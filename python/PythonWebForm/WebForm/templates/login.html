@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% block basecontent %}
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="row">
+          <div class="alert alert-info" role="alert">{{ message }}</div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <h1>Sign In</h1>
+  <div class = container>
+    <form action="" method="post" name="login">
+        <table>
+          {{ form.hidden_tag() }}
+            {% for f in form %}
+              {% if f.widget.input_type != 'hidden' %}
+                <tr>
+                  <td>{{ f.label }}</td>
+                  <td>{{ f }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          <tr>
+            <td><input type="submit" value="Sign In"></td>
+          </tr>
+        </table>
+
+    </form>
+    {% if error %}
+      <p class="error"><strong>Error:</strong> {{ error }}
+    {% endif %}
+  </div>
+
+   
+{% endblock %}

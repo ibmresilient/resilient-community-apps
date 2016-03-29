@@ -1,0 +1,25 @@
+{% extends "bootstrap/base.html" %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <!--<link href="static/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" -->
+      {%block ltitle %}
+        <title>{{ title }} - IR Create Incident</title>
+      {% endblock %}
+     <!--<script src="/static/moment.min.js"></script> -->
+     {% block navbar %}
+         <div class="navbar navbar-fixed-top">
+         <a href="/index">Home</a>
+         {% if current_user.is_authenticated %}
+            <div>{{ current_user.username }} : <a href="/logout">Logout</a></div>
+         {% endif %}
+
+         </div>
+     {% endblock %}
+
+    <hr>
+    {% block content %}
+      {% block basecontent %}{% endblock %}
+    {% endblock %}
+  </body>
+</html>

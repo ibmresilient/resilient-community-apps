@@ -1,0 +1,10 @@
+ Flask >= 0.10
+ Flask-Login >=0.3
+ Flask-SQLAlchemy >=2.1
+ Flask-WTF >= 0.12
+ SQLAlchemy >= 1.0
+ WTForms >= 2.1
+ python-dateutil >=2.4
+ flask-admin >= 1.4
+ flask-bootstrap >= 3.3
+ wtforms-components >= 0.9
