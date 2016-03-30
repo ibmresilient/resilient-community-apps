@@ -1,0 +1,34 @@
+{
+    "fields":[
+        {
+            "sourceloc":"action"
+            ,"sourcetype":"multiselect"
+            ,"sourcefield":"corp_incident_type"
+            ,"destloc":"incident"
+            ,"destcustom":false
+            ,"destfield":"incident_type_ids"
+        }
+        ,{
+            "sourceloc":"incident"
+            ,"sourcetype":"text"
+            ,"sourcefield":"name"
+            ,"sourcecustom":false
+            ,"destloc":"incident"
+            ,"destcustom":false
+            ,"destfield":"name"
+        }
+        ,{
+            "sourceloc":"incident"
+            ,"sourcetype":"textarea"
+            ,"sourcefield":"description"
+            ,"sourcecustom":false
+            ,"destloc":"incident"
+            ,"destcustom":false
+            ,"destfield":"description"
+        }
+    ],
+    "crosslink":{
+        "sourcefield":"sync_cross_link"
+        ,"destfield":"sync_cross_link"
+    }
+}
