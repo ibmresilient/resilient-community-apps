@@ -15,6 +15,7 @@ from pprint import pprint
 import co3 as resilient
 
 # resilient configuration
+# ----------- CHANGE THESE TO MATCH YOUR CONFIGURATION ----------
 CO3OPTS = {
     "userid":""  # resiilent user id
     "password":"" # Password for the resilient user
