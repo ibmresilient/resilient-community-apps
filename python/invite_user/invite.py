@@ -16,11 +16,10 @@ import co3 as resilient
 
 # resilient configuration
 CO3OPTS = {
-    "userid":"actionauto@resilientsystems.com", 
-    "password":"Dr3noZx4", 
-    "org_name":"DTAction", 
-    "orgid":"202", 
-    "base_url":"https://resv25base"
+    "userid":""  # resiilent user id
+    "password":"" # Password for the resilient user
+    "org_name":""  # Resilient organization
+    "base_url":"https://"   # hostname of the resilient server
 }
 
 # template for the invite api 
