@@ -1,11 +1,11 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python
 
 """
 Simple script to invite a user to the system
 Takes 2 parameters on the command line
 --email=<email address>
 --role= <role>
-where role is one of 
+where role is one of
 default, observer, administrator, master_administrator
 """
 
@@ -16,21 +16,21 @@ import co3 as resilient
 
 # resilient configuration
 CO3OPTS = {
-    "userid":"actionauto@resilientsystems.com", 
-    "password":"Dr3noZx4", 
-    "org_name":"DTAction", 
-    "orgid":"202", 
-    "base_url":"https://resv25base"
+    "userid":"user@example.com",
+    "password":"MyPassword",
+    "org_name":"My Org",
+    "orgid":"101",
+    "base_url":"https://resilient"
 }
 
-# template for the invite api 
+# template for the invite api
 invite = {
-    "email": "", 
-    "group_ids": None, 
+    "email": "",
+    "group_ids": None,
     "roles": {
-        "create_incs": True, 
-        "observer": False, 
-        "administrator": False, 
+        "create_incs": True,
+        "observer": False,
+        "administrator": False,
         "master_administrator": False
     }
 }
@@ -82,4 +82,4 @@ def main():
 
 if __name__ == "__main__":
     main()
- 
+
