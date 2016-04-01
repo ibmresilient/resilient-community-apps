@@ -15,12 +15,12 @@ from pprint import pprint
 import co3 as resilient
 
 # resilient configuration
+# ----------- CHANGE THESE TO MATCH YOUR CONFIGURATION ----------
 CO3OPTS = {
-    "userid":"user@example.com",
-    "password":"MyPassword",
-    "org_name":"My Org",
-    "orgid":"101",
-    "base_url":"https://resilient"
+    "userid":"user@example.com"  # resiilent user id
+    "password":"MyPassword" # Password for the resilient user
+    "org_name":"MyOrg"  # Resilient organization
+    "base_url":"https://resilient"   # hostname of the resilient server
 }
 
 # template for the invite api
