@@ -17,9 +17,9 @@ import co3 as resilient
 # resilient configuration
 # ----------- CHANGE THESE TO MATCH YOUR CONFIGURATION ----------
 CO3OPTS = {
-    "userid":"user@example.com"  # resiilent user id
-    "password":"MyPassword" # Password for the resilient user
-    "org_name":"MyOrg"  # Resilient organization
+    "userid":"user@example.com",  # resilient user id
+    "password":"MyPassword", # Password for the resilient user
+    "org_name":"MyOrg",  # Resilient organization
     "base_url":"https://resilient"   # hostname of the resilient server
 }
 

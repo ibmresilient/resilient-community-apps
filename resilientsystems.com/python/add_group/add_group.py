@@ -4,15 +4,14 @@
 """Action Module circuits component to add different users depending on severity"""
 
 from __future__ import print_function
-from circuits import Component, Debugger
+import logging
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
-import os
-import csv
-import logging
+
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'addgroup1'
+
 
 class AddGroupComponent(ResilientComponent):
     """Adds different users and groups depending on an incident's severity"""
@@ -26,7 +25,6 @@ class AddGroupComponent(ResilientComponent):
 
         # The queue name can be specified in the config file, or default to 'filelookup'
         self.channel = "actions." + self.options.get("queue", "addgroup")
-
 
     @handler()
     def _time_delta(self, event, *args, **kwargs):
@@ -45,37 +43,41 @@ class AddGroupComponent(ResilientComponent):
         # get information about the incident, such as its ID and severity
         incident = event.message["incident"]
         inc_id = incident["id"]
+
+        # Severity code is an id (SELECT field) so we need to find the text label
+        # There's a helper function in ResilientComponent for this purpose.
         incident_severity = incident["severity_code"]
-        
-        # if High severity, make the owner User 1. 
-        if (incident_severity==52):
-                incident["owner_id"] = 1
-        # else if Medium severity, make the owner the User 5
-        elif (incident_severity==51):
-                incident['owner_id'] = 5
-        # else if low security, make the owner User 6
-        elif (incident_severity==50):
-                incident['owner_id'] = 6
+        incident_severity_label = self.get_field_label("severity_code", incident_severity)
+        LOG.info(incident_severity_label)
 
-        # save progress 
-        self.rest_client().put("/incidents/"+str(inc_id), incident)
-        incident = self.rest_client().get("/incidents/"+str(inc_id))
+        def update_owner(inc):
+            # if High severity, make the owner User 1.
+            if (incident_severity_label == "High"):
+                inc["owner_id"] = self.options.get("high_owner")
+            # else if Medium severity, make the owner the User 5
+            elif (incident_severity_label == "Medium"):
+                inc['owner_id'] = "Someone"
+            # else if low security, make the owner User 6
+            elif (incident_severity_label == "Low"):
+                inc['owner_id'] = "A Group"
+            return inc
 
-        # if High severity, remove all members.                       
-        if (incident_severity==52):
+        # Update the incident owner
+        self.rest_client().get_put("/incidents/"+str(inc_id), update_owner)
+
+        def update_members(inc):
+            # if High severity, remove all members.
+            if (incident_severity_label == "High"):
                 incident["members"] = []
-        # else if Medium severity, add User 6 as a member. 
-        elif (incident_severity==51):
+            # else if Medium severity, add User 6 as a member.
+            elif (incident_severity_label == "Medium"):
                 incident['members'] = [6]
-        # else if low security, add User 4 as a member.                          
-        elif (incident_severity==50):
+            # else if low security, add User 4 as a member.
+            elif (incident_severity_label == "Low"):
                 incident['members'] = [4]
-	
-	# upload to resilient. 
-	self.rest_client().put("/incidents/"+str(inc_id), incident)
-        
-	# Log output
-	LOG.info("Finished adding users to incident %s due to severity change", inc_id)
 
-        yield "User updated!"
-    #end _lookup_action
+        # Update the incident members
+        self.rest_client().get_put("/incidents/" + str(inc_id), update_members)
+
+        status = "Finished adding users to incident {0} due to severity change".format(inc_id)
+        yield status

@@ -1,0 +1,11 @@
+
+[addgroup1]
+# -----------------------------------------------------------------------------
+# The 'add_group' action component
+# -----------------------------------------------------------------------------
+queue=addgroup
+
+high_owner=ztaira@resilientsystems.com
+medium_owner=hugh
+low_owner=groupname
+
