@@ -1,0 +1,5 @@
+# Scripts
+
+Use this directory for shell scripts that will be executed as
+part of the "shell" integration (with the "shell_runner" component).
+
