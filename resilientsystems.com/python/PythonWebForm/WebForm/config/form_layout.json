@@ -1,7 +1,0 @@
-[
-{"fieldlabel":"Name","fieldname":"name","fieldtype":"Text","resapi":"name"}
-,{"fieldlabel":"Description","fieldname":"description","fieldtype":"TextArea",
-        "rows":10,"cols":80,"resapi":"description"}
-,{"fieldlabel":"Incident Type","fieldname":"incidenttype","fieldtype":"MultiSelect","choosefrom":"incident_type_ids","resapi":"incident_type_ids"}
-
-]
