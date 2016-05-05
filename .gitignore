@@ -1,0 +1,13 @@
+build/
+dist/
+__pycache__
+.DS_Store
+.settings
+.idea
+.cache
+*.iml
+*.pem
+*.pyc
+*.log
+*.log.*
+*~
