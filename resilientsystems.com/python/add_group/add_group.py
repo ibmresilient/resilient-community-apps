@@ -27,7 +27,7 @@ class AddGroupComponent(ResilientComponent):
         self.channel = "actions." + self.options.get("queue", "addgroup")
 
     @handler()
-    def _time_delta(self, event, *args, **kwargs):
+    def __add__group(self, event, *args, **kwargs):
         """The @handler() annotation without an event name makes this
            a default handler - for all events on this component's queue.
            This will be called with some "internal" events from Circuits,

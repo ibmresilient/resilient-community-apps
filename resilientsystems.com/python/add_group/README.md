@@ -3,17 +3,7 @@ Add Group
 
 
 Use Case:  Upon changing the Severity of an incident, change the owner
-and add members as appropriate. This currently is specific to my
-(ztaira@resilientsystems.com) local instance, because it uses user ID's
-rather than names. However, the code can be easily modified to fit any
-case of assigning users based on a change in severity.
-Currently, you can get the user names and ID's with Python as follows:
-users = resilient_client.get("/users/")
-for user in users:
-	print user['id'], user['fname'], user['lname']
-groups = resilient_client.get("/groups")
-for group in groups:
-	print group['id'], group['name']
+and add members as appropriate.
 
 
 ## Environment and Installation

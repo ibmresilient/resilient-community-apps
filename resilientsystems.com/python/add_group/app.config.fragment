@@ -5,7 +5,7 @@
 # -----------------------------------------------------------------------------
 queue=addgroup
 
-high_owner=ztaira@resilientsystems.com
-medium_owner=hugh
-low_owner=groupname
+high_owner=example1@gmail.com
+medium_owner=example2@gmail.com
+low_owner=example2@gmail.com
 
