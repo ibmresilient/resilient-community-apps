@@ -1,0 +1,10 @@
+# -----------------------------------------------------------------------------
+# The 'time delta' action component
+# -----------------------------------------------------------------------------
+[timedelta1]
+queue=timedelta
+
+# Pick the custom fields to lookup and write to
+source_field=custom3
+source_field2=custom4
+dest_field=custom5

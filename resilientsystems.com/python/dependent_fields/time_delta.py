@@ -4,15 +4,14 @@
 """Action Module circuits component to add combine two fields to third field"""
 
 from __future__ import print_function
+import logging
 from circuits import Component, Debugger
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
-import os
-import csv
-import logging
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'timedelta1'
+
 
 class TimeDeltaComponent(ResilientComponent):
     """Add two fields to get a third field"""
@@ -24,9 +23,9 @@ class TimeDeltaComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
-        # The queue name can be specified in the config file, or default to 'timedelta'
-        self.channel = "actions." + self.options.get("queue", "timedelta")
-
+        # The queue name can be specified in the config file,
+        # or default to 'timedelta'
+        self.channel = "actions." + self.options.get("queue", "timedelta1")
 
     @handler()
     def _time_delta(self, event, *args, **kwargs):
@@ -37,7 +36,7 @@ class TimeDeltaComponent(ResilientComponent):
            (event, *args, **kwargs), and ignore any messages that are not
            from the Actions module.
         """
-	
+
         if not isinstance(event, ActionMessage):
             # Some event we are not interested in
             return
@@ -60,6 +59,7 @@ class TimeDeltaComponent(ResilientComponent):
                  source_value2, dest_fieldname, value)
 
         def update_field(incident, fieldname, value):
+            """Updates the field value, given an incident and field name"""
             incident["properties"][fieldname] = value
 
         # Store value in specified incident field
@@ -67,4 +67,4 @@ class TimeDeltaComponent(ResilientComponent):
                                    lambda incident: update_field(incident, dest_fieldname, value))
 
         yield "field %s updated" % dest_fieldname
-    #end _lookup_action
+    # end _lookup_action
