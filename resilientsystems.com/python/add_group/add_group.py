@@ -51,14 +51,15 @@ class AddGroupComponent(ResilientComponent):
         LOG.info(incident_severity_label)
 
         def update_owner(inc):
+            """updates the owner, given an incident"""
             # if High severity, make the owner User 1.
-            if (incident_severity_label == "High"):
+            if incident_severity_label == "High":
                 inc["owner_id"] = self.options.get("high_owner")
             # else if Medium severity, make the owner the User 5
-            elif (incident_severity_label == "Medium"):
+            elif incident_severity_label == "Medium":
                 inc['owner_id'] = "Someone"
             # else if low security, make the owner User 6
-            elif (incident_severity_label == "Low"):
+            elif incident_severity_label == "Low":
                 inc['owner_id'] = "A Group"
             return inc
 
@@ -66,15 +67,16 @@ class AddGroupComponent(ResilientComponent):
         self.rest_client().get_put("/incidents/"+str(inc_id), update_owner)
 
         def update_members(inc):
+            """updates the members, given an incident"""
             # if High severity, remove all members.
-            if (incident_severity_label == "High"):
-                incident["members"] = []
+            if incident_severity_label == "High":
+                inc["members"] = []
             # else if Medium severity, add User 6 as a member.
-            elif (incident_severity_label == "Medium"):
-                incident['members'] = [6]
+            elif incident_severity_label == "Medium":
+                inc['members'] = [6]
             # else if low security, add User 4 as a member.
-            elif (incident_severity_label == "Low"):
-                incident['members'] = [4]
+            elif incident_severity_label == "Low":
+                inc['members'] = [4]
 
         # Update the incident members
         self.rest_client().get_put("/incidents/" + str(inc_id), update_members)
