@@ -1,36 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Action Module circuits component to add different users depending on severity"""
+"""Action Module circuits component to post a tweet to Twitter"""
 
 from __future__ import print_function
-from circuits import Component, Debugger
+import logging
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
 from twitter import *
-import os
-import csv
-import logging
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'twitterpost'
 
-class AddGroupComponent(ResilientComponent):
-    """Adds different users and groups depending on an incident's severity"""
 
-    # This component adds different users and groups depending on an incident's severity
+class TwitterPostComponent(ResilientComponent):
+    """Action modules component to post a tweet when called"""
+
+    # This component posts a tweet to Twitter
 
     def __init__(self, opts):
-        super(AddGroupComponent, self).__init__(opts)
+        super(TwitterPostComponent, self).__init__(opts)
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
-        # The queue name can be specified in the config file, or default to 'filelookup'
-        self.channel = "actions." + self.options.get("queue", "addgroup")
-
+        # The queue name can be specified in the config file,
+        # or default to 'twitterpost'
+        self.channel = "actions." + self.options.get("queue", "twitterpost")
 
     @handler()
-    def _time_delta(self, event, *args, **kwargs):
+    def _post_tweet(self, event, *args, **kwargs):
         """The @handler() annotation without an event name makes this
            a default handler - for all events on this component's queue.
            This will be called with some "internal" events from Circuits,
@@ -60,4 +58,4 @@ class AddGroupComponent(ResilientComponent):
         LOG.info("Posted tweet to twitter! :D", inc_id)
 
         yield "User updated!"
-    #end _lookup_action
+        # end _post_tweet

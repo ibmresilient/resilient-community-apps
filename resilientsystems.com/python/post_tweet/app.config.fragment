@@ -1,0 +1,10 @@
+# -----------------------------------------------------------------------------
+# The 'twitterpost' action component
+# -----------------------------------------------------------------------------
+[twitterpost]
+queue=twitterpost
+oauth_token=123abc123abc
+oauth_secret=123abc123abc
+consumer_key=123abc123abc
+consumer_secret=123abc123abc
+
