@@ -4,17 +4,13 @@
 """Action Module circuits component to programmatically assign users to tasks"""
 
 from __future__ import print_function
-from circuits import Component, Debugger
+import logging
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
-import os
-import csv
-import logging
-import random
-import co3 as resilient
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'assigntasks'
+
 
 class AssignTasksComponent(ResilientComponent):
     """Assigns users to each task in an incident"""
@@ -27,7 +23,6 @@ class AssignTasksComponent(ResilientComponent):
         # The queue name can be specified in the config file,
         # or default to 'filelookup'
         self.channel = "actions." + self.options.get("queue", "assigntasks")
-
 
     @handler()
     def _assign_tasks(self, event, *args, **kwargs):
@@ -43,7 +38,7 @@ class AssignTasksComponent(ResilientComponent):
             # Some event we are not interested in
             return
 
-        # get information about the incident, such as its ID 
+        # get information about the incident, such as its ID
         incident = event.message["incident"]
         inc_id = incident["id"]
         LOG.info("Got incident info!")
@@ -66,13 +61,13 @@ class AssignTasksComponent(ResilientComponent):
         newtasklist = []
         for phase in mytasks:
             for task in phase['child_tasks']:
-        task['owner_id'] = idlist[random.randrange(len(idlist))] 
-        newtasklist.append(task)
-        LOG.info(task['owner_id'])
+                task['owner_id'] = idlist[random.randrange(len(idlist))]
+                newtasklist.append(task)
+                LOG.info(task['owner_id'])
         LOG.info("Made new tasks list!")
 
         # put the tasks back in resilient
-        LOG.info("Putting the tasks back in resilient...") 
+        LOG.info("Putting the tasks back in resilient...")
         self.rest_client().put('/tasks', newtasklist)
 
         LOG.info("Finished assigning tasks! :D")
@@ -81,4 +76,4 @@ class AssignTasksComponent(ResilientComponent):
         # self.rest_client().put("/incidents/"+str(inc_id), incident)
 
         yield "User updated!"
-        #end _assign_tasks
+        # end _assign_tasks
