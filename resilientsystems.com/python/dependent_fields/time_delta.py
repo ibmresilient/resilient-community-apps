@@ -27,19 +27,9 @@ class TimeDeltaComponent(ResilientComponent):
         # or default to 'timedelta'
         self.channel = "actions." + self.options.get("queue", "timedelta1")
 
-    @handler()
+    @handler("time_delta")
     def _time_delta(self, event, *args, **kwargs):
-        """The @handler() annotation without an event name makes this
-           a default handler - for all events on this component's queue.
-           This will be called with some "internal" events from Circuits,
-           so you must declare the method with the generic parameters
-           (event, *args, **kwargs), and ignore any messages that are not
-           from the Actions module.
-        """
-
-        if not isinstance(event, ActionMessage):
-            # Some event we are not interested in
-            return
+        """Adds two fields together and puts them in a third field"""
 
         # Get the incident and incident ID from the message
         incident = event.message["incident"]
