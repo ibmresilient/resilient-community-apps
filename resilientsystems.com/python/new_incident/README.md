@@ -37,7 +37,7 @@ to its users list.
 
 ## Manual Action
 
-Create an manual action named 'Escalate Incident between Orgs', 
+Create an manual action named 'Escalate Incident Between Orgs', 
 associated with object type "Incident". Choose `newincident` as the message 
 destination. 
 
