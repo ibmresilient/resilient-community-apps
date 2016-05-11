@@ -28,7 +28,7 @@ Open the Administrator Settings --> Actions, then:
 
 ## Message Destination
 
-Create a Queue message destination with programmatic name `newincident`.
+Create a Queue message destination with programmatic name `twitterpost`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
