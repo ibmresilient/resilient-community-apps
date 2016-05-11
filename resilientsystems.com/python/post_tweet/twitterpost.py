@@ -43,7 +43,7 @@ class TwitterPostComponent(ResilientComponent):
         twitter.statuses.update(status=str(tweet_body))
 
         # Log output
-        LOG.info("Posted tweet to twitter! :D", inc_id)
-
+        LOG.info("Posted tweet to twitter! :D")
+ 
         yield "User updated!"
         # end _post_tweet
