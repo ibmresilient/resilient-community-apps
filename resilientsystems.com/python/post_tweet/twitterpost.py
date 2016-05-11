@@ -29,18 +29,6 @@ class TwitterPostComponent(ResilientComponent):
 
     @handler("post_to_twitter")
     def _post_tweet(self, event, *args, **kwargs):
-        """The @handler() annotation without an event name makes this
-           a default handler - for all events on this component's queue.
-           This will be called with some "internal" events from Circuits,
-           so you must declare the method with the generic parameters
-           (event, *args, **kwargs), and ignore any messages that are not
-           from the Actions module.
-        """
-
-        if not isinstance(event, ActionMessage):
-            # Some event we are not interested in
-            return
-
         # Get the incident ID and tweet body
         incident = event.message["incident"]
         inc_id = incident["id"]
