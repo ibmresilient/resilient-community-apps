@@ -25,18 +25,16 @@ You must configure the following customizations to the Resilient server.
 Open the Administrator Settings --> Actions, then:
 
 
-### Message Destination
+## Message Destination
 
 Create a Queue message destination with programmatic name `addgroup`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
 
-### Automatic Action
+## Automatic Action
 
 Create an automatic action named 'Add Group', associated with object type
 "Incident".  Choose `addgroup` as the message destination. Add condition
 "Severity is changed".
-
-
 

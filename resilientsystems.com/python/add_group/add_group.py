@@ -6,7 +6,7 @@
 from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
-from resilient_circuits.actions_component import ResilientComponent, ActionMessage
+from resilient_circuits.actions_component import ResilientComponent
 
 LOG = logging.getLogger(__name__)
 
@@ -26,20 +26,8 @@ class AddGroupComponent(ResilientComponent):
         # The queue name can be specified in the config file, or default to 'filelookup'
         self.channel = "actions." + self.options.get("queue", "addgroup")
 
-    @handler()
+    @handler("add_group")
     def __add__group(self, event, *args, **kwargs):
-        """The @handler() annotation without an event name makes this
-           a default handler - for all events on this component's queue.
-           This will be called with some "internal" events from Circuits,
-           so you must declare the method with the generic parameters
-           (event, *args, **kwargs), and ignore any messages that are not
-           from the Actions module.
-        """
-
-        if not isinstance(event, ActionMessage):
-            # Some event we are not interested in
-            return
-
         # get information about the incident, such as its ID and severity
         incident = event.message["incident"]
         inc_id = incident["id"]
@@ -52,15 +40,15 @@ class AddGroupComponent(ResilientComponent):
 
         def update_owner(inc):
             """updates the owner, given an incident"""
-            # if High severity, make the owner User 1.
+            # if High severity, make the owner the high_owner
             if incident_severity_label == "High":
                 inc["owner_id"] = self.options.get("high_owner")
-            # else if Medium severity, make the owner the User 5
+            # else if Medium severity, make the owner the medium_owner
             elif incident_severity_label == "Medium":
-                inc['owner_id'] = "Someone"
-            # else if low security, make the owner User 6
+                inc['owner_id'] = self.options.get("medium_owner")
+            # else if Low security, make the owner the low_owner
             elif incident_severity_label == "Low":
-                inc['owner_id'] = "A Group"
+                inc['owner_id'] = self.options.get("low_owner")
             return inc
 
         # Update the incident owner
@@ -68,15 +56,21 @@ class AddGroupComponent(ResilientComponent):
 
         def update_members(inc):
             """updates the members, given an incident"""
-            # if High severity, remove all members.
+            # if High severity, make high_member_1 the only member
             if incident_severity_label == "High":
-                inc["members"] = []
-            # else if Medium severity, add User 6 as a member.
+                inc["members"] = [self.options.get("high_member_1")]
+            # else if Medium severity, make medium_member_1 and
+            # medium_member_2 the members
             elif incident_severity_label == "Medium":
-                inc['members'] = [6]
-            # else if low security, add User 4 as a member.
+                inc['members'] = [self.options.get("medium_member_1"),
+                                  self.options.get("medium_member_2")]
+            # else if Low severity, make low_member_1, low_member_2,
+            # and low_member_3 the members
             elif incident_severity_label == "Low":
-                inc['members'] = [4]
+                inc['members'] = [self.options.get("low_member_1"),
+                                  self.options.get("low_member_2"),
+                                  self.options.get("low_member_3")]
+            return inc
 
         # Update the incident members
         self.rest_client().get_put("/incidents/" + str(inc_id), update_members)
