@@ -27,19 +27,9 @@ class SendMailComponent(ResilientComponent):
         # or default to 'filelookup'
         self.channel = "actions." + self.options.get("queue", "outboundmail")
 
-    @handler()
+    @handler("send_email")
     def _send_mail(self, event, *args, **kwargs):
-        """The @handler() annotation without an event name makes this
-           a default handler - for all events on this component's queue.
-           This will be called with some "internal" events from Circuits,
-           so you must declare the method with the generic parameters
-           (event, *args, **kwargs), and ignore any messages that are not
-           from the Actions module.
-        """
-
-        if not isinstance(event, ActionMessage):
-            # Some event we are not interested in
-            return
+        """Function to send an email programmatically using gmail"""
 
         # Get the incident ID
         properties = event.message['properties']
