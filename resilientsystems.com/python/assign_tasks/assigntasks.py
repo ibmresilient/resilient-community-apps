@@ -21,7 +21,7 @@ class AssignTasksComponent(ResilientComponent):
         LOG.debug(self.options)
 
         # The queue name can be specified in the config file,
-        # or default to 'filelookup'
+        # or default to 'assigntasks'
         self.channel = "actions." + self.options.get("queue", "assigntasks")
 
     @handler("assign_tasks")
