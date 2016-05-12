@@ -6,7 +6,7 @@
 from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
-from resilient_circuits.actions_component import ResilientComponent, ActionMessage
+from resilient_circuits.actions_component import ResilientComponent
 from twitter import *
 LOG = logging.getLogger(__name__)
 
@@ -30,8 +30,6 @@ class TwitterPostComponent(ResilientComponent):
     @handler("post_to_twitter")
     def _post_tweet(self, event, *args, **kwargs):
         # Get the incident ID and tweet body
-        incident = event.message["incident"]
-        inc_id = incident["id"]
         properties = event.message['properties']
         tweet_body = properties['tweet_body']
 
@@ -44,6 +42,6 @@ class TwitterPostComponent(ResilientComponent):
 
         # Log output
         LOG.info("Posted tweet to twitter! :D")
- 
+
         yield "User updated!"
         # end _post_tweet
