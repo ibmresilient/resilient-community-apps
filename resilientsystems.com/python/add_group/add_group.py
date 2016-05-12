@@ -23,7 +23,8 @@ class AddGroupComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
-        # The queue name can be specified in the config file, or default to 'filelookup'
+        # The queue name can be specified in the config file,
+        # or default to 'addgroup'
         self.channel = "actions." + self.options.get("queue", "addgroup")
 
     @handler("add_group")
