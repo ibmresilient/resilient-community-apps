@@ -24,7 +24,7 @@ class TimeDeltaComponent(ResilientComponent):
         LOG.debug(self.options)
 
         # The queue name can be specified in the config file,
-        # or default to 'timedelta'
+        # or default to 'timedelta1'
         self.channel = "actions." + self.options.get("queue", "timedelta1")
 
     @handler("time_delta")
@@ -57,4 +57,4 @@ class TimeDeltaComponent(ResilientComponent):
                                    lambda incident: update_field(incident, dest_fieldname, value))
 
         yield "field %s updated" % dest_fieldname
-    # end _lookup_action
+        # end _lookup_action
