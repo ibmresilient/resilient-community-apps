@@ -1,0 +1,10 @@
+[framework_section]
+# -----------------------------------------------------------------------------
+# The 'add_group' action component
+# -----------------------------------------------------------------------------
+# The queue we want to listen to
+queue=framework_queue
+# The owners we want upon change to each severity
+framework_field=example
+framework_field2=example2
+
