@@ -6,7 +6,7 @@
 from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
-from resilient_circuits.actions_component import ResilientComponent, ActionMessage
+from resilient_circuits.actions_component import ResilientComponent
 import co3 as resilient
 LOG = logging.getLogger(__name__)
 
@@ -35,19 +35,19 @@ class AddIncidentComponent(ResilientComponent):
         incident = event.message["incident"]
         inc_id = incident["id"]
         LOG.info("Connecting to alternate org...")
-        self.resilient_client = resilient.SimpleClient(self.options['to_org_name'],
-                                                       self.options['to_org_address'],
-                                                       verify=self.options['verify'])
+        resilient_client = resilient.SimpleClient(self.options['to_org_name'],
+                                                  self.options['to_org_address'],
+                                                  verify=self.options['verify'])
         LOG.info("Authenticating with alternate org...")
-        self.resilient_client.connect(self.options['to_org_username'],
-                                      self.options['to_org_password'])
+        resilient_client.connect(self.options['to_org_username'],
+                                 self.options['to_org_password'])
         LOG.info("Creating new incident...")
         new_incident = {'name': 'New Incident From Manual Action',
                         'description': 'Incident created from incident '+str(inc_id),
                         'discovered_date': int('1461516765'),
                         'resilient_org_id': str(inc_id)}
         LOG.info("Posting new incident to alternate org...")
-        self.resilient_client.post('/incidents', new_incident)
+        resilient_client.post('/incidents', new_incident)
 
         # How to post things to the original org:
         # self.rest_client().put("/incidents/"+str(inc_id), incident)
