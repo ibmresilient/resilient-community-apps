@@ -30,6 +30,7 @@ Create a Queue message destination with programmatic name `framework_queue`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
+Note: 'framework_queue' must match the queue field in the config file.
 
 ## Automatic Action
 

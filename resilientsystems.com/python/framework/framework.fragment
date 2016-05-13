@@ -1,10 +1,10 @@
 [framework_section]
 # -----------------------------------------------------------------------------
-# The 'add_group' action component
+# The "framework" action component section
 # -----------------------------------------------------------------------------
 # The queue we want to listen to
 queue=framework_queue
-# The owners we want upon change to each severity
+# The example framework fields. Stored in self.options.
 framework_field=example
 framework_field2=example2
 
