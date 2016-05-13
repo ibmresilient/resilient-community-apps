@@ -44,8 +44,7 @@ class AddIncidentComponent(ResilientComponent):
         LOG.info("Creating new incident...")
         new_incident = {'name': 'New Incident From Manual Action',
                         'description': 'Incident created from incident '+str(inc_id),
-                        'discovered_date': int('1461516765'),
-                        'resilient_org_id': str(inc_id)}
+                        'discovered_date': incident['discovered_date']} 
         LOG.info("Posting new incident to alternate org...")
         resilient_client.post('/incidents', new_incident)
 
