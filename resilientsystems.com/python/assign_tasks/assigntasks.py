@@ -36,6 +36,7 @@ from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
+import random
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'assigntasks'
