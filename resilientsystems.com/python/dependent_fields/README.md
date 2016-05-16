@@ -2,7 +2,7 @@ Make a field in resilient dependent on the result of two other fields
 ===================================
 
 
-Use Case:  Lookup up the value of a two custom fields in the resilient 
+Use Case:  Given the value of a two custom fields in the resilient
 platform, add them together, and populate the value in a third custom field.
 These fields could represent many values, such as number of records or time
 change. 
@@ -17,7 +17,7 @@ This integration is provided as
 Copy the .py file into your `components` directory, where it will be
 loaded automatically when your application starts.
 
-Copy the confiruration file fragment into your application's configuration
+Copy the configuration file fragment into your application's configuration
 file and edit the settings appropriately.
 
 

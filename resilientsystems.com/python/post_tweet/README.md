@@ -45,7 +45,7 @@ destination.
 This incident assumes you have a working twitter account with valid login
 credentials. To get your keys for authenticating to twitter and interacting
 with twitter's API, follow the instructions for the Python twitter API
-as detailed at https://github.com/sixohsix. 
+as detailed at [https://github.com/sixohsix](https://github.com/sixohsix).
 
 Once you have followed those instructions and gotten your login credentials,
 put them in the associated places in the app.config.fragment file. 

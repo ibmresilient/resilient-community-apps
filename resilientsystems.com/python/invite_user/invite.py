@@ -71,6 +71,7 @@ def main():
 
 
     # Create SimpleClient and connect
+    # NOTE: DISABLES SSL VERIFICATION - AVOID THIS
     client = resilient.SimpleClient(org_name=CO3OPTS['org_name'], proxies=None, base_url=CO3OPTS['base_url'], verify=False)
 
     client.connect(CO3OPTS['userid'], CO3OPTS['password'])

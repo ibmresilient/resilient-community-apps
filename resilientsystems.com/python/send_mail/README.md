@@ -42,12 +42,12 @@ Create an manual action named 'Send Email', associated with object type
 Create three custom text fields to represent the email body, address, and
 subject. Put their API access names under the address, subject, and body 
 fields in the config file. Also, whatever message you include in the default
-message field in the [sendmail] section of the config file will be included
+message field in the `[sendmail]` section of the config file will be included
 in all of the messages you send out by default. 
 
 
 ## Gmail Configuration
 
-This incident assumes you have a working gmail account with valid login
+This example assumes you have a working gmail account with valid login
 credentials. Once you have your gmail, credentials, put them in the associated
-fields in the [sendmail] section of the app.config file.
+fields in the `[sendmail]` section of the app.config file.

@@ -56,6 +56,7 @@ class TimeDeltaComponent(ResilientComponent):
         # or default to 'timedelta1'
         self.channel = "actions." + self.options.get("queue", "timedelta1")
 
+    # Handle a custom action named "Time Delta"
     @handler("time_delta")
     def _time_delta(self, event, *args, **kwargs):
         """Adds two fields together and puts them in a third field"""

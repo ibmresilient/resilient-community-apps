@@ -5,6 +5,11 @@ Add Group
 Use Case:  Upon changing the Severity of an incident, change the owner
 and add members as appropriate.
 
+A custom action triggers when the severity is changed.  The action processor,
+implemented in the 'add_group.py' component, responds to this event.  It finds
+the intended owner and membership from settings in the configuration file,
+and applies them to the incident.
+
 
 ## Environment and Installation
 
@@ -15,7 +20,7 @@ This integration is provided as
 Copy the .py file into your `components` directory, where it will be
 loaded automatically when your application starts.
 
-Copy the confiruration file fragment into your application's configuration
+Copy the configuration file fragment into your application's configuration
 file and edit the settings appropriately.
 
 

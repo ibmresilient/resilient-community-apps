@@ -2,12 +2,16 @@ Create New Incident in Another Org
 ===================================
 
 
-Use Case: In many cases, a company will have multiple divisions involved
+Use Case: In some cases, a company will have multiple divisions involved
 in the handling of an incident. In Resilient, this often means one instance
-of Resilient will contain several orgs. 
+of Resilient will contain several Organizations (orgs).
 
-This script demonstrates the ability to escalate incidents between orgs. 
+This script demonstrates the ability to escalate incidents between orgs.
 
+The action messages arrive from one org.  The resilient_circuits library gives
+you a ready-authenticated 'SimpleClient' for REST API functions in that org.
+But orgs are independent; each has a distinct set of users.  So, to access
+another org, we need to construct a new SimpleClient for the purpose.
 
 ## Environment and Installation
 
@@ -18,7 +22,7 @@ This integration is provided as
 Copy the .py file into your `components` directory, where it will be
 loaded automatically when your application starts.
 
-Copy the confiruration file fragment into your application's configuration
+Copy the configuration file fragment into your application's configuration
 file and edit the settings appropriately.
 
 

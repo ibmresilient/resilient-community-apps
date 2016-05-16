@@ -64,6 +64,7 @@ class FrameworkComponent(ResilientComponent): # CHANGE FrameworkComponent. No im
         incident = event.message["incident"]
         inc_id = incident["id"]
 
+        # Example showing how to update an incident with get_put and a callback function
         def framework_change_function(inc):
             """function to pass to the get_put method"""
             inc[self.options.get("framework_field")] = self.options.get("framework_field2")
@@ -71,6 +72,8 @@ class FrameworkComponent(ResilientComponent): # CHANGE FrameworkComponent. No im
 
         self.rest_client().get_put("/incidents/"+str(inc_id), framework_change_function)
 
+        # Status string returned here will be displayed in "Action Status" in the Resilient UI
+        # Note: use 'yield', not 'return'; this is a generator method.
         status = "Finished executing framework code!" 
         yield status
 

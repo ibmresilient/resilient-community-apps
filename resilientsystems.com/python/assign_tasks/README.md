@@ -1,5 +1,5 @@
 Programmatically assign users to tasks in Resilient
-===================================
+===================================================
 
 Use Case: In many cases, a user of Resilient would like to manually or
 automatically assign tasks to a user or set of users. This circuits

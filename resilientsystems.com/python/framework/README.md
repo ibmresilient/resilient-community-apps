@@ -2,7 +2,8 @@ Framework
 =========
 
 
-Use Case: This is an example circuits framework for easy prototyping.
+Use Case: This is a template for a `resilient_circuits`-based component,
+for easy prototyping.
 
 
 ## Environment and Installation
