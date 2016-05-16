@@ -1,0 +1,6 @@
+# -----------------------------------------------------------------------------
+# The 'assign_tasks' action component
+# -----------------------------------------------------------------------------
+[assigntasks]
+# This is the queue we want to listen to
+queue=assigntasks

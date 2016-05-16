@@ -1,0 +1,12 @@
+# -----------------------------------------------------------------------------
+# The 'twitterpost' action component
+# -----------------------------------------------------------------------------
+[twitterpost]
+# The queue we want to listen to
+queue=twitterpost
+# Login credentials for twitter
+oauth_token=123abc123abc
+oauth_secret=123abc123abc
+consumer_key=123abc123abc
+consumer_secret=123abc123abc
+

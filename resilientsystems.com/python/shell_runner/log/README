@@ -1,0 +1,3 @@
+The app.log (rotating file) is written here.
+Override using the 'logdir' configuration setting or commandline option.
+
