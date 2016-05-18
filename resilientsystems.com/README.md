@@ -15,6 +15,10 @@ A simple example showing how to invite a user into Resilient using the Resilient
 
 A manual circuits example showing how to open an incident in another org.
 
+## phase_milestone
+
+An automatic action that adds a milestone when the incident phase changes.
+
 ## post_tweet
 
 A manual circuits example that posts a tweet to twitter.

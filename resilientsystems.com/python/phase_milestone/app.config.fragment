@@ -1,0 +1,7 @@
+[phasemilestone]
+# -----------------------------------------------------------------------------
+# The 'phase milestone' action component
+# -----------------------------------------------------------------------------
+# The queue we want to listen to
+queue=phase_milestone
+
