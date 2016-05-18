@@ -3,7 +3,7 @@
 # The "task_tracker" action component section
 # -----------------------------------------------------------------------------
 # The queue we want to listen to
-queue=change_task_status
+queue=tasktrackerqueue
 # The example framework fields. Stored in self.options.
 framework_field=example
 framework_field2=example2
