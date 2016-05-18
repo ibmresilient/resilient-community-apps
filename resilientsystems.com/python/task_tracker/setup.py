@@ -51,7 +51,7 @@ def setup():
     LOG.info("Creating new action...")
     LOG.info("Pointing action at message destination...")
     queue_id = get_queue_id(resilient_client, credentials["queue_name"])
-    automatic_action={"object_type": 0,
+    automatic_action={"object_type": 1,
                       "name": "Task Tracker",
                       "message_destinations": [queue_id],
                       "conditions":[{"method": "changed",
