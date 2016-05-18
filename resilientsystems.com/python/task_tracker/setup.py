@@ -55,7 +55,7 @@ def setup():
                       "name": "Task Tracker",
                       "message_destinations": [queue_id],
                       "conditions":[{"method": "changed",
-                                    "field_name": "task.active"
+                                    "field_name": "task.status"
                                     }]
                       }
     resilient_client.post("/actions", automatic_action)
