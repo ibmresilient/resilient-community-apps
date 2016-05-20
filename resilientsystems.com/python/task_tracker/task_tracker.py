@@ -102,7 +102,7 @@ class TaskTrackerComponent(ResilientComponent):
                   self.options['column_two']: str(task_note),
                   self.options['column_three']: task_init_date,
                   self.options['column_four']: task_closed_date,
-                  self.options['column_five']: str(task_closetime)
+                  self.options['column_five']: str(task_closetime),
                   self.options['column_six']: str(task_id)}
         table_uri = "/incidents/{}/table_data/{}/row_data".format(task_inc_id, mytable_id)
         # Create row to add
