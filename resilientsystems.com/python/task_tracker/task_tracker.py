@@ -59,26 +59,15 @@ class TaskTrackerComponent(ResilientComponent):
         """FRAMEWORK FUNCTION DOCSTRING""" # CHANGE inside """
         # CHANGE everything after the following line
         # ====================================================================
-        # How to get table data: 
-        # row_data = self.rest_client().get('/incidents/(incidentnum)/tabledata/(tableid)')
-        # {id, inc_id, rows[id, actions[{name, id, enabled}{}{}], cells{value, user, id}]}
-
-        # How to post row data:
-        # self.rest_client().post('/incidents/(incidentnum)/table_data/(tablenum)/row_data', row)
-        # row = {'actions': [], 'cells':{
-               # '207':{'id': '207', 'value':user},
-               # '208':{'id': '208', 'value':ip},
-               # '209':{'id': '209', 'value':date},
-               # '210':{'id': '210', 'value':inc_id},
-               # '211':{'id': '211', 'value':note}}}
-        # self.co3_client.post('/incidents/'+str(inc_id)+'/table_data/1000/row_data', row)
-
         # Get information from action
         LOG.info('Getting information from action...')
         information = kwargs['message']
         task_name = information['task']['name']
         task_init_date = information['task']['init_date']
         task_closed_date = information['task']['closed_date']
+        task_id = information['task']['id']
+        if task_closed_date == None:
+            task_closed_date=task_init_date
         task_status = information['task']['status']
         task_inc_id = information['task']['inc_id']
         # Create task note
@@ -111,9 +100,10 @@ class TaskTrackerComponent(ResilientComponent):
         # Create values dictionary
         values = {self.options['column_one']: str(task_name),
                   self.options['column_two']: str(task_note),
-                  self.options['column_three']: str(task_init_date),
-                  self.options['column_four']: str(task_closed_date),
-                  self.options['column_five']: str(task_closetime)}
+                  self.options['column_three']: task_init_date,
+                  self.options['column_four']: task_closed_date,
+                  self.options['column_five']: str(task_closetime)
+                  self.options['column_six']: str(task_id)}
         table_uri = "/incidents/{}/table_data/{}/row_data".format(task_inc_id, mytable_id)
         # Create row to add
         LOG.info('Creating row...')
