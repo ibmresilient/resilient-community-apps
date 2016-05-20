@@ -59,35 +59,75 @@ class TaskTrackerComponent(ResilientComponent):
         """FRAMEWORK FUNCTION DOCSTRING""" # CHANGE inside """
         # CHANGE everything after the following line
         # ====================================================================
-        # How to get a table id:
-        # mytable = self.rest_client.get('/types/self.options['table_name'])
-        # mytable_id = mytable['id']
-
         # How to get table data: 
         # row_data = self.rest_client().get('/incidents/(incidentnum)/tabledata/(tableid)')
         # {id, inc_id, rows[id, actions[{name, id, enabled}{}{}], cells{value, user, id}]}
 
         # How to post row data:
         # self.rest_client().post('/incidents/(incidentnum)/table_data/(tablenum)/row_data', row)
-        # row = {'actions': [], 'cells':{                                                                                                                        │0 
-               # '207':{'id': '207', 'value':user},                                                                                                                 │ 7
-               # '208':{'id': '208', 'value':ip},                                                                                                                   │1 
-               # '209':{'id': '209', 'value':date},                                                                                                                 │/r
-               # '210':{'id': '210', 'value':inc_id},                                                                                                               │ 7
-               # '211':{'id': '211', 'value':note}}}                                                                                                                │2 
-        # self.co3_client.post('/incidents/'+str(inc_id)+'/table_data/1000/row_data', row)  
+        # row = {'actions': [], 'cells':{
+               # '207':{'id': '207', 'value':user},
+               # '208':{'id': '208', 'value':ip},
+               # '209':{'id': '209', 'value':date},
+               # '210':{'id': '210', 'value':inc_id},
+               # '211':{'id': '211', 'value':note}}}
+        # self.co3_client.post('/incidents/'+str(inc_id)+'/table_data/1000/row_data', row)
 
+        # Get information from action
+        LOG.info('Getting information from action...')
         information = kwargs['message']
-        print(information['task']['status'])
-        init_date = information['task']['init_date']
-        closed_date = information['task']['closed_date']
-        name = information['task']['name']
-        id = information['task']['id']
+        task_name = information['task']['name']
+        task_init_date = information['task']['init_date']
+        task_closed_date = information['task']['closed_date']
+        task_status = information['task']['status']
+        task_inc_id = information['task']['inc_id']
+        # Create task note
+        LOG.info('Creating task note...')
+        task_note = "Task Opened"
+        if task_status == "C":
+            task_note = "Task Closed"
+        # Create time duration 
+        LOG.info('Calculating duration...')
         if closed_date != None:
-            secs = (int(closed_date)-int(init_date))/1000
+            secs = (int(task_closed_date)-int(task_init_date))/1000
+            minutes = int(secs/60)
+            secs = secs%60
+            hours = int(minutes/60)
+            minutes = minutes%60
+            days = int(hours/24)
+            hours = hours%24
+            task_closetime = "{}d{}h{}m{}s".format(days, hours, minutes, secs)
         else:
             secs = 0
-        print(name, 'took this many seconds to close:', secs)
+
+        # Get the table ID  
+        LOG.info('Organizing data...')
+        table_uri = '/types/'+self.options['table_api_name']
+        mytable = self.rest_client.get(table_uri)
+        mytable_id = mytable['id']
+        # Get table column ID's
+        column_ids = {}        
+        for column in mytable['fields']:
+            column_ids[column]=mytable['fields'][column]['id']
+        # Create values dictionary
+        values = {self.options['column_one']: task_name,
+                  self.options['column_two']: task_note,
+                  self.options['column_three']: task_init_date,
+                  self.options['column_four']: task_closed_date,
+                  self.options['column_five']: task_closetime}
+        table_uri = "/incidents/{}/tabledata/{}/row_data".format(task_inc_id, mytable_id)
+        # Create row to add
+        LOG.info('Creating row...')
+        row = {}
+        row['actions'] = []
+        row['cells'] = {}
+        for key in column_ids:
+            row['cells'][key] = {'id': column_ids[key], 'value':values[key]}
+
+        # Post Row
+        LOG.info('Posting row...')
+        self.rest_client.post(table_uri, row)
+        LOG.info('Row posted! :D')
 
         status = "Finished executing framework code!" 
         yield status
