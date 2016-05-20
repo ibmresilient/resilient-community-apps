@@ -88,7 +88,8 @@ class TaskTrackerComponent(ResilientComponent):
             task_note = "Task Closed"
         # Create time duration 
         LOG.info('Calculating duration...')
-        if closed_date != None:
+        task_closetime = 0
+        if task_closed_date != None:
             secs = (int(task_closed_date)-int(task_init_date))/1000
             minutes = int(secs/60)
             secs = secs%60
@@ -96,37 +97,34 @@ class TaskTrackerComponent(ResilientComponent):
             minutes = minutes%60
             days = int(hours/24)
             hours = hours%24
-            task_closetime = "{}d{}h{}m{}s".format(days, hours, minutes, secs)
-        else:
-            secs = 0
+            task_closetime = "{}d {}h {}m {}s".format(days, hours, minutes, secs)
 
         # Get the table ID  
         LOG.info('Organizing data...')
         table_uri = '/types/'+self.options['table_api_name']
-        mytable = self.rest_client.get(table_uri)
+        mytable = self.rest_client().get(table_uri)
         mytable_id = mytable['id']
         # Get table column ID's
         column_ids = {}        
         for column in mytable['fields']:
             column_ids[column]=mytable['fields'][column]['id']
         # Create values dictionary
-        values = {self.options['column_one']: task_name,
-                  self.options['column_two']: task_note,
-                  self.options['column_three']: task_init_date,
-                  self.options['column_four']: task_closed_date,
-                  self.options['column_five']: task_closetime}
-        table_uri = "/incidents/{}/tabledata/{}/row_data".format(task_inc_id, mytable_id)
+        values = {self.options['column_one']: str(task_name),
+                  self.options['column_two']: str(task_note),
+                  self.options['column_three']: str(task_init_date),
+                  self.options['column_four']: str(task_closed_date),
+                  self.options['column_five']: str(task_closetime)}
+        table_uri = "/incidents/{}/table_data/{}/row_data".format(task_inc_id, mytable_id)
         # Create row to add
         LOG.info('Creating row...')
         row = {}
-        row['actions'] = []
         row['cells'] = {}
         for key in column_ids:
-            row['cells'][key] = {'id': column_ids[key], 'value':values[key]}
+            row['cells'][int(column_ids[key])] = {'value': values[key]}
 
         # Post Row
         LOG.info('Posting row...')
-        self.rest_client.post(table_uri, row)
+        self.rest_client().post(table_uri, row)
         LOG.info('Row posted! :D')
 
         status = "Finished executing framework code!" 
