@@ -36,6 +36,55 @@ def setup():
                                               verify=verify_cert)
     resilient_client.connect(credentials["username"], credentials["password"])
 
+    # Create a new table
+    print('WHY ISNT THIS COMPLETING\n\n')
+    data_table = {
+                  "type_name": "time_to_close",
+                  "display_name": "Time to Close",
+                  "type_id":8,
+                  "parent_types": ["incident"],
+                  "fields":{
+                      "task_name": {
+                               "text": "Task Name",
+                               "placeholder": "",
+                               "input_type": "text",
+                               "required": None,
+                               "tooltip": "task name",
+                               "isNew": True,
+                               "order": 0,
+                               "blank_option": False,
+                               "chosen": False,
+                               "hide_notification": False
+                               },
+                      "incident_id": {
+                               "text": "Incident ID",
+                               "placeholder": "",
+                               "input_type": "text",
+                               "required": None,
+                               "tooltip": "incident ID",
+                               "isNew": True,
+                               "order": 1,
+                               "blank_option": False,
+                               "chosen": False,
+                               "hide_notification": False
+                               },
+                      "time_to_close": {
+                               "text": "Time to Close",
+                               "placeholder": "",
+                               "input_type": "text",
+                               "required": None,
+                               "tooltip": "measured in seconds",
+                               "isNew": True,
+                               "order": 2,
+                               "blank_option": False,
+                               "chosen": False,
+                               "hide_notification": False
+                               }
+                      },
+                 }
+    print(data_table)
+    resilient_client.post('/types', data_table)
+
     # Create a new message destination with the names defined in the config
     LOG.info("Creating new message destination...")
     message_destination={"programmatic_name": credentials["queue_prog_name"],
