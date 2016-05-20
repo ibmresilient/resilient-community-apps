@@ -77,8 +77,17 @@ class TaskTrackerComponent(ResilientComponent):
                # '211':{'id': '211', 'value':note}}}                                                                                                                │2 
         # self.co3_client.post('/incidents/'+str(inc_id)+'/table_data/1000/row_data', row)  
 
-        for thing in event:
-            print(thing)
+        information = kwargs['message']
+        print(information['task']['status'])
+        init_date = information['task']['init_date']
+        closed_date = information['task']['closed_date']
+        name = information['task']['name']
+        id = information['task']['id']
+        if closed_date != None:
+            secs = (int(closed_date)-int(init_date))/1000
+        else:
+            secs = 0
+        print(name, 'took this many seconds to close:', secs)
 
         status = "Finished executing framework code!" 
         yield status
