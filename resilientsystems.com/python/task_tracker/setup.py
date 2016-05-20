@@ -95,7 +95,18 @@ def setup():
                                              "name":"time_to_close",
                                              "tooltip":"How long the task took to close",
                                              "placeholder":"time to close",
-                                             "order":4}}} 
+                                             "order":4},
+                            "task_id": {"hide_notification":False,
+                                        "values": [],
+                                        "text":"Task ID",
+                                        "required":None,
+                                        "chosen":False,
+                                        "blank_option":True,
+                                        "input_type":"text",
+                                        "name":"task_id",
+                                        "tooltip":"The task ID",
+                                        "placeholder":"task ID",
+                                        "order":5}}} 
     resilient_client.post('/types', data_table)
 
     # Create a new message destination with the name as defined in the config
