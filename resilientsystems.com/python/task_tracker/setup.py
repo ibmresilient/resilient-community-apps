@@ -96,10 +96,10 @@ def setup():
                                              "tooltip":"How long the task took to close",
                                              "placeholder":"time to close",
                                              "order":4}}} 
-    print(data_table)
     resilient_client.post('/types', data_table)
 
-    # Create a new message destination with the names defined in the config
+    # Create a new message destination with the name as defined in the config
+    # Users of this message destination must be manually specified
     LOG.info("Creating new message destination...")
     message_destination={"programmatic_name": credentials["queue_prog_name"],
                          "name": credentials["queue_name"],
@@ -115,7 +115,7 @@ def setup():
     LOG.info("Pointing action at message destination...")
     queue_id = get_queue_id(resilient_client, credentials["queue_name"])
     automatic_action={"object_type": 1,
-                      "name": "Task Tracker",
+                      "name": credentials['action_name'],
                       "message_destinations": [queue_id],
                       "conditions":[{"method": "changed",
                                     "field_name": "task.status"
