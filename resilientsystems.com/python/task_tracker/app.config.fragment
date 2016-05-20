@@ -14,3 +14,4 @@ column_two=task_notes
 column_three=init_date
 column_four=closed_date
 column_five=time_to_close
+column_six=task_id
