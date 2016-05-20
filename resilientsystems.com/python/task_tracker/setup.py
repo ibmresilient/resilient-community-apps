@@ -59,7 +59,7 @@ def setup():
                                      "chosen":False,
                                      "blank_option":False,
                                      "input_type":"text",
-                                     "name":"owner",
+                                     "name":"task_notes",
                                      "tooltip":"Task Notes",
                                      "placeholder":"task changed",
                                      "order":1},
