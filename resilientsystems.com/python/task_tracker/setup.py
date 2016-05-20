@@ -110,13 +110,18 @@ def setup():
     resilient_client.post('/types', data_table)
 
     # Create a new message destination with the name as defined in the config
-    # Users of this message destination must be manually specified
     LOG.info("Creating new message destination...")
+    users = resilient_client.get('/users')
+    queuereaderid = ""
+    for user in users:
+        if user['email'] == credentials['queue_reader_email']:
+            queuereaderid = user['id']
+            print(queuereaderid)
     message_destination={"programmatic_name": credentials["queue_prog_name"],
                          "name": credentials["queue_name"],
                          "expect_ack": True,
                          "destination_type": 0,
-                         "users": []}
+                         "users": [queuereaderid]}
     resilient_client.post("/message_destinations", message_destination)
 
     # Create automatic action that triggers whenever the task is changed from
