@@ -49,4 +49,9 @@ Add condition "Active is changed".
 
 ## Data Table
 
-Insert Data table instructions here
+Create a data table with the title "Task History," the text value "task name",
+the text value "task notes", the datetimepicker "init date", the 
+datetimepicker "closed date", the text field "time to close, and the text field
+"task id". Make sure all those tasks are in order. Place the names of the
+fields you just created in the app.config file under the appropriate column.
+

@@ -30,7 +30,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""Action Module task logger, implemented via circuits""" 
+"""Action Module task logger, implemented via circuits"""
 
 from __future__ import print_function
 import logging
@@ -39,24 +39,27 @@ from resilient_circuits.actions_component import ResilientComponent
 
 LOG = logging.getLogger(__name__)
 
-CONFIG_DATA_SECTION = "task_tracker" 
+CONFIG_DATA_SECTION = "task_tracker"
 
 
 class TaskTrackerComponent(ResilientComponent):
     """Example Circuits script to implement a data-table based task tracker"""
 
     def __init__(self, opts):
-        super(TaskTrackerComponent, self).__init__(opts) 
+        super(TaskTrackerComponent, self).__init__(opts)
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
         # The queue name can be specified in the config file,
-        # or default to 'framework_default_queue'
+        # or default to 'tasktrackerqueue'
         self.channel = "actions." + self.options.get("queue", "tasktrackerqueue")
 
     @handler("task_tracker")
     def _task_tracker_function(self, event, *args, **kwargs):
-        """FRAMEWORK FUNCTION DOCSTRING""" # CHANGE inside """
+        """
+        Function to add a row in the data table containing task information
+        whenever task status changes from open to close or vice-versa
+        """
         # CHANGE everything after the following line
         # ====================================================================
         # Get information from action
@@ -66,8 +69,8 @@ class TaskTrackerComponent(ResilientComponent):
         task_init_date = information['task']['init_date']
         task_closed_date = information['task']['closed_date']
         task_id = information['task']['id']
-        if task_closed_date == None:
-            task_closed_date=task_init_date
+        if task_closed_date is None:
+            task_closed_date = task_init_date
         task_status = information['task']['status']
         task_inc_id = information['task']['inc_id']
         # Create task note
@@ -75,28 +78,28 @@ class TaskTrackerComponent(ResilientComponent):
         task_note = "Task Opened"
         if task_status == "C":
             task_note = "Task Closed"
-        # Create time duration 
+        # Create time duration
         LOG.info('Calculating duration...')
-        task_closetime = 0
-        if task_closed_date != None:
+        task_closetime = "task not closed"
+        if task_closed_date is not None:
             secs = (int(task_closed_date)-int(task_init_date))/1000
             minutes = int(secs/60)
-            secs = secs%60
+            secs = secs % 60
             hours = int(minutes/60)
-            minutes = minutes%60
+            minutes = minutes % 60
             days = int(hours/24)
-            hours = hours%24
+            hours = hours % 24
             task_closetime = "{}d {}h {}m {}s".format(days, hours, minutes, secs)
 
-        # Get the table ID  
+        # Get the table ID
         LOG.info('Organizing data...')
         table_uri = '/types/'+self.options['table_api_name']
         mytable = self.rest_client().get(table_uri)
         mytable_id = mytable['id']
         # Get table column ID's
-        column_ids = {}        
+        column_ids = {}
         for column in mytable['fields']:
-            column_ids[column]=mytable['fields'][column]['id']
+            column_ids[column] = mytable['fields'][column]['id']
         # Create values dictionary
         values = {self.options['column_one']: str(task_name),
                   self.options['column_two']: str(task_note),
@@ -117,6 +120,5 @@ class TaskTrackerComponent(ResilientComponent):
         self.rest_client().post(table_uri, row)
         LOG.info('Row posted! :D')
 
-        status = "Finished executing framework code!" 
+        status = "Finished posting task time to close! :D"
         yield status
-
