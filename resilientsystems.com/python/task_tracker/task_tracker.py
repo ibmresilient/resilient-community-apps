@@ -60,8 +60,7 @@ class TaskTrackerComponent(ResilientComponent):
         Function to add a row in the data table containing task information
         whenever task status changes from open to close or vice-versa
         """
-        # CHANGE everything after the following line
-        # ====================================================================
+
         # Get information from action
         LOG.info('Getting information from action...')
         information = kwargs['message']
@@ -90,6 +89,22 @@ class TaskTrackerComponent(ResilientComponent):
             days = int(hours/24)
             hours = hours % 24
             task_closetime = "{}d {}h {}m {}s".format(days, hours, minutes, secs)
+        # Note: Data fields will be organized as follows: 
+
+        # task_name | task_note |  init_date | closed_date | task_closetime | task_id
+        #    (text) |   (text)  | (datetime) |  (datetime) |     (text)     |  (text)
+        # ===========================================================================
+        # Do stuff  |   Opened  |    5/26    |     5/27    |  1d 2h 14m 23s |  22414
+        
+        # task_name: Name of task, text field
+        # task_note: Whether the task was opened or closed, text field
+        # init_date: Task init date, datetimepicker field
+        # closed_date: Task closed date, datetimepicker field
+        # task_closetime: Time taken to close task in days/hours/min/sec, text field
+        # task_id: The task ID, text field
+
+        # Posting to a data table is done via dictionary with the fields
+        # mentioned above
 
         # Get the table ID
         LOG.info('Organizing data...')
