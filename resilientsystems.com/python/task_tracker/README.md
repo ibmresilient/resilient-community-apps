@@ -2,7 +2,11 @@ Task Tracker
 =============
 
 
-Use Case: This is a circuits module to be used to track tasks in Resilient.  
+Use Case: This is a circuits module to be used to track tasks in Resilient. 
+Every time a task is closed or re-opened in Resilient, this script posts
+the task name, init_date, closed_date, task ID, and how long it took to close
+said task in a data table. This enables the user to quickly see which tasks
+were closed and how long it took to close each one.
 
 
 ## Environment and Installation
