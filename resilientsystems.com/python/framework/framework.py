@@ -54,8 +54,49 @@ class FrameworkComponent(ResilientComponent): # CHANGE FrameworkComponent. No im
         # or default to 'framework_default_queue'
         self.channel = "actions." + self.options.get("queue", "framework_default_queue") # CHANGE framework_default_queue
 
-    @handler("framework_action_title") # CHANGE inside ". Must match "Framework Action Title" as defined in the README. 
-    def _framework_function(self, event, *args, **kwargs): # CHANGE _framework_function
+    #---- ok to remove these comments for your application ----
+    """
+    There are two ways to declare a handler function for Resilient-Circuits:
+
+    1) a handler that will be called for any action on the queue/topic, like this:
+        ```
+            @handler()
+            def _workfunction(self, event, *args, **kwargs):
+                if not isinstance(event, ActionMessage):
+                    # Some event we are not interested in
+                    return
+                # the rest of your processing here
+        ```
+       This is convenient if your action processor should respond to more than
+       one different custom action.  For example, you might design a search action
+       to be triggered by any number of custom actions, and perform variations
+       of the same processing for each.
+       But, the generic handler receives lots of "housekeeping" messages too,
+       so you need to check each message to be sure you want to handle it.
+
+    2) a handler for a specific action (by name).
+        ```
+            @handler("action_name")
+            def _workfunction(self, event, source=None, headers=None, message=None):
+                # the rest of your processing here
+        ```
+        The name of the custom action is downcased, and non-word characters are
+        converted to spaces, to name the event.  So the handler name "action_name"
+        corresponds to a custom action named "Action Name".
+
+        You can declare the parameters as "self, event, *args, **kwargs" if you prefer,
+        and find the action data from 'kwargs' but naming the parameters is easier
+        since Action messages have only these three:
+        - the message source (the Circuits component that fired the event)
+        - the message headers (the message destination, timestamp, etc)
+        - the action message (data of the incident, artifact, etc, and any action fields).
+
+    Note: The name of the function is not important, as long as it's unique in the class.
+    """
+    #----
+
+    @handler("framework_action_title") # CHANGE inside ". Must match "Framework Action Title" as defined in the README.
+    def _framework_function(self, event, source=None, headers=None, message=None):
         """FRAMEWORK FUNCTION DOCSTRING""" # CHANGE inside """
         # CHANGE everything after the following line
         # ====================================================================
@@ -74,6 +115,5 @@ class FrameworkComponent(ResilientComponent): # CHANGE FrameworkComponent. No im
 
         # Status string returned here will be displayed in "Action Status" in the Resilient UI
         # Note: use 'yield', not 'return'; this is a generator method.
-        status = "Finished executing framework code!" 
+        status = "Finished executing framework code!"
         yield status
-
