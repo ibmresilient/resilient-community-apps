@@ -34,7 +34,7 @@ Open the Administrator Settings --> Actions, then:
 
 ## Message Destination
 
-Create a Queue message destination with programmatic name `newincident`.
+Create a Queue message destination with programmatic name `addincident`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
@@ -42,7 +42,7 @@ to its users list.
 ## Manual Action
 
 Create an manual action named 'Escalate Incident Between Orgs', 
-associated with object type "Incident". Choose `newincident` as the message 
+associated with object type "Incident". Choose `addincident` as the message 
 destination. 
 
 

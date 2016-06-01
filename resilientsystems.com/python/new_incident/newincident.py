@@ -63,10 +63,16 @@ class AddIncidentComponent(ResilientComponent):
         # get information about the incident, such as its ID
         incident = event.message["incident"]
         inc_id = incident["id"]
+
+        # set verify option
+        verify = self.options['verify']
+        if self.options['verify'] == "False"
+            verify = False
+
         LOG.info("Connecting to alternate org...")
         resilient_client = resilient.SimpleClient(self.options['to_org_name'],
                                                   self.options['to_org_address'],
-                                                  verify=self.options['verify'])
+                                                  verify=verify)
         LOG.info("Authenticating with alternate org...")
         resilient_client.connect(self.options['to_org_username'],
                                  self.options['to_org_password'])
