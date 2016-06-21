@@ -47,6 +47,7 @@ class FrameworkComponent(ResilientComponent): # CHANGE FrameworkComponent. No im
 
     def __init__(self, opts):
         super(FrameworkComponent, self).__init__(opts) # CHANGE FrameworkComponent. Must match class FrameworkComponent.
+
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
