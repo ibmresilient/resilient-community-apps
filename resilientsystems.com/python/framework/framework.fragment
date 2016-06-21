@@ -2,8 +2,10 @@
 # -----------------------------------------------------------------------------
 # The "framework" action component section
 # -----------------------------------------------------------------------------
-# The queue we want to listen to
+
+# The queue (message destination) this action processor should listen to
 queue=framework_queue
+
 # The example framework fields. Stored in self.options.
 framework_field=example
 framework_field2=example2
