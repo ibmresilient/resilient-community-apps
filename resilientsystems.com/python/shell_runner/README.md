@@ -8,8 +8,9 @@ The behaviors to locate the script and to process the results are configurable
 for specific actions if required.
 
 Typical uses include
-* Running network utilities such as dig, traceroute, nbtstat, ping
-* Using PowerShell or bash as a way to query databases or systems
+* Running network utilities such as dig, traceroute, nbtstat, ping,
+* Using PowerShell or bash as a way to query databases or systems,
+* Managing firewall and IPS rules (Snort examples are included),
 * Integrating with existing systems that have a command-line interface.
 
 For details, see the [setup documentation](Shell_Actions_Setup.pdf).
