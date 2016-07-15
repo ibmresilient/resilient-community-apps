@@ -73,8 +73,11 @@ def _shell_run(action_template, action_data):
         stdoutdata, stderrdata = call.communicate()
         retcode = call.returncode
         output = stderrdata.decode()
+
+        # Nonzero exit code indicates error; leave the temp file in place to ease debugging the script
         if retcode is not 0:
             raise OSError("'{}' failed: {}".format(cmd[0], output))
+
         result = stdoutdata.decode()
 
         # Clean up the temporary file

@@ -206,6 +206,13 @@ class Disposition(dict):
         incident_id = event.incident["id"]
         return self.client.post("/incidents/{}/comments".format(incident_id), data, co3_context_token=event.context)
 
+    def new_note_text(self, args, event, data):
+        """Add a new note to the event's incident. Wraps the 'data' string payload into a comment DTO"""
+        incident_id = event.incident["id"]
+        return self.client.post("/incidents/{}/comments".format(incident_id),
+                                {"text" : {"format" : "text", "content" : data}},
+                                co3_context_token=event.context)
+
     def new_milestone(self, args, event, data):
         """Add a new milestone to the event's incident"""
         if not isinstance(data, dict):
