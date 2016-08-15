@@ -42,7 +42,6 @@ LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = "auto_add_new_inc_type"
 
-
 class NewIncComponent(ResilientComponent):
     """Circuits framework to add a new incident type via the entry wizard"""
 
@@ -52,8 +51,7 @@ class NewIncComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         LOG.debug(self.options)
 
-        # The queue name can be specified in the config file,
-        # or default to 'framework_default_queue'
+        #The queue name, "add_new_object", is specified in the app.config.fragment file
         self.channel = "actions." + self.options.get("queue", “add_new_object”) 
 
     @handler("add_new_incident_type")
