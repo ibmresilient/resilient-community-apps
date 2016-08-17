@@ -52,11 +52,11 @@ class NewIncComponent(ResilientComponent):
         LOG.debug(self.options)
 
         #The queue name, "add_new_object", is specified in the app.config.fragment file
-        self.channel = "actions." + self.options.get("queue", “add_new_object”) 
+        self.channel = "actions." + self.options.get("queue", add_new_object)
 
     @handler("add_new_incident_type")
-    def _framework_function(self, event, source=None, headers=None, message=None):
-        """Function to programmatically add new incident types via etry wizard"""
+    def _add_new_inc_type(self, event, source=None, headers=None, message=None):
+        """Function to automatically add new incident types to Incident Types and the Incident via the entry wizard"""
         incident = event.message["incident"]
         inc_id = incident["id"]
         results = []
@@ -68,17 +68,16 @@ class NewIncComponent(ResilientComponent):
         obj = {"system": False, "parent_id": None, "create_date": None, "name": "Example", "hidden": False, "enabled": True, "id": None, "description": None}
         
         # Adds all the entered incident types to Resilient
-        def update_type():
-            LOG.info('Updated incident types with %s type', new_inc_type)
-            obj["name"] = new_inc_type 
-            results.append(self.rest_client().post("/incident_types", obj))
+        LOG.info('Updated incident types with %s type', new_inc_type)
+        obj["name"] = new_inc_type
+        results.append(self.rest_client().post("/incident_types", obj))
 
         # Function to add an incident type to an incident
         def update_inc(incident):
             LOG.info('Updated incident with %s type', new_inc_type)
             incident["incident_type_ids"].append(new_inc_type)
-	    return incident
+        return incident
 	
         # Updates the incident types with the types defined in the new entry wiz
-        self.rest_client().get_put("/incidents/{}".format(inc_id), lambda incident: update_inc(incident))
+        self.rest_client().get_put("/incidents/{}".format(inc_id), update_inc, co3_context_token=event.context)
 
