@@ -35,8 +35,8 @@
 from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
-from resilient_circuits.actions_component import ResilientComponent, ActionMessage
-import random
+from resilient_circuits.actions_component import ResilientComponent
+
 LOG = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'assigntasks'
@@ -78,7 +78,7 @@ class AssignTasksToMeComponent(ResilientComponent):
 
         def update_func(incident):
             """Update the incident to add a user as member"""
-            LOG.info("Adding {} as an incident member so that they can own tasks".format(user_def["email"]))
+            LOG.info("Adding %s as an incident member so they can own tasks", user_def["email"])
             incident["members"].append(user_id)
             return incident
         incident_url = "/incidents/{}".format(incident["id"])
@@ -115,7 +115,7 @@ class AssignTasksToMeComponent(ResilientComponent):
         def update_task(task):
             """Callback function to update a task and set its owner"""
             if task["status"] == "O" and task["owner_id"] is None:
-                LOG.info("Setting ownership for task {}".format(task["id"]))
+                LOG.info("Setting ownership for task %s", task["id"])
                 task["owner_id"] = user_id
 
         for task_id in task_ids:
