@@ -1,0 +1,6 @@
+# -----------------------------------------------------------------------------
+# The 'fields_to_artifacts' action component
+# -----------------------------------------------------------------------------
+[fields_to_artifacts]
+# This is the queue we want to listen on
+queue=fields_to_artifacts
