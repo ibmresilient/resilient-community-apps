@@ -166,6 +166,10 @@ class Shell(ResilientComponent):
         LOG.info("shell: %s", action_name)
         ret = yield self.call(evt, "worker")
         result = ret.value
+        if isinstance(result, list):
+            # results from circuits tasks come back wrapped in a list
+            result = result[0]
+
         if isinstance(result, Exception):
             raise result
 
