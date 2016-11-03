@@ -138,6 +138,12 @@ class Disposition(dict):
                                          co3_context_token=event.context)
         return result
 
+    def update_incident_field(self, args, event, data):
+        """Set a specific field in the incident, from raw data"""
+        fieldname = args.get("field", "unspecified_field_name")
+        payload = {"properties": {fieldname: data}}
+        return self.update_incident(args, event, payload)
+
     def update_task(self, args, event, data):
         """Update with data"""
         if not isinstance(data, dict):
