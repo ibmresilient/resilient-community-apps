@@ -31,3 +31,7 @@ A manual circuits example that sends an email using gmail.
 
 Action Module processor that runs shell scripts (bash PowerShell, etc).
 
+## acknowledge_all_messages
+
+A tool to acknowledge all pending actions on all messages destinations
+
