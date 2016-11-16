@@ -45,7 +45,7 @@ to its users list.
 
 ## Automatic Action
 
-Create an automatic action named 'AutoPhase', associated with object type
+Create an automatic action named 'Phase Milestone', associated with object type
 "Incident".  Choose `phase_milestone` as the message destination.
 Add condition: "Phase is changed".
 
