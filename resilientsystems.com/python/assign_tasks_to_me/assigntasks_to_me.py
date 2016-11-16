@@ -112,14 +112,18 @@ class AssignTasksToMeComponent(ResilientComponent):
         # Find the tasks in the current phase
         task_ids = self._tasks_in_current_phase(incident)
 
-        def update_task(task):
-            """Callback function to update a task and set its owner"""
-            if task["status"] == "O" and task["owner_id"] is None:
-                LOG.info("Setting ownership for task %s", task["id"])
-                task["owner_id"] = user_id
-
+        # Get all the tasks, into an array, and set the owner of each
+        tasks_to_update = []
         for task_id in task_ids:
             task_url = "/tasks/{}".format(task_id)
-            self.rest_client().get_put(task_url, update_task, co3_context_token=event.context)
+            task = self.rest_client().get(task_url)
+            if task["status"] == "O" and task["owner_id"] is None:
+                LOG.info("Setting ownership for task {}".format(task["id"]))
+                task["owner_id"] = user_id
+                tasks_to_update.append(task)
+
+        # Update them all at once
+        if tasks_to_update:
+            self.rest_client().put("/tasks", tasks_to_update, co3_context_token=event.context)
 
         LOG.info("Done")
