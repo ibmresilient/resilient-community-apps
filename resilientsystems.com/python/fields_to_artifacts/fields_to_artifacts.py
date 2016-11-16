@@ -35,6 +35,8 @@
 import logging
 import re
 import datetime
+import time
+import json
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
 
@@ -62,6 +64,11 @@ class FieldsToArtifactsComponent(ResilientComponent):
         self.all_artifact_types = [atype["label"] for atype in artifact_types["values"]]
         LOG.debug("All artifact types: %s", self.all_artifact_types)
 
+        # We cache the types (because they shouldn't change often)
+        # and refresh if more than 5 minutes old (so you can test without too much delay)
+        self.types_timestamp = 0
+        self.interesting_fields = None
+
     def _field_value_string(self, incident, fielddef):
         """Helper to get the value of a field, as a string"""
         fieldname = fielddef.get("name")
@@ -79,7 +86,9 @@ class FieldsToArtifactsComponent(ResilientComponent):
         elif ftype in ["textarea"]:
             # Value may be {"content":"...", "format":"text"}
             if isinstance(value, dict):
-                value = value.get("content")
+                value = value.get("content", "")
+            # Value may include text for embedded hyperlinks, as '<http://xxx>' ... strip them out brute-force
+            value = re.sub(r'<http.*>', "", value or "")
         elif isinstance(value, list):
             # If this is a 'multiselect' field, resolve each of the the ids
             value = [self.get_field_label(fieldname, v) for v in value]
@@ -97,23 +106,35 @@ class FieldsToArtifactsComponent(ResilientComponent):
             # Some event we are not interested in
             return
 
+        # Defer processing, this is low priority
+        if event.defer(self, delay=3):
+            # OK, let's handle it later
+            return
+
+        client = self.rest_client()
+        incident = event.message["incident"]
+        inc_id = incident["id"]
+
         # Find all the incident fields
         # that have a tooltip in the format:
         #   [Artifact: xxxx]
         # where we'll assume that xxxx is an Artifact Type.
-        client = self.rest_client()
-        fields = client.get("/types/incident/fields")
         regex = re.compile(r"\[Artifact:(.*)\]")
-        interesting_fields = [field for field in fields if regex.match(field.get("tooltip", ""))]
+        if self.interesting_fields is None or self.types_timestamp < (time.time() - 240):
+            fields = client.get("/types/incident/fields")
+            self.interesting_fields = [field for field in fields if regex.match(field.get("tooltip", ""))]
+            self.types_timestamp = time.time()
 
-        if len(interesting_fields) == 0:
+        if len(self.interesting_fields) == 0:
             msg = "No fields are configured for mapping to artifacts"
             LOG.warn(msg)
             return msg
 
+        # Fetch the incident again, getting plaintext instead of richtext, and resolved values for handle ids
+        incident_url = "/incidents/{0}?handle_format=names&text_content_output_format=always_text".format(inc_id)
+        incident = client.get(incident_url)
+
         # Fetch all the artifacts for this incident
-        incident = event.message["incident"]
-        inc_id = incident["id"]
         artifacts_url = "/incidents/{0}/artifacts?handle_format=names".format(inc_id)
         artifacts = client.get(artifacts_url)
         artifacts_by_type = {}
@@ -128,17 +149,22 @@ class FieldsToArtifactsComponent(ResilientComponent):
         # - Check whether there is an artifact with that value.
         #   If not, create it.
         add_artifact_url = "/incidents/{0}/artifacts".format(inc_id)
-        for field in interesting_fields:
+        for field in self.interesting_fields:
             match = regex.match(field["tooltip"])
             artifact_type = match.group(1).strip()
-            value = self._field_value_string(incident, field)
-            # Check that the artifact type is valid
             if artifact_type not in self.all_artifact_types:
+                # The artifact type is not valid
                 LOG.error("Tooltip for field '%s' specifies an invalid artifact type: '%s'",
                           field["name"],
                           artifact_type)
-            elif value not in artifacts_by_type.get(artifact_type, []):
+                continue
+            value = self._field_value_string(incident, field)
+            if value is None or len(value) == 0:
+                # nothing to do
+                continue
+            if value not in artifacts_by_type.get(artifact_type, []):
                 # We don't have this artifact.  Add it
+                value = value.strip()
                 LOG.info("Adding artifact '%s' for field '%s': '%s'",
                          artifact_type,
                          field["name"],
