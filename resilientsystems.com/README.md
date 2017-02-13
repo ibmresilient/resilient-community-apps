@@ -1,11 +1,11 @@
 
 ## add_group
 
-An automatic circuits example showing how to change incident owner/members based on severity.
+Circuits example showing how to change incident owner/members based on severity.
 
 ## dependent_fields
 
-An automatic circuits example showing how to make a field dependent on two other fields.
+Circuits example showing how to make a field dependent on two other fields.
 
 ## invite_user
 
@@ -13,19 +13,19 @@ A simple example showing how to invite a user into Resilient using the Resilient
 
 ## new_incident
 
-A manual circuits example showing how to open an incident in another org.
+Circuits example showing how to open an incident in another org with a menu item.
 
 ## phase_milestone
 
-An automatic action that adds a milestone when the incident phase changes.
+An automatic rule that adds a milestone when the incident phase changes.
 
 ## post_tweet
 
-A manual circuits example that posts a tweet to twitter.
+Circuits example that posts a tweet to twitter from a menu item.
 
 ## send_mail
 
-A manual circuits example that sends an email using gmail.
+Circuits example that sends an email using gmail from a menu item.
 
 ## shell_runner
 
@@ -33,5 +33,8 @@ Action Module processor that runs shell scripts (bash PowerShell, etc).
 
 ## acknowledge_all_messages
 
-A tool to acknowledge all pending actions on all messages destinations
+Tool to acknowledge all pending actions on all messages destinations using Resilient REST API
 
+## new_incident_type
+
+Circuits example to create new incident types from the New Incident Wizard screen.

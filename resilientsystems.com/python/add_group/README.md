@@ -5,7 +5,7 @@ Add Group
 Use Case:  Upon changing the Severity of an incident, change the owner
 and add members as appropriate.
 
-A custom action triggers when the severity is changed.  The action processor,
+An automatic rule triggers when the severity is changed.  The action processor,
 implemented in the 'add_group.py' component, responds to this event.  It finds
 the intended owner and membership from settings in the configuration file,
 and applies them to the incident.
@@ -27,19 +27,20 @@ file and edit the settings appropriately.
 ## Resilient server setup
 
 You must configure the following customizations to the Resilient server.
-Open the Administrator Settings --> Actions, then:
+Open the Customization Settings menu, then:
 
 
 ## Message Destination
 
+Open the Message Destinations tab.
 Create a Queue message destination with programmatic name `addgroup`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
 
-## Automatic Action
+## Automatic Rule
 
-Create an automatic action named 'Add Group', associated with object type
-"Incident".  Choose `addgroup` as the message destination. Add condition
-"Severity is changed".
+Open the Rules tab.  Create an automatic rule named 'Add Group',
+associated with object type "Incident".  Choose `addgroup` as the message destination. 
+Add condition "Severity is changed".
 
