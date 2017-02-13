@@ -1,15 +1,24 @@
 
+# REST API Examples
+
+## acknowledge_all_messages
+
+Tool to acknowledge all pending actions on all messages destinations using Resilient REST API
+
 ## add_group
 
 Circuits example showing how to change incident owner/members based on severity.
 
-## dependent_fields
-
-Circuits example showing how to make a field dependent on two other fields.
+# Resilient Circuits Examples (Action Module)
 
 ## invite_user
 
 A simple example showing how to invite a user into Resilient using the Resilient REST API
+
+
+## dependent_fields
+
+Circuits example showing how to make a field dependent on two other fields.
 
 ## new_incident
 
@@ -31,10 +40,9 @@ Circuits example that sends an email using gmail from a menu item.
 
 Action Module processor that runs shell scripts (bash PowerShell, etc).
 
-## acknowledge_all_messages
-
-Tool to acknowledge all pending actions on all messages destinations using Resilient REST API
-
 ## new_incident_type
 
 Circuits example to create new incident types from the New Incident Wizard screen.
+
+
+# Application Scripts (Scripts Tab) Examples
