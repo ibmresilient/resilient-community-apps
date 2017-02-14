@@ -3,7 +3,7 @@ Post to Twitter from Resilient
 
 
 Use Case: Given a twitter account defined in the config file and a message
-specified when executing a manual action, post the message to twitter. This
+specified when clicking an Incident menu item, post the message to twitter. This
 would be useful if one is managing the social media accounts of a company.
 
 
@@ -47,8 +47,13 @@ Create a Queue message destination with programmatic name `twitterpost`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
+## Custom Field
+Click the Layouts tab.
+Create a custom text field called `Tweet Body` and add it to one of your incident tabs.
+
 
 ## Rule
 Click the Rules tab.
 Create a Menu Item named `Post to Twitter`, associated with object type
 "Incident". Choose `twitterpost` as the message destination. 
+Add a condition `Tweet Body has a value`.

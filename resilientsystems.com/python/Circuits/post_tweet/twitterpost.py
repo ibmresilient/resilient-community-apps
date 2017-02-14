@@ -41,5 +41,5 @@ class TwitterPostComponent(ResilientComponent):
         # Log output
         LOG.info("Posted tweet to twitter! :D")
 
-        yield "User updated!"
+        yield "Tweet Posted"
     # end _post_tweet
