@@ -23,9 +23,9 @@ Configuration has two parts:
 
     `[Artifact: IP Address]`
 
-* An automatic action that triggers when the incident is
+* An automatic rule that triggers when the incident is
   modified.  If you have only a single field, or a small number of
-  fields, that are tracked in this way, then actions with specific
+  fields, that are tracked in this way, then rules with specific
   conditions should be created to trigger when those fields are
   changed.
 
@@ -51,10 +51,11 @@ application's configuration file and edit the settings appropriately.
 ## Resilient server setup
 
 You must configure the following customizations to the Resilient server.
+Open the Customization Settings menu, then:
 
 ### Field Tooltips
-
-As described above, setting the Tooltip for each field
+Open the Layouts tab.
+As described above, set the Tooltip for each field
 that you want to be reflected in an artifact.  Be sure that the
 Artifact Type you specify in the tooltip is valid, and that the
 field's values will be valid for that artifact type.  For example,
@@ -65,8 +66,7 @@ creation will fail.
 
 ### Message Destination
 
-Open the Administrator Settings --> Actions, then:
-
+Open the Message Destinations tab.
 Create a Queue message destination with programmatic name `fields_to_artifacts`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
@@ -74,15 +74,14 @@ to its users list.
 Note: you can use any message destination; its name is specified in the
 config file as 'queue' in the "[fields_to_artifacts]" section.
 
-### Automatic Action
+### Rule
 
-Open the Administrator Settings --> Actions, then:
-
-Create an automatic action (the name is not important), associated with
+Open the Rules tab.
+Create an automatic rule (the name is not important), associated with
 object type "Incident".  Choose `fields_to_artifacts` as the message
 destination.
  
-If you want the action to trigger only when a particular field is
+If you want the rule to trigger only when a particular field is
 changed, add that condition as appropriate.
 
 

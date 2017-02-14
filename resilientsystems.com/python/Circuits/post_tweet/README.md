@@ -19,33 +19,36 @@ loaded automatically when your application starts.
 Copy the configuration file fragment into your application's configuration
 file and edit the settings appropriately.
 
+This uses the "twitter" package for python. 
+[http://mike.verdone.ca/twitter](http://mike.verdone.ca/twitter)
+Install with:
+`pip install twitter`
+
+## Twitter Configuration
+
+This integration requires you to have a working twitter account with valid login
+credentials. To get your keys for authenticating to twitter and interacting
+with twitter's API, follow the instructions for the Python twitter API
+as detailed at [https://github.com/sixohsix/twitter](https://github.com/sixohsix/twitter).
+
+Once you have followed those instructions and gotten your login credentials,
+put them in the associated places in the app.config.fragment file. 
+
 
 ## Resilient server setup
 
 You must configure the following customizations to the Resilient server.
-Open the Administrator Settings --> Actions, then:
+Open the Customization Settings menu, then:
 
 
 ## Message Destination
-
+Click the Message Destinations tab.
 Create a Queue message destination with programmatic name `twitterpost`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
 
-## Manual Action
-
-Create an manual action named 'Post to Twitter', associated with object type
-"Incident". Choose `twitterpost` as the message 
-destination. 
-
-
-## Twitter Configuration
-
-This incident assumes you have a working twitter account with valid login
-credentials. To get your keys for authenticating to twitter and interacting
-with twitter's API, follow the instructions for the Python twitter API
-as detailed at [https://github.com/sixohsix](https://github.com/sixohsix).
-
-Once you have followed those instructions and gotten your login credentials,
-put them in the associated places in the app.config.fragment file. 
+## Rule
+Click the Rules tab.
+Create a Menu Item named `Post to Twitter`, associated with object type
+"Incident". Choose `twitterpost` as the message destination. 

@@ -1,38 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-# Resilient Systems, Inc. ("Resilient") is willing to license software
-# or access to software to the company or entity that will be using or
-# accessing the software and documentation and that you represent as
-# an employee or authorized agent ("you" or "your") only on the condition
-# that you accept all of the terms of this license agreement.
-#
-# The software and documentation within Resilient's Development Kit are
-# copyrighted by and contain confidential information of Resilient. By
-# accessing and/or using this software and documentation, you agree that
-# while you may make derivative works of them, you:
-#
-# 1)  will not use the software and documentation or any derivative
-#     works for anything but your internal business purposes in
-#     conjunction your licensed used of Resilient's software, nor
-# 2)  provide or disclose the software and documentation or any
-#     derivative works to any third party.
-#
-# THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS" AND ANY EXPRESS
-# OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL RESILIENT BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-# OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """Action Module circuits component to add an incident manually"""
 
-from __future__ import print_function
 import logging
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent
@@ -43,7 +12,7 @@ CONFIG_DATA_SECTION = 'addincident'
 
 
 class AddIncidentComponent(ResilientComponent):
-    """Adds an incident once a manual action is clicked"""
+    """Adds an incident once a menu item is clicked"""
 
     # This component adds an incident once a manual action is clicked
 
@@ -66,8 +35,10 @@ class AddIncidentComponent(ResilientComponent):
 
         # set verify option
         verify = self.options['verify']
-        if self.options['verify'] == "False"
+        if self.options['verify'] == "False":
             verify = False
+        elif self.options['verify'] == "True":
+            verify = True
 
         LOG.info("Connecting to alternate org...")
         resilient_client = resilient.SimpleClient(self.options['to_org_name'],
@@ -77,7 +48,7 @@ class AddIncidentComponent(ResilientComponent):
         resilient_client.connect(self.options['to_org_username'],
                                  self.options['to_org_password'])
         LOG.info("Creating new incident...")
-        new_incident = {'name': 'New Incident From Manual Action',
+        new_incident = {'name': 'New Incident Copied From Other Org',
                         'description': 'Incident created from incident '+str(inc_id),
                         'discovered_date': incident['discovered_date']} 
         LOG.info("Posting new incident to alternate org...")
@@ -89,5 +60,5 @@ class AddIncidentComponent(ResilientComponent):
         # Log output
         LOG.info("Finished incident posting! :D")
 
-        yield "User updated!"
-        # end _lookup_action
+        yield "Incident Created"
+    # end _add_incident

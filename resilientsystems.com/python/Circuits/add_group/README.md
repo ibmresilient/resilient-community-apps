@@ -40,7 +40,7 @@ to its users list.
 
 ## Automatic Rule
 
-Open the Rules tab.  Create an automatic rule named 'Add Group',
+Open the Rules tab.  Create an automatic rule named `Add Group`,
 associated with object type "Incident".  Choose `addgroup` as the message destination. 
 Add condition "Severity is changed".
 

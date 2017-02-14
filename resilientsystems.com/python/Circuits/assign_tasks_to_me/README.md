@@ -38,7 +38,7 @@ config file as 'queue' in the "[assigntasks]" section.
 
 ### Manual Action
 Open the Rules tab.
-Create a Menu Item named 'Assign Tasks To Me', associated with
+Create a Menu Item named `Assign Tasks To Me`, associated with
 object type "Incident".  Choose `assigntasks` as the message
 destination. 
 
