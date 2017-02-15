@@ -33,19 +33,19 @@ file and edit the settings appropriately.
 ## Resilient server setup
 
 You must configure the following customizations to the Resilient server.
-Open the Administrator Settings --> Actions, then:
+Open the Customization Settings menu, then:
 
 
 ## Message Destination
-
+Open the Message Destinations tab.
 Create a Queue message destination with programmatic name `phase_milestone`.
 Select Yes for "expect acknowledgement", and add the integration user
 to its users list.
 
 
-## Automatic Action
-
-Create an automatic action named 'Phase Milestone', associated with object type
+## Rule
+Open the Rules tab.
+Create an automatic rule named `Phase Milestone`, associated with object type
 "Incident".  Choose `phase_milestone` as the message destination.
 Add condition: "Phase is changed".
 

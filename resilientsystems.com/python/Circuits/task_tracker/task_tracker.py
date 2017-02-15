@@ -1,34 +1,4 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-# Resilient Systems, Inc. ("Resilient") is willing to license software
-# or access to software to the company or entity that will be using or
-# accessing the software and documentation and that you represent as
-# an employee or authorized agent ("you" or "your") only on the condition
-# that you accept all of the terms of this license agreement.
-#
-# The software and documentation within Resilient's Development Kit are
-# copyrighted by and contain confidential information of Resilient. By
-# accessing and/or using this software and documentation, you agree that
-# while you may make derivative works of them, you:
-#
-# 1)  will not use the software and documentation or any derivative
-#     works for anything but your internal business purposes in
-#     conjunction your licensed used of Resilient's software, nor
-# 2)  provide or disclose the software and documentation or any
-#     derivative works to any third party.
-#
-# THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS" AND ANY EXPRESS
-# OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL RESILIENT BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-# OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """Action Module task logger, implemented via circuits"""
 
@@ -89,13 +59,13 @@ class TaskTrackerComponent(ResilientComponent):
             days = int(hours/24)
             hours = hours % 24
             task_closetime = "{}d {}h {}m {}s".format(days, hours, minutes, secs)
-        # Note: Data fields will be organized as follows: 
+        # Note: Data fields will be organized as follows:
 
         # task_name | task_note |  init_date | closed_date | task_closetime | task_id
         #    (text) |   (text)  | (datetime) |  (datetime) |     (text)     |  (text)
         # ===========================================================================
         # Do stuff  |   Opened  |    5/26    |     5/27    |  1d 2h 14m 23s |  22414
-        
+
         # task_name: Name of task, text field
         # task_note: Whether the task was opened or closed, text field
         # init_date: Task init date, datetimepicker field
@@ -116,8 +86,8 @@ class TaskTrackerComponent(ResilientComponent):
         for column in mytable['fields']:
             column_ids[column] = mytable['fields'][column]['id']
         # Create values dictionary
-        values = {self.options['column_one']: str(task_name),
-                  self.options['column_two']: str(task_note),
+        values = {self.options['column_one']: task_name,
+                  self.options['column_two']: task_note,
                   self.options['column_three']: task_init_date,
                   self.options['column_four']: task_closed_date,
                   self.options['column_five']: str(task_closetime),

@@ -1,4 +1,4 @@
-__author__ = 'Resilient Systems'
+__author__ = 'IBM Resilient'
 
 import logging
 from resilient_circuits import app

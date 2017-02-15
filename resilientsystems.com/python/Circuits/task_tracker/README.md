@@ -14,7 +14,7 @@ were closed and how long it took to close each one.
 This integration is provided as
 * A component for a "resilient circuits" framework
 * A fragment of a configuration file.
-* A script to automatically set up the queue, table, and message destination
+* A script to automatically set up the rule, data table, and message destination
 * A configuration file for the setup script
 
 Copy the .py file into your 'components' directory, where it will be
@@ -30,9 +30,10 @@ You must configure the following customizations to the Resilient server.
 To do this, there are two options. If you would like to set everything up
 automatically, you can:
 * Fill out the setup.config file with login credentials
-* Run the setup.py script to automatically create a action, table, and queue
+* Run the setup.py script to automatically create an automatic rule, data table, 
+and message destination
 * Manually add the integration user to the tasktrackerqueue users list
-
+* Add the Task History table to an incident tab to make it visible
 OR you can set everything up manually by carrying out the following 
 instructions. 
 
@@ -45,9 +46,9 @@ to its users list.
 
 Note: 'tasktrackerqueue' must match the queue field in the app.config file.
 
-## Automatic Action
+## Rule
 
-Create an automatic action named 'Task Tracker', associated with  
+Create an automatic rule named 'Task Tracker', associated with  
 object type "Task".  Choose 'tasktrackerqueue' as the message destination.  
 Add condition "Active is changed".
 
