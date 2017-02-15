@@ -1,35 +1,4 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-# Resilient Systems, Inc. ("Resilient") is willing to license software
-# or access to software to the company or entity that will be using or
-# accessing the software and documentation and that you represent as
-# an employee or authorized agent ("you" or "your") only on the condition
-# that you accept all of the terms of this license agreement.
-#
-# The software and documentation within Resilient's Development Kit are
-# copyrighted by and contain confidential information of Resilient. By
-# accessing and/or using this software and documentation, you agree that
-# while you may make derivative works of them, you:
-#
-# 1)  will not use the software and documentation or any derivative
-#     works for anything but your internal business purposes in
-#     conjunction your licensed used of Resilient's software, nor
-# 2)  provide or disclose the software and documentation or any
-#     derivative works to any third party.
-#
-# THIS SOFTWARE AND DOCUMENTATION IS PROVIDED "AS IS" AND ANY EXPRESS
-# OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL RESILIENT BE LIABLE FOR ANY DIRECT,
-# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
-# HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
-# STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
-# OF THE POSSIBILITY OF SUCH DAMAGE.
-
 """Action Module circuits component """
 
 import logging
@@ -37,6 +6,7 @@ import re
 import datetime
 import time
 import json
+import csv
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
 
@@ -64,10 +34,22 @@ class FieldsToArtifactsComponent(ResilientComponent):
         self.all_artifact_types = [atype["label"] for atype in artifact_types["values"]]
         LOG.debug("All artifact types: %s", self.all_artifact_types)
 
+        # Get a list of artifact types that are multi-aware (support CSV split of value)
+        self.multi_aware_artifacts = [item["name"] for item in self._get_constants()["artifact_types"] if item["multi_aware"]]
+
         # We cache the types (because they shouldn't change often)
         # and refresh if more than 5 minutes old (so you can test without too much delay)
         self.types_timestamp = 0
         self.interesting_fields = None
+        self.artifacts_by_type = {}
+
+    def _get_constants(self):
+        """return data from Resilient /const endpoint"""
+        client = self.rest_client()
+        url = "{}/rest/const".format(client.base_url)
+        response = client._execute_request(client.session.get, url, proxies=client.proxies,
+                                           cookies=client.cookies, headers=client.headers)
+        return response.json()
 
     def _field_value_string(self, incident, fielddef):
         """Helper to get the value of a field, as a string"""
@@ -83,6 +65,8 @@ class FieldsToArtifactsComponent(ResilientComponent):
             # Value is epoch milliseconds
             dtime = datetime.datetime.utcfromtimestamp(int(value) / 1000.0)
             value = dtime.strftime("%Y-%m-%d %H:%M:%S")
+        elif ftype == "number":
+            value = str(value)
         elif ftype in ["textarea"]:
             # Value may be {"content":"...", "format":"text"}
             if isinstance(value, dict):
@@ -92,11 +76,11 @@ class FieldsToArtifactsComponent(ResilientComponent):
         elif isinstance(value, list):
             # If this is a 'multiselect' field, resolve each of the the ids
             value = [self.get_field_label(fieldname, v) for v in value]
-            value = ", ".join(value)
+            value = u", ".join(value)
         else:
             # If this is a 'select' field, resolve the id
             value = self.get_field_label(fieldname, value)
-        return value
+        return value.strip()
 
     @handler()
     def _fields_to_artifacts(self, event, *args, **kwargs):
@@ -137,12 +121,12 @@ class FieldsToArtifactsComponent(ResilientComponent):
         # Fetch all the artifacts for this incident
         artifacts_url = "/incidents/{0}/artifacts?handle_format=names".format(inc_id)
         artifacts = client.get(artifacts_url)
-        artifacts_by_type = {}
+        self.artifacts_by_type = {}
         for artifact in artifacts:
             atype = artifact["type"]
-            values = artifacts_by_type.get(atype, [])
+            values = self.artifacts_by_type.get(atype, [])
             values.append(artifact["value"])
-            artifacts_by_type[atype] = values
+            self.artifacts_by_type[atype] = values
 
         # For each of the interesting fields:
         # - Find the field value
@@ -162,23 +146,39 @@ class FieldsToArtifactsComponent(ResilientComponent):
             if value is None or len(value) == 0:
                 # nothing to do
                 continue
-            if value not in artifacts_by_type.get(artifact_type, []):
-                # We don't have this artifact.  Add it
-                value = value.strip()
-                LOG.info("Adding artifact '%s' for field '%s': '%s'",
-                         artifact_type,
-                         field["name"],
-                         value)
-                new_artifact = {"type": artifact_type,
-                                "value": value,
-                                "description": "From incident field '{}'".format(field["text"])}
-                try:
-                    client.post(add_artifact_url, new_artifact, co3_context_token=event.context)
-                except:
-                    # Log the error and carry on
-                    LOG.exception("Error adding artifact '%s' for field '%s' (invalid value?): '%s'",
-                                  artifact_type,
-                                  field["name"],
-                                  value)
+
+            if artifact_type in self.multi_aware_artifacts:
+                reader = csv.reader([value,], delimiter=',', skipinitialspace=True)
+                values = [row for row in reader][0]
+            else:
+                values = [value,]
+
+            for value in values:
+                if value not in self.artifacts_by_type.get(artifact_type, []):
+                    # We don't have this artifact.  Add it
+                    self._create_artifact(add_artifact_url, artifact_type, value, field, event.context)
 
         LOG.info("Done")
+
+    def _create_artifact(self, url, atype, value, field, co3_context_token):
+        """Create artifact"""
+        value = value.strip()
+        LOG.info("Adding artifact '%s' for field '%s': '%s'",
+                 atype,
+                 field["name"],
+                 value)
+        new_artifact = {"type": atype,
+                        "value": value,
+                        "description": "From incident field '{}'".format(field["text"])}
+        try:
+            self.rest_client().post(url, new_artifact, co3_context_token=co3_context_token)
+            # Add new artifact to our list
+            values = self.artifacts_by_type.get(atype, [])
+            values.append(value)
+            self.artifacts_by_type[atype] = values
+        except:
+            # Log the error and carry on
+            LOG.exception("Error adding artifact '%s' for field '%s' (invalid value?): '%s'",
+                          atype,
+                          field["name"],
+                          value)
