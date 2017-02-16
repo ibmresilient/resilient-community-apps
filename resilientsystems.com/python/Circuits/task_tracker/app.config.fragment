@@ -1,0 +1,17 @@
+[task_tracker]
+# -----------------------------------------------------------------------------
+# The "task_tracker" action component section
+# -----------------------------------------------------------------------------
+# The queue we want to listen to
+queue=tasktrackerqueue
+# The api name of the table to post to. 
+# Default set to the name of the table created with setupscript.py
+table_api_name=task_history
+# The api names of the table columns
+# Default set to the names of the fields created with setupscript.py
+column_one=task_name
+column_two=task_notes
+column_three=init_date
+column_four=closed_date
+column_five=time_to_close
+column_six=task_id
