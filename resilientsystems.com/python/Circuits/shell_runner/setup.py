@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 sample_scripts = [u"shell_runner/scripts/" + filename for filename in os.listdir("shell_runner/scripts")]
 
 setup(
-    name='shell_runner',
+    name='rc-shell-runner',
     version="27.0.0",
     url='https://www.resilientsystems.com/',
     license='Resilient License',
@@ -18,9 +18,9 @@ setup(
     long_description = "Resilient Circuits Component for Shell Script Runner",
     packages=find_packages(),
     include_package_data=True,
-    data_files = [("", ["shell_runner/LICENSE"]),
-                  ("scripts", sample_scripts),
-                  ("data", ["shell_runner/data/app.config"])],
+    data_files = [("shell_runner", ["shell_runner/LICENSE"]),
+                  ("shell_runner/scripts", sample_scripts),
+                  ("shell_runner/data", ["shell_runner/data/app.config"])],
     platforms='any',
     classifiers=[
         'Programming Language :: Python',
