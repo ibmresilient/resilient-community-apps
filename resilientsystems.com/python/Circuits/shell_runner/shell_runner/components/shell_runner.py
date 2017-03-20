@@ -28,7 +28,13 @@ def config_section_data():
     script_dir = pkg_resources.resource_filename("shell_runner", "scripts")
     with open(section_config_fn, 'r') as section_config_file:
         section_config = Template(section_config_file.read())
-        return section_config.safe_substitute(scriptdir=script_dir)
+        if os.name == "nt":
+            is_windows = True
+        else:
+            is_windows = False
+        return section_config.safe_substitute(scriptdir=script_dir,
+                                              commentifwin="#" if is_windows else "",
+                                              commentifbash="" if is_windows else "#")
 
 def _shell_run(action_template, action_data):
     """Render and run the `action_template` command"""
