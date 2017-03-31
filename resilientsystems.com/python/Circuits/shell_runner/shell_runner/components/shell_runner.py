@@ -4,19 +4,37 @@
 """Shell-runner (PowerShell, bash, etc) component"""
 
 from __future__ import print_function
-from circuits import task, Component, Timer, Debugger, Event
-from circuits.core.handlers import handler
-from resilient_circuits.actions_component import ResilientComponent, ActionMessage
-from lib.disposition import Disposition
-import resilient_circuits.template_functions as template_functions
+from __future__ import absolute_import
+
 import os
 import tempfile
 import json
 import subprocess
 import shlex
 import logging
+import pkg_resources
+from string import Template
+from circuits import task, Component, Timer, Debugger, Event
+from circuits.core.handlers import handler
+from resilient_circuits.actions_component import ResilientComponent, ActionMessage
+import resilient_circuits.template_functions as template_functions
+from shell_runner.lib.disposition import Disposition
+
 LOG = logging.getLogger(__name__)
 
+def config_section_data():
+    """sample config data for use in app.config"""
+    section_config_fn = pkg_resources.resource_filename("shell_runner", "data/app.config")
+    script_dir = pkg_resources.resource_filename("shell_runner", "scripts")
+    with open(section_config_fn, 'r') as section_config_file:
+        section_config = Template(section_config_file.read())
+        if os.name == "nt":
+            is_windows = True
+        else:
+            is_windows = False
+        return section_config.safe_substitute(scriptdir=script_dir,
+                                              commentifwin="#" if is_windows else "",
+                                              commentifbash="" if is_windows else "#")
 
 def _shell_run(action_template, action_data):
     """Render and run the `action_template` command"""
