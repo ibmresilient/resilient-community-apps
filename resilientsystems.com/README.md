@@ -34,6 +34,8 @@ Action Module processor that runs shell scripts (bash PowerShell, etc).
 #### new\_incident\_type
 Circuits example to create new incident types from the New Incident Wizard screen.  
   
+### simple_web
+Circuits example defining a simple webhook and incident-creation webform
   
 Internal Scripts Examples (Scripts Tab)
 --
