@@ -1,36 +1,35 @@
 sudo: false
-
 language: python
-
 cache: pip
-
 python:
- - 2.7
- - 3.4
- - 3.5
- - 3.6
-
+- 2.7
+- 3.4
 env:
-  global: 
-    - TEST_RESILIENT_APPLIANCE=d2-direct.resilientsystems.com
-    - TEST_RESILIENT_ORG="Resilient PS - Test"
-    
+  global:
+  - TEST_RESILIENT_APPLIANCE=d2-direct.resilientsystems.com
+  - TEST_RESILIENT_ORG="Resilient PS - Test"
+  - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
+  - secure: nyDj/aZDB11A2+AvGr/cbEaJL1YfWIN000786socVYZFVIsWKGzMbvW3bGjqbjF3HpmpgQY6FGCm3j9dc/Q6MXdvs3LkWDySiFH5rz4KHQR6M/VAtO2BvSE7GEQSTwK19+z91Z1Egf/pPtKYv8SihTYdXbCmMpZFoanQc2/R1/iTO1IFB00j8QAxVgxr7oQYhndsQ091XkUjIosiLhq+hLXJY3iLQ7J4cxHz2MhLtaMfIrZj4inqiQ7vgLSiPKOGFlu6ri6klpYTpR/3UvDAe9xnQgxZ1lEQZRXnXErhVv9uahclEw42lXIYgLF1Ji/gFj60Nacy/IBsJxrR85JYXKfZ1hoZ4AvePlgSvKogI8+Sy2eQHc8vvSbOjXZbn1Phe+qpzzv/HwvYNYzEvKNMMpMAEGR9dT0pulSUpFkki3MSweDUefvUvCgmQoS+dlq/4q3N0UVoppkbCefBB4Ifgtw5TSv1DTn9EmNSgm/Knr5yB/JiXuL4nQFwWaK44aufKtuqjmTwvJXekA1rIRVw35Ko/2aJhMkEH2kI6WmRBlss+UnkhIPEYsssE/Zne7CyQq+iIHlKE3Ds+2LAo9zPdbd+fGTCWYG+axcxkIizuOnpxVf4d/cqSWKPz5jcivr6UIp9YD4+ZwoacWra8TaBorWqRI5BbAjvM4RpVmZyioE=
 matrix:
   fast_finish: true
   include:
-      - python: 2.7
-        env: TOXENV=py27
-      - python: 3.4
-        env: TOXENV=py34
-
+  - python: 2.7
+    env: TOXENV=py27
+  - python: 3.4
+    env: TOXENV=py34
 install:
- - pip install tox
- - pip install 'git+ssh://git@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3'
- - pip install 'git+ssh://git@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits'
- - pip install 'git+ssh://git@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits'
-
+- pip install tox
+- pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3'
+- pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits'
+  - pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits'
 script:
- - ./run_tests.sh
+- ./run_tests.sh && ./build_packages.sh
 
-notifications:
-    slack: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
+deploy:
+  provider: releases
+  api_key: "$GITHUB_OAUTH_TOKEN"
+  file_glob: true
+  file: *.tar.gz
+  skip_cleanup: true
+  on:
+    tags: true
