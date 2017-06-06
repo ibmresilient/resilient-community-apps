@@ -9,7 +9,7 @@ Resilient IRP through:
 **You will also find example code to help give you ideas and get started building your own integrations!**
 
 
-## Integration Pacakges
+## Integration Packages
 | Package            | Description                                 | Requires                      |
 | ------------------ | ------------------------------------------- | -----------------------------:|
 | Shell Runner | Runs shell scripts locally (bash, powershell) and attach results to an incident | |
