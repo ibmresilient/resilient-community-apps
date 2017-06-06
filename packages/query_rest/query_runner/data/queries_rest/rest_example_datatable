@@ -1,0 +1,27 @@
+{
+    "vars": {
+        "http-headers": {"X-Fooble": "Bar"}
+    },
+
+    "query": {
+        "expression": "http://httpbin.org/get?q={{artifact.value|js}}"
+    },
+
+    "datatables": [
+        {
+            "name": "assets_affected",
+            "keys": ["employeeID"],
+            "cells": {
+                "employeeID":            { "value": "{{result.employeeID|js}}" },
+                "mailAddress":           { "value": "{{result.mailAddress|js}}" },
+                "displayName":           { "value": "{{result.displayName|js}}" },
+                "department":            { "value": "{{result.department|js}}" },
+                "title":                 { "value": "{{result.title|js}}" },
+                "country_name":          { "value": "{{result.c|js}}" },
+                "tel":                   { "value": "{{result.telephoneNumber|js}}" },
+                "mail":                  { "value": "{{result.mail|js}}" },
+                "actually_impacted":     { "value": "Y" }
+            }
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "vars": {
+    },
+
+    "query": {
+        "expression": "http://jarvis.coupang.net/api/v3/hosts?q={{artifact.value|js}}",
+        "extract_results_from": "result.content"
+    },
+
+    "datatables": [
+        {
+            "name": "assets_affected",
+            "keys": ["hostname"],
+            "cells": {
+                "hostname":     { "value": "{{result.name|js}}" },
+                "ip":           { "value": "{{result.ips|join(', ')|js}}" },
+                "phase":        { "value": "{{result.phase|js}}" },
+                "region":       { "value": "{{result.region|js}}" },
+                "status":       { "value": "{{result.status|js}}" },
+                "roles":        { "value": "{{result.roles|join(', ')|js}}" },
+                "desc":         { "value": "{{result.description|js}}" }
+            }
+        }
+    ]
+}

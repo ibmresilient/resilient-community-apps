@@ -1,0 +1,25 @@
+{
+    "comments": "Splunk query number of searches run by a user",
+    "query": {
+        "expression": "search index=_audit action=\"search\" search=* user=\"{{artifact.value}}\" earliest=-{{properties|value('days_to_search')}}days | stats count by user search| eventstats dc(search) as distinctsearches by user | eventstats count sum(count) as totalcount by user | dedup user | table user totalcount distinctsearches | fields *",
+        "limit": 1,
+        "extract_results_from": "results"
+    },
+    "datatables": [
+        {
+            "name": "splunk_user_logins",
+            "keys": ["username"],
+            "cells": {
+                "username": {
+                    "value": "{{result.user|js}}"
+                },
+                "total_searches": {
+                    "value": "{{result.totalcount|js}}"
+                },
+                "distinct_searches": {
+                    "value": "{{result.distinctsearches|js}}"
+                }
+            }
+        }
+    ]
+}

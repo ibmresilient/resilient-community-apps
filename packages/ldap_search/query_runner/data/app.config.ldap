@@ -1,0 +1,15 @@
+# -----------------------------------------------------------------------------
+# The 'LDAPIncidentUpdate' action component
+# -----------------------------------------------------------------------------
+[AD]
+queue=ldap
+query_definitions_dir={directory}
+
+server=ldap.forumsys.com
+port=389
+user=cn=read-only-admin,dc=example,dc=com
+password=Passw0rd
+auth=SIMPLE
+ssl=False
+
+search_base=dc=example,dc=com

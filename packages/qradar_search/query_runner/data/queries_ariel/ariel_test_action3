@@ -1,0 +1,18 @@
+{
+    "query": {
+        "expression": "select KathyCommandExecuted, qid, starttime from events where INOFFENSE({{ incident.properties.qradar_id }}) and NOT (KathyCommandExecuted IS NULL) START '{{ incident.discovered_date|datetime }}' STOP PARSEDATETIME('now')",
+        "range": "0-0",
+        "extract_results_from": "events"
+    },
+    "incident_fields": {
+        "commandexecuted": "{{ result.KathyCommandExecuted|js }}"
+    },
+    "artifacts": [
+        {
+            "value": "{{ result.KathyCommandExecuted|js }}",
+            "type": "String",
+            "description": "Event {{ result.qid }}"
+        }
+    ]
+}
+
