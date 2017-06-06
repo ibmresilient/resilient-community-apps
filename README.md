@@ -12,12 +12,12 @@ Resilient IRP through:
 ## Integration Packages
 | Package            | Description                                 | Requires                      |
 | ------------------ | ------------------------------------------- | -----------------------------:|
-| Shell Runner | Runs shell scripts locally (bash, powershell) and attach results to an incident | |
 | LDAP Search | Update incidents with information from Active Directory | Query Runner |
 | QRadar Search | Run Ariel queries and update incidents | Query Runner |
 | Query REST | Update incidents with results from  REST API requests| Query Runner |
 | Query Runner | Framework package for running tasks and updating incidents from structured results| |
 | RC Webserver | A circuits.web webserver for hosting web pages or REST APIs | |
+| Shell Runner | Runs shell scripts locally (bash, powershell) and attach results to an incident | |
 | Splunk Search | Run Splunk searches and update incidents | Query Runner |
 
 ### Setup
