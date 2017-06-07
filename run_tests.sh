@@ -27,8 +27,14 @@ echo "Running these second:";
 printf '  %s\n' "${second_runs[@]}";
 toxfiles=("${first_runs[@]}" "${second_runs[@]}");
 
+status=0;
 for toxfile in ${toxfiles[@]};
 do
     # Run the tests
     tox -c $toxfile -- tests;
+    if [ $? -ne 0 ]; then
+        status=$?;
+    fi
 done;
+
+exit $status
