@@ -8,7 +8,7 @@ match=$( IFS='|'; echo "${must_run_first[*]}" );
 
 
 echo "$match";
-toxfiles=(`find . -type f -name 'tox.ini'`);
+toxfiles=(`find packages -type f -name 'tox.ini'`);
 first_runs=();
 second_runs=();
 for i in ${!toxfiles[@]};
