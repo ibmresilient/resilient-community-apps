@@ -1,9 +1,7 @@
 sudo: false
 language: python
 cache: pip
-python:
-- 2.7
-- 3.4
+
 env:
   global:
   - TEST_RESILIENT_APPLIANCE=d2-direct.resilientsystems.com
