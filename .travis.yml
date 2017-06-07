@@ -18,10 +18,10 @@ matrix:
   - python: 3.4
     env: TOXENV=py34
 install:
-- pip install tox
-- pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3'
-- pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits'
-  - pip install -e 'git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits'
+  - pip install tox
+  - pip install -e "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3"
+  - pip install -e "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits"
+  - pip install -e "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits"
 script:
 - ./run_tests.sh && ./build_packages.sh
 
@@ -29,7 +29,7 @@ deploy:
   provider: releases
   api_key: "$GITHUB_OAUTH_TOKEN"
   file_glob: true
-  file: *.tar.gz
+  file: ./*.tar.gz
   skip_cleanup: true
   on:
     tags: true
