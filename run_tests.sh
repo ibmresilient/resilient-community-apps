@@ -32,9 +32,12 @@ for toxfile in ${toxfiles[@]};
 do
     # Run the tests
     tox -c $toxfile -- tests;
-    if [ $? -ne 0 ]; then
-        status=$?;
+    last_status=$?;
+    if [ $last_status -ne 0 ]; then
+        printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
+        status=$last_status;
     fi
 done;
 
+printf 'Test Run Complete.  Final Status [%d]\n' $status;
 exit $status
