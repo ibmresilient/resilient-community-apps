@@ -27,7 +27,7 @@ install:
 
 before_script:
   - git clone -b develop  --single-branch https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git --depth 1
-  - (cd resilient-api/python && ./build_all.sh 999);
+  - (cd resilient-api/python && ./buildall.sh 999);
   - cp resilient-api/python/*/dist/*.tar.gz .
 
 script:
