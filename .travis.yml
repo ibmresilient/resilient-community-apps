@@ -24,9 +24,9 @@ install:
   - pip install --upgrade pip
   - pip install --upgrade setuptools
   - pip install tox
-  - pip install --download-cache="$TRAVIS_BUILD_DIR" "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3"
-  - pip install --download-cache="$TRAVIS_BUILD_DIR" "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits"
-  - pip install --download-cache="$TRAVIS_BUILD_DIR" "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits"
+  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3"
+  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits"
+  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits"
 script:
 - ./build_packages.sh && ./run_tests.sh
 
