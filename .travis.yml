@@ -24,9 +24,12 @@ install:
   - pip install --upgrade pip
   - pip install --upgrade setuptools
   - pip install tox
-  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=co3&subdirectory=python/co3"
-  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=resilient_circuits&subdirectory=python/resilient-circuits"
-  - pip download "git+https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git#egg=pytest_resilient_circuits&subdirectory=python/pytest-resilient-circuits"
+
+before_script:
+  - git clone -b develop  --single-branch https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git --depth 1
+  - (cd resilient-api/python && ./build_all.sh 999);
+  - cp resilient-api/python/*/dist/*.tar.gz .
+
 script:
 - ./build_packages.sh && ./run_tests.sh
 
