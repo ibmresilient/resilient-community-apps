@@ -11,3 +11,4 @@ resilient_circuits_lockfile
 *.log
 *.log.*
 *~
+*.egg-info

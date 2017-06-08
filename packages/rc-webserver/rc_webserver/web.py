@@ -4,7 +4,12 @@ import json
 import logging
 from inspect import getargspec
 from functools import update_wrapper
-from json import JSONDecodeError
+try:
+    from json import JSONDecodeError
+except ImportError:
+    # Python 2
+    JSONDecodeError = ValueError
+
 from circuits.core import handler
 from circuits.web.wrappers import Response
 from circuits.web.exceptions import HTTPException

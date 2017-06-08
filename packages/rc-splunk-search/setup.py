@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 if not sys.version_info[0] == 2:
-    sys.exit("Sorry, splunk-sdk does not support Python 3")
+    print("Warning: splunk-sdk does not support Python 3")
 
 splunk_queries = [u"query_runner/data/queries_splunk/" + filename for filename in os.listdir("query_runner/data/queries_splunk")]
 
