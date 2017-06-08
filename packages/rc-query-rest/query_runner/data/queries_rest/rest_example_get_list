@@ -1,0 +1,17 @@
+{
+    "vars": {
+    },
+
+    "query": {
+        "expression": "https://jsonplaceholder.typicode.com/users",
+        "extract_results_from": "result"
+    },
+
+    "artifacts": [
+        {
+            "value": "{{result.website|js}}",
+            "type": "DNS Name",
+            "description": "Website for {{result.name|js}}"
+        }
+    ]
+}

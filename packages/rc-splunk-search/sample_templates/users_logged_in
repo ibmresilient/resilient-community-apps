@@ -1,0 +1,32 @@
+{
+    "comments": "Splunk query for sucessful user logins",
+    "query": {
+        "expression": "| rest /services/authentication/httpauth-tokens | search (userName=\"{{artifact.value}}\") searchId=\"\"| eventstats count by userName splunk_server | eventstats last(timeAccessed) as latest |dedup userName splunk_server | table userName splunk_server count latest | fields *",
+        "limit": 1,
+        "extract_results_from": "results"
+    },
+    "incident_fields": {
+        "splunk_system": "{{ result.splunk_server|js }}"
+    },
+    "datatables": [
+        {
+            "name": "splunk_user_logins",
+            "keys": ["username"],
+            "cells": {
+                "username": {
+                    "value": "{{result.userName|js}}"
+                },
+                "last_time": {
+                    "value": "{{result.latest|js}}"
+                },
+                "splunk_server": {
+                    "value": "{{result.splunk_server|js}}"
+                },
+
+                "login_count": {
+                    "value": "{{result.count|js}}"
+                }
+            }
+        }
+    ]
+}

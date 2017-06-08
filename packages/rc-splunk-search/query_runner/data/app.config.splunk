@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------------
+# The 'SplunkQueryRunner' action component
+# -----------------------------------------------------------------------------
+[splunk]
+# Connectivity to Splunk services
+host=vm-splunk
+port=8089
+user=username
+password=password
+
+# Search options
+max_results=100
+polling_interval=5
+query_timeout=120
+
+# Message destination
+queue=splunk
+
+# Directory containing query definition files
+# Filenames must match the Resilient action names
+query_definitions_dir= {directory}

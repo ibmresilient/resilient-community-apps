@@ -1,0 +1,10 @@
+{
+    "query": {
+        "expression": "SELECT RULENAME(creeventlist) as offenserule from events where INOFFENSE({{ incident.properties.qradar_id }}) GROUP BY offenserule LAST 5 DAYS",
+        "extract_results_from": "events"
+    },
+    "attachment": {
+        "name": "Result_File"
+    }
+}
+

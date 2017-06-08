@@ -1,0 +1,9 @@
+{
+    "query": {
+        "expression": "SELECT RULENAME(creeventlist) as offenserule from events where INOFFENSE({{ incident.properties.qradar_id }}) GROUP BY offenserule LAST 5 DAYS"
+    },
+
+    "incident_fields": {
+        "cres": "{% for event in events %}{{ event.offenserule }}{% if not loop.last %}, {% endif %}{% endfor %}"
+    }
+}
