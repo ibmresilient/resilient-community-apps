@@ -3,7 +3,7 @@ from __future__ import print_function
 
 import os.path
 import pytest
-import query_runner.components.ariel_query
+import query_runner.components.rest_query
 
 config_data = query_runner.components.rest_query.config_section_data()
 

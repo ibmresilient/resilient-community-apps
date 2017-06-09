@@ -30,12 +30,19 @@ toxfiles=("${first_runs[@]}" "${second_runs[@]}");
 status=0;
 for toxfile in ${toxfiles[@]};
 do
-    # Run the tests
-    tox -c $toxfile -- tests;
-    last_status=$?;
-    if [ $last_status -ne 0 ]; then
-        printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
-        status=$last_status;
+    # Run the tests if current TOXENV is applicable for this tox.ini file
+    valid_envs=`env -u TOXENV tox -c $toxfile --listenvs;`
+    #echo "Supported Environments: $valid_envs" 
+    if [[ "$valid_envs" =~ "$TOXENV" ]]
+    then
+        tox -c $toxfile -- tests;
+        last_status=$?;
+        if [ $last_status -ne 0 ]; then
+            printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
+            status=$last_status;
+        fi
+    else
+        printf 'Skipping %s because TOXENV %s incompatible\n' "$toxfile" "$TOXENV"
     fi
 done;
 
