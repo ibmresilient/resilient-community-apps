@@ -23,7 +23,8 @@ class PyTest(TestCommand):
 
 setup(
     name='rc-webserver',
-    version="27.0.0",
+    use_scm_version={"root": "../../", "relative_to": __file__},
+    setup_requires=['setuptools_scm'],
     url='https://www.resilientsystems.com/',
     license='Resilient License',
     author='IBM Resilient',
