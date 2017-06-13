@@ -6,7 +6,7 @@ env:
   - TEST_RESILIENT_APPLIANCE=d2-direct.resilientsystems.com
   - OCTOKIT_API_ENDPOINT="https://github.ibm.com/api/v3/"
   - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR"
-  - secure: nyDj/aZDB11A2+AvGr/cbEaJL1YfWIN000786socVYZFVIsWKGzMbvW3bGjqbjF3HpmpgQY6FGCm3j9dc/Q6MXdvs3LkWDySiFH5rz4KHQR6M/VAtO2BvSE7GEQSTwK19+z91Z1Egf/pPtKYv8SihTYdXbCmMpZFoanQc2/R1/iTO1IFB00j8QAxVgxr7oQYhndsQ091XkUjIosiLhq+hLXJY3iLQ7J4cxHz2MhLtaMfIrZj4inqiQ7vgLSiPKOGFlu6ri6klpYTpR/3UvDAe9xnQgxZ1lEQZRXnXErhVv9uahclEw42lXIYgLF1Ji/gFj60Nacy/IBsJxrR85JYXKfZ1hoZ4AvePlgSvKogI8+Sy2eQHc8vvSbOjXZbn1Phe+qpzzv/HwvYNYzEvKNMMpMAEGR9dT0pulSUpFkki3MSweDUefvUvCgmQoS+dlq/4q3N0UVoppkbCefBB4Ifgtw5TSv1DTn9EmNSgm/Knr5yB/JiXuL4nQFwWaK44aufKtuqjmTwvJXekA1rIRVw35Ko/2aJhMkEH2kI6WmRBlss+UnkhIPEYsssE/Zne7CyQq+iIHlKE3Ds+2LAo9zPdbd+fGTCWYG+axcxkIizuOnpxVf4d/cqSWKPz5jcivr6UIp9YD4+ZwoacWra8TaBorWqRI5BbAjvM4RpVmZyioE=
+  - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
 
 matrix:
   fast_finish: true
@@ -28,7 +28,7 @@ install:
   - pip install tox
 
 before_script:
-  - git clone -b develop  --single-branch https://$GITHUB_OAUTH_TOKEN@github.ibm.com/Resilient/resilient-api.git --depth 1
+  - git clone -b develop  --single-branch git@github.ibm.com:Resilient/resilient-api.git --depth 1
   - (cd resilient-api/python && ./buildall.sh 999);
   - cp resilient-api/python/*/dist/*.tar.gz .
 
