@@ -30,7 +30,8 @@ install:
 before_script:
   - git clone -b develop  --single-branch git@github.ibm.com:Resilient/resilient-api.git --depth 1
   - (cd resilient-api/python && ./buildall.sh 999);
-  - cp resilient-api/python/*/dist/*.tar.gz .
+  # Only copy the top level packages that are built, not all the examples
+  - find resilient-api/python -maxdepth 3 -name '*.999.tar.gz' -exec cp {} . \;
 
 script:
 - ./build_packages.sh && ./run_tests.sh
