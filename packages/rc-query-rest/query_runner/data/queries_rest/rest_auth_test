@@ -1,0 +1,17 @@
+{
+    "vars": {
+        "http-headers": {
+            "Authorization": "Basic {{ (options.rest_user, options.rest_pass)|join(':')|b64encode }}"
+        },
+        "http-method": "GET"
+    },
+    "query": {
+        "expression": "https://httpbin.org/basic-auth/{{ options.rest_user|urlencode }}/{{ options.rest_pass|urlencode }}"
+    },
+    "attachment": {
+        "name": "httpbin",
+        "keys": [
+            "result"
+        ]
+    }
+}
