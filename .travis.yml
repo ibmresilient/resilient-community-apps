@@ -36,6 +36,10 @@ before_script:
 script:
 - ./build_packages.sh && ./run_tests.sh
 
+after_script:
+  - echo "Packages To Deploy "
+  - ls -l *.tar.gz
+
 deploy:
   # Note: This is going to run twice and fail the second time. Will fix with travis enterprise 2.2 "stages" feature
   provider: releases
