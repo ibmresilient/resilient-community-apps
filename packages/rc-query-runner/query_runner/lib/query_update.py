@@ -140,7 +140,7 @@ def _do_attach(query_definition, event_message, response, res_client, context_to
         # This isn't something we will try to parse, just write it to file
         parsable = False
 
-    if not keys:
+    if not keys and parsable:
         for row in response:
             if len(keys) == 0:
                 keys = row.keys()
