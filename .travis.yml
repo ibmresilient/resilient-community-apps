@@ -32,11 +32,9 @@ before_script:
   - (cd resilient-api/python && ./buildall.sh 999);
   - mkdir pkgs
   - cp resilient-api/python/*/dist/*.tar.gz ./pkgs
-  - echo "Packages Before Tests Start"
-  - ls -l *.tar.gz
 
 script:
-- ./build_packages.sh && ./run_tests.sh
+- ./build_packages.sh && echo "Packages Before Tests Start" && ls -l *.tar.gz &&./run_tests.sh
 
 after_script:
   - echo "Packages To Deploy"
