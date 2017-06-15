@@ -1,5 +1,6 @@
 """Action Module circuits component to execute simple REST API queries"""
 import logging
+import base64
 import copy
 import json
 import requests
@@ -34,8 +35,11 @@ class QueryREST(QueryRunner):
 
     def __init__(self, opts):
         query_options = opts.get(CONFIG_DATA_SECTION, {})
-        super(QueryREST, self).__init__(opts, query_options, rest_call)
+        jinja_filters = template_functions.JINJA_FILTERS
+        jinja_filters['b64encode'] = base64.b64encode
+        template_functions.ENV.filters.update(jinja_filters)
 
+        super(QueryREST, self).__init__(opts, query_options, rest_call)
 
 def rest_call(options, query_definition, event_message):
     """ Make a REST call and return result """

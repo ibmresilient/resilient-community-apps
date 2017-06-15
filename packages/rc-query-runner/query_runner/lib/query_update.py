@@ -131,29 +131,40 @@ def _do_attach(query_definition, event_message, response, res_client, context_to
     # keys - options list of keys to extract from each result row
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
+    parsable = True
     keys = query_definition.attachment_mapping.get("keys") or []
 
-    if not keys:
+    if isinstance(response, dict):
+        response = [response]
+    elif not (isinstance(response, list) or isinstance(response, tuple)):
+        # This isn't something we will try to parse, just write it to file
+        parsable = False
+
+    if not keys and parsable:
         for row in response:
             if len(keys) == 0:
                 keys = row.keys()
             else:
                 keys = keys + list(set(row.keys()) - set(keys))
+
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_filename = temp_file.name
-        writer = csv.DictWriter(temp_file, fieldnames=keys,
-                                dialect='excel', extrasaction='ignore')
+        if not parsable:
+            temp_file.write(response)
+        else:
+            writer = csv.DictWriter(temp_file, fieldnames=keys,
+                                    dialect='excel', extrasaction='ignore')
 
-        key_dict = {}
-        for key in keys:
-            if isinstance(key, unicode):
-                key_dict[key] = key.encode("utf-8")
-            else:
-                key_dict[key] = key
-        writer.writerow(key_dict)
-        for row in response:
-            writer.writerow(row)
-        temp_file.flush()
+            key_dict = {}
+            for key in keys:
+                if isinstance(key, unicode):
+                    key_dict[key] = key.encode("utf-8")
+                else:
+                    key_dict[key] = key
+            writer.writerow(key_dict)
+            for row in response:
+                writer.writerow(row)
+            temp_file.flush()
 
     # Construct a filename based on attachment name (template) specified in the query definition
     filename = query_definition.attachment_mapping.get("name")
