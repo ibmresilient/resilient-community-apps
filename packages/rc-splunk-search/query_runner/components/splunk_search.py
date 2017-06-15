@@ -35,7 +35,7 @@ class SplunkQueryRunner(QueryRunner):
         query_options = opts.get(CONFIG_DATA_SECTION, {})
 
         jinja_filters = template_functions.JINJA_FILTERS
-        jinja_filters["datatime"] = self._datetime_filter
+        jinja_filters["datetime"] = self._datetime_filter
         jinja_filters["ms"] = self._ms_filter
         jinja_filters["mstz"] = self._mstz_filter
         template_functions.ENV.filters.update(jinja_filters)
