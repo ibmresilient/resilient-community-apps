@@ -4,6 +4,7 @@ import logging
 import json
 import copy
 import os
+import sys
 import tempfile
 import csv
 import threading
@@ -126,6 +127,15 @@ def post_attachment(rest_client, *args, **kwargs):
         return rest_client.post_attachment(*args, **kwargs)
 
 
+def _get_csv_tempfile():
+    if sys.version_info.major < 3:
+        # Python 2.x: CSVWriter writes to a binary file, data is bytes
+        return tempfile.NamedTemporaryFile(delete=False)
+    else:
+        # Python 3.x: CSVWriter writes to a text file, data is strings, but fix newline for Windows
+        return tempfile.NamedTemporaryFile(mode='w', delete=False, newline='')
+
+
 def _do_attach(query_definition, event_message, response, res_client, context_token):
     """ Update incident with results as a CSV file attachment """
     # keys - options list of keys to extract from each result row
@@ -143,11 +153,11 @@ def _do_attach(query_definition, event_message, response, res_client, context_to
     if not keys and parsable:
         for row in response:
             if len(keys) == 0:
-                keys = row.keys()
+                keys = list(row.keys())
             else:
-                keys = keys + list(set(row.keys()) - set(keys))
+                keys = list(keys) + list(set(row.keys()) - set(keys))
 
-    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+    with _get_csv_tempfile() as temp_file:
         temp_filename = temp_file.name
         if not parsable:
             temp_file.write(response)
@@ -157,7 +167,7 @@ def _do_attach(query_definition, event_message, response, res_client, context_to
 
             key_dict = {}
             for key in keys:
-                if isinstance(key, unicode):
+                if sys.version_info.major < 3 and isinstance(key, unicode):
                     key_dict[key] = key.encode("utf-8")
                 else:
                     key_dict[key] = key
@@ -296,7 +306,7 @@ def _unique_artifact(artifact, existing_artifacts):
 
 
 def _artifact_key(artifact):
-    return artifact.get("value", "") + unicode(artifact.get("type", ""))
+    return u"{}{}".format(artifact.get("value", ""), artifact.get("type", ""))
 
 
 def _get_artifacts(incident_id, res_client):
