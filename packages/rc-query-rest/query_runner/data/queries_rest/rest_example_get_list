@@ -13,5 +13,10 @@
             "type": "DNS Name",
             "description": "Website for {{result.name|js}}"
         }
-    ]
+    ],
+
+    "attachment": {
+        "name": "REST_results",
+        "ext": "csv"
+    }
 }
