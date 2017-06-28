@@ -14,13 +14,25 @@ import shlex
 import logging
 import pkg_resources
 from string import Template
-from circuits import task, Component, Timer, Debugger, Event
+from circuits import task, Component, Timer, Debugger, Event, Worker
 from circuits.core.handlers import handler
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
 import resilient_circuits.template_functions as template_functions
 from shell_runner.lib.disposition import Disposition
 
 LOG = logging.getLogger(__name__)
+
+
+class InterruptibleWorker(Worker):
+    @handler("signal", channel="*")
+    def _on_signal(self, signo, stack):
+        """Add a signal handler to the worker processes otherwise they swallow SIGINT, SIGTERM
+           (see FallBackSignalHandler in circuits/core/helpers.py)
+        """
+        if signo in [SIGINT, SIGTERM]:
+            LOG.info("Worker interrupted")
+            raise SystemExit(0)
+
 
 def config_section_data():
     """sample config data for use in app.config"""
@@ -115,6 +127,9 @@ class Shell(ResilientComponent):
         # The queue name can be specified in the config file, or default to 'default'
         self.channel = "actions." + self.options.get("queue", "shell")
 
+        self.worker = InterruptibleWorker(process=False, workers=5, channel=self.channel)
+        self.worker.register(self)
+
     # Handle any actions (not specific to the action name)
 
     @handler()
@@ -153,7 +168,7 @@ class Shell(ResilientComponent):
         # the result is returned as a string.
         evt = task(_shell_run, action_template, event.message)
         LOG.info("shell: %s", action_name)
-        ret = yield self.call(evt, "worker")
+        ret = yield self.call(evt)
         result = ret.value
         if isinstance(result, list):
             # results from circuits tasks come back wrapped in a list
@@ -170,7 +185,6 @@ class Shell(ResilientComponent):
             LOG.debug("Result: %s", result)
             result_disposition.call(event, result)
             yield "Found result"
-
 
 
 class ShellHarness(Component):
