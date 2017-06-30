@@ -10,7 +10,7 @@ setup(
     license='Resilient License',
     author='IBM Resilient',
     install_requires=[
-        'resilient_circuits>=27.1.0'
+        'resilient_circuits>=28.0.0'
     ],
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Component for Shell Script Runner",
