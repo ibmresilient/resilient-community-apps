@@ -38,8 +38,7 @@ setup(
     license='Resilient License',
     author='IBM Resilient',
     install_requires=[
-        'keyring',
-        'resilient_circuits>=27.1.0'
+        'resilient_circuits>=28.0.0'
     ],
     tests_require=["pytest",
                    "pytest_resilient_circuits"],
