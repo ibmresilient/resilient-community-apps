@@ -149,10 +149,14 @@ def run_search(options, query_definition, event_message):
     """ run Splunk query and get results """
     splunk_host = options.get("host", "")
     splunk_port = options.get("port", "")
+    splunk_ui_port = int(options.get("ui_port", 8000))
     splunk_user = options.get("user", "")
     splunk_pass = options.get("password", "")
+    job_ttl = options.get("job_ttl")
     timeout = int(options.get("query_timeout", 600))
     polling_interval = int(options.get("polling_interval", 5))
+    result_link_prefix = "http://%s:%d/app/search/search?sid=" % (splunk_host, splunk_ui_port)
+
     if not all((splunk_host, splunk_port,
                 splunk_user, splunk_pass,
                 polling_interval)):
@@ -165,6 +169,8 @@ def run_search(options, query_definition, event_message):
     kwargs = {}
     if query_definition.limit:
         kwargs["max_results"] = query_definition.limit
+    if job_ttl:
+        kwargs["job_ttl"] = job_ttl
     job = client.search(query_definition.query, **kwargs)
 
     if not job:
@@ -181,5 +187,7 @@ def run_search(options, query_definition, event_message):
         return "Query returned no data"
 
     LOG.info("Query finished")
+    response["metadata"] = {"job": job.name,
+                            "result_url": result_link_prefix + job.name}
     LOG.debug("QUERY RESULT: %s", json.dumps(response, indent=2))
     return response
