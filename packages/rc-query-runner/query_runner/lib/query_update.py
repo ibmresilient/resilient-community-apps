@@ -314,7 +314,6 @@ def _unique_artifact(artifact, existing_artifacts):
     return is_new
 
 
-
 def _artifact_key(artifact):
     return u"{}{}".format(artifact.get("value", ""), artifact.get("type", ""))
 
@@ -355,6 +354,7 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     dtkey = dtinfo.get("keys", [])
     dtrow_id = dtinfo.get("row_id", None)
     dtcells = dtinfo.get("cells", None)
+    limit = dtinfo.get("limit", 0)
 
     # Get access to the data table
     datatable = DataTable(res_client, table_name=dtname)
@@ -383,6 +383,7 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     cells_template = json.dumps({"cells": dtcells}, indent=2)
     LOG.debug("Cells template: %s", cells_template)
 
+    num_created = 0
     for result_row in rows:
         # If a key is specified, it's for upsert:
         # - Each row in the result should correspond to one row in the data table
@@ -417,6 +418,10 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
             # Update the row in the data table
             LOG.debug("Updating Row: %s", json.dumps(cells_rendered, indent=2))
             datatable.update(incident_id, dtrow, cells_rendered, co3_context_token=context_token)
+        num_created = num_created + 1
+        if num_created == limit:
+            LOG.info("Limiting Datatable row creation to first %d results", limit)
+            break
 # end _do_datatable_mapping
 
 
@@ -448,6 +453,7 @@ def _do_task_mapping(query_definition, event_message, metadata,
 
                 task = template_functions.render_json(task_template, mapdata)
                 _add_task(res_client, incident_id, task)
+
     else:
         # Create a single task from the query result
         for task_template in query_definition.task_mapping:
