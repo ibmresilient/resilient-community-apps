@@ -80,8 +80,7 @@ class SplunkClient(object):
                                              username=username,
                                              password=password)
 
-
-    def search(self, query, max_results=None):
+    def search(self, query, max_results=None, job_ttl=None):
         """Start a search in splunk"""
 
         # Create the job
@@ -93,6 +92,8 @@ class SplunkClient(object):
         job = None
         try:
             job = self.splunk_service.jobs.create(query, **query_args)
+            if job_ttl:
+                job.set_ttl(job_ttl)
         except Exception as e:
             LOG.exception("Search job creation failed")
 

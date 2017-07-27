@@ -25,6 +25,11 @@ except NameError:
 def update_with_results(res_client, query_definition, event_message, response, context_token):
 
     incident = event_message.get("incident", {})
+    if response and "metadata" in response:
+        # Some additional meta data about the search results, like a job ID
+        metadata = response["metadata"]
+    else:
+        metadata = {}
 
     if query_definition.result_container:
         # The rows we care about are in this key of the query result object
@@ -34,33 +39,33 @@ def update_with_results(res_client, query_definition, event_message, response, c
         if not response:
             LOG.warn("No data returned from query in %s", query_definition.result_container)
             return "Query returned no %s" % query_definition.result_container
+
     else:
         # We will use the entire query result object.  The mappings will need to manually
         # iterate over rows.
         pass
 
     if query_definition.attachment_mapping:
-        _do_attach(query_definition, event_message, response, res_client, context_token)
+        _do_attach(query_definition, event_message, metadata, response, res_client, context_token)
 
     if query_definition.incident_mapping:
-        _do_incident_mapping(query_definition, event_message,
+        _do_incident_mapping(query_definition, event_message, metadata,
                              response, res_client, context_token)
 
     if query_definition.artifact_mapping:
-        _do_artifact_mapping(query_definition, event_message,
+        _do_artifact_mapping(query_definition, event_message, metadata,
                              response, res_client, context_token)
 
     if query_definition.data_table_mapping:
         for dtinfo in query_definition.data_table_mapping:
-            _do_datatable_mapping(query_definition, dtinfo, event_message,
+            _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
                                   response, res_client, context_token)
 
     if query_definition.task_mapping:
-        _do_task_mapping(query_definition, event_message, response, res_client, context_token)
-        pass
+        _do_task_mapping(query_definition, event_message, metadata, response, res_client, context_token)
 
     if query_definition.note_mapping:
-        _do_note_mapping(query_definition, event_message, response, res_client, context_token)
+        _do_note_mapping(query_definition, event_message, metadata, response, res_client, context_token)
 
     # TODO: add milestones
 
@@ -136,7 +141,8 @@ def _get_csv_tempfile():
         return tempfile.NamedTemporaryFile(mode='w', delete=False, newline='')
 
 
-def _do_attach(query_definition, event_message, response, res_client, context_token):
+def _do_attach(query_definition, event_message, metadata,
+               response, res_client, context_token):
     """ Update incident with results as a CSV file attachment """
     # keys - options list of keys to extract from each result row
     incident = event_message.get("incident", {})
@@ -225,7 +231,7 @@ def _json(result):
     return value
 
 
-def _do_incident_mapping(query_definition, event_message,
+def _do_incident_mapping(query_definition, event_message, metadata,
                          response, res_client, context_token):
     """ Update incident with query results as defined in mapping """
     incident = event_message.get("incident", {})
@@ -235,7 +241,8 @@ def _do_incident_mapping(query_definition, event_message,
     mapdata = copy.deepcopy(event_message)
     # Add in any rendered vars
     mapdata.update(query_definition.vars)
-
+    # Add in any query result metadata
+    mapdata.update(metadata)
     # Add in the result data
     if query_definition.result_container:
         # We only use the first row returned to do incident updates.
@@ -267,7 +274,7 @@ def _do_incident_mapping(query_definition, event_message,
 # end _do_incident_mapping
 
 
-def _do_artifact_mapping(query_definition, event_message,
+def _do_artifact_mapping(query_definition, event_message, metadata,
                          response, res_client, context_token):
     """ Map query results to new artifact and add to Resilient """
     incident = event_message.get("incident", {})
@@ -282,8 +289,11 @@ def _do_artifact_mapping(query_definition, event_message,
         # Create an artifact for each query result row
         for row in response:
             for artifact_template in query_definition.artifact_mapping:
+                mapdata = {"result": row}
+                # Add in any query result metadata
+                mapdata.update(metadata)
                 artifact = template_functions.render_json(artifact_template,
-                                                          {"result": row})
+                                                          mapdata)
                 if artifact.get("value") and _unique_artifact(artifact, existing_artifacts):
                     _add_artifact(res_client, incident_id, artifact, context_token)
                     existing_artifacts.append(_artifact_key(artifact))
@@ -302,7 +312,6 @@ def _unique_artifact(artifact, existing_artifacts):
     if not is_new:
         LOG.debug(u"Duplicate artifact %s", artifact.get("value", ""))
     return is_new
-
 
 
 def _artifact_key(artifact):
@@ -333,7 +342,7 @@ def _get_incident_fields(res_client):
         LOG.exception("Failed to get incident fields from Resilient")
         raise
 
-def _do_datatable_mapping(query_definition, dtinfo, event_message,
+def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
                           response, res_client, context_token):
     """ Map query results to Resilient data table rows """
     incident = event_message.get("incident", {})
@@ -345,6 +354,7 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message,
     dtkey = dtinfo.get("keys", [])
     dtrow_id = dtinfo.get("row_id", None)
     dtcells = dtinfo.get("cells", None)
+    limit = dtinfo.get("limit", 0)
 
     # Get access to the data table
     datatable = DataTable(res_client, table_name=dtname)
@@ -365,11 +375,15 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message,
     mapdata = copy.deepcopy(event_message)
     # Add in any rendered vars
     mapdata.update(query_definition.vars)
+    # Add in any query result metadata
+    mapdata.update(metadata)
+
     LOG.debug("Key columns: %s", dtkey)
 
     cells_template = json.dumps({"cells": dtcells}, indent=2)
     LOG.debug("Cells template: %s", cells_template)
 
+    num_created = 0
     for result_row in rows:
         # If a key is specified, it's for upsert:
         # - Each row in the result should correspond to one row in the data table
@@ -404,10 +418,15 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message,
             # Update the row in the data table
             LOG.debug("Updating Row: %s", json.dumps(cells_rendered, indent=2))
             datatable.update(incident_id, dtrow, cells_rendered, co3_context_token=context_token)
+        num_created = num_created + 1
+        if num_created == limit:
+            LOG.info("Limiting Datatable row creation to first %d results", limit)
+            break
 # end _do_datatable_mapping
 
 
-def _do_task_mapping(query_definition, event_message, response, res_client, context_token):
+def _do_task_mapping(query_definition, event_message, metadata,
+                     response, res_client, context_token):
     """ Map query results to new task and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -428,8 +447,13 @@ def _do_task_mapping(query_definition, event_message, response, res_client, cont
         # Create a task for each query result row
         for row in response:
             for task_template in query_definition.task_mapping:
-                task = template_functions.render_json(task_template, {"result": row})
+                mapdata = {"result": row}
+                # Add in any query result metadata
+                mapdata.update(metadata)
+
+                task = template_functions.render_json(task_template, mapdata)
                 _add_task(res_client, incident_id, task)
+
     else:
         # Create a single task from the query result
         for task_template in query_definition.task_mapping:
@@ -438,7 +462,8 @@ def _do_task_mapping(query_definition, event_message, response, res_client, cont
 # end _do_task_mapping
 
 
-def _do_note_mapping(query_definition, event_message, response, res_client, context_token):
+def _do_note_mapping(query_definition, event_message, metadata,
+                     response, res_client, context_token):
     """ Map query results to new note and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -458,8 +483,12 @@ def _do_note_mapping(query_definition, event_message, response, res_client, cont
     if query_definition.result_container:
         # Create a note for each query result row
         for row in response:
+            mapdata = {"result": row}
+            # Add in any query result metadata
+            mapdata.update(metadata)
+
             for note_template in query_definition.note_mapping:
-                note = template_functions.render_json(note_template, {"result": row})
+                note = template_functions.render_json(note_template, mapdata)
                 _add_note(res_client, incident_id, note)
     else:
         # Create a single note from the query result
