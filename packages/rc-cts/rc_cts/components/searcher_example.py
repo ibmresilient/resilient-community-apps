@@ -22,8 +22,8 @@
     Test using 'curl':
 
         curl -v -X OPTIONS 'http://127.0.0.1:9000/cts/example'
-        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.name","value":"localhost"}' 'http://127.0.0.1:9000/cts/example'
-        curl -v 'http://127.0.0.1:9000/cts/example/9dd7b18b-48a1-5108-9d79-1a67641d0df5'
+        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.uri","value":"http://example.org"}' 'http://127.0.0.1:9000/cts/example'
+        curl -v 'http://127.0.0.1:9000/cts/example/f9acc1b7-6184-5746-873e-e385e6214261'
 
     To install the threat service with your Resilient server
     (assuming that resilient-circuits application is running on the same server):
@@ -50,10 +50,10 @@ class SearcherExample(BaseComponent):
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("example")
 
-    # Handle lookups for artifacts of type 'net.name' (see doc for full list)
-    @handler("net.name")
-    def _lookup_net_name(self, event, *args, **kwargs):
-        """Return hits for DNS Name artifacts"""
+    # Handle lookups for artifacts of type 'net.uri' (see doc for full list)
+    @handler("net.uri")
+    def _lookup_net_uri(self, event, *args, **kwargs):
+        """Return hits for URI artifacts"""
         hits = []
 
         # event.artifact is a ThreatServiceArtifactDTO
@@ -63,11 +63,19 @@ class SearcherExample(BaseComponent):
         # Return zero or more hits.  Here's one example.
         hits.append(
             Hit(
-                NumberProp(name="Score", value=123),
+                NumberProp(name="id", value=123),
                 StringProp(name="Type", value=artifact_type),
-                UriProp(name="Link", value="http://" + artifact_value),
+                UriProp(name="Link", value=artifact_value),
                 IpProp(name="IP Address", value="127.0.0.1"),
                 LatLngProp(name="Location", lat=42.366, lng=-71.081)
+            )
+        )
+        hits.append(
+            Hit(
+                NumberProp(name="id", value=456),
+                StringProp(name="Type", value=artifact_type),
+                UriProp(name="Link", value=artifact_value),
+                IpProp(name="IP Address", value="0.0.0.0"),
             )
         )
         yield hits

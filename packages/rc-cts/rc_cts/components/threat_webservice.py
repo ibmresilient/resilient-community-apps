@@ -188,6 +188,12 @@ class CustomThreatService(BaseController):
 
     @exposeWeb("POST")
     def _post_request(self, event, *args, **kwargs):
+        LOG.info(event.args[0])
+        result = self._handle_post_request(event, *args, **kwargs)
+        LOG.info("%s: %s", event.args[1].status, json.dumps(result))
+        return result
+
+    def _handle_post_request(self, event, *args, **kwargs):
         """
         Responds to POST /cts/<anything>
 
@@ -198,7 +204,6 @@ class CustomThreatService(BaseController):
         Request is a ThreatServiceArtifactDTO containing the artifact to be scanned
         Response is a ResponseDTO containing the response, or 'please retry' (HTTP status 303).
         """
-        LOG.info(event.args[0])
         request = event.args[0]
         response = event.args[1]
 
@@ -213,27 +218,29 @@ class CustomThreatService(BaseController):
         body = json.loads(value.decode("utf-8"))
         LOG.debug(body)
 
-        # Generate a request ID, derived the artifact being requested.
-        # TODO generate a unique ID for each request, and map them onto unique artifact content
-        #      using a two-layer cache of some sort
-        #        (endpoint, id) => (endpoint, artifact)
-        #        (endpoint, artifact) => (hits)
-        #
+        # Generate a request ID, derived from the artifact being requested.
         request_id = str(uuid5(self.namespace, json.dumps(body)))
         artifact_type = body.get("type", "unknown")
         artifact_value = body.get("value")
+        response_object = {"id": request_id, "hits": []}
+        cache_key = (cts_channel, request_id)
 
-        if artifact_type=="net.name" and artifact_value=="localhost":
+        if artifact_type == "net.name" and artifact_value == "localhost":
             # Hard-coded response to 'net.name' of 'localhost'
             # because this is used in 'resutil threatservicetest'
             # and we want to return an immediate (not async) response
-            return {"id": request_id, "hits": []}
+            return response_object
 
-        response.status = 200
-        response_object = {"id": request_id, "hits": [], "retry_secs": self.retry_secs}
+        # If we already have a completed query for this key, return it immmediately
+        request_data = self.cache.get(cache_key)
+        if request_data and request_data.get("complete"):
+            response_object["hits"] = request_data.get("hits", [])
+            return response_object
+
+        response.status = 303
+        response_object["retry_secs"] = self.retry_secs
 
         # Add the request to the cache, then notify searchers that there's a new request
-        cache_key = (cts_channel, request_id)
         self.cache.setdefault(cache_key, {"id": request_id, "artifact": body, "hits": [], "complete": False})
         evt = ThreatServiceLookupEvent(request_id=request_id, name=artifact_type, artifact=body, channel=cts_channel)
         self.async_helper.fire(evt, HELPER_CHANNEL)
@@ -242,6 +249,12 @@ class CustomThreatService(BaseController):
 
     @exposeWeb("GET")
     def _get_request(self, event, *args, **kwargs):
+        LOG.info(event.args[0])
+        result = self._handle_get_request(event, *args, **kwargs)
+        LOG.info("%s: %s", event.args[1].status, json.dumps(result))
+        return result
+
+    def _handle_get_request(self, event, *args, **kwargs):
         """
         Responds to GET /cts/<anything>/<request-id>
 
@@ -261,7 +274,7 @@ class CustomThreatService(BaseController):
         # The channel that searchers are listening for events
         cts_channel = searcher_channel(*args[:-1])
 
-        response_object = {"id": request_id, "hits": [], "retry_secs": self.retry_secs}
+        response_object = {"id": request_id, "hits": []}
 
         cache_key = (cts_channel, request_id)
         request_data = self.cache.get(cache_key)
@@ -273,6 +286,7 @@ class CustomThreatService(BaseController):
         if not request_data["complete"]:
             # The searchers haven't finished yet, return partial hits if available
             response.status = 303
+            response_object["retry_secs"] = self.retry_secs
             return response_object
 
         # Remove the result from cache

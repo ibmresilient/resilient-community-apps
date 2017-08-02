@@ -41,14 +41,6 @@ ARTIFACT_TYPES = [
     "system.service.name",
 ]
 
-PROPERTY_TYPES = [
-    "string",
-    "number",
-    "uri",
-    "ip",
-    "latlng",
-]
-
 
 class Hit(collections.OrderedDict):
     """A dict representing a Hit and its properties"""
@@ -71,7 +63,7 @@ class UriProp(dict):
 class NumberProp(dict):
     """A dict representing a numeric property of a hit"""
     def __init__(self, name=None, value=None):
-        super(NumberProp, self).__init__(type="number", name=name, value=value)
+        super(NumberProp, self).__init__(type="number", name=name, value=str(value))
 
 
 class IpProp(dict):
@@ -83,4 +75,4 @@ class IpProp(dict):
 class LatLngProp(dict):
     """A dict representing a lat/long property of a hit"""
     def __init__(self, name=None, lat=None, lng=None):
-        super(LatLngProp, self).__init__(type="latlng", name=name, value={"lat": lat, "lng": lng})
+        super(LatLngProp, self).__init__(type="lat_lng", name=name, value={"lat": lat, "lng": lng})
