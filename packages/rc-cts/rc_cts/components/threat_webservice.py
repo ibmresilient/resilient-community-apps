@@ -54,7 +54,8 @@ ConfigKey = namedtuple("ConfigKey", "key default")
 CONFIG_SECTION = "custom_threat_service"
 CONFIG_URLBASE = ConfigKey(key="urlbase", default="/cts")
 CONFIG_UPLOAD_FILE = ConfigKey(key="upload_file", default=False)
-CONFIG_RETRY_SECS = ConfigKey(key="retry_secs", default=0)
+CONFIG_FIRST_RETRY_SECS = ConfigKey(key="first_retry_secs", default=0)
+CONFIG_LATER_RETRY_SECS = ConfigKey(key="later_retry_secs", default=0)
 CONFIG_CACHE_SIZE = ConfigKey(key="cache_size", default=10000)
 CONFIG_CACHE_TTL = ConfigKey(key="cache_ttl", default=600000)
 
@@ -157,7 +158,8 @@ class CustomThreatService(BaseController):
         self.support_upload_file = bool(self.options.get(CONFIG_UPLOAD_FILE.key, CONFIG_UPLOAD_FILE.default))
 
         # Default time that this service will tell Resilient to retry
-        self.retry_secs = int(self.options.get(CONFIG_RETRY_SECS.key, CONFIG_RETRY_SECS.default)) or 60
+        self.first_retry_secs = int(self.options.get(CONFIG_FIRST_RETRY_SECS.key, CONFIG_FIRST_RETRY_SECS.default)) or 5
+        self.later_retry_secs = int(self.options.get(CONFIG_LATER_RETRY_SECS.key, CONFIG_LATER_RETRY_SECS.default)) or 60
 
         # Size of the request cache
         self.cache_size = int(self.options.get(CONFIG_CACHE_SIZE.key, CONFIG_CACHE_SIZE.default))
@@ -238,7 +240,7 @@ class CustomThreatService(BaseController):
             return response_object
 
         response.status = 303
-        response_object["retry_secs"] = self.retry_secs
+        response_object["retry_secs"] = self.first_retry_secs
 
         # Add the request to the cache, then notify searchers that there's a new request
         self.cache.setdefault(cache_key, {"id": request_id, "artifact": body, "hits": [], "complete": False})
@@ -267,7 +269,7 @@ class CustomThreatService(BaseController):
         response = event.args[1]
         request_id = None
         if not args:
-            return {"id": request_id, "hits": [], "retry_secs": self.retry_secs}
+            return {"id": request_id, "hits": []}
 
         # The ID of the lookup request
         request_id = args[-1]
@@ -286,7 +288,7 @@ class CustomThreatService(BaseController):
         if not request_data["complete"]:
             # The searchers haven't finished yet, return partial hits if available
             response.status = 303
-            response_object["retry_secs"] = self.retry_secs
+            response_object["retry_secs"] = self.later_retry_secs
             return response_object
 
         # Remove the result from cache
@@ -305,17 +307,25 @@ class CustomThreatService(BaseController):
         artifact = event.parent.artifact
         cts_channel = event.parent.cts_channel
         request_id = event.parent.request_id
-        LOG.info("Lookup complete: %s, %s", event.parent, json.dumps(results))
+
+        LOG.info("Lookup complete: %s, %s", event.parent, results)
 
         # Depending on how many components handled this lookup event,
-        # the results can be a single value (dict), or an array, or None
+        # the results can be a single value (dict), or an array, or None,
+        # or an exception, or a tuple (type, exception, traceback)
         hits = []
         if isinstance(results, list):
             for result in results:
                 if result:
-                    hits.append(result)
+                    if isinstance(result, (tuple, Exception)):
+                        LOG.error("No hits due to exception")
+                    else:
+                        hits.append(result)
         elif results:
-            hits.append(results)
+            if isinstance(results, (tuple, Exception)):
+                LOG.error("No hits due to exception")
+            else:
+                hits.append(results)
 
         # Store the result and mark as complete
         cache_key = (cts_channel, request_id)

@@ -53,7 +53,7 @@ class SearcherExample(BaseComponent):
     # Handle lookups for artifacts of type 'net.uri' (see doc for full list)
     @handler("net.uri")
     def _lookup_net_uri(self, event, *args, **kwargs):
-        """Return hits for URI artifacts"""
+        """Return hits for URL artifacts"""
         hits = []
 
         # event.artifact is a ThreatServiceArtifactDTO

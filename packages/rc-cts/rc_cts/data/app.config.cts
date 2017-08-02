@@ -9,8 +9,9 @@ urlbase=/cts
 # Whether we support file upload (for "file"-type artifacts)
 # upload_file=False
 
-# Retry time indicator
-#retry_secs=60
+# Retry time indicators
+#first_retry_secs=5
+#later_retry_secs=60
 
 # Cache management
 #cache_size=10000
