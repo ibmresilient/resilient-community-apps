@@ -282,6 +282,7 @@ class CustomThreatService(BaseController):
         request_data = self.cache.get(cache_key)
         if not request_data:
             # There's no record of this request in our cache, return empty hits
+            response.status = 200
             return response_object
 
         response_object["hits"] = request_data["hits"]
