@@ -50,7 +50,7 @@ def main():
 
         patch.add_value("incident_type_ids", old_itypes + itypes)
 
-        def patch_conflict_handler(client, response, patch_status, patch):
+        def patch_conflict_handler(response, patch_status, patch):
             # If this gets called then there was a patch conflict, we we need to
             # adjust the patch to include an update.  This only gets called if
             # a field we're trying to change has failed.  In that case the actual
@@ -67,11 +67,9 @@ def main():
 
             current_value = patch_status.get_actual_current_value("incident_type_ids")
 
-            patch.add_value("incident_type_ids",
-                            current_value + itypes,
-                            old_value = current_value)
-
-            return True
+            patch.exchange_conflicting_value(patch_status,
+                                             "incident_type_ids",
+                                             current_value + itypes)
 
         print("existing itypes: {}".format(old_itypes))
         print("wanted to add these: {}".format(itypes))
