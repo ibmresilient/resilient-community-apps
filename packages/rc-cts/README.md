@@ -5,8 +5,14 @@ simple framework to develop threat source lookups in Python using the
 Resilient Circuits integration framework.
   
 It's suitable for simple "lightweight" threat source lookups.
+* All lookups are asynchronous.
+* There is currently no support for file-attachment handling.
+* Queries are not stored persistently, so if you need to track external resources
+  (for example, if your threat service starts a long-running task such as
+  sandbox processing) those will not be tracked across restarts.
+
 For more robust and advanced features, you should consider deploying
-a standalone threat source, for example based on the Django example
+a standalone threat service, for example based on the Django example
 (https://github.com/Co3Systems/co3-api/tree/master/python/examples/custom-threat-service).
 
 
@@ -24,3 +30,4 @@ To delete,
 ```
 sudo resutil threatservicedel -name example
 ```
+

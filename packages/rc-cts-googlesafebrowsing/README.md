@@ -3,9 +3,9 @@
 This implements a custom threat service for the
 [Google Safe Browsing Lookup API](https://developers.google.com/safe-browsing/v4/get-started).
 
-    NOTE: For high volume applications it would be better (faster and more private)
-    to use the Google Safe Browsing *Update API* which provides downloadable lists
-    of threat information that can be queried by hash.
+>   NOTE: For high volume applications it would be better (faster and more private)
+>   to use the Google Safe Browsing *Update API* which provides downloadable lists
+>   of threat information that can be queried by hash.
 
 Install this package with 'pip', or `python setup.py install`.
 Run with: `resilient-circuits run`.
