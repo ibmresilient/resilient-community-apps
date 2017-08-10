@@ -94,8 +94,17 @@ def _update_incident(incident, mapping, incident_fields):
             # Convert the value to a list
             if not isinstance(value, list):
                 value = [value]
-
-        # Set the value
+        elif incident_fields.get(key, "") == "boolean":
+            # Convert the value to True or False
+            if value == "True":
+                value = True
+            elif value == "False":
+                value = False
+            elif not value:
+                value = None
+            else:
+                raise ValueError("Field [%s] Value [%s] not valid boolean value", key, value)
+            # Set the value
         if key in incident:
             incident[key] = value
         elif key in incident["properties"]:
@@ -152,7 +161,7 @@ def _do_attach(query_definition, event_message, metadata,
 
     if isinstance(response, dict):
         response = [response]
-    elif not (isinstance(response, list) or isinstance(response, tuple)):
+    elif not(hasattr(response, "__iter__")) or isinstance(response, basestring):
         # This isn't something we will try to parse, just write it to file
         parsable = False
 
