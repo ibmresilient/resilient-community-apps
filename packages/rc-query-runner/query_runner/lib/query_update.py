@@ -117,10 +117,10 @@ def _update_incident(incident, mapping, incident_fields):
 def _add_artifact(client, incident_id, artifact, context_token):
     """ Create resilient artifact """
     value = artifact.get("value")
-    if isinstance(value, basestring) and value == "NULL":
+    if isinstance(value, basestring) and value.lower() == "null":
         value = ""
     if not all((value, artifact.get("type"))):
-        LOG.error("Can't add artifact with missing value or type: %s",
+        LOG.warn("Can't add artifact with missing value or type: %s",
                   json.dumps(artifact, indent=2))
         return
     try:
