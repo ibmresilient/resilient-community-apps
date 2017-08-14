@@ -1,7 +1,7 @@
 """Action Module circuits component to update incidents from Queries"""
 
 import logging
-import datetime
+import time
 from signal import SIGINT, SIGTERM
 from circuits.core.handlers import handler
 from circuits import task
@@ -29,8 +29,7 @@ def search_and_update(run_search, res_client, options, query_definition,
         # In Windows, the loglevel is not passed to threads. Must reset it.
         LOG.setLevel(loglevel)
         logging.getLogger(run_search.__module__).setLevel(loglevel)
-        timestamp = datetime.datetime.utcnow()
-        timestamp = int(timestamp.strftime('%s')) * 1000 # epoch time in ms
+        timestamp = int(time.time() * 1000)
         response = run_search(options, query_definition, event_message)
         if response:
             # Add timestamp to search metadata
