@@ -1,6 +1,6 @@
 # Resilient Circuits Packages
 
-These packages contain installable components for the [resilient-circuits]() framework.
+These packages are installable components for the [resilient-circuits]() framework.
 
 They include,
 * `rc-query-runner`, a base for components that execute queries against another system and update the Resilient incident
@@ -17,13 +17,22 @@ They include,
 
 Download the latest release packages here:
   
-[Latest Release](./releases/latest)
+[Latest Release](https://github.com/ibmresilient/resilient-circuits-packages/releases/latest)
 
+To install a package,
+```shell
+pip install <filename>.tar.gz
+```
 Refer to each package directory for pre-requisites and specific install instructions.
+
+To list your installed packages,
+```shell
+resilient-circuits list
+```
 
 
 ### Contributing
 
-These packages are provided "as-is", without any support.  Please report issues using the [Issues](./Issues) tab on GitHub.
+These packages are provided "as-is", without any support.  Please report issues using the [Issues](https://github.com/ibmresilient/resilient-circuits-packages/issues) tab on GitHub.
 
-Contributions are welcome,
+Contributions are welcome.
