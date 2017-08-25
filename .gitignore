@@ -4,6 +4,10 @@ __pycache__
 .settings
 .idea
 .cache
+.coverage
+.tox
+.swp
+.eggs
 resilient_circuits_lockfile
 *.iml
 *.pem
@@ -11,6 +15,5 @@ resilient_circuits_lockfile
 *.log
 *.log.*
 *~
-.eggs
 *.egg-info
 *.tar.gz
