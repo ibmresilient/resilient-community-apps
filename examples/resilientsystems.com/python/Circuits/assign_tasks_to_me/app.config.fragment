@@ -1,6 +1,0 @@
-# -----------------------------------------------------------------------------
-# The 'assign_tasks_to_me' action component
-# -----------------------------------------------------------------------------
-[assigntasks]
-# This is the queue we want to listen on
-queue=assigntasks

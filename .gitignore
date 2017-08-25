@@ -13,3 +13,4 @@ resilient_circuits_lockfile
 *~
 .eggs
 *.egg-info
+*.tar.gz
