@@ -3,7 +3,7 @@
     },
 
     "query": {
-        "expression": "http://jarvis.coupang.net/api/v3/hosts?q={{artifact.value|js}}",
+        "expression": "http://cmdb.example.net/api/v3/hosts?q={{artifact.value|js}}",
         "extract_results_from": "result.content"
     },
 
