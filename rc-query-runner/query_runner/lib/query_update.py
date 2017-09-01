@@ -10,7 +10,7 @@ import csv
 import threading
 from datetime import datetime
 import resilient_circuits.template_functions as template_functions
-from co3.co3 import SimpleHTTPException
+from resilient import SimpleHTTPException
 from .datatable import DataTable
 
 LOG = logging.getLogger(__name__)

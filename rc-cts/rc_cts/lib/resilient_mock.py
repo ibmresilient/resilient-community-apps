@@ -9,7 +9,9 @@ To run with this mock class, in [resilient] section of app.config, set:
 import logging
 import requests
 import requests_mock
-from co3.resilient_rest_mock import ResilientMock, resilient_endpoint
+from resilient.resilient_rest_mock import ResilientMock, resilient_endpoint
+
+
 LOG = logging.getLogger(__name__)
 
 

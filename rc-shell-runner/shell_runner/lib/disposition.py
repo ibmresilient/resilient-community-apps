@@ -5,7 +5,7 @@
 
 from __future__ import print_function
 import os
-import co3
+import resilient
 import json
 import tempfile
 import collections
@@ -229,11 +229,11 @@ class Disposition(dict):
 
 def test():
     """Test some basic functionality"""
-    from rest_helper import get_resilient_client
-    from actions_component import ActionMessage
+    from resilient_circuits.rest_helper import get_resilient_client
+    from resilient_circuits.actions_component import ActionMessage
     import time
 
-    opts = vars(co3.ArgumentParser(config_file=os.environ.get("APP_CONFIG_FILE")).parse_args())
+    opts = vars(resilient.ArgumentParser(config_file=os.environ.get("APP_CONFIG_FILE")).parse_args())
     client = get_resilient_client(opts)
 
     action_event = None

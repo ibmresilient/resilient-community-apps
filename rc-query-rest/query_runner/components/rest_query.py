@@ -6,7 +6,7 @@ import json
 import requests
 from string import Template
 from pkg_resources import Requirement, resource_filename
-from co3.co3 import SimpleHTTPException
+from resilient import SimpleHTTPException
 import resilient_circuits.template_functions as template_functions
 from query_runner.lib.query_action import QueryRunner
 from query_runner.lib.misc import SearchTimeout, SearchFailure
@@ -40,6 +40,7 @@ class QueryREST(QueryRunner):
         template_functions.ENV.filters.update(jinja_filters)
 
         super(QueryREST, self).__init__(opts, query_options, rest_call)
+
 
 def rest_call(options, query_definition, event_message):
     """ Make a REST call and return result """
