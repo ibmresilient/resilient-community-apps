@@ -50,7 +50,7 @@ deploy:
   on:
     tags: true
 
-notifications:
-  slack:
-    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
-    on_success: change
+#notifications:
+#  slack:
+#    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
+#    on_success: change
