@@ -18,7 +18,7 @@ a standalone threat service, for example based on the Django example
 
 ## Custom Threat Service Example
 
-This package includes an example threat service that responds to 'URL' artifacts with
+This package includes an **example** threat service that responds to 'URL' artifacts with
 static data.  To register the example onto your Resilient server (assuming that the
 `resilient-circuits` application is running on the same server):
 
