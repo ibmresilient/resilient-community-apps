@@ -11,7 +11,7 @@ env:
 matrix:
   fast_finish: true
   exclude:
-    # This is to exlude the default build job
+    # This is to exclude the default build job
     - python: 2.6
 
   include:
@@ -29,9 +29,9 @@ install:
 
 before_script:
   - git clone -b master --single-branch git@github.ibm.com:Resilient/resilient-python-api.git --depth 1
-  - (cd resilient-python-api/python && ./buildall.sh 999);
+  - (cd resilient-python-api && ./buildall.sh 999);
   - mkdir pkgs
-  - cp resilient-python-api/python/*/dist/*.tar.gz ./pkgs
+  - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
 
 script:
 - ./build_packages.sh && ./run_tests.sh
