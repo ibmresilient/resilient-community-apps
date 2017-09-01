@@ -7,7 +7,7 @@ setup(
     setup_requires=['setuptools_scm'],
     use_scm_version={"root": "../", "relative_to": __file__},
     url='https://www.resilientsystems.com/',
-    license='Resilient License',
+    license='MIT',
     author='IBM Resilient',
     install_requires=[
         'rc-cts'
