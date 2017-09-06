@@ -12,9 +12,12 @@ class QueryDefinition(object):
     """ Store query and mapping rules for a query action definition """
     query_definitions = {}
 
-    def __init__(self, directory, action_name):
+    def __init__(self, directory, action_name, definition_json=None):
         LOG.info("QueryDefinition: %s/%s", directory, action_name)
-        query_definition = self._get_definition(directory, action_name)
+        if definition_json:
+            query_definition = definition_json
+        else:
+            query_definition = self._get_definition(directory, action_name)
         self.name = action_name
 
         # The 'vars' block defines expressions that are available later
@@ -75,6 +78,14 @@ class QueryDefinition(object):
 
         # Instructions to map the results onto notes
         self.note_mapping = query_definition.get("notes", [])
+
+        # Sometimes we need to iterate over the same result row a number of times
+        iterate_per_result = query_definition.get("iterate_per_result")
+        if iterate_per_result:
+            self.iterate_per_result = QueryDefinition(None, action_name, definition_json=iterate_per_result)
+            self.iterate_per_result.count_template = iterate_per_result["count"]
+        else:
+            self.iterate_per_result = None
 
         # These will be populated when the query is rendered
         self.mapdata = None
@@ -152,6 +163,14 @@ class QueryDefinition(object):
         # Render the query expression
         if self.query_template is not None:
             self.query = renderer(self.query_template, self.mapdata)
+
+        #
+        # Copy some values into the iterate_per_result object
+        if self.iterate_per_result:
+            self.iterate_per_result.vars = self.vars
+            self.iterate_per_result.params = self.params
+            self.iterate_per_result.each = self.each
+            self.iterate_per_result.mapdata = self.mapdata
 
         LOG.info("Query to run: %s", self.query)
     # end render_query

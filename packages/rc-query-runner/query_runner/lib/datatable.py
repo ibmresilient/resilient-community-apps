@@ -144,6 +144,14 @@ class DataTable(object):
                 # Convert the value to a list
                 if not isinstance(value, list):
                     value = [value]
+            elif dt_field_types[key] == "boolean":
+                # Convert the value to True or False
+                if value == "True":
+                    value = True
+                elif value == "False":
+                    value = False
+                elif not value:
+                    value = None
 
             dt_row["cells"][key]["value"] = value
 
