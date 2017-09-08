@@ -25,7 +25,7 @@ setup(
     name='rc-webserver',
     use_scm_version={"root": "../", "relative_to": __file__},
     setup_requires=['setuptools_scm'],
-    url='https://www.resilientsystems.com/',
+    url='https://github.com/ibmresilient/resilient-circuits-packages',
     license='MIT',
     author='IBM Resilient',
     install_requires=[
