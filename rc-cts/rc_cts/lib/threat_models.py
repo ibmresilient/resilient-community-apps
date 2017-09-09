@@ -14,6 +14,7 @@ def searcher_channel(*sub_urls):
     return "cts_search." + ".".join(sub_urls)
 
 
+# Standard artifact types in Resilient
 ARTIFACT_TYPES = [
     "file.content",
     "file.name",
@@ -26,12 +27,16 @@ ARTIFACT_TYPES = [
     "email.header.to",
     "hash.md5",
     "hash.sha1",
+    "hash.sha256",
     "hash.fuzzy",
     "cert.x509",
+    "net.cidr",
     "net.ip",
     "net.name",
+    "net.mac",
     "net.port",
     "net.uri",
+    "net.uri.path",
     "net.http.request.header",
     "net.http.response.header",
     "process.name",
@@ -39,13 +44,17 @@ ARTIFACT_TYPES = [
     "system.mutex",
     "system.registry",
     "system.service.name",
+    "system.service.name",
+    "system.user.name",
+    "threat.report.cve",
+    "threat.malware.family"
 ]
 
 
 class Hit(collections.OrderedDict):
     """A dict representing a Hit and its properties"""
     def __init__(self, *props):
-        super(Hit, self).__init__(props=list(props))
+        super(Hit, self).__init__(props=[prop for prop in list(props) if prop["value"] is not None])
 
 
 class StringProp(dict):
