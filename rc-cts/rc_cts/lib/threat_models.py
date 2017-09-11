@@ -56,6 +56,11 @@ class Hit(collections.OrderedDict):
     def __init__(self, *props):
         super(Hit, self).__init__(props=[prop for prop in list(props) if prop["value"] is not None])
 
+    def append(self, prop):
+        """Append a property to the hit.  Note: property names must be unique within the hit."""
+        if prop["value"] is not None:
+            self["props"].append(prop)
+
 
 class StringProp(dict):
     """A dict representing a string property of a hit"""
