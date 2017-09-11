@@ -23,7 +23,7 @@ except NameError:
 
 
 def update_with_results(res_client, query_definition, event_message, response,
-                        context_token, additional_map_data={}):
+                        context_token, additional_map_data=None):
     incident = event_message.get("incident", {})
     if response and "metadata" in response:
         # Some additional meta data about the search results, like a job ID
@@ -161,7 +161,7 @@ def _get_csv_tempfile():
 
 
 def _do_attach(query_definition, event_message, metadata,
-               response, res_client, context_token, additional_map_data={}):
+               response, res_client, context_token, additional_map_data=None):
     """ Update incident with results as a CSV file attachment """
     # keys - options list of keys to extract from each result row
     incident = event_message.get("incident", {})
@@ -252,14 +252,15 @@ def _json(result):
 
 def _do_incident_mapping(query_definition, event_message, metadata,
                          response, res_client, context_token,
-                         additional_map_data={}):
+                         additional_map_data=None):
     """ Update incident with query results as defined in mapping """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
 
     # Map for rendering starts with the event (incident, etc)
     mapdata = copy.deepcopy(event_message)
-    mapdata.update(additional_map_data)
+    if additional_map_data:
+        mapdata.update(additional_map_data)
     # Add in any rendered vars
     mapdata.update(query_definition.vars)
     # Add in any query result metadata
@@ -297,7 +298,7 @@ def _do_incident_mapping(query_definition, event_message, metadata,
 
 def _do_artifact_mapping(query_definition, event_message, metadata,
                          response, res_client, context_token,
-                         additional_map_data={}):
+                         additional_map_data=None):
     """ Map query results to new artifact and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -314,7 +315,8 @@ def _do_artifact_mapping(query_definition, event_message, metadata,
                 mapdata = {"result": row}
                 # Add in any query result metadata
                 mapdata.update(metadata)
-                mapdata.update(additional_map_data)
+                if additional_map_data:
+                    mapdata.update(additional_map_data)
                 artifact = template_functions.render_json(artifact_template,
                                                           mapdata)
                 if artifact.get("value") and _unique_artifact(artifact, existing_artifacts):
@@ -367,7 +369,7 @@ def _get_incident_fields(res_client):
 
 def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
                           response, res_client, context_token,
-                          additional_map_data={}):
+                          additional_map_data=None):
     """ Map query results to Resilient data table rows """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -397,7 +399,8 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
 
     # Map for rendering starts with the event (incident, etc)
     mapdata = copy.deepcopy(event_message)
-    mapdata.update(additional_map_data)
+    if additional_map_data:
+        mapdata.update(additional_map_data)
     # Add in any rendered vars
     mapdata.update(query_definition.vars)
     # Add in any query result metadata
@@ -452,7 +455,7 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
 
 def _do_task_mapping(query_definition, event_message, metadata,
                      response, res_client, context_token,
-                     additional_map_data={}):
+                     additional_map_data=None):
     """ Map query results to new task and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -476,7 +479,8 @@ def _do_task_mapping(query_definition, event_message, metadata,
                 mapdata = {"result": row}
                 # Add in any query result metadata
                 mapdata.update(metadata)
-                mapdata.update(additional_map_data)
+                if additional_map_data:
+                    mapdata.update(additional_map_data)
 
                 task = template_functions.render_json(task_template, mapdata)
                 _add_task(res_client, incident_id, task)
@@ -490,13 +494,14 @@ def _do_task_mapping(query_definition, event_message, metadata,
 
 def _do_iterate_per_result(query_definition, event_message, metadata,
                            response, res_client, context_token,
-                           additional_map_data={}):
+                           additional_map_data=None):
     """Call additional mappings n times per result row"""
 
     for row in response:
         mapdata = {"result": row}
         mapdata.update(metadata)
-        mapdata.update(additional_map_data)
+        if additional_map_data:
+            mapdata.update(additional_map_data)
         count = int(template_functions.render(query_definition.iterate_per_result.count_template, mapdata))
         for i in range(count):
             update_with_results(res_client,
@@ -509,7 +514,7 @@ def _do_iterate_per_result(query_definition, event_message, metadata,
 
 def _do_note_mapping(query_definition, event_message, metadata,
                      response, res_client, context_token,
-                     additional_map_data={}):
+                     additional_map_data=None):
     """ Map query results to new note and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -532,7 +537,8 @@ def _do_note_mapping(query_definition, event_message, metadata,
             mapdata = {"result": row}
             # Add in any query result metadata
             mapdata.update(metadata)
-            mapdata.update(additional_map_data)
+            if additional_map_data:
+                mapdata.update(additional_map_data)
 
             for note_template in query_definition.note_mapping:
                 note = template_functions.render_json(note_template, mapdata)
