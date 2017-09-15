@@ -382,11 +382,11 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     dtcells = dtinfo.get("cells", None)
     limit = dtinfo.get("limit", 0)
 
+    # Get access to the data table
+    if not datatable_locks[dtname].acquire(timeout=600):
+        LOG.error("Couldn't acquire lock on table %s. No update done.", dtname)
+        return
     try:
-        # Get access to the data table
-        if not datatable_locks[dtname].acquire(timeout=600):
-            LOG.error("Couldn't acquire lock on table %s. No update done.", dtname)
-            return
         datatable = DataTable(res_client, table_name=dtname)
         dtrows = []
         row_to_update = None
