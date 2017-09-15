@@ -3,6 +3,8 @@
 import logging
 import time
 from signal import SIGINT, SIGTERM
+from collections import defaultdict
+from multiprocessing import Lock
 from circuits.core.handlers import handler
 from circuits import task
 from resilient_circuits.actions_component import ResilientComponent, ActionMessage
@@ -23,7 +25,7 @@ class QueryEvent(NiceEvent):
     pass
 
 def search_and_update(run_search, res_client, options, query_definition,
-                      event_message, context_token, loglevel):
+                      event_message, context_token, loglevel, datatable_locks):
     """ Run Query and update incident with results """
     try:
         # In Windows, the loglevel is not passed to threads. Must reset it.
@@ -37,7 +39,8 @@ def search_and_update(run_search, res_client, options, query_definition,
                 response["metadata"]["current_time"] = timestamp
             else:
                 response["metadata"] = {"current_time": timestamp}
-        update_with_results(res_client, query_definition, event_message, response, context_token)
+        update_with_results(res_client, query_definition, event_message, response,
+                            datatable_locks, context_token)
         return "Query updates finished"
     except:
         LOG.exception("search_and_update error")
@@ -48,6 +51,7 @@ class QueryRunner(ResilientComponent):
     Base class for query-runner.  Implementations should inherit from this.
     Acknowledges and fires off new query requests.
     """
+    datatable_locks = defaultdict(Lock) # Share across all instances
 
     def __init__(self, all_opts, query_opts, run_search_function, wait_for_complete=False):
         super(QueryRunner, self).__init__(all_opts)
@@ -192,14 +196,16 @@ class QueryRunner(ResilientComponent):
         if self.wait_for_complete:
             search_and_update(self.run_search, self.rest_client(), self.options,
                               query_definition, event.message,
-                              event.context, LOG.getEffectiveLevel())
+                              event.context, LOG.getEffectiveLevel(),
+                              QueryRunner.datatable_locks)
             for name in query_definition.additional_queries:
                 # Run any additional queries linked to this action
                 other_query_definition = QueryDefinition(self.directory, name)
                 other_query_definition.render_query(event.message, renderer=self.render_template)
                 search_and_update(self.run_search, self.rest_client(), self.options,
                                   other_query_definition, event.message,
-                                  event.context, numeric_log_level)
+                                  event.context, numeric_log_level,
+                                  QueryRunner.datatable_locks)
             yield "Query Completed"
         else:
             self.fire(QueryEvent(query_definition, event))
@@ -242,4 +248,5 @@ class QueryRunner(ResilientComponent):
                              query_definition,
                              action_event.message,
                              action_event.context,
-                             numeric_log_level))
+                             numeric_log_level,
+                             QueryRunner.datatable_locks))
