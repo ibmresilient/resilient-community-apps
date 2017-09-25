@@ -22,8 +22,8 @@ except NameError:
     basestring = str
 
 
-def update_with_results(res_client, query_definition, event_message, response, context_token):
-
+def update_with_results(res_client, query_definition, event_message, response,
+                        datatable_locks, context_token, additional_map_data=None):
     incident = event_message.get("incident", {})
     if response and "metadata" in response:
         # Some additional meta data about the search results, like a job ID
@@ -46,29 +46,39 @@ def update_with_results(res_client, query_definition, event_message, response, c
         pass
 
     if query_definition.attachment_mapping:
-        _do_attach(query_definition, event_message, metadata, response, res_client, context_token)
+        _do_attach(query_definition, event_message, metadata, response, res_client,
+                   context_token, additional_map_data=additional_map_data)
 
     if query_definition.incident_mapping:
         _do_incident_mapping(query_definition, event_message, metadata,
-                             response, res_client, context_token)
+                             response, res_client, context_token,
+                             additional_map_data=additional_map_data)
 
     if query_definition.artifact_mapping:
         _do_artifact_mapping(query_definition, event_message, metadata,
-                             response, res_client, context_token)
+                             response, res_client, context_token,
+                             additional_map_data=additional_map_data)
 
     if query_definition.data_table_mapping:
         for dtinfo in query_definition.data_table_mapping:
             _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
-                                  response, res_client, context_token)
+                                  response, datatable_locks, res_client, context_token,
+                                  additional_map_data=additional_map_data)
 
     if query_definition.task_mapping:
-        _do_task_mapping(query_definition, event_message, metadata, response, res_client, context_token)
+        _do_task_mapping(query_definition, event_message, metadata, response, res_client,
+                         context_token, additional_map_data=additional_map_data)
 
     if query_definition.note_mapping:
-        _do_note_mapping(query_definition, event_message, metadata, response, res_client, context_token)
+        _do_note_mapping(query_definition, event_message, metadata, response, res_client,
+                         context_token, additional_map_data=additional_map_data)
 
     # TODO: add milestones
 
+    if query_definition.iterate_per_result:
+        _do_iterate_per_result(query_definition, event_message, metadata, response,
+                               res_client, context_token,
+                               additional_map_data=additional_map_data)
 # end update_with_results
 
 
@@ -151,7 +161,7 @@ def _get_csv_tempfile():
 
 
 def _do_attach(query_definition, event_message, metadata,
-               response, res_client, context_token):
+               response, res_client, context_token, additional_map_data=None):
     """ Update incident with results as a CSV file attachment """
     # keys - options list of keys to extract from each result row
     incident = event_message.get("incident", {})
@@ -241,13 +251,16 @@ def _json(result):
 
 
 def _do_incident_mapping(query_definition, event_message, metadata,
-                         response, res_client, context_token):
+                         response, res_client, context_token,
+                         additional_map_data=None):
     """ Update incident with query results as defined in mapping """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
 
     # Map for rendering starts with the event (incident, etc)
     mapdata = copy.deepcopy(event_message)
+    if additional_map_data:
+        mapdata.update(additional_map_data)
     # Add in any rendered vars
     mapdata.update(query_definition.vars)
     # Add in any query result metadata
@@ -284,7 +297,8 @@ def _do_incident_mapping(query_definition, event_message, metadata,
 
 
 def _do_artifact_mapping(query_definition, event_message, metadata,
-                         response, res_client, context_token):
+                         response, res_client, context_token,
+                         additional_map_data=None):
     """ Map query results to new artifact and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -301,6 +315,8 @@ def _do_artifact_mapping(query_definition, event_message, metadata,
                 mapdata = {"result": row}
                 # Add in any query result metadata
                 mapdata.update(metadata)
+                if additional_map_data:
+                    mapdata.update(additional_map_data)
                 artifact = template_functions.render_json(artifact_template,
                                                           mapdata)
                 if artifact.get("value") and _unique_artifact(artifact, existing_artifacts):
@@ -352,7 +368,8 @@ def _get_incident_fields(res_client):
         raise
 
 def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
-                          response, res_client, context_token):
+                          response, datatable_locks, res_client, context_token,
+                          additional_map_data=None):
     """ Map query results to Resilient data table rows """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -366,76 +383,85 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     limit = dtinfo.get("limit", 0)
 
     # Get access to the data table
-    datatable = DataTable(res_client, table_name=dtname)
-    dtrows = []
-    row_to_update = None
+    if not datatable_locks[dtname].acquire(timeout=600):
+        LOG.error("Couldn't acquire lock on table %s. No update done.", dtname)
+        return
+    try:
+        datatable = DataTable(res_client, table_name=dtname)
+        dtrows = []
+        row_to_update = None
 
-    if dtrow_id:
-        # We are updating a single existing row
-        row_to_update = datatable.find_row(incident['id'], dtrow_id)
-        if not row_to_update:
-            LOG.error("Row [%s] not found. No update done.", dtrow_id)
-            return
-    elif dtkey:
-        # Read all the rows
-        dtrows = datatable.rows(incident_id)
+        if dtrow_id:
+            # We are updating a single existing row
+            row_to_update = datatable.find_row(incident['id'], dtrow_id)
+            if not row_to_update:
+                LOG.error("Row [%s] not found. No update done.", dtrow_id)
+                return
+        elif dtkey:
+            # Read all the rows
+            dtrows = datatable.rows(incident_id)
 
-    # Map for rendering starts with the event (incident, etc)
-    mapdata = copy.deepcopy(event_message)
-    # Add in any rendered vars
-    mapdata.update(query_definition.vars)
-    # Add in any query result metadata
-    mapdata.update(metadata)
+        # Map for rendering starts with the event (incident, etc)
+        mapdata = copy.deepcopy(event_message)
+        if additional_map_data:
+            mapdata.update(additional_map_data)
+        # Add in any rendered vars
+        mapdata.update(query_definition.vars)
+        # Add in any query result metadata
+        mapdata.update(metadata)
 
-    LOG.debug("Key columns: %s", dtkey)
+        LOG.debug("Key columns: %s", dtkey)
 
-    cells_template = json.dumps({"cells": dtcells}, indent=2)
-    LOG.debug("Cells template: %s", cells_template)
+        cells_template = json.dumps({"cells": dtcells}, indent=2)
+        LOG.debug("Cells template: %s", cells_template)
 
-    num_created = 0
-    for result_row in rows:
-        # If a key is specified, it's for upsert:
-        # - Each row in the result should correspond to one row in the data table
-        # - Render key with **the event_message and the result row**
-        #   (because the key could be e.g. artifact.value, or task.id, or row.somevalue)
-        # - It looks like {"cell":"value"} when rendered
-        # - We expect a single row matching the key, or none
-        #   (If multiple rows match the key, just pick the randomly-first one and carry on)
-        # - Update it based on the response row, or insert
-        mapdata["result"] = result_row
+        num_created = 0
+        for result_row in rows:
+            # If a key is specified, it's for upsert:
+            # - Each row in the result should correspond to one row in the data table
+            # - Render key with **the event_message and the result row**
+            #   (because the key could be e.g. artifact.value, or task.id, or row.somevalue)
+            # - It looks like {"cell":"value"} when rendered
+            # - We expect a single row matching the key, or none
+            #   (If multiple rows match the key, just pick the randomly-first one and carry on)
+            # - Update it based on the response row, or insert
+            mapdata["result"] = result_row
 
-        # Render the result row to cells using the template provided in the query definition.
-        cells_rendered = template_functions.render_json(cells_template, mapdata)
-        datatable.update_cell_value_types(cells_rendered)
+            # Render the result row to cells using the template provided in the query definition.
+            cells_rendered = template_functions.render_json(cells_template, mapdata)
+            datatable.update_cell_value_types(cells_rendered)
 
-        dtrow = None
-        if dtkey:
-            LOG.debug("Find matching row to update!")
-            key_dict = {key: cells_rendered["cells"].get(key, {}).get("value", None) for key in dtkey}
-            matching_rows = datatable.match(dtrows, key_dict, limit=1)
-            if matching_rows:
-                dtrow = matching_rows[0]
-        elif row_to_update:
-            dtrow = row_to_update
-        if dtrow is None:
-            # Insert a new row in the data table
-            LOG.debug("Adding Row: %s", json.dumps(cells_rendered, indent=2))
-            new_row = datatable.add_row(incident_id, cells_rendered)
-            if new_row:
-                dtrows.append(new_row)
-        else:
-            # Update the row in the data table
-            LOG.debug("Updating Row: %s", json.dumps(cells_rendered, indent=2))
-            datatable.update(incident_id, dtrow, cells_rendered, co3_context_token=context_token)
-        num_created = num_created + 1
-        if num_created == limit:
-            LOG.info("Limiting Datatable row creation to first %d results", limit)
-            break
+            dtrow = None
+            if dtkey:
+                LOG.debug("Find matching row to update!")
+                key_dict = {key: cells_rendered["cells"].get(key, {}).get("value", None) for key in dtkey}
+                matching_rows = datatable.match(dtrows, key_dict, limit=1)
+                if matching_rows:
+                    dtrow = matching_rows[0]
+            elif row_to_update:
+                dtrow = row_to_update
+            if dtrow is None:
+                # Insert a new row in the data table
+                LOG.debug("Adding Row: %s", json.dumps(cells_rendered, indent=2))
+                new_row = datatable.add_row(incident_id, cells_rendered)
+                if new_row:
+                    dtrows.append(new_row)
+            else:
+                # Update the row in the data table
+                LOG.debug("Updating Row: %s", json.dumps(cells_rendered, indent=2))
+                datatable.update(incident_id, dtrow, cells_rendered, co3_context_token=context_token)
+            num_created = num_created + 1
+            if num_created == limit:
+                LOG.info("Limiting Datatable row creation to first %d results", limit)
+                break
+    finally:
+        datatable_locks[dtname].release()
 # end _do_datatable_mapping
 
 
 def _do_task_mapping(query_definition, event_message, metadata,
-                     response, res_client, context_token):
+                     response, res_client, context_token,
+                     additional_map_data=None):
     """ Map query results to new task and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -459,6 +485,8 @@ def _do_task_mapping(query_definition, event_message, metadata,
                 mapdata = {"result": row}
                 # Add in any query result metadata
                 mapdata.update(metadata)
+                if additional_map_data:
+                    mapdata.update(additional_map_data)
 
                 task = template_functions.render_json(task_template, mapdata)
                 _add_task(res_client, incident_id, task)
@@ -470,9 +498,29 @@ def _do_task_mapping(query_definition, event_message, metadata,
             _add_task(res_client, incident_id, task)
 # end _do_task_mapping
 
+def _do_iterate_per_result(query_definition, event_message, metadata,
+                           response, res_client, context_token,
+                           additional_map_data=None):
+    """Call additional mappings n times per result row"""
+
+    for row in response:
+        mapdata = {"result": row}
+        mapdata.update(metadata)
+        if additional_map_data:
+            mapdata.update(additional_map_data)
+        count = int(template_functions.render(query_definition.iterate_per_result.count_template, mapdata))
+        for i in range(count):
+            update_with_results(res_client,
+                                query_definition.iterate_per_result,
+                                event_message,
+                                response,
+                                context_token,
+                                additional_map_data={'i': i})
+    # end _do_iterate_per_result
 
 def _do_note_mapping(query_definition, event_message, metadata,
-                     response, res_client, context_token):
+                     response, res_client, context_token,
+                     additional_map_data=None):
     """ Map query results to new note and add to Resilient """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
@@ -495,6 +543,8 @@ def _do_note_mapping(query_definition, event_message, metadata,
             mapdata = {"result": row}
             # Add in any query result metadata
             mapdata.update(metadata)
+            if additional_map_data:
+                mapdata.update(additional_map_data)
 
             for note_template in query_definition.note_mapping:
                 note = template_functions.render_json(note_template, mapdata)

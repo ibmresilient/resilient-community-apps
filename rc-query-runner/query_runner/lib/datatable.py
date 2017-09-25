@@ -1,7 +1,8 @@
 """Simple helper class to access a data table"""
 import logging
-from query_runner.lib.misc import ensure_unicode as u
+
 LOG = logging.getLogger(__name__)
+
 
 class DataTableRow(dict):
     # Get and set attributes like row.prop, but store them in cells for datatable
@@ -144,6 +145,14 @@ class DataTable(object):
                 # Convert the value to a list
                 if not isinstance(value, list):
                     value = [value]
+            elif dt_field_types[key] == "boolean":
+                # Convert the value to True or False
+                if value == "True":
+                    value = True
+                elif value == "False":
+                    value = False
+                elif not value:
+                    value = None
 
             dt_row["cells"][key]["value"] = value
 
