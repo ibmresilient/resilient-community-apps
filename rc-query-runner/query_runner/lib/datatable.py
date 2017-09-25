@@ -1,7 +1,8 @@
 """Simple helper class to access a data table"""
 import logging
-from query_runner.lib.misc import ensure_unicode as u
+
 LOG = logging.getLogger(__name__)
+
 
 class DataTableRow(dict):
     # Get and set attributes like row.prop, but store them in cells for datatable

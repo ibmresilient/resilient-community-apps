@@ -13,7 +13,7 @@ import logging
 LOG = logging.getLogger(__name__)
 
 
-# Make a diposition
+# Make a disposition
 # Call when ready, passing the event (which has all the incident, etc)
 # and the result (which should be suitable for executing your disposition).
 #
@@ -158,12 +158,15 @@ class Disposition(dict):
                                    co3_context_token=event.context)
 
     # Add new (tasks, notes, etc)
-    # TODO multiple
 
     def new_incident(self, args, event, data):
         """Add a new incident from data"""
-        if not isinstance(data, dict):
+        if not (isinstance(data, dict) or isinstance(data, list)):
+            # Data was probably a string, load it
             data = json.loads(data)
+        if isinstance(data, list):
+            # Load each of the things in the list
+            return [self.new_incident(args, event, item) for item in data]
         ctx = None
         if event is not None:
             ctx = event.context
@@ -171,15 +174,23 @@ class Disposition(dict):
 
     def new_task(self, args, event, data):
         """Add a new task to the event's incident"""
-        if not isinstance(data, dict):
+        if not (isinstance(data, dict) or isinstance(data, list)):
+            # Data was probably a string, load it
             data = json.loads(data)
+        if isinstance(data, list):
+            # Load each of the things in the list
+            return [self.new_task(args, event, item) for item in data]
         incident_id = event.incident["id"]
         return self.client.post("/incidents/{}/tasks".format(incident_id), data, co3_context_token=event.context)
 
     def new_note(self, args, event, data):
         """Add a new note to the event's incident"""
-        if not isinstance(data, dict):
+        if not (isinstance(data, dict) or isinstance(data, list)):
+            # Data was probably a string, load it
             data = json.loads(data)
+        if isinstance(data, list):
+            # Load each of the things in the list
+            return [self.new_note(args, event, item) for item in data]
         incident_id = event.incident["id"]
         return self.client.post("/incidents/{}/comments".format(incident_id), data, co3_context_token=event.context)
 
@@ -192,15 +203,23 @@ class Disposition(dict):
 
     def new_milestone(self, args, event, data):
         """Add a new milestone to the event's incident"""
-        if not isinstance(data, dict):
+        if not (isinstance(data, dict) or isinstance(data, list)):
+            # Data was probably a string, load it
             data = json.loads(data)
+        if isinstance(data, list):
+            # Load each of the things in the list
+            return [self.new_milestone(args, event, item) for item in data]
         incident_id = event.incident["id"]
         return self.client.post("/incidents/{}/milestones".format(incident_id), data, co3_context_token=event.context)
 
     def new_artifact(self, args, event, data):
         """Add a new artifact to the event's incident.  NOTE: result is a list"""
-        if not isinstance(data, dict):
+        if not (isinstance(data, dict) or isinstance(data, list)):
+            # Data was probably a string, load it
             data = json.loads(data)
+        if isinstance(data, list):
+            # Load each of the things in the list
+            return [self.new_artifact(args, event, item) for item in data]
         incident_id = event.incident["id"]
         return self.client.post("/incidents/{}/artifacts".format(incident_id), data, co3_context_token=event.context)
 
