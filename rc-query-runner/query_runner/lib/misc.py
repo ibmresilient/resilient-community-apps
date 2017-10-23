@@ -47,6 +47,7 @@ class NiceEvent(Event):
 
         return "<%s[%s] (%s)>" % (self.name, channels, data)
 
+
 # Exception Definitions
 class SearchFailure(Exception):
     """ Search failed to execute """
@@ -63,13 +64,15 @@ class SearchTimeout(Exception):
         Exception.__init__(self, fail_msg)
         self.search_status = search_status
 
+
 class abstractstatic(staticmethod):
     __slots__ = ()
     def __init__(self, function):
         super(abstractstatic, self).__init__(function)
         function.__isabstractmethod__ = True
     __isabstractmethod__ = True
-        
+
+
 def ensure_unicode(input):
     """ if input is type str, convert to unicode with utf-8 encoding """
 

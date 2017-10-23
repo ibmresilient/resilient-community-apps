@@ -33,11 +33,12 @@ def update_with_results(res_client, query_definition, event_message, response,
 
     if query_definition.result_container:
         # The rows we care about are in this key of the query result object
+        key_names = ", ".join(response.keys())
         for key in query_definition.result_container.split("."):
             if response:
                 response = response.get(key)
         if not response:
-            LOG.warn("No data returned from query in %s", query_definition.result_container)
+            LOG.warn("No data returned from query in '%s' (top-level keys are: %s)", query_definition.result_container, key_names)
             return "Query returned no %s" % query_definition.result_container
 
     else:
@@ -131,7 +132,7 @@ def _add_artifact(client, incident_id, artifact, context_token):
         value = ""
     if not all((value, artifact.get("type"))):
         LOG.warn("Can't add artifact with missing value or type: %s",
-                  json.dumps(artifact, indent=2))
+                 json.dumps(artifact, indent=2))
         return
     try:
         LOG.info(u"Adding artifact to incident %s: %s", incident_id, artifact)
@@ -366,6 +367,7 @@ def _get_incident_fields(res_client):
     except SimpleHTTPException as error:
         LOG.exception("Failed to get incident fields from Resilient")
         raise
+
 
 def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
                           response, datatable_locks, res_client, context_token,
