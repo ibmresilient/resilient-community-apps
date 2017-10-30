@@ -513,7 +513,7 @@ def _do_iterate_per_result(query_definition, event_message, metadata,
             update_with_results(res_client,
                                 query_definition.iterate_per_result,
                                 event_message,
-                                response,
+                                [row],
                                 datatable_locks,
                                 context_token,
                                 additional_map_data={'i': i})
