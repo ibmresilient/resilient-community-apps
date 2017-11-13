@@ -21,8 +21,10 @@ except NameError:
 
 LOG = logging.getLogger(__name__)
 
+
 class QueryEvent(NiceEvent):
     pass
+
 
 def search_and_update(run_search, res_client, options, query_definition,
                       event_message, context_token, loglevel, datatable_locks):
@@ -45,6 +47,7 @@ def search_and_update(run_search, res_client, options, query_definition,
     except:
         LOG.exception("search_and_update error")
         return "Query updates failed"
+
 
 class QueryRunner(ResilientComponent):
     """
