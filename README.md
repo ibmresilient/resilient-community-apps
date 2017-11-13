@@ -1,8 +1,8 @@
-# Resilient Circuits Packages
+# Resilient Community Applications
 
-These packages are installable components for the [resilient-circuits]() framework.
+These packages are installable components for the [resilient-circuits](https://github.com/ibmresilient/resilient-python-api/tree/master/resilient-circuits) framework.
 
-They include,
+Applications include,
 * `rc-query-runner`, a base for components that execute queries against another system and update the Resilient incident
   with search results.  This includes a simple and powerful query definition file format.  
 * Query-runner packages for searching QRadar, Splunk, LDAP, generic REST APIs, and more.

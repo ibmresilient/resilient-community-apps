@@ -18,4 +18,5 @@ queue=splunk
 
 # Directory containing query definition files
 # Filenames must match the Resilient action names
-query_definitions_dir= {directory}
+# (recommend copying the supplied examples into your own custom directory)
+query_definitions_dir=${directory}
