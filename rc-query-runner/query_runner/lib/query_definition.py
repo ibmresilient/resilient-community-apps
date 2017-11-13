@@ -51,7 +51,7 @@ class QueryDefinition(object):
         # You can specify an error row to return in the case that the query fails with an error
         self.onerror = query.get("onerror")
 
-        # Additional query defitions to run for this action.
+        # Additional query definitions to run for this action.
         self.additional_queries = query.get("additional_queries", [])
 
         # The key in the query result object that contains the rows to iterate over as "row"
@@ -114,7 +114,11 @@ class QueryDefinition(object):
 
         # Parse action definition file and store
         with open(action_filename, 'r') as query_file:
-            query_definition = json.load(query_file)
+            try:
+                query_definition = json.load(query_file)
+            except ValueError:
+                LOG.exception("File %s could not be read as JSON. Can't run query.", action_name)
+                raise
             cls.query_definitions[action_name] = mtime, query_definition
 
         return query_definition

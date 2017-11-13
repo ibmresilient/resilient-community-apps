@@ -11,7 +11,8 @@ qradar_verify=True
 
 # Directory containing query definition files
 # Filenames must match the Resilient action names
-query_definitions_dir={directory}
+# (recommend copying the supplied examples into your own custom directory)
+query_definitions_dir=${directory}
 
 query_timeout=600
 polling_interval=5

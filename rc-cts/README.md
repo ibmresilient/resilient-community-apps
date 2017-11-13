@@ -13,7 +13,7 @@ It's suitable for simple "lightweight" threat source lookups.
 
 For more robust and advanced features, you should consider deploying
 a standalone threat service, for example based on the Django example
-(https://github.com/Co3Systems/co3-api/tree/master/python/examples/custom-threat-service).
+(https://github.com/ibmresilient/resilient-python-examples/tree/master/django-custom-threat-service).
 
 
 ## Custom Threat Service Example

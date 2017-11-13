@@ -11,12 +11,14 @@ def prefix_filter(val, sep):
         return val
     return val[:i]
 
+
 def suffix_filter(val, sep):
     try:
         i = val.index(sep) + 1
     except (ValueError, AttributeError):
         return ""
     return val[i:]
+
 
 def fmt_filter(val, formatstring):
     # A reverse of the built-in 'format' filter
@@ -27,10 +29,12 @@ def fmt_filter(val, formatstring):
         fmt = formatstring % tuple(val)
     return fmt
 
+
 def split_filter(val, splitter):
     # Split the value
     result = val.split(splitter)
     return result
+
 
 def dict_filter(val, *args):
     # Convert a list into a dict
@@ -40,10 +44,12 @@ def dict_filter(val, *args):
         result[arg] = i.next()
     return result
 
+
 def zip_filter(list1, list2):
     # zip lists
     result = zip(list1, list2)
     return result
+
 
 def artifact_type_filter(val):
     """ JINJA filter to extract artifact type label """
@@ -55,6 +61,7 @@ def artifact_type_filter(val):
         label = ""
 
     return label
+
 
 def properties_select_value_filter(properties, name=None, type_info=None):
     """JINJA filter function to replace Action Properties select value ID with String"""

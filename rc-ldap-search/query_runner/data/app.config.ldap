@@ -3,7 +3,9 @@
 # -----------------------------------------------------------------------------
 [AD]
 queue=ldap
-query_definitions_dir={directory}
+
+# (recommend copying the supplied examples into your own custom directory)
+query_definitions_dir=${directory}
 
 server=ldap.forumsys.com
 port=389

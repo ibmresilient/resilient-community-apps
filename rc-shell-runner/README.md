@@ -13,4 +13,4 @@ Typical uses include
 * Managing firewall and IPS rules (Snort examples are included),
 * Integrating with existing systems that have a command-line interface.
 
-For details, see the [setup documentation](Shell_Actions_Setup.pdf).
+For details, see the [setup documentation](https://github.com/ibmresilient/resilient-community-apps/blob/master/rc-shell-runner/docs/Shell_Actions_Setup.docx).
