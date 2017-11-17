@@ -373,7 +373,10 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     """ Map query results to Resilient data table rows """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
-    rows = response
+    if query_definition.result_container:
+        rows = response
+    else:
+        rows = [response,]
 
     # Contains: "name", "key" (optional), "cells" (optional)
     dtname = dtinfo.get("name")
