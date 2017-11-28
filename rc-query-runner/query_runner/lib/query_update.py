@@ -78,7 +78,7 @@ def update_with_results(res_client, query_definition, event_message, response,
 
     if query_definition.iterate_per_result:
         _do_iterate_per_result(query_definition, event_message, metadata, response,
-                               res_client, context_token,
+                               datatable_locks, res_client, context_token,
                                additional_map_data=additional_map_data)
 # end update_with_results
 
@@ -375,7 +375,10 @@ def _do_datatable_mapping(query_definition, dtinfo, event_message, metadata,
     """ Map query results to Resilient data table rows """
     incident = event_message.get("incident", {})
     incident_id = incident.get("id")
-    rows = response
+    if query_definition.result_container:
+        rows = response
+    else:
+        rows = [response,]
 
     # Contains: "name", "key" (optional), "cells" (optional)
     dtname = dtinfo.get("name")
@@ -501,7 +504,7 @@ def _do_task_mapping(query_definition, event_message, metadata,
 # end _do_task_mapping
 
 def _do_iterate_per_result(query_definition, event_message, metadata,
-                           response, res_client, context_token,
+                           response, datatable_locks, res_client, context_token,
                            additional_map_data=None):
     """Call additional mappings n times per result row"""
 
@@ -515,7 +518,8 @@ def _do_iterate_per_result(query_definition, event_message, metadata,
             update_with_results(res_client,
                                 query_definition.iterate_per_result,
                                 event_message,
-                                response,
+                                [row],
+                                datatable_locks,
                                 context_token,
                                 additional_map_data={'i': i})
     # end _do_iterate_per_result
