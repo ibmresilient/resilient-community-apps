@@ -1,0 +1,23 @@
+# -----------------------------------------------------------------------------
+# Custom Threat Service for MISP
+# -----------------------------------------------------------------------------
+[custom_threat_service_misp]
+
+# URL to access the MISP server
+misp_url=http://misp
+
+# URL for links to the MISP server (optional)
+# misp_link_url=http://misp_public_url
+
+# API access key (MISP: Event Actions -> Automation)
+misp_key=3PhYSFDeC8xpqjC0ZrFZDwazoSRDUQ1j4IlKbu0G
+
+# Verify the MISP server's TLS certificate
+# misp_verifycert=false
+
+# Optional: tags to filter
+# misp_tag=tlp:white,tlp:green
+
+# Optional: MISP org(s)
+# misp_org=CIRCL,SQUAR
+

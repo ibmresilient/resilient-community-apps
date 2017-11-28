@@ -11,7 +11,7 @@ env:
 matrix:
   fast_finish: true
   exclude:
-    # This is to exlude the default build job
+    # This is to exclude the default build job
     - python: 2.6
 
   include:
@@ -26,12 +26,13 @@ install:
   - pip install --upgrade pip
   - pip install --upgrade setuptools
   - pip install tox
+  - pip install sphinx
 
 before_script:
-  - git clone -b develop  --single-branch git@github.ibm.com:Resilient/resilient-api.git --depth 1
-  - (cd resilient-api/python && ./buildall.sh 999);
+  - git clone -b master --single-branch git@github.ibm.com:Resilient/resilient-python-api.git --depth 1
+  - (cd resilient-python-api && ./buildall.sh 999);
   - mkdir pkgs
-  - cp resilient-api/python/*/dist/*.tar.gz ./pkgs
+  - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
 
 script:
 - ./build_packages.sh && ./run_tests.sh
@@ -49,8 +50,9 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    python: 2.7
 
-notifications:
-  slack:
-    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
-    on_success: change
+#notifications:
+#  slack:
+#    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
+#    on_success: change
