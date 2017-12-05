@@ -16,6 +16,10 @@ except NameError:
     # py3
     pass
 
+
+NONE_VALUES = ["None", "null", "", None]
+
+
 class InterruptibleWorker(Worker):
     @handler("signal", channel="*")
     def _on_signal(self, signo, stack):
