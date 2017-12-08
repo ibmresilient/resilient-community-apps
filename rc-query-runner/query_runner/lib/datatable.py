@@ -1,5 +1,6 @@
 """Simple helper class to access a data table"""
 import logging
+from .misc import NONE_VALUES
 
 LOG = logging.getLogger(__name__)
 
@@ -132,8 +133,8 @@ class DataTable(object):
         dt_field_types = self.get_field_types()
         for key, value in dt_row["cells"].items():
             value = value["value"]
-            if not value:
-                pass
+            if value in NONE_VALUES:
+                value = None
             elif dt_field_types[key]  in ("datepicker", "datetimepicker", "number"):
                 try:
                     value = int(value)
@@ -151,8 +152,8 @@ class DataTable(object):
                     value = True
                 elif value == "False":
                     value = False
-                elif not value:
-                    value = None
+                else:
+                    raise ValueError("Datatable Field [%s] Value [%s] not valid boolean value", key, value)
 
             dt_row["cells"][key]["value"] = value
 
