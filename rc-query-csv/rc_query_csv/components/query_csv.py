@@ -2,7 +2,6 @@
 """Action Module circuits component to search comma-separated text files"""
 
 from __future__ import print_function
-from __future__ import unicode_literals
 
 import logging
 import os.path
