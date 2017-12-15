@@ -57,7 +57,7 @@ CONFIG_UPLOAD_FILE = ConfigKey(key="upload_file", default=False)
 CONFIG_FIRST_RETRY_SECS = ConfigKey(key="first_retry_secs", default=0)
 CONFIG_LATER_RETRY_SECS = ConfigKey(key="later_retry_secs", default=0)
 CONFIG_CACHE_SIZE = ConfigKey(key="cache_size", default=10000)
-CONFIG_CACHE_TTL = ConfigKey(key="cache_ttl", default=600000)
+CONFIG_CACHE_TTL = ConfigKey(key="cache_ttl", default=600)
 
 HELPER_CHANNEL = "threat_lookup_helper"
 LOOKUP_COMPLETE_CHANNEL = "threat_lookup_complete"
