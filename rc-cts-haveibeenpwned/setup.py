@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc-cts-haveibeenpwned',
-    version="1.0.0",
-    url='https://www.resilientsystems.com/',
-    license='Resilient License',
+    use_scm_version={"root": "../", "relative_to": __file__},
+    url='https://github.com/ibmresilient/resilient-circuits-packages',
+    license='MIT',
     author='IBM Resilient',
     install_requires=[
         'rc-cts'

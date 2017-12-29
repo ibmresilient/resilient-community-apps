@@ -1,4 +1,4 @@
-# Google Safe Browsing Threat Searcher
+# Have I Been Pwned Threat Searcher
 
 This implements a custom threat service for the
 [Have I Been Pwned API](https://haveibeenpwned.com/API/v2).
