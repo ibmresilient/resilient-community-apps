@@ -23,7 +23,7 @@ do
     if [[ ${toxfiles[$i]} =~ $match ]]
     then
       first_runs+=(${toxfiles[$i]});
-    elif [[ ${toxfiles[$i]} =~ match_second ]]
+    elif [[ ${toxfiles[$i]} =~ $match_second ]]
     then
       second_runs+=(${toxfiles[$i]});
     else
