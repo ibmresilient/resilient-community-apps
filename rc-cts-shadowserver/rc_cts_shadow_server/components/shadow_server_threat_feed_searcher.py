@@ -12,7 +12,7 @@
 """
 
 import logging
-from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp
+from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, ThreatServiceLookupEvent
 from circuits import Event, Timer, handler
 from resilient_circuits.actions_component import ResilientComponent
 import requests
@@ -45,31 +45,32 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("shadow_server_threat_feed")
 
-    @handler("hash.md5")
-    def _lookup_hash_md5(self, event, *args, **kwargs):
+    @handler()
+    def _lookup_hash_shadow_server(self, event, *args, **kwargs):
+        """Lookup an artifact"""
+
+        # This is a generic handler - we only care about lookup events but might be sent others
+        if not isinstance(event, ThreatServiceLookupEvent):
+            return
+
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = event.artifact['type']
         artifact_value = event.artifact['value']
-        LOG.debug("_lookup_hash_md5 started for Artifact Type {0} - Artifact Value {1}",
-                  artifact_type, artifact_value)
 
-        hits = self._query_shadow_server_(artifact_type, artifact_value)
+        # Check that the event matches an artifact type that we want to search in Shadow Server
+        if artifact_type not in self.allowed_artifacts:
+            # Nothing to do
+            LOG.info("Shadow Server lookup not implemented for %s", artifact_type)
+            return
 
-        yield hits
+        LOG.info("Shadow Server lookup started for Artifact Type {0} - Artifact Value {1}",
+                 artifact_type, artifact_value)
 
-    @handler("hash.sha1")
-    def _lookup_hash_sha1(self, event, *args, **kwargs):
-        # event.artifact is a ThreatServiceArtifactDTO
-        artifact_type = event.artifact['type']
-        artifact_value = event.artifact['value']
-        LOG.debug("_lookup_process_name started for Artifact Type {0} - Artifact Value {1}",
-                  artifact_type, artifact_value)
-
-        hits = self._query_shadow_server_(artifact_type, artifact_value)
+        hits = self._query_shadow_server(artifact_type, artifact_value)
 
         yield hits
 
-    def _query_shadow_server_(self, artifact_type, artifact_value):
+    def _query_shadow_server(self, artifact_type, artifact_value):
         hits = []
         try:
             url = "{0}?{1}={2}".format(self.options.get("shadow_server_url", "http://bin-test.shadowserver.org/api"),
