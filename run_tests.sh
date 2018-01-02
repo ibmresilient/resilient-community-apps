@@ -8,7 +8,7 @@ match=$( IFS='|'; echo "${must_run_first[*]}" );
 
 
 # Some package must be run second b/c others depend on them and they depend on ones run first, list them here
-must_run_second=( rc-cts);
+must_run_second=( rc-cts/ );
 match_second=$( IFS='|'; echo "${must_run_second[*]}" );
 
 
