@@ -19,7 +19,7 @@ class HaveIBeenPwnedSearcher(BaseComponent):
         curl -v -X OPTIONS 'http://127.0.0.1:9000/cts/have_i_been_pwned_threat_service'
         curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"email.header",
         "value":"test@example.com"}' 'http://127.0.0.1:9000/cts/have_i_been_pwned_threat_service'
-        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"email.header.sender_address",
+        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"email.header.to",
         "value":"safe@email2.com"}' 'http://127.0.0.1:9000/cts/have_i_been_pwned_threat_service'
 
     """
@@ -33,7 +33,7 @@ class HaveIBeenPwnedSearcher(BaseComponent):
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("have_i_been_pwned_threat_service")
 
-    # Handle lookups for artifacts of type 'email sender'
+    # Handle lookups for artifacts of type 'email sender' and 'email receiver
     @handler("email.header", "email.header.to")
     def _lookup_email_sender(self, event, *args, **kwargs):
         # event.artifact is a ThreatServiceArtifactDTO
