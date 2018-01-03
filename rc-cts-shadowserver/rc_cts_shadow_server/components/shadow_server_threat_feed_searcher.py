@@ -42,6 +42,9 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
             "hash.md5": "md5",
             "hash.sha1": "sha1"
         }
+
+        self.data_to_ignore =["md5", "sha1", "sha256", "sha512"]
+
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("shadow_server_threat_feed")
 
@@ -60,11 +63,11 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
         # Check that the event matches an artifact type that we want to search in Shadow Server
         if artifact_type not in self.allowed_artifacts:
             # Nothing to do
-            LOG.info("Shadow Server lookup not implemented for %s", artifact_type)
+            LOG.info("Shadow Server lookup not implemented for {0}".format(artifact_type))
             return
 
-        LOG.info("Shadow Server lookup started for Artifact Type {0} - Artifact Value {1}",
-                 artifact_type, artifact_value)
+        LOG.info("Shadow Server lookup started for Artifact Type {0} - Artifact Value {1}"
+                 .format(artifact_type, artifact_value))
 
         hits = self._query_shadow_server(artifact_type, artifact_value)
 
@@ -82,7 +85,8 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
                 resp_json = json.loads(response.text.replace(artifact_value, "", 1))
                 hit = Hit()
                 for attribute, value in resp_json.iteritems():
-                    hit.append(StringProp(name=attribute, value=value))
+                    if attribute not in self.data_to_ignore:
+                        hit.append(StringProp(name=attribute, value=value))
 
                 # Return zero or more hits.  Here's one example.
                 hits.append(hit)
