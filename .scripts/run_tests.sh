@@ -13,7 +13,7 @@ match_second=$( IFS='|'; echo "${must_run_second[*]}" );
 
 
 echo "$match";
-toxfiles=(`find . -type f -name 'tox.ini'`);
+toxfiles=(`find .. -type f -name 'tox.ini'`);
 first_runs=();
 second_runs=();
 third_runs=();
