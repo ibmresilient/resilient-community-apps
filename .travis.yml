@@ -35,7 +35,7 @@ before_script:
   - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
 
 script:
-- ./scripts/build_packages.sh && ./scripts/run_tests.sh
+- .scripts/build_packages.sh && .scripts/run_tests.sh
 
 after_script:
   - echo "Packages To Deploy"
