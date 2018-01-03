@@ -2,7 +2,7 @@
 
 # Build all packages
 
-setup_files=(`find . -type f -name 'setup.py'`);
+setup_files=(`find .. -type f -name 'setup.py'`);
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 echo "Building these packages:";
