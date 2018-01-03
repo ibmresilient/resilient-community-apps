@@ -35,17 +35,17 @@ before_script:
   - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
 
 script:
-- ./build_packages.sh && ./run_tests.sh
+- .scripts/build_packages.sh && .scripts/run_tests.sh
 
 after_script:
   - echo "Packages To Deploy"
-  - ls -l *.tar.gz
+  - ls -l ./scripts/*.tar.gz
 
 deploy:
   provider: releases
   api_key: "$GITHUB_OAUTH_TOKEN"
   file_glob: true
-  file: ./rc-*.tar.gz
+  file: ./scripts/rc-*.tar.gz
   skip_cleanup: true
   on:
     tags: true
