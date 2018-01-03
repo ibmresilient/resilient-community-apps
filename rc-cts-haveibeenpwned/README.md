@@ -8,6 +8,7 @@ Run with: `resilient-circuits run`.
 
 To register this custom threat service with Resilient:
 ```
-    sudo resutil threatserviceedit -name "Have I Been Pwned"  -resturl http://10.10.10.1:9000/cts/have_i_been_pwned_threat_service
+    sudo resutil threatserviceedit -name "Have I Been Pwned"
+     -resturl <resilient_circuits_url>:9000/cts/have_i_been_pwned_threat_service
     sudo resutil threatservicetest -name "Have I Been Pwned"
 ```

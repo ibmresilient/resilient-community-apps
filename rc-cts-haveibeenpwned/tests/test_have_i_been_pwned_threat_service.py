@@ -29,7 +29,7 @@ class TestHaveIBeenPwnedCustomThreatService(object):
         # put artifact hit data in cache so correct code is returned
         r = requests.post(SERVICE_URL, artifact)
         assert r.status_code == 303
-        time.sleep(1)
+        time.sleep(2)
         response = requests.post(SERVICE_URL, artifact)
         assert response.status_code == 200
         content = json.loads(response.text)
@@ -50,7 +50,7 @@ class TestHaveIBeenPwnedCustomThreatService(object):
         #put artifact hit data in cache so correct code is returned
         r = requests.post(SERVICE_URL, artifact)
         assert r.status_code == 303
-        time.sleep(1)
+        time.sleep(2)
         response = requests.post(SERVICE_URL, artifact)
         assert response.status_code == 200
         content = json.loads(response.text)
