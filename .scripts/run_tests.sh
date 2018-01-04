@@ -7,25 +7,36 @@ must_run_first=( rc-query-runner rc-webserver);
 match=$( IFS='|'; echo "${must_run_first[*]}" );
 
 
+# Some package must be run second b/c others depend on them and they depend on ones run first, list them here
+must_run_second=( rc-cts/ );
+match_second=$( IFS='|'; echo "${must_run_second[*]}" );
+
+
 echo "$match";
 toxfiles=(`find .. -type f -name 'tox.ini'`);
 first_runs=();
 second_runs=();
+third_runs=();
 for i in ${!toxfiles[@]};
 do
     #echo "look for " ${toxfiles[$i]} " in " $match;
     if [[ ${toxfiles[$i]} =~ $match ]]
     then
       first_runs+=(${toxfiles[$i]});
-    else
+    elif [[ ${toxfiles[$i]} =~ $match_second ]]
+    then
       second_runs+=(${toxfiles[$i]});
+    else
+      third_runs+=(${toxfiles[$i]});
     fi
 done;
 echo "Running these first:";
 printf '  %s\n' "${first_runs[@]}";
 echo "Running these second:";
 printf '  %s\n' "${second_runs[@]}";
-toxfiles=("${first_runs[@]}" "${second_runs[@]}");
+echo "Running these third:";
+printf '  %s\n' "${third_runs[@]}";
+toxfiles=("${first_runs[@]}" "${second_runs[@]}" "${third_runs[@]}");
 
 status=0;
 for toxfile in ${toxfiles[@]};
