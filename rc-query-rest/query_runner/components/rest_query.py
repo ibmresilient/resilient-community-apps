@@ -6,6 +6,7 @@ import json
 import requests
 from string import Template
 from pkg_resources import Requirement, resource_filename
+from circuits.six import string_types as string_types
 from resilient import SimpleHTTPException
 import resilient_circuits.template_functions as template_functions
 from query_runner.lib.query_action import QueryRunner
@@ -67,6 +68,8 @@ def rest_call(options, query_definition, event_message):
 
     # HTTP post body can be set in 'vars'
     http_body = query_definition.vars.get("http-body")
+    if isinstance(http_body, string_types):
+        http_body = json.loads(http_body)
     LOG.debug("HTTP body: %s", http_body)
 
     session = requests.Session()
