@@ -5,7 +5,7 @@ import logging
 import json
 import requests
 from circuits import BaseComponent, handler
-from rc_cts import searcher_channel, Hit, UriProp, NumberProp
+from rc_cts import searcher_channel, Hit, UriProp, NumberProp, ThreatLookupIncompleteException
 
 
 LOG = logging.getLogger(__name__)
@@ -65,11 +65,13 @@ class HaveIBeenPwnedSearcher(BaseComponent):
                         UriProp(name="View data from Have I Been Pwned", value=url)
                     )
                 )
+                return hits
             # 404 is returned when an email was not found
             elif response.status_code == 404:
                 LOG.info("No hit information found on email address: {0}".format(artifact_value))
+                return hits
             else:
                 LOG.warn("Have I Been pwned returned expected status code")
+                raise ThreatLookupIncompleteException()
         except BaseException as e:
             LOG.exception(e.message)
-        return hits
