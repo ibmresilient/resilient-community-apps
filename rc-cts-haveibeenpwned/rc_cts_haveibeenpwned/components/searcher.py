@@ -4,6 +4,7 @@
 import logging
 import json
 import requests
+import time
 from circuits import BaseComponent, handler
 from rc_cts import searcher_channel, Hit, UriProp, NumberProp, ThreatLookupIncompleteException
 
@@ -48,30 +49,36 @@ class HaveIBeenPwnedSearcher(BaseComponent):
 
     def _query_hibp_api(self, artifact_value):
         hits = []
-        try:
-            # Return zero or more hits.  Here's one example.
-            url = "{0}/{1}".format(self.HAVE_I_BEEN_PWNED_URL, artifact_value)
-            response = requests.get(url)
+        retry = True
+        while(retry):
+            try:
+                # Return zero or more hits.  Here's one example.
+                url = "{0}/{1}".format(self.HAVE_I_BEEN_PWNED_URL, artifact_value)
+                response = requests.get(url, headers={'User-Agent': 'Resilient HIBP CTS'})
 
-            if response.status_code == 200:
-                content = json.loads(response.text)
-                breaches = content["Breaches"]
-                pastes = content["Pastes"]
+                if response.status_code == 200:
+                    content = json.loads(response.text)
+                    breaches = content["Breaches"]
+                    pastes = content["Pastes"]
 
-                hits.append(
-                    Hit(
-                        NumberProp(name="Breached Sites", value=len(breaches)),
-                        NumberProp(name="Pastes", value=len(pastes)),
-                        UriProp(name="View data from Have I Been Pwned", value=url)
+                    hits.append(
+                        Hit(
+                            NumberProp(name="Breached Sites", value=len(breaches)),
+                            NumberProp(name="Pastes", value=len(pastes)),
+                            UriProp(name="View data from Have I Been Pwned", value=url)
+                        )
                     )
-                )
-                return hits
-            # 404 is returned when an email was not found
-            elif response.status_code == 404:
-                LOG.info("No hit information found on email address: {0}".format(artifact_value))
-                return hits
-            else:
-                LOG.warn("Have I Been pwned returned expected status code")
-                raise ThreatLookupIncompleteException()
-        except BaseException as e:
-            LOG.exception(e.message)
+                    return hits
+                # 404 is returned when an email was not found
+                elif response.status_code == 404:
+                    LOG.info("No hit information found on email address: {0}".format(artifact_value))
+                    return hits
+                elif response.status_code == 429:
+                    # Rate limit was hit, wait 2 seconds and try again
+                    time.sleep(2)
+                else:
+                    LOG.warn("Have I Been pwned returned expected status code")
+                    retry = False
+                    raise ThreatLookupIncompleteException()
+            except BaseException as e:
+                LOG.exception(e.message)
