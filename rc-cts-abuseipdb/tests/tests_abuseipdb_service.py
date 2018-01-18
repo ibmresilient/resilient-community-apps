@@ -6,7 +6,7 @@ import logging
 import time
 import rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher
 
-SERVICE_URL = "https://integration-v290-2-01.internal.resilientsystems.com:9000/cts/abuseipdb_threat_feed"
+SERVICE_URL = "http://localhost:9000/cts/abuseipdb_threat_feed"
 
 config_data = rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher.config_section_data()
 
