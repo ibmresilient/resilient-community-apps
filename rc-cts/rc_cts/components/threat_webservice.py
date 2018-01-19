@@ -227,7 +227,7 @@ class CustomThreatService(BaseController):
             LOG.debug(body)
         except ValueError as e:
             # Can't decode JSON.
-            err = "Can't handle request: {}".format(e.message)
+            err = "Can't handle request: {}".format(e)
             LOG.warn(err)
             LOG.debug(value)
             return response_object
