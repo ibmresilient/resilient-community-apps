@@ -213,14 +213,31 @@ class CustomThreatService(BaseController):
         cts_channel = searcher_channel(*args)
 
         value = request.body.getvalue()
-        if not value:
-            # TODO return success?
-            raise Exception("Empty request")
-
-        body = json.loads(value.decode("utf-8"))
-        LOG.debug(body)
-
         # Generate a request ID, derived from the artifact being requested.
+        request_id = str(uuid5(self.namespace, value))
+        response_object = {"id": request_id, "hits": []}
+
+        if not value:
+            err = "Empty request"
+            LOG.warn(err)
+            return response_object
+
+        try:
+            body = json.loads(value.decode("utf-8"))
+            LOG.debug(body)
+        except ValueError as e:
+            # Can't decode JSON.
+            err = "Can't handle request: {}".format(e.message)
+            LOG.warn(err)
+            LOG.debug(value)
+            return response_object
+
+        if not isinstance(body, dict):
+            # Valid JSON but not a valid request.
+            err = "Invalid request: {}".format(json.dumps(body))
+            LOG.warn(err)
+            return response_object
+
         request_id = str(uuid5(self.namespace, json.dumps(body)))
         artifact_type = body.get("type", "unknown")
         artifact_value = body.get("value")
