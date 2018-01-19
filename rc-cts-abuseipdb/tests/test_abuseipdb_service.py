@@ -8,7 +8,11 @@ import rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher
 
 SERVICE_URL = "http://localhost:9000/cts/abuseipdb_threat_feed"
 
-config_data = rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher.config_section_data()
+config_data = """[abuseipdb_cts]
+abuseipdb_url=https://www.abuseipdb.com/check
+abuseipdb_key=$TEST_RESILIENT_ABUSE_IP_DB_KEY
+ignore_white_listed=True
+"""
 
 
 class TestAbuseIPDBCustomThreatService(object):
@@ -38,7 +42,7 @@ class TestAbuseIPDBCustomThreatService(object):
         content = json.loads(response.text)
 
         # assert if hit where found
-        assert len(content["hits"]) > 0
+        assert len(content["hits"]) == 0
 
     def test_check_no_hit(self, circuits_app):
         """Verify no hit is returned"""
