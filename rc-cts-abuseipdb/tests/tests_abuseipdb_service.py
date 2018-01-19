@@ -26,22 +26,9 @@ class TestAbuseIPDBCustomThreatService(object):
         response = requests.options(SERVICE_URL)
         assert response.status_code == 200
 
-    def test_check_for_hit(self, circuits_app):
-        """Verify hit is returned on unsafe email"""
-        artifact = json.dumps({"type": "net.ip", "value": "91.200.12.212"})
-        # put artifact hit data in cache so correct code is returned
-        r = requests.post(SERVICE_URL, artifact)
-        assert r.status_code == 303
-        time.sleep(2)
-        response = requests.post(SERVICE_URL, artifact)
-        assert response.status_code == 200
-        content = json.loads(response.text)
-
-        # assert if hit where found
-        assert len(content["hits"]) > 0
 
     def test_check_no_hit(self, circuits_app):
-        """Verify no hit is returned on safe email"""
+        """Verify no hit is returned"""
         artifact = json.dumps({"type": "net.ip", "value": "8.8.8.8"})
         r = requests.post(SERVICE_URL, artifact)
         assert r.status_code == 303
