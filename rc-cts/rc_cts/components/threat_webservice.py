@@ -36,7 +36,7 @@ Searchers register to a single path, e.g. '/cts/gsb' for the Google Safe Browsin
 import json
 import logging
 from collections import namedtuple
-from uuid import UUID, uuid5
+from uuid import UUID, uuid4, uuid5
 from cachetools import TTLCache
 from pkg_resources import Requirement, resource_filename
 from rc_webserver.web import exposeWeb
@@ -213,14 +213,11 @@ class CustomThreatService(BaseController):
         cts_channel = searcher_channel(*args)
 
         value = request.body.getvalue()
-        # Generate a request ID, derived from the artifact being requested.
-        request_id = str(uuid5(self.namespace, value))
-        response_object = {"id": request_id, "hits": []}
 
         if not value:
             err = "Empty request"
             LOG.warn(err)
-            return response_object
+            return {"id": str(uuid4()), "hits": []}
 
         try:
             body = json.loads(value.decode("utf-8"))
@@ -230,14 +227,15 @@ class CustomThreatService(BaseController):
             err = "Can't handle request: {}".format(e)
             LOG.warn(err)
             LOG.debug(value)
-            return response_object
+            return {"id": str(uuid4()), "hits": []}
 
         if not isinstance(body, dict):
             # Valid JSON but not a valid request.
             err = "Invalid request: {}".format(json.dumps(body))
             LOG.warn(err)
-            return response_object
-
+            return {"id": str(uuid4()), "hits": []}
+        
+        # Generate a request ID, derived from the artifact being requested.
         request_id = str(uuid5(self.namespace, json.dumps(body)))
         artifact_type = body.get("type", "unknown")
         artifact_value = body.get("value")
