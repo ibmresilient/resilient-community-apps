@@ -70,6 +70,13 @@ def config_section_data():
         return section_config_file.read()
 
 
+class ThreatLookupIncompleteException(Exception):
+    """
+    A custom threat service searcher can raise this exception if they do not yet have full results
+    due to an intermittent condition, and the searcher will be called again later.
+    """
+
+
 class ThreatServiceLookupEvent(Event):
     """
     An event fired to lookup an artifact.
@@ -330,19 +337,26 @@ class CustomThreatService(BaseController):
         # the results can be a single value (dict), or an array, or None,
         # or an exception, or a tuple (type, exception, traceback)
         hits = []
+        complete = True
         if isinstance(results, list):
             for result in results:
                 if result:
-                    if isinstance(result, (tuple, Exception)):
+                    if isinstance(result, (tuple, ThreatLookupIncompleteException)):
+                        LOG.info("Retry later!")
+                        complete = False
+                    elif isinstance(result, (tuple, Exception)):
                         LOG.error("No hits due to exception")
                     else:
                         hits.append(result)
         elif results:
-            if isinstance(results, (tuple, Exception)):
+            if isinstance(results, (tuple, ThreatLookupIncompleteException)):
+                LOG.info("Retry later!")
+                complete = False
+            elif isinstance(results, (tuple, Exception)):
                 LOG.error("No hits due to exception")
             else:
                 hits.append(results)
 
-        # Store the result and mark as complete
+        # Store the result and mark as complete (or not)
         cache_key = (cts_channel, request_id)
-        self.cache[cache_key] = {"id": request_id, "artifact": artifact, "hits": hits, "complete": True}
+        self.cache[cache_key] = {"id": request_id, "artifact": artifact, "hits": hits, "complete": complete}
