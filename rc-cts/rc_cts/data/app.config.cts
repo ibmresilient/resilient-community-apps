@@ -12,6 +12,7 @@ urlbase=/cts
 # Retry time indicators
 #first_retry_secs=5
 #later_retry_secs=60
+#max_retries=60
 
 # Cache management
 #cache_size=10000
