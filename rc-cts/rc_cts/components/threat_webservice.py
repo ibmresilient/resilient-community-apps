@@ -178,7 +178,7 @@ class CustomThreatService(BaseController):
         # TTL of the request cache (millis before we give up on a request lookup)
         self.cache_ttl = int(self.options.get(CONFIG_CACHE_TTL.key, CONFIG_CACHE_TTL.default))
 
-        # TTL of the request cache (millis before we give up on a request lookup)
+        # Limit to the number of queries we'll answer for unfinished searchers (count before giving up on them)
         self.max_retries = int(self.options.get(CONFIG_MAX_RETRIES.key, CONFIG_MAX_RETRIES.default))
 
         # IDs and their results are maintained in a cache so that we can set
