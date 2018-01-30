@@ -7,6 +7,7 @@
     "query": {
         "parameters": {
             "search_base": "{{options.search_base}}"
+            "attributes": "{{options.attributes}}"
         },
         "expression": "(&(objectClass=person)(sAMAccountName={{artifact.value|ldap}}))",
         "extract_results_from": "entries"
