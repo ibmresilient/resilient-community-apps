@@ -5,10 +5,8 @@ import json
 import logging
 import traceback
 
-import resilient_circuits.template_functions as template_functions
 from circuits import BaseComponent, handler
-from jinja2 import FileSystemLoader, Environment
-from rc_cts import searcher_channel
+from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, ThreatServiceLookupEvent
 from rc_cts.components.threat_webservice import ThreatServiceLookupEvent
 
 import pyeti
@@ -22,13 +20,10 @@ def config_section_data():
 
     config_result = """
 [yeti]
-urlbase=http://9.70.194.30:5000/api
+urlbase=http://yeti-server:5000/api
 username=yeti
 password=
-api_key=e9ebc8358de715ccf8a060d313408d65f840a6cd981433f3aadd83ba2015d24ca522c0d473222a98
-# Directory to load jinja templates from
-template_dir=/usr/local/lib/python2.7/site-packages/rc_cts_yeti/data/jinja
-
+api_key=api_key_value
     """
     return config_result
 
@@ -39,10 +34,8 @@ class YetiThreatFeedSearcher(BaseComponent):
 
        Test using 'curl':
            curl -v -X OPTIONS 'http://127.0.0.1:9000/cts/yeti_threat_service'
-           curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"email.header",
-           "value":"test@example.com"}' 'http://127.0.0.1:9000/cts/yeti_threat_service'
-           curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"email.header.to",
-           "value":"safe@email2.com"}' 'http://127.0.0.1:9000/cts/yeti_threat_service'
+           curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.ip",
+           "value":"11.11.11.11"}' 'http://127.0.0.1:9000/cts/yeti_threat_service'
 
     """
     channel = searcher_channel("yeti_threat_service")
@@ -58,17 +51,6 @@ class YetiThreatFeedSearcher(BaseComponent):
 
         self.yeti_client = pyeti.YetiApi(url, (username, password), api_key)
 
-        # init jinja
-        # get the installed template folder
-        # check if the config has an override set
-        template_dir = self.options.get("template_dir")
-        if not template_dir:
-            raise Exception('template_dir config setting is required')
-        LOG.info('Using template directory:' + template_dir)
-        self.jinja_env = Environment(loader=FileSystemLoader(template_dir),
-                                     extensions=['jinja2.ext.do'])
-        self.jinja_env.filters.update(template_functions.JINJA_FILTERS)
-
     @handler()
     def lookup_artifact(self, event, *args, **kwargs):
         """
@@ -79,6 +61,7 @@ class YetiThreatFeedSearcher(BaseComponent):
         if not isinstance(event, ThreatServiceLookupEvent):
             return
 
+        hits = []
         LOG.info("Querying YETI")
 
         artifact = event.artifact
@@ -97,15 +80,27 @@ class YetiThreatFeedSearcher(BaseComponent):
             raise e
 
         if not indicators or len(indicators) < 1:
-            return []
+            return hits
 
-        my_template = self.jinja_env.get_template('yeti_indicator.json.jinja')
-        indicator_result = my_template.render(artifact=artifact,
-                                              indicator_list=indicators,
-                                              yeti_client=self.yeti_client)
-        LOG.debug(indicator_result)
+        tags = ""
+        for tag in indicators[0]["tags"]:
+            if tags != "":
+                tags += ", "
+            tags += tag["name"]
+
+        description = indicators[0]["description"] if indicators[0]["description"] else "None"
         try:
-            return json.loads(indicator_result)
+            hits.append(
+                Hit(
+                    StringProp(name="Type", value=indicators[0]["type"]),
+                    StringProp(name="Value", value=indicators[0]["value"]),
+                    StringProp(name="Tags", value=tags),
+                    StringProp(name="Created", value=indicators[0]["created"]),
+                    UriProp(name="URL", value=indicators[0]["human_url"]),
+                    StringProp(name="Description", value=description)
+                )
+            )
+            return hits
         except Exception as e:
             LOG.error(traceback.format_exc())
             raise e

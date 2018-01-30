@@ -11,7 +11,6 @@ setup(
     author='IBM Resilient',
     install_requires=[
         'rc-cts',
-        'pyeti'
     ],
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Custom Threat Service for YETI",

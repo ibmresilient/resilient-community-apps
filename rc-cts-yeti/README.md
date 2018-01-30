@@ -1,6 +1,8 @@
 # YETI
 
-This implements a custom threat service for Yeti
+This implements a custom threat service for YETI.
+
+YETI URL https://yeti-platform.github.io/
 
 Install this package with 'pip', or `python setup.py install`.
 Run with: `resilient-circuits run`.

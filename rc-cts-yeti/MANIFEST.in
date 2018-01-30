@@ -1,3 +1,3 @@
 include README.md
+include rc_cts_yeti/*
 include rc_cts_yeti/LICENSE
-include rc_cts_yeti/data/jinja/*
