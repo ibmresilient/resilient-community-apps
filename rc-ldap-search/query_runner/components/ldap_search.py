@@ -79,7 +79,8 @@ def run_search(options, query_definition, event_message):
     ldap_attributes = ldap3.ALL_ATTRIBUTES
     return_empty_attributes = True
     if query_definition_attributes and query_definition_attributes is not None:
-        ldap_attributes = ast.literal_eval(query_definition_attributes)
+        attributes = query_definition_attributes.split(',')
+        ldap_attributes = [str(attr) for attr in attributes]
         return_empty_attributes = False
 
     # Connect to the LDAP server

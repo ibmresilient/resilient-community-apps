@@ -15,4 +15,4 @@ auth=SIMPLE
 ssl=False
 
 search_base=dc=example,dc=com
-#attributes=['cn','sn', 'sAMAccountName']
+#attributes=cn,sn,sAMAccountName
