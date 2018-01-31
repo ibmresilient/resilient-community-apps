@@ -8,13 +8,6 @@ import logging
 
 SERVICE_URL = "http://localhost:9000/cts/yeti"
 
-config_data = """
-[yeti]
-urlbase=http://resilient:5000/api
-template_dir=../rc_cts_yeti/data/jinja
-"""
-
-print(config_data)
 
 class TestCustomThreatService(object):
     """ System tests """
