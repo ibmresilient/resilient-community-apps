@@ -8,10 +8,9 @@ import json
 from string import Template
 import resilient_circuits.template_functions as template_functions
 from query_runner.lib.query_action import QueryRunner
-from query_runner.lib.misc import SearchTimeout, SearchFailure
 import ldap3
-from ldap3 import Server, Connection
-from ldap3.utils.conv import escape_bytes
+from ldap3 import Server, Connection, STRING_TYPES
+import ast
 try:
     basestring
 except NameError:
@@ -75,18 +74,28 @@ def run_search(options, query_definition, event_message):
     if search_base is None:
         raise Exception("LDAP query requires 'search_base' parameter")
 
+    query_definition_attributes = query_definition.params.get("attributes")
+
+    ldap_attributes = ldap3.ALL_ATTRIBUTES
+    return_empty_attributes = True
+    if query_definition_attributes and query_definition_attributes is not None:
+        attributes = query_definition_attributes.split(',')
+        ldap_attributes = [str(attr) for attr in attributes]
+        return_empty_attributes = False
+
     # Connect to the LDAP server
     LOG.debug("LDAP connect")
     with Connection(client_ad_server,
                     user=client_ad_creds[0],
                     password=client_ad_creds[1],
                     authentication=client_ad_creds[2],
-                    auto_bind=True) as conn:
+                    auto_bind=True,
+                    return_empty_attributes=return_empty_attributes) as conn:
 
-        LOG.debug("LDAP search {0} / {1}".format(search_base, query_definition.query))
+        LOG.debug("LDAP search {0} / {1} / {2}".format(search_base, query_definition.query, ldap_attributes))
         conn.search(search_base,
                     query_definition.query,
-                    attributes=ldap3.ALL_ATTRIBUTES)
+                    attributes=ldap_attributes)
 
         entries = conn.entries
         if entries is None:

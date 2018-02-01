@@ -58,6 +58,7 @@ CONFIG_FIRST_RETRY_SECS = ConfigKey(key="first_retry_secs", default=0)
 CONFIG_LATER_RETRY_SECS = ConfigKey(key="later_retry_secs", default=0)
 CONFIG_CACHE_SIZE = ConfigKey(key="cache_size", default=10000)
 CONFIG_CACHE_TTL = ConfigKey(key="cache_ttl", default=600)
+CONFIG_MAX_RETRIES = ConfigKey(key="max_retries", default=60)
 
 HELPER_CHANNEL = "threat_lookup_helper"
 LOOKUP_COMPLETE_CHANNEL = "threat_lookup_complete"
@@ -129,7 +130,11 @@ class CustomThreatServiceHelper(BaseComponent):
         """
         if not isinstance(event, ThreatServiceLookupEvent):
             return
-        self.maincomponent.fire(event, event.cts_channel)
+        try:
+            LOG.info("helper: %s, %s", event, event.cts_channel)
+            self.maincomponent.fire(event, event.cts_channel)
+        except:
+            LOG.exception("Failed to dispatch event")
 
 
 def _make_args(opts):
@@ -172,6 +177,9 @@ class CustomThreatService(BaseController):
         self.cache_size = int(self.options.get(CONFIG_CACHE_SIZE.key, CONFIG_CACHE_SIZE.default))
         # TTL of the request cache (millis before we give up on a request lookup)
         self.cache_ttl = int(self.options.get(CONFIG_CACHE_TTL.key, CONFIG_CACHE_TTL.default))
+
+        # Limit to the number of queries we'll answer for unfinished searchers (count before giving up on them)
+        self.max_retries = int(self.options.get(CONFIG_MAX_RETRIES.key, CONFIG_MAX_RETRIES.default))
 
         # IDs and their results are maintained in a cache so that we can set
         # an upper bound on the number of in-progress and recent lookups.
@@ -312,10 +320,22 @@ class CustomThreatService(BaseController):
             # The searchers haven't finished yet, return partial hits if available
             response.status = 303
             response_object["retry_secs"] = self.later_retry_secs
+
+            # Update the counter, so we can detect "stale" failures
+            request_data["count"] = request_data.get("count", 0) + 1
+            if request_data["count"] > self.max_retries:
+                LOG.info("Exceeded max retries for {}".format(cache_key))
+                try:
+                    self.cache.pop(cache_key)
+                except KeyError:
+                    pass
+                response.status = 200
+                return response_object
+
             return response_object
 
         # Remove the result from cache
-        # self.cache.pop(request_id)
+        # self.cache.pop(cache_key)
 
         return response_object
 
