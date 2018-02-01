@@ -1,9 +1,29 @@
-To install the threat service with your Resilient server
-    (assuming that resilient-circuits application is running on the same server):
-        sudo resutil threatserviceedit -name "Shadow Server" -resturl http://127.0.0.1:9000/cts/shadow_server_threat_feed
-        
+ShadowServer Threat Service
+=============
+
+This CTS pulls data from ShadowServer(http://bin-test.shadowserver.org/) and fill Resilient with info about a hash artifact.
+
+## Environment
+
+This package requires that it is installed on a RHEL platform and that the resilient-circuits application is running.
+Install this package with 'pip', or `python setup.py install`.
+Run with: `resilient-circuits run`.
+
+## Setup
+Install the threat service:
+
+'''
+sudo resutil threatserviceedit -name "Shadow Server" -resturl <resilient_circuits_url>cts/shadow_server_threat_feed
+'''
+
 To test the connection:
-        sudo resutil threatservicetest -name "Shadow Server"
-        
+
+'''
+sudo resutil threatservicetest -name "Shadow Server"
+'''
+
 To delete:
-        sudo resutil threatservicedel -name "Shadow Server"
+
+'''
+sudo resutil threatservicedel -name "Shadow Server"
+'''
