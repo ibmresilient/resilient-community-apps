@@ -1,8 +1,8 @@
 AbuseIPDB Threat Service
 =============
 
-This CTS pulls data from AbuseIPDB(www.abuseipdb.com) and check if an IP artifact is blacklisted.
-This CTS needs an account and an api key from AbuseIPDB to work.
+This CTS pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted.
+This CTS needs an AbuseIPDB account and an api key to work.
 
 ## Environment
 
@@ -13,19 +13,19 @@ Run with: `resilient-circuits run`.
 ## Setup
 Install the threat service:
 
-'''
+```
 sudo resutil threatserviceedit -name "AbuseIPDB" -resturl <resilient_circuits_url>cts/abuseipdb_threat_feed
-'''
+```
 
 To test the connection:
 
-'''
+```
 sudo resutil threatservicetest -name "AbuseIPDB"
-'''
+```
 
 To delete:
 
-'''
+```
 sudo resutil threatservicedel -name "AbuseIPDB"
-'''
-=======
+```
+
