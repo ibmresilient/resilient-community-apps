@@ -1,7 +1,7 @@
 ShadowServer Threat Service
 =============
 
-This CTS pulls data from ShadowServer(http://bin-test.shadowserver.org/) and fill Resilient with info about a hash artifact.
+This CTS queries ShadowServer (http://bin-test.shadowserver.org/) and updates Resilient with information about a hash artifact.
 
 ## Environment
 
@@ -12,18 +12,18 @@ Run with: `resilient-circuits run`.
 ## Setup
 Install the threat service:
 
-'''
-sudo resutil threatserviceedit -name "Shadow Server" -resturl <resilient_circuits_url>cts/shadow_server_threat_feed
-'''
+```
+sudo resutil threatserviceedit -name "Shadow Server" -resturl <resilient_circuits_url>/cts/shadow_server_threat_feed
+```
 
 To test the connection:
 
-'''
+```
 sudo resutil threatservicetest -name "Shadow Server"
-'''
+```
 
 To delete:
 
-'''
+```
 sudo resutil threatservicedel -name "Shadow Server"
-'''
+```
