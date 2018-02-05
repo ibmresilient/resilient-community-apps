@@ -14,7 +14,7 @@ Run with: `resilient-circuits run`.
 Install the threat service:
 
 ```
-sudo resutil threatserviceedit -name "AbuseIPDB" -resturl <resilient_circuits_url>cts/abuseipdb_threat_feed
+sudo resutil threatserviceedit -name "AbuseIPDB" -resturl <resilient_circuits_url>/cts/abuseipdb_threat_feed
 ```
 
 To test the connection:
