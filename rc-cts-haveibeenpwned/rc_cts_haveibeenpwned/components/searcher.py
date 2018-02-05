@@ -59,7 +59,11 @@ class HaveIBeenPwnedSearcher(BaseComponent):
                 if response.status_code == 200:
                     content = json.loads(response.text)
                     breaches = content["Breaches"]
+                    if breaches is None:
+                        breaches = []
                     pastes = content["Pastes"]
+                    if pastes is None:
+                        pastes = []
 
                     hits.append(
                         Hit(
