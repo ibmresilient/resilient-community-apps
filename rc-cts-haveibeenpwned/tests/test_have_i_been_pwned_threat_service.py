@@ -56,3 +56,24 @@ class TestHaveIBeenPwnedCustomThreatService(object):
         content = json.loads(response.text)
         #assert no hit objects
         assert len(content["hits"]) == 0
+
+    def test_check_hit_no_pastes(self, circuits_app):
+        """Verify hit is returned if no pastes are found on email"""
+        artifact = json.dumps({"type": "email.header.to", "value": "a1@example.com"})
+        # put artifact hit data in cache so correct code is returned
+        r = requests.post(SERVICE_URL, artifact)
+        assert r.status_code == 303
+        time.sleep(2)
+        response = requests.post(SERVICE_URL, artifact)
+        assert response.status_code == 200
+        content = json.loads(response.text)
+        # assert hit is returned
+        assert len(content["hits"]) == 1
+        props = content["hits"][0]["props"]
+        p = 0
+        while True:
+            if props[p]["name"] == "Pastes":
+                props = props[p]
+                break
+            p = p + 1
+        assert props["value"] == "0"
