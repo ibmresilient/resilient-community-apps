@@ -39,13 +39,13 @@ script:
 
 after_script:
   - echo "Packages To Deploy"
-  - ls -l ./scripts/*.tar.gz
+  - ls -l .scripts/*.tar.gz
 
 deploy:
   provider: releases
   api_key: "$GITHUB_OAUTH_TOKEN"
   file_glob: true
-  file: ./scripts/rc-*.tar.gz
+  file: .scripts/rc-*.tar.gz
   skip_cleanup: true
   on:
     tags: true
