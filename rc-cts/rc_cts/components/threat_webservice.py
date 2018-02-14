@@ -239,8 +239,8 @@ class CustomThreatService(BaseController):
         # server may send either, even for cases where there is no file content,
         # so check content-type and decode appropriately.
         try:
-            if "form-data" in request.headers["content-type"]:
-                multipart_data = decoder.MultipartDecoder(value, request.headers["content-type"])
+            if "form-data" in request.headers.get("Content-Type"):
+                multipart_data = decoder.MultipartDecoder(value, request.headers["Content-Type"])
                 body = json.loads(multipart_data.parts[0].text)
                 LOG.debug(body)
             else:
