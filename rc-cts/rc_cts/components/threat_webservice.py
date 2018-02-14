@@ -235,7 +235,9 @@ class CustomThreatService(BaseController):
             LOG.warn(err)
             return {"id": str(uuid4()), "hits": []}
 
-        # if request.headers["content-type"]=="application/json"
+        # Resilient sends artifacts in two formats: multi-part MIME, or plain JSON.
+        # server may send either, even for cases where there is no file content,
+        # so check content-type and decode appropriately.
         try:
             if "form-data" in request.headers["content-type"]:
                 multipart_data = decoder.MultipartDecoder(value, request.headers["content-type"])
