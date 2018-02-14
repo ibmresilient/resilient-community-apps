@@ -44,6 +44,7 @@ from circuits import Event, BaseComponent
 from circuits.web import BaseController
 from circuits.core.handlers import handler
 from rc_cts import searcher_channel
+from requests_toolbelt.multipart import decoder, NonMultipartContentTypeException
 
 
 LOG = logging.getLogger(__name__)
@@ -234,11 +235,18 @@ class CustomThreatService(BaseController):
             LOG.warn(err)
             return {"id": str(uuid4()), "hits": []}
 
+        # Resilient sends artifacts in two formats: multi-part MIME, or plain JSON.
+        # server may send either, even for cases where there is no file content,
+        # so check content-type and decode appropriately.
         try:
-            body = json.loads(value.decode("utf-8"))
-            LOG.debug(body)
-        except ValueError as e:
-            # Can't decode JSON.
+            if "form-data" in request.headers["content-type"]:
+                multipart_data = decoder.MultipartDecoder(value, request.headers["content-type"])
+                body = json.loads(multipart_data.parts[0].text)
+                LOG.debug(body)
+            else:
+                body = json.loads(value.decode("utf-8"))
+                LOG.debug(body)
+        except (ValueError, NonMultipartContentTypeException) as e:
             err = "Can't handle request: {}".format(e)
             LOG.warn(err)
             LOG.debug(value)
