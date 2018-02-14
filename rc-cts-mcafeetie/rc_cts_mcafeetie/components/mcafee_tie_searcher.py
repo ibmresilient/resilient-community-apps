@@ -39,6 +39,9 @@ class McAfeeTieSearcher(BaseComponent):
 
     """
 
+    # Register this as an async searcher for the URL /<root>/mcafee_tie_searcher
+    channel = searcher_channel("mcafee_tie_searcher")
+
     def __init__(self, opts):
         super(McAfeeTieSearcher, self).__init__(opts)
         LOG.debug(opts)
@@ -46,20 +49,17 @@ class McAfeeTieSearcher(BaseComponent):
         config = opts.get("mcafee_tie_cts").get("dxlclient_config")
         if config is None:
             LOG.error("dxlclient_config is not set. You must set this path to run this threat service")
-            raise AssertionError("dxlclient_config is not set. You must set this path to run this threat service")
+            raise ValueError("dxlclient_config is not set. You must set this path to run this threat service")
 
         # Create configuration from file for DxlClient
         self.config = DxlClientConfig.create_dxl_config_from_file(config)
 
-    # Register this as an async searcher for the URL /<root>/mcafee_tie_searcher
-    channel = searcher_channel("mcafee_tie_searcher")
-
-    # Handle lookup for artifacts of type 'md5 hash'
-    @handler("hash.md5")
-    def _lookup_md5_hash(self, event, *args, **kwargs):
-        artifact_type = event.artifact['type']
-        artifact_value = event.artifact['value']
-        LOG.debug("_lookup_md5_hash started for Artifact Type {0} - Artifact Value {1}".format(
+    # Handle lookup for artifacts of type md5, sha1, and sha256 hashes
+    @handler("hash.md5", "hash.sha1", "hash.sha256")
+    def _lookup_hash(self, event, *args, **kwargs):
+        artifact_type = event.artifact["type"]
+        artifact_value = event.artifact["value"]
+        LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}".format(
             artifact_type, artifact_value))
 
         with DxlClient(self.config) as client:
@@ -67,54 +67,19 @@ class McAfeeTieSearcher(BaseComponent):
             client.connect()
             tie_client = TieClient(client)
 
-            reputations_dict = \
-                tie_client.get_file_reputation({
-                    HashType.MD5: artifact_value
-                })
-
-            hits = self._query_mcafee_tie(reputations_dict)
-
-            yield hits
-
-    # Handle lookup for artifacts of type 'sha1 hash'
-    @handler("hash.sha1")
-    def _lookup_sha1_hash(self, event, *args, **kwargs):
-        artifact_type = event.artifact['type']
-        artifact_value = event.artifact['value']
-        LOG.debug("_lookup_sha1_hash started for Artifact Type {0} - Artifact Value {1}".format(
-            artifact_type, artifact_value))
-
-        with DxlClient(self.config) as client:
-            # Connect to the fabric
-            client.connect()
-            tie_client = TieClient(client)
+            if artifact_type == "hash.md5":
+                resilient_hash = {HashType.MD5: artifact_value}
+            elif artifact_type == "hash.sha1":
+                resilient_hash = {HashType.SHA1: artifact_value}
+            elif artifact_type == "hash.sha256":
+                resilient_hash = {HashType.SHA256: artifact_value}
+            else:
+                raise ValueError("Something went wrong setting the hash value")
 
             reputations_dict = \
-                tie_client.get_file_reputation({
-                    HashType.SHA1: artifact_value
-                })
-
-            hits = self._query_mcafee_tie(reputations_dict)
-
-            yield hits
-
-    # Handle looup for artifacts for artifacts of type 'sha256 hash'
-    @handler("hash.sha256")
-    def _lookup_sha256_hash(self, event, *args, **kwargs):
-        artifact_type = event.artifact['type']
-        artifact_value = event.artifact['value']
-        LOG.debug("_lookup_sha256_hash started for Artifact Type {0} - Artifact Value {1}".format(
-            artifact_type, artifact_value))
-
-        with DxlClient(self.config) as client:
-            # Connect to the fabric
-            client.connect()
-            tie_client = TieClient(client)
-
-            reputations_dict = \
-                tie_client.get_file_reputation({
-                    HashType.SHA256: artifact_value
-                })
+                tie_client.get_file_reputation(
+                        resilient_hash
+                )
 
             hits = self._query_mcafee_tie(reputations_dict)
 
