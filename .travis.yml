@@ -29,6 +29,9 @@ install:
   - pip install sphinx
 
 before_script:
+  - git config --list
+  - echo $TEST_RESILIENT_PASSWORD
+  - echo $TEST_RESILIENT_USER
   - git clone -b master --single-branch git@github.ibm.com:Resilient/resilient-python-api.git --depth 1
   - (cd resilient-python-api && ./buildall.sh 999);
   - mkdir pkgs
