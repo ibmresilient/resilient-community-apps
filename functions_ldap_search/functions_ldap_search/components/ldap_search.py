@@ -18,6 +18,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("functions_ldap_search", {})
         self.ldap_port_def = 389
+        self.ldap_port_ssl = 636
         self.ldap_auth_def = "ANONYMOUS"
         self.ldap_auth_types = ["ANONYMOUS", "SIMPLE"]
 
@@ -25,6 +26,26 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("functions_ldap_search", {})
+
+    def get_creds(self):
+        """"Get lDAP credentials"""
+        ldap_user = self.options.get("user", "")
+        ldap_password = self.options.get("password", "")
+        ldap_auth = self.options.get("auth", "")
+
+        if (ldap_user == "" and ldap_password != "") or  (ldap_user != "" and ldap_password == ""):
+            raise Exception("Username and password required to be set as a pair.")
+
+        if ldap_auth.upper() in self.ldap_auth_types:
+            ldap_auth = ldap_auth.upper()
+        elif ldap_user != "" and ldap_password != "":
+            ldap_auth = "SIMPLE"
+        elif ldap_user == "" and ldap_password == "":
+            ldap_auth = "ANONYMOUS"
+        else:
+            ldap_auth = self.ldap_auth_def
+
+        return(ldap_user, ldap_password, ldap_auth)
 
     def str_to_bool(self, str):
         """"Convert unicode string to equivalent boolean value"""
@@ -38,16 +59,20 @@ class FunctionComponent(ResilientComponent):
     def setup_ldap_connection(self):
         """ Setup LDAP server connection """
         # Read the LDAP configuration options
-
         ldap_server = self.options["server"]
         ldap_port = int(self.options["port"] or self.ldap_port_def)
-        ldap_user = self.options["user"]
-        ldap_password = self.options["password"]
-        ldap_use_ssl = self.str_to_bool(self.options["use_ssl"])
-        if self.options["auth"].upper() in self.ldap_auth_types:
-            ldap_auth = self.options["auth"].upper()
+
+        if "use_ssl" in self.options:
+            ldap_use_ssl = self.str_to_bool(self.options["use_ssl"])
         else:
-            ldap_auth = self.ldap_auth_def
+            raise Exception("Credentials parameter 'use_ssl' not set.")
+        if ldap_use_ssl:
+            # Default to encrypted port
+            ldap_port = self.ldap_port_ssl
+        else:
+            ldap_port = int(self.options["port"] or self.ldap_port_def)
+
+        creds = self.get_creds()
 
         try:
             # Create LDAP Server object
@@ -55,10 +80,10 @@ class FunctionComponent(ResilientComponent):
             server = Server(ldap_server, port=ldap_port, get_info=ALL, use_ssl=ldap_use_ssl, connect_timeout=3 )
             # Connect to the LDAP server
 
-            self.connection = Connection(server, user=ldap_user, password=ldap_password, authentication=ldap_auth,
+            self.connection = Connection(server, user=creds[0], password=creds[1], authentication=creds[2],
                                         auto_bind=True, return_empty_attributes=True, raise_exceptions=True)
         except Exception as e:
-            LOG.debug("Could not connect to LDAP server %s, Exception %s", ldap_server, e)
+            raise Exception("Could not connect to LDAP server %s, Exception %s", ldap_server, e)
 
         try:
             self.connection
@@ -99,7 +124,7 @@ class FunctionComponent(ResilientComponent):
 
                 entries = conn.entries
             except Exception as e:
-                LOG.debug("Could not perform a query on LDAP connection got Exception %s",  e)
+                raise Exception("Could not perform a query on LDAP connection got Exception %s",  e)
 
             try:
                 entries
