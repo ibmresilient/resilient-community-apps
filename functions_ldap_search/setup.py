@@ -7,7 +7,7 @@ setup(
     name='functions_ldap_search',
     version='1.0.0',
     license='Resilient License',
-    author='<<your name here>>',
+    author='IBM Resilient',
     author_email='you@example.com',
     description="Resilient Circuits Components for 'functions_ldap_search'",
     long_description="Resilient Circuits Components for 'functions_ldap_search'",

@@ -13,7 +13,6 @@ def config_section_data():
 # LDAP server ip or fully qualified hostname
 server=localhost
 port=389
-#port 636 - LDAP server port set to 636 for encrypted communications
 user=cn=admin,dc=example,dc=com
 password=admin
 auth=SIMPLE
