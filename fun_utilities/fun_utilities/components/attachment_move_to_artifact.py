@@ -16,6 +16,8 @@ class FunctionComponent(ResilientComponent):
     def _attachment_move_to_artifact_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            log = logging.getLogger(__name__)
+
             # Get the function parameters:
             # artifact_file_type:
             # "Email Attachment", "Malware Sample", "Log File", "X509 Certificate File", "Other File", etc.
@@ -24,7 +26,6 @@ class FunctionComponent(ResilientComponent):
             artifact_file_type = self.get_select_param(kwargs.get("artifact_file_type")) or "Malware Sample"
             description = self.get_textarea_param(kwargs.get("description"))  # textarea
 
-            log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_file_type: %s", artifact_file_type)
@@ -39,15 +40,16 @@ class FunctionComponent(ResilientComponent):
             # So, look up the if of the type name
             client = self.rest_client()
             artifact_type_id = 16  # Other File (as default)
-            for value in client.get("/types/artifact/fields/type")["values"]:
+            for value in client.cached_get("/types/artifact/fields/type")["values"]:
                 if artifact_file_type == value["label"]:
                     artifact_type_id = value["value"]
                     break
 
             yield StatusMessage("Reading attachment...")
             metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-            metadata = client.get(metadata_uri)
             data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+
+            metadata = client.get(metadata_uri)
             data = client.get_content(data_uri)
 
             yield StatusMessage("Writing artifact...")
@@ -57,7 +59,7 @@ class FunctionComponent(ResilientComponent):
                     temp_file.close()
                     # Create a new artifact
                     client = self.rest_client()
-                    artifact_uri = "/incidents/{}/artifacts/files".format(incident_id, attachment_id)
+                    artifact_uri = "/incidents/{}/artifacts/files".format(incident_id)
                     new_artifact = client.post_artifact_file(artifact_uri,
                                                              artifact_type_id,
                                                              temp_file.name,

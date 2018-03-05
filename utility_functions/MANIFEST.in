@@ -1,3 +1,0 @@
-include README.md
-include utility_functions/util/*
-include utility_functions/LICENSE

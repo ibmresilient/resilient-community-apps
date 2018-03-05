@@ -4,7 +4,7 @@
 
 import logging
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
