@@ -115,10 +115,11 @@ class FunctionComponent(ResilientComponent):
         Adds the LDAP connection as a class property.
 
         """
-
-        ldap_server = self.options["server"]
+        if "server" in self.options:
+            ldap_server = self.options["server"]
+        else:
+            raise Exception("Mandatory config setting 'server' not set.")
         ldap_port = int(self.options["port"] or LDAP_PORT_DEF)
-
         if "use_ssl" in self.options:
             ldap_use_ssl = self.str_to_bool(self.options["use_ssl"])
         else:
