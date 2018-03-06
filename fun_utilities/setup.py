@@ -30,6 +30,7 @@ setup(
             "AttachmentZipListFunctionComponent = fun_utilities.components.attachment_zip_list:FunctionComponent",
             "Base64ToArtifactFunctionComponent = fun_utilities.components.base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fun_utilities.components.base64_to_attachment:FunctionComponent",
+            "DomainDistanceFunctionComponent = fun_utilities.components.domain_distance:FunctionComponent",
             "WaitFunctionComponent = fun_utilities.components.wait:FunctionComponent",
         ],
         "resilient.circuits.configsection": ["gen_config = fun_utilities.util.config:config_section_data"],
