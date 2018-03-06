@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for functions_ldap_search"""
+"""Generate the Resilient customizations required for fn_ldap_search"""
 
 from __future__ import print_function
 from resilient_circuits.util import *
@@ -71,4 +71,3 @@ def customization_data(client=None):
                     'element': 'field',
                     'field_type': '__function'}]}
     )
-

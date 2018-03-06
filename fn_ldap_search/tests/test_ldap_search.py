@@ -6,7 +6,7 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "functions_ldap_search"
+PACKAGE_NAME = "fn_ldap_search"
 FUNCTION_NAME = "ldap_search"
 
 # Read the default configuration-data section from the package
@@ -40,7 +40,7 @@ class TestLdapSearch:
     ])
     def test_success(self, circuits_app, search_base, search_filter, search_attributes, expected_result):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        function_params = {
             "search_base": search_base,
             "search_filter": search_filter,
             "search_attributes": search_attributes

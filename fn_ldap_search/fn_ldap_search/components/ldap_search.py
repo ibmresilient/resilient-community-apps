@@ -60,12 +60,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("functions_ldap_search", {})
+        self.options = opts.get("fn_ldap_search", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("functions_ldap_search", {})
+        self.options = opts.get("fn_ldap_search", {})
 
     def get_creds(self):
         """"Get lDAP credentials

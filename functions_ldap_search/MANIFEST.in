@@ -1,3 +1,0 @@
-include README.md
-include functions_ldap_search/util/*
-include functions_ldap_search/LICENSE

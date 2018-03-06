@@ -19,7 +19,7 @@ To set the config values in the app.config file run `resilient-circuits config -
 
 Config values example:
 ```
-[functions_ldap_search]
+[fn_ldap_search]
 server=localhost
 port=389
 user=cn=admin,dc=example,dc=com
