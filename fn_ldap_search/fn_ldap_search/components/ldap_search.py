@@ -11,6 +11,8 @@
 
 import logging
 import json
+import re
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import ldap3
 from ldap3 import Server, Connection, ALL
@@ -66,6 +68,18 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_ldap_search", {})
+
+    def update_param_fields(self, param):
+        """"Update %param% fields
+
+        If self.search_params hash has %param% set in any of it's values, update
+        value replacing %param% with actual value from param.
+
+        """
+        for k in self.search_params:
+            if re.search("%param%", self.search_params[k]):
+                self.search_params[k] = re.sub("%param%", param, self.search_params[k])
+                LOG.debug('Transformed parameter '+k+' to '+self.search_params[k])
 
     def get_creds(self):
         """"Get lDAP credentials
@@ -237,9 +251,12 @@ class FunctionComponent(ResilientComponent):
             LOG.info("param: %s", param)
 
             self.search_params = {'search_base': search_base, 'search_filter': search_filter,
-                                  'search_attributes': search_attributes}
+                                  'search_attributes': search_attributes, 'param': param}
 
             yield StatusMessage("Starting...")
+            if param:
+                yield StatusMessage("Updating search parameter fields...")
+                self.update_param_fields(param)
             yield StatusMessage("Setting up LDAP connection...")
             self.setup_ldap_connection()
             yield StatusMessage("Running LDAP query...")
