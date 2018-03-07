@@ -36,8 +36,9 @@ class FunctionComponent(ResilientComponent):
     An example of a set of query parameter might look like the following:
 
             search_base = "dc=example,dc=com"
-            search_filter = "(&(objectClass=person)(|(uid={einstein})(uid=newton)))"
+            search_filter = "(&(objectClass=person)(|(uid={%param%})(uid=newton)))"
             search_attributes = "uid,cn,sn,mail,telephoneNumber"
+            search_attributes = artifact.value # Assigned value 'einstein' during run.
 
     The LDAP lookup will return a result in JSON format with an entry consisting of a dn and a set of
     attributes for each result.
@@ -106,7 +107,6 @@ class FunctionComponent(ResilientComponent):
         Returns a tuple value.
 
         """
-
         ldap_user = self.options.get("user", "")
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
@@ -187,8 +187,11 @@ class FunctionComponent(ResilientComponent):
 
 
     def run_search(self):
-        """ Run LDAP search using input parameters and return result """
+        """ Run LDAP search/query
 
+        Run LDAP search using input parameters and return result.
+
+        """
         results = None
         return_empty_attributes = True
 
@@ -246,7 +249,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("ldap_search")
     def _ldap_search_function(self, event, *args, **kwargs):
-        """Function: """
+        """Resilient Function: entry point """
         try:
             # Get the function parameters:
             search_base = kwargs.get("search_base")  # text
