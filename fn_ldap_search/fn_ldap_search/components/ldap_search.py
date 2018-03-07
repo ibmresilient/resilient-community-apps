@@ -69,6 +69,22 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_ldap_search", {})
 
+    def check_params_set(self):
+        """"Check mandatory fields
+
+        Ensure mandatory fields haven't empty values.
+
+        """
+        if self.search_params is None:
+            raise Exception("LDAP query requires parameters dictionary to be set")
+        if not self.search_params["search_base"]:
+            raise Exception("LDAP query requires 'search_base' parameter to be a non empty value")
+        if not self.search_params["search_filter"]:
+            raise Exception("LDAP query requires 'search_filter' parameter to be a non empty value")
+        if not self.search_params["search_attributes"]:
+            raise Exception("LDAP query requires 'search_attributes' parameter to be non empty value")
+
+
     def update_param_fields(self, param):
         """"Update %param% fields
 
@@ -176,15 +192,8 @@ class FunctionComponent(ResilientComponent):
         results = None
         return_empty_attributes = True
 
-        if self.search_params is None:
-            raise Exception("LDAP query requires 'search_base' parameter")
         search_base = self.search_params.get("search_base")
-        if search_base is None:
-            raise Exception("LDAP query requires 'search_base' parameter")
         search_filter = self.search_params.get("search_filter")
-        if search_filter is None:
-            raise Exception("LDAP query requires 'search_filter' parameter")
-
         search_attributes = self.search_params.get("search_attributes")
 
         if search_attributes and search_attributes is not None:
@@ -254,6 +263,8 @@ class FunctionComponent(ResilientComponent):
                                   'search_attributes': search_attributes, 'param': param}
 
             yield StatusMessage("Starting...")
+            yield StatusMessage("Checking mandatory parameter fields set...")
+            self.check_params_set()
             if param:
                 yield StatusMessage("Updating search parameter fields...")
                 self.update_param_fields(param)
