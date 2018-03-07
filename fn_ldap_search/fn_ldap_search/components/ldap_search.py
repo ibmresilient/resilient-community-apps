@@ -81,14 +81,13 @@ class FunctionComponent(ResilientComponent):
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
 
-        if (ldap_user == "" and ldap_password != "") or  (ldap_user != "" and ldap_password == ""):
+        if (not ldap_user and ldap_password) or (ldap_user and not ldap_password):
             raise Exception("User and password required to be set as a pair.")
-
         if ldap_auth.upper() in LDAP_AUTH_TYPES:
             ldap_auth = ldap_auth.upper()
-        elif (ldap_user != "" and ldap_password != "") and (ldap_auth.lower == "ANONYMOUS"):
+        elif (ldap_user and ldap_password) and (ldap_auth.lower == "ANONYMOUS"):
             raise Exception("If user and password values are set 'auth=ANONYMOUS' is not allowed")
-        elif (ldap_user == "" and ldap_password == "") and (ldap_auth.lower != "ANONYMOUS"):
+        elif (not ldap_user and not ldap_password) and (ldap_auth.lower != "ANONYMOUS"):
             raise Exception("Empty user and password values can only be used with 'auth=ANONYMOUS'.")
         else:
             ldap_auth = LDAP_AUTH_DEF
@@ -218,8 +217,6 @@ class FunctionComponent(ResilientComponent):
                     entry.update(entry.pop("attributes", None))
                 # Entries added to results is converted back to JSON format.
                 results = {"entries": json.dumps(entries)}
-
-        self.connection.unbind()
 
         return results
 

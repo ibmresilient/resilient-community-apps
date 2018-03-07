@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_ldap_search'",
     long_description="Resilient Circuits Components for 'fn_ldap_search'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'ldap3'
     ],
     packages=find_packages(),
     include_package_data=True,
