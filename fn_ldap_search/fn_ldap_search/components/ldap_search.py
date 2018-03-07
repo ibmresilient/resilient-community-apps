@@ -229,10 +229,12 @@ class FunctionComponent(ResilientComponent):
             search_base = kwargs.get("search_base")  # text
             search_filter = self.get_textarea_param(kwargs.get("search_filter"))  # textarea
             search_attributes = kwargs.get("search_attributes")  # text
+            param = kwargs.get("param")  # text
 
             LOG.info("search_base: %s", search_base)
             LOG.info("search_filter: %s", search_filter)
             LOG.info("search_attributes: %s", search_attributes)
+            LOG.info("param: %s", param)
 
             self.search_params = {'search_base': search_base, 'search_filter': search_filter,
                                   'search_attributes': search_attributes}
