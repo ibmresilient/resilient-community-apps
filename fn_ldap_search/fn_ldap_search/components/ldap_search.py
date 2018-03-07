@@ -85,12 +85,13 @@ class FunctionComponent(ResilientComponent):
             raise Exception("User and password required to be set as a pair.")
         if ldap_auth.upper() in LDAP_AUTH_TYPES:
             ldap_auth = ldap_auth.upper()
-        elif (ldap_user and ldap_password) and (ldap_auth.lower == "ANONYMOUS"):
-            raise Exception("If user and password values are set 'auth=ANONYMOUS' is not allowed")
-        elif (not ldap_user and not ldap_password) and (ldap_auth.lower != "ANONYMOUS"):
-            raise Exception("Empty user and password values can only be used with 'auth=ANONYMOUS'.")
         else:
             ldap_auth = LDAP_AUTH_DEF
+
+        if (ldap_user and ldap_password) and (ldap_auth.upper() == "ANONYMOUS"):
+            raise Exception("If user and password values are both set 'auth=ANONYMOUS' is not allowed")
+        elif (not ldap_user and not ldap_password) and (ldap_auth.upper() != "ANONYMOUS"):
+            raise Exception("Empty user and password values can only be used with 'auth=ANONYMOUS'.")
 
         return(ldap_user, ldap_password, ldap_auth)
 
