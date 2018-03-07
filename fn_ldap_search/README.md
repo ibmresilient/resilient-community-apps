@@ -4,9 +4,11 @@ This Resilient Function package can be used to execute an an LDAP search/query f
 Circuits integration framework.
 
 Prerequisites:
+```
 resilient
 resilient_circuits
-
+ldap3
+```
 * Can be used in a Resilient workflow to populate/update a datatable.
 * For more info about the python ldap3 module, please visit http://ldap3.readthedocs.io/
 
@@ -32,13 +34,15 @@ Run with: `resilient-circuits run`.
 
 ## ldap_search Example
 
-The LDAP search requires 3 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
-The following are examples of setup of each parameter using a simple workflow pre-processing script.
+The LDAP search requires 4 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
+The following are examples of setup of each parameter using a simple workflow pre-processing script. The %param% token
+will be replaced by the actual inputs.param value at time of execution.
 
 ```
 inputs.search_base = "dc=example,dc=com"
-inputs.search_filter = "(&(objectClass=person)(uid={}))".format(artifact.value)
+inputs.search_filter = "(&(objectClass=person)(uid=%param%))"
 inputs.search_attributes = "cn,sn,mail,telephoneNumber"
+inputs.param =  artifact.value
 ```
 The results returned to Resilient will be in JSON format and will consist of a list of
 entries where each entry has a 'dn' entry and a set of attributes
