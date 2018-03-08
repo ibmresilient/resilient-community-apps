@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate a default configuration-file section for fun_utilities"""
+"""Generate a default configuration-file section for fn_utilities"""
 
 from __future__ import print_function
 

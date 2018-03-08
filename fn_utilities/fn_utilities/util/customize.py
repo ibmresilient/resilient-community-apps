@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fun_utilities"""
+"""Generate the Resilient customizations required for fn_utilities"""
 
 from __future__ import print_function
 from resilient_circuits.util import *
@@ -163,17 +163,17 @@ def customization_data(client=None):
         }
     )
 
-    # Message destination: 'fun_utilities'
+    # Message destination: 'fn_utilities'
     yield MessageDestinationDefinition({ 'destination_type': 0,
   'expect_ack': True,
-  'name': 'fun_utilities',
-  'programmatic_name': 'fun_utilities'}
+  'name': 'fn_utilities',
+  'programmatic_name': 'fn_utilities'}
     )
 
     # Function: 'base64_to_artifact'
     yield FunctionDefinition({ 'description': { 'content': 'Create a new artifact from a Base64 string',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Base64 to Artifact',
   'name': 'base64_to_artifact',
   'uuid': 'e82fa06a-584c-4f8d-9429-448ddc3d8bc4',
@@ -200,7 +200,7 @@ def customization_data(client=None):
     # Function: 'attachment_move_to_artifact'
     yield FunctionDefinition({ 'description': { 'content': 'Move an Attachment to an Artifact.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Attachment Move to Artifact',
   'name': 'attachment_move_to_artifact',
   'uuid': 'b0332700-fb72-4a32-bc9f-2e1291170204',
@@ -224,7 +224,7 @@ def customization_data(client=None):
     # Function: 'base64_to_attachment'
     yield FunctionDefinition({ 'description': { 'content': 'Create a new attachment fro base64 string.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Base64 to Attachment',
   'name': 'base64_to_attachment',
   'uuid': '11349159-153e-49b7-9a9b-e22676c03687',
@@ -248,7 +248,7 @@ def customization_data(client=None):
     # Function: 'attachment_zip_extract'
     yield FunctionDefinition({ 'description': { 'content': 'Extract a file from a zipfile attachment, producing a base64 string.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Attachment Zip Extract',
   'name': 'attachment_zip_extract',
   'uuid': '4d9fb1df-1eab-494b-8375-c4feb0525429',
@@ -272,7 +272,7 @@ def customization_data(client=None):
     # Function: 'attachment_zip_list'
     yield FunctionDefinition({ 'description': { 'content': 'For a zipfile attachment, return a list of its contents.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Attachment Zip List',
   'name': 'attachment_zip_list',
   'uuid': 'c28c15ac-ecd2-4cd8-ba85-8f8c2bb307d2',
@@ -290,7 +290,7 @@ def customization_data(client=None):
     # Function: 'domain_distance'
     yield FunctionDefinition({ 'description': { 'content': 'Identifies similarity between domain names.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Domain Distance',
   'name': 'domain_distance',
   'uuid': '6fd01564-96de-4482-bceb-cf396df6c758',
@@ -305,7 +305,7 @@ def customization_data(client=None):
     # Function: 'attachment_hash'
     yield FunctionDefinition({ 'description': { 'content': 'Calculate hashes for a file attachment.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Attachment Hash',
   'name': 'attachment_hash',
   'uuid': '9e0f46f4-ae8c-4aa6-a296-3a0662a53386',
@@ -323,7 +323,7 @@ def customization_data(client=None):
     # Function: 'wait'
     yield FunctionDefinition({ 'description': { 'content': 'Waits for a given number of seconds',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Wait',
   'name': 'wait',
   'uuid': 'f17025e5-5437-477f-b7ce-6d1f38a67cac',
@@ -335,7 +335,7 @@ def customization_data(client=None):
     # Function: 'attachment_to_base64'
     yield FunctionDefinition({ 'description': { 'content': 'Read a file attachment as a Base64 string.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Attachment to Base64',
   'name': 'attachment_to_base64',
   'uuid': '3a4b66c4-0465-4960-8bbf-fa3ebdc58c5a',
@@ -353,7 +353,7 @@ def customization_data(client=None):
     # Function: 'artifact_email_parse'
     yield FunctionDefinition({ 'description': { 'content': 'Extract message headers and body parts from an email message artifact.',
                    'format': 'text'},
-  'destination_handle': 'fun_utilities',
+  'destination_handle': 'fn_utilities',
   'display_name': 'Artifact Email Parse',
   'name': 'artifact_email_parse',
   'uuid': 'd83f571e-8904-4123-9c2c-3f404b00cc5e',

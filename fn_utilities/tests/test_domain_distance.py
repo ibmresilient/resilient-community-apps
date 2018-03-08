@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import verify_subset
 
-PACKAGE_NAME = "fun_utilities"
+PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "domain_distance"
 
 # Read the default configuration-data section from the package
@@ -49,7 +49,10 @@ class TestDomainDistance:
             "closest": {
                 "mOnday": 1
             }
-        })
+        }),
+        ("rnicrosoft.com", "microsoft.com, contoso.com", {"closest": {"microsoft.com": 2}}),
+        (u"wikipedi\u0430.com", "wikipedia.com, wikipedia.org", {"closest": {"wikipedia.com": 1}}),
+        ("xn--e1awd7f.com", "epic.com", {"closest": {"epic.com": 4}})
     ])
     def test_success(self, circuits_app, domain_name, domain_list, expected_result):
         """ Test calling with sample values for the parameters """
@@ -63,5 +66,5 @@ class TestDomainDistance:
         logging.getLogger(__name__).info(expected_result)
         logging.getLogger(__name__).info(result)
 
-        # verify_subset(expected_result, result)
-        assert(expected_result == result)
+        verify_subset(expected_result, result)
+        # assert(expected_result == result)

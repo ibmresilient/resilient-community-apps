@@ -10,7 +10,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint, verify_subset
 
-PACKAGE_NAME = "fun_utilities"
+PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "artifact_email_parse"
 
 

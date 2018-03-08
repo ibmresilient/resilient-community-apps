@@ -6,8 +6,8 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fun_utilities"
-FUNCTION_NAME = "base64_to_attachment"
+PACKAGE_NAME = "fn_utilities"
+FUNCTION_NAME = "attachment_move_to_artifact"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,36 +16,34 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_base64_to_attachment_function(circuits, function_params, timeout=10):
+def call_attachment_move_to_artifact_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    circuits.manager.fire(SubmitTestFunction("base64_to_attachment", function_params))
-    event = circuits.watcher.wait("base64_to_attachment_result", timeout=timeout)
+    circuits.manager.fire(SubmitTestFunction("attachment_move_to_artifact", function_params))
+    event = circuits.watcher.wait("attachment_move_to_artifact_result", timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestBase64ToAttachment:
-    """ Tests for the base64_to_attachment function"""
+class TestAttachmentMoveToArtifact:
+    """ Tests for the attachment_move_to_artifact function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("base64content, incident_id, task_id, file_name, content_type, expected_result", [
-        ("text", 123, 123, "text", "text", {"value": "xyz"}),
-        ("text", 123, 123, "text", "text", {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, attachment_id, artifact_file_type, expected_result", [
+        (123, 123, 'Other File', {"value": "xyz"}),
+        (123, 123, 'Malware Sample', {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, base64content, incident_id, task_id, file_name, content_type, expected_result):
+    def test_success(self, circuits_app, incident_id, attachment_id, artifact_file_type, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "base64content": base64content,
             "incident_id": incident_id,
-            "task_id": task_id,
-            "file_name": file_name,
-            "content_type": content_type
+            "attachment_id": attachment_id,
+            "artifact_file_type": artifact_file_type
         }
-        result = call_base64_to_attachment_function(circuits_app, function_params)
+        result = call_attachment_move_to_artifact_function(circuits_app, function_params)
         assert(result == expected_result)

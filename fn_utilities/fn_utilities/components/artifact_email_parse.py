@@ -7,7 +7,7 @@ import datetime
 import time
 import email
 import json
-from fun_utilities.util.mailtojson import MailJson
+from fn_utilities.util.mailtojson import MailJson
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 

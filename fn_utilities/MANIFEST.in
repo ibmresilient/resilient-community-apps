@@ -1,0 +1,3 @@
+include README.md
+include fn_utilities/util/*
+include fn_utilities/LICENSE

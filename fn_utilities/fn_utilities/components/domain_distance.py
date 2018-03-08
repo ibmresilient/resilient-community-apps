@@ -4,7 +4,7 @@
 
 import logging
 import unicodedata
-from fun_utilities.util.distance import damerau_levenshtein_distance
+from fn_utilities.util.distance import damerau_levenshtein_distance
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
 from resilient import ensure_unicode
 
@@ -19,7 +19,7 @@ def normalize_name(domain):
     except (UnicodeError, UnicodeDecodeError):
         domain = ensure_unicode(domain)
     # Normalize unicode strings
-    domain = unicodedata.normalize('NFKC', domain)
+    domain = unicodedata.normalize("NFKC", domain)
     return domain
 
 
@@ -28,7 +28,11 @@ class FunctionComponent(ResilientComponent):
 
     @function("domain_distance")
     def _domain_distance_function(self, event, *args, **kwargs):
-        """Function: Identifies similarity between domain names."""
+        """Function: Identifies similarity between domain names.
+
+           Note: this does a bad job of "confusables", which would be better handled via
+           https://pypi.python.org/pypi/confusable_homoglyphs
+        """
         try:
             # Get the function parameters:
             domain_name = kwargs.get("domain_name")  # text

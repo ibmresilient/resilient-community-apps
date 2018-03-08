@@ -6,7 +6,7 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "utility_functions"
+PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "attachment_zip_extract_to_artifact"
 
 # Read the default configuration-data section from the package

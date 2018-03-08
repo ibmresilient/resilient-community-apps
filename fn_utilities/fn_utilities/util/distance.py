@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-""" Damerau-Levenshtein Distance, from https://github.com/jamesturk/jellyfish/blob/master/jellyfish/_jellyfish.py """
+""" Damerau-Levenshtein Distance, from Jellyfish 0.5.6
+    https://github.com/jamesturk/jellyfish/blob/master/jellyfish/_jellyfish.py """
 
 # Copyright (c) 2015, James Turk
 # Copyright (c) 2015, Sunlight Foundation
