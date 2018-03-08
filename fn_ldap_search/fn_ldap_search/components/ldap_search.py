@@ -171,7 +171,7 @@ class FunctionComponent(ResilientComponent):
             raise Exception("Credentials parameter 'use_ssl' not set.")
         if ldap_use_ssl and (ldap_port != LDAP_PORT_SSL):
             # Should be port 636 for encrypted connections.
-            raise Exception("If 'use_ssl' set to 'True' the port needs to be set to '{}").format(LDAP_PORT_SSL)
+            raise Exception("If 'use_ssl' set to 'True' the port needs to be set to '{}'".format(LDAP_PORT_SSL))
         else:
             ldap_port = int(self.options["port"] or LDAP_PORT_DEF)
 
