@@ -22,7 +22,7 @@ from ldap3.core.exceptions import LDAPSocketOpenError, LDAPNoSuchObjectResult, L
 LOG = logging.getLogger(__name__)
 LDAP_PORT_DEF = 389
 LDAP_PORT_SSL = 636
-LDAP_AUTH_TYPES = ["ANONYMOUS", "SIMPLE"]
+LDAP_AUTH_TYPES = ["ANONYMOUS", "SIMPLE", "NTLM", "SASL"]
 LDAP_AUTH_DEF = "ANONYMOUS"
 
 class FunctionComponent(ResilientComponent):
@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             search_base = "dc=example,dc=com"
             search_filter = "(&(objectClass=person)(|(uid={%param%})(uid=newton)))"
             search_attributes = "uid,cn,sn,mail,telephoneNumber"
-            search_attributes = artifact.value # Assigned value 'einstein' during run.
+            param = artifact.value # Assigned value 'einstein' during run.
 
     The LDAP lookup will return a result in JSON format with an entry consisting of a dn and a set of
     attributes for each result.
@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
                 LOG.debug('Transformed parameter '+k+' to '+self.search_params[k])
 
     def get_creds(self):
-        """"Get lDAP credentials
+        """"Get LDAP credentials from configuration settings.
 
         Validates user, password and auth values from config file to
         setup the credentials.
@@ -108,20 +108,32 @@ class FunctionComponent(ResilientComponent):
 
         """
         ldap_user = self.options.get("user", "")
+        ldap_domain = self.options.get("domain", "")
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
 
+        if ldap_auth.upper() == "SASL":
+            raise Exception("Connection using SASL authentication not currently implemented.")
+
         if (not ldap_user and ldap_password) or (ldap_user and not ldap_password):
             raise Exception("User and password required to be set as a pair.")
+
         if ldap_auth.upper() in LDAP_AUTH_TYPES:
             ldap_auth = ldap_auth.upper()
         else:
             ldap_auth = LDAP_AUTH_DEF
 
         if (ldap_user and ldap_password) and (ldap_auth.upper() == "ANONYMOUS"):
-            raise Exception("If user and password values are both set 'auth=ANONYMOUS' is not allowed")
+            raise Exception("If 'user' and 'password' values are both set 'auth=ANONYMOUS' is not allowed.")
         elif (not ldap_user and not ldap_password) and (ldap_auth.upper() != "ANONYMOUS"):
-            raise Exception("Empty user and password values can only be used with 'auth=ANONYMOUS'.")
+            raise Exception("Empty 'user' and 'password' values can only be used with 'auth=ANONYMOUS'.")
+
+        if ldap_auth.upper() == "NTLM":
+            if not ldap_domain:
+                raise Exception("Connection using NTLM requires a 'domain' to be specified.")
+            else:
+                # Add domain to user if NTLM
+                ldap_user = "{}\\{}".format(ldap_domain, ldap_user)
 
         return(ldap_user, ldap_password, ldap_auth)
 

@@ -13,7 +13,10 @@ def config_section_data():
 # LDAP server ip or fully qualified hostname
 server=localhost
 port=389
+# The domain setting must be set to a valid Windows domain if using NTLM authentication.
+#domain=WORKGROUP 
 user=cn=admin,dc=example,dc=com
+#domain=
 password=admin
 auth=SIMPLE
 use_ssl=False
