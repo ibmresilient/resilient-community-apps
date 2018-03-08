@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_ldap_search", {})
 
-    def check_params_set(self):
+    def validate_params(self):
         """"Check mandatory fields
 
         Ensure mandatory fields haven't empty values.
@@ -95,8 +95,11 @@ class FunctionComponent(ResilientComponent):
         """
         for k in self.search_params:
             if re.search("%param%", self.search_params[k]):
-                self.search_params[k] = re.sub("%param%", param, self.search_params[k])
-                LOG.debug('Transformed parameter '+k+' to '+self.search_params[k])
+                if not param:
+                    raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank".format(k, "param"))
+                else:
+                    self.search_params[k] = re.sub("%param%", param, self.search_params[k])
+                    LOG.debug('Transformed parameter '+k+' to '+self.search_params[k])
 
     def get_creds(self):
         """"Get LDAP credentials from configuration settings.
@@ -279,10 +282,9 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting...")
             yield StatusMessage("Checking mandatory parameter fields set...")
-            self.check_params_set()
-            if param:
-                yield StatusMessage("Updating search parameter fields...")
-                self.update_param_fields(param)
+            self.validate_params()
+            yield StatusMessage("Updating search parameter fields...")
+            self.update_param_fields(param)
             yield StatusMessage("Setting up LDAP connection...")
             self.setup_ldap_connection()
             yield StatusMessage("Running LDAP query...")
