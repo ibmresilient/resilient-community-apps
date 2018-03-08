@@ -18,8 +18,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_ldap_search_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    circuits.manager.fire(SubmitTestFunction("ldap_search", function_params))
-    event = circuits.watcher.wait("ldap_search_result", timeout=timeout)
+    evt = SubmitTestFunction("ldap_search", function_params)
+    circuits.manager.fire(evt)
+    event = circuits.watcher.wait("ldap_search_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -34,16 +35,17 @@ class TestLdapSearch:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("search_base, search_filter, search_attributes, expected_result", [
-        ("text", {"type": "text", "content": "line1\nline2"}, "text", {"value": "xyz"}),
-        ("text", {"type": "text", "content": "line1\nline2"}, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("search_base, search_filter, search_attributes, param, expected_result", [
+        ("text", {"type": "text", "content": "line1\nline2"}, "text", "text", {"value": "xyz"}),
+        ("text", {"type": "text", "content": "line1\nline2"}, "text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, search_base, search_filter, search_attributes, expected_result):
+    def test_success(self, circuits_app, search_base, search_filter, search_attributes, param, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = {
             "search_base": search_base,
             "search_filter": search_filter,
-            "search_attributes": search_attributes
+            "search_attributes": search_attributes,
+            "param": param
         }
         result = call_ldap_search_function(circuits_app, function_params)
-        assert(result == expected_result)
+        assert(expected_result == result)
