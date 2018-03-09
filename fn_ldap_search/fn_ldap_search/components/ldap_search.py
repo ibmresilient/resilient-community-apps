@@ -78,12 +78,9 @@ class FunctionComponent(ResilientComponent):
         """
         if self.search_params is None:
             raise Exception("LDAP query requires parameters dictionary to be set")
-        if not self.search_params["search_base"]:
-            raise Exception("LDAP query requires 'search_base' parameter to be a non empty value")
-        if not self.search_params["search_filter"]:
-            raise Exception("LDAP query requires 'search_filter' parameter to be a non empty value")
-        if not self.search_params["search_attributes"]:
-            raise Exception("LDAP query requires 'search_attributes' parameter to be non empty value")
+        for k in self.search_params:
+            if re.match('^search_', k) and not self.search_params[k]:
+                raise ValueError("LDAP query requires '{}' parameter to be a non empty value".format(k))
 
 
     def update_param_fields(self, param):
@@ -251,7 +248,6 @@ class FunctionComponent(ResilientComponent):
             else:
                 # List of entries.
                 entries = json.loads(conn.response_to_json())["entries"]
-                LOG.debug(conn.response_to_json())
                 LOG.info("Result contains %s entries", len(entries))
                 # Each entry has 'dn' and dict of 'attributes'.  Move attributes to the top level for easier processing.
                 for entry in entries:
@@ -281,11 +277,8 @@ class FunctionComponent(ResilientComponent):
                                   'search_attributes': search_attributes, 'param': param}
 
             yield StatusMessage("Starting...")
-            yield StatusMessage("Checking mandatory parameter fields set...")
             self.validate_params()
-            yield StatusMessage("Updating search parameter fields...")
             self.update_param_fields(param)
-            yield StatusMessage("Setting up LDAP connection...")
             self.setup_ldap_connection()
             yield StatusMessage("Running LDAP query...")
             results = self.run_search()

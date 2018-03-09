@@ -8,7 +8,7 @@ setup(
     version='1.0.0',
     license='Resilient License',
     author='IBM Resilient',
-    author_email='you@example.com',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_ldap_search'",
     long_description="Resilient Circuits Components for 'fn_ldap_search'",
     install_requires=[
