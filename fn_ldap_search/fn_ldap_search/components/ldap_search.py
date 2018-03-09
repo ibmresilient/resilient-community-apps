@@ -175,7 +175,7 @@ class FunctionComponent(ResilientComponent):
         else:
             ldap_port = int(self.options["port"] or LDAP_PORT_DEF)
 
-        creds = self.get_creds()
+            ldap_user, ldap_password, ldap_auth = self.get_creds()
 
         try:
             # Create LDAP Server object.
@@ -183,7 +183,7 @@ class FunctionComponent(ResilientComponent):
             server = Server(ldap_server, port=ldap_port, get_info=ALL, use_ssl=ldap_use_ssl, connect_timeout=3 )
             # Connect to the LDAP server.
 
-            self.connection = Connection(server, user=creds[0], password=creds[1], authentication=creds[2],
+            self.connection = Connection(server, user=ldap_user, password=ldap_password, authentication=ldap_auth,
                                         auto_bind=True, return_empty_attributes=True, raise_exceptions=True)
 
         except LDAPSocketOpenError as e:
