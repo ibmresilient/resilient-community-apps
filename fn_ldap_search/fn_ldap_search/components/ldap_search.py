@@ -112,6 +112,9 @@ class FunctionComponent(ResilientComponent):
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
 
+        if ldap_auth.upper() not in LDAP_AUTH_TYPES:
+            raise ValueError("Invalid value for 'auth' configuration setting")
+
         if ldap_auth.upper() == "SASL":
             raise Exception("Connection using SASL authentication not currently implemented.")
 
