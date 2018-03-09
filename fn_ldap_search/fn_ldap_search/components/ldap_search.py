@@ -256,8 +256,7 @@ class FunctionComponent(ResilientComponent):
                 for entry in entries:
                     LOG.debug(json.dumps(entry))
                     entry.update(entry.pop("attributes", None))
-                # Entries added to results is converted back to JSON format.
-                results = {"entries": json.dumps(entries)}
+                results = {"entries": entries}
 
         return results
 
