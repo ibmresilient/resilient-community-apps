@@ -11,8 +11,8 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_base64"""
 
-    @function("attachment_base64")
-    def _attachment_base64_function(self, event, *args, **kwargs):
+    @function("attachment_to_base64")
+    def _attachment_to_base64_function(self, event, *args, **kwargs):
         """Function: Produce base64 content of a file attachment."""
         try:
             log = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # Produce a FunctionResult with the return value
-            log.debug(json.dumps(results))
+            log.debug(json.dumps(results, indent=2))
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()

@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Writing attachment...")
             with tempfile.NamedTemporaryFile(delete=False) as temp_file:
                 try:
-                    temp_file.write(base64.b64encode(base64content))
+                    temp_file.write(base64.b64decode(base64content))
                     temp_file.close()
                     # Create a new artifact
                     client = self.rest_client()

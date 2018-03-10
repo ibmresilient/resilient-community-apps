@@ -130,6 +130,16 @@ def customization_data(client=None):
                    'tooltip': '',
                    'uuid': 'ead214c2-13fe-43f6-a3c7-676a88338dbb',
                    'values': []},
+  'input_data': { 'blank_option': False,
+                  'input_type': 'text',
+                  'name': 'input_data',
+                  'placeholder': '',
+                  'rich_text': False,
+                  'templates': [],
+                  'text': 'input_data',
+                  'tooltip': '',
+                  'uuid': '6d66c61f-a581-4a39-8959-8e357b92317f',
+                  'values': []},
   'seconds': { 'blank_option': False,
                'input_type': 'number',
                'name': 'seconds',
@@ -222,7 +232,7 @@ def customization_data(client=None):
     )
 
     # Function: 'base64_to_attachment'
-    yield FunctionDefinition({ 'description': { 'content': 'Create a new attachment fro base64 string.',
+    yield FunctionDefinition({ 'description': { 'content': 'Create a new attachment from a base64 string.',
                    'format': 'text'},
   'destination_handle': 'fn_utilities',
   'display_name': 'Base64 to Attachment',
@@ -287,8 +297,20 @@ def customization_data(client=None):
                     'field_type': '__function'}]}
     )
 
+    # Function: 'wait'
+    yield FunctionDefinition({ 'description': { 'content': 'Waits for a given number of seconds',
+                   'format': 'text'},
+  'destination_handle': 'fn_utilities',
+  'display_name': 'Wait',
+  'name': 'wait',
+  'uuid': 'f17025e5-5437-477f-b7ce-6d1f38a67cac',
+  'view_items': [ { 'content': 'seconds',
+                    'element': 'field',
+                    'field_type': '__function'}]}
+    )
+
     # Function: 'domain_distance'
-    yield FunctionDefinition({ 'description': { 'content': 'Identifies similarity between domain names.',
+    yield FunctionDefinition({ 'description': { 'content': 'Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt.',
                    'format': 'text'},
   'destination_handle': 'fn_utilities',
   'display_name': 'Domain Distance',
@@ -320,14 +342,26 @@ def customization_data(client=None):
                     'field_type': '__function'}]}
     )
 
-    # Function: 'wait'
-    yield FunctionDefinition({ 'description': { 'content': 'Waits for a given number of seconds',
+    # Function: 'spreadsheet_read'
+    yield FunctionDefinition({ 'description': { 'content': 'Read data from a spreadsheet.  The spreadsheet should be in \'base64content\' input.  The results are named for each sheet, e.g. "results.Sheet1" contains the rows in sheet1.',
                    'format': 'text'},
   'destination_handle': 'fn_utilities',
-  'display_name': 'Wait',
-  'name': 'wait',
-  'uuid': 'f17025e5-5437-477f-b7ce-6d1f38a67cac',
-  'view_items': [ { 'content': 'seconds',
+  'display_name': 'Spreadsheet Read',
+  'name': 'spreadsheet_read',
+  'uuid': '309b8c20-4e54-4769-9ece-46b0b03fb5b2',
+  'view_items': [ { 'content': 'base64content',
+                    'element': 'field',
+                    'field_type': '__function'}]}
+    )
+
+    # Function: 'spreadsheet_write'
+    yield FunctionDefinition({ 'description': { 'content': 'Writes the data as a spreadsheet file attachment.\nTODO: what data, what output.',
+                   'format': 'text'},
+  'destination_handle': 'fn_utilities',
+  'display_name': 'Spreadsheet Write',
+  'name': 'spreadsheet_write',
+  'uuid': '61fa7c10-24e4-4ded-990e-8baa76eceb9b',
+  'view_items': [ { 'content': 'input_data',
                     'element': 'field',
                     'field_type': '__function'}]}
     )

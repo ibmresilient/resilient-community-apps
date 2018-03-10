@@ -18,8 +18,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_base64_to_attachment_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    circuits.manager.fire(SubmitTestFunction("base64_to_attachment", function_params))
-    event = circuits.watcher.wait("base64_to_attachment_result", timeout=timeout)
+    evt = SubmitTestFunction("base64_to_attachment", function_params)
+    circuits.manager.fire(evt)
+    event = circuits.watcher.wait("base64_to_attachment_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)

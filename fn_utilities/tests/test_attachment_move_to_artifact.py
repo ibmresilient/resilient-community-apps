@@ -18,8 +18,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_attachment_move_to_artifact_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    circuits.manager.fire(SubmitTestFunction("attachment_move_to_artifact", function_params))
-    event = circuits.watcher.wait("attachment_move_to_artifact_result", timeout=timeout)
+    evt = SubmitTestFunction("attachment_move_to_artifact", function_params)
+    circuits.manager.fire(evt)
+    event = circuits.watcher.wait("attachment_move_to_artifact_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)

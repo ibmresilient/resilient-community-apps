@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Utility Functions",
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'openpyxl'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -31,6 +32,8 @@ setup(
             "Base64ToArtifactFunctionComponent = fn_utilities.components.base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fn_utilities.components.base64_to_attachment:FunctionComponent",
             "DomainDistanceFunctionComponent = fn_utilities.components.domain_distance:FunctionComponent",
+            "SpreadsheetReadFunctionComponent = fn_utilities.components.spreadsheet_read:FunctionComponent",
+            "SpreadsheetWriteFunctionComponent = fn_utilities.components.spreadsheet_write:FunctionComponent",
             "WaitFunctionComponent = fn_utilities.components.wait:FunctionComponent",
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
