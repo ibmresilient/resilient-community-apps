@@ -42,15 +42,17 @@ class McAfeeTieSearcher(BaseComponent):
     # Register this as an async searcher for the URL /<root>/mcafee_tie_searcher
     channel = searcher_channel("mcafee_tie_searcher")
 
+    config_file = "dxlclient_config"
+
     def __init__(self, opts):
         super(McAfeeTieSearcher, self).__init__(opts)
         LOG.debug(opts)
 
         try:
-            config = opts.get("mcafee").get("dxlclient_config")
+            config = opts.get("mcafee").get(self.config_file)
             if config is None:
-                LOG.error("dxlclient_config is not set. You must set this path to run this threat service")
-                raise ValueError("dxlclient_config is not set. You must set this path to run this threat service")
+                LOG.error(self.config_file + " is not set. You must set this path to run this threat service")
+                raise ValueError(self.config_file + " is not set. You must set this path to run this threat service")
 
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
@@ -190,6 +192,7 @@ class McAfeeTieSearcher(BaseComponent):
                     trust_level = "Most Likely Malicious"
                 elif AtdTrustLevel.KNOWN_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
                     trust_level = "Known Malicious"
+
                 if trust_level:
                     hit.append(StringProp(name="ATD Trust Level", value=trust_level))
 
