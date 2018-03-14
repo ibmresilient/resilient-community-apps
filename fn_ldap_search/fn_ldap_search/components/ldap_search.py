@@ -110,8 +110,8 @@ class FunctionComponent(ResilientComponent):
             if re.search("%param%", self.search_params[k]):
                 # Only allow "%param% in search_attributes field.
                 if re.match('^search_filter$', k):
-                    if not self.search_params["param"]:
-                        raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank".format(k, "param"))
+                    if "param" not in self.search_params:
+                        raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank.".format(k, "param"))
                     else:
                         # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
                         self.search_params[k] = re.sub("%param%", self.search_params["param"].replace('\\', '\\\\'), self.search_params[k])
