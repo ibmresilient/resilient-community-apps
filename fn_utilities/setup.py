@@ -32,6 +32,7 @@ setup(
             "Base64ToArtifactFunctionComponent = fn_utilities.components.base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fn_utilities.components.base64_to_attachment:FunctionComponent",
             "DomainDistanceFunctionComponent = fn_utilities.components.domain_distance:FunctionComponent",
+            "PDFidFunctionComponent = fn_utilities.components.pdfid:FunctionComponent",
             "SpreadsheetReadFunctionComponent = fn_utilities.components.spreadsheet_read:FunctionComponent",
             "SpreadsheetWriteFunctionComponent = fn_utilities.components.spreadsheet_write:FunctionComponent",
             "WaitFunctionComponent = fn_utilities.components.wait:FunctionComponent",
