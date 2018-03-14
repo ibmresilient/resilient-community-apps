@@ -18,7 +18,8 @@ import ldap3
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPSocketOpenError, LDAPNoSuchObjectResult, LDAPInvalidCredentialsResult, \
     LDAPInvalidFilterError
-from ldap3.utils.conv import escape_filter_chars
+from ldap3.utils.conv import escape_filter_chars, to_unicode
+from ldap3.utils.config import get_config_parameter
 
 LOG = logging.getLogger(__name__)
 LDAP_PORT_DEF = 389
@@ -175,13 +176,17 @@ class FunctionComponent(ResilientComponent):
         else:
             raise ValueError
 
-    def escape_chars(self, str):
+    def escape_chars(self, str, encoding=None):
         """ Escape some characters in filter.
 
         Escape a set of characters in the filter string to help to mitigate against possibility of injection.
         This has a subset of characters escaped in ldap3 function escape_filter_chars.
 
         """
+        if encoding is None:
+            encoding = get_config_parameter('DEFAULT_ENCODING')
+
+        str = to_unicode(str, encoding)
         escaped_str = str.replace('\\', '\\5c')
         escaped_str = escaped_str.replace('*', '\\2a')
         escaped_str = escaped_str.replace('\x00', '\\00')
