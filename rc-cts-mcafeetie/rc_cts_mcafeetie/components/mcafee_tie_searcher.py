@@ -106,7 +106,7 @@ class McAfeeTieSearcher(BaseComponent):
         hit = self._get_atd_info(reputations_dict, hit)
 
         # Check MWG File Provider
-        hit = self._get_atd_info(reputations_dict, hit)
+        hit = self._get_mwg_info(reputations_dict, hit)
 
         # Verifies a trust level was set before returning a hit
         for prop in hit["props"]:
@@ -179,22 +179,11 @@ class McAfeeTieSearcher(BaseComponent):
         # Information for Advanced Threat Defense file provider
         if FileProvider.ATD in reputations_dict:
             atd_rep = reputations_dict[FileProvider.ATD]
+            trust_level = self._get_trust_level(atd_rep[ReputationProp.TRUST_LEVEL])
 
-            # Retrieve the ATD reputation attributes
-            atd_rep_attribs = atd_rep[ReputationProp.ATTRIBUTES]
-
-            # Get Trust score
-            if AtdAttrib.VERDICT in atd_rep_attribs:
-                trust_level = ""
-                if AtdTrustLevel.MIGHT_BE_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Might be Malicious"
-                elif AtdTrustLevel.MOST_LIKELY_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Most Likely Malicious"
-                elif AtdTrustLevel.KNOWN_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Known Malicious"
-
-                if trust_level:
-                    hit.append(StringProp(name="ATD Trust Level", value=trust_level))
+            if trust_level:
+                # Not a hit until trust level has been verified to less than or equal to MIGHT BE MALICIOUS
+                hit.append(StringProp(name="ATD Trust Level", value=trust_level))
 
         return hit
 
