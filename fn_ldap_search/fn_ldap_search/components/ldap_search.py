@@ -18,6 +18,7 @@ import ldap3
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPSocketOpenError, LDAPNoSuchObjectResult, LDAPInvalidCredentialsResult, \
     LDAPInvalidFilterError
+from ldap3.utils.conv import escape_filter_chars
 
 LOG = logging.getLogger(__name__)
 LDAP_PORT_DEF = 389
@@ -73,7 +74,7 @@ class FunctionComponent(ResilientComponent):
     def validate_params(self):
         """"Check mandatory fields
 
-        Ensure mandatory fields haven't empty values.
+        Do a number of checks on input fields.
 
         """
         if self.search_params is None:
@@ -81,22 +82,43 @@ class FunctionComponent(ResilientComponent):
         for k in self.search_params:
             if re.match('^search_', k) and not self.search_params[k]:
                 raise ValueError("LDAP query requires '{}' parameter to be a non empty value".format(k))
+            else:
+                if re.match('^search_filter$', k):
+                    # Do some basic checks on filter.
+                    if not re.match('^\(.*\)$',self.search_params[k]):
+                        # Outer parentheses not found thus invalid filter
+                        raise ValueError("LDAP search filter invalid format")
+                    if not self.search_params[k].count('(') == self.search_params[k].count(')'):
+                        # The count of '(' and ')' characters need to match in filter.
+                        raise LDAPInvalidFilterError("Invalid filter because of unmatched parentheses.")
 
-
-    def update_param_fields(self, param):
+    def update_param_fields(self):
         """"Update %param% fields
 
-        If self.search_params hash has %param% set in any of it's values, update
-        value replacing %param% with actual value from param.
+        Escape some characters in self.search_params[search_filter].
+        If self.search_params[search_filter] hash key has %param% set in it's value, update
+        value replacing %param% with actual escaped value from param.
+
 
         """
         for k in self.search_params:
+            if re.match('^search_filter$', k):
+                # Escape some characters in search_filter which might cause LDAP injection.
+                self.search_params[k] = self.escape_chars(self.search_params[k])
+            # Search for "%param% token in parameter.
             if re.search("%param%", self.search_params[k]):
-                if not param:
-                    raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank".format(k, "param"))
+                # Only allow "%param% in search_attributes field.
+                if re.match('^search_filter$', k):
+                    if not self.search_params["param"]:
+                        raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank".format(k, "param"))
+                    else:
+                        # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
+                        self.search_params[k] = re.sub("%param%", self.search_params["param"].replace('\\', '\\\\'), self.search_params[k])
+                        LOG.debug(('Transformed parameter'+k+' to '+self.search_params[k]))
                 else:
-                    self.search_params[k] = re.sub("%param%", param, self.search_params[k])
-                    LOG.debug('Transformed parameter '+k+' to '+self.search_params[k])
+                    raise Exception(
+                        "The string %param% not allowed in parameter '{}' ".format(k))
+
 
     def get_creds(self):
         """"Get LDAP credentials from configuration settings.
@@ -153,6 +175,19 @@ class FunctionComponent(ResilientComponent):
         else:
             raise ValueError
 
+    def escape_chars(self, str):
+        """ Escape some characters in filter.
+
+        Escape a set of characters in the filter string to help to mitigate against possibility of injection.
+        This has a subset of characters escaped in ldap3 function escape_filter_chars.
+
+        """
+        escaped_str = str.replace('\\', '\\5c')
+        escaped_str = escaped_str.replace('*', '\\2a')
+        escaped_str = escaped_str.replace('\x00', '\\00')
+
+        return escaped_str
+
     def setup_ldap_connection(self):
         """ Setup LDAP server connection
 
@@ -199,7 +234,6 @@ class FunctionComponent(ResilientComponent):
             self.connection
         except Exception as e:
             raise Exception("No LDAP connection returned for server %s, Exception $s",ldap_server, e)
-
 
     def run_search(self):
         """ Run LDAP search/query
@@ -260,6 +294,7 @@ class FunctionComponent(ResilientComponent):
 
         return results
 
+
     @function("ldap_search")
     def _ldap_search_function(self, event, *args, **kwargs):
         """Resilient Function: entry point """
@@ -276,11 +311,13 @@ class FunctionComponent(ResilientComponent):
             LOG.info("param: %s", param)
 
             self.search_params = {'search_base': search_base, 'search_filter': search_filter,
-                                  'search_attributes': search_attributes, 'param': param}
-
+                                  'search_attributes': search_attributes}
+            if param:
+                # Escape 'param' parameter.
+                self.search_params.setdefault('param', escape_filter_chars(param))
             yield StatusMessage("Starting...")
             self.validate_params()
-            self.update_param_fields(param)
+            self.update_param_fields()
             self.setup_ldap_connection()
             yield StatusMessage("Running LDAP query...")
             results = self.run_search()
