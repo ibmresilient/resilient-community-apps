@@ -8,7 +8,7 @@ from dxlclient.client_config import DxlClientConfig
 from dxlclient.client import DxlClient
 from dxltieclient import TieClient
 from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, TrustLevel, \
-    FileGtiAttrib, AtdAttrib, AtdTrustLevel
+    FileGtiAttrib, AtdAttrib, AtdTrustLevel, EpochMixin
 
 from circuits import BaseComponent, handler
 from rc_cts import searcher_channel, Hit, StringProp
@@ -18,7 +18,7 @@ LOG = logging.getLogger(__name__)
 
 
 def config_section_data():
-    return '''[mcafee_tie_cts]
+    return '''[mcafee]
 dxlclient_config=/home/resilient/.resilient/mcafee_tie/dxlclient.config
 '''
 
@@ -42,17 +42,28 @@ class McAfeeTieSearcher(BaseComponent):
     # Register this as an async searcher for the URL /<root>/mcafee_tie_searcher
     channel = searcher_channel("mcafee_tie_searcher")
 
+    config_file = "dxlclient_config"
+
     def __init__(self, opts):
         super(McAfeeTieSearcher, self).__init__(opts)
         LOG.debug(opts)
 
-        config = opts.get("mcafee_tie_cts").get("dxlclient_config")
-        if config is None:
-            LOG.error("dxlclient_config is not set. You must set this path to run this threat service")
-            raise ValueError("dxlclient_config is not set. You must set this path to run this threat service")
+        try:
+            config = opts.get("mcafee").get(self.config_file)
+            if config is None:
+                LOG.error(self.config_file + " is not set. You must set this path to run this threat service")
+                raise ValueError(self.config_file + " is not set. You must set this path to run this threat service")
 
-        # Create configuration from file for DxlClient
-        self.config = DxlClientConfig.create_dxl_config_from_file(config)
+            # Create configuration from file for DxlClient
+            self.config = DxlClientConfig.create_dxl_config_from_file(config)
+        except AttributeError:
+            LOG.error("There is no [mcafee] section in the config file,"
+                      "please set that by running resilient-circuits config -u")
+            raise AttributeError("[mcafee] section is not set in the config file")
+
+        # Create client
+        self.client = DxlClient(self.config)
+        self.client.connect()
 
     # Handle lookup for artifacts of type md5, sha1, and sha256 hashes
     @handler("hash.md5", "hash.sha1", "hash.sha256")
@@ -62,28 +73,25 @@ class McAfeeTieSearcher(BaseComponent):
         LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}".format(
             artifact_type, artifact_value))
 
-        with DxlClient(self.config) as client:
-            # Connect to the fabric
-            client.connect()
-            tie_client = TieClient(client)
+        tie_client = TieClient(self.client)
 
-            if artifact_type == "hash.md5":
-                resilient_hash = {HashType.MD5: artifact_value}
-            elif artifact_type == "hash.sha1":
-                resilient_hash = {HashType.SHA1: artifact_value}
-            elif artifact_type == "hash.sha256":
-                resilient_hash = {HashType.SHA256: artifact_value}
-            else:
-                raise ValueError("Something went wrong setting the hash value")
+        if artifact_type == "hash.md5":
+            resilient_hash = {HashType.MD5: artifact_value}
+        elif artifact_type == "hash.sha1":
+            resilient_hash = {HashType.SHA1: artifact_value}
+        elif artifact_type == "hash.sha256":
+            resilient_hash = {HashType.SHA256: artifact_value}
+        else:
+            raise ValueError("Something went wrong setting the hash value")
 
-            reputations_dict = \
-                tie_client.get_file_reputation(
-                        resilient_hash
-                )
+        reputations_dict = \
+            tie_client.get_file_reputation(
+                    resilient_hash
+            )
 
-            hits = self._query_mcafee_tie(reputations_dict)
+        hits = self._query_mcafee_tie(reputations_dict)
 
-            yield hits
+        yield hits
 
     def _query_mcafee_tie(self, reputations_dict):
         hit = Hit()
@@ -98,7 +106,7 @@ class McAfeeTieSearcher(BaseComponent):
         hit = self._get_atd_info(reputations_dict, hit)
 
         # Check MWG File Provider
-        hit = self._get_atd_info(reputations_dict, hit)
+        hit = self._get_mwg_info(reputations_dict, hit)
 
         # Verifies a trust level was set before returning a hit
         for prop in hit["props"]:
@@ -110,7 +118,7 @@ class McAfeeTieSearcher(BaseComponent):
         # Information for Enterprise file provider
         if FileProvider.ENTERPRISE in reputations_dict:
             ent_rep = reputations_dict[FileProvider.ENTERPRISE]
-            trust_level = self._get_trust_level(ent_rep)
+            trust_level = self._get_trust_level(ent_rep[ReputationProp.TRUST_LEVEL])
 
             if trust_level:
                 # Not a hit until trust level has been verified to less than or equal to MIGHT BE MALICIOUS
@@ -118,6 +126,12 @@ class McAfeeTieSearcher(BaseComponent):
 
             # Retrieve the enterprise reputation attributes
             ent_rep_attribs = ent_rep[ReputationProp.ATTRIBUTES]
+
+            # Get Average Local Rep
+            if FileEnterpriseAttrib.AVG_LOCAL_REP in ent_rep_attribs:
+                local_rep = self._get_trust_level(int(ent_rep_attribs[FileEnterpriseAttrib.AVG_LOCAL_REP]))
+                if local_rep:
+                    hit.append(StringProp(name="Enterprise Avg Local Trust Level", value=local_rep))
 
             # Get prevalence (if it exists)
             if FileEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
@@ -141,7 +155,7 @@ class McAfeeTieSearcher(BaseComponent):
         # Information for GTI file provider
         if FileProvider.GTI in reputations_dict:
             gti_rep = reputations_dict[FileProvider.GTI]
-            trust_level = self._get_trust_level(gti_rep)
+            trust_level = self._get_trust_level(gti_rep[ReputationProp.TRUST_LEVEL])
 
             if trust_level:
                 # Not a hit until trust level has been verified to less than or equal to MIGHT BE MALICIOUS
@@ -156,7 +170,8 @@ class McAfeeTieSearcher(BaseComponent):
 
             # Get First Contact Date (if it exists)
             if FileGtiAttrib.FIRST_CONTACT in gti_rep_attribs:
-                hit.append(StringProp(name="GTI First Contact", value=gti_rep_attribs[FileGtiAttrib.FIRST_CONTACT]))
+                hit.append(StringProp(name="GTI First Contact", value=EpochMixin.to_localtime_string(
+                    gti_rep_attribs[FileGtiAttrib.FIRST_CONTACT])))
 
         return hit
 
@@ -164,21 +179,11 @@ class McAfeeTieSearcher(BaseComponent):
         # Information for Advanced Threat Defense file provider
         if FileProvider.ATD in reputations_dict:
             atd_rep = reputations_dict[FileProvider.ATD]
+            trust_level = self._get_trust_level(atd_rep[ReputationProp.TRUST_LEVEL])
 
-            # Retrieve the ATD reputation attributes
-            atd_rep_attribs = atd_rep[ReputationProp.ATTRIBUTES]
-
-            # Get Trust score
-            if AtdAttrib.VERDICT in atd_rep_attribs:
-                trust_level = ""
-                if AtdTrustLevel.MIGHT_BE_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Might be Malicious"
-                elif AtdTrustLevel.MOST_LIKELY_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Most Likely Malicious"
-                elif AtdTrustLevel.KNOWN_MALICIOUS is atd_rep[AtdAttrib.VERDICT]:
-                    trust_level = "Known Malicious"
-                if trust_level:
-                    hit.append(StringProp(name="Overall ATD Trust Level", value=trust_level))
+            if trust_level:
+                # Not a hit until trust level has been verified to less than or equal to MIGHT BE MALICIOUS
+                hit.append(StringProp(name="ATD Trust Level", value=trust_level))
 
         return hit
 
@@ -186,7 +191,7 @@ class McAfeeTieSearcher(BaseComponent):
         # Information for  file provider
         if FileProvider.MWG in reputations_dict:
             mwg_rep = reputations_dict[FileProvider.MWG]
-            trust_level = self._get_trust_level(mwg_rep)
+            trust_level = self._get_trust_level(mwg_rep[ReputationProp.TRUST_LEVEL])
 
             if trust_level:
                 # Not a hit until trust level has been verified to less than or equal to MIGHT BE MALICIOUS
@@ -195,13 +200,13 @@ class McAfeeTieSearcher(BaseComponent):
         return hit
 
     @staticmethod
-    def _get_trust_level(file_provider):
+    def _get_trust_level(trust_level_number):
         trust_level = ""
-        if TrustLevel.MIGHT_BE_MALICIOUS is file_provider[ReputationProp.TRUST_LEVEL]:
+        if TrustLevel.MIGHT_BE_MALICIOUS is trust_level_number:
             trust_level = "Might be Malicious"
-        elif TrustLevel.MOST_LIKELY_MALICIOUS is file_provider[ReputationProp.TRUST_LEVEL]:
+        elif TrustLevel.MOST_LIKELY_MALICIOUS is trust_level_number:
             trust_level = "Most Likely Malicious"
-        elif TrustLevel.KNOWN_MALICIOUS is file_provider[ReputationProp.TRUST_LEVEL]:
+        elif TrustLevel.KNOWN_MALICIOUS is trust_level_number:
             trust_level = "Known Malicious"
 
         return trust_level

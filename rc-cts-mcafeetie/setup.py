@@ -1,8 +1,12 @@
 from __future__ import print_function
 
+import datetime
 import sys
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
+
+
+PUBLISH_VERSION = "1.0.0"
 
 
 class PyTest(TestCommand):
@@ -21,11 +25,11 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
+
 setup(
     name='rc-cts-mcafeetie',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
-    url='https://github.com/ibmresilient/resilient-circuits-packages',
+    version=PUBLISH_VERSION,
+    url='https://github.com/ibmresilient/resilient-community-apps/releases',
     license='MIT',
     author='IBM Resilient',
     install_requires=[
