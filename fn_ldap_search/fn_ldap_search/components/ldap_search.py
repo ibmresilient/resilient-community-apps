@@ -17,7 +17,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import ldap3
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPSocketOpenError, LDAPNoSuchObjectResult, LDAPInvalidCredentialsResult, \
-    LDAPInvalidFilterError
+    LDAPInvalidFilterError, LDAPAttributeError, LDAPObjectClassError
 from ldap3.utils.conv import escape_filter_chars, to_unicode
 from ldap3.utils.config import get_config_parameter
 
@@ -226,11 +226,10 @@ class FunctionComponent(ResilientComponent):
             self.connection = Connection(server, user=ldap_user, password=ldap_password, authentication=ldap_auth,
                                         auto_bind=True, return_empty_attributes=True, raise_exceptions=True)
 
-        except LDAPSocketOpenError as e:
-            raise Exception("Could not connect to LDAP server %s - SocketOpenError %s", ldap_server, e)
+        # Catch some specific exceptions
+        except (LDAPSocketOpenError, LDAPInvalidCredentialsResult) as e:
+            raise e
 
-        except LDAPInvalidCredentialsResult as e:
-            raise Exception("Invalid credentials used for server LDAP server %s, Exception %s", ldap_server, e)
         # Catch any additional errors not specifically checked for
         except Exception as e:
             raise Exception("Could not connect to LDAP server %s, Exception %s", ldap_server, e)
@@ -270,11 +269,10 @@ class FunctionComponent(ResilientComponent):
 
                 entries = conn.entries
 
-            except LDAPNoSuchObjectResult as e:
-                raise Exception("Returned no such object from LDAP query, with Exception %s", e)
+            # Catch some specific exceptions
+            except (LDAPNoSuchObjectResult, LDAPObjectClassError, LDAPInvalidFilterError, LDAPAttributeError) as e:
+                raise e
 
-            except LDAPInvalidFilterError as e:
-                raise Exception("Got a malformed from LDAP query, with Exception %s",  e)
             # Catch any errors not specifically tested for.
             except Exception as e:
                 raise Exception("Could not perform a query on LDAP connection, got Exception %s",  e)
