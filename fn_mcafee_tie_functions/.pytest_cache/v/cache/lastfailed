@@ -1,6 +1,0 @@
-{
-  "tests/test_mcafee_tie_search_hash.py": true, 
-  "tests/test_mcafee_tie_search_hash.py::TestMcafeeTieSearchHash::()::test_success[md5-0E4D13CC9AF04CC64B68FC38FE0A0DAC-{\"GTI\": {\"File Provider\": \"GTI\", \"Attributes\": {}, \"Create Date\": \"2018-02-21 12:34:07\", \"Trust Level\": \"Most Likely Malicious\"}, \"ATD\": {}, \"MWG\": {}, \"Enterprise\": {\"File Provider\": \"Enterprise\", \"Attributes\": {\"Average Local Rep\": \"15\", \"First Contact\": \"2018-02-21 12:34:07\", \"Min Local Rep\": \"Most Likely Malicious\", \"Prevalence\": \"51\", \"Is Prevalent\": \"0\", \"File Name Count\": \"1\", \"Enterprise Size\": \"330\", \"Max Local Rep\": \"Most Likely Malicious\"}, \"Create Date\": \"2018-02-21 12:34:07\", \"Trust Level\": \"Known Malicious\"}}]": true, 
-  "tests/test_mcafee_tie_search_hash.py::TestMcafeeTieSearchHash::()::test_success[sha1-84132654FBA9669952EF116ACCA9273362806512-expected_result1]": true, 
-  "tests/test_mcafee_tie_search_hash.py::TestMcafeeTieSearchHash::()::test_success[sha256-766A6A19991AAFE91BFAE3DA931041FA9BFD2B3BC181E2124940DCF98E906FF8-expected_result2]": true
-}

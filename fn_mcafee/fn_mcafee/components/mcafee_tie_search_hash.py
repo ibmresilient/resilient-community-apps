@@ -17,15 +17,17 @@ LOG = logging.getLogger(__name__)
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mcafee_tie_search_hash"""
 
+    config_file = "dxlclient_config"
+
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
 
         try:
-            config = opts.get("mcafee").get("dxlclient_config")
+            config = opts.get("mcafee").get(self.config_file)
             if config is None:
-                LOG.error("dxlclient_config is not set. You must set this path to run this threat service")
-                raise ValueError("dxlclient_config is not set. You must set this path to run this threat service")
+                LOG.error(self.config_file + " is not set. You must set this path to run this threat service")
+                raise ValueError(self.config_file + " is not set. You must set this path to run this threat service")
 
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
@@ -37,6 +39,7 @@ class FunctionComponent(ResilientComponent):
         # Create client
         self.client = DxlClient(self.config)
         self.client.connect()
+        self.tie_client = TieClient(self.client)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -47,7 +50,7 @@ class FunctionComponent(ResilientComponent):
     def _mcafee_tie_search_hash_function(self, event, *args, **kwargs):
         """Function: """
 
-        yield StatusMessage("starting...")
+        yield StatusMessage("Searching Hash...")
         try:
             response_dict = {}
             # Get the function parameters:
@@ -61,11 +64,6 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}".format(
                 mcafee_tie_hash_type, mcafee_tie_hash))
 
-            # with DxlClient(self.config) as client:
-            #     # Connect to the fabric
-            #     client.connect()
-            tie_client = TieClient(self.client)
-
             if mcafee_tie_hash_type == "md5":
                 resilient_hash = {HashType.MD5: mcafee_tie_hash}
             elif mcafee_tie_hash_type == "sha1":
@@ -76,10 +74,10 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Something went wrong setting the hash value")
 
             reputations_dict = \
-                tie_client.get_file_reputation(
+                self.tie_client.get_file_reputation(
                     resilient_hash
                 )
-            system_list = tie_client.get_file_first_references(
+            system_list = self.tie_client.get_file_first_references(
                 resilient_hash
             )
 
@@ -87,9 +85,9 @@ class FunctionComponent(ResilientComponent):
             response_dict["GTI"] = self._get_gti_info(reputations_dict)
             response_dict["ATD"] = self._get_atd_info(reputations_dict)
             response_dict["MWG"] = self._get_mwg_info(reputations_dict)
-            # response_dict["system_list"] = system_list
+            response_dict["system_list"] = system_list
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Done...")
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(response_dict)
@@ -109,64 +107,66 @@ class FunctionComponent(ResilientComponent):
                 ent_dict["Trust Level"] = trust_level
 
             # Retrieve the enterprise reputation attributes
-            ent_rep_attribs = ent_rep[ReputationProp.ATTRIBUTES]
-            attribs_dict = {}
+            if ReputationProp.ATTRIBUTES in ent_rep:
+                ent_rep_attribs = ent_rep[ReputationProp.ATTRIBUTES]
+                attribs_dict = {}
 
-            # Get prevalence (if it exists)
-            # if FileEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
-            #     attribs_dict["Prevalence"] = ent_rep_attribs[FileEnterpriseAttrib.PREVALENCE]
+                if FileEnterpriseAttrib.PREVALENCE in ent_rep_attribs:
+                    attribs_dict["Prevalence"] = ent_rep_attribs[FileEnterpriseAttrib.PREVALENCE]
 
-            # Get Enterprise Size (if it exists)
-            # if FileEnterpriseAttrib.ENTERPRISE_SIZE in ent_rep_attribs:
-            #     attribs_dict["Enterprise Size"] = ent_rep_attribs[FileEnterpriseAttrib.ENTERPRISE_SIZE]
+                if FileEnterpriseAttrib.ENTERPRISE_SIZE in ent_rep_attribs:
+                    attribs_dict["Enterprise Size"] = ent_rep_attribs[FileEnterpriseAttrib.ENTERPRISE_SIZE]
 
-            # Get First Contact Date (if it exists)
-            if FileEnterpriseAttrib.FIRST_CONTACT in ent_rep_attribs:
-                attribs_dict["First Contact"] = FileEnterpriseAttrib.to_localtime_string(
-                    ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
+                if FileEnterpriseAttrib.FIRST_CONTACT in ent_rep_attribs:
+                    attribs_dict["First Contact"] = FileEnterpriseAttrib.to_localtime_string(
+                        ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
 
-            if FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Parent Avg Local Rep"] = ent_rep_attribs[FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP]
+                if FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Parent Avg Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                            FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP]))
 
-            if FileEnterpriseAttrib.PARENT_FILE_REPS in ent_rep_attribs:
-                attribs_dict["Parent File Reps"] = FileEnterpriseAttrib.to_aggregate_tuple(ent_rep_attribs[
-                    FileEnterpriseAttrib.PARENT_FILE_REPS])
+                if FileEnterpriseAttrib.PARENT_FILE_REPS in ent_rep_attribs:
+                    attribs_dict["Parent File Reps"] = FileEnterpriseAttrib.to_aggregate_tuple(ent_rep_attribs[
+                        FileEnterpriseAttrib.PARENT_FILE_REPS])
 
-            if FileEnterpriseAttrib.CHILD_FILE_REPS in ent_rep_attribs:
-                attribs_dict["Child File Reps"] = FileEnterpriseAttrib.to_aggregate_tuple(ent_rep_attribs[
-                    FileEnterpriseAttrib.CHILD_FILE_REPS])
+                if FileEnterpriseAttrib.CHILD_FILE_REPS in ent_rep_attribs:
+                    attribs_dict["Child File Reps"] = FileEnterpriseAttrib.to_aggregate_tuple(ent_rep_attribs[
+                        FileEnterpriseAttrib.CHILD_FILE_REPS])
 
-            if FileEnterpriseAttrib.AVG_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Average Local Rep"] = ent_rep_attribs[FileEnterpriseAttrib.AVG_LOCAL_REP]
+                if FileEnterpriseAttrib.AVG_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Average Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                              FileEnterpriseAttrib.AVG_LOCAL_REP]))
 
-            if FileEnterpriseAttrib.MAX_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Max Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
-                                                                          FileEnterpriseAttrib.MAX_LOCAL_REP]))
+                if FileEnterpriseAttrib.MAX_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Max Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                              FileEnterpriseAttrib.MAX_LOCAL_REP]))
 
-            if FileEnterpriseAttrib.MIN_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Min Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
-                                                                          FileEnterpriseAttrib.MIN_LOCAL_REP]))
+                if FileEnterpriseAttrib.MIN_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Min Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                              FileEnterpriseAttrib.MIN_LOCAL_REP]))
 
-            if FileEnterpriseAttrib.DETECTION_COUNT in ent_rep_attribs:
-                attribs_dict["Detection Count"] = ent_rep_attribs[FileEnterpriseAttrib.DETECTION_COUNT]
+                if FileEnterpriseAttrib.DETECTION_COUNT in ent_rep_attribs:
+                    attribs_dict["Detection Count"] = ent_rep_attribs[FileEnterpriseAttrib.DETECTION_COUNT]
 
-            if FileEnterpriseAttrib.FILE_NAME_COUNT in ent_rep_attribs:
-                attribs_dict["File Name Count"] = ent_rep_attribs[FileEnterpriseAttrib.FILE_NAME_COUNT]
+                if FileEnterpriseAttrib.FILE_NAME_COUNT in ent_rep_attribs:
+                    attribs_dict["File Name Count"] = ent_rep_attribs[FileEnterpriseAttrib.FILE_NAME_COUNT]
 
-            if FileEnterpriseAttrib.LAST_DETECTION_TIME in ent_rep_attribs:
-                attribs_dict["Last Detection Time"] = FileEnterpriseAttrib.to_localtime_string(
-                    ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
+                if FileEnterpriseAttrib.LAST_DETECTION_TIME in ent_rep_attribs:
+                    attribs_dict["Last Detection Time"] = FileEnterpriseAttrib.to_localtime_string(
+                        ent_rep_attribs[FileEnterpriseAttrib.FIRST_CONTACT])
 
-            if FileEnterpriseAttrib.IS_PREVALENT in ent_rep_attribs:
-                attribs_dict["Is Prevalent"] = ent_rep_attribs[FileEnterpriseAttrib.IS_PREVALENT]
+                if FileEnterpriseAttrib.IS_PREVALENT in ent_rep_attribs:
+                    attribs_dict["Is Prevalent"] = ent_rep_attribs[FileEnterpriseAttrib.IS_PREVALENT]
 
-            if FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Parent Min Local Rep"] = ent_rep_attribs[FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP]
+                if FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Parent Min Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                            FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP]))
 
-            if FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP in ent_rep_attribs:
-                attribs_dict["Parent Max Local Rep"] = ent_rep_attribs[FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP]
+                if FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP in ent_rep_attribs:
+                    attribs_dict["Parent Max Local Rep"] = self._get_trust_level(int(ent_rep_attribs[
+                                                                            FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP]))
 
-            ent_dict["Attributes"] = attribs_dict
+                ent_dict["Attributes"] = attribs_dict
 
         return ent_dict
 
@@ -184,18 +184,19 @@ class FunctionComponent(ResilientComponent):
                 gti_dict["Trust Level"] = trust_level
 
             # Retrieve the GTI reputation attributes
-            gti_rep_attribs = gti_rep[ReputationProp.ATTRIBUTES]
-            attribs_dict = {}
+            if ReputationProp.ATTRIBUTES in gti_rep:
+                gti_rep_attribs = gti_rep[ReputationProp.ATTRIBUTES]
+                attribs_dict = {}
 
-            # Get prevalence (if it exists)
-            if FileGtiAttrib.PREVALENCE in gti_rep_attribs:
-                attribs_dict["Prevalence"] = gti_rep_attribs[FileGtiAttrib.PREVALENCE]
+                # Get prevalence (if it exists)
+                if FileGtiAttrib.PREVALENCE in gti_rep_attribs:
+                    attribs_dict["Prevalence"] = gti_rep_attribs[FileGtiAttrib.PREVALENCE]
 
-            # Get First Contact Date (if it exists)
-            if FileGtiAttrib.FIRST_CONTACT in gti_rep_attribs:
-                attribs_dict["First Contact"] = EpochMixin.to_localtime_string(gti_rep_attribs[
-                                                                                        FileGtiAttrib.FIRST_CONTACT])
-            gti_dict["Attributes"] = attribs_dict
+                # Get First Contact Date (if it exists)
+                if FileGtiAttrib.FIRST_CONTACT in gti_rep_attribs:
+                    attribs_dict["First Contact"] = EpochMixin.to_localtime_string(gti_rep_attribs[
+                                                                                       FileGtiAttrib.FIRST_CONTACT])
+                gti_dict["Attributes"] = attribs_dict
 
         return gti_dict
 
@@ -213,22 +214,23 @@ class FunctionComponent(ResilientComponent):
                 atd_dict["Trust Level"] = trust_level
 
             # Retrieve the ATD reputation attributes
-            atd_rep_attribs = atd_rep[ReputationProp.ATTRIBUTES]
+            if ReputationProp.ATTRIBUTES in atd_rep:
+                atd_rep_attribs = atd_rep[ReputationProp.ATTRIBUTES]
 
-            attribs_dict = {}
-            # Get Trust scores
-            if AtdAttrib.GAM_SCORE in atd_rep_attribs:
-                attribs_dict["GAM Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.GAM_SCORE)
-            if AtdAttrib.AV_ENGINE_SCORE in atd_rep_attribs:
-                attribs_dict["AV Engine Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.AV_ENGINE_SCORE)
-            if AtdAttrib.GAM_SCORE in atd_rep_attribs:
-                attribs_dict["Sandbox Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.SANDBOX_SCORE)
-            if AtdAttrib.GAM_SCORE in atd_rep_attribs:
-                attribs_dict["Verdict"] = self._get_atd_trust_level(atd_rep, AtdAttrib.VERDICT)
-            if AtdAttrib.BEHAVIORS in atd_rep_attribs:
-                attribs_dict["Behaviors"] = atd_rep_attribs[AtdAttrib.BEHAVIORS]
+                attribs_dict = {}
+                # Get Trust scores
+                if AtdAttrib.GAM_SCORE in atd_rep_attribs:
+                    attribs_dict["GAM Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.GAM_SCORE)
+                if AtdAttrib.AV_ENGINE_SCORE in atd_rep_attribs:
+                    attribs_dict["AV Engine Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.AV_ENGINE_SCORE)
+                if AtdAttrib.GAM_SCORE in atd_rep_attribs:
+                    attribs_dict["Sandbox Score"] = self._get_atd_trust_level(atd_rep, AtdAttrib.SANDBOX_SCORE)
+                if AtdAttrib.GAM_SCORE in atd_rep_attribs:
+                    attribs_dict["Verdict"] = self._get_atd_trust_level(atd_rep, AtdAttrib.VERDICT)
+                if AtdAttrib.BEHAVIORS in atd_rep_attribs:
+                    attribs_dict["Behaviors"] = atd_rep_attribs[AtdAttrib.BEHAVIORS]
 
-            atd_dict["Attributes"] = attribs_dict
+                atd_dict["Attributes"] = attribs_dict
 
         return atd_dict
 
@@ -275,9 +277,7 @@ class FunctionComponent(ResilientComponent):
     @staticmethod
     def _get_atd_trust_level(atd_rep, rep_provider):
         trust_level = ""
-        if AtdTrustLevel.KNOWN_TRUSTED_INSTALLER is atd_rep[rep_provider]:
-            trust_level = "Known Trusted Installer"
-        elif AtdTrustLevel.KNOWN_TRUSTED is atd_rep[rep_provider]:
+        if AtdTrustLevel.KNOWN_TRUSTED is atd_rep[rep_provider]:
             trust_level = "Known Trusted"
         elif AtdTrustLevel.MOST_LIKELY_TRUSTED is atd_rep[rep_provider]:
             trust_level = "Most Likely Trusted"
