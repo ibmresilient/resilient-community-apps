@@ -36,10 +36,14 @@ class FunctionComponent(ResilientComponent):
                       "please set that by running resilient-circuits config -u")
             raise AttributeError("[mcafee] section is not set in the config file")
 
-        # Create client
         self.client = DxlClient(self.config)
-        self.client.connect()
-        self.tie_client = TieClient(self.client)
+        self._connect_client()
+
+    def _connect_client(self):
+        # Connect client
+        if not self.client.connected:
+            self.client.connect()
+            self.tie_client = TieClient(self.client)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -71,7 +75,10 @@ class FunctionComponent(ResilientComponent):
             elif mcafee_tie_hash_type == "sha256":
                 resilient_hash = {HashType.SHA256: mcafee_tie_hash}
             else:
-                raise ValueError("Something went wrong setting the hash value")
+                yield FunctionError("Something went wrong setting the hash value")
+
+            # Make sure client is connected
+            self._connect_client()
 
             reputations_dict = \
                 self.tie_client.get_file_reputation(
