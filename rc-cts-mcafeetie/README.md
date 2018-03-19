@@ -1,7 +1,7 @@
 # McAfee TIE Threat Searcher
 
 This Custom Threat Source uses the Python OpenDXL TIE Client to communicate with your TIE server, which is located at 
-[GitHit: opendxl-tie-client-python](https://github.com/opendxl/opendxl-tie-client-python).
+[GitHub: opendxl-tie-client-python](https://github.com/opendxl/opendxl-tie-client-python).
 
 ### Prerequisites
 * System must have an OpenSSL version used by Python that supports TLSv1.2 (Version 1.0.1 or greater)
@@ -15,6 +15,6 @@ Run with: `resilient-circuits run`
 
 Use the following commands to register this custom threat service with Resilient and test it:
 ```
-    sudo resutil threatserviceedit -name "McAfee TIE Searcher" -resturl <resilient_circuits_url>:9000/cts/mcafee_tie_searcher
+    sudo resutil threatserviceedit -name "McAfee TIE Searcher" -resturl http://localhost:9000/cts/mcafee_tie_searcher
     sudo resutil threatservicetest -name "McAfee TIE Searcher"
 ```

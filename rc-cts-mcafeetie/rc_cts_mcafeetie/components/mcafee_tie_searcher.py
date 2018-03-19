@@ -18,9 +18,9 @@ LOG = logging.getLogger(__name__)
 
 
 def config_section_data():
-    return '''[mcafee]
-dxlclient_config=/home/resilient/.resilient/mcafee_tie/dxlclient.config
-'''
+    return u"""[mcafee]
+dxlclient_config=/home/integration/.resilient/mcafee_tie/dxlclient.config
+"""
 
 
 class McAfeeTieSearcher(BaseComponent):
