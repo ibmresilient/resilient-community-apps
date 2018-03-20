@@ -93,14 +93,18 @@ def remove_nulls(d):
         return u''
 
     new = {}
-    for k, v in d.items():
-        if isinstance(v, dict):
-            v = remove_nulls(v)
-        elif isinstance(v, list):
-            v = [remove_nulls(v1) for v1 in v]
-        elif isinstance(v, basestring) and v == u'NULL':
-            v = u''
-        new[k] = v
+    if isinstance(d, unicode):
+        new = d
+    else:
+
+        for k, v in d.items():
+            if isinstance(v, dict):
+                v = remove_nulls(v)
+            elif isinstance(v, list):
+                v = [remove_nulls(v1) for v1 in v]
+            elif isinstance(v, basestring) and v == u'NULL':
+                v = u''
+            new[k] = v
     return new
 
 
