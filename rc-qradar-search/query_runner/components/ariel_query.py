@@ -93,9 +93,9 @@ def remove_nulls(d):
         return u''
 
     new = {}
-    if isinstance(d, unicode):
-        new = d
-    else:
+    if isinstance(d, str):
+        new = d.decode('utf-8')
+    elif isinstance(d, dict):
 
         for k, v in d.items():
             if isinstance(v, dict):
@@ -104,7 +104,11 @@ def remove_nulls(d):
                 v = [remove_nulls(v1) for v1 in v]
             elif isinstance(v, basestring) and v == u'NULL':
                 v = u''
+            else:
+                v = d
             new[k] = v
+    else:
+        new = d
     return new
 
 
