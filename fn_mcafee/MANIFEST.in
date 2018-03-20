@@ -1,0 +1,3 @@
+include README.md
+include fn_mcafee/util/*
+include fn_mcafee/LICENSE
