@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_mcafee"""
+"""Generate the Resilient customizations required for fn_mcafee_epo"""
 
 from __future__ import print_function
 from resilient_circuits.util import *
@@ -38,17 +38,17 @@ def customization_data(client=None):
         }
     )
 
-    # Message destination: 'mcafee_message_destination'
+    # Message destination: 'mcafee_epo_message_destination'
     yield MessageDestinationDefinition({ 'destination_type': 0,
   'expect_ack': True,
-  'name': 'mcafee_Message Destination',
-  'programmatic_name': 'mcafee_message_destination'}
+  'name': 'McAfee ePO Message Destination',
+  'programmatic_name': 'mcafee_epo_message_destination'}
     )
 
     # Function: 'mcafee_tag_an_epo_asset'
     yield FunctionDefinition({ 'description': { 'content': 'A function which takes two inputs:\n\nmcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.\nmcafee_epo_tag: A Tag managed on ePO.\n\nApplies tag to the systems in ePO.',
                    'format': 'text'},
-  'destination_handle': 'mcafee_message_destination',
+  'destination_handle': 'mcafee_epo_message_destination',
   'display_name': 'mcafee_Tag an ePO asset',
   'name': 'mcafee_tag_an_epo_asset',
   'uuid': '67c5b852-f38f-40f7-8a68-1ae8e8a78549',

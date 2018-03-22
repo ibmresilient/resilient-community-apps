@@ -12,19 +12,19 @@ it should contain your actual contact and license information.
 
 To install in "development mode"
 
-    pip install -e ./fn_mcafee/
+    pip install -e ./fn_mcafee_epo/
 
 After installation, the package will be loaded by `resilient-circuits run`.
 
 
 To uninstall,
 
-    pip uninstall fn_mcafee
+    pip uninstall fn_mcafee_epo
 
 
 To package for distribution,
 
-    python ./fn_mcafee/setup.py sdist
+    python ./fn_mcafee_epo/setup.py sdist
 
 The resulting .tar.gz file can be installed using
 
