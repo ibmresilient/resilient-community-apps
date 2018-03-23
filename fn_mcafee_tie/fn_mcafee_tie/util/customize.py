@@ -36,16 +36,16 @@ def customization_data(client):
         }
     )
 
-    # Message destination: mcafee_tie_md
+    # Message destination: mcafee_tie_message_destination
     yield MessageDestinationDefinition({ 'destination_type': 0,
   'expect_ack': True,
-  'name': 'McAfee TIE MD',
-  'programmatic_name': 'mcafee_tie_md'}
+  'name': 'McAfee TIE Message Destination',
+  'programmatic_name': 'mcafee_tie_message_destination'}
     )
 
     # Function: mcafee_tie_search_hash
     yield FunctionDefinition({ 'description': { 'content': '', 'format': 'text'},
-  'destination_handle': 'mcafee_tie_md',
+  'destination_handle': 'mcafee_tie_message_destination',
   'display_name': 'McAfee TIE search hash',
   'name': 'mcafee_tie_search_hash',
   'view_items': [ { 'content': 'mcafee_tie_hash_type',

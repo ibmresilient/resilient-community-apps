@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
 
         try:
-            config = opts.get("mcafee").get(self.config_file)
+            config = opts.get("fn_mcafee_tie").get(self.config_file)
             if config is None:
                 LOG.error(self.config_file + " is not set. You must set this path to run this threat service")
                 raise ValueError(self.config_file + " is not set. You must set this path to run this threat service")
@@ -33,9 +33,9 @@ class FunctionComponent(ResilientComponent):
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
         except AttributeError:
-            LOG.error("There is no [mcafee] section in the config file, "
+            LOG.error("There is no [fn_mcafee_tie] section in the config file, "
                       "please set that by running resilient-circuits config -u")
-            raise AttributeError("[mcafee] section is not set in the config file")
+            raise AttributeError("[fn_mcafee_tie] section is not set in the config file")
 
         self.client = DxlClient(self.config)
         self._connect_client()
@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("mcafee", {})
+        self.options = opts.get("fn_mcafee_tie", {})
 
     @function("mcafee_tie_search_hash")
     def _mcafee_tie_search_hash_function(self, event, *args, **kwargs):

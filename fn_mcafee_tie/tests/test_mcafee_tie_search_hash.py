@@ -7,7 +7,7 @@ import json
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_mcafee"
+PACKAGE_NAME = "fn_mcafee_tie"
 FUNCTION_NAME = "mcafee_tie_search_hash"
 
 # Read the default configuration-data section from the package
