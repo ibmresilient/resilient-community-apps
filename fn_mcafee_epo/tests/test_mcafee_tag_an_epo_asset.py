@@ -27,7 +27,7 @@ def call_mcafee_tag_an_epo_asset_function(circuits, function_params, timeout=10)
     return event.kwargs["result"].value
 
 
-class TestMcafeeTagAnEpoAsset:
+class TestMcAfeeTagAnEpoAsset:
     """ Tests for the mcafee_tag_an_epo_asset function"""
 
     def test_function_definition(self):
@@ -36,8 +36,7 @@ class TestMcafeeTagAnEpoAsset:
         assert func is not None
 
     @pytest.mark.parametrize("mcafee_epo_systems, mcafee_epo_tag, expected_results", [
-        ("text", "text", {"value": "xyz"}),
-        ("text", "text", {"value": "xyz"})
+        ("10.0.2.15", "Resilient", u'OK:\r\n0\r\n')
     ])
     def test_success(self, circuits_app, mcafee_epo_systems, mcafee_epo_tag, expected_results):
         """ Test calling with sample values for the parameters """

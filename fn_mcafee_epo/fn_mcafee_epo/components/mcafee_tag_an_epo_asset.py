@@ -65,7 +65,11 @@ Applies tag to the systems in ePO."""
 
             # Get the function parameters:
             mcafee_epo_systems = kwargs.get("mcafee_epo_systems")  # text
+            if not mcafee_epo_systems:
+                yield FunctionError("mcafee_epo_systems is required")
             mcafee_epo_tag = kwargs.get("mcafee_epo_tag")  # text
+            if not mcafee_epo_tag:
+                yield FunctionError("mcafee_epo_tag is required")
 
             LOG.info("mcafee_epo_systems: %s", mcafee_epo_systems)
             LOG.info("mcafee_epo_tag: %s", mcafee_epo_tag)
@@ -116,5 +120,4 @@ class Client:
         return r
 
     def __call__(self, command_name, params, *args, **kwargs):
-
         return self._request(command_name, params=params)
