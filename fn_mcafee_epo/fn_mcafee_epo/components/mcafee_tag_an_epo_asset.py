@@ -81,15 +81,16 @@ Applies tag to the systems in ePO."""
             status_code = response.status_code
             content = response.text
 
-            if not status_code < 300 and content.startswith('OK'):
-                yield FunctionError
+            if not status_code < 300 or not content.startswith('OK'):
+                yield FunctionError(content.text)
 
             yield StatusMessage("Tag Applied...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(content)
-        except Exception:
-            yield FunctionError()
+        except Exception as e:
+            LOG.error(e)
+            yield FunctionError(e)
 
 
 class Client:
@@ -110,9 +111,7 @@ class Client:
 
         # Default to trusting cert
         trust_cert = True
-        if self.trust_cert == "true":
-            trust_cert = True
-        elif self.trust_cert == "false":
+        if self.trust_cert == "false":
             trust_cert = False
 
         # Make request
