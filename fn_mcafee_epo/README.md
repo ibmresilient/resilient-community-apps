@@ -36,7 +36,7 @@ Set the following values in the config file under the `[fn_mcafee_epo]` section:
 1. Start Resilient Circuits with:
     `resilient-circuits run`
 
-2. In the Resilient platform, create a workflow and add a the function `McAfee Tag an epo asset` to it
+2. In the Resilient platform, create a workflow and add the function `McAfee Tag an epo asset` to it
 
 3. Within the workflow, edit the function to determine how to set the two input parameters `mcafee_epo_systems` and `mcafee_epo_tag`
 
