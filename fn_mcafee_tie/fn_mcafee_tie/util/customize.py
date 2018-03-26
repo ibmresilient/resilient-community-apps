@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for test"""
+"""Generate the Resilient customizations required for fn_mcafee_tie"""
 
 from __future__ import print_function
 from resilient_circuits.util import *
