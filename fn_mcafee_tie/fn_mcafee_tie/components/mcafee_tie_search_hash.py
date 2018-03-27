@@ -27,8 +27,8 @@ class FunctionComponent(ResilientComponent):
         try:
             config = opts.get("fn_mcafee_tie").get(self.config_file)
             if config is None:
-                LOG.error(self.config_file + " is not set. You must set this path to run this threat service")
-                raise ValueError(self.config_file + " is not set. You must set this path to run this threat service")
+                LOG.error(self.config_file + " is not set. You must set this path to run this function")
+                raise ValueError(self.config_file + " is not set. You must set this path to run this function")
 
             # Create configuration from file for DxlClient
             self.config = DxlClientConfig.create_dxl_config_from_file(config)
