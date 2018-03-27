@@ -24,20 +24,20 @@ class FunctionComponent(ResilientComponent):
             password = self.options.get("epo_password")
             cert_trust = self.options.get("epo_trust_cert")
             if url is None:
-                LOG.error("epo_url is not set. You must set this path to run this threat service")
-                raise ValueError("epo_url is not set. You must set this path to run this threat service")
+                LOG.error("epo_url is not set. You must set this value to run this function")
+                raise ValueError("epo_url is not set. You must set this value to run this function")
 
             if username is None:
-                LOG.error("epo_username is not set. You must set this path to run this threat service")
-                raise ValueError("epo_username is not set. You must set this path to run this threat service")
+                LOG.error("epo_username is not set. You must set this value to run this function")
+                raise ValueError("epo_username is not set. You must set this value to run this function")
 
             if password is None:
-                LOG.error("epo_password is not set. You must set this path to run this threat service")
-                raise ValueError("epo_password is not set. You must set this path to run this threat service")
+                LOG.error("epo_password is not set. You must set this value to run this function")
+                raise ValueError("epo_password is not set. You must set this value to run this function")
 
             if cert_trust is None:
-                LOG.error("epo_trust_cert is not set. You must set this path to run this threat service")
-                raise ValueError("epo_trust_cert is not set. You must set this path to run this threat service")
+                LOG.error("epo_trust_cert is not set. You must set this value to run this function")
+                raise ValueError("epo_trust_cert is not set. You must set this value to run this function")
 
         except AttributeError:
             LOG.error("There is no [fn_mcafee_epo] section in the config file, "
