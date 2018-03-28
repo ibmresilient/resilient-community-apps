@@ -89,18 +89,30 @@ def _get_query_results(search_id, qradar_client, item_range):
 
 def remove_nulls(d):
     """ recursively replace 'NULL' with '' in dictionary """
-    if isinstance(d, basestring) and d == u'NULL':
-        return u''
+    if isinstance(d, basestring):
+        if d == u'NULL':
+            return u''
+        else:
+            return d
 
     new = {}
+    LOG.debug("d={d} ".format(d=d))
+    LOG.debug("type of d is {t}".format(t=type(d)))
+
     for k, v in d.items():
+        LOG.debug("{k}={v}".format(k=k, v=v))
+        LOG.debug("type of v is {t}".format(t=type(v)))
         if isinstance(v, dict):
             v = remove_nulls(v)
         elif isinstance(v, list):
             v = [remove_nulls(v1) for v1 in v]
         elif isinstance(v, basestring) and v == u'NULL':
             v = u''
+
         new[k] = v
+        LOG.info("Setting ({key}) = {v}".format(key=k,v=v))
+    LOG.info("Returning: {n}".format(n=new))
+
     return new
 
 
