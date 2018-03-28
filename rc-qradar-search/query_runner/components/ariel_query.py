@@ -2,7 +2,6 @@
 import logging
 from datetime import datetime
 import time
-import collections
 import copy
 import json
 from string import Template
