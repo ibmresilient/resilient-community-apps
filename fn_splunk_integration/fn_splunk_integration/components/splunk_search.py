@@ -80,4 +80,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the return value
             yield FunctionResult(result)
         except Exception as e:
+            log.error("Function execution throws exception {}".format(str(e)))
             yield FunctionError(str(e))
