@@ -9,8 +9,8 @@
 import unittest
 
 import sys
-sys.path.append("../fn_splunk_integration/components")
-sys.path.append("fn_splunk_integration/components")
+sys.path.append("../fn_splunk_integration/util")
+sys.path.append("fn_splunk_integration/util")
 from function_utils import make_query_string
 from function_utils import make_item_dict
 from function_utils import ItemDataError

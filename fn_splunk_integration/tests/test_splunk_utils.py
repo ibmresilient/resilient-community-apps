@@ -12,8 +12,8 @@ import mock
 import urllib
 import json
 import sys
-sys.path.append("../fn_splunk_integration/components")
-sys.path.append("fn_splunk_integration/components")
+sys.path.append("../fn_splunk_integration/util")
+sys.path.append("fn_splunk_integration/util")
 import splunk_utils
 import splunklib
 

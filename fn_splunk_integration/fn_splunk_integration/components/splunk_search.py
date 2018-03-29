@@ -7,27 +7,18 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import sys, os
+sys.path.append(os.path.realpath("../util"))
 from function_utils import make_query_string as make_query_string
 import splunk_utils
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'splunk_search"""
 
-    # Member variables
-    splunk_password = None
-    app_config = None
-
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_splunk_integration", {})
-        self.app_config = opts.get(splunk_utils.SPLUNK_SECTION, {})
-
-        #
-        # Somehow keyrings only works for the resilient section
-        #
-        args = dict(opts)
-        self.splunk_password = args["resilient"]["splunkpassword"]
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -62,13 +53,13 @@ class FunctionComponent(ResilientComponent):
 
             log.info("Splunk query to be executed: %s" % query_string)
             log.info("Splunk host: %s, port: %s, username: %s",
-                     self.app_config["host"], self.app_config["port"], self.app_config["username"])
+                     self.options["host"], self.options["port"], self.options["username"])
 
             yield StatusMessage("starting...")
-            splunk_client = splunk_utils.SplunkClient(self.app_config["host"],
-                                                      port=int(self.app_config["port"]),
-                                                      username=self.app_config["username"],
-                                                      password=self.splunk_password)
+            splunk_client = splunk_utils.SplunkClient(self.options["host"],
+                                                      port=int(self.options["port"]),
+                                                      username=self.options["username"],
+                                                      password=self.options["splunkpassword"])
             if splunk_max_return:
                 splunk_client.set_max_return(splunk_max_return)
 

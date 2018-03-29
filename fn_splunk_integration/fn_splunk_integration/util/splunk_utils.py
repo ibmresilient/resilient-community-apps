@@ -24,7 +24,7 @@ class SearchFailure(Exception):
     """ Search failed to execute """
     def __init__(self, search_id, search_status):
         fail_msg = "Query [{}] failed with status [{}]".format(search_id, search_status)
-        Exception.__init__(self, fail_msg)
+        super(SearchFailure, self).__init__(fail_msg)
         self.search_status = search_status
 
 
@@ -32,7 +32,7 @@ class SearchTimeout(Exception):
     """ Query failed to complete in time specified """
     def __init__(self, search_id, search_status):
         fail_msg = "Query [{}] timed out. Final Status was [{}]".format(search_id, search_status)
-        Exception.__init__(self, fail_msg)
+        super(SearchTimeout, self).__init__(fail_msg)
         self.search_status = search_status
 
 
@@ -40,21 +40,21 @@ class SearchJobFailure(Exception):
     """ Search job creation failure"""
     def __init__(self, query):
         fail_msg = "Failed to create search job for query [{}] ".format(query)
-        Exception.__init__(self, fail_msg)
+        super(SearchJobFailure, self).__init__(fail_msg)
 
 
 class RequestError(Exception):
     """ Request error"""
     def __init__(self, url, message):
         fail_msg = "Request to url [{}] throws exception. Error [{}]".format(url, message)
-        Exception.__init__(self, fail_msg)
+        super(RequestError, self).__init__(fail_msg)
 
 
 class DeleteError(Exception):
     """ Request error"""
     def __init__(self, url, message):
         fail_msg = "Delete request to url [{}] throws exception. Error [{}]".format(url, message)
-        Exception.__init__(self, fail_msg)
+        super(DeleteError, self).__init__(fail_msg)
 
 
 class SplunkClient(object):

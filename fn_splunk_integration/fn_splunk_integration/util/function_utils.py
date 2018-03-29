@@ -8,7 +8,7 @@ LOG = logging.getLogger(__name__)
 class ItemDataError(Exception):
     """ Search failed to execute """
     def __init__(self, msg):
-        Exception.__init__(self, msg)
+        super(ItemDataError, self).__init__(msg)
 
 def make_query_string(query, params):
     """

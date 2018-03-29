@@ -7,28 +7,17 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import sys, os
+sys.path.append(os.path.realpath("../util"))
 import function_utils
 import splunk_utils
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'splunk_add_intel_item"""
-    #
-    # Member variables
-    #
-    splunk_password = None
-    app_config = None
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_splunk_integration", {})
-        self.app_config = opts.get(splunk_utils.SPLUNK_SECTION, {})
-
-        #
-        # Somehow keyrings only works for the resilient section
-        #
-        args = dict(opts)
-        self.splunk_password = args["resilient"]["splunkpassword"]
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -57,7 +46,10 @@ class FunctionComponent(ResilientComponent):
             splunk_query_param8 = kwargs.get("splunk_query_param8")  # text
             splunk_query_param9 = kwargs.get("splunk_query_param9")  # text
             splunk_query_param10 = kwargs.get("splunk_query_param10")  # text
-            splunk_verify_cert = kwargs.get("splunk_verify_cert")  # boolean
+
+            splunk_verify_cert = True
+            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+                splunk_verify_cert = False
 
             log = logging.getLogger(__name__)
             log.info("splunk_threat_intel_type: %s", splunk_threat_intel_type)
@@ -71,7 +63,7 @@ class FunctionComponent(ResilientComponent):
             log.info("splunk_query_param8: %s", splunk_query_param8)
             log.info("splunk_query_param9: %s", splunk_query_param9)
             log.info("splunk_query_param10: %s", splunk_query_param10)
-            log.info("splunk_verify_cert: %s", splunk_verify_cert)
+            log.info("splunk_verify_cert: %s", str(splunk_verify_cert))
 
             yield StatusMessage("starting...")
 
@@ -89,10 +81,10 @@ class FunctionComponent(ResilientComponent):
             # log it for debug
             log.debug("item dict: {}".format(str(item_dict)))
 
-            splnk_utils = splunk_utils.SplunkUtils(host=self.app_config["host"],
-                                                   port=self.app_config["port"],
-                                                   username=self.app_config["username"],
-                                                   password=self.splunk_password,
+            splnk_utils = splunk_utils.SplunkUtils(host=self.options["host"],
+                                                   port=self.options["port"],
+                                                   username=self.options["username"],
+                                                   password=self.options["splunkpassword"],
                                                    verify=splunk_verify_cert)
 
             result = splnk_utils.add_threat_intel_item(threat_type=splunk_threat_intel_type,
