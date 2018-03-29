@@ -18,7 +18,7 @@ To package for distribution:
 
     python ./fn_mcafee_opendxl/setup.py sdist
 
-The resulting .tar.gz file can be installed using
+The resulting .tar.gz file can be installed using:
 
     pip install <filename>.tar.gz
 
@@ -26,11 +26,11 @@ Set the following value in the config file under the `[fn_mcafee_opendxl]` secti
 
     dxlclient_config=<path_to_dxlclient.config_file>
     
-Customize Resilient:
+Deploy to the Resilient Platform:
 
     resilient-circuits customize
 
-Creates the following items in the Resilient Appliance:
+Creates the following items in the Resilient Platform:
 
     Function: McAfee Publish to DXL
     Function inputs: mcafee_topic_name, mcafee_dxl_payload, mcafee_publish_method, mcafee_return_response
@@ -45,4 +45,4 @@ Creates the following items in the Resilient Appliance:
     Workflow: (Example) McAfee Publish to DXL (Tag System); Rule: (Example) McAfee Publish to DXL (Tag System)
     Workflow: (Example) McAfee Publish to DXL (Set TIE Reputation); Rule: (Example) McAfee Publish to DXL (Set TIE Reputation)
     ```
-3. Triggering either of the the manual rules will cause the function to be called.
+Triggering either of the the manual rules will cause the function to be called.
