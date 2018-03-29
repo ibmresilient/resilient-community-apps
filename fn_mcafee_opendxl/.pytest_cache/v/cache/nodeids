@@ -1,0 +1,5 @@
+[
+  "tests/test_mcafee_publish_to_dxl.py::TestMcafeePublishToDxl::()::test_function_definition", 
+  "tests/test_mcafee_publish_to_dxl.py::TestMcafeePublishToDxl::()::test_success[/mcafee/service/epo/remote/epo1-{\"command\": \"system.applyTag\", \"output\": \"json\", \"params\": {\"names\": \"10.0.2.15\", \"tagName\": \"Shut Down\"}}-Event-No-expected_results0]", 
+  "tests/test_mcafee_publish_to_dxl.py::TestMcafeePublishToDxl::()::test_success[/mcafee/service/tie/file/reputation/set-{\"hashes\": [{\"type\": \"md5\", \"value\": \"Dk0TzJrwTMZLaPw4/goNrA==\"}], \"providerId\": 3, \"trustLevel\": 1}-Service-No-expected_results1]"
+]

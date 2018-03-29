@@ -1,0 +1,3 @@
+include README.md
+include fn_mcafee_opendxl/*
+include fn_mcafee_opendxl/LICENSE
