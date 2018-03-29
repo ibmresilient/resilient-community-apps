@@ -5,6 +5,8 @@ from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 
+PUBLISH_VERSION = "1.0.0"
+
 class PyTest(TestCommand):
     user_options = [('pytestargs=', 'a', "Resilient Environment Arguments")]
     def initialize_options(self):
@@ -23,8 +25,7 @@ class PyTest(TestCommand):
 
 setup(
     name='rc-cts-mcafeetie',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
+    version=PUBLISH_VERSION,
     url='https://github.com/ibmresilient/resilient-circuits-packages',
     license='MIT',
     author='IBM Resilient',
