@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import sys, os
-sys.path.append(os.path.realpath("../util"))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'util'))
 import splunk_utils
 
 
