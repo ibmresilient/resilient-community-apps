@@ -8,8 +8,7 @@
 #
 
 import sys, getopt
-sys.path.append("../fn_splunk_integration/components")
-from splunk_utils import SplunkUtils as SplunkUtils
+from fn_splunk_integration.util.splunk_utils import SplunkUtils as SplunkUtils
 import json
 
 HELP_STRING = \

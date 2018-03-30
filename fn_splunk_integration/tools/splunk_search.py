@@ -19,8 +19,7 @@
 #
 
 import sys, getopt
-sys.path.append("../fn_splunk_integration/components")
-from splunk_utils import SplunkClient as SplunkClient
+from fn_splunk_integration.util.splunk_utils import SplunkClient as SplunkClient
 
 
 HELP_STRING = \
