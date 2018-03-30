@@ -93,7 +93,6 @@ def remove_nulls(d):
         if d == u'NULL':
             return u''
         else:
-            d = d.encode('utf-8')
             return d
 
     new = {}
