@@ -7,9 +7,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import sys, os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'util'))
-import splunk_utils
+from fn_splunk_integration.util import splunk_utils
 
 
 class FunctionComponent(ResilientComponent):
