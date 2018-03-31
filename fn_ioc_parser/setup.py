@@ -3,15 +3,17 @@
 # Copyright IBM Corp. - Confidential Information
 from setuptools import setup, find_packages
 
+PUBLISH_VERSION = "1.0.0"
+
+
 setup(
     name='fn_ioc_parser',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
-    license='Resilient License',
+    version=PUBLISH_VERSION,
+    license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Components for 'fn_ioc_parser'",
-    long_description="Resilient Circuits Components for 'fn_ioc_parser'",
+    description="Resilient Circuits Components for 'IOC_parser' function",
+    long_description="Resilient Circuits Components for 'IOC_parser' function",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'ioc_parser'
