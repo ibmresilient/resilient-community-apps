@@ -1,0 +1,3 @@
+include README.md
+include fn_pagerduty/util/*
+include fn_pagerduty/LICENSE
