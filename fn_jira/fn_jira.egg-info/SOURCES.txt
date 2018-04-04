@@ -1,5 +1,6 @@
 MANIFEST.in
 README.md
+setup.cfg
 setup.py
 fn_jira/LICENSE
 fn_jira/__init__.py
