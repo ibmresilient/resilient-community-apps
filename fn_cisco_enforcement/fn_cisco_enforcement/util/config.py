@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# Copyright IBM Corp. - Confidential Information
 """Generate a default configuration-file section for fn_cisco_enforcement"""
 
 from __future__ import print_function

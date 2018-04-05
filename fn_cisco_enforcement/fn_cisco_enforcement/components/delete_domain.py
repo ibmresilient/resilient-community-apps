@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-
+# Copyright IBM Corp. - Confidential Information
 import logging
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-
+# Deletes a domain using the Cisco api. The apikey is refernced in the app.config under [fn_cisco_enforcement]
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'delete_domain"""
 
@@ -29,21 +29,13 @@ class FunctionComponent(ResilientComponent):
             apikey = self.options.get('apikey')
             log = logging.getLogger(__name__)
             log.info("cisco_domin: %s", cisco_domin)
-          #  deleteapi = 'https://s-platform.api.opendns.com/1.0/domains/{}?customerKey={}'.format(cisco_domin,apikey)
-          #  respose = requests.request('DELETE', deleteapi, {"connection": "keep-alive", "accept-encoding": "gzip:deflate"})
+
+            log.info('Deleting {} from list'.format(cisco_domin))
             deleteapi = 'https://s-platform.api.opendns.com/1.0/domains/{}?customerKey={}'.format(cisco_domin,apikey)
             respose = requests.delete(deleteapi)
             results = {
                 "value": respose.content
             }
-
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-
-            results = {
-                "value": "xyz"
-            }
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

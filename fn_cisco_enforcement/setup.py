@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+# Copyright IBM Corp. - Confidential Information
 from setuptools import setup, find_packages
 
 setup(

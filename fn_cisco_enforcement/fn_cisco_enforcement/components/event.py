@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-
+# Copyright IBM Corp. - Confidential Information
 import logging
 import requests
 import datetime
-import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
+# This adds an event using the Cisco Event api. The inputs can be found with a description of the api here https://docs.umbrella.com/developer/enforcement-api/events2/
+# The apikey is refernced in the app.config under [fn_cisco_enforcement]
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'event"""
@@ -39,11 +41,11 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             yield FunctionError()
 
+    # Creates the data object to send
     def createdataobject(self,kwargs):
         # Get the function parameters:
         cisco_deviceid = str(kwargs.get("cisco_deviceid"))  # text
         cisco_deviceversion = str(kwargs.get("cisco_deviceversion"))  # text
-        # Date picker requires a unix timestamp eg something like 524783600000
 
         cisco_eventtime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_eventtime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
         cisco_alerttime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_alerttime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
@@ -95,6 +97,8 @@ class FunctionComponent(ResilientComponent):
                   cisco_filename, cisco_filehash, cisco_externalurl, cisco_src)
 
         return data
+
+    # Adds the non mandatory parameters to the data object
     def addothers(self,data,cisco_dstip,cisco_eventseverity,cisco_eventtype,cisco_eventdescription,cisco_eventhash,cisco_filename,cisco_filehash,cisco_externalurl,cisco_src):
         if cisco_dstip !=None:
             data['cisco_dstip']=cisco_dstip

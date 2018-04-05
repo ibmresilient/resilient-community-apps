@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-
+# Copyright IBM Corp. - Confidential Information
 import logging
 import requests
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
+# This adds an event using the Cisco Event api. The inputs can be found with a description of the api here https://docs.umbrella.com/developer/enforcement-api/events2/
+# The apikey is refernced in the app.config under [fn_cisco_enforcement]
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'get_domains"""
@@ -42,7 +44,7 @@ class FunctionComponent(ResilientComponent):
                 if (jsonversion['meta']['next'] == False):
                     isnextpage = False
                 getapi = jsonversion['meta']['next']
-
+            log.info('Returning results')
             results = {
                 "value": resultlist
             }
