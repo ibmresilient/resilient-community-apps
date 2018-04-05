@@ -39,10 +39,20 @@ Creates the following items in the Resilient Platform:
     Rules: (Example) McAfee Publish to DXL (Set TIE Reputation), (Example) McAfee Publish to DXL (Tag System)
 
 ### How to use the function
-1. Start Resilient Circuits with: `resilient-circuits run`
-2. There are two sets of example Workflows and Rules which trigger the function:
-    ```
-    Workflow: (Example) McAfee Publish to DXL (Tag System); Rule: (Example) McAfee Publish to DXL (Tag System)
-    Workflow: (Example) McAfee Publish to DXL (Set TIE Reputation); Rule: (Example) McAfee Publish to DXL (Set TIE Reputation)
-    ```
-Triggering either of the the manual rules will cause the function to be called.
+1. Import the necessary customization data into the Resilient Platform:
+
+		resilient-circuits customize
+		
+	This will create the following customization components:
+	* Function inputs: `mcafee_dxl_payload, mcafee_publish_method, mcafee_return_response, mcafee_topic_name`
+	* Message Destinations: `mcafee_dxl_message_destination`
+	* Functions: `mcafee_publish_to_dxl`
+	* Workflows: `example_mcafee_publish_to_dxl_set_tie_reputation, example_mcafee_publish_to_dxl_tag_system`
+	* Rules: `(Example) McAfee Publish to DXL (Tag System), (Example) McAfee Publish to DXL (Set TIE Reputation)`
+
+2. Update and edit `app.config`:
+
+		resilient-circuits configure -u
+
+3. Start Resilient Circuits with: `resilient-circuits run`
+4. Trigger either rule.

@@ -11,121 +11,132 @@ def customization_data(client=None):
        that should be installed by `resilient-circuits customize`
     """
 
-    # Function-field definitions
-    yield TypeDefinition(
-        {
-            "type_name": "__function",
-            "fields": { '3e44c51b-22a8-4350-906d-6ae038bb6779': { 'blank_option': False,
-                                            'input_type': 'select',
-                                            'name': 'mcafee_publish_method',
-                                            'placeholder': '',
-                                            'required': 'always',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_publish_method',
-                                            'tooltip': 'Specify whether to publish an event or invoke a service',
-                                            'uuid': '3e44c51b-22a8-4350-906d-6ae038bb6779',
-                                            'values': [ { 'label': 'Event'},
-                                                        { 'label': 'Service'}]},
-  '7e569052-b786-4933-9d87-eab57280624f': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_topic_name',
-                                            'placeholder': '',
-                                            'required': 'always',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_topic_name',
-                                            'tooltip': 'String of the topic name. ie: /mcafee/service/epo/remote/epo1',
-                                            'uuid': '7e569052-b786-4933-9d87-eab57280624f',
-                                            'values': []},
-  '85e0711e-c573-405a-b590-47ae04ba67dc': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_dxl_payload',
-                                            'placeholder': '',
-                                            'required': 'always',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_dxl_payload',
-                                            'tooltip': 'The text of the payload to publish to the topic',
-                                            'uuid': '85e0711e-c573-405a-b590-47ae04ba67dc',
-                                            'values': []},
-  'dbeed36a-23bf-4189-9f5b-b53ee54ecdc3': { 'blank_option': False,
-                                            'input_type': 'select',
-                                            'name': 'mcafee_return_response',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_return_response',
-                                            'tooltip': 'Specify whether or not to wait for and return the response. Uses synchronous/asynchronous service',
-                                            'uuid': 'dbeed36a-23bf-4189-9f5b-b53ee54ecdc3',
-                                            'values': [ { 'label': 'Yes'},
-                                                        { 'label': 'No'}]}}
-        }
+    # This import data contains:
+    #   Function inputs: mcafee_dxl_payload, mcafee_publish_method, mcafee_return_response, mcafee_topic_name
+    #   Message Destinations: mcafee_dxl_message_destination
+    #   Functions: mcafee_publish_to_dxl
+    #   Workflows: example_mcafee_publish_to_dxl_set_tie_reputation, example_mcafee_publish_to_dxl_tag_system
+    #   Rules: (Example) McAfee Publish to DXL (Tag System), (Example) McAfee Publish to DXL (Set TIE Reputation)
+
+
+    yield ImportDefinition(u"""
+eyJ0YXNrX29yZGVyIjogW10sICJ3b3JrZmxvd3MiOiBbXSwgImFjdGlvbnMiOiBbeyJsb2dpY190
+eXBlIjogImFsbCIsICJuYW1lIjogIihFeGFtcGxlKSBNY0FmZWUgUHVibGlzaCB0byBEWEwgKFNl
+dCBUSUUgUmVwdXRhdGlvbikiLCAidmlld19pdGVtcyI6IFtdLCAidHlwZSI6IDEsICJ3b3JrZmxv
+d3MiOiBbImV4YW1wbGVfbWNhZmVlX3B1Ymxpc2hfdG9fZHhsX3NldF90aWVfcmVwdXRhdGlvbiJd
+LCAib2JqZWN0X3R5cGUiOiAiaW5jaWRlbnQiLCAidGltZW91dF9zZWNvbmRzIjogODY0MDAsICJ1
+dWlkIjogIjU1OTY2MTFjLTkwOWMtNDU0NC05MDBjLWRhNGE4Mjc3NzY2OCIsICJhdXRvbWF0aW9u
+cyI6IFtdLCAiZXhwb3J0X2tleSI6ICIoRXhhbXBsZSkgTWNBZmVlIFB1Ymxpc2ggdG8gRFhMIChT
+ZXQgVElFIFJlcHV0YXRpb24pIiwgImNvbmRpdGlvbnMiOiBbXSwgImlkIjogMzQsICJtZXNzYWdl
+X2Rlc3RpbmF0aW9ucyI6IFtdfSwgeyJsb2dpY190eXBlIjogImFsbCIsICJuYW1lIjogIihFeGFt
+cGxlKSBNY0FmZWUgUHVibGlzaCB0byBEWEwgKFRhZyBTeXN0ZW0pIiwgInZpZXdfaXRlbXMiOiBb
+XSwgInR5cGUiOiAxLCAid29ya2Zsb3dzIjogWyJleGFtcGxlX21jYWZlZV9wdWJsaXNoX3RvX2R4
+bF90YWdfc3lzdGVtIl0sICJvYmplY3RfdHlwZSI6ICJpbmNpZGVudCIsICJ0aW1lb3V0X3NlY29u
+ZHMiOiA4NjQwMCwgInV1aWQiOiAiYjRhYjA4NWUtYTQxZS00MzJhLWExNTMtNzY5OGUxMGM0M2U4
+IiwgImF1dG9tYXRpb25zIjogW10sICJleHBvcnRfa2V5IjogIihFeGFtcGxlKSBNY0FmZWUgUHVi
+bGlzaCB0byBEWEwgKFRhZyBTeXN0ZW0pIiwgImNvbmRpdGlvbnMiOiBbXSwgImlkIjogMzUsICJt
+ZXNzYWdlX2Rlc3RpbmF0aW9ucyI6IFtdfV0sICJsYXlvdXRzIjogW10sICJleHBvcnRfZm9ybWF0
+X3ZlcnNpb24iOiAyLCAiaWQiOiAxLCAiaW5kdXN0cmllcyI6IG51bGwsICJwaGFzZXMiOiBbXSwg
+ImFjdGlvbl9vcmRlciI6IFtdLCAiZ2VvcyI6IG51bGwsICJzZXJ2ZXJfdmVyc2lvbiI6IHsibWFq
+b3IiOiAzMCwgInZlcnNpb24iOiAiMzAuMC4zNDEwIiwgImJ1aWxkX251bWJlciI6IDM0MTAsICJt
+aW5vciI6IDB9LCAidGltZWZyYW1lcyI6IG51bGwsICJ3b3Jrc3BhY2VzIjogW10sICJhdXRvbWF0
+aWNfdGFza3MiOiBbXSwgImZ1bmN0aW9ucyI6IFt7ImRpc3BsYXlfbmFtZSI6ICJNY0FmZWUgUHVi
+bGlzaCB0byBEWEwiLCAidXVpZCI6ICJmOTg3ZWQyMi0yN2Q0LTQzODMtOWFhNC04MWUzOTk5ZWRl
+MjUiLCAiY3JlYXRvciI6IHsiZGlzcGxheV9uYW1lIjogIlJlc2lsaWVudCBTeXNhZG1pbiIsICJ0
+eXBlIjogInVzZXIiLCAiaWQiOiAyLCAibmFtZSI6ICJid2Fsc2hAcmVzaWxpZW50c3lzdGVtcy5j
+b20ifSwgInZpZXdfaXRlbXMiOiBbeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVu
+dCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiN2U1NjkwNTItYjc4Ni00OTMzLTlkODctZWFi
+NTcyODA2MjRmIn0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAiZmll
+bGRfdXVpZCIsICJjb250ZW50IjogIjg1ZTA3MTFlLWM1NzMtNDA1YS1iNTkwLTQ3YWUwNGJhNjdk
+YyJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1aWQi
+LCAiY29udGVudCI6ICIzZTQ0YzUxYi0yMmE4LTQzNTAtOTA2ZC02YWUwMzhiYjY3NzkifSwgeyJm
+aWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRl
+bnQiOiAiZGJlZWQzNmEtMjNiZi00MTg5LTlmNWItYjUzZWU1NGVjZGMzIn1dLCAiZXhwb3J0X2tl
+eSI6ICJtY2FmZWVfcHVibGlzaF90b19keGwiLCAibGFzdF9tb2RpZmllZF9ieSI6IHsiZGlzcGxh
+eV9uYW1lIjogIlJlc2lsaWVudCBTeXNhZG1pbiIsICJ0eXBlIjogInVzZXIiLCAiaWQiOiAyLCAi
+bmFtZSI6ICJid2Fsc2hAcmVzaWxpZW50c3lzdGVtcy5jb20ifSwgIm5hbWUiOiAibWNhZmVlX3B1
+Ymxpc2hfdG9fZHhsIiwgInZlcnNpb24iOiAzLCAid29ya2Zsb3dzIjogW3sicHJvZ3JhbW1hdGlj
+X25hbWUiOiAiZXhhbXBsZV9tY2FmZWVfcHVibGlzaF90b19keGxfc2V0X3RpZV9yZXB1dGF0aW9u
+IiwgIm9iamVjdF90eXBlIjogImluY2lkZW50IiwgInV1aWQiOiBudWxsLCAiYWN0aW9ucyI6IFtd
+LCAibmFtZSI6ICIoRXhhbXBsZSkgTWNBZmVlIFB1Ymxpc2ggdG8gRFhMIChTZXQgVElFIFJlcHV0
+YXRpb24pIiwgIndvcmtmbG93X2lkIjogNywgImRlc2NyaXB0aW9uIjogbnVsbH0sIHsicHJvZ3Jh
+bW1hdGljX25hbWUiOiAiZXhhbXBsZV9tY2FmZWVfcHVibGlzaF90b19keGxfdGFnX3N5c3RlbSIs
+ICJvYmplY3RfdHlwZSI6ICJpbmNpZGVudCIsICJ1dWlkIjogbnVsbCwgImFjdGlvbnMiOiBbXSwg
+Im5hbWUiOiAiKEV4YW1wbGUpIE1jQWZlZSBQdWJsaXNoIHRvIERYTCAoVGFnIFN5c3RlbSkiLCAi
+d29ya2Zsb3dfaWQiOiA2LCAiZGVzY3JpcHRpb24iOiBudWxsfV0sICJsYXN0X21vZGlmaWVkX3Rp
+bWUiOiAxNTIyMTU1MTE3MzczLCAiZGVzdGluYXRpb25faGFuZGxlIjogIm1jYWZlZV9keGxfbWVz
+c2FnZV9kZXN0aW5hdGlvbiIsICJpZCI6IDUsICJkZXNjcmlwdGlvbiI6IHsiY29udGVudCI6ICJB
+IGZ1bmN0aW9uIHdoaWNoIHRha2VzIDQgaW5wdXRzOlxuXG5tY2FmZWVfdG9waWNfbmFtZTogU3Ry
+aW5nIG9mIHRoZSB0b3BpYyBuYW1lLiBpZTogL21jYWZlZS9zZXJ2aWNlL2Vwby9yZW1vdGUvZXBv
+MS5cbm1jYWZlZV9keGxfcGF5bG9hZDogVGhlIHRleHQgb2YgdGhlIHBheWxvYWQgdG8gcHVibGlz
+aCB0byB0aGUgdG9waWMuXG5tY2FmZWVfcHVibGlzaF9tZXRob2Q6IFNwZWNpZnkgd2hldGhlciB0
+byBwdWJsaXNoIGFuIGV2ZW50IG9yIGludm9rZSBhIHNlcnZpY2UuXG5tY2FmZWVfcmV0dXJuX3Jl
+c3BvbnNlOiBTcGVjaWZ5IHdoZXRoZXIgb3Igbm90IHRvIHdhaXQgZm9yIGFuZCByZXR1cm4gdGhl
+IHJlc3BvbnNlLiBVc2VzIHN5bmNocm9ub3VzL2FzeW5jaHJvbm91cyBzZXJ2aWNlLlxuXG5cblRo
+ZSBmdW5jdGlvbiB3aWxsIHNlbmQgdGhlIHByb3ZpZGVkIG1lc3NhZ2UgdG8gdGhlIHByb3ZpZGVk
+IHRvcGljLiIsICJmb3JtYXQiOiAidGV4dCJ9fV0sICJub3RpZmljYXRpb25zIjogbnVsbCwgInJl
+Z3VsYXRvcnMiOiBudWxsLCAiaW5jaWRlbnRfdHlwZXMiOiBbeyJjcmVhdGVfZGF0ZSI6IDE1MjI5
+NTE4OTU2OTEsICJkZXNjcmlwdGlvbiI6ICJDdXN0b21pemF0aW9uIFBhY2thZ2VzIChpbnRlcm5h
+bCkiLCAiZXhwb3J0X2tleSI6ICJDdXN0b21pemF0aW9uIFBhY2thZ2VzIChpbnRlcm5hbCkiLCAi
+aWQiOiAwLCAibmFtZSI6ICJDdXN0b21pemF0aW9uIFBhY2thZ2VzIChpbnRlcm5hbCkiLCAidXBk
+YXRlX2RhdGUiOiAxNTIyOTUxODk1NjkxLCAidXVpZCI6ICJiZmVlYzJkNC0zNzcwLTExZTgtYWQz
+OS00YTAwMDQwNDRhYTAiLCAiZW5hYmxlZCI6IGZhbHNlLCAic3lzdGVtIjogZmFsc2UsICJwYXJl
+bnRfaWQiOiBudWxsLCAiaGlkZGVuIjogZmFsc2V9XSwgInNjcmlwdHMiOiBbXSwgInR5cGVzIjog
+W10sICJtZXNzYWdlX2Rlc3RpbmF0aW9ucyI6IFtdLCAiaW5jaWRlbnRfYXJ0aWZhY3RfdHlwZXMi
+OiBbXSwgInJvbGVzIjogW10sICJmaWVsZHMiOiBbeyJvcGVyYXRpb25zIjogW10sICJyZWFkX29u
+bHkiOiB0cnVlLCAidXVpZCI6ICJjM2YwZTNlZC0yMWUxLTRkNTMtYWZmYi1mZTVjYTMzMDhjY2Ei
+LCAidGVtcGxhdGVzIjogW10sICJ0eXBlX2lkIjogMCwgImNob3NlbiI6IGZhbHNlLCAidGV4dCI6
+ICJTaW11bGF0aW9uIiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAiZXhwb3J0
+X2tleSI6ICJpbmNpZGVudC9pbmNfdHJhaW5pbmciLCAidG9vbHRpcCI6ICJXaGV0aGVyIHRoZSBp
+bmNpZGVudCBpcyBhIHNpbXVsYXRpb24gb3IgYSByZWd1bGFyIGluY2lkZW50LiAgVGhpcyBmaWVs
+ZCBpcyByZWFkLW9ubHkuIiwgInJpY2hfdGV4dCI6IGZhbHNlLCAib3BlcmF0aW9uX3Blcm1zIjog
+e30sICJwcmVmaXgiOiBudWxsLCAiaW50ZXJuYWwiOiBmYWxzZSwgInZhbHVlcyI6IFtdLCAiYmxh
+bmtfb3B0aW9uIjogZmFsc2UsICJpbnB1dF90eXBlIjogImJvb2xlYW4iLCAiY2hhbmdlYWJsZSI6
+IHRydWUsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAiaWQiOiAzNywgIm5hbWUiOiAiaW5j
+X3RyYWluaW5nIn0sIHsib3BlcmF0aW9ucyI6IFtdLCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9u
+X3Blcm1zIjoge30sICJ0ZXh0IjogIm1jYWZlZV90b3BpY19uYW1lIiwgImJsYW5rX29wdGlvbiI6
+IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVlLCAiaWQiOiAxNjYsICJy
+ZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiN2U1NjkwNTItYjc4Ni00OTMzLTlkODctZWFiNTcy
+ODA2MjRmIiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJ0ZXh0IiwgInRvb2x0aXAi
+OiAiU3RyaW5nIG9mIHRoZSB0b3BpYyBuYW1lLiBpZTogL21jYWZlZS9zZXJ2aWNlL2Vwby9yZW1v
+dGUvZXBvMSIsICJpbnRlcm5hbCI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0ZW1wbGF0
+ZXMiOiBbXSwgImV4cG9ydF9rZXkiOiAiX19mdW5jdGlvbi9tY2FmZWVfdG9waWNfbmFtZSIsICJo
+aWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIiOiAiIiwgIm5hbWUiOiAibWNh
+ZmVlX3RvcGljX25hbWUiLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJyZXF1
+aXJlZCI6ICJhbHdheXMiLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBbXSwgInR5cGVf
+aWQiOiAxMSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJtY2FmZWVfZHhsX3BheWxv
+YWQiLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6
+IHRydWUsICJpZCI6IDE2NywgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICI4NWUwNzExZS1j
+NTczLTQwNWEtYjU5MC00N2FlMDRiYTY3ZGMiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90eXBl
+IjogInRleHQiLCAidG9vbHRpcCI6ICJUaGUgdGV4dCBvZiB0aGUgcGF5bG9hZCB0byBwdWJsaXNo
+IHRvIHRoZSB0b3BpYyIsICJpbnRlcm5hbCI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0
+ZW1wbGF0ZXMiOiBbXSwgImV4cG9ydF9rZXkiOiAiX19mdW5jdGlvbi9tY2FmZWVfZHhsX3BheWxv
+YWQiLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIsICJuYW1l
+IjogIm1jYWZlZV9keGxfcGF5bG9hZCIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxz
+ZSwgInJlcXVpcmVkIjogImFsd2F5cyIsICJ2YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6IFtd
+LCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogIm1jYWZlZV9y
+ZXR1cm5fcmVzcG9uc2UiLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAi
+Y2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDE2OCwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6
+ICJkYmVlZDM2YS0yM2JmLTQxODktOWY1Yi1iNTNlZTU0ZWNkYzMiLCAiY2hvc2VuIjogZmFsc2Us
+ICJpbnB1dF90eXBlIjogInNlbGVjdCIsICJ0b29sdGlwIjogIlNwZWNpZnkgd2hldGhlciBvciBu
+b3QgdG8gd2FpdCBmb3IgYW5kIHJldHVybiB0aGUgcmVzcG9uc2UuIFVzZXMgc3luY2hyb25vdXMv
+YXN5bmNocm9ub3VzIHNlcnZpY2UiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZh
+bHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vbWNhZmVlX3Jl
+dHVybl9yZXNwb25zZSIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIi
+OiAiIiwgIm5hbWUiOiAibWNhZmVlX3JldHVybl9yZXNwb25zZSIsICJkZWZhdWx0X2Nob3Nlbl9i
+eV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFt7ImxhYmVsIjogIlllcyJ9LCB7ImxhYmVsIjog
+Ik5vIn1dfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRpb25fcGVy
+bXMiOiB7fSwgInRleHQiOiAibWNhZmVlX3B1Ymxpc2hfbWV0aG9kIiwgImJsYW5rX29wdGlvbiI6
+IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVlLCAiaWQiOiAxNzAsICJy
+ZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiM2U0NGM1MWItMjJhOC00MzUwLTkwNmQtNmFlMDM4
+YmI2Nzc5IiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJzZWxlY3QiLCAidG9vbHRp
+cCI6ICJTcGVjaWZ5IHdoZXRoZXIgdG8gcHVibGlzaCBhbiBldmVudCBvciBpbnZva2UgYSBzZXJ2
+aWNlIiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6
+IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL21jYWZlZV9wdWJsaXNoX21ldGhvZCIsICJo
+aWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIiOiAiIiwgIm5hbWUiOiAibWNh
+ZmVlX3B1Ymxpc2hfbWV0aG9kIiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAi
+cmVxdWlyZWQiOiAiYWx3YXlzIiwgInZhbHVlcyI6IFt7ImxhYmVsIjogIkV2ZW50In0sIHsibGFi
+ZWwiOiAiU2VydmljZSJ9XX1dLCAib3ZlcnJpZGVzIjogW10sICJleHBvcnRfZGF0ZSI6IDE1MjI3
+NzMwNjE4OTF9
+"""
     )
-
-    # Message destination: 'mcafee_dxl_message_destination'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'McAfee DXL Message Destination',
-  'programmatic_name': 'mcafee_dxl_message_destination'}
-    )
-
-    # Function: 'mcafee_publish_to_dxl'
-    yield FunctionDefinition({ 'description': { 'content': 'A function which takes 4 inputs:\n\nmcafee_topic_name: String of the topic name. ie: /mcafee/service/epo/remote/epo1.\nmcafee_dxl_payload: The text of the payload to publish to the topic.\nmcafee_publish_method: Specify whether to publish an event or invoke a service.\nmcafee_return_response: Specify whether or not to wait for and return the response. Uses synchronous/asynchronous service.\n\n\nThe function will send the provided message to the provided topic.',
-                   'format': 'text'},
-  'destination_handle': 'mcafee_dxl_message_destination',
-  'display_name': 'McAfee Publish to DXL',
-  'name': 'mcafee_publish_to_dxl',
-  'uuid': 'f987ed22-27d4-4383-9aa4-81e3999ede25',
-  'view_items': [ { 'content': '7e569052-b786-4933-9d87-eab57280624f',
-                    'element': 'field_uuid',
-                    'field_type': '__function'},
-                  { 'content': '85e0711e-c573-405a-b590-47ae04ba67dc',
-                    'element': 'field_uuid',
-                    'field_type': '__function'},
-                  { 'content': '3e44c51b-22a8-4350-906d-6ae038bb6779',
-                    'element': 'field_uuid',
-                    'field_type': '__function'},
-                  { 'content': 'dbeed36a-23bf-4189-9f5b-b53ee54ecdc3',
-                    'element': 'field_uuid',
-                    'field_type': '__function'}]}
-    )
-
-    # Workflow: 'example_mcafee_publish_to_dxl_tag_system'
-    yield WorkflowDefinition({ 'content': { 'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="example_mcafee_publish_to_dxl_tag_system" isExecutable="true" name="(Example) McAfee Publish to DXL (Tag System)"><documentation>Workflow to trigger the McAfee Publish to DXL function and set a system tag.</documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_0oiswie</outgoing></startEvent><serviceTask id="ServiceTask_00weioq" name="McAfee Publish to DXL" resilient:type="function"><extensionElements><resilient:function uuid="f987ed22-27d4-4383-9aa4-81e3999ede25"><![CDATA[{"inputs":{"7e569052-b786-4933-9d87-eab57280624f":{"input_type":"static","static_input":{"text_value":"/mcafee/service/epo/remote/epo1"}},"85e0711e-c573-405a-b590-47ae04ba67dc":{"input_type":"static","static_input":{"text_value":"{\\"command\\": \\"system.applyTag\\", \\"output\\": \\"json\\", \\"params\\": {\\"names\\": \\"10.0.2.15\\", \\"tagName\\": \\"Shut Down\\"}}"}},"3e44c51b-22a8-4350-906d-6ae038bb6779":{"input_type":"static","static_input":{"select_value":"cfcdbf7e-1765-4b87-b164-46c0c7297e5a"}},"dbeed36a-23bf-4189-9f5b-b53ee54ecdc3":{"input_type":"static","static_input":{"select_value":"b45fc834-7cab-48bc-8437-b214ece47678"}}},"pre_processing_script":null,"post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_0oiswie</incoming><outgoing>SequenceFlow_1w42sy3</outgoing></serviceTask><endEvent id="EndEvent_166kyf6"><incoming>SequenceFlow_1w42sy3</incoming></endEvent><sequenceFlow id="SequenceFlow_1w42sy3" sourceRef="ServiceTask_00weioq" targetRef="EndEvent_166kyf6"/><sequenceFlow id="SequenceFlow_0oiswie" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_00weioq"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_00weioq" id="ServiceTask_00weioq_di"><omgdc:Bounds height="80" width="100" x="332" y="166"/></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="EndEvent_166kyf6" id="EndEvent_166kyf6_di"><omgdc:Bounds height="36" width="36" x="583" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="601" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_1w42sy3" id="SequenceFlow_1w42sy3_di"><omgdi:waypoint x="432" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="583" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="507.5" y="184"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNEdge bpmnElement="SequenceFlow_0oiswie" id="SequenceFlow_0oiswie_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="332" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="265" y="184"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-  'object_type': 'incident',
-  'programmatic_name': 'example_mcafee_publish_to_dxl_tag_system'}
-    )
-
-    # Workflow: 'example_mcafee_publish_to_dxl_set_tie_reputation'
-    yield WorkflowDefinition({'content': { 'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="example_mcafee_publish_to_dxl_set_tie_reputation" isExecutable="true" name="(Example) McAfee Publish to DXL (Set TIE Reputation)"><documentation>Workflow to trigger the McAfee Publish to DXL function and set a TIE reputation.</documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_05d6x2p</outgoing></startEvent><serviceTask id="ServiceTask_0ahio5z" name="McAfee Publish to DXL" resilient:type="function"><extensionElements><resilient:function uuid="f987ed22-27d4-4383-9aa4-81e3999ede25"><![CDATA[{"inputs":{"7e569052-b786-4933-9d87-eab57280624f":{"input_type":"static","static_input":{"text_value":"/mcafee/service/tie/file/reputation/set"}},"85e0711e-c573-405a-b590-47ae04ba67dc":{"input_type":"static","static_input":{"text_value":"{\\"hashes\\": [{\\"type\\": \\"md5\\", \\"value\\": \\"Dk0TzJrwTMZLaPw4/goNrA==\\"}], \\"providerId\\": 3, \\"trustLevel\\": 1}"}},"3e44c51b-22a8-4350-906d-6ae038bb6779":{"input_type":"static","static_input":{"select_value":"cfcdbf7e-1765-4b87-b164-46c0c7297e5a"}},"dbeed36a-23bf-4189-9f5b-b53ee54ecdc3":{"input_type":"static","static_input":{"select_value":"66837bc7-65fd-4ff4-b79f-b7f38d684327"}}},"pre_processing_script":null,"post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_05d6x2p</incoming><outgoing>SequenceFlow_1q4scjf</outgoing></serviceTask><sequenceFlow id="SequenceFlow_05d6x2p" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_0ahio5z"/><endEvent id="EndEvent_1798gkf"><incoming>SequenceFlow_1q4scjf</incoming></endEvent><sequenceFlow id="SequenceFlow_1q4scjf" sourceRef="ServiceTask_0ahio5z" targetRef="EndEvent_1798gkf"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_0ahio5z" id="ServiceTask_0ahio5z_di"><omgdc:Bounds height="80" width="100" x="319" y="166"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_05d6x2p" id="SequenceFlow_05d6x2p_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="319" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="12" width="0" x="258.5" y="185"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_1798gkf" id="EndEvent_1798gkf_di"><omgdc:Bounds height="36" width="36" x="568" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="12" width="0" x="586" y="228"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_1q4scjf" id="SequenceFlow_1q4scjf_di"><omgdi:waypoint x="419" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="568" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="12" width="0" x="493.5" y="185"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-  'object_type': 'incident',
-  'programmatic_name': 'example_mcafee_publish_to_dxl_set_tie_reputation'}
-    )
-
-    # Rule: '(Example) McAfee Publish to DXL (Tag System)'
-    yield ActionDefinition({ 'automations': [],
-  'conditions': [],
-  'logic_type': 'all',
-  'message_destinations': [],
-  'name': '(Example) McAfee Publish to DXL (Tag System)',
-  'object_type': 'incident',
-  'timeout_seconds': 86400,
-  'type': 1,
-  'view_items': [],
-  'workflows': ['example_mcafee_publish_to_dxl_tag_system']}
-    )
-
-    # Rule: '(Example) McAfee Publish to DXL (Set TIE Reputation)'
-    yield ActionDefinition({'automations': [],
-  'conditions': [],
-  'logic_type': 'all',
-  'message_destinations': [],
-  'name': '(Example) McAfee Publish to DXL (Set TIE Reputation)',
-  'object_type': 'incident',
-  'timeout_seconds': 86400,
-  'type': 1,
-  'view_items': [],
-  'workflows': ['example_mcafee_publish_to_dxl_set_tie_reputation']}
-   )
-
