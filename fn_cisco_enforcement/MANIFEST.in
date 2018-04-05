@@ -1,0 +1,3 @@
+include README.md
+include fn_cisco_enforcement/util/*
+include fn_cisco_enforcement/LICENSE
