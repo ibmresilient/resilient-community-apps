@@ -46,7 +46,7 @@ Set the following value in the config file under the `[fn_mcafee_tie]` section
 	* Workflows: `mcafee_tie_hash_search_workflow`
 	* Rules: `(Example) McAfee artifact hash search`
 
-2. Update and edit `add.config`:
+2. Update and edit `app.config`:
 
 		resilient-circuits configure -u
 

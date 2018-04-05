@@ -43,7 +43,7 @@ Set the following values in the config file under the `[fn_mcafee_epo]` section:
 	* Functions: `mcafee_tag_an_epo_asset`
 	* Workflows: `mcafee_tag_epo_asset_workflow`
 	* Rules: `(Example) McAfee Tag ePO Asset`
-2. Update and edit `add.config`:
+2. Update and edit `app.config`:
 
 		resilient-circuits configure -u
 
