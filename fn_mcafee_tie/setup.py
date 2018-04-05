@@ -3,10 +3,11 @@
 
 from setuptools import setup, find_packages
 
+PUBLISH_VERSION = "1.0.0"
+
 setup(
     name='fn_mcafee_tie',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
+    version=PUBLISH_VERSION,
     url='https://github.com/ibmresilient/resilient-circuits-packages',
     license='MIT',
     author='IBM Resilient',
