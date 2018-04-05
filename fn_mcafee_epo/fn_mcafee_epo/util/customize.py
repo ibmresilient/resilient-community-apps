@@ -11,71 +11,87 @@ def customization_data(client=None):
        that should be installed by `resilient-circuits customize`
     """
 
-    # Function-field definitions
-    yield TypeDefinition(
-        {
-            "type_name": "__function",
-            "fields": { '134bfbe6-821d-4c29-9492-d594c38125d7': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_epo_tag',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_epo_tag',
-                                            'tooltip': 'Tag managed on ePO',
-                                            'uuid': '134bfbe6-821d-4c29-9492-d594c38125d7',
-                                            'values': []},
-  'bf25606e-96aa-4328-aa15-1cd5a8b8dc02': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_epo_systems',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_epo_systems',
-                                            'tooltip': 'Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO',
-                                            'uuid': 'bf25606e-96aa-4328-aa15-1cd5a8b8dc02',
-                                            'values': []}}
-        }
-    )
+    # This import data contains:
+    #   Function inputs: mcafee_epo_systems, mcafee_epo_tag
+    #   Message Destinations: mcafee_epo_message_destination
+    #   Functions: mcafee_tag_an_epo_asset
+    #   Workflows: mcafee_tag_epo_asset_workflow
+    #   Rules: (Example) McAfee Tag ePO Asset
 
-    # Message destination: 'mcafee_epo_message_destination'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'McAfee ePO Message Destination',
-  'programmatic_name': 'mcafee_epo_message_destination'}
-    )
 
-    # Function: 'mcafee_tag_an_epo_asset'
-    yield FunctionDefinition({ 'description': { 'content': 'A function which takes two inputs:\n\nmcafee_epo_system: Comma separated list of Hostnames/IpAddress. These systems must be managed on ePO.\nmcafee_epo_tag: A Tag managed on ePO.\n\nApplies tag to the systems in ePO.',
-                   'format': 'text'},
-  'destination_handle': 'mcafee_epo_message_destination',
-  'display_name': 'McAfee Tag an ePO asset',
-  'name': 'mcafee_tag_an_epo_asset',
-  'uuid': '67c5b852-f38f-40f7-8a68-1ae8e8a78549',
-  'view_items': [ { 'content': 'bf25606e-96aa-4328-aa15-1cd5a8b8dc02',
-                    'element': 'field_uuid',
-                    'field_type': '__function'},
-                  { 'content': '134bfbe6-821d-4c29-9492-d594c38125d7',
-                    'element': 'field_uuid',
-                    'field_type': '__function'}]}
+    yield ImportDefinition(u"""
+eyJ0YXNrX29yZGVyIjogW10sICJ3b3JrZmxvd3MiOiBbXSwgImFjdGlvbnMiOiBbeyJsb2dpY190
+eXBlIjogImFsbCIsICJuYW1lIjogIihFeGFtcGxlKSBNY0FmZWUgVGFnIGVQTyBBc3NldCIsICJ2
+aWV3X2l0ZW1zIjogW10sICJ0eXBlIjogMSwgIndvcmtmbG93cyI6IFsibWNhZmVlX3RhZ19lcG9f
+YXNzZXRfd29ya2Zsb3ciXSwgIm9iamVjdF90eXBlIjogImluY2lkZW50IiwgInRpbWVvdXRfc2Vj
+b25kcyI6IDg2NDAwLCAidXVpZCI6ICI4M2FjNjkzMS1mOTY1LTRkOWUtODQ4Mi0yOGY4ZDAxOTcw
+NTciLCAiYXV0b21hdGlvbnMiOiBbXSwgImV4cG9ydF9rZXkiOiAiKEV4YW1wbGUpIE1jQWZlZSBU
+YWcgZVBPIEFzc2V0IiwgImNvbmRpdGlvbnMiOiBbXSwgImlkIjogMzMsICJtZXNzYWdlX2Rlc3Rp
+bmF0aW9ucyI6IFtdfV0sICJsYXlvdXRzIjogW10sICJleHBvcnRfZm9ybWF0X3ZlcnNpb24iOiAy
+LCAiaWQiOiAxLCAiaW5kdXN0cmllcyI6IG51bGwsICJwaGFzZXMiOiBbXSwgImFjdGlvbl9vcmRl
+ciI6IFtdLCAiZ2VvcyI6IG51bGwsICJzZXJ2ZXJfdmVyc2lvbiI6IHsibWFqb3IiOiAzMCwgInZl
+cnNpb24iOiAiMzAuMC4zNDEwIiwgImJ1aWxkX251bWJlciI6IDM0MTAsICJtaW5vciI6IDB9LCAi
+dGltZWZyYW1lcyI6IG51bGwsICJ3b3Jrc3BhY2VzIjogW10sICJhdXRvbWF0aWNfdGFza3MiOiBb
+XSwgImZ1bmN0aW9ucyI6IFt7ImRpc3BsYXlfbmFtZSI6ICJNY0FmZWUgVGFnIGFuIGVQTyBhc3Nl
+dCIsICJ1dWlkIjogIjY3YzViODUyLWYzOGYtNDBmNy04YTY4LTFhZThlOGE3ODU0OSIsICJjcmVh
+dG9yIjogeyJkaXNwbGF5X25hbWUiOiAiUmVzaWxpZW50IFN5c2FkbWluIiwgInR5cGUiOiAidXNl
+ciIsICJpZCI6IDIsICJuYW1lIjogImJ3YWxzaEByZXNpbGllbnRzeXN0ZW1zLmNvbSJ9LCAidmll
+d19pdGVtcyI6IFt7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxk
+X3V1aWQiLCAiY29udGVudCI6ICJiZjI1NjA2ZS05NmFhLTQzMjgtYWExNS0xY2Q1YThiOGRjMDIi
+fSwgeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwg
+ImNvbnRlbnQiOiAiMTM0YmZiZTYtODIxZC00YzI5LTk0OTItZDU5NGMzODEyNWQ3In1dLCAiZXhw
+b3J0X2tleSI6ICJtY2FmZWVfdGFnX2FuX2Vwb19hc3NldCIsICJsYXN0X21vZGlmaWVkX2J5Ijog
+eyJkaXNwbGF5X25hbWUiOiAiUmVzaWxpZW50IFN5c2FkbWluIiwgInR5cGUiOiAidXNlciIsICJp
+ZCI6IDIsICJuYW1lIjogImJ3YWxzaEByZXNpbGllbnRzeXN0ZW1zLmNvbSJ9LCAibmFtZSI6ICJt
+Y2FmZWVfdGFnX2FuX2Vwb19hc3NldCIsICJ2ZXJzaW9uIjogNCwgIndvcmtmbG93cyI6IFt7InBy
+b2dyYW1tYXRpY19uYW1lIjogIm1jYWZlZV90YWdfZXBvX2Fzc2V0X3dvcmtmbG93IiwgIm9iamVj
+dF90eXBlIjogImluY2lkZW50IiwgInV1aWQiOiBudWxsLCAiYWN0aW9ucyI6IFtdLCAibmFtZSI6
+ICIoRXhhbXBsZSkgTWNBZmVlIFRhZyBlUE8gYXNzZXQgd29ya2Zsb3ciLCAid29ya2Zsb3dfaWQi
+OiA1LCAiZGVzY3JpcHRpb24iOiBudWxsfV0sICJsYXN0X21vZGlmaWVkX3RpbWUiOiAxNTIxNzUx
+ODA1NzcyLCAiZGVzdGluYXRpb25faGFuZGxlIjogIm1jYWZlZV9lcG9fbWVzc2FnZV9kZXN0aW5h
+dGlvbiIsICJpZCI6IDQsICJkZXNjcmlwdGlvbiI6IHsiY29udGVudCI6ICJBIGZ1bmN0aW9uIHdo
+aWNoIHRha2VzIHR3byBpbnB1dHM6XG5cbm1jYWZlZV9lcG9fc3lzdGVtOiBDb21tYSBzZXBhcmF0
+ZWQgbGlzdCBvZiBIb3N0bmFtZXMvSXBBZGRyZXNzLiBUaGVzZSBzeXN0ZW1zIG11c3QgYmUgbWFu
+YWdlZCBvbiBlUE8uXG5tY2FmZWVfZXBvX3RhZzogQSBUYWcgbWFuYWdlZCBvbiBlUE8uXG5cbkFw
+cGxpZXMgdGFnIHRvIHRoZSBzeXN0ZW1zIGluIGVQTy4iLCAiZm9ybWF0IjogInRleHQifX1dLCAi
+bm90aWZpY2F0aW9ucyI6IG51bGwsICJyZWd1bGF0b3JzIjogbnVsbCwgImluY2lkZW50X3R5cGVz
+IjogW3siY3JlYXRlX2RhdGUiOiAxNTIyOTQ0NDgzNDM2LCAiZGVzY3JpcHRpb24iOiAiQ3VzdG9t
+aXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImV4cG9ydF9rZXkiOiAiQ3VzdG9taXphdGlv
+biBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImlkIjogMCwgIm5hbWUiOiAiQ3VzdG9taXphdGlvbiBQ
+YWNrYWdlcyAoaW50ZXJuYWwpIiwgInVwZGF0ZV9kYXRlIjogMTUyMjk0NDQ4MzQzNiwgInV1aWQi
+OiAiYmZlZWMyZDQtMzc3MC0xMWU4LWFkMzktNGEwMDA0MDQ0YWEwIiwgImVuYWJsZWQiOiBmYWxz
+ZSwgInN5c3RlbSI6IGZhbHNlLCAicGFyZW50X2lkIjogbnVsbCwgImhpZGRlbiI6IGZhbHNlfV0s
+ICJzY3JpcHRzIjogW10sICJ0eXBlcyI6IFtdLCAibWVzc2FnZV9kZXN0aW5hdGlvbnMiOiBbXSwg
+ImluY2lkZW50X2FydGlmYWN0X3R5cGVzIjogW10sICJyb2xlcyI6IFtdLCAiZmllbGRzIjogW3si
+b3BlcmF0aW9ucyI6IFtdLCAicmVhZF9vbmx5IjogdHJ1ZSwgInV1aWQiOiAiYzNmMGUzZWQtMjFl
+MS00ZDUzLWFmZmItZmU1Y2EzMzA4Y2NhIiwgInRlbXBsYXRlcyI6IFtdLCAidHlwZV9pZCI6IDAs
+ICJjaG9zZW4iOiBmYWxzZSwgInRleHQiOiAiU2ltdWxhdGlvbiIsICJkZWZhdWx0X2Nob3Nlbl9i
+eV9zZXJ2ZXIiOiBmYWxzZSwgImV4cG9ydF9rZXkiOiAiaW5jaWRlbnQvaW5jX3RyYWluaW5nIiwg
+InRvb2x0aXAiOiAiV2hldGhlciB0aGUgaW5jaWRlbnQgaXMgYSBzaW11bGF0aW9uIG9yIGEgcmVn
+dWxhciBpbmNpZGVudC4gIFRoaXMgZmllbGQgaXMgcmVhZC1vbmx5LiIsICJyaWNoX3RleHQiOiBm
+YWxzZSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAicHJlZml4IjogbnVsbCwgImludGVybmFsIjog
+ZmFsc2UsICJ2YWx1ZXMiOiBbXSwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6
+ICJib29sZWFuIiwgImNoYW5nZWFibGUiOiB0cnVlLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxz
+ZSwgImlkIjogMzcsICJuYW1lIjogImluY190cmFpbmluZyJ9LCB7Im9wZXJhdGlvbnMiOiBbXSwg
+InR5cGVfaWQiOiAxMSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJtY2FmZWVfZXBv
+X3RhZyIsICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFuZ2VhYmxl
+IjogdHJ1ZSwgImlkIjogMTY1LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjEzNGJmYmU2
+LTgyMWQtNGMyOS05NDkyLWQ1OTRjMzgxMjVkNyIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5
+cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIlRhZyBtYW5hZ2VkIG9uIGVQTyIsICJpbnRlcm5hbCI6
+IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0ZW1wbGF0ZXMiOiBbXSwgImV4cG9ydF9rZXki
+OiAiX19mdW5jdGlvbi9tY2FmZWVfZXBvX3RhZyIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNl
+LCAicGxhY2Vob2xkZXIiOiAiIiwgIm5hbWUiOiAibWNhZmVlX2Vwb190YWciLCAiZGVmYXVsdF9j
+aG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJ2YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6IFtd
+LCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogIm1jYWZlZV9l
+cG9fc3lzdGVtcyIsICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFu
+Z2VhYmxlIjogdHJ1ZSwgImlkIjogMTY0LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogImJm
+MjU2MDZlLTk2YWEtNDMyOC1hYTE1LTFjZDVhOGI4ZGMwMiIsICJjaG9zZW4iOiBmYWxzZSwgImlu
+cHV0X3R5cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIkNvbW1hIHNlcGFyYXRlZCBsaXN0IG9mIEhv
+c3RuYW1lcy9JcEFkZHJlc3MuIFRoZXNlIHN5c3RlbXMgbXVzdCBiZSBtYW5hZ2VkIG9uIGVQTyIs
+ICJpbnRlcm5hbCI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0ZW1wbGF0ZXMiOiBbXSwg
+ImV4cG9ydF9rZXkiOiAiX19mdW5jdGlvbi9tY2FmZWVfZXBvX3N5c3RlbXMiLCAiaGlkZV9ub3Rp
+ZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIsICJuYW1lIjogIm1jYWZlZV9lcG9f
+c3lzdGVtcyIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFtd
+fV0sICJvdmVycmlkZXMiOiBbXSwgImV4cG9ydF9kYXRlIjogMTUyMjc3MzA2MTg5MX0=
+"""
     )
-
-    # Workflow: 'mcafee_tag_epo_asset_workflow'
-    yield WorkflowDefinition({ 'content': { 'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="mcafee_tag_epo_asset_workflow" isExecutable="true" name="(Example) McAfee Tag ePO asset workflow"><documentation>Workflow to trigger function to tag system managed by ePO.</documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_0i3hqk3</outgoing></startEvent><serviceTask id="ServiceTask_0v8ceni" name="McAfee Tag an ePO asset" resilient:type="function"><extensionElements><resilient:function uuid="67c5b852-f38f-40f7-8a68-1ae8e8a78549"><![CDATA[{"inputs":{"bf25606e-96aa-4328-aa15-1cd5a8b8dc02":{"input_type":"static","static_input":{"text_value":"10.0.2.15"}},"134bfbe6-821d-4c29-9492-d594c38125d7":{"input_type":"static","static_input":{"text_value":"Shut Down"}}},"pre_processing_script":null,"post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_0i3hqk3</incoming><outgoing>SequenceFlow_14llyc4</outgoing></serviceTask><sequenceFlow id="SequenceFlow_0i3hqk3" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_0v8ceni"/><endEvent id="EndEvent_194e8ac"><incoming>SequenceFlow_14llyc4</incoming></endEvent><sequenceFlow id="SequenceFlow_14llyc4" sourceRef="ServiceTask_0v8ceni" targetRef="EndEvent_194e8ac"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_0v8ceni" id="ServiceTask_0v8ceni_di"><omgdc:Bounds height="80" width="100" x="291" y="166"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_0i3hqk3" id="SequenceFlow_0i3hqk3_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="291" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="244.5" y="184"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_194e8ac" id="EndEvent_194e8ac_di"><omgdc:Bounds height="36" width="36" x="517" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="535" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_14llyc4" id="SequenceFlow_14llyc4_di"><omgdi:waypoint x="391" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="517" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="454" y="184"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-  'object_type': 'incident',
-  'programmatic_name': 'mcafee_tag_epo_asset_workflow'}
-    )
-
-    # Rule: '(Example) McAfee Tag ePO Asset'
-    yield ActionDefinition({ 'automations': [],
-  'conditions': [],
-  'logic_type': 'all',
-  'message_destinations': [],
-  'name': '(Example) McAfee Tag ePO Asset',
-  'object_type': 'incident',
-  'timeout_seconds': 86400,
-  'type': 1,
-  'view_items': [],
-  'workflows': ['mcafee_tag_epo_asset_workflow']}
-    )
-

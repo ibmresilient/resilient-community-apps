@@ -11,76 +11,91 @@ def customization_data(client=None):
        that should be installed by `resilient-circuits customize`
     """
 
-    # Function-field definitions
-    yield TypeDefinition(
-        {
-            "type_name": "__function",
-            "fields": { '1fbd9156-b2c4-49c2-82e8-041832e990b6': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_tie_hash',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_tie_hash',
-                                            'tooltip': 'The value of the hash',
-                                            'uuid': '1fbd9156-b2c4-49c2-82e8-041832e990b6',
-                                            'values': []},
-  '88c38278-7078-455b-9029-0ec47d21a3d8': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'mcafee_tie_hash_type',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'mcafee_tie_hash_type',
-                                            'tooltip': 'The type of file hash (md5, sha1, sha256)',
-                                            'uuid': '88c38278-7078-455b-9029-0ec47d21a3d8',
-                                            'values': []}}
-        }
-    )
+    # This import data contains:
+    #   Function inputs: mcafee_tie_hash, mcafee_tie_hash_type
+    #   Message Destinations: mcafee_tie_md
+    #   Functions: mcafee_tie_search_hash
+    #   Workflows: mcafee_tie_hash_search_workflow
+    #   Rules: (Example) McAfee artifact hash search
 
-    # Message destination: 'mcafee_tie_md'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'McAfee TIE MD',
-  'programmatic_name': 'mcafee_tie_md'}
-    )
 
-    # Function: 'mcafee_tie_search_hash'
-    yield FunctionDefinition({ 'description': { 'content': 'A function which takes two inputs:\n\nmcafee_tie_hash_type: The type of file hash (md5, sha1, sha256).\nmcafee_tie_hash: The value of the hash.\n\nThe function returns back a dict of all the available information from the different file providers (Enterprise, GTI, ATD, MWG) along with the list of systems related to it.',
-                   'format': 'text'},
-  'destination_handle': 'mcafee_tie_md',
-  'display_name': 'McAfee TIE search hash',
-  'name': 'mcafee_tie_search_hash',
-  'uuid': '44a9cf5b-16b7-4cea-adc4-3956b079a1ab',
-  'view_items': [ { 'content': '88c38278-7078-455b-9029-0ec47d21a3d8',
-                    'element': 'field_uuid',
-                    'field_type': '__function'},
-                  { 'content': '1fbd9156-b2c4-49c2-82e8-041832e990b6',
-                    'element': 'field_uuid',
-                    'field_type': '__function'}]}
-    )
-
-    # Workflow: 'mcafee_tie_hash_search_workflow'
-    yield WorkflowDefinition({ 'content': { 'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="mcafee_tie_hash_search_workflow" isExecutable="true" name="(Example) McAfee TIE hash search workflow"><documentation>Workflow to trigger function to search hash in TIE.</documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_159kb3y</outgoing></startEvent><serviceTask id="ServiceTask_0trnpek" name="McAfee TIE search hash" resilient:type="function"><extensionElements><resilient:function uuid="44a9cf5b-16b7-4cea-adc4-3956b079a1ab"><![CDATA[{"inputs":{"88c38278-7078-455b-9029-0ec47d21a3d8":{"input_type":"static","static_input":{"text_value":null}},"1fbd9156-b2c4-49c2-82e8-041832e990b6":{"input_type":"static","static_input":{"text_value":null}}},"pre_processing_script":"if artifact.type == \\"Malware MD5 Hash\\":\\n  inputs.mcafee_tie_hash_type = \\"md5\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelif artifact.type == \\"Malware SHA-1 Hash\\":\\n  inputs.mcafee_tie_hash_type = \\"sha1\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelif artifact.type == \\"Malware SHA-256 Hash\\":\\n  inputs.mcafee_tie_hash_type = \\"sha256\\"\\n  inputs.mcafee_tie_hash = artifact.value\\nelse:\\n  helper.fail(\\"Artifact hash was not set correctly\\")\\n","post_processing_script":null,"result_name":""}]]></resilient:function></extensionElements><incoming>SequenceFlow_159kb3y</incoming><outgoing>SequenceFlow_17q1ve9</outgoing></serviceTask><sequenceFlow id="SequenceFlow_159kb3y" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_0trnpek"/><endEvent id="EndEvent_1ahf1kb"><incoming>SequenceFlow_17q1ve9</incoming></endEvent><sequenceFlow id="SequenceFlow_17q1ve9" sourceRef="ServiceTask_0trnpek" targetRef="EndEvent_1ahf1kb"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_0trnpek" id="ServiceTask_0trnpek_di"><omgdc:Bounds height="80" width="100" x="354" y="166"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_159kb3y" id="SequenceFlow_159kb3y_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="354" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="276" y="184.5"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_1ahf1kb" id="EndEvent_1ahf1kb_di"><omgdc:Bounds height="36" width="36" x="636" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="654" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_17q1ve9" id="SequenceFlow_17q1ve9_di"><omgdi:waypoint x="454" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="636" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="545" y="184.5"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-  'object_type': 'artifact',
-  'programmatic_name': 'mcafee_tie_hash_search_workflow'}
-    )
-
-    # Rule: '(Example) McAfee artifact hash search'
-    yield ActionDefinition({ 'automations': [],
-  'conditions': [ { 'evaluation_id': None,
-                    'field_name': 'artifact.type',
-                    'method': 'in',
-                    'type': None,
-                    'value': [ 'Malware MD5 Hash',
-                               'Malware SHA-1 Hash',
-                               'Malware SHA-256 Hash']}],
-  'logic_type': 'all',
-  'message_destinations': [],
-  'name': '(Example) McAfee artifact hash search',
-  'object_type': 'artifact',
-  'timeout_seconds': 86400,
-  'type': 1,
-  'view_items': [],
-  'workflows': ['mcafee_tie_hash_search_workflow']}
+    yield ImportDefinition(u"""
+eyJ0YXNrX29yZGVyIjogW10sICJ3b3JrZmxvd3MiOiBbXSwgImFjdGlvbnMiOiBbeyJsb2dpY190
+eXBlIjogImFsbCIsICJuYW1lIjogIihFeGFtcGxlKSBNY0FmZWUgYXJ0aWZhY3QgaGFzaCBzZWFy
+Y2giLCAidmlld19pdGVtcyI6IFtdLCAidHlwZSI6IDEsICJ3b3JrZmxvd3MiOiBbIm1jYWZlZV90
+aWVfaGFzaF9zZWFyY2hfd29ya2Zsb3ciXSwgIm9iamVjdF90eXBlIjogImFydGlmYWN0IiwgInRp
+bWVvdXRfc2Vjb25kcyI6IDg2NDAwLCAidXVpZCI6ICI1ZTM1MDU3Zi05MjFiLTQzY2MtYjI4Zi02
+ZDRlNzkwODYzMGMiLCAiYXV0b21hdGlvbnMiOiBbXSwgImV4cG9ydF9rZXkiOiAiKEV4YW1wbGUp
+IE1jQWZlZSBhcnRpZmFjdCBoYXNoIHNlYXJjaCIsICJjb25kaXRpb25zIjogW3sidHlwZSI6IG51
+bGwsICJldmFsdWF0aW9uX2lkIjogbnVsbCwgImZpZWxkX25hbWUiOiAiYXJ0aWZhY3QudHlwZSIs
+ICJtZXRob2QiOiAiaW4iLCAidmFsdWUiOiBbIk1hbHdhcmUgTUQ1IEhhc2giLCAiTWFsd2FyZSBT
+SEEtMSBIYXNoIiwgIk1hbHdhcmUgU0hBLTI1NiBIYXNoIl19XSwgImlkIjogMTQsICJtZXNzYWdl
+X2Rlc3RpbmF0aW9ucyI6IFtdfV0sICJsYXlvdXRzIjogW10sICJleHBvcnRfZm9ybWF0X3ZlcnNp
+b24iOiAyLCAiaWQiOiAxLCAiaW5kdXN0cmllcyI6IG51bGwsICJwaGFzZXMiOiBbXSwgImFjdGlv
+bl9vcmRlciI6IFtdLCAiZ2VvcyI6IG51bGwsICJzZXJ2ZXJfdmVyc2lvbiI6IHsibWFqb3IiOiAz
+MCwgInZlcnNpb24iOiAiMzAuMC4zNDEwIiwgImJ1aWxkX251bWJlciI6IDM0MTAsICJtaW5vciI6
+IDB9LCAidGltZWZyYW1lcyI6IG51bGwsICJ3b3Jrc3BhY2VzIjogW10sICJhdXRvbWF0aWNfdGFz
+a3MiOiBbXSwgImZ1bmN0aW9ucyI6IFt7ImRpc3BsYXlfbmFtZSI6ICJNY0FmZWUgVElFIHNlYXJj
+aCBoYXNoIiwgInV1aWQiOiAiNDRhOWNmNWItMTZiNy00Y2VhLWFkYzQtMzk1NmIwNzlhMWFiIiwg
+ImNyZWF0b3IiOiB7ImRpc3BsYXlfbmFtZSI6ICJSZXNpbGllbnQgU3lzYWRtaW4iLCAidHlwZSI6
+ICJ1c2VyIiwgImlkIjogMiwgIm5hbWUiOiAiYndhbHNoQHJlc2lsaWVudHN5c3RlbXMuY29tIn0s
+ICJ2aWV3X2l0ZW1zIjogW3siZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAi
+ZmllbGRfdXVpZCIsICJjb250ZW50IjogIjg4YzM4Mjc4LTcwNzgtNDU1Yi05MDI5LTBlYzQ3ZDIx
+YTNkOCJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1
+aWQiLCAiY29udGVudCI6ICIxZmJkOTE1Ni1iMmM0LTQ5YzItODJlOC0wNDE4MzJlOTkwYjYifV0s
+ICJleHBvcnRfa2V5IjogIm1jYWZlZV90aWVfc2VhcmNoX2hhc2giLCAibGFzdF9tb2RpZmllZF9i
+eSI6IHsiZGlzcGxheV9uYW1lIjogIlJlc2lsaWVudCBTeXNhZG1pbiIsICJ0eXBlIjogInVzZXIi
+LCAiaWQiOiAyLCAibmFtZSI6ICJid2Fsc2hAcmVzaWxpZW50c3lzdGVtcy5jb20ifSwgIm5hbWUi
+OiAibWNhZmVlX3RpZV9zZWFyY2hfaGFzaCIsICJ2ZXJzaW9uIjogNCwgIndvcmtmbG93cyI6IFt7
+InByb2dyYW1tYXRpY19uYW1lIjogIm1jYWZlZV90aWVfaGFzaF9zZWFyY2hfd29ya2Zsb3ciLCAi
+b2JqZWN0X3R5cGUiOiAiYXJ0aWZhY3QiLCAidXVpZCI6IG51bGwsICJhY3Rpb25zIjogW10sICJu
+YW1lIjogIihFeGFtcGxlKSBNY0FmZWUgVElFIGhhc2ggc2VhcmNoIHdvcmtmbG93IiwgIndvcmtm
+bG93X2lkIjogMywgImRlc2NyaXB0aW9uIjogbnVsbH1dLCAibGFzdF9tb2RpZmllZF90aW1lIjog
+MTUyMjA3NjY0MzcxNywgImRlc3RpbmF0aW9uX2hhbmRsZSI6ICJtY2FmZWVfdGllX21kIiwgImlk
+IjogMywgImRlc2NyaXB0aW9uIjogeyJjb250ZW50IjogIkEgZnVuY3Rpb24gd2hpY2ggdGFrZXMg
+dHdvIGlucHV0czpcblxubWNhZmVlX3RpZV9oYXNoX3R5cGU6IFRoZSB0eXBlIG9mIGZpbGUgaGFz
+aCAobWQ1LCBzaGExLCBzaGEyNTYpLlxubWNhZmVlX3RpZV9oYXNoOiBUaGUgdmFsdWUgb2YgdGhl
+IGhhc2guXG5cblRoZSBmdW5jdGlvbiByZXR1cm5zIGJhY2sgYSBkaWN0IG9mIGFsbCB0aGUgYXZh
+aWxhYmxlIGluZm9ybWF0aW9uIGZyb20gdGhlIGRpZmZlcmVudCBmaWxlIHByb3ZpZGVycyAoRW50
+ZXJwcmlzZSwgR1RJLCBBVEQsIE1XRykgYWxvbmcgd2l0aCB0aGUgbGlzdCBvZiBzeXN0ZW1zIHJl
+bGF0ZWQgdG8gaXQuIiwgImZvcm1hdCI6ICJ0ZXh0In19XSwgIm5vdGlmaWNhdGlvbnMiOiBudWxs
+LCAicmVndWxhdG9ycyI6IG51bGwsICJpbmNpZGVudF90eXBlcyI6IFt7ImNyZWF0ZV9kYXRlIjog
+MTUyMjk0MzM1NDEwMSwgImRlc2NyaXB0aW9uIjogIkN1c3RvbWl6YXRpb24gUGFja2FnZXMgKGlu
+dGVybmFsKSIsICJleHBvcnRfa2V5IjogIkN1c3RvbWl6YXRpb24gUGFja2FnZXMgKGludGVybmFs
+KSIsICJpZCI6IDAsICJuYW1lIjogIkN1c3RvbWl6YXRpb24gUGFja2FnZXMgKGludGVybmFsKSIs
+ICJ1cGRhdGVfZGF0ZSI6IDE1MjI5NDMzNTQxMDEsICJ1dWlkIjogImJmZWVjMmQ0LTM3NzAtMTFl
+OC1hZDM5LTRhMDAwNDA0NGFhMCIsICJlbmFibGVkIjogZmFsc2UsICJzeXN0ZW0iOiBmYWxzZSwg
+InBhcmVudF9pZCI6IG51bGwsICJoaWRkZW4iOiBmYWxzZX1dLCAic2NyaXB0cyI6IFtdLCAidHlw
+ZXMiOiBbXSwgIm1lc3NhZ2VfZGVzdGluYXRpb25zIjogW10sICJpbmNpZGVudF9hcnRpZmFjdF90
+eXBlcyI6IFtdLCAicm9sZXMiOiBbXSwgImZpZWxkcyI6IFt7Im9wZXJhdGlvbnMiOiBbXSwgInJl
+YWRfb25seSI6IHRydWUsICJ1dWlkIjogImMzZjBlM2VkLTIxZTEtNGQ1My1hZmZiLWZlNWNhMzMw
+OGNjYSIsICJ0ZW1wbGF0ZXMiOiBbXSwgInR5cGVfaWQiOiAwLCAiY2hvc2VuIjogZmFsc2UsICJ0
+ZXh0IjogIlNpbXVsYXRpb24iLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJl
+eHBvcnRfa2V5IjogImluY2lkZW50L2luY190cmFpbmluZyIsICJ0b29sdGlwIjogIldoZXRoZXIg
+dGhlIGluY2lkZW50IGlzIGEgc2ltdWxhdGlvbiBvciBhIHJlZ3VsYXIgaW5jaWRlbnQuICBUaGlz
+IGZpZWxkIGlzIHJlYWQtb25seS4iLCAicmljaF90ZXh0IjogZmFsc2UsICJvcGVyYXRpb25fcGVy
+bXMiOiB7fSwgInByZWZpeCI6IG51bGwsICJpbnRlcm5hbCI6IGZhbHNlLCAidmFsdWVzIjogW10s
+ICJibGFua19vcHRpb24iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAiYm9vbGVhbiIsICJjaGFuZ2Vh
+YmxlIjogdHJ1ZSwgImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJpZCI6IDM3LCAibmFtZSI6
+ICJpbmNfdHJhaW5pbmcifSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVy
+YXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAibWNhZmVlX3RpZV9oYXNoX3R5cGUiLCAiYmxhbmtf
+b3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJpZCI6
+IDgwLCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjg4YzM4Mjc4LTcwNzgtNDU1Yi05MDI5
+LTBlYzQ3ZDIxYTNkOCIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIsICJ0
+b29sdGlwIjogIlRoZSB0eXBlIG9mIGZpbGUgaGFzaCAobWQ1LCBzaGExLCBzaGEyNTYpIiwgImlu
+dGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6IFtdLCAiZXhw
+b3J0X2tleSI6ICJfX2Z1bmN0aW9uL21jYWZlZV90aWVfaGFzaF90eXBlIiwgImhpZGVfbm90aWZp
+Y2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJtY2FmZWVfdGllX2hh
+c2hfdHlwZSIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFtd
+fSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRpb25fcGVybXMiOiB7
+fSwgInRleHQiOiAibWNhZmVlX3RpZV9oYXNoIiwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAicHJl
+Zml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVlLCAiaWQiOiA3OSwgInJlYWRfb25seSI6IGZh
+bHNlLCAidXVpZCI6ICIxZmJkOTE1Ni1iMmM0LTQ5YzItODJlOC0wNDE4MzJlOTkwYjYiLCAiY2hv
+c2VuIjogZmFsc2UsICJpbnB1dF90eXBlIjogInRleHQiLCAidG9vbHRpcCI6ICJUaGUgdmFsdWUg
+b2YgdGhlIGhhc2giLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAidGVt
+cGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vbWNhZmVlX3RpZV9oYXNoIiwg
+ImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJt
+Y2FmZWVfdGllX2hhc2giLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJ2YWx1
+ZXMiOiBbXX1dLCAib3ZlcnJpZGVzIjogW10sICJleHBvcnRfZGF0ZSI6IDE1MjI3NzMwNjE4OTF9
+"""
     )
