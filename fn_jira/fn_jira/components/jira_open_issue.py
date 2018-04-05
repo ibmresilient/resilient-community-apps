@@ -43,8 +43,6 @@ class FunctionComponent(ResilientComponent):
         self.res_params = opts.get("resilient", {})
         self.log = logging.getLogger(__name__)
 
-        self.log.info(self.options)  # TODO
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
