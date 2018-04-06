@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import json
-from requests_common import execute_call
+from fn_pagerduty.lib.requests_common import execute_call
 
 PRIORITIES_FRAGMENT = 'priorities'
 ESCALATION_FRAGMENT = 'escalation_policies'

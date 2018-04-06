@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from pd_common import update_incident
-from resilient_common import validateFields, clean_html
+from fn_pagerduty.lib.resilient_common import validateFields, clean_html
 
 
 class FunctionComponent(ResilientComponent):
