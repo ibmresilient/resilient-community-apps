@@ -27,7 +27,7 @@ See config.py for properties needed for jira access
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import create_issue
-from .resilient_common import *
+from fn_jira.lib.resilient_common import *
 
 BROWSE_FRAGMENT = 'browse'
 

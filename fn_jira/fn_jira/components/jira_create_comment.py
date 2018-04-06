@@ -10,7 +10,7 @@ inputs.jira_comment = note.text.content
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import create_comment
-from .resilient_common import validateFields, clean_html
+from fn_jira.lib.resilient_common import validateFields, clean_html
 
 
 class FunctionComponent(ResilientComponent):

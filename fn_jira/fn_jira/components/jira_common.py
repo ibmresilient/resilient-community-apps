@@ -6,8 +6,8 @@
  Requirements: JIRA URL and basic authentication user/password
 """
 import json
-from requests_common import execute_call
-import resilient_common
+from fn_jira.lib.requests_common import execute_call
+from fn_jira.lib.resilient_common import clean_html
 
 """
 This module implements the calls needed for jira api access. API operations supported:
@@ -90,7 +90,7 @@ def _mkCreatePayload(appDict):
     }
 
     for key in appDict['fields']:
-        payload['fields'][key] = resilient_common.clean_html(appDict['fields'][key])
+        payload['fields'][key] = clean_html(appDict['fields'][key])
 
     return json.dumps(payload)
 
@@ -101,7 +101,7 @@ def _mkCommentPayload(appDict):
     :return: json payload for jira update
     '''
     
-    payload = { "body": resilient_common.clean_html(appDict['comment']) }
+    payload = { "body": clean_html(appDict['comment'])}
 
     return json.dumps(payload)
 

@@ -19,7 +19,7 @@ See config.py for properties needed for jira access
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import transition_issue
-from .resilient_common import validateFields, clean_html
+from fn_jira.lib.resilient_common import validateFields, clean_html
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'jira_transition_issue"""
