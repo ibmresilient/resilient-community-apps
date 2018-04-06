@@ -9,7 +9,7 @@ import shlex
 import subprocess
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_circuits.template_functions import render, render_json
+from resilient_circuits.template_functions import render
 
 
 class FunctionComponent(ResilientComponent):
@@ -57,7 +57,6 @@ class FunctionComponent(ResilientComponent):
             commandline = render(shell_command_base, escaped_args)
             commandline = os.path.expandvars(commandline)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("Running: {}".format(commandline))
 
             # Set up the environment
@@ -78,6 +77,7 @@ class FunctionComponent(ResilientComponent):
             output = stderrdata.decode()
             output_json = None
             try:
+                # Let's see if the output can be decoded as JSON
                 output_json = json.loads(output)
             except:
                 pass
@@ -85,6 +85,7 @@ class FunctionComponent(ResilientComponent):
             result = stdoutdata.decode()
             result_json = None
             try:
+                # Let's see if the output can be decoded as JSON
                 result_json = json.loads(result)
             except:
                 pass
@@ -92,12 +93,12 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "start": int(tstart * 1000.0),
                 "end": int(tend * 1000.0),
-                "time": int((tend-tstart) * 1000.0),
+                "elapsed": int((tend-tstart) * 1000.0),
                 "exitcode": retcode,            # Nonzero exit code indicates error
                 "stdout": result,
-                "stdout_json": result_json,
                 "stderr": output,
-                "stderr_json": output_json
+                "stdout_json": result_json,     # May be null
+                "stderr_json": output_json      # May be null
             }
 
             # Produce a FunctionResult with the results

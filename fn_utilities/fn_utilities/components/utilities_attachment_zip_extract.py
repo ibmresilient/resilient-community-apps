@@ -21,7 +21,7 @@ def epoch_millis(zipdate):
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_zip_extract"""
 
-    @function("attachment_zip_extract")
+    @function("utilities_attachment_zip_extract")
     def _attachment_zip_extract_function(self, event, *args, **kwargs):
         """Function: Extract a file from a zipfile attachment, producing a base64 string."""
         try:
@@ -34,11 +34,11 @@ class FunctionComponent(ResilientComponent):
             file_path = kwargs.get("file_path")  # text
             zipfile_password = kwargs.get("zipfile_password")  # text
 
-            if not incident_id or task_id:
+            if incident_id is None and task_id is None:
                 raise FunctionError("Error: incident_id or task_id must be specified.")
-            if not attachment_id:
+            if attachment_id is None:
                 raise FunctionError("Error: attachment_id must be specified.")
-            if not file_path:
+            if file_path is None:
                 raise FunctionError("Error: file_path must be specified.")
 
             log.info("incident_id: %s", incident_id)
@@ -88,6 +88,8 @@ class FunctionComponent(ResilientComponent):
                     results["content"] = b64data
                 except (KeyError, zipfile.LargeZipFile, zipfile.BadZipfile) as exc:
                     # results["error"] = str(exc)
+                    # To help debug, list the contents
+                    log.info(zfile.namelist())
                     raise
                 finally:
                     os.unlink(temp_file.name)

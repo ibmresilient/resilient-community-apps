@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "shell_command"
+FUNCTION_NAME = "utilities_resilient_search"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,34 +16,34 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_shell_command_function(circuits, function_params, timeout=10):
+def call_utilities_resilient_search_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("shell_command", function_params)
+    evt = SubmitTestFunction("utilities_resilient_search", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("shell_command_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("utilities_resilient_search_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestShellCommand:
-    """ Tests for the shell_command function"""
+class TestUtilitiesResilientSearch:
+    """ Tests for the utilities_resilient_search function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("shell_command, shell_param1, expected_results", [
-        ('malfind', "text", {"value": "xyz"}),
-        ('sockscan', "text", {"value": "xyz"})
+    @pytest.mark.parametrize("resilient_search_template, resilient_search_query, expected_results", [
+        ({"type": "text", "content": "line1\nline2"}, "text", {"value": "xyz"}),
+        ({"type": "text", "content": "line1\nline2"}, "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, shell_command, shell_param1, expected_results):
+    def test_success(self, circuits_app, resilient_search_template, resilient_search_query, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "shell_command": shell_command,
-            "shell_param1": shell_param1
+            "resilient_search_template": resilient_search_template,
+            "resilient_search_query": resilient_search_query
         }
-        results = call_shell_command_function(circuits_app, function_params)
+        results = call_utilities_resilient_search_function(circuits_app, function_params)
         assert(expected_results == results)

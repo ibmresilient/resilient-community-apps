@@ -14,7 +14,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'pdfid"""
 
-    @function("pdfid")
+    @function("utilities_pdfid")
     def _pdfid_function(self, event, *args, **kwargs):
         """Function: """
         try:

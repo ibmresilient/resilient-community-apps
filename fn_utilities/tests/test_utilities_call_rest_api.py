@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "call_rest_api"
+FUNCTION_NAME = "utilities_call_rest_api"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)

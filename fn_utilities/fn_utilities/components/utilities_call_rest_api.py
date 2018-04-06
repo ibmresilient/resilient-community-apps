@@ -10,17 +10,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'call_rest_api"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_utilities", {})
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_utilities", {})
-
-    @function("call_rest_api")
+    @function("utilities_call_rest_api")
     def _call_rest_api_function(self, event, *args, **kwargs):
         """Function: Call a REST web service.
            The function parameters determine the type of call (GET, POST, etc),

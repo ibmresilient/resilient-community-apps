@@ -3,50 +3,48 @@
 
 from __future__ import print_function
 import pytest
-from mock_attachment import AttachmentMock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "attachment_hash"
+FUNCTION_NAME = "utilities_attachment_zip_list"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = AttachmentMock
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_attachment_hash_function(circuits, function_params, timeout=10):
+def call_attachment_zip_list_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("attachment_hash", function_params)
+    evt = SubmitTestFunction("attachment_zip_list", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("attachment_hash_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("attachment_zip_list_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
-    pytest.wait_for(evt, "complete", True)
+    pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestAttachmentHash:
-    """ Tests for the attachment_hash function"""
+class TestAttachmentZipList:
+    """ Tests for the attachment_zip_list function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, attachment_id, expected_result", [
-        (123, None, 1, {"md5": "6c41093b2d21a8d211bef483aeb76aa9"}),
-        (123, None, 2, {"sha1": "8d6a9011b9d5c4de87e851d69754586338c0a188"})
+    @pytest.mark.parametrize("incident_id, attachment_id, zipfile_password, expected_result", [
+        (123, 123, "text", {"value": "xyz"}),
+        (123, 123, "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, task_id, attachment_id, expected_result):
+    def test_success(self, circuits_app, incident_id, attachment_id, zipfile_password, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
-            "task_id": task_id,
-            "attachment_id": attachment_id
+            "attachment_id": attachment_id,
+            "zipfile_password": zipfile_password
         }
-        result = call_attachment_hash_function(circuits_app, function_params)
-        verify_subset(expected_result, result)
+        result = call_attachment_zip_list_function(circuits_app, function_params)
+        assert(result == expected_result)

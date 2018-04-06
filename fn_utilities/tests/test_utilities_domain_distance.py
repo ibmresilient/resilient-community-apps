@@ -8,7 +8,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "domain_distance"
+FUNCTION_NAME = "utilities_domain_distance"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -47,12 +47,13 @@ class TestDomainDistance:
                 "tuesday": 4
             },
             "closest": {
-                "mOnday": 1
+                "name": "mOnday",
+                "distance": 1
             }
         }),
-        ("rnicrosoft.com", "microsoft.com, contoso.com", {"closest": {"microsoft.com": 2}}),
-        (u"wikipedi\u0430.com", "wikipedia.com, wikipedia.org", {"closest": {"wikipedia.com": 1}}),
-        ("xn--e1awd7f.com", "epic.com", {"closest": {"epic.com": 4}})
+        (u"wikipedi\u0430.com", "wikipedia.com, wikipedia.org", {"closest": {"name": "wikipedia.com", "distance": 0}}),
+        ("xn--e1awd7f.com", "epic.com", {"closest": {"name": "epic.com", "distance": 0}}),
+        ("xn--ple-5cd5f.com", "apple.com", {"closest": {"name": "apple.com", "distance": 0}})
     ])
     def test_success(self, circuits_app, domain_name, domain_list, expected_result):
         """ Test calling with sample values for the parameters """

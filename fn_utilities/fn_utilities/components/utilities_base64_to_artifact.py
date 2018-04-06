@@ -14,7 +14,7 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'base64_to_artifact' """
 
-    @function("base64_to_artifact")
+    @function("utilities_base64_to_artifact")
     def _base64_to_artifact_function(self, event, *args, **kwargs):
         """Function: """
         try:

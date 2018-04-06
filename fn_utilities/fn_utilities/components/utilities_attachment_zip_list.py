@@ -20,7 +20,7 @@ def epoch_millis(zipdate):
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_zip_list"""
 
-    @function("attachment_zip_list")
+    @function("utilities_attachment_zip_list")
     def _attachment_zip_list_function(self, event, *args, **kwargs):
         """Function: For a zipfile attachment, return a list of its contents."""
         try:
@@ -34,9 +34,9 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
             log.info("attachment_id: %s", attachment_id)
-            if not incident_id or task_id:
+            if incident_id is None and task_id is None:
                 raise FunctionError("Error: incident_id or task_id must be specified.")
-            if not attachment_id:
+            if attachment_id is None:
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")

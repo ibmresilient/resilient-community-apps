@@ -3,17 +3,17 @@
 """Function implementation"""
 
 import logging
-import hashlib
+import base64
 import json
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'attachment_hash"""
+    """Component that implements Resilient function 'attachment_base64"""
 
-    @function("attachment_hash")
-    def _attachment_hash_function(self, event, *args, **kwargs):
-        """Function: Calculate hashes for a file attachment."""
+    @function("utilities_attachment_to_base64")
+    def _attachment_to_base64_function(self, event, *args, **kwargs):
+        """Function: Produce base64 content of a file attachment."""
         try:
             log = logging.getLogger(__name__)
 
@@ -25,9 +25,9 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
             log.info("attachment_id: %s", attachment_id)
-            if not incident_id or task_id:
+            if incident_id is None and task_id is None:
                 raise FunctionError("Error: incident_id or task_id must be specified.")
-            if not attachment_id:
+            if attachment_id is None:
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")
@@ -46,20 +46,12 @@ class FunctionComponent(ResilientComponent):
                 "filename": metadata["name"],
                 "content_type": metadata["content_type"],
                 "size": metadata["size"],
-                "created": metadata["created"]
+                "created": metadata["created"],
+                "content": base64.b64encode(data)
             }
 
-            # Hashlib provides a list of all "algorithms_available", but there's duplication, so
-            # use the standard list: ('md5', 'sha1', 'sha224', 'sha256', 'sha384', 'sha512')
-            for algo in hashlib.algorithms:
-                impl = hashlib.new(algo)
-                impl.update(data)
-                results[algo] = impl.hexdigest()
-
-            log.info("{} sha1={}".format(metadata["name"], results["sha1"]))
-
             # Produce a FunctionResult with the return value
-            log.debug(json.dumps(results))
+            log.debug(json.dumps(results, indent=2))
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()

@@ -10,7 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "artifact_email_parse"
+FUNCTION_NAME = "utilities_artifact_email_parse"
 LOG = logging.getLogger(__name__)
 
 
