@@ -9,9 +9,9 @@ class TestJira(unittest.TestCase):
 
     def setUp(self):
         self.baseDict = {
-            'url': 'https://jira1-01.internal.resilientsystems.com',
-            'user': 'mscherfling',
-            'password': '@CCEL2rate',
+            'url': 'https://<JIRA>',
+            'user': '<USER>',
+            'password': '<PASSWORD',
             # use verifyFlag to disable untrusted certificate verification
             'verifyFlag': False
         }
