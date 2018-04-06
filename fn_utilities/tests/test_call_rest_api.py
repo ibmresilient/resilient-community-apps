@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "attachment_move_to_artifact"
+FUNCTION_NAME = "call_rest_api"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,35 +16,36 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_attachment_move_to_artifact_function(circuits, function_params, timeout=10):
+def call_call_rest_api_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("attachment_move_to_artifact", function_params)
+    evt = SubmitTestFunction("call_rest_api", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("attachment_move_to_artifact_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("call_rest_api_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestAttachmentMoveToArtifact:
-    """ Tests for the attachment_move_to_artifact function"""
+class TestCallRestApi:
+    """ Tests for the call_rest_api function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, attachment_id, artifact_file_type, expected_result", [
-        (123, 123, 'Other File', {"value": "xyz"}),
-        (123, 123, 'Malware Sample', {"value": "xyz"})
+    @pytest.mark.parametrize("rest_method, rest_url, rest_headers, rest_body, expected_results", [
+        ('GET', "text", {"type": "text", "content": "line1\nline2"}, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"}),
+        ('OPTIONS', "text", {"type": "text", "content": "line1\nline2"}, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, attachment_id, artifact_file_type, expected_result):
+    def test_success(self, circuits_app, rest_method, rest_url, rest_headers, rest_body, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "incident_id": incident_id,
-            "attachment_id": attachment_id,
-            "artifact_file_type": artifact_file_type
+            "rest_method": rest_method,
+            "rest_url": rest_url,
+            "rest_headers": rest_headers,
+            "rest_body": rest_body
         }
-        result = call_attachment_move_to_artifact_function(circuits_app, function_params)
-        assert(result == expected_result)
+        results = call_call_rest_api_function(circuits_app, function_params)
+        assert(expected_results == results)
