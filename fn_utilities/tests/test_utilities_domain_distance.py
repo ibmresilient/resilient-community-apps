@@ -19,9 +19,9 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_domain_distance_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("domain_distance", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("domain_distance_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)

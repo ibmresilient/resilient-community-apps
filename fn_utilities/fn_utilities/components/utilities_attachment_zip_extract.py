@@ -67,11 +67,11 @@ class FunctionComponent(ResilientComponent):
                     zfile = zipfile.ZipFile(temp_file.name, "r")
                     # Read the metadata, since it may be useful
                     zinfo = zfile.getinfo(file_path)
+                    # Don't include zinfo.extra since it's not a string
                     results["info"] = {"filename": zinfo.filename,
                                        "date_time": epoch_millis(zinfo.date_time),
                                        "compress_type": zinfo.compress_type,
                                        "comment": zinfo.comment,
-                                       "extra": zinfo.extra,
                                        "create_system": zinfo.create_system,
                                        "create_version": zinfo.create_version,
                                        "extract_version": zinfo.extract_version,

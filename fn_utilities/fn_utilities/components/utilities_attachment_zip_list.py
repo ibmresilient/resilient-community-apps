@@ -59,11 +59,11 @@ class FunctionComponent(ResilientComponent):
                     # Examine with zip
                     zfile = zipfile.ZipFile(temp_file.name, "r")
                     results["namelist"] = zfile.namelist()
+                    # Don't include zinfo.extra since it's not a string
                     results["infolist"] = [{"filename": zinfo.filename,
                                             "date_time": epoch_millis(zinfo.date_time),
                                             "compress_type": zinfo.compress_type,
                                             "comment": zinfo.comment,
-                                            "extra": zinfo.extra,
                                             "create_system": zinfo.create_system,
                                             "create_version": zinfo.create_version,
                                             "extract_version": zinfo.extract_version,

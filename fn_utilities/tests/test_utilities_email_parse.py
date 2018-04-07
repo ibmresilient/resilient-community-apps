@@ -10,7 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from pytest_resilient_circuits import verify_subset
 
 PACKAGE_NAME = "fn_utilities"
-FUNCTION_NAME = "utilities_artifact_email_parse"
+FUNCTION_NAME = "utilities_email_parse"
 LOG = logging.getLogger(__name__)
 
 
@@ -21,11 +21,11 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = ArtifactMock
 
 
-def call_artifact_email_parse_function(circuits, function_params, timeout=10):
+def call_email_parse_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("artifact_email_parse", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("artifact_email_parse_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(evt, "complete", True)
@@ -40,8 +40,8 @@ class TestArtifactEmailParse:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, artifact_id, expected_result", [
-        (1234, 1, {
+    @pytest.mark.parametrize("base64content, expected_result", [
+        (ArtifactMock.test_data_b64("email_sample_1.eml"), {
             "from": [
                 {
                     "name": "",
@@ -52,7 +52,7 @@ class TestArtifactEmailParse:
             "timestamp": 1118089282000,
             "subject": "testing"
         }),
-        (1234, 2, {
+        (ArtifactMock.test_data_b64("email_sample_2.eml"), {
             "headers": {
                 "received": [
                     "from xxx.xxxx.xxx by xxx.xxxx.xxx with ESMTP id C1B953B4CB6 for <xxxxx@Exxx.xxxx.xxx>; Tue, 10 May 2005 15:27:05 -0500",
@@ -63,7 +63,7 @@ class TestArtifactEmailParse:
                 "to": "xxxxxxxxxxx@xxxx.xxxx.xxx",
             }
         }),
-        (1234, 3, {
+        (ArtifactMock.test_data_b64("email_sample_3.eml"), {
             "body_html": "<div dir=\"ltr\">see this<div><br></div></div>\r\n",
             "attachments": [
                 {
@@ -73,11 +73,10 @@ class TestArtifactEmailParse:
             ]
         }),
     ])
-    def test_success(self, circuits_app, incident_id, artifact_id, expected_result):
+    def test_success(self, circuits_app, base64content, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "incident_id": incident_id,
-            "artifact_id": artifact_id
+            "base64content": base64content
         }
-        result = call_artifact_email_parse_function(circuits_app, function_params)
+        result = call_email_parse_function(circuits_app, function_params)
         verify_subset(expected_result, result)

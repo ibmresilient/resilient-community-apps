@@ -20,9 +20,9 @@ resilient_mock = AttachmentMock
 
 def call_attachment_hash_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("attachment_hash", function_params)
+    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("attachment_hash_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("{}_result".format(FUNCTION_NAME), parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(evt, "complete", True)
@@ -38,8 +38,8 @@ class TestAttachmentHash:
         assert func is not None
 
     @pytest.mark.parametrize("incident_id, task_id, attachment_id, expected_result", [
-        (123, None, 1, {"md5": "6c41093b2d21a8d211bef483aeb76aa9"}),
-        (123, None, 2, {"sha1": "8d6a9011b9d5c4de87e851d69754586338c0a188"})
+        (123, None, 1, {"md5": "6c41093b2d21a8d211bef483aeb76aa9"}),            # md5 of 1st in mock_attachment.py
+        (123, None, 2, {"sha1": "9f96227572cb1f5dae3ab914f8738c1f3734e841"})    # sha1 of 2nd in mock_attachment.py
     ])
     def test_success(self, circuits_app, incident_id, task_id, attachment_id, expected_result):
         """ Test calling with sample values for the parameters """

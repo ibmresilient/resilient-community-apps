@@ -41,6 +41,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             base64content = kwargs.get("base64content")  # text
+            if base64content is None or base64content == "":
+                raise FunctionError("No message was supplied.")
 
             log = logging.getLogger(__name__)
             log.info("base64content: %s", base64content)

@@ -21,7 +21,7 @@ class ArtifactMock(BasicResilientMock):
     @staticmethod
     def test_data_b64(filename):
         """Read a test data file, return its contents as base64"""
-        return base64.b64decode(ArtifactMock.test_data(filename))
+        return base64.b64encode(ArtifactMock.test_data(filename))
 
     email_artifacts = {
         "1": {
@@ -48,6 +48,44 @@ class ArtifactMock(BasicResilientMock):
     def artifacts_get(self, request):
         """ GET the list of artifacts """
         data = [value for id, value in self.artifacts.items()]
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json=data)
+
+    @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts$")
+    def artifacts_post(self, request):
+        """ POST an attachment """
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json={})
+
+    @resilient_endpoint("POST", "/incidents/[0-9]+/artifacts/files$")
+    def artifacts_files_post(self, request):
+        """ POST an artifact file"""
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json={})
+
+    @resilient_endpoint("GET", "/types/artifact/fields/type$")
+    def artifacts_type_get(self, request):
+        """ GET artifact types """
+        data = {
+                "uuid": "25dd5ae3-549b-4114-a9b6-64ef7baef80c",
+                "type_id": 4,
+                "text": "Type",
+                "prefix": None,
+                "internal": None,
+                "values": [
+                    {
+                        "value": 1,
+                        "label": "IP Address",
+                    },
+                    {
+                        "value": 2,
+                        "label": "DNS Name",
+                    }
+            ]
+        }
         return requests_mock.create_response(request,
                                              status_code=200,
                                              json=data)

@@ -5,6 +5,7 @@
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from pytest_resilient_circuits import verify_subset
 
 
 class FunctionComponent(ResilientComponent):

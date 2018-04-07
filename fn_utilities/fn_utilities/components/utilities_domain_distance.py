@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
             log.info("domain_name: %s", domain_name)
-            log.info("domain_list: %s", domain_list)
+            log.debug("domain_list: %s", domain_list)   # may be very long
 
             compare_domains = domain_list.split(",")
             results = {
@@ -65,6 +65,8 @@ class FunctionComponent(ResilientComponent):
                 if min_distance is None or dist < min_distance:
                     min_distance = dist
                     results["closest"] = {"name": compp, "distance": dist}
+
+            log.info("closest: %s, distance %s", results["closest"]["name"], results["closest"]["distance"])
 
             # Produce a FunctionResult with the return value
             yield FunctionResult(results)

@@ -100,7 +100,7 @@ class MailJson:
 
         ret = []
         for h in v:
-            h = email.header.decode_header(h)
+            h = email.Header.decode_header(h)
             h_ret = []
             for h_decoded in h:
                 hv = h_decoded[0]
