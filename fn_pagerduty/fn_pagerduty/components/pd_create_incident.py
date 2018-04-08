@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_pagerduty.lib.resilient_common import validateFields, clean_html
+from fn_pagerduty.lib.resilient_common import validateFields, clean_html, build_incident_url, build_resilient_url
 from pd_common import create_incident
 
 
@@ -48,13 +48,15 @@ class FunctionComponent(ResilientComponent):
         # Get the function parameters:
         incidentID = kwargs.get("incidentID")
 
+        url = build_incident_url(build_resilient_url(self.res_options.get('host'), self.res_options.get('port')), incidentID)
+
         payloadDict = pd_options.copy()
-        payloadDict['incidentID'] = kwargs.get("incidentID")
+        payloadDict['incidentID'] = incidentID
         payloadDict['title'] = kwargs.get("pd_title")
         desc = self.get_textarea_param(kwargs.get("pd_description"))
         if desc:
             desc = clean_html(desc)
-        payloadDict['description'] = desc
+        payloadDict['description'] = '\n'.join((url, desc))
         payloadDict['service'] = kwargs.get("pd_service")
         payloadDict['escalation_policy'] = kwargs.get("pd_escalation_policy")
         payloadDict['priority'] = kwargs.get("pd_priority")
