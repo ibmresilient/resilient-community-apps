@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_utilities", {})
 
-    @function("shell_command")
+    @function("utilities_shell_command")
     def _shell_command_function(self, event, *args, **kwargs):
         """Function: Runs a shell command."""
         try:
@@ -91,6 +91,7 @@ class FunctionComponent(ResilientComponent):
                 pass
 
             results = {
+                "commandline": commandline,
                 "start": int(tstart * 1000.0),
                 "end": int(tend * 1000.0),
                 "elapsed": int((tend-tstart) * 1000.0),
