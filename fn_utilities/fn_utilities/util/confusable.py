@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """ Table of confusable characters """

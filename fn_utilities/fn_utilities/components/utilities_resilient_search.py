@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
+
 """Function implementation"""
 
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from pytest_resilient_circuits import verify_subset
 
 
 class FunctionComponent(ResilientComponent):
