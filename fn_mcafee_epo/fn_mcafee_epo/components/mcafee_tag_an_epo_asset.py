@@ -87,7 +87,7 @@ Applies tag to the systems in ePO."""
             yield StatusMessage("Tag Applied...")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(content)
+            yield FunctionResult({"Response": "OK"})
         except Exception as e:
             LOG.error(e)
             yield FunctionError(e)
