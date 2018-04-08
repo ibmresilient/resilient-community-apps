@@ -32,7 +32,6 @@ from fn_jira.lib.resilient_common import *
 BROWSE_FRAGMENT = 'browse'
 
 class FunctionComponent(ResilientComponent):
-    INCIDENT_FRAGMENT = '#incidents'
 
     """Component that implements Resilient function 'jirs_open_issue"""
 
