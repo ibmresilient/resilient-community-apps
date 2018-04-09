@@ -23,6 +23,7 @@ shell_escaping=sh
 nslookup=nslookup "{{shell_param1}}"
 dig=dig "{{shell_param1}}"
 traceroute=traceroute -m 15 "{{shell_param1}}"
+whois=whois "{{shell_param1}}"
 
 # more shell_command examples:
 # foo=bash $UTILBIN/foo "{{shell_param1}}"
