@@ -10,6 +10,7 @@ import time
 import shlex
 import subprocess
 import json
+import chardet
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_circuits.template_functions import render
 
@@ -76,19 +77,20 @@ class FunctionComponent(ResilientComponent):
             retcode = call.returncode
             tend = time.time()
 
-            output = stderrdata.decode()
-            output_json = None
-            try:
-                # Let's see if the output can be decoded as JSON
-                output_json = json.loads(output)
-            except:
-                pass
-
-            result = stdoutdata.decode()
+            encoding = chardet.detect(stdoutdata)["encoding"]
+            result = stdoutdata.decode(encoding)
             result_json = None
             try:
                 # Let's see if the output can be decoded as JSON
                 result_json = json.loads(result)
+            except:
+                pass
+
+            output = stderrdata.decode(encoding)
+            output_json = None
+            try:
+                # Let's see if the output can be decoded as JSON
+                output_json = json.loads(output)
             except:
                 pass
 
