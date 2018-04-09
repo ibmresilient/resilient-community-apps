@@ -11,352 +11,401 @@ def customization_data(client=None):
        that should be installed by `resilient-circuits customize`
     """
 
-    # Function-field definitions
-    yield TypeDefinition(
-        {
-            "type_name": "__function",
-            "fields": { '00c3475d-4026-4301-b73c-dc29fc7869b8': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_threat_intel_type',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_threat_intel_type',
-                                            'tooltip': '',
-                                            'uuid': '00c3475d-4026-4301-b73c-dc29fc7869b8',
-                                            'values': []},
-  '13d39604-e948-43b9-95b2-5d39529e7145': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param5',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param5',
-                                            'tooltip': '',
-                                            'uuid': '13d39604-e948-43b9-95b2-5d39529e7145',
-                                            'values': []},
-  '174ae898-a813-4379-b322-ba20e850a400': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_threat_intel_key',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_threat_intel_key',
-                                            'tooltip': 'The _key from Splunk ES for this threat_intel item',
-                                            'uuid': '174ae898-a813-4379-b322-ba20e850a400',
-                                            'values': []},
-  '4af32ba8-92cb-4bd7-a5b2-9e48c2618863': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param3',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param3',
-                                            'tooltip': '',
-                                            'uuid': '4af32ba8-92cb-4bd7-a5b2-9e48c2618863',
-                                            'values': []},
-  '5c8543bc-a513-4a47-90c6-1af4215b5e1f': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param4',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param4',
-                                            'tooltip': '',
-                                            'uuid': '5c8543bc-a513-4a47-90c6-1af4215b5e1f',
-                                            'values': []},
-  '5dcd2998-9222-44cf-b047-418d672fbf0c': { 'blank_option': False,
-                                            'input_type': 'number',
-                                            'name': 'notable_event_status',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'notable_event_status',
-                                            'tooltip': '',
-                                            'uuid': '5dcd2998-9222-44cf-b047-418d672fbf0c',
-                                            'values': []},
-  '6f6a7f2c-a26b-4377-9f55-dd7f3c6b2758': { 'blank_option': False,
-                                            'input_type': 'boolean',
-                                            'name': 'splunk_verify_cert',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_verify_cert',
-                                            'tooltip': '',
-                                            'uuid': '6f6a7f2c-a26b-4377-9f55-dd7f3c6b2758',
-                                            'values': []},
-  '7341377c-62c3-4565-aa76-b33bc8a5bcb4': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param9',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param9',
-                                            'tooltip': '',
-                                            'uuid': '7341377c-62c3-4565-aa76-b33bc8a5bcb4',
-                                            'values': []},
-  '747afc0e-82a0-4def-acab-edd06f61f81e': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'comment',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'comment',
-                                            'tooltip': 'Update the notable comment using this',
-                                            'uuid': '747afc0e-82a0-4def-acab-edd06f61f81e',
-                                            'values': []},
-  '85ecf916-d844-4b3c-a89f-5273bf3835a3': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param2',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param2',
-                                            'tooltip': '',
-                                            'uuid': '85ecf916-d844-4b3c-a89f-5273bf3835a3',
-                                            'values': []},
-  'b2ed2dd3-0b7d-4dc9-b4ae-dad49d34b124': { 'blank_option': False,
-                                            'input_type': 'textarea',
-                                            'name': 'splunk_query',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [ { 'name': 'search index for type',
-                                                             'template': 'search index = %param1% AND %param2% = %param3%'},
-                                                           { 'name': 'search thread_intel for type',
-                                                             'template': 'inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key'},
-                                                           { 'name': 'search index and source for type',
-                                                             'template': 'search index = %param1% source=%param2% AND %param3%=%param4%'}],
-                                            'text': 'splunk_query',
-                                            'tooltip': '',
-                                            'uuid': 'b2ed2dd3-0b7d-4dc9-b4ae-dad49d34b124',
-                                            'values': []},
-  'c51b4789-9132-4f0f-b5a6-b882b98277de': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param10',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param10',
-                                            'tooltip': '',
-                                            'uuid': 'c51b4789-9132-4f0f-b5a6-b882b98277de',
-                                            'values': []},
-  'd3c6002c-826a-41ce-9cca-67e94cda8fc0': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'event_id',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'event_id',
-                                            'tooltip': 'notable event id from splunk ES',
-                                            'uuid': 'd3c6002c-826a-41ce-9cca-67e94cda8fc0',
-                                            'values': []},
-  'de435906-91b7-4b74-80ec-3de099cacdd6': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param7',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param7',
-                                            'tooltip': '',
-                                            'uuid': 'de435906-91b7-4b74-80ec-3de099cacdd6',
-                                            'values': []},
-  'e584a13e-0bb5-4996-8a53-1f74f9a8ca0e': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param6',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param6',
-                                            'tooltip': '',
-                                            'uuid': 'e584a13e-0bb5-4996-8a53-1f74f9a8ca0e',
-                                            'values': []},
-  'ebf0aa1d-8286-4465-91fb-2a4a4943f22d': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param8',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param8',
-                                            'tooltip': '',
-                                            'uuid': 'ebf0aa1d-8286-4465-91fb-2a4a4943f22d',
-                                            'values': []},
-  'ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8': { 'blank_option': False,
-                                            'input_type': 'text',
-                                            'name': 'splunk_query_param1',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_query_param1',
-                                            'tooltip': '',
-                                            'uuid': 'ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8',
-                                            'values': []},
-  'f4243c42-ed46-4b74-b28e-7b99c021ec7b': { 'blank_option': False,
-                                            'input_type': 'number',
-                                            'name': 'splunk_max_return',
-                                            'placeholder': '',
-                                            'rich_text': False,
-                                            'templates': [],
-                                            'text': 'splunk_max_return',
-                                            'tooltip': 'max number of events to return (used in head max)',
-                                            'uuid': 'f4243c42-ed46-4b74-b28e-7b99c021ec7b',
-                                            'values': []}}
-        }
+    # This import data contains:
+    #   Function inputs: comment, splunk_query_param3, splunk_query_param5, splunk_query_param6, splunk_query_param8, splunk_query, splunk_query_param4, splunk_query_param2, splunk_query_param10, splunk_threat_intel_key, splunk_query_param7, notable_event_status, splunk_max_return, splunk_query_param1, splunk_query_param9, splunk_threat_intel_type, event_id
+    #   DataTables: splunk_ip_intel
+    #   Message Destinations: splunk_es_notable, splunk_es_rest, splunk_search
+    #   Functions: splunk_update_notable, splunk_delete_threat_intel_item, splunk_search, splunk_add_intel_item
+    #   Workflows: splunk_update_notable, splunk_add_new_ip_intel, search_splunk_ip_intel, delete_splunk_es_threat_intel_item
+    #   Rules: Add IP to Splunk ES ip_intel, Search Splunk ES ip_intel, Delete IP from Splunk ES ip_intel, Update Splunk ES notable event
+
+
+    yield ImportDefinition(u"""
+eyJ0YXNrX29yZGVyIjogW10sICJ3b3JrZmxvd3MiOiBbXSwgImFjdGlvbnMiOiBbeyJsb2dpY190
+eXBlIjogImFsbCIsICJuYW1lIjogIkFkZCBJUCB0byBTcGx1bmsgRVMgaXBfaW50ZWwiLCAidmll
+d19pdGVtcyI6IFtdLCAidHlwZSI6IDEsICJ3b3JrZmxvd3MiOiBbInNwbHVua19hZGRfbmV3X2lw
+X2ludGVsIl0sICJvYmplY3RfdHlwZSI6ICJhcnRpZmFjdCIsICJ0aW1lb3V0X3NlY29uZHMiOiA4
+NjQwMCwgInV1aWQiOiAiZjQ3Y2I2NGItYzE2Yi00NmM4LTllOTEtNzhjNDU2Nzc5YmM2IiwgImF1
+dG9tYXRpb25zIjogW10sICJleHBvcnRfa2V5IjogIkFkZCBJUCB0byBTcGx1bmsgRVMgaXBfaW50
+ZWwiLCAiY29uZGl0aW9ucyI6IFtdLCAiaWQiOiAyMSwgIm1lc3NhZ2VfZGVzdGluYXRpb25zIjog
+W119LCB7ImxvZ2ljX3R5cGUiOiAiYWxsIiwgIm5hbWUiOiAiRGVsZXRlIElQIGZyb20gU3BsdW5r
+IEVTIGlwX2ludGVsIiwgInZpZXdfaXRlbXMiOiBbXSwgInR5cGUiOiAxLCAid29ya2Zsb3dzIjog
+WyJkZWxldGVfc3BsdW5rX2VzX3RocmVhdF9pbnRlbF9pdGVtIl0sICJvYmplY3RfdHlwZSI6ICJz
+cGx1bmtfaXBfaW50ZWwiLCAidGltZW91dF9zZWNvbmRzIjogODY0MDAsICJ1dWlkIjogIjkxNjRk
+YTBjLTQ0ODUtNGE5NS1iZjZhLWNiNjM4YTM2YWE0ZCIsICJhdXRvbWF0aW9ucyI6IFtdLCAiZXhw
+b3J0X2tleSI6ICJEZWxldGUgSVAgZnJvbSBTcGx1bmsgRVMgaXBfaW50ZWwiLCAiY29uZGl0aW9u
+cyI6IFtdLCAiaWQiOiAyMiwgIm1lc3NhZ2VfZGVzdGluYXRpb25zIjogW119LCB7ImxvZ2ljX3R5
+cGUiOiAiYWxsIiwgIm5hbWUiOiAiU2VhcmNoIFNwbHVuayBFUyBpcF9pbnRlbCIsICJ2aWV3X2l0
+ZW1zIjogW10sICJ0eXBlIjogMSwgIndvcmtmbG93cyI6IFsic2VhcmNoX3NwbHVua19pcF9pbnRl
+bCJdLCAib2JqZWN0X3R5cGUiOiAiYXJ0aWZhY3QiLCAidGltZW91dF9zZWNvbmRzIjogODY0MDAs
+ICJ1dWlkIjogImY1NjhlNDg3LTI0YjYtNDc5OS1iODljLWEwNDJmMzAxMjI4NCIsICJhdXRvbWF0
+aW9ucyI6IFtdLCAiZXhwb3J0X2tleSI6ICJTZWFyY2ggU3BsdW5rIEVTIGlwX2ludGVsIiwgImNv
+bmRpdGlvbnMiOiBbXSwgImlkIjogMjAsICJtZXNzYWdlX2Rlc3RpbmF0aW9ucyI6IFtdfSwgeyJs
+b2dpY190eXBlIjogImFsbCIsICJuYW1lIjogIlVwZGF0ZSBTcGx1bmsgRVMgbm90YWJsZSBldmVu
+dCIsICJ2aWV3X2l0ZW1zIjogW10sICJ0eXBlIjogMSwgIndvcmtmbG93cyI6IFsic3BsdW5rX3Vw
+ZGF0ZV9ub3RhYmxlIl0sICJvYmplY3RfdHlwZSI6ICJpbmNpZGVudCIsICJ0aW1lb3V0X3NlY29u
+ZHMiOiA4NjQwMCwgInV1aWQiOiAiZmM5ZmU1NGYtYzkzNS00NjAyLTk0YjktYjEyMjRlNTU5MDky
+IiwgImF1dG9tYXRpb25zIjogW10sICJleHBvcnRfa2V5IjogIlVwZGF0ZSBTcGx1bmsgRVMgbm90
+YWJsZSBldmVudCIsICJjb25kaXRpb25zIjogW10sICJpZCI6IDE5LCAibWVzc2FnZV9kZXN0aW5h
+dGlvbnMiOiBbXX1dLCAibGF5b3V0cyI6IFtdLCAiZXhwb3J0X2Zvcm1hdF92ZXJzaW9uIjogMiwg
+ImlkIjogNiwgImluZHVzdHJpZXMiOiBudWxsLCAicGhhc2VzIjogW10sICJhY3Rpb25fb3JkZXIi
+OiBbXSwgImdlb3MiOiBudWxsLCAic2VydmVyX3ZlcnNpb24iOiB7Im1ham9yIjogMzAsICJ2ZXJz
+aW9uIjogIjMwLjAuMzQ1OSIsICJidWlsZF9udW1iZXIiOiAzNDU5LCAibWlub3IiOiAwfSwgInRp
+bWVmcmFtZXMiOiBudWxsLCAid29ya3NwYWNlcyI6IFtdLCAiYXV0b21hdGljX3Rhc2tzIjogW10s
+ICJmdW5jdGlvbnMiOiBbeyJkaXNwbGF5X25hbWUiOiAiU3BsdW5rIEFkZCBJbnRlbCBJdGVtIiwg
+InV1aWQiOiAiMzExOGY2MjYtZDcxOS00MGM1LWE4NjItYTc2YjkzZTU4NWU2IiwgImNyZWF0b3Ii
+OiB7ImRpc3BsYXlfbmFtZSI6ICJZb25namlhbiBGZW5nIiwgInR5cGUiOiAidXNlciIsICJpZCI6
+IDEsICJuYW1lIjogInlvbmdqaWFuLmZlbmdAaWJtLmNvbSJ9LCAidmlld19pdGVtcyI6IFt7ImZp
+ZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1aWQiLCAiY29udGVu
+dCI6ICIwMGMzNDc1ZC00MDI2LTQzMDEtYjczYy1kYzI5ZmM3ODY5YjgifSwgeyJmaWVsZF90eXBl
+IjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiZWQy
+ZWY1NmYtYTNmMi00NmM4LWJmZjMtNmMyOGE1ZTcwOGU4In0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1
+bmN0aW9uIiwgImVsZW1lbnQiOiAiZmllbGRfdXVpZCIsICJjb250ZW50IjogIjg1ZWNmOTE2LWQ4
+NDQtNGIzYy1hODlmLTUyNzNiZjM4MzVhMyJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIs
+ICJlbGVtZW50IjogImZpZWxkX3V1aWQiLCAiY29udGVudCI6ICI0YWYzMmJhOC05MmNiLTRiZDct
+YTViMi05ZTQ4YzI2MTg4NjMifSwgeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVu
+dCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiNWM4NTQzYmMtYTUxMy00YTQ3LTkwYzYtMWFm
+NDIxNWI1ZTFmIn0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAiZmll
+bGRfdXVpZCIsICJjb250ZW50IjogIjEzZDM5NjA0LWU5NDgtNDNiOS05NWIyLTVkMzk1MjllNzE0
+NSJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1aWQi
+LCAiY29udGVudCI6ICJlNTg0YTEzZS0wYmI1LTQ5OTYtOGE1My0xZjc0ZjlhOGNhMGUifSwgeyJm
+aWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRl
+bnQiOiAiZGU0MzU5MDYtOTFiNy00Yjc0LTgwZWMtM2RlMDk5Y2FjZGQ2In0sIHsiZmllbGRfdHlw
+ZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAiZmllbGRfdXVpZCIsICJjb250ZW50IjogImVi
+ZjBhYTFkLTgyODYtNDQ2NS05MWZiLTJhNGE0OTQzZjIyZCJ9LCB7ImZpZWxkX3R5cGUiOiAiX19m
+dW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1aWQiLCAiY29udGVudCI6ICI3MzQxMzc3Yy02
+MmMzLTQ1NjUtYWE3Ni1iMzNiYzhhNWJjYjQifSwgeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24i
+LCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiYzUxYjQ3ODktOTEzMi00ZjBm
+LWI1YTYtYjg4MmI5ODI3N2RlIn1dLCAiZXhwb3J0X2tleSI6ICJzcGx1bmtfYWRkX2ludGVsX2l0
+ZW0iLCAibGFzdF9tb2RpZmllZF9ieSI6IHsiZGlzcGxheV9uYW1lIjogIllvbmdqaWFuIEZlbmci
+LCAidHlwZSI6ICJ1c2VyIiwgImlkIjogMSwgIm5hbWUiOiAieW9uZ2ppYW4uZmVuZ0BpYm0uY29t
+In0sICJuYW1lIjogInNwbHVua19hZGRfaW50ZWxfaXRlbSIsICJ2ZXJzaW9uIjogMSwgIndvcmtm
+bG93cyI6IFt7InByb2dyYW1tYXRpY19uYW1lIjogInNwbHVua19hZGRfbmV3X2lwX2ludGVsIiwg
+Im9iamVjdF90eXBlIjogImFydGlmYWN0IiwgInV1aWQiOiBudWxsLCAiYWN0aW9ucyI6IFtdLCAi
+bmFtZSI6ICJFeGFtcGxlIG9mIGFkZGluZyBuZXcgaXAgaW50ZWwgaXRlbSB0byBTcGx1bmsgRVMi
+LCAid29ya2Zsb3dfaWQiOiAxLCAiZGVzY3JpcHRpb24iOiBudWxsfV0sICJsYXN0X21vZGlmaWVk
+X3RpbWUiOiAxNTEyNDM1ODkwNzIxLCAiZGVzdGluYXRpb25faGFuZGxlIjogInNwbHVua19lc19y
+ZXN0IiwgImlkIjogNCwgImRlc2NyaXB0aW9uIjogeyJjb250ZW50IjogIkFkZCBhIG5ldyBzcGx1
+bmsgZXMgdGhyZWF0IGludGVsbGlnZW5jZSBpdGVtIHRvIHRoZSBnaXZlbiBjb2xsZWN0aW9uLiBz
+cGx1bmtfdGhyZWF0X2ludGVsX3R5cGUgaXMgb25lIG9mIHRoZSA5IGNvbGxlY3Rpb25zLCBpbmNs
+dWRpbmcgaXBfaW50ZWwsIGZpbGVfaW50ZWwuLi4uIHNwbHVua19xdWVyeV9wYXJhbTEgdG8gc3Bs
+dW5rX3F1ZXJ5X3BhcmFtMTAgYXJlIHVzZWQgdG8gYnVpbGQgYSBkaWN0IHtzcGx1bmtfcXVlcnlf
+cGFyYW0xOnNwbHVua19xdWVyeV9wYXJhbWUyLCBzcGx1bmtfcXVlcnlfcGFyYW0zOnNwbHVua19x
+dWVyeV9wYXJhbTQuLi4ufSBUaGlzIGRpY3QgaXMgdXNlZCB0byBjcmVhdGUgdGhlIG5ldyB0aHJl
+YXQgaW50ZWwgaXRlbS4iLCAiZm9ybWF0IjogInRleHQifX0sIHsiZGlzcGxheV9uYW1lIjogIlNw
+bHVuayBEZWxldGUgVGhyZWF0IEludGVsIEl0ZW0iLCAidXVpZCI6ICJmNjZkMjJjYS1iMWYwLTQ5
+YzktYjMyOC0yMjYyOGJiYzEwYzQiLCAiY3JlYXRvciI6IHsiZGlzcGxheV9uYW1lIjogIllvbmdq
+aWFuIEZlbmciLCAidHlwZSI6ICJ1c2VyIiwgImlkIjogMSwgIm5hbWUiOiAieW9uZ2ppYW4uZmVu
+Z0BpYm0uY29tIn0sICJ2aWV3X2l0ZW1zIjogW3siZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwg
+ImVsZW1lbnQiOiAiZmllbGRfdXVpZCIsICJjb250ZW50IjogIjAwYzM0NzVkLTQwMjYtNDMwMS1i
+NzNjLWRjMjlmYzc4NjliOCJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50
+IjogImZpZWxkX3V1aWQiLCAiY29udGVudCI6ICIxNzRhZTg5OC1hODEzLTQzNzktYjMyMi1iYTIw
+ZTg1MGE0MDAifV0sICJleHBvcnRfa2V5IjogInNwbHVua19kZWxldGVfdGhyZWF0X2ludGVsX2l0
+ZW0iLCAibGFzdF9tb2RpZmllZF9ieSI6IHsiZGlzcGxheV9uYW1lIjogIllvbmdqaWFuIEZlbmci
+LCAidHlwZSI6ICJ1c2VyIiwgImlkIjogMSwgIm5hbWUiOiAieW9uZ2ppYW4uZmVuZ0BpYm0uY29t
+In0sICJuYW1lIjogInNwbHVua19kZWxldGVfdGhyZWF0X2ludGVsX2l0ZW0iLCAidmVyc2lvbiI6
+IDEsICJ3b3JrZmxvd3MiOiBbeyJwcm9ncmFtbWF0aWNfbmFtZSI6ICJkZWxldGVfc3BsdW5rX2Vz
+X3RocmVhdF9pbnRlbF9pdGVtIiwgIm9iamVjdF90eXBlIjogInNwbHVua19pcF9pbnRlbCIsICJ1
+dWlkIjogbnVsbCwgImFjdGlvbnMiOiBbXSwgIm5hbWUiOiAiRXhhbXBsZSBvZiBkZWxldGluZyBh
+IFNwbHVuayBFUyBpcF9pbnRlbCBpdGVtIiwgIndvcmtmbG93X2lkIjogNSwgImRlc2NyaXB0aW9u
+IjogbnVsbH1dLCAibGFzdF9tb2RpZmllZF90aW1lIjogMTUxMjQzNTc2Mjk0NiwgImRlc3RpbmF0
+aW9uX2hhbmRsZSI6ICJzcGx1bmtfZXNfcmVzdCIsICJpZCI6IDIsICJkZXNjcmlwdGlvbiI6IHsi
+Y29udGVudCI6ICJEZWxldGUgYSB0aHJlYXQgaW50ZWxsaWdlbmNlIGl0ZW0gZnJvbSBhIGdpdmVu
+IGNvbGxlY3Rpb25zLiBzcGx1bmtfdGhyZWF0X2ludGVsX3R5cGUgaXMgb25lIG9mIDkgY29sbGVj
+dGlvbnMsIGluY2x1ZGluZyBpcF9pbnRlbCwgZmlsZV9pbnRlbC4uLiBzcGx1bmtfdGhyZWF0X2lu
+dGVsX2tleSBpcyB0aGUgX2tleSBvZiB0aGUgaXRlbSB0byBiZSBkZWxldGVkLiIsICJmb3JtYXQi
+OiAidGV4dCJ9fSwgeyJkaXNwbGF5X25hbWUiOiAiU3BsdW5rIFNlYXJjaCIsICJ1dWlkIjogImFl
+ZTdmYmZmLWM3MmUtNDc1NS1iYTgwLWIzOWIzMTg2MTM1NCIsICJjcmVhdG9yIjogeyJkaXNwbGF5
+X25hbWUiOiAiWW9uZ2ppYW4gRmVuZyIsICJ0eXBlIjogInVzZXIiLCAiaWQiOiAxLCAibmFtZSI6
+ICJ5b25namlhbi5mZW5nQGlibS5jb20ifSwgInZpZXdfaXRlbXMiOiBbeyJmaWVsZF90eXBlIjog
+Il9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiN2IyMjlj
+MjAtNTUwOC00NDQ5LWFmNWUtZTZkNmQ3YmM5ZTM5In0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1bmN0
+aW9uIiwgImVsZW1lbnQiOiAiZmllbGRfdXVpZCIsICJjb250ZW50IjogImVkMmVmNTZmLWEzZjIt
+NDZjOC1iZmYzLTZjMjhhNWU3MDhlOCJ9LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJl
+bGVtZW50IjogImZpZWxkX3V1aWQiLCAiY29udGVudCI6ICI4NWVjZjkxNi1kODQ0LTRiM2MtYTg5
+Zi01MjczYmYzODM1YTMifSwgeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6
+ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiNGFmMzJiYTgtOTJjYi00YmQ3LWE1YjItOWU0OGMy
+NjE4ODYzIn0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAiZmllbGRf
+dXVpZCIsICJjb250ZW50IjogIjVjODU0M2JjLWE1MTMtNGE0Ny05MGM2LTFhZjQyMTViNWUxZiJ9
+LCB7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJlbGVtZW50IjogImZpZWxkX3V1aWQiLCAi
+Y29udGVudCI6ICIxM2QzOTYwNC1lOTQ4LTQzYjktOTViMi01ZDM5NTI5ZTcxNDUifSwgeyJmaWVs
+ZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6ICJmaWVsZF91dWlkIiwgImNvbnRlbnQi
+OiAiZjQyNDNjNDItZWQ0Ni00Yjc0LWIyOGUtN2I5OWMwMjFlYzdiIn1dLCAiZXhwb3J0X2tleSI6
+ICJzcGx1bmtfc2VhcmNoIiwgImxhc3RfbW9kaWZpZWRfYnkiOiB7ImRpc3BsYXlfbmFtZSI6ICJZ
+b25namlhbiBGZW5nIiwgInR5cGUiOiAidXNlciIsICJpZCI6IDEsICJuYW1lIjogInlvbmdqaWFu
+LmZlbmdAaWJtLmNvbSJ9LCAibmFtZSI6ICJzcGx1bmtfc2VhcmNoIiwgInZlcnNpb24iOiAxLCAi
+d29ya2Zsb3dzIjogW3sicHJvZ3JhbW1hdGljX25hbWUiOiAic2VhcmNoX3NwbHVua19pcF9pbnRl
+bCIsICJvYmplY3RfdHlwZSI6ICJhcnRpZmFjdCIsICJ1dWlkIjogbnVsbCwgImFjdGlvbnMiOiBb
+XSwgIm5hbWUiOiAiRXhhbXBsZSBvZiBzZWFyY2hpbmcgU3BsdW5rIEVTIGlwX2ludGVsIiwgIndv
+cmtmbG93X2lkIjogMiwgImRlc2NyaXB0aW9uIjogbnVsbH1dLCAibGFzdF9tb2RpZmllZF90aW1l
+IjogMTUxMjQzNTYwMDA5NSwgImRlc3RpbmF0aW9uX2hhbmRsZSI6ICJzcGx1bmtfc2VhcmNoIiwg
+ImlkIjogMywgImRlc2NyaXB0aW9uIjogeyJjb250ZW50IjogIkRlZmluZSBhIHF1ZXJ5IHN0cmlu
+ZyB3aXRoIHBhcmFtZXRlcnMuIE1hcCBwYXJhbWV0ZXJzIGZyb20gaW5wdXRzLCBhbmQgcGVyZm9y
+bSB0aGUgcXVlcnkuIEZvciBleGFtcGxlLCAlcGFyYW0xJSBpbiB0aGUgcXVlcnkgc3RyaW5nIHdp
+bGwgYmUgcmVwbGFjZWQgYnkgdGhlIHZhbHVlIG9mIHNwbHVua19xdWVyeV9wYXJhbTEuIFRoZSBy
+ZXR1cm4gaXMgYSBsaXN0LiIsICJmb3JtYXQiOiAidGV4dCJ9fSwgeyJkaXNwbGF5X25hbWUiOiAi
+U3BsdW5rIFVwZGF0ZSBOb3RhYmxlIEV2ZW50IiwgInV1aWQiOiAiM2UzOTE5OGYtYzMzNy00MmJl
+LTg0MjAtOTUwMmQ1NzNlNDEzIiwgImNyZWF0b3IiOiB7ImRpc3BsYXlfbmFtZSI6ICJZb25namlh
+biBGZW5nIiwgInR5cGUiOiAidXNlciIsICJpZCI6IDEsICJuYW1lIjogInlvbmdqaWFuLmZlbmdA
+aWJtLmNvbSJ9LCAidmlld19pdGVtcyI6IFt7ImZpZWxkX3R5cGUiOiAiX19mdW5jdGlvbiIsICJl
+bGVtZW50IjogImZpZWxkX3V1aWQiLCAiY29udGVudCI6ICJkM2M2MDAyYy04MjZhLTQxY2UtOWNj
+YS02N2U5NGNkYThmYzAifSwgeyJmaWVsZF90eXBlIjogIl9fZnVuY3Rpb24iLCAiZWxlbWVudCI6
+ICJmaWVsZF91dWlkIiwgImNvbnRlbnQiOiAiNWRjZDI5OTgtOTIyMi00NGNmLWIwNDctNDE4ZDY3
+MmZiZjBjIn0sIHsiZmllbGRfdHlwZSI6ICJfX2Z1bmN0aW9uIiwgImVsZW1lbnQiOiAiZmllbGRf
+dXVpZCIsICJjb250ZW50IjogIjc0N2FmYzBlLTgyYTAtNGRlZi1hY2FiLWVkZDA2ZjYxZjgxZSJ9
+XSwgImV4cG9ydF9rZXkiOiAic3BsdW5rX3VwZGF0ZV9ub3RhYmxlIiwgImxhc3RfbW9kaWZpZWRf
+YnkiOiB7ImRpc3BsYXlfbmFtZSI6ICJZb25namlhbiBGZW5nIiwgInR5cGUiOiAidXNlciIsICJp
+ZCI6IDEsICJuYW1lIjogInlvbmdqaWFuLmZlbmdAaWJtLmNvbSJ9LCAibmFtZSI6ICJzcGx1bmtf
+dXBkYXRlX25vdGFibGUiLCAidmVyc2lvbiI6IDIsICJ3b3JrZmxvd3MiOiBbeyJwcm9ncmFtbWF0
+aWNfbmFtZSI6ICJzcGx1bmtfdXBkYXRlX25vdGFibGUiLCAib2JqZWN0X3R5cGUiOiAiaW5jaWRl
+bnQiLCAidXVpZCI6IG51bGwsICJhY3Rpb25zIjogW10sICJuYW1lIjogIkV4YW1wbGUgb2YgdXBk
+YXRpbmcgU3BsdW5rIEVTIG5vdGFibGUgZXZlbnQiLCAid29ya2Zsb3dfaWQiOiAzLCAiZGVzY3Jp
+cHRpb24iOiBudWxsfV0sICJsYXN0X21vZGlmaWVkX3RpbWUiOiAxNTEyNDM1NDQxMDEwLCAiZGVz
+dGluYXRpb25faGFuZGxlIjogInNwbHVua19lc19ub3RhYmxlIiwgImlkIjogMSwgImRlc2NyaXB0
+aW9uIjogeyJjb250ZW50IjogIlVwZGF0ZSBub3RhYmxlIGV2ZW50cyBhY2NvcmRpbmcgdG8gdGhl
+IHN0YXR1cyBvZiB0aGUgY29ycmVzcG9uZGluZyBpbmNpZGVudC4gUGFyYW1ldGVyczogMS4gZXZl
+bnRfaWQ6IFRoZSBldmVudF9pZCBvZiB0aGUgbm90YWJsZSBldmVudDsgMi4gbm90YWJsZV9ldmVu
+dF9zdGF0dXM6IENoYW5nZSBuZXcgc3RhdHVzIGZvciB0aGUgbm90YWJsZSBldmVudDsgMy4gY29t
+bWVudDogY29tbWVudCB0byBiZSBhZGRlZCB0byB0aGUgbm90YWJsZSBldmVudC4iLCAiZm9ybWF0
+IjogInRleHQifX1dLCAibm90aWZpY2F0aW9ucyI6IG51bGwsICJyZWd1bGF0b3JzIjogbnVsbCwg
+ImluY2lkZW50X3R5cGVzIjogW3siY3JlYXRlX2RhdGUiOiAxNTIzMjgxNzk5NTQwLCAiZGVzY3Jp
+cHRpb24iOiAiQ3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImV4cG9ydF9rZXki
+OiAiQ3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgImlkIjogMCwgIm5hbWUiOiAi
+Q3VzdG9taXphdGlvbiBQYWNrYWdlcyAoaW50ZXJuYWwpIiwgInVwZGF0ZV9kYXRlIjogMTUyMzI4
+MTc5OTU0MCwgInV1aWQiOiAiYmZlZWMyZDQtMzc3MC0xMWU4LWFkMzktNGEwMDA0MDQ0YWEwIiwg
+ImVuYWJsZWQiOiBmYWxzZSwgInN5c3RlbSI6IGZhbHNlLCAicGFyZW50X2lkIjogbnVsbCwgImhp
+ZGRlbiI6IGZhbHNlfV0sICJzY3JpcHRzIjogW10sICJ0eXBlcyI6IFt7ImRpc3BsYXlfbmFtZSI6
+ICJzcGx1bmtfaXBfaW50ZWwiLCAidXVpZCI6ICJhOTdlMTFjZS1mOGEwLTQ4NmItYWM2NS01NWE3
+NjM4MTQyOGQiLCAidHlwZV9pZCI6IDgsICJmaWVsZHMiOiB7ImludGVsX2l0ZW1fa2V5IjogeyJv
+cGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTAwMCwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAi
+dGV4dCI6ICJpbnRlbF9pdGVtX2tleSIsICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6
+IG51bGwsICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImlkIjogMTAxLCAicmVhZF9vbmx5IjogZmFsc2Us
+ICJ1dWlkIjogIjllNThjYTg2LTdhMTMtNDI1NC1iZTEwLWJjZWZjMmI5OWJhZSIsICJjaG9zZW4i
+OiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIiIsICJ3aWR0aCI6IDE2
+NSwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6IFtd
+LCAiZXhwb3J0X2tleSI6ICJzcGx1bmtfaXBfaW50ZWwvaW50ZWxfaXRlbV9rZXkiLCAiaGlkZV9u
+b3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIsICJuYW1lIjogImludGVsX2l0
+ZW1fa2V5IiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAidmFsdWVzIjogW10s
+ICJvcmRlciI6IDN9LCAiaXBfaW50ZWxfaXAiOiB7Im9wZXJhdGlvbnMiOiBbXSwgInR5cGVfaWQi
+OiAxMDAwLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogImlwX2ludGVsX2lwIiwgImJs
+YW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVlLCAi
+aWQiOiAxMDAsICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiOGRlNzIxYjgtN2NlZC00YzJl
+LTk4MDItNjk4ODVkYWNiOGY5IiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJ0ZXh0
+IiwgInRvb2x0aXAiOiAiIiwgIndpZHRoIjogMTQwLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hf
+dGV4dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogInNwbHVua19pcF9p
+bnRlbC9pcF9pbnRlbF9pcCIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xk
+ZXIiOiAiIiwgIm5hbWUiOiAiaXBfaW50ZWxfaXAiLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVy
+IjogZmFsc2UsICJ2YWx1ZXMiOiBbXSwgIm9yZGVyIjogMn0sICJpcF9pbnRlbF9kZXNjcmlwdGlv
+biI6IHsib3BlcmF0aW9ucyI6IFtdLCAidHlwZV9pZCI6IDEwMDAsICJvcGVyYXRpb25fcGVybXMi
+OiB7fSwgInRleHQiOiAiaXBfaW50ZWxfZGVzY3JpcHRpb24iLCAiYmxhbmtfb3B0aW9uIjogZmFs
+c2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDk5LCAicmVhZF9v
+bmx5IjogZmFsc2UsICJ1dWlkIjogIjA2YmE3ZGQ4LTcyOTQtNDI1Yy1hNDJkLTM0MzQ1ZTZhYTM4
+NiIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIiIs
+ICJ3aWR0aCI6IDIxNiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRl
+bXBsYXRlcyI6IFtdLCAiZXhwb3J0X2tleSI6ICJzcGx1bmtfaXBfaW50ZWwvaXBfaW50ZWxfZGVz
+Y3JpcHRpb24iLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIs
+ICJuYW1lIjogImlwX2ludGVsX2Rlc2NyaXB0aW9uIiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZl
+ciI6IGZhbHNlLCAidmFsdWVzIjogW10sICJvcmRlciI6IDF9LCAidGltZSI6IHsib3BlcmF0aW9u
+cyI6IFtdLCAidHlwZV9pZCI6IDEwMDAsICJvcGVyYXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAi
+dGltZSIsICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFuZ2VhYmxl
+IjogdHJ1ZSwgImlkIjogOTgsICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiYTNlZDY3OTct
+MzcxOS00ZjEzLWFlZjYtNjM1OGI4ZjkxN2VhIiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlw
+ZSI6ICJ0ZXh0IiwgInRvb2x0aXAiOiAiIiwgIndpZHRoIjogMTQxLCAiaW50ZXJuYWwiOiBmYWxz
+ZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogInNw
+bHVua19pcF9pbnRlbC90aW1lIiwgImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhv
+bGRlciI6ICIiLCAibmFtZSI6ICJ0aW1lIiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZh
+bHNlLCAidmFsdWVzIjogW10sICJvcmRlciI6IDB9fSwgInBhcmVudF90eXBlcyI6IFsiaW5jaWRl
+bnQiXSwgInR5cGVfbmFtZSI6ICJzcGx1bmtfaXBfaW50ZWwiLCAiZXhwb3J0X2tleSI6ICJzcGx1
+bmtfaXBfaW50ZWwiLCAiZm9yX2N1c3RvbV9maWVsZHMiOiBmYWxzZSwgImFjdGlvbnMiOiBbXSwg
+InByb3BlcnRpZXMiOiB7ImZvcl93aG8iOiBbXSwgImNhbl9kZXN0cm95IjogZmFsc2UsICJjYW5f
+Y3JlYXRlIjogZmFsc2V9LCAiZm9yX2FjdGlvbnMiOiBmYWxzZSwgImZvcl9ub3RpZmljYXRpb25z
+IjogZmFsc2UsICJzY3JpcHRzIjogW10sICJpZCI6IG51bGx9XSwgIm1lc3NhZ2VfZGVzdGluYXRp
+b25zIjogW3sidXVpZCI6ICIyYWJiYzIzNi1mOGJlLTQ3NWEtYjRiYy03YWUwNzk5MDA1NWQiLCAi
+ZXhwb3J0X2tleSI6ICJzcGx1bmtfZXNfbm90YWJsZSIsICJuYW1lIjogInNwbHVua19lc19ub3Rh
+YmxlIiwgImRlc3RpbmF0aW9uX3R5cGUiOiAwLCAicHJvZ3JhbW1hdGljX25hbWUiOiAic3BsdW5r
+X2VzX25vdGFibGUiLCAiZXhwZWN0X2FjayI6IHRydWUsICJ1c2VycyI6IFsieW9uZ2ppYW4uZmVu
+Z0BpYm0uY29tIl19LCB7InV1aWQiOiAiMmE2YTcxZTUtOTgwNy00ODJiLThlZWYtMmQ5NjRjZTQ3
+YjAzIiwgImV4cG9ydF9rZXkiOiAic3BsdW5rX2VzX3Jlc3QiLCAibmFtZSI6ICJzcGx1bmtfZXNf
+cmVzdCIsICJkZXN0aW5hdGlvbl90eXBlIjogMCwgInByb2dyYW1tYXRpY19uYW1lIjogInNwbHVu
+a19lc19yZXN0IiwgImV4cGVjdF9hY2siOiB0cnVlLCAidXNlcnMiOiBbInlvbmdqaWFuLmZlbmdA
+aWJtLmNvbSJdfSwgeyJ1dWlkIjogIjAzZDMyNTUyLWUyNjEtNGYzOS04N2ZmLWNjMzRhNGFiOWNj
+OCIsICJleHBvcnRfa2V5IjogInNwbHVua19zZWFyY2giLCAibmFtZSI6ICJzcGx1bmtfc2VhcmNo
+IiwgImRlc3RpbmF0aW9uX3R5cGUiOiAwLCAicHJvZ3JhbW1hdGljX25hbWUiOiAic3BsdW5rX3Nl
+YXJjaCIsICJleHBlY3RfYWNrIjogdHJ1ZSwgInVzZXJzIjogWyJ5b25namlhbi5mZW5nQGlibS5j
+b20iXX1dLCAiaW5jaWRlbnRfYXJ0aWZhY3RfdHlwZXMiOiBbXSwgInJvbGVzIjogW10sICJmaWVs
+ZHMiOiBbeyJvcGVyYXRpb25zIjogW10sICJyZWFkX29ubHkiOiB0cnVlLCAidXVpZCI6ICJjM2Yw
+ZTNlZC0yMWUxLTRkNTMtYWZmYi1mZTVjYTMzMDhjY2EiLCAidGVtcGxhdGVzIjogW10sICJ0eXBl
+X2lkIjogMCwgImNob3NlbiI6IGZhbHNlLCAidGV4dCI6ICJTaW11bGF0aW9uIiwgImRlZmF1bHRf
+Y2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAiZXhwb3J0X2tleSI6ICJpbmNpZGVudC9pbmNfdHJh
+aW5pbmciLCAidG9vbHRpcCI6ICJXaGV0aGVyIHRoZSBpbmNpZGVudCBpcyBhIHNpbXVsYXRpb24g
+b3IgYSByZWd1bGFyIGluY2lkZW50LiAgVGhpcyBmaWVsZCBpcyByZWFkLW9ubHkuIiwgInJpY2hf
+dGV4dCI6IGZhbHNlLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJwcmVmaXgiOiBudWxsLCAiaW50
+ZXJuYWwiOiBmYWxzZSwgInZhbHVlcyI6IFtdLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJpbnB1
+dF90eXBlIjogImJvb2xlYW4iLCAiY2hhbmdlYWJsZSI6IHRydWUsICJoaWRlX25vdGlmaWNhdGlv
+biI6IGZhbHNlLCAiaWQiOiAzNiwgIm5hbWUiOiAiaW5jX3RyYWluaW5nIn0sIHsib3BlcmF0aW9u
+cyI6IFtdLCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogImNv
+bW1lbnQiLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJs
+ZSI6IHRydWUsICJpZCI6IDc5LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjc0N2FmYzBl
+LTgyYTAtNGRlZi1hY2FiLWVkZDA2ZjYxZjgxZSIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5
+cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIlVwZGF0ZSB0aGUgbm90YWJsZSBjb21tZW50IHVzaW5n
+IHRoaXMiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAidGVtcGxhdGVz
+IjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vY29tbWVudCIsICJoaWRlX25vdGlmaWNh
+dGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIiOiAiIiwgIm5hbWUiOiAiY29tbWVudCIsICJkZWZh
+dWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFtdfSwgeyJvcGVyYXRpb25z
+IjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAic3Bs
+dW5rX3F1ZXJ5X3BhcmFtMSIsICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGws
+ICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImlkIjogOTEsICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQi
+OiAiZWQyZWY1NmYtYTNmMi00NmM4LWJmZjMtNmMyOGE1ZTcwOGU4IiwgImNob3NlbiI6IGZhbHNl
+LCAiaW5wdXRfdHlwZSI6ICJ0ZXh0IiwgInRvb2x0aXAiOiAiIiwgImludGVybmFsIjogZmFsc2Us
+ICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1
+bmN0aW9uL3NwbHVua19xdWVyeV9wYXJhbTEiLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwg
+InBsYWNlaG9sZGVyIjogIiIsICJuYW1lIjogInNwbHVua19xdWVyeV9wYXJhbTEiLCAiZGVmYXVs
+dF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJ2YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6
+IFtdLCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogInNwbHVu
+a19xdWVyeV9wYXJhbTQiLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAi
+Y2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDg0LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjog
+IjVjODU0M2JjLWE1MTMtNGE0Ny05MGM2LTFhZjQyMTViNWUxZiIsICJjaG9zZW4iOiBmYWxzZSwg
+ImlucHV0X3R5cGUiOiAidGV4dCIsICJ0b29sdGlwIjogIiIsICJpbnRlcm5hbCI6IGZhbHNlLCAi
+cmljaF90ZXh0IjogZmFsc2UsICJ0ZW1wbGF0ZXMiOiBbXSwgImV4cG9ydF9rZXkiOiAiX19mdW5j
+dGlvbi9zcGx1bmtfcXVlcnlfcGFyYW00IiwgImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJw
+bGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJzcGx1bmtfcXVlcnlfcGFyYW00IiwgImRlZmF1bHRf
+Y2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBb
+XSwgInR5cGVfaWQiOiAxMSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJzcGx1bmtf
+cXVlcnkiLCAiYmxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJs
+ZSI6IHRydWUsICJpZCI6IDk3LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjdiMjI5YzIw
+LTU1MDgtNDQ0OS1hZjVlLWU2ZDZkN2JjOWUzOSIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5
+cGUiOiAidGV4dGFyZWEiLCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hf
+dGV4dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW3sidGVtcGxhdGUiOiB7ImNvbnRlbnQiOiAic2Vh
+cmNoIGluZGV4ID0gJXBhcmFtMSUgQU5EICVwYXJhbTIlID0gJXBhcmFtMyUiLCAiZm9ybWF0Ijog
+InRleHQifSwgIm5hbWUiOiAic2VhcmNoIGluZGV4IGZvciB0eXBlIn0sIHsidGVtcGxhdGUiOiB7
+ImNvbnRlbnQiOiAiaW5wdXRsb29rdXAgJXBhcmFtMSUgfCBzZWFyY2ggTk9UIGRpc2FibGVkPSog
+QU5EICVwYXJhbTIlPSVwYXJhbTMlIHwgZXZhbCBpdGVtX2tleT1fa2V5IiwgImZvcm1hdCI6ICJ0
+ZXh0In0sICJuYW1lIjogInNlYXJjaCB0aHJlYWRfaW50ZWwgZm9yIHR5cGUifSwgeyJ0ZW1wbGF0
+ZSI6IHsiY29udGVudCI6ICJzZWFyY2ggaW5kZXggPSAlcGFyYW0xJSBzb3VyY2U9JXBhcmFtMiUg
+QU5EICVwYXJhbTMlPSVwYXJhbTQlIiwgImZvcm1hdCI6ICJ0ZXh0In0sICJuYW1lIjogInNlYXJj
+aCBpbmRleCBhbmQgc291cmNlIGZvciB0eXBlIn1dLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9u
+L3NwbHVua19xdWVyeSIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIi
+OiAiIiwgIm5hbWUiOiAic3BsdW5rX3F1ZXJ5IiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6
+IGZhbHNlLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBbXSwgInR5cGVfaWQiOiAxMSwg
+Im9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJzcGx1bmtfcXVlcnlfcGFyYW0yIiwgImJs
+YW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVlLCAi
+aWQiOiA4NSwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICI4NWVjZjkxNi1kODQ0LTRiM2Mt
+YTg5Zi01MjczYmYzODM1YTMiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90eXBlIjogInRleHQi
+LCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAi
+dGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vc3BsdW5rX3F1ZXJ5X3Bh
+cmFtMiIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIiOiAiIiwgIm5h
+bWUiOiAic3BsdW5rX3F1ZXJ5X3BhcmFtMiIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBm
+YWxzZSwgInZhbHVlcyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJv
+cGVyYXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAic3BsdW5rX3RocmVhdF9pbnRlbF90eXBlIiwg
+ImJsYW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0cnVl
+LCAiaWQiOiA5NSwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICIwMGMzNDc1ZC00MDI2LTQz
+MDEtYjczYy1kYzI5ZmM3ODY5YjgiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90eXBlIjogInRl
+eHQiLCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNl
+LCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vc3BsdW5rX3RocmVh
+dF9pbnRlbF90eXBlIiwgImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6
+ICIiLCAibmFtZSI6ICJzcGx1bmtfdGhyZWF0X2ludGVsX3R5cGUiLCAiZGVmYXVsdF9jaG9zZW5f
+Ynlfc2VydmVyIjogZmFsc2UsICJ2YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6IFtdLCAidHlw
+ZV9pZCI6IDExLCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogInNwbHVua19xdWVyeV9w
+YXJhbTEwIiwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFi
+bGUiOiB0cnVlLCAiaWQiOiA4NiwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICJjNTFiNDc4
+OS05MTMyLTRmMGYtYjVhNi1iODgyYjk4Mjc3ZGUiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90
+eXBlIjogInRleHQiLCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4
+dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vc3Bs
+dW5rX3F1ZXJ5X3BhcmFtMTAiLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9s
+ZGVyIjogIiIsICJuYW1lIjogInNwbHVua19xdWVyeV9wYXJhbTEwIiwgImRlZmF1bHRfY2hvc2Vu
+X2J5X3NlcnZlciI6IGZhbHNlLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBbXSwgInR5
+cGVfaWQiOiAxMSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJzcGx1bmtfcXVlcnlf
+cGFyYW02IiwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFi
+bGUiOiB0cnVlLCAiaWQiOiA4MiwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICJlNTg0YTEz
+ZS0wYmI1LTQ5OTYtOGE1My0xZjc0ZjlhOGNhMGUiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90
+eXBlIjogInRleHQiLCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4
+dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vc3Bs
+dW5rX3F1ZXJ5X3BhcmFtNiIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xk
+ZXIiOiAiIiwgIm5hbWUiOiAic3BsdW5rX3F1ZXJ5X3BhcmFtNiIsICJkZWZhdWx0X2Nob3Nlbl9i
+eV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBl
+X2lkIjogMTEsICJvcGVyYXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAiZXZlbnRfaWQiLCAiYmxh
+bmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJp
+ZCI6IDkzLCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogImQzYzYwMDJjLTgyNmEtNDFjZS05
+Y2NhLTY3ZTk0Y2RhOGZjMCIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIs
+ICJ0b29sdGlwIjogIm5vdGFibGUgZXZlbnQgaWQgZnJvbSBzcGx1bmsgRVMiLCAiaW50ZXJuYWwi
+OiBmYWxzZSwgInJpY2hfdGV4dCI6IGZhbHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5
+IjogIl9fZnVuY3Rpb24vZXZlbnRfaWQiLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBs
+YWNlaG9sZGVyIjogIiIsICJuYW1lIjogImV2ZW50X2lkIiwgImRlZmF1bHRfY2hvc2VuX2J5X3Nl
+cnZlciI6IGZhbHNlLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBbXSwgInR5cGVfaWQi
+OiAxMSwgIm9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJzcGx1bmtfcXVlcnlfcGFyYW01
+IiwgImJsYW5rX29wdGlvbiI6IGZhbHNlLCAicHJlZml4IjogbnVsbCwgImNoYW5nZWFibGUiOiB0
+cnVlLCAiaWQiOiA4MSwgInJlYWRfb25seSI6IGZhbHNlLCAidXVpZCI6ICIxM2QzOTYwNC1lOTQ4
+LTQzYjktOTViMi01ZDM5NTI5ZTcxNDUiLCAiY2hvc2VuIjogZmFsc2UsICJpbnB1dF90eXBlIjog
+InRleHQiLCAidG9vbHRpcCI6ICIiLCAiaW50ZXJuYWwiOiBmYWxzZSwgInJpY2hfdGV4dCI6IGZh
+bHNlLCAidGVtcGxhdGVzIjogW10sICJleHBvcnRfa2V5IjogIl9fZnVuY3Rpb24vc3BsdW5rX3F1
+ZXJ5X3BhcmFtNSIsICJoaWRlX25vdGlmaWNhdGlvbiI6IGZhbHNlLCAicGxhY2Vob2xkZXIiOiAi
+IiwgIm5hbWUiOiAic3BsdW5rX3F1ZXJ5X3BhcmFtNSIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2
+ZXIiOiBmYWxzZSwgInZhbHVlcyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjog
+MTEsICJvcGVyYXRpb25fcGVybXMiOiB7fSwgInRleHQiOiAic3BsdW5rX3F1ZXJ5X3BhcmFtOCIs
+ICJibGFua19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFuZ2VhYmxlIjogdHJ1
+ZSwgImlkIjogODMsICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiZWJmMGFhMWQtODI4Ni00
+NDY1LTkxZmItMmE0YTQ5NDNmMjJkIiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJ0
+ZXh0IiwgInRvb2x0aXAiOiAiIiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxz
+ZSwgInRlbXBsYXRlcyI6IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL3NwbHVua19xdWVy
+eV9wYXJhbTgiLCAiaGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIs
+ICJuYW1lIjogInNwbHVua19xdWVyeV9wYXJhbTgiLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVy
+IjogZmFsc2UsICJ2YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6IFtdLCAidHlwZV9pZCI6IDEx
+LCAib3BlcmF0aW9uX3Blcm1zIjoge30sICJ0ZXh0IjogInNwbHVua19xdWVyeV9wYXJhbTMiLCAi
+Ymxhbmtfb3B0aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUs
+ICJpZCI6IDgwLCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjRhZjMyYmE4LTkyY2ItNGJk
+Ny1hNWIyLTllNDhjMjYxODg2MyIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4
+dCIsICJ0b29sdGlwIjogIiIsICJpbnRlcm5hbCI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2Us
+ICJ0ZW1wbGF0ZXMiOiBbXSwgImV4cG9ydF9rZXkiOiAiX19mdW5jdGlvbi9zcGx1bmtfcXVlcnlf
+cGFyYW0zIiwgImhpZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAi
+bmFtZSI6ICJzcGx1bmtfcXVlcnlfcGFyYW0zIiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6
+IGZhbHNlLCAidmFsdWVzIjogW119LCB7Im9wZXJhdGlvbnMiOiBbXSwgInR5cGVfaWQiOiAxMSwg
+Im9wZXJhdGlvbl9wZXJtcyI6IHt9LCAidGV4dCI6ICJzcGx1bmtfbWF4X3JldHVybiIsICJibGFu
+a19vcHRpb24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImlk
+IjogOTIsICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiZjQyNDNjNDItZWQ0Ni00Yjc0LWIy
+OGUtN2I5OWMwMjFlYzdiIiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJudW1iZXIi
+LCAidG9vbHRpcCI6ICJtYXggbnVtYmVyIG9mIGV2ZW50cyB0byByZXR1cm4gKHVzZWQgaW4gaGVh
+ZCBtYXgpIiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRl
+cyI6IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL3NwbHVua19tYXhfcmV0dXJuIiwgImhp
+ZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJzcGx1
+bmtfbWF4X3JldHVybiIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwgInZhbHVl
+cyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRpb25fcGVy
+bXMiOiB7fSwgInRleHQiOiAibm90YWJsZV9ldmVudF9zdGF0dXMiLCAiYmxhbmtfb3B0aW9uIjog
+ZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDkwLCAicmVh
+ZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjVkY2QyOTk4LTkyMjItNDRjZi1iMDQ3LTQxOGQ2NzJm
+YmYwYyIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAibnVtYmVyIiwgInRvb2x0aXAi
+OiAiIiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6
+IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL25vdGFibGVfZXZlbnRfc3RhdHVzIiwgImhp
+ZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJub3Rh
+YmxlX2V2ZW50X3N0YXR1cyIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwgInZh
+bHVlcyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRpb25f
+cGVybXMiOiB7fSwgInRleHQiOiAic3BsdW5rX3RocmVhdF9pbnRlbF9rZXkiLCAiYmxhbmtfb3B0
+aW9uIjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDg3
+LCAicmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjE3NGFlODk4LWE4MTMtNDM3OS1iMzIyLWJh
+MjBlODUwYTQwMCIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIsICJ0b29s
+dGlwIjogIlRoZSBfa2V5IGZyb20gU3BsdW5rIEVTIGZvciB0aGlzIHRocmVhdF9pbnRlbCBpdGVt
+IiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRlcyI6IFtd
+LCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL3NwbHVua190aHJlYXRfaW50ZWxfa2V5IiwgImhp
+ZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJzcGx1
+bmtfdGhyZWF0X2ludGVsX2tleSIsICJkZWZhdWx0X2Nob3Nlbl9ieV9zZXJ2ZXIiOiBmYWxzZSwg
+InZhbHVlcyI6IFtdfSwgeyJvcGVyYXRpb25zIjogW10sICJ0eXBlX2lkIjogMTEsICJvcGVyYXRp
+b25fcGVybXMiOiB7fSwgInRleHQiOiAic3BsdW5rX3F1ZXJ5X3BhcmFtNyIsICJibGFua19vcHRp
+b24iOiBmYWxzZSwgInByZWZpeCI6IG51bGwsICJjaGFuZ2VhYmxlIjogdHJ1ZSwgImlkIjogODgs
+ICJyZWFkX29ubHkiOiBmYWxzZSwgInV1aWQiOiAiZGU0MzU5MDYtOTFiNy00Yjc0LTgwZWMtM2Rl
+MDk5Y2FjZGQ2IiwgImNob3NlbiI6IGZhbHNlLCAiaW5wdXRfdHlwZSI6ICJ0ZXh0IiwgInRvb2x0
+aXAiOiAiIiwgImludGVybmFsIjogZmFsc2UsICJyaWNoX3RleHQiOiBmYWxzZSwgInRlbXBsYXRl
+cyI6IFtdLCAiZXhwb3J0X2tleSI6ICJfX2Z1bmN0aW9uL3NwbHVua19xdWVyeV9wYXJhbTciLCAi
+aGlkZV9ub3RpZmljYXRpb24iOiBmYWxzZSwgInBsYWNlaG9sZGVyIjogIiIsICJuYW1lIjogInNw
+bHVua19xdWVyeV9wYXJhbTciLCAiZGVmYXVsdF9jaG9zZW5fYnlfc2VydmVyIjogZmFsc2UsICJ2
+YWx1ZXMiOiBbXX0sIHsib3BlcmF0aW9ucyI6IFtdLCAidHlwZV9pZCI6IDExLCAib3BlcmF0aW9u
+X3Blcm1zIjoge30sICJ0ZXh0IjogInNwbHVua19xdWVyeV9wYXJhbTkiLCAiYmxhbmtfb3B0aW9u
+IjogZmFsc2UsICJwcmVmaXgiOiBudWxsLCAiY2hhbmdlYWJsZSI6IHRydWUsICJpZCI6IDk0LCAi
+cmVhZF9vbmx5IjogZmFsc2UsICJ1dWlkIjogIjczNDEzNzdjLTYyYzMtNDU2NS1hYTc2LWIzM2Jj
+OGE1YmNiNCIsICJjaG9zZW4iOiBmYWxzZSwgImlucHV0X3R5cGUiOiAidGV4dCIsICJ0b29sdGlw
+IjogIiIsICJpbnRlcm5hbCI6IGZhbHNlLCAicmljaF90ZXh0IjogZmFsc2UsICJ0ZW1wbGF0ZXMi
+OiBbXSwgImV4cG9ydF9rZXkiOiAiX19mdW5jdGlvbi9zcGx1bmtfcXVlcnlfcGFyYW05IiwgImhp
+ZGVfbm90aWZpY2F0aW9uIjogZmFsc2UsICJwbGFjZWhvbGRlciI6ICIiLCAibmFtZSI6ICJzcGx1
+bmtfcXVlcnlfcGFyYW05IiwgImRlZmF1bHRfY2hvc2VuX2J5X3NlcnZlciI6IGZhbHNlLCAidmFs
+dWVzIjogW119XSwgIm92ZXJyaWRlcyI6IFtdLCAiZXhwb3J0X2RhdGUiOiAxNTEyNDk3NDgzOTQ0
+fQ==
+"""
     )
-
-    # Message destination: 'splunk_es_notable'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'splunk_es_notable',
-  'programmatic_name': 'splunk_es_notable'}
-    )
-
-    # Message destination: 'splunk_es_rest'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'splunk_es_rest',
-  'programmatic_name': 'splunk_es_rest'}
-    )
-
-    # Message destination: 'splunk_search'
-    yield MessageDestinationDefinition({ 'destination_type': 0,
-  'expect_ack': True,
-  'name': 'splunk_search',
-  'programmatic_name': 'splunk_search'}
-    )
-
-    # Function: 'splunk_update_notable'
-    yield FunctionDefinition({'description': {
-        'content': 'Update notable events according to the status of the corresponding incident.\n\nInputs: \nevent_id: the notable event id in the splunk_notable_event_id field\ncomment: add a note to the notable event \nstatus: Notable event status. Integer: 2=active, 5= closed\nverify: Verify the certificate or not. Set it to false if the cert of your splunk server is a self-signed cert.',
-        'format': 'text'},
-                              'destination_handle': 'splunk_es_notable',
-                              'display_name': 'Splunk Update Notable Event',
-                              'name': 'splunk_update_notable',
-                              'uuid': '7797e5b5-bf54-4d48-aa2f-215f66ccc2ef',
-                              'view_items': [{'content': 'd3c6002c-826a-41ce-9cca-67e94cda8fc0',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '747afc0e-82a0-4def-acab-edd06f61f81e',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '5dcd2998-9222-44cf-b047-418d672fbf0c',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'}]}
-                             )
-
-    # Function: 'splunk_delete_threat_intel_item'
-    yield FunctionDefinition({'description': {
-        'content': 'Delete a threat intel item:\nsplunk_threat_intel_type: ip_intel, email_intel....., registry_intel\nsplunk_threat_intel_key: _key returned from Splunk ES for this item\nsplunk_verify_cert: False to skipping the validation of https cert.',
-        'format': 'text'},
-                              'destination_handle': 'splunk_es_rest',
-                              'display_name': 'Splunk Delete Intel Item',
-                              'name': 'splunk_delete_threat_intel_item',
-                              'uuid': '9260ef59-a3e1-4e76-ba26-f7c1688b1d59',
-                              'view_items': [{'content': '00c3475d-4026-4301-b73c-dc29fc7869b8',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '174ae898-a813-4379-b322-ba20e850a400',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'}]}
-                             )
-
-    # Function: 'splunk_search'
-    yield FunctionDefinition({'description': {
-        'content': 'Pick a query string from the "Text with value string" template, and perform Splunk/SplunkES search',
-        'format': 'text'},
-                              'destination_handle': 'splunk_search',
-                              'display_name': 'Splunk Search',
-                              'name': 'splunk_search',
-                              'uuid': '86482013-45d6-47d3-b010-e95359f05299',
-                              'view_items': [{'content': 'b2ed2dd3-0b7d-4dc9-b4ae-dad49d34b124',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '85ecf916-d844-4b3c-a89f-5273bf3835a3',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '4af32ba8-92cb-4bd7-a5b2-9e48c2618863',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '5c8543bc-a513-4a47-90c6-1af4215b5e1f',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '13d39604-e948-43b9-95b2-5d39529e7145',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'f4243c42-ed46-4b74-b28e-7b99c021ec7b',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'}]}
-                             )
-
-    # Function: 'splunk_add_intel_item'
-    yield FunctionDefinition({'description': {
-        'content': 'Add a new splunk es threat intelligence item to the collections\nsplunk_thread_intel_type: ip_intel, user_intel,...., or registry_intel\nsplunk_query_param1: field1 name of the dict used to create the item;\nsplunk_query_param2: field1 value;\nsplunk_query_param3: field2 name;\nsplunk_query_param4: field2 value;\n.....',
-        'format': 'text'},
-                              'destination_handle': 'splunk_es_rest',
-                              'display_name': 'Splunk Add Intel Item',
-                              'name': 'splunk_add_intel_item',
-                              'uuid': '2d9b53f7-d84e-4159-ba9e-d6c2b9c7e28e',
-                              'view_items': [{'content': '00c3475d-4026-4301-b73c-dc29fc7869b8',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '85ecf916-d844-4b3c-a89f-5273bf3835a3',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '4af32ba8-92cb-4bd7-a5b2-9e48c2618863',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '5c8543bc-a513-4a47-90c6-1af4215b5e1f',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '13d39604-e948-43b9-95b2-5d39529e7145',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'e584a13e-0bb5-4996-8a53-1f74f9a8ca0e',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'de435906-91b7-4b74-80ec-3de099cacdd6',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'ebf0aa1d-8286-4465-91fb-2a4a4943f22d',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': '7341377c-62c3-4565-aa76-b33bc8a5bcb4',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'},
-                                             {'content': 'c51b4789-9132-4f0f-b5a6-b882b98277de',
-                                              'element': 'field_uuid',
-                                              'field_type': '__function'}]}
-    )
-
-    # Workflow: 'splunk_update_notable'
-    yield WorkflowDefinition({'content': {
-        'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="splunk_update_notable" isExecutable="true" name="Example of Updating Splunk ES According to Incident Status"><documentation>Automatically update notable event status according to the status of the incident</documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_1q6i0ny</outgoing></startEvent><serviceTask id="ServiceTask_0hmk2kr" name="Splunk Update Notable Event" resilient:type="function"><extensionElements><resilient:function uuid="7797e5b5-bf54-4d48-aa2f-215f66ccc2ef"><![CDATA[{"inputs":{"d3c6002c-826a-41ce-9cca-67e94cda8fc0":{"input_type":"static","static_input":{"text_value":null}},"747afc0e-82a0-4def-acab-edd06f61f81e":{"input_type":"static","static_input":{"text_value":null}},"5dcd2998-9222-44cf-b047-418d672fbf0c":{"input_type":"static","static_input":{"number_value":null}},"6f6a7f2c-a26b-4377-9f55-dd7f3c6b2758":{"input_type":"static","static_input":{"boolean_value":false}}},"pre_processing_script":"inputs.event_id = incident.properties.splunk_notable_event_id\\n\\nif incident.plan_status == \\"C\\":\\n  inputs.notable_event_status = 5\\n  inputs.comment = \\"Resilient incident is closed\\"\\nelse:\\n  inputs.comment = \\"Reslient incident is active\\"\\n  inputs.notable_event_status = 2\\n  ","post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_1q6i0ny</incoming><outgoing>SequenceFlow_0wxcf4w</outgoing></serviceTask><sequenceFlow id="SequenceFlow_1q6i0ny" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_0hmk2kr"/><endEvent id="EndEvent_1ahimz8"><incoming>SequenceFlow_0wxcf4w</incoming></endEvent><sequenceFlow id="SequenceFlow_0wxcf4w" sourceRef="ServiceTask_0hmk2kr" targetRef="EndEvent_1ahimz8"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_0hmk2kr" id="ServiceTask_0hmk2kr_di"><omgdc:Bounds height="80" width="100" x="365" y="169"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_1q6i0ny" id="SequenceFlow_1q6i0ny_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="282" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="282" xsi:type="omgdc:Point" y="209"/><omgdi:waypoint x="365" xsi:type="omgdc:Point" y="209"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="297" y="201"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_1ahimz8" id="EndEvent_1ahimz8_di"><omgdc:Bounds height="36" width="36" x="677.6958637469586" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="695.6958637469586" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_0wxcf4w" id="SequenceFlow_0wxcf4w_di"><omgdi:waypoint x="465" xsi:type="omgdc:Point" y="209"/><omgdi:waypoint x="571" xsi:type="omgdc:Point" y="209"/><omgdi:waypoint x="571" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="678" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="586" y="201"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-                              'object_type': 'incident',
-                              'programmatic_name': 'splunk_update_notable'}
-                             )
-
-    # Workflow: 'splunk_add_new_ip_intel'
-    yield WorkflowDefinition({'content': {
-        'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="splunk_add_new_ip_intel" isExecutable="true" name="Example of Adding Splunk ES ip_intel"><documentation><![CDATA[Add a new ip_intel using artifact value:\nparam splunk_threat_intel_type: ip_intel, user_intel,..., or registry_intel\nparam splunk_query_param1: field to add. ip, or domain for example\nparam splunk_query_param2: value of field\nparam splunk_query_param3: field\nparam splunk_query_param4: value\n.....]]></documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_0gpe3sj</outgoing></startEvent><serviceTask id="ServiceTask_1g2gak6" name="Splunk Add Intel Item" resilient:type="function"><extensionElements><resilient:function uuid="2d9b53f7-d84e-4159-ba9e-d6c2b9c7e28e"><![CDATA[{"inputs":{"00c3475d-4026-4301-b73c-dc29fc7869b8":{"input_type":"static","static_input":{"text_value":"ip_intel"}},"ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8":{"input_type":"static","static_input":{"text_value":"ip"}},"6f6a7f2c-a26b-4377-9f55-dd7f3c6b2758":{"input_type":"static","static_input":{"boolean_value":false}}},"pre_processing_script":"inputs.splunk_query_param2 = artifact.value","post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_0gpe3sj</incoming><outgoing>SequenceFlow_01h31mw</outgoing></serviceTask><sequenceFlow id="SequenceFlow_0gpe3sj" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_1g2gak6"/><endEvent id="EndEvent_0v67ij6"><incoming>SequenceFlow_01h31mw</incoming></endEvent><sequenceFlow id="SequenceFlow_01h31mw" sourceRef="ServiceTask_1g2gak6" targetRef="EndEvent_0v67ij6"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_1g2gak6" id="ServiceTask_1g2gak6_di"><omgdc:Bounds height="80" width="100" x="251" y="174"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_0gpe3sj" id="SequenceFlow_0gpe3sj_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="225" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="225" xsi:type="omgdc:Point" y="214"/><omgdi:waypoint x="251" xsi:type="omgdc:Point" y="214"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="240" y="203"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_0v67ij6" id="EndEvent_0v67ij6_di"><omgdc:Bounds height="36" width="36" x="451" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="469" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_01h31mw" id="SequenceFlow_01h31mw_di"><omgdi:waypoint x="351" xsi:type="omgdc:Point" y="214"/><omgdi:waypoint x="401" xsi:type="omgdc:Point" y="214"/><omgdi:waypoint x="401" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="451" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="416" y="203"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-                              'object_type': 'artifact',
-                              'programmatic_name': 'splunk_add_new_ip_intel'}
-                             )
-
-    # Workflow: 'search_splunk_ip_intel'
-    yield WorkflowDefinition({'content': {
-        'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="search_splunk_ip_intel" isExecutable="true" name="Example of Searching Splunk IP Intel"><documentation><![CDATA[Use the Splunk Search function to look for an ip_intel\nParameters:\nparam1 intel type from (ip_intel, file_intel, user_intel, http_intel, email_intel, service_intel, process_intel, registry_intel, certificate_intel)\nparam2: what field to search. For example for ip_intel we can search ip. \nparam3: value. For example the ip value if param2 is ip\n\nReturn:\nAn array of dicts. Each dictionary contains the fields of that intel item, depending on the type. Once important field is item_key, which uniquely identifies the item.]]></documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_06k08vo</outgoing></startEvent><serviceTask id="ServiceTask_047839z" name="Splunk Search" resilient:type="function"><extensionElements><resilient:function uuid="86482013-45d6-47d3-b010-e95359f05299"><![CDATA[{"inputs":{"b2ed2dd3-0b7d-4dc9-b4ae-dad49d34b124":{"input_type":"static","static_input":{"text_content_value":{"format":"text","content":"inputlookup %param1% | search NOT disabled=* AND %param2%=%param3% | eval item_key=_key"}}},"ed2ef56f-a3f2-46c8-bff3-6c28a5e708e8":{"input_type":"static","static_input":{"text_value":"ip_intel"}},"85ecf916-d844-4b3c-a89f-5273bf3835a3":{"input_type":"static","static_input":{"text_value":"ip"}}},"pre_processing_script":"inputs.splunk_query_param3 = artifact.value","post_processing_script":"for event in results.events:\\n  splunk_es_ip_intel = incident.addRow(\\"splunk_ip_intel\\")\\n  splunk_es_ip_intel.time=event.time\\n  splunk_es_ip_intel.ip_intel_description=event.description\\n  splunk_es_ip_intel.ip_intel_ip=event.ip\\n  splunk_es_ip_intel.intel_item_key=event._key \\n  splunk_es_ip_intel.threat_key=event.threat_key","result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_06k08vo</incoming><outgoing>SequenceFlow_17k5670</outgoing></serviceTask><sequenceFlow id="SequenceFlow_06k08vo" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_047839z"/><endEvent id="EndEvent_0uufwag"><incoming>SequenceFlow_17k5670</incoming></endEvent><sequenceFlow id="SequenceFlow_17k5670" sourceRef="ServiceTask_047839z" targetRef="EndEvent_0uufwag"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="162" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="157" y="223"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="169" xsi:type="omgdc:Point" y="220"/><omgdi:waypoint x="153" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_047839z" id="ServiceTask_047839z_di"><omgdc:Bounds height="80" width="100" x="297.09653465346537" y="165.95420792079207"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_06k08vo" id="SequenceFlow_06k08vo_di"><omgdi:waypoint x="198" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="297" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="247.5" y="184.5"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_0uufwag" id="EndEvent_0uufwag_di"><omgdc:Bounds height="36" width="36" x="531.8470744680851" y="188"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="549.8470744680851" y="227"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_17k5670" id="SequenceFlow_17k5670_di"><omgdi:waypoint x="397" xsi:type="omgdc:Point" y="206"/><omgdi:waypoint x="532" xsi:type="omgdc:Point" y="206"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="464.5" y="184.5"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-                              'object_type': 'artifact',
-                              'programmatic_name': 'search_splunk_ip_intel'}
-                             )
-
-    # Workflow: 'delete_splunk_es_threat_intel_item'
-    yield WorkflowDefinition({'content': {
-        'xml': '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:resilient="http://resilient.ibm.com/bpmn" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.camunda.org/test"><process id="delete_splunk_es_threat_intel_item" isExecutable="true" name="Example of Deleting Splunk ES threat intel item"><documentation><![CDATA[This is an example of calling the "splunk delete threat intel item" to delete a ip_intel item:\nparam]]></documentation><startEvent id="StartEvent_155asxm"><outgoing>SequenceFlow_1te3lq4</outgoing></startEvent><serviceTask id="ServiceTask_1bez5fk" name="splunk delete threat intel item" resilient:type="function"><extensionElements><resilient:function uuid="9260ef59-a3e1-4e76-ba26-f7c1688b1d59"><![CDATA[{"inputs":{"00c3475d-4026-4301-b73c-dc29fc7869b8":{"input_type":"static","static_input":{"text_value":"ip_intel"}},"6f6a7f2c-a26b-4377-9f55-dd7f3c6b2758":{"input_type":"static","static_input":{"boolean_value":false}}},"pre_processing_script":"inputs.splunk_threat_intel_key = row.intel_item_key","post_processing_script":null,"result_name":null}]]></resilient:function></extensionElements><incoming>SequenceFlow_1te3lq4</incoming><outgoing>SequenceFlow_1y0amk9</outgoing></serviceTask><sequenceFlow id="SequenceFlow_1te3lq4" sourceRef="StartEvent_155asxm" targetRef="ServiceTask_1bez5fk"/><endEvent id="EndEvent_090sn33"><incoming>SequenceFlow_1y0amk9</incoming></endEvent><sequenceFlow id="SequenceFlow_1y0amk9" sourceRef="ServiceTask_1bez5fk" targetRef="EndEvent_090sn33"/><textAnnotation id="TextAnnotation_1kxxiyt"><text>Start your workflow here</text></textAnnotation><association id="Association_1seuj48" sourceRef="StartEvent_155asxm" targetRef="TextAnnotation_1kxxiyt"/><textAnnotation id="TextAnnotation_0ztsfom"><text><![CDATA[The splunk delete threat intel item function. This takes a threat type and an item key\n]]></text></textAnnotation><association id="Association_0ubek16" sourceRef="ServiceTask_1bez5fk" targetRef="TextAnnotation_0ztsfom"/></process><bpmndi:BPMNDiagram id="BPMNDiagram_1"><bpmndi:BPMNPlane bpmnElement="undefined" id="BPMNPlane_1"><bpmndi:BPMNShape bpmnElement="StartEvent_155asxm" id="StartEvent_155asxm_di"><omgdc:Bounds height="36" width="36" x="183" y="186"/><bpmndi:BPMNLabel><omgdc:Bounds height="0" width="90" x="178" y="221"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNShape bpmnElement="TextAnnotation_1kxxiyt" id="TextAnnotation_1kxxiyt_di"><omgdc:Bounds height="30" width="100" x="99" y="254"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_1seuj48" id="Association_1seuj48_di"><omgdi:waypoint x="188" xsi:type="omgdc:Point" y="216"/><omgdi:waypoint x="158" xsi:type="omgdc:Point" y="254"/></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="ServiceTask_1bez5fk" id="ServiceTask_1bez5fk_di"><omgdc:Bounds height="80" width="100" x="273" y="164"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_1te3lq4" id="SequenceFlow_1te3lq4_di"><omgdi:waypoint x="219" xsi:type="omgdc:Point" y="204"/><omgdi:waypoint x="273" xsi:type="omgdc:Point" y="204"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="246" y="182"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="EndEvent_090sn33" id="EndEvent_090sn33_di"><omgdc:Bounds height="36" width="36" x="464" y="186"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="482" y="225"/></bpmndi:BPMNLabel></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="SequenceFlow_1y0amk9" id="SequenceFlow_1y0amk9_di"><omgdi:waypoint x="373" xsi:type="omgdc:Point" y="204"/><omgdi:waypoint x="464" xsi:type="omgdc:Point" y="204"/><bpmndi:BPMNLabel><omgdc:Bounds height="13" width="0" x="418.5" y="182"/></bpmndi:BPMNLabel></bpmndi:BPMNEdge><bpmndi:BPMNShape bpmnElement="TextAnnotation_0ztsfom" id="TextAnnotation_0ztsfom_di"><omgdc:Bounds height="30" width="427" x="244" y="88"/></bpmndi:BPMNShape><bpmndi:BPMNEdge bpmnElement="Association_0ubek16" id="Association_0ubek16_di"><omgdi:waypoint x="369" xsi:type="omgdc:Point" y="170"/><omgdi:waypoint x="438" xsi:type="omgdc:Point" y="118"/></bpmndi:BPMNEdge></bpmndi:BPMNPlane></bpmndi:BPMNDiagram></definitions>'},
-                              'object_type': 'splunk_ip_intel',
-                              'programmatic_name': 'delete_splunk_es_threat_intel_item'}
-                             )
