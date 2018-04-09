@@ -47,20 +47,20 @@ class FunctionComponent(ResilientComponent):
             # Escape the input parameters
             escaping = self.options.get("shell_escaping", "sh")
             escaped_args = {
-                "shell_param1": render("{{shell_param1|%s}}" % escaping, kwargs),
-                "shell_param2": render("{{shell_param2|%s}}" % escaping, kwargs),
-                "shell_param3": render("{{shell_param3|%s}}" % escaping, kwargs)
+                "shell_param1": render(u"{{shell_param1|%s}}" % escaping, kwargs),
+                "shell_param2": render(u"{{shell_param2|%s}}" % escaping, kwargs),
+                "shell_param3": render(u"{{shell_param3|%s}}" % escaping, kwargs)
             }
 
             # Substitute parameters into the shell command
             if shell_command not in self.options:
-                yield FunctionError("Command is not configured: '{}'".format(shell_command))
+                yield FunctionError(u"Command is not configured: '{}'".format(shell_command))
                 return
             shell_command_base = self.options[shell_command]
             commandline = render(shell_command_base, escaped_args)
             commandline = os.path.expandvars(commandline)
 
-            yield StatusMessage("Running: {}".format(commandline))
+            yield StatusMessage(u"Running: {}".format(commandline))
 
             # Set up the environment
             env = os.environ.copy()
@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
             retcode = call.returncode
             tend = time.time()
 
-            encoding = chardet.detect(stdoutdata)["encoding"]
+            encoding = chardet.detect(stdoutdata)["encoding"] or "utf-8"
             result = stdoutdata.decode(encoding)
             result_json = None
             try:

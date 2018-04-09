@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
                 impl.update(data)
                 results[algo] = impl.hexdigest()
 
-            log.info("{} sha1={}".format(metadata["name"], results["sha1"]))
+            log.info(u"{} sha1={}".format(metadata["name"], results["sha1"]))
 
             # Produce a FunctionResult with the return value
             log.debug(json.dumps(results))
