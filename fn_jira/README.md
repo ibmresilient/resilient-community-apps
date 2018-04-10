@@ -6,7 +6,7 @@ This Resilient Functions package provides integration with JIRA for:
 * Comment Creation
 
 Prerequisites
-```$xslt
+```
 resilient-circuits >=v30.0.0
 ```
 
