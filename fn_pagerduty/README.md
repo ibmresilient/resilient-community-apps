@@ -6,7 +6,7 @@ This Resilient Functions package provides integration with PagerDuty for:
 * Note Creation
 
 Prerequisites
-```$xslt
+```
 resilient-circuits >=v30.0.0
 ```
 
@@ -27,7 +27,7 @@ Run with: `resilient-circuits run`.
 To uninstall, run: `pip uninstall fn_pagerduty`
     
 ## Resilient Configuration
-Follow the steps to add a jira section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
+Follow the steps to add a pagerduty section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
 
 ```
 [pagerduty]
