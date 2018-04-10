@@ -6,9 +6,9 @@ from setuptools import setup, find_packages
 setup(
     name='fn_jira',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_jira'",
     long_description="Resilient Circuits Components for 'fn_jira'",
     install_requires=[
