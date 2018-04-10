@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_pagerduty',
     version='1.0.0',
-    license='See License File',
+    license='MIT',
     author='Resilient',
     author_email='support@resilient.com',
     description="Resilient Circuits Components for 'fn_pagerduty'",
