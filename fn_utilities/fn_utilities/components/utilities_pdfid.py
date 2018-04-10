@@ -24,34 +24,35 @@ class FunctionComponent(ResilientComponent):
             base64content = kwargs.get("base64content")  # text
 
             log = logging.getLogger(__name__)
-            log.info("base64content: %s", base64content)
+            log.debug("base64content: %s", base64content)
 
             yield StatusMessage("Analysing with pdfid...")
-            pdfcontent = base64.b64decode(base64content)
-
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-                try:
-                    temp_file.write(pdfcontent)
-                    temp_file.close()
-                    xmldoc = PDFiD(temp_file.name)
-                    data = json.loads(PDFiD2JSON(xmldoc, True))
-                finally:
-                    os.unlink(temp_file.name)
-
             try:
+                pdfcontent = base64.b64decode(base64content)
+
+                with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                    try:
+                        temp_file.write(pdfcontent)
+                        temp_file.close()
+                        xmldoc = PDFiD(temp_file.name)
+                        data = json.loads(PDFiD2JSON(xmldoc, True))
+                    finally:
+                        os.unlink(temp_file.name)
+
                 results = {
                     "header": data[0]["pdfid"]["header"],
                     "isPdf": data[0]["pdfid"]["isPdf"]
                 }
                 for keyword in data[0]["pdfid"]["keywords"]["keyword"]:
                     results[keyword["name"]] = keyword["count"]
-            except:
+            except Exception as exc:
                 results = {
                     "header": None,
-                    "isPdf": False
+                    "isPdf": False,
+                    "error": str(exc)
                 }
 
-            log.debug(json.dumps(results, indent=2))
+            log.info(json.dumps(results, indent=2))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

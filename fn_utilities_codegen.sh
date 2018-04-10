@@ -3,7 +3,7 @@ resilient-circuits codegen -p fn_utilities -m fn_utilities \
     "Example: Call REST API" \
     "Example: Domain Distance" \
     "Example: Email Parsing" \
-    "Example: PDFid" \
+    "Example: PDFiD" \
     "Example: Resilient Search" \
     "Example: Shell Command" \
     "Example: Zip Extract" \

@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("No message was supplied.")
 
             log = logging.getLogger(__name__)
-            log.info("base64content: %s", base64content)
+            log.debug("base64content: %s", base64content)
 
             yield StatusMessage("Reading email message...")
             data = base64.b64decode(base64content)
