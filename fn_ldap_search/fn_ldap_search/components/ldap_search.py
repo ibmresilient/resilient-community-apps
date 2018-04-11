@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ldap_search'
 
     The Function does an LDAP lookup and takes the following parameters:
-        search_base , search_filter, search_attributes
+        search_base , search_filter, search_attributes and param
 
     An example of a set of query parameter might look like the following:
 
@@ -108,7 +108,7 @@ class FunctionComponent(ResilientComponent):
                 self.search_params[k] = self.escape_chars(self.search_params[k])
             # Search for "%param% token in parameter.
             if re.search("%param%", self.search_params[k]):
-                # Only allow "%param% in search_attributes field.
+                # Only allow "%param% in search_filter field.
                 if re.match('^search_filter$', k):
                     if "param" not in self.search_params:
                         raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank.".format(k, "param"))

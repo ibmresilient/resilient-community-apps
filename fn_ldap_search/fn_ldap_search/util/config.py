@@ -11,13 +11,12 @@ def config_section_data():
     """
     config_data = u"""[fn_ldap_search]
 # LDAP server ip or fully qualified hostname
-server=localhost
+server=ldap.forumsys.com
 port=389
 # The domain setting must be set to a valid Windows domain if using NTLM authentication.
 #domain=WORKGROUP 
-user=cn=admin,dc=example,dc=com
-#domain=
-password=admin
+user=cn=read-only-admin,dc=example,dc=com
+password=password
 auth=SIMPLE
 use_ssl=False
     """
