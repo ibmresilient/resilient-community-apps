@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: fn_jira
+Version: 1.0.0
+Summary: Resilient Circuits Components for 'fn_jira'
+Home-page: https://www.resilientsystems.com/
+Author: IBM Resilient
+Author-email: support@resilientsystems.com
+License: MIT
+Description: Resilient Circuits Components for 'fn_jira'
+Platform: any
+Classifier: Programming Language :: Python
