@@ -36,7 +36,7 @@ class TestMcAfeeTagAnEpoAsset:
         assert func is not None
 
     @pytest.mark.parametrize("mcafee_epo_systems, mcafee_epo_tag, expected_results", [
-        ("10.0.2.15", "Resilient", u'OK:\r\n0\r\n')
+        ("10.0.2.15", "Resilient", {"Systems": "10.0.2.15", "Tag": "Resilient"})
     ])
     def test_success(self, circuits_app, mcafee_epo_systems, mcafee_epo_tag, expected_results):
         """ Test calling with sample values for the parameters """
