@@ -72,17 +72,17 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for DNS RR History for a IP, Type and Domain Name"""
         try:
             # Get the function parameters:
-            resource = self.get_textarea_param(kwargs.get("resource"))  # textarea
-            dns_type = self.get_select_param(kwargs.get("dns_type"))  # select, values: "A", "NS", "MX", "TXT", "CNAME"
+            umbinv_resource = kwargs.get("umbinv_resource")  # text
+            umbinv_dns_type = self.get_select_param(kwargs.get("umbinv_dns_type"))  # select, values: "A", "NS", "MX", "TXT", "CNAME"
 
             log = logging.getLogger(__name__)
-            log.info("resource: %s", resource)
-            log.info("dns_type: %s", dns_type)
+            log.info("umbinv_resource: %s", umbinv_resource)
+            log.info("umbinv_dns_type: %s", umbinv_dns_type)
 
-            if resource is None:
-                raise ValueError("Required parameter 'resource' not set")
+            if umbinv_resource is None:
+                raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            self._params = {"resource": resource, "dns_type": dns_type}
+            self._params = {"resource": umbinv_resource, "dns_type": umbinv_dns_type}
 
             yield StatusMessage("Starting...")
             validate_opts(self)
@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             process_params(self)
 
             if not hasattr(self, '_res'):
-               raise ValueError("Parameter 'resource' which should be set to an ip address or domain name is not set")
+               raise ValueError("Parameter 'umbinv_resource' was not processed properly.")
 
             api_token = self.options.get("api_token")
             rinv = ResilientInv(api_token)

@@ -57,15 +57,15 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for Latest Malicious Domains for an IP."""
         try:
             # Get the function parameters:
-            ipaddr = kwargs.get("ipaddr")  # text
+            umbinv_ipaddr = kwargs.get("umbinv_ipaddr")  # text
 
             log = logging.getLogger(__name__)
-            log.info("ipddr: %s", ipaddr)
+            log.info("umbinv_ipaddr: %s", umbinv_ipaddr)
 
-            if ipaddr is None:
-                raise ValueError("Required parameter 'ipaddr' not set")
+            if umbinv_ipaddr is None:
+                raise ValueError("Required parameter 'umbinv_ipaddr' not set")
 
-            self._params = {"ipaddr": ipaddr}
+            self._params = {"ipaddr": umbinv_ipaddr}
 
             yield StatusMessage("Starting...")
             validate_opts(self)

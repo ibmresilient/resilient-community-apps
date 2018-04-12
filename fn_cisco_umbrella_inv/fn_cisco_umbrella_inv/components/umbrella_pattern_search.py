@@ -6,7 +6,7 @@ import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_pattern_search' of
@@ -58,23 +58,23 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for Pattern Search."""
         try:
             # Get the function parameters:
-            regex = kwargs.get("regex")  # text
-            start_epoch = kwargs.get("start_epoch")  # datetimepicker
-            start_relative = kwargs.get("start_relative")  # text
-            limit = kwargs.get("limit")  # number
-            include_category = kwargs.get("include_category")  # boolean
+            umbinv_regex = kwargs.get("umbinv_regex")  # text
+            umbinv_start_epoch = kwargs.get("umbinv_start_epoch")  # datetimepicker
+            umbinv_start_relative = kwargs.get("umbinv_start_relative")  # text
+            umbinv_limit = kwargs.get("umbinv_limit")  # number
+            umbinv_include_category = kwargs.get("umbinv_include_category")  # boolean
 
             log = logging.getLogger(__name__)
-            log.info("regex: %s", regex)
-            log.info("start_epoch: %s", start_epoch)
-            log.info("start_relative: %s", start_relative)
-            log.info("limit: %s", limit)
-            log.info("include_category: %s", include_category)
-            if regex is None:
+            log.info("umbinv_regex: %s", umbinv_regex)
+            log.info("umbinv_start_epoch: %s", umbinv_start_epoch)
+            log.info("umbinv_start_relative: %s", umbinv_start_relative)
+            log.info("umbinv_limit: %s", umbinv_limit)
+            log.info("umbinv_include_category: %s", umbinv_include_category)
+            if umbinv_regex is None:
                 raise ValueError("Required parameter 'regex' not set")
 
-            self._params = {"regex": regex, "start_epoch": start_epoch,"start_relative": start_relative,
-                            "limit": limit, "include_category": include_category, }
+            self._params = {"regex": umbinv_regex, "start_epoch": umbinv_start_epoch,"start_relative": umbinv_start_relative,
+                            "limit": umbinv_limit, "include_category": umbinv_include_category, }
 
             yield StatusMessage("Starting...")
             validate_opts(self)
@@ -82,13 +82,13 @@ class FunctionComponent(ResilientComponent):
             process_params(self)
 
             if not hasattr(self, '_regex'):
-               raise ValueError("Parameter 'regex' was not processed correctly")
+               raise ValueError("Parameter 'umbinv_regex' was not processed correctly")
 
             api_token = self.options.get("api_token")
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"search_matches": json.loads(json.dumps(rinv.search(self._regex, **helpers.omit_params(self._params, ["regex"]))))}
+            results = {"search_matches": json.loads(json.dumps(rinv.search(self._regex, **omit_params(self._params, ["regex"]))))}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

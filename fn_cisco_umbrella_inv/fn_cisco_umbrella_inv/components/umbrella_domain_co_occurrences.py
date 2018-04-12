@@ -66,15 +66,15 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for Co-Occurrences for a Domain."""
         try:
             # Get the function parameters:
-            domain = kwargs.get("domain")  # text
+            umbinv_domain = kwargs.get("umbinv_domain")  # text
 
             log = logging.getLogger(__name__)
-            log.info("input: %s", input)
+            log.info("umbinv_domain: %s", umbinv_domain)
 
-            if domain is None:
-                raise ValueError("Required parameter 'domain' not set")
+            if umbinv_domain is None:
+                raise ValueError("Required parameter 'umbinv_domain' not set")
 
-            self._params = {"domain": domain}
+            self._params = {"domain": umbinv_domain}
 
             yield StatusMessage("Starting...")
             validate_opts(self)
@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
             process_params(self)
 
             if not hasattr(self, '_domain'):
-               raise ValueError("Parameter 'domain' was not processed correctly")
+               raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
 
             api_token = self.options.get("api_token")
             rinv = ResilientInv(api_token)

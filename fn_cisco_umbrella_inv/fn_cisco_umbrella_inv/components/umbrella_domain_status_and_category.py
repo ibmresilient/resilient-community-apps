@@ -68,40 +68,40 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for Domain Status and Categorization."""
         try:
             # Get the function parameters:
-            domains = kwargs.get("domains")  # text
-            showlabels = kwargs.get("showlabels")  # boolean
-            status_endpoint = self.get_select_param(kwargs.get("status_endpoint"))  # select, values: "categorization", "categories"
+            umbinv_domains = kwargs.get("umbinv_domains")  # text
+            umbinv_showlabels = kwargs.get("umbinv_showlabels")  # boolean
+            umbinv_status_endpoint = self.get_select_param(kwargs.get("umbinv_status_endpoint"))  # select, values: "categorization", "categories"
 
             log = logging.getLogger(__name__)
-            log.info("domains: %s", domains)
-            log.info("showlabels: %s", showlabels)
-            log.info("status_endpoint: %s", status_endpoint)
+            log.info("umbinv_domains: %s", umbinv_domains)
+            log.info("umbinv_showlabels: %s", umbinv_showlabels)
+            log.info("umbinv_status_endpoint: %s", umbinv_status_endpoint)
 
-            if status_endpoint is None:
-                raise ValueError("Required parameter 'status_endpoint' not set")
+            if umbinv_status_endpoint is None:
+                raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
-            self._params = {"domains": domains, "showlabels": showlabels, "status_endpoint": status_endpoint}
-            if showlabels:
+            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
+            if umbinv_showlabels:
                 self._params.setdefault('showlabels', None)
 
             yield StatusMessage("Starting...")
             validate_opts(self)
             process_params(self)
             process_params(self)
-            if (status_endpoint == "categorization") and (not hasattr(self, '_domain') and not hasattr(self, '_domains')):
-                raise ValueError("Parameter 'domains' was not processed correctly")
+            if (umbinv_status_endpoint == "categorization") and (not hasattr(self, '_domain') and not hasattr(self, '_domains')):
+                raise ValueError("Parameter 'umbinv_domains' was not processed correctly")
 
             api_token = self.options.get("api_token")
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if (status_endpoint == "categories"):
+            if (umbinv_status_endpoint == "categories"):
                 results = {"categories": json.loads(json.dumps(rinv.categories()))}
-            elif (status_endpoint == "categorization"):
+            elif (umbinv_status_endpoint == "categorization"):
                 if hasattr(self, '_domains'):
-                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domains, showlabels)))}
+                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domains, self._params["showlabels"])))}
                 elif hasattr(self, '_domain'):
-                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domain, showlabels)))}
+                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domain, self._params["showlabels"])))}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
