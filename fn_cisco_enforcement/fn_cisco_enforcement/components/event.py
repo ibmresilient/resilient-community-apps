@@ -29,6 +29,7 @@ class FunctionComponent(ResilientComponent):
         try:
             data=self.createdataobject(kwargs)
             apikey=self.options.get('apikey')
+
             api = "https://s-platform.api.opendns.com/1.0/events?customerKey={}".format(apikey)
             respose=requests.post(api,json=data, verify=False)
 
@@ -44,14 +45,24 @@ class FunctionComponent(ResilientComponent):
     # Creates the data object to send
     def createdataobject(self,kwargs):
         # Get the function parameters:
-        cisco_deviceid = str(kwargs.get("cisco_deviceid"))  # text
-        cisco_deviceversion = str(kwargs.get("cisco_deviceversion"))  # text
+        deviceid = self.options.get('cisco_deviceid')
+        deviceversion = self.options.get('cisco_deviceversion')
+        protocolversion=self.options.get('cisco_protocolversion')
+        if(deviceid!=None or deviceversion!=None or protocolversion!=None):
+            cisco_deviceid = deviceid
+            cisco_deviceversion = deviceversion
+            cisco_protocolversion=protocolversion
+        else:
+            raise ValueError('Please set cisco_deviceid, cisco_deviceversion and cisco_protocolversion in the app.config under [fn_cisco_enforcement]')
 
+
+        # Convert timestamps from miliseconds to seconds
         cisco_eventtime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_eventtime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
         cisco_alerttime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_alerttime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
+
         cisco_dsturl = str(kwargs.get("cisco_dsturl"))  # text
         cisco_dstdomain = str(kwargs.get("cisco_dstdomain"))  # text
-        cisco_protocolversion = str(kwargs.get("cisco_protocolversion"))  # text
+
         cisco_providername = str(kwargs.get("cisco_providername"))  # text
         cisco_disabledstsafeguards = str(kwargs.get("cisco_disabledstsafeguards"))  # text
 
