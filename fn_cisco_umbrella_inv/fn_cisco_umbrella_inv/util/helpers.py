@@ -11,7 +11,7 @@ from urlparse import urlparse
 IP_PATTERN = re.compile(r"(\d{1,3}\.){3}\d{1,3}")
 DOMAIN_PATTERN = re.compile(r"\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b")
 UUID_PATTERN = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
-TIMEDELTA_PATTERN =  re.compile(r"^(-\d+)(second|minutes|hours|days|weeks)$")
+TIMEDELTA_PATTERN =  re.compile(r"^(-\d+)(seconds|minutes|hours|days|weeks)$")
 
 def validate_opts(func):
     """"Check options set correctly.
