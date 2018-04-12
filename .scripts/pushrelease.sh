@@ -21,6 +21,12 @@ for file in ./rc-*.tar.gz; do
   echo $fileUpload
 done
 
+for file in ./fn_*.tar.gz; do
+  echo Uploading file... ${file##*/}
+  fileUpload=$(curl --data-binary @./${file##*/} -H "Authorization: token $GIT_HUB_AUTH_TOKEN" -H "Content-Type: application/octet-stream" https://uploads.github.com/repos/ibmresilient/resilient-community-apps/releases/"$id"/assets?name=${file##*/} )
+  echo $fileUpload
+done
+
 
 
 
