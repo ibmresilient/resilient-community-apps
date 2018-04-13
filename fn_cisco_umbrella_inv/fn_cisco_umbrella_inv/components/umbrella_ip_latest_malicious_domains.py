@@ -17,7 +17,7 @@ from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
 from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'umbrella_dns_rr_hist' of
+    """Component that implements Resilient function 'umbrella_ip_latest_malicious_domains' of
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
