@@ -64,13 +64,13 @@ class FunctionComponent(ResilientComponent):
                 kwargs.get("mcafee_publish_method"))  # select, values: "Event", "Service"
             if not mcafee_publish_method:
                 yield FunctionError("mcafee_publish_method is required")
-            mcafee_return_response = self.get_select_param(
-                kwargs.get("mcafee_return_response"))  # select, values: "Yes", "No"
+            mcafee_wait_for_response = self.get_select_param(
+                kwargs.get("mcafee_wait_for_response"))  # select, values: "Yes", "No"
 
             log.info("mcafee_topic_name: %s", mcafee_topic_name)
             log.info("mcafee_dxl_payload: %s", mcafee_dxl_payload)
             log.info("mcafee_publish_method: %s", mcafee_publish_method)
-            log.info("mcafee_return_request: %s", mcafee_return_response)
+            log.info("mcafee_wait_for_response: %s", mcafee_wait_for_response)
 
             response = None
 
@@ -87,17 +87,24 @@ class FunctionComponent(ResilientComponent):
                 req.payload = mcafee_dxl_payload
                 yield StatusMessage("Invoking Service...")
 
-                if mcafee_return_response == "No":
+                if mcafee_wait_for_response == "No":
                     self.client.async_request(req)
                 else:
                     response = Response(self.client.sync_request(req, timeout=300))
 
             yield StatusMessage("Done...")
+            r = {
+                "mcafee_topic_name": mcafee_topic_name,
+                "mcafee_dxl_payload": mcafee_dxl_payload,
+                "mcafee_publish_method": mcafee_publish_method,
+                "mcafee_wait_for_response": mcafee_wait_for_response
+            }
 
             # Return response from publishing to topic
             if response is not None:
-                yield FunctionResult(vars(response))
+                r["response"] = vars(response)
+                yield FunctionResult(r)
             else:
-                yield FunctionResult({"value": "completed"})
+                yield FunctionResult(r)
         except Exception as e:
             yield FunctionError(e)

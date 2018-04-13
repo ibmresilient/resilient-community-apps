@@ -37,12 +37,14 @@ class TestMcafeePublishToDxl:
 
     @pytest.mark.parametrize("mcafee_topic_name, mcafee_dxl_payload, mcafee_publish_method, "
                              "mcafee_return_response, expected_results", [
-        ("/mcafee/service/epo/remote/epo1", "{\"command\": \"system.applyTag\", \"output\": \"json\", \"params\": {"
-                                            "\"names\": \"10.0.2.15\", \"tagName\": \"Shut Down\"}}", "Event", "No",
-                                            {"value": "completed"}),
         ("/mcafee/service/tie/file/reputation/set", "{\"hashes\": [{\"type\": \"md5\", \"value\": "
                                             "\"Dk0TzJrwTMZLaPw4/goNrA==\"}], \"providerId\": 3, \"trustLevel\":"
-                                            " 1}", "Service", "No", {"value": "completed"})
+                                            " 1}", "Service", "No", {
+                "mcafee_topic_name": "/mcafee/service/tie/file/reputation/set",
+                "mcafee_dxl_payload": "{\"hashes\": [{\"type\": \"md5\", \"value\": \"Dk0TzJrwTMZLaPw4/goNrA==\"}], \"providerId\": 3, \"trustLevel\": 1}",
+                "mcafee_publish_method": "Service",
+                "mcafee_wait_for_response": "No"
+            })
     ])
     def test_success(self, circuits_app, mcafee_topic_name, mcafee_dxl_payload,
                      mcafee_publish_method, mcafee_return_response, expected_results):
