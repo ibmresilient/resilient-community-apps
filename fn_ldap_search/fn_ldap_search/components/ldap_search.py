@@ -33,14 +33,14 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ldap_search'
 
     The Function does an LDAP lookup and takes the following parameters:
-        search_base , search_filter, search_attributes and param
+        ldap_search_base , ldap_search_filter, ldap_search_attributes and ldap_param
 
     An example of a set of query parameter might look like the following:
 
-            search_base = "dc=example,dc=com"
-            search_filter = "(&(objectClass=person)(|(uid={%param%})(uid=newton)))"
-            search_attributes = "uid,cn,sn,mail,telephoneNumber"
-            param = artifact.value # Assigned value 'einstein' during run.
+            ldap_search_base = "dc=example,dc=com"
+            ldap_search_filter = "(&(objectClass=person)(|(uid={%param%})(uid=newton)))"
+            ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"
+            ldap_param = artifact.value # Assigned value 'einstein' during run.
 
     The LDAP lookup will return a result in JSON format with an entry consisting of a dn and a set of
     attributes for each result.
@@ -303,21 +303,21 @@ class FunctionComponent(ResilientComponent):
         """Resilient Function: entry point """
         try:
             # Get the function parameters:
-            search_base = kwargs.get("search_base")  # text
-            search_filter = self.get_textarea_param(kwargs.get("search_filter"))  # textarea
-            search_attributes = kwargs.get("search_attributes")  # text
-            param = kwargs.get("param")  # text
+            ldap_search_base = kwargs.get("ldap_search_base")  # text
+            ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter"))  # textarea
+            ldap_search_attributes = kwargs.get("ldap_search_attributes")  # text
+            ldap_param = kwargs.get("ldap_param")  # text
 
-            LOG.info("search_base: %s", search_base)
-            LOG.info("search_filter: %s", search_filter)
-            LOG.info("search_attributes: %s", search_attributes)
-            LOG.info("param: %s", param)
+            LOG.info("ldap_search_base: %s", ldap_search_base)
+            LOG.info("ldap_search_filter: %s", ldap_search_filter)
+            LOG.info("ldap_search_attributes: %s", ldap_search_attributes)
+            LOG.info("ldap_param: %s", ldap_param)
 
-            self.search_params = {'search_base': search_base, 'search_filter': search_filter,
-                                  'search_attributes': search_attributes}
-            if param:
+            self.search_params = {'search_base': ldap_search_base, 'search_filter': ldap_search_filter,
+                                  'search_attributes': ldap_search_attributes}
+            if ldap_param:
                 # Escape 'param' parameter.
-                self.search_params.setdefault('param', escape_filter_chars(param))
+                self.search_params.setdefault('param', escape_filter_chars(ldap_param))
             yield StatusMessage("Starting...")
             self.validate_params()
             self.update_param_fields()
