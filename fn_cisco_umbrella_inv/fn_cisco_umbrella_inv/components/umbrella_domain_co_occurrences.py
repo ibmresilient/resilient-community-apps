@@ -22,11 +22,11 @@ class FunctionComponent(ResilientComponent):
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        domain
+        umbinv_domain
 
     An example of a set of query parameter might look like the following:
 
-            domain = "malware.com"
+            umbinv_domain = "malware.com"
 
     The Investigate Query will executs a REST call agaist the Cisco Umbrell Investigate server and returns a result in
     JSON format similar to the following.
@@ -36,18 +36,15 @@ class FunctionComponent(ResilientComponent):
     The Investigate Query will executs a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        {"cooccurrences": {"pfs2": [
-                                    "found": true,
-                                        [
-                                            "download.example.com",
-                                            0.9320288065469468
-                                        ],
-                                        [
-                                            "query.example.com",
-                                            0.06797119345305325
-                                        ]
-                                    ],
-                            }
+        'cooccurrences': { u'found': True,
+                            u'domain_name': u'googlevideo.com'
+                            u'pfs2': [[u'gowatchfreemovies.to', 0.14300200812663327],
+                            [u'www.mc-skv.com', 0.12482579576302438],
+                                ...
+                                ...
+                            [u'r5---sn-n4v7sn7l.googlevideo.com', 0.0064511764392265955],
+                            [u'sage200.co.uk', 0.006262067692875829],
+                            [u'demon.co.uk', 0.005126508408778887]]
         }
 
     """
@@ -88,7 +85,10 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"cooccurrences": json.loads(json.dumps(rinv.cooccurrences(self._domain)))}
+            rtn = rinv.cooccurrences(self._domain)
+            # Add in domain name it ran against to result.
+            rtn["domain_name"] = self._domain
+            results = {"cooccurrences": json.loads(json.dumps(rtn))}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
