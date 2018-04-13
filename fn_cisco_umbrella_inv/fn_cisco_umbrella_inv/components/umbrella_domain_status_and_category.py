@@ -22,15 +22,16 @@ class FunctionComponent(ResilientComponent):
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        domains, showlabels, status_endpoint
+        umbinv_domains, umbinv_showlabels, umbinv_status_endpoint
 
     An example of a set of query parameter might look like the following:
 
-            domains = "example.com" or domains = '"google.com","yahoo.com"' or domains = '"google.com" "yahoo.com"'
-            showlables = True/Falsed (boolean)
-            status_endpoint = "categorization" or status_endpoint = "categories"
+            umbinv_domains = "example.com" or umbinv_domains = '"google.com","yahoo.com"' \
+                or umbinv_domains = '"google.com" "yahoo.com"'
+            umbinv_showlables = True/Falsed (boolean)
+            umbinv_status_endpoint = "categorization" or status_endpoint = "categories"
 
-    For status_endpoint = "categorization", the Investigate Query will executes a REST call against the Cisco Umbrell
+    For status_endpoint = "categorization", the Investigate Query will executes a REST call against the Cisco Umbrella
     Investigate server and returns a result in JSON format similar to the following for single domain.
 
         {"statuses": {"example.com":
@@ -44,7 +45,9 @@ class FunctionComponent(ResilientComponent):
     Investigate server and returns a result in JSON format similar to the following giving a list of category numbers
     mapped to strings.
 
-        {"categories": {"133": "Safe for Kids",
+        {"min_id": 0,
+         "max_id": 150,
+         "categories": {"133": "Safe for Kids",
                         "132": "SaaS and B2B",
                         "131": "Real Estate",
                         ...
@@ -96,7 +99,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):
-                results = {"categories": json.loads(json.dumps(rinv.categories()))}
+                cat_keys = []
+                # Add metadata of min and max id keys to make it easier in post-processing.
+                rtn = rinv.categories()
+                for c in rtn:
+                    cat_keys.append(c)
+                    cat_keys_int = map(int, cat_keys)
+                results = {"min_id": min(cat_keys_int), "max_id": max(cat_keys_int), "categories": json.loads(json.dumps(rtn))}
             elif (umbinv_status_endpoint == "categorization"):
                 if hasattr(self, '_domains'):
                     results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domains, self._params["showlabels"])))}
