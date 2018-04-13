@@ -84,10 +84,15 @@ Applies tag to the systems in ePO."""
             if not status_code < 300 or not content.startswith('OK'):
                 yield FunctionError(content.text)
 
+            result = {
+                "Systems": mcafee_epo_systems,
+                "Tag": mcafee_epo_tag
+            }
+
             yield StatusMessage("Tag Applied...")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult({"Response": "OK"})
+            yield FunctionResult(result)
         except Exception as e:
             LOG.error(e)
             yield FunctionError(e)
