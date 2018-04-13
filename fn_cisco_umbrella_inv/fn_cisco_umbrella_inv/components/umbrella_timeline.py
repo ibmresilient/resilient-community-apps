@@ -21,11 +21,11 @@ class FunctionComponent(ResilientComponent):
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        resource
+        umbinv_resource
 
     An example of a set of query parameter might look like the following:
 
-            resource = "example.com" or resource = "http://domain.org/index.html"
+            umbinv_resource = "example.com" or umbinv_resource = "http://domain.org/index.html"
 
     The Investigate Query will executs a REST call agaist the Cisco Umbrell Investigate server and returns a result in
     JSON format similar to the following.
