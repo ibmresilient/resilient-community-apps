@@ -11,6 +11,7 @@
 import logging
 import json
 
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
 from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
@@ -29,25 +30,24 @@ class FunctionComponent(ResilientComponent):
     The Investigate Query will executs a REST call agaist the Cisco Umbrell Investigate server and returns a result in
     JSON format similar to the following.
 
-        {"timeline": [
-                      {
-                        categories: [ ],
-                        attacks: [ ],
-                        threatTypes: [ ],
-                        timestamp: 1501697925911
-                      },
-                      {
-                        categories: [
-                          "Malware"
-                        ],
-                        attacks: [ ],
-                        threatTypes: [
-                          "Exploit Kit"
-                        ],
-                        timestamp: 1488397543490
-                      }
-                    ]
-            }
+
+       'timeline':[
+          {
+             u'threatTypes':[
+
+             ],
+             'source':u'googlevideo.com',
+             u'attacks':[
+
+             ],
+             u'timestamp':1497478894605,
+             'timestamp_converted':'2017-06-14 23:21:34',
+             u'categories':[
+
+             ]
+          }
+       ]
+
 
     """
     def __init__(self, opts):
@@ -88,7 +88,17 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = json.loads(json.dumps({"timeline": rinv.timeline(self._res)}))
+            rtn = rinv.timeline(self._res)
+            # Make timestamp more readable
+            for x in range(len(rtn)):
+                try:
+                    rtn[x]['source'] = umbinv_resource
+                    secs = int(rtn[x]['timestamp']) / 1000
+                    human_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(secs))
+                    rtn[x]['timestamp_converted'] = human_time
+                except ValueError:
+                    yield FunctionError('timestamp value incorrectly specified')
+            results = {"timeline": json.loads(json.dumps(rtn))}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
