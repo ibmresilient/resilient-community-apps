@@ -10,5 +10,8 @@ def config_section_data():
     config_result = """
 [fn_cisco_enforcement]
 apikey=
+cisco_deviceid=
+cisco_deviceversion=
+cisco_protocolversion=
     """
     return config_result

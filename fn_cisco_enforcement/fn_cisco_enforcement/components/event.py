@@ -23,7 +23,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_cisco_enforcement", {})
 
-    @function("event")
+    @function("cisco_post_event")
     def _event_function(self, event, *args, **kwargs):
         """Function: This is a function implementation that uses the Cisco API to post a Malware event"""
         try:
@@ -31,14 +31,18 @@ class FunctionComponent(ResilientComponent):
             apikey=self.options.get('apikey')
 
             api = "https://s-platform.api.opendns.com/1.0/events?customerKey={}".format(apikey)
-            respose=requests.post(api,json=data, verify=False)
+            response=requests.post(api,json=data, verify=False)
 
-            results = {
-                "value": respose.content
-            }
+            if not response or response.status_code >= 300 or not response.content:
+                yield FunctionError('api call failure')
+            else:
+                results = {
+                    "value": response.content
+                }
+                log.info(results)
 
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+                # Produce a FunctionResult with the results
+                yield FunctionResult(results)
         except Exception:
             yield FunctionError()
 
