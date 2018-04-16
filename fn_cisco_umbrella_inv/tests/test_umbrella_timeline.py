@@ -35,14 +35,14 @@ class TestUmbrellaTimeline:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("29bf736d-87de-48fc-85b7-4dcc04670c48, expected_results", [
+    @pytest.mark.parametrize("umbinv_resource, expected_results", [
         ("text", {"value": "xyz"}),
         ("text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, 29bf736d-87de-48fc-85b7-4dcc04670c48, expected_results):
+    def test_success(self, circuits_app, umbinv_resource, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "29bf736d-87de-48fc-85b7-4dcc04670c48": 29bf736d-87de-48fc-85b7-4dcc04670c48
+            "umbinv_resource": umbinv_resource
         }
         results = call_umbrella_timeline_function(circuits_app, function_params)
         assert(expected_results == results)

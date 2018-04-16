@@ -79,7 +79,9 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"latest_malicious_domains": json.loads(json.dumps(rinv.latest_domains(self._ipaddr)))}
+            rtn = rinv.latest_domains(self._ipaddr)
+            # Add in ip address it ran against to result.
+            results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

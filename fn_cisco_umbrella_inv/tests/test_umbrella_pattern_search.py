@@ -35,18 +35,18 @@ class TestUmbrellaPatternSearch:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("a5e6e21f-b9f0-4168-beb8-0a41c778705c, 2b9d77ae-efaa-45ef-a64f-8a3f763ba58d, 8834d538-cabd-4d3e-a822-c89f4f96a3d7, 9e516a4b-9785-4802-bdac-575a6a51f430, ace816e4-59f1-4df1-8356-5dfe300c35f7, expected_results", [
+    @pytest.mark.parametrize("umbinv_regex, umbinv_start_epoch, umbinv_start_relative, umbinv_limit, umbinv_include_category, expected_results", [
         ("text", 1518367008000, "text", 123, True, {"value": "xyz"}),
         ("text", 1518367008000, "text", 123, True, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, a5e6e21f-b9f0-4168-beb8-0a41c778705c, 2b9d77ae-efaa-45ef-a64f-8a3f763ba58d, 8834d538-cabd-4d3e-a822-c89f4f96a3d7, 9e516a4b-9785-4802-bdac-575a6a51f430, ace816e4-59f1-4df1-8356-5dfe300c35f7, expected_results):
+    def test_success(self, circuits_app, umbinv_regex, umbinv_start_epoch, umbinv_start_relative, umbinv_limit, umbinv_include_category, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "a5e6e21f-b9f0-4168-beb8-0a41c778705c": a5e6e21f-b9f0-4168-beb8-0a41c778705c,
-            "2b9d77ae-efaa-45ef-a64f-8a3f763ba58d": 2b9d77ae-efaa-45ef-a64f-8a3f763ba58d,
-            "8834d538-cabd-4d3e-a822-c89f4f96a3d7": 8834d538-cabd-4d3e-a822-c89f4f96a3d7,
-            "9e516a4b-9785-4802-bdac-575a6a51f430": 9e516a4b-9785-4802-bdac-575a6a51f430,
-            "ace816e4-59f1-4df1-8356-5dfe300c35f7": ace816e4-59f1-4df1-8356-5dfe300c35f7
+            "umbinv_regex": umbinv_regex,
+            "umbinv_start_epoch": umbinv_start_epoch,
+            "umbinv_start_relative": umbinv_start_relative,
+            "umbinv_limit": umbinv_limit,
+            "umbinv_include_category": umbinv_include_category
         }
         results = call_umbrella_pattern_search_function(circuits_app, function_params)
         assert(expected_results == results)

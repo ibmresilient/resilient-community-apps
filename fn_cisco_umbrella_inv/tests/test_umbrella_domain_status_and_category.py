@@ -35,16 +35,16 @@ class TestUmbrellaDomainStatusAndCategory:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("a193c91a-66fa-43f1-a67c-3f080f51f894, fbf6a1a1-31a2-4ff4-ad53-3756657c841f, e5fdd9e4-3dfe-471d-8677-75242b78dc55, expected_results", [
-        ("text", True, 'categorization', {"value": "xyz"}),
+    @pytest.mark.parametrize("umbinv_domains, umbinv_showlabels, umbinv_status_endpoint, expected_results", [
+        ("text", True, 'categories', {"value": "xyz"}),
         ("text", True, 'categorization', {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, a193c91a-66fa-43f1-a67c-3f080f51f894, fbf6a1a1-31a2-4ff4-ad53-3756657c841f, e5fdd9e4-3dfe-471d-8677-75242b78dc55, expected_results):
+    def test_success(self, circuits_app, umbinv_domains, umbinv_showlabels, umbinv_status_endpoint, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "a193c91a-66fa-43f1-a67c-3f080f51f894": a193c91a-66fa-43f1-a67c-3f080f51f894,
-            "fbf6a1a1-31a2-4ff4-ad53-3756657c841f": fbf6a1a1-31a2-4ff4-ad53-3756657c841f,
-            "e5fdd9e4-3dfe-471d-8677-75242b78dc55": e5fdd9e4-3dfe-471d-8677-75242b78dc55
+            "umbinv_domains": umbinv_domains,
+            "umbinv_showlabels": umbinv_showlabels,
+            "umbinv_status_endpoint": umbinv_status_endpoint
         }
         results = call_umbrella_domain_status_and_category_function(circuits_app, function_params)
         assert(expected_results == results)

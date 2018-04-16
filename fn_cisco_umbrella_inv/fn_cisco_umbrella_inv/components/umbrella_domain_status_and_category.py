@@ -26,24 +26,26 @@ class FunctionComponent(ResilientComponent):
 
     An example of a set of query parameter might look like the following:
 
-            umbinv_domains = "example.com" or umbinv_domains = '"google.com","yahoo.com"' \
+            umbinv_domains = "amazon.com" or umbinv_domains = '"google.com","yahoo.com"' \
                 or umbinv_domains = '"google.com" "yahoo.com"'
             umbinv_showlables = True/Falsed (boolean)
             umbinv_status_endpoint = "categorization" or status_endpoint = "categories"
 
     For status_endpoint = "categorization", the Investigate Query will executes a REST call against the Cisco Umbrella
-    Investigate server and returns a result in JSON format similar to the following for single domain.
+    Investigate server and returns a result in JSON format similar to the following for single domain. Note: The
+    Function adds an extra "domains" field in the returned result to aid post-processing.
 
-        {"statuses": {"example.com":
-                                    {"status": 0,
-                                    "content_categories": [],
-                                    "security_categories": []
-                                    }
-                    }
+         {'domains': [u'amazon.com'],
+          'statuses': {u'amazon.com': {u'status': 1,
+                                       u'content_categories': [u'Ecommerce/Shopping'],
+                                       u'security_categories': []
+                                      }
+                      }
         }
     For status_endpoint = "categories", the Investigate Query will executes a REST call against the Cisco Umbrella
     Investigate server and returns a result in JSON format similar to the following giving a list of category numbers
-    mapped to strings.
+    mapped to strings. Note: The Function adds extra "min_id" and "max_id" field in the returned result to aid
+    post-processing.
 
         {"min_id": 0,
          "max_id": 150,
@@ -100,17 +102,22 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):
                 cat_keys = []
-                # Add metadata of min and max id keys to make it easier in post-processing.
+                # Add metadata of "min_id" and "max_id" keys to make it easier in post-processing.
                 rtn = rinv.categories()
                 for c in rtn:
                     cat_keys.append(c)
                     cat_keys_int = map(int, cat_keys)
                 results = {"min_id": min(cat_keys_int), "max_id": max(cat_keys_int), "categories": json.loads(json.dumps(rtn))}
             elif (umbinv_status_endpoint == "categorization"):
+                dom_list = []
                 if hasattr(self, '_domains'):
-                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domains, self._params["showlabels"])))}
+                    rtn = rinv.categorization(self._domains, self._params["showlabels"])
                 elif hasattr(self, '_domain'):
-                    results = {"statuses": json.loads(json.dumps(rinv.categorization(self._domain, self._params["showlabels"])))}
+                    rtn = rinv.categorization(self._domain, self._params["showlabels"])
+                for d in rtn:
+                    dom_list.append(d)
+                # Add metadata of "domains" key to make it easier in post-processing.
+                results = {"statuses": json.loads(json.dumps(rtn)), "domains": dom_list}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

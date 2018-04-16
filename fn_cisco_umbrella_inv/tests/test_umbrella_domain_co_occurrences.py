@@ -35,14 +35,14 @@ class TestUmbrellaDomainCoOccurrences:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("583d07bc-4086-48b8-a07f-287765b735a8, expected_results", [
+    @pytest.mark.parametrize("umbinv_domain, expected_results", [
         ("text", {"value": "xyz"}),
         ("text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, 583d07bc-4086-48b8-a07f-287765b735a8, expected_results):
+    def test_success(self, circuits_app, umbinv_domain, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "583d07bc-4086-48b8-a07f-287765b735a8": 583d07bc-4086-48b8-a07f-287765b735a8
+            "umbinv_domain": umbinv_domain
         }
         results = call_umbrella_domain_co_occurrences_function(circuits_app, function_params)
         assert(expected_results == results)

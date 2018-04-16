@@ -35,14 +35,14 @@ class TestUmbrellaIpLatestMaliciousDomains:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("e589cb42-c2a7-4220-a50f-ad24b75bfdad, expected_results", [
+    @pytest.mark.parametrize("umbinv_ipaddr, expected_results", [
         ("text", {"value": "xyz"}),
         ("text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, e589cb42-c2a7-4220-a50f-ad24b75bfdad, expected_results):
+    def test_success(self, circuits_app, umbinv_ipaddr, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "e589cb42-c2a7-4220-a50f-ad24b75bfdad": e589cb42-c2a7-4220-a50f-ad24b75bfdad
+            "umbinv_ipaddr": umbinv_ipaddr
         }
         results = call_umbrella_ip_latest_malicious_domains_function(circuits_app, function_params)
         assert(expected_results == results)

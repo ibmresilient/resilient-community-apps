@@ -96,7 +96,9 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"dns_rr_history": json.loads(json.dumps(rinv.rr_history(self._res)))}
+            rtn = rinv.rr_history(self._res,query_type=umbinv_dns_type)
+            # Add in ip address it ran against to result.
+            results = {"dns_rr_history": json.loads(json.dumps(rtn)), "resource_name": self._res}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

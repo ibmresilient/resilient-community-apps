@@ -28,46 +28,54 @@ class FunctionComponent(ResilientComponent):
             domain = "example.com"
 
     The Investigate Query will executs a REST call agaist the Cisco Umbrell Investigate server and returns a result in
-    JSON format similar to the following.
+    JSON format similar to the following.Note: The Function adds an extra "domain_name" field in the returned result to
+    aid post-processing.
 
-        {"security_info": {   "found": true,
-                              "dga_score": 38.301771886101335,
-                              "perplexity": 0.4540313302593146,
-                              "entropy": 2.5216406363433186,
-                              "securerank2": -1.3135141095601992,
-                              "pagerank": 0.0262532,
-                              "asn_score": -29.75810625887133,
-                              "prefix_score": -64.9070502788884,
-                              "rip_score": -75.64720536038982,
-                              "popularity": 25.335450495507196,
-                              "fastflux": false,
-                              "geodiversity": [
-                                [
-                                  "UA",
-                                  0.24074075
-                                ],
-                                [
-                                  "IN",
-                                  0.018518519
-                                ]
-                              ],
-                              "geodiversity_normalized": [
-                                [
-                                  "AP",
-                                  0.3761535390278368
-                                ],
-                                [
-                                  "US",
-                                  0.0005015965168831449
-                                ]
-                              ],
-                              "tld_geodiversity": [],
-                              "geoscore": 0,
-                              "ks_test": 0,
-                              "attack: "",
-                                "threat_type: ""
-                          }
-            }
+            'security_info':{
+              u'domain_name':u'example.com',
+              u'found':True,
+              u'geodiversity_normalized':[
+                 [
+                    u'??',
+                    0.5706777350888877
+                 ],
+
+                  ...
+                 [
+                    u'DZ',
+                    0.000126500569665041
+                 ]
+              ],
+              u'geodiversity':[
+                 [
+                    u'US',
+                    0.4534
+                 ],
+                  ...
+
+                 [
+                    u'LB',
+                    0.0001
+                 ]
+              ],
+              u'dga_score':0.0,
+              u'rip_score':0.0,
+              u'asn_score':-0.041783697445309576,
+              u'securerank2':100.0,
+              u'popularity':100.0,
+              u'geoscore':0.0,
+              u'attack':u'',
+              u'pagerank':40.914368,
+              u'entropy':2.521640636343318,
+              u'ks_test':0.0,
+              u'prefix_score':0.0,
+              u'perplexity':0.2327827581680193,
+              u'fastflux':False,
+              u'threat_type':u'',
+              u'tld_geodiversity':[
+
+              ]
+           }
 
     """
     def __init__(self, opts):
@@ -107,7 +115,10 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"security_info": json.loads(json.dumps(rinv.security(self._domain)))}
+            rtn = rinv.security(self._domain)
+            # Add in domain name it ran against to result.
+            rtn["domain_name"] = self._domain
+            results = {"security_info": json.loads(json.dumps(rtn))}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
