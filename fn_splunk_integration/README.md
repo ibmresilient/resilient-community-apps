@@ -25,7 +25,7 @@ This function package provides the following features to be used in a workflow:
 Install this package with 'pip', or run `python setup.py install`
 
 ## Setup
-Create app.config by running `resilient-circuits config -u`.
+Create app.config by running `resilient-circuits config -c`.
 
 The app.config needs the following configuration values, in addition to the appropriate [resilient] section for connecting to your Resilient platform:  
 
@@ -34,8 +34,8 @@ The app.config needs the following configuration values, in addition to the appr
 host = splunk-server-hostname-or-ip-address  
 port = 8089-or-splunk-port-for-REST-api  
 username = splunk-login-user-name 
-splunkpassword = splunk-password-keyring-recommend
-verify_cert = False-to-skip-splunk-cert-validation
+splunkpassword = splunk-password-keyring-protection-recommended
+verify_cert = [true, false] for verify https certtificate or not
 ```
 ## Customize
 Run with: `resilient-circuits customize` to install function definitions and sample workflows to the Resilient server.
