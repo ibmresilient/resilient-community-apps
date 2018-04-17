@@ -10,8 +10,8 @@
 # Manual Action: Execute a REST query against a Cisco Umbrella server.
 import logging
 import json
+from datetime import datetime, time
 
-import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
 from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
@@ -89,16 +89,18 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.timeline(self._res)
+            query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Make timestamp more readable
             for x in range(len(rtn)):
                 try:
                     rtn[x]['source'] = umbinv_resource
                     secs = int(rtn[x]['timestamp']) / 1000
-                    human_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(secs))
-                    rtn[x]['timestamp_converted'] = human_time
+                    ts_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                    rtn[x]['timestamp_converted'] = ts_readable
                 except ValueError:
                     yield FunctionError('timestamp value incorrectly specified')
-            results = {"timeline": json.loads(json.dumps(rtn))}
+            # Add  "query_execution_time" to result to facilitate post-processing.
+            results = {"timeline": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

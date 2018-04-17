@@ -36,7 +36,7 @@ class TestUmbrellaDnsRrHist:
         assert func is not None
 
     @pytest.mark.parametrize("umbinv_resource, umbinv_dns_type, expected_results", [
-        ("text", 'NS', {"value": "xyz"}),
+        ("text", 'CNAME', {"value": "xyz"}),
         ("text", 'MX', {"value": "xyz"})
     ])
     def test_success(self, circuits_app, umbinv_resource, umbinv_dns_type, expected_results):

@@ -3,6 +3,7 @@
 """Function implementation"""
 import json
 import logging
+from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
@@ -88,7 +89,10 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            results = {"search_matches": json.loads(json.dumps(rinv.search(self._regex, **omit_params(self._params, ["regex"]))))}
+            rtn = rinv.search(self._regex, **omit_params(self._params, ["regex"]))
+            query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            # Add "query_execution_time" to result to facilitate post-processing.
+            results = {"search_matches": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

@@ -11,6 +11,7 @@ Cisco Umbrella server """
 # Manual Action: Execute a REST query against a Cisco Umbrella server.
 import json
 import logging
+from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
@@ -102,12 +103,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):
                 cat_keys = []
-                # Add metadata of "min_id" and "max_id" keys to make it easier in post-processing.
+                # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
                 rtn = rinv.categories()
+                query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 for c in rtn:
                     cat_keys.append(c)
                     cat_keys_int = map(int, cat_keys)
-                results = {"min_id": min(cat_keys_int), "max_id": max(cat_keys_int), "categories": json.loads(json.dumps(rtn))}
+                results = {"categories": json.loads(json.dumps(rtn)), "min_id": min(cat_keys_int),
+                           "max_id": max(cat_keys_int), "query_execution_time": query_execution_time}
             elif (umbinv_status_endpoint == "categorization"):
                 dom_list = []
                 if hasattr(self, '_domains'):
@@ -116,8 +119,10 @@ class FunctionComponent(ResilientComponent):
                     rtn = rinv.categorization(self._domain, self._params["showlabels"])
                 for d in rtn:
                     dom_list.append(d)
-                # Add metadata of "domains" key to make it easier in post-processing.
-                results = {"statuses": json.loads(json.dumps(rtn)), "domains": dom_list}
+                    query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
+                results = {"statuses": json.loads(json.dumps(rtn)), "domains": dom_list,
+                           "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

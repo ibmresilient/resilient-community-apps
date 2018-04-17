@@ -11,6 +11,7 @@ Cisco Umbrella server """
 # Manual Action: Execute a REST query against a Cisco Umbrella server.
 import json
 import logging
+from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
@@ -80,8 +81,10 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.latest_domains(self._ipaddr)
-            # Add in ip address it ran against to result.
-            results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr}
+            query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
+            results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr,
+                       "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
