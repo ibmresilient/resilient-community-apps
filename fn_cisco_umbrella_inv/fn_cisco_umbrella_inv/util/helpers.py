@@ -81,7 +81,7 @@ def validate_params(func):
         if re.match("^regex$", k) and v is not None and not validate_regex(v):
             raise ValueError("Invalid value for function parameter 'regex' .")
         if re.match("^(limit|start_epoch|stop_epoch)$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value for function parameter 'limit'.".format(k))
+            raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^(start_relative|stop_relative)$", k) and v is not None and not TIMEDELTA_PATTERN.match(v):
             raise ValueError("Invalid value for function parameter '{}' . ".format(k))
         if re.match("^(start|stop)", k) and v is None:
