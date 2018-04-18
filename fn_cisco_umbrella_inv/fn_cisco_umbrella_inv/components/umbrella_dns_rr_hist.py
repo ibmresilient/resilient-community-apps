@@ -99,10 +99,17 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.rr_history(self._res,query_type=umbinv_dns_type)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"dns_rr_history": json.loads(json.dumps(rtn)), "resource_name": self._res,
-                       "query_execution_time": query_execution_time}
-            yield StatusMessage("done...")
+            if ("rrs" in rtn and len(rtn["rrs"]) == 0) \
+                    or ("rrs_tf" in rtn and len(rtn["rrs_tf"]) == 0):
+                log.debug(json.dumps(rtn))
+                yield StatusMessage("No Results returned for resource '{}' with query type '{}'."
+                                    .format(self._res,umbinv_dns_type))
+                results = {}
+            else:
+                # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
+                results = {"dns_rr_history": json.loads(json.dumps(rtn)), "resource_name": self._res,
+                           "query_execution_time": query_execution_time}
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

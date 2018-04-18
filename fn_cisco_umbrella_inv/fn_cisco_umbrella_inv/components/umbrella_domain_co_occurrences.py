@@ -88,10 +88,15 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.cooccurrences(self._domain)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
-            results = {"cooccurrences": json.loads(json.dumps(rtn)), "domain_name": self._domain,
-                       "query_execution_time": query_execution_time}
-            yield StatusMessage("done...")
+            if rtn["found"] is None or str(rtn["found"]).lower() == 'false':
+                log.debug(json.dumps(rtn))
+                yield StatusMessage("No Results returned for domain '{}'.".format(self._domain))
+                results = {}
+            else:
+                # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
+                results = {"cooccurrences": json.loads(json.dumps(rtn)), "domain_name": self._domain,
+                           "query_execution_time": query_execution_time}
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

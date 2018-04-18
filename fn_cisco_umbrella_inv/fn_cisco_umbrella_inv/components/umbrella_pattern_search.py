@@ -91,9 +91,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.search(self._regex, **omit_params(self._params, ["regex"]))
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Add "query_execution_time" to result to facilitate post-processing.
-            results = {"search_matches": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
-            yield StatusMessage("done...")
+            if len(rtn["matches"]) == 0:
+                log.debug(json.dumps(rtn))
+                yield StatusMessage("No Results returned for regular expression '{}'.".format(self._regex))
+                results = {}
+            else:
+                # Add "query_execution_time" to result to facilitate post-processing.
+                results = {"search_matches": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
+                yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

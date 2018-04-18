@@ -82,10 +82,15 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.latest_domains(self._ipaddr)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr,
-                       "query_execution_time": query_execution_time}
-            yield StatusMessage("done...")
+            if len(rtn) == 0:
+                log.debug(json.dumps(rtn))
+                yield StatusMessage("No Results returned for ip address '{}'.".format(self._ipaddr))
+                results = {}
+            else:
+                # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
+                results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr,
+                           "query_execution_time": query_execution_time}
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

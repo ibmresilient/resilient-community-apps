@@ -119,11 +119,11 @@ class FunctionComponent(ResilientComponent):
                     rtn = rinv.categorization(self._domain, self._params["showlabels"])
                 for d in rtn:
                     dom_list.append(d)
-                    query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
                 results = {"statuses": json.loads(json.dumps(rtn)), "domains": dom_list,
                            "query_execution_time": query_execution_time}
-            yield StatusMessage("done...")
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             #Produce a FunctionResult with the results
