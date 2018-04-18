@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation"""
-# Copyright IBM Corp. - Confidential Information
+
 import logging
 import requests
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
+HEADERS = {'content-type': 'application/json'}
 # This adds an event using the Cisco Event api. The inputs can be found with a description of the api here https://docs.umbrella.com/developer/enforcement-api/events2/
 # The apikey is refernced in the app.config under [fn_cisco_enforcement]
 
@@ -30,19 +32,24 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
 
             log = logging.getLogger(__name__)
-            apikey = self.options.get('apikey')
+            apikey = self.options.get('api_token')
             isnextpage = True
             resultlist = []
             page = 1
-            getapi = 'https://s-platform.api.opendns.com/1.0/domains?customerKey={}'.format(apikey)
+
+            url = '/'.join((self.options['url'], 'domains?customerKey={}'))
+            url = url.format(apikey)
+            log.debug(url)
+
             while (isnextpage):
                 log.info('Get page {}'.format(page))
-                api2 = requests.get(getapi)
+                response = requests.get(url, headers=HEADERS)
 
-                if not api2 or api2.status_code >= 300 or not api2.content:
-                    yield FunctionError('api call failure')
+                if not response or response.status_code >= 300 or not response.content:
+                    log.info(response)
+                    yield FunctionError('api call failure: ' + str(response.status_code))
                 else:
-                    jsonversion = json.loads(api2.content)
+                    jsonversion = json.loads(response.content)
 
                     if not jsonversion.get('data', None):
                         log.info(jsonversion)
@@ -52,12 +59,13 @@ class FunctionComponent(ResilientComponent):
                         page += 1
                         if (jsonversion['meta']['next'] == False):
                             isnextpage = False
-                        getapi = jsonversion['meta']['next']
+                        url = jsonversion['meta']['next']
+
             log.info('Returning results')
             results = {
                 "value": resultlist
             }
-
+            log.debug(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

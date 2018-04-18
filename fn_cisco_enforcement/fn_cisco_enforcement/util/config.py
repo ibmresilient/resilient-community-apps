@@ -9,9 +9,9 @@ def config_section_data():
 
     config_result = """
 [fn_cisco_enforcement]
+url=https://s-platform.api.opendns.com/1.0
 apikey=
-cisco_deviceid=
-cisco_deviceversion=
-cisco_protocolversion=
+protocolversion=1.0a
+providerName=Security Platform
     """
     return config_result

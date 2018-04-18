@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation"""
-# Copyright IBM Corp. - Confidential Information
 import logging
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
+HEADERS = {'content-type': 'application/json'}
 # Deletes a domain using the Cisco api. The apikey is refernced in the app.config under [fn_cisco_enforcement]
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'delete_domain"""
@@ -25,21 +26,27 @@ class FunctionComponent(ResilientComponent):
         """Function: This is a function implementation that uses the Cisco API to delete a domain from the shared customer’s domain list."""
         try:
             # Get the function parameters:
-            cisco_domin = kwargs.get("cisco_domain")  # text
-            apikey = self.options.get('apikey')
+            cisco_domain = kwargs.get("cisco_domain")  # text
+            apikey = self.options.get('api_token')
             log = logging.getLogger(__name__)
-            log.info("cisco_domin: %s", cisco_domin)
+            log.info("cisco_domain: %s", cisco_domain)
 
-            log.info('Deleting {} from list'.format(cisco_domin))
-            deleteapi = 'https://s-platform.api.opendns.com/1.0/domains/{}?customerKey={}'.format(cisco_domin,apikey)
-            response = requests.delete(deleteapi)
+            log.info('Deleting {} from list'.format(cisco_domain))
 
-            if not response or response.status_code >= 300 or not response.content:
-                yield FunctionError('api call failure')
+            url = '/'.join((self.options['url'], 'domains', '{}?customerKey={}'))
+            url = url.format(cisco_domain.strip(), apikey)
+            log.debug(url)
+
+            response = requests.delete(url)
+
+            if not response or response.status_code >= 300:
+                yield FunctionError('api call failure: '+ str(response.status_code))
             else:
                 results = {
-                    "value": response.content
+                    "value": response.content.decode('latin1')
                 }
+                log.debug(response.content)
+
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
         except Exception:
