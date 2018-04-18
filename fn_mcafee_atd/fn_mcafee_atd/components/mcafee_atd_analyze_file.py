@@ -3,6 +3,8 @@
 """Function implementation"""
 
 import logging
+import requests
+from fn_mcafee_atd.util.helper import getSessionATD
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 
@@ -14,12 +16,14 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_mcafee_atd", {})
 
+        r = getSessionATD("craigr", "?6l$$Izh", "https://161.69.151.33:8888")
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_atd", {})
 
-    def getFile(self, incident_id, artifact_id, file_location, **kwargs):
+    def getFile(self, file_location, **kwargs):
         url_switcher = {
             "Artifact": "/incidents/{}/artifacts/{}/contents",
             "Attachment": "/incidents/{}/attachments/{}/contents",
@@ -40,6 +44,14 @@ class FunctionComponent(ResilientComponent):
         response = resilient_client.get_content(url)
         return response
 
+    def submitFile(self, file):
+        atd_url = "https://161.69.151.33:8888/php/fileupload.php"
+        headers = {}
+        postdata = {'data': '{"data":{"xMode":0,"overrideOS":1,"vmProfileList":"11","submitType":"0"},"filePriorityQ":"run_now" }'}
+
+        file_upload_req = requests.post(atd_url, postdata, files=file, headers=headers, verify=False)
+        print(file_upload_req)
+
     @function("mcafee_atd_analyze_file")
     def _mcafee_atd_analyze_file_function(self, event, *args, **kwargs):
         """Function: """
@@ -54,10 +66,11 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("artifact_id: %s", artifact_id)
-            self.get_select_param(kwargs.get("inputType"))
+            log.info("mcafee_atd_file_location: %s", self.get_select_param(kwargs.get("inputType")))
 
-            file = self.getFile(incident_id, artifact_id, mcafee_atd_file_location)
+            file = self.getFile(mcafee_atd_file_location, **kwargs)
 
+            self.submitFile(file)
 
             results = {
                 "value": "xyz"
