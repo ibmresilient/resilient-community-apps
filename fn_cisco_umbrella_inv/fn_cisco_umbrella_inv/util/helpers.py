@@ -87,6 +87,12 @@ def validate_params(func):
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v):
                 raise ValueError("Invalid value for function parameter 'resource' .")
+        if re.match("^resource", k) and IP_PATTERN.match(v):
+            if "umbinv_resource_type" in func._params and func._params["umbinv_resource_type"] != "ip_address":
+                raise ValueError("Invalid value for function parameter 'resource', should be type 'ip_address'.")
+        if re.match("^resource", k) and validate_domains(v):
+            if "umbinv_resource_type" in func._params and func._params["umbinv_resource_type"] != "domain_name":
+                raise ValueError("Invalid value for function parameter 'resource', should be type 'domain_name' .")
         if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'".format(k))
         if re.match("^ipaddr$", k) and v is not None and not IP_PATTERN.match(v):

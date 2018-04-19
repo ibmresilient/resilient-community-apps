@@ -35,14 +35,15 @@ class TestUmbrellaDnsRrHist:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("umbinv_resource, umbinv_dns_type, expected_results", [
-        ("text", 'CNAME', {"value": "xyz"}),
-        ("text", 'MX', {"value": "xyz"})
+    @pytest.mark.parametrize("umbinv_resource, umbinv_resource_type, umbinv_dns_type, expected_results", [
+        ("text", 'ip_address', 'TXT', {"value": "xyz"}),
+        ("text", 'url', 'CNAME', {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, umbinv_resource, umbinv_dns_type, expected_results):
+    def test_success(self, circuits_app, umbinv_resource, umbinv_resource_type, umbinv_dns_type, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "umbinv_resource": umbinv_resource,
+            "umbinv_resource_type": umbinv_resource_type,
             "umbinv_dns_type": umbinv_dns_type
         }
         results = call_umbrella_dns_rr_hist_function(circuits_app, function_params)

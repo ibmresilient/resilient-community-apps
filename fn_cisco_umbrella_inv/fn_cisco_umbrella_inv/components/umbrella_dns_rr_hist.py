@@ -75,6 +75,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_resource = kwargs.get("umbinv_resource")  # text
+            umbinv_resource_type = self.get_select_param(kwargs.get("umbinv_resource_type"))  # select, values: "domain_name", "ip_address", "url"
             umbinv_dns_type = self.get_select_param(kwargs.get("umbinv_dns_type"))  # select, values: "A", "NS", "MX", "TXT", "CNAME"
 
             log = logging.getLogger(__name__)
@@ -84,7 +85,11 @@ class FunctionComponent(ResilientComponent):
             if umbinv_resource is None:
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            self._params = {"resource": umbinv_resource.strip(), "dns_type": umbinv_dns_type}
+            if umbinv_resource_type is None:
+                raise ValueError("Required parameter 'umbinv_resource_type' not set")
+
+            self._params = {"resource": umbinv_resource.strip(), "dns_type": umbinv_dns_type,
+                            "umbinv_resource_type": umbinv_resource_type}
 
             yield StatusMessage("Starting...")
 
