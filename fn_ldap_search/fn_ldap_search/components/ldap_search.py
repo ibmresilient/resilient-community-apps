@@ -217,10 +217,16 @@ class FunctionComponent(ResilientComponent):
 
             ldap_user, ldap_password, ldap_auth = self.get_creds()
 
+        if "connect_timeout" in self.options:
+            connect_timeout = int(self.options["connect_timeout"])
+        else:
+            LOG.debug(type(self.options["connect_timeout"]))
+            raise Exception("Mandatory config setting 'connect_timeout' not set.")
+
         try:
             # Create LDAP Server object.
             LOG.debug("Create LDAP server object")
-            server = Server(ldap_server, port=ldap_port, get_info=ALL, use_ssl=ldap_use_ssl, connect_timeout=3 )
+            server = Server(ldap_server, port=ldap_port, get_info=ALL, use_ssl=ldap_use_ssl, connect_timeout=connect_timeout )
             # Connect to the LDAP server.
 
             self.connection = Connection(server, user=ldap_user, password=ldap_password, authentication=ldap_auth,

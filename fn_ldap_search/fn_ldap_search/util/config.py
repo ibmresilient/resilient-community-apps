@@ -19,5 +19,6 @@ user=cn=read-only-admin,dc=example,dc=com
 password=password
 auth=SIMPLE
 use_ssl=False
+connect_timeout=10
     """
     return config_data
