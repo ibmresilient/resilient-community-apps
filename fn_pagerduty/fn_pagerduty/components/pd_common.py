@@ -11,7 +11,9 @@ NOTE_FRAGMENT       = '/'.join((UPDATE_FRAGMENT, 'notes'))
 
 HEADERS = { 'Accept': 'application/vnd.pagerduty+json;version=2',
             'Content-Type': 'application/json',
-            'Authorization': 'Token token={}' }
+            'Authorization': 'Token token={}',
+            'From': '{}'
+          }
 
 PD_BASE_URL = 'https://api.pagerduty.com'
 
@@ -23,7 +25,7 @@ def find_escalation_policy_by_name(log, appDict, name):
     :param name:
     :return: id of policy or None
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     # build url
     url = '/'.join((PD_BASE_URL, ESCALATION_FRAGMENT))
@@ -40,7 +42,7 @@ def find_service_by_name(log, appDict, name):
     :param name:
     :return: service Id or None
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     # build url
     url = '/'.join((PD_BASE_URL, SERVICE_FRAGMENT))
@@ -57,13 +59,17 @@ def find_priority_by_name(log, appDict, name):
     :param name:
     :return: policy Id or None
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     # build url
     url = '/'.join((PD_BASE_URL, PRIORITIES_FRAGMENT))
 
-    resp = execute_call(log, 'get', url, None, None, None, True, headers)
-    return _compareName(resp, 'priorities', name.strip().lower())
+    # trap the possibility that priorities are disabled
+    try:
+        resp = execute_call(log, 'get', url, None, None, None, True, headers)
+        return _compareName(resp, 'priorities', name.strip().lower())
+    except:
+        return None
 
 def create_incident(log, appDict):
     """
@@ -72,7 +78,7 @@ def create_incident(log, appDict):
     :param appDict:
     :return: the json string from the PD API
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     payload = build_incident_payload(appDict)
 
@@ -92,7 +98,7 @@ def update_incident(log, appDict, incident_id, status, priority, resolution):
     :param resolution:
     :return: the json string from the PD API
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     payload = build_update_payload(appDict, status, priority, resolution)
 
@@ -112,7 +118,7 @@ def create_note(log, appDict, incident_id, note):
     :param note:
     :return: the json string from the PD API
     """
-    headers = _build_header(appDict['api_token'])
+    headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     payload = build_note_payload(note)
     log.info(payload)
@@ -139,7 +145,7 @@ def _compareName(resp, respName, compareName):
 
     return None
 
-def _build_header(api_token):
+def _build_header(api_token, from_email):
     """
     build the header needed for API calls
     :param api_token:
@@ -147,6 +153,7 @@ def _build_header(api_token):
     """
     headers = HEADERS.copy()
     headers['Authorization'] = headers['Authorization'].format(api_token)
+    headers['From'] = headers['From'].format(from_email)
 
     return headers
 

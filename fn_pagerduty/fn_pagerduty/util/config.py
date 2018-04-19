@@ -11,6 +11,7 @@ def config_section_data():
     """
     config_data = u"""[pagerduty]
 api_token=<api_token>
+from_email=<from_email_address>
 # bypass https certificate validation (only set to False for testing purposes)
 verifyFlag=False
 """

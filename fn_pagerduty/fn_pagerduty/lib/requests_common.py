@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import requests
-from errors import IntegrationError
+from .errors import IntegrationError
 
 
 def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):

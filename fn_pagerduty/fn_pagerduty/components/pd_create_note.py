@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_pagerduty.lib.resilient_common import validateFields, clean_html
-from pd_common import create_note
+from .pd_common import create_note
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'pagerduty_create_note"""
