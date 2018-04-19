@@ -10,6 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_cisco_umbrella_inv]
-#api_token=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+base_url=https://investigate.api.umbrella.com/
+# The api_token will be supplied by Cisco will be in uuid format.
+api_token=<api token>
 """
     return config_data

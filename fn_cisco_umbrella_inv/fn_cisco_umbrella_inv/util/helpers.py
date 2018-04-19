@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
 
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
+""" Helper functions for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
 from __future__ import print_function
 import logging
@@ -8,9 +12,10 @@ import re
 import urllib
 from urlparse import urlparse
 
-IP_PATTERN = re.compile(r"(\d{1,3}\.){3}\d{1,3}")
-DOMAIN_PATTERN = re.compile(r"\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b")
-UUID_PATTERN = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}")
+LOG = logging.getLogger(__name__)
+IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
+DOMAIN_PATTERN = re.compile(r"^\b((?=[a-z0-9-]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}\b$")
+UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 TIMEDELTA_PATTERN =  re.compile(r"^-*(\d+)(seconds|minutes|hours|days|weeks)$")
 
 def validate_opts(func):
@@ -23,6 +28,11 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'api_token' not set.")
     if not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'")
+    if not "base_url" in func.options:
+        raise Exception("Mandatory config setting 'base_url' not set.")
+    if not validate_url(func.options["base_url"]):
+        raise ValueError("Invalid format for config setting 'base_url'")
+
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
@@ -34,6 +44,7 @@ def validate_url(url):
     if parsedurl.scheme is not None and parsedurl.scheme is not None and parsedurl.path is not None:
         return True
     else:
+        LOG.debug("url: %s", url)
         return False
 
 def validate_regex(regex):
@@ -46,6 +57,7 @@ def validate_regex(regex):
         re.compile(regex)
         valid_regex = True
     except re.error:
+        LOG.debug("regex: %s", regex)
         valid_regex = False
     return valid_regex
 
@@ -57,6 +69,7 @@ def validate_domains(dom):
      """
 
     for d in re.split('\s+|,', dom):
+        LOG.info('DEBUG1'+ d)
         if not DOMAIN_PATTERN.match(d):
             return False
     return True

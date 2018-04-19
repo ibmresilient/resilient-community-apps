@@ -83,6 +83,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cisco_umbrella_inv", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -102,10 +103,10 @@ class FunctionComponent(ResilientComponent):
             if umbinv_domain is None:
                 raise ValueError("Required parameter 'umbinv_domain' not set")
 
-            self._params = {"domain": umbinv_domain}
+            self._params = {"domain": umbinv_domain.strip()}
 
             yield StatusMessage("Starting...")
-            validate_opts(self)
+
             validate_params(self)
             process_params(self)
 
@@ -113,7 +114,8 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
 
             api_token = self.options.get("api_token")
-            rinv = ResilientInv(api_token)
+            base_url = self.options.get("base_url")
+            rinv = ResilientInv(api_token,base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.security(self._domain)
@@ -132,4 +134,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            logging.exception("Exception in Resilient Function.")
             yield FunctionError()

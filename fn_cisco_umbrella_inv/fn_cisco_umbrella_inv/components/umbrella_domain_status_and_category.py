@@ -63,6 +63,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cisco_umbrella_inv", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -86,19 +87,21 @@ class FunctionComponent(ResilientComponent):
             if umbinv_status_endpoint is None:
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
-            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
+            self._params = {"domains": umbinv_domains.strip(), "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
             if umbinv_showlabels:
                 self._params.setdefault('showlabels', None)
 
             yield StatusMessage("Starting...")
-            validate_opts(self)
+
+            validate_params(self)
             process_params(self)
-            process_params(self)
+
             if (umbinv_status_endpoint == "categorization") and (not hasattr(self, '_domain') and not hasattr(self, '_domains')):
                 raise ValueError("Parameter 'umbinv_domains' was not processed correctly")
 
             api_token = self.options.get("api_token")
-            rinv = ResilientInv(api_token)
+            base_url = self.options.get("base_url")
+            rinv = ResilientInv(api_token,base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):
@@ -129,4 +132,5 @@ class FunctionComponent(ResilientComponent):
             #Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            logging.exception("Exception in Resilient Function.")
             yield FunctionError()

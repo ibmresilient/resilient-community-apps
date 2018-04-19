@@ -1,21 +1,26 @@
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
 
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
+""" Investigate class for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
 from __future__ import print_function
 import urlparse, urllib
 import logging
 import datetime, time
 import re
-import investigate
+from investigate import Investigate
 
 log = logging.getLogger(__name__)
 
-class ResilientInv(investigate.Investigate):
+class ResilientInv(Investigate):
     """ Extend base Investigate Class to add support for unsupported and buggy methods.
 
     """
-    def __init__(self, api_key, proxies={}):
+    def __init__(self, api_key, base_url, proxies={}):
         super(ResilientInv, self).__init__(api_key, proxies)
+        # Extend _uris dict od Investigate instance.
         self._uris.update({
             "categories": "domains/categories/",
             "timeline":  "timeline/{}",
@@ -23,6 +28,9 @@ class ResilientInv(investigate.Investigate):
             "classifiers_info": "url/{}/info",
             "domain_volume": "domains/volume/{}"
         })
+        # Over-ride Investigate BASE_URL class attribute with version
+        # from config file.
+        setattr(Investigate, "BASE_URL", base_url)
 
     def categories(self):
         '''Get the category map for domain status and categorization.
