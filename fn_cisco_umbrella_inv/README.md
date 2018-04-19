@@ -5,8 +5,8 @@ Circuits integration framework.
 
 Prerequisites:
 ```
-resilient
-resilient_circuits
+resilient version 30 or later
+resilient_circuits version 30 or later
 investigate
 ```
 * Can be used in a Resilient workflow to populate/update a datatable.
@@ -18,10 +18,11 @@ investigate
 
 This package requires that it is installed on a RHEL platform and that the resilient-circuits application is running.
 Install this package with 'pip', or `python setup.py install`.
-To set the config values in the app.config file run `resilient-circuits config -u`.
+To set the config values in the app.config file with a new resilient instance run `resilient-circuits config -c`.
+To set the config values in the app.config file with an existing resilient instance run `resilient-circuits config -u`.
 
 Config values example:
-(Note: The api token will be suppided by Cisco and will be in uuid format)
+(Note: The api token will be supplied by Cisco and will be in uuid format)
 ```
 [fn_cisco_umbrella_inv]
 api_token=abcd1234-a123-123a-123a-123456abcdef
@@ -41,16 +42,17 @@ umbrella_timeline
 
 ## fn_cisco_umbrella_inv Example
 
-The umbrella_dns_rr_hist Functioon requires 2 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
+The umbrella_dns_rr_hist Function requires 2 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script. The %param% token
 will be replaced by the actual inputs.param value at time of execution.
 
 ```
-inputs.resource = artifact.value
-inputs.dns_type = "A"
+inputs.umbinv_resource = artifact.value
+inputs.umbinv_resource_type = "domain_name"
+inputs.umbinv_dns_type = "A"
 ```
-For example if  artifact.value gets set to an ip address (domain name also supported fro this function), the results
-returned to Resilient  will be in JSONb format and will be similar to the following format.
+For example if artifact.value gets set to an ip address (domain name also supported for this function), the results
+returned to Resilient will be in JSON format and will be similar to the following format.
 Note: Each Resilient Function will return a different result.
 ```
 {"dns_rr_history": {  "rrs": [  {
