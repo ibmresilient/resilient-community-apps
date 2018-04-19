@@ -69,7 +69,6 @@ def validate_domains(dom):
      """
 
     for d in re.split('\s+|,', dom):
-        LOG.info('DEBUG1'+ d)
         if not DOMAIN_PATTERN.match(d):
             return False
     return True
