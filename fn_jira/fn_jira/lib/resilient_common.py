@@ -1,5 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import re
+from six import string_types
 
 INCIDENT_FRAGMENT = '#incidents'
 
@@ -29,7 +30,7 @@ def clean_html(htmlFragment):
     :return: cleaned up code
     """
 
-    if not htmlFragment or not isinstance(htmlFragment, basestring):
+    if not htmlFragment or not isinstance(htmlFragment, string_types):
         return htmlFragment
 
     tmp = re.sub(r'</div>', '\n', htmlFragment)
