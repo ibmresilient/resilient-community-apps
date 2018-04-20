@@ -53,12 +53,16 @@ class FunctionComponent(ResilientComponent):
         # test for required fields
         validateFields(['jira_url', 'jira_comment'], kwargs)
 
+        jira_comment = clean_html(self.get_textarea_param(kwargs['jira_comment']))
+        if len(jira_comment.strip()) == 0:
+            raise FunctionError("comment is empty after rich text is removed")
+
         appDict = {
             'user': self.options['user'],
             'password': self.options['password'],
             'url': kwargs['jira_url'],
             'verifyFlag': True if self.options.get('verifyflag', 'True') == 'True' else False,
-            'comment': clean_html(self.get_textarea_param(kwargs['jira_comment']))
+            'comment': str(jira_comment)
         }
 
         return appDict
