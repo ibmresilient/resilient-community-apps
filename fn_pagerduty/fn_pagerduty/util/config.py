@@ -15,3 +15,5 @@ from_email=<from_email_address>
 # bypass https certificate validation (only set to False for testing purposes)
 verifyFlag=False
 """
+
+    return config_data
