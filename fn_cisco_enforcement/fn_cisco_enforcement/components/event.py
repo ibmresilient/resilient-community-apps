@@ -3,10 +3,11 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation"""
 import logging
-import datetime
 import re
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_cisco_enforcement.lib.resilient_common import validateFields, readableDateTime
+
 try:
     from urlparse import urlparse
 except:
@@ -26,18 +27,27 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_cisco_enforcement", {})
         self.log = logging.getLogger(__name__)
 
+        self._init()
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_cisco_enforcement", {})
 
+        self._init()
+
+    def _init(self):
+        validateFields(['api_token'], self.options)
+
+        """get the api token for cisco access"""
+        self.apikey = self.options.get('api_token')
+
     @function("cisco_post_event")
     def _event_function(self, event, *args, **kwargs):
         """Function: This is a function implementation that uses the Cisco API to post a Malware event"""
         try:
-            apikey=self.options.get('api_token')
             url = '/'.join((self.options['url'], 'events?customerKey={}'))
-            url = url.format(apikey)
+            url = url.format(self.apikey)
             self.log.debug(url)
 
             data=self.createdataobject(kwargs)
@@ -58,6 +68,8 @@ class FunctionComponent(ResilientComponent):
     # Creates the data object to send
     def createdataobject(self,kwargs):
 
+        validateFields(['protocol_version', 'provider_name'], self.options)
+
         # Get the function parameters:
         protocolversion=self.options.get('protocol_version')
         providername=self.options.get('provider_name')
@@ -68,13 +80,14 @@ class FunctionComponent(ResilientComponent):
         else:
             raise ValueError('Please set protocol_version and provider_name in the app.config under [fn_cisco_enforcement]')
 
+        validateFields(['cisco_deviceid', 'cisco_deviceversion', 'cisco_eventtime', 'cisco_alerttime', 'cisco_dstdomain'], kwargs)
 
         # Convert timestamps from miliseconds to seconds
         cisco_deviceid = kwargs.get("cisco_deviceid")  # text
         cisco_deviceversion = kwargs.get("cisco_deviceversion")  # text
 
-        cisco_eventtime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_eventtime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
-        cisco_alerttime = datetime.datetime.utcfromtimestamp(kwargs.get("cisco_alerttime")/1000).strftime('%Y-%m-%dT%H:%M:%SZ')  # datetimepicker
+        cisco_eventtime = readableDateTime(kwargs.get("cisco_eventtime")) # datetimepicker - resilient is in milliseconds
+        cisco_alerttime = readableDateTime(kwargs.get("cisco_eventtime")) # datetimepicker
 
         domain = kwargs.get("cisco_dstdomain")
         cisco_dsturl, cisco_dstdomain = self._parseUrl(domain)     # split url and domain
