@@ -56,6 +56,7 @@ class FunctionComponent(ResilientComponent):
                 results = {
                     "value": response.content.decode('latin1')
                 }
+                yield StatusMessage("Delete domain was successful")
                 self.log.debug(response.content)
 
                 # Produce a FunctionResult with the results

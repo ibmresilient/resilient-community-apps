@@ -58,6 +58,7 @@ class FunctionComponent(ResilientComponent):
                 yield FunctionError('api call failure: {} on {}'.format(response.status_code, data['dstDomain']))
             else:
                 result = response.content.decode('latin1')
+                yield StatusMessage("Post Event was successful")
 
             self.log.debug(result)
             # Produce a FunctionResult with the results

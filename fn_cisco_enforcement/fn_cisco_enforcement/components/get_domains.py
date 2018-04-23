@@ -74,6 +74,7 @@ class FunctionComponent(ResilientComponent):
 
             # add a field to display date field in UTC format
             if resultlist:
+                yield StatusMessage("Get Domains was successful")
                 for result in resultlist:
                     result['lastSeenAt_datetime'] = readableDateTime(result['lastSeenAt'], milliseconds=False)
 
