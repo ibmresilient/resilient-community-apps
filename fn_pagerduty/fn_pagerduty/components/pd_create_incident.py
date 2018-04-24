@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_pagerduty.lib.resilient_common import validateFields, clean_html, build_incident_url, build_resilient_url
+from fn_pagerduty.lib.resilient_common import validateFields, clean_html, build_incident_url, build_resilient_url, unescape
 from .pd_common import create_incident
 
 
@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
 
         payloadDict = pd_options.copy()
         payloadDict['incidentID'] = incidentID
-        payloadDict['title'] = kwargs.get("pd_title")
+        payloadDict['title'] = unescape(kwargs.get("pd_title"))
         desc = self.get_textarea_param(kwargs.get("pd_description"))
         if desc:
             desc = clean_html(desc)
