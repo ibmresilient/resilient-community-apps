@@ -8,7 +8,7 @@ import json
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url
+from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields
 from slackclient import SlackClient
 from six import string_types
 
@@ -22,26 +22,44 @@ class FunctionComponent(ResilientComponent):
         self.resoptions = opts.get("resilient", {})
         self.log = logging.getLogger(__name__)
 
+        self._init()
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_slack", {})
         self.resoptions = opts.get("resilient", {})
 
+        self._init()
+
+    def _init(self):
+        # validate app.config
+        validateFields(['api_token', 'username'], self.options)
+
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
         """Function: Create a Slack message based on an incident. All summary and detail information about an Incident are presented"""
         try:
+            # validate input
+            validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
             slack_details = kwargs.get("slack_details")  # text
             slack_thread_id = kwargs.get("slack_thread_id")  # text
             slack_reply_broadcast = self.get_select_param(kwargs.get("slack_reply_broadcast"))
 
+            slack_markdown = self.get_select_param(kwargs.get("slack_markdown"))  # select
+            slack_parse = self.get_select_param(kwargs.get("slack_parse"))  # select
+            slack_link_names = self.get_select_param(kwargs.get("slack_link_names"))   # select
+
             self.log.info("slack_channel: %s", slack_channel)
             self.log.info("slack_details: %s", slack_details)
             self.log.info("slack_thread_id: %s", slack_thread_id)
             self.log.info("slack_reply_broadcast: %s", slack_reply_broadcast)
+            self.log.info("slack_parse: %s", slack_parse) #todo
+            self.log.info("slack_markdwn: %s", slack_markdown) #todo
+            self.log.info("slack_link_names: %s", slack_link_names) #todo
 
             data = json.loads(slack_details)
 
@@ -66,10 +84,19 @@ class FunctionComponent(ResilientComponent):
                 text=payload,
                 as_user="false",
                 username=as_user,
-                reply_broadcast=slack_reply_broadcast
+                reply_broadcast=slack_reply_broadcast,
+                parse=slack_parse,
+                link_names=slack_link_names,
+                mrkdown=slack_markdown,
+                thread_ts=slack_thread_id
             )
 
-            self.log.info(results) # todo
+            self.log.info(results)
+
+            if 'ok' in results.keys() and results['ok']:
+                yield StatusMessage("Message added to slack")
+            else:
+                yield FunctionError("Message add failed: "+json.dumps(results))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
