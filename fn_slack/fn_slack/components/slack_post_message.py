@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Create a Slack message based on an incident. All summary and detail information about an Incident are presented"""
         try:
             # validate input
-            validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+            #validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
 
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             slack_thread_id = kwargs.get("slack_thread_id")  # text
             slack_reply_broadcast = self.get_select_param(kwargs.get("slack_reply_broadcast"))
 
-            slack_markdown = self.get_select_param(kwargs.get("slack_markdown"))  # select
+            slack_markdown = self.get_select_param(kwargs.get("slack_markdwn"))  # select
             slack_parse = self.get_select_param(kwargs.get("slack_parse"))  # select
             slack_link_names = self.get_select_param(kwargs.get("slack_link_names"))   # select
 
@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                 "chat.postMessage",
                 channel=slack_channel,
                 text=payload,
-                as_user="false",
+                as_user="true",
                 username=as_user,
                 reply_broadcast=slack_reply_broadcast,
                 parse=slack_parse,
@@ -100,7 +100,8 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
+        except Exception as err:
+            self.log.error(err)
             yield FunctionError()
 
     def _build_payload(self, dataDict):
