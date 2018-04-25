@@ -10,7 +10,7 @@ setup(
     author='Resilient',
     author_email='support@resilient.com',
     description="Resilient Circuits Components for 'fn_pagerduty'",
-    long_description="Resilient Circuits Components for 'fn_pagerduty'",
+    long_description="Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerducty incidents, create notes and transition incidents (acknowledged and resolved)",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
@@ -22,9 +22,9 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.pd_create_incident:FunctionComponent",
+            "PagerdutyCreateNoteFunctionComponent = fn_pagerduty.components.pd_create_note:FunctionComponent",
             "PagerdutyTransitionIncidentFunctionComponent = fn_pagerduty.components.pd_transition_incident:FunctionComponent",
-            "PagerdutyCreateNoteFunctionComponent = fn_pagerduty.components.pd_create_note:FunctionComponent"
+            "PagerdutyCreateIncidentFunctionComponent = fn_pagerduty.components.pd_create_incident:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_pagerduty.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_pagerduty.util.customize:customization_data"]

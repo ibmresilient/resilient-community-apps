@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import requests
-from errors import IntegrationError
+from .errors import IntegrationError
 
 
 def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
@@ -37,7 +37,7 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
         # check if anything returned
         log and log.info(resp.text)
         if resp.text is None or len(resp.text) == 0:
-            return { }          # make sure to always return a dictionary
+            return {}          # make sure to always return a dictionary
 
         # get the result
         r = resp.json()

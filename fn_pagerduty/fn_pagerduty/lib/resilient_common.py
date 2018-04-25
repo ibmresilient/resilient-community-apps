@@ -1,5 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+import html
 import re
+from six import string_types
+
 
 INCIDENT_FRAGMENT = '#incidents'
 
@@ -29,14 +32,22 @@ def clean_html(htmlFragment):
     :return: cleaned up code
     """
 
-    if not htmlFragment or not isinstance(htmlFragment, basestring):
+    if not htmlFragment or not isinstance(htmlFragment, string_types):
         return htmlFragment
 
     tmp = re.sub(r'</div>', '\n', htmlFragment)
     tmp = re.sub(r'</ol>', '\n', tmp)
     tmp = re.sub(r'</li>', '\n', tmp)
-    tmp = re.sub(r'&nbsp;', ' ', tmp)
-    return re.sub(r'<([^>]+)>', '', tmp)       # removes all remaining html
+    tmp = re.sub(r'<([^>]+)>', '', tmp)       # removes all remaining html
+    return unescape(tmp)
+
+
+def unescape(data):
+    """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
+    try:
+        return html.unescape(data)
+    except:
+        return data
 
 def merge_two_dicts(x, y):
     """

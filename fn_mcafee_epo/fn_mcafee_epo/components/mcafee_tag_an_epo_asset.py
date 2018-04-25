@@ -82,7 +82,7 @@ Applies tag to the systems in ePO."""
             content = response.text
 
             if not status_code < 300 or not content.startswith('OK'):
-                yield FunctionError(content.text)
+                yield FunctionError("Tag failed to apply successfully. Check connection and that Tag exists in ePO.")
 
             result = {
                 "Systems": mcafee_epo_systems,
