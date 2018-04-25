@@ -26,12 +26,14 @@ def validate_opts(func):
      """
     if not "api_token" in func.options:
         raise Exception("Mandatory config setting 'api_token' not set.")
+    if not "api_token" in func.options:
+        raise Exception("Mandatory config setting 'api_token' not set.")
     if not UUID_PATTERN.match(func.options["api_token"]):
-        raise ValueError("Invalid format for config setting 'api_token'")
+        raise ValueError("Invalid format for config setting 'api_token'.")
     if not "base_url" in func.options:
         raise Exception("Mandatory config setting 'base_url' not set.")
     if not validate_url(func.options["base_url"]):
-        raise ValueError("Invalid format for config setting 'base_url'")
+        raise ValueError("Invalid format for config setting 'base_url'.")
 
 
 def validate_url(url):
@@ -40,11 +42,13 @@ def validate_url(url):
     :param regex: url paramter value
 
     """
-    parsedurl = urlparse(url)
-    if parsedurl.scheme is not None and parsedurl.scheme is not None and parsedurl.path is not None:
-        return True
-    else:
-        LOG.debug("url: %s", url)
+    try:
+        result = urlparse(url)
+        if all([result.scheme, result.netloc]):
+            return True
+        else:
+            return False
+    except:
         return False
 
 def validate_regex(regex):
@@ -79,7 +83,7 @@ def validate_params(func):
     :param func: Resilient Function instance reference.
 
      """
-    if func._params is None:
+    if not hasattr(func, "_params") or func._params is None:
         raise Exception("Cisco Umbrella investigate query requires parameters dictionary to be set")
     for (k, v) in func._params.items():
         if re.match("^resource", k) and v is not None:
@@ -91,9 +95,9 @@ def validate_params(func):
                 raise ValueError("Invalid value for function parameter 'resource', should be type 'ip_address'.")
         if re.match("^resource", k) and validate_domains(v):
             if "umbinv_resource_type" in func._params and func._params["umbinv_resource_type"] != "domain_name":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'domain_name' .")
+                raise ValueError("Invalid value for function parameter 'resource', should be type 'domain_name'.")
         if re.match("^domain", k) and v is not None and not validate_domains(v):
-            raise ValueError("Invalid value for function parameter '{}'".format(k))
+            raise ValueError("Invalid value for function parameter '{}' .".format(k))
         if re.match("^ipaddr$", k) and v is not None and not IP_PATTERN.match(v):
             raise ValueError("Invalid value for function parameter 'ipaddr' .")
         if re.match("^regex$", k) and v is not None and not validate_regex(v):
