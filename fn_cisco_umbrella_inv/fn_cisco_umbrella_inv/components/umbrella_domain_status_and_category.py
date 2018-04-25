@@ -87,7 +87,9 @@ class FunctionComponent(ResilientComponent):
             if umbinv_status_endpoint is None:
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
-            self._params = {"domains": umbinv_domains.strip(), "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
+            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
+            if umbinv_domains:
+                self._params.setdefault("domains", umbinv_domains.strip())
             if umbinv_showlabels:
                 self._params.setdefault('showlabels', None)
 
