@@ -13,6 +13,8 @@ setup(
     long_description="Resilient Circuits Components for 'fn_slack'",
     install_requires=[
         'resilient_circuits>=30.0.0'
+        'slackclient',
+        'html2text'
     ],
     packages=find_packages(),
     include_package_data=True,

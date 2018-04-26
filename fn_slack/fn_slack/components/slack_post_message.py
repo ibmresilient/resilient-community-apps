@@ -4,11 +4,11 @@
 
 import datetime
 import logging
-import json
+import simplejson as json
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields
+from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields, groom
 from slackclient import SlackClient
 from six import string_types
 
@@ -47,11 +47,13 @@ class FunctionComponent(ResilientComponent):
             slack_channel = kwargs.get("slack_channel")  # text
             slack_details = kwargs.get("slack_details")  # text
             slack_thread_id = kwargs.get("slack_thread_id")  # text
+            slack_user_id = kwargs.get("slack_user_id")  # text
             slack_reply_broadcast = self.get_select_param(kwargs.get("slack_reply_broadcast"))
 
             slack_markdown = self.get_select_param(kwargs.get("slack_markdwn"))  # select
             slack_parse = self.get_select_param(kwargs.get("slack_parse"))  # select
             slack_link_names = self.get_select_param(kwargs.get("slack_link_names"))   # select
+            slack_as_user = self.get_select_param(kwargs.get("slack_as_user"))   # select
 
             self.log.info("slack_channel: %s", slack_channel)
             self.log.info("slack_details: %s", slack_details)
@@ -60,20 +62,18 @@ class FunctionComponent(ResilientComponent):
             self.log.info("slack_parse: %s", slack_parse) #todo
             self.log.info("slack_markdwn: %s", slack_markdown) #todo
             self.log.info("slack_link_names: %s", slack_link_names) #todo
+            self.log.info("slack_as_user: %s", slack_as_user) #todo
+            self.log.info("slack_user_id: %s", slack_user_id) #todo
 
-            data = json.loads(slack_details)
+            data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
 
             # configuration specific parameters
             api_token = self.options['api_token']
-            as_user = self.options['username']
+            def_username = self.options['username']
 
             sl = SlackClient(api_token)
 
-            for key,val in data.items():
-                self.log.info("%s %s", key, val)
-
             payload = self._build_payload(data)
-
             self.log.info(payload)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
@@ -82,8 +82,8 @@ class FunctionComponent(ResilientComponent):
                 "chat.postMessage",
                 channel=slack_channel,
                 text=payload,
-                as_user="true",
-                username=as_user,
+                as_user=slack_as_user,
+                username=slack_user_id if slack_user_id else def_username,
                 reply_broadcast=slack_reply_broadcast,
                 parse=slack_parse,
                 link_names=slack_link_names,
@@ -116,23 +116,23 @@ class FunctionComponent(ResilientComponent):
             if len(payload) > 0:
                 payload += "\n"
 
-            if valDict['type'] == 'string':
+            if valDict['type'] == 'string' and valDict['data']:
                 payload += '{}: {}'.format(key, valDict['data'])
 
-            elif valDict['type'] == 'incident':
+            elif valDict['type'] == 'incident' and valDict['data']:
                 payload += '{}: {}'.format(key, self._buildIncident(valDict['data']))
 
-            elif valDict['type'] == 'richtext':
-                payload += '{}: {}'.format(key, clean_html(valDict['data']).strip())
+            elif valDict['type'] == 'richtext' and valDict['data']:
+                payload += '{}: {}'.format(key, clean_html(valDict['data']))
 
-            elif valDict['type'] == 'datetime':
+            elif valDict['type'] == 'datetime' and valDict['data'] and valDict['data'] != 0:
                 payload += '{}: {}'.format(key, self._buildTimeStamp(valDict['data']))
 
-            elif valDict['type'] == 'boolean':
+            elif valDict['type'] == 'boolean' and valDict['data']:
                 payload += '{}: {}'.format(key, self._buildBoolean(valDict['data'], true_value='Yes', false_value='No'))
 
-            else:
-                raise IntegrationError("Invalid type: %s", key)
+            elif valDict['data']:
+                raise IntegrationError("Invalid type: "+ valDict['type'])
 
         return payload
 
@@ -149,3 +149,8 @@ class FunctionComponent(ResilientComponent):
             return true_value if value == 1 else false_value
 
         return false_value
+
+    def _buildRichText(self, data):
+        return html2text.html2text(html.unescape(data))
+
+
