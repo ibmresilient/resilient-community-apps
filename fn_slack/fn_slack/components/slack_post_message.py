@@ -8,7 +8,7 @@ import simplejson as json
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields, groom
+from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields
 from slackclient import SlackClient
 from six import string_types
 
@@ -38,10 +38,23 @@ class FunctionComponent(ResilientComponent):
 
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
-        """Function: Create a Slack message based on an incident. All summary and detail information about an Incident are presented"""
+        """Function: Create a Slack message based on an incident. Threaded replies are possible based on a retained slack thread_id.
+        All the fields to send to slack are sent in slack_details. A json structure is used to know how to interpret field meanings. A
+        structure can look like this with conversions based on the 'type' key/value pair
+        {
+          "Resilient Incident": {"type": "string", "data": "plain text here"},
+          "Resilient URL": {"type": "incident", "data": "123"},
+          "Description": {"type": "richtext", "data": "<div>text here</div>"},
+          "Confirmed": {"type": "boolean", "data": "1"},
+          "Start Date": {"type": "datetime", "data": 158949393}
+        }
+
+        The remaining input fields are passed to the slack api call to control the message post. Refer to the slack api documentated
+        on how to use the parameters
+        """
         try:
             # validate input
-            #validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+            validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
 
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
@@ -55,28 +68,28 @@ class FunctionComponent(ResilientComponent):
             slack_link_names = self.get_select_param(kwargs.get("slack_link_names"))   # select
             slack_as_user = self.get_select_param(kwargs.get("slack_as_user"))   # select
 
-            self.log.info("slack_channel: %s", slack_channel)
-            self.log.info("slack_details: %s", slack_details)
-            self.log.info("slack_thread_id: %s", slack_thread_id)
-            self.log.info("slack_reply_broadcast: %s", slack_reply_broadcast)
-            self.log.info("slack_parse: %s", slack_parse) #todo
-            self.log.info("slack_markdwn: %s", slack_markdown) #todo
-            self.log.info("slack_link_names: %s", slack_link_names) #todo
-            self.log.info("slack_as_user: %s", slack_as_user) #todo
-            self.log.info("slack_user_id: %s", slack_user_id) #todo
+            self.log.debug("slack_channel: %s", slack_channel)
+            self.log.debug("slack_details: %s", slack_details)
+            self.log.debug("slack_thread_id: %s", slack_thread_id)
+            self.log.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
+            self.log.debug("slack_parse: %s", slack_parse)
+            self.log.debug("slack_markdwn: %s", slack_markdown)
+            self.log.debug("slack_link_names: %s", slack_link_names)
+            self.log.debug("slack_as_user: %s", slack_as_user)
+            self.log.debug("slack_user_id: %s", slack_user_id)
 
             data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
 
-            # configuration specific parameters
+            # configuration specific slack parameters
             api_token = self.options['api_token']
             def_username = self.options['username']
 
             sl = SlackClient(api_token)
 
             payload = self._build_payload(data)
-            self.log.info(payload)
+            self.log.debug(payload)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
+            # start processing
             yield StatusMessage("starting...")
             results = sl.api_call(
                 "chat.postMessage",
@@ -90,8 +103,7 @@ class FunctionComponent(ResilientComponent):
                 mrkdown=slack_markdown,
                 thread_ts=slack_thread_id
             )
-
-            self.log.info(results)
+            self.log.debug(results)
 
             if 'ok' in results.keys() and results['ok']:
                 yield StatusMessage("Message added to slack")
@@ -136,6 +148,7 @@ class FunctionComponent(ResilientComponent):
 
         return payload
 
+    # Builders for slack presentation
     def _buildIncident(self, id):
         return build_incident_url(build_resilient_url(self.resoptions['host'], self.resoptions['port']), id)
 
@@ -151,6 +164,7 @@ class FunctionComponent(ResilientComponent):
         return false_value
 
     def _buildRichText(self, data):
+        """ first restore unicode characters and then convert html to text """
         return html2text.html2text(html.unescape(data))
 
 
