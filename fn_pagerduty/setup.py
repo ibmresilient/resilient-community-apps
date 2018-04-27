@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_pagerduty'",
     long_description="Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerducty incidents, create notes and transition incidents (acknowledged and resolved)",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'html2text'
     ],
     packages=find_packages(),
     include_package_data=True,

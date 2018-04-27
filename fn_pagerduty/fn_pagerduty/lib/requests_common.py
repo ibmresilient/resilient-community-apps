@@ -3,14 +3,15 @@ import requests
 from .errors import IntegrationError
 
 
-def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
+def execute_call(log, verb, url, user, password, payload, verifyFlag, headers, callback):
     """Function: perform the http API call. Different types of http operations are supported:
         GET, POST, PUT
         Errors raise IntegrationError
+        If a callback method is provided, then it's called to handle the error
     """
 
     try:
-        (payload and log) and log.info(payload)
+        (payload and log) and log.debug(payload)
 
         auth = None
         if user and password:
@@ -29,13 +30,16 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
             raise IntegrationError('no response returned')
 
         if resp.status_code >= 300:
-            log and log.info(resp)
-            # get the result
-            raise IntegrationError(resp.text)
-
+            log and log.warning(resp)
+            if callback:
+                callback(resp)
+                return {}
+            else:
+                # get the result
+                raise IntegrationError(resp.text)
 
         # check if anything returned
-        log and log.info(resp.text)
+        log and log.debug(resp.text)
         if resp.text is None or len(resp.text) == 0:
             return {}          # make sure to always return a dictionary
 
@@ -45,5 +49,5 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
         # Produce a IntegrationError with the return value
         return r      # json object needed, not a string representation
     except Exception as err:
-        log and log.info(err)
+        log and log.error(err)
         raise IntegrationError(err)
