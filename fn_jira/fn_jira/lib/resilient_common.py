@@ -1,4 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+import html
+import html2text
 import re
 from six import string_types
 
@@ -33,11 +35,14 @@ def clean_html(htmlFragment):
     if not htmlFragment or not isinstance(htmlFragment, string_types):
         return htmlFragment
 
-    tmp = re.sub(r'</div>', '\n', htmlFragment)
-    tmp = re.sub(r'</ol>', '\n', tmp)
-    tmp = re.sub(r'</li>', '\n', tmp)
-    tmp = re.sub(r'&nbsp;', ' ', tmp)
-    return re.sub(r'<([^>]+)>', '', tmp)       # removes all remaining html
+    return html2text.html2text(unescape(htmlFragment))
+
+def unescape(data):
+    """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
+    try:
+        return html.unescape(data)
+    except:
+        return data
 
 def merge_two_dicts(x, y):
     """
