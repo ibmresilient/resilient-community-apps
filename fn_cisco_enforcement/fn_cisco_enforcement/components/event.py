@@ -55,7 +55,9 @@ class FunctionComponent(ResilientComponent):
             response = requests.post(url, json=data, verify=False, headers=HEADERS)
 
             if not response or response.status_code >= 300 or not response.content:
+                response.content and self.log.error(response.content)
                 yield FunctionError('api call failure: {} on {}'.format(response.status_code, data['dstDomain']))
+
             else:
                 result = response.content.decode('latin1')
                 yield StatusMessage("Post Event was successful")
@@ -64,20 +66,21 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult({ "value": result})
         except Exception as err:
+            self.log.error(err)
             yield FunctionError(err)
 
     # Creates the data object to send
-    def createdataobject(self,kwargs):
+    def createdataobject(self, kwargs):
 
         validateFields(['protocol_version', 'provider_name'], self.options)
 
         # Get the function parameters:
-        protocolversion=self.options.get('protocol_version')
-        providername=self.options.get('provider_name')
+        protocolversion = self.options.get('protocol_version')
+        providername = self.options.get('provider_name')
 
         if protocolversion and providername:
-            cisco_protocolversion=protocolversion
-            cisco_providername=providername
+            cisco_protocolversion = protocolversion
+            cisco_providername = providername
         else:
             raise ValueError('Please set protocol_version and provider_name in the app.config under [fn_cisco_enforcement]')
 
@@ -134,7 +137,7 @@ class FunctionComponent(ResilientComponent):
                 "dstUrl": cisco_dsturl
                      }
 
-        data=self.addothers(basicdata, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
+        data = self.addothers(basicdata, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
                   cisco_filename, cisco_filehash, cisco_externalurl, cisco_src)
 
         return data
@@ -146,24 +149,25 @@ class FunctionComponent(ResilientComponent):
         return d.geturl(), d.hostname if d.hostname else d.path
 
     # Adds the non mandatory parameters to the data object
-    def addothers(self,data,cisco_dstip,cisco_eventseverity,cisco_eventtype,cisco_eventdescription,cisco_eventhash,cisco_filename,cisco_filehash,cisco_externalurl,cisco_src):
-        if cisco_dstip !=None:
-            data['cisco_dstip']=cisco_dstip
-        if cisco_eventseverity!=None:
-            data['cisco_eventseverity']=cisco_eventseverity
-        if cisco_eventtype!=None:
-            data['cisco_eventtype']=cisco_eventtype
-        if cisco_eventdescription!=None:
-            data['cisco_eventdescription']=cisco_eventdescription
-        if cisco_eventhash!=None:
-            data['cisco_eventhash']=cisco_eventhash
-        if cisco_filename!=None:
-            data['cisco_filename']=cisco_filename
-        if cisco_filehash!=None:
-            data['cisco_filehash']=cisco_filehash
-        if cisco_externalurl!=None:
-            data['cisco_externalurl']=cisco_externalurl
-        if cisco_src!=None:
-            data['cisco_src']=cisco_src
+    def addothers(self, data, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
+                  cisco_filename, cisco_filehash, cisco_externalurl, cisco_src):
+        if cisco_dstip != None:
+            data['cisco_dstip'] = cisco_dstip
+        if cisco_eventseverity != None:
+            data['cisco_eventseverity'] = cisco_eventseverity
+        if cisco_eventtype != None:
+            data['cisco_eventtype'] = cisco_eventtype
+        if cisco_eventdescription != None:
+            data['cisco_eventdescription'] = cisco_eventdescription
+        if cisco_eventhash != None:
+            data['cisco_eventhash'] = cisco_eventhash
+        if cisco_filename != None:
+            data['cisco_filename'] = cisco_filename
+        if cisco_filehash != None:
+            data['cisco_filehash'] = cisco_filehash
+        if cisco_externalurl != None:
+            data['cisco_externalurl'] = cisco_externalurl
+        if cisco_src != None:
+            data['cisco_src'] = cisco_src
 
         return data

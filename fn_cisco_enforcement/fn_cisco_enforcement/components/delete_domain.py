@@ -51,6 +51,7 @@ class FunctionComponent(ResilientComponent):
             response = requests.delete(url)
 
             if not response or response.status_code >= 300:
+                response.content and self.log.error(response.content)
                 yield FunctionError('api call failure: '+ str(response.status_code))
             else:
                 results = {
@@ -61,5 +62,6 @@ class FunctionComponent(ResilientComponent):
 
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
-        except Exception:
+        except Exception as err:
+            self.log.error(err)
             yield FunctionError()
