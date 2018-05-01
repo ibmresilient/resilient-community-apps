@@ -30,23 +30,35 @@ class TestEvent:
         assert (expected==results)
 
     # Test created data object
+    @pytest.mark.parametrize("cisco_deviceid,cisco_deviceversion,cisco_eventtime,cisco_alerttime,cisco_eventdescription,cisco_dsturl,cisco_dstdomain,expected",[("12","1",1518367008000,1518367008000,"test description","www.myurl.com/tt","/tt",{'eventTime': '2018-02-11T16:36:48Z', 'alertTime': '2018-02-11T16:36:48Z', 'deviceId': '12', 'providerName': 1, 'protocolVersion': 1, 'cisco_eventdescription': 'test description', 'dstDomain': '/tt', 'dstUrl': '/tt', 'deviceVersion': '1'})])
     @patch.object(FunctionComponent, "__init__", return_value=None)
-    def test_createdataobject(self,circuits_app):
-        args={"cisco_deviceid":"12","cisco_deviceversion":"1","cisco_eventtime":1518367008000,"cisco_alerttime":1518367008000,"cisco_eventdescription":"test description","cisco_dsturl":"www.myurl.com/tt","cisco_dstdomain":"/tt"}
+    def test_createdataobject(self,circuits_app,cisco_deviceid,cisco_deviceversion,cisco_eventtime,cisco_alerttime,cisco_eventdescription,cisco_dsturl,cisco_dstdomain,expected):
+        args={"cisco_deviceid":cisco_deviceid,"cisco_deviceversion":cisco_deviceversion,"cisco_eventtime":cisco_eventtime,"cisco_alerttime":cisco_alerttime,"cisco_eventdescription":cisco_eventdescription,"cisco_dsturl":cisco_dsturl,"cisco_dstdomain":cisco_dstdomain}
         fn = FunctionComponent(None)
+
+        # Default values from app config, just need to be set for this test
         fn.options={"protocol_version":1,"provider_name":1}
         log = logging.getLogger(__name__)
         fn.log=log
-        expected = {'eventTime': '2018-02-11T16:36:48Z', 'alertTime': '2018-02-11T16:36:48Z', 'deviceId': '12', 'providerName': 1, 'protocolVersion': 1, 'cisco_eventdescription': 'test description', 'dstDomain': '/tt', 'dstUrl': '/tt', 'deviceVersion': '1'}
         results = fn.createdataobject(args)
         assert (expected == results)
 
     @pytest.mark.parametrize("fields,expected",
                              [(["protocol_version"],{"protocol_version": "1"}),(['provider_name'],{"provider_name":"me"})])
     # Test fields are correctly validated
-    def test_validatefields(self,fields,expected):
+    def test_validatefields_correct(self,fields,expected):
         results=validateFields(fields,expected)
         assert(results==None)
+
+    @pytest.mark.parametrize("fields,expected",
+                             [(["protocol_versio2n"], 'Required field is missing or empty: protocol_versio2n'),
+                              (['provider_1name'], 'Required field is missing or empty: provider_1name')])
+    # Test fields are correctly validated
+    def test_validatefields_incorrect(self, fields, expected):
+
+        with pytest.raises(ValueError) as e:
+                validateFields(fields, '')
+                assert (e.value.message == expected)
 
     @pytest.mark.parametrize("time,expected",[(1525075238,'2018-04-30T08:00:38Z'),(1518367008,'2018-02-11T16:36:48Z')])
     # Test for correct time format
