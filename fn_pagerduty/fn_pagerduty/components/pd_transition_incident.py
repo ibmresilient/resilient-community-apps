@@ -43,6 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
             resp = update_incident(self.log, self.options, incident_id, status, priority, resolution, self.callback)
+            yield StatusMessage("pagerduty incident updated")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(resp)
