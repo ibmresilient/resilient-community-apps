@@ -86,6 +86,7 @@ class SplunkClient(object):
         # Create the job
         query_args = {"search_mode": "normal",
                       "enable_lookups": True}
+
         if max_results:
             query_args["max_count"] = max_results
 
@@ -126,9 +127,9 @@ class SplunkClient(object):
     #end write_results
 
     @staticmethod
-    def get_results(job):
+    def get_results(job, limit):
         """Return a collection of results"""
-        reader = results.ResultsReader(job.results())
+        reader = results.ResultsReader(job.results(count=limit))
         return {"results": [row for row in reader]}
     #end get_results
 
