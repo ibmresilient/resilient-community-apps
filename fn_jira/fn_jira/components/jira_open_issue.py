@@ -89,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             'issuetype': self.get_textarea_param(kwargs['jira_issuetype']),
             'fields': {
                 'summary': self.get_textarea_param(kwargs['jira_summary']),
-                'description': "{}\n{}".format(url, clean_html(kwargs.get('jira_description', ''))),
+                'description': u"{}\n{}".format(url, clean_html(kwargs.get('jira_description', ''))),
                 'priority': { 'id': kwargs['jira_priority'] }
             }
         }

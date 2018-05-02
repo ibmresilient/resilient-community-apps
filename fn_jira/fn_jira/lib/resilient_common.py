@@ -1,8 +1,12 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-import html
 import html2text
 import re
 from six import string_types
+try:
+    import HTMLParser as htmlparser
+except:
+    import html.parser as htmlparser
+
 
 INCIDENT_FRAGMENT = '#incidents'
 
@@ -40,7 +44,7 @@ def clean_html(htmlFragment):
 def unescape(data):
     """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
     try:
-        return html.unescape(data)
+        return htmlparser.unescape(data)
     except:
         return data
 
