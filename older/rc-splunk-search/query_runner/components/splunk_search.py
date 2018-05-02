@@ -117,14 +117,18 @@ def _wait_for_query_to_complete(job, splunk_client, timeout, polling_interval):
         raise SearchFailure(job.name, job["dispatchState"]+ u", " + unicode(job["messages"]))
 # end _wait_for_query_to_complete
 
-def _get_query_results(job, splunk_client):
+
+def _get_query_results(job, splunk_client, limit):
     """ Get results from a complete Splunk query """
-    response = splunk_client.get_results(job)
+    # Get the results and display them
+    response = splunk_client.get_results(job, limit)
+
     # Replace "null" with ""
     if response:
         response = remove_nulls(response)
     return response
 # end _get_query_results
+
 
 def remove_nulls(d):
     """ recursively replace 'null' with '' in dictionary """
@@ -144,6 +148,7 @@ def remove_nulls(d):
             v = u""
         new[k] = v
     return new
+
 
 def run_search(options, query_definition, event_message):
     """ run Splunk query and get results """
@@ -167,8 +172,10 @@ def run_search(options, query_definition, event_message):
                           splunk_user, splunk_pass)
 
     kwargs = {}
+    limit = 0
     if query_definition.limit:
         kwargs["max_results"] = query_definition.limit
+        limit = query_definition.limit
     if job_ttl:
         kwargs["job_ttl"] = job_ttl
     job = client.search(query_definition.query, **kwargs)
@@ -181,7 +188,7 @@ def run_search(options, query_definition, event_message):
     _wait_for_query_to_complete(job, client, timeout, polling_interval)
 
     # Query Execution Finished, Get Results
-    response = _get_query_results(job, client)
+    response = _get_query_results(job, client, limit)
     if not response:
         LOG.warn("No data returned from query")
         return "Query returned no data"
