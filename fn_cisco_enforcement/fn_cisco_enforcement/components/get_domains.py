@@ -7,7 +7,7 @@ import logging
 import requests
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_enforcement.lib.resilient_common import validateFields, readableDateTime
+from fn_cisco_enforcement.lib.resilient_common import validate_fields, readable_datetime
 
 
 HEADERS = {'content-type': 'application/json'}
@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
         self._init()
 
     def _init(self):
-        validateFields(['api_token'], self.options)
+        validate_fields(['api_token'], self.options)
 
         """get the api token for cisco access"""
         self.apikey = self.options.get('api_token')
@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             if resultlist:
                 yield StatusMessage("Get Domains was successful")
                 for result in resultlist:
-                    result['lastSeenAt_datetime'] = readableDateTime(result['lastSeenAt'], milliseconds=False)
+                    result['lastSeenAt_datetime'] = readable_datetime(result['lastSeenAt'], milliseconds=False)
 
             # add a field to allow the lastSeenAt field to be readable
             results = {

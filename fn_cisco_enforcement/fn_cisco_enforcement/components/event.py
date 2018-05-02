@@ -6,7 +6,7 @@ import logging
 import re
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_enforcement.lib.resilient_common import validateFields, readableDateTime
+from fn_cisco_enforcement.lib.resilient_common import validate_fields, readable_datetime
 
 try:
     from urlparse import urlparse
@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
         self._init()
 
     def _init(self):
-        validateFields(['api_token'], self.options)
+        validate_fields(['api_token'], self.options)
 
         """get the api token for cisco access"""
         self.apikey = self.options.get('api_token')
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
     # Creates the data object to send
     def createdataobject(self, kwargs):
 
-        validateFields(['protocol_version', 'provider_name'], self.options)
+        validate_fields(['protocol_version', 'provider_name'], self.options)
 
         # Get the function parameters:
         protocolversion = self.options.get('protocol_version')
@@ -84,14 +84,14 @@ class FunctionComponent(ResilientComponent):
         else:
             raise ValueError('Please set protocol_version and provider_name in the app.config under [fn_cisco_enforcement]')
 
-        validateFields(['cisco_deviceid', 'cisco_deviceversion', 'cisco_eventtime', 'cisco_alerttime', 'cisco_dstdomain'], kwargs)
+        validate_fields(['cisco_deviceid', 'cisco_deviceversion', 'cisco_eventtime', 'cisco_alerttime', 'cisco_dstdomain'], kwargs)
 
         # Convert timestamps from miliseconds to seconds
         cisco_deviceid = kwargs.get("cisco_deviceid")  # text
         cisco_deviceversion = kwargs.get("cisco_deviceversion")  # text
 
-        cisco_eventtime = readableDateTime(kwargs.get("cisco_eventtime")) # datetimepicker - resilient is in milliseconds
-        cisco_alerttime = readableDateTime(kwargs.get("cisco_eventtime")) # datetimepicker
+        cisco_eventtime = readable_datetime(kwargs.get("cisco_eventtime")) # datetimepicker - resilient is in milliseconds
+        cisco_alerttime = readable_datetime(kwargs.get("cisco_alerttime")) # datetimepicker
 
         domain = kwargs.get("cisco_dstdomain")
         cisco_dsturl, cisco_dstdomain = self._parseUrl(domain)     # split url and domain
@@ -151,23 +151,23 @@ class FunctionComponent(ResilientComponent):
     # Adds the non mandatory parameters to the data object
     def addothers(self, data, cisco_dstip, cisco_eventseverity, cisco_eventtype, cisco_eventdescription, cisco_eventhash,
                   cisco_filename, cisco_filehash, cisco_externalurl, cisco_src):
-        if cisco_dstip != None:
+        if cisco_dstip is not None:
             data['cisco_dstip'] = cisco_dstip
-        if cisco_eventseverity != None:
+        if cisco_eventseverity is not None:
             data['cisco_eventseverity'] = cisco_eventseverity
-        if cisco_eventtype != None:
+        if cisco_eventtype is not None:
             data['cisco_eventtype'] = cisco_eventtype
-        if cisco_eventdescription != None:
+        if cisco_eventdescription is not None:
             data['cisco_eventdescription'] = cisco_eventdescription
-        if cisco_eventhash != None:
+        if cisco_eventhash is not None:
             data['cisco_eventhash'] = cisco_eventhash
-        if cisco_filename != None:
+        if cisco_filename is not None:
             data['cisco_filename'] = cisco_filename
-        if cisco_filehash != None:
+        if cisco_filehash is not None:
             data['cisco_filehash'] = cisco_filehash
-        if cisco_externalurl != None:
+        if cisco_externalurl is not None:
             data['cisco_externalurl'] = cisco_externalurl
-        if cisco_src != None:
+        if cisco_src is not None:
             data['cisco_src'] = cisco_src
 
         return data

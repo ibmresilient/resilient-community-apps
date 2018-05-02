@@ -1,7 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import datetime
 
-def validateFields(fieldList, kwargs):
+def validate_fields(fieldList, kwargs):
     """
     ensure required fields are present. Throw ValueError if not
     :param fieldList:
@@ -12,7 +12,7 @@ def validateFields(fieldList, kwargs):
         if field not in kwargs or kwargs.get(field) == '':
             raise ValueError('Required field is missing or empty: '+field)
 
-def readableDateTime(timestamp, milliseconds=True):
+def readable_datetime(timestamp, milliseconds=True):
     if milliseconds:
         ts = timestamp/1000
     else:

@@ -5,7 +5,7 @@
 import logging
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cisco_enforcement.lib.resilient_common import validateFields
+from fn_cisco_enforcement.lib.resilient_common import validate_fields
 
 HEADERS = {'content-type': 'application/json'}
 # Deletes a domain using the Cisco api. The apikey is refernced in the app.config under [fn_cisco_enforcement]
@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
         self._init()
 
     def _init(self):
-        validateFields(['api_token'], self.options)
+        validate_fields(['api_token'], self.options)
 
         """get the api token for cisco access"""
         self.apikey = self.options.get('api_token')
@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
     def _delete_domain_function(self, event, *args, **kwargs):
         """Function: This is a function implementation that uses the Cisco API to delete a domain from the shared customer’s domain list."""
         try:
-            validateFields(['cisco_domain'], kwargs)
+            validate_fields(['cisco_domain'], kwargs)
 
             # Get the function parameters:
             cisco_domain = kwargs.get("cisco_domain")  # text

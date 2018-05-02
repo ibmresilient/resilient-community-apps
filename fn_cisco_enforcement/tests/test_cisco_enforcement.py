@@ -62,15 +62,15 @@ class TestEvent:
 
     @pytest.mark.parametrize("time,expected",[(1525075238,'2018-04-30T08:00:38Z'),(1518367008,'2018-02-11T16:36:48Z')])
     # Test for correct time format
-    def test_readabledatetime_seconds(self,time,expected):
-        results = readableDateTime(time, False)
+    def test_readable_datetime_seconds(self,time,expected):
+        results = readable_datetime(time, False)
         assert (results == expected)
 
     @pytest.mark.parametrize("time,expected",
                              [(1525075238, '2018-04-30T08:00:39Z'), (1518367008, '2018-02-11T16:36:49Z')])
     # Test for incorrect time format
-    def test_readabledatetime_miliseconds(self,time,expected):
-        results = readableDateTime(1525075238, True)
+    def test_readable_datetime_miliseconds(self,time,expected):
+        results = readable_datetime(1525075238, True)
         assert (results != expected)
 
 
