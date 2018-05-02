@@ -10,6 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_slack]
-#setting=xxx
-#"""
+api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
+# When as_user=False, username represents the submission author
+username=Resilient"""
+
     return config_data
