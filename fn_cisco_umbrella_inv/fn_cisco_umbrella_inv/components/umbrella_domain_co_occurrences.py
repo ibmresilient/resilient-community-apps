@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -37,7 +37,9 @@ class FunctionComponent(ResilientComponent):
     The Investigate Query will executs a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        'cooccurrences': { u'found': True,
+        {'domain_name': 'googlevideo.com',
+         'query_execution_time': '2018-05-02 16:03:15',
+         'cooccurrences': { u'found': True,
                             u'domain_name': u'googlevideo.com'
                             u'pfs2': [[u'gowatchfreemovies.to', 0.14300200812663327],
                             [u'www.mc-skv.com', 0.12482579576302438],
@@ -70,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("umbinv_domain: %s", umbinv_domain)
 
-            if umbinv_domain is None:
+            if is_none(umbinv_domain):
                 raise ValueError("Required parameter 'umbinv_domain' not set")
 
             self._params = {"domain": umbinv_domain.strip()}

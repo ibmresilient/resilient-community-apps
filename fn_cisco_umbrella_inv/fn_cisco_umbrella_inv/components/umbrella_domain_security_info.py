@@ -15,23 +15,26 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_dns_rr_hist' of
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        domain
+        umbinv_domain
 
     An example of a set of query parameter might look like the following:
 
-            domain = "example.com"
+            umbinv_domain = "example.com"
 
     The Investigate Query will executs a REST call agaist the Cisco Umbrell Investigate server and returns a result in
     JSON format similar to the following.Note: The Function adds an extra "domain_name" field in the returned result to
     aid post-processing.
 
+        {
+            'domain_name': 'domain.com',
+            'query_execution_time': '2018-04-27 11:37:38',
             'security_info':{
               u'domain_name':u'example.com',
               u'found':True,
@@ -76,7 +79,7 @@ class FunctionComponent(ResilientComponent):
               u'tld_geodiversity':[
 
               ]
-           }
+        }
 
     """
     def __init__(self, opts):
@@ -100,7 +103,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("umbinv_domain: %s", umbinv_domain)
 
-            if umbinv_domain is None:
+            if is_none(umbinv_domain):
                 raise ValueError("Required parameter 'umbinv_domain' not set")
 
             self._params = {"domain": umbinv_domain.strip()}

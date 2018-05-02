@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -37,6 +37,7 @@ class FunctionComponent(ResilientComponent):
     Function adds an extra "domains" field in the returned result to aid post-processing.
 
          {'domains': [u'amazon.com'],
+          'query_execution_time': '2018-04-27 11:37:38',
           'statuses': {u'amazon.com': {u'status': 1,
                                        u'content_categories': [u'Ecommerce/Shopping'],
                                        u'security_categories': []
@@ -48,7 +49,8 @@ class FunctionComponent(ResilientComponent):
     mapped to strings. Note: The Function adds extra "min_id" and "max_id" field in the returned result to aid
     post-processing.
 
-        {"min_id": 0,
+        {"query_execution_time": '2018-04-27 11:37:38',
+         "min_id": 0,
          "max_id": 150,
          "categories": {"133": "Safe for Kids",
                         "132": "SaaS and B2B",
@@ -84,7 +86,7 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_showlabels: %s", umbinv_showlabels)
             log.info("umbinv_status_endpoint: %s", umbinv_status_endpoint)
 
-            if umbinv_status_endpoint is None:
+            if is_none(umbinv_status_endpoint):
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
             self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
@@ -98,7 +100,7 @@ class FunctionComponent(ResilientComponent):
             validate_params(self)
             process_params(self)
 
-            if (umbinv_status_endpoint == "categorization") and (not hasattr(self, '_domain') and not hasattr(self, '_domains')):
+            if umbinv_status_endpoint == "categorization" and not hasattr(self, '_domains'):
                 raise ValueError("Parameter 'umbinv_domains' was not processed correctly")
 
             api_token = self.options.get("api_token")
@@ -120,8 +122,6 @@ class FunctionComponent(ResilientComponent):
                 dom_list = []
                 if hasattr(self, '_domains'):
                     rtn = rinv.categorization(self._domains, self._params["showlabels"])
-                elif hasattr(self, '_domain'):
-                    rtn = rinv.categorization(self._domain, self._params["showlabels"])
                 for d in rtn:
                     dom_list.append(d)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')

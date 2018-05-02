@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -71,6 +71,9 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
             log.info("umbinv_domain: %s", umbinv_domain)
+
+            if is_none(umbinv_domain):
+                raise ValueError("Required parameter 'umbinv_domain' not set")
 
             yield StatusMessage("Starting...")
             init_env(self)

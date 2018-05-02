@@ -16,7 +16,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -28,13 +28,15 @@ class FunctionComponent(ResilientComponent):
 
     An example of a set of query parameter might look like the following:
 
-            resource = "1.2.3.4" or resource = "example.com"
-            dns_type = "A"
+            umbinv_resource = "1.2.3.4" or resource = "example.com"
+            umbinv_dns_type = "A"
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        {"dns_rr_history": {  "rrs": [  {
+        {'resource_name': 'cosmos.furnipict.com',
+         'query_execution_time': '2018-05-02 16:03:15',
+         "dns_rr_history": {  "rrs": [  {
                                   "rr": "www.example.com.",
                                   "ttl": 86400,
                                   "class": "IN",
@@ -82,14 +84,14 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_resource: %s", umbinv_resource)
             log.info("umbinv_dns_type: %s", umbinv_dns_type)
 
-            if umbinv_resource is None:
+            if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            if umbinv_resource_type is None:
+            if is_none(umbinv_resource_type):
                 raise ValueError("Required parameter 'umbinv_resource_type' not set")
 
             self._params = {"resource": umbinv_resource.strip(), "dns_type": umbinv_dns_type,
-                            "umbinv_resource_type": umbinv_resource_type}
+                            "resource_type": umbinv_resource_type}
 
             yield StatusMessage("Starting...")
 

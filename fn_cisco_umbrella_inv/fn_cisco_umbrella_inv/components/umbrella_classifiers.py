@@ -14,7 +14,7 @@ from datetime import datetime, time
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_classifiers' of
@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for  Classifiers."""
         try:
             # Get the function parameters:
-            umbinv_domain = kwargs.get("umbinv_domain")  # text
+            umbinv_domain = kwargs.get("umbinv_domain") # text
             umbinv_classifiers_endpoint = self.get_select_param(kwargs.get("umbinv_classifiers_endpoint"))  # select, values: "classifiers", "info"
 
             log = logging.getLogger(__name__)
@@ -75,10 +75,11 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_domain: %s", umbinv_domain)
             log.info("umbinv_classifiers_endpoint: %s", umbinv_classifiers_endpoint)
 
-            if umbinv_domain is None:
+
+            if is_none(umbinv_domain):
                 raise ValueError("Required parameter 'umbinv_domain' not set.")
 
-            if umbinv_classifiers_endpoint is None:
+            if is_none(umbinv_classifiers_endpoint):
                 raise ValueError("Required parameter 'umbinv_classifiers_endpoint' not set.")
 
             yield StatusMessage("Starting...")

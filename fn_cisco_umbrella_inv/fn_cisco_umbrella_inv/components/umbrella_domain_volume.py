@@ -15,7 +15,8 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, \
+    is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_domain_volume' of package fn_cisco_umbrella_inv.
@@ -80,10 +81,10 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_stop_epoch: %s", umbinv_stop_epoch)
             log.info("umbinv_stop_relative: %s", umbinv_stop_relative)
 
-            if umbinv_domain is None:
+            if is_none(umbinv_domain):
                 raise ValueError("Required parameter 'umbinv_domain' not set")
 
-            if umbinv_match is None:
+            if is_none(umbinv_match):
                 raise ValueError("Required parameter 'umbinv_match' not set")
 
             yield StatusMessage("Starting...")

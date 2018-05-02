@@ -7,26 +7,27 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_pattern_search' of
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup and takes the following parameters:
-            regex, [start_epoch or start_relative], limit, include_category
+            umbinv_regex, [umbinv_start_epoch or umbinv_start_relative], umbinv_limit, umbinv_include_category
 
     An example of a set of query parameter might look like the following:
 
-            regex = "exa\[a-z\]ple.c"
-            start_relative = "-30days" or start_epoch = 1525517214000
-            limit = 30
-            include_category = True
+            umbinv_regex = "exa\[a-z\]ple.c"
+            umbinv_start_relative = "-30days" or start_epoch = 1525517214000
+            umbinv_limit = 30
+            umbinv_include_category = True
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        {"search_matches": {  "expression": "exa[a-z]ple.com",
+        {"query_execution_time": '2018-05-02 16:03:15'
+         "search_matches": {  "expression": "exa[a-z]ple.com",
                               "totalResults": 1,
                               "moreDataAvailable": false,
                               "limit": 30,
@@ -72,7 +73,8 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_start_relative: %s", umbinv_start_relative)
             log.info("umbinv_limit: %s", umbinv_limit)
             log.info("umbinv_include_category: %s", umbinv_include_category)
-            if umbinv_regex is None:
+
+            if is_none(umbinv_regex):
                 raise ValueError("Required parameter 'regex' not set")
 
             self._params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,"start_relative": umbinv_start_relative,

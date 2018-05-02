@@ -14,7 +14,7 @@ from datetime import datetime, time
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_dns_rr_hist' of
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
 
             log.info("resource: %s", umbinv_resource)
 
-            if umbinv_resource is None:
+            if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
             self._params = {"resource": umbinv_resource.strip()}

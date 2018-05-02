@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_ip_as_info' of
@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_ipaddr: %s", umbinv_ipaddr)
             log.info("umbinv_asn: %s", umbinv_asn)
 
-            if umbinv_ipaddr is None and umbinv_asn is None:
+            if is_none(umbinv_ipaddr) and is_none(umbinv_asn):
                 raise ValueError("One of parameters 'umbinv_ipaddr' or 'umbinv_asn' must be set")
 
             yield StatusMessage("Starting...")

@@ -15,7 +15,8 @@ from datetime import datetime, time
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, \
+    is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -118,10 +119,10 @@ class FunctionComponent(ResilientComponent):
             log.info("umbinv_limit: %s", umbinv_limit)
             log.info("umbinv_offset: %s", umbinv_offset)
 
-            if umbinv_hash is None:
+            if is_none(umbinv_hash):
                 raise ValueError("Required parameter 'umbinv_hash' not set")
 
-            if umbinv_sample_endpoint is None:
+            if is_none(umbinv_sample_endpoint):
                 raise ValueError("Required parameter 'umbinv_sample_endpoint' not set")
 
             yield StatusMessage("Starting...")

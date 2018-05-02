@@ -15,31 +15,25 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_ip_latest_malicious_domains' of
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        ipaddr
+        umbinv_ipaddr
 
     An example of a set of query parameter might look like the following:
 
-            ipaddr = "218.23.28.135"
+            umbinv_ipaddr = "218.23.28.135"
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        {"latest_malicious_domains": [{
-                                        "id": 22842894,
-                                        "name": "www.cxhyly.com"
-                                      },
-                                      {
-                                        "id": 22958747,
-                                        "name": "cxhyly.com"
-                                      }
-                                    ]
+        {'ip_address': '104.27.163.228',
+         'query_execution_time': '2018-05-02 16:22:14',
+        'latest_malicious_domains': [u'textspeier.de']
         }
 
     """
@@ -64,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("umbinv_ipaddr: %s", umbinv_ipaddr)
 
-            if umbinv_ipaddr is None:
+            if is_none(umbinv_ipaddr):
                 raise ValueError("Required parameter 'umbinv_ipaddr' not set")
 
             self._params = {"ipaddr": umbinv_ipaddr.strip()}

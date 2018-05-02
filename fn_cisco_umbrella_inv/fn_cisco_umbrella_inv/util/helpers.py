@@ -241,3 +241,16 @@ def omit_params(params, omit_list):
         raise ValueError("omit_list argument must be a string or list")
     params = {k: v for (k, v) in params.iteritems() if not k in omit_list}
     return params
+
+def is_none(param):
+    """"Test if a paramter is None value or string 'None'.
+
+    :param param: Parameter to test
+    :return: Boolen value
+
+    """
+
+    if param is None or (type(param) == str and param.lower() == 'none'):
+        return True
+    else:
+        return False
