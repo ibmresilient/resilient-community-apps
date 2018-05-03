@@ -20,15 +20,12 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_odbc_query
 
     The Function executes an ODBC query and takes the following parameters:
-        sql_select, sql_format_param, sql_table, sql_field_name, sql_param
+        sql_select, sql_field_name, sql_param
 
     An example of a set of query parameter might look like the following:
 
-        sql_select: "SELECT %format_param% FROM %table% WHERE %field_name% = %param%"
-        sql_format_param: "incident_id, name, description"
-        sql_table: "incidents"
-        sql_field_name: "incident_id"
-        sql_param: artifact.value # Assigned value '1' during run.
+        sql_select: "SELECT incident_id, name, description FROM incidents WHERE incident_id = {sql_condition_value}"
+        sql_condition_value: artifact.value # Assigned value '1' during run.
 
     The ODBC query will return a result in JSON format with an entry consisting of a dn and a set of
     attributes for each result.
@@ -58,29 +55,22 @@ class FunctionComponent(ResilientComponent):
     @function("fn_odbc_query")
     def _fn_odbc_query_function(self, event, *args, **kwargs):
         """Resilient Function: A function that makes ODBC queries.
-Inputs:
-sql_select: a query with parameters
-sql_format_param: comma separated columns for return
-sql_table: sql datatable name
-sql_field_name: condition
-sql_param: condition value"""
+
+        Inputs:
+        sql_select: a query with parameters
+        sql_condition_value: condition value
+
+        """
 
         try:
             # Get the function parameters:
-            sql_select = self.get_select_param(kwargs.get("sql_select"))  # select, values: "SELECT %format_param% FROM %table% WHERE %field_name% = %param%"
-            sql_format_param = kwargs.get("sql_format_param")  # text
-            sql_table = kwargs.get("sql_table")  # text
-            sql_field_name = kwargs.get("sql_field_name")  # text
-            sql_param = kwargs.get("sql_param")  # text
+            sql_select = self.get_select_param(kwargs.get("sql_select"))  # select, values: "SELECT incident_id, name, description FROM test.incidents WHERE incident_id = ?"
+            sql_condition_value = kwargs.get("sql_condition_value")  # text
 
             LOG.info("sql_select: %s", sql_select)
-            LOG.info("sql_format_param: %s", sql_format_param)
-            LOG.info("sql_table: %s", sql_table)
-            LOG.info("sql_field_name: %s", sql_field_name)
-            LOG.info("sql_param: %s", sql_param)
+            LOG.info("sql_condition_value: %s", sql_condition_value)
 
-            self.search_params = {'sql_select': sql_select, 'sql_format_param': sql_format_param,
-                                  'sql_table': sql_table, 'sql_field_name': sql_field_name}
+            self.search_params = {'sql_select': sql_select, 'sql_condition_value': sql_condition_value}
 
             yield StatusMessage("starting...")
             # TODO validate data
@@ -142,19 +132,19 @@ sql_param: condition value"""
         # FIXME hardcoded, set driver based on the sql_db_type
         sql_database_driver = "MariaDB ODBC 3.0 Driver"
 
-        """ FIXME ODBC connection pooling is turned on by default.
-            connections to the SQL server are not closed by default. 
-            Some database drivers do not close connections when close() is called in order to save round-trips to the server.
-            To close your connection when you call close() you should set pooling to False
-        """
         pyodbc.pooling = False
 
-        try:
-            connection_string = "DRIVER={{{}}};SERVER={};PORT={};DATABASE={};UID={};PWD={};".format(sql_database_driver,
-                                                                                                     sql_server_url, sql_port,
-                                                                                                     "test", sql_uid, sql_pwd)
+        """ FIXME ODBC connection pooling is turned on by default.
+        Connections to the SQL server are not closed by default. 
+        Some database drivers do not close connections when close() is called in order to save round-trips to the server.
+        To close your connection when you call close() you should set pooling to False.
+        """
 
-            # connection_string = "DRIVER={MariaDB ODBC 3.0 Driver}; SERVER=127.0.0.1; PORT=3306; DATABASE=test; UID=root; PWD=password;"
+        try:
+            connection_string = "DRIVER={{{}}};SERVER={};PORT={};UID={};PWD={};".format(sql_database_driver,
+                                                                                            sql_server_url, sql_port,
+                                                                                            sql_uid, sql_pwd)
+
 
             self.db_connection = pyodbc.connect(connection_string)
             if self.db_connection is None:
@@ -190,10 +180,15 @@ sql_param: condition value"""
         fetch functions - fetchone(), fetchall(), fetchmany(). If there are no rows, fetchone() will return None,
         whereas fetchall() and fetchmany() will both return empty lists.
 
+        ODBC supports parameters using a question mark as a place holder in the SQL.
+        You provide the values for the question marks by passing them after the SQL
+
         """
         try:
-            hardcoded_sql_statement = "SELECT incident_id, name, description FROM incidents"
-            self.db_cursor.execute(hardcoded_sql_statement)
+            sql_select = self.search_params.get("sql_select")
+            sql_condition_value = self.search_params.get("sql_condition_value")
+
+            self.db_cursor.execute(sql_select, [sql_condition_value])
 
             rows = self.db_cursor.fetchall()
             for row in rows:
@@ -208,7 +203,7 @@ sql_param: condition value"""
 
         # Catch any additional errors not specifically checked for
         except Exception as e:
-            raise Exception("Could not execute SQL statement %s, Exception %s", hardcoded_sql_statement, e)
+            raise Exception("Could not execute SQL statement %s, Exception %s", sql_select, e)
 
     def close_connections(self):
         """"  Close connection to cursor, connection and delete the cursor """
