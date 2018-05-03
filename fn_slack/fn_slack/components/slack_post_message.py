@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""Function implementation to Slack.
+This function creates a Slack message based on a Resilient incident and it's notes. Threaded replies are possible based on a retained Slack thread_id.
+Many of the features of posting a Slack message are under customer control including:
+- threaded replies
+- preserving embedded links
+- Slack markdown capability
+- posting messages displaying authorship
+"""
 
-import datetime
 import logging
 import simplejson as json
-
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, validateFields
+from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp, validate_fields
 from slackclient import SlackClient
 from six import string_types
 
@@ -34,7 +39,7 @@ class FunctionComponent(ResilientComponent):
 
     def _init(self):
         # validate app.config
-        validateFields(['api_token', 'username'], self.options)
+        validate_fields(['api_token', 'username'], self.options)
 
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
@@ -54,7 +59,7 @@ class FunctionComponent(ResilientComponent):
         """
         try:
             # validate input
-            validateFields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+            validate_fields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
 
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
@@ -132,13 +137,13 @@ class FunctionComponent(ResilientComponent):
                 payload += '{}: {}'.format(key, valDict['data'])
 
             elif valDict['type'] == 'incident' and valDict['data']:
-                payload += '{}: {}'.format(key, self._buildIncident(valDict['data']))
+                payload += '{}: {}'.format(key, build_incident_url(build_resilient_url(self.resoptions['host'], self.resoptions['port']), valDict['data']))
 
             elif valDict['type'] == 'richtext' and valDict['data']:
                 payload += '{}: {}'.format(key, clean_html(valDict['data']))
 
             elif valDict['type'] == 'datetime' and valDict['data'] and valDict['data'] != 0:
-                payload += '{}: {}'.format(key, self._buildTimeStamp(valDict['data']))
+                payload += '{}: {}'.format(key, build_timestamp(valDict['data']))
 
             elif valDict['type'] == 'boolean' and valDict['data']:
                 payload += '{}: {}'.format(key, self._buildBoolean(valDict['data'], true_value='Yes', false_value='No'))
@@ -149,22 +154,20 @@ class FunctionComponent(ResilientComponent):
         return payload
 
     # Builders for slack presentation
-    def _buildIncident(self, id):
-        return build_incident_url(build_resilient_url(self.resoptions['host'], self.resoptions['port']), id)
-
-    def _buildTimeStamp(self, ts):
-        return datetime.datetime.utcfromtimestamp(ts/1000).strftime('%Y-%m-%dT%H:%M:%SZ')
 
     def _buildBoolean(self, value, true_value="True", false_value="False"):
+        """
+         convert internal boolean to displayable format
+        :param value: boolean
+        :param true_value: value to use when boolean=True
+        :param false_value: value to use when boolean=False
+        :return: payload string
+        """
         if isinstance(value, string_types):
             return true_value if value.lower() in ('1', 'yes', 'true') else false_value
         if isinstance(value, int):
             return true_value if value == 1 else false_value
 
         return false_value
-
-    def _buildRichText(self, data):
-        """ first restore unicode characters and then convert html to text """
-        return html2text.html2text(html.unescape(data))
 
 

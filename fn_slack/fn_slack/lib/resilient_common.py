@@ -1,9 +1,13 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import collections
-import html
+import datetime
 import html2text
 import re
 from six import string_types
+try:
+    import HTMLParser as htmlparser
+except:
+    import html.parser as htmlparser
 
 INCIDENT_FRAGMENT = '#incidents'
 
@@ -42,12 +46,12 @@ def clean_html(htmlFragment):
 def unescape(data):
     """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
     try:
-        return html.unescape(data)
+        return htmlparser.unescape(data)
     except:
         return data
 
 
-def validateFields(fieldList, kwargs):
+def validate_fields(fieldList, kwargs):
     """
     ensure required fields are present. Throw ValueError if not
     :param fieldList:
@@ -58,3 +62,6 @@ def validateFields(fieldList, kwargs):
         if field not in kwargs or kwargs.get(field) == '':
             raise ValueError('Required field is missing or empty: '+field)
 
+def build_timestamp(ts, format="%Y-%m-%dT%H:%M:%SZ"):
+    """ create a timestamp. ts is in milliseconds """
+    return datetime.datetime.utcfromtimestamp(ts/1000).strftime(format)
