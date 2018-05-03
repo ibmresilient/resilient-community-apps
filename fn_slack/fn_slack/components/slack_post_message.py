@@ -12,10 +12,8 @@ Many of the features of posting a Slack message are under customer control inclu
 import logging
 import simplejson as json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp, validate_fields
-from slackclient import SlackClient
-from six import string_types
+from .slack_common import slack_post_message
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_post_message"""
@@ -60,6 +58,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # validate input
             validate_fields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+            validate_fields(['api_token', 'username'], self.options)
 
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
@@ -83,32 +82,12 @@ class FunctionComponent(ResilientComponent):
             self.log.debug("slack_as_user: %s", slack_as_user)
             self.log.debug("slack_user_id: %s", slack_user_id)
 
-            data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
-
             # configuration specific slack parameters
             api_token = self.options['api_token']
             def_username = self.options['username']
 
-            sl = SlackClient(api_token)
-
-            payload = self._build_payload(data)
-            self.log.debug(payload)
-
-            # start processing
-            yield StatusMessage("starting...")
-            results = sl.api_call(
-                "chat.postMessage",
-                channel=slack_channel,
-                text=payload,
-                as_user=slack_as_user,
-                username=slack_user_id if slack_user_id else def_username,
-                reply_broadcast=slack_reply_broadcast,
-                parse=slack_parse,
-                link_names=slack_link_names,
-                mrkdown=slack_markdown,
-                thread_ts=slack_thread_id
-            )
-            self.log.debug(results)
+            results = slack_post_message(self.log, self.resoptions, slack_details, slack_channel, slack_as_user, slack_user_id, slack_reply_broadcast,
+                               slack_parse, slack_link_names, slack_markdown, slack_thread_id, api_token, def_username)
 
             if 'ok' in results.keys() and results['ok']:
                 yield StatusMessage("Message added to slack")
@@ -120,54 +99,3 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             self.log.error(err)
             yield FunctionError()
-
-    def _build_payload(self, dataDict):
-        """
-        build the payload string based on the different types of data created
-        :param dataDict:
-        :return: payload string
-        """
-        payload = ""
-
-        for key, valDict in dataDict.items():
-            if len(payload) > 0:
-                payload += "\n"
-
-            if valDict['type'] == 'string' and valDict['data']:
-                payload += '{}: {}'.format(key, valDict['data'])
-
-            elif valDict['type'] == 'incident' and valDict['data']:
-                payload += '{}: {}'.format(key, build_incident_url(build_resilient_url(self.resoptions['host'], self.resoptions['port']), valDict['data']))
-
-            elif valDict['type'] == 'richtext' and valDict['data']:
-                payload += '{}: {}'.format(key, clean_html(valDict['data']))
-
-            elif valDict['type'] == 'datetime' and valDict['data'] and valDict['data'] != 0:
-                payload += '{}: {}'.format(key, build_timestamp(valDict['data']))
-
-            elif valDict['type'] == 'boolean' and valDict['data']:
-                payload += '{}: {}'.format(key, self._buildBoolean(valDict['data'], true_value='Yes', false_value='No'))
-
-            elif valDict['data']:
-                raise IntegrationError("Invalid type: "+ valDict['type'])
-
-        return payload
-
-    # Builders for slack presentation
-
-    def _buildBoolean(self, value, true_value="True", false_value="False"):
-        """
-         convert internal boolean to displayable format
-        :param value: boolean
-        :param true_value: value to use when boolean=True
-        :param false_value: value to use when boolean=False
-        :return: payload string
-        """
-        if isinstance(value, string_types):
-            return true_value if value.lower() in ('1', 'yes', 'true') else false_value
-        if isinstance(value, int):
-            return true_value if value == 1 else false_value
-
-        return false_value
-
-
