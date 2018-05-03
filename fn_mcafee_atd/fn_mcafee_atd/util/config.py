@@ -20,12 +20,14 @@ timeout=30
 polling_interval=60
 
 xMode=
-numVmProfiles=
 overrideOS=
-vmProfileList=
+
+# Analyzer pro le ID. The pro le ID number can be found in the UI Policy/Analyzer Pro le page.
+vm_profile_list=
 
 # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'
 filePriority=add_to_q
-setting=xxx
+
+trust_cert=False
 """
     return config_data
