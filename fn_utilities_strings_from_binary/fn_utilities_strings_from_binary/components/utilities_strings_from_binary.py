@@ -6,8 +6,8 @@ import os
 import tempfile
 import json
 import logging
-import floss
-import mimetypes
+#import mimetypes
+#import floss
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -74,8 +74,9 @@ class FunctionComponent(ResilientComponent):
 
                     with tempfile.NamedTemporaryFile('w', 0, dir=file_path, delete=False) as temp_file_strings:
                         try:
-                            #listFloss = dir(floss)
+                            listFloss = dir(floss)
                             # Spawn a subprocess to call floss to strip strings from the file.
+                            yield StatusMessage("Calling floss.")
                             env = os.environ.copy()
                             p = subprocess.Popen(["floss", "-sq", temp_file_binary.name],
                                                  shell=False,
@@ -92,30 +93,30 @@ class FunctionComponent(ResilientComponent):
                                 # The resulting attachment is posted to Incident attachments for
                                 # both the incident attachments and artifact files. Is this correct?
                                 attachment_uri = "/incidents/{}/attachments".format(incident_id)
+                            attachment_filename = os.path.join(file_path, "attachment.dat")
                             new_attachment = client.post_attachment(attachment_uri,
                                                                     temp_file_strings.name,
-                                                                    filename="~/attachment.txt",
+                                                                    filename=attachment_filename,
                                                                     mimetype="text/plain")
+                            yield StatusMessage("New attachment posted.")
                             # Produce a FunctionResult with the new attachment as return value
                             if isinstance(new_attachment, list):
                                 new_attachment = new_attachment[0]
                             log.info(json.dumps(new_attachment))
 
 
-                        except Exception:
-                            log.info("Error: running Floss and creating attachment.")
+                        except Exception as err:
                             raise
                         finally:
                             # Remove temporary file of strings
                             os.unlink(temp_file_strings.name)
-                except Exception:
-                    log.info("Error: opening binary file")
+                except Exception as err:
                     raise
                 finally:
                     # Remove temporary binary file
                     os.unlink(temp_file_binary.name)
 
-        except Exception:
-            yield FunctionError("Error: in utilities_strings_from_binary")
+        except Exception as err:
+            yield FunctionError(err)
 
         yield FunctionResult(new_attachment)
