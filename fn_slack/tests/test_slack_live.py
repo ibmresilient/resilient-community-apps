@@ -7,7 +7,7 @@ import os
 import unittest
 import simplejson as json
 
-api_token = os.environ['TEST_RESILIENT_SLACK_API_TOKEN'] #"xoxp-344599510069-344361958115-344605636853-3532acc3892fa61f3fb84edd695cb99c"
+api_token = os.environ['TEST_RESILIENT_SLACK_API_TOKEN']
 def_username = "Resilient"
 slack_channel = "test-this-channel"
 
@@ -29,7 +29,7 @@ class TestSlack(unittest.TestCase):
         dataDict = self._buildDataDetails()
 
         payload = build_payload(dataDict, self.resoptions)
-        self.log.info(payload)
+        #self.log.info(payload)
 
         self.assertIsNotNone(payload)
         self.assertRegexpMatches(payload, 'Resilient URL')
@@ -53,17 +53,14 @@ class TestSlack(unittest.TestCase):
         results = slack_post_message(self.log, self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
                                      True, True, True, None, api_token, def_username)
 
-        print(results)
-        self.assertTrue(results['ok'])
+        self.assertTrue(results['ok'], results)
 
         # send the reply
         thread_id = results['ts']
-        print(thread_id)
         results = slack_post_message(self.log, self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
                                      True, True, True, thread_id, api_token, def_username)
 
-        print(results)
-        self.assertTrue(results['ok'])
+        self.assertTrue(results['ok'], results)
         self.assertEqual(thread_id, results['message']['thread_ts'])
 
     def _buildDataDetails(self):
