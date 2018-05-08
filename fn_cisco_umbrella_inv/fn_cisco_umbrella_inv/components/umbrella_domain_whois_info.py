@@ -120,8 +120,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"emails": umbinv_emails, "nameservers": umbinv_nameservers, "domain": umbinv_domain,
-                            "limit": umbinv_limit, "sort_field": umbinv_sortby, "offset": umbinv_offset}
+            self._params = {"emails": umbinv_emails.strip(), "nameservers": umbinv_nameservers.strip(),
+                            "domain": umbinv_domain.strip(), "limit": umbinv_limit, "sort_field": umbinv_sortby,
+                            "offset": umbinv_offset}
 
             validate_params(self)
             process_params(self)
@@ -146,13 +147,13 @@ class FunctionComponent(ResilientComponent):
                 results = {"domain_whois": json.loads(json.dumps(rtn)), "domain": self._domain,
                            "query_execution_time": query_execution_time}
             elif hasattr(self, '_emails'):
-                rtn = rinv.email_whois(self._emails, **omit_params(self._params, ["emails","nameservers","domains"]))
+                rtn = rinv.email_whois(self._emails, **omit_params(self._params, ["emails","nameservers","domain"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "emails" key to result to facilitate post-processing.
                 results = {"email_whois": json.loads(json.dumps(rtn)), "emails": self._emails,
                            "query_execution_time": query_execution_time}
             elif hasattr(self, '_nameservers'):
-                rtn = rinv.ns_whois(self._nameservers, **omit_params(self._params, ["emails","nameservers","domains"]))
+                rtn = rinv.ns_whois(self._nameservers, **omit_params(self._params, ["emails","nameservers","domain"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "nameservers" key to result to facilitate post-processing.
                 results = {"ns_whois": json.loads(json.dumps(rtn)), "nameservers": self._nameservers,

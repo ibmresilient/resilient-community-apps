@@ -7,7 +7,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_pattern_search' of
@@ -77,10 +77,12 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_regex):
                 raise ValueError("Required parameter 'regex' not set")
 
-            self._params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,"start_relative": umbinv_start_relative,
-                            "limit": umbinv_limit, "include_category": umbinv_include_category, }
-
             yield StatusMessage("Starting...")
+            init_env(self)
+
+            self._params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,
+                            "start_relative": umbinv_start_relative,
+                            "limit": umbinv_limit, "include_category": umbinv_include_category}
 
             validate_params(self)
             process_params(self)

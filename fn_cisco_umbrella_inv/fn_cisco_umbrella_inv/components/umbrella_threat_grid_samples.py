@@ -129,7 +129,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"resource": umbinv_resource, "resource_type": umbinv_resource_type,
+            self._params = {"resource": umbinv_resource.strip(), "resource_type": umbinv_resource_type,
                             "limit": umbinv_limit, "sortby": umbinv_sortby, "offset": umbinv_offset}
 
             validate_params(self)

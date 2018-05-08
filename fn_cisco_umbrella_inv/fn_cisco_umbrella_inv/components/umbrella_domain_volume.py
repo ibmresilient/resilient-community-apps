@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"domain": umbinv_domain, "start_epoch": umbinv_start_epoch, "match": str(umbinv_match),
+            self._params = {"domain": umbinv_domain.strip(), "start_epoch": umbinv_start_epoch, "match": str(umbinv_match),
                             "start_relative": umbinv_start_relative, "stop_epoch": umbinv_stop_epoch,
                             "stop_relative": umbinv_stop_relative }
 

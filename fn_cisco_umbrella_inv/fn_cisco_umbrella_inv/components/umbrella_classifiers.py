@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"domain": umbinv_domain, "classifiers_endpoint": umbinv_classifiers_endpoint}
+            self._params = {"domain": umbinv_domain.strip(), "classifiers_endpoint": umbinv_classifiers_endpoint}
 
             validate_params(self)
             process_params(self)

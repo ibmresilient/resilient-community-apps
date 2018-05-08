@@ -128,7 +128,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"hash": umbinv_hash, "sample_endpoint": umbinv_sample_endpoint,
+            self._params = {"hash": umbinv_hash.strip(), "sample_endpoint": umbinv_sample_endpoint,
                             "limit": umbinv_limit, "offset": umbinv_offset}
 
             validate_params(self)

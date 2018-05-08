@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -89,13 +89,18 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_status_endpoint):
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
-            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels, "status_endpoint": umbinv_status_endpoint}
+            yield StatusMessage("Starting...")
+            init_env(self)
+
+            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels,
+                            "status_endpoint": umbinv_status_endpoint}
+
+            # Reset 'domains' and 'showlabels' param if inmput paramater set.
             if umbinv_domains:
                 self._params.setdefault("domains", umbinv_domains.strip())
+
             if umbinv_showlabels:
                 self._params.setdefault('showlabels', None)
-
-            yield StatusMessage("Starting...")
 
             validate_params(self)
             process_params(self)
