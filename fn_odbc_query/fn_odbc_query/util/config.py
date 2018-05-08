@@ -17,6 +17,9 @@ sql_db_type = MariaDB
 sql_port=3306
 sql_uid=root
 sql_pwd=password
+# The timeout value, in seconds, for an individual SQL query. Use zero to disable.
+sql_connection_timeout = 60
+sql_number_of_records_returned = 10
     """
     return config_data
 
