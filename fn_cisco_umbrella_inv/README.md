@@ -32,12 +32,20 @@ Run with: `resilient-circuits run`.
 
 ## Supported Resilient Functions for Cisco Umbrella Investigate
 
-umbrella_domain_status_and_category
+umbrella_domain_volume
+umbrella_classifiers
+umbrella_domain_whois_info
+umbrella_ip_as_info
 umbrella_dns_rr_hist
 umbrella_ip_latest_malicious_domains
-umbrella_domain_co_occurrencesumbrella_pattern_search
+umbrella_domain_co_occurrences
+umbrella_pattern_search
+umbrella_domain_related_domains
+umbrella_threat_grid_sample
 umbrella_domain_security_info
+umbrella_threat_grid_samples
 umbrella_timeline
+umbrella_domain_status_and_category
 
 
 ## fn_cisco_umbrella_inv Example
