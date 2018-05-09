@@ -138,5 +138,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            logging.exception("Exception in Resilient Function.")
+            log.exception("Exception in Resilient Function.")
             yield FunctionError()

@@ -10,7 +10,7 @@ resilient_circuits version 30 or later
 investigate
 ```
 * Can be used in a Resilient workflow to populate/update a datatable.
-* For more info about Cisc o Umbrella Investigate, please visit https://docs.umbrella.com/developer/investigate-api/introduction-to-cisco-investigate/
+* For more info about Cisco Umbrella Investigate, please visit https://docs.umbrella.com/developer/investigate-api/introduction-to-cisco-investigate/
 * For more info about the python investigate module, please visit https://github.com/opendns/pyinvestigate/
 
 
