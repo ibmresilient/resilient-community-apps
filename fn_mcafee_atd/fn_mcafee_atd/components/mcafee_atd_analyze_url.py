@@ -3,9 +3,9 @@
 """Function implementation"""
 
 import logging
-import requests
 import time
-from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir
+from tempfile import TemporaryFile
+from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -71,39 +71,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_atd", {})
 
-    def _get_file(self, **kwargs):
-        url = ""
-        name_url = ""
-        name = ""
-        if kwargs.get("artifact_id") is not None:
-            url = "/incidents/{}/artifacts/{}/contents".format(kwargs["incident_id"], kwargs["artifact_id"])
-            name_url = "/incidents/{}/artifacts/{}".format(kwargs["incident_id"], kwargs["artifact_id"])
-            log.debug("Downloading artifact attachment")
-            name = str(self.resilient_client.get(name_url)["attachment"]["name"])
-        elif kwargs.get("task_id") is not None:
-            url = "/tasks/{}/attachments/{}/contents".format(kwargs["task_id"], kwargs["attachment_id"])
-            name_url = "/tasks/{}/attachments/{}".format(kwargs["task_id"], kwargs["attachment_id"])
-            log.debug("Downloading task attachment")
-            name = str(self.resilient_client.get(name_url)["name"])
-        elif kwargs.get("attachment_id") is not None:
-            url = "/incidents/{}/attachments/{}/contents".format(kwargs["incident_id"], kwargs["attachment_id"])
-            name_url = "/incidents/{}/attachments/{}".format(kwargs["incident_id"], kwargs["attachment_id"])
-            log.debug("Downloading incident attachment")
-            name = str(self.resilient_client.get(name_url)["name"])
-        else:
-            log.error("Inputs not set correctly, can not download file.")
-            raise ValueError("Inputs not set correctly")
-
-        f = self.resilient_client.get_content(url)
-        response = {
-            "file": f,
-            "file_name": name
-        }
-
-        return response
-
-    @function("mcafee_atd_analyze_file")
-    def _mcafee_atd_analyze_file_function(self, event, *args, **kwargs):
+    @function("mcafee_atd_analyze_url")
+    def _mcafee_atd_analyze_url_function(self, event, *args, **kwargs):
         """Function: """
         try:
             start_time = time.time()
@@ -114,31 +83,20 @@ class FunctionComponent(ResilientComponent):
             if not incident_id:
                 yield FunctionError("incident_id is required")
             artifact_id = kwargs.get("artifact_id")  # number
-            attachment_id = kwargs.get("attachment_id")  # number
-            task_id = kwargs.get("task_id")  # number
+            url_to_analyze = kwargs.get("artifact_value")  # text
             atd_report_type = self.get_select_param(kwargs.get("mcafee_atd_report_type"))  # select
 
             log.info("incident_id: %s", incident_id)
             if artifact_id is not None:
                 log.info("artifact_id: %s", artifact_id)
-            if attachment_id is not None:
-                log.info("attachment_id: %s", attachment_id)
-            if task_id is not None:
-                log.info("task_id: %s", task_id)
 
-            f_download = self._get_file(**kwargs)
-            f = f_download["file"]
-            file_name = f_download["file_name"]
-            yield StatusMessage("File {} downloaded".format(file_name))
-
-            response = submit_file(self, f, file_name)
+            response = submit_url(self, url_to_analyze)
             content = response.json()
-            # self.submitFile(f, file_name)
 
             atd_task_id = content["results"][0]["taskId"]
             files_wait = content["filesWait"]
             estimated_time = content["estimatedTime"]
-            yield StatusMessage("File uploaded to ATD with taskId: ".format(str(atd_task_id)))
+            yield StatusMessage("URL submitted to ATD with taskId: {}".format(str(atd_task_id)))
             yield StatusMessage("Files waiting on: {}".format(files_wait))
             yield StatusMessage("Estimated Time: {} minutes".format(estimated_time))
 
@@ -152,13 +110,13 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Analysis Completed")
             if atd_report_type == "pdf" or atd_report_type == "html":
                 yield StatusMessage("Obtaining {} report".format(atd_report_type))
-                report_file = create_report_file(file_name, atd_report_type)
+                report_file = create_report_file(url_to_analyze, atd_report_type)
 
             results = get_atd_report(self, atd_task_id, atd_report_type, report_file["report_file"])
 
             if report_file is not None:
                 self.resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                             report_file["report_file"], filename=report_file["report_file_name"])
+                                                  report_file["report_file"], filename=report_file["report_file_name"])
                 yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
 
             end_time = time.time()
@@ -170,4 +128,5 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             yield FunctionError()
         finally:
-            remove_dir(report_file["tmp_dir"])
+            if report_file is not None:
+                remove_dir(report_file["tmp_dir"])

@@ -22,7 +22,7 @@ polling_interval=60
 xMode=
 overrideOS=
 
-# Analyzer pro le ID. The pro le ID number can be found in the UI Policy/Analyzer Pro le page.
+# Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.
 vm_profile_list=
 
 # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'

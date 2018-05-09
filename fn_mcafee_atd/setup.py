@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_mcafee_atd',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_mcafee_atd'",
-    long_description="Resilient Circuits Components for 'fn_mcafee_atd'",
+    long_description="Analyze files and URLs from Resilient in McAfee ATD",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
