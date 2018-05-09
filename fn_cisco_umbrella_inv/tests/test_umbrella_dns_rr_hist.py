@@ -11,7 +11,7 @@ from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_cisco_umbrella_inv.components.umbrella_dns_rr_hist import *
-from  mock_umbrella import  mocked_response
+from mock_umbrella import mocked_response
 
 PACKAGE_NAME = "fn_cisco_umbrella_inv"
 FUNCTION_NAME = "umbrella_dns_rr_hist"
@@ -50,11 +50,12 @@ class TestUmbrellaDnsRrHist:
         ("93.184.216.119", 'ip_address', 'A')
     ])
     def test_dns_rr_history_ip(self, mock_get, circuits_app, umbinv_resource, umbinv_resource_type, umbinv_dns_type):
-        """ Test for ip rr history using mocked response. """
+        """ Test for ip rr history using mocked data. """
 
         keys_outer = ["features", "rrs"]
         keys_feature = ["rr_count","ld2_count","ld3_count","ld2_1_count","ld2_2_count","div_ld2","div_ld3","div_ld2_1","div_ld2_2"]
         keys_rrs = ["ttl","type","class","rr", "name"]
+
         function_params = { 
             "umbinv_resource": umbinv_resource,
             "umbinv_resource_type": umbinv_resource_type,
@@ -73,11 +74,12 @@ class TestUmbrellaDnsRrHist:
         ("domain.com", 'domain_name', 'A')
     ])
     def test_dns_rr_history_domain(self, mock_get, circuits_app, umbinv_resource, umbinv_resource_type, umbinv_dns_type):
-        """ Test for domain rr history using mocked response. """
+        """ Test for domain rr history using mocked data. """
 
         keys_outer = ["features", "rrs_tf"]
         keys_feature = ["age","country_codes","is_subdomain","base_domain","rips","rips_stability","cname","prefixes","mail_exchanger"]
         keys_rrs_tf = ["first_seen","last_seen","rrs"]
+
         function_params = {
             "umbinv_resource": umbinv_resource,
             "umbinv_resource_type": umbinv_resource_type,

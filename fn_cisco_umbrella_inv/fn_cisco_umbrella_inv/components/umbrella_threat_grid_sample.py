@@ -11,7 +11,7 @@ Cisco Umbrella server """
 # Manual Action: Execute a REST query against a Cisco Umbrella server.import logging
 import logging
 import json
-from datetime import datetime, time
+from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv

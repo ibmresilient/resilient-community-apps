@@ -125,7 +125,7 @@ def validate_params(func):
         if re.match("^resource$", k) and v is not None:
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v):
-                raise ValueError("Invalid value for function parameter 'resource' .")
+                raise ValueError("Invalid value for function parameter 'resource'.")
         if re.match("^resource", k) and IP_PATTERN.match(v):
             if "resource_type" in func._params and func._params["resource_type"] != "ip_address":
                 raise ValueError("Invalid value for function parameter 'resource', should be type 'ip_address'.")
@@ -137,20 +137,20 @@ def validate_params(func):
                 raise ValueError("Invalid value for function parameter 'resource', should be type 'url'.")
         # Domain name and name server should be in similar format use same validator.
         if re.match("^(domain|nameservers)", k) and v is not None and not validate_domains(v):
-            raise ValueError("Invalid value for function parameter '{}' .".format(k))
+            raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^emails$", k) and v is not None and not validate_emails(v):
-            raise ValueError("Invalid value for function parameter '{}' .".format(k))
+            raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^ipaddr$", k) and v is not None and not IP_PATTERN.match(v):
-            raise ValueError("Invalid value for function parameter 'ipaddr' .")
+            raise ValueError("Invalid value for function parameter 'ipaddr'.")
         if re.match("^regex$", k) and v is not None and not validate_regex(v):
-            raise ValueError("Invalid value for function parameter 'regex' .")
+            raise ValueError("Invalid value for function parameter 'regex'.")
         if re.match("^asn$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value for function parameter 'asn' .")
+            raise ValueError("Invalid value for function parameter 'asn'.")
         if re.match("^(limit|start_epoch|stop_epoch)$", k) and v is not None and not type(v) == int:
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^(start_relative|stop_relative)$", k) and v is not None and not (TIMEDELTA_PATTERN.match(v) or \
             re.match("^Now$", v, re.IGNORECASE)):
-            raise ValueError("Invalid value for function parameter '{}' . ".format(k))
+            raise ValueError("Invalid value for function parameter '{}'. ".format(k))
         if re.match("^(start|stop)", k) and v is None:
             func._params.pop(k)
             # The regex pattern re.split('_', k)[0] splits [start|stop]_[epoch|relative] on '_' and selects 1st value
@@ -243,7 +243,7 @@ def omit_params(params, omit_list):
     return params
 
 def is_none(param):
-    """"Test if a paramter is None value or string 'None'.
+    """Test if a parameter is None value or string 'None'.
 
     :param param: Parameter to test
     :return: Boolen value

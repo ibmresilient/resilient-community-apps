@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
                             "status_endpoint": umbinv_status_endpoint}
 
             # Reset 'domains' and 'showlabels' param if inmput paramater set.
-            if umbinv_domains:
+            if not is_none(umbinv_domains):
                 self._params.setdefault("domains", umbinv_domains.strip())
 
             if umbinv_showlabels:

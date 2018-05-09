@@ -83,7 +83,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"ipaddr": umbinv_ipaddr.strip(), "asn": umbinv_asn}
+            self._params = {"ipaddr": umbinv_ipaddr, "asn": umbinv_asn}
+
+            # Reset 'ipaddr' or 'asn' param if inmput paramater set.
+            if not is_none(umbinv_ipaddr):
+                self._params.setdefault("ipaddr", umbinv_ipaddr.strip())
 
             validate_params(self)
             process_params(self)

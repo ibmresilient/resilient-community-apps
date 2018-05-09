@@ -115,14 +115,24 @@ class FunctionComponent(ResilientComponent):
 
             if is_none(umbinv_emails) and is_none(umbinv_nameservers) and is_none(umbinv_domain):
                 raise ValueError("One of parameters 'umbinv_emails', 'umbinv_nameservers 'or 'umbinv_domain' "
-                                 "must not set")
+                                 "must be set.")
 
             yield StatusMessage("Starting...")
             init_env(self)
 
-            self._params = {"emails": umbinv_emails.strip(), "nameservers": umbinv_nameservers.strip(),
-                            "domain": umbinv_domain.strip(), "limit": umbinv_limit, "sort_field": umbinv_sortby,
+            self._params = {"emails": umbinv_emails, "nameservers": umbinv_nameservers,
+                            "domain": umbinv_domain, "limit": umbinv_limit, "sort_field": umbinv_sortby,
                             "offset": umbinv_offset}
+
+            # Reset 'emails' and 'domain' or 'nameserver param if inmput paramater set.
+            if not is_none(umbinv_domain):
+                self._params.setdefault("domains", umbinv_domain.strip())
+
+            if not is_none(umbinv_nameservers):
+                self._params.setdefault("nameservers", umbinv_nameservers.strip())
+
+            if not is_none(umbinv_emails):
+                self._params.setdefault("emails", umbinv_emails.strip())
 
             validate_params(self)
             process_params(self)

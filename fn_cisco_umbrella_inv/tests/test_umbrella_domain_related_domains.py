@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import re
 import pytest
 from mock import patch
 
@@ -14,7 +10,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from  mock_umbrella import  mocked_response
 
 PACKAGE_NAME = "fn_cisco_umbrella_inv"
-FUNCTION_NAME = "umbrella_ip_latest_malicious_domains"
+FUNCTION_NAME = "umbrella_domain_related_domains"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -26,19 +22,19 @@ def assert_keys_in(json_obj, *keys):
     for key in keys:
         assert key in json_obj
 
-def call_umbrella_ip_latest_malicious_domains_function(circuits, function_params, timeout=10):
+def call_umbrella_domain_related_domains_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("umbrella_ip_latest_malicious_domains", function_params)
+    evt = SubmitTestFunction("umbrella_domain_related_domains", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("umbrella_ip_latest_malicious_domains_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("umbrella_domain_related_domains_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestUmbrellaIpLatestMaliciousDomains:
-    """ Tests for the umbrella_ip_latest_malicious_domains function"""
+class TestUmbrellaDomainRelatedDomains:
+    """ Tests for the umbrella_domain_related_domains function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -46,18 +42,17 @@ class TestUmbrellaIpLatestMaliciousDomains:
         assert func is not None
 
     @patch('investigate.Investigate.get', side_effect=mocked_response)
-    @pytest.mark.parametrize("umbinv_ipaddr", [
-        ("218.23.28.135")
+    @pytest.mark.parametrize("umbinv_domain", [
+        ("domain.com")
     ])
-    def test_ip_latest_malicious_domains(self, mock_get, circuits_app, umbinv_ipaddr):
-        """ Test p_latest_malicious_domains using mocked response. """
+    def test_success(self, mock_get, circuits_app, umbinv_domain):
+        """ Test for umbrella_domain_related_domains using mocked data.  """
 
-        keys = ["www.cxhyly.com", "cxhyly.com"]
+        keys = ["tb1", "found"]
 
         function_params = { 
-            "umbinv_ipaddr": umbinv_ipaddr
+            "umbinv_domain": umbinv_domain
         }
-        results = call_umbrella_ip_latest_malicious_domains_function(circuits_app, function_params)
-        ip_latest_malicious_domains = list(results["latest_malicious_domains"])
-        for d in ip_latest_malicious_domains:
-            assert d in keys
+        results = call_umbrella_domain_related_domains_function(circuits_app, function_params)
+        related_domains = results["related_domains"]
+        assert_keys_in(related_domains, *keys)
