@@ -36,58 +36,33 @@ class FunctionComponent(ResilientComponent):
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
 
-        {'hash': '414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c',
-         'query_execution_time': '2018-05-01 12:23:19'},
-         'sample_basic': {u'magicType': u'PE32 executable (GUI) Intel 80386 (stripped to external PDB), for MS Windows',
-                          u'behaviors': [{u'category': [u'file'],
-                                          u'hits': 1,
-                                          u'severity': 90,
-                                          u'title': u'Process Modified a File in a System Directory',
-                                          u'tags': [u'executable', u'file', u'process'],
-                                          u'confidence': 100,
-                                          u'threat': 90,
-                                          u'name': u'modified-file-in-system-dir'},
-                                            ...
-                                            ...
-                                       ],
-                          u'sha1': u'00bf659061121200c1e5469fbe31d100418b149e',
-                          u'size': 228864,
-                          u'threatScore': 100,
-                          u'connections': {u'connections': [{u'threatTypes': [],
-                                                             u'popularity1Month': None,
-                                                             u'name': u'195.22.28.198',
-                                                             u'attacks': [],
-                                                             u'popularity3Month': None,
-                                                             u'popularity': None,
-                                                             u'firstQueried': None,
-                                                             u'popularityWeek': None,
-                                                             u'securityCategories': [],
-                                                             u'ips': [],
-                                                             u'lastCommit': None,
-                                                             u'urls': [], u'type': u'IP',
-                                                             u'firstSeen': 1460762759000,
-                                                             u'lastSeen': 1460762759000
-                                                            },
-                                                                ...
-                                                                ...
-                                                           ]
-                                           u'totalResults': 5,
-                                           u'limit': 5,
-                                           u'moreDataAvailable': True,
-                                           u'offset': 0
-                                          },
-                          u'visible': True,
-                          u'lastSeen': 1460762759000,
-                          u'samples': {u'totalResults': 0,
-                                       u'limit': 5,
-                                       u'moreDataAvailable': False,
-                                       u'samples': [], u'offset': 0
-                                      },
-                          u'sha256': u'414e38ed0b5d507734361c2ba94f734252ca33b8259ca32334f32c4dba69b01c',
-                          u'avresults': [],
-                          u'firstSeen': 1460762759000,
-                          u'md5': u'6d8b70d20b1182546bc58ce7f90549d7'
-                         }
+        {'resource_name': 'cisco.com',
+         'query_execution_time': '2018-04-30 15:30:42'
+         'thread_grid_samples': {u'limit': 2,
+                                 u'moreDataAvailable': True,
+                                 u'samples': [{u'magicType': u'PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed',
+                                               u'behaviors': [],
+                                               u'sha1': u'ccdeb2319d6b924e359f563527404a0af3d1ac54',
+                                               u'size': 22020, u'threatScore': 100,
+                                               u'visible': False, u'lastSeen': 1518410873000,
+                                               u'sha256': u'65f33f9e6d16918ba72bc20bcd85ebd75bc735df5666a843cab9c6dec9c0b1c1',
+                                               u'avresults': [{u'product': u'ClamAV', u'signature': u'Win.Worm.Mydoom'}],
+                                               u'firstSeen': 1518410872000, u'md5': u'0c340a220817e157346bef7976a0d0b6'},
+                                             { u'magicType': u'PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed',
+                                               u'behaviors': [],
+                                               u'sha1': u'971d92e80764812f0abca9ccf3075f5e9cc6fa4a',
+                                               u'size': 33616,
+                                               u'threatScore': 100,
+                                               u'visible': False,
+                                               u'lastSeen': 1503550227000,
+                                               u'sha256': u'eb19d33f6b157d814bef539e3625ab9d40b217271d7144e23b20effb677577b5',
+                                               u'avresults': [{u'product': u'ClamAV', u'signature': u'Win.Worm.Mydoom'}],
+                                               u'firstSeen': 1503550227000, u'md5': u'8d1bcddb2cbb143e2ade4622770f4849'}
+                                             ],
+                                 u'offset': 0,
+                                 u'query': u'cisco.com', u'totalResults': 2
+                               }
+
         }
 
     """

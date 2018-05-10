@@ -147,11 +147,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             if hasattr(self, '_domain'):
-                if self._params["limit"] is None:
-                # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
-                    rtn = rinv.domain_whois(self._domain)
-                else:
-                    rtn = rinv.domain_whois_history(self._domain, self._params["limit"])
+                rtn = rinv.domain_whois_history(self._domain, self._params["limit"])
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domain" key to result to facilitate post-processing.
                 results = {"domain_whois": json.loads(json.dumps(rtn)), "domain": self._domain,

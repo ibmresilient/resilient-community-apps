@@ -57,6 +57,7 @@ def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
 
     :param regex: url paramter value
+    :return : boolean
 
     """
     try:
@@ -72,6 +73,7 @@ def validate_regex(regex):
     """"Validate regex string in a valid format and can be parsed ok.
 
     :param regex: Regex parameter value
+    :return : boolean
 
     """
     try:
@@ -86,6 +88,7 @@ def validate_domains(doms):
     """"Validate domain string(s) are in a valid format.
 
     :param doms: Domain(s) parameter value
+    :return : boolean
 
      """
 
@@ -98,6 +101,7 @@ def validate_emails(emails):
     """"Validate email string(s) are a valid format.
 
     :param emails: Email(s) parameter value
+    :return : boolean
 
      """
 
@@ -188,42 +192,42 @@ def set_attribs(func, attrib_name, val):
         setattr(func, "_"+attrib_name, str(val))
 
 def process_params(func):
-        """"Process Resilient Function parameter fields doing any necessary transformations.
+    """"Process Resilient Function parameter fields doing any necessary transformations.
 
     :param params: Resilient Function instance reference
 
-        """
-        for (k, v) in func._params.items():
-            if (re.match("^resource$", k)) and v is not None:
-                if IP_PATTERN.match(v):
-                    # Assume "resource" param is an ip address.
-                    func._res = str(v)
-                elif validate_url(v):
-                    # Assume "resource" param is a url.
+    """
+    for (k, v) in func._params.items():
+        if (re.match("^resource$", k)) and v is not None:
+            if IP_PATTERN.match(v):
+                # Assume "resource" param is an ip address.
+                func._res = str(v)
+            elif validate_url(v):
+                # Assume "resource" param is a url.
                     func._res = urllib.quote_plus(v)
-                elif validate_domains(v):
-                    # Assume "resource" param is a domain.
-                    func._res = str(v)
-            if (re.match("^(domain|nameservers|emails)", k)) and v is not None:
-                set_attribs(func, k, v)
-            if (re.match("^ipaddr$", k)) and v is not None:
-                func._ipaddr = str(v)
-            if (re.match("^regex$", k)) and v is not None:
-                func._regex = str(v)
-            if (re.match("^asn$", k)) and v is not None:
-                func._asn = str(v)
-            if (re.match("^hash$", k)) and v is not None:
-                func._hash = str(v)
-            if re.match("^(start|stop)$", k) and v is not None:
-                if type(v) == int:
-                    func._params[k] = datetime.datetime.fromtimestamp(v / 1e3)
+            elif validate_domains(v):
+                # Assume "resource" param is a domain.
+                func._res = str(v)
+        if (re.match("^(domain|nameservers|emails)", k)) and v is not None:
+            set_attribs(func, k, v)
+        if (re.match("^ipaddr$", k)) and v is not None:
+            func._ipaddr = str(v)
+        if (re.match("^regex$", k)) and v is not None:
+            func._regex = str(v)
+        if (re.match("^asn$", k)) and v is not None:
+            func._asn = str(v)
+        if (re.match("^hash$", k)) and v is not None:
+            func._hash = str(v)
+        if re.match("^(start|stop)$", k) and v is not None:
+            if type(v) == int:
+                func._params[k] = datetime.datetime.fromtimestamp(v / 1e3)
+            else:
+                if re.match("^Now$", v, re.IGNORECASE):
+                    func._params[k] = datetime.datetime.now()
                 else:
-                    if re.match("^Now$", v, re.IGNORECASE):
-                        func._params[k] = datetime.datetime.now()
-                    else:
-                        # Split value using regex e.g. -30days, m splits as m.group(1) = -30, m.group(2) = days
-                        m = TIMEDELTA_PATTERN.search(v)
-                        func._params[k] = datetime.timedelta(**{str(m.group(2)): int(m.group(1))})
+                    # Split value using regex e.g. -30days, m splits as m.group(1) = -30, m.group(2) = days
+                    m = TIMEDELTA_PATTERN.search(v)
+                    func._params[k] = datetime.timedelta(**{str(m.group(2)): int(m.group(1))})
 
 def omit_params(params, omit_list):
     """"Filter out 'omit_list' list of parameters from the 'params' dict keys.

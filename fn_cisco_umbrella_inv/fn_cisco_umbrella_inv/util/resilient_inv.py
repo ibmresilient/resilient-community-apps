@@ -6,10 +6,10 @@
 """ Investigate class for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
 from __future__ import print_function
-import urlparse, urllib
+import urlparse
 import logging
 import datetime, time
-import re
+import json
 from investigate import Investigate
 
 log = logging.getLogger(__name__)
@@ -26,6 +26,12 @@ class ResilientInv(Investigate):
 
     """
     def __init__(self, api_key, base_url, proxies={}):
+        """ New initialization parameters added.
+
+        :param api_key: Thw api_kewy value from config.
+        :param base_url: The base_url value from config.
+
+        """
         super(ResilientInv, self).__init__(api_key, proxies)
         # Extend _uris dict of Investigate instance.
         self._uris.update({
@@ -44,6 +50,10 @@ class ResilientInv(Investigate):
     def _process_datetime(dt, type):
         """Process datetime parameters for start and stop.
 
+        :param dt: The datetime value from Function parameter.
+        :param type: Type of dt (stop or start).
+        :return dt: Updated datetime.
+
         """
         if dt is None:
             dt = datetime.timedelta(days=30)
@@ -61,6 +71,10 @@ class ResilientInv(Investigate):
         """Get the category map for domain status and categorization.
 
         For more detail, see https://docs.umbrella.com/developer/investigate-api/domain-status-and-categorization-1/
+
+        :param: None.
+        :return Result in json format.
+
         """
         uri = self._uris["categories"]
         return self.get_parse(uri)
@@ -68,13 +82,37 @@ class ResilientInv(Investigate):
     def _get_categorization(self, domain, labels):
         """ Over-ride base method because not working for showLabels.
 
+        For more detail, see https://docs.umbrella.com/developer/investigate-api/domain-status-and-categorization-1/
+
+        :param domain: Domain name parameter.
+        :param labels: Optional parameter.
+        :return Result in json format.
+
         """
         uri = urlparse.urljoin(self._uris['categorization'], domain)
         params = {'showLabels': ''} if labels else {}
         return self.get_parse(uri, params)
 
+    def _post_categorization(self, domains, labels):
+        """ Over-ride base method because not working for showLabels.
+
+        For more detail, see https://docs.umbrella.com/developer/investigate-api/domain-status-and-categorization-1/
+
+        :param domain: Domain name parameter.
+        :param labels: Optional parameter.
+        :return Result in json format.
+
+        """
+        params = {'showLabels': ''} if labels else {}
+        return self.post_parse(self._uris['categorization'], params,
+            json.dumps(domains)
+        )
+
     def timeline(self, resource):
         """Get the timeline Information for the given domain, ip or url.
+
+        :param resource: The resource name parameter (domain, ip address or url).
+        :return Result in json format.
 
         For details, see https://docs.umbrella.com/developer/investigate-api/timeline/
         """
@@ -85,6 +123,10 @@ class ResilientInv(Investigate):
         """Get the Classifiers classifiers Information for the given domain.
 
         For details, see https://docs.umbrella.com/developer/investigate-api/timeline/
+
+        :param domain: Domain name parameter.
+        :return Result in json format.
+
         """
         uri = self._uris["classifiers_classifiers"].format(domain)
         return self.get_parse(uri)
@@ -93,6 +135,10 @@ class ResilientInv(Investigate):
         """Get the Classifiers info Information for the given domain.
 
         For details, see https://docs.umbrella.com/developer/investigate-api/timeline/
+
+        :param domain: Domain name parameter.
+        :return Result in json format.
+
         """
         uri = self._uris["classifiers_info"].format(domain)
         return self.get_parse(uri)
@@ -101,6 +147,13 @@ class ResilientInv(Investigate):
         """Get the Domain volume.
 
         For details, see https://investigate-api.readme.io/docs/domain-volume
+
+        :param domain: Domain name parameter.
+        :param start: Optional parameter.
+        :param stop: Optional parameter.
+        :param match: Optional parameter.
+        :return Result in json format.
+
         """
         params = dict()
 
@@ -125,6 +178,12 @@ class ResilientInv(Investigate):
 
         Over-ride base method because not working for nameServerList.
 
+        :param nameserver: The nameserver(s) parameter as string or list.
+        :param limit: Optional parameter.
+        :param offset: Optional parameter.
+        :param sort_field: Optional parameter.
+        :return Result in json format.
+
         """
         if not isinstance(nameservers, list):
             uri = self._uris["whois_ns"].format(nameservers)
@@ -140,6 +199,11 @@ class ResilientInv(Investigate):
         """Return an object representing behaviours associated with an input hash
 
         For details, see https://investigate-api.readme.io/docs/threat-grid-integration-cisco-amp-threat-grid
+
+        :param hash: The hash value parameter (md5, sha1, sha256).
+        :param limit: Optional parameter.
+        :param offset: Optional parameter.
+        :return Result in json format.
 
         """
 

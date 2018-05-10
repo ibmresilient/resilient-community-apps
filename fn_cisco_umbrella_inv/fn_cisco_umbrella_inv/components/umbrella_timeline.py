@@ -31,22 +31,15 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
 
-       'timeline':[
-          {
-             u'threatTypes':[
-
-             ],
-             'source':u'googlevideo.com',
-             u'attacks':[
-
-             ],
-             u'timestamp':1497478894605,
-             'timestamp_converted':'2017-06-14 23:21:34',
-             u'categories':[
-
-             ]
-          }
-       ]
+        {'resource_name': 'googlevideo.com'
+         'query_execution_time': '2018-05-02 17:30:44',
+         'timeline': [{u'threatTypes': [],
+                       u'timestamp_converted': u'2017-06-14 23:21:34',
+                       u'attacks': [],
+                       u'timestamp': 1497478894605,
+                       u'categories': []}
+                     ]
+        }
 
 
     """
@@ -101,14 +94,14 @@ class FunctionComponent(ResilientComponent):
                 # Make timestamp more readable
                 for x in range(len(rtn)):
                     try:
-                        rtn[x]['source'] = umbinv_resource
                         secs = int(rtn[x]['timestamp']) / 1000
                         ts_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
                         rtn[x]['timestamp_converted'] = ts_readable
                     except ValueError:
                         yield FunctionError('timestamp value incorrectly specified')
                 # Add  "query_execution_time" to result to facilitate post-processing.
-                results = {"timeline": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
+                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": self._res,
+                           "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))
