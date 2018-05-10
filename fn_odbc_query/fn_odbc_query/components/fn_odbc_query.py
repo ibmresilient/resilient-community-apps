@@ -14,6 +14,7 @@ import pyodbc
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import json
 import time
+from collections import OrderedDict
 
 LOG = logging.getLogger(__name__)
 
@@ -69,13 +70,13 @@ class FunctionComponent(ResilientComponent):
 
         Custom mapping's has a json structure.
         {
-            "sql_artifact_value": "sql_artifact_value",
-            "sql_timestamp": "sql_timestamp",
-            "sql_column_1": "sql_column_1",
-            "sql_column_2": "sql_column_2",
-            "sql_column_3": "sql_column_3",
-            "sql_column_4": "sql_column_4",
-            "sql_column_5": "sql_column_5"
+              "sql_artifact_value": "sql_artifact_value",
+              "sql_timestamp": "sql_timestamp",
+              "query_result_col_1": "sql_column_1",
+              "query_result_col_2": "sql_column_2",
+              "query_result_col_3": "sql_column_3",
+              "query_result_col_4": "sql_column_4",
+              "query_result_col_5": "sql_column_5"
         }
 
 
@@ -85,21 +86,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             sql_select = self.get_select_param(kwargs.get("sql_select"))  # select, values: "SELECT incident_id, name, description FROM test.incidents WHERE incident_id = ?"
             sql_condition_value = kwargs.get("sql_condition_value")  # text
-            sql_query_results_to_dt_map = kwargs.get("sql_query_results_to_dt_map")  # text
 
             LOG.info("sql_select: %s", sql_select)
             LOG.info("sql_condition_value: %s", sql_condition_value)
-            LOG.info("sql_query_results_to_dt_map: %s", sql_query_results_to_dt_map)
-
-            # Mapping
-            if sql_query_results_to_dt_map is not None:
-                map_dictionary = json.loads(sql_query_results_to_dt_map.replace("\\n", ""), strict=False)  # cleanup for json.loads
-            #else
-                # FIXME what happens if user doesn't provide mapping
 
             self.search_params = {'sql_select': sql_select,
-                                  'sql_condition_value': sql_condition_value,
-                                  'sql_query_results_to_dt_map': map_dictionary}
+                                  'sql_condition_value': sql_condition_value}
 
             yield StatusMessage("starting...")
             self.validate_data()
@@ -117,6 +109,8 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
 
         except Exception:
+            yield StatusMessage("Closing ODBC connection...")
+            self.close_connections() # TODO testiraj ce se zapre ob napaki!
             yield FunctionError()
 
         # Clean up actions
@@ -126,9 +120,9 @@ class FunctionComponent(ResilientComponent):
 
     def validate_data(self):
         """" Validate input data, allow SELECT statements only """
+        # TODO napisi do konca, poglej ldap, tesiraj pyodbc sql injection, testiraj select *, testiraj where dva pogoja
         sql_select = self.search_params.get("sql_select")
         sql_args = self.search_params.get("sql_condition_value")
-        sql_map = self.search_params.get("sql_query_results_to_dt_map")
 
 
     def setup_odbc_connection(self):
@@ -188,7 +182,7 @@ class FunctionComponent(ResilientComponent):
 
             self.db_connection = pyodbc.connect(connection_string)
             if self.db_connection is None:
-                raise Exception("Could not setup the ODBC connection %s, Exception %s", sql_server_url, e)
+                raise Exception("Could not setup the ODBC connection %s", sql_server_url)
 
             # The connection timeout value, set in the config file
             self.db_connection.timeout = int(sql_connection_timeout)
@@ -199,9 +193,9 @@ class FunctionComponent(ResilientComponent):
             # Create a cursor from the connection
             self.db_cursor = self.db_connection.cursor()
             if self.db_cursor is None:
-                raise Exception("Could not request ODBC connection cursor for server %s, Exception $s", sql_server_url, e)
+                raise Exception("Could not request ODBC connection cursor for server %s", sql_server_url)
 
-        # Catch specific pyodbc exceptions
+        # Catch specific pyodbc exceptions # FIXME pobirisi ven te errorje
         except pyodbc.DataError as e:
             raise Exception("DataError occurred connecting to %s, Exception %s", sql_server_url, e)
 
@@ -250,7 +244,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 rows = self.db_cursor.fetchall()
 
-        # Catch some specific exceptions # FIXME exceptions?
+        # Catch some specific exceptions # FIXME pobirisi ven
         except pyodbc.DatabaseError as err:
             raise err
 
@@ -258,8 +252,9 @@ class FunctionComponent(ResilientComponent):
         except Exception as e:
             raise Exception("Could not execute SQL statement %s, Exception %s", sql_select, e)
 
+        # FIXME naredi novo metodo, poslji argument rows
         try:
-            rows
+            rows # TODO a je to potrebno?
         except NameError:
             raise Exception("No query results returned")
 
@@ -270,16 +265,19 @@ class FunctionComponent(ResilientComponent):
             entries_data_list = []
 
             # list of Resilient datatable column names # FIXME not proper order
-            sql_map = self.search_params.get("sql_query_results_to_dt_map")
-            dt_column_keys = [column[1] for column in sql_map.items()]
+            client = self.rest_client()
+            types = client.get('/types')
+            systems_db = types["sql_query_results_dt"]
+            column_list = systems_db["fields"]
+            dt_column_keys = [column_name for column_name in column_list.iterkeys()]
 
             # prepend artifact value and timestamp to the results
-            query_result_column_names = [sql_args, time.time()]
+            query_result_column_names = [sql_args, int(time.time())] #FIXME artifact value popravi ne sql args
             # append query result column names - values we want to display as a row in Resilient datatable
             query_result_column_names.extend([column[0] for column in self.db_cursor.description])
 
             # add key-value pairs
-            entries_data_list.append(dict(zip(dt_column_keys, query_result_column_names)))
+            entries_data_list.append(dict(zip(dt_column_keys, query_result_column_names))) # FIXME - zamenjaj tole v list
 
             # add
             for row in rows:
@@ -287,7 +285,7 @@ class FunctionComponent(ResilientComponent):
                     break
 
                 # prepend artifact value and timestamp to the results
-                entry_row = [sql_args, time.time()]
+                entry_row = [sql_args, int(time.time())]
                 entry_row.extend(row)  # append row results - to append tuple to a list use extend
 
                 entries_data_list.append(dict(zip(dt_column_keys, entry_row)))
