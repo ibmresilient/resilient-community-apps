@@ -50,20 +50,21 @@ See the accompanying documentation for how to install to Resilient and configure
     atd_password=
     # Amount of time in minutes before the function quits and throws an error
     timeout=30
-    
+
     # Interval in seconds to wait to check if the file has finished being analyzed
     polling_interval=60
-    
+
+    # Value '0' indicates no user interaction is needed during sample analysis. Value '1' indicates user interaction
+    # is needed during sample analysis.
     xMode=
-    overrideOS=
-    
-    # Analyzer pro le ID. The pro le ID number can be found in the UI Policy/Analyzer Pro le page.
+
+    # Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.
     vm_profile_list=
-    
+
     # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'
     filePriority=add_to_q
-    
-    trust_cert=False
+
+    trust_cert=[True|False]
 ```
 ## Customization
 
