@@ -19,8 +19,9 @@ timeout=30
 # Interval in seconds to wait to check if the file has finished being analyzed
 polling_interval=60
 
+# Value '0' indicates no user interaction is needed during sample analysis. Value '1' indicates user interaction 
+# is needed during sample analysis.
 xMode=
-overrideOS=
 
 # Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.
 vm_profile_list=
@@ -28,6 +29,6 @@ vm_profile_list=
 # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'
 filePriority=add_to_q
 
-trust_cert=False
+trust_cert=[True|False]
 """
     return config_data

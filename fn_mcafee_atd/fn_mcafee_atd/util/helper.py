@@ -1,3 +1,5 @@
+# Copyright IBM Corp. - Confidential Information
+
 import base64
 import requests
 import logging
@@ -19,7 +21,7 @@ def _get_atd_session_headers(g):
         "VE-SDK-API": base64_login
     }
     r = requests.get(session_url, headers=headers, verify=g.trust_cert)
-    _check_status_code(r)
+    check_status_code(r)
     log.debug("User logged in successfully")
     content = r.json()
     session_string = "{}:{}".format(content["results"]["session"], content["results"]["userId"])
@@ -39,7 +41,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
     data_dict = {
             "data": {
                 "xMode": g.xMode,
-                "overrideOS": g.overrideOS,
                 "vmProfileList": g.vm_profile_list,
                 "submitType": submit_type,
                 "url": url
@@ -61,38 +62,33 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
     else:
         raise ValueError("Either file or url must be set")
 
-    _check_status_code(response)
+    check_status_code(response)
     return response
 
 
-def _check_status_code(response):
-    if response.status_code > 299 or response.status_code < 200:
-        raise ValueError("Request not successful")
-
-
 def _check_url_ending(url):
-    file_endings = {
-        ".aif": "", ".cda": "", ".mid": "", ".mp3": "", ".mpa": "", ".ogg": "", ".wav": "", ".wma": "", ".wpl": "",
-        ".7z": "", ".arj": "", ".deb": "", ".pkg": "", ".rar": "", ".rpm": "", ".tar.gz": "", ".z": "", ".zip": "",
-        ".bin": "", ".dmg": "", ".iso": "", ".toast": "", ".vcd": "", ".csv": "", ".dat": "", ".db": "", ".dbf": "",
-        ".log": "", ".mdb": "", ".sav": "", ".sql": "", ".tar": "", ".xml": "", ".apk": "", ".bat": "", ".jar": "",
-        ".cgi": "", ".com": "", ".exe": "", ".gadget": "", ".py": "", ".wsf": "", ".fnt": "", ".fon": "", ".otf": "",
-        ".ttf": "", ".ai": "", ".bmp": "", ".gif": "", ".ico": "", ".jpeg": "", ".png": "", ".ps": "", ".psd": "",
-        ".svg": "", ".tif": "", ".tiff": "", ".asp": "", ".part": "", ".cer": "", ".cfm": "", ".css": "", ".key": "",
-        ".odp": "", ".pps": "", ".ppt": "", ".pptx": "", ".c": "", ".class": "", ".cpp": "", ".cs": "", ".h": "",
-        ".java": "", ".sh": "", ".swift": "", ".vb": "", ".ods": "", ".xlr": "", ".xls": "", ".xlsx": "", ".bak": "",
-        ".cab": "", ".cgf": "", ".cur": "", ".dll": "", ".dmp": "", ".drv": "", ".icns": "", ".ini": "", ".lnk": "",
-        ".msi": "", ".sys": "", ".tmp": "", ".3g2": "", ".3gp": "", ".avi": "", ".flv": "", ".h264": "", ".m4v": "",
-        ".mkv": "", ".mov": "", ".mp4": "", ".mpg": "", ".mpeg": "", ".rm": "", ".swf": "", ".vob": "", ".wmv": "",
-        ".doc": "", ".docx": "", ".odt": "", ".pdf": "", ".rtf": "", ".tex": "", ".txt": "", ".wks": "", ".wps": "",
-        ".wpd": ""
-    }
+    file_endings = [
+        ".aif", ".cda", ".mid", ".mp3", ".mpa", ".ogg", ".wav", ".wma", ".wpl", ".7z", ".arj", ".deb", ".pkg", ".rar",
+        ".rpm", ".tar.gz", ".z", ".zip", ".bin", ".dmg", ".iso", ".toast", ".vcd", ".csv", ".dat", ".db", ".dbf",
+        ".log", ".mdb", ".sav", ".sql", ".tar", ".xml", ".apk", ".bat", ".jar", ".cgi", ".com", ".exe", ".gadget",
+        ".py", ".wsf", ".fnt", ".fon", ".otf", ".ttf", ".ai", ".bmp", ".gif", ".ico", ".jpeg", ".png", ".ps", ".psd",
+        ".svg", ".tif", ".tiff", ".asp", ".part", ".cer", ".cfm", ".css", ".key", ".odp", ".pps", ".ppt", ".pptx", ".c",
+        ".class", ".cpp", ".cs", ".h", ".java", ".sh", ".swift", ".vb", ".ods", ".xlr", ".xls", ".xlsx", ".bak", ".cab",
+        ".cgf", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ini", ".lnk", ".msi", ".sys", ".tmp", ".3g2", ".3gp", ".avi",
+        ".flv", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg", ".rm", ".swf", ".vob", ".wmv", ".doc",
+        ".docx", ".odt", ".pdf", ".rtf", ".tex", ".txt", ".wks", ".wps", ".wpd"
+    ]
     e = url.rfind('.')
     potential_file_ending = url[e:]
-    if file_endings.get(potential_file_ending.lower()) is not None:
+    if potential_file_ending.lower() in file_endings:
         return '3'
     else:
         return '1'
+
+
+def check_status_code(response):
+    if response.status_code > 299 or response.status_code < 200:
+        raise ValueError("Request not successful")
 
 
 def create_report_file(name, type):
@@ -155,7 +151,7 @@ def get_atd_report(g, taskId, report_type, report_file):
     if report_type == "pdf" or report_type == "html":
         report_url = url.format(g.atd_url, taskId, report_type)
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
-        _check_status_code(response)
+        check_status_code(response)
 
         with open(report_file, 'wb') as f:
             f.write(response.content)
@@ -163,6 +159,6 @@ def get_atd_report(g, taskId, report_type, report_file):
 
     json_url = url.format(g.atd_url, taskId, "json")
     json_response = requests.get(json_url, headers=headers, verify=g.trust_cert)
-    _check_status_code(json_response)
+    check_status_code(json_response)
 
     return json_response.json()

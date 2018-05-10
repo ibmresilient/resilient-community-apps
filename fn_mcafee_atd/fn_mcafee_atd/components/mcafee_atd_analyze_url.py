@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# Copyright IBM Corp. - Confidential Information
 """Function implementation"""
 
 import logging
 import time
-from tempfile import TemporaryFile
-from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir
+from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+    check_status_code
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -31,9 +31,6 @@ class FunctionComponent(ResilientComponent):
             self.xMode = self.options.get("xMode")
             if self.xMode is None:  # Default to ""
                 self.xMode = ""
-            self.overrideOS = self.options.get("overrideOS")
-            if self.overrideOS is None:  # Default to ""
-                self.overrideOS = ""
             self.vm_profile_list = self.options.get("vm_profile_list")
             self.filePriority = self.options.get("filePriority")
             if self.filePriority is None:  # Defaults to add_to_q
@@ -91,6 +88,7 @@ class FunctionComponent(ResilientComponent):
                 log.info("artifact_id: %s", artifact_id)
 
             response = submit_url(self, url_to_analyze)
+            check_status_code(response)
             content = response.json()
 
             atd_task_id = content["results"][0]["taskId"]
@@ -104,6 +102,8 @@ class FunctionComponent(ResilientComponent):
             t = 0
             start = time.time()
             while check_atd_status(self, atd_task_id) is False and t < timeout_seconds:
+                # Sleep is used to wait for the polling interval so ATD is not constantly getting checked if the
+                # analysis is complete
                 time.sleep(self.polling_interval)
                 end = time.time()
                 t = end - start
