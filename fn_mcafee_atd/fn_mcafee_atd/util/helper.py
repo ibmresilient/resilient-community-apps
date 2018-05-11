@@ -80,6 +80,8 @@ def _check_url_ending(url):
     ]
     e = url.rfind('.')
     potential_file_ending = url[e:]
+    # Per the McAfee documentation, 3 is used if the URL includes a file to download, while 1 is used to just analyze
+    # a URL
     if potential_file_ending.lower() in file_endings:
         return '3'
     else:

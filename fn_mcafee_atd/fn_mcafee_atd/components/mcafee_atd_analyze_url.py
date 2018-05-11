@@ -82,12 +82,18 @@ class FunctionComponent(ResilientComponent):
             artifact_id = kwargs.get("artifact_id")  # number
             url_to_analyze = kwargs.get("artifact_value")  # text
             atd_report_type = self.get_select_param(kwargs.get("mcafee_atd_report_type"))  # select
+            atd_url_submit_type = self.get_select_param(kwargs.get("mcafee_atd_url_submit_type"))  # select
 
             log.info("incident_id: %s", incident_id)
             if artifact_id is not None:
                 log.info("artifact_id: %s", artifact_id)
 
-            response = submit_url(self, url_to_analyze)
+            submit_type = None
+            if atd_url_submit_type == "Analyze URL":
+                submit_type = '1'
+            elif atd_url_submit_type == "Download and analyze file from URL":
+                submit_type = '3'
+            response = submit_url(self, url_to_analyze, submit_type)
             check_status_code(response)
             content = response.json()
 

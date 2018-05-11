@@ -34,8 +34,8 @@ See the accompanying documentation for how to install to Resilient and configure
 	* Message Destinations: `McAfee ATD Message Destination`
 	* Functions: `McAfee ATD Analyze URL`, `McAfee ATD Analyze File`
 	* Custom Fields: `incident_id`, `artifact_id`, `attachment_id`, `task_id`, `mcafee_atd_report_type`, `mcafee_atd_url_submit_type`
-	* Workflows: `McAfee ATD Analyze Artifact File`, `McAfee ATD Analyze Attachment`, `McAfee ATD Analyze URL`
-	* Rules: `McAfee ATD Analyze Artifact File`, `McAfee ATD Analyze Attachment`, `McAfee ATD Analyze URL`
+	* Workflows: `(Example) McAfee ATD Analyze Artifact File`, `(Example) McAfee ATD Analyze Attachment`, `(Example) McAfee ATD Analyze URL`
+	* Rules: `(Example) McAfee ATD Analyze Artifact File`, `(Example) McAfee ATD Analyze Attachment`, `(Example) McAfee ATD Analyze URL`
 
 2. Update and edit `app.config` by first running:
 
