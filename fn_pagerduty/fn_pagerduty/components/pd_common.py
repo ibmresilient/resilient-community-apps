@@ -30,7 +30,7 @@ def find_escalation_policy_by_name(log, appDict, name):
     # build url
     url = '/'.join((PD_BASE_URL, ESCALATION_FRAGMENT))
 
-    resp = execute_call(log, 'get', url, None, None, None, True, headers)
+    resp = execute_call(log, 'get', url, None, None, None, True, headers, None)
     return _compareName(resp, 'escalation_policies', name.strip().lower())
 
 
@@ -47,7 +47,7 @@ def find_service_by_name(log, appDict, name):
     # build url
     url = '/'.join((PD_BASE_URL, SERVICE_FRAGMENT))
 
-    resp = execute_call(log, 'get', url, None, None, None, True, headers)
+    resp = execute_call(log, 'get', url, None, None, None, True, headers, None)
     return _compareName(resp, 'services', name.strip().lower())
 
 
@@ -66,7 +66,7 @@ def find_priority_by_name(log, appDict, name):
 
     # trap the possibility that priorities are disabled
     try:
-        resp = execute_call(log, 'get', url, None, None, None, True, headers)
+        resp = execute_call(log, 'get', url, None, None, None, True, headers, None)
         return _compareName(resp, 'priorities', name.strip().lower())
     except:
         return None
@@ -84,10 +84,10 @@ def create_incident(log, appDict):
 
     # build url
     url = '/'.join((PD_BASE_URL, INCIDENT_FRAGMENT))
-    resp = execute_call(log, 'post', url, None, None, payload, True, headers)
+    resp = execute_call(log, 'post', url, None, None, payload, True, headers, None)
     return resp
 
-def update_incident(log, appDict, incident_id, status, priority, resolution):
+def update_incident(log, appDict, incident_id, status, priority, resolution, callback):
     """
     update an incident. Used to raise the severity or to close the Incident
     :param log:
@@ -96,6 +96,7 @@ def update_incident(log, appDict, incident_id, status, priority, resolution):
     :param status:
     :param priority:
     :param resolution:
+    :param callback: a callback method used to parse errors
     :return: the json string from the PD API
     """
     headers = _build_header(appDict['api_token'], appDict['from_email'])
@@ -105,7 +106,7 @@ def update_incident(log, appDict, incident_id, status, priority, resolution):
     # build url
     url = '/'.join((PD_BASE_URL, UPDATE_FRAGMENT))
     url = url.format(incident_id)
-    resp = execute_call(log, 'put', url, None, None, payload, True, headers)
+    resp = execute_call(log, 'put', url, None, None, payload, True, headers, callback)
     return resp
 
 
@@ -121,13 +122,12 @@ def create_note(log, appDict, incident_id, note):
     headers = _build_header(appDict['api_token'], appDict['from_email'])
 
     payload = build_note_payload(note)
-    log.info(payload)
 
     # build url
     url = '/'.join((PD_BASE_URL, NOTE_FRAGMENT))
     url = url.format(incident_id)
 
-    resp = execute_call(log, 'post', url, None, None, payload, True, headers)
+    resp = execute_call(log, 'post', url, None, None, payload, True, headers, None)
     return resp
 
 

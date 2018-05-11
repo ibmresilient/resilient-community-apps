@@ -37,6 +37,7 @@ class FunctionComponent(ResilientComponent):
             #
             yield StatusMessage("starting...")
             resp = create_incident(self.log, createDict)
+            yield StatusMessage("pagerduty incident created")
 
             # Produce a FunctionResult with the results
             yield FunctionResult({"pd": resp})

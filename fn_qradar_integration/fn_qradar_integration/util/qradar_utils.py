@@ -76,7 +76,7 @@ class ArielSearch(SearchWaitCommand):
     Overrides/implements get_search_id, check_status, get_search_result for QRadar
     """
 
-    def __init__(self, timeout=None, poll=None):
+    def __init__(self, timeout=600, poll=5):
         self.range_start = 1
         self.range_end = 50
         super(ArielSearch, self).__init__(timeout, poll)
@@ -96,6 +96,13 @@ class ArielSearch(SearchWaitCommand):
         :return:
         """
         self.range_end = end
+    def set_timeout(self, timeout):
+        """
+        Set timeout
+        :param timeout:
+        :return:
+        """
+        self.search_timeout = timeout
 
     def get_search_id(self, query):
         """
@@ -145,7 +152,7 @@ class ArielSearch(SearchWaitCommand):
                                               verify=auth_info.cafile)
         except Exception as e:
             LOG.error(str(e))
-            raise SearchFailure(self.search_id, None)
+            raise SearchFailure(search_id, None)
 
         ret = {}
         if response.status_code == 200:
@@ -219,12 +226,13 @@ class QRadarClient(object):
 
         return response
 
-    def ariel_search(self, query, range_start=None, range_end=None):
+    def ariel_search(self, query, range_start=None, range_end=None, timeout=None):
         """
         Perform an Ariel search
         :param query: query string
         :param range_start:
         :param range_end:
+        :param timeout: timeout for search
         :return: dict with events
         """
         ariel_search = ArielSearch()
@@ -233,6 +241,9 @@ class QRadarClient(object):
 
         if range_end:
             ariel_search.set_range_end(range_end)
+
+        if timeout:
+            ariel_search.set_timeout(timeout)
 
         response = ariel_search.perform_search(query)
         return response
@@ -276,13 +287,12 @@ class QRadarClient(object):
 
         ret = None
         try:
-            data = None
             if filter:
-               data = {"filter": urllib.quote(filter)}
+                parameter = urllib.quote('?filter=value="{}"'.format(filter))
+                url = url + parameter
 
             response = requests.Session().get(url=url,
                                               headers=auth_info.headers,
-                                              data=data,
                                               verify=auth_info.cafile)
             # Sample return
             #{"creation_time":1523020929069,"timeout_type":"FIRST_SEEN","number_of_elements":2,

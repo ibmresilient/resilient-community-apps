@@ -36,6 +36,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
             resp = create_note(self.log, self.options, incident_id, description)
+            yield StatusMessage("pagerduty note created")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)

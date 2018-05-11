@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             'password': self.options['password'],
             'url': kwargs['jira_url'],
             'verifyFlag': True if self.options.get('verifyflag', 'True') == 'True' else False,
-            'comment': str(jira_comment)
+            'comment': jira_comment
         }
 
         return appDict

@@ -41,12 +41,15 @@ class FunctionComponent(ResilientComponent):
             priority = kwargs.get("pd_priority")  # text
             resolution = clean_html(kwargs.get("pd_description"))  # text
 
-            log = logging.getLogger(__name__)
-
             yield StatusMessage("starting...")
-            resp = update_incident(self.log, self.options, incident_id, status, priority, resolution)
+            resp = update_incident(self.log, self.options, incident_id, status, priority, resolution, self.callback)
+            yield StatusMessage("pagerduty incident updated")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(resp)
         except Exception as err:
             yield FunctionError(err)
+
+    def callback(self, resp):
+        """" handle the failure here """
+        StatusMessage("Update failed. The PagerDuty Incident may have already been resolved.")

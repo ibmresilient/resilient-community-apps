@@ -52,6 +52,10 @@ class FunctionComponent(ResilientComponent):
             if "verify_cert" in self.options and self.options["verify_cert"] == "false":
                 qradar_verify_cert = False
 
+            timeout = None
+            if "search_timeout" in self.options:
+                timeout = self.options["search_timeout"]
+
             log.debug("Connection to {} using {}".format(self.options["host"], self.options["username"]))
 
             query_string = function_utils.make_query_string(qradar_query,
@@ -72,7 +76,8 @@ class FunctionComponent(ResilientComponent):
 
             result = qradar_client.ariel_search(query_string,
                                                 range_start=qradar_query_range_start,
-                                                range_end=qradar_query_range_end)
+                                                range_end=qradar_query_range_end,
+                                                timeout=timeout)
 
             yield StatusMessage("done...")
             yield FunctionResult(result)
