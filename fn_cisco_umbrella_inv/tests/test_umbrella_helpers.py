@@ -17,7 +17,6 @@ class Func(object):
         self.options = options
         if kwargs is not None:
             for k, v in kwargs.iteritems():
-                print "%s == %s" % (k, v)
                 setattr(self, k, v)
 
     def init_env(self):
