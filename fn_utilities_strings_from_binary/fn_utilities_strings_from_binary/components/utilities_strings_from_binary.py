@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-import subprocess
-import os
+import sys
 import tempfile
-import json
 import logging
-#import mimetypes
-#import floss
+from floss import main
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -28,25 +25,16 @@ class FunctionComponent(ResilientComponent):
         """Function: This function takes an attachment binary file and returns a file attachment which contains the strings within the binary file."""
         try:
             # Get the function parameters:
-
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
-            file_path = kwargs.get("file_path")  # text
 
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
             log.info("artifact_id: %s", artifact_id)
             log.info("attachment_id: %s", attachment_id)
-            log.info("file_path: %s", file_path)
-
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
-            if file_path is None:
-                yield FunctionError("Error: file_path must be specified.")
 
             # Get the binary data from the artifact or the attachment
             if artifact_id:
@@ -65,58 +53,49 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
             data = client.get_content(data_uri)
 
-            with tempfile.NamedTemporaryFile('w', 0, dir=file_path, delete=False) as temp_file_binary:
+            with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
                 try:
                     # Write data to a temporary file.
                     temp_file_binary.write(data)
-                    temp_file_binary.close()
-                    log.info("binary data written %s", temp_file_binary.name)
+                    yield StatusMessage("Binary file contents retrieved.")
 
-                    with tempfile.NamedTemporaryFile('w', 0, dir=file_path, delete=False) as temp_file_strings:
+                    with tempfile.NamedTemporaryFile() as temp_file_strings:
                         try:
-                            listFloss = dir(floss)
-                            # Spawn a subprocess to call floss to strip strings from the file.
-                            yield StatusMessage("Calling floss.")
-                            env = os.environ.copy()
-                            p = subprocess.Popen(["floss", "-sq", temp_file_binary.name],
-                                                 shell=False,
-                                                 stderr=subprocess.PIPE,
-                                                 stdout=temp_file_strings,
-                                                 env=env)
-                            p.communicate()
-                            temp_file_strings.close()
+                            # Floss writes output to stdout so redirect stdout to temporary file
+                            save_stdout = sys.stdout
+                            f = open(temp_file_strings.name.encode("ascii"), 'w')
+                            sys.stdout = temp_file_strings
 
-                                # Post the output from Floss as an attachment file.
-                            if task_id:
-                                attachment_uri = "/tasks/{}/attachments".format(task_id)
-                            else:
-                                # The resulting attachment is posted to Incident attachments for
-                                # both the incident attachments and artifact files. Is this correct?
-                                attachment_uri = "/incidents/{}/attachments".format(incident_id)
-                            attachment_filename = os.path.join(file_path, "attachment.dat")
-                            new_attachment = client.post_attachment(attachment_uri,
-                                                                    temp_file_strings.name,
-                                                                    filename=attachment_filename,
-                                                                    mimetype="text/plain")
-                            yield StatusMessage("New attachment posted.")
-                            # Produce a FunctionResult with the new attachment as return value
-                            if isinstance(new_attachment, list):
-                                new_attachment = new_attachment[0]
-                            log.info(json.dumps(new_attachment))
+                            # Call Floss to extract strings from the file.
+                            yield StatusMessage("Decoding strings from input file.")
+                            result = main.main(['main','-q', '-s', temp_file_binary.name.encode("ascii")])
+                            f.close()
 
+                            # Create a list of strings to return.
+                            yield StatusMessage("Prepare a list of string to return from the function.")
+                            try:
+                                inputStream = open(temp_file_strings.name.encode("ascii"), "r")
+                                listResults = inputStream.read().splitlines()
+                            except Exception as err:
+                                raise err
+                            finally:
+                                inputStream.close()
 
                         except Exception as err:
-                            raise
+                            raise err
                         finally:
-                            # Remove temporary file of strings
-                            os.unlink(temp_file_strings.name)
+                            # Restore stdout and close the file. The temporary file will be deleted on close.
+                            sys.output = save_stdout
+                            temp_file_strings.close()
+
                 except Exception as err:
-                    raise
+                    raise err
                 finally:
-                    # Remove temporary binary file
-                    os.unlink(temp_file_binary.name)
+                    # Close (delete) the temporary binary file.
+                    temp_file_binary.close()
 
         except Exception as err:
             yield FunctionError(err)
 
-        yield FunctionResult(new_attachment)
+        yield StatusMessage("Returning list of decoded strings")
+        yield FunctionResult({"value": listResults})
