@@ -6,6 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_pagerduty.lib.resilient_common import validateFields, clean_html
+from fn_pagerduty.lib.errors import IntegrationError
 from .pd_common import create_note
 
 class FunctionComponent(ResilientComponent):
@@ -35,10 +36,25 @@ class FunctionComponent(ResilientComponent):
             description = clean_html(kwargs.get(u'pd_description'))  # text
 
             yield StatusMessage("starting...")
-            resp = create_note(self.log, self.options, incident_id, description)
+            resp = create_note(self.log, self.options, incident_id, description, self.create_note_callback)
             yield StatusMessage("pagerduty note created")
 
             # Produce a FunctionResult with the results - if not error, the response is not used
             yield FunctionResult(resp)
         except Exception as err:
             yield FunctionError(err)
+
+
+
+    def create_note_callback(self, resp):
+        """ handle results such as this
+            {"error":{"message":"Invalid Input Provided","code":2001,"errors":["Content cannot be empty."]}}
+        """
+        result = resp.json()
+        if 'error' in result and result['error']['code'] == 2001:
+            msg = ": ".join((result['error']['message'], str(result['error']['errors'])))
+            self.log.warning(msg)
+            StatusMessage(msg)
+            return {}
+        else:
+            raise IntegrationError(resp.text)

@@ -110,7 +110,7 @@ def update_incident(log, appDict, incident_id, status, priority, resolution, cal
     return resp
 
 
-def create_note(log, appDict, incident_id, note):
+def create_note(log, appDict, incident_id, note, callback):
     """
     Create a PagerDuty note
     :param log:
@@ -127,7 +127,7 @@ def create_note(log, appDict, incident_id, note):
     url = '/'.join((PD_BASE_URL, NOTE_FRAGMENT))
     url = url.format(incident_id)
 
-    resp = execute_call(log, 'post', url, None, None, payload, True, headers, None)
+    resp = execute_call(log, 'post', url, None, None, payload, True, headers, callback)
     return resp
 
 

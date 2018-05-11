@@ -32,8 +32,7 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers, c
         if resp.status_code >= 300:
             log and log.warning(resp)
             if callback:
-                callback(resp)
-                return {}
+                return callback(resp)
             else:
                 # get the result
                 raise IntegrationError(resp.text)
