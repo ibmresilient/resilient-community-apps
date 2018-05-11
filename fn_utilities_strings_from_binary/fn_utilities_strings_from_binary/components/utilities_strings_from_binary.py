@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
 
                             # Call Floss to extract strings from the file.
                             yield StatusMessage("Decoding strings from input file.")
-                            result = main.main(['main','-q', '-s', temp_file_binary.name.encode("ascii")])
+                            result = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
                             f.close()
 
                             # Create a list of strings to return.
