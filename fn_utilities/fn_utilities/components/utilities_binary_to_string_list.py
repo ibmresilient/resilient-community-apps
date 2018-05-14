@@ -92,5 +92,5 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             yield FunctionError(err)
 
-        yield StatusMessage("Returning list of {} decoded strings".format(len(number_strings)))
+        yield StatusMessage("Returning list of {} decoded strings".format(len(listResults)))
         yield FunctionResult({"value": listResults})
