@@ -7,4 +7,5 @@ resilient-circuits codegen -p fn_utilities -m fn_utilities \
     "Example: Resilient Search" \
     "Example: Shell Command" \
     "Example: Zip Extract" \
-    "Example: Zip List"
+    "Example: Zip List" \
+    "Example: Expand URL"
