@@ -21,12 +21,14 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_odbc_query
 
     The Function executes an ODBC query and takes the following parameters:
-        sql_select, sql_condition_value
+        sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3
 
     An example of a set of query parameter might look like the following:
 
         sql_select: "SELECT incident_id, name, description FROM incidents WHERE incident_id = {sql_condition_value}"
-        sql_condition_value: artifact.value
+        sql_condition_value1: artifact.value or custom condition value 1
+        sql_condition_value2: condition value 2
+        sql_condition_value3: condition value 3
 
     The ODBC query will return a result in JSON format with an entry consisting of sql query results.
 
@@ -60,33 +62,44 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_odbc_query")
     def _fn_odbc_query_function(self, event, *args, **kwargs):
-        """Resilient Function: A function that makes ODBC queries.
+        """Resilient Function: A function that makes ODBC queries
+
+        Using prepared SQL statements, where parameters are passed to the database separately,
+        protecting against SQL injection attacks.
 
         Inputs:
-        sql_select: a query with parameters
-        sql_condition_value: condition value
+        sql_query: a SQL query with set parameters using a question mark as a place holder
+        sql_condition_value1: value for the question mark - condition value 1
+        sql_condition_value2: value for the question mark - condition value 2
+        sql_condition_value3: value for the question mark - condition value 3
 
         """
 
         try:
             # Get the function parameters:
-            sql_select = self.get_select_param(kwargs.get("sql_select"))  # select, values: "SELECT incident_id, name, description FROM test.incidents WHERE incident_id = ?"
-            sql_condition_value = kwargs.get("sql_condition_value")  # text
+            sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # text with value string: "SELECT incident_id, name, description FROM test.incidents WHERE incident_id = ?"
+            sql_condition_value1 = kwargs.get("sql_condition_value1")  # text
+            sql_condition_value2 = kwargs.get("sql_condition_value2")  # text
+            sql_condition_value3 = kwargs.get("sql_condition_value3")  # text
 
-            LOG.info("sql_select: %s", sql_select)
-            LOG.info("sql_condition_value: %s", sql_condition_value)
+            LOG.info("sql_query: %s", sql_query)
+            LOG.info("sql_condition_value1: %s", sql_condition_value1)
+            LOG.info("sql_condition_value2: %s", sql_condition_value2)
+            LOG.info("sql_condition_value3: %s", sql_condition_value3)
 
-            self.search_params = {'sql_select': sql_select,
-                                  'sql_condition_value': sql_condition_value}
+            sql_args = []
+            sql_args.extend(sql_condition_value1 if sql_condition_value1 is not None else [])
+            sql_args.extend(sql_condition_value2 if sql_condition_value2 is not None else [])
+            sql_args.extend(sql_condition_value3 if sql_condition_value3 is not None else [])
 
             yield StatusMessage("starting...")
-            self.validate_data()
+            self.validate_data(sql_query, sql_args)
 
             yield StatusMessage("Opening ODBC connection...")
             self.setup_odbc_connection()
 
             yield StatusMessage("Executing an ODBC query...")
-            results = self.execute_odbc_query()
+            results = self.execute_odbc_query(sql_query, sql_args)
 
             yield StatusMessage("done...")
             LOG.info(json.dumps(results))
@@ -94,7 +107,9 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
 
-        except Exception:
+        except Exception as ex:
+            LOG.error(str(ex))
+            # Clean up here as well, yield FunctionError() will prevent executing finally block
             self.close_connections()
             yield FunctionError()
 
@@ -103,68 +118,41 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Closing ODBC connection...")
             self.close_connections()
 
-    def validate_data(self):
-        """" Validate input data, allow SELECT statements only """
+    def validate_data(self, sql_query, sql_arg):
+        """" Validate input data """
         # TODO test pyodbc sql injection scenarios, test select * "ALL", test multiple where clauses WHERE aa = ? AND bb = ?
-        sql_select = self.search_params.get("sql_select")
-        sql_args = self.search_params.get("sql_condition_value")
+        if "sql_allowed_statements" in self.options:
+            sql_allowed_statements = self.options["sql_allowed_statements"]
+        else:
+            raise Exception("Mandatory config setting 'sql_allowed_statements' not set.")
+
+        # Check if sql_query is one of the allowed statements from configuration file
+
 
 
     def setup_odbc_connection(self):
-        """" Setup ODBC connection to a server database
+        """" Setup ODBC connection to a SQL server
 
-        Setups up server database and connection objects using credentials obtained from the config file.
-        Method also specifies the ODBC driver based on the sql_db_type from the config file.
-
-        For testing purposes I'm connecting to MariaDB that lives on my Docker.
+        Setups up SQL server and connection objects using connection string obtained from the config file.
 
         """
-        if "sql_server_url" in self.options:
-            sql_server_url = self.options["sql_server_url"]
+        if "sql_connection_string" in self.options:
+            sql_connection_string = self.options["sql_connection_string"]
         else:
-            raise Exception("Mandatory config setting 'sql_server_url' not set.")
-
-        if "sql_db_type" in self.options:
-            sql_db_type = self.options["sql_db_type"]
-        else:
-            raise Exception("Mandatory config setting 'sql_db_type' not set.")
-
-        if "sql_port" in self.options:
-            sql_port = self.options["sql_port"]
-        else:
-            raise Exception("Mandatory config setting 'sql_port' not set.")
-
-        if "sql_uid" in self.options:
-            sql_uid = self.options["sql_uid"]
-        else:
-            raise Exception("Mandatory config setting 'sql_uid' not set.")
-
-        if "sql_pwd" in self.options:
-            sql_pwd = self.options["sql_pwd"]
-        else:
-            raise Exception("Mandatory config setting 'sql_pwd' not set.")
-
+            raise Exception("Mandatory config setting 'sql_connection_string' not set.")
         if "sql_connection_timeout" in self.options:
             sql_connection_timeout = self.options["sql_connection_timeout"]
         else:
             raise Exception("Mandatory config setting 'sql_connection_timeout' not set.")
 
-        # FIXME hardcoded, set driver based on the sql_db_type
-        sql_database_driver = "MariaDB ODBC 3.0 Driver"
-
-        """ ODBC connection pooling is turned on by default.
-        Connections to the SQL server are not closed by default. 
-        Some database drivers do not close connections when close() is called in order to save round-trips to the server.
-        To close your connection when you call close() you should set pooling to False.
-        """
+        # ODBC connection pooling is turned ON by default.
+        # Not all database drivers close connections on db_connection.close() to save round trips to the server.
+        # Pooling should be set to False to close connection on db_connection.close().
         pyodbc.pooling = False
 
         try:
-            connection_string = "DRIVER={{{}}};SERVER={};PORT={};UID={};PWD={};".format(sql_database_driver,
-                                                                                            sql_server_url, sql_port,
-                                                                                            sql_uid, sql_pwd)
-
-            self.db_connection = pyodbc.connect(connection_string)
+            # The connection string credentials, set in the config file
+            self.db_connection = pyodbc.connect(sql_connection_string)
 
             # The connection timeout value, set in the config file
             self.db_connection.timeout = int(sql_connection_timeout)
@@ -177,37 +165,30 @@ class FunctionComponent(ResilientComponent):
 
         # Catch any additional errors not specifically checked for
         except Exception as e:
-            raise Exception("Could not setup the ODBC connection to %s, Exception %s", sql_server_url, e)
+            raise Exception("Could not setup the ODBC connection, Exception %s", e)
 
-    def execute_odbc_query(self):
+    def execute_odbc_query(self, sql_query, sql_args):
         """"  Execute SQL statement
 
-        Execute SQL statements using the Cursor execute() function. Using prepared SQL statements, where clause/
-        condition value is passed to the database separately, protecting against SQL injections.
+        Execute SQL statements using the Cursor execute() function.
 
         """
         if "sql_number_of_records_returned" in self.options:
             number_records = int(self.options["sql_number_of_records_returned"])
 
         try:
-            sql_select = self.search_params.get("sql_select")
-            sql_args = self.search_params.get("sql_condition_value")
+            # Execute query
+            self.db_cursor.execute(sql_query, sql_args)
 
-            self.db_cursor.execute(sql_select, [sql_args])
-
-
+            # Fetch results
             if number_records is not None:
                 rows = self.db_cursor.fetchmany(number_records)
             else:
                 rows = self.db_cursor.fetchall()
 
-        # Catch some specific exceptions
-        except pyodbc.DatabaseError as err:
-            raise err
-
         # Catch any additional errors not specifically checked for
         except Exception as e:
-            raise Exception("Could not execute SQL statement %s, Exception %s", sql_select, e)
+            raise Exception("Could not execute SQL statement %s, Exception %s", sql_query, e)
 
         try:
             rows
@@ -222,11 +203,15 @@ class FunctionComponent(ResilientComponent):
             LOG.info("No query results returned")
             return {"entries": None}
 
-        # add query result column names to result entries to be displayed as a row in Resilient datatable
-        entries_data_list = [[column[0] for column in self.db_cursor.description]]
+        # List of column names from SQL result to use as dictionary keys
+        dt_column_keys = [column[0] for column in self.db_cursor.description]
 
-        # add rows to the result entries
-        entries_data_list.extend([list(row) for row in rows])
+        # Build dictionary: key-value pairs consisting of column name - row value
+        entries_data_list = []
+        for row in rows:
+            if row is None:
+                break
+            entries_data_list.append(dict(zip(dt_column_keys, row)))
 
         LOG.info("Result contains %s entries", len(entries_data_list))
 
