@@ -16,7 +16,7 @@ atd_password=
 # Amount of time in minutes before the function quits and throws an error
 timeout=30
 
-# Interval in seconds to wait to check if the file has finished being analyzed
+# Interval in seconds to wait and check if the file has finished being analyzed
 polling_interval=60
 
 # Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.

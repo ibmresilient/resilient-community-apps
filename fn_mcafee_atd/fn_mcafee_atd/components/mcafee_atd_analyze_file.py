@@ -132,7 +132,7 @@ class FunctionComponent(ResilientComponent):
             atd_task_id = content["results"][0]["taskId"]
             files_wait = content["filesWait"]
             estimated_time = content["estimatedTime"]
-            yield StatusMessage("File uploaded to ATD with taskId: ".format(str(atd_task_id)))
+            yield StatusMessage("File uploaded to ATD with taskId: {}".format(str(atd_task_id)))
             yield StatusMessage("Files waiting on: {}".format(files_wait))
             yield StatusMessage("Estimated Time: {} minutes".format(estimated_time))
 
