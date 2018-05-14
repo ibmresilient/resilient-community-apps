@@ -30,23 +30,23 @@ class FunctionComponent(ResilientComponent):
         sql_condition_value2: condition value 2
         sql_condition_value3: condition value 3
 
-    The ODBC query will return a result in JSON format with an entry consisting of sql query results.
+    The ODBC query will return a result in JSON format with an entry consisting of key value pairs.
 
         {
             'entries': [
-                [u'sql_column_1', u'sql_column_2', u'sql_column_3', ...],
-                [u'query_result_column_1_value', u'query_result_column_2_value', u'query_result_column_3_value', ...]
-                [u'query_result_column_1_value', u'query_result_column_2_value', u'query_result_column_3_value', ...]
+                {u'sql_column_1': "query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...},
+                {u'sql_column_1': query_result_column_1_value, u'sql_column_2': u'query_result_column_2_value', ...}
                 ...
-           ]
+            ]
         }
 
     An example of a returned result:
 
-        'entries': [
-            [u'incident_id', u'name', u'description'],
-            [1, u'Bad incident mysql', u'very bad incident']
-        ]}
+        "entries": [
+            {"sql_column_1": 3, "sql_column_2": "MariaBD"},
+            {"sql_column_1": 4, "sql_column_2": "MariaBD"},
+            {"sql_column_1": 5, "sql_column_2": "MariaBD"}
+            ]
 
     """
 
@@ -119,7 +119,11 @@ class FunctionComponent(ResilientComponent):
             self.close_connections()
 
     def validate_data(self, sql_query, sql_arg):
-        """" Validate input data """
+        """" Validate input data
+
+        Validate if query is allowed.
+
+        """
         # TODO test pyodbc sql injection scenarios, test select * "ALL", test multiple where clauses WHERE aa = ? AND bb = ?
         if "sql_allowed_statements" in self.options:
             sql_allowed_statements = self.options["sql_allowed_statements"]
@@ -133,7 +137,7 @@ class FunctionComponent(ResilientComponent):
     def setup_odbc_connection(self):
         """" Setup ODBC connection to a SQL server
 
-        Setups up SQL server and connection objects using connection string obtained from the config file.
+        Setup ODBC connection to a SQL server using connection string obtained from the config file.
 
         """
         if "sql_connection_string" in self.options:
@@ -198,7 +202,11 @@ class FunctionComponent(ResilientComponent):
         return self.prepare_results(rows)
 
     def prepare_results(self, rows):
-        """"  Generate JSON from query results. """
+        """"  Generate result
+
+        Generate result in JSON format with an entry consisting of key value pairs.
+
+        """
         if rows is None:
             LOG.info("No query results returned")
             return {"entries": None}
@@ -220,7 +228,11 @@ class FunctionComponent(ResilientComponent):
         return entries
 
     def close_connections(self):
-        """"  Delete the cursor and close connection if they are defined. """
+        """"  Clean up
+
+        Delete the cursor and close connection if they are defined.
+
+        """
         if hasattr(self, 'db_cursor'):
             del self.db_cursor
         if hasattr(self, 'db_connection'):
