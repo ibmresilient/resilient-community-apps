@@ -40,7 +40,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
     data_dict = {
             "data": {
-                "xMode": g.xMode,
                 "vmProfileList": g.vm_profile_list,
                 "submitType": submit_type,
                 "url": url

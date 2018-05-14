@@ -28,9 +28,6 @@ class FunctionComponent(ResilientComponent):
             self.polling_interval = int(self.options.get("polling_interval"))
             if self.polling_interval is None:  # Defaults to 60 sec
                 self.polling_interval = 60
-            self.xMode = self.options.get("xMode")
-            if self.xMode is None:  # Default to ""
-                self.xMode = ""
             self.vm_profile_list = self.options.get("vm_profile_list")
             self.filePriority = self.options.get("filePriority")
             if self.filePriority is None:  # Defaults to add_to_q
