@@ -16,7 +16,7 @@ sql_connection_string='DRIVER={MariaDB ODBC 3.0 Driver};SERVER=127.0.0.1;PORT=33
 sql_connection_timeout = 60
 # Return a list of specific number of rows in the query. Leave blank to fetch all.
 sql_number_of_records_returned = 10
-sql_allowed_statements=[select]
+sql_not_allowed_statements=[delete]
     """
     return config_data
 
