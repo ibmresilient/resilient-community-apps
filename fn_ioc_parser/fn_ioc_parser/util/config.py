@@ -6,13 +6,13 @@
 from __future__ import print_function
 
 
-CONFIG_SECTION = "iocp"
+CONFIG_SECTION = "fn_ioc_parser"
 
 
 def config_section_data():
 
     config_result = """
-[iocp]
+[fn_ioc_parser]
 filepath=
     """
     return config_result

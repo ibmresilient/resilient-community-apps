@@ -18,7 +18,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get('iocp')
+        self.options = opts.get('fn_ioc_parser')
 
     # uses the rest service to go to /incidents/<num>/artifacts/<num>/contents
     def getContentsFromArtifact(self, incidentID, artifactID):
