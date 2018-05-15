@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # validate required fields
             validateFields(['incidentID', 'pd_title', 'pd_service', 'pd_escalation_policy'], kwargs)
+            validateFields(['api_token', 'from_email'], self.options)
 
             createDict = self._buildIncidentPayload(kwargs, self.options, self.res_options)
             #

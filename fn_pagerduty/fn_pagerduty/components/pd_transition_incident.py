@@ -34,6 +34,7 @@ class FunctionComponent(ResilientComponent):
         """Function: transition an indident"""
         try:
             validateFields(['pd_incident_id'], kwargs)
+            validateFields(['api_token', 'from_email'], self.options)
 
             # Get the function parameters:
             incident_id = kwargs.get("pd_incident_id")  # text

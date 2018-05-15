@@ -32,6 +32,8 @@ class FunctionComponent(ResilientComponent):
         try:
             # validate the function parameters:
             validateFields([u'pd_incident_id', u'pd_description'], kwargs)
+            validateFields(['api_token', 'from_email'], self.options)
+
             incident_id = kwargs.get(u'pd_incident_id')  # text
             description = clean_html(kwargs.get(u'pd_description'))  # text
 
