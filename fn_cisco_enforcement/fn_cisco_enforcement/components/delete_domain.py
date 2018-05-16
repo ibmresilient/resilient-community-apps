@@ -53,7 +53,7 @@ class FunctionComponent(ResilientComponent):
             if not response or response.status_code >= 300:
                 response.content and self.log.error(response.content)
                 resp = response.json()
-                yield FunctionError("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+                yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
             else:
                 results = {
                     "value": response.content.decode('latin1')

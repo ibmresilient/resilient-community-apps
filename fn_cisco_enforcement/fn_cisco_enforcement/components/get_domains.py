@@ -58,13 +58,13 @@ class FunctionComponent(ResilientComponent):
                 if not response or response.status_code >= 300 or not response.content:
                     response.content and self.log.error(response.content)
 
-                    yield FunctionError('api call failure: ' + str(response.status_code))
+                    yield FunctionError('Cisco Enforcement failure: ' + str(response.status_code))
                 else:
                     jsonversion = json.loads(response.content)
 
                     if not jsonversion.get('data', None):
                         self.log.error(jsonversion)
-                        yield FunctionError('api result incomplete')
+                        yield FunctionError('Cisco Enforcement result incomplete')
                     else:
                         resultlist.extend(jsonversion['data'])
                         page += 1

@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             if not response or response.status_code >= 300 or not response.content:
                 response.content and self.log.error(response.content)
-                yield FunctionError('api call failure: {} on {}'.format(response.status_code, data['dstDomain']))
+                yield FunctionError('Cisco Enforcement failure: {} on {}'.format(response.status_code, data['dstDomain']))
 
             else:
                 result = response.content.decode('latin1')
