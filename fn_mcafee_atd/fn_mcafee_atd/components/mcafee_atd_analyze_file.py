@@ -100,6 +100,7 @@ class FunctionComponent(ResilientComponent):
     def _mcafee_atd_analyze_file_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            inputs = {}
             start_time = time.time()
             yield StatusMessage("Starting...")
 
@@ -111,14 +112,19 @@ class FunctionComponent(ResilientComponent):
             attachment_id = kwargs.get("attachment_id")  # number
             task_id = kwargs.get("task_id")  # number
             atd_report_type = self.get_select_param(kwargs.get("mcafee_atd_report_type"))  # select
+            inputs["macfee_atd_report_type"] = atd_report_type
 
             log.info("incident_id: %s", incident_id)
+            inputs["incident_id"] = incident_id
             if artifact_id is not None:
                 log.info("artifact_id: %s", artifact_id)
+                inputs["artifact_id"] = artifact_id
             if attachment_id is not None:
                 log.info("attachment_id: %s", attachment_id)
+                inputs["attachment_id"] = attachment_id
             if task_id is not None:
                 log.info("task_id: %s", task_id)
+                inputs["task_id"] = task_id
 
             f_download = self._get_file(**kwargs)
             f = f_download["file"]
@@ -159,6 +165,7 @@ class FunctionComponent(ResilientComponent):
 
             end_time = time.time()
             results["Run Time"] = str(end_time - start_time)
+            results["Inputs"] = inputs
 
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results

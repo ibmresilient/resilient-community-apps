@@ -69,6 +69,7 @@ class FunctionComponent(ResilientComponent):
     def _mcafee_atd_analyze_url_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            inputs = {}
             start_time = time.time()
             yield StatusMessage("Starting...")
 
@@ -82,8 +83,19 @@ class FunctionComponent(ResilientComponent):
             atd_url_submit_type = self.get_select_param(kwargs.get("mcafee_atd_url_submit_type"))  # select
 
             log.info("incident_id: %s", incident_id)
+            inputs["incident_id"] = incident_id
             if artifact_id is not None:
                 log.info("artifact_id: %s", artifact_id)
+                inputs["artifact_id"] = artifact_id
+            if url_to_analyze is not None:
+                log.info("artifact_value: $s", url_to_analyze)
+                inputs["artifact_value"] = url_to_analyze
+            if atd_report_type is not None:
+                log.info("macfee_atd_report_type: %s", atd_report_type)
+                inputs["macfee_atd_report_type"] = atd_report_type
+            if atd_url_submit_type is not None:
+                log.info("mcafee_atd_url_submit_type: %s", atd_url_submit_type)
+                inputs["mcafee_atd_url_submit_type"] = atd_url_submit_type
 
             submit_type = None
             if atd_url_submit_type == "Analyze URL":
@@ -124,6 +136,7 @@ class FunctionComponent(ResilientComponent):
 
             end_time = time.time()
             results["Run Time"] = str(end_time - start_time)
+            results["Inputs"] = inputs
 
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
