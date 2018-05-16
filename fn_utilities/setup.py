@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_utilities',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -33,7 +33,8 @@ setup(
             "EmailParseFunctionComponent = fn_utilities.components.utilities_email_parse:FunctionComponent",
             "PDFidFunctionComponent = fn_utilities.components.utilities_pdfid:FunctionComponent",
             "ResilientSearchFunctionComponent = fn_utilities.components.utilities_resilient_search:FunctionComponent",
-            "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent"
+            "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent",
+            "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
