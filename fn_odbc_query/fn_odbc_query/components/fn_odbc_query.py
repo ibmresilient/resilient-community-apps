@@ -40,15 +40,6 @@ class FunctionComponent(ResilientComponent):
                 ...
             ]
         }
-
-    An example of a returned result:
-
-        "entries": [
-            {"sql_column_1": 3, "sql_column_2": "MariaBD"},
-            {"sql_column_1": 4, "sql_column_2": "MariaBD"},
-            {"sql_column_1": 5, "sql_column_2": "MariaBD"}
-            ]
-
     """
 
     def __init__(self, opts):
@@ -75,6 +66,7 @@ class FunctionComponent(ResilientComponent):
         sql_condition_value3: value for the question mark - condition value 3
 
         """
+        db_connection = None
 
         try:
             # Get the function parameters:
@@ -90,7 +82,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting...")
             sql_params = self.prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3)
-            self.validate_data(sql_query, sql_params)
+            self.validate_data(sql_query)
 
             yield StatusMessage("Opening ODBC connection...")
             db_connection = self.setup_odbc_connection()
@@ -99,7 +91,9 @@ class FunctionComponent(ResilientComponent):
             results = self.execute_odbc_query(db_connection, sql_query, sql_params)
 
             if results.get("entries") is None:
-                yield StatusMessage("No query results returned.")
+                yield StatusMessage("No query results returned...")
+            else:
+                yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
 
             yield StatusMessage("Done...")
             LOG.info(json.dumps(results))
@@ -136,20 +130,22 @@ class FunctionComponent(ResilientComponent):
 
         return sql_params
 
-    def validate_data(self, sql_query, sql_args):
+    def validate_data(self, sql_query):
         """" Validate input data
 
         Validate if query is allowed.
 
         """
-        # TODO test select * "ALL", test multiple where clauses WHERE aa = ? AND bb = ?
-        if "sql_not_allowed_statements" in self.options:
-            sql_not_allowed_statements = self.options["sql_not_allowed_statements"]
+        if "sql_restricted_sql_statements" in self.options:
+            sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"]
+
+        restricted_list = sql_restricted_sql_statements.lstrip("[").rstrip("]").split(",") \
+            if sql_restricted_sql_statements else []
 
         # Check if sql_query is one of the NOT allowed statements from configuration file
-
-        if re.search("delete", sql_query.lower()):
-            raise Exception("User does not have permission to perform %s SQL statement", sql_query)
+        for item in restricted_list:
+            if re.search(item.lower(), sql_query.lower()):
+                raise Exception("User does not have permission to perform %s action", item)
 
     def setup_odbc_connection(self):
         """" Setup ODBC connection to a SQL server
@@ -182,7 +178,6 @@ class FunctionComponent(ResilientComponent):
 
         # Catch any additional errors not specifically checked for
         except Exception as e:
-            db_connection = None
             raise Exception("Could not setup the ODBC connection, Exception %s", e)
 
         return db_connection
@@ -194,7 +189,8 @@ class FunctionComponent(ResilientComponent):
 
         """
         if "sql_number_of_records_returned" in self.options:
-            number_records = int(self.options["sql_number_of_records_returned"])
+            sql_number_of_records_returned = self.options["sql_number_of_records_returned"]
+            number_records = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
 
         try:
             db_cursor = db_connection.cursor()
@@ -243,7 +239,7 @@ class FunctionComponent(ResilientComponent):
     def close_connections(db_connection):
         """"  Clean up
 
-        Close connection if they are defined.
+        Close connection if it is defined.
 
         """
         if db_connection is not None:
