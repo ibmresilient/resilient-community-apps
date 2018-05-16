@@ -5,7 +5,6 @@
 
 import logging
 import requests
-import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_enforcement.lib.resilient_common import validate_fields, readable_datetime
 
@@ -55,12 +54,16 @@ class FunctionComponent(ResilientComponent):
                 self.log.info('Get page {}'.format(page))
                 response = requests.get(url, headers=HEADERS)
 
-                if not response or response.status_code >= 300 or not response.content:
-                    response.content and self.log.error(response.content)
-
-                    yield FunctionError('Cisco Enforcement failure: ' + str(response.status_code))
+                if response.status_code >= 300:
+                    resp = response.json()
+                    if response.status_code == 404:
+                        response.content and self.log.warning(response.content)
+                        yield StatusMessage("Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
+                    else:
+                        response.content and self.log.error(response.content)
+                        yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
                 else:
-                    jsonversion = json.loads(response.content)
+                    jsonversion = response.json()
 
                     if not jsonversion.get('data', None):
                         self.log.error(jsonversion)

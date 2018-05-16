@@ -50,10 +50,14 @@ class FunctionComponent(ResilientComponent):
 
             response = requests.delete(url)
 
-            if not response or response.status_code >= 300:
-                response.content and self.log.error(response.content)
+            if response.status_code >= 300:
                 resp = response.json()
-                yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+                if response.status_code == 404:
+                    response.content and self.log.warning(response.content)
+                    yield StatusMessage("Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
+                else:
+                    response.content and self.log.error(response.content)
+                    yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
             else:
                 results = {
                     "value": response.content.decode('latin1')
