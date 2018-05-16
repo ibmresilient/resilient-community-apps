@@ -10,9 +10,11 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_mcafee_atd]
-atd_url=https://127.0.0.1:8888
-atd_username=
-atd_password=
+
+# url example: https://127.0.0.1:8888
+atd_url=<your_atd_url>
+atd_username=<your_atd_username>
+atd_password=<your_atd_password>
 # Amount of time in minutes before the function quits and throws an error
 timeout=30
 
@@ -20,11 +22,12 @@ timeout=30
 polling_interval=60
 
 # Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.
-vm_profile_list=
+vm_profile_list=<your_vm_profile>
 
 # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'
 filePriority=add_to_q
 
+# If your ATD server uses a cert which is not automatically trusted by your machine set trust_cert=False
 trust_cert=[True|False]
 """
     return config_data
