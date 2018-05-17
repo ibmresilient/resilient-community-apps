@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
                raise ValueError("One of parameters 'ipaddr' or 'asn' was not processed correctly")
             elif "_ipaddr" in process_result:
                 ipaddr = process_result.pop("_ipaddr")
-            elif "_asn" in params:
+            elif "_asn" in process_result:
                 asn = process_result.pop("_asn")
 
             api_token = self.options.get("api_token")
