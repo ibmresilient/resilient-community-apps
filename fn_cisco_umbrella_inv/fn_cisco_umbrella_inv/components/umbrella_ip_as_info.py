@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_ip_as_info' of
@@ -81,36 +81,40 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("One of parameters 'umbinv_ipaddr' or 'umbinv_asn' must be set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            ipaddr = asn = None
+            process_result = {}
+            params = {"ipaddr": umbinv_ipaddr, "asn": umbinv_asn}
 
-            self._params = {"ipaddr": umbinv_ipaddr, "asn": umbinv_asn}
-
-            # Reset 'ipaddr' or 'asn' param if inmput paramater set.
+            # Reset 'ipaddr' param if inmput paramater set.
             if not is_none(umbinv_ipaddr):
-                self._params.setdefault("ipaddr", umbinv_ipaddr.strip())
+                params.setdefault("ipaddr", umbinv_ipaddr.strip())
 
-            validate_params(self)
-            process_params(self)
+            validate_params(params)
+            process_params(params, process_result)
 
-            if not hasattr(self, '_ipaddr') and not hasattr(self, '_asn'):
+            if "_ipaddr" not in process_result and "_asn" not in process_result:
                raise ValueError("One of parameters 'ipaddr' or 'asn' was not processed correctly")
+            elif "_ipaddr" in process_result:
+                ipaddr = process_result.pop("_ipaddr")
+            elif "_asn" in params:
+                asn = process_result.pop("_asn")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if hasattr(self, '_ipaddr'):
+            if ipaddr is not None:
                 # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
-                rtn = rinv.as_for_ip(self._ipaddr)
+                rtn = rinv.as_for_ip(ipaddr)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr,
+                results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
                            "query_execution_time": query_execution_time}
-            elif hasattr(self, '_asn'):
-                rtn = rinv.prefixes_for_asn(self._asn)
+            elif asn is not None:
+                rtn = rinv.prefixes_for_asn(asn)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": self._asn,
+                results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": asn,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 

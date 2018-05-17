@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, \
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params, \
     is_none
 
 
@@ -118,51 +118,52 @@ class FunctionComponent(ResilientComponent):
                                  "must be set.")
 
             yield StatusMessage("Starting...")
-            init_env(self)
-
-            self._params = {"emails": umbinv_emails, "nameservers": umbinv_nameservers,
-                            "domain": umbinv_domain, "limit": umbinv_limit, "sort_field": umbinv_sortby,
-                            "offset": umbinv_offset}
+            process_result = {}
+            params = {"emails": umbinv_emails, "nameservers": umbinv_nameservers,"domain": umbinv_domain,
+                      "limit": umbinv_limit, "sort_field": umbinv_sortby, "offset": umbinv_offset}
 
             # Reset 'emails' and 'domain' or 'nameserver param if inmput paramater set.
             if not is_none(umbinv_domain):
-                self._params.setdefault("domains", umbinv_domain.strip())
+                params.setdefault("domains", umbinv_domain.strip())
 
             if not is_none(umbinv_nameservers):
-                self._params.setdefault("nameservers", umbinv_nameservers.strip())
+                params.setdefault("nameservers", umbinv_nameservers.strip())
 
             if not is_none(umbinv_emails):
-                self._params.setdefault("emails", umbinv_emails.strip())
+                params.setdefault("emails", umbinv_emails.strip())
 
-            validate_params(self)
-            process_params(self)
+            validate_params(params)
+            process_params(params, process_result)
 
-            if not hasattr(self, '_domain') and not hasattr(self, '_emails') and not hasattr(self, '_nameservers'):
+            if "_domain" not in process_result and "_emails" not in process_result and "_nameservers" not in process_result:
                raise ValueError("One of parameters 'umbinv_domain', 'umbinv_emails' or 'umbinv_nameservers' was "
                                 "not processed correctly")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if hasattr(self, '_domain'):
-                rtn = rinv.domain_whois_history(self._domain, self._params["limit"])
+            if "_domain" in process_result:
+                domain = process_result.pop("_domain")
+                rtn = rinv.domain_whois_history(domain, params["limit"])
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domain" key to result to facilitate post-processing.
-                results = {"domain_whois": json.loads(json.dumps(rtn)), "domain": self._domain,
+                results = {"domain_whois": json.loads(json.dumps(rtn)), "domain": domain,
                            "query_execution_time": query_execution_time}
-            elif hasattr(self, '_emails'):
-                rtn = rinv.email_whois(self._emails, **omit_params(self._params, ["emails","nameservers","domain"]))
+            elif "_emails" in process_result:
+                emails = process_result.pop("_emails")
+                rtn = rinv.email_whois(emails, **omit_params(params, ["emails", "nameservers", "domain"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "emails" key to result to facilitate post-processing.
-                results = {"email_whois": json.loads(json.dumps(rtn)), "emails": self._emails,
+                results = {"email_whois": json.loads(json.dumps(rtn)), "emails": emails,
                            "query_execution_time": query_execution_time}
-            elif hasattr(self, '_nameservers'):
-                rtn = rinv.ns_whois(self._nameservers, **omit_params(self._params, ["emails","nameservers","domain"]))
+            elif "_nameservers" in process_result:
+                nameservers = process_result.pop("_nameservers")
+                rtn = rinv.ns_whois(nameservers, **omit_params(params, ["emails", "nameservers", "domain"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "nameservers" key to result to facilitate post-processing.
-                results = {"ns_whois": json.loads(json.dumps(rtn)), "nameservers": self._nameservers,
+                results = {"ns_whois": json.loads(json.dumps(rtn)), "nameservers": nameservers,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 
