@@ -76,10 +76,10 @@ class TestLdapSearch:
 
          """
         function_params = {
-            "search_base": login_search_base,
-            "search_filter": login_search_filter,
-            "search_attributes": login_search_attributes,
-            "param": login_param
+            "ldap_search_base": login_search_base,
+            "ldap_search_filter": login_search_filter,
+            "ldap_search_attributes": login_search_attributes,
+            "ldap_param": login_param
         }
         result = call_ldap_search_function(circuits_app, function_params)
         assert (login_expected_result == result)
@@ -103,10 +103,10 @@ class TestLdapSearch:
 
          """
         function_params = {
-            "search_base": success_search_base,
-            "search_filter": success_search_filter,
-            "search_attributes": success_search_attributes,
-            "param": success_param
+            "ldap_search_base": success_search_base,
+            "ldap_search_filter": success_search_filter,
+            "ldap_search_attributes": success_search_attributes,
+            "ldap_param": success_param
         }
         result = call_ldap_search_function(circuits_app, function_params)
         assert(success_expected_result == result)
