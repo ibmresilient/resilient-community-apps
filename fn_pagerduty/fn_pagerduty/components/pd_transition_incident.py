@@ -21,6 +21,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
+        validateFields(['api_token', 'from_email'], self.options)
         self.log = logging.getLogger(__name__)
 
     @handler("reload")
@@ -28,13 +29,13 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
+        validateFields(['api_token', 'from_email'], self.options)
 
     @function("pagerduty_transition_incident")
     def _pagerduty_transition_incident_function(self, event, *args, **kwargs):
         """Function: transition an indident"""
         try:
             validateFields(['pd_incident_id'], kwargs)
-            validateFields(['api_token', 'from_email'], self.options)
 
             # Get the function parameters:
             incident_id = kwargs.get("pd_incident_id")  # text

@@ -17,6 +17,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
+        validateFields(['api_token', 'from_email'], self.options)
         self.log = logging.getLogger(__name__)
 
     @handler("reload")
@@ -24,6 +25,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.res_options = opts.get("resilient", {})
         self.options = opts.get("pagerduty", {})
+        validateFields(['api_token', 'from_email'], self.options)
 
 
     @function("pagerduty_create_note")
@@ -32,7 +34,6 @@ class FunctionComponent(ResilientComponent):
         try:
             # validate the function parameters:
             validateFields([u'pd_incident_id', u'pd_description'], kwargs)
-            validateFields(['api_token', 'from_email'], self.options)
 
             incident_id = kwargs.get(u'pd_incident_id')  # text
             description = clean_html(kwargs.get(u'pd_description'))  # text
