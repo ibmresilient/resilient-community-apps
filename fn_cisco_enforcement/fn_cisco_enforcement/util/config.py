@@ -11,7 +11,7 @@ def config_section_data():
 [fn_cisco_enforcement]
 url=https://s-platform.api.opendns.com/1.0
 api_token=
-protocolversion=1.0a
-providerName=Security Platform
+protocol_version=1.0a
+provider_name=Security Platform
     """
     return config_result
