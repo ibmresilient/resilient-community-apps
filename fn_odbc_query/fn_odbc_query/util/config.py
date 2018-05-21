@@ -17,7 +17,8 @@ sql_connection_string=Driver={PostgreSQL};Server=localhost;Port=5432;Database=po
 # Define number of rows to fetch. Leave blank to fetch all.
 sql_number_of_records_returned = 10
 
-# Define a list of restricted sql statements, separated by a comma. Leave blank if there are no restrictions.
+# Define a list of restricted sql statements, use [] separated by a comma.
+# Example [delete, update, insert]. Leave blank if there are no restrictions.
 sql_restricted_sql_statements=[delete, insert, update]
 
 # Encoding and decoding settings needed for your database

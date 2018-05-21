@@ -60,7 +60,8 @@ class FunctionComponent(ResilientComponent):
         protecting against SQL injection attacks.
 
         Inputs:
-        sql_query: a SQL query with set parameters using a question mark as a place holder
+        Inputs: sql_query: a SQL query with set parameters using a question mark as a place holder,
+            SQL statements SELECT, INSERT, UPDATE and DELETE are supported
         sql_condition_value1: value for the question mark - condition value 1
         sql_condition_value2: value for the question mark - condition value 2
         sql_condition_value3: value for the question mark - condition value 3
@@ -91,13 +92,29 @@ class FunctionComponent(ResilientComponent):
             db_cursor = self.create_cursor(db_connection)
 
             yield StatusMessage("Executing an ODBC query...")
-            rows = self.execute_odbc_query(db_cursor, sql_query, sql_params)
-            results = self.prepare_results(db_cursor, rows)
 
-            if results.get("entries") is None:
-                yield StatusMessage("No query results returned...")
+            # Check what SQL statement is executed, get the first word in sql_query
+            sql_statement = sql_query.split(None, 1)[0]
+
+            if sql_statement.lower() == 'select':
+                rows = self.execute_select_statement(db_cursor, sql_query, sql_params)
+                results = self.prepare_results(db_cursor, rows)
+
+                if results.get("entries") is None:
+                    yield StatusMessage("No query results returned...")
+                else:
+                    yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
+
+            elif sql_statement.lower() == 'update' or sql_statement.lower() == 'delete' \
+                    or sql_statement.lower() == 'insert':
+                # Return row count and set results to empty list
+                row_count = self.execute_odbc_query(db_connection, db_cursor, sql_query, sql_params)
+                results = self.prepare_results(db_cursor, None)
+
+                yield StatusMessage("Updated {} rows".format(row_count))
             else:
-                yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
+                # Everything else isn't supported - return empty list
+                results = self.prepare_results(db_cursor, None)
 
             yield StatusMessage("Done...")
             LOG.info(json.dumps(results))
@@ -109,10 +126,9 @@ class FunctionComponent(ResilientComponent):
             LOG.error(str(ex))
             raise FunctionError()
 
-        # Tear down
+        # Commit changes and tear down connection
         finally:
             yield StatusMessage("Closing ODBC connection...")
-            self.commit_connection(db_connection)
             self.close_connections(db_connection, db_cursor)
 
     @staticmethod
@@ -143,12 +159,12 @@ class FunctionComponent(ResilientComponent):
             sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"]
 
         restricted_list = sql_restricted_sql_statements.lstrip("[").rstrip("]").split(",") \
-            if sql_restricted_sql_statements else []
+            if sql_restricted_sql_statements is not None and sql_restricted_sql_statements != "[]" else []
 
         # Check if sql_query is one of the NOT allowed statements from configuration file
         for item in restricted_list:
             if re.search(item.strip().lower(), sql_query.lower()):
-                raise Exception("User does not have permission to perform %s action", item)
+                raise Exception("User does not have permission to perform {} action".format(item.strip()))
 
     def setup_odbc_connection(self):
         """" Setup ODBC connection to a SQL server
@@ -218,8 +234,26 @@ class FunctionComponent(ResilientComponent):
 
         return db_cursor
 
-    def execute_odbc_query(self, db_cursor, sql_query, sql_args):
-        """"  Execute SQL statement
+    @staticmethod
+    def execute_odbc_query(db_connection, db_cursor, sql_query, sql_args):
+        """"  Execute SQL DELETE, UPDATE, INSERT statement
+
+        Execute SQL statements using the Cursor execute() function.
+
+        """
+        try:
+            db_cursor.execute(sql_query, sql_args)
+
+            if not db_connection.autocommit:
+                db_connection.commit()
+
+        except Exception as e:
+            raise Exception("Could not execute SQL statement %s, Exception %s", sql_query, e)
+
+        return db_cursor.rowcount
+
+    def execute_select_statement(self, db_cursor, sql_query, sql_args):
+        """"  Execute SQL SELECT statement
 
         Execute SQL statements using the Cursor execute() function.
 
@@ -250,7 +284,6 @@ class FunctionComponent(ResilientComponent):
 
         """
         if rows is None or len(rows) == 0:
-            LOG.info("No query results returned")
             return {"entries": None}
 
         # List of column names from SQL result to use as dictionary keys
@@ -263,18 +296,9 @@ class FunctionComponent(ResilientComponent):
                 break
             entries_data_list.append(dict(zip(dt_column_keys, row)))
 
-        LOG.info("Result contains %s entries", len(entries_data_list))
-
         entries = {"entries": [entry for entry in entries_data_list]}
 
         return entries
-
-    @staticmethod
-    def commit_connection(db_connection):
-        """"  Commit connection """
-        if db_connection is not None:
-            if not db_connection.autocommit:
-                db_connection.commit()
 
     @staticmethod
     def close_connections(db_cursor, db_connection):
