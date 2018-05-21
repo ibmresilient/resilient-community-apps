@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, init_env, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -76,30 +76,32 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_domain' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            domain = None
+            process_result = {}
+            params = {"domain": umbinv_domain.strip()}
 
-            self._params = {"domain": umbinv_domain.strip()}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
-
-            if not hasattr(self, '_domain'):
-               raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
+            if "_domain" not in process_result:
+                 raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
+            else:
+                domain = process_result.pop("_domain")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.cooccurrences(self._domain)
+            rtn = rinv.cooccurrences(domain)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if rtn["found"] is None or str(rtn["found"]).lower() == 'false':
                 log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for domain '{}'.".format(self._domain))
+                yield StatusMessage("No Results returned for domain '{}'.".format(domain))
                 results = {}
             else:
                 # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
-                results = {"cooccurrences": json.loads(json.dumps(rtn)), "domain_name": self._domain,
+                results = {"cooccurrences": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 

@@ -7,7 +7,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_pattern_search' of
@@ -78,28 +78,30 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'regex' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
-
-            self._params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,
+            regex = None
+            process_result = {}
+            params = {"regex": umbinv_regex.strip(), "start_epoch": umbinv_start_epoch,
                             "start_relative": umbinv_start_relative,
                             "limit": umbinv_limit, "include_category": umbinv_include_category}
 
-            validate_params(self)
-            process_params(self)
+            validate_params(params)
+            process_params(params, process_result)
 
-            if not hasattr(self, '_regex'):
+            if "_regex" not in process_result:
                raise ValueError("Parameter 'umbinv_regex' was not processed correctly")
+            else:
+                regex = process_result.pop("_regex")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.search(self._regex, **omit_params(self._params, ["regex"]))
+            rtn = rinv.search(regex, **omit_params(params, ["regex"]))
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if len(rtn["matches"]) == 0:
                 log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for regular expression '{}'.".format(self._regex))
+                yield StatusMessage("No Results returned for regular expression '{}'.".format(regex))
                 results = {}
             else:
                 # Add "query_execution_time" to result to facilitate post-processing.

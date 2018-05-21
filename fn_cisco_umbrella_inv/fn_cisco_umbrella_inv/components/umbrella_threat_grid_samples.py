@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params,omit_params, \
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params,omit_params, \
     is_none
 
 
@@ -103,31 +103,33 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_resource_type' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            res = None
+            process_result = {}
+            params = {"resource": umbinv_resource.strip(), "resource_type": umbinv_resource_type,
+                      "limit": umbinv_limit, "sortby": umbinv_sortby, "offset": umbinv_offset}
 
-            self._params = {"resource": umbinv_resource.strip(), "resource_type": umbinv_resource_type,
-                            "limit": umbinv_limit, "sortby": umbinv_sortby, "offset": umbinv_offset}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
-
-            if not hasattr(self, '_res'):
-               raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
+            if "_res" not in process_result:
+                raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
+            else:
+                res = process_result.pop("_res")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
             rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.samples(self._res, **omit_params(self._params, ["resource", "resource_type"]))
+            rtn = rinv.samples(res, **omit_params(params, ["resource", "resource_type"]))
             if len(rtn["samples"]) == 0:
                 log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for regular expression '{}'.".format(self._regex))
+                yield StatusMessage("No Results returned for resource '{}'.".format(res))
                 results = {}
             else:
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": self._res,
+                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 

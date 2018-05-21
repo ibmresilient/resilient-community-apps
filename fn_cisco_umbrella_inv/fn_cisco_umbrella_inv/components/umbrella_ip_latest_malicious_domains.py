@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env,  validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_ip_latest_malicious_domains' of
@@ -62,30 +62,33 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_ipaddr' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            ipaddr = None
+            process_result = {}
+            params = {"ipaddr": umbinv_ipaddr.strip()}
 
-            self._params = {"ipaddr": umbinv_ipaddr.strip()}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
+            if "_ipaddr" not in process_result:
+                 raise ValueError("Parameter 'ipaddr' was not processed correctly")
+            else:
+                ipaddr = process_result.pop("_ipaddr")
 
-            if not hasattr(self, '_ipaddr'):
-               raise ValueError("Parameter 'ipaddr' was not processed correctly")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.latest_domains(self._ipaddr)
+            rtn = rinv.latest_domains(ipaddr)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if len(rtn) == 0:
                 log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for ip address '{}'.".format(self._ipaddr))
+                yield StatusMessage("No Results returned for ip address '{}'.".format(ipaddr))
                 results = {}
             else:
                 # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
-                results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": self._ipaddr,
+                results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 

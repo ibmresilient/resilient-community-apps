@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 
 class FunctionComponent(ResilientComponent):
@@ -90,27 +90,30 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
-
-            self._params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels,
+            domains = None
+            process_result = {}
+            params = {"domains": umbinv_domains, "showlabels": umbinv_showlabels,
                             "status_endpoint": umbinv_status_endpoint}
 
             # Reset 'domains' and 'showlabels' param if inmput paramater set.
             if not is_none(umbinv_domains):
-                self._params.setdefault("domains", umbinv_domains.strip())
+                params.setdefault("domains", umbinv_domains.strip())
 
             if umbinv_showlabels:
-                self._params.setdefault('showlabels', None)
+                params.setdefault('showlabels', None)
 
-            validate_params(self)
-            process_params(self)
+            validate_params(params)
+            process_params(params, process_result)
 
-            if umbinv_status_endpoint == "categorization" and not hasattr(self, '_domains'):
-                raise ValueError("Parameter 'umbinv_domains' was not processed correctly")
+            if umbinv_status_endpoint == "categorization":
+                if "_domains" not in process_result:
+                    raise ValueError("Parameter 'umbinv_domains' was not processed correctly")
+                else:
+                    domains = process_result.pop("_domains")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_status_endpoint == "categories"):
@@ -125,8 +128,8 @@ class FunctionComponent(ResilientComponent):
                            "max_id": max(cat_keys_int), "query_execution_time": query_execution_time}
             elif (umbinv_status_endpoint == "categorization"):
                 dom_list = []
-                if hasattr(self, '_domains'):
-                    rtn = rinv.categorization(self._domains, self._params["showlabels"])
+                if domains is not None:
+                    rtn = rinv.categorization(domains, params["showlabels"])
                 for d in rtn:
                     dom_list.append(d)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
