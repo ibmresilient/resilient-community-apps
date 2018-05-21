@@ -67,6 +67,7 @@ class FunctionComponent(ResilientComponent):
 
         """
         db_connection = None
+        db_cursor = None
 
         try:
             # Get the function parameters:
@@ -86,9 +87,12 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Opening ODBC connection...")
             db_connection = self.setup_odbc_connection()
+            self.configure_unicode_settings(db_connection)
+            db_cursor = self.create_cursor(db_connection)
 
             yield StatusMessage("Executing an ODBC query...")
-            results = self.execute_odbc_query(db_connection, sql_query, sql_params)
+            rows = self.execute_odbc_query(db_cursor, sql_query, sql_params)
+            results = self.prepare_results(db_cursor, rows)
 
             if results.get("entries") is None:
                 yield StatusMessage("No query results returned...")
@@ -103,14 +107,13 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as ex:
             LOG.error(str(ex))
-            # Clean up here as well, yield FunctionError() will prevent executing finally block
-            self.close_connections(db_connection)
-            yield FunctionError()
+            raise FunctionError()
 
-        # Clean up actions
+        # Tear down
         finally:
             yield StatusMessage("Closing ODBC connection...")
-            self.close_connections(db_connection)
+            self.commit_connection(db_connection)
+            self.close_connections(db_connection, db_cursor)
 
     @staticmethod
     def prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3):
@@ -144,7 +147,7 @@ class FunctionComponent(ResilientComponent):
 
         # Check if sql_query is one of the NOT allowed statements from configuration file
         for item in restricted_list:
-            if re.search(item.lower(), sql_query.lower()):
+            if re.search(item.strip().lower(), sql_query.lower()):
                 raise Exception("User does not have permission to perform %s action", item)
 
     def setup_odbc_connection(self):
@@ -158,11 +161,6 @@ class FunctionComponent(ResilientComponent):
         else:
             raise Exception("Mandatory config setting 'sql_connection_string' not set.")
 
-        if "sql_connection_timeout" in self.options:
-            sql_connection_timeout = self.options["sql_connection_timeout"]
-        else:
-            raise Exception("Mandatory config setting 'sql_connection_timeout' not set.")
-
         # ODBC connection pooling is turned ON by default.
         # Not all database drivers close connections on db_connection.close() to save round trips to the server.
         # Pooling should be set to False to close connection on db_connection.close().
@@ -170,19 +168,57 @@ class FunctionComponent(ResilientComponent):
 
         try:
             db_connection = pyodbc.connect(sql_connection_string)
-            db_connection.timeout = int(sql_connection_timeout)
 
-            # This is just an example that works for PostgreSQL and MySQL, with Python 2.7.
-            db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')
-            db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
+            """ TODO:
+            The timeout value, in seconds, for an individual SQL query. Use zero, the default, to disable.
+            
+            The timeout is applied to all cursors created by the connection, so it cannot be changed for a 
+            specific cursor or SQL statement. If a query timeout occurs, the database should raise an OperationalError 
+            exception with SQLSTATE HYT00 or HYT01.
+            
+            Note, this attribute affects only SQL queries. To set the timeout for the actual connection process, 
+            use the timeout keyword of the pyodbc.connect() function."""
 
-        # Catch any additional errors not specifically checked for
         except Exception as e:
             raise Exception("Could not setup the ODBC connection, Exception %s", e)
 
         return db_connection
 
-    def execute_odbc_query(self, db_connection, sql_query, sql_args):
+    def configure_unicode_settings(self, db_connection):
+        """"  Configure unicode settings
+
+        Pyodbc recommends configurating connection's encoding and decoding.
+        "By default, pyodbc uses UTF-16 assuming native byte-order and SQL_C_WCHAR for reading and writing
+        all Unicode as recommended in the ODBC specification.
+        Unfortunately many drivers behave differently so connections may need to be configured."
+
+        Function configures suggested settings based on the type of SQL server.
+
+        """
+        if "sql_database_type" in self.options:
+            sql_database_type = self.options["sql_database_type"]
+            single_encoding_dbs = ["mariadb", "postgresql", "mysql"]
+
+            if sql_database_type.lower() in single_encoding_dbs:
+                db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
+                db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')
+                db_connection.setencoding(str, encoding='utf-8')
+                db_connection.setencoding(unicode, encoding='utf-8')
+
+        return db_connection
+
+    @staticmethod
+    def create_cursor(db_connection):
+        """"  Create cursor """
+        try:
+            db_cursor = db_connection.cursor()
+
+        except Exception as e:
+            raise Exception("Could not execute SQL statement, Exception %s", e)
+
+        return db_cursor
+
+    def execute_odbc_query(self, db_cursor, sql_query, sql_args):
         """"  Execute SQL statement
 
         Execute SQL statements using the Cursor execute() function.
@@ -193,7 +229,6 @@ class FunctionComponent(ResilientComponent):
             number_records = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
 
         try:
-            db_cursor = db_connection.cursor()
             db_cursor.execute(sql_query, sql_args)
 
             rows = None
@@ -202,14 +237,13 @@ class FunctionComponent(ResilientComponent):
             else:
                 rows = db_cursor.fetchall()
 
-        # Catch any additional errors not specifically checked for
         except Exception as e:
             raise Exception("Could not execute SQL statement %s, Exception %s", sql_query, e)
 
-        return self.prepare_results(db_cursor.description, rows)
+        return rows
 
     @staticmethod
-    def prepare_results(cursor_description_list, rows):
+    def prepare_results(db_cursor, rows):
         """"  Generate result
 
         Generate result in JSON format with an entry consisting of key value pairs.
@@ -220,7 +254,7 @@ class FunctionComponent(ResilientComponent):
             return {"entries": None}
 
         # List of column names from SQL result to use as dictionary keys
-        dt_column_keys = [column[0] for column in cursor_description_list]
+        dt_column_keys = [column[0] for column in db_cursor.description]
 
         # Build dictionary: key-value pairs consisting of column name - row value
         entries_data_list = []
@@ -236,11 +270,21 @@ class FunctionComponent(ResilientComponent):
         return entries
 
     @staticmethod
-    def close_connections(db_connection):
-        """"  Clean up
+    def commit_connection(db_connection):
+        """"  Commit connection """
+        if db_connection is not None:
+            if not db_connection.autocommit:
+                db_connection.commit()
 
-        Close connection if it is defined.
+    @staticmethod
+    def close_connections(db_cursor, db_connection):
+        """"  Tear down
+
+        Close connections if they're defined.
 
         """
         if db_connection is not None:
             db_connection.close()
+
+        if db_cursor is not None:
+            db_cursor.close()
