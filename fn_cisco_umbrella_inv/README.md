@@ -9,7 +9,7 @@ resilient version 30 or later
 resilient_circuits version 30 or later
 investigate
 ```
-* Can be used in a Resilient workflow to populate/update a datatable.
+* Can be used in a Resilient workflow to populate/update a datatable or other resource.
 * For more info about Cisco Umbrella Investigate, please visit https://docs.umbrella.com/developer/investigate-api/introduction-to-cisco-investigate/
 * For more info about the python investigate module, please visit https://github.com/opendns/pyinvestigate/
 
@@ -31,7 +31,7 @@ api_token=abcd1234-a123-123a-123a-123456abcdef
 Run with: `resilient-circuits run`.
 
 ## Supported Resilient Functions for Cisco Umbrella Investigate
-
+```
 umbrella_domain_volume
 umbrella_classifiers
 umbrella_domain_whois_info
@@ -46,8 +46,27 @@ umbrella_domain_security_info
 umbrella_threat_grid_samples
 umbrella_timeline
 umbrella_domain_status_and_category
-
-
+```
+## Sample workflows have been provided:
+```
+* Name: Example: AS Information for an ip address or ASN
+* Name: Example: Categories for a domain
+* Name: Example: Classifiers for a domain
+* Name: Example: Co-occurences for a domain
+* Name: Example: DNS RR history for a domain
+* Name: Example: DNS RR history for an ip address
+* Name: Example: Domain volume
+* Name: Example: Domain WHOIS info for a domain
+* Name: Example: Get list of category identifiers
+* Name: Example: Latest Malicious Domains for an ip address
+* Name:Example: Pattern search start epoch
+* Name:Example: Pattern search start relative
+* Name:Example: Related Domains for a Domain
+* Name:Example: Security information for a domain
+* Name:Example: ThreadGrid sample info for a hash
+* Name:Example: ThreadGrid samples for a resource
+* Name:Example: Timeline for a resource
+```
 ## fn_cisco_umbrella_inv Example
 
 The umbrella_dns_rr_hist Function requires 2 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
