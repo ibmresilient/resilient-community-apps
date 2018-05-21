@@ -10,7 +10,9 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'binary_to_string_list"""
 
-    def get_data_from_file(self, incident_id, task_id, artifact_id, attachment_id):
+    def get_binary_data_from_file(self, incident_id, task_id, artifact_id, attachment_id):
+        # get_binary_data_from_file calls the REST API to get the attachment or artifact data
+
         if artifact_id and incident_id:
             data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
         elif attachment_id:
@@ -27,6 +29,65 @@ class FunctionComponent(ResilientComponent):
         client = self.rest_client()
         data = client.get_content(data_uri)
         return data
+
+    def extract_strings_from_binary(self, data):
+        # extract_strings_from_binary writes binary data to a file and calls get_strings to extract
+        # the encoded strings
+        with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
+            try:
+                # Write binary data to a temporary file.
+                temp_file_binary.write(data)
+
+                list_string = self.get_strings(temp_file_binary)
+            except Exception as err:
+                raise err
+
+            finally:
+                # Close the temporary binary file. Closing the temp file will delete it.
+                temp_file_binary.close()
+        return list_string
+
+    def get_strings(self, temp_file_binary):
+        # get_strings extracts encoded string from file and returns a list of strings found in the
+        # file.  Floss is called to extract the strings.  For more information on Floss:
+        # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
+        with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
+            try:
+                # Floss writes output to stdout so redirect stdout to temporary file
+                save_stdout = sys.stdout
+                output_stream = open(temp_file_strings.name.encode("ascii"), 'w')
+                sys.stdout = temp_file_strings
+
+                # Call Floss to extract strings from the file.
+                # Use commandline arguments: -q for quiet mode so that only the strings
+                # are returned, no headers;  -s option directs floss to analyze binary
+                # files containing shellcode. See floss documentation for other options
+                # you can pass to floss.
+                # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
+                result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
+                output_stream.close()
+
+                if result_floss != 0:
+                    raise Exception("Error running floss.")
+
+                try:
+                    # Read the output from floss and make a list of the decoded strings
+                    floss_output = open(temp_file_strings.name.encode("ascii"), "r")
+                    list_string = floss_output.read().splitlines()
+                except Exception as err:
+                    raise err
+                finally:
+                    # Close the file.
+                    floss_output.close()
+
+            except Exception as err:
+                raise err
+            finally:
+                # Restore stdout and close the file. The temporary file will be deleted on close.
+                sys.output = save_stdout
+                temp_file_strings.close()
+
+        return list_string
 
     @function("utilities_binary_to_string_list")
     def _binary_to_string_list_function(self, event, *args, **kwargs):
@@ -45,61 +106,12 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
 
             # Get the binary data from the artifact or the attachment
-            data = self.get_data_from_file(incident_id, task_id, artifact_id, attachment_id)
+            data = self.get_binary_data_from_file(incident_id, task_id, artifact_id, attachment_id)
+            yield StatusMessage("Binary file retrieved.")
 
-            # Nested with-try-except-finally clauses are used here with raise so that the
-            # files and are closed and deleted in the finally clause.  There is a bug in
-            # FunctionError() which causes finally clause to not be executed...so use this
-            # implementation till that is fixed.
-            with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
-                try:
-                    # Write data to a temporary file.
-                    temp_file_binary.write(data)
-                    yield StatusMessage("Binary file contents retrieved and written to temporary file.")
-
-                    with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
-                        try:
-                            # Floss writes output to stdout so redirect stdout to temporary file
-                            save_stdout = sys.stdout
-                            f = open(temp_file_strings.name.encode("ascii"), 'w')
-                            sys.stdout = temp_file_strings
-
-                            # Call Floss to extract strings from the file.
-                            # Use commandline arguments: -q for quiet mode so that only the strings
-                            # are returned, no headers;  -s option directs floss to analyze binary
-                            # files containing shellcode. See floss documentation for other options
-                            # you can pass to floss.
-                            # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
-                            yield StatusMessage("Decoding strings from input file.")
-                            result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
-                            f.close()
-
-                            if result_floss == 1:
-                                raise Exception("Error running floss.")
-
-                            # Create a list of strings to return.
-                            yield StatusMessage("Prepare a list of string to return from the function.")
-                            try:
-                                #Read the input stream of and make a list of the decoded strings
-                                input_stream = open(temp_file_strings.name.encode("ascii"), "r")
-                                list_results = input_stream.read().splitlines()
-                            except Exception as err:
-                                raise err
-                            finally:
-                                input_stream.close()
-
-                        except Exception as err:
-                            raise err
-                        finally:
-                            # Restore stdout and close the file. The temporary file will be deleted on close.
-                            sys.output = save_stdout
-                            temp_file_strings.close()
-
-                except Exception as err:
-                    raise err
-                finally:
-                    # Close the temporary binary file. Closing the temp file will delete it.
-                    temp_file_binary.close()
+            # Extract the strings from the binary file and put them in a list.
+            list_results = self.extract_strings_from_binary(data)
+            yield StatusMessage("Strings decoded from file.")
 
         except Exception as err:
             yield FunctionError(err)
