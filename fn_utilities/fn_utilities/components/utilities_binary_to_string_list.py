@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-useFunctionError
+# pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 import sys
 import tempfile
