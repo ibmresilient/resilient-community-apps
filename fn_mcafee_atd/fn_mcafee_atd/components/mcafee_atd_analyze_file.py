@@ -5,10 +5,42 @@
 import logging
 import time
 from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code
+    check_status_code, check_timeout, get_incident_id, upload_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
+
+
+def _get_file(resilient_client, **kwargs):
+    url = ""
+    name_url = ""
+    name = ""
+    if kwargs.get("artifact_id") is not None:
+        url = "/incidents/{}/artifacts/{}/contents".format(kwargs["incident_id"], kwargs["artifact_id"])
+        name_url = "/incidents/{}/artifacts/{}".format(kwargs["incident_id"], kwargs["artifact_id"])
+        log.debug("Downloading artifact attachment")
+        name = str(resilient_client.get(name_url)["attachment"]["name"])
+    elif kwargs.get("task_id") is not None:
+        url = "/tasks/{}/attachments/{}/contents".format(kwargs["task_id"], kwargs["attachment_id"])
+        name_url = "/tasks/{}/attachments/{}".format(kwargs["task_id"], kwargs["attachment_id"])
+        log.debug("Downloading task attachment")
+        name = str(resilient_client.get(name_url)["name"])
+    elif kwargs.get("attachment_id") is not None:
+        url = "/incidents/{}/attachments/{}/contents".format(kwargs["incident_id"], kwargs["attachment_id"])
+        name_url = "/incidents/{}/attachments/{}".format(kwargs["incident_id"], kwargs["attachment_id"])
+        log.debug("Downloading incident attachment")
+        name = str(resilient_client.get(name_url)["name"])
+    else:
+        log.error("Inputs not set correctly, can not download file.")
+        raise ValueError("Inputs not set correctly")
+
+    f = resilient_client.get_content(url)
+    response = {
+        "file": f,
+        "file_name": name
+    }
+
+    return response
 
 
 class FunctionComponent(ResilientComponent):
@@ -57,57 +89,53 @@ class FunctionComponent(ResilientComponent):
                       "please set that by running resilient-circuits config -u")
             raise AttributeError("[fn_mcafee_atd] section is not set in the config file")
 
-        # Create Resilient Rest client
-        self.resilient_client = self.rest_client()
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_atd", {})
 
-    def _get_file(self, **kwargs):
-        url = ""
-        name_url = ""
-        name = ""
-        if kwargs.get("artifact_id") is not None:
-            url = "/incidents/{}/artifacts/{}/contents".format(kwargs["incident_id"], kwargs["artifact_id"])
-            name_url = "/incidents/{}/artifacts/{}".format(kwargs["incident_id"], kwargs["artifact_id"])
-            log.debug("Downloading artifact attachment")
-            name = str(self.resilient_client.get(name_url)["attachment"]["name"])
-        elif kwargs.get("task_id") is not None:
-            url = "/tasks/{}/attachments/{}/contents".format(kwargs["task_id"], kwargs["attachment_id"])
-            name_url = "/tasks/{}/attachments/{}".format(kwargs["task_id"], kwargs["attachment_id"])
-            log.debug("Downloading task attachment")
-            name = str(self.resilient_client.get(name_url)["name"])
-        elif kwargs.get("attachment_id") is not None:
-            url = "/incidents/{}/attachments/{}/contents".format(kwargs["incident_id"], kwargs["attachment_id"])
-            name_url = "/incidents/{}/attachments/{}".format(kwargs["incident_id"], kwargs["attachment_id"])
-            log.debug("Downloading incident attachment")
-            name = str(self.resilient_client.get(name_url)["name"])
-        else:
-            log.error("Inputs not set correctly, can not download file.")
-            raise ValueError("Inputs not set correctly")
-
-        f = self.resilient_client.get_content(url)
-        response = {
-            "file": f,
-            "file_name": name
-        }
-
-        return response
+    # def _get_file(self, **kwargs):
+    #     url = ""
+    #     name_url = ""
+    #     name = ""
+    #     if kwargs.get("artifact_id") is not None:
+    #         url = "/incidents/{}/artifacts/{}/contents".format(kwargs["incident_id"], kwargs["artifact_id"])
+    #         name_url = "/incidents/{}/artifacts/{}".format(kwargs["incident_id"], kwargs["artifact_id"])
+    #         log.debug("Downloading artifact attachment")
+    #         name = str(self.resilient_client.get(name_url)["attachment"]["name"])
+    #     elif kwargs.get("task_id") is not None:
+    #         url = "/tasks/{}/attachments/{}/contents".format(kwargs["task_id"], kwargs["attachment_id"])
+    #         name_url = "/tasks/{}/attachments/{}".format(kwargs["task_id"], kwargs["attachment_id"])
+    #         log.debug("Downloading task attachment")
+    #         name = str(self.resilient_client.get(name_url)["name"])
+    #     elif kwargs.get("attachment_id") is not None:
+    #         url = "/incidents/{}/attachments/{}/contents".format(kwargs["incident_id"], kwargs["attachment_id"])
+    #         name_url = "/incidents/{}/attachments/{}".format(kwargs["incident_id"], kwargs["attachment_id"])
+    #         log.debug("Downloading incident attachment")
+    #         name = str(self.resilient_client.get(name_url)["name"])
+    #     else:
+    #         log.error("Inputs not set correctly, can not download file.")
+    #         raise ValueError("Inputs not set correctly")
+    #
+    #     f = self.resilient_client.get_content(url)
+    #     response = {
+    #         "file": f,
+    #         "file_name": name
+    #     }
+    #
+    #     return response
 
     @function("mcafee_atd_analyze_file")
     def _mcafee_atd_analyze_file_function(self, event, *args, **kwargs):
         """Function: """
         try:
+            resilient_client = self.rest_client()
             inputs = {}
             start_time = time.time()
             yield StatusMessage("Starting...")
 
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            if not incident_id:
-                yield FunctionError("incident_id is required")
+            incident_id = get_incident_id(**kwargs)
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
             task_id = kwargs.get("task_id")  # number
@@ -126,7 +154,7 @@ class FunctionComponent(ResilientComponent):
                 log.info("task_id: %s", task_id)
                 inputs["task_id"] = task_id
 
-            f_download = self._get_file(**kwargs)
+            f_download = _get_file(resilient_client, **kwargs)
             f = f_download["file"]
             file_name = f_download["file_name"]
             yield StatusMessage("File {} downloaded".format(file_name))
@@ -143,14 +171,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Estimated Time: {} minutes".format(estimated_time))
 
             timeout_seconds = self.timeout_mins * 60
-            t = 0
             start = time.time()
-            while check_atd_status(self, atd_task_id) is False and t < timeout_seconds:
-                # Sleep is used to wait for the polling interval so ATD is not constantly getting checked if the
-                # analysis is complete
-                time.sleep(self.polling_interval)
-                end = time.time()
-                t = end - start
+            while check_atd_status(self, atd_task_id) is False:
+                check_timeout(start, self.polling_interval, timeout_seconds)
+
             yield StatusMessage("Analysis Completed")
             if atd_report_type == "pdf" or atd_report_type == "html":
                 yield StatusMessage("Obtaining {} report".format(atd_report_type))
@@ -159,7 +183,7 @@ class FunctionComponent(ResilientComponent):
             results = get_atd_report(self, atd_task_id, atd_report_type, report_file["report_file"])
 
             if report_file is not None:
-                self.resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
                                              report_file["report_file"], filename=report_file["report_file_name"])
                 yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
 
@@ -171,6 +195,6 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            yield FunctionError()
+            raise FunctionError()
         finally:
             remove_dir(report_file["tmp_dir"])

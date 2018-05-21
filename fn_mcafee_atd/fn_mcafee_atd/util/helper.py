@@ -6,6 +6,8 @@ import logging
 import json
 import tempfile
 import shutil
+import time
+from resilient_circuits import FunctionError, StatusMessage
 
 log = logging.getLogger(__name__)
 
@@ -113,6 +115,7 @@ def create_report_file(name, type):
 
 def remove_dir(dir):
     shutil.rmtree(dir)
+    log.debug("Tmp directory removed")
 
 
 def submit_file(g, f, file_name):
@@ -163,3 +166,30 @@ def get_atd_report(g, taskId, report_type, report_file):
     check_status_code(json_response)
 
     return json_response.json()
+
+
+def check_timeout(start, polling_interval, timeout):
+    end = time.time()
+    t = end - start
+    if t >= timeout:
+        raise FunctionError("Timeout limit reached")
+    else:
+        # Sleep is used to wait for the polling interval so ATD is not constantly getting checked if the
+        # analysis is not complete
+        time.sleep(polling_interval)
+        return True
+
+
+def get_incident_id(**kwargs):
+    incident_id = kwargs.get("incident_id")
+    if not incident_id:
+        raise FunctionError("incident_id is required")
+    else:
+        return incident_id
+
+
+def upload_attachment(resilient_client, incident_id, report_file):
+    if report_file is not None:
+        response = resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+                                              report_file["report_file"], filename=report_file["report_file_name"])
+        yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))

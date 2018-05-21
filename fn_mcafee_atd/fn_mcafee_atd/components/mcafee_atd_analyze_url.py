@@ -5,7 +5,7 @@
 import logging
 import time
 from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code
+    check_status_code, check_timeout, get_incident_id
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -74,9 +74,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
 
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            if not incident_id:
-                yield FunctionError("incident_id is required")
+            incident_id = get_incident_id(**kwargs)
             artifact_id = kwargs.get("artifact_id")  # number
             url_to_analyze = kwargs.get("artifact_value")  # text
             atd_report_type = self.get_select_param(kwargs.get("mcafee_atd_report_type"))  # select
@@ -114,14 +112,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Estimated Time: {} minutes".format(estimated_time))
 
             timeout_seconds = self.timeout_mins * 60
-            t = 0
             start = time.time()
-            while check_atd_status(self, atd_task_id) is False and t < timeout_seconds:
-                # Sleep is used to wait for the polling interval so ATD is not constantly getting checked if the
-                # analysis is complete
-                time.sleep(self.polling_interval)
-                end = time.time()
-                t = end - start
+            while check_atd_status(self, atd_task_id) is False:
+                check_timeout(start, self.polling_interval, timeout_seconds)
+
             yield StatusMessage("Analysis Completed")
             if atd_report_type == "pdf" or atd_report_type == "html":
                 yield StatusMessage("Obtaining {} report".format(atd_report_type))
@@ -142,7 +136,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            yield FunctionError()
+            raise FunctionError()
         finally:
             if report_file is not None:
                 remove_dir(report_file["tmp_dir"])

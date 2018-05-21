@@ -2,37 +2,14 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits.util import get_config_data
+from resilient_circuits.action_message import FunctionError_
 from mock import Mock, patch
-import requests
-import sys
+import time
 import os.path
 from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, _get_atd_session_headers, _check_url_ending, submit_url
-sys.path.append("../fn_mcafee_atd/util")
-sys.path.append("fn_mcafee_atd/util")
-
-PACKAGE_NAME = "fn_mcafee_atd"
-FUNCTION_NAME = "mcafee_atd_analyze_file"
-
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
-
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
-
-# def call_mcafee_atd_analyze_file_function(circuits, function_params, timeout=10):
-#     # Fire a message to the function
-#     evt = SubmitTestFunction("mcafee_atd_analyze_file", function_params)
-#     circuits.manager.fire(evt)
-#     event = circuits.watcher.wait("mcafee_atd_analyze_file_result", parent=evt, timeout=timeout)
-#     assert event
-#     assert isinstance(event.kwargs["result"], FunctionResult)
-#     pytest.wait_for(event, "complete", True)
-#     return event.kwargs["result"].value
+    check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id
+from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
 class MockClass:
@@ -267,28 +244,89 @@ class TestMcafeeAtdAnalyzeFile:
         finally:
             remove_dir(f.get("tmp_dir"))
 
+    def test_check_timeout(self):
+        start = time.time()
+        # Assert does not time out early
+        assert check_timeout(start, 1, 60) is True
 
+        # Assert raises FunctionError if it times out
+        start = time.time() - 30
+        try:
+            check_timeout(start, 1, 1)
+        except FunctionError_ as e:
+            assert e.message == "Timeout limit reached"
 
+    def test_get_incident_id(self):
+        kw = {}
 
+        # Assert error is thrown if incident_id is not provided
+        try:
+            get_incident_id(**kw)
+        except FunctionError_ as e:
+            assert e.message == "incident_id is required"
 
+        # Assert incident_id is returned if it exists
+        kw["incident_id"] = "1"
+        incident_id = get_incident_id(**kw)
+        assert incident_id == "1"
 
+    @patch("requests.get")
+    def test_get_file(self, mocked_requests_get):
+        kw = {}
+        mocked_client = Mock()
+        # Assert error is thrown if inputs are not set
+        try:
+            _get_file(mocked_client, **kw)
+        except ValueError as e:
+            assert e.message == "Inputs not set correctly"
 
-    # """ Tests for the mcafee_atd_analyze_file function"""
-    #
-    # def test_function_definition(self):
-    #     """ Test that the package provides customization_data that defines the function """
-    #     func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
-    #     assert func is not None
-    #
-    # @pytest.mark.parametrize("incident_id, artifact_id, expected_results", [
-    #     (123, 123, {"value": "xyz"}),
-    #     (123, 123, {"value": "xyz"})
-    # ])
-    # def test_success(self, circuits_app, incident_id, artifact_id, expected_results):
-    #     """ Test calling with sample values for the parameters """
-    #     function_params = {
-    #         "incident_id": incident_id,
-    #         "artifact_id": artifact_id
-    #     }
-    #     results = call_mcafee_atd_analyze_file_function(circuits_app, function_params)
-    #     assert(expected_results == results)
+        # Assert file and file name are returned when downloading from artifact
+        kw = {
+            "incident_id": "1",
+            "artifact_id": "123",
+        }
+        sim_get_content1 = {
+            "attachment": {
+                "name": "artifact_file"
+            }
+        }
+        mocked_client.get.return_value = sim_get_content1
+        mocked_client.get_content.return_value = "File Contents"
+        expected_r = {
+            "file": "File Contents",
+            "file_name": sim_get_content1["attachment"]["name"]
+        }
+
+        response = _get_file(mocked_client, **kw)
+        assert response == expected_r
+
+        # Assert file and file name are returned when downloading from task attachment
+        kw = {
+            "incident_id": "1",
+            "task_id": "456",
+            "attachment_id": "789"
+        }
+        sim_get_content1 = {"name": "task_file"}
+        mocked_client.get.return_value = sim_get_content1
+        expected_r = {
+            "file": "File Contents",
+            "file_name": sim_get_content1["name"]
+        }
+
+        response = _get_file(mocked_client, **kw)
+        assert response == expected_r
+
+        # Assert file and file name are returned when downloading from incident attachment
+        kw = {
+            "incident_id": "1",
+            "attachment_id": "789"
+        }
+        sim_get_content1 = {"name": "incident_file"}
+        mocked_client.get.return_value = sim_get_content1
+        expected_r = {
+            "file": "File Contents",
+            "file_name": sim_get_content1["name"]
+        }
+
+        response = _get_file(mocked_client, **kw)
+        assert response == expected_r
