@@ -49,23 +49,23 @@ umbrella_domain_status_and_category
 ```
 ## Sample workflows have been provided:
 ```
-* Name: Example: AS Information for an ip address or ASN
-* Name: Example: Categories for a domain
-* Name: Example: Classifiers for a domain
-* Name: Example: Co-occurences for a domain
-* Name: Example: DNS RR history for a domain
-* Name: Example: DNS RR history for an ip address
-* Name: Example: Domain volume
-* Name: Example: Domain WHOIS info for a domain
-* Name: Example: Get list of category identifiers
-* Name: Example: Latest Malicious Domains for an ip address
-* Name:Example: Pattern search start epoch
-* Name:Example: Pattern search start relative
-* Name:Example: Related Domains for a Domain
-* Name:Example: Security information for a domain
-* Name:Example: ThreadGrid sample info for a hash
-* Name:Example: ThreadGrid samples for a resource
-* Name:Example: Timeline for a resource
+Example: AS Information for an ip address or ASN
+Example: Categories for a domain
+Example: Classifiers for a domain
+Example: Co-occurences for a domain
+Example: DNS RR history for a domain
+Example: DNS RR history for an ip address
+Example: Domain volume
+Example: Domain WHOIS info for a domain
+Example: Get list of category identifiers
+Example: Latest Malicious Domains for an ip address
+Example: Pattern search start epoch
+Example: Pattern search start relative
+Example: Related Domains for a Domain
+Example: Security information for a domain
+Example: ThreadGrid sample info for a hash
+Example: ThreadGrid samples for a resource
+Example: Timeline for a resource
 ```
 ## fn_cisco_umbrella_inv Example
 
