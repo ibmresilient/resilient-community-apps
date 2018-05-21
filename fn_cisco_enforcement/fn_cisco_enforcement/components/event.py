@@ -54,14 +54,15 @@ class FunctionComponent(ResilientComponent):
 
             response = requests.post(url, json=data, verify=False, headers=HEADERS)
 
+            result = None
             if response.status_code >= 300:
                 resp = response.json()
                 if response.status_code == 404:
                     response.content and self.log.warning(response.content)
-                    yield StatusMessage("Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
+                    yield StatusMessage(u"Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
                 else:
                     response.content and self.log.error(response.content)
-                    yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+                    yield StatusMessage(u"Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
             else:
                 result = response.content.decode('latin1')
                 yield StatusMessage("Post Event was successful")

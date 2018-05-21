@@ -50,6 +50,7 @@ class FunctionComponent(ResilientComponent):
             url = url.format(self.apikey)
             self.log.debug(url)
 
+            resultlist = []
             while (isnextpage):
                 self.log.info('Get page {}'.format(page))
                 response = requests.get(url, headers=HEADERS)
@@ -58,10 +59,10 @@ class FunctionComponent(ResilientComponent):
                     resp = response.json()
                     if response.status_code == 404:
                         response.content and self.log.warning(response.content)
-                        yield StatusMessage("Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
+                        yield StatusMessage(u"Cisco Enforcement issue: {}: {}".format(response.status_code, resp['message']))
                     else:
                         response.content and self.log.error(response.content)
-                        yield StatusMessage("Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
+                        yield StatusMessage(u"Cisco Enforcement failure: {}: {}".format(response.status_code, resp['message']))
                 else:
                     jsonversion = response.json()
 
