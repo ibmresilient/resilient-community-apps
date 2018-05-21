@@ -14,7 +14,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_dns_rr_hist' of
@@ -69,26 +69,28 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            res = None
+            process_result = {}
+            params = {"resource": umbinv_resource.strip()}
 
-            self._params = {"resource": umbinv_resource.strip()}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
-
-            if not hasattr(self, '_res'):
-               raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
+            if "_res" not in process_result:
+                raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
+            else:
+                res = process_result.pop("_res")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            rtn = rinv.timeline(self._res)
+            rtn = rinv.timeline(res)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             if len(rtn) == 0:
                 log.debug(json.dumps(rtn))
-                yield StatusMessage("No Results returned for resource '{}'.".format(self._res))
+                yield StatusMessage("No Results returned for resource '{}'.".format(res))
                 results = {}
             else:
                 # Make timestamp more readable
@@ -100,7 +102,7 @@ class FunctionComponent(ResilientComponent):
                     except ValueError:
                         yield FunctionError('timestamp value incorrectly specified')
                 # Add  "query_execution_time" to result to facilitate post-processing.
-                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": self._res,
+                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 

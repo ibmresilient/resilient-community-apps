@@ -39,10 +39,10 @@ The following are examples of setup of each parameter using a simple workflow pr
 will be replaced by the actual inputs.param value at time of execution.
 
 ```
-inputs.search_base = "dc=example,dc=com"
-inputs.search_filter = "(&(objectClass=person)(uid=%param%))"
-inputs.search_attributes = "cn,sn,mail,telephoneNumber"
-inputs.param =  artifact.value
+inputs.ldap_search_base = "dc=example,dc=com"
+inputs.ldap_search_filter = "(&(objectClass=person)(uid=%param%))"
+inputs.ldap_search_attributes = "cn,sn,mail,telephoneNumber"
+inputs.ldap_param =  artifact.value
 ```
 The results returned to Resilient will be in JSON format and will consist of a list of
 entries where each entry has a 'dn' entry and a set of attributes

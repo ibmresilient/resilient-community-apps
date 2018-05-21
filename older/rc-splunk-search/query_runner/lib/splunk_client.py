@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """# A simple client for the Splunk SIEM"""
 
 import requests
@@ -14,11 +15,16 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.poolmanager import PoolManager
 
 import logging
+
+import sys
+if sys.version_info[0] < 3:
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
+
 LOG = logging.getLogger(__name__)
 
 # For details of the Splunk API, see:
 # <>
-
 
 EVENT_FIELDS = ["*"]
 

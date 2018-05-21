@@ -15,7 +15,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, omit_params, \
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, omit_params, \
     is_none
 
 
@@ -126,37 +126,39 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_sample_endpoint' not set")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            hash = None
+            process_result = {}
+            params = {"hash": umbinv_hash.strip(), "sample_endpoint": umbinv_sample_endpoint,
+                      "limit": umbinv_limit, "offset": umbinv_offset}
 
-            self._params = {"hash": umbinv_hash.strip(), "sample_endpoint": umbinv_sample_endpoint,
-                            "limit": umbinv_limit, "offset": umbinv_offset}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
-
-            if not hasattr(self, '_hash'):
+            if "_hash" not in process_result:
                raise ValueError("Parameter 'umbinv_hash' was not processed correctly")
+            else:
+                hash = process_result.pop("_hash")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
             rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            params = omit_params(self._params, ["hash", "sample_endpoint"])
+            params = omit_params(params, ["hash", "sample_endpoint"])
             if umbinv_sample_endpoint == "basic":
-                rtn = rinv.sample(self._hash, **params)
+                rtn = rinv.sample(hash, **params)
                 result_header = "sample_basic"
             elif umbinv_sample_endpoint == "artifacts":
-                rtn = rinv.sample_artifacts(self._hash, **params)
+                rtn = rinv.sample_artifacts(hash, **params)
                 result_header = "sample_artifacts"
             elif umbinv_sample_endpoint == "connections":
-                rtn = rinv.sample_connections(self._hash, **params)
+                rtn = rinv.sample_connections(hash, **params)
                 result_header = "sample_connections"
             elif umbinv_sample_endpoint == "samples":
-                rtn = rinv.sample_samples(self._hash, **params)
+                rtn = rinv.sample_samples(hash, **params)
                 result_header = "sample_samples"
             elif umbinv_sample_endpoint == "behaviors":
-                rtn = rinv.sample_behaviors(self._hash, **params)
+                rtn = rinv.sample_behaviors(hash, **params)
                 result_header = "sample_behaviors"
             else :
                 raise ValueError("Incorrect value for parameter parameter 'umbinv_sample_endpoint'.")
@@ -167,7 +169,7 @@ class FunctionComponent(ResilientComponent):
                 results = {}
             else:
                 # Add "query_execution_time" and "hash" key to result to facilitate post-processing.
-                results = {result_header: json.loads(json.dumps(rtn)), "hash": self._hash,
+                results = {result_header: json.loads(json.dumps(rtn)), "hash": hash,
                            "query_execution_time": query_execution_time}
                 yield StatusMessage("Done...")
 

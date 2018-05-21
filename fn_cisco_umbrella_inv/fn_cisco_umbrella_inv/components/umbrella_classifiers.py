@@ -14,7 +14,7 @@ from datetime import datetime, time
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import init_env, validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_classifiers' of
@@ -83,32 +83,34 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required parameter 'umbinv_classifiers_endpoint' not set.")
 
             yield StatusMessage("Starting...")
-            init_env(self)
+            domain = None
+            process_result = {}
+            params = {"domain": umbinv_domain.strip(), "classifiers_endpoint": umbinv_classifiers_endpoint}
 
-            self._params = {"domain": umbinv_domain.strip(), "classifiers_endpoint": umbinv_classifiers_endpoint}
+            validate_params(params)
+            process_params(params, process_result)
 
-            validate_params(self)
-            process_params(self)
-
-            if not hasattr(self, '_domain'):
-               raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
+            if "_domain" not in process_result:
+                 raise ValueError("Parameter 'umbinv_domain' was not processed correctly")
+            else:
+                domain = process_result.pop("_domain")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
-            rinv = ResilientInv(api_token,base_url)
+            rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
             if (umbinv_classifiers_endpoint == "classifiers"):
                 # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
-                rtn = rinv.classifiers_classifiers(self._domain)
+                rtn = rinv.classifiers_classifiers(domain)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                results = {"classifiers_classifiers": json.loads(json.dumps(rtn)), "domain_name": self._domain,
+                results = {"classifiers_classifiers": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
             elif (umbinv_classifiers_endpoint == "info"):
-                rtn = rinv.classifiers_info(self._domain)
+                rtn = rinv.classifiers_info(domain)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"classifiers_info": json.loads(json.dumps(rtn)), "domain_name": self._domain,
+                results = {"classifiers_info": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 

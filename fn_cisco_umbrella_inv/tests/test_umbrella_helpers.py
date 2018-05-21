@@ -11,24 +11,8 @@ Suites of tests to test the Umbrella Investigate Helper functions
 """
 
 class Func(object):
-    def __init__(self, params={}, options={}, **kwargs):
-        self.init_env()
-        self._params = params
+    def __init__(self, options={}):
         self.options = options
-        if kwargs is not None:
-            for k, v in kwargs.iteritems():
-                setattr(self, k, v)
-
-    def init_env(self):
-        """Initialize function environment. """
-
-        for v in ["_params", "_res", "_domain", "_domains", "_ipaddr", "_regex", "_asn",
-                "_emails", "_nameservers"]:
-            if hasattr(self, v):
-                delattr(self, v)
-
-    def __getitem__(self, key):
-        return getattr(self,key)
 
 class TestUmbrellaHelpersProcessParams:
     """Test process_params function"""
@@ -40,66 +24,72 @@ class TestUmbrellaHelpersProcessParams:
         ("domain.com", "domain.com")
     ])
     def test_process_params_resource(self, umbinv_resource, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "resource": umbinv_resource
-        })
-        process_params(func)
-        results = func._res
+        }
+        process_params(params, process_result)
+        results = process_result["_res"]
         assert (expected_results == results)
 
     @pytest.mark.parametrize("umbinv_domain, expected_results", [
         ("domain.com", "domain.com")
     ])
     def test_process_params_domain_name(self, umbinv_domain, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "domain": umbinv_domain
-        })
-        process_params(func)
-        results = func._domain
+        }
+        process_params(params, process_result)
+        results = process_result["_domain"]
         assert (expected_results == results)
 
     @pytest.mark.parametrize("umbinv_ipaddr, expected_results", [
         ("93.184.216.119", "93.184.216.119")
     ])
     def test_process_params_ipaddr(self, umbinv_ipaddr, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "ipaddr": umbinv_ipaddr
-        })
-        process_params(func)
-        results = func._ipaddr
+        }
+        process_params(params, process_result)
+        results = process_result["_ipaddr"]
         assert (expected_results == results)
 
     @pytest.mark.parametrize("umbinv_regex, expected_results", [
         ("paypal.*", "paypal.*")
     ])
     def test_process_params_regex(self, umbinv_regex, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "regex": umbinv_regex
-        })
-        process_params(func)
-        results = func._regex
+        }
+        process_params(params, process_result)
+        results = process_result["_regex"]
         assert (expected_results == results)
 
     @pytest.mark.parametrize("umbinv_emails, expected_results", [
         ("test@example.com", "test@example.com")
     ])
     def test_process_params_emails(self, umbinv_emails, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "emails": umbinv_emails
-        })
-        process_params(func)
-        results = func._emails
+        }
+        process_params(params, process_result)
+        results = process_result["_emails"]
         assert (expected_results == results)
 
     @pytest.mark.parametrize("umbinv_nameservers, expected_results", [
         ("ns1.google.com", "ns1.google.com")
     ])
     def test_process_params_nameservers(self, umbinv_nameservers, expected_results):
-        func = Func({
+        process_result = {}
+        params = {
             "nameservers": umbinv_nameservers
-        })
-        process_params(func)
-        results = func._nameservers
+        }
+        process_params(params, process_result)
+        results = process_result["_nameservers"]
         assert (expected_results == results)
 
 class TestUmbrellaHelpersValidateParams:
@@ -109,33 +99,33 @@ class TestUmbrellaHelpersValidateParams:
         ("anyoldtext", "Invalid value for function parameter 'resource'.")
     ])
     def test_validate_params_resource(self, umbinv_resource, expected_results):
-        func = Func({
+        params = {
             "resource": umbinv_resource
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_resource, expected_results", [
         ("anyoldtext", "Invalid value for function parameter 'resource'.")
     ])
     def test_validate_params_resource_any(self, umbinv_resource, expected_results):
-        func = Func({
+        params = {
             "resource": umbinv_resource
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_resource, expected_results", [
         ("93.184.216.119.1", "Invalid value for function parameter 'resource'.")
     ])
     def test_validate_params_resource_ip(self, umbinv_resource, expected_results):
-        func = Func({
+        params = {
             "resource": umbinv_resource
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_domain, expected_results", [
@@ -146,11 +136,11 @@ class TestUmbrellaHelpersValidateParams:
 
     ])
     def test_validate_params_domain_name(self, umbinv_domain, expected_results):
-        func = Func({
+        params = {
             "domain": umbinv_domain
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_ipaddr, expected_results", [
@@ -160,22 +150,22 @@ class TestUmbrellaHelpersValidateParams:
         ("test@example.com", "Invalid value for function parameter 'ipaddr'.")
     ])
     def test_validate_params_ip_address(self, umbinv_ipaddr, expected_results):
-        func = Func({
+        params = {
             "ipaddr": umbinv_ipaddr
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_regex, expected_results", [
         ("&\()", "Invalid value for function parameter 'regex'.")
     ])
     def test_process_params_regex(self, umbinv_regex, expected_results):
-        func = Func({
+        params = {
             "regex": umbinv_regex
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_nameservers, expected_results", [
@@ -186,11 +176,11 @@ class TestUmbrellaHelpersValidateParams:
 
     ])
     def test_validate_params_nameservers(self, umbinv_nameservers, expected_results):
-        func = Func({
+        params = {
             "nameservers": umbinv_nameservers
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
     @pytest.mark.parametrize("umbinv_emails, expected_results", [
@@ -201,11 +191,11 @@ class TestUmbrellaHelpersValidateParams:
 
     ])
     def test_validate_params_emails(self, umbinv_emails, expected_results):
-        func = Func({
+        params = {
             "emails": umbinv_emails
-        })
+        }
         with pytest.raises(ValueError) as e:
-            validate_params(func)
+            validate_params(params)
         assert str(e.value) == expected_results
 
 
@@ -227,7 +217,7 @@ class TestUmbrellaHelpersValidateOpts:
         ("https://investigate.api.umbrella.com/", "Mandatory config setting 'api_token' not set.")
     ])
     def test_validate_opts_empty_token(self, base_url, expected_results):
-        func = Func({},{
+        func = Func({
             "base_url": base_url
         })
         with pytest.raises(Exception) as e:
@@ -238,7 +228,7 @@ class TestUmbrellaHelpersValidateOpts:
         ("abcd1234-a123-123a-123a-123456abcde", "https://investigate.api.umbrella.com/", "Invalid format for config setting 'api_token'.")
     ])
     def test_validate_opts_wrong_token(self, api_token, base_url, expected_results):
-        func = Func({},{
+        func = Func({
             "api_token": api_token,
             "base_url": base_url
         })
@@ -250,7 +240,7 @@ class TestUmbrellaHelpersValidateOpts:
         ("abcd1234-a123-123a-123a-123456abcdef", "Mandatory config setting 'base_url' not set.")
     ])
     def test_validate_opts_empty_token(self, api_token, expected_results):
-        func = Func({},{
+        func = Func({
             "api_token": api_token,
         })
         with pytest.raises(Exception) as e:
@@ -261,51 +251,13 @@ class TestUmbrellaHelpersValidateOpts:
         ("abcd1234-a123-123a-123a-123456abcdef", "https:investigate.api.umbrella.com/", "Invalid format for config setting 'base_url'.")
     ])
     def test_validate_opts_wrong_token(self, api_token, base_url, expected_results):
-        func = Func({},{
+        func = Func({
             "api_token": api_token,
             "base_url": base_url
         })
         with pytest.raises(ValueError) as e:
             validate_opts(func)
         assert str(e.value) == expected_results
-
-class TestUmbrellaHelpersInitEnv:
-    """Test init_env function"""
-
-    @pytest.mark.parametrize("umbinv_domain, expected_results1, expected_results2", [
-        ("domain.com", "domain.com", "'Func' object has no attribute '_params'")
-    ])
-    def test_init_env_params(self, umbinv_domain, expected_results1, expected_results2):
-        func = Func({
-            "domain": umbinv_domain
-        })
-        results = func._params["domain"]
-        assert results == expected_results1
-        with pytest.raises(AttributeError) as e:
-            init_env(func)
-            results2 = func._params["domain"]
-        assert str(e.value) == expected_results2
-
-    @pytest.mark.parametrize("param_attrib_name, param_attrib_value, expected_results1, expected_results2", [
-        ("_res", "domain.com", "domain.com", "'Func' object has no attribute '_res'"),
-        ("_domain", "domain.com", "domain.com", "'Func' object has no attribute '_domain'"),
-        ("_domains", "domain.com domain2.com", "domain.com domain2.com", "'Func' object has no attribute '_domains'"),
-        ("_ipaddr", "93.184.216.119", "93.184.216.119", "'Func' object has no attribute '_ipaddr'"),
-        ("_regex", "paypal.*", "paypal.*", "'Func' object has no attribute '_regex'"),
-        ("_asn", "12345", "12345", "'Func' object has no attribute '_asn'"),
-        ("_emails", "test@example.com", "test@example.com", "'Func' object has no attribute '_emails'"),
-        ("_nameservers", "ns1.google.com", "ns1.google.com", "'Func' object has no attribute '_nameservers'"),
-    ])
-    def test_init_env_multiple(self, param_attrib_name, param_attrib_value, expected_results1, expected_results2):
-        func = Func({},{}, **{
-            param_attrib_name: param_attrib_value
-        })
-        results = func[param_attrib_name]
-        assert results == expected_results1
-        with pytest.raises(AttributeError) as e:
-            init_env(func)
-            results2 = func[param_attrib_name]
-        assert str(e.value) == expected_results2
 
 class TestUmbrellaHelpersIsNone:
     """Test init_env function"""
