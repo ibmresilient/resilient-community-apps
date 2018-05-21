@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-useFunctionError
 """Function implementation"""
 import sys
 import tempfile
@@ -10,6 +10,23 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'binary_to_string_list"""
 
+    def get_data_from_file(self, incident_id, task_id, artifact_id, attachment_id):
+        if artifact_id and incident_id:
+            data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+        elif attachment_id:
+            if task_id:
+                data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            elif incident_id:
+                data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+            else:
+                raise ValueError("task_id or incident_id must be specified with attachment")
+        else:
+            raise ValueError("artifact or attachment or incident id must be specified")
+
+        # Get the data
+        client = self.rest_client()
+        data = client.get_content(data_uri)
+        return data
 
     @function("utilities_binary_to_string_list")
     def _binary_to_string_list_function(self, event, *args, **kwargs):
@@ -28,21 +45,7 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
 
             # Get the binary data from the artifact or the attachment
-            if artifact_id:
-                data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
-            elif attachment_id:
-                if task_id:
-                    data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-                elif incident_id:
-                    data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
-                else:
-                    yield FunctionError("Error: incident_id or task_id must be specified.")
-            else:
-                yield FunctionError("Error: attachment_id or article_id must be specified.")
-
-            # Get the data
-            client = self.rest_client()
-            data = client.get_content(data_uri)
+            data = self.get_data_from_file(incident_id, task_id, artifact_id, attachment_id)
 
             # Nested with-try-except-finally clauses are used here with raise so that the
             # files and are closed and deleted in the finally clause.  There is a bug in
@@ -52,7 +55,7 @@ class FunctionComponent(ResilientComponent):
                 try:
                     # Write data to a temporary file.
                     temp_file_binary.write(data)
-                    yield StatusMessage("Binary file contents retrieved.")
+                    yield StatusMessage("Binary file contents retrieved and written to temporary file.")
 
                     with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
                         try:
@@ -62,19 +65,28 @@ class FunctionComponent(ResilientComponent):
                             sys.stdout = temp_file_strings
 
                             # Call Floss to extract strings from the file.
+                            # Use commandline arguments: -q for quiet mode so that only the strings
+                            # are returned, no headers;  -s option directs floss to analyze binary
+                            # files containing shellcode. See floss documentation for other options
+                            # you can pass to floss.
+                            # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
                             yield StatusMessage("Decoding strings from input file.")
-                            result = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
+                            result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
                             f.close()
+
+                            if result_floss == 1:
+                                raise Exception("Error running floss.")
 
                             # Create a list of strings to return.
                             yield StatusMessage("Prepare a list of string to return from the function.")
                             try:
-                                inputStream = open(temp_file_strings.name.encode("ascii"), "r")
-                                listResults = inputStream.read().splitlines()
+                                #Read the input stream of and make a list of the decoded strings
+                                input_stream = open(temp_file_strings.name.encode("ascii"), "r")
+                                list_results = input_stream.read().splitlines()
                             except Exception as err:
                                 raise err
                             finally:
-                                inputStream.close()
+                                input_stream.close()
 
                         except Exception as err:
                             raise err
@@ -86,11 +98,11 @@ class FunctionComponent(ResilientComponent):
                 except Exception as err:
                     raise err
                 finally:
-                    # Close (delete) the temporary binary file.
+                    # Close the temporary binary file. Closing the temp file will delete it.
                     temp_file_binary.close()
 
         except Exception as err:
             yield FunctionError(err)
 
-        yield StatusMessage("Returning list of {} decoded strings".format(len(listResults)))
-        yield FunctionResult({"value": listResults})
+        yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))
+        yield FunctionResult({"value": list_results})
