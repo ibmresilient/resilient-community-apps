@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+#  -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -53,10 +54,11 @@ class FunctionComponent(ResilientComponent):
 
             # Extract the strings from the binary file and put them in a list.
             list_results = extract_strings(data)
-            yield StatusMessage("Strings extracted from file.")
+
+            yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))
+            yield FunctionResult({"value": list_results})
 
         except Exception as err:
             yield FunctionError(err)
 
-        yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))
-        yield FunctionResult({"value": list_results})
+
