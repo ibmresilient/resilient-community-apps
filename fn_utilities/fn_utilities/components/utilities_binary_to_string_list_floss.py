@@ -2,7 +2,7 @@ import sys
 import tempfile
 from floss import main
 
-def get_strings(temp_file_binary):
+def get_strings_from_floss(temp_file_binary):
     # get_strings extracts encoded string from file and returns a list of strings found in the
     # file.  Floss is called to extract the strings.  For more information on Floss:
     # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
@@ -44,7 +44,7 @@ def get_strings(temp_file_binary):
 
     return list_string
 
-def extract_strings_from_binary(data):
+def extract_strings(data):
     # extract_strings_from_binary writes binary data to a file and calls get_strings to extract
     # the encoded strings
     with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
@@ -52,7 +52,7 @@ def extract_strings_from_binary(data):
             # Write binary data to a temporary file.
             temp_file_binary.write(data)
 
-            list_string = get_strings(temp_file_binary)
+            list_string = get_strings_from_floss(temp_file_binary)
         except Exception as err:
             raise err
 

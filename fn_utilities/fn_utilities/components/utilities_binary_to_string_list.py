@@ -52,8 +52,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Binary file retrieved.")
 
             # Extract the strings from the binary file and put them in a list.
-            list_results = extract_strings_from_binary(data)
-            yield StatusMessage("Strings decoded from file.")
+            list_results = extract_strings(data)
+            yield StatusMessage("Strings extracted from file.")
 
         except Exception as err:
             yield FunctionError(err)
