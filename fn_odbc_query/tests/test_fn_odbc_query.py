@@ -35,18 +35,17 @@ class TestFnOdbcQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("sql_select, sql_format_param, sql_table, sql_field_name, sql_param, expected_results", [
-        ('SELECT %format_param% FROM %table% WHERE %field_name% = %param%', "text", "text", "text", "text", {"value": "xyz"}),
-        ('SELECT %format_param% FROM %table% WHERE %field_name% = %param%', "text", "text", "text", "text", {"value": "xyz"})
+    @pytest.mark.parametrize("sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3, expected_results", [
+        ({"type": "text", "content": "line1\nline2"}, "text", "text", "text", {"value": "xyz"}),
+        ({"type": "text", "content": "line1\nline2"}, "text", "text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, sql_select, sql_format_param, sql_table, sql_field_name, sql_param, expected_results):
+    def test_success(self, circuits_app, sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
-            "sql_select": sql_select,
-            "sql_format_param": sql_format_param,
-            "sql_table": sql_table,
-            "sql_field_name": sql_field_name,
-            "sql_param": sql_param
+        function_params = {
+            "sql_query": sql_query,
+            "sql_condition_value1": sql_condition_value1,
+            "sql_condition_value2": sql_condition_value2,
+            "sql_condition_value3": sql_condition_value3
         }
         results = call_fn_odbc_query_function(circuits_app, function_params)
         assert(expected_results == results)

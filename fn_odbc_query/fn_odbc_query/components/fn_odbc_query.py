@@ -15,8 +15,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import json
 import re
 
-LOG = logging.getLogger(__name__)
-
+SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_odbc_query
@@ -46,6 +45,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_odbc_query", {})
+        self.log = logging.getLogger(__name__)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -58,6 +58,10 @@ class FunctionComponent(ResilientComponent):
 
         Using prepared SQL statements, where parameters are passed to the database separately,
         protecting against SQL injection attacks.
+
+        :param
+        :param
+        :return
 
         Inputs:
         Inputs: sql_query: a SQL query with set parameters using a question mark as a place holder,
@@ -72,15 +76,18 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get the function parameters:
-            sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # text with value string: "SELECT incident_id, name, description FROM test.incidents WHERE incident_id = ?"
+            if "sql_query" not in kwargs or kwargs.get("sql_query") == '':
+                raise ValueError("Required field sql_query is missing or empty")
+
+            sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # textarea
             sql_condition_value1 = kwargs.get("sql_condition_value1")  # text
             sql_condition_value2 = kwargs.get("sql_condition_value2")  # text
             sql_condition_value3 = kwargs.get("sql_condition_value3")  # text
 
-            LOG.info(u"sql_query: %s", sql_query)
-            LOG.info(u"sql_condition_value1: %s", sql_condition_value1)
-            LOG.info(u"sql_condition_value2: %s", sql_condition_value2)
-            LOG.info(u"sql_condition_value3: %s", sql_condition_value3)
+            self.log.info(u"sql_query: %s", sql_query)
+            self.log.info(u"sql_condition_value1: %s", sql_condition_value1)
+            self.log.info(u"sql_condition_value2: %s", sql_condition_value2)
+            self.log.info(u"sql_condition_value3: %s", sql_condition_value3)
 
             yield StatusMessage("Starting...")
             sql_params = self.prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3)
@@ -94,9 +101,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Executing an ODBC query...")
 
             # Check what SQL statement is executed, get the first word in sql_query
-            sql_statement = sql_query.split(None, 1)[0]
+            sql_statement = sql_query.split(None, 1)[0].lower()
 
-            if sql_statement.lower() == 'select':
+            if sql_statement == 'select':
                 rows = self.execute_select_statement(db_cursor, sql_query, sql_params)
                 results = self.prepare_results(db_cursor, rows)
 
@@ -105,25 +112,22 @@ class FunctionComponent(ResilientComponent):
                 else:
                     yield StatusMessage("Result contains {} entries...".format(len(results.get("entries"))))
 
-            elif sql_statement.lower() == 'update' or sql_statement.lower() == 'delete' \
-                    or sql_statement.lower() == 'insert':
+            elif sql_statement == 'update' or sql_statement == 'delete' \
+                    or sql_statement == 'insert':
                 # Return row count and set results to empty list
                 row_count = self.execute_odbc_query(db_connection, db_cursor, sql_query, sql_params)
                 results = self.prepare_results(db_cursor, None)
 
-                yield StatusMessage("Updated {} rows".format(row_count))
-            else:
-                # Everything else isn't supported - return empty list
-                results = self.prepare_results(db_cursor, None)
+                yield StatusMessage("{} rows processed".format(row_count))
 
             yield StatusMessage("Done...")
-            LOG.info(json.dumps(results))
+            self.log.info(json.dumps(results))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
 
         except Exception as ex:
-            LOG.error(str(ex))
+            self.log.error(str(ex))
             raise FunctionError()
 
         # Commit changes and tear down connection
@@ -155,10 +159,10 @@ class FunctionComponent(ResilientComponent):
         Validate if query is allowed.
 
         """
-        if "sql_restricted_sql_statements" in self.options:
-            sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"]
+        sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
+            if "sql_restricted_sql_statements" in self.options else None
 
-        restricted_list = sql_restricted_sql_statements.lstrip("[").rstrip("]").split(",") \
+        restricted_list = json.loads(sql_restricted_sql_statements) \
             if sql_restricted_sql_statements is not None and sql_restricted_sql_statements != "[]" else []
 
         # Check if sql_query is one of the NOT allowed statements from configuration file
@@ -170,12 +174,13 @@ class FunctionComponent(ResilientComponent):
         """" Setup ODBC connection to a SQL server
 
         Setup ODBC connection to a SQL server using connection string obtained from the config file.
+        Set autocommit and query time out values based on the information in config file.
 
         """
         if "sql_connection_string" in self.options:
             sql_connection_string = self.options["sql_connection_string"]
         else:
-            raise Exception("Mandatory config setting 'sql_connection_string' not set.")
+            raise ValueError("Mandatory config setting 'sql_connection_string' not set.")
 
         # ODBC connection pooling is turned ON by default.
         # Not all database drivers close connections on db_connection.close() to save round trips to the server.
@@ -185,15 +190,18 @@ class FunctionComponent(ResilientComponent):
         try:
             db_connection = pyodbc.connect(sql_connection_string)
 
-            """ TODO:
-            The timeout value, in seconds, for an individual SQL query. Use zero, the default, to disable.
-            
-            The timeout is applied to all cursors created by the connection, so it cannot be changed for a 
-            specific cursor or SQL statement. If a query timeout occurs, the database should raise an OperationalError 
-            exception with SQLSTATE HYT00 or HYT01.
-            
-            Note, this attribute affects only SQL queries. To set the timeout for the actual connection process, 
-            use the timeout keyword of the pyodbc.connect() function."""
+            if "sql_autocommit" in self.options:
+                sql_autocommit = self.options["sql_autocommit"].lower()
+
+                # As per the Python DB API, the default value is False
+                if sql_autocommit == "true":
+                    db_connection.autocommit = True
+
+            if "sql_query_timeout" in self.options:
+                sql_query_timeout = self.options["sql_query_timeout"]
+
+                # Timeout defaults to 0, which means "no timeout"
+                db_connection.timeout = int(sql_query_timeout)
 
         except Exception as e:
             raise Exception("Could not setup the ODBC connection, Exception %s", e)
@@ -212,10 +220,9 @@ class FunctionComponent(ResilientComponent):
 
         """
         if "sql_database_type" in self.options:
-            sql_database_type = self.options["sql_database_type"]
-            single_encoding_dbs = ["mariadb", "postgresql", "mysql"]
+            sql_database_type = self.options["sql_database_type"].lower()
 
-            if sql_database_type.lower() in single_encoding_dbs:
+            if sql_database_type in SINGLE_ENCODING_DATABASES:
                 db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
                 db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')
                 db_connection.setencoding(str, encoding='utf-8')
@@ -258,14 +265,16 @@ class FunctionComponent(ResilientComponent):
         Execute SQL statements using the Cursor execute() function.
 
         """
+        number_records = None
+        rows = None
+
         if "sql_number_of_records_returned" in self.options:
             sql_number_of_records_returned = self.options["sql_number_of_records_returned"]
-            number_records = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
+            number_records = int(sql_number_of_records_returned)
 
         try:
             db_cursor.execute(sql_query, sql_args)
 
-            rows = None
             if number_records is not None:
                 rows = db_cursor.fetchmany(number_records)
             else:
