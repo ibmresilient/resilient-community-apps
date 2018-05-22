@@ -1,3 +1,6 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
 import sys
 import tempfile
 from floss import main
@@ -10,7 +13,7 @@ def get_strings_from_floss(temp_file_binary):
         try:
             # Floss writes output to stdout so redirect stdout to temporary file
             save_stdout = sys.stdout
-            output_stream = open(temp_file_strings.name.encode("ascii"), 'w')
+            output_stream = open(temp_file_strings.name.encode('utf-8'), 'w')
             sys.stdout = temp_file_strings
 
             # Call Floss to extract strings from the file.
@@ -19,7 +22,7 @@ def get_strings_from_floss(temp_file_binary):
             # files containing shellcode. See floss documentation for other options
             # you can pass to floss.
             # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
-            result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode("ascii")])
+            result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode('utf-8')])
             output_stream.close()
 
             if result_floss != 0:
@@ -27,7 +30,7 @@ def get_strings_from_floss(temp_file_binary):
 
             try:
                 # Read the output from floss and make a list of the decoded strings
-                floss_output = open(temp_file_strings.name.encode("ascii"), "r")
+                floss_output = open(temp_file_strings.name, "r")
                 list_string = floss_output.read().splitlines()
             except Exception as err:
                 raise err
