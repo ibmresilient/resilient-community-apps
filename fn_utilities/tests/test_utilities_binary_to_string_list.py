@@ -1,7 +1,8 @@
-import unittest
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.import unittest
 import logging
 import sys
-from fn_utilities.components.utilities_binary_to_string_list_floss import extract_strings
+from fn
+_utilities.components.utilities_binary_to_string_list_floss import extract_strings
 
 log = logging.getLogger(__name__)
 
