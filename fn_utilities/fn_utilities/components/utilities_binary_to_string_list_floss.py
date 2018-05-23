@@ -5,6 +5,27 @@ import sys
 import tempfile
 from floss import main
 
+
+def get_binary_data_from_file(self, client, incident_id, task_id, artifact_id, attachment_id):
+    # get_binary_data_from_file calls the REST API to get the attachment or artifact data
+
+    if artifact_id and incident_id:
+        data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+    elif attachment_id:
+        if task_id:
+            data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+        elif incident_id:
+            data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+        else:
+            raise ValueError("task_id or incident_id must be specified with attachment")
+    else:
+        raise ValueError("artifact or attachment or incident id must be specified")
+
+    # Get the data
+    data = client.get_content(data_uri)
+
+    return data
+
 def get_strings_from_floss(temp_file_binary):
     # get_strings extracts encoded string from file and returns a list of strings found in the
     # file.  Floss is called to extract the strings.  For more information on Floss:
