@@ -3,7 +3,7 @@ import unittest
 import logging
 import sys
 import os
-from fn_utilities.components.utilities_binary_to_string_list_floss import extract_strings
+from fn_utilities.components.utilities_binary_to_string_list_util import extract_strings
 
 log = logging.getLogger(__name__)
 
