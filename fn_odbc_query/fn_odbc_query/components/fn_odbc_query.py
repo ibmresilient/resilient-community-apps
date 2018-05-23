@@ -13,9 +13,10 @@ import logging
 import pyodbc
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import json
-import re
 
 SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
+SQL_ATTR_CONNECTION_TIMEOUT = 113
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_odbc_query
@@ -167,7 +168,7 @@ class FunctionComponent(ResilientComponent):
 
         # Check if sql_query is one of the NOT allowed statements from configuration file
         for item in restricted_list:
-            if re.search(item.strip().lower(), sql_query.lower()):
+            if item.strip().lower() in sql_query.lower():
                 raise Exception("User does not have permission to perform {} action".format(item.strip()))
 
     def setup_odbc_connection(self):
@@ -187,6 +188,9 @@ class FunctionComponent(ResilientComponent):
         # Pooling should be set to False to close connection on db_connection.close().
         pyodbc.pooling = False
 
+        # Query statement timeout defaults to 0, which means "no timeout"
+        connection_timeout = 0
+
         try:
             db_connection = pyodbc.connect(sql_connection_string)
 
@@ -200,8 +204,23 @@ class FunctionComponent(ResilientComponent):
             if "sql_query_timeout" in self.options:
                 sql_query_timeout = self.options["sql_query_timeout"]
 
-                # Timeout defaults to 0, which means "no timeout"
-                db_connection.timeout = int(sql_query_timeout)
+                # Some odbc drivers might might throw an error while setting db_connection.timeout:
+                # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
+                # SQL_ATTR_CONNECTION_TIMEOUT represents value 113,
+                # this constant can be found in ODBC specification file "sqlext.h".
+                # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
+                # Try to catch a pyodbc.OperationalError and pass.
+                try:
+                    # Timeout defaults to 0, which means "no timeout"
+                    db_connection.timeout = int(sql_query_timeout)
+
+                except pyodbc.Error as e:
+                    sql_state = e.args[0]
+                    error_message = e.args[1]
+                    if sql_state == 'HY000' and str(SQL_ATTR_CONNECTION_TIMEOUT) in error_message:
+                        pass
+                    else:
+                        raise Exception("Could not setup the ODBC connection, Exception %s", e)
 
         except Exception as e:
             raise Exception("Could not setup the ODBC connection, Exception %s", e)
