@@ -25,7 +25,7 @@ def get_binary_data_from_file(self, client, incident_id, task_id, artifact_id, a
     data = client.get_content(data_uri)
 
     return data
-
+get_binary_data_from
 def get_strings_from_floss(temp_file_binary):
     # get_strings extracts encoded string from file and returns a list of strings found in the
     # file.  Floss is called to extract the strings.  For more information on Floss:
