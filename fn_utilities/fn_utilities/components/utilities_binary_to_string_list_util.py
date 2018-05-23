@@ -7,7 +7,7 @@ from floss import main
 
 
 def get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachment_id):
-    # get_binary_data_from_file calls the REST API to get the attachment or artifact data
+    """get_binary_data_from_file calls the REST API to get the attachment or artifact data"""
 
     if artifact_id and incident_id:
         data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
@@ -27,9 +27,9 @@ def get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachm
     return data
 
 def get_strings_from_floss(temp_file_binary):
-    # get_strings extracts encoded string from file and returns a list of strings found in the
-    # file.  Floss is called to extract the strings.  For more information on Floss:
-    # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
+    """get_strings extracts encoded string from file and returns a list of strings found in the
+       file.  Floss is called to extract the strings.  For more information on Floss:
+       https://github.com/fireeye/flare-floss/blob/master/doc/usage.md"""
     with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
         try:
             # Floss writes output to stdout so redirect stdout to temporary file
@@ -69,8 +69,8 @@ def get_strings_from_floss(temp_file_binary):
     return list_string
 
 def extract_strings(data):
-    # extract_strings_from_binary writes binary data to a file and calls get_strings to extract
-    # the encoded strings
+    """extract_strings_from_binary writes binary data to a file and calls get_strings to extract
+       the encoded strings"""
     with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
         try:
             # Write binary data to a temporary file.

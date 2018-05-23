@@ -1,4 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+"""Test fn_utilities.component.utilities_binary_to_string_list"""
 import unittest
 import logging
 import sys

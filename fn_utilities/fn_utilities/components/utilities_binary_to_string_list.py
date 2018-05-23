@@ -12,7 +12,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("utilities_binary_to_string_list")
     def _binary_to_string_list_function(self, event, *args, **kwargs):
-        """Function: This function takes a binary file and returns a list of decoded obfuscated strings from the binary file."""
+        """Function: This function takes a binary file and returns a list of decoded
+           obfuscated strings from the binary file."""
         try:
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -39,4 +40,3 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as err:
             yield FunctionError(err)
-
