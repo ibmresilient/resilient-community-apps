@@ -1,13 +1,14 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.import unittest
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+import unittest
 import logging
 import sys
-from fn
-_utilities.components.utilities_binary_to_string_list_floss import extract_strings
+import os
+from fn_utilities.components.utilities_binary_to_string_list_floss import extract_strings
 
 log = logging.getLogger(__name__)
 
-TESTCASE_INPUT        = './data/sample1.zip'
-TESTCASE_KNOWN_OUTPUT = './data/sample1-zip-floss-output.txt'
+TESTCASE_INPUT        = 'sample1.zip'
+TESTCASE_KNOWN_OUTPUT = 'sample1-zip-floss-output.txt'
 
 class TestBinaryToStringList(unittest.TestCase):
     def setUp(self):
@@ -18,8 +19,14 @@ class TestBinaryToStringList(unittest.TestCase):
         test extract strings from binary data
         :return:
         """
+        # Get the filename path of the floss testcase file and the expected output.
+        dirTestData = os.path.join(os.getcwd(), 'data')
+        fileTestcase = os.path.join(dirTestData, TESTCASE_INPUT)
+        fileTestcaseKnown = os.path.join(dirTestData, TESTCASE_KNOWN_OUTPUT)
+
+        # Open the read the testcase file
         try:
-            fileInput = open(TESTCASE_INPUT, 'r')
+            fileInput = open(fileTestcase, 'r')
             data = fileInput.read()
         except Exception as err:
             raise err
@@ -28,14 +35,16 @@ class TestBinaryToStringList(unittest.TestCase):
 
         listStrings = extract_strings(data)
 
+        # Open and read the file containing the expected output from floss string extractor
         try:
-            fileKnownOutput = open(TESTCASE_KNOWN_OUTPUT, 'r')
+            fileKnownOutput = open(fileTestcaseKnown, 'r')
             listKnownStrings = fileKnownOutput.read().splitlines()
         except Exception as err:
             raise err
         finally:
             fileKnownOutput.close()
 
+        # Compare just computed output from floss on the testcase to known expected output.
         self.assertListEqual(listStrings, listKnownStrings)
 
     def tearDown(self):
