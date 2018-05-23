@@ -33,14 +33,19 @@ class ResilientInv(Investigate):
 
         """
         super(ResilientInv, self).__init__(api_key, proxies)
+
+        # Convert existing uris to unicode object instead of string.
+        for k, v in self._uris.items():
+            self._uris[k] = v.decode('unicode-escape')
+
         # Extend _uris dict of Investigate instance.
         self._uris.update({
-            "categories": "domains/categories/",
-            "timeline":  "timeline/{}",
-            "classifiers_classifiers": "url/{}/classifiers",
-            "classifiers_info": "url/{}/info",
-            "domain_volume": "domains/volume/{}",
-            "sample_behaviors": "sample/{}/behaviors"
+            "categories": u"domains/categories/",
+            "timeline":  u"timeline/{}",
+            "classifiers_classifiers": u"url/{}/classifiers",
+            "classifiers_info": u"url/{}/info",
+            "domain_volume": u"domains/volume/{}",
+            "sample_behaviors": u"sample/{}/behaviors"
         })
         # Over-ride Investigate BASE_URL class attribute with version
         # from config file.
