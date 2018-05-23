@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from fn_utilities.components.utilities_binary_to_string_list_floss import extract_strings
+from fn_utilities.components.utilities_binary_to_string_list_floss import extract_strings, get_binary_data_from_file
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'binary_to_string_list"""
@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
 
             # Get the binary data from the artifact or the attachment
-            data = self.get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachment_id)
+            data = get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachment_id)
             yield StatusMessage("Binary file retrieved.")
 
             # Extract the strings from the binary file and put them in a list.
