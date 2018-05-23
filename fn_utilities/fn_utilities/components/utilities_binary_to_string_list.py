@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from fn_utilities.components.utilities_binary_to_string_list_util import extract_strings, get_binary_data_from_file
+from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings, get_binary_data_from_file
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'binary_to_string_list"""
