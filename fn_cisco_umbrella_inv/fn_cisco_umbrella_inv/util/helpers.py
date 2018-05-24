@@ -10,7 +10,7 @@ import logging
 import datetime
 import re
 import urllib
-from urlparse import urlparse
+from urllib.parse import urlparse, quote_plus
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
@@ -113,7 +113,7 @@ def validate_params(params):
             params[k] = None
 
     # Now do some validation on input parameters.
-    for (k, v) in params.items():
+    for (k, v) in params.copy().items():
         if re.match("^resource$", k) and v is not None:
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v):
@@ -194,7 +194,7 @@ def process_params(params, process_result):
                 process_result["_res"] = str(v)
             elif validate_url(v):
                 # Assume "resource" param is a url.
-                process_result["_res"] = urllib.quote_plus(v)
+                process_result["_res"] = quote_plus(v)
             elif validate_domains(v):
                 # Assume "resource" param is a domain.
                 process_result["_res"] = str(v)
@@ -233,7 +233,7 @@ def omit_params(params, omit_list):
         raise Exception("Error missing parameter 'omit_set'")
     if not isinstance(omit_list, str) and not isinstance(omit_list, list):
         raise ValueError("omit_list argument must be a string or list")
-    params = {k: v for (k, v) in params.iteritems() if not k in omit_list}
+    params = {k: v for (k, v) in params.items() if not k in omit_list}
     return params
 
 def is_none(param):
