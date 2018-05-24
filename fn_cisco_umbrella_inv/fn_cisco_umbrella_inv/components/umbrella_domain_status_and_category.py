@@ -123,7 +123,8 @@ class FunctionComponent(ResilientComponent):
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 for c in rtn:
                     cat_keys.append(c)
-                    cat_keys_int = map(int, cat_keys)
+                    cat_keys_int = list(map(int, cat_keys))
+                max_cat_keys = max(cat_keys_int)
                 results = {"categories": json.loads(json.dumps(rtn)), "min_id": min(cat_keys_int),
                            "max_id": max(cat_keys_int), "query_execution_time": query_execution_time}
             elif (umbinv_status_endpoint == "categorization"):
