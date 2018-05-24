@@ -122,7 +122,11 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.samples(res, **omit_params(params, ["resource", "resource_type"]))
-            if len(rtn["samples"]) == 0:
+            if "error" in rtn:
+                log.debug(json.dumps(rtn))
+                yield StatusMessage("Investigate returned 'error' status: '{}'.".format(rtn["error"]))
+                results = {}
+            elif len(rtn) == 0 or ("samples" in rtn and len(rtn["samples"]) == 0):
                 log.debug(json.dumps(rtn))
                 yield StatusMessage("No Results returned for resource '{}'.".format(res))
                 results = {}
