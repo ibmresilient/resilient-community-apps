@@ -87,6 +87,7 @@ class FunctionComponent(ResilientComponent):
 
             # Else, raise an error
             else:
+              yield StatusMessage('Failed creating attachment')
               raise FunctionError(u'Failed creating attachment')
             
         except Exception:
