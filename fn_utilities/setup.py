@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'vivisect>=0.0.20170525',
-        'floss>=1.5.1',
+        'floss>=1.5.1'
     ],
     packages=find_packages(),
     include_package_data=True,
