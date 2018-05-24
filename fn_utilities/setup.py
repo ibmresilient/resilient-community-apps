@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_utilities',
-    version='1.0.1',
+    version='1.0.0',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'vivisect>=0.0.20170525'
+        'vivisect>=0.0.20170525',
         'floss>=1.5.1',
     ],
     packages=find_packages(),
