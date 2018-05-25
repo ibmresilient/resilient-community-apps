@@ -19,17 +19,23 @@ SQL_ATTR_CONNECTION_TIMEOUT = 113
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_odbc_query
+    """Component that implements Resilient function 'fn_odbc_query'
 
     The Function executes an ODBC query and takes the following parameters:
         sql_query, sql_condition_value1, sql_condition_value2, sql_condition_value3
 
-    An example of a set of query parameter might look like the following:
+    An example of query parameters might look like the following:
 
-        sql_select: "SELECT incident_id, name, description FROM incidents WHERE incident_id = {sql_condition_value}"
-        sql_condition_value1: artifact.value or custom condition value 1
-        sql_condition_value2: condition value 2
-        sql_condition_value3: condition value 3
+        sql_select:
+        SELECT id AS sql_column_1, first_name AS sql_column_2, last_name AS sql_column_3
+            FROM mock_data WHERE id = ?
+        DELETE from mock_data WHERE id = ?
+        INSERT into mock_data (id, first_name, last_name) values (?, ?, ?)
+        UPDATE mock_data SET id = ? WHERE email = ?
+
+        sql_condition_value1: custom condition value 1 | artifact.value | artifact.description | etc
+        sql_condition_value2: custom condition value 2 | artifact.value | artifact.description | etc
+        sql_condition_value3: custom condition value 3 | artifact.value | artifact.description | etc
 
     The ODBC query will return a result in JSON format with an entry consisting of key value pairs.
 
@@ -59,10 +65,6 @@ class FunctionComponent(ResilientComponent):
 
         Using prepared SQL statements, where parameters are passed to the database separately,
         protecting against SQL injection attacks.
-
-        :param
-        :param
-        :return
 
         Inputs:
         Inputs: sql_query: a SQL query with set parameters using a question mark as a place holder,
@@ -175,7 +177,7 @@ class FunctionComponent(ResilientComponent):
         """" Setup ODBC connection to a SQL server
 
         Setup ODBC connection to a SQL server using connection string obtained from the config file.
-        Set autocommit and query time out values based on the information in config file.
+        Set autocommit and query timeout values based on the information in config file.
 
         """
         if "sql_connection_string" in self.options:
@@ -187,9 +189,6 @@ class FunctionComponent(ResilientComponent):
         # Not all database drivers close connections on db_connection.close() to save round trips to the server.
         # Pooling should be set to False to close connection on db_connection.close().
         pyodbc.pooling = False
-
-        # Query statement timeout defaults to 0, which means "no timeout"
-        connection_timeout = 0
 
         try:
             db_connection = pyodbc.connect(sql_connection_string)
@@ -211,7 +210,7 @@ class FunctionComponent(ResilientComponent):
                 # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
                 # Try to catch a pyodbc.OperationalError and pass.
                 try:
-                    # Timeout defaults to 0, which means "no timeout"
+                    # Query statement timeout defaults to 0, which means "no timeout"
                     db_connection.timeout = int(sql_query_timeout)
 
                 except pyodbc.Error as e:
@@ -235,12 +234,16 @@ class FunctionComponent(ResilientComponent):
         all Unicode as recommended in the ODBC specification.
         Unfortunately many drivers behave differently so connections may need to be configured."
 
-        Function configures suggested settings based on the type of SQL server.
+        Configure unicode settings based on the type of SQL database server.
 
         """
         if "sql_database_type" in self.options:
             sql_database_type = self.options["sql_database_type"].lower()
 
+            # These databases tend to use a single encoding and do not differentiate between
+            # "SQL_CHAR" and "SQL_WCHAR". Therefore you must configure them to encode Unicode
+            # data as UTF-8 and to decode both C buffer types using UTF-8.
+            # https://github.com/mkleehammer/pyodbc/wiki/Unicode
             if sql_database_type in SINGLE_ENCODING_DATABASES:
                 db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
                 db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')

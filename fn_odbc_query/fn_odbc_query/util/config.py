@@ -10,7 +10,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_odbc_query]
-# Define your connection string.
+# Define your connection string
 #sql_connection_string=DRIVER={MariaDB ODBC 3.0 Driver};SERVER=127.0.0.1;PORT=3306;UID=root;PWD=password;Connection Timeout=60;
 sql_connection_string=Driver={PostgreSQL};Server=localhost;Port=5432;Database=postgres_test_database;Uid=postgres;Pwd=password;Timeout=60;
 
@@ -26,14 +26,15 @@ sql_restricted_sql_statements=["delete", "insert", "update"]
 sql_autocommit=true
 
 # Optional setting
-# Define an query timeout in seconds. 
-# Comment this line to use the default, 0, which means "no timeout".
+# Might not be supported for all database drivers.
+# Define a query timeout in seconds. 
+# Comment this line to use the default 0, which means "no timeout".
 sql_query_timeout=10
 
 # Optional setting
-# Encoding and decoding settings needed for your database.
-# Choose one of the supported database types MariaDB, PostgreSQL or MySQL.
-# Define which SQL Server settings you want to use. 
+# Encoding and decoding settings needed for your SQL database.
+# Define which one of supported SQL Server database settings you want to use. 
+# At the moment MariaDB, PostgreSQL and MySQL are supported.
 # Comment this line if you don't wish to configure decoding/encoding.
 sql_database_type=MariaDB
 
