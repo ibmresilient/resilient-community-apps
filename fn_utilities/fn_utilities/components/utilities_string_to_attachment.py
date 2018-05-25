@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage('Writing attachment...')
 
             # Setup tempfile
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
                 try:
                     # Write and close tempfile
                     temp_file.write(string_to_convert_to_attachment)
