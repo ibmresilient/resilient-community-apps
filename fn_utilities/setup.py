@@ -34,6 +34,7 @@ setup(
             "PDFidFunctionComponent = fn_utilities.components.utilities_pdfid:FunctionComponent",
             "ResilientSearchFunctionComponent = fn_utilities.components.utilities_resilient_search:FunctionComponent",
             "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent",
+            "StringToAttachmentFunctionComponent = fn_utilities.components.utilities_string_to_attachment:FunctionComponent",
             "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
