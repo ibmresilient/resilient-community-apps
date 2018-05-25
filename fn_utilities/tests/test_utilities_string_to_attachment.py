@@ -39,8 +39,9 @@ class TestUtilitiesStringToAttachment:
         assert func is not None
 
     @pytest.mark.parametrize("string_to_convert_to_attachment, attachment_name, incident_id, expected_results", [
-        ("test string", "test attachment name", 123, {'attachment_id' : 5})
+        ("test string", "test attachment name", 202, {'attachment_id' : 2021})
     ])
+
     def test_success(self, circuits_app, string_to_convert_to_attachment, attachment_name, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
@@ -48,5 +49,5 @@ class TestUtilitiesStringToAttachment:
             "attachment_name": attachment_name,
             "incident_id": incident_id
         }
-        # results = call_utilities_string_to_attachment_function(circuits_app, function_params)
-        # assert(expected_results == results)
+        results = call_utilities_string_to_attachment_function(circuits_app, function_params)
+        assert(expected_results == results)
