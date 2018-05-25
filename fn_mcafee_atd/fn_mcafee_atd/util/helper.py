@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 
 def _get_atd_session_headers(g):
     login_string = "{}:{}".format(g.atd_username, g.atd_password)
-    base64_login = base64.b64encode(login_string)
+    base64_login = base64.b64encode(str.encode(login_string))
     session_url = "{}/php/session.php".format(g.atd_url)
 
     headers = {
@@ -27,7 +27,7 @@ def _get_atd_session_headers(g):
     log.debug("User logged in successfully")
     content = r.json()
     session_string = "{}:{}".format(content["results"]["session"], content["results"]["userId"])
-    base64_session = base64.b64encode(session_string)
+    base64_session = base64.b64encode(str.encode(session_string))
 
     session_headers = {
         "Accept": "application/vnd.ve.v1.0+json",

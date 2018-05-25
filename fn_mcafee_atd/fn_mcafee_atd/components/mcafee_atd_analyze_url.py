@@ -4,8 +4,12 @@
 
 import logging
 import time
-from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+try:
+    from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, check_timeout, get_incident_id
+except:
+    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+        check_status_code, check_timeout, get_incident_id
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -68,6 +72,7 @@ class FunctionComponent(ResilientComponent):
     @function("mcafee_atd_analyze_url")
     def _mcafee_atd_analyze_url_function(self, event, *args, **kwargs):
         """Function: """
+        report_file = None
         try:
             inputs = {}
             start_time = time.time()

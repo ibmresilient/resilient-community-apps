@@ -4,8 +4,12 @@
 
 import logging
 import time
-from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, check_timeout, get_incident_id, upload_attachment
+try:
+    from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+    check_status_code, check_timeout, get_incident_id
+except:
+    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+        check_status_code, check_timeout, get_incident_id
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -94,40 +98,10 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_atd", {})
 
-    # def _get_file(self, **kwargs):
-    #     url = ""
-    #     name_url = ""
-    #     name = ""
-    #     if kwargs.get("artifact_id") is not None:
-    #         url = "/incidents/{}/artifacts/{}/contents".format(kwargs["incident_id"], kwargs["artifact_id"])
-    #         name_url = "/incidents/{}/artifacts/{}".format(kwargs["incident_id"], kwargs["artifact_id"])
-    #         log.debug("Downloading artifact attachment")
-    #         name = str(self.resilient_client.get(name_url)["attachment"]["name"])
-    #     elif kwargs.get("task_id") is not None:
-    #         url = "/tasks/{}/attachments/{}/contents".format(kwargs["task_id"], kwargs["attachment_id"])
-    #         name_url = "/tasks/{}/attachments/{}".format(kwargs["task_id"], kwargs["attachment_id"])
-    #         log.debug("Downloading task attachment")
-    #         name = str(self.resilient_client.get(name_url)["name"])
-    #     elif kwargs.get("attachment_id") is not None:
-    #         url = "/incidents/{}/attachments/{}/contents".format(kwargs["incident_id"], kwargs["attachment_id"])
-    #         name_url = "/incidents/{}/attachments/{}".format(kwargs["incident_id"], kwargs["attachment_id"])
-    #         log.debug("Downloading incident attachment")
-    #         name = str(self.resilient_client.get(name_url)["name"])
-    #     else:
-    #         log.error("Inputs not set correctly, can not download file.")
-    #         raise ValueError("Inputs not set correctly")
-    #
-    #     f = self.resilient_client.get_content(url)
-    #     response = {
-    #         "file": f,
-    #         "file_name": name
-    #     }
-    #
-    #     return response
-
     @function("mcafee_atd_analyze_file")
     def _mcafee_atd_analyze_file_function(self, event, *args, **kwargs):
         """Function: """
+        report_file = None
         try:
             resilient_client = self.rest_client()
             inputs = {}
@@ -197,4 +171,5 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             raise FunctionError()
         finally:
-            remove_dir(report_file["tmp_dir"])
+            if report_file is not None:
+                remove_dir(report_file["tmp_dir"])
