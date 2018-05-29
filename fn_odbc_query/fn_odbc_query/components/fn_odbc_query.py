@@ -203,12 +203,12 @@ class FunctionComponent(ResilientComponent):
             if "sql_query_timeout" in self.options:
                 sql_query_timeout = self.options["sql_query_timeout"]
 
-                # Some odbc drivers might might throw an error while setting db_connection.timeout:
+                # Some odbc drivers might throw an error while setting db_connection.timeout:
                 # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
                 # SQL_ATTR_CONNECTION_TIMEOUT represents value 113,
                 # this constant can be found in ODBC specification file "sqlext.h".
                 # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
-                # Try to catch a pyodbc.OperationalError and pass.
+                # Try to catch a pyodbc.Error and pass.
                 try:
                     # Query statement timeout defaults to 0, which means "no timeout"
                     db_connection.timeout = int(sql_query_timeout)
@@ -242,7 +242,7 @@ class FunctionComponent(ResilientComponent):
 
             # These databases tend to use a single encoding and do not differentiate between
             # "SQL_CHAR" and "SQL_WCHAR". Therefore you must configure them to encode Unicode
-            # data as UTF-8 and to decode both C buffer types using UTF-8.
+            # data as UTF-8 and to decode both C buffer types using UTF-8. Using Python 2.7 syntax.
             # https://github.com/mkleehammer/pyodbc/wiki/Unicode
             if sql_database_type in SINGLE_ENCODING_DATABASES:
                 db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
