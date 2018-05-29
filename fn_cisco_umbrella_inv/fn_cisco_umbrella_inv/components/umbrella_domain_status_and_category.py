@@ -89,6 +89,9 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_status_endpoint):
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
+            if is_none(umbinv_domains) and umbinv_status_endpoint == "categorization":
+                raise ValueError("Parameter 'umbinv_domains' should be set if 'umbinv_status_endpoint' has value 'categories'.")
+
             if not is_none(umbinv_domains) and umbinv_status_endpoint == "categories":
                 raise ValueError("Parameter 'umbinv_domains' should not be set if 'umbinv_status_endpoint' has value 'categories'.")
 
