@@ -123,16 +123,18 @@ def validate_params(params):
                 raise ValueError("Invalid value for function parameter 'resource'.")
         if re.match("^resource", k) and IP_PATTERN.match(v):
             if "resource_type" in params and params["resource_type"] != "ip_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'ip_address'.")
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
         if re.match("^resource", k) and validate_domains(v):
-            if "resource_type" in params and (params["resource_type"] != "domain_name" and params["resource_type"] != "nameserver"):
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'domain_name' or type 'nameserver'.")
+            if "resource_type" in params and params["resource_type"] != "domain_name":
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
+            if "whois_type" in params and (params["whois_type"] != "domain_name" and params["whois_type"] != "nameserver"):
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
         if re.match("^resource", k) and validate_url(v):
             if "resource_type" in params and params["resource_type"] != "url":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'url'.")
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
         if re.match("^resource", k) and validate_emails(v):
-            if "resource_type" in params and params["resource_type"] != "email_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'email_address'.")
+            if "whois_type" in params and params["whois_type"] != "email_address":
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
         # Domain name and name server should be in similar format use same validator.
         if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
