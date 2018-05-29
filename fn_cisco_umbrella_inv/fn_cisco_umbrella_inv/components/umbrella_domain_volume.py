@@ -43,7 +43,8 @@ class FunctionComponent(ResilientComponent):
         {
         'domain_name': 'cisco.com',
         'query_execution_time': '2018-04-25 19:21:33'
-        'domain_volume': {u'dates': [1524589200000, 1524679200000],
+        'domain_volume': { u'dates': [1524589200000, 1524679200000],
+                           u'dates_converted': [u'2018-04-24 18:00:00', u'2018-04-25 19:00:00']
                            u'queries': [2610011, 2576588, 2518676, 2361999, 2161170, 1992158, 1835777, 1847458, 1809848,
                            1791200, 1784312, 1776649, 1830100, 1939211, 2023009, 2075916, 2042269, 2065889, 2137081,
                            2442077, 2618018, 2690130, 2726822, 2650116, 0, 0]},
@@ -108,6 +109,15 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             rtn = rinv.domain_volume(domain, **omit_params(params, ["domain"]))
+            dates_converted = []
+            for d in rtn["dates"]:
+                try:
+                    secs = int(d) / 1000
+                    ts_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                    dates_converted.append(ts_readable)
+                except ValueError:
+                    yield FunctionError('timestamp value incorrectly specified')
+            rtn["dates_converted"] = dates_converted
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             results = {"domain_volume": json.loads(json.dumps(rtn)), "domain_name": domain,
                        "query_execution_time": query_execution_time}
