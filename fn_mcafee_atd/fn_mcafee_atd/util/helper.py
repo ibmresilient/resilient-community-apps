@@ -134,6 +134,7 @@ def submit_url(g, url, submit_type=None):
 def check_atd_status(g, task_id):
     status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, task_id)
     submission_status = requests.get(status_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+    check_status_code(submission_status)
     submit_json = submission_status.json()
     if submit_json['results']['istate'] == 4:
         return False
