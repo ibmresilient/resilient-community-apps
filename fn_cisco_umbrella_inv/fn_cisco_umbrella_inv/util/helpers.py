@@ -9,8 +9,11 @@ from __future__ import print_function
 import logging
 import datetime
 import re
-import urllib
-from urlparse import urlparse
+try:
+    from urllib.parse import urlparse, quote_plus
+except:
+    from urlparse import urlparse
+    from urllib import quote_plus
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
@@ -113,24 +116,27 @@ def validate_params(params):
             params[k] = None
 
     # Now do some validation on input parameters.
-    for (k, v) in params.items():
+    for (k, v) in params.copy().items():
         if re.match("^resource$", k) and v is not None:
             if not IP_PATTERN.match(v) and not validate_url(v) \
-                and not validate_domains(v):
+                and not validate_domains(v) and not validate_emails(v):
                 raise ValueError("Invalid value for function parameter 'resource'.")
         if re.match("^resource", k) and IP_PATTERN.match(v):
             if "resource_type" in params and params["resource_type"] != "ip_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'ip_address'.")
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
         if re.match("^resource", k) and validate_domains(v):
             if "resource_type" in params and params["resource_type"] != "domain_name":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'domain_name'.")
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
+            if "whois_type" in params and (params["whois_type"] != "domain_name" and params["whois_type"] != "nameserver"):
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
         if re.match("^resource", k) and validate_url(v):
             if "resource_type" in params and params["resource_type"] != "url":
-                raise ValueError("Invalid value for function parameter 'resource', should be type 'url'.")
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
+        if re.match("^resource", k) and validate_emails(v):
+            if "whois_type" in params and params["whois_type"] != "email_address":
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
         # Domain name and name server should be in similar format use same validator.
-        if re.match("^(domain|nameservers)", k) and v is not None and not validate_domains(v):
-            raise ValueError("Invalid value for function parameter '{}'.".format(k))
-        if re.match("^emails$", k) and v is not None and not validate_emails(v):
+        if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^ipaddr$", k) and v is not None and not IP_PATTERN.match(v):
             raise ValueError("Invalid value for function parameter 'ipaddr'.")
@@ -189,16 +195,13 @@ def process_params(params, process_result):
 
     for (k, v) in params.items():
         if (re.match("^resource$", k)) and v is not None:
-            if IP_PATTERN.match(v):
-                # Assume "resource" param is an ip address.
+            if IP_PATTERN.match(v) or validate_domains(v) or validate_emails(v):
+                # Assume "resource" param is a domain name, nameserver, ip address or email address.
                 process_result["_res"] = str(v)
             elif validate_url(v):
                 # Assume "resource" param is a url.
-                process_result["_res"] = urllib.quote_plus(v)
-            elif validate_domains(v):
-                # Assume "resource" param is a domain.
-                process_result["_res"] = str(v)
-        if (re.match("^(domain|nameservers|emails)", k)) and v is not None:
+                process_result["_res"] = quote_plus(v)
+        if (re.match("^domain", k)) and v is not None:
             set_result(process_result, k, v)
         if (re.match("^ipaddr$", k)) and v is not None:
             process_result["_ipaddr"] = str(v)
@@ -233,7 +236,7 @@ def omit_params(params, omit_list):
         raise Exception("Error missing parameter 'omit_set'")
     if not isinstance(omit_list, str) and not isinstance(omit_list, list):
         raise ValueError("omit_list argument must be a string or list")
-    params = {k: v for (k, v) in params.iteritems() if not k in omit_list}
+    params = {k: v for (k, v) in params.items() if not k in omit_list}
     return params
 
 def is_none(param):

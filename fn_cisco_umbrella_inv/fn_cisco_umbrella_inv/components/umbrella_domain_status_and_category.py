@@ -89,6 +89,12 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_status_endpoint):
                 raise ValueError("Required parameter 'umbinv_status_endpoint' not set")
 
+            if is_none(umbinv_domains) and umbinv_status_endpoint == "categorization":
+                raise ValueError("Parameter 'umbinv_domains' should be set if 'umbinv_status_endpoint' has value 'categories'.")
+
+            if not is_none(umbinv_domains) and umbinv_status_endpoint == "categories":
+                raise ValueError("Parameter 'umbinv_domains' should not be set if 'umbinv_status_endpoint' has value 'categories'.")
+
             yield StatusMessage("Starting...")
             domains = None
             process_result = {}
@@ -123,7 +129,8 @@ class FunctionComponent(ResilientComponent):
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 for c in rtn:
                     cat_keys.append(c)
-                    cat_keys_int = map(int, cat_keys)
+                    cat_keys_int = list(map(int, cat_keys))
+                max_cat_keys = max(cat_keys_int)
                 results = {"categories": json.loads(json.dumps(rtn)), "min_id": min(cat_keys_int),
                            "max_id": max(cat_keys_int), "query_execution_time": query_execution_time}
             elif (umbinv_status_endpoint == "categorization"):

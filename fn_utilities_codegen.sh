@@ -6,6 +6,7 @@ resilient-circuits codegen -p fn_utilities -m fn_utilities \
     "Example: PDFiD" \
     "Example: Resilient Search" \
     "Example: Shell Command" \
+    "Example: String to Attachment" \
     "Example: Zip Extract" \
     "Example: Zip List" \
     "Example: Expand URL"

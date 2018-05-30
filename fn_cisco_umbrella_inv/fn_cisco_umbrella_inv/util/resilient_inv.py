@@ -6,10 +6,14 @@
 """ Investigate class for Resilient circuits Functions supporting Cisco Umbrella Investigate """
 
 from __future__ import print_function
-import urlparse
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
 import logging
 import datetime, time
 import json
+import sys
 from investigate import Investigate
 
 log = logging.getLogger(__name__)
@@ -33,14 +37,20 @@ class ResilientInv(Investigate):
 
         """
         super(ResilientInv, self).__init__(api_key, proxies)
+
+        # If python version 2 convert existing uris to unicode object instead of string.
+        if sys.version_info.major == 2:
+            for k, v in self._uris.items():
+                self._uris[k] = v.decode('unicode-escape')
+
         # Extend _uris dict of Investigate instance.
         self._uris.update({
-            "categories": "domains/categories/",
-            "timeline":  "timeline/{}",
-            "classifiers_classifiers": "url/{}/classifiers",
-            "classifiers_info": "url/{}/info",
-            "domain_volume": "domains/volume/{}",
-            "sample_behaviors": "sample/{}/behaviors"
+            "categories": u"domains/categories/",
+            "timeline":  u"timeline/{}",
+            "classifiers_classifiers": u"url/{}/classifiers",
+            "classifiers_info": u"url/{}/info",
+            "domain_volume": u"domains/volume/{}",
+            "sample_behaviors": u"sample/{}/behaviors"
         })
         # Over-ride Investigate BASE_URL class attribute with version
         # from config file.
@@ -89,7 +99,7 @@ class ResilientInv(Investigate):
         :return Result in json format.
 
         """
-        uri = urlparse.urljoin(self._uris['categorization'], domain)
+        uri = urljoin(self._uris['categorization'], domain)
         params = {'showLabels': ''} if labels else {}
         return self.get_parse(uri, params)
 

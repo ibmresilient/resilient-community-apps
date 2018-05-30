@@ -52,6 +52,13 @@ class AttachmentMock(BasicResilientMock):
             "size": 207,
             "id": 201,
         },
+        "2021": {
+            "name": "test attachment name.txt",
+            "created": 1519264285530,
+            "content_type": "text/plain",
+            "size": 984,
+            "id": 2021,
+        }
     }
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments$")
@@ -65,9 +72,16 @@ class AttachmentMock(BasicResilientMock):
     @resilient_endpoint("POST", "/incidents/[0-9]+/attachments$")
     def attachments_post(self, request):
         """ POST an attachment """
+
+        data = {}
+        incident_id = request.url.split("/")[-2]
+
+        if incident_id == "202":
+          data = self.attachments["2021"]
+
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             json={})
+                                             json=data)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
     def attachments_one_get(self, request):
