@@ -26,7 +26,7 @@ def get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachm
 
     return data
 
-def get_strings_from_floss(temp_file_binary):
+def get_strings_from_floss(str_floss_options, temp_file_binary):
     """get_strings extracts encoded string from file and returns a list of strings found in the
        file.  Floss is called to extract the strings.  For more information on Floss:
        https://github.com/fireeye/flare-floss/blob/master/doc/usage.md"""
@@ -38,12 +38,15 @@ def get_strings_from_floss(temp_file_binary):
             sys.stdout = temp_file_strings
 
             # Call Floss to extract strings from the file.
-            # Use commandline arguments: -q for quiet mode so that only the strings
-            # are returned, no headers;  -s option directs floss to analyze binary
-            # files containing shellcode. See floss documentation for other options
-            # you can pass to floss.
+            # See floss documentation for other options you can pass to floss.
             # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
-            result_floss = main.main(['main', '-q', '-s', temp_file_binary.name.encode('utf-8')])
+            # Create the list of commandline options to pass to floss main.
+            list_floss_params = ['main']
+            list_options = str_floss_options.split()
+            for option in list_options:
+                list_floss_params.append(option)
+            list_floss_params.append(temp_file_binary.name.encode('utf-8'))
+            result_floss = main.main(list_floss_params)
             output_stream.close()
 
             if result_floss != 0:
@@ -68,7 +71,7 @@ def get_strings_from_floss(temp_file_binary):
 
     return list_string
 
-def extract_strings(data):
+def extract_strings(str_options, data):
     """extract_strings_from_binary writes binary data to a file and calls get_strings to extract
        the encoded strings"""
     with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
@@ -76,7 +79,7 @@ def extract_strings(data):
             # Write binary data to a temporary file.
             temp_file_binary.write(data)
 
-            list_string = get_strings_from_floss(temp_file_binary)
+            list_string = get_strings_from_floss(str_options, temp_file_binary)
         except Exception as err:
             raise err
 

@@ -4,11 +4,21 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings, get_binary_data_from_file
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'binary_to_string_list"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("fn_utilities", {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_utilities", {})
 
     @function("utilities_binary_to_string_list")
     def _binary_to_string_list_function(self, event, *args, **kwargs):
@@ -32,8 +42,16 @@ class FunctionComponent(ResilientComponent):
             data = get_binary_data_from_file(client, incident_id, task_id, artifact_id, attachment_id)
             yield StatusMessage("Binary file retrieved.")
 
+            # Get the floss commandline options from the app.config file.
+            if "floss_options" in self.options:
+                str_floss_options = self.options["floss_options"]
+            else:
+                # Set the defaults floss options to -q (quiet mode) and -s (shellcode) if none are
+                # defined in the app.config file
+                str_floss_options = "-q -s"
+
             # Extract the strings from the binary file and put them in a list.
-            list_results = extract_strings(data)
+            list_results = extract_strings(str_floss_options, data)
 
             yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))
             yield FunctionResult({"value": list_results})
