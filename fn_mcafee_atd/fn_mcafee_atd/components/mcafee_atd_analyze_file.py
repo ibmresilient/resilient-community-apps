@@ -168,7 +168,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
+        except Exception as e:
+            log.info(e)
             raise FunctionError()
         finally:
             if report_file is not None:
