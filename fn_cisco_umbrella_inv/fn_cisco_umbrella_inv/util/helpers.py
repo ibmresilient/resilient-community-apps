@@ -34,8 +34,6 @@ def validate_opts(func):
      """
     if not "api_token" in func.options:
         raise Exception("Mandatory config setting 'api_token' not set.")
-    if not "api_token" in func.options:
-        raise Exception("Mandatory config setting 'api_token' not set.")
     if not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'.")
     if not "base_url" in func.options:
