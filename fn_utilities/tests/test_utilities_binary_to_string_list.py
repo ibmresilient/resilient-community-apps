@@ -34,7 +34,9 @@ class TestBinaryToStringList(unittest.TestCase):
         finally:
             fileInput.close()
 
-        listStrings = extract_strings(data)
+        # Use commandline args -q quiet mode, -s shellcode, -n 5 minimum characters 5
+        str_floss_options = '-q,-s,-n 5'
+        listStrings = extract_strings(str_floss_options, data)
 
         # Open and read the file containing the expected output from floss string extractor
         try:
