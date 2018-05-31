@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 # Set the defaults floss options to -q (quiet mode), -s (shellcode) and -n minimum
                 # string length 5...if none are defined in the app.config file
-                str_floss_options ='-q,-s,-n 5'
+                str_floss_options = '-q,-s,-n 5'
 
             # Extract the strings from the binary file and put them in a list.
             list_results = extract_strings(str_floss_options, data)
