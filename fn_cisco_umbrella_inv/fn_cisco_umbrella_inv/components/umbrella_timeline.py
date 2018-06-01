@@ -102,7 +102,7 @@ class FunctionComponent(ResilientComponent):
                     except ValueError:
                         yield FunctionError('timestamp value incorrectly specified')
                 # Add  "query_execution_time" to result to facilitate post-processing.
-                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": res,
+                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": params["resource"],
                            "query_execution_time": query_execution_time}
             yield StatusMessage("done...")
 

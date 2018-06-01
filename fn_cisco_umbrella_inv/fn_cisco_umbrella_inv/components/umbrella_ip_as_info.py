@@ -80,12 +80,15 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_ipaddr) and is_none(umbinv_asn):
                 raise ValueError("One of parameters 'umbinv_ipaddr' or 'umbinv_asn' must be set")
 
+            if not is_none(umbinv_ipaddr) and not is_none(umbinv_asn):
+                raise ValueError("Both parameters 'umbinv_ipaddr' or 'umbinv_asn' should not be set at the same time")
+
             yield StatusMessage("Starting...")
             ipaddr = asn = None
             process_result = {}
             params = {"ipaddr": umbinv_ipaddr, "asn": umbinv_asn}
 
-            # Reset 'ipaddr' param if inmput paramater set.
+            # Reset 'ipaddr' param if inmput parameter set.
             if not is_none(umbinv_ipaddr):
                 params.setdefault("ipaddr", umbinv_ipaddr.strip())
 
@@ -105,7 +108,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
             if ipaddr is not None:
-                # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
+                # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 rtn = rinv.as_for_ip(ipaddr)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
@@ -113,7 +116,7 @@ class FunctionComponent(ResilientComponent):
             elif asn is not None:
                 rtn = rinv.prefixes_for_asn(asn)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
+                # Add "query_execution_time" and "asn" key to result to facilitate post-processing.
                 results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": asn,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
