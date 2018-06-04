@@ -35,24 +35,24 @@ class FunctionComponent(ResilientComponent):
             excel_defined_names = kwargs.get("excel_defined_names")  # text
 
             log = logging.getLogger(__name__)
-            log.info("task_id: %s", task_id)
-            log.info("incident_id: %s", incident_id)
-            log.info("attachment_id: %s", attachment_id)
-            log.info("excel_ranges: %s", excel_ranges)
-            log.info("excel_defined_names: %s", excel_defined_names)
+            log.info("task_id: {0}".format(task_id))
+            log.info("incident_id: {0}".format(incident_id))
+            log.info("attachment_id: {0}".format(attachment_id))
+            log.info("excel_ranges: {0}".format(excel_ranges))
+            log.info("excel_defined_names: {0}".format(excel_defined_names))
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            yield StatusMessage("starting...")
+            yield StatusMessage("Reading the attachment.")
             attachment_data = self._get_attachment_binary(task_id, incident_id, attachment_id)
-            worksheet_data = WorksheetData(io.BytesIO(attachment_data))
-            worksheet_data.parse()
-
-            results = {
-                "value": "xyz"
-            }
-
+            yield StatusMessage("Processing attachment.")
+            worksheet_data = WorksheetData(io.BytesIO(attachment_data), {
+                "ranges": WorksheetData.parse_excel_notation(excel_ranges),
+                "named_ranges": excel_defined_names.split(',')
+            })
+            worksheet_data.parse() # extracts all the data to result
+            result = worksheet_data.result
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result)
         except Exception:
             yield FunctionError()
 
@@ -91,7 +91,7 @@ class WorksheetData(object):
     """
     # This reg exp captures the form "Name"!A1:B2 or 'Name'!A1
     # Has 4 capturing groups - name of the sheet, top_left and bottom_right (if range given None if not), and cell
-    EXCEL_RANGE_REG_EXP = r"((?:\"|\')([\w\ ,;\"\'\.]+)(?:\"|\')!" \
+    EXCEL_RANGE_REG_EXP = r"(?:(?:\"|\')([\w\ ,;.\"\']+)(?:\"|\')!" \
                           r"(?:(?:([a-zA-Z][\d])[:]([a-zA-Z][\d]))|([a-zA-Z][\d])))+"
     # These constant adjust the return JSON namings
     SHEETS_TITLES = "titles"
@@ -132,13 +132,14 @@ class WorksheetData(object):
         result = []
         range_matches = re.finditer(WorksheetData.EXCEL_RANGE_REG_EXP, ranges)
         for match in range_matches:
-            name = match.group(0)
+            name = match.group(1)
             # check if 2 coordinates were provided, or 1
-            if match.group(1):
-                top_left = match.group(1)
-                bottom_right = match.group(2)
-            if not top_left:
-                top_left = bottom_right = match.group(3)
+            if match.group(2):
+                top_left = match.group(2)
+                bottom_right = match.group(3)
+            # if the top left isn't provided, then a single coordinate in group 4 is given
+            if not match.group(2):
+                top_left = bottom_right = match.group(4)
             result.append({
                 "name": name,
                 "top_left":top_left,
@@ -209,12 +210,11 @@ class WorksheetData(object):
         :param range: object
             stores information about the range - sheet, top_left, bottom_right
         """
+        # make sure the worksheet actually exists
         try:
             ws = self.wb[range.name]
         except KeyError as e:
-            log = logging.getLogger(__name__)
-            log.error("The sheet {} provided by user doesn't exist".format(range.name))
-            return
+            raise FunctionError("The sheet {} provided by user doesn't exist".format(range.name))
 
         # additional thing to do for read only sheets to make sure only necessary data is read
         ws.calculate_dimension(force=True)
@@ -222,10 +222,8 @@ class WorksheetData(object):
         try:
             data = ws[range.top_left:range.bottom_right]
         except ValueError as e:
-            log = logging.getLogger(__name__)
-            log.error("The range coordinates {0},{1} provided by user are incorrect".
+            raise FunctionError("The range coordinates {0},{1} provided by user are incorrect".
                       format(range.top_left, range.bottom_right))
-            return
 
         if range.name not in self.result[self.PARSED_SHEETS]:
             self.result[self.PARSED_SHEETS][range.name] = {}
