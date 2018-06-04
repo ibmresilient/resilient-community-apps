@@ -3,9 +3,12 @@
 
 from __future__ import print_function
 import pytest
+from mock import patch, Mock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+import logging
 
+LOG = logging.getLogger(__name__)
 PACKAGE_NAME = "fn_odbc_query"
 FUNCTION_NAME = "fn_odbc_query"
 

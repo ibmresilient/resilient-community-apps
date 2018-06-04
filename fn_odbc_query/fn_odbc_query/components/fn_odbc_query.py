@@ -11,11 +11,18 @@
 
 import logging
 import pyodbc
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import json
+import sys
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_odbc_query.util import function_utils
 
 SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
 SQL_ATTR_CONNECTION_TIMEOUT = 113
+LOG = logging.getLogger(__name__)
+
+""" Unicode objects don’t exist in python 3.6. """
+if sys.version_info >= (3, 0):
+    unicode = str
 
 
 class FunctionComponent(ResilientComponent):
@@ -52,7 +59,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_odbc_query", {})
-        self.log = logging.getLogger(__name__)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -87,28 +93,34 @@ class FunctionComponent(ResilientComponent):
             sql_condition_value2 = kwargs.get("sql_condition_value2")  # text
             sql_condition_value3 = kwargs.get("sql_condition_value3")  # text
 
-            self.log.info(u"sql_query: %s", sql_query)
-            self.log.info(u"sql_condition_value1: %s", sql_condition_value1)
-            self.log.info(u"sql_condition_value2: %s", sql_condition_value2)
-            self.log.info(u"sql_condition_value3: %s", sql_condition_value3)
+            LOG.info(u"sql_query: %s", sql_query)
+            LOG.info(u"sql_condition_value1: %s", sql_condition_value1)
+            LOG.info(u"sql_condition_value2: %s", sql_condition_value2)
+            LOG.info(u"sql_condition_value3: %s", sql_condition_value3)
+
+            # Read configuration settings:
+            sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
+                if "sql_restricted_sql_statements" in self.options else None
 
             yield StatusMessage("Starting...")
-            sql_params = self.prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3)
-            self.validate_data(sql_query)
+
+            yield StatusMessage("Validating...")
+            sql_params = function_utils.prepare_sql_parameters(sql_condition_value1,
+                                                               sql_condition_value2, sql_condition_value3)
+            function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
             yield StatusMessage("Opening ODBC connection...")
-            db_connection = self.setup_odbc_connection()
-            self.configure_unicode_settings(db_connection)
-            db_cursor = self.create_cursor(db_connection)
+            db_connection = self.setup_odbc_connection() #fixme mock
+            self.configure_unicode_settings(db_connection) #fixme mock
+            db_cursor = self.create_cursor(db_connection) #fixme test exception
 
             yield StatusMessage("Executing an ODBC query...")
-
             # Check what SQL statement is executed, get the first word in sql_query
-            sql_statement = sql_query.split(None, 1)[0].lower()
+            sql_statement = function_utils.get_type_sql_statement(sql_query)
 
             if sql_statement == 'select':
                 rows = self.execute_select_statement(db_cursor, sql_query, sql_params)
-                results = self.prepare_results(db_cursor, rows)
+                results = function_utils.prepare_results(db_cursor.description, rows)
 
                 if results.get("entries") is None:
                     yield StatusMessage("No query results returned...")
@@ -119,59 +131,25 @@ class FunctionComponent(ResilientComponent):
                     or sql_statement == 'insert':
                 # Return row count and set results to empty list
                 row_count = self.execute_odbc_query(db_connection, db_cursor, sql_query, sql_params)
-                results = self.prepare_results(db_cursor, None)
+                results = function_utils.prepare_results(None, None)
 
                 yield StatusMessage("{} rows processed".format(row_count))
 
-            yield StatusMessage("Done...")
-            self.log.info(json.dumps(results))
+            else:
+                raise ValueError("SQL statement '{}' is not supported".format(sql_statement))
 
-            # Produce a FunctionResult with the results
+            yield StatusMessage("Done...")
+            LOG.info(json.dumps(results))
+
             yield FunctionResult(results)
 
-        except Exception as ex:
-            self.log.error(str(ex))
+        except Exception:
             raise FunctionError()
 
         # Commit changes and tear down connection
         finally:
             yield StatusMessage("Closing ODBC connection...")
             self.close_connections(db_connection, db_cursor)
-
-    @staticmethod
-    def prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3):
-        """" Prepare a list with non None parameters
-
-        Prepare a list of non None value or blank "Falsy" parameters.
-
-        """
-        sql_params = []
-
-        if sql_condition_value1:
-            sql_params.append(sql_condition_value1)
-        if sql_condition_value2:
-            sql_params.append(sql_condition_value2)
-        if sql_condition_value3:
-            sql_params.append(sql_condition_value3)
-
-        return sql_params
-
-    def validate_data(self, sql_query):
-        """" Validate input data
-
-        Validate if query is allowed.
-
-        """
-        sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
-            if "sql_restricted_sql_statements" in self.options else None
-
-        restricted_list = json.loads(sql_restricted_sql_statements) \
-            if sql_restricted_sql_statements is not None and sql_restricted_sql_statements != "[]" else []
-
-        # Check if sql_query is one of the NOT allowed statements from configuration file
-        for item in restricted_list:
-            if item.strip().lower() in sql_query.lower():
-                raise Exception("User does not have permission to perform {} action".format(item.strip()))
 
     def setup_odbc_connection(self):
         """" Setup ODBC connection to a SQL server
@@ -242,13 +220,16 @@ class FunctionComponent(ResilientComponent):
 
             # These databases tend to use a single encoding and do not differentiate between
             # "SQL_CHAR" and "SQL_WCHAR". Therefore you must configure them to encode Unicode
-            # data as UTF-8 and to decode both C buffer types using UTF-8. Using Python 2.7 syntax.
+            # data as UTF-8 and to decode both C buffer types using UTF-8.
             # https://github.com/mkleehammer/pyodbc/wiki/Unicode
             if sql_database_type in SINGLE_ENCODING_DATABASES:
                 db_connection.setdecoding(pyodbc.SQL_CHAR, encoding='utf-8')
                 db_connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')
-                db_connection.setencoding(str, encoding='utf-8')
-                db_connection.setencoding(unicode, encoding='utf-8')
+                if sys.version_info[0] == 3: # Python 3.x
+                    db_connection.setencoding(encoding='utf-8')
+                else:
+                    db_connection.setencoding(str, encoding='utf-8')
+                    db_connection.setencoding(unicode, encoding='utf-8')
 
         return db_connection
 
@@ -288,7 +269,6 @@ class FunctionComponent(ResilientComponent):
 
         """
         number_records = None
-        rows = None
 
         if "sql_number_of_records_returned" in self.options:
             sql_number_of_records_returned = self.options["sql_number_of_records_returned"]
@@ -306,30 +286,6 @@ class FunctionComponent(ResilientComponent):
             raise Exception("Could not execute SQL statement %s, Exception %s", sql_query, e)
 
         return rows
-
-    @staticmethod
-    def prepare_results(db_cursor, rows):
-        """"  Generate result
-
-        Generate result in JSON format with an entry consisting of key value pairs.
-
-        """
-        if rows is None or len(rows) == 0:
-            return {"entries": None}
-
-        # List of column names from SQL result to use as dictionary keys
-        dt_column_keys = [column[0] for column in db_cursor.description]
-
-        # Build dictionary: key-value pairs consisting of column name - row value
-        entries_data_list = []
-        for row in rows:
-            if row is None:
-                break
-            entries_data_list.append(dict(zip(dt_column_keys, row)))
-
-        entries = {"entries": [entry for entry in entries_data_list]}
-
-        return entries
 
     @staticmethod
     def close_connections(db_cursor, db_connection):

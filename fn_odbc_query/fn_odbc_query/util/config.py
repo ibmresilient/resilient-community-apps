@@ -11,10 +11,10 @@ def config_section_data():
     """
     config_data = u"""[fn_odbc_query]
 # Define your connection string
-sql_connection_string=Driver={PostgreSQL};Server=IP Adress;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;
+sql_connection_string=Driver={PostgreSQL};Server=IP Address;Port=5432;Database=myDataBase;Uid=myUserName;Pwd=myPassword;
 
 # Optional setting
-# Define a list of restricted SQL statements, separated by a comma.
+# Define restricted SQL statements as a list, separated by a comma, using square brackets.
 # Example ["delete", "update", "insert"]. 
 # Comment this line if there are no restrictions.
 sql_restricted_sql_statements=["delete", "insert", "update"]
