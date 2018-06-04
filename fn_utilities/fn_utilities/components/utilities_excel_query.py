@@ -5,7 +5,8 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import openpyxl
-
+import re # to extract ranges from user input
+import io # to pass attachment to openpyxl
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_excel_query"""
@@ -25,22 +26,26 @@ class FunctionComponent(ResilientComponent):
         """Function: Extract ranges of data or named ranges specified by the user from an excel document."""
         try:
             # Get the function parameters:
+            # Attachment information
             attachment_id = kwargs.get("attachment_id")  # number
-            excel_ranges = kwargs.get("excel_ranges")  # text
-            excel_defined_names = kwargs.get("excel_defined_names")  # text
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
+            # What data to get
+            excel_ranges = kwargs.get("excel_ranges")  # text
+            excel_defined_names = kwargs.get("excel_defined_names")  # text
 
             log = logging.getLogger(__name__)
+            log.info("task_id: %s", task_id)
+            log.info("incident_id: %s", incident_id)
             log.info("attachment_id: %s", attachment_id)
             log.info("excel_ranges: %s", excel_ranges)
             log.info("excel_defined_names: %s", excel_defined_names)
-            log.info("incident_id: %s", incident_id)
-            log.info("task_id: %s", task_id)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            yield StatusMessage("starting...")
+            attachment_data = self._get_attachment_binary(task_id, incident_id, attachment_id)
+            worksheet_data = WorksheetData(io.BytesIO(attachment_data))
+            worksheet_data.parse()
 
             results = {
                 "value": "xyz"
@@ -51,17 +56,45 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             yield FunctionError()
 
+    def _get_attachment_binary(self, task_id, incident_id, attachment_id):
+        """
+        Gets the attachment with the rest client as binary.
+        :param task_id: Number
+            task id provided by user
+        :param incident_id: Number
+            incident id provided by user
+        :param attachment_id: Number
+            attachment id provided by user
+        :return: Binary object
+        """
+        if incident_id is None and task_id is None:
+            raise FunctionError("Either incident id of the task id had to be specified")
+        if attachment_id is None:
+            raise FunctionError("The attachment id has to be specified")
+        yield StatusMessage("Reading the attachment.")
+        if task_id:
+            metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+            data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+        else:
+            metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+            data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+
+        client = self.rest_client()
+        data = client.get_content(data_uri)  # type: object
+        return data
+
 
 class WorksheetData(object):
     """
     Facade pattern with openpyxl library that will parse the given worksheet into
     the json of requested content.
     """
+    # This reg exp captures the form "Name"!A1:B2 or 'Name'!A1
+    # Has 4 capturing groups - name of the sheet, top_left and bottom_right (if range given None if not), and cell
+    EXCEL_RANGE_REG_EXP = r"((?:\"|\')([\w\ ,;\"\'\.]+)(?:\"|\')!" \
+                          r"(?:(?:([a-zA-Z][\d])[:]([a-zA-Z][\d]))|([a-zA-Z][\d])))+"
     # These constant adjust the return JSON namings
     SHEETS_TITLES = "titles"
-    SHEET_SIZE = "size_range"
-    START_ROW = "start_row"
-    END_ROW = "end_row"
     PARSED_SHEETS = "sheets"
     PARSED_SHEETS_LIST = "parsed_sheets"
     NAMED_RANGES = "named_ranges"
@@ -86,51 +119,60 @@ class WorksheetData(object):
         self.opts = opts
         # the eventual return value
         self.result = {}
-        # store option as a variable, so every sheet doesn't do this check
-        self._start_row = False
-        self._end_row = False
-        self._size = False
 
-        self.parse()
+    @staticmethod
+    def parse_excel_notation(ranges):
+        """
+        Takes in a string that has comma separated excel notation ranges
+        :param ranges: String
+            string
+        :return: List[Dict]
+            List of objects of a form {"sheet": "", "top_left": "", "bottom_right": ""}
+        """
+        result = []
+        range_matches = re.finditer(WorksheetData.EXCEL_RANGE_REG_EXP, ranges)
+        for match in range_matches:
+            name = match.group(0)
+            # check if 2 coordinates were provided, or 1
+            if match.group(1):
+                top_left = match.group(1)
+                bottom_right = match.group(2)
+            if not top_left:
+                top_left = bottom_right = match.group(3)
+            result.append({
+                "name": name,
+                "top_left":top_left,
+                "bottom_right": bottom_right
+            })
+        return result
 
     def parse(self):
         """
         Goes through the options and fills our self.result accordingly
         """
         self.result = {}
-
-        self._start_row = True if "start_row" in self.opts and self.opts["start_row"] else False
-        self._end_row = True if "end_row" in self.opts and self.opts["end_row"] else False
-        self._size = True if "size" in self.opts and self.opts["size"] else False
-
-        # check of "titles" is required
-        if "titles" in self.opts and self.opts["titles"]:
-            self.result[self.SHEETS_TITLES] = self.wb.sheetnames
+        self.result[self.SHEETS_TITLES] = self.wb.sheetnames
 
         # check if "named_ranges" is in the opts, and is not falsy
         if "named_ranges" in self.opts and self.opts["named_ranges"]:
-            self.parse_named_ranges()
+            self.parse_named_ranges(self.opts["names_ranges"])
 
-        # check if "sheets" is in the opts, and is not falsy
-        if "sheets" in self.opts:
-            if self.opts["sheets"]:
-                self.parse_workbook(self.opts["sheets"])
-        else:
-            self.parse_workbook(self.wb.sheetnames)
+        if "ranges" in self.opts and self.opts["ranges"]:
+            self.parse_sheet_ranges(self.opts["ranges"])
 
-    def parse_named_ranges(self):
+    def parse_named_ranges(self, named_ranges):
         """
         Gets a list or a string of named ranges from options
         and calls parse_named_range for each of them
         """
         self.result[self.NAMED_RANGES] = {}
         # check if a list of named ranged is requested or a single named range
-        if isinstance(self.opts['named_ranges'], list):
-            for name in self.opts['named_ranges']:
+        if isinstance(named_ranges, list):
+            for name in named_ranges:
                 self.parse_named_range(name)
-        elif isinstance(self.opts['named_ranges'], str):
-            self.parse_named_range(self.opts["named_ranges"])
-        elif isinstance(self.opts['named_ranges'], bool):
+        elif isinstance(named_ranges, str):
+            self.parse_named_range(named_ranges)
+        elif isinstance(named_ranges, bool):
             for range in self.wb.defined_names.definedName:  # defined_names is a list of DefinedName objects
                 self.parse_named_range(range.name)
 
@@ -153,67 +195,40 @@ class WorksheetData(object):
 
         self.result[self.NAMED_RANGES][name] = result
 
-    def parse_workbook(self, sheets):
+    def parse_sheet_ranges(self, ranges):
         """
-
-        :param sheets: List of Strings
-            List of the sheets to get the data from
-        """
-        self.result[self.PARSED_SHEETS_LIST] = sheets
-        self.result[self.PARSED_SHEETS] = {}
-        for sheet in sheets:
-            self.parse_sheet(self.wb[sheet])
-
-    def parse_sheet(self, sheet):
-        """
-        Gets the requested data from a particular worksheet
+        Gets the list of ranges provided by user from the options and processes it.
         :param sheet: openpyxl's Worksheet class
         """
-        sheet.calculate_dimension(force=True)
-        self.result[self.PARSED_SHEETS][sheet.title] = {}
+        for range in ranges:
+            self.parse_sheet_range(range)
 
-        if self._size:
-            self.record_size(sheet)
-        if self._start_row:
-            self.record_start_row(sheet)
-        if self._end_row:
-            self.record_end_row(sheet)
-
-    def record_size(self, sheet):
+    def parse_sheet_range(self, range):
         """
-        Records the known size of the sheet
-        :param sheet: Sheet
+        Parses a particular range - extract the data from the sheet.`
+        :param range: object
+            stores information about the range - sheet, top_left, bottom_right
         """
-        self.result[self.PARSED_SHEETS][sheet.title][self.SHEET_SIZE] = {
-                "range": sheet.calculate_dimension(),
-                "max_row": sheet.max_row,
-                "min_row": sheet.min_row,
-                "max_col": sheet.max_column,
-                "min_col": sheet.min_column
-            }
-
-    def record_start_row(self, sheet):
-        """
-        Records the first row
-        :param sheet: Sheet
-        """
-        result = []
-        # try/except to catch library errors in empty sheets
         try:
-            result = [cell.value for cell in sheet[sheet.min_row]]
-        except IndexError:
-            pass
-        self.result[self.PARSED_SHEETS][sheet.title][self.START_ROW] = result
+            ws = self.wb[range.name]
+        except KeyError as e:
+            log = logging.getLogger(__name__)
+            log.error("The sheet {} provided by user doesn't exist".format(range.name))
+            return
 
-    def record_end_row(self, sheet):
-        """
-        Records the last row
-        :param sheet: Sheet
-        """
-        result = []
-        # try/except to catch library errors in empty sheets
+        # additional thing to do for read only sheets to make sure only necessary data is read
+        ws.calculate_dimension(force=True)
+
         try:
-            result = [cell.value for cell in sheet[sheet.max_row]]
-        except IndexError:
-            pass
-        self.result[self.PARSED_SHEETS][sheet.title][self.END_ROW] = result
+            data = ws[range.top_left:range.bottom_right]
+        except ValueError as e:
+            log = logging.getLogger(__name__)
+            log.error("The range coordinates {0},{1} provided by user are incorrect".
+                      format(range.top_left, range.bottom_right))
+            return
+
+        if range.name not in self.result[self.PARSED_SHEETS]:
+            self.result[self.PARSED_SHEETS][range.name] = {}
+        result = [[cell.value for cell in row] for row in data]
+        self.result[self.PARSED_SHEETS]["{0}:{1}".format(range.top_left, range.bottom_right)] = result
+
