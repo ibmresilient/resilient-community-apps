@@ -2,11 +2,8 @@
 #
 # Copyright IBM Corp. - Confidential Information
 #
-import logging
 import json
 from json import JSONDecodeError
-
-LOG = logging.getLogger(__name__)
 
 
 def prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3):
