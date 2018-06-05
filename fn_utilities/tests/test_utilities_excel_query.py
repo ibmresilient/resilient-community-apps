@@ -74,9 +74,8 @@ class TestUtilitiesExcelQuery:
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path",[
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", "", "data/excel_query/test_cell_empty.dat"),
-        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!B5,", "", "data/excel_query/test_cell_string.dat"),
-        ("data/excel_query/budget.xlsx", "'JAN 2015'!B5:B5,", "", "data/excel_query/test_cell_string.dat"),
+        ("data/excel_query/budget.xlsx", "'Sheet1'!A1:A1,", "", "data/excel_query/test_cell_symbols.dat"),
     ])
     def test_worksheet_data_single_cell(self, path, ranges, defined_names, expected_result_path):
         import os
@@ -93,6 +92,9 @@ class TestUtilitiesExcelQuery:
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!B5:B5,", "", "data/excel_query/test_cell_string.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'JAN 2015'!A1:D10",
+            "", "data/excel_query/test_multiple_ranges.dat"),
     ])
     def test_worksheet_data_range(self, path, ranges, defined_names, expected_result_path):
         import os

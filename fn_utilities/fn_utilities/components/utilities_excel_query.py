@@ -236,9 +236,11 @@ class WorksheetData(object):
         self.result[self.PARSED_SHEETS][range["name"]][range_name] = result
 
 if __name__=="__main__":
-    wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/testing_openpyxl/test_files/budget.xlsx" ,
+    import json
+    wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/resilient-community-apps/"
+                       "fn_utilities/tests/data/excel_query/budget.xlsx",
                        {
-                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!E24,"),
+                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!A3, 'JAN 2015'!A1:D10"),
                             "named_ranges": WorksheetData.parse_defined_names_notation("")
                        })
     wb.parse()
