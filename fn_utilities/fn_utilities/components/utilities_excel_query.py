@@ -245,8 +245,8 @@ if __name__=="__main__":
     wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/resilient-community-apps/"
                        "fn_utilities/tests/data/excel_query/budget.xlsx",
                        {
-                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!A3, 'JAN 2015'!A1:D10"),
-                            "named_ranges": WorksheetData.parse_defined_names_notation("")
+                            "ranges": WorksheetData.parse_excel_notation(""),
+                            "named_ranges": WorksheetData.parse_defined_names_notation("test1")
                        })
     wb.parse()
-    print(wb.result)
+    print(str(wb.result))

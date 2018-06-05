@@ -38,6 +38,13 @@ class AttachmentMock(BasicResilientMock):
             "size": 24136,
             "id": 2,
         },
+        "42": {
+            "name": "excel_query/budget.xlsx",
+            "created": 1519264285530,
+            "content_type": "text/xlsx",
+            "size": 60061,
+            "id": 42,
+        },
         "101": {
             "name": "sample1.pdf",
             "created": 1519264285530,
@@ -61,6 +68,7 @@ class AttachmentMock(BasicResilientMock):
         }
     }
 
+    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments$")
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments$")
     def attachments_get(self, request):
         """ GET the list of attachments """
@@ -69,6 +77,7 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              json=data)
 
+    @resilient_endpoint("POST", "/tasks/[0-9]+/attachments$")
     @resilient_endpoint("POST", "/incidents/[0-9]+/attachments$")
     def attachments_post(self, request):
         """ POST an attachment """
@@ -83,6 +92,7 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              json=data)
 
+    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+$")
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
     def attachments_one_get(self, request):
         """ GET an attachment """
@@ -92,6 +102,7 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              json=data)
 
+    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+/contents$")
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+/contents$")
     def attachments_contents_get(self, request):
         """ GET the file contents of an attachment """
