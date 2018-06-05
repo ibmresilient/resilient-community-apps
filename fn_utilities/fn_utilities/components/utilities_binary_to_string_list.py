@@ -71,6 +71,7 @@ class FunctionComponent(ResilientComponent):
                 str_floss_options = '-q,-s,-n 5'
 
             # Extract the strings from the binary file and put them in a list.
+            list_results = []
             list_results = extract_strings(str_floss_options, data)
 
             yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))

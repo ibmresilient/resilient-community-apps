@@ -4,7 +4,7 @@ import unittest
 import logging
 import sys
 import os
-from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings
+from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings, get_floss_params
 
 log = logging.getLogger(__name__)
 
@@ -57,3 +57,4 @@ if __name__ == '__main__':
     logging.basicConfig( stream=sys.stderr )
     logging.getLogger(__name__).setLevel( logging.DEBUG )
     unittest.main()
+    
