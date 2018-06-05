@@ -5,8 +5,8 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import openpyxl
-import re # to extract ranges from user input
-import io # to pass attachment to openpyxl
+import re  # to extract ranges from user input
+import io  # to pass attachment to openpyxl
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_excel_query"""
@@ -27,6 +27,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             # Attachment information
+            yield StatusMessage("Starting the function")
             attachment_id = kwargs.get("attachment_id")  # number
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
@@ -47,13 +48,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Processing attachment.")
             worksheet_data = WorksheetData(io.BytesIO(attachment_data), {
                 "ranges": WorksheetData.parse_excel_notation(excel_ranges),
-                "named_ranges": excel_defined_names.split(',')
+                "named_ranges": WorksheetData.parse_defined_names_notation(excel_defined_names)
             })
-            worksheet_data.parse() # extracts all the data to result
+            worksheet_data.parse()  # extracts all the data to result
             result = worksheet_data.result
             # Produce a FunctionResult with the results
-            yield FunctionResult(result)
+            yield FunctionResult({"titles": "Pls work"})
         except Exception:
+            yield StatusMessage("An error occured")
             yield FunctionError()
 
     def _get_attachment_binary(self, task_id, incident_id, attachment_id):
@@ -71,12 +73,9 @@ class FunctionComponent(ResilientComponent):
             raise FunctionError("Either incident id of the task id had to be specified")
         if attachment_id is None:
             raise FunctionError("The attachment id has to be specified")
-        yield StatusMessage("Reading the attachment.")
         if task_id:
-            metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
             data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
         else:
-            metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
             data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
         client = self.rest_client()
@@ -92,7 +91,7 @@ class WorksheetData(object):
     # This reg exp captures the form "Name"!A1:B2 or 'Name'!A1
     # Has 4 capturing groups - name of the sheet, top_left and bottom_right (if range given None if not), and cell
     EXCEL_RANGE_REG_EXP = r"(?:(?:\"|\')([\w\ ,;.\"\']+)(?:\"|\')!" \
-                          r"(?:(?:([a-zA-Z][\d])[:]([a-zA-Z][\d]))|([a-zA-Z][\d])))+"
+                          r"(?:(?:([a-zA-Z]+[\d]+)[:]([a-zA-Z]+[\d]+))|([a-zA-Z]+[\d]+)))+"
     # These constant adjust the return JSON namings
     SHEETS_TITLES = "titles"
     PARSED_SHEETS = "sheets"
@@ -106,11 +105,7 @@ class WorksheetData(object):
         :param opts: Dict
             contains options with the following options
             named_ranges: String or List, to grab those from the file
-            sheets:     List if only specific sheets need to be grabbed
-                        False is none of the sheets should be parsed
-            start_row:  True if for all sheets the start row should be recorded
-            end_row:    True if for all sheets the end row should be recorded
-            titles:     True if want to receive a list of all sheet names
+            ranges: List of Objects that have name, top-left, and bottom-right coordinates of the range to be grabbed.
         """
         super().__init__()
         self._file_path = path
@@ -147,16 +142,23 @@ class WorksheetData(object):
             })
         return result
 
+    @staticmethod
+    def parse_defined_names_notation(defined_names):
+        split_names = defined_names.split(",")
+        if not len(split_names):
+            return False
+        else:
+            return split_names
+
     def parse(self):
         """
         Goes through the options and fills our self.result accordingly
         """
-        self.result = {}
-        self.result[self.SHEETS_TITLES] = self.wb.sheetnames
+        self.result = {self.SHEETS_TITLES: self.wb.sheetnames}
 
         # check if "named_ranges" is in the opts, and is not falsy
         if "named_ranges" in self.opts and self.opts["named_ranges"]:
-            self.parse_named_ranges(self.opts["names_ranges"])
+            self.parse_named_ranges(self.opts["named_ranges"])
 
         if "ranges" in self.opts and self.opts["ranges"]:
             self.parse_sheet_ranges(self.opts["ranges"])
@@ -201,6 +203,8 @@ class WorksheetData(object):
         Gets the list of ranges provided by user from the options and processes it.
         :param sheet: openpyxl's Worksheet class
         """
+        if self.PARSED_SHEETS not in self.result:
+            self.result[self.PARSED_SHEETS] = {}
         for range in ranges:
             self.parse_sheet_range(range)
 
@@ -212,21 +216,30 @@ class WorksheetData(object):
         """
         # make sure the worksheet actually exists
         try:
-            ws = self.wb[range.name]
+            ws = self.wb[range["name"]]
         except KeyError as e:
-            raise FunctionError("The sheet {} provided by user doesn't exist".format(range.name))
+            raise FunctionError("The sheet {} provided by user doesn't exist".format(range["name"]))
 
         # additional thing to do for read only sheets to make sure only necessary data is read
         ws.calculate_dimension(force=True)
 
         try:
-            data = ws[range.top_left:range.bottom_right]
+            data = ws[range["top_left"]:range["bottom_right"]]
         except ValueError as e:
             raise FunctionError("The range coordinates {0},{1} provided by user are incorrect".
-                      format(range.top_left, range.bottom_right))
+                      format(range["top_left"], range["bottom_right"]))
 
-        if range.name not in self.result[self.PARSED_SHEETS]:
-            self.result[self.PARSED_SHEETS][range.name] = {}
+        if range["name"] not in self.result[self.PARSED_SHEETS]:
+            self.result[self.PARSED_SHEETS][range["name"]] = {}
         result = [[cell.value for cell in row] for row in data]
-        self.result[self.PARSED_SHEETS]["{0}:{1}".format(range.top_left, range.bottom_right)] = result
+        range_name = "{0}:{1}".format(range["top_left"], range["bottom_right"])
+        self.result[self.PARSED_SHEETS][range["name"]][range_name] = result
 
+if __name__=="__main__":
+    wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/testing_openpyxl/test_files/budget.xlsx" ,
+                       {
+                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!E24,"),
+                            "named_ranges": WorksheetData.parse_defined_names_notation("")
+                       })
+    wb.parse()
+    print(wb.result)

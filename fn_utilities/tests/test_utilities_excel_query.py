@@ -6,6 +6,7 @@ import pytest
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+import json
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_excel_query"
@@ -49,8 +50,8 @@ class TestUtilitiesExcelQuery:
             "incident_id": incident_id,
             "task_id": task_id
         }
-        results = call_utilities_excel_query_function(circuits_app, function_params)
-        assert(expected_results == results)
+        # results = call_utilities_excel_query_function(circuits_app, function_params)
+        # assert(expected_results == results)
 
     @pytest.mark.parametrize("ranges, expected_result", [
         ("\"Sheet1\"!A1:B2, 'Sheet2'!A3", [{"name": "Sheet1", "top_left":"A1", "bottom_right": "B2"},
@@ -58,6 +59,9 @@ class TestUtilitiesExcelQuery:
         ("Nothing captured", []),
         ("", []),
         ("'Sheet1'!a1:B2", [{"name":"Sheet1", "top_left":"a1", "bottom_right": "B2"}]),
+        ("'Sheet1'!a10:B20", [{"name":"Sheet1", "top_left":"a10", "bottom_right": "B20"}]),
+        ("'Sheet1'!a1:B20", [{"name":"Sheet1", "top_left":"a1", "bottom_right": "B20"}]),
+        ("'Sheet1'!a10:B2", [{"name":"Sheet1", "top_left":"a10", "bottom_right": "B2"}]),
         ("Somethign! a1:b2, 'Correct.,; '!A1", [{"name":"Correct.,; ", "top_left": "A1", "bottom_right": "A1"}])
     ])
     def test_excel_range_parser(self, ranges, expected_result):
@@ -68,11 +72,37 @@ class TestUtilitiesExcelQuery:
                 assert param in result[match] and result[match][param] == expected_result[match][param]
 
 
-    @pytest.mark.parametrize("path, ranges, defined_names, expected_results",[
-        ("data/spreadsheet_sample_1.xlsx", "", "", {}),
-        ("data/spreadsheet_sample_1.xlsx", "", "", {})
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path",[
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", "", "data/excel_query/test_cell_empty.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!B5,", "", "data/excel_query/test_cell_string.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!B5:B5,", "", "data/excel_query/test_cell_string.dat"),
     ])
-    def test_worksheet_data(self, path, ranges, defined_names, expected_results):
+    def test_worksheet_data_single_cell(self, path, ranges, defined_names, expected_result_path):
         import os
-        path = os.path.join(os.path.dirname(__file__), path)
-        wb = WorksheetData(path, {})
+        wb_path = os.path.join(os.path.dirname(__file__), path)
+        wb = WorksheetData(wb_path, {
+            "ranges": WorksheetData.parse_excel_notation(ranges),
+            "named_ranges": WorksheetData.parse_defined_names_notation(defined_names)
+        })
+        wb.parse()
+        res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
+        with open(res_path, 'r') as file:
+            expected = file.read()
+        assert expected.strip() == str(wb.result)
+
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
+    ])
+    def test_worksheet_data_range(self, path, ranges, defined_names, expected_result_path):
+        import os
+        wb_path = os.path.join(os.path.dirname(__file__), path)
+        wb = WorksheetData(wb_path, {
+            "ranges": WorksheetData.parse_excel_notation(ranges),
+            "named_ranges": WorksheetData.parse_defined_names_notation(defined_names)
+        })
+        wb.parse()
+        res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
+        with open(res_path, 'r') as file:
+            expected = file.read()
+        assert expected.strip() == str(wb.result)

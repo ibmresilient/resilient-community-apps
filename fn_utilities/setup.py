@@ -26,6 +26,7 @@ setup(
             "AttachmentToBase64FunctionComponent = fn_utilities.components.utilities_attachment_to_base64:FunctionComponent",
             "AttachmentZipExtractFunctionComponent = fn_utilities.components.utilities_attachment_zip_extract:FunctionComponent",
             "AttachmentZipListFunctionComponent = fn_utilities.components.utilities_attachment_zip_list:FunctionComponent",
+            "AttachmentExcelQueryComponent = fn_utilities.components.utilities_excel_query:FunctionComponent",
             "Base64ToArtifactFunctionComponent = fn_utilities.components.utilities_base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fn_utilities.components.utilities_base64_to_attachment:FunctionComponent",
             "CallRestApiFunctionComponent = fn_utilities.components.utilities_call_rest_api:FunctionComponent",
@@ -35,7 +36,7 @@ setup(
             "ResilientSearchFunctionComponent = fn_utilities.components.utilities_resilient_search:FunctionComponent",
             "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent",
             "StringToAttachmentFunctionComponent = fn_utilities.components.utilities_string_to_attachment:FunctionComponent",
-            "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent"
+            "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent",
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
