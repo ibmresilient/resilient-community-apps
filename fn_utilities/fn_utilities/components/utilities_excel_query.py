@@ -42,6 +42,11 @@ class FunctionComponent(ResilientComponent):
             log.info("excel_ranges: {0}".format(excel_ranges))
             log.info("excel_defined_names: {0}".format(excel_defined_names))
 
+            if excel_defined_names is None:
+                excel_defined_names = ""
+            if excel_ranges is None:
+                excel_ranges = ""
+
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("Reading the attachment.")
             attachment_data = self._get_attachment_binary(task_id, incident_id, attachment_id)
@@ -53,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             worksheet_data.parse()  # extracts all the data to result
             result = worksheet_data.result
             # Produce a FunctionResult with the results
-            yield FunctionResult({"titles": "Pls work"})
+            yield FunctionResult(result)
         except Exception:
             yield StatusMessage("An error occured")
             yield FunctionError()

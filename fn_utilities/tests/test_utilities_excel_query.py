@@ -6,6 +6,7 @@ import pytest
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from tests.mock_attachment import AttachmentMock
 import json
 
 PACKAGE_NAME = "fn_utilities"
@@ -15,7 +16,7 @@ FUNCTION_NAME = "utilities_excel_query"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = AttachmentMock
 
 
 def call_utilities_excel_query_function(circuits, function_params, timeout=10):
@@ -53,15 +54,17 @@ class TestUtilitiesExcelQuery:
         # results = call_utilities_excel_query_function(circuits_app, function_params)
         # assert(expected_results == results)
 
+
+class TestWorksheetData:
     @pytest.mark.parametrize("ranges, expected_result", [
         ("\"Sheet1\"!A1:B2, 'Sheet2'!A3", [{"name": "Sheet1", "top_left":"A1", "bottom_right": "B2"},
-                                            {"name":"Sheet2", "top_left": "A3", "bottom_right": "A3"}]),
+                                            {"name": "Sheet2", "top_left": "A3", "bottom_right": "A3"}]),
         ("Nothing captured", []),
         ("", []),
-        ("'Sheet1'!a1:B2", [{"name":"Sheet1", "top_left":"a1", "bottom_right": "B2"}]),
-        ("'Sheet1'!a10:B20", [{"name":"Sheet1", "top_left":"a10", "bottom_right": "B20"}]),
-        ("'Sheet1'!a1:B20", [{"name":"Sheet1", "top_left":"a1", "bottom_right": "B20"}]),
-        ("'Sheet1'!a10:B2", [{"name":"Sheet1", "top_left":"a10", "bottom_right": "B2"}]),
+        ("'Sheet1'!a1:B2", [{"name": "Sheet1", "top_left":"a1", "bottom_right": "B2"}]),
+        ("'Sheet1'!a10:B20", [{"name": "Sheet1", "top_left":"a10", "bottom_right": "B20"}]),
+        ("'Sheet1'!a1:B20", [{"name": "Sheet1", "top_left":"a1", "bottom_right": "B20"}]),
+        ("'Sheet1'!a10:B2", [{"name": "Sheet1", "top_left":"a10", "bottom_right": "B2"}]),
         ("Somethign! a1:b2, 'Correct.,; '!A1", [{"name":"Correct.,; ", "top_left": "A1", "bottom_right": "A1"}])
     ])
     def test_excel_range_parser(self, ranges, expected_result):
