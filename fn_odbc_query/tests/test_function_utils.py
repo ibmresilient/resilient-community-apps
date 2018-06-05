@@ -1,23 +1,17 @@
 #
 # Unit tests for fn_odbc_query/util/function_utils.py
 #
-# $coverage report -m
-# Name                     Stmts   Miss  Cover   Missing
-# ------------------------------------------------------
-# test_function_utils.py      60      0   100%
-#
+# Module 	        statements 	missing 	excluded 	branches 	partial 	coverage
+# function_utils.py 	33      	0       	0       	22      	0      	100%
 #
 import unittest
 
-from fn_odbc_query.util.function_utils import prepare_sql_parameters
-from fn_odbc_query.util.function_utils import validate_data
-from fn_odbc_query.util.function_utils import get_type_sql_statement
-from fn_odbc_query.util.function_utils import prepare_results
+from fn_odbc_query.util.function_utils import prepare_sql_parameters, validate_data, get_type_sql_statement, prepare_results
 
 
 class TestFunctionUtils(unittest.TestCase):
 
-    def test_sql_param_prepare(self):
+    def test_prepare_sql_parameters(self):
         print("Testing preparing SQL params....")
 
         param1 = "p1"
@@ -110,5 +104,5 @@ class TestFunctionUtils(unittest.TestCase):
         self.assertEqual(result, {"entries": None})
 
 if __name__ == '__main__':
-    unittest.main()  # pragma: no cover
+    unittest.main()
 
