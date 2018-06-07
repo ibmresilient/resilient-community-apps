@@ -50,7 +50,6 @@ def test_get_floss_params():
 def test_call_floss(mocked_floss):
     # Test the case where running Floss produces an error an error and
     # returns value of 1. (Return value of zero means success.)
-    mocked_floss.return_value = 1
     options = "-q,-s,-n 5"
 
     with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
@@ -59,11 +58,12 @@ def test_call_floss(mocked_floss):
         data = "these strings might not be found in floss"
         temp_file_binary.write(data)
         with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
+            mocked_floss.return_value = 1
             try:
                 list_string = call_floss(options, temp_file_binary, temp_file_strings)
             except RuntimeError:
                 assert True
-            except Exception:
+            else:
                 assert False
 
             # Test the where Floss returns success.  Make sure that no exception is thrown
@@ -71,8 +71,6 @@ def test_call_floss(mocked_floss):
             try:
                 list_string = call_floss(options, temp_file_binary, temp_file_strings)
             except RuntimeError:
-                assert False
-            except Exception:
                 assert False
             else:
                 assert True
