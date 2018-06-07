@@ -14,6 +14,7 @@ import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_odbc_query.util import function_utils, odbc_utils
 
+
 LOG = logging.getLogger(__name__)
 
 
@@ -80,33 +81,48 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Required field sql_query is missing or empty")
 
             sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # textarea
+
+            LOG.info(u"sql_query: %s", sql_query)
+
+            # ------------------------------------------------------
+            # When adding more condition input fields to the function, you need to load them here
+            # and pass the new variable/s to the function_utils.prepare_sql_parameters().
+            # ------------------------------------------------------
             sql_condition_value1 = kwargs.get("sql_condition_value1")  # text
             sql_condition_value2 = kwargs.get("sql_condition_value2")  # text
             sql_condition_value3 = kwargs.get("sql_condition_value3")  # text
 
-            LOG.info(u"sql_query: %s", sql_query)
             LOG.info(u"sql_condition_value1: %s", sql_condition_value1)
             LOG.info(u"sql_condition_value2: %s", sql_condition_value2)
             LOG.info(u"sql_condition_value3: %s", sql_condition_value3)
 
+            sql_params = function_utils.prepare_sql_parameters(sql_condition_value1, sql_condition_value2,
+                                                               sql_condition_value3)
+
             # Read configuration settings:
-            sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
-                if "sql_restricted_sql_statements" in self.options else None
-            sql_autocommit = self.options["sql_autocommit"].lower() if "sql_autocommit" in self.options else None
-            sql_query_timeout = self.options["sql_query_timeout"] if "sql_query_timeout" in self.options else None
-            sql_database_type = self.options["sql_database_type"].lower() if "sql_database_type" in self.options else None
-            sql_number_of_records_returned = self.options["sql_number_of_records_returned"] \
-                if "sql_number_of_records_returned" in self.options else None
             if "sql_connection_string" in self.options:
                 sql_connection_string = self.options["sql_connection_string"]
             else:
                 raise ValueError("Mandatory config setting 'sql_connection_string' not set.")
 
+            sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
+                if "sql_restricted_sql_statements" in self.options else None
+
+            sql_autocommit = function_utils.str_to_bool(self.options["sql_autocommit"]) \
+                if "sql_autocommit" in self.options else False
+
+            sql_query_timeout = int(self.options["sql_query_timeout"]) \
+                if "sql_query_timeout" in self.options else None
+
+            sql_database_type = self.options["sql_database_type"].lower() \
+                if "sql_database_type" in self.options else None
+
+            sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
+                if "sql_number_of_records_returned" in self.options else None
+
             yield StatusMessage("Starting...")
 
             yield StatusMessage("Validating...")
-            sql_params = function_utils.prepare_sql_parameters(sql_condition_value1,
-                                                               sql_condition_value2, sql_condition_value3)
             function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
             yield StatusMessage("Opening ODBC connection...")

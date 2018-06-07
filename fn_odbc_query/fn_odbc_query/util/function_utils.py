@@ -3,26 +3,28 @@
 # Copyright IBM Corp. - Confidential Information
 #
 import json
-from json import JSONDecodeError
+try:
+    from json import JSONDecodeError
+except:
+    JSONDecodeError = ValueError
+
+def str_to_bool(v):
+    """"
+    Cast string 'true'/'True' value to boolean.
+    :param v
+    :return: boolean
+    """
+    return v.lower() == "true"
 
 
-def prepare_sql_parameters(sql_condition_value1, sql_condition_value2, sql_condition_value3):
+def prepare_sql_parameters(*argv):
     """"
     Prepare a list of non None value or blank "Falsy" parameters.
-    :param sql_condition_value1: values used to substitute
-    :param sql_condition_value2: values used to substitute
-    :param sql_condition_value3: values used to substitute
+    :param *argv - sql_condition_value1, sql_condition_value2,
+    sql_condition_value3: values used to substitute
     :return: list
-
     """
-    sql_params = []
-
-    if sql_condition_value1:
-        sql_params.append(sql_condition_value1)
-    if sql_condition_value2:
-        sql_params.append(sql_condition_value2)
-    if sql_condition_value3:
-        sql_params.append(sql_condition_value3)
+    sql_params = [condition for condition in argv if condition]
 
     return sql_params
 
@@ -32,7 +34,6 @@ def validate_data(sql_restricted_sql_statements, sql_query):
     Validate if query is allowed.
     :param sql_restricted_sql_statements: string of restricted SQL statements - configuration settings
     :param sql_query: sql statement - function input
-    :return:
 
     """
     # Convert to a list/call json.loads if sql_restricted_sql_statements is not None and is not empty string.
@@ -71,8 +72,6 @@ def prepare_results(cursor_description, rows):
     # Build dictionary: key-value pairs consisting of column name - row value
     entries_data_list = []
     for row in rows:
-        if row is None:
-            break
         entries_data_list.append(dict(zip(dt_column_keys, row)))
 
     entries = {"entries": [entry for entry in entries_data_list]}

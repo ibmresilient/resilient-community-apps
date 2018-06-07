@@ -43,11 +43,11 @@ class OdbcConnection(object):
             db_connection = pyodbc.connect(sql_connection_string)
 
             # As per the Python DB API, the default value is False
-            if sql_autocommit and sql_autocommit == "true":
+            if sql_autocommit:
                 db_connection.autocommit = True
 
             if sql_query_timeout:
-                # Some odbc drivers might throw an error while setting db_connection.timeout:
+                # Some ODBC drivers might throw an error while setting db_connection.timeout:
                 # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
                 # SQL_ATTR_CONNECTION_TIMEOUT represents value 113,
                 # this constant can be found in ODBC specification file "sqlext.h".
@@ -55,7 +55,7 @@ class OdbcConnection(object):
                 # Try to catch a pyodbc.Error and pass.
                 try:
                     # Query statement timeout defaults to 0, which means "no timeout"
-                    db_connection.timeout = int(sql_query_timeout)
+                    db_connection.timeout = sql_query_timeout
 
                 except pyodbc.Error as e:
                     sql_state = e.args[0]
@@ -110,13 +110,11 @@ class OdbcConnection(object):
         :param sql_number_of_records_returned: config setting
         :return: list of rows
         """
-        number_records = int(sql_number_of_records_returned) if sql_number_of_records_returned else None
-
         try:
             self.db_cursor.execute(sql_query, sql_params)
 
-            if number_records is not None:
-                rows = self.db_cursor.fetchmany(number_records)
+            if sql_number_of_records_returned is not None:
+                rows = self.db_cursor.fetchmany(sql_number_of_records_returned)
             else:
                 rows = self.db_cursor.fetchall()
 

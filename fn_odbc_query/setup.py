@@ -23,7 +23,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnOdbcQueryFunctionComponent = fn_odbc_query.components.fn_odbc_query:FunctionComponent"
+            "FnOdbcQueryFunctionComponent = fn_odbc_query.components.odbc_query:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_odbc_query.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_odbc_query.util.customize:customization_data"]

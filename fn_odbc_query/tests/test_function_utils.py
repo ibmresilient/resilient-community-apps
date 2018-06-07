@@ -1,15 +1,29 @@
 #
 # Unit tests for fn_odbc_query/util/function_utils.py
 #
-# Module 	        statements 	missing 	excluded 	branches 	partial 	coverage
-# function_utils.py 	33      	0       	0       	22      	0      	100%
+#  	100% code coverage
+#
 #
 import unittest
-
-from fn_odbc_query.util.function_utils import prepare_sql_parameters, validate_data, get_type_sql_statement, prepare_results
+from fn_odbc_query.util.function_utils import str_to_bool, prepare_sql_parameters, validate_data, get_type_sql_statement, prepare_results
 
 
 class TestFunctionUtils(unittest.TestCase):
+
+    def test_str_to_bool(self):
+        print("Testing casting string to boolean....")
+
+        result = str_to_bool("true")
+        self.assertEqual(result, True)
+
+        result = str_to_bool("True")
+        self.assertEqual(result, True)
+
+        result = str_to_bool("false")
+        self.assertEqual(result, False)
+
+        result = str_to_bool("Foo")
+        self.assertEqual(result, False)
 
     def test_prepare_sql_parameters(self):
         print("Testing preparing SQL params....")
@@ -17,6 +31,10 @@ class TestFunctionUtils(unittest.TestCase):
         param1 = "p1"
         param2 = "p2"
         param3 = "p3"
+
+        # Test for all None params
+        result = prepare_sql_parameters(None, None, None)
+        self.assertEqual(result, [])
 
         # Test for non None params
         result = prepare_sql_parameters(param1, param2, param3)
@@ -29,8 +47,8 @@ class TestFunctionUtils(unittest.TestCase):
         result = prepare_sql_parameters(param1, None, param3)
         self.assertEqual(result, [param1, param3])
 
-        result = prepare_sql_parameters(param1, param3, None)
-        self.assertEqual(result, [param1, param3])
+        result = prepare_sql_parameters(param1, param2, None)
+        self.assertEqual(result, [param1, param2])
 
     def test_validate_data(self):
         print("Testing validating data....")
