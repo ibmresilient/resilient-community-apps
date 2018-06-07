@@ -7,6 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import openpyxl
 import re  # to extract ranges from user input
 import io  # to pass attachment to openpyxl
+import datetime # to deal with sheet's date fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_excel_query"""
@@ -108,17 +109,30 @@ class WorksheetData(object):
         :param path : String
             an absolute path to the file
         :param opts: Dict
-            contains options with the following options
-            named_ranges: String or List, to grab those from the file
-            ranges: List of Objects that have name, top-left, and bottom-right coordinates of the range to be grabbed.
+            contains options with the following options:
+            named_ranges: List of String names of the defined_names
+            ranges: List of Objects that have name, top-left, and bottom-right
+                coordinates of the range to be grabbed.
         """
-        super().__init__()
+        super(WorksheetData, self).__init__()
         self._file_path = path
         self.wb = openpyxl.load_workbook(self._file_path, read_only=True)
         # options
         self.opts = opts
         # the eventual return value
         self.result = {}
+
+    @staticmethod
+    def serializer(obj):
+        """
+        when JSON passes a type it cannot serialize, check if it's one of the
+        types that can come from a worksheet and serialize it.
+        :return: serialized field
+        """
+        if isinstance(obj, datetime.datetime):
+            return (obj - datetime.datetime(1970, 1, 1)).total_seconds()
+        return str(obj)
+
 
     @staticmethod
     def parse_excel_notation(ranges):
@@ -129,6 +143,8 @@ class WorksheetData(object):
         :return: List[Dict]
             List of objects of a form {"sheet": "", "top_left": "", "bottom_right": ""}
         """
+        if ranges is None:
+            ranges = ""
         result = []
         range_matches = re.finditer(WorksheetData.EXCEL_RANGE_REG_EXP, ranges)
         for match in range_matches:
@@ -149,15 +165,14 @@ class WorksheetData(object):
 
     @staticmethod
     def parse_defined_names_notation(defined_names):
+        if defined_names is None:
+            defined_names = ""
         split_names = defined_names.split(",")
-        if not len(split_names):
-            return False
-        else:
-            return split_names
+        return split_names
 
     def parse(self):
         """
-        Goes through the options and fills our self.result accordingly
+        Goes through the options and fills our self.result accordingly.
         """
         self.result = {self.SHEETS_TITLES: self.wb.sheetnames}
 
@@ -199,7 +214,7 @@ class WorksheetData(object):
         for sheet_name, range in destinations:
             # worksheet
             ws = self.wb[sheet_name]
-            result.append(ws[range])
+            result.append([[cell.value for cell in row] for row in ws[range]])
 
         self.result[self.NAMED_RANGES][name] = result
 
@@ -242,11 +257,13 @@ class WorksheetData(object):
 
 if __name__=="__main__":
     import json
+    import sys
+    print(sys.version_info)
     wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/resilient-community-apps/"
                        "fn_utilities/tests/data/excel_query/budget.xlsx",
                        {
-                            "ranges": WorksheetData.parse_excel_notation(""),
-                            "named_ranges": WorksheetData.parse_defined_names_notation("test1")
+                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!A3, 'JAN 2015'!A1:D10"),
+                            "named_ranges": WorksheetData.parse_defined_names_notation("")
                        })
     wb.parse()
-    print(str(wb.result))
+    print(json.dumps(wb.result, default=WorksheetData.serializer))

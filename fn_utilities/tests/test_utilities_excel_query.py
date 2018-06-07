@@ -3,15 +3,21 @@
 
 from __future__ import print_function
 
-from unittest.mock import patch
+from resilient_circuits.action_message import FunctionException_
 
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 import pytest
 import os
+import sys
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
 from tests.mock_attachment import AttachmentMock
 import json
+import os
 
 PACKAGE_NAME = "fn_utilities"
 FUNCTION_NAME = "utilities_excel_query"
@@ -42,11 +48,30 @@ class TestUtilitiesExcelQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.parametrize("attachment_id, incident_id, task_id, excel_ranges, excel_defined_names, expected_results",
+                             [
+                                 (42, None, None, "'JAN 2015'!A3,", None, "data/excel_query/test_cell_empty.dat"),
+                                 (None, 1123, 33, None, None, "data/excel_query/test_cell_empty.dat"),
+                                 (None, None, 33, None, None, "data/excel_query/test_cell_empty.dat")
+                             ])
+    def test_bad_attachment_input(self, attachment_id, incident_id, task_id, excel_ranges,
+                     excel_defined_names, expected_results, circuits_app):
+        function_params = {
+            "attachment_id": attachment_id,
+            "excel_ranges": excel_ranges,
+            "excel_defined_names": excel_defined_names,
+            "incident_id": incident_id,
+            "task_id": task_id
+        }
+        # When Function Error Gets called in testing, the runner fails
+        with pytest.raises(AssertionError):
+            result = call_utilities_excel_query_function(circuits_app, function_params)
+
     @patch("fn_utilities.components.utilities_excel_query.WorksheetData")
     @pytest.mark.parametrize("attachment_id, incident_id, task_id, excel_ranges, excel_defined_names, expected_results",
     [
         (42, 1123, None, "'JAN 2015'!B5:B5,", "", "data/excel_query/test_cell_string.dat"),
-        (42, 1123, 33, "'JAN 2015'!B5,", "", "data/excel_query/test_cell_string.dat"),
+        (42, None, 33, "'JAN 2015'!B5,", "", "data/excel_query/test_cell_string.dat"),
         (42, 1123, 33, "", "test1", "data/excel_query/test_named_ranges.dat")
     ])
     def test_success(self, worksheet, circuits_app, attachment_id, incident_id, task_id, excel_ranges,
@@ -74,6 +99,7 @@ class TestUtilitiesExcelQuery:
 
 class TestWorksheetData:
     @pytest.mark.parametrize("ranges, expected_result", [
+        (None, []),
         ("Nothing captured", []),
         ("", []),
         ("'Sheet1'!A1:B2", [{"name": "Sheet1", "top_left": "A1", "bottom_right": "B2"}]),
@@ -92,12 +118,12 @@ class TestWorksheetData:
                 assert param in result[match] and result[match][param] == expected_result[match][param]
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path",[
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", None, "data/excel_query/test_cell_empty.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", "", "data/excel_query/test_cell_empty.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!B5,", "", "data/excel_query/test_cell_string.dat"),
         ("data/excel_query/budget.xlsx", "'Sheet1'!A1:A1,", "", "data/excel_query/test_cell_symbols.dat"),
     ])
     def test_worksheet_data_single_cell(self, path, ranges, defined_names, expected_result_path):
-        import os
         wb_path = os.path.join(os.path.dirname(__file__), path)
         wb = WorksheetData(wb_path, {
             "ranges": WorksheetData.parse_excel_notation(ranges),
@@ -107,7 +133,9 @@ class TestWorksheetData:
         res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
         with open(res_path, 'r') as file:
             expected = file.read()
-        assert expected.strip() == str(wb.result)
+        result = str(wb.result)
+
+        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -116,7 +144,6 @@ class TestWorksheetData:
             "", "data/excel_query/test_multiple_ranges.dat"),
     ])
     def test_worksheet_data_range(self, path, ranges, defined_names, expected_result_path):
-        import os
         wb_path = os.path.join(os.path.dirname(__file__), path)
         wb = WorksheetData(wb_path, {
             "ranges": WorksheetData.parse_excel_notation(ranges),
@@ -126,13 +153,13 @@ class TestWorksheetData:
         res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
         with open(res_path, 'r') as file:
             expected = file.read()
-        assert expected.strip() == str(wb.result)
+
+        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat")
     ])
     def test_defined_names(self, path, ranges, defined_names, expected_result_path):
-        import os
         wb_path = os.path.join(os.path.dirname(__file__), path)
         wb = WorksheetData(wb_path, {
             "ranges": WorksheetData.parse_excel_notation(ranges),
@@ -142,4 +169,18 @@ class TestWorksheetData:
         res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
         with open(res_path, 'r') as file:
             expected = file.read()
-        assert expected.strip() == str(wb.result)
+
+        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
+
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
+        ("data/excel_query/budget.xlsx", "'JANUA 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
+    ])
+    def test_no_arguments_fails(self, path, ranges, defined_names, expected_result_path):
+        # Test that wrong input raises a FunctionError
+        with pytest.raises(FunctionException_):
+            wb_path = os.path.join(os.path.dirname(__file__), path)
+            wb = WorksheetData(wb_path, {
+                "ranges": WorksheetData.parse_excel_notation(ranges),
+                "named_ranges": WorksheetData.parse_defined_names_notation(defined_names)
+            })
+            wb.parse()
