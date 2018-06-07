@@ -71,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             umbinv_match = self.get_select_param(kwargs.get("umbinv_match"))  # select, values: "all", "component", "exact"
             umbinv_start_epoch = kwargs.get("umbinv_start_epoch")  # datetimepicker
             umbinv_start_relative = kwargs.get("umbinv_start_relative")  # text
-            umbinv_stop_epoch = kwargs.get("umbinv_stop_epoch")  # text
+            umbinv_stop_epoch = kwargs.get("umbinv_stop_epoch")  # datetimepicker
             umbinv_stop_relative = kwargs.get("umbinv_stop_relative")  # text
 
             log = logging.getLogger(__name__)
