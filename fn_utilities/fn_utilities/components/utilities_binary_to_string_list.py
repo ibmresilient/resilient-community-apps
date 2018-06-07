@@ -73,9 +73,11 @@ class FunctionComponent(ResilientComponent):
             # Extract the strings from the binary file and put them in a list.
             list_results = []
             list_results = extract_strings(str_floss_options, data)
+            log.debug(str(list_results))
 
             yield StatusMessage("Returning list of {} decoded strings".format(len(list_results)))
             yield FunctionResult({"value": list_results})
 
         except Exception as err:
+            log.error(str(err))
             yield FunctionError(err)
