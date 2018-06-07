@@ -66,6 +66,18 @@ def test_call_floss(mocked_floss):
             except Exception:
                 assert False
 
+            # Test the where Floss returns success.  Make sure that no exception is thrown
+            mocked_floss.return_value = 0
+            try:
+                list_string = call_floss(options, temp_file_binary, temp_file_strings)
+            except RuntimeError:
+                assert False
+            except Exception:
+                assert False
+            else:
+                assert True
+
+
 @patch("fn_utilities.lib.utilities_binary_to_string_list_util.call_floss")
 def test_extract_strings(mocked_floss):
     list_expected = ["these", "strings", "might", "found", "floss"]

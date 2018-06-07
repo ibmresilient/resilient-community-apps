@@ -9,7 +9,7 @@ from fn_utilities.lib.utilities_binary_to_string_list_util import extract_string
 log = logging.getLogger(__name__)
 
 TESTCASE_INPUT        = 'sample1.zip'
-TESTCASE_KNOWN_OUTPUT = 'sample1-zip-floss-output.txt'
+TESTCASE_EXPECTED_OUTPUT = 'sample1-zip-floss-output.txt'
 
 class TestBinaryToStringList(unittest.TestCase):
     def setUp(self):
@@ -23,16 +23,17 @@ class TestBinaryToStringList(unittest.TestCase):
         # Get the filename path of the floss testcase file and the expected output.
         dirTestData = os.path.join(os.getcwd(), 'data')
         fileTestcase = os.path.join(dirTestData, TESTCASE_INPUT)
-        fileTestcaseKnown = os.path.join(dirTestData, TESTCASE_KNOWN_OUTPUT)
+        fileExpected = os.path.join(dirTestData, TESTCASE_EXPECTED_OUTPUT)
 
-        # Open the read the testcase file
+        # Open and read the testcase file
         try:
             fileInput = open(fileTestcase, 'r')
-            data = fileInput.read()
+            try:
+                data = fileInput.read()
+            finally:
+                fileInput.close()
         except Exception as err:
             raise err
-        finally:
-            fileInput.close()
 
         # Use commandline args -q quiet mode, -s shellcode, -n 5 minimum characters 5
         str_floss_options = '-q,-s,-n 5'
@@ -40,15 +41,16 @@ class TestBinaryToStringList(unittest.TestCase):
 
         # Open and read the file containing the expected output from floss string extractor
         try:
-            fileKnownOutput = open(fileTestcaseKnown, 'r')
-            listKnownStrings = fileKnownOutput.read().splitlines()
+            fileExpected = open(fileExpected, 'r')
+            try: 
+                listExpectedStrings = fileExpected.read().splitlines()
+            finally:
+                fileExpected.close()
         except Exception as err:
             raise err
-        finally:
-            fileKnownOutput.close()
 
         # Compare just computed output from floss on the testcase to known expected output.
-        self.assertListEqual(listStrings, listKnownStrings)
+        self.assertListEqual(listStrings, listExpectedStrings)
 
     def tearDown(self):
         pass
