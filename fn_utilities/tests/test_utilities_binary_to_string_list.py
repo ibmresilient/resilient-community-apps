@@ -27,11 +27,8 @@ class TestBinaryToStringList(unittest.TestCase):
 
         # Open and read the testcase file
         try:
-            fileInput = open(fileTestcase, 'r')
-            try:
+            with open(fileTestcase, 'r') as fileInput:
                 data = fileInput.read()
-            finally:
-                fileInput.close()
         except Exception as err:
             raise err
 
@@ -41,11 +38,8 @@ class TestBinaryToStringList(unittest.TestCase):
 
         # Open and read the file containing the expected output from floss string extractor
         try:
-            fileExpected = open(fileExpected, 'r')
-            try: 
+            with open(fileExpected, 'r') as fileExpected:
                 listExpectedStrings = fileExpected.read().splitlines()
-            finally:
-                fileExpected.close()
         except Exception as err:
             raise err
 

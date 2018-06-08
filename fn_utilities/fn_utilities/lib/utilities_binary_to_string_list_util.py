@@ -43,34 +43,36 @@ def get_floss_params(str_floss_options, filename):
 def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
     """Helper routine to get call Floss."""
     # Floss writes output to stdout so redirect stdout to temporary file
-    save_stdout = sys.stdout
-    output_stream = open(temp_file_strings.name.encode('utf-8'), 'w')
-    sys.stdout = temp_file_strings
-
-    # Call Floss to extract strings from the file.
-    # See floss documentation for other options you can pass to floss.
-    # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
-    # Create the list of commandline options to pass to floss main.
-    list_floss_params = get_floss_params(str_floss_options, temp_file_binary.name.encode('utf-8'))
-
-    # This is the actual call to Floss.
-    result_floss = main.main(list_floss_params)
-    output_stream.close()
-
-    if result_floss != 0:
-        raise RuntimeError("Error running Floss.")
-
-    list_string = []
     try:
-        # Read the output from floss and make a list of the decoded strings
-        floss_output = open(temp_file_strings.name, "r")
-        list_string = floss_output.read().splitlines()
+        save_stdout = sys.stdout
+        with open(temp_file_strings.name.encode('utf-8'), 'w') as output_stream:
+            sys.stdout = temp_file_strings
+
+            # Call Floss to extract strings from the file.
+            # See floss documentation for other options you can pass to floss.
+            # https://github.com/fireeye/flare-floss/blob/master/doc/usage.md
+            # Create the list of commandline options to pass to floss main.
+            list_floss_params = get_floss_params(str_floss_options, temp_file_binary.name.encode('utf-8'))
+
+            # This is the actual call to Floss.
+            result_floss = main.main(list_floss_params)
+
+        if result_floss != 0:
+            raise RuntimeError("Error running Floss. Return code: {}".format(str(result_floss)))
     except Exception as err:
         raise err
     finally:
-        # Close the file.
-        floss_output.close()
         sys.output = save_stdout
+
+    list_string = []
+
+    # Read the output from floss and make a list of the decoded strings
+    try:
+        with open(temp_file_strings.name, "r") as floss_output:
+            list_string = floss_output.read().splitlines()
+    except Exception as err:
+        raise err
+
     return list_string
         
 
@@ -79,12 +81,16 @@ def extract_strings(str_options, data):
     """extract_strings_from_binary writes binary data to a file and calls get_strings to extract
        the encoded strings"""
     list_string = []
-    with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
+    try:
+        with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
 
-        # Write binary data to a temporary file.
-        temp_file_binary.write(data)
-        with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
-            # Get the list of string from Floss.
-            list_string = call_floss(str_options, temp_file_binary, temp_file_strings)
+            # Write binary data to a temporary file.
+            temp_file_binary.write(data)
+            with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
+                # Get the list of string from Floss.
+                list_string = call_floss(str_options, temp_file_binary, temp_file_strings)
+    except Exception as err:
+        raise err
+
     return list_string
 
