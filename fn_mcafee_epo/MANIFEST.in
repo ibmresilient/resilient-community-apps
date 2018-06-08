@@ -1,0 +1,3 @@
+include README.md
+include fn_mcafee_epo/*
+include fn_mcafee_epo/LICENSE
