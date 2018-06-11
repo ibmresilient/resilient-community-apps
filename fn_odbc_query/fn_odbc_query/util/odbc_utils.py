@@ -57,7 +57,7 @@ class OdbcConnection(object):
                 # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
                 # Psqlodbc throws a general error 'HY000' for which there was no specific SQLSTATE and for which no
                 # implementation-specific SQLSTATE was defined.
-                # Try to catch a pyodbc.Error, verify if it included 'HY000' and '113' and pass.
+                # Try to catch a pyodbc.Error, verify if it includes 'HY000' and '113' and pass.
                 try:
                     # Query statement timeout defaults to 0, which means "no timeout"
                     db_connection.timeout = sql_query_timeout
