@@ -22,12 +22,14 @@ class FunctionComponent(ResilientComponent):
     package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
-        umbinv_ipaddr or umbinv_asn
+        umbinv_resource
+        umbinv_as_type
 
     An example of a set of query parameter might look like the following:
 
-            umbinv_ipaddr = 93.184.216.119
-            umbinv_asn = None
+            umbinv_resource = 93.184.216.119 and umbinv_as_type = "ip_address"
+            umbinv_resource = "12345" and umbinv_as_type = "as_number"
+
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
     in JSON format similar to the following.
@@ -70,51 +72,49 @@ class FunctionComponent(ResilientComponent):
         """Function: Resilient Function : Cisco Umbrella Investigate for ASA information for an IP address."""
         try:
             # Get the function parameters:
-            umbinv_ipaddr = kwargs.get("umbinv_ipaddr")  # text
-            umbinv_asn = kwargs.get("umbinv_asn")  # number
+            umbinv_resource = kwargs.get("umbinv_resource")  # text
+            umbinv_as_type = self.get_select_param(
+                kwargs.get("umbinv_as_type"))  # select, values: "ip_address", "as_number"
 
             log = logging.getLogger(__name__)
-            log.info("umbinv_ipaddr: %s", umbinv_ipaddr)
-            log.info("umbinv_asn: %s", umbinv_asn)
+            log.info("umbinv_resource: %s", umbinv_resource)
+            log.info("umbinv_as_type: %s", umbinv_as_type)
 
-            if is_none(umbinv_ipaddr) and is_none(umbinv_asn):
-                raise ValueError("One of parameters 'umbinv_ipaddr' or 'umbinv_asn' must be set")
+            if is_none(umbinv_resource):
+                raise ValueError("Required parameter 'umbinv_resource' not set")
+
+            if is_none(umbinv_as_type):
+                raise ValueError("Required parameter 'umbinv_as_type' not set")
 
             yield StatusMessage("Starting...")
-            ipaddr = asn = None
+            res = None
             process_result = {}
-            params = {"ipaddr": umbinv_ipaddr, "asn": umbinv_asn}
-
-            # Reset 'ipaddr' param if inmput paramater set.
-            if not is_none(umbinv_ipaddr):
-                params.setdefault("ipaddr", umbinv_ipaddr.strip())
+            params = {"resource": umbinv_resource.strip(), "as_type": umbinv_as_type}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_ipaddr" not in process_result and "_asn" not in process_result:
-               raise ValueError("One of parameters 'ipaddr' or 'asn' was not processed correctly")
-            elif "_ipaddr" in process_result:
-                ipaddr = process_result.pop("_ipaddr")
-            elif "_asn" in process_result:
-                asn = process_result.pop("_asn")
+            if "_res" not in process_result:
+                raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
+            else:
+                res = process_result.pop("_res")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
             rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if ipaddr is not None:
-                # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
-                rtn = rinv.as_for_ip(ipaddr)
+            if params["as_type"] == "ip_address":
+                rtn = rinv.as_for_ip(res)
+                # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
+                results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": res,
                            "query_execution_time": query_execution_time}
-            elif asn is not None:
-                rtn = rinv.prefixes_for_asn(asn)
+            elif params["as_type"] == "as_number":
+                rtn = rinv.prefixes_for_asn(res)
+                # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": asn,
+                results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": res,
                            "query_execution_time": query_execution_time}
             yield StatusMessage("Done...")
 
