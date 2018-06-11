@@ -135,7 +135,7 @@ class TestWorksheetData:
             expected = file.read()
         result = str(wb.result)
 
-        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -154,7 +154,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat")
@@ -170,7 +170,7 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert expected.strip() == json.dumps(wb.result, default=WorksheetData.serializer)
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JANUA 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),

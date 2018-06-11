@@ -59,6 +59,7 @@ class FunctionComponent(ResilientComponent):
             worksheet_data.parse()  # extracts all the data to result
             result = worksheet_data.result
             # Produce a FunctionResult with the results
+            yield StatusMessage("Done.")
             yield FunctionResult(result)
         except Exception:
             yield StatusMessage("An error occured")
@@ -183,6 +184,8 @@ class WorksheetData(object):
         if "ranges" in self.opts and self.opts["ranges"]:
             self.parse_sheet_ranges(self.opts["ranges"])
 
+        self.add_keys()
+
     def parse_named_ranges(self, named_ranges):
         """
         Gets a list or a string of named ranges from options
@@ -205,16 +208,18 @@ class WorksheetData(object):
              name of the named range to add to the return.
              It contains multiple ranges itself.
         """
-        result = []
+        result = {}
         # check if the named range is really in the workbook
         if name not in self.wb.defined_names:
             return
         ranges = self.wb.defined_names[name]  # get the data of the named range
         destinations = ranges.destinations  # returns a generator of tuples (ws title, range)
-        for sheet_name, range in destinations:
+        for sheet_name, rng in destinations:
+            if sheet_name not in result:
+                result[sheet_name] = {}
             # worksheet
             ws = self.wb[sheet_name]
-            result.append([[cell.value for cell in row] for row in ws[range]])
+            result[sheet_name][rng] = ([[cell.value for cell in row] for row in ws[rng]])
 
         self.result[self.NAMED_RANGES][name] = result
 
@@ -225,8 +230,9 @@ class WorksheetData(object):
         """
         if self.PARSED_SHEETS not in self.result:
             self.result[self.PARSED_SHEETS] = {}
-        for range in ranges:
-            self.parse_sheet_range(range)
+        # rng is for range, since range is a builtin name
+        for rng in ranges:
+            self.parse_sheet_range(rng)
 
     def parse_sheet_range(self, range):
         """
@@ -255,15 +261,32 @@ class WorksheetData(object):
         range_name = "{0}:{1}".format(range["top_left"], range["bottom_right"])
         self.result[self.PARSED_SHEETS][range["name"]][range_name] = result
 
-if __name__=="__main__":
-    import json
-    import sys
-    print(sys.version_info)
-    wb = WorksheetData("/Users/Ihor.Husar@ibm.com/resilient/resilient-community-apps/"
-                       "fn_utilities/tests/data/excel_query/budget.xlsx",
-                       {
-                            "ranges": WorksheetData.parse_excel_notation("'JAN 2015'!A3, 'JAN 2015'!A1:D10"),
-                            "named_ranges": WorksheetData.parse_defined_names_notation("")
-                       })
-    wb.parse()
-    print(json.dumps(wb.result, default=WorksheetData.serializer))
+    def add_keys(self):
+        """
+        Goes through self.result and adds _keys list to every dictionary as
+        a workaround for dictionary iteration in the post processing.
+        So adds _keys for all the sheets, and all the ranges in "sheets"
+        and keys for all named_ranges, their sheets, and their ranges in "defined_names"
+        """
+        if self.PARSED_SHEETS in self.result:
+            self.result[self.PARSED_SHEETS]["_keys"] = \
+                [sheet for sheet in self.result[self.PARSED_SHEETS].keys() if sheet != "_keys"]
+            for sheet_name, sheet in self.result[self.PARSED_SHEETS].items():
+                # _keys is not a sheet so don't iterate over it, would need it even if the top line was moved down
+                # in case _keys had already been defined before
+                if sheet_name == "_keys":
+                    continue
+                sheet["_keys"] = [rng for rng in sheet.keys() if rng != "_keys"]
+        if self.NAMED_RANGES in self.result:
+            self.result[self.NAMED_RANGES]["_keys"] = \
+                [rng for rng in self.result[self.NAMED_RANGES].keys() if rng != "_keys"]
+            for name, named_range in self.result[self.NAMED_RANGES].items():
+                # _keys is not a sheet so don't iterate over it, would need it even if the top line was moved down
+                # in case _keys had already been defined before
+                if name == "_keys":
+                    continue
+                named_range["_keys"] = [sheet for sheet in named_range.keys() if sheet != "_keys"]
+                for sheet_name, sheet in named_range.items():
+                    if sheet_name == "_keys":
+                        continue
+                    sheet["_keys"] = [rng for rng in sheet.keys() if rng != "_keys"]
