@@ -99,6 +99,20 @@ def validate_emails(emails):
             return False
     return True
 
+def validate_asn(asn):
+    """"Validate AS number is in a valid format.
+
+    :param asn: AS number parameter value
+    :return : boolean
+
+     """
+
+    try:
+        int(asn)
+        return True
+    except ValueError:
+        return False
+
 def validate_params(params):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.
 
@@ -117,11 +131,14 @@ def validate_params(params):
     for (k, v) in params.copy().items():
         if re.match("^resource$", k) and v is not None:
             if not IP_PATTERN.match(v) and not validate_url(v) \
-                and not validate_domains(v) and not validate_emails(v):
-                raise ValueError("Invalid value for function parameter 'resource'.")
+                and not validate_domains(v) and not validate_emails(v) \
+                    and not validate_asn(v):
+                raise ValueError("Invalid value or type for function parameter 'resource'.")
         if re.match("^resource", k) and IP_PATTERN.match(v):
             if "resource_type" in params and params["resource_type"] != "ip_address":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
+            if "as_type" in params and params["as_type"] != "ip_address":
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
         if re.match("^resource", k) and validate_domains(v):
             if "resource_type" in params and params["resource_type"] != "domain_name":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
@@ -133,6 +150,9 @@ def validate_params(params):
         if re.match("^resource", k) and validate_emails(v):
             if "whois_type" in params and params["whois_type"] != "email_address":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
+        if re.match("^resource", k) and validate_asn(v):
+            if "as_type" in params and params["as_type"] != "as_number":
+                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
         # Domain name and name server should be in similar format use same validator.
         if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
@@ -140,8 +160,6 @@ def validate_params(params):
             raise ValueError("Invalid value for function parameter 'ipaddr'.")
         if re.match("^regex$", k) and v is not None and not validate_regex(v):
             raise ValueError("Invalid value for function parameter 'regex'.")
-        if re.match("^asn$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value for function parameter 'asn'.")
         if re.match("^(limit|start_epoch|stop_epoch)$", k) and v is not None and not type(v) == int:
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
         if re.match("^(start_relative|stop_relative)$", k) and v is not None and not (TIMEDELTA_PATTERN.match(v) or \
@@ -193,8 +211,9 @@ def process_params(params, process_result):
 
     for (k, v) in params.items():
         if (re.match("^resource$", k)) and v is not None:
-            if IP_PATTERN.match(v) or validate_domains(v) or validate_emails(v):
-                # Assume "resource" param is a domain name, nameserver, ip address or email address.
+            if IP_PATTERN.match(v) or validate_domains(v) or validate_emails(v) \
+                    or validate_asn(v):
+                # Assume "resource" param is a domain name, nameserver, ip address, email address or asn.
                 process_result["_res"] = str(v)
             elif validate_url(v):
                 # Assume "resource" param is a url.
@@ -205,8 +224,6 @@ def process_params(params, process_result):
             process_result["_ipaddr"] = str(v)
         if (re.match("^regex$", k)) and v is not None:
             process_result["_regex"] = str(v)
-        if (re.match("^asn$", k)) and v is not None:
-            process_result["_asn"] = str(v)
         if (re.match("^hash$", k)) and v is not None:
             process_result["_hash"] = str(v)
         if re.match("^(start|stop)$", k) and v is not None:
