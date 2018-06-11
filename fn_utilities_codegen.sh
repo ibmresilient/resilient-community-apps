@@ -1,5 +1,7 @@
 resilient-circuits codegen -p fn_utilities -m fn_utilities \
     --rule "Example: Attachment Hash" \
+    "Example: Binary to String List: Artifact" \
+    "Example: Binary to String List: Attachment" \
     "Example: Call REST API" \
     "Example: Domain Distance" \
     "Example: Email Parsing" \
