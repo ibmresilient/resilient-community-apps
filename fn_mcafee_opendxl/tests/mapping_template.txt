@@ -1,0 +1,14 @@
+{
+  "name": "{{incident_name}}",
+  "discovered_date": "{{discovered_date}}",
+  "incident_type_ids": [19],
+  "description": "New Malware Incident created using the Resilient DXL Service Listener",
+  "artifacts": [
+    {
+      "type": {
+        "name": "{{artifact_type}}"
+      },
+      "value": "{{artifact_value}}"
+    }
+  ]
+}

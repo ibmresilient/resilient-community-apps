@@ -1,0 +1,17 @@
+{
+   "description":{
+      "format":"html",
+      "content": "{{description}}"
+   },
+   "discovered_date": {{discovered_date}},
+   "incident_type_ids": {{incident_type_ids}},
+   "artifacts" : [
+   {% for artifact in artifacts %}
+       {"type": {"name": "{{artifact.type.name}}"}, "value": "{{artifact.value}}"}
+       {%- if not loop.last -%}
+           ,
+       {% endif %}
+   {%- endfor %}
+   ],
+   "name": "{{name}}"
+}

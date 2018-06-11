@@ -62,20 +62,13 @@ def _create_incident(resilient_client, payload):
     log.debug("Payload: {}".format(payload))
 
     response = resilient_client.post(uri=uri, payload=payload_dict)
-    log.info("Created incident {}".format(str(response.get("id"))))
-
-
-def _add_artifact(resilient_client, inc_id):
-    uri = "/incidents/{}/artifacts".format(inc_id)
-    payload = {}
-    resilient_client.post(uri=uri, payload=payload)
+    return response
 
 
 def _map_values(template_file, mapping_template_file, message):
 
     with open(template_file, 'r') as template, open(mapping_template_file, 'r') as map_temp:
-        f = map_temp.read()
-        mapping_template = Template(f)
+        mapping_template = Template(map_temp.read())
         message_dict = json.loads(message)
         mapping_template = mapping_template.render(message_dict)
 
@@ -112,7 +105,8 @@ def event_subscriber(res_client, config):
                 inc_temp = _map_values(template, mapping_dict, message)
 
                 # Create new Incident in Resilient
-                _create_incident(res_client, inc_temp)
+                response = _create_incident(res_client, inc_temp)
+                log.info("Created incident {}".format(str(response.get("id"))))
 
         client.add_event_callback(EVENT_TOPIC, ResilientEventSubscriber)
 
