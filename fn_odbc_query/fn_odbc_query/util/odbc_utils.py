@@ -20,18 +20,19 @@ class OdbcConnection(object):
     db_connection = None
     db_cursor = None
 
-    def __init__(self, sql_connection_string, sql_autocommit, sql_query_timeout):
+    def __init__(self, sql_connection_string, sql_autocommit, sql_query_timeout, sql_pyodbc_timeout_error_state):
         self.db_connection = self.setup_odbc_connection(sql_connection_string, sql_autocommit,
-                                                        sql_query_timeout)
+                                                        sql_query_timeout, sql_pyodbc_timeout_error_state)
 
     @staticmethod
-    def setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout):
+    def setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout, sql_pyodbc_timeout_error_state):
         """"
         Setup ODBC connection to a SQL server using connection string obtained from the config file.
         Set autocommit and query timeout values based on the information in config file.
         :param sql_connection_string: config setting
         :param sql_autocommit: config setting
         :param sql_query_timeout: config setting
+        :param sql_pyodbc_timeout_error_state: config setting
         :return: pyodbc Connection
         """
         # ODBC connection pooling is turned ON by default.
@@ -49,10 +50,14 @@ class OdbcConnection(object):
             if sql_query_timeout:
                 # Some ODBC drivers might throw an error while setting db_connection.timeout:
                 # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
+                # The connection timeout period is set through SQLSetConnectAttr, SQL_ATTR_CONNECTION_TIMEOUT.
                 # SQL_ATTR_CONNECTION_TIMEOUT represents value 113,
                 # this constant can be found in ODBC specification file "sqlext.h".
+
                 # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
-                # Try to catch a pyodbc.Error and pass.
+                # Psqlodbc throws a general error 'HY000' for which there was no specific SQLSTATE and for which no
+                # implementation-specific SQLSTATE was defined.
+                # Try to catch a pyodbc.Error, verify if it included 'HY000' and '113' and pass.
                 try:
                     # Query statement timeout defaults to 0, which means "no timeout"
                     db_connection.timeout = sql_query_timeout
@@ -60,7 +65,7 @@ class OdbcConnection(object):
                 except pyodbc.Error as e:
                     sql_state = e.args[0]
                     error_message = e.args[1]
-                    if sql_state == 'HY000' and str(SQL_ATTR_CONNECTION_TIMEOUT) in error_message:
+                    if sql_state == sql_pyodbc_timeout_error_state and str(SQL_ATTR_CONNECTION_TIMEOUT) in error_message:
                         pass
                     else:
                         raise Exception("Could not setup the ODBC connection, Exception %s", e)

@@ -16,6 +16,7 @@ from fn_odbc_query.util import function_utils, odbc_utils
 
 
 LOG = logging.getLogger(__name__)
+SQL_PYODBC_TIMEOUT_ERROR_STATE = 'HY000'
 
 
 class FunctionComponent(ResilientComponent):
@@ -78,6 +79,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             if "sql_query" not in kwargs or kwargs.get("sql_query") == '':
+                LOG.error("Required field sql_query is missing or empty")
                 raise ValueError("Required field sql_query is missing or empty")
 
             sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # textarea
@@ -103,6 +105,7 @@ class FunctionComponent(ResilientComponent):
             if "sql_connection_string" in self.options:
                 sql_connection_string = self.options["sql_connection_string"]
             else:
+                LOG.error("Mandatory config setting 'sql_connection_string' not set.")
                 raise ValueError("Mandatory config setting 'sql_connection_string' not set.")
 
             sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
@@ -120,13 +123,17 @@ class FunctionComponent(ResilientComponent):
             sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
                 if "sql_number_of_records_returned" in self.options else None
 
+            sql_pyodbc_timeout_error_state = self.options["sql_pyodbc_timeout_error_state"] \
+                if "sql_pyodbc_timeout_error_state" in self.options else SQL_PYODBC_TIMEOUT_ERROR_STATE
+
             yield StatusMessage("Starting...")
 
             yield StatusMessage("Validating...")
             function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
             yield StatusMessage("Opening ODBC connection...")
-            odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit, sql_query_timeout)
+            odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit,
+                                                        sql_query_timeout, sql_pyodbc_timeout_error_state)
             odbc_connection.configure_unicode_settings(sql_database_type)
             odbc_connection.create_cursor()
 
@@ -135,8 +142,13 @@ class FunctionComponent(ResilientComponent):
             sql_statement = function_utils.get_type_sql_statement(sql_query)
 
             if sql_statement == 'select':
+
+                LOG.debug("Query: %s. Params: %s. Fetching %s records.",
+                         sql_query, sql_params, sql_number_of_records_returned)
+
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)
+                LOG.info(json.dumps(results))
 
                 if results.get("entries") is None:
                     yield StatusMessage("No query results returned...")
@@ -145,22 +157,26 @@ class FunctionComponent(ResilientComponent):
 
             elif sql_statement == 'update' or sql_statement == 'delete' \
                     or sql_statement == 'insert':
+
+                LOG.debug("Query: %s. Params: %s.", sql_query, sql_params)
+
                 # Return row count and set results to empty list
                 row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
                 results = function_utils.prepare_results(None, None)
 
+                LOG.info("{} rows processed".format(row_count))
                 yield StatusMessage("{} rows processed".format(row_count))
 
             else:
+                LOG.error("SQL statement '{}' is not supported".format(sql_statement))
                 raise ValueError("SQL statement '{}' is not supported".format(sql_statement))
 
             yield StatusMessage("Done...")
-            LOG.info(json.dumps(results))
-
             yield FunctionResult(results)
 
-        except Exception:
-            raise FunctionError()
+        except Exception as err:
+            LOG.error(str(err))
+            raise FunctionError(str(err))
 
         # Commit changes and tear down connection
         finally:

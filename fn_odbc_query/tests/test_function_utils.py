@@ -57,15 +57,16 @@ class TestFunctionUtils(unittest.TestCase):
 
         # Test for wrong config settings ValueError
         # Not valid json
+        # JSONDecodeError exception contains extra information, test if the err contains (assertIn) general error msg
         with self.assertRaises(ValueError) as cm:
             validate_data("insert", sql_query)
         err = cm.exception
-        self.assertEqual(str(err), "Restricted SQL statements must be defined in valid JSON format.")
+        self.assertIn("Restricted SQL statements must be defined in valid JSON format.", str(err))
 
         with self.assertRaises(ValueError) as cm:
             validate_data("[insert]", sql_query)
         err = cm.exception
-        self.assertEqual(str(err), "Restricted SQL statements must be defined in valid JSON format.")
+        self.assertIn("Restricted SQL statements must be defined in valid JSON format.", str(err))
 
         with self.assertRaises(ValueError) as cm:
             validate_data("\"insert\"", sql_query)
