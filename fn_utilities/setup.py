@@ -5,14 +5,16 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_utilities',
-    version='1.0.1',
+    version='1.0.0',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Utility Functions",
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'vivisect>=0.0.20170525',
+        'floss>=1.5.1'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -28,6 +30,7 @@ setup(
             "AttachmentZipListFunctionComponent = fn_utilities.components.utilities_attachment_zip_list:FunctionComponent",
             "Base64ToArtifactFunctionComponent = fn_utilities.components.utilities_base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fn_utilities.components.utilities_base64_to_attachment:FunctionComponent",
+            "BinaryToStringListFunctionComponent = fn_utilities.components.utilities_binary_to_string_list:FunctionComponent",
             "CallRestApiFunctionComponent = fn_utilities.components.utilities_call_rest_api:FunctionComponent",
             "DomainDistanceFunctionComponent = fn_utilities.components.utilities_domain_distance:FunctionComponent",
             "EmailParseFunctionComponent = fn_utilities.components.utilities_email_parse:FunctionComponent",

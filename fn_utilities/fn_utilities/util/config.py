@@ -39,4 +39,12 @@ whois=whois "{{shell_param1}}"
 # psscan=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" psscan --output=json
 # dlllist=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" dlllist --output=json
 # (etc)
+
+# Utilities: Binary to String Function
+# Use the following floss_options variable to specify the commandline options to be used by 
+# the floss package to define the behavior for extracting strings. 
+# Each commandline parameter should be separated by a comma.
+# The defaults here are: -q quiet mode, -s shellcode, -n minimum string length
+# See https://github.com/fireeye/flare-floss/blob/master/doc/usage.md for all possible commandline options.
+floss_options=-q,-s,-n 5
         """
