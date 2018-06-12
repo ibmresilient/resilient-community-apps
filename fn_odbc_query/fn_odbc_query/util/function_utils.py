@@ -9,7 +9,7 @@ except:
     JSONDecodeError = ValueError
 
 def str_to_bool(v):
-    """"
+    """
     Cast string 'true'/'True' value to boolean.
     :param v
     :return: boolean
@@ -18,7 +18,7 @@ def str_to_bool(v):
 
 
 def prepare_sql_parameters(*argv):
-    """"
+    """
     Prepare a list of non None value or blank "Falsy" parameters.
     :param *argv - sql_condition_value1, sql_condition_value2,
     sql_condition_value3: values used to substitute
@@ -30,7 +30,7 @@ def prepare_sql_parameters(*argv):
 
 
 def validate_data(sql_restricted_sql_statements, sql_query):
-    """"
+    """
     Validate if query is allowed.
     :param sql_restricted_sql_statements: string of restricted SQL statements - configuration settings
     :param sql_query: sql statement - function input
@@ -57,7 +57,7 @@ def validate_data(sql_restricted_sql_statements, sql_query):
 
 
 def prepare_results(cursor_description, rows):
-    """"
+    """
     Generate result in JSON format with an entry consisting of key value pairs.
     :param cursor_description: a tuple with query result columns
     :param rows: list of returned sql query values
@@ -80,7 +80,7 @@ def prepare_results(cursor_description, rows):
 
 
 def get_type_sql_statement(sql_query):
-    """"
+    """
     Check what SQL statement is executed. Return first word from sql_query.
     sql_query cannot be None or empty string, validation in fn_odbc_query_function().
     :param sql_query

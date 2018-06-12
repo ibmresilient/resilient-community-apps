@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             if "sql_query" not in kwargs or kwargs.get("sql_query") == '':
-                LOG.error("Required field sql_query is missing or empty")
+                LOG.error(u"Required field sql_query is missing or empty")
                 raise ValueError("Required field sql_query is missing or empty")
 
             sql_query = self.get_textarea_param(kwargs.get("sql_query"))  # textarea
@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             if "sql_connection_string" in self.options:
                 sql_connection_string = self.options["sql_connection_string"]
             else:
-                LOG.error("Mandatory config setting 'sql_connection_string' not set.")
+                LOG.error(u"Mandatory config setting 'sql_connection_string' not set.")
                 raise ValueError("Mandatory config setting 'sql_connection_string' not set.")
 
             sql_restricted_sql_statements = self.options["sql_restricted_sql_statements"] \
@@ -143,7 +143,7 @@ class FunctionComponent(ResilientComponent):
 
             if sql_statement == 'select':
 
-                LOG.debug("Query: %s. Params: %s. Fetching %s records.",
+                LOG.info(u"Query: %s. Params: %s. Fetching %s records.",
                          sql_query, sql_params, sql_number_of_records_returned)
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
@@ -158,17 +158,17 @@ class FunctionComponent(ResilientComponent):
             elif sql_statement == 'update' or sql_statement == 'delete' \
                     or sql_statement == 'insert':
 
-                LOG.debug("Query: %s. Params: %s.", sql_query, sql_params)
+                LOG.info(u"Query: %s. Params: %s.", sql_query, sql_params)
 
                 # Return row count and set results to empty list
                 row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
                 results = function_utils.prepare_results(None, None)
 
-                LOG.info("{} rows processed".format(row_count))
+                LOG.info(u"%s rows processed", row_count)
                 yield StatusMessage("{} rows processed".format(row_count))
 
             else:
-                LOG.error("SQL statement '{}' is not supported".format(sql_statement))
+                LOG.error(u"SQL statement '%s' is not supported", sql_statement)
                 raise ValueError("SQL statement '{}' is not supported".format(sql_statement))
 
             yield StatusMessage("Done...")

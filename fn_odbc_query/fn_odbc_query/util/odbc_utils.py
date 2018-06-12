@@ -26,7 +26,7 @@ class OdbcConnection(object):
 
     @staticmethod
     def setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout, sql_pyodbc_timeout_error_state):
-        """"
+        """
         Setup ODBC connection to a SQL server using connection string obtained from the config file.
         Set autocommit and query timeout values based on the information in config file.
         :param sql_connection_string: config setting
@@ -76,7 +76,7 @@ class OdbcConnection(object):
         return db_connection
 
     def configure_unicode_settings(self, sql_database_type):
-        """"
+        """
         Configure unicode settings based on the type of SQL database server.
         Pyodbc recommends configurating connection's encoding and decoding, since many drivers behave differently.
         :param sql_database_type: config setting
@@ -99,7 +99,7 @@ class OdbcConnection(object):
         self.db_cursor = db_cursor
 
     def create_cursor(self):
-        """"  Create cursor """
+        """  Create cursor """
         try:
             db_cursor = self.db_connection.cursor()
             self.set_db_cursor(db_cursor)
@@ -108,7 +108,7 @@ class OdbcConnection(object):
             raise Exception("Could not execute SQL statement, Exception %s", e)
 
     def execute_select_statement(self, sql_query, sql_params, sql_number_of_records_returned):
-        """"
+        """
         Execute SQL SELECT statement using the Cursor execute() function.
         :param sql_query: sql statement
         :param sql_params: function parameters
@@ -129,14 +129,14 @@ class OdbcConnection(object):
         return rows
 
     def get_cursor_description(self):
-        """"
+        """
         Returns cursor_description a tuple with query result columns.
         :return: tuple
         """
         return self.db_cursor.description
 
     def execute_odbc_query(self, sql_query, sql_params):
-        """"
+        """
         Execute SQL DELETE, UPDATE, INSERT statements using the Cursor execute() function.
         :param sql_query: sql statement
         :param sql_params: function parameters
@@ -153,7 +153,7 @@ class OdbcConnection(object):
         return self.db_cursor.rowcount
 
     def close_connections(self):
-        """"  Tear down. Close connections if they're defined."""
+        """  Tear down. Close connections if they're defined."""
         if self.db_cursor is not None:
             self.db_cursor.close()
 
