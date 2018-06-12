@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""
+    Function utilities_excel_query receives attachment information and two additional fields -
+    list of excel style ranges and comma separated list of names for defined ranges. It then
+    gets the attachment and gets the data from it.
+
+    It uses Openpyxl library (http://openpyxl.readthedocs.io/en/stable/).
+
+    Logic for extracting data and parsing inputs is in the WorksheetData class.
+"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
