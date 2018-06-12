@@ -4,7 +4,10 @@
 
 import logging
 from resilient_circuits import ResilientComponent
-from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber
+try:
+    from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber
+except ModuleNotFoundError:
+    from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, event_subscriber
 
 log = logging.getLogger(__name__)
 

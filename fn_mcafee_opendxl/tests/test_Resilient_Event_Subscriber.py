@@ -2,15 +2,13 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-from fn_mcafee_opendxl.util.helper import verify_config, _create_incident, _map_values, event_subscriber
-from mock import Mock, patch
+try:
+    from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, _create_incident, _map_values
+except Exception:
+    from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, _create_incident, _map_values
+from mock import Mock
 import json
 import os
-from dxlclient.client import DxlClient
-from dxlclient import EventCallback
-from dxlclient.client_config import DxlClientConfig
-from jinja2 import Template
-
 
 
 class ConfigClass:
@@ -46,7 +44,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(ops)
         except ValueError as e:
-            assert e.message == "[fn_mcafee_opendxl] section is not set in the config file"
+            assert e.args[0] == "[fn_mcafee_opendxl] section is not set in the config file"
 
     def test_verify_config_no_config_client(self):
         f = ConfigClass().ops
@@ -54,7 +52,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(f)
         except ValueError as e:
-            assert e.message == "dxlclient_config is not set. You must set this path to run this service"
+            assert e.args[0] == "dxlclient_config is not set. You must set this path to run this service"
 
     def test_verify_config_no_topic_name(self):
         ops = ConfigClass().ops
@@ -62,7 +60,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(ops)
         except ValueError as e:
-            assert e.message == "topic_name is not set. You must set this value to run this service"
+            assert e.args[0] == "topic_name is not set. You must set this value to run this service"
 
     def test_verify_config_no_topic_listener(self):
         ops = ConfigClass().ops
@@ -70,7 +68,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(ops)
         except ValueError as e:
-            assert e.message == "topic_listener_on is not set. You must set this value to run this service"
+            assert e.args[0] == "topic_listener_on is not set. You must set this value to run this service"
 
     def test_verify_config_no_incident_template(self):
         ops = ConfigClass().ops
@@ -78,7 +76,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(ops)
         except ValueError as e:
-            assert e.message == "incident_template is not set. You must set this path to run this service"
+            assert e.args[0] == "incident_template is not set. You must set this path to run this service"
 
     def test_verify_config_no_incident_mapping(self):
         ops = ConfigClass().ops
@@ -86,7 +84,7 @@ class TestResilientEvenSubscriber:
         try:
             verify_config(ops)
         except ValueError as e:
-            assert e.message == "incident_mapping is not set. You must set this path to run this service"
+            assert e.args[0] == "incident_mapping is not set. You must set this path to run this service"
 
     def test_create_incident(self):
         mock_client = Mock()
