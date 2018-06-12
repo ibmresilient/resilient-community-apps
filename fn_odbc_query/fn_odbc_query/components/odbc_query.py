@@ -143,7 +143,7 @@ class FunctionComponent(ResilientComponent):
 
             if sql_statement == 'select':
 
-                LOG.info(u"Query: %s. Params: %s. Fetching %s records.",
+                LOG.debug(u"Query: %s. Params: %s. Fetching %s records.",
                          sql_query, sql_params, sql_number_of_records_returned)
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
@@ -158,7 +158,7 @@ class FunctionComponent(ResilientComponent):
             elif sql_statement == 'update' or sql_statement == 'delete' \
                     or sql_statement == 'insert':
 
-                LOG.info(u"Query: %s. Params: %s.", sql_query, sql_params)
+                LOG.debug(u"Query: %s. Params: %s.", sql_query, sql_params)
 
                 # Return row count and set results to empty list
                 row_count = odbc_connection.execute_odbc_query(sql_query, sql_params)
