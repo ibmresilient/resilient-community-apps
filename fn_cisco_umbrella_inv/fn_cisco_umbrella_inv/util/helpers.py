@@ -137,8 +137,6 @@ def validate_params(params):
         if re.match("^resource", k) and IP_PATTERN.match(v):
             if "resource_type" in params and params["resource_type"] != "ip_address":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
-            if "as_type" in params and params["as_type"] != "ip_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
         if re.match("^resource", k) and validate_domains(v):
             if "resource_type" in params and params["resource_type"] != "domain_name":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
@@ -150,9 +148,6 @@ def validate_params(params):
         if re.match("^resource", k) and validate_emails(v):
             if "whois_type" in params and params["whois_type"] != "email_address":
                 raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
-        if re.match("^resource", k) and validate_asn(v):
-            if "as_type" in params and params["as_type"] != "as_number":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
         # Domain name and name server should be in similar format use same validator.
         if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
@@ -215,9 +210,18 @@ def process_params(params, process_result):
                     or validate_asn(v):
                 # Assume "resource" param is a domain name, nameserver, ip address, email address or asn.
                 process_result["_res"] = str(v)
+                if IP_PATTERN.match(v):
+                    process_result["_res_type"] = "ip_address"
+                elif validate_domains(v):
+                    process_result["_res_type"] = "domain_name"
+                elif validate_emails(v):
+                    process_result["_res_type"] = "email_address"
+                elif validate_asn(v):
+                    process_result["_res_type"] = "as_number"
             elif validate_url(v):
                 # Assume "resource" param is a url.
                 process_result["_res"] = quote_plus(v)
+                process_result["_res_type"] = "url"
         if (re.match("^domain", k)) and v is not None:
             set_result(process_result, k, v)
         if (re.match("^ipaddr$", k)) and v is not None:
