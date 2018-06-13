@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 
-from resilient_circuits.action_message import FunctionException_
+from resilient_circuits.action_message import FunctionException_, FunctionError_
 
 try:
     from unittest.mock import patch
@@ -140,8 +140,9 @@ class TestWorksheetData:
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!B5:B5,", "", "data/excel_query/test_cell_string.dat"),
+        ("data/excel_query/budget.xlsx", "'Sheet1'!D1:D12", "", "data/excel_query/test_all_types.dat"),
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'JAN 2015'!A1:D10",
-            "", "data/excel_query/test_multiple_ranges.dat"),
+            "", "data/excel_query/test_multiple_ranges.dat")
     ])
     def test_worksheet_data_range(self, path, ranges, defined_names, expected_result_path):
         wb_path = os.path.join(os.path.dirname(__file__), path)
@@ -157,7 +158,31 @@ class TestWorksheetData:
         assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
-        ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat")
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'Sheet1'!A1:A1",
+         "", "data/excel_query/test_multiple_sheets.dat")
+    ])
+    def test_worksheet_data_multiple_sheets(self, path, ranges, defined_names, expected_result_path):
+        wb_path = os.path.join(os.path.dirname(__file__), path)
+        wb = WorksheetData(wb_path, {
+            "ranges": WorksheetData.parse_excel_notation(ranges),
+            "named_ranges": WorksheetData.parse_defined_names_notation(defined_names)
+        })
+        wb.parse()
+        res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
+        with open(res_path, 'r') as file:
+            expected = file.read()
+        expected = json.loads(expected.strip())
+        actual = json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        # Python 3.6 and 2.7 have different dictionary iteration order, so the _keys
+        # are the same, but in different order
+        expected["sheets"]["_keys"].sort()
+        actual["sheets"]["_keys"].sort()
+        assert expected == actual
+
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
+        ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'JAN 2015'!A1:D10", "test1",
+            "data/excel_query/test_ranges_and_named.dat")
     ])
     def test_defined_names(self, path, ranges, defined_names, expected_result_path):
         wb_path = os.path.join(os.path.dirname(__file__), path)
@@ -174,10 +199,11 @@ class TestWorksheetData:
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JANUA 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
+        ("data/excel_query/budget.xlsx", "", "test2", "data/excel_query/test_cell_empty.dat"),
     ])
     def test_no_arguments_fails(self, path, ranges, defined_names, expected_result_path):
         # Test that wrong input raises a FunctionError
-        with pytest.raises(FunctionException_):
+        with pytest.raises( (FunctionException_, FunctionError_) ):
             wb_path = os.path.join(os.path.dirname(__file__), path)
             wb = WorksheetData(wb_path, {
                 "ranges": WorksheetData.parse_excel_notation(ranges),

@@ -15,7 +15,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import openpyxl
 import re  # to extract ranges from user input
 import io  # to pass attachment to openpyxl
-import datetime # to deal with sheet's date fields
+import datetime  # to deal with sheet's date fields
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_excel_query"""
@@ -71,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(result)
         except Exception:
             yield StatusMessage("An error occured")
-            yield FunctionError()
+            yield FunctionError("An error occured.")
 
     def _get_attachment_binary(self, task_id, incident_id, attachment_id):
         """
@@ -136,10 +137,12 @@ class WorksheetData(object):
         """
         when JSON passes a type it cannot serialize, check if it's one of the
         types that can come from a worksheet and serialize it.
-        :return: serialized field
+        :return: String
+            serialized field
         """
         if isinstance(obj, datetime.datetime):
-            return (obj - datetime.datetime(1970, 1, 1)).total_seconds()
+            # the standard of Resilient is in microseconds
+            return (obj - datetime.datetime(1970, 1, 1)).total_seconds()*1000
         return str(obj)
 
 
@@ -149,7 +152,7 @@ class WorksheetData(object):
         Takes in a string that has comma separated excel notation ranges
         :param ranges: String
             string
-        :return: List[Dict]
+        :return: List[object]
             List of objects of a form {"sheet": "", "top_left": "", "bottom_right": ""}
         """
         if ranges is None:
@@ -174,9 +177,15 @@ class WorksheetData(object):
 
     @staticmethod
     def parse_defined_names_notation(defined_names):
+        """
+        :param defined_names: Is a list that gets passed to function, with comma separated
+            names of defined ranges to be extracted
+        :return: List[String]
+            the list of split names
+        """
         if defined_names is None:
             defined_names = ""
-        split_names = defined_names.split(",")
+        split_names = [x.strip() for x in defined_names.split(",") if len(x.strip()) > 0]
         return split_names
 
     def parse(self):
@@ -219,7 +228,8 @@ class WorksheetData(object):
         result = {}
         # check if the named range is really in the workbook
         if name not in self.wb.defined_names:
-            return
+            raise FunctionError("The defined range {0} doesn't exist".format(name))
+
         ranges = self.wb.defined_names[name]  # get the data of the named range
         destinations = ranges.destinations  # returns a generator of tuples (ws title, range)
         for sheet_name, rng in destinations:
@@ -227,14 +237,17 @@ class WorksheetData(object):
                 result[sheet_name] = {}
             # worksheet
             ws = self.wb[sheet_name]
-            result[sheet_name][rng] = ([[cell.value for cell in row] for row in ws[rng]])
+            try:
+                result[sheet_name][rng] = ([[cell.value for cell in row] for row in ws[rng]])
+            except ValueError as e:
+                raise FunctionError("Requested range {0} is not correct.".format(rng.coord))
 
         self.result[self.NAMED_RANGES][name] = result
 
     def parse_sheet_ranges(self, ranges):
         """
         Gets the list of ranges provided by user from the options and processes it.
-        :param sheet: openpyxl's Worksheet class
+        :param ranges: List[object] - list of range objects
         """
         if self.PARSED_SHEETS not in self.result:
             self.result[self.PARSED_SHEETS] = {}
