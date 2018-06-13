@@ -2,14 +2,18 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-from resilient_circuits.util import get_config_data
 from resilient_circuits.action_message import FunctionError_
 from mock import Mock, patch
 import time
 import os.path
-from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+try:
+    from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id
-from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
+    from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
+except:
+    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+        check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id
+    from fn_mcafee_atd.fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
 class MockClass:
@@ -32,9 +36,10 @@ class TestMcafeeAtdAnalyzeFile:
     fake_username = "Username"
     fake_password = "MyPassword"
     verify = True
+
     sim_session_headers = {
         "Accept": "application/vnd.ve.v1.0+json",
-        "VE-SDK-API": "c2Vzc2lvbl9rZXk6MQ=="
+        "VE-SDK-API": str.encode("c2Vzc2lvbl9rZXk6MQ==")
     }
 
 
@@ -213,7 +218,7 @@ class TestMcafeeAtdAnalyzeFile:
                     "userId": "1"
                 }
             }
-            sim_get_content2 = "This is the report result"
+            sim_get_content2 = str.encode("This is the report result")
             generated_report = self._generateResponse(sim_get_content2, 200)
             creds = MockClass()
             mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
@@ -239,7 +244,7 @@ class TestMcafeeAtdAnalyzeFile:
             # Assert file contents is as expected
             with open(f.get("report_file"), 'r') as r:
                 content = r.read()
-                assert content == generated_report.content
+                assert generated_report.content.decode("utf-8") == content
 
         finally:
             remove_dir(f.get("tmp_dir"))
@@ -254,7 +259,7 @@ class TestMcafeeAtdAnalyzeFile:
         try:
             check_timeout(start, 1, 1)
         except FunctionError_ as e:
-            assert e.message == "Timeout limit reached"
+            assert e.args[0] == "Timeout limit reached"
 
     def test_get_incident_id(self):
         kw = {}
@@ -263,7 +268,7 @@ class TestMcafeeAtdAnalyzeFile:
         try:
             get_incident_id(**kw)
         except FunctionError_ as e:
-            assert e.message == "incident_id is required"
+            assert e.args[0] == "incident_id is required"
 
         # Assert incident_id is returned if it exists
         kw["incident_id"] = "1"
@@ -278,7 +283,7 @@ class TestMcafeeAtdAnalyzeFile:
         try:
             _get_file(mocked_client, **kw)
         except ValueError as e:
-            assert e.message == "Inputs not set correctly"
+            assert e.args[0] == "Inputs not set correctly"
 
         # Assert file and file name are returned when downloading from artifact
         kw = {
