@@ -23,12 +23,10 @@ class FunctionComponent(ResilientComponent):
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
         umbinv_resource
-        umbinv_as_type
 
     An example of a set of query parameter might look like the following:
 
-            umbinv_resource = 93.184.216.119 and umbinv_as_type = "ip_address"
-            umbinv_resource = "12345" and umbinv_as_type = "as_number"
+            umbinv_resource = 93.184.216.119 or umbinv_resource = "12345"
 
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
@@ -107,14 +105,18 @@ class FunctionComponent(ResilientComponent):
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'as_for_ip' results for ip address '{}'.".format(res))
+
             elif res_type == "as_number":
                 rtn = rinv.prefixes_for_asn(res)
                 # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'prefixes_for_asn' results for AS number '{}'.".format(res))
             else:
-                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}' should be an 'ip address' or an 'AS number'".format(res_type))
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}' should be an 'ip address' "
+                                 "or an 'AS number'".format(res_type))
 
             yield StatusMessage("Done...")
 
