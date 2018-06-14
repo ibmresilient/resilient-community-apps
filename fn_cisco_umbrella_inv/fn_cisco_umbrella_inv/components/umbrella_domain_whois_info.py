@@ -12,6 +12,7 @@ Cisco Umbrella server """
 import json
 import logging
 from datetime import datetime
+import re
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
@@ -23,12 +24,10 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'umbrella_domain_whois_info' of package fn_cisco_umbrella_inv.
 
     The Function does a Cisco Umbrella Investigate query lookup and takes the following parameters:
-            umbinv_emails, umbinv_nameservers, umbinv_domain, umbinv_limit, umbinv_sortby, umbinv_offset
+            umbinv_resource, umbinv_limit, umbinv_sortby, umbinv_offset
     An example of a set of query parameter might look like the following:
 
-            umbinv_emails = None
-            umbinv_nameservers = None
-            umbinv_domain = artifact.value
+            umbinv_resource = "domain.com" or umbinv_resource = "ns1.google.com" or umbinv_resource = "test@example.com"
             umbinv_limit = 2
             umbinv_sortby = "created"
             umbinv_offset = 0
@@ -99,15 +98,12 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_resource = kwargs.get("umbinv_resource")  # text
-            umbinv_whois_type = self.get_select_param(kwargs.get(
-                "umbinv_whois_type"))  # select, values: "domain_name", "email_address", "nameserver"
             umbinv_limit = kwargs.get("umbinv_limit")  # number
             umbinv_sortby = kwargs.get("umbinv_sortby")  # text
             umbinv_offset = kwargs.get("umbinv_offset")  # number
 
             log = logging.getLogger(__name__)
             log.info("umbinv_resource: %s", umbinv_resource)
-            log.info("umbinv_whois_type: %s", umbinv_whois_type)
             log.info("umbinv_limit: %s", umbinv_limit)
             log.info("umbinv_sortby: %s", umbinv_sortby)
             log.info("umbinv_offset: %s", umbinv_offset)
@@ -115,22 +111,26 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            if is_none(umbinv_whois_type):
-                raise ValueError("Required parameter 'umbinv_whois_type' not set")
-
-
             yield StatusMessage("Starting...")
+            res = None
+            res_type = None
             process_result = {}
-            params = {"resource": umbinv_resource.strip(), "whois_type": umbinv_whois_type,
-                      "limit": umbinv_limit, "sort_field": umbinv_sortby, "offset": umbinv_offset}
+            params = {"resource": umbinv_resource.strip(), "limit": umbinv_limit, "sort_field": umbinv_sortby,
+                      "offset": umbinv_offset}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_res" not in process_result:
+            if "_res" not in process_result or "_res_type" not in process_result:
                 raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
             else:
                 res = process_result.pop("_res")
+                res_type = process_result.pop("_res_type")
+
+            if res_type != "domain_name" and res_type != "email_address":
+                    raise ValueError(
+                        "Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
+                        "an 'ip address' or a 'nameserver'.".format(res_type))
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
@@ -138,24 +138,39 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco Investigate query...")
 
-            if umbinv_whois_type == "domain_name":
-                rtn = rinv.domain_whois_history(res, params["limit"])
+            if res_type == "domain_name":
+                # Can be either domain name or name server.
+                # Execute wois query for domain history.
+                rtn_dom = rinv.domain_whois_history(res, params["limit"])
+                # Execute whois query for nameserver.
+                rtn_ns = rinv.ns_whois(res, **omit_params(params, ["resource"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                # Add "query_execution_time" and "domain" key to result to facilitate post-processing.
-                results = {"domain_whois": json.loads(json.dumps(rtn)), "domain": res,
-                           "query_execution_time": query_execution_time}
-            elif umbinv_whois_type == "email_address":
-                rtn = rinv.email_whois(res, **omit_params(params, ["resource", "whois_type"]))
+
+                if len(rtn_dom) != 0:
+                    # Test if resource is a name server.
+                    for entry in rtn_dom:
+                        for ns in entry["nameServers"]:
+                            if res == ns:
+                                res_type = "nameserver"
+                                log.debug("Resource '{}' is a nameserver.".format(res))
+                                break
+
+                # Add "query_execution_time", 'resource' and 'resource_type' key to result to facilitate post-processing.
+                results = {"domain_whois": json.loads(json.dumps(rtn_dom)), "ns_whois": json.loads(json.dumps(rtn_ns)),
+                           "resource": res, "resource_type": res_type, "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'whois' results for resource '{}' of resource type {}."
+                                    .format(res, res_type))
+            elif res_type == "email_address":
+                rtn = rinv.email_whois(res, **omit_params(params, ["resource"]))
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "emails" key to result to facilitate post-processing.
                 results = {"email_whois": json.loads(json.dumps(rtn)), "emails": res,
                            "query_execution_time": query_execution_time}
-            elif umbinv_whois_type == "nameserver":
-                rtn = rinv.ns_whois(res, **omit_params(params, ["resource", "whois_type"]))
-                query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                # Add "query_execution_time" and "nameservers" key to result to facilitate post-processing.
-                results = {"ns_whois": json.loads(json.dumps(rtn)), "nameservers": res,
-                           "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'email_whois' results for resource '{}'.".format(res))
+            else:
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
+                                 "an 'email address' or a 'nameserver'.".format(res_type))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
