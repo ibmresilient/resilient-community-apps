@@ -23,12 +23,10 @@ class FunctionComponent(ResilientComponent):
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
         umbinv_resource
-        umbinv_as_type
 
     An example of a set of query parameter might look like the following:
 
-            umbinv_resource = 93.184.216.119 and umbinv_as_type = "ip_address"
-            umbinv_resource = "12345" and umbinv_as_type = "as_number"
+            umbinv_resource = 93.184.216.119 or umbinv_resource = "12345"
 
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
@@ -114,7 +112,8 @@ class FunctionComponent(ResilientComponent):
                 results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": res,
                            "query_execution_time": query_execution_time}
             else:
-                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}' should be an 'ip address' or an 'AS number'".format(res_type))
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}' should be an 'ip address' "
+                                 "or an 'AS number'".format(res_type))
 
             yield StatusMessage("Done...")
 
