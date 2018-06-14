@@ -136,6 +136,7 @@ class FunctionComponent(ResilientComponent):
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
                 results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'thread_grid_samples' results for resource '{}'.".format(res))
 
             yield StatusMessage("Done...")
 

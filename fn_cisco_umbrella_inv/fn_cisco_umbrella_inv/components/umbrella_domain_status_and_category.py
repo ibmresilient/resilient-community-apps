@@ -133,6 +133,8 @@ class FunctionComponent(ResilientComponent):
                 max_cat_keys = max(cat_keys_int)
                 results = {"categories": json.loads(json.dumps(rtn)), "min_id": min(cat_keys_int),
                            "max_id": max(cat_keys_int), "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'categories' list results.")
+
             elif (umbinv_status_endpoint == "categorization"):
                 dom_list = []
                 if domains is not None:
@@ -143,6 +145,8 @@ class FunctionComponent(ResilientComponent):
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
                 results = {"statuses": json.loads(json.dumps(rtn)), "domains": dom_list,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning categorization 'statuses' results for domains '{}'.".format(dom_list))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

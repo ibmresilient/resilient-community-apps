@@ -122,6 +122,8 @@ class FunctionComponent(ResilientComponent):
                 # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
                 results = {"dns_rr_history": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'dns_rr_history' results for resource '{}'.".format(res))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

@@ -106,12 +106,15 @@ class FunctionComponent(ResilientComponent):
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"classifiers_classifiers": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'classifiers_classifiers' results for domain '{}'.".format(domain))
             elif (umbinv_classifiers_endpoint == "info"):
                 rtn = rinv.classifiers_info(domain)
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
                 results = {"classifiers_info": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'classifiers_info' results for domain '{}'.".format(domain))
+
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

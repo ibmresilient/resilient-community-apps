@@ -158,7 +158,7 @@ class FunctionComponent(ResilientComponent):
                 # Add "query_execution_time", 'resource' and 'resource_type' key to result to facilitate post-processing.
                 results = {"domain_whois": json.loads(json.dumps(rtn_dom)), "ns_whois": json.loads(json.dumps(rtn_ns)),
                            "resource": res, "resource_type": res_type, "query_execution_time": query_execution_time}
-                yield StatusMessage("Returning 'whois' results for resource '{}' of resource type {}."
+                yield StatusMessage("Returning 'whois' results for resource '{}' of resource type '{}'."
                                     .format(res, res_type))
             elif res_type == "email_address":
                 rtn = rinv.email_whois(res, **omit_params(params, ["resource"]))

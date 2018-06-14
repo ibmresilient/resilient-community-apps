@@ -106,7 +106,9 @@ class FunctionComponent(ResilientComponent):
             else:
                 # Add "query_execution_time" to result to facilitate post-processing.
                 results = {"search_matches": json.loads(json.dumps(rtn)), "query_execution_time": query_execution_time}
-                yield StatusMessage("Done...")
+                yield StatusMessage("Returning 'search_matches' results for regex '{}'.".format(regex))
+
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
