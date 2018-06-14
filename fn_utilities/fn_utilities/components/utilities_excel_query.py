@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """
     Function utilities_excel_query receives attachment information and two additional fields -
@@ -38,12 +39,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             # Attachment information
             yield StatusMessage("Starting the function")
-            attachment_id = kwargs.get("attachment_id")  # number
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
+            attachment_id = kwargs.get("attachment_id", None)  # number
+            incident_id = kwargs.get("incident_id", None)  # number
+            task_id = kwargs.get("task_id", None)  # number
             # What data to get
-            excel_ranges = kwargs.get("excel_ranges")  # text
-            excel_defined_names = kwargs.get("excel_defined_names")  # text
+            excel_ranges = kwargs.get("excel_ranges", None)  # text
+            excel_defined_names = kwargs.get("excel_defined_names", None)  # text
 
             log = logging.getLogger(__name__)
             log.info("task_id: {0}".format(task_id))
@@ -70,9 +71,9 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield StatusMessage("Done.")
             yield FunctionResult(result)
-        except Exception:
-            yield StatusMessage("An error occured")
-            yield FunctionError("An error occured.")
+        except Exception as e:
+            log.error(str(e))
+            raise FunctionError("An error occurred.")
 
     def _get_attachment_binary(self, task_id, incident_id, attachment_id):
         """
@@ -86,9 +87,9 @@ class FunctionComponent(ResilientComponent):
         :return: Binary object
         """
         if incident_id is None and task_id is None:
-            raise FunctionError("Either incident id of the task id had to be specified")
+            raise FunctionError("Either incident id or the task id has to be specified.")
         if attachment_id is None:
-            raise FunctionError("The attachment id has to be specified")
+            raise FunctionError("The attachment id has to be specified.")
         if task_id:
             data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
         else:
@@ -126,7 +127,12 @@ class WorksheetData(object):
         """
         super(WorksheetData, self).__init__()
         self._file_path = path
-        self.wb = openpyxl.load_workbook(self._file_path, read_only=True)
+        try:
+            self.wb = openpyxl.load_workbook(self._file_path, read_only=True)
+        except IOError as e:
+            log = logging.getLogger(__name__)
+            log.error(str(e))
+            raise FunctionError("Error opening the provided file.")
         # options
         self.opts = opts
         # the eventual return value
@@ -144,7 +150,6 @@ class WorksheetData(object):
             # the standard of Resilient is in microseconds
             return (obj - datetime.datetime(1970, 1, 1)).total_seconds()*1000
         return str(obj)
-
 
     @staticmethod
     def parse_excel_notation(ranges):
@@ -209,7 +214,7 @@ class WorksheetData(object):
         and calls parse_named_range for each of them
         """
         self.result[self.NAMED_RANGES] = {}
-        # check if a list of named ranged is requested or a single named range
+        # check if a list of named ranges is requested or a single named range
         if isinstance(named_ranges, list):
             for name in named_ranges:
                 self.parse_named_range(name)
@@ -240,6 +245,8 @@ class WorksheetData(object):
             try:
                 result[sheet_name][rng] = ([[cell.value for cell in row] for row in ws[rng]])
             except ValueError as e:
+                log = logging.getLogger(__name__)
+                log.error(str(e))
                 raise FunctionError("Requested range {0} is not correct.".format(rng.coord))
 
         self.result[self.NAMED_RANGES][name] = result
@@ -265,6 +272,8 @@ class WorksheetData(object):
         try:
             ws = self.wb[range["name"]]
         except KeyError as e:
+            log = logging.getLogger(__name__)
+            log.error(str(e))
             raise FunctionError("The sheet {} provided by user doesn't exist".format(range["name"]))
 
         # additional thing to do for read only sheets to make sure only necessary data is read
@@ -273,6 +282,8 @@ class WorksheetData(object):
         try:
             data = ws[range["top_left"]:range["bottom_right"]]
         except ValueError as e:
+            log = logging.getLogger(__name__)
+            log.error(str(e))
             raise FunctionError("The range coordinates {0},{1} provided by user are incorrect".
                       format(range["top_left"], range["bottom_right"]))
 
