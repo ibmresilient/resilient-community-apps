@@ -10,8 +10,8 @@ def config_section_data():
       when called by `resilient-circuits config [-c|-u]`
   """
   config_data = u"""[fn_joe_sandbox_analysis]
-    joe_sandbox_api_key=
-    joe_sandbox_analysis_url=https://jbxcloud.joesecurity.org/analysis
-    joe_sandbox_analysis_report_request_timeout=1800"""
+joe_sandbox_api_key=
+joe_sandbox_analysis_url=https://jbxcloud.joesecurity.org/analysis
+joe_sandbox_analysis_report_request_timeout=1800"""
 
   return config_data
