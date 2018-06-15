@@ -7,6 +7,7 @@ strings from the file.
 Also included in the package are two example workflows: 
 - Artifact file input
 - Attachment file input
+
 Both workflows create a task or incident note containing the list of
 decoded string extracted from the file. 
 
@@ -28,11 +29,13 @@ decoded string extracted from the file.
 
 3) Install fn_floss in "development mode":
 
-	$ pip install -e ./fn_floss/
+	$ pip install -e  ./fn_floss/
 
    or the distribution file can be installed using:
    
-    $ pip install fn_floss-<version>.tar.gz
+    ```
+	$ pip install fn_floss-<version>.tar.gz
+	```
 
 ## Setup
 
@@ -50,23 +53,23 @@ Then edit the [fn_floss] section to define the parameters to floss:
 floss_options=-q,-s,-n 5
 ```
 ## Customize
-Run: `resilient-circuits customize` to install function definition, message destination, sample workflows, and rules to the Resilient server. 
+To install function definition, message destination, sample workflows, and rules to the Resilient server:
 
+	$ resilient-circuits customize
+	
 This package includes the followings:
 
 	Functions:
 		- fn_floss
 
 	Sample Workflows that demostrate how to use fn_floss:
-	- Example Floss: Artifact input
-	- Eaxmple Floss: Attachment input
+		- Example Floss: Artifact input
+		- Example Floss: Attachment input
 
 	Sample rules that call the sample Workflows
 
-	Message destination
-
 ## Start
-Start this function with: 
+To start this function: 
 
 	$ resilient-circuits run
 
