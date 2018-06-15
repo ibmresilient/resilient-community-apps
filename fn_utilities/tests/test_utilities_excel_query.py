@@ -105,7 +105,7 @@ class TestWorksheetData:
         ("'Sheet1'!a10:B20", [{"name": "Sheet1", "top_left": "a10", "bottom_right": "B20"}]),
         ("'Sheet1'!a1:B20", [{"name": "Sheet1", "top_left": "a1", "bottom_right": "B20"}]),
         ("'Sheet1'!a10:B2", [{"name": "Sheet1", "top_left": "a10", "bottom_right": "B2"}]),
-        ("\"Sheet1\"!A1:B2, 'Sheet2'!A3", [{"name": "Sheet1", "top_left":"A1", "bottom_right": "B2"},
+        ("\"Sheet1\"!A1:B2, 'Sheet2'!A3", [{"name": "Sheet1", "top_left": "A1", "bottom_right": "B2"},
                                             {"name": "Sheet2", "top_left": "A3", "bottom_right": "A3"}]),
         ("Somethign! a1:b2, 'Correct.,; '!A1", [{"name":"Correct.,; ", "top_left": "A1", "bottom_right": "A1"}])
     ])
@@ -115,6 +115,41 @@ class TestWorksheetData:
         for match in range(len(expected_result)):
             for param in expected_result[match]:
                 assert param in result[match] and result[match][param] == expected_result[match][param]
+
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
+        ("data/excel_query/budget.xlsx", "", "test1", "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", "", ["test1"], "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", "", True, "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", False, "data/excel_query/test_cell_empty.dat"),
+    ])
+    def test_defined_ranges_different_inputs(self, path, ranges, defined_names, expected_result_path):
+        wb_path = os.path.join(os.path.dirname(__file__), path)
+        wb = WorksheetData(wb_path, {
+            "ranges": WorksheetData.parse_excel_notation(ranges),
+            "named_ranges": defined_names
+        })
+        wb.parse()
+        res_path = os.path.join(os.path.dirname(__file__), expected_result_path)
+        with open(res_path, 'r') as file:
+            expected = file.read()
+
+        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+
+    @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
+        ("data/excel_query/budget.xlsx", {}, "test2", "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", [{"name": "JAN 2015", "top_left": "A03", "bottom_right": "00A"}],
+            False, "data/excel_query/test_named_ranges.dat"),
+        ("data/excel_query/budget.xlsx", {}, ["test2"], "data/excel_query/test_named_ranges.dat")
+    ])
+    def test_defined_ranges_different_wrong_inputs(self, path, ranges, defined_names, expected_result_path):
+        wb_path = os.path.join(os.path.dirname(__file__), path)
+        wb = WorksheetData(wb_path, {
+            "ranges": ranges,
+            "named_ranges": defined_names
+        })
+        with pytest.raises((FunctionError_, FunctionException_)):
+            wb.parse_sheet_ranges(ranges)
+            wb.parse_named_ranges(defined_names)
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path",[
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3,", None, "data/excel_query/test_cell_empty.dat"),

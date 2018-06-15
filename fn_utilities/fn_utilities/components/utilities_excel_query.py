@@ -158,7 +158,7 @@ class WorksheetData(object):
         :param ranges: String
             string
         :return: List[object]
-            List of objects of a form {"sheet": "", "top_left": "", "bottom_right": ""}
+            List of objects of a form {"name": "", "top_left": "", "bottom_right": ""}
         """
         if ranges is None:
             ranges = ""
@@ -220,7 +220,7 @@ class WorksheetData(object):
                 self.parse_named_range(name)
         elif isinstance(named_ranges, str):
             self.parse_named_range(named_ranges)
-        elif isinstance(named_ranges, bool):
+        elif isinstance(named_ranges, bool) and named_ranges:
             for range in self.wb.defined_names.definedName:  # defined_names is a list of DefinedName objects
                 self.parse_named_range(range.name)
 
