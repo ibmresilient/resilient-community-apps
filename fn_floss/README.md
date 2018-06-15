@@ -20,17 +20,17 @@ decoded string extracted from the file.
 
 ## Installation
 1) Install Python vivisect package:
-
+    ```
 	$ pip install https://github.com/williballenthin/vivisect/zipball/master
-
+    ```
 2) Install Python floss package:
-
+    ```
 	$ pip install https://github.com/fireeye/flare-floss/zipball/master
-
+    ```
 3) Install fn_floss in "development mode":
-
+    ```
 	$ pip install -e  ./fn_floss/
-
+    ```
    or the distribution file can be installed using:
    
     ```
