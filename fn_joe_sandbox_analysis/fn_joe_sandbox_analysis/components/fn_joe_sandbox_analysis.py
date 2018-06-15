@@ -7,6 +7,7 @@ import os
 import jbxapi
 import time
 import tempfile
+import re
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -31,30 +32,42 @@ class FunctionComponent(ResilientComponent):
         
         def remove_temp_files(files):
           for f in files:
-            print "Removing ", f
             os.remove(f)
 
         def get_input_entity(client, incident_id, attachment_id, artifact_id):
           
+          re_uri_match_pattern = r"""(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?"""
           entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
 
           if (attachment_id):
             entity["id"] = attachment_id
             entity["type"] = "attachment"
             entity["meta_data"] = client.get("/incidents/{0}/attachments/{1}".format(entity["incident_id"], entity["id"]))
-            entity["data"] = client.get_content("/incidents/{}/attachments/{}/contents".format(entity["incident_id"], entity["id"]))
-            return entity
+            entity["data"] = client.get_content("/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], entity["id"]))
           
           elif (artifact_id):
             entity["id"] = artifact_id
+            entity["type"] = "artifact"
+            entity["meta_data"] = client.get("/incidents/{0}/artifacts/{1}".format(entity["incident_id"], entity["id"]))
+
+            # handle if artifact has attachment
+            if (entity["meta_data"]["attachment"]):
+              entity["data"] = client.get_content("/incidents/{0}/artifacts/{1}/contents".format(entity["incident_id"], entity["id"]))
+
+            # else handle if artifact.value contains an URI using RegEx
+            else:
+              match = re.match(re_uri_match_pattern, entity["meta_data"]["value"])
+
+              if (match):
+                entity["uri"] = match.group()
             
-            # entity["type"] = "artifact_file"
-            # entity["meta_uri"] = "/incidents/{}/attachments/{}".format(entity["incident_id"], attachment_id)
-            # entity["data_uri"] = "/incidents/{}/attachments/{}/contents".format(entity["incident_id"], attachment_id)
-            return entity
+              else:
+                raise FunctionError("Artifact has no attachment or supported URI")
           
           else:
             raise ValueError('attachment_id AND artifact_id both None')
+
+          return entity
         
         def write_temp_file(data, name=None):
           path = None
@@ -77,22 +90,19 @@ class FunctionComponent(ResilientComponent):
           sample_response = joesandbox.submit_sample(f)
           f.close()
           return sample_response["webids"][0]
+        
+        def submit_uri(joesandbox, uri):
+          sample_response = joesandbox.submit_sample_url(uri)
+          return sample_response["webids"][0]
 
         def get_sample_info(joesandbox, sample_webid):
           return joesandbox.info(sample_webid)
-          # return {"status": "submitted"}
 
         def should_timeout(ping_timeout, start_time):
           returnValue = (time.time() - start_time) > float(ping_timeout)
           return returnValue
 
         try:
-            log = logging.getLogger(__name__)
-            # log.info("incident_id: %s", incident_id)
-            # log.info("attachment_id: %s", attachment_id)
-            # log.info("artifact_id: %s", artifact_id)
-            # log.info("ping_delay: %s", ping_delay)
-
             # Check required inputs are defined
             incident_id = kwargs.get("incident_id")  # number (required)
             if not incident_id:
@@ -100,9 +110,8 @@ class FunctionComponent(ResilientComponent):
 
             # Check for ping_delay, else set to 30 seconds by default
             ping_delay = kwargs.get("ping_delay")  # number
-            # ping_delay = 5
             if not ping_delay:
-              ping_delay = 30
+              ping_delay = 120
 
             # Get optional inputs
             attachment_id = kwargs.get("attachment_id")  # number
@@ -128,23 +137,30 @@ class FunctionComponent(ResilientComponent):
             # id of the sample that gets returned from Joe Sandbox
             sample_webid = None
 
-            # Handle if entity is an attachment
-            if (entity["type"] == "attachment"):
+            # Handle if entity is an attachment or an artifact (with an attachmet)
+            if (entity["type"] == "attachment" or (entity["type"] == "artifact" and entity["data"] != None)):
               
               # Generate attachment name
-              attachment_name = "[{0}_{1}] - {2}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"])
+              sample_name = None
+
+              if(entity["type"] == "attachment"):
+                sample_name = "[{0}_{1}] - {2}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"])
               
+              else:
+                sample_name = "[{0}_{1}] - {2}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"])
+
               # Write to temp file
-              path = write_temp_file(entity["data"], attachment_name)
+              path = write_temp_file(entity["data"], sample_name)
               
               # Submit to Joe Sandbox
               yield StatusMessage("Submitting sample to Joe Sandbox")
               sample_webid = submit_file(joesandbox, path)
-              # sample_webid = 589069 #Clean
-              # sample_webid = 588566 #Dirty
+
+            elif (entity["type"] == "artifact" and entity["uri"] != None):
+              sample_webid = submit_uri(joesandbox, entity["uri"])
 
             # get the status of the sample
-            sample_info = get_sample_info(joesandbox, sample_webid)
+            sample_status = get_sample_info(joesandbox, sample_webid)
 
             # Get current time in seconds
             now = time.time()
@@ -152,18 +168,33 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Sample {} being analyized by Joe Sandbox".format(sample_webid))
 
             # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQEST_TIMEOUT in seconds has passed
-            while (sample_info["status"].lower() != "finished"):
+            while (sample_status["status"].lower() != "finished"):
               if (should_timeout(ANALYSIS_REPORT_REQEST_TIMEOUT, now)):
                 raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQEST_TIMEOUT))
               
-              yield StatusMessage("Analysis Status: {0}. Fetch every {1} seconds".format(sample_info["status"], ping_delay))
+              yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ping_delay))
               time.sleep(ping_delay)
-              sample_info = get_sample_info(joesandbox, sample_webid)
+              sample_status = get_sample_info(joesandbox, sample_webid)
 
             yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
             download = joesandbox.download(sample_webid, "pdf")
-            report_name = "js-report [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "pdf")
+            
+            # Generate report name
+            report_name = None
+
+            if (entity["type"] == "attachment"):
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "pdf")
+            
+            elif (entity["type"] == "artifact" and entity["data"] != None):
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], "pdf")
+            
+            elif (entity["type"] == "artifact" and entity["uri"] != None):
+              report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, "pdf")
+            
+            # Write temp file of report
             path = write_temp_file(download[1], report_name)
+            
+            # POST report as attachment to incident
             attachment_pdf_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype="application/pdf")
 
             yield StatusMessage("Upload of attachment complete")
@@ -172,11 +203,12 @@ class FunctionComponent(ResilientComponent):
                 "analysis_report_name": report_name,
                 "analysis_report_pdf_id": attachment_pdf_report["id"],
                 "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
-                "analysis_status": sample_info["runs"][0]["detection"]
+                "analysis_status": sample_status["runs"][0]["detection"]
             }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+
         except Exception:
             yield FunctionError()
         
