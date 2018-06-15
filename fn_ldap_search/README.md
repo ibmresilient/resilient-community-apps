@@ -19,7 +19,7 @@ This package requires that it is installed on a RHEL platform and that the resil
 Install this package with 'pip', or `python setup.py install`.
 To set the config values in the app.config file run `resilient-circuits config -u`.
 
-Config values example:
+Config values example 1:
 ```
 [fn_ldap_search]
 server=localhost
@@ -28,6 +28,32 @@ user=cn=admin,dc=example,dc=com
 password=admin
 auth=SIMPLE
 use_ssl=False
+connect_timeout=10
+```
+
+Config values example 2 (Active Directory):
+```
+[fn_ldap_search]
+server=adserver
+port=389
+user=mydomain\myuser
+password=mypass
+auth=SIMPLE
+use_ssl=False
+connect_timeout=10
+```
+
+Config values example 3 (Active Directory):
+```
+[fn_ldap_search]
+server=adserver
+port=389
+domain=mydomain
+user=myuser
+password=mypass
+auth=NTLM
+use_ssl=False
+connect_timeout=10
 ```
 
 Run with: `resilient-circuits run`.
@@ -40,7 +66,7 @@ will be replaced by the actual inputs.param value at time of execution.
 
 ```
 inputs.ldap_search_base = "dc=example,dc=com"
-inputs.ldap_search_filter = "(&(objectClass=person)(uid=%param%))"
+inputs.ldap_search_filter = "(&(objectClass=person)(uid=%ldap_param%))"
 inputs.ldap_search_attributes = "cn,sn,mail,telephoneNumber"
 inputs.ldap_param =  artifact.value
 ```
