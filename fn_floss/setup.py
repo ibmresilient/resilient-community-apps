@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 
 from setuptools import setup, find_packages
 
@@ -9,7 +10,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     description="Resilient Circuits Components for 'fn_floss'",
-    long_description="Resilient Circuits Components for 'fn_floss'",
+    long_description="fn_floss package contains a function that extracts obfuscated strings from a binary. Also included are workflows that call floss on artifact and attachment files and create a note containing the extracted strings.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'vivisect>=0.0.20170525',

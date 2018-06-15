@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 """Generate a default configuration-file section for fn_floss"""
 
 from __future__ import print_function
