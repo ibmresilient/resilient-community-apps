@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_joe_sandbox_analysis',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    description="Resilient Circuits Components for 'fn_joe_sandbox_analysis'",
-    long_description="Resilient Circuits Components for 'fn_joe_sandbox_analysis'",
+    license='MIT',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
+    description="Resilient Circuits Joe Sandbox Function",
+    long_description="Resilient Circuits Joe Sandbox Function",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'jbxapi'
