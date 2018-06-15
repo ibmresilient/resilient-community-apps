@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_joe_sandbox_analysis'",
     long_description="Resilient Circuits Components for 'fn_joe_sandbox_analysis'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'jbxapi'
     ],
     packages=find_packages(),
     include_package_data=True,
