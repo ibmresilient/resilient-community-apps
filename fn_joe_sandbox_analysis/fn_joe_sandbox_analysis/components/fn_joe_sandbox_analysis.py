@@ -7,7 +7,6 @@ import os
 import jbxapi
 import time
 import tempfile
-import thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -27,7 +26,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_joe_sandbox_analysis_function(self, event, *args, **kwargs):
         """Function: A function that allows an Attachment or Artifact (File/URL) to be analyzed by Joe Sandbox"""
         
-        # List to store created paths of temp files
+        # List to store paths of created temp files
         TEMP_FILES = []
         
         def remove_temp_files(files):
@@ -73,24 +72,19 @@ class FunctionComponent(ResilientComponent):
           fo.close()
           return path
 
-        # def read_temp_file(path):
-        #   content = None
-        #   fo = open(path, 'rb')
-        #   content = fo.read()
-        #   fo.close()
-        #   # with open(path, 'rb') as content_file:
-        #     # content = content_file.read()
-        #   return content
-
         def submit_file(joesandbox, path):
           f = open(path, "rb")
           sample_response = joesandbox.submit_sample(f)
           f.close()
           return sample_response["webids"][0]
 
-        def get_sample_info(webid):
-          return joesandbox.info(webid)
+        def get_sample_info(joesandbox, sample_webid):
+          return joesandbox.info(sample_webid)
           # return {"status": "submitted"}
+
+        def should_timeout(ping_timeout, start_time):
+          returnValue = (time.time() - start_time) > float(ping_timeout)
+          return returnValue
 
         try:
             log = logging.getLogger(__name__)
@@ -106,6 +100,7 @@ class FunctionComponent(ResilientComponent):
 
             # Check for ping_delay, else set to 30 seconds by default
             ping_delay = kwargs.get("ping_delay")  # number
+            # ping_delay = 5
             if not ping_delay:
               ping_delay = 30
 
@@ -113,9 +108,10 @@ class FunctionComponent(ResilientComponent):
             attachment_id = kwargs.get("attachment_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
 
-            # Get Joe Sandbox API Key and Analysis_URL from appconfig file
+            # Get Joe Sandbox API Key, Analysis_URL and PING_TIMEOUT from appconfig file
             API_KEY = self.options.get("joe_sandbox_api_key")
             ANALYSIS_URL = self.options.get("joe_sandbox_analysis_url")
+            ANALYSIS_REPORT_REQEST_TIMEOUT = self.options.get("joe_sandbox_analysis_report_request_timeout")
 
             # Set to True to agree with Joe Sandbox Terms and Conditions.
             ACCEPT_TAC = True
@@ -129,21 +125,54 @@ class FunctionComponent(ResilientComponent):
             # Get entity we are dealing with (either attachment or artifact)
             entity = get_input_entity(client, incident_id, attachment_id, artifact_id)
 
+            # id of the sample that gets returned from Joe Sandbox
             sample_webid = None
 
+            # Handle if entity is an attachment
             if (entity["type"] == "attachment"):
+              
+              # Generate attachment name
               attachment_name = "[{0}_{1}] - {2}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"])
+              
+              # Write to temp file
               path = write_temp_file(entity["data"], attachment_name)
-              # sample_webid = submit_file(joesandbox, path)
-              sample_webid = 589069
+              
+              # Submit to Joe Sandbox
+              yield StatusMessage("Submitting sample to Joe Sandbox")
+              sample_webid = submit_file(joesandbox, path)
+              # sample_webid = 589069 #Clean
+              # sample_webid = 588566 #Dirty
 
-            sample_info = get_sample_info(sample_webid)
-            print sample_info
+            # get the status of the sample
+            sample_info = get_sample_info(joesandbox, sample_webid)
 
-            thread
+            # Get current time in seconds
+            now = time.time()
+            
+            yield StatusMessage("Sample {} being analyized by Joe Sandbox".format(sample_webid))
+
+            # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQEST_TIMEOUT in seconds has passed
+            while (sample_info["status"].lower() != "finished"):
+              if (should_timeout(ANALYSIS_REPORT_REQEST_TIMEOUT, now)):
+                raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQEST_TIMEOUT))
+              
+              yield StatusMessage("Analysis Status: {0}. Fetch every {1} seconds".format(sample_info["status"], ping_delay))
+              time.sleep(ping_delay)
+              sample_info = get_sample_info(joesandbox, sample_webid)
+
+            yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
+            download = joesandbox.download(sample_webid, "pdf")
+            report_name = "js-report [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "pdf")
+            path = write_temp_file(download[1], report_name)
+            attachment_pdf_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype="application/pdf")
+
+            yield StatusMessage("Upload of attachment complete")
 
             results = {
-                "value": "xyz"
+                "analysis_report_name": report_name,
+                "analysis_report_pdf_id": attachment_pdf_report["id"],
+                "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
+                "analysis_status": sample_info["runs"][0]["detection"]
             }
 
             # Produce a FunctionResult with the results
