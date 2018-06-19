@@ -120,10 +120,8 @@ class FunctionComponent(ResilientComponent):
             # Get Joe Sandbox API Key, Analysis_URL and PING_TIMEOUT from appconfig file
             API_KEY = self.options.get("joe_sandbox_api_key")
             ANALYSIS_URL = self.options.get("joe_sandbox_analysis_url")
-            ANALYSIS_REPORT_REQEST_TIMEOUT = self.options.get("joe_sandbox_analysis_report_request_timeout")
-
-            # Set to True to agree with Joe Sandbox Terms and Conditions.
-            ACCEPT_TAC = True
+            ANALYSIS_REPORT_REQUEST_TIMEOUT = self.options.get("joe_sandbox_analysis_report_request_timeout")
+            ACCEPT_TAC = self.options.get("joe_sandbox_analysus_accept_tac") == "True"
 
             # Instansiate new Joe Sandbox object
             joesandbox = jbxapi.JoeSandbox(apikey=API_KEY, accept_tac=ACCEPT_TAC)
@@ -167,10 +165,10 @@ class FunctionComponent(ResilientComponent):
             
             yield StatusMessage("Sample {} being analyized by Joe Sandbox".format(sample_webid))
 
-            # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQEST_TIMEOUT in seconds has passed
+            # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQUEST_TIMEOUT in seconds has passed
             while (sample_status["status"].lower() != "finished"):
-              if (should_timeout(ANALYSIS_REPORT_REQEST_TIMEOUT, now)):
-                raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQEST_TIMEOUT))
+              if (should_timeout(ANALYSIS_REPORT_REQUEST_TIMEOUT, now)):
+                raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQUEST_TIMEOUT))
               
               yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ping_delay))
               time.sleep(ping_delay)
