@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(result)
         except Exception as e:
             log.error(str(e))
-            raise FunctionError("An error occurred.")
+            yield FunctionError("A function error occurred.")
 
     def _get_attachment_binary(self, task_id, incident_id, attachment_id):
         """
