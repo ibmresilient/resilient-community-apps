@@ -3,7 +3,7 @@
 """Function implementation"""
 
 import logging
-import json
+import sys
 import html2text
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -28,6 +28,7 @@ class FunctionComponent(ResilientComponent):
     @function("fn_watson_translate")
     def _fn_watson_translate_function(self, event, *args, **kwargs):
         """Function: translates input text to a target language"""
+        log = logging.getLogger(__name__)
         try:
             language_translator = LanguageTranslatorV3(
                 iam_api_key=self.options["fn_watson_translate_api"],
@@ -46,7 +47,6 @@ class FunctionComponent(ResilientComponent):
             # get rid of the HTML tags that notes can have.
             source_text = html2text.html2text(source_text)
 
-            log = logging.getLogger(__name__)
             log.info("source_lang: %s", source_lang)
             log.info("target_lang: %s", target_lang)
             log.info("source_text: %s", source_text)
@@ -65,21 +65,25 @@ class FunctionComponent(ResilientComponent):
                     target=target_lang
                 )
             except WatsonApiException as e:
-                # log.error(str(e))
-                print("I've been here for sure")
-                raise FunctionError("First Watson error caught")
+                # if it couldn't be translated, return this message
+                log.error(str(e))
+                # yield FunctionResult({"value": "Couldn't translate from {} to {}".format(source_lang, target_lang),
+                #                       "confidence": confidence})
+                # return
+                raise FunctionError("Couldn't translate the text.")
+
             if len(translation['translations']) == 0:
                 raise FunctionError("Wasn't translated.")
             yield StatusMessage("Finished translating.")
-
             results = {
-                "value": translation.get('translations')[0].get('translation')
+                "value": translation["translations"][0]["translation"],
+                "confidence": confidence
             }
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log = logging.getLogger(__name__)
             log.error(str(e))
+            print(sys.exc_info())
             raise FunctionError("An error occurred, check out logs for details.")
 
     def _identify_language(self, text, language_translator):

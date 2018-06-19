@@ -3,6 +3,13 @@
 
 from __future__ import print_function
 import pytest
+
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
+
+from watson_developer_cloud import LanguageTranslatorV3
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -35,13 +42,20 @@ class TestFnWatsonTranslate:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("source_lang, target_lang, source_text, expected_results", [
-        ("text", "text", "text", {"value": "xyz"}),
-        ("text", "text", "text", {"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, source_lang, target_lang, source_text, expected_results):
+    @patch("watson_developer_cloud.LanguageTranslatorV3")
+    @pytest.mark.parametrize("source_lang, target_lang, source_text, expected_results, translate_value, identify_value",
+                             [
+                                 ("us", "text", "text", {"value": "k", "confidence": 1}, {"translations":[{"translation":"k"}]}, "uk"),
+                                 ("us", "text", "text", {"value": "k", "confidence": 1}, {"translations":[{"translation":"k"}]}, "uk"),
+                             ])
+    def test_success(self, translator, circuits_app, source_lang, target_lang, source_text, expected_results,
+                     translate_value, identify_value):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        translator.return_value = translator
+        translator.translate.return_value = translate_value
+        translator.identify.return_value = identify_value
+        print(translator)
+        function_params = {
             "source_lang": source_lang,
             "target_lang": target_lang,
             "source_text": source_text
