@@ -104,28 +104,31 @@ class FunctionComponent(ResilientComponent):
           return returnValue
 
         try:
-            # Check required inputs are defined
-            incident_id = kwargs.get("incident_id")  # number (required)
-            if not incident_id:
-              raise ValueError('incident_id is required')
-
-            # Check for ping_delay, else set to 30 seconds by default
-            ping_delay = kwargs.get("ping_delay")  # number
-            if not ping_delay:
-              ping_delay = 120
-
-            # Get optional inputs
-            attachment_id = kwargs.get("attachment_id")  # number
-            artifact_id = kwargs.get("artifact_id")  # number
 
             # Get Joe Sandbox API Key, Accept TAC, Analysis_URL, PING_TIMEOUT HTTP/HTTPS Proxy details from appconfig file
             API_KEY = self.options.get("jsb_api_key")
             ACCEPT_TAC = self.options.get("jsb_accept_tac") == "True"
             ANALYSIS_URL = self.options.get("jsb_analysis_url")
+            ANALYSIS_REPORT_DEFAULT_PING_DELAY = int(self.options.get("jsb_analysis_report_default_ping_delay"))
             ANALYSIS_REPORT_REQUEST_TIMEOUT = self.options.get("jsb_analysis_report_request_timeout")
             HTTP_PROXY = self.options.get("jsb_http_proxy")
             HTTPS_PROXY = self.options.get("jsb_https_proxy")
 
+            # Check required inputs are defined
+            incident_id = kwargs.get("incident_id")  # number (required)
+            if not incident_id:
+              raise ValueError('incident_id is required')
+
+            # Check for ping_delay, else set to ANALYSIS_REPORT_DEFAULT_PING_DELAY
+            ping_delay = kwargs.get("ping_delay")  # number
+            if not ping_delay:
+              ping_delay = ANALYSIS_REPORT_DEFAULT_PING_DELAY
+
+            # Get optional inputs
+            attachment_id = kwargs.get("attachment_id")  # number
+            artifact_id = kwargs.get("artifact_id")  # number
+
+            # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
             if (HTTP_PROXY):
@@ -166,10 +169,11 @@ class FunctionComponent(ResilientComponent):
               
               # Submit to Joe Sandbox
               yield StatusMessage("Submitting sample to Joe Sandbox")
-              sample_webid = submit_file(joesandbox, path)
+              # sample_webid = submit_file(joesandbox, path)
 
             elif (entity["type"] == "artifact" and entity["uri"] != None):
-              sample_webid = submit_uri(joesandbox, entity["uri"])
+              yield StatusMessage("Submitting sample to Joe Sandbox")              
+              # sample_webid = submit_uri(joesandbox, entity["uri"])
 
             # get the status of the sample
             sample_status = get_sample_info(joesandbox, sample_webid)
