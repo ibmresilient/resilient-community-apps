@@ -175,31 +175,31 @@ class FunctionComponent(ResilientComponent):
               sample_status = get_sample_info(joesandbox, sample_webid)
 
             yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
-            download = joesandbox.download(sample_webid, "pdf")
+            download = joesandbox.download(sample_webid, "html")
             
             # Generate report name
             report_name = None
 
             if (entity["type"] == "attachment"):
-              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "pdf")
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "html")
             
             elif (entity["type"] == "artifact" and entity["data"] != None):
-              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], "pdf")
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], "html")
             
             elif (entity["type"] == "artifact" and entity["uri"] != None):
-              report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, "pdf")
+              report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, "html")
             
             # Write temp file of report
             path = write_temp_file(download[1], report_name)
             
             # POST report as attachment to incident
-            attachment_pdf_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype="application/pdf")
+            attachment_html_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype="text/html")
 
             yield StatusMessage("Upload of attachment complete")
 
             results = {
                 "analysis_report_name": report_name,
-                "analysis_report_pdf_id": attachment_pdf_report["id"],
+                "analysis_report_pdf_id": attachment_html_report["id"],
                 "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
                 "analysis_status": sample_status["runs"][0]["detection"]
             }
