@@ -9,6 +9,9 @@ from __future__ import print_function
 import logging
 import datetime
 import re
+import os
+import json
+
 try:
     from urllib.parse import urlparse, quote_plus
 except:
@@ -256,3 +259,42 @@ def is_none(param):
         return True
     else:
         return False
+
+def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_execution_time):
+    """"Create an attachment and post to Resilient platform.
+
+    :param func_ref: Resilient Function instance reference
+    :param func_name: Resilient Function name
+    :param artifact_value: Resilient artifact value
+    :param params: Resilient Function parameters dictionary
+    :param rtn: Result returned from external source
+    :param query_execution_time: External time of query
+    :return att_report: Updated attachment report dictionary
+
+    """
+    file_name = func_name + " [{0} {1}] - [{2}].txt" \
+        .format(params['artifact_type'], artifact_value, query_execution_time)
+
+    try:
+        rest_client = func_ref.rest_client()
+
+        # Create the temporary file save results in json format.
+        with open(file_name, 'w') as outfile:
+            json.dump(rtn, outfile)
+
+        # Post file to Resilient
+        att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),
+                                                      file_name,
+                                                      file_name,
+                                                      "text/plain",
+                                                      "")
+        LOG.info("New attachment added to incident %s", params["incident_id"])
+
+        # Delete the temporary file.
+        os.remove(file_name)
+
+    except Exception as ex:
+        LOG.error(ex)
+        raise ex
+
+    return att_report
