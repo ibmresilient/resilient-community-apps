@@ -117,14 +117,27 @@ class FunctionComponent(ResilientComponent):
             attachment_id = kwargs.get("attachment_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
 
-            # Get Joe Sandbox API Key, Analysis_URL and PING_TIMEOUT from appconfig file
-            API_KEY = self.options.get("joe_sandbox_api_key")
-            ANALYSIS_URL = self.options.get("joe_sandbox_analysis_url")
-            ANALYSIS_REPORT_REQUEST_TIMEOUT = self.options.get("joe_sandbox_analysis_report_request_timeout")
-            ACCEPT_TAC = self.options.get("joe_sandbox_analysus_accept_tac") == "True"
+            # Get Joe Sandbox API Key, Accept TAC, Analysis_URL, PING_TIMEOUT HTTP/HTTPS Proxy details from appconfig file
+            API_KEY = self.options.get("jsb_api_key")
+            ACCEPT_TAC = self.options.get("jsb_accept_tac") == "True"
+            ANALYSIS_URL = self.options.get("jsb_analysis_url")
+            ANALYSIS_REPORT_REQUEST_TIMEOUT = self.options.get("jsb_analysis_report_request_timeout")
+            HTTP_PROXY = self.options.get("jsb_http_proxy")
+            HTTPS_PROXY = self.options.get("jsb_https_proxy")
+
+            proxies = {}
+
+            if (HTTP_PROXY):
+              proxies["HTTP"] = HTTP_PROXY
+            
+            if (HTTPS_PROXY):
+              proxies["HTTPS"] = HTTPS_PROXY
+            
+            if (len(proxies) == 0):
+              proxies = None
 
             # Instansiate new Joe Sandbox object
-            joesandbox = jbxapi.JoeSandbox(apikey=API_KEY, accept_tac=ACCEPT_TAC)
+            joesandbox = jbxapi.JoeSandbox(apikey=API_KEY, accept_tac=ACCEPT_TAC, proxies=proxies)
 
             # Instansiate new Resilient API object
             client = self.rest_client()
