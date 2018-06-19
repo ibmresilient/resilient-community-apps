@@ -35,16 +35,17 @@ class TestFnJoeSandboxAnalysis:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, attachment_id, artifact_id, ping_delay, expected_results", [
-        (123, 123, 123, 123, {"value": "xyz"}),
-        (123, 123, 123, 123, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, attachment_id, artifact_id, jsb_report_type, ping_delay, expected_results", [
+        (123, 123, 123, 'json', 123, {"value": "xyz"}),
+        (123, 123, 123, 'json', 123, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, attachment_id, artifact_id, ping_delay, expected_results):
+    def test_success(self, circuits_app, incident_id, attachment_id, artifact_id, jsb_report_type, ping_delay, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
             "attachment_id": attachment_id,
             "artifact_id": artifact_id,
+            "jsb_report_type": jsb_report_type,
             "ping_delay": ping_delay
         }
         results = call_fn_joe_sandbox_analysis_function(circuits_app, function_params)

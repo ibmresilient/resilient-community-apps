@@ -30,6 +30,9 @@ class FunctionComponent(ResilientComponent):
         
         # List to store paths of created temp files
         TEMP_FILES = []
+
+        # Dict to reference related mimetype
+        MIMETYPES = {"pdf": "application/pdf", "json": "application/json", "html": "text/html"}
         
         def remove_temp_files(files):
           for f in files:
@@ -117,7 +120,11 @@ class FunctionComponent(ResilientComponent):
             # Check required inputs are defined
             incident_id = kwargs.get("incident_id")  # number (required)
             if not incident_id:
-              raise ValueError('incident_id is required')
+              raise ValueError("incident_id is required")
+            
+            jsb_report_type = kwargs.get("jsb_report_type")["name"]  # select (required)
+            if not jsb_report_type:
+              raise ValueError("jsb_report_type is required")
 
             # Check for ping_delay, else set to ANALYSIS_REPORT_DEFAULT_PING_DELAY
             ping_delay = kwargs.get("ping_delay")  # number
@@ -169,11 +176,11 @@ class FunctionComponent(ResilientComponent):
               
               # Submit to Joe Sandbox
               yield StatusMessage("Submitting sample to Joe Sandbox")
-              # sample_webid = submit_file(joesandbox, path)
+              sample_webid = submit_file(joesandbox, path)
 
             elif (entity["type"] == "artifact" and entity["uri"] != None):
-              yield StatusMessage("Submitting sample to Joe Sandbox")              
-              # sample_webid = submit_uri(joesandbox, entity["uri"])
+              yield StatusMessage("Submitting sample to Joe Sandbox")
+              sample_webid = submit_uri(joesandbox, entity["uri"])
 
             # get the status of the sample
             sample_status = get_sample_info(joesandbox, sample_webid)
@@ -193,31 +200,31 @@ class FunctionComponent(ResilientComponent):
               sample_status = get_sample_info(joesandbox, sample_webid)
 
             yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
-            download = joesandbox.download(sample_webid, "html")
+            download = joesandbox.download(sample_webid, jsb_report_type)
             
             # Generate report name
             report_name = None
 
             if (entity["type"] == "attachment"):
-              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], "html")
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], jsb_report_type)
             
             elif (entity["type"] == "artifact" and entity["data"] != None):
-              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], "html")
+              report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], jsb_report_type)
             
             elif (entity["type"] == "artifact" and entity["uri"] != None):
-              report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, "html")
+              report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, jsb_report_type)
             
             # Write temp file of report
             path = write_temp_file(download[1], report_name)
             
             # POST report as attachment to incident
-            attachment_html_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype="text/html")
+            jsb_analysis_report = client.post_attachment('/incidents/{}/attachments'.format(incident_id), path, mimetype=MIMETYPES[jsb_report_type])
 
             yield StatusMessage("Upload of attachment complete")
 
             results = {
                 "analysis_report_name": report_name,
-                "analysis_report_pdf_id": attachment_html_report["id"],
+                "analysis_report_pdf_id": jsb_analysis_report["id"],
                 "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
                 "analysis_status": sample_status["runs"][0]["detection"]
             }
