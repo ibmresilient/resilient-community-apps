@@ -70,16 +70,22 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting...")
             res = None
+            res_type = None
             process_result = {}
             params = {"resource": umbinv_resource.strip()}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_res" not in process_result:
+            if "_res" not in process_result or "_res_type" not in process_result:
                 raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
             else:
                 res = process_result.pop("_res")
+                res_type = process_result.pop("_res_type")
+
+            if res_type != "domain_name" and res_type != "ip_address" and res_type != "url":
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
+                                 "an 'ip address' or a 'url'.".format(res_type))
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
@@ -102,8 +108,10 @@ class FunctionComponent(ResilientComponent):
                     except ValueError:
                         yield FunctionError('timestamp value incorrectly specified')
                 # Add  "query_execution_time" to result to facilitate post-processing.
-                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": params["resource"],
+                results = {"timeline": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'thread_grid_samples' results for resource '{}'.".format(res))
+
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

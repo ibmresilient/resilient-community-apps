@@ -90,6 +90,8 @@ class FunctionComponent(ResilientComponent):
                 # Add  "query_execution_time" and "ip_address" to result to facilitate post-processing.
                 results = {"latest_malicious_domains": json.loads(json.dumps(rtn)), "ip_address": ipaddr,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'latest_malicious_domains' results for ip address '{}'.".format(ipaddr))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

@@ -26,29 +26,17 @@ class FunctionComponent(ResilientComponent):
     An example of a set of query parameter might look like the following:
 
             umbinv_domain = "cosmos.furnipict.com"
-            umbinv_classifiers_endpoint = "classifiers"
 
     The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
     JSON format similar to the following.
 
 
         {'domain_name': 'cosmos.furnipict.com',
-         'query_execution_time': '2018-05-02 15:59:14'
-         'classifiers_classifiers': {u'securityCategories': [u'Malware'],
-                                     u'attacks': [u'Neutrino'],
-                                     u'threatTypes': [u'Exploit Kit']},
+         'query_execution_time': '2018-06-18 11:53:01'
+         'classifiers_info': {u'first_queried_converted': u'2016-11-18 19:16:00', u'firstQueried': 1479496560000},
+         'classifiers_classifiers': {u'securityCategories': [u'Malware'], u'attacks': [u'Neutrino'],
+                                     u'threatTypes': [u'Exploit Kit']}
         }
-
-    Also for:
-
-            umbinv_domain = "cosmos.furnipict.com"
-            umbinv_classifiers_endpoint = "info"
-
-
-        {'classifiers_info': {u'firstQueried': 1479496560000},
-         'domain_name': 'cosmos.furnipict.com',
-         'query_execution_time': '2018-05-02 16:03:15'
-         }
     """
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -68,24 +56,18 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_domain = kwargs.get("umbinv_domain") # text
-            umbinv_classifiers_endpoint = self.get_select_param(kwargs.get("umbinv_classifiers_endpoint"))  # select, values: "classifiers", "info"
 
             log = logging.getLogger(__name__)
 
             log.info("umbinv_domain: %s", umbinv_domain)
-            log.info("umbinv_classifiers_endpoint: %s", umbinv_classifiers_endpoint)
-
 
             if is_none(umbinv_domain):
                 raise ValueError("Required parameter 'umbinv_domain' not set.")
 
-            if is_none(umbinv_classifiers_endpoint):
-                raise ValueError("Required parameter 'umbinv_classifiers_endpoint' not set.")
-
             yield StatusMessage("Starting...")
             domain = None
             process_result = {}
-            params = {"domain": umbinv_domain.strip(), "classifiers_endpoint": umbinv_classifiers_endpoint}
+            params = {"domain": umbinv_domain.strip()}
 
             validate_params(params)
             process_params(params, process_result)
@@ -100,18 +82,44 @@ class FunctionComponent(ResilientComponent):
             rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if (umbinv_classifiers_endpoint == "classifiers"):
-                # Add metadata of "query_execution_time", "min_id" and "max_id" keys to make it easier in post-processing.
-                rtn = rinv.classifiers_classifiers(domain)
-                query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                results = {"classifiers_classifiers": json.loads(json.dumps(rtn)), "domain_name": domain,
-                           "query_execution_time": query_execution_time}
-            elif (umbinv_classifiers_endpoint == "info"):
-                rtn = rinv.classifiers_info(domain)
-                query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"classifiers_info": json.loads(json.dumps(rtn)), "domain_name": domain,
-                           "query_execution_time": query_execution_time}
+            classifiers_res = True
+            info_res = True
+            # Run against 'classifiers' endpoint
+            rtn_classifiers = rinv.classifiers_classifiers(domain)
+            # Run against 'info' endpoint
+            rtn_info = rinv.classifiers_info(domain)
+            query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+            if ("securityCategories" in rtn_classifiers and not rtn_classifiers["securityCategories"]) and \
+                    ("attacks" in rtn_classifiers and not rtn_classifiers["attacks"]) and \
+                    ("threatTypes" in rtn_classifiers and not rtn_classifiers["threatTypes"]):
+                classifiers_res = False
+
+            if "firstQueried" in rtn_info and rtn_info["firstQueried"] is None:
+                info_res = False
+            else:
+                # Make 'firstQueried' more readable
+                fq = rtn_info["firstQueried"]
+                try:
+                    secs = int(fq) / 1000
+                    fq_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                    rtn_info["first_queried_converted"] = fq_readable
+                except ValueError:
+                    yield FunctionError('timestamp value incorrectly specified')
+
+            if not classifiers_res and not info_res:
+                log.debug(json.dumps(rtn_classifiers))
+                log.debug(json.dumps(rtn_info))
+                results = {}
+                yield StatusMessage("No Results returned for domain '{}'.".format(domain))
+            else:
+                # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
+                results = {"classifiers_classifiers": json.loads(json.dumps(rtn_classifiers)),
+                            "classifiers_info": json.loads(json.dumps(rtn_info)),
+                            "domain_name": domain,
+                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'classifiers and info' results for domain '{}'.".format(domain))
+
             yield StatusMessage("done...")
 
             log.debug(json.dumps(results))

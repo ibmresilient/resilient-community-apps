@@ -1,11 +1,11 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Test fn_utilities.component.utilities_binary_to_string_list utility helper functions"""
+"""Test fn_floss.component.function_floss utility helper functions"""
 #
-#   Unit test for binary_to_string_list utility helper functions
+#   Unit test for fn_floss utility helper functions
 #
 import tempfile
 from floss import main
-from fn_utilities.lib.utilities_binary_to_string_list_util import get_binary_data_from_file, get_floss_params, extract_strings, call_floss
+from fn_floss.lib.floss_util import get_binary_data_from_file, get_floss_params, extract_strings, call_floss
 from mock import Mock
 from mock import patch
 
@@ -76,7 +76,7 @@ def test_call_floss(mocked_floss):
                 assert True
 
 
-@patch("fn_utilities.lib.utilities_binary_to_string_list_util.call_floss")
+@patch("fn_floss.lib.floss_util.call_floss")
 def test_extract_strings(mocked_floss):
     list_expected = ["these", "strings", "might", "found", "floss"]
     mocked_floss.return_value = list_expected

@@ -258,7 +258,7 @@ class TestWorksheetData:
     ])
     def test_no_arguments_fails(self, path, ranges, defined_names, expected_result_path):
         # Test that wrong input raises a FunctionError
-        with pytest.raises( (FunctionException_, FunctionError_) ):
+        with pytest.raises((FunctionException_, FunctionError_)):
             wb_path = os.path.join(os.path.dirname(__file__), path)
             wb = WorksheetData(wb_path, {
                 "ranges": WorksheetData.parse_excel_notation(ranges),

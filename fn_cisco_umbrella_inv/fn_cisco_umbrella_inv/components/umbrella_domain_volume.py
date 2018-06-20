@@ -121,6 +121,8 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             results = {"domain_volume": json.loads(json.dumps(rtn)), "domain_name": domain,
                        "query_execution_time": query_execution_time}
+            yield StatusMessage("Returning 'domain_volume' results for domain '{}'.".format(domain))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

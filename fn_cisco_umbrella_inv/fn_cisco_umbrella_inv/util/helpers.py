@@ -9,6 +9,9 @@ from __future__ import print_function
 import logging
 import datetime
 import re
+import os
+import json
+
 try:
     from urllib.parse import urlparse, quote_plus
 except:
@@ -133,26 +136,7 @@ def validate_params(params):
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v) and not validate_emails(v) \
                     and not validate_asn(v):
-                raise ValueError("Invalid value or type for function parameter 'resource'.")
-        if re.match("^resource", k) and IP_PATTERN.match(v):
-            if "resource_type" in params and params["resource_type"] != "ip_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
-            if "as_type" in params and params["as_type"] != "ip_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
-        if re.match("^resource", k) and validate_domains(v):
-            if "resource_type" in params and params["resource_type"] != "domain_name":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
-            if "whois_type" in params and (params["whois_type"] != "domain_name" and params["whois_type"] != "nameserver"):
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
-        if re.match("^resource", k) and validate_url(v):
-            if "resource_type" in params and params["resource_type"] != "url":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["resource_type"]))
-        if re.match("^resource", k) and validate_emails(v):
-            if "whois_type" in params and params["whois_type"] != "email_address":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["whois_type"]))
-        if re.match("^resource", k) and validate_asn(v):
-            if "as_type" in params and params["as_type"] != "as_number":
-                raise ValueError("Invalid value for function parameter 'resource', should be type '{}'.".format(params["as_type"]))
+                raise ValueError("Invalid value for function parameter 'resource'.")
         # Domain name and name server should be in similar format use same validator.
         if re.match("^domain", k) and v is not None and not validate_domains(v):
             raise ValueError("Invalid value for function parameter '{}'.".format(k))
@@ -215,9 +199,18 @@ def process_params(params, process_result):
                     or validate_asn(v):
                 # Assume "resource" param is a domain name, nameserver, ip address, email address or asn.
                 process_result["_res"] = str(v)
+                if IP_PATTERN.match(v):
+                    process_result["_res_type"] = "ip_address"
+                elif validate_domains(v):
+                    process_result["_res_type"] = "domain_name"
+                elif validate_emails(v):
+                    process_result["_res_type"] = "email_address"
+                elif validate_asn(v):
+                    process_result["_res_type"] = "as_number"
             elif validate_url(v):
                 # Assume "resource" param is a url.
                 process_result["_res"] = quote_plus(v)
+                process_result["_res_type"] = "url"
         if (re.match("^domain", k)) and v is not None:
             set_result(process_result, k, v)
         if (re.match("^ipaddr$", k)) and v is not None:
@@ -266,3 +259,42 @@ def is_none(param):
         return True
     else:
         return False
+
+def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_execution_time):
+    """"Create an attachment and post to Resilient platform.
+
+    :param func_ref: Resilient Function instance reference
+    :param func_name: Resilient Function name
+    :param artifact_value: Resilient artifact value
+    :param params: Resilient Function parameters dictionary
+    :param rtn: Result returned from external source
+    :param query_execution_time: External time of query
+    :return att_report: Updated attachment report dictionary
+
+    """
+    file_name = func_name + " [{0} {1}] - [{2}].txt" \
+        .format(params['artifact_type'], artifact_value, query_execution_time)
+
+    try:
+        rest_client = func_ref.rest_client()
+
+        # Create the temporary file save results in json format.
+        with open(file_name, 'w') as outfile:
+            json.dump(rtn, outfile)
+
+        # Post file to Resilient
+        att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),
+                                                      file_name,
+                                                      file_name,
+                                                      "text/plain",
+                                                      "")
+        LOG.info("New attachment added to incident %s", params["incident_id"])
+
+        # Delete the temporary file.
+        os.remove(file_name)
+
+    except Exception as ex:
+        LOG.error(ex)
+        raise ex
+
+    return att_report

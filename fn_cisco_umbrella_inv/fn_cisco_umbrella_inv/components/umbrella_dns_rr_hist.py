@@ -16,7 +16,8 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_umbrella_inv.util.resilient_inv import ResilientInv
-from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none
+from fn_cisco_umbrella_inv.util.helpers import validate_opts, validate_params, process_params, is_none, \
+    create_attachment
 
 
 class FunctionComponent(ResilientComponent):
@@ -77,32 +78,49 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_resource = kwargs.get("umbinv_resource")  # text
-            umbinv_resource_type = self.get_select_param(kwargs.get("umbinv_resource_type"))  # select, values: "domain_name", "ip_address", "url"
             umbinv_dns_type = self.get_select_param(kwargs.get("umbinv_dns_type"))  # select, values: "A", "NS", "MX", "TXT", "CNAME"
+            incident_id = kwargs.get("incident_id")  # number
+            artifact_type = kwargs.get("artifact_type")  # text
 
             log = logging.getLogger(__name__)
             log.info("umbinv_resource: %s", umbinv_resource)
             log.info("umbinv_dns_type: %s", umbinv_dns_type)
+            log.info("incident_id: %s", incident_id)
+            log.info("artifact_type: %s", artifact_type)
 
             if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            if is_none(umbinv_resource_type):
-                raise ValueError("Required parameter 'umbinv_resource_type' not set")
+            if is_none(umbinv_dns_type):
+                raise ValueError("Required parameter 'umbinv_dns_type' not set")
+
+            if is_none(incident_id):
+                raise ValueError("Required parameter 'incident_id' not set")
+
+            if is_none(artifact_type):
+                raise ValueError("Required parameter 'artifa7ct_type' not set")
 
             yield StatusMessage("Starting...")
             res = None
+            res_type = None
             process_result = {}
-            params = {"resource": umbinv_resource.strip(), "dns_type": umbinv_dns_type,
-                      "resource_type": umbinv_resource_type}
+            func_name = event.name
+
+            params = {"resource": umbinv_resource.strip(), "dns_type": umbinv_dns_type, "incident_id": incident_id,
+                      "artifact_type": artifact_type}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_res" not in process_result:
+            if "_res" not in process_result or "_res_type" not in process_result:
                 raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
             else:
                 res = process_result.pop("_res")
+                res_type = process_result.pop("_res_type")
+
+            if res_type != "domain_name" and res_type != "ip_address":
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
+                                 "or an 'ip address'.".format(res_type))
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
@@ -117,10 +135,21 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("No Results returned for resource '{}' with query type '{}'."
                                     .format(res, umbinv_dns_type))
                 results = {}
+            elif ("rrs" in rtn and len(rtn["rrs"]) > int(self.options.get("results_limit", "20"))) \
+                    or ("rrs_tf" in rtn and len(rtn["rrs_tf"]) > int(self.options.get("results_limit", "20"))):
+
+                att_report = create_attachment(self, func_name, res, params, rtn, query_execution_time)
+                # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
+                results = {"over_limit": True, "resource_name": res, "att_name": att_report["name"],
+                           "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'dns_rr_history' results for resource '{0}' as attachment: {1} ."
+                                    .format(res,att_report["name"]))
             else:
                 # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
                 results = {"dns_rr_history": json.loads(json.dumps(rtn)), "resource_name": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'dns_rr_history' results for resource '{}'.".format(res))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

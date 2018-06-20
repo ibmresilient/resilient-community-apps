@@ -103,6 +103,8 @@ class FunctionComponent(ResilientComponent):
                 # Add "query_execution_time" and "domain_name" to result to facilitate post-processing.
                 results = {"related_domains": json.loads(json.dumps(rtn)), "domain_name": domain,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'related_domains' results for domain '{}'.".format(domain))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

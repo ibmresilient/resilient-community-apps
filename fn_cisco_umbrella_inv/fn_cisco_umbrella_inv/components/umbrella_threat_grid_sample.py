@@ -171,7 +171,9 @@ class FunctionComponent(ResilientComponent):
                 # Add "query_execution_time" and "hash" key to result to facilitate post-processing.
                 results = {result_header: json.loads(json.dumps(rtn)), "hash": hash,
                            "query_execution_time": query_execution_time}
-                yield StatusMessage("Done...")
+                yield StatusMessage("Returning '{}' results for hash '{}'.".format(result_header, hash))
+
+            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

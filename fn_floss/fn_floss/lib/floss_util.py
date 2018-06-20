@@ -42,10 +42,11 @@ def get_floss_params(str_floss_options, filename):
 
 def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
     """Helper routine to get call Floss."""
-    # Floss writes output to stdout so redirect stdout to temporary file
     try:
+        # Floss writes output to stdout so redirect stdout to temporary file.
+        # Store stdout so we can restore
         save_stdout = sys.stdout
-        with open(temp_file_strings.name.encode('utf-8'), 'w') as output_stream:
+        with open(temp_file_strings.name.encode('utf-8'), 'w'):
             sys.stdout = temp_file_strings
 
             # Call Floss to extract strings from the file.
@@ -62,16 +63,12 @@ def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
     except Exception as err:
         raise err
     finally:
+        # Restore sys.output
         sys.output = save_stdout
 
-    list_string = []
-
     # Read the output from floss and make a list of the decoded strings
-    try:
-        with open(temp_file_strings.name, "r") as floss_output:
-            list_string = floss_output.read().splitlines()
-    except Exception as err:
-        raise err
+    with open(temp_file_strings.name, "r") as floss_output:
+        list_string = floss_output.read().splitlines()
 
     return list_string
         
@@ -80,17 +77,13 @@ def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
 def extract_strings(str_options, data):
     """extract_strings_from_binary writes binary data to a file and calls get_strings to extract
        the encoded strings"""
-    list_string = []
-    try:
-        with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
-
-            # Write binary data to a temporary file.
-            temp_file_binary.write(data)
-            with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
-                # Get the list of string from Floss.
-                list_string = call_floss(str_options, temp_file_binary, temp_file_strings)
-    except Exception as err:
-        raise err
+    # Create a temporary file to write the binary data to.
+    with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
+        # Write binary data to a temporary file.
+        temp_file_binary.write(data)
+        with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
+            # Get the list of string from Floss.
+            list_string = call_floss(str_options, temp_file_binary, temp_file_strings)
 
     return list_string
 

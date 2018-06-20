@@ -25,25 +25,25 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings, get_binary_data_from_file
+from fn_floss.lib.floss_util import extract_strings, get_binary_data_from_file
+
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'binary_to_string_list """
+    """Component that implements Resilient function 'fn_floss"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_utilities", {})
+        self.options = opts.get("fn_floss", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_utilities", {})
+        self.options = opts.get("fn_floss", {})
 
-    @function("utilities_binary_to_string_list")
-    def _binary_to_string_list_function(self, event, *args, **kwargs):
-        """Function: This function takes a binary file and returns a list of decoded
-           obfuscated strings from the binary file."""
+    @function("fn_floss")
+    def _fn_floss_function(self, event, *args, **kwargs):
+        """Function: This function takes a binary file from an attachment or artifact and returns a list of the decoded obfuscated strings extracted from the binary file."""
         try:
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
