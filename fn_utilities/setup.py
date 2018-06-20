@@ -13,8 +13,7 @@ setup(
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'vivisect>=0.0.20170525',
-        'floss>=1.5.1'
+        'openpyxl>=2.5.3'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -30,10 +29,10 @@ setup(
             "AttachmentZipListFunctionComponent = fn_utilities.components.utilities_attachment_zip_list:FunctionComponent",
             "Base64ToArtifactFunctionComponent = fn_utilities.components.utilities_base64_to_artifact:FunctionComponent",
             "Base64ToAttachmentFunctionComponent = fn_utilities.components.utilities_base64_to_attachment:FunctionComponent",
-            "BinaryToStringListFunctionComponent = fn_utilities.components.utilities_binary_to_string_list:FunctionComponent",
             "CallRestApiFunctionComponent = fn_utilities.components.utilities_call_rest_api:FunctionComponent",
             "DomainDistanceFunctionComponent = fn_utilities.components.utilities_domain_distance:FunctionComponent",
             "EmailParseFunctionComponent = fn_utilities.components.utilities_email_parse:FunctionComponent",
+            "ExcelQueryComponent = fn_utilities.components.utilities_excel_query:FunctionComponent",
             "PDFidFunctionComponent = fn_utilities.components.utilities_pdfid:FunctionComponent",
             "ResilientSearchFunctionComponent = fn_utilities.components.utilities_resilient_search:FunctionComponent",
             "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent",

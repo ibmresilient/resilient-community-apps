@@ -1,17 +1,17 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Test fn_utilities.component.utilities_binary_to_string_list"""
+"""Test fn_floss.component.function_floss"""
 import unittest
 import logging
 import sys
 import os
-from fn_utilities.lib.utilities_binary_to_string_list_util import extract_strings, get_floss_params
+from fn_floss.lib.floss_util import extract_strings, get_floss_params
 
 log = logging.getLogger(__name__)
 
 TESTCASE_INPUT        = 'sample1.zip'
 TESTCASE_EXPECTED_OUTPUT = 'sample1-zip-floss-output.txt'
 
-class TestBinaryToStringList(unittest.TestCase):
+class TestFunctionFloss(unittest.TestCase):
     def setUp(self):
         pass
 

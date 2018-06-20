@@ -33,7 +33,7 @@ sql_query_timeout=10
 # Define which one of supported SQL Server database settings you want to use. 
 # At the moment MariaDB, PostgreSQL and MySQL are supported.
 # Comment this line if you don't wish to configure decoding/encoding.
-sql_database_type=MariaDB
+sql_database_type=PostgreSQL
 
 # Define number of rows to fetch. 
 # Comment this line to fetch all.
