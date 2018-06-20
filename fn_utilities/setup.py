@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Utility Functions",
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'openpyxl>=2.5.3'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -31,6 +32,7 @@ setup(
             "CallRestApiFunctionComponent = fn_utilities.components.utilities_call_rest_api:FunctionComponent",
             "DomainDistanceFunctionComponent = fn_utilities.components.utilities_domain_distance:FunctionComponent",
             "EmailParseFunctionComponent = fn_utilities.components.utilities_email_parse:FunctionComponent",
+            "ExcelQueryComponent = fn_utilities.components.utilities_excel_query:FunctionComponent",
             "PDFidFunctionComponent = fn_utilities.components.utilities_pdfid:FunctionComponent",
             "ResilientSearchFunctionComponent = fn_utilities.components.utilities_resilient_search:FunctionComponent",
             "ShellCommandFunctionComponent = fn_utilities.components.utilities_shell_command:FunctionComponent",
