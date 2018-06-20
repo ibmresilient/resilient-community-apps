@@ -2,24 +2,24 @@
 
 This IBM Resilient Function package can be used to execute a **Joe Sandbox Analysis** of a file or URL. 
 
-Once the analysis is complete the user is informed if the file/URL is **clean** or **malicious** via a **Resilient Note**. The related Joe Sandbox Analysis report is then uploaded to Resilient as an Attachment
+Once the analysis is complete, the user is informed if the file or URL is **clean** or **malicious** via a **Resilient Note**. The related Joe Sandbox Analysis report is then uploaded to the Resilient platform as an attachment. The function has the following capabilities:
 
-* Supports **any attachment** or artifact that is a **file** or where the artifact's value contains a **URL**
-* The **type of report** that is returned from Joe Sandbox is configurable. User has the choice between: `pdf`, `html` or `json`
-* Has functionality to **support a proxy**. Just add your proxy details to the `app.config` file
-* Is dependant on **Joe Security's python module** `jbxapi`. See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
+* Supports an attachment or artifact that is a file, or where the artifact's value contains a URL.
+* Allows users to select the type of report, PDF, HTML, or JSON, which is returned from Joe Sandbox.
+* Supports a proxy. Just add your proxy details to the `app.config` file.
+* •	Is dependent on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
 
 
-## To install in *development mode*
+## To install in *development mode*:
 
     pip install -e ./fn_joe_sandbox_analysis/
 
-## To uninstall,
+## To uninstall:
 
     pip uninstall fn_joe_sandbox_analysis
 
 
-## To package for distribution,
+## To package for distribution:
 
     python ./fn_joe_sandbox_analysis/setup.py sdist
 
@@ -45,14 +45,14 @@ jsb_analysis_report_request_timeout=1800
 
 ## How to use the function
 
-1. Import the necessary customization data into the Resilient Platform:
+1. Import the necessary customization data into the Resilient platform:
 
 		resilient-circuits customize
 
-	This will create the following customization components:
-	* Function inputs: `jsb_report_type, ping_delay`
-	* Message Destinations: `fn_joe_sandbox_analysis`
-	* Functions: `fn_joe_sandbox_analysis`
+	This creates the following customization components:
+	* Function input: `jsb_report_type, ping_delay`
+	* Message Destination: `fn_joe_sandbox_analysis`
+	* Function: `fn_joe_sandbox_analysis`
 	* Workflows: `example_joe_sandbox_analysis_attachment, example_joe_sandbox_artifact`
 	* Rules: `Example: Joe Sandbox Analysis [Artifact], Example: Joe Sandbox Analysis [Attachment]`
 
@@ -60,7 +60,9 @@ jsb_analysis_report_request_timeout=1800
 
 		resilient-circuits configure -u
 
-3. Start Resilient Circuits with:
-    `resilient-circuits run`
+3. Start Resilient Circuits:
+    ```
+    resilient-circuits run
+    ```
 
 4. Trigger the rule.
