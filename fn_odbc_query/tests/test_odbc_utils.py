@@ -10,6 +10,50 @@ except:
 from fn_odbc_query.util import odbc_utils
 import pyodbc
 
+class PostgresODBCConnection(object):
+    autocommit = None
+
+    def close(self):
+        return None
+
+    def commit():
+        return None
+
+    def cursor(self):
+        return None
+
+    def setencoding(self, *args, **kwargs):
+        return None
+            
+    def setdecoding(self, *args, **kwargs):
+        return None
+
+    @property
+    def timeout(self):
+        return 1
+
+    @timeout.setter
+    def timeout(self, value):
+        raise pyodbc.Error('HY000', "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
+
+class FakeDBCursor:
+    def close(self):
+        return None
+
+    @property
+    def description(self):
+        return ""
+
+    def execute(self, sql_query, sql_params):
+        return None
+
+    def fetchmany(self, sql_number_of_records_returned):
+        return None
+
+    def fetchall(self):
+        return None
+
+
 class TestOdbcUtils:
     #
     # Test data
@@ -19,30 +63,21 @@ class TestOdbcUtils:
     def test_odbc_connection_setup_timeout_pyodbc_error_pass(self, mocked_pyodbc_connect):
         print("Test setup odbc connection set timeout pyodbc.Error pass")
 
-        class PostgresODBCConnection(object):
-
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
-
         mocked_pyodbc_connect.return_value = PostgresODBCConnection()
 
         try:
             odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
-            assert True
-        except Exception:
             assert False
+        except Exception as e:
+
+            print(str(e))
+            assert True
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_odbc_connection_setup_timeout_unknown_error(self, mocked_pyodbc_connect):
         print("Test setup odbc connection set timeout pyodbc.Error pass")
 
-        class PostgresODBCConnection(object):
+        class PostgresODBCConnection_customexception(object):
 
             @property
             def timeout(self):
@@ -53,7 +88,7 @@ class TestOdbcUtils:
                 raise pyodbc.Error('HY000',
                                    "[HY000] Driver doesn't support this")
 
-        db_connection = PostgresODBCConnection()
+        db_connection = PostgresODBCConnection_customexception()
         mocked_pyodbc_connect.return_value = db_connection
 
         try:
@@ -65,22 +100,6 @@ class TestOdbcUtils:
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_configure_unicode_settings(self, mocked_pyodbc_connect):
         print("Test configure unicode settings")
-
-        class PostgresODBCConnection:
-            def setencoding(self, *args, **kwargs):
-                return None
-            
-            def setdecoding(self, *args, **kwargs):
-                return None
-
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
 
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
@@ -99,16 +118,6 @@ class TestOdbcUtils:
     def test_set_db_cursor(self, mocked_pyodbc_connect):
         print("Test set db cursor")
 
-        class PostgresODBCConnection:
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
-
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -123,19 +132,6 @@ class TestOdbcUtils:
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_create_cursor(self, mocked_pyodbc_connect):
         print("Test create cursor")
-
-        class PostgresODBCConnection:
-            def cursor(self):
-                return None
-
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
 
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
@@ -152,16 +148,6 @@ class TestOdbcUtils:
     def test_execute_select_statement(self, mocked_pyodbc_connect):
         print("Test execute select statement")
 
-        class PostgresODBCConnection:
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
-
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -170,16 +156,6 @@ class TestOdbcUtils:
             OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
         except Exception:
             assert False
-
-        class FakeDBCursor:
-            def execute(self, sql_query, sql_params):
-                return None
-
-            def fetchmany(self, sql_number_of_records_returned):
-                return None
-
-            def fetchall(self):
-                return None
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
@@ -190,16 +166,6 @@ class TestOdbcUtils:
     def test_get_cursor_description(self, mocked_pyodbc_connect):
         print("Test get cursor description")
 
-        class PostgresODBCConnection:
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
-
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -209,12 +175,6 @@ class TestOdbcUtils:
         except Exception:
             assert False
 
-        class FakeDBCursor:
-            @property
-            def description(self):
-                return ""
-            
-
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
         OdbcConnection.get_cursor_description()
@@ -222,21 +182,6 @@ class TestOdbcUtils:
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_execute_odbc_query(self, mocked_pyodbc_connect):
         print("Test execute odbc query")
-
-        class PostgresODBCConnection:
-            autocommit = None
-            
-            def commit():
-                return None
-
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
 
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
@@ -264,19 +209,6 @@ class TestOdbcUtils:
     def test_close_connections(self, mocked_pyodbc_connect):
         print("Test close connections")
 
-        class PostgresODBCConnection:
-            def close(self):
-                return None
-
-            @property
-            def timeout(self):
-                return 1
-
-            @timeout.setter
-            def timeout(self, value):
-                raise pyodbc.Error('HY000',
-                                   "[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
-
         db_connection = PostgresODBCConnection()
         mocked_pyodbc_connect.return_value = db_connection
 
@@ -284,16 +216,8 @@ class TestOdbcUtils:
         try:
             OdbcConnection = odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
         except Exception:
-            assert False
-
-        class FakeDBCursor:
-            def close(self):
-                return None
+            assert False            
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
         OdbcConnection.close_connections()
-
-
-
-
