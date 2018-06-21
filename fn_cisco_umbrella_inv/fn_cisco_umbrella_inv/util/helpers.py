@@ -272,8 +272,8 @@ def create_attachment(func_ref, func_name, artifact_value, params, rtn, query_ex
     :return att_report: Updated attachment report dictionary
 
     """
-    file_name = func_name + " [{0} {1}] - [{2}].txt" \
-        .format(params['artifact_type'], artifact_value, query_execution_time)
+    file_name = func_name + " [{0}: {1}].txt" \
+        .format(params['artifact_type'], artifact_value)
 
     try:
         rest_client = func_ref.rest_client()
