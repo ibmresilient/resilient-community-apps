@@ -130,7 +130,7 @@ class FunctionComponent(ResilientComponent):
             if res_type != "domain_name" and res_type != "email_address":
                     raise ValueError(
                         "Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
-                        "an 'ip address' or a 'nameserver'.".format(res_type))
+                        "an 'email address' or a 'nameserver'.".format(res_type))
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
