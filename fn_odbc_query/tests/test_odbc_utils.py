@@ -67,11 +67,9 @@ class TestOdbcUtils:
 
         try:
             odbc_utils.OdbcConnection(self.fake_sql_connection_string, True, 10, 'HY000')
-            assert False
-        except Exception as e:
-
-            print(str(e))
             assert True
+        except Exception:
+            assert False
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_odbc_connection_setup_timeout_unknown_error(self, mocked_pyodbc_connect):
