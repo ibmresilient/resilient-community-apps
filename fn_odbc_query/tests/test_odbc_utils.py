@@ -131,6 +131,8 @@ class TestOdbcUtils:
 
         OdbcConnection.set_db_cursor(None)
 
+        assert True
+
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_create_cursor(self, mocked_pyodbc_connect):
         print("Test create cursor")
@@ -145,6 +147,8 @@ class TestOdbcUtils:
             assert False
 
         OdbcConnection.create_cursor()
+
+        assert True
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_execute_select_statement(self, mocked_pyodbc_connect):
@@ -161,8 +165,12 @@ class TestOdbcUtils:
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
+
+        # calling twice to cover both if statements
         OdbcConnection.execute_select_statement("", "", 1)
         OdbcConnection.execute_select_statement("", "", None)
+
+        assert True
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_get_cursor_description(self, mocked_pyodbc_connect):
@@ -180,6 +188,8 @@ class TestOdbcUtils:
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
         OdbcConnection.get_cursor_description()
+
+        assert True
 
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_execute_odbc_query(self, mocked_pyodbc_connect):
@@ -207,6 +217,8 @@ class TestOdbcUtils:
         OdbcConnection.set_db_cursor(db_cursor)
         OdbcConnection.execute_odbc_query("", "")
 
+        assert True
+
     @patch("fn_odbc_query.util.odbc_utils.pyodbc.connect")
     def test_close_connections(self, mocked_pyodbc_connect):
         print("Test close connections")
@@ -230,5 +242,7 @@ class TestOdbcUtils:
         OdbcConnection.close_connections()
 
         if not db_connection.closed or not db_cursor.closed:
-            print("close() was not called in both db_connection and db_cursor.")
+            print("close() was not called in db_connection or db_cursor.")
             assert False
+
+        assert True
