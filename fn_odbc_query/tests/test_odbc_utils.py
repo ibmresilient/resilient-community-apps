@@ -14,6 +14,8 @@ class PostgresODBCConnection(object):
     autocommit = None
 
     def close(self):
+        # Variable indicates that closed was called.
+        self.closed = True
         return None
 
     def commit():
@@ -38,6 +40,8 @@ class PostgresODBCConnection(object):
 
 class FakeDBCursor:
     def close(self):
+        # The same with PostgresODBCConnection, allows us to make sure that closed was called.
+        self.closed = True
         return None
 
     @property
@@ -218,4 +222,13 @@ class TestOdbcUtils:
 
         db_cursor = FakeDBCursor()
         OdbcConnection.set_db_cursor(db_cursor)
+
+        # Set closed to false initially
+        db_connection.closed = False
+        db_cursor.closed = False
+
         OdbcConnection.close_connections()
+
+        if not db_connection.closed or not db_cursor.closed:
+            print("close() was not called in both db_connection and db_cursor.")
+            assert False
