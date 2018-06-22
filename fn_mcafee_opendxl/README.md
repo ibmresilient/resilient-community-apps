@@ -56,3 +56,24 @@ Creates the following items in the Resilient Platform:
 
 3. Start Resilient Circuits with: `resilient-circuits run`
 4. Trigger either rule.
+
+
+
+## Integration McAfee DXL Listener
+#### This integration is designed to listen on a DXL topic and map the data into an Incident DTO and sent to Resilient to create Incidents and Artifacts
+
+It is included in the same package and installed/uninstalled in the same manor as above.
+
+The following values will need to be set in the config file under the `[fn_mcafee_opendxl]` section:
+
+    topic_name=<this_is_the_topic_the_integration_will_listen_on>
+    topic_listener_on=[True|False]  #Turns the listener on or off
+    incident_template=<Resilient incident DTO template>
+    incident_template_mapping=<Incident mapping template>
+
+### How to use the integration
+1. Update and edit `app.config`:
+
+		resilient-circuits configure -u
+
+2. Start Resilient Circuits with: `resilient-circuits run`
