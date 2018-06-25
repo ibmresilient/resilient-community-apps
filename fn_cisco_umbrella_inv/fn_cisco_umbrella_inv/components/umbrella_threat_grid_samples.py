@@ -133,6 +133,20 @@ class FunctionComponent(ResilientComponent):
                 results = {}
             else:
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                # Make each sample 'firstSeen' and "lastSeen" property more readable.
+                for i in range(len(rtn["samples"])):
+                    fs = rtn["samples"][i]["firstSeen"]
+                    ls = rtn["samples"][i]["lastSeen"]
+                    try:
+                        secs = int(fs) / 1000
+                        fs_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                        rtn["samples"][i]["first_seen_converted"] = fs_readable
+                        secs = int(ls) / 1000
+                        ls_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                        rtn["samples"][i]["last_seen_converted"] = ls_readable
+                    except ValueError:
+                        yield FunctionError('Timestamp value incorrectly specified')
+
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
                 results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": params["resource"],
                            "query_execution_time": query_execution_time}
