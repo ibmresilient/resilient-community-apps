@@ -56,14 +56,14 @@ Example: Co-occurences for a domain
 Example: DNS RR history for a domain
 Example: DNS RR history for an ip address
 Example: Domain volume
-Example: Domain WHOIS info for a domain
+Example: Domain WHOIS information for a domain
 Example: Get list of category identifiers
 Example: Latest Malicious Domains for an ip address
 Example: Pattern search start epoch
 Example: Pattern search start relative
 Example: Related Domains for a Domain
 Example: Security information for a domain
-Example: ThreadGrid sample info for a hash
+Example: ThreadGrid sample information for a hash
 Example: ThreadGrid samples for a resource
 Example: Timeline for a resource
 ```
@@ -75,14 +75,15 @@ will be replaced by the actual inputs.param value at time of execution.
 
 ```
 inputs.umbinv_resource = artifact.value
-inputs.umbinv_resource_type = "domain_name"
 inputs.umbinv_dns_type = "A"
 ```
 For example if artifact.value gets set to an ip address (domain name also supported for this function), the results
 returned to Resilient will be in JSON format and will be similar to the following format.
 Note: Each Resilient Function will return a different result.
 ```
-{"dns_rr_history": {  "rrs": [  {
+{"resource_name": "example.com",
+ "query_execution_time": "2018-05-02 16:03:15",
+ "dns_rr_history": {  "rrs": [  {
                                   "rr": "www.example.com.",
                                   "ttl": 86400,
                                   "class": "IN",
