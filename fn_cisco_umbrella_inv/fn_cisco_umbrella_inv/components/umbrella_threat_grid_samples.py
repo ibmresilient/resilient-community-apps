@@ -134,7 +134,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": res,
+                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": params["resource"],
                            "query_execution_time": query_execution_time}
                 yield StatusMessage("Returning 'thread_grid_samples' results for resource '{}'.".format(res))
 
