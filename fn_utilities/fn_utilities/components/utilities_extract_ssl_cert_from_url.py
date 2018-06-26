@@ -60,19 +60,11 @@ Outputs: Certificate file encoded in JSON."""
                     # Add '//' to the URL this will sort out any 'www' url
                     url_dict = urlparse.urlparse(
                         '//' + https_url)  # Note; this wont fix urls with bad schemes i.e htp:/
-                    if bool(url_dict.hostname) & bool(url_dict.port):
-                        x509 = ssl.get_server_certificate((url_dict.hostname, url_dict.port))
-                    else:
-                        x509 = ssl.get_server_certificate((url_dict.hostname, 443))
-                else:  # If we reach here then we know there was a netloc provided
 
-                    '''
-                        If no port is provided default to the standard port 443.
-                    '''
-                    if url_dict.port is not None:
-                        x509 = ssl.get_server_certificate((url_dict.hostname, url_dict.port))
-                    else:
-                        x509 = ssl.get_server_certificate((url_dict.hostname, 443))
+                if url_dict.port is not None:
+                    x509 = ssl.get_server_certificate((url_dict.hostname, url_dict.port))
+                else:
+                    x509 = ssl.get_server_certificate((url_dict.hostname, 443))
 
             except Exception:
                 raise FunctionError("Problem encountered while parsing the cert.")
