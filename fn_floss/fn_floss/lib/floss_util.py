@@ -1,6 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+import os
 import sys
 import tempfile
 from floss import main
@@ -40,13 +41,13 @@ def get_floss_params(str_floss_options, filename):
     list_floss_params.append(filename)
     return list_floss_params
 
-def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
+def call_floss(str_floss_options, temp_file_binary):
     """Helper routine to get call Floss."""
     try:
         # Floss writes output to stdout so redirect stdout to temporary file.
-        # Store stdout so we can restore
+        # Store stdout so we can restore when we are done.
         save_stdout = sys.stdout
-        with open(temp_file_strings.name.encode('utf-8'), 'w'):
+        with tempfile.NamedTemporaryFile('w+b', bufsize=0) as temp_file_strings:
             sys.stdout = temp_file_strings
 
             # Call Floss to extract strings from the file.
@@ -58,17 +59,19 @@ def call_floss(str_floss_options, temp_file_binary, temp_file_strings):
             # This is the actual call to Floss.
             result_floss = main.main(list_floss_params)
 
-        if result_floss != 0:
-            raise RuntimeError("Error running Floss. Return code: {}".format(str(result_floss)))
+            # Floss returns 0 for success
+            if result_floss != 0:
+                raise RuntimeError("Error running Floss. Return code: {}".format(str(result_floss)))
+
+            # Set read pointer to beginning of the file and make a list of strings
+            temp_file_strings.seek(0)
+            list_string = temp_file_strings.read().splitlines()
     except Exception as err:
         raise err
     finally:
-        # Restore sys.output
+        # Restore sys.output 
         sys.output = save_stdout
 
-    # Read the output from floss and make a list of the decoded strings
-    with open(temp_file_strings.name, "r") as floss_output:
-        list_string = floss_output.read().splitlines()
 
     return list_string
         
@@ -78,12 +81,19 @@ def extract_strings(str_options, data):
     """extract_strings_from_binary writes binary data to a file and calls get_strings to extract
        the encoded strings"""
     # Create a temporary file to write the binary data to.
-    with tempfile.NamedTemporaryFile('w', bufsize=0) as temp_file_binary:
-        # Write binary data to a temporary file.
+    with tempfile.NamedTemporaryFile('w+b', bufsize=0, delete=False) as temp_file_binary:
+        # Write binary data to a temporary file. Make sure to close the file here...this
+        # code must work on Windows and on Windows the file cannot be opened a second time
+        # While open.  Floss will open the file again to read the data, so close before
+        # calling Floss.
         temp_file_binary.write(data)
-        with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
+        temp_file_binary.close()
+        try:
             # Get the list of string from Floss.
-            list_string = call_floss(str_options, temp_file_binary, temp_file_strings)
-
+            list_string = call_floss(str_options, temp_file_binary)
+        except Exception as err:
+            raise err
+        finally:
+            os.unlink(temp_file_binary.name)
     return list_string
 
