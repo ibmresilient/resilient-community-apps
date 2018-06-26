@@ -132,7 +132,7 @@ class FunctionComponent(ResilientComponent):
         Returns a tuple value.
 
         """
-        ldap_user = self.options.get("user", "")
+        ldap_user = self.options.get("user", "").strip('\'"')
         ldap_domain = self.options.get("domain", "")
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
