@@ -1,7 +1,17 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+"""
+    Function utilities_extract_ssl_cert_from_url receives a HTTPS_URL as a parameter.
+    It then attempts to gather the certificate for this provided URL.
 
+    Uses the built in SSL and urlparse librarys to accomplish the functionality
+    In test cases it uses pyOpenSSL library (https://pyopenssl.org/en/stable/index.html) 
+    to confirm the output certificate data is in valid PEM format.
+
+    Returns the certifiacte encoded in JSON along with a 'successful' boolean to indicate whether the operation was successful.
+    If a valid URL is provided, the associated certificate is saved as an artifact in the Post-Processing Script.
+"""
 try:
     import urlparse
 except ImportError:
