@@ -172,7 +172,7 @@ class FunctionComponent(ResilientComponent):
               raise ValueError("jsb_report_type is required")
 
             # Check for ping_delay, else set to ANALYSIS_REPORT_DEFAULT_PING_DELAY
-            ping_delay = kwargs.get("ping_delay")  # number
+            ping_delay = kwargs.get("jsb_ping_delay")  # number
             if not ping_delay:
               ping_delay = ANALYSIS_REPORT_DEFAULT_PING_DELAY
 
