@@ -3,28 +3,17 @@
 
 """Export data to JSON"""
 
-import co3 as resilient
+import resilient
 import collections
 import json
 import logging
 import os
-import pytz
-import re
-import getpass
 import html2text
 import collections
 from datetime import datetime, timedelta
 from calendar import timegm
 
 LOG = logging.getLogger(__name__)
-
-
-# The config file location should usually be set in the environment
-APP_CONFIG_FILE = os.environ.get("APP_CONFIG_FILE", "app.config")
-# Resolve config values from keyring if specified
-import resilient_circuits.keyring_arguments as keyring_arguments
-from resilient_circuits.rest_helper import get_resilient_client
-
 
 OBJECT_TYPES = {
     "incident": 0,
@@ -35,13 +24,12 @@ OBJECT_TYPES = {
     "attachment": 5
 }
 
-
-class ExportArgumentParser(keyring_arguments.ArgumentParser):
-    def __init__(self):
-        super(ExportArgumentParser, self).__init__(config_file=APP_CONFIG_FILE)
+class ExportArgumentParser(resilient.ArgumentParser):
+    def __init__(self, config_file=None):
+        super(ExportArgumentParser, self).__init__(config_file=config_file)
 
         self.add_argument('filename',
-                          help="The spreadsheet filename.")
+                          help="The JSON filename.")
 
         self.add_argument("--since",
                           type=valid_date_or_days_ago,
@@ -87,20 +75,8 @@ def get_json_time_or_days_ago(dt):
         dt = datetime.now() - td
     return timegm(dt.utctimetuple()) * 1000
 
-
-def get_datetime(ts):
-    """datetime from epoch timestamp"""
-    if ts:
-        return datetime.fromtimestamp(int(int(ts)/1000))
-
-
-def get_field_value_label(field, value):
-    for val in field["values"]:
-        if val["value"] == value:
-            return val["label"]
-    return None
-
 def filter_htmltext(str):
+    """Removes rich text from a string"""
     original_string = str
     try:
         str = html2text.html2text(str)
@@ -110,6 +86,7 @@ def filter_htmltext(str):
     return str
 
 def convert_epoch_to_datetimestr(epoch, milliseconds):
+    """Converts epoch time into a datetime object"""
     if epoch is None:
         return None
     if milliseconds:
@@ -118,12 +95,12 @@ def convert_epoch_to_datetimestr(epoch, milliseconds):
     return datetime.fromtimestamp(epoch).isoformat()
 
 class ExportContext(object):
+    """Responsible for exporting Resilient data into a JSON formatted file"""
     def __init__(self, opts):
         self.opts = opts
 
         # Create SimpleClient and connect
-        self.client = get_resilient_client(self.opts)
-        self.client.connect(opts.email, opts.password)
+        self.client = resilient.get_client(opts)
 
         # Build a catalog of all the field definitions
         # If opts specifies a restricted list of fields, only include the ones specified.
@@ -136,7 +113,9 @@ class ExportContext(object):
             self.fields[objecttype] = {"name": "id", "input_type": "id", "text": "id"}
             # Then get the actual defined fields
             thefields = self.client.get("/types/{}/fields".format(objecttype))
-       
+            if not thefields:
+                raise Exception("Unable to get fields from REST API")
+
             for thefield in thefields:
                 if fieldlist == [] or thefield["name"] in fieldlist:
                     self.fields[objecttype][thefield["name"]] = thefield
@@ -158,15 +137,49 @@ class ExportContext(object):
         except KeyError:
             return None
 
+    def is_date(self, objecttype, fieldname):
+        """Checks the type of field"""        
+        field = self.get_field(objecttype, fieldname)
+        if not field:
+            return False
+
+        if field["input_type"] and field["input_type"] == "datetimepicker":
+            return True
+
+        return False
 
     def clean_schema(self, object, typename):
-        for field in list(object.keys()):
-            if not self.get_field(typename, field):
-                if field == "properties":
-                    continue
-                object.pop(field, None)
+        """Creates a new object referencing the fields of the type"""
+        type_fields = self.types[typename]["fields"]
+        new_object = {}
+
+        for field_name in type_fields:
+            field = type_fields[field_name]
+            if not field:
+                continue
+
+            prefix = field["prefix"]
+
+            shouldConvertToDatetime = False
+            if self.is_date(typename, field_name):
+                shouldConvertToDatetime = True
+
+            try:
+                if prefix is None:
+                    new_object[field_name] = object[field_name]
+                    if shouldConvertToDatetime:
+                        new_object[field_name] = convert_epoch_to_datetimestr(new_object[field_name], True)
+                else:
+                    new_object[prefix][field_name] = object[prefix][field_name]
+                    if shouldConvertToDatetime:
+                        new_object[prefix][field_name] = convert_epoch_to_datetimestr(new_object[prefix][field_name], True)
+            except KeyError:
+                continue
+
+        return new_object
 
     def get_name_from_id(self, id):
+        """Converts an ID provided by the REST API into the string it represents"""
         for type in self.types:
             if int(self.types[type]["id"]) == int(id):
                 return type
@@ -174,6 +187,7 @@ class ExportContext(object):
         return ""
 
     def get_column_name_from_id(self, tablename, columnid):
+        """Converts a field ID to the field name"""
         for column_name in self.types[tablename]["fields"]:
             column = self.types[tablename]["fields"][column_name]
             if int(column["id"]) == int(columnid):
@@ -235,9 +249,7 @@ class ExportContext(object):
             incidents = [i for i in incidents if i["id"] in specific_ids]
         for incident in incidents:
             full_incident = self.client.get("/incidents/{}?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
-            self.clean_schema(full_incident, "incident")
-
-            
+            full_incident = self.clean_schema(full_incident, "incident")
             yield full_incident
 
 
@@ -286,12 +298,13 @@ class ExportContext(object):
             yield attachment
 
     def get_datatables(self, incident):
+        """Grabs datatables from REST API and processes them"""
         data_tables = self.client.get("/incidents/{}/table_data".format(incident["id"]))
         return self.process_datatables(data_tables, incident["id"])
 
 
     def export_data(self):
-        """Do the export"""
+        """Formalize the export to JSON"""
 
         filename = self.opts.get("filename")
 
@@ -308,12 +321,6 @@ class ExportContext(object):
                 incident["milestones"] = list(self.get_milestones(incident))
                 incident["artifacts"] = list(self.get_artifacts(incident))
                 incident["attachments"] = list(self.get_attachments(incident))
-
-                incident["create_date"] = convert_epoch_to_datetimestr(incident["create_date"], True)
-                incident["due_date"] = convert_epoch_to_datetimestr(incident["due_date"], True)
-                incident["end_date"] = convert_epoch_to_datetimestr(incident["end_date"], True)
-                incident["discovered_date"] = convert_epoch_to_datetimestr(incident["discovered_date"], True)
-                incident["start_date"] = convert_epoch_to_datetimestr(incident["start_date"], True)
 
                 datatable_list.append(self.get_datatables(incident))
 
@@ -333,12 +340,7 @@ class ExportContext(object):
 
 def main():
     """Main"""
-    # Parse commandline arguments
-    if not APP_CONFIG_FILE:
-        print("Error, APP_CONFIG_FILE environment variable is not defined.")
-        return None
-
-    parser = ExportArgumentParser()
+    parser = ExportArgumentParser(config_file=resilient.get_config_file())
     opts = parser.parse_args()
 
     # Export the data

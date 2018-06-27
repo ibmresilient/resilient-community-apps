@@ -31,7 +31,6 @@ setup(
     ],
     author='IBM Resilient',
     install_requires=[
-        'circuits',
         'html2text',
         'resilient>={}.{}'.format(major, minor)
     ],
