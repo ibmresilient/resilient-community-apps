@@ -92,9 +92,8 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              json=data)
 
-    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+$")
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
-    def attachments_one_get(self, request):
+    def attachments_one_incident_get(self, request):
         """ GET an attachment """
         attachment_id = request.url.split("/")[-1]
         data = self.attachments[attachment_id]
@@ -102,9 +101,17 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              json=data)
 
-    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+/contents$")
+    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+$")
+    def attachments_one_task_get(self, request):
+        """ GET an attachment """
+        attachment_id = request.url.split("/")[-1]
+        data = self.attachments[attachment_id]
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json=data)
+
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+/contents$")
-    def attachments_contents_get(self, request):
+    def attachments_contents_incident_get(self, request):
         """ GET the file contents of an attachment """
         attachment_id = request.url.split("/")[-2]
         data = self.test_data(self.attachments[attachment_id]["name"])
@@ -112,3 +119,11 @@ class AttachmentMock(BasicResilientMock):
                                              status_code=200,
                                              content=data)
 
+    @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+/contents$")
+    def attachments_contents_task_get(self, request):
+        """ GET the file contents of an attachment """
+        attachment_id = request.url.split("/")[-2]
+        data = self.test_data(self.attachments[attachment_id]["name"])
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             content=data)
