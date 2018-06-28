@@ -8,8 +8,8 @@ import collections
 import json
 import logging
 import os
-import html2text
 import collections
+import re
 from datetime import datetime, timedelta
 from calendar import timegm
 
@@ -79,8 +79,7 @@ def filter_htmltext(str):
     """Removes rich text from a string"""
     original_string = str
     try:
-        str = html2text.html2text(str)
-        str = str.strip('\n')
+        return re.sub(re.compile('<.*?>'), '', str)
     except Exception as e:
         return original_string
     return str
@@ -321,12 +320,11 @@ class ExportContext(object):
                 incident["milestones"] = list(self.get_milestones(incident))
                 incident["artifacts"] = list(self.get_artifacts(incident))
                 incident["attachments"] = list(self.get_attachments(incident))
-
-                datatable_list.append(self.get_datatables(incident))
+                incident["data_tables"] = self.get_datatables(incident)
 
                 incidents_list.append(incident)
 
-            json.dump({"incidents":incidents_list, "data_tables": datatable_list}, outfile)
+            json.dump({"incidents":incidents_list}, outfile)
             outfile.write("\n")
 
         print("{} incidents written to {}".format(incident_count, filename))
