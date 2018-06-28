@@ -31,7 +31,6 @@ setup(
     ],
     author='IBM Resilient',
     install_requires=[
-        'html2text',
         'resilient>={}.{}'.format(major, minor)
     ],
     author_email='support@resilientsystems.com',

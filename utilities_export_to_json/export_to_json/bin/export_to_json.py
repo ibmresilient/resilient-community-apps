@@ -88,6 +88,8 @@ def convert_epoch_to_datetimestr(epoch, milliseconds):
     """Converts epoch time into a datetime object"""
     if epoch is None:
         return None
+    if type(epoch) is not int:
+        return epoch
     if milliseconds:
         epoch /= 1000
 
