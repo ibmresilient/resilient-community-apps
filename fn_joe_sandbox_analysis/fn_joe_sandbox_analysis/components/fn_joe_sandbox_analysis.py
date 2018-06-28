@@ -9,6 +9,7 @@ import jbxapi
 import time
 import tempfile
 import re
+from urlparse import urlparse
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 class FunctionComponent(ResilientComponent):
@@ -109,13 +110,17 @@ class FunctionComponent(ResilientComponent):
           report_name = None
 
           if (entity["type"] == "attachment"):
-            report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["name"], jsb_report_type)
+            report_name = "js-report: {0}.{1}".format(entity["meta_data"]["name"], jsb_report_type)
           
           elif (entity["type"] == "artifact" and entity["data"] != None):
-            report_name = "js-report-file [{0}_{1}] - {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], entity["meta_data"]["attachment"]["name"], jsb_report_type)
+            report_name = "js-report: {0}.{1}".format(entity["meta_data"]["attachment"]["name"], jsb_report_type)
           
           elif (entity["type"] == "artifact" and entity["uri"] != None):
-            report_name = "js-report-uri [{0}_{1}] - Analysis: {2}.{3}".format(entity["meta_data"]["inc_id"], entity["meta_data"]["id"], sample_webid, jsb_report_type)
+            parsed_uri = urlparse(entity["uri"])
+            if(parsed_uri.hostname):
+              report_name = "js-report: {0}.{1}".format(parsed_uri.hostname, jsb_report_type)
+            else:
+              report_name = "js-report: URL Analysis: {0}.{1}".format(sample_webid, jsb_report_type)
           
           return report_name
 
