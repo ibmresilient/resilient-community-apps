@@ -89,7 +89,10 @@ def convert_epoch_to_datetimestr(epoch, milliseconds):
     if epoch is None:
         return None
     if type(epoch) is not int:
-        return epoch
+        try:
+            epoch = int(epoch)
+        except Exception:
+            return epoch
     if milliseconds:
         epoch /= 1000
 
@@ -198,10 +201,11 @@ class ExportContext(object):
 
     def process_datatables(self, datatables, id):
         """Process datatable info from API"""
-        new_data_table = []
+        new_data_table = {}
         for data_table_id in datatables:
             table_name = self.get_name_from_id(data_table_id)
 
+            new_data_table[table_name] = []
             data_table = datatables[data_table_id]
 
             for row in data_table["rows"]:
@@ -217,11 +221,10 @@ class ExportContext(object):
                     column_name = self.get_column_name_from_id(table_name, cell["id"])
                     if column_name == "":
                         continue
-                    temp_row["incident_id"] = id
+
                     temp_row[column_name] = cell["value"]
 
-
-                new_data_table.append(temp_row)
+                new_data_table[table_name].append(temp_row)
 
         return new_data_table
 
@@ -322,7 +325,10 @@ class ExportContext(object):
                 incident["milestones"] = list(self.get_milestones(incident))
                 incident["artifacts"] = list(self.get_artifacts(incident))
                 incident["attachments"] = list(self.get_attachments(incident))
-                incident["data_tables"] = self.get_datatables(incident)
+                
+                data_tables = self.get_datatables(incident)
+                for data_table_name in data_tables:
+                    incident[data_table_name] = data_tables[data_table_name]
 
                 incidents_list.append(incident)
 
