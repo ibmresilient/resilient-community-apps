@@ -12,6 +12,59 @@ from resilient_circuits import FunctionError, StatusMessage
 log = logging.getLogger(__name__)
 
 
+def check_config(opts):
+    options = opts.get("fn_mcafee_atd", {})
+    if options == {}:
+        log.error("There is no [fn_mcafee_atd] section in the config file, "
+                  "please set that by running resilient-circuits config -u")
+        raise ValueError("[fn_mcafee_atd] section is not set in the config file")
+    else:
+        atd_url = options.get("atd_url")
+        atd_username = options.get("atd_username")
+        atd_password = options.get("atd_password")
+        timeout_mins = int(options.get("timeout"))
+        if timeout_mins is None:  # Defaults to 30 min
+            timeout_mins = 30
+        polling_interval = int(options.get("polling_interval"))
+        if polling_interval is None:  # Defaults to 60 sec
+            polling_interval = 60
+        vm_profile_list = options.get("vm_profile_list")
+        filePriority = options.get("filePriority")
+        if filePriority is None:  # Defaults to add_to_q
+            filePriority = "add_to_q"
+        trust_cert = options.get("trust_cert")
+        if trust_cert is None:  # Defaults to False
+            trust_cert = False
+
+        if atd_url is None:
+            log.error("atd_url is not set. You must set this value to run this function")
+            raise ValueError("atd_url is not set. You must set this value to run this function")
+
+        if atd_username is None:
+            log.error("atd_username is not set. You must set this value to run this function")
+            raise ValueError("atd_username is not set. You must set this value to run this function")
+
+        if atd_password is None:
+            log.error("atd_password is not set. You must set this value to run this function")
+            raise ValueError("atd_password is not set. You must set this value to run this function")
+
+        if vm_profile_list is None:
+            log.error("vmProfileList is not set. You must set this value to run this function")
+            raise ValueError("vmProfileList is not set. You must set this value to run this function")
+
+        ret_dict = {
+            "atd_url": atd_url,
+            "atd_username": atd_username,
+            "atd_password": atd_password,
+            "timeout_mins": timeout_mins,
+            "polling_interval": polling_interval,
+            "vm_profile_list": vm_profile_list,
+            "filePriority": filePriority,
+            "trust_cert": trust_cert
+        }
+        return ret_dict
+
+
 def _get_atd_session_headers(g):
     login_string = "{}:{}".format(g.atd_username, g.atd_password)
     base64_login = base64.b64encode(str.encode(login_string))

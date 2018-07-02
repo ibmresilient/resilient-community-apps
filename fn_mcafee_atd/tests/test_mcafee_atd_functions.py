@@ -8,11 +8,11 @@ import time
 import os.path
 try:
     from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id
+    check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
     from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 except:
     from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-        check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id
+        check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
     from fn_mcafee_atd.fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
@@ -54,6 +54,66 @@ class TestMcafeeAtdAnalyzeFile:
                 return self.content
 
         return simResponse(content, status)
+
+    def test_verify_config_no_section(self):
+        mock_opts = {}
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert  e.args[0] == "[fn_mcafee_atd] section is not set in the config file"
+
+    def test_verify_config_no_atd_url(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass()
+        }
+        mock_opts["fn_mcafee_atd"]["atd_url"] = None
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_url is not set. You must set this value to run this function"
+
+    def test_verify_config_no_atd_username(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass()
+        }
+        mock_opts["fn_mcafee_atd"]["atd_username"] = None
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_username is not set. You must set this value to run this function"
+
+    def test_verify_config_no_atd_password(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass()
+        }
+        mock_opts["fn_mcafee_atd"]["atd_password"] = None
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_password is not set. You must set this value to run this function"
+
+    def test_verify_config_no_vm_profile_list(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass()
+        }
+        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = None
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "vm_profile_list is not set. You must set this value to run this function"
+
+    def test_verify_config_valid(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass()
+        }
+        actual_config = check_config(mock_opts)
+
+        expected_config = {} # Add something here
+
+        assert actual_config == expected_config
+
+
+
 
     @patch("requests.get")
     def test_helper_get_atd_session_headers(self, mocked_requests_get):

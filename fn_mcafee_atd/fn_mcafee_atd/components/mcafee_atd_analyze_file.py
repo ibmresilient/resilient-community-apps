@@ -6,10 +6,10 @@ import logging
 import time
 try:
     from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, check_timeout, get_incident_id
+    check_status_code, check_timeout, get_incident_id, check_config
 except:
     from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-        check_status_code, check_timeout, get_incident_id
+        check_status_code, check_timeout, get_incident_id, check_config
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -53,45 +53,16 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        try:
-            self.options = opts.get("fn_mcafee_atd", {})
-            self.atd_url = self.options.get("atd_url")
-            self.atd_username = self.options.get("atd_username")
-            self.atd_password = self.options.get("atd_password")
-            self.timeout_mins = int(self.options.get("timeout"))
-            if self.timeout_mins is None:  # Defaults to 30 min
-                self.timeout_mins = 30
-            self.polling_interval = int(self.options.get("polling_interval"))
-            if self.polling_interval is None:  # Defaults to 60 sec
-                self.polling_interval = 60
-            self.vm_profile_list = self.options.get("vm_profile_list")
-            self.filePriority = self.options.get("filePriority")
-            if self.filePriority is None:  # Defaults to add_to_q
-                self.filePriority = "add_to_q"
-            self.trust_cert = self.options.get("trust_cert")
-            if self.trust_cert is None:  # Defaults to False
-                self.trust_cert = False
-
-            if self.atd_url is None:
-                log.error("atd_url is not set. You must set this value to run this function")
-                raise ValueError("atd_url is not set. You must set this value to run this function")
-
-            if self.atd_username is None:
-                log.error("atd_username is not set. You must set this value to run this function")
-                raise ValueError("atd_username is not set. You must set this value to run this function")
-
-            if self.atd_password is None:
-                log.error("atd_password is not set. You must set this value to run this function")
-                raise ValueError("atd_password is not set. You must set this value to run this function")
-
-            if self.vm_profile_list is None:
-                log.error("vmProfileList is not set. You must set this value to run this function")
-                raise ValueError("vmProfileList is not set. You must set this value to run this function")
-
-        except AttributeError:
-            log.error("There is no [fn_mcafee_atd] section in the config file, "
-                      "please set that by running resilient-circuits config -u")
-            raise AttributeError("[fn_mcafee_atd] section is not set in the config file")
+        # check_config is handling all of the error checking
+        config_opts = check_config(opts)
+        self.atd_url = config_opts.get("atd_url")
+        self.atd_username = config_opts.get("atd_username")
+        self.atd_password = config_opts.get("atd_password")
+        self.timeout_mins = config_opts.get("timeout_mins")
+        self.polling_interval = config_opts.get("polling_interval")
+        self.vm_profile_list = config_opts.get("vm_profile_list")
+        self.filePriority = config_opts.get("filePriority")
+        self.trust_cert = config_opts.get("trust_cert")
 
     @handler("reload")
     def _reload(self, event, opts):
