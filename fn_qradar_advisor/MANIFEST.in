@@ -1,0 +1,3 @@
+include README.md
+include fn_qradar_advisor/util/*
+include fn_qradar_advisor/LICENSE
