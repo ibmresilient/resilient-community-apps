@@ -285,7 +285,7 @@ class ExportContext(object):
             task["closed_date"] = convert_epoch_to_datetimestr(task.get("closed_date"), True)
             task["due_date"] = convert_epoch_to_datetimestr(task.get("due_date"), True)
 
-            self.clean_schema(task, "task")
+            task = self.clean_schema(task, "task")
             yield task
 
 
@@ -293,7 +293,7 @@ class ExportContext(object):
         """Yield all the notes"""
         notes = self.client.get("/incidents/{}/comments?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
         for note in notes:
-            self.clean_schema(note, "note")
+            note = self.clean_schema(note, "note")
             yield note
 
 
@@ -301,7 +301,7 @@ class ExportContext(object):
         """Yield all the milestones"""
         milestones = self.client.get("/incidents/{}/milestones?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
         for milestone in milestones:
-            self.clean_schema(milestone, "milestone")
+            milestone = self.clean_schema(milestone, "milestone")
             yield milestone
 
 
@@ -309,7 +309,7 @@ class ExportContext(object):
         """Yield all the artifacts"""
         artifacts = self.client.get("/incidents/{}/artifacts?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
         for artifact in artifacts:
-            self.clean_schema(artifact, "artifact")
+            artifact = self.clean_schema(artifact, "artifact")
             yield artifact
 
 
@@ -317,7 +317,7 @@ class ExportContext(object):
         """Yield all the attachments"""
         attachments = self.client.get("/incidents/{}/attachments?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
         for attachment in attachments:
-            self.clean_schema(attachment, "attachment")
+            attachment = self.clean_schema(attachment, "attachment")
             yield attachment
 
     def get_datatables(self, incident):
