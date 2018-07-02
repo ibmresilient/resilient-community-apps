@@ -72,15 +72,17 @@ Outputs: Certificate file encoded in JSON."""
                         '//' + https_url)  # Note; this wont fix urls with bad schemes i.e htp:/
 
                 if url_dict.port is not None:
-                    x509 = ssl.get_server_certificate((url_dict.hostname, url_dict.port))
+                    conn = ssl.create_connection((url_dict.hostname, url_dict.port))
                 else:
-                    x509 = ssl.get_server_certificate((url_dict.hostname, 443))
-
+                    conn = ssl.create_connection((url_dict.hostname, 443))
+                context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+                sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
+                certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
             except Exception:
                 raise FunctionError("Problem encountered while parsing the cert.")
 
             # Prepares a JSON object from the get_server_certificate function result
-            serialized_cert = json.dumps(x509, default=lambda o: o.__dict__,
+            serialized_cert = json.dumps(certificate, default=lambda o: o.__dict__,
                                          sort_keys=True, indent=4)
             # Results are used in PostProcessing script to create artifact on the platform
             results = {
