@@ -106,6 +106,9 @@ class ExportContext(object):
         # Create SimpleClient and connect
         self.client = resilient.get_client(opts)
 
+        if not self.client:
+            raise Exception("Resilient Client is not valid.")
+
         # Build a catalog of all the field definitions
         # If opts specifies a restricted list of fields, only include the ones specified.
         fieldlist = opts.field or []
@@ -126,6 +129,8 @@ class ExportContext(object):
 
         # Allows for ID to string conversion
         self.types = self.client.get("/types")
+        if not self.types:
+            raise Exception("Unable to get Resilient types")
 
         # The list of users and groups is available via the owner_id field
         # (or members, equivalently)
@@ -147,22 +152,29 @@ class ExportContext(object):
         if not field:
             return False
 
-        if field["input_type"] and field["input_type"] == "datetimepicker":
+        if field.get("input_type") and field.get("input_type") == "datetimepicker":
             return True
 
         return False
 
     def clean_schema(self, object, typename):
         """Creates a new object referencing the fields of the type"""
-        type_fields = self.types[typename]["fields"]
+        type_fields = self.types.get(typename)
+        if type_fields is None:
+            return {}
+
+        type_fields = type_fields.get("fields")
+        if type_fields is None:
+            return {}
+
         new_object = {}
 
         for field_name in type_fields:
-            field = type_fields[field_name]
+            field = type_fields.get(field_name)
             if not field:
                 continue
 
-            prefix = field["prefix"]
+            prefix = field.get("prefix")
 
             shouldConvertToDatetime = False
             if self.is_date(typename, field_name):
@@ -185,7 +197,7 @@ class ExportContext(object):
     def get_name_from_id(self, id):
         """Converts an ID provided by the REST API into the string it represents"""
         for type in self.types:
-            if int(self.types[type]["id"]) == int(id):
+            if int(self.types[type].get("id")) == int(id):
                 return type
 
         return ""
@@ -204,25 +216,27 @@ class ExportContext(object):
         new_data_table = {}
         for data_table_id in datatables:
             table_name = self.get_name_from_id(data_table_id)
+            if table_name == "":
+                continue
 
             new_data_table[table_name] = []
             data_table = datatables[data_table_id]
 
-            for row in data_table["rows"]:
+            for row in data_table.get("rows"):
                 temp_items = []
-                for cell_id in row["cells"]:
+                for cell_id in row.get("cells"):
                     cell = row["cells"][cell_id]
-                    temp_items.append({"id": cell["id"], "value": cell["value"]})
+                    temp_items.append({"id": cell.get("id"), "value": cell.get("value")})
 
-                temp_items.sort(key=lambda x: x["id"], reverse=False)
+                temp_items.sort(key=lambda x: x.get("id"), reverse=False)
 
                 temp_row = {}
                 for cell in temp_items:
-                    column_name = self.get_column_name_from_id(table_name, cell["id"])
+                    column_name = self.get_column_name_from_id(table_name, cell.get("id"))
                     if column_name == "":
                         continue
 
-                    temp_row[column_name] = cell["value"]
+                    temp_row[column_name] = cell.get("value")
 
                 new_data_table[table_name].append(temp_row)
 
@@ -247,12 +261,18 @@ class ExportContext(object):
             conditions.append({"field_name": "create_date", "method": "lte", "value": get_json_time_or_days_ago(created_since_date_or_days_ago)})
 
         query = {"filters": [{"conditions": conditions}]}
-        LOG.debug(json.dumps(query, indent=2))
+
         incidents = self.client.post("/incidents/query?return_level=partial", query)
+        if len(incidents) is 0:
+            raise Exception("Unable to get basic incident")
+
         if specific_ids:
             incidents = [i for i in incidents if i["id"] in specific_ids]
         for incident in incidents:
             full_incident = self.client.get("/incidents/{}?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+            if full_incident.get("id") is None:
+                raise Exception("Incident data corrupted, \"id\" attribute is non-existent.")
+
             full_incident = self.clean_schema(full_incident, "incident")
             yield full_incident
 
@@ -261,10 +281,9 @@ class ExportContext(object):
         """Yield all the tasks"""
         tasks = self.client.get("/incidents/{}/tasks?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
         for task in tasks:
-            task["instr_text"] = filter_htmltext(task["instr_text"])
-
-            task["closed_date"] = convert_epoch_to_datetimestr(task["closed_date"], True)
-            task["due_date"] = convert_epoch_to_datetimestr(task["due_date"], True)
+            task["instr_text"] = filter_htmltext(task.get("instr_text"))
+            task["closed_date"] = convert_epoch_to_datetimestr(task.get("closed_date"), True)
+            task["due_date"] = convert_epoch_to_datetimestr(task.get("due_date"), True)
 
             self.clean_schema(task, "task")
             yield task
@@ -311,6 +330,8 @@ class ExportContext(object):
         """Formalize the export to JSON"""
 
         filename = self.opts.get("filename")
+        if not filename:
+            raise Exception("Filename is invalid.")
 
         # generators do not provide a length
         incident_count = 0
@@ -319,6 +340,9 @@ class ExportContext(object):
             incidents_list = []
             datatable_list = []
             for incident in incidents:
+                if incident.get("id") is None:
+                    raise Exception("Incident data corrupted, \"id\" attribute is non-existent.")
+
                 incident_count += 1
                 incident["tasks"] = list(self.get_tasks(incident))
                 incident["notes"] = list(self.get_notes(incident))
