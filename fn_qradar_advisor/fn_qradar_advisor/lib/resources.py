@@ -30,9 +30,12 @@ image_dict = {
         "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_indicator_icon_72dpi_v1.png",
     "domain-name":
           "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/co2_domain_name_icon_72dpi_v1.png",
+    "sighting":
+        "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_sighting_icon_72dpi_v1.png",
+    "threat-actor":
+        "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_threat_actor_icon_72dpi_v1.png",
     "url":
         "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_indicator_icon_72dpi_v1.png"
-
 }
 
 

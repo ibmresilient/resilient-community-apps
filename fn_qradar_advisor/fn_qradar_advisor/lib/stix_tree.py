@@ -44,32 +44,6 @@ class MultiRootTree(object):
         self.roots.remove(node)
 
 
-def verify_tree(stix_objects, trees):
-    """
-    Verify stix objects agains stix tree
-    :param stix_objects:
-    :param trees:
-    :return:
-    """
-    object_count = 0
-    relationship_count = 0
-    for obj in stix_objects:
-        visitor = GetNodeVisitor(obj["id"])
-        trees.accept(visitor)
-        if not visitor.node:
-            if obj["type"] == "relationship":
-                #
-                # This is fine. Relationship is not shown as list item
-                #
-                relationship_count = relationship_count + 1
-            else:
-                raise("Object {} is not found in the tree".format(obj["id"]))
-        else:
-            object_count = object_count + 1
-
-    print("There are {} objects and {} relationships".format(str(object_count), str(relationship_count)))
-
-
 def build_tree(stix_objects, log):
     tree = None
     #
@@ -117,7 +91,7 @@ def handle_sightings(stix_objects, tree, log):
             #
             node = TreeNode(obj_type=obj["type"],
                             obj_id=obj["id"],
-                            name="",
+                            name=obj["id"],  # sighting has no name, stix2 sample uses id instead
                             description="",
                             objects=obj.get("objects", []),
                             is_link=False)
@@ -125,7 +99,8 @@ def handle_sightings(stix_objects, tree, log):
 
             sight_ref_created_by = None
             try:
-                sight_ref_created_by = stix_utils.find_object_by_id(stix_objects, obj["sighting_of_ref"]).created_by_ref
+                sighting_of_ref = stix_utils.find_object_by_id(stix_objects, obj["sighting_of_ref"])
+                sight_ref_created_by = sighting_of_ref["created_by_ref"]
             except Exception as e:
                 sight_ref_created_by = None
 
@@ -218,30 +193,3 @@ def get_html(stix, log):
 
     return html
 
-
-def verify_tree(stix_objects, trees):
-    """
-    Verify a tree against the stix objects we got from a stix file.
-    :param stix_objects: stix objects from stix file
-    :param trees: trees built from the stix_objects
-    :return: error message. Empty if there is no error
-    """
-    object_count = 0
-    relationship_count = 0
-    error_msg = ""
-    for obj in stix_objects:
-        visitor = GetNodeVisitor(obj["id"])
-        trees.accept(visitor)
-        if not visitor.node:
-            if obj["type"] == "relationship":
-                # This is fine. Relationship is not shown as list item
-                relationship_count = relationship_count + 1
-            else:
-                # This is an object in the objects list, but not in the trees we built
-                error_msg = error_msg + "\nObject {} is not found in the tree".format(obj["id"])
-        else:
-            object_count = object_count + 1
-
-    print("There are {} objects and {} relationships".format(str(object_count), str(relationship_count)))
-
-    return error_msg

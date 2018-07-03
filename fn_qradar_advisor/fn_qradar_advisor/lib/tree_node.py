@@ -47,7 +47,10 @@ class TreeNode(object):
         :param node:
         :return:
         """
-        self.children.append(node)
+        if node:
+            self.children.append(node)
+        else:
+            self.log.error("Adding a None child")
 
     def copy(self):
         """

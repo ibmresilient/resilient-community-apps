@@ -76,8 +76,10 @@ def get_observable_description(stix_obj, log):
     elif stix_obj["type"] == u"indicator":
         if stix_obj[u"name"] == u"IpAddress":
             desc = stix_obj[u"pattern"].replace("[ipv4-addr:value='", '').replace("']", '')
-        elif stix_obj[u"name"] == u"Url" or stix_obj[u"name"] == u"Malicious URL":
+        elif stix_obj[u"name"] == u"Url":
             desc = stix_obj[u"pattern"].replace("[url:value='", '').replace("']", '')
+        elif stix_obj[u"name"] == u"Malicious URL":
+            desc = stix_obj[u"pattern"].replace("[url:value = '", '').replace("']", '')
         elif stix_obj[u"name"] == u"DomainName":
             desc = stix_obj[u"pattern"].replace("[domain-name:value='", '').replace("']", '')
         else:
