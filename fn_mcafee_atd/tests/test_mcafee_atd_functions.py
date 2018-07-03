@@ -10,7 +10,7 @@ try:
     from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
     from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
-except:
+except ModuleNotFoundError:
     from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
         check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
     from fn_mcafee_atd.fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
@@ -18,13 +18,30 @@ except:
 
 class MockClass:
     def __init__(self):
+        self.mock = {
+            "atd_username": TestMcafeeAtdAnalyzeFile.fake_username,
+            "atd_password": TestMcafeeAtdAnalyzeFile.fake_password,
+            "atd_url": TestMcafeeAtdAnalyzeFile.fake_url,
+            "trust_cert": TestMcafeeAtdAnalyzeFile.verify,
+            "vm_profile_list": "1",
+            "filePriority": "add_to_q"
+        }
+        return
+
+    def __setitem__(self, key, value):
+        self.mock[key] = value
+
+
+class MockCredsAfterCheck:
+    def __init__(self):
         self.atd_username = TestMcafeeAtdAnalyzeFile.fake_username
-        self.atd_password = TestMcafeeAtdAnalyzeFile.fake_username
+        self.atd_password = TestMcafeeAtdAnalyzeFile.fake_password
         self.atd_url = TestMcafeeAtdAnalyzeFile.fake_url
         self.trust_cert = TestMcafeeAtdAnalyzeFile.verify
         self.vm_profile_list = "1"
         self.filePriority = "add_to_q"
-        return
+        self.timeout_mins = 30
+        self.polling_interval = 60
 
 
 class TestMcafeeAtdAnalyzeFile:
@@ -41,7 +58,6 @@ class TestMcafeeAtdAnalyzeFile:
         "Accept": "application/vnd.ve.v1.0+json",
         "VE-SDK-API": str.encode("c2Vzc2lvbl9rZXk6MQ==")
     }
-
 
     # Util function to generate simulated requests response
     def _generateResponse(self, content, status):
@@ -64,9 +80,9 @@ class TestMcafeeAtdAnalyzeFile:
 
     def test_verify_config_no_atd_url(self):
         mock_opts = {
-            "fn_mcafee_atd": MockClass()
+            "fn_mcafee_atd": MockClass().mock
         }
-        mock_opts["fn_mcafee_atd"]["atd_url"] = None
+        del mock_opts["fn_mcafee_atd"]["atd_url"]
         try:
             check_config(mock_opts)
         except ValueError as e:
@@ -74,9 +90,9 @@ class TestMcafeeAtdAnalyzeFile:
 
     def test_verify_config_no_atd_username(self):
         mock_opts = {
-            "fn_mcafee_atd": MockClass()
+            "fn_mcafee_atd": MockClass().mock
         }
-        mock_opts["fn_mcafee_atd"]["atd_username"] = None
+        del mock_opts["fn_mcafee_atd"]["atd_username"]
         try:
             check_config(mock_opts)
         except ValueError as e:
@@ -84,9 +100,9 @@ class TestMcafeeAtdAnalyzeFile:
 
     def test_verify_config_no_atd_password(self):
         mock_opts = {
-            "fn_mcafee_atd": MockClass()
+            "fn_mcafee_atd": MockClass().mock
         }
-        mock_opts["fn_mcafee_atd"]["atd_password"] = None
+        del mock_opts["fn_mcafee_atd"]["atd_password"]
         try:
             check_config(mock_opts)
         except ValueError as e:
@@ -94,9 +110,9 @@ class TestMcafeeAtdAnalyzeFile:
 
     def test_verify_config_no_vm_profile_list(self):
         mock_opts = {
-            "fn_mcafee_atd": MockClass()
+            "fn_mcafee_atd": MockClass().mock
         }
-        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = None
+        del mock_opts["fn_mcafee_atd"]["vm_profile_list"]
         try:
             check_config(mock_opts)
         except ValueError as e:
@@ -104,16 +120,67 @@ class TestMcafeeAtdAnalyzeFile:
 
     def test_verify_config_valid(self):
         mock_opts = {
-            "fn_mcafee_atd": MockClass()
+            "fn_mcafee_atd": MockClass().mock
         }
+        mock_opts["fn_mcafee_atd"]["trust_cert"] = "True"
+        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = "1"
         actual_config = check_config(mock_opts)
 
-        expected_config = {} # Add something here
+        expected_config = mock_opts["fn_mcafee_atd"]
+        expected_config["timeout_mins"] = 30
+        expected_config["polling_interval"] = 60
 
         assert actual_config == expected_config
 
+    def test_verify_config_default_url(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass().mock
+        }
+        mock_opts["fn_mcafee_atd"]["atd_url"] = "<your_atd_url>"
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_url is still the default value, this must be changed to run this function"
 
+    def test_verify_config_default_username(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass().mock
+        }
+        mock_opts["fn_mcafee_atd"]["atd_username"] = "<your_atd_username>"
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_username is still the default value, this must be changed to run this function"
 
+    def test_verify_config_default_password(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass().mock
+        }
+        mock_opts["fn_mcafee_atd"]["atd_password"] = "<your_atd_password>"
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "atd_password is still the default value, this must be changed to run this function"
+
+    def test_verify_config_default_profile_list(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass().mock
+        }
+        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = "<your_vm_profile>"
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "vm_profile_list is still the default value, this must be changed to run this function"
+
+    def test_verify_config_default_trust_cert(self):
+        mock_opts = {
+            "fn_mcafee_atd": MockClass().mock
+        }
+        mock_opts["fn_mcafee_atd"]["trust_cert"] = "[True|False]"
+        try:
+            check_config(mock_opts)
+        except ValueError as e:
+            assert e.args[0] == "trust_cert is not set correctly, please set to True or False to run this function"
 
     @patch("requests.get")
     def test_helper_get_atd_session_headers(self, mocked_requests_get):
@@ -124,7 +191,7 @@ class TestMcafeeAtdAnalyzeFile:
             }
         }
         mocked_requests_get.return_value = self._generateResponse(sim_content, 200)
-        creds = MockClass()
+        creds = MockCredsAfterCheck()
 
         atd_session_headers = _get_atd_session_headers(creds)
 
@@ -176,7 +243,7 @@ class TestMcafeeAtdAnalyzeFile:
         f = "This is file contents"
         mocked_requests_post.return_value = self._generateResponse(sim_post_content, 200)
         mocked_requests_get.return_value = self._generateResponse(sim_get_content, 200)
-        creds = MockClass()
+        creds = MockCredsAfterCheck()
 
         file_upload = submit_file(creds, f, "a_new_file.txt")
 
@@ -195,7 +262,7 @@ class TestMcafeeAtdAnalyzeFile:
         }
         mocked_requests_post.return_value = self._generateResponse(sim_post_content, 200)
         mocked_requests_get.return_value = self._generateResponse(sim_get_content, 200)
-        creds = MockClass()
+        creds = MockCredsAfterCheck()
 
         url_upload = submit_url(creds, url="https://www.badurl.com")
 
@@ -222,7 +289,7 @@ class TestMcafeeAtdAnalyzeFile:
         }
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200)]
-        creds = MockClass()
+        creds = MockCredsAfterCheck()
 
         r = check_atd_status(creds, '1')
         # Assert analysis is not complete
@@ -280,7 +347,7 @@ class TestMcafeeAtdAnalyzeFile:
             }
             sim_get_content2 = str.encode("This is the report result")
             generated_report = self._generateResponse(sim_get_content2, 200)
-            creds = MockClass()
+            creds = MockCredsAfterCheck()
             mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                                generated_report]
             res = get_atd_report(creds, '1', '', f.get("report_file"))

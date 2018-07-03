@@ -8,11 +8,23 @@ import tempfile
 import shutil
 import time
 from resilient_circuits import FunctionError, StatusMessage
+import configparser
+import io
+try:
+    from config import config_section_data
+except ModuleNotFoundError:
+    from fn_mcafee_atd.fn_mcafee_atd.util.config import config_section_data
 
 log = logging.getLogger(__name__)
 
 
 def check_config(opts):
+    # Read from default config file
+    buf = io.StringIO(config_section_data())
+    parser = configparser.RawConfigParser(allow_no_value=True)
+    parser.read_file(buf)
+    default_config = dict(parser.items("fn_mcafee_atd"))
+
     options = opts.get("fn_mcafee_atd", {})
     if options == {}:
         log.error("There is no [fn_mcafee_atd] section in the config file, "
@@ -22,35 +34,55 @@ def check_config(opts):
         atd_url = options.get("atd_url")
         atd_username = options.get("atd_username")
         atd_password = options.get("atd_password")
-        timeout_mins = int(options.get("timeout"))
+        timeout_mins = options.get("timeout")
         if timeout_mins is None:  # Defaults to 30 min
             timeout_mins = 30
-        polling_interval = int(options.get("polling_interval"))
+        elif timeout_mins is not None:
+            timeout_mins = int(timeout_mins)
+        polling_interval = options.get("polling_interval")
         if polling_interval is None:  # Defaults to 60 sec
             polling_interval = 60
+        elif polling_interval is not None:
+            polling_interval = int(polling_interval)
         vm_profile_list = options.get("vm_profile_list")
         filePriority = options.get("filePriority")
         if filePriority is None:  # Defaults to add_to_q
             filePriority = "add_to_q"
         trust_cert = options.get("trust_cert")
-        if trust_cert is None:  # Defaults to False
-            trust_cert = False
+        if trust_cert is None:  # Defaults to True
+            trust_cert = True
 
         if atd_url is None:
             log.error("atd_url is not set. You must set this value to run this function")
             raise ValueError("atd_url is not set. You must set this value to run this function")
+        elif atd_url == default_config["atd_url"]:
+            log.error("atd_url is still the default value, this must be changed to run this function")
+            raise ValueError("atd_url is still the default value, this must be changed to run this function")
 
         if atd_username is None:
             log.error("atd_username is not set. You must set this value to run this function")
             raise ValueError("atd_username is not set. You must set this value to run this function")
+        elif atd_username == default_config["atd_username"]:
+            log.error("atd_username is still the default value, this must be changed to run this function")
+            raise ValueError("atd_username is still the default value, this must be changed to run this function")
 
         if atd_password is None:
             log.error("atd_password is not set. You must set this value to run this function")
             raise ValueError("atd_password is not set. You must set this value to run this function")
+        elif atd_password == default_config["atd_password"]:
+            log.error("atd_password is still the default value, this must be changed to run this function")
+            raise ValueError("atd_password is still the default value, this must be changed to run this function")
 
         if vm_profile_list is None:
-            log.error("vmProfileList is not set. You must set this value to run this function")
-            raise ValueError("vmProfileList is not set. You must set this value to run this function")
+            log.error("vm_profile_list is not set. You must set this value to run this function")
+            raise ValueError("vm_profile_list is not set. You must set this value to run this function")
+        elif vm_profile_list == default_config["vm_profile_list"]:
+            log.error("vm_profile_list is still the default value, this must be changed to run this function")
+            raise ValueError("vm_profile_list is still the default value, this must be changed to run this function")
+
+        if trust_cert != "True" and trust_cert != "False":
+            log.error("trust_cert is not set correctly, please set to True or False to run this function")
+            raise ValueError("trust_cert is not set correctly, please set to True or False to run this function")
 
         ret_dict = {
             "atd_url": atd_url,
