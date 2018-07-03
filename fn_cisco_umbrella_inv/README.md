@@ -25,7 +25,9 @@ Config values example:
 (Note: The api token will be supplied by Cisco and will be in uuid format)
 ```
 [fn_cisco_umbrella_inv]
+base_url=https://investigate.api.umbrella.com/
 api_token=abcd1234-a123-123a-123a-123456abcdef
+results_limit=200
 ```
 
 Run with: `resilient-circuits run`.
