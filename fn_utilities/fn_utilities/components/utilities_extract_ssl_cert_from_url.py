@@ -52,7 +52,7 @@ Outputs: Certificate file encoded in JSON."""
                 raise FunctionError("Error: https_url must be specified.")
 
             url_dict = urlparse.urlparse(https_url)
-            x509 = None  # Init x509 as None and try to gather the cert
+            certificate = None  # Init x509 as None and try to gather the cert
             try:
 
                 '''
@@ -89,7 +89,7 @@ Outputs: Certificate file encoded in JSON."""
                 # If the certificate wasn't parsed; 'null' will be the result
                 "certificate": (serialized_cert if serialized_cert is not 'null' else None),
                 # x509 starts out as a None type; if unsuccessful it will still be a none type
-                "successful": (x509 is not None)
+                "successful": (certificate is not None)
             }
 
             # Produce a FunctionResult with the results
