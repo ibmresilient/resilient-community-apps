@@ -43,7 +43,10 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'base_url' not set.")
     if not validate_url(func.options["base_url"]):
         raise ValueError("Invalid format for config setting 'base_url'.")
-
+    if not "results_limit" in func.options:
+        raise Exception("Mandatory config setting 'results_limit' not set.")
+    if not validate_is_int(func.options["results_limit"]):
+        raise ValueError("Invalid value for config setting 'results_limit'.")
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
@@ -102,16 +105,16 @@ def validate_emails(emails):
             return False
     return True
 
-def validate_asn(asn):
-    """"Validate AS number is in a valid format.
+def validate_is_int(val):
+    """"Validate value is in a valid int format.
 
-    :param asn: AS number parameter value
+    :param val: Value to test
     :return : boolean
 
      """
 
     try:
-        int(asn)
+        int(val)
         return True
     except ValueError:
         return False
@@ -135,7 +138,7 @@ def validate_params(params):
         if re.match("^resource$", k) and v is not None:
             if not IP_PATTERN.match(v) and not validate_url(v) \
                 and not validate_domains(v) and not validate_emails(v) \
-                    and not validate_asn(v):
+                    and not validate_is_int(v):
                 raise ValueError("Invalid value for function parameter 'resource'.")
         # Domain name and name server should be in similar format use same validator.
         if re.match("^domain", k) and v is not None and not validate_domains(v):
@@ -196,7 +199,7 @@ def process_params(params, process_result):
     for (k, v) in params.items():
         if (re.match("^resource$", k)) and v is not None:
             if IP_PATTERN.match(v) or validate_domains(v) or validate_emails(v) \
-                    or validate_asn(v):
+                    or validate_is_int(v):
                 # Assume "resource" param is a domain name, nameserver, ip address, email address or asn.
                 process_result["_res"] = str(v)
                 if IP_PATTERN.match(v):
@@ -205,7 +208,7 @@ def process_params(params, process_result):
                     process_result["_res_type"] = "domain_name"
                 elif validate_emails(v):
                     process_result["_res_type"] = "email_address"
-                elif validate_asn(v):
+                elif validate_is_int(v):
                     process_result["_res_type"] = "as_number"
             elif validate_url(v):
                 # Assume "resource" param is a url.
