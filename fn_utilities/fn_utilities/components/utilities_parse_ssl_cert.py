@@ -1,7 +1,17 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, broad-except
-"""Function implementation"""
+"""
+    Function utilities_parse_ssl_cert receives a certificate as a parameter.
+    The certificate string is a JSON encoded string.
+
+    Uses the OpenSSL and Cryptography packages to accomplish the functionality
+    Expects a valid PEM format certificate.
+
+    Returns the details for the provided cert.
+
+    The results returned by this function can then be saved as a Rich Text note.
+"""
 
 import logging
 import json
@@ -28,7 +38,7 @@ class FunctionComponent(ResilientComponent):
     @function("utilities_parse_ssl_cert")
     def _utilities_parse_ssl_cert_function(self, event, *args, **kwargs):
         """Function: Takes in an SSL Certificate.
-Attempts to parse information from this certificate and save it as a note"""
+        Attempts to parse information from this certificate and save it as a note"""
         try:
             # Get the function parameters:
             certificate = kwargs.get("certificate")  # text
@@ -49,17 +59,7 @@ Attempts to parse information from this certificate and save it as a note"""
                 parsed_cert_crypto = x509.load_pem_x509_certificate(
                     str(parsed_cert_json), default_backend())
 
-                log.info(parsed_cert_crypto.serial_number)
-                log.info(parsed_cert_crypto.not_valid_before)
-                log.info(parsed_cert_crypto.not_valid_after)
-                log.info(parsed_cert_crypto.subject)
-
                 yield StatusMessage("Returning results")
-                # Loop over all available extensions and log them
-                # Most of this is handled by the get_issuer() function; 
-                for extension in range(parsed_cert_openssl.get_extension_count()):
-                    log.info(parsed_cert_openssl.get_extension(extension))
-
                 #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
                 results = {
 
@@ -68,11 +68,8 @@ Attempts to parse information from this certificate and save it as a note"""
                     "notAfter": str(parsed_cert_crypto.not_valid_after),
                     "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
                     "version": parsed_cert_openssl.get_version(),
-                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
-                    "local_time": str(datetime.datetime.now())  # Local time is used to save when the function was run
+                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired')
                 }
-
-                yield StatusMessage("Function finish at local time "+str(datetime.datetime.today()))
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
             except ValueError:
