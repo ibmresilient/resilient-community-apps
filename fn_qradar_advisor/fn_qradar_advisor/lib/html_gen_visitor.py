@@ -39,16 +39,17 @@ class HtmlGenVisitor(Visitor):
                     # object like ipv4 can have its own icon
                     image = '<img src="{}" alt="{}" style="width:20px; height:20px"/>'.format(resources.image_dict[type], type)
                 else:
-                    print("Can't find image")
+                    self.log.error("Unable to find image for type {}".format(type))
+                    image = "[{}]".format(type)
                 if type == "file":
                     value = obj.get("name", str(obj.get("hashes", "")))
                 else:
                     value = obj.get("value", "")
             else:
-                self.log.error("No objects found in observed-data")
+                self.log.error("No objects found in observed-data: {}".format(str(node)))
 
             if value == "":
-                print("Empty value?")
+                self.log.error("No value found in node: {}".format(str(node)))
 
         self.html = self.html + "<li>" + image + " " + str(value) + link + "</li>"
         return True

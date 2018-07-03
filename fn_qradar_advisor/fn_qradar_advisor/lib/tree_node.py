@@ -61,12 +61,14 @@ class TreeNode(object):
                         objects=self.objects)
         return node
 
-    def init_with_object(self, stix_obj):
+    def init_with_object(self, stix_obj, log=None):
         """
         Init a tree node with a stix obj
         :param stix_obj:
         :return:
         """
+        if log:
+            self.log = log
         self.id = stix_obj["id"]
         self.name = stix_utils.get_observable_description(stix_obj, self.log)
         self.type = stix_utils.get_obserable_type(stix_obj, self.log)

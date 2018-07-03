@@ -185,7 +185,7 @@ def extract_object(stix_objects, multi_root_tree, object_id, log):
         # Now look for it from the stix objects
         for obj in stix_objects:
             if obj["id"] == object_id:
-                node = TreeNode().init_with_object(obj)
+                node = TreeNode().init_with_object(obj, log)
                 stix_objects.remove(obj)
                 break
 

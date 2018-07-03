@@ -76,7 +76,7 @@ def get_observable_description(stix_obj, log):
     elif stix_obj["type"] == u"indicator":
         if stix_obj[u"name"] == u"IpAddress":
             desc = stix_obj[u"pattern"].replace("[ipv4-addr:value='", '').replace("']", '')
-        elif stix_obj[u"name"] == u"Url":
+        elif stix_obj[u"name"] == u"Url" or stix_obj[u"name"] == u"Malicious URL":
             desc = stix_obj[u"pattern"].replace("[url:value='", '').replace("']", '')
         elif stix_obj[u"name"] == u"DomainName":
             desc = stix_obj[u"pattern"].replace("[domain-name:value='", '').replace("']", '')
@@ -115,7 +115,7 @@ def get_obserable_type(stix_obj, log):
     elif obj_type == u"indicator":
         obj_type = INDICATOR_NAME_TYPE.get(stix_obj[u"name"], None)
 
-        if not type:
+        if not obj_type:
             #
             # Out INDICATOR_NAME_TYPE mapping is not complete
             #
