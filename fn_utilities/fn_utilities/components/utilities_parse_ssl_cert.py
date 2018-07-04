@@ -25,6 +25,11 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_parse_ssl_cert"""
 
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -66,12 +71,14 @@ class FunctionComponent(ResilientComponent):
                     "version": parsed_cert_openssl.get_version(),
                     "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired')
                 }
-                # Produce a FunctionResult with the results
-                yield FunctionResult(results)
+                
             except ValueError:
                 yield StatusMessage('Problem encountered loading the certificate')
 
                 raise FunctionError('Problem encountered loading the certificate')
+            else:
+                # Produce a FunctionResult with the results
+                yield FunctionResult(results)
 
 
         except Exception:
