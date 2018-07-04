@@ -1,0 +1,3 @@
+include README.md
+include fn_bigfix_integration/util/*
+include fn_bigfix_integration/LICENSE
