@@ -25,11 +25,6 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_parse_ssl_cert"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("utilities_parse_ssl_cert", {})
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -46,20 +41,21 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("certificate: %s", certificate)
 
+            if certificate is None:
+                raise FunctionError("Error: certificate must be specified.")
+
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
             try:  # Try catch inside a try catch ?
                 yield StatusMessage("Attempting to parse the cert as JSON")
                 parsed_cert_json = json.loads(certificate)
-                # Load the cert into PyOpenSSL; 
+                # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
                 parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                     OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
                 # Load cert also with cryptography; this package has better date attributes
                 parsed_cert_crypto = x509.load_pem_x509_certificate(
                     str(parsed_cert_json), default_backend())
-
-                yield StatusMessage("Returning results")
                 #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
                 results = {
 
@@ -73,9 +69,9 @@ class FunctionComponent(ResilientComponent):
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
             except ValueError:
-                yield StatusMessage('Problem loading the cert as JSON; Perhaps a file was provided?')
+                yield StatusMessage('Problem encountered loading the certificate')
 
-                raise FunctionError('Problem loading the certificate as JSON')
+                raise FunctionError('Problem encountered loading the certificate')
 
 
         except Exception:

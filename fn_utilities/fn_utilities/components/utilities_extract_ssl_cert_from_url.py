@@ -26,11 +26,6 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_extract_ssl_cert_from_url"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("utilities_extract_ssl_cert", {})
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
