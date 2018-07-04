@@ -135,8 +135,8 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("No Results returned for resource '{}' with query type '{}'."
                                     .format(res, umbinv_dns_type))
                 results = {}
-            elif ("rrs" in rtn and len(rtn["rrs"]) > int(self.options.get("results_limit", "20"))) \
-                    or ("rrs_tf" in rtn and len(rtn["rrs_tf"]) > int(self.options.get("results_limit", "20"))):
+            elif ("rrs" in rtn and len(rtn["rrs"]) > int(self.options.get("results_limit", "200"))) \
+                    or ("rrs_tf" in rtn and len(rtn["rrs_tf"]) > int(self.options.get("results_limit", "200"))):
 
                 att_report = create_attachment(self, func_name, res, params, rtn, query_execution_time)
                 # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
