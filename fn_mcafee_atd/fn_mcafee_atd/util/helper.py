@@ -49,8 +49,6 @@ def check_config(opts):
         if filePriority is None:  # Defaults to add_to_q
             filePriority = "add_to_q"
         trust_cert = options.get("trust_cert")
-        if trust_cert is None:  # Defaults to True
-            trust_cert = True
 
         if atd_url is None:
             log.error("atd_url is not set. You must set this value to run this function")
@@ -83,6 +81,11 @@ def check_config(opts):
         if trust_cert != "True" and trust_cert != "False":
             log.error("trust_cert is not set correctly, please set to True or False to run this function")
             raise ValueError("trust_cert is not set correctly, please set to True or False to run this function")
+        else:
+            if trust_cert == "True":
+                trust_cert = True
+            else:
+                trust_cert = False
 
         ret_dict = {
             "atd_url": atd_url,
