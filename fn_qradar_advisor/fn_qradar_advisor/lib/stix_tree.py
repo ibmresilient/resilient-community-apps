@@ -54,7 +54,8 @@ def build_tree(stix_objects, log):
             tree = MultiRootTree(TreeNode().init_with_object(obj))
             break
     if tree is None:
-        print("Failed to start up a tree")
+        log.error("Failed to start up a tree.")
+        return None
 
     while handle_relations(stix_objects, tree, log):
         pass
@@ -83,6 +84,18 @@ def handle_relations(stix_objects, tree, log):
     return found_relationship
 
 
+def get_sight_ref_created_by(stix_objects, obj, log):
+
+    sight_ref_created_by = None
+    try:
+        sighting_of_ref = stix_utils.find_object_by_id(stix_objects, obj["sighting_of_ref"])
+        sight_ref_created_by = sighting_of_ref["created_by_ref"]
+    except Exception as e:
+        sight_ref_created_by = None
+
+    return sight_ref_created_by
+
+
 def handle_sightings(stix_objects, tree, log):
     for obj in stix_objects:
         if obj["type"] == "sighting":
@@ -97,12 +110,7 @@ def handle_sightings(stix_objects, tree, log):
                             is_link=False)
             tree.add_root(node)
 
-            sight_ref_created_by = None
-            try:
-                sighting_of_ref = stix_utils.find_object_by_id(stix_objects, obj["sighting_of_ref"])
-                sight_ref_created_by = sighting_of_ref["created_by_ref"]
-            except Exception as e:
-                sight_ref_created_by = None
+            sight_ref_created_by = get_sight_ref_created_by(stix_objects, obj, log)
 
             sight_of_visitor = RelationVisitor(src_id=obj["id"],
                                                des_id=obj["sighting_of_ref"],

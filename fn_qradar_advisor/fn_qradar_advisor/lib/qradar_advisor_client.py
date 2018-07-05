@@ -93,8 +93,11 @@ class QRadarAdvisorClient(object):
             # The CSRF token is in the cookie. Add it to the
             # session header
             #
-            self.http_info.update_session(session.cookies.get_dict())
-
+            if response.status_code == 200:
+                self.http_info.update_session(session.cookies.get_dict())
+            else:
+                self.log.error("the about endpoint returns status {}".format(str(response.status_code)))
+                raise CsrfTokenError(url, "Status {}".format(str(response.status_code)))
         except Exception as e:
             self.log.error("Get token failed with exception:")
             self.log.error(str(e))
@@ -112,7 +115,7 @@ class QRadarAdvisorClient(object):
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
 
-        full_search = QradarFullSearch(self.http_info,
+        full_search = QRadarFullSearch(self.http_info,
                                        self.log,
                                        self.full_search_stage,
                                        self.full_search_timeout,
@@ -131,7 +134,7 @@ class QRadarAdvisorClient(object):
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
 
-        full_search = QradarFullSearch(self.http_info,
+        full_search = QRadarFullSearch(self.http_info,
                                        self.log,
                                        self.full_search_stage,
                                        self.full_search_timeout,
@@ -160,6 +163,11 @@ class QRadarAdvisorClient(object):
             response = session.post(url=url,
                                     data=data,
                                     verify=self.http_info.get_cafile())
+            if response.status_code != 200:
+                error_msg = "Quick search using {} returns {}".format(url, str(response))
+                self.log.error(error_msg)
+                raise QuickSearchError(url, error_msg)
+
         except Exception as e:
             self.log.error("Quick search failed with exception:")
             self.log.error(str(e))
@@ -183,6 +191,10 @@ class QRadarAdvisorClient(object):
             response = session.get(url=url,
                                    data=None,
                                    verify=self.http_info.get_cafile())
+            if response.status_code != 200:
+                error_msg = "Offense insights using {} returns error {}".format(url, str(response))
+                self.log.error(error_msg)
+                raise OffenseInsightsError(url, error_msg)
         except Exception as e:
             self.log.error("Offense insights failed with exception:")
             self.log.error(str(e))
@@ -223,7 +235,7 @@ class QRadarAdvisorClient(object):
         return stix_json
 
 
-class QradarFullSearch(SearchWaitCommand):
+class QRadarFullSearch(SearchWaitCommand):
     """
     Subclass of the SearchWaitCommand.
     """
@@ -236,7 +248,7 @@ class QradarFullSearch(SearchWaitCommand):
         self.return_stage = return_stage
         self.period = period
         self.stage3_available = False
-        super(QradarFullSearch, self).__init__(timeout, period)
+        super(QRadarFullSearch, self).__init__(timeout, period)
 
     def get_search_id(self, search_value):
         """
@@ -254,11 +266,21 @@ class QradarFullSearch(SearchWaitCommand):
             response = session.post(url=url,
                                     data=data,
                                     verify=self.http_info.get_cafile())
-            ret_json = response.json()
 
+            if response.status_code != 200:
+                error_msg = "Get search id using {} failed: {}".format(url, str(response))
+                self.log.error(error_msg)
+                raise SearchJobFailure(error_msg)
+
+            ret_json = response.json()
             #
             # There should be only one search id since we did only one here
             #
+            if len(ret_json["search_ids"]) > 1:
+                #
+                # if for any reason get search id returns more than one, we log an error
+                # and still use the first one
+                self.log.error("Get search id returns {}".format(str(ret_json)))
             search_id = ret_json["search_ids"][0]
         except Exception as e:
             self.log.error("Failed to get search id for full search with exception:")
@@ -283,10 +305,11 @@ class QradarFullSearch(SearchWaitCommand):
                                    verify=self.http_info.get_cafile())
 
             ret_json = response.json()
-            search_status = ret_json["search_status"]
-            self.log.info("Search {} status: {}".format(str(search_id), search_status))
 
             if response.status_code == 200:
+                search_status = ret_json["search_status"]
+                self.log.info("Search {} status: {}".format(str(search_id), search_status))
+
                 if search_status == self.SEARCH_RETURN_DONE:
                     status = self.SEARCH_STATUS_COMPLETED
                     #
@@ -304,7 +327,7 @@ class QradarFullSearch(SearchWaitCommand):
             self.log.error("Failed to get search status. Stop waiting for the result.")
             self.log.error(e.message)
             status = self.SEARCH_STATUS_ERROR_STOP
-            raise SearchFailure(str(search_id), search_status)
+            raise SearchFailure(str(search_id), str(status))
 
         return status
 
@@ -339,12 +362,16 @@ class QradarFullSearch(SearchWaitCommand):
         except Exception as e:
             self.log.error("Failed to get full search result.")
             self.log.error(e.message)
-            raise SearchFailure(str(search_id), str(response.status_code))
+            raise SearchFailure(str(search_id), e.message)
 
         if response.status_code == 200:
             stix_json = response.json()
         elif response.status_code == 404:
-            raise SearchFailure(str(search_id), str(response.status_code))
+            self.log.error("Search result for {} does not exist.".format(str(search_id)))
+            raise SearchFailure(str(search_id), "Search result do not exist.")
+        else:
+            self.log.error("Search result for {} returns {}".format(str(search_id), str(response)))
+            raise SearchFailure(str(search_id), str(response))
 
         return stix_json
 
@@ -427,15 +454,15 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
 
                 if ret_json.get("status", "") == self.ANALYSIS_DONE_STATUS:
                     status = self.SEARCH_STATUS_COMPLETED
-                    self.stag3_available = False
+                    self.stage3_available = False
                 elif ret_json.get("status", "") == self.ANALYSIS_DONE_STAGE3:
                     status = self.SEARCH_STATUS_COMPLETED
-                    self.stag3_available = True
+                    self.stage3_available = True
             elif response.status_code == 403:
                 #
                 # Offense does not exist or not permission
                 #
-                self.log.error("Offense {} does not exist or no permission to read".formet(str(offense_id)))
+                self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
                 status = self.SEARCH_STATUS_ERROR_STOP
         except Exception as e:
             self.log.error("Offense {} status exception: {}".format(str(offense_id), e.message))
@@ -471,14 +498,24 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
             response = session.get(url=url,
                                    verify=self.http_info.get_cafile())
 
-            if response.status_code == 200:
-                self.log.info("Get analysis result for offense {}".format(str(offense_id)))
-                stix_json = response.json()
-            elif response.status_code == 403:
-                self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
-            elif response.status_code == 404:
-                self.log.error("Offense {} analysis does not exists".format((str(offense_id))))
         except Exception as e:
             self.log.error("Exception in getting analysis result for {}:{}".format(str(offense_id), e.message))
+            raise SearchFailure(search_id, e.message)
+
+        if response.status_code == 200:
+            self.log.info("Get analysis result for offense {}".format(str(offense_id)))
+            stix_json = response.json()
+        elif response.status_code == 403:
+            self.log.error("Offense {} does not exist or no permission to read".format(str(offense_id)))
+            raise SearchFailure(search_id, str(response))
+        elif response.status_code == 404:
+            self.log.error("Offense {} analysis does not exists".format(str(offense_id)))
+            raise SearchFailure(search_id, str(response))
+        else:
+            #
+            # There shall not be any other result according to /api/docs. But just in case
+            #
+            self.log.error("Offense {} analysis failed: {}".format(str(offense_id), str(response)))
+            raise SearchFailure(search_id, str(response))
 
         return stix_json
