@@ -17,6 +17,7 @@ import logging
 import json
 import datetime
 import OpenSSL # Used for certificates
+import tempfile
 from cryptography import x509 # Used for certificates
 from cryptography.hazmat.backends import default_backend
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -42,43 +43,52 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             certificate = kwargs.get("certificate")  # text
+            incident_id = kwargs.get("incident_id")  # number
+            artifact_id = kwargs.get("artifact_id")  # number
 
             log = logging.getLogger(__name__)
             log.info("certificate: %s", certificate)
-
-            if certificate is None:
-                raise FunctionError("Error: certificate must be specified.")
+            log.info("incident_id: %s", incident_id)
+            log.info("artifact_id: %s", artifact_id)
+            client = self.rest_client()
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
+            # If certificate is none then it try to parse it either by JSON artifact
+            if certificate is not None:
 
-            try:  # Try catch inside a try catch ?
-                yield StatusMessage("Attempting to parse the cert as JSON")
-                parsed_cert_json = json.loads(certificate)
-                # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
-                parsed_cert_openssl = OpenSSL.crypto.load_certificate(
-                    OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
-                # Load cert also with cryptography; this package has better date attributes
-                parsed_cert_crypto = x509.load_pem_x509_certificate(
-                    str(parsed_cert_json), default_backend())
-                #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
-                results = {
+                try:  # Try catch inside a try catch ?
+                    yield StatusMessage("Attempting to parse the cert as JSON")
+                    parsed_cert_json = json.loads(certificate)
 
-                    "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
-                    "notBefore": str(parsed_cert_crypto.not_valid_before),
-                    "notAfter": str(parsed_cert_crypto.not_valid_after),
-                    "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
-                    "version": parsed_cert_openssl.get_version(),
-                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired')
-                }
-                
-            except ValueError:
-                yield StatusMessage('Problem encountered loading the certificate')
+                    '''
+                    Maybe we could throw json.decoder.JSONDecodeError here ??
+                    '''
+                    # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
+                    parsed_cert_openssl = OpenSSL.crypto.load_certificate(
+                        OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
+                    # Load cert also with cryptography; this package has better date attributes
+                    parsed_cert_crypto = x509.load_pem_x509_certificate(
+                        str(parsed_cert_json), default_backend())
+                    #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
+                    results = {
 
-                raise FunctionError('Problem encountered loading the certificate')
-            else:
-                # Produce a FunctionResult with the results
-                yield FunctionResult(results)
+                        "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
+                        "notBefore": str(parsed_cert_crypto.not_valid_before),
+                        "notAfter": str(parsed_cert_crypto.not_valid_after),
+                        "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
+                        "version": parsed_cert_openssl.get_version(),
+                        "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired')
+                    }
+                except ValueError:
+                    yield StatusMessage('Problem encountered loading the certificate as JSON;')
+                    
+                        
+                else:
+                    # Produce a FunctionResult with the results if no exceptions happened
+                    yield FunctionResult(results)
+
+            
 
 
         except Exception:
@@ -91,3 +101,16 @@ class FunctionComponent(ResilientComponent):
             return True
         else:
             return False
+    @staticmethod
+    def get_binary_data_from_file(client, incident_id, artifact_id):
+        """get_binary_data_from_file calls the REST API to get the attachment or artifact data"""
+
+        if artifact_id and incident_id:
+            data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+        else:
+            raise ValueError("artifact and incident id must be specified")
+
+        # Get the data
+        data = client.get_content(data_uri)
+
+        return data
