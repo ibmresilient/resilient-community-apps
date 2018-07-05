@@ -23,7 +23,6 @@ class MockClass:
             "atd_password": TestMcafeeAtdAnalyzeFile.fake_password,
             "atd_url": TestMcafeeAtdAnalyzeFile.fake_url,
             "trust_cert": TestMcafeeAtdAnalyzeFile.verify,
-            "vm_profile_list": "1",
             "filePriority": "add_to_q"
         }
         return
@@ -38,7 +37,6 @@ class MockCredsAfterCheck:
         self.atd_password = TestMcafeeAtdAnalyzeFile.fake_password
         self.atd_url = TestMcafeeAtdAnalyzeFile.fake_url
         self.trust_cert = TestMcafeeAtdAnalyzeFile.verify
-        self.vm_profile_list = "1"
         self.filePriority = "add_to_q"
         self.timeout_mins = 30
         self.polling_interval = 60
@@ -108,22 +106,11 @@ class TestMcafeeAtdAnalyzeFile:
         except ValueError as e:
             assert e.args[0] == "atd_password is not set. You must set this value to run this function"
 
-    def test_verify_config_no_vm_profile_list(self):
-        mock_opts = {
-            "fn_mcafee_atd": MockClass().mock
-        }
-        del mock_opts["fn_mcafee_atd"]["vm_profile_list"]
-        try:
-            check_config(mock_opts)
-        except ValueError as e:
-            assert e.args[0] == "vm_profile_list is not set. You must set this value to run this function"
-
     def test_verify_config_valid(self):
         mock_opts = {
             "fn_mcafee_atd": MockClass().mock
         }
         mock_opts["fn_mcafee_atd"]["trust_cert"] = "True"
-        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = "1"
         actual_config = check_config(mock_opts)
 
         expected_config = mock_opts["fn_mcafee_atd"]
@@ -162,16 +149,6 @@ class TestMcafeeAtdAnalyzeFile:
             check_config(mock_opts)
         except ValueError as e:
             assert e.args[0] == "atd_password is still the default value, this must be changed to run this function"
-
-    def test_verify_config_default_profile_list(self):
-        mock_opts = {
-            "fn_mcafee_atd": MockClass().mock
-        }
-        mock_opts["fn_mcafee_atd"]["vm_profile_list"] = "<your_vm_profile>"
-        try:
-            check_config(mock_opts)
-        except ValueError as e:
-            assert e.args[0] == "vm_profile_list is still the default value, this must be changed to run this function"
 
     def test_verify_config_default_trust_cert(self):
         mock_opts = {

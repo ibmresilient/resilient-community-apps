@@ -44,7 +44,6 @@ def check_config(opts):
             polling_interval = 60
         elif polling_interval is not None:
             polling_interval = int(polling_interval)
-        vm_profile_list = options.get("vm_profile_list")
         filePriority = options.get("filePriority")
         if filePriority is None:  # Defaults to add_to_q
             filePriority = "add_to_q"
@@ -71,13 +70,6 @@ def check_config(opts):
             log.error("atd_password is still the default value, this must be changed to run this function")
             raise ValueError("atd_password is still the default value, this must be changed to run this function")
 
-        if vm_profile_list is None:
-            log.error("vm_profile_list is not set. You must set this value to run this function")
-            raise ValueError("vm_profile_list is not set. You must set this value to run this function")
-        elif vm_profile_list == default_config["vm_profile_list"]:
-            log.error("vm_profile_list is still the default value, this must be changed to run this function")
-            raise ValueError("vm_profile_list is still the default value, this must be changed to run this function")
-
         if trust_cert != "True" and trust_cert != "False":
             log.error("trust_cert is not set correctly, please set to True or False to run this function")
             raise ValueError("trust_cert is not set correctly, please set to True or False to run this function")
@@ -93,7 +85,6 @@ def check_config(opts):
             "atd_password": atd_password,
             "timeout_mins": timeout_mins,
             "polling_interval": polling_interval,
-            "vm_profile_list": vm_profile_list,
             "filePriority": filePriority,
             "trust_cert": trust_cert
         }
@@ -130,7 +121,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
     data_dict = {
             "data": {
-                "vmProfileList": g.vm_profile_list,
                 "submitType": submit_type,
                 "url": url
             },

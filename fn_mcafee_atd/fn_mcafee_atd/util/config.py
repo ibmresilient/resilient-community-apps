@@ -21,9 +21,6 @@ timeout=30
 # Interval in seconds to wait and check if the file has finished being analyzed
 polling_interval=60
 
-# Analyzer profile ID. The profile ID number can be found in the UI Policy/Analyzer Profile page.
-vm_profile_list=<your_vm_profile>
-
 # parameter with values either 'run_now' or 'add_to_q', defaults to 'add_to_q'
 filePriority=add_to_q
 
