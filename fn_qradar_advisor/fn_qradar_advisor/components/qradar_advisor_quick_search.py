@@ -10,9 +10,6 @@ from fn_qradar_advisor.lib.qradar_advisor_client import QRadarAdvisorClient
 import json
 
 
-
-
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_advisor_quick_search"""
 

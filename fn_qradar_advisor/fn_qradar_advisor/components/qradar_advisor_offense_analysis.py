@@ -9,6 +9,7 @@ from fn_qradar_advisor.lib.qradar_advisor_client import QRadarAdvisorClient
 from fn_qradar_advisor.lib import stix_utils
 from fn_qradar_advisor.lib import stix_tree
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'qradar_advisor_offense_analysis"""
 
