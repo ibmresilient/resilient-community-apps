@@ -129,6 +129,7 @@ class TestMcafeeAtdAnalyzeFile:
         expected_config = mock_opts["fn_mcafee_atd"]
         expected_config["timeout_mins"] = 30
         expected_config["polling_interval"] = 60
+        expected_config["trust_cert"] = True
 
         assert actual_config == expected_config
 
