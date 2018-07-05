@@ -13,7 +13,6 @@ from fn_qradar_advisor.lib import stix_utils
 from fn_qradar_advisor.lib import stix_tree
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_qradar_advisor.lib.qradar_advisor_client import QRadarAdvisorClient
-from fn_qradar_advisor.lib.status_handler import StatusHandler
 
 
 class FunctionComponent(ResilientComponent):
@@ -57,6 +56,15 @@ class FunctionComponent(ResilientComponent):
                                          advisor_app_id=self.options["qradar_advisor_app_id"],
                                          cafile=qradar_verify_cert,
                                          log=log)
+
+            full_search_timeout = self.options.get("full_search_timeout", 1200)
+            full_search_period = self.options.get("full_search_period", 5)
+
+            log.debug("Using timeout: {}".format(str(full_search_timeout)))
+            log.debug("Using period: {}".format(str(full_search_period)))
+
+            client.full_search_timeout = full_search_timeout
+            client.full_search_period = full_search_period
 
             client.set_full_search_stage(qradar_advisor_result_stage)
 

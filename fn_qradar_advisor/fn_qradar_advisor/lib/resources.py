@@ -2,6 +2,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
+#
+# icon resources
+#
 image_dict = {
     "identity":
         "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_identity_icon_72dpi_v1.png",
@@ -38,31 +41,3 @@ image_dict = {
         "https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_indicator_icon_72dpi_v1.png"
 }
 
-
-
-
-#IP4:
-#https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/co2_ipv4_addr_icon_72dpi_v1.png
-'''
-Incident:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_incident_icon_72dpi_v1.png
-Actor:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_threat_actor_icon_72dpi_v1.png
-Location:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_location_icon_72dpi_v1.png
-Victim Target:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_victim_target_icon_72dpi_v1.png
-
-Relation:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_relationship_icon_72dpi_v1.png
-Infrastructure:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_infrastructure_icon_72dpi_v1.png
-Email Address:
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/co2_email_addr_icon_72dpi_v1.png
-User Account
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/co2_user_account_icon_72dpi_v1.png
-Marking Definition
-https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png_standard/stix2_tlp_amber_icon_72dpi_v1.png
-
-
-'''

@@ -58,7 +58,7 @@ class TestQRadarHttpInfo(object):
         assert http_info.get_analysis_result_url(offense_id, stage) == api_base_url + "/offense/" + str(offense_id) + "/analysis/" + stage + "/stix"
 
         # offense insights
-        assert http_info.get_offense_insigths_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/insights"
+        assert http_info.get_offense_insights_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/insights"
 
         # verify cert
         assert http_info.get_cafile() == cafile

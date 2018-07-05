@@ -10,6 +10,7 @@ from search_wait_command import SearchFailure
 import json
 import time
 
+
 class CsrfTokenError(Exception):
     """ Exception in getting csrf token"""
     def __init__(self, url, message):
@@ -25,7 +26,7 @@ class QuickSearchError(Exception):
 
 
 class OffenseInsightsError(Exception):
-    """ Exceptipn in fetching offense insights"""
+    """ Exception in fetching offense insights"""
     def __init__(self, url, message):
         fail_msg = "Offense insights using [{}] throws exception. Error [{}]".format(url, message)
         super(OffenseInsightsError, self).__init__(fail_msg)
@@ -52,30 +53,30 @@ class QRadarAdvisorClient(object):
     def set_full_search_stage(self, stage):
         """
 
-        :param stage:
+        :param stage: "stage1", "stage2", or "stage3". This is the stage of result user wants
         :return:
         """
         self.full_search_stage = stage
 
     def set_full_search_timeout(self, timeout):
         """
-
-        :param timeout:
+        Set the time out value for a full search
+        :param timeout: Time out in seconds
         :return:
         """
         self.full_search_timeout = timeout
 
     def set_full_search_period(self, period):
         """
-
-        :param period:
+        Set the period for checking status
+        :param period: period in seconds
         :return:
         """
         self.full_search_period = period
 
     def get_csrf_token(self):
         """
-        The call to the "about" endpoint serves the way to fetch a CSRF token
+        The call to the "about" endpoint serves as the way to fetch a CSRF token
         The CSRF token will be added to the session header
         :return: void
         """
@@ -83,10 +84,6 @@ class QRadarAdvisorClient(object):
 
         try:
             session = self.http_info.get_session()
-            #
-            # If the connection drops, and we
-            #
-
             response = session.get(url=url,
                                    verify=self.http_info.get_cafile())
             #
@@ -107,7 +104,7 @@ class QRadarAdvisorClient(object):
         """
         Full search for an indicator
         :param search_value: indicator value. For example "user:jsmith"
-        :return: stix in json
+        :return: stix2 in json
         """
         #
         # Make sure we have the CSRF token
@@ -128,8 +125,8 @@ class QRadarAdvisorClient(object):
     def full_search_by_id(self, search_id):
         """
         Get full search result for a search_id
-        :param search_id:
-        :return:
+        :param search_id: search id
+        :return: stix2 in json
         """
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
@@ -148,7 +145,7 @@ class QRadarAdvisorClient(object):
         """
         Do a quick search for an indicator
         :param search_value: indicator value. For example "8.8.8.8"
-        :return: search result in json
+        :return: search result in json (Not stix2)
         """
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
@@ -179,12 +176,12 @@ class QRadarAdvisorClient(object):
         """
         Get the insights for an offense
         :param offense_id: QRadar offense id
-        :return:
+        :return: summary in json (Not stix2)
         """
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
 
-        url = self.http_info.get_offense_insigths_url(offense_id)
+        url = self.http_info.get_offense_insights_url(offense_id)
         session = self.http_info.get_session()
 
         try:
@@ -206,14 +203,14 @@ class QRadarAdvisorClient(object):
                          restart_if_existed=True, return_stage="stage3",
                          timeout=1200, period=5):
         """
-
+        Do an analysis for a given offense
         :param offense_id: id for offense
         :param restart_if_existed: QRadar Advisor keeps the analysis result. Set to False
                 if just take the existing result. True to force restart
         :param return_stage: "stage1", "stage2", or "stage3"
         :param timeout: timeout for waiting for analysis result
         :param period: period for checking status
-        :return: stix in json
+        :return: stix2 in json
         """
         if not self.http_info.xsrf_token:
             self.get_csrf_token()
@@ -237,7 +234,7 @@ class QRadarAdvisorClient(object):
 
 class QRadarFullSearch(SearchWaitCommand):
     """
-    Subclass of the SearchWaitCommand.
+    Subclass of the SearchWaitCommand. This is for doing a full search of an indicator
     """
     SEARCH_RETURN_DONE_STAGE3 = "DONE_STAGE3"
     SEARCH_RETURN_DONE = "DONE"
@@ -291,9 +288,9 @@ class QRadarFullSearch(SearchWaitCommand):
 
     def check_status(self, search_id):
         """
-
-        :param search_id:
-        :return:
+        Check the status of a full search given the search id
+        :param search_id: search id for the full search
+        :return: search status defined in SearchWaitCommand super class
         """
         status = self.SEARCH_STATUS_WAITING
 
@@ -313,7 +310,7 @@ class QRadarFullSearch(SearchWaitCommand):
                 if search_status == self.SEARCH_RETURN_DONE:
                     status = self.SEARCH_STATUS_COMPLETED
                     #
-                    # stage3 data is not available? Need to fall back to stage1?
+                    # stage3 data is not available? Need to fall back to stage2.
                     #
                     self.stage3_available = False
                 elif search_status == self.SEARCH_RETURN_DONE_STAGE3:
@@ -333,9 +330,9 @@ class QRadarFullSearch(SearchWaitCommand):
 
     def get_search_result(self, search_id):
         """
-
-        :param search_id:
-        :return:
+        Retrieve the full search result
+        :param search_id: search id
+        :return: stix2 in json
         """
 
         url = self.http_info.get_full_search_result_url(search_id, self.return_stage)
@@ -378,7 +375,7 @@ class QRadarFullSearch(SearchWaitCommand):
 
 class QRadarOffenseAnalysis(SearchWaitCommand):
     """
-
+    QRadar offense analysis, a search and wait command
     """
 
     ANALYSIS_DONE_STATUS = "DONE"
@@ -394,9 +391,9 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
 
     def get_search_id(self, offense_id):
         """
-
-        :param query:
-        :return:
+        Start the analysis for this given offense
+        :param offense_id: offense id
+        :return: offense id
         """
         url = self.http_info.get_analysis_url(offense_id)
         session = self.http_info.get_session()
@@ -434,8 +431,8 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
     def check_status(self, search_id):
         """
         Check the status of offense analysis
-        :param search_id:
-        :return:
+        :param search_id: same as the offense id
+        :return: status defined in the SearchWaitCommand super class
         """
         status = self.SEARCH_STATUS_WAITING
 
@@ -472,7 +469,7 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
 
     def get_search_result(self, search_id):
         """
-
+        Retrieve the analysis result
         :param search_id: same as offense_id
         :return:
         """

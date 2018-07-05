@@ -10,6 +10,9 @@ import stix_utils
 
 
 class MultiRootTree(object):
+    """
+    A stix2 bundle can be represented by a multi-root tree.
+    """
 
     def __init__(self, node):
         self.roots = []
@@ -45,6 +48,12 @@ class MultiRootTree(object):
 
 
 def build_tree(stix_objects, log):
+    """
+    Build a multi-root tree using the stix_objects input
+    :param stix_objects: list of stix objects
+    :param log:
+    :return: multi-root tree
+    """
     tree = None
     #
     # Find the first SDO to init a tree
@@ -66,6 +75,13 @@ def build_tree(stix_objects, log):
 
 
 def handle_relations(stix_objects, tree, log):
+    """
+    Handle stix2 relation objects given in the stix_objects input
+    :param stix_objects: list of stix2 objects
+    :param tree: multi-root tree to build
+    :param log:
+    :return:
+    """
     found_relationship = False
     for obj in stix_objects:
         if obj["type"] == "relationship":
@@ -85,6 +101,13 @@ def handle_relations(stix_objects, tree, log):
 
 
 def get_sight_ref_created_by(stix_objects, obj, log):
+    """
+    Get the stix2 object (from stix_objects) that creates the sighting_of object
+    :param stix_objects: stix2 object list
+    :param obj: stix2 object
+    :param log:
+    :return: stix2 object id for sight_ref_created_by
+    """
 
     sight_ref_created_by = None
     try:
@@ -97,6 +120,13 @@ def get_sight_ref_created_by(stix_objects, obj, log):
 
 
 def handle_sightings(stix_objects, tree, log):
+    """
+    Handle all the sightings within the stix_objects input
+    :param stix_objects: stix2 object list
+    :param tree: multi-root tree to build
+    :param log:
+    :return:
+    """
     for obj in stix_objects:
         if obj["type"] == "sighting":
             #
@@ -151,6 +181,15 @@ def handle_sightings(stix_objects, tree, log):
 
 
 def extract_object(stix_objects, multi_root_tree, object_id, log):
+    """
+    For a given object id, look for the node from the multi-root tree. If found, return a copy of it.
+    If not found, look for the stix object from the stix_objects list, and creat a node for it. Return the node.
+    :param stix_objects: stix object list
+    :param multi_root_tree: the multi-root tree
+    :param object_id: object id
+    :param log:
+    :return:
+    """
     node = None
     existing_node = False
 

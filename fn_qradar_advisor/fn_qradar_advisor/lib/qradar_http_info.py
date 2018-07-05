@@ -14,6 +14,7 @@ QRADAR_ANALYSIS_URL = "/offense/{offense_id}/analysis"
 QRADAR_ANALYSIS_STATUS_URL = "/offense/{offense_id}/analysis/status"
 QRADAR_ANALYSIS_RESULT_URL = "/offense/{offense_id}/analysis/{stage}/stix"
 
+
 class HttpInfo(object):
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
         self.host = qradar_host
@@ -38,7 +39,7 @@ class HttpInfo(object):
 
     def get_quick_search_url(self):
         """
-
+        url for quick search
         :return:
         """
         return self.api_base_url + QRADAR_QUICK_SEARCH_URL
@@ -60,9 +61,9 @@ class HttpInfo(object):
 
     def get_full_search_result_url(self, search_id, stage):
         """
-
-        :param s_id:
-        :param stage:
+        url for full search result
+        :param search_id: search id
+        :param stage: "stage1", "stage2", or "stage3"
         :return:
         """
         sid = str(search_id)
@@ -71,7 +72,7 @@ class HttpInfo(object):
 
     def get_analysis_url(self, offense_id):
         """
-
+        URL to start offense analysis
         :param offense_id:
         :return:
         """
@@ -126,7 +127,12 @@ class HttpInfo(object):
         """
         return self.session
 
-    def get_offense_insigths_url(self, offense_id):
+    def get_offense_insights_url(self, offense_id):
+        """
+        URL for offense insights
+        :param offense_id: offense id
+        :return:
+        """
         url = self.api_base_url + QRADAR_OFFENSE_INSIGHTS_URL.format(offense_id=offense_id)
         return url
 

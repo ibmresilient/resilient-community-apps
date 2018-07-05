@@ -24,7 +24,7 @@ IBM_RELEVANCE = u"x_ibm_security_relevance"
 
 def get_obserables(stix_json, log):
     """
-
+    get obserables from stix2 json
     :param stix_json:
     :param log:
     :return:
@@ -97,8 +97,8 @@ def get_observable_description(stix_obj, log):
 
 def get_obserable_type(stix_obj, log):
     """
-
-    :param stix_obj:
+    Get obserable type for a stix object
+    :param stix_obj: stix object input
     :param log:
     :return:
     """
@@ -152,8 +152,8 @@ def get_obserable(stix_obj, log):
 def find_object_by_id(stix_objects, obj_id):
     """
     Find a stix obj using obj_id
-    :param stix_objects:
-    :param obj_id:
+    :param stix_objects: list of stix2 objects
+    :param obj_id: object id to look for
     :return:
     """
     ret_obj = None

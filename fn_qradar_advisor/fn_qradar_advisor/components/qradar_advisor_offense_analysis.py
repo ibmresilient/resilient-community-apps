@@ -46,6 +46,12 @@ class FunctionComponent(ResilientComponent):
                 # User wants restart a new analysis. Warn him/her it could take some time
                 yield StatusMessage("Restarting a new analysis. It could take up to 15 minutes...")
 
+            offense_analysis_timeout = self.options.get("offense_analysis_timeout", 1200)
+            offense_analysis_period = self.options.get("offense_analysis_period", 5)
+
+            log.debug("Using timeout: {}".format(str(offense_analysis_timeout)))
+            log.debug("Using period: {}".format(str(offense_analysis_period)))
+
             client = QRadarAdvisorClient(qradar_host=self.options["qradar_host"],
                                          qradar_token=self.options["qradar_advisor_token"],
                                          advisor_app_id=self.options["qradar_advisor_app_id"],
@@ -53,7 +59,9 @@ class FunctionComponent(ResilientComponent):
                                          log=log)
             stix_json = client.offense_analysis(offense_id=qradar_offense_id,
                                                 restart_if_existed=qradar_analysis_restart_if_existed,
-                                                return_stage=qradar_advisor_result_stage)
+                                                return_stage=qradar_advisor_result_stage,
+                                                timeout=offense_analysis_timeout,
+                                                period=offense_analysis_period)
             #
             # extract list of observables from this stix bundle
             #
