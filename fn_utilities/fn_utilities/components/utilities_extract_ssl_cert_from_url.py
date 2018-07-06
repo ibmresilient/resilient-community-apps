@@ -9,7 +9,7 @@
     In test cases it uses pyOpenSSL library (https://pyopenssl.org/en/stable/index.html) 
     to confirm the output certificate data is in valid PEM format.
 
-    Returns the certifiacte encoded in JSON along with a 'successful' boolean to indicate whether the operation was successful.
+    Returns the certificate encoded in JSON along with a 'successful' boolean to indicate whether the operation was successful.
     If a valid URL is provided, the associated certificate is saved as an artifact in the Post-Processing Script.
 """
 try:
@@ -26,20 +26,21 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'utilities_extract_ssl_cert_from_url"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("utilities_extract_ssl_cert", {})
 
     @function("utilities_extract_ssl_cert_from_url")
     def _utilities_extract_ssl_cert_from_url_function(self, event, *args, **kwargs):
         """Function: This function takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.
-Inputs: A HTTPS_URL.
-Outputs: Certificate file encoded in JSON."""
+        Inputs: A HTTPS_URL.
+        Outputs: Certificate file encoded in JSON.
+
+        Schema of the results :
+
+        results = 
+        {
+            "certificate": Certificate string encoded as JSON or NoneType,
+            "successful": True if certificate is not NoneType; False otherwise
+        }
+        """
         try:
             # Get the function parameters:
             https_url = kwargs.get("https_url")  # text
@@ -80,6 +81,9 @@ Outputs: Certificate file encoded in JSON."""
             except Exception:
                 raise FunctionError("Problem encountered while parsing the cert.")
 
+            finally:
+                # Close the connection once we have what we want
+                conn.close() 
             # Prepares a JSON object from the get_server_certificate function result
             serialized_cert = json.dumps(certificate, default=lambda o: o.__dict__,
                                          sort_keys=True, indent=4)
