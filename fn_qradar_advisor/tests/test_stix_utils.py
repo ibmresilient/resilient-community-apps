@@ -36,7 +36,7 @@ class TestStixUtils(object):
             "name": name
         }
 
-        observable = stix_utils.get_obserable(stix_obj, logging)
+        observable = stix_utils.get_observable(stix_obj, logging)
 
         assert observable[u"toxicity"] == toxicity
         assert observable[u"relevance"] == relevant
@@ -52,7 +52,7 @@ class TestStixUtils(object):
         }
 
         # a stix relation does not correspond to any observable
-        ret = stix_utils.get_obserable(stix_obj, logging)
+        ret = stix_utils.get_observable(stix_obj, logging)
         assert not ret
 
     def test_get_observables(self):
@@ -83,7 +83,7 @@ class TestStixUtils(object):
             "objects": [stix_obj1, stix_obj2, stix_obj3]
         }
 
-        observables = stix_utils.get_obserables(stix_json, logging)
+        observables = stix_utils.get_observables(stix_json, logging)
 
         # The relation shall not be here
         assert len(observables) == 2
@@ -111,21 +111,21 @@ class TestStixUtils(object):
             }
         }
 
-        obs_type = stix_utils.get_obserable_type(stix_obj, logging)
+        obs_type = stix_utils.get_observable_type(stix_obj, logging)
         assert obs_type == "ipv4-addr"
 
         stix_obj["name"] = "Url"
-        assert stix_utils.get_obserable_type(stix_obj, logging) == "url"
+        assert stix_utils.get_observable_type(stix_obj, logging) == "url"
 
         stix_obj["name"] = "DomainName"
-        assert stix_utils.get_obserable_type(stix_obj, logging) == "domain"
+        assert stix_utils.get_observable_type(stix_obj, logging) == "domain"
 
         # if we don't know how to map, use the object type
         stix_obj["name"] = "Fake"
-        assert stix_utils.get_obserable_type(stix_obj, logging) == stix_obj["type"]
+        assert stix_utils.get_observable_type(stix_obj, logging) == stix_obj["type"]
 
         stix_obj["type"] = "observed-data"
-        assert stix_utils.get_obserable_type(stix_obj, logging) == obj_type
+        assert stix_utils.get_observable_type(stix_obj, logging) == obj_type
 
     def test_get_observable_description(self):
         obj_des = "object description"

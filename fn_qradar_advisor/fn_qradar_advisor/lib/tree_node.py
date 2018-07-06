@@ -74,7 +74,7 @@ class TreeNode(object):
             self.log = log
         self.id = stix_obj["id"]
         self.name = stix_utils.get_observable_description(stix_obj, self.log)
-        self.type = stix_utils.get_obserable_type(stix_obj, self.log)
+        self.type = stix_utils.get_observable_type(stix_obj, self.log)
         self.description = stix_obj.get("description", "")
         self.objects = stix_obj.get("objects", {})
         self.is_root = False

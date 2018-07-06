@@ -66,8 +66,8 @@ class FunctionComponent(ResilientComponent):
             #
             # extract list of observables from this stix bundle
             #
-            observables = stix_utils.get_obserables(stix_json=stix_json,
-                                                    log=log)
+            observables = stix_utils.get_observables(stix_json=stix_json,
+                                                     log=log)
             #
             # generate a folder-tree like structure in html for this stix bundle
             #

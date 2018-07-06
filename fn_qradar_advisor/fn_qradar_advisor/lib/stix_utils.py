@@ -22,9 +22,9 @@ IBM_TOXICITY = u"x_ibm_security_toxicity"
 IBM_RELEVANCE = u"x_ibm_security_relevance"
 
 
-def get_obserables(stix_json, log):
+def get_observables(stix_json, log):
     """
-    get obserables from stix2 json
+    get observables from stix2 json
     :param stix_json:
     :param log:
     :return:
@@ -32,7 +32,7 @@ def get_obserables(stix_json, log):
     objects = stix_json["objects"]
     observables = []
     for obj in objects:
-        observable = get_obserable(obj, log)
+        observable = get_observable(obj, log)
         if observable:
             observables.append(observable)
 
@@ -97,9 +97,9 @@ def get_observable_description(stix_obj, log):
     return desc_str
 
 
-def get_obserable_type(stix_obj, log):
+def get_observable_type(stix_obj, log):
     """
-    Get obserable type for a stix object
+    Get observable type for a stix object
     :param stix_obj: stix object input
     :param log:
     :return:
@@ -129,7 +129,7 @@ def get_obserable_type(stix_obj, log):
     return obj_type
 
 
-def get_obserable(stix_obj, log):
+def get_observable(stix_obj, log):
     """
     Convert a stix_obj into what we are going to show
     :param stix_obj: dict of a stix obj
@@ -146,7 +146,7 @@ def get_obserable(stix_obj, log):
     res_obj[u"toxicity"] = stix_obj[IBM_TOXICITY]
     res_obj[u"relevance"] = stix_obj[IBM_RELEVANCE]
     res_obj[u"description"] = get_observable_description(stix_obj, log)
-    res_obj[u"type"] = get_obserable_type(stix_obj, log)
+    res_obj[u"type"] = get_observable_type(stix_obj, log)
 
     return res_obj
 
