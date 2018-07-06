@@ -8,7 +8,7 @@ requires_resilient_version = "29.0"
 major, minor = requires_resilient_version.split('.', 2)[:2]
 
 setup(
-    name='Export to JSON',
+    name='resilient_export_to_json',
     version='1.0.0',
     use_scm_version={"root": "../", "relative_to": __file__},
     setup_requires=['setuptools_scm==1.5.0'],

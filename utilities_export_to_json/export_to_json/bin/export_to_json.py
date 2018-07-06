@@ -10,6 +10,7 @@ import logging
 import os
 import collections
 import re
+import time
 from datetime import datetime, timedelta
 from calendar import timegm
 
@@ -30,6 +31,9 @@ class ExportArgumentParser(resilient.ArgumentParser):
 
         self.add_argument('filename',
                           help="The JSON filename.")
+
+        self.add_argument('last_modified_field_name',
+                          help="Fieldname that contains last run time.")
 
         self.add_argument("--since",
                           type=valid_date_or_days_ago,
@@ -242,9 +246,7 @@ class ExportContext(object):
 
         return new_data_table
 
-
-    def get_incidents(self):
-        """Yield all the incidents"""
+    def get_partial_incident_data(self, last_run_time):
         specific_ids = self.opts.get("incident")
         created_since_date_or_days_ago = self.opts.get("since")
         created_until_date_or_days_ago = self.opts.get("until")
@@ -259,21 +261,45 @@ class ExportContext(object):
             conditions.append({"field_name": "create_date", "method": "gt", "value": get_json_time_or_days_ago(created_since_date_or_days_ago)})
         if created_until_date_or_days_ago:
             conditions.append({"field_name": "create_date", "method": "lte", "value": get_json_time_or_days_ago(created_since_date_or_days_ago)})
+        if last_run_time:
+            conditions.append({"field_name":("properties." + self.opts.get("last_modified_field_name")), "method": "gt", "value": last_run_time})
 
         query = {"filters": [{"conditions": conditions}]}
 
         incidents = self.client.post("/incidents/query?return_level=partial", query)
-        if len(incidents) is 0:
-            raise Exception("Unable to get basic incident")
-
         if specific_ids:
             incidents = [i for i in incidents if i["id"] in specific_ids]
+
+        return incidents
+
+    def get_basic_incident_data(self):
+        if not os.path.isfile(".resilient_lastrun"):
+            return self.get_partial_incident_data(None)
+
+        with open(".resilient_lastrun", "r") as lastrun_file:
+            data = lastrun_file.read().replace("\n", "")
+
+        try:
+            last_run_time = int(data)
+        except Exception:
+            return self.get_partial_incident_data(None)
+
+        return self.get_partial_incident_data(last_run_time)
+
+    def get_incidents(self):
+        """Yield all the incidents"""
+        incidents = self.get_basic_incident_data()
         for incident in incidents:
             full_incident = self.client.get("/incidents/{}?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
             if full_incident.get("id") is None:
                 raise Exception("Incident data corrupted, \"id\" attribute is non-existent.")
 
+            properties = full_incident.get("properties")
+            last_modified_field = properties.get(self.opts.get("last_modified_field_name"))
+
             full_incident = self.clean_schema(full_incident, "incident")
+
+            full_incident["last_modified_etj"] = last_modified_field
             yield full_incident
 
 
@@ -335,6 +361,22 @@ class ExportContext(object):
 
         # generators do not provide a length
         incident_count = 0
+        existing_incidents = None
+        if os.path.isfile(filename):
+            with open(filename, "r") as export_file:
+                try:
+                    existing_incidents = json.loads(export_file.read().replace("\n", ""))
+                except Exception:
+                    existing_incidents = {}
+            os.remove(filename)
+
+        if os.path.isfile(".resilient_lastrun"):
+            with open(".resilient_lastrun", "r") as lastrun_file:
+                file_last_time = lastrun_file.read().replace("\n", "")
+        else:
+            file_last_time = 0
+
+        highest_last_modified = int(file_last_time)
         with open(filename, "w") as outfile:
             incidents = self.get_incidents()
             incidents_list = []
@@ -354,10 +396,57 @@ class ExportContext(object):
                 for data_table_name in data_tables:
                     incident[data_table_name] = data_tables[data_table_name]
 
+                if incident.get("last_modified_etj") is not None:
+                    last_modified_time = incident.get("last_modified_etj")
+
+                    if type(last_modified_time) is str:
+                        try:
+                            last_modified_time = int(last_modified_time)
+                        except Exception:
+                            incident.pop("last_modified_etj", None)
+                            incidents_list.append(incident)  
+                            continue
+
+                    if last_modified_time > highest_last_modified:
+                        highest_last_modified = last_modified_time
+
+                    incident.pop("last_modified_etj", None)
+
                 incidents_list.append(incident)
 
-            json.dump({"incidents":incidents_list}, outfile)
-            outfile.write("\n")
+            if not existing_incidents:
+                json.dump({"incidents":incidents_list}, outfile)
+                outfile.write("\n")
+            else:
+                for i, existing_incident in enumerate(existing_incidents.get("incidents")):
+                    for updated_incident in incidents_list:
+                        if existing_incident.get("id") == updated_incident.get("id") and existing_incident.get("id") is not None:
+                            existing_incidents["incidents"][i] = updated_incident
+                            break
+
+                for updated_incident in incidents_list:
+                    if existing_incidents.get("incidents") is None:
+                        break
+                    if updated_incident.get("id") is None:
+                        continue
+
+                    incidents = existing_incidents.get("incidents")
+
+                    found_incident = False
+                    for incident in incidents:
+                        if incident.get("id") == updated_incident.get("id"):
+                            found_incident = True
+                            break
+
+                    if found_incident is False:
+                        existing_incidents["incidents"].append(updated_incident)
+ 
+                json.dump(existing_incidents, outfile)
+                outfile.write("\n")
+
+        with open(".resilient_lastrun", "w") as outfile:
+            epoch_time = highest_last_modified
+            outfile.write(str(epoch_time))
 
         print("{} incidents written to {}".format(incident_count, filename))
         return filename

@@ -147,7 +147,7 @@ def fake_json_dump(object, outfile):
 	return None
 
 def call_export_to_json():
-	testargs = ["export_to_json.py", "export.json"]
+	testargs = ["export_to_json.py", "export.json", "time_incident_modified"]
 	with patch.object(sys, 'argv', testargs):
 		main()
 
@@ -237,5 +237,8 @@ def test_partial_response(caplog, a):
 
 	if os.path.exists("export.json"):
 		os.remove("export.json")
+
+	if os.path.exists(".resilient_lastrun"):
+		os.remove(".resilient_lastrun")
 
 	assert True
