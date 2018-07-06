@@ -215,8 +215,10 @@ def check_atd_status(g, task_id):
     check_status_code(submission_status)
     submit_json = submission_status.json()
     if submit_json['results']['istate'] == 4:
+        log.info("Analysis is still running")
         return False
     elif submit_json['results']['istate'] == 3:
+        log.info("Analysis is still running")
         return False
     elif submit_json['results']['istate'] == 1:
         log.debug("ATD Analysis Status: {}".format(submit_json['results']['status']))
