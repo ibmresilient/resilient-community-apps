@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_qradar_advisor',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT License',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_qradar_advisor'",
-    long_description="Resilient Circuits Components for 'fn_qradar_advisor'",
+    long_description="fn_qradar_advisor supports QRadar Advisor quick search, full search, and retrieve offense insights and analysis",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
