@@ -11,15 +11,16 @@ from dxlclient import EventCallback
 from dxlclient.client_config import DxlClientConfig
 try:
     from fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict, map_values, \
-        create_incident
+        create_incident, add_methods_to_global
 except ModuleNotFoundError:
     from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict, \
-        map_values, create_incident
+        map_values, create_incident, add_method_to_global
 
 log = logging.getLogger(__name__)
 
 
-def get_connected_resilient_client(opts):
+def get_connected_resilient_client(config):
+    opts = config.get("opts")
     client = get_resilient_client(opts)
     client.connect(opts.email, opts.password)
 
@@ -31,6 +32,7 @@ class DxlComponentListener(ResilientComponent):
     def __init__(self, opts):
         super(DxlComponentListener, self).__init__(opts)
         self.config = verify_config(opts)
+        add_methods_to_global()
 
         # Create and connect DXL client
         config_client_file = self.config.get("config_client")
@@ -83,10 +85,11 @@ class DxlComponentListener(ResilientComponent):
 
                     # Map values from topic to incident template to create new incident
 #                    inc_temp = map_values_old(self.temp, mapping_dict, message)
-                    inc_temp = map_values(self.temp, message_dict)
+                    inc_data = map_values(self.temp, message_dict)
 
                     # Create new Incident in Resilient
-                    response = create_incident(get_connected_resilient_client(config), inc_temp)
+                    log.info(inc_data)
+                    response = create_incident(get_connected_resilient_client(config), inc_data)
                     log.info("Created incident {}".format(str(response.get("id"))))
 
             for event_topic, template in topic_template_dict.iteritems():

@@ -4,11 +4,12 @@
 import logging
 import json
 import os
+import datetime
+import calendar
 from os.path import join, pardir
-from dxlclient.client import DxlClient
-from dxlclient import EventCallback
-from dxlclient.client_config import DxlClientConfig
-from jinja2 import Template
+from resilient_circuits.template_functions import environment
+import resilient_circuits.template_functions as template_functions
+
 
 log = logging.getLogger(__name__)
 
@@ -70,33 +71,35 @@ def create_incident(resilient_client, payload):
     return response
 
 
-def map_values_old(template_file, mapping_template_file, message):
-
-    with open(template_file, 'r') as template, open(mapping_template_file, 'r') as map_temp:
-        mapping_template = Template(map_temp.read())
-        message_dict = json.loads(message)
-        mapping_template = mapping_template.render(message_dict)
-
-        incident_template = Template(template.read())
-        mapping_dict = json.loads(mapping_template)
-        incident_template = incident_template.render(mapping_dict)
-
-        return incident_template
+def add_methods_to_global():
+    # Add ds_to_millis to global env so it can be used in filters
+    ds_filter = {
+        "ds_to_millis": ds_to_millis,
+        "get_incident_type": get_incident_type
+    }
+    env = environment()
+    env.globals.update(ds_filter)
 
 
-def map_values(template_file, message_dict):
+# Converts string datetime to milliseconds epoch
+def ds_to_millis(val):
+    """Assuming val is a string datetime, e.g. '2017-05-17T17:07:59.114Z' (UTC), convert to milliseconds epoch"""
+    if not val:
+        return val
+    try:
+        if len(val) != 24:
+            raise ValueError("Invalid timestamp length %s" % val)
+        ts = val[:23]
+        ts_format = "%Y-%m-%dT%H:%M:%S.%f"
+        dt = datetime.datetime.strptime(ts, ts_format)
+        return calendar.timegm(dt.utctimetuple()) * 1000
+    except Exception as e:
+        log.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
+        return None
 
-    with open(template_file, 'r') as template:
 
-        incident_template = Template(template.read())
-        incident_template = incident_template.render(message_dict)
-
-        return incident_template
-
-
-# Adds Incident Type to message dict
-def add_incident_type(message):
-    category = message.get("event").get("category")
+# Returns Incident Type if there is one to return
+def get_incident_type(category):
     log.debug("Category is {}".format(category))
 
     incident_type_lookup = {
@@ -105,9 +108,18 @@ def add_incident_type(message):
     incident_type = incident_type_lookup.get(category)
 
     if incident_type is not None:
-        message["incident_type"] = incident_type
+        return incident_type
+    else:
+        return ""
 
-    return message
+
+def map_values(template_file, message_dict):
+    with open(template_file, 'r') as template:
+
+        incident_template = template.read()
+        incident_data = template_functions.render(incident_template, message_dict)
+
+        return incident_data
 
 
 def _merge_two_dicts(a, b):
@@ -155,24 +167,6 @@ def get_topic_template_dict(overrides_dir=None):
         topic_template_dict[topic] = v
 
     return topic_template_dict
-
-
-# def _get_values_from_event(message):
-#     message = json.loads(message) #ast.literal_eval(message)
-#     dict = {}
-#     dict["target_artifact"] = message.get("event").get("target")
-#     dict["source_artifact"] = message.get("event").get("source")
-#     dict["category"] = message.get("event").get("category")
-#     dict["event_desc"] = message.get("event").get("eventDesc")
-#     dict["threat_type"] = message.get("event").get("threatType")
-#     dict["threat_name"] = message.get("event").get("threatName")
-#
-#     # Verify only usable values are being added to the dict
-#     for k, v in dict.iteritems():
-#         if v == "null" or v is None or v == "":
-#             del dict[k]
-#
-#     return dict
 
 
 # def event_subscriber(res_client, config):
