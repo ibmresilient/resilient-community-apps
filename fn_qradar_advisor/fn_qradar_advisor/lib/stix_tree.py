@@ -230,13 +230,17 @@ def get_html(stix, log):
     stix_tree = build_tree(objects, log)
     html = ""
     trees = stix_tree.roots
+    num_objects = 0
+    num_links = 0
     for subtree in trees:
         html = html + "<ul>"
         html_visitor = HtmlGenVisitor(log)
         subtree.accept(html_visitor)
         html = html + html_visitor.html + "</ul>"
+        num_links = num_links + html_visitor.link_count
+        num_objects = num_objects + html_visitor.obj_count
 
-    html = html + "<p>There are {} objects and {} links</p>".format(str(html_visitor.obj_count), str(html_visitor.link_count))
+    html = html + "<p>There are {} objects and {} links</p>".format(str(num_objects), str(num_links))
 
     return html
 

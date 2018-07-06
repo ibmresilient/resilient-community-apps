@@ -83,7 +83,9 @@ def get_observable_description(stix_obj, log):
         elif stix_obj[u"name"] == u"DomainName":
             desc = stix_obj[u"pattern"].replace("[domain-name:value='", '').replace("']", '')
         else:
-            log.error("Not handling {}".format(str(stix_obj)))
+            # Don't know how to handle the pattern, just put everything
+            desc = str(stix_obj[u"pattern"])
+            log.debug("Not handling {}".format(str(stix_obj)))
     else:
         desc = stix_obj["name"]
 

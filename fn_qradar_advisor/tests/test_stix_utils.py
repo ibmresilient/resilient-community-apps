@@ -164,6 +164,6 @@ class TestStixUtils(object):
         assert domain == stix_utils.get_observable_description(stix_obj, logging)
 
         stix_obj["name"] = "unknown name"
-        # Don't know how to handle unknown name, return empty string
-        assert "" == stix_utils.get_observable_description(stix_obj, logging)
+        # Don't know how to handle unknown name, return the pattern as string
+        assert str(stix_obj["pattern"]) == stix_utils.get_observable_description(stix_obj, logging)
 

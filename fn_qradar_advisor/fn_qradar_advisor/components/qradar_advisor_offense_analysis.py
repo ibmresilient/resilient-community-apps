@@ -47,8 +47,8 @@ class FunctionComponent(ResilientComponent):
                 # User wants restart a new analysis. Warn him/her it could take some time
                 yield StatusMessage("Restarting a new analysis. It could take up to 15 minutes...")
 
-            offense_analysis_timeout = self.options.get("offense_analysis_timeout", 1200)
-            offense_analysis_period = self.options.get("offense_analysis_period", 5)
+            offense_analysis_timeout = int(self.options.get("offense_analysis_timeout", 1200))
+            offense_analysis_period = int(self.options.get("offense_analysis_period", 5))
 
             log.debug("Using timeout: {}".format(str(offense_analysis_timeout)))
             log.debug("Using period: {}".format(str(offense_analysis_period)))

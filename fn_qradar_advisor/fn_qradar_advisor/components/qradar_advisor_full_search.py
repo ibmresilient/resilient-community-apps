@@ -63,8 +63,8 @@ class FunctionComponent(ResilientComponent):
             log.debug("Using timeout: {}".format(str(full_search_timeout)))
             log.debug("Using period: {}".format(str(full_search_period)))
 
-            client.full_search_timeout = full_search_timeout
-            client.full_search_period = full_search_period
+            client.full_search_timeout = int(full_search_timeout)
+            client.full_search_period = int(full_search_period)
 
             client.set_full_search_stage(qradar_advisor_result_stage)
 
