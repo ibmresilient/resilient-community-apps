@@ -25,6 +25,8 @@ OBJECT_TYPES = {
     "attachment": 5
 }
 
+LAST_RUN_FILE = ".resilient_export_to_json_lastrun"
+
 class ExportArgumentParser(resilient.ArgumentParser):
     def __init__(self, config_file=None):
         super(ExportArgumentParser, self).__init__(config_file=config_file)
@@ -33,7 +35,7 @@ class ExportArgumentParser(resilient.ArgumentParser):
                           help="The JSON filename.")
 
         self.add_argument('last_modified_field_name',
-                          help="Fieldname that contains last run time.")
+                          help="Name of a custom field that holds the last-modified timestamp")
 
         self.add_argument("--since",
                           type=valid_date_or_days_ago,
@@ -273,10 +275,10 @@ class ExportContext(object):
         return incidents
 
     def get_basic_incident_data(self):
-        if not os.path.isfile(".resilient_lastrun"):
+        if not os.path.isfile(LAST_RUN_FILE):
             return self.get_partial_incident_data(None)
 
-        with open(".resilient_lastrun", "r") as lastrun_file:
+        with open(LAST_RUN_FILE, "r") as lastrun_file:
             data = lastrun_file.read().replace("\n", "")
 
         try:
@@ -370,8 +372,8 @@ class ExportContext(object):
                     existing_incidents = {}
             os.remove(filename)
 
-        if os.path.isfile(".resilient_lastrun"):
-            with open(".resilient_lastrun", "r") as lastrun_file:
+        if os.path.isfile(LAST_RUN_FILE):
+            with open(LAST_RUN_FILE, "r") as lastrun_file:
                 file_last_time = lastrun_file.read().replace("\n", "")
         else:
             file_last_time = 0
@@ -444,7 +446,7 @@ class ExportContext(object):
                 json.dump(existing_incidents, outfile)
                 outfile.write("\n")
 
-        with open(".resilient_lastrun", "w") as outfile:
+        with open(LAST_RUN_FILE, "w") as outfile:
             epoch_time = highest_last_modified
             outfile.write(str(epoch_time))
 
