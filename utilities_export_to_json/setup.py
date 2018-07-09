@@ -9,7 +9,7 @@ major, minor = requires_resilient_version.split('.', 2)[:2]
 
 setup(
     name='resilient_export_to_json',
-    version='1.0.0',
+    version='1.0.1',
     use_scm_version={"root": "../", "relative_to": __file__},
     setup_requires=['setuptools_scm==1.5.0'],
     url='https://developer.ibm.com/resilient',

@@ -269,7 +269,7 @@ class ExportContext(object):
             conditions.append(condition)
 
         last_modified_field_name = self.opts.get("last_modified_field_name")
-        if self.is_date("incident", last_modified_field_name) is False:
+        if last_modified_field_name is not None and self.is_date("incident", last_modified_field_name) is False:
             raise Exception("Last Modified Field is not a datetime.")
 
         if last_run_time and last_modified_field_name is not None:
