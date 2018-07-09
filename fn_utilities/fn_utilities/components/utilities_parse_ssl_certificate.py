@@ -12,7 +12,6 @@
 
     The results returned by this function can then be saved as a Rich Text note.
 """
-
 import logging
 import json
 import datetime
@@ -24,10 +23,10 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'utilities_parse_ssl_cert"""
+    """Component that implements Resilient function 'utilities_parse_ssl_certificate"""
 
-    @function("utilities_parse_ssl_cert")
-    def _utilities_parse_ssl_cert_function(self, event, *args, **kwargs):
+    @function("utilities_parse_ssl_certificate")
+    def _utilities_parse_ssl_certificate_function(self, event, *args, **kwargs):
         """Function: Takes in an SSL Certificate.
         Attempts to parse information from this certificate and save it as a note
         
@@ -44,14 +43,14 @@ class FunctionComponent(ResilientComponent):
         }"""
         try:
             # Get the function parameters:
+            artifact_id = kwargs.get("artifact_id")  # number
             certificate = kwargs.get("certificate")  # text
             incident_id = kwargs.get("incident_id")  # number
-            artifact_id = kwargs.get("artifact_id")  # number
 
             log = logging.getLogger(__name__)
+            log.info("artifact_id: %s", artifact_id)
             log.info("certificate: %s", certificate)
             log.info("incident_id: %s", incident_id)
-            log.info("artifact_id: %s", artifact_id)
             client = self.rest_client()
 
             if certificate is None:

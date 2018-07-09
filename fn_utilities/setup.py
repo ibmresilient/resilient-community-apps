@@ -40,7 +40,7 @@ setup(
             "StringToAttachmentFunctionComponent = fn_utilities.components.utilities_string_to_attachment:FunctionComponent",
             "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent",
             "UtilitiesExtractSslCertFromUrlFunctionComponent = fn_utilities.components.utilities_extract_ssl_cert_from_url:FunctionComponent",
-            "ParseDataFromSslCertFunctionComponent = fn_utilities.components.utilities_parse_ssl_cert:FunctionComponent"
+            "UtilitiesParseSslCertificateFunctionComponent = fn_utilities.components.utilities_parse_ssl_certificate:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
