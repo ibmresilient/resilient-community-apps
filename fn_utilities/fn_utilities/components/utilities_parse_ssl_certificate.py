@@ -113,11 +113,13 @@ class FunctionComponent(ResilientComponent):
                 yield FunctionResult(results)
         
         except Exception as e:
-            log.info(e)
-
+            '''
+            Might be handy for figuring out if the user error came from them subbmitting a cert that isint PEM format
             if str(e) == [('PEM routines', 'PEM_read_bio', 'no start line')]:
                 yield FunctionError("Error: No PEM start line found, \
                     \n Only PEM certificates are supported.")
+
+            '''
 
             yield FunctionError()
     """
