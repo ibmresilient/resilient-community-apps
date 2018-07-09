@@ -1,5 +1,5 @@
+#!/usr/bin/env python
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-# !/usr/bin/env python
 
 """Export data to JSON"""
 
@@ -256,7 +256,7 @@ class ExportContext(object):
         conditions = [{"field_name": "inc_training", "method": "equals", "value": False}]
         if self.opts.get("query"):
             with open(self.opts.get("query"), 'r') as template_file:
-                conditions = json.loads(template_file.read())
+                conditions = json.load(template_file)
 
         if created_since_date_or_days_ago:
             create_date = get_json_time_or_days_ago(created_since_date_or_days_ago)
@@ -269,6 +269,9 @@ class ExportContext(object):
             conditions.append(condition)
 
         last_modified_field_name = self.opts.get("last_modified_field_name")
+        if self.is_date("incident", last_modified_field_name) is False:
+            raise Exception("Last Modified Field is not a datetime.")
+
         if last_run_time and last_modified_field_name is not None:
             field_name = ("properties." + last_modified_field_name)
             condition = {"field_name": field_name, "method": "gt", "value": last_run_time}
@@ -400,13 +403,6 @@ class ExportContext(object):
                 data_tables = self.get_datatables(incident)
                 for data_table_name in data_tables:
                     incident[data_table_name] = data_tables[data_table_name]
-
-                if type(last_modified_time) is str:
-                    try:
-                        last_modified_time = int(last_modified_time)
-                    except ValueError:
-                        incidents_list.append(incident)  
-                        continue
 
                 if last_modified_time > highest_last_modified:
                     highest_last_modified = last_modified_time

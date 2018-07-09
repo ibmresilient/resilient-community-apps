@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 import resilient
 import json
 import os
@@ -21,9 +24,11 @@ def get_json_from_file(filename):
     if os.path.isfile(filename):
         with open(filename, "r") as json_file:
             try:
-                return json.loads(json_file.read().replace("\n", ""))
+                return json.load(json_file)
             except ValueError:
-                return None
+                raise Exception(("Parsing file {} for JSON failed.".format(filename)))
+    else:
+        raise Exception(("File {} not found.".format(filename)))
 
     return None
 
@@ -39,36 +44,37 @@ def main():
         raise Exception("Invalid file provided.")
 
     if first_json.get("incidents") is None or second_json.get("incidents") is None:
-        raise Exception("Invalid JSON provided.")
+        raise Exception("Invalid JSON provided, incidents object not found.")
 
     first_incidents = first_json.get("incidents")
-    second_incidents = second_json.get("incidents")
 
-    incidents = second_incidents
+    second_incidents_array = second_json.get("incidents")
+    second_incidents = {}
+
+    for incident in second_incidents_array:
+        incident_id = incident.get("id")
+        if incident_id is not None:
+            second_incidents[incident_id] = incident
+
+    incidents = []
 
     for incident in first_incidents:
+        incident_id = incident.get("id")
         # if valid incident
-        if incident.get("id") is None:
+        if incident_id is None:
             continue
-
-        found_incident = False
-        for existing_incident in incidents:
-            # if they're the same incident
-            if incident.get("id") == existing_incident.get("id"):
-                found_incident = True
-                break
 
         # if the incident already exists, we don't want to add it
-        if found_incident is True:
-            continue
+        if second_incidents.get(incident_id) is None:
+            incidents.append(incident)
 
-        incidents.append(incident)
+    incidents += second_incidents_array
 
     with open(opts.get("output_json_file"), "w") as outfile:
         json.dump({"incidents": incidents}, outfile)
         outfile.write("\n")
 
-    print("Successfully merged JSON files.")
+    print("Successfully merged JSON files into {}.".format(opts.get("output_json_file")))
 
 
 if __name__ == "__main__":
