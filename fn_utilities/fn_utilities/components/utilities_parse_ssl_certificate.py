@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use, broad-except
+# pragma pylint: disable=unused-argument, no-self-use, broad-except,pointless-string-statement
 """
     Function utilities_parse_ssl_cert receives a certificate as a parameter.
     The certificate string is a JSON encoded string.
@@ -15,11 +15,11 @@
 import logging
 import json
 import datetime
-import OpenSSL # Used for certificates
 import tempfile
+import OpenSSL # Used for certificates
 from cryptography import x509 # Used for certificates
 from cryptography.hazmat.backends import default_backend
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
@@ -30,16 +30,14 @@ class FunctionComponent(ResilientComponent):
         """Function: Takes in an SSL Certificate.
         Attempts to parse information from this certificate and save it as a note
         
-        
-        
-        results = 
+        results =
         {
             "subject": JSON Encoded Array of subject components,
             "notBefore": The certificate is only valid AFTER this date; Formatted as Datetime,
             "notAfter": The certificate is only valid BEFORE this date; Formatted as Datetime,
             "issuer": JSON Encoded Array of issuer details,
             "version": The Version of the certificate v1/v2,
-            "expiration_status": Determined using by checking if the current date is within the range of notBefore and notAfter
+            "expiration_status": Check if the date is within the range of notBefore and notAfter
         }"""
         try:
             # Get the function parameters:
@@ -53,8 +51,9 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             client = self.rest_client()
 
-            if certificate is None:
-                raise FunctionError("Error: certificate must be specified.")
+            if certificate is None and (artifact_id or incident_id is None):
+                raise FunctionError("Error: Either a certificate string, \
+                    or BOTH artifact_id and incident_id must be supplied.")
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
@@ -64,11 +63,6 @@ class FunctionComponent(ResilientComponent):
                 try:  # Try catch inside a try catch ?
                     yield StatusMessage("Attempting to parse the cert as JSON")
                     parsed_cert_json = json.loads(certificate)
-
-                    '''
-                    Maybe we could throw json.decoder.JSONDecodeError here ??
-                    '''
-
                     # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
                     parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                         OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
@@ -78,6 +72,7 @@ class FunctionComponent(ResilientComponent):
                     
                 except ValueError:
                     yield StatusMessage('Problem encountered loading the certificate as JSON.')
+                    yield StatusMessage('Attempting to load from REST API instead.')
                     """
                         2 Possible causes for reaching this ValueError
                         -- Non valid JSON was provided; Maybe malformed cert
@@ -85,24 +80,22 @@ class FunctionComponent(ResilientComponent):
 
                         In the case of cause 2 try to load the file using the rest API
                     """
+                    # Get the artifact from the REST API
                     artifact_data = self.get_binary_data_from_file(client, incident_id, artifact_id)
-
 
                     # Create a temporary file to write the binary data to.
                     with tempfile.NamedTemporaryFile('w+b', bufsize=0) as temp_file:
                         # Write binary data to a temporary file.
                         temp_file.write(artifact_data)
                         # Load our new temporary file for parsing
-                        st_cert=open(temp_file.name, 'rt').read()
+                        st_cert = open(temp_file.name, 'rt').read()
                         # Load the cert into PyOpenSSL;
-                        parsed_cert_openssl=OpenSSL.crypto.load_certificate(
+                        parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                             OpenSSL.crypto.FILETYPE_PEM, st_cert)
 
                         # Load cert also with cryptography; this package has better date attributes
                         parsed_cert_crypto = x509.load_pem_x509_certificate(
                             st_cert, default_backend())
-                        
-                
                 #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
                 results = {
 
@@ -111,24 +104,33 @@ class FunctionComponent(ResilientComponent):
                     "notAfter": str(parsed_cert_crypto.not_valid_after),
                     "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
                     "version": parsed_cert_openssl.get_version(),
-                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired')
+                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
+                    "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
+                    "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey())
                 }
                 # Return the formatted data we have received.
                 yield StatusMessage("Finishing...")
                 yield FunctionResult(results)
-        except Exception:
+        
+        except Exception as e:
+            log.info(e)
+
+            if str(e) == [('PEM routines', 'PEM_read_bio', 'no start line')]:
+                yield FunctionError("Error: No PEM start line found, \
+                    \n Only PEM certificates are supported.")
+
             yield FunctionError()
     """
-    Takes in 3 params 
+    Takes in 3 params
     :param lower_bound the earliest date acceptable for validation
-    :param upper_bound the latest date acceptable 
+    :param upper_bound the latest date acceptable
     :param the_date the date we are checking, usually the current date at time of execution
 
 
     This function is used to ensure a SSL Cert is within a provided date range.
 
     Returns true if the_date is within the two bounds
-    False otherwise 
+    False otherwise
     """
     @staticmethod
     def _date_within_range(lower_bound, upper_bound, the_date):
@@ -140,7 +142,7 @@ class FunctionComponent(ResilientComponent):
 
     """
     Takes in 3 params
-    :client -- REST client to be used 
+    :client -- REST client to be used
     :incident_id -- The incident to be queried
     :artifact_id -- The artifact that will be queried
 

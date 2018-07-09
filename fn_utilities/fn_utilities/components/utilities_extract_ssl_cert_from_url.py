@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, pointless-string-statement
 """
     Function utilities_extract_ssl_cert_from_url receives a HTTPS_URL as a parameter.
     It then attempts to gather the certificate for this provided URL.
@@ -9,8 +9,9 @@
     In test cases it uses pyOpenSSL library (https://pyopenssl.org/en/stable/index.html) 
     to confirm the output certificate data is in valid PEM format.
 
-    Returns the certificate encoded in JSON along with a 'successful' boolean to indicate whether the operation was successful.
-    If a valid URL is provided, the associated certificate is saved as an artifact in the Post-Processing Script.
+    Returns the certificate encoded in JSON along with a 'successful' boolean.
+    This indicates whether the operation was successful.
+    If a valid URL is provided, the cert is saved as an artifact in the Post-Processing Script.
 """
 try:
     import urlparse
@@ -20,7 +21,8 @@ except ImportError:
 import logging
 import ssl
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, StatusMessage,\
+     FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
@@ -29,7 +31,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("utilities_extract_ssl_cert_from_url")
     def _utilities_extract_ssl_cert_from_url_function(self, event, *args, **kwargs):
-        """Function: This function takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.
+        """Function: 
+        This function takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.
         Inputs: A HTTPS_URL.
         Outputs: Certificate file encoded in JSON.
 
