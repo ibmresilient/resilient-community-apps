@@ -1,16 +1,14 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-#!/usr/bin/env python
+# !/usr/bin/env python
 
 """Export data to JSON"""
 
 import resilient
-import collections
 import json
 import logging
 import os
-import collections
 import re
-import time
+import argparse
 from datetime import datetime, timedelta
 from calendar import timegm
 
@@ -27,6 +25,7 @@ OBJECT_TYPES = {
 
 LAST_RUN_FILE = ".resilient_export_to_json_lastrun"
 
+
 class ExportArgumentParser(resilient.ArgumentParser):
     def __init__(self, config_file=None):
         super(ExportArgumentParser, self).__init__(config_file=config_file)
@@ -34,7 +33,7 @@ class ExportArgumentParser(resilient.ArgumentParser):
         self.add_argument('filename',
                           help="The JSON filename.")
 
-        self.add_argument('last_modified_field_name',
+        self.add_argument('--last_modified_field_name',
                           help="Name of a custom field that holds the last-modified timestamp")
 
         self.add_argument("--since",
@@ -81,14 +80,15 @@ def get_json_time_or_days_ago(dt):
         dt = datetime.now() - td
     return timegm(dt.utctimetuple()) * 1000
 
-def filter_htmltext(str):
+
+def filter_htmltext(text):
     """Removes rich text from a string"""
-    original_string = str
+    original_string = text
     try:
-        return re.sub(re.compile('<.*?>'), '', str)
-    except Exception as e:
+        return re.sub(re.compile('<.*?>'), '', text)
+    except TypeError:
         return original_string
-    return str
+
 
 def convert_epoch_to_datetimestr(epoch, milliseconds):
     """Converts epoch time into a datetime object"""
@@ -97,12 +97,13 @@ def convert_epoch_to_datetimestr(epoch, milliseconds):
     if type(epoch) is not int:
         try:
             epoch = int(epoch)
-        except Exception:
+        except ValueError:
             return epoch
     if milliseconds:
         epoch /= 1000
 
     return datetime.fromtimestamp(epoch).isoformat()
+
 
 class ExportContext(object):
     """Responsible for exporting Resilient data into a JSON formatted file"""
@@ -138,13 +139,6 @@ class ExportContext(object):
         if not self.types:
             raise Exception("Unable to get Resilient types")
 
-        # The list of users and groups is available via the owner_id field
-        # (or members, equivalently)
-        # (the full list of users and groups is only available to admins)
-        owner_field = self.get_field("incident", "owner_id")
-        self.users_lookup = {value["value"]: value["label"] for value in owner_field["values"]}
-
-
     def get_field(self, objecttype, fieldname):
         """Find a field definition, by api-name"""
         try:
@@ -163,7 +157,7 @@ class ExportContext(object):
 
         return False
 
-    def clean_schema(self, object, typename):
+    def clean_schema(self, target_object, typename):
         """Creates a new object referencing the fields of the type"""
         type_fields = self.types.get(typename)
         if type_fields is None:
@@ -182,29 +176,32 @@ class ExportContext(object):
 
             prefix = field.get("prefix")
 
-            shouldConvertToDatetime = False
+            should_convert_to_datetime = False
             if self.is_date(typename, field_name):
-                shouldConvertToDatetime = True
+                should_convert_to_datetime = True
 
             try:
                 if prefix is None:
-                    new_object[field_name] = object[field_name]
-                    if shouldConvertToDatetime:
-                        new_object[field_name] = convert_epoch_to_datetimestr(new_object[field_name], True)
+                    new_object[field_name] = target_object[field_name]
+                    if should_convert_to_datetime:
+                        datetimestr = convert_epoch_to_datetimestr(new_object[field_name], True)
+                        new_object[field_name] = datetimestr
                 else:
-                    new_object[prefix][field_name] = object[prefix][field_name]
-                    if shouldConvertToDatetime:
-                        new_object[prefix][field_name] = convert_epoch_to_datetimestr(new_object[prefix][field_name], True)
+                    new_object[prefix][field_name] = target_object[prefix][field_name]
+                    if should_convert_to_datetime:
+                        datetimestr = convert_epoch_to_datetimestr(new_object[prefix][field_name], True)
+                        new_object[prefix][field_name] = datetimestr
+
             except KeyError:
                 continue
 
         return new_object
 
-    def get_name_from_id(self, id):
+    def get_name_from_id(self, _id):
         """Converts an ID provided by the REST API into the string it represents"""
-        for type in self.types:
-            if int(self.types[type].get("id")) == int(id):
-                return type
+        for _type in self.types:
+            if int(self.types[_type].get("id")) == int(_id):
+                return _type
 
         return ""
 
@@ -217,7 +214,7 @@ class ExportContext(object):
 
         return ""
 
-    def process_datatables(self, datatables, id):
+    def process_datatables(self, datatables):
         """Process datatable info from API"""
         new_data_table = {}
         for data_table_id in datatables:
@@ -249,6 +246,7 @@ class ExportContext(object):
         return new_data_table
 
     def get_partial_incident_data(self, last_run_time):
+        """Gets primitive information about every incident"""
         specific_ids = self.opts.get("incident")
         created_since_date_or_days_ago = self.opts.get("since")
         created_until_date_or_days_ago = self.opts.get("until")
@@ -259,12 +257,22 @@ class ExportContext(object):
         if self.opts.get("query"):
             with open(self.opts.get("query"), 'r') as template_file:
                 conditions = json.loads(template_file.read())
+
         if created_since_date_or_days_ago:
-            conditions.append({"field_name": "create_date", "method": "gt", "value": get_json_time_or_days_ago(created_since_date_or_days_ago)})
+            create_date = get_json_time_or_days_ago(created_since_date_or_days_ago)
+            condition = {"field_name": "create_date", "method": "gt", "value": create_date}
+            conditions.append(condition)
+
         if created_until_date_or_days_ago:
-            conditions.append({"field_name": "create_date", "method": "lte", "value": get_json_time_or_days_ago(created_since_date_or_days_ago)})
-        if last_run_time:
-            conditions.append({"field_name":("properties." + self.opts.get("last_modified_field_name")), "method": "gt", "value": last_run_time})
+            create_date = get_json_time_or_days_ago(created_since_date_or_days_ago)
+            condition = {"field_name": "create_date", "method": "lte", "value": create_date}
+            conditions.append(condition)
+
+        last_modified_field_name = self.opts.get("last_modified_field_name")
+        if last_run_time and last_modified_field_name is not None:
+            field_name = ("properties." + last_modified_field_name)
+            condition = {"field_name": field_name, "method": "gt", "value": last_run_time}
+            conditions.append(condition)
 
         query = {"filters": [{"conditions": conditions}]}
 
@@ -275,16 +283,16 @@ class ExportContext(object):
         return incidents
 
     def get_basic_incident_data(self):
-        if not os.path.isfile(LAST_RUN_FILE):
-            return self.get_partial_incident_data(None)
+        """Checks if export_to_json has been run before, if so, imports the highest incident modified date. Returns partial incident data"""
+        last_run_time = None
+        if os.path.isfile(LAST_RUN_FILE):
+            with open(LAST_RUN_FILE, "r") as lastrun_file:
+                data = lastrun_file.read().replace("\n", "")
 
-        with open(LAST_RUN_FILE, "r") as lastrun_file:
-            data = lastrun_file.read().replace("\n", "")
-
-        try:
-            last_run_time = int(data)
-        except Exception:
-            return self.get_partial_incident_data(None)
+            try:
+                last_run_time = int(data)
+            except ValueError:
+                last_run_time = None
 
         return self.get_partial_incident_data(last_run_time)
 
@@ -292,22 +300,24 @@ class ExportContext(object):
         """Yield all the incidents"""
         incidents = self.get_basic_incident_data()
         for incident in incidents:
-            full_incident = self.client.get("/incidents/{}?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+            path = "/incidents/{}?handle_format=names&text_content_output_format=always_text"
+            full_incident = self.client.get(path.format(incident["id"]))
             if full_incident.get("id") is None:
                 raise Exception("Incident data corrupted, \"id\" attribute is non-existent.")
 
+            last_modified_field = 0
             properties = full_incident.get("properties")
-            last_modified_field = properties.get(self.opts.get("last_modified_field_name"))
+            if properties is not None and self.opts.get("last_modified_field_name") is not None:
+                last_modified_field = properties.get(self.opts.get("last_modified_field_name"))
 
             full_incident = self.clean_schema(full_incident, "incident")
 
-            full_incident["last_modified_etj"] = last_modified_field
-            yield full_incident
-
+            yield {"incident": full_incident, "last_modified_field": last_modified_field} 
 
     def get_tasks(self, incident):
         """Yield all the tasks"""
-        tasks = self.client.get("/incidents/{}/tasks?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+        path = "/incidents/{}/tasks?handle_format=names&text_content_output_format=always_text"
+        tasks = self.client.get(path.format(incident["id"]))
         for task in tasks:
             task["instr_text"] = filter_htmltext(task.get("instr_text"))
             task["closed_date"] = convert_epoch_to_datetimestr(task.get("closed_date"), True)
@@ -316,43 +326,43 @@ class ExportContext(object):
             task = self.clean_schema(task, "task")
             yield task
 
-
     def get_notes(self, incident):
         """Yield all the notes"""
-        notes = self.client.get("/incidents/{}/comments?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+        path = "/incidents/{}/comments?handle_format=names&text_content_output_format=always_text"
+        notes = self.client.get(path.format(incident["id"]))
         for note in notes:
             note = self.clean_schema(note, "note")
             yield note
 
-
     def get_milestones(self, incident):
         """Yield all the milestones"""
-        milestones = self.client.get("/incidents/{}/milestones?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+        path = "/incidents/{}/milestones?handle_format=names&text_content_output_format=always_text"
+        milestones = self.client.get(path.format(incident["id"]))
         for milestone in milestones:
             milestone = self.clean_schema(milestone, "milestone")
             yield milestone
 
-
     def get_artifacts(self, incident):
         """Yield all the artifacts"""
-        artifacts = self.client.get("/incidents/{}/artifacts?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+        path = "/incidents/{}/artifacts?handle_format=names&text_content_output_format=always_text"
+        artifacts = self.client.get(path.format(incident["id"]))
         for artifact in artifacts:
             artifact = self.clean_schema(artifact, "artifact")
             yield artifact
 
-
     def get_attachments(self, incident):
         """Yield all the attachments"""
-        attachments = self.client.get("/incidents/{}/attachments?handle_format=names&text_content_output_format=always_text".format(incident["id"]))
+        path = "/incidents/{}/attachments?handle_format=names&text_content_output_format=always_text"
+        attachments = self.client.get(path.format(incident["id"]))
         for attachment in attachments:
             attachment = self.clean_schema(attachment, "attachment")
             yield attachment
 
     def get_datatables(self, incident):
         """Grabs datatables from REST API and processes them"""
-        data_tables = self.client.get("/incidents/{}/table_data".format(incident["id"]))
-        return self.process_datatables(data_tables, incident["id"])
-
+        path = "/incidents/{}/table_data"
+        data_tables = self.client.get(path.format(incident["id"]))
+        return self.process_datatables(data_tables)
 
     def export_data(self):
         """Formalize the export to JSON"""
@@ -363,14 +373,6 @@ class ExportContext(object):
 
         # generators do not provide a length
         incident_count = 0
-        existing_incidents = None
-        if os.path.isfile(filename):
-            with open(filename, "r") as export_file:
-                try:
-                    existing_incidents = json.loads(export_file.read().replace("\n", ""))
-                except Exception:
-                    existing_incidents = {}
-            os.remove(filename)
 
         if os.path.isfile(LAST_RUN_FILE):
             with open(LAST_RUN_FILE, "r") as lastrun_file:
@@ -382,8 +384,9 @@ class ExportContext(object):
         with open(filename, "w") as outfile:
             incidents = self.get_incidents()
             incidents_list = []
-            datatable_list = []
             for incident in incidents:
+                last_modified_time = incident.get("last_modified_field")
+                incident = incident.get("incident")
                 if incident.get("id") is None:
                     raise Exception("Incident data corrupted, \"id\" attribute is non-existent.")
 
@@ -398,53 +401,20 @@ class ExportContext(object):
                 for data_table_name in data_tables:
                     incident[data_table_name] = data_tables[data_table_name]
 
-                if incident.get("last_modified_etj") is not None:
-                    last_modified_time = incident.get("last_modified_etj")
+                if type(last_modified_time) is str:
+                    try:
+                        last_modified_time = int(last_modified_time)
+                    except ValueError:
+                        incidents_list.append(incident)  
+                        continue
 
-                    if type(last_modified_time) is str:
-                        try:
-                            last_modified_time = int(last_modified_time)
-                        except Exception:
-                            incident.pop("last_modified_etj", None)
-                            incidents_list.append(incident)  
-                            continue
-
-                    if last_modified_time > highest_last_modified:
-                        highest_last_modified = last_modified_time
-
-                    incident.pop("last_modified_etj", None)
+                if last_modified_time > highest_last_modified:
+                    highest_last_modified = last_modified_time
 
                 incidents_list.append(incident)
 
-            if not existing_incidents:
-                json.dump({"incidents":incidents_list}, outfile)
-                outfile.write("\n")
-            else:
-                for i, existing_incident in enumerate(existing_incidents.get("incidents")):
-                    for updated_incident in incidents_list:
-                        if existing_incident.get("id") == updated_incident.get("id") and existing_incident.get("id") is not None:
-                            existing_incidents["incidents"][i] = updated_incident
-                            break
-
-                for updated_incident in incidents_list:
-                    if existing_incidents.get("incidents") is None:
-                        break
-                    if updated_incident.get("id") is None:
-                        continue
-
-                    incidents = existing_incidents.get("incidents")
-
-                    found_incident = False
-                    for incident in incidents:
-                        if incident.get("id") == updated_incident.get("id"):
-                            found_incident = True
-                            break
-
-                    if found_incident is False:
-                        existing_incidents["incidents"].append(updated_incident)
- 
-                json.dump(existing_incidents, outfile)
-                outfile.write("\n")
+            json.dump({"incidents": incidents_list}, outfile)
+            outfile.write("\n")
 
         with open(LAST_RUN_FILE, "w") as outfile:
             epoch_time = highest_last_modified
@@ -452,7 +422,6 @@ class ExportContext(object):
 
         print("{} incidents written to {}".format(incident_count, filename))
         return filename
-
 
     def export_json(self):
         """Export incidents to a file"""
@@ -466,7 +435,7 @@ def main():
 
     # Export the data
     export_context = ExportContext(opts)
-    filename = export_context.export_json()
+    export_context.export_json()
 
     print("Done.")
 

@@ -39,6 +39,7 @@ setup(
     include_package_data=True,
     platforms='any',
     entry_points={
-        'console_scripts': ['resilient-export-to-json=export_to_json.bin.export_to_json:main']
+        'console_scripts': ['resilient-export-to-json=export_to_json.bin.export_to_json:main',
+                            'resilient-merge-incident-json=export_to_json.bin.merge_incidents_json:main']
     }
 )
