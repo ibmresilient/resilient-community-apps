@@ -6,7 +6,10 @@
    },
    {# ds_to_millis expectes the data paramater to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
    "discovered_date": {{ ds_to_millis(event.analyzer.detectedUTC) }},
-   "incident_type_ids": ["{{ get_incident_type(event.category) }}"],
+   {%- set type = get_incident_type(event.category) -%}
+   {%- if type -%}
+       "incident_type_ids": ["{{ get_incident_type(event.category) }}"],
+   {% endif %}
 
    "artifacts" : [
    {%- set comma = joiner(",") -%}
@@ -43,27 +46,27 @@
    {%- endif -%}
 
    {%- for key, value in event.target.items() -%}
-       {%- if key == "port" and value != null and value != "" -%}
+       {%- if key == "port" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "Port"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Target Port"}}
-       {%- elif key == "userName" and value != null and value != "" -%}
+       {%- elif key == "userName" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "User Account"}, "value": "{{value|js}}",
                "description" : {"format" : "html","content" : "Target User Account"}}
-       {%- elif key == "fileName" and value != null and value != "" -%}
+       {%- elif key == "fileName" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "File Path"}, "value": "{{value|js}}",
                "description" : {"format" : "html","content" : "Target File Name"}}
-       {%- elif key == "mac" and value != null and value != "" -%}
+       {%- elif key == "mac" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "MAC Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Target MAC Address"}}
-       {%- elif key == "ipv4" and value != null and value != "" -%}
+       {%- elif key == "ipv4" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Target ipv4 Address"}}
-       {%- elif key == "ipv6" and value != null and value != "" -%}
+       {%- elif key == "ipv6" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Target ipv6 Address"}}
@@ -71,31 +74,31 @@
    {%- endfor -%}
 
    {%- for key, value in event.source.items() -%}
-       {%- if key == "port" and value != null and value != "" -%}
+       {%- if key == "port" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "Port"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source Port"}}
-       {%- elif key == "url" and value != null and value != "" -%}
+       {%- elif key == "url" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "URL"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source URL"}}
-       {%- elif key == "userName" and value != null and value != "" -%}
+       {%- elif key == "userName" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "User Account"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source User Account"}}
-       {%- elif key == "processName" and value != null and value != "" -%}
+       {%- elif key == "processName" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "Process Name"}, "value": "{{value|js}}",
                "description" : {"format" : "html","content" : "Source Process Name"}}
-       {%- elif key == "mac" and value != null and value != "" -%}
+       {%- elif key == "mac" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "MAC Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source MAC Address"}}
-       {%- elif key == "ipv4" and value != null and value != "" -%}
+       {%- elif key == "ipv4" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source ipv4 Address"}}
-       {%- elif key == "ipv6" and value != null and value != "" -%}
+       {%- elif key == "ipv6" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
                "description" : {"format" : "html","content" : "Source ipv6 Address"}}

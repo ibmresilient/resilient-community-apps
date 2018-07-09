@@ -44,7 +44,6 @@ class DxlComponentListener(ResilientComponent):
 
     def main(self):
         if self.config["topic_listener_on"] == "True":
-#            res_client = self.rest_client()
             log.info("Service Listener called")
 
             self.event_subscriber(self.config)
@@ -52,23 +51,7 @@ class DxlComponentListener(ResilientComponent):
             log.info("Event subscriber not listening. To turn on set topic_listener_on to True")
 
     def event_subscriber(self, config):
-#        config_client_file = config.get("config_client")
-#        dxl_config = DxlClientConfig.create_dxl_config_from_file(config_client_file)
-
-#        # Create the client
-#        with DxlClient(dxl_config) as client:
-
-#            # Connect to the fabric
-#            client.connect()
-
-            #
-            # Register the Event
-            #
-#            EVENT_TOPIC = config.get("topic_name")
-#            template = config.get("incident_template")
         try:
-            mapping_dict = config.get("incident_mapping")
-
             topic_template_dict = get_topic_template_dict(config.get("custom_template_dir"))
 
             class ResilientEventSubscriber(EventCallback):
@@ -84,11 +67,10 @@ class DxlComponentListener(ResilientComponent):
                     message_dict = json.loads(message)
 
                     # Map values from topic to incident template to create new incident
-#                    inc_temp = map_values_old(self.temp, mapping_dict, message)
+#                     inc_temp = map_values_old(self.temp, mapping_dict, message)
                     inc_data = map_values(self.temp, message_dict)
 
                     # Create new Incident in Resilient
-                    log.info(inc_data)
                     response = create_incident(get_connected_resilient_client(config), inc_data)
                     log.info("Created incident {}".format(str(response.get("id"))))
 
@@ -100,8 +82,3 @@ class DxlComponentListener(ResilientComponent):
         except Exception as e:
             log.error(e)
             self.client.destroy()
-
-            # Wait forever
-#            while True:
-#                continue
-

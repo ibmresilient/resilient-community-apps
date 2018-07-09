@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 try:
-    from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, _create_incident, _map_values
+    from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, create_incident, map_values
 except Exception:
     from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, _create_incident, _map_values
 from mock import Mock

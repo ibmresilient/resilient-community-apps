@@ -116,6 +116,8 @@ def get_incident_type(category):
 def map_values(template_file, message_dict):
     with open(template_file, 'r') as template:
 
+        log.debug("Message in dict form: {}".format(message_dict))
+
         incident_template = template.read()
         incident_data = template_functions.render(incident_template, message_dict)
 
@@ -167,51 +169,3 @@ def get_topic_template_dict(overrides_dir=None):
         topic_template_dict[topic] = v
 
     return topic_template_dict
-
-
-# def event_subscriber(res_client, config):
-#     config_client_file = config.get("config_client")
-#     dxl_config = DxlClientConfig.create_dxl_config_from_file(config_client_file)
-#
-#     # Create the client
-#     with DxlClient(dxl_config) as client:
-#
-#         # Connect to the fabric
-#         client.connect()
-#
-#         #
-#         # Register the Event
-#         #
-#         EVENT_TOPIC = config.get("topic_name")
-#         template = config.get("incident_template")
-#         mapping_dict = config.get("incident_mapping")
-#
-#         topic_template_dict = _get_topic_template_dict(config.get("custom_template_dir"))
-#
-#         class ResilientEventSubscriber(EventCallback):
-#
-#             def __init__(self, template):
-#                 super(ResilientEventSubscriber, self).__init__()
-#                 self.temp = template
-#
-#             def on_event(self, event):
-#                 message = event.payload.decode(encoding="UTF-8")
-#                 log.info("Event received payload: " + message)
-#
-#
-#                 # Map values from topic to incident template to create new incident
-#                 inc_temp = _map_values(template, mapping_dict, message)
-#
-#                 # Create new Incident in Resilient
-#                 response = _create_incident(res_client, inc_temp)
-#                 log.info("Created incident {}".format(str(response.get("id"))))
-#
-#         for event_topic, template in topic_template_dict.iteritems():
-#             client.add_event_callback(event_topic, ResilientEventSubscriber(template))
-# #        client.add_event_callback(EVENT_TOPIC, ResilientEventSubscriber)
-#             log.info("Resilient DXL Subscriber listening on {} ...".format(event_topic))
-# #            log.info("Listening on {}".format(EVENT_TOPIC))
-#
-#         # Wait forever
-#         while True:
-#             continue
