@@ -49,12 +49,12 @@ def main():
     first_incidents = first_json.get("incidents")
 
     second_incidents_array = second_json.get("incidents")
-    second_incidents = {}
+    second_incidents = []
 
     for incident in second_incidents_array:
         incident_id = incident.get("id")
         if incident_id is not None:
-            second_incidents[incident_id] = incident
+            second_incidents.append(incident_id)
 
     incidents = []
 
@@ -65,7 +65,7 @@ def main():
             continue
 
         # if the incident already exists, we don't want to add it
-        if second_incidents.get(incident_id) is None:
+        if incident_id not in second_incidents:
             incidents.append(incident)
 
     incidents += second_incidents_array
