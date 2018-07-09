@@ -30,10 +30,10 @@ The app.config needs the following configuration values, in addition to the appr
 
 ```
 [fn_qradar_advisor]  
-qradar_host = qradar_host  
+qradar_host=qradar_host
 qradar_advisor_token=qradar_advisor_token_keyring_protection_recommended
 qradar_advisor_app_id=app_id_from_qradar_server
-verify_cert = [true, false] for verify https certtificate or not
+verify_cert=[true, false] for verify https certificate or not
 full_search_timeout=optional_full_search_timeout_in_seconds_default_1200
 full_search_period=optional_full_search_period_in_seconds_default_5
 offense_analysis_timeout=optional_offense_analysis_timeout_in_seconds_default_1200

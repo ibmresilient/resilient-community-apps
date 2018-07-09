@@ -18,6 +18,17 @@ class HtmlGenVisitor(Visitor):
         self.log = log
 
     def action(self, node):
+        """
+        This visitor generates a html list item for a given node of a multi-root tree. It is
+        used to build a html representation for a given stix.
+        The html list item is added to the member variable of the visitor.
+
+        A html list item contains an icon (according to the type of this node) defined in
+        resourses.py. It is pointed to the png files stored in the official site of stix2.
+        It also contains a string value extracted from the node.
+        :param node: The node this visitor is visiting.
+        :return: Whether to continue traversing the rest of the tree
+        """
         if node.is_link:
             self.link_count = self.link_count + 1
         else:

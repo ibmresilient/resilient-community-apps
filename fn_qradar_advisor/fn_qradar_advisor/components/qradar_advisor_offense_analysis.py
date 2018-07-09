@@ -25,7 +25,16 @@ class FunctionComponent(ResilientComponent):
 
     @function("qradar_advisor_offense_analysis")
     def _qradar_advisor_offense_analysis_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function:
+        This function performs two tasks:
+        1. call the QRadar Advisor REST API to retrieve insights for a given QRadar offense
+        2. call the QRadar Advisor REST API to perform analysis on the QRadar offense
+        The input is qradar_offense_id in the input.
+        The reply from QRadar Advisor analysis is in stix format. This function then
+        1. extract the observables from the stix objects
+        2. generate a html representation for the stix
+        The return to Resilient server includes the above two, together with the raw replies for
+        offense insights and offense analysis."""
         try:
             # Get the function parameters:
             qradar_offense_id = kwargs.get("qradar_offense_id")  # text

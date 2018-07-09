@@ -25,7 +25,12 @@ class FunctionComponent(ResilientComponent):
 
     @function("qradar_advisor_quick_search")
     def _qradar_advisor_quick_search_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function:
+        Perform a QRadar Advisor quick search for an indicator.
+        The indicator is given as qradar_advisor_search_value in the input.
+        The QRadar Advisor reply is in json format.
+        This function forwards the QRadar Advisor reply to Resilient server, so
+        that user can process it in post-process script. """
         try:
             # Get the function parameters:
             qradar_advisor_search_value = kwargs.get("qradar_advisor_search_value")  # text

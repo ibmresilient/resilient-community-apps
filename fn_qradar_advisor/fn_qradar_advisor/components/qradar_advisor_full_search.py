@@ -30,7 +30,16 @@ class FunctionComponent(ResilientComponent):
 
     @function("qradar_advisor_full_search")
     def _qradar_advisor_full_search_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Perform a QRadar Advisor full search on an indicator.
+        The indicator is given as the qradar_advisor_search_value of the input.
+        Another input is qradar_advisor_result_stage. This can be "stage1", "stage2", or "stage3".
+        The return from QRadar Advisor is a report in stix format.
+        Then this function calls util funtions from lib to
+        1. extract observables from objects
+        2. generate a html representation of the stix objects
+        3. generate a summary
+        All of the above 3 will be returned to Resilient server, together with the raw stix
+        """
         try:
             # Get the function parameters:
             qradar_advisor_search_value = kwargs.get("qradar_advisor_search_value")  # text
@@ -80,8 +89,6 @@ class FunctionComponent(ResilientComponent):
             #
             html_str = stix_tree.get_html(stix_json, log)
 
-
-            yield StatusMessage("done...")
             yield StatusMessage("Returning {} observables".format(str(len(observables))))
 
             #
