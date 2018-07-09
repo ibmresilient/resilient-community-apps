@@ -4,12 +4,8 @@
 
 import logging
 import time
-try:
-    from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, check_timeout, get_incident_id, check_config
-except ModuleNotFoundError:
-    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-        check_status_code, check_timeout, get_incident_id, check_config
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)

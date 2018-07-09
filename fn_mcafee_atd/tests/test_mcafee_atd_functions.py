@@ -6,14 +6,9 @@ from resilient_circuits.action_message import FunctionError_
 from mock import Mock, patch
 import time
 import os.path
-try:
-    from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
-    from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
-except ModuleNotFoundError:
-    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-        check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
-    from fn_mcafee_atd.fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
+from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
 class MockClass:
@@ -300,7 +295,7 @@ class TestMcafeeAtdAnalyzeFile:
         res = create_report_file(name, type)
 
         # Assert file name and directory and location are returned
-        assert res["report_file_name"] == "{}_report.{}".format(name, type)
+        assert res["report_file_name"] == "McAfeeATD_{}_report.{}".format(name, type)
         assert res.get("report_file") is not None
         assert res.get("tmp_dir") is not None
 

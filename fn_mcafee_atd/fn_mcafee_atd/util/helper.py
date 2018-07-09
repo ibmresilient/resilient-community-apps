@@ -10,10 +10,7 @@ import time
 from resilient_circuits import FunctionError, StatusMessage
 import configparser
 import io
-try:
-    from config import config_section_data
-except ModuleNotFoundError:
-    from fn_mcafee_atd.fn_mcafee_atd.util.config import config_section_data
+from fn_mcafee_atd.util.config import config_section_data
 
 log = logging.getLogger(__name__)
 
@@ -181,7 +178,7 @@ def create_report_file(name, type):
     for c in [":", "/", "http", "https"]:
         if name.find(c) > -1:
             name = name.replace(c, '')
-    report_file_name = "{}_report.{}".format(name, type)
+    report_file_name = "McAfeeATD_{}_report.{}".format(name, type)
     file_location = {
         "report_file_name": report_file_name,
         "report_file": report_file,
