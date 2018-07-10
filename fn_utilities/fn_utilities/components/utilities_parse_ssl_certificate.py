@@ -18,6 +18,7 @@ import datetime
 import tempfile
 import OpenSSL # Used for certificates
 from cryptography import x509 # Used for certificates
+from cryptography.x509 import DNSName, ExtensionNotFound, ExtensionOID, NameOID
 from cryptography.hazmat.backends import default_backend
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
@@ -96,7 +97,16 @@ class FunctionComponent(ResilientComponent):
                         # Load cert also with cryptography; this package has better date attributes
                         parsed_cert_crypto = x509.load_pem_x509_certificate(
                             st_cert, default_backend())
+                
+
+                try:
+                    for ext in parsed_cert_crypto.extensions:
+                        log.info(ext)
+                except:
+                    log.info("Encountered error")
+
                 #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
+                #  Some fields must be serialised into JSON in order to be compatible with STOMP
                 results = {
 
                     "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
@@ -106,8 +116,19 @@ class FunctionComponent(ResilientComponent):
                     "version": parsed_cert_openssl.get_version(),
                     "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
                     "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
-                    "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey())
+                    "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey()),
+                    "extensions": {
+                        "subjectAltNmes": json.dumps(self.get_dns_subject_alternative_names(parsed_cert_crypto)),
+                        "extendedKeyUsage": "",
+                        "authorityInfoAccess": "",
+                        "subjectKeyIdentifier": "basicConstraints",
+                        
+
+                    }
+
                 }
+
+                log.info(results["extensions"])
                 # Return the formatted data we have received.
                 yield StatusMessage("Finishing...")
                 yield FunctionResult(results)
@@ -166,3 +187,16 @@ class FunctionComponent(ResilientComponent):
         data = client.get_content(data_uri)
 
         return data
+    @staticmethod
+    def get_dns_subject_alternative_names(certificate):
+        # type: (cryptography.x509.Certificate) -> List[Text]
+        """Retrieve all the DNS entries of the Subject Alternative Name extension.
+        """
+        subj_alt_names = []
+        try:
+            san_ext = certificate.extensions.get_extension_for_oid(ExtensionOID.SUBJECT_ALTERNATIVE_NAME)
+            subj_alt_names = san_ext.value.get_values_for_type(DNSName)
+        except ExtensionNotFound:
+            pass
+        return subj_alt_names
+
