@@ -235,7 +235,7 @@ def get_atd_report(g, taskId, report_type, report_file):
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
         check_status_code(response)
 
-        with open(report_file, 'wb') as f:
+        with open(report_file.get("report_file"), 'wb') as f:
             f.write(response.content)
             log.info("Saved ATD report")
 
@@ -268,6 +268,6 @@ def get_incident_id(**kwargs):
 
 def upload_attachment(resilient_client, incident_id, report_file):
     if report_file is not None:
-        response = resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+        resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
                                               report_file["report_file"], filename=report_file["report_file_name"])
         yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))

@@ -121,7 +121,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Obtaining {} report".format(atd_report_type))
                 report_file = create_report_file(file_name, atd_report_type)
 
-            results = get_atd_report(self, atd_task_id, atd_report_type, report_file["report_file"])
+            results = get_atd_report(self, atd_task_id, atd_report_type, report_file)
 
             if report_file is not None:
                 resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
