@@ -39,6 +39,7 @@ class FunctionComponent(ResilientComponent):
             "issuer": JSON Encoded Array of issuer details,
             "version": The Version of the certificate v1/v2,
             "expiration_status": Check if the date is within the range of notBefore and notAfter
+            "extensions": Object containing the various extensions a cert may have
         }"""
         try:
             # Get the function parameters:
@@ -82,7 +83,7 @@ class FunctionComponent(ResilientComponent):
                         In the case of cause 2 try to load the file using the rest API
                     """
                     # Get the artifact from the REST API
-                    artifact_data = self.get_binary_data_from_file(client, incident_id, artifact_id)
+                    artifact_data = self._get_binary_data_from_file(client, incident_id, artifact_id)
 
                     # Create a temporary file to write the binary data to.
                     with tempfile.NamedTemporaryFile('w+b', bufsize=0) as temp_file:
@@ -97,13 +98,6 @@ class FunctionComponent(ResilientComponent):
                         # Load cert also with cryptography; this package has better date attributes
                         parsed_cert_crypto = x509.load_pem_x509_certificate(
                             st_cert, default_backend())
-                
-
-                try:
-                    for ext in parsed_cert_crypto.extensions:
-                        log.info(ext)
-                except:
-                    log.info("Encountered error")
 
                 #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
                 #  Some fields must be serialised into JSON in order to be compatible with STOMP
@@ -118,31 +112,28 @@ class FunctionComponent(ResilientComponent):
                     "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
                     "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey()),
                     "extensions": {
-                        "subjectAltNmes": json.dumps(self.get_dns_subject_alternative_names(parsed_cert_crypto)),
-                        "extendedKeyUsage": "",
-                        "authorityInfoAccess": "",
-                        "subjectKeyIdentifier": "basicConstraints",
-                        
-
+                        "subjectAltNames": json.dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
+                        "basicConstraints":json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
+                        "issuerAltNames": json.dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
                     }
 
                 }
-
-                log.info(results["extensions"])
                 # Return the formatted data we have received.
                 yield StatusMessage("Finishing...")
                 yield FunctionResult(results)
         
         except Exception as e:
-            '''
-            Might be handy for figuring out if the user error came from them subbmitting a cert that isint PEM format
-            if str(e) == [('PEM routines', 'PEM_read_bio', 'no start line')]:
-                yield FunctionError("Error: No PEM start line found, \
+            # Might be handy for figuring out if the user error came from them submitting a cert that isint PEM format
+            if str(e) == "[('PEM routines', 'PEM_read_bio', 'no start line')]":
+                log.info("Caught exception of type "+str(e))
+                raise FunctionError("Error: No PEM start line found, \
                     \n Only PEM certificates are supported.")
+            else:
+                yield FunctionError() 
 
-            '''
+            
 
-            yield FunctionError()
+            
     """
     Takes in 3 params
     :param lower_bound the earliest date acceptable for validation
@@ -175,7 +166,7 @@ class FunctionComponent(ResilientComponent):
     Returns the data in binary form which can then be written to a local file.
     """
     @staticmethod
-    def get_binary_data_from_file(client, incident_id, artifact_id):
+    def _get_binary_data_from_file(client, incident_id, artifact_id):
         """get_binary_data_from_file calls the REST API to get the attachment or artifact data"""
 
         if artifact_id and incident_id:
@@ -187,8 +178,14 @@ class FunctionComponent(ResilientComponent):
         data = client.get_content(data_uri)
 
         return data
+    """
+    Takes in 1 params
+    :certificate -- REST client to be used
+
+    Attempts to gather the subject alternative names for a cert
+    """
     @staticmethod
-    def get_dns_subject_alternative_names(certificate):
+    def _get_dns_subject_alternative_names(certificate):
         # type: (cryptography.x509.Certificate) -> List[Text]
         """Retrieve all the DNS entries of the Subject Alternative Name extension.
         """
@@ -199,4 +196,31 @@ class FunctionComponent(ResilientComponent):
         except ExtensionNotFound:
             pass
         return subj_alt_names
+    """
+    Takes in 1 params
+    :certificate -- REST client to be used
 
+    Attempts to gather the issuer alternative names for a cert
+    """
+    @staticmethod
+    def _get_issuer_alternative_names(certificate):
+        # type: (cryptography.x509.Certificate) -> List[Text]
+        """Retrieve all the DNS entries of the Subject Alternative Name extension.
+        """
+        issuer_alt_names = []
+        try:
+            san_ext = certificate.extensions.get_extension_for_oid(ExtensionOID.ISSUER_ALTERNATIVE_NAME)
+            issuer_alt_names = san_ext.value.get_values_for_type(DNSName)
+        except ExtensionNotFound:
+            pass
+        return issuer_alt_names
+
+    @staticmethod
+    def _get_basic_constraints(certificate):
+        # return true/false based on basic constraints
+        try:
+            ext = certificate.extensions.get_extension_for_oid(ExtensionOID.BASIC_CONSTRAINTS)
+            return ext.value.ca
+        except ExtensionNotFound:
+            pass
+        return False
