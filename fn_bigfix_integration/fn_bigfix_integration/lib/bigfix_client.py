@@ -125,7 +125,65 @@ class BigFixClient(object):
         resp = self.get_bfclientquery(q_id)
         return resp
 
+    def send_delete_file_remediation_message(self, artifact_value, computer_id):
+        """ Class method - Bigfix action - Delete file remediate action.
 
+        :param artifact_value: Name of artifact to remediate
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        query = "delete \"{0}\"".format(artifact_value)
+        relevance = "exists file \"{0}\"".format(artifact_value)
+        return self._post_bf_action_query(query, computer_id, "Delete File {0}".format(artifact_value), relevance)
+
+    def send_kill_process_remediation_message(self, artifact_value, computer_id):
+        """ Class method - Bigfix action - Kill process remediate action.
+
+        :param artifact_value: Name of artifact to remediate
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        query = "if {{windows of operating system}} \n waithidden cmd.exe /c taskkill /im {0} /f /t \n" \
+                "else \n wait kill -9 {{id of process whose (name of it as lowercase = \"{0}\" as lowercase)}} \n" \
+                "endif".format(artifact_value)
+
+        relevance = "exists process whose(name of it as lowercase = \"{0}\")".format(artifact_value)
+        return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
+
+    def send_stop_service_remediation_message(self, artifact_value, computer_id):
+        """ Class method - Bigfix action - Stop service remediate action.
+
+        :param artifact_value: Name of artifact to remediate
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        query = "if {{windows of operating system}} \n waithidden cmd.exe /c net stop {0} \n" \
+                "else\n wait stop service {0} \n" \
+                "endif".format(artifact_value)
+        relevance = "disjunction of (it contains \"{0}\" as lowercase AND it contains \"running\")  " \
+                    "of (services as string as lowercase)".format(artifact_value)
+        return self._post_bf_action_query(query, computer_id, "Stop service {0}".format(artifact_value),
+                                          relevance)
+
+    def send_delete_registry_key_remediation_message(self, artifact_value, computer_id):
+        """ Class method - Bigfix action - Delete registry entry (MS Windows).
+
+        :param artifact_value: Name of artifact to remediate
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        query = "waithidden cmd.exe /c reg delete " \
+                "\"{0}\" /f".format(artifact_value)
+
+        relevance = "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"\
+            .format(artifact_value)
+
+        return self._post_bf_action_query(query, computer_id, "Delete Registry Key {0}".format(artifact_value),
+                                               relevance)
 
     def get_bfclientquery(self, query_id, wait=5, timeout=5000):
         """ Class method - Get Bigfix query results.
@@ -217,3 +275,53 @@ class BigFixClient(object):
                 raise e
         else:
             LOG.exception("BigFix client query creation did not return expected value: %s".format(r))
+
+    def _post_bf_action_query(self, query, computer_id, action_name, relevance="true"):
+        """"Class method - Post Bigfix action request.
+
+        :param query: Remediation relevance query
+        :param computer_id: BigFix Endpoint id
+        :param action_name: BigFix Action name
+        :param relevance: Action relevance - default to True
+        :return action_id: Action id generatd by request
+
+         """
+        query_str = 'api/actions'
+        query_url = "%s/%s" % (self.base_url, query_str)
+        post_xml = elementTree.Element('BES')
+        post_xml.attrib = {'xmlns:xsi': 'http://www.w3.org/2001/XMLSchema-instance',
+                           'xmlns:xsd': 'http://www.w3.org/2001/XMLSchema',
+                           'SkipUI': 'true'}
+        clientq_elem = elementTree.SubElement(post_xml, 'SingleAction')
+        title_elem = elementTree.SubElement(clientq_elem, 'Title')
+        title_elem.text = action_name
+        relevance_elem = elementTree.SubElement(clientq_elem, 'Relevance')
+        relevance_elem.text = relevance
+        script_elem = elementTree.SubElement(clientq_elem, 'ActionScript')
+        script_elem.text = query
+        criteria_elem = elementTree.SubElement(clientq_elem, 'SuccessCriteria')
+        criteria_elem.attrib = {'Option': 'RunToCompletion'}
+        settings_elem = elementTree.SubElement(clientq_elem, 'Settings')
+        settingsLocks_elem = elementTree.SubElement(clientq_elem, 'SettingsLocks')
+        target_elem = elementTree.SubElement(clientq_elem, 'Target')
+        target_comp_elem = elementTree.SubElement(target_elem, 'ComputerID')
+        target_comp_elem.text = str(computer_id)
+        r = requests.post(query_url, auth=(self.bf_user, self.bf_pass), verify=False,
+                          data=elementTree.tostring(post_xml))
+        if r.status_code == 200:
+            try:
+                # TODO! count the number of Tuples - should only be 1
+                xmlroot = elementTree.fromstring(r.text)
+                # TODO - should just be one ID, change XML path string
+                results = xmlroot.findall(".//Action/ID")
+                #  Urg, hardcoded index...
+                action_id = results[0].text
+                LOG.info("BigFix action created successfully. Action ID: {0}".format(action_id))
+                LOG.debug("BigFix action created successfully: {0}".format(r.text))
+                return action_id
+            except Exception as e:
+                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                raise e
+        else:
+            LOG.error("Received bad Status Code: {0}. Returned data: {1}".format(r.status_code, r.text))
+            return None

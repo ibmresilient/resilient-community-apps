@@ -3,11 +3,10 @@
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-""" Resilient functions component to run a Bigfix Query - DNS RR History for an IP Address or domain
-against a Cisco Umbrella server """
+""" Resilient functions component to run a Bigfix Query against a Bigfix server to determine """
 
 # Set up:
-# Destination: a Queue named "umbrella_investigate".
+# Destination: a Queue named "bigfix_artifact".
 # Manual Action: Execute a REST query against a BigFix server return hits.
 
 """Function implementation"""
@@ -42,7 +41,7 @@ class FunctionComponent(ResilientComponent):
                 bigfix_incident_id = 2095
                 bigfix_incident_plan_status = "A"
 
-        The BigFix Query will execute a REST call against a Bigfix server and returns a result
+        The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
         in JSON format similar to the following.
 
             {'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 1000,
