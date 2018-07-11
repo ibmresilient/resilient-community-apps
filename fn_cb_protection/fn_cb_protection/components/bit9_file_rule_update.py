@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_cb_protection.util.bit9_client import CbProtectClient
 
 
 class FunctionComponent(ResilientComponent):
@@ -43,13 +44,27 @@ class FunctionComponent(ResilientComponent):
             log.info("bit9_file_rule_policyids: %s", bit9_file_rule_policyids)
             log.info("bit9_file_rule_hash: %s", bit9_file_rule_hash)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # This can be called with a "file rule id", to update an existing rule.
+            # Or, it can be called with no file rule id, to create a new rule for a hash or filename.
 
-            results = {
-                "value": "xyz"
-            }
+            payload = {}
+            if bit9_file_catalog_id:
+                payload["fileCatalogId"] = bit9_file_catalog_id
+            if bit9_file_rule_name:
+                payload["name"] = bit9_file_rule_name
+            if bit9_file_rule_description:
+                payload["description"] = bit9_file_rule_description
+            if bit9_file_rule_filestate:
+                payload["fileState"] = bit9_file_rule_filestate
+            if bit9_file_rule_sourcetype:
+                payload["sourceType"] = bit9_file_rule_sourcetype
+            if bit9_file_rule_policyids:
+                payload["policyIds"] = bit9_file_rule_policyids
+            if bit9_file_rule_hash:
+                payload["hash"] = bit9_file_rule_hash
+
+            self.bit9_client = CbProtectClient(self.options)
+            results = self.bit9_client.update_file_rule(bit9_file_rule_id, payload)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

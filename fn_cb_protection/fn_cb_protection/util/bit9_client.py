@@ -66,3 +66,27 @@ class CbProtectClient(object):
     def update_approval_request(self, id, payload):
         """update an approval request"""
         return self.put("approvalRequest/{}".format(id), payload=payload)
+
+    def get_file_catalog(self, id):
+        """Get a file catalog item by ID"""
+        return self.get("fileCatalog/{}".format(id))
+
+    def query_file_catalog(self, query):
+        """get file catalog items that match the query string"""
+        return self.get("fileCatalog?q={}".format(query))
+
+    def get_file_rule(self, id):
+        """Get a file rule by ID"""
+        return self.get("fileRule/{}".format(id))
+
+    def query_file_rule(self, query):
+        """get file rules that match the query string"""
+        return self.get("fileRule?q={}".format(query))
+
+    def update_file_rule(self, id, payload):
+        """Update a file rule"""
+        # The file rule id can be None
+        if id is None:
+            return self.put("fileRule", payload=payload)
+        else:
+            return self.put("fileRule/{}".format(id), payload=payload)
