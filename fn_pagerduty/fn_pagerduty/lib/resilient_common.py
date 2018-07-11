@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import re
-import html2text
+from bs4 import BeautifulSoup
 from six import string_types
 try:
     import HTMLParser as htmlparser
@@ -39,7 +39,7 @@ def clean_html(htmlFragment):
     if not htmlFragment or not isinstance(htmlFragment, string_types):
         return htmlFragment
 
-    return html2text.html2text(unescape(htmlFragment))
+    return BeautifulSoup(unescape(htmlFragment), "html.parser").text
 
 def unescape(data):
     """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
