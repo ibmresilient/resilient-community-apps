@@ -2,13 +2,14 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-try:
-    from fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, create_incident, map_values
-except Exception:
-    from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, event_subscriber, _create_incident, _map_values
+from fn_mcafee_opendxl.util.helper import verify_config, create_incident, map_values, add_methods_to_global, \
+    get_topic_template_dict
 from mock import Mock
+from os.path import join, pardir
 import json
 import os
+import tempfile
+import shutil
 
 
 class ConfigClass:
@@ -16,10 +17,7 @@ class ConfigClass:
         self.ops = {
             "fn_mcafee_opendxl": {
                 "dxlclient_config": "path/to/dxlclient.config",
-                "topic_name": "resilient/event/subscriber/topic",
                 "topic_listener_on": "True",
-                "incident_template": "incident/jinja2/template.jinja",
-                "incident_template_mapping": "incident/jinja2/mappingTemplate.jinja"
             }
         }
 
@@ -31,10 +29,9 @@ class TestResilientEvenSubscriber:
         config = verify_config(ops)
         expected = {
             "config_client": ops["fn_mcafee_opendxl"]["dxlclient_config"],
-            "topic_name": ops["fn_mcafee_opendxl"]["topic_name"],
             "topic_listener_on": ops["fn_mcafee_opendxl"]["topic_listener_on"],
-            "incident_template": ops["fn_mcafee_opendxl"]["incident_template"],
-            "incident_mapping": ops["fn_mcafee_opendxl"]["incident_template_mapping"]
+            "custom_template_dir": None,
+            "opts": ops
         }
 
         assert expected == config
@@ -90,35 +87,59 @@ class TestResilientEvenSubscriber:
         mock_client = Mock()
         mock_client.post.return_value = {"id": 1234}
         payload = json.dumps({"name": "New Incident"})
-        response = _create_incident(mock_client, payload)
+        response = create_incident(mock_client, payload)
 
         assert response.get("id") == 1234
 
     def test_map_values(self):
+        # Need to call to be able to use when rendering a template
+        add_methods_to_global()
 
-        message = '{"artifact_type": "IP Address", "discovered_date": "1523569779000", "artifact_value": "8.8.8.8", "incident_name": "Malware Incident"}'
+        message_file = os.getcwd()
+        message_file = message_file + "/data/message.txt"
+        expected = os.getcwd()
+        expected = expected + "/data/expected.txt"
 
-        incident_template = os.getcwd()
-        incident_template = incident_template + "/incident_template.txt"
-        mapping_template = os.getcwd()
-        mapping_template = mapping_template + "/mapping_template.txt"
+        with open(message_file, 'r') as message, open(expected, 'r') as expected_data:
+            incident_template = os.getcwd()
+            incident_template = incident_template + "/data/incident_template.txt"
 
-        incident_data = _map_values(incident_template, mapping_template, message)
+            # Read file and create dict
+            message = json.loads(message.read())
 
-        expected_data = {
-            "description": {
-               "format": "html",
-               "content": "New Malware Incident created using the Resilient DXL Service Listener"
-            },
-            "discovered_date": 1523569779000,
-            "incident_type_ids": [19],
-            "artifacts": [
+            incident_data = map_values(incident_template, message)
 
-                {"type": {"name": "IP Address"}, "value": "8.8.8.8"}
-            ],
-            "name": "Malware Incident"
+            expected_data = json.loads(expected_data.read())
+            actual_data = json.loads(incident_data)
+
+            difference = {k: actual_data[k] for k in set(actual_data) - set(expected_data)}
+
+            assert difference == {}
+
+    def test_get_template_file(self):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        default_template = join(current_path, pardir, "fn_mcafee_opendxl/data/templates/_mcafee_event_epo_threat_response.jinja2")
+
+        expected_dict = {
+            "/mcafee/event/epo/threat/response": default_template
         }
-        actual_data = json.loads(incident_data)
+        actual_dict = get_topic_template_dict()
 
-        assert actual_data == expected_data
+        expected_dict["/mcafee/event/epo/threat/response"] = os.path.abspath(expected_dict.get("/mcafee/event/epo/threat/response"))
+        actual_dict["/mcafee/event/epo/threat/response"] = os.path.abspath(actual_dict.get("/mcafee/event/epo/threat/response"))
 
+        assert actual_dict == expected_dict
+
+    def test_get_override_template_file(self):
+        temp_dir = tempfile.mkdtemp()
+        try:
+            with open(temp_dir + "/_mcafee_event_epo_threat_response.jinja", "a") as temp:
+                expected_dict = {
+                    "/mcafee/event/epo/threat/response": temp.name
+                }
+                actual_dict = get_topic_template_dict(temp_dir)
+
+                assert actual_dict == expected_dict
+        finally:
+            # Remove the temp directory created
+            shutil.rmtree(temp_dir)

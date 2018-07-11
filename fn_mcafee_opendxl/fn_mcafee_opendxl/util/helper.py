@@ -22,38 +22,20 @@ def verify_config(opts):
         raise ValueError("[fn_mcafee_opendxl] section is not set in the config file")
 
     config_client = config_opts.get("dxlclient_config")
-    topic_name = config_opts.get("topic_name")
     topic_listener_on = config_opts.get("topic_listener_on")
-    incident_template = config_opts.get("incident_template")
-    incident_mapping = config_opts.get("incident_template_mapping")
     custom_template_dir = config_opts.get("custom_template_dir")
 
     if config_client is None:
         log.error("dxlclient_config is not set. You must set this path to run this service")
         raise ValueError("dxlclient_config is not set. You must set this path to run this service")
 
-    if topic_name is None:
-        log.error("topic_name is not set. You must set this value to run this service")
-        raise ValueError("topic_name is not set. You must set this value to run this service")
-
     if topic_listener_on is None:
         log.error("topic_listener_on is not set. You must set this value to run this service")
         raise ValueError("topic_listener_on is not set. You must set this value to run this service")
 
-    if incident_template is None:
-        log.error("incident_template is not set. You must set this path to run this service")
-        raise ValueError("incident_template is not set. You must set this path to run this service")
-
-    if incident_mapping is None:
-        log.error("incident_mapping is not set. You must set this path to run this service")
-        raise ValueError("incident_mapping is not set. You must set this path to run this service")
-
     config = {
         "config_client": config_client,
-        "topic_name": topic_name,
         "topic_listener_on": topic_listener_on,
-        "incident_template": incident_template,
-        "incident_mapping": incident_mapping,
         "custom_template_dir": custom_template_dir,
         "opts": opts
     }
@@ -164,8 +146,17 @@ def get_topic_template_dict(overrides_dir=None):
     template_files = _get_template_files(overrides_dir)
 
     topic_template_dict = {}
-    for k, v in template_files.iteritems():
-        topic = _get_topic_from_file_name(k)
-        topic_template_dict[topic] = v
+
+    # Python 2.x solution
+    try:
+        for k, v in template_files.iteritems():
+            topic = _get_topic_from_file_name(k)
+            topic_template_dict[topic] = v
+
+    # Python 3.6 solution
+    except AttributeError:
+        for k, v in template_files.items():
+            topic = _get_topic_from_file_name(k)
+            topic_template_dict[topic] = v
 
     return topic_template_dict

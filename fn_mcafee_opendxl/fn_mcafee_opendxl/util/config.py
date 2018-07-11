@@ -11,10 +11,12 @@ def config_section_data():
     """
     config_data = u"""[fn_mcafee_opendxl]
 dxlclient_config=/home/integration/.resilient/mcafee/dxlclient.config
-# Should be set to /mcafee/event/epo/threat/response if listening from ePO
-topic_name=/resilient/something
+
+# Set topic_listener to False to prevent it from listening on any topics
 topic_listener_on=True
-incident_template=/Users/brianwal/.resilient/mcafee_config/incident_template.json.jinja2
-incident_template_mapping=/Users/brianwal/.resilient/mcafee_config/incident_mapping.json.jinja2
+
+# custom_template_dir is optional and used to specify the directory where new 
+# templates can be found/to override any default templates
+custom_template_dir=
 """
     return config_data

@@ -9,12 +9,8 @@ from resilient_circuits.rest_helper import get_resilient_client
 from dxlclient.client import DxlClient
 from dxlclient import EventCallback
 from dxlclient.client_config import DxlClientConfig
-try:
-    from fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict, map_values, \
+from fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict, map_values, \
         create_incident, add_methods_to_global
-except ModuleNotFoundError:
-    from fn_mcafee_opendxl.fn_mcafee_opendxl.util.helper import verify_config, get_topic_template_dict, \
-        map_values, create_incident, add_method_to_global
 
 log = logging.getLogger(__name__)
 
@@ -67,7 +63,6 @@ class DxlComponentListener(ResilientComponent):
                     message_dict = json.loads(message)
 
                     # Map values from topic to incident template to create new incident
-#                     inc_temp = map_values_old(self.temp, mapping_dict, message)
                     inc_data = map_values(self.temp, message_dict)
 
                     # Create new Incident in Resilient
@@ -76,9 +71,8 @@ class DxlComponentListener(ResilientComponent):
 
             for event_topic, template in topic_template_dict.iteritems():
                 self.client.add_event_callback(event_topic, ResilientEventSubscriber(template))
-#                        client.add_event_callback(EVENT_TOPIC, ResilientEventSubscriber)
                 log.info("Resilient DXL Subscriber listening on {} ...".format(event_topic))
-#                        log.info("Listening on {}".format(EVENT_TOPIC))
+
         except Exception as e:
             log.error(e)
             self.client.destroy()
