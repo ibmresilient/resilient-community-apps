@@ -14,7 +14,7 @@ The "resilient-merge-incident-json" command allows for two JSON files, containin
 - Python requests
 
 ## Installation
-1) Install fn_floss in "development mode":
+1) Install utilities_export_to_json in "development mode":
     ```
 	$ pip install -e  ./utilities_export_to_json
     ```
