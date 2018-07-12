@@ -1,4 +1,11 @@
-Replace this with your own readme.
+# Thug
+
+Thug is a client honeypot that emulates a real web browser, fetches and executes any internal or external JavaScript,
+follows all redirects, downloadable files just like any browser would do, and collects the results.
+
+This integration is a Function that can be called from a Resilient workflow to investigate a URL.
+It loads a Thug docker image and submits the URL for testing.
+The results are available to Resilient as a SVG image and JSON report.
 
 ==
 

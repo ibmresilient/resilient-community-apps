@@ -3,7 +3,6 @@
 """Function implementation"""
 
 import logging
-import json
 import docker
 import base64
 import os
@@ -12,13 +11,14 @@ from resilient_circuits import ResilientComponent, function, StatusMessage, Func
 
 CONFIG_DATA_SECTION = 'thug'
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
 
     def __init__(self, opts):
-	super(FunctionComponent, self).__init__(opts)
+        super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(CONFIG_DATA_SECTION, {})
-	self.thug_dir = self.options.get("thug_dir")
+        self.thug_dir = self.options.get("thug_dir")
 
     @function("thug")
     def _thug_function(self, event, *args, **kwargs):
@@ -29,17 +29,17 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
 
-	    thug_dir = self.thug_dir
+            thug_dir = self.thug_dir
             
-	    def md5(my_val):
+            def md5(my_val):
                 """ Creates an MD5 from given value"""
                 m_val = hashlib.md5()
                 m_val.update(my_val)
                 return m_val.hexdigest()
-	    
-	    art_val_md5 = md5(art_val)
-    
-	    # Setup a connection to docker
+
+            art_val_md5 = md5(art_val)
+
+            # Setup a connection to docker
             try:
                 client = docker.from_env()
                 yield StatusMessage("Testing docker connection")
@@ -57,10 +57,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Getting thug image")
                 # go grab image
                 try: 
-                        client.images.pull('honeynet/thug:latest')
+                    client.images.pull('honeynet/thug:latest')
                 # handle download or API error
                 except docker.errors.APIError:
-                        yield StatusMessage("Couldn't download the image")
+                    yield StatusMessage("Couldn't download the image")
 
             # Runs the thug analysis tool in a docker
             client = docker.from_env()
@@ -77,33 +77,30 @@ class FunctionComponent(ResilientComponent):
             except docker.errors.ContainerError: 
                 yield StatusMessage("Some error happened during the analysis")
 
-           # Can probably make the file path stuff cleaner but shrug
+            # Can probably make the file path stuff cleaner but shrug
             site_analysis_dir = os.path.join(self.thug_dir, art_val_md5)
             all_analysis_dir = os.listdir(site_analysis_dir)
             wanted_analysis_dir = all_analysis_dir[-1]
             log.info("Using analysis in folder " + wanted_analysis_dir)
             wanted_analysis_path = os.path.join(self.thug_dir, art_val_md5, wanted_analysis_dir,'analysis')
-        
 
             yield StatusMessage("Encoding files for transmission")
             graph_path = os.path.join(wanted_analysis_path, 'graph.svg')
-	    with open(graph_path, "rb") as f:
-		data = f.read()
-		thug_png_b64 = base64.b64encode(data)        
+            with open(graph_path, "rb") as f:
+                data = f.read()
+                thug_png_b64 = base64.b64encode(data)
 
             json_path = os.path.join(wanted_analysis_path, 'json', 'analysis.json')
-	    with open(json_path, "rb") as f:
-	   	data = f.read()
-		thug_report_b64 = base64.b64encode(data)
+            with open(json_path, "rb") as f:
+                data = f.read()
+                thug_report_b64 = base64.b64encode(data)
            
-	    results = {
+            results = {
                 "png_file": thug_png_b64,
-		"report_file": thug_report_b64
-             }
+                "report_file": thug_report_b64
+            }
 
-            
-	    yield StatusMessage("Response values sent")
-	    # Produce a FunctionResult with the results
+            # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
