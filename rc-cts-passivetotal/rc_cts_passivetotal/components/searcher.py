@@ -8,22 +8,20 @@
         curl -v 'http://127.0.0.1:9000/cts/example/f9acc1b7-6184-5746-873e-e385e6214261'
 """
 
-import os
+from __future__ import unicode_literals
 import logging
 import json
 import requests
-import re
-from functools import partial
 from circuits import BaseComponent, handler
 from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, IpProp, LatLngProp
 
+
 LOG = logging.getLogger(__name__)
 
-SB_CLIENT_ID = "Resilient"
-SB_CLIENT_VER = "0.0.3"
+CONFIG_SECTION = "passivetotal"
 
-CONFIG_SECTION = "custom_threat_service"
-API_URL = "http:"
+PASSIVETOTAL_BASE_URL = 'https://api.passivetotal.org'
+
 
 class PassiveTotalSearcher(BaseComponent):
     """
@@ -44,83 +42,81 @@ class PassiveTotalSearcher(BaseComponent):
             exc = "Configuration value `passive_user=me@my.com` is missing in [{}] section".format(CONFIG_SECTION)
             raise Exception(exc)
         if self.passive_tags is None:
-            exc = "Configuration value `passive_tags=['Compromised','Ransomware']` is missing in [{}] section".format(CONFIG_SECTION)
+            exc = "Configuration value `passive_tags=tag1,tag2` is missing in [{}] section".format(CONFIG_SECTION)
             raise Exception(exc)
+        self.passive_tag_set = set(self.passive_tags.split(","))
 
-    @handler("net.name")
-    def _lookup_net_name(self, event, *args, **kwargs):
-        LOG.info("Looking up with Passive Total API")
+    @handler("net.name", "net.uri", "net.ip")
+    def _lookup(self, event, *args, **kwargs):
+        """Threat service searcher for 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address)"""
+        hits = []
+        auth = (self.userkey, self.apikey)
+        a_value = event.artifact['value']
+        LOG.info("PassiveTotal lookup: %s", a_value)
 
-	auth = (self.userkey, self.apikey)
-	base_url = 'https://api.passivetotal.org'
+        def passivetotal_get(path, query):
+            """get URL from PT"""
+            url = PASSIVETOTAL_BASE_URL + path
+            data = {'query': query}
+            response = requests.get(url, auth=auth, json=data)
+            return response.json()
 
-	a_value = event.artifact['value']
-        LOG.info("Looking up URL: " + str(a_value))
+        # checks if over quota
+        account_results = passivetotal_get('/v2/account', '')
+        account_oversub = account_results["searchApiQuotaExceeded"]
+        if account_oversub:
+            LOG.warn("Your PassiveTotal Account has no API queries left")
+            return hits
 
-	def passivetotal_get(path, query):
-    		url = base_url + path
-    		data = {'query': query}
-		response = requests.get(url, auth=auth, json=data)
-		return response.json()
+        # compares your definition of a hit with the tags in PassiveTotal
+        tags_results = passivetotal_get('/v2/actions/tags', a_value)
+        tags_hits = json.dumps(tags_results['tags'])
+        LOG.info("Comparing tags " + str(tags_hits) + " and " + str(self.passive_tags))
 
-	# checks if over quota
-	account_results = passivetotal_get('/v2/account', '')
-	account_oversub = account_results["searchApiQuotaExceeded"]
-	if account_oversub:
-		LOG.info("Your Account is has no API queries left")
-		hits = []
-		return hits
+        # Tests the site has tags you have flagged
+        if set(tags_hits) & self.passive_tag_set:
+            LOG.info("Positive Threat Intel for %s", a_value)
 
-	# compares your definition of a hit with the tags in PassiveTotal
-	tags_results = passivetotal_get('/v2/actions/tags', a_value)
-	tags_hits = json.dumps(tags_results['tags'])
-	LOG.info("Comparing tags " + str(tags_hits) + " and " + str(self.passive_tags))
-	
-	# Tests the site has tags you have flagged 
-	if set(tags_hits) & set(self.passive_tags):
-       		LOG.info("Positive Threat Intel for " + a_value)
-		
-		# Passive DNS Results
-		pdns_results = passivetotal_get('/v2/dns/passive', a_value)
-		pdns_hit = pdns_results["totalRecords"]
-		LOG.info(str(pdns_hit))
-	
-		# URL Classification
-		classification_results = passivetotal_get('/v2/actions/classification', a_value)
-		classification_hit = classification_results['classification']
-		LOG.info(str(classification_hit))	
+            # Passive DNS Results
+            pdns_results = passivetotal_get('/v2/dns/passive', a_value)
+            pdns_hit = pdns_results["totalRecords"]
+            LOG.debug(pdns_results)
+            LOG.info(pdns_hit)
 
-		# Count of subdomains
-		subdomain_results = passivetotal_get('/v2/enrichment/subdomains', a_value)
-		subdomain_hits = len(subdomain_results['subdomains'])
-		LOG.info(str(subdomain_hits))
-		
-		# Construct simple link to PT 
-		report_url = "https://community.riskiq.com/search/" + a_value
+            # URL Classification
+            classification_results = passivetotal_get('/v2/actions/classification', a_value)
+            classification_hit = classification_results['classification']
+            LOG.debug(classification_results)
+            LOG.info(classification_hit)
 
-		hits = []
+            # Count of subdomains
+            subdomain_results = passivetotal_get('/v2/enrichment/subdomains', a_value)
+            subdomain_hits = len(subdomain_results['subdomains'])
+            LOG.debug(subdomain_results)
+            LOG.info(subdomain_hits)
 
-		# Create the array for back in Resilient
-        	hits.append(Hit(
-                	StringProp(name="Passive DNS Hits", value=str(pdns_hit)),
-                	StringProp(name="Number of subdomains", value=str(subdomain_hits)),                
-			StringProp(name="Tags", value=str(tags_hits)),
-			StringProp(name="Classification", value=str(classification_hit)),
-        	        UriProp(name="Report Link", value=report_url)
-            	))
-        	return hits
+            # Construct simple link to PT
+            report_url = "https://community.riskiq.com/search/" + a_value
 
-	# failure condition if the site doesn't match your definition
-	else:
-		LOG.info("The site isn't currently listed as compromised acccording to your definition")
-		hits = []
-		return hits
+            # Create the hits array to sent back to Resilient
+            hits.append(Hit(
+                StringProp(name="Passive DNS Hits", value=str(pdns_hit)),
+                StringProp(name="Number of subdomains", value=str(subdomain_hits)),
+                StringProp(name="Tags", value=str(tags_hits)),
+                StringProp(name="Classification", value=str(classification_hit)),
+                UriProp(name="Report Link", value=report_url)
+            ))
+        else:
+            # failure condition if the site doesn't match your definition
+            LOG.info("The site isn't currently listed as compromised according to your definition")
+        return hits
 
 
 def main():
     """Just some tests"""
     import doctest
     doctest.testmod()
+
 
 if __name__ == "__main__":
     main()
