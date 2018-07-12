@@ -56,8 +56,7 @@ def create_incident(resilient_client, payload):
 def add_methods_to_global():
     # Add ds_to_millis to global env so it can be used in filters
     ds_filter = {
-        "ds_to_millis": ds_to_millis,
-        "get_incident_type": get_incident_type
+        "ds_to_millis": ds_to_millis
     }
     env = environment()
     env.globals.update(ds_filter)
@@ -78,21 +77,6 @@ def ds_to_millis(val):
     except Exception as e:
         log.exception("%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
         return None
-
-
-# Returns Incident Type if there is one to return
-def get_incident_type(category):
-    log.debug("Category is {}".format(category))
-
-    incident_type_lookup = {
-        "Malware detected": "Malware"
-    }
-    incident_type = incident_type_lookup.get(category)
-
-    if incident_type is not None:
-        return incident_type
-    else:
-        return ""
 
 
 def map_values(template_file, message_dict):

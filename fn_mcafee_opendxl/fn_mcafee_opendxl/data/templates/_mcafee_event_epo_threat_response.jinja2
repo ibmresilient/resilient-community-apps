@@ -2,13 +2,12 @@
    "description":{
       "format":"html",
       "content": "{{event.eventDesc}}
-      {%- if event.threatType -%} \nType: {{event.threatType}} {%- endif -%} {%- if event.threatName -%} \nName: {{event.threatName}} {% endif -%}"
+      {%- if event.threatType -%} \nType: {{event.threatType}} {%- endif -%}"
    },
    {# ds_to_millis expectes the data paramater to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
    "discovered_date": {{ ds_to_millis(event.analyzer.detectedUTC) }},
-   {%- set type = get_incident_type(event.category) -%}
-   {%- if type -%}
-       "incident_type_ids": ["{{ get_incident_type(event.category) }}"],
+   {%- if event.category == "Malware detected" -%}
+       "incident_type_ids": ["Malware"],
    {% endif %}
 
    "artifacts" : [
@@ -65,11 +64,13 @@
        {%- elif key == "ipv4" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
-               "description" : {"format" : "html","content" : "Target ipv4 Address"}}
+               "description" : {"format" : "html","content" : "Target ipv4 Address"},
+               "properties": [{"name": "destination", "value": true}]}
        {%- elif key == "ipv6" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
-               "description" : {"format" : "html","content" : "Target ipv6 Address"}}
+               "description" : {"format" : "html","content" : "Target ipv6 Address"},
+               "properties": [{"name": "destination", "value": true}]}
        {%- endif -%}
    {%- endfor -%}
 
@@ -97,13 +98,15 @@
        {%- elif key == "ipv4" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
-               "description" : {"format" : "html","content" : "Source ipv4 Address"}}
+               "description" : {"format" : "html","content" : "Source ipv4 Address"},
+               "properties": [{"name": "source", "value": true}]}
        {%- elif key == "ipv6" and value != None and value != "" -%}
            {{- comma() }}
            {"type": {"name": "IP Address"}, "value": "{{value}}",
-               "description" : {"format" : "html","content" : "Source ipv6 Address"}}
+               "description" : {"format" : "html","content" : "Source ipv6 Address"},
+               "properties": [{"name": "source", "value": true}]}
        {%- endif -%}
    {%- endfor -%}
    ],
-   "name": "{{event.category}} Incident"
+   "name": "{{event.threatName}}"
 }

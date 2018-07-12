@@ -23,10 +23,10 @@ def get_connected_resilient_client(config):
     return client
 
 
-class DxlComponentListener(ResilientComponent):
+class DxlComponentSubscriber(ResilientComponent):
 
     def __init__(self, opts):
-        super(DxlComponentListener, self).__init__(opts)
+        super(DxlComponentSubscriber, self).__init__(opts)
         self.config = verify_config(opts)
         add_methods_to_global()
 
@@ -39,7 +39,7 @@ class DxlComponentListener(ResilientComponent):
         self.main()
 
     def main(self):
-        if self.config["topic_listener_on"] == "True":
+        if self.config["topic_listener_on"].lower() == "true":
             log.info("Service Listener called")
 
             self.event_subscriber(self.config)
