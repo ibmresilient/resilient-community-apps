@@ -86,6 +86,7 @@ class FunctionComponent(ResilientComponent):
             timeout_seconds = self.timeout_mins * 60
             start = time.time()
             while check_atd_status(self, atd_task_id) is False:
+                yield StatusMessage("Analysis is still running")
                 check_timeout(start, self.polling_interval, timeout_seconds)
 
             yield StatusMessage("Analysis Completed")

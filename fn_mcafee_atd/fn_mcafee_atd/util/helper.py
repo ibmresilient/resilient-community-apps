@@ -7,7 +7,7 @@ import json
 import tempfile
 import shutil
 import time
-from resilient_circuits import FunctionError, StatusMessage
+from resilient_circuits import FunctionError
 import configparser
 import io
 from fn_mcafee_atd.util.config import config_section_data
@@ -212,10 +212,8 @@ def check_atd_status(g, task_id):
     check_status_code(submission_status)
     submit_json = submission_status.json()
     if submit_json['results']['istate'] == 4:
-        log.info("Analysis is still running")
         return False
     elif submit_json['results']['istate'] == 3:
-        log.info("Analysis is still running")
         return False
     elif submit_json['results']['istate'] == 1:
         log.debug("ATD Analysis Status: {}".format(submit_json['results']['status']))
@@ -264,10 +262,3 @@ def get_incident_id(**kwargs):
         raise FunctionError("incident_id is required")
     else:
         return incident_id
-
-
-def upload_attachment(resilient_client, incident_id, report_file):
-    if report_file is not None:
-        resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                              report_file["report_file"], filename=report_file["report_file_name"])
-        yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
