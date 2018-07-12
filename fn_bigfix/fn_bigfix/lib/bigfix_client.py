@@ -26,9 +26,9 @@ class BigFixClient(object):
         Class constructor
         """
         config = opts.get("fn_bigfix", {})
-        self.base_url = config.get("bigfix_url", "https://bigfix-url.com") + ":" + config.get("bigfix_port", "52311")
-        self.bf_user = config.get("bigfix_user", "BigFixAdmin")
-        self.bf_pass = config.get("bigfix_pass", "MyPassword")
+        self.base_url = config.get("bigfix_url") + ":" + config.get("bigfix_port")
+        self.bf_user = config.get("bigfix_user")
+        self.bf_pass = config.get("bigfix_pass")
         self.headers = {'content-type': 'application/json'}
 
         # Endpoints
@@ -41,7 +41,7 @@ class BigFixClient(object):
     # end __init__
 
     def get_bf_computer_by_service_name(self, service_name):
-        """ Class method - Bigfix query - Get endpoints by service name.
+        """ Method - Bigfix query - Get endpoints by service name.
 
         :param service_name: Service name
         :return resp: Response from query
@@ -55,7 +55,7 @@ class BigFixClient(object):
         return resp
 
     def get_bf_computer_by_process_name(self, process_name):
-        """ Class method - Bigfix query - Get endpoints by process name.
+        """ Bigfix query - Get endpoints by process name.
 
         :param process_name: Process name
         :return resp: Response from query
@@ -68,7 +68,7 @@ class BigFixClient(object):
         return resp
 
     def get_bf_computer_by_file_path(self, file_path):
-        """ Class method - Bigfix query - Get endpoints by file path.
+        """ Bigfix query - Get endpoints by file path.
 
         :param file_path: File path
         :return resp: Response from query
@@ -84,7 +84,7 @@ class BigFixClient(object):
         return resp
 
     def get_bf_computer_by_ip(self, ip):
-        """ Class method - Bigfix query - Get endpoints by ip address.
+        """ Bigfix query - Get endpoints by ip address.
 
         :param ip: ip address
         :return resp: Response from query
@@ -98,7 +98,7 @@ class BigFixClient(object):
         return resp
 
     def get_bf_computer_by_registry_key_name_value(self, key, name, value):
-        """ Class method - Bigfix query - Get endpoints by registry entry (MS Windows).
+        """ Bigfix query - Get endpoints by registry entry (MS Windows).
 
         :param key: Registry key
         :param name: Value name
@@ -126,7 +126,7 @@ class BigFixClient(object):
         return resp
 
     def send_delete_file_remediation_message(self, artifact_value, computer_id):
-        """ Class method - Bigfix action - Delete file remediate action.
+        """ Bigfix action - Delete file remediate action.
 
         :param artifact_value: Name of artifact to remediate
         :param computer_id: BigFix Endpoint id
@@ -138,7 +138,7 @@ class BigFixClient(object):
         return self._post_bf_action_query(query, computer_id, "Delete File {0}".format(artifact_value), relevance)
 
     def send_kill_process_remediation_message(self, artifact_value, computer_id):
-        """ Class method - Bigfix action - Kill process remediate action.
+        """ Bigfix action - Kill process remediate action.
 
         :param artifact_value: Name of artifact to remediate
         :param computer_id: BigFix Endpoint id
@@ -153,7 +153,7 @@ class BigFixClient(object):
         return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
 
     def send_stop_service_remediation_message(self, artifact_value, computer_id):
-        """ Class method - Bigfix action - Stop service remediate action.
+        """ Bigfix action - Stop service remediate action.
 
         :param artifact_value: Name of artifact to remediate
         :param computer_id: BigFix Endpoint id
@@ -169,7 +169,7 @@ class BigFixClient(object):
                                           relevance)
 
     def send_delete_registry_key_remediation_message(self, artifact_value, computer_id):
-        """ Class method - Bigfix action - Delete registry entry (MS Windows).
+        """ Bigfix action - Delete registry entry (MS Windows).
 
         :param artifact_value: Name of artifact to remediate
         :param computer_id: BigFix Endpoint id
@@ -186,7 +186,7 @@ class BigFixClient(object):
                                                relevance)
 
     def get_bfclientquery(self, query_id, wait=5, timeout=5000):
-        """ Class method - Get Bigfix query results.
+        """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
         :param wait: Value name
@@ -239,7 +239,7 @@ class BigFixClient(object):
         return result
 
     def post_bfclientquery(self, query):
-        """"Class method - Post Bigfix relevance query.
+        """" Post Bigfix relevance query.
 
         :param query: Relevance query
         :return query_id: Query id generatd by request
@@ -277,7 +277,7 @@ class BigFixClient(object):
             LOG.exception("BigFix client query creation did not return expected value: %s".format(r))
 
     def _post_bf_action_query(self, query, computer_id, action_name, relevance="true"):
-        """"Class method - Post Bigfix action request.
+        """" Post Bigfix action request.
 
         :param query: Remediation relevance query
         :param computer_id: BigFix Endpoint id

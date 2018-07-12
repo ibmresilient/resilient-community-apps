@@ -54,16 +54,17 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
         self.bigFix = BigFixClient(opts)
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
-        self.bigFix = BigFixClient(opts)
+        self.bigFix = BigFixClient(self.options)
 
     @function("fn_bigfix_artifact")
     def _fn_bigfix_artifact_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Resilient Function : Bigfix artifact - Get hits in BigFix for artifact."""
         try:
             # Get the function parameters:
             bigfix_artifact_id = kwargs.get("bigfix_artifact_id")  # number

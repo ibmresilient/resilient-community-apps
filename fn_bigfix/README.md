@@ -3,7 +3,7 @@
 This Resilient Function package can be used to perform the following actions from a workflow using the Functions feature of the Resilient
 Circuits integration framework.
 ```
-Run Bigfix query for Resilinet artifacts to determine if there are any hits.
+Run Bigfix query for Resilient artifacts to determine if there are any hits.
 Remediate hits in  Bigfix environment.
 Retrieve resource details from Bigfix
 ```
