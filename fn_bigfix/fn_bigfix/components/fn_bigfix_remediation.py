@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_bigfix_remediation")
     def _fn_bigfix_remediation_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Resilient Function : Bigfix remediation - Remediate hit for endpoint in BigFix."""
         try:
             # Get the function parameters:
             bigfix_asset_id = kwargs.get("bigfix_asset_id")  # text
@@ -111,11 +111,6 @@ class FunctionComponent(ResilientComponent):
                 status_message = "BigFix Action Created Successfully."
                 action_id = response
                 remediation_date = datetime.datetime.today().strftime('%m-%d-%Y %H:%M:%S')
-                #try:
-                #    self.datastore.add_bg_action(int(response), params["row_id"], int(params["incident_id"]))
-                #except Exception as e:
-                #    log.exception("Could not save row in DB. Action ID {0}. Row ID {1}. Incident ID {2}"
-                #                  .format(response, params["row_id"], params["incident_id"]))
                 status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \
                                 "and type {1} in asset ID {2}. BigFix Action ID {3}." \
                     .format(params["artifact_value"], params["artifact_type"], params["asset_id"], response)
