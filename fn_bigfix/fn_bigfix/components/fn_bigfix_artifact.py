@@ -3,7 +3,8 @@
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-""" Resilient functions component to run a Bigfix Query against a Bigfix server to determine """
+""" Resilient functions component to run a Bigfix Query against a Bigfix server for an artifact to determine
+if are hits on any of the BigFix endpoints"""
 
 # Set up:
 # Destination: a Queue named "bigfix_artifact".
