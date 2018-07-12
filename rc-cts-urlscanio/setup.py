@@ -6,15 +6,15 @@ setup(
     name='rc-cts-urlscanio',
     setup_requires=['setuptools_scm'],
     use_scm_version={"root": "../", "relative_to": __file__},
-    url='https://github.com/ibmresilient/resilient-circuits-packages',
+    url='https://github.com/IBMResilient/resilient-community-apps/',
     license='MIT',
     author='IBM Resilient',
     install_requires=[
         'rc-cts'
     ],
-    author_email='support@resilientsystems.com',
-    description="Custom Threat Service - UrlScan IO",
-    long_description="Custom Threat Service - UrlScan IO",
+    author_email='info@resilientsystems.com',
+    description="Custom Threat Service - urlscan.io",
+    long_description="Custom Threat Service - urlscan.io",
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
@@ -23,6 +23,9 @@ setup(
     ],
     entry_points={
         # Register the component with resilient_circuits
-        "resilient.circuits.components": ["UrlScanIoSearcher = rc_cts_urlscanio.components.searcher:UrlScanIoSearcher"]
+        "resilient.circuits.components": [
+            "UrlScanIoSearcher = rc_cts_urlscanio.components.searcher:UrlScanIoSearcher"
+        ],
+        "resilient.circuits.configsection": ["gen_config = rc_cts_urlscanio.util.config:config_section_data"],
     }
 )
