@@ -12,6 +12,9 @@ def config_section_data():
     config_data = u"""[urlscanio]
 # API key for urlscan.io
 urlscanio_api_key=xxx
+
+# Optional timeout (seconds)
+# timeout=300
     """
     return config_data
 

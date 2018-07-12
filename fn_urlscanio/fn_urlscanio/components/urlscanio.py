@@ -20,72 +20,89 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         self.apikey = self.options.get("urlscanio_api_key")
+        self.timeout = int(self.options.get("timeout", 600))
         if self.apikey is None:
             raise Exception("No API key found - please add urlscanio_api_key under a [urlscanio] in app.config")
 
     @function("urlscanio")
     def _urlscanio_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: urlscanio"""
         try:
-
             log = logging.getLogger(__name__)
 
             # Get the function parameters:
-            urlscanio_url = kwargs.get("urlscanio_url")        # text
-            incident_id = kwargs.get("urlscanio_incident_id")  # number
+            urlscanio_url = kwargs.get("urlscanio_url")              # text
+            urlscanio_public = kwargs.get("urlscanio_public")        # boolean, optional
+            urlscanio_useragent = kwargs.get("urlscanio_useragent")  # text, optional
+            urlscanio_referer = kwargs.get("urlscanio_referer")      # text, optional
 
             log.info("urlscanio_url: %s", urlscanio_url)
-            log.info("incident_id: %s", incident_id)
 
-            # Setup headers and json data array to submit url from function - it may work with IP address and DNS Name too - I should probably validate that.
+            # Construct the parameters to send to urlscan.io
             urlscanio_headers = {'Content-Type': 'application/json', 'API-Key': self.apikey}
-            urlscanio_data = '{"url": "%s"}' % urlscanio_url
+            urlscanio_data = {
+                "url": urlscanio_url
+            }
 
-            urlscanio_post = requests.post('https://urlscan.io/api/v1/scan/', headers=urlscanio_headers, data=urlscanio_data)
+            if urlscanio_public:
+                urlscanio_data["public"] = "on"
 
-            # The JSON never seems to be properly formatted on the response so I need to load into json from text
-            urlscanio_post_json = json.loads(urlscanio_post.text)
+            if urlscanio_useragent:
+                urlscanio_data["customagent"] = urlscanio_useragent
+
+            if urlscanio_referer:
+                urlscanio_data["referer"] = urlscanio_referer
+
+            urlscanio_post = requests.post('https://urlscan.io/api/v1/scan/',
+                                           headers=urlscanio_headers,
+                                           data=json.dumps(urlscanio_data))
+            urlscanio_post.raise_for_status()
+
+            # The post response contains a UUID that we use to check for the report
+            urlscanio_post_json = urlscanio_post.json()
+            log.debug(urlscanio_post_json)
 
             # UUID tells me my report ID so I can go grab it after
             uuid = urlscanio_post_json['uuid']
+            yield StatusMessage("Submitted URL successfully as %s" % uuid)
 
-            yield StatusMessage("Submitted URL Successfully as %s" % uuid)
+            # Loop until the report is ready
+            start_time = time.time()  # epoch seconds
+            while True:
+                time.sleep(10)
+                if time.time() > start_time + self.timeout:
+                    yield RuntimeError("Timeout: report was not ready after {} seconds".format(self.timeout))
+                urlscanio_get = requests.get('https://urlscan.io/api/v1/result/{}/'.format(uuid))
+                if urlscanio_get.status_code == 404:
+                    # 404 means the report is not yet complete
+                    yield StatusMessage("Waiting for report...")
+                elif urlscanio_get.status_code == 200:
+                    # Report is done
+                    break
+                else:
+                    # Some other error condition
+                    urlscanio_get.raise_for_status()
 
-            # Loop to check whether the report is ready - weirdly they respond with 404 so potentially here for issues if the site itself is is 404/down.
-            urlscan_status = False
-            while urlscan_status is False:
-                try:
-                    urlscanio_get = requests.get('https://urlscan.io/api/v1/result/{}/'.format(uuid))
-                    if urlscanio_get.status_code == 404:
-                        yield StatusMessage("Report is not ready yet... looping")
-                        time.sleep(5)
-                    elif urlscanio_get.status_code == 200:
-                        yield StatusMessage("Report is ready")
-                        urlscanio_status = True
-                        break
-                except requests.ConnectionError:
-                    yield StatusMessage("Failed to Connect to URLScan")
+            yield StatusMessage("Report is ready")
 
-            yield StatusMessage("Starting report download")
+            # get the full report json - usually a big blob
+            urlscanio_report_url = 'https://urlscan.io/api/v1/result/{}/'.format(uuid)
+            urlscanio_report_get = requests.get(urlscanio_report_url)
+            urlscanio_report_json = urlscanio_report_get.json()
+            yield StatusMessage("Downloaded report from {}".format(urlscanio_report_url))
 
-            # get the full report json - this is usually a big blob and we don't really use it, anything could be parsed out of it.
-            urlscanio_report_get = requests.get('https://urlscan.io/api/v1/result/{}/'.format(uuid))
-            urlscanio_report_json = json.loads(urlscanio_report_get.text)
-
-            yield StatusMessage("Downloaded report from %s " % urlscanio_report_json['task']['reportURL'])
-
-            yield StatusMessage("Getting PNG Screenshot")
-
-            # Grab the PNG screenshot from url and return as a base64 encoding so it can be passed to another function as needed
-            urlscanio_png_get = requests.get('https://urlscan.io/screenshots/{}.png'.format(uuid))
+            # Grab the PNG screenshot.  Return as a base64 string so it can be passed to another function as needed
+            urlscanio_png_url = 'https://urlscan.io/screenshots/{}.png'.format(uuid)
+            urlscanio_png_get = requests.get(urlscanio_png_url)
             urlscanio_png_b64 = base64.b64encode(urlscanio_png_get.content)
-
-            yield StatusMessage("Downloaded PNG Screenshot")
+            yield StatusMessage("Downloaded PNG screenshot from {}".format(urlscanio_png_url))
 
             # returns the png file base64 and also the report url
             results = {
-                "png_file": urlscanio_png_b64,
-                "urlscanio_report_url": urlscanio_report_json['task']['reportURL']
+                "png_base64content": urlscanio_png_b64,
+                "png_url": urlscanio_png_url,
+                "report_url": urlscanio_report_url,
+                "report": urlscanio_report_json
             }
 
             yield FunctionResult(results)

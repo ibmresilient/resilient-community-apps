@@ -12,6 +12,10 @@ It returns the report metadata, report URL, and base64-encoded screenshot that y
 
 ## Installation
 
+The example workflow in this package requires the "Base64 to Attachment" function from the `fn_utilities` package.
+You must install that package before installing this.
+
+
 To install in "development mode"
 
     pip install -e ./fn_urlscanio/
@@ -32,3 +36,13 @@ The resulting .tar.gz file can be installed using
 
     pip install <filename>.tar.gz
 
+
+After installation, before running, you must import the customizations into your Resilient platform,
+
+    resilient-circuits customize
+
+
+## Other notes
+
+To regenerate the customization blob,
+`resilient-circuits codegen -p fn_urlscanio -m urlscanio --workflow example_urlscanio --rule "Example: urlscan.io"`
