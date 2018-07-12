@@ -3,7 +3,7 @@
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-""" Resilient functions component to remediate a hit in a Bigfix environment """
+""" Resilient functions component to remediate a hit on and endpoint in a Bigfix environment """
 
 # Set up:
 # Destination: a Queue named "bigfix_artifact".
