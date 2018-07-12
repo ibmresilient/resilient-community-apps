@@ -1,4 +1,4 @@
-# Resilient Function - fn_bigfix_integration
+# Resilient Function - fn_bigfix
 
 This Resilient Function package can be used to perform the following actions from a workflow using the Functions feature of the Resilient
 Circuits integration framework.
@@ -24,7 +24,7 @@ To set the config values in the app.config file run `resilient-circuits config -
 
 Config values example:
 ```
-[fn_bigfix_integration]
+[fn_bigfix]
 bigfix_int_auto_configure=False
 bigfix_url=https://bigfix-url.com
 bigfix_port=12345
@@ -36,9 +36,9 @@ polling_period=120
 
 Run with: `resilient-circuits run`.
 
-## fn_bigfix_integration Example
+## fn_bigfix Example
 
-The fn_bigfix_integration  function fn_bigfix_artifact requires 4 input parameters. The parameters are setup from a
+The fn_bigfix  function fn_bigfix_artifact requires 4 input parameters. The parameters are setup from a
 Resilient systems workflow on the Resilient console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script.
 

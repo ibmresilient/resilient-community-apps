@@ -12,12 +12,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
 
     @function("fn_bigfix_assets")
     def _fn_bigfix_assets_function(self, event, *args, **kwargs):

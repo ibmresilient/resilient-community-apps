@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_bigfix_integration"""
+"""Generate the Resilient customizations required for fn_bigfix"""
 
 from __future__ import print_function
 from resilient_circuits.util import *

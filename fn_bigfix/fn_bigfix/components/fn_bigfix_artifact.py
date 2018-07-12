@@ -12,10 +12,10 @@
 """Function implementation"""
 
 import logging
-from fn_bigfix_integration.util.helpers import validate_opts, validate_params
+from fn_bigfix.util.helpers import validate_opts, validate_params
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_bigfix_integration.lib.bigfix_client import BigFixClient
-from fn_bigfix_integration.lib.bigfix_helpers import get_hits
+from fn_bigfix.lib.bigfix_client import BigFixClient
+from fn_bigfix.lib.bigfix_helpers import get_hits
 import datetime
 import os
 import json
@@ -24,7 +24,7 @@ LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_artifact' of
-        package fn_bigfix_integration.
+        package fn_bigfix.
 
         The Function does a BigFix query and takes the following parameters:
             bigfix_artifact_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_artifact_properties_name
@@ -51,13 +51,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
         self.bigFix = BigFixClient(opts)
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
         self.bigFix = BigFixClient(opts)
 

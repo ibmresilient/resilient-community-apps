@@ -25,7 +25,7 @@ class BigFixClient(object):
         """
         Class constructor
         """
-        config = opts.get("fn_bigfix_integration", {})
+        config = opts.get("fn_bigfix", {})
         self.base_url = config.get("bigfix_url", "https://bigfix-url.com") + ":" + config.get("bigfix_port", "52311")
         self.bf_user = config.get("bigfix_user", "BigFixAdmin")
         self.bf_pass = config.get("bigfix_pass", "MyPassword")

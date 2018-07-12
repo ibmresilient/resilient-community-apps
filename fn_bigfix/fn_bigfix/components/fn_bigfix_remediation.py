@@ -10,17 +10,17 @@
 # Manual Action: Execute a BigFix action to remediate hit.
 
 import logging
-from fn_bigfix_integration.util.helpers import validate_opts, validate_params
+from fn_bigfix.util.helpers import validate_opts, validate_params
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_bigfix_integration.lib.bigfix_client import BigFixClient
-import fn_bigfix_integration.lib.datastorage as datastore
+from fn_bigfix.lib.bigfix_client import BigFixClient
+import fn_bigfix.lib.datastorage as datastore
 
 import json
 import datetime
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_remediation' of
-        package fn_bigfix_integration.
+        package fn_bigfix.
 
         This Function attempts to remediate 'hits' discovered in a BigFix environment takes the following parameters:
             bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id
@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
         self.bigFix = BigFixClient(opts)
         self.datastore = datastore.Datastore()
@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_bigfix_integration", {})
+        self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
         self.bigFix = BigFixClient(opts)
         self.datastore = datastore.Datastore()
