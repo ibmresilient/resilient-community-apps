@@ -10,15 +10,15 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_ldap_utilities]
-# LDAP server ip or fully qualified hostname
-server=ldap.forumsys.com
-port=389
+ldap_server=xxx.xxx.xxx.xxx
+ldap_port=389
+ldap_use_ssl=False
+ldap_auth=SIMPLE
+ldap_user_dn=CN=Username,CN=Users,DC=example,DC=com
+ldap_password=password
+ldap_is_active_directory=False
+ldap_connect_timeout=10
 # The domain setting must be set to a valid Windows domain if using NTLM authentication.
-#domain=WORKGROUP 
-user=cn=read-only-admin,dc=example,dc=com
-password=password
-auth=SIMPLE
-use_ssl=False
-connect_timeout=10
+#ldap_domain=WORKGROUP 
 """
     return config_data

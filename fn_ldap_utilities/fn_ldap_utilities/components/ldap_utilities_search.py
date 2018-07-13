@@ -124,10 +124,10 @@ class FunctionComponent(ResilientComponent):
         Returns a tuple value.
 
         """
-        ldap_user = self.options.get("user", "").strip('\'"')
-        ldap_domain = self.options.get("domain", "")
-        ldap_password = self.options.get("password", "")
-        ldap_auth = self.options.get("auth", "")
+        ldap_user = self.options.get("ldap_user_dn", "").strip('\'"')
+        ldap_domain = self.options.get("ldap_domain", "")
+        ldap_password = self.options.get("ldap_password", "")
+        ldap_auth = self.options.get("ldap_auth", "")
         ldap_user_split = None
 
         if ldap_auth.upper() not in LDAP_AUTH_TYPES:
@@ -215,28 +215,28 @@ class FunctionComponent(ResilientComponent):
         Adds the LDAP connection as a class property.
 
         """
-        if "server" in self.options:
-            ldap_server = self.options["server"]
+        if "ldap_server" in self.options:
+            ldap_server = self.options["ldap_server"]
         else:
-            raise Exception("Mandatory config setting 'server' not set.")
-        ldap_port = int(self.options["port"] or LDAP_PORT_DEF)
-        if "use_ssl" in self.options:
-            ldap_use_ssl = self.str_to_bool(self.options["use_ssl"])
+            raise Exception("Mandatory config setting 'ldap_server' not set.")
+        ldap_port = int(self.options["ldap_port"] or LDAP_PORT_DEF)
+        if "ldap_use_ssl" in self.options:
+            ldap_use_ssl = self.str_to_bool(self.options["ldap_use_ssl"])
         else:
             raise Exception("Credentials parameter 'use_ssl' not set.")
         if ldap_use_ssl and (ldap_port != LDAP_PORT_SSL):
             # Should be port 636 for encrypted connections.
             raise Exception("If 'use_ssl' set to 'True' the port needs to be set to '{}'".format(LDAP_PORT_SSL))
         else:
-            ldap_port = int(self.options["port"] or LDAP_PORT_DEF)
+            ldap_port = int(self.options["ldap_port"] or LDAP_PORT_DEF)
 
             ldap_user, ldap_password, ldap_auth = self.get_creds()
 
-        if "connect_timeout" in self.options:
-            connect_timeout = int(self.options["connect_timeout"])
+        if "ldap_connect_timeout" in self.options:
+            connect_timeout = int(self.options["ldap_connect_timeout"])
         else:
-            LOG.debug(type(self.options["connect_timeout"]))
-            raise Exception("Mandatory config setting 'connect_timeout' not set.")
+            LOG.debug(type(self.options["ldap_connect_timeout"]))
+            raise Exception("Mandatory config setting 'ldap_connect_timeout' not set.")
 
         try:
             # Create LDAP Server object.
@@ -324,7 +324,6 @@ class FunctionComponent(ResilientComponent):
     def _ldap_search_function(self, event, *args, **kwargs):
         """Resilient Function: entry point """
         try:
-            print "here 2"
             # Get the function parameters:
             ldap_search_base = kwargs.get("ldap_search_base")  # text
             ldap_search_filter = self.get_textarea_param(kwargs.get("ldap_search_filter"))  # textarea
