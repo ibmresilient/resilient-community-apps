@@ -3,6 +3,7 @@ import json
 import logging
 from ToolCommand import ToolCommand
 import sys
+import ast
 
 logging.basicConfig(filename="testing.log", level=logging.DEBUG)
 HELP_STR = """
@@ -19,8 +20,13 @@ class SampleCmd(ToolCommand):
         html_filename = self.opts_dict["output"]
 
         with open(stix_filename, "r") as infile:
-            stix_json = json.load(infile)
-
+            stix_json = None
+            content_str = infile.read()
+            try:
+                stix_json = json.loads(content_str)
+            except Exception as e:
+                # single quote?
+                stix_json = ast.literal_eval(content_str)
             html_string = stix_tree.get_html(stix_json, logging)
 
             with open(html_filename, "w") as outfile:
