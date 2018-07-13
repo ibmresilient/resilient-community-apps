@@ -1,3 +1,5 @@
+from ldap3 import Server, Connection, ALL, MODIFY_REPLACE
+
 class LDAPUtilitiesHelper:
 
   def str_to_bool(self, str):
@@ -29,6 +31,10 @@ class LDAPUtilitiesHelper:
     else:
       return input
 
+  def get_ldap_connection(self):
+    server = Server(self.LDAP_SERVER, port=self.LDAP_PORT, get_info=ALL, use_ssl=self.LDAP_USE_SSL, connect_timeout=self.LDAP_CONNECT_TIMEOUT)
+    return Connection(server, user=self.LDAP_USER_DN, password=self.LDAP_PASSWORD, authentication=self.LDAP_AUTH, return_empty_attributes=True, raise_exceptions=True)
+  
   def __init__(self, options):
     self.options = options
 

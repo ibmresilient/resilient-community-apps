@@ -39,11 +39,8 @@ class FunctionComponent(ResilientComponent):
             input_ldap_new_password = helper.get_function_input(kwargs, "ldap_new_password") # text (required)
             yield StatusMessage("Function Inputs OK")
 
-            # Instansiate LDAP Server Object
-            server = Server(helper.LDAP_SERVER, port=helper.LDAP_PORT, get_info=ALL, use_ssl=helper.LDAP_USE_SSL, connect_timeout=helper.LDAP_CONNECT_TIMEOUT)
-            
-            # Connect to the LDAP Server
-            c = Connection(server, user=helper.LDAP_USER_DN, password=helper.LDAP_PASSWORD, authentication=helper.LDAP_AUTH, return_empty_attributes=True, raise_exceptions=True)
+            # Instansiate LDAP Server and Connection
+            c = helper.get_ldap_connection()
 
             # Bind to the connection
             c.bind()
