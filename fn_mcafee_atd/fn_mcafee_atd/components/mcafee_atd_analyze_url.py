@@ -5,7 +5,7 @@
 import logging
 import time
 from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, check_timeout, get_incident_id, check_config
+    check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -27,6 +27,9 @@ class FunctionComponent(ResilientComponent):
         self.vm_profile_list = config_opts.get("vm_profile_list")
         self.filePriority = config_opts.get("filePriority")
         self.trust_cert = config_opts.get("trust_cert")
+
+        # Verify can make connection to ATD with given config values
+        _get_atd_session_headers(self)
 
         # Create Resilient Rest client
         self.resilient_client = self.rest_client()
@@ -72,6 +75,8 @@ class FunctionComponent(ResilientComponent):
                 submit_type = '1'
             elif atd_url_submit_type == "Download and analyze file from URL":
                 submit_type = '3'
+            else:
+                yield FunctionError("atd_url_submit_type is not set correctly.")
             response = submit_url(self, url_to_analyze, submit_type)
             check_status_code(response)
             content = response.json()

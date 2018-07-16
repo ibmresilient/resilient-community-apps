@@ -142,28 +142,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
     return response
 
 
-def _check_url_ending(url):
-    file_endings = [
-        ".aif", ".cda", ".mid", ".mp3", ".mpa", ".ogg", ".wav", ".wma", ".wpl", ".7z", ".arj", ".deb", ".pkg", ".rar",
-        ".rpm", ".tar.gz", ".z", ".zip", ".bin", ".dmg", ".iso", ".toast", ".vcd", ".csv", ".dat", ".db", ".dbf",
-        ".log", ".mdb", ".sav", ".sql", ".tar", ".xml", ".apk", ".bat", ".jar", ".cgi", ".com", ".exe", ".gadget",
-        ".py", ".wsf", ".fnt", ".fon", ".otf", ".ttf", ".ai", ".bmp", ".gif", ".ico", ".jpeg", ".png", ".ps", ".psd",
-        ".svg", ".tif", ".tiff", ".asp", ".part", ".cer", ".cfm", ".css", ".key", ".odp", ".pps", ".ppt", ".pptx", ".c",
-        ".class", ".cpp", ".cs", ".h", ".java", ".sh", ".swift", ".vb", ".ods", ".xlr", ".xls", ".xlsx", ".bak", ".cab",
-        ".cgf", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ini", ".lnk", ".msi", ".sys", ".tmp", ".3g2", ".3gp", ".avi",
-        ".flv", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg", ".rm", ".swf", ".vob", ".wmv", ".doc",
-        ".docx", ".odt", ".pdf", ".rtf", ".tex", ".txt", ".wks", ".wps", ".wpd"
-    ]
-    e = url.rfind('.')
-    potential_file_ending = url[e:]
-    # Per the McAfee documentation, 3 is used if the URL includes a file to download, while 1 is used to just analyze
-    # a URL
-    if potential_file_ending.lower() in file_endings:
-        return '3'
-    else:
-        return '1'
-
-
 def check_status_code(response):
     if response.status_code > 299 or response.status_code < 200:
         raise ValueError("Request not successful")
@@ -175,10 +153,10 @@ def create_report_file(name, type):
     report_file = temp_f[1]
 
     # If it is a URL change certain characters as file names won't be uploaded correctly
-    for c in [":", "/", "http", "https"]:
+    for c in [":", "/", "https", "http"]:
         if name.find(c) > -1:
             name = name.replace(c, '')
-    report_file_name = "McAfeeATD_{}_report.{}".format(name, type)
+    report_file_name = "McAfeeATD_{}.{}".format(name, type)
     file_location = {
         "report_file_name": report_file_name,
         "report_file": report_file,
@@ -199,10 +177,8 @@ def submit_file(g, f, file_name):
 
 
 def submit_url(g, url, submit_type=None):
-    if submit_type is not None:
-        return _file_upload(g, submit_type, url=url)
-    else:
-        return _file_upload(g, _check_url_ending(url), url=url)
+    # Submit url to atd
+    return _file_upload(g, submit_type, url=url)
 
 
 # A loop to check if the analysis for a job has completed - need to add handling for -1 which is failed analysis
