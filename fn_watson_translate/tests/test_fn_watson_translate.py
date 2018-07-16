@@ -12,6 +12,8 @@ except ImportError:
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
+from watson_developer_cloud.watson_service import WatsonApiException
+
 from resilient_circuits.action_message import FunctionException_, FunctionError_
 import logging
 
@@ -75,19 +77,51 @@ class TestFnWatsonTranslateE2E:
 
     @patch("fn_watson_translate.components.fn_watson_translate.LanguageTranslatorV3")
     @pytest.mark.parametrize("source_lang, target_lang, source_text, expected_results, translate_value, identify_value",
+                             [   # source language is given, expected confidence - 1
+                                 ("us", "su", "text", {"value": "Couldn't translate from us to su", "confidence": 1, "language": "su"},
+                                  {"translations": [{"translation": "txet"}]},
+                                  {"languages": [{"language": "wrong", "confidence": 0}]})
+                             ])
+    def test_e2e_fail_translation(self, translator, circuits_app, source_lang, target_lang, source_text, expected_results,
+                         translate_value, identify_value):
+        """ Test calling with sample values for the parameters """
+        translator = translator.return_value
+        translator.translate.side_effect = WatsonApiException(message="Could'nt translate", code=33)
+
+        translator.identify.return_value = identify_value
+
+        function_params = {
+            "source_lang": source_lang,
+            "target_lang": target_lang,
+            "source_text": source_text
+        }
+        results = call_fn_watson_translate_function(circuits_app, function_params)
+        assert (expected_results == results)
+
+    @patch("fn_watson_translate.components.fn_watson_translate.LanguageTranslatorV3")
+    @pytest.mark.parametrize("source_lang, target_lang, source_text, expected_results, translate_value, identify_value",
                              [
-                                 # target language not given
+                                 # Target language not given
                                  ("us", None, "text", {"value": "txet", "confidence": 1, "language": "su"},
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": [{"language": "wrong", "confidence": 0}]}),
-                                 # text not given
+                                 # Text not given
                                  ("us", "su", None, {"value": "txet", "confidence": 0.7, "language": "su"},
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": [{"language": "su", "confidence": 0.7}]}),
-                                 # # Source not given, no correct results
+                                 # Source not given, no correct results
                                  ("us", "su", None, {"value": "txet", "confidence": 0.7, "language": "su"},
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": []}),
+                                 # No source, and no guesses on language
+                                 (None, "su", "text", {"value": "txet", "confidence": 0.7, "language": "su"},
+                                  {"translations": []},
+                                  {"languages": []}),
+                                 # No translation
+                                 ("us", "su", "text", {"value": "txet", "confidence": 0.7, "language": "su"},
+                                  {"translations": []},
+                                  {"languages": []}),
+
                              ])
     def test_e2e_fail_bad_parameters(self, translator, source_lang, target_lang, source_text, expected_results,
                          translate_value, identify_value, caplog, circuits_app):

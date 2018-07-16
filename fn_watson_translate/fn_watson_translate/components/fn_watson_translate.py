@@ -3,8 +3,7 @@
 """Function implementation"""
 
 import logging
-import sys
-import html2text
+import lxml.html
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
@@ -31,14 +30,8 @@ class FunctionComponent(ResilientComponent):
         log = logging.getLogger(__name__)
         self.should_except = False
         try:
-            raise Exception("MMMMMMMM")
-            language_translator = LanguageTranslatorV3(
-                iam_api_key=self.options["fn_watson_translate_api"],
-                version=self.options["fn_watson_translate_version"],
-                url=self.options["fn_watson_translate_url"]
-            )
-            print("Testing:")
-            print(language_translator)
+            language_translator = self._get_translator()
+
             # Get the function parameters:
             source_lang = kwargs.get("source_lang", None)  # text
             target_lang = kwargs.get("target_lang", None)  # text
@@ -48,7 +41,7 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Neither source_text nor target_lang can be unspecified.")
 
             # get rid of the HTML tags that notes can have.
-            source_text = html2text.html2text(source_text)
+            source_text = self._get_text_from_html(source_text)
 
             log.info("source_lang: %s", source_lang)
             log.info("target_lang: %s", target_lang)
@@ -87,10 +80,34 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            yield FunctionError("An error occurred."+str(e), trace=False)
-            return
+            yield FunctionError("An error occurred."+str(e))
 
-    def _identify_language(self, text, language_translator):
+    def _get_text_from_html(self, input):
+        """
+        Strips input from html.
+        :param input: String
+            Text from resilient's input field to be cleared of html.
+        :return: String
+            Stripped of html tags
+        """
+        return lxml.html.fromstring(input).text_content()
+
+    def _get_translator(self):
+        """
+        Uses provided value in the config value to authenticate to Watson Translate API
+        :return:  LanguageTranslatorV3
+        """
+        if not self.options["fn_watson_translate_api"] or not self.options["fn_watson_translate_version"] or \
+                not self.options["fn_watson_translate_api"]:
+            raise ValueError("Options do not have necessary information")
+        return LanguageTranslatorV3(
+                iam_api_key=self.options["fn_watson_translate_api"],
+                version=self.options["fn_watson_translate_version"],
+                url=self.options["fn_watson_translate_url"]
+            )
+
+    @staticmethod
+    def _identify_language(text, language_translator):
         """
 
         :param text: String
@@ -105,5 +122,5 @@ class FunctionComponent(ResilientComponent):
             confidence = source_lang[0]['confidence']
             source_lang = source_lang[0]['language']
         else:
-            raise FunctionError("The language wasn't identified.")
+            raise ValueError("The language wasn't identified.")
         return source_lang, confidence
