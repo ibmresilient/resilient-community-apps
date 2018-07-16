@@ -75,4 +75,5 @@ class DxlComponentSubscriber(ResilientComponent):
 
         except Exception as e:
             log.error(e)
+        finally:
             self.client.destroy()
