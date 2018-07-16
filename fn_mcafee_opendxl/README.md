@@ -66,10 +66,9 @@ It is included in the same package and installed/uninstalled in the same manor a
 
 The following values will need to be set in the config file under the `[fn_mcafee_opendxl]` section:
 
-    topic_name=<this_is_the_topic_the_integration_will_listen_on>
+    dxlclient_config=<path_to_dxlclient.config_file>
     topic_listener_on=[True|False]  #Turns the listener on or off
-    incident_template=<Resilient incident DTO template>
-    incident_template_mapping=<Incident mapping template>
+    custom_template_dir=<Optional value to absolute path of custom directory if one exists>
 
 ### How to use the integration
 1. Update and edit `app.config`:
@@ -77,3 +76,6 @@ The following values will need to be set in the config file under the `[fn_mcafe
 		resilient-circuits configure -u
 
 2. Start Resilient Circuits with: `resilient-circuits run`
+<br/>The `topic_listener` needs to be set to `True` and the Subscriber will listen on the
+default topic `/mcafee/event/epo/threat/response` and use the default template.
+To customize the behavior of the integration, please refer to the included documentation.
