@@ -22,6 +22,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "LdapUtilitiesUpdateFunctionComponent = fn_ldap_utilities.components.ldap_utilities_update:FunctionComponent",
             "LdapUtilitiesSearchFunctionComponent = fn_ldap_utilities.components.ldap_utilities_search:FunctionComponent",
             "LdapUtilitiesSetPasswordFunctionComponent = fn_ldap_utilities.components.ldap_utilities_set_password:FunctionComponent"
         ],

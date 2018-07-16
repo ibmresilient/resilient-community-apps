@@ -9,14 +9,14 @@ class LDAPUtilitiesHelper:
     elif str.lower() == 'false':
         return False
     else:
-        raise ValueError
+        raise ValueError("{} is not a boolean".format(str))
 
   def get_config_option(self, option_name, optional=False):
     """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
     option = self.options.get(option_name)
 
     if option is None and optional is False:
-      err = "'{0}' is mandatory and is not set in ~/.resilient/appconfig file. You must set this value to run this function".format(option_name)
+      err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
       raise ValueError(err)
     else:
       return option
