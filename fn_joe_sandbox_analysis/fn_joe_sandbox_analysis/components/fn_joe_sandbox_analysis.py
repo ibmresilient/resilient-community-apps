@@ -39,6 +39,25 @@ class FunctionComponent(ResilientComponent):
           for f in files:
             os.remove(f)
 
+        def str_to_bool(str):
+          """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
+          if str.lower() == 'true':
+              return True
+          elif str.lower() == 'false':
+              return False
+          else:
+              raise ValueError("{} is not a boolean".format(str))
+
+        def get_config_option(option_name, optional=False):
+          """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
+          option = self.options.get(option_name)
+
+          if option is None and optional is False:
+            err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
+            raise ValueError(err)
+          else:
+            return option
+
         def get_input_entity(client, incident_id, attachment_id, artifact_id):
           
           re_uri_match_pattern = r"""(?:(?:https?|ftp):\/\/|\b(?:[a-z\d]+\.))(?:(?:[^\s()<>]+|\((?:[^\s()<>]+|(?:\([^\s()<>]+\)))?\))+(?:\((?:[^\s()<>]+|(?:\(?:[^\s()<>]+\)))?\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))?"""
@@ -154,18 +173,18 @@ class FunctionComponent(ResilientComponent):
           return joesandbox.info(sample_webid)
 
         def should_timeout(ping_timeout, start_time):
-          returnValue = (time.time() - start_time) > float(ping_timeout)
+          returnValue = (time.time() - start_time) > ping_timeout
           return returnValue
 
         try:
-            # Get Joe Sandbox API Key, Accept TAC, Analysis_URL, PING_TIMEOUT HTTP/HTTPS Proxy details from appconfig file
-            API_KEY = self.options.get("jsb_api_key")
-            ACCEPT_TAC = self.options.get("jsb_accept_tac") == "True"
-            ANALYSIS_URL = self.options.get("jsb_analysis_url")
-            ANALYSIS_REPORT_DEFAULT_PING_DELAY = int(self.options.get("jsb_analysis_report_default_ping_delay"))
-            ANALYSIS_REPORT_REQUEST_TIMEOUT = self.options.get("jsb_analysis_report_request_timeout")
-            HTTP_PROXY = self.options.get("jsb_http_proxy")
-            HTTPS_PROXY = self.options.get("jsb_https_proxy")
+            # Get Joe Sandbox options from app.config file
+            API_KEY = get_config_option("jsb_api_key")
+            ACCEPT_TAC = str_to_bool(get_config_option("jsb_accept_tac"))
+            ANALYSIS_URL = get_config_option("jsb_analysis_url")
+            ANALYSIS_REPORT_PING_DELAY = int(get_config_option("jsb_analysis_report_ping_delay"))
+            ANALYSIS_REPORT_REQUEST_TIMEOUT = float(get_config_option("jsb_analysis_report_request_timeout"))
+            HTTP_PROXY = get_config_option("jsb_http_proxy", True)
+            HTTPS_PROXY = get_config_option("jsb_https_proxy", True)
 
             # Check required inputs are defined
             incident_id = kwargs.get("incident_id")  # number (required)
@@ -176,14 +195,12 @@ class FunctionComponent(ResilientComponent):
             if not jsb_report_type:
               raise ValueError("jsb_report_type is required")
 
-            # Check for ping_delay, else set to ANALYSIS_REPORT_DEFAULT_PING_DELAY
-            ping_delay = kwargs.get("jsb_ping_delay")  # number
-            if not ping_delay:
-              ping_delay = ANALYSIS_REPORT_DEFAULT_PING_DELAY
-
-            # Get optional inputs
+            # Get optional inputs, one of these must be defined
             attachment_id = kwargs.get("attachment_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
+
+            if not attachment_id and not artifact_id:
+              raise ValueError("attachment_id or artifact_id is required")
 
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
@@ -216,22 +233,22 @@ class FunctionComponent(ResilientComponent):
             # Get current time in seconds
             start_time = time.time()
             
-            yield StatusMessage("Sample {} being analyized by Joe Sandbox".format(sample_webid))
+            # Generate report name
+            report_name = generate_report_name(entity, jsb_report_type, sample_webid)
+
+            yield StatusMessage("{} being analyized by Joe Sandbox".format(report_name))
 
             # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQUEST_TIMEOUT in seconds has passed
             while (sample_status["status"].lower() != "finished"):
               if (should_timeout(ANALYSIS_REPORT_REQUEST_TIMEOUT, start_time)):
                 raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQUEST_TIMEOUT))
               
-              yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ping_delay))
-              sample_status = fetch_report(joesandbox, sample_webid, ping_delay)
+              yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ANALYSIS_REPORT_PING_DELAY))
+              sample_status = fetch_report(joesandbox, sample_webid, ANALYSIS_REPORT_PING_DELAY)
 
             yield StatusMessage("Analysis Finished. Getting report & attaching to this incident")
             download = joesandbox.download(sample_webid, jsb_report_type)
             
-            # Generate report name
-            report_name = generate_report_name(entity, jsb_report_type, sample_webid)
-
             # Write temp file of report
             path = write_temp_file(download[1], report_name)
             
