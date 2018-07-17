@@ -63,6 +63,22 @@ def validate_params(params, func_name):
             if re.match("^asset_id$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
 
+    elif func_name == "fn_bigfix_remediation":
+        for (k, v) in params.copy().items():
+            if re.match("^(artifact_value|artifact_type)$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+            if re.match("^incident_id$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+            if re.match("^asset_id$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+
+    elif func_name == "fn_bigfix_assets":
+        for (k, v) in params.copy().items():
+            if re.match("^incident_id$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+            if re.match("^(asset_id|asset_name)$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+
     # If any entry has "None" string change to None value.
     for k, v in params.items():
         if type(v) == str and v.lower() == 'none':
