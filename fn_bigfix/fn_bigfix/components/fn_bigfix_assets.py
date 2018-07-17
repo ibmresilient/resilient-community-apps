@@ -72,7 +72,8 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_assets")
 
-            yield StatusMessage("Running BigFix remediation for Artifact ...")
+            yield StatusMessage("Running BigFix Query for Endpoint id {0}, with name {1} ..."
+                                .format(params["asset_id"], params["asset_name"]))
             bigfix_client = BigFixClient(self.options)
             try:
                 rest_client = self.rest_client()

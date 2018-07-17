@@ -74,7 +74,8 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_remediation")
 
-            yield StatusMessage("Running BigFix remediation for Artifact ...")
+            yield StatusMessage("Running BigFix remediation for Artifact '{0}' on endpoint '{1}' ..."
+                                .format(params["artifact_value"], params["asset_id"]))
             bigfix_client = BigFixClient(self.options)
 
             yield StatusMessage("Running BigFix remediation ...")
@@ -104,6 +105,8 @@ class FunctionComponent(ResilientComponent):
                     .format(params["artifact_value"], params["artifact_type"], params["asset_id"], response)
                 results = {"status": "OK", "status_message": status_message,  "status_note": status_note,
                            "remediation_date": remediation_date, "action_id": action_id}
+
+            yield StatusMessage("done...")
 
             log.debug(results)
 

@@ -91,7 +91,8 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_artifact")
 
-            yield StatusMessage("Running Query BigFix for Artifact ...")
+            yield StatusMessage("Running BigFix Query for Artifact id {0}, with value {1} ..."
+                                .format(params["artifact_id"], params["artifact_value"] ))
             bigfix_client = BigFixClient(self.options)
 
             if params["incident_plan_status"] != 'C':
