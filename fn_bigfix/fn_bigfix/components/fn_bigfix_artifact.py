@@ -113,10 +113,10 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("Incorrect value for parameter parameter 'bigfix_artifact_type'.")
 
             if bigfix_incident_plan_status == 'C':
-                yield StatusMessage("Ignoring action, incident %s is closed")
+                yield StatusMessage("Ignoring action, incident {} is closed".format(params["incident_id"]))
                 results = {}
             elif not artifact_data:
-                yield StatusMessage("Could not find data about the artifact %s")
+                yield StatusMessage("Could not find data about the artifact {}".format(params["artifact_value"]))
                 results = {}
             else:
                 hits = get_hits(artifact_data, params)
