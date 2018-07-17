@@ -119,7 +119,12 @@ class FunctionComponent(ResilientComponent):
                 results = {}
             else:
                 hits = get_hits(artifact_data, params)
-                if len(hits) > int(self.options.get("hunt_results_limit", "200")):
+                if len(hits) == 0:
+                    yield StatusMessage("No hits detected for artifact id '{0}' with value '{1}' and of type '{2}'."
+                                        .format(params["artifact_id"], params["artifact_value"],
+                                                params["artifact_type"]))
+                    results = {}
+                elif len(hits) > int(self.options.get("hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
                     file_name = "query_for_artifact_{0}_{1}_{2}.txt" \
