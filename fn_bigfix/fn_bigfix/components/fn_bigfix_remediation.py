@@ -77,28 +77,20 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running BigFix remediation for Artifact ...")
             bigfix_client = BigFixClient(self.options)
 
-            # For our purposes, config_key will be the action name
-            map_data = event.message
-            action_name = event.name
-            workflow_name = event.workflow
-            map_data["action_name"] = action_name
-            map_data["workflow_name"] = workflow_name
-            log.debug(json.dumps(map_data, indent=2))
-
             yield StatusMessage("Running BigFix remediation ...")
             # Send a remediation message to BigFix
 
-            if workflow_name == "bigfix_kill_process":
+            if params["artifact_type"]  == "Process Name":
                 response = bigfix_client.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_stop_service":
+            elif params["artifact_type"] == "Service":
                 response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_delete_registry_key":
+            elif params["artifact_type"] == "Registry Key":
                 response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_delete_file":
+            elif params["artifact_type"] == "File Path":
                 response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             else:
-                log.info("Not supported action %s", action_name)
-                raise ValueError("Incorrect value {} for 'action_name'.".format(action_name))
+                log.error("Unsupported artifact type {}.".format(params["artifact_type"]))
+                raise ValueError("Unsupported artifact type {}.".format(params["artifact_type"]))
 
             if response is None:
                 log.debug("Could not create BigFix Action.")
