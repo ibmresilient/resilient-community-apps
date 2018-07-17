@@ -13,12 +13,11 @@ if are hits on any of the BigFix endpoints"""
 """Function implementation"""
 
 import logging
-from fn_bigfix.util.helpers import validate_opts, validate_params
+from fn_bigfix.util.helpers import validate_opts, validate_params, create_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import get_hits
 import datetime
-import os
 import json
 
 LOG = logging.getLogger(__name__)
@@ -122,7 +121,17 @@ class FunctionComponent(ResilientComponent):
                 hits = get_hits(artifact_data, params)
                 if len(hits) > int(self.options.get("hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
-                    att_report = self._create_attachment(hits, params)
+                    # Define file name and content to add as an attachment
+                    file_name = "query_for_artifact_{0}_{1}_{2}.txt" \
+                        .format(params["artifact_id"], params["artifact_type"],
+                                datetime.datetime.today().strftime('%Y%m%d'))
+                    file_content = ""
+                    for data in hits:
+                        file_content += "Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
+                            .format(data["computer_id"], data["computer_name"], params["artifact_value"],
+                                    params["artifact_type"])
+                    # Create an attachment
+                    att_report = create_attachment(self.rest_client(), file_name, file_content, params)
                     results = {"hits_over_limit": True, "att_name": att_report["name"]}
                 else:
                     results = {"endpoint_hits": json.loads(json.dumps(hits))}
@@ -134,36 +143,3 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             log.exception("Exception in Resilient Function for BigFix integration.")
             yield FunctionError()
-
-    def _create_attachment(self, hits, params):
-        file_name = "query_for_artifact_{0}_{1}_{2}.txt"\
-            .format(params["artifact_id"], params["artifact_type"], datetime.datetime.today().strftime('%Y%m%d'))
-        file_content = ""
-
-        for data in hits:
-                file_content += "Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n"\
-                            .format(data.computer_id, data.computer_name, params["artifact_value"], params["artifact_type"])
-
-        try:
-            rest_client = self.rest_client()
-
-            # Create the temporary file save results in json format.
-            with open(file_name, 'w') as outfile:
-                json.dump(file_content, outfile)
-
-            # Post file to Resilient
-            att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),
-                                                     file_name,
-                                                     file_name,
-                                                     "text/plain",
-                                                     "")
-            LOG.info("New attachment added to incident %s", params["incident_id"])
-
-            # Delete the temporary file.
-            os.remove(file_name)
-
-        except Exception as ex:
-            LOG.error(ex)
-            raise ex
-
-        return att_report
