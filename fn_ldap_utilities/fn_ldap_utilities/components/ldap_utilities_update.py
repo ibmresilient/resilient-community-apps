@@ -6,6 +6,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 from ldap3 import MODIFY_REPLACE
+from ast import literal_eval
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ldap_utilities_update"""
@@ -35,12 +36,14 @@ class FunctionComponent(ResilientComponent):
             # Get function inputs
             input_ldap_dn = helper.get_function_input(kwargs, "ldap_dn") # text (required)
             input_ldap_attribute_name = helper.get_function_input(kwargs, "ldap_attribute_name") # text (required)
-            input_ldap_attribute_value = helper.get_function_input(kwargs, "ldap_attribute_value") # text (required)
+            input_ldap_attribute_values_asString = helper.get_function_input(kwargs, "ldap_attribute_values") # text (required) [string repersentation of an array]
             yield StatusMessage("Function Inputs OK")
 
-            # input_ldap_attribute_value lenght must be > 0
-            if len(input_ldap_attribute_value) < 1:
-              raise ValueError("ldap_attribue_value length must be greater than 0")
+            try:
+              # Try converting input to an array
+              input_ldap_attribute_values = literal_eval(input_ldap_attribute_values_asString)
+            except Exception:
+              raise ValueError("""input_ldap_attribute_values must be a string repersenation of an array e.g. "['stringValue1, 1234, 'stringValue2']" """)
 
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
@@ -61,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             try:
               yield StatusMessage("Attempting to update {0}".format(input_ldap_attribute_name))
               # perform the Modify operation
-              res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, [input_ldap_attribute_value])]})
+              res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, input_ldap_attribute_values)]})
 
             except Exception:
               raise FunctionError()
@@ -69,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "success": res,
                 "attribute_name": input_ldap_attribute_name,
-                "attribute_value": input_ldap_attribute_value,
+                "attribute_values": input_ldap_attribute_values,
                 "user_dn": input_ldap_dn
             }
 

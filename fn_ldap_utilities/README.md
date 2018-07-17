@@ -23,8 +23,12 @@ This Python Package is comprised of various Resilient Functions that allow you t
     ```
 
 ## ldap_utilities_update
-* Uses the **MODIFY_REPLACE** change as documented [here](https://ldap3.readthedocs.io/modify.html)
+* Takes the name of the attribute you want to update and an array of values to update that attribute with
+* The function input `ldap_attribute_values` must be a **string repersenation of an array**
+  ```python
+  inputs.ldap_attribute_values = "['stringValue1', 1234, 'stringValue2']"
+  ```
+* Uses **MODIFY_REPLACE** as documented [here](https://ldap3.readthedocs.io/modify.html)
   * _"Replace all existing values of the specified attribute with the new values listed"_ 
   * _"Creates the attribute if it does not already exist"_
   * _"It is ignored if the attribute does not exist"_
-> **NOTE:** The function input `ldap_attribute_value` **cannot be an empty string**. Its length must be greater than 0
