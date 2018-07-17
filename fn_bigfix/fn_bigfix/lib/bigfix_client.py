@@ -39,8 +39,34 @@ class BigFixClient(object):
         requests.packages.urllib3.disable_warnings()
     # end __init__
 
+    def get_bf_computer_properties(self, computer_id):
+        """ Bigfix query - Get endpoint properties.
+
+        :param computer_id: BigFix Endpoint id
+        :return : Return response in XML format
+
+        """
+        query_str = 'api/query?relevance=if(number of property results of bes computers ' \
+                    'whose (id of it = {0}) < 10000) ' \
+                    'then((name of source analysis of property of it|"Retrieved Property",name of property of it,values of it) ' \
+                    'of property results of bes computers whose(id of it = {0})) else error "Too Many Results"' \
+                    .format(computer_id)
+
+        req_str = "{0}/{1}".format(self.base_url, query_str)
+
+        response = requests.get(req_str, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None)
+        if response.status_code == 200:
+            try:
+                return self._process_bf_computer_query_response_to_attachment(response,
+                                                                              "Computer ID {0} Properties"
+                                                                              .format(computer_id), 3)
+            except Exception as e:
+                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                raise e
+
+
     def get_bf_computer_by_service_name(self, service_name):
-        """ Method - Bigfix query - Get endpoints by service name.
+        """ Bigfix query - Get endpoints by service name.
 
         :param service_name: Service name
         :return resp: Response from query
@@ -326,3 +352,41 @@ class BigFixClient(object):
         else:
             LOG.error("Received bad Status Code: {0}. Returned data: {1}".format(r.status_code, r.text))
             return None
+
+    def _process_bf_computer_query_response_to_attachment(self, response_text, title, number_of_tuples=3):
+        """Transform the response of get_bf_computer_fixlets and get_bf_computer_properties
+                into a XML format for attachment
+
+        :param response_text: Remediation relevance query
+        :param title: Response title
+        :param number_of_tuples: Tuple count in xml
+        :return response: Response transformed to xml format
+
+        """
+        try:
+            xmlroot = elementTree.fromstring(response_text.text.encode('ascii', 'ignore'))
+            results = xmlroot.findall(".//Query/Result/Tuple/Answer")
+            response = "<?xml version='1.0' ?>\n<report> %s: \n" % title
+            insertion_count = 0
+            for elt in results:
+                if insertion_count == 0:
+                    response += "\t<property> %s \n" % elt.text
+                elif insertion_count == 1:
+                    response += "\t\t<name> %s </name> \n" % elt.text
+                elif insertion_count == 2:
+                    response += "\t\t<value> %s </value> \n" % elt.text
+
+                insertion_count += 1
+                if insertion_count == number_of_tuples:
+                    response += "\t</property>\n"
+                    insertion_count = 0
+
+            response += "</report>"
+            return response
+        except elementTree.ParseError as e:
+            LOG.error("There was an error trying to process XML. Returning RAW XML")
+            LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+            return response_text.text
+        except Exception as e:
+            LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+            raise e
