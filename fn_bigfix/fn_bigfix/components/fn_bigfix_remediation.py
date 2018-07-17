@@ -13,7 +13,6 @@ import logging
 from fn_bigfix.util.helpers import validate_opts, validate_params
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
-import fn_bigfix.lib.datastorage as datastore
 
 import json
 import datetime
@@ -46,16 +45,12 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
-        self.bigFix = BigFixClient(opts)
-        self.datastore = datastore.Datastore()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_bigfix", {})
         validate_opts(self)
-        self.bigFix = BigFixClient(opts)
-        self.datastore = datastore.Datastore()
 
     @function("fn_bigfix_remediation")
     def _fn_bigfix_remediation_function(self, event, *args, **kwargs):
@@ -80,6 +75,7 @@ class FunctionComponent(ResilientComponent):
             validate_params(params, "fn_bigfix_remediation")
 
             yield StatusMessage("Running BigFix remediation for Artifact ...")
+            bigfix_client = BigFixClient(self.options)
 
             # For our purposes, config_key will be the action name
             map_data = event.message
@@ -93,13 +89,13 @@ class FunctionComponent(ResilientComponent):
             # Send a remediation message to BigFix
 
             if workflow_name == "bigfix_kill_process":
-                response = self.bigFix.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                response = bigfix_client.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             elif workflow_name == "bigfix_stop_service":
-                response = self.bigFix.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             elif workflow_name == "bigfix_delete_registry_key":
-                response = self.bigFix.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             elif workflow_name == "bigfix_delete_file":
-                response = self.bigFix.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             else:
                 log.info("Not supported action %s", action_name)
                 raise ValueError("Incorrect value {} for 'action_name'.".format(action_name))

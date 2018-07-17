@@ -21,14 +21,13 @@ class BigFixClient(object):
     """
     Client class used to expose BigFix Rest API for BigFix Query
     """
-    def __init__(self, opts):
+    def __init__(self, options):
         """
         Class constructor
         """
-        config = opts.get("fn_bigfix", {})
-        self.base_url = config.get("bigfix_url") + ":" + config.get("bigfix_port")
-        self.bf_user = config.get("bigfix_user")
-        self.bf_pass = config.get("bigfix_pass")
+        self.base_url = options.get("bigfix_url") + ":" + options.get("bigfix_port")
+        self.bf_user = options.get("bigfix_user")
+        self.bf_pass = options.get("bigfix_pass")
         self.headers = {'content-type': 'application/json'}
 
         # Endpoints
