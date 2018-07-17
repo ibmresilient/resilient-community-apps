@@ -30,7 +30,10 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'bigfix_pass' not set.")
     if not "hunt_results_limit" in func.options:
         raise Exception("Mandatory config setting 'hunt_results_limit' not set.")
-
+    if not "bigfix_polling_interval" in func.options:
+        raise Exception("Mandatory config setting 'bigfix_polling_interval' not set.")
+    if not "bigfix_polling_timeout" in func.options:
+        raise Exception("Mandatory config setting 'bigfix_polling_timeout' not set.")
 
 def validate_params(params, func_name):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.

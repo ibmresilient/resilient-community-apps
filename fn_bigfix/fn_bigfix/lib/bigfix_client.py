@@ -390,3 +390,29 @@ class BigFixClient(object):
         except Exception as e:
             LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
             raise e
+
+    def get_bf_action_status(self, action_id):
+        """" Get Bigfix action status.
+
+        :param action_id: BigFix actions id
+        :return status: Return B igFix actions status
+
+         """
+        query_url = "{0}/api/action/{1}/status".format(self.base_url, action_id)
+        r = requests.get(query_url, auth=(self.bf_user, self.bf_pass), verify=False)
+        if r.status_code == 200:
+            try:
+                status = None
+                xmlroot = elementTree.fromstring(r.text)
+                results = xmlroot.findall(".//ActionResults/Computer/Status")
+                if len(results) > 0:
+                    status = results[0].text
+                LOG.debug("BigFix Action Status: {0} BigFix Action ID: {1}."
+                          .format(status, action_id))
+            except Exception as e:
+                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                raise e
+        else:
+            status = r.text
+            LOG.debug("Found an error trying to execution the action: {0}. Action: {1}".format(r.text, action_id))
+        return status
