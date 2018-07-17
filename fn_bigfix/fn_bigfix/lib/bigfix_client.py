@@ -313,6 +313,8 @@ class BigFixClient(object):
                 xmlroot = elementTree.fromstring(r.text)
                 # TODO - should just be one ID, change XML path string
                 results = xmlroot.findall(".//Action/ID")
+                if len(results) > 1:
+                    LOG.error("size of results larger than 1, only the first one will be used.")
                 #  Urg, hardcoded index...
                 action_id = results[0].text
                 LOG.info("BigFix action created successfully. Action ID: {0}".format(action_id))
