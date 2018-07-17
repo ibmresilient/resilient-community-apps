@@ -132,6 +132,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            log.exception("Exception in Resilient Function for BigFix integration.")
             yield FunctionError()
 
     def _create_attachment(self, hits, params):
