@@ -137,9 +137,14 @@ class FunctionComponent(ResilientComponent):
                                     params["artifact_type"])
                     # Create an attachment
                     att_report = create_attachment(self.rest_client(), file_name, file_content, params)
-                    results = {"hits_over_limit": True, "att_name": att_report["name"]}
+                    results = {"hits_over_limit": True, "att_name": att_report["name"], "hits_count": len(hits)}
                 else:
-                    results = {"endpoint_hits": json.loads(json.dumps(hits))}
+                    query_execution_date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
+                    yield StatusMessage("Adding artifact data as an incident attachment")
+                    results = {"endpoint_hits": json.loads(json.dumps(hits)), "hits_count": len(hits),
+                               "query_execution_date": query_execution_date}
+
+            yield StatusMessage("done...")
 
             log.debug(results)
 
