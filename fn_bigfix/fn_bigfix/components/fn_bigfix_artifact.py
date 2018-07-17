@@ -110,7 +110,7 @@ class FunctionComponent(ResilientComponent):
                                                                                            params["artifact_properties_name"],
                                                                                            params["artifact_properties_value"])
                 else:
-                    raise ValueError("Incorrect value for parameter parameter 'bigfix_artifact_type'.")
+                    raise ValueError("Unsupported artifact type {}.".format(bigfix_artifact_type))
 
             if bigfix_incident_plan_status == 'C':
                 yield StatusMessage("Ignoring action, incident {} is closed".format(params["incident_id"]))
