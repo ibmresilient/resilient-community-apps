@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2017. All Rights Reserved.
 """Service listener implementation"""
 
 import logging
@@ -24,6 +24,7 @@ def get_connected_resilient_client(config):
 
 
 class DxlComponentSubscriber(ResilientComponent):
+    """Component that Subscribes to DXL Topics and maps data back into the Resilient Platform"""
 
     def __init__(self, opts):
         super(DxlComponentSubscriber, self).__init__(opts)
@@ -36,6 +37,7 @@ class DxlComponentSubscriber(ResilientComponent):
         self.client = DxlClient(dxl_config)
         self.client.connect()
 
+        # This gets run once to tell the subscriber to listen on defined topics
         self.main()
 
     def main(self):
@@ -75,5 +77,4 @@ class DxlComponentSubscriber(ResilientComponent):
 
         except Exception as e:
             log.error(e)
-        finally:
             self.client.destroy()

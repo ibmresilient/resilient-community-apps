@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2017. All Rights Reserved.
 
 import logging
 import json
