@@ -25,12 +25,8 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'bigfix_url' not set.")
     if not "bigfix_pass" in func.options:
         raise Exception("Mandatory config setting 'bigfix_pass' not set.")
-    if not "bigfix_int_auto_configure" in func.options:
-        raise Exception("Mandatory config setting 'bigfix_int_auto_configure' not set.")
     if not "hunt_results_limit" in func.options:
         raise Exception("Mandatory config setting 'hunt_results_limit' not set.")
-    if not "polling_period" in func.options:
-        raise Exception("Mandatory config setting 'polling_period' not set.")
 
 
 def validate_params(params, func_name):
