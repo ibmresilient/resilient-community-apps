@@ -44,8 +44,10 @@ class FunctionComponent(ResilientComponent):
         The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
         in JSON format similar to the following.
 
-            {'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 1000,
+            {'hits_count': 1,
+             'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 0,
                                 u'query_id': 1, u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'}]
+             'query_execution_date': '07-17-2018 17:44:21'
             }
         """
     def __init__(self, opts):

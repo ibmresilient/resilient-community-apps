@@ -27,17 +27,17 @@ class FunctionComponent(ResilientComponent):
         An example of a set of query parameter might look like the following:
 
                 bigfix_asset_id = 12315195
-                bigfix_artifact_value = /tmp/test.txt
+                bigfix_artifact_value = /tmp/evilfile.txt
                 bigfix_artifact_type = File Path
-                bigfix_incident_id = incident.id
+                bigfix_incident_id = 2095
 
         The BigFix Query will execute a remediation action against a Bigfix server and the Funcxtion returns a status
         result in JSON format similar to the following.
 
-            {'status': 'OK', 'remediation_date': '07-11-2018 10:51:56',
-             'remediation_status': 'BigFix Action Created Successfully.',
-             'status_note': 'Big Fix Integration: Action created successfully to remediate artifact value lfsvc and
-             type Service in asset ID 12315195. BigFix Action ID 75.', 'action_id': '75'
+            {'status': 'OK',
+             'remediation_date': '07-18-2018 10:25:21',
+             'status_message': 'BigFix Action Created Successfully.',
+             'action_id': '119'
             }
     """
     def __init__(self, opts):

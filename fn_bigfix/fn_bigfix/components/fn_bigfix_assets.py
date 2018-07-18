@@ -24,7 +24,7 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_assets' of
         package fn_bigfix.
 
-        The Function does a BigFix query and takes the following parameters:
+        The Function does a BigFix query to retrieve properties if a BigFix endpoint and takes the following parameters:
             bigfix_asset_name, bigfix_asset_id, bigfix_incident_id
 
 
@@ -37,9 +37,11 @@ class FunctionComponent(ResilientComponent):
         The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
         in JSON format similar to the following.
 
-            {'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 1000,
-                                u'query_id': 1, u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'}]
+            {'status': 'OK',
+             'att_name': u'bigfix-properties-DESKTOP-TUKM3HF-20180718.xml'
             }
+        The Function will also create an attachment with a name similar to following:
+            bigfix-properties-DESKTOP-TUKM3HF-20180718.xml
     """
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

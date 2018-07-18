@@ -19,8 +19,22 @@ import datetime
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_bigfix_action_status"""
+    """Component that implements Resilient function 'fn_bigfix_action_status' of package fn_bigfix.
 
+        This Function polls status of a BigFix action which is remediating a hit and takes the following parameter:
+            bigfix_action_id
+
+        An example of a set of query parameter might look like the following:
+
+                bigfix_action_id = 119
+
+        The BigFix Query will execute a remediation action against a Bigfix server and the Funcxtion returns a status
+        result in JSON format similar to the following.
+
+            {'status': 'OK',
+             'status_message': 'The action executed successfully.',
+            }
+    """
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
