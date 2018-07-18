@@ -1,0 +1,3 @@
+include README.md
+include fn_elasticsearch_query/util/*
+include fn_elasticsearch_query/LICENSE
