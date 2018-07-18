@@ -103,7 +103,7 @@ class FunctionComponent(ResilientComponent):
                 status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \
                                 "and type {1} in asset ID {2}. BigFix Action ID {3}." \
                     .format(params["artifact_value"], params["artifact_type"], params["asset_id"], response)
-                results = {"status": "OK", "status_message": status_message,  "status_note": status_note,
+                results = {"status": "OK", "status_message": status_message,
                            "remediation_date": remediation_date, "action_id": action_id}
 
             yield StatusMessage("done...")
