@@ -57,8 +57,7 @@ class FunctionComponent(ResilientComponent):
             if status_message == "Timedout":
                 yield FunctionError("Timedout getting action status for BigFix action {}".format(bigfix_action_id))
             else:
-                results = {"status": "OK", "status_message": status_message, "remediation_date": remediation_date,
-                           "action_id": bigfix_action_id}
+                results = {"status": "OK", "status_message": status_message}
 
             yield StatusMessage("done...")
 
