@@ -37,6 +37,9 @@ class FunctionComponent(ResilientComponent):
             input_ldap_toggle_access = helper.get_function_input(kwargs, "ldap_toggle_access")["name"] # select, values: "Enable", "Disable" (required)
             yield StatusMessage("Function Inputs OK")
 
+            if not helper.LDAP_IS_ACTIVE_DIRECTORY:
+              raise FunctionError("This function only supports an Active Directory connection. Make sure ldap_is_active_directory is set to True in the app.config file")
+
             # Set local vars
             ldap_user_account_control_attribute = "userAccountControl"
 

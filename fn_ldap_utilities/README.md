@@ -32,3 +32,15 @@ This Python Package is comprised of various Resilient Functions that allow you t
   * _"Replace all existing values of the specified attribute with the new values listed"_ 
   * _"Creates the attribute if it does not already exist"_
   * _"It is ignored if the attribute does not exist"_
+
+## ldap_utilities_toggle_access
+* Supports only **Active Directory**. Set the following in the **app.config file**:
+    ```python
+      [fn_ldap_utilities]
+      ldap_port=636
+      ldap_use_ssl=True
+      ldap_is_active_directory=True
+    ```
+* Enables or Disables an **Active Directory** user
+* Requires the DN of the user you wish to toggle access for
+* Example shows how to use with **LDAP Utilities: Search Function** to toggle access for a user using their email address
