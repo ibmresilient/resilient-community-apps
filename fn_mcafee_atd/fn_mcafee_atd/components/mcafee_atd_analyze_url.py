@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
             timeout_seconds = self.timeout_mins * 60
             start = time.time()
             while check_atd_status(self, atd_task_id) is False:
-                yield StatusMessage("Analysis is still running")
+                yield StatusMessage("Analysis on {} is still running".format(url_to_analyze))
                 check_timeout(start, self.polling_interval, timeout_seconds)
 
             yield StatusMessage("Analysis Completed")
@@ -115,7 +115,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             log.info(e)
-            raise FunctionError()
+            yield FunctionError("Failed")
         finally:
             if report_file is not None:
                 remove_dir(report_file["tmp_dir"])
