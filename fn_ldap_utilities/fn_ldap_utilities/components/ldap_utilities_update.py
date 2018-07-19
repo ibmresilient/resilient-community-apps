@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
         log = logging.getLogger(__name__)
         
         try:
-            yield StatusMessage("Starting")
+            yield StatusMessage("Starting ldap_utilities_update")
 
             # Instansiate helper (which gets appconfigs from file)
             helper = LDAPUtilitiesHelper(self.options)
