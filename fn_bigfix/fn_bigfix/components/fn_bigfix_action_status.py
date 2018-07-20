@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
 
                 bigfix_action_id = 119
 
-        The BigFix Query will execute a remediation action against a Bigfix server and the Funcxtion returns a status
+        The BigFix Query will execute a remediation action against a Bigfix server and the Function returns a status
         result in JSON format similar to the following.
 
             {'status': 'OK',
