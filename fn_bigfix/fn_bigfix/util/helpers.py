@@ -20,19 +20,19 @@ def validate_opts(func):
     :param func: Resilient Function instance reference
 
      """
-    if not "bigfix_url" in func.options:
+    if not "bigfix_url" in func.options or len(func.options["bigfix_url"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_url' not set.")
-    if not "bigfix_port" in func.options:
+    if not "bigfix_port" in func.options or len(func.options["bigfix_port"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_port' not set.")
-    if not "bigfix_user" in func.options:
-        raise Exception("Mandatory config setting 'bigfix_url' not set.")
-    if not "bigfix_pass" in func.options:
+    if not "bigfix_user" in func.options or len(func.options["bigfix_user"]) == 0:
+        raise Exception("Mandatory config setting 'bigfix_user' not set.")
+    if not "bigfix_pass" in func.options or len(func.options["bigfix_pass"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_pass' not set.")
-    if not "hunt_results_limit" in func.options:
+    if not "hunt_results_limit" in func.options or len(func.options["hunt_results_limit"]) == 0:
         raise Exception("Mandatory config setting 'hunt_results_limit' not set.")
-    if not "bigfix_polling_interval" in func.options:
+    if not "bigfix_polling_interval" in func.options or len(func.options["bigfix_polling_interval"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_polling_interval' not set.")
-    if not "bigfix_polling_timeout" in func.options:
+    if not "bigfix_polling_timeout" in func.options or len(func.options["bigfix_polling_timeout"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_polling_timeout' not set.")
 
 def validate_params(params, func_name):
