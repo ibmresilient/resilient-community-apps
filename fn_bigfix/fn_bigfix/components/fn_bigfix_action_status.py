@@ -16,8 +16,6 @@ from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import poll_action_status
 import datetime
 
-LOG = logging.getLogger(__name__)
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_action_status' of package fn_bigfix.
 
