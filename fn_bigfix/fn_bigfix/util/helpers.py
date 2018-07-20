@@ -49,7 +49,7 @@ def validate_params(params, func_name):
         for (k, v) in params.copy().items():
             if re.match("^(artifact_id|artifact_value|artifact_type)$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
-            if re.match("^(incident_id|bigfix_incident_plan_status)$", k) and is_none(v):
+            if re.match("^(incident_id|incident_plan_status)$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
             if re.match("^artifact_type$", k) and v == "Registry Key":
                 if is_none(params["artifact_properties_name"]):
