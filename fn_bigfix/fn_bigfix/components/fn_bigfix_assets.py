@@ -81,16 +81,20 @@ class FunctionComponent(ResilientComponent):
                 rest_client = self.rest_client()
                 # Perform the BigFix Query
                 response = bigfix_client.get_bf_computer_properties(params["asset_id"])
-                # Create a Resilient attachment
-                file_name = "bigfix-properties-" + params["asset_name"] + "-" + \
-                            datetime.datetime.today().strftime('%Y%m%d') + ".xml"
-                att_report = create_attachment(self.rest_client(), file_name, response, params)
 
             except Exception as ex:
                 log.error(ex)
                 raise ex
 
-            results = {"status": "OK", "att_name": att_report["name"]}
+            if not response:
+                yield StatusMessage("No properties retrieved for the asset id '{}'".format(params["asset_id"]))
+                results = {}
+            else:
+                # Create a Resilient attachment
+                file_name = "bigfix-properties-" + params["asset_name"] + "-" + \
+                            datetime.datetime.today().strftime('%Y%m%d') + ".xml"
+                att_report = create_attachment(self.rest_client(), file_name, response, params)
+                results = {"status": "OK", "att_name": att_report["name"]}
 
             yield StatusMessage("done...")
 

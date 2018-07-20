@@ -57,13 +57,20 @@ class BigFixClient(object):
         response = requests.get(req_str, auth=(self.bf_user, self.bf_pass), verify=False, timeout=None)
         if response.status_code == 200:
             try:
-                return self._process_bf_computer_query_response_to_attachment(response,
-                                                                              "Computer ID {0} Properties"
-                                                                              .format(computer_id), 3)
+                qr_to_attachment = self._process_bf_computer_query_response_to_attachment(response,
+                                                                                          "Computer ID {0} Properties"
+                                                                                          .format(computer_id), 3)
+                if not qr_to_attachment:
+                    LOG.info("No properties returned for computer_id : %s" % (computer_id))
+
+                return qr_to_attachment
+
             except Exception as e:
                 LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
                 raise e
-
+        else:
+            LOG.exception("Unexpected HTTP status code: %d" % (response.status_code))
+            return None
 
     def get_bf_computer_by_service_name(self, service_name):
         """ Bigfix query - Get endpoints by service name.
@@ -366,23 +373,26 @@ class BigFixClient(object):
         try:
             xmlroot = elementTree.fromstring(response_text.text.encode('ascii', 'ignore'))
             results = xmlroot.findall(".//Query/Result/Tuple/Answer")
-            response = "<?xml version='1.0' ?>\n<report> %s: \n" % title
-            insertion_count = 0
-            for elt in results:
-                if insertion_count == 0:
-                    response += "\t<property> %s \n" % elt.text
-                elif insertion_count == 1:
-                    response += "\t\t<name> %s </name> \n" % elt.text
-                elif insertion_count == 2:
-                    response += "\t\t<value> %s </value> \n" % elt.text
+            if len(results) == 0:
+               return None
+            else:
+                response = "<?xml version='1.0' ?>\n<report> %s: \n" % title
+                insertion_count = 0
+                for elt in results:
+                    if insertion_count == 0:
+                        response += "\t<property> %s \n" % elt.text
+                    elif insertion_count == 1:
+                        response += "\t\t<name> %s </name> \n" % elt.text
+                    elif insertion_count == 2:
+                        response += "\t\t<value> %s </value> \n" % elt.text
 
-                insertion_count += 1
-                if insertion_count == number_of_tuples:
-                    response += "\t</property>\n"
-                    insertion_count = 0
+                    insertion_count += 1
+                    if insertion_count == number_of_tuples:
+                        response += "\t</property>\n"
+                        insertion_count = 0
 
-            response += "</report>"
-            return response
+                response += "</report>"
+                return response
         except elementTree.ParseError as e:
             LOG.error("There was an error trying to process XML. Returning RAW XML")
             LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
