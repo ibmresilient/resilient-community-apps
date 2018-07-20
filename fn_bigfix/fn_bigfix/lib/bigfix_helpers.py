@@ -45,15 +45,19 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
     """
     finished = False
     status_message = None
+    status = None
 
     while retry_timeout >= 0 and not finished:
         try:
             status_message = bigfix_client.get_bf_action_status(bigfix_action_id)
             if status_message:
-                if status_message == "The action executed successfully." or \
-                        status_message == "The action failed." or \
-                        "is not relevant" in status_message:
-                    finished = True
+                if status_message == "The action executed successfully." or "is not relevant" in status_message:
+                    status = "OK"
+                elif status_message == "The action failed.":
+                    status = "Failed"
+                else:
+                    status = "Unsupported"
+                finished = True
 
         except Exception as ex:
             LOG.error(ex)
@@ -64,5 +68,6 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
             time.sleep(retry_interval)
 
     if not finished:
-        status_message = "Timedout"
-    return status_message
+        status = "Timedout"
+
+    return (status, status_message)
