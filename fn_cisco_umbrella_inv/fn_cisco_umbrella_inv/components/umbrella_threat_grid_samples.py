@@ -84,14 +84,12 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_resource = kwargs.get("umbinv_resource")  # text
-            umbinv_resource_type = self.get_select_param(kwargs.get("umbinv_resource_type"))  # select, values: "domain_name", "ip_address", "url"
             umbinv_limit = kwargs.get("umbinv_limit")  # number
             umbinv_offset = kwargs.get("umbinv_offset")  # number
             umbinv_sortby = kwargs.get("umbinv_sortby")  # text
 
             log = logging.getLogger(__name__)
             log.info("umbinv_resource: %s", umbinv_resource)
-            log.info("umbinv_resource_type: %s", umbinv_resource_type)
             log.info("umbinv_limit: %s", umbinv_limit)
             log.info("umbinv_offset: %s", umbinv_offset)
             log.info("umbinv_sortby: %s", umbinv_sortby)
@@ -99,22 +97,25 @@ class FunctionComponent(ResilientComponent):
             if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            if is_none(umbinv_resource_type):
-                raise ValueError("Required parameter 'umbinv_resource_type' not set")
-
             yield StatusMessage("Starting...")
             res = None
+            res_type = None
             process_result = {}
-            params = {"resource": umbinv_resource.strip(), "resource_type": umbinv_resource_type,
-                      "limit": umbinv_limit, "sortby": umbinv_sortby, "offset": umbinv_offset}
+            params = {"resource": umbinv_resource.strip(), "limit": umbinv_limit, "sortby": umbinv_sortby,
+                      "offset": umbinv_offset}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_res" not in process_result:
+            if "_res" not in process_result or "_res_type" not in process_result:
                 raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
             else:
                 res = process_result.pop("_res")
+                res_type = process_result.pop("_res_type")
+
+            if res_type != "domain_name" and res_type != "ip_address" and res_type != "url":
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}', should be a 'domain name', "
+                                 "an 'ip address' or a 'url'.".format(res_type))
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
@@ -132,9 +133,25 @@ class FunctionComponent(ResilientComponent):
                 results = {}
             else:
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                # Make each sample 'firstSeen' and "lastSeen" property more readable.
+                for i in range(len(rtn["samples"])):
+                    fs = rtn["samples"][i]["firstSeen"]
+                    ls = rtn["samples"][i]["lastSeen"]
+                    try:
+                        secs = int(fs) / 1000
+                        fs_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                        rtn["samples"][i]["first_seen_converted"] = fs_readable
+                        secs = int(ls) / 1000
+                        ls_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                        rtn["samples"][i]["last_seen_converted"] = ls_readable
+                    except ValueError:
+                        yield FunctionError('Timestamp value incorrectly specified')
+
                 # Add "query_execution_time" and "domains" key to result to facilitate post-processing.
-                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": res,
+                results = {"thread_grid_samples": json.loads(json.dumps(rtn)), "resource_name": params["resource"],
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'thread_grid_samples' results for resource '{}'.".format(res))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

@@ -23,12 +23,10 @@ class FunctionComponent(ResilientComponent):
 
     The Function does a Cisco Umbrella Investigate query lookup takes the following parameters:
         umbinv_resource
-        umbinv_as_type
 
     An example of a set of query parameter might look like the following:
 
-            umbinv_resource = 93.184.216.119 and umbinv_as_type = "ip_address"
-            umbinv_resource = "12345" and umbinv_as_type = "as_number"
+            umbinv_resource = 93.184.216.119 or umbinv_resource = "12345"
 
 
     The Investigate Query will executes a REST call against the Cisco Umbrella Investigate server and returns a result
@@ -73,49 +71,53 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             umbinv_resource = kwargs.get("umbinv_resource")  # text
-            umbinv_as_type = self.get_select_param(
-                kwargs.get("umbinv_as_type"))  # select, values: "ip_address", "as_number"
 
             log = logging.getLogger(__name__)
             log.info("umbinv_resource: %s", umbinv_resource)
-            log.info("umbinv_as_type: %s", umbinv_as_type)
 
             if is_none(umbinv_resource):
                 raise ValueError("Required parameter 'umbinv_resource' not set")
 
-            if is_none(umbinv_as_type):
-                raise ValueError("Required parameter 'umbinv_as_type' not set")
 
             yield StatusMessage("Starting...")
             res = None
+            res_type = None
             process_result = {}
-            params = {"resource": umbinv_resource.strip(), "as_type": umbinv_as_type}
+            params = {"resource": umbinv_resource.strip()}
 
             validate_params(params)
             process_params(params, process_result)
 
-            if "_res" not in process_result:
+            if "_res" not in process_result or "_res_type" not in process_result:
                 raise ValueError("Parameter 'umbinv_resource' was not processed correctly")
             else:
                 res = process_result.pop("_res")
+                res_type = process_result.pop("_res_type")
 
             api_token = self.options.get("api_token")
             base_url = self.options.get("base_url")
             rinv = ResilientInv(api_token, base_url)
 
             yield StatusMessage("Running Cisco Investigate query...")
-            if params["as_type"] == "ip_address":
+            if res_type == "ip_address":
                 rtn = rinv.as_for_ip(res)
                 # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"as_for_ip": json.loads(json.dumps(rtn)), "ip_address": res,
                            "query_execution_time": query_execution_time}
-            elif params["as_type"] == "as_number":
+                yield StatusMessage("Returning 'as_for_ip' results for ip address '{}'.".format(res))
+
+            elif res_type == "as_number":
                 rtn = rinv.prefixes_for_asn(res)
                 # Add "query_execution_time" and "ip_address" key to result to facilitate post-processing.
                 query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 results = {"prefixes_for_asn": json.loads(json.dumps(rtn)), "asn": res,
                            "query_execution_time": query_execution_time}
+                yield StatusMessage("Returning 'prefixes_for_asn' results for AS number '{}'.".format(res))
+            else:
+                raise ValueError("Parameter 'umbinv_resource' was an incorrect type '{}' should be an 'ip address' "
+                                 "or an 'AS number'".format(res_type))
+
             yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))

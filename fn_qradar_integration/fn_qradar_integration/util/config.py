@@ -14,5 +14,4 @@ host=localhost
 username=admin
 qradarpassword=changeme
 '''
-#    return config_data
-    return None
+    return config_data

@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
     An example of a set of query parameter might look like the following:
 
             ldap_search_base = "dc=example,dc=com"
-            ldap_search_filter = "(&(objectClass=person)(|(uid={%param%})(uid=newton)))"
+            ldap_search_filter = "(&(objectClass=person)(|(uid={%ldap_param%})(uid=newton)))"
             ldap_search_attributes = "uid,cn,sn,mail,telephoneNumber"
             ldap_param = artifact.value # Assigned value 'einstein' during run.
 
@@ -107,19 +107,20 @@ class FunctionComponent(ResilientComponent):
             if re.match('^search_filter$', k):
                 # Escape some characters in search_filter which might cause LDAP injection.
                 search_params[k] = self.escape_chars(search_params[k])
-            # Search for "%param% token in parameter.
-            if re.search("%param%", search_params[k]):
-                # Only allow "%param% in search_filter field.
+            # Search for "%ldap_param% token in parameter.
+            if re.search("%ldap_param%", search_params[k]):
+                # Only allow "%ldap_param% in search_filter field.
                 if re.match('^search_filter$', k):
                     if "param" not in search_params:
-                        raise Exception ("The parameter '{}' contains string token '%param%' but parameter '{}' is blank.".format(k, "param"))
+                        raise Exception ("The parameter '{}' contains string token '%ldap_param%' but parameter '{}' "
+                                         "is blank.".format(k, "param"))
                     else:
                         # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                        search_params[k] = re.sub("%param%", search_params["param"].replace('\\', '\\\\'), search_params[k])
+                        search_params[k] = re.sub("%ldap_param%", search_params["param"].replace('\\', '\\\\'), search_params[k])
                         LOG.debug(('Transformed parameter'+k+' to '+search_params[k]))
                 else:
                     raise Exception(
-                        "The string %param% not allowed in parameter '{}' ".format(k))
+                        "The string %ldap_param% not allowed in parameter '{}' ".format(k))
 
 
     def get_creds(self):
@@ -131,16 +132,28 @@ class FunctionComponent(ResilientComponent):
         Returns a tuple value.
 
         """
-        ldap_user = self.options.get("user", "")
+        ldap_user = self.options.get("user", "").strip('\'"')
         ldap_domain = self.options.get("domain", "")
         ldap_password = self.options.get("password", "")
         ldap_auth = self.options.get("auth", "")
+        ldap_user_split = None
 
         if ldap_auth.upper() not in LDAP_AUTH_TYPES:
             raise ValueError("Invalid value for 'auth' configuration setting")
 
         if ldap_auth.upper() == "SASL":
             raise Exception("Connection using SASL authentication not currently implemented.")
+
+        if ldap_user and '\\' in ldap_user:
+            # User can have a domain value pre-pended if connecting to Active Directory server.
+            ldap_user_split = ldap_user.split("\\")
+            if len(ldap_user_split) > 2:
+                # If '\' character appears more than once throw error.
+                raise ValueError("Invalid value '{}' for 'user'.".format(ldap_user))
+            if len(ldap_user_split[1]) == 0:
+                raise ValueError("Invalid empty value for user after the '\\' character in 'user' config option.")
+            if len(ldap_user_split[0]) == 0:
+                raise ValueError("Invalid empty value for domain before the '\\' character in 'user' config option.")
 
         if (not ldap_user and ldap_password) or (ldap_user and not ldap_password):
             raise Exception("User and password required to be set as a pair.")
@@ -155,12 +168,22 @@ class FunctionComponent(ResilientComponent):
         elif (not ldap_user and not ldap_password) and (ldap_auth.upper() != "ANONYMOUS"):
             raise Exception("Empty 'user' and 'password' values can only be used with 'auth=ANONYMOUS'.")
 
-        if ldap_auth.upper() == "NTLM":
-            if not ldap_domain:
-                raise Exception("Connection using NTLM requires a 'domain' to be specified.")
-            else:
-                # Add domain to user if NTLM
+
+        if ldap_domain or ldap_auth.upper() == "NTLM":
+            # Looks like we are pointing at an Active Directory server.(Note: AD can also use auth='SIMPLE').
+            if (not ldap_domain and not ldap_user_split):
+                # If we got here 'auth' = 'NTLM' but no domain specified in 'domain' or 'user'.
+                raise Exception("Connection using AD requires a 'domain' to be specified.")
+            elif ldap_domain and not ldap_user_split:
+                # If we got here 'domain' is set and no domain specified in 'user' configuration option.
+                # Prepend domain to user.
                 ldap_user = "{}\\{}".format(ldap_domain, ldap_user)
+            elif ldap_domain and len(ldap_user_split) == 2:
+                # Check to see if ldap_domain and ldap_user_split[0] match.
+                if ldap_domain.upper() != ldap_user_split[0].upper():
+                    raise Exception("Conflicting domain names '{}' and '{}' specified for credentials."
+                                    .format(ldap_domain, ldap_user_split[0]))
+
 
         return(ldap_user, ldap_password, ldap_auth)
 

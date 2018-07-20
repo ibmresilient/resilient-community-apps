@@ -13,5 +13,6 @@ def config_section_data():
 base_url=https://investigate.api.umbrella.com/
 # The api_token will be supplied by Cisco will be in uuid format.
 api_token=<api token>
+results_limit=200
 """
     return config_data

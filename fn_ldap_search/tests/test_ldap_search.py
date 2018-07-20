@@ -89,9 +89,9 @@ class TestLdapSearch:
     @pytest.mark.parametrize("success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result", [
         ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(uid=einstein))"}, "uid,cn", "",
          {'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}),
-        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(uid=%param%))"},
+        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(uid=%ldap_param%))"},
          "uid,cn", "einstein", {'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}),
-        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(|(uid=newton)(uid=%param%)))"}, "uid,cn", "einstein",
+        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(|(uid=newton)(uid=%ldap_param%)))"}, "uid,cn", "einstein",
          {'entries': [{'cn': ['Isaac Newton'], 'dn': 'uid=newton,dc=example,dc=com', 'uid': ['newton']},
                       {'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]})
     ])
