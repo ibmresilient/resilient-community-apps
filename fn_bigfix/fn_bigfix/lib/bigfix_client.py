@@ -371,7 +371,7 @@ class BigFixClient(object):
 
         """
         try:
-            xmlroot = elementTree.fromstring(response_text.text.encode('ascii', 'ignore'))
+            xmlroot = elementTree.fromstring(response_text.text.encode('utf8', 'ignore'))
             results = xmlroot.findall(".//Query/Result/Tuple/Answer")
             if len(results) == 0:
                return None
