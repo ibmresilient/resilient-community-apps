@@ -405,7 +405,7 @@ class BigFixClient(object):
         """" Get Bigfix action status.
 
         :param action_id: BigFix actions id
-        :return status: Return B igFix actions status
+        :return status: Return BigFix actions status
 
          """
         query_url = "{0}/api/action/{1}/status".format(self.base_url, action_id)
