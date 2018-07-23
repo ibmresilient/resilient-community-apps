@@ -82,3 +82,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+        
+        finally:
+          # Unbind connection
+          c.unbind()
