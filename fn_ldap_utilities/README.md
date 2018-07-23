@@ -3,6 +3,7 @@
 This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
 
 ## ldap_utilities_set_password
+* Supports **Active Directory** and **OpenLDAP**
 * When using with **Microsoft Active Directory** server
   * Set the following in the **app.config file**:
     ```python
@@ -23,8 +24,9 @@ This Python Package is comprised of various Resilient Functions that allow you t
     ```
 
 ## ldap_utilities_update
+* Supports **Active Directory** and **OpenLDAP**
 * Takes the name of the attribute you want to update and an array of values to update that attribute with
-* The function input `ldap_attribute_values` must be a **string repersenation of an array**
+* The function input `ldap_attribute_values` must be a **string repersenation of an array:**
   ```python
   inputs.ldap_attribute_values = "['stringValue1', 1234, 'stringValue2']"
   ```
@@ -34,7 +36,8 @@ This Python Package is comprised of various Resilient Functions that allow you t
   * _"It is ignored if the attribute does not exist"_
 
 ## ldap_utilities_toggle_access
-* Supports only **Active Directory**. Set the following in the **app.config file**:
+* Supports only **Active Directory**.
+* Set the following in the **app.config file**:
     ```python
       [fn_ldap_utilities]
       ldap_port=636
@@ -44,3 +47,19 @@ This Python Package is comprised of various Resilient Functions that allow you t
 * Enables or Disables an **Active Directory** user
 * Requires the DN of the user you wish to toggle access for
 * Example shows how to use with **LDAP Utilities: Search Function** to toggle access for a user using their email address
+
+## ldap_utilities_add_to_groups / ldap_utilities_remove_from_groups
+* Supports only **Active Directory**.
+* Set the following in the **app.config file**:
+    ```python
+      [fn_ldap_utilities]
+      ldap_port=636
+      ldap_use_ssl=True
+      ldap_is_active_directory=True
+    ```
+* The function inputs `ldap_multiple_user_dn` and `ldap_multiple_group_dn` must be **string repersenations of an array:**
+  ```python
+  # Pre-Processing Script::
+  inputs.ldap_multiple_user_dn = "['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']"
+  inputs.ldap_multiple_group_dn = "['dn=Accounts Group,dc=example,dc=com', 'dn=IT Group,dc=example,dc=com']"
+  ```
