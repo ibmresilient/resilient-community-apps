@@ -1,3 +1,0 @@
-include README.md
-include create_webex_meeting/util/*
-include create_webex_meeting/LICENSE 
