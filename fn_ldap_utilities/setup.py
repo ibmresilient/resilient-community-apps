@@ -25,7 +25,8 @@ setup(
             "LdapUtilitiesToggleAccessFunctionComponent = fn_ldap_utilities.components.ldap_utilities_toggle_access:FunctionComponent",
             "LdapUtilitiesUpdateFunctionComponent = fn_ldap_utilities.components.ldap_utilities_update:FunctionComponent",
             "LdapUtilitiesSearchFunctionComponent = fn_ldap_utilities.components.ldap_utilities_search:FunctionComponent",
-            "LdapUtilitiesSetPasswordFunctionComponent = fn_ldap_utilities.components.ldap_utilities_set_password:FunctionComponent"
+            "LdapUtilitiesSetPasswordFunctionComponent = fn_ldap_utilities.components.ldap_utilities_set_password:FunctionComponent",
+            "LdapUtilitiesRemoveFromGroupsFunctionComponent = fn_ldap_utilities.components.ldap_utilities_remove_from_groups:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_ldap_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_ldap_utilities.util.customize:customization_data"]
