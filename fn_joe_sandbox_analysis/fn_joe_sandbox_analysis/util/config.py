@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_joe_sandbox_analysis"""
