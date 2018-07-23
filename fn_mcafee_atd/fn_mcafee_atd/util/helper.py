@@ -203,6 +203,7 @@ def check_atd_status(g, task_id):
         severity = res_json.get("severity")
         if severity < 0:
             log.info("Severity is {}".format(str(severity)))
+            log.info("ATD analysis probably failed, please check ATD system.")
             raise ValueError
         else:
             return True
@@ -216,6 +217,7 @@ def check_atd_status(g, task_id):
         severity = res_json.get("severity")
         if severity < 0:
             log.info("Severity is {}".format(str(severity)))
+            log.info("ATD analysis probably failed, please check ATD system.")
             raise ValueError
         else:
             return True
