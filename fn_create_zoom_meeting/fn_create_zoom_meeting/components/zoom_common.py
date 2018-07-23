@@ -1,0 +1,133 @@
+import requests
+import json
+import jwt
+import time
+import datetime
+import logging
+from resilient_circuits import FunctionError
+
+
+class ZoomCommon:
+    def __init__(self, key, secret):
+        self.key = key
+        self.secret = secret
+        self.access_token = ""
+
+    @staticmethod
+    def generate_auth_token(key, secret):
+        """Generates authentication token used to authenticate with Zoom API"""
+        return jwt.encode({'iss': key, 'exp': time.time() + 60}, secret, algorithm='HS256').decode('utf-8')  # expires in 1 minute
+
+    def zoom_request(self, path=None, method="GET", query=None, headers=None):
+        """Generates and makes specified request to Zoom API"""
+        url = "https://api.zoom.us/v2" + path
+        if '?' in path:
+            url += "&access_token=" + str(self.access_token)
+        else:
+            url += "?access_token=" + str(self.access_token)
+
+        response = None
+        if method == "GET":
+            response = requests.get(url)
+        elif method == "POST":
+            response = requests.post(url, json=query, verify=True, headers=headers)
+
+        if response is None:
+            raise FunctionError("Invalid METHOD passed to zoom_request! Method: {}".format(method))
+
+        if response.status_code != 200 and response.status_code != 201 and response.status_code != 401:
+            raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
+        elif response.status_code == 401:
+            # access token probably expired
+            self.access_token = self.generate_auth_token(self.key, self.secret)
+            return self.zoom_request(path, method, query, headers)
+
+        return response
+
+    def get_zoom_host_id(self, host_email):
+        """Gets the Zoom User ID of the host"""
+        path = "/users?status=active&page_size=30&page_number="
+        users_request = self.zoom_request(path + "1")
+        user_data = json.loads(users_request.text)
+
+        for page_number in range(0, user_data.get("page_count")):
+            current_page_data = json.loads(self.zoom_request(path + str(page_number + 1)).text)
+            for user in current_page_data.get("users"):
+                if user.get("email") == host_email:
+                    return user.get("id")
+
+    @staticmethod
+    def generate_meeting_post(agenda_string, record_boolean, post_time, topic, password):
+        """Generates the request that will be used to create the zoom meeting"""
+        set_auto_recording = "none"
+        if record_boolean:
+            set_auto_recording = "local"
+
+        data = {
+            "topic": topic,
+            "type": 2,
+            "start_time": post_time,
+            "duration": 0,
+            "timezone": "",
+            "password": password,
+            "agenda": agenda_string,
+            "recurrence": {
+                "type": 1,
+                "repeat_interval": 0,
+                "weekly_days": 1,
+                "monthly_day": 0,
+                "monthly_week": -1,
+                "monthly_week_day": 1,
+                "end_times": 0,
+                "end_date_time": post_time
+            },
+            "settings": {"host_video": True,
+                         "participant_video": True,
+                         "cn_meeting": False,
+                         "in_meeting": False,
+                         "join_before_host": False,
+                         "mute_upon_entry": False,
+                         "watermark": False,
+                         "use_pmi": False,
+                         "approval_type": 2,
+                         "registration_type": 1,
+                         "audio": "both",
+                         "auto_recording": set_auto_recording    # turn on option to save recording locally
+                         }
+        }
+
+        return data
+
+    def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password):
+        """Creates a Zoom Meeting"""
+        self.access_token = self.generate_auth_token(self.key, self.secret)
+
+        meeting_time = datetime.datetime.now()  # type: datetime
+        post_time_format = meeting_time.strftime('yyyy-MM-dd\'T\'HH:mm:ss%Z')
+        meeting_time = meeting_time.strftime('%m/%d/%Y %H:%M:%S')
+
+        query = self.generate_meeting_post(agenda_string, record_boolean, post_time_format, meeting_topic, meeting_password)
+        host_id = self.get_zoom_host_id(host_email)
+        if host_id is None:
+            raise FunctionError("Unable to find user with that email.")
+
+        path = "/users/" + host_id + "/meetings"
+
+        response = self.zoom_request(path, "POST", query, {'content-type': 'application/json'})
+
+        log = logging.getLogger(__name__)
+
+        if not response or response.status_code >= 300 or not response.content:
+            raise FunctionError('api call failure: {} on {}'.format(response.status_code, path))
+        else:
+            json_data = json.loads(response.text)
+            zoom_host_url = json_data["start_url"]
+            zoom_join_url = json_data["join_url"]
+
+        results = {
+            "host_url": zoom_host_url,
+            "attendee_url": zoom_join_url,
+            "date_created": meeting_time
+        }
+
+        return results
