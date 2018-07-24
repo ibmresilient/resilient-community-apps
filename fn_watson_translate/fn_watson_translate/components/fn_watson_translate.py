@@ -81,6 +81,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
+            log.error(e)
             yield FunctionError("An error occurred."+str(e))
 
     def _get_text_from_html(self, input):
