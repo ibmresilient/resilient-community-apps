@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 
 """Generate a default configuration-file section for fn_elasticsearch_query"""
 
@@ -14,6 +16,6 @@ es_datastore_url = 192.x.x.x:PORT
 es_datastore_scheme = https
 es_auth_username = elastic
 es_auth_password = XXXX
-es_cafile = None
+es_cafile = 
 """
     return config_data

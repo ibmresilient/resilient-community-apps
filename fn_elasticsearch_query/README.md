@@ -1,6 +1,7 @@
 # Fn_ElasticSearch_Query
 The ElasticSearch integration allows users of the Resilient Platform to connect to and query an ElasticSearch Database.
 
+Users can specify the location of a remote ElasticSearch instance and query this instance for data through the Resilient Platform.
 The function takes 3 inputs :
 
 + Index (Optional) --> An index to search for data. Default is searching all indices

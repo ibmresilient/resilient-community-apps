@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 class ElasticSearchHelper:
 
   def str_to_bool(self, str):
