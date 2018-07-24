@@ -2,6 +2,39 @@
 
 This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
 
+## ldap_utilities_search
+* Supports **Active Directory** and **OpenLDAP**
+* When using with **Microsoft Active Directory** server
+  * Set the following in the **app.config file**:
+    ```python
+      [fn_ldap_utilities]
+      ldap_port=636
+      ldap_use_ssl=True
+      ldap_is_active_directory=True
+    ```
+
+The LDAP search requires **4 input parameters**. The parameters are setup from a Resilient systems workflow on the Resilient console.
+The following are examples of setup of each parameter using a simple workflow pre-processing script. The %param% token
+will be replaced by the actual inputs.param value at time of execution.
+
+```
+inputs.ldap_search_base = "dc=example,dc=com"
+inputs.ldap_search_filter = "(&(objectClass=person)(uid=%ldap_param%))"
+inputs.ldap_search_attributes = "cn,sn,mail,telephoneNumber"
+inputs.ldap_search_param =  artifact.value
+```
+The results returned to Resilient will be in JSON format and will consist of a list of
+entries where each entry has a 'dn' entry and a set of attributes
+```
+{
+  "entries": [
+    {"dn': "entry1_dn1_value", "entry1_attribute2", "entry1_attribute3", ... },
+    {"dn": "entry2_dn2_value", "entry2_attribute2", "entry2_attribute3", ... }
+    ...
+  ]
+}
+```
+
 ## ldap_utilities_set_password
 * Supports **Active Directory** and **OpenLDAP**
 * When using with **Microsoft Active Directory** server
