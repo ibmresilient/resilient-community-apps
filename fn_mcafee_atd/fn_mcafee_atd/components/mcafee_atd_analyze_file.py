@@ -116,12 +116,16 @@ class FunctionComponent(ResilientComponent):
 
             timeout_seconds = self.timeout_mins * 60
             start = time.time()
-            while check_atd_status(self, atd_task_id) is False:
-                if artifact_id is not None:
-                    yield StatusMessage("Analysis on artifact_id {} is still running".format(artifact_id))
-                else:
-                    yield StatusMessage("Analysis on attachment_id {} is still running".format(attachment_id))
-                check_timeout(start, self.polling_interval, timeout_seconds)
+            try:
+                while check_atd_status(self, atd_task_id) is False:
+                    if artifact_id is not None:
+                        yield StatusMessage("Analysis on artifact_id {} is still running".format(artifact_id))
+                    else:
+                        yield StatusMessage("Analysis on attachment_id {} is still running".format(attachment_id))
+                    check_timeout(start, self.polling_interval, timeout_seconds)
+            except ValueError:
+                yield StatusMessage("ATD analysis probably failed, please check ATD system.")
+                raise FunctionError()
 
             yield StatusMessage("Analysis Completed")
             if atd_report_type == "pdf" or atd_report_type == "html":
