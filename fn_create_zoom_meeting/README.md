@@ -22,10 +22,10 @@ Config values example:
 (Note: The email and password should be for a user that is able to create meetings)
 ```
 [create_zoom_meeting]
-[create_zoom_meeting]
 zoom_api_url=https://api.zoom.us/v2
 zoom_api_key=<api key>
 zoom_api_secret=<api secret>
+zoom_api_timezone=<timezone, i.e America/New_York>
 ```
 
 Run with: `resilient-circuits run`.

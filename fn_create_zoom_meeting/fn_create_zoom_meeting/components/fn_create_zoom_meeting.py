@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ..components.zoom_common import ZoomCommon
-
+import pytz
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_create_zoom_meeting"""
@@ -42,6 +42,15 @@ class FunctionComponent(ResilientComponent):
             zoom_api_url = self.options.get("zoom_api_url")
             zoom_api_key = self.options.get("zoom_api_key")
             zoom_api_secret = self.options.get("zoom_api_secret")
+            zoom_api_timezone = self.options.get("zoom_api_timezone")
+
+            if zoom_api_timezone is None:
+                yield FunctionError("zoom_api_timezone is not defined in app.config")
+
+            try:
+                pytz.timezone(str(zoom_api_timezone))
+            except pytz.exceptions.UnknownTimeZoneError:
+                yield FunctionError("Invalid timezone provided in app.config")
 
             if zoom_api_url is None:
                 yield FunctionError("zoom_api_url is not defined in app.config")
@@ -60,7 +69,7 @@ class FunctionComponent(ResilientComponent):
 
             self.common = ZoomCommon(zoom_api_url, zoom_api_key, zoom_api_secret)
 
-            r = self.common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password)
+            r = self.common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password, zoom_api_timezone)
 
             yield FunctionResult(r)
         except Exception as e:

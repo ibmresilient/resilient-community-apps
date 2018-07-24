@@ -63,7 +63,7 @@ class ZoomCommon:
                     return user.get("id")
 
     @staticmethod
-    def generate_meeting_post(agenda_string, record_boolean, post_time, topic, password):
+    def generate_meeting_post(agenda_string, record_boolean, post_time, topic, password, timezone):
         """Generates the request that will be used to create the zoom meeting"""
         set_auto_recording = "none"
         if record_boolean:
@@ -71,10 +71,10 @@ class ZoomCommon:
 
         data = {
             "topic": topic,
-            "type": 2,
+            "type": 1,
             "start_time": post_time,
             "duration": 0,
-            "timezone": "",
+            "timezone": timezone,
             "password": password,
             "agenda": agenda_string,
             "recurrence": {
@@ -104,7 +104,7 @@ class ZoomCommon:
 
         return data
 
-    def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password):
+    def create_meeting(self, host_email, agenda_string, record_boolean, meeting_topic, meeting_password, timezone):
         """Creates a Zoom Meeting"""
         self.access_token = self.generate_auth_token(self.key, self.secret)
 
@@ -112,7 +112,7 @@ class ZoomCommon:
         post_time_format = meeting_time.strftime('yyyy-MM-dd\'T\'HH:mm:ss%Z')
         meeting_time = meeting_time.strftime('%m/%d/%Y %H:%M:%S')
 
-        query = self.generate_meeting_post(agenda_string, record_boolean, post_time_format, meeting_topic, meeting_password)
+        query = self.generate_meeting_post(agenda_string, record_boolean, post_time_format, meeting_topic, meeting_password, timezone)
         host_id = self.get_zoom_host_id(host_email)
         if host_id is None:
             raise FunctionError("Unable to find user with that email.")
