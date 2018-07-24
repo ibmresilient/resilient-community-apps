@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-
-"""Generate a default configuration-file section for fn_elasticsearch_query"""
+"""Generate a default configuration-file section for fn_elasticsearch"""
 
 from __future__ import print_function
 
@@ -11,11 +10,12 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-    config_data = u"""[fn_elasticsearch_query]
-es_datastore_url = 192.x.x.x:PORT
+    config_data = u"""[fn_elasticsearch]
+es_datastore_url = <YOUR_URL>
 es_datastore_scheme = https
 es_auth_username = elastic
-es_auth_password = XXXX
+es_auth_password = <YOUR_PASSWORD>
 es_cafile = 
 """
     return config_data
+    

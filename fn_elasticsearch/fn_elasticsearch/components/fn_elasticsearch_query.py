@@ -6,25 +6,25 @@
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_elasticsearch_query.util.helper import ElasticSearchHelper
+from fn_elasticsearch.util.helper import ElasticSearchHelper
 from elasticsearch import Elasticsearch
 from ssl import create_default_context
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'query_elasticsearch_datastore"""
+    """Component that implements Resilient function 'fn_elasticsearch_query"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_elasticsearch_query", {})
+        self.options = opts.get("fn_elasticsearch", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_elasticsearch_query", {})
+        self.options = opts.get("fn_elasticsearch", {})
 
-    @function("query_elasticsearch_datastore")
-    def _query_elasticsearch_datastore_function(self, event, *args, **kwargs):
+    @function("fn_elasticsearch_query")
+    def _fn_elasticsearch_query_function(self, event, *args, **kwargs):
         """Function: Allows a user to query a specified ElasticSearch datastore for data."""
         try:
 
@@ -37,8 +37,8 @@ class FunctionComponent(ResilientComponent):
             ELASTICSEARCH_USERNAME = helper.get_config_option("es_auth_username", True)
             ELASTICSEARCH_PASSWORD = helper.get_config_option("es_auth_password", True)
             # Get the function parameters:
-            index = kwargs.get("index")  # text
-            doc_type = kwargs.get("doc_type")  # text
+            index = kwargs.get("es_index")  # text
+            doc_type = kwargs.get("es_doc_type")  # text
             es_query = self.get_textarea_param(kwargs.get("es_query"))  # textarea
 
             
@@ -63,7 +63,11 @@ class FunctionComponent(ResilientComponent):
             
             if ELASTICSEARCH_SCHEME == 'https':
                 # Attempt to create an SSL context, should work fine if no CERT is provided
-                context = create_default_context(cafile=ELASTICSEARCH_CERT)
+                if ELASTICSEARCH_CERT is None:
+                    context = create_default_context()
+                else: 
+                    
+                    context = create_default_context(cafile=ELASTICSEARCH_CERT)
                 # Connect to the ElasticSearch instance 
                 es = Elasticsearch(ELASTICSEARCH_SCHEME +"://"+ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME,ELASTICSEARCH_PASSWORD)) 
             else: 
@@ -71,12 +75,17 @@ class FunctionComponent(ResilientComponent):
                 es = Elasticsearch([ELASTICSEARCH_URL], 
                 verify_certs=False,
                 cafile=ELASTICSEARCH_CERT)
+            # Start query results as None
+            query_results = None 
 
             es_results = es.search(index=index, doc_type=doc_type,body=es_query, ignore=[400, 404])
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
                 # Could do some extra stuff with results here
+
+                # Prepare the results object
+                query_results = json.dumps(es_results["hits"]["hits"]) 
                 
             # Check if we have a status attribute indicating an error we could raise
             elif 'status' in es_results:
@@ -84,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                 
                 if es_results['status'] in (400, 404):
                     # Can raise the root_cause of the failure
-                    log.info(es_results["error"]["root_cause"])
+                    log.error(es_results["error"]["root_cause"])
 
                     if es_results['status'] is 400:
                         # es_results["error"]["root_cause"][1]["reason"] is only available on exceptions of type 400
@@ -93,11 +102,11 @@ class FunctionComponent(ResilientComponent):
                         # Give reason that 404 happened; index not found?
                         raise FunctionError("Exception encounted during query :"+es_results["error"]["reason"])
                 
-           
-            # Prepare the results object
+           # Prepare the results object
             results = {
-                "query_results": json.dumps(es_results["hits"]["hits"]) 
+                "query_results": query_results 
             }
+            
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
