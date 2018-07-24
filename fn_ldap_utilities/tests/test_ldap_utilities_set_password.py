@@ -5,6 +5,8 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from helper import TestingHelper
+from mock import patch
 
 PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_set_password"
@@ -30,15 +32,24 @@ def call_ldap_utilities_set_password_function(circuits, function_params, timeout
 class TestLdapUtilitiesSetPassword:
     """ Tests for the ldap_utilities_set_password function"""
 
+    helper = TestingHelper()
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    inputs = {
+      "ldap_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+      "ldap_new_password": "Passw8rd!"
+    }
+
+    outputs = {"success": True, "user_dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"}
+
+    @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
+    @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
     @pytest.mark.parametrize("ldap_dn, ldap_new_password, expected_results", [
-        ("text", "text", {"value": "xyz"}),
-        ("text", "text", {"value": "xyz"})
-    ])
+        (inputs["ldap_dn"], inputs["ldap_new_password"], outputs)])
     def test_success(self, circuits_app, ldap_dn, ldap_new_password, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
