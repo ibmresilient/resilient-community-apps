@@ -18,5 +18,4 @@ bigfix_polling_interval=30
 bigfix_polling_timeout=1800
 hunt_results_limit=200
 """
-#    return config_data
-    return None
+    return config_data
