@@ -31,9 +31,6 @@ class FunctionComponent(ResilientComponent):
         # Verify can make connection to ATD with given config values
         _get_atd_session_headers(self)
 
-        # Create Resilient Rest client
-        self.resilient_client = self.rest_client()
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -103,7 +100,9 @@ class FunctionComponent(ResilientComponent):
             results = get_atd_report(self, atd_task_id, atd_report_type, report_file)
 
             if report_file is not None:
-                self.resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+                # Create Resilient Rest client
+                resilient_client = self.rest_client()
+                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
                                                   report_file["report_file"], filename=report_file["report_file_name"])
                 yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
 

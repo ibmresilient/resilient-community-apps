@@ -117,7 +117,10 @@ class FunctionComponent(ResilientComponent):
             timeout_seconds = self.timeout_mins * 60
             start = time.time()
             while check_atd_status(self, atd_task_id) is False:
-                yield StatusMessage("Analysis on attachment_id {} is still running".format(attachment_id))
+                if artifact_id is not None:
+                    yield StatusMessage("Analysis on artifact_id {} is still running".format(artifact_id))
+                else:
+                    yield StatusMessage("Analysis on attachment_id {} is still running".format(attachment_id))
                 check_timeout(start, self.polling_interval, timeout_seconds)
 
             yield StatusMessage("Analysis Completed")
