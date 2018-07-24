@@ -69,9 +69,9 @@ class TestFnWatsonTranslateE2E:
         translator.identify.return_value = identify_value
 
         function_params = {
-            "source_lang": source_lang,
-            "target_lang": target_lang,
-            "source_text": source_text
+            "fn_watson_translate_source_lang": source_lang,
+            "fn_watson_translate_target_lang": target_lang,
+            "fn_watson_translate_source_text": source_text
         }
         results = call_fn_watson_translate_function(circuits_app, function_params)
         assert(expected_results == results)
@@ -92,9 +92,9 @@ class TestFnWatsonTranslateE2E:
         translator.identify.return_value = identify_value
 
         function_params = {
-            "source_lang": source_lang,
-            "target_lang": target_lang,
-            "source_text": source_text
+            "fn_watson_translate_source_lang": source_lang,
+            "fn_watson_translate_target_lang": target_lang,
+            "fn_watson_translate_source_text": source_text
         }
         results = call_fn_watson_translate_function(circuits_app, function_params)
         assert (expected_results == results)
@@ -133,9 +133,9 @@ class TestFnWatsonTranslateE2E:
         translator.identify.return_value = identify_value
 
         function_params = {
-            "source_lang": source_lang,
-            "target_lang": target_lang,
-            "source_text": source_text
+            "fn_watson_translate_source_lang": source_lang,
+            "fn_watson_translate_target_lang": target_lang,
+            "fn_watson_translate_source_text": source_text
         }
         with pytest.raises(AssertionError):
             results = call_fn_watson_translate_function(circuits_app, function_params)

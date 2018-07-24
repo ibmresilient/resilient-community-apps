@@ -34,9 +34,9 @@ class FunctionComponent(ResilientComponent):
             language_translator = self._get_translator()
 
             # Get the function parameters:
-            source_lang = kwargs.get("source_lang", None)  # text
-            target_lang = kwargs.get("target_lang", None)  # text
-            source_text = kwargs.get("source_text", None)  # text
+            source_lang = kwargs.get("fn_watson_translate_source_lang", None)  # text
+            target_lang = kwargs.get("fn_watson_translate_target_lang", None)  # text
+            source_text = kwargs.get("fn_watson_translate_source_text", None)  # text
 
             if source_text is None or target_lang is None:
                 raise ValueError("Neither source_text nor target_lang can be unspecified.")
