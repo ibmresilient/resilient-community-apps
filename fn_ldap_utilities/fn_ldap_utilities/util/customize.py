@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 """Generate the Resilient customizations required for fn_ldap_utilities"""
 
 from __future__ import print_function

@@ -1,3 +1,5 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+
 from ldap3 import Server, Connection, ALL, ALL_ATTRIBUTES, MOCK_SYNC
 from mock import Mock
 import os

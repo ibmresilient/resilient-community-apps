@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 from ldap3 import Server, Connection, ALL, MODIFY_REPLACE
 
 class LDAPUtilitiesHelper:
