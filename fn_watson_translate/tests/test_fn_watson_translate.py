@@ -60,6 +60,10 @@ class TestFnWatsonTranslateE2E:
                                  (None, "su", "text", {"value": "txet", "confidence": 0.7, "language": "su"},
                                   {"translations": [{"translation": "txet"}]},
                                   {"languages": [{"language": "su", "confidence": 0.7}]}),
+                                 # check that html is stripped
+                                 (None, "su", "<div>text</div>", {"value": "txet", "confidence": 0.7, "language": "su"},
+                                  {"translations": [{"translation": "txet"}]},
+                                  {"languages": [{"language": "su", "confidence": 0.7}]}),
                              ])
     def test_e2e_success(self, translator, circuits_app, source_lang, target_lang, source_text, expected_results,
                      translate_value, identify_value):

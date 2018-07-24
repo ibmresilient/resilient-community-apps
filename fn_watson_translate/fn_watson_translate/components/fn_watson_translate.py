@@ -4,7 +4,7 @@
 """Function implementation"""
 
 import logging
-import lxml.html
+from bs4 import BeautifulSoup
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
@@ -92,7 +92,7 @@ class FunctionComponent(ResilientComponent):
         :return: String
             Stripped of html tags
         """
-        return lxml.html.fromstring(input).text_content()
+        return BeautifulSoup(input).get_text()
 
     def _get_translator(self):
         """

@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'watson_developer_cloud>=1.4.0',
-        'lxml'
+        'bs4'
     ],
     packages=find_packages(),
     include_package_data=True,
