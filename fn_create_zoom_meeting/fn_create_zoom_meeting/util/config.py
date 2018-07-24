@@ -10,6 +10,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     return u"""[create_zoom_meeting]
+zoom_api_url=https://api.zoom.us/v2
 zoom_api_key=
 zoom_api_secret=
 """

@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 import requests
 import json
 import jwt
@@ -8,10 +13,11 @@ from resilient_circuits import FunctionError
 
 
 class ZoomCommon:
-    def __init__(self, key, secret):
+    def __init__(self, api_url, key, secret):
         self.key = key
         self.secret = secret
         self.access_token = ""
+        self.api_url = api_url
 
     @staticmethod
     def generate_auth_token(key, secret):
@@ -20,7 +26,7 @@ class ZoomCommon:
 
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
-        url = "https://api.zoom.us/v2" + path
+        url = self.api_url + path
         if '?' in path:
             url += "&access_token=" + str(self.access_token)
         else:
@@ -120,7 +126,11 @@ class ZoomCommon:
         if not response or response.status_code >= 300 or not response.content:
             raise FunctionError('api call failure: {} on {}'.format(response.status_code, path))
         else:
-            json_data = json.loads(response.text)
+            try:
+                json_data = json.loads(response.text)
+            except ValueError:
+                raise FunctionError("Unable to parse response text")
+
             zoom_host_url = json_data["start_url"]
             zoom_join_url = json_data["join_url"]
 

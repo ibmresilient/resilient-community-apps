@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
@@ -33,8 +36,15 @@ class FunctionComponent(ResilientComponent):
             zoom_password = kwargs.get("zoom_password")  # text
             zoom_record_meeting = kwargs.get("zoom_record_meeting")  # boolean
 
+            if type(zoom_record_meeting) is not bool:
+                zoom_record_meeting = False
+
+            zoom_api_url = self.options.get("zoom_api_url")
             zoom_api_key = self.options.get("zoom_api_key")
             zoom_api_secret = self.options.get("zoom_api_secret")
+
+            if zoom_api_url is None:
+                yield FunctionError("zoom_api_url is not defined in app.config")
 
             if zoom_api_key is None:
                 yield FunctionError("zoom_api_key is not defined in app.config")
@@ -48,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             if zoom_password is None:
                 zoom_password = ""
 
-            self.common = ZoomCommon(zoom_api_key, zoom_api_secret)
+            self.common = ZoomCommon(zoom_api_url, zoom_api_key, zoom_api_secret)
 
             r = self.common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password)
 

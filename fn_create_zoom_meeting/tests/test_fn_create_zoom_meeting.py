@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -49,8 +51,8 @@ def mocked_requests_post(*args, **kwargs):
 
 
 def run_zoom_common_create_meeting():
-    zoom_api_key = "P4NSEjFtQl-uI9KPyk_jBg"  # Fill with zoom api key
-    zoom_api_secret = "eDLSPQUrZYcBdRRsFkjeG0M5dZLD0yLyL89u"  # Fill with zoom api secret
+    zoom_api_key = ""  # Fill with zoom api key
+    zoom_api_secret = ""  # Fill with zoom api secret
 
     zoom_host_email = "x"
     zoom_agenda = "test"
