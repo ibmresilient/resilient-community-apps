@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
 
             # Check status every 'retry' secs up to 'timeout' secs
             (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
-            stta = 1
+
             if status == "OK":
                 yield StatusMessage("Got good status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "OK", "status_message": status_message}
@@ -73,10 +73,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Got error status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "Error", "status_message": status_message}
             elif status == "Unsupported":
-                yield FunctionError("Got unexpected status {0} while retrieving status for BigFix action {1}."
+                raise FunctionError("Got unexpected status {0} while retrieving status for BigFix action {1}."
                                     .format(status_message, bigfix_action_id))
             elif status == "Timedout":
-                yield FunctionError("Timed out getting action status for BigFix action {}".format(bigfix_action_id))
+                raise FunctionError("Timed out getting action status for BigFix action {}".format(bigfix_action_id))
             elif not status:
                 raise ValueError("Function 'poll_action_status' returned bad status {}.".format(status))
 
@@ -87,4 +87,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            log.exception("Exception in Resilient Function for BigFix integration.")
             yield FunctionError()
