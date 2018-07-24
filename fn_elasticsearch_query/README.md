@@ -1,4 +1,18 @@
-Replace this with your own readme.
+# Fn_ElasticSearch_Query
+The ElasticSearch integration allows users of the Resilient Platform to connect to and query an ElasticSearch Database.
+
+The function takes 3 inputs :
+
++ Index (Optional) --> An index to search for data. Default is searching all indices
++ Doc_Type (Optional) --> An type of document to search. Default is searching all doc_types
++ Query (Required) --> The query we will be submitting
+
+Queries provided to the function must be properly formed to work.
+A number of example queries are available when setting up the function in a workflow.
+
+Two options are available for connection:
+HTTP connection to localhost or remote
+HTTPS connection with username:password authentication
 
 ==
 
