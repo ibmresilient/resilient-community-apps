@@ -6,13 +6,14 @@ from setuptools import setup, find_packages
 setup(
     name='fn_elasticsearch_query',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
+    license='MIT',
+    author='Ryan Gordon',
     author_email='you@example.com',
     description="Resilient Circuits Components for 'fn_elasticsearch_query'",
     long_description="Resilient Circuits Components for 'fn_elasticsearch_query'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'elasticsearch>=6.3.0'
     ],
     packages=find_packages(),
     include_package_data=True,

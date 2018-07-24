@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -46,10 +47,6 @@ class FunctionComponent(ResilientComponent):
             log.info("doc_type: %s", doc_type)
             log.info("es_query: %s", es_query)
 
-            # TODO: Remove these logs before finishing
-            log.info("es_datastore_url: %s", ELASTICSEARCH_URL)
-            log.info("es_cafile: %s", ELASTICSEARCH_CERT)
-
             if not es_query:
                 raise ValueError("An elasticsearch query is required")
 
@@ -75,29 +72,28 @@ class FunctionComponent(ResilientComponent):
                 verify_certs=False,
                 cafile=ELASTICSEARCH_CERT)
 
-            # Optional, Yield the cluster name
-            cluster_name = es.info()['cluster_name']
-            yield StatusMessage("ElasticSearch cluster_name:"+cluster_name)
-
             es_results = es.search(index=index, doc_type=doc_type,body=es_query, ignore=[400, 404])
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
                 # Could do some extra stuff with results here
-                yield StatusMessage("Results")
-                yield StatusMessage(json.dumps(es_results["hits"]["hits"]))
+                
             # Check if we have a status attribute indicating an error we could raise
             elif 'status' in es_results:
                 # If we encounter either a 404 (Not found) or 400 error return the reason
-                yield StatusMessage(json.dumps(es_results))
+                
                 if es_results['status'] in (400, 404):
                     # Can raise the root_cause of the failure
-                    log.info(es_results["error"]["root_cause"][1]["reason"])
-                    # Or can raise a basic explanation
-                    raise FunctionError("Exception encounted during query :"+es_results["error"]["reason"])
+                    log.info(es_results["error"]["root_cause"])
+
+                    if es_results['status'] is 400:
+                        # es_results["error"]["root_cause"][1]["reason"] is only available on exceptions of type 400
+                        raise FunctionError("Exception with code 400 encountered. Error: "+es_results["error"]["root_cause"][1]["reason"])
+                    elif es_results['status'] is 404:
+                        # Give reason that 404 happened; index not found?
+                        raise FunctionError("Exception encounted during query :"+es_results["error"]["reason"])
                 
-            # TODO: Remove before finishing
-            #yield StatusMessage(query_results)
+           
             # Prepare the results object
             results = {
                 "query_results": json.dumps(es_results["hits"]["hits"]) 
