@@ -15,7 +15,7 @@ LOG = logging.getLogger(__name__)
 PACKAGE_NAME = "fn_ldap_utilities"
 FUNCTION_NAME = "ldap_utilities_search"
 
-CWD = os.getcwd() + "/tests/"
+MOCK_DATA_PATH = os.getcwd() + "/tests/mock_data/search_specific/"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -23,7 +23,7 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 # Create a fake LDAP server from the info and schema json files
-fake_server = Server.from_definition('my_fake_server', CWD + 'mock_server_info.json', CWD + 'mock_server_schema.json')
+fake_server = Server.from_definition('my_fake_server', MOCK_DATA_PATH + 'mock_server_info.json', MOCK_DATA_PATH + 'mock_server_schema.json')
 
 
 def mocked_server():
@@ -41,7 +41,7 @@ def mocked_connection():
     mocked_connection = Connection(fake_server, user='cn=my_user,ou=test,o=lab', password='my_password',
                                      client_strategy=MOCK_SYNC)
     # Populate the DIT of the fake server with mock entries
-    mocked_connection.strategy.entries_from_json(CWD + 'mock_server_entries.json')
+    mocked_connection.strategy.entries_from_json(MOCK_DATA_PATH + 'mock_server_entries.json')
 
     connection = Mock(return_value=mocked_connection)
     return connection
