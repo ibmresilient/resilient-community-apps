@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_jira'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'html2text'
+        'beautifulsoup4'
     ],
     packages=find_packages(),
     include_package_data=True,
