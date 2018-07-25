@@ -27,7 +27,20 @@ it should contain your actual contact and license information.
 
 To install in "development mode"
 
-    pip install -e ./fn_elasticsearch/
+    pip install -e fn_elasticsearch/
+
+To package for distribution,
+
+    python fn_elasticsearch/setup.py sdist
+
+The resulting .tar.gz file can be installed using
+
+    pip install dist/<filename>.tar.gz
+
+Then to integrate with your resilient circuits enviroment:
+`resilient-circuits customize`
+
+Where you will be prompted on which integrations you want to include.
 
 After installation, the package will be loaded by `resilient-circuits run`.
 
@@ -36,11 +49,3 @@ To uninstall,
 
     pip uninstall fn_elasticsearch
 
-
-To package for distribution,
-
-    python ./fn_elasticsearch/setup.py sdist
-
-The resulting .tar.gz file can be installed using
-
-    pip install <filename>.tar.gz

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+  # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Generate a default configuration-file section for fn_elasticsearch"""
@@ -12,8 +12,8 @@ def config_section_data():
     """
     config_data = u"""[fn_elasticsearch]
 es_datastore_url = <YOUR_URL>
-es_datastore_scheme = https
-es_auth_username = elastic
+es_datastore_scheme = <https OR http>
+es_auth_username = <YOUR_USERNAME>
 es_auth_password = <YOUR_PASSWORD>
 es_cafile = 
 """

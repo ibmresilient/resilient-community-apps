@@ -48,7 +48,6 @@ class TestFnElasticsearchQuery:
             "es_query": es_query
         }
         results = call_fn_elasticsearch_query_function(circuits_app, function_params)
-        print(results)
         assert(results)
 
     @pytest.mark.parametrize("index, doc_type, es_query, expected_results", [
