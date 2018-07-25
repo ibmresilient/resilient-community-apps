@@ -31,19 +31,9 @@ def check_config(opts):
         atd_url = options.get("atd_url")
         atd_username = options.get("atd_username")
         atd_password = options.get("atd_password")
-        timeout_mins = options.get("timeout")
-        if timeout_mins is None:  # Defaults to 30 min
-            timeout_mins = 30
-        elif timeout_mins is not None:
-            timeout_mins = int(timeout_mins)
-        polling_interval = options.get("polling_interval")
-        if polling_interval is None:  # Defaults to 60 sec
-            polling_interval = 60
-        elif polling_interval is not None:
-            polling_interval = int(polling_interval)
-        filePriority = options.get("filePriority")
-        if filePriority is None:  # Defaults to add_to_q
-            filePriority = "add_to_q"
+        timeout_mins = int(options.get("timeout", 30))
+        polling_interval = int(options.get("polling_interval", 60))
+        filePriority = options.get("filePriority", "add_to_q")
         trust_cert = options.get("trust_cert")
 
         if atd_url is None:
@@ -199,10 +189,10 @@ def check_atd_status(g, task_id):
         job_id = submit_json['results']['jobid']
         jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
         res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
-        res_json = json.loads(res.content)
+        res_json = res.json()
         severity = res_json.get("severity")
         if severity < 0:
-            log.info("Severity is {}".format(str(severity)))
+            log.error("Severity is {}".format(str(severity)))
             raise ValueError
         else:
             return True
@@ -212,10 +202,10 @@ def check_atd_status(g, task_id):
         job_id = submit_json['results']['jobid']
         jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
         res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
-        res_json = json.loads(res.content)
+        res_json = res.json()
         severity = res_json.get("severity")
         if severity < 0:
-            log.info("Severity is {}".format(str(severity)))
+            log.error("Severity is {}".format(str(severity)))
             raise ValueError
         else:
             return True

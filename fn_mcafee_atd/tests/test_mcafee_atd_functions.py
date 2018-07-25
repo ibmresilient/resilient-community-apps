@@ -7,7 +7,7 @@ from mock import Mock, patch
 import time
 import os.path
 from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, _get_atd_session_headers, _check_url_ending, submit_url, check_timeout, get_incident_id, check_config
+    check_status_code, _get_atd_session_headers, submit_url, check_timeout, get_incident_id, check_config
 from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
@@ -189,20 +189,6 @@ class TestMcafeeAtdAnalyzeFile:
         except ValueError:
             assert True
 
-    def test_helper_check_url_ending_file(self):
-        url = "https://www.google.com/file.exe"
-        submit_type = _check_url_ending(url)
-
-        # Assert submit type is 3
-        assert submit_type is '3'
-
-    def test_helper_check_url_ending_not_file(self):
-        url = "https://www.google.com/news"
-        submit_type = _check_url_ending(url)
-
-        # Assert submit type is 1
-        assert submit_type is '1'
-
     @patch("requests.get")
     @patch("requests.post")
     def test_file_upload(self, mocked_requests_post, mocked_requests_get):
@@ -257,8 +243,12 @@ class TestMcafeeAtdAnalyzeFile:
         sim_get_content2 = {
             "results": {
                 "istate": 4,
-                "status": "Analysis is complete"
+                "status": "Analysis is complete",
+                "jobid": "1234"
             }
+        }
+        sim_get_content3 = {
+            "severity": "1"
         }
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200)]
@@ -277,14 +267,18 @@ class TestMcafeeAtdAnalyzeFile:
 
         sim_get_content2["results"]["istate"] = 2
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
-                                           self._generateResponse(sim_get_content2, 200)]
+                                           self._generateResponse(sim_get_content2, 200),
+                                           self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content3, 200)]
         r = check_atd_status(creds, '1')
         # Assert analysis is complete
         assert r is True
 
         sim_get_content2["results"]["istate"] = 1
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
-                                           self._generateResponse(sim_get_content2, 200)]
+                                           self._generateResponse(sim_get_content2, 200),
+                                           self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content3, 200)]
         r = check_atd_status(creds, '1')
         # Assert analysis is complete
         assert r is True
@@ -295,7 +289,7 @@ class TestMcafeeAtdAnalyzeFile:
         res = create_report_file(name, type)
 
         # Assert file name and directory and location are returned
-        assert res["report_file_name"] == "McAfeeATD_{}_report.{}".format(name, type)
+        assert res["report_file_name"] == "McAfeeATD_{}.{}".format(name, type)
         assert res.get("report_file") is not None
         assert res.get("tmp_dir") is not None
 
@@ -336,7 +330,7 @@ class TestMcafeeAtdAnalyzeFile:
             mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                                generated_report,
                                                generated_report]
-            res = get_atd_report(creds, '1', "pdf", f.get("report_file"))
+            res = get_atd_report(creds, '1', "pdf", f)
 
             # Assert JSON report is returned
             assert res == generated_report.content
