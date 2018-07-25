@@ -3,12 +3,11 @@
 import requests
 import logging
 from datetime import datetime
-from .authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
 log = logging.getLogger(__name__)
 
 
-class IBMCloudFoundry:
+class IBMCloudFoundryAPI:
     """
         Cloud Foundry Application utility
     """
@@ -19,25 +18,29 @@ class IBMCloudFoundry:
         self.bx_app_details_url = bx_app_details_url + "/{}"
         self.authenticator = authenticator
 
-    def get_bx_app_url(self, guid, action=None):
-        if action is None:
-            return self.bx_app_details_url.format(guid)
-        if action == "start":
-            return self.bx_app_details_url.format(guid) + "/start"
-        if action == "stop":
-            return self.bx_app_details_url.format(guid) + "/stop"
+    def _add_authentication_headers(self, request):
+        """
+        Adds authentication headers to the request.
+        Will overwrite headers with the same name already set.
 
-    def _get_bx_app_guid(self, authorization, app_name):
+        :param request: Dict
+            A dict object that's going to be sent in a request
+        :return: Dict
+            Request object with authentication headers.
+        """
+        return request.update(self.authenticator.get_headers())
+
+    def _get_bx_app_guid(self, app_name):
         oauth_authorization_headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "charset": "utf-8",
-            "authorization": authorization
+            "charset": "utf-8"
         }
+        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
 
         response = requests.get(self.bx_apps_url, headers=oauth_authorization_headers)
         if response.status_code == 200:
-            app_resources = response.json()["resources"];
+            app_resources = response.json()["resources"]
             for resource in app_resources:
                 res_app_name = resource["entity"]["name"]
                 guid = resource["metadata"]["guid"]
@@ -52,9 +55,9 @@ class IBMCloudFoundry:
         oauth_authorization_headers = {
             "accept": "application/json",
             "content-type": "application/json",
-            "charset": "utf-8",
-            "authorization": self.authenticator.get_headers()
+            "charset": "utf-8"
         }
+        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
 
         response = requests.get(self.bx_apps_url, headers=oauth_authorization_headers)
         if response.status_code == 200:
@@ -77,9 +80,10 @@ class IBMCloudFoundry:
 
                 oauth_authorization_headers = {
                     "accept": "application/json",
-                    "charset": "utf-8",
-                    "authorization": self.authenticator.get_headers()
+                    "charset": "utf-8"
                 }
+                oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
+
                 response = requests.get(self.get_bx_app_url(guid), headers=oauth_authorization_headers)
                 if response.status_code == 200:
                     bx_app_metadata = response.json()
@@ -101,16 +105,16 @@ class IBMCloudFoundry:
         return apps_metadata
 
     def _bx_invoke(self, app_name, action_name):
-        authorization = self.authenticator.get_headers()
-        app_guid = self._get_bx_app_guid(authorization, app_name)
+        app_guid = self._get_bx_app_guid(app_name)
         if app_guid is None:
             return None
 
         oauth_authorization_headers = {
             "accept": "application/json",
-            "charset": "utf-8",
-            "authorization": authorization
+            "charset": "utf-8"
         }
+        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
+
         app_status = {}
         response = requests.get(self.get_bx_app_url(app_guid, action_name), headers=oauth_authorization_headers)
         if response.status_code == 200:
@@ -125,35 +129,47 @@ class IBMCloudFoundry:
             log.debug(response)
         return app_status
 
-    @staticmethod
-    def convert_timestamp_to_epoch_time(ts, ts_format="%Y-%m-%dT%H:%M:%SZ"):
-            utc_time = datetime.strptime(ts, ts_format)
-            epoch_time = (utc_time - datetime(1970, 1, 1)).total_seconds()
-            return epoch_time
-
     def _execute_cmd(self, application_name, action_name):
         if action_name == "metadata":
             return self._get_bx_apps_metadata()
         if action_name == "start" or action_name == "stop":
             return self._bx_invoke(application_name, action_name)
 
-    def run(self, application_names, action_name):
+    def get_app_guid(self, application_name):
+        pass
 
+    def get_metadata(self):
+        pass
+
+    def application_metadata(self, application_name):
+        pass
+
+    def run(self, application_names, action_name):
         if application_names is not None:
-            app_names_str = str(application_names).lstrip("[").rstrip("]")
-            app_names = list(app_names_str.split(","))
-            for app_name in app_names:
+            # to allow user path in both a string and a list of strings
+            if not isinstance(application_names, list):
+                application_names = list(application_names)
+
+            for app_name in application_names:
                 log.info("Invoking {} action for {} application".format(action_name, app_name.strip(" ")))
-                ret_value = self._execute_cmd(app_name.strip(" "), action_name)
+                ret_value = self._execute_cmd(app_name, action_name)
         else:
             ret_value = self._execute_cmd(application_names, action_name)
 
         results = {"value": ret_value}
         return results
 
+    @staticmethod
+    def convert_timestamp_to_epoch_time(ts, ts_format="%Y-%m-%dT%H:%M:%SZ"):
+        utc_time = datetime.strptime(ts, ts_format)
+        epoch_time = (utc_time - datetime(1970, 1, 1)).total_seconds()
+        return epoch_time
+
+class App():
+    def __init__(self):
+        pass
 
 if __name__ == "__main__":
-
     api_key2 = "nlbp-C1HCzV-m9g2ZccvirA0VRUAewHoK9JevLOAH6M6"
     bx_apps_url2 = "http://api.ng.bluemix.net/v2/apps"
     bx_api_url2 = "http://api.ng.bluemix.net/info"
@@ -171,3 +187,4 @@ if __name__ == "__main__":
 #     SFZu3mliDuJ_pNXPEc8B_BUqAuOmfjup94i_qkvCBYsO
 # service key: YSzOLtdrtwaZ66YWR3YMaSJKId4u9Zpvoj9ig5K7BK2R
 
+# final staging pTGbVhnA8TbZNMr2X6ENC6tl82QyidedsJWtYlWi5Tof

@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from ..util.cloud_foundry_api import IBMCloudFoundry
+from ..util.cloud_foundry_api import IBMCloudFoundryAPI
 from ..util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
 class FunctionComponent(ResilientComponent):
@@ -43,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             bx_api_url2 = self.options["bx_api_url"]
             bx_app_details_url2 = self.options["bx_app_details_url"]
             authenticator = IBMCloudFoundryAuthenticator(bx_api_url2, api_key2)
-            bx_service = IBMCloudFoundry(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2, authenticator)
+            bx_service = IBMCloudFoundryAPI(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2, authenticator)
             results = bx_service.run(application_names, action_name)
 
             log.info("result: %s", results)
