@@ -3,57 +3,21 @@
 import requests
 import logging
 from datetime import datetime
+from .authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
 log = logging.getLogger(__name__)
 
 
 class IBMCloudFoundry:
     """
-        IBM Bluemix Cloud Foundry Application utility
+        Cloud Foundry Application utility
     """
-    def __init__(self, api_key, bx_api_url, bx_apps_url, bx_app_details_url):
-            self.api_key = api_key
-            self.bx_api_url = bx_api_url
-            self.bx_apps_url = bx_apps_url
-            self.bx_app_details_url = bx_app_details_url + "/{}"
-
-    def _get_bx_oauth_token(self):
-        response = requests.get(self.bx_api_url)
-        if response.status_code == 200:
-            # read authorization end point
-            auth_url = response.json()["authorization_endpoint"]
-            # prepare authorization token endpoint url
-            oauth_token_url = "{}/{}".format(auth_url, "oauth/token")
-            # request grant_type=password&username=apikey&password=myAPIkey
-            oauth_key = {
-                "grant_type": "password",
-                "username":"apikey",
-                "password": self.api_key
-            }
-            oauth_headers = {
-                "content-type":"application/x-www-form-urlencoded",
-                "charset":"utf-8",
-                "accept":"application/json",
-                "authorization": "Basic Y2Y6"
-            }
-
-            response = requests.post(oauth_token_url, headers=oauth_headers, data=oauth_key)
-
-            if response.status_code == 200:
-                oauth_token = response.json()
-                return oauth_token
-            else:
-                log.error("Error getting authorization code: status code {}".format(response.status_code))
-                log.debug(response)
-                raise ValueError("Coudln't retrieve access token from Bluemix")
-        else:
-            log.error("Error connecting to bluemix api server")
-            log.debug(response)
-            raise ValueError("Bluemix CF server not responding")
-
-    def _get_bx_oauth_authorization_header(self):
-        oauth_token = self._get_bx_oauth_token()
-        return "{} {}".format(oauth_token["token_type"], oauth_token["access_token"])
+    def __init__(self, api_key, bx_api_url, bx_apps_url, bx_app_details_url, authenticator):
+        self.api_key = api_key
+        self.bx_api_url = bx_api_url
+        self.bx_apps_url = bx_apps_url
+        self.bx_app_details_url = bx_app_details_url + "/{}"
+        self.authenticator = authenticator
 
     def get_bx_app_url(self, guid, action=None):
         if action is None:
@@ -80,17 +44,16 @@ class IBMCloudFoundry:
                 if app_name == res_app_name:
                     return guid
         else:
-            print "Error while getting bluemix applications metadata"
+            print("Error while getting bluemix applications metadata")
         return None
 
     def _get_bx_apps_metadata(self):
-        authorization = self._get_bx_oauth_authorization_header()
         apps_metadata = []
         oauth_authorization_headers = {
             "accept": "application/json",
             "content-type": "application/json",
             "charset": "utf-8",
-            "authorization": authorization
+            "authorization": self.authenticator.get_headers()
         }
 
         response = requests.get(self.bx_apps_url, headers=oauth_authorization_headers)
@@ -115,7 +78,7 @@ class IBMCloudFoundry:
                 oauth_authorization_headers = {
                     "accept": "application/json",
                     "charset": "utf-8",
-                    "authorization": authorization
+                    "authorization": self.authenticator.get_headers()
                 }
                 response = requests.get(self.get_bx_app_url(guid), headers=oauth_authorization_headers)
                 if response.status_code == 200:
@@ -138,7 +101,7 @@ class IBMCloudFoundry:
         return apps_metadata
 
     def _bx_invoke(self, app_name, action_name):
-        authorization = self._get_bx_oauth_authorization_header()
+        authorization = self.authenticator.get_headers()
         app_guid = self._get_bx_app_guid(authorization, app_name)
         if app_guid is None:
             return None
@@ -199,10 +162,11 @@ if __name__ == "__main__":
 
     auth_url = "https://iam.bluemix.net/identity/token"
 
+    from .authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
-    bx_service = IBMCloudFoundry(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2)
+    bx_service = IBMCloudFoundry(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2,
+                                 IBMCloudFoundryAuthenticator(bx_api_url2, api_key2))
     results = bx_service.run(application_names2, "start")
-    print results
 #     yitd_jXTSnP8J8xg4p4tSDdLVZEspbxASbSNOzbcTMA_  -- key
 #     SFZu3mliDuJ_pNXPEc8B_BUqAuOmfjup94i_qkvCBYsO
 # service key: YSzOLtdrtwaZ66YWR3YMaSJKId4u9Zpvoj9ig5K7BK2R
