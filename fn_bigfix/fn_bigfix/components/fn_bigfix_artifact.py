@@ -44,8 +44,10 @@ class FunctionComponent(ResilientComponent):
         The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
         in JSON format similar to the following.
 
-            {'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 1000,
+            {'hits_count': 1,
+             'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 0,
                                 u'query_id': 1, u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'}]
+             'query_execution_date': '07-17-2018 17:44:21'
             }
         """
     def __init__(self, opts):
@@ -91,20 +93,21 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_artifact")
 
-            yield StatusMessage("Running Query BigFix for Artifact ...")
+            yield StatusMessage("Running BigFix Query for Artifact id {0}, with value {1} ..."
+                                .format(params["artifact_id"], params["artifact_value"] ))
             bigfix_client = BigFixClient(self.options)
 
-            if bigfix_incident_plan_status != 'C':
+            if params["incident_plan_status"] != 'C':
                 # If incident isn't closed
-                if bigfix_artifact_type == "IP Address":
+                if params["artifact_type"] == "IP Address":
                     artifact_data = bigfix_client.get_bf_computer_by_ip(bigfix_artifact_value)
-                elif bigfix_artifact_type == "File Path":
+                elif params["artifact_type"] == "File Path":
                     artifact_data = bigfix_client.get_bf_computer_by_file_path(bigfix_artifact_value)
-                elif bigfix_artifact_type == "Process Name":
+                elif params["artifact_type"] == "Process Name":
                     artifact_data = bigfix_client.get_bf_computer_by_process_name(bigfix_artifact_value)
-                elif bigfix_artifact_type == "Service":
+                elif params["artifact_type"] == "Service":
                     artifact_data = bigfix_client.get_bf_computer_by_service_name(bigfix_artifact_value)
-                elif bigfix_artifact_type == "Registry Key":
+                elif params["artifact_type"] == "Registry Key":
                     artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(bigfix_artifact_value,
                                                                                            params["artifact_properties_name"],
                                                                                            params["artifact_properties_value"])
@@ -119,7 +122,12 @@ class FunctionComponent(ResilientComponent):
                 results = {}
             else:
                 hits = get_hits(artifact_data, params)
-                if len(hits) > int(self.options.get("hunt_results_limit", "200")):
+                if len(hits) == 0:
+                    yield StatusMessage("No hits detected for artifact id '{0}' with value '{1}' and of type '{2}'."
+                                        .format(params["artifact_id"], params["artifact_value"],
+                                                params["artifact_type"]))
+                    results = {}
+                elif len(hits) > int(self.options.get("hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
                     file_name = "query_for_artifact_{0}_{1}_{2}.txt" \
@@ -132,9 +140,14 @@ class FunctionComponent(ResilientComponent):
                                     params["artifact_type"])
                     # Create an attachment
                     att_report = create_attachment(self.rest_client(), file_name, file_content, params)
-                    results = {"hits_over_limit": True, "att_name": att_report["name"]}
+                    results = {"hits_over_limit": True, "att_name": att_report["name"], "hits_count": len(hits)}
                 else:
-                    results = {"endpoint_hits": json.loads(json.dumps(hits))}
+                    query_execution_date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
+                    yield StatusMessage("Adding artifact data as an incident attachment")
+                    results = {"endpoint_hits": json.loads(json.dumps(hits)), "hits_count": len(hits),
+                               "query_execution_date": query_execution_date}
+
+            yield StatusMessage("done...")
 
             log.debug(results)
 

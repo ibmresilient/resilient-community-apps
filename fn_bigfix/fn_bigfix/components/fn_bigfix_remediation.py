@@ -27,17 +27,17 @@ class FunctionComponent(ResilientComponent):
         An example of a set of query parameter might look like the following:
 
                 bigfix_asset_id = 12315195
-                bigfix_artifact_value = /tmp/test.txt
+                bigfix_artifact_value = /tmp/evilfile.txt
                 bigfix_artifact_type = File Path
-                bigfix_incident_id = incident.id
+                bigfix_incident_id = 2095
 
         The BigFix Query will execute a remediation action against a Bigfix server and the Funcxtion returns a status
         result in JSON format similar to the following.
 
-            {'status': 'OK', 'remediation_date': '07-11-2018 10:51:56',
-             'remediation_status': 'BigFix Action Created Successfully.',
-             'status_note': 'Big Fix Integration: Action created successfully to remediate artifact value lfsvc and
-             type Service in asset ID 12315195. BigFix Action ID 75.', 'action_id': '75'
+            {'status': 'OK',
+             'remediation_date': '07-18-2018 10:25:21',
+             'status_message': 'BigFix Action Created Successfully.',
+             'action_id': '119'
             }
     """
     def __init__(self, opts):
@@ -74,31 +74,24 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_remediation")
 
-            yield StatusMessage("Running BigFix remediation for Artifact ...")
+            yield StatusMessage("Running BigFix remediation for Artifact '{0}' on endpoint '{1}' ..."
+                                .format(params["artifact_value"], params["asset_id"]))
             bigfix_client = BigFixClient(self.options)
-
-            # For our purposes, config_key will be the action name
-            map_data = event.message
-            action_name = event.name
-            workflow_name = event.workflow
-            map_data["action_name"] = action_name
-            map_data["workflow_name"] = workflow_name
-            log.debug(json.dumps(map_data, indent=2))
 
             yield StatusMessage("Running BigFix remediation ...")
             # Send a remediation message to BigFix
 
-            if workflow_name == "bigfix_kill_process":
+            if params["artifact_type"]  == "Process Name":
                 response = bigfix_client.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_stop_service":
+            elif params["artifact_type"] == "Service":
                 response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_delete_registry_key":
+            elif params["artifact_type"] == "Registry Key":
                 response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif workflow_name == "bigfix_delete_file":
+            elif params["artifact_type"] == "File Path":
                 response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             else:
-                log.info("Not supported action %s", action_name)
-                raise ValueError("Incorrect value {} for 'action_name'.".format(action_name))
+                log.error("Unsupported artifact type {}.".format(params["artifact_type"]))
+                raise ValueError("Unsupported artifact type {}.".format(params["artifact_type"]))
 
             if response is None:
                 log.debug("Could not create BigFix Action.")
@@ -110,8 +103,10 @@ class FunctionComponent(ResilientComponent):
                 status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \
                                 "and type {1} in asset ID {2}. BigFix Action ID {3}." \
                     .format(params["artifact_value"], params["artifact_type"], params["asset_id"], response)
-                results = {"status": "OK", "status_message": status_message,  "status_note": status_note,
+                results = {"status": "OK", "status_message": status_message,
                            "remediation_date": remediation_date, "action_id": action_id}
+
+            yield StatusMessage("done...")
 
             log.debug(results)
 

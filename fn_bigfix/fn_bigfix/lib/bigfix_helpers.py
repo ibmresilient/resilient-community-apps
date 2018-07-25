@@ -5,6 +5,7 @@
 
 """ Helper functions for Bigfix integration with Resilient circuits Functions  """
 import logging
+import time
 
 # TODO: Check how should be defined this logger
 LOG = logging.getLogger(__name__)
@@ -34,3 +35,39 @@ def get_hits(artifact_data, params):
         LOG.info("Detected no hits")
 
     return hits
+
+def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=1800):
+    """"Poll Bigfix for status of action by id.
+
+    :param bigfix_action_id: Bigfix action id to poll status
+    :param retry_interval: Poll status every 'retry' secs
+    :param retry_timeout: Timeout value for poll status (secs)
+    """
+    finished = False
+    status_message = None
+    status = None
+
+    while retry_timeout >= 0 and not finished:
+        try:
+            status_message = bigfix_client.get_bf_action_status(bigfix_action_id)
+            if status_message:
+                if status_message == "The action executed successfully." or "is not relevant" in status_message:
+                    status = "OK"
+                elif status_message == "The action failed.":
+                    status = "Failed"
+                else:
+                    status = "Unsupported"
+                finished = True
+
+        except Exception as ex:
+            LOG.error(ex)
+            raise ex
+
+        retry_timeout = retry_timeout - retry_interval
+        if retry_timeout > 0 and not finished:
+            time.sleep(retry_interval)
+
+    if not finished:
+        status = "Timedout"
+
+    return (status, status_message)
