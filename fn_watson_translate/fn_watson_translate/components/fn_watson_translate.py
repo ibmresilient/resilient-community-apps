@@ -44,9 +44,9 @@ class FunctionComponent(ResilientComponent):
             # get rid of the HTML tags that notes can have.
             source_text = self._get_text_from_html(source_text)
 
-            log.info("source_lang: %s", source_lang)
-            log.info("target_lang: %s", target_lang)
-            log.info("source_text: %s", source_text)
+            log.info("fn_watson_translate_source_lang: %s", source_lang)
+            log.info("fn_watson_translate_target_lang: %s", target_lang)
+            log.info("fn_watson_translate_source_text: %s", source_text)
 
             if source_lang is None:
                 # get the source language and confidence it is the right language
@@ -76,7 +76,8 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "value": translation["translations"][0]["translation"],
                 "confidence": confidence,
-                "language": target_lang
+                "language": target_lang,
+                "source_lang": source_lang
             }
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -92,7 +93,7 @@ class FunctionComponent(ResilientComponent):
         :return: String
             Stripped of html tags
         """
-        return BeautifulSoup(input).get_text()
+        return BeautifulSoup(input, "html.parser").get_text()
 
     def _get_translator(self):
         """
@@ -103,8 +104,8 @@ class FunctionComponent(ResilientComponent):
                 not self.options["fn_watson_translate_api"]:
             raise ValueError("Options do not have necessary information")
         return LanguageTranslatorV3(
-                iam_api_key=self.options["fn_watson_translate_api"],
                 version=self.options["fn_watson_translate_version"],
+                iam_api_key=self.options["fn_watson_translate_api"],
                 url=self.options["fn_watson_translate_url"]
             )
 
