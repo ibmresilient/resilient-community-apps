@@ -50,14 +50,15 @@ To uninstall,
 
 1. Import the necessary customization data into the Resilient platform after pip installing the function:
 
-		resilient-circuits customize
+    resilient-circuits customize
 
-	This creates the following customization components:
-	* Function inputs: `es_doc_type`, `es_index`, `es_query`
-    * Message Destinations:`fn_elasticsearch`
-    * Functions:`fn_elasticsearch_query`
-    * Workflows:`example_elasticsearch_query_from_artifact`, `example_elasticsearch_query_from_incident`
-    * Rules:`Example: ElasticSearch Query from Artifact`, `Example: ElasticSearch Query from Incident`
+This creates the following customization components:
+
+* Function inputs: `es_doc_type`, `es_index`, `es_query`
+* Message Destinations:`fn_elasticsearch`
+* Functions:`fn_elasticsearch_query`
+* Workflows:`example_elasticsearch_query_from_artifact`, `example_elasticsearch_query_from_incident`
+* Rules:`Example: ElasticSearch Query from Artifact`, `Example: ElasticSearch Query from Incident`
 
 2. Update and edit `app.config`:
 
