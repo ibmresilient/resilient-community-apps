@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 
 from setuptools import setup, find_packages
 
@@ -7,8 +8,8 @@ setup(
     name='fn_calendar_invite',
     version='1.0.0',
     license='MIT',
-    author='Craig Roberts',
-    author_email='craig.roberts@uk.ibm.com',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_calendar_invite'",
     long_description="Resilient Circuits Components for 'fn_calendar_invite'",
     install_requires=[
