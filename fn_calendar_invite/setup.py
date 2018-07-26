@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from setuptools import setup, find_packages
+
+setup(
+    name='fn_calendar_invite',
+    version='1.0.0',
+    license='MIT',
+    author='Craig Roberts',
+    author_email='craig.roberts@uk.ibm.com',
+    description="Resilient Circuits Components for 'fn_calendar_invite'",
+    long_description="Resilient Circuits Components for 'fn_calendar_invite'",
+    install_requires=[
+        'resilient_circuits>=30.0.0',
+        'email'
+    ],
+    packages=find_packages(),
+    include_package_data=True,
+    platforms='any',
+    classifiers=[
+        'Programming Language :: Python',
+    ],
+    entry_points={
+        "resilient.circuits.components": [
+            "CalendarInviteFunctionComponent = fn_calendar_invite.components.calendar_invite:FunctionComponent"
+        ],
+        "resilient.circuits.configsection": ["gen_config = fn_calendar_invite.util.config:config_section_data"],
+        "resilient.circuits.customize": ["customize = fn_calendar_invite.util.customize:customization_data"]
+    }
+)
