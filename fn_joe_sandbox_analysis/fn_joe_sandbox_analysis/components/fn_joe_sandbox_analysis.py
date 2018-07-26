@@ -206,10 +206,10 @@ class FunctionComponent(ResilientComponent):
             proxies = {}
 
             if (HTTP_PROXY):
-              proxies["HTTP"] = HTTP_PROXY
+              proxies["http"] = HTTP_PROXY
             
             if (HTTPS_PROXY):
-              proxies["HTTPS"] = HTTPS_PROXY
+              proxies["https"] = HTTPS_PROXY
             
             if (len(proxies) == 0):
               proxies = None
