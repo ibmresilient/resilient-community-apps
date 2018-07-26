@@ -36,6 +36,18 @@ class FunctionComponent(ResilientComponent):
             zoom_password = kwargs.get("zoom_password")  # text
             zoom_record_meeting = kwargs.get("zoom_record_meeting")  # boolean
 
+            if zoom_host_email is None:
+                yield FunctionError("zoom_host_email is a required argument")
+
+            if zoom_topic is None:
+                zoom_topic = ""
+
+            if zoom_agenda is None:
+                zoom_agenda = ""
+
+            if zoom_password is None:
+                zoom_password = ""
+
             if type(zoom_record_meeting) is not bool:
                 zoom_record_meeting = False
 
