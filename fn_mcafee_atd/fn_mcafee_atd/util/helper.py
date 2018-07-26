@@ -7,9 +7,75 @@ import json
 import tempfile
 import shutil
 import time
-from resilient_circuits import FunctionError, StatusMessage
+from resilient_circuits import FunctionError
+import configparser
+import io
+from fn_mcafee_atd.util.config import config_section_data
 
 log = logging.getLogger(__name__)
+
+
+def check_config(opts):
+    # Read from default config file
+    buf = io.StringIO(config_section_data())
+    parser = configparser.RawConfigParser(allow_no_value=True)
+    parser.read_file(buf)
+    default_config = dict(parser.items("fn_mcafee_atd"))
+
+    options = opts.get("fn_mcafee_atd", {})
+    if options == {}:
+        log.error("There is no [fn_mcafee_atd] section in the config file, "
+                  "please set that by running resilient-circuits config -u")
+        raise ValueError("[fn_mcafee_atd] section is not set in the config file")
+    else:
+        atd_url = options.get("atd_url")
+        atd_username = options.get("atd_username")
+        atd_password = options.get("atd_password")
+        timeout_mins = int(options.get("timeout", 30))
+        polling_interval = int(options.get("polling_interval", 60))
+        filePriority = options.get("filePriority", "add_to_q")
+        trust_cert = options.get("trust_cert")
+
+        if atd_url is None:
+            log.error("atd_url is not set. You must set this value to run this function")
+            raise ValueError("atd_url is not set. You must set this value to run this function")
+        elif atd_url == default_config["atd_url"]:
+            log.error("atd_url is still the default value, this must be changed to run this function")
+            raise ValueError("atd_url is still the default value, this must be changed to run this function")
+
+        if atd_username is None:
+            log.error("atd_username is not set. You must set this value to run this function")
+            raise ValueError("atd_username is not set. You must set this value to run this function")
+        elif atd_username == default_config["atd_username"]:
+            log.error("atd_username is still the default value, this must be changed to run this function")
+            raise ValueError("atd_username is still the default value, this must be changed to run this function")
+
+        if atd_password is None:
+            log.error("atd_password is not set. You must set this value to run this function")
+            raise ValueError("atd_password is not set. You must set this value to run this function")
+        elif atd_password == default_config["atd_password"]:
+            log.error("atd_password is still the default value, this must be changed to run this function")
+            raise ValueError("atd_password is still the default value, this must be changed to run this function")
+
+        if trust_cert != "True" and trust_cert != "False":
+            log.error("trust_cert is not set correctly, please set to True or False to run this function")
+            raise ValueError("trust_cert is not set correctly, please set to True or False to run this function")
+        else:
+            if trust_cert == "True":
+                trust_cert = True
+            else:
+                trust_cert = False
+
+        ret_dict = {
+            "atd_url": atd_url,
+            "atd_username": atd_username,
+            "atd_password": atd_password,
+            "timeout_mins": timeout_mins,
+            "polling_interval": polling_interval,
+            "filePriority": filePriority,
+            "trust_cert": trust_cert
+        }
+        return ret_dict
 
 
 def _get_atd_session_headers(g):
@@ -42,7 +108,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
     data_dict = {
             "data": {
-                "vmProfileList": g.vm_profile_list,
                 "submitType": submit_type,
                 "url": url
             },
@@ -67,28 +132,6 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
     return response
 
 
-def _check_url_ending(url):
-    file_endings = [
-        ".aif", ".cda", ".mid", ".mp3", ".mpa", ".ogg", ".wav", ".wma", ".wpl", ".7z", ".arj", ".deb", ".pkg", ".rar",
-        ".rpm", ".tar.gz", ".z", ".zip", ".bin", ".dmg", ".iso", ".toast", ".vcd", ".csv", ".dat", ".db", ".dbf",
-        ".log", ".mdb", ".sav", ".sql", ".tar", ".xml", ".apk", ".bat", ".jar", ".cgi", ".com", ".exe", ".gadget",
-        ".py", ".wsf", ".fnt", ".fon", ".otf", ".ttf", ".ai", ".bmp", ".gif", ".ico", ".jpeg", ".png", ".ps", ".psd",
-        ".svg", ".tif", ".tiff", ".asp", ".part", ".cer", ".cfm", ".css", ".key", ".odp", ".pps", ".ppt", ".pptx", ".c",
-        ".class", ".cpp", ".cs", ".h", ".java", ".sh", ".swift", ".vb", ".ods", ".xlr", ".xls", ".xlsx", ".bak", ".cab",
-        ".cgf", ".cur", ".dll", ".dmp", ".drv", ".icns", ".ini", ".lnk", ".msi", ".sys", ".tmp", ".3g2", ".3gp", ".avi",
-        ".flv", ".h264", ".m4v", ".mkv", ".mov", ".mp4", ".mpg", ".mpeg", ".rm", ".swf", ".vob", ".wmv", ".doc",
-        ".docx", ".odt", ".pdf", ".rtf", ".tex", ".txt", ".wks", ".wps", ".wpd"
-    ]
-    e = url.rfind('.')
-    potential_file_ending = url[e:]
-    # Per the McAfee documentation, 3 is used if the URL includes a file to download, while 1 is used to just analyze
-    # a URL
-    if potential_file_ending.lower() in file_endings:
-        return '3'
-    else:
-        return '1'
-
-
 def check_status_code(response):
     if response.status_code > 299 or response.status_code < 200:
         raise ValueError("Request not successful")
@@ -100,10 +143,10 @@ def create_report_file(name, type):
     report_file = temp_f[1]
 
     # If it is a URL change certain characters as file names won't be uploaded correctly
-    for c in [":", "/", "http", "https"]:
+    for c in [":", "/", "https", "http"]:
         if name.find(c) > -1:
             name = name.replace(c, '')
-    report_file_name = "{}_report.{}".format(name, type)
+    report_file_name = "McAfeeATD_{}.{}".format(name, type)
     file_location = {
         "report_file_name": report_file_name,
         "report_file": report_file,
@@ -124,10 +167,8 @@ def submit_file(g, f, file_name):
 
 
 def submit_url(g, url, submit_type=None):
-    if submit_type is not None:
-        return _file_upload(g, submit_type, url=url)
-    else:
-        return _file_upload(g, _check_url_ending(url), url=url)
+    # Submit url to atd
+    return _file_upload(g, submit_type, url=url)
 
 
 # A loop to check if the analysis for a job has completed - need to add handling for -1 which is failed analysis
@@ -137,15 +178,39 @@ def check_atd_status(g, task_id):
     check_status_code(submission_status)
     submit_json = submission_status.json()
     if submit_json['results']['istate'] == 4:
+        log.debug("Waiting in queue")
         return False
     elif submit_json['results']['istate'] == 3:
+        log.debug("Being analyzed")
         return False
     elif submit_json['results']['istate'] == 1:
-        log.debug("ATD Analysis Status: {}".format(submit_json['results']['status']))
-        return True
+        status = submit_json['results']['status']
+        log.debug("ATD Analysis Status: {}".format(status))
+        job_id = submit_json['results']['jobid']
+        jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
+        res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+        res_json = res.json()
+        severity = res_json.get("severity")
+        if severity < 0:
+            log.error("Severity is {}".format(str(severity)))
+            raise ValueError
+        else:
+            return True
     elif submit_json['results']['istate'] == 2:
-        log.debug("ATD Analysis Status: {}".format(submit_json['results']['status']))
-        return True
+        status = submit_json['results']['status']
+        log.debug("ATD Analysis Status: {}".format(status))
+        job_id = submit_json['results']['jobid']
+        jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
+        res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+        res_json = res.json()
+        severity = res_json.get("severity")
+        if severity < 0:
+            log.error("Severity is {}".format(str(severity)))
+            raise ValueError
+        else:
+            return True
+    elif submit_json['results']['istate'] == -1:
+        raise ValueError
 
 
 # Gets the report from ATD
@@ -158,7 +223,7 @@ def get_atd_report(g, taskId, report_type, report_file):
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
         check_status_code(response)
 
-        with open(report_file, 'wb') as f:
+        with open(report_file.get("report_file"), 'wb') as f:
             f.write(response.content)
             log.info("Saved ATD report")
 
@@ -187,10 +252,3 @@ def get_incident_id(**kwargs):
         raise FunctionError("incident_id is required")
     else:
         return incident_id
-
-
-def upload_attachment(resilient_client, incident_id, report_file):
-    if report_file is not None:
-        response = resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                              report_file["report_file"], filename=report_file["report_file_name"])
-        yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))

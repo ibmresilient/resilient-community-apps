@@ -4,12 +4,8 @@
 
 import logging
 import time
-try:
-    from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, check_timeout, get_incident_id
-except:
-    from fn_mcafee_atd.fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-        check_status_code, check_timeout, get_incident_id
+from fn_mcafee_atd.util.helper import submit_url, check_atd_status, get_atd_report, create_report_file, remove_dir, \
+    check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -21,48 +17,19 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        try:
-            self.options = opts.get("fn_mcafee_atd", {})
-            self.atd_url = self.options.get("atd_url")
-            self.atd_username = self.options.get("atd_username")
-            self.atd_password = self.options.get("atd_password")
-            self.timeout_mins = int(self.options.get("timeout"))
-            if self.timeout_mins is None:  # Defaults to 30 min
-                self.timeout_mins = 30
-            self.polling_interval = int(self.options.get("polling_interval"))
-            if self.polling_interval is None:  # Defaults to 60 sec
-                self.polling_interval = 60
-            self.vm_profile_list = self.options.get("vm_profile_list")
-            self.filePriority = self.options.get("filePriority")
-            if self.filePriority is None:  # Defaults to add_to_q
-                self.filePriority = "add_to_q"
-            self.trust_cert = self.options.get("trust_cert")
-            if self.trust_cert is None:  # Defaults to False
-                self.trust_cert = False
+        # check_config is handling all of the error checking
+        config_opts = check_config(opts)
+        self.atd_url = config_opts.get("atd_url")
+        self.atd_username = config_opts.get("atd_username")
+        self.atd_password = config_opts.get("atd_password")
+        self.timeout_mins = config_opts.get("timeout_mins")
+        self.polling_interval = config_opts.get("polling_interval")
+        self.vm_profile_list = config_opts.get("vm_profile_list")
+        self.filePriority = config_opts.get("filePriority")
+        self.trust_cert = config_opts.get("trust_cert")
 
-            if self.atd_url is None:
-                log.error("atd_url is not set. You must set this value to run this function")
-                raise ValueError("atd_url is not set. You must set this value to run this function")
-
-            if self.atd_username is None:
-                log.error("atd_username is not set. You must set this value to run this function")
-                raise ValueError("atd_username is not set. You must set this value to run this function")
-
-            if self.atd_password is None:
-                log.error("atd_password is not set. You must set this value to run this function")
-                raise ValueError("atd_password is not set. You must set this value to run this function")
-
-            if self.vm_profile_list is None:
-                log.error("vmProfileList is not set. You must set this value to run this function")
-                raise ValueError("vmProfileList is not set. You must set this value to run this function")
-
-        except AttributeError:
-            log.error("There is no [fn_mcafee_atd] section in the config file, "
-                      "please set that by running resilient-circuits config -u")
-            raise AttributeError("[fn_mcafee_atd] section is not set in the config file")
-
-        # Create Resilient Rest client
-        self.resilient_client = self.rest_client()
+        # Verify can make connection to ATD with given config values
+        _get_atd_session_headers(self)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -91,6 +58,7 @@ class FunctionComponent(ResilientComponent):
                 log.info("artifact_id: %s", artifact_id)
                 inputs["artifact_id"] = artifact_id
             if url_to_analyze is not None:
+                yield StatusMessage("URL value: {}".format(url_to_analyze))
                 log.info("artifact_value: $s", url_to_analyze)
                 inputs["artifact_value"] = url_to_analyze
             if atd_report_type is not None:
@@ -105,6 +73,8 @@ class FunctionComponent(ResilientComponent):
                 submit_type = '1'
             elif atd_url_submit_type == "Download and analyze file from URL":
                 submit_type = '3'
+            else:
+                yield FunctionError("atd_url_submit_type is not set correctly.")
             response = submit_url(self, url_to_analyze, submit_type)
             check_status_code(response)
             content = response.json()
@@ -118,18 +88,25 @@ class FunctionComponent(ResilientComponent):
 
             timeout_seconds = self.timeout_mins * 60
             start = time.time()
-            while check_atd_status(self, atd_task_id) is False:
-                check_timeout(start, self.polling_interval, timeout_seconds)
+            try:
+                while check_atd_status(self, atd_task_id) is False:
+                    yield StatusMessage("Analysis on {} is still running".format(url_to_analyze))
+                    check_timeout(start, self.polling_interval, timeout_seconds)
+            except ValueError:
+                yield StatusMessage("ATD analysis probably failed, please check ATD system.")
+                raise FunctionError()
 
             yield StatusMessage("Analysis Completed")
             if atd_report_type == "pdf" or atd_report_type == "html":
                 yield StatusMessage("Obtaining {} report".format(atd_report_type))
                 report_file = create_report_file(url_to_analyze, atd_report_type)
 
-            results = get_atd_report(self, atd_task_id, atd_report_type, report_file["report_file"])
+            results = get_atd_report(self, atd_task_id, atd_report_type, report_file)
 
             if report_file is not None:
-                self.resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+                # Create Resilient Rest client
+                resilient_client = self.rest_client()
+                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
                                                   report_file["report_file"], filename=report_file["report_file_name"])
                 yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
 
@@ -142,7 +119,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             log.info(e)
-            raise FunctionError()
+            yield FunctionError("Failed")
         finally:
             if report_file is not None:
                 remove_dir(report_file["tmp_dir"])

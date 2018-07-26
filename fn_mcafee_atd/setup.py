@@ -22,7 +22,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "McafeeAtdAnalyzeFileFunctionComponent = fn_mcafee_atd.components.mcafee_atd_analyze_file:FunctionComponent"
+            "McafeeAtdAnalyzeFileFunctionComponent = fn_mcafee_atd.components.mcafee_atd_analyze_file:FunctionComponent",
+            "McafeeAtdAnalyzeUrlFunctionComponent = fn_mcafee_atd.components.mcafee_atd_analyze_url:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mcafee_atd.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mcafee_atd.util.customize:customization_data"]
