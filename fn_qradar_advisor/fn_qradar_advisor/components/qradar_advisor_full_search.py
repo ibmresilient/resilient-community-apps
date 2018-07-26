@@ -95,7 +95,11 @@ class FunctionComponent(ResilientComponent):
             # no insights
             #
             summary = "Full search of indicator {} returns {} observables.".format(qradar_advisor_search_value,
-                                                                                    str(len(observables)))
+                                                                                   str(len(observables)))
+            if len(observables) == 1 or len(observables) == 0:
+                summary = "Full search of indicator {} returns {} observable.".format(qradar_advisor_search_value,
+                                                                                      str(len(observables)))
+
             results = {
                 "observables": observables,
                 "note": html_str,
