@@ -37,14 +37,14 @@ class FunctionComponent(ResilientComponent):
             ELASTICSEARCH_USERNAME = helper.get_config_option("es_auth_username", True)
             ELASTICSEARCH_PASSWORD = helper.get_config_option("es_auth_password", True)
             # Get the function parameters:
-            index = kwargs.get("es_index")  # text
-            doc_type = kwargs.get("es_doc_type")  # text
+            es_index = kwargs.get("es_index")  # text
+            es_doc_type = kwargs.get("es_doc_type")  # text
             es_query = self.get_textarea_param(kwargs.get("es_query"))  # textarea
 
             
             log = logging.getLogger(__name__)
-            log.info("index: %s", index)
-            log.info("doc_type: %s", doc_type)
+            log.info("index: %s", es_index)
+            log.info("doc_type: %s", es_doc_type)
             log.info("es_query: %s", es_query)
 
             if not es_query:
@@ -60,25 +60,30 @@ class FunctionComponent(ResilientComponent):
 
             if not ELASTICSEARCH_CERT:
                 yield StatusMessage("No Cafile found in app.config. Attempting connection without")
-            
-            if ELASTICSEARCH_SCHEME == 'https':
-                # Attempt to create an SSL context, should work fine if no CERT is provided
-                if ELASTICSEARCH_CERT is None:
-                    context = create_default_context()
+            try:
+                if ELASTICSEARCH_SCHEME.lower() == 'https':
+                    # Attempt to create an SSL context, should work fine if no CERT is provided
+                    if ELASTICSEARCH_CERT is None:
+                        context = create_default_context()
+                    else: 
+                        
+                        context = create_default_context(cafile=ELASTICSEARCH_CERT)
+                    # Connect to the ElasticSearch instance 
+                    es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() +"://"+ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME,ELASTICSEARCH_PASSWORD)) 
                 else: 
-                    
-                    context = create_default_context(cafile=ELASTICSEARCH_CERT)
-                # Connect to the ElasticSearch instance 
-                es = Elasticsearch(ELASTICSEARCH_SCHEME +"://"+ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME,ELASTICSEARCH_PASSWORD)) 
-            else: 
-                # Connect without to Elastic without HTTPS
-                es = Elasticsearch([ELASTICSEARCH_URL], 
-                verify_certs=False,
-                cafile=ELASTICSEARCH_CERT)
+                    # Connect without to Elastic without HTTPS
+                    es = Elasticsearch([ELASTICSEARCH_URL], 
+                    verify_certs=False,
+                    cafile=ELASTICSEARCH_CERT)
+            except:
+                raise FunctionError("Encountered error while connecting to ElasticSearch")
             # Start query results as None
             query_results = None 
 
-            es_results = es.search(index=index, doc_type=doc_type,body=es_query, ignore=[400, 404])
+            try:
+                es_results = es.search(index=es_index, doc_type=es_doc_type,body=es_query, ignore=[400, 404])
+            except:
+                raise FunctionError("Encountered error while submitting query to ElasticSearch")
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
@@ -104,7 +109,8 @@ class FunctionComponent(ResilientComponent):
                 
            # Prepare the results object
             results = {
-                "query_results": query_results 
+                "query_results": query_results,
+                "success": (True if query_results is not None else False)
             }
             
             yield StatusMessage("done...")
