@@ -46,6 +46,7 @@ def poll_retry_sleep(retry_timeout, retry_interval, finished):
     retry_timeout = retry_timeout - retry_interval
     if retry_timeout > 0 and not finished:
         time.sleep(retry_interval)
+    return retry_timeout
 
 def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=1800):
     """"Poll Bigfix for status of action by id.
@@ -68,7 +69,7 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
                     status = "Failed"
                 elif status_message == "Evaluating relevance and action constraints." or status_message == \
                         "The action is currently running.":
-                    poll_retry_sleep(retry_timeout, retry_interval, finished)
+                    retry_timeout = poll_retry_sleep(retry_timeout, retry_interval, finished)
                     continue
                 else:
                     status = "Unsupported"
@@ -78,8 +79,8 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
             LOG.error(ex)
             raise ex
 
-        poll_retry_sleep(retry_timeout, retry_interval, finished)
-
+        retry_timeout = poll_retry_sleep(retry_timeout, retry_interval, finished)
+    test=1
     if not finished:
         status = "Timedout"
 
