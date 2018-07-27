@@ -77,13 +77,11 @@ class TestUtilitiesExtractSslCertFromUrl:
         else:
 
             results = call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
-            # assert(results['successful'] == expected_results['successful'])  # Assert we actually have some results
             if results['successful']:
                 assert (isinstance(
                     OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, json.loads(results['certificate'])),
                     X509))  # Assert our successful results are of type X509
             else:
-                # assert(results['certificate'] == 'null')
                 assert (isinstance(results['certificate'], type(None)))
 
     @pytest.mark.parametrize("https_url, expected_results", [
@@ -123,7 +121,6 @@ class TestUtilitiesExtractSslCertFromUrl:
 
         else:
             results = call_utilities_extract_ssl_cert_from_url_function(circuits_app, function_params)
-            # assert(results['successful'] == expected_results['successful'])  # Assert we actually have some results
             if results['successful']:
                 assert (self.is_json(results['certificate']))
             else:  # IF the success flag is false; there should be a result

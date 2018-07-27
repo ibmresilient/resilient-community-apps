@@ -18,7 +18,7 @@ import datetime
 import tempfile
 import OpenSSL # Used for certificates
 from cryptography import x509 # Used for certificates
-from cryptography.x509 import DNSName, ExtensionNotFound, ExtensionOID, NameOID
+from cryptography.x509 import DNSName, ExtensionNotFound, ExtensionOID
 from cryptography.hazmat.backends import default_backend
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
     @function("utilities_parse_ssl_certificate")
     def _utilities_parse_ssl_certificate_function(self, event, *args, **kwargs):
         """Function: Takes in an SSL Certificate.
-        Attempts to parse information from this certificate and save it as a note
+        Attempts to parse information from this certificate and return it for use.
         
         results =
         {
@@ -53,83 +53,66 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             client = self.rest_client()
 
-            if certificate is None and (artifact_id or incident_id is None):
-                raise FunctionError("Error: Either a certificate string, \
+            if certificate is None and (bool(artifact_id) or bool(incident_id)):
+                raise ValueError("Error: Either a certificate string, \
                     or BOTH artifact_id and incident_id must be supplied.")
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-            # If certificate is none then it try to parse it either by JSON artifact
-            if certificate is not None:
 
-                try:  # Try catch inside a try catch ?
-                    yield StatusMessage("Attempting to parse the cert as JSON")
-                    parsed_cert_json = json.loads(certificate)
-                    # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
-                    parsed_cert_openssl = OpenSSL.crypto.load_certificate(
-                        OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
-                    # Load cert also with cryptography; this package has better date attributes
-                    parsed_cert_crypto = x509.load_pem_x509_certificate(
-                        str(parsed_cert_json), default_backend())
-                    
-                except ValueError:
-                    yield StatusMessage('Problem encountered loading the certificate as JSON.')
-                    yield StatusMessage('Attempting to load from REST API instead.')
-                    """
-                        2 Possible causes for reaching this ValueError
-                        -- Non valid JSON was provided; Maybe malformed cert
-                        -- A file was provided and the filename threw exception
+            try:  # Try catch inside a try catch ?
+                yield StatusMessage("Attempting to parse the cert as JSON")
+                parsed_cert_json = json.loads(certificate)
+                # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
+                parsed_cert_openssl = OpenSSL.crypto.load_certificate(
+                    OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
+                # Load cert also with cryptography; this package has better date attributes
+                parsed_cert_crypto = x509.load_pem_x509_certificate(
+                    str(parsed_cert_json), default_backend())
+                
+            except ValueError:
+                yield StatusMessage('Problem encountered loading the certificate as JSON.')
+                yield StatusMessage('Attempting to load from REST API instead.')
+                """
+                    2 Possible causes for reaching this ValueError
+                    -- Non valid JSON was provided; Maybe malformed cert
+                    -- A file was provided and the filename threw exception
 
-                        In the case of cause 2 try to load the file using the rest API
-                    """
-                    # Get the artifact from the REST API
-                    artifact_data = self._get_binary_data_from_file(client, incident_id, artifact_id)
+                    In the case of cause 2 try to load the file using the rest API
+                """
+                # Get the artifact from the REST API
+                artifact_data = self._get_binary_data_from_file(client, incident_id, artifact_id)
+                parsed_cert_openssl = OpenSSL.crypto.load_certificate(
+                    OpenSSL.crypto.FILETYPE_PEM, artifact_data)
 
-                    # Create a temporary file to write the binary data to.
-                    with tempfile.NamedTemporaryFile('w+b', bufsize=0) as temp_file:
-                        # Write binary data to a temporary file.
-                        temp_file.write(artifact_data)
-                        # Load our new temporary file for parsing
-                        st_cert = open(temp_file.name, 'rt').read()
-                        # Load the cert into PyOpenSSL;
-                        parsed_cert_openssl = OpenSSL.crypto.load_certificate(
-                            OpenSSL.crypto.FILETYPE_PEM, st_cert)
-
-                        # Load cert also with cryptography; this package has better date attributes
-                        parsed_cert_crypto = x509.load_pem_x509_certificate(
-                            st_cert, default_backend())
-
-                #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
-                #  Some fields must be serialised into JSON in order to be compatible with STOMP
-                results = {
-
-                    "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
-                    "notBefore": str(parsed_cert_crypto.not_valid_before),
-                    "notAfter": str(parsed_cert_crypto.not_valid_after),
-                    "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
-                    "version": parsed_cert_openssl.get_version(),
-                    "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
-                    "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
-                    "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey()),
-                    "extensions": {
-                        "subjectAltNames": json.dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
-                        "basicConstraints":json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
-                        "issuerAltNames": json.dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
-                    }
-
+                # Load cert also with cryptography; this package has better date attributes
+                parsed_cert_crypto = x509.load_pem_x509_certificate(
+                    artifact_data, default_backend())
+                
+            #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
+            #  Some fields must be serialised into JSON in order to be compatible with STOMP
+            results = {
+                "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
+                "notBefore": str(parsed_cert_crypto.not_valid_before),
+                "notAfter": str(parsed_cert_crypto.not_valid_after),
+                "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
+                "version": parsed_cert_openssl.get_version(),
+                "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
+                "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
+                "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey()),
+                "extensions": {
+                    "subjectAltNames": json.dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
+                    "basicConstraints":json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
+                    "issuerAltNames": json.dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
                 }
-                # Return the formatted data we have received.
-                yield StatusMessage("Finishing...")
-                yield FunctionResult(results)
+
+            }
+            # Return the formatted data we have received.
+            yield StatusMessage("Finishing...")
+            yield FunctionResult(results)
         
-        except Exception as e:
-            # Might be handy for figuring out if the user error came from them submitting a cert that isint PEM format
-            if str(e) == "[('PEM routines', 'PEM_read_bio', 'no start line')]":
-                log.info("Caught exception of type "+str(e))
-                raise FunctionError("Error: No PEM start line found, \
-                    \n Only PEM certificates are supported.")
-            else:
-                yield FunctionError() 
+        except Exception:
+            yield FunctionError()
 
             
 
@@ -180,7 +163,7 @@ class FunctionComponent(ResilientComponent):
         return data
     """
     Takes in 1 params
-    :certificate -- REST client to be used
+    :certificate -- Certificate string we are checking
 
     Attempts to gather the subject alternative names for a cert
     """
@@ -198,7 +181,7 @@ class FunctionComponent(ResilientComponent):
         return subj_alt_names
     """
     Takes in 1 params
-    :certificate -- REST client to be used
+    :certificate -- Certificate string we are checking
 
     Attempts to gather the issuer alternative names for a cert
     """

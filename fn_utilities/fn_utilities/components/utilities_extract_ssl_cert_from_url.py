@@ -21,7 +21,7 @@ except ImportError:
 import logging
 import ssl
 import json
-from resilient_circuits import ResilientComponent, function, StatusMessage,\
+from resilient_circuits import ResilientComponent, function,\
      FunctionResult, FunctionError
 
 
@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
             log.info("https_url: %s", https_url)
 
             if https_url is None:
-                raise FunctionError("Error: https_url must be specified.")
+                raise ValueError("Error: https_url must be specified.")
 
             url_dict = urlparse.urlparse(https_url)
             certificate = None  # Init x509 as None and try to gather the cert
@@ -82,11 +82,12 @@ class FunctionComponent(ResilientComponent):
                 sock = context.wrap_socket(conn, server_hostname=url_dict.hostname)
                 certificate = ssl.DER_cert_to_PEM_cert(sock.getpeercert(True))
             except Exception:
-                raise FunctionError("Problem encountered while parsing the cert.")
+                raise KeyError("Problem encountered while parsing the cert.")
 
             finally:
                 # Close the connection once we have what we want
-                conn.close() 
+                if conn:
+                    conn.close() 
             # Prepares a JSON object from the get_server_certificate function result
             serialized_cert = json.dumps(certificate, default=lambda o: o.__dict__,
                                          sort_keys=True, indent=4)
