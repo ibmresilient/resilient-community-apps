@@ -1,20 +1,37 @@
-# URLScan Threat Searcher
+# URLScan IO Threat Searcher
 
-This implements a custom threat service for the [urlscan.io](https://urlscan.io/).
+This implements a custom threat service for the 
+[urlscan.io](https://urlscan.io/).
 
 This integration does *not* submit URLs to urlscan.io.  It only searches existing URLs that have previously been
 submitted for public scan (private scans do not appear in search results).  If the site has been scanned, and is
-marked as malicious by urlscan.io, the searcher returns a "Hit".
+marked as malicious by urlscan.io, the searcher returns a one or more "Hit/s".
 
+To query urlscan.io Search API user does not need to provide API key.
 
-## Installation
+Prerequisites
+```
+resilient
+resilient_circuits
+rc-webserver
+rc-cts
+```
 
-Install this package with 'pip', or `python setup.py install`.
+## Environment
+
+To install in "development mode"
+    `pip install -e ./rc-cts-urlscanio/`
+or 
+    `python setup.py install`.
+
+To configure the urlscanio, run `resilient-circuits config [-u | -c]`. 
+
+Then edit the `[urlscanio]` template with an optional setting search_size.
+
 Run with: `resilient-circuits run`.
 
 To register this custom threat service with Resilient:
-(if your `resilient-circuits` is running at IP address 10.10.10.1)
 ```
-    sudo resutil threatserviceedit -name "urlscan.io"  -resturl http://10.10.10.1:9000/cts/usio
+    sudo resutil threatserviceedit -name "urlscan.io"  -resturl http://<resilient_circuits_url>:9000/cts/usio
     sudo resutil threatservicetest -name "urlscan.io"
 ```

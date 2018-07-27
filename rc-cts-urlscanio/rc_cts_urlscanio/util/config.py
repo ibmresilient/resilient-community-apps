@@ -10,10 +10,9 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[urlscanio]
-# API key for urlscan.io
-urlscanio_api_key=xxx
-
-# Optional timeout (seconds)
-# timeout=300
+# Optional setting
+# Number of results returned. 
+# Comment out this line to return 100 results - the default.
+urlscan_io_search_size=10
     """
     return config_data
