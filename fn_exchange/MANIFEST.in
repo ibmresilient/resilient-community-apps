@@ -1,0 +1,3 @@
+include README.md
+include fn_exchange/util/*
+include fn_exchange/LICENSE
