@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use,
 """Function implementation"""
 
 import logging
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_elasticsearch.util.helper import ElasticSearchHelper
-from elasticsearch import Elasticsearch
 from ssl import create_default_context
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
+FunctionResult, FunctionError
+from elasticsearch import Elasticsearch
+from fn_elasticsearch.util.helper import ElasticSearchHelper
+
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_elasticsearch_query"""
@@ -30,7 +33,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting")
             helper = ElasticSearchHelper(self.options)
-            # Get Elasticsearch params 
+            # Get Elasticsearch params
             ELASTICSEARCH_URL = helper.get_config_option("es_datastore_url")
             ELASTICSEARCH_CERT = helper.get_config_option("es_cafile", True)
             ELASTICSEARCH_SCHEME = helper.get_config_option("es_datastore_scheme", True)
@@ -41,7 +44,6 @@ class FunctionComponent(ResilientComponent):
             es_doc_type = kwargs.get("es_doc_type")  # text
             es_query = self.get_textarea_param(kwargs.get("es_query"))  # textarea
 
-            
             log = logging.getLogger(__name__)
             log.info("index: %s", es_index)
             log.info("doc_type: %s", es_doc_type)
@@ -65,23 +67,22 @@ class FunctionComponent(ResilientComponent):
                     # Attempt to create an SSL context, should work fine if no CERT is provided
                     if ELASTICSEARCH_CERT is None:
                         context = create_default_context()
-                    else: 
-                        
+                    else:
                         context = create_default_context(cafile=ELASTICSEARCH_CERT)
-                    # Connect to the ElasticSearch instance 
-                    es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() +"://"+ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME,ELASTICSEARCH_PASSWORD)) 
-                else: 
+                    # Connect to the ElasticSearch instance
+                    es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                else:
                     # Connect without to Elastic without HTTPS
-                    es = Elasticsearch([ELASTICSEARCH_URL], 
-                    verify_certs=False,
-                    cafile=ELASTICSEARCH_CERT)
+                    es = Elasticsearch([ELASTICSEARCH_URL],
+                                       verify_certs=False,
+                                       cafile=ELASTICSEARCH_CERT)
             except:
                 raise FunctionError("Encountered error while connecting to ElasticSearch")
             # Start query results as None
             query_results = None 
 
             try:
-                es_results = es.search(index=es_index, doc_type=es_doc_type,body=es_query, ignore=[400, 404])
+                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404])
             except:
                 raise FunctionError("Encountered error while submitting query to ElasticSearch")
             # If our results has a 'hits' attribute; inform the user
