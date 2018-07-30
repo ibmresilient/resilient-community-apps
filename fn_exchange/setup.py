@@ -12,8 +12,7 @@ setup(
     description="Resilient Circuits Components for 'fn_exchange'",
     long_description="Resilient Circuits Components for 'fn_exchange'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'exchangelib'
+        'resilient_circuits>=30.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -23,6 +22,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "ExchangeFindEmailsFunctionComponent = fn_exchange.components.exchange_find_emails:FunctionComponent",
             "ExchangeGetMailboxInfoFunctionComponent = fn_exchange.components.exchange_get_mailbox_info:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_exchange.util.config:config_section_data"],
