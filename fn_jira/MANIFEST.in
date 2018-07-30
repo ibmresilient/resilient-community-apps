@@ -1,0 +1,4 @@
+include README.md
+include fn_jira/util/*
+include fn_pagerduty/lib/*
+include fn_jira/LICENSE
