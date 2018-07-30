@@ -1,5 +1,6 @@
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
+import time
 
 class exchange_utils:
     def __init__(self, **kwargs):
@@ -9,7 +10,7 @@ class exchange_utils:
         self.email = kwargs.get('email')
         self.password = kwargs.get('password')
         self.default_folder_path = kwargs.get('default_folder_path')
-        self.timezone = kwargs.get('timezone')
+        self.default_timezone = kwargs.get('default_timezone')
 
     def connect_to_account(self, primary_smtp_address):
         """Connect to specified account and return it"""
@@ -49,18 +50,20 @@ class exchange_utils:
 
         # filter by date
         if start_date:
-            # get [month, date, year] from MM/DD/YYYY
-            start_date = [int(i) for i in start_date.split('/')]
+            # get YYYY/MM/DD from epoch time in milliseconds
+            start_date = str(time.strftime('%Y-%m-%d', time.gmtime(start_date/1000.0)))
+            start_date = [int(i) for i in start_date.split('-')]
 
-            tz = EWSTimeZone.timezone(self.timezone)
-            start = tz.localize(EWSDateTime(start_date[2], start_date[0], start_date[1]))
+            tz = EWSTimeZone.timezone(self.default_timezone)
+            start = tz.localize(EWSDateTime(start_date[0], start_date[1], start_date[2]))
             filtered_emails = filtered_emails.filter(datetime_received__gte=start)
         if end_date:
-            # get [month, date, year] from MM/DD/YYYY
-            end_date = [int(i) for i in end_date.split('/')]
+            # get YYYY/MM/DD from epoch time in milliseconds
+            end_date = str(time.strftime('%Y-%m-%d', time.gmtime(end_date/1000.0)))
+            end_date = [int(i) for i in end_date.split('-')]
 
-            tz = EWSTimeZone.timezone(self.timezone)
-            end = tz.localize(EWSDateTime(end_date[2], end_date[0], end_date[1]))
+            tz = EWSTimeZone.timezone(self.default_timezone)
+            end = tz.localize(EWSDateTime(end_date[0], end_date[1], end_date[2]))
             filtered_emails = filtered_emails.filter(datetime_received__lte=end)
 
         return filtered_emails
