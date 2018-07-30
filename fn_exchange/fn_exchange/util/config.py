@@ -13,6 +13,7 @@ def config_section_data():
 cert_verify=[True|False]
 server=example.com
 username=domain\\username
+email=admin@example.com
 password=password
 default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox
 default_timeozne=Some Microsoft timezone i.e. America/New_York
