@@ -6,6 +6,7 @@ class exchange_utils:
         self.cert_verify = kwargs.get('cert_verify')
         self.server = kwargs.get('server')
         self.username = kwargs.get('username')
+        self.email = kwargs.get('email')
         self.password = kwargs.get('password')
         self.default_folder_path = kwargs.get('default_folder_path')
         self.timezone = kwargs.get('timezone')
@@ -22,7 +23,6 @@ class exchange_utils:
         config = Configuration(server=self.server, credentials=credentials)
         account = Account(primary_smtp_address=primary_smtp_address, config=config,
                           autodiscover=self.cert_verify, access_type=DELEGATE)
-
         return account
 
     def go_to_folder(self, username, folder_path):
@@ -64,4 +64,3 @@ class exchange_utils:
             filtered_emails = filtered_emails.filter(datetime_received__lte=end)
 
         return filtered_emails
-
