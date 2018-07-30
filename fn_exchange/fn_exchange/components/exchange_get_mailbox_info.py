@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_exchange.util.exchange_utils import exchange_utils
 
 
 class FunctionComponent(ResilientComponent):
@@ -24,15 +25,41 @@ class FunctionComponent(ResilientComponent):
         """Function: Get mailbox info from exchange"""
         try:
             # Get the function parameters:
-
             log = logging.getLogger(__name__)
+            if kwargs.get('exchange_email') is None:
+                username = self.options.get('email')
+                log.info('No connection email was specified, using value from config file')
+            else:
+                username = kwargs.get('exchange_email')
+            get_user = kwargs.get('exchange_get_email')
+            log.info("username: %s" % username)
+            log.info("get_user: %s" % get_user)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # Load opts and initialize utils
+            opts = {'cert_verify': self.options.get('cert_verify') == "True",
+                    'server': self.options.get('server'),
+                    'username': self.options.get('username'),
+                    'email:': self.options.get('email'),
+                    'password': self.options.get('password'),
+                    'default_folder_path': self.options.get('default_folder_path'),
+                    'timezone': self.options.get('timezone')}
+            utils = exchange_utils(**opts)
+
+            # Connect to account
+            yield StatusMessage("Connecting to %s ..." % username)
+            account = utils.connect_to_account(username)
+            yield StatusMessage("Connected")
+
+            # Get mailbox info
+            yield StatusMessage("Getting mailbox info")
+            info = account.protocol.resolve_names([get_user])[0]
+            yield StatusMessage("Done getting mailbox info")
 
             results = {
-                "value": "xyz"
+                "name": info.name,
+                "email_address": info.email_address,
+                "routing_type": info.routing_type,
+                "mailbox_type": info.mailbox_type
             }
 
             # Produce a FunctionResult with the results
