@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
                     'email:': self.options.get('email'),
                     'password': self.options.get('password'),
                     'default_folder_path': self.options.get('default_folder_path'),
-                    'timezone': self.options.get('timezone')}
+                    'default_timezone': self.options.get('default_timezone')}
             utils = exchange_utils(**opts)
 
             # Connect to account
