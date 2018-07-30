@@ -10,9 +10,10 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_calendar_invite]
+# Setup the email information for the sender of the calendar_invite email 
 email_username=jimmy@example.com
 email_password=l33t
-email_nickname=ResilientSpammer
+email_nickname=Resilient Meeting Organizer
 email_host=mail.example.com
 email_port=25
 """

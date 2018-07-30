@@ -1,14 +1,26 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-import logging
+"""
+This module contains utility routines used by the fn_calensdar_invite functions
+"""
 import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEBase import MIMEBase
-from email.MIMEText import MIMEText
-from email.Utils import COMMASPACE, formatdate
-from email import Encoders
 import datetime
+import sys
+
+if sys.version_info[0] == 2:
+    from email.MIMEMultipart import MIMEMultipart
+    from email.MIMEBase import MIMEBase
+    from email.MIMEText import MIMEText
+    from email.Utils import COMMASPACE, formatdate
+    from email import Encoders
+else:
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.base import MIMEBase
+    from email.mime.text import MIMEText
+    from email.utils import COMMASPACE, formatdate
+    from email.encoders import encode_base64
+
 
 def get_user_id(client, log, uid):
     uids = []
@@ -26,13 +38,13 @@ def get_user_id(client, log, uid):
         uids.append(users_response['id'])
         return uids
 
-
+# Get email address of the user ID.
 def get_email_addr(client, log, uid):
     user_json = client.get('/users/{}'.format(uid))
     log.info("Got {} from uid {}".format(user_json['email'], uid))
     return user_json['email']
 
-
+# Get the member and owner emails associated with an incident.
 def get_incident_members_email_addrs(client, log, incident_id):
     email_addrs = []
 
@@ -51,6 +63,7 @@ def get_incident_members_email_addrs(client, log, incident_id):
         email_addrs.append(get_email_addr(client, log, owner_id))
 
     return email_addrs
+
 
 def build_email_message(calendar_invite_datetime, calendar_invite_subject, calendar_invite_description, nickname, e_login, from_string, attendees):
     CRLF = "\r\n"
@@ -78,7 +91,6 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
                                                     CRLF) + "TRANSP:OPAQUE" + CRLF + "END:VEVENT" + CRLF + "END:VCALENDAR" + CRLF
 
     eml_body = "Email body visible in the invite of outlook and outlook.com but not google calendar"
-    eml_body_bin = "This is the email body in binary - two steps"
     msg = MIMEMultipart('mixed')
     msg['Reply-To'] = from_string
     msg['Date'] = formatdate(localtime=True)
@@ -94,24 +106,22 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
 
     ical_atch = MIMEBase('application/ics', ' ;name="%s"' % ("invite.ics"))
     ical_atch.set_payload(ical)
-    Encoders.encode_base64(ical_atch)
+    if sys.version_info[0] == 2:
+        Encoders.encode_base64(ical_atch)
+    else:
+        encode_base64(ical_atch)
     ical_atch.add_header('Content-Disposition', 'attachment; filename="%s"' % ("invite.ics"))
-
-    eml_atch = MIMEBase('text/plain', '')
-    Encoders.encode_base64(eml_atch)
-    eml_atch.add_header('Content-Transfer-Encoding', "")
 
     msgAlternative.attach(part_email)
     msgAlternative.attach(part_cal)
 
     return msg.as_string()
 
-
+# Open the SMTP host port and send the email
 def send_email(host, port, from_email, e_login, e_password, attendees_email_addr, msg_string):
-    # Open the SMTP host port and send the email
     mailServer = smtplib.SMTP(host, port)
     mailServer.ehlo()
     mailServer.starttls()
     mailServer.login(e_login, e_password)
     mailServer.sendmail(from_email, attendees_email_addr, msg_string)
-    mailServer.close()
+    mailServer.quit()
