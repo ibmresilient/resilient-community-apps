@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Performs a specified action on the chosen Cloud Foundry applications."""
         try:
             # Get the function parameters:
-            action_name = self.get_select_param(kwargs.get("fn_cloud_foundry_action"))  # select, values: "Start", "Stop", "Metadata"
+            action_name = self.get_select_param(kwargs.get("fn_cloud_foundry_action"))
             application_names = kwargs.get("fn_cloud_foundry_applications")  # text
 
             log = logging.getLogger(__name__)
@@ -38,13 +38,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
-            api_key2 = self.options["api_key"]
-            bx_apps_url2 = self.options["bx_apps_url"]
-            bx_api_url2 = self.options["bx_api_url"]
-            bx_app_details_url2 = self.options["bx_app_details_url"]
-            authenticator = IBMCloudFoundryAuthenticator(bx_api_url2, api_key2)
-            bx_service = IBMCloudFoundryAPI(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2, authenticator)
-            results = bx_service.run(application_names, action_name)
+            base_url = self.options["cf_api_base"]
+            application_names = [x.strip() for x in application_names.split(",")]
+
+            authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            print(authenticator.get_headers())
+            cf_service = IBMCloudFoundryAPI(base_url, authenticator)
+            results = cf_service.application_run_command(application_names, action_name)
 
             log.info("result: %s", results)
 
@@ -52,5 +52,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as e:
+            yield FunctionError(str(e))

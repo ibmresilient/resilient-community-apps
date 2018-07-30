@@ -11,12 +11,35 @@ class IBMCloudFoundryAPI:
     """
         Cloud Foundry Application utility
     """
-    def __init__(self, api_key, bx_api_url, bx_apps_url, bx_app_details_url, authenticator):
-        self.api_key = api_key
-        self.bx_api_url = bx_api_url
-        self.bx_apps_url = bx_apps_url
-        self.bx_app_details_url = bx_app_details_url + "/{}"
+    # class variables of the API end points
+    CF_API_BASE     = "v2/apps"
+    CF_APP_INFO     = "/{}/summary"
+    CF_ALL_APPS     = ""
+    CF_APP          = "/{}"
+    CF_APP_RESTAGE  = "/{}/restage"
+    CF_APP_INSTANCES= "/{}/instances"
+    CF_DEL_INSTANCE = "/{}/instances/{}"
+
+    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "create"]
+    INSTANCE_ACTIONS= ["delete"]
+
+    def __init__(self, base_url, authenticator):
+        if base_url[-1] != "/":
+            base_url += "/"
+        self.base_url = base_url + self.CF_API_BASE
         self.authenticator = authenticator
+        self.app_commands = {
+            "start":        self.start_app,
+            "stop":         self.stop_app,
+            "restage":      self.restage_app,
+            "delete":       self.delete_app,
+            "update":       self.update_app,
+            "instances":    self.get_app_instances,
+            "create":       self.create_app
+        }
+        self.instance_commands = {
+            "delete":       self.delete_app_instance
+        }
 
     def _add_authentication_headers(self, request):
         """
@@ -30,134 +53,312 @@ class IBMCloudFoundryAPI:
         """
         return request.update(self.authenticator.get_headers())
 
-    def _get_bx_app_guid(self, app_name):
+    def get_app_guids(self, application_names):
+        """
+        Gets the guids for the list of application names provided
+        :param application_names: list
+             List of names that guid need to be found for
+        :return: Dict - key: application name, value: guid
+        """
         oauth_authorization_headers = {
             "accept": "application/json",
-            "content-type": "application/json",
+            "content-type": "application/x-www-form-urlencoded",
             "charset": "utf-8"
         }
-        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
+        self._add_authentication_headers(oauth_authorization_headers)
 
-        response = requests.get(self.bx_apps_url, headers=oauth_authorization_headers)
+        result = {}
+
+        response = requests.get(self.base_url+self.CF_ALL_APPS, headers=oauth_authorization_headers)
         if response.status_code == 200:
             app_resources = response.json()["resources"]
             for resource in app_resources:
                 res_app_name = resource["entity"]["name"]
                 guid = resource["metadata"]["guid"]
-                if app_name == res_app_name:
-                    return guid
+                if res_app_name in application_names:
+                    result[res_app_name] = guid
+                    # if all the apps have been identified, no need to keep looping
+                    if len(result.keys()) == len(application_names):
+                        break
         else:
-            print("Error while getting bluemix applications metadata")
-        return None
+            raise ValueError("Error while getting CF applications metadata")
+        return result
 
-    def _get_bx_apps_metadata(self):
-        apps_metadata = []
+    def get_app_guid(self, app_name):
+        """
+        Get guid for a single app.
+        :param app_name: name of the applicaiton to get guid for
+        :return: String - guid for the application
+        """
+        return self.get_app_guids([app_name])[app_name]
+
+    def get_app_info(self, guid):
+        """
+        Extract JSON information for the application with given guid.
+        :param guid: String
+            GUID for the app to extract information for
+        :return:
+        """
         oauth_authorization_headers = {
             "accept": "application/json",
             "content-type": "application/json",
             "charset": "utf-8"
         }
-        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
+        self._add_authentication_headers(oauth_authorization_headers)
 
-        response = requests.get(self.bx_apps_url, headers=oauth_authorization_headers)
+        response = requests.get(self.base_url + self.CF_APP_INFO.format(guid), headers=oauth_authorization_headers)
         if response.status_code == 200:
-            app_resources = response.json()["resources"];
-            for resource in app_resources:
-                app_metadata = {}
-                entity = resource["entity"]
-                metadata = resource["metadata"]
-                guid = metadata["guid"]
-                app_name = entity["name"]
-                app_metadata["guid"] = guid
-                app_metadata["app_name"] = app_name
-                app_metadata["space_guid"] = entity["space_guid"]
-                app_metadata["production"] = entity["production"]
-                app_metadata["current_state"] = entity["state"]
-                app_metadata["memory"] = entity["memory"]
-                app_metadata["disk_quota"] = entity["disk_quota"]
-                app_metadata["enable_ssh"] = entity["enable_ssh"]
-                app_metadata["last_updated"] = self.convert_timestamp_to_epoch_time(metadata["updated_at"]) * 1000
-
-                oauth_authorization_headers = {
-                    "accept": "application/json",
-                    "charset": "utf-8"
-                }
-                oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
-
-                response = requests.get(self.get_bx_app_url(guid), headers=oauth_authorization_headers)
-                if response.status_code == 200:
-                    bx_app_metadata = response.json()
-                    routes = bx_app_metadata["metadata"]["routes"]
-                    for route in routes:
-                        app_metadata["app_domain"] = route["name"]
-                        app_metadata["app_port"] = route["port"]
-                    log.debug(app_metadata)
-                else:
-                    log.error("Error while getting app details for app - {}".format(app_name))
-                    log.debug(response)
-
-                apps_metadata.append(app_metadata)
-
+            apps_data = response.json()
         else:
-            log.error("Error while getting bluemix applications metadata")
+            log.error("Error while getting CF application information.")
             log.debug(response)
+            apps_data = {"status": response.status_code}
 
-        return apps_metadata
+        return apps_data
 
-    def _bx_invoke(self, app_name, action_name):
-        app_guid = self._get_bx_app_guid(app_name)
-        if app_guid is None:
-            return None
-
+    def update_app(self, app_guid, values=None):
+        """
+        PUT request with a body of values that need to be updated.
+        :param app_guid: GUID of the app to be updated
+        :param values: The fields to be updated
+        :return: New information about the app
+        """
         oauth_authorization_headers = {
             "accept": "application/json",
+            "Content-Type": "application/json",
             "charset": "utf-8"
         }
-        oauth_authorization_headers = self._add_authentication_headers(oauth_authorization_headers)
+        self._add_authentication_headers(oauth_authorization_headers)
 
         app_status = {}
-        response = requests.get(self.get_bx_app_url(app_guid, action_name), headers=oauth_authorization_headers)
-        if response.status_code == 200:
-            log.info("Done")
+        response = requests.put(self.base_url + self.CF_APP.format(app_guid), headers=oauth_authorization_headers,
+                                json=values)
+
+        if response.status_code == 201: # return status code for update
+            log.info("Successful update.")
             ret = response.json()
-            app_status["current_state"] = ret["state"]
-            app_status["last_updated"] = self.convert_timestamp_to_epoch_time(ret["updated_at"]) * 1000
+            app_status["success"] = True
+            app_status["current_state"] = ret["entity"]["state"]
+            app_status["last_updated"] = self.convert_timestamp_to_epoch_time(ret["metadata"]["updated_at"]) * 1000
         else:
+            app_status["success"] = False
             app_status["current_state"] = "ERROR"
             app_status["last_updated"] = None
-            log.error("Error while invoking bluemix application ({}) {} action ".format(app_name, action_name))
+            log.error("Error while invoking cf application {} action ".format(values))
             log.debug(response)
         return app_status
 
-    def _execute_cmd(self, application_name, action_name):
-        if action_name == "metadata":
-            return self._get_bx_apps_metadata()
-        if action_name == "start" or action_name == "stop":
-            return self._bx_invoke(application_name, action_name)
+    def start_app(self, guid):
+        """
+        Shortcut to start an app, using update.
+        """
+        return self.update_app(guid, values={"state": "STARTED"})
 
-    def get_app_guid(self, application_name):
-        pass
+    def stop_app(self, guid):
+        """
+        Shortcut for stop an app, using update.
+        """
+        return self.update_app(guid, values={"state": "STOPPED"})
 
-    def get_metadata(self):
-        pass
+    def restage_app(self, guid):
+        """
+        Restages an app.
+        :param guid: String
+           GUID of the app to restage.
+        :return: Information about the app.
+        """
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
 
-    def application_metadata(self, application_name):
-        pass
-
-    def run(self, application_names, action_name):
-        if application_names is not None:
-            # to allow user path in both a string and a list of strings
-            if not isinstance(application_names, list):
-                application_names = list(application_names)
-
-            for app_name in application_names:
-                log.info("Invoking {} action for {} application".format(action_name, app_name.strip(" ")))
-                ret_value = self._execute_cmd(app_name, action_name)
+        app_status = {}
+        response = requests.post(self.base_url + self.CF_APP_RESTAGE.format(guid), headers=oauth_authorization_headers)
+        if response.status_code == 201:  # return status code for update
+            log.info("Successful restage of {}".format(guid))
+            app_status = response.json()
+            app_status["success"] = True
         else:
-            ret_value = self._execute_cmd(application_names, action_name)
+            app_status["success"] = False
+            app_status["details"] = "Couldn't restage."
+            app_status["last_updated"] = None
+            log.error("Error while restaging cf application {}.".format(guid))
+            log.debug(response)
+        return app_status
 
-        results = {"value": ret_value}
+    def delete_app(self, guid):
+        """
+        Deletes an app.
+        :param guid: String
+            GUID of the app to delete.
+        :return: Information about the app.
+        """
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
+
+        app_status = {}
+        response = requests.delete(self.base_url + self.CF_APP.format(guid), headers=oauth_authorization_headers)
+        if response.status_code == 204:  # return status code for update
+            log.info("Successful deletion of {}".format(guid))
+            app_status["success"] = True
+        else:
+            app_status["success"] = False
+            app_status["details"] = "Couldn't delete."
+            app_status["last_updated"] = None
+            log.error("Error while deleting cf application {}.".format(guid))
+            log.debug(response)
+        return app_status
+
+    def run_application_command(self, application_names, action_name, *args, **kwargs):
+        results = {}
+        if not isinstance(application_names, list):
+            application_names = [application_names]
+        log.info("The provided command is {}".format(action_name))
+        if action_name in self.APP_ACTIONS:
+            guids = self.get_app_guids(application_names)
+            log.info(guids)
+            for app in application_names:
+                if app in guids:
+                    results[app] = self.app_commands[action_name](guids[app], *args, **kwargs)
+                else:
+                    message = "App {} wasn't found.".format(app)
+                    log.info(message)
+                    results[app] = {
+                        "message": message,
+                        "success": False
+                    }
         return results
+
+    def create_app(self, values=None):
+        """
+        Creating an app with the provided values.
+        :param values: Values to be passed to the REST call.
+        :return:
+        """
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
+
+        app_status = {}
+        response = requests.post(self.base_url + self.CF_ALL_APPS, headers=oauth_authorization_headers,
+                                 json=values)
+        if response.status_code == 201:  # return status code for update
+            log.info("Successful deletion of {}".format(guid))
+            app_status = response.json()
+            app_status["success"] = True
+        else:
+            app_status["success"] = False
+            app_status["details"] = "Couldn't delete."
+            app_status["last_updated"] = None
+            log.error("Error while deleting cf application {}.".format(guid))
+            log.debug(response)
+        return app_status
+
+    def run_application_command(self, application_names, action_name, *args, **kwargs):
+        results = {}
+        if not isinstance(application_names, list):
+            application_names = [application_names]
+        if action_name in self.APP_ACTIONS:
+            guids = self.get_app_guids(application_names)
+            log.info(guids)
+            for app in application_names:
+                if app in guids:
+                    results[app] = self.app_commands[action_name](guids[app], *args, **kwargs)
+                else:
+                    message = "App {} wasn't found.".format(app)
+                    log.info(message)
+                    results[app] = {
+                        "message": message,
+                        "success": False
+                    }
+        return results
+
+    def run_application_instance_command(self, app_name, instances, action_name, *args, **kwargs):
+        results = {}
+        if not isinstance(instances, list):
+            instances = [instances]
+        if action_name in self.INSTANCE_ACTIONS:
+            guid = self.get_app_guid(app_name)
+            log.info(guid)
+            if guid:
+                results[app_name] = {}
+                for instance in instances:
+                    results[app_name][instance] = self.instance_commands[action_name](guid, instances, *args, **kwargs)
+            else:
+                message = "App {} wasn't found.".format(app_name)
+                log.info(message)
+                results[app_name] = {
+                    "message": message,
+                    "success": False
+                }
+        return results
+
+    def get_app_instances(self, guid):
+        """
+        Gets instances' information for the app.
+        :param guid: String
+           Application to get the instances data for.
+        :return: Information about all the app instances.
+        """
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
+
+        app_status = {}
+        response = requests.get(self.base_url + self.CF_APP_INSTANCES.format(guid), headers=oauth_authorization_headers)
+        if response.status_code == 200:  # return status code for update
+            log.info("Got instance information for {}".format(guid))
+            app_status = response.json()
+            app_status["success"] = True
+        else:
+            app_status["success"] = False
+            app_status["details"] = "Couldn't restage."
+            app_status["last_updated"] = None
+            log.error("Error getting instance information for {}.".format(guid))
+            log.debug(response)
+        return app_status
+
+    def delete_app_instance(self, guid, instance):
+        """
+        Deletes an app instance.
+        :param guid: String
+            GUID of the app whose instance needs to be deleted
+        :param instance: String
+            Instance id to be deleted
+        :return: Success or not
+        """
+        oauth_authorization_headers = {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            "charset": "utf-8"
+        }
+        self._add_authentication_headers(oauth_authorization_headers)
+        app_status = {}
+        response = requests.delete(self.base_url + self.CF_DEL_INSTANCE.format(guid, instance),
+                                   headers=oauth_authorization_headers)
+        if response.status_code == 204:  # return status code for update
+            log.info("Successful deletion of {} instance {}".format(guid, instance))
+            app_status["success"] = True
+        else:
+            app_status["success"] = False
+            app_status["details"] = "Couldn't delete instance {}.".format(instance)
+            app_status["last_updated"] = None
+            log.error("Error while deleting cf application {} instance {}.".format(guid, instance))
+            log.debug(response)
+        return app_status
+
 
     @staticmethod
     def convert_timestamp_to_epoch_time(ts, ts_format="%Y-%m-%dT%H:%M:%SZ"):
@@ -165,26 +366,7 @@ class IBMCloudFoundryAPI:
         epoch_time = (utc_time - datetime(1970, 1, 1)).total_seconds()
         return epoch_time
 
-class App():
-    def __init__(self):
-        pass
 
-if __name__ == "__main__":
-    api_key2 = "nlbp-C1HCzV-m9g2ZccvirA0VRUAewHoK9JevLOAH6M6"
-    bx_apps_url2 = "http://api.ng.bluemix.net/v2/apps"
-    bx_api_url2 = "http://api.ng.bluemix.net/info"
-    bx_app_details_url2 = "https://console.bluemix.net/events/apps"
-    application_names2 = "[Z2C-rbadvelu, Python-demo-log-app]"
-
-    auth_url = "https://iam.bluemix.net/identity/token"
-
-    from .authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
-
-    bx_service = IBMCloudFoundry(api_key2, bx_api_url2, bx_apps_url2, bx_app_details_url2,
-                                 IBMCloudFoundryAuthenticator(bx_api_url2, api_key2))
-    results = bx_service.run(application_names2, "start")
-#     yitd_jXTSnP8J8xg4p4tSDdLVZEspbxASbSNOzbcTMA_  -- key
-#     SFZu3mliDuJ_pNXPEc8B_BUqAuOmfjup94i_qkvCBYsO
-# service key: YSzOLtdrtwaZ66YWR3YMaSJKId4u9Zpvoj9ig5K7BK2R
-
-# final staging pTGbVhnA8TbZNMr2X6ENC6tl82QyidedsJWtYlWi5Tof
+#     yitd_jXTSnP8J8xg4p4tSDdLVZEspbxASbSNOzbcTMA_  -- key workds
+#     SFZu3mliDuJ_pNXPEc8B_BUqAuOmfjup94i_qkvCBYsO  -- this too
+#     SSV4G_Xy_UWWnIVjCGBeVHiCiBtiM2MJNdi8j2U_akne  -- staging

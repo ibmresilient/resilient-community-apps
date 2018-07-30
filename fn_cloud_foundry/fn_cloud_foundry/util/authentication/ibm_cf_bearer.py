@@ -9,10 +9,14 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
     """
     Authenticates into IBM's Cloud Foundry Platform
     """
-    def __init__(self, url, api_key):
-        self.base_url = url
-        self.api_key = api_key
+    AUTHENTICATION_TYPE = "apikey"
+    CF_INFO_URL = "/v2/info"
+
+    def __init__(self, url, options):
+        super(IBMCloudFoundryAuthenticator, self).__init__(options)
+        self.base_url = url + self.CF_INFO_URL  # CF v2 API for info
         self.get_token()
+
 
     def get_token(self):
         """
@@ -28,7 +32,7 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
             oauth_key = {
                 "grant_type": "password",
                 "username": "apikey",
-                "password": self.api_key
+                "password": self.auth["apikey"]
             }
             oauth_headers = {
                 "content-type": "application/x-www-form-urlencoded",
@@ -43,9 +47,9 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
             else:
                 log.error("Error getting authorization code: status code {}".format(response.status_code))
                 log.debug(response)
-                raise ValueError("Couldn't retrieve access token from Bluemix")
+                raise ValueError("Couldn't retrieve access token from Bluemix CF")
         else:
-            log.error("Error connecting to bluemix api server")
+            log.error("Error connecting to Bluemix cf api server")
             log.debug(response)
             raise ValueError("Bluemix CF server not responding")
 
@@ -56,4 +60,4 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
         :return: Dict
         """
         oauth_token = self.oauth_token
-        return "{} {}".format(oauth_token["token_type"], oauth_token["access_token"])
+        return {"Authorization":"{} {}".format(oauth_token["token_type"], oauth_token["access_token"])}
