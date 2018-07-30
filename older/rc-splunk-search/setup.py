@@ -32,7 +32,7 @@ class PyTest(TestCommand):
 setup(
     name='rc-splunk-search',
     namespace_packages=['query_runner', 'query_runner.components', "query_runner.lib"],
-    use_scm_version={"root": "../", "relative_to": __file__},
+    use_scm_version={"root": "../../", "relative_to": __file__},
     setup_requires=['setuptools_scm'],
     url='https://github.com/ibmresilient/resilient-circuits-packages',
     license='MIT',

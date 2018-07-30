@@ -66,7 +66,7 @@ def _raise_if_posterror(response):
 class QRadarClient(object):
     """A simple REST client class for QRadar"""
 
-    def __init__(self, base_url, auth_token, version='6.0', verify=True):
+    def __init__(self, base_url, auth_token, version='7.0', verify=True):
 
         self.base_url = base_url
         self.verify = verify

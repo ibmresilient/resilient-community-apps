@@ -1,0 +1,14 @@
+{
+  "args": {
+    "q": "foo"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "gzip", 
+    "Connection": "close", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Wget/1.19.2 (darwin16.7.0)"
+  }, 
+  "origin": "73.60.128.100", 
+  "url": "http://httpbin.org/get?q=foo"
+}
