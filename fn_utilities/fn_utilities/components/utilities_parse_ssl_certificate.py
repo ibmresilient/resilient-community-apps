@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             artifact_id = kwargs.get("artifact_id")  # number
-            certificate = kwargs.get("certificate")  # text
+            certificate = kwargs.get("utilities_certificate")  # text
             incident_id = kwargs.get("incident_id")  # number
 
             log = logging.getLogger(__name__)
@@ -53,14 +53,14 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             client = self.rest_client()
 
-            if certificate is None and (bool(artifact_id) or bool(incident_id)):
+            if certificate is None and (artifact_id is None or incident_id is None):
                 raise ValueError("Error: Either a certificate string, \
                     or BOTH artifact_id and incident_id must be supplied.")
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
-            try:  # Try catch inside a try catch ?
+            try:  # Nested try catch
                 yield StatusMessage("Attempting to parse the cert as JSON")
                 parsed_cert_json = json.loads(certificate)
                 # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
