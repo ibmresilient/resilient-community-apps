@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_calendar_invite"
-FUNCTION_NAME = "calendar_invite"
+FUNCTION_NAME = "fn_calendar_invite"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,19 +16,19 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_calendar_invite_function(circuits, function_params, timeout=10):
+def call_fn_calendar_invite_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("calendar_invite", function_params)
+    evt = SubmitTestFunction("fn_calendar_invite", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("calendar_invite_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_calendar_invite_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestCalendarInvite:
-    """ Tests for the calendar_invite function"""
+class TestFnCalendarInvite:
+    """ Tests for the fn_calendar_invite function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -47,5 +47,5 @@ class TestCalendarInvite:
             "calendar_invite_description": calendar_invite_description,
             "calendar_incident_id": calendar_incident_id
         }
-        results = call_calendar_invite_function(circuits_app, function_params)
+        results = call_fn_calendar_invite_function(circuits_app, function_params)
         assert(expected_results == results)
