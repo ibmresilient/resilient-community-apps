@@ -23,6 +23,10 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "ExchangeFindEmailsFunctionComponent = fn_exchange.components.exchange_find_emails:FunctionComponent",
+            "ExchangeDeleteEmailsFunctionComponent = fn_exchange.components.exchange_delete_emails:FunctionComponent",
+            "ExchangeMoveAndDeleteFolderFunctionComponent = fn_exchange.components.exchange_move_and_delete_folder:FunctionComponent",
+            "ExchangeSendEmailFunctionComponent = fn_exchange.components.exchange_send_email:FunctionComponent",
+            "ExchangeMoveEmailsFunctionComponent = fn_exchange.components.exchange_move_emails:FunctionComponent",
             "ExchangeGetMailboxInfoFunctionComponent = fn_exchange.components.exchange_get_mailbox_info:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_exchange.util.config:config_section_data"],
