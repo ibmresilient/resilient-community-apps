@@ -80,7 +80,7 @@ def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry
             raise ex
 
         retry_timeout = poll_retry_sleep(retry_timeout, retry_interval, finished)
-    test=1
+
     if not finished:
         status = "Timedout"
 
