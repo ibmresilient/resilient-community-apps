@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util import exchange_utils
+from fn_exchange.util.exchange_utils import exchange_utils
 from exchangelib import Message
 
 
@@ -32,6 +32,9 @@ class FunctionComponent(ResilientComponent):
             exchange_emails = kwargs.get("exchange_emails")  # text
 
             log = logging.getLogger(__name__)
+            if exchange_email is None:
+                exchange_email = self.options.get('email')
+                log.info('No connection email was specified, using value from config file')
             log.info("exchange_email: %s", exchange_email)
             log.info("exchange_message_subject: %s", exchange_message_subject)
             log.info("exchange_message_body: %s", exchange_message_body)
@@ -39,9 +42,11 @@ class FunctionComponent(ResilientComponent):
 
             # Initialize utils
             utils = exchange_utils(self.options)
-            
+
             # Get sender account
+            yield StatusMessage("Connecting to account %s" % exchange_email)
             account = utils.connect_to_account(exchange_email)
+            yield StatusMessage("Successfully connected to %s" % exchange_email)
 
             # Create email
             email = Message(
@@ -53,7 +58,9 @@ class FunctionComponent(ResilientComponent):
             )
 
             # Send email
+            yield StatusMessage("Sending email")
             email.send_and_save()
+            yield StatusMessage("Email sent")
 
             results = {}
 
