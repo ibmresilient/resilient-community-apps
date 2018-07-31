@@ -143,7 +143,6 @@ class FunctionComponent(ResilientComponent):
                     results = {"hits_over_limit": True, "att_name": att_report["name"], "hits_count": len(hits)}
                 else:
                     query_execution_date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
-                    yield StatusMessage("Adding artifact data as an incident attachment")
                     results = {"endpoint_hits": json.loads(json.dumps(hits)), "hits_count": len(hits),
                                "query_execution_date": query_execution_date}
 
