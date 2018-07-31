@@ -20,7 +20,7 @@ class IBMCloudFoundryAPI:
     CF_APP_INSTANCES= "/{}/instances"
     CF_DEL_INSTANCE = "/{}/instances/{}"
 
-    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "create"]
+    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "create", "info"]
     INSTANCE_ACTIONS= ["delete"]
 
     def __init__(self, base_url, authenticator):
@@ -35,7 +35,8 @@ class IBMCloudFoundryAPI:
             "delete":       self.delete_app,
             "update":       self.update_app,
             "instances":    self.get_app_instances,
-            "create":       self.create_app
+            "create":       self.create_app,
+            "info":         self.get_app_info
         }
         self.instance_commands = {
             "delete":       self.delete_app_instance
@@ -324,7 +325,7 @@ class IBMCloudFoundryAPI:
             app_status["success"] = True
         else:
             app_status["success"] = False
-            app_status["details"] = "Couldn't restage."
+            app_status["details"] = "Couldn't get instances for {}.".format(guid)
             app_status["last_updated"] = None
             log.error("Error getting instance information for {}.".format(guid))
             log.debug(response)

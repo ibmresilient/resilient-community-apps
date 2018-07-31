@@ -22,7 +22,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnCloudFoundryManageApplicationsFunctionComponent = fn_cloud_foundry.components.fn_cloud_foundry_manage_applications:FunctionComponent"
+            "FnCloudFoundryManageApplicationsFunctionComponent = fn_cloud_foundry.components.fn_cloud_foundry_manage_applications:FunctionComponent",
+            "FnCloudFoundryInstanceCommandFunctionComponent = fn_cloud_foundry.components.fn_cloud_foundry_manage_applications:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cloud_foundry.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_cloud_foundry.util.customize:customization_data"]

@@ -32,25 +32,59 @@ class FunctionComponent(ResilientComponent):
             log.info("fn_cloud_foundry_action: %s", action_name)
             log.info("fn_cloud_foundry_applications: %s", application_names)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
-
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting...")
 
             base_url = self.options["cf_api_base"]
             application_names = [x.strip() for x in application_names.split(",")]
 
             authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
-            print(authenticator.get_headers())
             cf_service = IBMCloudFoundryAPI(base_url, authenticator)
-            results = cf_service.application_run_command(application_names, action_name)
+            results = cf_service.run_application_command(application_names, action_name)
 
-            log.info("result: %s", results)
-
-            yield StatusMessage("done...")
-
+            log.info("Result: %s", results)
+            yield StatusMessage("Done...")
+            self._add_keys(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(str(e))
+
+    @function("fn_cloud_foundry_instance_command")
+    def _literally_any_name(self, event, *args, **kwargs):
+        """Function: Performs a specified action on the chosen Cloud Foundry applications."""
+        try:
+            # Get the function parameters:
+            action_name = self.get_select_param(kwargs.get("fn_cloud_foundry_action"))
+            application_name = kwargs.get("fn_cloud_foundry_applications")  # text
+            instances = kwargs.get("fn_cloud_foundry_instances")  # text
+
+            log = logging.getLogger(__name__)
+            log.info("fn_cloud_foundry_action: %s", action_name)
+            log.info("fn_cloud_foundry_applications: %s", application_name)
+            log.info("fn_cloud_foundry_instances: %s", instances)
+
+            yield StatusMessage("Starting...")
+
+            base_url = self.options["cf_api_base"]
+            instances = [x.strip() for x in instances.split(",")]
+
+            authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            cf_service = IBMCloudFoundryAPI(base_url, authenticator)
+            results = cf_service.run_application_instance_command(application_name, instances, action_name)
+            log.info("Result: %s", results)
+            yield StatusMessage("Done...")
+            self._add_keys(results)
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception as e:
+            yield FunctionError(str(e))
+
+
+    @staticmethod
+    def _add_keys(result):
+        keys = list(result.keys())
+        for item in result:
+            if isinstance(result[item], dict):
+                FunctionComponent._add_keys(result[item])
+        result["_keys"] = keys
+
