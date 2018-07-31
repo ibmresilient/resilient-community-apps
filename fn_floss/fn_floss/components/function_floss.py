@@ -2,7 +2,7 @@
 #  -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """
-    Function binary_to_string_list reads a binary file and returns a list
+    fn_floss reads a binary file and returns a list
     of decoded obfuscated strings from the file. The input can be a binary
     file associated with an artifact or an attachment associated with an
     incident or task.

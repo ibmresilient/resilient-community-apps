@@ -40,6 +40,11 @@ class OdbcConnection(object):
         # Pooling should be set to False to close connection on db_connection.close().
         pyodbc.pooling = False
 
+        # This fixes incorrect locale setting issue that causes
+        # pyodbc.connect to abort on macOS with ODBC Driver 17 for SQL Server (msodbcsql17) working in Python 3.6.
+        import locale
+        locale.setlocale(locale.LC_ALL, "")
+
         try:
             db_connection = pyodbc.connect(sql_connection_string)
 
@@ -82,7 +87,7 @@ class OdbcConnection(object):
         :param sql_database_type: config setting
         """
         if sql_database_type:
-            # These databases tend to use a single encoding and do not differentiate between
+            # MariaDB, PostgreSQL, MySQL databases tend to use a single encoding and do not differentiate between
             # "SQL_CHAR" and "SQL_WCHAR". Therefore you must configure them to encode Unicode
             # data as UTF-8 and to decode both C buffer types using UTF-8.
             # https://github.com/mkleehammer/pyodbc/wiki/Unicode
@@ -94,6 +99,9 @@ class OdbcConnection(object):
                 else:
                     self.db_connection.setencoding(str, encoding='utf-8')
                     self.db_connection.setencoding(unicode, encoding='utf-8')
+
+            # Pyodbc Wiki page states recent MS SQL Server drivers match the specification,
+            # no additional Unicode configuration is necessary. Using the pyodbc defaults is recommended.
 
     def set_db_cursor(self, db_cursor):
         self.db_cursor = db_cursor

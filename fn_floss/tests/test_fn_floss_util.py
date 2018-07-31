@@ -57,23 +57,23 @@ def test_call_floss(mocked_floss):
         # Write binary data to a temporary file.
         data = "these strings might not be found in floss"
         temp_file_binary.write(data)
-        with tempfile.NamedTemporaryFile(bufsize=0) as temp_file_strings:
-            mocked_floss.return_value = 1
-            try:
-                list_string = call_floss(options, temp_file_binary, temp_file_strings)
-            except RuntimeError:
-                assert True
-            else:
-                assert False
 
-            # Test the where Floss returns success.  Make sure that no exception is thrown
-            mocked_floss.return_value = 0
-            try:
-                list_string = call_floss(options, temp_file_binary, temp_file_strings)
-            except RuntimeError:
-                assert False
-            else:
-                assert True
+        mocked_floss.return_value = 1
+        try:
+            list_string = call_floss(options, temp_file_binary)
+        except RuntimeError:
+            assert True
+        else:
+            assert False
+
+        # Test the where Floss returns success.  Make sure that no exception is thrown
+        mocked_floss.return_value = 0
+        try:
+            list_string = call_floss(options, temp_file_binary)
+        except RuntimeError:
+            assert False
+        else:
+            assert True
 
 
 @patch("fn_floss.lib.floss_util.call_floss")
