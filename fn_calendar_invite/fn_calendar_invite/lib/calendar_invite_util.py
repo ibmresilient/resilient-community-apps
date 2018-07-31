@@ -5,7 +5,8 @@
 This module contains utility routines used by the fn_calensdar_invite functions
 """
 import smtplib
-import datetime
+import time
+from datetime import datetime, timedelta
 import sys
 
 if sys.version_info[0] == 2:
@@ -69,13 +70,15 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     CRLF = "\r\n"
 
     organizer = "ORGANIZER;CN={}:mailto:first{}{}".format(nickname, CRLF, e_login)
+    meeting_time = datetime.fromtimestamp(calendar_invite_datetime/1000)
+    ts = calendar_invite_datetime/1000
+    utc_meeting_time = datetime.utcfromtimestamp(ts)
 
-    ddtstart = datetime.datetime.now()
-    dtoff = datetime.timedelta(days=1)
-    dur = datetime.timedelta(hours=1)
-    ddtstart = ddtstart + dtoff
-    dtend = ddtstart + dur
-    dtstamp = datetime.datetime.now().strftime("%Y%m%dT%H%M%SZ")
+    ddtstart = meeting_time
+    duration = timedelta(hours=1)
+    ddtstart = ddtstart
+    dtend    = ddtstart + duration
+    dtstamp = datetime.now().strftime("%Y%m%dT%H%M%SZ")
     dtstart = ddtstart.strftime("%Y%m%dT%H%M%SZ")
     dtend = dtend.strftime("%Y%m%dT%H%M%SZ")
 

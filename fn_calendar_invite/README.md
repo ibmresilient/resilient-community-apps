@@ -1,20 +1,29 @@
 # Resilient Function Calendar Invite
 
 This Resilient Function package provides a function fn_calendar_invite
-which will send email and Outlook calendar invitation to the members
+which will send email and an Outlook calendar invitation to the members
 and owner of an incident. 
 
-Also included in the package is example workflow and rule: 
-- Calendar Invite
+Also included in the package:
 
-And fn_calendar_invite message queue.
+An example workflow which call the fn_calendar_invite function:
+
+	example_calendar_invite
+
+An example rule:
+
+	Example: Calendar Invite
+
+And a message queue:
+
+	fn_calendar_invite
 
 
 
-## Package Dependences
+## fn_calendar_invite Package Dependences
 - resilient_circuits version 30 or later
 - Python version 2.7.10 or later;
-- Python email package for Python 2
+- Python 'email' package for Python 2 ('email' package not needed for Python 3)
 
 ## Installation
 

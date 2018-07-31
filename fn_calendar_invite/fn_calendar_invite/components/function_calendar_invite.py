@@ -26,8 +26,8 @@ class FunctionComponent(ResilientComponent):
         self.email_host = self.options.get("email_host")
         self.email_port = self.options.get("email_port")
 
-    @function("calendar_invite")
-    def _calendar_invite_function(self, event, *args, **kwargs):
+    @function("fn_calendar_invite")
+    def _fn_calendar_invite_function(self, event, *args, **kwargs):
         """Function: A function to invite people to a meeting via a calendar invite"""
         try:
             # Get the calendar meeting information input

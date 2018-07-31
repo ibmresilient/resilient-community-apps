@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 
 from setuptools import setup, find_packages
 
@@ -24,7 +23,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "CalendarInviteFunctionComponent = fn_calendar_invite.components.calendar_invite:FunctionComponent"
+            "FnCalendarInviteFunctionComponent = fn_calendar_invite.components.function_calendar_invite:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_calendar_invite.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_calendar_invite.util.customize:customization_data"]
