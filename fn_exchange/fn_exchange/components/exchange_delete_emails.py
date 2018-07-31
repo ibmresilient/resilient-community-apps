@@ -43,15 +43,8 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
 
-            # Load opts and initialize utils
-            opts = {'cert_verify': self.options.get('cert_verify') == "True",
-                    'server': self.options.get('server'),
-                    'username': self.options.get('username'),
-                    'email:': self.options.get('email'),
-                    'password': self.options.get('password'),
-                    'default_folder_path': self.options.get('default_folder_path'),
-                    'default_timezone': self.options.get('default_timezone')}
-            utils = exchange_utils(**opts)
+            # Initialize utils
+            utils = exchange_utils(self.options)
 
             # Find emails
             yield StatusMessage("Finding emails")

@@ -35,15 +35,8 @@ class FunctionComponent(ResilientComponent):
             log.info("username: %s" % username)
             log.info("get_user: %s" % get_user)
 
-            # Load opts and initialize utils
-            opts = {'cert_verify': self.options.get('cert_verify') == "True",
-                    'server': self.options.get('server'),
-                    'username': self.options.get('username'),
-                    'email:': self.options.get('email'),
-                    'password': self.options.get('password'),
-                    'default_folder_path': self.options.get('default_folder_path'),
-                    'default_timezone': self.options.get('default_timezone')}
-            utils = exchange_utils(**opts)
+            # Initialize utils
+            utils = exchange_utils(self.options)
 
             # Connect to account
             yield StatusMessage("Connecting to %s ..." % username)

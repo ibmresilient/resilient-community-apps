@@ -3,14 +3,14 @@ from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 import time
 
 class exchange_utils:
-    def __init__(self, **kwargs):
-        self.cert_verify = kwargs.get('cert_verify')
-        self.server = kwargs.get('server')
-        self.username = kwargs.get('username')
-        self.email = kwargs.get('email')
-        self.password = kwargs.get('password')
-        self.default_folder_path = kwargs.get('default_folder_path')
-        self.default_timezone = kwargs.get('default_timezone')
+    def __init__(self, opts):
+        self.cert_verify = opts.get('cert_verify') == "True"
+        self.server = opts.get('server')
+        self.username = opts.get('username')
+        self.email = opts.get('email')
+        self.password = opts.get('password')
+        self.default_folder_path = opts.get('default_folder_path')
+        self.default_timezone = opts.get('default_timezone')
 
     def connect_to_account(self, primary_smtp_address):
         """Connect to specified account and return it"""
