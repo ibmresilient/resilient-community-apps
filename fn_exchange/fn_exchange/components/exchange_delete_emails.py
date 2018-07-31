@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_exchange.util.exchange_utils import exchange_utils
 
 
 class FunctionComponent(ResilientComponent):
@@ -31,19 +32,47 @@ class FunctionComponent(ResilientComponent):
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
 
             log = logging.getLogger(__name__)
-            log.info("exchange_emails: %s", exchange_emails)
+            # Use default connection email if one was not specified
+            if exchange_emails is None:
+                exchange_emails = self.options.get('email')
+                log.info('No connection email was specified, using value from config file')
+            log = logging.getLogger(__name__)
+            log.info("exchange_email: %s", exchange_emails)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_sender: %s", exchange_sender)
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # Load opts and initialize utils
+            opts = {'cert_verify': self.options.get('cert_verify') == "True",
+                    'server': self.options.get('server'),
+                    'username': self.options.get('username'),
+                    'email:': self.options.get('email'),
+                    'password': self.options.get('password'),
+                    'default_folder_path': self.options.get('default_folder_path'),
+                    'default_timezone': self.options.get('default_timezone')}
+            utils = exchange_utils(**opts)
 
-            results = {
-                "value": "xyz"
-            }
+            # Find emails
+            yield StatusMessage("Finding emails")
+            emails = utils.get_emails(exchange_emails, exchange_folder_path, exchange_sender,
+                                      exchange_start_date, exchange_end_date)
+            yield StatusMessage("Done finding emails")
+
+            # Populate results with query data
+            results = {}
+            for email in emails:
+                results[email.message_id] = {}
+                curr_email = results[email.message_id]
+                curr_email['sender_name'] = email.sender.name
+                curr_email['sender_email'] = email.sender.email_address
+                curr_email['subject'] = email.subject
+                curr_email['body'] = email.body
+
+            # Delete Emails
+            yield StatusMessage("Deleting emails")
+            emails.delete()
+            yield StatusMessage("Done deleting emails")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
