@@ -36,7 +36,6 @@ class FunctionComponent(ResilientComponent):
             if exchange_email is None:
                 exchange_email = self.options.get('email')
                 log.info('No connection email was specified, using value from config file')
-            log = logging.getLogger(__name__)
             log.info("exchange_email: %s", exchange_email)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_sender: %s", exchange_sender)
