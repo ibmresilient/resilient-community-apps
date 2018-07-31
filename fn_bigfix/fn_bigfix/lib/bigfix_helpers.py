@@ -22,7 +22,7 @@ def get_hits(artifact_data, params):
 
     """
 
-    LOG.debug("Filtering incident %s with data for artifact %s", params["incident_id"], params["artifact_id"])
+    LOG.debug("Filtering endpoint responses for hits.")
 
     hits = []
     for d in artifact_data:
@@ -30,9 +30,9 @@ def get_hits(artifact_data, params):
             hits.append(d)
     # if no hits result will be an empty list.
     if hits:
-        LOG.info("Detected %s hits." % (len(hits)))
+        LOG.info("Detected hits on %s endpoints." % (len(hits)))
     else:
-        LOG.info("Detected no hits")
+        LOG.info("Detected no hits.")
 
     return hits
 

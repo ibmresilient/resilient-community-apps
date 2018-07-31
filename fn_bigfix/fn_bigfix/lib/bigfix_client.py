@@ -244,7 +244,7 @@ class BigFixClient(object):
                     if response['totalResults'] == 0:
                         LOG.debug("No results yet, retrying")
                     elif response['totalResults'] > 0:
-                        LOG.debug("Got results: %s" % (response['totalResults']))
+                        LOG.debug("Received responses from %s endpoints." % (response['totalResults']))
                         for i in range(response['totalResults']):
                             result.append({
                                 "computer_id": response['results'][i]['computerID'],
