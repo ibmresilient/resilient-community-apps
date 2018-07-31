@@ -35,8 +35,8 @@ class exchange_utils:
             folder = folder / dir
         return folder
 
-    def get_emails(self, username, folder_path=None,
-                   sender=None, start_date=None, end_date=None):
+    def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None,
+                   start_date=None, end_date=None):
         """Get queried emails"""
 
         folder_path = self.default_folder_path if folder_path is None else folder_path
@@ -47,6 +47,12 @@ class exchange_utils:
         # filter by sender
         if sender:
             filtered_emails = filtered_emails.filter(sender=sender)
+
+        if subject:
+            filtered_emails = filtered_emails.filter(subject__contains=subject)
+
+        if body:
+            filtered_emails = filtered_emails.filter(body__contains=body)
 
         # filter by date
         if start_date:

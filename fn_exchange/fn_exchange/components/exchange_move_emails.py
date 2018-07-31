@@ -28,6 +28,8 @@ class FunctionComponent(ResilientComponent):
             exchange_folder_path = kwargs.get("exchange_folder_path")  # text
             exchange_destination_folder_path = kwargs.get("exchange_destination_folder_path")  # text
             exchange_sender = kwargs.get("exchange_sender")  # text
+            exchange_message_subject = kwargs.get("exchange_message_subject")  # text
+            exchange_message_body = kwargs.get("exchange_message_body")  # text
             exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
 
@@ -43,6 +45,8 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_destination_folder_path: %s", exchange_destination_folder_path)
             log.info("exchange_sender: %s", exchange_sender)
+            log.info("exchange_message_subject: %s", exchange_message_subject)
+            log.info("exchange_message_body: %s", exchange_message_body)
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
 
@@ -51,8 +55,8 @@ class FunctionComponent(ResilientComponent):
 
             # Getting emails
             yield StatusMessage("Getting emails")
-            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender,
-                                      exchange_start_date, exchange_end_date)
+            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender, exchange_message_subject,
+                                      exchange_message_body, exchange_start_date, exchange_end_date)
             yield StatusMessage("Done getting emails")
 
             # Move emails

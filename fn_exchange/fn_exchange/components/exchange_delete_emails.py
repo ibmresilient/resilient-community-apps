@@ -28,6 +28,8 @@ class FunctionComponent(ResilientComponent):
             exchange_emails = kwargs.get("exchange_emails")  # text
             exchange_folder_path = kwargs.get("exchange_folder_path")  # text
             exchange_sender = kwargs.get("exchange_sender")  # text
+            exchange_message_subject = kwargs.get("exchange_message_subject") # text
+            exchange_message_body = kwargs.get("exchange_message_body") # text
             exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
 
@@ -42,6 +44,8 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_email: %s", exchange_emails)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_sender: %s", exchange_sender)
+            log.info("exchange_message_subject: %s", exchange_message_subject)
+            log.info("exchange_message_body: %s", exchange_message_body)
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
 
@@ -50,8 +54,8 @@ class FunctionComponent(ResilientComponent):
 
             # Find emails
             yield StatusMessage("Finding emails")
-            emails = utils.get_emails(exchange_emails, exchange_folder_path, exchange_sender,
-                                      exchange_start_date, exchange_end_date)
+            emails = utils.get_emails(exchange_emails, exchange_folder_path, exchange_sender, exchange_message_subject,
+                                      exchange_message_body, exchange_start_date, exchange_end_date)
             yield StatusMessage("Done finding emails")
 
             # Populate results with query data
