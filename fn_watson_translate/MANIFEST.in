@@ -1,0 +1,3 @@
+include README.md
+include fn_watson_translate/util/*
+include fn_watson_translate/LICENSE
