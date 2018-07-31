@@ -101,7 +101,7 @@ class FunctionComponent(ResilientComponent):
         :return:  LanguageTranslatorV3
         """
         if not self.options["fn_watson_translate_api"] or not self.options["fn_watson_translate_version"] or \
-                not self.options["fn_watson_translate_api"]:
+                not self.options["fn_watson_translate_url"]:
             raise ValueError("Options do not have necessary information")
         return LanguageTranslatorV3(
                 version=self.options["fn_watson_translate_version"],
