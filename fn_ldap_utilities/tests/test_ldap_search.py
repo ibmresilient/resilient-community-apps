@@ -5,7 +5,8 @@
 from __future__ import print_function
 import functools
 import pytest
-from mock import patch, Mock
+from helper import TestingHelper
+from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from ldap3 import Server, Connection, ALL, ALL_ATTRIBUTES, MOCK_SYNC
@@ -61,15 +62,17 @@ def call_ldap_utilities_search_function(circuits, function_params, timeout=10):
 class TestLdapUtilitiesSearch:
     """ Tests for the ldap_utilities_search function"""
 
+    helper = TestingHelper(isSearch=True)
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @patch('fn_ldap_utilities.components.ldap_utilities_search.Connection', mocked_connection())
-    @patch('fn_ldap_utilities.components.ldap_utilities_search.Server', mocked_server())
+    @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
+    @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
     @pytest.mark.parametrize("login_search_base, login_search_filter, login_search_attributes, login_param, login_expected_result", [
-        ("dc=example,dc=com", {"type": "text", "content": "(uid=)"}, "cn", "", {'entries': []})
+        ("dc=example,dc=com", {"type": "text", "content": "(uid=)"}, "cn", "", {'success': False, 'entries': []})
     ])
     def test_ldap_basic_connection(self, circuits_app, login_search_base, login_search_filter, login_search_attributes, login_param,
                              login_expected_result):
@@ -88,18 +91,34 @@ class TestLdapUtilitiesSearch:
         result = call_ldap_utilities_search_function(circuits_app, function_params)
         assert (login_expected_result == result)
 
-    @patch('fn_ldap_utilities.components.ldap_utilities_search.Connection', mocked_connection())
-    @patch('fn_ldap_utilities.components.ldap_utilities_search.Server', mocked_server())
-    @pytest.mark.parametrize("success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result", [
-        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(uid=einstein))"}, "uid,cn", "",
-         {'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}),
-        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(uid=%ldap_param%))"},
-         "uid,cn", "einstein", {'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}),
-        ("dc=example,dc=com", {"type": "text", "content": "(&(objectClass=person)(|(uid=newton)(uid=%ldap_param%)))"}, "uid,cn", "einstein",
-         {'entries': [{'cn': ['Isaac Newton'], 'dn': 'uid=newton,dc=example,dc=com', 'uid': ['newton']},
-                      {'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]})
+    @patch('fn_ldap_utilities.util.helper.Connection', helper.mocked_connection())
+    @patch('fn_ldap_utilities.util.helper.Server', helper.mocked_server())
+    @pytest.mark.parametrize("success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result",
+    [
+        (
+          "dc=example,dc=com",
+          {"type": "text", "content": "(&(objectClass=person)(uid=einstein))"},
+          "uid,cn",
+          "",
+          {'success': True,'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}
+        ),
+        (
+          "dc=example,dc=com",
+          {"type": "text", "content": "(&(objectClass=person)(uid=%ldap_param%))"},
+          "uid,cn",
+          "einstein",
+          {'success': True, 'entries': [{'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}
+        ),
+        (
+          "dc=example,dc=com",
+          {"type": "text", "content": "(&(objectClass=person)(|(uid=newton)(uid=%ldap_param%)))"},
+          "uid,cn",
+          "einstein",
+          {'success': True, 'entries': [{'cn': ['Isaac Newton'], 'dn': 'uid=newton,dc=example,dc=com', 'uid': ['newton']}, {'cn': ['Albert Einstein'], 'dn': 'uid=einstein,dc=example,dc=com', 'uid': ['einstein']}]}
+        )
     ])
-    def test_ldap_search(self, circuits_app, success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result):
+    
+    def test_utilities_ldap_search(self, circuits_app, success_search_base, success_search_filter, success_search_attributes, success_param, success_expected_result):
         """ Test LDAP searches
 
          Test LDAP search with various base, filter and attribute options.
