@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_exchange.util.exchange_utils import exchange_utils
 
 
 class FunctionComponent(ResilientComponent):
@@ -29,17 +30,42 @@ class FunctionComponent(ResilientComponent):
             exchange_destination_folder_path = kwargs.get("exchange_destination_folder_path")  # text
 
             log = logging.getLogger(__name__)
+            # Use default connection email if one was not specified
+            if exchange_email is None:
+                exchange_email = self.options.get('email')
+                log.info('No connection email was specified, using value from config file')
             log.info("exchange_email: %s", exchange_email)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_destination_folder_path: %s", exchange_destination_folder_path)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # Load opts and initialize utils
+            opts = {'cert_verify': self.options.get('cert_verify') == "True",
+                    'server': self.options.get('server'),
+                    'username': self.options.get('username'),
+                    'email:': self.options.get('email'),
+                    'password': self.options.get('password'),
+                    'default_folder_path': self.options.get('default_folder_path'),
+                    'default_timezone': self.options.get('default_timezone')}
+            utils = exchange_utils(**opts)
 
-            results = {
-                "value": "xyz"
-            }
+            # Get folders
+            yield StatusMessage("Getting folders")
+            from_folder = utils.go_to_folder(exchange_folder_path)
+            to_folder = utils.go_to_folder(exchange_destination_folder_path)
+            yield StatusMessage("Done getting folders")
+
+            # Move items
+            yield StatusMessage("Moving items")
+            for item in from_folder.all():
+                item.move(to_folder)
+            yield StatusMessage("Done moving items")
+
+            # Delete folder
+            yield StatusMessage("Deleting folder %s" % exchange_folder_path)
+            from_folder.delete()
+            yield StatusMessage("%s deleted" % exchange_folder_path)
+
+            results = {}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
