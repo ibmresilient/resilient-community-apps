@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
+from fn_exchange.util import exchange_utils
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_move_emails"""
@@ -32,6 +32,10 @@ class FunctionComponent(ResilientComponent):
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
 
             log = logging.getLogger(__name__)
+            # Use default connection email if one was not specified
+            if exchange_email is None:
+                exchange_email = self.options.get('email')
+                log.info('No connection email was specified, using value from config file')
             log.info("exchange_email: %s", exchange_email)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_destination_folder_path: %s", exchange_destination_folder_path)
@@ -39,13 +43,24 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # Initialize utils
+            utils = exchange_utils(self.options)
 
-            results = {
-                "value": "xyz"
-            }
+            # Getting emails
+            yield StatusMessage("Getting emails")
+            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender,
+                                      exchange_start_date, exchange_end_date)
+            yield StatusMessage("Done getting emails")
+
+            # Move emails
+            yield StatusMessage("Moving emails to %s" % exchange_destination_folder_path)
+            # get destination folder
+            move_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
+            for email in emails:
+                email.move(move_folder)
+            yield StatusMessage("Done moving emails")
+
+            results = {}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
