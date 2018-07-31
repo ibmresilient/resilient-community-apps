@@ -43,8 +43,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get folders
             yield StatusMessage("Getting folders")
-            from_folder = utils.go_to_folder(exchange_folder_path)
-            to_folder = utils.go_to_folder(exchange_destination_folder_path)
+            from_folder = utils.go_to_folder(exchange_email, exchange_folder_path)
+            to_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
             yield StatusMessage("Done getting folders")
 
             # Move items
