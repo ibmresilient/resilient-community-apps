@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_exchange.util import exchange_utils
+from fn_exchange.util.exchange_utils import exchange_utils
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_move_emails"""
@@ -36,6 +36,9 @@ class FunctionComponent(ResilientComponent):
             if exchange_email is None:
                 exchange_email = self.options.get('email')
                 log.info('No connection email was specified, using value from config file')
+            if exchange_folder_path is None:
+                exchange_folder_path = self.options.get('default_folder_path')
+                log.info('No from folder path was specified, using value from config file')
             log.info("exchange_email: %s", exchange_email)
             log.info("exchange_folder_path: %s", exchange_folder_path)
             log.info("exchange_destination_folder_path: %s", exchange_destination_folder_path)
