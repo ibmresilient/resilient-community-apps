@@ -4,6 +4,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_exchange.util import exchange_utils
+from exchangelib import Message
 
 
 class FunctionComponent(ResilientComponent):
@@ -35,13 +37,25 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_message_body: %s", exchange_message_body)
             log.info("exchange_emails: %s", exchange_emails)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            # Initialize utils
+            utils = exchange_utils(self.options)
+            
+            # Get sender account
+            account = utils.connect_to_account(exchange_email)
 
-            results = {
-                "value": "xyz"
-            }
+            # Create email
+            email = Message(
+                account=account,
+                folder=account.sent,
+                subject=exchange_message_subject,
+                body=exchange_message_body,
+                to_recipients=exchange_emails.split(',')
+            )
+
+            # Send email
+            email.send_and_save()
+
+            results = {}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
