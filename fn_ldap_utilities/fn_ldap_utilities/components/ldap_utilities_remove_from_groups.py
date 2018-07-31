@@ -53,8 +53,11 @@ class FunctionComponent(ResilientComponent):
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
 
-            # Bind to the connection
-            c.bind()
+            try:
+              # Bind to the connection
+              c.bind()
+            except:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
             
             # Inform user
             msg = "Connected to {0}".format("Active Directory")
@@ -68,8 +71,11 @@ class FunctionComponent(ResilientComponent):
               res = ad_remove_members_from_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
 
             except Exception:
-              yield StatusMessage("ERROR: Ensure all user and group DNs exist")
-              raise FunctionError()
+              raise ValueError("Ensure all user and group DNs exist")
+
+            finally:
+              # Unbind connection
+              c.unbind()
 
             results = {
                 "success": res,
@@ -83,7 +89,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-        
-        finally:
-          # Unbind connection
-          c.unbind()

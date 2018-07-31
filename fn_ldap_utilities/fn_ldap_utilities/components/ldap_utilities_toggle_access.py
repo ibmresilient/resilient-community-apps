@@ -58,9 +58,12 @@ class FunctionComponent(ResilientComponent):
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
             
-            # Bind to the connection
-            c.bind()
-            
+            try:
+              # Bind to the connection
+              c.bind()
+            except:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
+
             # Inform user
             msg = ""
             if helper.LDAP_IS_ACTIVE_DIRECTORY:
@@ -77,7 +80,11 @@ class FunctionComponent(ResilientComponent):
               res = c.modify(input_ldap_dn, {ldap_user_account_control_attribute: [(MODIFY_REPLACE, [ldap_user_accout_control_value])]})
 
             except Exception:
-              raise FunctionError()
+              raise ValueError("Could not toggle access for this user. Ensue ldap_dn is valid")
+
+            finally:
+              # Unbind connection
+              c.unbind()
 
             results = {
                 "success": res,
@@ -91,7 +98,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-        
-        finally:
-          # Unbind connection
-          c.unbind()

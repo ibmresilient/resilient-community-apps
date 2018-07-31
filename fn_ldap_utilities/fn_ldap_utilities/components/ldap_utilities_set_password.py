@@ -43,8 +43,11 @@ class FunctionComponent(ResilientComponent):
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
 
-            # Bind to the connection
-            c.bind()
+            try:
+              # Bind to the connection
+              c.bind()
+            except:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
             
             # Inform user
             msg = ""
@@ -64,7 +67,11 @@ class FunctionComponent(ResilientComponent):
                 res = c.modify(input_ldap_dn, {'userPassword': [(MODIFY_REPLACE, [input_ldap_new_password])]})
 
             except Exception:
-              raise FunctionError()
+              raise ValueError("Could not change password. Check input_ldap_dn and input_ldap_new_password are valid")
+
+            finally:
+              # Unbind connection
+              c.unbind()
 
             results = {
                 "success": res,
@@ -77,7 +84,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-        
-        finally:
-          # Unbind connection
-          c.unbind()

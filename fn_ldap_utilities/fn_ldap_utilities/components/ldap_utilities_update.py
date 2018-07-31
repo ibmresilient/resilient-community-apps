@@ -49,9 +49,12 @@ class FunctionComponent(ResilientComponent):
             # Instansiate LDAP Server and Connection
             c = helper.get_ldap_connection()
 
-            # Bind to the connection
-            c.bind()
-            
+            try:
+              # Bind to the connection
+              c.bind()
+            except:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
+
             # Inform user
             msg = ""
             if helper.LDAP_IS_ACTIVE_DIRECTORY:
@@ -68,7 +71,11 @@ class FunctionComponent(ResilientComponent):
               res = c.modify(input_ldap_dn, {input_ldap_attribute_name: [(MODIFY_REPLACE, input_ldap_attribute_values)]})
 
             except Exception:
-              raise FunctionError()
+              raise ValueError("Failed to update. Ensure 'ldap_dn' is valid and the update meets your LDAP CONSTRAINTS")
+          
+            finally:
+              # Unbind connection
+              c.unbind()
 
             results = {
                 "success": res,
@@ -83,7 +90,3 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-        
-        finally:
-          # Unbind connection
-          c.unbind()
