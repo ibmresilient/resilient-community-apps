@@ -1,6 +1,8 @@
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message
+from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
-import time
+import time, base64
+import tempfile
 
 class exchange_utils:
     def __init__(self, opts):
@@ -36,7 +38,7 @@ class exchange_utils:
         return folder
 
     def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None,
-                   start_date=None, end_date=None):
+                   start_date=None, end_date=None, has_attachments=None):
         """Get queried emails"""
 
         folder_path = self.default_folder_path if folder_path is None else folder_path
@@ -72,4 +74,95 @@ class exchange_utils:
             end = tz.localize(EWSDateTime(end_date[0], end_date[1], end_date[2]))
             filtered_emails = filtered_emails.filter(datetime_received__lte=end)
 
+        # Check attachments
+        if has_attachments is not None:
+            filtered_emails = filtered_emails.filter(has_attachments=has_attachments)
+
         return filtered_emails
+
+    def create_email_function_results(self, emails, include_attachments=True):
+        """Create function results from email query results"""
+        results = {
+            'email_ids': [],
+            'emails': {}
+        }
+
+        # Example function results
+        # results = {
+        #     'email_ids': ['id1', 'idN'],
+        #     'emails': {
+        #         'id1': {
+        #             'subject': 'Email Subject',
+        #             'body': 'Subject body in HTML',
+        #             'sender_name': 'FirstName LastName',
+        #             'sender_email': 'example@example.com',
+        #             'attachments': {
+        #                 'attachment_id1': {
+        #                     'attachment_name': 'attachment.xslx',
+        #                     'attachment_content_type': 'spreadsheet',
+        #                     'attachment_size': '8842',
+        #                     'attachment_base64': 'attachment encoded in base 64'
+        #                 },
+        #                 'attachment_id2': {
+        #                     'attachment_name': '...',
+        #                     'attachment_content_type': '...',
+        #                     'attachment_size': '...',
+        #                     'attachment_base64': 'attachment encoded in base 64'
+        #                 }
+        #             }
+        #         },
+        #         'idN': {
+        #             'subject': 'Email Subject',
+        #             'body': 'Subject body in HTML',
+        #             'sender_name': 'FirstName LastName',
+        #             'sender_email': 'example@example.com',
+        #             'attachments': {
+        #                 'attachment_id1': {
+        #                     'attachment_name': 'attachment.xslx',
+        #                     'attachment_content_type': 'spreadsheet',
+        #                     'attachment_size': '8842',
+        #                     'attachment_base64': 'attachment encoded in base 64'
+        #                 },
+        #                 'attachment_id2': {
+        #                     'attachment_name': '...',
+        #                     'attachment_content_type': '...',
+        #                     'attachment_size': '...',
+        #                     'attachment_base64': 'attachment encoded in base 64'
+        #                 }
+        #             }
+        #         }
+        #     }
+        # }
+
+        # Create results
+        for email in emails:
+            # Check to see if item is an email
+            if isinstance(email, Message):
+                results['email_ids'].append(email.message_id)
+                results['emails'][email.message_id] = {}
+                curr_email = results['emails'][email.message_id]
+
+                # Add subject and body
+                curr_email['subject'] = email.subject
+                curr_email['body'] = email.body
+
+                # Check to see if there is a sender
+                if email.sender:
+                    curr_email['sender_name'] = email.sender.name
+                    curr_email['sender_email'] = email.sender.email_address
+
+                # Check attachments
+                if include_attachments:
+                    curr_email['attachments'] = {}
+                    curr_email['attachment_ids'] = []
+                    for attachment in email.attachments:
+                        if isinstance(attachment, FileAttachment):
+                            curr_email['attachment_ids'].append(attachment.attachment_id.id)
+                            curr_email['attachments'][attachment.attachment_id.id] = {}
+                            curr_attachment = curr_email['attachments'][attachment.attachment_id.id]
+                            curr_attachment['attachment_name'] = attachment.name
+                            curr_attachment['attachment_content_type'] = attachment.content_type
+                            curr_attachment['attachment_size'] = attachment.size
+                            curr_attachment['attachment_base64'] = base64.b64encode(attachment.content)
+
+        return results
