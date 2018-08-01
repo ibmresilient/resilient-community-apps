@@ -2,7 +2,7 @@
 
 This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
 
-See [PDF Documentation here](/docs/Resilient Integration LDAP Utility Function.pdf)
+See [Detailed PDF Documentation here](./docs/Resilient%20Integration%20LDAP%20Utility%20Function.pdf)
 
 ## ldap_utilities_search
 * Supports **Active Directory** and **OpenLDAP**
