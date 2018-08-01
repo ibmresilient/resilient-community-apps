@@ -2,6 +2,8 @@
 
 This Python Package is comprised of various Resilient Functions that allow you to manage users in your Directory Service, without having to leave the UI of Resilient
 
+See [PDF Documentation here](/docs/Resilient Integration LDAP Utility Function.pdf)
+
 ## ldap_utilities_search
 * Supports **Active Directory** and **OpenLDAP**
 * When using with **Microsoft Active Directory** server
@@ -58,8 +60,8 @@ entries where each entry has a 'dn' entry and a set of attributes
 
 ## ldap_utilities_update
 * Supports **Active Directory** and **OpenLDAP**
-* Takes the name of the attribute you want to update and an array of values to update that attribute with
-* The function input `ldap_attribute_values` must be a **string repersenation of an array:**
+* Takes the name of the attribute you want to update and an list of values to update that attribute with
+* The function input `ldap_attribute_values` must be a **string representation of an list:**
   ```python
   inputs.ldap_attribute_values = "['stringValue1', 1234, 'stringValue2']"
   ```
@@ -90,7 +92,7 @@ entries where each entry has a 'dn' entry and a set of attributes
       ldap_use_ssl=True
       ldap_is_active_directory=True
     ```
-* The function inputs `ldap_multiple_user_dn` and `ldap_multiple_group_dn` must be **string repersenations of an array:**
+* The function inputs `ldap_multiple_user_dn` and `ldap_multiple_group_dn` must be **string representation of a list:**
   ```python
   # Pre-Processing Script::
   inputs.ldap_multiple_user_dn = "['dn=user1,dc=example,dc=com', 'dn=user2,dc=example,dc=com']"
