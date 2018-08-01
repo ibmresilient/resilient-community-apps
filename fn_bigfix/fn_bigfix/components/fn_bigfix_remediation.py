@@ -3,10 +3,10 @@
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-""" Resilient functions component to remediate a hit on and endpoint in a Bigfix environment """
+""" Resilient functions component to remediate a hit on an endpoint in a Bigfix environment """
 
 # Set up:
-# Destination: a Queue named "bigfix_artifact".
+# Destination: a Queue named "bigfix_remediation".
 # Manual Action: Execute a BigFix action to remediate hit.
 
 import logging
@@ -18,10 +18,11 @@ import json
 import datetime
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_bigfix_remediation' of
-        package fn_bigfix.
+    """Component that implements Resilient function 'fn_bigfix_remediation' of package fn_bigfix.
 
-        This Function attempts to remediate 'hits' discovered in a BigFix environment takes the following parameters:
+        This Function attempts to remediate a 'hit' discovered in a BigFix environment and takes the following
+        parameters:
+
             bigfix_asset_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_incident_id
 
         An example of a set of query parameter might look like the following:
@@ -31,7 +32,7 @@ class FunctionComponent(ResilientComponent):
                 bigfix_artifact_type = File Path
                 bigfix_incident_id = 2095
 
-        The BigFix Query will execute a remediation action against a Bigfix server and the Funcxtion returns a status
+        The BigFix Query will execute a remediation action against a Bigfix server and the Function returns a status
         result in JSON format similar to the following.
 
             {'status': 'OK',

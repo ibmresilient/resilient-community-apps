@@ -21,10 +21,11 @@ import datetime
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_bigfix_assets' of
-        package fn_bigfix.
+    """Component that implements Resilient function 'fn_bigfix_assets' of package fn_bigfix.
 
-        The Function does a BigFix query to retrieve properties if a BigFix endpoint and takes the following parameters:
+        The Function does a BigFix query to retrieve properties of a BigFix endpoint and takes the following
+        parameters:
+
             bigfix_asset_name, bigfix_asset_id, bigfix_incident_id
 
 
@@ -57,7 +58,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_bigfix_assets")
     def _fn_bigfix_assets_function(self, event, *args, **kwargs):
-        """Function: Resilient Function : Bigfix artifact - Get properties in BigFix for endpoint."""
+        """Function: Resilient Function : Bigfix assets - Get properties in BigFix for an endpoint."""
         try:
             # Get the function parameters:
             bigfix_asset_name = kwargs.get("bigfix_asset_name")  # text
