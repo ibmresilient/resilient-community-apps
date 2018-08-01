@@ -47,6 +47,12 @@ class FunctionComponent(ResilientComponent):
             to_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
             yield StatusMessage("Done getting folders")
 
+            results = {}
+            # Get items before moving
+            yield StatusMessage("Getting items")
+            results = utils.create_email_function_results(from_folder.all())
+            yield StatusMessage("Done getting items")
+
             # Move items
             yield StatusMessage("Moving items")
             for item in from_folder.all():
@@ -57,8 +63,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Deleting folder %s" % exchange_folder_path)
             from_folder.delete()
             yield StatusMessage("%s deleted" % exchange_folder_path)
-
-            results = {}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -56,14 +56,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Done finding emails")
 
             # Populate results with query data
-            results = {}
-            for email in emails:
-                results[email.message_id] = {}
-                curr_email = results[email.message_id]
-                curr_email['sender_name'] = email.sender.name
-                curr_email['sender_email'] = email.sender.email_address
-                curr_email['subject'] = email.subject
-                curr_email['body'] = email.body
+            results = utils.create_email_function_results(emails)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

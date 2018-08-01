@@ -59,6 +59,9 @@ class FunctionComponent(ResilientComponent):
                                       exchange_message_body, exchange_start_date, exchange_end_date)
             yield StatusMessage("Done getting emails")
 
+            # Get function results
+            results = utils.create_email_function_results(emails)
+
             # Move emails
             yield StatusMessage("Moving emails to %s" % exchange_destination_folder_path)
             # get destination folder
@@ -66,8 +69,6 @@ class FunctionComponent(ResilientComponent):
             for email in emails:
                 email.move(move_folder)
             yield StatusMessage("Done moving emails")
-
-            results = {}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
