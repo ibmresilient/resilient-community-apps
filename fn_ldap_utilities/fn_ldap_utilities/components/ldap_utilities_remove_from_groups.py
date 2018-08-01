@@ -64,14 +64,19 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(msg)
 
             res = False
+            users_dn = []
 
             try:
               yield StatusMessage("Attempting to remove user(s) from group(s)")
               # perform the removeMermbersFromGroups operation
               res = ad_remove_members_from_groups(c, input_ldap_multiple_user_dn, input_ldap_multiple_group_dn, True)
+              
+              # Return list of users that were removed, and ignore users that do not exist, not valid, or not member of group
+              if res and "changes" in c.request:
+                users_dn = c.request["changes"][0]["attribute"]["value"]
 
             except Exception:
-              raise ValueError("Ensure all user and group DNs exist")
+              raise ValueError("Ensure all group DNs exist")
 
             finally:
               # Unbind connection
@@ -79,7 +84,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "success": res,
-                "users_dn": input_ldap_multiple_user_dn,
+                "users_dn": users_dn if len(users_dn) > 0 else None,
                 "groups_dn": input_ldap_multiple_group_dn
             }
 
