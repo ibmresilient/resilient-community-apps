@@ -96,6 +96,7 @@ class exchange_utils:
         #             'body': 'Subject body in HTML',
         #             'sender_name': 'FirstName LastName',
         #             'sender_email': 'example@example.com',
+        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
         #             'attachments': {
         #                 'attachment_id1': {
         #                     'attachment_name': 'attachment.xslx',
@@ -116,6 +117,7 @@ class exchange_utils:
         #             'body': 'Subject body in HTML',
         #             'sender_name': 'FirstName LastName',
         #             'sender_email': 'example@example.com',
+        #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
         #             'attachments': {
         #                 'attachment_id1': {
         #                     'attachment_name': 'attachment.xslx',
