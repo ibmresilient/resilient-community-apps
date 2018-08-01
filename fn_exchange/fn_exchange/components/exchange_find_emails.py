@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
             exchange_message_body = kwargs.get("exchange_message_body") # text
             exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
+            exchange_has_attachments = kwargs.get("exchange_has_attachments") # boolean
 
             log = logging.getLogger(__name__)
             # Use default connection email if one was not specified
@@ -45,6 +46,7 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_message_body: %s", exchange_message_body)
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
+            log.info("exchange_has_attachments: %s", exchange_has_attachments)
 
             # Initialize utils
             utils = exchange_utils(self.options)
@@ -52,7 +54,8 @@ class FunctionComponent(ResilientComponent):
             # Find emails
             yield StatusMessage("Finding emails")
             emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender, exchange_message_subject,
-                                      exchange_message_body, exchange_start_date, exchange_end_date)
+                                      exchange_message_body, exchange_start_date, exchange_end_date,
+                                      exchange_has_attachments)
             yield StatusMessage("Done finding emails")
 
             # Populate results with query data
