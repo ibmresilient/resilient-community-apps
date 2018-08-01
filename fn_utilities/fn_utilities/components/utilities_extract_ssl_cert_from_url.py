@@ -56,6 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             url_dict = urlparse.urlparse(https_url)
             certificate = None  # Init x509 as None and try to gather the cert
+            conn = None   # Init conn as None to prevent reference before assign
             try:
 
                 '''
@@ -86,7 +87,7 @@ class FunctionComponent(ResilientComponent):
 
             finally:
                 # Close the connection once we have what we want
-                if conn:
+                if conn is not None:
                     conn.close() 
             # Prepares a JSON object from the get_server_certificate function result
             serialized_cert = json.dumps(certificate, default=lambda o: o.__dict__,
