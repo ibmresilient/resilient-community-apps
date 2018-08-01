@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
             try:
                 phone_numbers = json.loads(phone_numbers_json)
             except Exception:
-                yield FunctionError("Invalid phone numbers provided, failed to decode.")
+                raise FunctionError("Invalid phone numbers provided, failed to decode.")
 
             sns = AwsSns(my_aws_access_key_id, my_aws_secret_access_key, aws_region_name, aws_sms_topic_name)
 
