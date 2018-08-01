@@ -23,10 +23,11 @@ import json
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_bigfix_artifact' of
-        package fn_bigfix.
+    """Component that implements Resilient function 'fn_bigfix_artifact' of package fn_bigfix.
 
-        The Function does a BigFix query and takes the following parameters:
+        The Function does a BigFix query to determine BigFix endpoints with hits and takes the
+        following parameters:
+
             bigfix_artifact_id, bigfix_artifact_value, bigfix_artifact_type, bigfix_artifact_properties_name
             bigfix_artifact_properties_value, bigfix_incident_id, bigfix_incident_plan_status
 
@@ -41,7 +42,7 @@ class FunctionComponent(ResilientComponent):
                 bigfix_incident_id = 2095
                 bigfix_incident_plan_status = "A"
 
-        The BigFix Query will execute a REST call against a Bigfix server and the Function returns a result
+        The BigFix Query will execute a REST query against a Bigfix server and the Function returns a result
         in JSON format similar to the following.
 
             {'hits_count': 1,
@@ -143,7 +144,6 @@ class FunctionComponent(ResilientComponent):
                     results = {"hits_over_limit": True, "att_name": att_report["name"], "hits_count": len(hits)}
                 else:
                     query_execution_date = datetime.datetime.now().strftime('%m-%d-%Y %H:%M:%S')
-                    yield StatusMessage("Adding artifact data as an incident attachment")
                     results = {"endpoint_hits": json.loads(json.dumps(hits)), "hits_count": len(hits),
                                "query_execution_date": query_execution_date}
 

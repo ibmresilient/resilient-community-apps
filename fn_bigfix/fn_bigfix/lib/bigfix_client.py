@@ -208,7 +208,8 @@ class BigFixClient(object):
         :return resp: Response from action
 
         """
-        query = "waithidden cmd.exe /c reg delete " \
+        query = "action uses wow64 redirection false \n" \
+                "waithidden cmd.exe /c reg delete " \
                 "\"{0}\" /f".format(artifact_value)
 
         relevance = "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"\
@@ -243,7 +244,7 @@ class BigFixClient(object):
                     if response['totalResults'] == 0:
                         LOG.debug("No results yet, retrying")
                     elif response['totalResults'] > 0:
-                        LOG.debug("Got results: %s" % (response['totalResults']))
+                        LOG.debug("Received responses from %s endpoints." % (response['totalResults']))
                         for i in range(response['totalResults']):
                             result.append({
                                 "computer_id": response['results'][i]['computerID'],
@@ -332,7 +333,7 @@ class BigFixClient(object):
         script_elem = elementTree.SubElement(clientq_elem, 'ActionScript')
         script_elem.text = query
         criteria_elem = elementTree.SubElement(clientq_elem, 'SuccessCriteria')
-        criteria_elem.attrib = {'Option': 'RunToCompletion'}
+        criteria_elem.attrib = {'Option': 'OriginalRelevance'}
         settings_elem = elementTree.SubElement(clientq_elem, 'Settings')
         settingsLocks_elem = elementTree.SubElement(clientq_elem, 'SettingsLocks')
         target_elem = elementTree.SubElement(clientq_elem, 'Target')

@@ -6,7 +6,7 @@
 """ Resilient functions component to check BigFix action status """
 
 # Set up:
-# Destination: a Queue named "bigfix_artifact".
+# Destination: a Queue named "bigfix_remediation".
 # Manual Action: Check BigFix action status.
 
 import logging
@@ -20,14 +20,15 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_action_status' of package fn_bigfix.
 
         This Function polls status of a BigFix action which is remediating a hit and takes the following parameter:
+
             bigfix_action_id
 
         An example of a set of query parameter might look like the following:
 
                 bigfix_action_id = 119
 
-        The BigFix Query will execute a remediation action against a Bigfix server and the Function returns a status
-        result in JSON format similar to the following.
+        The BigFix Query will poll the status of a remediation action on a Bigfix server and the Function
+        returns a status result in JSON format similar to the following.
 
             {'status': 'OK',
              'status_message': 'The action executed successfully.',
@@ -47,7 +48,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_bigfix_action_status")
     def _fn_bigfix_action_status_function(self, event, *args, **kwargs):
-        """Function: Resilient Function : Bigfix action id - Get staus for Bigfix action id."""
+        """Function: Resilient Function : Bigfix action status - Get status for Bigfix action id."""
         try:
             # Get the function parameters:
             bigfix_action_id = kwargs.get("bigfix_action_id")  # number
@@ -63,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             retry_interval = int(self.options.get("bigfix_polling_interval"))
             retry_timeout = int(self.options.get("bigfix_polling_timeout"))
 
-            # Check status every 'retry' secs up to 'timeout' secs
+            # Check status every 'retry_interval' secs up to 'retry_timeout' secs
             (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
 
             if status == "OK":
