@@ -66,9 +66,10 @@ class FunctionComponent(ResilientComponent):
                 # Load the cert into PyOpenSSL; Throws OpenSSL.crypto.Error if problems
                 parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                     OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
+
                 # Load cert also with cryptography; this package has better date attributes
                 parsed_cert_crypto = x509.load_pem_x509_certificate(
-                    str(parsed_cert_json), default_backend())
+                    str(parsed_cert_json).encode('utf-8'), default_backend())
                 
             except ValueError:
                 yield StatusMessage('Problem encountered loading the certificate as JSON.')
@@ -84,7 +85,6 @@ class FunctionComponent(ResilientComponent):
                 artifact_data = self._get_binary_data_from_file(client, incident_id, artifact_id)
                 parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                     OpenSSL.crypto.FILETYPE_PEM, artifact_data)
-
                 # Load cert also with cryptography; this package has better date attributes
                 parsed_cert_crypto = x509.load_pem_x509_certificate(
                     artifact_data, default_backend())
@@ -92,17 +92,17 @@ class FunctionComponent(ResilientComponent):
             #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
             #  Some fields must be serialised into JSON in order to be compatible with STOMP
             results = {
-                "subject": json.dumps(parsed_cert_openssl.get_subject().get_components()),
+                "subject": json.dumps(str(parsed_cert_openssl.get_subject().get_components())),
                 "notBefore": str(parsed_cert_crypto.not_valid_before),
                 "notAfter": str(parsed_cert_crypto.not_valid_after),
-                "issuer": json.dumps(parsed_cert_openssl.get_issuer().get_components()),
+                "issuer": json.dumps(str(parsed_cert_openssl.get_issuer().get_components())),
                 "version": parsed_cert_openssl.get_version(),
                 "expiration_status": ('Valid' if self._date_within_range(parsed_cert_crypto.not_valid_before, parsed_cert_crypto.not_valid_after, datetime.datetime.today()) is True else 'Expired'),
-                "signature_algorithm": parsed_cert_openssl.get_signature_algorithm(),
-                "public_key": OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey()),
+                "signature_algorithm": str(parsed_cert_openssl.get_signature_algorithm()),
+                "public_key": str(OpenSSL.crypto.dump_publickey(OpenSSL.crypto.FILETYPE_PEM, parsed_cert_openssl.get_pubkey())),
                 "extensions": {
                     "subjectAltNames": json.dumps(self._get_dns_subject_alternative_names(parsed_cert_crypto)),
-                    "basicConstraints":json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
+                    "basicConstraints": json.dumps(self._get_basic_constraints(parsed_cert_crypto)),
                     "issuerAltNames": json.dumps(self._get_issuer_alternative_names(parsed_cert_crypto))
                 }
 
