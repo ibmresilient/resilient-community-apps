@@ -80,7 +80,7 @@ class exchange_utils:
 
         return filtered_emails
 
-    def create_email_function_results(self, emails, include_attachments=True):
+    def create_email_function_results(self, emails):
         """Create function results from email query results"""
         results = {
             'email_ids': [],
@@ -152,17 +152,16 @@ class exchange_utils:
                     curr_email['sender_email'] = email.sender.email_address
 
                 # Check attachments
-                if include_attachments:
-                    curr_email['attachments'] = {}
-                    curr_email['attachment_ids'] = []
-                    for attachment in email.attachments:
-                        if isinstance(attachment, FileAttachment):
-                            curr_email['attachment_ids'].append(attachment.attachment_id.id)
-                            curr_email['attachments'][attachment.attachment_id.id] = {}
-                            curr_attachment = curr_email['attachments'][attachment.attachment_id.id]
-                            curr_attachment['attachment_name'] = attachment.name
-                            curr_attachment['attachment_content_type'] = attachment.content_type
-                            curr_attachment['attachment_size'] = attachment.size
-                            curr_attachment['attachment_base64'] = base64.b64encode(attachment.content)
+                curr_email['attachments'] = {}
+                curr_email['attachment_ids'] = []
+                for attachment in email.attachments:
+                    if isinstance(attachment, FileAttachment):
+                        curr_email['attachment_ids'].append(attachment.attachment_id.id)
+                        curr_email['attachments'][attachment.attachment_id.id] = {}
+                        curr_attachment = curr_email['attachments'][attachment.attachment_id.id]
+                        curr_attachment['attachment_name'] = attachment.name
+                        curr_attachment['attachment_content_type'] = attachment.content_type
+                        curr_attachment['attachment_size'] = attachment.size
+                        curr_attachment['attachment_base64'] = base64.b64encode(attachment.content)
 
         return results
