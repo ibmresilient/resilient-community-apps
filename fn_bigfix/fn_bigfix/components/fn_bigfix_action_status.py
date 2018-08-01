@@ -69,14 +69,16 @@ class FunctionComponent(ResilientComponent):
             if status == "OK":
                 yield StatusMessage("Got good status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "OK", "status_message": status_message}
-            elif status == "Error":
+            elif status == "Failed":
                 yield StatusMessage("Got error status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
-                results = {"status": "Error", "status_message": status_message}
+                results = {"status": "Failed", "status_message": status_message}
             elif status == "Unsupported":
-                raise FunctionError("Got unexpected status {0} while retrieving status for BigFix action {1}."
+                yield StatusMessage("Got unexpected status {0} while retrieving status for BigFix action {1}."
                                     .format(status_message, bigfix_action_id))
+                results = {}
             elif status == "Timedout":
-                raise FunctionError("Timed out getting action status for BigFix action {}".format(bigfix_action_id))
+                yield StatusMessage("Timed out getting action status for BigFix action {}".format(bigfix_action_id))
+                results = {}
             elif not status:
                 raise ValueError("Function 'poll_action_status' returned bad status {}.".format(status))
 
