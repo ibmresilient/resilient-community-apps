@@ -30,13 +30,15 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("bit9_file_catalog_id: %s", bit9_file_catalog_id)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            self.bit9_client = CbProtectClient(self.options)
+            results = self.bit9_client.get_file_catalog(bit9_file_catalog_id)
 
-            results = {
-                "value": "xyz"
-            }
+            results["details_url"] = u"https://{}/file-details.php?antibody_id={}".format(
+                self.bit9_client.server,
+                bit9_file_catalog_id
+            )
+            log.info("Effective State :%s", results.get("effectiveState"))
+            log.debug(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

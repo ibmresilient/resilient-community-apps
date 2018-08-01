@@ -75,6 +75,14 @@ class CbProtectClient(object):
         """get file catalog items that match the query string"""
         return self.get("fileCatalog?q={}".format(query))
 
+    def get_file_instance(self, id):
+        """Get a file instance by ID"""
+        return self.get("fileInstance/{}".format(id))
+
+    def update_file_instance(self, id, payload):
+        """update an file instance"""
+        return self.put("fileInstance/{}".format(id), payload=payload)
+
     def get_file_rule(self, id):
         """Get a file rule by ID"""
         return self.get("fileRule/{}".format(id))
@@ -87,6 +95,6 @@ class CbProtectClient(object):
         """Update a file rule"""
         # The file rule id can be None
         if id is None:
-            return self.put("fileRule", payload=payload)
+            return self.post("fileRule", payload=payload)
         else:
             return self.put("fileRule/{}".format(id), payload=payload)

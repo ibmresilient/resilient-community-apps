@@ -30,13 +30,11 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("bit9_file_rule_id: %s", bit9_file_rule_id)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            self.bit9_client = CbProtectClient(self.options)
+            results = self.bit9_client.get_file_rule(bit9_file_rule_id)
 
-            results = {
-                "value": "xyz"
-            }
+            log.info("Done")
+            log.debug(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

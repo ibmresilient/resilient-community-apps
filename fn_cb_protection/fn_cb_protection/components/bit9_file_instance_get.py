@@ -8,39 +8,32 @@ from fn_cb_protection.util.bit9_client import CbProtectClient
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'bit9_file_catalog_query"""
+    """Component that implements Resilient function 'bit9_file_instance_get"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts["fn_cb_protection"]
+        self.options = opts.get("fn_cb_protection", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts["fn_cb_protection"]
+        self.options = opts.get("fn_cb_protection", {})
 
-    @function("bit9_file_catalog_query")
-    def _bit9_file_catalog_query_function(self, event, *args, **kwargs):
-        """Function: Return file catalog objects that match the given criteria."""
+    @function("bit9_file_instance_get")
+    def _bit9_file_instance_get_function(self, event, *args, **kwargs):
+        """Function: Get a file instance item by ID"""
         try:
             # Get the function parameters:
-            bit9_query = kwargs.get("bit9_query")  # text
+            bit9_file_instance_id = kwargs.get("bit9_file_instance_id")  # number
 
             log = logging.getLogger(__name__)
-            log.info("bit9_query: %s", bit9_query)
+            log.info("bit9_file_instance_id: %s", bit9_file_instance_id)
 
-            # Query example: 'id:6' (see https://<server>/api/bit9platform/v1 for details)
             self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.query_file_catalog(bit9_query)
+            results = self.bit9_client.get_file_instance(bit9_file_instance_id)
 
-            # Query results should be a list
-            if isinstance(results, list):
-                log.info("%d results", len(results))
-                results = {
-                    "count": len(results),
-                    "items": results
-                }
+            log.info("Local State: %d", results.get("localState"))
             log.debug(results)
 
             # Produce a FunctionResult with the results

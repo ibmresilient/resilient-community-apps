@@ -66,6 +66,9 @@ class FunctionComponent(ResilientComponent):
             self.bit9_client = CbProtectClient(self.options)
             results = self.bit9_client.update_file_rule(bit9_file_rule_id, payload)
 
+            log.info("Done")
+            log.debug(results)
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

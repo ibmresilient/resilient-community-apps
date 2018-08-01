@@ -33,6 +33,13 @@ class FunctionComponent(ResilientComponent):
             self.bit9_client = CbProtectClient(self.options)
             results = self.bit9_client.get_approval_request(bit9_approval_request_id)
 
+            results["details_url"] = u"https://{}/approval-request-details.php?request_id={}".format(
+                self.bit9_client.server,
+                bit9_approval_request_id
+            )
+            log.info("Request Status :%d", results.get("status"))
+            log.debug(results)
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

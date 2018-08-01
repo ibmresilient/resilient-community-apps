@@ -30,8 +30,18 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("bit9_query: %s", bit9_query)
 
+            # Query example: 'id:6' (see https://<server>/api/bit9platform/v1 for details)
             self.bit9_client = CbProtectClient(self.options)
             results = self.bit9_client.query_approval_request(bit9_query)
+
+            # Query results should be a list
+            if isinstance(results, list):
+                log.info("%d results", len(results))
+                results = {
+                    "count": len(results),
+                    "items": results
+                }
+            log.debug(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
