@@ -3,6 +3,7 @@
 """Function implementation"""
 
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import requests
 from fn_xforce.util.helper import XForceHelper
@@ -39,7 +40,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("xforce_collection_type: %s", xforce_collection_type)
             log.info("xforce_query: %s", xforce_query)
-
+            log.info("Proxies :HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
             if xforce_query is None:
                 raise ValueError("No Query provided for XForce search.")
 
@@ -47,32 +48,36 @@ class FunctionComponent(ResilientComponent):
             proxies = {}
 
             if (HTTP_PROXY):
-              proxies["http"] = HTTP_PROXY
+                proxies["http"] = HTTP_PROXY
             
             if (HTTPS_PROXY):
-              proxies["https"] = HTTPS_PROXY
+                proxies["https"] = HTTPS_PROXY
             
             if (len(proxies) == 0):
-              proxies = None
+                proxies = None
 
+            case_files = None
+            try:
+                # Create the session and set the proxies.
+                with requests.Session() as session:
+                    #session.proxies = proxies
 
-            # Create the session and set the proxies.
-            session = requests.Session()
-            session.proxies = proxies
+                    # Make the HTTP request through the session.
+                    request_string = 'https://api.xforce.ibmcloud.com/casefiles/'+str(xforce_collection_type)+'/fulltext?q='+str(xforce_query)
+                    res = session.get(request_string, auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
 
-            # Make the HTTP request through the session.
-            request_string = 'https://api.xforce.ibmcloud.com/casefiles/'+str(xforce_collection_type)+'/fulltext?q='+str(xforce_query)
-            log.info(request_string)
-            res = session.get(request_string ,auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
+                    case_files = json.loads(res.content)
 
-            log.info(res.text)
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            except Exception as e:
+                log.info(e)
+                raise ValueError("Encountered issue when querying X-Force API")
 
             results = {
-                "value": "xyz"
+                "success": (True if len(case_files["casefiles"]) else False),
+                "case_files": case_files["casefiles"],
+                "num_of_casefiles": len(case_files["casefiles"])
             }
+            yield StatusMessage("Finished function; Success:"+str(results['success']))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
