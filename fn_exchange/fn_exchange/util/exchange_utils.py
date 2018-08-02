@@ -6,7 +6,7 @@ import tempfile
 
 class exchange_utils:
     def __init__(self, opts):
-        self.cert_verify = opts.get('cert_verify') == "True"
+        self.verify_cert = opts.get('verify_cert') == "True"
         self.server = opts.get('server')
         self.username = opts.get('username')
         self.email = opts.get('email')
@@ -18,14 +18,14 @@ class exchange_utils:
         """Connect to specified account and return it"""
 
         # Don't check certificates
-        if not self.cert_verify:
+        if not self.verify_cert:
             BaseProtocol.HTTP_ADAPTER_CLS = NoVerifyHTTPAdapter
 
         # Use credentials to get account
         credentials = Credentials(username=self.username, password=self.password)
         config = Configuration(server=self.server, credentials=credentials)
         account = Account(primary_smtp_address=primary_smtp_address, config=config,
-                          autodiscover=self.cert_verify, access_type=DELEGATE)
+                          autodiscover=self.verify_cert, access_type=DELEGATE)
         return account
 
     def go_to_folder(self, username, folder_path):
@@ -38,7 +38,7 @@ class exchange_utils:
         return folder
 
     def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None,
-                   start_date=None, end_date=None, has_attachments=None):
+                   start_date=None, end_date=None, has_attachments=None, order_by_recency=None, num_emails=None):
         """Get queried emails"""
 
         folder_path = self.default_folder_path if folder_path is None else folder_path
@@ -77,6 +77,17 @@ class exchange_utils:
         # Check attachments
         if has_attachments is not None:
             filtered_emails = filtered_emails.filter(has_attachments=has_attachments)
+
+        # Order by date
+        if order_by_recency is not None:
+            if order_by_recency:
+                filtered_emails = filtered_emails.order_by('-datetime_received')
+            else:
+                filtered_emails = filtered_emails.order_by('datetime_received')
+
+        # Only get num_emails
+        if num_emails:
+            filtered_emails = filtered_emails[:num_emails]
 
         return filtered_emails
 
