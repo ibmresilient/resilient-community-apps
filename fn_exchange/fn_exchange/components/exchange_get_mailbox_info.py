@@ -26,34 +26,32 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             log = logging.getLogger(__name__)
-            if kwargs.get('exchange_email') is None:
-                username = self.options.get('email')
-                log.info('No connection email was specified, using value from config file')
-            else:
-                username = kwargs.get('exchange_email')
             get_user = kwargs.get('exchange_get_email')
-            log.info("username: %s" % username)
             log.info("get_user: %s" % get_user)
 
             # Initialize utils
             utils = exchange_utils(self.options)
 
-            # Connect to account
-            yield StatusMessage("Connecting to %s ..." % username)
+            # Connect to server
+            username = self.options.get("email")
+            yield StatusMessage("Getting mailbox info for %s", get_user)
             account = utils.connect_to_account(username)
-            yield StatusMessage("Connected")
 
             # Get mailbox info
-            yield StatusMessage("Getting mailbox info")
-            info = account.protocol.resolve_names([get_user])[0]
-            yield StatusMessage("Done getting mailbox info")
+            info = account.protocol.resolve_names([get_user])
+            if len(info) == 1:
+                info = info[0]
+                results = {
+                    "name": info.name,
+                    "email_address": info.email_address,
+                    "routing_type": info.routing_type,
+                    "mailbox_type": info.mailbox_type
+                }
+            else:
+                results = {}
+                yield StatusMessage("No mailbox found for %s", get_user)
 
-            results = {
-                "name": info.name,
-                "email_address": info.email_address,
-                "routing_type": info.routing_type,
-                "mailbox_type": info.mailbox_type
-            }
+            yield StatusMessage("Done getting mailbox info")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
