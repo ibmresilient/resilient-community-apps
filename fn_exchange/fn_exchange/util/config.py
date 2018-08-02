@@ -10,7 +10,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_exchange]
-cert_verify=[True|False]
+verify_cert=[True|False]
 server=example.com
 username=domain\\username
 email=admin@example.com
