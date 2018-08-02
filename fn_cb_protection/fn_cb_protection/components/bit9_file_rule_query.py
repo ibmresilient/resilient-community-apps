@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_cb_protection.util.bit9_client import CbProtectClient
+from fn_cb_protection.util.bit9_client import CbProtectClient, escape
 
 
 class FunctionComponent(ResilientComponent):

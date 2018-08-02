@@ -14,6 +14,14 @@ def _is_true(flag):
     return str(flag).lower()[:1] not in ["f", "n", "0"]
 
 
+def escape(query):
+    """Escape a value to be used in a query"""
+    query = query.replace("\\", "\\\\")
+    query = query.replace("|", "\\|")
+    query = query.replace("*", "\\*")
+    return query
+
+
 class CbProtectClient(object):
 
     """A simple client for the CbProtect API.
@@ -75,9 +83,9 @@ class CbProtectClient(object):
         """get file catalog items that match the query string"""
         return self.get("fileCatalog?q={}".format(query))
 
-    def get_file_instance(self, id):
-        """Get a file instance by ID"""
-        return self.get("fileInstance/{}".format(id))
+    def query_file_instance(self, query):
+        """get file rules that match the query string"""
+        return self.get("fileInstance?q={}".format(query))
 
     def update_file_instance(self, id, payload):
         """update an file instance"""
