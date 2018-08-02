@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             # Warn the user
-            yield  StatusMessage("a full search could take up to 15 minutes...")
+            yield  StatusMessage("Watson Search with Local Context could take up to 15 minutes...")
 
             stix_json = None
 
@@ -94,11 +94,11 @@ class FunctionComponent(ResilientComponent):
             #
             # no insights
             #
-            summary = "Full search of indicator {} returns {} observables.".format(qradar_advisor_search_value,
-                                                                                   str(len(observables)))
-            if len(observables) == 1 or len(observables) == 0:
-                summary = "Full search of indicator {} returns {} observable.".format(qradar_advisor_search_value,
-                                                                                      str(len(observables)))
+            summary = "Watson Search with Local Context of indicator {} returns {} observables.".format(qradar_advisor_search_value,
+                                                                                                        str(len(observables)))
+            if len(observables) == 1:
+                summary = "Watson Search with Local Context of indicator {} returns {} observable.".format(qradar_advisor_search_value,
+                                                                                                           str(len(observables)))
 
             results = {
                 "observables": observables,
