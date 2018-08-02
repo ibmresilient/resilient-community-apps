@@ -15,7 +15,7 @@ setup(
         'resilient_circuits>=30.0.0',
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
-        'cryptography>=2.3.0'
+        'cryptography>=2.2.2'
     ],
     packages=find_packages(),
     include_package_data=True,

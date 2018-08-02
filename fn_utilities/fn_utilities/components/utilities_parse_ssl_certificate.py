@@ -67,10 +67,22 @@ class FunctionComponent(ResilientComponent):
                 parsed_cert_openssl = OpenSSL.crypto.load_certificate(
                     OpenSSL.crypto.FILETYPE_PEM, parsed_cert_json)
 
-                # Load cert also with cryptography; this package has better date attributes
-                parsed_cert_crypto = x509.load_pem_x509_certificate(
-                    str(parsed_cert_json).encode('utf-8'), default_backend())
-                
+                '''
+                For python 2 load_pem_x509_certificate expects a string
+
+                The code in the try clause doesnt work for python 3
+                In 3, the string needs to be encoded as UTF8
+
+                But in 2 this encoded string throws a similar error
+                So try catch
+                '''
+                try:
+                    parsed_cert_crypto = x509.load_pem_x509_certificate(
+                        str(parsed_cert_json), default_backend())
+                except TypeError:
+                    # Load cert also with cryptography; this package has better date attributes
+                    parsed_cert_crypto = x509.load_pem_x509_certificate(
+                        str(parsed_cert_json).encode('utf-8'), default_backend())
             except ValueError:
                 yield StatusMessage('Problem encountered loading the certificate as JSON.')
                 yield StatusMessage('Attempting to load from REST API instead.')
