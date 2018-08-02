@@ -33,6 +33,8 @@ class FunctionComponent(ResilientComponent):
             exchange_start_date = kwargs.get("exchange_start_date")  # datepicker
             exchange_end_date = kwargs.get("exchange_end_date")  # datepicker
             exchange_has_attachments = kwargs.get("exchange_has_attachments")  # boolean
+            exchange_order_by_recency = kwargs.get("exchange_order_by_recency")  # boolean
+            exchange_num_emails = kwargs.get("exchange_num_emails")  # int
 
             log = logging.getLogger(__name__)
             # Use default connection email if one was not specified
@@ -51,6 +53,8 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_start_date: %s", exchange_start_date)
             log.info("exchange_end_date: %s", exchange_end_date)
             log.info("exchange_has_attachments: %s", exchange_has_attachments)
+            log.info("exchange_order_by_recency: %s", exchange_order_by_recency)
+            log.info("exchange_num_emails: %s", exchange_num_emails)
 
             # Initialize utils
             utils = exchange_utils(self.options)
@@ -59,7 +63,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting emails")
             emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender, exchange_message_subject,
                                       exchange_message_body, exchange_start_date, exchange_end_date,
-                                      exchange_has_attachments)
+                                      exchange_has_attachments, exchange_order_by_recency, exchange_num_emails)
             yield StatusMessage("Done getting emails")
 
             # Get function results
@@ -69,9 +73,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Moving emails to %s" % exchange_destination_folder_path)
             # get destination folder
             move_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
+            emails_moved = move_folder.all().count()
             for email in emails:
                 email.move(move_folder)
-            yield StatusMessage("Done moving emails")
+            yield StatusMessage("Done moving emails, %d emails moved", emails_moved)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
