@@ -40,7 +40,8 @@ class exchange_utils:
         return folder
 
     def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None, start_date=None,
-                   end_date=None, has_attachments=None, order_by_recency=None, num_emails=None, search_subfolders=False):
+                   end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
+                   search_subfolders=False):
         """Get queried emails"""
 
         # Default folder path if no folder path is specified
