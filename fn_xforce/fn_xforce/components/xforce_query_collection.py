@@ -8,6 +8,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import requests
 from fn_xforce.util.helper import XForceHelper
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'xforce_query_collection"""
 
@@ -31,8 +32,8 @@ class FunctionComponent(ResilientComponent):
             # Get Xforce params
             XFORCE_API_KEY = helper.get_config_option("xforce_apikey")
             XFORCE_API_PASSWORD = helper.get_config_option("xforce_password")
-            HTTP_PROXY = helper.get_config_option("xforce_http_proxy",True)
-            HTTPS_PROXY = helper.get_config_option("xforce_https_proxy",True)
+            HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
+            HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
             # Get the function parameters:
             xforce_collection_type = self.get_select_param(kwargs.get("xforce_collection_type"))  # multiselect, values: "public", "private"
             xforce_query = kwargs.get("xforce_query")  # text
