@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Generate the Resilient customizations required for fn_xforce"""
 
 from __future__ import print_function

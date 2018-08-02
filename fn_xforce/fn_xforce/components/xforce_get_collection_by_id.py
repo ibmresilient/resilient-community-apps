@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -70,9 +71,10 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Encountered issue when querying X-Force API")
 
             results = {
+                "success": (True if 'contents' in case_files else False),
                 "plaintext": case_files["contents"]["plainText"],
                 "created": case_files["created"],
-                "title":case_files["title"],
+                "title": case_files["title"],
                 "tags": case_files["tags"]
             }
 
