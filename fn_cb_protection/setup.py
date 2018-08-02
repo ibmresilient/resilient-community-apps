@@ -32,7 +32,8 @@ setup(
             "Bit9ApprovalRequestQueryFunctionComponent = fn_cb_protection.components.bit9_approval_request_query:FunctionComponent",
             "Bit9FileRuleGetFunctionComponent = fn_cb_protection.components.bit9_file_rule_get:FunctionComponent",
             "Bit9FileCatalogQueryFunctionComponent = fn_cb_protection.components.bit9_file_catalog_query:FunctionComponent",
-            "Bit9FileRuleQueryFunctionComponent = fn_cb_protection.components.bit9_file_rule_query:FunctionComponent"
+            "Bit9FileRuleQueryFunctionComponent = fn_cb_protection.components.bit9_file_rule_query:FunctionComponent",
+            "Bit9PollComponent = fn_cb_protection.components.bit9_poll:Bit9PollComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cb_protection.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_cb_protection.util.customize:customization_data"]

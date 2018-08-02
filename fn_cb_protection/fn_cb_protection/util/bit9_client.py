@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""CbProtection (aka bit) API client"""
+"""CbProtection (aka bit9) API client"""
 
 import requests
 import logging
@@ -27,7 +27,6 @@ class CbProtectClient(object):
     """A simple client for the CbProtect API.
 
        There are no "sessions", each API call is independent.
-       This client just makes it easier to
     """
 
     def __init__(self, options):
@@ -84,11 +83,11 @@ class CbProtectClient(object):
         return self.get("fileCatalog?q={}".format(query))
 
     def query_file_instance(self, query):
-        """get file rules that match the query string"""
+        """get file instances that match the query string"""
         return self.get("fileInstance?q={}".format(query))
 
     def update_file_instance(self, id, payload):
-        """update an file instance"""
+        """update an file instance by ID"""
         return self.put("fileInstance/{}".format(id), payload=payload)
 
     def get_file_rule(self, id):
