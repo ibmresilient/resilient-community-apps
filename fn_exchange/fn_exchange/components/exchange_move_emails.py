@@ -35,12 +35,10 @@ class FunctionComponent(ResilientComponent):
             exchange_has_attachments = kwargs.get("exchange_has_attachments")  # boolean
             exchange_order_by_recency = kwargs.get("exchange_order_by_recency")  # boolean
             exchange_num_emails = kwargs.get("exchange_num_emails")  # int
+            exchange_search_subfolders = kwargs.get("exchange_search_subfolders") # boolean
 
             log = logging.getLogger(__name__)
             # Use default connection email if one was not specified
-            if exchange_email is None:
-                exchange_email = self.options.get('email')
-                log.info('No connection email was specified, using value from config file')
             if exchange_folder_path is None:
                 exchange_folder_path = self.options.get('default_folder_path')
                 log.info('No from folder path was specified, using value from config file')
@@ -55,6 +53,7 @@ class FunctionComponent(ResilientComponent):
             log.info("exchange_has_attachments: %s", exchange_has_attachments)
             log.info("exchange_order_by_recency: %s", exchange_order_by_recency)
             log.info("exchange_num_emails: %s", exchange_num_emails)
+            log.info("exchange_search_subfolders: %s", exchange_search_subfolders)
 
             # Initialize utils
             utils = exchange_utils(self.options)
@@ -63,7 +62,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting emails")
             emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender, exchange_message_subject,
                                       exchange_message_body, exchange_start_date, exchange_end_date,
-                                      exchange_has_attachments, exchange_order_by_recency, exchange_num_emails)
+                                      exchange_has_attachments, exchange_order_by_recency, exchange_num_emails,
+                                      exchange_search_subfolders)
             yield StatusMessage("Done getting emails")
 
             # Get function results
