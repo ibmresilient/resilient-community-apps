@@ -1,8 +1,8 @@
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message
+from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 import time, base64
-import tempfile
 
 class exchange_utils:
     def __init__(self, opts):
@@ -33,18 +33,33 @@ class exchange_utils:
 
         account = self.connect_to_account(username)
         folder = account.root
+        if folder_path is None:
+            return folder
         for dir in folder_path.split('/'):
             folder = folder / dir
         return folder
 
-    def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None,
-                   start_date=None, end_date=None, has_attachments=None, order_by_recency=None, num_emails=None):
+    def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None, start_date=None,
+                   end_date=None, has_attachments=None, order_by_recency=None, num_emails=None, search_subfolders=False):
         """Get queried emails"""
 
+        # Default folder path if no folder path is specified
         folder_path = self.default_folder_path if folder_path is None else folder_path
 
-        folder = self.go_to_folder(username, folder_path)
-        filtered_emails = folder.all()
+        # Get list of all specified folders
+        folders = [self.go_to_folder(username, folder) for folder in folder_path.split(',')]
+
+        # Subfolder query check
+        if search_subfolders:
+            subfolders = []
+            # For each specified folder
+            for folder in folders:
+                if folder.child_folder_count > 0:
+                    subfolders += list(folder.walk().get_folders())
+            folders += subfolders
+
+        folder_collection = FolderCollection(account=self.connect_to_account(username), folders=folders)
+        filtered_emails = folder_collection.all()
 
         # filter by sender
         if sender:
