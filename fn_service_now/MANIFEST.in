@@ -1,0 +1,3 @@
+include README.md
+include fn_service_now/util/*
+include fn_service_now/LICENSE
