@@ -19,5 +19,19 @@ token=XXXXX-XXXX-XXXXX-XXXX
 
 # If your CbProtect server has a self-signed TLS certificate, you cannot verify it:
 # verify=false
+
+# Interval (seconds) for automatic escalation of approval requests, set 0 to disable
+# Suggest 300 as a starting point, which will check CbProtect every 5 minutes
+escalation_interval=0
+
+# Optional: query for which requests to escalate; default is to escalate all open approval requests
+# escalation_query=resolution:0
+
+# Optional: path to a custom template file for the escalated incident
+# template_file=/usr/integration/bit9_escalation.jinja
+
+# Optional: set this to only escalate a single request ID, e.g. when testing a custom template 
+# test_single_request=4
+
 """
     return config_data
