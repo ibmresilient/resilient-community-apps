@@ -114,6 +114,7 @@ class exchange_utils:
             'emails': {}
         }
 
+
         # Example function results
         # results = {
         #     'email_ids': ['id1', 'idN'],
@@ -175,10 +176,13 @@ class exchange_utils:
                 curr_email['subject'] = email.subject
                 curr_email['body'] = email.body
 
-                # Check to see if there is a sender
+                # Check to see if there is a sender, might be no sender if email is a draft
                 if email.sender:
                     curr_email['sender_name'] = email.sender.name
                     curr_email['sender_email'] = email.sender.email_address
+                else:
+                    curr_email['sender_name'] = None
+                    curr_email['sender_email'] = None
 
                 # Check attachments
                 curr_email['attachments'] = {}
