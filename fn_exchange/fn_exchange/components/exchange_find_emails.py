@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
                                       exchange_message_body, exchange_start_date, exchange_end_date,
                                       exchange_has_attachments, exchange_order_by_recency, exchange_num_emails,
                                       exchange_search_subfolders)
-            yield StatusMessage("Done finding emails, %d emails found", emails.count())
+            yield StatusMessage("Done finding emails, %d emails found" % emails.count())
 
             # Populate results with query data
             results = utils.create_email_function_results(emails)

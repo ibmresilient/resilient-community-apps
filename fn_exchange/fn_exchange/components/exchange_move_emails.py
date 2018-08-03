@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             emails_moved = move_folder.all().count()
             for email in emails:
                 email.move(move_folder)
-            yield StatusMessage("Done moving emails, %d emails moved", emails_moved)
+            yield StatusMessage("Done moving emails, %d emails moved" % emails_moved)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

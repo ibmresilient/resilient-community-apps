@@ -71,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             # Delete Emails
             yield StatusMessage("Deleting emails")
             emails.delete()
-            yield StatusMessage("Done deleting emails, %d emails deleted", num_deleted)
+            yield StatusMessage("Done deleting emails, %d emails deleted" % num_deleted)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

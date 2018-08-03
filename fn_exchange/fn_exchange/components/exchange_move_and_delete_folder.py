@@ -55,6 +55,7 @@ class FunctionComponent(ResilientComponent):
 
             # Move items
             yield StatusMessage("Moving items")
+            item_count = from_folder.all().count()
             for item in from_folder.all():
                 item.move(to_folder)
             yield StatusMessage("Done moving items")
@@ -62,7 +63,7 @@ class FunctionComponent(ResilientComponent):
             # Delete folder
             yield StatusMessage("Deleting folder %s" % exchange_folder_path)
             from_folder.delete()
-            yield StatusMessage("%s deleted" % exchange_folder_path)
+            yield StatusMessage("%s deleted, %d items deleted" % exchange_folder_path, item_count)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
