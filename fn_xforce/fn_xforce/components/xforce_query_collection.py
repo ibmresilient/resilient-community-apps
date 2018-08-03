@@ -5,7 +5,8 @@
 
 import logging
 import json
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, \
+                                StatusMessage, FunctionResult, FunctionError
 import requests
 from fn_xforce.util.helper import XForceHelper
 
@@ -25,18 +26,20 @@ class FunctionComponent(ResilientComponent):
 
     @function("xforce_query_collection")
     def _xforce_query_collection_function(self, event, *args, **kwargs):
-        """Function: Allows user to submit a query to the X-Force Collections API. Supports searching either public or private collections."""
+        """Function: Allows user to submit a query to the X-Force Collections API.
+         Supports searching either public or private collections."""
         try:
 
             yield StatusMessage("Starting")
             helper = XForceHelper(self.options)
             # Get Xforce params
-            XFORCE_API_KEY = helper.get_config_option("xforce_apikey")
-            XFORCE_API_PASSWORD = helper.get_config_option("xforce_password")
+            XFORCE_APIKEY = helper.get_config_option("xforce_apikey")
+            XFORCE_PASSWORD = helper.get_config_option("xforce_password")
             HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
             HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
             # Get the function parameters:
-            xforce_collection_type = self.get_select_param(kwargs.get("xforce_collection_type"))  # multiselect, values: "public", "private"
+            xforce_collection_type = self.get_select_param(
+                kwargs.get("xforce_collection_type"))
             xforce_query = kwargs.get("xforce_query")  # text
 
             log = logging.getLogger(__name__)
@@ -49,29 +52,26 @@ class FunctionComponent(ResilientComponent):
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
-            if (HTTP_PROXY):
+            if HTTP_PROXY:
                 proxies["http"] = HTTP_PROXY
-            
-            if (HTTPS_PROXY):
+            if HTTPS_PROXY:
                 proxies["https"] = HTTPS_PROXY
-            
-            if (len(proxies) == 0):
+            if len(proxies) == 0:
                 proxies = None
 
             case_files = None
             try:
                 # Create the session and set the proxies.
                 with requests.Session() as session:
-                    #session.proxies = proxies
+                    session.proxies = proxies
 
                     # Make the HTTP request through the session.
                     request_string = 'https://api.xforce.ibmcloud.com/casefiles/'+str(xforce_collection_type)+'/fulltext?q='+str(xforce_query)
-                    res = session.get(request_string, auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
-
+                    res = session.get(
+                        request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
                     case_files = json.loads(res.content)
-
-            except Exception as e:
-                log.info(e)
+            except Exception as error:
+                log.info(error)
                 raise ValueError("Encountered issue when querying X-Force API")
 
             results = {
