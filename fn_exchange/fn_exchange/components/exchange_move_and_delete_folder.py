@@ -34,9 +34,9 @@ class FunctionComponent(ResilientComponent):
             if exchange_email is None:
                 exchange_email = self.options.get('email')
                 log.info('No connection email was specified, using value from config file')
-            log.info("exchange_email: %s", exchange_email)
-            log.info("exchange_folder_path: %s", exchange_folder_path)
-            log.info("exchange_destination_folder_path: %s", exchange_destination_folder_path)
+            log.info("exchange_email: %s" % exchange_email)
+            log.info("exchange_folder_path: %s" % exchange_folder_path)
+            log.info("exchange_destination_folder_path: %s" % exchange_destination_folder_path)
 
             # Initialize utils
             utils = exchange_utils(self.options)

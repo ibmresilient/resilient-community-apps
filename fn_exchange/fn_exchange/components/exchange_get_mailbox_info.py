@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
 
             # Connect to server
             username = self.options.get("email")
-            yield StatusMessage("Getting mailbox info for %s", get_user)
+            yield StatusMessage("Getting mailbox info for %s" % get_user)
             account = utils.connect_to_account(username)
 
             # Get mailbox info
@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
                 }
             else:
                 results = {}
-                yield StatusMessage("No mailbox found for %s", get_user)
+                yield StatusMessage("No mailbox found for %s" % get_user)
 
             yield StatusMessage("Done getting mailbox info")
 
