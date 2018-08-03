@@ -2,9 +2,9 @@
 
 """CbProtection (aka bit9) API client"""
 
-import requests
-import logging
 import json
+import requests
+
 
 URI_PATH = "api/bit9platform/v1"
 
@@ -62,21 +62,21 @@ class CbProtectClient(object):
         response.raise_for_status()
         return response.json()
 
-    def get_approval_request(self, id):
+    def get_approval_request(self, request_id):
         """get an approval request"""
-        return self.get("approvalRequest/{}".format(id))
+        return self.get("approvalRequest/{}".format(request_id))
 
     def query_approval_request(self, query):
         """get approval requests that match the query string"""
         return self.get("approvalRequest?q={}".format(query))
 
-    def update_approval_request(self, id, payload):
+    def update_approval_request(self, request_id, payload):
         """update an approval request"""
-        return self.put("approvalRequest/{}".format(id), payload=payload)
+        return self.put("approvalRequest/{}".format(request_id), payload=payload)
 
-    def get_file_catalog(self, id):
+    def get_file_catalog(self, file_catalog_id):
         """Get a file catalog item by ID"""
-        return self.get("fileCatalog/{}".format(id))
+        return self.get("fileCatalog/{}".format(file_catalog_id))
 
     def query_file_catalog(self, query):
         """get file catalog items that match the query string"""
@@ -86,22 +86,21 @@ class CbProtectClient(object):
         """get file instances that match the query string"""
         return self.get("fileInstance?q={}".format(query))
 
-    def update_file_instance(self, id, payload):
+    def update_file_instance(self, file_instance_id, payload):
         """update an file instance by ID"""
-        return self.put("fileInstance/{}".format(id), payload=payload)
+        return self.put("fileInstance/{}".format(file_instance_id), payload=payload)
 
-    def get_file_rule(self, id):
+    def get_file_rule(self, file_rule_id):
         """Get a file rule by ID"""
-        return self.get("fileRule/{}".format(id))
+        return self.get("fileRule/{}".format(file_rule_id))
 
     def query_file_rule(self, query):
         """get file rules that match the query string"""
         return self.get("fileRule?q={}".format(query))
 
-    def update_file_rule(self, id, payload):
+    def update_file_rule(self, file_rule_id, payload):
         """Update a file rule"""
         # The file rule id can be None
         if id is None:
             return self.post("fileRule", payload=payload)
-        else:
-            return self.put("fileRule/{}".format(id), payload=payload)
+        return self.put("fileRule/{}".format(file_rule_id), payload=payload)

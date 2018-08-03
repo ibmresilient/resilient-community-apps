@@ -6,11 +6,11 @@ import os
 import logging
 import datetime
 import calendar
-from circuits import Event, Timer, handler
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from circuits import Event, Timer
+from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
 from pkg_resources import Requirement, resource_filename
-from fn_cb_protection.util.bit9_client import CbProtectClient, escape
+from fn_cb_protection.util.bit9_client import CbProtectClient
 
 
 BIT9_POLL_CHANNEL = "bit9_escalation"
@@ -121,7 +121,7 @@ class Bit9PollComponent(ResilientComponent):
 
         # Query results should be a list
         if not isinstance(results, list):
-            self.log.warn(u"Query produced unexpected value: {}".format(results))
+            self.log.warn(u"Query produced unexpected value: %s", results)
             return
 
         self.log.info("%d results", len(results))

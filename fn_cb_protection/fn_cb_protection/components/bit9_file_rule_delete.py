@@ -30,8 +30,8 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("bit9_file_rule_id: %s", bit9_file_rule_id)
 
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.delete_file_rule(bit9_file_rule_id)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.delete_file_rule(bit9_file_rule_id)
 
             log.info("Done")
             log.debug(results)

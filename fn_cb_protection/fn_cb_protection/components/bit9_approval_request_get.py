@@ -30,11 +30,11 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("bit9_approval_request_id: %s", bit9_approval_request_id)
 
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.get_approval_request(bit9_approval_request_id)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.get_approval_request(bit9_approval_request_id)
 
             results["details_url"] = u"https://{}/approval-request-details.php?request_id={}".format(
-                self.bit9_client.server,
+                bit9_client.server,
                 bit9_approval_request_id
             )
             log.info("Request Status :%d", results.get("status"))

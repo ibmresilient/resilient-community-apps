@@ -63,8 +63,8 @@ class FunctionComponent(ResilientComponent):
             if bit9_file_rule_hash:
                 payload["hash"] = bit9_file_rule_hash
 
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.update_file_rule(bit9_file_rule_id, payload)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.update_file_rule(bit9_file_rule_id, payload)
 
             log.info("Done")
             log.debug(results)

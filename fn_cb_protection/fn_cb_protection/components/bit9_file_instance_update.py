@@ -36,8 +36,8 @@ class FunctionComponent(ResilientComponent):
                 "localState": bit9_file_instance_localstate
             }
 
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.update_file_instance(bit9_file_instance_id, payload)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.update_file_instance(bit9_file_instance_id, payload)
 
             log.info("Done")
             log.debug(results)

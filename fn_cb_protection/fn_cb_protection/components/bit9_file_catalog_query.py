@@ -31,8 +31,8 @@ class FunctionComponent(ResilientComponent):
             log.info("bit9_query: %s", bit9_query)
 
             # Query example: 'id:6' (see https://<server>/api/bit9platform/v1 for details)
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.query_file_catalog(bit9_query)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.query_file_catalog(bit9_query)
 
             # Query results should be a list
             if isinstance(results, list):

@@ -51,8 +51,8 @@ class FunctionComponent(ResilientComponent):
             if bit9_file_instance_localstate:
                 query.append("localState:{}".format(bit9_file_instance_localstate))
             bit9_query = "&q=".join(query)
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.query_file_instance(bit9_query)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.query_file_instance(bit9_query)
 
             # Query results should be a list
             if isinstance(results, list):

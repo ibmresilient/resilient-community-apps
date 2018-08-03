@@ -44,11 +44,11 @@ class FunctionComponent(ResilientComponent):
             if bit9_approval_request_status:
                 payload["status"] = bit9_approval_request_status
 
-            self.bit9_client = CbProtectClient(self.options)
-            results = self.bit9_client.update_approval_request(bit9_approval_request_id, payload)
+            bit9_client = CbProtectClient(self.options)
+            results = bit9_client.update_approval_request(bit9_approval_request_id, payload)
 
             results["details_url"] = u"https://{}/approval-request-details.php?request_id={}".format(
-                self.bit9_client.server,
+                bit9_client.server,
                 bit9_approval_request_id
             )
             log.info("Request Status: %d", results.get("status"))
