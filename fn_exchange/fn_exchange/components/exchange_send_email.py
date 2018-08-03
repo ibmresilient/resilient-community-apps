@@ -62,7 +62,12 @@ class FunctionComponent(ResilientComponent):
             email.send_and_save()
             yield StatusMessage("Email sent")
 
-            results = {}
+            results = {
+                'recipients': exchange_emails,
+                'sender': account.primary_smtp_address,
+                'subject': exchange_message_subject,
+                'body': exchange_message_body
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
