@@ -216,26 +216,6 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-    def run_application_command(self, application_names, action_name, *args, **kwargs):
-        results = {}
-        if not isinstance(application_names, list):
-            application_names = [application_names]
-        log.info("The provided command is {}".format(action_name))
-        if action_name in self.APP_ACTIONS:
-            guids = self.get_app_guids(application_names)
-            log.info(guids)
-            for app in application_names:
-                if app in guids:
-                    results[app] = self.app_commands[action_name](guids[app], *args, **kwargs)
-                else:
-                    message = "App {} wasn't found.".format(app)
-                    log.info(message)
-                    results[app] = {
-                        "message": message,
-                        "success": False
-                    }
-        return results
-
     def create_app(self, values=None):
         """
         Creating an app with the provided values.
@@ -253,14 +233,14 @@ class IBMCloudFoundryAPI:
         response = requests.post(self.base_url + self.CF_ALL_APPS, headers=oauth_authorization_headers,
                                  json=values)
         if response.status_code == 201:  # return status code for update
-            log.info("Successful deletion of {}".format(guid))
+            log.info("Successful creation ")
             app_status = response.json()
             app_status["success"] = True
         else:
             app_status["success"] = False
-            app_status["details"] = "Couldn't delete."
+            app_status["details"] = "Couldn't create."
             app_status["last_updated"] = None
-            log.error("Error while deleting cf application {}.".format(guid))
+            log.error("Error while creating cf application {}.")
             log.debug(response)
         return app_status
 
@@ -278,7 +258,7 @@ class IBMCloudFoundryAPI:
                     message = "App {} wasn't found.".format(app)
                     log.info(message)
                     results[app] = {
-                        "message": message,
+                        "details": message,
                         "success": False
                     }
         return results
@@ -298,7 +278,7 @@ class IBMCloudFoundryAPI:
                 message = "App {} wasn't found.".format(app_name)
                 log.info(message)
                 results[app_name] = {
-                    "message": message,
+                    "details": message,
                     "success": False
                 }
         return results

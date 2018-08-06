@@ -49,37 +49,6 @@ class FunctionComponent(ResilientComponent):
         except Exception as e:
             yield FunctionError(str(e))
 
-    @function("fn_cloud_foundry_instance_command")
-    def _literally_any_name(self, event, *args, **kwargs):
-        """Function: Performs a specified action on the chosen Cloud Foundry applications."""
-        try:
-            # Get the function parameters:
-            action_name = self.get_select_param(kwargs.get("fn_cloud_foundry_action"))
-            application_name = kwargs.get("fn_cloud_foundry_applications")  # text
-            instances = kwargs.get("fn_cloud_foundry_instances")  # text
-
-            log = logging.getLogger(__name__)
-            log.info("fn_cloud_foundry_action: %s", action_name)
-            log.info("fn_cloud_foundry_applications: %s", application_name)
-            log.info("fn_cloud_foundry_instances: %s", instances)
-
-            yield StatusMessage("Starting...")
-
-            base_url = self.options["cf_api_base"]
-            instances = [x.strip() for x in instances.split(",")]
-
-            authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
-            cf_service = IBMCloudFoundryAPI(base_url, authenticator)
-            results = cf_service.run_application_instance_command(application_name, instances, action_name)
-            log.info("Result: %s", results)
-            yield StatusMessage("Done...")
-            self._add_keys(results)
-            # Produce a FunctionResult with the results
-            yield FunctionResult(results)
-        except Exception as e:
-            yield FunctionError(str(e))
-
-
     @staticmethod
     def _add_keys(result):
         keys = list(result.keys())
