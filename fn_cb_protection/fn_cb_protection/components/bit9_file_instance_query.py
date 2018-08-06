@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
@@ -61,7 +64,10 @@ class FunctionComponent(ResilientComponent):
                     "count": len(results),
                     "items": results
                 }
-            log.debug(results)
+                log.debug(results)
+            else:
+                log.warn(u"Expected a list but received:")
+                log.warn(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

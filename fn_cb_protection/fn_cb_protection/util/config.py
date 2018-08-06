@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Generate a default configuration-file section for fn_cb_protection"""
 
@@ -18,7 +19,7 @@ server=10.200.1.1
 token=XXXXX-XXXX-XXXXX-XXXX
 
 # If your CbProtect server has a self-signed TLS certificate, you cannot verify it:
-# verify=false
+# verify_cert=false
 
 # Interval (seconds) for automatic escalation of approval requests, set 0 to disable
 # Suggest 300 as a starting point, which will check CbProtect every 5 minutes
@@ -31,7 +32,7 @@ escalation_interval=0
 # template_file=/usr/integration/bit9_escalation.jinja
 
 # Optional: set this to only escalate a single request ID, e.g. when testing a custom template 
-# test_single_request=4
+# test_single_request=999
 
 """
     return config_data

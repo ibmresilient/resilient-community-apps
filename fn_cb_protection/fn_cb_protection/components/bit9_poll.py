@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Function implementation"""
 
 import os
@@ -48,8 +51,7 @@ def timestamp_to_millis(val):
         dt = datetime.datetime.strptime(ts, ts_format)
         return calendar.timegm(dt.utctimetuple()) * 1000
     except Exception as e:
-        logging.getLogger(__name__).exception(u"%s Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ", val)
-        return None
+        raise ValueError(u"Timestamp '{}' Not in expected timestamp format YYYY-MM-DDTHH:MM:SS.mmmZ".format(val))
 
 
 class Bit9PollComponent(ResilientComponent):
