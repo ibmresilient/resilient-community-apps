@@ -40,6 +40,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             if exchange_folder_path is None:
                 exchange_folder_path = self.options.get('default_folder_path')
+                log.info('No folder path was specified, using value from config file')
             log.info("exchange_email: %s" % exchange_email)
             log.info("exchange_folder_path: %s" % exchange_folder_path)
             log.info("exchange_sender: %s" % exchange_sender)
