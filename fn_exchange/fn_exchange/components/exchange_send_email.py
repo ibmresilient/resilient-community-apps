@@ -44,18 +44,10 @@ class FunctionComponent(ResilientComponent):
             utils = exchange_utils(self.options)
 
             # Get sender account
-            yield StatusMessage("Connecting to account %s" % exchange_email)
-            account = utils.connect_to_account(exchange_email)
+            yield StatusMessage("Connecting to account %s and creating email" % exchange_email)
+            email = utils.create_email_message(exchange_email, exchange_message_subject, exchange_message_body,
+                                               exchange_emails)
             yield StatusMessage("Successfully connected to %s" % exchange_email)
-
-            # Create email
-            email = Message(
-                account=account,
-                folder=account.sent,
-                subject=exchange_message_subject,
-                body=exchange_message_body,
-                to_recipients=exchange_emails.split(',')
-            )
 
             # Send email
             yield StatusMessage("Sending email")
@@ -64,7 +56,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 'recipients': exchange_emails,
-                'sender': account.primary_smtp_address,
+                'sender': exchange_email,
                 'subject': exchange_message_subject,
                 'body': exchange_message_body
             }

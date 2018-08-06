@@ -1,4 +1,4 @@
-from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message
+from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
@@ -39,6 +39,11 @@ class exchange_utils:
             folder = folder / dir
         return folder
 
+    def parse_time(self, epoch_time):
+        """Convert epoch time in milliseconds to [year, month, day, hour, minute, second]"""
+        date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000.0))
+        return [int(i) for i in date.split('-')]
+
     def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None, start_date=None,
                    end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
                    search_subfolders=False):
@@ -75,16 +80,14 @@ class exchange_utils:
         # filter by date
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            start_date = str(time.strftime('%Y-%m-%d', time.gmtime(start_date/1000.0)))
-            start_date = [int(i) for i in start_date.split('-')]
+            start_date = self.parse_time(start_date)
 
             tz = EWSTimeZone.timezone(self.default_timezone)
             start = tz.localize(EWSDateTime(start_date[0], start_date[1], start_date[2]))
             filtered_emails = filtered_emails.filter(datetime_received__gte=start)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            end_date = str(time.strftime('%Y-%m-%d', time.gmtime(end_date/1000.0)))
-            end_date = [int(i) for i in end_date.split('-')]
+            end_date = self.parse_time(end_date)
 
             tz = EWSTimeZone.timezone(self.default_timezone)
             end = tz.localize(EWSDateTime(end_date[0], end_date[1], end_date[2]))
@@ -106,6 +109,42 @@ class exchange_utils:
             filtered_emails = filtered_emails[:num_emails]
 
         return filtered_emails
+
+    def create_email_message(self, username, subject, body, to_recipients):
+        """Create an email message object"""
+        account = self.connect_to_account(username)
+        email = Message(
+            account=account,
+            folder=account.sent,
+            subject=subject,
+            body=body,
+            to_recipients=to_recipients.split(',')
+        )
+        return email
+
+    def create_meeting(self, username, start_time, end_time, subject, body, required_attendees, optional_attendees):
+        """Create a meeting object"""
+        account = self.connect_to_account(username)
+        tz = EWSTimeZone.timezone(self.default_timezone)
+        start_time = self.parse_time(start_time)
+        end_time = self.parse_time(end_time)
+
+        if required_attendees:
+            required_attendees = required_attendees.split(',')
+        if optional_attendees:
+            optional_attendees = optional_attendees.split(',')
+
+        meeting = CalendarItem(
+            account=account,
+            folder=account.calendar,
+            start=tz.localize(EWSDateTime(start_time[0], start_time[1], start_time[2], start_time[3], start_time[4])),
+            end=tz.localize(EWSDateTime(end_time[0], end_time[1], end_time[2], end_time[3], end_time[4])),
+            subject=subject,
+            body=body,
+            required_attendees=required_attendees,
+            optional_attendees=optional_attendees
+        )
+        return meeting
 
     def create_email_function_results(self, emails):
         """Create function results from email query results"""
