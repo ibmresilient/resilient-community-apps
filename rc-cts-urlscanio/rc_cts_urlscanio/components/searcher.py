@@ -22,16 +22,17 @@ class UrlScanIoSearcher(BaseComponent):
     """
 
     CONFIG_SECTION = "urlscanio"
-    URLSCAN_IO_SEARCH_API_URL = "https://urlscan.io/api/v1/search/?q=page.url:"
-    URLSCAN_IO_RESULT_API_URL = "https://urlscan.io/api/v1/result/"
     HEADERS = {'Content-Type': 'application/json'}
-    SIZE_QUERY_PARAM_FOR_SERACH_API = "&size="
+    SEARCH_API_SIZE_QUERY_PARAM = "&size="
+    SEARCH_API_QUERY_TERM_PAGE_URL_PARAM = "?q=page.url:"
 
     def __init__(self, opts):
         super(UrlScanIoSearcher, self).__init__(opts)
         LOG.info(opts)
 
         # Load config settings
+        self.urlscan_io_search_api_url = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_search_api_url")
+        self.urlscan_io_result_api_url = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_result_api_url")
         self.urlscan_io_search_size = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_search_size")
 
     # Register this as an async searcher for the URL /<root>/example
@@ -59,9 +60,12 @@ class UrlScanIoSearcher(BaseComponent):
         hits = []
 
         try:
-            optional_size_param = "{0}{1}".format(self.SIZE_QUERY_PARAM_FOR_SERACH_API, self.urlscan_io_search_size) \
+            optional_size_param = "{0}{1}".format(self.SEARCH_API_SIZE_QUERY_PARAM, self.urlscan_io_search_size) \
                 if self.urlscan_io_search_size else ""
-            url = "{0}\"{1}\"{2}".format(self.URLSCAN_IO_SEARCH_API_URL, artifact_value, optional_size_param)
+
+            url = "{0}{1}\"{2}\"{3}".format(self.urlscan_io_search_api_url, self.SEARCH_API_QUERY_TERM_PAGE_URL_PARAM,
+                                            artifact_value, optional_size_param)
+
             search_response = requests.get(url, headers=self.HEADERS)
 
             if search_response.status_code == 200:
@@ -99,7 +103,7 @@ class UrlScanIoSearcher(BaseComponent):
         :param search_result: dictionary
         """
         result_id = search_result.get('_id', None)
-        result_url = "{0}{1}".format(self.URLSCAN_IO_RESULT_API_URL, result_id)
+        result_url = "{0}{1}".format(self.urlscan_io_result_api_url, result_id)
         result_response = requests.get(result_url, headers=self.HEADERS)
 
         if result_response.status_code == 200:

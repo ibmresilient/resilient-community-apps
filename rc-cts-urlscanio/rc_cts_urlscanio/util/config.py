@@ -10,6 +10,11 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[urlscanio]
+
+# Define the API URL
+urlscan_io_search_api_url=https://urlscan.io/api/v1/search/
+urlscan_io_result_api_url=https://urlscan.io/api/v1/result/
+
 # Optional setting
 # Number of results returned. 
 # Comment out this line to return 100 results - the default.

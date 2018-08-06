@@ -11,7 +11,6 @@ To query urlscan.io Search API user does not need to provide API key.
 
 Prerequisites
 ```
-resilient
 resilient_circuits
 rc-webserver
 rc-cts
