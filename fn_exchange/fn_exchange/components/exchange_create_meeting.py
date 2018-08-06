@@ -62,8 +62,8 @@ class FunctionComponent(ResilientComponent):
                 'sender': exchange_email,
                 'subject': exchange_meeting_subject,
                 'body': exchange_meeting_body,
-                'start_time': utils.parse_time(exchange_meeting_start_time),
-                'end_time': utils.parse_time(exchange_meeting_end_time)
+                'start_time': exchange_meeting_start_time,
+                'end_time': exchange_meeting_end_time
             }
 
             # Produce a FunctionResult with the results
