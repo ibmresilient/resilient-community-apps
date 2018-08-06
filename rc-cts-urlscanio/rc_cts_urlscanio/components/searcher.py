@@ -92,6 +92,7 @@ class UrlScanIoSearcher(BaseComponent):
                     LOG.info("URL {0} isn't marked as malicious.".format(artifact_value))
             else:
                 LOG.info("No hit information found on URL: {0}".format(artifact_value))
+                LOG.debug(search_response.text)
 
         except BaseException as ex:
             LOG.exception(ex.message)
@@ -108,7 +109,6 @@ class UrlScanIoSearcher(BaseComponent):
 
         if result_response.status_code == 200:
             result_content = json.loads(result_response.text)
-            LOG.debug(result_content)
 
             report_stats = result_content.get('stats', None)
 
@@ -132,13 +132,16 @@ class UrlScanIoSearcher(BaseComponent):
 
                     return Hit(
                         StringProp(name="Time Last Scanner", value=scan_time),
-                        StringProp(name="Number of Countries", value=countries),
+                        NumberProp(name="Number of Countries", value=countries),
                         StringProp(name="City and Country", value=city_country),
                         StringProp(name="Server", value=server),
                         StringProp(name="ASN Name", value=asn),
                         UriProp(name="Report Link", value=report_url),
                         UriProp(name="Screenshot Link", value=png_url)
                     )
+        else:
+            LOG.info("No Result information found on URL: {0}".format(result_url))
+            LOG.debug(result_response.text)
 
     def _prepare_city_contry(self, *argv):
         """
