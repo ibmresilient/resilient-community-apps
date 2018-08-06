@@ -25,9 +25,10 @@ setup(
             "ExchangeFindEmailsFunctionComponent = fn_exchange.components.exchange_find_emails:FunctionComponent",
             "ExchangeDeleteEmailsFunctionComponent = fn_exchange.components.exchange_delete_emails:FunctionComponent",
             "ExchangeMoveAndDeleteFolderFunctionComponent = fn_exchange.components.exchange_move_and_delete_folder:FunctionComponent",
-            "ExchangeSendEmailFunctionComponent = fn_exchange.components.exchange_send_email:FunctionComponent",
+            "ExchangeCreateMeetingFunctionComponent = fn_exchange.components.exchange_create_meeting:FunctionComponent",
             "ExchangeMoveEmailsFunctionComponent = fn_exchange.components.exchange_move_emails:FunctionComponent",
-            "ExchangeGetMailboxInfoFunctionComponent = fn_exchange.components.exchange_get_mailbox_info:FunctionComponent"
+            "ExchangeGetMailboxInfoFunctionComponent = fn_exchange.components.exchange_get_mailbox_info:FunctionComponent",
+            "ExchangeSendEmailFunctionComponent = fn_exchange.components.exchange_send_email:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_exchange.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_exchange.util.customize:customization_data"]
