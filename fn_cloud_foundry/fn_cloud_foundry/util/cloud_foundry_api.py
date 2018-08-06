@@ -20,7 +20,7 @@ class IBMCloudFoundryAPI:
     CF_APP_INSTANCES= "/{}/instances"
     CF_DEL_INSTANCE = "/{}/instances/{}"
 
-    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "create", "info"]
+    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "info", "recreate"]
     INSTANCE_ACTIONS= ["delete"]
 
     def __init__(self, base_url, authenticator):
@@ -35,8 +35,8 @@ class IBMCloudFoundryAPI:
             "delete":       self.delete_app,
             "update":       self.update_app,
             "instances":    self.get_app_instances,
-            "create":       self.create_app,
-            "info":         self.get_app_info
+            "info":         self.get_app_info,
+            "recreate":     self.recreate_app
         }
         self.instance_commands = {
             "delete":       self.delete_app_instance
@@ -244,6 +244,9 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
+    def recreate_app(self):
+        pass
+
     def run_application_command(self, application_names, action_name, *args, **kwargs):
         results = {}
         if not isinstance(application_names, list):
@@ -340,14 +343,9 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-
     @staticmethod
     def convert_timestamp_to_epoch_time(ts, ts_format="%Y-%m-%dT%H:%M:%SZ"):
         utc_time = datetime.strptime(ts, ts_format)
         epoch_time = (utc_time - datetime(1970, 1, 1)).total_seconds()
         return epoch_time
 
-
-#     yitd_jXTSnP8J8xg4p4tSDdLVZEspbxASbSNOzbcTMA_  -- key workds
-#     SFZu3mliDuJ_pNXPEc8B_BUqAuOmfjup94i_qkvCBYsO  -- this too
-#     SSV4G_Xy_UWWnIVjCGBeVHiCiBtiM2MJNdi8j2U_akne  -- staging

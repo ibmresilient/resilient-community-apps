@@ -27,8 +27,15 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             action_name = self.get_select_param(kwargs.get("fn_cloud_foundry_instance_action"))
-            application_name = kwargs.get("fn_cloud_foundry_applications")  # text
-            instances = kwargs.get("fn_cloud_foundry_instances")  # text
+            application_name = kwargs.get("fn_cloud_foundry_applications", None)  # text
+            instances = kwargs.get("fn_cloud_foundry_instances", None)  # text
+            additional_parameters = kwargs.get("fn_cloud_foundry_additional_parameters_json", None)  # text
+
+            if additional_parameters is None:
+                additional_parameters = {}
+            else:
+                import json
+                additional_parameters = json.loads(additional_parameters)
 
             log = logging.getLogger(__name__)
             log.info("fn_cloud_foundry_action: %s", action_name)
@@ -50,3 +57,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(str(e))
+
+    @staticmethod
+    def _add_keys(result):
+        keys = list(result.keys())
+        for item in result:
+            if isinstance(result[item], dict):
+                FunctionComponent._add_keys(result[item])
+        result["_keys"] = keys
