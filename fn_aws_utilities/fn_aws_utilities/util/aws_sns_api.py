@@ -2,42 +2,34 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-
-import boto3
 import logging
 from resilient_circuits import FunctionError
+from fn_aws_utilities.util.aws_common import AWSCommon
 
 
-class AwsSns:
+class AwsSns(AWSCommon):
     def __init__(self, aws_access_key_id, aws_secret_access_key, region_name, topic_name):
         """Initializes boto3 client"""
-        client = None
-        # Multithread-fix
-        while not client:
-            try:
-                client = boto3.client("sns",
-                                      aws_access_key_id=aws_access_key_id,
-                                      aws_secret_access_key=aws_secret_access_key,
-                                      region_name=region_name
-                                      )
-            except Exception:
-                client = None
-
-        self.aws_client = client
+        AWSCommon.__init__(self, "sns", aws_access_key_id, aws_secret_access_key, region_name)
         self.topic_name = topic_name
 
     def create_sms_topic(self):
         """Create the topic if it doesn't exist, return resource name"""
-        topic_exists = False
+        log = logging.getLogger(__name__)
 
-        topic = self.aws_client.create_topic(Name=self.topic_name)
+        try:
+            topic = self.aws_client.create_topic(Name=self.topic_name)
+        except Exception as e:
+            log.error(e)
+            raise Exception("Failed to create topic")
+
         topic_arn = topic.get('TopicArn')  # get its Amazon Resource Name
         if topic_arn is None:
             raise FunctionError("Resource name of topic is null.")
 
         return topic_arn
 
-    def message_members(self, message, cell_numbers):
+    def send_text_via_sns(self, message, cell_numbers):
         """Sends a text message to cell_numbers using AWS SNS"""
         topic_arn = self.create_sms_topic()
         log = logging.getLogger(__name__)

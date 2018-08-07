@@ -14,7 +14,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'boto3',
-        'fn_get_phone_numbers'  # Another resilient-circuits function required for example workflows
+        'fn_utilities'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,7 +24,9 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "FnGetStepFunctionExecutionFunctionComponent = fn_aws_utilities.components.fn_get_step_function_execution:FunctionComponent",
             "FnInvokeLambdaFunctionComponent = fn_aws_utilities.components.fn_invoke_lambda:FunctionComponent",
+            "FnInvokeStepFunctionFunctionComponent = fn_aws_utilities.components.fn_invoke_step_function:FunctionComponent",
             "FnSendSmsViaSnsFunctionComponent = fn_aws_utilities.components.fn_send_sms_via_sns:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_aws_utilities.util.config:config_section_data"],

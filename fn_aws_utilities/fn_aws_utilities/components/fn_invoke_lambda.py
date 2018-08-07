@@ -7,6 +7,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from fn_aws_utilities.util.aws_lambda_api import AWSLambda
+from fn_aws_utilities.util.aws_config import AWSConfig
 
 
 class FunctionComponent(ResilientComponent):
@@ -26,22 +27,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_invoke_lambda_function(self, event, *args, **kwargs):
         """Function: Invokes an AWS Lambda function synchronously and returns the function output"""
         try:
-            my_aws_secret_access_key = self.options.get("aws_secret_access_key")
-            my_aws_access_key_id = self.options.get("aws_access_key_id")
-            aws_region_name = self.options.get("aws_region_name")
-            aws_sms_topic_name = self.options.get("aws_sms_topic_name")
-
-            if aws_region_name is None:
-                yield FunctionError("aws_region_name undefined in app.config")
-
-            if my_aws_access_key_id is None:
-                yield FunctionError("aws_access_key_id undefined in app.config")
-
-            if my_aws_secret_access_key is None:
-                yield FunctionError("aws_secret_access_key undefined in app.config")
-
-            if aws_sms_topic_name is None:
-                yield FunctionError("aws_sms_topic_name undefined in app.config")
+            config = AWSConfig(self.options)
 
             # Get the function parameters:
             lambda_function_name = kwargs.get("lambda_function_name")  # text
@@ -57,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             if lambda_payload is None:
                 lambda_payload = ""
 
-            lambda_api = AWSLambda(my_aws_access_key_id, my_aws_secret_access_key, aws_region_name)
+            lambda_api = AWSLambda(config.my_aws_access_key_id, config.my_aws_secret_access_key, config.aws_region_name)
             response = lambda_api.invoke_lambda(lambda_function_name, lambda_payload)
 
             if response == {}:
@@ -68,7 +54,6 @@ class FunctionComponent(ResilientComponent):
                 yield FunctionResult({"response_payload": None})
 
             payload_string = str(payload.read())
-            payload_string = payload_string.replace('"', '')  # boto3 appends quote chars to payload
 
             yield FunctionResult({"response_payload": payload_string})
         except Exception:
