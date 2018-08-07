@@ -18,6 +18,6 @@ urlscan_io_result_api_url=https://urlscan.io/api/v1/result/
 # Optional setting
 # Number of results returned. 
 # Comment out this line to return 100 results - the default.
-urlscan_io_search_size=10
+#urlscan_io_search_size=10
     """
     return config_data
