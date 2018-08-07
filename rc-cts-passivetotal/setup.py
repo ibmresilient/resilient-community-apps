@@ -12,9 +12,9 @@ setup(
     install_requires=[
         'rc-cts'
     ],
-    author_email='info@resilientsystems.com',
-    description="Custom Threat Service - PassiveTotal",
-    long_description="Custom Threat Service - PassiveTotal",
+    author_email='support@resilientsystems.com',
+    description="Resilient Circuits Custom Threat Service for PassiveTotal",
+    long_description="Resilient Circuits Custom Threat Service for PassiveTotal",
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

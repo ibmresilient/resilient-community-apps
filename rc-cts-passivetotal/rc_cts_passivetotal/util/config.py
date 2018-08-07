@@ -10,13 +10,17 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[passivetotal]
-# API key for passivetotal
-passive_api_key=xxx
+    
+# API credentials
+passivetotal_api_key=your_api_key
+passivetotal_username=username
 
-# Username
-passive_user=me@my.com
+# API URLS
+passivetotal_base_url=https://api.passivetotal.org
+passivetotal_account_api_url=/v2/account
+passivetotal_actions_tags_api_url=/v2/actions/tags
 
 # Tags that result in a hit
-passive_tags=Compromised,Ransomware
+passivetotal_tags=Compromised,Ransomware
     """
     return config_data
