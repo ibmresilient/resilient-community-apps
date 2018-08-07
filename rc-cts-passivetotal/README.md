@@ -1,14 +1,31 @@
-# Risk IQ PassiveTotal
+# RiskIQ PassiveTotal
 
-This implements a custom threat service for [RISK IQ PassiveTotal](https://community.riskiq.com/home).
+This implements a custom threat service for [RiskIQ PassiveTotal](https://community.riskiq.com/home).
 
-You must define the tags you class as "hits" in app.config to ensure you get the correct hits. An example is included. 
+To query RiskIQ PassiveTotal API user needs to provide API key.
 
-Install this package with 'pip', or `python setup.py install`.
+Prerequisites
+```
+resilient_circuits
+rc-webserver
+rc-cts
+```
+
+## Environment
+
+To install in "development mode"
+    `pip install -e ./rc-cts-passivetotal/`
+or 
+    `python setup.py install`.
+
+To configure the PassiveTotal, run `resilient-circuits config [-u | -c]`. 
+
+Then edit the `[passivetotal]` template with the API URLs and define the tags you class as "hits" to ensure you get the correct hits. An example is included.
+
 Run with: `resilient-circuits run`.
 
 To register this custom threat service with Resilient:
 ```
-    sudo resutil threatserviceedit -name "Google SafeBrowsing"  -resturl http://10.10.10.1:9000/cts/gsb
-    sudo resutil threatservicetest -name "Google SafeBrowsing"
+    sudo resutil threatserviceedit -name "RiskIQ PassiveTotal" -resturl http://<resilient_circuits_url>:9000/cts/gsb
+    sudo resutil threatservicetest -name "RiskIQ PassiveTotal"
 ```
