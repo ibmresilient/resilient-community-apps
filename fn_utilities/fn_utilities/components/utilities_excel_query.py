@@ -17,6 +17,7 @@ import openpyxl
 import re  # to extract ranges from user input
 import io  # to pass attachment to openpyxl
 import datetime  # to deal with sheet's date fields
+import json
 
 
 class FunctionComponent(ResilientComponent):
@@ -67,6 +68,7 @@ class FunctionComponent(ResilientComponent):
                 "named_ranges": WorksheetData.parse_defined_names_notation(excel_defined_names)
             })
             worksheet_data.parse()  # extracts all the data to result
+            worksheet_data.serialize()
             result = worksheet_data.result
             # Produce a FunctionResult with the results
             yield StatusMessage("Done.")
@@ -207,6 +209,9 @@ class WorksheetData(object):
             self.parse_sheet_ranges(self.opts["ranges"])
 
         self.add_keys()
+
+    def serialize(self):
+        self.result = json.loads(json.dumps(self.result, default=self.serializer))
 
     def parse_named_ranges(self, named_ranges):
         """

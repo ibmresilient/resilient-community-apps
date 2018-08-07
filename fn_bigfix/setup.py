@@ -23,6 +23,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "FnBigfixAssetsFunctionComponent = fn_bigfix.components.fn_bigfix_assets:FunctionComponent",
+            "FnBigfixActionStatusFunctionComponent = fn_bigfix.components.fn_bigfix_action_status:FunctionComponent",
             "FnBigfixArtifactFunctionComponent = fn_bigfix.components.fn_bigfix_artifact:FunctionComponent",
             "FnBigfixRemediationFunctionComponent = fn_bigfix.components.fn_bigfix_remediation:FunctionComponent"
         ],

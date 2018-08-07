@@ -1,0 +1,3 @@
+include README.md
+include fn_joe_sandbox_analysis/util/*
+include fn_joe_sandbox_analysis/LICENSE
