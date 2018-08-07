@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import json
 import requests
 from circuits import BaseComponent, handler
-from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, IpProp, LatLngProp
+from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp
 
 LOG = logging.getLogger(__name__)
+
 
 class UrlScanIoSearcher(BaseComponent):
     """
@@ -28,12 +28,8 @@ class UrlScanIoSearcher(BaseComponent):
 
     def __init__(self, opts):
         super(UrlScanIoSearcher, self).__init__(opts)
-        LOG.info(opts)
-
-        # Load config settings
-        self.urlscan_io_search_api_url = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_search_api_url")
-        self.urlscan_io_result_api_url = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_result_api_url")
-        self.urlscan_io_search_size = opts.get(self.CONFIG_SECTION, {}).get("urlscan_io_search_size")
+        LOG.debug(opts)
+        self.options = opts.get(self.CONFIG_SECTION, {})
 
     # Register this as an async searcher for the URL /<root>/example
     channel = searcher_channel("usio")
@@ -44,6 +40,20 @@ class UrlScanIoSearcher(BaseComponent):
         Handle lookups for artifacts of type 'net uri' (URL artifacts)
         """
 
+        # Read configuration settings:
+        if "urlscan_io_search_api_url" in self.options:
+            self.urlscan_io_search_api_url = self.options["urlscan_io_search_api_url"]
+        else:
+            self._raise_mandatory_setting_error("urlscan_io_search_api_url")
+
+        if "urlscan_io_result_api_url" in self.options:
+            self.urlscan_io_result_api_url = self.options["urlscan_io_result_api_url"]
+        else:
+            self._raise_mandatory_setting_error("urlscan_io_result_api_url")
+
+        self.urlscan_io_search_size = self.options["urlscan_io_search_size"] \
+            if "urlscan_io_search_size" in self.options else None
+
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = event.artifact['type']
         artifact_value = event.artifact['value']
@@ -51,6 +61,15 @@ class UrlScanIoSearcher(BaseComponent):
             artifact_type, artifact_value))
         hits = self._query_urlscan_io_api(artifact_value)
         yield hits
+
+    @staticmethod
+    def _raise_mandatory_setting_error(app_config_setting_name):
+        """
+         Raise ValueError for the mandatory config setting.
+        """
+        error_msg = "Mandatory config setting '{}' not set.".format(app_config_setting_name)
+        LOG.error(error_msg)
+        raise ValueError(error_msg)
 
     def _query_urlscan_io_api(self, artifact_value):
         """
@@ -69,7 +88,7 @@ class UrlScanIoSearcher(BaseComponent):
             search_response = requests.get(url, headers=self.HEADERS)
 
             if search_response.status_code == 200:
-                content = json.loads(search_response.text)
+                content = search_response.json()
 
                 total_hits = content.get('total', None)
                 if total_hits is None or total_hits == 0:
@@ -108,7 +127,7 @@ class UrlScanIoSearcher(BaseComponent):
         result_response = requests.get(result_url, headers=self.HEADERS)
 
         if result_response.status_code == 200:
-            result_content = json.loads(result_response.text)
+            result_content = result_response.json()
 
             report_stats = result_content.get('stats', None)
 
@@ -143,7 +162,8 @@ class UrlScanIoSearcher(BaseComponent):
             LOG.info("No Result information found on URL: {0}".format(result_url))
             LOG.debug(result_response.text)
 
-    def _prepare_city_contry(self, *argv):
+    @staticmethod
+    def _prepare_city_contry(*argv):
         """
         Prepare a list of non None value or blank "Falsy" parameters.
         :param *argv - city, country
