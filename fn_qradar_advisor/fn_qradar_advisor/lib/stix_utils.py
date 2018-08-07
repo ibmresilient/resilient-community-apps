@@ -72,7 +72,12 @@ def get_observable_description(stix_obj, log):
 
         # Only look at the first one
         obj = stix_obj["objects"]["0"]
-        desc = obj.get("value", obj.get("name", obj.get("hashes", "")))
+
+        # If this obj is a file, the nanme could be unknown. Do something special for it
+        if obj.get("name", "") == "unknown" and obj.get("type", "") == "file":
+            desc = "file with name unknown"
+        else:
+            desc = obj.get("value", obj.get("name", obj.get("hashes", "")))
     elif stix_obj["type"] == u"indicator":
         if stix_obj[u"name"] == u"IpAddress":
             desc = stix_obj[u"pattern"].replace("[ipv4-addr:value='", '').replace("']", '')
