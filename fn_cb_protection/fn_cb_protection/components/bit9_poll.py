@@ -44,6 +44,7 @@ def timestamp_to_millis(val):
     if not val:
         return val
     try:
+        # The milliseconds portion might have 1, 2 or 3 digits; fail if too short
         if len(val) <= 20:
             raise ValueError(u"Invalid timestamp length %s" % val)
         ts = val.replace("Z", "")[:23]
