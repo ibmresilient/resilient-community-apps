@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -36,8 +38,8 @@ class TestXforceGetCollectionById:
         assert func is not None
 
     @pytest.mark.parametrize("xforce_collection_id, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("e7dd02a139820860866a4fdd82cf9d8e", {"success": True}),
+        ("c6856cc0154f6531aa6c430c5087aa77", {"success": True})
     ])
     def test_success(self, circuits_app, xforce_collection_id, expected_results):
         """ Test calling with sample values for the parameters """
@@ -45,4 +47,17 @@ class TestXforceGetCollectionById:
             "xforce_collection_id": xforce_collection_id
         }
         results = call_xforce_get_collection_by_id_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results["success"] == results["success"])
+
+
+    @pytest.mark.parametrize("xforce_collection_id, expected_results", [
+        ("badcaseID", {"success": False}),
+        ("c6856123", {"success": False})
+    ])
+    def test_failure(self, circuits_app, xforce_collection_id, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = { 
+            "xforce_collection_id": xforce_collection_id
+        }
+        results = call_xforce_get_collection_by_id_function(circuits_app, function_params)
+        assert(expected_results["success"] == results["success"])

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -35,15 +37,49 @@ class TestXforceQueryCollection:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("xforce_collections_type, xforce_query, expected_results", [
-        (['public', 'private'], "text", {"value": "xyz"}),
-        (['private', 'public'], "text", {"value": "xyz"})
+    @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
+        ({'name': 'public'}, "coinminer", {"success": True}),
+        ({'name': 'public'}, "mirai", {"success": True}),
+        ({'name': 'public'}, "E08BEFB4D791E8B9218020292B2FECAD", {"success": True})  # MD5
     ])
-    def test_success(self, circuits_app, xforce_collections_type, xforce_query, expected_results):
+    def test_success(self, circuits_app, xforce_collection_type, xforce_query, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "xforce_collections_type": xforce_collections_type,
+            "xforce_collection_type": xforce_collection_type,
             "xforce_query": xforce_query
         }
+        
         results = call_xforce_query_collection_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results["success"] == results["success"])
+
+    @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
+        ({'name': 'public'}, "badquery123", {"success": False}),
+        ({'name': 'public'}, "badquery999", {"success": False}),
+        ({'name': 'private'}, "mirai", {"success": False}) #Assumes the current user has no private collections
+    ])
+    def test_failure(self, circuits_app, xforce_collection_type, xforce_query, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = { 
+            "xforce_collection_type": xforce_collection_type,
+            "xforce_query": xforce_query
+        }
+        
+        results = call_xforce_query_collection_function(circuits_app, function_params)
+        assert(expected_results["success"] == results["success"])
+
+    @pytest.mark.parametrize("xforce_collection_type, xforce_query, expected_results", [
+        ({'name': 'public'}, "coinminer", {"success": True}),
+        ({'name': 'public'}, "mirai", {"success": True})
+    ])
+    def test_num_of_casefiles(self, circuits_app, xforce_collection_type, xforce_query, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = { 
+            "xforce_collection_type": xforce_collection_type,
+            "xforce_query": xforce_query
+        }
+        
+        results = call_xforce_query_collection_function(circuits_app, function_params)
+        assert(expected_results["success"] == results["success"])
+        assert(results["num_of_casefiles"] >= 1)
+
+    

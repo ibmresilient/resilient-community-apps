@@ -9,8 +9,10 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-#    config_data = u"""[fn_xforce]
-#setting=xxx
-#"""
-#    return config_data
-    return None
+    config_data = u"""[fn_xforce]
+xforce_apikey = <YOUR_API_KEY>
+xforce_password = <YOUR_API_PASSWORD>
+xforce_https_proxy = <YOUR_PROXY_URL>
+xforce_http_proxy = <YOUR_PROXY_URL>
+"""
+    return config_data
