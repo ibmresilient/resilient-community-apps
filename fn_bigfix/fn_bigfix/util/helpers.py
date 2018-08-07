@@ -20,17 +20,20 @@ def validate_opts(func):
     :param func: Resilient Function instance reference
 
      """
-    if not "bigfix_url" in func.options:
+    if not "bigfix_url" in func.options or len(func.options["bigfix_url"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_url' not set.")
-    if not "bigfix_port" in func.options:
+    if not "bigfix_port" in func.options or len(func.options["bigfix_port"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_port' not set.")
-    if not "bigfix_user" in func.options:
-        raise Exception("Mandatory config setting 'bigfix_url' not set.")
-    if not "bigfix_pass" in func.options:
+    if not "bigfix_user" in func.options or len(func.options["bigfix_user"]) == 0:
+        raise Exception("Mandatory config setting 'bigfix_user' not set.")
+    if not "bigfix_pass" in func.options or len(func.options["bigfix_pass"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_pass' not set.")
-    if not "hunt_results_limit" in func.options:
+    if not "hunt_results_limit" in func.options or len(func.options["hunt_results_limit"]) == 0:
         raise Exception("Mandatory config setting 'hunt_results_limit' not set.")
-
+    if not "bigfix_polling_interval" in func.options or len(func.options["bigfix_polling_interval"]) == 0:
+        raise Exception("Mandatory config setting 'bigfix_polling_interval' not set.")
+    if not "bigfix_polling_timeout" in func.options or len(func.options["bigfix_polling_timeout"]) == 0:
+        raise Exception("Mandatory config setting 'bigfix_polling_timeout' not set.")
 
 def validate_params(params, func_name):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.
@@ -46,7 +49,7 @@ def validate_params(params, func_name):
         for (k, v) in params.copy().items():
             if re.match("^(artifact_id|artifact_value|artifact_type)$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
-            if re.match("^(incident_id|bigfix_incident_plan_status)$", k) and is_none(v):
+            if re.match("^(incident_id|incident_plan_status)$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
             if re.match("^artifact_type$", k) and v == "Registry Key":
                 if is_none(params["artifact_properties_name"]):
@@ -61,6 +64,13 @@ def validate_params(params, func_name):
             if re.match("^incident_id$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
             if re.match("^asset_id$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+
+    elif func_name == "fn_bigfix_assets":
+        for (k, v) in params.copy().items():
+            if re.match("^incident_id$", k) and is_none(v):
+                raise ValueError("Required parameter '{}' not set.".format(k))
+            if re.match("^(asset_id|asset_name)$", k) and is_none(v):
                 raise ValueError("Required parameter '{}' not set.".format(k))
 
     # If any entry has "None" string change to None value.

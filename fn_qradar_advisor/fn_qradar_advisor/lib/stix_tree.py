@@ -240,7 +240,15 @@ def get_html(stix, log):
         num_links = num_links + html_visitor.link_count
         num_objects = num_objects + html_visitor.obj_count
 
-    html = html + "<p>There are {} objects and {} links</p>".format(str(num_objects), str(num_links))
+    obj_str = "are {} objects".format(str(num_objects))
+    if num_objects == 1 or num_objects == 0:
+        obj_str = "is {} object".format(str(num_objects))
+
+    link_str = "{} links".format(str(num_links))
+    if num_links == 1 or num_links == 0:
+        link_str = "{} link".format(str(num_links))
+
+    html = html + "<p>There {} and {}.</p>".format(obj_str, link_str)
 
     return html
 

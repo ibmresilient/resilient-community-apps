@@ -4,8 +4,9 @@ This Resilient Function package can be used to perform the following actions fro
 Circuits integration framework.
 ```
 Run Bigfix query for Resilient artifacts to determine if there are any hits.
-Remediate hits in  Bigfix environment.
-Retrieve resource details from Bigfix
+Retrieve properties of an endpoint, with hits, from Bigfix.
+Remediate hits in Bigfix environment.
+Update status of a Bigfix remediating action.
 ```
 
 Prerequisites:
@@ -30,15 +31,16 @@ bigfix_url=https://bigfix-url.com
 bigfix_port=12345
 bigfix_user=BigFixAdmin
 bigfix_pass=MyPassword
+bigfix_polling_interval=30
+bigfix_polling_timeout=1800
 hunt_results_limit=200
-polling_period=120
 ```
 
 Run with: `resilient-circuits run`.
 
 ## fn_bigfix Example
 
-The fn_bigfix  function fn_bigfix_artifact requires 4 input parameters. The parameters are setup from a
+The fn_bigfix function fn_bigfix_artifact requires 7 input parameters. The parameters are setup from a
 Resilient systems workflow on the Resilient console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script.
 
@@ -52,11 +54,11 @@ inputs.bigfix_incident_id = 2095
 inputs.bigfix_incident_plan_status = "A"
 ```
 The results returned to Resilient will be in JSON format and will consist of a list of
-endpoints where hits for the artifact 'hits' have been found.
+endpoints where hits for the artifact have been found.
 ```
-{'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 1000,
-                    u'query_id': 1, u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'
-                   }
-                  ]
+{'hits_count': 1,
+ 'endpoint_hits': [{u'computer_id': 13550086, u'failure': False, u'resp_time': 0, u'query_id': 1,
+                    u'result': u'True', u'computer_name': u'DESKTOP-TUKM3HF'}]
+ 'query_execution_date': '07-17-2018 17:44:21'
 }
 ```
