@@ -114,7 +114,7 @@ if api_version == 2:
         #
         # The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info
         #
-        summary_string = "This artifact is a suspicous observable"
+        summary_string = "This artifact is a suspicious observable"
   
   # Add a note about number of suspicious_observables
   note_string = "<h3>Watson Search Result Summary</h3><hr>"
