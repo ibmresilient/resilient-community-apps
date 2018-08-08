@@ -238,6 +238,9 @@ class QRadarFullSearch(SearchWaitCommand):
     """
     SEARCH_RETURN_DONE_STAGE3 = "DONE_STAGE3"
     SEARCH_RETURN_DONE = "DONE"
+    SEARCH_RETURN_NO_OBSERVABLES = "NO_OBSERVABLES"
+    SEARCH_RETURN_ERROR = "ERROR"
+    SEARCH_RETURN_ERROR_AUTH = "ERROR_AUTH"
 
     def __init__(self, http_info, log, return_stage="stage3", timeout=1200, period=5):
         self.http_info = http_info
@@ -316,6 +319,15 @@ class QRadarFullSearch(SearchWaitCommand):
                 elif search_status == self.SEARCH_RETURN_DONE_STAGE3:
                     status = self.SEARCH_STATUS_COMPLETED
                     self.stage3_available = True
+                elif search_status == self.SEARCH_RETURN_NO_OBSERVABLES:
+                    status = self.SEARCH_STATUS_COMPLETED
+                    self.stage3_available = False
+                elif search_status == self.SEARCH_RETURN_ERROR:
+                    self.log.error("Search {} returns ERROR.".format(str(search_id)))
+                    status = self.SEARCH_STATUS_ERROR_STOP
+                elif search_status == self.SEARCH_RETURN_ERROR_AUTH:
+                    self.log.error("Search {} returns ERROR_AUTH.".format(str(search_id)))
+                    status = self.SEARCH_STATUS_ERROR_STOP
             elif response.status_code == 404:
                 # The full search does not exist
                 self.log.error("Search {} does not exist.".format(str(search_id)))
@@ -380,6 +392,9 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
 
     ANALYSIS_DONE_STATUS = "DONE"
     ANALYSIS_DONE_STAGE3 = "DONE_STAGE3"
+    ANALYSIS_NO_OBSERVABLES = "NO_OBSERVABLES"
+    ANALYSIS_ERROR = "ERROR"
+    ANALYSIS_ERROR_AUTH = "ERROR_AUTH"
 
     def __init__(self, http_info, log, return_stage="stage3", timeout=1200, period=5):
         self.http_info = http_info
@@ -455,6 +470,13 @@ class QRadarOffenseAnalysis(SearchWaitCommand):
                 elif ret_json.get("status", "") == self.ANALYSIS_DONE_STAGE3:
                     status = self.SEARCH_STATUS_COMPLETED
                     self.stage3_available = True
+                elif ret_status == self.ANALYSIS_NO_OBSERVABLES:
+                    status = self.SEARCH_STATUS_COMPLETED
+                    self.stage3_available = False
+                elif ret_status == self.ANALYSIS_ERROR or ret_status == self.ANALYSIS_ERROR_AUTH:
+                    status = self.SEARCH_STATUS_ERROR_STOP
+                    self.stage3_available = False
+
             elif response.status_code == 403:
                 #
                 # Offense does not exist or not permission
