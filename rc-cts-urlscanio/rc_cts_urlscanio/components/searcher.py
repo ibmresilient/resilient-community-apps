@@ -51,8 +51,7 @@ class UrlScanIoSearcher(BaseComponent):
         else:
             self._raise_mandatory_setting_error("urlscan_io_result_api_url")
 
-        self.urlscan_io_search_size = self.options["urlscan_io_search_size"] \
-            if "urlscan_io_search_size" in self.options else None
+        self.urlscan_io_search_size = self.options.get("urlscan_io_search_size", None)
 
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = event.artifact['type']
@@ -142,7 +141,7 @@ class UrlScanIoSearcher(BaseComponent):
                     png_url = task.get('screenshotURL', None) if task else None
                     scan_time = task.get('time', None) if task else None
                     report_url = task.get('reportURL', None) if task else None
-                    countries = str(stats.get('uniqCountries', None)) if stats else None
+                    uniq_countries_int = stats.get('uniqCountries', None) if stats else None
                     city_country_list = self._prepare_city_contry(page.get('city', None),
                                                                   page.get('country', None)) if page else None
                     city_country = ",".join(city_country_list) if city_country_list else None
@@ -151,7 +150,7 @@ class UrlScanIoSearcher(BaseComponent):
 
                     return Hit(
                         StringProp(name="Time Last Scanner", value=scan_time),
-                        NumberProp(name="Number of Countries", value=countries),
+                        NumberProp(name="Number of Countries", value=uniq_countries_int),
                         StringProp(name="City and Country", value=city_country),
                         StringProp(name="Server", value=server),
                         StringProp(name="ASN Name", value=asn),
