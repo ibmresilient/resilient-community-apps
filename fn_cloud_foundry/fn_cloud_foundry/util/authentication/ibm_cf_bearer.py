@@ -60,4 +60,4 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
         :return: Dict
         """
         oauth_token = self.oauth_token
-        return {"Authorization":"{} {}".format(oauth_token["token_type"], oauth_token["access_token"])}
+        return {"Authorization": "{} {}".format(oauth_token["token_type"], oauth_token["access_token"])}

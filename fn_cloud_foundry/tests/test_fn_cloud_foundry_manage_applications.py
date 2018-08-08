@@ -5,6 +5,12 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from .mock_response import give_response, AuthenticationMock, GUIDS_MOCK
+
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 
 PACKAGE_NAME = "fn_cloud_foundry"
 FUNCTION_NAME = "fn_cloud_foundry_manage_applications"
@@ -35,15 +41,120 @@ class TestFnCloudFoundryManageApplications:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications, expected_results", [
-        ('Metadata', "text", {"value": "xyz"}),
-        ('Start', "text", {"value": "xyz"})
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ('start', "test1, test2"),
+        ('stop', "test1")
     ])
-    def test_success(self, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications, expected_results):
+    def test_success(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
         """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(201, GUIDS_MOCK["resources"][0])
+        get.return_value = give_response(200, GUIDS_MOCK)
+
         function_params = { 
             "fn_cloud_foundry_action": fn_cloud_foundry_action,
             "fn_cloud_foundry_applications": fn_cloud_foundry_applications
         }
         results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert results["test1"]["success"] == True
+
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ('start', "test1")
+    ])
+    def test_success_start(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
+        """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(201, GUIDS_MOCK["resources"][0])
+        get.return_value = give_response(200, GUIDS_MOCK)
+
+        function_params = {
+            "fn_cloud_foundry_action": fn_cloud_foundry_action,
+            "fn_cloud_foundry_applications": fn_cloud_foundry_applications
+        }
+        results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
+        assert results["test1"]["success"] == True
+        assert results["test1"]["current_state"] == "STARTED"
+
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ('wut is this action', "test1")
+    ])
+    def test_incorrect_action(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
+        """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(201, GUIDS_MOCK["resources"][0])
+        get.return_value = give_response(200, GUIDS_MOCK)
+
+        function_params = {
+            "fn_cloud_foundry_action": fn_cloud_foundry_action,
+            "fn_cloud_foundry_applications": fn_cloud_foundry_applications
+        }
+        results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
+        assert results["success"] == False
+
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ('wut is this action', None),
+        (None, "test"),
+        (None, None)
+    ])
+    def test_fails_parameters(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
+        """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(201, GUIDS_MOCK["resources"][0])
+        get.return_value = give_response(200, GUIDS_MOCK)
+
+        function_params = {
+            "fn_cloud_foundry_action": fn_cloud_foundry_action,
+            "fn_cloud_foundry_applications": fn_cloud_foundry_applications
+        }
+        with pytest.raises(AssertionError):
+            results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
+
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ("restage", "rand name")
+    ])
+    def test_app_not_found(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
+        """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(201, GUIDS_MOCK["resources"][0])
+        get.return_value = give_response(200, GUIDS_MOCK)
+
+        function_params = {
+            "fn_cloud_foundry_action": fn_cloud_foundry_action,
+            "fn_cloud_foundry_applications": fn_cloud_foundry_applications
+        }
+        results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
+        assert results[fn_cloud_foundry_applications]["success"] == False
+
+    @patch("fn_cloud_foundry.components.fn_cloud_foundry_manage_applications.IBMCloudFoundryAuthenticator")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.get")
+    @patch("fn_cloud_foundry.util.cloud_foundry_api.requests.put")
+    @pytest.mark.parametrize("fn_cloud_foundry_action, fn_cloud_foundry_applications", [
+        ('start', "test1")
+    ])
+    def test_fails_updating(self, put, get, auth, circuits_app, fn_cloud_foundry_action, fn_cloud_foundry_applications):
+        """ Test calling with sample values for the parameters """
+        auth.return_value = AuthenticationMock()
+        put.return_value = give_response(404, {})
+        get.return_value = give_response(200, GUIDS_MOCK)
+
+        function_params = {
+            "fn_cloud_foundry_action": fn_cloud_foundry_action,
+            "fn_cloud_foundry_applications": fn_cloud_foundry_applications
+        }
+        results = call_fn_cloud_foundry_manage_applications_function(circuits_app, function_params)
+        assert results["test1"]["success"] == False

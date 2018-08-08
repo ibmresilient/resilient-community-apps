@@ -6,6 +6,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ..util.cloud_foundry_api import IBMCloudFoundryAPI
 from ..util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
+import json
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_cloud_foundry_create_app"""
@@ -29,34 +30,47 @@ class FunctionComponent(ResilientComponent):
             space_guid = kwargs.get("fn_cloud_foundry_space_guid", None)  # text
             additional_parameters = kwargs.get("fn_cloud_foundry_additional_parameters_json", None)  # text
 
+            if space_guid is None or application_name is None:
+                raise ValueError("Both fn_cloud_foundry_applications and fn_cloud_foundry_space_guid "
+                                 "have to be defined.")
+
             if additional_parameters is None:
                 additional_parameters = {}
             else:
-                import json
                 additional_parameters = json.loads(additional_parameters)
 
             log = logging.getLogger(__name__)
             log.info("fn_cloud_foundry_applications: %s", application_name)
             log.info("fn_cloud_foundry_space_guid: %s", space_guid)
             log.info("fn_cloud_foundry_additional_parameters_json: %s", additional_parameters)
+            log.info("Params: {}".format(additional_parameters))
 
             base_url = self.options["cf_api_base"]
 
             authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            yield StatusMessage("Authenticated into Cloud Foundry")
             cf_service = IBMCloudFoundryAPI(base_url, authenticator)
 
             values = {
                 "space_guid": space_guid,
                 "name": application_name
             }
-
-            values = additional_parameters.update(values)  # so values overwrite additional params, not the other way
+            additional_parameters.update(values)  # so values overwrite additional params, not the other way
+            values = additional_parameters
 
             results = cf_service.create_app(values)
             log.info("Result: %s", results)
-            yield StatusMessage("Done...")
+            yield StatusMessage("Done.")
             self._add_keys(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(str(e))
+
+    @staticmethod
+    def _add_keys(result):
+        keys = list(result.keys())
+        for item in result:
+            if isinstance(result[item], dict):
+                FunctionComponent._add_keys(result[item])
+        result["_keys"] = keys

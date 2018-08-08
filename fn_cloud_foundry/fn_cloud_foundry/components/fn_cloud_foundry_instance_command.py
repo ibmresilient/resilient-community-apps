@@ -31,6 +31,10 @@ class FunctionComponent(ResilientComponent):
             instances = kwargs.get("fn_cloud_foundry_instances", None)  # text
             additional_parameters = kwargs.get("fn_cloud_foundry_additional_parameters_json", None)  # text
 
+            if action_name is None or application_name is None or instances is None:
+                raise ValueError("fn_cloud_foundry_action, fn_cloud_foundry_applications, and "
+                                 "fn_cloud_foundry_instances all have to be defined.")
+
             if additional_parameters is None:
                 additional_parameters = {}
             else:
@@ -42,16 +46,18 @@ class FunctionComponent(ResilientComponent):
             log.info("fn_cloud_foundry_applications: %s", application_name)
             log.info("fn_cloud_foundry_instances: %s", instances)
 
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Starting.")
 
             base_url = self.options["cf_api_base"]
             instances = [x.strip() for x in instances.split(",")]
 
             authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            yield StatusMessage("Authenticated into Cloud Foundry")
             cf_service = IBMCloudFoundryAPI(base_url, authenticator)
-            results = cf_service.run_application_instance_command(application_name, instances, action_name)
+            results = cf_service.run_application_instance_command(application_name, instances, action_name,
+                                                                  **additional_parameters)
             log.info("Result: %s", results)
-            yield StatusMessage("Done...")
+            yield StatusMessage("Done.")
             self._add_keys(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

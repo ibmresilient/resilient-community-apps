@@ -30,6 +30,9 @@ class FunctionComponent(ResilientComponent):
             application_names = kwargs.get("fn_cloud_foundry_applications", None)  # text
             additional_parameters = kwargs.get("fn_cloud_foundry_additional_parameters_json", None)  # text
 
+            if action_name is None or application_names is None:
+                raise ValueError("Both fn_cloud_foundry_action and fn_cloud_foundry_applications have to be defined.")
+
             if additional_parameters is None:
                 additional_parameters = {}
             else:
@@ -39,22 +42,27 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("fn_cloud_foundry_action: %s", action_name)
             log.info("fn_cloud_foundry_applications: %s", application_names)
-
-            yield StatusMessage("Starting...")
-
+            log.info("fn_cloud_foundry_additional_parameters_json: %s", additional_parameters)
             base_url = self.options["cf_api_base"]
             application_names = [x.strip() for x in application_names.split(",")]
 
             authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            yield StatusMessage("Authenticated into Cloud Foundry")
             cf_service = IBMCloudFoundryAPI(base_url, authenticator)
             results = cf_service.run_application_command(application_names, action_name, additional_parameters)
 
             log.info("Result: %s", results)
-            yield StatusMessage("Done...")
+            yield StatusMessage("Done.")
             self._add_keys(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(str(e))
 
-
+    @staticmethod
+    def _add_keys(result):
+        keys = list(result.keys())
+        for item in result:
+            if isinstance(result[item], dict):
+                FunctionComponent._add_keys(result[item])
+        result["_keys"] = keys

@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 class IBMCloudFoundryAPI:
     """
-        Cloud Foundry Application utility
+        API wrapper for IBM Cloud Foundry.
     """
     # class variables of the API end points
     CF_API_BASE     = "v2/apps"
@@ -20,7 +20,7 @@ class IBMCloudFoundryAPI:
     CF_APP_INSTANCES= "/{}/instances"
     CF_DEL_INSTANCE = "/{}/instances/{}"
 
-    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "info", "recreate"]
+    APP_ACTIONS     = ["start", "stop", "restage", "delete", "update", "instances", "info"]
     INSTANCE_ACTIONS= ["delete"]
 
     def __init__(self, base_url, authenticator):
@@ -35,8 +35,7 @@ class IBMCloudFoundryAPI:
             "delete":       self.delete_app,
             "update":       self.update_app,
             "instances":    self.get_app_instances,
-            "info":         self.get_app_info,
-            "recreate":     self.recreate_app
+            "info":         self.get_app_info
         }
         self.instance_commands = {
             "delete":       self.delete_app_instance
@@ -91,9 +90,13 @@ class IBMCloudFoundryAPI:
         :param app_name: name of the applicaiton to get guid for
         :return: String - guid for the application
         """
-        return self.get_app_guids([app_name])[app_name]
+        guids = self.get_app_guids([app_name])
+        if app_name in guids:
+            return guids[app_name]
+        else:
+            return None
 
-    def get_app_info(self, guid):
+    def get_app_info(self, guid, *args, **kwargs):
         """
         Extract JSON information for the application with given guid.
         :param guid: String
@@ -117,7 +120,7 @@ class IBMCloudFoundryAPI:
 
         return apps_data
 
-    def update_app(self, app_guid, values=None):
+    def update_app(self, app_guid, values=None, *args, **kwargs):
         """
         PUT request with a body of values that need to be updated.
         :param app_guid: GUID of the app to be updated
@@ -135,7 +138,7 @@ class IBMCloudFoundryAPI:
         response = requests.put(self.base_url + self.CF_APP.format(app_guid), headers=oauth_authorization_headers,
                                 json=values)
 
-        if response.status_code == 201: # return status code for update
+        if response.status_code == 201:  # return status code for update
             log.info("Successful update.")
             ret = response.json()
             app_status["success"] = True
@@ -149,19 +152,19 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-    def start_app(self, guid):
+    def start_app(self, guid, *args, **kwargs):
         """
         Shortcut to start an app, using update.
         """
         return self.update_app(guid, values={"state": "STARTED"})
 
-    def stop_app(self, guid):
+    def stop_app(self, guid, *args, **kwargs):
         """
         Shortcut for stop an app, using update.
         """
         return self.update_app(guid, values={"state": "STOPPED"})
 
-    def restage_app(self, guid):
+    def restage_app(self, guid, *args, **kwargs):
         """
         Restages an app.
         :param guid: String
@@ -189,7 +192,7 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-    def delete_app(self, guid):
+    def delete_app(self, guid, *args, **kwargs):
         """
         Deletes an app.
         :param guid: String
@@ -216,12 +219,14 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-    def create_app(self, values=None):
+    def create_app(self, values):
         """
         Creating an app with the provided values.
         :param values: Values to be passed to the REST call.
         :return:
         """
+        if values is None:
+            raise ValueError("To create an app proper values are needed")
         oauth_authorization_headers = {
             "accept": "application/json",
             "Content-Type": "application/json",
@@ -240,14 +245,24 @@ class IBMCloudFoundryAPI:
             app_status["success"] = False
             app_status["details"] = "Couldn't create."
             app_status["last_updated"] = None
-            log.error("Error while creating cf application {}.")
+            log.error("Error while creating cf application.")
+            log.error(response.json())
             log.debug(response)
         return app_status
 
-    def recreate_app(self):
-        pass
-
     def run_application_command(self, application_names, action_name, *args, **kwargs):
+        """
+        Simplifies command execution on multiple applications.
+        :param application_names: List or String
+            applications that the commands should be executed on
+        :param action_name: String
+            one of the pre defined commands to be executed
+        :param args:
+            additional parameters
+        :param kwargs:
+            additional parameters
+        :return: for each app whether it was a success and additional data
+        """
         results = {}
         if not isinstance(application_names, list):
             application_names = [application_names]
@@ -264,9 +279,22 @@ class IBMCloudFoundryAPI:
                         "details": message,
                         "success": False
                     }
+        else:
+            results["success"] = False
+            results["details"] = "Action {} isn't supported.".format(action_name)
         return results
 
     def run_application_instance_command(self, app_name, instances, action_name, *args, **kwargs):
+        """
+        Simplifies command execution on multiple instances of an app.
+        :param app_name: String
+            Name of the app whose instances are the subject
+        :param instances: List or String
+            Instances subjected
+        :param action_name:
+            Instance action to be executed
+        :return: For each instance whether the command was a success.
+        """
         results = {}
         if not isinstance(instances, list):
             instances = [instances]
@@ -284,9 +312,12 @@ class IBMCloudFoundryAPI:
                     "details": message,
                     "success": False
                 }
+        else:
+            results["success"] = False
+            results["details"] = "Action {} isn't defined for instances.".format(action_name)
         return results
 
-    def get_app_instances(self, guid):
+    def get_app_instances(self, guid, *args, **kwargs):
         """
         Gets instances' information for the app.
         :param guid: String
@@ -314,7 +345,7 @@ class IBMCloudFoundryAPI:
             log.debug(response)
         return app_status
 
-    def delete_app_instance(self, guid, instance):
+    def delete_app_instance(self, guid, instance, *args, **kwargs):
         """
         Deletes an app instance.
         :param guid: String
