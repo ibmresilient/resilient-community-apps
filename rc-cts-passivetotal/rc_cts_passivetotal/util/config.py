@@ -19,8 +19,12 @@ passivetotal_username=username
 passivetotal_base_url=https://api.passivetotal.org
 passivetotal_account_api_url=/v2/account
 passivetotal_actions_tags_api_url=/v2/actions/tags
+passivetotal_passive_dns_api_url=/v2/dns/passive
+passivetotal_actions_class_api_url=/v2/actions/classification
+passivetotal_enrich_subdom_api_url=/v2/enrichment/subdomains
+passivetotal_community_url=https://community.riskiq.com/search/
 
-# Tags that result in a hit
+# Define the tags you classify as "hits", separated by a comma
 passivetotal_tags=Compromised,Ransomware
     """
     return config_data

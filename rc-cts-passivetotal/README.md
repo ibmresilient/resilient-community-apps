@@ -20,12 +20,12 @@ or
 
 To configure the PassiveTotal, run `resilient-circuits config [-u | -c]`. 
 
-Then edit the `[passivetotal]` template with the API URLs and define the tags you class as "hits" to ensure you get the correct hits. An example is included.
+Then edit the `[passivetotal]` template with the API URLs and define the tags you classify as "hits" to ensure you get the correct hits. An example is included.
 
 Run with: `resilient-circuits run`.
 
 To register this custom threat service with Resilient:
 ```
-    sudo resutil threatserviceedit -name "RiskIQ PassiveTotal" -resturl http://<resilient_circuits_url>:9000/cts/gsb
+    sudo resutil threatserviceedit -name "RiskIQ PassiveTotal" -resturl http://<resilient_circuits_url>:9000/cts/pst
     sudo resutil threatservicetest -name "RiskIQ PassiveTotal"
 ```
