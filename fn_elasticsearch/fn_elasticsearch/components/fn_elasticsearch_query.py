@@ -80,41 +80,47 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Encountered error while connecting to ElasticSearch")
             # Start query results as None
             query_results = None 
+            matched_records = 0
 
             try:
-                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404])
+                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
             except:
                 raise FunctionError("Encountered error while submitting query to ElasticSearch")
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
                 # Could do some extra stuff with results here
-
+                
                 # Prepare the results object
                 query_results = json.dumps(es_results["hits"]["hits"]) 
+                matched_records = es_results["hits"]["total"]
                 
             # Check if we have a status attribute indicating an error we could raise
             elif 'status' in es_results:
                 # If we encounter either a 404 (Not found) or 400 error return the reason
                 
-                if es_results['status'] in (400, 404):
+                if es_results['status'] in (400, 404, 500):
                     # Can raise the root_cause of the failure
                     log.error(es_results["error"]["root_cause"])
-
-                    if es_results['status'] is 400:
+                    log.error(es_results)
+                    log.error(es_results['status'])
+                    if es_results['status'] == 400:
                         # es_results["error"]["root_cause"][1]["reason"] is only available on exceptions of type 400
-                        raise FunctionError("Exception with code 400 encountered. Error: "+es_results["error"]["root_cause"][1]["reason"])
-                    elif es_results['status'] is 404:
+                        yield StatusMessage("Exception with code 400 encountered. Error: "+str(es_results["error"]["root_cause"]))
+                        
+                    elif es_results['status'] == 404:
                         # Give reason that 404 happened; index not found?
-                        raise FunctionError("Exception encounted during query :"+es_results["error"]["reason"])
-                
+                        yield StatusMessage("Exception encounted during query : "+str(es_results["error"]["reason"]))
+                    elif es_results['status'] == 500:
+                        yield StatusMessage("Unexpected 500 error encountered. Error: "+str(es_results["error"]["reason"]))               
            # Prepare the results object
             results = {
                 "query_results": query_results,
-                "success": (True if query_results is not None else False)
+                "success": (True if query_results is not None else False),
+                "matched_records": matched_records
             }
             
-            yield StatusMessage("done...")
+            yield StatusMessage("done... Successful: "+str(results["success"]))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

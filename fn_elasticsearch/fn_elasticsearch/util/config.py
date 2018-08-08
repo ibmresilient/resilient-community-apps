@@ -11,11 +11,11 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_elasticsearch]
-es_datastore_url = <YOUR_URL>
+es_datastore_url = <ELASTICSEARCH_URL>
 es_datastore_scheme = <https OR http>
-es_auth_username = <YOUR_USERNAME>
-es_auth_password = <YOUR_PASSWORD>
-es_cafile = 
+es_auth_username = <ELASTICSEARCH_USERNAME>
+es_auth_password = <ELASTICSEARCH_PASSWORD>
+es_cafile = <CA_FILE_TO_BE_USED>
 """
     return config_data
     
