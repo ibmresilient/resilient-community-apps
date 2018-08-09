@@ -90,10 +90,9 @@ class PassiveTotalSearcher(BaseComponent):
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = event.artifact['type']
         artifact_value = event.artifact['value']
-        LOG.info("_lookup started for Artifact Type {0} - Artifact Value {1}".format(
-            artifact_type, artifact_value))
+        LOG.info("_lookup started for Artifact Type {0} - Artifact Value {1}".format(artifact_type, artifact_value))
 
-        hits = self._query_passivetotal_find(artifact_value)
+        hits = self._query_passivetotal_api(artifact_value)
         yield hits
 
     @staticmethod
@@ -105,32 +104,66 @@ class PassiveTotalSearcher(BaseComponent):
         LOG.error(error_msg)
         raise ValueError(error_msg)
 
-    def _query_passivetotal_find(self, artifact_value):
+    def _query_passivetotal_api(self, artifact_value):
+        """
+        Validate user account if API call quota has exceeded, verify if tags are match, query RiskIQ PassiveTotal API
+         for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address) and generate Hits.
+        :param artifact_value
+        """
         hits = []
 
-        # Validation step - checks if user account API call quota has exceeded
-        account_metadata_response = self._passivetotal_get_resoponse(self.passivetotal_account_api_url, '')
+        if self._validate_user_account_exceeded():
+            return hits
+
+        validate_tags_match, tags_hits = self._validate_tag_match(artifact_value)
+        if not validate_tags_match:
+            # failure condition if the site doesn't match your definition
+            LOG.info("The site isn't currently listed as compromised according to your definition.")
+            return hits
+
+        LOG.info("Positive Threat Intel for %s", artifact_value)
+
+        # Create the hits array to sent back to Resilient
+        hits.append(self._generate_hit(artifact_value, tags_hits))
+
+        return hits
+
+    def _validate_user_account_exceeded(self):
+        """
+        Validate if user's API call quota has exceeded.
+        Return True if user may not proceed.
+        """
+
+        account_metadata_response = self._passivetotal_get_response(self.passivetotal_account_api_url, '')
         if account_metadata_response.status_code == 200:
             account = account_metadata_response.json()
         else:
             LOG.info("No Account information found for username: {0}".format(self.passivetotal_username))
             LOG.debug(account_metadata_response.text)
-            return hits
+            return True
 
         account_quota_exceeded = account.get("searchApiQuotaExceeded", None)
         if account_quota_exceeded:
             LOG.info("Your PassiveTotal Account has no API queries left.")
             LOG.debug(account_metadata_response)
-            return hits
+            return True
 
-        # Validation step - compares your definition of a hit with the tags in PassiveTotal
-        tags_response = self._passivetotal_get_resoponse(self.passivetotal_actions_tags_api_url, artifact_value)
+        return False
+
+    def _validate_tag_match(self, artifact_value):
+        """
+        Validate if returned PassiveTotal tag hits for given artifact_value include user's flagged tags from app.config file.
+        Return True if tags intersect, there is a match. PT returns tags users has flagged.
+        :param artifact_value
+        """
+
+        tags_response = self._passivetotal_get_response(self.passivetotal_actions_tags_api_url, artifact_value)
         if tags_response.status_code == 200:
             tags = tags_response.json()
         else:
             LOG.info("No Tag information found for artifact value: {0}".format(artifact_value))
             LOG.debug(tags_response.text)
-            return hits
+            return True
 
         tags_hits = tags.get('tags', None)
 
@@ -141,65 +174,13 @@ class PassiveTotalSearcher(BaseComponent):
         passive_tag_set = set(item.lower() for item in self.passivetotal_tags.split(","))
         tags_hit_set = set(item.lower() for item in tags_hits)
 
-        if passive_tag_set.intersection(tags_hit_set):
-            LOG.info("Positive Threat Intel for %s", artifact_value)
+        return bool(passive_tag_set.intersection(tags_hit_set)), tags_hits
 
-            # Hit data
-            #------------------------
-
-            # Passive DNS Results
-            pdns_results_response = self._passivetotal_get_resoponse(self.passivetotal_passive_dns_api_url,
-                                                                     artifact_value)
-            if pdns_results_response.status_code == 200:
-                pdns_results = pdns_results_response.json()
-                pdns_hit = pdns_results.get("totalRecords", None)
-                LOG.info(pdns_hit)
-            else:
-                LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
-                LOG.debug(pdns_results_response.text)
-
-            # URL Classification
-            classification_results_response = self._passivetotal_get_resoponse(self.passivetotal_actions_class_api_url,
-                                                                               artifact_value)
-            if classification_results_response.status_code == 200:
-                classification_results = classification_results_response.json()
-                classification_hit = classification_results.get("classification", None)
-                LOG.info(classification_hit)
-            else:
-                LOG.info("No URL classification found for artifact value: {0}".format(self.artifact_value))
-                LOG.debug(classification_results_response.text)
-
-            # Count of subdomains
-            subdomain_results_response = self._passivetotal_get_resoponse(self.passivetotal_enrich_subdom_api_url,
-                                                                          artifact_value)
-            if subdomain_results_response.status_code == 200:
-                subdomain_results = subdomain_results_response.json()
-                subdomain_hits = subdomain_results.get("subdomains", None)
-                subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None
-                LOG.info(subdomain_hits_number)
-            else:
-                LOG.info("No subdomain information found for artifact value: {0}".format(self.artifact_value))
-                LOG.debug(subdomain_results_response.text)
-
-            # Construct simple link to PT
-            report_url = self.passivetotal_community_url + artifact_value
-
-            # Create the hits array to sent back to Resilient
-            hits.append(Hit(
-                StringProp(name="Passive DNS Hits", value=str(pdns_hit)),
-                NumberProp(name="Number of subdomains", value=subdomain_hits),
-                StringProp(name="Tags", value=str(tags_hits)),
-                StringProp(name="Classification", value=str(classification_hit)),
-                UriProp(name="Report Link", value=report_url)
-            ))
-        else:
-            # failure condition if the site doesn't match your definition
-            LOG.info("The site isn't currently listed as compromised according to your definition.")
-        return hits
-
-    def _passivetotal_get_resoponse(self, path, query):
+    def _passivetotal_get_response(self, path, query):
         """
         Get response from the given API for the given query.
+        :param path PT API url
+        :param query the domain or IP being queried
         """
         url = self.passivetotal_base_url + path
         data = {'query': query}
@@ -207,3 +188,55 @@ class PassiveTotalSearcher(BaseComponent):
 
         response = requests.get(url, auth=auth, json=data)
         return response
+
+    def _generate_hit(self, artifact_value, tags_hits):
+        """
+        Query RiskIQ PassiveTotal API for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip'
+        (IP address) and generate a Hit.
+        :param artifact_value
+        :param tags_hits
+        """
+        # Passive DNS Results
+        pdns_results_response = self._passivetotal_get_response(self.passivetotal_passive_dns_api_url,
+                                                                artifact_value)
+        if pdns_results_response.status_code == 200:
+            pdns_results = pdns_results_response.json()
+            pdns_hit_number = pdns_results.get("totalRecords", None) #FIXME if I grab here ["results"] I can iterate through all PT Resolutions
+            LOG.info(pdns_hit_number)
+        else:
+            LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
+            LOG.debug(pdns_results_response.text)
+
+        # URL Classification
+        classification_results_response = self._passivetotal_get_response(self.passivetotal_actions_class_api_url,
+                                                                          artifact_value)
+        if classification_results_response.status_code == 200:
+            classification_results = classification_results_response.json()
+            classification_hit = classification_results.get("classification", None) #FIXME WHy is this always None?
+            LOG.info(classification_hit)
+        else:
+            LOG.info("No URL classification found for artifact value: {0}".format(self.artifact_value))
+            LOG.debug(classification_results_response.text)
+
+        # Count of subdomains
+        subdomain_results_response = self._passivetotal_get_response(self.passivetotal_enrich_subdom_api_url,
+                                                                     artifact_value)
+        if subdomain_results_response.status_code == 200:
+            subdomain_results = subdomain_results_response.json()
+            subdomain_hits = subdomain_results.get("subdomains", None)
+            subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None #FIXME Do I print out the names of subdomains instead of numbers?
+            LOG.info(subdomain_hits_number)
+        else:
+            LOG.info("No subdomain information found for artifact value: {0}".format(self.artifact_value))
+            LOG.debug(subdomain_results_response.text)
+
+        # Construct url back to to PassiveThreat
+        report_url = self.passivetotal_community_url + artifact_value
+
+        return Hit(
+            NumberProp(name="Passive DNS Hits", value=pdns_hit_number),
+            NumberProp(name="Number of subdomains", value=subdomain_hits_number),
+            StringProp(name="Tags", value=str(tags_hits)), # tags_hits is a list FIXME this format isn't ok [u'apt32', u'compromised', u'oceanlotus'] 
+            StringProp(name="Classification", value=classification_hit),
+            UriProp(name="Report Link", value=report_url)
+            )
