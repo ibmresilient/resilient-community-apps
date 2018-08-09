@@ -88,11 +88,6 @@ class exchange_utils:
                 raise FolderError(username, dir)
         return folder
 
-    def parse_time(self, epoch_time):
-        """Convert epoch time in milliseconds to [year, month, day, hour, minute, second]"""
-        date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000.0))
-        return [int(i) for i in date.split('-')]
-
     def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None, start_date=None,
                    end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
                    search_subfolders=False):
@@ -129,14 +124,14 @@ class exchange_utils:
         # filter by date
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            start_date = self.parse_time(start_date)
+            start_date = parse_time(start_date)
 
             tz = EWSTimeZone.timezone(self.default_timezone)
             start = tz.localize(EWSDateTime(start_date[0], start_date[1], start_date[2]))
             filtered_emails = filtered_emails.filter(datetime_received__gte=start)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            end_date = self.parse_time(end_date)
+            end_date = parse_time(end_date)
 
             tz = EWSTimeZone.timezone(self.default_timezone)
             end = tz.localize(EWSDateTime(end_date[0], end_date[1], end_date[2]))
@@ -286,3 +281,9 @@ class exchange_utils:
                         curr_attachment['attachment_base64'] = base64.b64encode(attachment.content)
 
         return results
+
+
+def parse_time(epoch_time):
+    """Convert epoch time in milliseconds to [year, month, day, hour, minute, second]"""
+    date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000.0))
+    return [int(i) for i in date.split('-')]
