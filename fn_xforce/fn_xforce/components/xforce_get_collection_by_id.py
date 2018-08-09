@@ -34,6 +34,7 @@ class FunctionComponent(ResilientComponent):
             # Get Xforce params
             XFORCE_API_KEY = helper.get_config_option("xforce_apikey")
             XFORCE_API_PASSWORD = helper.get_config_option("xforce_password")
+            XFORCE_BASEURL = helper.get_config_option("xforce_baseurl")
             HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
             HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
             # Get the function parameters:
@@ -62,8 +63,10 @@ class FunctionComponent(ResilientComponent):
                 with requests.Session() as session:
                     session.proxies = proxies
 
+
+                    # Prepare request string
+                    request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, str(xforce_collection_id))
                     # Make the HTTP request through the session.
-                    request_string = 'https://api.xforce.ibmcloud.com/casefiles/'+str(xforce_collection_id)
                     res = session.get(request_string, auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
                     case_files = res.json()
             except Exception as e:
@@ -73,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             print(case_files["contents"]["plainText"])
             if 'contents' in case_files:
                 results = {
-                    "success": (True if 'contents' in case_files else False),
+                    "success": True,
                     "plaintext": case_files["contents"]["plainText"].replace(u'\xa0', u' ').encode('utf-8'),
                     "created": case_files["created"],
                     "title": case_files["title"],

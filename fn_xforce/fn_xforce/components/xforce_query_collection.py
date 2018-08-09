@@ -35,6 +35,7 @@ class FunctionComponent(ResilientComponent):
             # Get Xforce params
             XFORCE_APIKEY = helper.get_config_option("xforce_apikey")
             XFORCE_PASSWORD = helper.get_config_option("xforce_password")
+            XFORCE_BASEURL = helper.get_config_option("xforce_baseurl")
             HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
             HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
             # Get the function parameters:
@@ -65,8 +66,11 @@ class FunctionComponent(ResilientComponent):
                 with requests.Session() as session:
                     session.proxies = proxies
 
+
+                    # Prepare request string
+                    request_string = '{}/casefiles/{}/fulltext?q={}'.format(XFORCE_BASEURL, str(xforce_collection_type), str(xforce_query))
+                    log.info(request_string)
                     # Make the HTTP request through the session.
-                    request_string = 'https://api.xforce.ibmcloud.com/casefiles/'+str(xforce_collection_type)+'/fulltext?q='+str(xforce_query)
                     res = session.get(
                         request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
                     case_files = json.loads(res.content)
