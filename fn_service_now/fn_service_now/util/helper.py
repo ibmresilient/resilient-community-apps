@@ -1,7 +1,16 @@
 # (c) Copyright IBM Corp. 2018. All Rights Reserved.
 import requests
+import os
+import base64
 
 class ServiceNowHelper:
+
+  def write_file(self, filename, data):
+    path = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+    fo = open(path, 'wb')
+    fo.write(data)
+    fo.close()
+    return path
 
   def str_to_bool(self, str):
     """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
@@ -32,7 +41,93 @@ class ServiceNowHelper:
     else:
       return input
   
-  def POST(self, url, data, auth=None, headers={"Content-Type":"application/xml","Accept":"application/xml"}):
+  def get_res_incident(self, client, incident_id, want_attachments=False):
+    entity = {
+      "id": incident_id,
+      "data": None
+    }
+
+    try:
+      entity["data"] = client.get("/incidents/{0}?text_content_output_format=always_text".format(entity["id"]))
+
+    except:
+      raise ValueError('incident_id {0} not found'.format(incident_id))
+
+    if want_attachments:
+      incident = entity["data"]
+      attachments = self.get_res_incident_attachments(client, entity["id"])
+      incident["attachments_meta_data"] = attachments["meta_data"]
+      incident["attachments_data"] = attachments["data"]
+    return entity
+
+  def get_res_incident_attachments(self, client, incident_id):
+    entity = {
+      "id": incident_id,
+      "data": None,
+      "meta_data": None
+    }
+
+    entity["meta_data"] = client.get("/incidents/{0}/attachments".format(entity["id"]))
+
+    if entity["meta_data"] is not None and len(entity["meta_data"]) > 0:
+      entity["data"] = []
+      for attachment_info in entity["meta_data"]:
+        attachment = client.get_content("/incidents/{0}/attachments/{1}/contents".format(entity["id"], attachment_info["id"]))
+
+        if attachment is not None:
+          entity["data"].append(base64.b64encode(attachment))
+
+    return entity
+
+  def get_res_incident_tasks(self, client, incident_id, want_layouts=False, want_notes=False, want_attachments=False):
+    entity = {
+      "id": incident_id,
+      "data": None
+    }
+
+    entity["data"] = client.get("/incidents/{0}/tasks?want_layouts={1}&want_notes={2}".format(entity["id"], want_layouts, want_notes))
+
+    if entity["data"] is not None and len(entity["data"]) > 0:
+      tasks = entity["data"]
+      for task in tasks:
+        if task["notes_count"] > 0:
+          task_notes = task["notes"]
+
+          for note in task_notes:
+            print note["text"]
+        
+        if want_attachments and task["attachments_count"] > 0:
+          attachments = self.get_res_task_attachments(client, task["id"])
+
+          task["attachments_meta_data"] = attachments["meta_data"]
+          task["attachments_data"] = attachments["data"]
+
+    return entity
+
+  def get_res_task_attachments(self, client, task_id):
+    entity = {
+      "id": task_id,
+      "data": None,
+      "meta_data": None
+    }
+
+    entity["meta_data"] = client.get("/tasks/{0}/attachments".format(entity["id"]))
+
+    if entity["meta_data"] is not None and len(entity["meta_data"]) > 0:
+      entity["data"] = []
+      for attachment_info in entity["meta_data"]:
+        attachment = client.get_content("/tasks/{0}/attachments/{1}/contents".format(entity["id"], attachment_info["id"]))
+
+        if attachment is not None:
+          entity["data"].append(base64.b64encode(attachment))
+
+    return entity
+
+  def POST(self, url, data, auth=None, headers=None):
+
+    if(headers is None):
+      headers = self.headers
+
     if auth is None:
       auth = self.SN_AUTH
     
@@ -53,10 +148,12 @@ class ServiceNowHelper:
     
     # Handle password surrounded by '
     pwd = str(self.get_config_option("sn_password"))
-    if pwd.startswith("'") and pwd.endswith("'"):
+    if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
       self.SN_PASSWORD = pwd[1:-1]
     else:
       self.SN_PASSWORD = pwd
     
     self.SN_AUTH = (self.SN_USERNAME, self.SN_PASSWORD)
+
+    self.headers = {"Content-Type":"application/json","Accept":"application/json"}
 
