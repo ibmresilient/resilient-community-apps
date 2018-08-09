@@ -70,14 +70,16 @@ class FunctionComponent(ResilientComponent):
                 log.info(e)
                 raise ValueError("Encountered issue when querying X-Force API")
             #Prepare results object
+            print(case_files["contents"]["plainText"])
             if 'contents' in case_files:
                 results = {
                     "success": (True if 'contents' in case_files else False),
-                    "plaintext": case_files["contents"]["plainText"],
+                    "plaintext": case_files["contents"]["plainText"].replace(u'\xa0', u' ').encode('utf-8'),
                     "created": case_files["created"],
                     "title": case_files["title"],
                     "tags": json.dumps(case_files["tags"])
                 }
+                print results
             # If no 'contents' set success to false for other functions
             else:
                 results = {
