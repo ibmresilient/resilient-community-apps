@@ -1,8 +1,42 @@
-from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem
+from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem, IMPERSONATION
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 import time, base64
+# Errors
+from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
+from requests.exceptions import ConnectionError
+
+
+class NoMailboxError(Exception):
+    def __init__(self, email):
+        fail_msg = 'The SMTP address {} has no mailbox associated with it'.format(email)
+        super(NoMailboxError, self).__init__(fail_msg)
+
+
+class ServerConnectionError(Exception):
+    def __init__(self, server):
+        fail_msg = 'Failed to connect to server: {}'.format(server)
+        super(ServerConnectionError, self).__init__(fail_msg)
+
+
+class CredentialsError(Exception):
+    def __init__(self):
+        fail_msg = 'The username or password specified in the config file is invalid'
+        super(CredentialsError, self).__init__(fail_msg)
+
+
+class FolderError(Exception):
+    def __init__(self, email, folder):
+        fail_msg = 'Either the user {} does not have access to the folder {}, or the folder does not exist'.format(
+            email, folder)
+        super(FolderError, self).__init__(fail_msg)
+
+class ImpersonationError(Exception):
+    def __init__(self, impersonator, impersonation_target):
+        fail_msg = '{} does not have permission to impersonate {}'.format(impersonator, impersonation_target)
+        super(ImpersonationError, self).__init__(fail_msg)
+
 
 class exchange_utils:
     def __init__(self, opts):
@@ -14,18 +48,30 @@ class exchange_utils:
         self.default_folder_path = opts.get('default_folder_path')
         self.default_timezone = opts.get('default_timezone')
 
-    def connect_to_account(self, primary_smtp_address):
+    def connect_to_account(self, primary_smtp_address, impersonation=False):
         """Connect to specified account and return it"""
 
         # Don't check certificates
         if not self.verify_cert:
             BaseProtocol.HTTP_ADAPTER_CLS = NoVerifyHTTPAdapter
 
+        # Decide whether or not to use impersonation access
+        access_type = IMPERSONATION if impersonation else DELEGATE
+
         # Use credentials to get account
-        credentials = Credentials(username=self.username, password=self.password)
-        config = Configuration(server=self.server, credentials=credentials)
-        account = Account(primary_smtp_address=primary_smtp_address, config=config,
-                          autodiscover=self.verify_cert, access_type=DELEGATE)
+        try:
+            credentials = Credentials(username=self.username, password=self.password)
+            config = Configuration(server=self.server, credentials=credentials)
+            account = Account(primary_smtp_address=primary_smtp_address, config=config,
+                              autodiscover=self.verify_cert, access_type=access_type)
+        except ErrorNonExistentMailbox:
+            raise NoMailboxError(primary_smtp_address)
+        except ConnectionError:
+            raise ServerConnectionError(self.server)
+        except UnauthorizedError:
+            raise CredentialsError()
+        except ErrorImpersonateUserDenied:
+            raise ImpersonationError(self.email, primary_smtp_address)
         return account
 
     def go_to_folder(self, username, folder_path):
@@ -36,7 +82,10 @@ class exchange_utils:
         if folder_path is None:
             return folder
         for dir in folder_path.split('/'):
-            folder = folder / dir
+            try:
+                folder = folder / dir
+            except ErrorFolderNotFound:
+                raise FolderError(username, dir)
         return folder
 
     def parse_time(self, epoch_time):
@@ -112,7 +161,7 @@ class exchange_utils:
 
     def create_email_message(self, username, subject, body, to_recipients):
         """Create an email message object"""
-        account = self.connect_to_account(username)
+        account = self.connect_to_account(username, impersonation=(username != self.email))
         email = Message(
             account=account,
             folder=account.sent,
@@ -124,7 +173,7 @@ class exchange_utils:
 
     def create_meeting(self, username, start_time, end_time, subject, body, required_attendees, optional_attendees):
         """Create a meeting object"""
-        account = self.connect_to_account(username)
+        account = self.connect_to_account(username, impersonation=(username != self.email))
         tz = EWSTimeZone.timezone(self.default_timezone)
         start_time = self.parse_time(start_time)
         end_time = self.parse_time(end_time)
