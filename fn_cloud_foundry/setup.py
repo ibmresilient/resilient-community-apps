@@ -6,13 +6,14 @@ from setuptools import setup, find_packages
 setup(
     name='fn_cloud_foundry',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_cloud_foundry'",
     long_description="Resilient Circuits Components for 'fn_cloud_foundry'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'requests'
     ],
     packages=find_packages(),
     include_package_data=True,

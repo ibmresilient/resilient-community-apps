@@ -15,8 +15,10 @@ class IBMCloudFoundryAuthenticator(AuthenticatorBase):
     def __init__(self, url, options):
         super(IBMCloudFoundryAuthenticator, self).__init__(options)
         self.base_url = url + self.CF_INFO_URL  # CF v2 API for info
-        self.get_token()
+        self.authenticate()
 
+    def authenticate(self):
+        self.get_token()
 
     def get_token(self):
         """
