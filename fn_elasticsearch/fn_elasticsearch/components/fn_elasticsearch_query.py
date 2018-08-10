@@ -120,7 +120,7 @@ class FunctionComponent(ResilientComponent):
                 "matched_records": matched_records
             }
             
-            yield StatusMessage("done... Successful: "+str(results["success"]))
+            yield StatusMessage("Successful: "+str(results["success"]))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
