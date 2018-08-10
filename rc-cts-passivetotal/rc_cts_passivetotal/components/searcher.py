@@ -37,55 +37,17 @@ class PassiveTotalSearcher(BaseComponent):
         """
 
         # Read configuration settings:
-        if "passivetotal_api_key" in self.options:
-            self.passivetotal_api_key = self.options["passivetotal_api_key"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_api_key")
 
-        if "passivetotal_username" in self.options:
-            self.passivetotal_username = self.options["passivetotal_username"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_username")
-
-        if "passivetotal_base_url" in self.options:
-            self.passivetotal_base_url = self.options["passivetotal_base_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_base_url")
-
-        if "passivetotal_account_api_url" in self.options:
-            self.passivetotal_account_api_url = self.options["passivetotal_account_api_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_account_api_url")
-
-        if "passivetotal_actions_tags_api_url" in self.options:
-            self.passivetotal_actions_tags_api_url = self.options["passivetotal_actions_tags_api_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_actions_tags_api_url")
-
-        if "passivetotal_passive_dns_api_url" in self.options:
-            self.passivetotal_passive_dns_api_url = self.options["passivetotal_passive_dns_api_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_passive_dns_api_url")
-
-        if "passivetotal_actions_class_api_url" in self.options:
-            self.passivetotal_actions_class_api_url = self.options["passivetotal_actions_class_api_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_actions_class_api_url")
-
-        if "passivetotal_enrich_subdom_api_url" in self.options:
-            self.passivetotal_enrich_subdom_api_url = self.options["passivetotal_enrich_subdom_api_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_enrich_subdom_api_url")
-
-        if "passivetotal_community_url" in self.options:
-            self.passivetotal_community_url = self.options["passivetotal_community_url"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_community_url")
-
-        if "passivetotal_tags" in self.options:
-            self.passivetotal_tags = self.options["passivetotal_tags"]
-        else:
-            self._raise_mandatory_setting_error("passivetotal_tags")
+        self.passivetotal_api_key = self._get_value_from_options("passivetotal_api_key")
+        self.passivetotal_username = self._get_value_from_options("passivetotal_username")
+        self.passivetotal_base_url = self._get_value_from_options("passivetotal_base_url")
+        self.passivetotal_account_api_url = self._get_value_from_options("passivetotal_account_api_url")
+        self.passivetotal_actions_tags_api_url = self._get_value_from_options("passivetotal_actions_tags_api_url")
+        self.passivetotal_passive_dns_api_url = self._get_value_from_options("passivetotal_passive_dns_api_url")
+        self.passivetotal_actions_class_api_url = self._get_value_from_options("passivetotal_actions_class_api_url")
+        self.passivetotal_enrich_subdom_api_url = self._get_value_from_options("passivetotal_enrich_subdom_api_url")
+        self.passivetotal_community_url = self._get_value_from_options("passivetotal_community_url")
+        self.passivetotal_tags = self._get_value_from_options("passivetotal_tags")
 
         # event.artifact is a ThreatServiceArtifactDTO
         artifact_type = event.artifact['type']
@@ -95,14 +57,17 @@ class PassiveTotalSearcher(BaseComponent):
         hits = self._query_passivetotal_api(artifact_value)
         yield hits
 
-    @staticmethod
-    def _raise_mandatory_setting_error(app_config_setting_name):
+    def _get_value_from_options(self, app_config_setting_key):
         """
-        Raise ValueError for the mandatory config setting.
+        Get value from options dict or raise ValueError for the mandatory config setting.
+        :param app_config_setting_name key
         """
-        error_msg = "Mandatory config setting '{}' not set.".format(app_config_setting_name)
-        LOG.error(error_msg)
-        raise ValueError(error_msg)
+        if app_config_setting_key in self.options:
+            return self.options[app_config_setting_key]
+        else:
+            error_msg = "Mandatory config setting '{}' not set.".format(app_config_setting_key)
+            LOG.error(error_msg)
+            raise ValueError(error_msg)
 
     def _query_passivetotal_api(self, artifact_value):
         """
@@ -189,7 +154,7 @@ class PassiveTotalSearcher(BaseComponent):
         response = requests.get(url, auth=auth, json=data)
         return response
 
-    def _generate_hit(self, artifact_value, tags_hits):
+    def _generate_hit(self, artifact_value, tags_hits_list):
         """
         Query RiskIQ PassiveTotal API for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip'
         (IP address) and generate a Hit.
@@ -230,13 +195,16 @@ class PassiveTotalSearcher(BaseComponent):
             LOG.info("No subdomain information found for artifact value: {0}".format(self.artifact_value))
             LOG.debug(subdomain_results_response.text)
 
+        # Convert tags hits list to str
+        tags_hits = ", ".join(tags_hits_list) if tags_hits_list else None
+
         # Construct url back to to PassiveThreat
         report_url = self.passivetotal_community_url + artifact_value
 
         return Hit(
             NumberProp(name="Passive DNS Hits", value=pdns_hit_number),
             NumberProp(name="Number of subdomains", value=subdomain_hits_number),
-            StringProp(name="Tags", value=str(tags_hits)), # tags_hits is a list FIXME this format isn't ok [u'apt32', u'compromised', u'oceanlotus'] 
+            StringProp(name="Tags", value=tags_hits),
             StringProp(name="Classification", value=classification_hit),
             UriProp(name="Report Link", value=report_url)
             )
