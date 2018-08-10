@@ -1,0 +1,3 @@
+include README.md
+include fn_cisco_amp4ep/util/*
+include fn_cisco_amp4ep/LICENSE
