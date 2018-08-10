@@ -2,6 +2,7 @@ from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTi
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
+from exchangelib.restriction import Q
 import time, base64
 # Errors
 from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
@@ -27,9 +28,9 @@ class CredentialsError(Exception):
 
 
 class FolderError(Exception):
-    def __init__(self, email, folder):
-        fail_msg = 'Either the user {} does not have access to the folder {}, or the folder does not exist'.format(
-            email, folder)
+    def __init__(self, email, folder, folder_path, tree):
+        fail_msg = 'Either the user {} does not have access to the folder {} from the path ' \
+                   '{}, or the folder does not exist\n{}'.format(email, folder, folder_path, tree)
         super(FolderError, self).__init__(fail_msg)
 
 class ImpersonationError(Exception):
@@ -85,11 +86,11 @@ class exchange_utils:
             try:
                 folder = folder / dir
             except ErrorFolderNotFound:
-                raise FolderError(username, dir)
+                raise FolderError(username, dir, folder_path, account.root.tree().encode('utf-8'))
         return folder
 
-    def get_emails(self, username, folder_path=None, sender=None, subject=None, body=None, start_date=None,
-                   end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
+    def get_emails(self, username, folder_path=None, email_ids = None, sender=None, subject=None, body=None,
+                   start_date=None, end_date=None, has_attachments=None, order_by_recency=None, num_emails=None,
                    search_subfolders=False):
         """Get queried emails"""
 
@@ -110,6 +111,13 @@ class exchange_utils:
 
         folder_collection = FolderCollection(account=self.connect_to_account(username), folders=folders)
         filtered_emails = folder_collection.all()
+
+        # filter by ids
+        if email_ids:
+            id_query = Q()
+            for email_id in email_ids.split(','):
+                id_query = id_query | Q(message_id=email_id)
+            filtered_emails = filtered_emails.filter(id_query)
 
         # filter by sender
         if sender:
