@@ -41,7 +41,7 @@ class ServiceNowHelper:
     else:
       return input
   
-  def get_res_incident(self, client, incident_id, want_attachments=False):
+  def get_res_incident(self, client, incident_id, want_notes=False, want_attachments=False,):
     entity = {
       "id": incident_id,
       "data": None
@@ -53,11 +53,32 @@ class ServiceNowHelper:
     except:
       raise ValueError('incident_id {0} not found'.format(incident_id))
 
+    if want_notes:
+      incident = entity["data"]
+      notes = self.get_res_incident_notes(client, incident_id)
+      if notes is not None:
+        incident["notes"] = notes["data"]
+
     if want_attachments:
       incident = entity["data"]
       attachments = self.get_res_incident_attachments(client, entity["id"])
-      incident["attachments_meta_data"] = attachments["meta_data"]
-      incident["attachments_data"] = attachments["data"]
+      if attachments is not None:
+        incident["attachments_meta_data"] = attachments["meta_data"]
+        incident["attachments_data"] = attachments["data"]
+
+    return entity["data"]
+
+  def get_res_incident_notes(self, client, incident_id):
+    entity = {
+      "id": incident_id,
+      "data": None
+    }
+
+    entity["data"] = client.get("/incidents/{0}/comments?text_content_output_format=always_text".format(entity["id"]))
+    
+    if entity["data"] is not None and len(entity["data"]) == 0:
+      entity = None
+    
     return entity
 
   def get_res_incident_attachments(self, client, incident_id):
@@ -76,6 +97,9 @@ class ServiceNowHelper:
 
         if attachment is not None:
           entity["data"].append(base64.b64encode(attachment))
+
+    else:
+      entity = None
 
     return entity
 
@@ -102,7 +126,7 @@ class ServiceNowHelper:
           task["attachments_meta_data"] = attachments["meta_data"]
           task["attachments_data"] = attachments["data"]
 
-    return entity
+    return entity["data"]
 
   def get_res_task_attachments(self, client, task_id):
     entity = {
