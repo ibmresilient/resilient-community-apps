@@ -1,6 +1,7 @@
 # import unittest
 import pytest
-from exchangelib import Message, FileAttachment, Account, Folder
+from exchangelib import Message, FileAttachment, Account, Folder, FolderCollection
+from exchangelib.restriction import Q
 from fn_exchange.util.exchange_utils import exchange_utils, parse_time, FolderError
 
 try:
@@ -40,15 +41,21 @@ class MockAttachmentId(object):
 class MockAccount(Account):
     def __init__(self, root):
         self.root = root
-        self.sent = MockFolder('sent', {})
-        self.calendar = MockFolder('calendar', {})
+        self.sent = MockFolder('sent', {}, account=self)
+        self.calendar = MockFolder('calendar', {}, account=self)
+
+    def set_root(self, root):
+        self.root = root
 
 
 class MockFolder(Folder):
-    def __init__(self, name, subfolders):
+    FIELDS = []
+
+    def __init__(self, name, subfolders, account=None):
         self.name = name
         self.subfolders = subfolders
-        self.account = None
+        self.child_folder_count = len(subfolders)
+        self.account = account
 
     def __truediv__(self, other):
         if self.subfolders.get(other):
@@ -58,6 +65,9 @@ class MockFolder(Folder):
 
     def __eq__(self, other):
         return self.name == other.name and self.subfolders == other.subfolders
+
+    def __repr__(self):
+        return '{}: {}'.format(self.name, str(self.subfolders))
 
 
 class TestExchangeUtils:
@@ -241,3 +251,45 @@ class TestExchangeUtils:
         assert meeting3.body == None
         assert meeting3.required_attendees == ['r1@example.com', 'r2@example.com']
         assert meeting3.optional_attendees == ['o1@a.com', 'o2@a.com']
+
+    @patch.object(FolderCollection, '__eq__', lambda fc1, fc2: set(fc1) == set(fc2))
+    @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
+    def test_get_email(self, connect_to_account):
+        test_utils = exchange_utils({'default_folder_path': '1'})
+        mock_account = MockAccount(None)
+        test_root = MockFolder('root', {
+            '1': MockFolder('1', {}, mock_account),
+            '2': MockFolder('2', {
+                '2_1': MockFolder('2_1', {}, mock_account),
+                '2_2': MockFolder('2_2', {
+                    '2_2_1': MockFolder('2_2_1', {}, mock_account)
+                }, mock_account)
+            }, mock_account)
+        }, mock_account)
+        rsf = test_root.subfolders
+        mock_account.set_root(test_root)
+        connect_to_account.return_value = mock_account
+
+        emails1 = test_utils.get_emails('mockemail', sender='testsender')
+        assert emails1.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
+        assert emails1.q == Q(sender='testsender')
+
+        emails2 = test_utils.get_emails('mockemail', folder_path='1,2', sender='another sender')
+        assert emails2.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1'], rsf['2']])
+        assert emails2.q == Q(sender='another sender')
+
+        emails3 = test_utils.get_emails('mockemail', subject='subject')
+        assert emails3.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
+        assert emails3.q == Q(subject__contains='subject')
+
+        emails4 = test_utils.get_emails('mockemail', body='body')
+        assert emails4.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
+        assert emails4.q == Q(body__contains='body')
+
+        emails5 = test_utils.get_emails('mockemail', email_ids='id1,id2,idN')
+        assert emails5.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
+        assert emails5.q == Q(message_id='id1') | Q(message_id='id2') | Q(message_id='idN')
+
+        emails6 = test_utils.get_emails('mockemail', has_attachments=True)
+        assert emails6.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
+        assert emails6.q == Q(has_attachments= True)   

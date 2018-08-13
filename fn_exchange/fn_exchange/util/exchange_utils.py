@@ -205,7 +205,6 @@ class exchange_utils:
             'emails': {}
         }
 
-
         # Example function results
         # results = {
         #     'email_ids': ['id1', 'idN'],
