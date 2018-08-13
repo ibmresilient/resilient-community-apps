@@ -162,14 +162,17 @@ class PassiveTotalSearcher(BaseComponent):
         :param tags_hits_list
         """
         # Passive DNS Results - Hits
+        # We grab just the totalRecords number and the firs seen to last seen interval
         pdns_results_response = self._passivetotal_get_response(self.passivetotal_passive_dns_api_url,
                                                                 artifact_value)
         if pdns_results_response.status_code == 200:
             pdns_results = pdns_results_response.json()
             pdns_hit_number = pdns_results.get("totalRecords", None)
-            #FIXME if I grab here ["results"] I can iterate through all PT Resolutions
-            #pdns_hit_results = pdns_results.get("results", None)
+            pdns_first_seen = pdns_results.get("firstSeen", None)
+            pdns_last_seen = pdns_results.get("lastSeen", None)
             LOG.info(pdns_hit_number)
+            LOG.info(pdns_first_seen)
+            LOG.info(pdns_last_seen)
         else:
             LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
             LOG.debug(pdns_results_response.text)
@@ -191,8 +194,10 @@ class PassiveTotalSearcher(BaseComponent):
         if subdomain_results_response.status_code == 200:
             subdomain_results = subdomain_results_response.json()
             subdomain_hits = subdomain_results.get("subdomains", None)
-            subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None #FIXME Do I print out the names of subdomains instead of numbers?
+            subdomain_hits_number = len(subdomain_hits) if subdomain_hits else None
+            first_ten_subdomains = ', '.join(subdomain_hits[:10]) if subdomain_hits else None
             LOG.info(subdomain_hits_number)
+            LOG.info(first_ten_subdomains)
         else:
             LOG.info("No subdomain information found for artifact value: {0}".format(self.artifact_value))
             LOG.debug(subdomain_results_response.text)
@@ -204,8 +209,11 @@ class PassiveTotalSearcher(BaseComponent):
         report_url = self.passivetotal_community_url + artifact_value
 
         return Hit(
-            NumberProp(name="Passive DNS Hits", value=pdns_hit_number),
-            NumberProp(name="Number of subdomains", value=subdomain_hits_number),
+            NumberProp(name="Number of Passive DNS Records", value=pdns_hit_number),
+            StringProp(name="First Seen", value=pdns_first_seen),
+            StringProp(name="Last Seen", value=pdns_last_seen),
+            NumberProp(name="Subdomains - All", value=subdomain_hits_number),
+            StringProp(name="Subdomains - First ten Hostenames", value=first_ten_subdomains),
             StringProp(name="Tags", value=tags_hits),
             StringProp(name="Classification", value=classification_hit),
             UriProp(name="Report Link", value=report_url)
