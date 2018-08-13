@@ -178,8 +178,8 @@ class exchange_utils:
         """Create a meeting object"""
         account = self.connect_to_account(username, impersonation=(username != self.email))
         tz = EWSTimeZone.timezone(self.default_timezone)
-        start_time = self.parse_time(start_time)
-        end_time = self.parse_time(end_time)
+        start_time = parse_time(start_time)
+        end_time = parse_time(end_time)
 
         if required_attendees:
             required_attendees = required_attendees.split(',')
