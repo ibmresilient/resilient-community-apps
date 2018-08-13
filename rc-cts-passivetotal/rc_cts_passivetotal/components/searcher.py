@@ -159,14 +159,16 @@ class PassiveTotalSearcher(BaseComponent):
         Query RiskIQ PassiveTotal API for the given 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip'
         (IP address) and generate a Hit.
         :param artifact_value
-        :param tags_hits
+        :param tags_hits_list
         """
-        # Passive DNS Results
+        # Passive DNS Results - Hits
         pdns_results_response = self._passivetotal_get_response(self.passivetotal_passive_dns_api_url,
                                                                 artifact_value)
         if pdns_results_response.status_code == 200:
             pdns_results = pdns_results_response.json()
-            pdns_hit_number = pdns_results.get("totalRecords", None) #FIXME if I grab here ["results"] I can iterate through all PT Resolutions
+            pdns_hit_number = pdns_results.get("totalRecords", None)
+            #FIXME if I grab here ["results"] I can iterate through all PT Resolutions
+            #pdns_hit_results = pdns_results.get("results", None)
             LOG.info(pdns_hit_number)
         else:
             LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
