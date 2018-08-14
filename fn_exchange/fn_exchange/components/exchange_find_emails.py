@@ -27,6 +27,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             exchange_email = kwargs.get("exchange_email")  # text
             exchange_folder_path = kwargs.get("exchange_folder_path")  # text
+            exchange_email_ids = kwargs.get("exchange_email_ids") # text
             exchange_sender = kwargs.get("exchange_sender")  # text
             exchange_message_subject = kwargs.get("exchange_message_subject") # text
             exchange_message_body = kwargs.get("exchange_message_body") # text
@@ -43,6 +44,7 @@ class FunctionComponent(ResilientComponent):
                 log.info('No folder path was specified, using value from config file')
             log.info("exchange_email: %s" % exchange_email)
             log.info("exchange_folder_path: %s" % exchange_folder_path)
+            log.info("exchange_email_ids: %s" % exchange_email_ids)
             log.info("exchange_sender: %s" % exchange_sender)
             log.info("exchange_message_subject: %s" % exchange_message_subject)
             log.info("exchange_message_body: %s" % exchange_message_body)
@@ -58,10 +60,10 @@ class FunctionComponent(ResilientComponent):
 
             # Find emails
             yield StatusMessage("Finding emails")
-            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_sender, exchange_message_subject,
-                                      exchange_message_body, exchange_start_date, exchange_end_date,
-                                      exchange_has_attachments, exchange_order_by_recency, exchange_num_emails,
-                                      exchange_search_subfolders)
+            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_email_ids, exchange_sender,
+                                      exchange_message_subject, exchange_message_body, exchange_start_date,
+                                      exchange_end_date, exchange_has_attachments, exchange_order_by_recency,
+                                      exchange_num_emails, exchange_search_subfolders)
             yield StatusMessage("Done finding emails, %d emails found" % emails.count())
 
             # Populate results with query data
