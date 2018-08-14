@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 from __future__ import unicode_literals
 import logging
 import requests
@@ -128,7 +130,7 @@ class PassiveTotalSearcher(BaseComponent):
         else:
             LOG.info("No Tag information found for artifact value: {0}".format(artifact_value))
             LOG.debug(tags_response.text)
-            return True
+            return False, None
 
         tags_hits = tags.get('tags', None)
 
