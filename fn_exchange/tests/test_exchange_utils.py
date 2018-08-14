@@ -69,6 +69,13 @@ class MockFolder(Folder):
     def __repr__(self):
         return '{}: {}'.format(self.name, str(self.subfolders))
 
+    # For get_emails search_subfolders list(folder.walk().get_folders())
+    def get_folders(self):
+        for item in self.subfolders.values():
+            yield item
+            for recur_item in item.subfolders.values():
+                yield recur_item
+
 
 class TestExchangeUtils:
 
@@ -292,4 +299,12 @@ class TestExchangeUtils:
 
         emails6 = test_utils.get_emails('mockemail', has_attachments=True)
         assert emails6.folder_collection == FolderCollection(account=mock_account, folders=[rsf['1']])
-        assert emails6.q == Q(has_attachments= True)   
+        assert emails6.q == Q(has_attachments= True)
+
+        with patch.object(Folder, 'walk') as walk:
+            walk.return_value = test_root.subfolders['2']
+            emails7 = test_utils.get_emails('mockemail', folder_path='2', search_subfolders=True)
+        assert emails7.folder_collection == FolderCollection(folders=[rsf['2'], rsf['2'].subfolders['2_1'],
+                                                                      rsf['2'].subfolders['2_2'].subfolders['2_2_1'],
+                                                                      rsf['2'].subfolders['2_2']], account=mock_account)
+        assert emails7.q == Q()
