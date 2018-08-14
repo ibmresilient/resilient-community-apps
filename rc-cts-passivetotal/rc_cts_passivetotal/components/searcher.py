@@ -167,6 +167,7 @@ class PassiveTotalSearcher(BaseComponent):
         # We grab the totalRecords number and show the First Seen date to Last Seen date interval
         pdns_results_response = self._passivetotal_get_response(self.passivetotal_passive_dns_api_url,
                                                                 artifact_value)
+        pdns_hit_number, pdns_first_seen, pdns_last_seen = None, None, None
         if pdns_results_response.status_code == 200:
             pdns_results = pdns_results_response.json()
             pdns_hit_number = pdns_results.get("totalRecords", None)
@@ -182,6 +183,7 @@ class PassiveTotalSearcher(BaseComponent):
         # URL Classification - suspicious, malicious etc
         classification_results_response = self._passivetotal_get_response(self.passivetotal_actions_class_api_url,
                                                                           artifact_value)
+        classification_hit = None
         if classification_results_response.status_code == 200:
             classification_results = classification_results_response.json()
             classification_hit = classification_results.get("classification", None)
@@ -193,6 +195,7 @@ class PassiveTotalSearcher(BaseComponent):
         # Count of subdomains
         subdomain_results_response = self._passivetotal_get_response(self.passivetotal_enrich_subdom_api_url,
                                                                      artifact_value)
+        subdomain_hits_number, first_ten_subdomains = None, None
         if subdomain_results_response.status_code == 200:
             subdomain_results = subdomain_results_response.json()
             subdomain_hits = subdomain_results.get("subdomains", None)
