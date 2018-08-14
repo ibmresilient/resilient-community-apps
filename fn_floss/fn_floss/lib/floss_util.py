@@ -46,6 +46,7 @@ def call_floss(str_floss_options, temp_file_binary):
     try:
         # Floss writes output to stdout so redirect stdout to temporary file.
         # Store stdout so we can restore when we are done.
+        floss_call_complete = True
         save_stdout = sys.stdout
         with tempfile.NamedTemporaryFile('w+b', bufsize=0) as temp_file_strings:
             sys.stdout = temp_file_strings
@@ -56,8 +57,15 @@ def call_floss(str_floss_options, temp_file_binary):
             # Create the list of commandline options to pass to floss main.
             list_floss_params = get_floss_params(str_floss_options, temp_file_binary.name.encode('utf-8'))
 
-            # This is the actual call to Floss.
+            # main.main is the actual call to Floss.
+            # The flag floss_call_complete is a hack used to indicate whether the call to floss
+            # actually completes.  If the commandline options passed into floss are invalid in some
+            # cases it will call down to the python option parser library which will write an error message
+            # to stderr and exit.  In this case there is no error raised and the function and workflow
+            # do not terminate properly.
+            floss_call_complete = False
             result_floss = main.main(list_floss_params)
+            floss_call_complete = True
 
             # Floss returns 0 for success
             if result_floss != 0:
@@ -71,7 +79,10 @@ def call_floss(str_floss_options, temp_file_binary):
     finally:
         # Restore sys.output 
         sys.output = save_stdout
-
+        # See comments above about the use of floss_call_complete flag. This raise will only be
+        # executed if invalid commandline options are passed to floss.
+        if floss_call_complete == False:
+            raise RuntimeError("Error running Floss. Floss did not complete. Check input options are valid in app.config file.")
 
     return list_string
         
