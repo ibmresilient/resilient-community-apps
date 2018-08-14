@@ -44,7 +44,7 @@ class AwsSns(AWSCommon):
                     ReturnSubscriptionArn=True
                 )
 
-                if subscription.get("SubscriptionArn"):
+                if subscription.get("SubscriptionArn"):  # Grabbing ARN so we can unsubscribe the user later
                     subscriptions.append(subscription.get("SubscriptionArn"))
             except Exception as e:
                 # An example number would be 19998887777

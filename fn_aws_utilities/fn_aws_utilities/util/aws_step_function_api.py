@@ -86,7 +86,7 @@ class AwsStepFunction(AWSCommon):
                 if execution_status != "RUNNING" or execution_status != "SUCCEEDED":
                     raise Exception("Function did not complete successfully, status: {}.".format(execution_status))
 
-                time.sleep(1)  # Free up the CPU and don't spam API calls
+                time.sleep(10)  # Free up the CPU and don't spam API calls
 
             return execution_description
 

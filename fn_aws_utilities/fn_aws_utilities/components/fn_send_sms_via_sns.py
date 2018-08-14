@@ -8,6 +8,7 @@ from resilient_circuits import ResilientComponent, function, handler, FunctionRe
 import json
 from fn_aws_utilities.util.aws_sns_api import AwsSns
 from fn_aws_utilities.util.aws_config import AWSConfig
+import re
 
 
 class FunctionComponent(ResilientComponent):
@@ -30,11 +31,15 @@ class FunctionComponent(ResilientComponent):
             config = AWSConfig(self.options)
 
             # Get the function parameters:
-            phone_numbers_json = kwargs.get("phone_numbers")  # text
+            phone_numbers_csv = kwargs.get("phone_numbers")  # text
             msg_body = kwargs.get("msg_body")  # text
 
             try:
-                phone_numbers = json.loads(phone_numbers_json)
+                phone_numbers_unstripped = [s.strip() for s in
+                                            phone_numbers_csv.split(',')]  # Split commas ignoring any whitespace
+                phone_numbers = []
+                for phone_number_unstripped in phone_numbers_unstripped:
+                    phone_numbers.append(re.sub("[^0-9]", "", phone_number_unstripped))  # Strip all non-numeric chars
             except Exception:
                 raise FunctionError("Invalid phone numbers provided, failed to decode.")
 
