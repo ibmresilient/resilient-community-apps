@@ -136,7 +136,7 @@ class PassiveTotalSearcher(BaseComponent):
                  + " with flagged tags in app.config file " + self.passivetotal_tags)
 
         # Tests the site has tags you have flagged
-        passive_tag_set = set(item.lower() for item in self.passivetotal_tags.split(","))
+        passive_tag_set = set(item.lower().strip() for item in self.passivetotal_tags.split(","))
         tags_hit_set = set(item.lower() for item in tags_hits)
 
         return bool(passive_tag_set.intersection(tags_hit_set)), tags_hits
@@ -162,7 +162,7 @@ class PassiveTotalSearcher(BaseComponent):
         :param tags_hits_list
         """
         # Passive DNS Results - Hits
-        # We grab just the totalRecords number and the firs seen to last seen interval
+        # We grab the totalRecords number and show the First Seen date to Last Seen date interval
         pdns_results_response = self._passivetotal_get_response(self.passivetotal_passive_dns_api_url,
                                                                 artifact_value)
         if pdns_results_response.status_code == 200:
@@ -177,12 +177,12 @@ class PassiveTotalSearcher(BaseComponent):
             LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
             LOG.debug(pdns_results_response.text)
 
-        # URL Classification
+        # URL Classification - suspicious, malicious etc
         classification_results_response = self._passivetotal_get_response(self.passivetotal_actions_class_api_url,
                                                                           artifact_value)
         if classification_results_response.status_code == 200:
             classification_results = classification_results_response.json()
-            classification_hit = classification_results.get("classification", None) #FIXME WHy is this always None?
+            classification_hit = classification_results.get("classification", None)
             LOG.info(classification_hit)
         else:
             LOG.info("No URL classification found for artifact value: {0}".format(self.artifact_value))
@@ -213,7 +213,7 @@ class PassiveTotalSearcher(BaseComponent):
             StringProp(name="First Seen", value=pdns_first_seen),
             StringProp(name="Last Seen", value=pdns_last_seen),
             NumberProp(name="Subdomains - All", value=subdomain_hits_number),
-            StringProp(name="Subdomains - First ten Hostenames", value=first_ten_subdomains),
+            StringProp(name="Subdomains - First ten Hostnames", value=first_ten_subdomains),
             StringProp(name="Tags", value=tags_hits),
             StringProp(name="Classification", value=classification_hit),
             UriProp(name="Report Link", value=report_url)
