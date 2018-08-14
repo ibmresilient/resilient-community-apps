@@ -3,11 +3,14 @@ resilient-circuits codegen -p fn_utilities -m fn_utilities \
     "Example: Call REST API" \
     "Example: Domain Distance" \
     "Example: Email Parsing" \
+    "Example: Expand URL" \
+    "Example: Extract SSL Certificate" \
+    "Example: JSON2HTML and HTML2PDF" \
+    "Example: Parse SSL Certificate" \
     "Example: PDFiD" \
     "Example: Resilient Search" \
     "Example: Shell Command" \
     "Example: String to Attachment" \
+    "Example: Use Excel Data" \
     "Example: Zip Extract" \
     "Example: Zip List" \
-    "Example: Expand URL" \
-    "Example: Use Excel Data"
