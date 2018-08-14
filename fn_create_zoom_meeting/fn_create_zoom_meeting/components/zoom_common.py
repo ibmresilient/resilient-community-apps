@@ -22,7 +22,9 @@ class ZoomCommon:
     @staticmethod
     def generate_auth_token(key, secret):
         """Generates authentication token used to authenticate with Zoom API"""
-        return jwt.encode({'iss': key, 'exp': time.time() + 60}, secret, algorithm='HS256').decode('utf-8')  # expires in 1 minute
+        return jwt.encode({'iss': key, 'exp': time.time() + 60},  # exp is expiry time in epoch, we have it for 60 secs
+                          secret,  # secret key
+                          algorithm='HS256').decode('utf-8')
 
     def zoom_request(self, path=None, method="GET", query=None, headers=None):
         """Generates and makes specified request to Zoom API"""
@@ -69,35 +71,36 @@ class ZoomCommon:
         if record_boolean:
             set_auto_recording = "local"
 
+        # https://zoom.github.io/api/#meetings
         data = {
-            "topic": topic,
-            "type": 1,
-            "start_time": post_time,
-            "duration": 0,
-            "timezone": timezone,
-            "password": password,
-            "agenda": agenda_string,
+            "topic": topic,  # Meeting topic
+            "type": 1,  # Meeting type (1 = Instant meeting, 2 = Scheduled meeting, 3 = Recurring meeting no fixed time, 8 = Recurring meeting fixed time)
+            "start_time": post_time,  # Meeting start time
+            "duration": 0,  # Meeting duration, only used for scheduled meetings
+            "timezone": timezone,  # Timezone of start_time, list: https://zoom.github.io/api/#timezones
+            "password": password,  # Meeting password
+            "agenda": agenda_string,  # Meeting description
             "recurrence": {
-                "type": 1,
-                "repeat_interval": 0,
-                "weekly_days": 1,
-                "monthly_day": 0,
-                "monthly_week": -1,
-                "monthly_week_day": 1,
-                "end_times": 0,
-                "end_date_time": post_time
+                "type": 1,  # Recurrence meeting type (1 = Daily, 2 = Weekly, 3 = Monthly)
+                "repeat_interval": 0,  # Interval meeting should repeat
+                "weekly_days": 1,  # Days of the week meeting should repeat, separated by comma
+                "monthly_day": 0,  # Day of the month for the meeting to be scheduled
+                "monthly_week": -1,  # Week for which the meeting should recur each month
+                "monthly_week_day": 1,  # Day for which the meeting should recur each month
+                "end_times": 0,  # How many times meeting should occur before it is canceled
+                "end_date_time": post_time  # End date time
             },
-            "settings": {"host_video": True,
-                         "participant_video": True,
-                         "cn_meeting": False,
-                         "in_meeting": False,
-                         "join_before_host": False,
-                         "mute_upon_entry": False,
-                         "watermark": False,
-                         "use_pmi": False,
-                         "approval_type": 2,
-                         "registration_type": 1,
-                         "audio": "both",
+            "settings": {"host_video": True,  # Start video when host joins meeting
+                         "participant_video": True,  # Start video when participants join meeting
+                         "cn_meeting": False,  # Host meeting in China
+                         "in_meeting": False,  # Host meeting in India
+                         "join_before_host": False,  # Allow participants to join before host starts meeting (only for scheduled or recurring meetings)
+                         "mute_upon_entry": False,  # Mute participants on entry
+                         "watermark": False,  # Add watermark when viewing shared screen
+                         "use_pmi": False,  # Personal meeting ID, only for scheduled and recurring meetings w/ no fixed time
+                         "approval_type": 2,  # (0 = Automatically approve, 1 = Manually approve, 2 = No Reg. Required)
+                         "registration_type": 1,  # Registration type (only for recurring meetings)
+                         "audio": "both",  # Determine how participants can join the audio portion of the meeting
                          "auto_recording": set_auto_recording    # turn on option to save recording locally
                          }
         }

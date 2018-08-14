@@ -51,6 +51,7 @@ def mocked_requests_post(*args, **kwargs):
 
 
 def run_zoom_common_create_meeting():
+    zoom_api_url = "https://api.zoom.us/v2"
     zoom_api_key = ""  # Fill with zoom api key
     zoom_api_secret = ""  # Fill with zoom api secret
 
@@ -59,10 +60,11 @@ def run_zoom_common_create_meeting():
     zoom_record_meeting = False
     zoom_topic = "test"
     zoom_password = ""
+    zoom_timezone = "America/New_York"
 
-    common = ZoomCommon(zoom_api_key, zoom_api_secret)
+    common = ZoomCommon(zoom_api_url, zoom_api_key, zoom_api_secret)
 
-    result = common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password)
+    result = common.create_meeting(zoom_host_email, zoom_agenda, zoom_record_meeting, zoom_topic, zoom_password, zoom_timezone)
 
     return result
 
