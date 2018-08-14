@@ -17,7 +17,7 @@ class XForceHelper:
     option = self.options.get(option_name)
 
     if option is None and optional is False:
-      err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
+      err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function properly".format(option_name)
       raise ValueError(err)
     else:
       return option

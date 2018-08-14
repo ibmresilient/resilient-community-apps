@@ -10,6 +10,7 @@ from resilient_circuits import ResilientComponent, function, handler, \
     StatusMessage, FunctionResult, FunctionError
 from fn_xforce.util.helper import XForceHelper
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function
          'xforce_get_collection_by_id"""
@@ -29,6 +30,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Takes in a parameter of a casefileID 
         and then submits this to the X-Force API to gather data for the provided case."""
         try:
+
             yield StatusMessage("Starting")
             helper = XForceHelper(self.options)
             # Get Xforce params
@@ -63,33 +65,34 @@ class FunctionComponent(ResilientComponent):
                 with requests.Session() as session:
                     session.proxies = proxies
 
-
                     # Prepare request string
                     request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, str(xforce_collection_id))
+
                     # Make the HTTP request through the session.
                     res = session.get(request_string, auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
+
                     case_files = res.json()
-            except Exception as e:
-                log.info(e)
-                raise ValueError("Encountered issue when querying X-Force API")
-            #Prepare results object
-            print(case_files["contents"]["plainText"])
+            except Exception:
+                raise ValueError("Encountered issue when contacting XForce API")
+            # Prepare results object
             if 'contents' in case_files:
                 results = {
                     "success": True,
-                    "plaintext": case_files["contents"]["plainText"].replace(u'\xa0', u' ').encode('utf-8'),
-                    "created": case_files["created"],
+                    "plaintext": json.dumps(case_files["contents"]["plainText"],default=lambda o: o.__dict__,
+                                            sort_keys=True, indent=4),
+                    "created": json.dumps(case_files["created"]),
                     "title": case_files["title"],
-                    "tags": json.dumps(case_files["tags"])
+                    "tags": json.dumps(str(case_files["tags"]))
                 }
-                print results
             # If no 'contents' set success to false for other functions
             else:
                 results = {
                     "success": False
                 }
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+
+

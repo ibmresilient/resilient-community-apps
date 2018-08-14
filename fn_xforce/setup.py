@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_xforce'",
     long_description="Resilient Circuits Components for 'fn_xforce'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'requests'
     ],
     packages=find_packages(),
     include_package_data=True,
