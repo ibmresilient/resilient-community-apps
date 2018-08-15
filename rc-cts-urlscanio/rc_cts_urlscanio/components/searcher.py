@@ -90,12 +90,15 @@ class UrlScanIoSearcher(BaseComponent):
                 total_hits = content.get('total', None)
                 if total_hits is None or total_hits == 0:
                     LOG.info("No Results for the URL.")
+                    LOG.debug(search_response.text)
                     return hits
 
                 LOG.info("Getting the report for the URL.")
 
                 search_results = content.get('results', None)
                 if not search_results:
+                    LOG.info("No Results for the URL.")
+                    LOG.debug(search_response.text)
                     return hits
 
                 for result in search_results:
@@ -103,7 +106,7 @@ class UrlScanIoSearcher(BaseComponent):
                         continue
 
                     result_hit = self._generate_hit_from_search_result(result)
-                    if result_hit: # Do not include None value
+                    if result_hit:  # Do not include None value
                         hits.append(result_hit)
 
                 if not hits:
@@ -128,15 +131,16 @@ class UrlScanIoSearcher(BaseComponent):
         if result_response.status_code == 200:
             result_content = result_response.json()
 
-            # Some scans show as failed, do not include those
-            if self._verify_for_fail_scan_flag(result_content):
-                return None
-
             stats = result_content.get('stats', None)
             if stats:
                 malicious_flag = stats.get('malicious', None)
 
                 if malicious_flag and malicious_flag == 1:
+
+                    # Some malicious scans show as failed, do not include those
+                    if self._verify_for_scan_failed_flag(result_content):
+                        return None
+
                     task = result_content.get('task', None)
                     page = result_content.get('page', None)
 
@@ -164,7 +168,7 @@ class UrlScanIoSearcher(BaseComponent):
             LOG.debug(result_response.text)
 
     @staticmethod
-    def _verify_for_fail_scan_flag(result_content):
+    def _verify_for_scan_failed_flag(result_content):
         """ Verify if scan failed """
 
         result_data = result_content.get('data', None)
