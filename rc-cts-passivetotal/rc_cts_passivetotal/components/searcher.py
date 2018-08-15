@@ -177,7 +177,7 @@ class PassiveTotalSearcher(BaseComponent):
             LOG.info(pdns_first_seen)
             LOG.info(pdns_last_seen)
         else:
-            LOG.info("No Passive DNS information found for artifact value: {0}".format(self.artifact_value))
+            LOG.info("No Passive DNS information found for artifact value: {0}".format(artifact_value))
             LOG.debug(pdns_results_response.text)
 
         # URL Classification - suspicious, malicious etc
@@ -189,7 +189,7 @@ class PassiveTotalSearcher(BaseComponent):
             classification_hit = classification_results.get("classification", None)
             LOG.info(classification_hit)
         else:
-            LOG.info("No URL classification found for artifact value: {0}".format(self.artifact_value))
+            LOG.info("No URL classification found for artifact value: {0}".format(artifact_value))
             LOG.debug(classification_results_response.text)
 
         # Count of subdomains
@@ -204,7 +204,7 @@ class PassiveTotalSearcher(BaseComponent):
             LOG.info(subdomain_hits_number)
             LOG.info(first_ten_subdomains)
         else:
-            LOG.info("No subdomain information found for artifact value: {0}".format(self.artifact_value))
+            LOG.info("No subdomain information found for artifact value: {0}".format(artifact_value))
             LOG.debug(subdomain_results_response.text)
 
         # Convert tags hits list to str

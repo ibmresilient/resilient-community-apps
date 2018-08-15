@@ -1,6 +1,6 @@
 # RiskIQ PassiveTotal
 
-This implements a custom threat service for [RiskIQ PassiveTotal](https://community.riskiq.com/home).
+This implements a custom threat service for [RiskIQ PassiveTotal](https://community.riskiq.com/home). This threat service is automatically triggered when adding artifacts of type 'net.name' (domain name artifact), 'net.uri' (URL) or 'net.ip' (IP address).
 
 To query RiskIQ PassiveTotal API user needs to provide API key.
 
