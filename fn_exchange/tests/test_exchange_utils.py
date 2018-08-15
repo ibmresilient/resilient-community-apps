@@ -66,6 +66,9 @@ class MockFolder(Folder):
     def __eq__(self, other):
         return self.name == other.name and self.subfolders == other.subfolders
 
+    def __hash__(self):
+        return hash(self.name + str(set(self.subfolders)))
+
     def __repr__(self):
         return '{}: {}'.format(self.name, str(self.subfolders))
 
@@ -124,7 +127,8 @@ class TestExchangeUtils:
         assert emails2_output == emails2_results
 
         emails3 = emails2 + [MockEmail('weio', 'nzxcv', 'vds', MockSender('FIRST LAST', 'firstlast@example.com'),
-                                       [MockAttachment(MockAttachmentId('22'), 'ATTCH', 'spreadsheet', 12, 'encode me')])]
+                                       [MockAttachment(MockAttachmentId('22'), 'ATTCH', 'spreadsheet', 12,
+                                                       str.encode('encode me'))])]
         emails3_output = test_utils.create_email_function_results(emails3)
         emails3_results = {
             'email_ids': ['1', 'weio'],
@@ -148,7 +152,7 @@ class TestExchangeUtils:
                             'attachment_name': 'ATTCH',
                             'attachment_content_type': 'spreadsheet',
                             'attachment_size': 12,
-                            'attachment_base64': 'ZW5jb2RlIG1l'
+                            'attachment_base64': b'ZW5jb2RlIG1l'
                         }
                     }
                 }
