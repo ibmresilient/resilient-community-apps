@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -42,10 +43,10 @@ class FunctionComponent(ResilientComponent):
             utils = exchange_utils(self.options)
 
             # Get folders
-            yield StatusMessage("Getting folders")
+            yield StatusMessage("Getting folder")
             from_folder = utils.go_to_folder(exchange_email, exchange_folder_path)
             to_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
-            yield StatusMessage("Done getting folders")
+            yield StatusMessage("Done getting folder")
 
             results = {}
             # Get items before moving

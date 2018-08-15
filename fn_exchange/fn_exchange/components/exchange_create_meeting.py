@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -46,7 +47,6 @@ class FunctionComponent(ResilientComponent):
             utils = exchange_utils(self.options)
 
             # Create meeting
-            yield StatusMessage("Connecting to account %s and creating meeting" % exchange_email)
             meeting = utils.create_meeting(exchange_email, exchange_meeting_start_time, exchange_meeting_end_time,
                                            exchange_meeting_subject, exchange_meeting_body,
                                            exchange_required_attendees, exchange_optional_attendees)

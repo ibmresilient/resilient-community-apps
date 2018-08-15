@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -44,7 +45,6 @@ class FunctionComponent(ResilientComponent):
             utils = exchange_utils(self.options)
 
             # Get sender account
-            yield StatusMessage("Connecting to account %s and creating email" % exchange_email)
             email = utils.create_email_message(exchange_email, exchange_message_subject, exchange_message_body,
                                                exchange_emails)
             yield StatusMessage("Successfully connected to %s" % exchange_email)

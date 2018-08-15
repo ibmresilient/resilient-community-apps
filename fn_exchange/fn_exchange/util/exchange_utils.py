@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem, IMPERSONATION
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
