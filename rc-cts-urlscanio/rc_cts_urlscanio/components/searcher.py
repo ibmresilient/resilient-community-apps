@@ -135,7 +135,7 @@ class UrlScanIoSearcher(BaseComponent):
             if stats:
                 malicious_flag = stats.get('malicious', None)
 
-                if malicious_flag and malicious_flag == 1:
+                if malicious_flag == 1:
 
                     # Some malicious scans show as failed, do not include those
                     if self._verify_for_scan_failed_flag(result_content):
