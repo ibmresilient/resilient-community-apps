@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Delete emails with the specified parameters"""
         try:
             # Get the function parameters:
-            exchange_emails = kwargs.get("exchange_emails")  # text
+            exchange_email = kwargs.get("exchange_email")  # text
             exchange_folder_path = kwargs.get("exchange_folder_path")  # text
             exchange_email_ids = kwargs.get("exchange_email_ids")  # text
             exchange_sender = kwargs.get("exchange_sender")  # text
@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
             if exchange_folder_path is None:
                 exchange_folder_path = self.options.get('default_folder_path')
                 log.info('No folder path was specified, using value from config file')
-            log.info("exchange_emails: %s" % exchange_emails)
+            log.info("exchange_email: %s" % exchange_email)
             log.info("exchange_folder_path: %s" % exchange_folder_path)
             log.info("exchange_email_ids: %s" % exchange_email_ids)
             log.info("exchange_sender: %s" % exchange_sender)
@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
 
             # Find emails
             yield StatusMessage("Finding emails")
-            emails = utils.get_emails(exchange_emails, exchange_folder_path, exchange_email_ids, exchange_sender,
+            emails = utils.get_emails(exchange_email, exchange_folder_path, exchange_email_ids, exchange_sender,
                                       exchange_message_subject, exchange_message_body, exchange_start_date,
                                       exchange_end_date, exchange_has_attachments, exchange_order_by_recency,
                                       exchange_num_emails, exchange_search_subfolders)

@@ -30,7 +30,8 @@ class CredentialsError(Exception):
 class FolderError(Exception):
     def __init__(self, email, folder, folder_path, tree):
         fail_msg = 'Either the user {} does not have access to the folder {} from the path ' \
-                   '{}, or the folder does not exist\n{}'.format(email, folder, folder_path, tree)
+                   '{}, or the folder does not exist'.format(email, folder, folder_path)
+        print(tree)
         super(FolderError, self).__init__(fail_msg)
 
 class ImpersonationError(Exception):
