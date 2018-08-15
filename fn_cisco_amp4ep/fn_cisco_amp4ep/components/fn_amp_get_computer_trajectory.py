@@ -113,8 +113,6 @@ class FunctionComponent(ResilientComponent):
             results = {"computer_trajectory": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["conn_guid"]))
 
-            yield StatusMessage("Done...")
-
             log.debug(json.dumps(results))
 
             # Produce a FunctionResult with the results

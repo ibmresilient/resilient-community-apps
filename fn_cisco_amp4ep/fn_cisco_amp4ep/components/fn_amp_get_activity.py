@@ -93,8 +93,6 @@ class FunctionComponent(ResilientComponent):
             results = {"activity": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'activity' results for query '{}'.".format(params["q"]))
 
-            yield StatusMessage("Done...")
-
             log.debug(json.dumps(results))
 
             # Produce a FunctionResult with the results
