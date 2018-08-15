@@ -13,12 +13,8 @@ def config_section_data():
 base_url=https://api.amp.cisco.com/
 api_version=v1
 # The client id will be generated on the Cisco AMP foer endpoints dashboard.
-client_id=<api token>
+client_id=<client id>
 # The api_tokenwill be generated on the Cisco AMP foer endpoints dashboard and will be will be in uuid format.
 api_token=<api token>
-
-
-
-
 """
     return config_data
