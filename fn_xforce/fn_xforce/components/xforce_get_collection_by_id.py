@@ -34,11 +34,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting")
             helper = XForceHelper(self.options)
             # Get Xforce params
-            XFORCE_API_KEY = helper.get_config_option("xforce_apikey")
-            XFORCE_API_PASSWORD = helper.get_config_option("xforce_password")
-            XFORCE_BASEURL = helper.get_config_option("xforce_baseurl")
-            HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
-            HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
+            HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
+
             # Get the function parameters:
             xforce_collection_id = kwargs.get("xforce_collection_id")  # text
 
@@ -51,14 +48,7 @@ class FunctionComponent(ResilientComponent):
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
-            if HTTP_PROXY:
-                proxies["http"] = HTTP_PROXY
-
-            if HTTPS_PROXY:
-                proxies["https"] = HTTPS_PROXY
-
-            if len(proxies) == 0:
-                proxies = None
+            proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
             try:
                 # Create the session and set the proxies.
@@ -69,20 +59,24 @@ class FunctionComponent(ResilientComponent):
                     request_string = '{}/casefiles/{}'.format(XFORCE_BASEURL, str(xforce_collection_id))
 
                     # Make the HTTP request through the session.
-                    res = session.get(request_string, auth=(XFORCE_API_KEY, XFORCE_API_PASSWORD))
+                    res = session.get(request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
 
-                    case_files = res.json()
+                    if res.status_code == 200:
+                        case_files = res.json()
+                    else:
+                        log.error("Got unexpected result from request. Expected 200 status")
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")
             # Prepare results object
             if 'contents' in case_files:
                 results = {
                     "success": True,
+                    # We json.dump for python 2&3 compat
                     "plaintext": json.dumps(case_files["contents"]["plainText"],default=lambda o: o.__dict__,
                                             sort_keys=True, indent=4),
-                    "created": json.dumps(case_files["created"]),
+                    "created": case_files["created"],
                     "title": case_files["title"],
-                    "tags": json.dumps(str(case_files["tags"]))
+                    "tags": case_files["tags"]
                 }
             # If no 'contents' set success to false for other functions
             else:
@@ -93,6 +87,8 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+
 
 
 

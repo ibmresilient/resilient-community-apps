@@ -32,6 +32,22 @@ class XForceHelper:
     else:
       return input
 
+  def setup_config(self):
+    XFORCE_APIKEY = self.get_config_option("xforce_apikey")
+    XFORCE_PASSWORD = self.get_config_option("xforce_password")
+    XFORCE_BASEURL = self.get_config_option("xforce_baseurl")
+    HTTP_PROXY = self.get_config_option("xforce_http_proxy", True)
+    HTTPS_PROXY = self.get_config_option("xforce_https_proxy", True)
+    return HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD
+
+  def setup_proxies(self, proxies, http_proxy, https_proxy):
+    if http_proxy:
+        proxies["http"] = http_proxy
+    if https_proxy:
+        proxies["https"] = https_proxy
+    if len(proxies) == 0:
+        proxies = None
+    return proxies
+
   def __init__(self, options):
     self.options = options
-    

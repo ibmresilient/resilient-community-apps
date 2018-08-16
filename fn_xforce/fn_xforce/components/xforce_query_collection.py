@@ -33,11 +33,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting")
             helper = XForceHelper(self.options)
             # Get Xforce params
-            XFORCE_APIKEY = helper.get_config_option("xforce_apikey")
-            XFORCE_PASSWORD = helper.get_config_option("xforce_password")
-            XFORCE_BASEURL = helper.get_config_option("xforce_baseurl")
-            HTTP_PROXY = helper.get_config_option("xforce_http_proxy", True)
-            HTTPS_PROXY = helper.get_config_option("xforce_https_proxy", True)
+            HTTPS_PROXY, HTTP_PROXY, XFORCE_APIKEY, XFORCE_BASEURL, XFORCE_PASSWORD = helper.setup_config()
             # Get the function parameters:
             xforce_collection_type = self.get_select_param(
                 kwargs.get("xforce_collection_type"))
@@ -53,12 +49,8 @@ class FunctionComponent(ResilientComponent):
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
-            if HTTP_PROXY:
-                proxies["http"] = HTTP_PROXY
-            if HTTPS_PROXY:
-                proxies["https"] = HTTPS_PROXY
-            if len(proxies) == 0:
-                proxies = None
+            proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
+
 
             case_files = None
             try:
@@ -73,7 +65,10 @@ class FunctionComponent(ResilientComponent):
                     # Make the HTTP request through the session.
                     res = session.get(
                         request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
-                    case_files = json.loads(res.content)
+                    if res.status_code == 200:
+                        case_files = res.json()
+                    else:
+                        log.error("Got unexpected result from request. Expected 200 status")
             except Exception as error:
                 log.info(error)
                 raise ValueError("Encountered issue when querying X-Force API")
@@ -89,3 +84,4 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
