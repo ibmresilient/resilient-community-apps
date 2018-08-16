@@ -36,8 +36,7 @@ class TestGetUserRisk:
         assert func is not None
 
     @pytest.mark.parametrize("username, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("USERNAME", {"value": "100"})
     ])
     def test_success(self, circuits_app, username, expected_results):
         """ Test calling with sample values for the parameters """

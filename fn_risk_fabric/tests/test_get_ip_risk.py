@@ -36,8 +36,7 @@ class TestGetIpRisk:
         assert func is not None
 
     @pytest.mark.parametrize("ipaddress, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("123.123.123.123", {"value": "100"})
     ])
     def test_success(self, circuits_app, ipaddress, expected_results):
         """ Test calling with sample values for the parameters """

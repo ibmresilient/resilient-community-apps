@@ -36,8 +36,7 @@ class TestGetHostRisk:
         assert func is not None
 
     @pytest.mark.parametrize("hostname, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("HOSTNAME", {"value": "100"})
     ])
     def test_success(self, circuits_app, hostname, expected_results):
         """ Test calling with sample values for the parameters """

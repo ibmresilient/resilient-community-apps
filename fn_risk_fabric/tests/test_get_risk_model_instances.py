@@ -36,8 +36,7 @@ class TestGetRiskModelInstances:
         assert func is not None
 
     @pytest.mark.parametrize("limit, expected_results", [
-        (123, {"value": "xyz"}),
-        (123, {"value": "xyz"})
+        (1, {"value": "success"})
     ])
     def test_success(self, circuits_app, limit, expected_results):
         """ Test calling with sample values for the parameters """

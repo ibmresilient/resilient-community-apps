@@ -36,8 +36,7 @@ class TestSetEventClassifications:
         assert func is not None
 
     @pytest.mark.parametrize("riskmodelinstanceid, cardinstanceid, focusentityid, actionplanguid, expected_results", [
-        ("text", "text", "text", "text", {"value": "xyz"}),
-        ("text", "text", "text", "text", {"value": "xyz"})
+        ("1", "1", "1", "1", {"value": "success"})
     ])
     def test_success(self, circuits_app, riskmodelinstanceid, cardinstanceid, focusentityid, actionplanguid, expected_results):
         """ Test calling with sample values for the parameters """
