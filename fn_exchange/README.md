@@ -40,7 +40,7 @@ Set the following values in the config file (`~/.resilient/app.config`) under th
 ```
 verify_cert=[True|False]
 server=example.com
-username=domain\\username
+username=domain\username
 email=admin@example.com
 password=password
 default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox
