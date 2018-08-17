@@ -294,5 +294,5 @@ class exchange_utils:
 
 def parse_time(epoch_time):
     """Convert epoch time in milliseconds to [year, month, day, hour, minute, second]"""
-    date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000.0))
+    date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000))
     return [int(i) for i in date.split('-')]
