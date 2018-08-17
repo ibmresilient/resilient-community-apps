@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
             calendar_invite_datetime = kwargs.get("calendar_invite_datetime")  # datetimepicker
             calendar_invite_subject = kwargs.get("calendar_invite_subject")  # text
             calendar_invite_description = kwargs.get("calendar_invite_description")  # text
-            incident_id = kwargs.get("calendar_incident_id")
+            incident_id = kwargs.get("calendar_invite_incident_id")
 
             log = logging.getLogger(__name__)
             log.info("calendar_invite_datetime: %s", calendar_invite_datetime)
