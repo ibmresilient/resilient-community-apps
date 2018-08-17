@@ -1,7 +1,7 @@
 # URLScan IO Threat Searcher
 
 This implements a custom threat service for the 
-[urlscan.io](https://urlscan.io/).
+[urlscan.io](https://urlscan.io/). This threat service is automatically triggered when adding artifacts of type 'net uri' (URL artifacts).
 
 This integration does *not* submit URLs to urlscan.io.  It only searches existing URLs that have previously been
 submitted for public scan (private scans do not appear in search results).  If the site has been scanned, and is
