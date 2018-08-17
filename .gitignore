@@ -1,7 +1,10 @@
 build/
 __pycache__
 .DS_Store
+.gradle
+.scripts
 .settings
+.travis*
 .idea
 .cache
 .pytest_cache
@@ -9,6 +12,7 @@ __pycache__
 .tox
 .swp
 .eggs
+.virtualenv*
 resilient_circuits_lockfile
 *.iml
 *.pem
