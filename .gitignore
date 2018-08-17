@@ -2,9 +2,7 @@ build/
 __pycache__
 .DS_Store
 .gradle
-.scripts
 .settings
-.travis*
 .idea
 .cache
 .pytest_cache
