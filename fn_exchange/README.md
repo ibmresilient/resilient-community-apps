@@ -55,7 +55,6 @@ default_timeozne=Some Microsoft timezone i.e. America/New_York
                 
         This creates the following customization components:
         * Action fields and Function inputs: 
-            ```
             exchange_destination_folder_path
             exchange_email
             exchange_email_ids
@@ -77,10 +76,8 @@ default_timeozne=Some Microsoft timezone i.e. America/New_York
             exchange_search_subfolders
             exchange_sender
             exchange_start_date
-            ```
         * Message Destination: `fn_exchange`
         * Functions: 
-            ```
             exchange_create_meeting
             exchange_delete_emails
             exchange_find_emails
@@ -88,9 +85,7 @@ default_timeozne=Some Microsoft timezone i.e. America/New_York
             exchange_move_and_delete_folder
             exchange_move_emails
             exchange_send_email
-            ```
         * Workflows:
-            ```
             example_of_exchange_create_meeting
             example_of_exchange_delete_emails
             example_of_exchange_find_emails
@@ -98,9 +93,7 @@ default_timeozne=Some Microsoft timezone i.e. America/New_York
             example_of_exchange_move_emails
             example_of_exchange_send_email
             exchange_move_and_delete_folder
-            ```
         * Rules:
-            ```
             Exchange Create Meeting
             Exchange Delete Emails
             Exchange Find Emails
@@ -108,7 +101,6 @@ default_timeozne=Some Microsoft timezone i.e. America/New_York
             Exchange Move and Delete Folder
             Exchange Move Emails
             Exchange Send Email
-            ```
           
 2. Update and edit `app.config`:
                 
