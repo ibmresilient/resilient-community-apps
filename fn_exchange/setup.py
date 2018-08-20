@@ -7,7 +7,8 @@ setup(
     name='fn_exchange',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient>',
+    author='IBM Resilient',
+    auhor_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_exchange'",
     long_description="fn_exchange is a package that contains functions for querying, deleting, and moving emails, moving entire folder contents, sending emails, creating meetings, and getting mailbox info. It also includes workflows that create appropriate artifacts and notes from the results of these functions",
     install_requires=[

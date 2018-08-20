@@ -46,10 +46,11 @@ class FunctionComponent(ResilientComponent):
                     "name": info.name,
                     "email_address": info.email_address,
                     "routing_type": info.routing_type,
-                    "mailbox_type": info.mailbox_type
+                    "mailbox_type": info.mailbox_type,
+                    "success": True
                 }
             else:
-                results = {}
+                results = {"success": False}
                 yield StatusMessage("No mailbox found for %s" % get_user)
 
             yield StatusMessage("Done getting mailbox info")
