@@ -2,13 +2,22 @@
 import pytest
 from exchangelib import Message, FileAttachment, Account, Folder, FolderCollection
 from exchangelib.restriction import Q
-from fn_exchange.util.exchange_utils import exchange_utils, parse_time, FolderError
+from fn_exchange.util.exchange_utils import exchange_utils, parse_time, FolderError, get_config_option, str_to_bool
 
 try:
     from unittest.mock import patch
 except ImportError:
     from mock import patch
 
+MOCK_OPTS = {
+    'verify_cert': 'false',
+    'server': 'server',
+    'username': 'username',
+    'email': 'email',
+    'password': 'password',
+    'default_folder_path': 'path',
+    'default_timezone': 'Etc/GMT'
+}
 
 class MockEmail(Message):
     """Mocking exchangelib Email"""
@@ -113,7 +122,7 @@ class TestExchangeUtils:
 
     def test_create_email_function_results(self):
         """Testing create_email_function_results"""
-        test_utils = exchange_utils({})
+        test_utils = exchange_utils(MOCK_OPTS)
 
         # Test when no results are returned
         emails1 = test_utils.create_email_function_results([])
@@ -198,7 +207,7 @@ class TestExchangeUtils:
             })
         })
         connect_to_account.return_value = MockAccount(test_root)
-        test_utils = exchange_utils({})
+        test_utils = exchange_utils(MOCK_OPTS)
 
         # Check when go to folder that doesn't exist appropriate error is raised
         with pytest.raises(FolderError):
@@ -233,7 +242,7 @@ class TestExchangeUtils:
     def test_create_email_message(self, connect_to_account):
         """Testing create_email_message"""
 
-        test_utils = exchange_utils({})
+        test_utils = exchange_utils(MOCK_OPTS)
         mock_account = MockAccount(MockFolder('root', {}))
         connect_to_account.return_value = mock_account
 
@@ -268,7 +277,7 @@ class TestExchangeUtils:
     @patch("fn_exchange.util.exchange_utils.exchange_utils.connect_to_account")
     def test_create_meeting(self, connect_to_account):
         """Testing create meeting"""
-        test_utils = exchange_utils({'default_timezone': 'America/New_York'})
+        test_utils = exchange_utils(MOCK_OPTS)
         mock_account = MockAccount(MockFolder('root', {}))
         connect_to_account.return_value = mock_account
 
@@ -309,7 +318,9 @@ class TestExchangeUtils:
 
         # Initialize testing variables with Mock objects
         # Mocked account and mocked root with subfolders
-        test_utils = exchange_utils({'default_folder_path': '1'})
+        opts = MOCK_OPTS
+        opts['default_folder_path'] = '1'
+        test_utils = exchange_utils(opts)
         mock_account = MockAccount(None)
         test_root = MockFolder('root', {
             '1': MockFolder('1', {}, mock_account),
@@ -370,3 +381,37 @@ class TestExchangeUtils:
         print(Q(sender='sender', subject__contains='subject', body__contains='body', has_attachments=False))
         assert emails8.q == Q(sender='sender') & Q(subject__contains='subject') \
                & Q(body__contains='body') & Q(has_attachments=False)
+
+    def test_str_to_bool(self):
+        """Testing str_to_bool"""
+
+        # Test true values
+        assert str_to_bool('tRUe') == True
+        assert str_to_bool('TRUE') == True
+        assert str_to_bool('true') == True
+        assert str_to_bool('True') == True
+
+        # Test false values
+        assert str_to_bool('FAlse') == False
+        assert str_to_bool('false') == False
+        assert str_to_bool('FALSE') == False
+        assert str_to_bool('False') == False
+
+        # Test errors
+        with pytest.raises(ValueError):
+            str_to_bool('error')
+        with pytest.raises(ValueError):
+            str_to_bool('Fakse')
+        with pytest.raises(ValueError):
+            str_to_bool('true ')
+        with pytest.raises(ValueError):
+            str_to_bool(' true')
+
+    def test_get_config_option(self):
+        """Test get_config_options"""
+
+        assert get_config_option(MOCK_OPTS, 'verify_cert') == 'false'
+        assert get_config_option(MOCK_OPTS, 'server') == 'server'
+        assert get_config_option(MOCK_OPTS, 'default_timezone') == 'Etc/GMT'
+        with pytest.raises(ValueError):
+            get_config_option(MOCK_OPTS, 'option')

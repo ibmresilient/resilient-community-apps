@@ -43,13 +43,13 @@ class ImpersonationError(Exception):
 
 class exchange_utils:
     def __init__(self, opts):
-        self.verify_cert = opts.get('verify_cert') == "True"
-        self.server = opts.get('server')
-        self.username = opts.get('username')
-        self.email = opts.get('email')
-        self.password = opts.get('password')
-        self.default_folder_path = opts.get('default_folder_path')
-        self.default_timezone = opts.get('default_timezone')
+        self.verify_cert = str_to_bool(get_config_option(opts, 'verify_cert'))
+        self.server = get_config_option(opts, 'server')
+        self.username = get_config_option(opts, 'username')
+        self.email = get_config_option(opts, 'email')
+        self.password = get_config_option(opts, 'password')
+        self.default_folder_path = get_config_option(opts, 'default_folder_path')
+        self.default_timezone = get_config_option(opts, 'default_timezone')
 
     def connect_to_account(self, primary_smtp_address, impersonation=False):
         """Connect to specified account and return it"""
@@ -296,3 +296,23 @@ def parse_time(epoch_time):
     """Convert epoch time in milliseconds to [year, month, day, hour, minute, second]"""
     date = time.strftime('%Y-%m-%d-%H-%M-%S', time.gmtime(epoch_time/1000))
     return [int(i) for i in date.split('-')]
+
+
+def str_to_bool(str):
+    """Convert a unicode string to equivalent boolean value and is case insensitive."""
+    if str.lower() == 'true':
+        return True
+    elif str.lower() == 'false':
+        return False
+    else:
+        raise ValueError("{} in the app.config file is not a boolean value".format(str))
+
+def get_config_option(options, option_name):
+    """If the specified option is in options, return it. If it isn't raise an error"""
+    option = options.get(option_name)
+
+    if option is None:
+        err = "'{}' is mandatory and not set in the app.config file. This option must be set to run this function"
+        raise ValueError(err.format(option_name))
+    else:
+        return option
