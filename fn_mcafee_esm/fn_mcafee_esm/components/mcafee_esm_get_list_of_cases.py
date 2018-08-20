@@ -5,8 +5,10 @@
 import logging
 import requests
 import time
+from datetime import datetime
+from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_mcafee_esm.util.helper import check_config, get_authentached_headers, check_status_code
+from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
 log = logging.getLogger(__name__)
@@ -15,7 +17,7 @@ log = logging.getLogger(__name__)
 def case_get_case_list(options):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseList"
 
-    headers = get_authentached_headers(options["esm_url"], options["esm_username"],
+    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
                                        options["esm_password"], options["trust_cert"])
 
     r = requests.post(url, headers=headers, verify=options["trust_cert"])
@@ -59,7 +61,12 @@ class FunctionComponent(ResilientComponent):
 
             end_time = time.time()
             results = {
-                "Run Time": str(end_time - start_time),
+                "metrics": {
+                    "execution_time": str(end_time - start_time),
+                    "function": "mcafee_esm_get_list_or_cases",
+                    "thread": current_thread().name,
+                    "timestamp": datetime.fromtimestamp(end_time).strftime("%Y-%m-%d %H:%M:%S")
+                },
                 "case_list": case_list
             }
             yield StatusMessage("done...")

@@ -67,7 +67,7 @@ def check_status_code(status_code):
         raise ValueError("Request not successful")
 
 
-def get_authentached_headers(address, username, password, verify_cert=True):
+def get_authenticated_headers(address, username, password, verify_cert=True):
     url = address + "/rs/esm/v2/login"
     headers = {
         'Content-Type': "application/json",
@@ -97,13 +97,6 @@ def get_authentached_headers(address, username, password, verify_cert=True):
     }
 
     return authenticated_headers
-
-
-def log_out(address, headers):
-    url = address + "/rs/esm/v2/logout"
-
-    r = requests.delete(url, headers=headers)
-    check_status_code(r.status_code)
 
 
 def merge_two_dicts(x, y):

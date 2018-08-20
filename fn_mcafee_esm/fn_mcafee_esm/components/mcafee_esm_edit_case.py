@@ -6,13 +6,18 @@ import logging
 import time
 import json
 import requests
+from datetime import datetime
+from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_mcafee_esm.util.helper import check_config, get_authentached_headers, check_status_code, merge_two_dicts
+from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code, merge_two_dicts
 from fn_mcafee_esm.components.mcafee_esm_get_case_detail import case_get_case_detail
 
 
 def case_edit_case_details(options, dict_payload, case_id):
-    case_details = case_get_case_detail(options, case_id)
+    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+                                       options["esm_password"], options["trust_cert"])
+
+    case_details = case_get_case_detail(options, headers, case_id)
     case_assigned_dict = dict(caseDetail={})
     case_assigned_dict["caseDetail"]["assignedTo"] = case_details.get("assignedTo")
     case_assigned_dict["caseDetail"]["orgId"] = case_details.get("orgId")
@@ -20,9 +25,6 @@ def case_edit_case_details(options, dict_payload, case_id):
     dict_payload["caseDetail"] = merge_two_dicts(case_details, dict_payload["caseDetail"])
 
     url = options["esm_url"] + "/rs/esm/v2/caseEditCase"
-
-    headers = get_authentached_headers(options["esm_url"], options["esm_username"],
-                                       options["esm_password"], options["trust_cert"])
 
     r = requests.post(url, headers=headers, data=json.dumps(dict_payload), verify=options["trust_cert"])
     check_status_code(r.status_code)
@@ -55,10 +57,6 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-#        case_edit_case_details(self.options, json.loads('{"something": "2"}'), 1)
-#        case_edit_case_details(self.options, '{"caseDetail": {"summary": "This is a new summary","id": 1,"severity": 2}}')
-#        case_edit_case_details(self.options, '{"caseDetail": {"severity" : 1,"summary" : "test3", "assignedTo" : 1, "orgId" : 1, "openTime" : "08/10/2018 19:18:43","id" : 1,"statusId" : {"value" : 1}} }')
-
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -78,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             mcafee_esm_edit_case_json = self.get_textarea_param(
                 kwargs.get("mcafee_esm_edit_case_json", '{"caseDetail": {}}'))  # textarea
             mcafee_esm_case_severity = kwargs.get("mcafee_esm_case_severity")  # number
-            mcafee_esm_case_summary = kwargs.get("mcafee_esm_case_summary")  # textarea
+            mcafee_esm_case_summary = kwargs.get("mcafee_esm_case_summary")  # text
             mcafee_esm_case_status = kwargs.get("mcafee_esm_case_status")  # number
 
             log = logging.getLogger(__name__)
@@ -104,7 +102,12 @@ class FunctionComponent(ResilientComponent):
 
             end_time = time.time()
             results = {
-                "Run Time": str(end_time - start_time),
+                "metrics": {
+                    "execution_time": str(end_time - start_time),
+                    "function": "mcafee_esm_edit_case",
+                    "thread": current_thread().name,
+                    "timestamp": datetime.fromtimestamp(end_time).strftime("%Y-%m-%d %H:%M:%S")
+                },
                 "inputs": {
                     "mcafee_esm_edit_case_json": mcafee_esm_edit_case_json,
                     "mcafee_esm_case_id": mcafee_esm_case_id,

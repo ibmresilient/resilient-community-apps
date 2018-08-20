@@ -8,7 +8,7 @@ import time
 from datetime import datetime
 from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_mcafee_esm.util.helper import check_config, get_authentached_headers, check_status_code
+from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
 log = logging.getLogger(__name__)
@@ -17,8 +17,8 @@ log = logging.getLogger(__name__)
 def alarm_get_triggered_alarms(options, params):
     url = options["esm_url"] + "/rs/esm/v2/alarmGetTriggeredAlarms"
 
-    headers = get_authentached_headers(options["esm_url"], options["esm_username"],
-                                       options["esm_password"], options["trust_cert"])
+    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
+                                        options["esm_password"], options["trust_cert"])
 
     r = requests.post(url, headers=headers, params=params, verify=options["trust_cert"])
     check_status_code(r.status_code)

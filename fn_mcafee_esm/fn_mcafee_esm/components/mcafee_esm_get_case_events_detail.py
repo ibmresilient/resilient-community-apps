@@ -6,14 +6,16 @@ import logging
 import json
 import requests
 import time
+from datetime import datetime
+from threading import current_thread
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_mcafee_esm.util.helper import check_config, get_authentached_headers, check_status_code
+from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, check_status_code
 
 
 def case_get_case_events_details(options, ids):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseEventsDetail"
 
-    headers = get_authentached_headers(options["esm_url"], options["esm_username"],
+    headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
                                        options["esm_password"], options["trust_cert"])
     payload = {
         "eventIds": {
@@ -44,8 +46,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_esm", {})
 
-    @function("mcafee_esm_get_case_evensts_detail")
-    def _mcafee_esm_get_case_evensts_detail_function(self, event, *args, **kwargs):
+    @function("mcafee_esm_get_case_events_detail")
+    def _mcafee_esm_get_case_events_detail_function(self, event, *args, **kwargs):
         """Function: """
         try:
             start_time = time.time()
@@ -69,7 +71,12 @@ class FunctionComponent(ResilientComponent):
                 "inputs": {
                     "mcafee_event_ids_list": mcafee_event_ids_list
                 },
-                "Run Time": str(end_time - start_time),
+                "metrics": {
+                    "execution_time": str(end_time - start_time),
+                    "function": "mcafee_esm_get_case_events_detail",
+                    "thread": current_thread().name,
+                    "timestamp": datetime.fromtimestamp(end_time).strftime("%Y-%m-%d %H:%M:%S")
+                },
                 "event_details": event_details
             }
 
