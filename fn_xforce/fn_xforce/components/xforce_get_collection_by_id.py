@@ -61,10 +61,15 @@ class FunctionComponent(ResilientComponent):
                     # Make the HTTP request through the session.
                     res = session.get(request_string, auth=(XFORCE_APIKEY, XFORCE_PASSWORD))
 
-                    if res.status_code == 200:
+                    # Is the status code in the 2XX family?
+                    if int(res.status_code / 100) == 2:
                         case_files = res.json()
+                    elif res.status_code == 401:
+                        raise FunctionError("401 Status code returned. Retry function with updated credentials")
+                    elif res.status_code == 403:
+                        raise FunctionError("403 Forbidden response received by API")
                     else:
-                        log.error("Got unexpected result from request. Expected 200 status")
+                        log.error("Got unexpected result from request.")
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")
             # Prepare results object
@@ -74,6 +79,7 @@ class FunctionComponent(ResilientComponent):
                     # We json.dump for python 2&3 compat
                     "plaintext": json.dumps(case_files["contents"]["plainText"],default=lambda o: o.__dict__,
                                             sort_keys=True, indent=4),
+                    "wiki": case_files["contents"]["wiki"],
                     "created": case_files["created"],
                     "title": case_files["title"],
                     "tags": case_files["tags"]
