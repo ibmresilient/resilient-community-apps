@@ -13,7 +13,7 @@ def config_section_data():
     config_data = u"""[fn_exchange]
 verify_cert=[True|False]
 server=example.com
-username=domain\\username
+username=domain\\username - to use this package, this must be an admin account with mailbox access to other accounts
 email=admin@example.com
 password=password
 default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas
