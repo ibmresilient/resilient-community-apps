@@ -79,17 +79,3 @@ class FunctionComponent(ResilientComponent):
             css = None
 
         return html.write_pdf(None, css)
-
-
-    def get_html_from_url(self, url):
-        '''
-        Read the contents of a web page
-        :param url:
-        :return: html contents, if no error occurred
-        '''
-        try:
-            url = urlopen(url)
-            return url.read()
-        finally:
-            if url:
-                url.close()
