@@ -6,7 +6,7 @@
 import logging
 import json
 from json2html import *
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
