@@ -92,7 +92,7 @@ class FunctionComponent(ResilientComponent):
                 # Could do some extra stuff with results here
                 
                 # Prepare the results object
-                query_results = json.dumps(es_results["hits"]["hits"]) 
+                query_results = es_results["hits"]["hits"]
                 matched_records = es_results["hits"]["total"]
                 
             # Check if we have a status attribute indicating an error we could raise
@@ -112,7 +112,9 @@ class FunctionComponent(ResilientComponent):
                         # Give reason that 404 happened; index not found?
                         yield StatusMessage("Exception encounted during query : "+str(es_results["error"]["reason"]))
                     elif es_results['status'] == 500:
-                        yield StatusMessage("Unexpected 500 error encountered. Error: "+str(es_results["error"]["reason"]))               
+                        yield StatusMessage("Unexpected 500 error encountered. Error: "+str(es_results["error"]["reason"]))
+
+
            # Prepare the results object
             results = {
                 "query_results": query_results,
