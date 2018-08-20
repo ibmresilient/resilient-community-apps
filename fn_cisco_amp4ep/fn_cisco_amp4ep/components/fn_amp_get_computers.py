@@ -119,7 +119,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_computers(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"computers": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
+            results = {"computers": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning all 'computers' results")
 
             log.debug(json.dumps(results))
