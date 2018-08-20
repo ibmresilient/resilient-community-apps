@@ -24,8 +24,7 @@ class FunctionComponent(ResilientComponent):
             log.info("json2html_data: %s", json2html_data)
             log.info("json2html_keys: %s", json2html_keys)
 
-            json_data = json.loads(json2html_data)
-            json_node = json_data
+            json_node = json.loads(json2html_data)
 
             # look for path information to narrow the amount of json to render
             if json2html_keys:
