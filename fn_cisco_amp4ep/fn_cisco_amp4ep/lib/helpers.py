@@ -31,19 +31,19 @@ def validate_opts(func):
      """
     if not "base_url" in func.options:
         raise Exception("Mandatory config setting 'base_url' not set.")
-    if not validate_url(func.options["base_url"]):
+    if func.options["base_url"] is None or not validate_url(func.options["base_url"]):
         raise ValueError("Invalid format for config setting 'base_url'.")
     if not "api_version" in func.options:
         raise Exception("Mandatory config setting 'api_version' not set.")
-    if not re.match("^v\d+$", func.options["api_version"]):
+    if func.options["api_version"] is None or not re.match("^v\d+$", func.options["api_version"]):
         raise ValueError("Invalid format for config setting 'api_version'.")
     if not "client_id" in func.options:
         raise Exception("Mandatory config setting 'client_id' not set.")
-    if not CLI_ID_PATTERN.match(func.options["client_id"]):
+    if func.options["client_id"] is None or not CLI_ID_PATTERN.match(func.options["client_id"]):
         raise ValueError("Invalid format for config setting 'client_id'.")
     if not "api_token" in func.options:
         raise Exception("Mandatory config setting 'api_token' not set.")
-    if not UUID_PATTERN.match(func.options["api_token"]):
+    if func.options["api_token"] is None or not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'.")
 
 def validate_url(url):
