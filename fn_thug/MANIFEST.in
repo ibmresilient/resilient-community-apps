@@ -1,3 +1,4 @@
 include README.md
 include fn_thug/util/*
 include fn_thug/LICENSE
+include fn_thug/doc/*

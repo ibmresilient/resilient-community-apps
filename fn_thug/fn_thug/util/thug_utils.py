@@ -34,7 +34,7 @@ class ThugUtils:
             # Mount output_dir to thug_log_dir and run thug, remove container when thug is done running
             thug_logs = {output_dir: {'bind': thug_log_dir, 'mode': 'rw'}}
             thug_container = client.containers.run('honeynet/thug', volumes=thug_logs, command=command, detach=True)
-            thug_container.wait()
+            status = thug_container.wait()
             thug_container.remove()
 
             # Get output directory
@@ -53,10 +53,6 @@ class ThugUtils:
             with open(maec11_path) as f:
                 data = f.read()
                 maec11_b64 = base64.b64encode(data)
-        except Exception as e:
-            LOG.debug('An error occurred while running thug. This is most likely an issue with a temporary directory '
-                      'not being able to be mounted into docker or an issue with the specified arguments')
-            raise e
         finally:
             try:
                 pass
@@ -69,7 +65,9 @@ class ThugUtils:
             'url': url,
             'report_json': report_json,
             'graph_svg': thug_graph_svg_b64,
-            'report_xml': maec11_b64
+            'report_xml': maec11_b64,
+            'exit_status': status[u'StatusCode'],
+            'error': status[u'Error']
         }
         return results
 
