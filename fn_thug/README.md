@@ -54,3 +54,7 @@ thug_dir=Absolute path to a directory that can be mounted into a docker containe
         resilient-circuits run
 
 4. Trigger the rule
+
+## Aditional Notes
+
+To use this function, docker must be installed on the machine that is running resilient-circuits.
