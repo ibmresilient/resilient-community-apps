@@ -11,6 +11,7 @@ def config_section_data():
     """
     return u"""[create_zoom_meeting]
 zoom_api_url=https://api.zoom.us/v2
-zoom_api_key=
-zoom_api_secret=
+zoom_api_key=<zoom api key>
+zoom_api_secret=<zoom api secret>
+zoom_api_timezone=<timezone, i.e America/New_York>
 """
