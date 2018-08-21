@@ -8,7 +8,7 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient',
-    author_email='info@resilientsystems.com',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_create_zoom_meeting'",
     long_description="Resilient Circuits Components for 'fn_create_zoom_meeting'",
     install_requires=[
