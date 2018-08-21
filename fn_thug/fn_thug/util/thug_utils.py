@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import docker
 import logging
 import os
@@ -15,7 +16,7 @@ class DockerClientError(Exception):
         super(DockerClientError, self).__init__('Docker is not installed or started')
 
 
-class thug_utils:
+class ThugUtils:
     def __init__(self, opts):
         self.thug_dir = get_config_option(opts, 'thug_dir')
 
@@ -28,7 +29,7 @@ class thug_utils:
             thug_log_dir = '/{}'.format(md5(url))
 
             # Create command
-            command = 'python /opt/thug/src/thug.py -n {} {} {}'.format(thug_log_dir, args, url)
+            command = 'python /opt/thug/src/thug.py -FZM -n {} {} {}'.format(thug_log_dir, args, url)
 
             # Mount output_dir to thug_log_dir and run thug, remove container when thug is done running
             thug_logs = {output_dir: {'bind': thug_log_dir, 'mode': 'rw'}}
@@ -47,24 +48,29 @@ class thug_utils:
 
             json_path = os.path.join(wanted_analysis_path, 'json', 'analysis.json')
             with open(json_path, "rb") as f:
+                report_json = f.read()
+            maec11_path = os.path.join(wanted_analysis_path, 'maec11', 'analysis.xml')
+            with open(maec11_path) as f:
                 data = f.read()
-                thug_report_b64 = base64.b64encode(data)
+                maec11_b64 = base64.b64encode(data)
         except Exception as e:
             LOG.debug('An error occurred while running thug. This is most likely an issue with a temporary directory '
                       'not being able to be mounted into docker or an issue with the specified arguments')
             raise e
         finally:
             try:
+                pass
                 # Remove the temporary directory and its contents
                 shutil.rmtree(output_dir)
             except UnboundLocalError:
                 LOG.debug('Failed to create temporary directory, check filepath in config file')
 
         results = {
-            'report_json': thug_report_b64,
-            'graph_svg': thug_graph_svg_b64
+            'url': url,
+            'report_json': report_json,
+            'graph_svg': thug_graph_svg_b64,
+            'report_xml': maec11_b64
         }
-
         return results
 
 
@@ -75,7 +81,7 @@ def get_thug_client():
     try:
         client = docker.from_env()
         client.ping()
-    except (ConnectionError):
+    except ConnectionError:
         LOG.debug('Error connecting to docker')
         raise DockerClientError()
 
@@ -90,7 +96,7 @@ def get_thug_client():
 
 
 def md5(my_val):
-    """ Creates an MD5 from given value"""
+    """Creates an MD5 from given value"""
     m_val = hashlib.md5()
     m_val.update(my_val)
     return m_val.hexdigest()
@@ -105,8 +111,3 @@ def get_config_option(options, option_name):
         raise ValueError(err.format(option_name))
     else:
         return option
-
-
-thug_utils = thug_utils({'thug_dir': '/tmp'})
-args = '-FZM'
-print(thug_utils.run_thug(get_thug_client(), args, 'https://google.com'))

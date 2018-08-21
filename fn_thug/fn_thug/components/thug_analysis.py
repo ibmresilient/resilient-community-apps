@@ -1,9 +1,11 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_thug.util.thug_utils import ThugUtils, get_thug_client
 
 
 class FunctionComponent(ResilientComponent):
@@ -31,13 +33,10 @@ class FunctionComponent(ResilientComponent):
             log.info("thug_args: %s", thug_args)
             log.info("thug_url: %s", thug_url)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
-
-            results = {
-                "value": "xyz"
-            }
+            # Run thug analysis on the given input
+            yield StatusMessage('Beginning thug analysis on %s' % thug_url)
+            util = ThugUtils(self.options)
+            results = util.run_thug(get_thug_client(), thug_args, thug_url)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
