@@ -35,7 +35,7 @@ After installation, the package will be loaded by `resilient-circuits run`.
     
     resilient-circuits config -u
     
-Set the following values in the config file (`~/.resilient/app.config`) under the `[fn_exchange]` section:
+Set the following values in the config file (`app.config`) under the `[fn_exchange]` section:
 
 ```
 verify_cert=[True|False]
