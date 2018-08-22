@@ -1,4 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# -*- coding: utf-8 -*-
 import docker
 import logging
 import os
@@ -9,6 +10,7 @@ import tempfile
 import shutil
 
 LOG = logging.getLogger(__name__)
+THUG_IMAGE = 'honeynet/thug:latest'
 
 
 class DockerClientError(Exception):
@@ -55,7 +57,6 @@ class ThugUtils:
                 maec11_b64 = base64.b64encode(data)
         finally:
             try:
-                pass
                 # Remove the temporary directory and its contents
                 shutil.rmtree(output_dir)
             except UnboundLocalError:
@@ -85,10 +86,10 @@ def get_thug_client():
 
     # Get thug image
     try:
-        client.images.get('honeynet/thug:latest')
+        client.images.get(THUG_IMAGE)
     except docker.errors.ImageNotFound:
         LOG.info('Docker image was not found, pulling image')
-        client.images.pull('honeynet/thug:latest')
+        client.images.pull(THUG_IMAGE)
 
     return client
 

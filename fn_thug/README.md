@@ -24,7 +24,7 @@ After installation, the package will be loaded by `resilient-circuits run`.
     
     resilient-circuits config -u
     
-Set the following values in the config file (`~/.resilient/app.config`) under the `[fn_thug]` section:
+Set the following values in the config file (`app.config`) under the `[fn_thug]` section:
 
 ```
 thug_dir=Absolute path to a directory that can be mounted into a docker container. Go to Docker -> Preferences -> File Sharing to configure.
