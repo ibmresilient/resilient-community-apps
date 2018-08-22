@@ -94,8 +94,12 @@ class BigFixClient(object):
 
         """
         LOG.debug("get_bf_computer_by_process_name triggered")
+
         q_id = self.post_bfclientquery(
-            "exists process whose(name of it as lowercase = \"{0}\")".format(process_name))
+            "if (windows of operating system) "
+            "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) "
+            "else if (name of it contains \"Linux\") of operating system "
+            "then (exists process whose(name of it = \"{0}\")) else (false)".format(process_name))
         resp = self.get_bfclientquery(q_id)
         return resp
 
@@ -178,10 +182,12 @@ class BigFixClient(object):
 
         """
         query = "if {{windows of operating system}} \n waithidden cmd.exe /c taskkill /im {0} /f /t \n" \
-                "else \n wait kill -9 {{id of process whose (name of it as lowercase = \"{0}\" as lowercase)}} \n" \
+                "else \n wait kill -9  {{concatenation \" \" of (ids of processes whose (name of it = \"{0}\") as string)}}\n " \
                 "endif".format(artifact_value)
-
-        relevance = "exists process whose(name of it as lowercase = \"{0}\")".format(artifact_value)
+        relevance = "if (windows of operating system) " \
+                    "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) " \
+                    "else if (name of it contains \"Linux\") of operating system " \
+                    "then (exists process whose(name of it = \"{0}\")) else (false)".format(artifact_value)
         return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
 
     def send_stop_service_remediation_message(self, artifact_value, computer_id):
