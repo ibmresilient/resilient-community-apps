@@ -33,7 +33,7 @@ base_url=https://api.amp.cisco.com/
 # Version of api to use.
 api_version=v1
 # The client id will be generated on the Cisco AMP for endpoints dashboard.
-client_id=01234abcde56789efghi
+client_id=01234abcde56789efedc
 # The api_token will be generated on the Cisco AMP for endpoints dashboard and will be will be in uuid format.
 api_token=abcd1234-a123-123a-123a-123456abcdef
 ```

@@ -8,7 +8,6 @@ import logging
 import requests
 from requests.auth import HTTPBasicAuth
 import urlparse
-import re
 import json
 
 LOG = logging.getLogger(__name__)
@@ -27,10 +26,15 @@ class Ampclient(object):
         self.api_version = options.get("api_version")
         # Rest request endpoints
         self._endpoints = {
+            # Computers
             "computers":                    "/"+self.api_version+"/computers/",
             "computer":                     "/"+self.api_version+"/computers/{}",
             "computer_trajectory":          "/"+self.api_version+"/computers/{}/trajectory/",
-            "activity":                     "/"+self.api_version+"/computers/activity"
+            "activity":                     "/"+self.api_version+"/computers/activity",
+            # File lists
+            "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
+            "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
+            "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
                         "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
@@ -61,6 +65,8 @@ class Ampclient(object):
             r = self._s.get(url, params=params, headers=self._headers, auth=self._auth)
         elif method == "POST":
             r = self._s.post(url, params=params, data=json.dumps(data), headers=self._headers, auth=self._auth)
+        elif method == "DELETE":
+            r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth)
         else:
             raise ValueError("Unsupported request method '{}'.".format(method))
 
@@ -126,4 +132,52 @@ class Ampclient(object):
         uri = self._endpoints["activity"]
         params = {"q": q, "limit": limit, "offset": offset}
         r_json = self._req(uri, params=params)
+        return r_json
+
+    def get_file_lists(self, name, limit=None, offset=None):
+        """
+        :param name: group_guid.
+        :return Result in json format.
+
+        """
+        uri = self._endpoints["file_lists"]
+        params = {"name": name, "limit": limit, "offset": offset}
+        r_json = self._req(uri, params=params)
+        return r_json
+
+    def get_file_list_files(self, file_list_guid, sha256, limit=None, offset=None):
+        """
+        :param: file_list_guid.
+        :return Result in json format.
+
+        """
+        if sha256 is None:
+            uri = self._endpoints["file_lists_files"].format(file_list_guid)
+        else:
+            uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+        params = {"limit": limit, "offset": offset}
+        r_json = self._req(uri, params=params)
+        return r_json
+
+    def set_file_list_files(self, file_list_guid, sha256, description):
+        """
+
+        :param: group_guid.
+        :return Result in json format.
+
+        """
+        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+        data = json.dumps({"description": description})
+        r_json = self._req(uri, method="POST", data=data)
+        return r_json
+
+    def delete_file_list_files(self, file_list_guid, sha256):
+        """
+
+        :param: group_guid.
+        :return Result in json format.
+
+        """
+        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+        r_json = self._req(uri, method="DELETE")
         return r_json
