@@ -4,8 +4,11 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import mock
-from fn_create_zoom_meeting.components.zoom_common import ZoomCommon
+try:
+    from unittest.mock import patch
+except:
+    from mock import patch
+from fn_create_zoom_meeting.util.zoom_common import ZoomCommon
 
 partial_response = {"meetings": True, "page_number": True}
 
@@ -72,15 +75,15 @@ def run_zoom_common_create_meeting():
 class TestFnCreateZoomMeeting:
     """ Tests for the fn_create_zoom_meeting function"""
 
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
-    @mock.patch('requests.post', side_effect=mocked_requests_post)
+    @patch('requests.get', side_effect=mocked_requests_get)
+    @patch('requests.post', side_effect=mocked_requests_post)
     def test_success(self, get, post):
         """ Test calling with sample values """
         result = run_zoom_common_create_meeting()
         assert result["host_url"] is not None
 
-    @mock.patch('requests.get', side_effect=mocked_requests_get)
-    @mock.patch('requests.post', side_effect=mocked_requests_post)
+    @patch('requests.get', side_effect=mocked_requests_get)
+    @patch('requests.post', side_effect=mocked_requests_post)
     def test_partial(self, get, post):
         """ Test calling with partial data """
 

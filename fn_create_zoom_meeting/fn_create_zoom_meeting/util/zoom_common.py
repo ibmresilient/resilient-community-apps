@@ -10,11 +10,11 @@ import time
 import datetime
 import logging
 from resilient_circuits import FunctionError
-from urlparse import urlparse, parse_qs
-from urllib import urlencode
-
-#python3
-#from urllib.parse import urlencode, urlparse, urlunparse, parse_qs
+try:
+    from urlparse import urlparse, parse_qs
+    from urllib import urlencode
+except:
+    from urllib.parse import urlencode, urlparse, parse_qs
 
 LOG = logging.getLogger(__name__)
 PWD_IN_URL = "pwd"

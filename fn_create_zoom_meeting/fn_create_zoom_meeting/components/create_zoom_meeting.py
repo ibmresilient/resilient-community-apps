@@ -6,8 +6,8 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from ..components.zoom_common import ZoomCommon
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
+from fn_create_zoom_meeting.util.zoom_common import ZoomCommon
 import pytz
 from bs4 import BeautifulSoup
 from six import string_types
@@ -15,7 +15,6 @@ try:
     import HTMLParser as htmlparser
 except:
     import html.parser as htmlparser
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_create_zoom_meeting"""

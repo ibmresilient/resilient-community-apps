@@ -4,10 +4,7 @@ This Resilient Function package can be used to create a Zoom meeting from a work
 
 Prerequisites:
 ```
-resilient version 30 or later
-resilient_circuits version 30 or later
-pyjwt
-requests
+resilient-circuits >=v30.0.0
 ```
 Can be used in a Resilient workflow to add a note or update another resource.
 
