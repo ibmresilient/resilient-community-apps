@@ -6,6 +6,12 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from fn_thug.util.thug_utils import ThugUtils
+
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
 
 PACKAGE_NAME = "fn_thug"
 FUNCTION_NAME = "thug_analysis"
@@ -36,15 +42,19 @@ class TestThugAnalysis:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @patch("fn_thug.components.thug_analysis.ThugUtils")
     @pytest.mark.parametrize("thug_args, thug_url, expected_results", [
-        ("text", "text", {"value": "xyz"}),
-        ("text", "text", {"value": "xyz"})
+        (None, "https://www.google.com", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, thug_args, thug_url, expected_results):
+    def test_success(self, mock_utils, circuits_app, thug_args, thug_url, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "thug_args": thug_args,
             "thug_url": thug_url
         }
+        mock_utils.return_value = ThugUtils({'thug_dir': '/tmp'})
         results = call_thug_analysis_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert results.get('url') == 'https://www.google.com'
+        assert results.get('report_json') is not None
+        assert results.get('graph_svg') is not None
+        assert results.get('report_xml') is not None

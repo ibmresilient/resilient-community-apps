@@ -52,7 +52,7 @@ class ThugUtils:
             with open(json_path, "rb") as f:
                 report_json = f.read()
             maec11_path = os.path.join(wanted_analysis_path, 'maec11', 'analysis.xml')
-            with open(maec11_path) as f:
+            with open(maec11_path, "rb") as f:
                 data = f.read()
                 maec11_b64 = base64.b64encode(data)
         finally:
