@@ -29,7 +29,8 @@ class BigFixClient(object):
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
         self.headers = {'content-type': 'application/json'}
-
+        self.retry_interval = int(options.get("bigfix_polling_interval"))
+        self.retry_timeout = int(options.get("bigfix_polling_timeout"))
         # Endpoints
         self.client_query_endpoint = '/api/clientquery'
         self.client_query_results_endpoint = '/api/clientqueryresults/'
@@ -85,7 +86,7 @@ class BigFixClient(object):
             "if (windows of operating system) "
             "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) "
             "of (services as string as lowercase)) else (false)".format(service_name))
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_process_name(self, process_name):
@@ -102,7 +103,7 @@ class BigFixClient(object):
             "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) "
             "else if (name of it contains \"Linux\") of operating system "
             "then (exists process whose(name of it = \"{0}\")) else (false)".format(process_name))
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_file_path(self, file_path):
@@ -118,7 +119,7 @@ class BigFixClient(object):
             query = "exists file \"{0}\" of folder \"{1}\"".format(tail, head)
         LOG.debug("get_bf_computer_by_file_path triggered")
         q_id = self.post_bfclientquery(query)
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_ip(self, ip):
@@ -132,10 +133,10 @@ class BigFixClient(object):
         q_id = self.post_bfclientquery(
             "exists remote addresses whose(it=\"{0}\") of sockets whose(established of tcp state of it) of network"
                 .format(ip))
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
-    def get_bf_computer_by_registry_key_name_value(self, key, name, value):
+    def get_bf_computer_by_registry_key_name_value(self, key, name, value, retry_interval, retry_timeout):
         """ Bigfix query - Get endpoints by registry entry (MS Windows).
 
         :param key: Registry key
@@ -160,7 +161,7 @@ class BigFixClient(object):
                 "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
                 .format(name))
 
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, retry_interval, retry_timeout)
         return resp
 
     def send_delete_file_remediation_message(self, artifact_value, computer_id):
@@ -227,7 +228,7 @@ class BigFixClient(object):
         return self._post_bf_action_query(query, computer_id, "Delete Registry Key {0}".format(artifact_value),
                                                relevance)
 
-    def get_bfclientquery(self, query_id, wait=5, timeout=5000):
+    def get_bfclientquery(self, query_id, wait=30, timeout=600):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
@@ -236,8 +237,8 @@ class BigFixClient(object):
         :return result: Result (list of resposes) for query id
 
         """
-        # Let's give some time to BigFix to get all the data
-        time.sleep(wait)
+        # Let's give some time (5 secs) to BigFix to get all the data
+        time.sleep(5)
         """
             timeout is in ms. 0 means try once
         """
