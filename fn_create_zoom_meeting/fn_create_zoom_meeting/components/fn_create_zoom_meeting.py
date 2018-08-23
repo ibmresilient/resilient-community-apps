@@ -9,6 +9,13 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from ..components.zoom_common import ZoomCommon
 import pytz
+from bs4 import BeautifulSoup
+from six import string_types
+try:
+    import HTMLParser as htmlparser
+except:
+    import html.parser as htmlparser
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_create_zoom_meeting"""
@@ -32,9 +39,11 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             zoom_host_email = kwargs.get("zoom_host_email")  # text
             zoom_topic = kwargs.get("zoom_topic")  # text
-            zoom_agenda = kwargs.get("zoom_agenda")  # text
             zoom_password = kwargs.get("zoom_password")  # text
             zoom_record_meeting = kwargs.get("zoom_record_meeting")  # boolean
+
+            # Remove the HTML tags
+            zoom_agenda = self._clean_html(kwargs.get("zoom_agenda"))  # text
 
             if type(zoom_record_meeting) is not bool:
                 zoom_record_meeting = False
@@ -75,3 +84,24 @@ class FunctionComponent(ResilientComponent):
         except Exception as e:
             log.error(e)
             yield FunctionError(e)
+
+    def _clean_html(self, html_fragment):
+        """
+        Resilient textarea fields return html fragments. This routine will remove the html and insert any
+        code within <div></div> with a linefeed
+        :param html_fragment:
+        :return: cleaned up code
+        """
+
+        if not html_fragment or not isinstance(html_fragment, string_types):
+            return html_fragment
+
+        return BeautifulSoup(self._unescape(html_fragment), "html.parser").text
+
+    @staticmethod
+    def _unescape(data):
+        """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
+        try:
+            return htmlparser.unescape(data)
+        except:
+            return data

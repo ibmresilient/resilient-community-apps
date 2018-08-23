@@ -10,9 +10,18 @@ import time
 import datetime
 import logging
 from resilient_circuits import FunctionError
+from urlparse import urlparse, parse_qs
+from urllib import urlencode
+
+#python3
+#from urllib.parse import urlencode, urlparse, urlunparse, parse_qs
+
+LOG = logging.getLogger(__name__)
+PWD_IN_URL = "pwd"
 
 
 class ZoomCommon:
+
     def __init__(self, api_url, key, secret):
         self.key = key
         self.secret = secret
@@ -101,9 +110,12 @@ class ZoomCommon:
                          "approval_type": 2,  # (0 = Automatically approve, 1 = Manually approve, 2 = No Reg. Required)
                          "registration_type": 1,  # Registration type (only for recurring meetings)
                          "audio": "both",  # Determine how participants can join the audio portion of the meeting
-                         "auto_recording": set_auto_recording    # turn on option to save recording locally
+                         "auto_recording": set_auto_recording,    # turn on option to save recording locally
+                         "enforce_login": True    # Only signed-in users can join this meeting
                          }
         }
+
+        LOG.debug(json.dumps(data))
 
         return data
 
@@ -124,8 +136,6 @@ class ZoomCommon:
 
         response = self.zoom_request(path, "POST", query, {'content-type': 'application/json'})
 
-        log = logging.getLogger(__name__)
-
         if not response or response.status_code >= 300 or not response.content:
             raise FunctionError('api call failure: {} on {}'.format(response.status_code, path))
         else:
@@ -134,8 +144,10 @@ class ZoomCommon:
             except ValueError:
                 raise FunctionError("Unable to parse response text")
 
+            LOG.debug(json.dumps(json_data))
+
             zoom_host_url = json_data["start_url"]
-            zoom_join_url = json_data["join_url"]
+            zoom_join_url = self.strip_password_from_join_url(json_data["join_url"])
 
         results = {
             "host_url": zoom_host_url,
@@ -144,3 +156,16 @@ class ZoomCommon:
         }
 
         return results
+
+    @staticmethod
+    def strip_password_from_join_url(original):
+        """ Parse query - pwd - password part from url """
+        if PWD_IN_URL in original:
+            parsed_url = urlparse(original)
+            query_dict = parse_qs(parsed_url.query)
+            query_dict.pop(PWD_IN_URL, None)
+            parsed_url = parsed_url._replace(query=urlencode(query_dict, True))
+            return parsed_url.geturl()
+        else:
+            return original
+

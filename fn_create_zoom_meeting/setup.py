@@ -15,7 +15,8 @@ setup(
         'resilient_circuits>=30.0.0',
         'pyjwt',
         'requests',
-        'pytz'
+        'pytz',
+        'bs4'
     ],
     packages=find_packages(),
     include_package_data=True,
