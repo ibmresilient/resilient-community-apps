@@ -100,3 +100,22 @@ class TestFnCreateZoomMeeting:
             assert False
         except Exception:
             assert True
+
+    def test_strip_password_from_join_url(self):
+        print("Testing striping password from url....")
+
+        url = "https://zoom.us/j/759429847?pwd=L3RMeXFXaHVxT3U5NmlJM1I1UEtLdz09"
+        result = ZoomCommon.strip_password_from_join_url(url)
+        assert result == "https://zoom.us/j/759429847"
+
+        url = "https://zoom.us/j/759429847?pwd=L3RMeXFXaHVxT3U5NmlJM1I1UEtLdz09&sthelsehere=1111"
+        result = ZoomCommon.strip_password_from_join_url(url)
+        assert result == "https://zoom.us/j/759429847?sthelsehere=1111"
+
+        url = "https://zoom.us/j/759429847"
+        result = ZoomCommon.strip_password_from_join_url(url)
+        assert result == "https://zoom.us/j/759429847"
+
+        url = "https://zoom.us/j/759429847?sthelsehere=1111&pwd=L3RMeXFXaHVxT3U5NmlJM1I1UEtLdz09"
+        result = ZoomCommon.strip_password_from_join_url(url)
+        assert result == "https://zoom.us/j/759429847?sthelsehere=1111"
