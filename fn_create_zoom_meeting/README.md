@@ -26,7 +26,7 @@ Then edit the `[create_zoom_meeting]` template.
 After installation, the package will be loaded by: `resilient-circuits run`.
 
 To uninstall,
-    `pip uninstall fn_odbc_query`
+    `pip uninstall fn_create_zoom_meeting`
 
 ## Resilient Configuration
 Follow the steps to add a create_zoom_meeting section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
