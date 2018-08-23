@@ -80,9 +80,11 @@ class BigFixClient(object):
 
         """
         LOG.debug("get_bf_computer_by_service_name triggered")
+
         q_id = self.post_bfclientquery(
-            "disjunction of (it contains \"{0}\" as lowercase AND it contains \"running\") "
-            "of (services as string as lowercase)".format(service_name))
+            "if (windows of operating system) "
+            "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) "
+            "of (services as string as lowercase)) else (false)".format(service_name))
         resp = self.get_bfclientquery(q_id)
         return resp
 
@@ -198,11 +200,12 @@ class BigFixClient(object):
         :return resp: Response from action
 
         """
-        query = "if {{windows of operating system}} \n waithidden cmd.exe /c net stop {0} \n" \
+        query = "if {{windows of operating system}} \n waithidden cmd.exe /c net stop \"{0}\" \n" \
                 "else\n wait stop service {0} \n" \
                 "endif".format(artifact_value)
-        relevance = "disjunction of (it contains \"{0}\" as lowercase AND it contains \"running\")  " \
-                    "of (services as string as lowercase)".format(artifact_value)
+        relevance = "if (windows of operating system) " \
+                    "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) " \
+                    "of (services as string as lowercase)) else (false)".format(artifact_value)
         return self._post_bf_action_query(query, computer_id, "Stop service {0}".format(artifact_value),
                                           relevance)
 
