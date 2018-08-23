@@ -64,7 +64,7 @@ Note: Each Resilient Function will return a different result.
 ```
 {
 "host_url": "https://zoom.us/s/x?zak=x", 
-"attendee_url": "https://zoom.us/j/x?pwd=x", 
+"attendee_url": "https://zoom.us/j/x", 
 "date_created": "01/01/1971 12:00:00"
 }
 ```
