@@ -1,6 +1,6 @@
 # Thug Function
 
-This IBM Resilient Function package can be used to analyze a url for malicious content using thug
+This IBM Resilient Function package can be used to analyze a url for malicious content using thug. It uses a dockerized thug to run analysis in a deatched container then cleans up the output files and container after execution completes.
 
 ## To install in *development mode*:
 
