@@ -150,6 +150,67 @@ def get_computer_trajectory():
     )
     return response
 
+def get_file_lists():
+
+    response = ('{"version": "v1.2.0", '
+                '"data": ['
+                    '{"guid": "9710a198-b95a-462a-b184-9e688968fd94", "type": "simple_custom_detections",'
+                     '"name": "File Blacklist",'
+                     '"links": {"file_list": "https://api.amp.cisco.com/v1/file_lists/9710a198-b95a-462a-b184-9e688968fd94"}}],'
+                 '"metadata": {"results": {"index": 0, "total": 1, "items_per_page": 500, "current_item_count": 1},'
+                              '"links": {"self": "https://api.amp.cisco.com/v1/file_lists/simple_custom_detections"}}'
+                '}'
+    )
+    return response
+
+def get_file_list_files(sha256):
+
+    if sha256:
+        k = "s256"
+    else:
+        k = "None"
+
+    response = {"None": ('{"version": "v1.2.0",'
+                         '"data": {"items": [], "guid": "9710a198-b95a-462a-b184-9e688968fd94", "name": "File Blacklist", "policies": ['
+                               ' {"guid": "a98a0f97-4d54-4175-9eef-b8dee9c8e74b", "name": "Audit",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/a98a0f97-4d54-4175-9eef-b8dee9c8e74b"}},'
+                                '{"guid": "fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267", "name": "Audit",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/fdf4c7f9-b0de-41bf-9d86-d0fae7aa5267"}},'
+                                '{"guid": "99a9d07e-59a3-41d4-a9d7-c73c0cd43bae", "name": "Audit",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/99a9d07e-59a3-41d4-a9d7-c73c0cd43bae"}},'
+                                '{"guid": "175c473a-7942-4cf2-877d-6fdd476f0b9a", "name": "Domain Controller",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/175c473a-7942-4cf2-877d-6fdd476f0b9a"}},'
+                                '{"guid": "7aac0dca-7782-414f-b19b-83dec31ea131", "name": "Protect",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/7aac0dca-7782-414f-b19b-83dec31ea131"}},'
+                                '{"guid": "abc537e0-d0fa-4a20-aefe-a50bf17cef2a", "name": "Protect",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/abc537e0-d0fa-4a20-aefe-a50bf17cef2a"}},'
+                                '{"guid": "aef1226d-1df1-400f-8791-4db8f9b2eee3", "name": "Protect",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/aef1226d-1df1-400f-8791-4db8f9b2eee3"}},'
+                                '{"guid": "1945af96-2026-4f77-805d-59565079ec88", "name": "Server",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/1945af96-2026-4f77-805d-59565079ec88"}},'
+                                '{"guid": "51450374-366c-4759-9099-7baa138c499f", "name": "Triage",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/51450374-366c-4759-9099-7baa138c499f"}},'
+                                '{"guid": "3b27e1e3-cde3-4750-a571-031ae4e111bc", "name": "Triage",'
+                                 '"links": {"policy": "https://api.amp.cisco.com/v1/policies/3b27e1e3-cde3-4750-a571-031ae4e111bc"}}]'
+                                '},'
+                         '"metadata": {"results": {"index": 10, "total": 1, "items_per_page": 500, "current_item_count": 0},'
+                                      '"links": {"self": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files"}}'
+                         '}'
+                        ),
+                "s256": ('{"version": "v1.2.0",'
+                          '"data": { "sha256": "e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b",'
+                                    '"source": "Created by entering SHA-256 via Public api.",'
+                                    '"links": {'
+                                        '"file_list": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d"}'
+                           '},'
+                          '"metadata": {'
+                            '"links": {"self": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b"}'
+                          '}'
+                         '}'
+                        )
+               }
+
+    return response[k]
 
 def mocked_amp_client(*args):
 
@@ -177,10 +238,17 @@ def mocked_amp_client(*args):
             self.r._content = get_activity()
             return self.r.json()
 
+        def get_file_lists(self, name, limit=None, offset=None):
+            self.r._content = get_file_lists()
+            return self.r.json()
+
+        def get_file_list_files(self, file_list_guid, sha256, limit=None, offset=None):
+            self.r._content = get_file_list_files(bool(sha256))
+            return self.r.json()
+
     return MockResponse(*args)
 
 def mocked_session(*args, **kwargs):
-
     class MockSession:
         """Class will be used by the mock to replace get and post requests in standalone tests"""
         def __init__(self, *arg, **kwargs):
@@ -199,6 +267,12 @@ def mocked_session(*args, **kwargs):
                 return MockGetResponse(get_computer_trajectory(), 200)
             elif url == "/v1/computers/activity":
                 return MockGetResponse(get_activity(), 200)
+            elif url == "/v1/file_lists/simple_custom_detections":
+                return MockGetResponse(get_file_lists(), 200)
+            elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files$", url):
+                return MockGetResponse(get_file_list_files(False), 200)
+            elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
+                return MockGetResponse(get_file_list_files(True), 200)
             else:
                 return MockGetResponse(None, 404)
     return MockSession(*args, **kwargs)
