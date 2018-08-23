@@ -98,7 +98,7 @@ class FunctionComponent(ResilientComponent):
                 log.debug("Could not create BigFix Action.")
                 yield FunctionError("Could not create BigFix Action")
             else:
-                status_message = "BigFix Action Created Successfully."
+                status_message = "BigFix action created successfully."
                 action_id = response
                 remediation_date = datetime.datetime.today().strftime('%m-%d-%Y %H:%M:%S')
                 status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \
