@@ -4,7 +4,7 @@ This IBM Resilient Function package can be used to analyze a url for malicious c
 
 Please note that thug may expose your IP address to a malicious source, so it is best to run it on the cloud or remotely.
 For more information on thug, the documentation can be found here: 
-`https://thug-honeyclient.readthedocs.io/en/latest/index.html`
+https://thug-honeyclient.readthedocs.io/en/latest/index.html
 
 ## To install in *development mode*:
 
