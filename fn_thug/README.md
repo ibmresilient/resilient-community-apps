@@ -2,6 +2,9 @@
 
 This IBM Resilient Function package can be used to analyze a url for malicious content using thug. It uses a dockerized thug to run analysis in a deatched container then cleans up the output files and container after execution completes.
 
+Please note that thug may expose your IP address to a malicious source, so it is best to run it on the cloud or remotely.
+For more information on thug, the documentation can be found here: https://thug-honeyclient.readthedocs.io/en/latest/index.html
+
 ## To install in *development mode*:
 
     pip install -e ./fn_thug/
