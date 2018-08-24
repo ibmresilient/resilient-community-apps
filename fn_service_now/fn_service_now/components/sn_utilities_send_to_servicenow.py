@@ -4,7 +4,14 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
+from fn_service_now.util.resilient_helper import ResilientHelper
+try:
+    # for Python 2.x
+    from StringIO import StringIO
+except ImportError:
+    # for Python 3.x
+    from io import StringIO
+import csv
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'sn_utilities_send_to_servicenow"""
@@ -23,35 +30,60 @@ class FunctionComponent(ResilientComponent):
     def _sn_utilities_send_to_servicenow_function(self, event, *args, **kwargs):
         """Function: A function that has the ability to send an Incident, Task, Attachment, Note or Artifact to ServiceNow"""
 
-        try:
-            # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            attachment_id = kwargs.get("attachment_id")  # number
-            note_id = kwargs.get("note_id")  # number
-            artifact_id = kwargs.get("artifact_id")  # number
-            sn_ref_id = kwargs.get("sn_ref_id")  # text
-            sn_comment_type = kwargs.get("sn_comment_type")  # text
-            sn_optional_fields = kwargs.get("sn_optional_fields")  # text
-            sn_track_changes = kwargs.get("sn_track_changes")  # boolean
+        log = logging.getLogger(__name__)
 
-            log = logging.getLogger(__name__)
-            log.info("incident_id: %s", incident_id)
-            log.info("task_id: %s", task_id)
-            log.info("attachment_id: %s", attachment_id)
-            log.info("note_id: %s", note_id)
-            log.info("artifact_id: %s", artifact_id)
-            log.info("sn_ref_id: %s", sn_ref_id)
-            log.info("sn_comment_type: %s", sn_comment_type)
-            log.info("sn_optional_fields: %s", sn_optional_fields)
-            log.info("sn_track_changes: %s", sn_track_changes)
+        try:
+            # Instansiate helper (which gets appconfigs from file)
+            res_helper = ResilientHelper(self.options)
+
+            # Get the function inputs:
+            input_incident_id = res_helper.get_function_input(kwargs, "incident_id")  # number (required)
+            input_task_id = res_helper.get_function_input(kwargs, "task_id", True)  # number
+            input_attachment_id = res_helper.get_function_input(kwargs, "attachment_id", True)  # number
+            input_note_id = res_helper.get_function_input(kwargs, "note_id", True)  # number
+            input_artifact_id = res_helper.get_function_input(kwargs, "artifact_id", True)  # number
+            input_sn_ref_id = res_helper.get_function_input(kwargs, "sn_ref_id", True)  # text
+            input_sn_comment_type = res_helper.get_function_input(kwargs, "sn_comment_type", True)  # text
+            input_sn_optional_fields = res_helper.get_function_input(kwargs, "sn_optional_fields", True)  # text [csv]
+            input_sn_init_work_note = res_helper.get_function_input(kwargs, "sn_init_work_note", True)  # text
+            input_sn_track_changes = res_helper.get_function_input(kwargs, "sn_track_changes", True)  # boolean
+            yield StatusMessage("Function Inputs OK")
+
+            # Convert input_sn_optional_fields in CSV to Python list
+            if input_sn_optional_fields is not None:
+              optional_fields_as_list = []
+              f = StringIO(input_sn_optional_fields)
+              reader = csv.reader(f, delimiter=',')
+              for value in reader:
+                optional_fields_as_list.append(value)
+              input_sn_optional_fields = optional_fields_as_list[0]
+
+            # Instansiate new Resilient API object
+            res_client = self.rest_client()
+
+            if input_incident_id and input_task_id:
+              task = res_helper.get_task(res_client, input_task_id, input_incident_id, input_sn_optional_fields)
+              
+              # TODO
+              # Send task to ServiceNow
+
+            log.info("incident_id: %s", input_incident_id)
+            log.info("task_id: %s", input_task_id)
+            log.info("attachment_id: %s", input_attachment_id)
+            log.info("note_id: %s", input_note_id)
+            log.info("artifact_id: %s", input_artifact_id)
+            log.info("sn_ref_id: %s", input_sn_ref_id)
+            log.info("sn_comment_type: %s", input_sn_comment_type)
+            log.info("sn_optional_fields: %s", input_sn_optional_fields)
+            log.info("sn_init_work_note: %s", input_sn_init_work_note)
+            log.info("sn_track_changes: %s", input_sn_track_changes)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             #  yield StatusMessage("starting...")
             #  yield StatusMessage("done...")
 
             results = {
-                "value": "xyz"
+                "success": True
             }
 
             # Produce a FunctionResult with the results

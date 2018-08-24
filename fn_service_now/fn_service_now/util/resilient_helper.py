@@ -2,21 +2,79 @@
 import requests
 import os
 import base64
+from bs4 import BeautifulSoup
 
-class ServiceNowHelper:
+class ResilientHelper:
+
+  # Define a Task that gets sent to ServiceNow
+  class Task:
+    def __init__(self, incident_id, task_id, task_date_initiated, task_instructions,
+                task_creator, task_owner, optional_fields=None):
+      self.incident_id = incident_id
+      self.task_id = task_id
+      self.task_date_initiated = task_date_initiated
+      self.task_instructions = task_instructions
+      self.task_creator = task_creator
+      self.task_owner = task_owner
+      self.optional_fields = optional_fields
+
+  def get_task(self, client, task_id, incident_id, optional_fields_wanted=None):
+    # Get the task from resilient api
+    try:
+      task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
+    except:
+      raise ValueError("task_id {0} not found".format(task_id))
+    
+    # Get the task_instructions in plaintext
+    try:
+      task_instructions = client.get_content("/tasks/{0}/instructions".format(task_id))
+      soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
+      soup = soup.get_text()
+      task_instructions = soup.replace(u'\xa0', u' ')
+    except:
+      raise ValueError("Error getting task instructions")
+
+    # Get the task creator and owner
+    task_creator = {
+      "name": "{0} {1}".format(task["creator"]["fname"], task["creator"]["lname"]),
+      "email": task["creator"]["email"]
+    }
+    task_owner = {
+      "name": "{0} {1}".format(task["owner_fname"], task["owner_lname"]),
+      "email": task["owner_id"]
+    }
+
+    # Setup optional fields dict
+    optional_fields = None
+    
+    if optional_fields_wanted is not None:
+      optional_fields = {}
+      
+      # Add all optional fields
+      for field_name in optional_fields_wanted:
+        
+        # if it is a known SYSTEM_FIELD
+        if field_name in self.SYSTEM_FIELDS:
+          if field_name == "task_due_date":
+            optional_fields["task_due_date"] = task["due_date"]
+        
+        # Else it must be a CUSTOM_INCIDENT_FIELD or the field does not exist
+        # TODO
+
+    return self.Task(incident_id, task_id, task["init_date"], task_instructions, task_creator, task_owner, optional_fields)
 
   def write_file(self, filename, data):
     path = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
-    fo = open(path, 'wb')
+    fo = open(path, "wb")
     fo.write(data)
     fo.close()
     return path
 
   def str_to_bool(self, str):
     """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-    if str.lower() == 'true':
+    if str.lower() == "true":
         return True
-    elif str.lower() == 'false':
+    elif str.lower() == "false":
         return False
     else:
         raise ValueError("{} is not a boolean".format(str))
@@ -40,7 +98,7 @@ class ServiceNowHelper:
       raise ValueError(err)
     else:
       return input
-  
+
   def get_res_incident(self, client, incident_id, want_notes=False, want_attachments=False,):
     entity = {
       "id": incident_id,
@@ -51,7 +109,7 @@ class ServiceNowHelper:
       entity["data"] = client.get("/incidents/{0}?text_content_output_format=always_text".format(entity["id"]))
 
     except:
-      raise ValueError('incident_id {0} not found'.format(incident_id))
+      raise ValueError("incident_id {0} not found".format(incident_id))
 
     if want_notes:
       incident = entity["data"]
@@ -103,30 +161,30 @@ class ServiceNowHelper:
 
     return entity
 
-  def get_res_incident_tasks(self, client, incident_id, want_layouts=False, want_notes=False, want_attachments=False):
-    entity = {
-      "id": incident_id,
-      "data": None
-    }
+  # def get_res_incident_tasks(self, client, incident_id, want_layouts=False, want_notes=False, want_attachments=False):
+  #   entity = {
+  #     "id": incident_id,
+  #     "data": None
+  #   }
 
-    entity["data"] = client.get("/incidents/{0}/tasks?want_layouts={1}&want_notes={2}".format(entity["id"], want_layouts, want_notes))
+  #   entity["data"] = client.get("/incidents/{0}/tasks?want_layouts={1}&want_notes={2}".format(entity["id"], want_layouts, want_notes))
 
-    if entity["data"] is not None and len(entity["data"]) > 0:
-      tasks = entity["data"]
-      for task in tasks:
-        if task["notes_count"] > 0:
-          task_notes = task["notes"]
+  #   if entity["data"] is not None and len(entity["data"]) > 0:
+  #     tasks = entity["data"]
+  #     for task in tasks:
+  #       if task["notes_count"] > 0:
+  #         task_notes = task["notes"]
 
-          for note in task_notes:
-            print note["text"]
+  #         for note in task_notes:
+  #           print note["text"]
         
-        if want_attachments and task["attachments_count"] > 0:
-          attachments = self.get_res_task_attachments(client, task["id"])
+  #       if want_attachments and task["attachments_count"] > 0:
+  #         attachments = self.get_res_task_attachments(client, task["id"])
 
-          task["attachments_meta_data"] = attachments["meta_data"]
-          task["attachments_data"] = attachments["data"]
+  #         task["attachments_meta_data"] = attachments["meta_data"]
+  #         task["attachments_data"] = attachments["data"]
 
-    return entity["data"]
+  #   return entity["data"]
 
   def get_res_task_attachments(self, client, task_id):
     entity = {
@@ -164,6 +222,23 @@ class ServiceNowHelper:
 
     return response
 
+  def GET(self, url, params, auth=None, headers=None):
+
+    if(headers is None):
+      headers = self.headers
+
+    if auth is None:
+      auth = self.SN_AUTH
+    
+    url = self.SN_API_URL + url
+    
+    try:
+      response = requests.get(url, auth=auth, headers=headers, params=params)
+    except Exception:
+      raise ValueError("ServiceNow GET failed. Check url, credentials and params")
+
+    return response
+
   def __init__(self, options):
     self.options = options
 
@@ -181,3 +256,13 @@ class ServiceNowHelper:
 
     self.headers = {"Content-Type":"application/json","Accept":"application/json"}
 
+    # List of both required and optional fields that are know to Resilient that we handle getting
+    self.SYSTEM_FIELDS = [
+      "incident_id",
+      "task_id",
+      "task_date_initiated",
+      "task_instructions",
+      "task_creator",
+      "task_owner",
+      "task_due_date"
+      ]
