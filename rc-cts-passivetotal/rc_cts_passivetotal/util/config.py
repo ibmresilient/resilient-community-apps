@@ -25,6 +25,8 @@ passivetotal_enrich_subdom_api_url=/v2/enrichment/subdomains
 passivetotal_community_url=https://community.riskiq.com/search/
 
 # Define the tags you classify as "hits", separated by a comma
-passivetotal_tags=compromised,ransomeware
+# Global tasks defined by RiskIQ Passive total include
+# apt32, oceanlotus, compromised, espionage, bad rabbit, ransomware and more
+passivetotal_tags=compromised,ransomware
     """
     return config_data
