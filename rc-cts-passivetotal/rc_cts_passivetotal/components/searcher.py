@@ -62,7 +62,7 @@ class PassiveTotalSearcher(BaseComponent):
     def _get_value_from_options(self, app_config_setting_key):
         """
         Get value from options dict or raise ValueError for the mandatory config setting.
-        :param app_config_setting_name key
+        :param app_config_setting_key key
         """
         if app_config_setting_key in self.options:
             return self.options[app_config_setting_key]
