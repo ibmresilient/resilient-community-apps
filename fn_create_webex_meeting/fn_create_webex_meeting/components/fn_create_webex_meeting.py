@@ -47,6 +47,7 @@ class FunctionComponent(ResilientComponent):
             if webex_timezone is None:
                 yield FunctionError("webex_timezone is not defined in app.config")
 
+
             opts = dict()
             opts["webex_site_url"] = webex_site_url
             opts["email"] = webex_email
@@ -57,12 +58,14 @@ class FunctionComponent(ResilientComponent):
             webex_meeting_name = kwargs.get("webex_meeting_name")  # text
             webex_meeting_password = kwargs.get("webex_meeting_password")  # text
             webex_meeting_agenda = kwargs.get("webex_meeting_agenda")  # text
+            webex_meeting_start_time = kwargs.get("webex_meeting_start_time") # time
+            webex_meeting_end_time = kwargs.get("webex_meeting_end_time") # time
 
             opts["meeting_password"] = webex_meeting_password
             opts["meeting_name"] = webex_meeting_name
             opts["meeting_agenda"] = webex_meeting_agenda
 
-            self.common = WebexAPI(opts)
+            self.common = WebexAPI(opts, webex_meeting_start_time, webex_meeting_end_time)
 
             result = self.common.create_meeting()
 

@@ -11,10 +11,20 @@ import pytz
 
 from resilient_circuits import FunctionError
 
+DEFAULT_MEETING_LENGTH = 60
 
 class WebexAPI:
-    def __init__(self, options):
+    def __init__(self, options, meeting_start_time, meeting_end_time):
         self.opts = options
+
+        self.meeting_start_time = meeting_start_time
+        if meeting_end_time is not None:
+            if meeting_start_time:
+                if meeting_end_time < meeting_start_time:
+                    raise ValueError('End time must be after start time')
+            else:
+                raise ValueError('If an end time is specified, a start time must also be specified')
+        self.meeting_end_time = meeting_end_time
 
     def webex_request(self, path=None, method="GET", query=None, headers=None):
         """Wrapper for requests, appends content-type and fills in site url"""
@@ -113,29 +123,37 @@ class WebexAPI:
 
         timezone_info = self.get_timezone_info()
         if type(timezone_info.get("id")) is int and timezone_info.get("id") is 0:
-            raise FunctionError("Unable to find timezone for string %s".format(self.opts.get("options")))
+            raise FunctionError("Unable to find timezone for string %s" % self.opts.get("timezone"))
 
         utc_offset = datetime.timedelta(hours=timezone_info["gmt_hour"], minutes=timezone_info["gmt_minute"])
         now = datetime.datetime.now(pytz.utc)
 
         timezones_with_offset = list({tz for tz in map(pytz.timezone, pytz.all_timezones_set)
                                       if now.astimezone(tz).utcoffset() == utc_offset})
-
-        time = datetime.datetime.now(tz=timezones_with_offset[0])
+        if self.meeting_start_time is None:
+            time = datetime.datetime.now(tz=timezones_with_offset[0])
+            duration = DEFAULT_MEETING_LENGTH
+        else:
+            time = datetime.datetime.fromtimestamp(self.meeting_start_time/1000)
+            if self.meeting_end_time:
+                duration = (self.meeting_end_time/1000 - self.meeting_start_time/1000)/60
+            else:
+                duration = DEFAULT_MEETING_LENGTH
         meeting_time = time.strftime("%m/%d/%Y %H:%M:%S")
 
         xml = """<accessControl>
-        <meetingPassword>""" + meeting_password + """</meetingPassword>
+        <meetingPassword>{}</meetingPassword>
         </accessControl>
         <metaData>
-        <confName>""" + meeting_name + """</confName>
-        <agenda>""" + meeting_agenda + """</agenda>
+        <confName>{}</confName>
+        <agenda>{}</agenda>
         </metaData>
         <schedule>
-        <startDate>""" + meeting_time + """</startDate>
-        <timeZoneID>""" + timezone_info.get("id") + """</timeZoneID>
-        </schedule>
-        """
+        <startDate>{}</startDate>
+        <duration>{}</duration>
+        <timeZoneID>{}</timeZoneID>
+        </schedule>""".format(meeting_password, meeting_name, meeting_agenda, meeting_time, duration,
+                              timezone_info.get("id"))
 
         return xml
 
