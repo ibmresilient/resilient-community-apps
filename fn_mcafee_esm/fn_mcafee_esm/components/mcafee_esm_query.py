@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mcafee_esm", {})
 
-    @function("mcafee_esm_query_logs")
+    @function("mcafee_esm_query")
     def _mcafee_esm_query_logs_function(self, event, *args, **kwargs):
         """Function: """
         try:

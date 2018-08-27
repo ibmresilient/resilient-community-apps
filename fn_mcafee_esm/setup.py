@@ -26,8 +26,8 @@ setup(
             "McafeeEsmGetListOfCasesFunctionComponent = fn_mcafee_esm.components.mcafee_esm_get_list_of_cases:FunctionComponent",
             "McafeeEsmGetCaseEvenstsDetailFunctionComponent = fn_mcafee_esm.components.mcafee_esm_get_case_events_detail:FunctionComponent",
             "McafeeEsmEditCaseFunctionComponent = fn_mcafee_esm.components.mcafee_esm_edit_case:FunctionComponent",
-            "McafeeEsmGetTriggeredAlarms = fn_mcafee_esm.mcafee_esm_get_triggered_alarms:FunctionComponent",
-            "McafeeEsmQueryLogs = fn_mcafee_esm.mcafee_esm_query_logs:FunctionComponent"
+            "McafeeEsmGetTriggeredAlarms = fn_mcafee_esm.components.mcafee_esm_get_triggered_alarms:FunctionComponent",
+            "McafeeEsmQueryLogs = fn_mcafee_esm.components.mcafee_esm_query:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mcafee_esm.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mcafee_esm.util.customize:customization_data"]
