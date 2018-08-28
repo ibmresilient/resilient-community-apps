@@ -15,7 +15,9 @@ setup(
         'resilient_circuits>=30.0.0',
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
-        'cryptography>=2.2.2'
+        'cryptography>=2.2.2',
+        'weasyprint',
+        'json2html'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -41,7 +43,9 @@ setup(
             "StringToAttachmentFunctionComponent = fn_utilities.components.utilities_string_to_attachment:FunctionComponent",
             "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent",
             "UtilitiesExtractSslCertFromUrlFunctionComponent = fn_utilities.components.utilities_extract_ssl_cert_from_url:FunctionComponent",
-            "UtilitiesParseSslCertificateFunctionComponent = fn_utilities.components.utilities_parse_ssl_certificate:FunctionComponent"
+            "UtilitiesParseSslCertificateFunctionComponent = fn_utilities.components.utilities_parse_ssl_certificate:FunctionComponent",
+            "Html2PdfFunctionComponent = fn_utilities.components.utilities_html2pdf:FunctionComponent",
+            "Json2HtmlFunctionComponent = fn_utilities.components.utilities_json2html:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
