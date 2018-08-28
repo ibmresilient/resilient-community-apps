@@ -134,7 +134,7 @@ class WebexAPI:
             time = datetime.datetime.now(tz=timezones_with_offset[0])
             duration = DEFAULT_MEETING_LENGTH
         else:
-            time = datetime.datetime.fromtimestamp(self.meeting_start_time/1000)
+            time = datetime.datetime.fromtimestamp(self.meeting_start_time/1000, tz=timezones_with_offset[0])
             if self.meeting_end_time:
                 duration = (self.meeting_end_time/1000 - self.meeting_start_time/1000)/60
             else:
