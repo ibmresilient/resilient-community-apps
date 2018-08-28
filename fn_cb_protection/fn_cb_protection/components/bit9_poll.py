@@ -10,6 +10,7 @@ import logging
 import datetime
 import calendar
 from circuits import Event, Timer
+from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
 from pkg_resources import Requirement, resource_filename
@@ -130,6 +131,7 @@ class Bit9PollComponent(ResilientComponent):
         self.log.info("%d results", len(results))
         self.log.debug(results)
 
+        r_incidents = []
         if len(results) > 0:
             # Some (many!) of these approval requests will already have been escalated to Resilient.
             # For efficiency, find them and filter them out from this batch.
@@ -152,9 +154,32 @@ class Bit9PollComponent(ResilientComponent):
                     ]
                 }]
             }
-            r_incidents = self.rest_client().post(query_uri, query)
-        else:
-            r_incidents = []
+            self.log.debug(query)
+            try:
+                r_incidents = self.rest_client().post(query_uri, query)
+            except SimpleHTTPException:
+                # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+                # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+                query_uri = "/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+                query = {
+                    'filters': [{
+                        'conditions': [
+                            {
+                                'field_name': 'properties.{}'.format(REQUEST_ID_FIELDNAME),
+                                'method': 'has_a_value'
+                            },
+                            {
+                                'field_name': 'plan_status',
+                                'method': 'equals',
+                                'value': 'A'
+                            }
+                        ]
+                    }]
+                }
+                self.log.debug(query)
+                r_incidents_tmp = self.rest_client().post(query_uri, query)
+                r_incidents = [r_inc for r_inc in r_incidents_tmp
+                               if r_inc["properties"].get(REQUEST_ID_FIELDNAME) in req_ids]
 
         escalated_ids = [r_inc["properties"].get(REQUEST_ID_FIELDNAME) for r_inc in r_incidents]
 
@@ -168,6 +193,7 @@ class Bit9PollComponent(ResilientComponent):
         self.fire(PollCompleted())
 
     def _find_resilient_incident_for_req(self, req_id):
+        r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
         query = {
             'filters': [{
@@ -189,7 +215,31 @@ class Bit9PollComponent(ResilientComponent):
                 "type": "desc"
             }]
         }
-        r_incidents = self.rest_client().post(query_uri, query)
+        try:
+            r_incidents = self.rest_client().post(query_uri, query)
+        except SimpleHTTPException:
+            # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+            # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+            query = {
+                'filters': [{
+                    'conditions': [
+                        {
+                            'field_name': 'properties.{}'.format(REQUEST_ID_FIELDNAME),
+                            'method': 'has_a_value'
+                        },
+                        {
+                            'field_name': 'plan_status',
+                            'method': 'equals',
+                            'value': 'A'
+                        }
+                    ]
+                }]
+            }
+            self.log.debug(query)
+            r_incidents_tmp = self.rest_client().post(query_uri, query)
+            r_incidents = [r_inc for r_inc in r_incidents_tmp
+                           if r_inc["properties"].get(REQUEST_ID_FIELDNAME) == req_id]
         if len(r_incidents) > 0:
             return r_incidents[0]
         return None
