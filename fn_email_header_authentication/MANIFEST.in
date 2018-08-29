@@ -1,0 +1,3 @@
+include README.md
+include fn_email_header_authentication/util/*
+include fn_email_header_authentication/LICENSE
