@@ -64,19 +64,23 @@ class FunctionComponent(ResilientComponent):
             if input_incident_id and input_task_id:
               task = res_helper.get_task(res_client, input_task_id, input_incident_id, input_sn_optional_fields)
               
-              # TODO
-              # Send task to ServiceNow
+              response = res_helper.POST("/create_ticket", data=task.toJSON())
 
-            log.info("incident_id: %s", input_incident_id)
-            log.info("task_id: %s", input_task_id)
-            log.info("attachment_id: %s", input_attachment_id)
-            log.info("note_id: %s", input_note_id)
-            log.info("artifact_id: %s", input_artifact_id)
-            log.info("sn_ref_id: %s", input_sn_ref_id)
-            log.info("sn_comment_type: %s", input_sn_comment_type)
-            log.info("sn_optional_fields: %s", input_sn_optional_fields)
-            log.info("sn_init_work_note: %s", input_sn_init_work_note)
-            log.info("sn_track_changes: %s", input_sn_track_changes)
+              if response is not None:
+                print response["instructions"]
+              else:
+                print response
+
+            # log.info("incident_id: %s", input_incident_id)
+            # log.info("task_id: %s", input_task_id)
+            # log.info("attachment_id: %s", input_attachment_id)
+            # log.info("note_id: %s", input_note_id)
+            # log.info("artifact_id: %s", input_artifact_id)
+            # log.info("sn_ref_id: %s", input_sn_ref_id)
+            # log.info("sn_comment_type: %s", input_sn_comment_type)
+            # log.info("sn_optional_fields: %s", input_sn_optional_fields)
+            # log.info("sn_init_work_note: %s", input_sn_init_work_note)
+            # log.info("sn_track_changes: %s", input_sn_track_changes)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             #  yield StatusMessage("starting...")

@@ -3,13 +3,14 @@ import requests
 import os
 import base64
 from bs4 import BeautifulSoup
-
+import json
 class ResilientHelper:
 
   # Define a Task that gets sent to ServiceNow
   class Task:
     def __init__(self, incident_id, task_id, task_date_initiated, task_instructions,
                 task_creator, task_owner, optional_fields=None):
+      self.type = "res_task"
       self.incident_id = incident_id
       self.task_id = task_id
       self.task_date_initiated = task_date_initiated
@@ -17,6 +18,9 @@ class ResilientHelper:
       self.task_creator = task_creator
       self.task_owner = task_owner
       self.optional_fields = optional_fields
+    
+    def toJSON(self):
+      return json.dumps(self.__dict__)
 
   def get_task(self, client, task_id, incident_id, optional_fields_wanted=None):
     # Get the task from resilient api
@@ -214,13 +218,30 @@ class ResilientHelper:
       auth = self.SN_AUTH
     
     url = self.SN_API_URL + url
-    
+
+    returnJSON = None
+
     try:
       response = requests.post(url, auth=auth, headers=headers, data=data)
-    except Exception:
-      raise ValueError("ServiceNow POST failed. Check url and credentials")
+      response.raise_for_status()
 
-    return response
+      returnJSON = response.json()['result']
+
+    except requests.exceptions.Timeout:
+      print 'Timeout error'
+    except requests.exceptions.TooManyRedirects:
+      print 'Bad URL'
+    except requests.exceptions.HTTPError as err:
+      if(err.response.content):
+        custom_error_content = json.loads(err.response.content)
+        print custom_error_content['error']['message']
+      else:
+        print err
+    except requests.exceptions.RequestException as e:
+        # catastrophic error. bail.
+        print e
+
+    return returnJSON
 
   def GET(self, url, params, auth=None, headers=None):
 
@@ -242,7 +263,9 @@ class ResilientHelper:
   def __init__(self, options):
     self.options = options
 
-    self.SN_API_URL = self.get_config_option("sn_api_url")
+    self.SN_HOST = self.get_config_option("sn_host")
+    # https://service-now-host.com/api/<app-name>/<custom-api-name/
+    self.SN_API_URL = "{0}{1}".format(self.SN_HOST, "/api/x_261673_test_res/res_test_api")
     self.SN_USERNAME = str(self.get_config_option("sn_username"))
     
     # Handle password surrounded by '

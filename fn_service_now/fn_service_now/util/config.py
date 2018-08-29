@@ -10,7 +10,7 @@ def config_section_data():
       when called by `resilient-circuits config [-c|-u]`
   """
   config_data = u"""[fn_service_now]
-sn_api_url=https://instance.service-now.com/api/now
+sn_host=https://instance.service-now.com
 sn_username=
 sn_password=
 """
