@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import dkim
 
 
 class FunctionComponent(ResilientComponent):
@@ -29,12 +30,29 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("email_header_authentication_target_email: %s", email_header_authentication_target_email)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            yield StatusMessage("Analyzing email headers")
+            # Initialize DKIM object and check for DKIM header
+            dkim_email = dkim.DKIM(email_header_authentication_target_email)
+            dkim_header_exists = b"dkim-signature" in [header[0].lower() for header in dkim_email.headers]
+
+            # Do header analysis
+            dkim_results = dkim.dkim_verify(email_header_authentication_target_email)
+            arc_results = dkim.arc_verify(email_header_authentication_target_email)
+
+            # Form DKIM results statement
+            if dkim_header_exists:
+                if dkim_results:
+                    dkim_message = 'success'
+                else:
+                    dkim_message = 'Most recent DKIM-Message-Signature did not validate'
+            else:
+                dkim_message = 'Message is not DKIM signed'
 
             results = {
-                "value": "xyz"
+                "dkim_verify": dkim_results,
+                "arc_verify": arc_results[0] == 'pass',
+                "dkim_message": dkim_message,
+                "arc_message": arc_results[2]
             }
 
             # Produce a FunctionResult with the results
