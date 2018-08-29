@@ -6,7 +6,7 @@ and owner of an incident.
 
 Also included in the package:
 
-An example workflow which call the fn_calendar_invite function:
+An example workflow which calls the fn_calendar_invite function:
 
 	example_calendar_invite
 
@@ -21,9 +21,9 @@ And a message queue:
 
 
 ## fn_calendar_invite Package Dependences
-- resilient_circuits version 30 or later
-- Python version 2.7.10 or later;
-- Python 'email' package for Python 2 ('email' package not needed for Python 3)
+- Resilient V31 or later 
+- Python V2.7.10 or later
+- Python email package, for Python version less than 3.0
 
 ## Installation
 
