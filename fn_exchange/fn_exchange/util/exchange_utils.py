@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem, IMPERSONATION
 from exchangelib.folders import FolderCollection
@@ -5,9 +6,15 @@ from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 from exchangelib.restriction import Q
 import time, base64
+import datetime
 # Errors
 from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
 from requests.exceptions import ConnectionError
+
+# from exchangelib.folders import ArchiveInbox
+# from exchangelib.version import EXCHANGE_2016
+# BaseProtocol.HTTP_ADAPTER_CLS = NoVerifyHTTPAdapter
+# ArchiveInbox.supported_from = EXCHANGE_2016
 
 
 class NoMailboxError(Exception):
@@ -30,10 +37,11 @@ class CredentialsError(Exception):
 
 class FolderError(Exception):
     def __init__(self, email, folder, folder_path, tree):
-        fail_msg = 'Either the user {} does not have access to the folder {} from the path ' \
-                   '{}, or the folder does not exist'.format(email, folder, folder_path)
+        fail_msg = 'Either the user {} does not have access to the folder {} from the path {} or the folder does not ' \
+                   'exist. See the above tree structure above for more information.'.format(email, folder, folder_path)
         print(tree)
         super(FolderError, self).__init__(fail_msg)
+
 
 class ImpersonationError(Exception):
     def __init__(self, impersonator, impersonation_target):
@@ -49,7 +57,6 @@ class exchange_utils:
         self.email = get_config_option(opts, 'email')
         self.password = get_config_option(opts, 'password')
         self.default_folder_path = get_config_option(opts, 'default_folder_path')
-        self.default_timezone = get_config_option(opts, 'default_timezone')
 
     def connect_to_account(self, primary_smtp_address, impersonation=False):
         """Connect to specified account and return it"""
@@ -74,7 +81,7 @@ class exchange_utils:
         except UnauthorizedError:
             raise CredentialsError()
         except ErrorImpersonateUserDenied:
-            raise ImpersonationError(self.email, primary_smtp_address)
+            raise ImpersonationError(self.username, primary_smtp_address)
         return account
 
     def go_to_folder(self, username, folder_path):
@@ -134,18 +141,14 @@ class exchange_utils:
         # filter by date
         if start_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            start_date = parse_time(start_date)
-
-            tz = EWSTimeZone.timezone(self.default_timezone)
-            start = tz.localize(EWSDateTime(start_date[0], start_date[1], start_date[2]))
-            filtered_emails = filtered_emails.filter(datetime_received__gte=start)
+            tz = EWSTimeZone.timezone('Etc/GMT')
+            start_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_date/1000, tz=tz))
+            filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
         if end_date:
             # get YYYY/MM/DD from epoch time in milliseconds
-            end_date = parse_time(end_date)
-
-            tz = EWSTimeZone.timezone(self.default_timezone)
-            end = tz.localize(EWSDateTime(end_date[0], end_date[1], end_date[2]))
-            filtered_emails = filtered_emails.filter(datetime_received__lte=end)
+            tz = EWSTimeZone.timezone('Etc/GMT')
+            end_date = EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_date/1000, tz=tz))
+            filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
         # Check attachments
         if has_attachments is not None:
@@ -179,9 +182,6 @@ class exchange_utils:
     def create_meeting(self, username, start_time, end_time, subject, body, required_attendees, optional_attendees):
         """Create a meeting object"""
         account = self.connect_to_account(username, impersonation=(username != self.email))
-        tz = EWSTimeZone.timezone(self.default_timezone)
-        start_time = parse_time(start_time)
-        end_time = parse_time(end_time)
 
         if required_attendees:
             required_attendees = required_attendees.split(',')
@@ -191,8 +191,8 @@ class exchange_utils:
         meeting = CalendarItem(
             account=account,
             folder=account.calendar,
-            start=tz.localize(EWSDateTime(start_time[0], start_time[1], start_time[2], start_time[3], start_time[4])),
-            end=tz.localize(EWSDateTime(end_time[0], end_time[1], end_time[2], end_time[3], end_time[4])),
+            start=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_time/1000)),
+            end=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_time/1000)),
             subject=subject,
             body=body,
             required_attendees=required_attendees,

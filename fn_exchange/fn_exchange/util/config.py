@@ -16,7 +16,6 @@ server=example.com
 username=domain\\username - to use this package, this must be an admin account with mailbox access to other accounts
 email=admin@example.com
 password=password
-default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas
-default_timezone=Some Microsoft timezone i.e. America/New_York or Etc/GMT
-#"""
+default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
+"""
     return config_data

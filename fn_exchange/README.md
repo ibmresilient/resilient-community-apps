@@ -43,11 +43,11 @@ server=example.com
 username=domain\username
 email=admin@example.com
 password=password
-default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox
-default_timeozne=Some Microsoft timezone i.e. America/New_York
+default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
 ```
 
 ## How to use the function
+Please note that version 31 of Resilient is required to use the example workflows.
 
 1. Import the necessary customization data into the Resilient platform:
                 
