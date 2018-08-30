@@ -5,6 +5,7 @@ resilient-circuits codegen -p fn_utilities -m fn_utilities \
     "Example: Email Parsing" \
     "Example: Expand URL" \
     "Example: Extract SSL Certificate" \
+    "Example: Get Incident Contact Info" \
     "Example: JSON2HTML and HTML2PDF" \
     "Example: Parse SSL Certificate" \
     "Example: PDFiD" \
