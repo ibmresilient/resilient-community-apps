@@ -159,7 +159,7 @@ class BigFixClient(object):
         else:
             q_id = self.post_bfclientquery(
                 "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name))
+                .format(key))
 
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
