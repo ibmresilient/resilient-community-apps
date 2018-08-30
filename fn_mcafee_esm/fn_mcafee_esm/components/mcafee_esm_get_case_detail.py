@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             if not mcafee_esm_case_id:
                 raise ValueError("mcafee_case_id is required")
-            log.info("mcafee_case_id: %s", mcafee_esm_case_id)
+            log.info("mcafee_esm_case_id: %s", mcafee_esm_case_id)
 
             # Get case details
             details = case_get_case_detail(options, authenticated_headers, mcafee_esm_case_id)

@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-        alarm_get_triggered_alarms(self.options, {"triggeredTimeRange": "CURRENT_DAY"})
+#        alarm_get_triggered_alarms(self.options, {"triggeredTimeRange": "CURRENT_DAY"})
 
     @handler("reload")
     def _reload(self, event, opts):

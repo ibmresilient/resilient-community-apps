@@ -1,6 +1,15 @@
 import json
 
 
+def string_test_config():
+    return u"""[fn_mcafee_esm]
+esm_url=https://mockesmurl.com
+esm_username=fake_user
+esm_password=fake_password
+trust_cert=False
+"""
+
+
 def get_test_config():
     config = {
         "esm_url": "https://mockesmurl.com",

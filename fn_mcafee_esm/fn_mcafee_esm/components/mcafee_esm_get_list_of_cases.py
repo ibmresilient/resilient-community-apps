@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-        case_get_case_list(self.options)
+#        case_get_case_list(self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
