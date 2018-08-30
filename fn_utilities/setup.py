@@ -17,7 +17,8 @@ setup(
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.2.2',
         'weasyprint',
-        'json2html'
+        'json2html',
+        'lxml'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -46,7 +47,8 @@ setup(
             "UtilitiesParseSslCertificateFunctionComponent = fn_utilities.components.utilities_parse_ssl_certificate:FunctionComponent",
             "Html2PdfFunctionComponent = fn_utilities.components.utilities_html2pdf:FunctionComponent",
             "Json2HtmlFunctionComponent = fn_utilities.components.utilities_json2html:FunctionComponent",
-            "GetContactInfoFunctionComponent = fn_utilities.components.utilities_get_contact_info:FunctionComponent"
+            "GetContactInfoFunctionComponent = fn_utilities.components.utilities_get_contact_info:FunctionComponent",
+            "XMLTransformationFunctionComponent = fn_utilities.components.utilities_xml_transformation:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_utilities.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_utilities.util.customize:customization_data"]
