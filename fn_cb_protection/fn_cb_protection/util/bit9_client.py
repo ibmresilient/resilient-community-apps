@@ -102,6 +102,6 @@ class CbProtectClient(object):
     def update_file_rule(self, file_rule_id, payload):
         """Update a file rule"""
         # The file rule id can be None
-        if id is None:
+        if file_rule_id is None:
             return self.post("fileRule", payload=payload)
         return self.put(u"fileRule/{}".format(file_rule_id), payload=payload)
