@@ -136,7 +136,7 @@ class BigFixClient(object):
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
-    def get_bf_computer_by_registry_key_name_value(self, key, name, value, retry_interval, retry_timeout):
+    def get_bf_computer_by_registry_key_name_value(self, key, name, value):
         """ Bigfix query - Get endpoints by registry entry (MS Windows).
 
         :param key: Registry key
@@ -161,7 +161,7 @@ class BigFixClient(object):
                 "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
                 .format(name))
 
-        resp = self.get_bfclientquery(q_id, retry_interval, retry_timeout)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def send_delete_file_remediation_message(self, artifact_value, computer_id):
