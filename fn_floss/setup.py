@@ -9,6 +9,7 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_floss'",
     long_description="fn_floss package contains a function that extracts obfuscated strings from a binary. Also included are workflows that call floss on artifact and attachment files and create a note containing the extracted strings.",
     install_requires=[
