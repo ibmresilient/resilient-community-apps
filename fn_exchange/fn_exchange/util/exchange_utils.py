@@ -7,6 +7,7 @@ from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
 from exchangelib.restriction import Q
 import time, base64
 import datetime
+import re
 # Errors
 from exchangelib.errors import ErrorNonExistentMailbox, UnauthorizedError, ErrorFolderNotFound, ErrorImpersonateUserDenied
 from requests.exceptions import ConnectionError
@@ -86,12 +87,14 @@ class exchange_utils:
 
     def go_to_folder(self, username, folder_path):
         """Navigate to specified folder path and return it"""
+        # Split the folder path by '/' preserving paths wrapped in quotes
+        split_path = [path.strip('"') for path in re.findall('(?:[^/"]|"(?:\\.|[^"])*")+', folder_path)]
 
         account = self.connect_to_account(username)
         folder = account.root
         if folder_path is None:
             return folder
-        for dir in folder_path.split('/'):
+        for dir in split_path:
             try:
                 folder = folder / dir
             except ErrorFolderNotFound:
@@ -106,8 +109,9 @@ class exchange_utils:
         # Default folder path if no folder path is specified
         folder_path = self.default_folder_path if folder_path is None else folder_path
 
-        # Get list of all specified folders
-        folders = [self.go_to_folder(username, folder) for folder in folder_path.split(',')]
+        # Get list of all specified folders, preserving commas wrapped in quotes
+        split_folder_paths = re.findall('(?:[^,"]|"(?:\\.|[^"])*")+', folder_path)
+        folders = [self.go_to_folder(username, folder.strip()) for folder in split_folder_paths]
 
         # Subfolder query check
         if search_subfolders:
@@ -125,7 +129,7 @@ class exchange_utils:
         if email_ids:
             id_query = Q()
             for email_id in email_ids.split(','):
-                id_query = id_query | Q(message_id=email_id)
+                id_query = id_query | Q(message_id=email_id.strip())
             filtered_emails = filtered_emails.filter(id_query)
 
         # filter by sender
@@ -175,7 +179,7 @@ class exchange_utils:
             folder=account.sent,
             subject=subject,
             body=body,
-            to_recipients=to_recipients.split(',')
+            to_recipients=[recipient.strip() for recipient in to_recipients.split(',')]
         )
         return email
 
@@ -184,9 +188,9 @@ class exchange_utils:
         account = self.connect_to_account(username, impersonation=(username != self.email))
 
         if required_attendees:
-            required_attendees = required_attendees.split(',')
+            required_attendees = [ra.strip() for ra in required_attendees.split(',')]
         if optional_attendees:
-            optional_attendees = optional_attendees.split(',')
+            optional_attendees = [oa.strip() for oa in optional_attendees.split(',')]
 
         meeting = CalendarItem(
             account=account,
@@ -267,6 +271,9 @@ class exchange_utils:
                 # Add subject and body
                 curr_email['subject'] = email.subject
                 curr_email['body'] = email.body
+
+                # Add mime content
+                curr_email['mime_content'] = email.mime_content
 
                 # Check to see if there is a sender, might be no sender if email is a draft
                 if email.sender:

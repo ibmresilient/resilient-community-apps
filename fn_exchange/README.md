@@ -41,7 +41,7 @@ Set the following values in the config file (`app.config`) under the `[fn_exchan
 verify_cert=[True|False]
 server=example.com
 username=domain\username
-email=admin@example.com
+email=admin@example.com - this is the default account to send emails and create meetings if one was not specified. Specifying an account that is not this one will require impersonation access.
 password=password
 default_folder_path=Some folder path after root i.e. Top of Information Store/Inbox. Multiple folderpaths must be separated by commas.
 ```

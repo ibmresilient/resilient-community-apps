@@ -71,12 +71,12 @@ class FunctionComponent(ResilientComponent):
 
             # Get function results
             results = utils.create_email_function_results(emails)
+            emails_moved = emails.count()
 
             # Move emails
             yield StatusMessage("Moving emails to %s" % exchange_destination_folder_path)
             # get destination folder
             move_folder = utils.go_to_folder(exchange_email, exchange_destination_folder_path)
-            emails_moved = move_folder.all().count()
             for email in emails:
                 email.move(move_folder)
             yield StatusMessage("Done moving emails, %d emails moved" % emails_moved)
