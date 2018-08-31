@@ -218,6 +218,7 @@ class exchange_utils:
         #         'id1': {
         #             'subject': 'Email Subject',
         #             'body': 'Subject body in HTML',
+        #             'mime_content': mime content of message
         #             'sender_name': 'FirstName LastName',
         #             'sender_email': 'example@example.com',
         #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
@@ -239,6 +240,7 @@ class exchange_utils:
         #         'idN': {
         #             'subject': 'Email Subject',
         #             'body': 'Subject body in HTML',
+        #             'mime_content': mime content of message
         #             'sender_name': 'FirstName LastName',
         #             'sender_email': 'example@example.com',
         #             'attachment_ids': ['attachment_id1', 'attachment_id2'],
