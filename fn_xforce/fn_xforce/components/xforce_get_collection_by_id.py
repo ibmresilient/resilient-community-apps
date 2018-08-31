@@ -51,6 +51,7 @@ class FunctionComponent(ResilientComponent):
             proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
             try:
+                case_files = {}
                 # Create the session and set the proxies.
                 with requests.Session() as session:
                     session.proxies = proxies
@@ -68,8 +69,9 @@ class FunctionComponent(ResilientComponent):
                         raise FunctionError("401 Status code returned. Retry function with updated credentials")
                     elif res.status_code == 403:
                         raise FunctionError("403 Forbidden response received by API")
+
                     else:
-                        log.error("Got unexpected result from request.")
+                        yield StatusMessage("Got no results or unexpected result from request.")
             except Exception:
                 raise ValueError("Encountered issue when contacting XForce API")
             # Prepare results object
