@@ -5,6 +5,7 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+import test_emails
 
 PACKAGE_NAME = "fn_email_header_authentication"
 FUNCTION_NAME = "email_header_authentication_using_dkimarc"
@@ -36,8 +37,30 @@ class TestEmailHeaderAuthenticationUsingDkimarc:
         assert func is not None
 
     @pytest.mark.parametrize("email_header_authentication_target_email, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        (test_emails.arc_only(), {"dkim_verify": False,
+                                  "arc_verify": True,
+                                  "dkim_message": "Message is not DKIM signed",
+                                  "arc_message": "success"}),
+        (test_emails.arc_only_fail(), {"dkim_verify": False,
+                                       "arc_verify": False,
+                                       "dkim_message": "Message is not DKIM signed",
+                                       "arc_message": "Most recent ARC-Message-Signature did not validate"}),
+        (test_emails.dkim_arc_success(), {"dkim_verify": True,
+                                          "arc_verify": True,
+                                          "dkim_message": "success",
+                                          "arc_message": "success"}),
+        (test_emails.no_headers(), {"dkim_verify": False,
+                                    "arc_verify": False,
+                                    "dkim_message": "Message is not DKIM signed",
+                                    "arc_message": "Message is not ARC signed"}),
+        (test_emails.dkim_only(), {"dkim_verify": True,
+                                   "arc_verify": False,
+                                   "dkim_message": "success",
+                                   "arc_message": "Message is not ARC signed"}),
+        (test_emails.dkim_only_fail(), {"dkim_verify": False,
+                                        "arc_verify": False,
+                                        "dkim_message": "Most recent DKIM-Message-Signature did not validate",
+                                        "arc_message": "Message is not ARC signed"})
     ])
     def test_success(self, circuits_app, email_header_authentication_target_email, expected_results):
         """ Test calling with sample values for the parameters """
