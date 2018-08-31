@@ -7,8 +7,8 @@ setup(
     name='fn_create_zoom_meeting',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='IBM Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_create_zoom_meeting'",
     long_description="Resilient Circuits Components for 'fn_create_zoom_meeting'",
     install_requires=[

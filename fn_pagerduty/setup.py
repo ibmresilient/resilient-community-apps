@@ -7,8 +7,8 @@ setup(
     name='fn_pagerduty',
     version='1.0.0',
     license='MIT',
-    author='Resilient',
-    author_email='support@resilient.com',
+    author='IBM Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_pagerduty'",
     long_description="Resilient Circuits Components for 'fn_pagerduty'. Used to create pagerducty incidents, create notes and transition incidents (acknowledged and resolved)",
     install_requires=[
