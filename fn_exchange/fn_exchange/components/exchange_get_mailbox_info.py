@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             log = logging.getLogger(__name__)
             get_user = kwargs.get('exchange_get_email')
-            log.info("get_user: %s" % get_user)
+            log.info("exchange_get_email: %s" % get_user)
 
             # Initialize utils
             utils = exchange_utils(self.options)
