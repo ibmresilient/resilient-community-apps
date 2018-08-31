@@ -54,35 +54,37 @@ Please note that version 31 of Resilient is required to use the example workflow
         resilient-circuits customize
                 
     This creates the following customization components:
-    * Action fields and Function inputs: 
+    * Action fields and Function inputs:
+        *   `exchange_delete_if_no_subfolders`
         *   `exchange_destination_folder_path`
         *   `exchange_email`
         *   `exchange_email_ids`
-        *    `exchange_emails`
-        *    `exchange_end_date`
-        *    `exchange_folder_path`
-        *    `exchange_get_email`
-        *    `exchange_has_attachments`
-        *    `exchange_meeting_body`
-        *    `exchange_meeting_end_time`
-        *    `exchange_meeting_start_time`
-        *    `exchange_meeting_subject`
-        *    `exchange_message_body`
-        *    `exchange_message_subject`
-        *    `exchange_num_emails`
-        *    `exchange_optional_attendees`
-        *    `exchange_order_by_recency`
-        *    `exchange_required_attendees`
-        *    `exchange_search_subfolders`
-        *    `exchange_sender`
-        *    `exchange_start_date`
+        *   `exchange_emails`
+        *   `exchange_end_date`
+        *   `exchange_folder_path`
+        *   `exchange_get_email`
+        *   `exchange_hard_delete`
+        *   `exchange_has_attachments`
+        *   `exchange_meeting_body`
+        *   `exchange_meeting_end_time`
+        *   `exchange_meeting_start_time`
+        *   `exchange_meeting_subject`
+        *   `exchange_message_body`
+        *   `exchange_message_subject`
+        *   `exchange_num_emails`
+        *   `exchange_optional_attendees`
+        *   `exchange_order_by_recency`
+        *   `exchange_required_attendees`
+        *   `exchange_search_subfolders`
+        *   `exchange_sender`
+        *   `exchange_start_date`
     * Message Destination: `fn_exchange`
     * Functions: 
         * `exchange_create_meeting`
         * `exchange_delete_emails`
         * `exchange_find_emails`
         * `exchange_get_mailbox_info`
-        * `exchange_move_and_delete_folder`
+        * `exchange_move_folder_contents_and_delete_folder`
         * `exchange_move_emails`
         * `exchange_send_email`
     * Workflows:
@@ -98,7 +100,7 @@ Please note that version 31 of Resilient is required to use the example workflow
         * `Exchange Delete Emails`
         * `Exchange Find Emails`
         * `Exchange Get Mailbox Info`
-        * `Exchange Move and Delete Folder`
+        * `Exchange Move Folder Contents and Delete Folder`
         * `Exchange Move Emails`
         * `Exchange Send Email`
           
