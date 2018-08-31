@@ -13,7 +13,7 @@ from fn_mcafee_esm.components.mcafee_esm_edit_case import case_edit_case_details
 PACKAGE_NAME = "fn_mcafee_esm"
 FUNCTION_NAME = "mcafee_esm_edit_case"
 
-# Read the default configuration-data section from the package
+# Read test configuration-data
 t_config_data = get_test_config()
 default_config_data = get_default_test_config()
 config_data = string_test_config()
@@ -241,7 +241,7 @@ class TestMcafeeEsmEditCase:
     @pytest.mark.parametrize(
         "mcafee_esm_edit_case_json, mcafee_esm_case_id, mcafee_esm_case_status, mcafee_esm_case_summary, mcafee_esm_case_severity, expected_results",
         [
-            ({"type": "text", "content": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}, 1, None, None, None, '{"inputs": {"mcafee_esm_case_id": 1, "mcafee_esm_case_severity": None, "mcafee_esm_case_status": None, "mcafee_esm_case_summary": None, "mcafee_esm_edit_case_json": {"caseDetail": {"summary": "This is a new summary","severity": "2"}}}}')
+            ({"type": "text", "content": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}, 1, None, None, None, {"inputs": {"mcafee_esm_case_id": 1, "mcafee_esm_case_severity": None, "mcafee_esm_case_status": None, "mcafee_esm_case_summary": None, "mcafee_esm_edit_case_json": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}})
         ])
     @patch("requests.post")
     def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_edit_case_json, mcafee_esm_case_id, mcafee_esm_case_status,
@@ -294,5 +294,4 @@ class TestMcafeeEsmEditCase:
 
         results = call_mcafee_esm_edit_case_function(circuits_app, function_params)
         del results["metrics"]
-        t = cmp(expected_results, results)
-        print("")
+        assert expected_results == results

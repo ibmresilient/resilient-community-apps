@@ -13,7 +13,7 @@ from fn_mcafee_esm.util.helper import check_config
 PACKAGE_NAME = "fn_mcafee_esm"
 FUNCTION_NAME = "mcafee_esm_get_case_detail"
 
-# Read the default configuration-data section from the package
+# Read test configuration-data
 t_config_data = get_test_config()
 config_data = string_test_config()
 
