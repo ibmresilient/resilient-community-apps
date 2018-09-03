@@ -208,9 +208,13 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("No entries found")
                 success = False
 
-            except Exception:
+            except LDAPSocketOpenError:
               success = False
-              raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid")
+              raise ValueError("Invalid Search Base", input_ldap_search_base)
+
+            except Exception as e:
+              success = False
+              raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", e)
 
             finally:
               # Unbind connection
