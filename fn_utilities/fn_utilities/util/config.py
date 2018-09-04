@@ -39,4 +39,7 @@ whois=whois "{{shell_param1}}"
 # psscan=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" psscan --output=json
 # dlllist=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" dlllist --output=json
 # (etc)
+
+# directory of xml stylesheets to use for xml transformations
+# xml_stylesheet_dir=
         """
