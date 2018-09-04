@@ -27,7 +27,6 @@ from pymisp import PyMISP
 from circuits import BaseComponent, handler
 from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, IpProp, LatLngProp, ThreatServiceLookupEvent
 
-
 LOG = logging.getLogger(__name__)
 
 CONFIG_SECTION = "custom_threat_service_misp"
@@ -35,42 +34,56 @@ CONFIG_SECTION = "custom_threat_service_misp"
 # Map from the Resilient Custom Threat Service API type to the MISP types
 #   MISP: https://www.circl.lu/doc/misp/categories-and-types/)
 MISP_TYPES = {
-    "file.content":                 None,
-    "file.name":                    ["filename", "email-attachment"],
-    "file.path":                    ["other"],
-    "email":                        None,
-    "email.body":                   ["text"],
-    "email.header":                 ["email-src", "email-dst", "target-email", "whois-registrant-email",
-                                     "dns-soa-email", "email-reply-to", "email-subject", "email-header",
-                                     "email-x-mailer", "email-message-id", "email-mime-boundary"],
-    "email.header.sender_address":  ["email-src", "email-dst", "target-email", "whois-registrant-email",
-                                     "dns-soa-email", "email-reply-to"],
-    "email.header.sender_name":     None,
-    "email.header.to":              ["email-src", "email-dst", "target-email", "whois-registrant-email",
-                                     "dns-soa-email", "email-reply-to"],
-    "hash.md5":                     ["md5", "authentihash"],
-    "hash.sha1":                    ["sha1", "x509-fingerprint-sha1"],
-    "hash.fuzzy":                   ["other"],
-    "hash.sha256":                  ["sha256", "sha512/256"],
-    "cert.x509":                    ["other"],
-    "net.cidr":                     ["ip-src", "ip-dst"],
-    "net.ip":                       ["ip-src", "ip-dst"],
-    "net.name":                     ["hostname", "domain"],
-    "net.mac":                      ["other"],
-    "net.port":                     ["port"],
-    "net.uri":                      ["url", "uri", "link"],
-    "net.uri.path":                 ["uri"],
-    "net.http.request.header":      ["http-method", "user-agent"],
-    "net.http.response.header":     None,
-    "process.name":                 ["other"],
-    "system.name":                  ["target-machine"],
-    "system.mutex":                 ["mutex"],
-    "system.registry":              ["regkey"],
-    "system.service.name":          ["windows-service-name", "windows-service-displayname"],
-    "system.user.name":             ["text", "target-user", "github-username"],
-    "system.user.password":         ["other"],
-    "threat.report.cve":            ["vulnerability"],
-    "threat.malware.family":        ["malware-type"]
+    "file.content": None,
+    "file.name": ["filename",
+                  "email-attachment",
+                  "filename|md5",
+                  "filename|sha1",
+                  "filename|sha256",
+                  "filename|authentihash",
+                  "filename|ssdeep",
+                  "filename|imphash",
+                  "filename|pehash",
+                  "filename|sha224",
+                  "filename|sha384",
+                  "filename|sha512",
+                  "filename|sha512/224",
+                  "filename|sha512/256"],
+    "file.path": ["other"],
+    "email": None,
+    "email.body": ["text"],
+    "email.header": ["email-src", "email-dst", "target-email", "whois-registrant-email",
+                     "dns-soa-email", "email-reply-to", "email-subject", "email-header",
+                     "email-x-mailer", "email-message-id", "email-mime-boundary"],
+    "email.header.sender_address": ["email-src", "email-dst", "target-email", "whois-registrant-email",
+                                    "dns-soa-email", "email-reply-to"],
+    "email.header.sender_name": None,
+    "email.header.to": ["email-src", "email-dst", "target-email", "whois-registrant-email",
+                        "dns-soa-email", "email-reply-to"],
+    "hash.md5": ["md5", "authentihash", "filename|md5"],
+    "hash.sha1": ["sha1", "x509-fingerprint-sha1", "filename|sha1"],
+    "hash.fuzzy": ["other"],
+    "hash.sha256": ["sha256", "sha512/256", "filename|sha256"],
+    "cert.x509": ["other"],
+    "net.cidr": ["ip-src", "ip-dst"],
+    "net.ip": ["ip-src", "ip-dst",
+               "ip-dst|port", "ip-src|port", "domain|ip"],
+    "net.name": ["hostname", "domain", "domain|ip"],
+    "net.mac": ["other"],
+    "net.port": ["port"],
+    "net.uri": ["url", "uri", "link"],
+    "net.uri.path": ["uri"],
+    "net.http.request.header": ["http-method", "user-agent"],
+    "net.http.response.header": None,
+    "process.name": ["other"],
+    "system.name": ["target-machine"],
+    "system.mutex": ["mutex"],
+    "system.registry": ["regkey"],
+    "system.service.name": ["windows-service-name", "windows-service-displayname"],
+    "system.user.name": ["text", "target-user", "github-username"],
+    "system.user.password": ["other"],
+    "threat.report.cve": ["vulnerability"],
+    "threat.malware.family": ["malware-type"]
 }
 
 
@@ -84,7 +97,6 @@ def config_section_data():
 class MISPThreatSearcher(BaseComponent):
     """
     Custom threat lookup for MISP
-
     """
     channel = searcher_channel("misp")
 
@@ -177,6 +189,10 @@ class MISPThreatSearcher(BaseComponent):
             if an_attribute["value"].lower() == search_value:
                 # Match the whole attribute value, lowercase.
                 return True
+            if "|" in misp_type and "|" in an_attribute["value"]:
+                # Some misp types are compound types, allow searching of both parts of the compound type
+                my_misp_value = an_attribute["value"].lower()
+                return search_value in my_misp_value.split("|")
             return False
 
         for misp_type in misp_types:
@@ -208,6 +224,7 @@ class MISPThreatSearcher(BaseComponent):
             result = misp_api.get_event(event_id)
             if "Event" in result:
                 event = result["Event"]
+                LOG.debug(json.dumps(event))
                 event_id = event["id"]
                 link = self.misp_link_url + "/events/view/" + str(event_id)
                 info = event.get("info")
@@ -218,9 +235,14 @@ class MISPThreatSearcher(BaseComponent):
                     UriProp(name="MISP Link", value=link),
                 )
                 # Add all the tags as separate properties
-                for tag in event.get("Tag"):
-                    tag_name, tag_value = tag["name"].split(":", 1)
-                    hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
+                if event.get("Tag"):
+                    for tag in event.get("Tag"):
+                        if ":" in tag["name"]:
+                            tag_name, tag_value = tag["name"].split(":", 1)
+                        else:
+                            tag_name = tag_value = tag["name"]
+                        hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
+
                 hits.append(hit)
 
         return hits
@@ -230,6 +252,7 @@ def main():
     """Just some tests"""
     import doctest
     doctest.testmod()
+
 
 if __name__ == "__main__":
     main()
