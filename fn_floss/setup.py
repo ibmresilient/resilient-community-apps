@@ -7,8 +7,10 @@ from setuptools import setup, find_packages
 setup(
     name='fn_floss',
     version='1.0.0',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_floss'",
     long_description="fn_floss package contains a function that extracts obfuscated strings from a binary. Also included are workflows that call floss on artifact and attachment files and create a note containing the extracted strings.",
     install_requires=[
