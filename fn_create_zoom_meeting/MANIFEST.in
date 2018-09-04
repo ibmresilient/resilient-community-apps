@@ -1,0 +1,4 @@
+include README.md
+include fn_create_zoom_meeting/util/*
+include fn_create_zoom_meeting/LICENSE
+include fn_create_zoom_meeting/doc/*
