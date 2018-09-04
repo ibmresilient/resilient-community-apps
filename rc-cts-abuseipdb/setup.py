@@ -26,9 +26,8 @@ class PyTest(TestCommand):
 
 setup(
     name='rc-cts-abuseipdb',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
-    url='https://github.com/ibmresilient/resilient-circuits-packages',
+    version='1.0.0',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

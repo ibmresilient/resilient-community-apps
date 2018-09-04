@@ -9,6 +9,7 @@ PUBLISH_VERSION = "1.0.0"
 setup(
     name='fn_ioc_parser',
     version=PUBLISH_VERSION,
+    url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

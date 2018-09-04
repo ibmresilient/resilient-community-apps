@@ -4,9 +4,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc-cts-urlscanio',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
-    url='https://github.com/IBMResilient/resilient-community-apps/',
+    version='1.0.0',
+    url='https://github.com/IBMResilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

@@ -6,6 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_pagerduty',
     version='1.0.0',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
