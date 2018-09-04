@@ -22,22 +22,10 @@ else:
     from email.utils import COMMASPACE, formatdate
     from email.encoders import encode_base64
 
-
-def get_user_id(client, log, uid):
+def get_user_id (client, log, uid):
     uids = []
-    try:
-        groups_response = client.get('/groups/{}'.format(uid))
-        log.info("{} is a group".format(uid))
-        for member in groups_response['members']:
-            log.info("Adding uid {}".format(member))
-            uids.append(member)
-        return uids
-    except Exception:
-        log.info("{} is not a group".format(uid))
-        users_response = client.get('/users/{}'.format(uid))
-        log.info("{} is a user".format(uid))
-        uids.append(users_response['id'])
-        return uids
+    user_json = client.get('/users/{}'.format(uid))
+    return user_json['id']
 
 # Get email address of the user ID.
 def get_email_addr(client, log, uid):
@@ -52,16 +40,14 @@ def get_incident_members_email_addrs(client, log, incident_id):
     # Get the member ids from the incident then lookup their email
     inc_members_json = client.get('/incidents/{}/members'.format(incident_id))
     for member in inc_members_json['members']:
-        users_ids = get_user_id(client, log, member)
-        for user_id in users_ids:
-            email_addrs.append(get_email_addr(client, log, user_id))
+        user_id = get_user_id(client, log, member)
+        email_addrs.append(get_email_addr(client, log, user_id))
 
     # Get the owner id then their email
     inc_owners_json = client.get('/incidents/{}'.format(incident_id))
     inc_owner_id = inc_owners_json['owner_id']
-    owner_ids = get_user_id(client, log, inc_owner_id)
-    for owner_id in owner_ids:
-        email_addrs.append(get_email_addr(client, log, owner_id))
+    owner_id = get_user_id(client, log, inc_owner_id)
+    email_addrs.append(get_email_addr(client, log, owner_id))
 
     return email_addrs
 

@@ -1,8 +1,10 @@
 # Resilient Function Calendar Invite
 
 This Resilient Function package provides a function fn_calendar_invite
-which will send email and an Outlook calendar invitation to the members
-and owner of an incident. 
+which will send an email with a calendar invitation in ICS format to the members
+and owner of an incident. (ICS file can be used by several email and
+calendar programs including Microsoft Outlook, Google Calendar and
+Apple Calendar.)
 
 Also included in the package:
 
