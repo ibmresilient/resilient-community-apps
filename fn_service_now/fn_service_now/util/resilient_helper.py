@@ -4,25 +4,56 @@ import os
 import base64
 from bs4 import BeautifulSoup
 import json
+import csv
+try:
+    # for Python 2.x
+    from StringIO import StringIO
+except ImportError:
+    # for Python 3.x
+    from io import StringIO
+
 class ResilientHelper:
+
+  class FunctionPayload:
+    """Class that contains the payload sent back to UI and available in the post-processing script"""
+    def __init__(self, inputs):
+      self.success = True
+      self.inputs = {}
+      
+      for key, value in inputs.items():
+        self.inputs[key] = value
+    
+    def asDict(self):
+      """Return this class as a Dictionary"""
+      return self.__dict__
+
+    # def add(self, attributes):
+    #   for a in attributes:
 
   # Define a Task that gets sent to ServiceNow
   class Task:
-    def __init__(self, incident_id, task_id, task_date_initiated, task_instructions,
+    """Class that repersents a Resilient Task. See API notes for more"""
+    def __init__(self, incident_id, task_id, task_name, task_date_initiated, task_instructions,
                 task_creator, task_owner, optional_fields=None):
       self.type = "res_task"
       self.incident_id = incident_id
       self.task_id = task_id
+      self.task_name = task_name
       self.task_date_initiated = task_date_initiated
       self.task_instructions = task_instructions
       self.task_creator = task_creator
       self.task_owner = task_owner
+      self.sn_init_work_note = None
       self.optional_fields = optional_fields
     
-    def toJSON(self):
-      return json.dumps(self.__dict__)
+    def add_work_note(self, note):
+      self.sn_init_work_note = note
+
+    def asDict(self):
+      return self.__dict__
 
   def get_task(self, client, task_id, incident_id, optional_fields_wanted=None):
+    """Function that gets the task from Resilient. Gets the task's instructions too and any optional fields"""
     # Get the task from resilient api
     try:
       task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
@@ -61,11 +92,33 @@ class ResilientHelper:
         if field_name in self.SYSTEM_FIELDS:
           if field_name == "task_due_date":
             optional_fields["task_due_date"] = task["due_date"]
-        
-        # Else it must be a CUSTOM_INCIDENT_FIELD or the field does not exist
-        # TODO
 
-    return self.Task(incident_id, task_id, task["init_date"], task_instructions, task_creator, task_owner, optional_fields)
+        # Else it must be a CUSTOM_INCIDENT_FIELD or the field does not exist
+        # TODO custom fields are in incident.properties
+
+    return self.Task(incident_id, task_id, task["name"],task["init_date"], task_instructions,
+                    task_creator, task_owner, optional_fields)
+
+  def generate_res_id(self, incident_id, task_id=None):
+    """If incident_id and task_id are valid, returns "RES-1001-2002"
+      Else if task_id is None, returns "RES-1001" """
+
+    id = "RES-{0}".format(str(incident_id))
+
+    if task_id is not None:
+      id += "-{0}".format(str(task_id))
+
+    return id
+
+  def generate_res_link(self, incident_id, host, task_id=None):
+    """Function that generates a https URL to the incident or task"""
+    
+    link = "https://{0}/#incidents/{1}".format(host, incident_id)
+
+    if task_id is not None:
+      link += "?task_id={0}".format(task_id)
+    
+    return link
 
   def write_file(self, filename, data):
     path = os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
@@ -82,6 +135,15 @@ class ResilientHelper:
         return False
     else:
         raise ValueError("{} is not a boolean".format(str))
+
+  def csv_to_list(self, as_csv):
+    """Function to convert a csv string to a Python List"""
+    as_list = []
+    f = StringIO(as_csv)
+    reader = csv.reader(f, delimiter=',')
+    for value in reader:
+      as_list.append(value)
+    return as_list[0]
 
   def get_config_option(self, option_name, optional=False):
     """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
@@ -165,31 +227,6 @@ class ResilientHelper:
 
     return entity
 
-  # def get_res_incident_tasks(self, client, incident_id, want_layouts=False, want_notes=False, want_attachments=False):
-  #   entity = {
-  #     "id": incident_id,
-  #     "data": None
-  #   }
-
-  #   entity["data"] = client.get("/incidents/{0}/tasks?want_layouts={1}&want_notes={2}".format(entity["id"], want_layouts, want_notes))
-
-  #   if entity["data"] is not None and len(entity["data"]) > 0:
-  #     tasks = entity["data"]
-  #     for task in tasks:
-  #       if task["notes_count"] > 0:
-  #         task_notes = task["notes"]
-
-  #         for note in task_notes:
-  #           print note["text"]
-        
-  #       if want_attachments and task["attachments_count"] > 0:
-  #         attachments = self.get_res_task_attachments(client, task["id"])
-
-  #         task["attachments_meta_data"] = attachments["meta_data"]
-  #         task["attachments_data"] = attachments["data"]
-
-  #   return entity["data"]
-
   def get_res_task_attachments(self, client, task_id):
     entity = {
       "id": task_id,
@@ -210,7 +247,7 @@ class ResilientHelper:
     return entity
 
   def POST(self, url, data, auth=None, headers=None):
-
+    """Function to handle POSTing to ServiceNow. If successful, returns the response as a Dictionary"""
     if(headers is None):
       headers = self.headers
 
@@ -228,18 +265,19 @@ class ResilientHelper:
       returnJSON = response.json()['result']
 
     except requests.exceptions.Timeout:
-      print 'Timeout error'
+      raise ValueError('Request to ServiceNow timedout')
+
     except requests.exceptions.TooManyRedirects:
-      print 'Bad URL'
+      raise ValueError('A bad url request', url)
+
     except requests.exceptions.HTTPError as err:
       if(err.response.content):
         custom_error_content = json.loads(err.response.content)
-        print custom_error_content['error']['message']
+        raise ValueError(custom_error_content['error']['message'])
       else:
-        print err
+        raise ValueError(err)
     except requests.exceptions.RequestException as e:
-        # catastrophic error. bail.
-        print e
+        raise ValueError(e)
 
     return returnJSON
 
@@ -264,19 +302,21 @@ class ResilientHelper:
     self.options = options
 
     self.SN_HOST = self.get_config_option("sn_host")
+
     # https://service-now-host.com/api/<app-name>/<custom-api-name/
-    self.SN_API_URL = "{0}{1}".format(self.SN_HOST, "/api/x_261673_test_res/res_test_api")
+    self.SN_API_URL = "{0}{1}".format(self.SN_HOST, "/api/x_261673_resilient/api")
     self.SN_USERNAME = str(self.get_config_option("sn_username"))
-    
+
     # Handle password surrounded by '
     pwd = str(self.get_config_option("sn_password"))
     if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
       self.SN_PASSWORD = pwd[1:-1]
     else:
       self.SN_PASSWORD = pwd
-    
+
     self.SN_AUTH = (self.SN_USERNAME, self.SN_PASSWORD)
 
+    # Default headers
     self.headers = {"Content-Type":"application/json","Accept":"application/json"}
 
     # List of both required and optional fields that are know to Resilient that we handle getting

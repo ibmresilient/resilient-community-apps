@@ -1,17 +1,12 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper
-try:
-    # for Python 2.x
-    from StringIO import StringIO
-except ImportError:
-    # for Python 3.x
-    from io import StringIO
-import csv
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'sn_utilities_send_to_servicenow"""
@@ -20,6 +15,9 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_service_now", {})
+
+        # Get host as needed to create link to incident/task
+        self.host = opts.get("host")
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -37,58 +35,85 @@ class FunctionComponent(ResilientComponent):
             res_helper = ResilientHelper(self.options)
 
             # Get the function inputs:
-            input_incident_id = res_helper.get_function_input(kwargs, "incident_id")  # number (required)
-            input_task_id = res_helper.get_function_input(kwargs, "task_id", True)  # number
-            input_attachment_id = res_helper.get_function_input(kwargs, "attachment_id", True)  # number
-            input_note_id = res_helper.get_function_input(kwargs, "note_id", True)  # number
-            input_artifact_id = res_helper.get_function_input(kwargs, "artifact_id", True)  # number
-            input_sn_ref_id = res_helper.get_function_input(kwargs, "sn_ref_id", True)  # text
-            input_sn_comment_type = res_helper.get_function_input(kwargs, "sn_comment_type", True)  # text
-            input_sn_optional_fields = res_helper.get_function_input(kwargs, "sn_optional_fields", True)  # text [csv]
-            input_sn_init_work_note = res_helper.get_function_input(kwargs, "sn_init_work_note", True)  # text
-            input_sn_track_changes = res_helper.get_function_input(kwargs, "sn_track_changes", True)  # boolean
+            inputs = {
+              "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
+              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
+              "attachment_id": res_helper.get_function_input(kwargs, "attachment_id", True), # number
+              "note_id": res_helper.get_function_input(kwargs, "note_id", True), # number
+              "artifact_id": res_helper.get_function_input(kwargs, "artifact_id", True), # number
+              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text
+              "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type", True), # text
+              "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True), # text [csv]
+              "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True), # text
+              "sn_track_changes": res_helper.get_function_input(kwargs, "sn_track_changes", True) # boolean
+            }
             yield StatusMessage("Function Inputs OK")
 
-            # Convert input_sn_optional_fields in CSV to Python list
-            if input_sn_optional_fields is not None:
-              optional_fields_as_list = []
-              f = StringIO(input_sn_optional_fields)
-              reader = csv.reader(f, delimiter=',')
-              for value in reader:
-                optional_fields_as_list.append(value)
-              input_sn_optional_fields = optional_fields_as_list[0]
+            # Create function_payload dict with inputs
+            function_payload = res_helper.FunctionPayload(inputs)
+
+            # Convert sn_optional_fields in CSV to Python list
+            if function_payload.inputs["sn_optional_fields"] is not None:
+              function_payload.inputs["sn_optional_fields"] = res_helper.csv_to_list(function_payload.inputs["sn_optional_fields"])
 
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
-            if input_incident_id and input_task_id:
-              task = res_helper.get_task(res_client, input_task_id, input_incident_id, input_sn_optional_fields)
+            # If its a Task
+            if function_payload.inputs["task_id"] is not None:
               
-              response = res_helper.POST("/create_ticket", data=task.toJSON())
+              if function_payload.inputs["attachment_id"] is not None:
+                # TODO: If its a Task attachment
+                pass
+              
+              elif function_payload.inputs["note_id"] is not None:
+                # TODO: If its a Task note
+                pass
 
-              if response is not None:
-                print response["instructions"]
               else:
-                print response
+                # Get the task
+                task = res_helper.get_task(res_client, function_payload.inputs["task_id"], 
+                function_payload.inputs["incident_id"], function_payload.inputs["sn_optional_fields"])
+                
+                # If there is a sn_init_work_note, add to the task
+                if(function_payload.inputs["sn_init_work_note"]):
+                  task.add_work_note(function_payload.inputs["sn_init_work_note"])
 
-            # log.info("incident_id: %s", input_incident_id)
-            # log.info("task_id: %s", input_task_id)
-            # log.info("attachment_id: %s", input_attachment_id)
-            # log.info("note_id: %s", input_note_id)
-            # log.info("artifact_id: %s", input_artifact_id)
-            # log.info("sn_ref_id: %s", input_sn_ref_id)
-            # log.info("sn_comment_type: %s", input_sn_comment_type)
-            # log.info("sn_optional_fields: %s", input_sn_optional_fields)
-            # log.info("sn_init_work_note: %s", input_sn_init_work_note)
-            # log.info("sn_track_changes: %s", input_sn_track_changes)
+                # Add task to the request_data
+                request_data = task.asDict()
+                
+                # Add resilient_id and link to this task to the request_data
+                request_data["id"] = res_helper.generate_res_id(function_payload.inputs["incident_id"], function_payload.inputs["task_id"])
+                request_data["link"] = res_helper.generate_res_link(function_payload.inputs["incident_id"], self.host, function_payload.inputs["task_id"])
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+                # Call POST and get response
+                response = res_helper.POST("/create", data=json.dumps(request_data))
 
-            results = {
-                "success": True
-            }
+                if response is not None:
+                  print response["sn_sys_id"], response["sn_id"]
+                else:
+                  function_payload.success = False
+
+            # Else it must be an incident
+            else:
+              
+              if function_payload.inputs["artifact_id"] is not None:
+                # TODO: If its an incident artifact
+                pass
+
+              elif function_payload.inputs["attachment_id"] is not None:
+                # TODO: If its an incident attachment
+                pass
+              
+              elif function_payload.inputs["note_id"] is not None:
+                # TODO: If its an incident note
+                pass
+              
+              else:
+                # TODO: If its an Incident
+                pass
+
+            results = function_payload.asDict()
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
