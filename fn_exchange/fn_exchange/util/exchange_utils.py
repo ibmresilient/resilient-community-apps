@@ -192,11 +192,13 @@ class exchange_utils:
         if optional_attendees:
             optional_attendees = [oa.strip() for oa in optional_attendees.split(',')]
 
+        tz = EWSTimeZone.timezone('Etc/GMT')
+
         meeting = CalendarItem(
             account=account,
             folder=account.calendar,
-            start=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_time/1000)),
-            end=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_time/1000)),
+            start=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(start_time/1000, tz=tz)),
+            end=EWSDateTime.from_datetime(datetime.datetime.fromtimestamp(end_time/1000, tz=tz)),
             subject=subject,
             body=body,
             required_attendees=required_attendees,
