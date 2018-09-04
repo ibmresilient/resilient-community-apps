@@ -23,7 +23,6 @@ else:
     from email.encoders import encode_base64
 
 def get_user_id (client, log, uid):
-    uids = []
     user_json = client.get('/users/{}'.format(uid))
     return user_json['id']
 
