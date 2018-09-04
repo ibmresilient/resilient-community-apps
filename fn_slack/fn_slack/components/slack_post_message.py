@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation to Slack.
 This function creates a Slack message based on a Resilient incident and it's notes. Threaded replies are possible based on a retained Slack thread_id.
 Many of the features of posting a Slack message are under customer control including:
@@ -14,6 +15,7 @@ import simplejson as json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp, validate_fields
 from .slack_common import slack_post_message
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_post_message"""

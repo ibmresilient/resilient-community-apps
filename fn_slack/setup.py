@@ -12,7 +12,7 @@ setup(
     description="Resilient Circuits Components for 'fn_slack'",
     long_description="Create a Slack message based on an incident and added notes. Threaded replies are possible based on a retained slack thread_id.",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
         'slackclient',
         'simplejson',
         'html2text'
