@@ -110,8 +110,27 @@ class FunctionComponent(ResilientComponent):
                 pass
               
               else:
-                # TODO: If its an Incident
-                pass
+                # Get the incident
+                incident = res_helper.get_incident(res_client, function_payload.inputs["incident_id"])
+                
+                # If there is a sn_init_work_note, add to the incident
+                if(function_payload.inputs["sn_init_work_note"]):
+                  incident.add_work_note(function_payload.inputs["sn_init_work_note"])
+
+                # Add incident to the request_data
+                request_data = incident.asDict()
+                
+                # Add resilient_id and link to this incident to the request_data
+                request_data["id"] = res_helper.generate_res_id(function_payload.inputs["incident_id"])
+                request_data["link"] = res_helper.generate_res_link(function_payload.inputs["incident_id"], self.host)
+
+                # Call POST and get response
+                response = res_helper.POST("/create", data=json.dumps(request_data))
+
+                if response is not None:
+                  print response["sn_sys_id"], response["sn_id"]
+                else:
+                  function_payload.success = False
 
             results = function_payload.asDict()
 

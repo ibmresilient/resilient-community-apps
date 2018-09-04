@@ -52,12 +52,31 @@ class ResilientHelper:
     def asDict(self):
       return self.__dict__
 
+  # Define an Incident that gets sent to ServiceNow
+  class Incident:
+    """Class that repersents a Resilient Incident. See API notes for more"""
+    def __init__(self, incident_id, incident_name, incident_description,
+                 incident_creator):
+
+      self.type = "res_incident"
+      self.incident_id = incident_id
+      self.incident_name = incident_name
+      self.incident_description = incident_description
+      self.incident_creator = incident_creator
+
+    def add_work_note(self, note):
+      self.sn_init_work_note = note
+
+    def asDict(self):
+      return self.__dict__
+
   def get_task(self, client, task_id, incident_id, optional_fields_wanted=None):
     """Function that gets the task from Resilient. Gets the task's instructions too and any optional fields"""
     # Get the task from resilient api
     try:
       task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
     except:
+      # TODO: Better error
       raise ValueError("task_id {0} not found".format(task_id))
     
     # Get the task_instructions in plaintext
@@ -98,6 +117,32 @@ class ResilientHelper:
 
     return self.Task(incident_id, task_id, task["name"],task["init_date"], task_instructions,
                     task_creator, task_owner, optional_fields)
+
+  def get_incident(self, client, incident_id, optional_fields_wanted=None):
+    """Function that gets the incident from Resilient and any optional fields"""
+    # Get the incident from resilient api
+    try:
+      incident = client.get("/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id))
+    except:
+      # TODO Better error
+      raise ValueError("incident_id {0} not found".format(incident_id))
+
+    print incident
+
+    incident_creator = {
+      "name": "{0} {1}".format(incident["creator"]["fname"], incident["creator"]["lname"]),
+      "email": incident["creator"]["email"]
+    }
+
+    # Setup optional fields dict
+    optional_fields = None
+    
+    if optional_fields_wanted is not None:
+      # TODO: handle optional fields
+      pass
+
+    return self.Incident(incident_id, incident["name"], incident["description"],
+                         incident_creator)
 
   def generate_res_id(self, incident_id, task_id=None):
     """If incident_id and task_id are valid, returns "RES-1001-2002"
@@ -164,33 +209,6 @@ class ResilientHelper:
       raise ValueError(err)
     else:
       return input
-
-  def get_res_incident(self, client, incident_id, want_notes=False, want_attachments=False,):
-    entity = {
-      "id": incident_id,
-      "data": None
-    }
-
-    try:
-      entity["data"] = client.get("/incidents/{0}?text_content_output_format=always_text".format(entity["id"]))
-
-    except:
-      raise ValueError("incident_id {0} not found".format(incident_id))
-
-    if want_notes:
-      incident = entity["data"]
-      notes = self.get_res_incident_notes(client, incident_id)
-      if notes is not None:
-        incident["notes"] = notes["data"]
-
-    if want_attachments:
-      incident = entity["data"]
-      attachments = self.get_res_incident_attachments(client, entity["id"])
-      if attachments is not None:
-        incident["attachments_meta_data"] = attachments["meta_data"]
-        incident["attachments_data"] = attachments["data"]
-
-    return entity["data"]
 
   def get_res_incident_notes(self, client, incident_id):
     entity = {

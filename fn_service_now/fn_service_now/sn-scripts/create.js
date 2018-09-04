@@ -68,7 +68,32 @@
 	
 	//If it is a Resilient Incident
 	else if(req.type == 'res_incident'){
+		//Initialize a new record
+		record = newRecord(TABLE_NAME_TO_INSERT);
 		
+		//Set custom table column fields
+		record.setValue("x_261673_resilient_reference_id", req.id);
+		record.setValue("x_261673_resilient_type", 'Incident');
+		record.setValue("x_261673_resilient_reference_link", req.link);
+		
+		//Set system table column fields
+		record.caller_id.setDisplayValue(req.incident_creator.name);
+		record.short_description = req.incident_name;
+		record.description = req.incident_description;
+
+		//If an initial work note is defined, add it
+		if(req.sn_init_work_note != null){
+			record.work_notes = req.sn_init_work_note;
+		}
+
+		//Insert the record
+		record.insert();
+		
+		//Create the response
+		response_body.res_incident_id = req.incident_id;
+		response_body.sn_sys_id = record.getValue('sys_id');
+		response_body.sn_id = record.getValue('number');
+		response_body.sn_record_link = record.getLink(false);
 	}
 	
 	else{
