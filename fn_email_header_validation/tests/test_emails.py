@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 def arc_only():
     return """Delivered-To: machkeenan@gmail.com
 Received: by 2002:a17:90a:4d4d:0:0:0:0 with SMTP id l13-v6csp1057618pjh;
