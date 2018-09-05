@@ -111,7 +111,7 @@ class FunctionComponent(ResilientComponent):
               
               else:
                 # Get the incident
-                incident = res_helper.get_incident(res_client, function_payload.inputs["incident_id"])
+                incident = res_helper.get_incident(res_client, function_payload.inputs["incident_id"], function_payload.inputs["sn_optional_fields"])
                 
                 # If there is a sn_init_work_note, add to the incident
                 if(function_payload.inputs["sn_init_work_note"]):

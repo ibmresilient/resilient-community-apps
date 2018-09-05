@@ -6,18 +6,56 @@
 	//Declare CONSTANTS
 	var TABLE_NAME_TO_INSERT = 'incident';
 	
-	//Declare variables
-	var record = null;
+	//Declare global variables
+	var record, response_body = null;
     var req = request.body.data;
-	var response_body = {};
 	
-	//Function that creates and initializes new GlideRecord
-	function newRecord(table_name){
+	//Function that converts miliseconds to a GlideDateTime Object
+	function ms_to_glideDateTime(ms){
+		var gdt = new GlideDateTime();
+		gdt.subtract(gdt.getNumericValue()); // sets the date to 0 
+		gdt.add(ms); //Set to ms you want
+		return gdt;
+	}
+	
+	//Function that creates and initializes a new GlideRecord
+	function new_record(table_name){
 		var rec = new GlideRecord(table_name);
 		rec.initialize();
 		return rec;
 	}
 
+	//Function that generates the response body
+	function generate_response_body(record){
+		return {
+			"res_incident_id": req.incident_id,
+			"sn_sys_id": record.getValue('sys_id'),
+			"sn_id": record.getValue('number'),
+			"sn_record_link": record.getLink(false)
+		};
+	}
+	
+	//Function to set all common table column fields
+	function set_record_values(record, request, type, caller_display_name,
+								short_description, description, work_note){
+		//Set custom table column fields
+		record.setValue("x_261673_resilient_reference_id", request.id);
+		record.setValue("x_261673_resilient_type", type);
+		record.setValue("x_261673_resilient_reference_link", request.link);
+		
+		//Set system table column fields
+ 		record.caller_id.setDisplayValue(caller_display_name);	
+		record.short_description = short_description;
+		record.description = description;
+		
+		//If an initial work note is defined, add it
+		if(work_note != null){
+			record.work_notes = work_note;
+		}
+		
+		return record;
+	}
+	
 	//Create a ServiceNow record in if it is a Resilient Task
 	if(req.type == 'res_task'){	
 		
@@ -38,62 +76,46 @@
 			} */
 		
 		//Initialize a new record
-		record = newRecord(TABLE_NAME_TO_INSERT);
+		record = new_record(TABLE_NAME_TO_INSERT);
 		
-		//Set custom table column fields
-		record.setValue("x_261673_resilient_reference_id", req.id);
-		record.setValue("x_261673_resilient_type", 'Task');
-		record.setValue("x_261673_resilient_reference_link", req.link);
+		//Set the common values of the record
+		record = set_record_values(record, req, 'Task', req.task_creator.name,
+								   req.task_name, req.task_instructions, req.sn_init_work_note);
 		
-		//Set system table column fields
-		record.caller_id.setDisplayValue(req.task_creator.name);
-		record.short_description = req.task_name;
-		record.description = req.task_instructions;
-		
-		//If an initial work note is defined, add it
-		if(req.sn_init_work_note != null){
-			record.work_notes = req.sn_init_work_note;
+		//Set custom optional values for a Task
+		if(req.optional_fields.task_due_date != null){
+			record.setValue("due_date", ms_to_glideDateTime(req.optional_fields.task_due_date));
 		}
-		
+
 		//Insert the record
 		record.insert();
 		
 		//Create the response
-		response_body.res_incident_id = req.incident_id;
+		response_body = generate_response_body(record);
 		response_body.res_task_id = req.task_id;
-		response_body.sn_sys_id = record.getValue('sys_id');
-		response_body.sn_id = record.getValue('number');
-		response_body.sn_record_link = record.getLink(false);
 	}
 	
 	//If it is a Resilient Incident
 	else if(req.type == 'res_incident'){
 		//Initialize a new record
-		record = newRecord(TABLE_NAME_TO_INSERT);
+		record = new_record(TABLE_NAME_TO_INSERT);
 		
-		//Set custom table column fields
-		record.setValue("x_261673_resilient_reference_id", req.id);
-		record.setValue("x_261673_resilient_type", 'Incident');
-		record.setValue("x_261673_resilient_reference_link", req.link);
+		//Set the common values of the record
+		record = set_record_values(record, req, 'Incident', req.incident_creator.name,
+								   req.incident_name, req.incident_description,
+								   req.sn_init_work_note);
 		
-		//Set system table column fields
-		record.caller_id.setDisplayValue(req.incident_creator.name);
-		record.short_description = req.incident_name;
-		record.description = req.incident_description;
-
-		//If an initial work note is defined, add it
-		if(req.sn_init_work_note != null){
-			record.work_notes = req.sn_init_work_note;
-		}
+		//Set custom required values for an Incident
+		record.setValue('severity', req.incident_severity);
+		
+		//Set custom optional values for an Incident
+		//TODO
 
 		//Insert the record
 		record.insert();
 		
 		//Create the response
-		response_body.res_incident_id = req.incident_id;
-		response_body.sn_sys_id = record.getValue('sys_id');
-		response_body.sn_id = record.getValue('number');
-		response_body.sn_record_link = record.getLink(false);
+		response_body = generate_response_body(record);
 	}
 	
 	else{
