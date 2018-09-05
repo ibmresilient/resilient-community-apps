@@ -277,7 +277,7 @@ class exchange_utils:
                 curr_email['body'] = email.body
 
                 # Add mime content
-                curr_email['mime_content'] = email.mime_content
+                curr_email['mime_content'] = email.mime_content.decode('utf-8')
 
                 # Check to see if there is a sender, might be no sender if email is a draft
                 if email.sender:
