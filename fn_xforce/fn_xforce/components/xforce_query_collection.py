@@ -45,7 +45,8 @@ class FunctionComponent(ResilientComponent):
             log.info("Proxies :HTTP %s and HTTPS %s", HTTP_PROXY, HTTPS_PROXY)
             if xforce_query is None:
                 raise ValueError("No Query provided for XForce search.")
-
+            if isinstance(str(xforce_query),str) == False:
+                raise ValueError("Input must be a string.")
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
