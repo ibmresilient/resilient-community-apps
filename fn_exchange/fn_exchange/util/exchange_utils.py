@@ -298,7 +298,7 @@ class exchange_utils:
                         curr_attachment['attachment_name'] = attachment.name
                         curr_attachment['attachment_content_type'] = attachment.content_type
                         curr_attachment['attachment_size'] = attachment.size
-                        curr_attachment['attachment_base64'] = base64.b64encode(attachment.content)
+                        curr_attachment['attachment_base64'] = base64.b64encode(attachment.content).decode('utf-8')
 
         return results
 

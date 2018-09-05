@@ -21,12 +21,13 @@ MOCK_OPTS = {
 
 class MockEmail(Message):
     """Mocking exchangelib Email"""
-    def __init__(self, message_id, subject, body, sender, attachments):
+    def __init__(self, message_id, subject, body, sender, attachments, mime_content):
         self.message_id = message_id
         self.subject = subject
         self.body = body
         self.sender = sender
         self.attachments = attachments
+        self.mime_content = mime_content
 
 
 class MockSender(object):
@@ -133,7 +134,7 @@ class TestExchangeUtils:
         assert emails1 == emails1_results
 
         # Test one email with no attachments
-        emails2 = [MockEmail('1', 'Subject 1', 'Body', MockSender('Sen Der1', 'sender1@example.com'), [])]
+        emails2 = [MockEmail('1', 'Subject 1', 'Body', MockSender('Sen Der1', 'sender1@example.com'), [], b'abc')]
         emails2_output = test_utils.create_email_function_results(emails2)
         emails2_results = {
             'email_ids': ['1'],
@@ -144,7 +145,8 @@ class TestExchangeUtils:
                     'sender_name': 'Sen Der1',
                     'sender_email': 'sender1@example.com',
                     'attachment_ids': [],
-                    'attachments': {}
+                    'attachments': {},
+                    'mime_content': 'abc'
                 }
             }
         }
@@ -153,7 +155,7 @@ class TestExchangeUtils:
         # Test two emails, one with attachments and one without
         emails3 = emails2 + [MockEmail('weio', 'nzxcv', 'vds', MockSender('FIRST LAST', 'firstlast@example.com'),
                                        [MockAttachment(MockAttachmentId('22'), 'ATTCH', 'spreadsheet', 12,
-                                                       str.encode('encode me'))])]
+                                                       str.encode('encode me'))], b'def')]
         emails3_output = test_utils.create_email_function_results(emails3)
         emails3_results = {
             'email_ids': ['1', 'weio'],
@@ -164,7 +166,8 @@ class TestExchangeUtils:
                     'sender_name': 'Sen Der1',
                     'sender_email': 'sender1@example.com',
                     'attachment_ids': [],
-                    'attachments': {}
+                    'attachments': {},
+                    'mime_content': 'abc'
                 },
                 'weio': {
                     'subject': 'nzxcv',
@@ -177,9 +180,10 @@ class TestExchangeUtils:
                             'attachment_name': 'ATTCH',
                             'attachment_content_type': 'spreadsheet',
                             'attachment_size': 12,
-                            'attachment_base64': b'ZW5jb2RlIG1l'
+                            'attachment_base64': 'ZW5jb2RlIG1l'
                         }
-                    }
+                    },
+                    'mime_content': 'def'
                 }
             }
         }
