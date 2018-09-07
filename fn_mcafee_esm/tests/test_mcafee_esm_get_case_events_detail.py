@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function

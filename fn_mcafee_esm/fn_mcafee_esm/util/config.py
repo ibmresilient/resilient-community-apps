@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Generate a default configuration-file section for fn_mcafee_esm"""
 
@@ -18,5 +19,12 @@ esm_password=<your_esm_password>
 
 # If your ESM server uses a cert which is not automatically trusted by your machine set trust_cert=False
 trust_cert=[True|False]
+
+## ESM Polling settings
+# Weather or not polling for ESM cases should be turned on. Set to `True` to do so
+esm_polling=False
+# How often polling should happen. Value is in seconds
+esm_polling_interval=300
+incident_template=<location_of_template_file>
 """
     return config_data

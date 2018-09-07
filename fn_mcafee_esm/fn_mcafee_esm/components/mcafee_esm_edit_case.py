@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -30,21 +31,15 @@ def case_edit_case_details(options, dict_payload, case_id):
     check_status_code(r.status_code)
 
 
-def combine_case_details(case_details, **kwargs):
+def combine_case_details(case_details, id):
     case_details_dict = json.loads(case_details)
     merge_dict = dict(caseDetail={})
-    merge_dict["caseDetail"]["id"] = kwargs.get("mcafee_esm_case_id")
-    if kwargs.get("mcafee_esm_case_severity"):
-        merge_dict["caseDetail"]["severity"] = kwargs.get("mcafee_esm_case_severity")
-    if kwargs.get("mcafee_esm_case_summary"):
-        merge_dict["caseDetail"]["summary"] = kwargs.get("mcafee_esm_case_summary")
-    if kwargs.get("mcafee_esm_case_status"):
-        merge_dict["caseDetail"].update({"statusId": {"value": kwargs.get("mcafee_esm_case_status")}})
+    merge_dict["caseDetail"]["id"] = id
 
     if case_details_dict.get("caseDetail") is None:
         raise ValueError("caseDetail key was not set in json input.")
 
-    return merge_two_dicts(case_details_dict, merge_dict)
+    return merge_two_dicts(case_details_dict["caseDetail"], merge_dict["caseDetail"])
 
 
 class FunctionComponent(ResilientComponent):
@@ -94,7 +89,8 @@ class FunctionComponent(ResilientComponent):
                 log.info("mcafee_esm_case_status: %s", mcafee_esm_case_status)
 
             # Combine details to edit case
-            edit_case_dict = combine_case_details(mcafee_esm_edit_case_json, **kwargs)
+            edit_case_dict = dict(caseDetail={})
+            edit_case_dict["caseDetail"] = combine_case_details(mcafee_esm_edit_case_json, mcafee_esm_case_id)
 
             # Edit Case, nothing is returned
             case_edit_case_details(options, edit_case_dict, mcafee_esm_case_id)
