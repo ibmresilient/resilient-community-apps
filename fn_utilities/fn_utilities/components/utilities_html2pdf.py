@@ -11,7 +11,7 @@ except:
     from io import StringIO
 
 try:
-    import urllib2.urlopen as urlopen
+    from urllib2 import urlopen
 except:
     from urllib.request import urlopen
 
