@@ -34,7 +34,7 @@ class ResilientHelper:
   class Task:
     """Class that repersents a Resilient Task. See API notes for more"""
     def __init__(self, incident_id, task_id, task_name, task_instructions,
-                task_creator, task_owner, optional_fields=None):
+                task_creator, task_owner):
       self.type = "res_task"
       self.incident_id = incident_id
       self.task_id = task_id
@@ -42,16 +42,11 @@ class ResilientHelper:
       self.task_instructions = task_instructions
       self.task_creator = task_creator
       self.task_owner = task_owner
-      self.sn_init_work_note = None
-      self.optional_fields = optional_fields
-    
-    def add_work_note(self, note):
-      self.sn_init_work_note = note
 
     def asDict(self):
       return self.__dict__
 
-  def get_task(self, client, task_id, incident_id, optional_fields_wanted=None):
+  def get_task(self, client, task_id, incident_id):
     """Function that gets the task from Resilient. Gets the task's instructions too and any optional fields"""
     # Get the task from resilient api
     try:
@@ -79,33 +74,14 @@ class ResilientHelper:
       "email": task["owner_id"]
     }
 
-    # Setup optional fields dict
-    optional_fields = None
-    
-    if optional_fields_wanted is not None:
-      optional_fields = {}
-      
-      # Add all optional fields
-      for field_name in optional_fields_wanted:
-        
-        # if it is a known SYSTEM_FIELD
-        if field_name in self.SYSTEM_FIELDS:
-          if field_name == "task_due_date":
-            optional_fields["task_due_date"] = task["due_date"]
-
-        else:
-          # Else it must be a CUSTOM_INCIDENT_FIELD or the field does not exist
-          # TODO custom fields are in incident.properties
-          pass
-
     return self.Task(incident_id, task_id, task["name"], task_instructions,
-                    task_creator, task_owner, optional_fields)
+                    task_creator, task_owner)
 
   # Define an Incident that gets sent to ServiceNow
   class Incident:
     """Class that repersents a Resilient Incident. See API notes for more"""
     def __init__(self, incident_id, incident_name, incident_description, incident_serverity,
-                 incident_creator, incident_date_created, optional_fields=None):
+                 incident_creator, incident_date_created):
 
       self.type = "res_incident"
       self.incident_id = incident_id
@@ -114,8 +90,6 @@ class ResilientHelper:
       self.incident_severity = incident_serverity
       self.incident_creator = incident_creator
       self.incident_date_created = incident_date_created
-      self.sn_init_work_note = None
-      self.optional_fields = optional_fields
 
     def add_work_note(self, note):
       self.sn_init_work_note = note
@@ -147,42 +121,8 @@ class ResilientHelper:
     elif incident_severity == "low":
       incident_severity = 3
 
-    # Setup optional fields dict
-    optional_fields = None
-
-    if optional_fields_wanted is not None:
-      optional_fields = {}
-
-      # Add all optional fields
-      for field_name in optional_fields_wanted:
-
-        # if it is a known SYSTEM_FIELD
-        if field_name in self.SYSTEM_FIELDS:
-          
-          if field_name == "incident_date_occurred":
-            optional_fields["incident_date_occurred"] = incident["start_date"]
-          
-          elif field_name == "incident_date_discovered":
-            optional_fields["incident_date_discovered"] = incident["discovered_date"]
-          
-          elif field_name == "incident_type":
-            incident_type_ids = incident["incident_type_ids"]
-            all_ids = ""
-            if incident_type_ids is not None and len(incident_type_ids) > 0:
-              for id in incident_type_ids:
-                all_ids += id + ", "
-              
-              optional_fields["incident_type"] = all_ids[:-2]
-            else:
-              optional_fields["incident_type"] = None
-
-        else:
-          # Else it must be a CUSTOM_INCIDENT_FIELD or the field does not exist
-          # TODO custom fields are in incident.properties
-          pass
-
     return self.Incident(incident_id, incident["name"], incident["description"], incident_severity,
-                         incident_creator, incident["create_date"], optional_fields)
+                         incident_creator, incident["create_date"])
 
   def generate_res_id(self, incident_id, task_id=None):
     """If incident_id and task_id are valid, returns "RES-1001-2002"

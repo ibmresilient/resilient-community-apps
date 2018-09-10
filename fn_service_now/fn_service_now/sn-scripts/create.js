@@ -42,9 +42,10 @@
 		record.setValue("x_261673_resilient_reference_id", request.id);
 		record.setValue("x_261673_resilient_type", type);
 		record.setValue("x_261673_resilient_reference_link", request.link);
+		record.setValue("x_261673_resilient_track_changes", request.track_changes_in_resilient);
 		
 		//Set system table column fields
- 		record.caller_id.setDisplayValue(caller_display_name);	
+ 		record.caller_id.setDisplayValue(caller_display_name);	//Caller has to be a ServiceNow user to display correctly
 		record.short_description = short_description;
 		record.description = description;
 		
@@ -59,21 +60,24 @@
 	//Create a ServiceNow record in if it is a Resilient Task
 	if(req.type == 'res_task'){	
 		
-		/* IBM Resilient 'Create Task Request' Payload Example
-			req = {
-				"type": "res_task",
-				"id": "RES-1001-2002"
-				"link": "https://192.168.0.2/#incidents/1001?task_id=2002"
-				"incident_id": 1001,
-				"task_id": 2002,
-				"task_name": "Change device/application passwords",
-				"task_creator": {"name": "John Smith", "email": "johnsmith@example.com"},
-				"task_owner": {"name": "Jane Smith", "email": "jamesmith@example.com"},
-				"task_date_initiated": 1534932076553,
-				"task_instructions": "Immediately change any associated app or device passwords to company directory services.",
-				"sn_init_work_note": "This Incident has been created by Resilient Systems user seanmurphy@example.com",
-				"optional_fields": {"task_due_date": null}
-			} */
+		/* IBM Resilient 'Create Task in ServiceNow Request' Payload Example
+		{
+		  "id": "RES-2131-2254750",
+		  "type": "res_task",
+		  "link": "https://192.168.57.3/#incidents/2131?task_id=2254750",
+		  "sn_init_work_note": "This record was created by Admin User [admin@example.com] using our IBM Resilient Systems IR Platform",
+		  "track_changes_in_resilient": true,
+		  "incident_id": 2131,
+		  "task_id": 2254750,
+		  "task_creator": {"name": "Tom Smith", "email": "tomsmith@example.com"},
+		  "task_instructions": "Call the local Police to see if any mobile device has been handed in",
+		  "task_owner": { "name": "Jane Smith", "email": "janesmith@example.com"},
+		  "task_name": "Check with local Police",
+		  "extra_info": {
+			  "assignment_group": "IT Security",
+			  "state": "In Progress"
+		  }
+	   } */
 		
 		//Initialize a new record
 		record = new_record(TABLE_NAME_TO_INSERT);
@@ -82,10 +86,8 @@
 		record = set_record_values(record, req, 'Task', req.task_creator.name,
 								   req.task_name, req.task_instructions, req.sn_init_work_note);
 		
-		//Set custom optional values for a Task
-		if(req.optional_fields.task_due_date != null){
-			record.setValue("due_date", ms_to_glideDateTime(req.optional_fields.task_due_date));
-		}
+		//Set extra_info values
+		//TODO
 
 		//Insert the record
 		record.insert();
@@ -97,6 +99,27 @@
 	
 	//If it is a Resilient Incident
 	else if(req.type == 'res_incident'){
+		
+		/*
+		{
+		  "id": "RES-2131",
+		  "type": "res_incident",
+		  "link": "https://192.168.57.3/#incidents/2131",
+		  "sn_init_work_note": "This record was created by Admin User [admin@res.com] using our IBM Resilient Systems IR Platform",
+		  "track_changes_in_resilient": true,
+		  "incident_id": 2131,
+		  "incident_creator": { "name": "Angela Valdes", "email": "angela@res.com"},
+		  "incident_name": "James lost his laptop bag in Dublin",
+		  "incident_description": "James was visiting a client and left his laptop bag in the taxi at the \\nairport in Dublin",
+		  "incident_severity": 1,
+		  "incident_date_created": 1533809472000,
+		  "extra_info": {
+			"assignment_group": "IT Security",
+			"state": "In Progress"
+		  }
+		}
+		*/
+		
 		//Initialize a new record
 		record = new_record(TABLE_NAME_TO_INSERT);
 		
@@ -108,7 +131,7 @@
 		//Set custom required values for an Incident
 		record.setValue('severity', req.incident_severity);
 		
-		//Set custom optional values for an Incident
+		//Set extra_info values
 		//TODO
 
 		//Insert the record
