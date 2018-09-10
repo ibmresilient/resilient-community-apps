@@ -52,6 +52,10 @@ class FunctionComponent(ResilientComponent):
                 "shell_param3": render(u"{{shell_param3|%s}}" % escaping, kwargs)
             }
 
+            # Options keys are lowercase, so the shell command name needs to be lowercase
+            if shell_command:
+                shell_command = shell_command.lower()
+
             # Substitute parameters into the shell command
             if shell_command not in self.options:
                 yield FunctionError(u"Command is not configured: '{}'".format(shell_command))
