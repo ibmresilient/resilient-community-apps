@@ -13,8 +13,8 @@ Many of the features of posting a Slack message are under customer control inclu
 import logging
 import simplejson as json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp, validate_fields
-from .slack_common import slack_post_message
+from fn_slack.lib.resilient_common import validate_fields
+import slack_common
 
 
 class FunctionComponent(ResilientComponent):
@@ -64,6 +64,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             slack_channel = kwargs.get("slack_channel")  # text
+            slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean
+            slack_participant_emails = kwargs.get("slack_participant_emails")  # text
             slack_details = kwargs.get("slack_details")  # text
             slack_thread_id = kwargs.get("slack_thread_id")  # text
             slack_user_id = kwargs.get("slack_user_id")  # text
@@ -76,6 +78,8 @@ class FunctionComponent(ResilientComponent):
 
             self.log.debug("slack_channel: %s", slack_channel)
             self.log.debug("slack_details: %s", slack_details)
+            self.log.debug("slack_is_private: %s", slack_details)
+            self.log.debug("slack_participant_emails: %s", slack_participant_emails)
             self.log.debug("slack_thread_id: %s", slack_thread_id)
             self.log.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
             self.log.debug("slack_parse: %s", slack_parse)
@@ -88,16 +92,43 @@ class FunctionComponent(ResilientComponent):
             api_token = self.options['api_token']
             def_username = self.options['username']
 
-            results = slack_post_message(self.log, self.resoptions, slack_details, slack_channel, slack_as_user, slack_user_id, slack_reply_broadcast,
-                               slack_parse, slack_link_names, slack_markdown, slack_thread_id, api_token, def_username)
+            # find or create a new channel
+            slack_client = slack_common.SlackUtils(api_token)
+            slack_id_channel = None
 
-            if 'ok' in results.keys() and results['ok']:
+            if not slack_client.find_channel_by_name(slack_channel):
+                # rewrite the slack_channel name just in case Slack validation modifies the submitted channel name
+                slack_channel, slack_id_channel = slack_client.slack_create_channel(slack_channel, slack_is_private)
+
+            # find id channel, based on the channel name
+            if not slack_id_channel:
+                slack_id_channel = slack_client.find_id_channel_by_name(slack_channel)
+
+            # find user id based on their emails
+            user_id_list = slack_client.find_user_ids(slack_participant_emails)
+
+            # invite users to a channel
+            results_users_added = slack_client.invite_users_to_channel(slack_id_channel, user_id_list)
+
+            if "ok" in results_users_added and results_users_added.get("ok"):
+                yield StatusMessage("Users invited to # {} channel".format(slack_channel))
+            else:
+                yield FunctionError("Invite users failed: " + json.dumps(results_users_added))
+
+            # post message to the channel
+            results_msg_posted = slack_client.slack_post_message(self.resoptions, slack_details, slack_channel,
+                                                                 slack_as_user, slack_user_id, slack_reply_broadcast,
+                                                                 slack_parse, slack_link_names, slack_markdown,
+                                                                 slack_thread_id, def_username)
+
+            if "ok" in results_msg_posted and results_msg_posted.get("ok"):
                 yield StatusMessage("Message added to slack")
             else:
-                yield FunctionError("Message add failed: "+json.dumps(results))
+                yield FunctionError("Message add failed: "+json.dumps(results_msg_posted))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(results_msg_posted)
         except Exception as err:
             self.log.error(err)
             yield FunctionError()
+
