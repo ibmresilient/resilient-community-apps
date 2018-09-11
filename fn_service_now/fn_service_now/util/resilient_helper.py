@@ -19,16 +19,19 @@ class ResilientHelper:
     def __init__(self, inputs):
       self.success = True
       self.inputs = {}
-      
-      for key, value in inputs.items():
-        self.inputs[key] = value
+      self.row_id = None
+      self.res_id = None
+      self.sn_ref_id = None
+      self.sn_status = None
+      self.sn_action = None
+      self.sn_record_link = None
+
+      for input in inputs:
+        self.inputs[input] = inputs[input]
     
     def asDict(self):
       """Return this class as a Dictionary"""
       return self.__dict__
-
-    # def add(self, attributes):
-    #   for a in attributes:
 
   # Define a Task that gets sent to ServiceNow
   class Task:

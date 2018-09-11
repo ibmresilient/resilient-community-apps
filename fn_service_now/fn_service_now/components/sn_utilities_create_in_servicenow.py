@@ -5,6 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import json
+import time
 from fn_service_now.util.resilient_helper import ResilientHelper
 
 class FunctionComponent(ResilientComponent):
@@ -107,10 +108,51 @@ class FunctionComponent(ResilientComponent):
                                                 function_payload.inputs["sn_extend_request"])
 
             # Call POST and get response
-            response = res_helper.POST("/create", data=json.dumps(request_data))
+            create_in_sn_response = res_helper.POST("/create", data=json.dumps(request_data))
 
-            if response is not None:
-              print response["sn_sys_id"], response["sn_id"]
+            if create_in_sn_response is not None:
+
+              # Set datatable name
+              data_table_api_name = "sn_external_ticket_status"
+              
+              # Get current time (*1000 as API does not accept int)
+              now = int(time.time()*1000)
+
+              # Generate Link to ServiceNow record
+              link = res_helper.SN_HOST + "/" + create_in_sn_response["sn_record_link"]
+
+              # Generate cells for the datatable
+              cells = {
+                "cells" : {
+                  "time": {"value": now},
+                  "res_id": {"value": create_in_sn_response["res_id"]},
+                  "sn_ref_id": {"value": create_in_sn_response["sn_ref_id"]},
+                  "status": {"value": create_in_sn_response["sn_status"]},
+                  "action": {"value": create_in_sn_response["sn_action"]},
+                  "link": {"value": """<a href="{0}">Link</a>""".format(link)}
+                }
+              }
+
+              # Add values to function_payload
+              function_payload.res_id = create_in_sn_response["res_id"]
+              function_payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
+              function_payload.sn_status = create_in_sn_response["sn_status"]
+              function_payload.sn_action = create_in_sn_response["sn_action"]
+              function_payload.sn_record_link = link
+
+              # Generate uri to POST datatable row
+              uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(function_payload.inputs["incident_id"], data_table_api_name)
+
+              try:
+                # POST row
+                add_row_response = res_client.post(uri, cells)
+
+                # Add row_id to function_payload
+                function_payload.row_id = add_row_response["id"]
+              except:
+                function_payload.success = False
+                raise ValueError("Failed to add row to datatable")
+
             else:
               function_payload.success = False
 
