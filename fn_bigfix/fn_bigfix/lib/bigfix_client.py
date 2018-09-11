@@ -148,7 +148,7 @@ class BigFixClient(object):
 
         # strip off the prefix if it exists for current user or users
         if key.lower().startswith(("hkcu", "hkey_current_user", "hku", "hkey_users")):
-            key = key.split('/', 1)[1]
+            key = key.split('\\', 1)[1]
             namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
                 "of current user keys (logged on users) " \
                 "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
