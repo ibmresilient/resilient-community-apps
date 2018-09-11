@@ -109,8 +109,6 @@ class ResilientHelper:
       # TODO Better error
       raise ValueError("incident_id {0} not found".format(incident_id))
 
-    print incident
-
     incident_creator = {
       "name": "{0} {1}".format(incident["creator"]["fname"], incident["creator"]["lname"]),
       "email": incident["creator"]["email"]

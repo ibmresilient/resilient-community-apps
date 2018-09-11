@@ -43,7 +43,7 @@ class FunctionComponent(ResilientComponent):
           
           else:
             incident = res_helper.get_incident(res_client, incident_id)
-            
+
             # Add incident to the request_data
             request_data = incident.asDict()
 
@@ -107,10 +107,13 @@ class FunctionComponent(ResilientComponent):
                                                 function_payload.inputs["sn_track_changes"],
                                                 function_payload.inputs["sn_extend_request"])
 
+            yield StatusMessage("Send Request to ServiceNow")
             # Call POST and get response
             create_in_sn_response = res_helper.POST("/create", data=json.dumps(request_data))
 
             if create_in_sn_response is not None:
+
+              yield StatusMessage("Request Successful")
 
               # Set datatable name
               data_table_api_name = "sn_external_ticket_status"
@@ -144,6 +147,9 @@ class FunctionComponent(ResilientComponent):
               uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(function_payload.inputs["incident_id"], data_table_api_name)
 
               try:
+
+                yield StatusMessage("Adding row to " + data_table_api_name + " datatable")
+
                 # POST row
                 add_row_response = res_client.post(uri, cells)
 
