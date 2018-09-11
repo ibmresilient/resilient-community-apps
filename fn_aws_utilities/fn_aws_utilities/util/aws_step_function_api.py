@@ -13,10 +13,6 @@ class AwsStepFunction(AWSCommon):
         """Initializes boto3 client"""
         AWSCommon.__init__(self, "stepfunctions", aws_access_key_id, aws_secret_access_key, region_name)
 
-    def generate_random_uuid(self):
-        """Generates a random UUID used as the execution ID"""
-        return str(uuid.uuid4())
-
     def get_execution_result(self, execution_arn):
         """Returns details about an ongoing description"""
         log = logging.getLogger(__name__)
@@ -57,14 +53,10 @@ class AwsStepFunction(AWSCommon):
         if state_machine_arn is None:
             raise ValueError("Could not find state machine")
 
-        execution_name = self.generate_random_uuid()
-
         log = logging.getLogger(__name__)
 
         try:
-            execution_information = self.aws_client.start_execution(stateMachineArn=state_machine_arn,
-                                                                    name=execution_name,
-                                                                    input=payload)
+            execution_information = self.aws_client.start_execution(stateMachineArn=state_machine_arn, input=payload)
         except Exception as e:
             log.error(e)  # Python 3.6 compatible exception info
             raise Exception("Failed to start execution")
@@ -83,9 +75,10 @@ class AwsStepFunction(AWSCommon):
             while execution_description.get("output") is None:
                 execution_description = self.aws_client.describe_execution(executionArn=execution_arn)
                 execution_status = execution_description.get("status")
-                if execution_status != "RUNNING" or execution_status != "SUCCEEDED":
+                if execution_status != "RUNNING" and execution_status != "SUCCEEDED":
                     raise Exception("Function did not complete successfully, status: {}.".format(execution_status))
 
+                log.info('Execution not complete, sleeping for 10 seconds')
                 time.sleep(10)  # Free up the CPU and don't spam API calls
 
             return execution_description
