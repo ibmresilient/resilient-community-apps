@@ -146,8 +146,8 @@ class BigFixClient(object):
 
         """
 
-        # strip off the prefix if it exists for current user or users
-        if key.lower().startswith(("hkcu", "hkey_current_user", "hku", "hkey_users")):
+        # strip off the prefix if it exists for current user
+        if key.lower().startswith(("hkcu", "hkey_current_user")):
             key = key.split('\\', 1)[1]
             namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
                 "of current user keys (logged on users) " \
@@ -235,8 +235,17 @@ class BigFixClient(object):
                 "waithidden cmd.exe /c reg delete " \
                 "\"{0}\" /f".format(artifact_value)
 
-        relevance = "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"\
-            .format(artifact_value)
+        # strip off the prefix if it exists for current user
+        if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
+            artifact_value = artifact_value.split('\\', 1)[1]
+            key_format = "exists keys \"{0}\" " \
+                         "of current user keys (logged on users) " \
+                         "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        else:
+            key_format = "exists keys \"{0}\" " \
+                         "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
+        relevance = key_format.format(artifact_value)
 
         return self._post_bf_action_query(query, computer_id, "Delete Registry Key {0}".format(artifact_value),
                                                relevance)
