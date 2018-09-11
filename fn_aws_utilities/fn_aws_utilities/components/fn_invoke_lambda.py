@@ -38,16 +38,13 @@ class FunctionComponent(ResilientComponent):
             log.info("lambda_payload: %s", lambda_payload)
 
             if lambda_function_name is None or lambda_function_name == "":
-                yield FunctionError("Invalid function name provided")
+                raise FunctionError("Invalid function name provided")
 
             if lambda_payload is None:
                 lambda_payload = ""
 
             lambda_api = AWSLambda(config.my_aws_access_key_id, config.my_aws_secret_access_key, config.aws_region_name)
             response = lambda_api.invoke_lambda(lambda_function_name, lambda_payload)
-
-            if response == {}:
-                yield FunctionError("Function not found")
 
             payload = response.get("Payload")
             if payload is None:
