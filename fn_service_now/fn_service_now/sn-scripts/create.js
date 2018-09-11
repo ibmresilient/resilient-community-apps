@@ -28,10 +28,12 @@
 	//Function that generates the response body
 	function generate_response_body(record){
 		return {
-			"res_incident_id": req.incident_id,
+			"res_id": req.id,
 			"sn_sys_id": record.getValue('sys_id'),
-			"sn_id": record.getValue('number'),
-			"sn_record_link": record.getLink(false)
+			"sn_ref_id": record.getValue('number'),
+			"sn_record_link": record.getLink(false),
+			"sn_status": 'New',
+			"sn_action": record.getValue('x_261673_resilient_type') + ' Created'
 		};
 	}
 	
