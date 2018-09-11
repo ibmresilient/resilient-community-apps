@@ -13,48 +13,14 @@ class AwsSns(AWSCommon):
         AWSCommon.__init__(self, "sns", aws_access_key_id, aws_secret_access_key, region_name)
         self.topic_name = topic_name
 
-    def create_sms_topic(self):
-        """Create the topic if it doesn't exist, return resource name"""
-        log = logging.getLogger(__name__)
-
-        try:
-            topic = self.aws_client.create_topic(Name=self.topic_name)
-        except Exception as e:
-            log.error(e)
-            raise Exception("Failed to create topic")
-
-        topic_arn = topic.get('TopicArn')  # get its Amazon Resource Name
-        if topic_arn is None:
-            raise FunctionError("Resource name of topic is null.")
-
-        return topic_arn
-
     def send_text_via_sns(self, message, cell_numbers):
-        """Sends a text message to cell_numbers using AWS SNS"""
-        topic_arn = self.create_sms_topic()
         log = logging.getLogger(__name__)
-
-        subscriptions = []
+        results = {}
         for cell_number in cell_numbers:
             try:
-                subscription = self.aws_client.subscribe(
-                    TopicArn=topic_arn,
-                    Endpoint=cell_number,
-                    Protocol="sms",
-                    ReturnSubscriptionArn=True
-                )
-
-                if subscription.get("SubscriptionArn"):  # Grabbing ARN so we can unsubscribe the user later
-                    subscriptions.append(subscription.get("SubscriptionArn"))
+                results[cell_number] = self.aws_client.publish(PhoneNumber=cell_number, Message=message)
             except Exception as e:
-                # An example number would be 19998887777
                 log.error(e)
-                continue  # invalid number
+                log.info('Phone number %s is invalid' % cell_number)
 
-        return_value = self.aws_client.publish(Message=message, TopicArn=topic_arn)
-
-        # We need to unsubscribe everyone so that the next time someone texts to this topic, only cell_numbers gets msg
-        for subscription in subscriptions:
-            self.aws_client.unsubscribe(SubscriptionArn=subscription)
-
-        return return_value
+        return results
