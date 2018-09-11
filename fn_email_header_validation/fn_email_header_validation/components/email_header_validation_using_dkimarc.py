@@ -13,16 +13,6 @@ import dkim
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'email_header_validation_using_dkimarc"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_email_header_validation", {})
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_email_header_validation", {})
-
     @function("email_header_validation_using_dkimarc")
     def _email_header_validation_using_dkimarc_function(self, event, *args, **kwargs):
         """Function: Analyzes the DKIM and ARC headers for an RFC822 formatted email."""
