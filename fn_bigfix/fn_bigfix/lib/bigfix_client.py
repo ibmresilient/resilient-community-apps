@@ -149,26 +149,30 @@ class BigFixClient(object):
         # strip off the prefix if it exists for current user or users
         if key.lower().startswith(("hkcu", "hkey_current_user", "hku", "hkey_users")):
             key = key.split('/', 1)[1]
+            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
+                "of current user keys (logged on users) " \
+                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namekey = "exists values \"{0}\" of keys \"{1}\" " \
+                "of current user keys (logged on users) " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            keyonly = "exists keys \"{0}\" " \
+                "of current user keys (logged on users) " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        else:
+            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
+                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namekey = "exists values \"{0}\" of keys \"{1}\" " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            keyonly = "exists keys \"{0}\" " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
 
         LOG.debug("get_bf_computer_by_registry_key_name_value triggered")
         if name and value:
-            q_id = self.post_bfclientquery(
-                "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" "
-                "of current user keys (logged on users) "
-                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name, value, key))
+            q_id = self.post_bfclientquery(namevaluekey.format(name, value, key))
         elif name:
-            q_id = self.post_bfclientquery(
-                "exists values \"{0}\" of keys \"{1}\" "
-                "of current user keys (logged on users) "
-                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name, key))
+            q_id = self.post_bfclientquery(namekey.format(name, key))
         else:
-            q_id = self.post_bfclientquery(
-                "exists keys \"{0}\" "
-                "of current user keys (logged on users) "
-                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(key))
+            q_id = self.post_bfclientquery(keyonly.format(key))
 
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
