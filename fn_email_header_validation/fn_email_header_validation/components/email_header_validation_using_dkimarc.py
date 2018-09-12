@@ -17,27 +17,6 @@ class FunctionComponent(ResilientComponent):
     def _email_header_validation_using_dkimarc_function(self, event, *args, **kwargs):
         """Function: Analyzes the DKIM and ARC headers for an RFC822 formatted email."""
 
-        def get_content(client, incident_id, attachment_id, artifact_id):
-            entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
-
-            if (attachment_id):
-                return client.get_content(
-                    "/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], attachment_id))
-
-            elif (artifact_id):
-                entity["meta_data"] = client.get(
-                    "/incidents/{0}/artifacts/{1}".format(entity["incident_id"], artifact_id))
-
-                # handle if artifact has attachment
-                if (entity["meta_data"]["attachment"]):
-                    return client.get_content(
-                        "/incidents/{0}/artifacts/{1}/contents".format(entity["incident_id"], artifact_id))
-                else:
-                    raise FunctionError("Artifact has no attachment or supported URI")
-
-            else:
-                raise ValueError('attachment_id AND artifact_id both None')
-
         try:
             # Get the function parameters:
             email_header_validation_target_email = kwargs.get("email_header_validation_target_email")  # text
@@ -90,3 +69,25 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+
+def get_content(client, incident_id, attachment_id, artifact_id):
+    entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
+
+    if attachment_id:
+        return client.get_content(
+            "/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], attachment_id))
+
+    elif artifact_id:
+        entity["meta_data"] = client.get(
+            "/incidents/{0}/artifacts/{1}".format(entity["incident_id"], artifact_id))
+
+        # handle if artifact has attachment
+        if (entity["meta_data"].get("attachment")):
+            return client.get_content(
+                "/incidents/{0}/artifacts/{1}/contents".format(entity["incident_id"], artifact_id))
+        else:
+            raise FunctionError("Artifact has no attachment or supported URI")
+
+    else:
+        raise ValueError('attachment_id AND artifact_id both None')
