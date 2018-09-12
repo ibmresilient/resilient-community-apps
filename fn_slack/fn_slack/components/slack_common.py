@@ -64,12 +64,12 @@ class SlackUtils(object):
         :param user_id_list: A comma separated list of user IDs. Up to 30 users may be listed.
         :return: JSON result
         """
-        # TODO support more ids, users = ",".join(user_id_list)
+        users_id = ",".join(user_id_list)
 
         results = self.slack_client.api_call(
             "conversations.invite",
             channel=slack_id_channel,
-            users=user_id_list
+            users=users_id
         )
         LOG.debug(results)
 
@@ -104,20 +104,20 @@ class SlackUtils(object):
         channel = self.find_channel_by_name(slack_channel)
         return channel.get("id")
 
-    def find_user_ids(self, list_emails):
+    def find_user_ids(self, emails):
         """
         Method will lookup users by email and return a list od user ids.
-        :param list_emails:
+        :param emails: comma-delimited string
         :return: list of user ids
         """
-        #TODO split list emails delimiter ","
-        #user_id_list = [self._lookup_user_by_email(email) for email in list_emails]
-        return self._lookup_user_by_email(list_emails)
+        list_emails = emails.split(",")
+        user_id_list = [self._lookup_user_by_email(email.strip()) for email in list_emails]
+        return user_id_list
 
     def _lookup_user_by_email(self, user_email):
         """
         Retrieve a single user by looking them up by their registered email address.
-        :param email: An email address belonging to a user in the workspace
+        :param user_email: An email address belonging to a user in the workspace
         :return:
         """
         results = self.slack_client.api_call(
@@ -162,7 +162,6 @@ class SlackUtils(object):
         :param is_private: Create a private channel instead of a public one
         :return: slack_channel name and slack_id_channel
         """
-        # TODO add some helper tools info to input param in the function
         results = self.slack_client.api_call(
             "conversations.create",
             name=slack_channel,

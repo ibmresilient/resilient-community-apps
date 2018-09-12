@@ -69,12 +69,11 @@ class FunctionComponent(ResilientComponent):
             slack_details = kwargs.get("slack_details")  # text
             slack_thread_id = kwargs.get("slack_thread_id")  # text
             slack_user_id = kwargs.get("slack_user_id")  # text
-            slack_reply_broadcast = self.get_select_param(kwargs.get("slack_reply_broadcast"))
-
-            slack_markdown = self.get_select_param(kwargs.get("slack_markdwn"))  # select
-            slack_parse = self.get_select_param(kwargs.get("slack_parse"))  # select
-            slack_link_names = self.get_select_param(kwargs.get("slack_link_names"))   # select
-            slack_as_user = self.get_select_param(kwargs.get("slack_as_user"))   # select
+            slack_reply_broadcast = kwargs.get("slack_reply_broadcast") # Boolean
+            slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
+            slack_parse = kwargs.get("slack_parse")  # Boolean
+            slack_link_names = kwargs.get("slack_link_names")   # Boolean
+            slack_as_user = kwargs.get("slack_as_user")   # Boolean
 
             self.log.debug("slack_channel: %s", slack_channel)
             self.log.debug("slack_details: %s", slack_details)
@@ -83,7 +82,7 @@ class FunctionComponent(ResilientComponent):
             self.log.debug("slack_thread_id: %s", slack_thread_id)
             self.log.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
             self.log.debug("slack_parse: %s", slack_parse)
-            self.log.debug("slack_markdwn: %s", slack_markdown)
+            self.log.debug("slack_mrkdwn: %s", slack_mrkdown)
             self.log.debug("slack_link_names: %s", slack_link_names)
             self.log.debug("slack_as_user: %s", slack_as_user)
             self.log.debug("slack_user_id: %s", slack_user_id)
@@ -111,14 +110,17 @@ class FunctionComponent(ResilientComponent):
             results_users_added = slack_client.invite_users_to_channel(slack_id_channel, user_id_list)
 
             if "ok" in results_users_added and results_users_added.get("ok"):
-                yield StatusMessage("Users invited to # {} channel".format(slack_channel))
+                yield StatusMessage("Users invited to #{} channel".format(slack_channel))
+            elif "ok" in results_users_added and not results_users_added.get("ok") \
+                    and results_users_added.get("error") == "already_in_channel":
+                yield StatusMessage("Invited user is already in #{} channel".format(slack_channel))
             else:
                 yield FunctionError("Invite users failed: " + json.dumps(results_users_added))
 
             # post message to the channel
             results_msg_posted = slack_client.slack_post_message(self.resoptions, slack_details, slack_channel,
                                                                  slack_as_user, slack_user_id, slack_reply_broadcast,
-                                                                 slack_parse, slack_link_names, slack_markdown,
+                                                                 slack_parse, slack_link_names, slack_mrkdown,
                                                                  slack_thread_id, def_username)
 
             if "ok" in results_msg_posted and results_msg_posted.get("ok"):

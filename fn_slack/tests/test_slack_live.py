@@ -11,6 +11,7 @@ api_token = os.environ['TEST_RESILIENT_SLACK_API_TOKEN']
 def_username = "Resilient"
 slack_channel = "test-this-channel"
 
+
 class TestSlack(unittest.TestCase):
     # pipenv run python -m unittest discover tests
     url = None
@@ -45,20 +46,21 @@ class TestSlack(unittest.TestCase):
         link_names=slack_link_names,
         mrkdown=slack_markdown,
         thread_ts=slack_thread_id
-        def slack_post_message(log, resoptions, slack_details, slack_channel, slack_as_user, slack_user_id, slack_reply_broadcast,
-                       slack_parse, slack_link_names, slack_markdown, slack_thread_id, api_token, def_username):
+        def slack_post_message(resoptions, slack_details, slack_channel, slack_as_user, slack_user_id, slack_reply_broadcast,
+                       slack_parse, slack_link_names, slack_markdown, slack_thread_id, def_username):
         """
         dataDict = self._buildDataDetails()
 
-        results = slack_post_message(self.log, self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
-                                     True, True, True, None, api_token, def_username)
+        slack_client = SlackUtils(api_token)
+        results = slack_client.slack_post_message(self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
+                                     True, True, True, None, def_username)
 
         self.assertTrue(results['ok'], results)
 
         # send the reply
         thread_id = results['ts']
-        results = slack_post_message(self.log, self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
-                                     True, True, True, thread_id, api_token, def_username)
+        results = slack_client.slack_post_message(self.resoptions, json.dumps(dataDict), slack_channel, True, False, True,
+                                     True, True, True, thread_id, def_username)
 
         self.assertTrue(results['ok'], results)
         self.assertEqual(thread_id, results['message']['thread_ts'])
