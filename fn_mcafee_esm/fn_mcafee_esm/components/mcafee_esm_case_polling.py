@@ -14,10 +14,12 @@ from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers
 from fn_mcafee_esm.components.mcafee_esm_get_list_of_cases import case_get_case_list
 from fn_mcafee_esm.components.mcafee_esm_get_case_detail import case_get_case_detail
 from resilient_circuits.template_functions import environment
+from resilient import SimpleHTTPException
 import resilient_circuits.template_functions as template_functions
 
 
 log = logging.getLogger(__name__)
+ESM_CASE_FIELD_NAME = "mcafee_esm_case_id"
 
 
 class ESM_CasePolling(ResilientComponent):
@@ -55,10 +57,7 @@ class ESM_CasePolling(ResilientComponent):
 
     def esm_polling_thread(self):
         while True:
-            resilient_client = self.rest_client()
             case_list = case_get_case_list(self.options)
-
-            open_incidents = resilient_client.get("/incidents/open")
 
             headers = get_authenticated_headers(self.options["esm_url"], self.options["esm_username"],
                                                 self.options["esm_password"], self.options["trust_cert"])
@@ -66,12 +65,12 @@ class ESM_CasePolling(ResilientComponent):
             # Check cases in incidents
             for case in case_list:
                 # If case is not currently an incident create one
-                if not is_case_incident(case, open_incidents):
+                if len(self._find_resilient_incident_for_req(case["id"])) == 0:
                     incident_payload = self.build_incident_dto(headers, case["id"])
                     self.create_incident(incident_payload)
 
-            # Amount of time (seconds) to wait to check cases again, defaults to 5 mins if not set
-            time.sleep(int(self.options.get("esm_polling_interval", 300)))
+            # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
+            time.sleep(int(self.options.get("esm_polling_interval", 600)))
 
     def build_incident_dto(self, headers, case_id):
         try:
@@ -99,13 +98,56 @@ class ESM_CasePolling(ResilientComponent):
         response = resilient_client.post(uri=uri, payload=payload_dict)
         return response
 
+    # Returns back list of incidents if there is one with the same case ID, else returns empty list
+    def _find_resilient_incident_for_req(self, esm_case_id):
+        r_incidents = []
+        query_uri = "/incidents/query?return_level=partial"
+        query = {
+            'filters': [{
+                'conditions': [
+                    {
+                        'field_name': 'properties.{}'.format(ESM_CASE_FIELD_NAME),
+                        'method': 'equals',
+                        'value': esm_case_id
+                    },
+                    {
+                        'field_name': 'plan_status',
+                        'method': 'equals',
+                        'value': 'A'
+                    }
+                ]
+            }],
+            "sorts": [{
+                "field_name": "create_date",
+                "type": "desc"
+            }]
+        }
+        try:
+            r_incidents = self.rest_client().post(query_uri, query)
+        except SimpleHTTPException:
+            # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+            # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(ESM_CASE_FIELD_NAME)
+            query = {
+                'filters': [{
+                    'conditions': [
+                        {
+                            'field_name': 'properties.{}'.format(ESM_CASE_FIELD_NAME),
+                            'method': 'has_a_value'
+                        },
+                        {
+                            'field_name': 'plan_status',
+                            'method': 'equals',
+                            'value': 'A'
+                        }
+                    ]
+                }]
+            }
+            r_incidents_tmp = self.rest_client().post(query_uri, query)
+            r_incidents = [r_inc for r_inc in r_incidents_tmp
+                           if r_inc["properties"].get(ESM_CASE_FIELD_NAME) == esm_case_id]
 
-def is_case_incident(case, incident_list):
-    exists = filter(lambda incident: str(incident["name"]).startswith(str(case["id"])), incident_list)
-    if len(exists) > 0:
-        return True
-    else:
-        return False
+        return r_incidents
 
 
 # Converts string datetime to milliseconds epoch

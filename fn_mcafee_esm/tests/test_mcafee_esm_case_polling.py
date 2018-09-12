@@ -3,50 +3,10 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import pytest
-from mock import patch
-from resilient_circuits.util import get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
-from test_helper import get_test_config, get_default_test_config, generate_response, string_test_config
-from fn_mcafee_esm.util.helper import check_config, check_status_code, get_authenticated_headers, merge_two_dicts
-from fn_mcafee_esm.components.mcafee_esm_edit_case import case_edit_case_details
-from fn_mcafee_esm.components.mcafee_esm_case_polling import is_case_incident, ds_to_millis
+from fn_mcafee_esm.components.mcafee_esm_case_polling import ds_to_millis
 
 
 class TestMcAfeeCasePolling:
-
-    def test_is_case_incident_yes(self):
-        case = {
-            'id': 1,
-            'openTime': '07/25/2018 13:56:52',
-            'statusId': {
-                'value': 1
-            },
-            'severity': 10,
-            'summary': 'Re-opened'
-        }
-        incident_list = [{'name': 'name1'},
-                         {'name': 'name2'},
-                         {'name': '1name'},]
-        outcome = is_case_incident(case, incident_list)
-
-        assert True is outcome
-
-    def test_is_case_incident_no(self):
-        case = {
-            'id': 1,
-            'openTime': '07/25/2018 13:56:52',
-            'statusId': {
-                'value': 1
-            },
-            'severity': 10,
-            'summary': 'Re-opened'
-        }
-        incident_list = [{'name': 'name1'},
-                         {'name': 'name2'},]
-        outcome = is_case_incident(case, incident_list)
-
-        assert False is outcome
 
     def test_ds_to_millis_good(self):
         ts = ds_to_millis("05/17/2017 17:07:59")

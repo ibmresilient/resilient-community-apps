@@ -70,9 +70,6 @@ class FunctionComponent(ResilientComponent):
             mcafee_esm_case_id = kwargs.get("mcafee_esm_case_id")  # number
             mcafee_esm_edit_case_json = self.get_textarea_param(
                 kwargs.get("mcafee_esm_edit_case_json", '{"caseDetail": {}}'))  # textarea
-            mcafee_esm_case_severity = kwargs.get("mcafee_esm_case_severity")  # number
-            mcafee_esm_case_summary = kwargs.get("mcafee_esm_case_summary")  # text
-            mcafee_esm_case_status = kwargs.get("mcafee_esm_case_status")  # number
 
             log = logging.getLogger(__name__)
             if not mcafee_esm_case_id:
@@ -81,12 +78,6 @@ class FunctionComponent(ResilientComponent):
 
             if mcafee_esm_edit_case_json:
                 log.info("mcafee_esm_edit_case_json: %s", mcafee_esm_edit_case_json)
-            if mcafee_esm_case_severity:
-                log.info("mcafee_esm_case_severity: %s", mcafee_esm_case_severity)
-            if mcafee_esm_case_summary:
-                log.info("mcafee_esm_case_summary: %s", mcafee_esm_case_summary)
-            if mcafee_esm_case_status:
-                log.info("mcafee_esm_case_status: %s", mcafee_esm_case_status)
 
             # Combine details to edit case
             edit_case_dict = dict(caseDetail={})
@@ -106,10 +97,7 @@ class FunctionComponent(ResilientComponent):
                 },
                 "inputs": {
                     "mcafee_esm_edit_case_json": mcafee_esm_edit_case_json,
-                    "mcafee_esm_case_id": mcafee_esm_case_id,
-                    "mcafee_esm_case_severity": mcafee_esm_case_severity,
-                    "mcafee_esm_case_summary": mcafee_esm_case_summary,
-                    "mcafee_esm_case_status": mcafee_esm_case_status
+                    "mcafee_esm_case_id": mcafee_esm_case_id
                 }
             }
 

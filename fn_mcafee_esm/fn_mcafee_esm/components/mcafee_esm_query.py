@@ -90,15 +90,15 @@ class FunctionComponent(ResilientComponent):
                                                               options["esm_password"], options["trust_cert"])
 
             # Get inputs
-            mcafee_esm_qry_event_type = self.get_select_param(
-                kwargs.get("mcafee_esm_qry_event_type", "EVENT"))  # select
+            mcafee_esm_qry_type = self.get_select_param(
+                kwargs.get("mcafee_esm_qry_type", "EVENT"))  # select
             mcafee_esm_qry_config = self.get_textarea_param(kwargs.get("mcafee_esm_qry_config"))  # textarea
 
             # Log inputs
-            if mcafee_esm_qry_event_type:
-                log.info("mcafee_esm_qry_event_type: %s", mcafee_esm_qry_event_type)
+            if mcafee_esm_qry_type:
+                log.info("mcafee_esm_qry_type: %s", mcafee_esm_qry_type)
             else:
-                raise FunctionError("mcafee_esm_qry_event_type needs to be set")
+                raise FunctionError("mcafee_esm_qry_type needs to be set")
             if mcafee_esm_qry_config:
                 log.info("mcafee_esm_qry_config: %s", mcafee_esm_qry_config)
             else:
@@ -117,7 +117,7 @@ class FunctionComponent(ResilientComponent):
             end_time = time.time()
             results = {
                 "inputs": {
-                    "mcafee_esm_qry_event_type": mcafee_esm_qry_event_type,
+                    "mcafee_esm_qry_type": mcafee_esm_qry_type,
                     "mcafee_esm_qry_config": mcafee_esm_qry_config
                 },
                 "metrics": {
