@@ -175,6 +175,26 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
+    def get_permalink(self, channel, thread_id):
+        """
+        Retrieve a permalink URL for a specific extant message
+        :param channel: The ID of the conversation or channel containing the message
+        :param thread_id: A message's ts value, uniquely identifying it within a channel
+        :return:
+        """
+        results = self.slack_client.api_call(
+            "chat.getPermalink",
+            channel=channel,
+            message_ts=thread_id
+        )
+        LOG.debug(results)
+
+        if all(key in results for key in ("ok", "permalink")) and results.get("ok"):
+            return results.get("permalink")
+
+        else:
+            raise ValueError("Slack error response: " + results.get("error", ""))
+
 
 def build_payload(dataDict, resoptions):
     """

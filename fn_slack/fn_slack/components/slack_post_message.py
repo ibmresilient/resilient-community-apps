@@ -103,19 +103,20 @@ class FunctionComponent(ResilientComponent):
             if not slack_id_channel:
                 slack_id_channel = slack_client.find_id_channel_by_name(slack_channel)
 
-            # find user id based on their emails
-            user_id_list = slack_client.find_user_ids(slack_participant_emails)
+            if slack_participant_emails:
+                # find user id based on their emails, #FIXME verify if they're already members of this channel or try to add them again?
+                user_id_list = slack_client.find_user_ids(slack_participant_emails)
 
-            # invite users to a channel
-            results_users_added = slack_client.invite_users_to_channel(slack_id_channel, user_id_list)
+                # invite users to a channel
+                results_users_added = slack_client.invite_users_to_channel(slack_id_channel, user_id_list)
 
-            if "ok" in results_users_added and results_users_added.get("ok"):
-                yield StatusMessage("Users invited to #{} channel".format(slack_channel))
-            elif "ok" in results_users_added and not results_users_added.get("ok") \
-                    and results_users_added.get("error") == "already_in_channel":
-                yield StatusMessage("Invited user is already in #{} channel".format(slack_channel))
-            else:
-                yield FunctionError("Invite users failed: " + json.dumps(results_users_added))
+                if "ok" in results_users_added and results_users_added.get("ok"):
+                    yield StatusMessage("Users invited to #{} channel".format(slack_channel))
+                elif "ok" in results_users_added and not results_users_added.get("ok") \
+                        and results_users_added.get("error") == "already_in_channel":
+                    yield StatusMessage("Invited user is already in #{} channel".format(slack_channel))
+                else:
+                    yield FunctionError("Invite users failed: " + json.dumps(results_users_added))
 
             # post message to the channel
             results_msg_posted = slack_client.slack_post_message(self.resoptions, slack_details, slack_channel,
@@ -128,9 +129,15 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield FunctionError("Message add failed: "+json.dumps(results_msg_posted))
 
+            # generate a permalink URL to join this conversation
+            conversation_url = slack_client.get_permalink(slack_id_channel, results_msg_posted.get("ts"))
+
+            results = {"channel": slack_channel,
+                       "ts": results_msg_posted.get("ts"),
+                       "conversation_url": conversation_url}
+
             # Produce a FunctionResult with the results
-            yield FunctionResult(results_msg_posted)
+            yield FunctionResult(results)
         except Exception as err:
             self.log.error(err)
             yield FunctionError()
-
