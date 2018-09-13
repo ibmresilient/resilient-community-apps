@@ -1,0 +1,3 @@
+include README.md
+include fn_machine_learning/util/*
+include fn_machine_learning/LICENSE

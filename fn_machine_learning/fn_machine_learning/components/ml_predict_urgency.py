@@ -1,0 +1,68 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+#
+"""Function implementation"""
+
+import logging
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_machine_learning.lib.ml_model_common import MlModelCommon
+import numpy
+
+
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'ml_predict_urgency"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("fn_machine_learning", {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_machine_learning", {})
+
+    @function("ml_predict_urgency")
+    def _ml_predict_urgency_function(self, event, *args, **kwargs):
+        """Function: """
+        try:
+            # Get the function parameters:
+            ml_incident_id = kwargs.get("ml_incident_id")  # number
+
+            log = logging.getLogger(__name__)
+            log.info("ml_incident_id: %s", ml_incident_id)
+
+
+            yield StatusMessage("starting...")
+            inc = self.rest_client().get("/incidents/{}".format(str(ml_incident_id)))
+            log.debug("Incident {id}: {dic}".format(id=str(ml_incident_id),
+                                                    dic=inc))
+
+            active_model = self.opts["machine_learning_predict"].get("active_model", None)
+            if active_model:
+                model = MlModelCommon.load_from_file(active_model)
+            else:
+                raise Exception("active_model not defined in app.config")
+
+            prediction = ""
+            if model:
+                predictions = model.predict_result(inc)
+                if isinstance(predictions, numpy.ndarray):
+                    prediction = str(predictions[0])
+                else:
+                    prediction = str(model.predict_result(inc))
+            else:
+                raise Exception("Failed to load model file: {}".format(active_model))
+
+            yield StatusMessage("done...")
+
+            results = {
+                "prediction": prediction
+            }
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception:
+            yield FunctionError()
