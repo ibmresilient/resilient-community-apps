@@ -22,42 +22,57 @@ else:
     from email.utils import COMMASPACE, formatdate
     from email.encoders import encode_base64
 
-def get_user_id (client, log, uid):
+def get_user_id (client, uid):
+    """Get user id"""
     user_json = client.get('/users/{}'.format(uid))
     return user_json['id']
 
-# Get email address of the user ID.
 def get_email_addr(client, log, uid):
+    """ Get email address of the user ID."""
     user_json = client.get('/users/{}'.format(uid))
     log.info("Got {} from uid {}".format(user_json['email'], uid))
     return user_json['email']
 
-# Get the member and owner emails associated with an incident.
 def get_incident_members_email_addrs(client, log, incident_id):
+    """Get the member and owner emails associated with an incident."""
     email_addrs = []
 
     # Get the member ids from the incident then lookup their email
     inc_members_json = client.get('/incidents/{}/members'.format(incident_id))
     for member in inc_members_json['members']:
-        user_id = get_user_id(client, log, member)
+        user_id = get_user_id(client, member)
         email_addrs.append(get_email_addr(client, log, user_id))
 
     # Get the owner id then their email
     inc_owners_json = client.get('/incidents/{}'.format(incident_id))
     inc_owner_id = inc_owners_json['owner_id']
-    owner_id = get_user_id(client, log, inc_owner_id)
+    owner_id = get_user_id(client, inc_owner_id)
     email_addrs.append(get_email_addr(client, log, owner_id))
 
     return email_addrs
 
+def parse_email_addresses(addresses):
+    if not addresses:
+        return []
+    address_list = addresses.split(",")
+    for item in address_list:
+        item.strip()
+
+def get_email_addresses(client, log, incident_id, extra_email_addresses):
+    """Get email addresses of incident members, incident owner and extra email
+    addresses entered by the user."""
+    incident_email_addr = get_incident_members_email_addrs(client, log, incident_id)
+    extra_addr = parse_email_addresses(extra_email_addresses)
+
+    all_attendees = list(set(incident_email_addr).union(set(extra_addr)))
+    return all_attendees
 
 def build_email_message(calendar_invite_datetime, calendar_invite_subject, calendar_invite_description, nickname, e_login, from_string, attendees):
+    """Build the email file to be sent(ICS file)."""
     CRLF = "\r\n"
 
     organizer = "ORGANIZER;CN={}:mailto:first{}{}".format(nickname, CRLF, e_login)
     meeting_time = datetime.fromtimestamp(calendar_invite_datetime/1000)
-    ts = calendar_invite_datetime/1000
-    utc_meeting_time = datetime.utcfromtimestamp(ts)
 
     ddtstart = meeting_time
     duration = timedelta(hours=1)
@@ -105,8 +120,8 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
 
     return msg.as_string()
 
-# Open the SMTP host port and send the email
 def send_email(host, port, from_email, e_login, e_password, attendees_email_addr, msg_string):
+    """Open the SMTP host port and send the email"""
     mailServer = smtplib.SMTP(host, port)
     mailServer.ehlo()
     mailServer.starttls()

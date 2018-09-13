@@ -9,7 +9,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from fn_calendar_invite.lib.calendar_invite_util import get_incident_members_email_addrs, build_email_message, send_email
+from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
 
 CONFIG_DATA_SECTION = 'fn_calendar_invite'
 
@@ -31,15 +31,17 @@ class FunctionComponent(ResilientComponent):
         """Function: A function to invite people to a meeting via a calendar invite"""
         try:
             # Get the calendar meeting information input
-            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")  # datetimepicker
-            calendar_invite_subject = kwargs.get("calendar_invite_subject")  # text
-            calendar_invite_description = kwargs.get("calendar_invite_description")  # text
+            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")
+            calendar_invite_subject = kwargs.get("calendar_invite_subject")
+            calendar_invite_description = kwargs.get("calendar_invite_description")
+            calendar_invite_extra_email_addr = kwargs.get("calendar_invite_extra_email_addr")
             incident_id = kwargs.get("calendar_invite_incident_id")
 
             log = logging.getLogger(__name__)
             log.info("calendar_invite_datetime: %s", calendar_invite_datetime)
             log.info("calendar_invite_subject: %s", calendar_invite_subject)
             log.info("calendar_invite_description: %s", calendar_invite_description)
+            log.info("calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
 
             # Email sender information
             host = self.email_host
@@ -50,28 +52,32 @@ class FunctionComponent(ResilientComponent):
 
             # Get email addresses of the members and owner of the incident.
             client = self.rest_client()
-            attendees = get_incident_members_email_addrs(client, log, incident_id)
+            attendees = get_email_addresses(client, log, incident_id, calendar_invite_extra_email_addr)
 
             yield StatusMessage("Sending Emails to {}".format(attendees))
 
             # Build the email message string to be sent.
-            from_string = "{} <{}>".format(nickname, e_login)
+            sender = "{} <{}>".format(nickname, e_login)
             email_message_string = build_email_message(calendar_invite_datetime,
                                                        calendar_invite_subject,
                                                        calendar_invite_description,
                                                        nickname,
                                                        e_login,
-                                                       from_string,
+                                                       sender,
                                                        attendees)
 
             yield StatusMessage("Connecting to Mail Server")
 
             # Connect to SMTP server and send the message.
-            send_email(host, port, from_string, e_login, e_password, attendees, email_message_string)
+            send_email(host, port, sender, e_login, e_password, attendees, email_message_string)
 
             yield StatusMessage("Send Mail - Complete")
 
-            results = {}
+            results = {"recipient": attendees,
+                "sender": sender,
+                "subject": calendar_invite_subject,
+                "body": email_message_string}
+
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
