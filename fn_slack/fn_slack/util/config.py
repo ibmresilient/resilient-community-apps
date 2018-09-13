@@ -11,7 +11,7 @@ def config_section_data():
     """
     config_data = u"""[fn_slack]
 api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
-# When as_user=False, username represents the submission author
+# When as_user=False, username represents the default submission author, you can override the username on the Workflow
 username=Resilient"""
 
     return config_data

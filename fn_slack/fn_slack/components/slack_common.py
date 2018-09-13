@@ -14,23 +14,37 @@ LOG = logging.getLogger(__name__)
 class SlackUtils(object):
 
     slack_client = None
+    channel = None
 
-    def __init__(self, api_token):
+    def __init__(self, api_token, slack_channel_name):
         self.slack_client = SlackClient(api_token)
+        self.channel = self.find_channel_by_name(slack_channel_name)
 
-    def slack_post_message(self, resoptions, slack_details, slack_channel, slack_as_user, slack_user_id, slack_reply_broadcast,
-                           slack_parse, slack_link_names, slack_markdown, slack_thread_id, def_username):
+    def get_channel(self):
+        """
+        Return instance variable channel.
+        :return: channel
+        """
+        return self.channel
+
+    def set_channel(self, channel):
+        """
+        Set the instance variable channel.
+        :param channel:
+        """
+        self.channel = channel
+
+    def slack_post_message(self, resoptions, slack_details, slack_as_user, slack_username, slack_reply_broadcast,
+                           slack_parse, slack_markdown, slack_thread_id, def_username):
         """
         Process the slack post
         :param resoptions: app.config resilient section
         :param slack_details: json structure for how to structure the payload to slack
         See slack API for the use of these variables
-        :param slack_channel:
         :param slack_as_user:
-        :param slack_user_id:
+        :param slack_username:
         :param slack_reply_broadcast:
         :param slack_parse:
-        :param slack_link_names:
         :param slack_markdown:
         :param slack_thread_id:
         :param def_username - name to use for who posted the message
@@ -43,13 +57,13 @@ class SlackUtils(object):
         # start processing
         results = self.slack_client.api_call(
             "chat.postMessage",
-            channel=slack_channel,
+            channel=self.channel.get("id"),
             text=payload,
             as_user=slack_as_user,
-            username=slack_user_id if slack_user_id else def_username,
+            username=slack_username if slack_username else def_username,
             reply_broadcast=slack_reply_broadcast,
             parse=slack_parse,
-            link_names=slack_link_names,
+            link_names=1, # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
             mrkdown=slack_markdown,
             thread_ts=slack_thread_id
         )
@@ -57,10 +71,9 @@ class SlackUtils(object):
 
         return results
 
-    def invite_users_to_channel(self, slack_id_channel, user_id_list):
+    def invite_users_to_channel(self, user_id_list):
         """
         Method invites 1-30 users to a public or private channel.
-        :param slack_id_channel: The ID of the public or private channel to invite user(s) to.
         :param user_id_list: A comma separated list of user IDs. Up to 30 users may be listed.
         :return: JSON result
         """
@@ -68,41 +81,26 @@ class SlackUtils(object):
 
         results = self.slack_client.api_call(
             "conversations.invite",
-            channel=slack_id_channel,
+            channel=self.channel.get("id"),
             users=users_id
         )
         LOG.debug(results)
 
         return results
 
-    def find_channel_by_name(self, slack_channel):
+    def find_channel_by_name(self, slack_channel_name):
         """
         Method verifies if suggested slack channel already exists and returns the channel object.
-        :param slack_channel: Name of the public or private channel
+        :param slack_channel_name: Name of the public or private channel
         :return: channel object
         """
-        # TODO check if it is a private channel
-        # channel.get("is_channel") is False & channel.get("is_private") is True -> private channel
-
-        # TODO check if it is a private channel
-        # channel.get("is_channel") is True & channel.get("is_private") is False -> public channel
-
         all_channels = self._slack_find_channels()
 
         for channel in all_channels:
-            if slack_channel == channel.get("name"):
+            if slack_channel_name == channel.get("name"):
                 return channel
 
         return None
-
-    def find_id_channel_by_name(self, slack_channel):
-        """
-        Find id channel by channel name.
-        :param slack_channel:
-        :return: slack_id_channel
-        """
-        channel = self.find_channel_by_name(slack_channel)
-        return channel.get("id")
 
     def find_user_ids(self, emails):
         """
@@ -132,6 +130,19 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
+    def is_channel_private(self):
+        """
+        Verify if channel is private.
+        channel.get("is_channel") is True & channel.get("is_private") is False -> public channel
+        channel.get("is_channel") is False & channel.get("is_private") is True -> private channel
+        :return:
+        """
+        if self.channel and not self.channel.get("is_channel") and self.channel.get("is_private"):
+            return True
+
+        else:
+            return False
+
     def _slack_find_channels(self):
         """
         Method returns a list of all public or private channels in a workspace.
@@ -152,39 +163,39 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def slack_create_channel(self, slack_channel, is_private):
+    def slack_create_channel(self, slack_channel_name, is_private):
         """
         Method creates a public or private channel.
         Using Conversations API to access anything channel-like (private, public, direct, etc).
         Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be
         21 characters or less. Slack validates the submitted channel name and modifies it to meet the above criteria.
-        :param slack_channel: Name of the public or private channel to create
+        Since the channel name can get modified use channel_id instead.
+        :param slack_channel_name: Name of the public or private channel to create
         :param is_private: Create a private channel instead of a public one
-        :return: slack_channel name and slack_id_channel
+        :return: channel dict
         """
         results = self.slack_client.api_call(
             "conversations.create",
-            name=slack_channel,
+            name=slack_channel_name,
             is_private=is_private
         )
         LOG.debug(results)
 
         if all(key in results for key in ("ok", "channel")) and results.get("ok"):
-            return results.get("channel").get("name"), results.get("channel").get("id")
+            return results.get("channel")
 
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def get_permalink(self, channel, thread_id):
+    def get_permalink(self, thread_id):
         """
         Retrieve a permalink URL for a specific extant message
-        :param channel: The ID of the conversation or channel containing the message
         :param thread_id: A message's ts value, uniquely identifying it within a channel
         :return:
         """
         results = self.slack_client.api_call(
             "chat.getPermalink",
-            channel=channel,
+            channel=self.channel.get("id"),
             message_ts=thread_id
         )
         LOG.debug(results)

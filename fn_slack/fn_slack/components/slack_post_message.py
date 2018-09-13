@@ -54,8 +54,8 @@ class FunctionComponent(ResilientComponent):
           "Start Date": {"type": "datetime", "data": 158949393}
         }
 
-        The remaining input fields are passed to the slack api call to control the message post. Refer to the slack api documentated
-        on how to use the parameters
+        The remaining input fields are passed to the slack api call to control the message post.
+        Refer to the slack api documentation on how to use the parameters.
         """
         try:
             # validate input
@@ -63,19 +63,18 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['api_token', 'username'], self.options)
 
             # Get the function parameters:
-            slack_channel = kwargs.get("slack_channel")  # text
+            slack_channel_name = kwargs.get("slack_channel")  # text
             slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean
             slack_participant_emails = kwargs.get("slack_participant_emails")  # text
             slack_details = kwargs.get("slack_details")  # text
             slack_thread_id = kwargs.get("slack_thread_id")  # text
-            slack_user_id = kwargs.get("slack_user_id")  # text
             slack_reply_broadcast = kwargs.get("slack_reply_broadcast") # Boolean
             slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
             slack_parse = kwargs.get("slack_parse")  # Boolean
-            slack_link_names = kwargs.get("slack_link_names")   # Boolean
             slack_as_user = kwargs.get("slack_as_user")   # Boolean
+            slack_username = kwargs.get("slack_username")  # text
 
-            self.log.debug("slack_channel: %s", slack_channel)
+            self.log.debug("slack_channel: %s", slack_channel_name)
             self.log.debug("slack_details: %s", slack_details)
             self.log.debug("slack_is_private: %s", slack_details)
             self.log.debug("slack_participant_emails: %s", slack_participant_emails)
@@ -83,56 +82,68 @@ class FunctionComponent(ResilientComponent):
             self.log.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
             self.log.debug("slack_parse: %s", slack_parse)
             self.log.debug("slack_mrkdwn: %s", slack_mrkdown)
-            self.log.debug("slack_link_names: %s", slack_link_names)
             self.log.debug("slack_as_user: %s", slack_as_user)
-            self.log.debug("slack_user_id: %s", slack_user_id)
+            self.log.debug("slack_username: %s", slack_username)
 
             # configuration specific slack parameters
             api_token = self.options['api_token']
             def_username = self.options['username']
 
             # find or create a new channel
-            slack_client = slack_common.SlackUtils(api_token)
-            slack_id_channel = None
+            slack_client = slack_common.SlackUtils(api_token, slack_channel_name)
 
-            if not slack_client.find_channel_by_name(slack_channel):
-                # rewrite the slack_channel name just in case Slack validation modifies the submitted channel name
-                slack_channel, slack_id_channel = slack_client.slack_create_channel(slack_channel, slack_is_private)
+            if slack_client.get_channel():
+                # validate if your input param 'slack_is_private' matches channel's type, if not stop the workflow
+                if slack_is_private and not slack_client.is_channel_private():
+                    yield FunctionError("The existing channel #{} you are posting to is a public channel. "
+                                        "To post to this channel please change the input parameter "
+                                        "'slack_is_channel_private' "
+                                        "to 'No' or create a new private channel.".format(slack_channel_name))
+                elif not slack_is_private and slack_client.is_channel_private():
+                    yield FunctionError("The existing channel #{} you are posting to is a private channel. "
+                                        "To post to this channel please change the input parameter "
+                                        "'slack_is_channel_private' "
+                                        "to 'Yes' or create a new public channel.".format(slack_channel_name))
 
-            # find id channel, based on the channel name
-            if not slack_id_channel:
-                slack_id_channel = slack_client.find_id_channel_by_name(slack_channel)
+            else:
+                # create a new channel
+                new_channel = slack_client.slack_create_channel(slack_channel_name, slack_is_private)
+                if not new_channel:
+                    yield FunctionError("There was an error creating the channel")
+
+                slack_client.set_channel(new_channel)
+                # rewrite slack_channel_name just in case Slack validation modifies the submitted channel name
+                slack_channel_name = new_channel.get("name")
 
             if slack_participant_emails:
-                # find user id based on their emails, #FIXME verify if they're already members of this channel or try to add them again?
+                # find user ids based on their emails
                 user_id_list = slack_client.find_user_ids(slack_participant_emails)
 
                 # invite users to a channel
-                results_users_added = slack_client.invite_users_to_channel(slack_id_channel, user_id_list)
+                results_users_added = slack_client.invite_users_to_channel(user_id_list)
 
                 if "ok" in results_users_added and results_users_added.get("ok"):
-                    yield StatusMessage("Users invited to #{} channel".format(slack_channel))
+                    yield StatusMessage("Users invited to #{} channel".format(slack_channel_name))
                 elif "ok" in results_users_added and not results_users_added.get("ok") \
                         and results_users_added.get("error") == "already_in_channel":
-                    yield StatusMessage("Invited user is already in #{} channel".format(slack_channel))
+                    yield StatusMessage("Invited user is already in #{} channel".format(slack_channel_name))
                 else:
                     yield FunctionError("Invite users failed: " + json.dumps(results_users_added))
 
             # post message to the channel
-            results_msg_posted = slack_client.slack_post_message(self.resoptions, slack_details, slack_channel,
-                                                                 slack_as_user, slack_user_id, slack_reply_broadcast,
-                                                                 slack_parse, slack_link_names, slack_mrkdown,
-                                                                 slack_thread_id, def_username)
+            results_msg_posted = slack_client.slack_post_message(self.resoptions, slack_details, slack_as_user,
+                                                                 slack_username, slack_reply_broadcast, slack_parse,
+                                                                 slack_mrkdown, slack_thread_id, def_username)
 
             if "ok" in results_msg_posted and results_msg_posted.get("ok"):
-                yield StatusMessage("Message added to slack")
+                yield StatusMessage("Message added to slack.")
             else:
                 yield FunctionError("Message add failed: "+json.dumps(results_msg_posted))
 
             # generate a permalink URL to join this conversation
-            conversation_url = slack_client.get_permalink(slack_id_channel, results_msg_posted.get("ts"))
+            conversation_url = slack_client.get_permalink(results_msg_posted.get("ts"))
 
-            results = {"channel": slack_channel,
+            results = {"channel": slack_channel_name,
                        "ts": results_msg_posted.get("ts"),
                        "conversation_url": conversation_url}
 
