@@ -6,7 +6,7 @@ This function package provides the following feature to be used in a workflow:
 
 Make a prediction of one field of a given incident, using pre-built machine model
 
-In addition, this package contains a web component used to build a machine model
+In addition, this package contains a command line tool used to build a machine model
 
 ## System Requirements
 - Resilient Server version 30 or later

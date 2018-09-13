@@ -36,14 +36,29 @@ SAMPLE_CSV_FILE="resilient_incidents.csv"
 
 
 class OptParser(resilient.ArgumentParser):
+    """
+    This is a subclass of resilient.ArgumentParser. resilient.ArgumentParser takes care of both
+    1. Reading app.config
+    2. Validating required command line arguments.
+    Here we just want app.config, we are parsing/validating commandline arguments in our main function.
+    """
     def __init__(self, config_file=None):
         self.config_file = config_file or resilient.get_config_file()
         super(OptParser, self).__init__(config_file=self.config_file)
+        #
+        #   Note this is a trick used by resilient-circuits. resilient.ArgumentParser will
+        #   validate the arguments of the command line. We don't want that, so we
+        #   erase them before we call parse_args(). So parse_args() only
+        #   reads from app.config
+        #
         sys.argv = sys.argv[0:1]
         self.opts = self.parse_args()
 
         if self.config:
             for section in self.config.sections():
+                #
+                # Handle sections other than [resilient] in app.config
+                #
                 items = dict((item.lower(), self.config.get(section, item)) for item in self.config.options(section))
                 self.opts.update({section: items})
 
@@ -51,7 +66,20 @@ class OptParser(resilient.ArgumentParser):
 
 
 def main():
-
+    """
+    We support 3 subcommands: build, rebuild, view.
+    1. build: build a new model
+        -o  Required flag, pointing to a file we can save the model to
+        -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
+            download incidents and use them as samples.
+        Example: res-ml build -o logReg_adaboost.ml
+    2. rebuild: Rebuild a saved model
+        -i  Required flag, file of saved model to rebuild
+        -c  Optional falg, same as -c of build above
+    3. view: show summary of a saved model
+        -i  Required flag, pointing to a saved model file
+    :return:
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--verbose", help="Print debug output", action="store_true")
 
@@ -127,6 +155,14 @@ def main():
 
 
 def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
+    """
+    Build a model
+    :param model_file: Save built model to this file
+    :param opt_parser: information from app.config
+    :param csv_file: CSV file with samples
+    :param rebuilding: True if rebuilding saved model
+    :return:
+    """
     res_opt = opt_parser.opts.get(RESILIENT_SECTION)
     ml_opt = opt_parser.opts.get(MACHINE_LEARNING_SECTION)
 

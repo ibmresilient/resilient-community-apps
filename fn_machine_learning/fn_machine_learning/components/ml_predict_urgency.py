@@ -26,7 +26,16 @@ class FunctionComponent(ResilientComponent):
 
     @function("ml_predict_urgency")
     def _ml_predict_urgency_function(self, event, *args, **kwargs):
-        """Function: """
+        """
+        This function takes an input of incident id. It will
+            1. Retrieve the corresponding incident from Resilient server
+            2. Read the active machine model
+            3. Use the model to make a prediction for this incident.
+        :param event:
+        :param args:
+        :param kwargs:
+        :return:
+        """
         try:
             # Get the function parameters:
             ml_incident_id = kwargs.get("ml_incident_id")  # number

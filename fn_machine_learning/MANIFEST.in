@@ -1,3 +1,5 @@
 include README.md
 include fn_machine_learning/util/*
+include doc/*
 include fn_machine_learning/LICENSE
+
