@@ -52,18 +52,28 @@ def get_incident_members_email_addrs(client, log, incident_id):
     return email_addrs
 
 def parse_email_addresses(addresses):
+    """Parse the text field entered by the user containing the extra email addresses"""
+    # If none are entered return empty list
     if not addresses:
         return []
+
+    # Parse on comma and remove white space
     address_list = addresses.split(",")
     for item in address_list:
         item.strip()
 
+    return address_list
+
 def get_email_addresses(client, log, incident_id, extra_email_addresses):
     """Get email addresses of incident members, incident owner and extra email
     addresses entered by the user."""
+    # Get the email addresses of members associated with the incident.
     incident_email_addr = get_incident_members_email_addrs(client, log, incident_id)
+
+    # Get the extra email addresses entered by the user
     extra_addr = parse_email_addresses(extra_email_addresses)
 
+    # Combine the two lists and remove duplicates by taking union of 2 sets.
     all_attendees = list(set(incident_email_addr).union(set(extra_addr)))
     return all_attendees
 

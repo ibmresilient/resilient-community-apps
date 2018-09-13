@@ -78,7 +78,6 @@ class FunctionComponent(ResilientComponent):
                 "subject": calendar_invite_subject,
                 "body": email_message_string}
 
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
