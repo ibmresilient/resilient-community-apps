@@ -14,25 +14,6 @@ except ImportError:
 
 class ResilientHelper:
 
-  class FunctionPayload:
-    """Class that contains the payload sent back to UI and available in the post-processing script"""
-    def __init__(self, inputs):
-      self.success = True
-      self.inputs = {}
-      self.row_id = None
-      self.res_id = None
-      self.sn_ref_id = None
-      self.sn_status = None
-      self.sn_action = None
-      self.sn_record_link = None
-
-      for input in inputs:
-        self.inputs[input] = inputs[input]
-    
-    def asDict(self):
-      """Return this class as a Dictionary"""
-      return self.__dict__
-
   # Define a Task that gets sent to ServiceNow
   class Task:
     """Class that repersents a Resilient Task. See API notes for more"""
@@ -129,12 +110,10 @@ class ResilientHelper:
     """If incident_id and task_id are valid, returns "RES-1001-2002"
       Else if task_id is None, returns "RES-1001" """
 
-    id = "RES-{0}".format(str(incident_id))
-
+    id = ["RES", str(incident_id)]
     if task_id is not None:
-      id += "-{0}".format(str(task_id))
-
-    return id
+      id.append(str(task_id))
+    return "-".join(id)
 
   def generate_res_link(self, incident_id, host, task_id=None):
     """Function that generates a https URL to the incident or task"""
@@ -325,3 +304,48 @@ class ResilientHelper:
       "incident_date_discovered",
       "incident_type"
       ]
+
+class ExternalTicketStatusDatatable():
+  """TODO"""
+  def __init__(self, res_client, incident_id):
+    self.res_client = res_client
+    self.incident_id = incident_id
+    self.api_name = "sn_external_ticket_status"
+    self.data = None
+    self.rows = None
+
+  def get_data(self):
+    uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
+    try:
+      self.data = self.res_client.get(uri)
+      self.rows = self.data["rows"]
+    except Exception:
+      raise ValueError("Failed to get sn_external_ticket_status Datatable")
+
+  def get_sn_ref_ids(self, incident_id, task_id=None):
+    """Returns list of each related sn_ref_id"""
+    id = ["RES", str(incident_id)]
+    
+    if task_id is not None:
+      id.append(str(task_id))
+
+    res_id_to_search = "-".join(id)
+
+    ids_found = []
+    
+    for row in self.rows:
+      cells = row["cells"]
+      res_id = str(cells["res_id"]["value"])
+      
+      if task_id is not None:
+        if(res_id_to_search == res_id):
+          ids_found.append(str(cells["sn_ref_id"]["value"]))
+
+      else:
+        if(res_id_to_search in res_id):
+          ids_found.append(str(cells["sn_ref_id"]["value"]))
+    
+    return ids_found
+
+  def asDict(self):
+    return self.__dict__
