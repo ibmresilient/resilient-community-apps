@@ -16,7 +16,7 @@ setup(
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.2.2',
-        'pywinrm>=0.3.0'
+        'pywinrm>=0.3.0',
         'weasyprint',
         'json2html',
         'lxml'
