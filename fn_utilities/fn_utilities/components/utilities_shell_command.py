@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Runs a shell command."""
         try:
             # Get the function parameters:
-            shell_command = kwargs.get('shell_command').lower()  # text
+            shell_command = kwargs.get('shell_command')  # text
             shell_remote = kwargs.get("shell_remote")  # boolean
             shell_param1 = kwargs.get("shell_param1")  # text
             shell_param2 = kwargs.get("shell_param2")  # text
@@ -47,6 +47,10 @@ class FunctionComponent(ResilientComponent):
             log.info("shell_param1: %s", shell_param1)
             log.info("shell_param2: %s", shell_param2)
             log.info("shell_param3: %s", shell_param3)
+
+            # Options keys are lowercase, so the shell command name needs to be lowercase
+            if shell_command:
+                shell_command = shell_command.lower()
 
             # Escape the input parameters
             escaping = self.options.get("shell_escaping", "sh")
@@ -101,8 +105,21 @@ class FunctionComponent(ResilientComponent):
                         raise ValueError("The specified file must be have extension %s but %s was specified" %
                                          (str(self.options.get('remote_powershell_extensions')), extension))
 
-                    shell_command_base = shell_command_base[1:-1].strip() + \
-                                         ' "{{shell_param1}}" "{{shell_param2}}" "{{shell_param3}}"'
+                    # Format shell parameters
+                    shell_command_base = shell_command_base[1:-1].strip()
+                    if shell_param1:
+                        shell_command_base = shell_command_base + ' "{{shell_param1}}"'
+                    else:
+                        shell_command_base = shell_command_base + ' $null'
+                    if shell_param2:
+                        shell_command_base = shell_command_base + ' "{{shell_param2}}"'
+                    else:
+                        shell_command_base = shell_command_base + ' $null'
+                    if shell_param3:
+                        shell_command_base = shell_command_base + ' "{{shell_param3}}"'
+                    else:
+                        shell_command_base = shell_command_base + ' $null'
+
                 else:
                     raise ValueError("A remote command '%s' was specified but shell_remote was set to False"
                                      % shell_command)
