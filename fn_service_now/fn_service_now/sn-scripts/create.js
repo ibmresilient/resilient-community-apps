@@ -90,6 +90,12 @@
 		
 		//Set extra_info values
 		//TODO
+		/*
+		if(req.extra_info.type == "firewall_request"){
+			extra_info = req.extra_info
+			record.setValue("ip_to_block", extra_info.ip_to_block)
+		}
+		*/
 
 		//Insert the record
 		record.insert();
