@@ -188,12 +188,19 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         resilient_client = resilient.SimpleClient(**args)
         session = resilient_client.connect(email, password)
         max_count = None
-        if opt_parser.getopt(RESILIENT_SECTION, "max_count"):
-            max_count = int(opt_parser.getopt(RESILIENT_SECTION, "max_count"))
+        if opt_parser.getopt(MACHINE_LEARNING_SECTION, "max_count"):
+            max_count = int(opt_parser.getopt(MACHINE_LEARNING_SECTION, "max_count"))
 
-        resilient_utils.get_incidents(res_client=resilient_client,
-                                      filename=SAMPLE_CSV_FILE,
-                                      max_count=max_count)
+        # get_incidents is going to download all the incidents using this resilient_client
+        # The json result will be converted into CSV format, and then save into
+        # SAMPLE_CSV_FILE.
+        # The optional max_count controls how many samples to process. The conversion from
+        # json to CSV will stop once reaches this limit.
+        num_inc = resilient_utils.get_incidents(res_client=resilient_client,
+                                                filename=SAMPLE_CSV_FILE,
+                                                max_count=max_count)
+        LOG.info("Saved {} samples into {}".format(num_inc, SAMPLE_CSV_FILE))
+
         csv_file = SAMPLE_CSV_FILE
     elif not csv_file:
         LOG.error("You need to specify a CSV file for samples")

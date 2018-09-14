@@ -4,9 +4,10 @@
 
 This function package provides the following feature to be used in a workflow:
 
-Make a prediction of one field of a given incident, using pre-built machine model
+Make a prediction of one field of a given incident, using pre-built machine model.
 
-In addition, this package contains a command line tool used to build a machine model
+In addition, this package contains a command line tool used to build a machine model. Please refer to the User Guide doc for
+instructions on building the model and running predictions.
 
 ## System Requirements
 - Resilient Server version 30 or later
@@ -29,9 +30,6 @@ The app.config needs the following configuration values, in addition to those in
 connecting to your Resilient platform:
 
 ```
-[resilient]
-# (Optional) Maximum number of samples to process
-# max_count = 10000
 [machine_learning_predict]
 # saved model to be used for prediction
 active_model=file_path
@@ -47,7 +45,8 @@ algorithm=Logistic Regression
 method=None
 # split samples
 split=0.5
-
+# (Optional) Maximum number of samples to process
+# max_count = 10000
 
 ```
 
