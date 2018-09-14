@@ -31,7 +31,7 @@ connecting to your Resilient platform:
 ```
 [resilient]
 # (Optional) Maximum number of samples to process
-# max_samples = 10000
+# max_count = 10000
 [machine_learning_predict]
 # saved model to be used for prediction
 active_model=file_path
