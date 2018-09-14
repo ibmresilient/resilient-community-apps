@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_edit_case")
     def _mcafee_esm_edit_case_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Calls the caseEditCase endpoint and edits a case. """
         try:
             start_time = time.time()
             yield StatusMessage("starting...")

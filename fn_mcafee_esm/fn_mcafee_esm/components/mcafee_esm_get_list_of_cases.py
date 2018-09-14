@@ -37,7 +37,6 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-#        case_get_case_list(self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -46,7 +45,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_get_list_of_cases")
     def _mcafee_esm_get_list_of_cases_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Calls the caseGetCaseList endpoint and returns a list of all cases that are open and
+        assigned to the logged in user."""
         try:
             start_time = time.time()
 

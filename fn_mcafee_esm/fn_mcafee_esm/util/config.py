@@ -17,13 +17,13 @@ esm_url=<your_esm_url>
 esm_username=<your_esm_username>
 esm_password=<your_esm_password>
 
-# If your ESM server uses a cert which is not automatically trusted by your machine set trust_cert=False
+# If your ESM server uses a cert which is not automatically trusted by your machine, set trust_cert=False.
 trust_cert=[True|False]
 
 ## ESM Polling settings
-# Weather or not polling for ESM cases should be turned on. Set to `True` to do so
+# Weather or not polling for ESM cases should be turned on. Set to `True` to do so.
 esm_polling=False
-# How often polling should happen. Value is in seconds
+# How often polling should happen. Value is in seconds.
 esm_polling_interval=300
 incident_template=<location_of_template_file>
 """

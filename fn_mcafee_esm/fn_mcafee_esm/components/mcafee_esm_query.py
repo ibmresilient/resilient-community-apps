@@ -36,10 +36,18 @@ def query_esm(options, headers, data):
 
     status_dict = get_qry_status(options, headers, qconf_json)
     status = status_dict.get("percentComplete")
-    while status != 100:
-        time.sleep(10)
-        status_dict = get_qry_status(options, headers, qconf_json)
-        status = status_dict.get("percentComplete")
+
+    # If the query is not 100% complete it will wait 10 seconds and then check again. If the query is not complete after
+    # 10 mins, an Error is raised indicating something went wrong.
+    for i in range(60):
+        if status == 100:
+            break
+        else:
+            time.sleep(10)
+            status_dict = get_qry_status(options, headers, qconf_json)
+            status = status_dict.get("percentComplete")
+        if status != 100 and i == 59:
+            raise FunctionError("Query timed out.")
 
     total_records = status_dict.get("totalRecords")
     return qconf_json, total_records
@@ -81,7 +89,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_query")
     def _mcafee_esm_query_logs_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Queries McAfee ESM."""
         try:
             start_time = time.time()
             yield StatusMessage("starting...")

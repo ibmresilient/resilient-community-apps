@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_get_case_detail")
     def _mcafee_esm_get_case_detail_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Calls the caseGetCaseDetail endpoint and returns all the details of a case."""
         try:
             start_time = time.time()
             yield StatusMessage("starting...")

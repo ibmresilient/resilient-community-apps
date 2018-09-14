@@ -49,7 +49,6 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-#        alarm_get_triggered_alarms(self.options, {"triggeredTimeRange": "CURRENT_DAY"})
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -58,7 +57,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_get_triggered_alarms")
     def _mcafee_esm_get_triggered_alarms_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Calls the alarmGetTriggeredAlarms endpoint and returns the alarms (up to 100),
+        which are assigned to the logged-in user and within the specified timeframe."""
         try:
             start_time = time.time()
 

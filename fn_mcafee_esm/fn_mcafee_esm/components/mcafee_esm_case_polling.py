@@ -7,6 +7,7 @@ import logging
 import time
 import json
 import calendar
+import jinja2
 from datetime import datetime
 from threading import Thread
 from resilient_circuits import ResilientComponent, handler
@@ -84,19 +85,23 @@ class ESM_CasePolling(ResilientComponent):
 
                 return template_functions.render(incident_template, case_details)
 
-        except Exception:
-            raise Exception("'incident_template' is not set correctly in config file.")
+        except jinja2.exceptions.TemplateSyntaxError:
+            log.info("'incident_template' is not set correctly in config file.")
 
     def create_incident(self, payload):
-        resilient_client = self.rest_client()
+        try:
+            resilient_client = self.rest_client()
 
-        uri = "/incidents"
-        payload_dict = json.loads(payload)
-        log.info("Creating incident with payload: {}".format(payload))
-        log.debug("Payload: {}".format(payload_dict))
+            uri = "/incidents"
+            payload_dict = json.loads(payload)
+            log.info("Creating incident with payload: {}".format(payload))
+            log.debug("Payload: {}".format(payload_dict))
 
-        response = resilient_client.post(uri=uri, payload=payload_dict)
-        return response
+            response = resilient_client.post(uri=uri, payload=payload_dict)
+            return response
+
+        except SimpleHTTPException:
+            log.info("Something went wrong when attempting to create the Incident")
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, esm_case_id):

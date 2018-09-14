@@ -29,31 +29,23 @@ def check_config(options):
         trust_cert = options.get("trust_cert")
 
         if esm_url is None:
-            log.error("esm_url is not set. You must set this value to run this function")
             raise ValueError("esm_url is not set. You must set this value to run this function")
         elif esm_url == default_config["esm_url"]:
-            log.error("esm_url is still the default value, this must be changed to run this function")
             raise ValueError("esm_url is still the default value, this must be changed to run this function")
 
         if esm_username is None:
-            log.error("esm_username is not set. You must set this value to run this function")
             raise ValueError("esm_username is not set. You must set this value to run this function")
         elif esm_username == default_config["esm_username"]:
-            log.error("esm_username is still the default value, this must be changed to run this function")
             raise ValueError("esm_username is still the default value, this must be changed to run this function")
 
         if esm_password is None:
-            log.error("esm_password is not set. You must set this value to run this function")
             raise ValueError("esm_password is not set. You must set this value to run this function")
         elif esm_password == default_config["esm_password"]:
-            log.error("esm_password is still the default value, this must be changed to run this function")
             raise ValueError("esm_password is still the default value, this must be changed to run this function")
 
         if trust_cert is None:
-            log.error("trust_cert is not set. You must set this value to run this function")
             raise ValueError("trust_cert is not set. You must set this value to run this function")
         elif trust_cert == default_config["trust_cert"]:
-            log.error("trust_cert is still the default value, this must be changed to run this function")
             raise ValueError("trust_cert is still the default value, this must be changed to run this function")
         if not trust_cert or trust_cert.lower() == "false":
             trust_cert = False

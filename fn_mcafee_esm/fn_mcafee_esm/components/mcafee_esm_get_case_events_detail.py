@@ -40,7 +40,6 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
-#        case_get_case_events_details(self.options, "144115188075855872|1422")
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -49,7 +48,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("mcafee_esm_get_case_events_detail")
     def _mcafee_esm_get_case_events_detail_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Calls the caseGetCaseEventsDetail endpoint and returns the details of all the events,
+        which is provided as an input."""
         try:
             start_time = time.time()
             yield StatusMessage("starting...")
