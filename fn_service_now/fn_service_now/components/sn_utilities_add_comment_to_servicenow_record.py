@@ -4,6 +4,7 @@
 
 import logging
 import json
+from bs4 import BeautifulSoup
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
 
@@ -55,6 +56,11 @@ class FunctionComponent(ResilientComponent):
               "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type")["name"] # select, text (required)
             }
 
+            # Convert rich text comment to plain text
+            soup = BeautifulSoup(inputs["sn_comment_text"], 'html.parser')
+            soup = soup.get_text()
+            inputs["sn_comment_text"] = soup.replace(u'\xa0', u' ')
+            
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
 
@@ -62,7 +68,8 @@ class FunctionComponent(ResilientComponent):
             
             # Instansiate new Resilient API object
             res_client = self.rest_client()
-            
+
+            # Get the datatable and its data
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
             datatable.get_data()
 
@@ -74,6 +81,10 @@ class FunctionComponent(ResilientComponent):
 
             # If its None, check the datatable
             if sn_ref_id is None:
+
+              yield StatusMessage("Searching Datatable for sn_ref_id")
+
+              # Get all sn_ref_ids
               sn_ref_ids = datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
 
               # If task_id is defined, handle a Task Level Note
@@ -88,23 +99,36 @@ class FunctionComponent(ResilientComponent):
                   payload.success = False
                   raise ValueError("This task has not been created in ServiceNow yet")
 
-                # Generate the request_data
-                request_data = {
-                  "sn_ref_id": sn_ref_id,
-                  "type": "comment",
-                  "sn_comment_text": payload.inputs["sn_comment_text"],
-                  "sn_comment_type": payload.inputs["sn_comment_type"]
-                }
-
-                yield StatusMessage("Add Task Note to ServiceNow")
-                
-                # Call POST and get response
-                add_in_sn_response = res_helper.POST("/add", data=json.dumps(request_data))
-                payload.res_id = res_id
-                payload.sn_ref_id = sn_ref_id
+              # If an Incident Level Note and only one sn_ref_id, then use that id
+              elif len(sn_ref_ids) == 1:
+                sn_ref_id = sn_ref_ids[0]
               
               else:
-                print "Handle incident level note"
+                payload.success = False
+                raise ValueError("This incident has not been created in ServiceNow yet")
+
+            else:
+              pass
+              # Get id from activity field
+
+            if sn_ref_id is not None:
+              # Generate the request_data
+              request_data = {
+                "sn_ref_id": sn_ref_id,
+                "type": "comment",
+                "sn_comment_text": payload.inputs["sn_comment_text"],
+                "sn_comment_type": payload.inputs["sn_comment_type"]
+              }
+
+              yield StatusMessage("Add Task Note to ServiceNow")
+            
+              # Call POST and get response
+              add_in_sn_response = res_helper.POST("/add", data=json.dumps(request_data))
+              payload.res_id = res_id
+              payload.sn_ref_id = sn_ref_id
+          
+            else:
+              raise ValueError("No sn_ref_id defined")
 
             results = payload.asDict()
 

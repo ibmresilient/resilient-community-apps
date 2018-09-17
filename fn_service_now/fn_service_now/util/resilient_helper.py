@@ -338,11 +338,11 @@ class ExternalTicketStatusDatatable():
       res_id = str(cells["res_id"]["value"])
       
       if task_id is not None:
-        if(res_id_to_search == res_id):
+        if(res_id_to_search in res_id):
           ids_found.append(str(cells["sn_ref_id"]["value"]))
 
       else:
-        if(res_id_to_search in res_id):
+        if(res_id_to_search == res_id):
           ids_found.append(str(cells["sn_ref_id"]["value"]))
     
     return ids_found
