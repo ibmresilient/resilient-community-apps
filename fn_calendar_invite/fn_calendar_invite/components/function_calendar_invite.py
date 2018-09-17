@@ -31,11 +31,11 @@ class FunctionComponent(ResilientComponent):
         """Function: A function to invite people to a meeting via a calendar invite"""
         try:
             # Get the calendar meeting information input
-            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")
-            calendar_invite_subject = kwargs.get("calendar_invite_subject")
-            calendar_invite_description = kwargs.get("calendar_invite_description")
-            calendar_invite_extra_email_addr = kwargs.get("calendar_invite_extra_email_addr")
-            incident_id = kwargs.get("calendar_invite_incident_id")
+            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")        # datetime picker
+            calendar_invite_subject = kwargs.get("calendar_invite_subject")          # text
+            calendar_invite_description = kwargs.get("calendar_invite_description")  # text area
+            calendar_invite_extra_email_addr = kwargs.get("calendar_invite_extra_email_addr") # text area
+            incident_id = kwargs.get("calendar_invite_incident_id")                  # number
 
             log = logging.getLogger(__name__)
             log.info("calendar_invite_datetime: %s", calendar_invite_datetime)
