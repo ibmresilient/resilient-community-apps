@@ -39,11 +39,14 @@ class MlBernoulliNB(MlModelCommon, BernoulliNB):
 
     def build(self, csv_file, features, prediction, test_prediction):
         """
+        This method builds a Bernoulli Naive Bayes
+        http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html
+        model.
 
-        :param csv_file:
-        :param features:
-        :param prediction:
-        :param test_prediction:
+        :param csv_file: CSV file with samples
+        :param features: features to use
+        :param prediction: field to predict
+        :param test_prediction: how to split trainng/testing samples
         :return:
         """
         try:

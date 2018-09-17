@@ -53,7 +53,7 @@ class FunctionComponent(ResilientComponent):
             if active_model:
                 model = MlModelCommon.load_from_file(active_model)
             else:
-                raise Exception("active_model not defined in app.config")
+                raise ValueError("active_model not defined in app.config")
 
             prediction = ""
             if model:
