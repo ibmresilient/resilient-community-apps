@@ -17,7 +17,6 @@ setup(
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.2.2',
         'pywinrm>=0.3.0',
-        'weasyprint',
         'json2html',
         'lxml'
     ],
@@ -46,7 +45,6 @@ setup(
             "ExpandURLFunctionComponent = fn_utilities.components.utilities_expand_url:FunctionComponent",
             "UtilitiesExtractSslCertFromUrlFunctionComponent = fn_utilities.components.utilities_extract_ssl_cert_from_url:FunctionComponent",
             "UtilitiesParseSslCertificateFunctionComponent = fn_utilities.components.utilities_parse_ssl_certificate:FunctionComponent",
-            "Html2PdfFunctionComponent = fn_utilities.components.utilities_html2pdf:FunctionComponent",
             "Json2HtmlFunctionComponent = fn_utilities.components.utilities_json2html:FunctionComponent",
             "GetContactInfoFunctionComponent = fn_utilities.components.utilities_get_contact_info:FunctionComponent",
             "XMLTransformationFunctionComponent = fn_utilities.components.utilities_xml_transformation:FunctionComponent"
