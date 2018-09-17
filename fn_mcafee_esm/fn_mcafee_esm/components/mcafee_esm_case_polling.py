@@ -43,7 +43,7 @@ class ESM_CasePolling(ResilientComponent):
     def main(self):
         options = self.options
 
-        if options.get("esm_polling") == "True":
+        if int(options.get("esm_polling_interval", 0)) > 0:
             # Add ds_to_millis to global for use in filters
             ds_filter = {"ds_to_millis": ds_to_millis}
             env = environment()
@@ -51,6 +51,7 @@ class ESM_CasePolling(ResilientComponent):
 
             # Create and start polling thread
             thread = Thread(target=self.esm_polling_thread)
+            thread.daemon = True
             thread.start()
             log.info("Polling for cases in ESM is occurring")
         else:

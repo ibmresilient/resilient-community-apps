@@ -26,7 +26,7 @@ def check_config(options):
         esm_url = options.get("esm_url")
         esm_username = options.get("esm_username")
         esm_password = options.get("esm_password")
-        trust_cert = options.get("trust_cert")
+        trust_cert = options.get("verify_cert")
 
         if esm_url is None:
             raise ValueError("esm_url is not set. You must set this value to run this function")
@@ -44,9 +44,9 @@ def check_config(options):
             raise ValueError("esm_password is still the default value, this must be changed to run this function")
 
         if trust_cert is None:
-            raise ValueError("trust_cert is not set. You must set this value to run this function")
-        elif trust_cert == default_config["trust_cert"]:
-            raise ValueError("trust_cert is still the default value, this must be changed to run this function")
+            raise ValueError("verify_cert is not set. You must set this value to run this function")
+        elif trust_cert == default_config["verify_cert"]:
+            raise ValueError("verify_cert is still the default value, this must be changed to run this function")
         if not trust_cert or trust_cert.lower() == "false":
             trust_cert = False
         else:

@@ -33,14 +33,12 @@ Set the following values in the config file under the `[fn_mcafee_esm]` section:
     esm_password=<your_esm_password>
 
     # If your ESM server uses a cert which is not automatically trusted by your machine, set trust_cert=False.
-    trust_cert=[True|False]
+    verify_cert=[True|False]
 
     ## ESM Polling settings
-    # Weather or not polling for ESM cases should be turned on. Set to `True` to do so.
-    esm_polling=False
-    # How often polling should happen. Value is in seconds.
-    esm_polling_interval=300
-    incident_template=<location_of_incident_template_file>
+    # How often polling should happen. Value is in seconds. To disable polling, set this to zero.
+    esm_polling_interval=0
+    incident_template=<location_of_incident_template_file>  # If not set uses default template.
 
 Deploy to the Resilient platform:
 
