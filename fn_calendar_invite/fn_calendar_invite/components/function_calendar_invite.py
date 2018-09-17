@@ -20,11 +20,31 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         # Get app.config parameters.
         self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+        if self.options == {}:
+            log.error("There is no [fn_calendar_invite] section in the config file, "
+                      "please set that by running resilient-circuits config -u")
+            raise ValueError("[fn_calendar_invite] section is not set in the config file")
+
         self.email_username = self.options.get("email_username")
         self.email_password = self.options.get("email_password")
         self.email_nickname = self.options.get("email_nickname")
         self.email_host = self.options.get("email_host")
         self.email_port = self.options.get("email_port")
+
+        if self.email_username is None:
+            log.error("email_username is not set. You must set this value to run fn_calendar_invite")
+            raise ValueError("email_username is not set. You must set this value to run fn_calendar_invite")
+        if self.email_password is None:
+            log.error("email_password is not defined. You must set this value to run fn_calendar_invite")
+            raise ValueError("email_password is not defined. You must set this value to run fn_calendar_invite")
+        if self.email_host is None:
+            log.error("email_host is not set. You must set this value to run fn_calendar_invite")
+            raise ValueError("email_host is not set. You must set this value to run fn_calendar_invite")
+        if self.email_port is None:
+            log.error("email_port is not set. You must set this value to run fn_calendar_invite")
+            raise ValueError("email_port is not set. You must set this value to run fn_calendar_invite")
+
 
     @function("fn_calendar_invite")
     def _fn_calendar_invite_function(self, event, *args, **kwargs):
