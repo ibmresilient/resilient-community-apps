@@ -16,9 +16,8 @@ class SlackUtils(object):
     slack_client = None
     channel = None
 
-    def __init__(self, api_token, slack_channel_name):
+    def __init__(self, api_token):
         self.slack_client = SlackClient(api_token)
-        self.channel = self.find_channel_by_name(slack_channel_name)
 
     def get_channel(self):
         """
@@ -27,12 +26,12 @@ class SlackUtils(object):
         """
         return self.channel
 
-    def set_channel(self, channel):
+    def get_slack_client(self):
         """
-        Set the instance variable channel.
-        :param channel:
+        Return instance variable slack_client.
+        :return: slack_client
         """
-        self.channel = channel
+        return self.slack_client
 
     def slack_post_message(self, resoptions, slack_details, slack_as_user, slack_username, slack_reply_broadcast,
                            slack_parse, slack_markdown, slack_thread_id, def_username):
@@ -98,9 +97,7 @@ class SlackUtils(object):
 
         for channel in all_channels:
             if slack_channel_name == channel.get("name"):
-                return channel
-
-        return None
+                self.channel = channel
 
     def find_user_ids(self, emails):
         """
@@ -116,7 +113,7 @@ class SlackUtils(object):
         """
         Retrieve a single user by looking them up by their registered email address.
         :param user_email: An email address belonging to a user in the workspace
-        :return:
+        :return: id_user
         """
         results = self.slack_client.api_call(
             "users.lookupByEmail",
@@ -124,8 +121,9 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        if all(key in results for key in ("ok", "user")) and results.get("ok"):
-            return results.get("user").get("id")
+        user_data = results.get("user")
+        if results.get("ok") and user_data:
+            return user_data.get("id")
 
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
@@ -146,6 +144,7 @@ class SlackUtils(object):
     def _slack_find_channels(self):
         """
         Method returns a list of all public or private channels in a workspace.
+        # FIXME max 100 channels returned, look into cursor!
         :return: list of channels
         """
         # Using Conversations API to access anything channel-like (private, public, direct, etc)
@@ -157,7 +156,7 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        if "ok" in results and results.get("ok"):
+        if results.get("ok"):
             return results.get("channels")
 
         else:
@@ -181,8 +180,8 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        if all(key in results for key in ("ok", "channel")) and results.get("ok"):
-            return results.get("channel")
+        if results.get("ok"):
+            self.channel = results.get("channel")
 
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
@@ -200,7 +199,7 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        if all(key in results for key in ("ok", "permalink")) and results.get("ok"):
+        if results.get("ok"):
             return results.get("permalink")
 
         else:
