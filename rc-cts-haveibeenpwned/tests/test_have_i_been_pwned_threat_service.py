@@ -33,16 +33,8 @@ class TestHaveIBeenPwnedCustomThreatService(object):
         response = requests.post(SERVICE_URL, artifact)
         assert response.status_code == 200
         content = json.loads(response.text)
-        props = content["hits"][0]["props"]
-        p = 0
-        while True:
-            if props[p]["type"] == "uri":
-                props = props[p]
-                break
-            p = p+1
-        artifact = json.loads(artifact)
-        #assert shows the correct Have I Been Pwned URI
-        assert props["value"] == "https://haveibeenpwned.com/api/v2/unifiedsearch/" + artifact["value"]
+        hits = content["hits"]
+        assert len(hits) > 0
 
     def test_check_no_hit(self, circuits_app):
         """Verify no hit is returned on safe email"""

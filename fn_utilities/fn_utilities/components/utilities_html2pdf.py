@@ -11,9 +11,9 @@ except:
     from io import StringIO
 
 try:
-    import urllib2.urlopen as urlopen
-except:
     from urllib2 import urlopen
+except:
+    from urllib.request import urlopen
 
 import weasyprint
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError

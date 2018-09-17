@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
             # look for path information to narrow the amount of json to render
             if json2html_keys:
                 for key in json2html_keys.split('.'):
-                    if json_node.get(key) is None:
+                    if key not in json_node.keys():
                         raise ValueError("{} key not found".format(key))
                     else:
                         json_node = json_node.get(key)
