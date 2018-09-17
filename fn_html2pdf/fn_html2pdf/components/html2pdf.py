@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
         converts it to a pdf image. That image is converted to base64 and returned.
     """
 
-    @function("utilities_html2pdf")
+    @function("fn_html2pdf")
     def _fn_html2pdf_function(self, event, *args, **kwargs):
         """Function: function accessible from Resilient to render html to binary pdf format """
         try:
