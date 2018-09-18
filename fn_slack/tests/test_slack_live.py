@@ -48,6 +48,20 @@ class TestSlack:
         )
         assert (slack_utils.get_channel().get("name") == slack_test_channel)
 
+    # @patch('fn_slack.components.slack_common.SlackClient.api_call, side_effect=')
+    # def test_find_channel_by_name_error(self, mocked_api_call):
+    #     """ Test find Slack channel by name error"""
+    #     print("Test find Slack channel by name error\n")
+    #
+    #     mocked_api_call.side_effect = Exception("Some error exception")
+    #
+    #     try:
+    #         slack_utils = SlackUtils("fake_api_key")
+    #         slack_utils.find_channel_by_name(slack_test_channel)
+    #         assert False
+    #     except ValueError:
+    #         assert True
+
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_slack_create_channel(self, mocked_api_call):
         """ Test create Slack channel"""

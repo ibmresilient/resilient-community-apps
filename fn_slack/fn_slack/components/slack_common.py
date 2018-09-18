@@ -27,7 +27,19 @@ class SlackUtils(object):
         return self.channel
 
     def set_channel(self, channel):
+        """
+        Set channel.
+        :param channel:
+        :return:
+        """
         self.channel = channel
+
+    def get_channel_id(self):
+        """
+        Return channel_id.
+        :return: channel_id
+        """
+        return self.channel.get("id")
 
     def get_slack_client(self):
         """
@@ -136,7 +148,7 @@ class SlackUtils(object):
         Verify if channel is private.
         channel.get("is_channel") is True & channel.get("is_private") is False -> public channel
         channel.get("is_channel") is False & channel.get("is_private") is True -> private channel
-        :return:
+        :return: True if channel is private else False
         """
         if self.channel and not self.channel.get("is_channel") and self.channel.get("is_private"):
             return True
@@ -193,7 +205,7 @@ class SlackUtils(object):
         """
         Retrieve a permalink URL for a specific extant message
         :param thread_id: A message's ts value, uniquely identifying it within a channel
-        :return:
+        :return: permalink
         """
         results = self.slack_client.api_call(
             "chat.getPermalink",
@@ -204,6 +216,40 @@ class SlackUtils(object):
 
         if results.get("ok"):
             return results.get("permalink")
+
+        else:
+            raise ValueError("Slack error response: " + results.get("error", ""))
+
+    def get_channel_history(self):
+        """
+        Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
+        and then continue paging using the instructions below. Cursor-based pagination will make it easier to
+        incrementally collect information. To begin pagination, specify a limit value under 1000.
+        Slack recommends no more than 200 results at a time.
+        :return: JSON result
+        """
+        results = self.slack_client.api_call(
+            "conversations.history",
+            channel=self.channel.get("id")
+        )
+        LOG.debug(results)
+
+        return results
+
+    def get_user_info(self, user_id):
+        """
+        This method returns information about a member of a workspace.
+        :param user_id:
+        :return: user dict
+        """
+        results = self.slack_client.api_call(
+            "users.info",
+            user=user_id
+        )
+        LOG.debug(results)
+
+        if results.get("ok"):
+            return results.get("user")
 
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
