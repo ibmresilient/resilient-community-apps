@@ -4,10 +4,11 @@ import docker
 import logging
 import os
 import hashlib
-from requests.exceptions import ConnectionError
 import base64
 import tempfile
 import shutil
+from requests.exceptions import ConnectionError
+from .errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
 THUG_IMAGE = 'honeynet/thug:latest'
@@ -42,7 +43,12 @@ class ThugUtils:
             # Get output directory
             wanted_analysis_path = os.path.join(output_dir, 'analysis')
 
-            # Get files outputted from thug in the analysis directory and convert to base64
+            # test for files. If missing, the analysis failed
+            graph_file = os.path.join(wanted_analysis_path, 'graph.svg')
+            if not os.path.isfile(graph_file):
+                raise IntegrationError("Analysis failed. Check iput parameters")
+
+            # Get files results from thug in the analysis directory and convert to base64
             graph_path = os.path.join(wanted_analysis_path, 'graph.svg')
             with open(graph_path, "rb") as f:
                 data = f.read()
@@ -64,9 +70,9 @@ class ThugUtils:
 
         results = {
             'url': url,
-            'report_json': report_json,
-            'graph_svg': thug_graph_svg_b64,
-            'report_xml': maec11_b64,
+            'report_json': report_json.decode("utf-8"),
+            'graph_svg': thug_graph_svg_b64.decode("utf-8"),
+            'report_xml': maec11_b64.decode("utf-8"),
             'exit_status': status[u'StatusCode'],
             'error': status[u'Error']
         }
@@ -97,7 +103,7 @@ def get_thug_client():
 def md5(my_val):
     """Creates an MD5 from given value"""
     m_val = hashlib.md5()
-    m_val.update(my_val)
+    m_val.update(my_val.encode('utf-8'))
     return m_val.hexdigest()
 
 
