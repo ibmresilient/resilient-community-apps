@@ -101,10 +101,12 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Send Mail - Complete")
 
-            results = {"recipient": attendees,
+            results = {
+                "recipient": attendees,
                 "sender": sender,
                 "subject": calendar_invite_subject,
-                "body": email_message_string}
+                "body": email_message_string
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
