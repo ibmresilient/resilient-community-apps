@@ -7,7 +7,8 @@
 	var TABLE_NAME_TO_ADD = 'incident';
 	
 	//Declare global variables
-	var record, response_body = null;
+	var record = null;
+	var response_body = {};
     var req = request.body.data;
 	
 	record = new GlideRecord(TABLE_NAME_TO_ADD);
@@ -28,14 +29,19 @@
 			else if(comment_type == "additional_comment"){
 				record.comments = comment_text;
 			}
+			break;
+		
+		case "attachment":
+			var sys_attachment = new GlideSysAttachment();
+			response_body["attachment_id"] = sys_attachment.writeBase64(record, req.attachment_name, req.attachment_content_type, req.attachment_base64);
 	}
 
 	//Update the record
 	record.update();
 	
-	response.setBody({
-		"id": req.sn_ref_id
-	});
+	response_body["sn_ref_id"] = req.sn_ref_id;
+	
+	response.setBody(response_body);
 	
 
 	return response;
