@@ -60,7 +60,10 @@ def parse_email_addresses(addresses):
     # Parse on comma and remove white space
     address_list = addresses.split(",")
     for item in address_list:
-        item.strip()
+        temp = item.strip()
+        # Remove null or empty string
+        if len(temp) <= 0:
+            address_list.remove(item)
 
     return address_list
 
@@ -107,7 +110,7 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     msg = MIMEMultipart('mixed')
     msg['Reply-To'] = from_string
     msg['Date'] = formatdate(localtime=True)
-    msg['Subject'] = "[Resilient Incident] {}".format(calendar_invite_subject)
+    msg['Subject'] = u"[Resilient Incident] {}".format(calendar_invite_subject)
     msg['From'] = from_string
     msg['To'] = ",".join(attendees)
 

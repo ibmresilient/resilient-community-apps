@@ -8,6 +8,7 @@
  """
 
 import logging
+import datetime
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
 
@@ -32,6 +33,7 @@ class FunctionComponent(ResilientComponent):
         self.email_host = self.options.get("email_host")
         self.email_port = self.options.get("email_port")
 
+        # Check that config parameters are defined.
         if self.email_username is None:
             log.error("email_username is not set. You must set this value to run fn_calendar_invite")
             raise ValueError("email_username is not set. You must set this value to run fn_calendar_invite")
@@ -58,10 +60,10 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("calendar_invite_incident_id")                  # number
 
             log = logging.getLogger(__name__)
-            log.info("calendar_invite_datetime: %s", calendar_invite_datetime)
-            log.info("calendar_invite_subject: %s", calendar_invite_subject)
-            log.info("calendar_invite_description: %s", calendar_invite_description)
-            log.info("calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
+            log.info(u"calendar_invite_datetime: %s", calendar_invite_datetime)
+            log.info(u"calendar_invite_subject: %s", calendar_invite_subject)
+            log.info(u"calendar_invite_description: %s", calendar_invite_description)
+            log.info(u"calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
 
             # Email sender information
             host = self.email_host
@@ -70,6 +72,12 @@ class FunctionComponent(ResilientComponent):
             e_login = self.email_username
             e_password = self.email_password
 
+            now_utc = datetime.datetime.utcnow()
+            meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
+            if now_utc > meeting_time_utc:
+                log.error("Calendar date and time for meeting is not valid.")
+                yield FunctionError("Calendar date and time for meeting is not valid")
+
             # Get email addresses of the members and owner of the incident.
             client = self.rest_client()
             attendees = get_email_addresses(client, log, incident_id, calendar_invite_extra_email_addr)
@@ -77,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Sending Emails to {}".format(attendees))
 
             # Build the email message string to be sent.
-            sender = "{} <{}>".format(nickname, e_login)
+            sender = u"{} <{}>".format(nickname, e_login)
             email_message_string = build_email_message(calendar_invite_datetime,
                                                        calendar_invite_subject,
                                                        calendar_invite_description,
