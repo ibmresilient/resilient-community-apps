@@ -10,6 +10,7 @@ import calendar
 import jinja2
 from datetime import datetime
 from threading import Thread
+from os.path import join, pardir, os
 from resilient_circuits import ResilientComponent, handler
 from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers
 from fn_mcafee_esm.components.mcafee_esm_get_list_of_cases import case_get_case_list
@@ -75,8 +76,12 @@ class ESM_CasePolling(ResilientComponent):
             time.sleep(int(self.options.get("esm_polling_interval", 600)))
 
     def build_incident_dto(self, headers, case_id):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        default_temp_file = join(current_path, pardir, "data/templates/esm_incident_mapping.jinja")
+        template_file = self.options.get("incident_template", default_temp_file)
+
         try:
-            with open(self.options["incident_template"], 'r') as template:
+            with open(template_file, 'r') as template:
                 log.debug("Reading template file")
 
                 case_details = case_get_case_detail(self.options, headers, case_id)
