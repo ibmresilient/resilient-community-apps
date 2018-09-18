@@ -20,7 +20,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             email_header_validation_target_email = kwargs.get("email_header_validation_target_email")  # text
-            incident_id = kwargs.get('optional_incident_id') # number
+            incident_id = kwargs.get('incident_id') # number
             attachment_id = kwargs.get('attachment_id') # number
             artifact_id = kwargs.get('artifact_id') # number
 
