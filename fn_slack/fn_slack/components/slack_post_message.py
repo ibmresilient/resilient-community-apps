@@ -129,8 +129,8 @@ class FunctionComponent(ResilientComponent):
 
             # post message to the channel
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_details, slack_as_user,
-                                                                 slack_username, slack_reply_broadcast, slack_parse,
-                                                                 slack_mrkdown, slack_thread_id, def_username)
+                                                                slack_username, slack_reply_broadcast, slack_parse,
+                                                                slack_mrkdown, slack_thread_id, def_username)
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message added to slack.")
             else:

@@ -26,6 +26,9 @@ class SlackUtils(object):
         """
         return self.channel
 
+    def set_channel(self, channel):
+        self.channel = channel
+
     def get_slack_client(self):
         """
         Return instance variable slack_client.
@@ -106,7 +109,7 @@ class SlackUtils(object):
         :return: list of user ids
         """
         list_emails = emails.split(",")
-        user_id_list = [self._lookup_user_by_email(email.strip()) for email in list_emails]
+        user_id_list = [self._lookup_user_by_email(email.strip()) for email in list_emails if email.strip()] # making sure to exclude ' ' or ''
         return user_id_list
 
     def _lookup_user_by_email(self, user_email):
