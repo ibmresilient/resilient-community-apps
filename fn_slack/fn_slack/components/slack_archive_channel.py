@@ -26,10 +26,11 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_slack", {})
 
-    @function("slack_close")
-    def _slack_close_channel(self, event, *args, **kwargs):
-        """Function: Functions archives a channel, exports conversation history to a csv file and saves that csv file
-        on an Incidents as an attachment """
+    @function("slack_archive_channel")
+    def _slack_archive_channel_function(self, event, *args, **kwargs):
+        """Function: Function exports conversation history from given Slack channel to a csv file,
+        saves the csv file as an attachment and archives the Slack channel. """
+
         try:
             validate_fields(['api_token'], self.options)
 
@@ -44,15 +45,10 @@ class FunctionComponent(ResilientComponent):
             slack_utils = slack_common.SlackUtils(api_token)
             res_client = self.rest_client()
 
-            # create a csv file for us to put the JSON from slack in
-            f_name = "slack_msg_export_" + slack_channel_name + ".csv"
-            f = open(f_name, 'w')
-            csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
-
             # get the channel history in json format
             # find the channel
             slack_utils.find_channel_by_name(slack_channel_name)
-            yield StatusMessage("Found channel #{0} with id {}".format(slack_channel_name, slack_utils.get_channel_id()))
+            yield StatusMessage("Found channel #{} with id {}".format(slack_channel_name, slack_utils.get_channel_id()))
 
             results = slack_utils.get_channel_history()
             if results.get("ok"): #FIXME pagination!!!
@@ -60,32 +56,34 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield FunctionError("Getting channel history failed: " + json.dumps(results))
 
-            yield StatusMessage("Archiving conversation history to CSV")
-            # For each msg in the history, parse
-            for message in results.get("messages"):
-                # get the username
-                if message.get("type") == "message":
-                    subtype = message.get("subtype")
-                    if subtype == "bot_message":
-                        username = message["username"] #FIXME is it really username, cannot find this in Slack API doc
+            # create a csv file for us to put the JSON from slack in
+            file_name = "slack_msg_export_" + slack_channel_name + ".csv"
+            with open(file_name, mode='w') as slack_csv_file:
+                csv_writer = csv.writer(slack_csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
+
+                yield StatusMessage("Archiving conversation history to CSV")
+                # For each msg in the history, parse
+                for message in results.get("messages"):
+                    # get the username
+                    if message.get("type") == "message":
+                        subtype = message.get("subtype")
+                        if subtype == "bot_message":
+                            username = message["username"] #FIXME is it really username, cannot find this in Slack API doc
+                        else:
+                            username = slack_utils.get_user_info(message.get("user")).get("name")
+
+                        # get the timestamp
+                        msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
+                        msg_time = msg_ts.strftime("%Y-%m-%d %H:%M:%S")
+
+                        # get the text message
+                        msg_text = message.get("text")
                     else:
-                        username = slack_utils.get_user_info(message.get("user")).get("name")
+                        yield StatusMessage("Skipping message as not message.")
 
-                    # get the timestamp
-                    msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
-                    msg_time = msg_ts.strftime("%Y-%m-%d %H:%M:%S")
-
-                    # get the text message
-                    msg_text = message.get("text")
-                else:
-                    yield StatusMessage("Skipping message as not message.")
-
-                # write that message output to the csv file
-                csv_row = [msg_time.encode('utf-8'), msg_text.encode('utf-8'), username.encode('utf-8')]
-                csv_writer.writerow(csv_row)
-
-            # close the csv now all the messages have been written
-            f.close()
+                    # write that message output to the csv file
+                    csv_row = [msg_time.encode('utf-8'), msg_text.encode('utf-8'), username.encode('utf-8')]
+                    csv_writer.writerow(csv_row)
 
             # # Save csv as an attachment - FIXME use utils for saving attachments!
             # yield StatusMessage("Chat log has been uploaded for " + str(inc_id))

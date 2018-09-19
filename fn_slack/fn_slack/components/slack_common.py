@@ -220,21 +220,43 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def get_channel_history(self):
-        """
-        Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
-        and then continue paging using the instructions below. Cursor-based pagination will make it easier to
-        incrementally collect information. To begin pagination, specify a limit value under 1000.
-        Slack recommends no more than 200 results at a time.
-        :return: JSON result
-        """
-        results = self.slack_client.api_call(
-            "conversations.history",
-            channel=self.channel.get("id")
-        )
-        LOG.debug(results)
-
-        return results
+    # def get_channel_history(self, cursor):
+    #     """
+    #     Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
+    #     and then continue paging using the instructions below. Cursor-based pagination will make it easier to
+    #     incrementally collect information. To begin pagination, specify a limit value under 1000.
+    #     Slack recommends no more than 200 results at a time.
+    #     :return: JSON result
+    #     """
+    #     messages = []
+    #     cursor = None
+    #     more_results = True
+    #     while more_results
+    #         results = self.slack_client.api_call(
+    #           "conversations.history",
+    #            channel=self.channel.get("id"),
+    #             limit=200,
+    #             cursor=cursor
+    #         )
+    #
+    #         LOG.debug(results)
+    #
+    #         response_metadata = results.get("response_metadata")
+    #         if results.get("ok") and response_metadata:
+    #             messages.append(results.get("messages"))
+    #             cursor = response_metadata.get("next_cursor")
+    #             if not cursor:
+    #                 more_results = False
+    #     #
+    #     # results = self.slack_client.api_call(
+    #     #     "conversations.history",
+    #     #     channel=self.channel.get("id"),
+    #     #     limit=100,
+    #     #     cursor=cursor
+    #     # )
+    #     # LOG.debug(results)
+    #
+    #     return messages
 
     def get_user_info(self, user_id):
         """

@@ -25,7 +25,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "SlackPostMessageFunctionComponent = fn_slack.components.slack_post_message:FunctionComponent"
+            "SlackPostMessageFunctionComponent = fn_slack.components.slack_post_message:FunctionComponent",
+            "SlackArchiveChannelFunctionComponent = fn_slack.components.slack_archive_channel:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_slack.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_slack.util.customize:customization_data"]

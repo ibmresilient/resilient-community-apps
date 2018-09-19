@@ -48,19 +48,21 @@ class TestSlack:
         )
         assert (slack_utils.get_channel().get("name") == slack_test_channel)
 
-    # @patch('fn_slack.components.slack_common.SlackClient.api_call, side_effect=')
-    # def test_find_channel_by_name_error(self, mocked_api_call):
-    #     """ Test find Slack channel by name error"""
-    #     print("Test find Slack channel by name error\n")
-    #
-    #     mocked_api_call.side_effect = Exception("Some error exception")
-    #
-    #     try:
-    #         slack_utils = SlackUtils("fake_api_key")
-    #         slack_utils.find_channel_by_name(slack_test_channel)
-    #         assert False
-    #     except ValueError:
-    #         assert True
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_find_channel_by_name_error(self, mocked_api_call):
+        """ Test find Slack channel by name error"""
+        print("Test find Slack channel by name error\n")
+
+        mocked_api_call.return_value = {
+                "ok": False,
+            }
+
+        try:
+            slack_utils = SlackUtils("fake_api_key")
+            slack_utils.find_channel_by_name(slack_test_channel)
+            assert False
+        except ValueError:
+            assert True
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_slack_create_channel(self, mocked_api_call):
@@ -135,27 +137,25 @@ class TestSlack:
                 }
         }
         slack_utils = SlackUtils("fake_api_key")
-        user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com")
+        user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com") #FIXME test multiple times to test split and strip
         mocked_api_call.assert_called_with( # checks the last call to a method, check for b@b.com email
             "users.lookupByEmail",
             email="b@b.com"
         )
         assert user_id_list == ['W012A3CDE', 'W012A3CDE']
 
-    @patch('fn_slack.components.slack_common.SlackUtils.slack_create_channel')
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
-    def test_invite_users_to_channel(self, mocked_api_call, mocked_create_channel):
+    def test_invite_users_to_channel(self, mocked_api_call):
         """ Test invite Slack users to a channel"""
         print("Test invite Slack users to a channel\n")
 
         # Setup channel first
-        mocked_create_channel.return_value = {
+        mocked_channel = {
             "id": "C0EAQDV4Z",
             "name": "test-channel"
         }
         slack_utils = SlackUtils("fake_api_key")
-        channel = slack_utils.slack_create_channel(slack_test_channel, False)
-        slack_utils.set_channel(channel)
+        slack_utils.set_channel(mocked_channel)
 
         # Test inviting users to a channel
         mocked_api_call.return_value = {
