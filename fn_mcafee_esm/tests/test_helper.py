@@ -8,7 +8,7 @@ def string_test_config():
 esm_url=https://mockesmurl.com
 esm_username=fake_user
 esm_password=fake_password
-trust_cert=False
+verify_cert=False
 """
 
 
@@ -17,7 +17,7 @@ def get_test_config():
         "esm_url": "https://mockesmurl.com",
         "esm_username": "fake_user",
         "esm_password": "fake_password",
-        "trust_cert": "False"
+        "verify_cert": "False"
     }
     return config
 
@@ -27,7 +27,7 @@ def get_default_test_config():
         "esm_url": "<your_esm_url>",
         "esm_username": "<your_esm_username>",
         "esm_password": "<your_esm_password>",
-        "trust_cert": "[True|False]"
+        "verify_cert": "[True|False]"
     }
     return config
 

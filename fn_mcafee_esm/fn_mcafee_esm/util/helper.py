@@ -68,9 +68,15 @@ def get_authenticated_headers(address, username, password, verify_cert=True):
         'cache-control': "no-cache"
     }
 
+    # To support both python 2.7 and 3.6
+    string_encoded_username = base64.b64encode(str.encode(str(username)))
+    string_encoded_username = string_encoded_username.decode("utf-8")
+    string_encoded_password = base64.b64encode(str.encode(str(password)))
+    string_encoded_password = string_encoded_password.decode("utf-8")
+
     data = {
-        "username": base64.b64encode(username),
-        "password": base64.b64encode(password),
+        "username": string_encoded_username,
+        "password": string_encoded_password,
         "locale": "en_US"
     }
     data_string = json.dumps(data)

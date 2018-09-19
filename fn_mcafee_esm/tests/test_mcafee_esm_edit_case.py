@@ -78,8 +78,9 @@ class TestMcafeeEsmEditCase:
 
     def test_check_config_valid_trust_cert(self):
         test_config_data = t_config_data.copy()
-        test_config_data["trust_cert"] = "True"
+        test_config_data["verify_cert"] = "True"
         expected_config_ops = t_config_data.copy()
+        expected_config_ops["verify_cert"] = "True"
         expected_config_ops["trust_cert"] = True
         actual_config_ops = check_config(test_config_data)
 
@@ -122,11 +123,11 @@ class TestMcafeeEsmEditCase:
     def test_check_config_no_trust_cert(self):
         test_config_ops = t_config_data.copy()
         try:
-            del test_config_ops["trust_cert"]
+            del test_config_ops["verify_cert"]
             check_config(test_config_ops)
             assert False
         except ValueError as e:
-            assert e.args[0] == "trust_cert is not set. You must set this value to run this function"
+            assert e.args[0] == "verify_cert is not set. You must set this value to run this function"
 
     def test_check_config_default_url(self):
         test_config_ops = default_config_data.copy()
@@ -164,7 +165,7 @@ class TestMcafeeEsmEditCase:
             check_config(test_config_ops)
             assert False
         except ValueError as e:
-            assert e.args[0] == "trust_cert is still the default value, this must be changed to run this function"
+            assert e.args[0] == "verify_cert is still the default value, this must be changed to run this function"
 
     @patch("requests.post")
     def test_get_authenticated_headers(self, mocked_requests_post):
@@ -181,7 +182,7 @@ class TestMcafeeEsmEditCase:
             "X-Xsrf-Token": "mock_header_token"
         }
         actual_headers = get_authenticated_headers(ops.get("esm_url"), ops.get("esm_username"),
-                                                   ops.get("esm_password"), ops.get("trust_cert"))
+                                                   ops.get("esm_password"), ops.get("verify_cert"))
 
         assert expected_headers == actual_headers
 
@@ -240,20 +241,17 @@ class TestMcafeeEsmEditCase:
         assert func is not None
 
     @pytest.mark.parametrize(
-        "mcafee_esm_edit_case_json, mcafee_esm_case_id, mcafee_esm_case_status, mcafee_esm_case_summary, mcafee_esm_case_severity, expected_results",
+        "mcafee_esm_edit_case_json, mcafee_esm_case_id, expected_results",
         [
-            ({"type": "text", "content": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}, 1, None, None, None, {"inputs": {"mcafee_esm_case_id": 1, "mcafee_esm_case_severity": None, "mcafee_esm_case_status": None, "mcafee_esm_case_summary": None, "mcafee_esm_edit_case_json": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}})
+            ({"type": "text", "content": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}, 1, {"inputs": {"mcafee_esm_case_id": 1, "mcafee_esm_edit_case_json": '{"caseDetail": {"summary": "This is a new summary","severity": "2"}}'}})
         ])
     @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_edit_case_json, mcafee_esm_case_id, mcafee_esm_case_status,
-                     mcafee_esm_case_summary, mcafee_esm_case_severity, expected_results):
+    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_edit_case_json, mcafee_esm_case_id,
+                     expected_results):
         """ Test calling with sample values for the parameters """
         function_params = {
             "mcafee_esm_edit_case_json": mcafee_esm_edit_case_json,
-            "mcafee_esm_case_id": mcafee_esm_case_id,
-            "mcafee_esm_case_status": mcafee_esm_case_status,
-            "mcafee_esm_case_summary": mcafee_esm_case_summary,
-            "mcafee_esm_case_severity": mcafee_esm_case_severity
+            "mcafee_esm_case_id": mcafee_esm_case_id
         }
 
         content1 = {
@@ -294,5 +292,5 @@ class TestMcafeeEsmEditCase:
                                             generate_response({}, 200)]
 
         results = call_mcafee_esm_edit_case_function(circuits_app, function_params)
-        del results["metrics"]
+        results.pop("metrics")
         assert expected_results == results

@@ -79,14 +79,14 @@ class TestMcafeeEsmQuery:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("mcafee_esm_qry_event_type, mcafee_esm_qry_config, expected_results", [
-        ('EVENT', {"type": "text", "content": '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}'}, {'inputs': {'mcafee_esm_qry_config': '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}', 'mcafee_esm_qry_event_type': 'EVENT'}, 'result': {u'rows': [{u'values': [u'08/20/2018 14:58:23', u'08/20/2018 14:58:23', u'306-50080', u'1', u'::', u'A physical network interface connection has been made or removed', u'', u'', u'', u'', u'']}], u'columns': [{u'name': u'Alert.FirstTime'}, {u'name': u'Alert.LastTime'}, {u'name': u'Alert.DSIDSigID'}, {u'name': u'Alert.EventCount'}, {u'name': u'Alert.SrcIP'}, {u'name': u'Rule.msg'}, {u'name': u'Alert.BIN(1)'}, {u'name': u'Alert.4259843'}, {u'name': u'Alert.BIN(4)'}, {u'name': u'Alert.BIN(10)'}, {u'name': u'Alert.65538'}]}})
+    @pytest.mark.parametrize("mcafee_esm_qry_type, mcafee_esm_qry_config, expected_results", [
+        ('EVENT', {"type": "text", "content": '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}'}, {'inputs': {'mcafee_esm_qry_config': '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}', 'mcafee_esm_qry_type': 'EVENT'}, 'result': {u'rows': [{u'values': [u'08/20/2018 14:58:23', u'08/20/2018 14:58:23', u'306-50080', u'1', u'::', u'A physical network interface connection has been made or removed', u'', u'', u'', u'', u'']}], u'columns': [{u'name': u'Alert.FirstTime'}, {u'name': u'Alert.LastTime'}, {u'name': u'Alert.DSIDSigID'}, {u'name': u'Alert.EventCount'}, {u'name': u'Alert.SrcIP'}, {u'name': u'Rule.msg'}, {u'name': u'Alert.BIN(1)'}, {u'name': u'Alert.4259843'}, {u'name': u'Alert.BIN(4)'}, {u'name': u'Alert.BIN(10)'}, {u'name': u'Alert.65538'}]}})
     ])
     @patch("requests.post")
-    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_qry_event_type, mcafee_esm_qry_config, expected_results):
+    def test_success(self, mocked_requests_post, circuits_app, mcafee_esm_qry_type, mcafee_esm_qry_config, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "mcafee_esm_qry_event_type": mcafee_esm_qry_event_type,
+            "mcafee_esm_qry_type": mcafee_esm_qry_type,
             "mcafee_esm_qry_config": mcafee_esm_qry_config
         }
         content1 = {
@@ -115,5 +115,5 @@ class TestMcafeeEsmQuery:
                                             generate_response(content4, 200)]
 
         results = call_mcafee_esm_query_function(circuits_app, function_params)
-        del results["metrics"]
+        results.pop("metrics")
         assert(expected_results == results)

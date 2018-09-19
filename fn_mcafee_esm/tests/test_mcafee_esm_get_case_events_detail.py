@@ -79,5 +79,5 @@ class TestMcafeeEsmGetCaseEvenstsDetail:
                                             generate_response(content2, 200)]
 
         results = call_mcafee_esm_get_case_events_detail_function(circuits_app, function_params)
-        del results["metrics"]
+        results.pop("metrics")
         assert(expected_results == results)
