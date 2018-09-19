@@ -8,6 +8,7 @@
  """
 
 import logging
+import datetime
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from fn_calendar_invite.lib.calendar_invite_util import get_email_addresses, build_email_message, send_email
 
@@ -18,30 +19,46 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts)
+
         # Get app.config parameters.
         self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+        if self.options == {}:
+            raise ValueError("{} section is not set in the config file".format(CONFIG_DATA_SECTION))
+
         self.email_username = self.options.get("email_username")
         self.email_password = self.options.get("email_password")
         self.email_nickname = self.options.get("email_nickname")
         self.email_host = self.options.get("email_host")
         self.email_port = self.options.get("email_port")
 
+        # Check that config parameters are defined.
+        if not self.email_username:
+            raise ValueError("email_username is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_password:
+            raise ValueError("email_password is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_host:
+            raise ValueError("email_host is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_port:
+            raise ValueError("email_port is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+
+
     @function("fn_calendar_invite")
     def _fn_calendar_invite_function(self, event, *args, **kwargs):
         """Function: A function to invite people to a meeting via a calendar invite"""
         try:
             # Get the calendar meeting information input
-            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")
-            calendar_invite_subject = kwargs.get("calendar_invite_subject")
-            calendar_invite_description = kwargs.get("calendar_invite_description")
-            calendar_invite_extra_email_addr = kwargs.get("calendar_invite_extra_email_addr")
-            incident_id = kwargs.get("calendar_invite_incident_id")
+            calendar_invite_datetime = kwargs.get("calendar_invite_datetime")        # datetime picker
+            calendar_invite_subject = kwargs.get("calendar_invite_subject")          # text
+            calendar_invite_description = kwargs.get("calendar_invite_description")  # text area
+            calendar_invite_extra_email_addr = kwargs.get("calendar_invite_extra_email_addr") # text area
+            incident_id = kwargs.get("calendar_invite_incident_id")                  # number
 
             log = logging.getLogger(__name__)
-            log.info("calendar_invite_datetime: %s", calendar_invite_datetime)
-            log.info("calendar_invite_subject: %s", calendar_invite_subject)
-            log.info("calendar_invite_description: %s", calendar_invite_description)
-            log.info("calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
+            log.info(u"calendar_invite_datetime: %s", calendar_invite_datetime)
+            log.info(u"calendar_invite_subject: %s", calendar_invite_subject)
+            log.info(u"calendar_invite_description: %s", calendar_invite_description)
+            log.info(u"calendar_invite_extra_email_addr %s", calendar_invite_extra_email_addr)
 
             # Email sender information
             host = self.email_host
@@ -50,6 +67,12 @@ class FunctionComponent(ResilientComponent):
             e_login = self.email_username
             e_password = self.email_password
 
+            now_utc = datetime.datetime.utcnow()
+            meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
+            if now_utc > meeting_time_utc:
+                log.error("Calendar date and time for meeting is in the past.")
+                raise ValueError("Calendar date and time for meeting is in the past.")
+
             # Get email addresses of the members and owner of the incident.
             client = self.rest_client()
             attendees = get_email_addresses(client, log, incident_id, calendar_invite_extra_email_addr)
@@ -57,7 +80,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Sending Emails to {}".format(attendees))
 
             # Build the email message string to be sent.
-            sender = "{} <{}>".format(nickname, e_login)
+            sender = u"{} <{}>".format(nickname, e_login)
             email_message_string = build_email_message(calendar_invite_datetime,
                                                        calendar_invite_subject,
                                                        calendar_invite_description,
@@ -73,13 +96,14 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Send Mail - Complete")
 
-            results = {"recipient": attendees,
+            results = {
+                "recipient": attendees,
                 "sender": sender,
                 "subject": calendar_invite_subject,
-                "body": email_message_string}
+                "description": calendar_invite_description
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log.error(e.message)
-            yield FunctionError(e.message)
+            yield FunctionError()

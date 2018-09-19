@@ -13,13 +13,13 @@ if sys.version_info[0] == 2:
     from email.MIMEMultipart import MIMEMultipart
     from email.MIMEBase import MIMEBase
     from email.MIMEText import MIMEText
-    from email.Utils import COMMASPACE, formatdate
+    from email.Utils import formatdate
     from email import Encoders
 else:
     from email.mime.multipart import MIMEMultipart
     from email.mime.base import MIMEBase
     from email.mime.text import MIMEText
-    from email.utils import COMMASPACE, formatdate
+    from email.utils import formatdate
     from email.encoders import encode_base64
 
 def get_user_id (client, uid):
@@ -60,7 +60,10 @@ def parse_email_addresses(addresses):
     # Parse on comma and remove white space
     address_list = addresses.split(",")
     for item in address_list:
-        item.strip()
+        temp = item.strip()
+        # Remove null or empty string
+        if len(temp) <= 0:
+            address_list.remove(item)
 
     return address_list
 
@@ -81,7 +84,7 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     """Build the email file to be sent(ICS file)."""
     CRLF = "\r\n"
 
-    organizer = "ORGANIZER;CN={}:mailto:first{}{}".format(nickname, CRLF, e_login)
+    organizer = "ORGANIZER;CN={}:mailto:{}".format(nickname, e_login)
     meeting_time = datetime.fromtimestamp(calendar_invite_datetime/1000)
 
     ddtstart = meeting_time
@@ -92,7 +95,7 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     dtstart = ddtstart.strftime("%Y%m%dT%H%M%SZ")
     dtend = dtend.strftime("%Y%m%dT%H%M%SZ")
 
-    description = "DESCRIPTION: {}{}".format(calendar_invite_description, CRLF)
+    description = u"DESCRIPTION: {}{}".format(calendar_invite_description, CRLF)
     attendee = ""
     for att in attendees:
         attendee += "ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-    PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE" + CRLF + " ;CN=" + att + ";X-NUM-GUESTS=0:" + CRLF + " mailto:" + att + CRLF
@@ -100,14 +103,14 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     ical += "METHOD:REQUEST" + CRLF + "BEGIN:VEVENT" + CRLF + "DTSTART:" + dtstart + CRLF + "DTEND:" + dtend + CRLF + "DTSTAMP:" + dtstamp + CRLF + organizer + CRLF
     ical += "UID:FIXMEUID" + dtstamp + CRLF
     ical += attendee + "CREATED:" + dtstamp + CRLF + description + "LAST-MODIFIED:" + dtstamp + CRLF + "LOCATION:" + CRLF + "SEQUENCE:0" + CRLF + "STATUS:CONFIRMED" + CRLF
-    ical += "SUMMARY: [ResilientIncident] {} {}".format(calendar_invite_subject,
+    ical += "SUMMARY: [Resilient Incident] {} {}".format(calendar_invite_subject,
                                                     CRLF) + "TRANSP:OPAQUE" + CRLF + "END:VEVENT" + CRLF + "END:VCALENDAR" + CRLF
 
     eml_body = "Email body visible in the invite of outlook and outlook.com but not google calendar"
     msg = MIMEMultipart('mixed')
     msg['Reply-To'] = from_string
     msg['Date'] = formatdate(localtime=True)
-    msg['Subject'] = "[ResilientIncident] {}".format(calendar_invite_subject)
+    msg['Subject'] = u"[Resilient Incident] {}".format(calendar_invite_subject)
     msg['From'] = from_string
     msg['To'] = ",".join(attendees)
 
