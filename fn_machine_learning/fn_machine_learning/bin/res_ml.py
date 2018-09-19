@@ -215,7 +215,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
 
     model = resilient_utils.get_model(mlconfig.model_name, mlconfig.addition_method)
 
-    if model:
+    if model is not None:
         model.build(csv_file=csv_file,
                     features=mlconfig.selected_features,
                     prediction=mlconfig.predict_field,
