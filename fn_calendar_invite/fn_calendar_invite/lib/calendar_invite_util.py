@@ -84,7 +84,7 @@ def build_email_message(calendar_invite_datetime, calendar_invite_subject, calen
     """Build the email file to be sent(ICS file)."""
     CRLF = "\r\n"
 
-    organizer = "ORGANIZER;CN={}:mailto:first{}{}".format(nickname, CRLF, e_login)
+    organizer = "ORGANIZER;CN={}:mailto:{}".format(nickname, e_login)
     meeting_time = datetime.fromtimestamp(calendar_invite_datetime/1000)
 
     ddtstart = meeting_time
