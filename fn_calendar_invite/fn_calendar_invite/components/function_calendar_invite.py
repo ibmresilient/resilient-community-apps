@@ -20,7 +20,6 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts)
 
-        log = logging.getLogger(__name__)
         # Get app.config parameters.
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
