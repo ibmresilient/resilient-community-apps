@@ -13,6 +13,7 @@ from fn_machine_learning.lib.ml_gaussiannb import MlGaussianNB
 from fn_machine_learning.lib.ml_bernoullinb import MlBernoulliNB
 from fn_machine_learning.lib.ml_knn import MlKNN
 import logging
+import json
 
 def get_model(name, method=None):
     model = None
@@ -104,7 +105,9 @@ def get_incidents(res_client, filename, max_count=None):
 
         inc_count = 0
         for inc in ret:
+            field_count = 0
             for field in fields[:-1]:
+                field_count = field_count + 1
                 try:
                     value = str(inc.get(field, ""))
                 except UnicodeEncodeError:
@@ -116,6 +119,27 @@ def get_incidents(res_client, filename, max_count=None):
                 # value with those two special chars needs preprocessed
                 # anyway
                 #
+
+                #
+                # @TODO
+                # It seems like there is a bug in pandas read_csv. Even though
+                # quotechar is set to ", it still gets confused by the comma below:
+                # "From: Faith Csikesz <faith@secretweaponleader.com>\\nTo: \\"Linda.Pham@ALLERGAN.com\\" <Linda.Pham@ALLERGAN.com>\\nSubject: Feedback Perceptions Survey for Claire Sears\\nDate: Thu, 16 Aug 2018 17:15:37 +0000\\n"
+                # but it has no trouble with the comma below.
+                # "Date: Wed, 27 Jun 2018 10:30:10 -0400\\nFrom: \\"Gartner Insights\\" <GartnerInsights@Gartner-promo.com>\\nSubject: Have You Explored Gartner Peer Insights Yet?\\nTo: ijessop@lifecell.com\\n"
+                #
+                # So by now we just remove the comma, since we don't handle NLS yet.
+                #
+                value = value.replace(',', ' ')
+                #
+                #
+                # @TODO
+                # If customer entered something wrong, like mismatched ' and ", the
+                # value = json.dumps(value) won't help.
+                #
+                #if '"' in value:
+                #    value = json.dumps(value)
+                value = value.replace('"', ' ')
                 if '\n' in value or ',' in value:
                     value = '"' + value + '"'
                 outfile.write(value + ", ")

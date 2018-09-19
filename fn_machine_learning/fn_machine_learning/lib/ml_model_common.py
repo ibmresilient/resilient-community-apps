@@ -69,6 +69,7 @@ class MlModelCommon(object):
         self.df = pds.read_csv(csv_file,
                                sep=self.separator,
                                usecols=all_fields,
+                               dtype={prediction:object},
                                skipinitialspace=True,
                                quotechar='"')
         #print(self.df)
