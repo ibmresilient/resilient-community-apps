@@ -19,13 +19,13 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts)
+
+        log = logging.getLogger(__name__)
         # Get app.config parameters.
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         if self.options == {}:
-            log.error("There is no [fn_calendar_invite] section in the config file, "
-                      "please set that by running resilient-circuits config -u")
-            raise ValueError("[fn_calendar_invite] section is not set in the config file")
+            raise ValueError("{} section is not set in the config file".format(CONFIG_DATA_SECTION))
 
         self.email_username = self.options.get("email_username")
         self.email_password = self.options.get("email_password")
@@ -34,18 +34,14 @@ class FunctionComponent(ResilientComponent):
         self.email_port = self.options.get("email_port")
 
         # Check that config parameters are defined.
-        if self.email_username is None:
-            log.error("email_username is not set. You must set this value to run fn_calendar_invite")
-            raise ValueError("email_username is not set. You must set this value to run fn_calendar_invite")
-        if self.email_password is None:
-            log.error("email_password is not defined. You must set this value to run fn_calendar_invite")
-            raise ValueError("email_password is not defined. You must set this value to run fn_calendar_invite")
-        if self.email_host is None:
-            log.error("email_host is not set. You must set this value to run fn_calendar_invite")
-            raise ValueError("email_host is not set. You must set this value to run fn_calendar_invite")
-        if self.email_port is None:
-            log.error("email_port is not set. You must set this value to run fn_calendar_invite")
-            raise ValueError("email_port is not set. You must set this value to run fn_calendar_invite")
+        if not self.email_username:
+            raise ValueError("email_username is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_password:
+            raise ValueError("email_password is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_host:
+            raise ValueError("email_host is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.email_port:
+            raise ValueError("email_port is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
 
 
     @function("fn_calendar_invite")
@@ -75,8 +71,8 @@ class FunctionComponent(ResilientComponent):
             now_utc = datetime.datetime.utcnow()
             meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
             if now_utc > meeting_time_utc:
-                log.error("Calendar date and time for meeting is not valid.")
-                yield FunctionError("Calendar date and time for meeting is not valid")
+                log.error("Calendar date and time for meeting is in the past.")
+                raise ValueError("Calendar date and time for meeting is in the past.")
 
             # Get email addresses of the members and owner of the incident.
             client = self.rest_client()
@@ -105,11 +101,10 @@ class FunctionComponent(ResilientComponent):
                 "recipient": attendees,
                 "sender": sender,
                 "subject": calendar_invite_subject,
-                "body": email_message_string
+                "description": calendar_invite_description
             }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log.error(e.message)
-            yield FunctionError(e.message)
+            yield FunctionError()
