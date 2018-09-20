@@ -5,7 +5,7 @@
 import logging
 import time
 from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers
+    check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers, atd_logout
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -61,7 +61,9 @@ class FunctionComponent(ResilientComponent):
         self.trust_cert = config_opts.get("trust_cert")
 
         # Verify can make connection to ATD with given config values
-        _get_atd_session_headers(self)
+        h = _get_atd_session_headers(self)
+        # Logout after making connection
+        atd_logout(self.atd_url, h, self.trust_cert)
 
     @handler("reload")
     def _reload(self, event, opts):

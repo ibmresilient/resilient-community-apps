@@ -117,18 +117,22 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
     post_data = {'data': data_dict}
 
     response = None
+    headers = _get_atd_session_headers(g)
+
     if f is not None:
         files = {'amas_filename': (file_name, f)}
-        response = requests.post(file_upload_url, post_data, files=files, headers=_get_atd_session_headers(g),
+        response = requests.post(file_upload_url, post_data, files=files, headers=headers,
                                  verify=g.trust_cert)
         log.debug("File submitted")
     elif url != "":
-        response = requests.post(file_upload_url, post_data, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+        response = requests.post(file_upload_url, post_data, headers=headers, verify=g.trust_cert)
         log.debug("url submitted")
     else:
         raise ValueError("Either file or url must be set")
 
     check_status_code(response)
+    atd_logout(g.atd_url, headers, g.trust_cert)
+
     return response
 
 
@@ -173,8 +177,10 @@ def submit_url(g, url, submit_type=None):
 
 # A loop to check if the analysis for a job has completed - need to add handling for -1 which is failed analysis
 def check_atd_status(g, task_id):
+    headers = _get_atd_session_headers(g)
+
     status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, task_id)
-    submission_status = requests.get(status_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+    submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
     check_status_code(submission_status)
     submit_json = submission_status.json()
     if submit_json['results']['istate'] == 4:
@@ -188,28 +194,33 @@ def check_atd_status(g, task_id):
         log.debug("ATD Analysis Status: {}".format(status))
         job_id = submit_json['results']['jobid']
         jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
-        res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+        res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
         res_json = res.json()
         severity = res_json.get("severity")
-        if severity < 0:
+        if int(severity) < 0:
             log.error("Severity is {}".format(str(severity)))
+            atd_logout(g.atd_url, headers, g.trust_cert)
             raise ValueError
         else:
+            atd_logout(g.atd_url, headers, g.trust_cert)
             return True
     elif submit_json['results']['istate'] == 2:
         status = submit_json['results']['status']
         log.debug("ATD Analysis Status: {}".format(status))
         job_id = submit_json['results']['jobid']
         jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
-        res = requests.get(jobid_url, headers=_get_atd_session_headers(g), verify=g.trust_cert)
+        res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
         res_json = res.json()
         severity = res_json.get("severity")
-        if severity < 0:
+        if int(severity) < 0:
             log.error("Severity is {}".format(str(severity)))
+            atd_logout(g.atd_url, headers, g.trust_cert)
             raise ValueError
         else:
+            atd_logout(g.atd_url, headers, g.trust_cert)
             return True
     elif submit_json['results']['istate'] == -1:
+        atd_logout(g.atd_url, headers, g.trust_cert)
         raise ValueError
 
 
@@ -230,8 +241,15 @@ def get_atd_report(g, taskId, report_type, report_file):
     json_url = url.format(g.atd_url, taskId, "json")
     json_response = requests.get(json_url, headers=headers, verify=g.trust_cert)
     check_status_code(json_response)
+    atd_logout(g.atd_url, headers, g.trust_cert)
 
     return json_response.json()
+
+
+# Logout of ATD session
+def atd_logout(url, headers, cert):
+    url = url + "/php/session.php"
+    requests.delete(url, headers=headers, verify=cert)
 
 
 def check_timeout(start, polling_interval, timeout):
