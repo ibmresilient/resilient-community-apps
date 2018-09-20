@@ -5,6 +5,7 @@
 
 """ Helper module containing REST API client for BigFix  """
 import logging
+from textwrap import dedent
 import requests
 import xml.etree.ElementTree as elementTree
 import ntpath
@@ -148,16 +149,19 @@ class BigFixClient(object):
 
         # strip off the prefix if it exists for current user
         if key.lower().startswith(("hkcu", "hkey_current_user")):
+            # The hkcu hive maps to a corresponding entry in hku for each user.
+            # For hkcu search instead in hku for existence of key for each actual user.
             key = key.split('\\', 1)[1]
-            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
-                "of current user keys (logged on users) " \
-                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            namekey = "exists values \"{0}\" of keys \"{1}\" " \
-                "of current user keys (logged on users) " \
-                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-            keyonly = "exists keys \"{0}\" " \
-                "of current user keys (logged on users) " \
-                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of " \
+                           "keys \"{2}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) " \
+                           "of (it as string) ) of keys \"HKU\" of " \
+                           "(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namekey = "exists values \"{0}\" of keys \"{1}\" of keys whose " \
+                      "(exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) of " \
+                      "keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            keyonly = "exists keys \"{0}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) " \
+                      "of (it as string) ) of keys \"HKU\" of " \
+                      "(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
         else:
             namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
                 "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
@@ -231,23 +235,56 @@ class BigFixClient(object):
         :return resp: Response from action
 
         """
-        query = "action uses wow64 redirection false \n" \
-                "waithidden cmd.exe /c reg delete " \
-                "\"{0}\" /f".format(artifact_value)
+        key_abs_path = artifact_value
 
         # strip off the prefix if it exists for current user
         if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
-            artifact_value = artifact_value.split('\\', 1)[1]
-            key_format = "exists keys \"{0}\" " \
-                         "of current user keys (logged on users) " \
-                         "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            # The hkcu hive maps to a corresponding entry in hku for each user.
+            # For hkcu entries remediate instead in hku for corresponding key for all users.
+            (hive, artifact_value) = artifact_value.split('\\', 1)
+            query = dedent("""
+                // set Powershell parameter
+                if {{x64 of operating system}}
+                    parameter "PowerShellexe"="{{value "Path" of key "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\\1\ShellIds\Microsoft.PowerShell" of x64 registry}}"
+                else
+                    parameter "PowerShellexe"="{{value "Path" of key "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\\1\ShellIds\Microsoft.PowerShell" of registry}}"
+                endif
+
+                //Create script
+                delete __createfile
+                delete remove_keys.ps1
+                createfile until END_OF_FILE
+                New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS
+                $PatternSID = 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$'
+                Get-ChildItem HKU:\* |where {{{{$_.name  -match $PatternSID}} | %{{{{$_.Name}} | % {{{{
+                    if (Test-Path -Path HKU:\$_\{0}) {{{{
+                        Remove-Item HKU:\$_\{0} -Confirm:$false
+                    }}
+                }}
+                END_OF_FILE
+                move __createfile remove_keys.ps1
+
+                // Execute PowerShell script
+                action uses wow64 redirection false
+                waithidden "{{parameter "PowerShellexe"}}" -ExecutionPolicy Bypass -File remove_keys.ps1
+                action uses wow64 redirection {{x64 of operating system}}
+                //delete remove_keys.ps1
+            """.format(artifact_value))
+
+            key_format = "exists keys \"{0}\" of keys whose " \
+                         "(exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) of (it as string) ) of " \
+                         "keys \"HKU\" of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
         else:
+            query = "action uses wow64 redirection false \n" \
+                    "waithidden cmd.exe /c reg delete " \
+                    "\"{0}\" /f".format(artifact_value)
+
             key_format = "exists keys \"{0}\" " \
                          "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
 
         relevance = key_format.format(artifact_value)
 
-        return self._post_bf_action_query(query, computer_id, "Delete Registry Key {0}".format(artifact_value),
+        return self._post_bf_action_query(query, computer_id, "Delete Registry Key '{0}'".format(key_abs_path),
                                                relevance)
 
     def get_bfclientquery(self, query_id, wait=30, timeout=600):
