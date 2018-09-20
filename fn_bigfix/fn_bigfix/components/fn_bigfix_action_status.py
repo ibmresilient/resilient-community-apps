@@ -11,6 +11,7 @@
 
 import logging
 from fn_bigfix.util.helpers import validate_opts, is_none
+from requests.exceptions import SSLError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import poll_action_status
@@ -65,9 +66,21 @@ class FunctionComponent(ResilientComponent):
             retry_timeout = int(self.options.get("bigfix_polling_timeout"))
 
             # Check status every 'retry_interval' secs up to 'retry_timeout' secs
-            (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
+            try:
+                status = None
+                (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
 
-            if status == "OK":
+            except (SSLError) as e:
+                log.exception("Got ssl exception %s while trying to run poll action status.", e)
+                yield StatusMessage("Got ssl exception while trying to run poll action status.")
+
+            except Exception as e:
+                log.exception("Got exception %s while trying to run poll action status.", e)
+                yield StatusMessage("Got exception while trying to run poll action status.")
+
+            if not status:
+                raise FunctionError("Function 'poll_action_status' returned bad status {}.".format(status))
+            elif status == "OK":
                 yield StatusMessage("Got good status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "OK", "status_message": status_message}
             elif status == "Failed":
@@ -80,8 +93,6 @@ class FunctionComponent(ResilientComponent):
             elif status == "Timedout":
                 yield StatusMessage("Timed out getting action status for BigFix action {}".format(bigfix_action_id))
                 results = {}
-            elif not status:
-                raise ValueError("Function 'poll_action_status' returned bad status {}.".format(status))
 
             yield StatusMessage("done...")
 

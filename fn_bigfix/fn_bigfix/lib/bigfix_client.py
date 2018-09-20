@@ -29,7 +29,8 @@ class BigFixClient(object):
         self.bf_user = options.get("bigfix_user")
         self.bf_pass = options.get("bigfix_pass")
         self.headers = {'content-type': 'application/json'}
-
+        self.retry_interval = int(options.get("bigfix_polling_interval"))
+        self.retry_timeout = int(options.get("bigfix_polling_timeout"))
         # Endpoints
         self.client_query_endpoint = '/api/clientquery'
         self.client_query_results_endpoint = '/api/clientqueryresults/'
@@ -80,10 +81,12 @@ class BigFixClient(object):
 
         """
         LOG.debug("get_bf_computer_by_service_name triggered")
+
         q_id = self.post_bfclientquery(
-            "disjunction of (it contains \"{0}\" as lowercase AND it contains \"running\") "
-            "of (services as string as lowercase)".format(service_name))
-        resp = self.get_bfclientquery(q_id)
+            "if (windows of operating system) "
+            "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) "
+            "of (services as string as lowercase)) else (false)".format(service_name))
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_process_name(self, process_name):
@@ -94,9 +97,13 @@ class BigFixClient(object):
 
         """
         LOG.debug("get_bf_computer_by_process_name triggered")
+
         q_id = self.post_bfclientquery(
-            "exists process whose(name of it as lowercase = \"{0}\")".format(process_name))
-        resp = self.get_bfclientquery(q_id)
+            "if (windows of operating system) "
+            "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) "
+            "else if (name of it contains \"Linux\") of operating system "
+            "then (exists process whose(name of it = \"{0}\")) else (false)".format(process_name))
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_file_path(self, file_path):
@@ -112,7 +119,7 @@ class BigFixClient(object):
             query = "exists file \"{0}\" of folder \"{1}\"".format(tail, head)
         LOG.debug("get_bf_computer_by_file_path triggered")
         q_id = self.post_bfclientquery(query)
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_ip(self, ip):
@@ -126,7 +133,7 @@ class BigFixClient(object):
         q_id = self.post_bfclientquery(
             "exists remote addresses whose(it=\"{0}\") of sockets whose(established of tcp state of it) of network"
                 .format(ip))
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def get_bf_computer_by_registry_key_name_value(self, key, name, value):
@@ -138,23 +145,36 @@ class BigFixClient(object):
         :return resp: Response from query
 
         """
+
+        # strip off the prefix if it exists for current user
+        if key.lower().startswith(("hkcu", "hkey_current_user")):
+            key = key.split('\\', 1)[1]
+            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
+                "of current user keys (logged on users) " \
+                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namekey = "exists values \"{0}\" of keys \"{1}\" " \
+                "of current user keys (logged on users) " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            keyonly = "exists keys \"{0}\" " \
+                "of current user keys (logged on users) " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        else:
+            namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" " \
+                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            namekey = "exists values \"{0}\" of keys \"{1}\" " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+            keyonly = "exists keys \"{0}\" " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
         LOG.debug("get_bf_computer_by_registry_key_name_value triggered")
         if name and value:
-            q_id = self.post_bfclientquery(
-                "exists values \"{0}\" whose (it=\"{1}\") of keys \"{2}\" "
-                "of (if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name, value, key))
+            q_id = self.post_bfclientquery(namevaluekey.format(name, value, key))
         elif name:
-            q_id = self.post_bfclientquery(
-                "exists values \"{0}\" of keys \"{1}\" "
-                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name, key))
+            q_id = self.post_bfclientquery(namekey.format(name, key))
         else:
-            q_id = self.post_bfclientquery(
-                "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
-                .format(name))
+            q_id = self.post_bfclientquery(keyonly.format(key))
 
-        resp = self.get_bfclientquery(q_id)
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
     def send_delete_file_remediation_message(self, artifact_value, computer_id):
@@ -178,10 +198,12 @@ class BigFixClient(object):
 
         """
         query = "if {{windows of operating system}} \n waithidden cmd.exe /c taskkill /im {0} /f /t \n" \
-                "else \n wait kill -9 {{id of process whose (name of it as lowercase = \"{0}\" as lowercase)}} \n" \
+                "else \n wait kill -9  {{concatenation \" \" of (ids of processes whose (name of it = \"{0}\") as string)}}\n " \
                 "endif".format(artifact_value)
-
-        relevance = "exists process whose(name of it as lowercase = \"{0}\")".format(artifact_value)
+        relevance = "if (windows of operating system) " \
+                    "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) " \
+                    "else if (name of it contains \"Linux\") of operating system " \
+                    "then (exists process whose(name of it = \"{0}\")) else (false)".format(artifact_value)
         return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
 
     def send_stop_service_remediation_message(self, artifact_value, computer_id):
@@ -192,11 +214,12 @@ class BigFixClient(object):
         :return resp: Response from action
 
         """
-        query = "if {{windows of operating system}} \n waithidden cmd.exe /c net stop {0} \n" \
+        query = "if {{windows of operating system}} \n waithidden cmd.exe /c net stop \"{0}\" \n" \
                 "else\n wait stop service {0} \n" \
                 "endif".format(artifact_value)
-        relevance = "disjunction of (it contains \"{0}\" as lowercase AND it contains \"running\")  " \
-                    "of (services as string as lowercase)".format(artifact_value)
+        relevance = "if (windows of operating system) " \
+                    "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) " \
+                    "of (services as string as lowercase)) else (false)".format(artifact_value)
         return self._post_bf_action_query(query, computer_id, "Stop service {0}".format(artifact_value),
                                           relevance)
 
@@ -212,13 +235,22 @@ class BigFixClient(object):
                 "waithidden cmd.exe /c reg delete " \
                 "\"{0}\" /f".format(artifact_value)
 
-        relevance = "exists keys \"{0}\" of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"\
-            .format(artifact_value)
+        # strip off the prefix if it exists for current user
+        if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
+            artifact_value = artifact_value.split('\\', 1)[1]
+            key_format = "exists keys \"{0}\" " \
+                         "of current user keys (logged on users) " \
+                         "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        else:
+            key_format = "exists keys \"{0}\" " \
+                         "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
+        relevance = key_format.format(artifact_value)
 
         return self._post_bf_action_query(query, computer_id, "Delete Registry Key {0}".format(artifact_value),
                                                relevance)
 
-    def get_bfclientquery(self, query_id, wait=5, timeout=5000):
+    def get_bfclientquery(self, query_id, wait=30, timeout=600):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
@@ -227,8 +259,8 @@ class BigFixClient(object):
         :return result: Result (list of resposes) for query id
 
         """
-        # Let's give some time to BigFix to get all the data
-        time.sleep(wait)
+        # Let's give some time (5 secs) to BigFix to get all the data
+        time.sleep(5)
         """
             timeout is in ms. 0 means try once
         """

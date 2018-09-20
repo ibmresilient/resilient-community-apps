@@ -87,18 +87,23 @@ class FunctionComponent(ResilientComponent):
             elif params["artifact_type"] == "Service":
                 response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             elif params["artifact_type"] == "Registry Key":
-                response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                if len(bigfix_artifact_value.split('\\')) <= 2:
+                    log.exception("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                    yield StatusMessage("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                    response = None
+                else:
+                    response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             elif params["artifact_type"] == "File Path":
                 response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
             else:
-                log.error("Unsupported artifact type {}.".format(params["artifact_type"]))
-                raise ValueError("Unsupported artifact type {}.".format(params["artifact_type"]))
+                log.error("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+                raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
 
             if response is None:
                 log.debug("Could not create BigFix Action.")
-                yield FunctionError("Could not create BigFix Action")
+                raise FunctionError("Could not create BigFix Action")
             else:
-                status_message = "BigFix Action Created Successfully."
+                status_message = "BigFix action created successfully."
                 action_id = response
                 remediation_date = datetime.datetime.today().strftime('%m-%d-%Y %H:%M:%S')
                 status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \

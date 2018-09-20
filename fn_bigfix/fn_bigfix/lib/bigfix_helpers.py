@@ -48,7 +48,7 @@ def poll_retry_sleep(retry_timeout, retry_interval, finished):
         time.sleep(retry_interval)
     return retry_timeout
 
-def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=1800):
+def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=600):
     """"Poll Bigfix for status of action by id.
 
     :param bigfix_action_id: Bigfix action id to poll status

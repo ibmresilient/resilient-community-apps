@@ -102,7 +102,7 @@ def create_attachment(rest_client, file_name, file_content, params):
     """
 
     # Create the temporary file save results in json format.
-    with tempfile.NamedTemporaryFile('w+b', bufsize=0, delete=False) as temp_file:
+    with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file:
         json.dump(file_content, temp_file)
         temp_file.close()
         try:
