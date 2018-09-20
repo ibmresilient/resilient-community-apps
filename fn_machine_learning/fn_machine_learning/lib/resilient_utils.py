@@ -130,7 +130,13 @@ def get_incidents(res_client, filename, max_count=None):
                 #
                 # So by now we just remove the comma, since we don't handle NLS yet.
                 #
-                value = value.replace(',', ' ')
+                try:
+                    tmp = json.loads(value)
+                except Exception as e:
+                    #
+                    # value could be a list. Only replace for string
+                    #
+                    value = value.replace(',', ' ')
                 #
                 #
                 # @TODO
@@ -151,3 +157,36 @@ def get_incidents(res_client, filename, max_count=None):
                 break
 
     return inc_count
+
+
+def get_field_def(resilient_client, field, type_name):
+    """
+    Call the /types/{type}/fields/{field_name} to get the mapping
+    between numerical value and label.
+    Once a prediction is done, we will use this mapping to
+    convert the numerical value back to label.
+    :param resilient_client:
+    :param field:
+    :param type_name:
+    :return:
+    """
+    log = logging.getLogger(__name__)
+    url_path = "/types/{}/fields/{}".format(type_name, field)
+    json_dict = resilient_client.get(url_path)
+
+    ret = {}
+    if json_dict:
+        log.debug("Field def: {}".format(json_dict))
+        values = json_dict.get("values", [])
+        for val in values:
+            #
+            #   For classification, we always assume prediction to be
+            #   string. We forced it to be object type when
+            #   we read using pandas.read_csv. So here we convert
+            #   the value to string as well
+            #
+            ret[str(val["value"])] = val["label"]
+    else:
+        log.error("get_field_def for field = {}, and type = {} returned Null".format(field, type_name))
+
+    return ret

@@ -41,7 +41,8 @@ class LogisticRegression(MlModelCommon, LgRegression):
         else:
             LgRegression.__init__(self,
                                   C=c,
-                                  random_state=random_state)
+                                  random_state=random_state,
+                                  class_weight='balanced')
 
 
 

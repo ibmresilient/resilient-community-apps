@@ -15,7 +15,8 @@ import pandas as pds
 import pickle
 import datetime
 import logging
-
+import fn_machine_learning.lib.model_utils as model_utils
+import numpy
 
 class MlModelCommon(object):
 
@@ -252,6 +253,29 @@ class MlModelCommon(object):
         self.accuracy = accuracy_score(y_true=actual,
                               y_pred=predict)
 
+
+        analysis = model_utils.analyze(y_true=actual,
+                                       y_pred=predict)
+
         for t, p in zip(actual, predict):
             log.debug(str(t) + " : " + str(p) + "\n")
         return self.accuracy
+
+    def predict_result(self, input_dict):
+        """
+        Override this in subclass
+        :return:
+        """
+        pass
+
+    def predict_map(self, input_dict, mapping):
+        res = self.predict_result(input_dict)
+        #
+        #   res could be a numpy.ndarray
+        #
+        if isinstance(res, numpy.ndarray):
+            predict = mapping.get(res[0], res[0])
+        else:
+            predict = mapping.get(res, res)
+
+        return predict

@@ -7,8 +7,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import fn_machine_learning.lib.resilient_utils as resilient_utils
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
-import numpy
 
 
 class FunctionComponent(ResilientComponent):
@@ -55,13 +55,12 @@ class FunctionComponent(ResilientComponent):
             else:
                 raise ValueError("active_model not defined in app.config")
 
+            mapping = resilient_utils.get_field_def(self.rest_client(),
+                                                    model.prediction,
+                                                    "incident")
             prediction = ""
             if model:
-                predictions = model.predict_result(inc)
-                if isinstance(predictions, numpy.ndarray):
-                    prediction = str(predictions[0])
-                else:
-                    prediction = str(model.predict_result(inc))
+                prediction = model.predict_map(inc, mapping)
             else:
                 raise Exception("Failed to load model file: {}".format(active_model))
 

@@ -24,7 +24,8 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
         self.using_method = False
         RandomForestClassifier.__init__(self,
                                         n_estimators=100,
-                                        random_state=99)
+                                        random_state=99,
+                                        class_weight="balanced")
 
     @staticmethod
     def get_name():

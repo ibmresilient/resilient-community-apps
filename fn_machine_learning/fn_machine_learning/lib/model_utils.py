@@ -97,3 +97,29 @@ def get_default_encoder(features, csv_file, separator=','):
 
     return preprocess
 
+
+def analyze(y_true, y_pred):
+    re = {}
+    count = {}
+    correct = {}
+    for t, p in zip(y_true, y_pred):
+        if t in count:
+            count[t] = count[t] + 1
+        else:
+            count[t] = 1
+
+        if t == p:
+            if t in correct:
+                correct[t] = correct[t] + 1
+            else:
+                correct[t] = 1
+
+    for key, value in count.iteritems():
+        cor = correct.get(key, 0)
+        re[key] = cor/count[key]
+
+    return re
+
+
+
+
