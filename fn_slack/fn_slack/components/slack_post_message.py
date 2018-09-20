@@ -117,15 +117,16 @@ class FunctionComponent(ResilientComponent):
                 # find user ids based on their emails
                 user_id_list = slack_utils.find_user_ids(slack_participant_emails)
 
-                # invite users to a channel
-                results_users_invited = slack_utils.invite_users_to_channel(user_id_list)
+                if user_id_list:
+                    # invite users to a channel
+                    results_users_invited = slack_utils.invite_users_to_channel(user_id_list)
 
-                if results_users_invited.get("ok"):
-                    yield StatusMessage("Users invited to #{} channel".format(slack_channel_name))
-                elif not results_users_invited.get("ok") and results_users_invited.get("error") == "already_in_channel":
-                    yield StatusMessage("Invited user is already in #{} channel".format(slack_channel_name))
-                else:
-                    yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
+                    if results_users_invited.get("ok"):
+                        yield StatusMessage("Users invited to #{} channel".format(slack_channel_name))
+                    elif not results_users_invited.get("ok") and results_users_invited.get("error") == "already_in_channel":
+                        yield StatusMessage("Invited user is already in #{} channel".format(slack_channel_name))
+                    else:
+                        yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
 
             # post message to the channel
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_details, slack_as_user,

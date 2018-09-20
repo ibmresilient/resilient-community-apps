@@ -13,10 +13,8 @@ def_username = "Resilient"
 slack_test_channel = "test-channel"
 
 
-class TestSlack:
+class TestSlack(object):
     """ Tests for the fn_slack function"""
-
-    # TODO - add ok = "False" api call results! - errors patch - side_effect
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_find_channel_by_name(self, mocked_api_call):
@@ -87,6 +85,22 @@ class TestSlack:
         assert (slack_utils.get_channel().get("name") == slack_test_channel)
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_slack_create_channel_error(self, mocked_api_call):
+        """ Test find Slack channel by name error"""
+        print("TTest create Slack channel error\n")
+
+        mocked_api_call.return_value = {
+            "ok": False,
+        }
+
+        try:
+            slack_utils = SlackUtils("fake_api_key")
+            slack_utils.slack_create_channel(slack_test_channel, False)
+            assert False
+        except ValueError:
+            assert True
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
     @pytest.mark.parametrize("test_input,expected", [
         ("test-channel-public", False),
         ("test-channel-private", True)
@@ -137,12 +151,45 @@ class TestSlack:
                 }
         }
         slack_utils = SlackUtils("fake_api_key")
-        user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com") #FIXME test multiple times to test split and strip
+        user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com")
         mocked_api_call.assert_called_with( # checks the last call to a method, check for b@b.com email
             "users.lookupByEmail",
             email="b@b.com"
         )
         assert user_id_list == ['W012A3CDE', 'W012A3CDE']
+
+        user_id_list = slack_utils.find_user_ids("a@a.com")
+        mocked_api_call.assert_called_with(
+            "users.lookupByEmail",
+            email="a@a.com"
+        )
+        assert user_id_list == ['W012A3CDE']
+
+        user_id_list = slack_utils.find_user_ids("a@a.com, ")
+        mocked_api_call.assert_called_with(
+            "users.lookupByEmail",
+            email="a@a.com"
+        )
+        assert user_id_list == ['W012A3CDE']
+
+        user_id_list = slack_utils.find_user_ids(" ")
+        assert user_id_list == []
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_find_user_ids_error(self, mocked_api_call):
+        """ Test find Slack user id by email error"""
+        print("Test find Slack user id by email error\n")
+
+        mocked_api_call.return_value = {
+            "ok": False,
+        }
+
+        try:
+            slack_utils = SlackUtils("fake_api_key")
+            slack_utils.find_user_ids("b@b.com")
+            assert False
+        except ValueError:
+            assert True
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_invite_users_to_channel(self, mocked_api_call):
@@ -174,8 +221,61 @@ class TestSlack:
         )
         assert results.get("ok") is True
 
-        # invite the same users again
-        #self.assertTrue(results.get("ok") and results.get("error") == "already_in_channel")
+        results = slack_utils.invite_users_to_channel(["W1234567890"])
+        mocked_api_call.assert_called_with(
+            "conversations.invite",
+            channel="C0EAQDV4Z",
+            users="W1234567890"
+        )
+        assert results.get("ok") is True
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_invite_users_to_channel_error_pass(self, mocked_api_call):
+        """ Test invite Slack users to a channel - already in channel error"""
+        print("Test invite Slack users to a channel - already in channel error\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        # Test inviting users to a channel error
+        mocked_api_call.return_value = {
+            "ok": False,
+            "error": "already_in_channel"
+        }
+        results = slack_utils.invite_users_to_channel(["W1234567890"])
+        if not results.get("ok") and results.get("error") == "already_in_channel":
+            assert True
+        else:
+            assert False
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_invite_users_to_channel_error(self, mocked_api_call):
+        """ Test invite Slack users to a channel error"""
+        print("Test invite Slack users to a channel error\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        # Test inviting users to a channel error
+        mocked_api_call.return_value = {
+            "ok": False,
+            "error": "something_else"
+        }
+        results = slack_utils.invite_users_to_channel(["W1234567890"])
+        if not results.get("ok") and results.get("error") == "already_in_channel":
+            assert False
+        else:
+            assert True
 
     def test_build_boolean(self):
         """ Test build boolean method"""
@@ -219,29 +319,29 @@ class TestSlack:
         print("Test build payload method\n")
 
         dataDict = self._buildDataDetails()
-        resoptions = {
-                    'host': 'localhost',
-                    'port': '443',
-                }
+        resoptions = {'host': 'localhost', 'port': '443'}
         payload = build_payload(dataDict, resoptions)
 
         assert payload is not None
         assert 'Resilient URL' in payload
 
-    @patch('fn_slack.components.slack_common.SlackUtils.slack_create_channel')
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
-    def test_slack_post_message(self, mocked_api_call, mocked_create_channel):
+    def test_slack_post_message(self, mocked_api_call):
         """ Test post and reply Slack message"""
         print("Test post and reply Slack message\n")
 
+        # Create slack_details for the post_message
+        resoptions = {'host': 'localhost', 'port': '443'}
+        dataDict = self._buildDataDetails()
+        slack_details = json.dumps(dataDict)
+
         # Setup channel first
-        mocked_create_channel.return_value = {
-                    "id": "C1H9RESGL",
-                    "name": "test-channel"
-                    }
+        mocked_channel = {
+            "id": "C1H9RESGL",
+            "name": "test-channel"
+        }
         slack_utils = SlackUtils("fake_api_key")
-        channel = slack_utils.slack_create_channel(slack_test_channel, False)
-        slack_utils.set_channel(channel)
+        slack_utils.set_channel(mocked_channel)
 
         # 1 - Test sending a message
         mocked_api_call.return_value = {
@@ -254,17 +354,8 @@ class TestSlack:
             "ts": "1536873835.000100"
         }
 
-        # create slack_details for the post_message
-        resoptions = {
-            'host': 'localhost',
-            'port': '443',
-        }
-        dataDict = self._buildDataDetails()
-        slack_details = json.dumps(dataDict)
-
         results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, None,
                                                  def_username)
-
         # covert slack_details to string - create payload to compare with for assert_called_with
         data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
         payload = build_payload(data, resoptions)
@@ -314,6 +405,32 @@ class TestSlack:
         assert results2.get("ok") is True
         assert results2.get("message").get("thread_ts") == thread_id
 
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_slack_post_message_error(self, mocked_api_call):
+        """ Test post and reply Slack message error"""
+        print("Test post and reply Slack message error\n")
+
+        # Create slack_details for the post_message
+        resoptions = {'host': 'localhost', 'port': '443'}
+        dataDict = self._buildDataDetails()
+        slack_details = json.dumps(dataDict)
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C1H9RESGL",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        # Test inviting users to a channel error
+        mocked_api_call.return_value = {
+            "ok": False,
+        }
+        results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, None,
+                                                 def_username)
+        assert results.get("ok") is False
+
     def _buildDataDetails(self):
         """ Mock Data Details """
         return {
@@ -328,19 +445,18 @@ class TestSlack:
   "Incident Types": {"type": "string", "data": "[Phishing]" }
         }
 
-    @patch('fn_slack.components.slack_common.SlackUtils.slack_create_channel')
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
-    def test_get_permalink(self, mocked_api_call, mocked_create_channel):
+    def test_get_permalink(self, mocked_api_call):
         """ Test get a permalink"""
         print("Test get a permalink\n")
 
-        mocked_create_channel.return_value = {
-                    "id": "C0EAQDV4Z",
-                    "name": "test-channel"
-                }
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
         slack_utils = SlackUtils("fake_api_key")
-        channel = slack_utils.slack_create_channel(slack_test_channel, False)
-        slack_utils.set_channel(channel)
+        slack_utils.set_channel(mocked_channel)
 
         mocked_api_call.return_value = {
             "ok": True,
@@ -349,3 +465,25 @@ class TestSlack:
         }
         permalink = slack_utils.get_permalink("fake_thread_id")
         assert permalink == "https://ghostbusters.slack.com/archives/C0EAQDV4Z/p135854651500008"
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_get_permalink_error(self, mocked_api_call):
+        """ Test get a permalink error"""
+        print("Test get a permalink error\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        mocked_api_call.return_value = {
+            "ok": False
+        }
+        try:
+            slack_utils.get_permalink("fake_thread_id")
+            assert False
+        except ValueError:
+            assert True
