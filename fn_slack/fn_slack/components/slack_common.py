@@ -7,6 +7,9 @@ from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp
 from slackclient import SlackClient
 from six import string_types
+import tempfile
+import datetime
+import os
 
 LOG = logging.getLogger(__name__)
 
@@ -40,6 +43,13 @@ class SlackUtils(object):
         :return: channel_id
         """
         return self.channel.get("id")
+
+    def get_channel_name(self):
+        """
+        Return channel_name.
+        :return: channel_name
+        """
+        return self.channel.get("name")
 
     def get_slack_client(self):
         """
@@ -220,43 +230,43 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    # def get_channel_history(self, cursor):
-    #     """
-    #     Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
-    #     and then continue paging using the instructions below. Cursor-based pagination will make it easier to
-    #     incrementally collect information. To begin pagination, specify a limit value under 1000.
-    #     Slack recommends no more than 200 results at a time.
-    #     :return: JSON result
-    #     """
-    #     messages = []
-    #     cursor = None
-    #     more_results = True
-    #     while more_results
-    #         results = self.slack_client.api_call(
-    #           "conversations.history",
-    #            channel=self.channel.get("id"),
-    #             limit=200,
-    #             cursor=cursor
-    #         )
-    #
-    #         LOG.debug(results)
-    #
-    #         response_metadata = results.get("response_metadata")
-    #         if results.get("ok") and response_metadata:
-    #             messages.append(results.get("messages"))
-    #             cursor = response_metadata.get("next_cursor")
-    #             if not cursor:
-    #                 more_results = False
-    #     #
-    #     # results = self.slack_client.api_call(
-    #     #     "conversations.history",
-    #     #     channel=self.channel.get("id"),
-    #     #     limit=100,
-    #     #     cursor=cursor
-    #     # )
-    #     # LOG.debug(results)
-    #
-    #     return messages
+    def get_channel_history(self, cursor=None):
+        """
+        Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
+        and then continue paging using the cursor. Cursor-based pagination will make it easier to
+        incrementally collect information. To begin pagination, specify a limit value under 1000.
+        Slack recommends no more than 200 results at a time.
+        :return: JSON result
+        """
+        messages = []
+        has_more_results = True
+        while has_more_results:
+            results = self.slack_client.api_call(
+                "conversations.history",
+                channel=self.channel.get("id"),
+                limit=200,
+                cursor=cursor
+            )
+
+            LOG.debug(results)
+
+            if results.get("ok"):
+                response_metadata = results.get("response_metadata")
+                if results.get("has_more") and response_metadata:  # more pages
+                    cursor = response_metadata.get("next_cursor")
+                    # we've reached the last page
+                    # not sure this extra step is needed, since we already check for "has_more" flag
+                    # Slack pagination documentation isn't clear on this
+                    if not cursor:
+                        has_more_results = False
+                else:  # final page
+                    has_more_results = False
+                messages.extend(results.get("messages"))
+
+            else:
+                raise ValueError("Slack error response: " + results.get("error", ""))
+
+        return messages
 
     def get_user_info(self, user_id):
         """
@@ -275,6 +285,59 @@ class SlackUtils(object):
 
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
+
+    def save_conversation_history_as_attachment(self, messages, client, incident_id, task_id):
+        """
+        Method saves conversation history to a text file and posts it as an attachment.
+        :param messages list of message dict
+        :param client Resilient API
+        :param incident_id
+        :param task_id
+        :return:
+        """
+        new_attachment = None
+        with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
+            try:
+                # For each msg in the history, parse
+                for message in messages:
+                    # get the username
+                    if message.get("type") == "message":
+                        subtype = message.get("subtype")
+                        if subtype == "bot_message":
+                            username = message["username"]  # Bot's name is stored in "username" property
+                        else:
+                            username = self.get_user_info(message.get("user")).get("name")
+
+                        # get the timestamp
+                        msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
+                        msg_time = msg_ts.strftime("%Y-%m-%d %H:%M:%S")
+
+                        # get the text message
+                        msg_text = message.get("text")
+
+                    # write to a temp file
+                    temp_file.write(username.encode('utf-8') + " - " + msg_time.encode('utf-8') + ": " +
+                                    msg_text.encode('utf-8') + "\n")
+                    temp_file.write("\n")  # Add a new blank line
+
+                temp_file.close()
+
+                # Create POST uri
+                # ..for a task, if task_id is defined
+                if task_id:
+                    attachment_uri = '/tasks/{}/attachments'.format(task_id)
+                # ...else for an attachment
+                else:
+                    attachment_uri = '/incidents/{}/attachments'.format(incident_id)
+
+                # POST the new attachment
+                attachment_name = "slack_msg_export_" + self.get_channel_name() + ".txt"
+                new_attachment = client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
+                                                        mimetype='text/plain')
+            finally:
+                os.unlink(temp_file.name)
+
+        return new_attachment
 
 
 def build_payload(dataDict, resoptions):

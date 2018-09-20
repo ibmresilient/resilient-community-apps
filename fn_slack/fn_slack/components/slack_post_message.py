@@ -111,7 +111,7 @@ class FunctionComponent(ResilientComponent):
                 slack_utils.slack_create_channel(slack_channel_name, slack_is_private)
 
                 # rewrite slack_channel_name just in case Slack validation modifies the submitted channel name
-                slack_channel_name = slack_utils.get_channel().get("name")
+                slack_channel_name = slack_utils.get_channel_name()
 
             if slack_participant_emails:
                 # find user ids based on their emails
