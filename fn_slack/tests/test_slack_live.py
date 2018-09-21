@@ -3,7 +3,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 from fn_slack.components.slack_common import *
 import pytest
-import simplejson as json
 try:
     from unittest.mock import patch
 except:
@@ -41,10 +40,10 @@ class TestSlack(object):
         slack_utils.find_channel_by_name(slack_test_channel)
         mocked_api_call.assert_called_with(
             "conversations.list",
-            exclude_archived=True,
+            exclude_archived=False,
             types="public_channel,private_channel"
         )
-        assert (slack_utils.get_channel().get("name") == slack_test_channel)
+        assert (slack_utils.get_channel_name() == slack_test_channel)
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_find_channel_by_name_error(self, mocked_api_call):
@@ -82,7 +81,7 @@ class TestSlack(object):
             name=slack_test_channel,
             is_private=False
         )
-        assert (slack_utils.get_channel().get("name") == slack_test_channel)
+        assert (slack_utils.get_channel_name() == slack_test_channel)
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_slack_create_channel_error(self, mocked_api_call):
@@ -132,7 +131,7 @@ class TestSlack(object):
         slack_utils.find_channel_by_name(test_input)
         mocked_api_call.assert_called_with(
             "conversations.list",
-            exclude_archived=True,
+            exclude_archived=False,
             types="public_channel,private_channel"
         )
         assert (slack_utils.is_channel_private() == expected)
@@ -152,7 +151,7 @@ class TestSlack(object):
         }
         slack_utils = SlackUtils("fake_api_key")
         user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com")
-        mocked_api_call.assert_called_with( # checks the last call to a method, check for b@b.com email
+        mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
             "users.lookupByEmail",
             email="b@b.com"
         )
@@ -330,11 +329,6 @@ class TestSlack(object):
         """ Test post and reply Slack message"""
         print("Test post and reply Slack message\n")
 
-        # Create slack_details for the post_message
-        resoptions = {'host': 'localhost', 'port': '443'}
-        dataDict = self._buildDataDetails()
-        slack_details = json.dumps(dataDict)
-
         # Setup channel first
         mocked_channel = {
             "id": "C1H9RESGL",
@@ -347,19 +341,11 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": True,
             "channel": "C1H9RESGL",
-            "message": {
-                "text": "Here's a message for you",
-                "ts": "1536873835.000100"
-            },
             "ts": "1536873835.000100"
         }
 
-        results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, None,
-                                                 def_username)
-        # covert slack_details to string - create payload to compare with for assert_called_with
-        data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
-        payload = build_payload(data, resoptions)
-
+        payload = "testing"
+        results = slack_utils.slack_post_message(None, payload, True, None, True, "none", True, None, def_username)
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
@@ -381,15 +367,12 @@ class TestSlack(object):
             "ok": True,
             "channel": "C1H9RESGL",
             "message": {
-                "text": "Here's a message for you",
-                "ts": "1537293614.000100",
-                "thread_ts": "1536873835.000100" # this is the one that needs to match it's parent for threading
+                "thread_ts": "1536873835.000100"  # this is the one that needs to match it's parent for threading
             },
             "ts": "1537293614.000100"
         }
 
-        results2 = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, thread_id,
-                                                  def_username)
+        results2 = slack_utils.slack_post_message(None, payload, True, None, True, "none", True, thread_id, def_username)
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
@@ -410,11 +393,6 @@ class TestSlack(object):
         """ Test post and reply Slack message error"""
         print("Test post and reply Slack message error\n")
 
-        # Create slack_details for the post_message
-        resoptions = {'host': 'localhost', 'port': '443'}
-        dataDict = self._buildDataDetails()
-        slack_details = json.dumps(dataDict)
-
         # Setup channel first
         mocked_channel = {
             "id": "C1H9RESGL",
@@ -427,7 +405,7 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": False,
         }
-        results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, None,
+        results = slack_utils.slack_post_message(None, "testing", True, None, True, "none", True, None,
                                                  def_username)
         assert results.get("ok") is False
 

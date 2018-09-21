@@ -2,7 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import logging
-import simplejson as json
+import json
+try:
+    from json import JSONDecodeError
+except:
+    JSONDecodeError = ValueError
+
 from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp
 from slackclient import SlackClient
@@ -42,14 +47,20 @@ class SlackUtils(object):
         Return channel_id.
         :return: channel_id
         """
-        return self.channel.get("id")
+        if self.get_channel() is not None:
+            return self.get_channel().get("id")
+        else:
+            return None
 
     def get_channel_name(self):
         """
         Return channel_name.
         :return: channel_name
         """
-        return self.channel.get("name")
+        if self.get_channel() is not None:
+            return self.get_channel().get("name")
+        else:
+            return None
 
     def get_slack_client(self):
         """
@@ -74,14 +85,17 @@ class SlackUtils(object):
         :param def_username - name to use for who posted the message
         :return: JSON result
         """
-        data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
-        payload = build_payload(data, resoptions)
-        LOG.debug(payload)
+        try:
+            data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
+            payload = build_payload(data, resoptions)
+            LOG.debug(payload)
+        except JSONDecodeError: # if slack_details aren't in JSON format then just post it as is - also need to post to Slack from other methods, like right before archiving channel
+            payload = slack_details
 
         # start processing
         results = self.slack_client.api_call(
             "chat.postMessage",
-            channel=self.channel.get("id"),
+            channel=self.get_channel_id(),
             text=payload,
             as_user=slack_as_user,
             username=slack_username if slack_username else def_username,
@@ -105,7 +119,7 @@ class SlackUtils(object):
 
         results = self.slack_client.api_call(
             "conversations.invite",
-            channel=self.channel.get("id"),
+            channel=self.get_channel_id(),
             users=users_id
         )
         LOG.debug(results)
@@ -120,9 +134,10 @@ class SlackUtils(object):
         """
         all_channels = self._slack_find_channels()
 
-        for channel in all_channels:
-            if slack_channel_name == channel.get("name"):
-                self.channel = channel
+        for ch in all_channels:
+            if ch.get("name") == slack_channel_name:
+                self.channel = ch
+                break
 
     def find_user_ids(self, emails):
         """
@@ -166,6 +181,17 @@ class SlackUtils(object):
         else:
             return False
 
+    def is_channel_archived(self):
+        """
+        Verify if channel is archived.
+        :return: True if channel is archived
+        """
+        if self.channel and self.channel.get("is_archived"):
+            return True
+
+        else:
+            return False
+
     def _slack_find_channels(self):
         """
         Method returns a list of all public or private channels in a workspace.
@@ -176,7 +202,7 @@ class SlackUtils(object):
 
         results = self.slack_client.api_call(
             "conversations.list",
-            exclude_archived=True,
+            exclude_archived=False,  # we need to load archived channels
             types="public_channel,private_channel"
         )
         LOG.debug(results)
@@ -219,7 +245,7 @@ class SlackUtils(object):
         """
         results = self.slack_client.api_call(
             "chat.getPermalink",
-            channel=self.channel.get("id"),
+            channel=self.get_channel_id(),
             message_ts=thread_id
         )
         LOG.debug(results)
@@ -230,20 +256,24 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def get_channel_history(self, cursor=None):
+    def _get_channel_message_history(self, cursor=None):
         """
-        Method return the entire history for a conversation. Need to call the method with no latest or oldest arguments,
+        Method returns the thread's parent message IDs ("ts") from a conversation. Supports pagination.
+        Need to call "conversations.history" method with no latest or oldest arguments,
         and then continue paging using the cursor. Cursor-based pagination will make it easier to
         incrementally collect information. To begin pagination, specify a limit value under 1000.
         Slack recommends no more than 200 results at a time.
-        :return: JSON result
+
+        "conversations.history" method returns only parent messages, save all parent messages ts IDs and call
+        "conversations.replies" function to load complete message history.
+        :return: list of 'ts' timestamps - thread's parent message.
         """
-        messages = []
+        message_ts_list = []
         has_more_results = True
         while has_more_results:
             results = self.slack_client.api_call(
                 "conversations.history",
-                channel=self.channel.get("id"),
+                channel=self.get_channel_id(),
                 limit=200,
                 cursor=cursor
             )
@@ -254,19 +284,56 @@ class SlackUtils(object):
                 response_metadata = results.get("response_metadata")
                 if results.get("has_more") and response_metadata:  # more pages
                     cursor = response_metadata.get("next_cursor")
-                    # we've reached the last page
-                    # not sure this extra step is needed, since we already check for "has_more" flag
-                    # Slack pagination documentation isn't clear on this
-                    if not cursor:
-                        has_more_results = False
                 else:  # final page
                     has_more_results = False
-                messages.extend(results.get("messages"))
+                messages = results.get("messages")
+                message_ts_list.extend([msg.get("ts") for msg in messages])
 
             else:
                 raise ValueError("Slack error response: " + results.get("error", ""))
 
-        return messages
+        return message_ts_list
+
+    def get_channel_complete_history(self, cursor=None):
+        """
+        Method will return the entire history for a conversation. Supports pagination.
+        Do not use "conversations.history" here use "conversations.replies" instead, "conversations.replies" method
+        returns an entire thread (a message plus all the messages in reply to it),
+        while "conversations.history" method returns only parent messages.
+        :return: JSON result
+        """
+        # Get a list of thread's parent message "ts" which are the timestamp of an existing parent
+        # message with 0 or more replies. If there are no replies then just the single parent message
+        # referenced by "ts" will return - it is just an ordinary message.
+        message_ts_list = self._get_channel_message_history()
+
+        history = []
+
+        for msg_ts in message_ts_list:
+            has_more_results = True
+            while has_more_results:
+                results = self.slack_client.api_call(
+                    "conversations.replies",
+                    channel=self.get_channel_id(),
+                    ts=msg_ts,
+                    limit=10,
+                    cursor=cursor
+                )
+
+                LOG.debug(results)
+
+                if results.get("ok"):
+                    response_metadata = results.get("response_metadata")
+                    if results.get("has_more") and response_metadata:  # more pages
+                        cursor = response_metadata.get("next_cursor")
+                    else:  # final page
+                        has_more_results = False
+                    history.extend(results.get("messages"))
+
+                else:
+                    raise ValueError("Slack error response: " + results.get("error", ""))
+
+        return history
 
     def get_user_info(self, user_id):
         """
@@ -295,30 +362,38 @@ class SlackUtils(object):
         :param task_id
         :return:
         """
-        new_attachment = None
         with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
             try:
                 # For each msg in the history, parse
                 for message in messages:
-                    # get the username
                     if message.get("type") == "message":
+
+                        # 1 get the username
                         subtype = message.get("subtype")
                         if subtype == "bot_message":
                             username = message["username"]  # Bot's name is stored in "username" property
                         else:
                             username = self.get_user_info(message.get("user")).get("name")
 
-                        # get the timestamp
+                        # 2 were there any replies - only parent messages can have replies
+                        replies = message.get("reply_count")
+
+                        # 3 get the timestamp
                         msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
                         msg_time = msg_ts.strftime("%Y-%m-%d %H:%M:%S")
 
-                        # get the text message
-                        msg_text = message.get("text")
+                        # 4 get the text message
+                        text = message.get("text")
 
-                    # write to a temp file
-                    temp_file.write(username.encode('utf-8') + " - " + msg_time.encode('utf-8') + ": " +
-                                    msg_text.encode('utf-8') + "\n")
-                    temp_file.write("\n")  # Add a new blank line
+                        # 5 write in a temp file - replace certain values if this is a thread (replies are None)
+                        # FIXME try using jinja this is not pretty!
+                        indentation = "\t" if replies is None else ""
+                        msg_text = text.replace("\n", "\n\t") if replies is None else text
+                        posted_info = " POSTED A REPLY ON " if replies is None else " POSTED ON "
+                        replies_info = "\n{} REPLIES:".format(str(replies)) if replies else ""
+                        temp_file.write(indentation + username.encode('utf-8') + posted_info + msg_time.encode('utf-8')
+                                        + ": \n" + indentation + msg_text.encode('utf-8') + replies_info + "\n")
+                        temp_file.write("\n")  # Add a new blank line
 
                 temp_file.close()
 
@@ -331,13 +406,28 @@ class SlackUtils(object):
                     attachment_uri = '/incidents/{}/attachments'.format(incident_id)
 
                 # POST the new attachment
-                attachment_name = "slack_msg_export_" + self.get_channel_name() + ".txt"
+                attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
                 new_attachment = client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
                                                         mimetype='text/plain')
+            except Exception as ex:
+                raise ex
+
             finally:
                 os.unlink(temp_file.name)
 
         return new_attachment
+
+    def archive_channel(self):
+        """
+        Function sets the channel to archive.
+        :return:
+        """
+        # results = self.slack_client.api_call(
+        #     "conversations.archive",
+        #     channel=self.get_channel_id()
+        # )
+        # LOG.debug(results)
+        return {"ok": True} # FIXME turn off for easier testing
 
 
 def build_payload(dataDict, resoptions):

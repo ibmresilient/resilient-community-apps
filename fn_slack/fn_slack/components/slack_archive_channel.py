@@ -3,13 +3,10 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 import logging
-import simplejson as json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
 import slack_common
-import tempfile
-import datetime
-import os
+import json
 
 LOG = logging.getLogger(__name__)
 
@@ -47,42 +44,50 @@ class FunctionComponent(ResilientComponent):
 
             # configuration specific slack parameters
             api_token = self.options['api_token']
-            slack_utils = slack_common.SlackUtils(api_token)
+            def_username = self.options['username']
 
-            # get the channel history in json format
             # find the channel
+            slack_utils = slack_common.SlackUtils(api_token)
             slack_utils.find_channel_by_name(slack_channel_name)
-            yield StatusMessage("Found channel #{} with id {}".format(slack_channel_name, slack_utils.get_channel_id()))
+            if slack_utils.get_channel() is None:
+                yield FunctionError(
+                    "There is no private or public channel named {} in your workspace. ".format(slack_channel_name))
 
-            # load history
-            messages = slack_utils.get_channel_history(None)
+            if slack_utils.is_channel_archived():
+                yield FunctionError(
+                    "Channel {} is already marked as archived.".format(slack_channel_name))
+            else:
+                yield StatusMessage(
+                    "Found channel #{} with id {}".format(slack_channel_name, slack_utils.get_channel_id()))
 
-            # Saving conversation history to a text file
+            # notify the channel that we are going to archive
+            text = "This channel has been set to be archived from Resilient."
+            results_msg_posted = slack_utils.slack_post_message(None, text, None, None, True, None, None, None, def_username)
+            if results_msg_posted.get("ok"):
+                yield StatusMessage("Message for archiving channel was added to Slack.")
+            else:
+                yield FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
+
+            # get the channel history
+            messages = slack_utils.get_channel_complete_history()
+
+            # Saving conversation history to a text file and post it as attachment
             yield StatusMessage("Saving conversation history to a text file.")
             new_attachment = slack_utils.save_conversation_history_as_attachment(messages, self.rest_client(),
                                                                                  incident_id, task_id)
-
-            # If the attachment succeeded in POSTing, print message, return result
             if new_attachment is not None:
-                yield StatusMessage('Chat log was uploaded as an attachment for {}'.format(new_attachment['id']))
-                #yield FunctionResult({'attachment_id': new_attachment['id']})
-
-            # Else, raise an error
+                yield StatusMessage("Channel '{}' chat history was uploaded as an attachment.".format(slack_channel_name))
             else:
-                yield StatusMessage('Failed creating attachment')
-                raise FunctionError(u'Failed creating attachment')
+                yield FunctionError("Failed creating an attachment.")
 
+            # Archive channel
+            results = slack_utils.archive_channel()
+            if results.get("ok"):
+                yield StatusMessage("Channel {} has been archived.".format(slack_channel_name))
+            else:
+                yield FunctionError("Archiving channel failed: " + json.dumps(results))
 
-            # # notify the channel that we are going to archive
-            # sc.api_call("chat.postMessage", channel="#" + channel_name,
-            #             text="This channel has been set to be archived from Resilient")
-            #
-            # # set the channel to archive
-            # sc.api_call("channels.archive", channel=channel_id)
-
-            yield StatusMessage("Integration has completed")
-
-            results = {}  # FIXME create a Note in the postprocess script?
+            results = {"channel": slack_channel_name}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

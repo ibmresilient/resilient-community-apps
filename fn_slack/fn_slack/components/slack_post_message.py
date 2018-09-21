@@ -11,7 +11,7 @@ Many of the features of posting a Slack message are under customer control inclu
 """
 
 import logging
-import simplejson as json
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
 import slack_common
@@ -105,7 +105,8 @@ class FunctionComponent(ResilientComponent):
                                         "To post to this channel please change the input parameter "
                                         "'slack_is_channel_private' "
                                         "to 'Yes' or create a new public channel.".format(slack_channel_name))
-
+                elif slack_utils.is_channel_archived():
+                    yield FunctionError("Channel {} is archived.".format(slack_channel_name))
             else:
                 # create a new channel
                 slack_utils.slack_create_channel(slack_channel_name, slack_is_private)
