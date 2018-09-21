@@ -151,6 +151,10 @@ class BigFixClient(object):
         if key.lower().startswith(("hkcu", "hkey_current_user")):
             # The hkcu hive maps to a corresponding entry in hku for each user.
             # For hkcu search instead in hku for existence of key for each actual user.
+            # The hku entries top-level keys are the sids for the users which can have an hkcu hive loaded.
+            # e.g 'HKEY_USERS\S-1-5-18' or 'HKEY_USERS\S-1-5-21-0123456789-0123456789-0123456789-1000' for a system or
+            # standard account.
+            # The regex pattern 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$' is used to match an sid in the hku hive.
             key = key.split('\\', 1)[1]
             namevaluekey = "exists values \"{0}\" whose (it=\"{1}\") of " \
                            "keys \"{2}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) " \
@@ -241,6 +245,10 @@ class BigFixClient(object):
         if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
             # The hkcu hive maps to a corresponding entry in hku for each user.
             # For hkcu entries remediate instead in hku for corresponding key for all users.
+            # The hku entries top-level keys are the sids for the users which can have an hkcu hive loaded.
+            # e.g 'HKEY_USERS\S-1-5-18' or 'HKEY_USERS\S-1-5-21-0123456789-0123456789-0123456789-1000' for system or
+            # standard account.
+            # The regex pattern 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$' is used to match an sid in the hku hive.
             (hive, artifact_value) = artifact_value.split('\\', 1)
             query = dedent("""
                 // set Powershell parameter
