@@ -185,6 +185,36 @@ class BigFixClient(object):
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
+    def check_exists_subkey(self, artifact_value, computer_id):
+        """ Bigfix query - Determine if a registry key has subkeys.
+
+        :param artifact_value: Name of artifact to query
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        # strip off the prefix if it exists for current user
+        if artifact_value.lower().startswith(("hkcu", "hkey_current_user")):
+            (hive, artifact_value) = artifact_value.split('\\', 1)
+            # The hkcu hive maps to a corresponding entry in hku for each user.
+            # For hkcu get subkey instead in hku for existence of key for each actual user.
+            # The hku entries top-level keys are the sids for the users which can have an hkcu hive loaded.
+            # e.g 'HKEY_USERS\S-1-5-18' or 'HKEY_USERS\S-1-5-21-0123456789-0123456789-0123456789-1000' for a system or
+            # standard account.
+            # The regex pattern 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$' is used to match an sid in the hku hive.
+            subkey = "exists key of keys \"{0}\" of keys whose (exists matches(regex(\"S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$\")) " \
+                      "of (it as string) ) of keys \"HKU\" of " \
+                      "(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+        else:
+            subkey = "exists key of keys \"{0}\" " \
+                "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
+
+        LOG.debug("exists subkey triggered")
+        q_id = self.post_bfclientquery(subkey.format(artifact_value), computer_id)
+
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
+        return resp
+
     def send_delete_file_remediation_message(self, artifact_value, computer_id):
         """ Bigfix action - Delete file remediate action.
 
@@ -265,6 +295,7 @@ class BigFixClient(object):
                 New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS
                 $PatternSID = 'S-\d+-\d+-\d+(-\d+-\d+\-\d+\-\d+)*$'
                 Get-ChildItem HKU:\* |where {{{{$_.name  -match $PatternSID}} | %{{{{$_.Name}} | % {{{{
+
                     if (Test-Path -Path HKU:\$_\{0}) {{{{
                         Remove-Item HKU:\$_\{0} -Confirm:$false
                     }}
@@ -348,7 +379,7 @@ class BigFixClient(object):
                 time.sleep(1)
         return result
 
-    def post_bfclientquery(self, query):
+    def post_bfclientquery(self, query, computer_id=None):
         """" Post Bigfix relevance query.
 
         :param query: Relevance query
@@ -366,8 +397,12 @@ class BigFixClient(object):
         query_elem = elementTree.SubElement(clientq_elem, 'QueryText')
         query_elem.text = query
         target_elem = elementTree.SubElement(clientq_elem, 'Target')
-        target_comp_elem = elementTree.SubElement(target_elem, 'CustomRelevance')
-        target_comp_elem.text = 'true'
+        if computer_id is not None:
+            target_comp_elem = elementTree.SubElement(target_elem, 'ComputerID')
+            target_comp_elem.text = str(computer_id)
+        else:
+            target_comp_elem = elementTree.SubElement(target_elem, 'CustomRelevance')
+            target_comp_elem.text = 'true'
         r = requests.post(query_url, auth=(self.bf_user, self.bf_pass), verify=False, data=elementTree.tostring(post_xml))
         if r.status_code == 200:
             try:

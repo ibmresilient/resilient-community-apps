@@ -90,10 +90,18 @@ class FunctionComponent(ResilientComponent):
                 elif params["artifact_type"] == "Registry Key":
                     if len(bigfix_artifact_value.split('\\')) <= 2:
                         log.exception("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
-                        yield StatusMessage("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                        yield StatusMessage("Warning: Delete not allowed for root level key {}.".format(bigfix_artifact_value))
                         response = None
                     else:
-                        response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                        # Test if registry key has 1 or more subkeys
+                        result = bigfix_client.check_exists_subkey(bigfix_artifact_value, bigfix_asset_id)
+                        if (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                            log.exception("Delete not allowed, key '{}' has 1 or more subkeys.".format(bigfix_artifact_value))
+                            yield StatusMessage("Warning: Delete not allowed, key '{}' has 1 or more subkeys."
+                                                .format(bigfix_artifact_value))
+                            response = None
+                        else:
+                            response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 elif params["artifact_type"] == "File Path":
                     response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 else:
