@@ -6,8 +6,8 @@ import resilient.co3base as resilient
 HELP_STR = """
 python get_incidents -p PASSWORD"""
 
-arg_str = "hp:"
-arg_list = ["help", "password"]
+arg_str = "hp:o:"
+arg_list = ["help", "password", "outfile"]
 
 
 class SampleCmd(ToolCommand):
@@ -21,7 +21,7 @@ class SampleCmd(ToolCommand):
 
 		res_client = resilient.BaseClient(**args)
 		res_client.connect(self.system_user, self.opts_dict["password"])
-		resilient_utils.get_incidents(res_client, "tool_incident.csv")
+		resilient_utils.get_incidents(res_client, self.opts_dict["outfile"])
 
 		print("Done")
 

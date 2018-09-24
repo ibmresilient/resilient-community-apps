@@ -11,23 +11,22 @@ class ToolCommand(object):
     system_host = None
     system_verify = False
 
-    def __init__(self, help_string):
+    def __init__(self, help_string, server_tool=True):
         import os
         if system_host_env in os.environ:
             self.system_host = os.environ[system_host_env]
-        else:
+        elif server_tool:
             print("Environment variable " + system_host_env + " is missing.")
 
         if system_user_env in os.environ:
             self.system_user = os.environ[system_user_env]
-        else:
+        elif server_tool:
             print("Environment variable " + system_user_env + " is missing")
 
         if system_org_env in os.environ:
             self.system_org = os.environ[system_org_env]
-        else:
+        elif server_tool:
             print("Environment variable " + system_org_env + " is missing")
-
 
         if system_verify_env in os.environ and os.environ[system_verify_env] == "True":
             self.system_verify = True
@@ -35,7 +34,6 @@ class ToolCommand(object):
         self.help_string = help_basic + "\n" + help_string
 
         self.opts_dict = {}
-
 
     def run_command(self, argv, arg_str, arg_list):
         import sys, getopt
@@ -59,7 +57,6 @@ class ToolCommand(object):
             self.do_command()
         except Exception as e:
             print(str(e))
-
 
     def do_command(self):
         """
