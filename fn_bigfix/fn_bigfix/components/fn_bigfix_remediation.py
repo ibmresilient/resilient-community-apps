@@ -80,24 +80,37 @@ class FunctionComponent(ResilientComponent):
             bigfix_client = BigFixClient(self.options)
 
             yield StatusMessage("Running BigFix remediation ...")
-            # Send a remediation message to BigFix
 
-            if params["artifact_type"]  == "Process Name":
-                response = bigfix_client.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif params["artifact_type"] == "Service":
-                response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif params["artifact_type"] == "Registry Key":
-                if len(bigfix_artifact_value.split('\\')) <= 2:
-                    log.exception("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
-                    yield StatusMessage("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
-                    response = None
+            # Send a remediation message to BigFix
+            try:
+                if params["artifact_type"]  == "Process Name":
+                    response = bigfix_client.send_kill_process_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                elif params["artifact_type"] == "Service":
+                    response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                elif params["artifact_type"] == "Registry Key":
+                    if len(bigfix_artifact_value.split('\\')) <= 2:
+                        log.exception("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                        yield StatusMessage("Warning: Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                        response = None
+                    else:
+                        # Test if registry key has 1 or more subkeys
+                        result = bigfix_client.check_exists_subkey(bigfix_artifact_value, bigfix_asset_id)
+                        if (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                            log.exception("Delete not allowed, key '{}' has 1 or more subkeys.".format(bigfix_artifact_value))
+                            yield StatusMessage("Warning: Delete not allowed, key '{}' has 1 or more subkeys."
+                                                .format(bigfix_artifact_value))
+                            response = None
+                        else:
+                            response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                elif params["artifact_type"] == "File Path":
+                    response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 else:
-                    response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            elif params["artifact_type"] == "File Path":
-                response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
-            else:
-                log.error("Unsupported artifact type '{}'.".format(params["artifact_type"]))
-                raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+                    log.error("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+                    raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+            except Exception as e:
+                log.exception("Got exception while trying to run a BigFix remediation.", e)
+                yield StatusMessage("Got exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
+                raise Exception("Got exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
 
             if response is None:
                 log.debug("Could not create BigFix Action.")

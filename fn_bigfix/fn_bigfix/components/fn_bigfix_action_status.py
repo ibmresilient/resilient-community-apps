@@ -69,14 +69,10 @@ class FunctionComponent(ResilientComponent):
             try:
                 status = None
                 (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
-
-            except (SSLError) as e:
-                log.exception("Got ssl exception %s while trying to run poll action status.", e)
-                yield StatusMessage("Got ssl exception while trying to run poll action status.")
-
             except Exception as e:
-                log.exception("Got exception %s while trying to run poll action status.", e)
-                yield StatusMessage("Got exception while trying to run poll action status.")
+                log.exception("Got exception while trying to poll BigFix action status.", e)
+                yield StatusMessage("Got exception '{}' while trying to poll BigFix action status.".format(type(e).__name__))
+                raise type(e).__name__
 
             if not status:
                 raise FunctionError("Function 'poll_action_status' returned bad status {}.".format(status))
