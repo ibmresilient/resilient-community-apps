@@ -18,14 +18,13 @@ import logging
 import fn_machine_learning.lib.model_utils as model_utils
 import numpy
 
+
 class MlModelCommon(object):
+    """
+    Super class of all the ml models we support
+    """
 
-    #
-    # Support only one saved model at this point
-    #
-    FEATURES_FILE_NAME = "saved_feature.txt"
-
-    def __init__(self, method=None):
+    def __init__(self, method=None, log=None):
         """
         Initialize
         """
@@ -45,6 +44,11 @@ class MlModelCommon(object):
         self.method_name = method
         self.ensemble_method = None
         self.number_samples = 0
+        self.log = log
+        self.build_time = ""
+
+    def set_log(self, log):
+        self.log = log
 
     def set_build_time(self):
         self.build_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -57,16 +61,18 @@ class MlModelCommon(object):
         :param prediction:
         :return:
         """
-        log = logging.getLogger(__name__)
-
         self.prediction = prediction
         self.features = list(features)
 
         all_fields = list(features)
-        log.debug("All fields in csv: {}".format(str(all_fields)))
+        self.log.debug("All fields in csv: {}".format(str(all_fields)))
         all_fields.append(prediction)
 
-
+        #
+        # Use pandas.read_csv to load samples.
+        #@TODO: right now we force the prediciton type to object (string)
+        # Need to revisit this when we need to predict regression later
+        #
         self.df = pds.read_csv(csv_file,
                                sep=self.separator,
                                usecols=all_fields,
@@ -74,7 +80,6 @@ class MlModelCommon(object):
                                skipinitialspace=True,
                                quotechar='"')
         #print(self.df)
-
 
     def eliminate_missings(self):
         """
@@ -96,10 +101,9 @@ class MlModelCommon(object):
         #
         # Basically each categorical column needs one labelencoder
         #
-        log = logging.getLogger(__name__)
         for col_name, col in self.X.iteritems():
-            log.info("Column {col_name} is {col_type}".format(col_name=col_name,
-                                                              col_type=col.dtype.name))
+            self.log.debug("Column {col_name} is {col_type}".format(col_name=col_name,
+                                                                   col_type=col.dtype.name))
             #
             # For numerical column labelencoder is used to normalize the column
             # And for categorical column, it is used to transform to numerical labels.
@@ -146,7 +150,7 @@ class MlModelCommon(object):
                 self.X[col_name] = le.transform(self.X[col_name])
                 self.label_encoder[col_name] = le
 
-        log.debug(self.X)
+        self.log.debug(self.X)
 
     def get_encoder_for_float(self):
         """
@@ -159,24 +163,27 @@ class MlModelCommon(object):
         """
         return LabelEncoder()
 
-
     def transform_for_prediction(self, df):
-        log = logging.getLogger(__name__)
+        """
+        Transform the input df before applying ml model on it
+        :param df:
+        :return:
+        """
         for col_name, col in df.iteritems():
             if col.dtype.name == "object" or col.dtype.name == "float64":
                 try:
-                   le = self.label_encoder.get(col_name, None)
-                   if le:
-                       if isinstance(le, MultiIdBinarizer):
-                           df = le.transform(df)
-                       elif le:
-                           df[col_name] = le.transform(df[col_name])
-                   else:
-                       log.error("Unable to find lable encoder for " + col_name)
+                    le = self.label_encoder.get(col_name, None)
+                    if le:
+                        if isinstance(le, MultiIdBinarizer):
+                            df = le.transform(df)
+                        elif le:
+                            df[col_name] = le.transform(df[col_name])
+                    else:
+                        self.log.error("Unable to find label encoder for " + col_name)
                 except ValueError as e:
                     #
                     #
-                    log.error("Need to handle new label for " + col_name)
+                    self.log.error("Need to handle new label for " + col_name)
 
         return df
 
@@ -190,14 +197,12 @@ class MlModelCommon(object):
         #
         self.X = DataPreparation.one_hot_encoding(self.X, features)
 
-
     def split_samples(self, test_percentage=0.5):
         """
 
         :param test_percentage:
         :return:
         """
-        log = logging.getLogger(__name__)
         X = self.X.values
         y = self.y.values
         self.X_train, self.X_test, self.y_train, self.y_test = \
@@ -206,7 +211,7 @@ class MlModelCommon(object):
                              random_state=0,
                              stratify=self.y)
 
-        log.debug(self.y_train)
+        self.log.debug(self.y_train)
 
     def save_to_file(self, file_name):
         """
@@ -223,9 +228,9 @@ class MlModelCommon(object):
         self.X_train = None
         self.y_train = None
         self.y_test = None
+        self.log = None
 
         pickle.dump(self, open(file_name, "wb"))
-
 
     @staticmethod
     def load_from_file(file_name):
@@ -244,7 +249,6 @@ class MlModelCommon(object):
         :param actual:
         :return: accuracy percentage
         """
-        log = logging.getLogger(__name__)
         #
         # Set build time
         #
@@ -253,12 +257,18 @@ class MlModelCommon(object):
         self.accuracy = accuracy_score(y_true=actual,
                               y_pred=predict)
 
-
         analysis = model_utils.analyze(y_true=actual,
                                        y_pred=predict)
 
         for t, p in zip(actual, predict):
-            log.debug(str(t) + " : " + str(p) + "\n")
+            self.log.debug(str(t) + " : " + str(p) + "\n")
+
+        self.log.info("----------------------------------")
+        self.log.info("Accuracy for each predicted value:")
+        self.log.info("----------------------------------")
+        for key, value in analysis.iteritems():
+            self.log.info("{}:    {}".format(key, value))
+
         return self.accuracy
 
     def predict_result(self, input_dict):
@@ -266,7 +276,7 @@ class MlModelCommon(object):
         Override this in subclass
         :return:
         """
-        pass
+        return []
 
     def predict_map(self, input_dict, mapping):
         res = self.predict_result(input_dict)

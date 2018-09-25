@@ -45,13 +45,14 @@ class MultiIdBinarizer(object):
 
         return
 
-    def transform(self, df):
+    def transform(self, df, in_log=None):
         """
 
-        :param df:
+        :param df: dataframe to transform
+        :param in_log:
         :return:
         """
-        log = logging.getLogger(__name__)
+        log = in_log if in_log else logging.getLogger(__name__)
         col = df[self.col_name]
         col_size = len(col)
 

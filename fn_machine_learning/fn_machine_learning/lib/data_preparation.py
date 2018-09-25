@@ -6,6 +6,7 @@
 import pandas as pds
 from sklearn.preprocessing import MinMaxScaler
 
+
 class DataPreparation(object):
 
     @staticmethod

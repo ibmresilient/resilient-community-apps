@@ -14,8 +14,8 @@ import logging
 
 class MlGaussianNB(MlModelCommon, GaussianNB):
 
-    def __init__(self, method=None, random_state=1):
-        MlModelCommon.__init__(self, method=method)
+    def __init__(self, method=None, random_state=1, log=None):
+        MlModelCommon.__init__(self, method=method, log=log)
         self.using_method = False
         if method == "Bagging":
             model = GaussianNB()
@@ -46,7 +46,6 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to handle missing values
             self.eliminate_missings()
@@ -55,7 +54,7 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
             self.split_samples(test_prediction)
 
             if len(self.y_train) > 0:
-                log.info("Using {} samples to train. ".format(len(self.y_train)))
+                self.log.info("Using {} samples to train. ".format(len(self.y_train)))
                 if self.using_method:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
@@ -72,10 +71,10 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.info("No samples to train the model")
+                self.log.info("No samples to train the model")
 
         except Exception as e:
-            log.error(e)
+            self.log.error(e)
             raise e
 
     def predict_result(self, input):
@@ -84,7 +83,6 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         :param input:
         :return:
         """
-        log = logging.getLogger(__name__)
         df = pds.DataFrame([input])
         #
         # We only care about the features
@@ -92,7 +90,7 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         df = df[self.features]
 
         df = self.transform_for_prediction(df)
-        log.info("Using df {} to predict.".format(str(df)))
+        self.log.info("Using df {} to predict.".format(str(df)))
 
         if self.using_method:
             ret = self.ensemble_method.predict(df)

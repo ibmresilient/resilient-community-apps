@@ -214,6 +214,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         model_utils.update_config_from_app_config(ml_opt, mlconfig)
 
     model = resilient_utils.get_model(mlconfig.model_name, mlconfig.addition_method)
+    model.log = LOG
 
     if model is not None:
         model.build(csv_file=csv_file,
@@ -221,7 +222,6 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
                     prediction=mlconfig.predict_field,
                     test_prediction=mlconfig.split_percentage)
         # Output summary of build
-
 
         LOG.info("--------")
         LOG.info("Summary:")

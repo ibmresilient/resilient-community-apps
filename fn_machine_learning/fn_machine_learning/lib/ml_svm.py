@@ -11,11 +11,12 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 import logging
 
+
 class MlSVC(MlModelCommon, SVC):
     """
     Support Vector Machine algorithm.
     """
-    def __init__(self, kernel="linear", C=1.0, random_state=1, method=None):
+    def __init__(self, kernel="linear", C=1.0, random_state=1, method=None, log=None):
         """
 
         :param kernel:
@@ -23,7 +24,7 @@ class MlSVC(MlModelCommon, SVC):
         :param random_state:
         """
         self.kernel = kernel
-        MlModelCommon.__init__(self, method=method)
+        MlModelCommon.__init__(self, method=method, log=log)
         self.using_method = False
         if method == "Bagging":
             model = SVC(kernel=kernel,
@@ -54,7 +55,6 @@ class MlSVC(MlModelCommon, SVC):
         else:
             return "SVM with Gaussian kernel"
 
-
     def build(self, csv_file, features, prediction, test_prediction):
         """
 
@@ -65,7 +65,6 @@ class MlSVC(MlModelCommon, SVC):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to remove samples with missig values. If
             # customer has other ways to handle missing values,
@@ -76,7 +75,7 @@ class MlSVC(MlModelCommon, SVC):
             self.split_samples(test_prediction)
 
             if len(self.y_train) > 0:
-                log.info("Using {} samples to train. ".format(len(self.y_train)))
+                self.log.info("Using {} samples to train. ".format(len(self.y_train)))
                 if self.using_method:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
@@ -93,9 +92,9 @@ class MlSVC(MlModelCommon, SVC):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.error("No sample to train the model")
+                self.log.error("No sample to train the model")
         except Exception as e:
-            log.error(str(e))
+            self.log.error(str(e))
             raise e
 
     def predict_result(self, input_dict):

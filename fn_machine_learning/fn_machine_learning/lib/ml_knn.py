@@ -15,14 +15,14 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
     """
     Support K-Nearest Neighbor algorithm
     """
-    def __init__(self, random_state=1, n_neighbors=5, method=None):
+    def __init__(self, random_state=1, n_neighbors=5, method=None, log=None):
         """
 
         :param random_state:
         :param n_neighbors:
         :param method:
         """
-        MlModelCommon.__init__(self, method=method)
+        MlModelCommon.__init__(self, method=method, log=log)
         self.using_method = False
         if method == "Bagging":
             model = KNeighborsClassifier(n_neighbors=n_neighbors,
@@ -42,6 +42,7 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
             KNeighborsClassifier.__init__(self,
                                           n_neighbors=n_neighbors,
                                           metric="minkowski")
+
     @staticmethod
     def get_name():
         return u"K-Nearest Neighbor"
@@ -56,7 +57,6 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to remove samples with missig values. If
             # customer has other ways to handle missing values,
@@ -67,7 +67,7 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
             self.split_samples(test_prediction)
 
             if len(self.y_train) > 0:
-                log.info("Using {} samples to train. ".format(len(self.y_train)))
+                self.log.info("Using {} samples to train. ".format(len(self.y_train)))
                 if self.using_method:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
@@ -84,9 +84,9 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.error("No sample to train the model")
+                self.log.error("No sample to train the model")
         except Exception as e:
-            log.error(str(e))
+            self.log.error(str(e))
             raise e
 
     def predict_result(self, input_dict):

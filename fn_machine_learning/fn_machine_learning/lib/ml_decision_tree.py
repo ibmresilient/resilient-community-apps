@@ -14,8 +14,8 @@ import logging
 
 class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
 
-    def __init__(self, method=None, random_state=10):
-        MlModelCommon.__init__(self, method=method)
+    def __init__(self, method=None, random_state=10, log=None):
+        MlModelCommon.__init__(self, method=method, log=log)
         self.using_method = False
         if method == "Bagging":
             model = DecisionTreeClassifier(min_samples_split=20,
@@ -50,7 +50,6 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to handle missing values
             self.eliminate_missings()
@@ -59,7 +58,7 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
             self.split_samples(test_prediction)
 
             if len(self.y_train) > 0:
-                log.info("Using {} samples to train. ".format(len(self.y_train)))
+                self.log.info("Using {} samples to train. ".format(len(self.y_train)))
                 if self.using_method:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
@@ -90,10 +89,10 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.info("No samples to train the model")
+                self.log.info("No samples to train the model")
 
         except Exception as e:
-            log.error(str(e))
+            self.log.error(str(e))
             raise e
 
     def predict_result(self, input):

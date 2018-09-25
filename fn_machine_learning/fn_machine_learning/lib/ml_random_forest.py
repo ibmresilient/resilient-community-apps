@@ -14,8 +14,8 @@ import logging
 
 class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
-    def __init__(self, method=None):
-        MlModelCommon.__init__(self, method=method)
+    def __init__(self, method=None, log=None):
+        MlModelCommon.__init__(self, method=method, log=log)
         #
         # Random forest is a special case of bagging of
         # decision tree. Might not make sense to
@@ -41,7 +41,6 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to handle missing values
             self.eliminate_missings()
@@ -71,10 +70,10 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.error("No samples to train the model")
+                self.log.error("No samples to train the model")
 
         except Exception as e:
-            log.error(str(e))
+            self.log.error(str(e))
             raise e
 
     def predict_result(self, input):

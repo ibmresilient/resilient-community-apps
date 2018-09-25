@@ -16,7 +16,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
     """
     Logistic Regression algorithm for Machine Learning
     """
-    def __init__(self, method=None, c=100.0, random_state=1):
+    def __init__(self, method=None, c=100.0, random_state=1, log=None):
         """
         Initialize the model
         :param c:
@@ -24,7 +24,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
         """
         self.c = c
         self.random_state = random_state
-        MlModelCommon.__init__(self, method=method)
+        MlModelCommon.__init__(self, method=method, log=log)
         self.using_method = False
         if method == "Bagging":
             model = LgRegression(C=c, random_state=random_state)
@@ -44,8 +44,6 @@ class LogisticRegression(MlModelCommon, LgRegression):
                                   random_state=random_state,
                                   class_weight='balanced')
 
-
-
     @staticmethod
     def get_name():
         return "Logistic Regression"
@@ -60,23 +58,22 @@ class LogisticRegression(MlModelCommon, LgRegression):
         :return:
         """
         try:
-            log = logging.getLogger(__name__)
             self.extract_csv(csv_file, features, prediction)
             # Need to handle missing values
-            log.info("Eliminate samples with missing feature(s).")
+            self.log.debug("Eliminate samples with missing feature(s).")
             self.eliminate_missings()
 
             # self.one_hot_encoding(features)
-            log.info("Transform numerical.")
+            self.log.debug("Transform numerical.")
             self.transform_numerical()
-            log.info("Split samples at " + str(test_prediction))
+            self.log.debug("Split samples at " + str(test_prediction))
             self.split_samples(test_prediction)
 
             #
             # Train model using training data
             #
             if len(self.y_train) > 0:
-                log.info("Using {} samples to train.".format(str(len(self.y_train))))
+                self.log.info("Using {} samples to train.".format(str(len(self.y_train))))
                 if self.using_method:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
@@ -92,8 +89,10 @@ class LogisticRegression(MlModelCommon, LgRegression):
                     y_predict = self.predict(self.X_test)
                     pres = self.predict_proba(self.X_test)[:, 1]
 #==
-
-
+                #
+                #   IBM Watson uses AUC to measure the performance of a model
+                #   To compare against IBM Watson we compute AUC here as well
+                #
                 ytest = []
                 for re in self.y_test:
                     if re == "yes":
@@ -114,10 +113,10 @@ class LogisticRegression(MlModelCommon, LgRegression):
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
             else:
-                log.info("Nothing to train the model")
+                self.log.info("Nothing to train the model")
 
         except Exception as e:
-            log.exception(str(e))
+            self.log.exception(str(e))
             raise e
 
     def predict_result(self, input):
@@ -126,11 +125,10 @@ class LogisticRegression(MlModelCommon, LgRegression):
         :param input:
         :return:
         """
-        log = logging.getLogger(__name__)
         df = pds.DataFrame([input])
         df = df[self.features]
         df = self.transform_for_prediction(df)
-        log.info("dataframe used to predict: " + str(df))
+        self.log.info("dataframe used to predict: " + str(df))
 
         if self.using_method:
             ret = self.ensemble_method.predict(df)

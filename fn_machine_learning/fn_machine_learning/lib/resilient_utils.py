@@ -15,6 +15,7 @@ from fn_machine_learning.lib.ml_knn import MlKNN
 import logging
 import json
 
+
 def get_model(name, method=None):
     model = None
     if name == "Logistic Regression":
@@ -78,14 +79,14 @@ class MlConfig(object):
         self.model = self.NAME_MAPPING.get(name, self.ML_MODEL_LOGISTIC_REGRESSION)
 
 
-def get_incidents(res_client, filename, max_count=None):
+def get_incidents(res_client, filename, max_count=None, in_log=None):
     """
     Convert JSON into CSV and save
     :param res_client: incidents in json format
     :param filename: file name for saving CSV
     :return:
     """
-    log = logging.getLogger(__name__)
+    log = in_log if in_log else logging.getLogger(__name__)
 
     # Read the fields of an incident
     inc_fields = res_client.get("/types/incident")
@@ -159,7 +160,7 @@ def get_incidents(res_client, filename, max_count=None):
     return inc_count
 
 
-def get_field_def(resilient_client, field, type_name):
+def get_field_def(resilient_client, field, type_name, in_log=None):
     """
     Call the /types/{type}/fields/{field_name} to get the mapping
     between numerical value and label.
@@ -168,9 +169,10 @@ def get_field_def(resilient_client, field, type_name):
     :param resilient_client:
     :param field:
     :param type_name:
+    :param in_log: log
     :return:
     """
-    log = logging.getLogger(__name__)
+    log = in_log if in_log else logging.getLogger(__name__)
     url_path = "/types/{}/fields/{}".format(type_name, field)
     json_dict = resilient_client.get(url_path)
 

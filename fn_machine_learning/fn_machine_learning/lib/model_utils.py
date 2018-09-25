@@ -62,7 +62,7 @@ def update_config_from_saved_model(model_file, mlconfig):
         mlconfig.addition_method = None
 
 
-def get_default_encoder(features, csv_file, separator=','):
+def get_default_encoder(features, csv_file, separator=',', in_log=None):
     """
     Get the default preprocess for selected features
     :param features: selected features from the csv_file
@@ -70,7 +70,7 @@ def get_default_encoder(features, csv_file, separator=','):
     :return:
     """
     preprocess = {}
-    log = logging.getLogger(__name__)
+    log = in_log if in_log else logging.getLogger(__name__)
 
     try:
         df = pds.read_csv(csv_file,
@@ -116,7 +116,7 @@ def analyze(y_true, y_pred):
 
     for key, value in count.iteritems():
         cor = correct.get(key, 0)
-        re[key] = cor/count[key]
+        re[key] = float(cor)/count[key]
 
     return re
 
