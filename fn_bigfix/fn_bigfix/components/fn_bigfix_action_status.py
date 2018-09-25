@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
             if not status:
                 raise FunctionError("Function 'poll_action_status' returned bad status {}.".format(status))
             elif status == "OK":
-                yield StatusMessage("Got good status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
+                yield StatusMessage("Got good status '{0}' for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "OK", "status_message": status_message}
             elif status == "Failed":
                 yield StatusMessage("Got error status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
