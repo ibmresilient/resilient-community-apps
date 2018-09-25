@@ -138,7 +138,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield FunctionError("Message add failed: "+json.dumps(results_msg_posted))
 
-            # generate a permalink URL to join this conversation
+            # generate a permalink URL to join this conversation # FIXME - do we need this when replying?
             conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
 
             results = {"channel": slack_channel_name,

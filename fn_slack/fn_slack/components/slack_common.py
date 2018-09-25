@@ -62,13 +62,6 @@ class SlackUtils(object):
         else:
             return None
 
-    def get_slack_client(self):
-        """
-        Return instance variable slack_client.
-        :return: slack_client
-        """
-        return self.slack_client
-
     def slack_post_message(self, resoptions, slack_details, slack_as_user, slack_username, slack_reply_broadcast,
                            slack_parse, slack_markdown, slack_thread_id, def_username):
         """
@@ -86,10 +79,8 @@ class SlackUtils(object):
         :return: JSON result
         """
         try:
-            data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
-            payload = build_payload(data, resoptions)
-            LOG.debug(payload)
-        except JSONDecodeError: # if slack_details aren't in JSON format then just post it as is - also need to post to Slack from other methods, like right before archiving channel
+            payload = convert_slack_details_to_payload(slack_details, resoptions)
+        except JSONDecodeError: # if slack_details aren't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
             payload = slack_details
 
         # start processing
@@ -138,6 +129,49 @@ class SlackUtils(object):
             if ch.get("name") == slack_channel_name:
                 self.channel = ch
                 break
+
+    def _slack_find_channels(self, cursor=None):
+        """
+        Method returns a list of all public or private channels in a workspace.
+        Using Conversations API to access anything channel-like (private, public, direct, etc)
+
+        Supports pagination. Cursor-based pagination will make it easier to
+        incrementally collect information. To begin pagination, specify a limit value under 1000.
+        Slack recommends no more than 200 results at a time. Paginate only until channel is found.
+        :return: list of channels
+        """
+        has_more_results = True
+        while has_more_results:
+            results = self.slack_client.api_call(
+                "conversations.list",
+                exclude_archived=False,  # we need to load archived channels
+                types="public_channel,private_channel",
+                limit=20,
+                cursor=cursor
+            )
+
+            LOG.debug(results)
+
+            if results.get("ok"):
+                response_metadata = results.get("response_metadata")
+                if results.get("has_more") and response_metadata:  # more pages
+                    cursor = response_metadata.get("next_cursor")
+                elif response_metadata:  # more pages
+                    # you need this extra step there is no "has_more" flag
+                    # different behaviour with Slack api functions that support pagination
+                    cursor = response_metadata.get("next_cursor")
+                    if not cursor:
+                        # we've reached the last page
+                        has_more_results = False
+                else:
+                    # we've reached the last page
+                    has_more_results = False
+
+                for ch in results.get("channels"):  # yield the first page, paginate only until channel is found!
+                    yield ch
+
+            else:
+                raise ValueError("Slack error response: " + results.get("error", ""))
 
     def find_user_ids(self, emails):
         """
@@ -191,27 +225,6 @@ class SlackUtils(object):
 
         else:
             return False
-
-    def _slack_find_channels(self):
-        """
-        Method returns a list of all public or private channels in a workspace.
-        # FIXME max 100 channels returned, look into cursor!
-        :return: list of channels
-        """
-        # Using Conversations API to access anything channel-like (private, public, direct, etc)
-
-        results = self.slack_client.api_call(
-            "conversations.list",
-            exclude_archived=False,  # we need to load archived channels
-            types="public_channel,private_channel"
-        )
-        LOG.debug(results)
-
-        if results.get("ok"):
-            return results.get("channels")
-
-        else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
 
     def slack_create_channel(self, slack_channel_name, is_private):
         """
@@ -274,7 +287,7 @@ class SlackUtils(object):
             results = self.slack_client.api_call(
                 "conversations.history",
                 channel=self.get_channel_id(),
-                limit=200,
+                limit=2,
                 cursor=cursor
             )
 
@@ -284,8 +297,17 @@ class SlackUtils(object):
                 response_metadata = results.get("response_metadata")
                 if results.get("has_more") and response_metadata:  # more pages
                     cursor = response_metadata.get("next_cursor")
-                else:  # final page
+                elif response_metadata:  # more pages
+                    # you need this extra step there is no "has_more" flag
+                    # different behaviour with Slack api functions that support pagination
+                    cursor = response_metadata.get("next_cursor")
+                    if not cursor:
+                        # we've reached the last page
+                        has_more_results = False
+                else:
+                    # we've reached the last page
                     has_more_results = False
+
                 messages = results.get("messages")
                 message_ts_list.extend([msg.get("ts") for msg in messages])
 
@@ -297,6 +319,10 @@ class SlackUtils(object):
     def get_channel_complete_history(self, cursor=None):
         """
         Method will return the entire history for a conversation. Supports pagination.
+        Cursor-based pagination will make it easier to
+        incrementally collect information. To begin pagination, specify a limit value under 1000.
+        Slack recommends no more than 200 results at a time.
+
         Do not use "conversations.history" here use "conversations.replies" instead, "conversations.replies" method
         returns an entire thread (a message plus all the messages in reply to it),
         while "conversations.history" method returns only parent messages.
@@ -316,7 +342,7 @@ class SlackUtils(object):
                     "conversations.replies",
                     channel=self.get_channel_id(),
                     ts=msg_ts,
-                    limit=10,
+                    limit=2,
                     cursor=cursor
                 )
 
@@ -326,8 +352,17 @@ class SlackUtils(object):
                     response_metadata = results.get("response_metadata")
                     if results.get("has_more") and response_metadata:  # more pages
                         cursor = response_metadata.get("next_cursor")
-                    else:  # final page
+                    elif response_metadata:  # more pages
+                        # you need this extra step there is no "has_more" flag
+                        # different behaviour with Slack api functions that support pagination
+                        cursor = response_metadata.get("next_cursor")
+                        if not cursor:
+                            # we've reached the last page
+                            has_more_results = False
+                    else:
+                        # we've reached the last page
                         has_more_results = False
+
                     history.extend(results.get("messages"))
 
                 else:
@@ -427,6 +462,7 @@ class SlackUtils(object):
         #     channel=self.get_channel_id()
         # )
         # LOG.debug(results)
+        # return results
         return {"ok": True} # FIXME turn off for easier testing
 
 
@@ -479,3 +515,19 @@ def build_boolean(value, true_value="True", false_value="False"):
         return true_value if value == 1 else false_value
 
     return false_value
+
+
+def convert_slack_details_to_payload(slack_details, resoptions):
+    """
+    Method converts json format to python dict and creates a payload for the post message.
+    :param slack_details:
+    :param resoptions:
+    :return:
+    """
+    try:
+        data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
+        payload = build_payload(data, resoptions)
+        LOG.debug(payload)
+        return payload
+    except JSONDecodeError:
+        raise JSONDecodeError
