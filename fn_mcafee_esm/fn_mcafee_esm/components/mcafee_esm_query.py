@@ -16,10 +16,10 @@ from fn_mcafee_esm.util.helper import check_config, get_authenticated_headers, c
 log = logging.getLogger(__name__)
 
 
-def query_esm(options, headers, data):
+def query_esm(options, headers, data, type):
     log.debug("Calling query_esm()")
     base_url = options["esm_url"]
-    url = base_url + "/rs/esm/v2/qryExecuteDetail?type=EVENT&reverse=False"
+    url = base_url + "/rs/esm/v2/qryExecuteDetail?type={}&reverse=False".format(type)
 
     r = requests.post(url, headers=headers, data=data, verify=options["trust_cert"])
     check_status_code(r.status_code)
@@ -113,7 +113,8 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("mcafee_esm_qry_config needs to be set")
 
             # Query Logs
-            qconf_json, total_records = query_esm(options, authenticated_headers, mcafee_esm_qry_config)
+            qconf_json, total_records = query_esm(options, authenticated_headers, mcafee_esm_qry_config,
+                                                  mcafee_esm_qry_type)
 
             query_result = None
             if total_records > 0:

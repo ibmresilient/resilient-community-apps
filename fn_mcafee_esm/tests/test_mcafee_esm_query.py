@@ -59,7 +59,7 @@ class TestMcafeeEsmQuery:
         mocked_requests_post.side_effect = [generate_response(content1, 200),
                                             generate_response(content2, 200)]
         data = '{"config": {"timeRange": "CUSTOM", "customStart": "2018-08-15T14:49:25.324Z", "customEnd": "2018-08-20T15:49:25.324Z", "order": [{"direction": "ASCENDING", "field": {"name": "FirstTime"}}], "includeTotal": "false", "fields": [{"name": "FirstTime"}, {"name": "LastTime"}, {"name": "DSIDSigID"}, {"name": "EventCount"}, {"name": "SrcIP"}, {"name": "Rule.msg"}, {"name": "AppID"}, {"name": "Filename"}, {"name": "HostID"}, {"name": "Object_Type"}, {"name" : "Threat_Name"}], "filters": [{"type": "EsmFieldFilter", "field": {"name": "DSIDSigID"}, "operator": "IN", "values": [{"type": "EsmBasicValue", "value": "306-50080"}]}]}}'
-        r_ID, r = query_esm(ops, {}, data)
+        r_ID, r = query_esm(ops, {}, data, "EVENT")
 
         assert 1 == r
         assert '{"resultID": "123456789"}' == r_ID
