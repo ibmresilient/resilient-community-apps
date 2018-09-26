@@ -19,7 +19,19 @@ shell_escaping=sh
 # The values of these parameters usually includes artifacts or other untrusted data
 # that may contain spaces, dashes and other content.  
 
-# shell_command default commands (unix)
+# accepted remote powershell extensions in a comma separated list, example: ps1, psm1, etc
+remote_powershell_extensions=ps1
+
+# remote auth transport one of [ntlm, basic]
+remote_auth_transport=ntlm
+
+# remote computers
+remote_computer=(username:password@server)
+
+# remote shell commands
+remote_command=[remote path to script]
+
+# local shell_command default commands (unix)
 nslookup=nslookup "{{shell_param1}}"
 dig=dig "{{shell_param1}}"
 traceroute=traceroute -m 15 "{{shell_param1}}"
@@ -39,4 +51,7 @@ whois=whois "{{shell_param1}}"
 # psscan=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" psscan --output=json
 # dlllist=python /path/to/vol.py -f "{{shell_param1}}" "--profile={{shell_param2}}" dlllist --output=json
 # (etc)
-        """
+
+# directory of xml stylesheets to use for xml transformations
+# xml_stylesheet_dir=
+"""

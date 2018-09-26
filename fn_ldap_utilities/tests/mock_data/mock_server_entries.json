@@ -1,0 +1,401 @@
+{
+    "entries": [
+        {
+            "attributes": {
+                "accountExpires": "9999-12-31 23:59:59.999999",
+                "badPasswordTime": "1601-01-01 00:00:00+00:00",
+                "badPwdCount": 0,
+                "cn": "Test User8",
+                "codePage": 0,
+                "countryCode": 0,
+                "dSCorePropagationData": [
+                    "1601-01-01 00:00:00+00:00"
+                ],
+                "displayName": "Test User8",
+                "distinguishedName": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "givenName": "Test",
+                "instanceType": 4,
+                "lastLogoff": "1601-01-01 00:00:00+00:00",
+                "lastLogon": "1601-01-01 00:00:00+00:00",
+                "logonCount": 0,
+                "mail": "testuser8@test.com",
+                "memberOf": [
+                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": "Test User8",
+                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectClass": [
+                    "top",
+                    "person",
+                    "organizationalPerson",
+                    "user"
+                ],
+                "objectGUID": "{960081a2-50d3-4e32-9651-cac38822f6af}",
+                "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1755",
+                "primaryGroupID": 513,
+                "pwdLastSet": "2018-07-24 13:10:59.394003+00:00",
+                "sAMAccountName": "testuser8",
+                "sAMAccountType": 805306368,
+                "sn": "User8",
+                "uSNChanged": 624011,
+                "uSNCreated": 624005,
+                "userAccountControl": 512,
+                "userPrincipalName": "testuser8@dev.co3sys.com",
+                "whenChanged": "2018-07-24 13:11:12+00:00",
+                "whenCreated": "2018-07-24 13:10:59+00:00"
+            },
+            "dn": "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "raw": {
+                "accountExpires": [
+                    "9223372036854775807"
+                ],
+                "badPasswordTime": [
+                    "0"
+                ],
+                "badPwdCount": [
+                    "0"
+                ],
+                "cn": [
+                    "Test User8"
+                ],
+                "codePage": [
+                    "0"
+                ],
+                "countryCode": [
+                    "0"
+                ],
+                "dSCorePropagationData": [
+                    "16010101000000.0Z"
+                ],
+                "displayName": [
+                    "Test User8"
+                ],
+                "distinguishedName": [
+                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "givenName": [
+                    "Test"
+                ],
+                "instanceType": [
+                    "4"
+                ],
+                "lastLogoff": [
+                    "0"
+                ],
+                "lastLogon": [
+                    "0"
+                ],
+                "logonCount": [
+                    "0"
+                ],
+                "mail": [
+                    "testuser8@test.com"
+                ],
+                "memberOf": [
+                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": [
+                    "Test User8"
+                ],
+                "objectCategory": [
+                    "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                ],
+                "objectClass": [
+                    "top",
+                    "person",
+                    "organizationalPerson",
+                    "user"
+                ],
+                "objectGUID": [
+                    {
+                        "encoded": "ooEAltNQMk6WUcrDiCL2rw==",
+                        "encoding": "base64"
+                    }
+                ],
+                "objectSid": [
+                    {
+                        "encoded": "AQUAAAAAAAUVAAAALrPecrx6zaG/5QPS2wYAAA==",
+                        "encoding": "base64"
+                    }
+                ],
+                "primaryGroupID": [
+                    "513"
+                ],
+                "pwdLastSet": [
+                    "131769114593940030"
+                ],
+                "sAMAccountName": [
+                    "testuser8"
+                ],
+                "sAMAccountType": [
+                    "805306368"
+                ],
+                "sn": [
+                    "User8"
+                ],
+                "uSNChanged": [
+                    "624011"
+                ],
+                "uSNCreated": [
+                    "624005"
+                ],
+                "userAccountControl": [
+                    "512"
+                ],
+                "userPrincipalName": [
+                    "testuser8@dev.co3sys.com"
+                ],
+                "whenChanged": [
+                    "20180724131112.0Z"
+                ],
+                "whenCreated": [
+                    "20180724131059.0Z"
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "accountExpires": "9999-12-31 23:59:59.999999",
+                "badPasswordTime": "1601-01-01 00:00:00+00:00",
+                "badPwdCount": 0,
+                "cn": "Test User9",
+                "codePage": 0,
+                "countryCode": 0,
+                "dSCorePropagationData": [
+                    "1601-01-01 00:00:00+00:00"
+                ],
+                "displayName": "Test User9",
+                "distinguishedName": "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "givenName": "Test",
+                "instanceType": 4,
+                "lastLogoff": "1601-01-01 00:00:00+00:00",
+                "lastLogon": "1601-01-01 00:00:00+00:00",
+                "logonCount": 0,
+                "mail": "testuser9@test.com",
+                "memberOf": [
+                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": "Test User9",
+                "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectClass": [
+                    "top",
+                    "person",
+                    "organizationalPerson",
+                    "user"
+                ],
+                "objectGUID": "{2f6c05c3-037a-4423-b021-80dcd0288108}",
+                "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1756",
+                "primaryGroupID": 513,
+                "pwdLastSet": "2018-07-24 13:11:38.528486+00:00",
+                "sAMAccountName": "testuser9",
+                "sAMAccountType": 805306368,
+                "sn": "User9",
+                "uSNChanged": 624019,
+                "uSNCreated": 624013,
+                "userAccountControl": 512,
+                "userPrincipalName": "testuser9@dev.co3sys.com",
+                "whenChanged": "2018-07-24 13:11:56+00:00",
+                "whenCreated": "2018-07-24 13:11:38+00:00"
+            },
+            "dn": "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "raw": {
+                "accountExpires": [
+                    "9223372036854775807"
+                ],
+                "badPasswordTime": [
+                    "0"
+                ],
+                "badPwdCount": [
+                    "0"
+                ],
+                "cn": [
+                    "Test User9"
+                ],
+                "codePage": [
+                    "0"
+                ],
+                "countryCode": [
+                    "0"
+                ],
+                "dSCorePropagationData": [
+                    "16010101000000.0Z"
+                ],
+                "displayName": [
+                    "Test User9"
+                ],
+                "distinguishedName": [
+                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "givenName": [
+                    "Test"
+                ],
+                "instanceType": [
+                    "4"
+                ],
+                "lastLogoff": [
+                    "0"
+                ],
+                "lastLogon": [
+                    "0"
+                ],
+                "logonCount": [
+                    "0"
+                ],
+                "mail": [
+                    "testuser9@test.com"
+                ],
+                "memberOf": [
+                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": [
+                    "Test User9"
+                ],
+                "objectCategory": [
+                    "CN=Person,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                ],
+                "objectClass": [
+                    "top",
+                    "person",
+                    "organizationalPerson",
+                    "user"
+                ],
+                "objectGUID": [
+                    {
+                        "encoded": "wwVsL3oDI0SwIYDc0CiBCA==",
+                        "encoding": "base64"
+                    }
+                ],
+                "objectSid": [
+                    {
+                        "encoded": "AQUAAAAAAAUVAAAALrPecrx6zaG/5QPS3AYAAA==",
+                        "encoding": "base64"
+                    }
+                ],
+                "primaryGroupID": [
+                    "513"
+                ],
+                "pwdLastSet": [
+                    "131769114985284869"
+                ],
+                "sAMAccountName": [
+                    "testuser9"
+                ],
+                "sAMAccountType": [
+                    "805306368"
+                ],
+                "sn": [
+                    "User9"
+                ],
+                "uSNChanged": [
+                    "624019"
+                ],
+                "uSNCreated": [
+                    "624013"
+                ],
+                "userAccountControl": [
+                    "512"
+                ],
+                "userPrincipalName": [
+                    "testuser9@dev.co3sys.com"
+                ],
+                "whenChanged": [
+                    "20180724131156.0Z"
+                ],
+                "whenCreated": [
+                    "20180724131138.0Z"
+                ]
+            }
+        },
+        {
+            "attributes": {
+                "cn": "TestGroup5",
+                "dSCorePropagationData": [
+                    "1601-01-01 00:00:00+00:00"
+                ],
+                "distinguishedName": "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com",
+                "groupType": -2147483646,
+                "instanceType": 4,
+                "member": [
+                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": "TestGroup5",
+                "objectCategory": "CN=Group,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com",
+                "objectClass": [
+                    "top",
+                    "group"
+                ],
+                "objectGUID": "{7ba79392-4f77-4ef9-846a-540dbc86455e}",
+                "objectSid": "S-1-5-21-1927197486-2714598076-3523470783-1754",
+                "sAMAccountName": "TestGroup5",
+                "sAMAccountType": 268435456,
+                "uSNChanged": 624022,
+                "uSNCreated": 624001,
+                "whenChanged": "2018-07-24 13:12:22+00:00",
+                "whenCreated": "2018-07-24 13:10:22+00:00"
+            },
+            "dn": "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com",
+            "raw": {
+                "cn": [
+                    "TestGroup5"
+                ],
+                "dSCorePropagationData": [
+                    "16010101000000.0Z"
+                ],
+                "distinguishedName": [
+                    "CN=TestGroup5,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "groupType": [
+                    "-2147483646"
+                ],
+                "instanceType": [
+                    "4"
+                ],
+                "member": [
+                    "CN=Test User9,CN=Users,DC=dev,DC=co3sys,DC=com",
+                    "CN=Test User8,CN=Users,DC=dev,DC=co3sys,DC=com"
+                ],
+                "name": [
+                    "TestGroup5"
+                ],
+                "objectCategory": [
+                    "CN=Group,CN=Schema,CN=Configuration,DC=dev,DC=co3sys,DC=com"
+                ],
+                "objectClass": [
+                    "top",
+                    "group"
+                ],
+                "objectGUID": [
+                    {
+                        "encoded": "kpOne3dP+U6EalQNvIZFXg==",
+                        "encoding": "base64"
+                    }
+                ],
+                "objectSid": [
+                    {
+                        "encoded": "AQUAAAAAAAUVAAAALrPecrx6zaG/5QPS2gYAAA==",
+                        "encoding": "base64"
+                    }
+                ],
+                "sAMAccountName": [
+                    "TestGroup5"
+                ],
+                "sAMAccountType": [
+                    "268435456"
+                ],
+                "uSNChanged": [
+                    "624022"
+                ],
+                "uSNCreated": [
+                    "624001"
+                ],
+                "whenChanged": [
+                    "20180724131222.0Z"
+                ],
+                "whenCreated": [
+                    "20180724131022.0Z"
+                ]
+            }
+        }
+    ]
+}
