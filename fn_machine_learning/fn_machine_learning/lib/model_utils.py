@@ -57,6 +57,7 @@ def update_config_from_saved_model(model_file, mlconfig):
     mlconfig.predict_field = model.prediction
     mlconfig.class_weight = model.class_weight
     mlconfig.model_name = model.get_name()
+    mlconfig.num_samples = model.number_samples
     mlconfig.split_percentage = 0.5
     try:
         mlconfig.addition_method = model.method_name

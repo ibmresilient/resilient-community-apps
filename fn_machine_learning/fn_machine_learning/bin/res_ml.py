@@ -171,6 +171,8 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
     password = res_opt.get("password", None)
     org = res_opt.get("org", None)
 
+    mlconfig = resilient_utils.MlConfig()
+
     if host and org and email and password and not csv_file:
         url = "https://{}:443".format(host)
         verify = True
@@ -201,12 +203,12 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
                                                 max_count=max_count)
         LOG.info("Saved {} samples into {}".format(num_inc, SAMPLE_CSV_FILE))
 
+        mlconfig.num_samples = num_inc
+
         csv_file = SAMPLE_CSV_FILE
     elif not csv_file:
         LOG.error("You need to specify a CSV file for samples")
         return
-
-    mlconfig = resilient_utils.MlConfig()
 
     if rebuilding:
         model_utils.update_config_from_saved_model(model_file, mlconfig)
@@ -217,6 +219,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
                                       class_weight=mlconfig.class_weight,
                                       method=mlconfig.addition_method)
     model.log = LOG
+    model.number_samples = mlconfig.num_samples
 
     if model is not None:
         model.build(csv_file=csv_file,
@@ -230,6 +233,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         LOG.info("--------")
         LOG.info("File:         {}".format(os.path.abspath(model_file)))
         LOG.info("Build time:   {}".format(model.build_time))
+        LOG.info("Num_samples:  {}".format(model.number_samples))
         LOG.info("Algorithm:    {}".format(model.get_name()))
         LOG.info("Method:       {}".format(mlconfig.addition_method))
         LOG.info("Prediction:   {}".format(model.prediction))
@@ -237,9 +241,9 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         LOG.info("Class weight: {}".format(str(model.class_weight)))
         LOG.info("Accuracy:     {}".format(model.accuracy))
         if model.analysis:
-            LOG.info("  Accuracy for each value of {}".format(model.prediciton))
+            LOG.info("  Accuracy for {} value:".format(model.prediction))
             for key, value in model.analysis.iteritems():
-                LOG.info("  {}:       {}".format(key, value))
+                LOG.info("    {}:     {}".format(key, value))
         # save the model
         model.save_to_file(os.path.abspath(model_file))
 
@@ -288,6 +292,7 @@ def view_model(args):
         LOG.info("--------")
         LOG.info("File:         {}".format(os.path.abspath(file_name)))
         LOG.info("Build time:   {}".format(model.build_time))
+        LOG.info("Num_samples:  {}".format(model.number_samples))
         LOG.info("Algorithm:    {}".format(model.get_name()))
         LOG.info("Method:       {}".format(method_name))
         LOG.info("Prediction:   {}".format(model.prediction))
@@ -295,9 +300,9 @@ def view_model(args):
         LOG.info("Class weight: {}".format(str(model.class_weight)))
         LOG.info("Accuracy:     {}".format(model.accuracy))
         if model.analysis:
-            LOG.info("  Accuracy for each value of {}".format(model.prediciton))
+            LOG.info("  Accuracy for {} value:".format(model.prediction))
             for key, value in model.analysis.iteritems():
-                LOG.info("  {}:       {}".format(key, value))
+                LOG.info("    {}:     {}".format(key, value))
     else:
         LOG.error("Model file {} does not exist.".format(file_name))
 
