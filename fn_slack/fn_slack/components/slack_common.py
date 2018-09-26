@@ -149,29 +149,11 @@ class SlackUtils(object):
                 limit=20,
                 cursor=cursor
             )
-
             LOG.debug(results)
 
-            if results.get("ok"):
-                response_metadata = results.get("response_metadata")
-                if results.get("has_more") and response_metadata:  # more pages
-                    cursor = response_metadata.get("next_cursor")
-                elif response_metadata:  # more pages
-                    # you need this extra step there is no "has_more" flag
-                    # different behaviour with Slack api functions that support pagination
-                    cursor = response_metadata.get("next_cursor")
-                    if not cursor:
-                        # we've reached the last page
-                        has_more_results = False
-                else:
-                    # we've reached the last page
-                    has_more_results = False
-
-                for ch in results.get("channels"):  # yield the first page, paginate only until channel is found!
-                    yield ch
-
-            else:
-                raise ValueError("Slack error response: " + results.get("error", ""))
+            has_more_results, cursor = self._get_next_cursor_for_next_page(results)
+            for ch in results.get("channels"):  # yield the first page, paginate only until channel is found!
+                yield ch
 
     def find_user_ids(self, emails):
         """
@@ -269,7 +251,7 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def _get_channel_message_history(self, cursor=None):
+    def _get_channel_parent_message_history(self, cursor=None):
         """
         Method returns the thread's parent message IDs ("ts") from a conversation. Supports pagination.
         Need to call "conversations.history" method with no latest or oldest arguments,
@@ -287,34 +269,40 @@ class SlackUtils(object):
             results = self.slack_client.api_call(
                 "conversations.history",
                 channel=self.get_channel_id(),
-                limit=2,
+                limit=200,
                 cursor=cursor
             )
-
             LOG.debug(results)
 
-            if results.get("ok"):
-                response_metadata = results.get("response_metadata")
-                if results.get("has_more") and response_metadata:  # more pages
-                    cursor = response_metadata.get("next_cursor")
-                elif response_metadata:  # more pages
-                    # you need this extra step there is no "has_more" flag
-                    # different behaviour with Slack api functions that support pagination
-                    cursor = response_metadata.get("next_cursor")
-                    if not cursor:
-                        # we've reached the last page
-                        has_more_results = False
-                else:
-                    # we've reached the last page
-                    has_more_results = False
-
-                messages = results.get("messages")
-                message_ts_list.extend([msg.get("ts") for msg in messages])
-
-            else:
-                raise ValueError("Slack error response: " + results.get("error", ""))
+            has_more_results, cursor = self._get_next_cursor_for_next_page(results)
+            message_ts_list.extend([msg.get("ts") for msg in results.get("messages")])
 
         return message_ts_list
+
+    @staticmethod
+    def _get_next_cursor_for_next_page(results):
+        """
+        Cursor-based pagination will make it easier to incrementally collect information.
+        :param results
+        :return:
+        """
+        has_more_results = True
+        cursor = None
+
+        if results.get("ok"):
+            response_metadata = results.get("response_metadata")
+            if response_metadata:  # more pages
+                cursor = response_metadata.get("next_cursor")
+                if not cursor:
+                    # we've reached the last page
+                    has_more_results = False
+            else:
+                # we've reached the last page
+                has_more_results = False
+
+            return has_more_results, cursor
+        else:
+            raise ValueError("Slack error response: " + results.get("error", ""))
 
     def get_channel_complete_history(self, cursor=None):
         """
@@ -331,7 +319,7 @@ class SlackUtils(object):
         # Get a list of thread's parent message "ts" which are the timestamp of an existing parent
         # message with 0 or more replies. If there are no replies then just the single parent message
         # referenced by "ts" will return - it is just an ordinary message.
-        message_ts_list = self._get_channel_message_history()
+        message_ts_list = self._get_channel_parent_message_history()
 
         history = []
 
@@ -342,31 +330,13 @@ class SlackUtils(object):
                     "conversations.replies",
                     channel=self.get_channel_id(),
                     ts=msg_ts,
-                    limit=2,
+                    limit=20,
                     cursor=cursor
                 )
-
                 LOG.debug(results)
 
-                if results.get("ok"):
-                    response_metadata = results.get("response_metadata")
-                    if results.get("has_more") and response_metadata:  # more pages
-                        cursor = response_metadata.get("next_cursor")
-                    elif response_metadata:  # more pages
-                        # you need this extra step there is no "has_more" flag
-                        # different behaviour with Slack api functions that support pagination
-                        cursor = response_metadata.get("next_cursor")
-                        if not cursor:
-                            # we've reached the last page
-                            has_more_results = False
-                    else:
-                        # we've reached the last page
-                        has_more_results = False
-
-                    history.extend(results.get("messages"))
-
-                else:
-                    raise ValueError("Slack error response: " + results.get("error", ""))
+                has_more_results, cursor = self._get_next_cursor_for_next_page(results)
+                history.extend(results.get("messages"))
 
         return history
 
@@ -463,7 +433,7 @@ class SlackUtils(object):
         # )
         # LOG.debug(results)
         # return results
-        return {"ok": True} # FIXME turn off for easier testing
+        return {"ok": True} # FIXME at the moment it's turned off for easier testing
 
 
 def build_payload(dataDict, resoptions):

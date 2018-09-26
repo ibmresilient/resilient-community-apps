@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             text = "This channel has been set to be archived from Resilient."
             results_msg_posted = slack_utils.slack_post_message(None, text, None, None, True, None, None, None, def_username)
             if results_msg_posted.get("ok"):
-                yield StatusMessage("Message for archiving channel was added to Slack.")
+                yield StatusMessage("Message warning 'channel is set to be archived' was added to Slack.")
             else:
                 yield FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
 
@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             new_attachment = slack_utils.save_conversation_history_as_attachment(messages, self.rest_client(),
                                                                                  incident_id, task_id)
             if new_attachment is not None:
-                yield StatusMessage("Channel '{}' chat history was uploaded as an attachment.".format(slack_channel_name))
+                yield StatusMessage("Channel's '{}' chat history was uploaded as an attachment.".format(slack_channel_name))
             else:
                 yield FunctionError("Failed creating an attachment.")
 

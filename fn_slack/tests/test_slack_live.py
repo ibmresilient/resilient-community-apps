@@ -4,9 +4,9 @@
 from fn_slack.components.slack_common import *
 import pytest
 try:
-    from unittest.mock import patch, Mock
+    from unittest.mock import patch
 except:
-    from mock import patch, Mock
+    from mock import patch
 
 def_username = "Resilient"
 slack_test_channel = "test-channel"
@@ -20,32 +20,43 @@ class TestSlack(object):
         """ Test find Slack channel by name"""
         print("Test find Slack channel by name\n")
 
-        mocked_api_call.return_value = {
-            "ok": True,
-            "channels": [
-                {
-                    "id": "C012AB3CD",
-                    "name": "general"
-                },
-                {
-                    "id": "C061EG9T2",
-                    "name": "random"
-                },
-                {
-                    "id": "C0EAQDV4Z",
-                    "name": "test-channel"
-                }]
-        }
+        mocked_api_call.side_effect = [
+            {
+                "ok": True,
+                "channels": [
+                    {
+                        "id": "C012AB3CD",
+                        "name": "general"
+                    },
+                    {
+                        "id": "C061EG9T2",
+                        "name": "random"
+                    },
+                    {
+                        "id": "C0EAQDV4Z",
+                        "name": "test-channel2"
+                    }],
+                "response_metadata":
+                    {
+                    "next_cursor": "aW1f"
+                    }
+            },
+            {
+                "ok": True,
+                "channels": [
+                    {
+                        "id": "C012AB3CR",
+                        "name": "test-channel"
+                    }],
+                "response_metadata":
+                    {
+                        "next_cursor": None
+                    }
+            }]
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.find_channel_by_name(slack_test_channel)
-        mocked_api_call.assert_called_with(
-            "conversations.list",
-            exclude_archived=False,
-            types="public_channel,private_channel",
-            limit=20,
-            cursor=None
-        )
-        assert (slack_utils.get_channel_name() == slack_test_channel)
+
+        assert slack_utils.get_channel_name() == slack_test_channel
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_find_channel_by_name_error(self, mocked_api_call):
@@ -83,7 +94,7 @@ class TestSlack(object):
             name=slack_test_channel,
             is_private=False
         )
-        assert (slack_utils.get_channel_name() == slack_test_channel)
+        assert slack_utils.get_channel_name() == slack_test_channel
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_slack_create_channel_error(self, mocked_api_call):
@@ -101,45 +112,31 @@ class TestSlack(object):
         except ValueError:
             assert True
 
-    def test_get_channel_id(self):
+    @pytest.mark.parametrize("channel,expected_channel_id", [
+        ({"id": "C0EAQDV4Z", "name": "test-channel"}, 'C0EAQDV4Z'),
+        (None, None)
+    ])
+    def test_get_channel_id(self, channel, expected_channel_id):
         """ Test get channel id"""
         print("Test get channel id\n")
 
-        # Setup channel with an id
-        mocked_channel = {
-            "id": "C0EAQDV4Z",
-            "name": "test-channel"
-        }
         slack_utils = SlackUtils("fake_api_key")
-        slack_utils.set_channel(mocked_channel)
+        slack_utils.set_channel(channel)
 
-        assert slack_utils.get_channel_id() == 'C0EAQDV4Z'
+        assert slack_utils.get_channel_id() == expected_channel_id
 
-        # no channel set
-        slack_utils = SlackUtils("fake_api_key")
-        slack_utils.set_channel(None)
-
-        assert not slack_utils.get_channel_id()
-
-    def test_get_channel_name(self):
+    @pytest.mark.parametrize("channel,expected_channel_name", [
+        ({"id": "C0EAQDV4Z", "name": "test-channel"}, 'test-channel'),
+        (None, None)
+    ])
+    def test_get_channel_name(self, channel, expected_channel_name):
         """ Test get channel id"""
         print("Test get channel id\n")
 
-        # Setup channel with a name
-        mocked_channel = {
-            "id": "C0EAQDV4Z",
-            "name": "test-channel"
-        }
         slack_utils = SlackUtils("fake_api_key")
-        slack_utils.set_channel(mocked_channel)
+        slack_utils.set_channel(channel)
 
-        assert slack_utils.get_channel_name() == 'test-channel'
-
-        # no channel set
-        slack_utils = SlackUtils("fake_api_key")
-        slack_utils.set_channel(None)
-
-        assert not slack_utils.get_channel_name()
+        assert slack_utils.get_channel_name() == expected_channel_name
 
     @pytest.mark.parametrize("is_channel,is_private,expected", [
         (True, False, False),  # public channel
@@ -159,11 +156,11 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
-        assert (slack_utils.is_channel_private() == expected)
+        assert slack_utils.is_channel_private() == expected
 
     @pytest.mark.parametrize("is_archived,expected", [
         (True, True),  # archived channel
-        (False, False)  # non arvhived channel
+        (False, False)  # non archived channel
     ])
     def test_is_channel_archived(self, is_archived, expected):
         """ Test is Slack channel archived"""
@@ -178,10 +175,16 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
-        assert (slack_utils.is_channel_archived() == expected)
+        assert slack_utils.is_channel_archived() == expected
 
+    @pytest.mark.parametrize("user_ids,expected", [
+        ("a@a.com, b@b.com", ['W012A3CDE', 'W012A3CDE']),
+        ("b@b.com", ['W012A3CDE']),
+        ("b@b.com, ", ['W012A3CDE']),
+        (" ", [])
+    ])
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
-    def test_find_user_ids(self, mocked_api_call):
+    def test_find_user_ids(self, mocked_api_call, user_ids, expected):
         """ Test find Slack user id by email"""
         print("Test find Slack user id by email\n")
 
@@ -194,29 +197,9 @@ class TestSlack(object):
                 }
         }
         slack_utils = SlackUtils("fake_api_key")
-        user_id_list = slack_utils.find_user_ids("a@a.com, b@b.com")
-        mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
-            "users.lookupByEmail",
-            email="b@b.com"
-        )
-        assert user_id_list == ['W012A3CDE', 'W012A3CDE']
 
-        user_id_list = slack_utils.find_user_ids("a@a.com")
-        mocked_api_call.assert_called_with(
-            "users.lookupByEmail",
-            email="a@a.com"
-        )
-        assert user_id_list == ['W012A3CDE']
-
-        user_id_list = slack_utils.find_user_ids("a@a.com, ")
-        mocked_api_call.assert_called_with(
-            "users.lookupByEmail",
-            email="a@a.com"
-        )
-        assert user_id_list == ['W012A3CDE']
-
-        user_id_list = slack_utils.find_user_ids(" ")
-        assert user_id_list == []
+        user_id_list = slack_utils.find_user_ids(user_ids)
+        assert user_id_list == expected
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_find_user_ids_error(self, mocked_api_call):
@@ -234,8 +217,12 @@ class TestSlack(object):
         except ValueError:
             assert True
 
+    @pytest.mark.parametrize("user_ids_list,expected_ids", [
+        (["W1234567890", "U2345678901", "U3456789012"], "W1234567890,U2345678901,U3456789012"),
+        (["W1234567890"], "W1234567890")
+    ])
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
-    def test_invite_users_to_channel(self, mocked_api_call):
+    def test_invite_users_to_channel(self, mocked_api_call, user_ids_list, expected_ids):
         """ Test invite Slack users to a channel"""
         print("Test invite Slack users to a channel\n")
 
@@ -256,19 +243,11 @@ class TestSlack(object):
                     "name": "test-channel"
                 }
         }
-        results = slack_utils.invite_users_to_channel(["W1234567890", "U2345678901", "U3456789012"])
+        results = slack_utils.invite_users_to_channel(user_ids_list)
         mocked_api_call.assert_called_with(
             "conversations.invite",
             channel="C0EAQDV4Z",
-            users="W1234567890,U2345678901,U3456789012"
-        )
-        assert results.get("ok") is True
-
-        results = slack_utils.invite_users_to_channel(["W1234567890"])
-        mocked_api_call.assert_called_with(
-            "conversations.invite",
-            channel="C0EAQDV4Z",
-            users="W1234567890"
+            users=expected_ids
         )
         assert results.get("ok") is True
 
@@ -320,45 +299,26 @@ class TestSlack(object):
         else:
             assert True
 
-    def test_build_boolean(self):
+    @pytest.mark.parametrize("input,output", [
+        ("1", "True"),
+        ("yes", "True"),
+        ("true", "True"),
+        ("TRUE", "True"),
+        (1, "True"),
+        (0, "False"),
+        (55, "False"),
+        ("no", "False"),
+        ("0", "False"),
+        ("false", "False"),
+        ("FALSE", "False"),
+        ({}, "False")
+    ])
+    def test_build_boolean(self, input, output):
         """ Test build boolean method"""
         print("Test build boolean method\n")
 
-        result = build_boolean("1")
-        assert result == 'True'
-
-        result = build_boolean("yes")
-        assert result == 'True'
-
-        result = build_boolean("true")
-        assert result == 'True'
-
-        result = build_boolean("TRUE")
-        assert result == 'True'
-
-        result = build_boolean(1)
-        assert result == 'True'
-
-        result = build_boolean(0)
-        assert result == 'False'
-
-        result = build_boolean(55)
-        assert result == 'False'
-
-        result = build_boolean("no")
-        assert result == 'False'
-
-        result = build_boolean("0")
-        assert result == 'False'
-
-        result = build_boolean("false")
-        assert result == 'False'
-
-        result = build_boolean("FALSE")
-        assert result == 'False'
-
-        result = build_boolean({})
-        assert result == 'False'
+        result = build_boolean(input)
+        assert result == output
 
     def test_build_payload(self):
         """ Test build payload method"""
@@ -472,7 +432,7 @@ class TestSlack(object):
             mrkdown=True,
             thread_ts=None
         )
-        assert results2.get("ok") is True
+        assert results3.get("ok") is True
 
     @patch('fn_slack.components.slack_common.SlackClient.api_call')
     def test_slack_post_message_error(self, mocked_api_call):
@@ -626,3 +586,104 @@ class TestSlack(object):
             assert False
         except ValueError:
             assert True
+
+    @pytest.mark.parametrize("results,expected_has_more,expected_cursor", [
+        ({"ok": True, "response_metadata": {"next_cursor": "bmV4d"}}, True, "bmV4d"),
+        ({"ok": True, "response_metadata": {"next_cursor": None}}, False, None),
+        ({"ok": True}, False, None)
+    ])
+    def test_get_next_cursor_for_next_page(self, results, expected_has_more, expected_cursor):
+        """ Test get next cursor for next page"""
+        print("Test get next cursor for next page\n")
+
+        slack_utils = SlackUtils("fake_api_key")
+        has_more_results, cursor = slack_utils._get_next_cursor_for_next_page(results)
+        assert has_more_results == expected_has_more
+        assert cursor == expected_cursor
+
+    def test_get_next_cursor_for_next_page_error(self):
+        """ Test get next cursor for next page error"""
+        print("Test get next cursor for next page error\n")
+
+        results = {
+            "ok": False
+        }
+        try:
+            slack_utils = SlackUtils("fake_api_key")
+            slack_utils._get_next_cursor_for_next_page(results)
+            assert False
+        except ValueError:
+            assert True
+
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_get_channel_parent_message_history(self, mocked_api_call):
+        """ Test get channel parent msg history"""
+        print("Test get channel parent msg history\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": True,
+                "messages": [
+                    {
+                        "ts": "1"
+                    },
+                    {
+                        "ts": "2"
+                    }],
+                "response_metadata": {
+                    "next_cursor": "bmV4d"
+                }
+            },
+            {
+                "ok": True,
+                "messages": [
+                    {
+                        "ts": "3"
+                    },
+                    {
+                        "ts": "4"
+                    }],
+                "response_metadata": {
+                    "next_cursor": None
+                }
+            }]
+        slack_utils = SlackUtils("fake_api_key")
+        message_ts_list = slack_utils._get_channel_parent_message_history()
+        assert message_ts_list == ["1", "2", "3", "4"]
+
+    @patch('fn_slack.components.slack_common.SlackUtils._get_channel_parent_message_history')
+    @patch('fn_slack.components.slack_common.SlackClient.api_call')
+    def test_get_channel_complete_history(self, mocked_api_call, mocked_msg_history_list):
+        """ Test get complete history"""
+        print("Test get complete history\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": True,
+                "messages": [
+                    {
+                        "text": "one"
+                    },
+                    {
+                        "text": "two"
+                    }],
+                "response_metadata": {
+                    "next_cursor": "bmV4d"
+                }
+            },
+            {
+                "ok": True,
+                "messages": [
+                    {
+                        "text": "three"
+                    }],
+                "response_metadata": {
+                    "next_cursor": None
+                }
+            }]
+
+        mocked_msg_history_list.return_value = ["ts1"]
+
+        slack_utils = SlackUtils("fake_api_key")
+        history = slack_utils.get_channel_complete_history()
+        assert history == [{'text': 'one'}, {'text': 'two'}, {'text': 'three'}]
