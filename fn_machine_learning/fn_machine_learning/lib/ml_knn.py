@@ -15,14 +15,23 @@ class MlKNN(MlModelCommon, KNeighborsClassifier):
     """
     Support K-Nearest Neighbor algorithm
     """
-    def __init__(self, random_state=1, n_neighbors=5, method=None, log=None):
+    def __init__(self, class_weight=None, random_state=1, n_neighbors=5, method=None, log=None):
         """
 
+        :param class_weight:
         :param random_state:
         :param n_neighbors:
         :param method:
+        :param log:
         """
-        MlModelCommon.__init__(self, method=method, log=log)
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
+
+        #
+        #   class_weight is not supported for KNN.
+        #
         self.using_method = False
         if method == "Bagging":
             model = KNeighborsClassifier(n_neighbors=n_neighbors,

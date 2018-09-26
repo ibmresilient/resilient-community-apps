@@ -14,11 +14,15 @@ import logging
 
 class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
 
-    def __init__(self, method=None, random_state=10, log=None):
-        MlModelCommon.__init__(self, method=method, log=log)
+    def __init__(self, class_weight=None, method=None, random_state=10, log=None):
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
         self.using_method = False
         if method == "Bagging":
-            model = DecisionTreeClassifier(min_samples_split=20,
+            model = DecisionTreeClassifier(class_weight=class_weight,
+                                           min_samples_split=20,
                                            random_state=99)
             self.using_method = True
             self.ensemble_method = BaggingClassifier(base_estimator=model,
@@ -26,15 +30,17 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
                                                      random_state=random_state)
         elif method == "Adaptive Boosting":
             self.using_method = True
-            model = DecisionTreeClassifier(min_samples_split=20,
+            model = DecisionTreeClassifier(class_weight=class_weight,
+                                           min_samples_split=20,
                                            random_state=99)
             self.ensemble_method = AdaBoostClassifier(base_estimator=model,
                                                       n_estimators=50,
                                                       random_state=random_state)
-
-        DecisionTreeClassifier.__init__(self,
-                                        min_samples_split=20,
-                                        random_state=99)
+        else:
+            DecisionTreeClassifier.__init__(self,
+                                            class_weight=class_weight,
+                                            min_samples_split=20,
+                                            random_state=99)
 
     @staticmethod
     def get_name():

@@ -15,8 +15,16 @@ import logging
 
 
 class MlBernoulliNB(MlModelCommon, BernoulliNB):
-    def __init__(self, method=None, c=100.0, random_state=1, log=None):
-        MlModelCommon.__init__(self, method=method, log=log)
+    def __init__(self, class_weight=None, method=None, c=100.0, random_state=1, log=None):
+        #
+        # class_weight is not supported for BernoulliNB
+        #
+        #
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
+
         self.using_method = False
         if method == "Bagging":
             model = BernoulliNB()

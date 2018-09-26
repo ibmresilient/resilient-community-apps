@@ -16,24 +16,24 @@ import logging
 import json
 
 
-def get_model(name, method=None):
+def get_model(name, class_weight=None, method=None):
     model = None
     if name == "Logistic Regression":
-        model = LogisticRegression(method=method)
+        model = LogisticRegression(method=method, class_weight=class_weight)
     elif name == "SVM":
-        model = MlSVC(method=method)
+        model = MlSVC(method=method, class_weight=class_weight)
     elif name == "SVM with Gaussian kernel":
-        model = MlSVC(kernel="rbf", method=method)
+        model = MlSVC(kernel="rbf", method=method, class_weight=class_weight)
     elif name == "Decision Tree":
-        model = MlDecisionTree(method=method)
+        model = MlDecisionTree(method=method, class_weight=class_weight)
     elif name == "Random Forest":
-        model = MlRandomForest(method=method)
+        model = MlRandomForest(method=method, class_weight=class_weight)
     elif name == "GaussianNB":
-        model = MlGaussianNB(method=method)
+        model = MlGaussianNB(method=method, class_weight=class_weight)
     elif name == "BernoulliNB":
-        model = MlBernoulliNB(method=method)
+        model = MlBernoulliNB(method=method, class_weight=class_weight)
     elif name == MlKNN.get_name():
-        model = MlKNN(method=method)
+        model = MlKNN(method=method, class_weight=class_weight)
 
     return model
 

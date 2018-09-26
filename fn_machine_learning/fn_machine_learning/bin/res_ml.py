@@ -213,7 +213,9 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
     else:
         model_utils.update_config_from_app_config(ml_opt, mlconfig)
 
-    model = resilient_utils.get_model(mlconfig.model_name, mlconfig.addition_method)
+    model = resilient_utils.get_model(name=mlconfig.model_name,
+                                      class_weight=mlconfig.class_weight,
+                                      method=mlconfig.addition_method)
     model.log = LOG
 
     if model is not None:
@@ -226,16 +228,19 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         LOG.info("--------")
         LOG.info("Summary:")
         LOG.info("--------")
-        LOG.info("File:        {}".format(os.path.abspath(model_file)))
-        LOG.info("Algorithm:   {}".format(model.get_name()))
-        LOG.info("Method:      {}".format(mlconfig.addition_method))
-        LOG.info("Prediction:  {}".format(model.prediction))
-        LOG.info("Features:    {}".format(", ".join(model.features)))
-        LOG.info("Build time:  {}".format(model.build_time))
-        LOG.info("Accuracy:    {}".format(model.accuracy))
+        LOG.info("File:         {}".format(os.path.abspath(model_file)))
+        LOG.info("Build time:   {}".format(model.build_time))
+        LOG.info("Algorithm:    {}".format(model.get_name()))
+        LOG.info("Method:       {}".format(mlconfig.addition_method))
+        LOG.info("Prediction:   {}".format(model.prediction))
+        LOG.info("Features:     {}".format(", ".join(model.features)))
+        LOG.info("Class weight: {}".format(str(model.class_weight)))
+        LOG.info("Accuracy:     {}".format(model.accuracy))
+        if model.analysis:
+            for key, value in model.analysis.iteritems():
+                LOG.info("  {}:       {}".format(key, value))
         # save the model
         model.save_to_file(os.path.abspath(model_file))
-
 
 
 def build_new_model(args, opt_parser):
@@ -280,13 +285,18 @@ def view_model(args):
         LOG.info("--------")
         LOG.info("Summary:")
         LOG.info("--------")
-        LOG.info("File:        {}".format(os.path.abspath(file_name)))
-        LOG.info("Algorithm:   {}".format(model.get_name()))
-        LOG.info("Method:      {}".format(method_name))
-        LOG.info("Prediction:  {}".format(model.prediction))
-        LOG.info("Features:    {}".format(", ".join(model.features)))
-        LOG.info("Build time:  {}".format(model.build_time))
-        LOG.info("Accuracy:    {}".format(model.accuracy))
+        LOG.info("File:         {}".format(os.path.abspath(file_name)))
+        LOG.info("Build time:   {}".format(model.build_time))
+        LOG.info("Algorithm:    {}".format(model.get_name()))
+        LOG.info("Method:       {}".format(method_name))
+        LOG.info("Prediction:   {}".format(model.prediction))
+        LOG.info("Features:     {}".format(", ".join(model.features)))
+        LOG.info("Class weight: {}".format(str(model.class_weight)))
+        LOG.info("Accuracy:     {}".format(model.accuracy))
+        if model.analysis:
+            LOG.info("  Accuracy for each value of {}".format(model.prediciton))
+            for key, value in model.analysis.iteritems():
+                LOG.info("  {}:       {}".format(key, value))
     else:
         LOG.error("Model file {} does not exist.".format(file_name))
 

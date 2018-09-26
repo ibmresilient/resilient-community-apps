@@ -16,18 +16,25 @@ class MlSVC(MlModelCommon, SVC):
     """
     Support Vector Machine algorithm.
     """
-    def __init__(self, kernel="linear", C=1.0, random_state=1, method=None, log=None):
+    def __init__(self, class_weight=None, kernel="linear", C=1.0, random_state=1, method=None, log=None):
         """
 
+        :param class_weight:
         :param kernel:
         :param C:
         :param random_state:
+        :param method:
+        :param log:
         """
         self.kernel = kernel
-        MlModelCommon.__init__(self, method=method, log=log)
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
         self.using_method = False
         if method == "Bagging":
             model = SVC(kernel=kernel,
+                        class_weight=class_weight,
                         C=C,
                         random_state=random_state)
             self.using_method = True
@@ -37,7 +44,7 @@ class MlSVC(MlModelCommon, SVC):
         elif method == "Adaptive Boosting":
             self.using_method = True
             model = SVC(kernel=kernel,
-                        probability=True,
+                        class_weight=class_weight,
                         C=C,
                         random_state=random_state)
             self.ensemble_method = AdaBoostClassifier(base_estimator=model,
@@ -46,6 +53,7 @@ class MlSVC(MlModelCommon, SVC):
         else:
             SVC.__init__(self,
                          kernel=kernel,
+                         class_weight=class_weight,
                          C=C,
                          random_state=random_state)
 

@@ -16,33 +16,43 @@ class LogisticRegression(MlModelCommon, LgRegression):
     """
     Logistic Regression algorithm for Machine Learning
     """
-    def __init__(self, method=None, c=100.0, random_state=1, log=None):
+    def __init__(self, class_weight=None, method=None, c=100.0, random_state=1, log=None):
         """
         Initialize the model
+        :param class_weight: class_weight. It can be None, "balanced", or a dict. Used for imbalance class
+        :param method: Optional ensemble method
         :param c:
         :param random_state:
+        :param log:
         """
         self.c = c
         self.random_state = random_state
-        MlModelCommon.__init__(self, method=method, log=log)
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
         self.using_method = False
         if method == "Bagging":
-            model = LgRegression(C=c, random_state=random_state)
             self.using_method = True
+            model = LgRegression(C=c,
+                                 class_weight=class_weight,
+                                 random_state=random_state)
             self.ensemble_method = BaggingClassifier(base_estimator=model,
-                                            n_estimators=200,
-                                            random_state=random_state)
+                                                     n_estimators=200,
+                                                     random_state=random_state)
         elif method == "Adaptive Boosting":
             self.using_method = True
-            model = LgRegression(C=c, random_state=random_state)
+            model = LgRegression(C=c,
+                                 class_weight=class_weight,
+                                 random_state=random_state)
             self.ensemble_method = AdaBoostClassifier(base_estimator=model,
-                                            n_estimators=200,
-                                            random_state=random_state)
+                                                      n_estimators=200,
+                                                      random_state=random_state)
         else:
             LgRegression.__init__(self,
                                   C=c,
                                   random_state=random_state,
-                                  class_weight='balanced')
+                                  class_weight=class_weight)
 
     @staticmethod
     def get_name():

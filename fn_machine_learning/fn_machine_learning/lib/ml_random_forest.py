@@ -14,8 +14,11 @@ import logging
 
 class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
-    def __init__(self, method=None, log=None):
-        MlModelCommon.__init__(self, method=method, log=log)
+    def __init__(self, class_weight=None, method=None, log=None):
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
         #
         # Random forest is a special case of bagging of
         # decision tree. Might not make sense to
@@ -23,9 +26,9 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
         #
         self.using_method = False
         RandomForestClassifier.__init__(self,
+                                        class_weight=class_weight,
                                         n_estimators=100,
-                                        random_state=99,
-                                        class_weight="balanced")
+                                        random_state=99)
 
     @staticmethod
     def get_name():

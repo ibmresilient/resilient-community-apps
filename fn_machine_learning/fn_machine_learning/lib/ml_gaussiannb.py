@@ -14,8 +14,14 @@ import logging
 
 class MlGaussianNB(MlModelCommon, GaussianNB):
 
-    def __init__(self, method=None, random_state=1, log=None):
-        MlModelCommon.__init__(self, method=method, log=log)
+    def __init__(self, class_weight=None, method=None, random_state=1, log=None):
+        MlModelCommon.__init__(self,
+                               class_weight=class_weight,
+                               method=method,
+                               log=log)
+        #
+        #   GaussianNB does not support class_weight
+        #
         self.using_method = False
         if method == "Bagging":
             model = GaussianNB()

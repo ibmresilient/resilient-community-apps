@@ -24,10 +24,12 @@ class MlModelCommon(object):
     Super class of all the ml models we support
     """
 
-    def __init__(self, method=None, log=None):
+    def __init__(self, class_weight=None, method=None, log=None):
         """
         Initialize
         """
+        self.class_weight = class_weight
+        self.analysis = None
         self.features = []
         self.prediction = None
         self.X_train = None
@@ -257,17 +259,11 @@ class MlModelCommon(object):
         self.accuracy = accuracy_score(y_true=actual,
                               y_pred=predict)
 
-        analysis = model_utils.analyze(y_true=actual,
+        self.analysis = model_utils.analyze(y_true=actual,
                                        y_pred=predict)
 
         for t, p in zip(actual, predict):
             self.log.debug(str(t) + " : " + str(p) + "\n")
-
-        self.log.info("----------------------------------")
-        self.log.info("Accuracy for each predicted value:")
-        self.log.info("----------------------------------")
-        for key, value in analysis.iteritems():
-            self.log.info("{}:    {}".format(key, value))
 
         return self.accuracy
 

@@ -43,6 +43,7 @@ def update_config_from_app_config(ml_opt, mlconfig):
     mlconfig.predict_field = ml_opt.get("prediction", None)
     selected = ml_opt.get("features", []).split(',')
     mlconfig.split_percentage = float(ml_opt.get("split", 0.5))
+    mlconfig.class_weight = ml_opt.get("class_weight", None)
     mlconfig.selected_features = []
 
     for select in selected:
@@ -54,6 +55,7 @@ def update_config_from_saved_model(model_file, mlconfig):
     model = pickle.load(open(model_file, "rb"))
     mlconfig.selected_features = list(model.features)
     mlconfig.predict_field = model.prediction
+    mlconfig.class_weight = model.class_weight
     mlconfig.model_name = model.get_name()
     mlconfig.split_percentage = 0.5
     try:
