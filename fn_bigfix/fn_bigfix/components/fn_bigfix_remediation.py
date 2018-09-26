@@ -10,12 +10,11 @@
 # Manual Action: Execute a BigFix action to remediate hit.
 
 import logging
+import datetime
+
 from fn_bigfix.util.helpers import validate_opts, validate_params
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
-
-import json
-import datetime
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_remediation' of package fn_bigfix.
@@ -89,14 +88,14 @@ class FunctionComponent(ResilientComponent):
                     response = bigfix_client.send_stop_service_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 elif params["artifact_type"] == "Registry Key":
                     if len(bigfix_artifact_value.split('\\')) <= 2:
-                        log.exception("Delete not allowed for root level key {}.".format(bigfix_artifact_value))
+                        log.exception("Delete not allowed for root level key %s.", bigfix_artifact_value)
                         yield StatusMessage("Warning: Delete not allowed for root level key {}.".format(bigfix_artifact_value))
                         response = None
                     else:
                         # Test if registry key has 1 or more subkeys
                         result = bigfix_client.check_exists_subkey(bigfix_artifact_value, bigfix_asset_id)
                         if (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
-                            log.exception("Delete not allowed, key '{}' has 1 or more subkeys.".format(bigfix_artifact_value))
+                            log.exception("Delete not allowed, key '%s' has 1 or more subkeys.", bigfix_artifact_value)
                             yield StatusMessage("Warning: Delete not allowed, key '{}' has 1 or more subkeys."
                                                 .format(bigfix_artifact_value))
                             response = None
@@ -105,10 +104,10 @@ class FunctionComponent(ResilientComponent):
                 elif params["artifact_type"] == "File Path":
                     response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 else:
-                    log.error("Unsupported artifact type '{}'.".format(params["artifact_type"]))
+                    log.error("Unsupported artifact type '%s'.", params["artifact_type"])
                     raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
             except Exception as e:
-                log.exception("Failed to run a BigFix remediation.", e)
+                log.exception("Failed to run a BigFix remediation.")
                 yield StatusMessage("Failed with exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
                 raise Exception("Failed with exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
 
@@ -119,9 +118,6 @@ class FunctionComponent(ResilientComponent):
                 status_message = "BigFix action created successfully."
                 action_id = response
                 remediation_date = datetime.datetime.today().strftime('%m-%d-%Y %H:%M:%S')
-                status_note = "Big Fix Integration: Action created successfully to remediate artifact value {0} " \
-                                "and type {1} in asset ID {2}. BigFix Action ID {3}." \
-                    .format(params["artifact_value"], params["artifact_type"], params["asset_id"], response)
                 results = {"status": "OK", "status_message": status_message,
                            "remediation_date": remediation_date, "action_id": action_id}
 

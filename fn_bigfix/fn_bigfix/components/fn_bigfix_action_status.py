@@ -10,12 +10,11 @@
 # Manual Action: Check BigFix action status.
 
 import logging
+
 from fn_bigfix.util.helpers import validate_opts, is_none
-from requests.exceptions import SSLError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import poll_action_status
-import datetime
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_action_status' of package fn_bigfix.

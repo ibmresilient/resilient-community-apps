@@ -9,19 +9,15 @@ if are hits on any of the BigFix endpoints"""
 # Set up:
 # Destination: a Queue named "bigfix_artifact".
 # Manual Action: Execute a REST query against a BigFix server return hits.
-from requests.exceptions import SSLError
-
-"""Function implementation"""
 
 import logging
+import datetime
+import json
+
 from fn_bigfix.util.helpers import validate_opts, validate_params, create_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import get_hits
-import datetime
-import json
-
-LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_artifact' of package fn_bigfix.
