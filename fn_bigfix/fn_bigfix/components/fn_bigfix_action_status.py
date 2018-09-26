@@ -10,12 +10,12 @@
 # Manual Action: Check BigFix action status.
 
 import logging
+import re
+
 from fn_bigfix.util.helpers import validate_opts, is_none
-from requests.exceptions import SSLError
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import poll_action_status
-import datetime
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_action_status' of package fn_bigfix.
@@ -70,20 +70,20 @@ class FunctionComponent(ResilientComponent):
                 status = None
                 (status, status_message) = poll_action_status(bigfix_client, bigfix_action_id, retry_interval, retry_timeout)
             except Exception as e:
-                log.exception("Got exception while trying to poll BigFix action status.", e)
-                yield StatusMessage("Got exception '{}' while trying to poll BigFix action status.".format(type(e).__name__))
-                raise type(e).__name__
+                log.exception("Failed to poll BigFix action status.")
+                yield StatusMessage("Failed with exception '{}' while trying to poll BigFix action status.".format(type(e).__name__))
+                raise Exception("Failed with exception '{}' while trying to poll BigFix action status.".format(type(e).__name__))
 
             if not status:
                 raise FunctionError("Function 'poll_action_status' returned bad status {}.".format(status))
             elif status == "OK":
-                yield StatusMessage("Got good status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
+                yield StatusMessage("Received successful status message '{0}' for BigFix action {1}.".format(re.sub('\.$', '', status_message), bigfix_action_id))
                 results = {"status": "OK", "status_message": status_message}
             elif status == "Failed":
-                yield StatusMessage("Got error status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
+                yield StatusMessage("Received error status {0} for BigFix action {1}.".format(status_message, bigfix_action_id))
                 results = {"status": "Failed", "status_message": status_message}
             elif status == "Unsupported":
-                yield StatusMessage("Got unexpected status {0} while retrieving status for BigFix action {1}."
+                yield StatusMessage("Received  unexpected status {0} while retrieving status for BigFix action {1}."
                                     .format(status_message, bigfix_action_id))
                 results = {}
             elif status == "Timedout":

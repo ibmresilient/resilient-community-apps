@@ -12,7 +12,6 @@ import ntpath
 import json
 import time
 
-# TODO: Check how should be defined this logger
 LOG = logging.getLogger(__name__)
 
 __author__ = 'Resilient'
@@ -63,15 +62,15 @@ class BigFixClient(object):
                                                                                           "Computer ID {0} Properties"
                                                                                           .format(computer_id), 3)
                 if not qr_to_attachment:
-                    LOG.info("No properties returned for computer_id : %s" % (computer_id))
+                    LOG.info("No properties returned for computer_id : %s", computer_id)
 
                 return qr_to_attachment
 
             except Exception as e:
-                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
                 raise e
         else:
-            LOG.exception("Unexpected HTTP status code: %d" % (response.status_code))
+            LOG.exception("Unexpected HTTP status code: %d", response.status_code)
             return None
 
     def get_bf_computer_by_service_name(self, service_name):
@@ -330,16 +329,13 @@ class BigFixClient(object):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
-        :param wait: Value name
-        :param timeout: Timeout value - give some time to BigFix to get all the data
+        :param wait: Value name in ms
+        :param timeout: Timeout value in ms - give some time to BigFix to get all the data. Value of 0 means try once.
         :return result: Result (list of resposes) for query id
 
         """
         # Let's give some time (5 secs) to BigFix to get all the data
         time.sleep(5)
-        """
-            timeout is in ms. 0 means try once
-        """
         clientq_restapi = 'api/clientqueryresults'
         req_url = "%s/%s/%d?stats=1&output=json" % (self.base_url, clientq_restapi, query_id)
 
@@ -352,7 +348,7 @@ class BigFixClient(object):
                     if response['totalResults'] == 0:
                         LOG.debug("No results yet, retrying")
                     elif response['totalResults'] > 0:
-                        LOG.debug("Received responses from %s endpoints." % (response['totalResults']))
+                        LOG.debug("Received responses from %s endpoints.", response['totalResults'])
                         for i in range(response['totalResults']):
                             result.append({
                                 "computer_id": response['results'][i]['computerID'],
@@ -365,14 +361,14 @@ class BigFixClient(object):
                             )
                         break
                     else:
-                        LOG.exception("Got unexpected number of results (%d)" % (response['totalResults']))
+                        LOG.exception("Got unexpected number of results (%d)", response['totalResults'])
                         break
 
                 except Exception as e:
-                    LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                    LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
                     raise e
             else:
-                LOG.exception("Unexpected HTTP status code: %d" % (r.status_code))
+                LOG.exception("Unexpected HTTP status code: %d", r.status_code)
 
             timeout = timeout - 1000
             if timeout > 0:
@@ -412,14 +408,14 @@ class BigFixClient(object):
                 results = xmlroot.findall(".//ClientQuery/ID")
                 #  Urg, hardcoded index...
                 query_id = int(results[0].text)
-                LOG.debug("** Client Query ID: %d" % (query_id))
+                LOG.debug("** Client Query ID: %d", query_id)
                 return query_id
             except Exception as e:
                 # TODO - return error so that msg parser can handle it
-                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
                 raise e
         else:
-            LOG.exception("BigFix client query creation did not return expected value: %s".format(r))
+            LOG.exception("BigFix client query creation did not return expected value: %s", r)
 
     def _post_bf_action_query(self, query, computer_id, action_name, relevance="true"):
         """" Post Bigfix action request.
@@ -446,8 +442,8 @@ class BigFixClient(object):
         script_elem.text = query
         criteria_elem = elementTree.SubElement(clientq_elem, 'SuccessCriteria')
         criteria_elem.attrib = {'Option': 'OriginalRelevance'}
-        settings_elem = elementTree.SubElement(clientq_elem, 'Settings')
-        settingsLocks_elem = elementTree.SubElement(clientq_elem, 'SettingsLocks')
+        #settings_elem = elementTree.SubElement(clientq_elem, 'Settings')
+        #settingsLocks_elem = elementTree.SubElement(clientq_elem, 'SettingsLocks')
         target_elem = elementTree.SubElement(clientq_elem, 'Target')
         target_comp_elem = elementTree.SubElement(target_elem, 'ComputerID')
         target_comp_elem.text = str(computer_id)
@@ -463,14 +459,14 @@ class BigFixClient(object):
                     LOG.error("size of results larger than 1, only the first one will be used.")
                 #  Urg, hardcoded index...
                 action_id = results[0].text
-                LOG.info("BigFix action created successfully. Action ID: {0}".format(action_id))
-                LOG.debug("BigFix action created successfully: {0}".format(r.text))
+                LOG.info("BigFix action created successfully. Action ID: %s", action_id)
+                LOG.debug("BigFix action created successfully: %s", r.text)
                 return action_id
             except Exception as e:
-                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
                 raise e
         else:
-            LOG.error("Received bad Status Code: {0}. Returned data: {1}".format(r.status_code, r.text))
+            LOG.error("Received bad Status Code: %s. Returned data: %s", r.status_code, r.text)
             return None
 
     def _process_bf_computer_query_response_to_attachment(self, response_text, title, number_of_tuples=3):
@@ -487,7 +483,7 @@ class BigFixClient(object):
             xmlroot = elementTree.fromstring(response_text.text.encode('utf8', 'ignore'))
             results = xmlroot.findall(".//Query/Result/Tuple/Answer")
             if len(results) == 0:
-               return None
+                return None
             else:
                 response = "<?xml version='1.0' ?>\n<report> %s: \n" % title
                 insertion_count = 0
@@ -508,10 +504,10 @@ class BigFixClient(object):
                 return response
         except elementTree.ParseError as e:
             LOG.error("There was an error trying to process XML. Returning RAW XML")
-            LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+            LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
             return response_text.text
         except Exception as e:
-            LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+            LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
             raise e
 
     def get_bf_action_status(self, action_id):
@@ -530,12 +526,11 @@ class BigFixClient(object):
                 results = xmlroot.findall(".//ActionResults/Computer/Status")
                 if len(results) > 0:
                     status = results[0].text
-                LOG.debug("BigFix Action Status: {0} BigFix Action ID: {1}."
-                          .format(status, action_id))
+                LOG.debug("BigFix Action Status: %s BigFix Action ID: %s.", status, action_id)
             except Exception as e:
-                LOG.exception("XML processing, Got exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                LOG.exception("XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
                 raise e
         else:
             status = r.text
-            LOG.debug("Found an error trying to execution the action: {0}. Action: {1}".format(r.text, action_id))
+            LOG.debug("Found an error trying to execution the action: %s. Action: %s", r.text, action_id)
         return status
