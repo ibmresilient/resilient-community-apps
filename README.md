@@ -1,39 +1,73 @@
 # Resilient Community Applications
 
-These packages are installable components for the [resilient-circuits](https://github.com/ibmresilient/resilient-python-api/tree/master/resilient-circuits) framework.
+This repository contains the source-code for packaged Resilient integrations.
 
-Applications include,
-* `rc-query-runner`, a base for components that execute queries against another system and update the Resilient incident
-  with search results.  This includes a simple and powerful query definition file format.  
-* Query-runner packages for searching QRadar, Splunk, LDAP, generic REST APIs, and more.
-* `rc-webserver`, a base for components that listen to incoming Web Service requests.
-* `rc-cts`, a simple Resilient Custom Threat Service
-* Custom Threat Service packages that implement several types of integration with third-party
-  threat intelligence sources.
-* `rc-shell-runner`, a package for running shell scripts from Resilient rules.
+Many of these integrations are available for download from [IBM Security App Exchange](https://exchange.xforce.ibmcloud.com/hub/Resilient).
+This source code repository may include unpublished versions, and additional integrations that are not published to App
+Exchange, but you will need to build and install them yourself.
+
+
+### Developing New Integrations
+
+Developing new integrations is straightforward.  A good introduction can be found on the
+[IBM Resilient Developer Portal](https://developer.ibm.com/security/resilient/).
+
+For questions and discussion, head over to the [Resilient Community](http://ibm.biz/resilientcommunity) where you'll
+find blogs, technotes, discussion forums and other useful resources.
+
 
 
 ### Setup
 
-Download the latest release packages here:
-  
-[Latest Release](https://github.com/ibmresilient/resilient-circuits-packages/releases/latest)
+Refer to each directory for any pre-requisites and specific install instructions.
 
-To install a package,
-```shell
-pip install <filename>.tar.gz
-```
-Refer to each package directory for pre-requisites and specific install instructions.
+Each application has a `setup.py` installer.  You can install in two ways:
 
-To list your installed packages,
+#### Installing in "developer mode"
+
+To install a package in "developer mode", change to the directory that contains `setup.py` and install with:
 ```shell
-resilient-circuits list
+pip install -e .
 ```
+
+If you make any changes to the source files, they will apply next time the application is run.
+
+#### Creating a Distribution
+
+To create a distribution package,
+```shell
+python setup.py sdist
+```
+
+Then in the `dist` subdirectory you will find a .tar.gz file that you can copy to another environment and
+install using 'pip' (specifying the filename of the package that you built):
+
+```shell
+pip install app_name.tar.gz
+```
+
+If you make any changes to the source files, you'll need to rebuild and reinstall the distribution package.
+
+
+### License
+
+Unless otherwise specified, contents of this repository are published under the MIT open-source license.
+[LICENSE](LICENSE)
+
+Files and subdirectories within this repository may contain specific licenses that apply individually to that item.
 
 
 ### Contributing
 
-These packages are provided "as-is", without any support.  Please report issues using the [Issues](https://github.com/ibmresilient/resilient-circuits-packages/issues) tab on GitHub.
+Applications published to the [IBM Security App Exchange](https://exchange.xforce.ibmcloud.com/hub/Resilient) have
+support contact information displayed there.  If you have questions or issues with a published application,
+you should start there.
 
-Contributions are welcome.
+Otherwise, please report issues using the [Issues](https://github.com/ibmresilient/resilient-community-apps/issues) tab on GitHub.
 
+Contributions are welcome.  Please read the [CONTRIBUTING](CONTRIBUTING.md) guidelines for more about the process.
+
+
+# Open Source @ IBM
+
+[Find more open source projects on the IBM Github Page](http://ibm.github.io/)
