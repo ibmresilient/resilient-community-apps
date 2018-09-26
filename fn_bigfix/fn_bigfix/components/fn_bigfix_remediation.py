@@ -108,9 +108,9 @@ class FunctionComponent(ResilientComponent):
                     log.error("Unsupported artifact type '{}'.".format(params["artifact_type"]))
                     raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
             except Exception as e:
-                log.exception("Got exception while trying to run a BigFix remediation.", e)
-                yield StatusMessage("Got exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
-                raise Exception("Got exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
+                log.exception("Failed to run a BigFix remediation.", e)
+                yield StatusMessage("Failed with exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
+                raise Exception("Failed with exception '{}' while trying to run a BigFix remediation.".format(type(e).__name__))
 
             if response is None:
                 log.debug("Could not create BigFix Action.")

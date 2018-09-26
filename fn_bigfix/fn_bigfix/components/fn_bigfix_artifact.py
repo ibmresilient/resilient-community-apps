@@ -118,9 +118,9 @@ class FunctionComponent(ResilientComponent):
                     else:
                         raise ValueError("Unsupported artifact type {}.".format(bigfix_artifact_type))
             except Exception as e:
-                log.exception("Got exception while trying to query BigFix.", e)
-                yield StatusMessage("Got exception '{}' while while trying to query BigFix.".format(type(e).__name__))
-                raise Exception("Got exception '{}' while trying to query BigFix.".format(type(e).__name__))
+                log.exception("Failed to query BigFix.")
+                yield StatusMessage("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
+                raise Exception("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
 
             if bigfix_incident_plan_status == 'C':
                 yield StatusMessage("Ignoring action, incident {} is closed".format(params["incident_id"]))
