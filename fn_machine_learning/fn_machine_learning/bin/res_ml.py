@@ -237,6 +237,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         LOG.info("Class weight: {}".format(str(model.class_weight)))
         LOG.info("Accuracy:     {}".format(model.accuracy))
         if model.analysis:
+            LOG.info("  Accuracy for each value of {}".format(model.prediciton))
             for key, value in model.analysis.iteritems():
                 LOG.info("  {}:       {}".format(key, value))
         # save the model

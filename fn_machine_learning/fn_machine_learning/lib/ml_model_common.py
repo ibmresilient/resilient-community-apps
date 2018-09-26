@@ -257,13 +257,16 @@ class MlModelCommon(object):
         self.set_build_time()
 
         self.accuracy = accuracy_score(y_true=actual,
-                              y_pred=predict)
-
-        self.analysis = model_utils.analyze(y_true=actual,
                                        y_pred=predict)
 
-        for t, p in zip(actual, predict):
-            self.log.debug(str(t) + " : " + str(p) + "\n")
+        self.analysis = model_utils.analyze(y_true=actual,
+                                            y_pred=predict)
+        #
+        # This is very expensive. Do it only if debug is enabled
+        #
+        if self.log.isEnabledFor(logging.DEBUG):
+            for t, p in zip(actual, predict):
+                self.log.debug(str(t) + " : " + str(p) + "\n")
 
         return self.accuracy
 
