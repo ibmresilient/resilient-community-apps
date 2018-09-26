@@ -52,6 +52,7 @@ class FunctionComponent(ResilientComponent):
             active_model = self.opts["machine_learning_predict"].get("active_model", None)
             if active_model:
                 model = MlModelCommon.load_from_file(active_model)
+                model.log = log
             else:
                 raise ValueError("active_model not defined in app.config")
 
