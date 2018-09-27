@@ -14,7 +14,7 @@ import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
-import slack_common
+from fn_slack.lib.slack_common import SlackUtils
 
 
 class FunctionComponent(ResilientComponent):
@@ -89,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             api_token = self.options['api_token']
             def_username = self.options['username']
 
-            slack_utils = slack_common.SlackUtils(api_token)
+            slack_utils = SlackUtils(api_token)
             # find or create a new channel
             slack_utils.find_channel_by_name(slack_channel_name)
 

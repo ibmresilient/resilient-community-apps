@@ -1,0 +1,7 @@
+{% if reply_count is not none %}{{ username }} POSTED ON {{ msg_time }}:
+{{ msg_text }}
+{% if reply_count > 0 %}{{ reply_count }} REPLIES:{% endif %}{% endif %}
+{% if reply_count is none %}    {{ username }} POSTED A REPLY ON {{ msg_time }}:
+    {{ msg_text }}
+
+{% endif %}

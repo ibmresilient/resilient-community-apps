@@ -14,9 +14,15 @@ from slackclient import SlackClient
 from six import string_types
 import tempfile
 import datetime
+import resilient_circuits.template_functions as template_functions
+from os.path import join, pardir
 import os
+import pkg_resources
 
 LOG = logging.getLogger(__name__)
+
+# Template files for Slack
+ARCHIVE_TEMPLATE_PATH = "data/templates/template_archive_slack.jinja2"
 
 
 class SlackUtils(object):
@@ -146,7 +152,7 @@ class SlackUtils(object):
                 "conversations.list",
                 exclude_archived=False,  # we need to load archived channels
                 types="public_channel,private_channel",
-                limit=20,
+                limit=100,
                 cursor=cursor
             )
             LOG.debug(results)
@@ -365,8 +371,11 @@ class SlackUtils(object):
         :param client Resilient API
         :param incident_id
         :param task_id
+        :param slack_channel_name
         :return:
         """
+        archive_template = self.get_template_file_path(ARCHIVE_TEMPLATE_PATH)
+
         with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
             try:
                 # For each msg in the history, parse
@@ -381,7 +390,7 @@ class SlackUtils(object):
                             username = self.get_user_info(message.get("user")).get("name")
 
                         # 2 were there any replies - only parent messages can have replies
-                        replies = message.get("reply_count")
+                        reply_count = message.get("reply_count")
 
                         # 3 get the timestamp
                         msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
@@ -389,16 +398,21 @@ class SlackUtils(object):
 
                         # 4 get the text message
                         text = message.get("text")
+                        msg_text = text.replace("\n", "\n\t") if reply_count is None else text
 
                         # 5 write in a temp file - replace certain values if this is a thread (replies are None)
-                        # FIXME try using jinja this is not pretty!
-                        indentation = "\t" if replies is None else ""
-                        msg_text = text.replace("\n", "\n\t") if replies is None else text
-                        posted_info = " POSTED A REPLY ON " if replies is None else " POSTED ON "
-                        replies_info = "\n{} REPLIES:".format(str(replies)) if replies else ""
-                        temp_file.write(indentation + username.encode('utf-8') + posted_info + msg_time.encode('utf-8')
-                                        + ": \n" + indentation + msg_text.encode('utf-8') + replies_info + "\n")
-                        temp_file.write("\n")  # Add a new blank line
+                        data = self.data_for_template(username, reply_count, msg_time, msg_text)
+                        output_data = self.map_values(archive_template, data)
+
+                        # # FIXME try using jinja this is not pretty!
+                        # indentation = "\t" if replies is None else ""
+                        # msg_text = text.replace("\n", "\n\t") if replies is None else text
+                        # posted_info = " POSTED A REPLY ON " if replies is None else " POSTED ON "
+                        # replies_info = "\n{} REPLIES:".format(str(replies)) if replies else ""
+                        # temp_file.write(indentation + username.encode('utf-8') + posted_info + msg_time.encode('utf-8')
+                        #                 + ": \n" + indentation + msg_text.encode('utf-8') + replies_info + "\n")
+                        # temp_file.write("\n")  # Add a new blank line
+                        temp_file.write(output_data.encode('utf-8'))
 
                 temp_file.close()
 
@@ -421,6 +435,43 @@ class SlackUtils(object):
                 os.unlink(temp_file.name)
 
         return new_attachment
+
+    @staticmethod
+    def get_template_file_path(path):
+        current_path = os.path.dirname(os.path.realpath(__file__))
+        template_file_path = join(current_path, pardir, ARCHIVE_TEMPLATE_PATH)
+        return template_file_path
+
+    @staticmethod
+    def map_values(template_file, message_dict):
+        with open(template_file, 'r') as template:
+
+            LOG.debug("Message in dict form: {}".format(message_dict))
+
+            template = template.read()
+            output_data = template_functions.render(template, message_dict)
+
+            return output_data
+
+    @staticmethod
+    def data_for_template(username, reply_count, msg_time, msg_text):
+        """
+        Prepare the dictionary of substitution values for jinja2
+        :param username:
+        :param reply_count:
+        :param msg_time:
+        :param msg_text:
+        :param slack_channel_name
+        :return:
+        """
+        data = {
+            "username": username,
+            "reply_count": reply_count,
+            "msg_time": msg_time,
+            "msg_text": msg_text
+        }
+        LOG.debug(u"Configuration data:\n%s", json.dumps(data, indent=2))
+        return data
 
     def archive_channel(self):
         """

@@ -5,7 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
-import slack_common
+from fn_slack.lib.slack_common import SlackUtils
 import json
 
 LOG = logging.getLogger(__name__)
@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             def_username = self.options['username']
 
             # find the channel
-            slack_utils = slack_common.SlackUtils(api_token)
+            slack_utils = SlackUtils(api_token)
             slack_utils.find_channel_by_name(slack_channel_name)
             if slack_utils.get_channel() is None:
                 yield FunctionError(
@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             text = "This channel has been set to be archived from Resilient."
             results_msg_posted = slack_utils.slack_post_message(None, text, None, None, True, None, None, None, def_username)
             if results_msg_posted.get("ok"):
-                yield StatusMessage("Message warning 'channel is set to be archived' was added to Slack.")
+                yield StatusMessage("Message warning 'Channel is set to be archived' was added to Slack.")
             else:
                 yield FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
 
@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             new_attachment = slack_utils.save_conversation_history_as_attachment(messages, self.rest_client(),
                                                                                  incident_id, task_id)
             if new_attachment is not None:
-                yield StatusMessage("Channel's '{}' chat history was uploaded as an attachment.".format(slack_channel_name))
+                yield StatusMessage("Channel's chat history was uploaded as an attachment.")
             else:
                 yield FunctionError("Failed creating an attachment.")
 
