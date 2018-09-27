@@ -114,7 +114,7 @@ class BigFixClient(object):
 
         """
         head, tail = ntpath.split(file_path)
-        query = "exists folder \"{0}\"".format(head)
+        query = "exists file \"{0}\"".format(head)
         if tail:
             query = "exists file \"{0}\" of folder \"{1}\"".format(tail, head)
         LOG.debug("get_bf_computer_by_file_path triggered")
@@ -208,9 +208,22 @@ class BigFixClient(object):
             subkey = "exists key of keys \"{0}\" " \
                 "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
 
-        LOG.debug("exists subkey triggered")
+        LOG.debug("check exists subkey triggered")
         q_id = self.post_bfclientquery(subkey.format(artifact_value), computer_id)
 
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
+        return resp
+
+    def check_is_folder(self, artifact_value, computer_id):
+        """ Bigfix query - Determine if artifact value is a folder.
+
+        :param artifact_value: Name of artifact to query
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        LOG.debug("check is folder triggered")
+        q_id = self.post_bfclientquery("exists folder \"{0}\"".format(artifact_value))
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 

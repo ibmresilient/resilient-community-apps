@@ -102,7 +102,14 @@ class FunctionComponent(ResilientComponent):
                         else:
                             response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 elif params["artifact_type"] == "File Path":
-                    response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                    # Test if file path is a folder, if so disallow remediate.
+                    result = bigfix_client.check_is_folder(bigfix_artifact_value, bigfix_asset_id)
+                    if (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                        log.exception("Delete not allowed, '%s' is a folder artifact.", bigfix_artifact_value)
+                        yield StatusMessage("Warning: Delete not allowed for folder artifacts.".format(bigfix_artifact_value))
+                        response = None
+                    else:
+                        response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 else:
                     log.error("Unsupported artifact type '%s'.", params["artifact_type"])
                     raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
