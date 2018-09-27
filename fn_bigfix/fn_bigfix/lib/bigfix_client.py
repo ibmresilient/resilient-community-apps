@@ -237,7 +237,7 @@ class BigFixClient(object):
         """
         query = "delete \"{0}\"".format(artifact_value)
         relevance = "exists file \"{0}\"".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Delete File {0}".format(artifact_value), relevance)
+        return self._post_bf_action_query(query, computer_id, "Delete File '{0}'".format(artifact_value), relevance)
 
     def send_kill_process_remediation_message(self, artifact_value, computer_id):
         """ Bigfix action - Kill process remediate action.
@@ -254,7 +254,7 @@ class BigFixClient(object):
                     "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) " \
                     "else if (name of it contains \"Linux\") of operating system " \
                     "then (exists process whose(name of it = \"{0}\")) else (false)".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
+        return self._post_bf_action_query(query, computer_id, "Kill Process '{0}'".format(artifact_value), relevance)
 
     def send_stop_service_remediation_message(self, artifact_value, computer_id):
         """ Bigfix action - Stop service remediate action.
@@ -270,7 +270,7 @@ class BigFixClient(object):
         relevance = "if (windows of operating system) " \
                     "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) " \
                     "of (services as string as lowercase)) else (false)".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Stop service {0}".format(artifact_value),
+        return self._post_bf_action_query(query, computer_id, "Stop service '{0}'".format(artifact_value),
                                           relevance)
 
     def send_delete_registry_key_remediation_message(self, artifact_value, computer_id):
@@ -319,7 +319,7 @@ class BigFixClient(object):
                 action uses wow64 redirection false
                 waithidden "{{parameter "PowerShellexe"}}" -ExecutionPolicy Bypass -File remove_keys.ps1
                 action uses wow64 redirection {{x64 of operating system}}
-                //delete remove_keys.ps1
+                delete remove_keys.ps1
             """.format(artifact_value))
 
             key_format = "exists keys \"{0}\" of keys whose " \
