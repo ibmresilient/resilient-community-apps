@@ -12,6 +12,8 @@ import os
 import json
 import tempfile
 
+import sys
+
 LOG = logging.getLogger(__name__)
 
 def validate_opts(func):
@@ -101,8 +103,13 @@ def create_attachment(rest_client, file_name, file_content, params):
     :return att_report: Return result (dict) of Resilient post attachment request
     """
 
+    if sys.version_info.major == 3:
+        temp_file_obj = tempfile.NamedTemporaryFile('w', delete=False, encoding="utf8")
+    else:
+        temp_file_obj = tempfile.NamedTemporaryFile('w+b', delete=False)
+
     # Create the temporary file save results in json format.
-    with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file:
+    with temp_file_obj as temp_file:
         json.dump(file_content, temp_file)
         temp_file.close()
         try:
