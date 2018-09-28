@@ -177,14 +177,8 @@ class TestSlack(object):
 
         assert slack_utils.is_channel_archived() == expected
 
-    @pytest.mark.parametrize("user_ids,expected", [
-        ("a@a.com, b@b.com", ['W012A3CDE', 'W012A3CDE']),
-        ("b@b.com", ['W012A3CDE']),
-        ("b@b.com, ", ['W012A3CDE']),
-        (" ", [])
-    ])
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    def test_find_user_ids(self, mocked_api_call, user_ids, expected):
+    def test_lookup_user_by_email(self, mocked_api_call):
         """ Test find Slack user id by email"""
         print("Test find Slack user id by email\n")
 
@@ -198,8 +192,30 @@ class TestSlack(object):
         }
         slack_utils = SlackUtils("fake_api_key")
 
-        user_id_list = slack_utils.find_user_ids(user_ids)
-        assert user_id_list == expected
+        results = slack_utils.lookup_user_by_email("a@a.com")
+        mocked_api_call.assert_called_with(
+            "users.lookupByEmail",
+            email="a@a.com"
+        )
+        if results.get("ok") and results.get("user"):
+            assert results.get("user").get("id") == "W012A3CDE"
+
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_find_user_ids_error_pass(self, mocked_api_call):
+        """ Test find Slack user id by email error pass"""
+        print("Test find Slack user id by email error pass\n")
+
+        mocked_api_call.return_value = {
+            "ok": False,
+            "error": "users_not_found"
+        }
+
+        slack_utils = SlackUtils("fake_api_key")
+        results = slack_utils.lookup_user_by_email("b@b.com")
+        if not results.get("ok") and results.get("error") == "users_not_found":
+            assert True
+        else:
+            assert False
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_find_user_ids_error(self, mocked_api_call):
@@ -207,14 +223,15 @@ class TestSlack(object):
         print("Test find Slack user id by email error\n")
 
         mocked_api_call.return_value = {
-            "ok": False
+            "ok": False,
+            "error": "something_else"
         }
 
-        try:
-            slack_utils = SlackUtils("fake_api_key")
-            slack_utils.find_user_ids("b@b.com")
+        slack_utils = SlackUtils("fake_api_key")
+        results = slack_utils.lookup_user_by_email("b@b.com")
+        if not results.get("ok") and results.get("error") == "users_not_found":
             assert False
-        except ValueError:
+        else:
             assert True
 
     @pytest.mark.parametrize("user_ids_list,expected_ids", [
@@ -359,11 +376,10 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": True,
             "channel": "C1H9RESGL",
-            "ts": "1536873835.000100"
         }
 
         payload = "testing"
-        results = slack_utils.slack_post_message(None, payload, True, None, True, "none", True, None, def_username)
+        results = slack_utils.slack_post_message(None, payload, True, None, True, "none", True, def_username)
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
@@ -373,40 +389,11 @@ class TestSlack(object):
             reply_broadcast=True,
             parse="none",
             link_names=1,
-            mrkdown=True,
-            thread_ts=None
+            mrkdown=True
         )
         assert results.get("ok") is True
 
-        # 2 - Test sending a reply with thread_id
-        thread_id = results.get("ts")
-
-        mocked_api_call.return_value = {
-            "ok": True,
-            "channel": "C1H9RESGL",
-            "message": {
-                "thread_ts": "1536873835.000100"  # this is the one that needs to match it's parent for threading
-            },
-            "ts": "1537293614.000100"
-        }
-
-        results2 = slack_utils.slack_post_message(None, payload, True, None, True, "none", True, thread_id, def_username)
-        mocked_api_call.assert_called_with(
-            "chat.postMessage",
-            channel="C1H9RESGL",
-            text=payload,
-            as_user=True,
-            username=def_username,
-            reply_broadcast=True,
-            parse="none",
-            link_names=1,
-            mrkdown=True,
-            thread_ts=thread_id
-        )
-        assert results2.get("ok") is True
-        assert results2.get("message").get("thread_ts") == thread_id
-
-        # 3 - Test sending a reply with json payload
+        # 2 - Test sending a reply with json payload
 
         # create slack_details for the post_message
         resoptions = {
@@ -414,8 +401,7 @@ class TestSlack(object):
             'port': '443',
          }
         slack_details = json.dumps(self._buildDataDetails())
-        results3 = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, None,
-                                                  def_username)
+        results2 = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, "none", True, def_username)
 
         # covert slack_details to payload - to compare what was assert_called_with
         payload = convert_slack_details_to_payload(slack_details, resoptions)
@@ -429,10 +415,9 @@ class TestSlack(object):
             reply_broadcast=True,
             parse="none",
             link_names=1,
-            mrkdown=True,
-            thread_ts=None
+            mrkdown=True
         )
-        assert results3.get("ok") is True
+        assert results2.get("ok") is True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_slack_post_message_error(self, mocked_api_call):
@@ -451,8 +436,7 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": False
         }
-        results = slack_utils.slack_post_message(None, "testing", True, None, True, "none", True, None,
-                                                 def_username)
+        results = slack_utils.slack_post_message(None, "testing", True, None, True, "none", True, def_username)
         assert results.get("ok") is False
 
     def _buildDataDetails(self):

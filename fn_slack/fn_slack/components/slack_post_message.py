@@ -16,6 +16,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_slack.lib.resilient_common import validate_fields
 from fn_slack.lib.slack_common import SlackUtils
 
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_post_message"""
@@ -25,7 +26,6 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_slack", {})
         self.resoptions = opts.get("resilient", {})
-        self.log = logging.getLogger(__name__)
 
         self._init()
 
@@ -67,23 +67,21 @@ class FunctionComponent(ResilientComponent):
             slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean
             slack_participant_emails = kwargs.get("slack_participant_emails")  # text
             slack_details = kwargs.get("slack_details")  # text
-            slack_thread_id = kwargs.get("slack_thread_id")  # text
             slack_reply_broadcast = kwargs.get("slack_reply_broadcast") # Boolean
             slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
             slack_parse = kwargs.get("slack_parse")  # Boolean
             slack_as_user = kwargs.get("slack_as_user")   # Boolean
             slack_username = kwargs.get("slack_username")  # text
 
-            self.log.debug("slack_channel: %s", slack_channel_name)
-            self.log.debug("slack_details: %s", slack_details)
-            self.log.debug("slack_is_private: %s", slack_details)
-            self.log.debug("slack_participant_emails: %s", slack_participant_emails)
-            self.log.debug("slack_thread_id: %s", slack_thread_id)
-            self.log.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
-            self.log.debug("slack_parse: %s", slack_parse)
-            self.log.debug("slack_mrkdwn: %s", slack_mrkdown)
-            self.log.debug("slack_as_user: %s", slack_as_user)
-            self.log.debug("slack_username: %s", slack_username)
+            LOG.debug("slack_channel: %s", slack_channel_name)
+            LOG.debug("slack_details: %s", slack_details)
+            LOG.debug("slack_is_private: %s", slack_details)
+            LOG.debug("slack_participant_emails: %s", slack_participant_emails)
+            LOG.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
+            LOG.debug("slack_parse: %s", slack_parse)
+            LOG.debug("slack_mrkdwn: %s", slack_mrkdown)
+            LOG.debug("slack_as_user: %s", slack_as_user)
+            LOG.debug("slack_username: %s", slack_username)
 
             # configuration specific slack parameters
             api_token = self.options['api_token']
@@ -116,7 +114,19 @@ class FunctionComponent(ResilientComponent):
 
             if slack_participant_emails:
                 # find user ids based on their emails
-                user_id_list = slack_utils.find_user_ids(slack_participant_emails)
+                user_id_list = []
+                list_emails = slack_participant_emails.split(",")
+                for email in list_emails:
+                    email = email.strip()  # making sure to exclude ' ' or ''
+                    if email:
+                        results_user_id = slack_utils.lookup_user_by_email(email)
+
+                        if results_user_id.get("ok") and results_user_id.get("user"):
+                            user_id_list.append(results_user_id.get("user").get("id"))
+                        elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
+                            yield StatusMessage("{} user is not a member of your workspace.".format(email))
+                        else:
+                            yield FunctionError("Invite users failed: " + json.dumps(results_user_id))
 
                 if user_id_list:
                     # invite users to a channel
@@ -129,24 +139,23 @@ class FunctionComponent(ResilientComponent):
                     else:
                         yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
 
-            # post message to the channel
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_details, slack_as_user,
                                                                 slack_username, slack_reply_broadcast, slack_parse,
-                                                                slack_mrkdown, slack_thread_id, def_username)
+                                                                slack_mrkdown, def_username)
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message added to slack.")
             else:
-                yield FunctionError("Message add failed: "+json.dumps(results_msg_posted))
+                yield FunctionError("Message add failed: " + json.dumps(results_msg_posted))
 
-            # generate a permalink URL to join this conversation # FIXME - do we need this when replying?
+            # generate a permalink URL to join this conversation
             conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
 
             results = {"channel": slack_channel_name,
-                       "ts": results_msg_posted.get("ts"),
+                       "channel_id": results_msg_posted.get("channel"),
                        "conversation_url": conversation_url}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            self.log.error(err)
+            LOG.error(err)
             yield FunctionError()

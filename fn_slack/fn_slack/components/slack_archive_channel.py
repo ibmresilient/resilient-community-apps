@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
 
             # notify the channel that we are going to archive
             text = "This channel has been set to be archived from Resilient."
-            results_msg_posted = slack_utils.slack_post_message(None, text, None, None, True, None, None, None, def_username)
+            results_msg_posted = slack_utils.slack_post_message(None, text, None, None, True, None, None, def_username)
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message warning 'Channel is set to be archived' was added to Slack.")
             else:

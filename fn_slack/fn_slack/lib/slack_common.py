@@ -17,7 +17,7 @@ import datetime
 import resilient_circuits.template_functions as template_functions
 from os.path import join, pardir
 import os
-import textwrap
+import time
 
 LOG = logging.getLogger(__name__)
 
@@ -69,7 +69,7 @@ class SlackUtils(object):
             return None
 
     def slack_post_message(self, resoptions, slack_details, slack_as_user, slack_username, slack_reply_broadcast,
-                           slack_parse, slack_markdown, slack_thread_id, def_username):
+                           slack_parse, slack_markdown, def_username):
         """
         Process the slack post
         :param resoptions: app.config resilient section
@@ -80,7 +80,6 @@ class SlackUtils(object):
         :param slack_reply_broadcast:
         :param slack_parse:
         :param slack_markdown:
-        :param slack_thread_id:
         :param def_username - name to use for who posted the message
         :return: JSON result
         """
@@ -99,8 +98,7 @@ class SlackUtils(object):
             reply_broadcast=slack_reply_broadcast,
             parse=slack_parse,
             link_names=1, # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
-            mrkdown=slack_markdown,
-            thread_ts=slack_thread_id
+            mrkdown=slack_markdown
         )
         LOG.debug(results)
 
@@ -129,12 +127,20 @@ class SlackUtils(object):
         :param slack_channel_name: Name of the public or private channel
         :return: channel object
         """
+        start = time.time()
+
         all_channels = self._slack_find_channels()
 
+        i = 0
         for ch in all_channels:
+            i = i + 1
             if ch.get("name") == slack_channel_name:
                 self.channel = ch
                 break
+
+        end = time.time()
+        print(end - start)
+        print i
 
     def _slack_find_channels(self, cursor=None):
         """
@@ -161,17 +167,7 @@ class SlackUtils(object):
             for ch in results.get("channels"):  # yield the first page, paginate only until channel is found!
                 yield ch
 
-    def find_user_ids(self, emails):
-        """
-        Method will lookup users by email and return a list od user ids.
-        :param emails: comma-delimited string
-        :return: list of user ids
-        """
-        list_emails = emails.split(",")
-        user_id_list = [self._lookup_user_by_email(email.strip()) for email in list_emails if email.strip()] # making sure to exclude ' ' or ''
-        return user_id_list
-
-    def _lookup_user_by_email(self, user_email):
+    def lookup_user_by_email(self, user_email):
         """
         Retrieve a single user by looking them up by their registered email address.
         :param user_email: An email address belonging to a user in the workspace
@@ -183,12 +179,7 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        user_data = results.get("user")
-        if results.get("ok") and user_data:
-            return user_data.get("id")
-
-        else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
+        return results
 
     def is_channel_private(self):
         """
@@ -371,7 +362,6 @@ class SlackUtils(object):
         :param client Resilient API
         :param incident_id
         :param task_id
-        :param slack_channel_name
         :return:
         """
         archive_template = self.get_template_file_path(ARCHIVE_TEMPLATE_PATH)
@@ -399,9 +389,6 @@ class SlackUtils(object):
 
                         # 4 get the text message
                         text = message.get("text")
-                        # FIXME - indent all new lines if it's a thread
-                        #new_text = textwrap.fill(text) # Reformat the single paragraph in 'text' to fit in lines of no more than 'width' columns, default width=70
-                        #msg_text = text.replace("\n", "\n\t") if not is_msg_parent else text  # indent for threads
 
                         # 5 write in a temp file
                         data = self.data_for_template(username, reply_count, msg_time, text, is_msg_parent)
@@ -433,7 +420,7 @@ class SlackUtils(object):
     @staticmethod
     def get_template_file_path(path):
         current_path = os.path.dirname(os.path.realpath(__file__))
-        template_file_path = join(current_path, pardir, ARCHIVE_TEMPLATE_PATH)
+        template_file_path = join(current_path, pardir, path)
         return template_file_path
 
     @staticmethod
@@ -465,7 +452,6 @@ class SlackUtils(object):
             "msg_text": msg_text,
             "is_msg_parent": is_msg_parent
         }
-        LOG.debug(u"Configuration data:\n%s", json.dumps(data, indent=2))
         return data
 
     def archive_channel(self):
