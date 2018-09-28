@@ -114,7 +114,7 @@ class BigFixClient(object):
 
         """
         head, tail = ntpath.split(file_path)
-        query = "exists folder \"{0}\"".format(head)
+        query = "exists file \"{0}\"".format(head)
         if tail:
             query = "exists file \"{0}\" of folder \"{1}\"".format(tail, head)
         LOG.debug("get_bf_computer_by_file_path triggered")
@@ -208,9 +208,22 @@ class BigFixClient(object):
             subkey = "exists key of keys \"{0}\" " \
                 "of(if(x64 of operating system) then(x64 registry;x32 registry) else(registry))"
 
-        LOG.debug("exists subkey triggered")
+        LOG.debug("check exists subkey triggered")
         q_id = self.post_bfclientquery(subkey.format(artifact_value), computer_id)
 
+        resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
+        return resp
+
+    def check_is_folder(self, artifact_value, computer_id):
+        """ Bigfix query - Determine if artifact value is a folder.
+
+        :param artifact_value: Name of artifact to query
+        :param computer_id: BigFix Endpoint id
+        :return resp: Response from action
+
+        """
+        LOG.debug("check is folder triggered")
+        q_id = self.post_bfclientquery("exists folder \"{0}\"".format(artifact_value))
         resp = self.get_bfclientquery(q_id, self.retry_interval, self.retry_timeout)
         return resp
 
@@ -224,7 +237,7 @@ class BigFixClient(object):
         """
         query = "delete \"{0}\"".format(artifact_value)
         relevance = "exists file \"{0}\"".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Delete File {0}".format(artifact_value), relevance)
+        return self._post_bf_action_query(query, computer_id, "Delete File '{0}'".format(artifact_value), relevance)
 
     def send_kill_process_remediation_message(self, artifact_value, computer_id):
         """ Bigfix action - Kill process remediate action.
@@ -241,7 +254,7 @@ class BigFixClient(object):
                     "then (exists process whose(name of it as lowercase = \"{0}\" as lowercase)) " \
                     "else if (name of it contains \"Linux\") of operating system " \
                     "then (exists process whose(name of it = \"{0}\")) else (false)".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Kill Process {0}".format(artifact_value), relevance)
+        return self._post_bf_action_query(query, computer_id, "Kill Process '{0}'".format(artifact_value), relevance)
 
     def send_stop_service_remediation_message(self, artifact_value, computer_id):
         """ Bigfix action - Stop service remediate action.
@@ -257,7 +270,7 @@ class BigFixClient(object):
         relevance = "if (windows of operating system) " \
                     "then (disjunction of (exists matches(case insensitive regex(\"%22{0}%22.*%22running%22\")) of it ) " \
                     "of (services as string as lowercase)) else (false)".format(artifact_value)
-        return self._post_bf_action_query(query, computer_id, "Stop service {0}".format(artifact_value),
+        return self._post_bf_action_query(query, computer_id, "Stop service '{0}'".format(artifact_value),
                                           relevance)
 
     def send_delete_registry_key_remediation_message(self, artifact_value, computer_id):
@@ -306,7 +319,7 @@ class BigFixClient(object):
                 action uses wow64 redirection false
                 waithidden "{{parameter "PowerShellexe"}}" -ExecutionPolicy Bypass -File remove_keys.ps1
                 action uses wow64 redirection {{x64 of operating system}}
-                //delete remove_keys.ps1
+                delete remove_keys.ps1
             """.format(artifact_value))
 
             key_format = "exists keys \"{0}\" of keys whose " \

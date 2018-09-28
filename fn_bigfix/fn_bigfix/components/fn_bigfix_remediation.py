@@ -93,16 +93,35 @@ class FunctionComponent(ResilientComponent):
                         response = None
                     else:
                         # Test if registry key has 1 or more subkeys
+                        response = None
                         result = bigfix_client.check_exists_subkey(bigfix_artifact_value, bigfix_asset_id)
-                        if (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                        # Query should return array with single result.
+                        if not result or not result[0]:
+                            log.exception("Delete not allowed for key '%s'. BigFix subkey query did not return a valid result.",
+                                          bigfix_artifact_value)
+                            yield StatusMessage("Warning: Delete not allowed for key '{}'. BigFix subkey query did not return a valid result."
+                                                .format(bigfix_artifact_value))
+                        elif (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
                             log.exception("Delete not allowed, key '%s' has 1 or more subkeys.", bigfix_artifact_value)
                             yield StatusMessage("Warning: Delete not allowed, key '{}' has 1 or more subkeys."
                                                 .format(bigfix_artifact_value))
-                            response = None
                         else:
                             response = bigfix_client.send_delete_registry_key_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 elif params["artifact_type"] == "File Path":
-                    response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
+                    # Test if file path is a folder, if so disallow remediate.
+                    response = None
+                    result = bigfix_client.check_is_folder(bigfix_artifact_value, bigfix_asset_id)
+                    # Query should return array with single result.
+                    if not result or not result[0]:
+                        log.exception("Delete not allowed' for artifact %s'. BigFix subkey query did not return a valid result.",
+                                      bigfix_artifact_value)
+                        yield StatusMessage("Warning: Delete not allowed for artifact '{}'. BigFix subkey query did not "
+                                            "return a valid result".format(bigfix_artifact_value))
+                    elif (result[0]["failure"] == 0 or result[0]["failure"] == "False") and result[0]["result"] == "True":
+                        log.exception("Delete not allowed, '%s' is a folder artifact.", bigfix_artifact_value)
+                        yield StatusMessage("Warning: Delete not allowed for folder artifact '{}'.".format(bigfix_artifact_value))
+                    else:
+                        response = bigfix_client.send_delete_file_remediation_message(bigfix_artifact_value, bigfix_asset_id)
                 else:
                     log.error("Unsupported artifact type '%s'.", params["artifact_type"])
                     raise ValueError("Unsupported artifact type '{}'.".format(params["artifact_type"]))
