@@ -17,7 +17,7 @@ import datetime
 import resilient_circuits.template_functions as template_functions
 from os.path import join, pardir
 import os
-import pkg_resources
+import textwrap
 
 LOG = logging.getLogger(__name__)
 
@@ -391,6 +391,7 @@ class SlackUtils(object):
 
                         # 2 were there any replies - only parent messages can have replies
                         reply_count = message.get("reply_count")
+                        is_msg_parent = reply_count is not None
 
                         # 3 get the timestamp
                         msg_ts = datetime.datetime.utcfromtimestamp(float(message.get("ts")))
@@ -398,20 +399,13 @@ class SlackUtils(object):
 
                         # 4 get the text message
                         text = message.get("text")
-                        msg_text = text.replace("\n", "\n\t") if reply_count is None else text
+                        # FIXME - indent all new lines if it's a thread
+                        #new_text = textwrap.fill(text) # Reformat the single paragraph in 'text' to fit in lines of no more than 'width' columns, default width=70
+                        #msg_text = text.replace("\n", "\n\t") if not is_msg_parent else text  # indent for threads
 
-                        # 5 write in a temp file - replace certain values if this is a thread (replies are None)
-                        data = self.data_for_template(username, reply_count, msg_time, msg_text)
+                        # 5 write in a temp file
+                        data = self.data_for_template(username, reply_count, msg_time, text, is_msg_parent)
                         output_data = self.map_values(archive_template, data)
-
-                        # # FIXME try using jinja this is not pretty!
-                        # indentation = "\t" if replies is None else ""
-                        # msg_text = text.replace("\n", "\n\t") if replies is None else text
-                        # posted_info = " POSTED A REPLY ON " if replies is None else " POSTED ON "
-                        # replies_info = "\n{} REPLIES:".format(str(replies)) if replies else ""
-                        # temp_file.write(indentation + username.encode('utf-8') + posted_info + msg_time.encode('utf-8')
-                        #                 + ": \n" + indentation + msg_text.encode('utf-8') + replies_info + "\n")
-                        # temp_file.write("\n")  # Add a new blank line
                         temp_file.write(output_data.encode('utf-8'))
 
                 temp_file.close()
@@ -454,21 +448,22 @@ class SlackUtils(object):
             return output_data
 
     @staticmethod
-    def data_for_template(username, reply_count, msg_time, msg_text):
+    def data_for_template(username, reply_count, msg_time, msg_text, is_msg_parent):
         """
         Prepare the dictionary of substitution values for jinja2
         :param username:
         :param reply_count:
         :param msg_time:
         :param msg_text:
-        :param slack_channel_name
+        :param is_msg_parent
         :return:
         """
         data = {
             "username": username,
             "reply_count": reply_count,
             "msg_time": msg_time,
-            "msg_text": msg_text
+            "msg_text": msg_text,
+            "is_msg_parent": is_msg_parent
         }
         LOG.debug(u"Configuration data:\n%s", json.dumps(data, indent=2))
         return data
