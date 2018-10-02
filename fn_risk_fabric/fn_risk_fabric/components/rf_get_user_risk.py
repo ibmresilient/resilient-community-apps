@@ -4,11 +4,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import risk_fabric
+from fn_risk_fabric.util.risk_fabric import get_risk_info
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'get_ip_risk"""
+    """Component that implements Resilient function 'rf_get_user_risk"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -20,18 +20,18 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_risk_fabric", {})
 
-    @function("get_ip_risk")
-    def _get_ip_risk_function(self, event, *args, **kwargs):
-        """Function: Function to retrieve the latest risk score for an IP address"""
+    @function("rf_get_user_risk")
+    def _rf_get_user_risk_function(self, event, *args, **kwargs):
+        """Function: Function to retrieve the latest risk score for a user"""
         try:
             # Get the function parameters:
-            ipaddress = kwargs.get("ipaddress")  # text
+            rf_username = kwargs.get("rf_username")  # text
 
             log = logging.getLogger(__name__)
-            log.info("ipaddress: %s", ipaddress)
+            log.info("rf_username: %s", rf_username)
 
             yield StatusMessage("starting...")
-            result = risk_fabric.get_risk_info(self.options, 'ipaddress', ipaddress)
+            result = get_risk_info(self.options, 'user', rf_username)
             yield StatusMessage("done...")
 
             results = {

@@ -4,11 +4,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import risk_fabric
+from fn_risk_fabric.util.risk_fabric import get_risk_info
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'get_risk_model_instances"""
+    """Component that implements Resilient function 'rf_get_host_risk"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -20,22 +20,18 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_risk_fabric", {})
 
-    @function("get_risk_model_instances")
-    def _get_risk_model_instances_function(self, event, *args, **kwargs):
-        """Function: Function to retrieve risk model instances"""
+    @function("rf_get_host_risk")
+    def _rf_get_host_risk_function(self, event, *args, **kwargs):
+        """Function: Function to retrieve the latest risk score for a host"""
         try:
             # Get the function parameters:
-            limit = kwargs.get("limit")  # number
+            rf_hostname = kwargs.get("rf_hostname")  # text
 
             log = logging.getLogger(__name__)
-            log.info("limit: %s", limit)
-
-            params = {
-                'Limit': limit
-            }
+            log.info("rf_hostname: %s", rf_hostname)
 
             yield StatusMessage("starting...")
-            result = risk_fabric.get_risk_model_instances(self.options, params)
+            result = get_risk_info(self.options, 'computerendpoint', rf_hostname)
             yield StatusMessage("done...")
 
             results = {

@@ -4,11 +4,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import risk_fabric
+from fn_risk_fabric.util.risk_fabric import set_event_mitigations
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'set_event_mitigations"""
+    """Component that implements Resilient function 'rf_set_event_mitigations"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -20,31 +20,31 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_risk_fabric", {})
 
-    @function("set_event_mitigations")
-    def _set_event_mitigations_function(self, event, *args, **kwargs):
+    @function("rf_set_event_mitigations")
+    def _rf_set_event_mitigations_function(self, event, *args, **kwargs):
         """Function: Function to set event mitigations"""
         try:
             # Get the function parameters:
-            riskmodelinstanceid = kwargs.get("riskmodelinstanceid")  # text
-            cardinstanceid = kwargs.get("cardinstanceid")  # text
-            focusentityid = kwargs.get("focusentityid")  # text
-            actionplanguid = kwargs.get("actionplanguid")  # text
+            rf_riskmodelinstanceid = kwargs.get("rf_riskmodelinstanceid")  # text
+            rf_cardinstanceid = kwargs.get("rf_cardinstanceid")  # text
+            rf_focusentityid = kwargs.get("rf_focusentityid")  # text
+            rf_actionplanguid = kwargs.get("rf_actionplanguid")  # text
 
             log = logging.getLogger(__name__)
-            log.info("riskmodelinstanceid: %s", riskmodelinstanceid)
-            log.info("cardinstanceid: %s", cardinstanceid)
-            log.info("focusentityid: %s", focusentityid)
-            log.info("actionplanguid: %s", actionplanguid)
+            log.info("rf_riskmodelinstanceid: %s", rf_riskmodelinstanceid)
+            log.info("rf_cardinstanceid: %s", rf_cardinstanceid)
+            log.info("rf_focusentityid: %s", rf_focusentityid)
+            log.info("rf_actionplanguid: %s", rf_actionplanguid)
 
             params = {
-                'RiskModelInstanceID': riskmodelinstanceid,
-                'CardInstanceID': cardinstanceid,
-                'FocusEntityID': focusentityid,
-                'ActionPlanGUID': actionplanguid,
+                'RiskModelInstanceID': rf_riskmodelinstanceid,
+                'CardInstanceID': rf_cardinstanceid,
+                'FocusEntityID': rf_focusentityid,
+                'ActionPlanGUID': rf_actionplanguid,
             }
 
             yield StatusMessage("starting...")
-            result = risk_fabric.set_event_mitigations(self.options, params)
+            result = set_event_mitigations(self.options, params)
             yield StatusMessage("done...")
 
             results = {

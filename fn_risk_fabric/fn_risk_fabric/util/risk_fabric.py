@@ -8,6 +8,7 @@ def _make_rest_call(config, api_url, api_params=None, method='get'):
         res = requests.get(api_url, auth=api_auth, params=api_params)
     else:
         res = requests.post(api_url, auth=api_auth, json=api_params)
+    res.raise_for_status()
     return res.json()
 
 

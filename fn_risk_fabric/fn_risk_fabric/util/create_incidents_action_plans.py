@@ -7,8 +7,8 @@ from __future__ import print_function
 import time
 import logging
 import resilient
-import risk_fabric
 import ConfigParser
+from fn_risk_fabric.util.risk_fabric import rf_get_action_plans
 
 
 logging.basicConfig()
@@ -20,13 +20,9 @@ class ExampleArgumentParser(resilient.ArgumentParser):
     def __init__(self, config_file=None):
         super(ExampleArgumentParser, self).__init__(config_file=config_file)
 
-        self.add_argument('--itype', '-t',
-                          action='append',
-                          help="The incident type(s).  Multiple arguments may be supplied.")
-
-        self.add_argument('--limit', '-l',
+        self.add_argument('--queue', '-q',
                           required=True,
-                          help="Limit imported risk model instances.")
+                          help="The action plan queue.")
 
 
 def main():
@@ -38,8 +34,7 @@ def main():
     parser = ExampleArgumentParser(config_file)
     opts = parser.parse_args()
 
-    inc_types = opts["itype"]
-    inc_limit = opts["limit"]
+    inc_queue = opts["queue"]
 
     # Create SimpleClient for a REST connection to the Resilient services
     client = resilient.get_client(opts)
@@ -53,26 +48,29 @@ def main():
         rf_config = ConfigParser.ConfigParser()
         rf_config.read(config_file)
         rf_opts = dict(rf_config.items('fn_risk_fabric'))
-        params = {
-            'Limit': inc_limit
-        }
-        result = risk_fabric.get_risk_model_instances(rf_opts, params)
+        result = rf_get_action_plans(rf_opts)
 
-        for ap in result['Records']:
+        for ap in result:
 
-            # Construct the basic incident DTO that will be posted
-            inc_name = ap['RiskModelName']
-            inc_description = ap['Threats'] + ', ' + ap['FocusEntityCaption'] + ', #' + str(ap['ID'])
-            new_incident = {"name": inc_name,
-                    "description": inc_description,
-                    "incident_type_ids": inc_types,
-                    "discovered_date": time_now}
+            if 'AssignToQueueName' in ap and ap['AssignToQueueName'] == inc_queue:
 
-            # Create the incident
-            incident = client.post(uri, new_incident)
-            inc_id = incident["id"]
+                # Construct the basic incident DTO that will be posted
+                new_incident = {"name": ap['Title'],
+                        "description": ap['Notes'],
+                        "incident_type_ids": [1003],
+                        "discovered_date": time_now}
 
-            print("Created incident {}".format(inc_id))
+                # Create the incident
+                incident = client.post(uri, new_incident)
+                inc_id = incident["id"]
+
+                params = {
+                    'ActionPlanGUID': ap['ActionPlanGUID'],
+                    'Comment': "Created Resilient Incident ID #" + str(inc_id)
+                }
+                result = risk_fabric.set_action_plan_comment(rf_opts, params)
+
+                print("Created incident {}".format(inc_id))
 
 
     except resilient.SimpleHTTPException as ecode:

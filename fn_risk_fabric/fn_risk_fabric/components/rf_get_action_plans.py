@@ -4,11 +4,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import risk_fabric
+from fn_risk_fabric.util.risk_fabric import get_action_plans
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'get_risk_model_instance_details"""
+    """Component that implements Resilient function 'rf_get_action_plans"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -20,22 +20,16 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_risk_fabric", {})
 
-    @function("get_risk_model_instance_details")
-    def _get_risk_model_instance_details_function(self, event, *args, **kwargs):
-        """Function: Function to retrieve risk model instance details"""
+    @function("rf_get_action_plans")
+    def _rf_get_action_plans_function(self, event, *args, **kwargs):
+        """Function: Action to retrieve action plans"""
         try:
             # Get the function parameters:
-            riskmodelinstanceid = kwargs.get("riskmodelinstanceid")  # text
 
             log = logging.getLogger(__name__)
-            log.info("riskmodelinstanceid: %s", riskmodelinstanceid)
-
-            params = {
-                'riskModelInstanceID': riskmodelinstanceid
-            }
 
             yield StatusMessage("starting...")
-            result = risk_fabric.get_risk_model_instances(self.options, params)
+            result = get_action_plans(self.options)
             yield StatusMessage("done...")
 
             results = {
