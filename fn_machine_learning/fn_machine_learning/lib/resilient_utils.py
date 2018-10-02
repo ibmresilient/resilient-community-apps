@@ -14,6 +14,7 @@ from fn_machine_learning.lib.ml_bernoullinb import MlBernoulliNB
 from fn_machine_learning.lib.ml_knn import MlKNN
 import logging
 import json
+import urllib
 
 
 def get_model(name, class_weight=None, method=None):
@@ -95,13 +96,16 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
     log.debug("Incident Fields: " + str(fields_dict))
 
     # Get all the incidents
-    ret = res_client.get("/incidents")
+    #ret = res_client.get("/incidents")
+    ret = query_incidents(res_client=res_client,
+                          max_count=max_count)
+
     with open(filename, "w") as outfile:
         # Write everything into a CSV file
         # Write header
         fields = list(fields_dict.keys())
         for field in fields[:-1]:
-            outfile.write(field + ", ")
+            outfile.write(field + ",")
         outfile.write(fields[-1] + '\n')
 
         inc_count = 0
@@ -110,9 +114,9 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
             for field in fields[:-1]:
                 field_count = field_count + 1
                 try:
-                    value = str(inc.get(field, ""))
+                    value = str(inc.get(field, inc["properties"].get(field, "")))
                 except UnicodeEncodeError:
-                    value = inc.get(field, "").encode("ascii", "ignore").decode("ascii")
+                    value = inc.get(field, inc["properties"].get(field, "")).encode("ascii", "ignore").decode("ascii")
                 except Exception:
                     value = ""
                 #
@@ -149,7 +153,7 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
                 value = value.replace('"', ' ')
                 if '\n' in value or ',' in value:
                     value = '"' + value + '"'
-                outfile.write(value + ", ")
+                outfile.write(value + ",")
             value = str(inc.get(fields[-1], ""))
             outfile.write(value + '\n')
             inc_count = inc_count + 1
@@ -192,3 +196,48 @@ def get_field_def(resilient_client, field, type_name, in_log=None):
         log.error("get_field_def for field = {}, and type = {} returned Null".format(field, type_name))
 
     return ret
+
+
+def query_incidents(res_client, max_count=None, page_size=1000):
+    """
+    Use the query endpoint since we are going to down load
+    large number of incidents.
+    :param res_client:
+    :param max_count:
+    :param page_size:
+    :return:
+    """
+    incidents = []
+    url = "/incidents/query_paged?field_handle=-1&return_level=full"
+    num_incidents = 0
+    ret_num = 0
+    done = False
+    while not done:
+        body = {
+            "start": num_incidents,
+            "length": page_size,
+            "recordsTotal": page_size
+        }
+        ret = res_client.post(uri=url,
+                              payload=body)
+
+        data = ret.get("data", [])
+        ret_num = len(data)
+        if ret_num > 0:
+            incidents.extend(data)
+        else:
+            #
+            # No more to read.
+            #
+            done = True
+
+        num_incidents = num_incidents + ret_num
+
+        if max_count:
+            if num_incidents >= max_count:
+                #
+                # Reach max_count set by user, stop now
+                #
+                done = True
+
+    return incidents
