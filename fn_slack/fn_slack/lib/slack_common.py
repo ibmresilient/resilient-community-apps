@@ -9,7 +9,7 @@ except:
     JSONDecodeError = ValueError
 
 from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import clean_html, build_incident_url, build_resilient_url, build_timestamp
+from fn_slack.lib.resilient_common import *
 from slackclient import SlackClient
 from six import string_types
 import tempfile
@@ -23,6 +23,10 @@ LOG = logging.getLogger(__name__)
 
 # Template files for Slack
 ARCHIVE_TEMPLATE_PATH = "data/templates/template_archive_slack.jinja2"
+# API name of Slack conversations datatable
+DATA_TABLE_API_NAME = "slack_conversations_db"
+# Prefix for generating res_id which is either RES-1001 for incidents or RES-1001-2002 for tasks
+RES_PREFIX = "RES"
 
 
 class SlackUtils(object):
@@ -68,25 +72,24 @@ class SlackUtils(object):
         else:
             return None
 
-    def slack_post_message(self, resoptions, slack_details, slack_as_user, slack_username, slack_reply_broadcast,
-                           slack_parse, slack_markdown, def_username):
+    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_parse, slack_markdown,
+                           def_username):
         """
         Process the slack post
         :param resoptions: app.config resilient section
-        :param slack_details: json structure for how to structure the payload to slack
+        :param slack_text: json structure for how to structure the payload to slack
         See slack API for the use of these variables
         :param slack_as_user:
         :param slack_username:
-        :param slack_reply_broadcast:
         :param slack_parse:
         :param slack_markdown:
         :param def_username - name to use for who posted the message
         :return: JSON result
         """
         try:
-            payload = convert_slack_details_to_payload(slack_details, resoptions)
-        except JSONDecodeError: # if slack_details aren't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
-            payload = slack_details
+            payload = convert_slack_details_to_payload(slack_text, resoptions)
+        except JSONDecodeError: # if slack_text isn't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
+            payload = slack_text
 
         # start processing
         results = self.slack_client.api_call(
@@ -95,7 +98,6 @@ class SlackUtils(object):
             text=payload,
             as_user=slack_as_user,
             username=slack_username if slack_username else def_username,
-            reply_broadcast=slack_reply_broadcast,
             parse=slack_parse,
             link_names=1, # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
             mrkdown=slack_markdown
@@ -127,20 +129,12 @@ class SlackUtils(object):
         :param slack_channel_name: Name of the public or private channel
         :return: channel object
         """
-        start = time.time()
-
         all_channels = self._slack_find_channels()
 
-        i = 0
         for ch in all_channels:
-            i = i + 1
             if ch.get("name") == slack_channel_name:
                 self.channel = ch
                 break
-
-        end = time.time()
-        print(end - start)
-        print i
 
     def _slack_find_channels(self, cursor=None):
         """
@@ -355,7 +349,7 @@ class SlackUtils(object):
         else:
             raise ValueError("Slack error response: " + results.get("error", ""))
 
-    def save_conversation_history_as_attachment(self, messages, client, incident_id, task_id):
+    def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id):
         """
         Method saves conversation history to a text file and posts it as an attachment.
         :param messages list of message dict
@@ -364,7 +358,7 @@ class SlackUtils(object):
         :param task_id
         :return:
         """
-        archive_template = self.get_template_file_path(ARCHIVE_TEMPLATE_PATH)
+        archive_template = get_template_file_path(ARCHIVE_TEMPLATE_PATH)
 
         with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
             try:
@@ -391,8 +385,8 @@ class SlackUtils(object):
                         text = message.get("text")
 
                         # 5 write in a temp file
-                        data = self.data_for_template(username, reply_count, msg_time, text, is_msg_parent)
-                        output_data = self.map_values(archive_template, data)
+                        data = data_for_template(username, reply_count, msg_time, text, is_msg_parent)
+                        output_data = map_values(archive_template, data)
                         temp_file.write(output_data.encode('utf-8'))
 
                 temp_file.close()
@@ -407,7 +401,7 @@ class SlackUtils(object):
 
                 # POST the new attachment
                 attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
-                new_attachment = client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
+                new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
                                                         mimetype='text/plain')
             except Exception as ex:
                 raise ex
@@ -416,43 +410,6 @@ class SlackUtils(object):
                 os.unlink(temp_file.name)
 
         return new_attachment
-
-    @staticmethod
-    def get_template_file_path(path):
-        current_path = os.path.dirname(os.path.realpath(__file__))
-        template_file_path = join(current_path, pardir, path)
-        return template_file_path
-
-    @staticmethod
-    def map_values(template_file, message_dict):
-        with open(template_file, 'r') as template:
-
-            LOG.debug("Message in dict form: {}".format(message_dict))
-
-            template = template.read()
-            output_data = template_functions.render(template, message_dict)
-
-            return output_data
-
-    @staticmethod
-    def data_for_template(username, reply_count, msg_time, msg_text, is_msg_parent):
-        """
-        Prepare the dictionary of substitution values for jinja2
-        :param username:
-        :param reply_count:
-        :param msg_time:
-        :param msg_text:
-        :param is_msg_parent
-        :return:
-        """
-        data = {
-            "username": username,
-            "reply_count": reply_count,
-            "msg_time": msg_time,
-            "msg_text": msg_text,
-            "is_msg_parent": is_msg_parent
-        }
-        return data
 
     def archive_channel(self):
         """
@@ -466,6 +423,41 @@ class SlackUtils(object):
         # LOG.debug(results)
         # return results
         return {"ok": True} # FIXME at the moment it's turned off for easier testing
+
+    def create_row_in_datatable(self, res_client, incident_id, task_id, conversation_url):
+        """
+        Create a row in Resilient datatable.
+        :param res_client:
+        :param incident_id:
+        :param task_id:
+        :param conversation_url:
+        :return:
+        """
+        # Get current time (*1000 as API does not accept int)
+        now = int(time.time() * 1000)
+
+        # Create res_id
+        res_id = generate_res_id(incident_id, task_id)
+
+        # Generate cells for the datatable
+        cells = {
+            "cells": {
+                "slack_db_time": {"value": now},
+                "slack_db_res_id": {"value": res_id},
+                "slack_db_channel": {"value": self.get_channel_name()}
+            }
+        }
+
+        # Generate uri to POST datatable row
+        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(incident_id, DATA_TABLE_API_NAME)
+
+        try:
+            # POST row
+            add_row_response = res_client.post(uri, cells)
+        except Exception as exe:
+            raise exe
+
+        return add_row_response
 
 
 def build_payload(dataDict, resoptions):
@@ -519,17 +511,141 @@ def build_boolean(value, true_value="True", false_value="False"):
     return false_value
 
 
-def convert_slack_details_to_payload(slack_details, resoptions):
+def convert_slack_details_to_payload(slack_text, resoptions):
     """
     Method converts json format to python dict and creates a payload for the post message.
-    :param slack_details:
+    :param slack_text:
     :param resoptions:
     :return:
     """
     try:
-        data = json.loads(slack_details.replace("\\n", ""), strict=False)  # cleanup for json.loads
+        data = json.loads(slack_text.replace("\\n", ""), strict=False)  # cleanup for json.loads
         payload = build_payload(data, resoptions)
         LOG.debug(payload)
         return payload
     except JSONDecodeError:
         raise JSONDecodeError
+
+
+def get_template_file_path(path):
+    """
+    Get template file path.
+    :param path:
+    :return:
+    """
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    template_file_path = join(current_path, pardir, path)
+    return template_file_path
+
+
+def map_values(template_file, message_dict):
+    """
+    Map values from jinja template.
+    :param template_file:
+    :param message_dict:
+    :return:
+    """
+    with open(template_file, 'r') as template:
+
+        LOG.debug("Message in dict form: {}".format(message_dict))
+
+        template = template.read()
+        output_data = template_functions.render(template, message_dict)
+
+        return output_data
+
+
+def data_for_template(username, reply_count, msg_time, msg_text, is_msg_parent):
+    """
+    Prepare the dictionary of substitution values for jinja template
+    :param username:
+    :param reply_count:
+    :param msg_time:
+    :param msg_text:
+    :param is_msg_parent
+    :return:
+    """
+    data = {
+        "username": username,
+        "reply_count": reply_count,
+        "msg_time": msg_time,
+        "msg_text": msg_text,
+        "is_msg_parent": is_msg_parent
+    }
+    return data
+
+
+def slack_channel_name_datatable_lookup(res_client, incident_id, task_id=None):
+    """
+    Function loads Resilient datatable and looks for the slack_channel name associated with your incident or task.
+    :param res_client:
+    :param incident_id:
+    :param task_id:
+    :return:
+    """
+    datatable = ConversationsDatatable(res_client, incident_id)
+    datatable.get_data()
+    return datatable.get_slack_channel_name(incident_id, task_id)
+
+
+class ConversationsDatatable():
+    """ Object for the Slack conversations datatable"""
+
+    def __init__(self, res_client, incident_id):
+        self.res_client = res_client
+        self.incident_id = incident_id
+        self.api_name = DATA_TABLE_API_NAME
+        self.data = None
+        self.rows = None
+
+    def get_data(self):
+        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
+        try:
+            self.data = self.res_client.get(uri)
+            self.rows = self.data["rows"]
+        except Exception as ex:
+            raise ValueError("Failed to get {} datatable: ".format(DATA_TABLE_API_NAME) + ex)
+
+    def get_slack_channel_name(self, incident_id, task_id=None):
+        """
+        Returns a res_associated_channel_name
+        :param incident_id:
+        :param task_id:
+        :return:
+        """
+        res_id = [RES_PREFIX, str(incident_id)]
+
+        if task_id is not None:
+            res_id.append(str(task_id))
+
+        res_id_to_search = "-".join(res_id)
+
+        for row in self.rows:
+            cells = row["cells"]
+            slack_db_res_id = cells.get("slack_db_res_id")
+            res_id = slack_db_res_id.get("value") if slack_db_res_id else None
+            if res_id is None:
+                raise ValueError("{} datatable is missing 'slack_db_res_id' column.".format(DATA_TABLE_API_NAME))
+
+            if task_id is not None:
+                if res_id_to_search in res_id:
+                    slack_db_channel = cells.get("slack_db_channel")
+                    if slack_db_channel:
+                        return slack_db_channel.get("value")
+
+            else:
+                if res_id_to_search == res_id:
+                    slack_db_channel = cells.get("slack_db_channel")
+                    if slack_db_channel:
+                        return slack_db_channel.get("value")
+        return None
+
+
+def generate_res_id(incident_id, task_id=None):
+    """If incident_id and task_id are valid, returns "RES-1001-2002"
+      Else if task_id is None, returns "RES-1001" """
+
+    res_id = [RES_PREFIX, str(incident_id)]
+    if task_id is not None:
+        res_id.append(str(task_id))
+    return "-".join(res_id)

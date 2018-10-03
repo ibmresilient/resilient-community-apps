@@ -1,8 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-import collections
+
 import datetime
 import html2text
-import re
 from six import string_types
 try:
     import HTMLParser as htmlparser
@@ -10,6 +9,7 @@ except:
     import html.parser as htmlparser
 
 INCIDENT_FRAGMENT = '#incidents'
+
 
 def build_incident_url(url, incidentId):
     """
@@ -20,6 +20,7 @@ def build_incident_url(url, incidentId):
     """
     return '/'.join([url, INCIDENT_FRAGMENT, str(incidentId)])
 
+
 def build_resilient_url(host, port):
     """
     build basic url to resilient instance
@@ -28,6 +29,7 @@ def build_resilient_url(host, port):
     :return: base url
     """
     return "https://{0}:{1}".format(host, port)
+
 
 def clean_html(htmlFragment):
     """
@@ -61,6 +63,7 @@ def validate_fields(fieldList, kwargs):
     for field in fieldList:
         if field not in kwargs or kwargs.get(field) == '':
             raise ValueError('Required field is missing or empty: '+field)
+
 
 def build_timestamp(ts, format="%Y-%m-%dT%H:%M:%SZ"):
     """ create a timestamp. ts is in milliseconds """

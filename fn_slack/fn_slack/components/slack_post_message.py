@@ -14,9 +14,10 @@ import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
-from fn_slack.lib.slack_common import SlackUtils
+from fn_slack.lib.slack_common import *
 
 LOG = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'slack_post_message"""
@@ -44,7 +45,7 @@ class FunctionComponent(ResilientComponent):
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
         """Function: Create a Slack message based on an incident. Threaded replies are possible based on a retained slack thread_id.
-        All the fields to send to slack are sent in slack_details. A json structure is used to know how to interpret field meanings. A
+        All the fields to send to slack are sent in slack_text. A json structure is used to know how to interpret field meanings. A
         structure can look like this with conversions based on the 'type' key/value pair
         {
           "Resilient Incident": {"type": "string", "data": "plain text here"},
@@ -59,25 +60,27 @@ class FunctionComponent(ResilientComponent):
         """
         try:
             # validate input
-            validate_fields(['slack_channel', 'slack_details', 'slack_reply_broadcast'], kwargs)
+            validate_fields(['incident_id', 'slack_text'], kwargs)
             validate_fields(['api_token', 'username'], self.options)
 
             # Get the function parameters:
-            slack_channel_name = kwargs.get("slack_channel")  # text
+            incident_id = kwargs.get("incident_id")  # number
+            task_id = kwargs.get("task_id")  # number
+            input_channel_name = kwargs.get("slack_channel")  # text
             slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean
             slack_participant_emails = kwargs.get("slack_participant_emails")  # text
-            slack_details = kwargs.get("slack_details")  # text
-            slack_reply_broadcast = kwargs.get("slack_reply_broadcast") # Boolean
+            slack_text = kwargs.get("slack_text")  # text
             slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
             slack_parse = kwargs.get("slack_parse")  # Boolean
             slack_as_user = kwargs.get("slack_as_user")   # Boolean
             slack_username = kwargs.get("slack_username")  # text
 
-            LOG.debug("slack_channel: %s", slack_channel_name)
-            LOG.debug("slack_details: %s", slack_details)
-            LOG.debug("slack_is_private: %s", slack_details)
+            LOG.debug("incident_id: %s", incident_id)
+            LOG.debug("task_id: %s", task_id)
+            LOG.debug("slack_channel: %s", input_channel_name)
+            LOG.debug("slack_text: %s", slack_text)
+            LOG.debug("slack_is_private: %s", slack_is_private)
             LOG.debug("slack_participant_emails: %s", slack_participant_emails)
-            LOG.debug("slack_reply_broadcast: %s", slack_reply_broadcast)
             LOG.debug("slack_parse: %s", slack_parse)
             LOG.debug("slack_mrkdwn: %s", slack_mrkdown)
             LOG.debug("slack_as_user: %s", slack_as_user)
@@ -87,7 +90,30 @@ class FunctionComponent(ResilientComponent):
             api_token = self.options['api_token']
             def_username = self.options['username']
 
+            # Initialize SlackClient
             slack_utils = SlackUtils(api_token)
+            # Initialize Resilient API object
+            res_client = self.rest_client()
+
+            # If user doesn't specify a channel name, use the incident/task associated channel (the default channel).
+            res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
+            LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
+
+            # One more validation - channel needs to be defined
+            if input_channel_name is None and res_associated_channel_name is None:
+                yield FunctionError("Slack_channel name is missing or empty.")
+
+            # Pick the right channel
+            slack_channel_name = None
+            if input_channel_name is None and res_associated_channel_name:
+                slack_channel_name = res_associated_channel_name
+
+            elif input_channel_name:
+                if res_associated_channel_name:
+                    yield StatusMessage("This incident/task has an association with Slack channel #{}, "
+                                        "your message will be posted to a separate Slack channel #{}.".format(res_associated_channel_name, input_channel_name))
+                slack_channel_name = input_channel_name
+
             # find or create a new channel
             slack_utils.find_channel_by_name(slack_channel_name)
 
@@ -139,8 +165,8 @@ class FunctionComponent(ResilientComponent):
                     else:
                         yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
 
-            results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_details, slack_as_user,
-                                                                slack_username, slack_reply_broadcast, slack_parse,
+            results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_text, slack_as_user,
+                                                                slack_username, slack_parse,
                                                                 slack_mrkdown, def_username)
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message added to slack.")
@@ -149,6 +175,15 @@ class FunctionComponent(ResilientComponent):
 
             # generate a permalink URL to join this conversation
             conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
+
+            # Create a 1 to 1 connection between res_id and slack_channel_id if there isn't one
+            if res_associated_channel_name is None:
+                yield StatusMessage("Adding row to Slack conversations datatable")
+                datatable_row = slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
+                if datatable_row is not None:
+                    yield StatusMessage("Row was added to Slack conversations datatable")
+                else:
+                    yield FunctionError("Failed to add row to datatable.")
 
             results = {"channel": slack_channel_name,
                        "channel_id": results_msg_posted.get("channel"),
