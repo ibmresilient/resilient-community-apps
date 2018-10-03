@@ -17,9 +17,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_utilities", {})
-        # confirm that our required parameter exists and is a directory
-        if not (self.options.get(FunctionComponent.XML_DIR) and os.path.isdir(self.options.get(FunctionComponent.XML_DIR))):
-            raise ValueError("missing or incorrectly specified configuration property: {}".format(FunctionComponent.XML_DIR))
+
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -36,6 +34,10 @@ class FunctionComponent(ResilientComponent):
             xml_stylesheet = kwargs.get("xml_stylesheet")  # text
 
             validate_fields(("xml_source", "xml_stylesheet"), kwargs)
+
+            # confirm that our required parameter exists and is a directory
+            if not (self.options.get(FunctionComponent.XML_DIR) and os.path.isdir(self.options.get(FunctionComponent.XML_DIR))):
+                raise ValueError("missing or incorrectly specified configuration property: {}".format(FunctionComponent.XML_DIR))
 
             log = logging.getLogger(__name__)
             log.info("xml_source: %s", xml_source)
