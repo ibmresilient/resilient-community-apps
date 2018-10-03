@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_utilities',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
