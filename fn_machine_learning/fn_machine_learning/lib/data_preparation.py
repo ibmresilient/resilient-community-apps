@@ -41,3 +41,66 @@ class DataPreparation(object):
         """
         return pds.get_dummies(df[features])
 
+    @staticmethod
+    def upsample_minorities(df_training, imbalance_upsampling=None):
+        """
+        Note upsampling shall be down for training set ONLY.
+        :param df_training: dataframe for training
+        :param prediction: field to predict
+        :param imbalance_upsampling: None, True, False, or a dict
+        :return:
+        """
+
+        if imbalance_upsampling is None or imbalance_upsampling == False:
+            # nothing to do
+            return df_training
+
+        if imbalance_upsampling == True:
+            #
+            # upsample every class to match the majority
+            #
+            counts = df_training.iloc[:, -1].value_counts()
+            # first we need to figure out the count for the majority class
+            maj_count = 0
+            for itr in counts.iteritems():
+                if itr[1] > maj_count:
+                    maj_count = itr[1]
+
+            # go through all the classes again and upsample if necessary
+            dataf = pds.DataFrame()
+            for itr in counts.iteritems():
+                #
+                # itr is a tuple (class_value, count)
+                # Here we want to extract all the samples with the same
+                # predicted value
+                #
+                class_df = df_training[df_training.iloc[:, -1] == itr[0]]
+                if itr[1] < maj_count:
+                    #
+                    # Need to upsample it to maj_count
+                    #
+                    class_df = class_df.sample(maj_count,
+                                               replace=True)
+
+                dataf = pds.concat([dataf, class_df], axis=0)
+
+            return dataf
+
+        return df_training
+
+    @staticmethod
+    def remove_samples_with_values(data_frame, prediction, value_list):
+        """
+        Clean up the data_frame. Some of the values of the prediction can
+        confuse the ML model. Customer can choose to remove those samples.
+        :param data_frame: dataframe to clean up
+        :param prediction: prediction
+        :param value_list: prediction values to remove
+        :return:
+        """
+
+        dataf = data_frame
+        for value in value_list:
+            dataf = dataf[dataf[prediction] != value]
+
+        return dataf

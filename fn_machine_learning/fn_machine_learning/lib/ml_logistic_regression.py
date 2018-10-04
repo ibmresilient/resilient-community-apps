@@ -16,7 +16,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
     """
     Logistic Regression algorithm for Machine Learning
     """
-    def __init__(self, class_weight=None, method=None, c=100.0, random_state=1, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, c=100.0, random_state=1, log=None):
         """
         Initialize the model
         :param class_weight: class_weight. It can be None, "balanced", or a dict. Used for imbalance class
@@ -28,6 +28,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
         self.c = c
         self.random_state = random_state
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -78,6 +79,11 @@ class LogisticRegression(MlModelCommon, LgRegression):
             self.transform_numerical()
             self.log.debug("Split samples at " + str(test_prediction))
             self.split_samples(test_prediction)
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             #
             # Train model using training data

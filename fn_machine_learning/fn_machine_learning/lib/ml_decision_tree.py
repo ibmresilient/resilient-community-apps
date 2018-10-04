@@ -14,8 +14,9 @@ import logging
 
 class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
 
-    def __init__(self, class_weight=None, method=None, random_state=10, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, random_state=10, log=None):
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -62,6 +63,11 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
 
             self.transform_numerical()
             self.split_samples(test_prediction)
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))

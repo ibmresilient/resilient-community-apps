@@ -24,10 +24,11 @@ class MlModelCommon(object):
     Super class of all the ml models we support
     """
 
-    def __init__(self, class_weight=None, method=None, log=None):
+    def __init__(self, imbalance_upsampling=False, class_weight=None, method=None, log=None):
         """
         Initialize
         """
+        self.imbalance_upsampling = imbalance_upsampling
         self.class_weight = class_weight
         self.analysis = None
         self.features = []
@@ -214,6 +215,26 @@ class MlModelCommon(object):
                              stratify=self.y)
 
         self.log.debug(self.y_train)
+
+    def upsample_if_necessary(self):
+        """
+        To handle imbalance class, one approach is to do
+        upsampling.
+
+        Note: You should always split the sample first and then only
+        upsample the training set.
+        :return:
+        """
+        X = pds.DataFrame(data=self.X_train)
+        y = pds.DataFrame(data=self.y_train)
+        data_training = pds.concat([X, y],
+                                   axis=1)
+        data_up = DataPreparation.upsample_minorities(data_training,
+                                                      imbalance_upsampling=self.imbalance_upsampling)
+
+        self.X_train = data_up.iloc[:, :-1]
+        self.y_train = data_up.iloc[:, -1]
+        self.log.debug(self.y_train.value_counts())
 
     def save_to_file(self, file_name):
         """

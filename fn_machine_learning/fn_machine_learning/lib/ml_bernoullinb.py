@@ -15,12 +15,13 @@ import logging
 
 
 class MlBernoulliNB(MlModelCommon, BernoulliNB):
-    def __init__(self, class_weight=None, method=None, c=100.0, random_state=1, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, c=100.0, random_state=1, log=None):
         #
         # class_weight is not supported for BernoulliNB
         #
         #
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -39,6 +40,9 @@ class MlBernoulliNB(MlModelCommon, BernoulliNB):
                                                       n_estimators=10,
                                                       random_state=random_state)
         else:
+            #
+            # BernoulliNB does not support class_weight?
+            #
             BernoulliNB.__init__(self)
 
     @staticmethod
@@ -64,6 +68,11 @@ class MlBernoulliNB(MlModelCommon, BernoulliNB):
 
             self.transform_numerical()
             self.split_samples(test_prediction)
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))

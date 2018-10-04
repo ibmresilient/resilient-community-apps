@@ -14,8 +14,9 @@ import logging
 
 class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
-    def __init__(self, class_weight=None, method=None, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, log=None):
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -50,6 +51,11 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
             self.transform_numerical()
             self.split_samples(test_prediction)
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
                 self.fit(self.X_train, self.y_train)

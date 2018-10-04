@@ -216,6 +216,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         model_utils.update_config_from_app_config(ml_opt, mlconfig)
 
     model = resilient_utils.get_model(name=mlconfig.model_name,
+                                      imbalance_upsampling=mlconfig.imbalance_upsampling,
                                       class_weight=mlconfig.class_weight,
                                       method=mlconfig.addition_method)
     model.log = LOG

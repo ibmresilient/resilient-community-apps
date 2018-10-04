@@ -44,6 +44,17 @@ def update_config_from_app_config(ml_opt, mlconfig):
     selected = ml_opt.get("features", []).split(',')
     mlconfig.split_percentage = float(ml_opt.get("split", 0.5))
     mlconfig.class_weight = ml_opt.get("class_weight", None)
+    imbalance_upsampling = ml_opt.get("imbalance_upsampling", None)
+    if imbalance_upsampling and imbalance_upsampling.lower() == "true":
+        mlconfig.imbalance_upsampling = True;
+    elif imbalance_upsampling and imbalance_upsampling.lower() == "false":
+        mlconfig.imbalance_upsampling = False
+    else:
+        try:
+            mlconfig.imbalance_upsampling = json.loads(imbalance_upsampling)
+        except Exception as e:
+            mlconfig.imbalance_upsampling = False
+
     mlconfig.selected_features = []
 
     for select in selected:
@@ -58,6 +69,7 @@ def update_config_from_saved_model(model_file, mlconfig):
     mlconfig.class_weight = model.class_weight
     mlconfig.model_name = model.get_name()
     mlconfig.num_samples = model.number_samples
+    mlconfig.imbalance_upsampling = model.imbalance_upsammpling
     mlconfig.split_percentage = 0.5
     try:
         mlconfig.addition_method = model.method_name

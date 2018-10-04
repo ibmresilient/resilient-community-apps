@@ -16,7 +16,7 @@ class MlSVC(MlModelCommon, SVC):
     """
     Support Vector Machine algorithm.
     """
-    def __init__(self, class_weight=None, kernel="linear", C=1.0, random_state=1, method=None, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, kernel="linear", C=1.0, random_state=1, method=None, log=None):
         """
 
         :param class_weight:
@@ -28,6 +28,7 @@ class MlSVC(MlModelCommon, SVC):
         """
         self.kernel = kernel
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -81,6 +82,12 @@ class MlSVC(MlModelCommon, SVC):
 
             self.transform_numerical()
             self.split_samples(test_prediction)
+
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))

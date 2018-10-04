@@ -14,8 +14,9 @@ import logging
 
 class MlGaussianNB(MlModelCommon, GaussianNB):
 
-    def __init__(self, class_weight=None, method=None, random_state=1, log=None):
+    def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, random_state=1, log=None):
         MlModelCommon.__init__(self,
+                               imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
@@ -36,11 +37,14 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
                                                       n_estimators=100,
                                                       random_state=random_state)
         else:
+            #
+            # GaussianNB does not support class_weight?
+            #
             GaussianNB.__init__(self)
 
     @staticmethod
     def get_name():
-        return "GausianNB"
+        return "GaussianNB"
 
     def build(self, csv_file, features, prediction, test_prediction):
         """
@@ -58,6 +62,12 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
 
             self.transform_numerical()
             self.split_samples(test_prediction)
+
+            #
+            # One way to compensate imbalance class is to do upsampling. Do
+            # it if user specified this in
+            #
+            self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))

@@ -17,24 +17,41 @@ import json
 import urllib
 
 
-def get_model(name, class_weight=None, method=None):
+def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
     model = None
     if name == "Logistic Regression":
-        model = LogisticRegression(method=method, class_weight=class_weight)
+        model = LogisticRegression(method=method,
+                                   imbalance_upsampling=imbalance_upsampling,
+                                   class_weight=class_weight)
     elif name == "SVM":
-        model = MlSVC(method=method, class_weight=class_weight)
+        model = MlSVC(method=method,
+                      imbalance_upsampling=imbalance_upsampling,
+                      class_weight=class_weight)
     elif name == "SVM with Gaussian kernel":
-        model = MlSVC(kernel="rbf", method=method, class_weight=class_weight)
+        model = MlSVC(kernel="rbf",
+                      method=method,
+                      imbalance_upsampling=imbalance_upsampling,
+                      class_weight=class_weight)
     elif name == "Decision Tree":
-        model = MlDecisionTree(method=method, class_weight=class_weight)
+        model = MlDecisionTree(method=method,
+                               imbalance_upsampling=imbalance_upsampling,
+                               class_weight=class_weight)
     elif name == "Random Forest":
-        model = MlRandomForest(method=method, class_weight=class_weight)
+        model = MlRandomForest(method=method,
+                               imbalance_upsampling=imbalance_upsampling,
+                               class_weight=class_weight)
     elif name == "GaussianNB":
-        model = MlGaussianNB(method=method, class_weight=class_weight)
+        model = MlGaussianNB(method=method,
+                             imbalance_upsampling=imbalance_upsampling,
+                             class_weight=class_weight)
     elif name == "BernoulliNB":
-        model = MlBernoulliNB(method=method, class_weight=class_weight)
+        model = MlBernoulliNB(method=method,
+                              imbalance_upsampling=imbalance_upsampling,
+                              class_weight=class_weight)
     elif name == MlKNN.get_name():
-        model = MlKNN(method=method, class_weight=class_weight)
+        model = MlKNN(method=method,
+                      imbalance_upsampling=imbalance_upsampling,
+                      class_weight=class_weight)
 
     return model
 
@@ -75,6 +92,8 @@ class MlConfig(object):
         self.feature_preprocess = {}
         self.active_model = None
         self.rebuild_model = None
+        self.class_weight = None
+        self.imbalance_upsampling = None
 
     def set_ml_model(self, name):
         self.model = self.NAME_MAPPING.get(name, self.ML_MODEL_LOGISTIC_REGRESSION)
