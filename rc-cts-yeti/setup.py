@@ -4,13 +4,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc-cts-yeti',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     install_requires=[
         'rc-cts',
+        'pyeti'
     ],
     description="Resilient Circuits Custom Threat Service for YETI",
     long_description="Resilient Circuits Custom Threat Service Component for YETI",
