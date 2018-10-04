@@ -72,8 +72,7 @@ class SlackUtils(object):
         else:
             return None
 
-    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_parse, slack_markdown,
-                           def_username):
+    def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
         """
         Process the slack post
         :param resoptions: app.config resilient section
@@ -81,7 +80,6 @@ class SlackUtils(object):
         See slack API for the use of these variables
         :param slack_as_user:
         :param slack_username:
-        :param slack_parse:
         :param slack_markdown:
         :param def_username - name to use for who posted the message
         :return: JSON result
@@ -98,8 +96,8 @@ class SlackUtils(object):
             text=payload,
             as_user=slack_as_user,
             username=slack_username if slack_username else def_username,
-            parse=slack_parse,
-            link_names=1, # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
+            parse="full",  # In full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
+            link_names=1,  # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
             mrkdown=slack_markdown
         )
         LOG.debug(results)
@@ -391,24 +389,37 @@ class SlackUtils(object):
 
                 temp_file.close()
 
-                # Create POST uri
-                # ..for a task, if task_id is defined
-                if task_id:
-                    attachment_uri = '/tasks/{}/attachments'.format(task_id)
-                # ...else for an attachment
-                else:
-                    attachment_uri = '/incidents/{}/attachments'.format(incident_id)
+                new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file)
 
-                # POST the new attachment
-                attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
-                new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
-                                                        mimetype='text/plain')
             except Exception as ex:
                 raise ex
 
             finally:
                 os.unlink(temp_file.name)
 
+        return new_attachment
+
+    def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file):
+        """
+        Function posts an attachment to Resilient.
+        :param res_client:
+        :param incident_id:
+        :param task_id:
+        :param temp_file:
+        :return:
+        """
+        # Create POST uri
+        # ..for a task, if task_id is defined
+        if task_id:
+            attachment_uri = '/tasks/{}/attachments'.format(task_id)
+        # ...else for an attachment
+        else:
+            attachment_uri = '/incidents/{}/attachments'.format(incident_id)
+
+        # POST the new attachment
+        attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
+        new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
+                                                    mimetype='text/plain')
         return new_attachment
 
     def archive_channel(self):
@@ -424,13 +435,13 @@ class SlackUtils(object):
         # return results
         return {"ok": True} # FIXME at the moment it's turned off for easier testing
 
-    def create_row_in_datatable(self, res_client, incident_id, task_id, conversation_url):
+    def create_row_in_datatable(self, res_client, incident_id, task_id, thread_id):
         """
         Create a row in Resilient datatable.
         :param res_client:
         :param incident_id:
         :param task_id:
-        :param conversation_url:
+        :param thread_id:
         :return:
         """
         # Get current time (*1000 as API does not accept int)
@@ -439,12 +450,16 @@ class SlackUtils(object):
         # Create res_id
         res_id = generate_res_id(incident_id, task_id)
 
+        # generate a permalink URL to join this conversation
+        conversation_url = self.get_permalink(thread_id)
+
         # Generate cells for the datatable
         cells = {
             "cells": {
                 "slack_db_time": {"value": now},
                 "slack_db_res_id": {"value": res_id},
-                "slack_db_channel": {"value": self.get_channel_name()}
+                "slack_db_channel": {"value": self.get_channel_name()},
+                "slack_db_permalink": {"value": """<a href="{0}">Link</a>""".format(conversation_url)}
             }
         }
 
@@ -613,12 +628,12 @@ class ConversationsDatatable():
         :param task_id:
         :return:
         """
-        res_id = [RES_PREFIX, str(incident_id)]
+        id = [RES_PREFIX, str(incident_id)]
 
         if task_id is not None:
-            res_id.append(str(task_id))
+            id.append(str(task_id))
 
-        res_id_to_search = "-".join(res_id)
+        res_id_to_search = "-".join(id)
 
         for row in self.rows:
             cells = row["cells"]
@@ -627,17 +642,10 @@ class ConversationsDatatable():
             if res_id is None:
                 raise ValueError("{} datatable is missing 'slack_db_res_id' column.".format(DATA_TABLE_API_NAME))
 
-            if task_id is not None:
-                if res_id_to_search in res_id:
-                    slack_db_channel = cells.get("slack_db_channel")
-                    if slack_db_channel:
-                        return slack_db_channel.get("value")
-
-            else:
-                if res_id_to_search == res_id:
-                    slack_db_channel = cells.get("slack_db_channel")
-                    if slack_db_channel:
-                        return slack_db_channel.get("value")
+            if res_id_to_search == res_id:
+                slack_db_channel = cells.get("slack_db_channel")
+                if slack_db_channel:
+                    return slack_db_channel.get("value")
         return None
 
 

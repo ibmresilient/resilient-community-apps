@@ -71,7 +71,6 @@ class FunctionComponent(ResilientComponent):
             slack_participant_emails = kwargs.get("slack_participant_emails")  # text
             slack_text = kwargs.get("slack_text")  # text
             slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
-            slack_parse = kwargs.get("slack_parse")  # Boolean
             slack_as_user = kwargs.get("slack_as_user")   # Boolean
             slack_username = kwargs.get("slack_username")  # text
 
@@ -81,7 +80,6 @@ class FunctionComponent(ResilientComponent):
             LOG.debug("slack_text: %s", slack_text)
             LOG.debug("slack_is_private: %s", slack_is_private)
             LOG.debug("slack_participant_emails: %s", slack_participant_emails)
-            LOG.debug("slack_parse: %s", slack_parse)
             LOG.debug("slack_mrkdwn: %s", slack_mrkdown)
             LOG.debug("slack_as_user: %s", slack_as_user)
             LOG.debug("slack_username: %s", slack_username)
@@ -166,28 +164,23 @@ class FunctionComponent(ResilientComponent):
                         yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
 
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_text, slack_as_user,
-                                                                slack_username, slack_parse,
-                                                                slack_mrkdown, def_username)
+                                                                slack_username, slack_mrkdown, def_username)
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message added to slack.")
             else:
                 yield FunctionError("Message add failed: " + json.dumps(results_msg_posted))
 
-            # generate a permalink URL to join this conversation
-            conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
-
             # Create a 1 to 1 connection between res_id and slack_channel_id if there isn't one
             if res_associated_channel_name is None:
                 yield StatusMessage("Adding row to Slack conversations datatable")
-                datatable_row = slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
+                datatable_row = slack_utils.create_row_in_datatable(res_client, incident_id, task_id, results_msg_posted.get("ts"))
                 if datatable_row is not None:
                     yield StatusMessage("Row was added to Slack conversations datatable")
                 else:
                     yield FunctionError("Failed to add row to datatable.")
 
             results = {"channel": slack_channel_name,
-                       "channel_id": results_msg_posted.get("channel"),
-                       "conversation_url": conversation_url}
+                       "channel_id": results_msg_posted.get("channel")}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

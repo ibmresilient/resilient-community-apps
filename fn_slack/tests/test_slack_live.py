@@ -379,14 +379,14 @@ class TestSlack(object):
         }
 
         payload = "testing"
-        results = slack_utils.slack_post_message(None, payload, True, None, "none", True, def_username)
+        results = slack_utils.slack_post_message(None, payload, True, None, True, def_username)
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
             text=payload,
             as_user=True,
             username=def_username,
-            parse="none",
+            parse="full",
             link_names=1,
             mrkdown=True
         )
@@ -400,7 +400,7 @@ class TestSlack(object):
             'port': '443',
          }
         slack_details = json.dumps(self._buildDataDetails())
-        results2 = slack_utils.slack_post_message(resoptions, slack_details, True, None, "none", True, def_username)
+        results2 = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, def_username)
 
         # covert slack_details to payload - to compare what was assert_called_with
         payload = convert_slack_details_to_payload(slack_details, resoptions)
@@ -411,7 +411,7 @@ class TestSlack(object):
             text=payload,
             as_user=True,
             username=def_username,
-            parse="none",
+            parse="full",
             link_names=1,
             mrkdown=True
         )
@@ -434,7 +434,7 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": False
         }
-        results = slack_utils.slack_post_message(None, "testing", True, None, "none", True, def_username)
+        results = slack_utils.slack_post_message(None, "testing", True, None, True, def_username)
         assert results.get("ok") is False
 
     def _buildDataDetails(self):
