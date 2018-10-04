@@ -15,6 +15,7 @@ import logging
 class MlGaussianNB(MlModelCommon, GaussianNB):
 
     def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, random_state=1, log=None):
+
         MlModelCommon.__init__(self,
                                imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
@@ -23,30 +24,25 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         #
         #   GaussianNB does not support class_weight
         #
-        self.using_method = False
         if method == "Bagging":
             model = GaussianNB()
-            self.using_method = True
             self.ensemble_method = BaggingClassifier(base_estimator=model,
                                                      n_estimators=100,
                                                      random_state=random_state)
         elif method == "Adaptive Boosting":
-            self.using_method = True
             model = GaussianNB()
             self.ensemble_method = AdaBoostClassifier(base_estimator=model,
                                                       n_estimators=100,
                                                       random_state=random_state)
         else:
-            #
-            # GaussianNB does not support class_weight?
-            #
+            self.ensemble_method = None
             GaussianNB.__init__(self)
 
     @staticmethod
     def get_name():
         return "GaussianNB"
 
-    def build(self, csv_file, features, prediction, test_prediction):
+    def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
 
         :param csv_file:
@@ -57,8 +53,9 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         """
         try:
             self.extract_csv(csv_file, features, prediction)
-            # Need to handle missing values
-            self.eliminate_missings()
+            # Cleanup samples by removing samples with empty
+            # features and unwanted values
+            self.cleanup_samples(unwanted_values)
 
             self.transform_numerical()
             self.split_samples(test_prediction)
@@ -70,8 +67,9 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
             self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
+                self.config.number_samples = len(self.y_train) + len(self.y_test)
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))
-                if self.using_method:
+                if self.ensemble_method is not None:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
                     self.fit(self.X_train, self.y_train)
@@ -79,7 +77,7 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
                 #
                 # Test model
                 #
-                if self.using_method:
+                if self.ensemble_method is not None:
                     y_predict = self.ensemble_method.predict(self.X_test)
                 else:
                     y_predict = self.predict(self.X_test)
@@ -103,12 +101,12 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
         #
         # We only care about the features
         #
-        df = df[self.features]
+        df = df[self.config.selected_features]
 
         df = self.transform_for_prediction(df)
         self.log.info("Using df {} to predict.".format(str(df)))
 
-        if self.using_method:
+        if self.ensemble_method is not None:
             ret = self.ensemble_method.predict(df)
         else:
             ret = self.predict(df)

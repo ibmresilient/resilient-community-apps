@@ -25,7 +25,7 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
         # decision tree. Might not make sense to
         # add ensemble method.
         #
-        self.using_method = False
+        self.ensemble_method = None
         RandomForestClassifier.__init__(self,
                                         class_weight=class_weight,
                                         n_estimators=100,
@@ -35,19 +35,21 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
     def get_name():
         return "Random Forest"
 
-    def build(self, csv_file, features, prediction, test_prediction):
+    def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
 
         :param csv_file:
         :param features:
         :param prediction:
         :param test_prediction:
+        :param unwanted_values: Samples with these unwanted predicted values will be removed
         :return:
         """
         try:
             self.extract_csv(csv_file, features, prediction)
-            # Need to handle missing values
-            self.eliminate_missings()
+            # Cleanup samples by removing samples with empty
+            # features and unwanted values
+            self.cleanup_samples(unwanted_values)
 
             self.transform_numerical()
             self.split_samples(test_prediction)
@@ -58,6 +60,7 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
             self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
+                self.config.number_samples = len(self.y_train) + len(self.y_test)
                 self.fit(self.X_train, self.y_train)
 
                 y_predict = self.predict(self.X_test)
@@ -95,13 +98,8 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
         #
         # We only care about the features
         #
-        df = df[self.features]
-
+        df = df[self.config.selected_features]
         df = self.transform_for_prediction(df)
-
-        if self.using_method:
-            ret = self.method.predict(df)
-        else:
-            ret = self.predict(df)
+        ret = self.predict(df)
 
         return ret

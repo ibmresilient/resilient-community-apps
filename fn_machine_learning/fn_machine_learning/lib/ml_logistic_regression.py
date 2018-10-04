@@ -32,9 +32,8 @@ class LogisticRegression(MlModelCommon, LgRegression):
                                class_weight=class_weight,
                                method=method,
                                log=log)
-        self.using_method = False
+
         if method == "Bagging":
-            self.using_method = True
             model = LgRegression(C=c,
                                  class_weight=class_weight,
                                  random_state=random_state)
@@ -42,7 +41,6 @@ class LogisticRegression(MlModelCommon, LgRegression):
                                                      n_estimators=200,
                                                      random_state=random_state)
         elif method == "Adaptive Boosting":
-            self.using_method = True
             model = LgRegression(C=c,
                                  class_weight=class_weight,
                                  random_state=random_state)
@@ -50,6 +48,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
                                                       n_estimators=200,
                                                       random_state=random_state)
         else:
+            self.ensemble_method = None
             LgRegression.__init__(self,
                                   C=c,
                                   random_state=random_state,
@@ -59,20 +58,23 @@ class LogisticRegression(MlModelCommon, LgRegression):
     def get_name():
         return "Logistic Regression"
 
-    def build(self, csv_file, features, prediction, test_prediction):
+    def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
 
         :param csv_file:
         :param features:
         :param prediction:
         :param test_prediction:
+        :param unwanted_values: Samples with unwanted values will be removed
         :return:
         """
         try:
             self.extract_csv(csv_file, features, prediction)
             # Need to handle missing values
             self.log.debug("Eliminate samples with missing feature(s).")
-            self.eliminate_missings()
+            # Cleanup samples by removing samples with empty
+            # features and unwanted values
+            self.cleanup_samples(unwanted_values)
 
             # self.one_hot_encoding(features)
             self.log.debug("Transform numerical.")
@@ -89,8 +91,9 @@ class LogisticRegression(MlModelCommon, LgRegression):
             # Train model using training data
             #
             if len(self.y_train) > 0:
+                self.config.number_samples = len(self.y_train) + len(self.y_test)
                 self.log.info("Using {} samples to train.".format(str(len(self.y_train))))
-                if self.using_method:
+                if self.ensemble_method is not None:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
                     self.fit(self.X_train, self.y_train)
@@ -98,7 +101,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
                 #
                 # Test model
                 #
-                if self.using_method:
+                if self.ensemble_method is not None:
                     y_predict = self.ensemble_method.predict(self.X_test)
                     pres = self.ensemble_method.predict_proba(self.X_test)[:, 1]
                 else:
@@ -142,11 +145,11 @@ class LogisticRegression(MlModelCommon, LgRegression):
         :return:
         """
         df = pds.DataFrame([input])
-        df = df[self.features]
+        df = df[self.config.selected_features]
         df = self.transform_for_prediction(df)
         self.log.info("dataframe used to predict: " + str(df))
 
-        if self.using_method:
+        if self.ensemble_method is not None:
             ret = self.ensemble_method.predict(df)
         else:
             ret = self.predict(df)

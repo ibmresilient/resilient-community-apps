@@ -9,6 +9,7 @@ import os, os.path
 import resilient
 import sys
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
+from fn_machine_learning.lib.ml_config import MlConfig
 import fn_machine_learning.lib.resilient_utils as resilient_utils
 import fn_machine_learning.lib.model_utils as model_utils
 
@@ -38,8 +39,8 @@ SAMPLE_CSV_FILE="resilient_incidents.csv"
 class OptParser(resilient.ArgumentParser):
     """
     This is a subclass of resilient.ArgumentParser. resilient.ArgumentParser takes care of both
-    1. Reading app.config
-    2. Validating required command line arguments.
+        1. Reading app.config
+        2. Validating required command line arguments.
     Here we just want app.config, we are parsing/validating commandline arguments in our main function.
     """
     def __init__(self, config_file=None):
@@ -68,16 +69,16 @@ class OptParser(resilient.ArgumentParser):
 def main():
     """
     We support 3 subcommands: build, rebuild, view.
-    1. build: build a new model
-        -o  Required flag, pointing to a file we can save the model to
-        -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
-            download incidents and use them as samples.
-        Example: res-ml build -o logReg_adaboost.ml
-    2. rebuild: Rebuild a saved model
-        -i  Required flag, file of saved model to rebuild
-        -c  Optional falg, same as -c of build above
-    3. view: show summary of a saved model
-        -i  Required flag, pointing to a saved model file
+        1. build: build a new model
+            -o  Required flag, pointing to a file we can save the model to
+            -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
+                download incidents and use them as samples.
+            Example: res-ml build -o logReg_adaboost.ml
+        2. rebuild: Rebuild a saved model
+            -i  Required flag, file of saved model to rebuild
+            -c  Optional falg, same as -c of build above
+        3. view: show summary of a saved model
+            -i  Required flag, pointing to a saved model file
     :return:
     """
     parser = argparse.ArgumentParser()
@@ -96,7 +97,6 @@ def main():
     view_parser = subparsers.add_parser("view",
                                         help="Manage Resilient Circuits as a service with Windows or Supervisord")
 
-
     # 1. build process
     #
     #   -c Specifiy a CSV file with samples. Otherwise download incidents
@@ -110,7 +110,6 @@ def main():
     build_parser.add_argument("-o", "--output",
                               help="Save model as",
                               default=None)
-
 
     # 2. rebuild process
     #
@@ -171,7 +170,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
     password = res_opt.get("password", None)
     org = res_opt.get("org", None)
 
-    mlconfig = resilient_utils.MlConfig()
+    mlconfig = MlConfig()
 
     if host and org and email and password and not csv_file:
         url = "https://{}:443".format(host)
@@ -203,7 +202,7 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
                                                 max_count=max_count)
         LOG.info("Saved {} samples into {}".format(num_inc, SAMPLE_CSV_FILE))
 
-        mlconfig.num_samples = num_inc
+        mlconfig.number_samples = num_inc
 
         csv_file = SAMPLE_CSV_FILE
     elif not csv_file:
@@ -220,38 +219,25 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
                                       class_weight=mlconfig.class_weight,
                                       method=mlconfig.addition_method)
     model.log = LOG
-    model.number_samples = mlconfig.num_samples
+    model.config.number_samples = mlconfig.number_samples
 
     if model is not None:
         model.build(csv_file=csv_file,
                     features=mlconfig.selected_features,
                     prediction=mlconfig.predict_field,
-                    test_prediction=mlconfig.split_percentage)
+                    test_prediction=mlconfig.split_percentage,
+                    unwanted_values=mlconfig.unwanted_values)
         # Output summary of build
 
-        LOG.info("--------")
-        LOG.info("Summary:")
-        LOG.info("--------")
-        LOG.info("File:         {}".format(os.path.abspath(model_file)))
-        LOG.info("Build time:   {}".format(model.build_time))
-        LOG.info("Num_samples:  {}".format(model.number_samples))
-        LOG.info("Algorithm:    {}".format(model.get_name()))
-        LOG.info("Method:       {}".format(mlconfig.addition_method))
-        LOG.info("Prediction:   {}".format(model.prediction))
-        LOG.info("Features:     {}".format(", ".join(model.features)))
-        LOG.info("Class weight: {}".format(str(model.class_weight)))
-        LOG.info("Accuracy:     {}".format(model.accuracy))
-        if model.analysis:
-            LOG.info("  Accuracy for {} value:".format(model.prediction))
-            for key, value in model.analysis.iteritems():
-                LOG.info("    {}:     {}".format(key, value))
+        show_model_summary(model, os.path.abspath(model_file))
         # save the model
         model.save_to_file(os.path.abspath(model_file))
 
 
 def build_new_model(args, opt_parser):
     """
-    Build a model
+    Build a model.
+    This method is called when user uses the command line util to build a model
     :param args:
     :param opt_parser:
     :return:
@@ -263,13 +249,60 @@ def build_new_model(args, opt_parser):
 
 
 def rebuild_model(args, opt_parser):
+    """
+    This method is called when user uses the command line util to rebuild
+    a model, based on a saved model file
+    :param args:
+    :param opt_parser:
+    :return:
+    """
     LOG.info("Rebuilding a  model: " + str(args))
     model_file = args.input
     csv_file = args.csv
     build_model(model_file, opt_parser, csv_file, True)
 
 
+def show_model_summary(model, model_file):
+    """
+    Output summary of a given model
+    :param model:
+    :param model_file: model file read/write
+    :return:
+    """
+    try:
+        method_name = model.config.method_name
+    except Exception:
+        method_name = "None"
+
+    LOG.info("--------")
+    LOG.info("Summary:")
+    LOG.info("--------")
+    LOG.info("File:            {}".format(model_file))
+    LOG.info("Build time:      {}".format(model.config.build_time))
+    LOG.info("Num_samples:     {}".format(model.config.number_samples))
+    LOG.info("Algorithm:       {}".format(model.get_name()))
+    LOG.info("Method:          {}".format(method_name))
+    LOG.info("Prediction:      {}".format(model.config.predict_field))
+    LOG.info("Features:        {}".format(", ".join(model.config.selected_features)))
+    LOG.info("Class weight:    {}".format(str(model.config.class_weight)))
+    LOG.info("Upsampling:      {}".format(str(model.config.imbalance_upsampling)))
+    if model.config.unwanted_values is not None:
+        LOG.info("Unwanted Values: {}".format(", ".join(model.config.unwanted_values)))
+    LOG.info("Accuracy:        {}".format(model.config.accuracy))
+    if model.config.analysis:
+        LOG.info("  Accuracy for {} value:".format(model.config.predict_field))
+        for key, value in model.config.analysis.iteritems():
+            LOG.info("    {}:         {}".format(key, value))
+
+
 def view_model(args):
+    """
+    Show the summary of a saved model file.
+    This method is call when user use command line util to view summary of
+    a saved model file.
+    :param args:
+    :return:
+    """
     file_name = args.input
 
     file_exits = os.path.exists(file_name)
@@ -279,31 +312,10 @@ def view_model(args):
         # Deserialize model
         #
         model = MlModelCommon.load_from_file(file_name)
-
         #
         # Output the information of this model
         #
-
-        try:
-            method_name = model.method_name
-        except Exception:
-            method_name = "None"
-        LOG.info("--------")
-        LOG.info("Summary:")
-        LOG.info("--------")
-        LOG.info("File:         {}".format(os.path.abspath(file_name)))
-        LOG.info("Build time:   {}".format(model.build_time))
-        LOG.info("Num_samples:  {}".format(model.number_samples))
-        LOG.info("Algorithm:    {}".format(model.get_name()))
-        LOG.info("Method:       {}".format(method_name))
-        LOG.info("Prediction:   {}".format(model.prediction))
-        LOG.info("Features:     {}".format(", ".join(model.features)))
-        LOG.info("Class weight: {}".format(str(model.class_weight)))
-        LOG.info("Accuracy:     {}".format(model.accuracy))
-        if model.analysis:
-            LOG.info("  Accuracy for {} value:".format(model.prediction))
-            for key, value in model.analysis.iteritems():
-                LOG.info("    {}:     {}".format(key, value))
+        show_model_summary(model, os.path.abspath(file_name))
     else:
         LOG.error("Model file {} does not exist.".format(file_name))
 

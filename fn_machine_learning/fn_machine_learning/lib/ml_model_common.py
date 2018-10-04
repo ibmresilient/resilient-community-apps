@@ -5,12 +5,11 @@
 #
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score
 
 from fn_machine_learning.lib.data_preparation import DataPreparation
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
-from fn_machine_learning.lib.normalization_encoder import ResNormalizationEncoder
+from fn_machine_learning.lib.ml_config import MlConfig
 import pandas as pds
 import pickle
 import datetime
@@ -28,11 +27,15 @@ class MlModelCommon(object):
         """
         Initialize
         """
-        self.imbalance_upsampling = imbalance_upsampling
-        self.class_weight = class_weight
-        self.analysis = None
-        self.features = []
-        self.prediction = None
+        self.config = MlConfig()
+        self.config.imbalance_upsampling = imbalance_upsampling
+        self.config.class_weight = class_weight
+        self.config.addition_method = method
+
+
+        #
+        # Dataset
+        #
         self.X_train = None
         self.X_test = None
         self.y_train = None
@@ -40,21 +43,17 @@ class MlModelCommon(object):
         self.X = None
         self.y = None
         self.df = None
-        self.accuracy = 0.5
-        self.separator = ','
-        self.label_encoder = {}
-        self.build_rimw = ""
-        self.method_name = method
-        self.ensemble_method = None
-        self.number_samples = 0
+
         self.log = log
-        self.build_time = ""
+
+        self.ensemble_method = None
+        self.label_encoder = {}
 
     def set_log(self, log):
         self.log = log
 
     def set_build_time(self):
-        self.build_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.config.build_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def extract_csv(self, csv_file, features, prediction):
         """
@@ -64,8 +63,8 @@ class MlModelCommon(object):
         :param prediction:
         :return:
         """
-        self.prediction = prediction
-        self.features = list(features)
+        self.config.predict_field = prediction
+        self.config.selected_features = list(features)
 
         all_fields = list(features)
         self.log.debug("All fields in csv: {}".format(str(all_fields)))
@@ -77,26 +76,34 @@ class MlModelCommon(object):
         # Need to revisit this when we need to predict regression later
         #
         self.df = pds.read_csv(csv_file,
-                               sep=self.separator,
+                               sep=self.config.separator,
                                usecols=all_fields,
                                dtype={prediction:object},
                                skipinitialspace=True,
                                quotechar='"')
         #print(self.df)
 
-    def eliminate_missings(self):
+    def cleanup_samples(self, unwanted_values=None):
         """
         It is recommended to fix features/samples with missing values.
         One straightforward and simplest way is to eliminate all of them.
         If user wants to do imputing, he/she can do it to the input csv file
         first.
+        Also, user can remove samples with unwanted values
         :return:
         """
         self.df = self.df.dropna(axis=0)
         self.df = self.df.dropna(axis=1)
 
-        self.X = self.df[self.features]
-        self.y = self.df[self.prediction]
+        self.config.unwanted_values = unwanted_values
+
+        if unwanted_values is not None:
+            self.df = DataPreparation.remove_samples_with_values(data_frame=self.df,
+                                                                 prediction=self.config.predict_field,
+                                                                 value_list=unwanted_values)
+
+        self.X = self.df[self.config.selected_features]
+        self.y = self.df[self.config.predict_field]
 
     def transform_numerical(self):
         #
@@ -106,7 +113,7 @@ class MlModelCommon(object):
         #
         for col_name, col in self.X.iteritems():
             self.log.debug("Column {col_name} is {col_type}".format(col_name=col_name,
-                                                                   col_type=col.dtype.name))
+                                                                    col_type=col.dtype.name))
             #
             # For numerical column labelencoder is used to normalize the column
             # And for categorical column, it is used to transform to numerical labels.
@@ -230,7 +237,7 @@ class MlModelCommon(object):
         data_training = pds.concat([X, y],
                                    axis=1)
         data_up = DataPreparation.upsample_minorities(data_training,
-                                                      imbalance_upsampling=self.imbalance_upsampling)
+                                                      imbalance_upsampling=self.config.imbalance_upsampling)
 
         self.X_train = data_up.iloc[:, :-1]
         self.y_train = data_up.iloc[:, -1]
@@ -251,6 +258,7 @@ class MlModelCommon(object):
         self.X_train = None
         self.y_train = None
         self.y_test = None
+        self.df = None
         self.log = None
 
         pickle.dump(self, open(file_name, "wb"))
@@ -277,11 +285,11 @@ class MlModelCommon(object):
         #
         self.set_build_time()
 
-        self.accuracy = accuracy_score(y_true=actual,
-                                       y_pred=predict)
+        self.config.accuracy = accuracy_score(y_true=actual,
+                                              y_pred=predict)
 
-        self.analysis = model_utils.analyze(y_true=actual,
-                                            y_pred=predict)
+        self.config.analysis = model_utils.analyze(y_true=actual,
+                                                   y_pred=predict)
         #
         # This is very expensive. Do it only if debug is enabled
         #
@@ -289,7 +297,7 @@ class MlModelCommon(object):
             for t, p in zip(actual, predict):
                 self.log.debug(str(t) + " : " + str(p) + "\n")
 
-        return self.accuracy
+        return self.config.accuracy
 
     def predict_result(self, input_dict):
         """
@@ -309,3 +317,4 @@ class MlModelCommon(object):
             predict = mapping.get(res, res)
 
         return predict
+

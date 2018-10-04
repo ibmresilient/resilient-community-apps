@@ -14,7 +14,6 @@ from fn_machine_learning.lib.ml_bernoullinb import MlBernoulliNB
 from fn_machine_learning.lib.ml_knn import MlKNN
 import logging
 import json
-import urllib
 
 
 def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
@@ -54,49 +53,6 @@ def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
                       class_weight=class_weight)
 
     return model
-
-
-class MlSummary(object):
-    def __init__(self):
-        self.accuracy = 0.0
-        self.prediction = ""
-        self.build_time = ""
-
-
-class MlConfig(object):
-
-    ML_MODEL_LOGISTIC_REGRESSION = 0
-    ML_MODEL_SVM = 1
-    ML_MODEL_DECISION_TREE = 2
-    ML_MODEL_RANDOM_FOREST = 3
-    ML_MODEL_GAUSSIAN = 4
-
-    NAME_MAPPING = {
-        "Logistic Regression" : ML_MODEL_LOGISTIC_REGRESSION,
-        "Decision Tree": ML_MODEL_DECISION_TREE,
-        "Random Forest": ML_MODEL_RANDOM_FOREST
-    }
-
-    def __init__(self):
-        self.data_file = None
-        self.selected_features = []
-        self.predict_field = None
-        self.num_samples = 0
-        self.split_percentage = 0.5
-        self.model = self.ML_MODEL_LOGISTIC_REGRESSION
-        self.model_name = "Logistic Regression"
-        self.addition_method = None
-        self.host = None
-        self.separator = ','
-        self.saved_models = []
-        self.feature_preprocess = {}
-        self.active_model = None
-        self.rebuild_model = None
-        self.class_weight = None
-        self.imbalance_upsampling = None
-
-    def set_ml_model(self, name):
-        self.model = self.NAME_MAPPING.get(name, self.ML_MODEL_LOGISTIC_REGRESSION)
 
 
 def get_incidents(res_client, filename, max_count=None, in_log=None):

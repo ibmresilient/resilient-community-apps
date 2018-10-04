@@ -1,15 +1,14 @@
-import os
-import glob
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+#
 import json
 import pickle
-import time
 import pandas as pds
 import logging
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
-
-DATA_FOLDER_PATH = None
-
-ACTIVE_MODEL_FILE = "active_model.json"
+from fn_machine_learning.lib.ml_config import MlConfig
 
 SUPPORTED_ALGORITHMS = [
     u"Logistic Regression",
@@ -42,6 +41,7 @@ def update_config_from_app_config(ml_opt, mlconfig):
     mlconfig.addition_method = ml_opt.get("method", "").strip()
     mlconfig.predict_field = ml_opt.get("prediction", None)
     selected = ml_opt.get("features", []).split(',')
+    unwanted_values = ml_opt.get("unwanted_values", []).split(',')
     mlconfig.split_percentage = float(ml_opt.get("split", 0.5))
     mlconfig.class_weight = ml_opt.get("class_weight", None)
     imbalance_upsampling = ml_opt.get("imbalance_upsampling", None)
@@ -60,19 +60,30 @@ def update_config_from_app_config(ml_opt, mlconfig):
     for select in selected:
         mlconfig.selected_features.append(select.strip())
 
+    mlconfig.unwanted_values = []
+
+    for value in unwanted_values:
+        mlconfig.unwanted_values.append(value.strip())
+
 
 def update_config_from_saved_model(model_file, mlconfig):
-
+    """
+    Update mlconfig with config data from a saved model file
+    :param model_file: saved model file
+    :param mlconfig:
+    :return:
+    """
     model = pickle.load(open(model_file, "rb"))
-    mlconfig.selected_features = list(model.features)
-    mlconfig.predict_field = model.prediction
-    mlconfig.class_weight = model.class_weight
+    mlconfig.selected_features = list(model.config.selected_features)
+    mlconfig.predict_field = model.config.predict_field
+    mlconfig.class_weight = model.config.class_weight
     mlconfig.model_name = model.get_name()
-    mlconfig.num_samples = model.number_samples
-    mlconfig.imbalance_upsampling = model.imbalance_upsammpling
+    mlconfig.num_samples = model.config.number_samples
+    mlconfig.imbalance_upsampling = model.config.imbalance_upsammpling
+    mlconfig.unwanted_values = list(model.config.unwanted_values)
     mlconfig.split_percentage = 0.5
     try:
-        mlconfig.addition_method = model.method_name
+        mlconfig.addition_method = model.config.addition_method
     except Exception:
         mlconfig.addition_method = None
 

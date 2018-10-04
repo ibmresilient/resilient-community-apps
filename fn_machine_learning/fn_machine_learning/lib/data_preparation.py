@@ -51,7 +51,7 @@ class DataPreparation(object):
         :return:
         """
 
-        if imbalance_upsampling is None or imbalance_upsampling == False:
+        if imbalance_upsampling is None or not imbalance_upsampling:
             # nothing to do
             return df_training
 
@@ -103,4 +103,6 @@ class DataPreparation(object):
         for value in value_list:
             dataf = dataf[dataf[prediction] != value]
 
+        # Need to re-arrange the index after dropping rows
+        dataf.index = range(len(dataf))
         return dataf

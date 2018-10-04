@@ -15,22 +15,21 @@ import logging
 class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
 
     def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, random_state=10, log=None):
+
         MlModelCommon.__init__(self,
                                imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
                                method=method,
                                log=log)
-        self.using_method = False
+
         if method == "Bagging":
             model = DecisionTreeClassifier(class_weight=class_weight,
                                            min_samples_split=20,
                                            random_state=99)
-            self.using_method = True
             self.ensemble_method = BaggingClassifier(base_estimator=model,
                                                      n_estimators=10,
                                                      random_state=random_state)
         elif method == "Adaptive Boosting":
-            self.using_method = True
             model = DecisionTreeClassifier(class_weight=class_weight,
                                            min_samples_split=20,
                                            random_state=99)
@@ -38,6 +37,7 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
                                                       n_estimators=50,
                                                       random_state=random_state)
         else:
+            self.ensemble_method = None
             DecisionTreeClassifier.__init__(self,
                                             class_weight=class_weight,
                                             min_samples_split=20,
@@ -47,19 +47,22 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
     def get_name():
         return "Decision Tree"
 
-    def build(self, csv_file, features, prediction, test_prediction):
+    def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
+        This method builds the model
 
         :param csv_file:
         :param features:
         :param prediction:
-        :param test_prediction:
+        :param test_prediction: how to split training and test dataset
+        :param unwanted_values: Samples with these values will be removed
         :return:
         """
         try:
             self.extract_csv(csv_file, features, prediction)
-            # Need to handle missing values
-            self.eliminate_missings()
+            # Cleanup samples by removing samples with empty
+            # features and unwanted values
+            self.cleanup_samples(unwanted_values)
 
             self.transform_numerical()
             self.split_samples(test_prediction)
@@ -70,8 +73,9 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
             self.upsample_if_necessary()
 
             if len(self.y_train) > 0:
+                self.config.number_samples = len(self.y_train) + len(self.y_test)
                 self.log.info("Using {} samples to train. ".format(len(self.y_train)))
-                if self.using_method:
+                if self.ensemble_method is not None:
                     self.ensemble_method.fit(self.X_train, self.y_train)
                 else:
                     self.fit(self.X_train, self.y_train)
@@ -79,7 +83,7 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
                 #
                 # Test model
                 #
-                if self.using_method:
+                if self.ensemble_method is not None:
                     y_predict = self.ensemble_method.predict(self.X_test)
                 else:
                     y_predict = self.predict(self.X_test)
@@ -117,11 +121,11 @@ class MlDecisionTree(MlModelCommon, DecisionTreeClassifier):
         #
         # We only care about the features
         #
-        df = df[self.features]
+        df = df[self.config.selected_features]
 
         df = self.transform_for_prediction(df)
 
-        if self.using_method:
+        if self.ensemble_method is not None:
             ret = self.ensemble_method.predict(df)
         else:
             ret = self.predict(df)
