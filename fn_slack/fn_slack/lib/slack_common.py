@@ -351,7 +351,7 @@ class SlackUtils(object):
         """
         Method saves conversation history to a text file and posts it as an attachment.
         :param messages list of message dict
-        :param client Resilient API
+        :param res_client Resilient API
         :param incident_id
         :param task_id
         :return:
@@ -435,6 +435,16 @@ class SlackUtils(object):
         # return results
         return {"ok": True} # FIXME at the moment it's turned off for easier testing
 
+    def get_channel_type(self):
+        """
+        Return channels status as str.
+        :return:
+        """
+        if self.is_channel_private():
+            return "Private"
+        else:
+            return "Public"
+
     def create_row_in_datatable(self, res_client, incident_id, task_id, thread_id):
         """
         Create a row in Resilient datatable.
@@ -459,6 +469,7 @@ class SlackUtils(object):
                 "slack_db_time": {"value": now},
                 "slack_db_res_id": {"value": res_id},
                 "slack_db_channel": {"value": self.get_channel_name()},
+                "slack_db_channel_type": {"value": self.get_channel_type()},
                 "slack_db_permalink": {"value": """<a href="{0}">Link</a>""".format(conversation_url)}
             }
         }

@@ -5,7 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.resilient_common import validate_fields
-from fn_slack.lib.slack_common import SlackUtils
+from fn_slack.lib.slack_common import *
 import json
 
 LOG = logging.getLogger(__name__)
@@ -34,11 +34,9 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['incident_id'], kwargs)
 
             # Get the function parameters:
-            slack_channel_name = kwargs.get("slack_channel")  # text
             incident_id = kwargs.get('incident_id')  # number (required)
             task_id = kwargs.get('task_id')  # number (optional)
 
-            LOG.debug("slack_channel: %s", slack_channel_name)
             LOG.info('incident_id: %s', incident_id)
             LOG.info('task_id: %s', task_id)
 
@@ -46,19 +44,26 @@ class FunctionComponent(ResilientComponent):
             api_token = self.options['api_token']
             def_username = self.options['username']
 
-            # find the channel
+            # Initialize SlackClient
             slack_utils = SlackUtils(api_token)
-            slack_utils.find_channel_by_name(slack_channel_name)
+            # Initialize Resilient API object
+            res_client = self.rest_client()
+
+            # Use the incident/task associated channel (the default channel).
+            res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
+            LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
+
+            slack_utils.find_channel_by_name(res_associated_channel_name)
             if slack_utils.get_channel() is None:
                 yield FunctionError(
-                    "There is no private or public channel named {} in your workspace. ".format(slack_channel_name))
+                    "There is no private or public channel named {} in your workspace. ".format(res_associated_channel_name))
 
             if slack_utils.is_channel_archived():
                 yield FunctionError(
-                    "Channel {} is already marked as archived.".format(slack_channel_name))
+                    "Channel {} is already marked as archived.".format(res_associated_channel_name))
             else:
                 yield StatusMessage(
-                    "Found channel #{} with id {}".format(slack_channel_name, slack_utils.get_channel_id()))
+                    "Found channel #{} with id {}".format(res_associated_channel_name, slack_utils.get_channel_id()))
 
             # notify the channel that we are going to archive
             text = "This channel has been set to be archived from Resilient."
@@ -71,12 +76,9 @@ class FunctionComponent(ResilientComponent):
             # get the channel history
             messages = slack_utils.get_channel_complete_history()
 
-            # Instantiate new Resilient API object
-            res_client = self.rest_client()
-
             # Saving conversation history to a text file and post it as attachment
             yield StatusMessage("Saving conversation history to a text file.")
-            new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages,incident_id, task_id)
+            new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id, task_id)
             if new_attachment is not None:
                 yield StatusMessage("Channel's chat history was uploaded as an attachment.")
             else:
@@ -85,11 +87,11 @@ class FunctionComponent(ResilientComponent):
             # Archive channel
             results = slack_utils.archive_channel()
             if results.get("ok"):
-                yield StatusMessage("Channel {} has been archived.".format(slack_channel_name))
+                yield StatusMessage("Channel {} has been archived.".format(res_associated_channel_name))
             else:
                 yield FunctionError("Archiving channel failed: " + json.dumps(results))
 
-            results = {"channel": slack_channel_name}
+            results = {"channel": res_associated_channel_name}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
