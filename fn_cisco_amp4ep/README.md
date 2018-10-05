@@ -20,7 +20,7 @@ resilient_circuits version 30 or later
 
 ## Environment
 
-This package requires that it is installed on a RHEL platform and that the resilient-circuits application is running.
+This package requires that it is installed on a RHEL or CentOS platform and that the resilient-circuits application is running.
 Install this package with 'pip', or `python setup.py install`.
 To set the config values in the app.config file with a new resilient instance run `resilient-circuits config -c`.
 To set the config values in the app.config file with an existing resilient instance run `resilient-circuits config -u`.
@@ -40,7 +40,7 @@ api_token=abcd1234-a123-123a-123a-123456abcdef
 
 Run with: `resilient-circuits run`.
 
-## Supported Resilient Functions for Cisco Umbrella Investigate
+## Supported Resilient Functions for Cisco AMP for endpoints.
 ```
 fn_amp_get_computer
 fn_amp_get_computers
