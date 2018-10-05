@@ -1,7 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
 
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
+""" Resilient functions component to run a Cisco AMP for endpoints query - get file lists files """
+
+# Set up:
+# Destination: a Queue named "amp_get_file_list_files".
+# Manual Action: Execute a REST query against a Cisco AMP for endpoints server.
 import logging
 import json
 from datetime import datetime
