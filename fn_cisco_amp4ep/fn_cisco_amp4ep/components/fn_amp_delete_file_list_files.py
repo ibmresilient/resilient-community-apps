@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
             log.info("amp_file_list_guid: %s", amp_file_list_guid)
             log.info("amp_sha256: %s", amp_sha256)
 
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Running Cisco AMP for endpoints delete file lists files by guid and sha256...")
 
             params = {"file_list_guid": amp_file_list_guid, "sha256": amp_sha256}
 
@@ -45,7 +45,6 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            yield StatusMessage("Running Cisco AMP for endpoints delete file lists files by guid and sha256...")
             rtn = amp.delete_file_list_files(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.

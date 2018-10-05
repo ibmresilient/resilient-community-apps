@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
             if is_none(amp_q):
                 raise ValueError("Required parameter 'amp_q' not set.")
 
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Running Cisco AMP for endpoints get activity...")
 
             params = {"q": amp_q, "limit": amp_limit, "offset": amp_offset}
 
@@ -86,7 +86,6 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            yield StatusMessage("Running Cisco AMP for endpoints get activity...")
             rtn = amp.get_activity(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.

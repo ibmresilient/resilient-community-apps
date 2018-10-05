@@ -106,7 +106,7 @@ class FunctionComponent(ResilientComponent):
             log.info("amp_internal_ip: %s", amp_internal_ip)
             log.info("amp_external_ip: %s", amp_external_ip)
 
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Running Cisco AMP get computers query...")
 
             params = {"group_guid": amp_group_guid, "limit": amp_limit, "hostname": amp_hostname,
                       "internal_ip": amp_internal_ip, "external_ip": amp_external_ip}
@@ -115,7 +115,6 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            yield StatusMessage("Running Cisco AMP get computers query...")
             rtn = amp.get_computers(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.

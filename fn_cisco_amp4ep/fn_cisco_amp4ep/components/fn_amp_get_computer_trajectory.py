@@ -98,7 +98,7 @@ class FunctionComponent(ResilientComponent):
             if is_none(amp_conn_guid):
                 raise ValueError("Required parameter 'amp_conn_guid' not set.")
 
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Running Cisco AMP for endpoints get computers trajectory ...")
 
             params = {"conn_guid": amp_conn_guid, "limit": amp_limit }
 
@@ -106,7 +106,6 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            yield StatusMessage("Running Cisco AMP for endpoints get computers trajectory ...")
             rtn = amp.get_computer_trajectory(amp_conn_guid, amp_limit)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
