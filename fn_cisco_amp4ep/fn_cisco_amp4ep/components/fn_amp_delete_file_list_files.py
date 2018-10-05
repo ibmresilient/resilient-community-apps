@@ -52,8 +52,8 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_cisco_amp4ep", {})
         validate_opts(self)
 
-    @function("fn_amp_delete_file_list_files_by_sha256")
-    def _fn_amp_delete_file_list_files_by_sha256_function(self, event, *args, **kwargs):
+    @function("fn_amp_delete_file_list_files")
+    def _fn_amp_delete_file_list_files_function(self, event, *args, **kwargs):
         """Function: Delete file list item with a given SHA-256 and associated to file list with given file_list_guid."""
         try:
             # Get the function parameters:
@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
-            yield StatusMessage("Returning 'file lists files' results for guid '{}' and sha256 value '{}'."
+            yield StatusMessage("Returning 'delete file lists files' results for guid '{}' and sha256 value '{}'."
                                 .format(params["file_list_guid"], params["sha256"]))
 
             yield StatusMessage("Done...")

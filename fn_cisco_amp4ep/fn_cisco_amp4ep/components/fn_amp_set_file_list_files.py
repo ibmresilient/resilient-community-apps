@@ -58,8 +58,8 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_cisco_amp4ep", {})
         validate_opts(self)
 
-    @function("fn_amp_set_file_list_files_by_sha256")
-    def _fn_amp_set_file_list_files_by_sha256_function(self, event, *args, **kwargs):
+    @function("fn_amp_set_file_list_files")
+    def _fn_amp_set_file_list_files_function(self, event, *args, **kwargs):
         """Function: Add a SHA-256 to a file list using file_list_guid."""
         try:
             # Get the function parameters:
@@ -75,7 +75,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running Cisco AMP for endpoints set file lists file by guid and sha256 ...")
 
             params = {"file_list_guid": amp_file_list_guid, "sha256": amp_sha256,
-                      "file_description": amp_file_description }
+                      "description": amp_file_description }
 
             validate_params(params)
 
@@ -85,8 +85,8 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn,"query_execution_time": query_execution_time}
-            yield StatusMessage("Returning 'file lists files' results for guid '{}' and sha256 value '{}'."
-                                .format(params["file_list_guid"], params["sha256"]))
+            yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
+                                .format(params["file_list_guid"], params["sha256"], params["description"]))
 
             yield StatusMessage("Done...")
 
