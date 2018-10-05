@@ -6,9 +6,9 @@ from setuptools import setup, find_packages
 setup(
     name='fn_cisco_amp4ep',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='Resilient License',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_cisco_amp4ep'",
     long_description="Resilient Circuits Components for 'fn_cisco_amp4ep'",
     install_requires=[
