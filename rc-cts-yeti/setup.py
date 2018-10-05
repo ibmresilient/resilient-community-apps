@@ -11,7 +11,10 @@ setup(
     author_email='resil.labs@gmail.com',
     install_requires=[
         'rc-cts',
-        'pyeti'
+        'pyeti==0.0.1'
+    ],
+    dependency_links=[
+        'https://github.com/yeti-platform/pyeti/archive/master.zip#egg=pyeti-0.0.1'
     ],
     description="Resilient Circuits Custom Threat Service for YETI",
     long_description="Resilient Circuits Custom Threat Service Component for YETI",
