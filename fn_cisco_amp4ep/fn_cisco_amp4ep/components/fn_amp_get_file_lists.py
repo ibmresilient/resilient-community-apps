@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_file_lists(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"file_lists": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'file lists' results.")
 
             yield StatusMessage("Done...")

@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.set_file_list_files(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"file_lists_files": rtn,"query_execution_time": query_execution_time}
+            results = {"response": rtn,"query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'file lists files' results for guid '{}' and sha256 value '{}'."
                                 .format(params["file_list_guid"], params["sha256"]))
 

@@ -89,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_activity(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"activity": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'activity' results for query '{}'.".format(params["q"]))
 
             log.debug(json.dumps(results))

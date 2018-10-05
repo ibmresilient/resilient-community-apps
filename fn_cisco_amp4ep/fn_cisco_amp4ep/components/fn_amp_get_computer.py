@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_computer(amp_conn_guid)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"computer": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'computer by guid' results for guid '{}'.".format(params["conn_guid"]))
 
             log.debug(json.dumps(results))
