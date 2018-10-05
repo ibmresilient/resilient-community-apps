@@ -22,7 +22,9 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "FnAmpGetEventTypesFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_event_types:FunctionComponent",
             "FnAmpGetComputersFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_computers:FunctionComponent",
+            "FnAmpGetEventsFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_events:FunctionComponent",
             "FnAmpGetFileListsFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_file_lists:FunctionComponent",
             "FnAmpSetFileListFilesFunctionComponent = fn_cisco_amp4ep.components.fn_amp_set_file_list_files:FunctionComponent",
             "FnAmpGetComputerFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_computer:FunctionComponent",

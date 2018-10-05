@@ -34,7 +34,10 @@ class Ampclient(object):
             # File lists
             "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
             "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
-            "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}"
+            "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}",
+            # Events
+            "events":                       "/" + self.api_version + "/events/",
+            "event_types":                  "/" + self.api_version + "/event_types/"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
                         "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
@@ -180,4 +183,40 @@ class Ampclient(object):
         """
         uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
         r_json = self._req(uri, method="DELETE")
+        return r_json
+
+    def get_events(self, detection_sha256=None, application_sha256=None, connector_guid=None,
+                   group_guid=None, start_date=None, event_type=None, limit=None, offset=None):
+        """Get a list of events. Filter by criteria set by parameter values. The criteria types
+        are logically ORed.
+
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param detection_sha256: Filter by detection sha256
+        :param application_sha256: Filter by application sha256
+        :param connector_guid: Filter by connector guid
+        :param group_guid: Filter by group guid
+        :param start_date: Filter by start date
+        :param event_type: Filter by event types
+        :param limit: Limit number of results
+        :param offset: Results from offset
+        :return: Response in json format
+        """
+        uri = self._endpoints["events"]
+        params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
+                  "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
+                  "event_type[]": event_type, "limit": limit, "offset": offset }
+        r_json = self._req(uri, params=params)
+        return r_json
+
+    def get_event_types(self):
+        """Get list of human readable names, and short descriptions of each event by ID.
+
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :return Result in json format.
+
+        """
+        uri = self._endpoints["event_types"]
+        r_json = self._req(uri)
         return r_json

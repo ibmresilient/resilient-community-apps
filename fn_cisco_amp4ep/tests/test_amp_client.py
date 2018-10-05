@@ -181,3 +181,56 @@ class TestAMPClient:
             data = response["data"]
             assert_keys_in(data, *keys_d)
             assert expected_results_3 == response["data"]["source"]
+
+    """ Test amp_client.set_file_list_files  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_file_list_guid, amp_sha256, amp_file_description, expected_results_1, "
+                             "expected_results_2, expected_results_3", [
+        ("9710a198-b95a-462a-b184-9e688968fd94", "e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b",
+         "Test description", "v1.2.0", 1, "Test file sha256")
+    ])
+    def test_set_file_lists(self, mock_get, amp_file_list_guid, amp_sha256, amp_file_description, expected_results_1,
+                            expected_results_2, expected_results_3):
+
+        keys = ["data", "metadata"]
+
+        keys_d = ["links", "sha256", "source", "description"]
+
+        params = {
+            "file_list_guid": amp_file_list_guid,
+            "sha256": amp_sha256,
+            "description": amp_file_description
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.set_file_list_files(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == len(response["metadata"]["links"])
+        data = response["data"]
+        assert_keys_in(data, *keys_d)
+        description = data["description"]
+        assert expected_results_3 == description
+
+    """ Test amp_client.delete_file_list_files  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_file_list_guid, amp_sha256, amp_file_description, expected_results_1, "
+                             "expected_results_2, expected_results_3", [
+        ("9710a198-b95a-462a-b184-9e688968fd94", "e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b",
+         "Test description", "v1.2.0", 1, 0)
+    ])
+    def test_delete_file_lists(self, mock_get, amp_file_list_guid, amp_sha256, amp_file_description, expected_results_1,
+                            expected_results_2, expected_results_3):
+
+        keys = ["data", "metadata"]
+
+        params = {
+            "file_list_guid": amp_file_list_guid,
+            "sha256": amp_sha256,
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.delete_file_list_files(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == len(response["metadata"]["links"])
+        data = response["data"]
+        assert expected_results_3 == len(data)

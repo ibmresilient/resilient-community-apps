@@ -212,6 +212,40 @@ def get_file_list_files(sha256):
 
     return response[k]
 
+def set_file_list_files():
+
+    response = ('{"version": "v1.2.0",'
+                    '"metadata": {'
+                        '"links": {'
+                            '"self": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284"'
+                        '}'
+                    '},'
+                    '"data": {'
+                        '"sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284",'
+                        '"description": "Test file sha256",'
+                        '"source": "Created by entering SHA-256 via Public api.",'
+                        '"links": {'
+                        '"file_list": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d"'
+                        '}'
+                    '}'
+                '}'
+    )
+    return response
+
+def delete_file_list_files():
+
+    response = ('{"version": "v1.2.0",'
+                    '"metadata": {'
+                        '"links": {'
+                            '"self": "https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/4ce4e7ab22a8900bf438ff84baebe74d3ef3828a716b933b6e2a85b991b36f31"'
+                        '}'
+                    '},'
+                    '"data": {}'
+                '}'
+    )
+    return response
+
+
 def mocked_amp_client(*args):
 
     class MockResponse:
@@ -246,6 +280,14 @@ def mocked_amp_client(*args):
             self.r._content = get_file_list_files(bool(sha256))
             return self.r.json()
 
+        def set_file_list_files(self, file_list_guid, sha256, description):
+            self.r._content = set_file_list_files()
+            return self.r.json()
+
+        def delete_file_list_files(self, file_list_guid, sha256):
+            self.r._content = delete_file_list_files()
+            return self.r.json()
+
     return MockResponse(*args)
 
 def mocked_session(*args, **kwargs):
@@ -273,8 +315,26 @@ def mocked_session(*args, **kwargs):
                 return MockGetResponse(get_file_list_files(False), 200)
             elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
                 return MockGetResponse(get_file_list_files(True), 200)
+            elif url == "/v1/computers/activity":
+                return MockGetResponse(get_activity(), 200)
             else:
                 return MockGetResponse(None, 404)
+
+        def post(self, url, **kwargs):
+
+            if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
+                return MockGetResponse(set_file_list_files(), 200)
+            else:
+                return MockGetResponse(None, 404)
+
+        def delete(self, url, **kwargs):
+
+            if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}", url):
+                return MockGetResponse(delete_file_list_files(), 200)
+            else:
+                return MockGetResponse(None, 404)
+
+
     return MockSession(*args, **kwargs)
 
 class MockGetResponse:
