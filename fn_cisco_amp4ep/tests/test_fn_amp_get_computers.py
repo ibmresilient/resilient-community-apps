@@ -50,9 +50,9 @@ class TestFnAmpGetComputers:
                      amp_external_ip, expected_results_1, expected_results_2):
         """ Test for classifiers 'classifiers' using mocked data.  """
 
-        keys = ["computers", "query_execution_time"]
-        keys_a = ["data", "metadata"]
-        keys_a_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+        keys = ["response", "query_execution_time"]
+        keys_c = ["data", "metadata"]
+        keys_c_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
 
         function_params = {
             "amp_group_guid": amp_group_guid,
@@ -62,12 +62,12 @@ class TestFnAmpGetComputers:
             "amp_external_ip": amp_external_ip
         }
         results = call_fn_amp_get_computers_function(circuits_app, function_params)
-        assert expected_results_1 == results["computers"]["version"]
+        assert expected_results_1 == results["response"]["version"]
         assert_keys_in(results, *keys)
-        assert (expected_results_2 == len(results["computers"]["data"]))
-        activity = results["computers"]
-        assert_keys_in(activity, *keys_a)
-        data = results["computers"]["data"]
+        assert (expected_results_2 == len(results["response"]["data"]))
+        computers= results["response"]
+        assert_keys_in(computers, *keys_c)
+        data = results["response"]["data"]
         for d in data:
-            assert_keys_in(d, *keys_a_d)
+            assert_keys_in(d, *keys_c_d)
 

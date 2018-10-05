@@ -51,13 +51,13 @@ class TestFnAmpGetFileListFiles:
                      expected_results_1, expected_results_2, expected_results_3):
         """ Test calling with sample values for the parameters """
 
-        keys = ["file_list_files", "query_execution_time"]
-        keys_a = ["data", "metadata"]
+        keys = ["response", "query_execution_time"]
+        keys_flf = ["data", "metadata"]
         if amp_sha256 is None:
-            keys_a_d = ["guid", "items", "name", "policies"]
-            keys_a_d_p = ["guid", "name", "links"]
+            keys_flf_d = ["guid", "items", "name", "policies"]
+            keys_flf_d_p = ["guid", "name", "links"]
         else:
-            keys_a_d = ["links", "sha256", "source"]
+            keys_flf_d = ["links", "sha256", "source"]
 
         function_params = {
             "amp_file_list_guid": amp_file_list_guid,
@@ -66,20 +66,20 @@ class TestFnAmpGetFileListFiles:
             "amp_offset": amp_offset
         }
         results = call_fn_amp_get_file_list_files_function(circuits_app, function_params)
-        assert expected_results_1 == results["file_list_files"]["version"]
+        assert expected_results_1 == results["response"]["version"]
         assert_keys_in(results, *keys)
-        file_list_files = results["file_list_files"]
-        assert_keys_in(file_list_files, *keys_a)
+        file_list_files = results["response"]
+        assert_keys_in(file_list_files, *keys_flf)
         if amp_sha256 is None:
             assert expected_results_2 == file_list_files["metadata"]["results"]["total"]
             data = file_list_files["data"]
-            assert_keys_in(data, *keys_a_d)
+            assert_keys_in(data, *keys_flf_d)
             policies = data["policies"]
             assert expected_results_3 == len(policies)
             for p in policies:
-                assert_keys_in(p, *keys_a_d_p)
+                assert_keys_in(p, *keys_flf_d_p)
         else:
             assert expected_results_2 == len(file_list_files["metadata"]["links"])
             data = file_list_files["data"]
-            assert_keys_in(data, *keys_a_d)
+            assert_keys_in(data, *keys_flf_d)
             assert expected_results_3 == file_list_files["data"]["source"]

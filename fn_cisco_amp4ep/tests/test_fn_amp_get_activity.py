@@ -47,7 +47,7 @@ class TestFnAmpGetActivity:
     def test_success(self, mock_get, circuits_app, amp_q, amp_limit, amp_offset, expected_results_1, expected_results_2):
         """ Test calling with sample values for the parameters """
 
-        keys = ["activity", "query_execution_time"]
+        keys = ["response", "query_execution_time"]
         keys_a = ["data", "metadata"]
         keys_a_d = ["connector_guid", "hostname", "active", "links"]
 
@@ -57,11 +57,11 @@ class TestFnAmpGetActivity:
             "amp_offset": amp_offset
         }
         results = call_fn_amp_get_activity_function(circuits_app, function_params)
-        assert expected_results_1 == results["activity"]["version"]
+        assert expected_results_1 == results["response"]["version"]
         assert_keys_in(results, *keys)
-        assert(expected_results_2 == len(results["activity"]["data"]))
-        activity = results["activity"]
+        assert(expected_results_2 == len(results["response"]["data"]))
+        activity = results["response"]
         assert_keys_in(activity, *keys_a)
-        data = results["activity"]["data"]
+        data = results["response"]["data"]
         for d in data:
             assert_keys_in(d, *keys_a_d)

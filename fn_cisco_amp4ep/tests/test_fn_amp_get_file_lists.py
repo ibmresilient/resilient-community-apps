@@ -49,9 +49,9 @@ class TestFnAmpGetFileLists:
         """ Test calling with sample values for the parameters """
 
 
-        keys = ["file_lists", "query_execution_time"]
-        keys_a = ["data", "metadata"]
-        keys_a_d = ["guid", "links", "name", "type"]
+        keys = ["response", "query_execution_time"]
+        keys_fl = ["data", "metadata"]
+        keys_fl_d = ["guid", "links", "name", "type"]
 
         function_params = {
             "name": amp_scd_name,
@@ -59,11 +59,11 @@ class TestFnAmpGetFileLists:
             "amp_offset": amp_offset
         }
         results = call_fn_amp_get_file_lists_function(circuits_app, function_params)
-        assert expected_results_1 == results["file_lists"]["version"]
+        assert expected_results_1 == results["response"]["version"]
         assert_keys_in(results, *keys)
-        assert(expected_results_2 == len(results["file_lists"]["data"]))
-        file_lists = results["file_lists"]
-        assert_keys_in(file_lists, *keys_a)
-        data = results["file_lists"]["data"]
+        assert(expected_results_2 == len(results["response"]["data"]))
+        file_lists = results["response"]
+        assert_keys_in(file_lists, *keys_fl)
+        data = results["response"]["data"]
         for d in data:
-            assert_keys_in(d, *keys_a_d)
+            assert_keys_in(d, *keys_fl_d)

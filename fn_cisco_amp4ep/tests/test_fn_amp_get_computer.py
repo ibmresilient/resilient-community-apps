@@ -47,17 +47,17 @@ class TestFnAmpGetComputer:
     def test_success(self, mock_get, circuits_app, amp_conn_guid, expected_results):
         """ Test calling with sample values for the parameters """
 
-        keys = ["computer", "query_execution_time"]
-        keys_a = ["data", "metadata"]
-        keys_a_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+        keys = ["response", "query_execution_time"]
+        keys_c = ["data", "metadata"]
+        keys_c_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
 
         function_params = {
             "amp_conn_guid": amp_conn_guid
         }
         results = call_fn_amp_get_computer_function(circuits_app, function_params)
-        assert expected_results == results["computer"]["version"]
+        assert expected_results == results["response"]["version"]
         assert_keys_in(results, *keys)
-        activity = results["computer"]
-        assert_keys_in(activity, *keys_a)
-        data = results["computer"]["data"]
-        assert_keys_in(data, *keys_a_d)
+        computer = results["response"]
+        assert_keys_in(computer, *keys_c)
+        data = results["response"]["data"]
+        assert_keys_in(data, *keys_c_d)

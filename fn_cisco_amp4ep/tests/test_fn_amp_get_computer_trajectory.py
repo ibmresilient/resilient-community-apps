@@ -47,17 +47,17 @@ class TestFnAmpGetComputerTrajectory:
     def test_success(self, mock_get, circuits_app, amp_conn_guid, expected_results):
         """ Test calling with sample values for the parameters """
 
-        keys = ["computer_trajectory", "query_execution_time"]
-        keys_a = ["data", "metadata"]
-        keys_a_d = ["computer", "events"]
+        keys = ["response", "query_execution_time"]
+        keys_t = ["data", "metadata"]
+        keys_t_d = ["computer", "events"]
 
         function_params = { 
             "amp_conn_guid": amp_conn_guid
         }
         results = call_fn_amp_get_computer_trajectory_function(circuits_app, function_params)
-        assert expected_results == results["computer_trajectory"]["version"]
+        assert expected_results == results["response"]["version"]
         assert_keys_in(results, *keys)
-        activity = results["computer_trajectory"]
-        assert_keys_in(activity, *keys_a)
-        data = results["computer_trajectory"]["data"]
-        assert_keys_in(data, *keys_a_d)
+        computer_trajectory = results["response"]
+        assert_keys_in(computer_trajectory, *keys_t)
+        data = results["response"]["data"]
+        assert_keys_in(data, *keys_t_d)
