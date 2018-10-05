@@ -148,7 +148,7 @@ class TestAMPClient:
         ("9710a198-b95a-462a-b184-9e688968fd94", "e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b",
          None, None, "v1.2.0", 1, "Created by entering SHA-256 via Public api.")
     ])
-    def test_get_file_lists(self, mock_get, amp_file_list_guid, amp_sha256, amp_limit, amp_offset, expected_results_1,
+    def test_get_file_list_files(self, mock_get, amp_file_list_guid, amp_sha256, amp_limit, amp_offset, expected_results_1,
                             expected_results_2, expected_results_3):
 
         keys = ["data", "metadata"]
@@ -234,3 +234,55 @@ class TestAMPClient:
         assert expected_results_2 == len(response["metadata"]["links"])
         data = response["data"]
         assert expected_results_3 == len(data)
+
+    """ Test amp_client.get_events  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_detection_sha256, amp_application_sha256, amp_conn_guid, amp_group_guid, "
+                             " amp_start_date, amp_event_type, amp_limit, amp_offset, expected_results_1, "
+                             "expected_results_2, expected_results_3", [
+                                 (None, None, None, None, None, None, None, None, "v1.2.0", 1, "WIN-S1AC1PI6L5L")
+                             ])
+    def test_get_events(self, mock_get, amp_detection_sha256, amp_application_sha256, amp_conn_guid,
+                               amp_group_guid, amp_start_date, amp_event_type, amp_limit, amp_offset,
+                               expected_results_1, expected_results_2, expected_results_3):
+
+        keys = ["data", "metadata"]
+        keys_d = ["computer", "date", "detection_id", "event_type", "event_type_id", "file",
+                  "group_guids", "id", "timestamp", "timestamp_nanoseconds" ]
+        params = {
+            "detection_sha256": amp_detection_sha256,
+            "application_sha256": amp_application_sha256,
+            "connector_guid": amp_conn_guid,
+            "group_guid": amp_group_guid,
+            "start_date": amp_start_date,
+            "event_type": amp_event_type,
+            "limit": amp_limit,
+            "offset": amp_offset
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.get_events(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == response["metadata"]["results"]["total"]
+        data = response["data"]
+        assert_keys_in(data[0], *keys_d)
+        assert expected_results_3 == response["data"][0]["computer"]["hostname"]
+
+    """ Test amp_client.get_event_types  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("expected_results_1, expected_results_2, expected_results_3", [
+        ("v1.2.0", 4, "An agent has started scanning.")
+    ])
+    def test_get_event_types(self, mock_get, expected_results_1, expected_results_2, expected_results_3):
+
+        keys = ["data", "metadata"]
+        keys_d = ["description", "id", "name"]
+
+        amp_client = Ampclient(get_config())
+        response = amp_client.get_event_types()
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == response["metadata"]["results"]["total"]
+        data = response["data"]
+        assert_keys_in(data[0], *keys_d)
+        assert expected_results_3 == response["data"][0]["description"]

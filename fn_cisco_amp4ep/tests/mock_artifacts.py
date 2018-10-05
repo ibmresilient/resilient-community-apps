@@ -245,6 +245,95 @@ def delete_file_list_files():
     )
     return response
 
+def get_events():
+
+    response = ('{"version": "v1.2.0",'
+                    '"metadata": {'
+                        '"links": {'
+                            '"self": "https://api.amp.cisco.com/v1/events?limit=2",'
+                            '"next": "https://api.amp.cisco.com/v1/events?limit=2&offset=2"'
+                        '},'
+                        '"results": {'
+                            '"total": 1,'
+                            '"current_item_count": 2,'
+                            '"index": 0,'
+                            '"items_per_page": 2'
+                        '}'
+                    '},'
+                    '"data": ['
+                      '{'
+                          '"id": 6455442249407791000,'
+                          '"timestamp": 1503024774,'
+                          '"timestamp_nanoseconds": 98000000,'
+                          '"date": "2017-08-18T02:52:54+00:00",'
+                          '"event_type": "Threat Quarantined",'
+                          '"event_type_id": 553648143,'
+                          '"detection_id": "6455442249407791109",'
+                          '"group_guids": ['
+                            '"b077d6bc-bbdf-42f7-8838-a06053fbd98a"'
+                          '],'
+                          '"computer": {'
+                            '"connector_guid": "af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01",'
+                            '"hostname": "WIN-S1AC1PI6L5L",'
+                            '"external_ip": "10.200.65.31",'
+                            '"active": true,'
+                            '"network_addresses": ['
+                              '{'
+                                '"ip": "10.0.2.15",'
+                                '"mac": "08:00:27:85:28:61"'
+                              '}'
+                            '],'
+                            '"links": {'
+                              '"computer": "https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01",'
+                              '"trajectory": "https://api.amp.cisco.com/v1/computers/af73d9d5-ddc5-4c93-9c6d-d5e6b5c5eb01/trajectory",'
+                              '"group": "https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a"'
+                            '}'
+                          '},'
+                          '"file": {'
+                            '"disposition": "Unknown",'
+                            '"identity": {'
+                              '"sha256": "f8a6a244138cb1e2f044f63f3dc42beeb555da892bbd7a121274498cbdfc9ad5"'
+                            '}'
+                          '}'
+                     '}'
+                    ']'
+                '}'
+    )
+    return response
+
+def get_event_types():
+    response = ('{"version": "v1.2.0",'
+                    '"metadata": {'
+                        '"links": {'
+                            '"self": "https://api.amp.cisco.com/v1/event_types"'
+                        '},'
+                        '"results": { "total": 4 }'
+                 '},'
+                  '"data": ['
+                    '{'
+                    '"id": 554696714,'
+                    '"name": "Scan Started",'
+                    '"description": "An agent has started scanning."'
+                    '},'
+                    '{'
+                    '"id": 2165309453,'
+                    '"name": "Scan Failed",'
+                    '"description": "A scan has been attempted, and failed to run."'
+                    '},'
+                    '{'
+                    '"id": 1090519054,'
+                    '"name": "Threat Detected",'
+                    '"description": "A threat was found on this system."'
+                    '},'
+                    '{'
+                    '"id": 553648143,'
+                    '"name": "Threat Quarantined",'
+                     '"description": "A threat was successfully quarantined."'
+                    '}'
+                  ']'
+                 '}'
+    )
+    return response
 
 def mocked_amp_client(*args):
 
@@ -288,6 +377,15 @@ def mocked_amp_client(*args):
             self.r._content = delete_file_list_files()
             return self.r.json()
 
+        def get_events(self, detection_sha256, application_sha256, connector_guid, group_guid, start_date, event_type,
+                       limit, offset):
+            self.r._content = get_events()
+            return self.r.json()
+
+        def get_event_types(self):
+            self.r._content = get_event_types()
+            return self.r.json()
+
     return MockResponse(*args)
 
 def mocked_session(*args, **kwargs):
@@ -307,16 +405,18 @@ def mocked_session(*args, **kwargs):
                 return MockGetResponse(get_computer(), 200)
             elif re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trajectory/$", url):
                 return MockGetResponse(get_computer_trajectory(), 200)
-            elif url == "/v1/computers/activity":
+            elif re.match("^/v1/computers/activity$", url):
                 return MockGetResponse(get_activity(), 200)
-            elif url == "/v1/file_lists/simple_custom_detections":
+            elif re.match("^/v1/file_lists/simple_custom_detections$", url):
                 return MockGetResponse(get_file_lists(), 200)
             elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files$", url):
                 return MockGetResponse(get_file_list_files(False), 200)
             elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
                 return MockGetResponse(get_file_list_files(True), 200)
-            elif url == "/v1/computers/activity":
-                return MockGetResponse(get_activity(), 200)
+            elif re.match("^/v1/events/(\?.+)*$", url):
+                return MockGetResponse(get_events(), 200)
+            elif re.match("^/v1/event_types/$", url):
+                return MockGetResponse(get_event_types(), 200)
             else:
                 return MockGetResponse(None, 404)
 
