@@ -17,8 +17,35 @@ from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_amp_set_file_list_files_by_sha256"""
+    """Component that implements Resilient function 'amp_set_file_list_files' of
+    package fn_cisco_amp4ep.
 
+    The Function does a Cisco AMP for endpoints add operation takes the following parameter:
+        amp_file_list_guid, amp_file_sha256, amp_file_description
+
+
+    An example of a set of query parameter might look like the following:
+            amp_file_list_guid = "e773a9eb-296c-40df-98d8-bed46322589d"
+            amp_file_sha256 = "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284"
+            amp_file_description = "Sha256 description"
+
+    The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
+    JSON format similar to the following.
+    {
+      "set_file_lists_file": {u'version': u'v1.2.0',
+                              u'data': {u'source': u'Created by entering SHA-256 via Public api.',
+                                u'sha256': u'8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284',
+                                u'description': u'Test file sha256',
+                                u'links': {u'file_list': u'https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d'}
+                              },
+                              u'metadata': {
+                                u'links': {
+                                    u'self': u'https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284'}
+                                }
+                              },
+      "query_execution_time": "2018-08-09 11:56:02"
+    }
+    """
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
