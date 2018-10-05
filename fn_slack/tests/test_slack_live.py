@@ -4,9 +4,9 @@
 from fn_slack.lib.slack_common import *
 import pytest
 try:
-    from unittest.mock import patch
+    from unittest.mock import patch, Mock
 except:
-    from mock import patch
+    from mock import patch, Mock
 
 def_username = "Resilient"
 slack_test_channel = "test-channel"
@@ -669,3 +669,211 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         history = slack_utils.get_channel_complete_history()
         assert history == [{'text': 'one'}, {'text': 'two'}, {'text': 'three'}]
+
+    @pytest.mark.parametrize("is_channel,is_private,expected", [
+        (True, False, "Public"),  # public channel
+        (False, True, "Private")  # private channel
+    ])
+    def test_get_channel_type(self, is_channel, is_private, expected):
+        """ Test get channel type as str"""
+        print("Test get channel type as str - {}\n".format(expected))
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel",
+            "is_channel": is_channel,
+            "is_private": is_private
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        assert slack_utils.get_channel_type() == expected
+
+    def test_get_template_file_path(self):
+        """ Test get template file path"""
+        print("Test get template file path\n")
+
+        path = get_template_file_path("test")
+
+        assert "test" in path
+
+    def test_get_template_file_path_error(self):
+        """ Test get template file path error"""
+        print("Test get template file path error\n")
+
+        try:
+            get_template_file_path(123)
+            assert False
+        except ValueError:
+            assert True
+
+    def test_data_for_template(self):
+        """ Test data for template"""
+        print("Test data for template\n")
+
+        data = data_for_template("username", "reply_count", "msg_time", "msg_text", True)
+
+        expected_data = {
+            "username": "username",
+            "reply_count": "reply_count",
+            "msg_time": "msg_time",
+            "msg_text": "msg_text",
+            "is_msg_parent": True
+        }
+
+        assert data == expected_data
+
+    @pytest.mark.parametrize("incident_id,task_id,res_id", [
+        (1001, None, "RES-1001"),
+        (1001, 2002, "RES-1001-2002")
+    ])
+    def test_generate_res_id(self, incident_id, task_id, res_id):
+        """ Test generate res id"""
+        print("Test generate res id\n")
+
+        assert generate_res_id(incident_id, task_id) == res_id
+
+    @pytest.mark.parametrize("incident_id,task_id,expected_channel_name", [
+        (2095, None, "test-incident-channel"),
+        (2095, 2251214, "test-task-channel")
+    ])
+    def test_slack_channel_name_datatable_lookup(self, incident_id, task_id, expected_channel_name):
+        """ Test slack channel name datatable lookup"""
+        print("Test slack channel name datatable lookup\n")
+
+        mocked_res_client = Mock()
+        mocked_res_client.get.return_value = {u'rows': [
+            {u'cells': {
+                u'slack_db_res_id': {u'row_id': 14, u'id': u'slack_db_res_id', u'value': u'RES-2095'},
+                u'slack_db_channel': {u'row_id': 14, u'id': u'slack_db_channel', u'value': u'test-incident-channel'}}},
+
+            {u'cells': {
+              u'slack_db_res_id': {u'row_id': 15, u'id': u'slack_db_res_id', u'value': u'RES-2095-2251214'},
+              u'slack_db_channel': {u'row_id': 15, u'id': u'slack_db_channel', u'value': u'test-task-channel'}}}
+        ]}
+
+        result = slack_channel_name_datatable_lookup(mocked_res_client, 2095, 2251214)
+        return result == expected_channel_name
+
+    def test_slack_channel_name_datatable_lookup_data_error(self):
+        """ Test slack channel name datatable lookup data error"""
+        print("Test slack channel name datatable lookup data error\n")
+
+        mocked_res_client = Mock()
+        mocked_res_client.get.side_effect = Exception
+
+        try:
+            slack_channel_name_datatable_lookup(mocked_res_client, 2095, 2251214)
+            assert False
+        except ValueError:
+            assert True
+
+    def test_slack_channel_name_datatable_lookup_no_res_id_error(self):
+        """ Test slack channel name datatable lookup no res id error"""
+        print("Test slack channel name datatable lookup no res id error\n")
+
+        mocked_res_client = Mock()
+        mocked_res_client.get.return_value = {u'rows': [
+            {u'cells': {
+                u'slack_db_channel': {u'row_id': 14, u'id': u'slack_db_channel', u'value': u'test-incident-channel'}}}]}
+
+        try:
+            slack_channel_name_datatable_lookup(mocked_res_client, 2095, 2251214)
+            assert False
+        except ValueError:
+            assert True
+
+    def test_slack_channel_name_datatable_lookup_return_none(self):
+        """ Test slack channel name datatable lookup return none"""
+        print("Test slack channel name datatable lookup return none\n")
+
+        mocked_res_client = Mock()
+        mocked_res_client.get.return_value = {u'rows': [
+            {u'cells': {
+                u'slack_db_res_id': {u'row_id': 14, u'id': u'slack_db_res_id', u'value': u'RES-2095'},
+                u'slack_db_channel': {u'row_id': 14, u'id': u'slack_db_channel', u'value': u'test-incident-channel'}}}
+        ]}
+
+        result = slack_channel_name_datatable_lookup(mocked_res_client, 2095, 2251214)
+        assert result is None
+
+    @patch('fn_slack.lib.slack_common.SlackUtils.get_permalink')
+    def test_create_row_in_datatable(self, mocked_permalink):
+        """ Test slack create row in datatable"""
+        print("Test slack create row in datatable\n")
+
+        slack_utils = SlackUtils("fake_api_key")
+        mocked_res_client = Mock()
+        mocked_res_client.post.return_value = True
+        mocked_permalink.return_value = "mocked_permalink"
+        try:
+            slack_utils.create_row_in_datatable(mocked_res_client, 2095, 2251214, "fake_thread_id")
+            assert True
+        except ValueError:
+            assert False
+
+    @patch('fn_slack.lib.slack_common.SlackUtils.get_permalink')
+    def test_create_row_in_datatable_error(self, mocked_permalink):
+        """ Test slack create row in datatable error"""
+        print("Test slack create row in datatable error\n")
+
+        slack_utils = SlackUtils("fake_api_key")
+        mocked_res_client = Mock()
+        mocked_res_client.post.side_effect = Exception
+        mocked_permalink.return_value = "mocked_permalink"
+        try:
+            slack_utils.create_row_in_datatable(mocked_res_client, 2095, 2251214, "fake_thread_id")
+            assert False
+        except ValueError:
+            assert True
+
+    @pytest.mark.parametrize("incident_id,task_id", [
+        (2095, None),
+        (2095, 2251214)
+    ])
+    def test_post_attachment_to_resilient(self, incident_id, task_id):
+        """ Test post attachment to resilient"""
+        print("Test post attachment to resilient\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        mocked_res_client = Mock()
+        mocked_res_client.post_attachment.return_value = True
+
+        mocked_temp_file = Mock()
+        mocked_temp_file.name.return_value = "Name"
+
+        try:
+            slack_utils._post_attachment_to_resilient(mocked_res_client, incident_id, task_id, mocked_temp_file)
+            assert True
+        except ValueError:
+            assert False
+
+    def test_post_attachment_to_resilient_error(self):
+        """ Test post attachment to resilient error"""
+        print("Test post attachment to resilient error\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        mocked_res_client = Mock()
+        mocked_res_client.post_attachment.side_effect = Exception
+
+        mocked_temp_file = Mock()
+        mocked_temp_file.name.return_value = "Name"
+
+        try:
+            slack_utils._post_attachment_to_resilient(mocked_res_client, 2095, 2251214, mocked_temp_file)
+            assert False
+        except ValueError:
+            assert True

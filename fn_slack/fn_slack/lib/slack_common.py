@@ -391,8 +391,8 @@ class SlackUtils(object):
 
                 new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file)
 
-            except Exception as ex:
-                raise ex
+            except ValueError as err:
+                raise err
 
             finally:
                 os.unlink(temp_file.name)
@@ -418,8 +418,11 @@ class SlackUtils(object):
 
         # POST the new attachment
         attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
-        new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name,
-                                                    mimetype='text/plain')
+        try:
+            new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype='text/plain')
+        except Exception as ex:
+            raise ValueError("Failed to post the {} attachment: {}".format(attachment_name, ex))
+
         return new_attachment
 
     def archive_channel(self):
@@ -480,8 +483,8 @@ class SlackUtils(object):
         try:
             # POST row
             add_row_response = res_client.post(uri, cells)
-        except Exception as exe:
-            raise exe
+        except Exception as ex:
+            raise ValueError("Failed to add row to {} datatable: {}".format(DATA_TABLE_API_NAME, ex))
 
         return add_row_response
 
@@ -559,6 +562,9 @@ def get_template_file_path(path):
     :param path:
     :return:
     """
+    if not isinstance(path, string_types):
+        raise ValueError("Variable 'path' type must be a string {}".format(path))
+
     current_path = os.path.dirname(os.path.realpath(__file__))
     template_file_path = join(current_path, pardir, path)
     return template_file_path
@@ -609,9 +615,12 @@ def slack_channel_name_datatable_lookup(res_client, incident_id, task_id=None):
     :param task_id:
     :return:
     """
-    datatable = ConversationsDatatable(res_client, incident_id)
-    datatable.get_data()
-    return datatable.get_slack_channel_name(incident_id, task_id)
+    try:
+        datatable = ConversationsDatatable(res_client, incident_id)
+        datatable.get_data()
+        return datatable.get_slack_channel_name(incident_id, task_id)
+    except ValueError as err:
+        raise err
 
 
 class ConversationsDatatable():
@@ -628,9 +637,9 @@ class ConversationsDatatable():
         uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
         try:
             self.data = self.res_client.get(uri)
-            self.rows = self.data["rows"]
+            self.rows = self.data.get("rows")
         except Exception as ex:
-            raise ValueError("Failed to get {} datatable: ".format(DATA_TABLE_API_NAME) + ex)
+            raise ValueError("Failed to get {} datatable: {}".format(DATA_TABLE_API_NAME, ex))
 
     def get_slack_channel_name(self, incident_id, task_id=None):
         """
@@ -647,7 +656,7 @@ class ConversationsDatatable():
         res_id_to_search = "-".join(id)
 
         for row in self.rows:
-            cells = row["cells"]
+            cells = row.get("cells")
             slack_db_res_id = cells.get("slack_db_res_id")
             res_id = slack_db_res_id.get("value") if slack_db_res_id else None
             if res_id is None:
