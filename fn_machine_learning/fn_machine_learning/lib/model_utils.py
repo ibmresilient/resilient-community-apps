@@ -41,7 +41,7 @@ def update_config_from_app_config(ml_opt, mlconfig):
     mlconfig.addition_method = ml_opt.get("method", "").strip()
     mlconfig.predict_field = ml_opt.get("prediction", None)
     selected = ml_opt.get("features", []).split(',')
-    unwanted_values = ml_opt.get("unwanted_values", []).split(',')
+    unwanted_values = ml_opt.get("unwanted_values", "").split(',')
     mlconfig.split_percentage = float(ml_opt.get("split", 0.5))
     mlconfig.class_weight = ml_opt.get("class_weight", None)
     imbalance_upsampling = ml_opt.get("imbalance_upsampling", None)
