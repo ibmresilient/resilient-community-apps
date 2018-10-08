@@ -2,18 +2,16 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation to Slack.
-This function creates a Slack message based on a Resilient incident and it's notes. Threaded replies are possible based on a retained Slack thread_id.
+This function creates a Slack message based on a Resilient incident, it's tasks, notes and artifacts.
+
 Many of the features of posting a Slack message are under customer control including:
-- threaded replies
-- preserving embedded links
+- Creating private or public channels
+- Inviting users to conversations
 - Slack markdown capability
 - posting messages displaying authorship
 """
 
-import logging
-import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_slack.lib.resilient_common import validate_fields
 from fn_slack.lib.slack_common import *
 
 LOG = logging.getLogger(__name__)
@@ -44,7 +42,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
-        """Function: Create a Slack message based on an incident. Threaded replies are possible based on a retained slack thread_id.
+        """Function: Create a Slack message based on an incident, task, note or an artifact.
         All the fields to send to slack are sent in slack_text. A json structure is used to know how to interpret field meanings. A
         structure can look like this with conversions based on the 'type' key/value pair
         {
@@ -54,6 +52,12 @@ class FunctionComponent(ResilientComponent):
           "Confirmed": {"type": "boolean", "data": "1"},
           "Start Date": {"type": "datetime", "data": 158949393}
         }
+
+        Default settings for posting messages are:
+        - parse="full", full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
+        - link_names=1, find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
+
+        Threading isn't supported (reply_broadcast and thread_ts are None).
 
         The remaining input fields are passed to the slack api call to control the message post.
         Refer to the slack api documentation on how to use the parameters.
@@ -130,6 +134,9 @@ class FunctionComponent(ResilientComponent):
                 elif slack_utils.is_channel_archived():
                     yield FunctionError("Channel {} is archived.".format(slack_channel_name))
             else:
+                # validate slack_is_private
+                validate_fields(['slack_is_channel_private'], kwargs)
+
                 # create a new channel
                 slack_utils.slack_create_channel(slack_channel_name, slack_is_private)
 

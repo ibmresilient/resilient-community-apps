@@ -2,9 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_slack.lib.resilient_common import validate_fields
 from fn_slack.lib.slack_common import *
 import json
 
@@ -26,11 +24,11 @@ class FunctionComponent(ResilientComponent):
 
     @function("slack_archive_channel")
     def _slack_archive_channel_function(self, event, *args, **kwargs):
-        """Function: Function exports conversation history from given Slack channel to a csv file,
-        saves the csv file as an attachment and archives the Slack channel. """
+        """Function: Function exports conversation history from given Slack channel to a text file,
+        saves the text file as an attachment and archives the Slack channel. """
 
         try:
-            validate_fields(['api_token'], self.options)
+            validate_fields(['api_token', 'username'], self.options)
             validate_fields(['incident_id'], kwargs)
 
             # Get the function parameters:
@@ -52,6 +50,9 @@ class FunctionComponent(ResilientComponent):
             # Use the incident/task associated channel (the default channel).
             res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
             LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
+
+            if res_associated_channel_name is None:
+                yield FunctionError("There is no slack_channel name associated with Incident or Task. There is no channel available to be archived.")
 
             slack_utils.find_channel_by_name(res_associated_channel_name)
             if slack_utils.get_channel() is None:
