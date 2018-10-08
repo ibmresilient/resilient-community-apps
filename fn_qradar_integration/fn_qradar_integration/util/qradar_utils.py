@@ -236,13 +236,13 @@ class QRadarClient(object):
         :return: dict with events
         """
         ariel_search = ArielSearch()
-        if range_start:
+        if range_start is not None:
             ariel_search.set_range_start(range_start)
 
-        if range_end:
+        if range_end is not None:
             ariel_search.set_range_end(range_end)
 
-        if timeout:
+        if timeout is not None:
             ariel_search.set_timeout(timeout)
 
         response = ariel_search.perform_search(query)
