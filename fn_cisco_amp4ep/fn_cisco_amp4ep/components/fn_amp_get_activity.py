@@ -20,16 +20,17 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_activity' of
     package fn_cisco_amp4ep.
 
-    The Function does a Cisco AMP for endpoints query takes the following parameters:
+    The Function takes the following parameters:
         amp_q, amp_limit, amp_offset
 
     An example of a set of query parameter might look like the following:
-            amp_q = "SearchProtocolHost.exe"
-            amp_limit = None
-            amp_offset = None
+            amp_q       = "SearchProtocolHost.exe"
+            amp_limit   = None
+            amp_offset  = None
 
-    The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
+    The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
+
     {
       "query_execution_time": "2018-08-09 13:19:22",
       "activity": {

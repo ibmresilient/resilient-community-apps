@@ -20,7 +20,7 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_groups' of package fn_cisco_amp4ep.
     The function can be used to query to get information on groups or individual group by group_guid.
 
-    The Function does a Cisco AMP for endpoints query operation and takes the following parameter:
+    The Function takes the following parameter:
         amp_group_guid, amp_group_name, amp_limit
 
         An example of a set of query parameter might look like the following:
@@ -28,8 +28,9 @@ class FunctionComponent(ResilientComponent):
                 amp_group_name = None
                 amp_limit      = None
 
-        The query will execute a REST call against the Cisco AMP for endpoints server and returns a result in
-        JSON format similar to the following.
+    The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
+    JSON format similar to the following.
+
     {
       "response": {
         "version": "v1.2.0",

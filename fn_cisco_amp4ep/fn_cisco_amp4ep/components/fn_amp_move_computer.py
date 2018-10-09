@@ -29,10 +29,10 @@ class FunctionComponent(ResilientComponent):
                 amp_conn_guid = "00da1a57-b833-43ba-8ea2-79a5ab21908f"
                 amp_group_guid = "89663c44-f95e-4ee8-896d-7611744a6e9a"
 
-        The patch api request will execute a REST call against the Cisco AMP for endpoints server and returns a result in JSON format
-        similar to the following.
+    The function will execute a REST api patch request against a Cisco AMP for endpoints server and returns a result in
+    JSON format similar to the following.
 
-        {
+    {
           "response": {
             "version": "v1.2.0",
             "data": {
