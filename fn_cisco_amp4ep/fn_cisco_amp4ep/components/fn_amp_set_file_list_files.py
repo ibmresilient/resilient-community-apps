@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn,"query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
-                                .format(params["file_list_guid"], params["sha256"], params["description"]))
+                                .format(params["file_list_guid"], params["file_sha256"], params["description"]))
 
             yield StatusMessage("Done...")
 

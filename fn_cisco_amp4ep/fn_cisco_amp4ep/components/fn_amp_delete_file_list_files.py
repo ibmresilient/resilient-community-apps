@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'delete file lists files' results for guid '{}' and sha256 value '{}'."
-                                .format(params["file_list_guid"], params["sha256"]))
+                                .format(params["file_list_guid"], params["file_sha256"]))
 
             yield StatusMessage("Done...")
 
