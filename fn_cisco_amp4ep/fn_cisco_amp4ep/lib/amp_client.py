@@ -31,13 +31,17 @@ class Ampclient(object):
             "computer":                     "/"+self.api_version+"/computers/{}",
             "computer_trajectory":          "/"+self.api_version+"/computers/{}/trajectory/",
             "activity":                     "/"+self.api_version+"/computers/activity",
+            "computer_move":                 "/"+self.api_version+"/computers/{}",
             # File lists
             "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
             "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
             "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}",
             # Events
             "events":                       "/" + self.api_version + "/events/",
-            "event_types":                  "/" + self.api_version + "/event_types/"
+            "event_types":                  "/" + self.api_version + "/event_types/",
+            # Groups
+            "groups":                       "/" + self.api_version + "/groups/",
+            "group_by_guid":                "/" + self.api_version + "/groups/{}"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
                         "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
@@ -67,7 +71,9 @@ class Ampclient(object):
         if method == "GET":
             r = self._s.get(url, params=params, headers=self._headers, auth=self._auth)
         elif method == "POST":
-            r = self._s.post(url, params=params, data=json.dumps(data), headers=self._headers, auth=self._auth)
+            r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth)
+        elif method == "PATCH":
+            r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth)
         elif method == "DELETE":
             r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth)
         else:
@@ -219,4 +225,39 @@ class Ampclient(object):
         """
         uri = self._endpoints["event_types"]
         r_json = self._req(uri)
+        return r_json
+
+    def get_groups(self, group_guid, name, limit=None):
+        """Get information on groups or individual group by group_guid.
+
+         For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param: group_guid: Lookup by group_guid
+        :param: name: Filter by group name
+        :param limit: Limit number of results
+        :return Result in json format.
+
+        """
+        if group_guid is None:
+            uri = self._endpoints["groups"]
+        else:
+            uri = self._endpoints["group_by_guid"].format(group_guid)
+        params = {"name": name , "limit": limit}
+        r_json = self._req(uri, params=params)
+        return r_json
+
+    def move_computer(self, connector_guid, group_guid):
+        """Get information on groups or individual group by group_guid.
+
+         For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param: connector_guid: Connector guid of computer to move.
+        :param: group_guid: Group guid to move computer to.
+
+        :return Result in json format.
+
+        """
+        uri = self._endpoints["computer_move"].format(connector_guid)
+        data = json.dumps({"group_guid": group_guid})
+        r_json = self._req(uri, method="PATCH", data=data)
         return r_json

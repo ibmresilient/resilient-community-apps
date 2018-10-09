@@ -27,6 +27,8 @@ setup(
             "FnAmpGetEventsFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_events:FunctionComponent",
             "FnAmpGetFileListsFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_file_lists:FunctionComponent",
             "FnAmpSetFileListFilesFunctionComponent = fn_cisco_amp4ep.components.fn_amp_set_file_list_files:FunctionComponent",
+            "FnAmpMoveComputerFunctionComponent = fn_cisco_amp4ep.components.fn_amp_move_computer:FunctionComponent",
+            "FnAmpGetGroupsFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_groups:FunctionComponent",
             "FnAmpGetComputerFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_computer:FunctionComponent",
             "FnAmpGetComputerTrajectoryFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_computer_trajectory:FunctionComponent",
             "FnAmpGetActivityFunctionComponent = fn_cisco_amp4ep.components.fn_amp_get_activity:FunctionComponent",
