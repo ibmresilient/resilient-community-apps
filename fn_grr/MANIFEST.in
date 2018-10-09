@@ -1,0 +1,3 @@
+include README.md
+include fn_grr/util/*
+include fn_grr/LICENSE
