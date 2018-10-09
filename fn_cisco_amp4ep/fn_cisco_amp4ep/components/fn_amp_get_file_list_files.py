@@ -14,7 +14,8 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
-from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
+from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of
@@ -83,19 +84,22 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             amp_file_list_guid = kwargs.get("amp_file_list_guid")  # text
-            amp_sha256 = kwargs.get("amp_sha256")  # text
+            amp_file_sha256 = kwargs.get("amp_file_sha256")  # text
             amp_limit = kwargs.get("amp_limit")  # number
             amp_offset = kwargs.get("amp_offset")  # number
 
             log = logging.getLogger(__name__)
             log.info("amp_file_list_guid: %s", amp_file_list_guid)
-            log.info("amp_sha256: %s", amp_sha256)
+            log.info("amp_file_sha256: %s", amp_file_sha256)
             log.info("amp_limit: %s", amp_limit)
             log.info("amp_offset: %s", amp_offset)
 
+            if is_none(amp_file_list_guid):
+                raise ValueError("Required parameter 'amp_file_list_guid' not set.")
+
             yield StatusMessage("Running Cisco AMP for endpoints get file lists files by guid...")
 
-            params = {"file_list_guid": amp_file_list_guid, "sha256": amp_sha256, "limit": amp_limit,
+            params = {"file_list_guid": amp_file_list_guid, "sha256": amp_file_sha256, "limit": amp_limit,
                       "offset": amp_offset  }
 
             validate_params(params)
