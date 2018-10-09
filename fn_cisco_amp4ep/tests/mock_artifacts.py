@@ -365,15 +365,15 @@ def mocked_amp_client(*args):
             self.r._content = get_file_lists()
             return self.r.json()
 
-        def get_file_list_files(self, file_list_guid, sha256, limit=None, offset=None):
-            self.r._content = get_file_list_files(bool(sha256))
+        def get_file_list_files(self, file_list_guid, file_sha256, limit=None, offset=None):
+            self.r._content = get_file_list_files(bool(file_sha256))
             return self.r.json()
 
-        def set_file_list_files(self, file_list_guid, sha256, description):
+        def set_file_list_files(self, file_list_guid, file_sha256, description):
             self.r._content = set_file_list_files()
             return self.r.json()
 
-        def delete_file_list_files(self, file_list_guid, sha256):
+        def delete_file_list_files(self, file_list_guid, file_sha256):
             self.r._content = delete_file_list_files()
             return self.r.json()
 

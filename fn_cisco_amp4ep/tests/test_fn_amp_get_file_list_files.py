@@ -41,19 +41,19 @@ class TestFnAmpGetFileListFiles:
         assert func is not None
 
     @patch('fn_cisco_amp4ep.components.fn_amp_get_file_list_files.Ampclient', side_effect=mocked_amp_client)
-    @pytest.mark.parametrize("amp_file_list_guid, amp_sha256, amp_limit, amp_offset, expected_results_1, "
+    @pytest.mark.parametrize("amp_file_list_guid, amp_file_sha256, amp_limit, amp_offset, expected_results_1, "
                              "expected_results_2, expected_results_3", [
         ("9710a198-b95a-462a-b184-9e688968fd94", None, None, None, "v1.2.0", 1, 10),
         ("9710a198-b95a-462a-b184-9e688968fd94", "e93faae7706644387cd3383aaf1bd9919f9f441acce498f15391eb60eb54288b",
          None, None, "v1.2.0", 1, "Created by entering SHA-256 via Public api.")
     ])
-    def test_success(self, mock_get, circuits_app, amp_file_list_guid, amp_sha256, amp_limit, amp_offset,
+    def test_success(self, mock_get, circuits_app, amp_file_list_guid, amp_file_sha256, amp_limit, amp_offset,
                      expected_results_1, expected_results_2, expected_results_3):
         """ Test calling with sample values for the parameters """
 
         keys = ["response", "query_execution_time"]
         keys_flf = ["data", "metadata"]
-        if amp_sha256 is None:
+        if amp_file_sha256 is None:
             keys_flf_d = ["guid", "items", "name", "policies"]
             keys_flf_d_p = ["guid", "name", "links"]
         else:
@@ -61,7 +61,7 @@ class TestFnAmpGetFileListFiles:
 
         function_params = {
             "amp_file_list_guid": amp_file_list_guid,
-            "amp_sha256": amp_sha256,
+            "amp_file_sha256": amp_file_sha256,
             "amp_limit": amp_limit,
             "amp_offset": amp_offset
         }
@@ -70,7 +70,7 @@ class TestFnAmpGetFileListFiles:
         assert_keys_in(results, *keys)
         file_list_files = results["response"]
         assert_keys_in(file_list_files, *keys_flf)
-        if amp_sha256 is None:
+        if amp_file_sha256 is None:
             assert expected_results_2 == file_list_files["metadata"]["results"]["total"]
             data = file_list_files["data"]
             assert_keys_in(data, *keys_flf_d)
