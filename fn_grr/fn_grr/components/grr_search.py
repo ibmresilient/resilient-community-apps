@@ -20,20 +20,35 @@ class FunctionComponent(ResilientComponent):
     @function("grr_search")
     def _grr_search_function(self, event, *args, **kwargs):
         """Function: A function to search for GRR Agent"""
+        
+        def get_config_option(option_name, optional=False):
+          """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
+          option = self.options.get(option_name)
+
+          if option is None and optional is False:
+            err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
+            raise ValueError(err)
+          else:
+            return option
+
         try:
             # Get the function parameters:
             grr_search_type = self.get_select_param(kwargs.get("grr_search_type"))  # select, values: "ip", "user", "host"
             grr_search_value = kwargs.get("grr_search_value")  # text
+
+            if grr_search_value is None:
+                err = "'{0}' is a mandatory function input".format("grr_search_value")
+                raise ValueError(err)
 
             log = logging.getLogger(__name__)
             log.info("grr_search_type: %s", grr_search_type)
             log.info("grr_search_value: %s", grr_search_value)
 
             # Set the connection parameters
-            grr_server=self.options["grr_server"]
-            grr_user=self.options["grr_user"]
-            grr_pwd=self.options["grr_pwd"]
-            verify_cert=self.options["verify_cert"]
+            grr_server=get_config_option("grr_server")
+            grr_user=get_config_option("grr_user")
+            grr_pwd=get_config_option("grr_pwd")
+            verify_cert=get_config_option("verify_cert")
 
             # Setup the connection
             grrapi = api.InitHttp(api_endpoint=grr_server,
