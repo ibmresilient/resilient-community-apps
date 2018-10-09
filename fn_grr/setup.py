@@ -8,8 +8,8 @@ setup(
     name='fn_grr',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components GRR Search Function",
     long_description="A Resilient Circuits Function to allow you to search your GRR Agents by user, ip or host",
     install_requires=[
