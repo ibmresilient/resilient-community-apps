@@ -14,6 +14,7 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
+from fn_cisco_amp4ep.lib.helpers import validate_opts
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_event_types of package fn_cisco_amp4ep.
@@ -61,11 +62,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cisco_amp4ep", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_cisco_amp4ep", {})
+        validate_opts(self)
 
     @function("fn_amp_get_event_types")
     def _fn_amp_get_event_types_function(self, event, *args, **kwargs):
