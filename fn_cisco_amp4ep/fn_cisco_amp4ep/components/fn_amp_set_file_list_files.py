@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco AMP for endpoints set file lists file by guid and sha256 ...")
 
-            params = {"file_list_guid": amp_file_list_guid, "sha256": amp_file_sha256,
+            params = {"file_list_guid": amp_file_list_guid, "file_sha256": amp_file_sha256,
                       "description": amp_file_description }
 
             validate_params(params)

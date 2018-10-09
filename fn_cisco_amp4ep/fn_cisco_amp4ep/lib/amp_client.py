@@ -154,40 +154,40 @@ class Ampclient(object):
         r_json = self._req(uri, params=params)
         return r_json
 
-    def get_file_list_files(self, file_list_guid, sha256, limit=None, offset=None):
+    def get_file_list_files(self, file_list_guid, file_sha256, limit=None, offset=None):
         """
         :param: file_list_guid.
         :return Result in json format.
 
         """
-        if sha256 is None:
+        if file_sha256 is None:
             uri = self._endpoints["file_lists_files"].format(file_list_guid)
         else:
-            uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+            uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, file_sha256)
         params = {"limit": limit, "offset": offset}
         r_json = self._req(uri, params=params)
         return r_json
 
-    def set_file_list_files(self, file_list_guid, sha256, description):
+    def set_file_list_files(self, file_list_guid, file_sha256, description):
         """
 
         :param: group_guid.
         :return Result in json format.
 
         """
-        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, file_sha256)
         data = json.dumps({"description": description})
         r_json = self._req(uri, method="POST", data=data)
         return r_json
 
-    def delete_file_list_files(self, file_list_guid, sha256):
+    def delete_file_list_files(self, file_list_guid, file_sha256):
         """
 
         :param: group_guid.
         :return Result in json format.
 
         """
-        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, sha256)
+        uri = self._endpoints["file_lists_files_by_sha256"].format(file_list_guid, file_sha256)
         r_json = self._req(uri, method="DELETE")
         return r_json
 

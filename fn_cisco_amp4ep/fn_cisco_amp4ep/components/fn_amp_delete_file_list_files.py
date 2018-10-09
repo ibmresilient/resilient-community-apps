@@ -59,20 +59,20 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             amp_file_list_guid = kwargs.get("amp_file_list_guid")  # text
-            amp_sha256 = kwargs.get("amp_sha256")  # text
+            amp_file_sha256 = kwargs.get("amp_file_sha256")  # text
 
             log = logging.getLogger(__name__)
             log.info("amp_file_list_guid: %s", amp_file_list_guid)
-            log.info("amp_sha256: %s", amp_sha256)
+            log.info("amp_file_sha256: %s", amp_file_sha256)
 
             if is_none(amp_file_list_guid):
                 raise ValueError("Required parameter 'amp_file_list_guid' not set.")
-            if is_none(amp_sha256):
-                raise ValueError("Required parameter 'amp_sha256' not set.")
+            if is_none(amp_file_sha256):
+                raise ValueError("Required parameter 'amp_file_sha256' not set.")
 
             yield StatusMessage("Running Cisco AMP for endpoints delete file lists files by guid and sha256...")
 
-            params = {"file_list_guid": amp_file_list_guid, "sha256": amp_sha256}
+            params = {"file_list_guid": amp_file_list_guid, "file_sha256": amp_file_sha256}
 
             validate_params(params)
 
