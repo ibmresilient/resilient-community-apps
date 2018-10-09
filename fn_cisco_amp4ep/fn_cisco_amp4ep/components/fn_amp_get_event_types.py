@@ -16,8 +16,47 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_amp_get_event_types"""
+    """Component that implements Resilient function 'fn_amp_get_event_types of package fn_cisco_amp4ep.
+    The Function takes no parameters.
 
+    The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in JSON
+    format similar to the following.
+
+    {
+      "response": {
+        "version": "v1.2.0",
+        "data": [
+          {
+            "description": "An agent has been told to fetch policy.",
+            "id": 553648130,
+            "name": "Policy Update"
+          },
+          {
+            "description": "An agent has started scanning.",
+            "id": 554696714,
+            "name": "Scan Started"
+          },
+          {
+            "description": "A scan has completed without detecting anything malicious.",
+            "id": 554696715,
+            "name": "Scan Completed, No Detections"
+          },
+          ...
+          ...
+
+        ],
+        "metadata": {
+          "results": {
+            "total": 94
+          },
+          "links": {
+            "self": "https://api.amp.cisco.com/v1/event_types"
+          }
+        }
+      },
+      "query_execution_time": "2018-10-08 16:27:32"
+    }
+    """
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
