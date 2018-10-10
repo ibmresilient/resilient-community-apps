@@ -121,6 +121,7 @@ class Ampclient(object):
         For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
 
         :param: connector_guid. Computer selection criteria
+        :param limit: Limit number of results
         :return Result in json format.
 
         """
@@ -134,7 +135,9 @@ class Ampclient(object):
 
         For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
 
-        :param: group_guid.
+        :param q: Search query string
+        :param limit: Limit number of results
+        :param offset: Results from offset
         :return Result in json format.
 
         """
@@ -144,8 +147,13 @@ class Ampclient(object):
         return r_json
 
     def get_file_lists(self, name, limit=None, offset=None):
-        """
-        :param name: group_guid.
+        """ Returns a list of simple custom detection file lists. List acnwe be filtered by name.
+
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param name: Name search string
+        :param limit: Limit number of results
+        :param offset: Results from offset
         :return Result in json format.
 
         """
@@ -155,8 +163,15 @@ class Ampclient(object):
         return r_json
 
     def get_file_list_files(self, file_list_guid, file_sha256, limit=None, offset=None):
-        """
-        :param: file_list_guid.
+        """ Returns a particular item for a given file_list. A SHA-256 and file_list_guid need to be provided
+         to get an item.
+
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param file_list_guid: file_list_guid value.
+        :param file_sha256: File sha256 value.
+        :param limit: Limit number of results
+        :param offset: Results from offset
         :return Result in json format.
 
         """
@@ -169,9 +184,12 @@ class Ampclient(object):
         return r_json
 
     def set_file_list_files(self, file_list_guid, file_sha256, description):
-        """
+        """Add a SHA-256 to a file list using file_list_guid.
 
-        :param: group_guid.
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param file_list_guid: file_list_guid value.
+        :param file_sha256: File sha256 value.
         :return Result in json format.
 
         """
@@ -181,9 +199,12 @@ class Ampclient(object):
         return r_json
 
     def delete_file_list_files(self, file_list_guid, file_sha256):
-        """
+        """ Delete a file list item with a given SHA-256 and associated to file list with given file_list_guid
 
-        :param: group_guid.
+        For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
+
+        :param file_list_guid: file_list_guid value.
+        :param file_sha256: File sha256 value.
         :return Result in json format.
 
         """
