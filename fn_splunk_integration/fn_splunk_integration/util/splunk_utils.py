@@ -78,8 +78,10 @@ class SplunkClient(object):
         :param port: port for splunk
         :param username: user name to login
         :param password: password to login
+        :param verify: True to validate the SSL cert
         :return:
         """
+        LOG.info("Splunk SDK verify flag is {}".format(verify))
         return splunk_client.connect(host=host,
                                      port=port,
                                      username=username,
