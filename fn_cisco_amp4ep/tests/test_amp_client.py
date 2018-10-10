@@ -286,3 +286,52 @@ class TestAMPClient:
         data = response["data"]
         assert_keys_in(data[0], *keys_d)
         assert expected_results_3 == response["data"][0]["description"]
+
+    """ Test amp_client.get_groups  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_group_guid, amp_group_name, amp_limit, expected_results_1, expected_results_2, "
+                             "expected_results_3", [
+        ("4060cf94-26e5-4176-8dea-cd3d0b68d8bc", None, 1, "v1.2.0", 2, "Audit Group"),
+        (None, "Audit", 1, "v1.2.0", 1, "Audit Group for FireAMP API Docs")
+    ])
+    def test_get_groups(self, mock_get, amp_group_guid, amp_group_name, amp_limit, expected_results_1, expected_results_2,
+                        expected_results_3):
+
+        keys = ["data", "metadata"]
+        keys_d = ["description", "guid", "links", "name", "source"]
+
+        params = {
+            "group_guid": amp_group_guid,
+            "name": amp_group_name,
+            "limit": amp_limit
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.get_groups(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == response["metadata"]["results"]["total"]
+        data = response["data"]
+        assert_keys_in(data[0], *keys_d)
+        assert expected_results_3 == response["data"][0]["description"]
+
+    """ Test amp_client.move_computer  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_conn_guid, amp_group_guid, expected_results_1, expected_results_2", [
+        ("ad29d359-dac9-4940-9c7e-c50e6d32ee6f", "b077d6bc-bbdf-42f7-8838-a06053fbd98a", "v1.2.0", "Demo_CozyDuke")
+    ])
+    def test_move_computer(self, mock_get, amp_conn_guid, amp_group_guid, expected_results_1, expected_results_2):
+
+        keys = ["data", "metadata"]
+        keys_d = ["active", "connector_guid", "connector_version", "external_ip", "group_guid"]
+
+        params = {
+            "connector_guid": amp_conn_guid,
+            "group_guid": amp_group_guid
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.move_computer(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        data = response["data"]
+        assert_keys_in(data, *keys_d)
+        assert expected_results_2 == response["data"]["hostname"]

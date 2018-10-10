@@ -335,6 +335,115 @@ def get_event_types():
     )
     return response
 
+def get_groups(name):
+
+    if name:
+        k = "name"
+    else:
+        k = "None"
+    response = {"name": ('{"version": "v1.2.0",'
+                          '"metadata": {'
+                            '"links": {'
+                              '"self": "https://api.amp.cisco.com/v1/groups?name=Audit&limit=5"'
+                            '},'
+                            '"results": {'
+                             '"total": 1,'
+                              '"current_item_count": 1,'
+                              '"index": 0,'
+                              '"items_per_page": 5'
+                            '}'
+                          '},'
+                          '"data": ['
+                            '{'
+                              '"name": "Audit",'
+                              '"description": "Audit Group for FireAMP API Docs",'
+                              '"guid": "b077d6bc-bbdf-42f7-8838-a06053fbd98a",'
+                              '"source": null,'
+                              '"links": {'
+                                '"group": "https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a"'
+                              '}'
+                            '}'
+                          ']'
+                        '}'
+                        ),
+               "None":  ('{"version": "v1.2.0",'
+                            '"data": ['
+                              '{'
+                                '"source": null,'
+                                '"guid": "b077d6bc-bbdf-42f7-8838-a06053fbd98a",'
+                                '"name": "Audit",'
+                                '"links": {'
+                                  '"group": "https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a"'
+                                '},'
+                                '"description": "Audit Group"'
+                              '},'
+                              '{'
+                                '"source": null,'
+                                '"guid": "89663c44-f95e-4ee8-896d-7611744a6e9a",'
+                                '"name": "Int_Test_group1",'
+                                '"links": {'
+                                  '"group": "https://api.amp.cisco.com/v1/groups/89663c44-f95e-4ee8-896d-7611744a6e9a"'
+                                '},'
+                                '"description": "Test group 1 for Resilient functions."'
+                              '}'
+                            '],'
+                            '"metadata": {'
+                              '"results": {'
+                                '"index": 0,'
+                                '"total": 2,'
+                                '"items_per_page": 500,'
+                                '"current_item_count": 2'
+                              '},'
+                              '"links": {'
+                                '"self": "https://api.amp.cisco.com/v1/groups"'
+                              '}'
+                            '}'
+                           '}'
+                        )
+               }
+    return response[k]
+
+def move_computer():
+
+    response = ('{"version": "v1.2.0",'
+                  '"metadata": {'
+                    '"links": {'
+                      '"self": "https://api.amp.cisco.com/v1/computers/ad29d359-dac9-4940-9c7e-c50e6d32ee6f"'
+                    '}'
+                  '},'
+                  '"data": {'
+                    '"connector_guid": "ad29d359-dac9-4940-9c7e-c50e6d32ee6f",'
+                    '"hostname": "Demo_CozyDuke",'
+                    '"active": true,'
+                    '"links": {'
+                      '"computer": "https://api.amp.cisco.com/v1/computers/ad29d359-dac9-4940-9c7e-c50e6d32ee6f",'
+                      '"trajectory": "https://api.amp.cisco.com/v1/computers/ad29d359-dac9-4940-9c7e-c50e6d32ee6f/trajectory",'
+                      '"group": "https://api.amp.cisco.com/v1/groups/b077d6bc-bbdf-42f7-8838-a06053fbd98a"'
+                    '},'
+                    '"connector_version": "4.1.7.10201",'
+                    '"operating_system": "Windows 7, SP 1.0",'
+                    '"internal_ips": ['
+                      '"87.27.44.37"'
+                    '],'
+                    '"external_ip": "93.111.140.204",'
+                    '"group_guid": "b077d6bc-bbdf-42f7-8838-a06053fbd98a",'
+                    '"install_date": "2016-05-20T19:20:00Z",'
+                    '"network_addresses": ['
+                      '{'
+                        '"mac": "09:de:6b:a8:74:10",'
+                        '"ip": "87.27.44.37"'
+                      '}'
+                    '],'
+                    '"policy": {'
+                      '"guid": "89912c9e-8dbd-4c2b-a1d8-dee8a0c2bb29",'
+                      '"name": "Audit Policy"'
+                    '}'
+                  '}'
+                '}'
+    )
+
+    return response
+
 def mocked_amp_client(*args):
 
     class MockResponse:
@@ -386,6 +495,14 @@ def mocked_amp_client(*args):
             self.r._content = get_event_types()
             return self.r.json()
 
+        def get_groups(self, group_guid, name, limit):
+            self.r._content = get_groups(bool(name))
+            return self.r.json()
+
+        def move_computer(self, connector_guid, group_guid):
+            self.r._content = move_computer()
+            return self.r.json()
+
     return MockResponse(*args)
 
 def mocked_session(*args, **kwargs):
@@ -417,6 +534,10 @@ def mocked_session(*args, **kwargs):
                 return MockGetResponse(get_events(), 200)
             elif re.match("^/v1/event_types/$", url):
                 return MockGetResponse(get_event_types(), 200)
+            elif re.match("^/v1/groups/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+                return MockGetResponse(get_groups(False), 200)
+            elif re.match("^/v1/groups/$", url):
+                return MockGetResponse(get_groups(True), 200)
             else:
                 return MockGetResponse(None, 404)
 
@@ -431,6 +552,13 @@ def mocked_session(*args, **kwargs):
 
             if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}", url):
                 return MockGetResponse(delete_file_list_files(), 200)
+            else:
+                return MockGetResponse(None, 404)
+
+        def patch(self, url, **kwargs):
+
+            if re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+                return MockGetResponse(move_computer(), 200)
             else:
                 return MockGetResponse(None, 404)
 
