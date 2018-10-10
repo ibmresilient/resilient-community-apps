@@ -19,6 +19,7 @@ class FunctionPayload:
     self.sn_status = None
     self.sn_action = None
     self.sn_record_link = None
+    self.sn_time_created = None
 
     for input in inputs:
       self.inputs[input] = inputs[input]
@@ -49,13 +50,13 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
 
-        def generate_request_data(res_client, res_helper, incident_id, task_id=None, init_note=None, track_changes=None, extra_info=None):
+        def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, task_id=None, init_note=None, sn_optional_fields=None):
           """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
           request_data = None
 
-          datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
-          datatable.get_data()
-          sn_ref_ids = datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
+          # Get the datatable data and rows
+          res_datatable.get_data()
+          sn_ref_ids = res_datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
 
           if(len(sn_ref_ids) > 0):
             raise ValueError("This item is already in the datatable")
@@ -73,26 +74,20 @@ class FunctionComponent(ResilientComponent):
             # Add incident to the request_data
             request_data = incident.asDict()
 
-          # Add resilient_id and link to the request_data
+          # Add sn_table_name, resilient_id, link and init_note to the request_data
+          request_data["sn_table_name"] = sn_table_name
           request_data["id"] = res_helper.generate_res_id(incident_id, task_id)
           request_data["link"] = res_helper.generate_res_link(incident_id, self.host, task_id)
-
-          # If there is a sn_init_work_note, add to the task
           request_data["sn_init_work_note"] = init_note
 
-          # Indicate whether changes to the related record in ServiceNow should be reflected in Resilient
-          request_data["track_changes_in_resilient"] = track_changes
-
-          # Extend request_data if there is data in 'sn_extend_request'
-          if extra_info is not None and len(extra_info) > 0:
-            temp_dict = {}
-            for d in extra_info:
-              key = d
-              value = extra_info[d]
-              temp_dict[key] = value
-            request_data["extra_info"] = temp_dict
+          # Extend request_data if there is data in 'sn_optional_fields'
+          if sn_optional_fields is not None and len(sn_optional_fields) > 0:
+            fields = []
+            for field in sn_optional_fields:
+              fields.append({"name": field, "value": sn_optional_fields[field]})
+            request_data["sn_optional_fields"] = fields
           else:
-            request_data["extra_info"] = None
+            request_data["sn_optional_fields"] = None
           
           return request_data
 
@@ -104,17 +99,17 @@ class FunctionComponent(ResilientComponent):
             inputs = {
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
+              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"), # text (required)
               "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True), # text
-              "sn_track_changes": res_helper.get_function_input(kwargs, "sn_track_changes", True), # boolean
-              "sn_extend_request": res_helper.get_function_input(kwargs, "sn_extend_request", True) # text, JSON String
+              "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True) # text, JSON String
             }
 
-            # Convert 'sn_extend_request' JSON string to Dictionary
+            # Convert 'sn_optional_fields' JSON string to Dictionary
             try:
-              inputs["sn_extend_request"] = json.loads(inputs["sn_extend_request"])
+              inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"])
             except Exception as e:
               print e
-              raise ValueError("sn_extend_request JSON String is invalid")
+              raise ValueError("sn_optional_fields JSON String is invalid")
             
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
@@ -123,25 +118,25 @@ class FunctionComponent(ResilientComponent):
 
             # Instansiate new Resilient API object
             res_client = self.rest_client()
+            
+            # Instansiate a reference to the ServiceNow Datatable
+            datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
 
             # Generate the request_data
-            request_data = generate_request_data(res_client, res_helper,
+            request_data = generate_sn_request_data(res_client, res_helper, datatable,
                                                 payload.inputs["incident_id"],
+                                                payload.inputs["sn_table_name"],
                                                 payload.inputs["task_id"],
                                                 payload.inputs["sn_init_work_note"],
-                                                payload.inputs["sn_track_changes"],
-                                                payload.inputs["sn_extend_request"])
+                                                payload.inputs["sn_optional_fields"])
 
-            yield StatusMessage("Send Request to ServiceNow")
+            yield StatusMessage("Creating a new record in ServiceNow")
             # Call POST and get response
-            create_in_sn_response = res_helper.POST("/create", data=json.dumps(request_data))
+            create_in_sn_response = res_helper.sn_POST("/create", data=json.dumps(request_data))
 
             if create_in_sn_response is not None:
 
-              yield StatusMessage("Request Successful")
-
-              # Set datatable name
-              data_table_api_name = "sn_external_ticket_status"
+              yield StatusMessage("Record Created")
               
               # Get current time (*1000 as API does not accept int)
               now = int(time.time()*1000)
@@ -149,47 +144,39 @@ class FunctionComponent(ResilientComponent):
               # Generate Link to ServiceNow record
               link = res_helper.SN_HOST + "/" + create_in_sn_response["sn_record_link"]
 
-              # Generate cells for the datatable
-              cells = {
-                "cells" : {
-                  "time": {"value": now},
-                  "res_id": {"value": create_in_sn_response["res_id"]},
-                  "sn_ref_id": {"value": create_in_sn_response["sn_ref_id"]},
-                  "status": {"value": create_in_sn_response["sn_status"]},
-                  "action": {"value": create_in_sn_response["sn_action"]},
-                  "link": {"value": """<a href="{0}">Link</a>""".format(link)}
-                }
-              }
-
               # Add values to payload
               payload.res_id = create_in_sn_response["res_id"]
               payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
               payload.sn_status = create_in_sn_response["sn_status"]
               payload.sn_action = create_in_sn_response["sn_action"]
               payload.sn_record_link = link
+              payload.sn_time_created = now
 
-              # Generate uri to POST datatable row
-              uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(payload.inputs["incident_id"], data_table_api_name)
+              # Generate cells for the datatable
+              cells = [
+                ("time", payload.sn_time_created),
+                ("res_id", payload.res_id),
+                ("sn_ref_id", payload.sn_ref_id),
+                ("status", payload.sn_status),
+                ("action", payload.sn_action),
+                ("link", """<a href="{0}">Link</a>""".format(link))
+              ]
 
               try:
-
-                yield StatusMessage("Adding row to " + data_table_api_name + " datatable")
-
-                # POST row
-                add_row_response = res_client.post(uri, cells)
-
-                # Add row_id to payload
+                # Add row to the datatable
+                add_row_response = datatable.add_row(cells)
                 payload.row_id = add_row_response["id"]
-              except:
+
+              except Exception as e:
                 payload.success = False
-                raise ValueError("Failed to add row to datatable")
+                raise ValueError("Failed to add row to datatable {0}".format(e))
 
             else:
               payload.success = False
 
             results = payload.asDict()
 
-            yield StatusMessage("Complete")
+            log.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

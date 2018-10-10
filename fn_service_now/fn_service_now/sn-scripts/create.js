@@ -3,9 +3,6 @@
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
-	//Declare CONSTANTS
-	var TABLE_NAME_TO_INSERT = 'incident';
-	
 	//Declare global variables
 	var record, response_body = null;
     var req = request.body.data;
@@ -38,64 +35,49 @@
 	}
 	
 	//Function to set all common table column fields
-	function set_record_values(record, request, type, caller_display_name,
-								short_description, description, work_note){
+	function set_record_required_fields(record, request, type, short_description, description){
 		//Set custom table column fields
 		record.setValue("x_261673_resilient_reference_id", request.id);
 		record.setValue("x_261673_resilient_type", type);
 		record.setValue("x_261673_resilient_reference_link", request.link);
-		record.setValue("x_261673_resilient_track_changes", request.track_changes_in_resilient);
+		//record.setValue("x_261673_resilient_track_changes", request.track_changes_in_resilient);
 		
 		//Set system table column fields
- 		record.caller_id.setDisplayValue(caller_display_name);	//Caller has to be a ServiceNow user to display correctly
 		record.short_description = short_description;
 		record.description = description;
 		
 		//If an initial work note is defined, add it
-		if(work_note != null){
-			record.work_notes = work_note;
+		if(request.sn_init_work_note != null){
+			record.work_notes = request.sn_init_work_note;
 		}
 		
 		return record;
 	}
+
+	//Function that sets the optional_fields of the record
+	function set_record_optional_fields(record, fields){
+		for (var i=0; i<fields.length; i++){
+			var field = fields[i];
+			if(record.isValidField(field.name)){
+				record[field.name] = field.value;
+				record.setValue(field.name, field.value);
+			}
+		}
+	}
 	
 	//Create a ServiceNow record in if it is a Resilient Task
 	if(req.type == 'res_task'){	
-		
-		/* IBM Resilient 'Create Task in ServiceNow Request' Payload Example
-		{
-		  "id": "RES-2131-2254750",
-		  "type": "res_task",
-		  "link": "https://192.168.57.3/#incidents/2131?task_id=2254750",
-		  "sn_init_work_note": "This record was created by Admin User [admin@example.com] using our IBM Resilient Systems IR Platform",
-		  "track_changes_in_resilient": true,
-		  "incident_id": 2131,
-		  "task_id": 2254750,
-		  "task_creator": {"name": "Tom Smith", "email": "tomsmith@example.com"},
-		  "task_instructions": "Call the local Police to see if any mobile device has been handed in",
-		  "task_owner": { "name": "Jane Smith", "email": "janesmith@example.com"},
-		  "task_name": "Check with local Police",
-		  "extra_info": {
-			  "assignment_group": "IT Security",
-			  "state": "In Progress"
-		  }
-	   } */
-		
+				
 		//Initialize a new record
-		record = new_record(TABLE_NAME_TO_INSERT);
+		record = new_record(req.sn_table_name);
 		
-		//Set the common values of the record
-		record = set_record_values(record, req, 'Task', req.task_creator.name,
-								   req.task_name, req.task_instructions, req.sn_init_work_note);
+		//Set the required fields of the record
+		record = set_record_required_fields(record, req, 'Task', req.task_name, req.task_instructions);
 		
-		//Set extra_info values
-		//TODO
-		/*
-		if(req.extra_info.type == "firewall_request"){
-			extra_info = req.extra_info
-			record.setValue("ip_to_block", extra_info.ip_to_block)
+		//Set the optional_fields that the user defines in the Resilient pre-process script
+		if(req.sn_optional_fields){
+			set_record_optional_fields(record, req.sn_optional_fields);
 		}
-		*/
 
 		//Insert the record
 		record.insert();
@@ -108,40 +90,17 @@
 	//If it is a Resilient Incident
 	else if(req.type == 'res_incident'){
 		
-		/*
-		{
-		  "id": "RES-2131",
-		  "type": "res_incident",
-		  "link": "https://192.168.57.3/#incidents/2131",
-		  "sn_init_work_note": "This record was created by Admin User [admin@res.com] using our IBM Resilient Systems IR Platform",
-		  "track_changes_in_resilient": true,
-		  "incident_id": 2131,
-		  "incident_creator": { "name": "Angela Valdes", "email": "angela@res.com"},
-		  "incident_name": "James lost his laptop bag in Dublin",
-		  "incident_description": "James was visiting a client and left his laptop bag in the taxi at the \\nairport in Dublin",
-		  "incident_severity": 1,
-		  "incident_date_created": 1533809472000,
-		  "extra_info": {
-			"assignment_group": "IT Security",
-			"state": "In Progress"
-		  }
-		}
-		*/
-		
 		//Initialize a new record
-		record = new_record(TABLE_NAME_TO_INSERT);
+		record = new_record(req.sn_table_name);
+				
+		//Set the required fields of the record
+		record = set_record_required_fields(record, req, 'Incident', req.incident_name, req.incident_description);
 		
-		//Set the common values of the record
-		record = set_record_values(record, req, 'Incident', req.incident_creator.name,
-								   req.incident_name, req.incident_description,
-								   req.sn_init_work_note);
+		//Set the optional_fields that the user defines in the Resilient pre-process script
+		if(req.sn_optional_fields){
+			set_record_optional_fields(record, req.sn_optional_fields);
+		}
 		
-		//Set custom required values for an Incident
-		record.setValue('severity', req.incident_severity);
-		
-		//Set extra_info values
-		//TODO
-
 		//Insert the record
 		record.insert();
 		
@@ -155,8 +114,6 @@
 	
 	response.setBody(response_body);
 	
-// 	See this for creating response object
-// 	https://docs.servicenow.com/bundle/kingston-application-development/page/app-store/dev_portal/API_reference/ScriptableServiceResponseBuilder/concept/c_ScriptableServiceResponseBuilder.html
 	return response;
 
 })(request, response);

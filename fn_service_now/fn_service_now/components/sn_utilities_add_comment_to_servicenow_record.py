@@ -123,7 +123,7 @@ class FunctionComponent(ResilientComponent):
               yield StatusMessage("Add Task Note to ServiceNow")
             
               # Call POST and get response
-              add_in_sn_response = res_helper.POST("/add", data=json.dumps(request_data))
+              add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
               payload.res_id = res_id
               payload.sn_ref_id = sn_ref_id
           

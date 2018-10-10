@@ -42,8 +42,6 @@
 	response_body["sn_ref_id"] = req.sn_ref_id;
 	
 	response.setBody(response_body);
-	
-
 	return response;
 
 })(request, response);

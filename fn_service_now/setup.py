@@ -24,6 +24,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "SnUtilitiesGetSysIdFunctionComponent = fn_service_now.components.sn_utilities_get_sys_id:FunctionComponent",
             "SnUtilitiesAddCommentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_comment_to_servicenow_record:FunctionComponent",
             "SnUtilitiesAddAttachmentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_attachment_to_servicenow_record:FunctionComponent",
             "SnUtilitiesCreateInServicenowFunctionComponent = fn_service_now.components.sn_utilities_create_in_servicenow:FunctionComponent"
