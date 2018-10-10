@@ -15,8 +15,8 @@ dxlclient_config=/home/integration/.resilient/mcafee/dxlclient.config
 # Set topic_listener to False to prevent it from listening on any topics
 topic_listener_on=False
 
-# custom_template_dir is optional and used to specify the directory where new 
-# templates can be found/to override any default templates
-custom_template_dir=
+## custom_template_dir is optional and used to specify the directory where new 
+## templates can be found/to override any default templates
+#custom_template_dir=<*optional* path to directory which contains custom templates>
 """
     return config_data
