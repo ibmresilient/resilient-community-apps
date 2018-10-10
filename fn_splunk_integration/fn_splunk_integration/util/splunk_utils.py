@@ -66,12 +66,12 @@ class SplunkClient(object):
     polling_interval = 5
     max_return = 0
 
-    def __init__(self, host, port, username, password):
+    def __init__(self, host, port, username, password, verify=True):
         """Init splunk_service"""
-        self.splunk_service = self.connect(host, port, username, password)
+        self.splunk_service = self.connect(host, port, username, password, verify)
 
     @staticmethod
-    def connect(host, port, username, password):
+    def connect(host, port, username, password, verify):
         """
         Connect to Splunk
         :param host: hostname for splunk
@@ -83,7 +83,8 @@ class SplunkClient(object):
         return splunk_client.connect(host=host,
                                      port=port,
                                      username=username,
-                                     password=password)
+                                     password=password,
+                                     verify=verify)
 
     def set_timeout(self, timeout):
         self.time_out = timeout
