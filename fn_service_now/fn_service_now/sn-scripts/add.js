@@ -3,15 +3,12 @@
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
-	//Declare CONSTANTS
-	var TABLE_NAME_TO_ADD = 'incident';
-	
 	//Declare global variables
 	var record = null;
 	var response_body = {};
     var req = request.body.data;
 	
-	record = new GlideRecord(TABLE_NAME_TO_ADD);
+	record = new GlideRecord(req.sn_table_name);
 
 	//Get the record using sn_ref_id
 	record.addQuery("number", req.sn_ref_id);
@@ -42,6 +39,7 @@
 	response_body["sn_ref_id"] = req.sn_ref_id;
 	
 	response.setBody(response_body);
+	
 	return response;
 
 })(request, response);

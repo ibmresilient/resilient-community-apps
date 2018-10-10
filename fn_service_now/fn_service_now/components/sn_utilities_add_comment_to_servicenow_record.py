@@ -49,8 +49,8 @@ class FunctionComponent(ResilientComponent):
            # Get the function inputs:
             inputs = {
               "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text
+              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name", True), # text
               "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
-              "note_id": res_helper.get_function_input(kwargs, "note_id"), # number (required)
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "sn_comment_text": res_helper.get_function_input(kwargs, "sn_comment_text"), # text (required)
               "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type")["name"] # select, text (required)
@@ -115,6 +115,7 @@ class FunctionComponent(ResilientComponent):
               # Generate the request_data
               request_data = {
                 "sn_ref_id": sn_ref_id,
+                "sn_table_name": payload.inputs["sn_table_name"],
                 "type": "comment",
                 "sn_comment_text": payload.inputs["sn_comment_text"],
                 "sn_comment_type": payload.inputs["sn_comment_type"]
