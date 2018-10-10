@@ -31,17 +31,17 @@ class Ampclient(object):
             "computer":                     "/"+self.api_version+"/computers/{}",
             "computer_trajectory":          "/"+self.api_version+"/computers/{}/trajectory/",
             "activity":                     "/"+self.api_version+"/computers/activity",
-            "computer_move":                 "/"+self.api_version+"/computers/{}",
+            "computer_move":                "/"+self.api_version+"/computers/{}",
             # File lists
             "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
             "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
             "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}",
             # Events
-            "events":                       "/" + self.api_version + "/events/",
-            "event_types":                  "/" + self.api_version + "/event_types/",
+            "events":                       "/"+self.api_version+"/events/",
+            "event_types":                  "/"+self.api_version+"/event_types/",
             # Groups
-            "groups":                       "/" + self.api_version + "/groups/",
-            "group_by_guid":                "/" + self.api_version + "/groups/{}"
+            "groups":                       "/"+self.api_version+"/groups/",
+            "group_by_guid":                "/"+self.api_version+"/groups/{}"
         }
         self._headers = {"content-type": "application/json", "Accept": "application/json",
                         "Accept-Encoding": "application/gzip", "Authorization": "Basic FILTERED"}
