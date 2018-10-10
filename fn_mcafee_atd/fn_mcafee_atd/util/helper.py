@@ -179,49 +179,48 @@ def submit_url(g, url, submit_type=None):
 def check_atd_status(g, task_id):
     headers = _get_atd_session_headers(g)
 
-    status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, task_id)
-    submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
-    check_status_code(submission_status)
-    submit_json = submission_status.json()
-    if submit_json['results']['istate'] == 4:
-        log.debug("Waiting in queue")
-        return False
-    elif submit_json['results']['istate'] == 3:
-        log.debug("Being analyzed")
-        return False
-    elif submit_json['results']['istate'] == 1:
-        status = submit_json['results']['status']
-        log.debug("ATD Analysis Status: {}".format(status))
-        job_id = submit_json['results']['jobid']
-        jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
-        res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
-        res_json = res.json()
-        severity = res_json.get("severity")
-        if int(severity) < 0:
-            log.error("Severity is {}".format(str(severity)))
-            atd_logout(g.atd_url, headers, g.trust_cert)
+    try:
+        status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, task_id)
+        submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
+        check_status_code(submission_status)
+        submit_json = submission_status.json()
+        if submit_json['results']['istate'] == 4:
+            log.debug("Waiting in queue")
+            return False
+        elif submit_json['results']['istate'] == 3:
+            log.debug("Being analyzed")
+            return False
+        elif submit_json['results']['istate'] == 1:
+            status = submit_json['results']['status']
+            log.debug("ATD Analysis Status: {}".format(status))
+            job_id = submit_json['results']['jobid']
+            jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
+            res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
+            res_json = res.json()
+            severity = res_json.get("severity")
+            if severity < 0:
+                log.error("Severity is {}".format(str(severity)))
+                raise ValueError
+            else:
+                return True
+        elif submit_json['results']['istate'] == 2:
+            status = submit_json['results']['status']
+            log.debug("ATD Analysis Status: {}".format(status))
+            job_id = submit_json['results']['jobid']
+            jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
+            res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
+            res_json = res.json()
+            severity = res_json.get("severity")
+            if severity < 0:
+                log.error("Severity is {}".format(str(severity)))
+                raise ValueError
+            else:
+                atd_logout(g.atd_url, headers, g.trust_cert)
+                return True
+        elif submit_json['results']['istate'] == -1:
             raise ValueError
-        else:
-            atd_logout(g.atd_url, headers, g.trust_cert)
-            return True
-    elif submit_json['results']['istate'] == 2:
-        status = submit_json['results']['status']
-        log.debug("ATD Analysis Status: {}".format(status))
-        job_id = submit_json['results']['jobid']
-        jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
-        res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
-        res_json = res.json()
-        severity = res_json.get("severity")
-        if int(severity) < 0:
-            log.error("Severity is {}".format(str(severity)))
-            atd_logout(g.atd_url, headers, g.trust_cert)
-            raise ValueError
-        else:
-            atd_logout(g.atd_url, headers, g.trust_cert)
-            return True
-    elif submit_json['results']['istate'] == -1:
+    finally:
         atd_logout(g.atd_url, headers, g.trust_cert)
-        raise ValueError
 
 
 # Gets the report from ATD
