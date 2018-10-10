@@ -118,7 +118,7 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'group' or 'groups' results for group_guid '{}', group name '{}' and limit '{}'"
-                                .format(params["group_guid"], params["group_name"], params["limit"]))
+                                .format(params["group_guid"], params["name"], params["limit"]))
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

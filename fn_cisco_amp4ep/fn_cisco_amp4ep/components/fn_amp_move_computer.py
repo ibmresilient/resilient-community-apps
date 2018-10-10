@@ -108,7 +108,7 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            rtn = amp.move_computer(amp_conn_guid, amp_group_guid)
+            rtn = amp.move_computer(params["conn_guid"], params["group_guid"])
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "response" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time}
@@ -117,6 +117,7 @@ class FunctionComponent(ResilientComponent):
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
+            yield FunctionResult(results)
         except Exception:
             log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
             yield FunctionError()
