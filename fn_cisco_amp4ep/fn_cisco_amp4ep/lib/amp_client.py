@@ -7,7 +7,10 @@
 import logging
 import requests
 from requests.auth import HTTPBasicAuth
-import urlparse
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
 import json
 
 LOG = logging.getLogger(__name__)
@@ -60,7 +63,7 @@ class Ampclient(object):
         :return: Response in json format
 
         """
-        url = urlparse.urljoin(self.base_url, uri)
+        url = urljoin(self.base_url, uri)
 
         if data is None:
             data = {}
