@@ -49,6 +49,14 @@ class FunctionComponent(ResilientComponent):
         """Function: A function that sends Task or Incident information to a custom endpoint in ServiceNow in order to create an associated ServiceNow record"""
 
         log = logging.getLogger(__name__)
+        
+        # Convert unicode dict to str dict
+        def _byteify(data):
+          if isinstance(data, unicode):
+            return data.encode("utf-8")
+          
+          if isinstance(data, dict):
+            return { _byteify(key): _byteify(value) for key, value in data.items() }
 
         def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, task_id=None, init_note=None, sn_optional_fields=None):
           """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
@@ -106,7 +114,7 @@ class FunctionComponent(ResilientComponent):
 
             # Convert 'sn_optional_fields' JSON string to Dictionary
             try:
-              inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"])
+              inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=_byteify)
             except Exception as e:
               print e
               raise ValueError("sn_optional_fields JSON String is invalid")

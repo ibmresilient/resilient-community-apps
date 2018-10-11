@@ -3,18 +3,15 @@
 """Function implementation"""
 
 import logging
-import json
-from bs4 import BeautifulSoup
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
+import json
 
 class FunctionPayload:
   """Class that contains the payload sent back to UI and available in the post-processing script"""
   def __init__(self, inputs):
     self.success = True
     self.inputs = {}
-    self.res_id = None
-    self.sn_ref_id = None
 
     for input in inputs:
       self.inputs[input] = inputs[input]
@@ -22,9 +19,9 @@ class FunctionPayload:
   def asDict(self):
     """Return this class as a Dictionary"""
     return self.__dict__
-
+  
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_add_comment_to_servicenow_record"""
+    """Component that implements Resilient function 'sn_utilities_close_in_servicenow"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -36,36 +33,33 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_add_comment_to_servicenow_record")
-    def _sn_utilities_add_comment_to_servicenow_record_function(self, event, *args, **kwargs):
-        """Function: A function that adds a Resilient Note to a ServiceNow record as either a 'Work Note' or 'Additional Comment'"""
+    @function("sn_utilities_close_in_servicenow")
+    def _sn_utilities_close_in_servicenow_function(self, event, *args, **kwargs):
+        """Function: A Function that closes a record in ServiceNow while also supplying the reason for resolving"""
 
         log = logging.getLogger(__name__)
 
         try:
+
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
-
-           # Get the function inputs:
+            
+            # Get the function inputs:
             inputs = {
-              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text
-              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name", True), # text
-              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
-              "sn_comment_text": res_helper.get_function_input(kwargs, "sn_comment_text"), # text (required)
-              "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type")["name"] # select, text (required)
+              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number (optional)
+              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text (optional)
+              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"), # text (required)
+              "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"), # number (required)
+              "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True), # text (optional)
+              "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code", True), # text (required)
             }
 
-            # Convert rich text comment to plain text
-            soup = BeautifulSoup(inputs["sn_comment_text"], 'html.parser')
-            soup = soup.get_text()
-            inputs["sn_comment_text"] = soup.replace(u'\xa0', u' ')
-            
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
 
             yield StatusMessage("Function Inputs OK")
-            
+
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
@@ -87,7 +81,7 @@ class FunctionComponent(ResilientComponent):
               # Get all sn_ref_ids
               sn_ref_ids = datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
 
-              # If task_id is defined, handle a Task Level Note
+              # If task_id is defined, handle closing Task in ServiceNow
               if payload.inputs["task_id"] is not None:
 
                 # Be sure only one relevant entry is in the datatable
@@ -99,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                   payload.success = False
                   raise ValueError("This task has not been created in ServiceNow yet")
 
-              # If an Incident Level Note and only one sn_ref_id, then use that id
+              # If an Incident and only one sn_ref_id, then use that id
               elif len(sn_ref_ids) == 1:
                 sn_ref_id = sn_ref_ids[0]
               
@@ -109,23 +103,22 @@ class FunctionComponent(ResilientComponent):
 
             else:
               pass
-              # Get id from activity field
+              # sn_ref_id is already defined, assuming from activity field
 
             if sn_ref_id is not None:
               # Generate the request_data
               request_data = {
                 "sn_ref_id": sn_ref_id,
                 "sn_table_name": payload.inputs["sn_table_name"],
-                "type": "comment",
-                "sn_comment_text": payload.inputs["sn_comment_text"],
-                "sn_comment_type": payload.inputs["sn_comment_type"]
+                "sn_close_code": payload.inputs["sn_close_code"],
+                "sn_close_notes": payload.inputs["sn_close_notes"],
+                "sn_record_state": payload.inputs["sn_record_state"]
               }
 
-              yield StatusMessage("Add Task Note to ServiceNow")
+              yield StatusMessage("Closing in ServiceNow {0}".format(sn_ref_id))
             
               # Call POST and get response
-              add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
-              payload.res_id = res_id
+              close_in_sn_response = res_helper.sn_POST("/close_record", data=json.dumps(request_data))
               payload.sn_ref_id = sn_ref_id
           
             else:

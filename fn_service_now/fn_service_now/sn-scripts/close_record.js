@@ -15,19 +15,26 @@
 	record.query();
 	record.next();
 
-	//Set note why its resolved and set the state to closed 
-	//[this number is defined in Resilient as changes client to client]
-	record.close_notes = req.sn_close_notes;
-	record.close_code = req.sn_close_code;
-	record.state = req.sn_record_state;
+	//Only update if the sn_record_state is different to the records current state
+	if(req.sn_record_state != record.state){
+		
+		//Set the attributes required to close a record
+		record.close_notes = req.sn_close_notes;
+		record.close_code = req.sn_close_code;
+		record.state = req.sn_record_state;
+		
+		//Update the record
+		record.update();
+		
+		response_body["sn_ref_id"] = req.sn_ref_id;
+		response.setBody(response_body);
 	
-	//Update the record
-	record.update();
-	
-	response_body["sn_ref_id"] = req.sn_ref_id;
-	
-	response.setBody(response_body);
-	
+	}
+	else{
+		err_msg = req.sn_ref_id + " state is already " + record.state + ". Cannot update the record.";
+		return new sn_ws_err.BadRequestError(err_msg);
+	}
+
 	return response;
 
 })(request, response);
