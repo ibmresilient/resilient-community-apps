@@ -71,9 +71,19 @@ class DxlComponentSubscriber(ResilientComponent):
                     response = create_incident(get_connected_resilient_client(config), inc_data)
                     log.info("Created incident {}".format(str(response.get("id"))))
 
-            for event_topic, template in topic_template_dict.iteritems():
-                self.client.add_event_callback(event_topic, ResilientEventSubscriber(template))
-                log.info("Resilient DXL Subscriber listening on {} ...".format(event_topic))
+            # Python 2.x solution
+            try:
+                for event_topic, template in topic_template_dict.iteritems():
+                    self.client.add_event_callback(event_topic.encode('ascii', 'ignore'),
+                                                   ResilientEventSubscriber(template.encode('ascii', 'ignore')))
+                    log.info("Resilient DXL Subscriber listening on {} ...".format(event_topic))
+            # Python 3.6 solution
+            except AttributeError:
+                for event_topic, template in topic_template_dict.items():
+                    # Ensure unicode and bytes are converted to String
+                    self.client.add_event_callback(event_topic.encode('ascii', 'ignore').decode("utf-8"),
+                                                   ResilientEventSubscriber(template.encode('ascii', 'ignore').decode("utf-8")))
+                    log.info("Resilient DXL Subscriber listening on {} ...".format(event_topic))
 
         except Exception as e:
             log.error(e)
