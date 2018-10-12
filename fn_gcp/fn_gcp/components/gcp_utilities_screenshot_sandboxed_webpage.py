@@ -18,7 +18,6 @@ try: #python3
     from urllib.request import urlopen
 except: #python2
     from urllib import urlopen
-    print("Using python 2")
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'gcp_utilities_screenshot_sandboxed_webpage"""
@@ -71,6 +70,7 @@ class FunctionComponent(ResilientComponent):
                 """
                 with requests.Session() as session:
                     session.proxies = proxies
+                    # Prepare a header
                     headers = {
                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
                         'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
@@ -78,13 +78,13 @@ class FunctionComponent(ResilientComponent):
                                }
                     # Prepare request string
                     request_string = 'https://{}-{}.cloudfunctions.net/{}?url={}'.format(GCP_REGION,GCP_PROJECT_ID, GCP_FUNCTION_NAME, gcp_url)
-                    log.debug("Request string {}".format(request_string))
+                    yield StatusMessage("Sending request to Cloud Function : {}".format(request_string))
                     # Make the HTTP request through the session.
                     res = session.get(request_string, headers=headers, stream= True)
 
                     # Is the status code in the 2XX family?
                     if int(res.status_code / 100) == 2:
-
+                        # Read the stream for image data
                         base64Screenshot = base64.b64encode(res.raw.read())
                         
                     elif res.status_code == 401:
@@ -105,14 +105,14 @@ class FunctionComponent(ResilientComponent):
                 log.info(str(e))
                 raise ValueError("Encountered issue when invoking the Googlecloud Function")
 
+            # Parse the input URL to get only the host. Full URL gives issues with Attachment names
             input_url = urlparse(gcp_url)
 
             results = {
-                "input_url": input_url.netloc,
+                "input_url": input_url.hostname,
                 "success": True if base64Screenshot else False,
                 "base64Screenshot" : base64Screenshot
             }
-            log.info(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
