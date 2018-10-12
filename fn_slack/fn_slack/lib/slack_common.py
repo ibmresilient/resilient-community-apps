@@ -3,11 +3,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import logging
 import json
-try:
-    from json import JSONDecodeError
-except:
-    JSONDecodeError = ValueError
-
 from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import *
 from slackclient import SlackClient
@@ -86,10 +81,9 @@ class SlackUtils(object):
         """
         try:
             payload = convert_slack_details_to_payload(slack_text, resoptions)
-        except JSONDecodeError: # if slack_text isn't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
+        except ValueError: # if slack_text isn't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
             payload = slack_text
 
-        # start processing
         results = self.slack_client.api_call(
             "chat.postMessage",
             channel=self.get_channel_id(),
@@ -99,6 +93,27 @@ class SlackUtils(object):
             parse="full",  # In full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
             link_names=1,  # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
             mrkdown=slack_markdown
+        )
+        LOG.debug(results)
+
+        return results
+
+    def slack_post_attachment(self, attachment_content, attachment_data):
+        """
+        Function uploads file to your slack_channel.
+        :param attachment_content:
+        :param attachment_data:
+        :return:
+        """
+
+        results = self.slack_client.api_call(
+            "files.upload",
+            channels=self.get_channel_id(),
+            file=attachment_content,
+            as_user=False,
+            filename=attachment_data.get("name"),
+            filetype=attachment_data.get("content_type"),
+            title="Incident ID {} - type {} attachment".format(attachment_data.get("inc_id"), attachment_data.get("type"))
         )
         LOG.debug(results)
 
@@ -385,15 +400,14 @@ class SlackUtils(object):
                         # 5 write in a temp file
                         data = data_for_template(username, reply_count, msg_time, text, is_msg_parent)
                         output_data = map_values(archive_template, data)
+
                         temp_file.write(output_data.encode('utf-8'))
 
                 temp_file.close()
-
                 new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file)
 
             except ValueError as err:
                 raise err
-
             finally:
                 os.unlink(temp_file.name)
 
@@ -448,13 +462,13 @@ class SlackUtils(object):
         else:
             return "Public"
 
-    def create_row_in_datatable(self, res_client, incident_id, task_id, thread_id):
+    def create_row_in_datatable(self, res_client, incident_id, task_id, conversation_url):
         """
         Create a row in Resilient datatable.
         :param res_client:
         :param incident_id:
         :param task_id:
-        :param thread_id:
+        :param conversation_url:
         :return:
         """
         # Get current time (*1000 as API does not accept int)
@@ -462,9 +476,6 @@ class SlackUtils(object):
 
         # Create res_id
         res_id = generate_res_id(incident_id, task_id)
-
-        # generate a permalink URL to join this conversation
-        conversation_url = self.get_permalink(thread_id)
 
         # Generate cells for the datatable
         cells = {
@@ -502,7 +513,7 @@ def build_payload(dataDict, resoptions):
             payload += "\n"
 
         if valDict['type'] == 'string' and valDict['data']:
-            payload += '{}: {}'.format(key, valDict['data'])
+            payload += u'{}: {}'.format(key, valDict['data'])
 
         elif valDict['type'] == 'incident' and valDict['data']:
             payload += '{}: {}'.format(key, build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), valDict['data']))
@@ -510,7 +521,7 @@ def build_payload(dataDict, resoptions):
         elif valDict['type'] == 'richtext' and valDict['data']:
             cleaned_data = clean_html(valDict['data'])
             if len(cleaned_data) > 0:
-                payload += '{}: {}'.format(key, cleaned_data)
+                payload += u'{}: {}'.format(key, cleaned_data)
 
         elif valDict['type'] == 'datetime' and valDict['data'] and valDict['data'] != 0:
             payload += '{}: {}'.format(key, build_timestamp(valDict['data']))
@@ -552,8 +563,8 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         payload = build_payload(data, resoptions)
         LOG.debug(payload)
         return payload
-    except JSONDecodeError:
-        raise JSONDecodeError
+    except ValueError:
+        raise ValueError
 
 
 def get_template_file_path(path):
@@ -670,10 +681,47 @@ class ConversationsDatatable():
 
 
 def generate_res_id(incident_id, task_id=None):
-    """If incident_id and task_id are valid, returns "RES-1001-2002"
-      Else if task_id is None, returns "RES-1001" """
-
+    """
+    If incident_id and task_id are valid, returns "RES-1001-2002"
+    Else if task_id is None, returns "RES-1001"
+    :param incident_id:
+    :param task_id:
+    :return:
+    """
     res_id = [RES_PREFIX, str(incident_id)]
     if task_id is not None:
         res_id.append(str(task_id))
     return "-".join(res_id)
+
+
+def get_file_attachment_data(res_client, incident_id, artifact_id, task_id, attachment_id):
+    """
+    Call the Resilient REST API to get the specific attachment content, type and title.
+    :param res_client:
+    :param incident_id:
+    :param artifact_id:
+    :param task_id:
+    :param attachment_id:
+    :return:
+    """
+
+    if incident_id and artifact_id:
+        content_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+        data_uri = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
+    elif attachment_id:
+        if task_id:
+            content_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            data_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+        elif incident_id:
+            content_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+            data_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+        else:
+            raise ValueError("task_id or incident_id must be specified with attachment")
+    else:
+        raise ValueError("artifact or attachment or incident id must be specified")
+
+    # Get the attachment content and data
+    content = res_client.get_content(content_uri)
+    attachment_data = res_client.get(data_uri)
+
+    return content, attachment_data

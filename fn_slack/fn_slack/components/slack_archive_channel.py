@@ -51,16 +51,17 @@ class FunctionComponent(ResilientComponent):
             res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
             LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
 
+            # Channel name validation - At this point channel needs to be defined
             if res_associated_channel_name is None:
-                yield FunctionError("There is no slack_channel name associated with Incident or Task. There is no channel available to be archived.")
+                raise FunctionError("There is no slack_channel name associated with Incident or Task. There is no channel available to be archived.")
 
             slack_utils.find_channel_by_name(res_associated_channel_name)
             if slack_utils.get_channel() is None:
-                yield FunctionError(
+                raise FunctionError(
                     "There is no private or public channel named {} in your workspace. ".format(res_associated_channel_name))
 
             if slack_utils.is_channel_archived():
-                yield FunctionError(
+                raise FunctionError(
                     "Channel {} is already marked as archived.".format(res_associated_channel_name))
             else:
                 yield StatusMessage(
@@ -72,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message warning 'Channel is set to be archived' was added to Slack.")
             else:
-                yield FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
+                raise FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
 
             # get the channel history
             messages = slack_utils.get_channel_complete_history()
@@ -83,14 +84,14 @@ class FunctionComponent(ResilientComponent):
             if new_attachment is not None:
                 yield StatusMessage("Channel's chat history was uploaded as an attachment.")
             else:
-                yield FunctionError("Failed creating an attachment.")
+                raise FunctionError("Failed creating an attachment.")
 
             # Archive channel
             results = slack_utils.archive_channel()
             if results.get("ok"):
                 yield StatusMessage("Channel {} has been archived.".format(res_associated_channel_name))
             else:
-                yield FunctionError("Archiving channel failed: " + json.dumps(results))
+                raise FunctionError("Archiving channel failed: " + json.dumps(results))
 
             results = {"channel": res_associated_channel_name}
 

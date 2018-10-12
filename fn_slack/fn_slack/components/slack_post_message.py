@@ -68,15 +68,15 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['api_token', 'username'], self.options)
 
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            input_channel_name = kwargs.get("slack_channel")  # text
-            slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean
-            slack_participant_emails = kwargs.get("slack_participant_emails")  # text
-            slack_text = kwargs.get("slack_text")  # text
-            slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean
-            slack_as_user = kwargs.get("slack_as_user")   # Boolean
-            slack_username = kwargs.get("slack_username")  # text
+            incident_id = kwargs.get("incident_id")  # number (required)
+            task_id = kwargs.get("task_id")  # number (optional)
+            input_channel_name = kwargs.get("slack_channel")  # text (optional)
+            slack_is_private = kwargs.get("slack_is_channel_private")  # Boolean (optional)
+            slack_participant_emails = kwargs.get("slack_participant_emails")  # text (optional)
+            slack_text = kwargs.get("slack_text")  # text (required)
+            slack_mrkdown = kwargs.get("slack_mrkdwn")  # Boolean (optional)
+            slack_as_user = kwargs.get("slack_as_user")   # Boolean (optional)
+            slack_username = kwargs.get("slack_username")  # text (optional)
 
             LOG.debug("incident_id: %s", incident_id)
             LOG.debug("task_id: %s", task_id)
@@ -101,9 +101,9 @@ class FunctionComponent(ResilientComponent):
             res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
             LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
 
-            # One more validation - channel needs to be defined
+            # Channel name validation - At this point channel needs to be defined
             if input_channel_name is None and res_associated_channel_name is None:
-                yield FunctionError("Slack_channel name is missing or empty.")
+                raise FunctionError("There is no slack_channel name associated with Incident or Task. There is no channel available to post messages in.")
 
             # Pick the right channel
             slack_channel_name = None
@@ -122,17 +122,17 @@ class FunctionComponent(ResilientComponent):
             if slack_utils.get_channel():
                 # validate if your input param 'slack_is_private' matches channel's type, if not stop the workflow
                 if slack_is_private and not slack_utils.is_channel_private():
-                    yield FunctionError("The existing channel #{} you are posting to is a public channel. "
+                    raise FunctionError("The existing channel #{} you are posting to is a public channel. "
                                         "To post to this channel please change the input parameter "
                                         "'slack_is_channel_private' "
                                         "to 'No' or create a new private channel.".format(slack_channel_name))
-                elif not slack_is_private and slack_utils.is_channel_private():
-                    yield FunctionError("The existing channel #{} you are posting to is a private channel. "
+                elif slack_is_private is False and slack_utils.is_channel_private():
+                    raise FunctionError("The existing channel #{} you are posting to is a private channel. "
                                         "To post to this channel please change the input parameter "
                                         "'slack_is_channel_private' "
                                         "to 'Yes' or create a new public channel.".format(slack_channel_name))
                 elif slack_utils.is_channel_archived():
-                    yield FunctionError("Channel {} is archived.".format(slack_channel_name))
+                    raise FunctionError("Channel {} is archived.".format(slack_channel_name))
             else:
                 # validate slack_is_private
                 validate_fields(['slack_is_channel_private'], kwargs)
@@ -157,7 +157,7 @@ class FunctionComponent(ResilientComponent):
                         elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
                             yield StatusMessage("{} user is not a member of your workspace.".format(email))
                         else:
-                            yield FunctionError("Invite users failed: " + json.dumps(results_user_id))
+                            raise FunctionError("Invite users failed: " + json.dumps(results_user_id))
 
                 if user_id_list:
                     # invite users to a channel
@@ -168,26 +168,30 @@ class FunctionComponent(ResilientComponent):
                     elif not results_users_invited.get("ok") and results_users_invited.get("error") == "already_in_channel":
                         yield StatusMessage("Invited user is already in #{} channel".format(slack_channel_name))
                     else:
-                        yield FunctionError("Invite users failed: " + json.dumps(results_users_invited))
+                        raise FunctionError("Invite users failed: " + json.dumps(results_users_invited))
 
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_text, slack_as_user,
                                                                 slack_username, slack_mrkdown, def_username)
             if results_msg_posted.get("ok"):
-                yield StatusMessage("Message added to slack.")
+                yield StatusMessage("Message added to Slack.")
             else:
-                yield FunctionError("Message add failed: " + json.dumps(results_msg_posted))
+                raise FunctionError("Message add failed: " + json.dumps(results_msg_posted))
+
+            # generate a permalink URL to join this conversation
+            conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
 
             # Create a 1 to 1 connection between res_id and slack_channel_id if there isn't one
             if res_associated_channel_name is None:
                 yield StatusMessage("Adding row to Slack conversations datatable")
-                datatable_row = slack_utils.create_row_in_datatable(res_client, incident_id, task_id, results_msg_posted.get("ts"))
+                datatable_row = slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
                 if datatable_row is not None:
                     yield StatusMessage("Row was added to Slack conversations datatable")
                 else:
-                    yield FunctionError("Failed to add row to datatable.")
+                    raise FunctionError("Failed to add row to datatable.")
 
             results = {"channel": slack_channel_name,
-                       "channel_id": results_msg_posted.get("channel")}
+                       "channel_id": results_msg_posted.get("channel"),
+                       "url": conversation_url}
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
