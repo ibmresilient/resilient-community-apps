@@ -4,10 +4,11 @@ import requests
 def _make_rest_call(config, api_url, api_params=None, method='get'):
     api_url = config['server'] + api_url
     api_auth = (config['username'], config['password'])
+    verify = config.get('verifyflag', 'True') == 'True'
     if method == 'get':
-        res = requests.get(api_url, auth=api_auth, params=api_params)
+        res = requests.get(api_url, verify=verify, auth=api_auth, params=api_params)
     else:
-        res = requests.post(api_url, auth=api_auth, json=api_params)
+        res = requests.post(api_url, verify=verify, auth=api_auth, json=api_params)
     res.raise_for_status()
     return res.json()
 

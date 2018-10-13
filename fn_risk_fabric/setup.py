@@ -8,7 +8,7 @@ setup(
     version='1.0.0',
     license='Resilient License',
     author='Bay Dynamics',
-    author_email='support@resilientsystems.com',
+    author_email='support@baydynamics.com',
     description="Resilient Circuits Components for 'fn_risk_fabric'",
     long_description="Resilient Circuits Components for 'fn_risk_fabric'",
     install_requires=[

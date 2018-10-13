@@ -48,3 +48,4 @@ Set the following values in the config file under the `[fn_risk_fabric]` section
     server=https://www.riskfabric.com
     username=xxxxxxx
     password=xxxxxxx
+    verifyFlag=True
