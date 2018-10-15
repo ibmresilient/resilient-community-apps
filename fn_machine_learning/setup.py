@@ -26,7 +26,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "MlPredictUrgencyFunctionComponent = fn_machine_learning.components.ml_predict_urgency:FunctionComponent"
+            "MlPredictFunctionComponent = fn_machine_learning.components.ml_predict:FunctionComponent",         
         ],
         "resilient.circuits.configsection": ["gen_config = fn_machine_learning.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_machine_learning.util.customize:customization_data"],
