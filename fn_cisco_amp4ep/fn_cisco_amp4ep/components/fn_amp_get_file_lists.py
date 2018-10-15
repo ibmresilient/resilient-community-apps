@@ -19,15 +19,15 @@ from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of package fn_cisco_amp4ep.
 
-    The Function does a Cisco AMP for endpoints query operation takes the following parameter:
+    The Function takes the following parameter:
         amp_scd_name, amp_limit, amp_offset
 
     An example of a set of query parameter might look like the following:
-            amp_scd_name = None
-            amp_limit = None
-            amp_offset = None
+            amp_scd_name    = None
+            amp_limit       = None
+            amp_offset      = None
 
-    The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
+    The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
      "file_lists": {    u'version': u'v1.2.0',
@@ -101,4 +101,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
             yield FunctionError()

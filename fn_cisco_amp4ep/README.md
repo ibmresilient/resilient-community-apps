@@ -46,6 +46,14 @@ fn_amp_get_computer
 fn_amp_get_computers
 fn_amp_get_computer_trajectory
 fn_amp_get_activity
+fn_amp_get_file_lists
+fn_amp_get_file_list_files
+fn_amp_set_file_list_files
+fn_amp_delete_file_list_files
+fn_amp_get_event_types
+fn_amp_get_events
+fn_amp_get_groups
+fn_amp_move_computer
 ```
 ## Sample workflows have been provided:
 ```

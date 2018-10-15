@@ -75,6 +75,20 @@ def validate_domain_name(domain_or_hostname):
             return False
     return True
 
+def validate_is_int(val):
+    """"Validate value is in a valid int format.
+
+    :param val: Value to test
+    :return : boolean
+
+     """
+
+    try:
+        int(val)
+        return True
+    except ValueError:
+        return False
+
 def validate_params(params):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.
 
@@ -88,11 +102,15 @@ def validate_params(params):
     for (k, v) in params.copy().items():
         if re.match("^(limit|offset)$", k) and v is not None and not type(v) == int:
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
-        if re.match("^conn_guid$", k) and v is not None and not UUID_PATTERN.match(v):
+        if re.match("^conn_guid|group_guid$", k) and v is not None and not UUID_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^(internal_ip|external_ip)$", k) and v is not None and not IP_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^hostname$", k) and v is not None  and not validate_domain_name(v):
+            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+        if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
+            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+        if re.match("^event_type$", k) and v is not None and not validate_is_int(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
 
     # If any entry has "None" string change to None value.
