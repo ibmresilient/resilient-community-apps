@@ -1,0 +1,61 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+"""Function implementation"""
+
+import logging
+from fn_geocoding.util.request_common import execute_call
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
+
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'geocoding_get_address"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("fn_geocoding", {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_geocoding", {})
+
+    @function("geocoding")
+    def _geocoding_get_address_function(self, event, *args, **kwargs):
+        """Function: two function types implemented: address and latlng.
+           For an address, return coordinate information.
+           For coordinates, return an address.
+        """
+        try:
+            # Get the function parameters:
+            geocoding_source = self.get_select_param(kwargs.get("geocoding_source"))  # String
+            geocoding_data = kwargs.get("geocoding_data")  # String
+
+            log = logging.getLogger(__name__)
+            log.info("geocoding_source: %s", geocoding_source)
+            log.info("geocoding_data: %s", geocoding_data)
+
+            if geocoding_source == "lnglat":
+                geocoding_data = geocoding_data.strip()
+
+            yield StatusMessage("starting...")
+
+            url = self.options['url']
+            payload = { "key": self.options['api_key'],
+                        geocoding_source: geocoding_data
+                      }
+
+            log.debug(payload)
+            response = execute_call(log, "get", url, None, None, payload, True, None, None)
+
+            results = {
+                "response": response
+            }
+
+            yield StatusMessage("done...")
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception:
+            yield FunctionError()
