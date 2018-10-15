@@ -147,5 +147,26 @@ def analyze(y_true, y_pred):
     return re
 
 
+def count_values(csv_file, field, in_log=None):
+    """
+    Read samples from the csv_file, and count values of the given field
+    :param csv_file:
+    :param field:
+    :return:
+    """
+    log = in_log if in_log else logging.getLogger(__name__)
+
+    dataf = pds.read_csv(csv_file,
+                         sep=',',
+                         # usecols=["name", "id", "description", "hostname", "incident_type_ids", "confirmed", "negative_pr_likely", "nist_attack_vectors", predict],
+                         # usecols=[predict, "id", "confirmed", "exposure_type_id"],
+                         dtype={field: object},
+                         skipinitialspace=True,
+                         quotechar='"',
+                         error_bad_lines=True)
+    value_counts = dataf[field].value_counts()
+    log.debug("Value counts of {} in {} is {}".format(field, csv_file, value_counts))
+
+    return value_counts
 
 

@@ -79,6 +79,12 @@ def main():
             -c  Optional falg, same as -c of build above
         3. view: show summary of a saved model
             -i  Required flag, pointing to a saved model file
+        4. download: Download incidents and save as CSV file
+            -o  Required flag, file of saved incidents in CSV
+        5. count_value: show value count for a given field. Normally this is the field to be predict.
+                        This can help to determine whether the dataset is imbalance regarding this field
+            -i  Required flag, pointing to a CSV file with samples
+            -f  Required flag, the field to check value count
     :return:
     """
     parser = argparse.ArgumentParser()
@@ -96,6 +102,10 @@ def main():
                                            help="Rebuild an saved machine model")
     view_parser = subparsers.add_parser("view",
                                         help="Manage Resilient Circuits as a service with Windows or Supervisord")
+    download_parser = subparsers.add_parser("download",
+                                            help="Download incidents and save into a CSV file")
+    count_value_parser = subparsers.add_parser("count_value",
+                                               help="Count value of a field")
 
     # 1. build process
     #
@@ -133,6 +143,26 @@ def main():
                              help="Model file to rebuild",
                              default=None)
 
+    # 4. Download
+    #
+    #   -o file to save
+    #
+    download_parser.add_argument("-o", "--output",
+                                 help="CSV file to save samples",
+                                 default=None)
+
+    # 5. Value count
+    #
+    #   -i  input CSV file with samples
+    #   -f  field to check
+    #
+    count_value_parser.add_argument("-i", "--input",
+                                    help="CSV file with samples",
+                                    default=None)
+    count_value_parser.add_argument("-f", "--field",
+                                    help="value of which field to count",
+                                    default=None)
+
     args, unknown_args = parser.parse_known_args()
     fh = logging.FileHandler("res-ml.log")
     fh.setLevel(logging.INFO)
@@ -149,30 +179,45 @@ def main():
         rebuild_model(args, opt_parser)
     elif args.cmd == "view":
         view_model(args)
+    elif args.cmd == "download":
+        csv_file = args.output
+        download_incidents_csv(opt_parser, csv_file)
+    elif args.cmd == "count_value":
+        count_value(args)
     else:
         LOG.info("Unknown command")
 
 
-def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
+def count_value(args):
     """
-    Build a model
-    :param model_file: Save built model to this file
-    :param opt_parser: information from app.config
-    :param csv_file: CSV file with samples
-    :param rebuilding: True if rebuilding saved model
+    Count values
+    :param args:
+    :return:
+    """
+    csv_file = args.input
+    field = args.field
+
+    value_counts = model_utils.count_values(csv_file, field)
+    LOG.info("------------")
+    LOG.info("Value Counts")
+    LOG.info("------------")
+    LOG.info("Value counts for {} in {}:".format(field, csv_file))
+    LOG.info("{}".format(value_counts))
+
+def download_incidents_csv(opt_parser, csv_file):
+    """
+
+    :param opt_parser:
     :return:
     """
     res_opt = opt_parser.opts.get(RESILIENT_SECTION)
-    ml_opt = opt_parser.opts.get(MACHINE_LEARNING_SECTION)
-
     host = res_opt.get("host", None)
     email = res_opt.get("email", None)
     password = res_opt.get("password", None)
     org = res_opt.get("org", None)
 
-    mlconfig = MlConfig()
-
-    if host and org and email and password and not csv_file:
+    num_inc = 0
+    if host and org and email and password:
         url = "https://{}:443".format(host)
         verify = True
         try:
@@ -198,12 +243,31 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
         # The optional max_count controls how many samples to process. The conversion from
         # json to CSV will stop once reaches this limit.
         num_inc = resilient_utils.get_incidents(res_client=resilient_client,
-                                                filename=SAMPLE_CSV_FILE,
+                                                filename=csv_file,
                                                 max_count=max_count)
-        LOG.info("Saved {} samples into {}".format(num_inc, SAMPLE_CSV_FILE))
 
+    LOG.info("Saved {} samples into {}".format(num_inc, csv_file))
+
+    return num_inc
+
+
+def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
+    """
+    Build a model
+    :param model_file: Save built model to this file
+    :param opt_parser: information from app.config
+    :param csv_file: CSV file with samples
+    :param rebuilding: True if rebuilding saved model
+    :return:
+    """
+    res_opt = opt_parser.opts.get(RESILIENT_SECTION)
+    ml_opt = opt_parser.opts.get(MACHINE_LEARNING_SECTION)
+
+    mlconfig = MlConfig()
+
+    if not csv_file:
+        num_inc = download_incidents_csv(opt_parser, SAMPLE_CSV_FILE)
         mlconfig.number_samples = num_inc
-
         csv_file = SAMPLE_CSV_FILE
     elif not csv_file:
         LOG.error("You need to specify a CSV file for samples")
