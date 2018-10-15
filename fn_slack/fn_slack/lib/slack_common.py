@@ -13,6 +13,7 @@ import resilient_circuits.template_functions as template_functions
 from os.path import join, pardir
 import os
 import time
+import warnings
 
 LOG = logging.getLogger(__name__)
 
@@ -67,6 +68,87 @@ class SlackUtils(object):
         else:
             return None
 
+    def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id):
+        """
+        If channel_name is NOT specified in the function input, method will perform a lookup
+        for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
+        slack_channel, method will use found channel name for either searching for an existing Slack channel in
+        Slack Workspace (api call) or create a new Slack channel (api call).
+
+        If channel_name is specified in the function input, method will search for an existing Slack channel in
+        Slack Workspace (api call) or create a new Slack channel (api call) with the specified channel_name.
+        If channel_name is specified and there is also the associated channel fond, method will ignore the associated
+        one and post to the input one.
+
+        :param input_channel_name:
+        :param slack_is_private:
+        :param res_client:
+        :param incident_id:
+        :param task_id:
+        :return: Method returns a channel_name.
+        """
+
+        # If user doesn't specify a channel name, use the incident/task associated channel (the default channel).
+        res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
+        LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
+
+        # Channel name validation - Channel name needs to be defined
+        if input_channel_name is None and res_associated_channel_name is None:
+            raise IntegrationError("There is no slack_channel name associated with Incident or Task available to post messages in")
+
+        # Pick the right channel to post in
+        slack_channel_name = None
+
+        if input_channel_name is None and res_associated_channel_name:
+            # if there wasn't channel specified in the activity prompt,
+            # post to the_channel associated with the Incident or Task
+            slack_channel_name = res_associated_channel_name
+
+        elif input_channel_name:
+            # if there was channel specified in the activity prompt,
+            # post to to this one and ignore the associated one
+            slack_channel_name = input_channel_name
+
+            if res_associated_channel_name:
+                # If the associated channel exists raise a Warning so we can yield it as a StatusMessage:
+                warnings.warn("This Incident/Task has an association with Slack channel #{}, your message was "
+                              "posted in a different channel #{}".format(res_associated_channel_name, input_channel_name))
+
+        # find or create a new channel
+        self.find_channel_by_name(slack_channel_name)
+
+        # validation for exiting channels
+        if self.get_channel():
+            warnings.warn("Channel #{} was found in your Workspace".format(slack_channel_name))
+
+            # validate if your function input param 'slack_is_private' matches channel's type, if not stop the workflow
+            if slack_is_private and not self.is_channel_private():
+                raise IntegrationError("You've indicated the channel you are posting to should be private. "
+                                       "The existing channel #{} you are posting to is a public channel. "
+                                       "To post to this channel change the input parameter 'slack_is_channel_private' "
+                                       "to 'No'.".format(slack_channel_name))
+            elif slack_is_private is False and self.is_channel_private():
+                raise IntegrationError("You've indicated the channel you are posting to should be public."
+                                       "The existing channel #{} you are posting to is a private channel. "
+                                       "To post to this channel change the input parameter 'slack_is_channel_private' "
+                                       "to 'Yes'.".format(slack_channel_name))
+            elif self.is_channel_archived():
+                raise IntegrationError("Channel {} is archived".format(slack_channel_name))
+
+        # create a new channel
+        else:
+            # validate slack_is_private is defined, check for None only, False is ok
+            if slack_is_private is None:
+                raise ValueError("Required field 'slack_is_private' is missing or empty")
+
+            self.slack_create_channel(slack_channel_name, slack_is_private)
+
+            # rewrite slack_channel_name just in case Slack validation modifies the submitted channel name
+            slack_channel_name = self.get_channel_name()
+            warnings.warn("Channel #{} was created in your Workspace".format(slack_channel_name))
+
+        return slack_channel_name, res_associated_channel_name is not None
+
     def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
         """
         Process the slack post
@@ -119,6 +201,28 @@ class SlackUtils(object):
 
         return results
 
+    def find_user_ids_based_on_email(self, slack_participant_emails):
+        """
+        Find user ids based on their emails.
+        :param slack_participant_emails:
+        :return: user_id_list
+        """
+        user_id_list = []
+        list_emails = slack_participant_emails.split(",")
+        for email in list_emails:
+            email = email.strip()  # making sure to exclude ' ' or ''
+            if email:
+                results_user_id = self.lookup_user_by_email(email)
+
+                if results_user_id.get("ok") and results_user_id.get("user"):
+                    user_id_list.append(results_user_id.get("user").get("id"))
+                elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
+                    warnings.warn("'{}' user is not a member of your workspace".format(email))
+                else:
+                    raise IntegrationError("Invite users failed: " + json.dumps(results_user_id))
+
+        return user_id_list
+
     def invite_users_to_channel(self, user_id_list):
         """
         Method invites 1-30 users to a public or private channel.
@@ -134,7 +238,12 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        return results
+        if results.get("ok"):
+            warnings.warn("Users invited to channel #{}".format(self.get_channel_name()))
+        elif not results.get("ok") and results.get("error") == "already_in_channel":
+            warnings.warn("Invited user is already in #{} channel".format(self.get_channel_name()))
+        else:
+            raise IntegrationError("Invite users failed: " + json.dumps(results))
 
     def find_channel_by_name(self, slack_channel_name):
         """
@@ -234,7 +343,7 @@ class SlackUtils(object):
             self.channel = results.get("channel")
 
         else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
+            raise IntegrationError("Slack error response: " + results.get("error", ""))
 
     def get_permalink(self, thread_id):
         """
@@ -253,7 +362,33 @@ class SlackUtils(object):
             return results.get("permalink")
 
         else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
+            raise IntegrationError("Slack error response: " + results.get("error", ""))
+
+    def get_ts_from_file_upload_results(self, file_upload_results):
+        """
+        Extract ts from file.upload json results.
+        :param file_upload_results:
+        :return:
+        """
+        file_ts = None
+        file_data = file_upload_results.get("file")
+        if file_data:
+            shares = file_data.get("shares")
+            if shares:
+                channel_upload_data = None
+
+                if shares.get("private"):
+                    channel_upload_data = shares.get("private").get(self.get_channel_id())
+                elif shares.get("public"):
+                    channel_upload_data = shares.get("public").get(self.get_channel_id())
+                else:
+                    return channel_upload_data  # no other type supported
+
+                first_data_entry = channel_upload_data[0]
+                if first_data_entry:
+                    file_ts = first_data_entry.get("ts")
+
+        return file_ts
 
     def _get_channel_parent_message_history(self, cursor=None):
         """
@@ -306,7 +441,7 @@ class SlackUtils(object):
 
             return has_more_results, cursor
         else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
+            raise IntegrationError("Slack error response: " + results.get("error", ""))
 
     def get_channel_complete_history(self, cursor=None):
         """
@@ -360,7 +495,7 @@ class SlackUtils(object):
             return results.get("user")
 
         else:
-            raise ValueError("Slack error response: " + results.get("error", ""))
+            raise IntegrationError("Slack error response: " + results.get("error", ""))
 
     def save_conversation_history_as_attachment(self, res_client, messages, incident_id, task_id):
         """
@@ -384,7 +519,7 @@ class SlackUtils(object):
                         if subtype == "bot_message":
                             username = message["username"]  # Bot's name is stored in "username" property
                         else:
-                            username = self.get_user_info(message.get("user")).get("name")
+                            username = self.get_user_info(message.get("user")).get("name") # FIXME soon deprecated! If you want to maintain a mapping of display names and user IDs, look for the display_name listed under profile and note the updated timestamp indicating the last time the user record was updated.
 
                         # 2 were there any replies - only parent messages can have replies
                         reply_count = message.get("reply_count")
@@ -464,18 +599,23 @@ class SlackUtils(object):
 
     def create_row_in_datatable(self, res_client, incident_id, task_id, conversation_url):
         """
-        Create a row in Resilient datatable.
+        Create an association, a 1 to 1 connection, between res_id and slack_channel_id -a  row in Resilient datatable.
         :param res_client:
         :param incident_id:
         :param task_id:
         :param conversation_url:
         :return:
         """
+        warnings.warn("Adding row to Slack conversations datatable.")
+
         # Get current time (*1000 as API does not accept int)
         now = int(time.time() * 1000)
 
         # Create res_id
         res_id = generate_res_id(incident_id, task_id)
+
+        # URL might not always be available
+        permalink = """<a href="{0}">Link</a>""".format(conversation_url) if conversation_url else "N/A"
 
         # Generate cells for the datatable
         cells = {
@@ -484,7 +624,7 @@ class SlackUtils(object):
                 "slack_db_res_id": {"value": res_id},
                 "slack_db_channel": {"value": self.get_channel_name()},
                 "slack_db_channel_type": {"value": self.get_channel_type()},
-                "slack_db_permalink": {"value": """<a href="{0}">Link</a>""".format(conversation_url)}
+                "slack_db_permalink": {"value": permalink}
             }
         }
 
@@ -493,11 +633,10 @@ class SlackUtils(object):
 
         try:
             # POST row
-            add_row_response = res_client.post(uri, cells)
+            res_client.post(uri, cells)
+            warnings.warn("Row was added to Slack conversations datatable")
         except Exception as ex:
             raise ValueError("Failed to add row to {} datatable: {}".format(DATA_TABLE_API_NAME, ex))
-
-        return add_row_response
 
 
 def build_payload(dataDict, resoptions):
@@ -530,7 +669,7 @@ def build_payload(dataDict, resoptions):
             payload += '{}: {}'.format(key, build_boolean(valDict['data'], true_value='Yes', false_value='No'))
 
         elif valDict['data']:
-            raise IntegrationError("Invalid type: "+ valDict['type'])
+            raise IntegrationError("Invalid type: " + valDict['type'])
 
     return payload
 
@@ -671,7 +810,7 @@ class ConversationsDatatable():
             slack_db_res_id = cells.get("slack_db_res_id")
             res_id = slack_db_res_id.get("value") if slack_db_res_id else None
             if res_id is None:
-                raise ValueError("{} datatable is missing 'slack_db_res_id' column.".format(DATA_TABLE_API_NAME))
+                raise ValueError("{} datatable is missing 'slack_db_res_id' column".format(DATA_TABLE_API_NAME))
 
             if res_id_to_search == res_id:
                 slack_db_channel = cells.get("slack_db_channel")
