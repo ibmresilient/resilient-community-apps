@@ -29,7 +29,7 @@ class FunctionComponent(ResilientComponent):
             FIXME - You can upload files as bot user with Bot User Token!"""
         try:
             validate_fields(['api_token'], self.options)
-            validate_fields(['incident_id', 'attachment_id'], kwargs)
+            validate_fields(['incident_id'], kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number (required)
@@ -101,7 +101,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Attachment file retrieved")
 
             # Upload file to Slack
-            results = slack_utils.slack_post_attachment(attachment_content, attachment_data)
+            results = slack_utils.slack_post_attachment(attachment_content, attachment_data, slack_text)
 
             if results.get("ok"):
                 yield StatusMessage("Attachment uploaded to Slack")

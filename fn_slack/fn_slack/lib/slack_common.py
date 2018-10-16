@@ -180,22 +180,35 @@ class SlackUtils(object):
 
         return results
 
-    def slack_post_attachment(self, attachment_content, attachment_data):
+    def slack_post_attachment(self, attachment_content, attachment_data, slack_text):
         """
         Function uploads file to your slack_channel.
         :param attachment_content:
         :param attachment_data:
+        :param slack_text
         :return:
         """
+        attachment = attachment_data.get("attachment")
+        if attachment:
+            file_name = attachment.get("name") if attachment else None
+            file_type = attachment.get("content_type") if attachment else None
+            incident_id = attachment.get("inc_id") if attachment else None
+            artifact_type = attachment.get("type") if attachment else None
+        else:
+            file_name = attachment_data.get("name")
+            file_type = attachment_data.get("content_type")
+            incident_id = attachment_data.get("inc_id")
+            artifact_type = attachment_data.get("type")
 
         results = self.slack_client.api_call(
             "files.upload",
             channels=self.get_channel_id(),
             file=attachment_content,
             as_user=False,
-            filename=attachment_data.get("name"),
-            filetype=attachment_data.get("content_type"),
-            title="Incident ID {} - type {} attachment".format(attachment_data.get("inc_id"), attachment_data.get("type"))
+            filename=file_name,
+            filetype=file_type,
+            title="Incident id {} {} attachment {}".format(incident_id, artifact_type, file_name),
+            initial_comment=slack_text
         )
         LOG.debug(results)
 

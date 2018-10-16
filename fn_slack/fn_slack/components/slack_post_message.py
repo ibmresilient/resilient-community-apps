@@ -7,7 +7,6 @@ This function creates a Slack message based on a Resilient incident, it's tasks,
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
 - Inviting users to conversations
-- Slack markdown capability
 - posting messages displaying authorship
 """
 
