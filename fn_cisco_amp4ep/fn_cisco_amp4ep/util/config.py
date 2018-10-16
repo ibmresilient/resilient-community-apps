@@ -16,5 +16,6 @@ api_version=v1
 client_id=<client id>
 # The api_tokenwill be generated on the Cisco AMP foer endpoints dashboard and will be will be in uuid format.
 api_token=<api token>
+query_limit=1000
 """
     return config_data

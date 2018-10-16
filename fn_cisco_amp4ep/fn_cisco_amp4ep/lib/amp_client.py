@@ -27,6 +27,7 @@ class Ampclient(object):
         self.client_id = options.get("client_id")
         self.api_token = options.get("api_token")
         self.api_version = options.get("api_version")
+        self.query_limit = int(options.get("query_limit"))
         # Rest request endpoints
         self._endpoints = {
             # Computers
@@ -40,7 +41,7 @@ class Ampclient(object):
             "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
             "file_lists_files_by_sha256":   "/"+self.api_version+"/file_lists/{}/files/{}",
             # Events
-            "events":                       "/"+self.api_version+"/events/",
+            "events":                       "/"+self.api_version+"/events",
             "event_types":                  "/"+self.api_version+"/event_types/",
             # Groups
             "groups":                       "/"+self.api_version+"/groups/",
@@ -130,7 +131,8 @@ class Ampclient(object):
         """
 
         uri = self._endpoints["computer_trajectory"].format(connector_guid)
-        r_json = self._req(uri)
+        params = {"limit": limit}
+        r_json = self._req(uri, params=params)
         return r_json
 
     def get_activity(self, q, limit=None, offset=None):
@@ -285,3 +287,43 @@ class Ampclient(object):
         data = json.dumps({"group_guid": group_guid})
         r_json = self._req(uri, method="PATCH", data=data)
         return r_json
+
+    def get_paginated_total(self, get_method, **params):
+        """Get multiple pages of paginated data and using 'query_limit' property to limit returned results.
+
+        :param: get_method: Reference to instance get method e.g. self.get_activity, self.get_events etc.
+        :param: params: Parameters for get method .
+
+        :return Result in json format.
+
+        """
+
+        limit_max_count = self.query_limit
+
+        if "limit" in params and params["limit"] is not None:
+            if int(params["limit"]) < self.query_limit:
+                limit_max_count = int(params["limit"])
+            else:
+                params["limit"] = self.query_limit
+        else:
+            if self.query_limit < 500: # Default limit 500, reset limit to query_limit if less than 500.
+                params["limit"] = self.query_limit
+
+        rtn = get_method(**params)
+        if "results" in rtn["metadata"]:
+            # The 'get_computer_trajectory' Rest call doesn't return a 'results' sub-dict so assuming it returns all
+            # results in that case.
+            max_count = rtn["metadata"]["results"]["total"]
+            if limit_max_count < max_count:
+                max_count = limit_max_count
+
+            offset = rtn["metadata"]["results"]["items_per_page"]
+            current_item_count = rtn["metadata"]["results"]["current_item_count"]
+            while max_count > current_item_count:
+                params["offset"] = offset
+                rtn_sub = get_method(**params)
+                rtn["data"].extend(rtn_sub["data"])
+                rtn["metadata"] = rtn_sub["metadata"]
+                current_item_count += rtn["metadata"]["results"]["current_item_count"]
+                offset += offset
+        return rtn

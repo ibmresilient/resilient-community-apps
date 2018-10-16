@@ -88,7 +88,7 @@ class FunctionComponent(ResilientComponent):
 
             amp = Ampclient(self.options)
 
-            rtn = amp.get_file_lists(**params)
+            rtn = amp.get_paginated_total(amp.get_file_lists, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time}

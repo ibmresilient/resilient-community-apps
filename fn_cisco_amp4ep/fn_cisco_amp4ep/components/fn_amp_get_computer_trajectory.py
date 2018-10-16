@@ -101,13 +101,13 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco AMP for endpoints get computers trajectory ...")
 
-            params = {"conn_guid": amp_conn_guid, "limit": amp_limit }
+            params = {"connector_guid": amp_conn_guid, "limit": amp_limit }
 
             validate_params(params)
 
             amp = Ampclient(self.options)
 
-            rtn = amp.get_computer_trajectory(amp_conn_guid, amp_limit)
+            rtn = amp.get_paginated_total(amp.get_computer_trajectory, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time}
