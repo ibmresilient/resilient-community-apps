@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Starting")
             helper = GCPHelper(self.options)
-            # Get Xforce params
+            # Get GCP params
             HTTPS_PROXY, HTTP_PROXY,GCP_REGION,GCP_PROJECT_ID,GCP_FUNCTION_NAME = helper.setup_config()
             yield StatusMessage("Gathered config")
             # Get the function parameters:
