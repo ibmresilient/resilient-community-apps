@@ -16,9 +16,10 @@ except:
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
-DOMAIN_REGEX = "((?=[a-z0-9-_]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}" # AMP seems to allow underscore
+DOMAIN_REGEX = "((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}((\.)(xn--)?" \
+               "([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,}))*"
 # in hostnames
-DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX))
+DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX), re.IGNORECASE)
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CLI_ID_PATTERN = re.compile(r"^[a-fA-F0-9]{20}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
