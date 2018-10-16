@@ -56,7 +56,7 @@ class FunctionComponent(ResilientComponent):
         Default settings for posting messages are:
         - parse="full", full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
         - link_names=1, find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
-                        FIXME! Soon to be deprecated!
+                        # TODO! Soon to be deprecated!
                         Slack apps and their bot users should not use the username field when authoring a message.
                         The username is part of your app's configuration and will not always be settable at runtime.
 

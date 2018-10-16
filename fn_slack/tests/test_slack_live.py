@@ -71,7 +71,7 @@ class TestSlack(object):
             slack_utils = SlackUtils("fake_api_key")
             slack_utils.find_channel_by_name(slack_test_channel)
             assert False
-        except ValueError:
+        except IntegrationError:
             assert True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
@@ -109,7 +109,7 @@ class TestSlack(object):
             slack_utils = SlackUtils("fake_api_key")
             slack_utils.slack_create_channel(slack_test_channel, False)
             assert False
-        except ValueError:
+        except IntegrationError:
             assert True
 
     @pytest.mark.parametrize("channel,expected_channel_id", [
@@ -260,18 +260,21 @@ class TestSlack(object):
                     "name": "test-channel"
                 }
         }
-        results = slack_utils.invite_users_to_channel(user_ids_list)
-        mocked_api_call.assert_called_with(
-            "conversations.invite",
-            channel="C0EAQDV4Z",
-            users=expected_ids
-        )
-        assert results.get("ok") is True
+        try:
+            slack_utils.invite_users_to_channel(user_ids_list)
+            mocked_api_call.assert_called_with(
+                "conversations.invite",
+                channel="C0EAQDV4Z",
+                users=expected_ids
+            )
+            assert True
+        except IntegrationError:
+            assert False
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_invite_users_to_channel_error_pass(self, mocked_api_call):
-        """ Test invite Slack users to a channel - already in channel error"""
-        print("Test invite Slack users to a channel - already in channel error\n")
+        """ Test invite Slack users to a channel - already in channel error pass"""
+        print("Test invite Slack users to a channel - already in channel error pass\n")
 
         # Setup channel first
         mocked_channel = {
@@ -286,10 +289,10 @@ class TestSlack(object):
             "ok": False,
             "error": "already_in_channel"
         }
-        results = slack_utils.invite_users_to_channel(["W1234567890"])
-        if not results.get("ok") and results.get("error") == "already_in_channel":
+        try:
+            slack_utils.invite_users_to_channel(["W1234567890"])
             assert True
-        else:
+        except IntegrationError:
             assert False
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
@@ -310,10 +313,10 @@ class TestSlack(object):
             "ok": False,
             "error": "something_else"
         }
-        results = slack_utils.invite_users_to_channel(["W1234567890"])
-        if not results.get("ok") and results.get("error") == "already_in_channel":
+        try:
+            slack_utils.invite_users_to_channel(["W1234567890"])
             assert False
-        else:
+        except IntegrationError:
             assert True
 
     @pytest.mark.parametrize("input,output", [
@@ -491,7 +494,7 @@ class TestSlack(object):
         try:
             slack_utils.get_permalink("fake_thread_id")
             assert False
-        except ValueError:
+        except IntegrationError:
             assert True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
@@ -566,7 +569,7 @@ class TestSlack(object):
             slack_utils = SlackUtils("fake_api_key")
             slack_utils.get_user_info("W012A3CDE")
             assert False
-        except ValueError:
+        except IntegrationError:
             assert True
 
     @pytest.mark.parametrize("results,expected_has_more,expected_cursor", [
@@ -594,7 +597,7 @@ class TestSlack(object):
             slack_utils = SlackUtils("fake_api_key")
             slack_utils._get_next_cursor_for_next_page(results)
             assert False
-        except ValueError:
+        except IntegrationError:
             assert True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')

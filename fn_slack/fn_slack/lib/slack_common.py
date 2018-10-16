@@ -532,7 +532,7 @@ class SlackUtils(object):
                         if subtype == "bot_message":
                             username = message["username"]  # Bot's name is stored in "username" property
                         else:
-                            username = self.get_user_info(message.get("user")).get("name") # FIXME soon deprecated! If you want to maintain a mapping of display names and user IDs, look for the display_name listed under profile and note the updated timestamp indicating the last time the user record was updated.
+                            username = self.get_user_info(message.get("user")).get("name")  # TODO! soon deprecated! If you want to maintain a mapping of display names and user IDs, look for the display_name listed under profile and note the updated timestamp indicating the last time the user record was updated.
 
                         # 2 were there any replies - only parent messages can have replies
                         reply_count = message.get("reply_count")

@@ -26,7 +26,7 @@ class FunctionComponent(ResilientComponent):
     @function("slack_post_attachment")
     def _slack_post_attachment(self, event, *args, **kwargs):
         """Function: Function uploads Incident, Task or Artifact attachment to Slack channel.
-            FIXME - You can upload files as bot user with Bot User Token!"""
+            TODO! - You can upload files as bot user with Bot User Token!"""
         try:
             validate_fields(['api_token'], self.options)
             validate_fields(['incident_id'], kwargs)
