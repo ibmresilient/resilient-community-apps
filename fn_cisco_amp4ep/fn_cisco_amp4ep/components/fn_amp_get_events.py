@@ -15,7 +15,6 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
-from fn_cisco_amp4ep.components.mock_artifacts import get_events, get_events_2
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_events of package fn_cisco_amp4ep.
