@@ -46,6 +46,10 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'api_token' not set.")
     if func.options["api_token"] is None or not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'.")
+    if not "query_limit" in func.options:
+        raise Exception("Mandatory config setting 'query_limit' not set.")
+    if func.options["query_limit"] is None or not validate_is_int(func.options["query_limit"]):
+        raise ValueError("Invalid format for config setting 'query_limit'.")
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
