@@ -47,6 +47,9 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("gcp_url: %s", gcp_url)
 
+            if gcp_url is None:
+                raise FunctionError("GCP_URL evaluates to NoneType. GCP_URL must be provided to run this function.")
+
             # Setup proxies parameter if exist in appconfig file
             proxies = {}
 
@@ -70,20 +73,21 @@ class FunctionComponent(ResilientComponent):
                 """
                 with requests.Session() as session:
                     session.proxies = proxies
-                    # Prepare a header
+                    # Preparea user-agent and accept header instead of using requests user-agent
                     headers = {
                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
-                        'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-
-                               }
+                        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                        }
                     # Prepare request string
                     request_string = 'https://{}-{}.cloudfunctions.net/{}?url={}'.format(GCP_REGION,GCP_PROJECT_ID, GCP_FUNCTION_NAME, gcp_url)
+
                     yield StatusMessage("Sending request to Cloud Function : {}".format(request_string))
                     # Make the HTTP request through the session.
-                    res = session.get(request_string, headers=headers, stream= True)
+                    res = session.get(request_string, headers=headers, stream=True)
 
                     # Is the status code in the 2XX family?
                     if int(res.status_code / 100) == 2:
+                        yield StatusMessage("Got a response back in the 200 family, parsing result")
                         # Read the stream for image data
                         base64Screenshot = base64.b64encode(res.raw.read())
                         
@@ -93,17 +97,13 @@ class FunctionComponent(ResilientComponent):
                         raise FunctionError("403 Forbidden response received by API")
 
                     else:
-                        log.info(res.text)
-                        log.info(res.reason)
+                        log.error(res.text)
+                        log.error(res.reason)
                         yield StatusMessage("Request made. Status Code: {}; Reason {}".format(res.status_code, res.reason))
 
-                """
-                if base64Screenshot and base64ScreenshotFromURLLib:
-                    log.info("Result for comaparison between libraries, same output? : {}".format(base64Screenshot == base64ScreenshotFromURLLib))
-                """
             except Exception as e:
                 log.info(str(e))
-                raise ValueError("Encountered issue when invoking the Googlecloud Function")
+                raise ValueError("Encountered issue when invoking the Google Cloud Function; Reason {}".format(str(e)))
 
             # Parse the input URL to get only the host. Full URL gives issues with Attachment names
             input_url = urlparse(gcp_url)
