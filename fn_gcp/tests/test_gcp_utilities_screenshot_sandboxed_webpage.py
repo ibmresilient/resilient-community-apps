@@ -52,4 +52,19 @@ class TestGcpUtilitiesScreenshotSandboxedWebpage:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+
+    def test_config_gather_failure(self):
+        """Should raise an exception when trying to gather config options without patching.
+        This is because config.py does not have usuable config values and that is where they are pulled from when not in a resilient-circuits enviroment."""
+        helper = GCPHelper({})
+        with pytest.raises(Exception):
+            helper.setup_config()
+
+    def test_config_gather_success(self):
+        """When patching the gathering of config values to return Non-Null values,
+        the function should not fail or raise any errors """
+        helper = GCPHelper({})
+        with patch.object(GCPHelper, "get_config_option", lambda x, y, z=None: "10", True):
+            helper.setup_config()
+
                 
