@@ -12,7 +12,6 @@ Many of the features of posting a Slack message are under customer control inclu
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.slack_common import *
-import warnings
 
 LOG = logging.getLogger(__name__)
 
@@ -52,6 +51,16 @@ class FunctionComponent(ResilientComponent):
           "Confirmed": {"type": "boolean", "data": "1"},
           "Start Date": {"type": "datetime", "data": 158949393}
         }
+
+        If channel_name is NOT specified in the function input, method will perform a lookup
+        for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
+        slack_channel, method will use found channel name for either searching for an existing Slack channel in
+        Slack Workspace (api call) or create a new Slack channel (api call).
+
+        If channel_name is specified in the function input, method will search for an existing Slack channel in
+        Slack Workspace (api call) or create a new Slack channel (api call) with the specified channel_name.
+        If channel_name is specified and there is also the associated channel fond, method will ignore the associated
+        one and post to the input one.
 
         Default settings for posting messages are:
         - parse="full", full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
@@ -100,65 +109,33 @@ class FunctionComponent(ResilientComponent):
             # Initialize Resilient API object
             res_client = self.rest_client()
 
-            with warnings.catch_warnings(record=True) as warning_messages:
-                warnings.simplefilter("always", UserWarning)
-                # Find or create a channel
-                # ------------------------
-                slack_channel_name, has_association_in_slack_db = \
-                    slack_utils.find_or_create_channel(input_channel_name, slack_is_private, res_client, incident_id,
-                                                       task_id)
-                # Check the warning message and yield StatusMessage.
-                for w in warning_messages:
-                    usr_msg = w.message
-                    if usr_msg and usr_msg.message:
-                        yield StatusMessage(usr_msg.message)
+            # Find or create a channel
+            slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
+                input_channel_name, slack_is_private, res_client, incident_id, task_id)
 
-            user_id_list = None
-            with warnings.catch_warnings(record=True) as warning_messages:
-                warnings.simplefilter("always", UserWarning)
+            # Add users to the channel
+            if slack_participant_emails:
                 # Find user ids based on their emails
-                # -----------------------------------
-                if slack_participant_emails:
-                    user_id_list = slack_utils.find_user_ids_based_on_email(slack_participant_emails)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
+                user_id_list = slack_utils.find_user_ids_based_on_email(slack_participant_emails)
 
-            if user_id_list:
-                with warnings.catch_warnings(record=True) as warning_messages:
-                    warnings.simplefilter("always", UserWarning)
-                    # Add users to the channel
-                    # ------------------------
+                # invite users to a channel
+                if user_id_list:
                     slack_utils.invite_users_to_channel(user_id_list)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
 
+            # Post a message
             results_msg_posted = slack_utils.slack_post_message(self.resoptions, slack_text, slack_as_user,
                                                                 slack_username, slack_mrkdown, def_username)
-            if results_msg_posted.get("ok"):
-                yield StatusMessage("Message added to Slack.")
-            else:
-                raise FunctionError("Message add failed: " + json.dumps(results_msg_posted))
 
-            # generate a permalink URL to join this conversation
+            # Generate a permalink URL to join this conversation
             conversation_url = slack_utils.get_permalink(results_msg_posted.get("ts"))
 
+            # Create an association if there isn't one
             if has_association_in_slack_db is False:
-                with warnings.catch_warnings(record=True) as warning_messages:
-                    warnings.simplefilter("always", UserWarning)
-                    # Create an association if there isn't one
-                    # ----------------------------------------
-                    slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
+                slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
+
+            # Yield Status Messages
+            for warn in slack_utils.get_warnings():
+                yield StatusMessage(warn)
 
             results = {"channel": slack_channel_name,
                        "url": conversation_url}

@@ -13,7 +13,6 @@ import resilient_circuits.template_functions as template_functions
 from os.path import join, pardir
 import os
 import time
-import warnings
 
 LOG = logging.getLogger(__name__)
 
@@ -27,11 +26,10 @@ RES_PREFIX = "RES"
 
 class SlackUtils(object):
 
-    slack_client = None
-    channel = None
-
     def __init__(self, api_token):
         self.slack_client = SlackClient(api_token)
+        self.channel = None
+        self.warnings = []
 
     def get_channel(self):
         """
@@ -68,18 +66,32 @@ class SlackUtils(object):
         else:
             return None
 
+    def get_warnings(self):
+        """
+        Return instance variable warnings.
+        :return: warnings
+        """
+        return self.warnings
+
+    def add_warning(self, warn):
+        """
+        Add warn to warnings.
+        :param warn:
+        :return:
+        """
+        if warn:
+            self.warnings.append(warn)
+
     def find_or_create_channel(self, input_channel_name, slack_is_private, res_client, incident_id, task_id):
         """
         If channel_name is NOT specified in the function input, method will perform a lookup
         for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
         slack_channel, method will use found channel name for either searching for an existing Slack channel in
         Slack Workspace (api call) or create a new Slack channel (api call).
-
         If channel_name is specified in the function input, method will search for an existing Slack channel in
         Slack Workspace (api call) or create a new Slack channel (api call) with the specified channel_name.
         If channel_name is specified and there is also the associated channel fond, method will ignore the associated
         one and post to the input one.
-
         :param input_channel_name:
         :param slack_is_private:
         :param res_client:
@@ -87,14 +99,14 @@ class SlackUtils(object):
         :param task_id:
         :return: Method returns a channel_name.
         """
-
         # If user doesn't specify a channel name, use the incident/task associated channel (the default channel).
         res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
         LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
 
         # Channel name validation - Channel name needs to be defined
         if input_channel_name is None and res_associated_channel_name is None:
-            raise IntegrationError("There is no slack_channel name associated with Incident or Task available to post messages in")
+            self.add_warning("There is no slack_channel name associated with Incident or Task available "
+                             "to post messages in")
 
         # Pick the right channel to post in
         slack_channel_name = None
@@ -110,28 +122,29 @@ class SlackUtils(object):
             slack_channel_name = input_channel_name
 
             if res_associated_channel_name:
-                # If the associated channel exists raise a Warning so we can yield it as a StatusMessage:
-                warnings.warn("This Incident/Task has an association with Slack channel #{}, your message was "
-                              "posted in a different channel #{}".format(res_associated_channel_name, input_channel_name))
+                # If the associated channel exists yield a StatusMessage
+                self.add_warning("This Incident or Task has an association with Slack channel #{}, your message "
+                                 "was posted in a different channel #{}".format(res_associated_channel_name,
+                                                                                input_channel_name))
 
-        # find or create a new channel
+        # find the channel in Slack Workspace
         self.find_channel_by_name(slack_channel_name)
 
-        # validation for exiting channels
+        # validation for channels existing in Slack Workspace
         if self.get_channel():
-            warnings.warn("Channel #{} was found in your Workspace".format(slack_channel_name))
+            self.add_warning("Channel #{} was found in your Workspace".format(slack_channel_name))
 
-            # validate if your function input param 'slack_is_private' matches channel's type, if not stop the workflow
+            # validate if your fun input param 'slack_is_private' matches channel's type, if not stop the workflow
             if slack_is_private and not self.is_channel_private():
                 raise IntegrationError("You've indicated the channel you are posting to should be private. "
                                        "The existing channel #{} you are posting to is a public channel. "
-                                       "To post to this channel change the input parameter 'slack_is_channel_private' "
-                                       "to 'No'.".format(slack_channel_name))
+                                       "To post to this channel change the input parameter "
+                                       "'slack_is_channel_private' to 'No'.".format(slack_channel_name))
             elif slack_is_private is False and self.is_channel_private():
-                raise IntegrationError("You've indicated the channel you are posting to should be public."
+                raise IntegrationError("You've indicated the channel you are posting to should be public. "
                                        "The existing channel #{} you are posting to is a private channel. "
-                                       "To post to this channel change the input parameter 'slack_is_channel_private' "
-                                       "to 'Yes'.".format(slack_channel_name))
+                                       "To post to this channel change the input parameter "
+                                       "'slack_is_channel_private' to 'Yes'.".format(slack_channel_name))
             elif self.is_channel_archived():
                 raise IntegrationError("Channel {} is archived".format(slack_channel_name))
 
@@ -145,7 +158,7 @@ class SlackUtils(object):
 
             # rewrite slack_channel_name just in case Slack validation modifies the submitted channel name
             slack_channel_name = self.get_channel_name()
-            warnings.warn("Channel #{} was created in your Workspace".format(slack_channel_name))
+            self.add_warning("Channel #{} was created in your Workspace".format(slack_channel_name))
 
         return slack_channel_name, res_associated_channel_name is not None
 
@@ -178,7 +191,11 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        return results
+        if results.get("ok"):
+            self.add_warning("Message added to Slack")
+            return results
+        else:
+            raise IntegrationError("Message add failed: " + json.dumps(results))
 
     def slack_post_attachment(self, attachment_content, attachment_data, slack_text):
         """
@@ -204,7 +221,6 @@ class SlackUtils(object):
             "files.upload",
             channels=self.get_channel_id(),
             file=attachment_content,
-            as_user=False,
             filename=file_name,
             filetype=file_type,
             title="Incident id {} {} attachment {}".format(incident_id, artifact_type, file_name),
@@ -212,7 +228,11 @@ class SlackUtils(object):
         )
         LOG.debug(results)
 
-        return results
+        if results.get("ok"):
+            self.add_warning("Attachment uploaded to Slack")
+            return results
+        else:
+            raise IntegrationError("File upload failed: " + json.dumps(results))
 
     def find_user_ids_based_on_email(self, slack_participant_emails):
         """
@@ -220,19 +240,19 @@ class SlackUtils(object):
         :param slack_participant_emails:
         :return: user_id_list
         """
+        # Find user ids based on their emails
         user_id_list = []
-        list_emails = slack_participant_emails.split(",")
-        for email in list_emails:
-            email = email.strip()  # making sure to exclude ' ' or ''
-            if email:
-                results_user_id = self.lookup_user_by_email(email)
 
-                if results_user_id.get("ok") and results_user_id.get("user"):
-                    user_id_list.append(results_user_id.get("user").get("id"))
-                elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
-                    warnings.warn("'{}' user is not a member of your workspace".format(email))
-                else:
-                    raise IntegrationError("Invite users failed: " + json.dumps(results_user_id))
+        emails = [email for email in slack_participant_emails.split(",") if email.strip()]  # making sure to exclude '  ' or ''
+        for email in emails:
+            results_user_id = self.lookup_user_by_email(email)
+
+            if results_user_id.get("ok") and results_user_id.get("user"):
+                user_id_list.append(results_user_id.get("user").get("id"))
+            elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
+                self.add_warning("User i{} s not a member of your workspace".format(email))
+            else:
+                raise IntegrationError("Invite users failed: " + json.dumps(results_user_id))
 
         return user_id_list
 
@@ -252,9 +272,9 @@ class SlackUtils(object):
         LOG.debug(results)
 
         if results.get("ok"):
-            warnings.warn("Users invited to channel #{}".format(self.get_channel_name()))
+            self.add_warning("Users invited to channel #{}".format(self.get_channel_name()))
         elif not results.get("ok") and results.get("error") == "already_in_channel":
-            warnings.warn("Invited user is already in #{} channel".format(self.get_channel_name()))
+            self.add_warning("Invited user is already in #{} channel".format(self.get_channel_name()))
         else:
             raise IntegrationError("Invite users failed: " + json.dumps(results))
 
@@ -619,8 +639,6 @@ class SlackUtils(object):
         :param conversation_url:
         :return:
         """
-        warnings.warn("Adding row to Slack conversations datatable.")
-
         # Get current time (*1000 as API does not accept int)
         now = int(time.time() * 1000)
 
@@ -647,9 +665,44 @@ class SlackUtils(object):
         try:
             # POST row
             res_client.post(uri, cells)
-            warnings.warn("Row was added to Slack conversations datatable")
+            self.add_warning("Row was added to {} datatable".format(DATA_TABLE_API_NAME))
         except Exception as ex:
             raise ValueError("Failed to add row to {} datatable: {}".format(DATA_TABLE_API_NAME, ex))
+
+    def get_file_attachment_data(self, res_client, incident_id, artifact_id, task_id, attachment_id):
+        """
+        Call the Resilient REST API to get the specific attachment content, type and title.
+        :param res_client:
+        :param incident_id:
+        :param artifact_id:
+        :param task_id:
+        :param attachment_id:
+        :return:
+        """
+
+        if incident_id and artifact_id:
+            content_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+            data_uri = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
+        elif attachment_id:
+            if task_id:
+                content_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+                data_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+            elif incident_id:
+                content_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+                data_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+            else:
+                raise ValueError("task_id or incident_id must be specified with attachment")
+        else:
+            raise ValueError("artifact or attachment or incident id must be specified")
+
+        try:
+            # Get the attachment content and data
+            content = res_client.get_content(content_uri)
+            attachment_data = res_client.get(data_uri)
+            self.add_warning("Attachment file retrieved")
+            return content, attachment_data
+        except Exception as ex:
+            raise ValueError("Failed to get attachment from Resilient: {}".format(ex))
 
 
 def build_payload(dataDict, resoptions):
@@ -844,36 +897,3 @@ def generate_res_id(incident_id, task_id=None):
     if task_id is not None:
         res_id.append(str(task_id))
     return "-".join(res_id)
-
-
-def get_file_attachment_data(res_client, incident_id, artifact_id, task_id, attachment_id):
-    """
-    Call the Resilient REST API to get the specific attachment content, type and title.
-    :param res_client:
-    :param incident_id:
-    :param artifact_id:
-    :param task_id:
-    :param attachment_id:
-    :return:
-    """
-
-    if incident_id and artifact_id:
-        content_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
-        data_uri = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
-    elif attachment_id:
-        if task_id:
-            content_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-            data_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-        elif incident_id:
-            content_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
-            data_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-        else:
-            raise ValueError("task_id or incident_id must be specified with attachment")
-    else:
-        raise ValueError("artifact or attachment or incident id must be specified")
-
-    # Get the attachment content and data
-    content = res_client.get_content(content_uri)
-    attachment_data = res_client.get(data_uri)
-
-    return content, attachment_data

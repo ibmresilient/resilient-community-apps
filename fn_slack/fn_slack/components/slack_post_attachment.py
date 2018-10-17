@@ -58,73 +58,39 @@ class FunctionComponent(ResilientComponent):
             # Initialize Resilient API object
             res_client = self.rest_client()
 
-            with warnings.catch_warnings(record=True) as warning_messages:
-                warnings.simplefilter("always", UserWarning)
-                # Find or create a channel
-                # ------------------------
-                slack_channel_name, has_association_in_slack_db = \
-                    slack_utils.find_or_create_channel(input_channel_name, slack_is_private, res_client, incident_id,
-                                                       task_id)
-                # Check the warning message and yield StatusMessage.
-                for w in warning_messages:
-                    usr_msg = w.message
-                    if usr_msg and usr_msg.message:
-                        yield StatusMessage(usr_msg.message)
+            # Find or create a channel
+            slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
+                input_channel_name, slack_is_private, res_client, incident_id, task_id)
 
-            user_id_list = None
-            with warnings.catch_warnings(record=True) as warning_messages:
-                warnings.simplefilter("always", UserWarning)
+            # Add users to the channel
+            if slack_participant_emails:
                 # Find user ids based on their emails
-                # -----------------------------------
-                if slack_participant_emails:
-                    user_id_list = slack_utils.find_user_ids_based_on_email(slack_participant_emails)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
+                user_id_list = slack_utils.find_user_ids_based_on_email(slack_participant_emails)
 
-            if user_id_list:
-                with warnings.catch_warnings(record=True) as warning_messages:
-                    warnings.simplefilter("always", UserWarning)
-                    # Add users to the channel
-                    # ------------------------
+                # invite users to a channel
+                if user_id_list:
                     slack_utils.invite_users_to_channel(user_id_list)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
 
             # Get the the attachment from Incident or Task
-            attachment_content, attachment_data = get_file_attachment_data(res_client, incident_id, artifact_id, task_id, attachment_id)
-            yield StatusMessage("Attachment file retrieved")
+            attachment_content, attachment_data = slack_utils.get_file_attachment_data(res_client, incident_id,
+                                                                                       artifact_id, task_id, attachment_id)
 
             # Upload file to Slack
-            results = slack_utils.slack_post_attachment(attachment_content, attachment_data, slack_text)
+            results_attachment_uploaded = slack_utils.slack_post_attachment(attachment_content, attachment_data, slack_text)
 
-            if results.get("ok"):
-                yield StatusMessage("Attachment uploaded to Slack")
-            else:
-                raise FunctionError("File upload failed: " + json.dumps(results))
+            # Find ts for file upload message
+            file_ts = slack_utils.get_ts_from_file_upload_results(results_attachment_uploaded)
 
-            # find ts from file upload
-            file_ts = slack_utils.get_ts_from_file_upload_results(results)
-
-            # generate a permalink URL to join this conversation
+            # Generate a permalink URL to join this conversation
             conversation_url = slack_utils.get_permalink(file_ts)
 
+            # Create an association if there isn't one
             if has_association_in_slack_db is False:
-                with warnings.catch_warnings(record=True) as warning_messages:
-                    warnings.simplefilter("always", UserWarning)
-                    # Create an association if there isn't one
-                    # ----------------------------------------
-                    slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
-                    # Check the warning message and yield StatusMessage.
-                    for w in warning_messages:
-                        usr_msg = w.message
-                        if usr_msg and usr_msg.message:
-                            yield StatusMessage(usr_msg.message)
+                slack_utils.create_row_in_datatable(res_client, incident_id, task_id, conversation_url)
+
+            # Yield Status Messages
+            for warn in slack_utils.get_warnings():
+                yield StatusMessage(warn)
 
             results = {"channel": slack_channel_name,
                        "url": conversation_url}

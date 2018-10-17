@@ -437,8 +437,11 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": False
         }
-        results = slack_utils.slack_post_message(None, "testing", True, None, True, def_username)
-        assert results.get("ok") is False
+        try:
+            slack_utils.slack_post_message(None, "testing", True, None, True, def_username)
+            assert False
+        except IntegrationError:
+            assert True
 
     def _buildDataDetails(self):
         """ Mock Data Details """
