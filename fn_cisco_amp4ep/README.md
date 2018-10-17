@@ -36,6 +36,14 @@ api_version=v1
 client_id=01234abcde56789efedc
 # The api_token will be generated on the Cisco AMP for endpoints dashboard and will be will be in uuid format.
 api_token=abcd1234-a123-123a-123a-123456abcdef
+# Query results limit
+query_limit=1000
+#Max number of retry attempts for Rate limiting exception
+max_retries=3
+#Retry backoff delay
+retry_delay=3
+#Retry backoff multiplier
+retry_backoff=2
 ```
 
 Run with: `resilient-circuits run`.
@@ -72,7 +80,7 @@ returned to Resilient will be in JSON format and will be similar to the followin
 Note: Each Resilient Function will return a different result.
 ```
 {
-  "computer": {
+  "response": {
     "version": "v1.2.0",
     "data": {
       "operating_system": "Windows 7, SP 1.0",
