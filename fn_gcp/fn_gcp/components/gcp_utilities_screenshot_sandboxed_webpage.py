@@ -58,22 +58,10 @@ class FunctionComponent(ResilientComponent):
             try:
                 base64Screenshot = None
                 # Create the session and set the proxies.
-                """ Expirimental urllib2 code
-                request_string = 'https://{}-{}.cloudfunctions.net/{}?url={}'.format(GCP_REGION, GCP_PROJECT_ID,
-                                                                                     GCP_FUNCTION_NAME, gcp_url)
 
-                res2 = urlopen(request_string)
-                print(res2)
-                if int(res2.getcode()/ 100) == 2:
-                    data = res2.read()
-                    log.info(data)
-                    base64ScreenshotFromURLLib = base64.b64encode(data)
-                    log.info(base64ScreenshotFromURLLib)
-                    
-                """
                 with requests.Session() as session:
                     session.proxies = proxies
-                    # Preparea user-agent and accept header instead of using requests user-agent
+                    # Prepare a user-agent and accept header instead of using requests user-agent
                     headers = {
                         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
                         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',

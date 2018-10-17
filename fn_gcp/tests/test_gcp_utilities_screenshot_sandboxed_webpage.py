@@ -9,6 +9,7 @@ import requests_mock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_gcp.util.helper import GCPHelper
+from requests.sessions import Session
 PACKAGE_NAME = "fn_gcp"
 FUNCTION_NAME = "gcp_utilities_screenshot_sandboxed_webpage"
 
@@ -20,16 +21,31 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
+
+    class RawResp:
+        """
+        A mock class intended to mock the 'raw' attribute on a Response
+
+        Contains a method Read() which is the most common way to access the raw attribute
+        """
+        def read(self):
+            return "Mock"
+
     class MockResponse:
-        def __init__(self, json_data, status_code):
+        """
+        A mock class intended to mock the entire Response attribute for a request.
+        """
+        def __init__(self, json_data, status_code,raw):
             self.json_data = json_data
             self.status_code = status_code
+            self.raw = RawResp()
 
         def json(self):
             return self.json_data
 
+
     if kwargs.get('success') == True:
-        return MockResponse(json_data={'contents': [{"test1":"test"},{"test2":"test"}]},status_code=200)
+        return MockResponse(json_data={'contents': [{"test1":"test"},{"test2":"test"}]},status_code=200, raw="test")
     else:
         return MockResponse(json_data={}, status_code=400)
 
@@ -67,4 +83,24 @@ class TestGcpUtilitiesScreenshotSandboxedWebpage:
         with patch.object(GCPHelper, "get_config_option", lambda x, y, z=None: "10", True):
             helper.setup_config()
 
-                
+
+    @pytest.mark.parametrize("gcp_url, expected_results", [
+        ("text", {"success": True}),
+        ("text2", {"success": True})
+    ])
+    def test_success(self, circuits_app, gcp_url, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "gcp_url": gcp_url
+        }
+        # Mock acquiring the config options, all config options are set to '10' or 10
+        with patch.object(GCPHelper, "get_config_option", lambda x, y, z=None: "10", True):
+            # Get a handle on the requests.Session class and patch its get function
+            with patch.object(Session, 'get') as mock_session:
+                # Replace the return value of our mock_session with a custom function
+                mock_session.return_value = mocked_requests_get(success=True)
+                # Fire the function with mocked functionality
+                results = call_gcp_utilities_screenshot_sandboxed_webpage_function(circuits_app, function_params)
+                assert (expected_results["success"] == results["success"])
+
+
