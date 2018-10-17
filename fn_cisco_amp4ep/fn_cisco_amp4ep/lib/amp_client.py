@@ -5,7 +5,11 @@
 
 """ Class for Resilient circuits Functions supporting REST API client for Cisco AMP for endpoints  """
 import logging
+import random
+
 import requests
+import time
+from requests import HTTPError
 from requests.auth import HTTPBasicAuth
 try:
     from urllib.parse import urljoin
@@ -28,6 +32,9 @@ class Ampclient(object):
         self.api_token = options.get("api_token")
         self.api_version = options.get("api_version")
         self.query_limit = int(options.get("query_limit"))
+        self.max_retries = int(options.get("max_retries"))
+        self.retry_delay = int(options.get("retry_delay"))
+        self.retry_backoff = int(options.get("retry_backoff"))
         # Rest request endpoints
         self._endpoints = {
             # Computers
@@ -54,7 +61,7 @@ class Ampclient(object):
 
 
 
-    def _req(self, uri, method='GET', params=None, data=None, ):
+    def _req(self, uri, method='GET', params=None, data=None):
         """Test if a parameter is None value or string 'None'.
 
         :param uri: Used to form url
@@ -66,24 +73,49 @@ class Ampclient(object):
         """
         url = urljoin(self.base_url, uri)
 
+        retry_attempts = 0
+        delay = self.retry_delay
+
         if data is None:
             data = {}
 
         if params is None:
             params = {}
 
-        if method == "GET":
-            r = self._s.get(url, params=params, headers=self._headers, auth=self._auth)
-        elif method == "POST":
-            r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth)
-        elif method == "PATCH":
-            r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth)
-        elif method == "DELETE":
-            r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth)
-        else:
-            raise ValueError("Unsupported request method '{}'.".format(method))
+        while retry_attempts <= self.max_retries:
+            try:
+                if method == "GET":
+                    r = self._s.get(url, params=params, headers=self._headers, auth=self._auth)
+                elif method == "POST":
+                    r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth)
+                elif method == "PATCH":
+                    r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth)
+                elif method == "DELETE":
+                    r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth)
+                else:
+                    raise ValueError("Unsupported request method '{}'.".format(method))
 
-        r.raise_for_status()  # If the request fails throw an error.
+                r.raise_for_status()  # If the request fails throw an error.
+
+            except HTTPError as e:
+                if e.response.status_code == 429:
+                    LOG.exception("Got Rate Limiting exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                    # Retry if we get Rate Limiting response
+                    delay *= self.retry_backoff
+                    retry_duration = delay + random.random()  # Add random padding to retry duration.
+                    LOG.info("Retrying in %f seconds..." % (retry_duration))
+                    time.sleep(retry_duration)
+                else:
+                    raise e
+
+            if r.status_code == 200:
+                break
+
+            retry_attempts += 1
+            if (retry_attempts > self.max_retries):
+                LOG.error("Too many retry attempts")
+                raise HTTPError("Too many retry attempts")
+
         return r.json()
 
     def get_computers(self, group_guid=None, limit=None, hostname=None, internal_ip=None, external_ip=None):

@@ -16,6 +16,13 @@ api_version=v1
 client_id=<client id>
 # The api_tokenwill be generated on the Cisco AMP foer endpoints dashboard and will be will be in uuid format.
 api_token=<api token>
+# Query results limit
 query_limit=1000
+#Max number of retry attempts
+max_retries=3
+#Retry backoff delay
+retry_delay=3
+#Retry backoff multiplier
+retry_backoff=2
 """
     return config_data
