@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api post request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
-      "set_file_lists_file": {u'version': u'v1.2.0',
+      "response": {u'version': u'v1.2.0',
                               u'data': {u'source': u'Created by entering SHA-256 via Public api.',
                                 u'sha256': u'8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284',
                                 u'description': u'Test file sha256',

@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
-      "file_list_files": {u'version': u'v1.2.0',
+      "response": {u'version': u'v1.2.0',
                           u'data': {u'items': [],
                                     u'guid': u'9710a198-b95a-462a-b184-9e688968fd94',
                                     u'name': u'File Blacklist',

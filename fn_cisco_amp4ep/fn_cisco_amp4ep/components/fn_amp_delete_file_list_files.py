@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
     in JSON format similar to the following.
 
     {
-     "delete_file_list_files": {u'version': u'v1.2.0',
+     "response": {u'version': u'v1.2.0',
                                 u'data': {},
                                 u'metadata': {u'links': {
                                                 u'self': u'https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/4ce4e7ab22a8900bf438ff84baebe74d3ef3828a716b933b6e2a85b991b36f31'}

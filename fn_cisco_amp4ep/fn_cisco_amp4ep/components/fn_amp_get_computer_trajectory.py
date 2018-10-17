@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
 
     {
       "query_execution_time": "2018-08-09 12:34:15",
-      "computer_trajectory": {
+      "response": {
         "version": "v1.2.0",
         "data": {
           "computer": {
@@ -62,7 +62,33 @@ class FunctionComponent(ResilientComponent):
             },
             "active": true
           },
-          "events": []
+          "events": [{"timestamp": 1502989429,'
+                      "timestamp_nanoseconds": 659151942,'
+                      "date": "2017-08-17T17:03:49+00:00",'
+                      "event_type": "NFM",'
+                      "group_guids": ["b077d6bc-bbdf-42f7-8838-a06053fbd98a"],
+                      "network_info": { "dirty_url": "http://www.sanjosemaristas.com/app/index.php?", "remote_ip": "188.120.225.17",
+                                        "remote_port": 80, "local_ip": "192.168.1.3", "local_port": 54233,
+                                        "nfm": {"direction": "Outgoing connection from", "protocol": "TCP"},
+                                        "parent": {"disposition": "Clean",
+                                                   "identity": {"sha256": "5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124"}
+                                        }
+                      }
+                     },
+                     {"timestamp": 1502989426,
+                      "timestamp_nanoseconds": 155931927,
+                      "date": "2017-08-17T17:03:46+00:00",
+                      "event_type": "NFM",
+                      "group_guids": ["b077d6bc-bbdf-42f7-8838-a06053fbd98a"],
+                      "network_info": {"dirty_url": "http://www.sanjosemaristas.com/app/index.php?", "remote_ip": "188.120.225.17",
+                                       "remote_port": 80, "local_ip": "192.168.1.3", "local_port": 54232,
+                                       "nfm": { "direction": "Outgoing connection from","protocol": "TCP"},
+                                       "parent": { "disposition": "Clean",
+                                                    "identity": {"sha256": "5ad3c37e6f2b9db3ee8b5aeedc474645de90c66e3d95f8620c48102f1eba4124"}
+                                    }
+                      }
+                     }
+                    ]
         },
         "metadata": {
           "links": {

@@ -30,7 +30,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
-      "computer": {
+      "response": {
         "version": "v1.2.0",
         "data": {
           "operating_system": "Windows 7, SP 1.0",
