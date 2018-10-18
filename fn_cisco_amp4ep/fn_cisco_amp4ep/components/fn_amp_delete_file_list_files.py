@@ -85,8 +85,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Returning 'delete file lists files' results for guid '{}' and sha256 value '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"]))
 
-            yield StatusMessage("Done...")
-
             log.debug(json.dumps(results))
 
 

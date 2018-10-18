@@ -95,8 +95,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"], params["description"]))
 
-            yield StatusMessage("Done...")
-
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

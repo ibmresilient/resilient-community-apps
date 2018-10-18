@@ -167,8 +167,6 @@ class FunctionComponent(ResilientComponent):
             results = {"response": rtn, "query_execution_time": query_execution_time}
             yield StatusMessage("Returning 'events' results")
 
-            yield StatusMessage("Done...")
-
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
