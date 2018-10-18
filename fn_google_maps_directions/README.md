@@ -1,5 +1,5 @@
 # Resilient Integration with Google Maps
-**This package contains one function that generates a link to Google Maps which shows directions from the given origin to the destination**
+**This package contains one function that generates a link to Google Maps which shows directions from the given origin to the destination.**
 
  ![screenshot](./screenshots/1.png)
 
@@ -32,8 +32,8 @@ results = {
 
 ```
 
-## Pre-Processing:
-*This example sets the origin and gets the destination **from the Incident Details***
+## Pre-Process Script:
+This example sets the origin and gets the destination **from the Incident Details.**
 ```python
 # Set Origin
 inputs.google_maps_origin = "IBM, Armonk, New York"
@@ -45,8 +45,8 @@ destination = "{0}, {1}, {2}".format(incident.addr, incident.city, incident.coun
 inputs.google_maps_destination = destination
 ```
 
-## Post-Processing:
-*This example **adds a Note to the Incident***
+## Post-Process Script:
+This example **adds a Note to the Incident.**
 ```python
 if (results.success):
   
