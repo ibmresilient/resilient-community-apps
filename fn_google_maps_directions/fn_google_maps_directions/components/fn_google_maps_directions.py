@@ -33,6 +33,9 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
 
+        # Base URL to Google Maps
+        GOOGLE_MAPS_URL = "https://www.google.com/maps/dir/?api=1"
+
         def get_function_input(inputs, input_name, optional=False):
           """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
           input = inputs.get(input_name)
@@ -62,7 +65,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Generating Link")
 
             # Generate Link
-            payload.directions_link = "https://www.google.com/maps/dir/?api=1&origin={0}&destination={1}".format(origin, destination)
+            payload.directions_link = "{0}&origin={1}&destination={2}".format(GOOGLE_MAPS_URL, origin, destination)
 
             # Send payload back to Appliance
             results = payload.asDict()
