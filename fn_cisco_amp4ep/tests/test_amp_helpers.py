@@ -129,75 +129,63 @@ class TestAmpHelpersValidateParamsErr:
 class TestAmpHelpersValidateOptsErr:
     """Test validate_opts function"""
 
+    @pytest.mark.parametrize("base_url, api_version, client_id, api_token, query_limit, max_retries, retry_delay, "
+                             "retry_backoff, expected_results", [
+        ('', None, None, None, None, None, None, None, "Mandatory config setting 'base_url' not set."),
+        ("https://api.amp.cisco.com/", '', None, None, None, None, None, None, "Mandatory config setting 'api_version' not set."),
+        ("https://api.amp.cisco.com/", "v1",'', None, None, None, None, None, "Mandatory config setting 'client_id' not set."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", '', None, None, None, None, "Mandatory config setting 'api_token' not set."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", '', None, None, None, "Mandatory config setting 'query_limit' not set."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, '', None, None, "Mandatory config setting 'max_retries' not set."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, 3, '', None, "Mandatory config setting 'retry_delay' not set."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, 3, 2, '', "Mandatory config setting 'retry_backoff' not set."),
 
-    @pytest.mark.parametrize("api_version, client_id, api_token, expected_results", [
-        ("v1", "01234abcde56789efghi", "abcd1234-a123-123a-123a-123456abcdef",
-         "Mandatory config setting 'base_url' not set."),
     ])
-    def test_validate_opts_base_url_Not_set(self, api_version, client_id, api_token, expected_results):
-        func = Func({
-            "api_version": api_version,
-            "client_id": client_id,
-            "api_token": api_token,
-        })
-        with pytest.raises(Exception) as e:
-            validate_opts(func)
-        assert expected_results == str(e.value)
-
-    @pytest.mark.parametrize("base_url, client_id, api_token, expected_results", [
-        ("https://api.amp.cisco.com/", "01234abcde56789efghi", "abcd1234-a123-123a-123a-123456abcdef",
-         "Mandatory config setting 'api_version' not set."),
-    ])
-    def test_validate_opts_api_version_Not_set(self, base_url, client_id, api_token, expected_results):
-        func = Func({
-            "base_url": base_url,
-            "client_id": client_id,
-            "api_token": api_token,
-        })
-        with pytest.raises(Exception) as e:
-            validate_opts(func)
-        assert expected_results == str(e.value)
-
-    @pytest.mark.parametrize("base_url, api_version, api_token, expected_results", [
-        ("https://api.amp.cisco.com/", "v1", "abcd1234-a123-123a-123a-123456abcdef",
-         "Mandatory config setting 'client_id' not set."),
-    ])
-    def test_validate_opts_client_id_Not_set(self, base_url, api_version, api_token, expected_results):
-        func = Func({
-            "base_url": base_url,
-            "api_version": api_version,
-            "api_token": api_token,
-        })
-        with pytest.raises(Exception) as e:
-            validate_opts(func)
-        assert expected_results == str(e.value)
-
-    @pytest.mark.parametrize("base_url, api_version, client_id, expected_results", [
-        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc",
-         "Mandatory config setting 'api_token' not set."),
-    ])
-    def test_validate_opts_api_token_Not_set(self, base_url, api_version, client_id, expected_results):
-        func = Func({
+    def test_validate_opts_Not_set(self, base_url, api_version, client_id, api_token, query_limit,
+                                               max_retries, retry_delay, retry_backoff, expected_results):
+        opt = {
             "base_url": base_url,
             "api_version": api_version,
             "client_id": client_id,
-        })
+            "api_token": api_token,
+            "query_limit": query_limit,
+            "max_retries": max_retries,
+            "retry_delay": retry_delay,
+            "retry_backoff": retry_backoff
+        }
+        for (k, v) in opt.copy().items():
+            if v == '':
+                opt.pop(k)
+
+        func = Func(opt)
+
         with pytest.raises(Exception) as e:
             validate_opts(func)
         assert expected_results == str(e.value)
 
-    @pytest.mark.parametrize("base_url, api_version, client_id, api_token, expected_results", [
-        (None, None, None, None, "Invalid format for config setting 'base_url'."),
-        ("https://api.amp.cisco.com/", None, None, None, "Invalid format for config setting 'api_version'."),
-        ("https://api.amp.cisco.com/", "v1", None, None, "Invalid format for config setting 'client_id'."),
-        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", None, "Invalid format for config setting 'api_token'."),
+
+    @pytest.mark.parametrize("base_url, api_version, client_id, api_token, query_limit, max_retries, retry_delay, retry_backoff,"
+                             "  expected_results", [
+        (None, None, None, None, None, None, None, None, "Invalid format for config setting 'base_url'."),
+        ("https://api.amp.cisco.com/", None, None, None, None, None, None, None, "Invalid format for config setting 'api_version'."),
+        ("https://api.amp.cisco.com/", "v1", None, None, None, None, None, None, "Invalid format for config setting 'client_id'."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", None, None, None, None, None, "Invalid format for config setting 'api_token'."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", None, None, None, None, "Invalid format for config setting 'query_limit'."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, None, None, None, "Invalid format for config setting 'max_retries'."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, 3, None, None, "Invalid format for config setting 'retry_delay'."),
+        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, 3, 2, None, "Invalid format for config setting 'retry_backoff'."),
     ])
-    def test_validate_opts_Invalid(self, base_url, api_version, client_id, api_token, expected_results):
+    def test_validate_opts_Invalid(self, base_url, api_version, client_id, api_token, query_limit, max_retries, retry_delay, retry_backoff,
+                                   expected_results):
         func = Func({
             "base_url": base_url,
             "api_version": api_version,
             "client_id": client_id,
             "api_token": api_token,
+            "query_limit": query_limit,
+            "max_retries": max_retries,
+            "retry_delay": retry_delay,
+            "retry_backoff": retry_backoff
         })
         with pytest.raises(Exception) as e:
             validate_opts(func)

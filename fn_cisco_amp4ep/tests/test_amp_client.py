@@ -24,6 +24,10 @@ def get_config():
         "api_version": "v1",
         "client_id": "01234abcde56789efedc",
         "api_token": "abcd1234-a123-123a-123a-123456abcdef",
+        "query_limit": 2,
+        "max_retries":  3,
+        "retry_delay": 3,
+        "retry_backoff": 2
     })
 
 class TestAMPClient:
@@ -50,7 +54,7 @@ class TestAMPClient:
     @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
     @pytest.mark.parametrize("amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip, "
                              "expected_results_1, expected_results_2", [
-        (None, None, None, None, None, "v1.2.0", 6)
+        (None, None, None, None, None, "v1.2.0", 4)
     ])
     def test_get_computers(self, mock_get, amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip,
                            expected_results_1, expected_results_2):
@@ -335,3 +339,80 @@ class TestAMPClient:
         data = response["data"]
         assert_keys_in(data, *keys_d)
         assert expected_results_2 == response["data"]["hostname"]
+
+
+    """ Test amp_client.get_paginated_total  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip, "
+                             "expected_results_1, expected_results_2", [
+        (None, None, None, None, None, "v1.2.0", 2)
+    ])
+    def test_get_paginated_total(self, mock_get, amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip,
+                           expected_results_1, expected_results_2):
+
+        keys = ["data", "metadata"]
+        keys_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+
+        params = {
+            "group_guid": amp_group_guid,
+            "limit": amp_limit,
+            "hostname": amp_hostname,
+            "internal_ip": amp_internal_ip,
+            "external_ip": amp_external_ip
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.get_paginated_total(amp_client.get_computers, **params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == response["metadata"]["results"]["total"]
+        data = response["data"]
+        for d in data:
+            assert_keys_in(d, *keys_d)
+
+    """ Test amp_client.rate_limit  """
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip, "
+                             "expected_results_1, expected_results_2", [
+            (None, None, "test_rate_limit_good", None, None, "v1.2.0", 4)
+    ])
+    def test_rate_limit_success(self, mock_get, amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip,
+                                expected_results_1, expected_results_2):
+
+        keys = ["data", "metadata"]
+        keys_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+
+        params = {
+            "group_guid": amp_group_guid,
+            "limit": amp_limit,
+            "hostname": amp_hostname,
+            "internal_ip": amp_internal_ip,
+            "external_ip": amp_external_ip
+        }
+        amp_client = Ampclient(get_config())
+        response = amp_client.get_computers(**params)
+        assert expected_results_1 == response["version"]
+        assert_keys_in(response, *keys)
+        assert expected_results_2 == response["metadata"]["results"]["total"]
+        data = response["data"]
+        for d in data:
+            assert_keys_in(d, *keys_d)
+
+    @patch('fn_cisco_amp4ep.lib.amp_client.requests.Session', side_effect=mocked_session)
+    @pytest.mark.parametrize("amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip, "
+                             "expected_results", [
+        (None, None, "test_rate_limit_fail", None, None, "Too many retry attempts")
+    ])
+    def test_rate_limit_failure(self, mock_get, amp_group_guid, amp_limit, amp_hostname, amp_internal_ip, amp_external_ip,
+                           expected_results):
+
+        params = {
+            "group_guid": amp_group_guid,
+            "limit": amp_limit,
+            "hostname": amp_hostname,
+            "internal_ip": amp_internal_ip,
+            "external_ip": amp_external_ip
+        }
+        amp_client = Ampclient(get_config())
+        with pytest.raises(HTTPError) as e:
+            response = amp_client.get_computers(**params)
+        assert str(e.value) == expected_results

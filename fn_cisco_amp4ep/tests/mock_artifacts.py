@@ -27,7 +27,7 @@ def get_computer():
 def get_computers():
     response = ('{"version": "v1.2.0", "metadata": {'
                     '"links": {"self": "https://api.amp.cisco.com/v1/computers?group_guid=4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3"},'
-                    '"results": {"total": 6, "current_item_count": 4, "index": 4, "items_per_page": 500}}, '
+                    '"results": {"total": 4, "current_item_count": 4, "index": 4, "items_per_page": 500}}, '
                 '"data": ['
                     '{"connector_guid": "0b471b7e-2243-40ef-8691-904627c32754", "hostname": "Demo_AMP_Exploit_Prevention_Audit",'
                      '"active": true,'
@@ -70,6 +70,33 @@ def get_computers():
                 )
     return response
 
+def get_computers_limit():
+    response = ('{"version": "v1.2.0", "metadata": {'
+                    '"links": {"self": "https://api.amp.cisco.com/v1/computers?group_guid=4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3"},'
+                    '"results": {"total": 2, "current_item_count": 2, "index": 2, "items_per_page": 2}}, '
+                '"data": ['
+                    '{"connector_guid": "0b471b7e-2243-40ef-8691-904627c32754", "hostname": "Demo_AMP_Exploit_Prevention_Audit",'
+                     '"active": true,'
+                     '"links": {"computer": "https://api.amp.cisco.com/v1/computers/0b471b7e-2243-40ef-8691-904627c32754",'
+                               '"trajectory": "https://api.amp.cisco.com/v1/computers/0b471b7e-2243-40ef-8691-904627c32754/trajectory",'
+                               '"group": "https://api.amp.cisco.com/v1/groups/4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3"},'
+                     '"connector_version": "6.0.9.10685", "operating_system": "Windows 7, SP 1.0", "internal_ips": ["60.132.82.150"],'
+                     '"external_ip": "225.216.192.205", "group_guid": "4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3",'
+                     '"install_date": "2018-05-22T16:53:27Z",'
+                     '"network_addresses": [{"mac": "62:56:31:9a:33:56", "ip": "60.132.82.150"}],'
+                     '"policy": {"guid": "51450374-366c-4759-9099-7baa138c499f", "name": "Triage"}},'
+                    '{"connector_guid": "160fb8db-331d-45d2-bd3c-38aacfd236d6", "hostname": "Demo_AMP_Threat_Quarantined",'
+                     '"active": true,'
+                     '"links": {"computer": "https://api.amp.cisco.com/v1/computers/160fb8db-331d-45d2-bd3c-38aacfd236d6",'
+                               '"trajectory": "https://api.amp.cisco.com/v1/computers/160fb8db-331d-45d2-bd3c-38aacfd236d6/trajectory",'
+                               '"group": "https://api.amp.cisco.com/v1/groups/4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3"},'
+                     '"connector_version": "6.0.9.10685", "operating_system": "Windows 7, SP 1.0", "internal_ips": ["69.199.68.14"],'
+                     '"external_ip": "49.221.161.222", "group_guid": "4cb5b3b4-b33e-4825-98e9-97d2b5b1a4d3",'
+                     '"install_date": "2018-05-22T16:53:28Z",'
+                     '"network_addresses": [{"mac": "e1:47:3d:a3:23:b0", "ip": "69.199.68.14"}],'
+                     '"policy": {"guid": "51450374-366c-4759-9099-7baa138c499f", "name": "Triage"}}]}'
+                )
+    return response
 
 
 
@@ -503,6 +530,9 @@ def mocked_amp_client(*args):
             self.r._content = move_computer()
             return self.r.json()
 
+        def get_paginated_total(self, get_method, **params):
+            return get_method(**params)
+
     return MockResponse(*args)
 
 def mocked_session(*args, **kwargs):
@@ -510,6 +540,7 @@ def mocked_session(*args, **kwargs):
         """Class will be used by the mock to replace get and post requests in standalone tests"""
         def __init__(self, *arg, **kwargs):
             self.status_code = 200
+            self.rate_limit_count =  0
 
         def raise_for_status(self):
             pass
@@ -517,7 +548,19 @@ def mocked_session(*args, **kwargs):
         def get(self, url, **kwargs):
 
             if url == "/v1/computers/":
-                return MockGetResponse(get_computers(), 200)
+                if "limit" in kwargs["params"] and  kwargs["params"]["limit"] is not None:
+                    return MockGetResponse(get_computers_limit(), 200)
+                elif "hostname" in kwargs["params"] and  kwargs["params"]["hostname"] is not None:
+                        if kwargs["params"]["hostname"] == "test_rate_limit_fail":
+                            return MockGetResponse(get_computers(), 429)
+                        elif kwargs["params"]["hostname"] == "test_rate_limit_good":
+                            if self.rate_limit_count < 3:
+                                self.rate_limit_count += 1
+                                return MockGetResponse(get_computers(), 429)
+                            else:
+                                return MockGetResponse(get_computers(), 200)
+                else:
+                    return MockGetResponse(get_computers(), 200)
             elif re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
                 return MockGetResponse(get_computer(), 200)
             elif re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/trajectory/$", url):
@@ -530,7 +573,7 @@ def mocked_session(*args, **kwargs):
                 return MockGetResponse(get_file_list_files(False), 200)
             elif re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
                 return MockGetResponse(get_file_list_files(True), 200)
-            elif re.match("^/v1/events/(\?.+)*$", url):
+            elif re.match("^/v1/events(\?.+)*$", url):
                 return MockGetResponse(get_events(), 200)
             elif re.match("^/v1/event_types/$", url):
                 return MockGetResponse(get_event_types(), 200)
@@ -570,6 +613,7 @@ class MockGetResponse:
     def __init__(self, *args, **kwargs):
         self.r = Response()
         self.r._content = args[0]
+        self.status_code = args[1]
         self.r.status_code = args[1]
         test=1
 
@@ -587,5 +631,9 @@ api_version=v1
 client_id=01234abcde56789efedc
 # The api_token will be generated on the Cisco AMP for endpoints dashboard and will be will be in uuid format.
 api_token=abcd1234-a123-123a-123a-123456abcdef
+query_limit=2
+max_retries=3
+retry_delay=3
+retry_backoff=2
 """
     return config_data
