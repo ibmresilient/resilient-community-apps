@@ -22,12 +22,12 @@ None
 results = {
   success: True,
 
-  directions_link: "https://www.google.com/maps/dir/?api=1&origin=xxx&destination=xxx"
+  directions_link: "https://www.google.com/maps/dir/?api=1&origin=xxx&destination=xxx",s
 
   inputs: {
     google_maps_origin: "IBM, Armonk, New York", 
     google_maps_destination: "IBM Resilient, Cambridge, Boston, MA"
-  },
+  }
 }
 
 ```
