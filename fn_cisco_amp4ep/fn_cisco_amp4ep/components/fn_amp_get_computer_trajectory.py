@@ -137,7 +137,7 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time}
-            yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["conn_guid"]))
+            yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["connector_guid"]))
 
             log.debug(json.dumps(results))
 
