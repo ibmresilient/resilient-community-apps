@@ -13,6 +13,8 @@ import resilient_circuits.template_functions as template_functions
 from os.path import join, pardir
 import os
 import time
+import collections
+import re
 
 LOG = logging.getLogger(__name__)
 
@@ -105,8 +107,8 @@ class SlackUtils(object):
 
         # Channel name validation - Channel name needs to be defined
         if input_channel_name is None and res_associated_channel_name is None:
-            self.add_warning("There is no slack_channel name associated with Incident or Task available "
-                             "to post messages in")
+            raise IntegrationError("There is no slack_channel name associated with Incident or Task available "
+                                   "to post messages in")
 
         # Pick the right channel to post in
         slack_channel_name = None
@@ -174,20 +176,23 @@ class SlackUtils(object):
         :param def_username - name to use for who posted the message
         :return: JSON result
         """
+        attachment_json = None
+        payload = None
         try:
-            payload = convert_slack_details_to_payload(slack_text, resoptions)
+            attachment_json = convert_slack_details_to_payload(slack_text, resoptions)
         except ValueError: # if slack_text isn't in JSON format then just post it as is - we need to post to Slack from other methods, like right before archiving channel
             payload = slack_text
 
         results = self.slack_client.api_call(
             "chat.postMessage",
             channel=self.get_channel_id(),
-            text=payload,
             as_user=slack_as_user,
             username=slack_username if slack_username else def_username,
-            parse="full",  # In full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
-            link_names=1,  # Find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
-            mrkdown=slack_markdown
+            parse="none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
+            link_names=1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
+            mrkdown=slack_markdown,
+            attachments=attachment_json,
+            text=payload
         )
         LOG.debug(results)
 
@@ -705,37 +710,44 @@ class SlackUtils(object):
             raise ValueError("Failed to get attachment from Resilient: {}".format(ex))
 
 
-def build_payload(dataDict, resoptions):
+def build_payload(ordered_data_dict):
     """
-    build the payload string based on the different types of data created
-    :param dataDict:
+    Build the payload string based on the different types of data created.
+    :param ordered_data_dict:
     :return: payload string
     """
     payload = ""
 
-    for key, valDict in dataDict.items():
-        if len(payload) > 0:
+    for key, value in ordered_data_dict.items():
+
+        input_type = value.get("type")
+        input_data = value.get("data")
+
+        if input_type == 'string' and input_data:
             payload += "\n"
+            matches = re.findall(r"u'(.*?)'", input_data)  # extract data from u'[u\\'Malware\\', u\\'Lost PC / laptop / tablet\\']'
+            if matches:
+                data = ", ".join(matches)
+                payload += u'*{}*: {}'.format(key, data)
+            else:
+                payload += u'*{}*: {}'.format(key, input_data)
 
-        if valDict['type'] == 'string' and valDict['data']:
-            payload += u'{}: {}'.format(key, valDict['data'])
-
-        elif valDict['type'] == 'incident' and valDict['data']:
-            payload += '{}: {}'.format(key, build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), valDict['data']))
-
-        elif valDict['type'] == 'richtext' and valDict['data']:
-            cleaned_data = clean_html(valDict['data'])
+        elif input_type == 'richtext' and input_data:
+            cleaned_data = clean_html(input_data)
             if len(cleaned_data) > 0:
-                payload += u'{}: {}'.format(key, cleaned_data)
+                payload += "\n"
+                payload += u'*{}*: {}'.format(key, cleaned_data)
 
-        elif valDict['type'] == 'datetime' and valDict['data'] and valDict['data'] != 0:
-            payload += '{}: {}'.format(key, build_timestamp(valDict['data']))
+        elif input_type == 'datetime' and input_data:
+            payload += "\n"
+            payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data/1000, build_timestamp(input_data))  # send epoch in seconds to Slack
 
-        elif valDict['type'] == 'boolean' and valDict['data']:
-            payload += '{}: {}'.format(key, build_boolean(valDict['data'], true_value='Yes', false_value='No'))
+        elif input_type == 'boolean' and input_data:
+            payload += "\n"
+            payload += '*{}*: {}'.format(key, build_boolean(input_data, true_value='Yes', false_value='No'))
 
-        elif valDict['data']:
-            raise IntegrationError("Invalid type: " + valDict['type'])
+        elif input_data:
+            raise IntegrationError("Invalid type: " + input_type)
 
     return payload
 
@@ -764,10 +776,41 @@ def convert_slack_details_to_payload(slack_text, resoptions):
     :return:
     """
     try:
-        data = json.loads(slack_text.replace("\\n", ""), strict=False)  # cleanup for json.loads
-        payload = build_payload(data, resoptions)
+        # slack_text.replace("\\n", "") - cleanup for json.loads
+        # object_pairs_hook=OrderedDict - JSON object decoded with an ordered list of pairs
+        # strict=False - control characters will be allowed inside strings
+        ordered_data = json.loads(slack_text.replace("\\n", ""), object_pairs_hook=collections.OrderedDict, strict=False)
+        LOG.debug(ordered_data)
+
+        resilient_url_dict = ordered_data.pop("Resilient URL", None)  # get the "Resilient URL" and delete it from the dict
+        url = None
+        if resilient_url_dict and resilient_url_dict.get("type") == "incident" and resilient_url_dict.get("data"):
+            url = build_incident_url(build_resilient_url(resoptions['host'], resoptions['port']), resilient_url_dict.get("data"))
+
+        additional_text_dict = ordered_data.pop("Additional Text", None)  # get the "Additional Text" and delete it from the dict
+        pretext = None
+        if additional_text_dict.get("type") == "string" and additional_text_dict.get("data"):
+            pretext = additional_text_dict.get("data")
+
+        type_data_dict = ordered_data.pop("Type of data", None)  # get the "Type of data" and delete it from the dict
+        type_data = None
+        if type_data_dict.get("type") == "string" and type_data_dict.get("data"):
+            type_data = type_data_dict.get("data")
+
+        payload = build_payload(ordered_data)
         LOG.debug(payload)
-        return payload
+
+        attachment_json = [
+                {
+                    "pretext": pretext,
+                    "fallback": "Resilient {}".format(type_data),
+                    "title": "Resilient {}".format(type_data),
+                    "title_link": url,
+                    "text": payload,
+                    "color": "#36a64f"
+                }
+            ]
+        return attachment_json
     except ValueError:
         raise ValueError
 
