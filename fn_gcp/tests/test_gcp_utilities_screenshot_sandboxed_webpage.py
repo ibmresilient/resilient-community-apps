@@ -29,7 +29,20 @@ def mocked_requests_get(*args, **kwargs):
         Contains a method Read() which is the most common way to access the raw attribute
         """
         def read(self):
-            return "Mock"
+            """
+            Python 2 and 3 handle strings/bytes differently so we need a solution which works on both
+
+            One solution is to make the return value 'bytes-like'
+            But in doing so we must also decode this value to avoid errors on py3
+
+            python 2 can -- return "Mock"
+            python 3 can -- return b"Mock"
+
+            but then you need to decode any byte-like stuff to make it JSON Serializable
+            #.decode("utf-8")
+            :return:
+            """
+            return b'Mock'
 
     class MockResponse:
         """

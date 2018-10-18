@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
                     if int(res.status_code / 100) == 2:
                         yield StatusMessage("Got a response back in the 200 family, parsing result")
                         # Read the stream for image data
-                        base64Screenshot = base64.b64encode(res.raw.read())
+                        base64Screenshot = base64.b64encode(res.raw.read()).decode("utf-8")
                         
                     elif res.status_code == 401:
                         raise FunctionError("401 Status code returned. Retry function with updated credentials")
