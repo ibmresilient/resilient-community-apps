@@ -36,13 +36,16 @@ api_version=v1
 client_id=01234abcde56789efedc
 # The api_token will be generated on the Cisco AMP for endpoints dashboard and will be will be in uuid format.
 api_token=abcd1234-a123-123a-123a-123456abcdef
+# Settings for access to cisco AMP website via a proxy
+#http_proxy=http':'http://proxy:80
+#https_proxy=https':'http://proxy:80
 # Query results limit
-query_limit=1000
-#Max number of retry attempts for Rate limiting exception
+query_limit=200
+# Max number of retry attempts
 max_retries=3
-#Retry backoff delay
+# Retry backoff delay
 retry_delay=3
-#Retry backoff multiplier
+# Retry backoff multiplier
 retry_backoff=2
 ```
 

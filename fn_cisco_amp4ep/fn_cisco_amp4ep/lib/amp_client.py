@@ -27,6 +27,7 @@ class Ampclient(object):
         """
         Class constructor
         """
+
         self.base_url = options.get("base_url")
         self.client_id = options.get("client_id")
         self.api_token = options.get("api_token")
@@ -35,6 +36,11 @@ class Ampclient(object):
         self.max_retries = int(options.get("max_retries"))
         self.retry_delay = int(options.get("retry_delay"))
         self.retry_backoff = int(options.get("retry_backoff"))
+        self.proxies = {}
+        if "https_proxy" in options and options["https_proxy"] is not None:
+            self.proxies.update({"https": options.get("https_proxy")})
+        if "http_proxy" in options and options["http_proxy"] is not None:
+            self.proxies.update({"http": options.get("http_proxy")})
         # Rest request endpoints
         self._endpoints = {
             # Computers
@@ -85,13 +91,13 @@ class Ampclient(object):
         while retry_attempts <= self.max_retries:
             try:
                 if method == "GET":
-                    r = self._s.get(url, params=params, headers=self._headers, auth=self._auth)
+                    r = self._s.get(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies )
                 elif method == "POST":
-                    r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth)
+                    r = self._s.post(url, params=params, data=data, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 elif method == "PATCH":
-                    r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth)
+                    r = self._s.patch(url, params=params, data=data, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 elif method == "DELETE":
-                    r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth)
+                    r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 else:
                     raise ValueError("Unsupported request method '{}'.".format(method))
 
