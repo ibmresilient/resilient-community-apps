@@ -352,7 +352,9 @@ class Ampclient(object):
             offset = rtn["metadata"]["results"]["items_per_page"]
             current_item_count = rtn["metadata"]["results"]["current_item_count"]
             while max_count > current_item_count:
-                params["offset"] = offset
+                if "offset" in params:
+                    # Certain get methods don't have offset in their parameter signature
+                    params["offset"] = offset
                 rtn_sub = get_method(**params)
                 rtn["data"].extend(rtn_sub["data"])
                 rtn["metadata"] = rtn_sub["metadata"]
