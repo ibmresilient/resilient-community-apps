@@ -66,6 +66,18 @@ def validate_fields(fieldList, kwargs):
             raise ValueError('Required field is missing or empty: '+field)
 
 
-def build_timestamp(ts, format="%Y-%m-%dT%H:%M:%SZ"):
-    """ create a timestamp. ts is in milliseconds """
-    return datetime.datetime.utcfromtimestamp(ts/1000).strftime(format)
+def readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%d %H:%M:%S'):
+    """
+    convert an epoch timestamp to a string using a format
+    :param timestamp:
+    :param milliseconds: True = epoch in
+    :param rtn_format: format of resulant string
+    :return: string representation of timestamp
+    """
+    if milliseconds:
+        ts = timestamp/1000
+    else:
+        ts = timestamp
+
+    return datetime.datetime.utcfromtimestamp(ts).strftime(rtn_format)
+

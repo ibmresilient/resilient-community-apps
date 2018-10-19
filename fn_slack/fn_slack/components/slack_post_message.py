@@ -63,12 +63,10 @@ class FunctionComponent(ResilientComponent):
         one and post to the input one.
 
         Default settings for posting messages are:
-        - parse="full", full parse mode, Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@').
-        - link_names=1, find and link channel names by mentioning users with their user ID '<@U123>'. On by default.
-                        # TODO! Soon to be deprecated!
-                        Slack apps and their bot users should not use the username field when authoring a message.
-                        The username is part of your app's configuration and will not always be settable at runtime.
-
+        - parse="none", Slack will not perform any processing on the message, it will keep all markup formatting '<'
+        - link_names=1, Slack will linkify URLs, channel names (starting with a '#') and username ids (starting with an '<@ user_id >')
+                        Example of text to post in Slack: "Hey user <@UCNC5K34J> check out #random"
+                        FIXME! Using link_names when posting messages to be deprecated
         Threading isn't supported (reply_broadcast and thread_ts are None).
 
         The remaining input fields are passed to the slack api call to control the message post.

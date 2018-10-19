@@ -1,8 +1,11 @@
-{% if is_msg_parent %}{{ username }} POSTED ON {{ msg_time }}:
+{% if is_msg_parent %}{{ number }} - {{ username }} POSTED ON {{ msg_time }}:
+{{ msg_pretext }}
 {{ msg_text }}
+{{ file_name }}
+{{ file_permalink }}
 {% if reply_count > 0 %}{{ reply_count }} REPLIES:
 {% endif %}
-{% else %}    {{ username }} POSTED A REPLY ON {{ msg_time }}:
+{% else %}    {{ number }} {{ username }} POSTED A REPLY ON {{ msg_time }}:
     {{ msg_text }}
 
 {% endif %}
