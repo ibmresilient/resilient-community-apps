@@ -14,9 +14,7 @@ setup(
     long_description="A Resilient Circuits Function to allow you to search your GRR Agents by user, ip or host",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'grr_api_client>=2.3.4',
-        'future'
-
+        'grr_api_client>=2.3.4'
     ],
     packages=find_packages(),
     include_package_data=True,
