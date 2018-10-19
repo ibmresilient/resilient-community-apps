@@ -1,12 +1,12 @@
 # Resilient Integration with GRR
-**This package contains one function that allows you to search for your GRR Agents using IP, Host or User**
+**This package contains one function that allows you to search for your GRR Agents using IP, Host or User.**
 
  ![screenshot](./screenshots/fn_grr_snap_1.png)
 
 
-## app.config settings:
+## app.config Settings:
 ```python
-[fn_grr]
+[fn_grr_search]
 grr_server=127.0.0.1
 grr_user=user
 grr_pwd=password
@@ -15,17 +15,15 @@ verify_cert=False
 ```
 
 ## Function Inputs:
-**grr_search_value:**
-* The value of the IP/Host/User
-* E.g. 127.0.0.1
+| Function Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `grr_search_value` | `String` | Yes | `"127.0.0.1"` |
+| `grr_search_type` | `Select` | Yes | `host/ip/user` |
 
-**grr_search_type:**
-* Select from the dropdown
 
 ## Function Output:
-* The function returns the results as a Python Dictionary. Here is an example ouput:
-```
-{   
+```python
+results = {
     'grr_search_type': u'ip',
     'grr_search_value': u'127.0.0.1',
     'success': True
@@ -75,7 +73,7 @@ verify_cert=False
                 u'version': u'7.5'
             },
             u'urn': u'aff4:/C.ddc30808cf5d06d3',
-            u'volumes:[
+            u'volumes':[
                 {
                     u'actualAvailableAllocationUnits': u'21684382',
                     u'bytesPerSector': u'4096',
@@ -89,3 +87,41 @@ verify_cert=False
 }
 
 ```
+
+## Pre-Process Script:
+This example sets the search value **to the value of the Incident's Artifact.**
+```python
+# Set the grr_search_value
+inputs.grr_search_value = artifact.value
+```
+
+## Post-Process Script:
+This example loops the found agents and **adds Notes to the Incident.**
+```python
+if results.success:
+  # Loop all found agents
+  for agent in results["agents"]:
+
+    note_text = """<i style="color:#00af08">GRR Agent Found:</i>
+              <br><b>System Product Name:</b> {0}
+              <br><b>System UUID:</b> {1}
+              <br><b>System Manufacturer:</b> {2}
+              <br><b>Release:</b> {3}
+              <br><b>Machine:</b> {4}
+              <br><b>Version:</b> {5}""".format(agent["hardwareInfo"]["systemProductName"],
+                                            agent["hardwareInfo"]["systemUuid"],
+                                            agent["hardwareInfo"]["systemManufacturer"],
+                                            agent["osInfo"]["release"],
+                                            agent["osInfo"]["machine"],
+                                            agent["osInfo"]["version"])
+  incident.addNote(helper.createRichText(note_text))
+
+else:
+  note_text = "{0} system not found in GRR".format(results.grr_search_value)
+  incident.addNote(helper.createPlainText(note_text))
+```
+
+## Rules
+| Rule Name | Object Type | Workflow Triggered | Conditions |
+| --------- | :---------: | ------------------ | ---------- |
+| GRR Search by IP | `Artifact` | `Example: GRR Search by IP` | `Type` is equal to `IP Address`

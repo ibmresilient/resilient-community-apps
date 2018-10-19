@@ -4,21 +4,26 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from grr_api_client import api
 from google.protobuf import json_format
 import json
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function(s)"""
+    """Component that implements Resilient function 'fn_grr_search"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_grr", {})
+        self.options = opts.get("fn_grr_search", {})
 
-    @function("grr_search")
-    def _grr_search_function(self, event, *args, **kwargs):
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get("fn_grr_search", {})
+
+    @function("fn_grr_search")
+    def _fn_grr_search_function(self, event, *args, **kwargs):
         """Function: A function to search for GRR Agent"""
         
         def get_config_option(option_name, optional=False):
@@ -68,12 +73,16 @@ class FunctionComponent(ResilientComponent):
             if search_result == None:
                 success = False
           
-          # Loop the results and append some them in dict format to agents
+            # Loop the results and append them in dict format to agents
             else:
                 for agent in search_result:
                     # Get the agent in JSON and convert to Python dictionary
                     entry = json.loads(json_format.MessageToJson(agent.data))
                     agents.append(entry)
+
+            # Check if any agents we added
+            if len(agents) == 0:
+                success = False
 
             # Create the results dictionary
             results = {
@@ -85,7 +94,6 @@ class FunctionComponent(ResilientComponent):
 
             # Some logging
             log.info("Sending results to Resilient Appliance")
-            log.info(results)
             log.info("Complete")
 
             # Send the results to the appliance
