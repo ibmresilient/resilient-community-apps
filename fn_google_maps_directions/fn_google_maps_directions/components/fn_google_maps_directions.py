@@ -20,7 +20,7 @@ class FunctionPayload:
     for input in inputs:
       self.inputs[input] = inputs[input]
   
-  def asDict(self):
+  def as_dict(self):
     """Return this class as a Dictionary"""
     return self.__dict__
 
@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             payload.directions_link = "{0}&origin={1}&destination={2}".format(GOOGLE_MAPS_URL, origin, destination)
 
             # Send payload back to Appliance
-            results = payload.asDict()
+            results = payload.as_dict()
 
             log.info("Complete")
 
