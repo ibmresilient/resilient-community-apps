@@ -6,6 +6,9 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
+'''
+tested with pytest --resilient_app_config=/path/to/.resilient/app.config
+'''
 PACKAGE_NAME = "fn_geocoding"
 FUNCTION_NAME = "geocoding"
 
@@ -36,8 +39,8 @@ class TestGeocoding:
         assert func is not None
 
     @pytest.mark.parametrize("geocoding_source, geocoding_data, expected_results", [
-        ('address', "text", {"value": "xyz"}),
-        ('latlng', "text", {"value": "xyz"})
+        ('latlng', "42.3656119,-71.0805841", "75 Binney St, Cambridge, MA 02142, USA"),
+        ('address', "75 Binney St, Cambridge, MA 02142, USA", "42.3656119,-71.0805841")
     ])
     def test_success(self, circuits_app, geocoding_source, geocoding_data, expected_results):
         """ Test calling with sample values for the parameters """
@@ -46,4 +49,11 @@ class TestGeocoding:
             "geocoding_data": geocoding_data
         }
         results = call_geocoding_function(circuits_app, function_params)
-        assert(expected_results == results)
+        print (results)
+        if geocoding_source == 'address':
+            result = "{},{}".format(results['response']['results'][0]['geometry']['location']['lat'],
+                               results['response']['results'][0]['geometry']['location']['lng'])
+        elif geocoding_source == 'latlng':
+            result = results['response']['results'][0]['formatted_address']
+
+        assert(expected_results == result)

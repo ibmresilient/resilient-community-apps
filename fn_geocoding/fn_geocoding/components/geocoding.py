@@ -10,6 +10,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'geocoding_get_address"""
+    VALID_SOURCES = ('address', 'latlng')
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -22,10 +23,11 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_geocoding", {})
 
     @function("geocoding")
-    def _geocoding_get_address_function(self, event, *args, **kwargs):
+    def _geocoding_get_function(self, event, *args, **kwargs):
         """Function: two function types implemented: address and latlng.
            For an address, return coordinate information.
            For coordinates, return an address.
+           see: https://developers.google.com/maps/documentation/geocoding/start
         """
         try:
             # Get the function parameters:
@@ -36,7 +38,14 @@ class FunctionComponent(ResilientComponent):
             log.info("geocoding_source: %s", geocoding_source)
             log.info("geocoding_data: %s", geocoding_data)
 
-            if geocoding_source == "lnglat":
+            # choices are set in the workflow: lnglat or address
+            if geocoding_source not in FunctionComponent.VALID_SOURCES:
+                raise ValueError("geocoding_source must be one of these values: %s", FunctionComponent.VALID_SOURCES)
+
+            if geocoding_source == "latlng":
+                if len(geocoding_data.split(',')) != 2:
+                    raise ValueError("geocoding_data must be comma separated numeric values such as 42.3656119,-71.0805841")
+                # api can't handle spaces
                 geocoding_data = geocoding_data.strip()
 
             yield StatusMessage("starting...")

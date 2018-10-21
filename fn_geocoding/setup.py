@@ -27,6 +27,7 @@ setup(
             "GeocodingFunctionComponent = fn_geocoding.components.geocoding:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_geocoding.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_geocoding.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_geocoding.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_geocoding.util.selftest:selftest_function"]
     }
 )
