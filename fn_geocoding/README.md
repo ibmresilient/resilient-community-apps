@@ -5,6 +5,19 @@ For coordinates, return an address.
 
 See https://developers.google.com/maps/documentation/geocoding/start
 
+Components
+
+   Message Destinations:
+     fn_geocoding
+   Functions:
+     geocoding
+   Workflows:
+     example_geocoding_get_address
+     example_geocoding_get_coordinates
+   Rules:
+     Example: Geocode Get Address
+     Example: Geocoding Get Coordinates
+
 To install in "development mode"
 
     pip install -e ./fn_geocoding/
