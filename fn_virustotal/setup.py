@@ -9,13 +9,15 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
+    url='https://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_virustotal'",
     long_description="""Resilient Circuits Components for 'fn_virustotal'. Queries are possible for IP Addresses, URLs, hashes, domain and files.
 Files and URLs may require additional time to complete their scans, so a link is returned to review the results at a later time.
                      """,
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'virustotal_api'
+        'virustotal_api',
+        'bs4'
     ],
     packages=find_packages(),
     include_package_data=True,
