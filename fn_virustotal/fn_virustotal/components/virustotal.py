@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -29,6 +30,7 @@ class FunctionComponent(ResilientComponent):
         self.vt = self._init_virustotal()
 
     def _init_virustotal(self):
+        """ validate required fields for app.config """
         validateFields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
         return VirusTotal(self.options['api_token'], self.options['proxies'])
 
@@ -43,7 +45,13 @@ class FunctionComponent(ResilientComponent):
 
     @function("virustotal")
     def _virustotal_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: perform different scans on the following types:
+            ip addresses
+            hash - this will attempt to find an existing file report on the hash
+            domain
+            url - this will attempt to find an existing file report on the url. If none exist, a new scan is queued
+            file - this will start a new scan for the file and queue for a report later.
+        """
         try:
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
 
@@ -81,7 +89,17 @@ class FunctionComponent(ResilientComponent):
                     finally:
                         os.unlink(temp_file_binary.name)
 
-                result = self.return_response(response, self.vt.get_file_report, time.time())
+                file_result = self.return_response(response, self.vt.get_file_report, time.time())
+
+                ## was a sha-256 returned? try an existing report first
+                if file_result.get("sha256"):
+                    response = self.vt.get_file_report(file_result.get("sha256"))
+                    report_result = self.return_response(response, None, time.time())
+
+                    if report_result.get("response_code") and report_result.get("response_code") == 1:
+                        result = report_result
+                    else:
+                        result = file_result
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
@@ -106,7 +124,7 @@ class FunctionComponent(ResilientComponent):
                 result = self.return_response(response, None, time.time())
 
             else:
-                raise ValueError("Unknown type field: {}".format(vt_type))
+                raise ValueError("Unknown type field: {}. Check workflow pre-processor script.".format(vt_type))
 
             results = {
                 "scan": result
@@ -134,7 +152,6 @@ class FunctionComponent(ResilientComponent):
         if status == HTTP_RATE_LIMIT:
             raise IntegrationError('API rate limit exceeded')
 
-        #if status == RC_NOT_FOUND:
         self.log.info(response)
 
         if status != HTTP_OK:
@@ -170,6 +187,3 @@ class FunctionComponent(ResilientComponent):
 
         self.log.debug(results)
         return results
-
-
-

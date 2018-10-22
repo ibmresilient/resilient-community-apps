@@ -6,13 +6,16 @@ from setuptools import setup, find_packages
 setup(
     name='fn_virustotal',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_virustotal'",
-    long_description="Resilient Circuits Components for 'fn_virustotal'",
+    long_description="""Resilient Circuits Components for 'fn_virustotal'. Queries are possible for IP Addresses, URLs, hashes, domain and files.
+Files and URLs may require additional time to complete their scans, so a link is returned to review the results at a later time.
+                     """,
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'virustotal_api'
     ],
     packages=find_packages(),
     include_package_data=True,
