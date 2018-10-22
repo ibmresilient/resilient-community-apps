@@ -177,31 +177,28 @@ class TestSlack(object):
 
         assert slack_utils.is_channel_archived() == expected
 
+    @pytest.mark.parametrize("user_email_list,expected_list_ids", [
+        ("a@a.com, b@b.com, ", ["W012A3CDE", "W012A3CDE"]),
+        ("", [])
+    ])
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    def test_lookup_user_by_email(self, mocked_api_call):
-        """ Test find Slack user id by email"""
-        print("Test find Slack user id by email\n")
+    def test_find_user_ids_based_on_email(self, mocked_api_call, user_email_list, expected_list_ids):
+        """ Test find user ids on email"""
+        print("Test find user ids on email\n")
 
         mocked_api_call.return_value = {
             "ok": True,
             "user": {
-                    "id": "W012A3CDE",
-                    "team_id": "T012AB3C4",
-                    "name": "spengler"
-                }
+                "id": "W012A3CDE"
+            }
         }
         slack_utils = SlackUtils("fake_api_key")
 
-        results = slack_utils.lookup_user_by_email("a@a.com")
-        mocked_api_call.assert_called_with(
-            "users.lookupByEmail",
-            email="a@a.com"
-        )
-        if results.get("ok") and results.get("user"):
-            assert results.get("user").get("id") == "W012A3CDE"
+        results = slack_utils.find_user_ids_based_on_email(user_email_list)
+        assert results == expected_list_ids
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    def test_find_user_ids_error_pass(self, mocked_api_call):
+    def test_find_user_ids_based_on_email_error_pass(self, mocked_api_call):
         """ Test find Slack user id by email error pass"""
         print("Test find Slack user id by email error pass\n")
 
@@ -211,14 +208,14 @@ class TestSlack(object):
         }
 
         slack_utils = SlackUtils("fake_api_key")
-        results = slack_utils.lookup_user_by_email("b@b.com")
-        if not results.get("ok") and results.get("error") == "users_not_found":
+        try:
+            slack_utils.find_user_ids_based_on_email("b@b.com")
             assert True
-        else:
+        except IntegrationError:
             assert False
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    def test_find_user_ids_error(self, mocked_api_call):
+    def test_find_user_ids_based_on_email_error(self, mocked_api_call):
         """ Test find Slack user id by email error"""
         print("Test find Slack user id by email error\n")
 
@@ -228,10 +225,10 @@ class TestSlack(object):
         }
 
         slack_utils = SlackUtils("fake_api_key")
-        results = slack_utils.lookup_user_by_email("b@b.com")
-        if not results.get("ok") and results.get("error") == "users_not_found":
+        try:
+            slack_utils.find_user_ids_based_on_email("b@b.com")
             assert False
-        else:
+        except IntegrationError:
             assert True
 
     @pytest.mark.parametrize("user_ids_list,expected_ids", [
@@ -340,32 +337,22 @@ class TestSlack(object):
         result = build_boolean(input)
         assert result == output
 
-    def test_build_payload(self):
-        """ Test build payload method"""
-        print("Test build payload method\n")
-
-        dataDict = self._buildDataDetails()
-        resoptions = {'host': 'localhost', 'port': '443'}
-        payload = build_payload(dataDict, resoptions)
-
-        assert payload is not None
-        assert 'Resilient URL' in payload
-
     def test_build_payload_error(self):
         """ Test build payload method error"""
         print("Test build payload method error\n")
 
         dataDict = {"Something else": {"type": "list", "data": "[a,b,c]"}}
         try:
-            build_payload(dataDict, {})
+            build_payload(dataDict)
             assert False
         except IntegrationError:
             assert True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    def test_slack_post_message(self, mocked_api_call):
-        """ Test post and reply Slack message"""
-        print("Test post and reply Slack message\n")
+    def test_slack_post_message_no_attachment(self, mocked_api_call):
+        """ Test post and reply Slack message without attachment
+        # 1 - Test sending a message with a non json payload"""
+        print("Test post and reply Slack message without attachment\n")
 
         # Setup channel first
         mocked_channel = {
@@ -375,10 +362,9 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
 
-        # 1 - Test sending a message with a non json payload
         mocked_api_call.return_value = {
             "ok": True,
-            "channel": "C1H9RESGL",
+            "channel": "C1H9RESGL"
         }
 
         payload = "testing"
@@ -386,16 +372,34 @@ class TestSlack(object):
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
-            text=payload,
             as_user=True,
             username=def_username,
-            parse="full",
+            parse="none",
             link_names=1,
-            mrkdown=True
+            mrkdown=True,
+            text=payload,
+            attachments=None
         )
         assert results.get("ok") is True
 
-        # 2 - Test sending a reply with json payload
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_slack_post_message_attachment(self, mocked_api_call):
+        """ Test post and reply Slack message with attachment
+        2 - Test sending a reply with json payload"""
+        print("Test post and reply Slack message with attachment\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C1H9RESGL",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        mocked_api_call.return_value = {
+            "ok": True,
+            "channel": "C1H9RESGL"
+        }
 
         # create slack_details for the post_message
         resoptions = {
@@ -403,22 +407,23 @@ class TestSlack(object):
             'port': '443',
          }
         slack_details = json.dumps(self._buildDataDetails())
-        results2 = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, def_username)
+        results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, def_username)
 
         # covert slack_details to payload - to compare what was assert_called_with
-        payload = convert_slack_details_to_payload(slack_details, resoptions)
+        attachment_json = convert_slack_details_to_payload(slack_details, resoptions)
 
         mocked_api_call.assert_called_with(
             "chat.postMessage",
             channel="C1H9RESGL",
-            text=payload,
             as_user=True,
             username=def_username,
-            parse="full",
+            parse="none",
             link_names=1,
-            mrkdown=True
+            mrkdown=True,
+            attachments=attachment_json,
+            text=None
         )
-        assert results2.get("ok") is True
+        assert results.get("ok") is True
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_slack_post_message_error(self, mocked_api_call):
@@ -446,15 +451,17 @@ class TestSlack(object):
     def _buildDataDetails(self):
         """ Mock Data Details """
         return {
-  "Resilient Incident": {"type": "string", "data": "title here" },
-  "Resilient URL": {"type": "incident", "data": "1234" },
-  "Description": {"type": "richtext", "data": "<div>data<div>" },
-  "Confirmed": {"type": "boolean", "data": "true" },
-  "Create Date": {"type": "datetime", "data": 1525356259000 },
-  "Start Date": {"type": "datetime", "data": 1525356259000 },
-  "Severity": {"type": "string", "data": "low" },
-  "NIST Vectors": {"type": "string", "data": "[Email, Malware]" },
-  "Incident Types": {"type": "string", "data": "[Phishing]" }
+            "Additional Text": {"type": "string", "data": "Hey this is my message"},
+            "Resilient URL": {"type": "incident", "data": "1234"},
+            "Type of data": {"type": "string", "data": "Artifact"},
+            "Resilient Incident": {"type": "string", "data": "title here"},
+            "Description": {"type": "richtext", "data": "<div>data<div>"},
+            "Confirmed": {"type": "boolean", "data": "true"},
+            "Create Date": {"type": "datetime", "data": 1525356259000},
+            "Start Date": {"type": "datetime", "data": 1525356259000},
+            "Severity": {"type": "string", "data": "low"},
+            "NIST Vectors": {"type": "string", "data": "[Email, Malware]"},
+            "Incident Types": {"type": "string", "data": "u'[u\\'Malware\\', u\\'Lost PC / laptop / tablet\\']'"}
         }
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
@@ -549,16 +556,39 @@ class TestSlack(object):
             "ok": True,
             "user": {
                     "id": "W012A3CDE",
-                    "name": "spengler"
+                    "name": "spengler",
+                    "profile": {
+                        "display_name": "Egon Spengler"
+                    }
                 }
         }
         slack_utils = SlackUtils("fake_api_key")
-        user = slack_utils.get_user_info("W012A3CDE")
+        display_name = slack_utils.get_user_display_name("W012A3CDE")
         mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
             "users.info",
             user="W012A3CDE"
         )
-        assert user.get("id") == 'W012A3CDE'
+        assert display_name == "Egon Spengler"
+
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_get_user_info_no_display_name(self, mocked_api_call):
+        """ Test get user info"""
+        print("Test get user info\n")
+
+        mocked_api_call.return_value = {
+            "ok": True,
+            "user": {
+                "id": "W012A3CDE",
+                "name": "spengler"
+            }
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        display_name = slack_utils.get_user_display_name("W012A3CDE")
+        mocked_api_call.assert_called_with(  # checks the last call to a method, check for b@b.com email
+            "users.info",
+            user="W012A3CDE"
+        )
+        assert display_name == "spengler"
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_get_user_info_error(self, mocked_api_call):
@@ -570,7 +600,7 @@ class TestSlack(object):
         }
         try:
             slack_utils = SlackUtils("fake_api_key")
-            slack_utils.get_user_info("W012A3CDE")
+            slack_utils.get_user_display_name("W012A3CDE")
             assert False
         except IntegrationError:
             assert True
@@ -613,9 +643,11 @@ class TestSlack(object):
                 "ok": True,
                 "messages": [
                     {
+                        "text": "one",
                         "ts": "1"
                     },
                     {
+                        "text": "two",
                         "ts": "2"
                     }],
                 "response_metadata": {
@@ -626,9 +658,11 @@ class TestSlack(object):
                 "ok": True,
                 "messages": [
                     {
+                        "text": "three",
                         "ts": "3"
                     },
                     {
+                        "text": "four",
                         "ts": "4"
                     }],
                 "response_metadata": {
@@ -637,7 +671,24 @@ class TestSlack(object):
             }]
         slack_utils = SlackUtils("fake_api_key")
         message_ts_list = slack_utils._get_channel_parent_message_history()
-        assert message_ts_list == ["1", "2", "3", "4"]
+        assert message_ts_list == [{'text': 'one', "ts": "1"}, {'text': 'two', "ts": "2"}, {'text': 'three', "ts": "3"}, {'text': 'four', "ts": "4"}]
+
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_get_channel_parent_message_history_error(self, mocked_api_call):
+        """ Test get channel parent msg history error"""
+        print("Test get channel parent msg history error\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": False
+            }]
+
+        slack_utils = SlackUtils("fake_api_key")
+        try:
+            slack_utils._get_channel_parent_message_history()
+            assert False
+        except IntegrationError:
+            assert True
 
     @patch('fn_slack.lib.slack_common.SlackUtils._get_channel_parent_message_history')
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
@@ -650,10 +701,14 @@ class TestSlack(object):
                 "ok": True,
                 "messages": [
                     {
-                        "text": "one"
+                        "text": "parent_one",
+                        "thread_ts": "111",
+                        "ts": "111"
                     },
                     {
-                        "text": "two"
+                        "text": "reply_one",
+                        "thread_ts": "111",
+                        "ts": "112"
                     }],
                 "response_metadata": {
                     "next_cursor": "bmV4d"
@@ -663,18 +718,44 @@ class TestSlack(object):
                 "ok": True,
                 "messages": [
                     {
-                        "text": "three"
+                        "text": "reply_two",
+                        "thread_ts": "111",
+                        "ts": "113"
                     }],
                 "response_metadata": {
                     "next_cursor": None
                 }
             }]
 
-        mocked_msg_history_list.return_value = ["ts1"]
+        mocked_msg_history_list.return_value = [{'text': 'parent_one', "replies": [{"mock": "mock"}]}, {'text': 'parent_two'}]
 
         slack_utils = SlackUtils("fake_api_key")
         history = slack_utils.get_channel_complete_history()
-        assert history == [{'text': 'one'}, {'text': 'two'}, {'text': 'three'}]
+        assert history == [{'text': 'parent_one', "replies": [{"mock": "mock"}]},
+                           {'text': 'reply_one', "thread_ts": "111", "ts": "112"},
+                           {"text": "reply_two", "thread_ts": "111", "ts": "113"},
+                           {'text': 'parent_two'}]
+
+    @patch('fn_slack.lib.slack_common.SlackUtils._get_channel_parent_message_history')
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_get_channel_complete_history_error(self, mocked_api_call, mocked_msg_history_list):
+        """ Test get complete history error """
+        print("Test get complete history error\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": False
+            }]
+
+        mocked_msg_history_list.return_value = [{'text': 'parent_one', "replies": [{"mock": "mock"}]},
+                                                {'text': 'parent_two'}]
+
+        slack_utils = SlackUtils("fake_api_key")
+        try:
+            slack_utils.get_channel_complete_history()
+            assert False
+        except IntegrationError:
+            assert True
 
     @pytest.mark.parametrize("is_channel,is_private,expected", [
         (True, False, "Public"),  # public channel
@@ -718,13 +799,18 @@ class TestSlack(object):
         """ Test data for template"""
         print("Test data for template\n")
 
-        data = data_for_template("username", "reply_count", "msg_time", "msg_text", True)
+        data = data_for_template("number", "username", "reply_count", "msg_time", "msg_pretext", "msg_text",
+                                 "file_permalink", "file_name", True)
 
         expected_data = {
+            "number": "number",
             "username": "username",
             "reply_count": "reply_count",
             "msg_time": "msg_time",
+            "msg_pretext": "msg_pretext",
             "msg_text": "msg_text",
+            "file_permalink": "file_permalink",
+            "file_name": "file_name",
             "is_msg_parent": True
         }
 
@@ -883,3 +969,32 @@ class TestSlack(object):
             assert False
         except ValueError:
             assert True
+
+    @pytest.mark.parametrize("type_channel,file_ts_result", [
+        ("private", "1532"),
+        ("public", "1532"),
+        ("other", None)
+    ])
+    def test_get_ts_from_file_upload_results(self, type_channel, file_ts_result):
+        """ Test get timestamp from file.upload json results"""
+        print("Test get timestamp from file.upload json results\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        file_upload_results = {
+            "ok": True,
+            "file": {
+                "shares": {
+                    type_channel: {"C0EAQDV4Z": [{"ts": "1532"}]}
+                }
+            }
+        }
+
+        file_ts = slack_utils.get_ts_from_file_upload_results(file_upload_results)
+        assert file_ts == file_ts_result

@@ -247,7 +247,7 @@ class SlackUtils(object):
         # Find user ids based on their emails
         user_id_list = []
 
-        emails = [email for email in slack_participant_emails.split(",") if email.strip()]  # making sure to exclude '  ' or ''
+        emails = [email.strip() for email in slack_participant_emails.split(",") if email.strip()]  # making sure to exclude '  ' or ''
         for email in emails:
             results_user_id = self.lookup_user_by_email(email)
 
@@ -315,6 +315,9 @@ class SlackUtils(object):
                 cursor=cursor
             )
             LOG.debug(results)
+
+            if not results.get("ok"):
+                raise IntegrationError("Slack error response: " + results.get("error", ""))
 
             has_more_results, cursor = self._get_next_cursor_for_next_page(results)
             for ch in results.get("channels"):  # yield the first page, paginate only until channel is found!
@@ -448,6 +451,9 @@ class SlackUtils(object):
             )
             LOG.debug(results)
 
+            if not results.get("ok"):
+                raise IntegrationError("Slack error response: " + results.get("error", ""))
+
             has_more_results, cursor = self._get_next_cursor_for_next_page(results)
             parent_messages_list.extend(results.get("messages"))
 
@@ -534,6 +540,9 @@ class SlackUtils(object):
                 cursor=cursor
             )
             LOG.debug(results)
+
+            if not results.get("ok"):
+                raise IntegrationError("Slack error response: " + results.get("error", ""))
 
             has_more_results, cursor = self._get_next_cursor_for_next_page(results)
             thread_messages_list.extend(results.get("messages"))
@@ -857,12 +866,12 @@ def convert_slack_details_to_payload(slack_text, resoptions):
 
         additional_text_dict = ordered_data.pop("Additional Text", None)  # get the "Additional Text" and delete it from the dict
         pretext = None
-        if additional_text_dict.get("type") == "string" and additional_text_dict.get("data"):
+        if additional_text_dict and additional_text_dict.get("type") == "string" and additional_text_dict.get("data"):
             pretext = additional_text_dict.get("data")
 
         type_data_dict = ordered_data.pop("Type of data", None)  # get the "Type of data" and delete it from the dict
         type_data = None
-        if type_data_dict.get("type") == "string" and type_data_dict.get("data"):
+        if type_data_dict and type_data_dict.get("type") == "string" and type_data_dict.get("data"):
             type_data = type_data_dict.get("data")
 
         payload = build_payload(ordered_data)
