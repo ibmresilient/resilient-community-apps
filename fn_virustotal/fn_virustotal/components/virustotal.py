@@ -75,7 +75,7 @@ class FunctionComponent(ResilientComponent):
             if vt_type.lower() == 'file':
                 entity = get_input_entity(get_resilient_client(self.resilient), incident_id, attachment_id, artifact_id)
                 # Create a temporary file to write the binary data to.
-                with tempfile.NamedTemporaryFile('w+b', bufsize=0, delete=False) as temp_file_binary:
+                with tempfile.NamedTemporaryFile('w+b', delete=False) as temp_file_binary:
                     # Write binary data to a temporary file. Make sure to close the file here...this
                     # code must work on Windows and on Windows the file cannot be opened a second time
                     # While open.  Floss will open the file again to read the data, so close before
