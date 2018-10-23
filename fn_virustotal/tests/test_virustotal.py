@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Tests using pytest_resilient_circuits"""
+"""Tests using pytest_resilient_circuits
+test as: pytest --resilient_app_config /path/to/.resilient/app.config -s
+"""
 
 from __future__ import print_function
 import pytest
