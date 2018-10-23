@@ -137,12 +137,18 @@ print(str(row_count))
 #
 #   Compute how many times we can do this
 #
-fold = row_count/minor_count
+fold = row_count/minor_count/5
 print("We need to do {} times".format(fold))
+
+svm1 = SVC(kernel="rbf", class_weight="balanced")
+svm1.fit(X_tmp, y_tmp)
+y_1 = svm1.predict(X_test)
+accuracy = accuracy_score(y_true=y_test,
+                          y_pred=y_1)
 
 estimators = []
 for i in range(0, fold, 1):
-    samples_df = data_major.sample(minor_count,
+    samples_df = data_major.sample(minor_count*5,
                                    replace=False)
     dataf_est = pds.concat([samples_df, data_minor], axis=0)
 
@@ -152,7 +158,7 @@ for i in range(0, fold, 1):
     #
     # Random Forest already use voting. SVM is better.
     #
-    svm = SVC(kernel="rbf")
+    svm = SVC(kernel="rbf", class_weight="balanced")
     #svm = SVC(kernel="linear")
     svm.fit(X_train_est, y_train_est)
     estimators.append(svm)
