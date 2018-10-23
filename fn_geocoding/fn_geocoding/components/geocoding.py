@@ -16,17 +16,11 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_geocoding", {})
-        self.init_config()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_geocoding", {})
-        self.init_config()
-
-    def init_config(self):
-        if not (self.options.get("url", None) and self.options.get("api_key", None)):
-            raise ValueError("Check that app.config [fn_geocoding] url and api_key settings are configured")
 
     @function("geocoding")
     def _geocoding_get_function(self, event, *args, **kwargs):
@@ -43,6 +37,9 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("geocoding_source: %s", geocoding_source)
             log.info("geocoding_data: %s", geocoding_data)
+
+            # confirm app.config setup
+            self.init_config()
 
             # choices are set in the workflow: lnglat or address
             if geocoding_source not in FunctionComponent.VALID_SOURCES:
@@ -75,3 +72,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    def init_config(self):
+        if not (self.options.get("url", None) and self.options.get("api_key", None)):
+            raise ValueError("Check that app.config [fn_geocoding] url and api_key settings are configured")
