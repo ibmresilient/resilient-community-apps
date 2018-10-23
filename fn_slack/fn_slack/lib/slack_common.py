@@ -23,6 +23,11 @@ ARCHIVE_TEMPLATE_PATH = "data/templates/template_archive_slack.jinja2"
 DATA_TABLE_API_NAME = "slack_conversations_db"
 # Prefix for generating res_id which is either RES-1001 for incidents or RES-1001-2002 for tasks
 RES_PREFIX = "RES"
+# Used for pagination for Slack methods: 'conversations.history', 'conversations.replies' and 'conversations.list'.
+# Slack recommends no more than 200 results at a time.
+SLACK_HISTORY_MESSAGE_LIMIT = 100
+SLACK_HISTORY_REPLY_MESSAGE_LIMIT = 20
+SLACK_LOAD_CHANNELS_LIMIT = 100
 
 
 class SlackUtils(object):
@@ -211,10 +216,10 @@ class SlackUtils(object):
         """
         attachment = attachment_data.get("attachment")
         if attachment:
-            file_name = attachment.get("name") if attachment else None
-            file_type = attachment.get("content_type") if attachment else None
-            incident_id = attachment.get("inc_id") if attachment else None
-            artifact_type = attachment.get("type") if attachment else None
+            file_name = attachment.get("name")
+            file_type = attachment.get("content_type")
+            incident_id = attachment.get("inc_id")
+            artifact_type = attachment.get("type")
         else:
             file_name = attachment_data.get("name")
             file_type = attachment_data.get("content_type")
@@ -254,7 +259,7 @@ class SlackUtils(object):
             if results_user_id.get("ok") and results_user_id.get("user"):
                 user_id_list.append(results_user_id.get("user").get("id"))
             elif not results_user_id.get("ok") and results_user_id.get("error", "") == "users_not_found":
-                self.add_warning("User {} s not a member of your workspace".format(email))
+                self.add_warning("User {} is not a member of your workspace".format(email))
             else:
                 raise IntegrationError("Invite users failed: " + json.dumps(results_user_id))
 
@@ -284,9 +289,9 @@ class SlackUtils(object):
 
     def find_channel_by_name(self, slack_channel_name):
         """
-        Method verifies if suggested slack channel already exists and returns the channel object.
+        Method verifies if suggested slack channel already exists and updates the channel instance variable.
         :param slack_channel_name: Name of the public or private channel
-        :return: channel object
+        :return:
         """
         all_channels = self._slack_find_channels()
 
@@ -311,7 +316,7 @@ class SlackUtils(object):
                 "conversations.list",
                 exclude_archived=False,  # we need to load archived channels
                 types="public_channel,private_channel",
-                limit=100,
+                limit=SLACK_LOAD_CHANNELS_LIMIT,
                 cursor=cursor
             )
             LOG.debug(results)
@@ -344,11 +349,10 @@ class SlackUtils(object):
         channel.get("is_channel") is False & channel.get("is_private") is True -> private channel
         :return: True if channel is private else False
         """
-        if self.channel and not self.channel.get("is_channel") and self.channel.get("is_private"):
-            return True
-
-        else:
+        if self.channel and self.channel.get("is_channel") and not self.channel.get("is_private"):
             return False
+        else:
+            return True
 
     def is_channel_archived(self):
         """
@@ -363,14 +367,14 @@ class SlackUtils(object):
 
     def slack_create_channel(self, slack_channel_name, is_private):
         """
-        Method creates a public or private channel.
+        Method creates a public or private channel and updates the channel instance variable.
         Using Conversations API to access anything channel-like (private, public, direct, etc).
         Channel names can only contain lowercase letters, numbers, hyphens, and underscores, and must be
         21 characters or less. Slack validates the submitted channel name and modifies it to meet the above criteria.
         Since the channel name can get modified use channel_id instead.
         :param slack_channel_name: Name of the public or private channel to create
         :param is_private: Create a private channel instead of a public one
-        :return: channel dict
+        :return:
         """
         results = self.slack_client.api_call(
             "conversations.create",
@@ -446,7 +450,7 @@ class SlackUtils(object):
             results = self.slack_client.api_call(
                 "conversations.history",
                 channel=self.get_channel_id(),
-                limit=200,
+                limit=SLACK_HISTORY_MESSAGE_LIMIT,
                 cursor=cursor
             )
             LOG.debug(results)
@@ -536,7 +540,7 @@ class SlackUtils(object):
                 "conversations.replies",
                 channel=self.get_channel_id(),
                 ts=msg_ts,
-                limit=20,
+                limit=SLACK_HISTORY_REPLY_MESSAGE_LIMIT,
                 cursor=cursor
             )
             LOG.debug(results)

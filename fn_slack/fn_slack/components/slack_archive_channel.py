@@ -87,13 +87,14 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Failed creating an attachment")
 
             # Archive channel
-            results = slack_utils.archive_channel()
-            if results.get("ok"):
+            archive_results = slack_utils.archive_channel()
+            if archive_results.get("ok"):
                 yield StatusMessage("Channel {} has been archived".format(res_associated_channel_name))
             else:
-                raise FunctionError("Archiving channel failed: " + json.dumps(results))
+                raise FunctionError("Archiving channel failed: " + json.dumps(archive_results))
 
             results = {"channel": res_associated_channel_name}
+            LOG.info(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -998,3 +998,48 @@ class TestSlack(object):
 
         file_ts = slack_utils.get_ts_from_file_upload_results(file_upload_results)
         assert file_ts == file_ts_result
+
+    @pytest.mark.parametrize("attachment_data", [
+        {"attachment": {"name": "n", "content_type": "ct", "inc_id": "id", "type": "tp"}},  # attachment
+        {"name": "n", "content_type": "ct", "inc_id": "id", "type": "tp"}  # artifact attachment
+    ])
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_slack_post_attachment(self, mocked_api_call, attachment_data):
+        """ Test Slack post attachment - file upload"""
+        print("Test Slack post attachment - file upload\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": True
+            }]
+
+        slack_utils = SlackUtils("fake_api_key")
+        try:
+            slack_utils.slack_post_attachment("attachment_content", attachment_data, "text")
+            assert True
+        except IntegrationError:
+            assert False
+
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_slack_post_attachment_error(self, mocked_api_call):
+        """ Test Slack post attachment - file upload error"""
+        print("Test Slack post attachment - file upload error\n")
+
+        mocked_api_call.side_effect = [
+            {
+                "ok": False
+            }]
+
+        slack_utils = SlackUtils("fake_api_key")
+        try:
+            slack_utils.slack_post_attachment("attachment_content", {}, "text")
+            assert False
+        except IntegrationError:
+            assert True
+
+    def test_get_warnings(self):
+        """ Test get warnings"""
+        print("Test get warnings\n")
+        slack_utils = SlackUtils("fake_api_key")
+        assert isinstance(slack_utils.get_warnings(), list)
+
