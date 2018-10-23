@@ -1,6 +1,8 @@
 # Resilient Functions Integration to Slack
 
-This function creates a Slack message based on a Resilient incident and it's notes. Threaded replies are possible based on a retained Slack thread_id.
+This function creates a Slack message based on a Resilient incident, it's tasks, notes and artifacts. 
+Threaded replies are possible based on a retained Slack thread_id.
+
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
 - Inviting users to conversations

@@ -2,3 +2,5 @@ include README.md
 include fn_slack/util/*
 include fn_slack/lib/*
 include fn_slack/LICENSE
+include fn_slack/doc/*
+include fn_slack/data/templates/*.jinja*

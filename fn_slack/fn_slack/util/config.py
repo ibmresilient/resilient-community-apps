@@ -10,8 +10,12 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_slack]
+# Slack app OAuth Access Token
 api_token=xoxp-xxxxxxxxx-xxxxxxxxxxxx-xxxxxxxxxxxxx-xxxxxxxxxxx
-# When as_user=False, username represents the default submission author, you can override the username on the Workflow
+
+# Username represents the default submission author.
+# Used together with 'as_user=False'.
+# You can also update the username on the Workflow.
 username=Resilient"""
 
     return config_data

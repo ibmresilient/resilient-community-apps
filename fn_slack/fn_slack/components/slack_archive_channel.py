@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+"""Function implementation to Slack.
+This function exports conversation history to a text file,
+saves it as an attachment in Resilient and arches Slack channel.
+"""
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.slack_common import *
@@ -26,7 +30,6 @@ class FunctionComponent(ResilientComponent):
     def _slack_archive_channel_function(self, event, *args, **kwargs):
         """Function: Function exports conversation history from Slack channel to a text file,
             saves the text file as an attachment and archives the Slack channel. """
-
         try:
             validate_fields(['api_token', 'username'], self.options)
             validate_fields(['incident_id'], kwargs)

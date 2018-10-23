@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+"""Function implementation to Slack.
+This function uploads file to Slack and creates a Slack message based on a Resilient attachments.
+
+Many of the features of posting a Slack message are under customer control including:
+- Creating private or public channels
+- Inviting users to conversations
+- Uploading Incident, Task or Artifact attachment
+"""
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.slack_common import *

@@ -7,7 +7,9 @@ This function creates a Slack message based on a Resilient incident, it's tasks,
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
 - Inviting users to conversations
-- posting messages displaying authorship
+- Preserving embedded links
+- Posting messages from Incidents, Notes, Artifacts and Tasks displaying authorship
+- Slack user ID <@U345GHIJKL> and channel ID <#C012ABCDE> references
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -42,14 +44,18 @@ class FunctionComponent(ResilientComponent):
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
         """Function: Create a Slack message based on an incident, task, note or an artifact data.
-        All the fields to send to slack are sent in slack_text. A json structure is used to know how to interpret field meanings. A
-        structure can look like this with conversions based on the 'type' key/value pair
+        All the fields to send to slack are sent in slack_text. A json structure is used to know how to interpret field
+        meanings. A structure can look like this with conversions based on the 'type' key/value pair:
+
         {
-          "Resilient Incident": {"type": "string", "data": "plain text here"},
-          "Resilient URL": {"type": "incident", "data": "123"},
+          "Additional Text": {{"type": "string", "data": "My text message to post in Slack" }},
+          "Resilient URL": {{"type": "incident", "data": 123 }},
+          "Type of data": {{"type": "string", "data": "Incident" }},
+          "Incident name": {"type": "string", "data": "plain text here"},
           "Description": {"type": "richtext", "data": "<div>text here</div>"},
-          "Confirmed": {"type": "boolean", "data": "1"},
-          "Start Date": {"type": "datetime", "data": 158949393}
+          "Date Occurred": {"type": "boolean", "data": "1"},
+          "Date Occurred": {"type": "datetime", "data": 158949393}
+          ...
         }
 
         If channel_name is NOT specified in the function input, method will perform a lookup
