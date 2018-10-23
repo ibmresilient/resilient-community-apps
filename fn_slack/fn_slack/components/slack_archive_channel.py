@@ -79,7 +79,6 @@ class FunctionComponent(ResilientComponent):
             messages = slack_utils.get_channel_complete_history()
 
             # Saving conversation history to a text file and post it as attachment
-            yield StatusMessage("Saving conversation history to a text file")
             new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id, task_id)
             if new_attachment is not None:
                 yield StatusMessage("Channel's chat history was uploaded as an attachment")
