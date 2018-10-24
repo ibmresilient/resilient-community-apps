@@ -47,13 +47,17 @@ class FunctionComponent(ResilientComponent):
             if webex_timezone is None:
                 yield FunctionError("webex_timezone is not defined in app.config")
 
-
             opts = dict()
             opts["webex_site_url"] = webex_site_url
             opts["email"] = webex_email
             opts["password"] = webex_password
             opts["sitename"] = webex_site
             opts["timezone"] = webex_timezone
+
+            if self.options.get("webex_site_id"):
+                opts["site_id"] = self.options.get("webex_site_id")
+            if self.options.get("webex_partner_id"):
+                opts["partner_id"] = self.options.get("webex_partner_id")
 
             webex_meeting_name = kwargs.get("webex_meeting_name")  # text
             webex_meeting_password = kwargs.get("webex_meeting_password")  # text
@@ -75,4 +79,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(result)
         except Exception as e:
-            yield FunctionError(e.message)
+            if hasattr(e, 'message'):
+                yield FunctionError(e.message)
+            else:
+                yield FunctionError(e)

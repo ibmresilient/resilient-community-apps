@@ -28,6 +28,7 @@ setup(
             "FnCreateWebexMeetingFunctionComponent = fn_create_webex_meeting.components.fn_create_webex_meeting:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_create_webex_meeting.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_create_webex_meeting.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_create_webex_meeting.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_create_webex_meeting.util.selftest:selftest_function"]
     }
 )

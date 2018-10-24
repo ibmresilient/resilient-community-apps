@@ -81,12 +81,16 @@ class WebexAPI:
 
         response = self.webex_request(path, "POST", timezone_xml)
 
+        log.debug(response.text)
+
         status_regex = "<serv:result>(.*)<\/serv:result>"
         status_regex_search = re.search(status_regex, response.text)
 
         # check if call failed
         if status_regex_search is not None and status_regex_search.group(1) == "FAILURE":
-            return {"id": 0, "gmt_hour": 0, "gmt_minute": 0}
+            reason_regex = "<serv:reason>(.*)<\/serv:reason>"
+            reason_regex_search = re.search(reason_regex, response.text)
+            return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": reason_regex_search.group(1)}
 
         timezone_pattern = re.compile(r'<ns1:timeZoneID>([0-9]*)<\/ns1:timeZoneID><ns1:gmtOffset>[\-0-9]*<\/ns1:gmtOffset><ns1:description>([a-zA-Z+\-0-9:,\s\(\).&;]*)<\/ns1:description>')
         gmt_time_pattern = r'GMT([\-+0-9]*):([0-9]*)'
@@ -103,15 +107,18 @@ class WebexAPI:
 
                 return {"id": str(m.group(1)), "gmt_hour": gmt_hour, "gmt_minute": gmt_minute}
 
-        return {"id": 0, "gmt_hour": 0, "gmt_minute": 0}
+        return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": "timezone not found: {}".format(self.opts["timezone"])}
 
     def generate_security_context(self):
         """Generates the security context required by the API for authentication"""
-        xml = """<securityContext>
-        <webExID>""" + self.opts.get("email") + """</webExID>
-        <password>""" + self.opts.get("password") + """</password>
-        <siteName>""" + self.opts.get("sitename") + """</siteName>
-        </securityContext>"""
+        xml = "<webExID>{}</webExID><password>{}</password>".format(self.opts.get("email"), self.opts.get("password"))
+
+        if self.opts.get("site_id") and self.opts.get("partner_id"):
+            xml = xml + "<siteID>{}</siteID><partnerID>{}</partnerID>".format(self.opts.get("site_id"). self.opts.get("partner_id"))
+        else:
+            xml = xml + "<siteName>{}</siteName>".format(self.opts.get("sitename"))
+
+        xml = "<securityContext>{}</securityContext>".format(xml)
 
         return xml
 
@@ -123,7 +130,7 @@ class WebexAPI:
 
         timezone_info = self.get_timezone_info()
         if type(timezone_info.get("id")) is int and timezone_info.get("id") is 0:
-            raise FunctionError("Unable to find timezone for string %s" % self.opts.get("timezone"))
+            raise FunctionError(timezone_info.get("reason", "unknown reason"))
 
         utc_offset = datetime.timedelta(hours=timezone_info["gmt_hour"], minutes=timezone_info["gmt_minute"])
         now = datetime.datetime.now(pytz.utc)
@@ -136,7 +143,7 @@ class WebexAPI:
         else:
             time = datetime.datetime.fromtimestamp(self.meeting_start_time/1000, tz=timezones_with_offset[0])
             if self.meeting_end_time:
-                duration = (self.meeting_end_time/1000 - self.meeting_start_time/1000)/60
+                duration = int((self.meeting_end_time/1000 - self.meeting_start_time/1000)/60)
             else:
                 duration = DEFAULT_MEETING_LENGTH
         meeting_time = time.strftime("%m/%d/%Y %H:%M:%S")
@@ -178,6 +185,8 @@ class WebexAPI:
         meeting_xml = self.generate_create_meeting_xml()
 
         path = "/WBXService/XMLService"
+        log = logging.getLogger(__name__)
+        log.debug(meeting_xml)
 
         response = self.webex_request(path, "POST", meeting_xml)
 
