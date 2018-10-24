@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_create_webex_meeting',
-    version='1.0.0',
+    version='1.0.1',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
