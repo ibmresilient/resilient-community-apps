@@ -15,6 +15,7 @@ class FunctionPayload:
     self.inputs = {}
     self.row_id = None
     self.res_id = None
+    self.res_link = None
     self.sn_ref_id = None
     self.sn_status = None
     self.sn_action = None
@@ -58,7 +59,7 @@ class FunctionComponent(ResilientComponent):
           if isinstance(data, dict):
             return { _byteify(key): _byteify(value) for key, value in data.items() }
 
-        def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, task_id=None, init_note=None, sn_optional_fields=None):
+        def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, res_link, task_id=None, init_note=None, sn_optional_fields=None):
           """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
           request_data = None
 
@@ -85,7 +86,7 @@ class FunctionComponent(ResilientComponent):
           # Add sn_table_name, resilient_id, link and init_note to the request_data
           request_data["sn_table_name"] = sn_table_name
           request_data["id"] = res_helper.generate_res_id(incident_id, task_id)
-          request_data["link"] = res_helper.generate_res_link(incident_id, self.host, task_id)
+          request_data["link"] = res_link
           request_data["sn_init_work_note"] = init_note
 
           # Extend request_data if there is data in 'sn_optional_fields'
@@ -130,10 +131,14 @@ class FunctionComponent(ResilientComponent):
             # Instansiate a reference to the ServiceNow Datatable
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
 
+            # Generate the res_link
+            payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
+
             # Generate the request_data
             request_data = generate_sn_request_data(res_client, res_helper, datatable,
                                                 payload.inputs["incident_id"],
                                                 payload.inputs["sn_table_name"],
+                                                payload.res_link,
                                                 payload.inputs["task_id"],
                                                 payload.inputs["sn_init_work_note"],
                                                 payload.inputs["sn_optional_fields"])
@@ -150,14 +155,14 @@ class FunctionComponent(ResilientComponent):
               now = int(time.time()*1000)
 
               # Generate Link to ServiceNow record
-              link = res_helper.SN_HOST + "/" + create_in_sn_response["sn_record_link"]
+              sn_link = res_helper.SN_HOST + "/" + create_in_sn_response["sn_record_link"]
 
               # Add values to payload
               payload.res_id = create_in_sn_response["res_id"]
               payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
               payload.sn_status = create_in_sn_response["sn_status"]
               payload.sn_action = create_in_sn_response["sn_action"]
-              payload.sn_record_link = link
+              payload.sn_record_link = sn_link
               payload.sn_time_created = now
 
               # Generate cells for the datatable
@@ -167,7 +172,7 @@ class FunctionComponent(ResilientComponent):
                 ("sn_ref_id", payload.sn_ref_id),
                 ("status", payload.sn_status),
                 ("action", payload.sn_action),
-                ("link", """<a href="{0}">Link</a>""".format(link))
+                ("link", """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
               ]
 
               try:
