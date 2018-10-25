@@ -15,7 +15,7 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
-from fn_cisco_amp4ep.components.mock_artifacts import get_computer_trajectory
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_computer_trajectory' of
     package fn_cisco_amp4ep.
