@@ -12,11 +12,20 @@ from fn_machine_learning.lib.ml_random_forest import MlRandomForest
 from fn_machine_learning.lib.ml_gaussiannb import MlGaussianNB
 from fn_machine_learning.lib.ml_bernoullinb import MlBernoulliNB
 from fn_machine_learning.lib.ml_knn import MlKNN
+from fn_machine_learning.lib.ml_dummy_classifier import MlDummyClassifier
 import logging
 import json
 
 
 def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
+    """
+    Factory design pattern
+    :param name:
+    :param imbalance_upsampling:
+    :param class_weight:
+    :param method:
+    :return:
+    """
     model = None
     if name == "Logistic Regression":
         model = LogisticRegression(method=method,
@@ -51,6 +60,8 @@ def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
         model = MlKNN(method=method,
                       imbalance_upsampling=imbalance_upsampling,
                       class_weight=class_weight)
+    elif name == MlDummyClassifier.get_name():
+        model = MlDummyClassifier()
 
     return model
 

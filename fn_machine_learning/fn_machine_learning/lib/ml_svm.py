@@ -105,6 +105,7 @@ class MlSVC(MlModelCommon, SVC):
 
                 self.compute_accuracy(predict=y_predict,
                                       actual=self.y_test)
+
             else:
                 self.log.error("No sample to train the model")
         except Exception as e:

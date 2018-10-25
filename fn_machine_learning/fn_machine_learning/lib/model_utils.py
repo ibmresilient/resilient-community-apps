@@ -8,7 +8,9 @@ import pickle
 import pandas as pds
 import logging
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
-from fn_machine_learning.lib.ml_config import MlConfig
+from sklearn.metrics import precision_score, recall_score, f1_score
+import numpy as np
+
 
 SUPPORTED_ALGORITHMS = [
     u"Logistic Regression",
@@ -146,6 +148,41 @@ def analyze(y_true, y_pred):
 
     return re
 
+
+def compute_recall(y_true, y_pred):
+    """
+    Use sklearn to comput recall
+    :param y_true:
+    :param y_pred:
+    :return:
+    """
+    recall = recall_score(y_true=y_true,
+                          y_pred=y_pred,
+                          average="macro")
+    return recall
+
+
+def compute_precision(y_true, y_pred):
+    """
+    Compute precision
+    :param y_true:
+    :param y_pred:
+    :return:
+    """
+    return precision_score(y_true=y_true,
+                           y_pred=y_pred,
+                           average="macro")
+
+def comput_f1(y_true, y_pred):
+    """
+    Compute f1
+    :param y_true:
+    :param y_pred:
+    :return:
+    """
+    return f1_score(y_true=y_true,
+                    y_pred=y_pred,
+                    average="macro")
 
 def count_values(csv_file, field, in_log=None):
     """

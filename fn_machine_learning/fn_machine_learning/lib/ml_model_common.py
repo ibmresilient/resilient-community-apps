@@ -290,6 +290,16 @@ class MlModelCommon(object):
 
         self.config.analysis = model_utils.analyze(y_true=actual,
                                                    y_pred=predict)
+        self.config.precision = model_utils.compute_precision(y_true=actual,
+                                                              y_pred=predict)
+
+        self.config.recall = model_utils.compute_recall(y_true=actual,
+                                                        y_pred=predict)
+
+        self.config.f1 = model_utils.comput_f1(y_true=actual,
+                                               y_pred=predict)
+
+
         #
         # This is very expensive. Do it only if debug is enabled
         #

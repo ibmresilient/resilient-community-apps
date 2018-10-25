@@ -27,6 +27,9 @@ class MlConfig(object):
         self.accuracy = 0.0
         self.analysis = None
         self.build_time = ""
+        self.precision = 0.0
+        self.recall = 0.0
+        self.f1 = 0.0
 
         #
         #   Advanced (optional)

@@ -353,10 +353,20 @@ def show_model_summary(model, model_file):
     if model.config.unwanted_values is not None:
         LOG.info("Unwanted Values: {}".format(", ".join(model.config.unwanted_values)))
     LOG.info("Accuracy:        {}".format(model.config.accuracy))
+    #
+    #@TODO: Does customer care about precision and recall? F1 is enough?
+    #
+    # if model.config.precision is not None:
+    #     LOG.info("Precision:       {}".format(model.config.precision))
+    # if model.config.recall is not None:
+    #     LOG.info("Recall:           }".format(model.config.recall))
+    if model.config.f1 is not None:
+        LOG.info("F1:              {}".format(model.config.f1))
+
     if model.config.analysis:
         LOG.info("  Accuracy for {} value:".format(model.config.predict_field))
         for key, value in model.config.analysis.iteritems():
-            LOG.info("    {}:         {}".format(key, value))
+            LOG.info("    {}:        {}".format(key, value))
 
 
 def view_model(args):
