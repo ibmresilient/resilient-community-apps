@@ -160,7 +160,7 @@ class Ampclient(object):
         r_json = self._req(uri)
         return r_json
 
-    def get_computer_trajectory(self, connector_guid, limit=None):
+    def get_computer_trajectory(self, connector_guid, q=None, limit=None):
         """Get a list of all activities associated with a particular computer, search by guid
 
         For more detail v1, see https://api-docs.amp.cisco.com/api_resources?api_host=api.amp.cisco.com&api_version=v1
@@ -172,7 +172,7 @@ class Ampclient(object):
         """
 
         uri = self._endpoints["computer_trajectory"].format(connector_guid)
-        params = {"limit": limit}
+        params = {"limit": limit, "q": q}
         r_json = self._req(uri, params=params)
         return r_json
 
