@@ -35,10 +35,6 @@ class FunctionComponent(ResilientComponent):
             if webex_password is None:
                 yield FunctionError("webex_password is not defined in app.config")
 
-            webex_site = self.options.get("webex_site")
-            if webex_site is None:
-                yield FunctionError("webex_site is not defined in app.config")
-
             webex_site_url = self.options.get("webex_site_url")
             if webex_site_url is None:
                 yield FunctionError("webex_site_url is not defined in app.config")
