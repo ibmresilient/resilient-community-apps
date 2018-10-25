@@ -82,4 +82,3 @@ def readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%d %H:%M:%
         ts = timestamp
 
     return datetime.datetime.utcfromtimestamp(ts).strftime(rtn_format)
-

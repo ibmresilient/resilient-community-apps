@@ -8,7 +8,6 @@ saves it as an attachment in Resilient and arches Slack channel.
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_slack.lib.slack_common import *
-import json
 
 LOG = logging.getLogger(__name__)
 

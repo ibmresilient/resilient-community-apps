@@ -3,17 +3,17 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 import logging
 import json
-from fn_slack.lib.errors import IntegrationError
-from fn_slack.lib.resilient_common import *
-from slackclient import SlackClient
-from six import string_types
-import tempfile
-import resilient_circuits.template_functions as template_functions
-from os.path import join, pardir
-import os
 import time
 import collections
 import re
+import tempfile
+import os
+from os.path import join, pardir
+from slackclient import SlackClient
+import resilient_circuits.template_functions as template_functions
+from fn_slack.lib.errors import IntegrationError
+from fn_slack.lib.resilient_common import *
+
 
 LOG = logging.getLogger(__name__)
 
@@ -31,6 +31,9 @@ SLACK_LOAD_CHANNELS_LIMIT = 100
 
 
 class SlackUtils(object):
+    """
+    Helper object SlackUtils.
+    """
 
     def __init__(self, api_token):
         self.slack_client = SlackClient(api_token)
@@ -59,8 +62,8 @@ class SlackUtils(object):
         """
         if self.get_channel() is not None:
             return self.get_channel().get("id")
-        else:
-            return None
+
+        return None
 
     def get_channel_name(self):
         """
@@ -69,8 +72,8 @@ class SlackUtils(object):
         """
         if self.get_channel() is not None:
             return self.get_channel().get("name")
-        else:
-            return None
+
+        return None
 
     def get_warnings(self):
         """
@@ -365,8 +368,8 @@ class SlackUtils(object):
         """
         if self.channel and self.channel.get("is_channel") and not self.channel.get("is_private"):
             return False
-        else:
-            return True
+
+        return True
 
     def is_channel_archived(self):
         """
@@ -376,8 +379,7 @@ class SlackUtils(object):
         if self.channel and self.channel.get("is_archived"):
             return True
 
-        else:
-            return False
+        return False
 
     def slack_create_channel(self, slack_channel_name, is_private):
         """
@@ -621,7 +623,9 @@ class SlackUtils(object):
                 for message in messages:
 
                     # Parse out the data from the message
-                    data = self._parse_message_data(message, number, archive_template)
+                    data = self._parse_message_data(message, number)
+                    if not data:  # if it's not a message skip it
+                        continue
 
                     # Convert data to a txt output using a jinja template.
                     output_txt_data = map_values(archive_template, data)
@@ -700,6 +704,7 @@ class SlackUtils(object):
             data = data_for_template(number, username, reply_count, msg_time, pretext, text, file_permalink, file_name,
                                      is_msg_parent)
             return data
+        return None
 
     def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file):
         """
@@ -747,8 +752,8 @@ class SlackUtils(object):
         """
         if self.is_channel_private():
             return "Private"
-        else:
-            return "Public"
+
+        return "Public"
 
     def create_row_in_datatable(self, res_client, incident_id, task_id, conversation_url):
         """
@@ -839,7 +844,7 @@ def build_payload(ordered_data_dict):
         input_data = value.get("data")
 
         if input_type == 'string' and input_data:
-            if len(payload) > 0:
+            if payload:
                 payload += "\n"
             matches = re.findall(r"u'(.*?)'", input_data)  # extract data from u'[u\\'Malware\\', u\\'Lost PC / laptop / tablet\\']'
             if matches:
@@ -850,18 +855,19 @@ def build_payload(ordered_data_dict):
 
         elif input_type == 'richtext' and input_data:
             cleaned_data = clean_html(input_data)
-            if len(cleaned_data) > 0:
-                if len(payload) > 0:
+            if cleaned_data:
+                if payload:
                     payload += "\n"
                 payload += u'*{}*: {}'.format(key, cleaned_data)
 
         elif input_type == 'datetime' and input_data:
-            if len(payload) > 0:
+            if payload:
                 payload += "\n"
-            payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data/1000, readable_datetime(input_data), True)  # send epoch in seconds to Slack
+            payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data/1000,
+                                                                                 readable_datetime(input_data, True))  # send epoch in seconds to Slack
 
         elif input_type == 'boolean' and input_data:
-            if len(payload) > 0:
+            if payload:
                 payload += "\n"
             payload += '*{}*: {}'.format(key, build_boolean(input_data, true_value='Yes', false_value='No'))
 
@@ -920,15 +926,15 @@ def convert_slack_details_to_payload(slack_text, resoptions):
         LOG.debug(payload)
 
         attachment_json = [
-                {
-                    "pretext": pretext,
-                    "fallback": "Resilient {}".format(type_data),
-                    "title": "Resilient {}".format(type_data),
-                    "title_link": url,
-                    "text": payload,
-                    "color": "#36a64f"
-                }
-            ]
+            {
+                "pretext": pretext,
+                "fallback": "Resilient {}".format(type_data),
+                "title": "Resilient {}".format(type_data),
+                "title_link": url,
+                "text": payload,
+                "color": "#36a64f"
+            }
+        ]
         return attachment_json
     except ValueError:
         raise ValueError
@@ -957,7 +963,7 @@ def map_values(template_file, message_dict):
     """
     with open(template_file, 'r') as template:
 
-        LOG.debug("Message in dict form: {}".format(message_dict))
+        LOG.debug("Message in dict format: %s", message_dict)
 
         template = template.read()
         output_data = template_functions.render(template, message_dict)
