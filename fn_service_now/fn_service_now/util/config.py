@@ -12,6 +12,7 @@ def config_section_data():
   config_data = u"""[fn_service_now]
 sn_host=https://instance.service-now.com
 sn_api_uri=/api/x_261673_resilient/api
+sn_table_name=incident
 sn_username=
 sn_password=
 """

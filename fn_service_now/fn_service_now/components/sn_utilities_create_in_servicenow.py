@@ -17,7 +17,6 @@ class FunctionPayload:
     self.res_id = None
     self.res_link = None
     self.sn_ref_id = None
-    self.sn_status = None
     self.sn_action = None
     self.sn_record_link = None
     self.sn_time_created = None
@@ -160,24 +159,20 @@ class FunctionComponent(ResilientComponent):
               # Add values to payload
               payload.res_id = create_in_sn_response["res_id"]
               payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
-              payload.sn_status = create_in_sn_response["sn_status"]
               payload.sn_action = create_in_sn_response["sn_action"]
               payload.sn_record_link = sn_link
               payload.sn_time_created = now
 
-              # Generate cells for the datatable
-              cells = [
-                ("time", payload.sn_time_created),
-                ("res_id", payload.res_id),
-                ("sn_ref_id", payload.sn_ref_id),
-                ("status", payload.sn_status),
-                ("action", payload.sn_action),
-                ("link", """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
-              ]
-
               try:
                 # Add row to the datatable
-                add_row_response = datatable.add_row(cells)
+                add_row_response = datatable.add_row(
+                  payload.sn_time_created,
+                  payload.res_id,
+                  payload.sn_ref_id,
+                  res_helper.get_status_rich_text("Active"),
+                  payload.sn_action,
+                  """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link)
+                )
                 payload.row_id = add_row_response["id"]
 
               except Exception as e:

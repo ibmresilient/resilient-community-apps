@@ -1,6 +1,3 @@
-// Script that runs for the following endpoint:: 
-// https://service-now-host.com/api/x_261673_resilient/api/create
-
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
 	//Declare global variables
@@ -29,7 +26,6 @@
 			"sn_sys_id": record.getValue('sys_id'),
 			"sn_ref_id": record.getValue('number'),
 			"sn_record_link": record.getLink(false),
-			"sn_status": 'New',
 			"sn_action": record.getValue('x_261673_resilient_type') + ' Created'
 		};
 	}
@@ -117,3 +113,4 @@
 	return response;
 
 })(request, response);
+

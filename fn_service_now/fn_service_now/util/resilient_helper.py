@@ -22,6 +22,7 @@ class ResilientHelper:
 
     # https://service-now-host.com/api/<app-name>/<custom-api-name/
     self.SN_API_URL = "{0}{1}".format(self.SN_HOST, self.SN_API_URI)
+    self.SN_TABLE_NAME = str(self.get_config_option("sn_table_name"))
     self.SN_USERNAME = str(self.get_config_option("sn_username"))
 
     # Handle password surrounded by ' or "
@@ -58,7 +59,7 @@ class ResilientHelper:
     """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
     option = self.options.get(option_name)
 
-    if option is None and optional is False:
+    if not option and optional is False:
       err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
       raise ValueError(err)
     else:
@@ -92,6 +93,31 @@ class ResilientHelper:
       link += "?task_id={0}".format(task_id)
     
     return link
+
+  def generate_sn_link(self, sn_query, sn_table_name=None):
+    """Function that generates a URL to the record in ServiceNow"""
+    if not sn_table_name:
+      sn_table_name = self.SN_TABLE_NAME
+
+    # https://dev59090.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010350
+    uri = "{0}/nav_to.do?uri={1}.do?sysparm_query={2}".format(self.SN_HOST, sn_table_name, sn_query)
+    return uri
+
+  def get_status_rich_text(self, status):
+    """Function that returns a richtext version of status: A/Active = Green, C/Closed = Red"""
+    color = None
+
+    status = status.lower()
+
+    if status == "a" or status == "active":
+      status = "Active"
+      color = "#10b201" #Green
+    
+    elif status == "c" or status == "closed":
+      status = "Closed"
+      color = "#d61c04" #Red
+    
+    return """<div style="color:{0}">{1}</div>""".format(color, status)
 
   def sn_POST(self, url, data, auth=None, headers=None):
     """Function to handle POSTing to ServiceNow. If successful, returns the response as a Dictionary"""
@@ -280,9 +306,19 @@ class ExternalTicketStatusDatatable():
     
     return ids_found
 
-  def add_row(self, cells):
+  def add_row(self, time, res_id, sn_ref_id, status, action, link):
     # Generate uri to POST datatable row
     uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
+    
+    cells = [
+      ("time", time),
+      ("res_id", res_id),
+      ("sn_ref_id", sn_ref_id),
+      ("status", status),
+      ("action", action),
+      ("link", link)
+    ]
+
     formatted_cells = {}
 
     # Format the cells
@@ -294,6 +330,45 @@ class ExternalTicketStatusDatatable():
     }
 
     return self.res_client.post(uri, formatted_cells)
+
+  def update_row(self, row, cells_to_update):
+    # Generate uri to POST datatable row
+    uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row["id"])
+    
+    def get_value(cell_name):
+      if cell_name in cells_to_update:
+        return cells_to_update[cell_name]
+      else:
+        return row["cells"][cell_name]["value"]
+
+    cells = [
+      ("time", get_value("time")),
+      ("res_id", get_value("res_id")),
+      ("sn_ref_id", get_value("sn_ref_id")),
+      ("status", get_value("status")),
+      ("action", get_value("action")),
+      ("link", get_value("link"))
+    ]
+
+    formatted_cells = {}
+
+    # Format the cells
+    for cell in cells:
+      formatted_cells[cell[0]] = {"value": cell[1]}
+
+    formatted_cells = {
+      "cells": formatted_cells
+    }
+
+    return self.res_client.put(uri, formatted_cells)
+
+  def get_row(self, cell_name, cell_value):
+    """Returns the row if found. Returns None if no matching row found"""
+    for row in self.rows:
+      cells = row["cells"]
+      if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
+        return row
+    return None
 
   def asDict(self):
     return self.__dict__
