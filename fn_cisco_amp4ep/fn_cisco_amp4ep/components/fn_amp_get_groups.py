@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"group_guid": null, "limit": null, "name": null},
       "response": {
         "version": "v1.2.0",
         "data": [
@@ -116,7 +117,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_paginated_total(amp.get_groups, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'group' or 'groups' results for group_guid '{}', group name '{}' and limit '{}'"
                                 .format(params["group_guid"], params["name"], params["limit"]))
 

@@ -33,6 +33,8 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+          "input_params": {"conn_guid": "00da1a57-b833-43ba-8ea2-79a5ab21908f",
+                           "group_guid": "89663c44-f95e-4ee8-896d-7611744a6e9a"},
           "response": {
             "version": "v1.2.0",
             "data": {
@@ -111,7 +113,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.move_computer(params["conn_guid"], params["group_guid"])
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "response" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'move computer' results for connector guid '{}' and new group guid '{}'."
                                 .format(params["conn_guid"], params["group_guid"]))
 

@@ -37,6 +37,8 @@ class FunctionComponent(ResilientComponent):
     format similar to the following.
 
     {
+      "input_params": {"detection_sha256": null, "application_sha256": null, "connector_guid": null,
+                       "group_guid": null, "start_date": null, "event_type": null, "limit": null, "offset": null},
       "response": {
         "version": "v1.2.0",
         "data": [
@@ -164,7 +166,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_paginated_total(amp.get_events, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'events' results")
 
             log.debug(json.dumps(results))

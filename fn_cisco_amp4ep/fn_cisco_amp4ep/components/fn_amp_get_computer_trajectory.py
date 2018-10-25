@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"connector_guid": "00da1a57-b833-43ba-8ea2-79a5ab21908f", "q": null, "limit": null},
       "query_execution_time": "2018-08-09 12:34:15",
       "query": None,
       "total": 97,
@@ -146,7 +147,7 @@ class FunctionComponent(ResilientComponent):
             total = rtn.pop("total")
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "total": total, "query_execution_time": query_execution_time,
-                       "connector_guid": params["connector_guid"], "query": params["q"]}
+                       "input_params": params}
             yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["connector_guid"]))
 
             log.debug(json.dumps(results))

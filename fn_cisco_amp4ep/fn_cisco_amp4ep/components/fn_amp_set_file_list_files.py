@@ -32,6 +32,9 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api post request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
+      "input_params":{"file_list_guid": "e773a9eb-296c-40df-98d8-bed46322589d",
+                      "file_sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284",
+                      "description": "Sha256 description"},
       "response": {u'version': u'v1.2.0',
                               u'data': {u'source': u'Created by entering SHA-256 via Public api.',
                                 u'sha256': u'8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284',
@@ -91,7 +94,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.set_file_list_files(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn,"query_execution_time": query_execution_time}
+            results = {"response": rtn,"query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"], params["description"]))
 

@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"q": "SearchProtocolHost.exe", "limit": null, "offset": null},
       "query_execution_time": "2018-08-09 13:19:22",
       "query": "SearchProtocolHost.exe",
       "response": {
@@ -106,7 +107,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_paginated_total(amp.get_activity, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time, "query": params["q"]}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'activity' results for query '{}'.".format(params["q"]))
 
             log.debug(json.dumps(results))

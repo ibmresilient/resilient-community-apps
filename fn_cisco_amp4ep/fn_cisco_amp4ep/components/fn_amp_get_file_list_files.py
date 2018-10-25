@@ -33,6 +33,9 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
+      "input_params": {"file_list_guid": "e773a9eb-296c-40df-98d8-bed46322589d",
+                       "file_sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284", "limit": null,
+                       "offset": null},
       "response": {u'version': u'v1.2.0',
                           u'data': {u'items': [],
                                     u'guid': u'9710a198-b95a-462a-b184-9e688968fd94',
@@ -109,7 +112,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_paginated_total(amp.get_file_list_files, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn,"query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'file list files' results for guid '{}'.".format(params["file_list_guid"]))
 
             log.debug(json.dumps(results))

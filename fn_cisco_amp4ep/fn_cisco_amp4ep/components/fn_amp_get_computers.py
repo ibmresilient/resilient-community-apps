@@ -35,6 +35,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"group_guid": null, "limit": null, "hostname": null, "internal_ip": null, "external_ip": null},
       "query_execution_time": "2018-08-09 12:34:15",
       "computer_trajectory": {
         "version": "v1.2.0",
@@ -119,7 +120,7 @@ class FunctionComponent(ResilientComponent):
             rtn = amp.get_paginated_total(amp.get_computers, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning all 'computers' results")
 
             log.debug(json.dumps(results))
