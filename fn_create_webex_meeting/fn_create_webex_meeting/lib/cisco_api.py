@@ -114,7 +114,7 @@ class WebexAPI:
         xml = "<webExID>{}</webExID><password>{}</password>".format(self.opts.get("email"), self.opts.get("password"))
 
         if self.opts.get("site_id") and self.opts.get("partner_id"):
-            xml = xml + "<siteID>{}</siteID><partnerID>{}</partnerID>".format(self.opts.get("site_id"). self.opts.get("partner_id"))
+            xml = xml + "<siteID>{}</siteID><partnerID>{}</partnerID>".format(self.opts.get("site_id"), self.opts.get("partner_id"))
         else:
             xml = xml + "<siteName>{}</siteName>".format(self.opts.get("sitename"))
 

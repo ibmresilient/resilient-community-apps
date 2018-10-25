@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             opts["webex_site_url"] = webex_site_url
             opts["email"] = webex_email
             opts["password"] = webex_password
-            opts["sitename"] = webex_site
+            opts["sitename"] = self.options.get("webex_site", None)
             opts["timezone"] = webex_timezone
 
             if self.options.get("webex_site_id"):
