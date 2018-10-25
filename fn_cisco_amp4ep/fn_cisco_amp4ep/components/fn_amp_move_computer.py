@@ -102,7 +102,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Cisco AMP for endpoints get computer by guid query...")
 
-            params = {"conn_guid": amp_conn_guid, "group_guid": amp_conn_guid,}
+            params = {"conn_guid": amp_conn_guid, "group_guid": amp_group_guid,}
 
             validate_params(params)
 
