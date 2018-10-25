@@ -341,6 +341,13 @@ class Ampclient(object):
         """
 
         limit_max_count = self.query_limit
+        results_total = None
+
+        if get_method.__name__ == "get_computer_trajectory":
+            # Rest call get_computer_trajectory doesn't return a 'results' sub-dict.
+            # If method is get_computer_trajectory get total in case limit is lower that total.
+            rtn = get_method(**params)
+            results_total = len(rtn["data"]["events"])
 
         if "limit" in params and params["limit"] is not None:
             if int(params["limit"]) < self.query_limit:
@@ -351,7 +358,9 @@ class Ampclient(object):
             if self.query_limit < 500: # Default limit 500, reset limit to query_limit if less than 500.
                 params["limit"] = self.query_limit
 
-        rtn = get_method(**params)
+        if results_total is None or (results_total is not None and params["limit"] < results_total):
+            rtn = get_method(**params)
+
         if "results" in rtn["metadata"]:
             # The 'get_computer_trajectory' Rest call doesn't return a 'results' sub-dict so assuming it returns all
             # results in that case.
@@ -370,4 +379,8 @@ class Ampclient(object):
                 rtn["metadata"] = rtn_sub["metadata"]
                 current_item_count += rtn["metadata"]["results"]["current_item_count"]
                 offset += offset
+
+        if results_total is not None:
+            rtn["total"] = results_total
+
         return rtn
