@@ -67,6 +67,16 @@ class TestAmpHelpersValidateParamsGood:
         results = validate_params(params)
         assert (expected_results == results)
 
+    @pytest.mark.parametrize("amp_event_type, expected_results", [
+        ("1090519054", None),
+        ("1090519054,1090519084", None),
+    ])
+    def test_validate_params_event_type(self, amp_event_type, expected_results):
+        params = {
+            "amp_event_type": amp_event_type
+        }
+        results = validate_params(params)
+        assert (expected_results == results)
 
 class TestAmpHelpersValidateParamsErr:
     """Test validate_params function"""
@@ -121,6 +131,17 @@ class TestAmpHelpersValidateParamsErr:
     def test_validate_params_external_ip(self, amp_external_ip, expected_results):
         params = {
             "external_ip": amp_external_ip
+        }
+        with pytest.raises(ValueError) as e:
+            validate_params(params)
+        assert expected_results == str(e.value)
+
+    @pytest.mark.parametrize("amp_event_type, expected_results", [
+        ("anyoldtext", "Invalid value 'anyoldtext' for function parameter 'event_type'.")
+    ])
+    def test_validate_params_external_ip(self, amp_event_type, expected_results):
+        params = {
+            "event_type": amp_event_type
         }
         with pytest.raises(ValueError) as e:
             validate_params(params)
