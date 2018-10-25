@@ -276,9 +276,12 @@ class Ampclient(object):
         :return: Response in json format
         """
         uri = self._endpoints["events"]
+        # Try and split event_type if not none
+        if event_type is not None:
+            event_type = re.split('\s+|,', event_type)
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
-                  "event_type[]": re.split('\s+|,', event_type), "limit": limit, "offset": offset }
+                  "event_type[]": event_type, "limit": limit, "offset": offset }
         r_json = self._req(uri, params=params)
         return r_json
 
