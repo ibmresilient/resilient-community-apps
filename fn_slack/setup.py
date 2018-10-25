@@ -29,6 +29,7 @@ setup(
             "SlackPostAttachmentFunctionComponent = fn_slack.components.slack_post_attachment:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_slack.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_slack.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_slack.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_slack.util.selftest:selftest_function"]
     }
 )

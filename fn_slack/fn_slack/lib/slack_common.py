@@ -829,6 +829,18 @@ class SlackUtils(object):
         except Exception as ex:
             raise ValueError("Failed to get attachment from Resilient: {}".format(ex))
 
+    def api_test(self):
+        """
+        This method helps you test your calling code.
+        :return: JSON result
+        """
+        results = self.slack_client.api_call(
+            "api.test"
+        )
+        LOG.debug(results)
+
+        return results
+
 
 def build_payload(ordered_data_dict):
     """
