@@ -226,7 +226,7 @@ class SlackUtils(object):
         :param attachment_content:
         :param attachment_data:
         :param slack_text
-        :return:
+        :return: JSON result
         """
         attachment = attachment_data.get("attachment")
         if attachment:
@@ -346,7 +346,7 @@ class SlackUtils(object):
         """
         Retrieve a single user by looking them up by their registered email address.
         :param user_email: An email address belonging to a user in the workspace
-        :return: id_user
+        :return: JSON result
         """
         results = self.slack_client.api_call(
             "users.lookupByEmail",
@@ -426,7 +426,7 @@ class SlackUtils(object):
         """
         Extract ts from file.upload json results.
         :param file_upload_results:
-        :return:
+        :return: file_ts
         """
         file_ts = None
         file_data = file_upload_results.get("file")
@@ -482,7 +482,7 @@ class SlackUtils(object):
         """
         Cursor-based pagination will make it easier to incrementally collect information.
         :param results
-        :return:
+        :return: has_more_results, cursor
         """
         has_more_results = True
         cursor = None
@@ -515,7 +515,7 @@ class SlackUtils(object):
         duplicate messages.
 
         History loads from the newest to the oldest.
-        :return: JSON result
+        :return: list of complete conversation messages
         """
         parent_messages_list = self._get_channel_parent_message_history()
 
@@ -590,7 +590,7 @@ class SlackUtils(object):
         """
         This method returns information about a member of a workspace.
         :param user_id:
-        :return: user dict
+        :return: user
         """
         results = self.slack_client.api_call(
             "users.info",
@@ -611,7 +611,7 @@ class SlackUtils(object):
         :param res_client Resilient API
         :param incident_id
         :param task_id
-        :return:
+        :return: new_attachment
         """
         archive_template = get_template_file_path(ARCHIVE_TEMPLATE_PATH)
 
@@ -621,9 +621,12 @@ class SlackUtils(object):
                 for message in messages:
 
                     # Parse out the data from the message
-                    output_txt_data = self._parse_message_data(message, number, archive_template)
+                    data = self._parse_message_data(message, number, archive_template)
 
-                    # write in a temp file
+                    # Convert data to a txt output using a jinja template.
+                    output_txt_data = map_values(archive_template, data)
+
+                    # Write in a temp file
                     temp_file.write(output_txt_data.encode('utf-8'))
 
                     # message counter
@@ -639,21 +642,20 @@ class SlackUtils(object):
 
         return new_attachment
 
-    def _parse_message_data(self, message, number, archive_template):
+    def _parse_message_data(self, message, number):
         """
         Parse username, number of replies, timestamp, text message from different types of message conversations.
         Message can be a parent message or a thread. Message can contain a Slack attachment in JSON format, or it can
-        be an uploaded file. The data extracted from the message is saved in a sting using a jinja template.
+        be an uploaded file.
         :param message:
         :param number:
-        :param archive_template:
-        :return: output_txt_data
+        :return: data
         """
         if message.get("type") == "message":
             # 1 get the username
             subtype = message.get("subtype")
             if subtype == "bot_message":
-                username = message["username"]  # Bot's name is stored in "username" property
+                username = message.get("username")  # Bot's name is stored in "username" property
                 # FIXME! Bot's username to be deprecated
             else:
                 username = self.get_user_display_name(message.get("user"))
@@ -697,9 +699,7 @@ class SlackUtils(object):
             # 4 use the jinja template to combine all the data in a string
             data = data_for_template(number, username, reply_count, msg_time, pretext, text, file_permalink, file_name,
                                      is_msg_parent)
-            output_txt_data = map_values(archive_template, data)
-
-            return output_txt_data
+            return data
 
     def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file):
         """
@@ -708,7 +708,7 @@ class SlackUtils(object):
         :param incident_id:
         :param task_id:
         :param temp_file:
-        :return:
+        :return: new_attachment
         """
         # Create POST uri
         # ..for a task, if task_id is defined
@@ -730,20 +730,20 @@ class SlackUtils(object):
     def archive_channel(self):
         """
         Function sets the channel to archive.
-        :return:
+        :return: JSON result
         """
-        results = self.slack_client.api_call(
-            "conversations.archive",
-            channel=self.get_channel_id()
-        )
-        LOG.debug(results)
-        return results
-        #return {"ok": True}  # TODO archiving turned off for easier testing
+        # results = self.slack_client.api_call(
+        #     "conversations.archive",
+        #     channel=self.get_channel_id()
+        # )
+        # LOG.debug(results)
+        # return results
+        return {"ok": True}  # TODO archiving turned off for easier testing
 
     def get_channel_type(self):
         """
         Return channels status as str.
-        :return:
+        :return: channel type
         """
         if self.is_channel_private():
             return "Private"
@@ -797,7 +797,7 @@ class SlackUtils(object):
         :param artifact_id:
         :param task_id:
         :param attachment_id:
-        :return:
+        :return: content, attachment_data
         """
 
         if incident_id and artifact_id:
@@ -892,7 +892,7 @@ def convert_slack_details_to_payload(slack_text, resoptions):
     Method converts json format to python dict and creates a payload for the post message.
     :param slack_text:
     :param resoptions:
-    :return:
+    :return: attachment_json
     """
     try:
         # slack_text.replace("\\n", "") - cleanup for json.loads
@@ -938,7 +938,7 @@ def get_template_file_path(path):
     """
     Get template file path.
     :param path:
-    :return:
+    :return: template_file_path
     """
     if not isinstance(path, string_types):
         raise ValueError("Variable 'path' type must be a string {}".format(path))
@@ -953,7 +953,7 @@ def map_values(template_file, message_dict):
     Map values from jinja template.
     :param template_file:
     :param message_dict:
-    :return:
+    :return: output_data
     """
     with open(template_file, 'r') as template:
 
@@ -1021,6 +1021,10 @@ class ConversationsDatatable():
         self.rows = None
 
     def get_data(self):
+        """
+        Load the datatable data from Resilient.
+        :return:
+        """
         uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
         try:
             self.data = self.res_client.get(uri)

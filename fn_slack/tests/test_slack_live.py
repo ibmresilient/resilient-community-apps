@@ -1138,3 +1138,26 @@ class TestSlack(object):
             assert False
         except ValueError:
             assert True
+
+    @pytest.mark.parametrize("message,expected_output_data", [
+        ({"type": "message", "subtype": "bot_message", "username": "username", "ts": "1531195200",
+         "thread_ts": "1531195200", "reply_count": 3, "text": "Non attachment text",
+          "files": [{"permalink": "permalink", "name": "name"}]},
+         {'username': "username", 'msg_time': '2018-07-10 04:00:00', 'reply_count': 3, 'msg_text': 'Non attachment text',
+          'msg_pretext': None, 'file_name': 'File name name', 'file_permalink': 'File url permalink',
+          'is_msg_parent': True, 'number': 'number'}),  # this is a file upload and is_parent is True
+        ({"type": "message", "subtype": "not_bot_message", "username": "username", "ts": "1531195200",
+          "thread_ts": "1531195201", "reply_count": 3, "text": None,
+          "attachments": [{"pretext": "pretext", "text": "Attachment text"}]},
+         {'username': "mocked_user_display_name", 'msg_time': '2018-07-10 04:00:00', 'reply_count': 3, 'msg_text': 'Attachment text',
+          'msg_pretext': 'pretext', 'file_name': None, 'file_permalink': None,
+          'is_msg_parent': False, 'number': 'number'})  # this is an Slack attachment and is_parent is False and it's not a bot message
+    ])
+    @patch('fn_slack.lib.slack_common.SlackUtils.get_user_display_name')
+    def test_parse_message_data(self, mocked_user_display_name, message, expected_output_data):
+        """ Test parse message data"""
+        print("Test parse message data\n")
+        slack_utils = SlackUtils("fake_api_key")
+        mocked_user_display_name.return_value = "mocked_user_display_name"
+        data = slack_utils._parse_message_data(message, "number")
+        assert data == expected_output_data
