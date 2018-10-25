@@ -21,7 +21,7 @@ class FunctionComponent(ResilientComponent):
     package fn_cisco_amp4ep.
 
     The Function takes the following parameter:
-        amp_conn_guid, amp_limit
+        amp_conn_guid, amp_limit, amp_q
 
     An example of a set of query parameter might look like the following:
             amp_conn_guid = "00da1a57-b833-43ba-8ea2-79a5ab21908f"
