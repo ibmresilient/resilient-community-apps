@@ -48,7 +48,6 @@ class Ampclient(object):
             "computer":                     "/"+self.api_version+"/computers/{}",
             "computer_trajectory":          "/"+self.api_version+"/computers/{}/trajectory/",
             "activity":                     "/"+self.api_version+"/computers/activity",
-            "computer_move":                "/"+self.api_version+"/computers/{}",
             # File lists
             "file_lists":                   "/"+self.api_version+"/file_lists/simple_custom_detections",
             "file_lists_files":             "/"+self.api_version+"/file_lists/{}/files",
@@ -325,7 +324,7 @@ class Ampclient(object):
         :return Result in json format.
 
         """
-        uri = self._endpoints["computer_move"].format(connector_guid)
+        uri = self._endpoints["computer"].format(connector_guid)
         data = json.dumps({"group_guid": group_guid})
         r_json = self._req(uri, method="PATCH", data=data)
         return r_json
