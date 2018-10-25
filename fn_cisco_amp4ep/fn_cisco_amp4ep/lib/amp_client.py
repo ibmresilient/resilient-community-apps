@@ -16,7 +16,7 @@ try:
 except:
     from urlparse import urljoin
 import json
-
+import re
 LOG = logging.getLogger(__name__)
 
 class Ampclient(object):
@@ -278,7 +278,7 @@ class Ampclient(object):
         uri = self._endpoints["events"]
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
-                  "event_type[]": event_type, "limit": limit, "offset": offset }
+                  "event_type[]": re.split('\s+|,', event_type), "limit": limit, "offset": offset }
         r_json = self._req(uri, params=params)
         return r_json
 

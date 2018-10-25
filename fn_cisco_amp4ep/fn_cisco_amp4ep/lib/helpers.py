@@ -106,6 +106,19 @@ def validate_is_int(val):
     except ValueError:
         return False
 
+def validate_is_event_type(event_types):
+    """"Validate domain string(s) are in a valid format.
+
+    :param event_types: Ent type or types parameter value
+    :return : boolean
+
+     """
+
+    for et in re.split('\s+|,', event_types):
+        if not validate_is_int(et):
+            return False
+    return True
+
 def validate_params(params):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.
 
@@ -127,7 +140,7 @@ def validate_params(params):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
-        if re.match("^event_type$", k) and v is not None and not validate_is_int(v):
+        if re.match("^event_type$", k) and v is not None and not validate_is_event_type(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
 
     # If any entry has "None" string change to None value.
