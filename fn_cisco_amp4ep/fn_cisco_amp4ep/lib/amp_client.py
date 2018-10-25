@@ -167,6 +167,7 @@ class Ampclient(object):
 
         :param: connector_guid. Computer selection criteria
         :param limit: Limit number of results
+        :param q: Query string to search for an IP Address, SHA256 or URL.
         :return Result in json format.
 
         """
