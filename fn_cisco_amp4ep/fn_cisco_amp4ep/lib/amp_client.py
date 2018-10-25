@@ -113,11 +113,11 @@ class Ampclient(object):
                 else:
                     raise e
 
-            if r.status_code in range(200, 202):
+            if r.status_code in range(200, 203):
                 break
             else:
                 LOG.error("Unexpected response '%s' received." % r.status_code)
-                raise HTTPError("Unexpected response '{}' received.").format(r.status_code)
+                raise HTTPError("Unexpected response '{}' received.".format(r.status_code))
 
             retry_attempts += 1
             if (retry_attempts > self.max_retries):
