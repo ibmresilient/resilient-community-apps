@@ -1,11 +1,29 @@
-{% if is_msg_parent %}{{ number }} - {{ username }} POSTED ON {{ msg_time }}:
-{{ msg_pretext }}
-{{ msg_text }}
-{{ file_name }}
-{{ file_permalink }}
-{% if reply_count > 0 %}{{ reply_count }} REPLIES:
-{% endif %}
-{% else %}    {{ number }} {{ username }} POSTED A REPLY ON {{ msg_time }}:
-    {{ msg_text }}
-
-{% endif %}
+{%- if is_msg_parent -%}
+    {{- number }} - {{ username }} POSTED ON {{ msg_time }}:{{ '\n' -}}
+    {%- if msg_pretext -%}
+        {{- msg_pretext }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if msg_text -%}
+        {{- msg_text }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_name -%}
+        {{- file_name }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_permalink -%}
+        {{- file_permalink }}{{ '\n' -}}
+    {%- endif %}{{ '\n' -}}
+    {%- if reply_count > 0 -%}
+        {{- reply_count }} REPLIES:{{ '\n' -}}
+    {% endif -%}
+{%- else -%}
+    {{- '\t' }}{{ number }} - {{ username }} POSTED A REPLY ON {{ msg_time }}:{{ '\n' -}}
+    {%- if msg_text -%}
+        {{- '\t' }}{{ msg_text }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_name -%}
+        {{- '\t' }}{{ file_name }}{{ '\n' -}}
+    {%- endif -%}
+    {%- if file_permalink -%}
+        {{- '\t' }}{{ file_permalink }}{{ '\n' -}}
+    {% endif %}{{ '\n' -}}
+{%- endif -%}

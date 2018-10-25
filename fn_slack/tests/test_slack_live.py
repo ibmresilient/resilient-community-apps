@@ -1043,3 +1043,98 @@ class TestSlack(object):
         slack_utils = SlackUtils("fake_api_key")
         assert isinstance(slack_utils.get_warnings(), list)
 
+    @pytest.mark.parametrize("input_channel_name,channel_name_db_lookup_return,chosen_channel", [
+        (None, "test-channel-return", "test-channel-return"),
+        ("test-channel", "test-channel-return", "test-channel")
+    ])
+    @patch('fn_slack.lib.slack_common.slack_channel_name_datatable_lookup')
+    def test_find_the_proper_channel_name(self, mocked_channel_name_db_lookup, input_channel_name,
+                                          channel_name_db_lookup_return, chosen_channel):
+        """ Test find the proper channel name"""
+        print("Test find the proper channel name\n")
+
+        slack_utils = SlackUtils("fake_api_key")
+
+        mocked_channel_name_db_lookup.return_value = channel_name_db_lookup_return
+
+        slack_channel_name, res_associated_channel_name = slack_utils._find_the_proper_channel_name(
+            input_channel_name, "res_client", "incident_id", "task_id")
+
+        assert slack_channel_name == chosen_channel
+        assert res_associated_channel_name == channel_name_db_lookup_return
+
+    @patch('fn_slack.lib.slack_common.slack_channel_name_datatable_lookup')
+    def test_find_the_proper_channel_name_error(self, mocked_channel_name_db_lookup):
+        """ Test find the proper channel name error"""
+        print("Test find the proper channel name error\n")
+        slack_utils = SlackUtils("fake_api_key")
+        mocked_channel_name_db_lookup.return_value = None
+        try:
+            slack_utils._find_the_proper_channel_name(None, "res_client", "incident_id", "task_id")
+            assert False
+        except IntegrationError:
+            assert True
+
+    @pytest.mark.parametrize("slack_is_private,is_channel,is_private,is_archived", [
+        (True, True, False, False),  # slack_is_private is True & channel is public
+        (False, False, True, False),  # slack_is_private is False & channel is private
+        (True, False, True, True)  # slack_is_private is True & channel is private but channel is archived
+    ])
+    @patch('fn_slack.lib.slack_common.SlackUtils._find_the_proper_channel_name')
+    @patch('fn_slack.lib.slack_common.SlackUtils.find_channel_by_name')
+    def test_find_or_create_channel_error(self, mocked_found_channel, mocked_channel_name, slack_is_private, is_channel, is_private, is_archived):
+        """ Test find or create channel error"""
+        print("Test find or create channel error\n")
+        mocked_found_channel.return_value = True  # do nothing
+        mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel",
+            "is_channel": is_channel,
+            "is_private": is_private,
+            "is_archived": is_archived
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+        try:
+            slack_utils.find_or_create_channel("test-channel", slack_is_private, "res_client", "incident_id", "task_id")
+            assert False
+        except IntegrationError:
+            assert True
+
+    @patch('fn_slack.lib.slack_common.SlackUtils._find_the_proper_channel_name')
+    @patch('fn_slack.lib.slack_common.SlackUtils.find_channel_by_name')
+    @patch('fn_slack.lib.slack_common.SlackUtils.slack_create_channel')
+    @patch('fn_slack.lib.slack_common.SlackUtils.get_channel_name')
+    def test_find_or_create_channel(self, mocked_returned_channel_name, mocked_created_channel, mocked_found_channel,
+                                    mocked_channel_name):
+        """ Test find or create channel"""
+        print("Test find or create channel\n")
+        mocked_found_channel.return_value = True  # do nothing
+        mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
+        mocked_created_channel.return_value = True  # do nothing
+        mocked_returned_channel_name.return_value = "edited-test-channel" # Slack validation can modify the submitted channel name
+
+        slack_utils = SlackUtils("fake_api_key")
+        slack_channel_name, has_association_in_slack_db = slack_utils.find_or_create_channel(
+            "test-channel", True, "res_client", "incident_id", "task_id")
+
+        assert slack_channel_name == "edited-test-channel"
+        assert has_association_in_slack_db is True
+
+    @patch('fn_slack.lib.slack_common.SlackUtils._find_the_proper_channel_name')
+    @patch('fn_slack.lib.slack_common.SlackUtils.find_channel_by_name')
+    @patch('fn_slack.lib.slack_common.SlackUtils.slack_create_channel')
+    def test_find_or_create_channel_is_private_error(self, mocked_created_channel, mocked_found_channel, mocked_channel_name):
+        """ Test find or create channel - is private error"""
+        print("Test find or create channel - is private error\n")
+        mocked_found_channel.return_value = True  # do nothing
+        mocked_channel_name.return_value = ("test-channel", "res_associated_channel_name")
+        mocked_created_channel.return_value = True  # do nothing
+
+        slack_utils = SlackUtils("fake_api_key")
+        try:
+            slack_utils.find_or_create_channel("test-channel", None, "res_client", "incident_id", "task_id")
+            assert False
+        except ValueError:
+            assert True

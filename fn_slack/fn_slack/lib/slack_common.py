@@ -96,42 +96,18 @@ class SlackUtils(object):
         Slack Workspace (api call) or create a new Slack channel (api call).
         If channel_name is specified in the function input, method will search for an existing Slack channel in
         Slack Workspace (api call) or create a new Slack channel (api call) with the specified channel_name.
-        If channel_name is specified and there is also the associated channel fond, method will ignore the associated
+        If channel_name is specified and there is also the associated channel found, method will ignore the associated
         one and post to the input one.
         :param input_channel_name:
         :param slack_is_private:
         :param res_client:
         :param incident_id:
         :param task_id:
-        :return: Method returns a channel_name.
+        :return: slack_channel_name, True if res_associated_channel_name exists
         """
-        # If user doesn't specify a channel name, use the incident/task associated channel (the default channel).
-        res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
-        LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
-
-        # Channel name validation - Channel name needs to be defined
-        if input_channel_name is None and res_associated_channel_name is None:
-            raise IntegrationError("There is no slack_channel name associated with Incident or Task available "
-                                   "to post messages in")
-
         # Pick the right channel to post in
-        slack_channel_name = None
-
-        if input_channel_name is None and res_associated_channel_name:
-            # if there wasn't channel specified in the activity prompt,
-            # post to the_channel associated with the Incident or Task
-            slack_channel_name = res_associated_channel_name
-
-        elif input_channel_name:
-            # if there was channel specified in the activity prompt,
-            # post to to this one and ignore the associated one
-            slack_channel_name = input_channel_name
-
-            if res_associated_channel_name:
-                # If the associated channel exists yield a StatusMessage
-                self.add_warning("This Incident or Task has an association with Slack channel #{}, your message "
-                                 "was posted in a different channel #{}".format(res_associated_channel_name,
-                                                                                input_channel_name))
+        slack_channel_name, res_associated_channel_name = self._find_the_proper_channel_name(
+            input_channel_name, res_client, incident_id, task_id)
 
         # find the channel in Slack Workspace
         self.find_channel_by_name(slack_channel_name)
@@ -167,6 +143,44 @@ class SlackUtils(object):
             self.add_warning("Channel #{} was created in your Workspace".format(slack_channel_name))
 
         return slack_channel_name, res_associated_channel_name is not None
+
+    def _find_the_proper_channel_name(self, input_channel_name, res_client, incident_id, task_id):
+        """
+        Method will decided what channel name to use based on different params.
+        :param input_channel_name:
+        :param res_client:
+        :param incident_id:
+        :param task_id:
+        :return: slack_channel_name, res_associated_channel_name
+        """
+        # If user doesn't specify a channel name, use the incident/task associated channel (the default channel).
+        res_associated_channel_name = slack_channel_name_datatable_lookup(res_client, incident_id, task_id)
+        LOG.debug("slack_channel name associated with Incident or Task: %s", res_associated_channel_name)
+
+        # Channel name validation - Channel name needs to be defined
+        if input_channel_name is None and res_associated_channel_name is None:
+            raise IntegrationError("There is no slack_channel name associated with Incident or Task available "
+                                   "to post messages in")
+
+        # Pick the right channel to post in
+        slack_channel_name = None
+
+        if input_channel_name is None and res_associated_channel_name:
+            # if there wasn't channel specified in the activity prompt,
+            # post to the_channel associated with the Incident or Task
+            slack_channel_name = res_associated_channel_name
+
+        elif input_channel_name:
+            # if there was channel specified in the activity prompt,
+            # post to to this one and ignore the associated one
+            slack_channel_name = input_channel_name
+
+            if res_associated_channel_name:
+                # If the associated channel exists yield a StatusMessage
+                self.add_warning("This Incident or Task has an association with Slack channel #{}, your message "
+                                 "was posted in a different channel #{}".format(res_associated_channel_name,
+                                                                                input_channel_name))
+        return slack_channel_name, res_associated_channel_name
 
     def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
         """
@@ -603,59 +617,17 @@ class SlackUtils(object):
 
         with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
             try:
-                # For each msg in the history, parse
                 number = 1
                 for message in messages:
-                    if message.get("type") == "message":
 
-                        # 1 get the username
-                        subtype = message.get("subtype")
-                        if subtype == "bot_message":
-                            username = message["username"]  # Bot's name is stored in "username" property
-                            # FIXME! Bot's username to be deprecated
-                        else:
-                            username = self.get_user_display_name(message.get("user"))
+                    # Parse out the data from the message
+                    output_txt_data = self._parse_message_data(message, number, archive_template)
 
-                        # 2 does msg have replies
-                        # files, parent msg and threads behave differently
-                        # if there was a reply on the thread it will include "reply_count" property
-                        # but not all parent msg have "reply_count" property
-                        # we can establish whether this is a parent or a child msg by comparing "ts" and "thread_ts"
-                        ts = message.get("ts")
-                        thread_ts = message.get("thread_ts")
+                    # write in a temp file
+                    temp_file.write(output_txt_data.encode('utf-8'))
 
-                        is_msg_parent = False
-                        if thread_ts is None or thread_ts == ts:
-                            is_msg_parent = True
-
-                        reply_count = message.get("reply_count")
-
-                        # 3 get the timestamp
-                        msg_time = readable_datetime(float(message.get("ts")), False)
-
-                        # 4 get the text message
-                        text, pretext = "", ""
-                        attachments = message.get("attachments")
-                        if not attachments:
-                            text = message.get("text")
-                        else:
-                            at = attachments[0]
-                            pretext = at.get("pretext") if at else ""
-                            text = at.get("text") if at else ""
-
-                        file_permalink, file_name = "", ""
-                        file_uploads = message.get("files")
-                        if file_uploads:
-                            f = file_uploads[0]  # only one in the list
-                            file_permalink = f.get("permalink") if f else ""
-                            file_name = f.get("name") if f else ""
-
-                        # 4 write in a temp file
-                        data = data_for_template(number, username, reply_count, msg_time, pretext, text, file_permalink, file_name, is_msg_parent)
-                        output_data = map_values(archive_template, data)
-
-                        temp_file.write(output_data.encode('utf-8'))
-                        number += 1
+                    # message counter
+                    number += 1
 
                 temp_file.close()
                 new_attachment = self._post_attachment_to_resilient(res_client, incident_id, task_id, temp_file)
@@ -666,6 +638,68 @@ class SlackUtils(object):
                 os.unlink(temp_file.name)
 
         return new_attachment
+
+    def _parse_message_data(self, message, number, archive_template):
+        """
+        Parse username, number of replies, timestamp, text message from different types of message conversations.
+        Message can be a parent message or a thread. Message can contain a Slack attachment in JSON format, or it can
+        be an uploaded file. The data extracted from the message is saved in a sting using a jinja template.
+        :param message:
+        :param number:
+        :param archive_template:
+        :return: output_txt_data
+        """
+        if message.get("type") == "message":
+            # 1 get the username
+            subtype = message.get("subtype")
+            if subtype == "bot_message":
+                username = message["username"]  # Bot's name is stored in "username" property
+                # FIXME! Bot's username to be deprecated
+            else:
+                username = self.get_user_display_name(message.get("user"))
+
+            # 2 does msg have replies
+            # files, parent msg and threads behave differently
+            # if there was a reply on the thread it will include "reply_count" property
+            # but not all parent msg have "reply_count" property
+            # we can establish whether this is a parent or a child msg by comparing "ts" and "thread_ts"
+            ts = message.get("ts")
+            thread_ts = message.get("thread_ts")
+
+            is_msg_parent = False
+            if thread_ts is None or thread_ts == ts:
+                is_msg_parent = True
+
+            reply_count = message.get("reply_count")
+
+            # 3 get the timestamp
+            msg_time = readable_datetime(float(message.get("ts")), False)
+
+            # 4 get the text message
+            text, pretext = None, None
+            attachments = message.get("attachments")
+            if not attachments:
+                text = message.get("text")
+            else:
+                at = attachments[0]  # only one in the list
+                if at:
+                    pretext = at.get("pretext")
+                    text = at.get("text")
+
+            file_permalink, file_name = None, None
+            file_uploads = message.get("files")
+            if file_uploads:
+                f = file_uploads[0]  # only one in the list
+                if f:
+                    file_permalink = "File url {}".format(f.get("permalink"))
+                    file_name = "File name {}".format(f.get("name"))
+
+            # 4 use the jinja template to combine all the data in a string
+            data = data_for_template(number, username, reply_count, msg_time, pretext, text, file_permalink, file_name,
+                                     is_msg_parent)
+            output_txt_data = map_values(archive_template, data)
+
+            return output_txt_data
 
     def _post_attachment_to_resilient(self, res_client, incident_id, task_id, temp_file):
         """
@@ -805,7 +839,8 @@ def build_payload(ordered_data_dict):
         input_data = value.get("data")
 
         if input_type == 'string' and input_data:
-            payload += "\n"
+            if len(payload) > 0:
+                payload += "\n"
             matches = re.findall(r"u'(.*?)'", input_data)  # extract data from u'[u\\'Malware\\', u\\'Lost PC / laptop / tablet\\']'
             if matches:
                 data = ", ".join(matches)
@@ -816,15 +851,18 @@ def build_payload(ordered_data_dict):
         elif input_type == 'richtext' and input_data:
             cleaned_data = clean_html(input_data)
             if len(cleaned_data) > 0:
-                payload += "\n"
+                if len(payload) > 0:
+                    payload += "\n"
                 payload += u'*{}*: {}'.format(key, cleaned_data)
 
         elif input_type == 'datetime' and input_data:
-            payload += "\n"
+            if len(payload) > 0:
+                payload += "\n"
             payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data/1000, readable_datetime(input_data), True)  # send epoch in seconds to Slack
 
         elif input_type == 'boolean' and input_data:
-            payload += "\n"
+            if len(payload) > 0:
+                payload += "\n"
             payload += '*{}*: {}'.format(key, build_boolean(input_data, true_value='Yes', false_value='No'))
 
         elif input_data:
@@ -939,7 +977,7 @@ def data_for_template(number, username, reply_count, msg_time, msg_pretext, msg_
     :param file_permalink:
     :param file_name:
     :param is_msg_parent:
-    :return:
+    :return: data
     """
     data = {
         "number": number,
@@ -958,10 +996,11 @@ def data_for_template(number, username, reply_count, msg_time, msg_pretext, msg_
 def slack_channel_name_datatable_lookup(res_client, incident_id, task_id=None):
     """
     Function loads Resilient datatable and looks for the slack_channel name associated with your incident or task.
+    If there isn't one, it will return None
     :param res_client:
     :param incident_id:
     :param task_id:
-    :return:
+    :return: res_associated_channel_name
     """
     try:
         datatable = ConversationsDatatable(res_client, incident_id)
@@ -994,7 +1033,7 @@ class ConversationsDatatable():
         Returns a res_associated_channel_name
         :param incident_id:
         :param task_id:
-        :return:
+        :return: res_associated_channel_name or None
         """
         id = [RES_PREFIX, str(incident_id)]
 
@@ -1023,7 +1062,7 @@ def generate_res_id(incident_id, task_id=None):
     Else if task_id is None, returns "RES-1001"
     :param incident_id:
     :param task_id:
-    :return:
+    :return: res_id
     """
     res_id = [RES_PREFIX, str(incident_id)]
     if task_id is not None:
