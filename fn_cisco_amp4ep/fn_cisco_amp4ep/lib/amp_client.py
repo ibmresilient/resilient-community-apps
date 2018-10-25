@@ -115,7 +115,7 @@ class Ampclient(object):
 
             if r.status_code in range(200, 203):
                 break
-            else:
+            elif r.status_code != 429:
                 LOG.error("Unexpected response '%s' received." % r.status_code)
                 raise HTTPError("Unexpected response '{}' received.".format(r.status_code))
 
