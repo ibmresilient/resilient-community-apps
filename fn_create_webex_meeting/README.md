@@ -19,7 +19,9 @@ To set the config values in the app.config file with a new resilient instance ru
 To set the config values in the app.config file with an existing resilient instance run `resilient-circuits config -u`.
 
 Config values example:
-(Note: The email and password should be for a user that is able to create meetings)
+Note: The email and password should be for a user that is able to create meetings. 
+The parameters website_site_id and website_partner_id are only used in special cases as
+such as the use of the Cisco developer sandbox.
 ```
 [create_webex_meeting]
 webex_email=abc@abc.com
@@ -27,7 +29,11 @@ webex_password=abc123
 webex_site=abc.webex.com
 webex_site_url=abc
 webex_timezone=GMT-04:00
+# use these as an alternative to webex_site (i.e. developer sandbox)
+#webex_site_id=
+#webex_partner_id=
 ```
+
 
 Run with: `resilient-circuits run`.
 
