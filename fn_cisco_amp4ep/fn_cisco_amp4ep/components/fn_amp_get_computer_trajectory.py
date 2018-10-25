@@ -15,22 +15,27 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
-
+from fn_cisco_amp4ep.components.mock_artifacts import get_computer_trajectory
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_computer_trajectory' of
     package fn_cisco_amp4ep.
 
     The Function takes the following parameter:
-        amp_conn_guid
+        amp_conn_guid, amp_limit
 
     An example of a set of query parameter might look like the following:
             amp_conn_guid = "00da1a57-b833-43ba-8ea2-79a5ab21908f"
+            amp_q = None
+            amp_limit = None
 
     The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
 
     {
       "query_execution_time": "2018-08-09 12:34:15",
+      "query": None,
+      "total": 97,
+      "connector_guid": None,
       "response": {
         "version": "v1.2.0",
         "data": {
@@ -117,26 +122,31 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             amp_conn_guid = kwargs.get("amp_conn_guid")  # text
             amp_limit = kwargs.get("amp_limit")  # number
+            amp_q = kwargs.get("amp_q")  # text
 
             log = logging.getLogger(__name__)
             log.info("amp_conn_guid: %s", amp_conn_guid)
             log.info("amp_limit: %s", amp_limit)
+            log.info("amp_q: %s", amp_q)
 
             if is_none(amp_conn_guid):
                 raise ValueError("Required parameter 'amp_conn_guid' not set.")
 
             yield StatusMessage("Running Cisco AMP for endpoints get computers trajectory ...")
 
-            params = {"connector_guid": amp_conn_guid, "limit": amp_limit }
+            params = {"connector_guid": amp_conn_guid, "q": amp_q, "limit": amp_limit }
 
             validate_params(params)
 
             amp = Ampclient(self.options)
 
             rtn = amp.get_paginated_total(amp.get_computer_trajectory, **params)
+
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            total = rtn.pop("total")
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "total": total, "query_execution_time": query_execution_time,
+                       "connector_guid": params["connector_guid"], "query": params["q"]}
             yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["connector_guid"]))
 
             log.debug(json.dumps(results))
