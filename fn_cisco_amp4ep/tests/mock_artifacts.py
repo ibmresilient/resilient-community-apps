@@ -131,7 +131,8 @@ def get_activity():
     return response
 
 def get_computer_trajectory():
-    response = ('{"version": "v1.2.0", "metadata": {'
+    response = ('{"total": 2,'
+                '"version": "v1.2.0", "metadata": {'
                  '"links": {"self": "https://api.amp.cisco.com/v1/computers/ad29d359-dac9-4940-9c7e-c50e6d32ee6f/trajectory"}},'
                     '"data": {'
                         '"computer": {"connector_guid": "ad29d359-dac9-4940-9c7e-c50e6d32ee6f", "hostname": "Demo_CozyDuke", "active": true,'
@@ -489,7 +490,7 @@ def mocked_amp_client(*args):
             self.r._content = get_computer()
             return self.r.json()
 
-        def get_computer_trajectory(self, connector_guid, limit=None):
+        def get_computer_trajectory(self, connector_guid, q=None, limit=None):
             self.r._content = get_computer_trajectory()
             return self.r.json()
 
