@@ -14,12 +14,6 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_hibp", {})
-
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_hibp", {})
 
     @function("have_i_been_pwned_get_pastes")
     def _have_i_been_pwned_get_pastes_function(self, event, *args, **kwargs):
