@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_pastebin',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    description="Resilient Circuits Components for 'fn_pastebin'",
-    long_description="Resilient Circuits Components for 'fn_pastebin'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    description="Resilient Circuits Function that dumps any text/code to pastebin.com and returns a link to that paste",
+    long_description="This package contains one function that creates a Paste on Pastebin and returns a link to that Paste",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
