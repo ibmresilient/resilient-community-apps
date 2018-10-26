@@ -60,14 +60,14 @@ class FunctionComponent(ResilientComponent):
             slack_utils.find_channel_by_name(res_associated_channel_name)
             if slack_utils.get_channel() is None:
                 raise FunctionError(
-                    "There is no private or public channel named {} in your workspace".format(res_associated_channel_name))
+                    u"There is no private or public channel named {} in your workspace".format(res_associated_channel_name))
 
             if slack_utils.is_channel_archived():
                 raise FunctionError(
-                    "Channel {} is already marked as archived".format(res_associated_channel_name))
+                    u"Channel {} is already marked as archived".format(res_associated_channel_name))
             else:
                 yield StatusMessage(
-                    "Found channel #{} with id {}".format(res_associated_channel_name, slack_utils.get_channel_id()))
+                    u"Found channel #{} with id {}".format(res_associated_channel_name, slack_utils.get_channel_id()))
 
             # notify the channel that we are going to archive
             text = "This channel has been set to be archived from Resilient."
@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
             # Archive channel
             archive_results = slack_utils.archive_channel()
             if archive_results.get("ok"):
-                yield StatusMessage("Channel {} has been archived".format(res_associated_channel_name))
+                yield StatusMessage(u"Channel {} has been archived".format(res_associated_channel_name))
             else:
                 raise FunctionError("Archiving channel failed: " + json.dumps(archive_results))
 

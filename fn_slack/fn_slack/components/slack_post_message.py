@@ -27,19 +27,11 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_slack", {})
         self.resoptions = opts.get("resilient", {})
 
-        self._init()
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_slack", {})
         self.resoptions = opts.get("resilient", {})
-
-        self._init()
-
-    def _init(self):
-        # validate app.config
-        validate_fields(['api_token', 'username'], self.options)
 
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):

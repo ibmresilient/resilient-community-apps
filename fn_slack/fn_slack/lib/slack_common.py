@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+from __future__ import division
 import logging
 import json
 import time
@@ -117,21 +118,21 @@ class SlackUtils(object):
 
         # validation for channels existing in Slack Workspace
         if self.get_channel():
-            self.add_warning("Channel #{} was found in your Workspace".format(slack_channel_name))
+            self.add_warning(u"Channel #{} was found in your Workspace".format(slack_channel_name))  # channel_name can be unicode
 
             # validate if your fun input param 'slack_is_private' matches channel's type, if not stop the workflow
             if slack_is_private and not self.is_channel_private():
-                raise IntegrationError("You've indicated the channel you are posting to should be private. "
-                                       "The existing channel #{} you are posting to is a public channel. "
-                                       "To post to this channel change the input parameter "
-                                       "'slack_is_channel_private' to 'No'.".format(slack_channel_name))
+                raise IntegrationError(u"You've indicated the channel you are posting to should be private. "
+                                       u"The existing channel #{} you are posting to is a public channel. "
+                                       u"To post to this channel change the input parameter "
+                                       u"'slack_is_channel_private' to 'No'.".format(slack_channel_name))
             elif slack_is_private is False and self.is_channel_private():
-                raise IntegrationError("You've indicated the channel you are posting to should be public. "
-                                       "The existing channel #{} you are posting to is a private channel. "
-                                       "To post to this channel change the input parameter "
-                                       "'slack_is_channel_private' to 'Yes'.".format(slack_channel_name))
+                raise IntegrationError(u"You've indicated the channel you are posting to should be public. "
+                                       u"The existing channel #{} you are posting to is a private channel. "
+                                       u"To post to this channel change the input parameter "
+                                       u"'slack_is_channel_private' to 'Yes'.".format(slack_channel_name))
             elif self.is_channel_archived():
-                raise IntegrationError("Channel {} is archived".format(slack_channel_name))
+                raise IntegrationError(u"Channel {} is archived".format(slack_channel_name))
 
         # create a new channel
         else:
@@ -143,7 +144,7 @@ class SlackUtils(object):
 
             # rewrite slack_channel_name just in case Slack validation modifies the submitted channel name
             slack_channel_name = self.get_channel_name()
-            self.add_warning("Channel #{} was created in your Workspace".format(slack_channel_name))
+            self.add_warning(u"Channel #{} was created in your Workspace".format(slack_channel_name))
 
         return slack_channel_name, res_associated_channel_name is not None
 
@@ -180,9 +181,10 @@ class SlackUtils(object):
 
             if res_associated_channel_name:
                 # If the associated channel exists yield a StatusMessage
-                self.add_warning("This Incident or Task has an association with Slack channel #{}, your message "
-                                 "was posted in a different channel #{}".format(res_associated_channel_name,
-                                                                                input_channel_name))
+                self.add_warning(u"This Incident or Task has an association with Slack channel #{}, "
+                                 u"your message was posted in a different channel #{}".
+                                 format(res_associated_channel_name, input_channel_name))
+
         return slack_channel_name, res_associated_channel_name
 
     def slack_post_message(self, resoptions, slack_text, slack_as_user, slack_username, slack_markdown, def_username):
@@ -249,7 +251,7 @@ class SlackUtils(object):
             file=attachment_content,
             filename=file_name,
             filetype=file_type,
-            title="Incident id {} {} attachment {}".format(incident_id, artifact_type, file_name),
+            title=u"Incident id {} {} attachment {}".format(incident_id, artifact_type, file_name),
             initial_comment=slack_text
         )
         LOG.debug(results)
@@ -298,9 +300,9 @@ class SlackUtils(object):
         LOG.debug(results)
 
         if results.get("ok"):
-            self.add_warning("Users invited to channel #{}".format(self.get_channel_name()))
+            self.add_warning(u"Users invited to channel #{}".format(self.get_channel_name()))
         elif not results.get("ok") and results.get("error") == "already_in_channel":
-            self.add_warning("Invited user is already in #{} channel".format(self.get_channel_name()))
+            self.add_warning(u"Invited user is already in #{} channel".format(self.get_channel_name()))
         else:
             raise IntegrationError("Invite users failed: " + json.dumps(results))
 
@@ -617,7 +619,9 @@ class SlackUtils(object):
         """
         archive_template = get_template_file_path(ARCHIVE_TEMPLATE_PATH)
 
-        with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_file:
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_file:
+            # "w+b" Binary mode is used so that it behaves consistently on all platforms without
+            # regard for the data that is stored.
             try:
                 number = 1
                 for message in messages:
@@ -698,7 +702,7 @@ class SlackUtils(object):
                 f = file_uploads[0]  # only one in the list
                 if f:
                     file_permalink = "File url {}".format(f.get("permalink"))
-                    file_name = "File name {}".format(f.get("name"))
+                    file_name = u"File name {}".format(f.get("name"))  # name can be unicode
 
             # 4 use the jinja template to combine all the data in a string
             data = data_for_template(number, username, reply_count, msg_time, pretext, text, file_permalink, file_name,
@@ -728,7 +732,7 @@ class SlackUtils(object):
         try:
             new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype='text/plain')
         except Exception as ex:
-            raise ValueError("Failed to post the {} attachment: {}".format(attachment_name, ex))
+            raise ValueError(u"Failed to post the {} attachment: {}".format(attachment_name, ex))
 
         return new_attachment
 
@@ -827,7 +831,7 @@ class SlackUtils(object):
             self.add_warning("Attachment file retrieved")
             return content, attachment_data
         except Exception as ex:
-            raise ValueError("Failed to get attachment from Resilient: {}".format(ex))
+            raise ValueError(u"Failed to get attachment from Resilient: {}".format(ex))
 
     def api_test(self):
         """
@@ -875,8 +879,9 @@ def build_payload(ordered_data_dict):
         elif input_type == 'datetime' and input_data:
             if payload:
                 payload += "\n"
-            payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data/1000,
-                                                                                 readable_datetime(input_data, True))  # send epoch in seconds to Slack
+            # Slack expects epoch date in seconds, using future import for division and using operator '//' to yield int in Py2 and Py3
+            payload += '*{}*: `<!date^{}^{{date_num}} {{time_secs}}|{}>`'.format(key, input_data//1000,
+                                                                                 readable_datetime(input_data, True))
 
         elif input_type == 'boolean' and input_data:
             if payload:
