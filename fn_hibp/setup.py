@@ -6,11 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_hibp',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    description="Resilient Circuits Components for 'fn_hibp'",
-    long_description="Resilient Circuits Components for 'fn_hibp'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    description="Resilient Circuits Have I Been Pwned search functions.",
+    long_description="Resilient Circuits functions to search for breaches and pastes on email accounts.",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],

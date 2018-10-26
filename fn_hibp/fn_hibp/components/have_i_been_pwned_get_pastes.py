@@ -43,15 +43,16 @@ class FunctionComponent(ResilientComponent):
 
                 breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
                 pastes_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'})
-                if pastes_response is None:
-                    yield StatusMessage("No pastes found")
 
+                pastes = None
                 # Good response
                 if pastes_response.status_code == 200:
+                    pastes = pastes_response.json()
                     retry = False
                 # 404 is returned when an email was not found
                 elif pastes_response.status_code == 404:
-                    log.info("No hit information found on email address: {0}".format(email_address))
+                    yield StatusMessage("No pastes found on email address: {}".format(email_address))
+                    pastes = None
                     retry = False
                 # Rate limit was hit, wait 2 seconds and try again
                 elif pastes_response.status_code == 429:
@@ -65,11 +66,11 @@ class FunctionComponent(ResilientComponent):
                 results = {
                     "Run Time": str(end - start),
                     "Inputs": kwargs,
-                    "pastes": pastes_response.json()
+                    "Pastes": pastes
                 }
 
                 yield StatusMessage("done...")
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
-            except Exception:
-                yield FunctionError()
+            except Exception as e:
+                yield FunctionError(e)

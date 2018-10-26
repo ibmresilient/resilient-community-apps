@@ -43,15 +43,16 @@ class FunctionComponent(ResilientComponent):
 
                 breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, email_address)
                 breaches_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'})
-                if breaches_response is None:
-                    yield StatusMessage("No breaches found")
 
+                breaches = None
                 # Good response
                 if breaches_response.status_code == 200:
+                    breaches = breaches_response.json()
                     retry = False
                 # 404 is returned when an email was not found
                 elif breaches_response.status_code == 404:
-                    log.info("No hit information found on email address: {0}".format(email_address))
+                    yield StatusMessage("No breaches found on email address: {}".format(email_address))
+                    breaches = None
                     retry = False
                 # Rate limit was hit, wait 2 seconds and try again
                 elif breaches_response.status_code == 429:
@@ -61,16 +62,15 @@ class FunctionComponent(ResilientComponent):
                     retry = False
                     yield FunctionError("Have I Been Pwned returned unexpected status code")
 
-
                 end = time.time()
                 results = {
                     "Run Time": str(end - start),
                     "Inputs": kwargs,
-                    "Breaches": breaches_response.json()
+                    "Breaches": breaches
                 }
 
                 yield StatusMessage("done...")
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
-            except Exception:
-                yield FunctionError()
+            except Exception as e:
+                yield FunctionError(e)
