@@ -121,7 +121,7 @@ class FunctionComponent(ResilientComponent):
                 "sn_comment_type": payload.inputs["sn_comment_type"]
               }
 
-              yield StatusMessage("Add Task Note to ServiceNow")
+              yield StatusMessage("Add Note to ServiceNow")
             
               # Call POST and get response
               add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
