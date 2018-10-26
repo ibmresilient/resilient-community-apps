@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -53,16 +54,6 @@ class FunctionComponent(ResilientComponent):
             else:
                 return option
 
-        def retrieve_name(var):
-            """
-            Gets the name of var. Does it from the out most frame inner-wards.
-            :param var: variable to get name from.
-            :return: string
-            """
-            for fi in reversed(inspect.stack()):
-                names = [var_name for var_name, var_val in fi.frame.f_locals.items() if var_val is var]
-                if len(names) > 0:
-                    return names[0]
         try:
             # Get the function parameters:
             twitter_search_tweet_string = self.get_textarea_param(kwargs.get("twitter_search_tweet_string"))  # textarea
@@ -75,8 +66,8 @@ class FunctionComponent(ResilientComponent):
             query = json.loads(twitter_search_tweet_string)["hashtags"]
             # Create payload dict with inputs
             payload = FunctionPayload({
-                retrieve_name(twitter_search_tweet_string): query,
-                retrieve_name(twitter_search_tweet_count): twitter_search_tweet_count
+                "twitter_search_tweet_string": query,
+                "twitter_search_tweet_count": twitter_search_tweet_count
             })
 
             log.info("Setting up Twython")

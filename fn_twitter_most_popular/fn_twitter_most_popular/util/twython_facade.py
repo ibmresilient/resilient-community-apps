@@ -1,3 +1,5 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+
 from twython import Twython
 
 
@@ -19,7 +21,9 @@ class TwythonFacade:
         self.twitter = Twython(api_key, access_token=self.access_token)
 
         log.info("Access_Token is {}".format(self.access_token))
-        del api_secret
+        del api_secret, self.twitter_auth
+
+
         
         log.info("Deleted API Secret")
 
@@ -35,7 +39,6 @@ class TwythonFacade:
         :return:
         """
 
-        print(tags_to_search)
         if isinstance(tags_to_search, list):
             if (len(tags_to_search) > 1):
 
