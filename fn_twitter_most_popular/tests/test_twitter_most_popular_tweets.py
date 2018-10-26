@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -36,8 +37,9 @@ class TestTwitterMostPopularTweets:
         assert func is not None
 
     @pytest.mark.parametrize("twitter_search_tweet_string, twitter_search_tweet_count, expected_results", [
-        ({"type": "text", "content": "line1\nline2"}, 123, {"value": "xyz"}),
-        ({"type": "text", "content": "line1\nline2"}, 123, {"value": "xyz"})
+        ({"type": "text", 'content': '{\n"hashtags":[ "Malware"]\n}'}, 123, {"value": "xyz"}),
+        ({"type": "text", 'content': '{\n"hashtags":[ "Botnet", "Cybersecurity", "Malware"]\n}'}, 123, {"value": "xyz"}),
+        ({"type": "text", 'content': '{\n"hashtags":[ "Викрито ", "хакера"]\n}'}, 123, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, twitter_search_tweet_string, twitter_search_tweet_count, expected_results):
         """ Test calling with sample values for the parameters """
@@ -46,4 +48,4 @@ class TestTwitterMostPopularTweets:
             "twitter_search_tweet_count": twitter_search_tweet_count
         }
         results = call_twitter_most_popular_tweets_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(results["success"] is True)
