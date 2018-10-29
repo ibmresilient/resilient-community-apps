@@ -366,7 +366,7 @@ def show_model_summary(model, model_file):
     if model.config.analysis:
         LOG.info("  Accuracy for {} value:".format(model.config.predict_field))
         for key, value in model.config.analysis.iteritems():
-            LOG.info("    {}:        {}".format(key, value))
+            LOG.info("    %-*s %s" % (12, key + ":", value))
 
 
 def view_model(args):
