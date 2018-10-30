@@ -14,6 +14,9 @@ PASTEBIN_LOGIN_URL = "https://pastebin.com/api/api_login.php"
 # POST URL for Pastebin
 PASTEBIN_POST_URL = "https://pastebin.com/api/api_post.php"
 
+# Proxy Dict for requests
+PROXIES = {}
+
 class FunctionPayload:
   """Class that contains the payload sent back to UI and available in the post-processing script"""
   def __init__(self, inputs):
@@ -52,7 +55,7 @@ class FunctionComponent(ResilientComponent):
           option = self.options.get(option_name)
 
           if not option and optional is False:
-            err = "'{0}' is mandatory and is not set in /app.config file. You must set this value to run this function".format(option_name)
+            err = "'{0}' is mandatory and is not set in the app.config file. You must set this value to run this function".format(option_name)
             raise ValueError(err)
           else:
             return option
@@ -67,11 +70,11 @@ class FunctionComponent(ResilientComponent):
           else:
             return input
         
-        def get_pastebin_api_dev_key(api_dev_key, api_user_name, login_url):
+        def get_pastebin_api_dev_key(api_dev_key, api_user_name, login_url, proxies, payload):
             """Gets the api_dev_key from Pastebin. This essentially creates a session so the paste is
             created under that user account"""
 
-            response = requests.post(login_url, data={
+            response = requests.post(login_url, proxies=proxies, data={
               "api_dev_key": api_dev_key,
               "api_user_name": api_user_name,
               "api_user_password": str(get_config_option("pastebin_api_user_password"))
@@ -81,29 +84,38 @@ class FunctionComponent(ResilientComponent):
 
               # If there is an error, fail
               if response.status_code == 200 and "Bad API request" in response.content:
+                payload.success = False
                 raise ValueError(response.content)
 
-              # If success, set the link
+              # If success, return the api_dev_key
               elif response.status_code == 200:
                 return response.content
 
               # If not a 200 code
               else:
+                payload.success = False
                 raise ValueError("Error with Pastebin API. Status Code: {0}".format(response.status_code))
             
             else:
+              payload.success = False
               raise ValueError("No response from Pastebin. Check your connection/credentials")
 
         try:
+            # Get proxies
+            PROXY_HTTP = get_config_option("pastebin_proxy_http", True)
+            PROXY_HTTPS = get_config_option("pastebin_proxy_https", True)
+
+            if PROXY_HTTP is not None:
+              PROXIES["http"] = PROXY_HTTP
+
+            if PROXY_HTTPS is not None:
+              PROXIES["https"] = PROXY_HTTP
 
             # Get API Key from app.config file
             PASTEBIN_API_DEV_KEY = str(get_config_option("pastebin_api_dev_key"))
 
             # Get the Pastebin username, its optional, if defined, will log the user in, then create the paste
             PASTEBIN_API_USER_NAME = str(get_config_option("pastebin_api_user_name", True))
-
-            # Get the API user key, so we can create a paste under this users account
-            PASTEBIN_API_USER_KEY = None if PASTEBIN_API_USER_NAME is None else get_pastebin_api_dev_key(PASTEBIN_API_DEV_KEY, PASTEBIN_API_USER_NAME, PASTEBIN_LOGIN_URL)
 
             # Get the function inputs:
             inputs = {
@@ -116,6 +128,9 @@ class FunctionComponent(ResilientComponent):
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
+
+            # Get the API user key, so we can create a paste under this users account
+            PASTEBIN_API_USER_KEY = None if PASTEBIN_API_USER_NAME is None else get_pastebin_api_dev_key(PASTEBIN_API_DEV_KEY, PASTEBIN_API_USER_NAME, PASTEBIN_LOGIN_URL, PROXIES, payload)
 
             yield StatusMessage("Function Inputs OK")
 
@@ -145,14 +160,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Creating the Paste")
 
             # Call the POST and get response
-            response = requests.post(PASTEBIN_POST_URL, data=pastebin_request_data)
+            response = requests.post(PASTEBIN_POST_URL, proxies=PROXIES, data=pastebin_request_data)
 
             if response:
 
               # If there is an error, fail
               if response.status_code == 200 and "Bad API request" in response.content:
                 payload.success = False
-                raise FunctionError(response.content)
+                raise ValueError(response.content)
 
               # If success, set the link
               elif response.status_code == 200:
@@ -160,11 +175,12 @@ class FunctionComponent(ResilientComponent):
 
               # If not a 200 code
               else:
+                payload.success = False
                 raise ValueError("Error with Pastebin API. Status Code: {0}".format(response.status_code))
             
             else:
               payload.success = False
-              raise FunctionError("No response from Pastebin. Check your connection/credentials")
+              raise ValueError("No response from Pastebin. Check your connection/credentials")
 
             # Send payload back to Appliance
             results = payload.as_dict()

@@ -14,5 +14,7 @@ def config_section_data():
 pastebin_api_dev_key=
 pastebin_api_user_name=
 pastebin_api_user_password=
+#pastebin_proxy_http=http://0.0.0.0:3128
+#pastebin_proxy_https=https://0.0.0.0:3128
 """
   return config_data
