@@ -8,6 +8,12 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import requests
 
+# Login URL for Pastebin
+PASTEBIN_LOGIN_URL = "https://pastebin.com/api/api_login.php"
+
+# POST URL for Pastebin
+PASTEBIN_POST_URL = "https://pastebin.com/api/api_post.php"
+
 class FunctionPayload:
   """Class that contains the payload sent back to UI and available in the post-processing script"""
   def __init__(self, inputs):
@@ -41,18 +47,12 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
 
-        # Login URL for Pastebin
-        PASTEBIN_LOGIN_URL = "https://pastebin.com/api/api_login.php"
-
-        # POST URL for Pastebin
-        PASTEBIN_POST_URL = "https://pastebin.com/api/api_post.php"
-
         def get_config_option(option_name, optional=False):
           """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
           option = self.options.get(option_name)
 
           if not option and optional is False:
-            err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
+            err = "'{0}' is mandatory and is not set in /app.config file. You must set this value to run this function".format(option_name)
             raise ValueError(err)
           else:
             return option
@@ -77,18 +77,22 @@ class FunctionComponent(ResilientComponent):
               "api_user_password": str(get_config_option("pastebin_api_user_password"))
             })
 
-            if response and response.content:
+            if response:
+
               # If there is an error, fail
-              if "Bad API request" in response.content:
-                payload.success = False
+              if response.status_code == 200 and "Bad API request" in response.content:
                 raise ValueError(response.content)
 
-              # If success, return the api key
-              else:
+              # If success, set the link
+              elif response.status_code == 200:
                 return response.content
 
+              # If not a 200 code
+              else:
+                raise ValueError("Error with Pastebin API. Status Code: {0}".format(response.status_code))
+            
             else:
-              raise ValueError("No response from Pastebin. Check your connection")
+              raise ValueError("No response from Pastebin. Check your connection/credentials")
 
         try:
 
@@ -143,19 +147,24 @@ class FunctionComponent(ResilientComponent):
             # Call the POST and get response
             response = requests.post(PASTEBIN_POST_URL, data=pastebin_request_data)
 
-            if response and response.content:
+            if response:
+
               # If there is an error, fail
-              if "Bad API request" in response.content:
+              if response.status_code == 200 and "Bad API request" in response.content:
                 payload.success = False
-                yield FunctionError(response.content)
+                raise FunctionError(response.content)
 
               # If success, set the link
-              else:
+              elif response.status_code == 200:
                 payload.pastebin_link = response.content
 
+              # If not a 200 code
+              else:
+                raise ValueError("Error with Pastebin API. Status Code: {0}".format(response.status_code))
+            
             else:
               payload.success = False
-              yield FunctionError("No response from Pastebin. Check your connection")
+              raise FunctionError("No response from Pastebin. Check your connection/credentials")
 
             # Send payload back to Appliance
             results = payload.as_dict()
