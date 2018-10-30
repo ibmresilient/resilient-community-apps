@@ -14,6 +14,29 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.options = opts.get("hibp", {})
+
+        self.PROXIES = {}
+        # Get proxies
+        PROXY_HTTP = self.get_config_option("hibp_proxy_http", True)
+        PROXY_HTTPS = self.get_config_option("hibp_proxy_https", True)
+
+        if PROXY_HTTP is not None:
+            self.PROXIES["http"] = PROXY_HTTP
+
+        if PROXY_HTTPS is not None:
+            self.PROXIES["https"] = PROXY_HTTP
+
+    def get_config_option(self, option_name, optional=False):
+        """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
+        option = self.options.get(option_name)
+
+        if not option and optional is False:
+            err = "'{0}' is mandatory and is not set in the app.config file. You must set this value to run this " \
+                  "function".format(option_name)
+            raise ValueError(err)
+        else:
+            return option
 
     @function("have_i_been_pwned_get_pastes")
     def _have_i_been_pwned_get_pastes_function(self, event, *args, **kwargs):
@@ -36,7 +59,8 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("email_address is required to run this function")
 
                 breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
-                pastes_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'})
+                pastes_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'},
+                                               proxies=self.PROXIES)
 
                 pastes = None
                 # Good response

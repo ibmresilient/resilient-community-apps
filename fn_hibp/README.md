@@ -4,7 +4,12 @@
  ![screenshot](./screenshots/HIBP_workflow_1.png)
 
 ## app.config settings:
-**NONE**
+Set if using a proxy
+
+    [fn_hibp]
+    ## Proxy settings if needed
+    #hibp_proxy_http=
+    #hibp_proxy_https=
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |
@@ -14,81 +19,96 @@
 
 ## Function Outputs:
 ### Have I Been Pwned Get Breaches:
-```[
-   {
-      u'PwnCount':14936670,
-      u'Domain':u'000webhost.com',
-      u'IsSensitive':False,
-      u'Name':u'000webhost',
-      u'Title':u'000webhost',
-      u'DataClasses':[
-         u'Email addresses',
-         u'IP addresses',
-         u'Names',
-         u'Passwords'
-      ],
-      u'LogoType':u'png',
-      u'IsSpamList':False,
-      u'IsRetired':False,
-      u'BreachDate':u'2015-03-01',
-      u'IsFabricated':False,
-      u'ModifiedDate':      u'2017-12-10T21:44:27      Z',
-      u'AddedDate':      u'2015-10-26T23:35:45      Z',
-      u'IsVerified':True,
-      u'Description':u'In approximately March 2015,
-      the free web hosting provider <a href="http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html" target="_blank" rel="noopener">000webhost suffered a major data breach</a> that exposed almost 15 million customer records. The data was sold and traded before 000webhost was alerted in October. The breach included names,
-      email addresses and plain text passwords.'
-   },
-   {
-      u'PwnCount':7990619,
-      u'Domain':u'8tracks.com',
-      u'IsSensitive':False,
-      u'Name':u'8tracks',
-      u'Title':u'8tracks',
-      u'DataClasses':[
-         u'Email addresses',
-         u'Passwords'
-      ],
-      u'LogoType':u'png',
-      u'IsSpamList':False,
-      u'IsRetired':False,
-      u'BreachDate':u'2017-06-27',
-      u'IsFabricated':False,
-      u'ModifiedDate':      u'2018-02-16T07:09:30      Z',
-      u'AddedDate':      u'2018-02-16T07:09:30      Z',
-      u'IsVerified':True,
-      u'Description':u'In June 2017,
-      the online playlists service known as <a href="https://blog.8tracks.com/2017/06/27/password-security-alert/" target="_blank" rel="noopener">8Tracks suffered a data breach</a> which impacted 18 million accounts. In their disclosure,
-      8      Tracks advised that &quot;the vector for the attack was an employee\u2019s GitHub account,
-      which was not secured using two-factor authentication&quot;. Salted SHA-1 password hashes for users who <em>didn\'t</em> sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses.'
-   }
-]
+```
+{
+  "Inputs": {
+    "email_address": "test@email.com"
+  },
+  "Run Time": "2000",
+  "Breaches":
+    [
+       {
+          u'PwnCount':14936670,
+          u'Domain':u'000webhost.com',
+          u'IsSensitive':False,
+          u'Name':u'000webhost',
+          u'Title':u'000webhost',
+          u'DataClasses':[
+             u'Email addresses',
+             u'IP addresses',
+             u'Names',
+             u'Passwords'
+          ],
+          u'LogoType':u'png',
+          u'IsSpamList':False,
+          u'IsRetired':False,
+          u'BreachDate':u'2015-03-01',
+          u'IsFabricated':False,
+          u'ModifiedDate':      u'2017-12-10T21:44:27      Z',
+          u'AddedDate':      u'2015-10-26T23:35:45      Z',
+          u'IsVerified':True,
+          u'Description':u'In approximately March 2015,
+          the free web hosting provider <a href="http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html" target="_blank" rel="noopener">000webhost suffered a major data breach</a> that exposed almost 15 million customer records. The data was sold and traded before 000webhost was alerted in October. The breach included names,
+          email addresses and plain text passwords.'
+       },
+       {
+          u'PwnCount':7990619,
+          u'Domain':u'8tracks.com',
+          u'IsSensitive':False,
+          u'Name':u'8tracks',
+          u'Title':u'8tracks',
+          u'DataClasses':[
+             u'Email addresses',
+             u'Passwords'
+          ],
+          u'LogoType':u'png',
+          u'IsSpamList':False,
+          u'IsRetired':False,
+          u'BreachDate':u'2017-06-27',
+          u'IsFabricated':False,
+          u'ModifiedDate':      u'2018-02-16T07:09:30      Z',
+          u'AddedDate':      u'2018-02-16T07:09:30      Z',
+          u'IsVerified':True,
+          u'Description':u'In June 2017,
+          the online playlists service known as <a href="https://blog.8tracks.com/2017/06/27/password-security-alert/" target="_blank" rel="noopener">8Tracks suffered a data breach</a> which impacted 18 million accounts. In their disclosure,
+          8      Tracks advised that &quot;the vector for the attack was an employee\u2019s GitHub account,
+          which was not secured using two-factor authentication&quot;. Salted SHA-1 password hashes for users who <em>didn\'t</em> sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses.'
+       }
+    ]
+}
 ```
 
 ### Have I Been Pwned Get Pastes:
-```[
-   {
-      u'Date':None,
-      u'Source':u'AdHocUrl',
-      u'EmailCount':9893,
-      u'Id':      u'http://siph0n.in/exploits.php?id=3670',
-      u'Title':u'siph0n.in'
-   },
-   {
-      u'Date':None,
-      u'Source':u'AdHocUrl',
-      u'EmailCount':12002,
-      u'Id':      u'http://siph0n.in/exploits.php?id=3892',
-      u'Title':u'siph0n.in'
-   },
-   {
-      u'Date':None,
-      u'Source':u'AdHocUrl',
-      u'EmailCount':99791,
-      u'Id':      u'http://siph0n.in/exploits.php?id=4680',
-      u'Title':u'remotestaff.com.au'
-   }
-]
+```
+{
+  "Inputs": {
+    "email_address": "test@email.com"
+  },
+  "Pastes":
+    [
+       {
+          u'Date':None,
+          u'Source':u'AdHocUrl',
+          u'EmailCount':9893,
+          u'Id':      u'http://siph0n.in/exploits.php?id=3670',
+          u'Title':u'siph0n.in'
+       },
+       {
+          u'Date':None,
+          u'Source':u'AdHocUrl',
+          u'EmailCount':12002,
+          u'Id':      u'http://siph0n.in/exploits.php?id=3892',
+          u'Title':u'siph0n.in'
+       },
+       {
+          u'Date':None,
+          u'Source':u'AdHocUrl',
+          u'EmailCount':99791,
+          u'Id':      u'http://siph0n.in/exploits.php?id=4680',
+          u'Title':u'remotestaff.com.au'
+       }
+    ]
+}
 ```
 
 
