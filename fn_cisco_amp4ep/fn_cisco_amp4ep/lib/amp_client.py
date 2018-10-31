@@ -384,5 +384,7 @@ class Ampclient(object):
 
         if results_total is not None:
             rtn["total"] = results_total
+            # Return slice of rtn["data"]["events"] up to limit for "get_computer_trajectory"
+            rtn["data"]["events"] = rtn["data"]["events"][:int(params["limit"])]
 
         return rtn
