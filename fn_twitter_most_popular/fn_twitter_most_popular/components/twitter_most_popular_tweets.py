@@ -89,7 +89,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Config Inputs Gathered. Sending Search request")
             payload.tweets = twitter.search_for_tweets(query=query, count=twitter_search_tweet_count)
 
-
             if len(payload.tweets) > 0:
                 yield StatusMessage("Got results back")
 
@@ -97,6 +96,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Got no results.")
                 payload.success = False
             yield StatusMessage("Complete")
+
 
             # Produce a FunctionResult with the results
             yield FunctionResult(payload.as_dict())

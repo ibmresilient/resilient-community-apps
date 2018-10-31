@@ -47,7 +47,7 @@ The [Twython documentation](https://twython.readthedocs.io/en/latest/) has detai
 
 
 ## Pre-Process Script:
-This provided workflow does not utilize the Pre-Processing Script.
+Rather than manipulating potential inputs in the Pre-Processing script, this integration uses inputs taken from the Inputs tab. See screenshot for example.
 
 
 ## Post-Process Script:
@@ -70,24 +70,3 @@ if (results.success):
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ |
 | Get Popular Tweets For Specified Tag(s) | `Incident` | `Example Twitter: Popular Tweets For Tag(s)` |
-
-
-To install in "development mode"
-
-    pip install -e ./fn_twitter_most_popular/
-
-After installation, the package will be loaded by `resilient-circuits run`.
-
-
-To uninstall,
-
-    pip uninstall fn_twitter_most_popular
-
-
-To package for distribution,
-
-    python ./fn_twitter_most_popular/setup.py sdist
-
-The resulting .tar.gz file can be installed using
-
-    pip install <filename>.tar.gz
