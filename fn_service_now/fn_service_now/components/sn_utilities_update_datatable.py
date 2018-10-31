@@ -96,8 +96,8 @@ class FunctionComponent(ResilientComponent):
               }
 
               # Update the row
-              update_row_reponse = res_datatable.update_row(row_found, cells_to_update)
-              payload.row_id = update_row_reponse["id"]
+              update_row_response = res_datatable.update_row(row_found, cells_to_update)
+              payload.row_id = update_row_response["id"]
             
             else:
               yield StatusMessage("No row found. Add row to Datatable")

@@ -17,6 +17,7 @@ class FunctionPayload:
     self.res_id = None
     self.res_link = None
     self.sn_ref_id = None
+    self.sn_sys_id = None
     self.sn_action = None
     self.sn_record_link = None
     self.sn_time_created = None
@@ -116,7 +117,6 @@ class FunctionComponent(ResilientComponent):
             try:
               inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=_byteify)
             except Exception as e:
-              print e
               raise ValueError("sn_optional_fields JSON String is invalid")
             
             # Create payload dict with inputs
@@ -153,17 +153,16 @@ class FunctionComponent(ResilientComponent):
               # Get current time (*1000 as API does not accept int)
               now = int(time.time()*1000)
 
-              # Generate Link to ServiceNow record
-              sn_link = res_helper.SN_HOST + "/" + create_in_sn_response["sn_record_link"]
-
               # Add values to payload
               payload.res_id = create_in_sn_response["res_id"]
               payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
+              payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
               payload.sn_action = create_in_sn_response["sn_action"]
-              payload.sn_record_link = sn_link
+              payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
               payload.sn_time_created = now
 
               try:
+                yield StatusMessage("Updating Datatable")
                 # Add row to the datatable
                 add_row_response = datatable.add_row(
                   payload.sn_time_created,
