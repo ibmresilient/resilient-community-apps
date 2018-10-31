@@ -142,6 +142,8 @@ def validate_params(params):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^event_type$", k) and v is not None and not validate_is_event_type(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+        if re.match("^q|scd_name$", k) and v is not None and v == '':
+            raise ValueError("Invalid empty value '{0}' specified for function parameter '{1}'.".format(v, k))
 
     # If any entry has "None" string change to None value.
     for k, v in params.items():
