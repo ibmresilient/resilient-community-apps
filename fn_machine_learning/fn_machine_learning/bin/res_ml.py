@@ -12,7 +12,7 @@ from fn_machine_learning.lib.ml_model_common import MlModelCommon
 from fn_machine_learning.lib.ml_config import MlConfig
 import fn_machine_learning.lib.resilient_utils as resilient_utils
 import fn_machine_learning.lib.model_utils as model_utils
-
+from fn_machine_learning.lib.incident_filter import IncidentFilter
 
 try:
     # For all python < 3.2
@@ -204,6 +204,7 @@ def count_value(args):
     LOG.info("Value counts for {} in {}:".format(field, csv_file))
     LOG.info("{}".format(value_counts))
 
+
 def download_incidents_csv(opt_parser, csv_file):
     """
 
@@ -237,6 +238,11 @@ def download_incidents_csv(opt_parser, csv_file):
         if opt_parser.getopt(MACHINE_LEARNING_SECTION, "max_count"):
             max_count = int(opt_parser.getopt(MACHINE_LEARNING_SECTION, "max_count"))
 
+        time_start = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_start")
+        time_end = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_end")
+        filter = IncidentFilter(time_start=time_start,
+                                time_end=time_end)
+
         # get_incidents is going to download all the incidents using this resilient_client
         # The json result will be converted into CSV format, and then save into
         # SAMPLE_CSV_FILE.
@@ -244,7 +250,9 @@ def download_incidents_csv(opt_parser, csv_file):
         # json to CSV will stop once reaches this limit.
         num_inc = resilient_utils.get_incidents(res_client=resilient_client,
                                                 filename=csv_file,
-                                                max_count=max_count)
+                                                filter=filter,
+                                                max_count=max_count,
+                                                in_log=LOG)
 
     LOG.info("Saved {} samples into {}".format(num_inc, csv_file))
 

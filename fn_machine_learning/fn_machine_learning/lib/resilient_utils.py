@@ -66,7 +66,7 @@ def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
     return model
 
 
-def get_incidents(res_client, filename, max_count=None, in_log=None):
+def get_incidents(res_client, filename, max_count=None, filter=None, in_log=None):
     """
     Convert JSON into CSV and save
     :param res_client: incidents in json format
@@ -84,7 +84,8 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
     # Get all the incidents
     #ret = res_client.get("/incidents")
     ret = query_incidents(res_client=res_client,
-                          max_count=max_count)
+                          max_count=max_count,
+                          in_log=log)
 
     with open(filename, "w") as outfile:
         # Write everything into a CSV file
@@ -96,6 +97,14 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
 
         inc_count = 0
         for inc in ret:
+            if filter is not None:
+                shall_include = filter.shall_include_incident(inc)
+                if not shall_include:
+                    #
+                    #   Filter it out. Continue to the next
+                    #
+                    continue
+
             field_count = 0
             for field in fields[:-1]:
                 field_count = field_count + 1
@@ -103,7 +112,8 @@ def get_incidents(res_client, filename, max_count=None, in_log=None):
                     value = str(inc.get(field, inc["properties"].get(field, "")))
                 except UnicodeEncodeError:
                     value = inc.get(field, inc["properties"].get(field, "")).encode("ascii", "ignore").decode("ascii")
-                except Exception:
+                except Exception as e:
+                    log.exception("Exception in reading incident field {}: {}".format(field, str(e)))
                     value = ""
                 #
                 # Since we use csv, put quote if value contains \n or ,
@@ -184,7 +194,7 @@ def get_field_def(resilient_client, field, type_name, in_log=None):
     return ret
 
 
-def query_incidents(res_client, max_count=None, page_size=1000):
+def query_incidents(res_client, max_count=None, page_size=1000, in_log=None):
     """
     Use the query endpoint since we are going to down load
     large number of incidents.
@@ -193,6 +203,7 @@ def query_incidents(res_client, max_count=None, page_size=1000):
     :param page_size:
     :return:
     """
+    log = in_log if in_log else logging.getLogger(__name__)
     incidents = []
     url = "/incidents/query_paged?field_handle=-1&return_level=full"
     num_incidents = 0
@@ -210,6 +221,7 @@ def query_incidents(res_client, max_count=None, page_size=1000):
         data = ret.get("data", [])
         ret_num = len(data)
         if ret_num > 0:
+            log.debug("Downloaded {} incidents, total now {} ...".format(ret_num, ret_num + num_incidents))
             incidents.extend(data)
         else:
             #
