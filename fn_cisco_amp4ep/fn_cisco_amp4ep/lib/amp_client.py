@@ -17,6 +17,9 @@ except:
     from urlparse import urljoin
 import json
 import re
+from datetime import datetime
+
+
 LOG = logging.getLogger(__name__)
 
 class Ampclient(object):
@@ -279,6 +282,10 @@ class Ampclient(object):
         # Try and split event_type if not none
         if event_type is not None:
             event_type = re.split('\s+|,', event_type)
+
+        # Convert start_date from Unix timestamp (in secs) to isoformat
+        start_date = datetime.fromtimestamp(int(str(start_date)[0:-3])).isoformat()
+
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
                   "event_type[]": event_type, "limit": limit, "offset": offset }

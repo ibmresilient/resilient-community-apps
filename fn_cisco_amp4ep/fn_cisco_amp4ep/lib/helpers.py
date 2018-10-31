@@ -130,7 +130,7 @@ def validate_params(params):
 
     # Now do some validation on input parameters.
     for (k, v) in params.copy().items():
-        if re.match("^(limit|offset)$", k) and v is not None and not type(v) == int:
+        if re.match("^(limit|offset|start_date)$", k) and v is not None and not type(v) == int:
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^conn_guid|group_guid|file_list_guid$", k) and v is not None and not UUID_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
