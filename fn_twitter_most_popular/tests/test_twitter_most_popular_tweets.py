@@ -7,9 +7,9 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from test_helper import get_mock_config
-from mock import patch, MagicMock
-from twython import Twython
-
+from mock import mock, patch, MagicMock
+from twython.api import Twython
+from fn_twitter_most_popular.util.twython_facade import TwythonFacade
 
 
 PACKAGE_NAME = "fn_twitter_most_popular"
@@ -46,6 +46,7 @@ class TestTwitterMostPopularTweets:
         ({"type": "text", 'content': '{\n"hashtags":[ "Malware"]\n}'}, 123, {"value": "xyz"}),
         ({"type": "text", 'content': '{\n"hashtags":[ "Botnet", "Cybersecurity", "Malware"]\n}'}, 123, {"value": "xyz"}),
         ({"type": "text", 'content': '{\n"hashtags":[ "Викрито ", "хакера"]\n}'}, 123, {"value": "xyz"})
+
     ])
     def test_success(self, circuits_app, twitter_search_tweet_string, twitter_search_tweet_count, expected_results):
         """ Test calling with sample values for the parameters """
@@ -53,7 +54,18 @@ class TestTwitterMostPopularTweets:
             "twitter_search_tweet_string": twitter_search_tweet_string,
             "twitter_search_tweet_count": twitter_search_tweet_count
         }
-        with patch(Twython) as mock_session:
-            mock_session.instance = MagicMock()
-            results = call_twitter_most_popular_tweets_function(circuits_app, function_params)
-            assert(results["success"] is True)
+
+        result_mock = MagicMock()
+        result_mock = [{
+            "value":"mock"
+        },
+        {
+            "value": "mock"
+        },
+        ]
+        with patch.object(TwythonFacade, "__init__", lambda x,api_key,api_secret, log,client_args: None) as mock_session1:
+            with patch.object(TwythonFacade, "search_for_tweets",
+                              lambda x, query, count: result_mock):
+
+                results = call_twitter_most_popular_tweets_function(circuits_app, function_params)
+                assert(results["success"] is True)
