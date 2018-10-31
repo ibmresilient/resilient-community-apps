@@ -4,8 +4,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from ..util.cloud_foundry_api import IBMCloudFoundryAPI
-from ..util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
+from fn_cloud_foundry.util.cloud_foundry_api import IBMCloudFoundryAPI
+from fn_cloud_foundry.util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
 
 class FunctionComponent(ResilientComponent):
