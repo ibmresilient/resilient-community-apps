@@ -1,4 +1,5 @@
-**This package contains one function which targets the Twitter Search API. Takes in an input of a multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token.
+# Resilient Integration with Twitter Search API
+**This package contains one function which targets the Twitter Search API. Takes in an input of a multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token. **
  ![screenshot](./screenshots/1.png)
 
 
@@ -39,7 +40,14 @@ results = {
 }
 
 ```
-Review the Twitter API documentation for more info on all the attributes returned.
+Review the [Twitter API documentation](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets.html) for more info on all the attributes returned.
+
+The [Twython documentation](https://twython.readthedocs.io/en/latest/) has details specific to the Twython package used by this integration
+
+
+
+## Pre-Process Script:
+This provided workflow does not utilize the Pre-Processing Script.
 
 
 ## Post-Process Script:

@@ -5,7 +5,7 @@ from twython import Twython
 
 class TwythonFacade: 
 
-    def __init__(self,api_key, api_secret,log):
+    def __init__(self,api_key, api_secret,log, client_args):
         """
 
         :param api_key: The API KEY for a Twitter Developer App
@@ -15,12 +15,11 @@ class TwythonFacade:
         :param log:
         """
         self.log = log
-        self.twitter_auth = Twython(api_key, api_secret, oauth_version=2)
-        log.info(api_key)
+        self.twitter_auth = Twython(api_key, api_secret, oauth_version=2, client_args=client_args)
         self.access_token = self.twitter_auth.obtain_access_token()
-        self.twitter = Twython(api_key, access_token=self.access_token)
+        self.twitter = Twython(api_key, access_token=self.access_token,  client_args=client_args)
 
-        log.info("Access_Token is {}".format(self.access_token))
+        log.debug("Access_Token is {}".format(self.access_token))
         del api_secret, self.twitter_auth
 
 
@@ -45,6 +44,3 @@ class TwythonFacade:
                 return ",".join(tags_to_search).replace(',', ' OR ')
         print("Result is "+str(tags_to_search))
         return tags_to_search
-
-
-

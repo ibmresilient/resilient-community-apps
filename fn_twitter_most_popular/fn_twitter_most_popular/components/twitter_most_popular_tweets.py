@@ -8,6 +8,8 @@ import inspect
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_twitter_most_popular.util.twython_facade import TwythonFacade
+
+
 class FunctionPayload:
     """Class that contains the payload sent back to UI and available in the post-processing script"""
 
@@ -47,12 +49,24 @@ class FunctionComponent(ResilientComponent):
             """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
             option = self.options.get(option_name)
 
-            if option is None and optional is False:
+            if not option and optional is False:
                 err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
                     option_name)
                 raise ValueError(err)
             else:
                 return option
+
+        def setup_proxies(http_proxy, https_proxy):
+            if http_proxy is None and https_proxy is None:
+                return None
+            else:
+                client_args = {
+                    'proxies': {
+                        'http': http_proxy,
+                        'https': https_proxy,
+                    }
+                }
+                return client_args
 
         try:
             # Get the function parameters:
@@ -71,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             })
 
             log.info("Setting up Twython")
-            twitter = TwythonFacade(api_key=get_config_option(option_name="twitter_api_key"), api_secret=get_config_option(option_name="twitter_api_secret"), log=log)
+            twitter = TwythonFacade(api_key=get_config_option(option_name="twitter_api_key"), api_secret=get_config_option(option_name="twitter_api_secret"), log=log, client_args=setup_proxies(get_config_option(option_name="twitter_proxy_http", optional=True),get_config_option(option_name="twitter_proxy_https", optional=True)))
             yield StatusMessage("Config Inputs Gathered. Sending Search request")
             payload.tweets = twitter.search_for_tweets(query=query, count=twitter_search_tweet_count)
 
@@ -81,6 +95,7 @@ class FunctionComponent(ResilientComponent):
 
             else:
                 yield StatusMessage("Got no results.")
+                payload.success = False
             yield StatusMessage("Complete")
 
             # Produce a FunctionResult with the results
