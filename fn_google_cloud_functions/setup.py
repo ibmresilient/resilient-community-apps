@@ -6,10 +6,9 @@ from setuptools import setup, find_packages
 setup(
     name='fn_google_cloud_functions',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Ryan',
+    author_email='ryan@resilientlab.co.uk',
     description="Resilient Circuits Components for 'fn_google_cloud_functions'",
     long_description="Resilient Circuits Components for 'fn_google_cloud_functions'",
     install_requires=[
