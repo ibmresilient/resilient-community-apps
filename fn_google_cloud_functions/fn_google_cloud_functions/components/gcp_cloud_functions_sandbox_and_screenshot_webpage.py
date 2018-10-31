@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Function implementation"""
 
 import logging
 import requests
 import base64
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_gcp.util.helper import GCPHelper
+from fn_google_cloud_functions.util.helper import GCPHelper
 
 try: # Python 3 import
     from urllib.parse import urlparse
@@ -20,20 +21,20 @@ except: #python2
     from urllib import urlopen
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'gcp_utilities_screenshot_sandboxed_webpage"""
+    """Component that implements Resilient function 'gcp_cloud_functions_sandbox_and_screenshot_webpage"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_gcp", {})
+        self.options = opts.get("fn_google_cloud_functions", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_gcp", {})
+        self.options = opts.get("fn_google_cloud_functions", {})
 
-    @function("gcp_utilities_screenshot_sandboxed_webpage")
-    def _gcp_utilities_screenshot_sandboxed_webpage_function(self, event, *args, **kwargs):
+    @function("gcp_cloud_functions_sandbox_and_screenshot_webpage")
+    def _gcp_cloud_functions_sandbox_and_screenshot_webpage_function(self, event, *args, **kwargs):
         """Function: Takes in an input of a URL and returns a screenshot of the UI for that webpage. Utilises Cloud Functions provided by Google Cloud Platform to set up an isolated headless Chrome instance to sandbox the webpage. Function triggers this Cloud Function with the URL and then returns the result."""
         try:
             yield StatusMessage("Starting")

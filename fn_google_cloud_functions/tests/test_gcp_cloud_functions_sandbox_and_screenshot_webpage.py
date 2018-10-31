@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -8,10 +9,11 @@ from mock import patch
 import requests_mock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from fn_gcp.util.helper import GCPHelper
+from fn_google_cloud_functions.util.helper import GCPHelper
 from requests.sessions import Session
-PACKAGE_NAME = "fn_gcp"
-FUNCTION_NAME = "gcp_utilities_screenshot_sandboxed_webpage"
+
+PACKAGE_NAME = "fn_google_cloud_functions"
+FUNCTION_NAME = "gcp_cloud_functions_sandbox_and_screenshot_webpage"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -61,20 +63,19 @@ def mocked_requests_get(*args, **kwargs):
         return MockResponse(json_data={'contents': [{"test1":"test"},{"test2":"test"}]},status_code=200, raw="test")
     else:
         return MockResponse(json_data={}, status_code=400)
-
-def call_gcp_utilities_screenshot_sandboxed_webpage_function(circuits, function_params, timeout=10):
+def call_gcp_cloud_functions_sandbox_and_screenshot_webpage_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("gcp_utilities_screenshot_sandboxed_webpage", function_params)
+    evt = SubmitTestFunction("gcp_cloud_functions_sandbox_and_screenshot_webpage", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("gcp_utilities_screenshot_sandboxed_webpage_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("gcp_cloud_functions_sandbox_and_screenshot_webpage_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestGcpUtilitiesScreenshotSandboxedWebpage:
-    """ Tests for the gcp_utilities_screenshot_sandboxed_webpage function"""
+class TestGcpCloudFunctionsSandboxAndScreenshotWebpage:
+    """ Tests for the gcp_cloud_functions_sandbox_and_screenshot_webpage function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -113,7 +114,7 @@ class TestGcpUtilitiesScreenshotSandboxedWebpage:
                 # Replace the return value of our mock_session with a custom function
                 mock_session.return_value = mocked_requests_get(success=True)
                 # Fire the function with mocked functionality
-                results = call_gcp_utilities_screenshot_sandboxed_webpage_function(circuits_app, function_params)
+                results = call_gcp_cloud_functions_sandbox_and_screenshot_webpage_function(circuits_app, function_params)
                 assert (expected_results["success"] == results["success"])
 
 
