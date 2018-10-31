@@ -76,13 +76,6 @@ class FunctionComponent(ResilientComponent):
             # Search for a row that contains the same sn_ref_id
             row_found = res_datatable.get_row("sn_ref_id", payload.inputs["sn_ref_id"])
 
-            # Get the incident_status: either Active or Closed
-            incident_status = None
-            if payload.inputs["incident_status"] == "A":
-              incident_status = "Active"
-            elif payload.inputs["incident_status"] == "C":
-              incident_status = "Closed"
-
             # Get current time (*1000 as API does not accept int)
             now = int(time.time()*1000)
 
@@ -91,7 +84,7 @@ class FunctionComponent(ResilientComponent):
 
               cells_to_update = {
                 "time": now,
-                "status": res_helper.get_status_rich_text(incident_status),
+                "status": res_helper.get_status_rich_text(payload.inputs["incident_status"]),
                 "action": "Status Updated"
               }
 
@@ -117,7 +110,7 @@ class FunctionComponent(ResilientComponent):
                   now,
                   payload.res_id,
                   payload.inputs["sn_ref_id"],
-                  incident_status,
+                  res_helper.get_status_rich_text(payload.inputs["incident_status"]),
                   payload.action,
                   """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_link)
               )
