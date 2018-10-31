@@ -1,0 +1,3 @@
+include README.md
+include fn_hibp/util/*
+include fn_hibp/LICENSE
