@@ -7,8 +7,8 @@ setup(
     name='fn_watson_translate',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_watson_translate'",
     long_description="Resilient Circuits Components for 'fn_watson_translate'",
     install_requires=[
