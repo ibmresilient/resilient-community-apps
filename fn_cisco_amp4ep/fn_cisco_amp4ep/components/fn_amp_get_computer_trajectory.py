@@ -148,7 +148,8 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "total": total, "query_execution_time": query_execution_time,
                        "input_params": params}
-            yield StatusMessage("Returning 'computer trajectory by guid' results for guid '{}'.".format(params["connector_guid"]))
+            yield StatusMessage("Returning 'computer trajectory' results for guid '{1}' and query '{2}'."
+                                .format(params["connector_guid"], params["q"] ))
 
             log.debug(json.dumps(results))
 
