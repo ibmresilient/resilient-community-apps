@@ -40,9 +40,10 @@ def selftest_function(opts):
         state = "failure"
         reason = str(err)
 
-    result = {"state": state,
-            "reason": reason
-           }
+    result = {
+                "state": state,
+                "reason": reason
+             }
 
     log.info(result)
 

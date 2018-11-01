@@ -27,20 +27,18 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
-        self.vt = self._init_virustotal()
+        self._init_virustotal()
 
     def _init_virustotal(self):
         """ validate required fields for app.config """
         validateFields(('api_token', 'polling_interval_sec', 'max_polling_wait_sec'), self.options)
-        return VirusTotal(self.options['api_token'], self.options['proxies'])
-
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_virustotal", {})
         self.resilient = opts.get("resilient", {})
-        self.vt = self._init_virustotal()
+        self._init_virustotal()
 
 
     @function("virustotal")
@@ -54,6 +52,8 @@ class FunctionComponent(ResilientComponent):
         """
         try:
             validateFields(('incident_id', 'vt_type'), kwargs)  # required
+
+            vt = VirusTotal(self.options['api_token'], self.options['proxies'])
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -83,17 +83,17 @@ class FunctionComponent(ResilientComponent):
                     temp_file_binary.write(entity["data"])
                     temp_file_binary.close()
                     try:
-                        response = self.vt.scan_file(temp_file_binary.name, filename=entity["name"])
+                        response = vt.scan_file(temp_file_binary.name, filename=entity["name"])
                     except Exception as err:
                         raise err
                     finally:
                         os.unlink(temp_file_binary.name)
 
-                file_result = self.return_response(response, self.vt.get_file_report, time.time())
+                file_result = self.return_response(response, vt.get_file_report, time.time())
 
                 ## was a sha-256 returned? try an existing report first
                 if file_result.get("sha256"):
-                    response = self.vt.get_file_report(file_result.get("sha256"))
+                    response = vt.get_file_report(file_result.get("sha256"))
                     report_result = self.return_response(response, None, time.time())
 
                     if report_result.get("response_code") and report_result.get("response_code") == 1:
@@ -103,24 +103,24 @@ class FunctionComponent(ResilientComponent):
 
             elif vt_type.lower() == 'url':
                 # attempt to see if a report already exists
-                response = self.vt.get_url_report(vt_data)
+                response = vt.get_url_report(vt_data)
                 result = self.return_response(response, None, time.time())
 
                 # check if result is not found, meaning no report exists
                 if result['response_code'] == RC_NOT_FOUND:
-                    response = self.vt.scan_url(vt_data)
-                    result = self.return_response(response, self.vt.get_url_report, time.time())
+                    response = vt.scan_url(vt_data)
+                    result = self.return_response(response, vt.get_url_report, time.time())
 
             elif vt_type.lower() == 'ip':
-                response = self.vt.get_ip_report(vt_data)
+                response = vt.get_ip_report(vt_data)
                 result = self.return_response(response, None, time.time())
 
             elif vt_type.lower() == 'domain':
-                response = self.vt.get_domain_report(vt_data)
+                response = vt.get_domain_report(vt_data)
                 result = self.return_response(response, None, time.time())
 
             elif vt_type.lower() == 'hash':
-                response = self.vt.get_file_report(vt_data)
+                response = vt.get_file_report(vt_data)
                 result = self.return_response(response, None, time.time())
 
             else:
