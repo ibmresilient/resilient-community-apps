@@ -741,13 +741,13 @@ class SlackUtils(object):
         Function sets the channel to archive.
         :return: JSON result
         """
-        # results = self.slack_client.api_call(
-        #     "conversations.archive",
-        #     channel=self.get_channel_id()
-        # )
-        # LOG.debug(results)
-        # return results
-        return {"ok": True}  # TODO archiving turned off for easier testing
+        results = self.slack_client.api_call(
+            "conversations.archive",
+            channel=self.get_channel_id()
+        )
+        LOG.debug(results)
+        return results
+        #return {"ok": True}  # TODO archiving turned off for easier testing
 
     def get_channel_type(self):
         """

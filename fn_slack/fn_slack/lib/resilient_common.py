@@ -48,6 +48,7 @@ def clean_html(htmlFragment):
 
     return ' '.join(s.strings)
 
+
 def unescape(data):
     """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """
     try:
@@ -77,7 +78,7 @@ def readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%d %H:%M:%
     :return: string representation of timestamp
     """
     if milliseconds:
-        ts = timestamp/1000
+        ts = int(timestamp/1000)
     else:
         ts = timestamp
 

@@ -9,7 +9,7 @@ Many of the features of posting a Slack message are under customer control inclu
 - Preserving embedded links
 - Posting messages from Incidents, Notes, Artifacts and Tasks displaying authorship
 - Uploading Incident, Task or Artifact attachment
-- Slack user ID <@U345GHIJKL> and channel ID <#C012ABCDE> references
+- Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
 - Exporting conversation history to a text file, saving it as an attachment in Resilient and archiving Slack channel
 
 ## Installation

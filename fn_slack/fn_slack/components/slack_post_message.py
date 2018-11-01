@@ -9,7 +9,7 @@ Many of the features of posting a Slack message are under customer control inclu
 - Inviting users to conversations
 - Preserving embedded links
 - Posting messages from Incidents, Notes, Artifacts and Tasks displaying authorship
-- Slack user ID <@U345GHIJKL> and channel ID <#C012ABCDE> references
+- Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -50,14 +50,15 @@ class FunctionComponent(ResilientComponent):
           ...
         }
 
-        If channel_name is NOT specified in the function input, method will perform a lookup
+        If channel_name is NOT specified as the function input, method will perform a lookup
         for associated channel_name in Slack Conversations Datatable. If there is an Incident or Task associated
-        slack_channel, method will use found channel name for either searching for an existing Slack channel in
-        Slack Workspace (api call) or create a new Slack channel (api call).
+        slack_channel, method will use found channel name and search for an existing channel in
+        Slack Workspace (api call).
 
-        If channel_name is specified in the function input, method will search for an existing Slack channel in
-        Slack Workspace (api call) or create a new Slack channel (api call) with the specified channel_name.
-        If channel_name is specified and there is also the associated channel fond, method will ignore the associated
+        If channel_name is specified as the function input, method will search for an existing channel in
+        Slack Workspace (api call) or create a new Slack channel (api call), if it doesn't exist yet, with the
+        specified channel_name.
+        If channel_name is specified and there is also the associated channel found, method will ignore the associated
         one and post to the input one.
 
         Default settings for posting messages are:
