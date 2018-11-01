@@ -284,7 +284,8 @@ class Ampclient(object):
             event_type = re.split('\s+|,', event_type)
 
         # Convert start_date from Unix timestamp (in secs) to isoformat
-        start_date = datetime.fromtimestamp(int(str(start_date)[0:-3])).isoformat()
+        if start_date is not None:
+            start_date = datetime.fromtimestamp(int(str(start_date)[0:-3])).isoformat()
 
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
