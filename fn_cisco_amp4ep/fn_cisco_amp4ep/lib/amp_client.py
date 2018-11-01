@@ -70,7 +70,8 @@ class Ampclient(object):
 
 
     def _req(self, uri, method='GET', params=None, data=None):
-        """Test if a parameter is None value or string 'None'.
+        """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH and
+        DELETE. Retries are attempted if a Rate limit exception (429) is  detected.
 
         :param uri: Used to form url
         :param method: Request method, defaults to "GET"
