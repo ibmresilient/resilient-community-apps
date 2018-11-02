@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 class MicrosoftGraphHelper:
     def __init__(self, tenant_id, client_id, client_secret):
-        self.__cache = TTLCache(maxsize=1, ttl=55*1000)
+        self.__cache = TTLCache(maxsize=1, ttl=55*1000)  # Set to expire after 55 minutes so we always have a fresh one
 
         self.__tenant_id = tenant_id
         self.__client_id = client_id,
@@ -18,8 +18,12 @@ class MicrosoftGraphHelper:
         self.__get_cache('microsoft_security_graph_access_token')
 
     def __set_cache(self, d):
-        for k, v in d.iteritems():
-            self.__cache.update([(k, v)])
+        try:
+            for k, v in d.iteritems():
+                self.__cache.update([(k, v)])
+        except KeyError:
+            for k, v in d.items():
+                self.__cache.update([(k, v)])
 
     def __get_cache(self, key):
         if key not in self.__cache:
@@ -35,6 +39,8 @@ class MicrosoftGraphHelper:
             "grant_type": "client_credentials"
         }
         r = requests.post(token_url, data=post_data)
+        json = r.json()
+        return json.get("access_token")
 
     def check_status_code(self, response):
         if 200 <= response.status_code <= 299:
@@ -42,8 +48,8 @@ class MicrosoftGraphHelper:
         # Access token has expired, request a new one
         elif response.status_code == 401:
             log.debug(response.content)
-            r = self.__refresh_access_token()
-            self.check_status_code(r)
+            access_token = self.__refresh_access_token()
+            self.__set_cache(access_token)
             return False
         else:
             raise ValueError("Invalid response from Microsoft Security Graph")

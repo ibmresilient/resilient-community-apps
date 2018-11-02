@@ -10,7 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_microsoft_security_graph]
-microsoft_graph_url=https://graph.microsoft.com/v1.0/  # Normally should not need to change this
+# Graph URL with version number
+microsoft_graph_url=https://graph.microsoft.com/v1.0/
 tenant_id=
 client_id=<App client id>
 client_secret=<App client secret>
@@ -18,7 +19,7 @@ client_secret=<App client secret>
 # Polling options
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.
 msg_polling_interval=0
-incident_template=<location_of_template_file>  # If not set uses default template.
+#incident_template=<location_of_template_file>  # If not set uses default template.
 
 # String filter to apply to the alert polling component. This will be added directly to the end of the url
 # when searching for alerts, start from the '?'. An example is show below

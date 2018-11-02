@@ -5,6 +5,7 @@
 import logging
 import requests
 import json
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
 
@@ -21,9 +22,9 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_microsoft_security_graph", {})
 
         if "Microsoft_security_graph_helper" not in self.options:
-            self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
-                                                                        self.options.get("client_id"),
-                                                                        self.options.get("client_secret"))
+            self.options["Microsoft_security_graph_helper"] = MicrosoftGraphHelper(self.options.get("tenant_id"),
+                                                                                   self.options.get("client_id"),
+                                                                                   self.options.get("client_secret"))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -33,12 +34,16 @@ class FunctionComponent(ResilientComponent):
     @function("microsoft_security_graph_update_alert")
     def _microsoft_security_graph_update_alert_function(self, event, *args, **kwargs):
         """Function: Update an alert in the Microsoft Security Graph."""
+        options = self.options
+        ms_graph_helper = options.get("Microsoft_security_graph_helper")
         try:
-
+            start_time = time.time()
             yield StatusMessage("starting...")
+
             # Get the function parameters:
             microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
-            microsoft_security_graph_alert_data = kwargs.get("microsoft_security_graph_alert_data")  # text
+            microsoft_security_graph_alert_data = self.get_textarea_param(
+                kwargs.get("microsoft_security_graph_alert_data"))  # textarea
 
             if microsoft_security_graph_alert_id is not None:
                 log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
@@ -49,22 +54,36 @@ class FunctionComponent(ResilientComponent):
             else:
                 raise ValueError("microsoft_security_graph_alert_data is required to run this function")
 
-            headers = {
-                "Content-type": "application/json",
-                "Authorization": "Bearer " + self.Microsoft_security_graph_helper.get_access_token(),
-                "Prefer": "return=representation"
-            }
-            try:
-                data = json.loads(microsoft_security_graph_alert_data)
-            except ValueError as e:
-                raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
+            r = None
+            for i in list(range(2)):
+                headers = {
+                    "Content-type": "application/json",
+                    "Authorization": "Bearer " + ms_graph_helper.get_access_token(),
+                    "Prefer": "return=representation"
+                }
+                try:
+                    data = json.loads(microsoft_security_graph_alert_data)
+                except ValueError as e:
+                    raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
-            r = requests.get("https://graph.microsoft.com/v1.0/security/alerts", headers=headers, data=data)
-            self.Microsoft_security_graph_helper.check_status_code(r)
+                r = requests.patch("{}/security/alerts/{}".format(options.get("microsoft_graph_url"),
+                                                                  microsoft_security_graph_alert_id), headers=headers,
+                                   json=data)
+                # Need to refresh token and run again
+                if ms_graph_helper.check_status_code(r):
+                    break
+                elif i == 2:
+                    raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")
+            end_time = time.time()
             results = {
-                "value": "xyz"
+                "Inputs": {
+                    "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id,
+                    "microsoft_security_graph_alert_data": microsoft_security_graph_alert_data
+                },
+                "Run Time": str(end_time - start_time),
+                "Value": r.json()
             }
 
             # Produce a FunctionResult with the results
