@@ -19,8 +19,8 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_microsoft_security_graph", {})
 
-        if self.Microsoft_security_graph_helper is None:
-            self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
+        if "Microsoft_security_graph_helper" not in self:
+            self.options["Microsoft_security_graph_helper"] = MicrosoftGraphHelper(self.options.get("tenant_id"),
                                                                         self.options.get("client_id"),
                                                                         self.options.get("client_secret"))
 
@@ -50,7 +50,6 @@ class FunctionComponent(ResilientComponent):
             }
             r = requests.get("https://graph.microsoft.com/v1.0/security/alerts", headers=headers)
             self.Microsoft_security_graph_helper.check_status_code(r)
-
 
             yield StatusMessage("done...")
             results = {

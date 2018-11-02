@@ -1,36 +1,52 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+
 import requests
+import logging
+from cachetools import TTLCache
+
+
+log = logging.getLogger(__name__)
 
 
 class MicrosoftGraphHelper:
     def __init__(self, tenant_id, client_id, client_secret):
+        self.__cache = TTLCache(maxsize=1, ttl=55*1000)
+
         self.__tenant_id = tenant_id
         self.__client_id = client_id,
         self.__client_secret = client_secret
-        self.__access_token = self.get_access_token()
+        self.__get_cache('microsoft_security_graph_access_token')
+
+    def __set_cache(self, d):
+        for k, v in d.iteritems():
+            self.__cache.update([(k, v)])
+
+    def __get_cache(self, key):
+        if key not in self.__cache:
+            self.__set_cache({key: self.__refresh_access_token()})
+        return self.__cache.get(key)
 
     def __refresh_access_token(self):
-        token_url = 'https://login.microsoftonline.com/{}/oauth2/v2.0/token'.format(self._tenant_id)
+        token_url = 'https://login.microsoftonline.com/{}/oauth2/v2.0/token'.format(self.__tenant_id)
         post_data = {
-            "client_id": self._client_id,
+            "client_id": self.__client_id,
             "scope": ["https://graph.microsoft.com/.default"],
-            "client_secret": self._client_secret,
+            "client_secret": self.__client_secret,
             "grant_type": "client_credentials"
         }
         r = requests.post(token_url, data=post_data)
-        self.check_status_code(r)
-        r_json = r.json()
-
-        return r_json.get("access_token")
 
     def check_status_code(self, response):
         if 200 <= response.status_code <= 299:
-            return
+            return True
         # Access token has expired, request a new one
         elif response.status_code == 401:
-            r = self.get_access_token()
+            log.debug(response.content)
+            r = self.__refresh_access_token()
             self.check_status_code(r)
+            return False
         else:
             raise ValueError("Invalid response from Microsoft Security Graph")
 
     def get_access_token(self):
-        return self._access_token
+        return self.__get_cache("microsoft_security_graph_access_token")
