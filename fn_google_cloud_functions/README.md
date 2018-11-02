@@ -52,8 +52,11 @@ The function returns the results as a Python Dictionary. Here is an example oupu
 ```
 results : {
   success: True  
-  inputs: { },
-  base64Screenshot: x
+  inputs: {
+   "input_url": google.com,
+   "input_full_url": https://google.com
+   },
+  base64Screenshot: cmFuZG9t......
 }
 ```
 
@@ -66,8 +69,6 @@ results : {
 
 Other function packages are needed to use this package. Below is a table detailing what packages are needed to make the integration work and where to get them.
 
-| Name  | Min Version  | Function Used  | Link  |   |
-|---|---|---|---|---|
-| fn_utilities  | 1.0.3  | utilities_base64_to_attachment.py  | [AppX Link](https://exchange.xforce.ibmcloud.com/hub/extension/2b6699ac8a3976b67dfbddee26dbe3a5)  |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+| Name  | Min Version  | Function Used  | Link  |
+|---|---|---|---|
+| fn_utilities  | 1.0.3  | utilities_base64_to_attachment.py  | [AppX Link](https://exchange.xforce.ibmcloud.com/hub/extension/2b6699ac8a3976b67dfbddee26dbe3a5)  |
