@@ -21,6 +21,7 @@ from datetime import datetime
 
 
 LOG = logging.getLogger(__name__)
+AMP_LIMIT_DEFAULT = 500
 
 class Ampclient(object):
     """
@@ -366,7 +367,7 @@ class Ampclient(object):
             else:
                 params["limit"] = self.query_limit
         else:
-            if self.query_limit < 500: # Default limit 500, reset limit to query_limit if less than 500.
+            if self.query_limit < AMP_LIMIT_DEFAULT : # Reset limit to query_limit if less than default limit.
                 params["limit"] = self.query_limit
 
         if results_total is None or (results_total is not None and params["limit"] < results_total):
