@@ -20,6 +20,22 @@ try: #python3
 except: #python2
     from urllib import urlopen
 
+class FunctionPayload:
+    """Class that contains the payload sent back to UI and available in the post-processing script"""
+
+    def __init__(self, inputs):
+        self.success = True
+        self.inputs = {}
+        self.base64Screenshot = None
+
+        for input in inputs:
+            self.inputs[input] = inputs[input]
+
+    def as_dict(self):
+        """Return this class as a Dictionary"""
+        return self.__dict__
+
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'gcp_cloud_functions_sandbox_and_screenshot_webpage"""
 
@@ -56,6 +72,13 @@ class FunctionComponent(ResilientComponent):
 
             proxies = helper.setup_proxies(proxies, HTTP_PROXY, HTTPS_PROXY)
 
+            # Parse the input URL to get only the host. Full URL gives issues with Attachment names
+            input_url = urlparse(gcp_url)
+
+            payload = FunctionPayload({
+                "input_url": input_url.hostname,
+                "input_full_url": gcp_url
+            })
             try:
                 base64Screenshot = None
                 # Create the session and set the proxies.
@@ -78,7 +101,7 @@ class FunctionComponent(ResilientComponent):
                     if int(res.status_code / 100) == 2:
                         yield StatusMessage("Got a response back in the 200 family, parsing result")
                         # Read the stream for image data
-                        base64Screenshot = base64.b64encode(res.raw.read()).decode("utf-8")
+                        payload.base64Screenshot = base64.b64encode(res.raw.read()).decode("utf-8")
                         
                     elif res.status_code == 401:
                         raise FunctionError("401 Status code returned. Retry function with updated credentials")
@@ -88,22 +111,16 @@ class FunctionComponent(ResilientComponent):
                     else:
                         log.error(res.text)
                         log.error(res.reason)
+
                         yield StatusMessage("Request made. Status Code: {}; Reason {}".format(res.status_code, res.reason))
 
             except Exception as e:
                 log.info(str(e))
                 raise ValueError("Encountered issue when invoking the Google Cloud Function; Reason {}".format(str(e)))
 
-            # Parse the input URL to get only the host. Full URL gives issues with Attachment names
-            input_url = urlparse(gcp_url)
-
-            results = {
-                "input_url": input_url.hostname,
-                "success": True if base64Screenshot else False,
-                "base64Screenshot" : base64Screenshot
-            }
+            payload.success = True if payload.base64Screenshot else False
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(payload.as_dict())
         except Exception:
             yield FunctionError()

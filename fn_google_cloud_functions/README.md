@@ -7,8 +7,7 @@ Do you have a use-case or a need to get data / perform an operation from a servi
 Why not build out a cloud function which does that work for you under a different network configuration and target that instead.
 
 Note: This Package depends on the fn_utilities package. fn_utilities must be installed for the function to work as expected.
-
-The output of the Google Cloud Function is fed downstream into a Utility function called Base64ToAttachment.
+In this example Workflow the output of the Google Cloud Function is used as an input into a Utility function called Base64ToAttachment.
 This function takes the base64 result from the previous function and saves it in the Resilient Platform as an attachment.
 ## app.config settings:
 ```python
@@ -23,19 +22,21 @@ gcp_https_proxy = None
 ```
 
 ## Function Inputs:
-**gcp_url:**
-* The URL to send to the GCP Cloud Function
-* E.g. https://www.ibm.com
+
+| Function Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `gcp_url` | `String` | Yes | `'https://google.com'` |  
+
 
 ## Pre-Processing Scripts 
 The workflow `Example: GCP Cloud Functions: Sandbox and Screenshot Webpage` includes 2 functions.
 
-### Function : GCP Cloud Functions: Sandbox and Screenshot Webpage
+### Function: GCP Cloud Functions: Sandbox and Screenshot Webpage
 ```python
 inputs.gcp_url = artifact.value
 ```
 
-### Function : Utilities: Base64 to Attachment
+### Function: Utilities: Base64 to Attachment
 ```python
 url = workflow.properties.sandbox_screenshot["input_url"]
 attachment_desc = "GCP Sandbox Screenshot of {0}".format(url)
@@ -47,12 +48,12 @@ inputs.base64content = workflow.properties.sandbox_screenshot["base64Screenshot"
 
 
 ## Function Output:
-* The function returns the results as a Python Dictionary. Here is an example ouput:
+The function returns the results as a Python Dictionary. Here is an example ouput:
 ```
-{
-    "success": True/False,
-    "base64Screenshot": <base64 string>
-    "input_url": <string>
+results : {
+  success: True  
+  inputs: { },
+  base64Screenshot: x
 }
 ```
 
@@ -61,3 +62,12 @@ inputs.base64content = workflow.properties.sandbox_screenshot["base64Screenshot"
 | --------- | :---------: | ------------------ |
 | Send URL to Google Cloud function for Sandboxing | `Artifact` | `Example: GCP Cloud Functions: Sandbox and Screenshot Webpage` |
 
+## Dependancies
+
+Other function packages are needed to use this package. Below is a table detailing what packages are needed to make the integration work and where to get them.
+
+| Name  | Min Version  | Function Used  | Link  |   |
+|---|---|---|---|---|
+| fn_utilities  | 1.0.3  | utilities_base64_to_attachment.py  | [AppX Link](https://exchange.xforce.ibmcloud.com/hub/extension/2b6699ac8a3976b67dfbddee26dbe3a5)  |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
