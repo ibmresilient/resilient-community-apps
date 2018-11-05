@@ -12,8 +12,8 @@ twitter_api_secret = <API_SECRET>
 ## Function Inputs:
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `twitter_search_tweet_string` | `String` | Yes | `'{"hashtags":[ "Malware"]}'` |
-| `twitter_search_tweet_count` | `String` | Yes | `10` |
+| `twitter_search_tweet_string` | `String Representation of JSON` | Yes | `'{"hashtags":[ "Malware", "Ransomware", "Phishing"]}'` |
+| `twitter_search_tweet_count` | `Number` | Yes | `10` |
 
 
 ## Function Output:
@@ -40,6 +40,8 @@ results = {
 }
 
 ```
+
+
 Review the [Twitter API documentation](https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets.html) for more info on all the attributes returned.
 
 The [Twython documentation](https://twython.readthedocs.io/en/latest/) has details specific to the Twython package used by this integration
