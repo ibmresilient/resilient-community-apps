@@ -28,9 +28,10 @@ results = {
   tweets: {
     statuses: [{
       text: "Hello World",
+      id_str: "123",
       entities: {
           urls:[{
-            url : "https://twitter.com/i/web/status/hello-world"id_str
+            url : "https://twitter.com/i/web/status/123"
           }]
         },
         ...OtherAttributes
