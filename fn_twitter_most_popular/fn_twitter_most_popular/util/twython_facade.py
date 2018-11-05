@@ -30,7 +30,7 @@ class TwythonFacade:
         if count is None:
             count = 15
 
-        return self.twitter.search(q=self.form_query_string(query), result_type='popular', count=count)
+        return self.twitter.search(q=self.form_query_string(query), result_type='popular', count=count, tweet_mode='extended')
 
     def form_query_string(self, tags_to_search):
         """
