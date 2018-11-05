@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
             if response:
 
               # If there is an error, fail
-              if response.status_code == 200 and "Bad API request" in response.content:
+              if response.status_code == 200 and "Bad API request".encode("utf-8") in response.content:
                 payload.success = False
                 raise ValueError(response.content)
 
@@ -165,13 +165,13 @@ class FunctionComponent(ResilientComponent):
             if response:
 
               # If there is an error, fail
-              if response.status_code == 200 and "Bad API request" in response.content:
+              if response.status_code == 200 and "Bad API request".encode("utf-8") in response.content:
                 payload.success = False
                 raise ValueError(response.content)
 
               # If success, set the link
               elif response.status_code == 200:
-                payload.pastebin_link = response.content
+                payload.pastebin_link = response.content.decode("utf-8")
 
               # If not a 200 code
               else:
