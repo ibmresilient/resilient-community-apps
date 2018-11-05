@@ -15,7 +15,7 @@ gcp_region = <GCP_REGION_ID>
 gcp_project_id = <GCP_PROJECT_ID>
 gcp_function_name = <NAME_OF_CLOUD_FUNCTION>
 # Optional Config values
-gcp_http_proxy = None
-gcp_https_proxy = None
+#gcp_http_proxy = None
+#gcp_https_proxy = None
 """
     return config_data

@@ -8,7 +8,7 @@ Why not build out a cloud function which does that work for you under a differen
 
 The cloud function used by this example workflow is leverages a headless chrome instance to consume a URL and screenshot the result. For information on how to set this up see [this post](https://cloud.google.com/blog/products/gcp/introducing-headless-chrome-support-in-cloud-functions-and-app-engine)
 
-Note: This Package depends on the fn_utilities package. fn_utilities must be installed for the function to work as expected.
+>**Note:** This Package depends on the fn_utilities package. fn_utilities must be installed for the function to work as expected.
 In this example Workflow the output of the Google Cloud Function is used as an input into a Utility function called Base64ToAttachment.
 This function takes the base64 result from the previous function and saves it in the Resilient Platform as an attachment.
 ## app.config settings:
@@ -23,11 +23,22 @@ gcp_https_proxy = None
 
 ```
 
-## Function Inputs:
+## Function Inputs: Google Cloud Function:
 
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `gcp_url` | `String` | Yes | `'https://google.com'` |  
+
+
+### Function Inputs: Base64 to Attachment:
+>The inputs used by this function are acquired using the outputs of the Google Cloud Function
+
+
+| Function Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `base64content` | `String` | Yes | `'cmFuZG9t......'` |  
+| `incident_id` | `Number` | Yes | `'2011'` |  
+| `file_name` | `Number` | Yes | `'GCP Screenshot of ibm.com.png'` | 
 
 
 ## Pre-Processing Scripts 
@@ -49,7 +60,7 @@ inputs.base64content = workflow.properties.sandbox_screenshot["base64Screenshot"
 ```
 
 
-## Function Output:
+## Google Cloud Function Output:
 The function returns the results as a Python Dictionary. Here is an example ouput:
 ```
 results : {
