@@ -6,7 +6,7 @@
 Do you have a use-case or a need to get data / perform an operation from a service without exposing your IP? 
 Why not build out a cloud function which does that work for you under a different network configuration and target that instead.
 
-The cloud function used by this example workflow is leverages a headless chrome instance to consume a URL and screenshot the result. For information on how to set this up see [this post](https://cloud.google.com/blog/products/gcp/introducing-headless-chrome-support-in-cloud-functions-and-app-engine)
+The cloud function used by this example workflow leverages a headless chrome instance to consume a URL and screenshot the result. For information on how to set this up see [this post](https://cloud.google.com/blog/products/gcp/introducing-headless-chrome-support-in-cloud-functions-and-app-engine)
 
 >**Note:** This Package depends on the fn_utilities package. fn_utilities must be installed for the function to work as expected.
 In this example Workflow the output of the Google Cloud Function is used as an input into a Utility function called Base64ToAttachment.
@@ -37,8 +37,8 @@ gcp_https_proxy = None
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `base64content` | `String` | Yes | `'cmFuZG9t......'` |  
-| `incident_id` | `Number` | Yes | `'2011'` |  
-| `file_name` | `Number` | Yes | `'GCP Screenshot of ibm.com.png'` | 
+| `incident_id` | `Number` | Yes | `2011` |  
+| `file_name` | `String` | Yes | `'GCP Screenshot of ibm.com.png'` | 
 
 
 ## Pre-Processing Scripts 

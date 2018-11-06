@@ -9,8 +9,8 @@ setup(
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
-    description="Resilient Circuits Components for 'fn_twitter_most_popular'",
-    long_description="Resilient Circuits Components for 'fn_twitter_most_popular'",
+    description="Resilient Circuits Twitter Search Function",
+    long_description="A Resilient Circuits Function allowing you to search tweets with one or more tags",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'twython>= 3.7.0'
