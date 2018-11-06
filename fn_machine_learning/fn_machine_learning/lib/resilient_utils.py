@@ -15,6 +15,7 @@ from fn_machine_learning.lib.ml_knn import MlKNN
 from fn_machine_learning.lib.ml_dummy_classifier import MlDummyClassifier
 import logging
 import json
+import csv
 
 
 def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
@@ -66,12 +67,76 @@ def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
     return model
 
 
+def write_to_csv(incidents, fields_dict, filename, max_count=None, filter=None, in_log=None):
+    """
+    Write incidents to a CSV file according to the field definition
+    :param incidents:
+    :param fields_dict:
+    :param filename:
+    :param max_count:
+    :param filter:
+    :param in_log:
+    :return:
+    """
+    log = in_log if in_log else logging.getLogger(__name__)
+    #
+    #   Keep a count for samples
+    #
+    inc_count = 0
+    with open(filename, "wb") as outfile:
+        #
+        #   Write everything into a CSV file, since scikit-learn uses CSV format for samples
+        #
+        fields = list(fields_dict.keys())
+        csv_writer = csv.DictWriter(outfile,
+                                    fieldnames=fields,
+                                    dialect="excel")
+        csv_writer.writeheader()
+
+        for inc in incidents:
+            #
+            #   Call filter to figure if we want to keep this incident/sample
+            #
+            if filter is not None:
+                shall_include = filter.shall_include_incident(inc)
+                if not shall_include:
+                    #
+                    #   Filter it out. Continue to the next
+                    #
+                    continue
+
+            new_dict = {}
+            for field in fields:
+                try:
+                    #
+                    #   The field could be a custom field, if so read from properties.
+                    #
+                    value = str(inc.get(field, inc["properties"].get(field, "")))
+                except UnicodeEncodeError:
+                    value = inc.get(field, inc["properties"].get(field, "")).encode("ascii", "ignore").decode("ascii")
+                except Exception as e:
+                    log.exception("Exception in reading incident field {}: {}".format(field, str(e)))
+                    value = ""
+                new_dict[field] = value
+
+            csv_writer.writerow(new_dict)
+
+            inc_count = inc_count + 1
+            if max_count and inc_count >= max_count:
+                log.info("Truncated samples at " + str(max_count))
+                break
+
+    return inc_count
+
 def get_incidents(res_client, filename, max_count=None, filter=None, in_log=None):
     """
-    Convert JSON into CSV and save
-    :param res_client: incidents in json format
-    :param filename: file name for saving CSV
-    :return:
+    Convert JSON into CSV and save, since scikit-learn uses CSV.
+    :param res_client:
+    :param filename:
+    :param max_count:
+    :param filter:
+    :param in_log:
+    :return: incidents/samples count
     """
     log = in_log if in_log else logging.getLogger(__name__)
 
@@ -82,81 +147,16 @@ def get_incidents(res_client, filename, max_count=None, filter=None, in_log=None
     log.debug("Incident Fields: " + str(fields_dict))
 
     # Get all the incidents
-    #ret = res_client.get("/incidents")
     ret = query_incidents(res_client=res_client,
                           max_count=max_count,
                           in_log=log)
 
-    with open(filename, "w") as outfile:
-        # Write everything into a CSV file
-        # Write header
-        fields = list(fields_dict.keys())
-        for field in fields[:-1]:
-            outfile.write(field + ",")
-        outfile.write(fields[-1] + '\n')
-
-        inc_count = 0
-        for inc in ret:
-            if filter is not None:
-                shall_include = filter.shall_include_incident(inc)
-                if not shall_include:
-                    #
-                    #   Filter it out. Continue to the next
-                    #
-                    continue
-
-            field_count = 0
-            for field in fields[:-1]:
-                field_count = field_count + 1
-                try:
-                    value = str(inc.get(field, inc["properties"].get(field, "")))
-                except UnicodeEncodeError:
-                    value = inc.get(field, inc["properties"].get(field, "")).encode("ascii", "ignore").decode("ascii")
-                except Exception as e:
-                    log.exception("Exception in reading incident field {}: {}".format(field, str(e)))
-                    value = ""
-                #
-                # Since we use csv, put quote if value contains \n or ,
-                # value with those two special chars needs preprocessed
-                # anyway
-                #
-
-                #
-                # @TODO
-                # It seems like there is a bug in pandas read_csv. Even though
-                # quotechar is set to ", it still gets confused by the comma below:
-                # "From: Faith Csikesz <faith@secretweaponleader.com>\\nTo: \\"Linda.Pham@ALLERGAN.com\\" <Linda.Pham@ALLERGAN.com>\\nSubject: Feedback Perceptions Survey for Claire Sears\\nDate: Thu, 16 Aug 2018 17:15:37 +0000\\n"
-                # but it has no trouble with the comma below.
-                # "Date: Wed, 27 Jun 2018 10:30:10 -0400\\nFrom: \\"Gartner Insights\\" <GartnerInsights@Gartner-promo.com>\\nSubject: Have You Explored Gartner Peer Insights Yet?\\nTo: ijessop@lifecell.com\\n"
-                #
-                # So by now we just remove the comma, since we don't handle NLS yet.
-                #
-                try:
-                    tmp = json.loads(value)
-                except Exception as e:
-                    #
-                    # value could be a list. Only replace for string
-                    #
-                    value = value.replace(',', ' ')
-                #
-                #
-                # @TODO
-                # If customer entered something wrong, like mismatched ' and ", the
-                # value = json.dumps(value) won't help.
-                #
-                #if '"' in value:
-                #    value = json.dumps(value)
-                value = value.replace('"', ' ')
-                if '\n' in value or ',' in value:
-                    value = '"' + value + '"'
-                outfile.write(value + ",")
-            value = str(inc.get(fields[-1], ""))
-            outfile.write(value + '\n')
-            inc_count = inc_count + 1
-            if max_count and inc_count >= max_count:
-                log.info("Truncated samples at " + str(max_count))
-                break
-
+    inc_count = write_to_csv(incidents=ret,
+                             fields_dict=fields_dict,
+                             filename=filename,
+                             max_count=max_count,
+                             filter=filter,
+                             in_log=in_log)
     return inc_count
 
 
