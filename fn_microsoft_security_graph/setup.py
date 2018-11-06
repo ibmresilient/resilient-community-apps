@@ -24,6 +24,7 @@ setup(
         "resilient.circuits.components": [
             "MicrosoftSecurityGraphUpdateAlertFunctionComponent = fn_microsoft_security_graph.components.microsoft_security_graph_update_alert:FunctionComponent",
             "MicrosoftSecurityGraphGetAlertDetailsFunctionComponent = fn_microsoft_security_graph.components.microsoft_security_graph_get_alert_details:FunctionComponent",
+            "MicrosoftSecurityGraphAlertSearchFunctionComponent = fn_microsoft_security_graph.components.microsoft_security_graph_alert_search:FunctionComponent",
             "MicrosoftSecurityGraphAlertsPolling = fn_microsoft_security_graph.components.microsoft_security_graph_alerts_polling:MicrosoftSecurityGraphAlertsPolling"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_microsoft_security_graph.util.config:config_section_data"],

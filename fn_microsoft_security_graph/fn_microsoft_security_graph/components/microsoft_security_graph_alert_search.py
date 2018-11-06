@@ -30,8 +30,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_microsoft_security_graph", {})
 
-    @function("microsoft_security_graph_get_alert_details")
-    def _microsoft_security_graph_get_alert_details_function(self, event, *args, **kwargs):
+    @function("microsoft_security_graph_alert_search")
+    def _microsoft_security_graph_alert_search_function(self, event, *args, **kwargs):
         """Function: Get the details of an alert from the Microsoft Security Graph API."""
         options = self.options
         ms_graph_helper = options.get("Microsoft_security_graph_helper")
@@ -40,12 +40,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             # Get the function parameters:
-            microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
+            microsoft_security_graph_alert_search_filter = kwargs.get("microsoft_security_graph_alert_search_filter")  # text
 
-            if microsoft_security_graph_alert_id is not None:
-                log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
-            else:
-                raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
+            if microsoft_security_graph_alert_search_filter is not None:
+                log.info("microsoft_security_graph_alert_search_filter: %s", microsoft_security_graph_alert_search_filter)
 
             r = None
             for i in list(range(2)):
@@ -53,8 +51,12 @@ class FunctionComponent(ResilientComponent):
                     "Content-type": "application/json",
                     "Authorization": "Bearer " + ms_graph_helper.get_access_token()
                 }
-                r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                               microsoft_security_graph_alert_id), headers=headers)
+                start_filter = ""
+                if options.get("alert_filter"):
+                    start_filter = "?$filter="
+                r = requests.get("{}security/alerts/{}{}".format(options.get("microsoft_graph_url"), start_filter,
+                                                                 microsoft_security_graph_alert_search_filter),
+                                 headers=headers)
                 # Check if need to refresh token and run again
                 if ms_graph_helper.check_status_code(r):
                     break
@@ -65,10 +67,10 @@ class FunctionComponent(ResilientComponent):
             end_time = time.time()
             results = {
                 "Inputs": {
-                    "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id
+                    "microsoft_security_graph_alert_search_filter": microsoft_security_graph_alert_search_filter
                 },
                 "Run Time": str(end_time - start_time),
-                "Details": r.json()
+                "Alerts": r.json()
             }
 
             # Produce a FunctionResult with the results

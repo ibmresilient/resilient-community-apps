@@ -69,10 +69,10 @@ class FunctionComponent(ResilientComponent):
                 r = requests.patch("{}/security/alerts/{}".format(options.get("microsoft_graph_url"),
                                                                   microsoft_security_graph_alert_id), headers=headers,
                                    json=data)
-                # Need to refresh token and run again
+                # Check if need to refresh token and run again
                 if ms_graph_helper.check_status_code(r):
                     break
-                elif i == 2:
+                elif i == 1:
                     raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")

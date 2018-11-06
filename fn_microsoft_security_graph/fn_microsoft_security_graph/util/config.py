@@ -12,7 +12,7 @@ def config_section_data():
     config_data = u"""[fn_microsoft_security_graph]
 # Graph URL with version number
 microsoft_graph_url=https://graph.microsoft.com/v1.0/
-tenant_id=
+tenant_id=<Tenant directory id>
 client_id=<App client id>
 client_secret=<App client secret>
 
@@ -21,8 +21,9 @@ client_secret=<App client secret>
 msg_polling_interval=0
 #incident_template=<location_of_template_file>  # If not set uses default template.
 
-# String filter to apply to the alert polling component. This will be added directly to the end of the url
-# when searching for alerts, start from the '?'. An example is show below
-alert_filter= # ?$filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
+# String filter to apply to the alert polling component. This will be added to the end of the url
+# when searching for alerts. The example shown below would make the whole search url equal to
+# https://graph.microsoft.com/v1.0/security/alerts/?$filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
+#alert_filter= assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
 """
     return config_data

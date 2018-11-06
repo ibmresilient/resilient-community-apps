@@ -109,12 +109,15 @@ class MicrosoftSecurityGraphAlertsPolling(ResilientComponent):
                 "Content-type": "application/json",
                 "Authorization": "Bearer " + ms_graph_helper.get_access_token()
             }
-            r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                           options.get("alert_filter")), headers=headers)
-            # Need to refresh token and run again
+            start_filter = ""
+            if options.get("alert_filter"):
+                start_filter = "?$filter="
+            r = requests.get("{}security/alerts/{}{}".format(options.get("microsoft_graph_url"), start_filter,
+                                                             options.get("alert_filter")), headers=headers)
+            # Check if need to refresh token and run again
             if ms_graph_helper.check_status_code(r):
                 break
-            elif i == 2:
+            elif i == 1:
                 raise ValueError("Problem with the access_token")
 
         response_json = r.json()

@@ -21,7 +21,7 @@ class MicrosoftGraphHelper:
         try:
             for k, v in d.iteritems():
                 self.__cache.update([(k, v)])
-        except KeyError:
+        except AttributeError:
             for k, v in d.items():
                 self.__cache.update([(k, v)])
 
@@ -49,7 +49,7 @@ class MicrosoftGraphHelper:
         elif response.status_code == 401:
             log.debug(response.content)
             access_token = self.__refresh_access_token()
-            self.__set_cache(access_token)
+            self.__set_cache({"microsoft_security_graph_access_token": access_token})
             return False
         else:
             raise ValueError("Invalid response from Microsoft Security Graph")
