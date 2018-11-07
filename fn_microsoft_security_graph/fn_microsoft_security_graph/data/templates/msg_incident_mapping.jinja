@@ -5,7 +5,7 @@
    },
    {# ds_to_millis expectes the data paramater to be a string datetime in the following format 05/17/2017 17:07:59 -#}
    "discovered_date": {{ ds_to_millis(createdDateTime) }},
-   "name": "{{id}}Microsoft Security Graph Alert: {{eventDateTime}}",
+   "name": "Microsoft Security Graph Alert: {{eventDateTime}}",
    "properties": {
       "microsoft_security_graph_alert_id": "{{ id }}"
    }
