@@ -12,7 +12,7 @@ from fn_machine_learning.lib.ml_model_common import MlModelCommon
 from fn_machine_learning.lib.ml_config import MlConfig
 import fn_machine_learning.lib.resilient_utils as resilient_utils
 import fn_machine_learning.lib.model_utils as model_utils
-from fn_machine_learning.lib.incident_filter import IncidentFilter
+from fn_machine_learning.lib.incident_time_filter import IncidentTimeFilter
 import requests
 
 try:
@@ -255,8 +255,9 @@ def download_incidents_csv(opt_parser, csv_file):
 
         time_start = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_start")
         time_end = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_end")
-        res_filter = IncidentFilter(time_start=time_start,
-                                    time_end=time_end)
+        res_filter = IncidentTimeFilter(time_start=time_start,
+                                        time_end=time_end,
+                                        in_log=LOG)
 
         # get_incidents is going to download all the incidents using this resilient_client
         # The optional max_count controls how many samples to process. The conversion from

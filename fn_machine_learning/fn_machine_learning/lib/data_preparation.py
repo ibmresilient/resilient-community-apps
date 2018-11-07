@@ -15,6 +15,8 @@ class DataPreparation(object):
         [Optional step in pre-processing samples]
         It is recommended to handle those samples with missing value(s) first.
         The easiest approach is just removing all of them
+
+        :param df:  input dataframe to process
         :return:
         """
         df = df.dropna(axis=0)
@@ -24,8 +26,9 @@ class DataPreparation(object):
     def normalize_samples(samples):
         """
         Feature scaling is crucial for most learning models
-        :param samples: samples to normalize
-        :return: normalized samples
+
+        :param samples:     samples to normalize
+        :return:            normalized samples
         """
         mms = MinMaxScaler()
         samples = mms.fit_transform(samples)
@@ -34,10 +37,13 @@ class DataPreparation(object):
     @staticmethod
     def one_hot_encoding(df, features):
         """
-        One hot encoding
-        :param df:
-        :param features:
-        :return:
+        Use pandas function to do one hot encoding. Basically string features need to
+        be converted/encoded into categorical integers.
+        https://pandas.pydata.org/pandas-docs/stable/generated/pandas.get_dummies.html
+
+        :param df:          input dataframe of samples to handle
+        :param features:    list of features to be encoded using one hot encoding
+        :return:            encoded dataframe of samples
         """
         return pds.get_dummies(df[features])
 
@@ -45,10 +51,11 @@ class DataPreparation(object):
     def upsample_minorities(df_training, imbalance_upsampling=None):
         """
         Note upsampling shall be down for training set ONLY.
-        :param df_training: dataframe for training
-        :param prediction: field to predict
-        :param imbalance_upsampling: None, True, False, or a dict
-        :return:
+
+        :param df_training:             dataframe for training
+        :param prediction:              field to predict
+        :param imbalance_upsampling:    None, True, False, or a dict
+        :return:                        upsampled dataframe
         """
 
         if imbalance_upsampling is None or not imbalance_upsampling:
@@ -92,11 +99,13 @@ class DataPreparation(object):
     def remove_samples_with_values(data_frame, prediction, value_list):
         """
         Clean up the data_frame. Some of the values of the prediction can
-        confuse the ML model. Customer can choose to remove those samples.
-        :param data_frame: dataframe to clean up
-        :param prediction: prediction
-        :param value_list: prediction values to remove
-        :return:
+        confuse the ML model. For example, unknowns.
+        Customer can choose to remove those samples.
+
+        :param data_frame:  dataframe to clean up
+        :param prediction:  prediction
+        :param value_list:  prediction values to remove
+        :return:            cleaned up dataframe
         """
 
         dataf = data_frame

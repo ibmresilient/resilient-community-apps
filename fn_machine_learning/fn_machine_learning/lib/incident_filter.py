@@ -4,78 +4,52 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
 import logging
-from datetime import datetime
 
 
 class IncidentFilter(object):
     """
-    Filter incidents.
-        1. Time filter: time_start and time_end
-        2. Others not implemented yet
+    Filters can be chained together. Chain of Command design pattern is a good fit here.
+
+    This is the super class for all individual filters
     """
-    TIME_FORMAT = "%Y-%m-%d"
-
-    def __init__(self, time_start=None, time_end=None, in_log=None):
-        self.time_start = time_start
-        self.time_end = time_end
-        self.log = in_log if in_log is not None else logging.getLogger(__name__)
-
-    def set_time(self, time_start=None, time_end=None):
+    def __init__(self, next_filter=None, in_log=None):
         """
-        Set time_start and time_end for time filter
-        :param time_start:
-        :param time_end:
-        :return:
+        Constructor.
+        :param next_filter:     The next filter in the chain
+        :param in_log:          Log
         """
-        self.time_start = time_start
-        self.time_end = time_end
+        self.next_filter = next_filter
+        self.log = in_log if in_log else logging.getLogger(__name__)
 
-    def check_time_filter(self, incident):
+    def filter_implementation(self, incident):
         """
-        Check if the input incident shall be included in the samples or not.
-        :param incident: input incident
-        :return: True for including it.
+        Subclass needs to implement/override this.
+
+        :param incident:        Input incident
+        :return:                True to include
         """
-        #
-        #   Not a security feature. Ok to default it to True
-        #
-        shall_include = True
-
-        #
-        # Filter according to create_date
-        #
-        create_date = datetime.fromtimestamp(incident["create_date"] / 1000.)
-        if self.time_start is not None:
-            try:
-                t_start = datetime.strptime(self.time_start, IncidentFilter.TIME_FORMAT)
-                if t_start is not None and create_date < t_start:
-                    shall_include = False
-            except ValueError as e:
-                t_start = None
-                self.log.error("Exception in casting {} into datetime: {}".format(self.time_start, e))
-
-        if self.time_end is not None:
-            try:
-                t_end = datetime.strptime(self.time_end, IncidentFilter.TIME_FORMAT)
-                if t_end is not None and create_date > t_end:
-                    shall_include = False
-            except ValueError as e:
-                t_end = None
-                self.log.error("Exception in casting {} into datetime: {}".format(self.time_end, e))
-
-        return shall_include
+        return True
 
     def shall_include_incident(self, incident):
         """
-        Check if the input incident shall be included in the samples or not.
-        :param incident: input incident
-        :return: True for including it.
+        A user just need to call this. Template method design pattern is used here.
+        This method will first call the filter_implementation that a subclass implements.
+        Then it will take care of the next filter in the chain, so the subclass
+        does not need to worry about it.
+
+        All a subclass needs to do is to implement the filter_implement method.
+
+        :param incident:        The incident to check
+        :return:                True to include, false to exclude the input incident
         """
-        include_time = self.check_time_filter(incident)
+        shall_include_incident = self.filter_implementation(incident)
 
-        #
-        #   Other filters in the future
-        #
-        return include_time
+        if shall_include_incident:
+            #
+            #   Only need to check the next filter in the chain if we shall include
+            #
+            if self.next_filter is not None:
+                shall_include_incident = self.next_filter.shall_include_incident(incident)
 
+        return shall_include_incident
 
