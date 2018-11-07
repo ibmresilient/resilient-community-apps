@@ -15,7 +15,7 @@ setup(
         'resilient_circuits>=30.0.0',
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
-        'cryptography>2.3',
+        'cryptography>=2.3',
         'pywinrm>=0.3.0',
         'json2html',
         'lxml'
