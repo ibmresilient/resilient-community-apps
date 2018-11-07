@@ -13,6 +13,7 @@ from fn_machine_learning.lib.ml_config import MlConfig
 import fn_machine_learning.lib.resilient_utils as resilient_utils
 import fn_machine_learning.lib.model_utils as model_utils
 from fn_machine_learning.lib.incident_filter import IncidentFilter
+import requests
 
 try:
     # For all python < 3.2
@@ -68,7 +69,7 @@ class OptParser(resilient.ArgumentParser):
 
 def main():
     """
-    We support 3 subcommands: build, rebuild, view.
+    We support 5 subcommands: build, rebuild, view.
         1. build: build a new model
             -o  Required flag, pointing to a file we can save the model to
             -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
@@ -115,7 +116,7 @@ def main():
                               help="Use samples from CSV file",
                               default=None)
     #
-    #  -o Save model as
+    #   -o Save model as
     #
     build_parser.add_argument("-o", "--output",
                               help="Save model as",
@@ -129,7 +130,7 @@ def main():
                                 help="Use samples from CSV file",
                                 default=None)
     #
-    #  -i Model file to rebuild
+    #   -i Model file to rebuild
     #
     rebuild_parser.add_argument("-i", "--input",
                                 help="Model file to rebuild",
@@ -207,9 +208,11 @@ def count_value(args):
 
 def download_incidents_csv(opt_parser, csv_file):
     """
+    Download incidents and convert json into CSV. Save the result to the csv_file.
 
-    :param opt_parser:
-    :return:
+    :param opt_parser:  Options/configurations and command line parameters
+    :param csv_file:    CSV file to save samples/incidents to
+    :return:            Number of incidents saved to the CSV file
     """
     res_opt = opt_parser.opts.get(RESILIENT_SECTION)
     host = res_opt.get("host", None)
@@ -223,8 +226,20 @@ def download_incidents_csv(opt_parser, csv_file):
         verify = True
         try:
             cafile = opt_parser.getopt(RESILIENT_SECTION, "cafile")
-            if cafile == "false":
+            if cafile == "false" or cafile == "False":
+                #
+                #   This is a security related feature. The user has to explicitly enter false or False to
+                #   turn it off. We don't accept anything else.
+                #
+                LOG.debug("HTTPS certificate validation has been turned off.")
+
+                requests.packages.urllib3.disable_warnings()
                 verify = False
+            elif os.path.isfile(cafile):
+                #
+                #   User specify a cafile
+                #
+                verify = cafile
         except:
             verify = True
 
@@ -240,17 +255,15 @@ def download_incidents_csv(opt_parser, csv_file):
 
         time_start = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_start")
         time_end = opt_parser.getopt(MACHINE_LEARNING_SECTION, "time_end")
-        filter = IncidentFilter(time_start=time_start,
-                                time_end=time_end)
+        res_filter = IncidentFilter(time_start=time_start,
+                                    time_end=time_end)
 
         # get_incidents is going to download all the incidents using this resilient_client
-        # The json result will be converted into CSV format, and then save into
-        # SAMPLE_CSV_FILE.
         # The optional max_count controls how many samples to process. The conversion from
         # json to CSV will stop once reaches this limit.
         num_inc = resilient_utils.get_incidents(res_client=resilient_client,
                                                 filename=csv_file,
-                                                filter=filter,
+                                                filter=res_filter,
                                                 max_count=max_count,
                                                 in_log=LOG)
 

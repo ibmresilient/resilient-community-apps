@@ -14,18 +14,18 @@ from fn_machine_learning.lib.ml_bernoullinb import MlBernoulliNB
 from fn_machine_learning.lib.ml_knn import MlKNN
 from fn_machine_learning.lib.ml_dummy_classifier import MlDummyClassifier
 import logging
-import json
 import csv
 
 
 def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
     """
-    Factory design pattern
-    :param name:
-    :param imbalance_upsampling:
-    :param class_weight:
-    :param method:
-    :return:
+    Factory design pattern. Use name to get the corresponding ML model object
+
+    :param name:                    Name of algorithm
+    :param imbalance_upsampling:    Apply upsampling to compensate imbalanced dataset
+    :param class_weight:            Apply class_weight approach to compensate imbalanced dataset
+    :param method:                  Optional ensemble method
+    :return:                        A model object built
     """
     model = None
     if name == "Logistic Regression":
@@ -69,14 +69,16 @@ def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
 
 def write_to_csv(incidents, fields_dict, filename, max_count=None, filter=None, in_log=None):
     """
-    Write incidents to a CSV file according to the field definition
-    :param incidents:
-    :param fields_dict:
-    :param filename:
-    :param max_count:
-    :param filter:
-    :param in_log:
-    :return:
+    Write incidents to a CSV file according to the field definition.
+    This function is factorized out intentionally for better unit test.
+
+    :param incidents:       list of incidents in json
+    :param fields_dict:     field definitions in json dict
+    :param filename:        filename for CSV file to save samples
+    :param max_count:       max count for incidents to save
+    :param filter:          filter for incidents
+    :param in_log:          log
+    :return:                number of incidents saved to the CSV file
     """
     log = in_log if in_log else logging.getLogger(__name__)
     #
@@ -128,15 +130,17 @@ def write_to_csv(incidents, fields_dict, filename, max_count=None, filter=None, 
 
     return inc_count
 
+
 def get_incidents(res_client, filename, max_count=None, filter=None, in_log=None):
     """
     Convert JSON into CSV and save, since scikit-learn uses CSV.
-    :param res_client:
-    :param filename:
-    :param max_count:
-    :param filter:
-    :param in_log:
-    :return: incidents/samples count
+
+    :param res_client:  resilient client used to query incidents
+    :param filename:    CSV file to save to
+    :param max_count:   max count of incidents/samples to handle
+    :param filter:      filter for incidents/sample
+    :param in_log:      log
+    :return:            incidents/samples count
     """
     log = in_log if in_log else logging.getLogger(__name__)
 
@@ -166,11 +170,12 @@ def get_field_def(resilient_client, field, type_name, in_log=None):
     between numerical value and label.
     Once a prediction is done, we will use this mapping to
     convert the numerical value back to label.
-    :param resilient_client:
-    :param field:
-    :param type_name:
-    :param in_log: log
-    :return:
+
+    :param resilient_client:    Resilient client used to retrieve field definition
+    :param field:               Field we want the mapping for
+    :param type_name:           Built-in type. For example "incident"
+    :param in_log:              log
+    :return:                    dict for translating numerical back to label for given field
     """
     log = in_log if in_log else logging.getLogger(__name__)
     url_path = "/types/{}/fields/{}".format(type_name, field)
@@ -187,6 +192,8 @@ def get_field_def(resilient_client, field, type_name, in_log=None):
             #   we read using pandas.read_csv. So here we convert
             #   the value to string as well
             #
+            #@TODO: Need to revisit this when we need to support regression
+            #
             ret[str(val["value"])] = val["label"]
     else:
         log.error("get_field_def for field = {}, and type = {} returned Null".format(field, type_name))
@@ -198,10 +205,11 @@ def query_incidents(res_client, max_count=None, page_size=1000, in_log=None):
     """
     Use the query endpoint since we are going to down load
     large number of incidents.
-    :param res_client:
-    :param max_count:
-    :param page_size:
-    :return:
+
+    :param res_client:  Resilient client used to download incidents
+    :param max_count:   Max count for incidents to handle
+    :param page_size:   Number of incident to download for each call
+    :return:            All downloaded incidents in json
     """
     log = in_log if in_log else logging.getLogger(__name__)
     incidents = []
