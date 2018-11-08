@@ -138,7 +138,7 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
 def check_status_code(response):
     if response.status_code > 299 or response.status_code < 200:
-        raise ValueError("Request not successful")
+        raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
 
 
 def create_report_file(name, type):
@@ -175,12 +175,49 @@ def submit_url(g, url, submit_type=None):
     return _file_upload(g, submit_type, url=url)
 
 
+def get_task_id_list(g, jobId):
+    headers = _get_atd_session_headers(g)
+    try:
+        task_list_url = "{}/php/getTaskIdList.php?jobId={}".format(g.atd_url, jobId)
+        task_list_status = requests.get(task_list_url, headers=headers, verify=g.trust_cert)
+        check_status_code(task_list_status)
+        task_list_json = task_list_status.json()
+        task_list_string = task_list_json["result"]["taskIdList"]
+        return task_list_string.split(',')
+
+    finally:
+        atd_logout(g.atd_url, headers, g.trust_cert)
+
+
 # A loop to check if the analysis for a job has completed - need to add handling for -1 which is failed analysis
-def check_atd_status(g, task_id):
+def check_job_status(g, jobId):
     headers = _get_atd_session_headers(g)
 
     try:
-        status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, task_id)
+        status_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, jobId)
+        submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
+        check_status_code(submission_status)
+        submit_json = submission_status.json()
+        if submit_json["status"] == -1:
+            raise ValueError
+        elif submit_json["status"] == 0:
+            return False
+        elif submit_json["status"] == 2:
+            return False
+        elif submit_json["status"] == 3:
+            return False
+        elif submit_json["status"] == 5:
+            return True
+    finally:
+        atd_logout(g.atd_url, headers, g.trust_cert)
+
+
+# A loop to check if the analysis for a job has completed - need to add handling for -1 which is failed analysis
+def check_task_status(g, taskId):
+    headers = _get_atd_session_headers(g)
+
+    try:
+        status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, taskId)
         submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
         check_status_code(submission_status)
         submit_json = submission_status.json()
@@ -233,6 +270,10 @@ def get_atd_report(g, taskId, report_type, report_file):
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
         check_status_code(response)
 
+        # Task does not have a report associated with it
+        if "Description: File type not supported" in response.content:
+            return False
+
         with open(report_file.get("report_file"), 'wb') as f:
             f.write(response.content)
             log.info("Saved ATD report")
@@ -241,6 +282,10 @@ def get_atd_report(g, taskId, report_type, report_file):
     json_response = requests.get(json_url, headers=headers, verify=g.trust_cert)
     check_status_code(json_response)
     atd_logout(g.atd_url, headers, g.trust_cert)
+
+    # Task does not have a report associated with it
+    if "Description: File type not supported" in json_response.content:
+        return False
 
     return json_response.json()
 
