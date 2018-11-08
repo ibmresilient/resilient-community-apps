@@ -1,10 +1,13 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
 """Function implementation"""
 
 import logging
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_mxtoolbox.lib.resilient_common import validate_fields
 
 HEADERS = {'content-type': 'application/json'}
 class FunctionComponent(ResilientComponent):
@@ -19,6 +22,11 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_mxtoolbox", {})
+        self._init()
+
+    def _init(self):
+        validate_fields(['api_token','mx_command','mx_argument'], self.options)
+
 
     @function("fn_mxtoolbox")
     def _fn_mxtoolbox_function(self, event, *args, **kwargs):
@@ -40,8 +48,8 @@ class FunctionComponent(ResilientComponent):
             if(response.status_code == 200):
                 res = response.json()
             else:
-                res = {}
-                log.info("Some error occured while retrieving the information from MXToolbox")
+                msg = "Some error occured while retrieving the information from MXToolbox with status code: {}"
+                raise ValueError(msg.format(response.status_code))
 
             results = {
                 "value": res

@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -6,12 +7,16 @@ from setuptools import setup, find_packages
 setup(
     name='fn_mxtoolbox',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='IBM Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_mxtoolbox'",
-    long_description="Resilient Circuits Components for 'fn_mxtoolbox'",
+    long_description="""The MxToolBox API is a RESTful Web Service allowing MxToolbox customers 
+    to query the status of their monitors and run lookups (blacklist, smtp, mx, etc.). Generally, 
+    programmers use this API to integrate MxToolBox into their products. For example,
+    customers have created a dashboard on their site which shows
+    the real-time status of their monitors.""",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
