@@ -8,13 +8,29 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cloud_foundry.util.cloud_foundry_api import IBMCloudFoundryAPI
 from fn_cloud_foundry.util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
+CONFIG_DATA_SECTION = 'fn_cloud_foundry'
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_cloud_foundry_create_app"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cloud_foundry", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+        if self.options == {}:
+            raise ValueError("{} section is not set in the config file".format(CONFIG_DATA_SECTION))
+
+        self.base_url = self.options.get("cf_api_base")
+        self.cf_api_username = self.options.get("cf_api_username")
+        self.cf_api_password = self.options.get("cf_api_password")
+
+        if not self.base_url:
+            raise ValueError("cf_api_base is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.cf_api_username:
+            raise ValueError("cf_api_username is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        if not self.cf_api_password:
+            raise ValueError("cf_api_password is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -45,15 +61,15 @@ class FunctionComponent(ResilientComponent):
             log.info("fn_cloud_foundry_additional_parameters_json: %s", additional_parameters)
             log.info("Params: {}".format(additional_parameters))
 
-            base_url = self.options["cf_api_base"]
-
-            authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            authenticator = IBMCloudFoundryAuthenticator(self.base_url, self.options)
             yield StatusMessage("Authenticated into Cloud Foundry")
-            cf_service = IBMCloudFoundryAPI(base_url, authenticator)
+            cf_service = IBMCloudFoundryAPI(self.base_url, authenticator)
 
             values = {
                 "space_guid": space_guid,
-                "name": application_name
+                "name": application_name,
+                "username" : self.cf_api_username,
+                "password" : self.cf_api_password
             }
             additional_parameters.update(values)  # so values overwrite additional params, not the other way
             values = additional_parameters

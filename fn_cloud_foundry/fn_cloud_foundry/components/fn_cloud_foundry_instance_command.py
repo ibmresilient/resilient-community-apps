@@ -7,6 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cloud_foundry.util.cloud_foundry_api import IBMCloudFoundryAPI
 from fn_cloud_foundry.util.authentication.ibm_cf_bearer import IBMCloudFoundryAuthenticator
 
+CONFIG_DATA_SECTION = 'fn_cloud_foundry'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_cloud_foundry_instance_command"""
@@ -14,7 +15,15 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_cloud_foundry", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+        if self.options == {}:
+            raise ValueError("{} section is not set in the config file".format(CONFIG_DATA_SECTION))
+
+        self.base_url = self.options.get("cf_api_base")
+
+        if not self.base_url:
+            raise ValueError("cf_api_base is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -42,18 +51,17 @@ class FunctionComponent(ResilientComponent):
                 additional_parameters = json.loads(additional_parameters)
 
             log = logging.getLogger(__name__)
-            log.info("fn_cloud_foundry_action: %s", action_name)
-            log.info("fn_cloud_foundry_applications: %s", application_name)
-            log.info("fn_cloud_foundry_instances: %s", instances)
+            log.info("fn_cloud_foundry_action: %s", action_name) # text
+            log.info("fn_cloud_foundry_applications: %s", application_name) # text
+            log.info("fn_cloud_foundry_instances: %s", instances) # text
 
             yield StatusMessage("Starting.")
 
-            base_url = self.options["cf_api_base"]
             instances = [x.strip() for x in instances.split(",")]
 
-            authenticator = IBMCloudFoundryAuthenticator(base_url, self.options)
+            authenticator = IBMCloudFoundryAuthenticator(self.base_url, self.options)
             yield StatusMessage("Authenticated into Cloud Foundry")
-            cf_service = IBMCloudFoundryAPI(base_url, authenticator)
+            cf_service = IBMCloudFoundryAPI(self.base_url, authenticator)
             results = cf_service.run_application_instance_command(application_name, instances, action_name,
                                                                   **additional_parameters)
             log.info("Result: %s", results)
