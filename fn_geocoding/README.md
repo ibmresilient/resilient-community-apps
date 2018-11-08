@@ -5,6 +5,19 @@ For coordinates, return an address.
 
 See https://developers.google.com/maps/documentation/geocoding/start
 
+This package contains:
+
+Functions:
+- geocoding
+     
+Workflows:
+- Example: Geocoding Get Address
+- Example: Geocoding Get Coordinates
+     
+Rules:
+- Example: Geocoding Get Address
+- Example: Geocoding Get Coordinates
+=======
 Components
 
    Message Destinations:
@@ -20,7 +33,7 @@ Components
 
 To install in "development mode"
 
-    pip install -e ./fn_geocoding/
+    pip install fn_geocoding-<version>.tar.gz
 
 After installation, the package will be loaded by `resilient-circuits run`.
 

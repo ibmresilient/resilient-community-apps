@@ -18,7 +18,7 @@ def codegen_reload_data():
                     "automatic_tasks": [], 
                     "scripts": [], 
                     "workflows": [u"example_geocoding_get_address", u"example_geocoding_get_coordinates"], 
-                    "actions": [u"Example: Geocode Get Address", u"Example: Geocoding Get Coordinates"] 
+                    "actions": [u"Example: Geocoding Get Address", u"Example: Geocoding Get Coordinates"] 
                     }
     return reload_params
 
@@ -40,7 +40,7 @@ def customization_data(client=None):
     #     example_geocoding_get_address
     #     example_geocoding_get_coordinates
     #   Rules:
-    #     Example: Geocode Get Address
+    #     Example: Geocoding Get Address
     #     Example: Geocoding Get Coordinates
 
 
