@@ -38,6 +38,9 @@ class FunctionComponent(ResilientComponent):
             log.info("geocoding_source: %s", geocoding_source)
             log.info("geocoding_data: %s", geocoding_data)
 
+            # confirm app.config setup
+            self.init_config()
+
             # choices are set in the workflow: lnglat or address
             if geocoding_source not in FunctionComponent.VALID_SOURCES:
                 raise ValueError("geocoding_source must be one of these values: %s", FunctionComponent.VALID_SOURCES)
@@ -59,7 +62,8 @@ class FunctionComponent(ResilientComponent):
             response = execute_call(log, "get", url, None, None, payload, True, None, None)
 
             results = {
-                "response": response
+                "response": response,
+                "status": True if response.get('status', '') == "OK" else False
             }
 
             yield StatusMessage("done...")
@@ -68,3 +72,7 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    def init_config(self):
+        if not (self.options.get("url", None) and self.options.get("api_key", None)):
+            raise ValueError("Check that app.config [fn_geocoding] url and api_key settings are configured")

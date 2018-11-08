@@ -1,4 +1,4 @@
-# Function Email Header Avalidation
+# Function Email Header Validation
 
 This IBM Resilient Function package can be used to analyze DKIM and ARC headers on a RFC822 formatted email.
 This email can be provide via a **Resilient Attachment**, **Resilient Artifact**, or string.

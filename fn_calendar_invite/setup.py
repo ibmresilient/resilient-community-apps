@@ -8,8 +8,8 @@ setup(
     name='fn_calendar_invite',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_calendar_invite'",
     long_description="Resilient Circuits Components for 'fn_calendar_invite'",
     install_requires=[

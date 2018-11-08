@@ -14,22 +14,23 @@ from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
-from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
+from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of
     package fn_cisco_amp4ep.
 
-    The Function does a Cisco AMP for endpoints query operation takes the following parameter:
+    The Function takes the following parameter:
         amp_file_list_guid, amp_file_sha256, amp_limit, amp_offset
 
     An example of a set of query parameter might look like the following:
-            amp_file_list_guid = "e773a9eb-296c-40df-98d8-bed46322589d"
-            amp_file_sha256 = "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284"
-            amp_limit = None
-            amp_offset = None
+            amp_file_list_guid  = "e773a9eb-296c-40df-98d8-bed46322589d"
+            amp_file_sha256     = "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284"
+            amp_limit           = None
+            amp_offset          = None
 
-    The Investigate Query will executs a REST call against the Cisco Umbrell Investigate server and returns a result in
+    The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
       "file_list_files": {u'version': u'v1.2.0',
@@ -83,19 +84,22 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             amp_file_list_guid = kwargs.get("amp_file_list_guid")  # text
-            amp_sha256 = kwargs.get("amp_sha256")  # text
+            amp_file_sha256 = kwargs.get("amp_file_sha256")  # text
             amp_limit = kwargs.get("amp_limit")  # number
             amp_offset = kwargs.get("amp_offset")  # number
 
             log = logging.getLogger(__name__)
             log.info("amp_file_list_guid: %s", amp_file_list_guid)
-            log.info("amp_sha256: %s", amp_sha256)
+            log.info("amp_file_sha256: %s", amp_file_sha256)
             log.info("amp_limit: %s", amp_limit)
             log.info("amp_offset: %s", amp_offset)
 
+            if is_none(amp_file_list_guid):
+                raise ValueError("Required parameter 'amp_file_list_guid' not set.")
+
             yield StatusMessage("Running Cisco AMP for endpoints get file lists files by guid...")
 
-            params = {"file_list_guid": amp_file_list_guid, "sha256": amp_sha256, "limit": amp_limit,
+            params = {"file_list_guid": amp_file_list_guid, "file_sha256": amp_file_sha256, "limit": amp_limit,
                       "offset": amp_offset  }
 
             validate_params(params)
@@ -115,4 +119,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
+            log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
             yield FunctionError()

@@ -7,8 +7,8 @@ setup(
     name='fn_email_header_validation',
     version='1.0.0',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_email_header_validation'",
     long_description="Resilient Circuits Components for 'fn_email_header_validation'",
     install_requires=[
