@@ -1,5 +1,8 @@
+###Google Geocoding Functions for Resilient
+
 This package is an implementation of Google's Geocoding API set. 
 Two function types are implemented: address and latlng. 
+
 For an address, return coordinate information. 
 For coordinates, return an address.
 
@@ -17,31 +20,30 @@ Workflows:
 Rules:
 - Example: Geocoding Get Address
 - Example: Geocoding Get Coordinates
-=======
-Components
 
-   Message Destinations:
-     fn_geocoding
-   Functions:
-     geocoding
-   Workflows:
-     example_geocoding_get_address
-     example_geocoding_get_coordinates
-   Rules:
-     Example: Geocode Get Address
-     Example: Geocoding Get Coordinates
+###Components
+
+ Message Destinations:
+   - fn_geocoding
+   
+ Functions:
+   - geocoding
+   
+ Workflows:
+   - example_geocoding_get_address
+   - example_geocoding_get_coordinates
+   
+ Rules:
+   - Example: Geocode Get Address
+   - Example: Geocoding Get Coordinates
 
 To install in "development mode"
 
     pip install fn_geocoding-<version>.tar.gz
 
-After installation, the package will be loaded by `resilient-circuits run`.
-
-
 To uninstall,
 
     pip uninstall fn_geocoding
-
 
 To package for distribution,
 
@@ -49,6 +51,20 @@ To package for distribution,
 
 The resulting .tar.gz file can be installed using
 
-    pip install <filename>.tar.gz
+    pip install fn_geocoding-<version>.tar.gz
     
-Edit the app.config file to supply the api_key. 
+###Requirements:
+* resilient-circuits 
+
+###Installation:
+Run the following command to import this function into IBM Resilient
+
+    resilient-circuits customize
+
+To configure this function run and following command
+
+    resilient-circuits config -u
+
+Then edit the app.config file, providing the api_token for the 
+[fn_geocoding] section necessary to communicate with the Google Geocoding API.
+
