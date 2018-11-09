@@ -15,7 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
 
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of
@@ -107,7 +109,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
             rtn = amp.get_paginated_total(amp.get_file_list_files, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')

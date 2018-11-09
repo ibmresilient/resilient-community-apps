@@ -54,14 +54,6 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'max_retries' not set.")
     if func.options["max_retries"] is None or not validate_is_int(func.options["max_retries"]):
         raise ValueError("Invalid format for config setting 'max_retries'.")
-    if not "retry_delay" in func.options:
-        raise Exception("Mandatory config setting 'retry_delay' not set.")
-    if func.options["retry_delay"] is None or not validate_is_int(func.options["retry_delay"]):
-        raise ValueError("Invalid format for config setting 'retry_delay'.")
-    if not "retry_backoff" in func.options:
-        raise Exception("Mandatory config setting 'retry_backoff' not set.")
-    if func.options["retry_backoff"] is None or not validate_is_int(func.options["retry_backoff"]):
-        raise ValueError("Invalid format for config setting 'retry_backoff'.")
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.

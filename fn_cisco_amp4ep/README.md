@@ -41,12 +41,8 @@ api_token=abcd1234-a123-123a-123a-123456abcdef
 #https_proxy=https':'http://proxy:80
 # Query results limit
 query_limit=200
-# Max number of retry attempts
+# Max number of retry attempts on rate limit exception
 max_retries=3
-# Retry backoff delay
-retry_delay=3
-# Retry backoff multiplier
-retry_backoff=2
 ```
 
 Run with: `resilient-circuits run`.

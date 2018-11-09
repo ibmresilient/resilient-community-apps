@@ -23,9 +23,5 @@ api_token=<api token>
 query_limit=200
 # Max number of retry attempts
 max_retries=3
-# Retry backoff delay
-retry_delay=3
-# Retry backoff multiplier
-retry_backoff=2
 """
     return config_data

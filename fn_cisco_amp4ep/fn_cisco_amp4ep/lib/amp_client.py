@@ -6,7 +6,6 @@
 """ Class for Resilient circuits Functions supporting REST API client for Cisco AMP for endpoints  """
 import logging
 import random
-
 import requests
 import time
 from requests import HTTPError
@@ -19,7 +18,6 @@ import json
 import re
 from datetime import datetime
 
-
 LOG = logging.getLogger(__name__)
 AMP_LIMIT_DEFAULT = 500
 
@@ -27,7 +25,7 @@ class Ampclient(object):
     """
     Client class used to expose Cisco AMP for endpoints Rest API for queries
     """
-    def __init__(self, options):
+    def __init__(self, options, rate_limiter):
         """
         Class constructor
         """
@@ -38,8 +36,6 @@ class Ampclient(object):
         self.api_version = options.get("api_version")
         self.query_limit = int(options.get("query_limit"))
         self.max_retries = int(options.get("max_retries"))
-        self.retry_delay = int(options.get("retry_delay"))
-        self.retry_backoff = int(options.get("retry_backoff"))
         self.proxies = {}
         if "https_proxy" in options and options["https_proxy"] is not None:
             self.proxies.update({"https": options.get("https_proxy")})
@@ -68,7 +64,32 @@ class Ampclient(object):
         self._auth = HTTPBasicAuth(self.client_id, self.api_token)
         self._s = requests.Session()
 
+        # Maintain information about the rate-limiter information from the most recent call.
+        self.rate_limiter = rate_limiter
 
+    def _save_rate_limit(self, response):
+        """Save rate limit info to safelimiter object from the response headers.
+
+        :param response: Response returned from api call.
+
+        """
+        limit_headers = {k: v for k, v in response.headers.items() if k.startswith(u"X-RateLimit")}
+        self.rate_limiter.save_limits(limit_headers)
+
+
+    def suggested_delay(self):
+        """Return period (in secs) function should wait before making the next api call.
+
+        :param response: Response returned from api call.
+
+        """
+        # Check if this is 1st time rate limiter called (by any function).
+        if not self.rate_limiter.get_limit_update_ts():
+            # Get here if this is 1st time rate limiter called (by any function) during this
+            # resilient circuits run period.
+           return 0
+        else:
+            return self.rate_limiter.get_delay()
 
     def _req(self, uri, method='GET', params=None, data=None):
         """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH and
@@ -84,7 +105,6 @@ class Ampclient(object):
         url = urljoin(self.base_url, uri)
 
         retry_attempts = 0
-        delay = self.retry_delay
 
         if data is None:
             data = {}
@@ -92,8 +112,16 @@ class Ampclient(object):
         if params is None:
             params = {}
 
+        # See if we need to add rate limit delay.
+        rl_delay = self.suggested_delay()
+        if rl_delay > 0:
+            LOG.debug("Rate limiting! Delay %s seconds for url %s", rl_delay, url)
+            time.sleep(rl_delay)
+
         while retry_attempts <= self.max_retries:
             try:
+                # Save timestamp of new request to ratelimiter.
+                self.rate_limiter.add_ts(time.time())
                 if method == "GET":
                     r = self._s.get(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies )
                 elif method == "POST":
@@ -104,17 +132,19 @@ class Ampclient(object):
                     r = self._s.delete(url, params=params, headers=self._headers, auth=self._auth, proxies=self.proxies)
                 else:
                     raise ValueError("Unsupported request method '{}'.".format(method))
+                # Save rate limit data from response.
+                self._save_rate_limit(r)
 
                 r.raise_for_status()  # If the request fails throw an error.
 
             except HTTPError as e:
                 if e.response.status_code == 429:
-                    LOG.exception("Got Rate Limiting exception type: %s, msg: %s" % (e.__repr__(), e.message))
+                    LOG.exception("Got Rate Limiting exception type: %s, msg: %s" % (e.__repr__(), getattr(e, 'message', str(e))))
                     # Retry if we get Rate Limiting response
-                    delay *= self.retry_backoff
-                    retry_duration = delay + random.random()  # Add random padding to retry duration.
-                    LOG.info("Retrying in %f seconds..." % (retry_duration))
-                    time.sleep(retry_duration)
+                    # Set delay to value of r.headers["X-RateLimit-Remaining"].
+                    retry_delay = int(r.headers.get("X-Rate-Limit-Reset"))
+                    LOG.info("Retrying in %f seconds..." % (retry_delay))
+                    time.sleep(retry_delay)
                 else:
                     raise e
 
