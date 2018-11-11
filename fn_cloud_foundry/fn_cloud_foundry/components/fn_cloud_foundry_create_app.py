@@ -27,6 +27,8 @@ class FunctionComponent(ResilientComponent):
 
         if not self.base_url:
             raise ValueError("cf_api_base is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+        else:
+            self.base_url = str(self.base_url).rstrip('/')
         if not self.cf_api_username:
             raise ValueError("cf_api_username is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
         if not self.cf_api_password:

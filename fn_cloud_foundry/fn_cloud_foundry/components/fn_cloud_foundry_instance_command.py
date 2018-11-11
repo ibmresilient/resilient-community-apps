@@ -25,6 +25,8 @@ class FunctionComponent(ResilientComponent):
         if not self.base_url:
             raise ValueError("cf_api_base is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
 
+        self.base_url = str(self.base_url).rstrip('/')
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
