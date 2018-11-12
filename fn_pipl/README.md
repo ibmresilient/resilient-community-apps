@@ -98,7 +98,7 @@ When clicking on Example: Create an Artifact from Pipl data rule user is prompt 
 wishes to create:
 ![screenshot](./screenshots/activity_field.png)
 
-If users wishes to use custom artifact types they will need to edit the activity filed on Example: Create an Artifact 
+If users wish to use custom artifact types they will need to edit the activity filed on Example: Create an Artifact 
 from Pipl data rule:
 ![screenshot](./screenshots/activity_field_rule.png)
 
@@ -151,8 +151,8 @@ def add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_match_no, db_p
 
 if results.success:
   # Save the json result as an Note
-  noteText = """Pipl Data API response for artifact_value {} returned {}: <br><br>{}""".format(artifact.value, results.pipl_response, results.raw_data)
-  incident.addNote(helper.createRichText(noteText))
+  noteText = """Pipl Data API response for artifact_value {} returned {}: \n{}""".format(artifact.value, results.pipl_response, results.raw_data)
+  incident.addNote(noteText)
   
   # Create a datatable from pipl response
   possible_person_counter = 0
