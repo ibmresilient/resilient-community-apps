@@ -270,8 +270,14 @@ def get_atd_report(g, taskId, report_type, report_file):
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
         check_status_code(response)
 
+        # Convert content to bytes if needed
+        if type(response.content) is bytes:
+            byte_content = response.content
+        else:
+            byte_content = str.encode(response.content)
+
         # Task does not have a report associated with it
-        if "Description: File type not supported" in response.content:
+        if b'Description: File type not supported' in byte_content:
             return False
 
         with open(report_file.get("report_file"), 'wb') as f:
@@ -283,8 +289,14 @@ def get_atd_report(g, taskId, report_type, report_file):
     check_status_code(json_response)
     atd_logout(g.atd_url, headers, g.trust_cert)
 
+    # Convert content to bytes if needed
+    if type(json_response.content) is bytes:
+        json_byte_content = json_response.content
+    else:
+        json_byte_content = str.encode(json_response.content)
+
     # Task does not have a report associated with it
-    if "Description: File type not supported" in json_response.content:
+    if b'Description: File type not supported' in json_byte_content:
         return False
 
     return json_response.json()
