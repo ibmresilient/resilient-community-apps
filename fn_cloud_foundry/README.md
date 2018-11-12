@@ -27,36 +27,13 @@ The resulting .tar.gz file can be installed using
 
     pip install <filename>.tar.gz
 
-## How to use the function
+## Add Cloud Foundry configuration details to the config file:
 
-1. Import the necessary customization data into the Resilient platform:
+    resilient-circuits config -u
 
-		resilient-circuits customize
-    This import data contains:
-	* Function inputs:
-         `fn_cloud_foundry_action
-         fn_cloud_foundry_additional_parameters_json
-         fn_cloud_foundry_applications
-         fn_cloud_foundry_instance_action
-         fn_cloud_foundry_instances
-         fn_cloud_foundry_space_guid`
-    * Message Destination: `cloud_foundry`
-	* Functions:
-         `fn_cloud_foundry_create_app
-         fn_cloud_foundry_instance_command
-         fn_cloud_foundry_manage_applications`
- 	* Workflows:
-         `cloud_foundry_create_an_application
-         cloud_foundry_instance_command
-         cloud_foundry_stop_application`
- 	* Rules:
-         `Example: Cloud Foundry Create Application
-         Example: Cloud Foundry Instance Command
-         Example: Cloud Foundry Stop Application`
-		
-2. Update and edit `app.config`:
+Set the following values in the config file (`~/.resilient/app.config`) under the `[fn_cloud_foundry]` section:
 
-		resilient-circuits configure -u
+```
 [fn_cloud_foundry]
 #Base url endpoint of your CF platform
 #For example, for IBM’s BlueMix it is: https://api.ng.bluemix.net/
@@ -69,11 +46,40 @@ cf_api_apikey=
 ##Enter username and password if needed for access to DockerHub for Create Application function
 cf_api_username=
 cf_api_password=
+```
 
+## How to use the function
+
+1. Import the necessary customization data into the Resilient platform:
+
+		resilient-circuits customize
+		
+    This import data contains:
+	* Function inputs:
+         `fn_cloud_foundry_action,
+         fn_cloud_foundry_additional_parameters_json,
+         fn_cloud_foundry_applications,
+         fn_cloud_foundry_instance_action,
+         fn_cloud_foundry_instances,
+         fn_cloud_foundry_space_guid`
+    * Message Destination: `cloud_foundry`
+	* Functions: `fn_cloud_foundry_create_app,
+         fn_cloud_foundry_instance_command,
+         fn_cloud_foundry_manage_applications`
+ 	* Workflows: `cloud_foundry_create_an_application,
+         cloud_foundry_instance_command,
+         cloud_foundry_stop_application`
+ 	* Rules: `Example: Cloud Foundry Create Application,
+         Example: Cloud Foundry Instance Command,
+         Example: Cloud Foundry Stop Application`
+		
+2. Update and edit `app.config`:
+
+		resilient-circuits configure -u
 
 3. Start Resilient Circuits:
-    ```
-    resilient-circuits run
-    ```
+   
+         resilient-circuits run
+    
 
 4. Trigger the rule.
