@@ -32,28 +32,28 @@ The resulting .tar.gz file can be installed using
 1. Import the necessary customization data into the Resilient platform:
 
 		resilient-circuits customize
-    # This imort data contains:
-    #   Function inputs:
-    #     fn_cloud_foundry_action
-    #     fn_cloud_foundry_additional_parameters_json
-    #     fn_cloud_foundry_applications
-    #     fn_cloud_foundry_instance_action
-    #     fn_cloud_foundry_instances
-    #     fn_cloud_foundry_space_guid
-    #   Message Destinations:
-    #     cloud_foundry
-    #   Functions:
-    #     fn_cloud_foundry_create_app
-    #     fn_cloud_foundry_instance_command
-    #     fn_cloud_foundry_manage_applications
-    #   Workflows:
-    #     cloud_foundry_create_an_application
-    #     cloud_foundry_instance_command
-    #     cloud_foundry_stop_application
-    #   Rules:
-    #     Example: Cloud Foundry Create Application
-    #     Example: Cloud Foundry Instance Command
-    #     Example: Cloud Foundry Stop Application
+    This import data contains:
+       Function inputs:
+         fn_cloud_foundry_action
+         fn_cloud_foundry_additional_parameters_json
+         fn_cloud_foundry_applications
+         fn_cloud_foundry_instance_action
+         fn_cloud_foundry_instances
+         fn_cloud_foundry_space_guid
+       Message Destinations:
+         cloud_foundry
+       Functions:
+         fn_cloud_foundry_create_app
+         fn_cloud_foundry_instance_command
+         fn_cloud_foundry_manage_applications
+       Workflows:
+         cloud_foundry_create_an_application
+         cloud_foundry_instance_command
+         cloud_foundry_stop_application
+       Rules:
+         Example: Cloud Foundry Create Application
+         Example: Cloud Foundry Instance Command
+         Example: Cloud Foundry Stop Application
 		
 2. Update and edit `app.config`:
 
