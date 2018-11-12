@@ -142,11 +142,11 @@ class Ampclient(object):
                     LOG.exception("Got Rate Limiting exception type: %s, msg: %s" % (e.__repr__(), getattr(e, 'message', str(e))))
                     # Retry if we get Rate Limiting response
                     # Set delay to value of r.headers["X-RateLimit-Remaining"].
-                    retry_delay = int(r.headers.get("X-Rate-Limit-Reset"))
+                    retry_delay = int(r.headers.get("Retry-After"))
                     LOG.info("Retrying in %f seconds..." % (retry_delay))
                     time.sleep(retry_delay)
                 else:
-                    raise e
+                    raise
 
             if r.status_code in range(200, 203):
                 break
