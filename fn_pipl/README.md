@@ -1,7 +1,7 @@
 # Resilient Integration with Pipl
-This package contains one function that enriches your leads (name, email address, phone number, or social media username) 
+This package contains a function that enriches your leads (name, email address, phone number, or social media username) 
 with Pipl and gets their personal, professional, demographic, and contact information.
-The response from Pipl is saved in Pipl possible person datatable.
+The response from Pipl is saved in Pipl person datatable.
 The package also contains a script for creating an artifact from a selected row in the datatable.
 
 To query Pipl Data API user needs to provide API key from [Pipl](https://pipl.com/api/).
@@ -40,12 +40,12 @@ The resulting .tar.gz file can be installed using
 	This will create the following custom components:        
 	* Message Destinations: `fn_pipl`
 	* Functions: `pipl_search_function`
-	* Function Params": `artifact_id`, `incident_id`
+	* Function Params": `artifact_type`, `artifact_value`
 	* Action Fields: `pipl_artifact_type`
 	* Custom Datatables: `pipl_person_data`
-	* Workflows: `example_pipl_search_function`
+	* Workflows: ` Example: Pipl search`
 	* Rules: `Example: Create an Artifact from Pipl data`, `Example: Pipl search function`
-	* Scripts: `pipl_create_artifact`
+	* Scripts: `Create Artifact from Pipl Data`
 
 2. Update and edit `app.config` by first running:
 
@@ -57,18 +57,27 @@ Then edit the [fn_pipl]:
 [fn_pipl]
 pipl_api_key=xxxxx
 
+# Number of possible person matches to include in the results.
+# A possible persons response returns possible persons in descending order based on their match rate 
+# (whether you can see the match rate or not). 
+# The most probable person will always appear as the first possible person at the top of the results 
+# and the least probable person will appear at the bottom of the list.
+pipl_max_no_possible_per_matches=10
+
 # Optional
-# 0 – 1 (float value) The minimum required match score for possible persons to be returned.
-# minimum_match 1 will return the information for the chosen person only - the definite match
-# other values will return a possible persons list
+# Value between 0 and 1 (float value) The minimum required match score for possible persons to be returned.
+# minimum_match 1 will return the information for the chosen person only - the definite match.
+# A definite match is best when you need someone’s contact information or for identity verification.
+# Values other than 1 will return a possible persons list.
 #pipl_minimum_match=1
 
 # Optional
-# 0 – 1 (float value) The minimum acceptable probability for inferred data
+# Value between 0 and 1 (float value) The minimum acceptable probability for inferred data
 # Minimum probability lets you decide if your matches should only include source-validated data 
-(data found in one of our data sources) or can include inferred data (data we infer based on statistical analysis).
+# (data found in one of pipl data sources) or can include inferred data (data pipl infers based on statistical analysis).
 # Setting your minimum probability to 1 means no inferred data will be used to determine a match or be included in matches.
-#pipl_minimum_probability=1
+# Setting your minimum probability to 0.7 will include inferred data that has a 70% confidence level or higher.
+#pipl_minimum_probability=0.7
 
 # Optional
 # True or False, default value is False
@@ -76,17 +85,150 @@ pipl_api_key=xxxxx
 #pipl_infer_persons=True
 ```
 
-## Function Inputs:
-Function can be invoked only on certain type of artifacts:
+## Example Rules
+| Rule Name | Object Type | Workflow or Script Triggered |
+| --------- | :---------: | ---------------------------- |
+| Example: Pipl search function | `Artifact` | `Example: Pipl search workflow` |
+| Example: Create an Artifact from Pipl data | `Data Table` | `Create Artifact from Pipl Data` |
+
+Example: Pipl search function rule only works on certain types of artifacts:
 ![screenshot](./screenshots/pipl_rule.png)
 
+When clicking on Example: Create an Artifact from Pipl data rule user is prompt for an artifact type he or she 
+wishes to create:
+![screenshot](./screenshots/activity_field.png)
+
+If users wishes to use custom artifact types they will need to edit the activity filed on Example: Create an Artifact 
+from Pipl data rule:
+![screenshot](./screenshots/activity_field_rule.png)
+
+## Rule for Example: Pipl search workflow
 ![screenshot](./screenshots/pipl_function_rule.png)
 
-## Function Output:
+## Function Results
+A note is created with raw json:
+![screenshot](./screenshots/results_pipl_note.png)
+
+A row is also created in Pipl person datatable:
+![screenshot](./screenshots/results_pipl.png)
+
+To display Pipl person datatable, users need to manually add it to a new or existing layout.
+1. Navigate to the Customization Settings and select or create a new Incident tab in the Layouts tab.
+2. Drag the “Pipl person datatable” datatable to your Incident tab.
+3. Click Save.
+
+## Rule for Create Artifact from Pipl Data Script
+![screenshot](./screenshots/script_rule.png)
+
+## Script Result
+![screenshot](./screenshots/script_result.png)
+
+## Create Artifact from Pipl Data Script
+![screenshot](./screenshots/artifact_script.png)
+
+## Example: Pipl search workflow Pre-Process Script
+This example sets the inputs
+```python
+# Required inputs are: the artifact_type and artifact_value
+inputs.pipl_artifact_type = artifact.type
+inputs.pipl_artifact_value = artifact.value
+```
+
+## Example: Pipl search workflow Post-Process Script:
+This example creates a row in Pipl person datatable for certain types of Pipl data.
+```python
+from java.util import Date
+
+def add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_match_no, db_property, db_value, db_match, db_inferred):
+  pipl_person_data = incident.addRow("pipl_person_data")
+  pipl_person_data.pipl_timestamp = db_timestamp
+  pipl_person_data.pipl_artifact_value = db_artifact_value
+  pipl_person_data.pipl_possible_match_no = db_match_no
+  pipl_person_data.pipl_property = db_property
+  pipl_person_data.pipl_value = db_value
+  pipl_person_data.pipl_match = db_match
+  pipl_person_data.pipl_inferred = db_inferred
+
+if results.success:
+  # Save the json result as an Note
+  noteText = """Pipl Data API response for artifact_value {} returned {}: <br><br>{}""".format(artifact.value, results.pipl_response, results.raw_data)
+  incident.addNote(helper.createRichText(noteText))
+  
+  # Create a datatable from pipl response
+  possible_person_counter = 0
+  for person in results.person_list:
+    
+    # generate result_id and timestamp
+    possible_person_counter += 1
+    now = Date()
+    
+    # 0-1. The level of confidence we have that this is the person you’re looking for.
+    match = str(person.get("@match", ""))
+    
+    # Whether this person is made up solely from data inferred by statistical analysis from your search query. 
+    # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.
+    inferred = str(person.get("@inferred", ""))
+    
+    # Person data
+    names = person.get("names", [])
+    for name in names:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "name", name.get("display", ""), match, inferred)
+    
+    emails = person.get("emails", [])
+    for email in emails:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "email address", email.get("address", ""), match, inferred)
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address_md5", email.get("address_md5", ""), match, inferred)
+    
+    usernames = person.get("usernames", [])
+    for usrname in usernames:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "username", usrname.get("content", ""), match, inferred)
+      
+    phones = person.get("phones", [])
+    for phone in phones:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "phone", phone.get("display_international", ""), match, inferred)
+      
+    gender = person.get("gender")
+    if gender:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "gender", gender.get("content", ""), match, inferred)
+    
+    dob = person.get("dob")
+    if dob:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "dob", dob.get("display", ""), match, inferred)
+    
+    addresses = person.get("addresses", [])
+    for address in addresses:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "address", address.get("display", ""), match, inferred)
+      
+    jobs = person.get("jobs", [])
+    for job in jobs:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "job", job.get("display", ""), match, inferred)
+    
+    educations = person.get("educations", [])
+    for edu in educations:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "education", edu.get("display", ""), match, inferred)
+      
+    user_ids = person.get("user_ids", [])
+    for usr_id in user_ids:
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "user_id", usr_id.get("content", ""), match, inferred)
+      
+    images = person.get("images", [])
+    for image in images:
+      image_url = """<a href='{0}'>{0}</a>""".format(image.get("url", "")) if image.get("url", "") else ""
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "image", image_url, match, inferred)
+      
+    urls = person.get("urls", [])
+    for url in urls:
+      url_url = """<a href='{0}'>{0}</a>""".format(url.get("url", "")) if url.get("url", "") else ""
+      add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "url", url_url, match, inferred)
+```
+
+## Example Output:
 ```python
 
 results = {
   success: True,
+  
+  pipl_response: "definite match/possible person matches/no match",
 
   possible_persons: [
   {
@@ -373,107 +515,3 @@ results = {
   raw_data: JSON output
 }
 ```
-
-## Pre-Process Script:
-This example sets the inputs
-```python
-# Required inputs are: the incident id and artifact id
-inputs.incident_id = incident.id
-inputs.artifact_id = artifact.id
-```
-
-## Post-Process Script:
-This example creates a row in Pipl possible person datatable for certain types of Pipl data.
-```python
-from java.util import Date
-
-def add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_result_id, db_property, db_value, db_match, db_inferred):
-  pipl_person_data = incident.addRow("pipl_person_data")
-  pipl_person_data.pipl_timestamp = db_timestamp
-  pipl_person_data.pipl_artifact_value = db_artifact_value
-  pipl_person_data.pipl_result_id = db_result_id
-  pipl_person_data.pipl_property = db_property
-  pipl_person_data.pipl_value = db_value
-  pipl_person_data.pipl_match = db_match
-  pipl_person_data.pipl_inferred = db_inferred
-
-if results.success:
-  # Save the json results to an artifact
-  artifact.description = results.raw_data
-  
-  # Create a datatable with results
-  result_id = 0
-  for person in results.possible_persons:
-    # generate result_id and timestamp
-    result_id += 1
-    now = Date()
-    
-    # 0-1. The level of confidence we have that this is the person you’re looking for.
-    match = str(person.get("@match", ""))
-    
-    # Whether this person is made up solely from data inferred by statistical analysis from your search query. 
-    # You can control inference using the minimum_probability parameter, and inference of persons using the infer_persons parameter.
-    inferred = str(person.get("@inferred", ""))
-    
-    # Person data
-    names = person.get("names", [])
-    for name in names:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "name", name.get("display", ""), match, inferred)
-    
-    emails = person.get("emails", [])
-    for email in emails:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "email address", email.get("address", ""), match, inferred)
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "address_md5", email.get("address_md5", ""), match, inferred)
-    
-    usernames = person.get("usernames", [])
-    for usrname in usernames:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "username", usrname.get("content", ""), match, inferred)
-      
-    phones = person.get("phones", [])
-    for phone in phones:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "phone", phone.get("display_international", ""), match, inferred)
-      
-    gender = person.get("gender")
-    if gender:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "gender", gender.get("content", ""), match, inferred)
-    
-    dob = person.get("dob")
-    if dob:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "dob", dob.get("display", ""), match, inferred)
-    
-    addresses = person.get("addresses", [])
-    for address in addresses:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "address", address.get("display", ""), match, inferred)
-      
-    jobs = person.get("jobs", [])
-    for job in jobs:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "job", job.get("display", ""), match, inferred)
-    
-    educations = person.get("educations", [])
-    for edu in educations:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "education", edu.get("display", ""), match, inferred)
-      
-    user_ids = person.get("user_ids", [])
-    for usr_id in user_ids:
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "user_id", usr_id.get("content", ""), match, inferred)
-      
-    images = person.get("images", [])
-    for image in images:
-      image_url = """<a href='{0}'>{0}</a>""".format(image.get("url", "")) if image.get("url", "") else ""
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "image", image_url, match, inferred)
-      
-    urls = person.get("urls", [])
-    for url in urls:
-      url_url = """<a href='{0}'>{0}</a>""".format(url.get("url", "")) if url.get("url", "") else ""
-      add_row_to_pipl_datatable(now, artifact.value, result_id, "url", url_url, match, inferred)
-```
-![screenshot](./screenshots/results_pipl.png)
-
-## Rules
-| Rule Name | Object Type | Workflow or Script Triggered |
-| --------- | :---------: | ---------------------------- |
-| Example: Pipl search function | `Artifact` | `Example: Pipl search workflow` |
-| Example: Create an Artifact from Pipl data | `Data Table` | `pipl_create_artifact script` |
-
-## Script
-![screenshot](./screenshots/artifact_script.png)

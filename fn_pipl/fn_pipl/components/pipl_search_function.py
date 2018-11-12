@@ -10,18 +10,14 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import fn_pipl.util.selftest as selftest
 import json
 
-ARTIFACT_TYPE_EMAIL_SENDER = 9
-ARTIFACT_TYPE_EMAIL_SENDER_NAME = 19
-ARTIFACT_TYPE_EMAIL_RECIPIENT = 20
-ARTIFACT_TYPE_USER_ACCOUNT = 23
-
 
 class FunctionPayload:
     """Class that contains the payload sent back to UI and available in the post-processing script"""
 
     def __init__(self):
         self.success = True
-        self.possible_persons = None
+        self.person_list = None
+        self.pipl_response = None
         self.raw_data = None
 
     def as_dict(self):
@@ -74,15 +70,16 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get the function parameters:
-            artifact_id = get_function_input(kwargs, "artifact_id")  # number
-            incident_id = get_function_input(kwargs, "incident_id")  # number
+            artifact_type = get_function_input(kwargs, "pipl_artifact_type")  # text
+            artifact_value = get_function_input(kwargs, "pipl_artifact_value")  # text
 
             log = logging.getLogger(__name__)
-            log.info("artifact_id: %s", artifact_id)
-            log.info("incident_id: %s", incident_id)
+            log.info("artifact_type: %s", artifact_type)
+            log.info("artifact_value: %s", artifact_value)
 
             # Read configuration settings:
             pipl_api_key = get_config_option("pipl_api_key")
+            max_matches = int(get_config_option("pipl_max_no_possible_per_matches"))
             pipl_minimum_match = get_config_option("pipl_minimum_match", True)
             minimum_match = float(pipl_minimum_match) if pipl_minimum_match else None
             pipl_minimum_probability = get_config_option("pipl_minimum_probability", True)
@@ -90,23 +87,18 @@ class FunctionComponent(ResilientComponent):
             pipl_infer_persons = get_config_option("pipl_infer_persons", True)
             infer_persons = parse_bool(pipl_infer_persons) if pipl_infer_persons else None
 
-            # Load the artifact
-            artifact_data = self.get_artifact_data(incident_id, artifact_id)
-
-            artifact_type = artifact_data["type"]
-            artifact_value = artifact_data["value"]
-
             email, raw_name, username = None, None, None
-            if artifact_type == ARTIFACT_TYPE_EMAIL_SENDER or artifact_type == ARTIFACT_TYPE_EMAIL_RECIPIENT:
-                # In Pipl search this are full email addresses. Personal and Work emails.
+            if artifact_type == "Email Sender" or artifact_type == "Email Recipient":
+                # In Pipl Data this are full email addresses. Personal and Work emails.
                 email = artifact_value
-            elif artifact_type == ARTIFACT_TYPE_EMAIL_SENDER_NAME:
-                # In Pipl search this is current name as well as maiden name and nicknames.
-                raw_name = artifact_value
-            elif artifact_type == ARTIFACT_TYPE_USER_ACCOUNT:
-                # In Pipl search this are usernames in use by the person online. This includes screen names,
+
+            elif artifact_type == "User Account":
+                # In Pipl Data this are usernames in use by the person online. This includes screen names,
                 # handles and nicknames from across the web, social media sites, forums and more.
                 username = artifact_value
+            else:
+                # In Pipl Data this is current name as well as maiden name and nicknames.
+                raw_name = artifact_value
 
             # Set the required request data
             request = SearchAPIRequest(email=email, raw_name=raw_name, username=username, api_key=pipl_api_key,
@@ -136,22 +128,33 @@ class FunctionComponent(ResilientComponent):
 
                         if pipl_person:
                             person_list.append(pipl_person)
+                            payload.pipl_response = "definite match"
+                            yield StatusMessage("The data sent/found to Pipl is enough to identify a single, matching person.")
+
                         elif possible_persons:
-                            person_list.extend(possible_persons)
+                            # Include only this number of possible person matches in the results
+                            new_list = possible_persons[:max_matches]
+                            person_list.extend(new_list)
+
+                            payload.pipl_response = "possible person matches"
+                            yield StatusMessage("The data sent/found to Pipl is not enough to identify a single person. "
+                                                "A list of possible person matches was returned.")
                         else:
-                            payload.success = True
-                            yield StatusMessage("There were no persons returned in the Pipl response. "
+                            payload.pipl_response = "no match"
+                            yield StatusMessage("No data was found in Pipl. "
                                                 "Try adjusting the search settings in app.config.")
 
                         # Save the response in payload
-                        payload.possible_persons = person_list
-                        payload.raw_data = json.dumps(person_list)
+                        payload.person_list = person_list
+                        # Pretty printing
+                        payload.raw_data = json.dumps(person_list, sort_keys=True, indent=4, separators=(',', ': '))
 
                     # No data returned
                     else:
-                        payload.success = True
                         payload.possible_persons = []
-                        yield StatusMessage("There were no persons returned in the Pipl response.")
+                        payload.pipl_response = "no match"
+                        yield StatusMessage("No data was found in Pipl. "
+                                            "Try adjusting the search settings in app.config.")
 
                 # If not a 200 code
                 else:
@@ -172,25 +175,6 @@ class FunctionComponent(ResilientComponent):
         except Exception as err:
             log.error(err)
             yield FunctionError()
-
-    def get_artifact_data(self, incident_id, artifact_id):
-        """
-        Call the Resilient REST API to get the specific attachment content, type and title.
-        """
-        # Initialize Resilient API object
-        res_client = self.rest_client()
-
-        if incident_id and artifact_id:
-            artifact_uri = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
-        else:
-            raise ValueError("Artifact and incident id must be specified")
-
-        try:
-            # Get the artifact content and data
-            artifact_data = res_client.get(artifact_uri)
-            return artifact_data
-        except Exception as ex:
-            raise ValueError(u"Failed to get attachment from Resilient: {}".format(ex))
 
 
 def parse_bool(value):
