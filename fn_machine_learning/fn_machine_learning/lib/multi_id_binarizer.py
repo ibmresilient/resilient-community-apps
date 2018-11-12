@@ -3,18 +3,32 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
-import pandas as pds
+"""
+    MultiIdBinarizer
+    ----------------
+    This is an extension of MultiLabelBinarizer.
+    It can take a list of string like ["[1,2,3]", "[2]", "[5,6,7]"] directly from
+    a CSV file, and binarizes them.
+
+    Basically, MultiIdBinarizer needs to create 6 new features for the above example
+    column. It uses the original column name. For example, if the original column name is
+    "feature1", then this class is going to create 6 new features: "feature1_1", "feature1_2", "feature_3",
+    "feature_5", "feature_6", "feature_7".
+    Then the values for each of the three samples above will be translated into
+                feature1    feature1_1  feature1_2  feature1_3  feature1_5 feature1_6   feature1_7
+    Sample1     [1,2,3]         1           1           1           0           0           0
+    Sample2     [2]             0           1           0           0           0           0
+    Sample3     [5,6,7]         0           0           0           1           1           1
+
+    Then feature1 is removed from the dataset after the translation
+
+"""
 import json
 import logging
 
 
 class MultiIdBinarizer(object):
-    """
-    This is an extention to MultiLabelBinarizer. Instead of handling list
-    of string, here we handle list of both strings and integers.
-    Also we combine the csv list handler here. So it can handle directly
-    a list as a string.
-    """
+
     def __init__(self):
         self.new_col = []           # list of names of new cols
         self.mapping_dict = {}      # mapping between a value and a new col
@@ -23,8 +37,9 @@ class MultiIdBinarizer(object):
     def fit(self, col, col_name):
         """
 
-        :param col: Column of a dataframe. It is a list of string, and each string
-        is also a list. Sample of col: ["[1,2,3]", "[2]", "[5,6,7]"]
+        :param col:         Column of a dataframe. It is a list of string, and each string
+                            is also a list. Example of col: ["[1,2,3]", "[2]", "[5,6,7]"]
+        :param col_name:    Column Name
         :return: None
             """
         log = logging.getLogger(__name__)

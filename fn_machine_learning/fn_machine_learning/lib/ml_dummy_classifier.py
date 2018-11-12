@@ -3,24 +3,31 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlDummyClassifier
+    -----------------
+    sklearn Dummy Classifier uses pure statistics to predict, without digging out the
+    relation between the features and the predicting value.
+    https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html
 
+    This is the baseline for any meaningful machine learning model. If a ML model can
+    find any meaningful/useful relation between the features and the predicting field,
+    it will do better than this Dummy Classifier.
+
+    We include this for advanced users. They can compare a real ML model with this to
+    make sure that the model actually learns something useful from the data.
+"""
 from sklearn.dummy import DummyClassifier
-import numpy as py
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
 
 
 class MlDummyClassifier(MlModelCommon, DummyClassifier):
-    """
-    Use DummyClassifier to get the minimal value based on statistics
-    This offers a floor value that any meaningful machine learning
-    model shall outperform.
-    http://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html
-    """
+
     def __init__(self, strategy="stratified", log=None):
         """
 
         :param self:
-        :param strategy:
+        :param strategy: Possible choices
                 "stratified": Predict by respecting the training set's class distribution
                 "most_frequent": Always predict the majority
                 "prior": Maximize the lass prior
@@ -34,15 +41,17 @@ class MlDummyClassifier(MlModelCommon, DummyClassifier):
 
     @staticmethod
     def get_name():
+        """ Return the name of algorithm"""
         return "Dummy Classifier"
 
     def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
+        Build the model
 
-        :param csv_file:
-        :param features:
-        :param prediction:
-        :param test_prediction:
+        :param csv_file:        CSV file for dataset
+        :param features:        features for ML learning.
+        :param prediction:      field to predict
+        :param test_prediction: how to split the dataset
         :param unwanted_values: Samples with these unwanted predicted values will be removed
         :return:
         """

@@ -3,15 +3,20 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    IncidentFilter
+    --------------
+    Filter for incidents.
+
+    Filters can be chained, so the Chain of Command design pattern is a good fit
+
+    This is a superclass for concrete filters. It takes care of how to navigate to
+    the next filter in the chain, so subclasses don't need to worry about it.
+"""
 import logging
 
 
 class IncidentFilter(object):
-    """
-    Filters can be chained together. Chain of Command design pattern is a good fit here.
-
-    This is the super class for all individual filters
-    """
     def __init__(self, next_filter=None, in_log=None):
         """
         Constructor.
@@ -32,10 +37,10 @@ class IncidentFilter(object):
 
     def shall_include_incident(self, incident):
         """
-        A user just need to call this. Template method design pattern is used here.
+        A user just needs to call this. Template method design pattern is used here.
         This method will first call the filter_implementation that a subclass implements.
-        Then it will take care of the next filter in the chain, so the subclass
-        does not need to worry about it.
+        Then it will take care of navigating to the next filter in the chain, so the
+        subclass does not need to worry about it.
 
         All a subclass needs to do is to implement the filter_implement method.
 

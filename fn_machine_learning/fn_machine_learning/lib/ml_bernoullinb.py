@@ -3,15 +3,22 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlBernoulliNB
+    -------------
+    A machine learning model that uses the scikit-learn Bernoulli Naive Bayes algorithm.
+    https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html
 
+    Good for binary/boolean features.
+
+    Note for imbalanced dataset handling. This BernoulliNB does not support class_weight.
+    Use upsampling.
+"""
 from sklearn.naive_bayes import BernoulliNB
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
-
 import pandas as pds
-
-import logging
 
 
 class MlBernoulliNB(MlModelCommon, BernoulliNB):
@@ -35,7 +42,7 @@ class MlBernoulliNB(MlModelCommon, BernoulliNB):
                                                       random_state=random_state)
         else:
             #
-            # BernoulliNB does not support class_weight?
+            # BernoulliNB does not support class_weight
             #
             BernoulliNB.__init__(self)
             self.ensemble_method = None
@@ -50,17 +57,19 @@ class MlBernoulliNB(MlModelCommon, BernoulliNB):
         http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.BernoulliNB.html
         model.
 
-        :param csv_file: CSV file with samples
-        :param features: features to use
-        :param prediction: field to predict
-        :param test_prediction: how to split trainng/testing samples
-        :param unwanted_values: Unwanted values for samples. Those samples will be removed
+        :param csv_file:            CSV file with samples
+        :param features:            features to use
+        :param prediction:          field to predict
+        :param test_prediction:     how to split trainng/testing samples
+        :param unwanted_values:     Unwanted values for samples. Those samples will be removed
         :return:
         """
         try:
             self.extract_csv(csv_file, features, prediction)
+            #
             # Cleanup samples by removing samples with empty
             # features and unwanted values
+            #
             self.cleanup_samples(unwanted_values=unwanted_values)
 
             self.transform_numerical()

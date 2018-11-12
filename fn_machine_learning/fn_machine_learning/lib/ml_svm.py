@@ -3,28 +3,34 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlSVC
+    -----
+    Machine learning model using Support Vector Machine algorithm.
+    https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html
+
+    This package support both the orginal (linear) SVM and the SVM with
+    Gaussian kernel
+"""
 from sklearn.svm import SVC
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
 from fn_machine_learning.lib.normalization_encoder import ResNormalizationEncoder
 import pandas as pds
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
-import logging
 
 
 class MlSVC(MlModelCommon, SVC):
-    """
-    Support Vector Machine algorithm.
-    """
+
     def __init__(self, imbalance_upsampling=None, class_weight=None, kernel="linear", C=1.0, random_state=1, method=None, log=None):
         """
-
-        :param class_weight:
-        :param kernel:
-        :param C:
-        :param random_state:
-        :param method:
-        :param log:
+        :param imbalance_upsampling:    Use upsampling to compensate imbalanced dataset
+        :param class_weight:            Use class_weight to compensate imbalanced dataset
+        :param kernel:                  "linear" or "rbf" for Gaussian kernel
+        :param C:                       Not supported yet
+        :param random_state:            Random state
+        :param method:                  Bagging or Adaptive Boost
+        :param log:                     Log
         """
         self.kernel = kernel
         MlModelCommon.__init__(self,
@@ -57,6 +63,10 @@ class MlSVC(MlModelCommon, SVC):
                          random_state=random_state)
 
     def get_name(self):
+        """
+        Return the name of algorithm
+        :return:
+        """
         if self.kernel == "linear":
             return "SVM"
         else:
@@ -64,7 +74,7 @@ class MlSVC(MlModelCommon, SVC):
 
     def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
-
+        Build this model
         :param csv_file:
         :param features:
         :param prediction:
@@ -113,6 +123,12 @@ class MlSVC(MlModelCommon, SVC):
             raise e
 
     def predict_result(self, input_dict):
+        """
+        Use this model to predict a new incident
+
+        :param input_dict:      Input incident
+        :return:                Prediction
+        """
         df = pds.DataFrame([input_dict])
         df = df[self.config.selected_features]
         df = self.transform_for_prediction(df)
@@ -124,4 +140,8 @@ class MlSVC(MlModelCommon, SVC):
         return ret
 
     def get_encoder_for_float(self):
+        """
+        According to our test, normalized float features is better for SVM.
+        :return:
+        """
         return ResNormalizationEncoder()

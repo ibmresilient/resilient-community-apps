@@ -3,6 +3,21 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    DataPreparation
+    ---------------
+    Machine learning relies on good dataset. DataPreparation prepare
+    the dataset before it is used for training a machine learning
+    model.
+
+    Data preparation includes the following steps:
+        1. Clean up the dataset. Samples with blank values shall be removed
+           according to recommendation from ML books
+        2. String/Boolean values will be converted into integers
+        3. Integer/flow values will be normalized, so samples can span
+           out for easier identification/categorization
+        4. Upsampling is used for imbalanced dataset
+"""
 import pandas as pds
 from sklearn.preprocessing import MinMaxScaler
 

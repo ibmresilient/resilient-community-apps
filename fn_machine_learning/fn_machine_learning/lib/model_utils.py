@@ -3,15 +3,21 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    model_utils
+    -----------
+    Collection of util functions related to ML model
+"""
 import json
 import pickle
 import pandas as pds
 import logging
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
 from sklearn.metrics import precision_score, recall_score, f1_score
-import numpy as np
 
-
+#
+#   All the algorithms supported by this integration package
+#
 SUPPORTED_ALGORITHMS = [
     u"Logistic Regression",
     u"SVM",
@@ -22,11 +28,17 @@ SUPPORTED_ALGORITHMS = [
     u"BernoulliNB",
     u"K-Nearest Neighbor"
 ]
+#
+#   Ensemble methods
+#
 SUPPORTED_METHODS = [
     u"None",
     u"Bagging",
     u"Adaptive Boosting"
 ]
+#
+#   Future features
+#
 SUPPORTED_PREPROCESS = [
     u"None",
     u"Min Max Scaler",
@@ -39,6 +51,17 @@ SUPPORTED_PREPROCESS = [
 
 
 def update_config_from_app_config(ml_opt, mlconfig):
+    """
+    Use data from app.config to update the mlconfig structure.
+    The mlconfig structure is used to build a ML model
+
+    This is used to build new ml model. We read config data
+    from app.config, update mlconfig accordingly, and then build
+
+    :param ml_opt:          Config data from app.config
+    :param mlconfig:        mlconfig structure to update
+    :return:
+    """
     mlconfig.model_name = ml_opt.get("algorithm", "").strip()
     mlconfig.addition_method = ml_opt.get("method", "").strip()
     mlconfig.predict_field = ml_opt.get("prediction", None)
@@ -48,7 +71,7 @@ def update_config_from_app_config(ml_opt, mlconfig):
     mlconfig.class_weight = ml_opt.get("class_weight", None)
     imbalance_upsampling = ml_opt.get("imbalance_upsampling", None)
     if imbalance_upsampling and imbalance_upsampling.lower() == "true":
-        mlconfig.imbalance_upsampling = True;
+        mlconfig.imbalance_upsampling = True
     elif imbalance_upsampling and imbalance_upsampling.lower() == "false":
         mlconfig.imbalance_upsampling = False
     else:
@@ -70,9 +93,13 @@ def update_config_from_app_config(ml_opt, mlconfig):
 
 def update_config_from_saved_model(model_file, mlconfig):
     """
-    Update mlconfig with config data from a saved model file
-    :param model_file: saved model file
-    :param mlconfig:
+    Update mlconfig with config data from a saved model file.
+
+    This is used to rebuild a model from a saved model file.
+    We update the mlconfig structure using data from the saved model
+
+    :param model_file:      saved model file
+    :param mlconfig:        mlconfig to update
     :return:
     """
     model = pickle.load(open(model_file, "rb"))
@@ -93,8 +120,9 @@ def update_config_from_saved_model(model_file, mlconfig):
 def get_default_encoder(features, csv_file, separator=',', in_log=None):
     """
     Get the default preprocess for selected features
-    :param features: selected features from the csv_file
-    :param csv_file: csv file containing samples
+
+    :param features:        selected features from the csv_file
+    :param csv_file:        csv file containing samples
     :return:
     """
     preprocess = {}
@@ -127,8 +155,21 @@ def get_default_encoder(features, csv_file, separator=',', in_log=None):
 
 
 def analyze(y_true, y_pred):
+    """
+    Compute the accuracy for each value
+
+    :param y_true:      List of actual value for prediction field. This is from the test data
+    :param y_pred:      List of predicted value the model generate
+    :return:
+    """
     re = {}
+    #
+    #   count is a dict to store the count for each value
+    #
     count = {}
+    #
+    #   correct is a dict to store the correct prediction for each value
+    #
     correct = {}
     for t, p in zip(y_true, y_pred):
         if t in count:
@@ -151,9 +192,12 @@ def analyze(y_true, y_pred):
 
 def compute_recall(y_true, y_pred):
     """
-    Use sklearn to comput recall
-    :param y_true:
-    :param y_pred:
+    Use sklearn to compute recall:
+    https://en.wikipedia.org/wiki/Precision_and_recall
+    Recall is also called sensitivity.
+
+    :param y_true:          The "true" value from the testing dataset
+    :param y_pred:          The prediction given by the model for the testing dataset
     :return:
     """
     recall = recall_score(y_true=y_true,
@@ -164,18 +208,28 @@ def compute_recall(y_true, y_pred):
 
 def compute_precision(y_true, y_pred):
     """
-    Compute precision
-    :param y_true:
-    :param y_pred:
-    :return:
+    Compute precision:
+    https://en.wikipedia.org/wiki/Precision_and_recall
+    Precision is also called Positive Predictive Value.
+
+    :param y_true:          The "true" value from the testing dataset
+    :param y_pred:          The prediction given by the model for the testing dataset
+    :return:                Precision score
     """
     return precision_score(y_true=y_true,
                            y_pred=y_pred,
                            average="macro")
 
-def comput_f1(y_true, y_pred):
+
+def compute_f1(y_true, y_pred):
     """
-    Compute f1
+    Compute F1-score:
+    https://en.wikipedia.org/wiki/F1_score
+    This is a measurement better than the overall accuracy because it takes in account
+    of all the accuracy of all the values. It gives a more balanced view of the
+    performance of a model, and it is also called the harmonic average of precision and
+    recall.
+
     :param y_true:
     :param y_pred:
     :return:
@@ -184,19 +238,24 @@ def comput_f1(y_true, y_pred):
                     y_pred=y_pred,
                     average="macro")
 
+
 def count_values(csv_file, field, in_log=None):
     """
-    Read samples from the csv_file, and count values of the given field
-    :param csv_file:
-    :param field:
-    :return:
+    Read samples from the csv_file, and count values of the given field.
+
+    This is used for detecting imbalanced dataset. Also user can use this
+    to check if any value he/she wants to exclude. Things like Unknown is
+    recommended to be excluded for example.
+
+    :param csv_file:    Input CSV file with samples
+    :param field:       Field to predict
+    :param in_log:      Log
+    :return:            dict of value counts
     """
     log = in_log if in_log else logging.getLogger(__name__)
 
     dataf = pds.read_csv(csv_file,
                          sep=',',
-                         # usecols=["name", "id", "description", "hostname", "incident_type_ids", "confirmed", "negative_pr_likely", "nist_attack_vectors", predict],
-                         # usecols=[predict, "id", "confirmed", "exposure_type_id"],
                          dtype={field: object},
                          skipinitialspace=True,
                          quotechar='"',

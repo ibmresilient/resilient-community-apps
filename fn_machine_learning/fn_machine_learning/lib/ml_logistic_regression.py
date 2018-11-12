@@ -3,27 +3,35 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    LogisticRegression
+    ------------------
+    A machine learning using Logistic Regression for classification:
+    http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html
+
+    Also two possible (optional) ensemble methods:
+        1. Bagging
+        2. Adaptive Boost
+
+"""
 from sklearn.linear_model import LogisticRegression as LgRegression
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
-from fn_machine_learning.lib.data_preparation import DataPreparation
-import logging
 import pandas as pds
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import BaggingClassifier
 
 
 class LogisticRegression(MlModelCommon, LgRegression):
-    """
-    Logistic Regression algorithm for Machine Learning
-    """
+
     def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, c=100.0, random_state=1, log=None):
         """
         Initialize the model
-        :param class_weight: class_weight. It can be None, "balanced", or a dict. Used for imbalance class
-        :param method: Optional ensemble method
-        :param c:
-        :param random_state:
-        :param log:
+        :param imbalance_upsampling:    Using upsampling to compensate imbalanced dataset
+        :param class_weight:            It can be None, "balanced", or a dict. Used for imbalance class
+        :param method:                  Optional ensemble method
+        :param c:                       Not supported yet.
+        :param random_state:            Random state
+        :param log:                     log
         """
         self.c = c
         self.random_state = random_state
@@ -56,15 +64,16 @@ class LogisticRegression(MlModelCommon, LgRegression):
 
     @staticmethod
     def get_name():
+        """Return the name of the algorithm"""
         return "Logistic Regression"
 
     def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
-
-        :param csv_file:
-        :param features:
-        :param prediction:
-        :param test_prediction:
+        Build this model
+        :param csv_file:        CSV file with samples
+        :param features:        Features for building this model
+        :param prediction:      Field to predict
+        :param test_prediction: How to split samples
         :param unwanted_values: Samples with unwanted values will be removed
         :return:
         """
@@ -88,7 +97,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
             self.upsample_if_necessary()
 
             #
-            # Train model using training data
+            #   Train model using training data
             #
             if len(self.y_train) > 0:
                 self.config.number_samples = len(self.y_train) + len(self.y_test)
@@ -99,7 +108,7 @@ class LogisticRegression(MlModelCommon, LgRegression):
                     self.fit(self.X_train, self.y_train)
 
                 #
-                # Test model
+                #   Test model
                 #
                 if self.ensemble_method is not None:
                     y_predict = self.ensemble_method.predict(self.X_test)
@@ -111,19 +120,20 @@ class LogisticRegression(MlModelCommon, LgRegression):
                 #
                 #   IBM Watson uses AUC to measure the performance of a model
                 #   To compare against IBM Watson we compute AUC here as well
+                #   Reserved for future tests
                 #
-                ytest = []
-                for re in self.y_test:
-                    if re == "yes":
-                        ytest.append(True)
-                    else:
-                        ytest.append(False)
-
-
-
-                from sklearn import metrics
-                fpr, tpr, _ = metrics.roc_curve(ytest, pres)
-                auc = metrics.auc(fpr, tpr)
+                # ytest = []
+                # for re in self.y_test:
+                #     if re == "yes":
+                #         ytest.append(True)
+                #     else:
+                #         ytest.append(False)
+                #
+                #
+                #
+                # from sklearn import metrics
+                # fpr, tpr, _ = metrics.roc_curve(ytest, pres)
+                # auc = metrics.auc(fpr, tpr)
 
 #==
                 #
@@ -140,9 +150,10 @@ class LogisticRegression(MlModelCommon, LgRegression):
 
     def predict_result(self, input):
         """
-        Input will be a dict
-        :param input:
-        :return:
+        Use this model to predict a new incident.
+
+        :param input:       Incident in json dict
+        :return:            Prediction
         """
         df = pds.DataFrame([input])
         df = df[self.config.selected_features]

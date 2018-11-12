@@ -1,6 +1,23 @@
 #!/usr/bin/env python
 
-""" Command line tool to manage and run resilient-circuits """
+"""
+    RES-ML
+    ------
+    A command line tool to build machine learning model. It supports:
+        1. Download. Download incidents and save in CSV format.
+        2. Build. Build machine model and save it into a file
+        3. Count-value. Value count for a given field. Useful for discovering imbalanced dataset
+        4. View. View the summary of a saved model.
+        5. Rebuild. Rebuild a saved model with latest data
+
+    Note the recommended steps to use our res-ml package are:
+        1. Use this command line tool to
+            a. download incidents
+            b. build and save a machine learning model
+        2. Use our function component to do prediction, by point to the saved model file
+        3. Rebuild the saved model periodically with updated incidents/samples.
+"""
+
 from __future__ import absolute_import
 
 import argparse
@@ -49,7 +66,8 @@ class OptParser(resilient.ArgumentParser):
         super(OptParser, self).__init__(config_file=self.config_file)
         #
         #   Note this is a trick used by resilient-circuits. resilient.ArgumentParser will
-        #   validate the arguments of the command line. We don't want that, so we
+        #   validate the arguments of the command line. Since we use command line
+        #   argument of input/output files, we don't want that validation, so we
         #   erase them before we call parse_args(). So parse_args() only
         #   reads from app.config
         #
@@ -69,7 +87,7 @@ class OptParser(resilient.ArgumentParser):
 
 def main():
     """
-    We support 5 subcommands: build, rebuild, view.
+    We support 5 sub-commands: build, rebuild, view.
         1. build: build a new model
             -o  Required flag, pointing to a file we can save the model to
             -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
@@ -100,9 +118,9 @@ def main():
     build_parser = subparsers.add_parser("build",
                                          help="Build a machine model")
     rebuild_parser = subparsers.add_parser("rebuild",
-                                           help="Rebuild an saved machine model")
+                                           help="Rebuild an saved machine learning model")
     view_parser = subparsers.add_parser("view",
-                                        help="Manage Resilient Circuits as a service with Windows or Supervisord")
+                                        help="View the summary of a saved machine learning model")
     download_parser = subparsers.add_parser("download",
                                             help="Download incidents and save into a CSV file")
     count_value_parser = subparsers.add_parser("count_value",
@@ -124,7 +142,7 @@ def main():
 
     # 2. rebuild process
     #
-    #   -c Specifiy a CSV file with samples. Otherwise download incidents
+    #   -c Specify a CSV file with samples. Otherwise download incidents
     #
     rebuild_parser.add_argument("-c", "--csv",
                                 help="Use samples from CSV file",
@@ -165,6 +183,10 @@ def main():
                                     default=None)
 
     args, unknown_args = parser.parse_known_args()
+    #
+    #   Use res-ml -v sub-command.....
+    #   to get debug level log
+    #
     fh = logging.FileHandler("res-ml.log")
     fh.setLevel(logging.INFO)
     if args.verbose:
@@ -186,7 +208,7 @@ def main():
     elif args.cmd == "count_value":
         count_value(args)
     else:
-        LOG.info("Unknown command")
+        LOG.error("Unknown command")
 
 
 def count_value(args):
@@ -237,7 +259,7 @@ def download_incidents_csv(opt_parser, csv_file):
                 verify = False
             elif os.path.isfile(cafile):
                 #
-                #   User specify a cafile
+                #   User specified a cafile for trusted certificate
                 #
                 verify = cafile
         except:
@@ -324,10 +346,12 @@ def build_new_model(args, opt_parser):
     """
     Build a model.
     This method is called when user uses the command line util to build a model
+
     :param args:
     :param opt_parser:
     :return:
     """
+    LOG.debug("Building a new model: " + str(args))
     file_name = args.output
     csv_file = args.csv
 
@@ -338,11 +362,12 @@ def rebuild_model(args, opt_parser):
     """
     This method is called when user uses the command line util to rebuild
     a model, based on a saved model file
-    :param args:
-    :param opt_parser:
+
+    :param args:            command line tools arguments
+    :param opt_parser:      app.config information
     :return:
     """
-    LOG.info("Rebuilding a  model: " + str(args))
+    LOG.debug("Rebuilding a model: " + str(args))
     model_file = args.input
     csv_file = args.csv
     build_model(model_file, opt_parser, csv_file, True)
@@ -351,8 +376,9 @@ def rebuild_model(args, opt_parser):
 def show_model_summary(model, model_file):
     """
     Output summary of a given model
-    :param model:
-    :param model_file: model file read/write
+
+    :param model:           saved model re-constructed frome saved model
+    :param model_file:      model file name
     :return:
     """
     try:
@@ -396,7 +422,8 @@ def view_model(args):
     Show the summary of a saved model file.
     This method is call when user use command line util to view summary of
     a saved model file.
-    :param args:
+
+    :param args:        Command line arguments
     :return:
     """
     file_name = args.input

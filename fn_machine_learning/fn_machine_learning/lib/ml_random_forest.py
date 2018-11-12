@@ -3,13 +3,19 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlRandomForest
+    --------------
+    Machine learning model using Random Forest algorithm.
+    https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html
 
+    Note that Random Forest is basically an ensemble method of Decision Tree. So it does not make sense
+    provide ensemble method on top of Random Forest.
+
+"""
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import BaggingClassifier
 import pandas as pds
-import logging
 
 
 class MlRandomForest(MlModelCommon, RandomForestClassifier):
@@ -33,10 +39,15 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
     @staticmethod
     def get_name():
+        """
+        Return the name of algorithm
+        :return:
+        """
         return "Random Forest"
 
     def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
+        Build this model
 
         :param csv_file:
         :param features:
@@ -90,9 +101,9 @@ class MlRandomForest(MlModelCommon, RandomForestClassifier):
 
     def predict_result(self, input):
         """
-        Input is a dict
-        :param input:
-        :return:
+        Use this model to predict a new incident
+        :param input:       New incident to predict
+        :return:            Prediction in string
         """
         df = pds.DataFrame([input])
         #

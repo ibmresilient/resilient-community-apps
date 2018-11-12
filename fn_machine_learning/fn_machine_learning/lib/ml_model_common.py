@@ -3,6 +3,13 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlModelCommon
+    -------------
+    Superclass for all individual machine model.
+
+    It contains common methods and variables.
+"""
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import accuracy_score
@@ -32,7 +39,6 @@ class MlModelCommon(object):
         self.config.class_weight = class_weight
         self.config.addition_method = method
 
-
         #
         # Dataset
         #
@@ -50,17 +56,28 @@ class MlModelCommon(object):
         self.label_encoder = {}
 
     def set_log(self, log):
+        """
+        Set the log to use
+        :param log:
+        :return:
+        """
         self.log = log
 
     def set_build_time(self):
+        """
+        Record the build time. This will be written into the saved model file for record
+        :return:
+        """
         self.config.build_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     def extract_csv(self, csv_file, features, prediction):
         """
+        Extract dataframe from the given CSV file. This dataframe then contains the samples
+        used to build the model later
 
-        :param csv_file:
-        :param features:
-        :param prediction:
+        :param csv_file:        CSV file with samples
+        :param features:        Features to use to build
+        :param prediction:      Field to predict
         :return:
         """
         self.config.predict_field = prediction
@@ -81,7 +98,6 @@ class MlModelCommon(object):
                                dtype={prediction:object},
                                skipinitialspace=True,
                                quotechar='"')
-        #print(self.df)
 
     def cleanup_samples(self, unwanted_values=None):
         """
@@ -89,7 +105,10 @@ class MlModelCommon(object):
         One straightforward and simplest way is to eliminate all of them.
         If user wants to do imputing, he/she can do it to the input csv file
         first.
-        Also, user can remove samples with unwanted values
+        Also, user can remove samples with unwanted values for the predict field.
+        Samples with those values will be excluded in fitting the model.
+
+        :param unwanted_values:         list of unwanted values of the predict field.
         :return:
         """
         self.df = self.df.dropna(axis=0)
@@ -106,11 +125,13 @@ class MlModelCommon(object):
         self.y = self.df[self.config.predict_field]
 
     def transform_numerical(self):
-        #
-        # https://stackoverflow.com/questions/28656736/using-scikits-labelencoder-correctly-across-multiple-programs
-        #
-        # Basically each categorical column needs one labelencoder
-        #
+        """
+        Each categorical column needs one label encoder.
+        https://stackoverflow.com/questions/28656736/using-scikits-labelencoder-correctly-across-multiple-programs
+
+        A label encoder convert a string value (of features) into integers.
+        :return:
+        """
         for col_name, col in self.X.iteritems():
             self.log.debug("Column {col_name} is {col_type}".format(col_name=col_name,
                                                                     col_type=col.dtype.name))
@@ -148,12 +169,9 @@ class MlModelCommon(object):
                 # Note that labelencoder can be used to normalize as well
                 # labelencoder is good except SVM.
                 #
-                #le = LabelEncoder()
-                #
-                # Our own
-                #
-                #le = ResNormalizationEncoder()
 
+                # So here will use template method design pattern and let the subclass to decide
+                # what label encoder to use
                 le = self.get_encoder_for_float()
 
                 le.fit(col)
@@ -164,19 +182,27 @@ class MlModelCommon(object):
 
     def get_encoder_for_float(self):
         """
+        Template Method design method.
+
         Most algorithm works well with sklearn LabelEncoder.
-        Some (SVM category?) works well with normalization
+        Some (SVM category?) work better with normalization
         By default, this method returns LabelEncoder.
+
         Override it in subclass if a specific algorithm wants
         something else
-        :return:
+
+        :return:        The encoder to be used for float
         """
         return LabelEncoder()
 
     def transform_for_prediction(self, df):
         """
-        Transform the input df before applying ml model on it
-        :param df:
+        Transform the input dataframe before applying ml model on it
+
+        This dataframe needs to be transformed exactly like how we treated the
+        training dataset/dataframe before we fit the model.
+
+        :param df:      Dataframe we need to predict
         :return:
         """
         for col_name, col in df.iteritems():
@@ -209,8 +235,13 @@ class MlModelCommon(object):
 
     def split_samples(self, test_percentage=0.5):
         """
+        Split the samples into training and testing subsets.
 
-        :param test_percentage:
+        The training subset is used to fit and train the model, and the testing
+        subset is used to validate the model, and compute measurements like
+        overall accuracy/F1.
+
+        :param test_percentage:     The percentage for testing subset
         :return:
         """
         X = self.X.values
@@ -225,11 +256,13 @@ class MlModelCommon(object):
 
     def upsample_if_necessary(self):
         """
-        To handle imbalance class, one approach is to do
-        upsampling.
+        To handle imbalance class, one approach is to do upsampling. Basically we just
+        make multiple copies of each minority sample, so that the count of the minority
+        sample is the same as the majority samples.
 
-        Note: You should always split the sample first and then only
-        upsample the training set.
+        Note: You should always split the sample first and then upsample the training
+        set only. No need to upsample the testing set.
+
         :return:
         """
         X = pds.DataFrame(data=self.X_train)
@@ -245,12 +278,13 @@ class MlModelCommon(object):
 
     def save_to_file(self, file_name):
         """
-        Save this model to a file
-        :param file_name:
+        Save this model to a file using pickle.
+
+        :param file_name:   Name of the file to be used for saving
         :return:
         """
         #
-        #   No need to save these
+        #   No need to save these. They are not used in prediction
         #
         self.X_test = None
         self.X = None
@@ -266,8 +300,9 @@ class MlModelCommon(object):
     @staticmethod
     def load_from_file(file_name):
         """
-        Read a model from a file
-        :param file_name:
+        Read a model from a file. Deserialize it.
+
+        :param file_name:   Name of the saved model file
         :return:
         """
         model = pickle.load(open(file_name, "rb"))
@@ -275,19 +310,26 @@ class MlModelCommon(object):
 
     def compute_accuracy(self, predict, actual):
         """
+        Compute the overall accuracy and other measurement, by comparing predict and actual
 
-        :param predict:
-        :param actual:
-        :return: accuracy percentage
+        :param predict:         This is a list of the predictions the model gives for the testing
+                                data subset.
+        :param actual:          This is the actual/true result of the testing dataset
+        :return:                Measurements
         """
         #
-        # Set build time
+        #   Set build time. This will be saved to the model file for record
         #
         self.set_build_time()
-
+        #
+        #   Overall accuracy
+        #
         self.config.accuracy = accuracy_score(y_true=actual,
                                               y_pred=predict)
 
+        #
+        #   For imbalanced dataset, more measurements
+        #
         self.config.analysis = model_utils.analyze(y_true=actual,
                                                    y_pred=predict)
         self.config.precision = model_utils.compute_precision(y_true=actual,
@@ -296,7 +338,7 @@ class MlModelCommon(object):
         self.config.recall = model_utils.compute_recall(y_true=actual,
                                                         y_pred=predict)
 
-        self.config.f1 = model_utils.comput_f1(y_true=actual,
+        self.config.f1 = model_utils.compute_f1(y_true=actual,
                                                y_pred=predict)
 
 
@@ -311,12 +353,18 @@ class MlModelCommon(object):
 
     def predict_result(self, input_dict):
         """
-        Override this in subclass
+        Override this in subclass if necessary
         :return:
         """
         return []
 
     def predict_map(self, input_dict, mapping):
+        """
+
+        :param input_dict:
+        :param mapping:
+        :return:
+        """
         res = self.predict_result(input_dict)
         #
         #   res could be a numpy.ndarray

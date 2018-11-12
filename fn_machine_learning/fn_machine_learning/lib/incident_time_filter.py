@@ -3,14 +3,18 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    IncidentTimeFilter
+    ------------------
+    Filter incidents using time_start and time_end.
+
+    This is a subclass of IncidentFilter
+"""
 from fn_machine_learning.lib.incident_filter import IncidentFilter
 from datetime import datetime
 
 
 class IncidentTimeFilter(IncidentFilter):
-    """
-    Time filter using time_start and time_end
-    """
     #
     #   Format constant. This is the format we expect for time_start and time_end from app.config
     #

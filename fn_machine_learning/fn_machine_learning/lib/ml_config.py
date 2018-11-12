@@ -3,13 +3,15 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlConfig
+    --------
+
+    This is a struct for organizing config data for a machine learning model.
+"""
 
 
 class MlConfig(object):
-    """
-    This is basically a struct for organizing config data
-    of a model
-    """
     def __init__(self):
         # Data source
         self.data_file = None

@@ -3,7 +3,15 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
+"""
+    MlGaussianNB
+    ------------
+    A machine learning model that uses the scikit-learn Gaussian Naive Bayes algorithm:
+    https://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html
 
+    This algorithm can do partial fit, but not supported yet in our softeare.
+
+"""
 from sklearn.naive_bayes import GaussianNB
 from fn_machine_learning.lib.ml_model_common import MlModelCommon
 import pandas as pds
@@ -15,7 +23,15 @@ import logging
 class MlGaussianNB(MlModelCommon, GaussianNB):
 
     def __init__(self, imbalance_upsampling=None, class_weight=None, method=None, random_state=1, log=None):
+        """
+        Construtor
 
+        :param imbalance_upsampling:    Use upsampling to compensate imbalanced dataset
+        :param class_weight:            Use class_weight to compensate imbalanced dataset
+        :param method:                  [Optional] Ensemble method
+        :param random_state:            Random state
+        :param log:                     Log
+        """
         MlModelCommon.__init__(self,
                                imbalance_upsampling=imbalance_upsampling,
                                class_weight=class_weight,
@@ -40,15 +56,20 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
 
     @staticmethod
     def get_name():
+        """
+        Return the name of the algorithm
+        :return:
+        """
         return "GaussianNB"
 
     def build(self, csv_file, features, prediction, test_prediction, unwanted_values=None):
         """
+        Build this model.
 
-        :param csv_file:
-        :param features:
-        :param prediction:
-        :param test_prediction:
+        :param csv_file:            CSV file with samples
+        :param features:            Features to build this model
+        :param prediction:          Field to predict
+        :param test_prediction:     How to split training/testing dataset
         :return:
         """
         try:
@@ -93,16 +114,19 @@ class MlGaussianNB(MlModelCommon, GaussianNB):
 
     def predict_result(self, input):
         """
-        Input is a dict
-        :param input:
+        This is the method to predict a "new" incident. Input is a dict
+
+        :param input:       Incident in json dict
         :return:
         """
         df = pds.DataFrame([input])
         #
-        # We only care about the features
+        #   We only care about the features
         #
         df = df[self.config.selected_features]
-
+        #
+        #   We need to do the same transformation as for the training dataset
+        #
         df = self.transform_for_prediction(df)
         self.log.info("Using df {} to predict.".format(str(df)))
 

@@ -3,7 +3,11 @@
 #
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
-"""Utility functions for Resilient API"""
+"""
+    resilient_utils
+    ---------------
+    Collection of resilient util functions
+"""
 
 from fn_machine_learning.lib.ml_logistic_regression import LogisticRegression
 from fn_machine_learning.lib.ml_svm import MlSVC
