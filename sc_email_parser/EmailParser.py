@@ -134,10 +134,10 @@ class CIDR(WhiteListElement):
 
   def test(self, anIPAddress):
     """ An IP address matches the CIDR if both of them have the same binary value when both are shifted right by the
-    CIDR subnet mask suffix, and if shifting the IP address by that amount does not result in a zero value.
+    CIDR subnet mask suffix.
     """
     log.debug("Going to filter IPAddress {} against {}".format(anIPAddress, self))
-    return (anIPAddress.addressAsBinary >> (self.width - self.cidrSuffix) > 0) and (anIPAddress.addressAsBinary >> (self.width - self.cidrSuffix) == self.addressAsBinary >> (self.width - self.cidrSuffix))
+    return (anIPAddress.addressAsBinary >> (self.width - self.cidrSuffix) == self.addressAsBinary >> (self.width - self.cidrSuffix))
 
 
 class IPRange(WhiteListElement):
@@ -209,7 +209,8 @@ class EmailProcessor(object):
     CIDR('203.0.113.0/24'),               #   TEST-NET-3 examples and documentation (RFC 5737)
     CIDR('233.252.0.0/24'),               #   Multicast test network
     IPRange('234.0.0.0-238.255.255.255'),
-    IPRange('225.0.0.0-231.255.255.255')
+    IPRange('225.0.0.0-231.255.255.255'),
+    CIDR('127.0.0.1')
   ]
 
   ipV6WhiteList = [
@@ -235,12 +236,9 @@ class EmailProcessor(object):
     CIDR('FE00::/9')    
   ]
 
-  # Customer-specific IP address whitelist
-  customIPv4WhiteList = [
-    CIDR("127.0.0.1"),
-    CIDR("192.0.0.0/8"),
-    CIDR("3.0.1.4")
-  ]
+  # Customer-specific IP address whitelists
+  # Add entries to these lists to whitelist the entries without disrupting the standard set above
+  customIPv4WhiteList = []
   customIPv6WhiteList = []
 
   # Standard domain whitelist
