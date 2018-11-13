@@ -68,7 +68,7 @@ class WhiteListElement(object):
 
   def __repr__(self):
     """Method to return the text representation of the object."""
-    return self.asString
+    return "WhiteListElement(\"{0}\")".format(self.asString)
 
   def test(self, other):
     """ A function intended to be inherited but overrided by subclasses. It should return True if the "other" object
@@ -97,7 +97,7 @@ class IPAddress:
 
   def __repr__(self):
     """Method to return the text representation of the object."""
-    return self.addressAsString
+    return "IPAddress(\"{0}\")".format(self.addressAsString)
 
 
 class CIDR(WhiteListElement):
@@ -159,6 +159,14 @@ class IPRange(WhiteListElement):
     """ A method that returns true if anIPAddress is not below self.lowest and not above self.highest. """
     return self.highest.addressAsBinary >= anIPAddress.addressAsBinary and self.lowest.addressAsBinary <= anIPAddress.addressAsBinary
 
+  def __str__(self):
+    """Method to return the text representation of the object."""
+    return "{0}-{1}".format(self.lowest, self.highest)
+
+  def __repr__(self):
+    """Method to return the text representation of the object."""
+    return "IPRange(\"{0}-{1}\")".format(self.lowest, self.highest)
+
 
 class Domain(WhiteListElement):
   """ A type of WhiteListElement that represents a domain or domain pattern. E.G.
@@ -179,6 +187,14 @@ class Domain(WhiteListElement):
     """ A method that returns true if the value passed in urlString matches the regex in self.processedRegEx. """
     matches = re.findall(self.processedRegEx, urlString, re.IGNORECASE)
     return (matches != None) and (len(matches) > 0)
+
+  def __str__(self):
+    """Method to return the text representation of the object."""
+    return "{0}".format(self.asString)
+
+  def __repr__(self):
+    """Method to return the text representation of the object."""
+    return "Domain(\"{0}\")".format(self.asString)
 
 
 class EmailProcessor(object):
@@ -261,9 +277,9 @@ class EmailProcessor(object):
     """This method adds a new unique artifact to the incident. Previously added artifacts are added to the 
     "addedArtifacts" set. If the new artifact as already been added to the list then it is not added to the 
     incident a second time.
-    Parameter theArtifact - the value of the artifact to create
-    Parameter artifactType - the type of the artifact
-    Parameter description - the description of the artifact
+    Parameter "theArtifact" - the value of the artifact to create.
+    Parameter "artifactType" - the type of the artifact.
+    Parameter "description" - the description of the artifact.
     No return value.
     """
     if (theArtifact, artifactType) in self.addedArtifacts:
