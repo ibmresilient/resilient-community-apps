@@ -5,6 +5,8 @@
 """Generate Mock responses to simulate Cisco AMP for endpoinst for Unit and function tests """
 import time
 import re
+
+from requests import HTTPError
 from requests.models import Response
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 # Responses for standalone tests
@@ -553,11 +555,11 @@ def mocked_session(*args, **kwargs):
                     return MockGetResponse(get_computers_limit(), 200)
                 elif "hostname" in kwargs["params"] and  kwargs["params"]["hostname"] is not None:
                         if kwargs["params"]["hostname"] == "test_rate_limit_fail":
-                            return MockGetResponse(get_computers(), 429)
+                            return MockGetResponse(get_computers(), 429, url)
                         elif kwargs["params"]["hostname"] == "test_rate_limit_good":
                             if self.rate_limit_count < 3:
                                 self.rate_limit_count += 1
-                                return MockGetResponse(get_computers(), 429)
+                                return MockGetResponse(get_computers(), 429, url)
                             else:
                                 return MockGetResponse(get_computers(), 200)
                 else:
@@ -612,17 +614,53 @@ def mocked_session(*args, **kwargs):
 class MockGetResponse:
     """Class will be used by the mock to replace get and post requests in standalone tests"""
     def __init__(self, *args, **kwargs):
+        self.headers = {}
         self.r = Response()
-        self.r._content = args[0]
+        self.r._content = (args[0]).encode()
         self.status_code = args[1]
         self.r.status_code = args[1]
+        if len(args) == 3:
+            self.url = args[2]
+            self.headers["Retry-After"] = 2
         test=1
 
     def json(self):
         return self.r.json()
 
     def raise_for_status(self):
-        pass
+        """Raises stored :class:`HTTPError`, if one occurred."""
+
+        http_error_msg = ''
+
+        if  self.status_code == 200:
+            pass
+        elif self.status_code == 429:
+            reason = "Rate limit failure"
+            http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)
+
+        if http_error_msg:
+            raise HTTPError(http_error_msg, response=self)
+
+def mocked_rl(*args, **kwargs):
+
+    class MockRatelimit:
+        """Class will be used by the mock ratelimiter in standalone tests"""
+        def __init__(self, *arg, **kwargs):
+            pass
+
+        def save_limits(self, limit_headers):
+            pass
+
+        def get_delay(self):
+            return 0
+
+        def get_limit_update_ts(self):
+            return 0
+
+        def add_ts(self, ts):
+            pass
+
+    return MockRatelimit(*args, **kwargs)
 
 def get_mock_config():
     config_data = u"""[fn_cisco_amp4ep]
