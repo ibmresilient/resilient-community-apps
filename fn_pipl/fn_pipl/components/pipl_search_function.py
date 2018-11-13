@@ -151,7 +151,7 @@ class FunctionComponent(ResilientComponent):
 
                     # No data returned
                     else:
-                        payload.possible_persons = []
+                        payload.person_list = []
                         payload.pipl_response = "no match"
                         yield StatusMessage("No data was found in Pipl. "
                                             "Try adjusting the search settings in app.config.")
@@ -173,7 +173,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            log.error(err)
+            log.info(err)
             yield FunctionError()
 
 

@@ -1,4 +1,5 @@
 # Resilient Integration with Pipl
+
 This package contains a function that enriches your leads (name, email address, phone number, or social media username) 
 with Pipl and gets their personal, professional, demographic, and contact information.
 The response from Pipl is saved in Pipl person datatable.
@@ -92,24 +93,31 @@ pipl_max_no_possible_per_matches=10
 | Example: Create an Artifact from Pipl data | `Data Table` | `Create Artifact from Pipl Data` |
 
 Example: Pipl search function rule only works on certain types of artifacts:
+
 ![screenshot](./screenshots/pipl_rule.png)
 
 When clicking on Example: Create an Artifact from Pipl data rule user is prompt for an artifact type he or she 
 wishes to create:
+
 ![screenshot](./screenshots/activity_field.png)
 
-If users wish to use custom artifact types they will need to edit the activity filed on Example: Create an Artifact 
-from Pipl data rule:
+If users wish to use custom artifact types they will need to edit the activity filed on "Example: Create an Artifact 
+from Pipl data" rule:
+
 ![screenshot](./screenshots/activity_field_rule.png)
 
-## Rule for Example: Pipl search workflow
+## Function Call
+
 ![screenshot](./screenshots/pipl_function_rule.png)
 
 ## Function Results
-A note is created with raw json:
+
+A note is created with JSON output:
+
 ![screenshot](./screenshots/results_pipl_note.png)
 
 A row is also created in Pipl person datatable:
+
 ![screenshot](./screenshots/results_pipl.png)
 
 To display Pipl person datatable, users need to manually add it to a new or existing layout.
@@ -117,13 +125,18 @@ To display Pipl person datatable, users need to manually add it to a new or exis
 2. Drag the “Pipl person datatable” datatable to your Incident tab.
 3. Click Save.
 
-## Rule for Create Artifact from Pipl Data Script
+## Create Artifact from Pipl Data
+
+User can invoke the Script on the datatable:
+
 ![screenshot](./screenshots/script_rule.png)
 
-## Script Result
+The result is a new artifact:
+
 ![screenshot](./screenshots/script_result.png)
 
-## Create Artifact from Pipl Data Script
+Script:
+
 ![screenshot](./screenshots/artifact_script.png)
 
 ## Example: Pipl search workflow Pre-Process Script
