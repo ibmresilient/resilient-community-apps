@@ -56,7 +56,7 @@ class WhiteListElement(object):
   """ A class that represents a domain, IP address range or network segment that has been verified as not being suspicious. """
 
   # A text representation of the element
-  asString = ""
+  asString = None
 
   def __init__(self, elementAsString):
     """ The constructor that takes one parameter - the textual representation of the element. """
@@ -81,10 +81,10 @@ class IPAddress:
   """ A class for IP addresses, both IPv4 and IPv6. """
 
   # The IP address as a String, as originally presented to the constructor
-  addressAsString=""
+  addressAsString = None
 
   # The IP Address as a binary representation
-  addressAsBinary=0
+  addressAsBinary = None
 
   def __init__(self, newAddressAsString):
     """ The constructor, which takes one parameter - the string representation to be used to create the addressAsBinary. """
@@ -136,7 +136,7 @@ class CIDR(WhiteListElement):
     """ An IP address matches the CIDR if both of them have the same binary value when both are shifted right by the
     CIDR subnet mask suffix.
     """
-    log.debug("Going to filter IPAddress {} against {}".format(anIPAddress, self))
+    log.debug("Going to filter IPAddress {0} against {1}".format(anIPAddress, self))
     return (anIPAddress.addressAsBinary >> (self.width - self.cidrSuffix) == self.addressAsBinary >> (self.width - self.cidrSuffix))
 
 
@@ -147,10 +147,10 @@ class IPRange(WhiteListElement):
   
   def __init__(self, stringRepresentation):
     """ IPRange constructor that takes two parameters.
-    Parameter 'lowestAsText' - the lowest IP address in the range.
-    Parameter 'highestAsText' - the highest IP address in the range.
+    Parameter "lowestAsText" - the lowest IP address in the range.
+    Parameter "highestAsText" - the highest IP address in the range.
     """
-    lowestAsText, highestAsText = stringRepresentation.split('-')
+    lowestAsText, highestAsText = stringRepresentation.split("-")
     super(IPRange, self).__init__(stringRepresentation)    
     self.lowest = IPAddress(lowestAsText)
     self.highest = IPAddress(highestAsText)
@@ -173,7 +173,7 @@ class Domain(WhiteListElement):
     """ Constructor for the Domain class. This takes one parameter - the domain pattern as a String. """
     # Save the string representation in the superclass
     super(Domain, self).__init__(stringRepresentation)    
-    self.processedRegEx = "://" + stringRepresentation.replace('.','\.').replace('*', ".*") + ".*"
+    self.processedRegEx = "://{0}.*".format(stringRepresentation.replace(".","\.").replace("*", ".*"))
 
   def test(self, urlString):
     """ A method that returns true if the value passed in urlString matches the regex in self.processedRegEx. """
@@ -196,44 +196,44 @@ class EmailProcessor(object):
 
   # Standard Whitelist for IP addresses
   ipV4WhiteList = [
-    CIDR('192.168.0.0/16'),               #   Class B private network local communication (RFC 1918)
-    CIDR('198.18.0.0/15'),                #  Testing of inter-network communications between subnets (RFC 2544)
-    IPRange('239.0.0.0-239.255.255.255'), #   Administrative Multicast
-    CIDR('169.254.0.0/16'),
-    CIDR('224.0.0.0/4'),
-    CIDR('192.88.99.0/24'),               #   6to4 anycast relays (RFC 3068)
-    CIDR('0.0.0.0/8'),                    #   Broadcast message (RFC 1700)
-    CIDR('192.0.2.0/24'),                 #   TEST-NET examples and documentation (RFC 5737)
-    CIDR('240.0.0.0/4'),                  #   Reserved for  multicast assignments (RFC 5771)
-    CIDR('198.51.100.0/24'),              #   TEST-NET-2 examples and documentation (RFC 5737)
-    CIDR('203.0.113.0/24'),               #   TEST-NET-3 examples and documentation (RFC 5737)
-    CIDR('233.252.0.0/24'),               #   Multicast test network
-    IPRange('234.0.0.0-238.255.255.255'),
-    IPRange('225.0.0.0-231.255.255.255'),
-    CIDR('127.0.0.1')
+    CIDR("192.168.0.0/16"),               #   Class B private network local communication (RFC 1918)
+    CIDR("198.18.0.0/15"),                #  Testing of inter-network communications between subnets (RFC 2544)
+    IPRange("239.0.0.0-239.255.255.255"), #   Administrative Multicast
+    CIDR("169.254.0.0/16"),
+    CIDR("224.0.0.0/4"),
+    CIDR("192.88.99.0/24"),               #   6to4 anycast relays (RFC 3068)
+    CIDR("0.0.0.0/8"),                    #   Broadcast message (RFC 1700)
+    CIDR("192.0.2.0/24"),                 #   TEST-NET examples and documentation (RFC 5737)
+    CIDR("240.0.0.0/4"),                  #   Reserved for  multicast assignments (RFC 5771)
+    CIDR("198.51.100.0/24"),              #   TEST-NET-2 examples and documentation (RFC 5737)
+    CIDR("203.0.113.0/24"),               #   TEST-NET-3 examples and documentation (RFC 5737)
+    CIDR("233.252.0.0/24"),               #   Multicast test network
+    IPRange("234.0.0.0-238.255.255.255"),
+    IPRange("225.0.0.0-231.255.255.255"),
+    CIDR("127.0.0.1")
   ]
 
   ipV6WhiteList = [
-    CIDR('fc00::/7'),                     #   Unique Local Addresses (ULA)
-    CIDR('fec0::/10'),                    #   Site Local Addresses (deprecated - RFC 3879)
-    CIDR('fe80::/10'),
-    CIDR('ff00::/8'),
-    CIDR('ff00::/12'),
-    CIDR('::/8'),
-    CIDR('0100::/8'),
-    CIDR('0200::/7'),
-    CIDR('0400::/6'),
-    CIDR('0800::/5'),
-    CIDR('1000::/4'),
-    CIDR('4000::/3'),
-    CIDR('6000::/3'),
-    CIDR('8000::/3'),
-    CIDR('A000::/3'),
-    CIDR('C000::/3'),
-    CIDR('E000::/4'),
-    CIDR('F000::/5'),
-    CIDR('F800::/6'),
-    CIDR('FE00::/9')    
+    CIDR("fc00::/7"),                     #   Unique Local Addresses (ULA)
+    CIDR("fec0::/10"),                    #   Site Local Addresses (deprecated - RFC 3879)
+    CIDR("fe80::/10"),
+    CIDR("ff00::/8"),
+    CIDR("ff00::/12"),
+    CIDR("::/8"),
+    CIDR("0100::/8"),
+    CIDR("0200::/7"),
+    CIDR("0400::/6"),
+    CIDR("0800::/5"),
+    CIDR("1000::/4"),
+    CIDR("4000::/3"),
+    CIDR("6000::/3"),
+    CIDR("8000::/3"),
+    CIDR("A000::/3"),
+    CIDR("C000::/3"),
+    CIDR("E000::/4"),
+    CIDR("F000::/5"),
+    CIDR("F800::/6"),
+    CIDR("FE00::/9")    
   ]
 
   # Customer-specific IP address whitelists
@@ -259,7 +259,7 @@ class EmailProcessor(object):
 
   def addUniqueArtifact(self, theArtifact, artifactType, description):
     """This method adds a new unique artifact to the incident. Previously added artifacts are added to the 
-    'addedArtifacts' set. If the new artifact as already been added to the list then it is not added to the 
+    "addedArtifacts" set. If the new artifact as already been added to the list then it is not added to the 
     incident a second time.
     Parameter theArtifact - the value of the artifact to create
     Parameter artifactType - the type of the artifact
@@ -267,7 +267,6 @@ class EmailProcessor(object):
     No return value.
     """
     if (theArtifact, artifactType) in self.addedArtifacts:
-      pass
       log.debug(u"Skipping previously added artifact {0} of type {1}, description {2}".format(theArtifact, artifactType, description))
     else:
       log.info(u"Adding artifact {0} of type {1}, description {2}".format(theArtifact, artifactType, description))
@@ -277,21 +276,21 @@ class EmailProcessor(object):
   def addRecipient(self, recipient):
     """A method to add the email address of the recipient of the email message to the incident as an artifact.
     If the recipient has a name as well as an address, the name is added as part of the artifact.
-    Parameter 'recipient' - an object with a String 'address' and 'name' attribute.
+    Parameter "recipient" - an object with a String "address" and "name" attribute.
     No return value.
     """
     fullData = recipient.address
     if recipient.name:
-      fullData = recipient.name + " <" + recipient.address + ">"
-    log.debug("Adding recipient " + fullData)
+      fullData = "{0} <{1}>".format(recipient.name, recipient.address)
+    log.debug("Adding recipient {0}".format(fullData))
     self.addUniqueArtifact(fullData, "Email Recipient", "Suspicious email recipient")        
 
 
   def printList(self, name, list):
     """A convenience method to log the contents of a list. The method will log each element in a list, along with
     its name and ordinal in the list.
-    Parameter 'name' - the name of the elements in the list e.g. "IP Address".
-    Parameter 'list' - the list to iterate through.
+    Parameter "name" - the name of the elements in the list e.g. "IP Address".
+    Parameter "list" - the list to iterate through.
     No return value.
     """
     for num, value in enumerate(list):
@@ -302,8 +301,8 @@ class EmailProcessor(object):
     """A method to return a regex pattern that includes a full URL including scheme, domain, path, hash and 
     query string. It starts the match from the scheme name with optional "s", followed by "://" and continues until
     it finds a character that is not permitted in a URL. Because of the expectation that potentially harmful URLs
-    are being modified for safety, the URL-invalid characters '[' and ']' will not terminate the match.
-    Parameter 'scheme' - the scheme (protocol) of the URL, defaults to "http".
+    are being modified for safety, the URL-invalid characters "[" and "]" will not terminate the match.
+    Parameter "scheme" - the scheme (protocol) of the URL, defaults to "http".
     Returns the requested pattern as a string.
     """
     return scheme + "s?://[^^|~`\\s<>\"'{}]*"
@@ -313,7 +312,7 @@ class EmailProcessor(object):
     """Method to fix a list of bowdlerized URLs. Many systems attempts to make potentially dangerous URLs into
     unopenable but human-readible strings. Resilient will reject URL artifacts that do not conform to spec.
     In this case we are converting "www[.]dangerous[.]nasty" to "www.dangerous.nasty".
-    Parameter 'list' - the list of URLs to fix.
+    Parameter "list" - the list of URLs to fix.
     Returns a new list containing fixed versions of the original list.
     """
     return re.sub(r"\[\.\]",".",theURL)
@@ -321,7 +320,7 @@ class EmailProcessor(object):
   @staticmethod
   def makeIPv4Pattern():
     """A method to return a pattern that matches valid IPv4 addresses.
-    Returns a string containing a pattern that matches 4 instances of 1-3 decimal digits, separated by '.'.
+    Returns a string containing a pattern that matches 4 instances of 1-3 decimal digits, separated by ".".
     """
     return "(?:[\d]{1,3}\.){3}[\d]{1,3}"
 
@@ -331,7 +330,7 @@ class EmailProcessor(object):
     from makeIPv4Pattern(). 
     First each address is split into its component octets. If the maximum int value of an octet in an address is
     less than 256 then the address is valid. The return value is a set, to avoid unnecessary duplication.
-    Parameter 'addressList' - the list of addresses to filter.
+    Parameter "addressList" - the list of addresses to filter.
     Returns a new set of valid addresses.
     """
     octets = anAddress.split(".")
@@ -360,19 +359,19 @@ class EmailProcessor(object):
     """A method to filter invalid IP addresses from the addressList parameter. The list is presumed to derive
     from matching text based on the output of makeIPv6Pattern() or makeIPv4Pattern().
     If the method discovers that the address is encapsulated IPv4 then the method will return the result from calling
-    cleanIPv4() on the IPv4 section. If the address is IPv6 the method will reject strings with more than 7 ':"s or
-    more than one instance of '::'. If there is no '::" then there must be 7 ':'s.
+    cleanIPv4() on the IPv4 section. If the address is IPv6 the method will reject strings with more than 7 ":"s or
+    more than one instance of "::". If there is no "::" then there must be 7 ":"s.
     """
-    log.debug("Going to clean IP address " + anAddress)
+    log.debug("Going to clean IP address {0}".format(anAddress))
     hextets = anAddress.split(":")
     # It might be a V4 IP address in a V6 envelope
     if "." in hextets[-1]:
       return EmailProcessor.cleanIPv4(hextets[-1])
     # At most 7 ":"
-    if anAddress.count(':') < 8:
+    if anAddress.count(":") < 8:
       # At most one instance of "::"
-      if anAddress.count('::') < 2:
-        if anAddress.count('::') == 1 or anAddress.count(':') == 7:
+      if anAddress.count("::") < 2:
+        if anAddress.count("::") == 1 or anAddress.count(":") == 7:
             return anAddress
     return None
 
@@ -381,7 +380,7 @@ class EmailProcessor(object):
   def makeHexPattern(length):
     """A method that returns a regex pattern that matches a case-insensitive hexidecimal number of exactly a specified
     length.
-    Parameter 'length' - the length of the pattern in digits/characters/nibbles
+    Parameter "length" - the length of the pattern in digits/characters/nibbles
     Returns the corresponding pattern.
     """
     return "[^0-9a-zA-Z]([0-9a-fA-F]{" + str(length) + "})[^0-9a-zA-Z]"
@@ -391,10 +390,10 @@ class EmailProcessor(object):
     """A method to process a category of artifact, based on a regular expression. Each match of the regex in the
     bodyText is added as an artifact of the same type and description. The optional list modifier function, if present,
     is run against the list of matches before the artifact addition takes place.
-    Parameter 'regex' - the regular expression to use to pick out the text to interpret as an artifact
-    Parameter 'artifactType' - the type of the artifact
-    Parameter 'description' - the description of the artifact
-    Parameter 'optionalListModifierFn' - a function to run across the list of matches to filter inappropriate values
+    Parameter "regex" - the regular expression to use to pick out the text to interpret as an artifact
+    Parameter "artifactType" - the type of the artifact
+    Parameter "description" - the description of the artifact
+    Parameter "optionalListModifierFn" - a function to run across the list of matches to filter inappropriate values
     No return value.
     """
     dataList = set(re.findall(regex, self.bodyText))
@@ -404,20 +403,20 @@ class EmailProcessor(object):
           dataList = map(aFunction, dataList)
           dataList = [x for x in dataList if x is not None]
 
-      self.printList("Found " + artifactType + " (" + description + ")", dataList)
+      self.printList("Found {0} ( {1} )".format(artifactType,description), dataList)
       map(lambda theArtifact: self.addUniqueArtifact(theArtifact, artifactType, description), dataList)
     else:
-      log.debug("Could not find artifact " + artifactType + " for regex " + regex)
+      log.debug("Could not find artifact {0} for regex {1}".format(artifactType,regex))
 
 
   def checkIsItemNotOnWhiteList(self, anItem, whiteList):
     """ A method that checks if an IP Address should be removed from the artifact list because if matches a whitelist element.
-    Parameter 'anItem' - the item in question.
+    Parameter "anItem" - the item in question.
     Return value: True if the item should be kept, false if it should be removed.
     """
     for whiteListEntry in whiteList:
       if whiteListEntry.test(anItem):
-        log.info("Filtering out IP Address {} because it matched with whitelist entry {}".format(anItem, whiteListEntry))
+        log.info("Filtering out IP Address {0} because it matched with whitelist entry {1}".format(anItem, whiteListEntry))
         return None
     return anItem
 
@@ -425,13 +424,13 @@ class EmailProcessor(object):
   def checkIPWhiteList(self, anAddress):
     """ A method to check a list of IP Addresses aginst the whitelist. """
     whiteList = self.ipV4WhiteList if "." in anAddress.addressAsString else self.ipV6WhiteList
-    log.debug("Going to filter {} against whitelist ".format(anAddress, whiteList))
+    log.debug("Going to filter {0} against whitelist ".format(anAddress, whiteList))
     return self.checkIsItemNotOnWhiteList(anAddress, whiteList)
 
 
   def checkDomainWhiteList(self, aURL):
     """ A method to check a list of URLs aginst a whitelist. """
-    log.debug("Going to filter {} against whitelist ".format(aURL, self.domainWhiteList))
+    log.debug("Going to filter {0} against whitelist ".format(aURL, self.domainWhiteList))
     return self.checkIsItemNotOnWhiteList(aURL,self.domainWhiteList)
 
 
@@ -452,7 +451,7 @@ class EmailProcessor(object):
 
   def addBasicInfoToIncident(self):
     """A method to perform basic artifact extraction on the email message.
-    The artifacts concerned are the 'Email Sender', 'Email Sender Name', and the subject.
+    The artifacts concerned are the "Email Sender", "Email Sender Name", and the subject.
     No return value.
     """ 
     log.debug("Adding sender {0} {1}".format(emailmessage.from.address, emailmessage.from.name))
@@ -460,20 +459,20 @@ class EmailProcessor(object):
       incident.reporter = mailmessage.from.address
     else:
       incident.reporter = "{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
-    self.addUniqueArtifact(u'{}'.format(emailmessage.subject), "Email Subject", "Suspicious email subject")
+    self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
 
 ###
 # Mainline starts here
 ###
 
 # Create an incident with a title based on the email subject, owned by user admin@co3sys.com
-newIncidentTitle = u"Incident generated from email \"{}\" via mailbox {}".format(emailmessage.subject, emailmessage.inbound_mailbox)
+newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
 emailmessage.createAssociatedIncident(newIncidentTitle, "admin@co3sys.com")
 
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor(emailmessage.body.content)
 
-# Add the 'Email Sender', 'Email Sender Name', and the subject to the incident as artifacts.
+# Add the "Email Sender", "Email Sender Name", and the subject to the incident as artifacts.
 processor.addBasicInfoToIncident()
 
 # Capture any URLs present in the email body text and add them as artifacts
