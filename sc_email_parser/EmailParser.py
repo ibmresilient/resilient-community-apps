@@ -481,9 +481,12 @@ class EmailProcessor(object):
 # Mainline starts here
 ###
 
+# The new incident owner
+newIncidentOwner = "admin@co3sys.com"
+
 # Create an incident with a title based on the email subject, owned by user admin@co3sys.com
 newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
-emailmessage.createAssociatedIncident(newIncidentTitle, "admin@co3sys.com")
+emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
 
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor(emailmessage.body.content)
