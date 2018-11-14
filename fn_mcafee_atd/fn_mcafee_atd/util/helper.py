@@ -200,11 +200,7 @@ def check_job_status(g, jobId):
         submit_json = submission_status.json()
         if submit_json["status"] == -1:
             raise ValueError
-        elif submit_json["status"] == 0:
-            return False
-        elif submit_json["status"] == 2:
-            return False
-        elif submit_json["status"] == 3:
+        elif submit_json["status"] in [0, 2, 3]:
             return False
         elif submit_json["status"] == 5:
             return True
