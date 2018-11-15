@@ -1,6 +1,8 @@
 //Use to convert JavaScript JSON Object to JSON String and back
 var JSON_PARSER = new global.JSON();
 
+var RES_DATATABLE_NAME = "sn_external_ticket_status";
+
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){
 	return gs.getProperty("x_261673_resilient.ResilientUserPassword");
@@ -19,7 +21,7 @@ function getMidServer(){
 		while(gr.next()) {
 			if(gr.agent.status == "Up") {
 				return gr.agent.name;
-		   }
+			 }
 		}
 	}
 	catch (e){
@@ -146,7 +148,7 @@ var ResilientAPI = Class.create();
 ResilientAPI.prototype = {
 	type: 'ResilientAPI',
 	
-    initialize: function() {
+		initialize: function() {
 		
 		var hostName, orgName, userEmail, userPassword = null;
 		
@@ -176,7 +178,7 @@ ResilientAPI.prototype = {
 		this.orgId = null; 
 		
 		this.connect();
-    },
+		},
 	
 	connect: function(){
 		
@@ -281,6 +283,61 @@ ResilientAPI.prototype = {
 		var endpoint = "/orgs/" + this.orgId + "/incidents";
 		var headers = {"handle_format": "names"};
 		return this.request(method, endpoint, data, headers);
+	},
+	
+	getIncident: function(incidentId){
+		var method = "get";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId;
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, null, headers);
+	},
+	
+	closeIncident: function(incidentId, data){
+		var method = "patch";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId;
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, data, headers);
+	},
+	
+	getField: function(fieldAPIName, type, isCustomField){
+		fieldAPIName = (isCustomField) ? "properties."+fieldAPIName : fieldAPIName;
+		var method = "get";
+		var endpoint = "/orgs/" + this.orgId + "/types/" + type + "/fields/" + fieldAPIName;
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, null, headers);
+	},
+	
+	getDatatable: function(incidentId){
+		var method = "get";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME;
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, null, headers);
+	},
+	
+	udpateDatatableRow: function(incidentId, rowId, formattedCells){
+		var method = "put";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME + "/row_data/" + rowId;
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, formattedCells, headers);
+	},
+	
+	addNote: function(incidentId, taskId, noteText){
+		var endpoint = null;
+		if(taskId){
+			endpoint = "/orgs/" + this.orgId + "/tasks/" + taskId + "/comments";
+		}
+		else{
+			endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/comments";
+		}
+
+		var data = {
+			"text": {
+				"format": "text",
+				"content": noteText
+			}
+		};
+		var method = "post";
+		return this.request(method, endpoint, data);
 	},
 	
 	generateRESid: function(incident_id, task_id){

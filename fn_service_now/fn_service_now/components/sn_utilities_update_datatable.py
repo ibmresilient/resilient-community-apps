@@ -12,10 +12,7 @@ class FunctionPayload:
   def __init__(self, inputs):
     self.success = True
     self.inputs = {}
-    self.action = None #'add'/'update'/None
     self.res_id = None
-    self.res_link = None
-    self.sn_link = None
     self.row_id = None
 
     for input in inputs:
@@ -54,9 +51,8 @@ class FunctionComponent(ResilientComponent):
             # Get the function inputs:
             inputs = {
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
-              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
-              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id"), # text (required)
-              "incident_status": res_helper.get_function_input(kwargs, "incident_status"), # text (required)
+              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number (optional)
+              "sn_resilient_status": res_helper.get_function_input(kwargs, "sn_resilient_status"), # text (required)
             }
 
             # Create payload dict with inputs
@@ -73,8 +69,11 @@ class FunctionComponent(ResilientComponent):
             # Get the datatable data and rows
             res_datatable.get_data()
             
-            # Search for a row that contains the same sn_ref_id
-            row_found = res_datatable.get_row("sn_ref_id", payload.inputs["sn_ref_id"])
+            # Generate the res_id
+            payload.res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
+
+            # Search for a row that contains the res_id
+            row_found = res_datatable.get_row("res_id", payload.res_id)
 
             # Get current time (*1000 as API does not accept int)
             now = int(time.time()*1000)
@@ -82,39 +81,31 @@ class FunctionComponent(ResilientComponent):
             if row_found:
               yield StatusMessage("Row found. Updating Datatable")
 
+              resilient_status = None
+
+              # A=Active Incident, O=Open Task
+              if payload.inputs["sn_resilient_status"] == "A" or payload.inputs["sn_resilient_status"] == "O":
+                resilient_status = res_helper.get_status_rich_text("Active", "green")
+
+              # C=Closed Incident/Task
+              elif payload.inputs["sn_resilient_status"] == "C":
+                resilient_status = res_helper.get_status_rich_text("Closed", "red")
+
+              else:
+                raise ValueError("{0} is not a handled status option".format(payload.inputs["sn_resilient_status"]))
+
               cells_to_update = {
                 "time": now,
-                "status": res_helper.get_status_rich_text(payload.inputs["incident_status"]),
-                "action": "Status Updated"
+                "resilient_status": resilient_status
               }
 
               # Update the row
               update_row_response = res_datatable.update_row(row_found, cells_to_update)
               payload.row_id = update_row_response["id"]
-            
+
             else:
-              yield StatusMessage("No row found. Add row to Datatable")
-
-              # Generate the res_id
-              payload.res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
-
-              # Generate the res_link and sn_link
-              payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
-              payload.sn_link = res_helper.generate_sn_link("number={0}".format(payload.inputs["sn_ref_id"]))
-
-              # Specify the action
-              payload.action = "Task Created" if payload.inputs["task_id"] else "Incident Created"
-
-              # Add the row
-              add_row_response = res_datatable.add_row(
-                  now,
-                  payload.res_id,
-                  payload.inputs["sn_ref_id"],
-                  res_helper.get_status_rich_text(payload.inputs["incident_status"]),
-                  payload.action,
-                  """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_link)
-              )
-              payload.row_id = add_row_response["id"]
+              yield StatusMessage("No related ServiceNow record. Not changing Datatable state")
+              payload.success = False
 
             results = payload.asDict()
 

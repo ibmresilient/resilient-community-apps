@@ -6,6 +6,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
 import json
+import time
 
 class FunctionPayload:
   """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -67,9 +68,6 @@ class FunctionComponent(ResilientComponent):
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
             datatable.get_data()
 
-            # Generate res_id using incident and task id
-            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
-
             # Get sn_ref_id from input
             sn_ref_id = payload.inputs["sn_ref_id"]
 
@@ -101,10 +99,6 @@ class FunctionComponent(ResilientComponent):
                 payload.success = False
                 raise ValueError("This incident has not been created in ServiceNow yet")
 
-            else:
-              pass
-              # sn_ref_id is already defined, assuming from activity field
-
             if sn_ref_id is not None:
               # Generate the request_data
               request_data = {
@@ -115,12 +109,32 @@ class FunctionComponent(ResilientComponent):
                 "sn_record_state": payload.inputs["sn_record_state"]
               }
 
-              yield StatusMessage("Closing in ServiceNow {0}".format(sn_ref_id))
-            
-              # Call POST and get response
-              close_in_sn_response = res_helper.sn_POST("/close_record", data=json.dumps(request_data))
-              payload.sn_ref_id = sn_ref_id
-          
+              try:
+                yield StatusMessage("Closing in ServiceNow {0}".format(sn_ref_id))
+                close_in_sn_response = res_helper.sn_POST("/close_record", data=json.dumps(request_data))
+                payload.sn_ref_id = sn_ref_id
+              
+              except Exception as err:
+                payload.success = False
+                raise ValueError("Failed to close in ServiceNow: {0}".format(err))
+              
+              try:
+                yield StatusMessage("Updating ServiceNow Status to {0}".format(close_in_sn_response["sn_state"]))
+
+                row_id_to_update = datatable.get_row("sn_ref_id", sn_ref_id)
+
+                cells_to_update = {
+                  "time": int(time.time()*1000),
+                  "servicenow_status": res_helper.get_status_rich_text(close_in_sn_response["sn_state"], "red")
+                  }
+                
+                # Update the row
+                datatable.update_row(row_id_to_update, cells_to_update)
+              
+              except Exception as err:
+                payload.success = False
+                raise ValueError("Failed to update ServiceNow Status in Datatable: {0}".format(err))
+
             else:
               raise ValueError("No sn_ref_id defined")
 

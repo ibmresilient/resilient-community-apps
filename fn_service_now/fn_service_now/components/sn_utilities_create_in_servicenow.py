@@ -169,7 +169,7 @@ class FunctionComponent(ResilientComponent):
                   payload.res_id,
                   payload.sn_ref_id,
                   res_helper.get_status_rich_text("Active"),
-                  payload.sn_action,
+                  res_helper.get_status_rich_text("Sent to ServiceNow"),
                   """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link)
                 )
                 payload.row_id = add_row_response["id"]

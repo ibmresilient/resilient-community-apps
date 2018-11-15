@@ -103,21 +103,19 @@ class ResilientHelper:
     uri = "{0}/nav_to.do?uri={1}.do?sysparm_query={2}".format(self.SN_HOST, sn_table_name, sn_query)
     return uri
 
-  def get_status_rich_text(self, status):
-    """Function that returns a richtext version of status: A/Active = Green, C/Closed = Red"""
-    color = None
-
-    status = status.lower()
-
-    if status == "a" or status == "active":
-      status = "Active"
-      color = "#10b201" #Green
+  def get_status_rich_text(self, text, color="green"):
+    """Function that returns a richtext version of status_in_servicenow"""
     
-    elif status == "c" or status == "closed":
-      status = "Closed"
-      color = "#d61c04" #Red
-    
-    return """<div style="color:{0}">{1}</div>""".format(color, status)
+    colors = {
+      "green": "#00b33c",
+      "orange": "#ff9900",
+      "yellow": "#e6e600",
+      "red": "#e60000"
+    }
+
+    color = colors.get(color)
+
+    return """<div style="color:{0}">{1}</div>""".format(color, text)
 
   def sn_POST(self, url, data, auth=None, headers=None):
     """Function to handle POSTing to ServiceNow. If successful, returns the response as a Dictionary"""
@@ -306,7 +304,7 @@ class ExternalTicketStatusDatatable():
     
     return ids_found
 
-  def add_row(self, time, res_id, sn_ref_id, status, action, link):
+  def add_row(self, time, res_id, sn_ref_id, resilient_status, servicenow_status, link):
     # Generate uri to POST datatable row
     uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
     
@@ -314,8 +312,8 @@ class ExternalTicketStatusDatatable():
       ("time", time),
       ("res_id", res_id),
       ("sn_ref_id", sn_ref_id),
-      ("status", status),
-      ("action", action),
+      ("resilient_status", resilient_status),
+      ("servicenow_status", servicenow_status),
       ("link", link)
     ]
 
@@ -345,8 +343,8 @@ class ExternalTicketStatusDatatable():
       ("time", get_value("time")),
       ("res_id", get_value("res_id")),
       ("sn_ref_id", get_value("sn_ref_id")),
-      ("status", get_value("status")),
-      ("action", get_value("action")),
+      ("resilient_status", get_value("resilient_status")),
+      ("servicenow_status", get_value("servicenow_status")),
       ("link", get_value("link"))
     ]
 
