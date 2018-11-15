@@ -394,7 +394,7 @@ class EmailProcessor(object):
 
   @staticmethod
   def makeHexPattern(length):
-    """A method that returns a regex pattern that matches a case-insensitive hexidecimal number of exactly a specified
+    """A method that returns a regex pattern that matches a case-insensitive hexadecimal number of exactly a specified
     length.
     Parameter "length" - the length of the pattern in digits/characters/nibbles
     Returns the corresponding pattern.
@@ -503,11 +503,11 @@ processor.processArtifactCategory(processor.makeIPv4Pattern(), "IP Address", "Su
 # Capture any IPv6 addresses present in the email body text and add them as artifacts
 processor.processArtifactCategory(processor.makeIPv6Pattern(), "IP Address", "Suspicious IP Address", processor.processIPFully)
 
-# Capture 32-nibble hexidecimal substrings in the email body text and add them as MD5 hash artifacts
+# Capture 32-nibble hexadecimal substrings in the email body text and add them as MD5 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(32), "Malware MD5 Hash", "MD5 hash of potential malware file")
 
-# Capture 40-nibble hexidecimal substrings in the email body text and add them as SHA-1 hash artifacts
+# Capture 40-nibble hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(40), "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
 
-# Capture 64-nibble hexidecimal substrings in the email body text and add them as SHA-256 hash artifacts
+# Capture 64-nibble hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(64), "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
