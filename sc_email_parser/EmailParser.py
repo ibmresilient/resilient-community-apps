@@ -472,7 +472,7 @@ class EmailProcessor(object):
     """ 
     log.debug("Adding sender {0} {1}".format(emailmessage.from.address, emailmessage.from.name))
     if emailmessage.from.address is None:
-      incident.reporter = mailmessage.from.address
+      incident.reporter = emailmessage.from.address
     else:
       incident.reporter = "{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
     self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
