@@ -48,10 +48,12 @@ ResilientHelper.prototype = {
 			}
 			
 			var inc = this.res_api.createIncident(incData);
+			var res_ref_id = this.res_api.generateRESid(inc.id);
+			var res_link = this.res_api.generateRESlink(inc.id);
 
-			record.setValue("x_261673_resilient_reference_id", this.res_api.generateRESid(inc.id));
+			record.setValue("x_261673_resilient_reference_id", res_ref_id);
 			record.setValue("x_261673_resilient_type", "Incident");
-			record.setValue("x_261673_resilient_reference_link", this.res_api.generateRESlink(inc.id));
+			record.setValue("x_261673_resilient_reference_link", res_link);
 			
 			record.work_notes = "Sent to IBM Resilient";
 			
@@ -59,6 +61,8 @@ ResilientHelper.prototype = {
 			//TODO handle optional_fields from workflow
 
 			record.update();
+
+			this.addNewRowToRESDatatable(res_ref_id, recordNumber, res_link, record.getLink());
 		}
 		catch(e){
 			var errMsg = "Failed to Create the Incident in IBM Resilient";
@@ -260,6 +264,54 @@ ResilientHelper.prototype = {
 
 		catch(e){
 			var errMsg = "Failed to send StateUpdated note to IBM Resilient";
+			gs.error(errMsg);
+			throw e;
+		}
+	},
+	
+	addNewRowToRESDatatable: function(res_ref_id, sn_ref_id, res_link, sn_link){
+		var colors = {
+			"green": "#00b33c",
+			"orange": "#ff9900",
+			"yellow": "#e6e600",
+			"red": "#e60000"
+		};
+
+		try{
+				var ids = this.parseRefId(res_ref_id);
+				var gdt = new GlideDateTime();
+				var now = gdt.getNumericValue();
+
+				var instanceName = gs.getProperty('instance_name');
+				sn_link = "https://" + instanceName + ".service-now.com/" + sn_link;
+
+				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>'
+
+				var resTicketStateRichText = '<div style="color:' + colors["green"] +'">Active</div>';
+				var snTicketStateRichText = '<div style="color:' + colors["green"] +'">Sent to Resilient</div>';
+
+				var cells = [
+					["time", now],
+					["res_id", res_ref_id],
+					["sn_ref_id", sn_ref_id],
+					["resilient_status", resTicketStateRichText],
+					["servicenow_status", snTicketStateRichText],
+					["link", links]
+				];
+				
+				var formattedCells = {};
+				
+				for (var j=0; j<cells.length; j++){
+					formattedCells[cells[j][0]] = {"value": cells[j][1]};
+				}
+				formattedCells = {"cells": formattedCells};
+				
+				gs.info(JSON_PARSER.encode(formattedCells));
+
+				this.res_api.addDatatableRow(ids.incidentId, formattedCells);
+			}
+		catch(e){
+			var errMsg = "Failed to send add row in Resilient Datatable for " + res_ref_id;
 			gs.error(errMsg);
 			throw e;
 		}

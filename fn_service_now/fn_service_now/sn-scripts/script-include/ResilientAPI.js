@@ -313,6 +313,13 @@ ResilientAPI.prototype = {
 		var headers = {"handle_format": "names"};
 		return this.request(method, endpoint, null, headers);
 	},
+
+	addDatatableRow: function(incidentId, formattedCells){
+		var method = "post";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/table_data/" + RES_DATATABLE_NAME + "/row_data/";
+		var headers = {"handle_format": "names"};
+		return this.request(method, endpoint, formattedCells, headers);
+	},
 	
 	udpateDatatableRow: function(incidentId, rowId, formattedCells){
 		var method = "put";
