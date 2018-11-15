@@ -205,7 +205,7 @@ wishes to create:
 If users wish to use custom artifact types they will need to edit the activity filed on "Example: Create an Artifact 
 from Pipl data" rule:
 
-<img src="./screenshots/activity_field_rule.png" alt="screenshot" width="50%"/>
+![screenshot](./screenshots/activity_field_rule.png)
 
 ## Function Call
 
