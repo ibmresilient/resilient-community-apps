@@ -31,7 +31,7 @@ To package for distribution,
 
 The resulting .tar.gz file can be installed using
 
-    pip install fn_slack<version>.tar.gz
+    pip install fn_pipl<version>.tar.gz
 
 ## Configuration
 1. Import the package's customization data into the Resilient Platform through the command:
@@ -85,62 +85,9 @@ pipl_max_no_possible_per_matches=10
 # whether the API should return persons made up solely from data inferred by statistical analysis from your search query.
 #pipl_infer_persons=True
 ```
-
-## Example Rules
-| Rule Name | Object Type | Workflow or Script Triggered |
-| --------- | :---------: | ---------------------------- |
-| Example: Pipl search function | `Artifact` | `Example: Pipl search workflow` |
-| Example: Create an Artifact from Pipl data | `Data Table` | `Create Artifact from Pipl Data` |
-
-Example: Pipl search function rule only works on certain types of artifacts:
-
-![screenshot](./screenshots/pipl_rule.png)
-
-When clicking on Example: Create an Artifact from Pipl data rule user is prompt for an artifact type he or she 
-wishes to create:
-
-![screenshot](./screenshots/activity_field.png)
-
-If users wish to use custom artifact types they will need to edit the activity filed on "Example: Create an Artifact 
-from Pipl data" rule:
-
-![screenshot](./screenshots/activity_field_rule.png)
-
-## Function Call
-
-![screenshot](./screenshots/pipl_function_rule.png)
-
-## Function Results
-
-A note is created with JSON output:
-
-![screenshot](./screenshots/results_pipl_note.png)
-
-A row is also created in Pipl person datatable:
-
-![screenshot](./screenshots/results_pipl.png)
-
-To display Pipl person datatable, users need to manually add it to a new or existing layout.
-1. Navigate to the Customization Settings and select or create a new Incident tab in the Layouts tab.
-2. Drag the “Pipl person datatable” datatable to your Incident tab.
-3. Click Save.
-
-## Create Artifact from Pipl Data
-
-User can invoke the Script on the datatable:
-
-![screenshot](./screenshots/script_rule.png)
-
-The result is a new artifact:
-
-![screenshot](./screenshots/script_result.png)
-
-Script:
-
-![screenshot](./screenshots/artifact_script.png)
-
 ## Example: Pipl search workflow Pre-Process Script
 This example sets the inputs
+
 ```python
 # Required inputs are: the artifact_type and artifact_value
 inputs.pipl_artifact_type = artifact.type
@@ -149,6 +96,7 @@ inputs.pipl_artifact_value = artifact.value
 
 ## Example: Pipl search workflow Post-Process Script:
 This example creates a row in Pipl person datatable for certain types of Pipl data.
+
 ```python
 from java.util import Date
 
@@ -163,10 +111,7 @@ def add_row_to_pipl_datatable(db_timestamp, db_artifact_value, db_match_no, db_p
   pipl_person_data.pipl_inferred = db_inferred
 
 if results.success:
-  # Save the json result as an Note
-  noteText = """Pipl Data API response for artifact_value {} returned {}: \n{}""".format(artifact.value, results.pipl_response, results.raw_data)
-  incident.addNote(noteText)
-  
+
   # Create a datatable from pipl response
   possible_person_counter = 0
   for person in results.person_list:
@@ -233,7 +178,67 @@ if results.success:
     for url in urls:
       url_url = """<a href='{0}'>{0}</a>""".format(url.get("url", "")) if url.get("url", "") else ""
       add_row_to_pipl_datatable(now, artifact.value, possible_person_counter, "url", url_url, match, inferred)
+      
+  # Save the json result as an Note
+  raw_data = results.raw_data if results.raw_data else ""
+  counter = possible_person_counter if possible_person_counter > 0 else ""
+  noteText = u"""Pipl Data API response for artifact_value {} returned {} {}: \n{}""".format(artifact.value, counter, results.pipl_response, raw_data)
+  incident.addNote(noteText)
 ```
+
+## Example Rules
+
+| Rule Name | Object Type | Workflow or Script Triggered |
+| --------- | :---------: | ---------------------------- |
+| Example: Pipl search function | `Artifact` | `Example: Pipl search workflow` |
+| Example: Create an Artifact from Pipl data | `Data Table` | `Create Artifact from Pipl Data` |
+
+Example: Pipl search function rule only works on certain types of artifacts:
+
+![screenshot](./screenshots/pipl_rule.png)
+
+When clicking on Example: Create an Artifact from Pipl data rule user is prompt for an artifact type he or she 
+wishes to create:
+
+<img src="./screenshots/activity_field.png" alt="screenshot" width="50%"/>
+
+If users wish to use custom artifact types they will need to edit the activity filed on "Example: Create an Artifact 
+from Pipl data" rule:
+
+<img src="./screenshots/activity_field_rule.png" alt="screenshot" width="50%"/>
+
+## Function Call
+
+<img src="./screenshots/pipl_function_rule.png" alt="screenshot" width="75%"/>
+
+## Function Results
+
+A note is created with JSON output:
+
+![screenshot](./screenshots/results_pipl_note.png)
+
+A row is also created in Pipl person datatable:
+
+![screenshot](./screenshots/results_pipl.png)
+
+To display Pipl person datatable, users need to manually add it to a new or existing layout.
+1. Navigate to the Customization Settings and select or create a new Incident tab in the Layouts tab.
+2. Drag the “Pipl person datatable” datatable to your Incident tab.
+3. Click Save.
+
+## Create Artifact from Pipl Data
+
+User can invoke the Script on the datatable:
+
+![screenshot](./screenshots/script_rule.png)
+
+The result is a new artifact:
+
+<img src="./screenshots/script_result.png" alt="screenshot" width="75%"/>
+
+Script:
+
+![screenshot](./screenshots/artifact_script.png)
 
 ## Example Output:
 ```python
@@ -247,7 +252,7 @@ results = {
   {
     "@id": "e3317300-8868-4f2d-a696-b54756586cb3",
     "@match": 1.0,
-    "@search_pointer": "43bf014e0a517a1f47af759d43255fdeee25ee03da3df1028499aa7099d1428beb52dda70391b52c26bb9837bc714f3af308889aba2ca8d9deb670336f844c9c5f50b887713a1d4ea8301bc032be768e0799caee050fcf2ad8470e919fb11007b6c61f34c2da3b0d695f9da7210e2d1ed32a5a33dffe28d8e5d50e04a98bfbf5872aafdbcb40bf119bdecd05ff56997ef034665e09cb4198dd6730bf6ea6381a89dec63291aec66b3e661f7cb0d85f7cd900bbb538081d0f31d479a806b88e7a1e56b454f274b4948e7511524d6f8b909bae09ad1cf6c14afb9ec0675fca78ddf013bd2d2d35852c5fb0a44600a1a12cafc0658d40bceb48617afef71898b44d5cb075e5a932a8a9008d0c3327f40b62a69bc124f670a9734480dffe4159620627cc46ef875d63264a09a4ff05de6f0dbc72e04fe00464762904eed41f6875655543f8e2f69793130918ee1f1317437a91b51554aa2ef2fe38d330de7217f8b21a05183cf47a15fd3034711c52d7c986dcea79591e6cbcf673bb4244872bdbaaea14004e8f5daf9682b681dc03f8cd5d4c9a2a3523ef3c6bb441c308a706203fe3cb4395a2c3f914d11f86bf3d1d0f34eb9f1b34014299dcc6d1ab7fba27e1baf627b2bd48d034ae7820eb1919f59330b23b00c2d9ac7c1245fe07520a5792f49f543cb8ab887c64c6f4417f5056359302322f125c393bc93cac47ef4058066ebe4592c9e61993c9ff2c72cd1f4516ce870daeee9bbf6931cf4944804d5dcb7a668dd4257d377bcb9ca1bb3adf8633c2e18cc27c507f90ad8ff1eba8f5704b59fc4a1838e13c98ede8a00ed561187c47bda078a9942e8a371bbdbfdc9c5a869e40b1c2de0847dd16af1b5adab5f5355eb67cd1929a3620fb101333971967b5bb6812e01c2b9dfd7219f681c059bc2d9f42667f0fdf10c3a7fb8ac23ee7f85a4ee9f6709e695f91dfddfda35c06acfe4ad5981fcd67ba0126f383e2e17ca25be6d75482c2b3060978f14d9f9cf3b61d077958e87c57960d152593d77df99c15b100cfcf4bc337c0d26d61070048d7d37b2fc6b3d33797990668fde2e3bf8d5f41f9bbdd2be3f62fbfb7222f524f81704e83382735742416419020d17b2b9f8a16ab5bbc73e3eda94276588d325811b79d9461ffb869bdbe1140ce4cfc2bc4dcdffb7e26fd474abfa2eb38a36c3bc37afbefb84e7f68d8cc0a982b530ee0151e7ab2440828de00480baa9fbf6d1586522805dcab7772c5b8ef09b1817a644bcfc500b0ebdb090b39a9651e376eddb853e619eb7e803bed462af4703e0c09493ddd6167f8e1cde5dff03c41c600eb4066d6ad0d186f0c04aaa6984a3b02dc74dc389dfab0fbc76f2850c81a8772ccc8d65d06344089157d340d52d48ede80daa534b0cbaac245e4b8eea5e1733a8db4de877c14c37e7d346f67db588a7594862b09c6b05d3622995fcb3cd834fcd9a8174a91fd8fb4a537d044d47ca834bb48da41779281865d3fc1022a718e6cc096c2d4320c52472055711593d74b2efe708bb6d49c880b8f722d32a296b75451257e26bdbe897885dae33a6e7d63bd375085996e9307659f2fb6d1a1ad817b58579dcb51e5658e467ba2ca48032d9addae06b0",
+    "@search_pointer": "43bf014e0a517a1f47af759d43255fdeee2...",
     "names": [
         {
             "first": "Kal",
@@ -259,9 +264,6 @@ results = {
             "middle": "Joseph",
             "last": "Kent",
             "display": "Clark Joseph Kent"
-        },
-        {
-            "display": "The red blue blur"
         }
     ],
     "emails": [
@@ -276,18 +278,6 @@ results = {
             "@email_provider": false,
             "address": "full.email.available@business.subscription",
             "address_md5": "999e509752141a0ee42ff455529c10fc"
-        },
-        {
-            "@type": "personal",
-            "@email_provider": true,
-            "address": "full.email.available@business.subscription",
-            "address_md5": "501548362894b9a08f071b1565d8aa14"
-        },
-        {
-            "@disposable": true,
-            "@email_provider": false,
-            "address": "full.email.available@business.subscription",
-            "address_md5": "2610ee49440fe757e3cc4e46e5b40819"
         }
     ],
     "usernames": [
@@ -330,9 +320,6 @@ results = {
         },
         {
             "content": "american_indian"
-        },
-        {
-            "content": "white"
         }
     ],
     "origin_countries": [
@@ -385,12 +372,6 @@ results = {
                 "end": "2000-10-10"
             },
             "display": "Junior Reporter at The Daily Planet (1999-2000)"
-        },
-        {
-            "title": "Top Reporter",
-            "organization": "The Daily Planet",
-            "industry": "Reporting",
-            "display": "Top Reporter at The Daily Planet"
         }
     ],
     "educations": [
@@ -408,8 +389,6 @@ results = {
             "date_range": {
                 "start": "2001-09-01",
                 "end": "2005-06-01"
-            },
-            "display": "Smallville High (2001-2005)"
         }
     ],
     "relationships": [
@@ -441,53 +420,7 @@ results = {
                     "display": "Jor El"
                 }
             ]
-        },
-        {
-            "@type": "family",
-            "@subtype": "Cousin",
-            "names": [
-                {
-                    "first": "Kara",
-                    "last": "Kent",
-                    "display": "Kara Kent"
-                }
-            ]
-        },
-        {
-            "@type": "other",
-            "@subtype": "Archenemy",
-            "names": [
-                {
-                    "first": "Alexander",
-                    "middle": "Joseph",
-                    "last": "Luthor",
-                    "display": "Alexander Joseph Luthor"
-                }
-            ]
-        },
-        {
-            "@type": "work",
-            "@subtype": "Colleague",
-            "names": [
-                {
-                    "first": "Ron",
-                    "last": "Troupe",
-                    "display": "Ron Troupe"
-                }
-            ]
-        },
-        {
-            "@type": "friend",
-            "@subtype": "The real love",
-            "names": [
-                {
-                    "first": "Chloe",
-                    "middle": "Anne",
-                    "last": "Sullivan",
-                    "display": "Chloe Anne Sullivan"
-                }
-            ]
-        }
+        }   
     ],
     "user_ids": [
         {
@@ -516,11 +449,6 @@ results = {
             "@name": "Facebook",
             "@category": "personal_profiles",
             "url": "http://facebook.com/superman"
-        },
-        {
-            "@domain": "linkedin.com",
-            "@category": "professional_and_business",
-            "url": "https://www.linkedin.com/pub/superman/20/7a/365"
         }
     ]
   }],

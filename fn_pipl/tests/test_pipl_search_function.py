@@ -27,19 +27,20 @@ def mocked_requests_get(*args, **kwargs):
         """
         A mock class intended to mock the entire Response attribute for a requests.
         """
-        def __init__(self, http_status_code, raw_json, persons_count):
+        def __init__(self, http_status_code, raw_json, persons_count, error):
             self.http_status_code = http_status_code
             self.raw_json = raw_json
             self.persons_count = persons_count
+            self.error = error
 
     if kwargs.get("success") and kwargs.get("no_match"):
-        return MockResponse(200, '{}', 0)
+        return MockResponse(200, '{}', 0, None)
     elif kwargs.get("success") and not kwargs.get("definite"):
-        return MockResponse(200, '{"possible_persons": [{"@id": "id1"}, {"@id": "id2"}]}', 2)
+        return MockResponse(200, '{"possible_persons": [{"@id": "id1"}, {"@id": "id2"}]}', 2, None)
     elif kwargs.get("success") and kwargs.get("definite"):
-        return MockResponse(200, '{"person": {"@id": "id1"}}', 1)
+        return MockResponse(200, '{"person": {"@id": "id1"}}', 1, None)
     else:
-        return MockResponse(400, "Bad Request", None)
+        return MockResponse(400, None, None, "Bad Request")
 
 
 def call_pipl_search_function_function(circuits, function_params, timeout=10):
@@ -130,7 +131,7 @@ class TestPiplSearchFunction:
         # Replace the return value of our mock_session with a custom function
         mocked_api_call.return_value = mocked_requests_get(success=False)
 
-        #Fire the function with mocked functionality
+        # Fire the function with mocked functionality
         evt = SubmitTestFunction("pipl_search_function", function_params)
         circuits_app.manager.fire(evt)
         try:

@@ -88,7 +88,7 @@ class FunctionComponent(ResilientComponent):
             infer_persons = parse_bool(pipl_infer_persons) if pipl_infer_persons else None
 
             email, raw_name, username = None, None, None
-            if artifact_type == "Email Sender" or artifact_type == "Email Recipient":
+            if artifact_type in ("Email Sender", "Email Recipient"):
                 # In Pipl Data this are full email addresses. Personal and Work emails.
                 email = artifact_value
 
