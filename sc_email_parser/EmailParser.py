@@ -486,7 +486,21 @@ newIncidentOwner = "admin@co3sys.com"
 
 # Create an incident with a title based on the email subject, owned by user admin@co3sys.com
 newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
-emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
+
+# Check to see if a similar incident already exists
+# We will search for an incident which has the same name as we would give a new incident
+query_builder.equals(fields.incident.name, newIncidentTitle)
+query = query_builder.build()
+incidents = helper.findIncidents(query)
+
+if len(incidents) == 0:
+  # A similar incident does not already exist. Associate the email with a new incident.
+  log.info("Creating new incident {0}".format(newIncidentTitle))
+  emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
+else:
+   # A similar incident already exists. Associate the email with this preexisting incident.
+  log.info("Associating with existing incident {0}".format(incidents[0].id))
+  emailmessage.associateWithIncident(incidents[0])
 
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor(emailmessage.body.content)
@@ -503,11 +517,11 @@ processor.processArtifactCategory(processor.makeIPv4Pattern(), "IP Address", "Su
 # Capture any IPv6 addresses present in the email body text and add them as artifacts
 processor.processArtifactCategory(processor.makeIPv6Pattern(), "IP Address", "Suspicious IP Address", processor.processIPFully)
 
-# Capture 32-nibble hexadecimal substrings in the email body text and add them as MD5 hash artifacts
+# Capture 32-character hexadecimal substrings in the email body text and add them as MD5 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(32), "Malware MD5 Hash", "MD5 hash of potential malware file")
 
-# Capture 40-nibble hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
+# Capture 40-character hexadecimal substrings in the email body text and add them as SHA-1 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(40), "Malware SHA-1 Hash", "SHA-1 hash of potential malware file")
 
-# Capture 64-nibble hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
+# Capture 64-character hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(64), "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
