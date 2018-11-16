@@ -72,6 +72,8 @@ ResilientHelper.prototype = {
 	},
 	
 	createTask: function(record, snRecordId, incidentId, taskName, initSnNote, optionalFields){
+		var snLink = null;
+
 		try{
 			//Set required values (only name is required to create a Task using RES API)
 			var taskData = {
@@ -101,11 +103,21 @@ ResilientHelper.prototype = {
 				record.work_notes = initSnNote;
 			}
 			
-
 			record.update();
-
+			
+			//Get the link to the SN record
+			snLink = record.getLink();
+			
 			//Update the Datatable in Resilient
-			this.addNewRowToRESDatatable(res_ref_id, snRecordId, res_link, record.getLink());
+			this.addNewRowToRESDatatable(res_ref_id, snRecordId, res_link, snLink);
+			
+			// Generate the link for the RES Note
+			var instanceName = gs.getProperty("instance_name");
+			snLink = "https://" + instanceName + ".service-now.com/" + snLink;
+
+			// Create the RES Note
+			var noteText = '<br>This Task has been sent from <b>ServiceNow</b><br><b>ServiceNow ID:</b> ' +snRecordId+ '<br><b>ServiceNow Link:</b> <a href="'+snLink+'">'+snLink+'</a></div>';
+			this.res_api.addNote(incidentId, resTask.id, noteText, "html");
 		}
 		catch(e){
 			var errMsg = "Failed to Create a Task in IBM Resilient:" + taskName;
@@ -325,7 +337,7 @@ ResilientHelper.prototype = {
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
 
-				var instanceName = gs.getProperty('instance_name');
+				var instanceName = gs.getProperty("instance_name");
 				sn_link = "https://" + instanceName + ".service-now.com/" + sn_link;
 
 				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>';

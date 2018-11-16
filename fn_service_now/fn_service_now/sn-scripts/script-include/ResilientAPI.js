@@ -335,7 +335,7 @@ ResilientAPI.prototype = {
 		return this.request(method, endpoint, formattedCells, headers);
 	},
 	
-	addNote: function(incidentId, taskId, noteText){
+	addNote: function(incidentId, taskId, noteText, noteFormat){
 		var endpoint = null;
 		if(taskId){
 			endpoint = "/orgs/" + this.orgId + "/tasks/" + taskId + "/comments";
@@ -344,9 +344,13 @@ ResilientAPI.prototype = {
 			endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/comments";
 		}
 
+		if (!noteFormat){
+			noteFormat = "text";
+		}
+
 		var data = {
 			"text": {
-				"format": "text",
+				"format": noteFormat,
 				"content": noteText
 			}
 		};
