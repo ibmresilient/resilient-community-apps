@@ -2,11 +2,21 @@
 ** This package consists of a .res Resilient configuration file which contains an example email parsing script, a rule to run it automatically, and an associated incident field.
 
 ## Installation instructions
-1. Log on to the Resilient user interface using an account with &&&& permissions.
-1. Navigate 
-1. Click on 
-1. Select the .res file
-1. Select "OK"
+
+Before installing, verify that your environment meets the following prerequisites:
+•	Resilient platform is version 32 or later. 
+•	You have a Resilient account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.
+
+### Procedure
+
+1. Log on to the Resilient user interface using a suitable account.
+1. Navigate to "Administrator Settings"
+1. Select the "Organization" tab.
+1. Select the "Import" link.
+1. Select "+ Import settings".
+1. Select the .res file from the installation bundle.
+1. Select "Open".
+1. Perform configuration changes as described below.
 
 ## Result
 After installing, the Resilient system now has a new Python script called "" and a new rule called "". The rule triggers when a new email message is received by Resilient and runs the script. The script is intended to 
