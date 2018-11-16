@@ -88,8 +88,9 @@ class AmpRateLimit(dict):
         :param ts: Timestamp Unix format.
 
         """
-        REQ_TIMESTAMPS.append(ts);
-        LIMIT_INFO["lastest_request_ts"] = ts
+        with rl_lock:
+            REQ_TIMESTAMPS.append(ts);
+            LIMIT_INFO["lastest_request_ts"] = ts
 
     def get_limit_update_ts(self):
         """"

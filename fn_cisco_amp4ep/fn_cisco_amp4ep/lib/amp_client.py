@@ -80,8 +80,6 @@ class Ampclient(object):
     def suggested_delay(self):
         """Return period (in secs) function should wait before making the next api call.
 
-        :param response: Response returned from api call.
-
         """
         # Check if this is 1st time rate limiter called (by any function).
         if not self.rate_limiter.get_limit_update_ts():
@@ -145,6 +143,11 @@ class Ampclient(object):
                     retry_delay = int(r.headers.get("Retry-After"))
                     LOG.info("Retrying in %f seconds..." % (retry_delay))
                     time.sleep(retry_delay)
+                elif e.response.status_code == 409 and method == "POST":
+                    # We are probably trying to redo a successful update operation here.
+                    LOG.error("Got '409' error, possible attempt to redo a successfull update operation.")
+                    # Re-raise exception
+                    raise
                 else:
                     raise
 
