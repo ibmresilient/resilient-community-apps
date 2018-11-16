@@ -413,7 +413,7 @@ class Ampclient(object):
             if limit_max_count < max_count:
                 max_count = limit_max_count
 
-            offset = rtn["metadata"]["results"]["items_per_page"]
+            offset = items_per_page = rtn["metadata"]["results"]["items_per_page"]
             current_item_count = rtn["metadata"]["results"]["current_item_count"]
             while max_count > current_item_count:
                 if "offset" in params:
@@ -423,7 +423,7 @@ class Ampclient(object):
                 rtn["data"].extend(rtn_sub["data"])
                 rtn["metadata"] = rtn_sub["metadata"]
                 current_item_count += rtn["metadata"]["results"]["current_item_count"]
-                offset += offset
+                offset += items_per_page
 
         if results_total is not None:
             rtn["total"] = results_total
