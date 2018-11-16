@@ -71,6 +71,49 @@ ResilientHelper.prototype = {
 		}
 	},
 	
+	createTask: function(record, snRecordId, incidentId, taskName, initSnNote, optionalFields){
+		try{
+			//Set required values (only name is required to create a Task using RES API)
+			var taskData = {
+				"name": taskName,
+			};
+
+			// //If an initial note is defined, add it to taskData as a comment
+			// if(initResNote){
+			// 	taskData["notes"] = [{"text":{"format": "text", "content": initResNote}}];
+			// }
+			
+			if(optionalFields){
+				//TODO handle optional_fields from workflow
+			}
+
+			//Create the task
+			var resTask = this.res_api.createTask(incidentId, taskData);
+			
+			//Get and Set required values on SN record
+			var res_ref_id = this.res_api.generateRESid(incidentId, resTask.id);
+			var res_link = this.res_api.generateRESlink(incidentId, resTask.id);
+			record.setValue("x_261673_resilient_reference_id", res_ref_id);
+			record.setValue("x_261673_resilient_type", "Task");
+			record.setValue("x_261673_resilient_reference_link", res_link);
+			
+			if(initSnNote){
+				record.work_notes = initSnNote;
+			}
+			
+
+			record.update();
+
+			//Update the Datatable in Resilient
+			this.addNewRowToRESDatatable(res_ref_id, snRecordId, res_link, record.getLink());
+		}
+		catch(e){
+			var errMsg = "Failed to Create a Task in IBM Resilient:" + taskName;
+			gs.error(errMsg);
+			throw e;
+		}
+	},
+	
 	formatChange: function(type, field){
 
 		var returnValue = {
@@ -285,7 +328,7 @@ ResilientHelper.prototype = {
 				var instanceName = gs.getProperty('instance_name');
 				sn_link = "https://" + instanceName + ".service-now.com/" + sn_link;
 
-				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>'
+				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>';
 
 				var resTicketStateRichText = '<div style="color:' + colors["green"] +'">Active</div>';
 				var snTicketStateRichText = '<div style="color:' + colors["green"] +'">Sent to Resilient</div>';

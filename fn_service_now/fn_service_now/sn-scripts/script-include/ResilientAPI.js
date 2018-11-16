@@ -285,6 +285,13 @@ ResilientAPI.prototype = {
 		return this.request(method, endpoint, data, headers);
 	},
 	
+	createTask: function(incidentId, data){
+		var method = "post";
+		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId + "/tasks";
+		var headers = null;
+		return this.request(method, endpoint, data, headers);
+	},
+	
 	getIncident: function(incidentId){
 		var method = "get";
 		var endpoint = "/orgs/" + this.orgId + "/incidents/" + incidentId;

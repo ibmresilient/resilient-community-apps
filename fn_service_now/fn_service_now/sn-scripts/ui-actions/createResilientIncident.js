@@ -1,3 +1,11 @@
+/////////////////
+/// Condition ///
+/////////////////
+current.isValidField("x_261673_resilient_reference_id") && current.getValue("x_261673_resilient_reference_id") == null
+
+//////////////////
+///   Script   ///
+//////////////////
 (function resActionCreateIncident(){
 	//Stop redirect
 	action.setRedirectURL(current);
