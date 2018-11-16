@@ -400,7 +400,9 @@ class Ampclient(object):
             else:
                 params["limit"] = self.query_limit
         else:
-            if self.query_limit < AMP_LIMIT_DEFAULT : # Reset limit to query_limit if less than default limit.
+            if self.query_limit < AMP_LIMIT_DEFAULT or get_method.__name__ == "get_computer_trajectory":
+                # Reset limit to query_limit if less than default limit.
+                # Limit defined for "get_computer_trajectory" set to default for results calculation.
                 params["limit"] = self.query_limit
 
         if get_method.__name__ != "get_computer_trajectory":
