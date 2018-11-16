@@ -103,17 +103,24 @@ class MicrosoftSecurityGraphAlertsPolling(ResilientComponent):
     def _get_alerts(self):
         options = self.options
         ms_graph_helper = options.get("Microsoft_security_graph_helper")
+
+        # Set createDateTime start filter
+        alert_time_range_sec = options.get("alert_time_range_sec")
+        createdDateTime_filter = ""
+        if alert_time_range_sec:
+            createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
+            createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
+
         r = None
         for i in list(range(2)):
             headers = {
                 "Content-type": "application/json",
                 "Authorization": "Bearer " + ms_graph_helper.get_access_token()
             }
-            start_filter = ""
-            if options.get("alert_filter"):
-                start_filter = "?$filter="
-            r = requests.get("{}security/alerts/{}{}".format(options.get("microsoft_graph_url"), start_filter,
-                                                             options.get("alert_filter")), headers=headers)
+
+            r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
+                                                           create_filter(options.get("alert_filter"),
+                                                                         createdDateTime_filter)), headers=headers)
             # Check if need to refresh token and run again
             if ms_graph_helper.check_status_code(r):
                 break
@@ -173,6 +180,26 @@ class MicrosoftSecurityGraphAlertsPolling(ResilientComponent):
                            if r_inc["properties"].get(MSG_FIELD_NAME) == field_value]
 
         return r_incidents
+
+
+def create_filter(alert_filter, createDateTime_filter):
+    query = ""
+
+    # Add custom filter if set
+    if alert_filter:
+        query = "?${}".format(alert_filter)
+
+    # Add date filter if set
+    if len(createDateTime_filter) > 0:
+        if "?$" in query:
+            query = query + "%20and%20"
+        else:
+            query = "?$filter="
+        query = query + createDateTime_filter
+
+    log.debug(query)
+    return query
+
 
 
 # Converts string datetime to milliseconds epoch

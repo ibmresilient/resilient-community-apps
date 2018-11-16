@@ -52,8 +52,8 @@ class FunctionComponent(ResilientComponent):
                     "Authorization": "Bearer " + ms_graph_helper.get_access_token()
                 }
                 start_filter = ""
-                if options.get("alert_filter"):
-                    start_filter = "?$filter="
+                if microsoft_security_graph_alert_search_filter:
+                    start_filter = "?$"
                 r = requests.get("{}security/alerts/{}{}".format(options.get("microsoft_graph_url"), start_filter,
                                                                  microsoft_security_graph_alert_search_filter),
                                  headers=headers)

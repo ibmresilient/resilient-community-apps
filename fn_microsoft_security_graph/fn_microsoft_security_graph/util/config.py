@@ -16,7 +16,7 @@ tenant_id=<Tenant directory id>
 client_id=<App client id>
 client_secret=<App client secret>
 
-# Polling options
+## Polling options
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.
 msg_polling_interval=0
 #incident_template=<location_of_template_file>  # If not set uses default template.
@@ -24,6 +24,10 @@ msg_polling_interval=0
 # String filter to apply to the alert polling component. This will be added to the end of the url
 # when searching for alerts. The example shown below would make the whole search url equal to
 # https://graph.microsoft.com/v1.0/security/alerts/?$filter=assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
-#alert_filter= assignedTo eq 'analyst@m365x594651.onmicrosoft.com' and severity eq 'high'
+#alert_filter=filter=assignedTo%20eq%20'analyst@m365x594651.onmicrosoft.com'%20and%20severity%20eq%20'high'
+
+# Alert Time range - Optional value in seconds to set the start dateTime values for the createdDateTime field when filtering alerts.
+# This is calculated by adding to the filter 'createdDateTime ge (current_dateTime - alert_time_range)
+#alert_time_range_sec=3600
 """
     return config_data

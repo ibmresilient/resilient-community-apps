@@ -48,11 +48,11 @@ class FunctionComponent(ResilientComponent):
             if microsoft_security_graph_alert_id is not None:
                 log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
             else:
-                raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
+                raise FunctionError("microsoft_security_graph_alert_id is required to run this function.")
             if microsoft_security_graph_alert_data is not None:
                 log.info("microsoft_security_graph_alert_data: %s", microsoft_security_graph_alert_data)
             else:
-                raise ValueError("microsoft_security_graph_alert_data is required to run this function")
+                raise FunctionError("microsoft_security_graph_alert_data is required to run this function")
 
             r = None
             for i in list(range(2)):
