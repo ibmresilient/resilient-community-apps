@@ -86,7 +86,7 @@ class FunctionComponent(ResilientComponent):
             'url': self.options['url'],
             'user': self.options['user'],
             'password': self.options['password'],
-            'verifyFlag': True if self.options.get('verifyflag', 'True') == 'True' else False,
+            'verifyFlag': parse_bool(self.options.get('verify_cert', True)),
             'project': self.get_textarea_param(kwargs['jira_project']),
             'issuetype': self.get_textarea_param(kwargs['jira_issuetype']),
             'fields': {

@@ -10,7 +10,7 @@ inputs.jira_comment = note.text.content
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import create_comment
-from fn_jira.lib.resilient_common import validateFields, html2markdwn
+from fn_jira.lib.resilient_common import validateFields, html2markdwn, parse_bool
 
 
 class FunctionComponent(ResilientComponent):
@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
             'user': self.options['user'],
             'password': self.options['password'],
             'url': kwargs['jira_url'],
-            'verifyFlag': True if self.options.get('verifyflag', 'True') == 'True' else False,
+            'verifyFlag': parse_bool(self.options.get('verify_cert', True)),
             'comment': jira_comment
         }
 

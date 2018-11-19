@@ -80,3 +80,14 @@ def validateFields(fieldList, kwargs):
     for field in fieldList:
         if field not in kwargs or kwargs.get(field) == '':
             raise ValueError('Required field is missing or empty: '+field)
+
+def parse_bool(value):
+    """Represents value as boolean.
+    :param value:
+    :rtype: bool
+    """
+    if isinstance(value, bool):
+        return value
+
+    value = str(value).lower()
+    return value in ('1', 'true', 'yes')

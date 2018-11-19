@@ -133,7 +133,7 @@ def _mkTransitionPayload(appDict):
         }
     }
 
-    if appDict['comment']:
+    if appDict.get('comment'):
         comment = \
         { "comment":
             [
@@ -146,7 +146,7 @@ def _mkTransitionPayload(appDict):
         }
         payload['update'] = comment
 
-    if appDict['resolution']:
+    if appDict.get('resolution'):
         resolution = {
             "resolution": {
                 "name": appDict['resolution']
