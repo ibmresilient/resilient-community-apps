@@ -420,6 +420,9 @@ class Ampclient(object):
                 max_count = limit_max_count
 
             offset = items_per_page = rtn["metadata"]["results"]["items_per_page"]
+            if "offset" in params and params["offset"] is not None:
+                # If offset parameter set add to offset value
+                offset += int(params["offset"])
             current_item_count = rtn["metadata"]["results"]["current_item_count"]
             while max_count > current_item_count:
                 if "offset" in params:
