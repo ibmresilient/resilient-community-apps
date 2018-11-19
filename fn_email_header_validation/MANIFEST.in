@@ -1,0 +1,4 @@
+include README.md
+include fn_email_header_validation/util/*
+include fn_email_header_validation/LICENSE
+include fn_email_header_validation/doc/*

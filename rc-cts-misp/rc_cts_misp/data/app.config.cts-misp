@@ -13,7 +13,7 @@ misp_url=http://misp
 misp_key=3PhYSFDeC8xpqjC0ZrFZDwazoSRDUQ1j4IlKbu0G
 
 # Verify the MISP server's TLS certificate
-# misp_verifycert=false
+# misp_verifycert=False
 
 # Optional: tags to filter
 # misp_tag=tlp:white,tlp:green
