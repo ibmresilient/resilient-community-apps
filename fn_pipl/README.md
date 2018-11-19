@@ -3,7 +3,7 @@
 This package contains a function that enriches your leads (name, email address, phone number, or social media username) 
 with Pipl and gets their personal, professional, demographic, and contact information.
 The response from Pipl is saved in Pipl person datatable.
-The package also contains a script for creating an artifact from a selected row in the datatable.
+The package also contains a script for creating an artifact based on a selected row in the Pipl person datatable.
 
 To query Pipl Data API user needs to provide API key from [Pipl](https://pipl.com/api/).
 
@@ -41,7 +41,7 @@ The resulting .tar.gz file can be installed using
 	This will create the following custom components:        
 	* Message Destinations: `fn_pipl`
 	* Functions: `pipl_search_function`
-	* Function Params": `artifact_type`, `artifact_value`
+	* Function Params: `artifact_type`, `artifact_value`
 	* Action Fields: `pipl_artifact_type`
 	* Custom Datatables: `pipl_person_data`
 	* Workflows: ` Example: Pipl search`
