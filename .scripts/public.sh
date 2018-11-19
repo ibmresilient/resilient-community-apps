@@ -2,6 +2,9 @@
 
 # Utility helper to move things around on the internal repo
 
+# get the latest 'master'
+git checkout master && git pull
+
 # get onto a branch named 'public'
 git checkout public && git pull
 
@@ -46,7 +49,6 @@ fn_qradar_advisor
 fn_qradar_integration
 fn_splunk_integration
 fn_thug
-fn_urlscanio
 fn_utilities
 fn_virustotal
 fn_watson_translate
