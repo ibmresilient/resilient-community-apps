@@ -1,25 +1,25 @@
 # Resilient example email message parsing script
-** This package consists of a .res Resilient configuration file which contains an example email parsing script, a rule to run it automatically, and an associated incident field.
+This package consists of a .res Resilient configuration file which contains an example email parsing script, a rule to run it automatically, and an associated incident field.
 
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:
-•	Resilient platform is version 32 or later. 
-•	You have a Resilient account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.
+* Resilient platform is version 32 or later. 
+* You have a Resilient account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.
 
 ### Procedure
 
-1. Log on to the Resilient user interface using a suitable account.
+1. Log on to the Resilient user interface using a suitable account
 1. Navigate to "Administrator Settings"
-1. Select the "Organization" tab.
-1. Select the "Import" link.
-1. Select "+ Import settings".
-1. Select the `GenericEmailParser.res` file from the installation bundle.
-1. Select "Open".
-1. Perform configuration changes as described below.
+1. Select the "Organization" tab
+1. Select the "Import" link
+1. Select "+ Import settings"
+1. Select the `GenericEmailParser.res` file from the installation bundle
+1. Select "Open"
+1. Perform configuration changes as described below
 
 ### Result
-After installing, the Resilient system now has a new Python script called "Generic email script" and a new rule called "Process email message". The rule runs the script when it is triggered by a new email message being received by Resilient. The script is intended to perform generic email parsing on newly created email message objects. It:
+After installing, the Resilient platform now has a new Python script called "Generic email script" and a new rule called "Process email message". The rule runs the script when it is triggered by a new email message being received by Resilient. The script is intended to perform generic email parsing on newly created email message objects. It:
 * Checks if an existing incident exists whose title reflects the email message received
   * If so
     * Associates the email message with the existing incident
@@ -32,7 +32,7 @@ After installing, the Resilient system now has a new Python script called "Gener
 
 ## Configuration
 ### The incident owner
-New incidents need an owner, either an individual identified by their email address. In the provided script every incident is owned by the user `admin@co3sys.com`. This should be changed to reflect your system. To change the owner to `l1@businessname.com`, editing line 485 of the script:
+New incidents need an owner, either an individual identified by their email address. In the provided script every incident is owned by the user `admin@co3sys.com`. This should be changed to reflect your Resilient platform. To change the owner to `l1@businessname.com`, editing line 492 of the script:
 
 ```python
 # The new incident owner
@@ -48,7 +48,7 @@ newIncidentOwner = "l1@businessname.com"
 There are two categories of whitelist - IP address and URL domain - which are configured by altering data in the script.
 
 | Variable Name | Line number | Purpose |
-| ------------- | :--: | :-------:| 
+|:------------- | -----------:|:------- | 
 | `ipV4WhiteList` | 214 | General IP v4 whitelist |
 | `ipV6WhiteList` | 232 | General IP v6 whitelist |
 | `customIPv4WhiteList` | 257 | Additional customer-specific IP v4 whitelist |
@@ -95,12 +95,13 @@ There are two approaches to customisation of the mechanism:
 1. Running multiple scripts for the same email
 1. Modifying the supplied script
 
-For a variety of reasons, adding more scripts is generally a better idea than adding more complexity to one script. The Resilient system could be expected to ingest multiple categories of email messages from different integrations. Some of the processing of the email messages could be common, and some processing could be category- or integration-specific. Keeping the common processing in one script, and the specialised processing in others would allow a cleaner and more maintainable implementation.
+For a variety of reasons, adding more scripts is generally a better idea than adding more complexity to one script. The Resilient platform could be expected to ingest multiple categories of email messages from different integrations. Some of the processing of the email messages could be common, and some processing could be category- or integration-specific. Keeping the common processing in one script, and the specialised processing in others would allow a cleaner and more maintainable implementation.
 Each script execution is run within defined computational quota limits - 5 seconds of execution time or 50,000 lines of Python executed. Regular Expression processing is performed by the _re_ Python module, execution of which is considered part of the quota. It is possible to create a complex regular expression whose execution requires a great many lines of Python to be interpreted on a particular email message. Multiple such complex regular expressions could overrun the 50,000 line limit.
 
 ## Examples
 ### Extending the solution to deal with Phishing reports
 Scenario: Emails arriving in a particular mailbox reflect user reports of suspected Phishing attempts. These email messages should, in addition to the generic processing, record the sender of the email message as having been the target of a phishing attack.
+
 A solution:
 Add the following script to the Resilient platform:
 ```python
@@ -119,9 +120,11 @@ Run the script as part of a rule that includes a condition that helps identify t
 
 ### Campaign identifier
 Scenario: The customer wants to collect email messages related to the same campaign of attack to a single incident.
+
 A solution:
 1. Create a new incident custom field for the campaign signifier of type text
-1. Copy the generic parsing script into a new script that will run instead, for the category of emails in question
+1. Copy the generic parsing script into a new script that will run instead, for the category of email messages in question
 1. Modify the mainline of the generic script to create a value for the campaign signfier
 1. Use the signifier field for the incident search criteria instead of the incident title
 1. For new incidents, set the campaign signifier field to be the signifier value
+1. Modify the rules, so that the new script runs instead of the generic script
