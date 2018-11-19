@@ -17,7 +17,7 @@ LIMIT_INFO = {}
 
 rl_lock = threading.Lock()
 
-class AmpRateLimit(dict):
+class AmpRateLimit():
     """
     Class to store Rate limit information and introduce delays to throttle requests for
     Cisco AMP API calls.
