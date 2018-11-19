@@ -75,12 +75,14 @@ class FunctionComponent(ResilientComponent):
         :return: dictionary of values to use
         '''
 
-        validateFields(['incidentID', 'jira_project', 'jira_issuetype', 'jira_summary', 'jira_priority'], kwargs)
+        validateFields(['incident_id', 'jira_project', 'jira_issuetype', 'jira_summary', 'jira_priority'], kwargs)
 
         # build the URL back to Resilient
-        url = build_incident_url(build_resilient_url(self.res_params.get('host'), self.res_params.get('port')), kwargs['incidentID'])
+        url = build_incident_url(build_resilient_url(self.res_params.get('host'), self.res_params.get('port')), kwargs['incident_id'])
+        if kwargs.get("task_id"):
+            url = "{}?task_id={}".format(url, kwargs.get("task_id"))
 
-        return {
+        data = {
             'url': self.options['url'],
             'user': self.options['user'],
             'password': self.options['password'],
@@ -89,8 +91,12 @@ class FunctionComponent(ResilientComponent):
             'issuetype': self.get_textarea_param(kwargs['jira_issuetype']),
             'fields': {
                 'summary': self.get_textarea_param(kwargs['jira_summary']),
-                'description': u"{}\n{}".format(url, clean_html(kwargs.get('jira_description', ''))),
+                'description': u"{}\n{}".format(url, html2markdwn(kwargs.get('jira_description', ''))),
                 'priority': { 'id': kwargs['jira_priority'] }
             }
         }
 
+        if kwargs.get('jira_assignee'):
+            data['fields']['assignee'] = { "name": kwargs['jira_assignee'] }
+
+        return data

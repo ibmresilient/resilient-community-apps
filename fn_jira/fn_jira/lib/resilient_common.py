@@ -1,11 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+import html2markdown
+
 from bs4 import BeautifulSoup
-import re
 from six import string_types
-try:
-    import HTMLParser as htmlparser
-except:
-    import html.parser as htmlparser
 
 
 INCIDENT_FRAGMENT = '#incidents'
@@ -39,7 +36,21 @@ def clean_html(htmlFragment):
     if not htmlFragment or not isinstance(htmlFragment, string_types):
         return htmlFragment
 
-    return BeautifulSoup(unescape(htmlFragment), "html.parser").text
+    return BeautifulSoup(unescape(htmlFragment), "html.parser")
+
+def html2markdwn(htmlFragment):
+    """
+    convert html to markdown as some environments (aka Jira, Slack) use markdown for their rich text
+    :param htmlFragment:
+    :return: markdownstring
+    """
+
+    if not htmlFragment or not isinstance(htmlFragment, string_types):
+        return htmlFragment
+
+    htmlparser = html2markdown.MarkdownParser(bold="*", underline="_")
+    return htmlparser.convert(htmlFragment)
+
 
 def unescape(data):
     """ Return unescaped data such as &gt; -> >, &quot -> ', etc. """

@@ -10,7 +10,7 @@ inputs.jira_comment = note.text.content
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import create_comment
-from fn_jira.lib.resilient_common import validateFields, clean_html
+from fn_jira.lib.resilient_common import validateFields, html2markdwn
 
 
 class FunctionComponent(ResilientComponent):
@@ -53,8 +53,8 @@ class FunctionComponent(ResilientComponent):
         # test for required fields
         validateFields(['jira_url', 'jira_comment'], kwargs)
 
-        jira_comment = clean_html(self.get_textarea_param(kwargs['jira_comment']))
-        if len(jira_comment.strip()) == 0:
+        jira_comment = html2markdwn(self.get_textarea_param(kwargs['jira_comment']))
+        if jira_comment is None or len(jira_comment.strip()) == 0:
             raise FunctionError("comment is empty after rich text is removed")
 
         appDict = {
