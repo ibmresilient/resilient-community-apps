@@ -11,7 +11,9 @@
 	var initSnNote = "Sent to IBM Resilient";
 	
 	//Set any optional fields
-	var optionalFields = {};
+	var optionalFields = {
+    "instr_text": record.getValue("description")
+  };
 		
 	resHelper.createTask(record,
 						  snRecordId,

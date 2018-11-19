@@ -44,7 +44,7 @@ function createTaskNew() {
 
 			wf.startFlow(wf.getWorkflowFromName("ResilientCreateTask"), current, null, vars);
 			
-			gs.addInfoMessage("Creating a Task in Resilient on the Incident: " + incidentId);
+			gs.addInfoMessage("Creating a Task in Resilient from this record in the Resilient Incidents: " + incidentId);
 		}
 		else{
 			gs.addErrorMessage(incidentId + " is not a VALID Resilient Incident ID");
