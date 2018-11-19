@@ -261,7 +261,7 @@ class EmailProcessor(object):
   domainWhiteList=[Domain("*.ibm.com")]
 
   # Customer-specific domain whitelist
-  customDomainWhiteList=[]
+  customDomainWhiteList = []
 
   def __init__(self, newBodyText):
     """The EmailProcessor constructor.
