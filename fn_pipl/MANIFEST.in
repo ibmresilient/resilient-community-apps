@@ -1,0 +1,3 @@
+include README.md
+include fn_pipl/util/*
+include fn_pipl/LICENSE
