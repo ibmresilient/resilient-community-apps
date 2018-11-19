@@ -1,5 +1,5 @@
 # Resilient Integration with Twitter Search API
-**This package contains one function which targets the Twitter Search API. Takes in an input of a multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token.**
+**This package contains one function which targets the Twitter Search API. Takes in an input of multiple possible hashtags and a number of Tweets to be returned and contacts the Twitter Search API to return the results. Requires Twitter Access Key and Secret to obtain a OAuth2 read-only token.**
  ![screenshot](./screenshots/1.png)
 
 

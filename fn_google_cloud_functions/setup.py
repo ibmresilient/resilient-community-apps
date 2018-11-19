@@ -9,10 +9,11 @@ setup(
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
-    description="Resilient Circuits Components for 'fn_google_cloud_functions'",
-    long_description="Resilient Circuits Components for 'fn_google_cloud_functions'",
+    description="Resilient Circuits Components used to Invoke Google Cloud Functions",
+    long_description="Includes a Resilient Circuits Function to allow you to send a URL to a cloud function for sandboxing and returning a screenshot of the page",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'fn_utilities'
     ],
     packages=find_packages(),
     include_package_data=True,
