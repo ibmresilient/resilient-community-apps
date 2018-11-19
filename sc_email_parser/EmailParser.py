@@ -466,47 +466,59 @@ class EmailProcessor(object):
 
 
   def addBasicInfoToIncident(self):
-    """A method to perform basic artifact extraction on the email message.
-    The artifacts concerned are the "Email Sender", "Email Sender Name", and the subject.
+    """A method to perform basic information extraction from the email message.
+    The email message sender address, including personal name if present, is set as the reporter field
+    in the incident. An artifact is created from the email message subject with the type "Email Subject".
     No return value.
     """ 
-    log.debug("Adding sender {0} {1}".format(emailmessage.from.address, emailmessage.from.name))
-    if emailmessage.from.address is None:
-      incident.reporter = emailmessage.from.address
-    else:
-      incident.reporter = "{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
+  
+    newReporterInfo = emailmessage.from.address
+    if emailmessage.from.name is not None:
+      newReporterInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
+    log.info("Adding reporter field \"{0}\"".format(newReporterInfo))
+    incident.reporter = newReporterInfo
+
     self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
+
 
 ###
 # Mainline starts here
 ###
 
-# The new incident owner
-newIncidentOwner = "admin@co3sys.com"
-
-# Create an incident with a title based on the email subject, owned by user admin@co3sys.com
-newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
-
-# Check to see if a similar incident already exists
-# We will search for an incident which has the same name as we would give a new incident
-query_builder.equals(fields.incident.name, newIncidentTitle)
-query = query_builder.build()
-incidents = helper.findIncidents(query)
-
-if len(incidents) == 0:
-  # A similar incident does not already exist. Associate the email with a new incident.
-  log.info("Creating new incident {0}".format(newIncidentTitle))
-  emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
-else:
-   # A similar incident already exists. Associate the email with this preexisting incident.
-  log.info("Associating with existing incident {0}".format(incidents[0].id))
-  emailmessage.associateWithIncident(incidents[0])
-
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor(emailmessage.body.content)
 
-# Add the "Email Sender", "Email Sender Name", and the subject to the incident as artifacts.
-processor.addBasicInfoToIncident()
+# The new incident owner
+newIncidentOwner = "admin@co3sys.com"
+
+# Create a suitable title for an incident based on the email
+newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
+
+# Check to see if a similar active incident already exists
+query_builder.equals(fields.incident.name, newIncidentTitle) # Same name as we would give a new incident
+query_builder.equals(fields.incident.plan_status, "Active")  # Restrict search to active incidents
+query = query_builder.build()                                # Create the query object
+incidents = helper.findIncidents(query)                      # Retrieve similar incidents
+
+if len(incidents) == 0:
+  # A similar incident does not already exist. Create a new incident and associate the email with it.
+  log.info("Creating new incident {0}".format(newIncidentTitle))
+  
+  # Create an incident with a title based on the email subject, owned by user admin@co3sys.com
+  emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
+
+  # Add the subject to the incident as an artifact, and set the incident reporter.
+  # This does not need to be done for an existing incident.
+  processor.addBasicInfoToIncident()
+
+else:
+   # One or more similar incidents already exist. Associate the email with the first preexisting incident.
+  log.info("Associating with existing incident {0}".format(incidents[0].id))
+  emailmessage.associateWithIncident(incidents[0])
+
+###
+# From here on, the "incident" variable refers to the incident that the email is associated with.
+###
 
 # Capture any URLs present in the email body text and add them as artifacts
 processor.processArtifactCategory(processor.makeUrlPattern(), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainWhiteList)
