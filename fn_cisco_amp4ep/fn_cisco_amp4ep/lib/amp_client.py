@@ -20,6 +20,7 @@ from datetime import datetime
 
 LOG = logging.getLogger(__name__)
 AMP_LIMIT_DEFAULT = 500
+AMP_LIMIT_MAX = 1000
 
 class Ampclient(object):
     """
@@ -384,8 +385,11 @@ class Ampclient(object):
         :return Result in json format.
 
         """
-
-        limit_max_count = self.query_limit
+        if self.query_limit > AMP_LIMIT_MAX:
+            # Make sure query limit set to max 1000
+            limit_max_count = AMP_LIMIT_MAX
+        else:
+            limit_max_count = self.query_limit
         results_total = None
 
         if get_method.__name__ == "get_computer_trajectory":

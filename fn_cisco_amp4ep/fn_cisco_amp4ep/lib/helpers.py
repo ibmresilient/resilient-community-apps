@@ -23,6 +23,7 @@ DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX), re.IGNORECASE)
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CLI_ID_PATTERN = re.compile(r"^[a-fA-F0-9]{20}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
+AMP_LIMIT_MAX = 1000
 
 def validate_opts(func):
     """"Check options set correctly.
@@ -50,6 +51,8 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'query_limit' not set.")
     if func.options["query_limit"] is None or not validate_is_int(func.options["query_limit"]):
         raise ValueError("Invalid format for config setting 'query_limit'.")
+    if int(func.options["query_limit"]) > AMP_LIMIT_MAX:
+        raise ValueError("Config setting 'query_limit' is too high it should not be greater than {}.".format(AMP_LIMIT_MAX))
     if not "max_retries" in func.options:
         raise Exception("Mandatory config setting 'max_retries' not set.")
     if func.options["max_retries"] is None or not validate_is_int(func.options["max_retries"]):

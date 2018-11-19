@@ -12,16 +12,16 @@ def config_section_data():
     config_data = u"""[fn_cisco_amp4ep]
 base_url=https://api.amp.cisco.com/
 api_version=v1
-# The client id will be generated on the Cisco AMP foer endpoints dashboard.
+# The client id will be generated on the Cisco AMP for endpoints dashboard.
 client_id=<client id>
-# The api_tokenwill be generated on the Cisco AMP foer endpoints dashboard and will be will be in uuid format.
+# The api_tokenwill be generated on the Cisco AMP for endpoints dashboard and will be will be in uuid format.
 api_token=<api token>
 # Settings for access to cisco website via a proxy
 #http_proxy=http':'http://proxy:80
 #https_proxy=https':'http://proxy:80
-# Query results limit
-query_limit=200
-# Max number of retry attempts
+# Query results global limit (Max is 1000).
+query_limit=1000
+# Max number of retry attempts on Rate Limit exception
 max_retries=3
 """
     return config_data
