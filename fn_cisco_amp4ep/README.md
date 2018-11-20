@@ -39,9 +39,9 @@ api_token=abcd1234-a123-123a-123a-123456abcdef
 # Settings for access to cisco AMP website via a proxy
 #http_proxy=http':'http://proxy:80
 #https_proxy=https':'http://proxy:80
-# Query results limit
-query_limit=200
-# Max number of retry attempts on rate limit exception
+# Query results global limit override for the integration global default which is set to 1000.
+#query_limit=1000
+# Max number of retry attempts on Rate Limit exception
 max_retries=3
 ```
 

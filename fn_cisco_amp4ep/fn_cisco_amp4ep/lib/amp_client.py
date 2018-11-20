@@ -19,8 +19,10 @@ import re
 from datetime import datetime
 
 LOG = logging.getLogger(__name__)
-AMP_LIMIT_DEFAULT = 500
-AMP_LIMIT_MAX = 1000
+# Define query limit default for the integration.
+AMP_LIMIT_DEFAULT = 1000
+# Define max query limit REST api will allow as a parameter.
+AMP_LIMIT_REST_MAX = 500
 
 class Ampclient(object):
     """
@@ -35,13 +37,14 @@ class Ampclient(object):
         self.client_id = options.get("client_id")
         self.api_token = options.get("api_token")
         self.api_version = options.get("api_version")
-        self.query_limit = int(options.get("query_limit"))
         self.max_retries = int(options.get("max_retries"))
         self.proxies = {}
         if "https_proxy" in options and options["https_proxy"] is not None:
             self.proxies.update({"https": options.get("https_proxy")})
         if "http_proxy" in options and options["http_proxy"] is not None:
             self.proxies.update({"http": options.get("http_proxy")})
+        if options.get("query_limit") is not None:
+            self.query_limit = int(options.get("query_limit"))
         # Rest request endpoints
         self._endpoints = {
             # Computers
@@ -385,12 +388,19 @@ class Ampclient(object):
         :return Result in json format.
 
         """
-        if self.query_limit > AMP_LIMIT_MAX:
-            # Make sure query limit set to max 1000
-            limit_max_count = AMP_LIMIT_MAX
-        else:
-            limit_max_count = self.query_limit
         results_total = None
+        # Set query limit to max 1000 by default.
+        limit_max_count = AMP_LIMIT_DEFAULT
+
+        if "limit" in params and params["limit"] is not None:
+            # Set to REST call limit parameter. Call will fail if > 500
+            if int(params["limit"]) > 500:
+                raise ValueError("The 'limit' value '{}' is too high, maximum allowed is 500.".format(params["limit"]))
+            else:
+                limit_max_count = int(params["limit"])
+        elif hasattr(self, "query_limit") and self.query_limit is not None:
+            # Set limit to global override value.
+            limit_max_count = self.query_limit
 
         if get_method.__name__ == "get_computer_trajectory":
             # Rest call get_computer_trajectory doesn't return a 'results' sub-dict.
@@ -398,16 +408,10 @@ class Ampclient(object):
             rtn = get_method(**params)
             results_total = len(rtn["data"]["events"])
 
-        if "limit" in params and params["limit"] is not None:
-            if int(params["limit"]) < self.query_limit:
-                limit_max_count = int(params["limit"])
-            else:
-                params["limit"] = self.query_limit
-        else:
-            if self.query_limit < AMP_LIMIT_DEFAULT or get_method.__name__ == "get_computer_trajectory":
+        if limit_max_count < AMP_LIMIT_REST_MAX or get_method.__name__ == "get_computer_trajectory":
                 # Reset limit to query_limit if less than default limit.
                 # Limit defined for "get_computer_trajectory" set to default for results calculation.
-                params["limit"] = self.query_limit
+                params["limit"] = limit_max_count
 
         if get_method.__name__ != "get_computer_trajectory":
             rtn = get_method(**params)
