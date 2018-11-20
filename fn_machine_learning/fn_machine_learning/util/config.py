@@ -10,8 +10,6 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""
-[resilient]
-
 [machine_learning_predict]
 #   The folder for saved models
 model_dir=path to the folder of saved machine learning models you built

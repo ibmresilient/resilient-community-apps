@@ -1,20 +1,24 @@
 #!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+#
 """
     RES-ML
     ------
     A command line tool to build machine learning model. It supports:
-        1. Download. Download incidents and save in CSV format.
-        2. Build. Build machine model and save it into a file
-        3. Count-value. Value count for a given field. Useful for discovering imbalanced dataset
-        4. View. View the summary of a saved model.
-        5. Rebuild. Rebuild a saved model with latest data
+        1. download. Download incidents and save in CSV format.
+        2. build. Build machine model and save it into a file
+        3. count-value. Value count for a given field. Useful for discovering imbalanced dataset
+        4. view. View the summary of a saved model.
+        5. rebuild. Rebuild a saved model with latest data
 
     Note the recommended steps to use our res-ml package are:
         1. Use this command line tool to
             a. download incidents
             b. build and save a machine learning model
-        2. Use our function component to do prediction, by point to the saved model file
+        2. Use our function component to do prediction, by pointing to the saved model file
         3. Rebuild the saved model periodically with updated incidents/samples.
 """
 
@@ -49,9 +53,10 @@ LOG.setLevel(logging.INFO)
 LOG.addHandler(logging.StreamHandler())
 
 
-RESILIENT_SECTION="resilient"
-MACHINE_LEARNING_SECTION="machine_learning"
-SAMPLE_CSV_FILE="resilient_incidents.csv"
+RESILIENT_SECTION = "resilient"
+MACHINE_LEARNING_SECTION = "machine_learning"
+SAMPLE_CSV_FILE = "resilient_incidents.csv"
+LOG_FILE = "res-ml.log"
 
 
 class OptParser(resilient.ArgumentParser):
@@ -87,7 +92,7 @@ class OptParser(resilient.ArgumentParser):
 
 def main():
     """
-    We support 5 sub-commands: build, rebuild, view.
+    We support 5 sub-commands: build, rebuild, view, download, and count_value.
         1. build: build a new model
             -o  Required flag, pointing to a file we can save the model to
             -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
@@ -187,7 +192,7 @@ def main():
     #   Use res-ml -v sub-command.....
     #   to get debug level log
     #
-    fh = logging.FileHandler("res-ml.log")
+    fh = logging.FileHandler(LOG_FILE)
     fh.setLevel(logging.INFO)
     if args.verbose:
         fh.setLevel(logging.DEBUG)
@@ -208,7 +213,7 @@ def main():
     elif args.cmd == "count_value":
         count_value(args)
     else:
-        LOG.error("Unknown command")
+        LOG.error("Unknown command: " + args.cmd)
 
 
 def count_value(args):
@@ -310,12 +315,15 @@ def build_model(model_file, opt_parser, csv_file=None, rebuilding=False):
     mlconfig = MlConfig()
 
     if not csv_file:
+        #
+        #   Users did not specify a CSV file with samples. So we
+        #   need to download incidents first.
+        #   Save them to SAMPLE_CSV_FLLE
+        #
         num_inc = download_incidents_csv(opt_parser, SAMPLE_CSV_FILE)
+        LOG.info("Download and save samples to " + SAMPLE_CSV_FILE)
         mlconfig.number_samples = num_inc
         csv_file = SAMPLE_CSV_FILE
-    elif not csv_file:
-        LOG.error("You need to specify a CSV file for samples")
-        return
 
     if rebuilding:
         model_utils.update_config_from_saved_model(model_file, mlconfig)

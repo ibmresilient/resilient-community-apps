@@ -26,7 +26,7 @@ Install this package with 'pip', or run `python setup.py install`
 ## Setup
 Create app.config by running `resilient-circuits config -c`.
 
-The app.config needs the following configuration values, in addition to those in the appropriate [resilient] section for
+The app.config file needs the following configuration values, in addition to those in the appropriate [resilient] section for
 connecting to your Resilient platform:
 
 ```
@@ -130,7 +130,7 @@ If you have newly added incidents, and you want to retrain a saved model, you ca
 ```
 res-ml rebuild -i incident_prediction.ml
 ```
-In general, customer can rebuild a model once a week.
+As a rule, it is recommended that customers rebuild their model once a week.
 
 There are more advanced options. Please refer to the User Guide.
 ## Uninstall,
