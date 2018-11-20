@@ -1,6 +1,6 @@
-# Exchange Functions
+# Microsoft Exchange Functions
 
-This IBM Resilient Function package can be used to access Exchange email and meeting capabilities.
+This IBM Resilient Function package can be used to access Microsoft Exchange email and meeting capabilities.
 The functions provided have the following capabilities:
 
 * Querying emails
@@ -31,7 +31,7 @@ After installation, the package will be loaded by `resilient-circuits run`.
 
     pip install <filename>.tar.gz
 
-## Add Exchange configuration details to the config file:
+## Add Microsoft Exchange configuration details to the config file:
     
     resilient-circuits config -u
     
