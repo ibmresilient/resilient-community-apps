@@ -10,12 +10,12 @@ Before installing, verify that your environment meets the following prerequisite
 ### Procedure
 
 1. Log on to the Resilient platform using a suitable account.
-1. Navigate to *Administrator Settings*.
-1. Select the *Organization* tab.
-1. Select the *Import* link.
-1. Select the *+ Import settings* button.
-1. Select the *GenericEmailParser.res* file from the installation bundle.
-1. Select *Open*.
+1. Navigate to **Administrator Settings**.
+1. Select the **Organization** tab.
+1. Select the **Import** link.
+1. Select the **+ Import settings** button.
+1. Select the **GenericEmailParser.res** file from the installation bundle.
+1. Select **Open**.
 
 ### Result
 After installing, the Resilient platform has a new Python script called "Generic email script" and a new rule called "Process email message". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
