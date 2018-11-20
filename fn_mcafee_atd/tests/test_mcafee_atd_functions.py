@@ -6,8 +6,9 @@ from resilient_circuits.action_message import FunctionError_
 from mock import Mock, patch
 import time
 import os.path
-from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, _get_atd_session_headers, submit_url, check_timeout, get_incident_id, check_config
+from fn_mcafee_atd.util.helper import submit_file, check_task_status, get_atd_report, create_report_file, remove_dir, \
+    check_status_code, _get_atd_session_headers, submit_url, check_timeout, get_incident_id, check_config,\
+    check_job_status
 from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
@@ -240,7 +241,7 @@ class TestMcafeeAtdAnalyzeFile:
 
     @patch("requests.delete")
     @patch("requests.get")
-    def test_check_atd_status(self, mocked_requests_get, mocked_requests_delete):
+    def test_check_task_status(self, mocked_requests_get, mocked_requests_delete):
         sim_get_content1 = {
             "results": {
                 "session": "session_key",
@@ -255,7 +256,7 @@ class TestMcafeeAtdAnalyzeFile:
             }
         }
         sim_get_content3 = {
-            "severity": "1"
+            "severity": 1
         }
         sim_delete_content = {}
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
@@ -263,7 +264,7 @@ class TestMcafeeAtdAnalyzeFile:
         mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
         creds = MockCredsAfterCheck()
 
-        r = check_atd_status(creds, '1')
+        r = check_task_status(creds, '1')
         # Assert analysis is not complete
         assert r is False
 
@@ -271,7 +272,7 @@ class TestMcafeeAtdAnalyzeFile:
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200)]
         mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
-        r = check_atd_status(creds, '1')
+        r = check_task_status(creds, '1')
         # Assert analysis is not complete
         assert r is False
 
@@ -280,7 +281,7 @@ class TestMcafeeAtdAnalyzeFile:
                                            self._generateResponse(sim_get_content2, 200),
                                            self._generateResponse(sim_get_content3, 200)]
         mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
-        r = check_atd_status(creds, '1')
+        r = check_task_status(creds, '1')
         # Assert analysis is complete
         assert r is True
 
@@ -289,7 +290,7 @@ class TestMcafeeAtdAnalyzeFile:
                                            self._generateResponse(sim_get_content2, 200),
                                            self._generateResponse(sim_get_content3, 200)]
         mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
-        r = check_atd_status(creds, '1')
+        r = check_task_status(creds, '1')
         # Assert analysis is complete
         assert r is True
 
@@ -309,6 +310,47 @@ class TestMcafeeAtdAnalyzeFile:
         remove_dir(res.get("tmp_dir"))
         # Assert file is removed
         assert os.path.isdir(res.get("tmp_dir")) is False
+
+    @patch("requests.delete")
+    @patch("requests.get")
+    def test_check_job_status(self, mocked_requests_get, mocked_requests_delete):
+        creds = MockCredsAfterCheck()
+        sim_get_content1 = {
+            "results": {
+                "session": "session_key",
+                "userId": "1"
+            }
+        }
+        sim_get_content2 = {
+            "status": 5
+        }
+        sim_delete_content = {}
+
+        # Test for job completed
+        mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content2, 200)]
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
+
+        res = check_job_status(creds, 123)
+        assert res is True
+
+        # Test for job not completed
+        sim_get_content2["status"] = 3
+        mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content2, 200)]
+        res = check_job_status(creds, 123)
+        assert res is False
+
+        # Test for job failed
+        try:
+            sim_get_content2["status"] = -1
+            mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                               self._generateResponse(sim_get_content2, 200)]
+            res = check_job_status(creds, 123)
+            assert res is False
+        except ValueError:
+            assert True
+
 
     @patch("requests.delete")
     @patch("requests.get")
