@@ -47,16 +47,13 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'api_token' not set.")
     if func.options["api_token"] is None or not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'.")
-    if not "query_limit" in func.options:
-        raise Exception("Mandatory config setting 'query_limit' not set.")
-    if func.options["query_limit"] is None or not validate_is_int(func.options["query_limit"]):
-        raise ValueError("Invalid format for config setting 'query_limit'.")
-    if int(func.options["query_limit"]) > AMP_LIMIT_MAX:
-        raise ValueError("Config setting 'query_limit' is too high it should not be greater than {}.".format(AMP_LIMIT_MAX))
     if not "max_retries" in func.options:
         raise Exception("Mandatory config setting 'max_retries' not set.")
     if func.options["max_retries"] is None or not validate_is_int(func.options["max_retries"]):
         raise ValueError("Invalid format for config setting 'max_retries'.")
+    if "query_limit" in func.options and func.options["query_limit"] is not None and not \
+            validate_is_int(func.options["query_limit"]):
+            raise ValueError("Invalid format for config setting 'query_limit'.")
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
