@@ -203,8 +203,14 @@ class SlackUtils(object):
         payload = None
         try:
             attachment_json = convert_slack_details_to_payload(slack_text, resoptions)
-        except ValueError: # if slack_text isn't in JSON format then just post it as is - we need to post to Slack in a non JSON format from other functions, like right before archiving channel
-            payload = slack_text
+        # If slack_text can be converted to a python dictionary with json.loads the payload will be posted in Slack as
+        # a Slack attachment.
+        # If slack_text isn't in JSON format and json.loads returns an error but the workflow does not terminate,
+        # message is posted in Slack as a regular text and the message describing this 'action' is saved to log.
+        except ValueError as json_error:
+            LOG.info("Warning - Cannot convert payload to JSON, posting to Slack as a regular text - "
+                     "see JSON message '{}'.".format(json_error))
+            payload = slack_text  # FIXME change to LOG.debug
 
         results = self.slack_client.api_call(
             "chat.postMessage",
@@ -953,8 +959,8 @@ def convert_slack_details_to_payload(slack_text, resoptions):
             }
         ]
         return attachment_json
-    except ValueError:
-        raise ValueError
+    except ValueError as json_error:
+        raise json_error
 
 
 def get_template_file_path(path):

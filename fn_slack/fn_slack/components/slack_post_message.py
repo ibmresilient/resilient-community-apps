@@ -136,7 +136,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {"channel": slack_channel_name,
                        "url": conversation_url}
-            LOG.info(results)
+            LOG.debug(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
