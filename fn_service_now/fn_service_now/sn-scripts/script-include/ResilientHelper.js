@@ -133,7 +133,7 @@ ResilientHelper.prototype = {
 
 			// Create the RES Note
 			var noteText = '<br>This Task has been sent from <b>ServiceNow</b><br><b>ServiceNow ID:</b> ' +snRecordId+ '<br><b>ServiceNow Link:</b> <a href="'+snLink+'">'+snLink+'</a></div>';
-			this.res_api.addNote(incidentId, resTask.id, noteText, "html");
+			this.addNote(res_ref_id, noteText, "html");
 		}
 		catch(e){
 			var errMsg = "Failed to Create a Task in IBM Resilient:" + taskName;
@@ -326,20 +326,6 @@ ResilientHelper.prototype = {
 		}
 	},
 	
-	addStateUpdatedNote: function(res_ref_id, snTicketState){
-		try{
-			var ids = this.parseRefId(res_ref_id);
-			var noteText = "ServiceNow state updated to: " + snTicketState;
-			this.res_api.addNote(ids.incidentId, ids.taskId, noteText);
-		}
-
-		catch(e){
-			var errMsg = "Failed to send StateUpdated note to IBM Resilient";
-			gs.error(errMsg);
-			throw e;
-		}
-	},
-	
 	addNewRowToRESDatatable: function(res_ref_id, sn_ref_id, res_link, sn_link){
 		var colors = {
 			"green": "#00b33c",
@@ -454,10 +440,13 @@ ResilientHelper.prototype = {
 		}
 	},
 	
-	addNote: function(res_ref_id, noteText){
+	addNote: function(res_ref_id, noteText, noteFormat){
 		try{
+			if(!noteFormat){
+				noteFormat = "text";
+			}
 			var ids = this.parseRefId(res_ref_id);
-			this.res_api.addNote(ids.incidentId, ids.taskId, noteText);
+			this.res_api.addNote(ids.incidentId, ids.taskId, noteText, noteFormat);
 		}
 
 		catch(e){
