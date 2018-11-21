@@ -396,11 +396,8 @@ class Ampclient(object):
         limit_max_count = AMP_LIMIT_DEFAULT
 
         if "limit" in params and params["limit"] is not None:
-            # Set to REST call limit parameter. Call will fail if > 500
-            if int(params["limit"]) > 500:
-                raise ValueError("The 'limit' value '{}' is too high, maximum allowed is 500.".format(params["limit"]))
-            else:
-                limit_max_count = int(params["limit"])
+            # Set to REST call limit parameter.
+            limit_max_count = int(params["limit"])
         elif hasattr(self, "query_limit") and self.query_limit is not None:
             # Set limit to global override value.
             limit_max_count = self.query_limit
