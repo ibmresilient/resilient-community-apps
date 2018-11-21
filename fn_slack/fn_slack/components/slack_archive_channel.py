@@ -95,7 +95,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Archiving channel failed: " + json.dumps(archive_results))
 
             results = {"channel": res_associated_channel_name}
-            LOG.info(results)
+            LOG.debug(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
