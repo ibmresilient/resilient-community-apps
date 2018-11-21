@@ -380,7 +380,10 @@ class Ampclient(object):
         return r_json
 
     def get_paginated_total(self, get_method, **params):
-        """Get multiple pages of paginated data and using 'query_limit' property to limit returned results.
+        """Get multiple pages of paginated data. Use a limit value to limit returned results.
+
+        The results limit defaults to AMP_LIMIT_DEFAULT unless params["limit"] or the 'query_limit' integration
+        configuration property is set with params["limit"] having the highest precedence.
 
         :param: get_method: Reference to instance get method e.g. self.get_activity, self.get_events etc.
         :param: params: Parameters for get method .
@@ -428,15 +431,16 @@ class Ampclient(object):
                 # If offset parameter set add to offset value
                 offset += int(params["offset"])
             current_item_count = rtn["metadata"]["results"]["current_item_count"]
-            while max_count > current_item_count:
-                if "offset" in params:
-                    # Certain get methods don't have offset in their parameter signature
-                    params["offset"] = offset
-                rtn_sub = get_method(**params)
-                rtn["data"].extend(rtn_sub["data"])
-                rtn["metadata"] = rtn_sub["metadata"]
-                current_item_count += rtn["metadata"]["results"]["current_item_count"]
-                offset += items_per_page
+            if not current_item_count < items_per_page:
+                while max_count > current_item_count:
+                    if "offset" in params:
+                        # Certain get methods don't have offset in their parameter signature
+                        params["offset"] = offset
+                    rtn_sub = get_method(**params)
+                    rtn["data"].extend(rtn_sub["data"])
+                    rtn["metadata"] = rtn_sub["metadata"]
+                    current_item_count += rtn["metadata"]["results"]["current_item_count"]
+                    offset += items_per_page
 
         if results_total is not None:
             rtn["total"] = results_total
