@@ -101,7 +101,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(
                     "Got a 409 error while attempting to set a sha256 '{0}' to list with uid '{1}' because of a possible "
                     "attempt to redo a set operation."
-                        .format(params["file_sha256"], params["file_list_guid"], params["file_sha256"]))
+                        .format(params["file_sha256"], params["file_list_guid"]))
             else:
                 yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"], params["description"]))
