@@ -156,8 +156,6 @@ class TestAmpHelpersValidateOptsErr:
         ("https://api.amp.cisco.com/", '', None, None, None, None, None, None, "Mandatory config setting 'api_version' not set."),
         ("https://api.amp.cisco.com/", "v1",'', None, None, None, None, None, "Mandatory config setting 'client_id' not set."),
         ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", '', None, None, None, None, "Mandatory config setting 'api_token' not set."),
-        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", '', None, None, None, "Mandatory config setting 'query_limit' not set.")
-
     ])
     def test_validate_opts_Not_set(self, base_url, api_version, client_id, api_token, query_limit,
                                                max_retries, retry_delay, retry_backoff, expected_results):
@@ -188,7 +186,6 @@ class TestAmpHelpersValidateOptsErr:
         ("https://api.amp.cisco.com/", None, None, None, None, None, None, None, "Invalid format for config setting 'api_version'."),
         ("https://api.amp.cisco.com/", "v1", None, None, None, None, None, None, "Invalid format for config setting 'client_id'."),
         ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", None, None, None, None, None, "Invalid format for config setting 'api_token'."),
-        ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", None, None, None, None, "Invalid format for config setting 'query_limit'."),
         ("https://api.amp.cisco.com/", "v1", "01234abcde56789efedc", "abcd1234-a123-123a-123a-123456abcdef", 200, None, None, None, "Invalid format for config setting 'max_retries'.")
     ])
     def test_validate_opts_Invalid(self, base_url, api_version, client_id, api_token, query_limit, max_retries, retry_delay, retry_backoff,
