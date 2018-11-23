@@ -150,8 +150,8 @@ class Ampclient(object):
                 elif e.response.status_code == 409 and method == "POST":
                     # We are probably trying to redo a successful update operation here.
                     LOG.error("Got '409' error, possible attempt to redo a successfull update operation.")
-                    # Re-raise exception
-                    raise
+                    # Allow error to bubble up to the Resilient function.
+                    break
                 else:
                     raise
 
