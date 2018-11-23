@@ -70,7 +70,7 @@ class AmpRateLimit():
 
         """
         if len(REQ_TIMESTAMPS):
-            return (len(REQ_TIMESTAMPS), REQ_TIMESTAMPS[0]);
+            return (len(REQ_TIMESTAMPS), REQ_TIMESTAMPS[0])
         else:
             return (0,0)
 
@@ -80,7 +80,7 @@ class AmpRateLimit():
         :return : Return timestamp in secs.
 
         """
-        return LIMIT_INFO["lastest_request_ts"];
+        return LIMIT_INFO["lastest_request_ts"]
 
     def add_ts(self, ts):
         """ Add time to list and update latest executed timestamp.
@@ -89,7 +89,7 @@ class AmpRateLimit():
 
         """
         with rl_lock:
-            REQ_TIMESTAMPS.append(ts);
+            REQ_TIMESTAMPS.append(ts)
             LIMIT_INFO["lastest_request_ts"] = ts
 
     def get_limit_update_ts(self):
@@ -174,8 +174,8 @@ class AmpRateLimit():
                     try:
                         new_min = new_reset/calls_remaining
                     except ZeroDivisionError:
-                        LOG.error("Unexpected zero value detected for calls remaining '%s'." % calls_remaining)
-                        raise ValueError("Unexpected zero value detected for calls remaining '%s'."
+                        LOG.error("Unexpected zero value detected for calls remaining '%s'.", calls_remaining)
+                        raise ValueError("Unexpected zero value detected for calls remaining '{}'."
                                          .format(calls_remaining))
 
                     if new_min > min_time:
