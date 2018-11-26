@@ -14,8 +14,8 @@ except ImportError:
 
 class ResilientHelper:
 
-  def __init__(self, options):
-    self.options = options
+  def __init__(self, app_configs):
+    self.app_configs = app_configs
 
     self.SN_HOST = self.get_config_option("sn_host")
     self.SN_API_URI = self.get_config_option("sn_api_uri")
@@ -39,7 +39,7 @@ class ResilientHelper:
 
   def get_config_option(self, option_name, optional=False):
     """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
-    option = self.options.get(option_name)
+    option = self.app_configs.get(option_name)
 
     if not option and optional is False:
       err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
@@ -186,17 +186,13 @@ class ResilientHelper:
 
   # Define an Incident that gets sent to ServiceNow
   class Incident:
-    """Class that repersents a Resilient Incident. See API notes for more"""
-    def __init__(self, incident_id, incident_name, incident_description, incident_serverity,
-                 incident_creator, incident_date_created):
+    """Class that represents a Resilient Incident. See API notes for more"""
+    def __init__(self, incident_id, incident_name, incident_description):
 
       self.type = "res_incident"
       self.incident_id = incident_id
       self.incident_name = incident_name
       self.incident_description = incident_description
-      self.incident_severity = incident_serverity
-      self.incident_creator = incident_creator
-      self.incident_date_created = incident_date_created
 
     def add_work_note(self, note):
       self.sn_init_work_note = note
@@ -210,25 +206,9 @@ class ResilientHelper:
     try:
       incident = client.get("/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id))
     except:
-      # TODO Better error
       raise ValueError("incident_id {0} not found".format(incident_id))
 
-    incident_creator = {
-      "name": "{0} {1}".format(incident["creator"]["fname"], incident["creator"]["lname"]),
-      "email": incident["creator"]["email"]
-    }
-
-    incident_severity = str(incident["severity_code"]).lower()
-    if incident_severity == "high":
-      incident_severity = 1
-    elif incident_severity == "medium":
-      incident_severity = 2
-    elif incident_severity == "low":
-      incident_severity = 3
-
-    return self.Incident(incident_id, incident["name"], incident["description"], incident_severity,
-                         incident_creator, incident["create_date"])
-
+    return self.Incident(incident_id, incident["name"], incident["description"])
 
 class ExternalTicketStatusDatatable():
   """TODO"""
