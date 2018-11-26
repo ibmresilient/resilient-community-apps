@@ -24,8 +24,7 @@
 		return {
 			"res_id": req.id,
 			"sn_sys_id": record.getValue('sys_id'),
-			"sn_ref_id": record.getValue('number'),
-			"sn_action": record.getValue('x_261673_resilient_type') + ' Created'
+			"sn_ref_id": record.getValue('number')
 		};
 	}
 	

@@ -19,7 +19,6 @@ class FunctionPayload:
     self.res_link = None
     self.sn_ref_id = None
     self.sn_sys_id = None
-    self.sn_action = None
     self.sn_record_link = None
     self.sn_time_created = None
 
@@ -160,7 +159,6 @@ class FunctionComponent(ResilientComponent):
               payload.res_id = create_in_sn_response["res_id"]
               payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
               payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
-              payload.sn_action = create_in_sn_response["sn_action"]
               payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
               payload.sn_time_created = now
 
@@ -185,6 +183,7 @@ class FunctionComponent(ResilientComponent):
               payload.success = False
 
             results = payload.asDict()
+            print results
 
             log.info("Complete")
 
