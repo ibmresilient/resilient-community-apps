@@ -153,7 +153,7 @@ class ResilientHelper:
 
   # Define a Task that gets sent to ServiceNow
   class Task:
-    """Class that repersents a Resilient Task. See API notes for more"""
+    """Class that represents a Resilient Task. See API notes for more"""
     def __init__(self, incident_id, task_id, task_name, task_instructions):
       self.type = "res_task"
       self.incident_id = incident_id
@@ -211,13 +211,15 @@ class ResilientHelper:
     return self.Incident(incident_id, incident["name"], incident["description"])
 
 class ExternalTicketStatusDatatable():
-  """TODO"""
+  """Class that handles the sn_external_ticket_status datatable"""
   def __init__(self, res_client, incident_id):
     self.res_client = res_client
     self.incident_id = incident_id
     self.api_name = "sn_external_ticket_status"
     self.data = None
     self.rows = None
+
+    self.get_data()
 
   def get_data(self):
     uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
@@ -227,30 +229,24 @@ class ExternalTicketStatusDatatable():
     except Exception:
       raise ValueError("Failed to get sn_external_ticket_status Datatable")
 
-  def get_sn_ref_ids(self, incident_id, task_id=None):
-    """Returns list of each related sn_ref_id"""
-    id = ["RES", str(incident_id)]
-    
-    if task_id is not None:
-      id.append(str(task_id))
-
-    res_id_to_search = "-".join(id)
-
-    ids_found = []
-    
+  def get_row(self, cell_name, cell_value):
+    """Returns the row if found. Returns None if no matching row found"""
     for row in self.rows:
       cells = row["cells"]
-      res_id = str(cells["res_id"]["value"])
-      
-      if task_id is not None:
-        if(res_id_to_search in res_id):
-          ids_found.append(str(cells["sn_ref_id"]["value"]))
+      if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
+        return row
+    return None
 
-      else:
-        if(res_id_to_search == res_id):
-          ids_found.append(str(cells["sn_ref_id"]["value"]))
-    
-    return ids_found
+  def get_sn_ref_id(self, res_id):
+    """Returns the sn_ref_id that relates to the res_id"""
+    row = self.get_row("res_id", res_id)
+
+    if row is not None:
+      cells = row["cells"]
+      return str(cells["sn_ref_id"]["value"])
+
+    else:
+      return None
 
   def add_row(self, time, res_id, sn_ref_id, resilient_status, servicenow_status, link):
     # Generate uri to POST datatable row
@@ -307,14 +303,6 @@ class ExternalTicketStatusDatatable():
     }
 
     return self.res_client.put(uri, formatted_cells)
-
-  def get_row(self, cell_name, cell_value):
-    """Returns the row if found. Returns None if no matching row found"""
-    for row in self.rows:
-      cells = row["cells"]
-      if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
-        return row
-    return None
 
   def asDict(self):
     return self.__dict__

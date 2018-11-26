@@ -66,40 +66,18 @@ class FunctionComponent(ResilientComponent):
 
             # Get the datatable and its data
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
-            datatable.get_data()
 
-            # Get sn_ref_id from input
-            sn_ref_id = payload.inputs["sn_ref_id"]
+            # Generate the res_id
+            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
 
-            # If its None, check the datatable
+            # Get the sn_ref_id
+            sn_ref_id = datatable.get_sn_ref_id(res_id)
+
             if sn_ref_id is None:
+              payload.success = False
+              raise ValueError("This item has not been created in ServiceNow yet")
 
-              yield StatusMessage("Searching Datatable for sn_ref_id")
-
-              # Get all sn_ref_ids
-              sn_ref_ids = datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
-
-              # If task_id is defined, handle closing Task in ServiceNow
-              if payload.inputs["task_id"] is not None:
-
-                # Be sure only one relevant entry is in the datatable
-                if(len(sn_ref_ids) == 1):
-                  sn_ref_id = sn_ref_ids[0]
-
-                # Else warn the user
-                elif (len(sn_ref_ids) == 0):
-                  payload.success = False
-                  raise ValueError("This task has not been created in ServiceNow yet")
-
-              # If an Incident and only one sn_ref_id, then use that id
-              elif len(sn_ref_ids) == 1:
-                sn_ref_id = sn_ref_ids[0]
-              
-              else:
-                payload.success = False
-                raise ValueError("This incident has not been created in ServiceNow yet")
-
-            if sn_ref_id is not None:
+            else:
               # Generate the request_data
               request_data = {
                 "sn_ref_id": sn_ref_id,
@@ -134,9 +112,6 @@ class FunctionComponent(ResilientComponent):
               except Exception as err:
                 payload.success = False
                 raise ValueError("Failed to update ServiceNow Status in Datatable: {0}".format(err))
-
-            else:
-              raise ValueError("No sn_ref_id defined")
 
             results = payload.asDict()
 

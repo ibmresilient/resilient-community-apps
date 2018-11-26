@@ -48,10 +48,9 @@ class FunctionComponent(ResilientComponent):
 
            # Get the function inputs:
             inputs = {
-              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text
-              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name", True), # text
-              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
+              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
+              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name", True), # text
               "sn_comment_text": res_helper.get_function_input(kwargs, "sn_comment_text"), # text (required)
               "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type")["name"] # select, text (required)
             }
@@ -69,49 +68,20 @@ class FunctionComponent(ResilientComponent):
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
-            # Get the datatable and its data
+            # Get the datatable
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
-            datatable.get_data()
 
             # Generate res_id using incident and task id
             res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
 
-            # Get sn_ref_id from input
-            sn_ref_id = payload.inputs["sn_ref_id"]
+            # Get the sn_ref_id
+            sn_ref_id = datatable.get_sn_ref_id(res_id)
 
-            # If its None, check the datatable
             if sn_ref_id is None:
-
-              yield StatusMessage("Searching Datatable for sn_ref_id")
-
-              # Get all sn_ref_ids
-              sn_ref_ids = datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
-
-              # If task_id is defined, handle a Task Level Note
-              if payload.inputs["task_id"] is not None:
-
-                # Be sure only one relevant entry is in the datatable
-                if(len(sn_ref_ids) == 1):
-                  sn_ref_id = sn_ref_ids[0]
-
-                # Else warn the user
-                elif (len(sn_ref_ids) == 0):
-                  payload.success = False
-                  raise ValueError("This task has not been created in ServiceNow yet")
-
-              # If an Incident Level Note and only one sn_ref_id, then use that id
-              elif len(sn_ref_ids) == 1:
-                sn_ref_id = sn_ref_ids[0]
-              
-              else:
-                payload.success = False
-                raise ValueError("This incident has not been created in ServiceNow yet")
+              payload.success = False
+              raise ValueError("This item has not been created in ServiceNow yet")
 
             else:
-              pass
-              # Get id from activity field
-
-            if sn_ref_id is not None:
               # Generate the request_data
               request_data = {
                 "sn_ref_id": sn_ref_id,
@@ -127,9 +97,6 @@ class FunctionComponent(ResilientComponent):
               add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
               payload.res_id = res_id
               payload.sn_ref_id = sn_ref_id
-          
-            else:
-              raise ValueError("No sn_ref_id defined")
 
             results = payload.asDict()
 

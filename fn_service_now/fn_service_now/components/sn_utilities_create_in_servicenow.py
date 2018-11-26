@@ -63,12 +63,14 @@ class FunctionComponent(ResilientComponent):
           """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
           request_data = None
 
-          # Get the datatable data and rows
-          res_datatable.get_data()
-          sn_ref_ids = res_datatable.get_sn_ref_ids(payload.inputs["incident_id"], payload.inputs["task_id"])
+          # Generate the res_id
+          res_id = res_helper.generate_res_id(incident_id, task_id)
 
-          if(len(sn_ref_ids) > 0):
-            raise ValueError("This item is already in the datatable")
+          # Get the datatable data and rows
+          sn_ref_id = res_datatable.get_sn_ref_id(res_id)
+
+          if sn_ref_id is not None:
+            raise ValueError("This item is already exists in the ServiceNow as it is in the Datatable")
 
           if task_id is not None:
             # Get the task
@@ -85,7 +87,7 @@ class FunctionComponent(ResilientComponent):
 
           # Add sn_table_name, resilient_id, link and init_note to the request_data
           request_data["sn_table_name"] = sn_table_name
-          request_data["id"] = res_helper.generate_res_id(incident_id, task_id)
+          request_data["id"] = res_id
           request_data["link"] = res_link
           request_data["sn_init_work_note"] = init_note
 
