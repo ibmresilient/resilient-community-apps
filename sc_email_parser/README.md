@@ -1,5 +1,5 @@
 # Resilient example email message parsing script
-This package consists of a .res Resilient configuration file which contains an example email parsing script, a rule to run it automatically, and an associated incident field.
+This package consists of the GenericEmailScript.res Resilient configuration file which contains an example email parsing script and a rule to run it automatically.
 
 ## Installation instructions
 
@@ -16,6 +16,7 @@ Before installing, verify that your environment meets the following prerequisite
 1. Select the **+ Import settings** button.
 1. Select the **GenericEmailParser.res** file from the installation bundle.
 1. Select **Open**.
+1. Select **Proceed**.
 
 ### Result
 After installing, the Resilient platform has a new Python script called "Generic email script" and a new rule called "Process email message". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
@@ -27,6 +28,7 @@ After installing, the Resilient platform has a new Python script called "Generic
     * Adds the email message's subject as an artifact to the new incident.
     * Sets the incident's reporter field to be the email address that sent the message.
 * Parses the email body text looking for URLs, IP addresses and file hashes. After filtering out invalid and whitelisted values, it adds the remaining data to the incident as artifacts.
+* Adds non-inline email message attachments to the incident.
 
 ## Configuration
 ### The incident owner
