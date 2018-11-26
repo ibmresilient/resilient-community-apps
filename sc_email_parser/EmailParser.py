@@ -261,7 +261,7 @@ class EmailProcessor(object):
   domainWhiteList=[Domain("*.ibm.com")]
 
   # Customer-specific domain whitelist
-  customDomainWhiteList = []
+  customDomainWhiteList=[]
 
   def __init__(self, newBodyText):
     """The EmailProcessor constructor.
@@ -465,6 +465,17 @@ class EmailProcessor(object):
     return None                                                  # The address was filtered out
 
 
+  def processAttachments(self):
+    """ A method to process the email attachments, if present. Each non-inline email attachment is added as an 
+    attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.
+    No return value.
+    """
+    for attachment in emailmessage.attachments:
+      if not attachment.inline:
+        incident.addEmailAttachment(attachment.id)
+        incident.addArtifact("Email Attachment Name", attachment.suggested_filename, "")
+
+
   def addBasicInfoToIncident(self):
     """A method to perform basic information extraction from the email message.
     The email message sender address, including personal name if present, is set as the reporter field
@@ -480,7 +491,6 @@ class EmailProcessor(object):
 
     self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
 
-
 ###
 # Mainline starts here
 ###
@@ -494,11 +504,12 @@ newIncidentOwner = "admin@co3sys.com"
 # Create a suitable title for an incident based on the email
 newIncidentTitle = u"Incident generated from email \"{0}\" via mailbox {1}".format(emailmessage.subject, emailmessage.inbound_mailbox)
 
-# Check to see if a similar active incident already exists
-query_builder.equals(fields.incident.name, newIncidentTitle) # Same name as we would give a new incident
-query_builder.equals(fields.incident.plan_status, "Active")  # Restrict search to active incidents
-query = query_builder.build()                                # Create the query object
-incidents = helper.findIncidents(query)                      # Retrieve similar incidents
+# Check to see if a similar incident already exists
+# We will search for an incident which has the same name as we would give a new incident
+query_builder.equals(fields.incident.name, newIncidentTitle)
+query_builder.equals(fields.incident.plan_status, "Active")
+query = query_builder.build()
+incidents = helper.findIncidents(query)
 
 if len(incidents) == 0:
   # A similar incident does not already exist. Create a new incident and associate the email with it.
@@ -512,13 +523,10 @@ if len(incidents) == 0:
   processor.addBasicInfoToIncident()
 
 else:
-   # One or more similar incidents already exist. Associate the email with the first preexisting incident.
+
+   # A similar incident already exists. Associate the email with this preexisting incident.
   log.info("Associating with existing incident {0}".format(incidents[0].id))
   emailmessage.associateWithIncident(incidents[0])
-
-###
-# From here on, the "incident" variable refers to the incident that the email is associated with.
-###
 
 # Capture any URLs present in the email body text and add them as artifacts
 processor.processArtifactCategory(processor.makeUrlPattern(), "URL", "Suspicious URL", processor.fixURL, processor.checkDomainWhiteList)
@@ -537,3 +545,6 @@ processor.processArtifactCategory(processor.makeHexPattern(40), "Malware SHA-1 H
 
 # Capture 64-character hexadecimal substrings in the email body text and add them as SHA-256 hash artifacts
 processor.processArtifactCategory(processor.makeHexPattern(64), "Malware SHA-256 Hash", "SHA-256 hash of potential malware file")
+
+# Add email message attachments to incident
+processor.processAttachments()
