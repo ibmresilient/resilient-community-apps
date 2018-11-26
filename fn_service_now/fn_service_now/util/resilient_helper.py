@@ -37,24 +37,6 @@ class ResilientHelper:
     # Default headers
     self.headers = {"Content-Type":"application/json","Accept":"application/json"}
 
-  # def str_to_bool(self, str):
-  #   """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""
-  #   if str.lower() == "true":
-  #       return True
-  #   elif str.lower() == "false":
-  #       return False
-  #   else:
-  #       raise ValueError("{} is not a boolean".format(str))
-
-  # def csv_to_list(self, as_csv):
-  #   """Function to convert a csv string to a Python List"""
-  #   as_list = []
-  #   f = StringIO(as_csv)
-  #   reader = csv.reader(f, delimiter=',')
-  #   for value in reader:
-  #     as_list.append(value)
-  #   return as_list[0]
-
   def get_config_option(self, option_name, optional=False):
     """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
     option = self.options.get(option_name)
@@ -103,8 +85,8 @@ class ResilientHelper:
     uri = "{0}/nav_to.do?uri={1}.do?sysparm_query={2}".format(self.SN_HOST, sn_table_name, sn_query)
     return uri
 
-  def get_status_rich_text(self, text, color="green"):
-    """Function that returns a richtext version of status_in_servicenow"""
+  def convert_text_to_richtext(self, text, color="green"):
+    """Converts text to richtext and adds a color"""
     
     colors = {
       "green": "#00b33c",
@@ -172,15 +154,12 @@ class ResilientHelper:
   # Define a Task that gets sent to ServiceNow
   class Task:
     """Class that repersents a Resilient Task. See API notes for more"""
-    def __init__(self, incident_id, task_id, task_name, task_instructions,
-                task_creator, task_owner):
+    def __init__(self, incident_id, task_id, task_name, task_instructions):
       self.type = "res_task"
       self.incident_id = incident_id
       self.task_id = task_id
       self.task_name = task_name
       self.task_instructions = task_instructions
-      self.task_creator = task_creator
-      self.task_owner = task_owner
 
     def asDict(self):
       return self.__dict__
@@ -203,18 +182,7 @@ class ResilientHelper:
     except:
       raise ValueError("Error getting task instructions")
 
-    # Get the task creator and owner
-    task_creator = {
-      "name": "{0} {1}".format(task["creator"]["fname"], task["creator"]["lname"]),
-      "email": task["creator"]["email"]
-    }
-    task_owner = {
-      "name": "{0} {1}".format(task["owner_fname"], task["owner_lname"]),
-      "email": task["owner_id"]
-    }
-
-    return self.Task(incident_id, task_id, task["name"], task_instructions,
-                    task_creator, task_owner)
+    return self.Task(incident_id, task_id, task["name"], task_instructions)
 
   # Define an Incident that gets sent to ServiceNow
   class Incident:

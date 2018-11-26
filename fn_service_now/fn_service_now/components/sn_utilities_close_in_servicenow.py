@@ -125,7 +125,7 @@ class FunctionComponent(ResilientComponent):
 
                 cells_to_update = {
                   "time": int(time.time()*1000),
-                  "servicenow_status": res_helper.get_status_rich_text(close_in_sn_response["sn_state"], "red")
+                  "servicenow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
                   }
                 
                 # Update the row

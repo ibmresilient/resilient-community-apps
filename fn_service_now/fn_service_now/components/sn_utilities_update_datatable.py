@@ -85,11 +85,11 @@ class FunctionComponent(ResilientComponent):
 
               # A=Active Incident, O=Open Task
               if payload.inputs["sn_resilient_status"] == "A" or payload.inputs["sn_resilient_status"] == "O":
-                resilient_status = res_helper.get_status_rich_text("Active", "green")
+                resilient_status = res_helper.convert_text_to_richtext("Active", "green")
 
               # C=Closed Incident/Task
               elif payload.inputs["sn_resilient_status"] == "C":
-                resilient_status = res_helper.get_status_rich_text("Closed", "red")
+                resilient_status = res_helper.convert_text_to_richtext("Closed", "red")
 
               else:
                 raise ValueError("{0} is not a handled status option".format(payload.inputs["sn_resilient_status"]))
