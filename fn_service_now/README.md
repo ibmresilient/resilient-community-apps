@@ -1,7 +1,7 @@
 # Resilient Integration with ServiceNow
 **This package contains six functions that help integrate with the ServiceNow Platform**
 
- ![screenshot](./screenshots/1.png)
+ ![screenshot](./screenshots/0.png)
 
 
 ## app.config settings:
@@ -26,7 +26,7 @@ sn_password=
 ## **1: Create in ServiceNow**
 
 ### Function Inputs:
-| Function Name | Type | Required | Example |
+| Input Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `incident_id` | `Number` | Yes | `1001` |
 | `task_id` | `Number` | No | `20000002` |
@@ -139,8 +139,101 @@ if results.success:
   incident.addNote(helper.createRichText(noteText))
 ```
 
+## **2: Close in ServiceNow**
+
+### Function Inputs:
+| Input Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `incident_id` | `Number` | Yes | `1001` |
+| `task_id` | `Number` | No | `20000002` |
+| `sn_record_state` | `Number` | Yes | `7` *NB: These are defined in ServiceNow (See Note below)* |
+| `sn_close_notes` | `String` | Yes | `"We have closed this Incident"` |
+| `sn_close_code` | `String` | Yes | `"Solved (Work Around)"`  *NB: These are defined in ServiceNow (See Note below). We use an Activity Field in the Rule to define a Select field, where we list all the possible close_codes* |
+
+>**NOTE:** 
+> * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **sate/close_code** and you will see their label and values
+> * It is the value that we send from Resilient to ServiceNow
+>
+> **Record State:**
+>![screenshot](./screenshots/1.png)
+>
+> **Close Code:**
+> ![screenshot](./screenshots/2.png)
+
+### Function Output:
+```python
+results = {
+  success: True,
+
+  inputs: {
+    incident_id: 2105,
+    sn_record_state: 7,
+    task_id: 2251401,
+    sn_close_notes: "The IBM Resilient Team fixed this one!",
+    sn_ref_id: None,
+    sn_close_code: "Solved (Permanently)"
+    },
+
+  sn_ref_id: "INC0010454"
+}
+```
+
+### Pre-Process Script:
+* This example creates a Python Dictionary to map the ServiceNow States to their corresponding numeric value
+```python
+# A Dictionary that maps Record States to their corresponding codes
+# These codes are defined in ServiceNow and may be different for each ServiceNow configuration
+map_sn_record_states = {
+  "New": 1,
+  "In Progress": 2,
+  "On Hold": 3,
+  "Resolved": 6,
+  "Closed": 7,
+  "Canceled": 8
+}
+
+#####################
+### Define Inputs ###
+#####################
+
+# ID of this incident
+inputs.incident_id = incident.id
+
+# The state to change the record to
+# inputs.sn_record_state = map_sn_record_states["Closed"]
+inputs.sn_record_state = map_sn_record_states[rule.properties.sn_record_state]
+
+# The resolution notes that are normally required when you close a ServiceNow record
+# inputs.sn_close_notes = "This incident has been resolved in Resilient. No further action required"
+inputs.sn_close_notes = rule.properties.sn_close_notes
+
+# The ServiceNow 'close_code' that you normally select when closing a ServiceNow record
+# inputs.sn_close_code = "Solved (Permanently)"
+inputs.sn_close_code = rule.properties.sn_close_code
+```
+
+### Post-Process Script:
+This example **adds a Note to the Incident** detailing why the Incident was Closed.
+```python
+if results.success:
+
+  noteText = """<br>This Incident has been CLOSED in <b>ServiceNow</b>
+              <br><b>ServiceNow ID:</b> {0}
+              <br><b>ServiceNow Record State:</b> {1}
+              <br><b>ServiceNow Closing Notes:</b> {2}
+              <br><b>ServiceNow Closing Code:</b> {3}""".format(
+                                      results.sn_ref_id,
+                                      results.inputs.sn_record_state,
+                                      results.inputs.sn_close_notes,
+                                      results.inputs.sn_close_code)
+
+  incident.addNote(helper.createRichText(noteText))
+```
+
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered |
 | --------- | :---------: | --------------- | ------------------ |
 | Create Incident in ServiceNow | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Incident in ServiceNow` |
 | Create Task in ServiceNow | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Task in ServiceNow` |
+| Close Incident in ServiceNow | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Incident in ServiceNow` |
+| Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` |
