@@ -27,7 +27,7 @@ To uninstall,
 
 To package for distribution,
 
-    python ./fn_risk_fabric/setup.py sdist
+    python setup.py sdist --formats=gztar
 
 The resulting .tar.gz file can be installed using
 
