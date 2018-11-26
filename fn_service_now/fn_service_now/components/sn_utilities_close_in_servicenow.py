@@ -14,6 +14,7 @@ class FunctionPayload:
   def __init__(self, inputs):
     self.success = True
     self.inputs = {}
+    self.sn_ref_id = None
 
     for input in inputs:
       self.inputs[input] = inputs[input]
@@ -50,7 +51,6 @@ class FunctionComponent(ResilientComponent):
             inputs = {
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number (optional)
-              "sn_ref_id": res_helper.get_function_input(kwargs, "sn_ref_id", True), # text (optional)
               "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"), # text (required)
               "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"), # number (required)
               "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True), # text (optional)

@@ -183,7 +183,6 @@ class FunctionComponent(ResilientComponent):
               payload.success = False
 
             results = payload.asDict()
-            print results
 
             log.info("Complete")
 
