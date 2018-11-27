@@ -25,13 +25,17 @@ To uninstall,
 
     pip uninstall fn_risk_fabric
 
+To check for errors,
+
+    pylint --disable=R,C,W fn_risk_fabric
+
 To package for distribution,
 
     python setup.py sdist --formats=gztar
 
 The resulting .tar.gz file can be installed using
 
-    pip install <filename>.tar.gz
+    pip install fn_risk_fabric-<version>.tar.gz
 
 ## Configuration
 
@@ -49,3 +53,14 @@ Set the following values in the config file under the `[fn_risk_fabric]` section
     username=xxxxxxx
     password=xxxxxxx
     verifyFlag=True
+
+
+## Example Create Incident Scripts
+
+Loading Action Plans data for a Queue. Be sure to set the correct Incident Type ID:
+
+    python create_incidents_action_plans.py -q resilient
+
+Loading Risk Models with the Incident Type and Limit passed as a parameter:
+
+    python create_incidents_risk_models.py --itype "Risk Model" --limit 1

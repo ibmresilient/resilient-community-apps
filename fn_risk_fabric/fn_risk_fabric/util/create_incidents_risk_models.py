@@ -6,7 +6,7 @@ Simple script to create a new incident.
 from __future__ import print_function
 import time
 import logging
-import Resilient
+import resilient
 import ConfigParser
 from fn_risk_fabric.util.risk_fabric import get_risk_model_instances
 
