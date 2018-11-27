@@ -590,7 +590,7 @@ def mocked_session(*args, **kwargs):
         def post(self, url, **kwargs):
 
             if re.match("^/v1/file_lists/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/files/[a-fA-F0-9]{64}$", url):
-                return MockGetResponse(set_file_list_files(), 200)
+                return MockGetResponse(set_file_list_files(), 201)
             else:
                 return MockGetResponse(None, 404)
 
@@ -604,7 +604,7 @@ def mocked_session(*args, **kwargs):
         def patch(self, url, **kwargs):
 
             if re.match("^/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
-                return MockGetResponse(move_computer(), 200)
+                return MockGetResponse(move_computer(), 202)
             else:
                 return MockGetResponse(None, 404)
 
@@ -632,7 +632,7 @@ class MockGetResponse:
 
         http_error_msg = ''
 
-        if  self.status_code == 200:
+        if self.status_code in range(200, 203):
             pass
         elif self.status_code == 429:
             reason = "Rate limit failure"
