@@ -439,3 +439,33 @@ inputs.sn_resilient_status = task.status
 | Add Attachment to ServiceNow Record | `Attachment` | None | `Example: SN Utilities: Add Attachment to ServiceNow Record` | None |
 | Update SN Datatable on Incident Status Change | `Incident` | None | `Example: SN Utilities: Update Datatable Incident Status Change` | Status is changed |
 | Update SN Datatable on Task Status Change | `Task` | None | `Example: SN Utilities: Update Datatable Task Status Change` | Status is changed |
+
+# Datatable:
+
+## **ServiceNow External Ticket Status Datatable**
+ ![screenshot](./screenshots/3.png)
+
+### API Name:
+sn_external_ticket_status
+
+### Columns:
+| Column Name | API Access Name | Type |
+| ----------- | --------------- | -----|
+| Time Last Updated | `time` | `DateTimePicker` |
+| res_id | `res_id` | `Text` |
+| sn_ref_id | `sn_ref_id` | `Text` |
+| Resilient Status | `resilient_status` | `Rich Text Area` |
+| ServiceNow Status | `servicenow_status` | `Rich Text Area` |
+| Links | `link` | `Rich Text Area` |
+
+### Display the Datatable in an Incident
+* In IBM Resilient, each Incident can have one ServiceNow External Ticket Status Datatable
+* In order to display the Datatable in your Incident, you must **modify your Layout Settings**
+
+1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
+ ![screenshot](./screenshots/4.png)
+2. Enter **Tab Text**: `ServiceNow` and click **Add**
+ ![screenshot](./screenshots/5.png)
+3. **Drag** the Datatable into the middle and click **Save**
+ ![screenshot](./screenshots/6.png)
+4. Create a new Incident and you will now see the **ServiceNow Tab** with the Datatable
