@@ -18,13 +18,13 @@
 	//Switch on the type: "comment", "attachment" or "artifact"
 	switch(req.type){
 		case "comment":
-			var comment_type = req.sn_comment_type;
-			var comment_text = req.sn_comment_text;
-			if(comment_type == "work_note"){
-				record.work_notes = comment_text;
+			var note_type = req.sn_note_type;
+			var note_text = req.sn_note_text;
+			if(note_type == "work_note"){
+				record.work_notes = note_text;
 			}
-			else if(comment_type == "additional_comment"){
-				record.comments = comment_text;
+			else if(note_type == "additional_comment"){
+				record.comments = note_text;
 			}
 			break;
 		

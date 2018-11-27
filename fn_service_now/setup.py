@@ -27,10 +27,10 @@ setup(
         "resilient.circuits.components": [
             "SnUtilitiesCloseInServicenowFunctionComponent = fn_service_now.components.sn_utilities_close_in_servicenow:FunctionComponent",
             "SnUtilitiesCreateInServicenowFunctionComponent = fn_service_now.components.sn_utilities_create_in_servicenow:FunctionComponent",
+            "SnUtilitiesAddNoteToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_note_to_servicenow_record:FunctionComponent",
             "SnUtilitiesAddAttachmentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_attachment_to_servicenow_record:FunctionComponent",
             "SnUtilitiesGetSysIdFunctionComponent = fn_service_now.components.sn_utilities_get_sys_id:FunctionComponent",
-            "SnUtilitiesUpdateDatatableFunctionComponent = fn_service_now.components.sn_utilities_update_datatable:FunctionComponent",
-            "SnUtilitiesAddCommentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_comment_to_servicenow_record:FunctionComponent"
+            "SnUtilitiesUpdateDatatableFunctionComponent = fn_service_now.components.sn_utilities_update_datatable:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_service_now.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_service_now.util.customize:customization_data"],

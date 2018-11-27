@@ -25,7 +25,7 @@ class FunctionPayload:
     return self.__dict__
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_add_comment_to_servicenow_record"""
+    """Component that implements Resilient function 'sn_utilities_add_note_to_servicenow_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -37,8 +37,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_add_comment_to_servicenow_record")
-    def _sn_utilities_add_comment_to_servicenow_record_function(self, event, *args, **kwargs):
+    @function("sn_utilities_add_note_to_servicenow_record")
+    def _sn_utilities_add_note_to_servicenow_record_function(self, event, *args, **kwargs):
         """Function: A function that adds a Resilient Note to a ServiceNow record as either a 'Work Note' or 'Additional Comment'"""
 
         log = logging.getLogger(__name__)
@@ -52,14 +52,14 @@ class FunctionComponent(ResilientComponent):
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
               "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name", True), # text
-              "sn_comment_text": res_helper.get_function_input(kwargs, "sn_comment_text"), # text (required)
-              "sn_comment_type": res_helper.get_function_input(kwargs, "sn_comment_type")["name"] # select, text (required)
+              "sn_note_text": res_helper.get_function_input(kwargs, "sn_note_text"), # text (required)
+              "sn_note_type": res_helper.get_function_input(kwargs, "sn_note_type")["name"] # select, text (required)
             }
 
             # Convert rich text comment to plain text
-            soup = BeautifulSoup(inputs["sn_comment_text"], 'html.parser')
+            soup = BeautifulSoup(inputs["sn_note_text"], 'html.parser')
             soup = soup.get_text()
-            inputs["sn_comment_text"] = soup.replace(u'\xa0', u' ')
+            inputs["sn_note_text"] = soup.replace(u'\xa0', u' ')
             
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
@@ -88,8 +88,8 @@ class FunctionComponent(ResilientComponent):
                 "sn_ref_id": sn_ref_id,
                 "sn_table_name": payload.inputs["sn_table_name"],
                 "type": "comment",
-                "sn_comment_text": payload.inputs["sn_comment_text"],
-                "sn_comment_type": payload.inputs["sn_comment_type"]
+                "sn_note_text": payload.inputs["sn_note_text"],
+                "sn_note_type": payload.inputs["sn_note_type"]
               }
 
               yield StatusMessage("Add Note to ServiceNow")

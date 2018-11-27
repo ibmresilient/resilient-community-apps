@@ -28,8 +28,8 @@ sn_password=
 ### Function Inputs:
 | Input Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `incident_id` | `Number` | Yes | `1001` |
-| `task_id` | `Number` | No | `20000002` |
+| `incident_id` | `Number` | Yes | `2105` |
+| `task_id` | `Number` | No | `None` |
 | `sn_init_work_note` | `String` | No | `"This Incident originated from our Cyber Security Team using the IBM Resilient platform"` |
 | `sn_optional_fields` | `JSON String` | No | `"""{"assignment_group": "IT Security"}"""` |
 
@@ -60,8 +60,8 @@ results = {
 ```
 
 ### Pre-Process Script:
-* This example defines and uses the `dict_to_json_str` function to allow us to easily set optional_fields we want to send to ServiceNow
-* We also make use of user inputs from Rule Activity Fields by using: `rule.properties.sn_initial_note`
+* This example defines and uses the `dict_to_json_str` function to allow us to easily set optional_fields we want to send to ServiceNow.
+* We also make use of user inputs from Rule Activity Fields by using: `rule.properties.sn_initial_note`.
 * In the supplied example Workflow, there are 3 Functions chained together, with this Function being the third. 
 We use the output of the first and second functions here: 
   ```python
@@ -128,7 +128,7 @@ inputs.sn_optional_fields = dict_to_json_str({
 ```
 
 ### Post-Process Script:
-This example **adds a Note to the Incident** with a link to the ServiceNow Record.
+* This example **adds a Note to the Incident** with a link to the ServiceNow Record.
 ```python
 if results.success:
 
@@ -144,15 +144,15 @@ if results.success:
 ### Function Inputs:
 | Input Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `incident_id` | `Number` | Yes | `1001` |
-| `task_id` | `Number` | No | `20000002` |
+| `incident_id` | `Number` | Yes | `2105` |
+| `task_id` | `Number` | No | `2251401` |
 | `sn_record_state` | `Number` | Yes | `7` *NB: These are defined in ServiceNow (See Note below)* |
 | `sn_close_notes` | `String` | Yes | `"We have closed this Incident"` |
 | `sn_close_code` | `String` | Yes | `"Solved (Work Around)"`  *NB: These are defined in ServiceNow (See Note below). We use an Activity Field in the Rule to define a Select field, where we list all the possible close_codes* |
 
 >**NOTE:** 
-> * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **sate/close_code** and you will see their label and values
-> * It is the value that we send from Resilient to ServiceNow
+> * To see your record_state and close_codes value in ServiceNow go to **System Definition** > **Dictionary** > **Table Name** > **sate/close_code** and you will see their label and values.
+> * It is the value that we send from Resilient to ServiceNow.
 >
 > **Record State:**
 >![screenshot](./screenshots/1.png)
@@ -179,7 +179,7 @@ results = {
 ```
 
 ### Pre-Process Script:
-* This example creates a Python Dictionary to map the ServiceNow States to their corresponding numeric value
+* This example **creates a Python Dictionary** to map the ServiceNow States to their corresponding numeric value.
 ```python
 # A Dictionary that maps Record States to their corresponding codes
 # These codes are defined in ServiceNow and may be different for each ServiceNow configuration
@@ -213,7 +213,7 @@ inputs.sn_close_code = rule.properties.sn_close_code
 ```
 
 ### Post-Process Script:
-This example **adds a Note to the Incident** detailing why the Incident was Closed.
+* This example **adds a Note to the Incident** detailing why the Incident was closed.
 ```python
 if results.success:
 
@@ -230,6 +230,52 @@ if results.success:
   incident.addNote(helper.createRichText(noteText))
 ```
 
+## **3: Add Note to ServiceNow Record**
+
+### Function Inputs:
+| Input Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `incident_id` | `Number` | Yes | `2105` |
+| `task_id` | `Number` | No | `2251401` |
+| `sn_note_text` | `String` | Yes | `"Can your team look into this please` |
+| `sn_note_type` | `Select` | Yes | `"work_note"` OR `"additional_comment"` |
+
+### Function Output:
+```python
+results = {
+  success: True,
+
+  inputs: {
+    incident_id: 2105,
+    sn_note_text: "Can your team look into this please",
+    task_id: 2251401,
+    sn_note_type: "work_note"
+    }, 
+  res_id: "RES-2105-2251401",
+  sn_ref_id: INC0010455
+}
+```
+
+### Pre-Process Script:
+```python
+# The id of this incident
+inputs.incident_id = incident.id
+
+# If this is a task, get the taskId
+if note.type == 'task':
+  # Set the task_id
+  inputs.task_id = task.id
+
+# The type of note to create in ServiceNow
+inputs.sn_note_type = "work_note"
+
+# Get the text of the note
+inputs.sn_note_text = note.text.content
+```
+
+### Post-Process Script:
+*There is no Post-Process Script for this Function.*
+
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered |
 | --------- | :---------: | --------------- | ------------------ |
@@ -237,3 +283,5 @@ if results.success:
 | Create Task in ServiceNow | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Task in ServiceNow` |
 | Close Incident in ServiceNow | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Incident in ServiceNow` |
 | Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` |
+| Send as Additional Comment | `Note` | None | `Example: SN Utilities: Add Comment to ServiceNow Record` |
+| Send as Work Note | `Note` | None | `Example: SN Utilities: Add Work Note to ServiceNow Record` |
