@@ -11,7 +11,7 @@ import threading
 LOG = logging.getLogger(__name__)
 AMP_RL_RATE = 3600
 AMP_RL_LIMIT = 3000
-# Use module variables to share rate limit dynamic data shared between functions.
+# Use module variables to share rate limit dynamic between functions.
 REQ_TIMESTAMPS = []
 LIMIT_INFO = {}
 
@@ -109,8 +109,11 @@ class AmpRateLimit():
         """
         with rl_lock:
             now = time.time()
-            self._set_limit_update_ts(now) # Save timestamp when limits updated.
+            # Save timestamp when limits updated.
+            self._set_limit_update_ts(now)
             # Ensure we have all 4 rate limit headers returned before updating limits.
+            # The header keys are "X-RateLimit-Limit", "X-RateLimit-Remaining",
+            # "X-RateLimit-Reset", "X-RateLimit-ResetDate" which should have numeric values.
             if len(limit_headers) == 4:
                 for k, v in limit_headers.items():
                     LIMIT_INFO[k] = v
@@ -142,6 +145,9 @@ class AmpRateLimit():
             else:
                 elapsed_time = now - limit_update_ts
                 try:
+                    # Dict LIMIT_INFO should have the following 4 keys: "X-RateLimit-Limit", "X-RateLimit-Remaining",
+                    # "X-RateLimit-Reset", "X-RateLimit-ResetDate" with numeric values saved from request responses.
+                    # Only the 1st 3 headers are used in the calculations.
                     for k, v in LIMIT_INFO.items():
                         if k.endswith("Limit"):
                             # Set default minimum interval between calls.
