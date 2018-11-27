@@ -110,7 +110,6 @@ class FunctionComponent(ResilientComponent):
             inputs = {
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
-              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"), # text (required)
               "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True), # text
               "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True) # text, JSON String
             }
@@ -138,7 +137,7 @@ class FunctionComponent(ResilientComponent):
             # Generate the request_data
             request_data = generate_sn_request_data(res_client, res_helper, datatable,
                                                 payload.inputs["incident_id"],
-                                                payload.inputs["sn_table_name"],
+                                                res_helper.SN_TABLE_NAME,
                                                 payload.res_link,
                                                 payload.inputs["task_id"],
                                                 payload.inputs["sn_init_work_note"],

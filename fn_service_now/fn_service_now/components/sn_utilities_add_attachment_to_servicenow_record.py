@@ -70,7 +70,6 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function inputs:
             inputs = {
-              "sn_table_name": res_helper.get_function_input(kwargs, "sn_table_name"), # number (required)
               "attachment_id": res_helper.get_function_input(kwargs, "attachment_id"), # number (required)
               "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
               "task_id": res_helper.get_function_input(kwargs, "task_id", True) # number
@@ -107,7 +106,7 @@ class FunctionComponent(ResilientComponent):
               # Generate the request_data
               request_data = {
                 "sn_ref_id": sn_ref_id,
-                "sn_table_name": payload.inputs["sn_table_name"],
+                "sn_table_name": res_helper.SN_TABLE_NAME,
                 "type": "attachment",
                 "attachment_base64": attachment["contents"],
                 "attachment_name": attachment["name"],
