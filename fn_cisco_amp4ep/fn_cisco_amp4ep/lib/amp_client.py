@@ -168,6 +168,17 @@ class Ampclient(object):
 
         return r.json()
 
+    def test_connectivity(self):
+        """Connectivity Test which is used by resilient_circuits selftest.
+
+        Calls http 'head' request against 'event_types' url.
+
+        :return: Response
+        """
+        url = urljoin(self.base_url, self._endpoints["event_types"])
+        r = self._s.head(url, auth=self._auth)
+        return r
+
     def get_computers(self, group_guid=None, limit=None, hostname=None, internal_ip=None, external_ip=None):
         """Get a list of computers with agents deployed on them. Use parameters to narrow the search by IP address
         ,hostname or guid
