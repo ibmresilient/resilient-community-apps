@@ -35,19 +35,17 @@ class TestSnUtilitiesCreateInServicenow:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, sn_init_work_note, sn_custom_fields, sn_track_changes, sn_extend_request, expected_results", [
-        (123, 123, "text", "text", True, "text", {"value": "xyz"}),
-        (123, 123, "text", "text", True, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, sn_init_work_note, sn_optional_fields, expected_results", [
+        (123, 123, "text", "text", {"value": "xyz"}),
+        (123, 123, "text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, task_id, sn_init_work_note, sn_custom_fields, sn_track_changes, sn_extend_request, expected_results):
+    def test_success(self, circuits_app, incident_id, task_id, sn_init_work_note, sn_optional_fields, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
             "task_id": task_id,
             "sn_init_work_note": sn_init_work_note,
-            "sn_custom_fields": sn_custom_fields,
-            "sn_track_changes": sn_track_changes,
-            "sn_extend_request": sn_extend_request
+            "sn_optional_fields": sn_optional_fields
         }
         results = call_sn_utilities_create_in_servicenow_function(circuits_app, function_params)
         assert(expected_results == results)

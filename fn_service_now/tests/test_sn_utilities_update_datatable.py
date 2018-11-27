@@ -35,17 +35,16 @@ class TestSnUtilitiesUpdateDatatable:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, sn_ref_id, sn_record_state, expected_results", [
-        (123, 123, "text", 123, {"value": "xyz"}),
-        (123, 123, "text", 123, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, sn_resilient_status, expected_results", [
+        (123, 123, "text", {"value": "xyz"}),
+        (123, 123, "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, task_id, sn_ref_id, sn_record_state, expected_results):
+    def test_success(self, circuits_app, incident_id, task_id, sn_resilient_status, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
             "task_id": task_id,
-            "sn_ref_id": sn_ref_id,
-            "sn_record_state": sn_record_state
+            "sn_resilient_status": sn_resilient_status
         }
         results = call_sn_utilities_update_datatable_function(circuits_app, function_params)
         assert(expected_results == results)

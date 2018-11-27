@@ -35,17 +35,15 @@ class TestSnUtilitiesCloseInServicenow:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, sn_ref_id, sn_table_name, sn_record_state, sn_close_notes, sn_close_code, expected_results", [
-        (123, 123, "text", "text", 123, "text", "text", {"value": "xyz"}),
-        (123, 123, "text", "text", 123, "text", "text", {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, sn_record_state, sn_close_notes, sn_close_code, expected_results", [
+        (123, 123, 123, "text", "text", {"value": "xyz"}),
+        (123, 123, 123, "text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, task_id, sn_ref_id, sn_table_name, sn_record_state, sn_close_notes, sn_close_code, expected_results):
+    def test_success(self, circuits_app, incident_id, task_id, sn_record_state, sn_close_notes, sn_close_code, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
             "task_id": task_id,
-            "sn_ref_id": sn_ref_id,
-            "sn_table_name": sn_table_name,
             "sn_record_state": sn_record_state,
             "sn_close_notes": sn_close_notes,
             "sn_close_code": sn_close_code

@@ -35,15 +35,15 @@ class TestSnUtilitiesGetSysId:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("sn_query_field, sn_query_operator, sn_query_value, expected_results", [
+    @pytest.mark.parametrize("sn_table_name, sn_query_field, sn_query_value, expected_results", [
         ("text", "text", "text", {"value": "xyz"}),
         ("text", "text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, sn_query_field, sn_query_operator, sn_query_value, expected_results):
+    def test_success(self, circuits_app, sn_table_name, sn_query_field, sn_query_value, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
+            "sn_table_name": sn_table_name,
             "sn_query_field": sn_query_field,
-            "sn_query_operator": sn_query_operator,
             "sn_query_value": sn_query_value
         }
         results = call_sn_utilities_get_sys_id_function(circuits_app, function_params)

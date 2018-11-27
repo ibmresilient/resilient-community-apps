@@ -35,17 +35,16 @@ class TestSnUtilitiesAddAttachmentToServicenowRecord:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("attachment_id, incident_id, task_id, sn_ref_id, expected_results", [
-        (123, 123, 123, "text", {"value": "xyz"}),
-        (123, 123, 123, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("attachment_id, incident_id, task_id, expected_results", [
+        (123, 123, 123, {"value": "xyz"}),
+        (123, 123, 123, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, attachment_id, incident_id, task_id, sn_ref_id, expected_results):
+    def test_success(self, circuits_app, attachment_id, incident_id, task_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "attachment_id": attachment_id,
             "incident_id": incident_id,
-            "task_id": task_id,
-            "sn_ref_id": sn_ref_id
+            "task_id": task_id
         }
         results = call_sn_utilities_add_attachment_to_servicenow_record_function(circuits_app, function_params)
         assert(expected_results == results)
