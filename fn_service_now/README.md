@@ -33,6 +33,18 @@ sn_password=
 | `sn_init_work_note` | `String` | No | `"This Incident originated from our Cyber Security Team using the IBM Resilient platform"` |
 | `sn_optional_fields` | `JSON String` | No | `"""{"assignment_group": "IT Security"}"""` |
 
+>**NOTE:** by default this function:
+> * sets `short_description` in ServiceNow as the `incident.name` or `task.name`
+> * sets `description` in ServiceNow as the `incident.description` or `task.instructions`
+> * sets `work_notes` in ServiceNow as the `sn_init_work_note`
+>
+> **These defaults can be overwritten** by passing values from them in the `sn_optional_fields` input. To do this you would extend the example Pre-Process Script provided with the following:
+> ```python
+> inputs.sn_optional_fields = dict_to_json_str({
+> "short_description": "Custom Short Description",
+> "description": "Custom Long Description"
+> })
+> ```
 
 ### Function Output:
 ```python
