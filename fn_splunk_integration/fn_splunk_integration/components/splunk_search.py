@@ -46,6 +46,10 @@ class FunctionComponent(ResilientComponent):
             log.info("splunk_query_param5: %s", splunk_query_param5)
             log.info("splunk_max_return: %d", splunk_max_return)
 
+            splunk_verify_cert = True
+            if "verify_cert" in self.options and self.options["verify_cert"] == "false":
+                splunk_verify_cert = False
+
             splunk_query_param = [splunk_query_param1, splunk_query_param2, splunk_query_param3,
                                   splunk_query_param4, splunk_query_param5]
             query_string = make_query_string(splunk_query, splunk_query_param)
@@ -58,7 +62,8 @@ class FunctionComponent(ResilientComponent):
             splunk_client = splunk_utils.SplunkClient(self.options["host"],
                                                       port=int(self.options["port"]),
                                                       username=self.options["username"],
-                                                      password=self.options["splunkpassword"])
+                                                      password=self.options["splunkpassword"],
+                                                      verify=splunk_verify_cert)
             if splunk_max_return:
                 splunk_client.set_max_return(splunk_max_return)
 

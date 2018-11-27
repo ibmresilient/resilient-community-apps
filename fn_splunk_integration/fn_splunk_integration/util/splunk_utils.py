@@ -66,24 +66,27 @@ class SplunkClient(object):
     polling_interval = 5
     max_return = 0
 
-    def __init__(self, host, port, username, password):
+    def __init__(self, host, port, username, password, verify=True):
         """Init splunk_service"""
-        self.splunk_service = self.connect(host, port, username, password)
+        self.splunk_service = self.connect(host, port, username, password, verify)
 
     @staticmethod
-    def connect(host, port, username, password):
+    def connect(host, port, username, password, verify):
         """
         Connect to Splunk
         :param host: hostname for splunk
         :param port: port for splunk
         :param username: user name to login
         :param password: password to login
+        :param verify: True to validate the SSL cert
         :return:
         """
+        LOG.info("Splunk SDK verify flag is {}".format(verify))
         return splunk_client.connect(host=host,
                                      port=port,
                                      username=username,
-                                     password=password)
+                                     password=password,
+                                     verify=verify)
 
     def set_timeout(self, timeout):
         self.time_out = timeout

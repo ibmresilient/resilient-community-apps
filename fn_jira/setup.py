@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_jira'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'html2text'
+        'beautifulsoup4'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -28,6 +28,7 @@ setup(
             "JiraCreateCommentFunctionComponent = fn_jira.components.jira_create_comment:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_jira.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_jira.util.selftest:selftest_function"]
     }
 )

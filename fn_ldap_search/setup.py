@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_ldap_search',
     version='1.0.0',
-    license='Resilient License',
+    license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_ldap_search'",

@@ -4,15 +4,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc-cts-googlesafebrowsing',
-    setup_requires=['setuptools_scm'],
-    use_scm_version={"root": "../", "relative_to": __file__},
-    url='https://github.com/ibmresilient/resilient-circuits-packages',
+    version='1.0.0',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
-    author='IBM Resilient',
+    author='IBM Resilient Labs',
+    author_email='resil.labs@gmail.com',
     install_requires=[
         'rc-cts'
     ],
-    author_email='support@resilientsystems.com',
     description="Custom Threat Service - Google SafeBrowsing",
     long_description="Custom Threat Service - Google SafeBrowsing",
     packages=find_packages(),
