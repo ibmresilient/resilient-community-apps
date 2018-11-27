@@ -4,8 +4,8 @@
  ![screenshot](./screenshots/0.png)
 
 
-## app.config settings:
-```python
+# app.config settings:
+```
 [fn_service_now]
 # Link to your ServiceNow Instance
 sn_host=https://instance.service-now.com
@@ -375,13 +375,55 @@ inputs.sn_query_value = rule.properties.sn_assignment_group
 ### Post-Process Script:
 *There is generally no Post-Process Script for this Function. Its output is normally used as an input to the **Create in ServiceNow** function.*
 
+## **6: Update Datatable**
+
+### Function Inputs:
+| Input Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `incident_id` | `Number` | Yes | `2105` |
+| `task_id` | `Number` | No | `2251401` |
+| `sn_resilient_status` | `String` | Yes | `"C"` *("A"=Active Incident, "O"=Open Task, "C"=Closed Incident/Task)*|
+
+### Function Output:
+```python
+results = {
+  success: True,
+
+  inputs: {
+    incident_id: 2105,
+    task_id: 2251401,
+    sn_resilient_status: "C"
+  },
+
+  row_id: 47,
+  res_id: "RES-2105-2251401"
+}
+```
+
+### Pre-Process Script:
+```python
+# Get the incident id
+inputs.incident_id = incident.id
+
+# Get the task id
+inputs.task_id = task.id
+
+# Get the new status of the task
+inputs.sn_resilient_status = task.status
+```
+
+### Post-Process Script:
+*There is generally no Post-Process Script for this Function.*
+
 # Rules:
-| Rule Name | Object Type | Activity Fields | Workflow Triggered |
-| --------- | :---------: | --------------- | ------------------ |
-| Create Incident in ServiceNow | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Incident in ServiceNow` |
-| Create Task in ServiceNow | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Task in ServiceNow` |
-| Close Incident in ServiceNow | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Incident in ServiceNow` |
-| Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` |
-| Send as Additional Comment | `Note` | None | `Example: SN Utilities: Add Comment to ServiceNow Record` |
-| Send as Work Note | `Note` | None | `Example: SN Utilities: Add Work Note to ServiceNow Record` |
-| Add Attachment to ServiceNow Record | `Attachment` | None | `Example: SN Utilities: Add Attachment to ServiceNow Record` |
+| Rule Name | Object Type | Activity Fields | Workflow Triggered | Conditions |
+| --------- | :---------: | --------------- | ------------------ | ---------- |
+| Create Incident in ServiceNow | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Incident in ServiceNow` | None |
+| Create Task in ServiceNow | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Task in ServiceNow` | None |
+| Close Incident in ServiceNow | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Incident in ServiceNow` | None |
+| Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` | None |
+| Send as Additional Comment | `Note` | None | `Example: SN Utilities: Add Comment to ServiceNow Record` | None |
+| Send as Work Note | `Note` | None | `Example: SN Utilities: Add Work Note to ServiceNow Record` | None |
+| Add Attachment to ServiceNow Record | `Attachment` | None | `Example: SN Utilities: Add Attachment to ServiceNow Record` | None |
+| Update SN Datatable on Incident Status Change | `Incident` | None | `Example: SN Utilities: Update Datatable Incident Status Change` | Status is changed |
+| Update SN Datatable on Task Status Change | `Task` | None | `Example: SN Utilities: Update Datatable Task Status Change` | Status is changed |
