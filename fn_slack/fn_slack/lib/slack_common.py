@@ -734,9 +734,11 @@ class SlackUtils(object):
             attachment_uri = '/incidents/{}/attachments'.format(incident_id)
 
         # POST the new attachment
-        attachment_name = "slack_msg_export_channel_" + self.get_channel_name() + ".txt"
+        attachment_name = u"slack_msg_export_channel_{}.txt".format(self.get_channel_name())
+
         try:
             new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype='text/plain')
+
         except Exception as ex:
             raise ValueError(u"Failed to post the {} attachment: {}".format(attachment_name, ex))
 
@@ -752,6 +754,7 @@ class SlackUtils(object):
             channel=self.get_channel_id()
         )
         LOG.debug(results)
+
         return results
         #return {"ok": True}  # TODO archiving turned off for easier testing
 

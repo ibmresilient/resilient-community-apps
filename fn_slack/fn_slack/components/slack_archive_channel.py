@@ -75,7 +75,7 @@ class FunctionComponent(ResilientComponent):
             if results_msg_posted.get("ok"):
                 yield StatusMessage("Message warning 'Channel is set to be archived' was added to Slack.")
             else:
-                raise FunctionError("Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
+                raise FunctionError(u"Posting message for archiving channel failed: " + json.dumps(results_msg_posted))
 
             # get the channel history
             messages = slack_utils.get_channel_complete_history()
@@ -92,10 +92,10 @@ class FunctionComponent(ResilientComponent):
             if archive_results.get("ok"):
                 yield StatusMessage(u"Channel {} has been archived".format(res_associated_channel_name))
             else:
-                raise FunctionError("Archiving channel failed: " + json.dumps(archive_results))
+                raise FunctionError(u"Archiving channel failed: " + json.dumps(archive_results))
 
             results = {"channel": res_associated_channel_name}
-            LOG.debug(results)
+            LOG.info(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

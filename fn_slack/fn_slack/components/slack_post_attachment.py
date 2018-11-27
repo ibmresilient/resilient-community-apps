@@ -102,7 +102,9 @@ class FunctionComponent(ResilientComponent):
 
             results = {"channel": slack_channel_name,
                        "url": conversation_url}
-            LOG.debug(results)
+            # When printing unicode strings saved in a dict in Py2, make sure to add .decode("unicode-escape") so that
+            # unicode characters are displayed correctly
+            LOG.info(str(results).decode("unicode-escape"))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
