@@ -252,7 +252,7 @@ results = {
     sn_note_type: "work_note"
     }, 
   res_id: "RES-2105-2251401",
-  sn_ref_id: INC0010455
+  sn_ref_id: "INC0010455"
 }
 ```
 
@@ -276,6 +276,62 @@ inputs.sn_note_text = note.text.content
 ### Post-Process Script:
 *There is no Post-Process Script for this Function.*
 
+## **4: Add Attachment to ServiceNow Record**
+
+### Function Inputs:
+| Input Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `attachment_id` | `Number` | Yes | `2105` |
+| `incident_id` | `Number` | Yes | `2105` |
+| `task_id` | `Number` | No | `2251401` |
+
+### Function Output:
+```python
+results = {
+  success: True,
+
+  inputs: {
+    attachment_id: 39,
+    task_id: 2251401,
+    incident_id: 2105
+  },
+
+  attachment_name: "malwarefile.exe",
+  res_id: "RES-2105-2251401",
+  sn_ref_id: "INC0010455"
+}
+```
+
+### Pre-Process Script:
+```python
+# The id of this attachment
+inputs.attachment_id = attachment.id
+
+# The id of this incident
+inputs.incident_id = incident.id
+
+# If this is a task attachment, get the taskId
+if attachment.type == 'task':
+  inputs.task_id = task.id
+```
+
+### Post-Process Script:
+* This example **adds a Note to the Incident/Task** detailing what attachment was sent to ServiceNow.
+```python
+if results.success:
+
+  noteText = """<br>An Attachment was added to <b>ServiceNow</b>
+              <br><b>Attachment Name:</b>  {0}
+              <br><b>ServiceNow ID:</b>  {1}""".format(results.attachment_name, results.sn_ref_id)
+
+  # If this is a task attachment, add a note to the Task
+  if task:
+    task.addNote(helper.createRichText(noteText))
+  # Else add the note to the Incident
+  else:
+    incident.addNote(helper.createRichText(noteText))
+```
+
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered |
 | --------- | :---------: | --------------- | ------------------ |
@@ -285,3 +341,4 @@ inputs.sn_note_text = note.text.content
 | Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` |
 | Send as Additional Comment | `Note` | None | `Example: SN Utilities: Add Comment to ServiceNow Record` |
 | Send as Work Note | `Note` | None | `Example: SN Utilities: Add Work Note to ServiceNow Record` |
+| Add Attachment to ServiceNow Record | `Attachment` | None | `Example: SN Utilities: Add Attachment to ServiceNow Record` |
