@@ -281,7 +281,7 @@ inputs.sn_note_text = note.text.content
 ### Function Inputs:
 | Input Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `attachment_id` | `Number` | Yes | `2105` |
+| `attachment_id` | `Number` | Yes | `39` |
 | `incident_id` | `Number` | Yes | `2105` |
 | `task_id` | `Number` | No | `2251401` |
 
@@ -331,6 +331,49 @@ if results.success:
   else:
     incident.addNote(helper.createRichText(noteText))
 ```
+
+## **5: Get sys_id**
+
+### Function Inputs:
+| Input Name | Type | Required | Example |
+| ------------- | :--: | :-------:| ------- |
+| `sn_table_name` | `String` | Yes | `"sys_user_group"` |
+| `sn_query_field` | `String` | Yes | `"name"` *(This is the column name in the table you want to query)* |
+| `sn_query_value` | `String` | Yes | `"IT Securities"` *(This is the cell value in the column you want to query)* |
+
+### Function Output:
+```python
+results = {
+  success: True,
+
+  inputs: {
+    sn_table_name: "sys_user_group",
+    sn_query_value: "IT Securities",
+    sn_query_field: "name"
+  },
+  
+  sys_id: "5f6441efc0a8010e0177fcb589156352"
+}
+```
+
+### Pre-Process Script:
+```python
+# The table in ServiceNow to query
+inputs.sn_table_name = "sys_user_group"
+
+# The name of the field/table column to query
+inputs.sn_query_field = "name"
+
+# The value to equate the cell to
+## Get the group name from the Rule Activity Field with:
+inputs.sn_query_value = rule.properties.sn_assignment_group
+
+## OR Set group name statically with:
+# inputs.sn_query_value = "IT Securities"
+```
+
+### Post-Process Script:
+*There is generally no Post-Process Script for this Function. Its output is normally used as an input to the **Create in ServiceNow** function.*
 
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered |
