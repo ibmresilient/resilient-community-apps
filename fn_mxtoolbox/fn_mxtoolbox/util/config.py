@@ -9,9 +9,8 @@ from __future__ import print_function
 CONFIG_SECTION = "fn_mxtoolbox"
 def config_section_data():
 
-   config_data = """
-   [fn_mxtoolbox]
-   url=https://api.mxtoolbox.com/api/v1/Lookup
-   api_token=
-   """
+   config_data = u"""[fn_mxtoolbox]
+url=https://api.mxtoolbox.com/api/v1/Lookup
+api_token=
+"""
    return config_data
