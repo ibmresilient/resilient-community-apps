@@ -55,23 +55,10 @@ class IntegrationComponent(ResilientComponent):
                 log.info("microsoft_security_graph_alert_search_filter: %s",
                          microsoft_security_graph_alert_search_filter)
 
-            r = None
-            for i in list(range(2)):
-                headers = {
-                    "Content-type": "application/json",
-                    "Authorization": "Bearer " + ms_graph_helper.get_access_token()
-                }
-                start_filter = ""
-                if microsoft_security_graph_alert_search_filter:
-                    start_filter = "?$"
-                r = requests.get("{}security/alerts/{}{}".format(options.get("microsoft_graph_url"), start_filter,
-                                                                 microsoft_security_graph_alert_search_filter),
-                                 headers=headers)
-                # Check if need to refresh token and run again
-                if ms_graph_helper.check_status_code(r):
-                    break
-                elif i == 1:
-                    raise FunctionError("Problem with the access_token")
+            r = alert_search(options.get("microsoft_graph_url"), ms_graph_helper,
+                             microsoft_security_graph_alert_search_filter)
+            if not r:
+                raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")
             end_time = time.time()
@@ -105,19 +92,10 @@ class IntegrationComponent(ResilientComponent):
             else:
                 raise FunctionError("microsoft_security_graph_alert_id is required to run this function.")
 
-            r = None
-            for i in list(range(2)):
-                headers = {
-                    "Content-type": "application/json",
-                    "Authorization": "Bearer " + ms_graph_helper.get_access_token()
-                }
-                r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                               microsoft_security_graph_alert_id), headers=headers)
-                # Check if need to refresh token and run again
-                if ms_graph_helper.check_status_code(r):
-                    break
-                elif i == 1:
-                    raise FunctionError("Problem with the access_token")
+            r = get_alert_details(options.get("microsoft_graph_url"), ms_graph_helper,
+                                  microsoft_security_graph_alert_id)
+            if not r:
+                raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")
             end_time = time.time()
@@ -157,26 +135,10 @@ class IntegrationComponent(ResilientComponent):
             else:
                 raise FunctionError("microsoft_security_graph_alert_data is required to run this function")
 
-            r = None
-            for i in list(range(2)):
-                headers = {
-                    "Content-type": "application/json",
-                    "Authorization": "Bearer " + ms_graph_helper.get_access_token(),
-                    "Prefer": "return=representation"
-                }
-                try:
-                    data = json.loads(microsoft_security_graph_alert_data)
-                except ValueError as e:
-                    raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
-
-                r = requests.patch("{}/security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                                  microsoft_security_graph_alert_id), headers=headers,
-                                   json=data)
-                # Check if need to refresh token and run again
-                if ms_graph_helper.check_status_code(r):
-                    break
-                elif i == 1:
-                    raise FunctionError("Problem with the access_token")
+            r = update_alert(options.get("microsoft_graph_url"), ms_graph_helper, microsoft_security_graph_alert_id,
+                             microsoft_security_graph_alert_data)
+            if not r:
+                raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")
             end_time = time.time()
@@ -213,32 +175,17 @@ class IntegrationComponent(ResilientComponent):
 
     def msg_polling_thread(self):
         while True:
-            alert_list = self._get_alerts()
+            alert_list = get_alerts(self.options, self.Microsoft_security_graph_helper)
 
             # Check for alerts in incidents
             for alert in alert_list:
-                # If case is not currently an incident create one
+                # If alert is not currently an incident create one
                 if len(self._find_resilient_incident_for_req(alert.get("id"))) == 0:
-                    incident_payload = self.build_incident_dto(alert)
+                    incident_payload = build_incident_dto(alert, self.options.get("incident_template"))
                     self.create_incident(incident_payload)
 
                 # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
             time.sleep(int(self.options.get("msg_polling_interval", 600)))
-
-    def build_incident_dto(self, alert):
-        current_path = os.path.dirname(os.path.realpath(__file__))
-        default_temp_file = join(current_path, pardir, "data/templates/msg_incident_mapping.jinja")
-        template_file = self.options.get("incident_template", default_temp_file)
-
-        try:
-            with open(template_file, 'r') as template:
-                log.debug("Reading template file")
-                incident_template = template.read()
-
-                return template_functions.render(incident_template, alert)
-
-        except jinja2.exceptions.TemplateSyntaxError:
-            log.info("'incident_template' is not set correctly in config file.")
 
     def create_incident(self, payload):
         try:
@@ -254,36 +201,6 @@ class IntegrationComponent(ResilientComponent):
 
         except SimpleHTTPException:
             log.info("Something went wrong when attempting to create the Incident")
-
-    def _get_alerts(self):
-        options = self.options
-        ms_graph_helper = self.Microsoft_security_graph_helper
-
-        # Set createDateTime start filter
-        alert_time_range_sec = options.get("alert_time_range_sec")
-        createdDateTime_filter = ""
-        if alert_time_range_sec:
-            createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
-            createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
-
-        r = None
-        for i in list(range(2)):
-            headers = {
-                "Content-type": "application/json",
-                "Authorization": "Bearer " + ms_graph_helper.get_access_token()
-            }
-
-            r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                           create_filter(options.get("alert_filter"),
-                                                                         createdDateTime_filter)), headers=headers)
-            # Check if need to refresh token and run again
-            if ms_graph_helper.check_status_code(r):
-                break
-            elif i == 1:
-                raise ValueError("Problem with the access_token")
-
-        response_json = r.json()
-        return response_json.get("value")
 
     # Returns back list of incidents if there is one with the same case ID, else returns empty list
     def _find_resilient_incident_for_req(self, field_value):
@@ -335,6 +252,113 @@ class IntegrationComponent(ResilientComponent):
                            if r_inc["properties"].get(MSG_FIELD_NAME) == field_value]
 
         return r_incidents
+
+
+def get_alerts(options, ms_graph_helper):
+    # Set createDateTime start filter
+    alert_time_range_sec = options.get("alert_time_range_sec")
+    createdDateTime_filter = ""
+    if alert_time_range_sec:
+        createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
+        createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
+
+    r = None
+    for i in list(range(2)):
+        headers = {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + ms_graph_helper.get_access_token()
+        }
+
+        r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
+                                                       create_filter(options.get("alert_filter"),
+                                                                     createdDateTime_filter)), headers=headers)
+        # Check if need to refresh token and run again
+        if ms_graph_helper.check_status_code(r):
+            break
+        elif i == 1:
+            raise ValueError("Problem with the access_token")
+
+    response_json = r.json()
+    return response_json.get("value")
+
+
+def build_incident_dto(alert, custom_temp_file=None):
+    current_path = os.path.dirname(os.path.realpath(__file__))
+    default_temp_file = join(current_path, pardir, "data/templates/msg_incident_mapping.jinja")
+    if custom_temp_file:
+        template_file = custom_temp_file
+    else:
+        template_file = default_temp_file
+
+    try:
+        with open(template_file, 'r') as template:
+            log.debug("Reading template file")
+            incident_template = template.read()
+
+            return template_functions.render(incident_template, alert)
+
+    except jinja2.exceptions.TemplateSyntaxError:
+        log.info("'incident_template' is not set correctly in config file.")
+
+
+def alert_search(url, ms_helper, search_filter=None):
+    r = None
+    for i in list(range(2)):
+        headers = {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + ms_helper.get_access_token()
+        }
+        start_filter = ""
+        if search_filter:
+            start_filter = "?$"
+        r = requests.get("{}security/alerts/{}{}".format(url, start_filter,
+                                                         search_filter),
+                         headers=headers)
+        # Check if need to refresh token and run again
+        if ms_helper.check_status_code(r):
+            break
+        elif i == 1:
+            return False
+    return r
+
+
+def get_alert_details(url, ms_helper, alert_id):
+    r = None
+    for i in list(range(2)):
+        headers = {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + ms_helper.get_access_token()
+        }
+        r = requests.get("{}security/alerts/{}".format(url, alert_id), headers=headers)
+        # Check if need to refresh token and run again
+        if ms_helper.check_status_code(r):
+            break
+        elif i == 1:
+            return False
+    return r
+
+
+def update_alert(url, ms_helper, alert_id, alert_data):
+    r = None
+    for i in list(range(2)):
+        headers = {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + ms_helper.get_access_token(),
+            "Prefer": "return=representation"
+        }
+        try:
+            data = json.loads(alert_data)
+        except ValueError as e:
+            raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
+
+        r = requests.patch("{}/security/alerts/{}".format(url, alert_id), headers=headers,
+                           json=data)
+        # Check if need to refresh token and run again
+        if ms_helper.check_status_code(r):
+            break
+        elif i == 1:
+            return False
+    return r
 
 
 def create_filter(alert_filter, createDateTime_filter):

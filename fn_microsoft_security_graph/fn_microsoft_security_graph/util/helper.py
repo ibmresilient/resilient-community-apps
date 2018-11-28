@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 class MicrosoftGraphHelper:
     def __init__(self, tenant_id, client_id, client_secret):
-        self.__cache = TTLCache(maxsize=1, ttl=55*1000)  # Set to expire after 55 minutes so we always have a fresh one
+        self.__cache = TTLCache(maxsize=1, ttl=55*60)  # Set to expire after 55 minutes so it is always fresh
 
         self.__tenant_id = tenant_id
         self.__client_id = client_id,
@@ -56,3 +56,6 @@ class MicrosoftGraphHelper:
 
     def get_access_token(self):
         return self.__get_cache("microsoft_security_graph_access_token")
+
+    def clear_cache(self):
+        self.__cache.clear()
