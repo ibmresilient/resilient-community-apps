@@ -37,6 +37,25 @@ class AttachmentMock(BasicResilientMock):
         }
     }
     
+    datatable_rows = [
+      {
+        "time": 1543333316605,
+        "res_id": "RES-1001-2002",
+        "sn_ref_id": "INC123456",
+        "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+        "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+      },
+      {
+        "time": 1543333316605,
+        "res_id": "RES-1001",
+        "sn_ref_id": "INC123457",
+        "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+        "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+      }
+    ]
+
     @staticmethod
     def format_datatable_row(row):
       formatted_row = {}
@@ -99,16 +118,8 @@ class AttachmentMock(BasicResilientMock):
     @resilient_endpoint("GET", "/incidents/[0-9]+/table_data/sn_external_ticket_status\?handle_format=names")
     def datatable_incident_get(self, request):
         """ GET sn_external_ticket_status datatable """
-        rows = [{
-          "time": 1543333316605,
-          "res_id": "RES-1001-2002",
-          "sn_ref_id": "INC123456",
-          "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
-          "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-          "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
-        }]
 
-        data = {"rows": AttachmentMock.get_datatable_rows(rows)}
+        data = {"rows": AttachmentMock.get_datatable_rows(self.datatable_rows)}
 
         return requests_mock.create_response(request,
                                              status_code=200,

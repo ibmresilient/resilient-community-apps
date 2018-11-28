@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
               # Call POST and get response
               add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
               payload.res_id = res_id
-              payload.sn_ref_id = sn_ref_id
+              payload.sn_ref_id = add_in_sn_response["sn_ref_id"]
 
             results = payload.asDict()
 

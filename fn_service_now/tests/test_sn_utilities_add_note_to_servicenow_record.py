@@ -5,15 +5,17 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from sn_test_helper import *
+from copy import deepcopy
 
 PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "sn_utilities_add_note_to_servicenow_record"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Get mock config data
+config_data = get_mock_config_data()
 
-# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+# Use custom resilient_mock
+resilient_mock = AttachmentMock
 
 
 def call_sn_utilities_add_note_to_servicenow_record_function(circuits, function_params, timeout=10):
@@ -30,22 +32,48 @@ def call_sn_utilities_add_note_to_servicenow_record_function(circuits, function_
 class TestSnUtilitiesAddNoteToServicenowRecord:
     """ Tests for the sn_utilities_add_note_to_servicenow_record function"""
 
+    inputs1 = {
+      "incident_id": 1001,
+      "task_id": 2002,
+      "sn_note_text": "This is a test note",
+      "sn_note_type": {"name": "work_note"}
+    }
+
+    output1 = {
+      "inputs": deepcopy(inputs1),
+      "success": True,
+      "res_id": "RES-1001-2002",
+      "sn_ref_id": "INC0010459"
+    }
+    output1["inputs"]["sn_note_type"] = output1["inputs"]["sn_note_type"]["name"]
+
+    inputs2 = {
+      "incident_id": 1001,
+      "task_id": None,
+      "sn_note_text": "This is a test note",
+      "sn_note_type": {"name": "additional_comment"}
+    }
+
+    output2 = {
+      "inputs": deepcopy(inputs2),
+      "success": True,
+      "res_id": "RES-1001",
+      "sn_ref_id": "INC0010459"
+    }
+    output2["inputs"]["sn_note_type"] = output2["inputs"]["sn_note_type"]["name"]
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, sn_note_text, sn_note_type, expected_results", [
-        (123, 123, "text", 'additional_comment', {"value": "xyz"}),
-        (123, 123, "text", 'additional_comment', {"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, incident_id, task_id, sn_note_text, sn_note_type, expected_results):
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1), (inputs2, output2)])
+    def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
-            "incident_id": incident_id,
-            "task_id": task_id,
-            "sn_note_text": sn_note_text,
-            "sn_note_type": sn_note_type
-        }
-        results = call_sn_utilities_add_note_to_servicenow_record_function(circuits_app, function_params)
+
+        mock_response = {"sn_ref_id": "INC0010459"}
+
+        ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
+
+        results = call_sn_utilities_add_note_to_servicenow_record_function(circuits_app, inputs)
         assert(expected_results == results)
