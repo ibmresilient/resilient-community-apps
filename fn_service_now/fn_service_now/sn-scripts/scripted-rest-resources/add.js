@@ -6,7 +6,7 @@
 	//Declare global variables
 	var record = null;
 	var response_body = {};
-    var req = request.body.data;
+	var req = request.body.data;
 	
 	record = new GlideRecord(req.sn_table_name);
 

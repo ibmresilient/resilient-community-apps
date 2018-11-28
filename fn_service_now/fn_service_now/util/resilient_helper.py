@@ -42,7 +42,7 @@ class ResilientHelper:
     option = self.app_configs.get(option_name)
 
     if not option and optional is False:
-      err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
+      err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
       raise ValueError(err)
     else:
       return option
@@ -226,8 +226,8 @@ class ExternalTicketStatusDatatable():
     try:
       self.data = self.res_client.get(uri)
       self.rows = self.data["rows"]
-    except Exception:
-      raise ValueError("Failed to get sn_external_ticket_status Datatable")
+    except Exception as e:
+      raise ValueError("Failed to get sn_external_ticket_status Datatable", e)
 
   def get_row(self, cell_name, cell_value):
     """Returns the row if found. Returns None if no matching row found"""

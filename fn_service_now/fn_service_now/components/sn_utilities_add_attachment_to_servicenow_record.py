@@ -40,6 +40,7 @@ class FunctionPayload:
     self.res_id = None
     self.sn_ref_id = None
     self.attachment_name = None
+    self.sn_attachment_sys_id = None
 
     for input in inputs:
       self.inputs[input] = inputs[input]
@@ -117,9 +118,11 @@ class FunctionComponent(ResilientComponent):
             
               # Call POST and get response
               add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
+              print add_in_sn_response
               payload.res_id = res_id
               payload.sn_ref_id = sn_ref_id
               payload.attachment_name = attachment["name"]
+              payload.sn_attachment_sys_id = add_in_sn_response["attachment_id"]
 
             results = payload.asDict()
 

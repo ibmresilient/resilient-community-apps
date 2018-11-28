@@ -5,16 +5,16 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from sn_test_helper import *
 
 PACKAGE_NAME = "fn_service_now"
 FUNCTION_NAME = "sn_utilities_add_attachment_to_servicenow_record"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Get mock config data
+config_data = get_mock_config_data()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
+resilient_mock = AttachmentMock
 
 def call_sn_utilities_add_attachment_to_servicenow_record_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -30,21 +30,33 @@ def call_sn_utilities_add_attachment_to_servicenow_record_function(circuits, fun
 class TestSnUtilitiesAddAttachmentToServicenowRecord:
     """ Tests for the sn_utilities_add_attachment_to_servicenow_record function"""
 
+    inputs = {
+      "attachment_id": 1,
+      "incident_id": 1001,
+      "task_id": 2002
+    }
+
+    output = {
+      "inputs": inputs,
+      "success": True,
+      "res_id": "RES-1001-2002",
+      "sn_ref_id": "INC123456",
+      "attachment_name": u"Mock Attachment Name",
+      "sn_attachment_sys_id": "c1ea807ddb82230044ccd426ca961937"
+    }
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("attachment_id, incident_id, task_id, expected_results", [
-        (123, 123, 123, {"value": "xyz"}),
-        (123, 123, 123, {"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, attachment_id, incident_id, task_id, expected_results):
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
+    def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
-            "attachment_id": attachment_id,
-            "incident_id": incident_id,
-            "task_id": task_id
-        }
-        results = call_sn_utilities_add_attachment_to_servicenow_record_function(circuits_app, function_params)
+
+        mock_response = {'attachment_id': 'c1ea807ddb82230044ccd426ca961937', 'sn_ref_id': 'INC0010459'}
+
+        ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
+
+        results = call_sn_utilities_add_attachment_to_servicenow_record_function(circuits_app, inputs)
         assert(expected_results == results)
