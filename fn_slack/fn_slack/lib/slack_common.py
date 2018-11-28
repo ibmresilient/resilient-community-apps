@@ -257,7 +257,7 @@ class SlackUtils(object):
             file=attachment_content,
             filename=file_name,
             filetype=file_type,
-            title=u"Incident id {} {} attachment {}".format(incident_id, artifact_type, file_name),
+            title=u"Incident ID {} {} Attachment: {}".format(incident_id, artifact_type, file_name),
             initial_comment=slack_text
         )
         LOG.debug(results)
