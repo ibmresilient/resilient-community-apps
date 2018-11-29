@@ -41,16 +41,22 @@ class FunctionComponent(ResilientComponent):
             log.info("mx_command: %s", mx_command)
             log.info("mx_argument: %s", mx_argument)
             log.info("mx_param1: %s", mx_param1)
-            
+
+            # Setup the URL request
             url = '/'.join((self.options['url'], mx_command, "?argument={}&Authorization={}"))
             url = url.format(mx_argument, self.options['api_token'])
+
+            # Make URL request
             response = requests.get(url, headers=HEADERS)
+
+            # Check the results
             if(response.status_code == 200):
                 res = response.json()
             else:
                 msg = "Some error occured while retrieving the information from MXToolbox with status code: {}"
                 raise ValueError(msg.format(response.status_code))
 
+            # Send results back
             results = {
                 "value": res
             }
