@@ -513,7 +513,7 @@ incidents = helper.findIncidents(query)
 
 if len(incidents) == 0:
   # A similar incident does not already exist. Create a new incident and associate the email with it.
-  log.info("Creating new incident {0}".format(newIncidentTitle))
+  log.info(u"Creating new incident {0}".format(newIncidentTitle))
   
   # Create an incident with a title based on the email subject, owned by user admin@co3sys.com
   emailmessage.createAssociatedIncident(newIncidentTitle, newIncidentOwner)
