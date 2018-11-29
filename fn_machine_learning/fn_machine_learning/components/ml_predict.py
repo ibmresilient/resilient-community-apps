@@ -21,12 +21,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_machine_learning", {})
+        self.options = opts.get(APP_CONFIG_SECTION, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_machine_learning", {})
+        self.options = opts.get(APP_CONFIG_SECTION, {})
 
     @function("ml_predict")
     def _ml_predict_function(self, event, *args, **kwargs):
@@ -47,7 +47,14 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
             log.info("ml_incident_id: %s", ml_incident_id)
-            log.info("ml_model_file: %s", ml_model_file)
+
+            filename = resilient_utils.extract_filename(ml_model_file)
+            if not filename:
+                err_str = "No valid model file found in {}".format(ml_model_file)
+                log.error(err_str)
+                raise Exception(err_str)
+
+            log.info("ml_model_file: %s", filename)
 
             yield StatusMessage("starting...")
             inc = self.rest_client().get("/incidents/{}".format(str(ml_incident_id)))
@@ -57,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             # Read model folder from app.config
             #
             model_folder = self.opts[APP_CONFIG_SECTION].get(MODEL_DIR_KEY, None)
-            selected_model = os.path.join(model_folder, ml_model_file)
+            selected_model = os.path.join(model_folder, filename)
 
             if selected_model:
                 model = MlModelCommon.load_from_file(selected_model)

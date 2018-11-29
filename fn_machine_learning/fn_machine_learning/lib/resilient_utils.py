@@ -19,6 +19,7 @@ from fn_machine_learning.lib.ml_knn import MlKNN
 from fn_machine_learning.lib.ml_dummy_classifier import MlDummyClassifier
 import logging
 import csv
+import ntpath
 
 
 def get_model(name, imbalance_upsampling=None, class_weight=None, method=None):
@@ -251,3 +252,17 @@ def query_incidents(res_client, max_count=None, page_size=1000, in_log=None):
                 done = True
 
     return incidents
+
+
+def extract_filename(path_filename):
+    """
+    In case the customer uses a path instead of a filename, we extract the filename
+    If it is just a filename, then we return it back directly.
+    Using ntpath to make sure it works on all platforms.
+    Note the filename could be empty
+
+    :param path_filename:   input path or filename
+    :return:                extracted filename
+    """
+    filename = ntpath.basename(path_filename)
+    return filename
