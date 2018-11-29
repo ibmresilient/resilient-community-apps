@@ -15,8 +15,7 @@ FUNCTION_NAME = "sn_utilities_add_note_to_servicenow_record"
 config_data = get_mock_config_data()
 
 # Use custom resilient_mock
-resilient_mock = AttachmentMock
-
+resilient_mock = SNResilientMock
 
 def call_sn_utilities_add_note_to_servicenow_record_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -27,7 +26,6 @@ def call_sn_utilities_add_note_to_servicenow_record_function(circuits, function_
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
-
 
 class TestSnUtilitiesAddNoteToServicenowRecord:
     """ Tests for the sn_utilities_add_note_to_servicenow_record function"""

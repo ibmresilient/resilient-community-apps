@@ -18,7 +18,7 @@ class MockedResponse:
     self.status_code = status_code
     self.text = text
 
-class AttachmentMock(BasicResilientMock):
+class SNResilientMock(BasicResilientMock):
 
     attachments = {
         "1": {
@@ -57,26 +57,25 @@ class AttachmentMock(BasicResilientMock):
     ]
 
     @staticmethod
-    def format_datatable_row(row):
+    def format_datatable_row(row, row_id):
       formatted_row = {}
-      row_id = 0
 
       for key, value in row.items():
-        row_id += 1
-        
         formatted_row[key] = {
           "row_id": row_id,
           "id": key,
           "value": value
         }
   
-      return {"cells": formatted_row}
+      return {"id": row_id, "cells": formatted_row}
     
     @staticmethod
     def get_datatable_rows(rows):
+      row_id = 0
       return_rows = []
       for row in rows:
-        return_rows.append(AttachmentMock.format_datatable_row(row))
+        row_id += 1
+        return_rows.append(SNResilientMock.format_datatable_row(row, row_id))
       return return_rows
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/attachments/[0-9]+$")
@@ -119,7 +118,7 @@ class AttachmentMock(BasicResilientMock):
     def datatable_incident_get(self, request):
         """ GET sn_external_ticket_status datatable """
 
-        data = {"rows": AttachmentMock.get_datatable_rows(self.datatable_rows)}
+        data = {"rows": SNResilientMock.get_datatable_rows(self.datatable_rows)}
 
         return requests_mock.create_response(request,
                                              status_code=200,

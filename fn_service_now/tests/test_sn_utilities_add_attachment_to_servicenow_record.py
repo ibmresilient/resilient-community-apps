@@ -14,7 +14,7 @@ FUNCTION_NAME = "sn_utilities_add_attachment_to_servicenow_record"
 config_data = get_mock_config_data()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = AttachmentMock
+resilient_mock = SNResilientMock
 
 def call_sn_utilities_add_attachment_to_servicenow_record_function(circuits, function_params, timeout=10):
     # Fire a message to the function
