@@ -412,17 +412,20 @@ class EmailProcessor(object):
     Parameter "optionalListModifierFn" - a function to run across the list of matches to filter inappropriate values
     No return value.
     """
-    dataList = set(re.findall(regex, self.bodyText))
-    if dataList is not None and len(dataList) > 0 :
-      if optionalListModifierFn is not None:
-        for aFunction in optionalListModifierFn:
-          dataList = map(aFunction, dataList)
-          dataList = [x for x in dataList if x is not None]
-
-      self.printList("Found {0} ( {1} )".format(artifactType,description), dataList)
-      map(lambda theArtifact: self.addUniqueArtifact(theArtifact, artifactType, description), dataList)
+    if self.bodyText is None:
+      log.debug("Body is empty so not able to find artifact {0} for regex {1}".format(artifactType,regex))
     else:
-      log.debug("Could not find artifact {0} for regex {1}".format(artifactType,regex))
+      dataList = set(re.findall(regex, self.bodyText))
+      if dataList is not None and len(dataList) > 0 :
+        if optionalListModifierFn is not None:
+          for aFunction in optionalListModifierFn:
+            dataList = map(aFunction, dataList)
+            dataList = [x for x in dataList if x is not None]
+
+        self.printList("Found {0} ( {1} )".format(artifactType,description), dataList)
+        map(lambda theArtifact: self.addUniqueArtifact(theArtifact, artifactType, description), dataList)
+      else:
+        log.debug("Could not find artifact {0} for regex {1}".format(artifactType,regex))
 
 
   def checkIsItemNotOnWhiteList(self, anItem, whiteList):
