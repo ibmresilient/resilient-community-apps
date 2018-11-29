@@ -170,7 +170,6 @@ class ResilientHelper:
     try:
       task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
     except:
-      # TODO: Better error
       raise ValueError("task_id {0} not found".format(task_id))
     
     # Get the task_instructions in plaintext

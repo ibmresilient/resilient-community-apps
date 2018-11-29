@@ -14,13 +14,13 @@ class FunctionPayload:
   def __init__(self, inputs):
     self.success = True
     self.inputs = {}
-    self.row_id = None
-    self.res_id = None
-    self.res_link = None
-    self.sn_ref_id = None
-    self.sn_sys_id = None
-    self.sn_record_link = None
-    self.sn_time_created = None
+    self.row_id = None            # The row_id of the row created in Datatable
+    self.res_id = None            # RES-<incId>-<taskId>
+    self.res_link = None          # Link to res incident/task
+    self.sn_ref_id = None         # Local (to its table) unique id of ServiceNow record 
+    self.sn_sys_id = None         # Global unique id of ServiceNow record
+    self.sn_record_link = None    # Link to ServiceNow record
+    self.sn_time_created = None   # Timestamp from Resilient Integration server when record was created
 
     for input in inputs:
       self.inputs[input] = inputs[input]
