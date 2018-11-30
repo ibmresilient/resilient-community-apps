@@ -9,8 +9,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_digital_shadows_search]
-ds_api_key=XXXXX
-ds_api_secret=XXXXXXXXXXXXXXXXXXXXXXX
+ds_api_key=
+ds_api_secret=
 ds_base_url=https://portal-digitalshadows.com/api
 """
     return config_data
