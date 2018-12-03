@@ -88,8 +88,8 @@ class TestAMPRatelimit:
         self.rate_limiter.add_ts(time.time())
         self.rate_limiter.save_limits(limit_info_1)
         response = self.rate_limiter.get_delay()
-        assert 1.19 < response
-        assert 1.2 > response
+        assert 0.79 < response
+        assert 0.80 > response
 
     """ Test AmpRateLimit.get_delay now in future with save_limits, delay and add timestamp """
     def test_get_delay_with_delay_and_new_ts(self):
@@ -105,8 +105,8 @@ class TestAMPRatelimit:
         self.rate_limiter._set_limit_update_ts(now)
         response = self.rate_limiter.get_delay()
         test=1
-        assert 2.39 < response
-        assert 2.4 > response
+        assert 2.0 < response
+        assert 2.1 > response
 
     """ Test AmpRateLimit.get_delay with save_limits and 4 X timestamp """
     def test_get_delay_new_ts_X4(self):
@@ -123,8 +123,8 @@ class TestAMPRatelimit:
         self.rate_limiter.add_ts(now)
         self.rate_limiter.add_ts(now)
         response = self.rate_limiter.get_delay()
-        assert 3.59 < response
-        assert 3.6 > response
+        assert 2.4 < response
+        assert 2.5 > response
 
     """ Test AmpRateLimit.get_delay with now in future, save_limits and 4 X timestamp """
     def test_get_delay_with_delay_and_new_ts_X4(self):
@@ -142,8 +142,8 @@ class TestAMPRatelimit:
         self.rate_limiter.add_ts(now)
         self.rate_limiter.add_ts(now)
         response = self.rate_limiter.get_delay()
-        assert 4.79 < response
-        assert 4.8 > response
+        assert 3.6 < response
+        assert 3.7 > response
 
     """ Test AmpRateLimit.get_delay with zero remaining requests in time remaining"""
     def test_get_delay_zero_remaining(self):
@@ -161,6 +161,57 @@ class TestAMPRatelimit:
         response = self.rate_limiter.get_delay()
         assert 179.99 < response
         assert 180 > response
+    """ Test AmpRateLimit.get_delay with longer delay and period reset """
+    def test_get_delay_short_delay_short_period_reset(self):
+        REQ_TIMESTAMPS = []
+        limit_info_1 = {
+            "X-RateLimit-Limit": 3000,
+            "X-RateLimit-Remaining": 0,
+            "X-RateLimit-Reset": 2,
+            "X-RateLimit-ResetDate": 0.0,
+        }
+        now = time.time()
+        self.rate_limiter.save_limits(limit_info_1)
+        self.rate_limiter.add_ts(now)
+        time.sleep(2)
+        response = self.rate_limiter.get_delay()
+        assert 0 == response
+
+    """ Test AmpRateLimit.get_delay with short delay and period reset """
+    def test_get_delay_short_delay_period_reset_2(self):
+        REQ_TIMESTAMPS = []
+        limit_info_1 = {
+            "X-RateLimit-Limit": 3000,
+            "X-RateLimit-Remaining": 0,
+            "X-RateLimit-Reset": 5,
+            "X-RateLimit-ResetDate": 0.0,
+        }
+        now = time.time()
+        self.rate_limiter.save_limits(limit_info_1)
+        self.rate_limiter.add_ts(now)
+        self.rate_limiter.add_ts(now)
+        self.rate_limiter.add_ts(now)
+        self.rate_limiter.add_ts(now)
+        time.sleep(2)
+        response = self.rate_limiter.get_delay()
+        assert 2.9 < response
+        assert 3.0 > response
+
+    """ Test AmpRateLimit.get_delay with longer delay and period reset """
+    def test_get_delay_short_delay_2_period_reset(self):
+        REQ_TIMESTAMPS = []
+        limit_info_1 = {
+            "X-RateLimit-Limit": 3000,
+            "X-RateLimit-Remaining": 0,
+            "X-RateLimit-Reset": 2,
+            "X-RateLimit-ResetDate": 0.0,
+        }
+        now = time.time()
+        self.rate_limiter.save_limits(limit_info_1)
+        self.rate_limiter.add_ts(now)
+        time.sleep(2)
+        response = self.rate_limiter.get_delay()
+        assert 0 == response
 
     """ Test AmpRateLimit.save_limits test missing response header"""
 
