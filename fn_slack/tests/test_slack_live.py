@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-from fn_slack.lib.slack_common import *
 import pytest
+from fn_slack.lib.slack_common import *
 try:
     from unittest.mock import patch, Mock
 except:
@@ -38,7 +38,7 @@ class TestSlack(object):
                     }],
                 "response_metadata":
                     {
-                    "next_cursor": "aW1f"
+                        "next_cursor": "aW1f"
                     }
             },
             {
@@ -64,8 +64,8 @@ class TestSlack(object):
         print("Test find Slack channel by name error\n")
 
         mocked_api_call.return_value = {
-                "ok": False
-            }
+            "ok": False
+        }
 
         try:
             slack_utils = SlackUtils("fake_api_key")
@@ -405,7 +405,7 @@ class TestSlack(object):
         resoptions = {
             'host': 'localhost',
             'port': '443',
-         }
+        }
         slack_details = json.dumps(self._buildDataDetails())
         results = slack_utils.slack_post_message(resoptions, slack_details, True, None, True, def_username)
 
@@ -527,25 +527,25 @@ class TestSlack(object):
 
         assert results.get("ok") is True
 
-    # @patch('fn_slack.lib.slack_common.SlackClient.api_call')
-    # def test_archive_channel_error(self, mocked_api_call):
-    #     """ Test archive channel error"""
-    #     print("TTest archive channel error\n")
-    #
-    #     # Setup channel first
-    #     mocked_channel = {
-    #         "id": "C0EAQDV4Z",
-    #         "name": "test-channel"
-    #     }
-    #     slack_utils = SlackUtils("fake_api_key")
-    #     slack_utils.set_channel(mocked_channel)
-    #
-    #     mocked_api_call.return_value = {
-    #         "ok": False
-    #     }
-    #     results = slack_utils.archive_channel()
-    #
-    #     assert results.get("ok") is False
+    @patch('fn_slack.lib.slack_common.SlackClient.api_call')
+    def test_archive_channel_error(self, mocked_api_call):
+        """ Test archive channel error"""
+        print("TTest archive channel error\n")
+
+        # Setup channel first
+        mocked_channel = {
+            "id": "C0EAQDV4Z",
+            "name": "test-channel"
+        }
+        slack_utils = SlackUtils("fake_api_key")
+        slack_utils.set_channel(mocked_channel)
+
+        mocked_api_call.return_value = {
+            "ok": False
+        }
+        results = slack_utils.archive_channel()
+
+        assert results.get("ok") is False
 
     @patch('fn_slack.lib.slack_common.SlackClient.api_call')
     def test_get_user_info(self, mocked_api_call):
@@ -555,12 +555,12 @@ class TestSlack(object):
         mocked_api_call.return_value = {
             "ok": True,
             "user": {
-                    "id": "W012A3CDE",
-                    "name": "spengler",
-                    "profile": {
-                        "display_name": "Egon Spengler"
-                    }
+                "id": "W012A3CDE",
+                "name": "spengler",
+                "profile": {
+                    "display_name": "Egon Spengler"
                 }
+            }
         }
         slack_utils = SlackUtils("fake_api_key")
         display_name = slack_utils.get_user_display_name("W012A3CDE")
@@ -841,8 +841,8 @@ class TestSlack(object):
                 u'slack_db_channel': {u'row_id': 14, u'id': u'slack_db_channel', u'value': u'test-incident-channel'}}},
 
             {u'cells': {
-              u'slack_db_res_id': {u'row_id': 15, u'id': u'slack_db_res_id', u'value': u'RES-2095-2251214'},
-              u'slack_db_channel': {u'row_id': 15, u'id': u'slack_db_channel', u'value': u'test-task-channel'}}}
+                u'slack_db_res_id': {u'row_id': 15, u'id': u'slack_db_res_id', u'value': u'RES-2095-2251214'},
+                u'slack_db_channel': {u'row_id': 15, u'id': u'slack_db_channel', u'value': u'test-task-channel'}}}
         ]}
 
         result = slack_channel_name_datatable_lookup(mocked_res_client, 2095, 2251214)
@@ -930,7 +930,7 @@ class TestSlack(object):
 
         # Setup channel first
         mocked_channel = {
-            "name": "test-channel"
+            "name": u"test-channel"
         }
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
@@ -953,7 +953,7 @@ class TestSlack(object):
 
         # Setup channel first
         mocked_channel = {
-            "name": "test-channel"
+            "name": u"test-channel"
         }
         slack_utils = SlackUtils("fake_api_key")
         slack_utils.set_channel(mocked_channel)
@@ -1141,7 +1141,7 @@ class TestSlack(object):
 
     @pytest.mark.parametrize("message,expected_output_data", [
         ({"type": "message", "subtype": "bot_message", "username": "username", "ts": "1531195200",
-         "thread_ts": "1531195200", "reply_count": 3, "text": "Non attachment text",
+          "thread_ts": "1531195200", "reply_count": 3, "text": "Non attachment text",
           "files": [{"permalink": "permalink", "name": "name"}]},
          {'username': "username", 'msg_time': '2018-07-10 04:00:00', 'reply_count': 3, 'msg_text': 'Non attachment text',
           'msg_pretext': None, 'file_name': 'File name name', 'file_permalink': 'File url permalink',
