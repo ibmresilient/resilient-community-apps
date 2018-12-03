@@ -17,7 +17,7 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Simple test to confirm access to Ciscp AMP for endpoint API connectivity.
+    Simple test to confirm access to Cisco AMP for endpoint API connectivity.
     """
     options = opts.get("fn_cisco_amp4ep", {})
     try:
