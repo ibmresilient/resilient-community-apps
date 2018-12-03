@@ -14,6 +14,7 @@ from slackclient import SlackClient
 import resilient_circuits.template_functions as template_functions
 from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import *
+import unicodedata
 
 
 LOG = logging.getLogger(__name__)
@@ -734,7 +735,13 @@ class SlackUtils(object):
             attachment_uri = '/incidents/{}/attachments'.format(incident_id)
 
         # POST the new attachment
-        attachment_name = u"slack_msg_export_channel_{}.txt".format(self.get_channel_name())
+        # Uploading files with non-ASCII file names using Python Requests doesn't work correctly.
+        # To solve this issue we are using unicodedata.normalize(form, unistr)
+        # to return the Slack channel name to normal form 'form' for the Unicode string 'unistr'.
+        # The normal form KD (NFKD) will apply the compatibility decomposition,
+        # i.e. replace all compatibility characters with their equivalents.
+        channel_name_ascii = unicodedata.normalize('NFKD', self.get_channel_name()).encode('ascii', 'ignore')
+        attachment_name = u"Slack_channel_{}_history.txt".format(channel_name_ascii)
 
         try:
             new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype='text/plain')
@@ -756,7 +763,6 @@ class SlackUtils(object):
         LOG.debug(results)
 
         return results
-        #return {"ok": True}  # TODO archiving turned off for easier testing
 
     def get_channel_type(self):
         """
