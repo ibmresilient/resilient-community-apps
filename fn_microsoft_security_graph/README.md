@@ -6,7 +6,7 @@ To install in "development mode":
 
     pip install -e ./fn_microsoft_security_graph/
 
-After installation, the package will be loaded by `resilient-circuits run`.
+After installation, the package is loaded by `resilient-circuits run`.
 
 
 To uninstall:
@@ -25,16 +25,16 @@ The resulting .tar.gz file can be installed using:
 <br/>
 ## Configuration
 
-1. Import the package's customization data into the Resilient Platform using the command:
+1. Import the package's customization data into the Resilient platform using the command:
 
 		resilient-circuits customize
 
-2. Update and edit the `app.config` file by first running:
+2. Update the `app.config` file by first running:
 
 		resilient-circuits configure -c, to start a new configuration file or
 		resilient-circuits configure -u, to update an existing configuration
 
-	Edit
+3.	Edit the `app.config` file:
 
 		[fn_microsoft_security_graph]
 		# Graph URL with version number
@@ -58,20 +58,20 @@ The resulting .tar.gz file can be installed using:
 		#alert_time_range_sec=3600
 
 ## Customization
-For each each of the workflow, review the inputs and the post-process scripts to ensure expected behavior is set to occur.
+For each workflow, verify the inputs and the post-process scripts to ensure that they are accurate and appropriate.
 
 ## Run Functions
 1. Start Resilient Circuits with:
 
 		resilient-circuits run
 
-2. Trigger one of the rules which will return more information on alerts from the Microsoft Graph
+2. Trigger one of the rules that will return information on alerts from the Microsoft Graph.
 
 ## Run alert poller:
-Based on configurations under the `## Polling options` section in the `app.config` the polling interval, which alerts to find and other settings can be customized.
+Based on configurations under the `## Polling options` section in the `app.config`, you can customize the polling interval, which alerts to find, and other settings.
 
-1. Start Resilient Circutis with:
+1. Start Resilient Circuits with:
 
 		resilient-circuits run
 
-2. When an alert which doesn't have a coorsponding open incident in Resilient and would be returned by the search query is generated in the Microsoft Security Graph a new Incident in created.
+2. When an alert that does not have a corresponding open incident in the Resilient platform and would be returned by the search query, is generated in the Microsoft Security Graph, a new incident is created.
