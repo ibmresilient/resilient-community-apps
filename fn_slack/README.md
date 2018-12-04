@@ -1,7 +1,6 @@
 # Resilient Functions Integration to Slack
 
-This function creates a Slack message based on a Resilient incident, it's tasks, notes and artifacts. 
-Threaded replies are possible based on a retained Slack thread_id.
+This function creates a Slack message based on a Resilient Incident, it's Tasks, Notes, Artifacts and Attachments.
 
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
@@ -10,7 +9,7 @@ Many of the features of posting a Slack message are under customer control inclu
 - Posting messages from Incidents, Notes, Artifacts and Tasks displaying authorship
 - Uploading Incident, Task or Artifact attachment
 - Slack user ID <@U345GHIJKL> and channel ID #C012ABCDE references
-- Exporting conversation history to a text file, saving it as an attachment in Resilient and archiving Slack channel
+- Exporting conversation history to a text file, saving it as an Attachment in Resilient and archiving Slack channel
 
 ## Installation
 
@@ -53,11 +52,10 @@ See the accompanying documentation for how to install to Resilient and configure
 	This will create the following custom components:
 	* Message Destinations: `slack`
 	* Functions: `slack_archive_channel, slack_post_attachment, slack_post_message`
-	* Custom Fields: `slack_url`
 	* Action Fields: `rule_slack_channel, rule_slack_is_channel_private, rule_slack_participant_emails, rule_slack_text`
 	* Custom datatables: `slack_conversations_db`
 	* Workflows: `archive_slack_channel, create_slack_message, create_slack_reply, example_post_attachment_to_slack__artifact, slack_example_archive_slack_channel__task, slack_example_post_attachment_to_slack, slack_example_post_message_to_slack__artifact, slack_example_post_message_to_slack__task`
-	* Rules: `Example: Archive Slack Channel - Incident, Example: Archive Slack Channel - Task, Example: Post Artifact data to Slack, Example: Post Attachment to Slack, Example: Post Attachment to Slack - Artifact, Example: Post Incident data to Slack, Example: Post Note data to Slack, Example: Post Task data to Slack`
+	* Rules: `Example: Archive Incident Slack Channel, Example: Archive Task Slack Channel, Example: Post Artifact Attachment to Slack, Example: Post Artifact to Slack, Example: Post Incident / Task Attachment to Slack, Example: Post Incident to Slack, Example: Post Note to Slack, Example: Post Task to Slack`                  
 
 2. Update and edit `app.config` by first running:
 

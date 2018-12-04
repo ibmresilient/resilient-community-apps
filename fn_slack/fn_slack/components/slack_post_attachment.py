@@ -2,12 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation to Slack.
-This function uploads file to Slack and creates a Slack message based on a Resilient attachments.
+This function uploads file to Slack and creates a Slack message based on a Resilient Attachments.
 
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
 - Inviting users to conversations
-- Uploading Incident, Task or Artifact attachment
+- Uploading Incident, Task or Artifact Attachments
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -33,8 +33,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("slack_post_attachment")
     def _slack_post_attachment(self, event, *args, **kwargs):
-        """Function: Function uploads Incident, Task or Artifact attachment to Slack channel.
-            TODO! - You can upload files as bot user with Bot User Token!"""
+        """Function: Function uploads Incident, Task or Artifact Attachments to Slack channel."""
         try:
             validate_fields(['api_token'], self.options)
             validate_fields(['incident_id'], kwargs)

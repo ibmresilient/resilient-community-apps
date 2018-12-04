@@ -3,7 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation to Slack.
 This function exports conversation history to a text file,
-saves it as an attachment in Resilient and arches Slack channel.
+saves it as an Attachment in Resilient and archives Slack channel.
 """
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -28,7 +28,7 @@ class FunctionComponent(ResilientComponent):
     @function("slack_archive_channel")
     def _slack_archive_channel_function(self, event, *args, **kwargs):
         """Function: Function exports conversation history from Slack channel to a text file,
-            saves the text file as an attachment and archives the Slack channel. """
+            saves the text file as an Attachment and archives the Slack channel. """
         try:
             validate_fields(['api_token', 'username'], self.options)
             validate_fields(['incident_id'], kwargs)
@@ -83,9 +83,9 @@ class FunctionComponent(ResilientComponent):
             # Saving conversation history to a text file and post it as attachment
             new_attachment = slack_utils.save_conversation_history_as_attachment(res_client, messages, incident_id, task_id)
             if new_attachment is not None:
-                yield StatusMessage("Channel's chat history was uploaded as an attachment")
+                yield StatusMessage("Channel's chat history was uploaded as an Attachment")
             else:
-                raise FunctionError("Failed creating an attachment")
+                raise FunctionError("Failed creating an Attachment")
 
             # Archive channel
             archive_results = slack_utils.archive_channel()

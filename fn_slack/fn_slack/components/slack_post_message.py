@@ -2,7 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 """Function implementation to Slack.
-This function creates a Slack message based on a Resilient incident, it's tasks, notes and artifacts.
+This function creates a Slack message based on a Resilient Incident, it's Tasks, Notes and Artifacts.
 
 Many of the features of posting a Slack message are under customer control including:
 - Creating private or public channels
@@ -35,8 +35,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("slack_post_message")
     def _slack_post_message_function(self, event, *args, **kwargs):
-        """Function: Create a Slack message based on an incident, task, note or an artifact data.
-        All the fields to send to slack are sent in slack_text. A json structure is used to know how to interpret field
+        """Function: Create a Slack message based on an Incident, Task, Note or an Artifact data.
+        All the fields to send to Dlack are sent in slack_text. A json structure is used to know how to interpret field
         meanings. A structure can look like this with conversions based on the 'type' key/value pair:
 
         {
@@ -65,10 +65,10 @@ class FunctionComponent(ResilientComponent):
         - parse="none", Slack will not perform any processing on the message, it will keep all markup formatting '<'
         - link_names=1, Slack will linkify URLs, channel names (starting with a '#') and username ids (starting with an '<@ user_id >')
                         Example of text to post in Slack: "Hey user <@UCNC5K34J> check out #random"
-                        FIXME! Using link_names when posting messages to be deprecated
+                        TODO Using link_names when posting messages to be deprecated
         Threading isn't supported (reply_broadcast and thread_ts are None).
 
-        The remaining input fields are passed to the slack api call to control the message post.
+        The remaining input fields are passed to the Slack api call to control the message post.
         Refer to the slack api documentation on how to use the parameters.
         """
         try:

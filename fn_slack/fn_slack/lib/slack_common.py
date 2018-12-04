@@ -10,11 +10,11 @@ import re
 import tempfile
 import os
 from os.path import join, pardir
+import unicodedata
 from slackclient import SlackClient
 import resilient_circuits.template_functions as template_functions
 from fn_slack.lib.errors import IntegrationError
 from fn_slack.lib.resilient_common import *
-import unicodedata
 
 
 LOG = logging.getLogger(__name__)
@@ -206,18 +206,18 @@ class SlackUtils(object):
             attachment_json = convert_slack_details_to_payload(slack_text, resoptions)
         # If slack_text can be converted to a python dictionary with json.loads the payload will be posted in Slack as
         # a Slack attachment.
-        # If slack_text isn't in JSON format and json.loads returns an error but the workflow does not terminate,
-        # message is posted in Slack as a regular text and the message describing this 'action' is saved to log.
+        # If slack_text isn't in JSON format and json.loads returns an error the workflow does not terminate,
+        # message is posted in Slack as a regular text and the message describing this action is saved to log.
         except ValueError as json_error:
-            LOG.info("Warning - Cannot convert payload to JSON, posting to Slack as a regular text - "
-                     "see JSON message '{}'.".format(json_error))
-            payload = slack_text  # FIXME change to LOG.debug
+            LOG.debug("Warning - Cannot convert payload to JSON, posting to Slack as a regular text - "
+                      "see JSON message '{}'. %s", json_error)
+            payload = slack_text
 
         results = self.slack_client.api_call(
             "chat.postMessage",
             channel=self.get_channel_id(),
             as_user=slack_as_user,
-            username=slack_username if slack_username else def_username,  # FIXME! Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
+            username=slack_username if slack_username else def_username,  # TODO Username to be deprecated! Slack apps and their bot users should not use the username field when authoring a message. The username is part of your app's configuration and will not always be settable at runtime.
             parse="none",  # Slack will not perform any processing on the message, it will keep all markup formatting '<'
             link_names=1,  # Slack will linkify URLs, channel names (starting with a '#') and usernames (starting with an '@')
             mrkdown=slack_markdown,
@@ -671,7 +671,7 @@ class SlackUtils(object):
             subtype = message.get("subtype")
             if subtype == "bot_message":
                 username = message.get("username")  # Bot's name is stored in "username" property
-                # FIXME! Bot's username to be deprecated
+                # TODO Bot's username to be deprecated
             else:
                 username = self.get_user_display_name(message.get("user"))
 
@@ -734,7 +734,6 @@ class SlackUtils(object):
         else:
             attachment_uri = '/incidents/{}/attachments'.format(incident_id)
 
-        # POST the new attachment
         # Uploading files with non-ASCII file names using Python Requests doesn't work correctly.
         # To solve this issue we are using unicodedata.normalize(form, unistr)
         # to return the Slack channel name to normal form 'form' for the Unicode string 'unistr'.
@@ -743,6 +742,7 @@ class SlackUtils(object):
         channel_name_ascii = unicodedata.normalize('NFKD', self.get_channel_name()).encode('ascii', 'ignore')
         attachment_name = u"Slack_channel_{}_history.txt".format(channel_name_ascii)
 
+        # POST the new attachment
         try:
             new_attachment = res_client.post_attachment(attachment_uri, temp_file.name, filename=attachment_name, mimetype='text/plain')
 
