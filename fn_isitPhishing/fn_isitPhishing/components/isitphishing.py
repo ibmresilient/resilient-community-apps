@@ -83,7 +83,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Send the results back.")
 
             # Send back the results and the input parameter.
-            
+            results = {
+                "analysis": results_analysis,
+                "inputs": {"URL": isitphishing_url}
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

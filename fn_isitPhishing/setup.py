@@ -6,12 +6,12 @@ from setuptools import setup, find_packages
 setup(
     name='fn_isitPhishing',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_isitPhishing'",
-    long_description="Resilient Circuits Components for 'fn_isitPhishing'",
+    description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL",
+    long_description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
