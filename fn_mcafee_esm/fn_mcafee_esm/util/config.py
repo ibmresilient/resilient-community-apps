@@ -23,6 +23,6 @@ verify_cert=[True|False]
 ## ESM Polling settings
 # How often polling should happen. Value is in seconds. To disable polling, set this to zero.
 esm_polling_interval=0
-incident_template=<location_of_template_file>  # If not set uses default template.
+#incident_template=<location_of_template_file>  # If not set uses default template.
 """
     return config_data

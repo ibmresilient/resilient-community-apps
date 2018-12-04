@@ -19,7 +19,7 @@ def case_get_case_list(options):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseList"
 
     headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
-                                       options["esm_password"], options["trust_cert"])
+                                        options["esm_password"], options["trust_cert"])
 
     r = requests.post(url, headers=headers, verify=options["trust_cert"])
     check_status_code(r.status_code)
@@ -37,6 +37,9 @@ class FunctionComponent(ResilientComponent):
 
         # Check config file and change trust_cert to Boolean
         self.options = check_config(self.options)
+
+        # Check the connection to ESM
+        case_get_case_list(self.options)
 
     @handler("reload")
     def _reload(self, event, opts):

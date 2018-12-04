@@ -17,7 +17,7 @@ def case_get_case_events_details(options, ids):
     url = options["esm_url"] + "/rs/esm/v2/caseGetCaseEventsDetail"
 
     headers = get_authenticated_headers(options["esm_url"], options["esm_username"],
-                                       options["esm_password"], options["trust_cert"])
+                                        options["esm_password"], options["trust_cert"])
     payload = {
         "eventIds": {
             "list": [ids]
