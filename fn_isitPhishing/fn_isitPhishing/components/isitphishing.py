@@ -2,10 +2,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import sys
 import logging
-import requests
 import json
 import base64
+import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_isitPhishing.util.selftest as selftest
 
@@ -57,11 +58,18 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Setup the isitPhishing POST request.")
 
             # Compute the base64 license key. This key will be provided to you by Vade Secure,
-            # and has the following format: <CUSTOMER_NAME>:<CUSTOMER_LICENSE>. It must be Base64-encoded.
+            # and has the following format: <CUSTOMER_NAME>:<CUSTOMER_LICENSE>.
             url_key = u'{}:{}'.format(self.isitPhishing_name, self.isitPhishing_license)
-            auth_token = base64.b64encode(bytes(url_key).encode("utf-8"))
-            bearer_auth = "Bearer " + auth_token
 
+            # It must be Base64-encoded. Handled different on Python 2 vs 3.
+            if sys.version_info[0] == 2:
+                auth_token = base64.b64encode(bytes(url_key).encode("utf-8"))
+            else:
+                auth_token = base64.b64encode(bytes(url_key, 'ascii')).decode('ascii')
+
+            bearer_auth = u'Bearer {}'.format(auth_token)
+
+            # Build the header and the data payload.
             headers = {
                 "Authorization": bearer_auth,
                 "Content-type": "application/json",
