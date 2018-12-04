@@ -44,7 +44,8 @@ class AmpRateLimit():
             if not LIMIT_INFO:
                 self._set_defaults()
 
-    def _set_defaults(self):
+    @staticmethod
+    def _set_defaults():
         """ Set default values.
 
         """
@@ -57,7 +58,8 @@ class AmpRateLimit():
             "lastest_request_ts": 0.0
         })
 
-    def _set_limit_update_ts(self, ts):
+    @staticmethod
+    def _set_limit_update_ts(ts):
         """ Set time when get_delay executed.
 
         :param ts: Timestamp Unix format.
@@ -65,7 +67,8 @@ class AmpRateLimit():
         """
         LIMIT_INFO["limit_update_ts"] = ts
 
-    def _pop_request_ts(self):
+    @staticmethod
+    def _pop_request_ts():
         """"
         Remove from start of current in-progress request backlog.
 
@@ -73,7 +76,8 @@ class AmpRateLimit():
         if len(REQ_TIMESTAMPS):
             return REQ_TIMESTAMPS.pop(0)
 
-    def _get_oldest_req_ts_info(self):
+    @staticmethod
+    def _get_oldest_req_ts_info():
         """"
         Get oldest request timestamp and in-progress request count.
 
@@ -94,7 +98,8 @@ class AmpRateLimit():
         """
         return LIMIT_INFO["lastest_request_ts"]
 
-    def _set_limits_from_last_saved(self, lv, r_cnt):
+    @staticmethod
+    def _set_limits_from_last_saved(lv, r_cnt):
         """ Method to set limit values based on last saved update.
 
         :param lv: Instance of LimitValues to store values.
@@ -157,7 +162,8 @@ class AmpRateLimit():
 
         return delay_period
 
-    def add_ts(self, ts):
+    @staticmethod
+    def add_ts(ts):
         """ Add time to list and update latest executed timestamp.
 
         :param ts: Timestamp Unix format.
@@ -167,7 +173,8 @@ class AmpRateLimit():
             REQ_TIMESTAMPS.append(ts)
             LIMIT_INFO["lastest_request_ts"] = ts
 
-    def get_limit_update_ts(self):
+    @staticmethod
+    def get_limit_update_ts():
         """"
         Return timestamp for when limits last updated.
 
