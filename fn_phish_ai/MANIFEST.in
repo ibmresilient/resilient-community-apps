@@ -1,0 +1,3 @@
+include README.md
+include fn_phish_ai/util/*
+include fn_phish_ai/LICENSE
