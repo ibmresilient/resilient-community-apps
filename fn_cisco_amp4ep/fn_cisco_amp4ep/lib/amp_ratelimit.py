@@ -49,10 +49,10 @@ class AmpRateLimit():
 
         """
         LIMIT_INFO.update({
-            "X-RateLimit-Limit": 0.0,
-            "X-RateLimit-Remaining": 0.0,
-            "X-RateLimit-Reset": 0.0,
-            "X-RateLimit-ResetDate": 0.0,
+            "X-RateLimit-Limit": 0,
+            "X-RateLimit-Remaining": 0,
+            "X-RateLimit-Reset": 0,
+            "X-RateLimit-ResetDate": 0,
             "limit_update_ts": 0.0,
             "lastest_request_ts": 0.0
         })
