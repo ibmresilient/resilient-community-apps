@@ -71,6 +71,8 @@ class FunctionComponent(ResilientComponent):
             else:
                 raise ValueError("active_model not defined in app.config")
 
+            model.log = log
+
             mapping = resilient_utils.get_field_def(self.rest_client(),
                                                     model.config.predict_field,
                                                     "incident")
