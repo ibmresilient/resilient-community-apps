@@ -20,13 +20,17 @@ rl_lock = threading.Lock()
 
 class LimitValues():
     """
-    Class to store updated Rate limit information.
+    Simple class to store updated Rate limit information.
     """
     def __init__(self):
         self.limit = 0
         self.calls_remaining = 0
         self.min_time = 0.0
         self.reset_period = 0.0
+        self.limit_update_ts = 0.0,
+        self.lastest_ts = 0.0,
+        self.oldest_ts = 0.0,
+        self.request_count = 0
 
 class AmpRateLimit():
     """
@@ -55,7 +59,7 @@ class AmpRateLimit():
             "X-RateLimit-Reset": 0,
             "X-RateLimit-ResetDate": 0,
             "limit_update_ts": 0.0,
-            "lastest_request_ts": 0.0
+            "lastest_request_ts": 0.0,
         })
 
     @staticmethod
@@ -98,13 +102,14 @@ class AmpRateLimit():
         """
         return LIMIT_INFO["lastest_request_ts"]
 
-    @staticmethod
-    def _set_limits_from_last_saved(lv, r_cnt):
-        """ Method to set limit values based on last saved update.
+    def _set_limit_data_from_saved(self, lv):
+        """ Method to set limit data based on saved updates.
 
         :param lv: Instance of LimitValues to store values.
-        :param r_cnt: Count of oustanding requests which have not received responses.
         """
+        lv.limit_update_ts = self.get_limit_update_ts()
+        lv.lastest_ts = self._get_lastest_req_ts()
+        (lv.request_count, lv.oldest_ts) = self._get_oldest_req_ts_info()
         try:
             # Dict LIMIT_INFO should have the following 4 keys: "X-RateLimit-Limit", "X-RateLimit-Remaining",
             # "X-RateLimit-Reset", "X-RateLimit-ResetDate" with numeric values saved from request responses.
@@ -117,9 +122,9 @@ class AmpRateLimit():
                 if k.endswith("Remaining"):
                     # We had this many remaining calls after last request.
                     lv.calls_remaining = min(int(v), AMP_RL_LIMIT_MAX)
-                    if r_cnt:
+                    if lv.request_count:
                         # Decrease calls_remaining if new requests since limit information updated.
-                        lv.calls_remaining -= r_cnt
+                        lv.calls_remaining -= lv.request_count
                 if k.endswith("Reset"):
                     # Timestamp (seconds) when this limit will reset from last request.
                     lv.reset_period = float(v)
@@ -128,35 +133,32 @@ class AmpRateLimit():
             LOG.error("Zero value detected for rate limit parameter 'X-RateLimit-Limit'.")
             raise ValueError("Zero value detected for rate limit parameter 'X-RateLimit-Limit'.")
 
-    def _calculate_latest_delay(self, lv, now, e_time, r_cnt, o_ts):
+    def _calculate_latest_delay(self, lv, now, e_time):
         """ Method to calculate delay based on last update.
 
 
         :param lv: Instance of 'LimitValues' to store values.
         :param now: Time when calling function started.
         :param e_time: Time elapsed since limit values last updated or since period was reset.
-        :param r_cnt: Count of outstanding reqests which have not received responses.
-        :param o_ts: Oldest timestamp of requests awaiting responses.
         :return : Return delay period value.
         """
         delay_period = 0
-        lastest_ts = self._get_lastest_req_ts()
 
         # Alter self.min_time to take account of changes in limiting interval.
         lv.reset_period = lv.reset_period - e_time
         try:
             lv.min_time = lv.reset_period / lv.calls_remaining
         except ZeroDivisionError:
-            LOG.error("Unexpected zero value detected for calls remaining '%s'.", self.calls_remaining)
+            LOG.error("Unexpected zero value detected for calls remaining '%s'.", lv.calls_remaining)
             raise ValueError("Unexpected zero value detected for calls remaining '{}'."
                              .format(lv.calls_remaining))
 
-        if r_cnt:
+        if lv.request_count:
             # If other requests out-standing which have not yet updated limit information.
-            left_to_wait = (o_ts + (r_cnt * lv.min_time)) - now
+            left_to_wait = (lv.oldest_ts + (lv.request_count * lv.min_time)) - now
         else:
             # If no other requests out-standing.
-            left_to_wait = (lastest_ts + lv.min_time) - now
+            left_to_wait = (lv.lastest_ts + lv.min_time) - now
         if left_to_wait > 0:
             delay_period = left_to_wait
 
@@ -216,15 +218,13 @@ class AmpRateLimit():
         delay_period = 0
 
         with rl_lock:
-            limit_update_ts = self.get_limit_update_ts()
-            (request_count, oldest_ts) = self._get_oldest_req_ts_info()
-            if not limit_update_ts:
+            if not self.get_limit_update_ts():
                 delay_period = 0
             else:
+                # Setup saved data for current execution.
+                self._set_limit_data_from_saved(lv)
                 # Set time elapsed since limit values last updated from a response.
-                elapsed_time = now - limit_update_ts
-                self._set_limits_from_last_saved(lv, request_count)
-
+                elapsed_time = now - lv.limit_update_ts
                 if lv.calls_remaining <= 0:
                     if lv.reset_period - elapsed_time > 1:
                         # Calls remaining are used up, wait until end of current period otherwise
@@ -238,5 +238,5 @@ class AmpRateLimit():
                         lv.calls_remaining = AMP_RL_LIMIT_MAX + lv.calls_remaining
                         lv.reset_period = AMP_RL_RESET_MAX
 
-                delay_period = self._calculate_latest_delay(lv, now, elapsed_time, request_count, oldest_ts)
+                delay_period = self._calculate_latest_delay(lv, now, elapsed_time)
             return delay_period
