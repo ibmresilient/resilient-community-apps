@@ -6,6 +6,7 @@ import jinja2
 import time
 import json
 import calendar
+from requests.utils import quote
 from datetime import datetime
 from threading import Thread
 from os.path import join, pardir, os
@@ -38,9 +39,13 @@ class IntegrationComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_microsoft_security_graph", {})
 
+        self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
+                                                                    self.options.get("client_id"),
+                                                                    self.options.get("client_secret"))
+
     @function("microsoft_security_graph_alert_search")
     def _microsoft_security_graph_alert_search_function(self, event, *args, **kwargs):
-        """Function: Get the details of an alert from the Microsoft Security Graph API."""
+        """Function: Query alerts from the Microsoft Security Graph API."""
         options = self.options
         ms_graph_helper = self.Microsoft_security_graph_helper
         try:
@@ -48,26 +53,26 @@ class IntegrationComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             # Get the function parameters:
-            microsoft_security_graph_alert_search_filter = kwargs.get(
-                "microsoft_security_graph_alert_search_filter")  # text
+            microsoft_security_graph_alert_search_query = kwargs.get(
+                "microsoft_security_graph_alert_search_query")  # text
 
-            if microsoft_security_graph_alert_search_filter is not None:
-                log.info("microsoft_security_graph_alert_search_filter: %s",
-                         microsoft_security_graph_alert_search_filter)
+            if microsoft_security_graph_alert_search_query is not None:
+                log.info("microsoft_security_graph_alert_search_query: %s",
+                         microsoft_security_graph_alert_search_query)
 
             r = alert_search(options.get("microsoft_graph_url"), ms_graph_helper,
-                             microsoft_security_graph_alert_search_filter)
+                             microsoft_security_graph_alert_search_query)
             if not r:
                 raise FunctionError("Problem with the access_token")
 
             yield StatusMessage("done...")
             end_time = time.time()
             results = {
-                "Inputs": {
-                    "microsoft_security_graph_alert_search_filter": microsoft_security_graph_alert_search_filter
+                "inputs": {
+                    "microsoft_security_graph_alert_search_query": microsoft_security_graph_alert_search_query
                 },
-                "Run Time": str(end_time - start_time),
-                "Alerts": r.json()
+                "run_time": end_time - start_time,
+                "content": r.json()
             }
 
             # Produce a FunctionResult with the results
@@ -90,7 +95,7 @@ class IntegrationComponent(ResilientComponent):
             if microsoft_security_graph_alert_id is not None:
                 log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
             else:
-                raise FunctionError("microsoft_security_graph_alert_id is required to run this function.")
+                raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
 
             r = get_alert_details(options.get("microsoft_graph_url"), ms_graph_helper,
                                   microsoft_security_graph_alert_id)
@@ -100,11 +105,11 @@ class IntegrationComponent(ResilientComponent):
             yield StatusMessage("done...")
             end_time = time.time()
             results = {
-                "Inputs": {
+                "inputs": {
                     "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id
                 },
-                "Run Time": str(end_time - start_time),
-                "Details": r.json()
+                "run_time": end_time - start_time,
+                "content": r.json()
             }
 
             # Produce a FunctionResult with the results
@@ -129,11 +134,11 @@ class IntegrationComponent(ResilientComponent):
             if microsoft_security_graph_alert_id is not None:
                 log.info("microsoft_security_graph_alert_id: %s", microsoft_security_graph_alert_id)
             else:
-                raise FunctionError("microsoft_security_graph_alert_id is required to run this function.")
+                raise ValueError("microsoft_security_graph_alert_id is required to run this function.")
             if microsoft_security_graph_alert_data is not None:
                 log.info("microsoft_security_graph_alert_data: %s", microsoft_security_graph_alert_data)
             else:
-                raise FunctionError("microsoft_security_graph_alert_data is required to run this function")
+                raise ValueError("microsoft_security_graph_alert_data is required to run this function")
 
             r = update_alert(options.get("microsoft_graph_url"), ms_graph_helper, microsoft_security_graph_alert_id,
                              microsoft_security_graph_alert_data)
@@ -143,12 +148,12 @@ class IntegrationComponent(ResilientComponent):
             yield StatusMessage("done...")
             end_time = time.time()
             results = {
-                "Inputs": {
+                "inputs": {
                     "microsoft_security_graph_alert_id": microsoft_security_graph_alert_id,
                     "microsoft_security_graph_alert_data": microsoft_security_graph_alert_data
                 },
-                "Run Time": str(end_time - start_time),
-                "Value": r.json()
+                "run_time": end_time - start_time,
+                "content": r.json()
             }
 
             # Produce a FunctionResult with the results
@@ -157,6 +162,8 @@ class IntegrationComponent(ResilientComponent):
             yield FunctionError(e)
 
     def polling_main(self):
+        """Spawn second thread to query alerts from the Microsoft Security Graph API and create incidents in the
+        Resilient platform if they do not already exist"""
         options = self.options
 
         if int(options.get("msg_polling_interval", 0)) > 0:
@@ -176,6 +183,8 @@ class IntegrationComponent(ResilientComponent):
     def msg_polling_thread(self):
         while True:
             alert_list = get_alerts(self.options, self.Microsoft_security_graph_helper)
+            # Amount of time (seconds) to wait to check alerts again, defaults to 10 mins if not set
+            wait_time = int(self.options.get("msg_polling_interval", 600))
 
             # Check for alerts in incidents
             for alert in alert_list:
@@ -184,8 +193,8 @@ class IntegrationComponent(ResilientComponent):
                     incident_payload = build_incident_dto(alert, self.options.get("incident_template"))
                     self.create_incident(incident_payload)
 
-                # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
-            time.sleep(int(self.options.get("msg_polling_interval", 600)))
+            # Wait to check alerts again
+            time.sleep(wait_time)
 
     def create_incident(self, payload):
         try:
@@ -263,20 +272,23 @@ def get_alerts(options, ms_graph_helper):
         createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
 
     r = None
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + ms_graph_helper.get_access_token()
+    }
     for i in list(range(2)):
-        headers = {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + ms_graph_helper.get_access_token()
-        }
+        url = "{}security/alerts/{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
+                                                                                             createdDateTime_filter))
+        safe_url = quote(url, safe='')
 
-        r = requests.get("{}security/alerts/{}".format(options.get("microsoft_graph_url"),
-                                                       create_filter(options.get("alert_filter"),
-                                                                     createdDateTime_filter)), headers=headers)
+        r = requests.get(safe_url, headers=headers)
         # Check if need to refresh token and run again
         if ms_graph_helper.check_status_code(r):
             break
+        # If it fails a second time, something else is wrong
         elif i == 1:
-            raise ValueError("Problem with the access_token")
+            log.info(r.content)
+            raise ValueError("Something went wrong")
 
     response_json = r.json()
     return response_json.get("value")
@@ -301,51 +313,57 @@ def build_incident_dto(alert, custom_temp_file=None):
         log.info("'incident_template' is not set correctly in config file.")
 
 
-def alert_search(url, ms_helper, search_filter=None):
+def alert_search(url, ms_helper, search_query=None):
     r = None
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + ms_helper.get_access_token()
+    }
     for i in list(range(2)):
-        headers = {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + ms_helper.get_access_token()
-        }
-        start_filter = ""
-        if search_filter:
-            start_filter = "?$"
-        r = requests.get("{}security/alerts/{}{}".format(url, start_filter,
-                                                         search_filter),
-                         headers=headers)
+        start_query = ""
+        if search_query:
+            start_query = "?$"
+
+        url = "{}security/alerts/{}{}".format(url, start_query, search_query)
+        safe_url = quote(url, safe='')
+
+        r = requests.get(safe_url, headers=headers)
         # Check if need to refresh token and run again
         if ms_helper.check_status_code(r):
             break
+        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
         elif i == 1:
+            log.info(r.content)
             return False
     return r
 
 
 def get_alert_details(url, ms_helper, alert_id):
     r = None
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + ms_helper.get_access_token()
+    }
     for i in list(range(2)):
-        headers = {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + ms_helper.get_access_token()
-        }
         r = requests.get("{}security/alerts/{}".format(url, alert_id), headers=headers)
         # Check if need to refresh token and run again
         if ms_helper.check_status_code(r):
             break
+        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
         elif i == 1:
+            log.info(r.content)
             return False
     return r
 
 
 def update_alert(url, ms_helper, alert_id, alert_data):
     r = None
+    headers = {
+        "Content-type": "application/json",
+        "Authorization": "Bearer " + ms_helper.get_access_token(),
+        "Prefer": "return=representation"
+    }
     for i in list(range(2)):
-        headers = {
-            "Content-type": "application/json",
-            "Authorization": "Bearer " + ms_helper.get_access_token(),
-            "Prefer": "return=representation"
-        }
         try:
             data = json.loads(alert_data)
         except ValueError as e:
@@ -356,17 +374,19 @@ def update_alert(url, ms_helper, alert_id, alert_data):
         # Check if need to refresh token and run again
         if ms_helper.check_status_code(r):
             break
+        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
         elif i == 1:
+            log.info(r.content)
             return False
     return r
 
 
-def create_filter(alert_filter, createDateTime_filter):
+def create_query(alert_query, createDateTime_filter):
     query = ""
 
-    # Add custom filter if set
-    if alert_filter:
-        query = "?${}".format(alert_filter)
+    # Add custom query if set
+    if alert_query:
+        query = "?${}".format(alert_query)
 
     # Add date filter if set
     if len(createDateTime_filter) > 0:
