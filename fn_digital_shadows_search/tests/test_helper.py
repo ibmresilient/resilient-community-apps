@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 def get_mocked_config():
   return """[fn_digital_shadows_search]
 ds_api_key=DFGHJ7564765476457

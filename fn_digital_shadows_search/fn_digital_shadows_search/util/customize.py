@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate the Resilient customizations required for fn_digital_shadows_search"""
