@@ -35,15 +35,14 @@ class TestIsitphishing:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("isitphishing_command, isitphishing_argument, expected_results", [
-        ('Document', "text", {"value": "xyz"}),
-        ('URL', "text", {"value": "xyz"})
+    @pytest.mark.parametrize("isitphishing_url, expected_results", [
+        ("text", {"value": "xyz"}),
+        ("text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, isitphishing_command, isitphishing_argument, expected_results):
+    def test_success(self, circuits_app, isitphishing_url, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "isitphishing_command": isitphishing_command,
-            "isitphishing_argument": isitphishing_argument
+            "isitphishing_url": isitphishing_url
         }
         results = call_isitphishing_function(circuits_app, function_params)
         assert(expected_results == results)
