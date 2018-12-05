@@ -19,7 +19,7 @@ See config.py for properties needed for jira access
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from .jira_common import transition_issue
-from fn_jira.lib.resilient_common import validateFields, clean_html
+from fn_jira.lib.resilient_common import validateFields, html2markdwn, parse_bool
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'jira_transition_issue"""
@@ -68,12 +68,14 @@ class FunctionComponent(ResilientComponent):
             'user': self.options['user'],
             'password': self.options['password'],
             'url': kwargs['jira_url'],
-            'verifyFlag': True if self.options['verifyflag'] == 'True' else False,
-            'transitionId': kwargs['jira_transition_id']
+            'verifyFlag': parse_bool(self.options.get('verify_cert', True)),
+            'transitionId': kwargs['jira_transition_id'],
+            'resolution': kwargs['jira_resolution']
         }
 
         # optional
         if kwargs.get('jira_comment', None):
-            appDict['comment'] = clean_html(kwargs['jira_comment'])
+            appDict['comment'] = html2markdwn(kwargs['jira_comment'])
 
         return appDict
+

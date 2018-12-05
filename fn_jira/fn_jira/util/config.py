@@ -13,7 +13,7 @@ def config_section_data():
 url=https://<jira url>
 user=<jira user>
 password=<jira user password>
-# use verifyFlag to disable untrusted certificate verification
-verifyFlag=True
+# use verify_cert to disable untrusted certificate verification
+verify_cert=True
 """
     return config_data
