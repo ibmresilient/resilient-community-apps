@@ -10,7 +10,9 @@ setup(
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_slack'",
-    long_description="Function sends a message from an Incident, Task or a Note to a Slack channel, uploads Incident, Task or Artifact attachment to Slack channel and exports conversation history from Slack channel to a text file, saves the text file as an attachment and archives the Slack channel.",
+    long_description="Function creates a Slack message based on a Resilient Incident, it's Tasks, Notes, Artifacts "
+                     "and Attachments, exports conversation history from Slack channel to a text file, saves the "
+                     "text file as an Attachment and archives the Slack channel.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'slackclient',
