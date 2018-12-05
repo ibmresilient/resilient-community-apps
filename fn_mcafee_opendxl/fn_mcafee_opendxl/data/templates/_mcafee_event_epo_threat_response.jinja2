@@ -1,0 +1,112 @@
+{
+   "description":{
+      "format":"html",
+      "content": "{{event.eventDesc}}
+      {%- if event.threatType -%} \nType: {{event.threatType}} {%- endif -%}"
+   },
+   {# ds_to_millis expectes the data paramater to be a string datetime in the following format 2017-05-17T17:07:59.114Z -#}
+   "discovered_date": {{ ds_to_millis(event.analyzer.detectedUTC) }},
+   {%- if event.category == "Malware detected" -%}
+       "incident_type_ids": ["Malware"],
+   {% endif %}
+
+   "artifacts" : [
+   {%- set comma = joiner(",") -%}
+
+   {%- if event.otherData.sc_evtFileMd5 != "{sc_evtFileMd5}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware MD5 Hash"}, "value": "{{event.otherData.sc_evtFileMd5}}",
+           "description" : {"format" : "html","content" : "File MD5 Hash"}}
+   {%- endif -%}
+   {%- if event.otherData.sc_evtProcessMd5 != "{sc_evtProcessMd5}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware MD5 Hash"}, "value": "{{event.otherData.sc_evtProcessMd5}}",
+           "description" : {"format" : "html","content" : "Process MD5 Hash"}},
+   {%- endif -%}
+   {%- if event.otherData.sc_evtFileSha1 != "{sc_evtFileSha1}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware SHA1 Hash"}, "value": "{{event.otherData.sc_evtFileSha1}}",
+           "description" : {"format" : "html","content" : "File SHA1 Hash"}},
+   {%- endif -%}
+   {%- if event.otherData.sc_evtProcessSha1 != "{sc_evtProcessSha1}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware SHA1 Hash"}, "value": "{{event.otherData.sc_evtProcessSha1}}",
+           "description" : {"format" : "html","content" : "Process SHA1 Hash"}},
+   {%- endif -%}
+   {%- if event.otherData.sc_evtFileSha256 != "{sc_evtFileSha256}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware SHA256 Hash"}, "value": "{{event.otherData.sc_evtFileSha256}}",
+           "description" : {"format" : "html","content" : "File SHA256 Hash"}},
+   {%- endif -%}
+   {%- if event.otherData.sc_evtProcessSha256 != "{sc_evtProcessSha256}" -%}
+       {{- comma() }}
+       {"type": {"name": "Malware SHA256 Hash"}, "value": "{{event.otherData.sc_evtProcessSha256}}",
+           "description" : {"format" : "html","content" : "Process SHA256 Hash"}},
+   {%- endif -%}
+
+   {%- for key, value in event.target.items() -%}
+       {%- if key == "port" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "Port"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Target Port"}}
+       {%- elif key == "userName" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "User Account"}, "value": "{{value|js}}",
+               "description" : {"format" : "html","content" : "Target User Account"}}
+       {%- elif key == "fileName" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "File Path"}, "value": "{{value|js}}",
+               "description" : {"format" : "html","content" : "Target File Name"}}
+       {%- elif key == "mac" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "MAC Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Target MAC Address"}}
+       {%- elif key == "ipv4" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "IP Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Target ipv4 Address"},
+               "properties": [{"name": "destination", "value": true}]}
+       {%- elif key == "ipv6" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "IP Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Target ipv6 Address"},
+               "properties": [{"name": "destination", "value": true}]}
+       {%- endif -%}
+   {%- endfor -%}
+
+   {%- for key, value in event.source.items() -%}
+       {%- if key == "port" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "Port"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source Port"}}
+       {%- elif key == "url" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "URL"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source URL"}}
+       {%- elif key == "userName" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "User Account"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source User Account"}}
+       {%- elif key == "processName" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "Process Name"}, "value": "{{value|js}}",
+               "description" : {"format" : "html","content" : "Source Process Name"}}
+       {%- elif key == "mac" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "MAC Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source MAC Address"}}
+       {%- elif key == "ipv4" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "IP Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source ipv4 Address"},
+               "properties": [{"name": "source", "value": true}]}
+       {%- elif key == "ipv6" and value != None and value != "" -%}
+           {{- comma() }}
+           {"type": {"name": "IP Address"}, "value": "{{value}}",
+               "description" : {"format" : "html","content" : "Source ipv6 Address"},
+               "properties": [{"name": "source", "value": true}]}
+       {%- endif -%}
+   {%- endfor -%}
+   ],
+   "name": "{{event.threatName}}"
+}

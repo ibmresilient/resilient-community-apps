@@ -1,13 +1,16 @@
 build/
 __pycache__
 .DS_Store
+.gradle
 .settings
 .idea
 .cache
+.pytest_cache
 .coverage
 .tox
 .swp
 .eggs
+.virtualenv*
 resilient_circuits_lockfile
 *.iml
 *.pem
@@ -17,3 +20,5 @@ resilient_circuits_lockfile
 *~
 *.egg-info
 *.tar.gz
+*.pytest_cache
+*.bak

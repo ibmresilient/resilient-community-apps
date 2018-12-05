@@ -25,7 +25,7 @@ class HaveIBeenPwnedSearcher(BaseComponent):
 
     """
 
-    HAVE_I_BEEN_PWNED_URL = "https://haveibeenpwned.com/api/v2/unifiedsearch"
+    HAVE_I_BEEN_PWNED_URL = "https://haveibeenpwned.com/api/v2"
 
     def __init__(self, opts):
         super(HaveIBeenPwnedSearcher, self).__init__(opts)
@@ -53,32 +53,33 @@ class HaveIBeenPwnedSearcher(BaseComponent):
         while(retry):
             try:
                 # Return zero or more hits.  Here's one example.
-                url = "{0}/{1}".format(self.HAVE_I_BEEN_PWNED_URL, artifact_value)
-                response = requests.get(url, headers={'User-Agent': 'Resilient HIBP CTS'})
+                breach_url = "{0}/breachedaccount/{1}".format(self.HAVE_I_BEEN_PWNED_URL, artifact_value)
+                breaches_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP CTS'})
 
-                if response.status_code == 200:
-                    content = json.loads(response.text)
-                    breaches = content["Breaches"]
-                    if breaches is None:
-                        breaches = []
-                    pastes = content["Pastes"]
-                    if pastes is None:
-                        pastes = []
+                paste_url = "{0}/pasteaccount/{1}".format(self.HAVE_I_BEEN_PWNED_URL, artifact_value)
+                pastes_response = requests.get(paste_url, headers={'User-Agent': 'Resilient HIBP CTS'})
+
+                if breaches_response.status_code == 200 and pastes_response.status_code == 200:
+                    b_content = breaches_response.json()
+                    if b_content is None:
+                       b_content = []
+                    p_content = pastes_response.json()
+                    if p_content is None:
+                        p_content = []
 
                     hits.append(
                         Hit(
-                            NumberProp(name="Breached Sites", value=len(breaches)),
-                            NumberProp(name="Pastes", value=len(pastes)),
-                            UriProp(name="View data from Have I Been Pwned", value=url)
+                            NumberProp(name="Breached Sites", value=len(b_content)),
+                            NumberProp(name="Pastes", value=len(p_content))
                         )
                     )
                     retry = False
 
                 # 404 is returned when an email was not found
-                elif response.status_code == 404:
+                elif breaches_response.status_code == 404 or pastes_response.status_code == 404:
                     LOG.info("No hit information found on email address: {0}".format(artifact_value))
                     retry = False
-                elif response.status_code == 429:
+                elif breaches_response.status_code == 429 or pastes_response.status_code == 429:
                     # Rate limit was hit, wait 2 seconds and try again
                     time.sleep(2)
                 else:

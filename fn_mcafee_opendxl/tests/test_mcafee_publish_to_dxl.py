@@ -3,6 +3,10 @@
 
 from __future__ import print_function
 import pytest
+import os
+import json
+from mock import patch
+from fn_mcafee_opendxl.components import mcafee_publish_to_dxl
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -25,6 +29,20 @@ def call_mcafee_publish_to_dxl_function(circuits, function_params, timeout=10):
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
+
+
+def get_mock_ops():
+    return {
+        "fn_mcafee_opendxl": {
+            "dxlclient_config": os.getcwd() + "/data/mock_dxlclient.config"
+        },
+        "email": "mock_email",
+        "password": "mock_password",
+        "host": "1.1.1.1",
+        "org": "mock_org",
+        "logdir": "/tmp",
+        "cafile": "false"
+    }
 
 
 class TestMcafeePublishToDxl:
@@ -57,3 +75,80 @@ class TestMcafeePublishToDxl:
         }
         results = call_mcafee_publish_to_dxl_function(circuits_app, function_params)
         assert(expected_results == results)
+
+    # Util function to generate simulated requests response
+    def _generateResponse(self, content, status):
+        class simResponse:
+            def __init__(self, content, status):
+                self.status_code = status
+                self.content = content
+                self.text = json.dumps(content)
+                self.cookies = {"JSESSIONID": "mock_id"}
+
+            def json(self):
+                return self.content
+
+        return simResponse(content, status)
+
+
+    @patch("dxlclient.client.DxlClient.connect")
+    @patch("resilient.SimpleClient.get")
+    @patch("requests.Session.get")
+    @patch("requests.Session.post")
+    def test_open_dxl_section_not_present(self, mocked_requests_session_post, mocked_requests_get,
+                                          mocked_resilient_client_get, mock_dxl_connect):
+
+        try:
+            mock_ops = get_mock_ops()
+            mock_ops.pop("fn_mcafee_opendxl")
+
+            mock_session = {
+                "orgs": [{
+                    "name": "mock_org",
+                    "enabled": True,
+                    "id": 1234
+                }],
+                "csrf_token": "mock_csrf_token",
+                "user_id": 456
+            }
+            mocked_requests_session_post.return_value = self._generateResponse(mock_session, 200)
+            mocked_requests_get.side_effect = [self._generateResponse({"actions_framework_enabled": True}, 200),
+                                               self._generateResponse({"name": "mock"}, 200),
+                                               self._generateResponse({"name": "mock"}, 200),
+                                               self._generateResponse({"id": "mock"}, 200)]
+            mock_dxl_connect.return_value = True
+
+            mcafee_publish_to_dxl.FunctionComponent(mock_ops)
+        except AttributeError as e:
+            assert e.args[0] == "[fn_mcafee_opendxl] section is not set in the config file"
+
+    @patch("dxlclient.client.DxlClient.connect")
+    @patch("resilient.SimpleClient.get")
+    @patch("requests.Session.get")
+    @patch("requests.Session.post")
+    def test_config_file_not_set(self, mocked_requests_session_post, mocked_requests_get,
+                                          mocked_resilient_client_get, mock_dxl_connect):
+
+        try:
+            mock_ops = get_mock_ops()
+            mock_ops["fn_mcafee_opendxl"]["dxlclient_config"] = None
+
+            mock_session = {
+                "orgs": [{
+                    "name": "mock_org",
+                    "enabled": True,
+                    "id": 1234
+                }],
+                "csrf_token": "mock_csrf_token",
+                "user_id": 456
+            }
+            mocked_requests_session_post.return_value = self._generateResponse(mock_session, 200)
+            mocked_requests_get.side_effect = [self._generateResponse({"actions_framework_enabled": True}, 200),
+                                               self._generateResponse({"name": "mock"}, 200),
+                                               self._generateResponse({"name": "mock"}, 200),
+                                               self._generateResponse({"id": "mock"}, 200)]
+            mock_dxl_connect.return_value = True
+
+            mcafee_publish_to_dxl.FunctionComponent(mock_ops)
+        except ValueError as e:
+            assert e.args[0] == "dxlclient_config is not set. You must set this path to run this function"

@@ -7,7 +7,6 @@
 """
 import json
 from fn_jira.lib.requests_common import execute_call
-from fn_jira.lib.resilient_common import clean_html
 
 """
 This module implements the calls needed for jira api access. API operations supported:
@@ -32,9 +31,10 @@ def create_issue(log, appDict):
     issue_url = '/'.join((appDict['url'], ISSUE_URL))
 
     payload = _mkCreatePayload(appDict)
-    log and log.info(payload)
+    log and log.debug(payload)
 
     result = execute_call(log, 'post', issue_url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
+    log and log.debug(result)
 
     return result
 
@@ -46,15 +46,29 @@ def transition_issue(log, appDict):
 
     url = '/'.join((appDict['url'], TRANSITION_PARAM))
     payload = _mkTransitionPayload(appDict)
-    log and log.info(payload)
+    log and log.debug(payload)
+
+    #find_transitions(log, appDict) # uncomment to see transitions for this enterprise
 
     result = execute_call(log, 'post', url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
-    # log.info(result)
-
-    if appDict['comment']:
-        create_comment(log, appDict)
+    log and log.debug(result)
 
     return result
+
+def find_transitions(log, appDict):
+    """
+    determine the ticket transitions for a given issue
+    :param log: 
+    :param appDict: 
+    :return: None
+    """
+    url = '/'.join((appDict['url'], TRANSITION_PARAM))
+
+    result = execute_call(log, 'get', url, appDict['user'], appDict['password'], None, appDict['verifyFlag'], HTTP_HEADERS)
+    log and log.debug(result)
+
+    return result
+
 
 def create_comment(log, appDict):
     """Function: create a jira comment in a Jira issue. No JSON is returned on success
@@ -64,12 +78,13 @@ def create_comment(log, appDict):
     url = '/'.join((appDict['url'], COMMENT_PARAM))
 
     payload = _mkCommentPayload(appDict)
-    log and log.info(payload)
+    log and log.debug(payload)
 
-    resp =  execute_call(log, 'post', url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
+    result =  execute_call(log, 'post', url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
+    log and log.debug(result)
 
     # successfully added comments return an empty dictionary: { }
-    return resp
+    return result
 
 def _mkCreatePayload(appDict):
     '''
@@ -90,7 +105,7 @@ def _mkCreatePayload(appDict):
     }
 
     for key in appDict['fields']:
-        payload['fields'][key] = clean_html(appDict['fields'][key])
+        payload['fields'][key] = appDict['fields'][key]
 
     return json.dumps(payload)
 
@@ -101,7 +116,7 @@ def _mkCommentPayload(appDict):
     :return: json payload for jira update
     '''
     
-    payload = { "body": clean_html(appDict['comment'])}
+    payload = { "body": appDict['comment'] }
 
     return json.dumps(payload)
 
@@ -118,4 +133,26 @@ def _mkTransitionPayload(appDict):
         }
     }
 
+    if appDict.get('comment'):
+        comment = \
+        { "comment":
+            [
+                {
+                    "add": {
+                        "body": appDict['comment']
+                    }
+                }
+            ]
+        }
+        payload['update'] = comment
+
+    if appDict.get('resolution'):
+        resolution = {
+            "resolution": {
+                "name": appDict['resolution']
+            }
+        }
+        payload['fields'] = resolution
+
     return json.dumps(payload)
+

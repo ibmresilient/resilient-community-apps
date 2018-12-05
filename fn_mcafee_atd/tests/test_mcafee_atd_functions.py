@@ -6,8 +6,9 @@ from resilient_circuits.action_message import FunctionError_
 from mock import Mock, patch
 import time
 import os.path
-from fn_mcafee_atd.util.helper import submit_file, check_atd_status, get_atd_report, create_report_file, remove_dir, \
-    check_status_code, _get_atd_session_headers, submit_url, check_timeout, get_incident_id, check_config
+from fn_mcafee_atd.util.helper import submit_file, check_task_status, get_atd_report, create_report_file, remove_dir, \
+    check_status_code, _get_atd_session_headers, submit_url, check_timeout, get_incident_id, check_config,\
+    check_job_status
 from fn_mcafee_atd.components.mcafee_atd_analyze_file import _get_file
 
 
@@ -189,9 +190,10 @@ class TestMcafeeAtdAnalyzeFile:
         except ValueError:
             assert True
 
+    @patch("requests.delete")
     @patch("requests.get")
     @patch("requests.post")
-    def test_file_upload(self, mocked_requests_post, mocked_requests_get):
+    def test_file_upload(self, mocked_requests_post, mocked_requests_get, mocked_requests_delete):
         sim_post_content = {}
         sim_get_content = {
             "results": {
@@ -199,9 +201,11 @@ class TestMcafeeAtdAnalyzeFile:
                 "userId": "1"
             }
         }
+        sim_delete_content = {}
         f = "This is file contents"
         mocked_requests_post.return_value = self._generateResponse(sim_post_content, 200)
         mocked_requests_get.return_value = self._generateResponse(sim_get_content, 200)
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
         creds = MockCredsAfterCheck()
 
         file_upload = submit_file(creds, f, "a_new_file.txt")
@@ -209,9 +213,10 @@ class TestMcafeeAtdAnalyzeFile:
         # Verify call was successful
         assert file_upload.status_code == 200
 
+    @patch("requests.delete")
     @patch("requests.get")
     @patch("requests.post")
-    def test_url_upload(self, mocked_requests_post, mocked_requests_get):
+    def test_url_upload(self, mocked_requests_post, mocked_requests_get, mocked_requests_delete):
         sim_post_content = {}
         sim_get_content = {
             "results": {
@@ -219,8 +224,10 @@ class TestMcafeeAtdAnalyzeFile:
                 "userId": "1"
             }
         }
+        sim_delete_content = {}
         mocked_requests_post.return_value = self._generateResponse(sim_post_content, 200)
         mocked_requests_get.return_value = self._generateResponse(sim_get_content, 200)
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
         creds = MockCredsAfterCheck()
 
         url_upload = submit_url(creds, url="https://www.badurl.com")
@@ -232,8 +239,9 @@ class TestMcafeeAtdAnalyzeFile:
         # Verify call was successful
         assert url_file_upload.status_code == 200
 
+    @patch("requests.delete")
     @patch("requests.get")
-    def test_check_atd_status(self, mocked_requests_get):
+    def test_check_task_status(self, mocked_requests_get, mocked_requests_delete):
         sim_get_content1 = {
             "results": {
                 "session": "session_key",
@@ -248,38 +256,41 @@ class TestMcafeeAtdAnalyzeFile:
             }
         }
         sim_get_content3 = {
-            "severity": "1"
+            "severity": 1
         }
+        sim_delete_content = {}
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200)]
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
         creds = MockCredsAfterCheck()
 
-        r = check_atd_status(creds, '1')
+        r = check_task_status(creds, '1')
         # Assert analysis is not complete
         assert r is False
 
         sim_get_content2["results"]["istate"] = 3
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200)]
-        r = check_atd_status(creds, '1')
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
+        r = check_task_status(creds, '1')
         # Assert analysis is not complete
         assert r is False
 
         sim_get_content2["results"]["istate"] = 2
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200),
-                                           self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content3, 200)]
-        r = check_atd_status(creds, '1')
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
+        r = check_task_status(creds, '1')
         # Assert analysis is complete
         assert r is True
 
         sim_get_content2["results"]["istate"] = 1
         mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content2, 200),
-                                           self._generateResponse(sim_get_content1, 200),
                                            self._generateResponse(sim_get_content3, 200)]
-        r = check_atd_status(creds, '1')
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
+        r = check_task_status(creds, '1')
         # Assert analysis is complete
         assert r is True
 
@@ -300,8 +311,50 @@ class TestMcafeeAtdAnalyzeFile:
         # Assert file is removed
         assert os.path.isdir(res.get("tmp_dir")) is False
 
+    @patch("requests.delete")
     @patch("requests.get")
-    def test_get_atd_report(self, mocked_requests_get):
+    def test_check_job_status(self, mocked_requests_get, mocked_requests_delete):
+        creds = MockCredsAfterCheck()
+        sim_get_content1 = {
+            "results": {
+                "session": "session_key",
+                "userId": "1"
+            }
+        }
+        sim_get_content2 = {
+            "status": 5
+        }
+        sim_delete_content = {}
+
+        # Test for job completed
+        mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content2, 200)]
+        mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
+
+        res = check_job_status(creds, 123)
+        assert res is True
+
+        # Test for job not completed
+        sim_get_content2["status"] = 3
+        mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                           self._generateResponse(sim_get_content2, 200)]
+        res = check_job_status(creds, 123)
+        assert res is False
+
+        # Test for job failed
+        try:
+            sim_get_content2["status"] = -1
+            mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
+                                               self._generateResponse(sim_get_content2, 200)]
+            res = check_job_status(creds, 123)
+            assert res is False
+        except ValueError:
+            assert True
+
+
+    @patch("requests.delete")
+    @patch("requests.get")
+    def test_get_atd_report(self, mocked_requests_get, mocked_requests_delete):
         name = "file name"
         type = "pdf"
         f = create_report_file(name, type)
@@ -312,11 +365,13 @@ class TestMcafeeAtdAnalyzeFile:
                     "userId": "1"
                 }
             }
+            sim_delete_content = {}
             sim_get_content2 = str.encode("This is the report result")
             generated_report = self._generateResponse(sim_get_content2, 200)
             creds = MockCredsAfterCheck()
             mocked_requests_get.side_effect = [self._generateResponse(sim_get_content1, 200),
                                                generated_report]
+            mocked_requests_delete.return_value = self._generateResponse(sim_delete_content, 200)
             res = get_atd_report(creds, '1', '', f.get("report_file"))
 
             # Assert JSON report is returned

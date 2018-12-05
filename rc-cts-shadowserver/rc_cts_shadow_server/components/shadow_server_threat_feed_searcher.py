@@ -16,7 +16,7 @@ from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, Threa
 from circuits import Event, Timer, handler
 from resilient_circuits.actions_component import ResilientComponent
 import requests
-import time
+import sys
 import json
 
 
@@ -82,17 +82,28 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
             LOG.debug("Getting info from {0}".format(url))
             response = requests.get(url)
             if response.status_code == 200:
-                resp_json = json.loads(response.text.replace(artifact_value, "", 1))
-                hit = Hit()
-                for attribute, value in resp_json.iteritems():
-                    if attribute not in self.data_to_ignore:
-                        hit.append(StringProp(name=attribute, value=value))
+                LOG.debug(response.text)
 
-                # Return zero or more hits.  Here's one example.
-                hits.append(hit)
+                # return hash {...} for found result or just hash
+                if not response.text.strip() ==  artifact_value:
+                    resp_json = json.loads(response.text.replace(artifact_value, "", 1))
+                    hit = Hit()
+
+                    if sys.version_info[0] < 3:
+                        items = resp_json.iteritems()
+                    else:
+                        items = resp_json.items()
+
+                    for attribute, value in items:
+                        if attribute not in self.data_to_ignore:
+                            hit.append(StringProp(name=attribute, value=value))
+
+                    # Return zero or more hits.  Here's one example.
+                    hits.append(hit)
+
             else:
                 LOG.warn("Got response status {0} from Shadow Server".format(response.status_code))
 
         except BaseException as e:
-            LOG.exception(e.message)
+            LOG.exception(str(e))
         return hits
