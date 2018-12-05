@@ -4,6 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import fn_digital_shadows_search.util.selftest as selftest
 import requests
 from requests.auth import HTTPBasicAuth
 from requests.adapters import HTTPAdapter
@@ -24,22 +25,23 @@ class FunctionPayload:
     return self.__dict__
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_digital_shadows_search"""
+    """Component that implements Resilient function 'fn_ds_search"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_digital_shadows_search", {})
+        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_digital_shadows_search", {})
 
-    @function("fn_digital_shadows_search")
-    def _fn_digital_shadows_search_function(self, event, *args, **kwargs):
+    @function("fn_ds_search")
+    def _fn_ds_search_function(self, event, *args, **kwargs):
         """Function: Function to send a Query to the Digital Shadows Platform and returns a Python List of the results"""
-    
+
         log = logging.getLogger(__name__)
 
         def get_config_option(option_name, optional=False):

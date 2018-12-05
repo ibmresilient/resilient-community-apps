@@ -23,7 +23,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnDigitalShadowsSearchFunctionComponent = fn_digital_shadows_search.components.fn_digital_shadows_search:FunctionComponent"
+            "FnDigitalShadowsSearchFunctionComponent = fn_digital_shadows_search.components.fn_ds_search:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_digital_shadows_search.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_digital_shadows_search.util.customize:customization_data"],
