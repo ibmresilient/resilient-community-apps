@@ -1,4 +1,16 @@
 # Digital Shadows Search Function for IBM Resilient
+
+## Table of Contents
+  - [app.config settings](#appconfig-settings)
+  - [Function Inputs](#function-inputs)
+  - [Function Output](#function-output)
+  - [Pre-Process Script](#pre-process-script)
+  - [Post-Process Script](#post-process-script)
+  - [Rules](#rules)
+  - [Datatable](#datatable)
+    - [Display the Datatable in an Incident](#display-the-datatable-in-an-incident)
+---
+
 **This package contains a function that searches your Digital Shadows platform with the given query**
 
  ![screenshot](./screenshots/1.png)
