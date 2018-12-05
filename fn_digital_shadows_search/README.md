@@ -27,6 +27,10 @@ results = {
     "ds_search_value": "192.168.0.1"
   },
 
+  "link": "https://portal-digitalshadows.com/search?q=52.58.78.16&view=List",
+
+  "href": "<a href=https://portal-digitalshadows.com/search?q=52.58.78.16&view=List>Link</a>",
+
   "data": [{
     "type": "WEBROOT_IP",
     "entity": {
@@ -348,6 +352,8 @@ ds_search_results
 | Search Query | `search_query` | `Text` |
 | Type | `type` | `Text` |
 | Count | `count` | `Number` |
+| DS Link | `ds_link` | `Rich Text Area` |
+
 
 #### Display the Datatable in an Incident
 * In IBM Resilient, each Incident can have one Digital Shadows Search Datatable

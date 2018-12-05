@@ -10,7 +10,7 @@ from mock import patch
 import json
 
 PACKAGE_NAME = "fn_digital_shadows_search"
-FUNCTION_NAME = "fn_digital_shadows_search"
+FUNCTION_NAME = "fn_ds_search"
 
 # Read the default configuration-data section from the package
 config_data = get_mocked_config()
@@ -36,11 +36,11 @@ def get_mocked_post_request(*args, **kwargs):
   else:
     return MockResponse(400, "Bad API request")
 
-def call_fn_digital_shadows_search_function(circuits, function_params, timeout=10):
+def call_fn_ds_search_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("fn_digital_shadows_search", function_params)
+    evt = SubmitTestFunction("fn_ds_search", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("fn_digital_shadows_search_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_ds_search_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
@@ -48,7 +48,7 @@ def call_fn_digital_shadows_search_function(circuits, function_params, timeout=1
 
 
 class TestFnDigitalShadowsSearch:
-    """ Tests for the fn_digital_shadows_search function"""
+    """ Tests for the fn_ds_search function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -62,6 +62,8 @@ class TestFnDigitalShadowsSearch:
     output = {
       "success": True,
       "inputs": inputs,
+      "link": "https://portal-digitalshadows.com/search?q=192.168.0.1&view=List",
+      "href": "<a href=https://portal-digitalshadows.com/search?q=192.168.0.1&view=List>Link</a>",
       "data": get_mocked_data()
     }
 
@@ -69,29 +71,32 @@ class TestFnDigitalShadowsSearch:
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
         
-        with patch("fn_digital_shadows_search.components.fn_digital_shadows_search.requests.post") as mocked_post_request:
+        with patch("fn_digital_shadows_search.components.fn_ds_search.requests.post") as mocked_post_request:
 
           # Replace the return value of our mock_session with a custom function
           mocked_post_request.return_value = get_mocked_post_request(success=True)
 
           # Fire the function with mocked functionality
-          results = call_fn_digital_shadows_search_function(circuits_app, inputs)
+          results = call_fn_ds_search_function(circuits_app, inputs)
           assert(expected_results == results)
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     def test_fail(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        
-        with patch("fn_digital_shadows_search.components.fn_digital_shadows_search.requests.post") as mocked_post_request:
+
+        expected_results["link"] = None
+        expected_results["href"] = None
+
+        with patch("fn_digital_shadows_search.components.fn_ds_search.requests.post") as mocked_post_request:
 
           # Replace the return value of our mock_session with a custom function
           mocked_post_request.return_value = get_mocked_post_request(success=False)
 
-          evt = SubmitTestFunction("fn_digital_shadows_search", inputs)
+          evt = SubmitTestFunction("fn_ds_search", inputs)
           circuits_app.manager.fire(evt)
 
           try:
-            event = circuits_app.watcher.wait("fn_digital_shadows_search_result", parent=evt, timeout=10)
+            event = circuits_app.watcher.wait("fn_ds_search_result", parent=evt, timeout=10)
             assert event == False
           except ValueError:
             assert True
