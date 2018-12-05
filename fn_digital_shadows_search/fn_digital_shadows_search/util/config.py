@@ -12,6 +12,6 @@ def config_section_data():
     config_data = u"""[fn_digital_shadows_search]
 ds_api_key=
 ds_api_secret=
-ds_base_url=https://portal-digitalshadows.com/api
+ds_base_url=https://portal-digitalshadows.com
 """
     return config_data

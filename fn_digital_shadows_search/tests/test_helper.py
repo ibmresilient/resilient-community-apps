@@ -3,7 +3,7 @@ def get_mocked_config():
   return """[fn_digital_shadows_search]
 ds_api_key=DFGHJ7564765476457
 ds_api_secret=KHGHJ676575
-ds_base_url=https://portal-digitalshadows.com/api"""
+ds_base_url=https://portal-digitalshadows.com"""
 
 def get_mocked_data():
   return [{

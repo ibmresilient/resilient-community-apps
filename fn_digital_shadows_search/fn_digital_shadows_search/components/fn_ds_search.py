@@ -51,8 +51,6 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
 
-        BASE_DS_SEARCH_URL = "https://portal-digitalshadows.com/search?q={0}&view=List"
-
         def get_config_option(option_name, optional=False):
           """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
           option = self.options.get(option_name)
@@ -91,13 +89,13 @@ class FunctionComponent(ResilientComponent):
             headers = {'content-type': 'application/json; charset=utf-8', 'Accept': 'application/json'}
             basic_auth = HTTPBasicAuth(api_key, api_secret)
 
-            url = "{0}{1}".format(base_url, "/search/find")
+            qry_url = "{0}{1}".format(base_url, "/api/search/find")
             filter = {"query": payload.inputs["ds_search_value"]}
 
             try:
-              yield StatusMessage("Sending POST request to {0}".format(url))
+              yield StatusMessage("Sending POST request to {0}".format(qry_url))
               res = requests.post(
-                url,
+                qry_url,
                 json.dumps(filter),
                 auth=basic_auth,
                 headers=headers,
@@ -109,19 +107,19 @@ class FunctionComponent(ResilientComponent):
                 payload.data = json.loads(res.text)["content"]
 
                 q = url_encode(payload.inputs["ds_search_value"].encode('utf8'))
-                url = BASE_DS_SEARCH_URL.format(q)
-                payload.link = url
-                payload.href = """<a href={0}>Link</a>""".format(url)
+                link = "{0}/search?q={1}&view=List".format(base_url, q)
+                payload.link = link
+                payload.href = """<a href={0}>Link</a>""".format(link)
 
               else:
                 payload.success = False
-                raise ValueError('Request to {0} failed with code {1}'.format(url, res.status_code))
+                raise ValueError('Request to {0} failed with code {1}'.format(qry_url, res.status_code))
 
             except requests.exceptions.Timeout:
-              raise ValueError('Request to {0} timedout'.format(url))
+              raise ValueError('Request to {0} timedout'.format(qry_url))
 
             except requests.exceptions.TooManyRedirects:
-              raise ValueError('A bad url request', url)
+              raise ValueError('A bad url request', qry_url)
 
             except requests.exceptions.HTTPError as err:
               if(err.response.content):
@@ -133,8 +131,6 @@ class FunctionComponent(ResilientComponent):
               raise ValueError(e)
 
             results = payload.asDict()
-
-            print results
 
             log.info("Complete")
 

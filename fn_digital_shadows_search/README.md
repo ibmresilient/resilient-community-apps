@@ -15,14 +15,14 @@
 
  ![screenshot](./screenshots/1.png)
 
-The function makes use of the Digital Shadows `/search/find` API call to get information on a given query
+The function makes use of the Digital Shadows `/api/search/find` API call to get information on a given query
 
 ## app.config settings:
 ```
 [fn_digital_shadows_search]
 ds_api_key=
 ds_api_secret=
-ds_base_url=https://portal-digitalshadows.com/api
+ds_base_url=https://portal-digitalshadows.com
 ```
 
 ## Function Inputs:
