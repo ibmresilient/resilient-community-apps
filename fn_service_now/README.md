@@ -1,4 +1,19 @@
 # IBM Resilient Integration for ServiceNow
+
+## Table of Contents
+  - [App Config Settings:](#appconfig-settings)
+  - [Functions:](#functions)
+    - [1: Create in ServiceNow](#1-create-in-servicenow)
+    - [2: Close in ServiceNow](#2-close-in-servicenow)
+    - [3: Add Note to ServiceNow Record](#3-add-note-to-servicenow-record)
+    - [4: Add Attachment to ServiceNow Record](#4-add-attachment-to-servicenow-record)
+    - [5: Get sys_id](#5-get-sysid)
+    - [6: Update Datatable](#6-update-datatable)
+  - [Rules](#rules)
+  - [Datatable](#datatable)
+     - [Import the Datatable](#display-the-datatable-in-an-incident)
+
+---
 **This package contains six functions that help integrate with the ServiceNow Platform**
 
  ![screenshot](./screenshots/0.png)
