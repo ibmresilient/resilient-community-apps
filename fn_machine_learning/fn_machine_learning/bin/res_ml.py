@@ -143,6 +143,7 @@ def main():
     #
     build_parser.add_argument("-o", "--output",
                               help="Save model as",
+                              required=True,
                               default=None)
 
     # 2. rebuild process
@@ -157,6 +158,7 @@ def main():
     #
     rebuild_parser.add_argument("-i", "--input",
                                 help="Model file to rebuild",
+                                required=True,
                                 default=None)
 
     # 3. View
@@ -165,6 +167,7 @@ def main():
     #
     view_parser.add_argument("-i", "--input",
                              help="Model file to rebuild",
+                             required=True,
                              default=None)
 
     # 4. Download
@@ -173,6 +176,7 @@ def main():
     #
     download_parser.add_argument("-o", "--output",
                                  help="CSV file to save samples",
+                                 required=True,
                                  default=None)
 
     # 5. Value count
@@ -182,9 +186,11 @@ def main():
     #
     count_value_parser.add_argument("-i", "--input",
                                     help="CSV file with samples",
+                                    required=True,
                                     default=None)
     count_value_parser.add_argument("-f", "--field",
                                     help="value of which field to count",
+                                    required=True,
                                     default=None)
 
     args, unknown_args = parser.parse_known_args()
