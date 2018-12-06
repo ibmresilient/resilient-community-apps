@@ -170,6 +170,6 @@
 * You're up to date!
 
 # Where Next?
-* Customize the Workflows in Resilient to suit your needs 
-* Get help from the Function documentation provided with the package
+* **Import the Datatable** and **Customize the Workflows** in Resilient to suit your needs 
+* Get help from the **Function documentation provided with the package**
 * Customize the Workflows in ServiceNow - *docs not yet complete*
