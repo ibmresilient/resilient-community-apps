@@ -21,7 +21,7 @@
 --- 
 
 ## Step 2: *Get IBM Resilient ServiceNow App from GitLab*
-**NOTE: this is temporary and will be replaced by an App on the ServiceNow App Store shortly**
+***NOTE: this is temporary and will be replaced by an App on the ServiceNow App Store shortly***
 * Login to your ServiceNow instance with a user that has an **admin role**
 * In the navigation panel on the left, go to **System Applications > Studio**
  ![screenshot](./screenshots/3.png)
@@ -67,7 +67,7 @@
 * Click **Properties**, a new tab will open
  ![screenshot](./screenshots/13.png)
 * Enter your configurations:
-  * **Resilient Host:** this is the Hostname/IP Address of your Resilient Appliance, **relative to your ServiceNow Instance**, but **if you use a Mid-Server, it is relative to the Mid-Server** *(See next step on setting up your Mid-Server)*
+  * **Resilient Host:** this is the Hostname/IP Address of your Resilient Appliance, **relative to your ServiceNow Instance**, but **if you use a Mid-Server, it is relative to the Mid-Server** *(See later step on setting up your Mid-Server)*
   * **Resilient Organization:** this is the Org Name you used in **Step 1**
   * **Email Address:** this is the Email Address you used in **Step 1**
   * **Password:** this is the Password you used in **Step 1**
@@ -98,7 +98,7 @@
   ```
   * **sn_host:** this is the host you use to access your ServiceNow Instance
     ![screenshot](./screenshots/14.png)
-  * **sn_api_uri:** generally left as its default setting. This is the URL for the custom APIs that get installed with the app. If you decide to implement your own endpoints, you would change this URL
+  * **sn_api_uri:** generally left as its default setting. This is the URL for the custom APIs that gets installed with the app. If you decide to implement your own endpoints, you would change this URL
   * **sn_table_name:** this is the Name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced
     >**NOTE:** currently this version (v1) only supports the **incident table in ServiceNow**. There are plans to release another update that will enable this integration to work with any table in ServiceNow, in the near future
   * **sn_username:** the **User ID** from **Step 3**
@@ -148,3 +148,28 @@
 * Once the incident has been created in Resilient, these fields will be populated
   >**NOTE:** this can take up to 20 seconds
 * Sign into your Resilient Appliance and see if it created successfully
+* Open the incident that was created
+* Send the **default task** to ServiceNow by clicking the Action Status button:
+  ![screenshot](./screenshots/23.png)
+* Then fill out the Activity Inputs and click **Execute**:
+  ![screenshot](./screenshots/24.png)
+* If successful, a **Note** was added to the Task
+  ![screenshot](./screenshots/25.png)
+---
+
+## Step 8: *How to Import Updates in ServiceNow*
+***Still in a testing stage, so updates will be delivered frequently***
+* In ServiceNow, go to **System Applications > Studio**
+* Click on **IBM Resilient**
+* On the top left click **Source Control > Apply Remote Changes**
+  ![screenshot](./screenshots/26.png)
+* It will **re-install the app** with the latest changes, which will remove your configurations
+* Click **Apply Stashed Changes** to *re-import* your configurations
+  ![screenshot](./screenshots/26.png)
+* Go back to ServiceNow Homepage and **refresh the browser**
+* You're up to date!
+
+# Where Next?
+* Customize the Workflows in Resilient to suit your needs 
+* Get help from the Function documentation provided with the package
+* Customize the Workflows in ServiceNow - *docs not yet complete*
