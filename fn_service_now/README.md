@@ -1,8 +1,7 @@
-# Resilient Integration with ServiceNow
+# IBM Resilient Integration for ServiceNow
 **This package contains six functions that help integrate with the ServiceNow Platform**
 
  ![screenshot](./screenshots/0.png)
-
 
 # app.config settings:
 ```
