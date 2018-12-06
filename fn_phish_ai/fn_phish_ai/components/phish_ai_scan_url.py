@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             if artifact_value is not None:
                 log.info("artifact_value: %s", artifact_value)
             else:
-                raise FunctionError("artifact_value needs to be set to run this function.")
+                raise ValueError("artifact_value needs to be set to run this function.")
 
             ph = API(api_key=api_key)
             res = ph.scan_url(artifact_value)
@@ -44,11 +44,11 @@ class FunctionComponent(ResilientComponent):
             end_time = time.time()
             yield StatusMessage("done...")
             results = {
-                "Inputs": {
+                "inputs": {
                     "artifact_value": artifact_value
                 },
-                "Run Time": str(end_time - start_time),
-                "Value": res
+                "run_time": str(end_time - start_time),
+                "content": res
             }
 
             # Produce a FunctionResult with the results
