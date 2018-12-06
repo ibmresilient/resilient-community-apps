@@ -2,6 +2,18 @@
 **Please note that this guide has been created prior to the ServiceNow certification. Once we have completed that process, this guide will be refactored accordingly**
 
 ---
+## Table of Contents
+  - [Prerequisites](#prerequisites)
+  - [Step 1: *Create a User on the Resilient Appliance*](#step-1-create-a-user-on-the-resilient-appliance)
+  - [Step 2: *Get IBM Resilient ServiceNow App from GitLab*](#step-2-get-ibm-resilient-servicenow-app-from-gitlab)
+  - [Step 3: *Create a User in ServiceNow and assign it the correct Role*](#step-3-create-a-user-in-servicenow-and-assign-it-the-correct-role)
+  - [Step 4: *Enter IBM Resilient Configurations*](#step-4-enter-ibm-resilient-configurations)
+  - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fnservicenow-integration)
+  - [Step 6a: *Install Mid-Server (if needed)*](#step-6a-install-mid-server-if-needed)
+  - [Step 6b: *Configure Mid-Server (if needed)*](#step-6b-configure-mid-server-if-needed)
+  - [Step 7: *Test*](#step-7-test)
+  - [Step 8: *How to Import Updates in ServiceNow*](#step-8-how-to-import-updates-in-servicenow)
+  - [Where Next?](#where-next)
 
 ## Prerequisites 
 * Resilient Appliance updated to at least `v31.0.0`
