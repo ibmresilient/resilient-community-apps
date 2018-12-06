@@ -134,7 +134,7 @@ class ResilientHelper:
 
     return returnJSON
 
-  def sn_GET(self, url, params, auth=None, headers=None):
+  def sn_GET(self, url, params=None, auth=None, headers=None):
 
     if(headers is None):
       headers = self.headers
