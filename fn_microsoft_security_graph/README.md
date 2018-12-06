@@ -1,4 +1,4 @@
-# Resilient Functions for Microsoft Security Graph
+# Resilient Functions Integration for Microsoft Security Graph
 <br/>
 ## Installation
 

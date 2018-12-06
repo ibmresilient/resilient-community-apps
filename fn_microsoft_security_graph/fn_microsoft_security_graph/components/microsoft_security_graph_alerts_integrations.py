@@ -1,6 +1,5 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-import requests
 import logging
 import jinja2
 import time
@@ -271,24 +270,14 @@ def get_alerts(options, ms_graph_helper):
         createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
         createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
 
-    r = None
     headers = {
         "Content-type": "application/json",
         "Authorization": "Bearer " + ms_graph_helper.get_access_token()
     }
-    for i in list(range(2)):
-        url = "{}security/alerts/{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
-                                                                                             createdDateTime_filter))
-        safe_url = quote(url, safe='')
-
-        r = requests.get(safe_url, headers=headers)
-        # Check if need to refresh token and run again
-        if ms_graph_helper.check_status_code(r):
-            break
-        # If it fails a second time, something else is wrong
-        elif i == 1:
-            log.info(r.content)
-            raise ValueError("Something went wrong")
+    url = "{}security/alerts/{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
+                                                                                         createdDateTime_filter))
+    safe_url = quote(url, safe='')
+    r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
 
     response_json = r.json()
     return response_json.get("value")
@@ -314,45 +303,29 @@ def build_incident_dto(alert, custom_temp_file=None):
 
 
 def alert_search(url, ms_helper, search_query=None):
-    r = None
     headers = {
         "Content-type": "application/json",
         "Authorization": "Bearer " + ms_helper.get_access_token()
     }
-    for i in list(range(2)):
-        start_query = ""
-        if search_query:
-            start_query = "?$"
+    start_query = ""
+    if search_query:
+        start_query = "?$"
 
-        url = "{}security/alerts/{}{}".format(url, start_query, search_query)
-        safe_url = quote(url, safe='')
+    url = "{}security/alerts/{}{}".format(url, start_query, search_query)
+    safe_url = quote(url, safe='')
+    r = ms_helper.microsoft_graph_request("GET", url, headers)
 
-        r = requests.get(safe_url, headers=headers)
-        # Check if need to refresh token and run again
-        if ms_helper.check_status_code(r):
-            break
-        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
-        elif i == 1:
-            log.info(r.content)
-            return False
     return r
 
 
 def get_alert_details(url, ms_helper, alert_id):
-    r = None
     headers = {
         "Content-type": "application/json",
         "Authorization": "Bearer " + ms_helper.get_access_token()
     }
-    for i in list(range(2)):
-        r = requests.get("{}security/alerts/{}".format(url, alert_id), headers=headers)
-        # Check if need to refresh token and run again
-        if ms_helper.check_status_code(r):
-            break
-        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
-        elif i == 1:
-            log.info(r.content)
-            return False
+    request_url = "{}security/alerts/{}".format(url, alert_id)
+    r = ms_helper.microsoft_graph_request("GET", request_url, headers)
+
     return r
 
 
@@ -363,21 +336,14 @@ def update_alert(url, ms_helper, alert_id, alert_data):
         "Authorization": "Bearer " + ms_helper.get_access_token(),
         "Prefer": "return=representation"
     }
-    for i in list(range(2)):
-        try:
-            data = json.loads(alert_data)
-        except ValueError as e:
-            raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
+    try:
+        data = json.loads(alert_data)
+    except ValueError as e:
+        raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
-        r = requests.patch("{}/security/alerts/{}".format(url, alert_id), headers=headers,
-                           json=data)
-        # Check if need to refresh token and run again
-        if ms_helper.check_status_code(r):
-            break
-        # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
-        elif i == 1:
-            log.info(r.content)
-            return False
+    request_url = "{}/security/alerts/{}".format(url, alert_id)
+    r = ms_helper.microsoft_graph_request("PATCH", request_url, headers, data)
+
     return r
 
 
@@ -390,11 +356,25 @@ def create_query(alert_query, createDateTime_filter):
 
     # Add date filter if set
     if len(createDateTime_filter) > 0:
-        if "?$" in query:
-            query = query + "%20and%20"
-        else:
+        # Query is currently empty
+        if query == "":
             query = "?$filter="
-        query = query + createDateTime_filter
+            query = query + createDateTime_filter
+        # Query already has a filter section in it and the date filter should just be added to the end of that section
+        elif "$filter=" in query:
+            query_sections = query.split('&$')
+            i = 0
+            while i < len(query_sections):
+                if "filter" in query_sections[i]:
+                    query_sections[i] = query_sections[i] + "%20and%20" + createDateTime_filter
+                    break
+            query = '&$'.join(query_sections)
+            print(query)
+
+        # Query has other sections but not a filter section, add filter to the end
+        else:
+            query = "&$filter="
+            query = query + createDateTime_filter
 
     log.debug(query)
     return query

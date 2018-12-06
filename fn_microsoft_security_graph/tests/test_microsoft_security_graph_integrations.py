@@ -10,7 +10,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
 from fn_microsoft_security_graph.components.microsoft_security_graph_alerts_integrations import alert_search, \
-    update_alert, create_filter, get_alert_details, ds_to_millis, build_incident_dto, get_alerts
+    update_alert, create_query, get_alert_details, ds_to_millis, build_incident_dto, get_alerts
 from resilient_circuits.template_functions import environment
 
 PACKAGE_NAME = "fn_microsoft_security_graph"
@@ -215,13 +215,18 @@ class TestMicrosoftSecurityGraphfunctions:
         assert r.json() == content2
 
     def test_create_filter_alert(self):
-        f = create_filter("severity%20eq%20'high'", "")
-        assert f == "?$severity%20eq%20'high'"
+        f = create_query("filter=severity%20eq%20'high'", "")
+        assert f == "?$filter=severity%20eq%20'high'"
 
     def test_create_filter_alert_date(self):
-        f = create_filter("severity%20eq%20'high'", "createdDateTime%20ge%202018-11-28T19:42:42.225471Z")
+        f = create_query("filter=severity%20eq%20'high'", "createdDateTime%20ge%202018-11-28T19:42:42.225471Z")
 
-        assert f == "?$severity%20eq%20'high'%20and%20createdDateTime%20ge%202018-11-28T19:42:42.225471Z"
+        assert f == "?$filter=severity%20eq%20'high'%20and%20createdDateTime%20ge%202018-11-28T19:42:42.225471Z"
+
+    def test_create_query(self):
+        q = create_query("filter=userStates/any(user:%20user/accountName%20eq%20'brianwal_ibm')&$top=5&$sort=decn", "createdDateTime%20ge%202018-11-28T19:42:42.225471Z")
+
+        assert q == "?$filter=userStates/any(user:%20user/accountName%20eq%20'brianwal_ibm')%20and%20createdDateTime%20ge%202018-11-28T19:42:42.225471Z&$top=5&$sort=decn"
 
     def test_ds_to_millis(self):
         epoch = ds_to_millis("2017-05-17T17:07:59.114Z")

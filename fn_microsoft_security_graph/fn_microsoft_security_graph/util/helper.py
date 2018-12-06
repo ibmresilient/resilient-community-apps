@@ -54,6 +54,24 @@ class MicrosoftGraphHelper:
         else:
             raise ValueError("Invalid response from Microsoft Security Graph")
 
+    def microsoft_graph_request(self, method, url, headers, json=None):
+        r = None
+        for i in list(range(2)):
+            if method == "GET":
+                r = requests.get(url, headers=headers)
+            elif method == "PATCH":
+                r = requests.patch(url, headers=headers, json=json)
+            else:
+                raise ValueError("{} not implemented.".format(method))
+
+            if self.check_status_code(r):
+                break
+            # If it fails a second time, something more serious is wrong, ie: creds, query, etc.
+            elif i == 1:
+                log.info(r.content)
+                return False
+        return r
+
     def get_access_token(self):
         return self.__get_cache("microsoft_security_graph_access_token")
 
