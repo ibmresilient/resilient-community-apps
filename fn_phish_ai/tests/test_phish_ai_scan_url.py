@@ -36,8 +36,8 @@ class TestPhishAiScanUrl:
         assert func is not None
 
     @pytest.mark.parametrize("artifact_value, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("https://google.com", {}),
+        ("https://startup417.gb.net/M3?mes1=asdf@asdf.com", {})
     ])
     def test_success(self, circuits_app, artifact_value, expected_results):
         """ Test calling with sample values for the parameters """
@@ -45,4 +45,5 @@ class TestPhishAiScanUrl:
             "artifact_value": artifact_value
         }
         results = call_phish_ai_scan_url_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert artifact_value == results["content"]["url"]
+        assert "scan_id" in results["content"]
