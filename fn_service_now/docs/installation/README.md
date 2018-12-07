@@ -40,6 +40,7 @@
 * A new tab will open, click **Import from Source Control**
  ![screenshot](./screenshots/4.png)
 * Copy this url, paste it into the **URL input** and click **Import**
+  * https://gitlab.com/Curtin/service-now-resilient-app.git
  ![screenshot](./screenshots/5.png)
 * Wait for it to import successfully. Then click **Select Application**
  ![screenshot](./screenshots/6.png)
@@ -177,7 +178,7 @@
   ![screenshot](./screenshots/26.png)
 * It will **re-install the app** with the latest changes, which will remove your configurations
 * Click **Apply Stashed Changes** to *re-import* your configurations
-  ![screenshot](./screenshots/26.png)
+  ![screenshot](./screenshots/27.png)
 * Go back to ServiceNow Homepage and **refresh the browser**
 * You're up to date!
 
