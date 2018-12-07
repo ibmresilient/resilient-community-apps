@@ -108,7 +108,7 @@ def update_config_from_saved_model(model_file, mlconfig):
     mlconfig.class_weight = model.config.class_weight
     mlconfig.model_name = model.get_name()
     mlconfig.num_samples = model.config.number_samples
-    mlconfig.imbalance_upsampling = model.config.imbalance_upsammpling
+    mlconfig.imbalance_upsampling = model.config.imbalance_upsampling
     mlconfig.unwanted_values = list(model.config.unwanted_values)
     mlconfig.split_percentage = 0.5
     try:
