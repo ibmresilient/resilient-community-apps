@@ -65,7 +65,7 @@ class TestIsitphishing:
         """ Test calling with sample values for the parameters """
         function_params = inputs
 
-        with patch("fn_isitphishing.components.isitphishing.requests.post") as mock_requests_get:
+        with patch("fn_isitPhishing.components.isitphishing.requests.post") as mock_requests_get:
             # Replace the return value of our mock_session with a custom function
             mock_requests_get.return_value = mocked_requests_get(success=True)
 
