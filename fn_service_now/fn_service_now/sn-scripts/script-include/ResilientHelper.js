@@ -5,12 +5,7 @@ ResilientHelper.prototype = {
 	type: 'ResilientHelper',
 	
 	initialize: function() {
-		try{
 			this.res_api = new ResilientAPI();
-		}
-		catch (e){
-			throw (e);
-		}
 	},
 	
 	parseRefId: function(res_ref_id){
@@ -264,8 +259,6 @@ ResilientHelper.prototype = {
 			}
 		}
 		
-		gs.info(JSON_PARSER.encode("fieldsToUpdate::" + fieldsToUpdate));
-		
 		//Loop fieldsToUpdate
 		for (var fieldName in fieldsToUpdate) {
 		
@@ -305,8 +298,6 @@ ResilientHelper.prototype = {
 		};
 		
 		requestData.push(this.formatChange("text", plan_status));
-		
-		gs.info(JSON_PARSER.encode({"changes": requestData}));
 		
 		if(ids.taskId){
 // 			resTicket = this.res_api.getTask(ids.taskId);
@@ -363,8 +354,6 @@ ResilientHelper.prototype = {
 				}
 				formattedCells = {"cells": formattedCells};
 				
-				gs.info(JSON_PARSER.encode(formattedCells));
-
 				this.res_api.addDatatableRow(ids.incidentId, formattedCells);
 			}
 		catch(e){
@@ -394,7 +383,6 @@ ResilientHelper.prototype = {
 			var rowToUpdate = null;
 			
 			for (var i=0; i<rows.length; i++){
-				gs.info(res_ref_id + "::::" + JSON_PARSER.encode(rows[i]));
 				if(rows[i].cells.res_id.value == res_ref_id){
 					rowToUpdate = rows[i];
 					break;
@@ -427,8 +415,6 @@ ResilientHelper.prototype = {
 					formattedCells[cells[j][0]] = {"value": cells[j][1]};
 				}
 				formattedCells = {"cells": formattedCells};
-				
-				gs.info(JSON_PARSER.encode(formattedCells));
 
 				this.res_api.udpateDatatableRow(ids.incidentId, rowId, formattedCells);
 			}

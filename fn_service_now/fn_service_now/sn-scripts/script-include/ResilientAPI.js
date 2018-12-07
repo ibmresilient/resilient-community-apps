@@ -26,49 +26,52 @@ function getMidServer(){
 	}
 	catch (e){
 		var errMsg = "Failed to search for/find a MidServer with IBMResilientAccess Capabilities.";
-		gs.error(errMsg);
 		throw errMsg;
 	}
+
+	gs.info("No Mid-Server being used");
 
 	return null;
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
 function executeRESTMessage(rm){
-	var response, status, responseBody = null;
-	
-	try{
-		//Execute RESTMessage, get body and status
+	var response, statusCode, responseBody, responseHeaders, errMsg = null;
 		response = rm.execute();
-		responseBody = response.getBody();
-		status = response.getStatusCode();
-
-		//Parse the body
-		if (responseBody){
-			responseBody = JSON_PARSER.decode(responseBody);
+		statusCode = response.getStatusCode();
+		
+		if(statusCode == 200){
+			responseBody = JSON_PARSER.decode(response.getBody());
+			responseHeaders = response.getHeaders();
+			return {
+				body: responseBody,
+				headers: responseHeaders
+			}
 		}
-
-		//Check for errors
-		if(response.haveError()){
-			var errMsg = response.getErrorMessage() + " :: " + responseBody.message;
-			gs.error(errMsg);
+		else if (statusCode >= 400){
+			responseBody = JSON_PARSER.decode(response.getBody());
+			errMsg = "Resilient API call FAILED\nStatus Code: " + statusCode + "\nReason: " + responseBody.message;
 			throw errMsg;
 		}
-		//Return the response if all good
-		else{
-			return response;
+		else if (response.haveError()){
+			var reason = response.getErrorMessage();
+			if (reason.toLowerCase().indexOf("unknown host")){
+				reason += "\n(Hint: Your Resilient Host may be incorrect or not accessible."
+				reason += "\nCheck your Resilient Host is correct and Mid-Server is correctly configured)";
+			}
+			errMsg = "Reason: " + reason;
+			throw errMsg;
 		}
-	}
-	catch (e){
-		var errMsg = "Failed to execute a RESTMessage to the ResilientAPI. (Status: " + status + ").";
-		if(status == 0){ errMsg += " Cannot connect to Resilient. Check connection"; }
-		gs.error(errMsg);
-		throw e;
-	}
+		else {
+			errMsg = "Failed to call Resilient API: Unknown Error";
+			throw errMsg;
+		}
 }
 
 //Function to parse the JSESSIONID from a cookie
 function parseJSESSIONID(cookie){
+	var errMsg = null;
+
 	//Create Regex and search the cookie for the regex
 	var regex = new RegExp('JSESSIONID=[A-Z0-9]+;');
 	var jsessionFound = cookie.match(regex);
@@ -81,15 +84,13 @@ function parseJSESSIONID(cookie){
 		}
 		//else throw an error
 		else{
-			var errMsg = "No JSESSIONID found in the cookie: " + cookie;
-			gs.error(errMsg);
+			errMsg = "No JSESSIONID found in the cookie: " + cookie;
 			throw errMsg;
 		}		
 	}
 	//Throw a custom error if anything fails
 	catch (e){
-		var errMsg = "JSESSIONID could not be parsed from the Cookie recieved from ResilientAPI";
-		gs.error(errMsg);
+		errMsg = "JSESSIONID could not be parsed from the Cookie received from ResilientAPI\n" + e;
 		throw errMsg;
 	}	
 }
@@ -110,7 +111,6 @@ function getOrgId(orgs, orgName){
 				//If user does not have permission throw error
 				if (!orgs[i].enabled){
 					errMsg = "Resilient user does not have permission to access org: " + orgName;
-					gs.error(errMsg);
 					throw errMsg;
 				}
 				break;
@@ -119,7 +119,6 @@ function getOrgId(orgs, orgName){
 		//If no orgId found, throw error
 		if (!orgId){
 			errMsg = "Resilient user is not a member of specified org: " + orgName;
-			gs.error(errMsg);
 			throw errMsg;
 		}
 
@@ -128,8 +127,7 @@ function getOrgId(orgs, orgName){
 
 	//Throw a custom error if anything fails
 	catch (e){
-		var errMsg = "OrgId could not be found for: " + orgName;
-		gs.error(errMsg);
+		errMsg = "OrgId could not be found for: " + orgName + "\nReason: " + e;
 		throw errMsg;
 	}	
 }
@@ -150,7 +148,7 @@ ResilientAPI.prototype = {
 	
 		initialize: function() {
 		
-		var hostName, orgName, userEmail, userPassword = null;
+		var hostName, orgName, userEmail, userPassword, errMsg = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -160,8 +158,7 @@ ResilientAPI.prototype = {
 			userPassword = gs.getProperty("x_261673_resilient.ResilientUserPassword");
 		}
 		catch (e){
-			var errMsg = "Failed getting Resilient Configuration Properties. Check the System Properties";
-			gs.error(errMsg);
+			errMsg = "Failed getting Resilient Configuration Properties. Check the System Properties\n" + e;
 			throw errMsg;
 		}
 
@@ -177,8 +174,14 @@ ResilientAPI.prototype = {
 		this.JSESSIONID=null;
 		this.orgId = null; 
 		
-		this.connect();
-		},
+		try{
+			this.connect();
+		}
+		catch (e){
+			errMsg = "Failed to connect to Resilient\n" + e;
+			throw errMsg;
+		}
+	},
 	
 	connect: function(){
 		
@@ -206,27 +209,14 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute and get response
-		var response = executeRESTMessage(rm);
-		var responseBody = response.getBody();
+		var res = executeRESTMessage(rm);
 		
-		if (responseBody){
-			//Parse the body
-			responseBody = JSON_PARSER.decode(responseBody);
-					
-			//Get csrfToken and JSESSIONID
-			this.csrfToken = responseBody.csrf_token;
-			var cookie = response.getHeader("Set-Cookie");
-			this.JSESSIONID = parseJSESSIONID(cookie);
-			
-			//Get the orgId
-			this.orgId = getOrgId(responseBody.orgs, this.orgName);
-		}
+		//Get csrfToken and JSESSIONID
+		this.csrfToken = res.body.csrf_token;
+		this.JSESSIONID = parseJSESSIONID(res.headers["Set-Cookie"]);
 		
-		else{
-			var errMsg = "No body in the response from the ResilientAPI";
-			gs.error(errMsg);
-			throw errMsg;
-		}
+		//Get the orgId
+		this.orgId = getOrgId(res.body.orgs, this.orgName);
 	},
 	
 	request: function(method, endpoint, dataAsJSONobj, headers){
@@ -260,18 +250,8 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute the request
-		var response = executeRESTMessage(rm);
-		var responseBody = response.getBody();
-	
-		if(responseBody){
-			gs.info("Request Status Code:: " + response.getStatusCode());
-			return JSON_PARSER.decode(responseBody);
-		}
-		else{
-			var errMsg = "No body in the response from the ResilientAPI";
-			gs.error(errMsg);
-			throw errMsg;
-		}
+		var res = executeRESTMessage(rm);
+		return res.body;
 	},
 	
 	disconnect: function(){
