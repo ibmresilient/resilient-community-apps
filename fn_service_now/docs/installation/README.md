@@ -159,7 +159,13 @@
 * Click the **IBM Resilient** tab
   ![screenshot](./screenshots/22.png)
 * Once the incident has been created in Resilient, these fields will be populated
-  >**NOTE:** this can take up to 20 seconds
+  >**NOTE:** this can take up to 20 seconds. If nothing appears after that time, **view the logs**
+  > 
+  > To view the Application Logs in ServiceNow:
+  > * In the navigation panel, go to **System Logs > System Log > Application Logs**
+  >  ![screenshot](./screenshots/28.png)
+  > * If you are using a Mid-Server but there is a log: "No Mid-Server being used", either your Mid-Server is not "Up" or it does not have the **IBMResilientAccess Capability,** *see **Step 6b***
+
 * Sign into your Resilient Appliance and see if it created successfully
 * Open the incident that was created
 * Send the **default task** to ServiceNow by clicking the Action Status button:
