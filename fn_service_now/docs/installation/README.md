@@ -150,6 +150,12 @@
 ---
 
 ## Step 7: *Test*
+* In ServiceNow, in the navigation panel, go to **IBM Resilient > Test Connection**
+* A **new tab** opens
+* Click the blue **Test Connection** button and wait until you see a page banner
+* The **page banner** will inform you if your Test was successful or not and print any errors you may have
+  ![screenshot](./screenshots/29.png)
+* If your test was successful, we can now to a real test
 * In ServiceNow, go to the **Incident Table**
   ![screenshot](./screenshots/20.png)
 * Create a **New Incident** and **Save** it
