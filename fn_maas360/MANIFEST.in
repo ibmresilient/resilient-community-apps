@@ -1,0 +1,4 @@
+include README.md
+include fn_maas360/util/*
+include fn_maas360/LICENSE
+include fn_maas360/doc/*
