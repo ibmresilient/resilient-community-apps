@@ -155,7 +155,7 @@
 * Click the blue **Test Connection** button and wait until you see a page banner
 * The **page banner** will inform you if your Test was successful or not and print any errors you may have
   ![screenshot](./screenshots/29.png)
-* If your test was successful, we can now to a real test
+* If your test was successful, we can now do a **real test:**
 * In ServiceNow, go to the **Incident Table**
   ![screenshot](./screenshots/20.png)
 * Create a **New Incident** and **Save** it
@@ -184,6 +184,9 @@
 
 ## Step 8: *How to Import Updates in ServiceNow*
 ***Still in a testing stage, so updates will be delivered frequently***
+>**NOTE:** this will **clear the Reference ID, Type and Link for ALL of your Incidents** that you have synced with Resilient. This is a current limitation on how we update the App using Git, but will not be an issue once we have
+> completed the Certification Process:
+> ![screenshot](./screenshots/30.png)
 * In ServiceNow, go to **System Applications > Studio**
 * Click on **IBM Resilient**
 * On the top left click **Source Control > Apply Remote Changes**
@@ -192,7 +195,7 @@
 * Click **Apply Stashed Changes** to *re-import* your configurations
   ![screenshot](./screenshots/27.png)
 * Go back to ServiceNow Homepage and **refresh the browser**
-* You're up to date!
+* We recommend using the **Test Connection** functionality after each update
 
 # Where Next?
 * **Import the Datatable** and **Customize the Workflows** in Resilient to suit your needs 
