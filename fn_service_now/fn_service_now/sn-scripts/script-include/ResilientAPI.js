@@ -10,6 +10,7 @@ function getPassword(){
 
 //Function to get the name of the MidServer that has IBMResilientAccess Capabilities and is Running
 function getMidServer(){
+	var errMsg = null;
 	var MID_SERVER_TABLE_NAME = "ecc_agent_capability_m2m";
 	var MID_SERVER_CAPABILITY = "IBMResilientAccess";
 	
@@ -25,13 +26,13 @@ function getMidServer(){
 		}
 	}
 	catch (e){
-		var errMsg = "Failed to search for/find a MidServer with IBMResilientAccess Capabilities.";
+		errMsg = "Failed to search for/find a MidServer " + e;
 		throw errMsg;
 	}
 
-	gs.info("No Mid-Server being used");
-
-	return null;
+	errMsg = "No Active Mid-Server with " + MID_SERVER_CAPABILITY + " Capabilities found.";
+	errMsg += "\nEnsure your Mid-Server is 'Up' and has " + MID_SERVER_CAPABILITY + "Capabilities";
+	throw errMsg;
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
@@ -46,7 +47,7 @@ function executeRESTMessage(rm){
 			return {
 				body: responseBody,
 				headers: responseHeaders
-			}
+			};
 		}
 		else if (statusCode >= 400){
 			responseBody = JSON_PARSER.decode(response.getBody());
@@ -56,7 +57,7 @@ function executeRESTMessage(rm){
 		else if (response.haveError()){
 			var reason = response.getErrorMessage();
 			if (reason.toLowerCase().indexOf("unknown host")){
-				reason += "\n(Hint: Your Resilient Host may be incorrect or not accessible."
+				reason += "\n(Hint: Your Resilient Host may be incorrect or not accessible.";
 				reason += "\nCheck your Resilient Host is correct and Mid-Server is correctly configured)";
 			}
 			errMsg = "Reason: " + reason;
@@ -148,7 +149,7 @@ ResilientAPI.prototype = {
 	
 		initialize: function() {
 		
-		var hostName, orgName, userEmail, userPassword, errMsg = null;
+		var hostName, orgName, userEmail, userPassword, usingMidServer, errMsg = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -156,23 +157,30 @@ ResilientAPI.prototype = {
 			orgName = gs.getProperty("x_261673_resilient.ResilientOrgName");
 			userEmail = gs.getProperty("x_261673_resilient.ResilientUserEmail");
 			userPassword = gs.getProperty("x_261673_resilient.ResilientUserPassword");
+			usingMidServer = gs.getProperty("x_261673_resilient.UseMidServer");
 		}
 		catch (e){
 			errMsg = "Failed getting Resilient Configuration Properties. Check the System Properties\n" + e;
 			throw errMsg;
 		}
 
+		if (!hostName) {throw "Resilient Host cannot be null";}
+		if (!orgName) {throw "Resilient Organization cannot be null";}
+		if (!userEmail) {throw "Resilient Email Address cannot be null";}
+		if (!userPassword) {throw "Resilient Password cannot be null";}
+
 		//Set Resilient Configuration Settings
 		this.baseURL = "https://" + hostName;
 		this.orgName = orgName;
 		this.userEmail = userEmail;
-		
+		this.usingMidServer = usingMidServer;
+
 		//Initialise other class variables that will be set in the connect() method
-		this.midServer=null;
+		this.midServerName = null;
 		this.XSESSID = null;
 		this.csrfToken = null;
-		this.JSESSIONID=null;
-		this.orgId = null; 
+		this.JSESSIONID = null;
+		this.orgId = null;
 		
 		try{
 			this.connect();
@@ -198,14 +206,14 @@ ResilientAPI.prototype = {
 		var requestBody = JSON_PARSER.encode(authData);
 		rm.setRequestBody(requestBody);
 
-		//If this.midServer is null (it may already be set if we are 're-authenticating)
-		if(!this.midServer){
-			//Check if there is a MidServer with IBMResilientAccess Capabilities
-			this.midServer = getMidServer();
+		// If we're using a Mid-Server, get its name
+		if(!this.midServerName && this.usingMidServer){
+			//Check if there is an Active Mid-Server with IBMResilientAccess Capabilities
+			this.midServerName = getMidServer();
 		}
 		//If its valid, set it
-		if (this.midServer){
-			rm.setMIDServer(this.midServer);
+		if (this.midServerName){
+			rm.setMIDServer(this.midServerName);
 		}
 		
 		//Execute and get response
@@ -230,7 +238,7 @@ ResilientAPI.prototype = {
 		var rm = new sn_ws.RESTMessageV2();
 		
 		//If using a midServer, set it
-		if (this.midServer){ rm.setMIDServer(this.midServer);}
+		if (this.midServerName){ rm.setMIDServer(this.midServerName);}
 		
 		//Set the method 'get', 'post', 'delete'
 		rm.setHttpMethod(method);

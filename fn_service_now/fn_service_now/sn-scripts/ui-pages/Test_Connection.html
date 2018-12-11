@@ -1,11 +1,47 @@
 <!-- HTML -->
 <?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
-	<g:ui_form>
-		<h3>Test Resilient Connection Properties.</h3>
-		<div style="white-space:pre-line"/>
-		<button class="btn btn-primary" type="submit" onclick="doTestConnection()">${gs.getMessage("Test Connection")}</button>
-	</g:ui_form>
+	<style>
+		.res-container {
+			margin: auto;
+			width: 500px;
+			height: 175px;
+			border: 2px solid #82bc00;
+			padding: 10px;
+			-webkit-box-shadow: 10px 10px 5px -1px rgba(237,237,237,1);
+			-moz-box-shadow: 10px 10px 5px -1px rgba(237,237,237,1);
+			box-shadow: 10px 10px 5px -1px rgba(237,237,237,1);
+		}
+		
+		.res-container .res-logo{
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 50%;
+		}
+		
+		.res-container h3 {
+			text-align: center;
+			margin: 20px 0px 20px 0px;
+		}
+		
+		.res-container .btn-primary{
+			background-color: #82bc00;
+			border-color: #639001;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 35%;
+		}
+
+	</style>
+	<div class="res-container">
+		<img class="res-logo" alt="ibm_resilient_logo" src="ibm_resilient_logo.png"/>
+		<g:ui_form>
+			<h3>Test IBM Resilient Connection</h3>
+			<button class="btn btn-primary" type="submit" onclick="doTestConnection()">Test Connection</button>
+		</g:ui_form>
+	</div>
 </j:jelly>
 
 <!-- Client Script -->

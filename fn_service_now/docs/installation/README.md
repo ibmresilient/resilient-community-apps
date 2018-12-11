@@ -85,6 +85,7 @@
   * **Email Address:** this is the Email Address you used in **Step 1**
   * **Password:** this is the Password you used in **Step 1**
   * **ServiceNow Username:** this is the **User ID** you enterd in **Step 3**
+  * **Using MidServer:** tick this box if **you will be using a Mid-Server** with this Integration *(See Step 6 for more)*
 * Click **Save**
 * You should see a **Properties updated** banner at the top of the page if the save was successful
 * **Close** the tab
@@ -152,7 +153,7 @@
 ## Step 7: *Test*
 * In ServiceNow, in the navigation panel, go to **IBM Resilient > Test Connection**
 * A **new tab** opens
-* Click the blue **Test Connection** button and wait until you see a page banner
+* Click the green **Test Connection** button and wait until you see a page banner
 * The **page banner** will inform you if your Test was successful or not and print any errors you may have
   ![screenshot](./screenshots/29.png)
 * If your test was successful, we can now do a **real test:**
