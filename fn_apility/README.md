@@ -4,7 +4,7 @@ Apility.io can be defined as Threat Intelligence SaaS for developers and product
 
 Automatic extraction processes extracts all the information in realtime, keeping the most up to date data available, saving yourself the hassle of extract and update regularly all these lists and the data.
 
-## Using MxToolBox Function
+## Using the Ability.IO Function
 
 We have included 3 rules and 3 workflows for Full IP reputation, Email reputation and Domain reputation checks as examples.
 
