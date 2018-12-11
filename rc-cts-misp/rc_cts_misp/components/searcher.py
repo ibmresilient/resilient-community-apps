@@ -120,7 +120,11 @@ class MISPThreatSearcher(BaseComponent):
             raise Exception(exc)
 
         # verify the MISP server HTTPS certificate?
-        self.misp_verifycert = opts.get(CONFIG_SECTION, {}).get("misp_verifycert", True)
+        verify_cert = opts.get(CONFIG_SECTION, {}).get("misp_verifycert", True)
+        if isinstance(verify_cert, str):
+            verify_cert = json.loads(verify_cert.lower()) if verify_cert.lower() in ['true', 'false'] else verify_cert
+
+        self.misp_verifycert = verify_cert
 
         # Optionally, filter on:
         # tags=one,two

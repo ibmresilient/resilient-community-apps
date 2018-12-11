@@ -22,6 +22,8 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
             resp = requests.post(url, verify=verifyFlag, headers=headers, data=payload, auth=auth)
         elif verb == 'put':
             resp = requests.put(url, verify=verifyFlag, headers=headers, data=payload, auth=auth)
+        elif verb == 'delete':
+            resp = requests.delete(url, verify=verifyFlag, headers=headers, data=payload, auth=auth)
         else:
             raise IntegrationError("unknown verb {}".format(verb))
 
@@ -29,7 +31,7 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
             raise IntegrationError('no response returned')
 
         if resp.status_code >= 300:
-            log and log.info(resp)
+            log and log.error(resp)
             # get the result
             raise IntegrationError(resp.text)
 
@@ -45,5 +47,5 @@ def execute_call(log, verb, url, user, password, payload, verifyFlag, headers):
         # Produce a IntegrationError with the return value
         return r      # json object needed, not a string representation
     except Exception as err:
-        log and log.info(err)
+        log and log.error(err)
         raise IntegrationError(err)

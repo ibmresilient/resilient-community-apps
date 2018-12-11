@@ -1,0 +1,27 @@
+{
+   "description":{
+      "format":"html",
+      "content": "Malware deleted\nType: Trojan\nName: Ransomware-FUO!037A9DEDF00D "
+   },
+   "discovered_date": 1529951924000,"incident_type_ids": ["Malware"],
+
+
+   "artifacts" : [
+           {"type": {"name": "User Account"}, "value": "IE8WIN7\\IEUser",
+               "description" : {"format" : "html","content" : "Target User Account"}},
+           {"type": {"name": "File Path"}, "value": "C:\\Users\\IEUser\\Downloads\\New DE Demo\\New DE Demo\\test-samples-new\\0798A74FD4F24C4B1565E2EE13BB3F3D6B3067E1D46B04F0D3EA63937C583FFD.exe",
+               "description" : {"format" : "html","content" : "Target File Name"}},
+           {"type": {"name": "IP Address"}, "value": "10.0.2.15",
+               "description" : {"format" : "html","content" : "Target ipv4 Address"}},
+           {"type": {"name": "IP Address"}, "value": "10.0.2.15",
+               "description" : {"format" : "html","content" : "Target ipv6 Address"}},
+           {"type": {"name": "Port"}, "value": "0",
+               "description" : {"format" : "html","content" : "Target Port"}},
+           {"type": {"name": "Process Name"}, "value": "C:\\Windows\\explorer.exe",
+               "description" : {"format" : "html","content" : "Source Process Name"}},
+           {"type": {"name": "IP Address"}, "value": "10.0.2.15",
+               "description" : {"format" : "html","content" : "Source ipv4 Address"}},
+           {"type": {"name": "IP Address"}, "value": "10.0.2.15",
+               "description" : {"format" : "html","content" : "Source ipv6 Address"}}],
+   "name": "Malware detected Incident"
+}
