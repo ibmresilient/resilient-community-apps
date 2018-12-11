@@ -24,6 +24,8 @@ def case_get_case_detail(options, headers, id):
     }
 
     r = requests.post(url, headers=headers, data=json.dumps(payload), verify=options["trust_cert"])
+    if r.status_code == 400:
+        raise FunctionError(r.content)
     check_status_code(r.status_code)
     log.debug(r.json())
 

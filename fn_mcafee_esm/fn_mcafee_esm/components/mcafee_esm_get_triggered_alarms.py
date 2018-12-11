@@ -29,7 +29,7 @@ def alarm_get_triggered_alarms(options, params):
 
 def create_parameters(**kwargs):
     params_dict = dict()
-    if "start" in kwargs and "end" in kwargs:
+    if kwargs.get("start") and kwargs.get("end"):
         params_dict["customStart"] = kwargs.get("start")
         params_dict["customEnd"] = kwargs.get("end")
         params_dict["triggeredTimeRange"] = "CUSTOM"
