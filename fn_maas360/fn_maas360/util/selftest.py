@@ -12,12 +12,12 @@ log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
 
-def selftest_function(options):
+def selftest_function(opts):
     """
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    # options = opts.get("fn_maas360", {})
+    options = opts.get("fn_maas360", {})
     validate_fields(['maas360_url', 'maas360_billing_id', 'maas360_platform_id',
                      'maas360_app_id', 'maas360_app_version', 'maas360_app_access_key',
                      'maas360_username', 'maas360_password'], options)
@@ -37,12 +37,13 @@ def selftest_function(options):
             'Calling createPartnerConfigurations with WS Server base: ' + url + ', Blling ID: ' + billing_id + ', User: '
             + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id + ', App Version: ' + app_version)
 
-        response = selftest_maas360(url, billing_id, username, password, app_id, app_version, platform_id, app_access_key)
-        if response:
+        state, reason = "", ""
+        authResponse = selftest_maas360(url, billing_id, username, password, app_id, app_version, platform_id, app_access_key)
+        if authResponse and authResponse.authToken:
             state = "success"
         else:
             state = "failure"
-            #reason = response
+            reason = authResponse.errorCode if authResponse else "N/A"
     except Exception as ex:
         state = "failure"
         reason = str(ex)

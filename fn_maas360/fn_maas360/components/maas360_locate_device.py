@@ -35,8 +35,6 @@ class FunctionComponent(ResilientComponent):
             #  yield StatusMessage("starting...")
             #  yield StatusMessage("done...")
 
-            selftest.selftest_function(self.options)
-
             results = {
                 "value": "xyz"
             }
