@@ -71,20 +71,14 @@ inputs.phishai_scan_id = workflow.properties.phishai_scan_output["content"]["sca
 ```
 
 ## Post-Process Script:
-This example adds to the artifact's description the verdict of the Phish.AI report.
-```python
-if results.content:
-  try:
-    des = artifact.description.content
-  except Exception, e:
-    des = None
-  
-  if des is None:
-    artifact.description = "Phish.AI verdict: " + results.content.verdict
-  else:
-    artifact.description = des + "\nPhish.AI verdict: " + results.content.verdict
-```
+This example adds a note to the incident with the verdict of the Phish.AI report and a link to in within Phish.AI
 
+```
+if results.content:
+	note = "Phish.AI verdict: " + results.content.verdict
+	note = note + "<br/><a href=\"https://app.phish.ai/incident/{}\">Phish.AI report link</a>".format(results.inputs.phishai_scan_id)
+	incident.addNote(helper.createRichText(note))
+```
 ## Rules
 | Rule Name | Object Type | Workflow Triggered | Conditions |
 | --------- | :---------: | ------------------ | ---------- |
