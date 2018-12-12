@@ -4,10 +4,12 @@
  ![screenshot](./screenshots/phishai_workflow.png)
 
 ## app.config settings:
-Set if using a proxy
-
+```
     [fn_phish_ai]
     phishai_api_key=<phish.ai_api_key>
+    ## Timeout to return report report in seconds, defaults to 60 seconds
+    #timeout_seconds=60
+```
 
 ## Function Inputs:
 | Input Name| Type | Required | Example |
@@ -18,7 +20,7 @@ Set if using a proxy
 ## Function Outputs:
 ### Phish.AI Scan URL:
 ```
-{  
+results = {
    "content":{  
       "url":"https://startup417.gb.net/M3?mes1=asdf@asdf.com",
       "scan_id":"gGBSaVvlN5qc5PcwvnuT"
@@ -32,7 +34,7 @@ Set if using a proxy
 
 ### Phish.AI Get Report:
 ```
-{  
+results = {
    "content":{  
       "status":"completed",
       "domain":"startup417.gb.net",
