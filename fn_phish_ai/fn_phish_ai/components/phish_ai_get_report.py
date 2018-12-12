@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright IBM Corp. - Confidential Information
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -28,6 +29,7 @@ class FunctionComponent(ResilientComponent):
             start_time = time.time()
             yield StatusMessage("starting...")
             api_key = self.options.get("phishai_api_key", None)
+            timeout_seconds = int(self.options.get("timeout_seconds", 60))
 
             # Get the function parameters:
             phishai_scan_id = kwargs.get("phishai_scan_id")  # text
@@ -43,12 +45,12 @@ class FunctionComponent(ResilientComponent):
 
             # Keep checking until report is ready, will timeout after a minute
             i = 0
-            while i < 20:
+            while i < round(timeout_seconds/5):
                 time.sleep(5)
                 res = ph.get_report(phishai_scan_id)
                 if res.get("status") == "completed":
                     break
-                i += 1
+                i += 5
                 yield StatusMessage("Waiting for report to report to complete")
 
             if res.get("status") != "completed":

@@ -11,5 +11,7 @@ def config_section_data():
     """
     config_data = u"""[fn_phish_ai]
 #phishai_api_key=<phish.ai_api_key>
+## Timeout to return report report in seconds, defaults to 60 seconds
+#timeout_seconds=60
 """
     return config_data
