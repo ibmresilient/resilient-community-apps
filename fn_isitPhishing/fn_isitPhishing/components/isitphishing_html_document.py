@@ -4,18 +4,18 @@
 """Function implementation"""
 
 import sys
-import logging
 import json
 import base64
 import requests
+import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib.components.resilient_common import get_file_attachment
 import fn_isitPhishing.util.selftest as selftest
-
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'isitphishing"""
+    """Component that implements Resilient function 'isitphishing_html_document"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -33,34 +33,45 @@ class FunctionComponent(ResilientComponent):
 
         # Check that config parameters are defined.
         if not self.isitPhishing_name:
-            raise ValueError("isitPhishing_name is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+            raise ValueError(
+                "isitPhishing_name is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
         if not self.isitPhishing_license:
-            raise ValueError("isitPhishing_license is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+            raise ValueError(
+                "isitPhishing_license is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
         if not self.isitPhishing_api_url:
-            raise ValueError("isitPhishing_api_url is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
+            raise ValueError(
+                "isitPhishing_api_url is not set. You must set this value to run {}".format(CONFIG_DATA_SECTION))
 
         selftest.selftest_function(opts)
+
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_isitPhishing", {})
 
-    @function("isitphishing")
-    def _isitphishing_function(self, event, *args, **kwargs):
-        """Function: Analyze a URL, a list of URLs or a document using the Vade Secure IsItPhishing Webservice API."""
+    @function("isitphishing_html_document")
+    def _isitphishing_html_document_function(self, event, *args, **kwargs):
+        """Function: """
         try:
             # Get the function parameters:
-            isitphishing_url = kwargs.get("isitphishing_url")  # text
+            incident_id = kwargs.get("incident_id")  # number
+            task_id = kwargs.get("task_id")  # number
+            attachment_id = kwargs.get("attachment_id")  # number
+            artifact_id = kwargs.get("artifact_id")  # number
 
             log = logging.getLogger(__name__)
-            log.info("isitphishing_url: %s", isitphishing_url)
+            log.info("incident_id: %s", incident_id)
+            log.info("task_id: %s", task_id)
+            log.info("attachment_id: %s", attachment_id)
+            log.info("artifact_id: %s", artifact_id)
+
 
             yield StatusMessage("Setup the isitPhishing POST request.")
 
             # Compute the base64 license key. This key will be provided to you by Vade Secure,
             # and has the following format: <CUSTOMER_NAME>:<CUSTOMER_LICENSE>.
-            url_key = u'{}:{}'.format(self.isitPhishing_name, self.isitPhishing_license)
+            url_key = u'{0}:{1}'.format(self.isitPhishing_name, self.isitPhishing_license)
 
             # It must be Base64-encoded. Handled different on Python 2 vs 3.
             if sys.version_info[0] == 2:
@@ -74,16 +85,26 @@ class FunctionComponent(ResilientComponent):
             headers = {
                 "Authorization": bearer_auth,
                 "Content-type": "application/json",
+                "Accept": "application/json"
             }
-            payload = {"url": isitphishing_url, "force": False, "smart": True, "timeout": 8000}
 
+            # Build the document payload which sase64-encoded string.
+            client = self.rest_client()
 
-            api_url = "{0}{1}".format(self.isitPhishing_api_url, "/url")
+            # Get the attachment data
+            data = get_file_attachment(client, incident_id, artifact_id, task_id, attachment_id)
 
+            # Base64 encode the document string.
+            base64encoded_doc = base64.b64encode(data).decode("ascii")
+
+            payload = {"document": base64encoded_doc}
+            payload_string = json.dumps(payload)
             yield StatusMessage("Query isitPhishing.org endpoint.")
 
+            api_url = "{0}{1}".format(self.isitPhishing_api_url, "/document")
+
             # Make URL request
-            response = requests.post(api_url, headers=headers, data=json.dumps(payload))
+            response = requests.post(api_url, headers=headers, data=payload_string)
 
             # Check the results
             if response.status_code == 200:
@@ -97,10 +118,14 @@ class FunctionComponent(ResilientComponent):
             # Send back the results and the input parameter.
             results = {
                 "analysis": results_analysis,
-                "inputs": {"URL": isitphishing_url}
+                "inputs": {"incident_id": incident_id,
+                           "task_id": task_id,
+                           "attachment_id": attachment_id,
+                           "artifact_id": artifact_id}
             }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionError()
+
