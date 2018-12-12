@@ -1,7 +1,7 @@
 # Resilient Integration with IPInfo
 **This package contains one function which provides enrichment information for an IP Address Artifact by querying that artifact in the IPInfo Database. Takes in an input of an IP address and then queries for information such as the location, ASN and hostname of the IP if any. Results are saved in a rich text note.**
 
-
+![screenshot](./screenshots/1.png)
 ## app.config settings:
 The only config value required by this integration package is an access token for IP Info's API
 
@@ -19,7 +19,7 @@ ipinfo_access_token=123asb
 
 ## Pre-Process Script:
 ```python
-inputs. ipinfo_query_ip = artifact.value
+inputs.ipinfo_query_ip = artifact.value
 ```
 
 ## Post-Process Script:

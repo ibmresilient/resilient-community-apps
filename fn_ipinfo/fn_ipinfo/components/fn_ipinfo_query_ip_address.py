@@ -129,7 +129,7 @@ Takes in a String input representing an IP Address."""
                 else:
                     yield StatusMessage(
                         "Encountered error when querying Ip Info. Provided Message {0}".format(e.args[0]))
-
+            log.info("Complete")
             # Produce a FunctionResult with the results
             yield FunctionResult(payload.as_dict())
         except Exception:
