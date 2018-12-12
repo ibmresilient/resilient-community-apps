@@ -29,20 +29,25 @@ def call_isitphishing_url_function(circuits, function_params, timeout=10):
 
 class TestIsitphishingUrl:
     """ Tests for the isitphishing_url function"""
-
+    inputs = {
+        "isitphishing_url": "http://www.thisisaphishingurl.com"
+    }
+    output = {"analysis": {"status": "PHISHING"},
+              "inputs": {"URL": inputs["isitphishing_url"]}
+    }
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("isitphishing_url, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
-    ])
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     def test_success(self, circuits_app, isitphishing_url, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
-            "isitphishing_url": isitphishing_url
-        }
-        results = call_isitphishing_url_function(circuits_app, function_params)
-        assert(expected_results == results)
+        function_params = inputs
+
+        with patch("fn_isitPhishing.components.isitphishing_url.requests.post") as mock_requests_get:
+            # Replace the return value of our mock_session with a custom function
+            mock_requests_get.return_value = mocked_requests_get(success=True)
+
+            results = call_isitphishing_url_function(circuits_app, function_params)
+            assert(expected_results == results)
