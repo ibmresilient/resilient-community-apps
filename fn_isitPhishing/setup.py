@@ -4,14 +4,13 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fn_isitPhishing',
+     name='fn_isitPhishing',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_isitPhishing'",
-    long_description="Resilient Circuits Components for 'fn_isitPhishing'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
+    long_description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
@@ -23,7 +22,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "IsitphishingFunctionComponent = fn_isitPhishing.components.isitphishing:FunctionComponent",
+            "IsitphishingUrlFunctionComponent = fn_isitPhishing.components.isitphishing_url:FunctionComponent",
             "IsitphishingHtmlDocumentFunctionComponent = fn_isitPhishing.components.isitphishing_html_document:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_isitPhishing.util.config:config_section_data"],

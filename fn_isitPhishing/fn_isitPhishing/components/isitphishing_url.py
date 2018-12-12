@@ -46,8 +46,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_isitPhishing", {})
 
-    @function("isitphishing")
-    def _isitphishing_function(self, event, *args, **kwargs):
+    @function("isitphishing_url")
+    def _isitphishing_url_function(self, event, *args, **kwargs):
         """Function: Analyze a URL, a list of URLs or a document using the Vade Secure IsItPhishing Webservice API."""
         try:
             # Get the function parameters:
