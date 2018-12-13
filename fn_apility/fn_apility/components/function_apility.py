@@ -35,7 +35,6 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("apility_lookup_type: %s", apility_lookup_type)
             log.info("apility_lookup_value: %s", apility_lookup_value)
-            # log.info("apility_lookup_type type: %s", type(apility_lookup_value))
 
             HEADERS = {'content-type': 'application/json', 'X-Auth-Token': self.options['api_token']}
             api = api_url(apility_lookup_type)
