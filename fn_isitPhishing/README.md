@@ -121,14 +121,14 @@ incident.addNote(note)
 ## Install and run
 To package for distribution,
 
-python ./fn_isitPhishing/setup.py sdist
+`python ./fn_isitPhishing/setup.py sdist`
 
 The resulting .tar.gz file can be installed using
 
-pip install <filename>.tar.gz
+`pip install <filename>.tar.gz`
 
 To run the integration:
 
-resilient-circuits run
+`resilient-circuits run`
 
 ##
