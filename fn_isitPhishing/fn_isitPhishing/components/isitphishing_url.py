@@ -75,6 +75,7 @@ class FunctionComponent(ResilientComponent):
                 "Authorization": bearer_auth,
                 "Content-type": "application/json",
             }
+
             payload = {"url": isitphishing_url, "force": False, "smart": True, "timeout": 8000}
 
 

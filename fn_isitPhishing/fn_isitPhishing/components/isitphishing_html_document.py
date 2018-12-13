@@ -88,23 +88,22 @@ class FunctionComponent(ResilientComponent):
                 "Accept": "application/json"
             }
 
-            # Build the document payload which sase64-encoded string.
+            # Build the document payload which is a base64-encoded string.
             client = self.rest_client()
 
             # Get the attachment data
             data = get_file_attachment(client, incident_id, artifact_id, task_id, attachment_id)
 
-            # Base64 encode the document string.
+            # Base64 encode the document string and build payload.
             base64encoded_doc = base64.b64encode(data).decode("ascii")
-
             payload = {"document": base64encoded_doc}
-            payload_string = json.dumps(payload)
+
             yield StatusMessage("Query isitPhishing.org endpoint.")
 
             api_url = "{0}{1}".format(self.isitPhishing_api_url, "/document")
 
             # Make URL request
-            response = requests.post(api_url, headers=headers, data=payload_string)
+            response = requests.post(api_url, headers=headers, data=json.dumps(payload))
 
             # Check the results
             if response.status_code == 200:

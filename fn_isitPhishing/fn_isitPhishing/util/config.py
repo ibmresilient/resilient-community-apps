@@ -12,7 +12,7 @@ def config_section_data():
     config_data = u"""[fn_isitPhishing]
 # Define the Vade Secure IsItPhishing Webservice API endpoint
 #
-#isitphishing_api_url=https://ws.isitphishing.org/api/v2/url
+#isitphishing_api_url=https://ws.isitphishing.org/api/v2
 #
 # You need a license key to use the Vade Secure IsItPhishing API. 
 # This key will be provided to you by Vade Secure, and has the following format:
