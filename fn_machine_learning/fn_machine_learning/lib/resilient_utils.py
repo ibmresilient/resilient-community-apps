@@ -118,9 +118,37 @@ def write_to_csv(incidents, fields_dict, filename, max_count=None, filter=None, 
                     #
                     #   The field could be a custom field, if so read from properties.
                     #
-                    value = str(inc.get(field, inc["properties"].get(field, "")))
-                except UnicodeEncodeError:
-                    value = inc.get(field, inc["properties"].get(field, "")).encode("ascii", "ignore").decode("ascii")
+                    val = inc.get(field, inc["properties"].get(field, None))
+                    #
+                    # Note val can be False, so "if not val" does not work
+                    #
+                    if val is None:
+                        gdpr_dict = inc.get("gdpr", None)
+                        pii_dict = inc.get("pii", None)
+                        hipaa_dict = inc.get("hipaa", None)
+                        reg_risk = inc.get("regulator_risk", None)
+
+                        if gdpr_dict:
+                            val = gdpr_dict.get(field, None)
+
+                        if val is None and pii_dict:
+                            val = pii_dict.get(field, None)
+
+                        if val is None and hipaa_dict:
+                            val = hipaa_dict.get(field, None)
+
+                        if val is None and reg_risk:
+                            val = reg_risk.get(field, None)
+
+                    #
+                    #   Since we are writing it to a CSV file, we convert it into string
+                    #   Later on we will use pandas to read the CSV file, and pandas will
+                    #   convert things back anyway.
+                    #
+                    try:
+                        value = str(val)
+                    except UnicodeEncodeError:
+                        value = val.encode("ascii", "ignore").decode("ascii")
                 except Exception as e:
                     log.exception("Exception in reading incident field {}: {}".format(field, str(e)))
                     value = ""
