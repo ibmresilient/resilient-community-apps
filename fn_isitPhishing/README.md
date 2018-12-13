@@ -26,6 +26,7 @@ isitPhishing_license=xxxx
 ## Function: isitPhishing_url
 
 ###Function Inputs: 
+
 | Function Parameter | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ---- |
 | `isitPhishing_url`| `String` | Yes | `"http://www.thisisaphishingurl.com "` | N/A |
