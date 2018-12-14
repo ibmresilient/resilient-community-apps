@@ -120,5 +120,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
+            log.exception("Exception in Resilient Function ClamAV scan stream.")
             yield FunctionError()
