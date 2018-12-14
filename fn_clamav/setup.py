@@ -7,14 +7,13 @@ setup(
     name='fn_clamav',
     version='1.0.0',
     license='Resilient License',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_clamav'",
     long_description="Resilient Circuits Components for 'fn_clamav'",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'pyclamd >= 0.4.0'
-
     ],
     packages=find_packages(),
     include_package_data=True,

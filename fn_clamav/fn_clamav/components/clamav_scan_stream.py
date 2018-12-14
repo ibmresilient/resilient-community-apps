@@ -6,23 +6,17 @@
 """ Resilient functions component to run a ClamAV scan on a stream of data. """
 
 # Set up:
-# Destination: a Queue named "clamav".
+# Destination: a Queue named "fn_clamav".
 # Manual Action: Execute a ClamAV scan stream against file or attachment in Resilient.
 import logging
-import sys
-import base64
 import json
-if sys.version_info.major == 2:
-    from StringIO import StringIO
-else:
-    from io import StringIO
+from io import BytesIO
 
 import pyclamd
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_clamav.lib.helpers import validate_opts, validate_params
+from fn_clamav.lib.helpers import validate_opts, validate_params, get_file_attachment
 import fn_clamav.util.selftest as selftest
-
 
 
 class FunctionComponent(ResilientComponent):
@@ -30,11 +24,11 @@ class FunctionComponent(ResilientComponent):
     package fn_clamav.
 
     The Function takes the following parameters:
-        base64content, file_name
+        clamav_base64content, clamav_file_name
 
     An example of a set of query parameter might look like the following:
-            base64content  = "base64content: ..."
-            filre_name     = "eicar.txt"
+            clamav_base64content  = "base64content: ..."
+            clamav_file_name     = "eicar.txt"
 
     The function will stream  contents of a file to a ClamAV server to check for virus signature and returns a result
     in JSON format similar to the following.
@@ -72,18 +66,30 @@ class FunctionComponent(ResilientComponent):
         """Function: Function to send a contents of a file as a data-stream to ClamAV to scan for viruses."""
         try:
             # Get the function parameters:
-            base64content = kwargs.get("base64content")  # text
-            file_name = kwargs.get("file_name")  # text
 
-            validate_params(('base64content', 'file_name'), kwargs)
+            incident_id = kwargs.get("incident_id")  # number
+            task_id = kwargs.get("task_id")  # number
+            attachment_id = kwargs.get("attachment_id")  # number
+            artifact_id = kwargs.get("artifact_id")  # number
 
             log = logging.getLogger(__name__)
-            log.info("base64content: %s", base64content)
-            log.info("file_name : %s", file_name)
+            log.info("incident_id: %s", incident_id)
+            log.info("task_id: %s", task_id)
+            log.info("attachment_id: %s", attachment_id)
+            log.info("artifact_id: %s", artifact_id)
+
+            params = {"incident_id": incident_id, "artifact_id": artifact_id, "task_id": task_id,
+                      "attachment_id": attachment_id}
+
+            validate_params(params)
 
             yield StatusMessage("Scanning attachment with ClamAV ...")
             # Decode input which is base64 format.
-            data = base64.b64decode(base64content)
+            attachment = get_file_attachment(self.rest_client(), incident_id, artifact_id, task_id, attachment_id)
+
+            data_content = attachment["content"]
+            file_name =  attachment["filename"]
+
             # Setup ClamAV socket instance and test to see if we can connect.
             try:
                 cd = pyclamd.ClamdNetworkSocket(host=str(self.options['host']),
@@ -96,13 +102,18 @@ class FunctionComponent(ResilientComponent):
                               " msg: %s" % (e.__repr__(), getattr(e, 'message', str(e))))
                 raise ValueError('Could not connect to ClamAV server network socket')
 
-            rtn = cd.scan_stream(StringIO(data))
-            #Assume we got here and we have an empty dict then no virus found retrun result in common format.
+            rtn = cd.scan_stream(BytesIO(data_content))
+            #Assume we got here and we have an empty dict then no virus found return result in common format.
             if not rtn:
-                rtn = {u"stream": ("OK",'')}
-            # Add in "file_name" values to results.
-            results = {"response": json.loads(json.dumps(rtn)),"file_name": file_name}
-            yield StatusMessage("Returning ClamAV scan_stream results for attachment name '{}'.".format(file_name))
+                rtn = {u"stream": ("OK",'Clean')}
+
+            results = {"response": json.loads(json.dumps(rtn)), "inputs_params": params, "file_name": file_name}
+
+            if rtn["stream"][0] == "ERROR":
+                yield StatusMessage("ClamAV scan stream returned an 'ERROR': msg: '{}'.".format(rtn["stream"][1]))
+            else:
+                # Add "file_name" values to results.
+                yield StatusMessage(u"Returning ClamAV scan stream results for attachment name '{}'.".format(file_name))
 
             log.debug(json.dumps(results))
 
