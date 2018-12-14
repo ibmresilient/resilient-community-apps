@@ -13,7 +13,7 @@ setup(
     description="Resilient Circuits Components for IPInfo IP Enrichment API",
     long_description="Contains a function which accepts an IP Address as an input and attempts to query IPInfo against this IP",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=31.0.0',
         'ipinfo',
         'ipaddress'
     ],
@@ -28,6 +28,7 @@ setup(
             "FnIpinfoQueryIpAddressFunctionComponent = fn_ipinfo.components.fn_ipinfo_query_ip_address:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_ipinfo.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_ipinfo.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_ipinfo.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_ipinfo.util.selftest:selftest_function"]
     }
 )

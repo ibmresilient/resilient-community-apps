@@ -1,23 +1,24 @@
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import ipinfo
-import ipaddress
-import sys
+from fn_ipinfo.util.helper import IpInfoHelper
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
+
 
 class FunctionPayload:
     """Class that contains the payload sent back to UI and available in the post-processing script"""
 
     def __init__(self, inputs):
         self.success = True
-        self.inputs = {}
+        self.inputs = inputs
         self.query_result = None
 
-        for input in inputs:
-            self.inputs[input] = inputs[input]
+
 
     def as_dict(self):
         """Return this class as a Dictionary"""
@@ -41,32 +42,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Submits a query to IP Info for enrichment information on a given IP address.
 Takes in a String input representing an IP Address."""
 
-        """Helper Functions """
 
-        def is_valid_ipv4_addr(ip):
-            """ A custom Jinja filter function which determines if input is an IPV4 Address"""
-            try:
-                return isinstance(ipaddress.ip_address(ip), ipaddress.IPv4Address)
-            except Exception as e:
-                return False
-
-        def is_valid_ipv6_addr(ip):
-            """ A custom Jinja filter function which determines if input is an IPV6 Address"""
-            try:
-                return isinstance(ipaddress.ip_address(ip), ipaddress.IPv6Address)
-            except Exception as e:
-                return False
-
-        def get_config_option(option_name, optional=False):
-            """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-            option = self.options.get(option_name)
-
-            if not option and optional is False:
-                err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function properly".format(
-                    option_name)
-                raise ValueError(err)
-            else:
-                return option
 
         """ Function Code """
         try:
@@ -79,47 +55,47 @@ Takes in a String input representing an IP Address."""
             if not ipinfo_query_ip:
                 raise ValueError("An IP to query is mandatory, check your provided input.")
 
+            helper = IpInfoHelper()
+            # Prepare the function payload
+            payload = FunctionPayload({
+                "ipinfo_query_ip": ipinfo_query_ip
+            })
             """Validate the input is a IP Address
             
             On Py2 the ipaddress package expects unicode 
             This is a problem as when we do a input.encode('utf-8')
             on python the type resolves as str and not unicode 
             """
-            if not is_valid_ipv4_addr(ipinfo_query_ip
-                                      if sys.version_info > (3, 0)
-                                      else unicode(ipinfo_query_ip)) \
-                    and not is_valid_ipv6_addr(ipinfo_query_ip
-                                               if sys.version_info > (3, 0)
-                                            else unicode(ipinfo_query_ip)):
-                yield StatusMessage("Could not validate the IP as a IPV4 or IPV6 IP Address.")
-                raise ValueError("Could not validate the IP as a IPV4 or IPV6 IP Address.")
+            if not helper.is_valid_ipv4_addr(helper.get_ipinfo_qry_ip(ip=ipinfo_query_ip)) \
+                    and not helper.is_valid_ipv6_addr(helper.get_ipinfo_qry_ip(ip=ipinfo_query_ip)):
+
+                    payload.success = False
+                    raise ValueError("Could not validate the IP as a IPV4 or IPV6 IP Address.")
             else:
                 yield StatusMessage("Input IP has passed validation, querying for information")
 
-            # Prepare the function payload
-            payload = FunctionPayload({
-                "ipinfo_query_ip": ipinfo_query_ip
-            })
-
-            access_token = get_config_option(option_name='ipinfo_access_token')
+            access_token = helper.get_config_option(option_name='ipinfo_access_token', options=self.options)
             # Setup the IpInfo API Class
-            handler = ipinfo.getHandler(access_token)
+            ipinfo_handler = ipinfo.getHandler(access_token)
 
             try:
                 # Submit query
-                details = handler.getDetails(ipinfo_query_ip)
+                details = ipinfo_handler.getDetails(ipinfo_query_ip)
 
                 # Take all the results into our payload for enrichment
                 payload.query_result = details.all
                 # If key is not present in dictionary, then del can throw KeyError, need to catch this
                 try:
                     """Part of the payload is a field called 'ip_address' of type IPV4Address
-                    This classtype isin't JSON compat and the string representation 
+                    This classtype isin't JSON compat and the string representation
                     of 'ip_address' is already present in attribute 'ip'
                     In this case, remove 'ip_address' from payload'"""
                     del payload.query_result["ip_address"]
                 except KeyError:
                     log.debug("Encounted issue trying to remove ip_address attribute")
+                # Query result is a dict, if it is falsey (None, empty dict) set success to false
+                if not payload.query_result:
+                    payload.success = False
 
             except Exception as e:
                 payload.success = False

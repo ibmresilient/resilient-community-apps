@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -18,6 +20,7 @@ FUNCTION_NAME = "fn_ipinfo_query_ip_address"
 
 # Read the default configuration-data section from the package
 #config_data = get_config_data(PACKAGE_NAME)
+# Read the mock config data
 config_data = get_mock_config()
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
