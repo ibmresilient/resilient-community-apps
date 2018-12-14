@@ -12,7 +12,7 @@ setup(
     description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
     long_description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=31.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
