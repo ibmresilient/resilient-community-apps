@@ -4,7 +4,8 @@
 """
     A custom threat service 'searcher' for MISP
 
-    Tested with PyMISP version: 2.4.79
+    Tested with PyMISP version: 2.4.99
+    MISP version: 2.4.99
 
     Test using 'curl':
         curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.uri","value":"http://example.org"}' 'http://127.0.0.1:9000/cts/misp'
@@ -90,7 +91,7 @@ MISP_TYPES = {
 def config_section_data():
     """sample config data for use in app.config"""
     section_config_fn = resource_filename(Requirement.parse("rc-cts-misp"), "rc_cts_misp/data/app.config.cts-misp")
-    with open(section_config_fn, b'r') as section_config_file:
+    with open(section_config_fn, 'r') as section_config_file:
         return section_config_file.read()
 
 
@@ -121,7 +122,8 @@ class MISPThreatSearcher(BaseComponent):
 
         # verify the MISP server HTTPS certificate?
         verify_cert = opts.get(CONFIG_SECTION, {}).get("misp_verifycert", True)
-        if isinstance(verify_cert, str):
+
+        if not isinstance(verify_cert, bool):
             verify_cert = json.loads(verify_cert.lower()) if verify_cert.lower() in ['true', 'false'] else verify_cert
 
         self.misp_verifycert = verify_cert
