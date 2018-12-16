@@ -14,7 +14,6 @@ from fn_isitPhishing.lib.isitphishing_util import get_license_key
 import fn_isitPhishing.util.selftest as selftest
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
-API_URL = 'https://ws.isitphishing.org/api/v2/document'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'isitphishing_html_document"""
@@ -30,7 +29,7 @@ class FunctionComponent(ResilientComponent):
 
     def _init_isitPhishing(self):
         """ validate required fields for app.config """
-        validate_fields(('isitphishing_name', 'isitphishing_license'), self.options)
+        validate_fields(('isitphishing_api_url', 'isitphishing_name', 'isitphishing_license'), self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -47,8 +46,8 @@ class FunctionComponent(ResilientComponent):
         Vade Secure API endpoint:
         https://ws.isitphishing.org/api/v2/document
         for analysis to detemine if the document contains phishing.
-        The results contain the result of the query in 'contents' and the
-        input paramters to the function.
+        The "results" dictionary contains the result of the API query in
+        "contents" and the "inputs" parameters to the function.
         """
         try:
             # Get the function parameters:
@@ -63,8 +62,11 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_id: %s", artifact_id)
 
+            # Form the URL for API request.
+            API_URL = u"{0}/document".format(self.options["isitphishing_api_url"])
+
             # Get the license key to access the API endpoint.
-            auth_token = get_license_key(self.isitPhishing_name, self.isitPhishing_license)
+            auth_token = get_license_key(self.options["isitphishing_name"], self.options["isitphishing_license"])
 
             # Build the header and the data payload.
             headers = {
@@ -83,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             base64encoded_doc = base64.b64encode(data).decode("ascii")
             payload = {"document": base64encoded_doc}
 
-            yield StatusMessage("Query isitPhishing.org endpoint.")
+            yield StatusMessage("Query isitPhishing endpoint for status of document.")
 
             # Make API URL request
             response = requests.post(API_URL, headers=headers, json=payload)

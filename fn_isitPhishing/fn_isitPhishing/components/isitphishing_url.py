@@ -13,7 +13,6 @@ import fn_isitPhishing.util.selftest as selftest
 
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
-API_URL = 'https://ws.isitphishing.org/api/v2/url'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'isitphishing"""
@@ -28,7 +27,7 @@ class FunctionComponent(ResilientComponent):
 
     def _init_isitPhishing(self):
         """ validate required fields for app.config """
-        validate_fields(('isitphishing_name', 'isitphishing_license'), self.options)
+        validate_fields(('isitphishing_api_url', 'isitphishing_name', 'isitphishing_license'), self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -38,7 +37,13 @@ class FunctionComponent(ResilientComponent):
 
     @function("isitphishing_url")
     def _isitphishing_url_function(self, event, *args, **kwargs):
-        """Function: Analyze a URL, a list of URLs or a document using the Vade Secure IsItPhishing Webservice API."""
+        """Function: isitphishing_url
+        This function takes URL string as a required parameter.  It
+        queries the Vade Secure isiphishing API to analyze the
+        URL to determine if it is PHISHING or SPAM.
+        The results contain the result of the query in 'contents' and the
+        URL input parameter to the function.
+        """
         try:
             # Get the function parameters:
             isitphishing_url = kwargs.get("isitphishing_url")  # text
@@ -46,8 +51,11 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("isitphishing_url: %s", isitphishing_url)
 
+            # Form the URL for API request.
+            API_URL = u"{0}/url".format(self.options["isitphishing_api_url"])
+
             # Get the license key to access the API endpoint.
-            auth_token = get_license_key(self.isitPhishing_name, self.isitPhishing_license)
+            auth_token = get_license_key(self.options["isitphishing_name"], self.options["isitphishing_license"])
 
             # Build the header and the data payload.
             headers = {
@@ -57,7 +65,7 @@ class FunctionComponent(ResilientComponent):
 
             payload = {"url": isitphishing_url, "force": False, "smart": True, "timeout": 8000}
 
-            yield StatusMessage("Query isitPhishing.org endpoint.")
+            yield StatusMessage("Query isitPhishing.org endpoint for status of URL {0}.".format(isitphishing_url))
 
             # Make URL request
             response = requests.post(API_URL, headers=headers, json=payload)
