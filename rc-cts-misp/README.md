@@ -21,5 +21,16 @@ is listening on port 9000):
 
 ```
     sudo resutil threatserviceedit -name MISP -resturl http://127.0.0.1:9000/cts/misp
-    sudo resutil threatservicetest -name MISP
+```
+
+To test the connection:
+
+```
+sudo resutil threatservicetest -name MISP
+```
+
+To delete:
+
+```
+sudo resutil threatservicedel -name MISP
 ```
