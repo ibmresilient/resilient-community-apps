@@ -115,7 +115,7 @@ Each script execution is run within defined computational quota limits - 5 secon
 
 ## Examples
 ### Extending the solution to deal with Phishing reports
-Scenario: Emails arriving in a particular mailbox reflect user reports of suspected Phishing attempts. These email messages should, in addition to the generic processing, record the sender of the email message as having been the target of a phishing attack.
+Scenario: Emails arriving in a particular mailbox reflect individuals forwarding suspected Phishing messages. The scripts operating on these email messages should, in addition to the generic processing, record the reporter's email address as possibly having been the target of a phishing attack, and identify the sender of the forwarded phishing email as suspicious. 
 
 A solution:
 Add the following script to the Resilient platform:
