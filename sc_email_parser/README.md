@@ -123,8 +123,8 @@ Add the following script to the Resilient platform:
 import re
 
 def addArtifact(regex, artifactType, description):
-  """This method adds new artifacts to the incident derived from matches of the the regular expression parameter within
-  the email body contents.
+  """This method adds new artifacts to the incident derived from matches of the the regular expression
+  parameter within the email body contents.
   Parameter "regex" - a regular expression to match against the email body contents.
   Parameter "artifactType" - the type of the artifact(s).
   Parameter "description" - the description of the artifact(s).
@@ -148,7 +148,7 @@ incident.addArtifact("Email Recipient", reportingUserInfo, "Recipient of suspici
 
 # Extract email sender information on the assumption that a fishing email is being forwarded
 if not emailmessage.body.content is None:
-  addArtifact(r"From: (.*@.*)\n", "Email Sender", "Suspicious email sender")
+  addArtifact(r"From: (.*)\n", "Email Sender", "Suspicious email sender")
   addArtifact(r"Reply-To: (.*)\n", "Email Sender", "Suspicious email sender (Reply-To)")
 ```
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script expects this to have been done already.
