@@ -6,15 +6,22 @@ current.isValidField("x_261673_resilient_reference_id") && current.getValue("x_2
 //////////////////
 ///   Script   ///
 //////////////////
-(function executeRule(current, previous) {
-
-	//Instaniate new Workflow object (use global. as in Scoped Application)
+(function executeRule(current) {
+	
+	var workflowId = null;
+	
+	//Instantiate new Workflow object (use global. as in Scoped Application)
 	var wf = new global.Workflow();
 	
-	//Get the workflow_id from the workflow name
-	var workflowId = wf.getWorkflowFromName("ResilientUpdateState");
-			
+	//Check if user has defined a custom workflow
+	workflowId = wf.getWorkflowFromName("CUSTOM_RES_WF_UpdateState");
+	
+	//If there is no custom workflow, run the default one
+	if(workflowId == null){
+		workflowId = wf.getWorkflowFromName("RES_WF_UpdateState");
+	}
+
 	//Start the workflow, where 'current' is the current record the UI action was triggered from
 	wf.startFlow(workflowId, current, null, null);
 
-})(current, previous);
+})(current);

@@ -1,4 +1,4 @@
-(function resilientAddCommentRunScript(){
+(function RES_WF_AddComment(){
 	try{
 		var res_helper = new ResilientHelper();
 	

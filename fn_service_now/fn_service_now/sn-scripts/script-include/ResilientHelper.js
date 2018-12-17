@@ -21,122 +21,118 @@ ResilientHelper.prototype = {
 		return {"incidentId": incidentId, "taskId": taskId};
 	},
 	
-	createIncident: function(record, snRecordId, incidentName, initSnNote, optionalFields){
-		try{
-			
-			//Get discoveredDate
-			var gdt = new GlideDateTime();
-			var discovered_date = gdt.getNumericValue();
+	create: function(record, snRecordId, caseName, options){
+		var caseData = {};
+		var snLink, res, res_reference_id, res_reference_type, res_reference_link, returnValue, errMsg = null;
+		var VALID_OPTIONS = ["incidentId", "initSnNote", "optionalFields"];
 
-			// Generate the link for the RES Note
-			var snLink = record.getLink();
-			var instanceName = gs.getProperty("instance_name");
-			snLink = "https://" + instanceName + ".service-now.com/" + snLink;
+		//Validate required parameters
+		if(!record || record instanceof GlideRecord == false){
+			errMsg = "ResilientHelper.create(): 'record' parameter must be a GlideRecord object";
+			throw errMsg;
+		}
 
-			// Create the RES Note
-			var noteText = '<br>This Incident has been sent from <b>ServiceNow</b><br><b>ServiceNow ID:</b> ' +snRecordId+ '<br><b>ServiceNow Link:</b> <a href="'+snLink+'">'+snLink+'</a></div>';
-			
-			var incidentData = {
-				"name": incidentName,
-				"discovered_date": discovered_date,
-				"comments": [{"text":{"format": "html", "content": noteText}}]
-			};
-			
-			//Handle optional fields
-			if(optionalFields){
-				for (var fieldName in optionalFields){
-					if (optionalFields.hasOwnProperty(fieldName)) {
-						var fieldValue = optionalFields[fieldName];
-						incidentData[fieldName] = fieldValue;
-					}
+		if(!snRecordId || typeof snRecordId !== "string"){
+			errMsg = "ResilientHelper.create(): 'snRecord' parameter must be a defined String object";
+			throw errMsg;
+		}
+
+		if(!caseName || typeof caseName !== "string"){
+			errMsg = "ResilientHelper.create(): 'caseName' parameter must be a defined String object";
+			throw errMsg;
+		}
+
+		//Validate options
+		if(options){
+			for (var optionName in options){
+				if (options.hasOwnProperty(optionName) && VALID_OPTIONS.indexOf(optionName) == -1) {
+					errMsg = "Invalid option for ResilientHelper.create()";
+					errMsg += "\n" + optionName + " is an invalid option";
+					errMsg += "\n Valid options are: " + VALID_OPTIONS.join(","); 
+					throw errMsg;
 				}
 			}
+		}
 
-			//Create the incident 
-			var resIncident = this.res_api.createIncident(incidentData);
+		//Get vars in options
+		var incidentId = options["incidentId"];
+		var initSnNote = options["initSnNote"];
+		var optionalFields = options["optionalFields"];
+
+		//Set name of the incident/task
+		caseData["name"] = caseName;
+
+		//Handle optional fields
+		if(optionalFields){
+			for (var fieldName in optionalFields){
+				if (optionalFields.hasOwnProperty(fieldName)) {
+					var fieldValue = optionalFields[fieldName];
+					caseData[fieldName] = fieldValue;
+				}
+			}
+		}
+
+		// Generate the snLink for the Resilient Datatable Entry
+		snLink = this.res_api.generateSNlink(record);
+
+		//If no incidentId, we are creating an Incident
+		if (!incidentId){
+
+			//Set the type
+			res_reference_type = "Incident";
+
+			//Get discoveredDate
+			var gdt = new GlideDateTime();
+			var discoveredDate = gdt.getNumericValue();
+
+			//Set the discovered_date, which is mandatory to create an incident
+			caseData["discovered_date"] = discoveredDate;
+
+			//Create the incident and get response
+			res = this.res_api.createIncident(caseData);
+
+			//Get res_reference_id and link
+			res_reference_id = this.res_api.generateRESid(res.id);
+			res_reference_link = this.res_api.generateRESlink(res.id);
+		}
+		//Else we are creating a Task on the given incidentId
+		else{
+			//Set the type
+			res_reference_type = "Task";
+
+			//Create the task
+			res = this.res_api.createTask(incidentId, caseData);
 			
-			//Get and Set required values on SN record
-			var res_ref_id = this.res_api.generateRESid(resIncident.id);
-			var res_link = this.res_api.generateRESlink(resIncident.id);
-			record.setValue("x_261673_resilient_reference_id", res_ref_id);
-			record.setValue("x_261673_resilient_type", "Incident");
-			record.setValue("x_261673_resilient_reference_link", res_link);
-			
+			//Get res_reference_id and link
+			res_reference_id = this.res_api.generateRESid(incidentId, res.id);
+			res_reference_link = this.res_api.generateRESlink(incidentId, res.id);
+		}
+
+		if(res){
+			//Set required values on SN record
+			record.setValue("x_261673_resilient_reference_id", res_reference_id);
+			record.setValue("x_261673_resilient_type", res_reference_type);
+			record.setValue("x_261673_resilient_reference_link", res_reference_link);
+
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
 				record.work_notes = initSnNote;
 			}
 
-			//Update the Datatable in Resilient
-			this.addNewRowToRESDatatable(res_ref_id, snRecordId, res_link, snLink);
-		}
-		catch(e){
-			var errMsg = "Failed to Create the Incident in IBM Resilient";
-			gs.error(errMsg);
-			throw e;
-		}
-	},
-	
-	createTask: function(record, snRecordId, incidentId, taskName, initSnNote, optionalFields){
-		var snLink = null;
+			//Add a new row to the Resilient Datatable
+			this.addNewRowToRESDatatable(res_reference_id, snRecordId, res_reference_link, snLink);
 
-		try{
-			//Set required values (only name is required to create a Task using RES API)
-			var taskData = {
-				"name": taskName,
-			};
-
-			// //If an initial note is defined, add it to taskData as a comment
-			// if(initResNote){
-			// 	taskData["notes"] = [{"text":{"format": "text", "content": initResNote}}];
-			// }
-			
-			//Handle optional fields
-			if(optionalFields){
-				for (var fieldName in optionalFields){
-					if (optionalFields.hasOwnProperty(fieldName)) {
-						var fieldValue = optionalFields[fieldName];
-						taskData[fieldName] = fieldValue;
-					}
-				}
+			returnValue = {
+				res_reference_id: res_reference_id,
+				res_reference_link: res_reference_link,
+				res_reference_type: res_reference_type,
+				snLink: snLink
 			}
-
-			//Create the task
-			var resTask = this.res_api.createTask(incidentId, taskData);
-			
-			//Get and Set required values on SN record
-			var res_ref_id = this.res_api.generateRESid(incidentId, resTask.id);
-			var res_link = this.res_api.generateRESlink(incidentId, resTask.id);
-			record.setValue("x_261673_resilient_reference_id", res_ref_id);
-			record.setValue("x_261673_resilient_type", "Task");
-			record.setValue("x_261673_resilient_reference_link", res_link);
-			
-			if(initSnNote){
-				record.work_notes = initSnNote;
-			}
-			
-			
-			//Get the link to the SN record
-			snLink = record.getLink();
-			
-			//Update the Datatable in Resilient
-			this.addNewRowToRESDatatable(res_ref_id, snRecordId, res_link, snLink);
-			
-			// Generate the link for the RES Note
-			var instanceName = gs.getProperty("instance_name");
-			snLink = "https://" + instanceName + ".service-now.com/" + snLink;
-
-			// Create the RES Note
-			var noteText = '<br>This Task has been sent from <b>ServiceNow</b><br><b>ServiceNow ID:</b> ' +snRecordId+ '<br><b>ServiceNow Link:</b> <a href="'+snLink+'">'+snLink+'</a></div>';
-			this.addNote(res_ref_id, noteText, "html");
 		}
-		catch(e){
-			var errMsg = "Failed to Create a Task in IBM Resilient:" + taskName;
-			gs.error(errMsg);
-			throw e;
-		}
+
+		return returnValue;
 	},
-	
+
 	formatChange: function(type, field){
 
 		var returnValue = {
@@ -329,9 +325,6 @@ ResilientHelper.prototype = {
 				var ids = this.parseRefId(res_ref_id);
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
-
-				var instanceName = gs.getProperty("instance_name");
-				sn_link = "https://" + instanceName + ".service-now.com/" + sn_link;
 
 				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>';
 

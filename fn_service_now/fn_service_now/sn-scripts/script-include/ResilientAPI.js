@@ -364,5 +364,11 @@ ResilientAPI.prototype = {
 		}
 		
 		return link;
+	},
+
+	generateSNlink: function(record){
+		var snLink = record.getLink();
+		var instanceName = gs.getProperty("instance_name");
+		return "https://" + instanceName + ".service-now.com/" + snLink;
 	}
 };

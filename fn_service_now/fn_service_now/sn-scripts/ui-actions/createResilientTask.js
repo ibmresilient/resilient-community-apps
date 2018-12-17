@@ -26,8 +26,9 @@ function promptForResilientIncidentId(){
 
 //Code that runs without "onclick"
 //Ensure call to server-side function with no browser errors
-if(typeof window == "undefined")
+if(typeof window == "undefined"){
 	createTaskNew();
+}
 
 function createTaskNew() {
 	action.setRedirectURL(current);
@@ -38,20 +39,34 @@ function createTaskNew() {
 
 	try{
 		if(valid){
+			gs.addInfoMessage("Creating a Task in Resilient from this record in the Resilient Incident: " + incidentId);
+			
+			var workflowId, workflowVars = null;
+			
+			//Instantiate new Workflow object (use global. as in Scoped Application)
 			var wf = new global.Workflow();
 		
-			vars = { "u_ibm_resilient_incident_id": incidentId };
+			workflowVars = { 
+				"u_ibm_resilient_incident_id": incidentId 
+			};
 
-			wf.startFlow(wf.getWorkflowFromName("ResilientCreateTask"), current, null, vars);
-			
-			gs.addInfoMessage("Creating a Task in Resilient from this record in the Resilient Incidents: " + incidentId);
+			//Check if user has defined a custom workflow
+			workflowId = wf.getWorkflowFromName("CUSTOM_RES_WF_CreateTask");
+
+			//If there is no custom workflow, run the default one
+			if(workflowId == null){
+				workflowId = wf.getWorkflowFromName("RES_WF_CreateTask");
+			}
+	
+			wf.startFlow(workflowId, current, null, workflowVars);
+
 		}
 		else{
-			gs.addErrorMessage(incidentId + " is not a VALID Resilient Incident ID");
+			gs.addErrorMessage(incidentId + " is NOT a valid Resilient Incident ID");
 		}
 	}
-	catch (ex){
-		gs.addInfoMessage("Failed to Create Resilient Task: " + ex.toString());
-		throw ex;
+	catch (err){
+		gs.addInfoMessage("Failed to Create Resilient Task: " + err);
+		throw err;
 	}
 }

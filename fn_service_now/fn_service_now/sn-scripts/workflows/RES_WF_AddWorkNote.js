@@ -1,4 +1,4 @@
-(function resilientAddWorkNoteRunScript(){
+(function RES_WF_AddWorkNote(){
 	try{
 		var res_helper = new ResilientHelper();
 	

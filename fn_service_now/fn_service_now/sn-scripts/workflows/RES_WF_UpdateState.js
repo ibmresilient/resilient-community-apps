@@ -1,4 +1,4 @@
-(function resilientUpdateStateWorkflow(){
+(function RES_WF_UpdateState(){
 	try{
 		//Instantiate new resHelper
 		var resHelper = new ResilientHelper();
@@ -32,5 +32,4 @@
 	catch(errMsg){
 		gs.error(errMsg);
 	}
-	
 })();
