@@ -32,7 +32,7 @@ After installing, the Resilient platform has a new Python script called "Generic
 
 ## Configuration
 ### The incident owner
-New incidents need an owner, an individual identified by their email address. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 492 of the script:
+New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 492 of the script:
 
 ```python
 # The new incident owner
@@ -120,6 +120,23 @@ Scenario: Emails arriving in a particular mailbox reflect user reports of suspec
 A solution:
 Add the following script to the Resilient platform:
 ```python
+import re
+
+def addArtifact(regex, artifactType, description):
+  """This method adds new artifacts to the incident derived from matches of the the regular expression parameter within
+  the email body contents.
+  Parameter "regex" - a regular expression to match against the email body contents.
+  Parameter "artifactType" - the type of the artifact(s).
+  Parameter "description" - the description of the artifact(s).
+  """
+  dataList = set(re.findall(regex, emailmessage.body.content)) # Using a set to enforce uniqueness
+  if dataList is not None and len(dataList) > 0 :
+    map(lambda theArtifact: incident.addArtifact(artifactType, theArtifact, description), dataList)
+
+###
+# Mainline starts here
+###
+
 # Add "Phishing" as an incident type for the associated incident
 incident.incident_type_ids.append("Phishing") 
 
@@ -127,9 +144,12 @@ incident.incident_type_ids.append("Phishing")
 reportingUserInfo = emailmessage.from.address
 if emailmessage.from.name is not None:
   reportingUserInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
-log.info("Adding reporting user info \"{0}\"".format(reportingUserInfo))
+incident.addArtifact("Email Recipient", reportingUserInfo, "Recipient of suspicious email")
 
-incident.addArtifact("Email Recipient", reportingUserInfo, "Suspicious email recipient name")
+# Extract email sender information on the assumption that a fishing email is being forwarded
+if not emailmessage.body.content is None:
+  addArtifact(r"From: (.*@.*)\n", "Email Sender", "Suspicious email sender")
+  addArtifact(r"Reply-To: (.*)\n", "Email Sender", "Suspicious email sender (Reply-To)")
 ```
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script expects this to have been done already.
 
