@@ -28,7 +28,6 @@ def call_clamav_scan_stream_function(circuits, function_params, timeout=10):
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
-
 class TestClamavScanStream:
     """ Tests for the clamav_scan_stream function"""
 
@@ -40,9 +39,9 @@ class TestClamavScanStream:
     @patch('fn_clamav.components.clamav_scan_stream.pyclamd.ClamdNetworkSocket', side_effect=mocked_pyclamd_client)
     @patch('resilient_circuits.actions_component.ResilientComponent.rest_client', side_effect=mocked_res_client)
     @pytest.mark.parametrize("incident_id, artifact_id, attachment_id, task_id, expected_results_1, expected_results_2", [
-        (2095, None, 25, None, "incident_eicar.txt", {u'stream': [u'FOUND', u'Eicar-Test-Signature']}),
-        (2095, 10, None, None, "artifact_eicar.txt", {u'stream': [u'FOUND', u'Eicar-Test-Signature']}),
-        (2095, None, 25, 2251251, "task_eicar.txt", {u'stream': [u'FOUND', u'Eicar-Test-Signature']})
+        (2095, None, 25, None, "incident_eicar.txt", {u'stream': (u'FOUND', u'Eicar-Test-Signature')}),
+        (2095, 10, None, None, "artifact_eicar.txt", {u'stream': (u'FOUND', u'Eicar-Test-Signature')}),
+        (2095, None, 25, 2251251, "task_eicar.txt", {u'stream': (u'FOUND', u'Eicar-Test-Signature')})
     ])
     def test_success(self, mock_get_1, mock_get_2, circuits_app, incident_id, artifact_id, attachment_id, task_id,
                      expected_results_1, expected_results_2):

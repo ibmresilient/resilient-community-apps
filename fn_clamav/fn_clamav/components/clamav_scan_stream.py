@@ -18,6 +18,17 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_clamav.lib.helpers import validate_opts, validate_params, get_file_attachment
 import fn_clamav.util.selftest as selftest
 
+class FunctionPayload:
+    """Class that contains the payload sent back to UI and available in the post-processing script"""
+
+    def __init__(self, inputs):
+        self.inputs_params = inputs
+        self.file_name = None
+        self.response = {}
+
+    def as_dict(self):
+        """Return this class as a Dictionary"""
+        return self.__dict__
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'clamav_scan_stream' of
@@ -53,18 +64,18 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_clamav", {})
         selftest.selftest_function(opts)
-        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_clamav", {})
-        validate_opts(self)
 
     @function("clamav_scan_stream")
     def _clamav_scan_stream_function(self, event, *args, **kwargs):
         """Function: Function to send a contents of a file as a data-stream to ClamAV to scan for viruses."""
         try:
+            # Validate configuration settings.
+            validate_opts(self)
             # Get the function parameters:
 
             incident_id = kwargs.get("incident_id")  # number
@@ -78,17 +89,20 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_id: %s", artifact_id)
 
-            params = {"incident_id": incident_id, "artifact_id": artifact_id, "task_id": task_id,
-                      "attachment_id": attachment_id}
+            payload = FunctionPayload({
+                "incident_id": incident_id,
+                "artifact_id": artifact_id,
+                "task_id": task_id,
+                "attachment_id": attachment_id
+            })
 
-            validate_params(params, ['incident_id'])
+            validate_params(payload.inputs_params, ['incident_id'])
 
             yield StatusMessage("Scanning attachment with ClamAV ...")
             # Decode input which is base64 format.
             attachment = get_file_attachment(self.rest_client(), incident_id, artifact_id, task_id, attachment_id)
 
             data_content = attachment["content"]
-            file_name =  attachment["filename"]
 
             # Setup ClamAV socket instance and test to see if we can connect.
             try:
@@ -102,23 +116,24 @@ class FunctionComponent(ResilientComponent):
                               " msg: %s" % (e.__repr__(), getattr(e, 'message', str(e))))
                 raise ValueError('Could not connect to ClamAV server network socket')
 
-            rtn = cd.scan_stream(BytesIO(data_content))
+            payload.response = cd.scan_stream(BytesIO(data_content))
             #Assume we got here and we have an empty dict then no virus found return result in common format.
-            if not rtn:
-                rtn = {u"stream": ("OK",'Clean')}
+            if not payload.response:
+                payload.response = {u"stream": ("OK",'Clean')}
 
-            results = {"response": json.loads(json.dumps(rtn)), "inputs_params": params, "file_name": file_name}
+            payload.file_name = attachment["filename"]
 
-            if rtn["stream"][0] == "ERROR":
-                yield StatusMessage("ClamAV scan stream returned an 'ERROR': msg: '{}'.".format(rtn["stream"][1]))
+            if payload.response["stream"][0] == "ERROR":
+                yield StatusMessage("ClamAV scan stream returned an 'ERROR': msg: '{}'.".format(payload.response["stream"][1]))
             else:
                 # Add "file_name" values to results.
-                yield StatusMessage(u"Returning ClamAV scan stream results for attachment name '{}'.".format(file_name))
+                yield StatusMessage(u"Returning ClamAV scan stream results for attachment name '{}'.".format(payload.file_name))
 
-            log.debug(json.dumps(results))
+            log.debug(json.dumps(payload.as_dict()))
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(payload.as_dict())
+            log.info("Complete")
         except Exception:
             log.exception("Exception in Resilient Function ClamAV scan stream.")
             yield FunctionError()
