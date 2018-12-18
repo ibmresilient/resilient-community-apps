@@ -14,3 +14,15 @@ def get_license_key(name, license):
         auth_token = base64.b64encode(bytes(url_key, 'ascii')).decode('ascii')
  
     return auth_token
+
+def get_filename_attachment(client, incident_id, task_id, attachment_id):
+
+    # return the filename of an attachment.
+    if task_id:
+        metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+    else:
+        metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+
+    metadata = client.get(metadata_uri)
+
+    return metadata["name"]

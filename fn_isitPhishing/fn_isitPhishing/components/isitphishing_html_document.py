@@ -10,7 +10,7 @@ import requests
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib.components.resilient_common import get_file_attachment, validate_fields
-from fn_isitPhishing.lib.isitphishing_util import get_license_key
+from fn_isitPhishing.lib.isitphishing_util import get_license_key, get_filename_attachment
 import fn_isitPhishing.util.selftest as selftest
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
@@ -80,6 +80,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the attachment data
             data = get_file_attachment(client, incident_id, artifact_id, task_id, attachment_id)
+            filename = get_filename_attachment(client, incident_id, task_id, attachment_id)
 
             # Base64 encode the document string and build payload.
             base64encoded_doc = base64.b64encode(data).decode("ascii")
@@ -105,7 +106,8 @@ class FunctionComponent(ResilientComponent):
                 "inputs": {"incident_id": incident_id,
                            "task_id": task_id,
                            "attachment_id": attachment_id,
-                           "artifact_id": artifact_id}
+                           "artifact_id": artifact_id,
+                           "filename": filename}
             }
 
             # Produce a FunctionResult with the results
