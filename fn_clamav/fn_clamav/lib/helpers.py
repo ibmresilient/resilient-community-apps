@@ -26,7 +26,7 @@ def validate_opts(func):
         raise ValueError("Invalid format for config setting 'host'.")
     if not "port" in func.options:
         raise Exception("Mandatory config setting 'port' not set.")
-    if func.options["host"] is None or not validate_is_int(func.options["port"]):
+    if func.options["port"] is None or not validate_is_int(func.options["port"]):
         raise ValueError("Invalid format for config setting 'port'.")
     if not "timeout" in func.options:
         raise Exception("Mandatory config setting 'timeout' not set.")
@@ -60,20 +60,24 @@ def validate_domain_name(domain_or_hostname):
             return False
     return True
 
-def validate_params(params):
+def validate_params(params, fieldList):
     """"Check parameter fields for Resilient Function that they exist and validate that are non None
         they are in correct format.
 
     :param params: Dictionary of Resilient Function parameters.
-    :param kwargs:
+    :param fieldList: Tuple of mandatory parameters.
     :return: no return
 
     """
+    for field in fieldList:
+        if field not in params:
+            raise ValueError('Required field is missing: '+field)
+
     for (k, v) in params.copy().items():
         if re.match("^incident_id$", k) and (v == '' or is_none(v)):
             raise ValueError("Required parameter '{}' is missing or empty.".format(k))
         if re.match("^(incident_id|artifact_id|task_id|attachment_id)$", k) and v is not None and not validate_is_int(v):
-            raise ValueError("Invalid value for function parameter '{}'.".format(k))
+            raise ValueError("Invalid value '{}' for function parameter '{}'.".format(v, k))
 
 def is_none(param):
     """Test if a parameter is None value or string 'None'.

@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
             params = {"incident_id": incident_id, "artifact_id": artifact_id, "task_id": task_id,
                       "attachment_id": attachment_id}
 
-            validate_params(params)
+            validate_params(params, ['incident_id'])
 
             yield StatusMessage("Scanning attachment with ClamAV ...")
             # Decode input which is base64 format.
