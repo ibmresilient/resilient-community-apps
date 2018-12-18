@@ -1,8 +1,6 @@
 ## About Apility.IO
 
-Apility.io can be defined as Threat Intelligence SaaS for developers and product companies that want to know in realtime if their existing or potential users have been classified as 'abusers' by one or more of these lists.
-
-Automatic extraction processes extracts all the information in realtime, keeping the most up to date data available, saving yourself the hassle of extract and update regularly all these lists and the data.
+Get reputation score for your **Emails, Domain Names and IP Addresses**, in addition you will also receive other necessary information regarding your assets such as **_geoip, as-network, freemail score, disposable score_** and many other useful information. 
 
 ## Using the Ability.IO Function
 
