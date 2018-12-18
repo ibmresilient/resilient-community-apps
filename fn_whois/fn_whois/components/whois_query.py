@@ -71,8 +71,6 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
 
             log.info("whois_query: %s", whois_query)
-
-            url_params = urlparse.urlparse(whois_query)
             # Initialise the payload
             payload = FunctionPayload({
                 "whois_query": whois_query
@@ -87,50 +85,57 @@ class FunctionComponent(ResilientComponent):
                 uri = urlparse.urlparse(get_config_option("whois_https_proxy", True))
                 socks.set_default_proxy(socks.PROXY_TYPE_HTTP, uri.hostname, uri.port)
                 socket.socket = socks.socksocket
+
             domain = None
             try:
-
                 domain = whois.whois(whois_query)
             except Exception as e:
-                if u"Unknown TLD" in e.args[0]:
-                    # Return a message telling the user which args are supported.
-                    yield StatusMessage(
-                        "Unsupported domain provided. The supported domains are {0}".format(e.args[0][32:-1]))
+                yield StatusMessage("Encountered exception when sending query. Reason {0}".format(str(e)))
                 payload.success = False
 
             domain_details = None
             if not isinstance(domain, type(None)):
-                # Get a dict representation of the details
-                domain_details = domain.__dict__
+                domain_details = domain
                 payload.success = True
 
                 yield StatusMessage("Gathered domain details, now normalising dates.")
                 try:
-                    for key,value in domain_details.items():
+                    for key,value in zip(domain_details.keys(), domain_details.values()):
                         # If value is a datetime, convert to a datestring
                         if isinstance(value,datetime.datetime):
+
                             domain_details[key] = value.strftime('%m/%d/%Y')
+                        # Possible also to encounter a list of datetimes for updated_date
+                        if isinstance(value, list) \
+                           and any(isinstance(x, datetime.datetime) for x in value):
+                            # Do a set comprehension to parse datetimes and remove duplicates then return update as list
+                            domain_details[key] = list(set(date.strftime('%m/%d/%Y')
+                                                           for date in value
+                                                           if isinstance(date, datetime.datetime)))
+
+                    # Ensure there aren't duplicate domain names
+                    if domain_details.get("domain_name", None):
+                        domain_details["domain_name"] = list(set(element.lower() for element in domain_details["domain_name"]))
+
                     # Last check if name_servers are provided
-                    if isinstance(domain_details.get("name_servers",None),set):
+                    if isinstance(domain_details.get("name_servers",None),list):
                         # Servers are duplicated with /r char, remove it then convert it from set to list
                         domain_details["name_servers"] = list({
-                            element.replace('\r', '')
+                            element.lower()
                             for element in domain_details.get("name_servers",None)
                            })
                 except Exception as e:
                     yield StatusMessage("Encountered exception while attempting to parse the results")
-
-
                 finally:
+                    # Put our results in the payload
                     payload.domain_details = domain_details
                     payload.domain_details_keys = list(domain_details.keys())
                     payload.domain_details_values = list(domain_details.values())
 
                 yield StatusMessage("Returning results")
-
-
             # Produce a FunctionResult with the results
             yield FunctionResult(payload.as_dict())
             log.info("Complete")
         except Exception:
             yield FunctionError()
+

@@ -72,24 +72,15 @@ class TestWhoisQuery:
         function_params = { 
             "whois_query": whois_query
         }
-        result_mock = WhoisMock()
-        with patch.object(whois, "whois",
-                          lambda query: result_mock):
-            """Patch the whois.__dict__ with a new dict. 
-                Here we take the test case name with os.environ
-                We then parse it out to get just the testcase name
-                result is something like test_success[test_id]
-                
-                For the logic below to work, your test_id needs to have no spaces
-                Test with ibm website -> Test-with-ibm-website
-            """
-            with patch.dict(whois.__dict__, mock_whois_payload(os.environ.get('PYTEST_CURRENT_TEST').split(':')[-1].split(' ')[0])):
-                results = call_whois_query_function(circuits_app, function_params)
+        with patch.object(whois, "whois") as mock_whois:
+            mock_whois.return_value = mock_whois_payload(os.environ.get('PYTEST_CURRENT_TEST').split(':')[-1].split(' ')[0])
+            results = call_whois_query_function(circuits_app, function_params)
+            assert (results["success"] == True)
+            assert (isinstance(results["domain_details"], dict))
+            assert (isinstance(results["domain_details_keys"], list))
+            assert (isinstance(results["domain_details_values"], list))
 
-                assert(results["success"] == True)
-                assert (isinstance(results["domain_details"],dict))
-                assert (isinstance(results["domain_details_keys"], list))
-                assert (isinstance(results["domain_details_values"], list))
+
 
     @pytest.mark.livetest
     @pytest.mark.parametrize("whois_query", [
@@ -119,7 +110,6 @@ class TestWhoisQuery:
         }
 
         results = call_whois_query_function(circuits_app, function_params)
-        print(results)
         assert (results["success"] == True)
         assert (isinstance(results["domain_details"], dict))
         assert (isinstance(results["domain_details_keys"], list))
