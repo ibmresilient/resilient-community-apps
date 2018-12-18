@@ -350,10 +350,11 @@ class EmailProcessor(object):
     Returns a new set of valid addresses.
     """
     octets = anAddress.split(".")
-    if (len(octets) != 4) or max(map(int, octets)) > 255:
+    octetsAsIntArray = map(int, octets)
+    if (len(octets) != 4) or max(octetsAsIntArray) > 255:
       return None
     else:
-      return anAddress
+      return ".".join(map(str, octetsAsIntArray)) # eliminate leading zeros.
 
   @staticmethod
   def makeIPv6Pattern():
@@ -492,7 +493,8 @@ class EmailProcessor(object):
     log.info("Adding reporter field \"{0}\"".format(newReporterInfo))
     incident.reporter = newReporterInfo
 
-    self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
+    if emailmessage.subject is not None:
+      self.addUniqueArtifact(u"{0}".format(emailmessage.subject), "Email Subject", "Suspicious email subject")
 
 ###
 # Mainline starts here

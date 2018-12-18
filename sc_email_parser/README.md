@@ -32,7 +32,7 @@ After installing, the Resilient platform has a new Python script called "Generic
 
 ## Configuration
 ### The incident owner
-New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 492 of the script:
+New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 507 of the script:
 
 ```python
 # The new incident owner
