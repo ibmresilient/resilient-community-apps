@@ -35,28 +35,42 @@ class FunctionComponent(ResilientComponent):
     package fn_clamav.
 
     The Function takes the following parameters:
-        clamav_base64content, clamav_file_name
+        incident_id, task_id, attachment_id, artifact_id
 
     An example of a set of query parameter might look like the following:
-            clamav_base64content  = "base64content: ..."
-            clamav_file_name     = "eicar.txt"
+            incident_id = 2095
+            task_id = None
+            attachment_id = None
+            artifact_id = None
 
     The function will stream  contents of a file to a ClamAV server to check for virus signature and returns a result
     in JSON format similar to the following.
     # Virus found:
-        Result: {
-                    "file_name": "eicar.txt",
-                    "response": {"stream": ["FOUND", "Eicar-Test-Signature"]},
-           }
+    Result: {
+        "inputs": {"incident_id": 2095,
+                   "attachment_id": 45,
+                   "artifact_id": null,
+                   "task_id": null},
+        "response": {"stream": ["FOUND", "Clamav.Test.File-6"]},
+        "file_name": "test.rar"
+        }
     # No virus detected:
-        Result: {
-                    "file_name": "test.txt",
-                    "response": {"stream": ["OK", '']},
-           }
+    Result: {
+        "inputs": {"incident_id": 2095,
+                   "attachment_id": 45,
+                   "artifact_id": null,
+                   "task_id": null},
+        "response": {"stream": ["OK", '']},
+        "file_name": "test.txt"
+        }
     # Got an error:
-        Result: {
-                    "file_name": "test.txt",
-                    "response": {"stream": ["ERROR", '<reason>']},
+    Result: {
+        "inputs": {"incident_id": 2095,
+                   "attachment_id": 45,
+                   "artifact_id": null,
+                   "task_id": null},
+        "response": {"stream": ["ERROR", '<reason>']},
+        "file_name": "test.txt"
         }
     """
     def __init__(self, opts):
