@@ -1,11 +1,11 @@
 # Resilient Integration with IsItPhishing
 **This package contains two functions that calls the Vade Secure IsItPhishing Webservice API to analyze a URL or to analyze an HTML document.  Also included are an example workflow and rule for each function**
 
- ![screenshot](./screenshots/isitPhishing-url-rule.png)
+ ![screenshot](./screenshots/isitPhishing-url-function.png)
  ![screenshot](./screenshots/isitPhishing-url-preprocess.png)
  ![screenshot](./screenshots/isitPhishing-url-postprocess.png)
  ![screenshot](./screenshots/isitPhishing-url-rule.png)
- ![screenshot](./screenshots/isitPhishing-doc-rule.png)
+ ![screenshot](./screenshots/isitPhishing-doc-function.png)
  ![screenshot](./screenshots/isitPhishing-doc-preprocess.png)
  ![screenshot](./screenshots/isitPhishing-doc-postprocess.png)
  ![screenshot](./screenshots/isitPhishing-doc-rule.png)
