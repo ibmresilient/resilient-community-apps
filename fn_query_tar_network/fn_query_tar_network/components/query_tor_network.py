@@ -37,9 +37,9 @@ class FunctionComponent(ResilientComponent):
 
             __params_data = {'flag': self.options.get('flag'), 'fields': self.options.get('data_fields'),
                              'search': search_data}
-            log.info(__params_data)
+
             __response_data = requests.get(self.options.get('base_url'), params=__params_data)
-            log.info(__response_data.url)
+
             __response_data = __response_data.text
             if __response_data.find(search_data) != -1:
                 results = {'status': 'success', 'data': __response_data, 'value': True}
@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
                 results = {'status': 'failed', 'data': __response_data, 'value': False}
 
             yield StatusMessage("done...")
-            log.info("#################################\n{}".format(results))
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
