@@ -49,7 +49,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
 ---
 
 ## Pre-Defined ServiceNow Workflows
-* Below is the code for each **Run Scripts** of the pre-defined workflows
+* Below is the code for each **Run Script** of the pre-defined workflows
 * Use this code for guidance along with the **ResilientHelper API** (below) when creating your own Custom Workflows
 
 ### RES_WF_CreateIncident
