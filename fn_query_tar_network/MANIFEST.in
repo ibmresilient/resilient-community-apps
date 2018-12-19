@@ -1,0 +1,4 @@
+include README.md
+include fn_query_tar_network/util/*
+include fn_query_tar_network/LICENSE
+include fn_query_tar_network/doc/*
