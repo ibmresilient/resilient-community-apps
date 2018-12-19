@@ -1,11 +1,19 @@
-(function RES_WF_AddWorkNote(){
-	try{
-		var res_helper = new ResilientHelper();
+(function RES_WF_AddComment(){
 	
-		var res_ref_id = current.getValue("x_261673_resilient_reference_id");
-		var noteText = current.work_notes.getJournalEntry(1);
+	var resHelper, res_reference_id, noteText = null;
+	
+	try{
+		//Instantiate new ResilientHelper
+		resHelper = new ResilientHelper();
+	
+		//Get resilient_reference_id
+		res_reference_id = current.getValue("x_261673_resilient_reference_id");
 		
-		res_helper.addNote(res_ref_id, noteText);
+		//Set noteText to last additional comment added
+		noteText = current.work_notes.getJournalEntry(1);
+		
+		//Add a note in Resilient
+		resHelper.addNote(res_reference_id, noteText);
 	}
 	catch (errMsg){
 		gs.error(errMsg);

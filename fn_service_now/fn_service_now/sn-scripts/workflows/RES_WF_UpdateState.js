@@ -1,10 +1,14 @@
 (function RES_WF_UpdateState(){
+	
+	var resHelper, stateToColorMap, res_reference_id, snTicketState, snTicketStateColor, resolutionNotes = null;
+
 	try{
 		//Instantiate new resHelper
-		var resHelper = new ResilientHelper();
+		resHelper = new ResilientHelper();
 		
-		//A map of the ServiceNow record state to a related color
-		var stateToColorMap = {
+		//Map ServiceNow state to a color
+		//Colors accepted by resHelper.updateStateInResilient() = green/orange/yellow/red
+		stateToColorMap = {
 			"New": "green",
 			"In Progress": "orange",
 			"On Hold": "yellow",
@@ -14,19 +18,19 @@
 		};
 		
 		//Get the required values
-		var res_ref_id = current.getValue("x_261673_resilient_reference_id");
-		var snTicketState = current.state.getChoiceValue();
-		var snTicketStateColor = stateToColorMap[snTicketState];
+		res_reference_id = current.getValue("x_261673_resilient_reference_id");
+		snTicketState = current.state.getChoiceValue();
+		snTicketStateColor = stateToColorMap[snTicketState];
 		
 		//Update that status in the res datatable
-		resHelper.updateStateInResilient(res_ref_id, snTicketState, snTicketStateColor);
+		resHelper.updateStateInResilient(res_reference_id, snTicketState, snTicketStateColor);
 		
 		//Get resolution notes if there are any
-		var resolutionNotes = current.getValue("close_notes");
+		resolutionNotes = current.getValue("close_notes");
 		
 		//Add a note to the resilient incident/task if there are resolution notes
 		if(resolutionNotes){
-			resHelper.addNote(res_ref_id, resolutionNotes);
+			resHelper.addNote(res_reference_id, resolutionNotes);
 		}
 	}
 	catch(errMsg){

@@ -14,10 +14,11 @@
   - [Step 7: *Test*](#step-7-test)
   - [Step 8: *How to Import Updates in ServiceNow*](#step-8-how-to-import-updates-in-servicenow)
   - [Where Next?](#where-next)
+---
 
 ## Prerequisites 
 * Resilient Appliance updated to at least `v31.0.0`
-* An Integrations Server setup with `resilient-circuits >= 30.0.111` installed
+* An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
 ---
 
 ## Step 1: *Create a User on the Resilient Appliance*
@@ -84,7 +85,7 @@
   * **Resilient Organization:** this is the Org Name you used in **Step 1**
   * **Email Address:** this is the Email Address you used in **Step 1**
   * **Password:** this is the Password you used in **Step 1**
-  * **ServiceNow Username:** this is the **User ID** you enterd in **Step 3**
+  * **ServiceNow Username:** this is the **User ID** you entered in **Step 3**
   * **Using MidServer:** tick this box if **you will be using a Mid-Server** with this Integration *(See Step 6 for more)*
 * Click **Save**
 * You should see a **Properties updated** banner at the top of the page if the save was successful
@@ -185,8 +186,7 @@
 
 ## Step 8: *How to Import Updates in ServiceNow*
 ***Still in a testing stage, so updates will be delivered frequently***
->**NOTE:** this will **clear the Reference ID, Type and Link for ALL of your Incidents** that you have synced with Resilient. This is a current limitation on how we update the App using Git, but will not be an issue once we have
-> completed the Certification Process:
+>**NOTE:** this will **clear the Reference ID, Type and Link for ALL of your Incidents** that you have synced with Resilient. This is a current limitation on how we update the App using Git:
 > ![screenshot](./screenshots/30.png)
 * In ServiceNow, go to **System Applications > Studio**
 * Click on **IBM Resilient**
@@ -201,4 +201,4 @@
 # Where Next?
 * **Import the Datatable** and **Customize the Workflows** in Resilient to suit your needs 
 * Get help from the **Function documentation provided with the package**
-* Customize the Workflows in ServiceNow - *docs not yet complete*
+* Follow the **ServiceNow Customization Guide** to configure the ServiceNow part of this Integration to suit your needs

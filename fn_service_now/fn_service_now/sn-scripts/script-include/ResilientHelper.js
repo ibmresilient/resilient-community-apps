@@ -8,9 +8,9 @@ ResilientHelper.prototype = {
 			this.res_api = new ResilientAPI();
 	},
 	
-	parseRefId: function(res_ref_id){
+	parseRefId: function(res_reference_id){
 		var incidentId, taskId = null;
-		var ids = res_ref_id.split("-");
+		var ids = res_reference_id.split("-");
 
 		//RES-1234-56789
 		incidentId = ids[1];
@@ -192,7 +192,7 @@ ResilientHelper.prototype = {
 	},
 	
 	close: function(record, roc_fields){
-		var res_ref_id = record.getValue("x_261673_resilient_reference_id");
+		var res_reference_id = record.getValue("x_261673_resilient_reference_id");
 		var errMsg = null;
 		var resTicket = null;
 		var resTicketType = null;
@@ -200,7 +200,7 @@ ResilientHelper.prototype = {
 		var requestData = [];
 
 		//Get and parse the resilient_reference_ids [RES-incidentId-taskId]
-		var ids = this.parseRefId(res_ref_id);
+		var ids = this.parseRefId(res_reference_id);
 				
 		if(ids.taskId){
 			try{
@@ -306,14 +306,14 @@ ResilientHelper.prototype = {
 				this.res_api.closeIncident(ids.incidentId, {"changes": requestData});
 			}
 			catch(e){
-				errMsg = "Failed to close the Resilient " + resTicketType + ": " + res_ref_id;
+				errMsg = "Failed to close the Resilient " + resTicketType + ": " + res_reference_id;
 				gs.error(errMsg);
 				throw e;
 			}
 		}
 	},
 	
-	addNewRowToRESDatatable: function(res_ref_id, sn_ref_id, res_link, sn_link){
+	addNewRowToRESDatatable: function(res_reference_id, sn_ref_id, res_link, sn_link){
 		var colors = {
 			"green": "#00b33c",
 			"orange": "#ff9900",
@@ -322,7 +322,7 @@ ResilientHelper.prototype = {
 		};
 
 		try{
-				var ids = this.parseRefId(res_ref_id);
+				var ids = this.parseRefId(res_reference_id);
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
 
@@ -333,7 +333,7 @@ ResilientHelper.prototype = {
 
 				var cells = [
 					["time", now],
-					["res_id", res_ref_id],
+					["res_id", res_reference_id],
 					["sn_ref_id", sn_ref_id],
 					["resilient_status", resTicketStateRichText],
 					["servicenow_status", snTicketStateRichText],
@@ -350,13 +350,13 @@ ResilientHelper.prototype = {
 				this.res_api.addDatatableRow(ids.incidentId, formattedCells);
 			}
 		catch(e){
-			var errMsg = "Failed to send add row in Resilient Datatable for " + res_ref_id;
+			var errMsg = "Failed to send add row in Resilient Datatable for " + res_reference_id;
 			gs.error(errMsg);
 			throw e;
 		}
 	},
 	
-	updateStateInResilient: function(res_ref_id, snTicketState, snTicketStateColor){
+	updateStateInResilient: function(res_reference_id, snTicketState, snTicketStateColor){
 		var colors = {
 			"green": "#00b33c",
 			"orange": "#ff9900",
@@ -369,21 +369,21 @@ ResilientHelper.prototype = {
 		}
 
 		try{
-			var ids = this.parseRefId(res_ref_id);
+			var ids = this.parseRefId(res_reference_id);
 
 			var dt = this.res_api.getDatatable(ids.incidentId);
 			var rows = dt.rows;
 			var rowToUpdate = null;
 			
 			for (var i=0; i<rows.length; i++){
-				if(rows[i].cells.res_id.value == res_ref_id){
+				if(rows[i].cells.res_id.value == res_reference_id){
 					rowToUpdate = rows[i];
 					break;
 				}
 			}
 			
 			if (rowToUpdate == null){
-				throw "Could not find row in Resilient Datatable for " + res_ref_id;
+				throw "Could not find row in Resilient Datatable for " + res_reference_id;
 			}
 
 			else{
@@ -419,12 +419,12 @@ ResilientHelper.prototype = {
 		}
 	},
 	
-	addNote: function(res_ref_id, noteText, noteFormat){
+	addNote: function(res_reference_id, noteText, noteFormat){
 		try{
 			if(!noteFormat){
 				noteFormat = "text";
 			}
-			var ids = this.parseRefId(res_ref_id);
+			var ids = this.parseRefId(res_reference_id);
 			this.res_api.addNote(ids.incidentId, ids.taskId, noteText, noteFormat);
 		}
 
