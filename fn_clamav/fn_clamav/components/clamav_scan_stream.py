@@ -22,7 +22,7 @@ class FunctionPayload:
     """Class that contains the payload sent back to UI and available in the post-processing script"""
 
     def __init__(self, inputs):
-        self.inputs_params = inputs
+        self.inputs = inputs
         self.file_name = None
         self.response = {}
 
@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
                 "attachment_id": attachment_id
             })
 
-            validate_params(payload.inputs_params, ['incident_id'])
+            validate_params(payload.inputs, ['incident_id'])
 
             yield StatusMessage("Scanning attachment with ClamAV ...")
             # Decode input which is base64 format.
