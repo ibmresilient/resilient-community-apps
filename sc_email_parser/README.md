@@ -61,7 +61,7 @@ The IP address whitelists are divided into separate IPv4 and IPv6 lists. These l
 
 Additions to the whitelist should be made to `customIPv4WhiteList` and `customIPv6WhiteList`.
 
-There are two categories of IP whitelist entry, CIDR (Classless Inter-Domain Routing) and IPRange. For example, in IP V4, IBM owns the "9" class A network. You may want to also whitelist an IP range, such as 12.0.0.1 - 12.5.5.5. To add this criterion to the whitelist we would add the following to customIPv4WhiteList:
+There are two categories of IP whitelist entry, CIDR (Classless Inter-Domain Routing) and IPRange. For example, in IP V4, IBM owns the "9" class A network. You may want to also whitelist an IP range, such as 12.0.0.1 - 12.5.5.5. To add this criterion to the whitelist you would add the following to customIPv4WhiteList:
 ```python
 CIDR("9.0.0.0/8"),
 IPRange("12.0.0.1-12.5.5.5")
@@ -72,7 +72,7 @@ You may also want to whitelist an explicit IP address, such as 13.13.13.13. This
 CIDR("13.13.13.13")
 ```
 
-IP v6 whitelists operate similarly. For example to whitelist a V6 CIDR aaaa::/16 we would add CIDR("aaaa::/16") to customIPv6WhiteList. For example:
+IP v6 whitelists operate similarly. For example to whitelist a V6 CIDR aaaa::/16 you would add CIDR("aaaa::/16") to customIPv6WhiteList. For example:
 
 ```python
   # Customer-specific IP address whitelists
@@ -154,7 +154,7 @@ if not emailmessage.body.content is None:
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script expects this to have been done already.
 
 ### Campaign identifier
-Scenario: The customer wants to collect email messages related to the same campaign of attack to a single incident.
+Scenario: You want to collect email messages related to the same campaign of attack to a single incident.
 
 A solution:
 1. Create a new incident custom field for the campaign signifier of type Text.
