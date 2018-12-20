@@ -33,7 +33,7 @@ def selftest_function(opts):
     api_token = get_config_option("api_token", options)
 
     HEADERS = {'content-type': 'application/json', 'X-Auth-Token': api_token}
-    url = base_url+"badip/1.2.3.4"
+    url = "/".join((base_url, "badip/1.2.3.4"))
 
     try:
       res = requests.get(url, headers=HEADERS)
