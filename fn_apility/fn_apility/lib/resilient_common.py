@@ -5,7 +5,7 @@ def api_url(query_type):
     """
     Method Will return appropriate URL based on query type    
     """
-    type_url_mapping = {'Email': 'bademail', 'Domain': 'baddomain', 'IP Address': 'v2.0/ip'}
+    type_url_mapping = {'Email Sender': 'bademail', 'Email Recipient': 'bademail', 'Domain': 'baddomain', 'IP Address': 'v2.0/ip'}
     return type_url_mapping[query_type]
 
 
