@@ -1,6 +1,7 @@
 # Resilient Integration with WHOIS
 **This package contains one function which provides enrichment information about a domains WHOIS information. Takes in an input of an IP address or URL and then queries for WHOIS info related to this input. Results are saved in a rich text note.**
 
+
 ## Table of Contents 
   - [app.config settings:](#appconfig-settings)
   - [Function Inputs:](#function-inputs)
@@ -8,6 +9,8 @@
   - [Pre-Process Script:](#pre-process-script)
   - [Post-Process Script:](#post-process-script)
   - [Rules](#rules)
+
+![screenshot](./screenshots/1.png)
 
 
 ## app.config settings:
