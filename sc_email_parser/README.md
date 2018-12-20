@@ -41,7 +41,7 @@ newIncidentOwner = "admin@co3sys.com"
 Edit the line:
 ```python
 # The new incident owner
-newIncidentOwner = "l1@businessname.com"
+newIncidentOwner = "SOC_L1@example.com"
 ```
 
 ### Whitelisting
@@ -100,11 +100,13 @@ The domain whitelist applies to URLs found in the body of the email. If a whitel
 would become:
 ```python
   # Customer-specific domain whitelist
-  customDomainWhiteList = [ Domain("mail.businessname.com"),
-                            Domain("*.otherbusinessname.com") ]
+  customDomainWhiteList = [ Domain("mail.example.com"),
+                            Domain("*.secondexample.com") ]
 ```
 
 # Extension and Customization
+Refer to the Resilient Incident Response Platform Playbook Designer Guide for details on writing and customizing scripts. This guide is available from the Help/Contact menu in the Resilient platform.
+
 There are two approaches to customization of the mechanism:
 * Running multiple scripts for the same email
 * Modifying the supplied script
