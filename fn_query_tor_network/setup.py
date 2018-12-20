@@ -5,7 +5,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fn_query_tar_network',
+    name='fn_query_tor_network',
     version='1.0.0',
     license='MIT',
     author='Resilient Labs',
@@ -13,9 +13,9 @@ setup(
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_query_tar_network'",
     long_description="""The Query TOR Network API is RESTful web service allowing query tar network customer
-                        search for IP Addresses or host names in tor relay exit node database.and results
-                        will be updated on the Dashboard.
-                     """,
+                    search for IP Addresses or host names in tor relay exit node database.and results
+                    will be updated on the Incidents Notes Dashboard.
+                 """,
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
@@ -27,10 +27,10 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "QueryTorNetworkFunctionComponent = fn_query_tar_network.components.query_tor_network:FunctionComponent"
+            "FnTorFunctionComponent = fn_query_tor_network.components.fn_tor:FunctionComponent"
         ],
-        "resilient.circuits.configsection": ["gen_config = fn_query_tar_network.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_query_tar_network.util.customize:customization_data"],
-        "resilient.circuits.selftest": ["selftest = fn_query_tar_network.util.selftest:selftest_function"]
+        "resilient.circuits.configsection": ["gen_config = fn_query_tor_network.util.config:config_section_data"],
+        "resilient.circuits.customize": ["customize = fn_query_tor_network.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_query_tor_network.util.selftest:selftest_function"]
     }
 )
