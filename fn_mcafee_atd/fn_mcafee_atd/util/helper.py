@@ -137,6 +137,7 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
 
 def check_status_code(response):
+    log.info(response.json())
     if response.status_code > 299 or response.status_code < 200:
         raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
 
@@ -230,6 +231,7 @@ def check_task_status(g, taskId):
             jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
             res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
             res_json = res.json()
+            log.info(res_json)
             severity = res_json.get("severity")
             if severity < 0:
                 log.error("Severity is {}".format(str(severity)))
@@ -243,6 +245,7 @@ def check_task_status(g, taskId):
             jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
             res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
             res_json = res.json()
+            log.info(res_json)
             severity = res_json.get("severity")
             if severity < 0:
                 log.error("Severity is {}".format(str(severity)))
