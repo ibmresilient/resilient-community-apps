@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_query_tar_network
+   test with: resilient-circuits selftest -l fn_query_tor_network
 """
 
 import logging
@@ -18,7 +18,7 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
-    options = opts.get("fn_query_tar_network", {})
+    options = opts.get("fn_query_tor_network", {})
     try:
         connection_status = requests.get(options.get('base_url'))
         if not connection_status.status_code == 200:
