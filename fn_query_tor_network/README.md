@@ -1,8 +1,9 @@
-##About TOR  
+#About TOR  
  
+
 The Query TOR Network API is RESTful Web service allowing TOR Customers to query the IP Addresses and Host names to search in Exit Node TOR Network.
 
-##Using TOR Function
+#Using TOR Function
  We have included one rule and one workflow as an example.
 Below is details of Input and outputs of the API
 
@@ -13,6 +14,7 @@ Output : returns the json object by the label 'results', which hold 3 type of th
         3. data   -- (a complete json data object from the result)
       
 ##Resilient Configuration
+
 Follow the steps to add a TOR section to your app.config file by running resilient-circuits config [-u | -c] and updating the fields:
 
      [fn_query_tor_network]
