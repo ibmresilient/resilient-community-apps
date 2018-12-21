@@ -12,8 +12,16 @@ Output : returns the json object by the label 'results', which hold 3 type of th
         1. status -- (if object found in TOR Network it will be 'success' or else 'failed')
         2. value  -- (a Boolean value '1' for success and '0' for failures)
         3. data   -- (a complete json data object from the result)
-        
+      
+##Resilient Configuration
+Follow the steps to add a TOR section to your app.config file by running resilient-circuits config [-u | -c] and updating the fields:
 
+     [fn_query_tor_network]
+     base_url = https://onionoo.torproject.org/details
+     flag = Exit      --(The Flag can be 'Running','Exit' for more information on flag settings - https://metrics.torproject.org/onionoo.html)
+     data_fields = exit_addresses,or_addresses,host_name   -- (The data fields should be comma separated and no space should be given in between each fields)
+  
+#
     resilient-circuits codegen -p fn_query_tor_network [-f fn_tor] [-w ]
 
 
