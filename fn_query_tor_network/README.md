@@ -1,6 +1,5 @@
 ##About TOR  
  
-==
 The Query TOR Network API is RESTful Web service allowing TOR Customers to query the IP Addresses and Host names to search in Exit Node TOR Network.
 
 ##Using TOR Function
