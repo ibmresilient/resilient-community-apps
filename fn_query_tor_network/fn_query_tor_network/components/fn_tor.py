@@ -32,7 +32,6 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("tor_search_data: %s", tor_search_data)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
             __params_data = {'flag': self.options.get('flag'), 'fields': self.options.get('data_fields'),
@@ -40,12 +39,32 @@ class FunctionComponent(ResilientComponent):
 
             __response_data = requests.get(self.options.get('base_url'), params=__params_data)
 
-            __response_data = __response_data.text
-            if __response_data.find(tor_search_data) != -1:
-                results = {'status': 'success', 'data': __response_data, 'value': True}
+            __response_data_json_obj = __response_data.json()
+            __relays_data_list = __response_data_json_obj.get('relays')
+            search_field_list = self.options.get('data_fields').split(',')
+            __MATCH_FLAG = False
+            if not __relays_data_list:
+                log.info("Given Search Artifact is Not Matched...!")
+                __MATCH_FLAG = False
             else:
-                log.info("No Data found for given search element...!")
-                results = {'status': 'failed', 'data': __response_data, 'value': False}
+                for relay_data in __relays_data_list:
+                    for field in search_field_list:
+                        data = relay_data.get(field)
+                        if data is not None:
+                            if isinstance(data, list):
+                                for element in data:
+                                    if element.find(tor_search_data) != -1:
+                                        log.info('Given Search Artifact matched..!')
+                                        __MATCH_FLAG = True
+                            else:
+                                if data.find(tor_search_data) != -1:
+                                    log.info('Given Search Artifact matched..!')
+                                    __MATCH_FLAG = True
+            if __MATCH_FLAG:
+                results = {'status': 'success', 'value': True, 'data': __response_data.text}
+            else:
+                log.info("Given Search Artifact is Not Matched...!")
+                results = {'status': 'failed', 'value': False, 'data': __response_data.text}
 
             yield StatusMessage("done...")
 

@@ -12,7 +12,7 @@ def config_section_data():
     """
     config_data = u"""[fn_query_tor_network]
 base_url = https://onionoo.torproject.org/details
-#The Flag can be 'Running','Exit'
+#The Flag can be 'Running','Exit' for more information on flag settings - https://metrics.torproject.org/onionoo.html
 flag = Exit
 # The data fields should be comma separated and no space should be given in between each fields  
 data_fields = exit_addresses,or_addresses,host_name"""
