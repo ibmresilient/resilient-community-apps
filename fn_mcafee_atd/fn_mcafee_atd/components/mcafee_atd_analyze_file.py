@@ -66,6 +66,8 @@ class FunctionComponent(ResilientComponent):
         # Logout after making connection
         atd_logout(self.atd_url, h, self.trust_cert)
 
+        # check_task_status(self, "144115188075874420")
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -133,7 +135,7 @@ class FunctionComponent(ResilientComponent):
                             check_timeout(start, self.polling_interval, timeout_seconds)
                     except ValueError:
                         log.info("ATD analysis probably failed, please check ATD system.")
-                        raise FunctionError()
+#                        raise FunctionError()
 
             except ValueError:
                 yield StatusMessage("ATD analysis probably failed, please check ATD system.")
@@ -142,22 +144,23 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Analysis Completed")
 
             report_list = []
-            for task_id in task_id_list:
-                if atd_report_type == "pdf" or atd_report_type == "html":
-                    yield StatusMessage("Obtaining {} report".format(atd_report_type))
-                    report_file = create_report_file(file_name, atd_report_type)
+#            for task_id in task_id_list:
+            task_id = task_id_list[-1]
+            if atd_report_type == "pdf" or atd_report_type == "html":
+                yield StatusMessage("Obtaining {} report".format(atd_report_type))
+                report_file = create_report_file(file_name, atd_report_type)
 
-                report = get_atd_report(self, task_id, atd_report_type, report_file)
-                # If report does not exist continue to the next task
-                if not report:
-                    continue
+            report = get_atd_report(self, task_id, atd_report_type, report_file)
+            # If report does not exist continue to the next task
+#            if not report:
+#                continue
 
-                report_list.append(report)
+            report_list.append(report)
 
-                if report_file is not None:
-                    resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                                 report_file["report_file"], filename=report_file["report_file_name"])
-                    yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
+            if report_file is not None:
+                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+                                             report_file["report_file"], filename=report_file["report_file_name"])
+                yield StatusMessage("Report added to incident {} as Attachment".format(str(incident_id)))
 
             end_time = time.time()
 

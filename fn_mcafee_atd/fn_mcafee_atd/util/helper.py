@@ -137,7 +137,7 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
 
 def check_status_code(response):
-    log.info(response.json())
+    log.info(response.content)
     if response.status_code > 299 or response.status_code < 200:
         raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
 
@@ -216,6 +216,7 @@ def check_task_status(g, taskId):
     try:
         status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, taskId)
         submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
+        log.info(submission_status.content)
         check_status_code(submission_status)
         submit_json = submission_status.json()
         if submit_json['results']['istate'] == 4:
