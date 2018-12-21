@@ -1,4 +1,4 @@
-This function converts HTML data into a base64 encoded PDF documnent. 
+This function converts HTML data into a base64 encoded PDF document. 
 Alternatively, converts the contents of a website URL into a base64 encoded document.
 
 This function can be used in sequence with other functions, such as `fn_utilities:json2html` and `fn_utilities:base64 to attachment`. See Resilient workflows functions and the use of output workflow properties.
