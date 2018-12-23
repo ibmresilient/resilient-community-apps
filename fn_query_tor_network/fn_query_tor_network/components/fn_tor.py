@@ -36,30 +36,34 @@ class FunctionComponent(ResilientComponent):
 
             __params_data = {'flag': self.options.get('flag'), 'fields': self.options.get('data_fields'),
                              'search': tor_search_data}
-
+            __params_data = "&".join("%s=%s" % (k, v) for k, v in __params_data.items())
             __response_data = requests.get(self.options.get('base_url'), params=__params_data)
-
-            __response_data_json_obj = __response_data.json()
-            __relays_data_list = __response_data_json_obj.get('relays')
-            search_field_list = self.options.get('data_fields').split(',')
             __MATCH_FLAG = False
-            if not __relays_data_list:
-                log.info("Given Search Artifact is Not Matched...!")
-                __MATCH_FLAG = False
-            else:
-                for relay_data in __relays_data_list:
-                    for field in search_field_list:
-                        data = relay_data.get(field)
-                        if data is not None:
-                            if isinstance(data, list):
-                                for element in data:
-                                    if element.find(tor_search_data) != -1:
+            if __response_data.status_code == 200:
+                __response_data_json_obj = __response_data.json()
+                __relays_data_list = __response_data_json_obj.get('relays')
+                search_field_list = self.options.get('data_fields').split(',')
+                if not __relays_data_list:
+                    log.info("Given Search Artifact is Not Matched...!")
+                    __MATCH_FLAG = False
+                else:
+                    for relay_data in __relays_data_list:
+                        for field in search_field_list:
+                            data = relay_data.get(field)
+                            if data is not None:
+                                if isinstance(data, list):
+                                    for element in data:
+                                        if element.find(tor_search_data) != -1:
+                                            log.info('Given Search Artifact matched..!')
+                                            __MATCH_FLAG = True
+                                else:
+                                    if data.find(tor_search_data) != -1:
                                         log.info('Given Search Artifact matched..!')
                                         __MATCH_FLAG = True
-                            else:
-                                if data.find(tor_search_data) != -1:
-                                    log.info('Given Search Artifact matched..!')
-                                    __MATCH_FLAG = True
+            else:
+                __MATCH_FLAG = False
+                log.info(__response_data.text)
+
             if __MATCH_FLAG:
                 results = {'status': 'success', 'value': True, 'data': __response_data.text}
             else:
