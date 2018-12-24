@@ -27,7 +27,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnTorFunctionComponent = fn_query_tor_network.components.fn_tor:FunctionComponent"
+            "FnTorFunctionComponent = fn_query_tor_network.components.function_tor:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_query_tor_network.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_query_tor_network.util.customize:customization_data"],
