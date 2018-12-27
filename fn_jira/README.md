@@ -34,23 +34,29 @@ Follow the steps to add a jira section to your `app.config` file by running `res
 url=https://<jira url>
 user=<jira user>
 password=<jira user password>
-# use verifyFlag to disable untrusted certificate verification
-verifyFlag=True
+# use verify_cert to disable untrusted certificate verification
+verify_cert=True
 ```
 
 Sample workflows have been provided. They include: 
 * Name: Jira Create Issue
-  * Automatic
+  * Manual
   * Object type: Incident
-  * Conditions: When an Incident is created
+* Name: Jira Create Issue (Task)
+  * Manual
+  * Object type: Task
 * Name: Jira Close Issue
   * Automatic
   * Object type: Incident
   * Conditions: When an Incident Resolution Summary is changed
+* Name: Jira Close Issue (Task)
+  * Manual
+  * Object type: Task
 * Name: Jira Create Comment
   * Automatic
-  * Object type: Note
+  * Object type: Incident Note
   * Conditions: When a Note is created
+ 
   
 
 

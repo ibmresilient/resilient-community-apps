@@ -28,7 +28,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnMxtoolboxFunctionComponent = fn_mxtoolbox.components.fn_mxtoolbox:FunctionComponent"
+            "FnMxtoolboxFunctionComponent = fn_mxtoolbox.components.function_mxtoolbox:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mxtoolbox.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mxtoolbox.util.customize:customization_data"]
