@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the attachment data
             data = get_file_attachment(client, incident_id, artifact_id, task_id, attachment_id)
-            filename = get_filename_attachment(client, incident_id, task_id, attachment_id)
+            filename = get_filename_attachment(client, incident_id, artifact_id, task_id, attachment_id)
 
             # Base64 encode the document string and build payload.
             base64encoded_doc = base64.b64encode(data).decode("ascii")

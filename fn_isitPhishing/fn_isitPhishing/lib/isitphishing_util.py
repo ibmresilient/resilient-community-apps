@@ -15,14 +15,24 @@ def get_license_key(name, license):
  
     return auth_token
 
-def get_filename_attachment(client, incident_id, task_id, attachment_id):
+def get_filename_attachment(client, incident_id, artifact_id, task_id, attachment_id):
 
     # return the filename of an attachment.
-    if task_id:
-        metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+    if attachment_id:
+        if task_id:
+            metadata_uri = "/tasks/{0}/attachments/{1}".format(task_id, attachment_id)
+        else:
+            metadata_uri = "/incidents/{0}/attachments/{1}".format(incident_id, attachment_id)
+    elif artifact_id:
+        metadata_uri = "/incidents/{0}/artifacts/{1}".format(incident_id, artifact_id)
     else:
-        metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+        raise ValueError("Attachment or Artifact id must be specified")
+
 
     metadata = client.get(metadata_uri)
 
-    return metadata["name"]
+    # Return the filename
+    if attachment_id:
+        return metadata["name"]
+    elif artifact_id:
+        return metadata["attachment"]["name"]

@@ -1,5 +1,5 @@
 # Resilient Integration with IsItPhishing
-**This package contains two functions that calls the Vade Secure IsItPhishing Webservice API to analyze a URL or to analyze an HTML document.  Also included are an example workflow and rule for each function**
+**This package contains two functions that call the Vade Secure IsItPhishing Webservice API to analyze a URL or to analyze an HTML document.  Also included are 3 example workflows and rules to demonstrate how to invoke and use the functions.**
 
  ![screenshot](./screenshots/isitPhishing-url-function.png)
  ![screenshot](./screenshots/isitPhishing-url-preprocess.png)
@@ -53,11 +53,11 @@ inputs.isitphishing_url = artifact.value
 
 ```
 
-### Post-Process Script: Example: isitPhishing Analyze URL:
+### Post-Process Script: Example: IsItPhishing Analyze URL:
 
 ```python
 # Get the results and post to an incident note.
-content = u'isitPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['URL'], results['analysis']['status'])
+content = u'IsItPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['URL'], results['analysis']['status'])
 note = helper.createPlainText(content)
 incident.addNote(note)
 
@@ -66,10 +66,10 @@ incident.addNote(note)
 ### Rules: Example: isitPhishing Analyze URL:
 | Rule Name | Object Type | Workflow Triggered | Conditions |
 | --------- | :---------: | ------------------ | ---------- |
-| Example: isitPhishing Analyze URL | `Artifact` | `Example: isitPhishing Analyze URL` | Artifact type is URL |
+| Example: IsItPhishing Analyze URL | `Artifact` | `Example: IsItPhishing Analyze URL` | Artifact type is URL |
 
 
-##Function: isitPhishing_html_document
+##Function: isitPhishing__html__document
 
 ### Function Inputs:
 | Function Parameter | Type | Required |
@@ -96,28 +96,58 @@ results = {
 
 ```
 
-### Pre-Process Script:
+### Pre-Process Script for Attachment:
 
 ```python
-# Get the URL from the artifact value
-inputs.isitphishing_url = artifact.value
+# Required inputs are: incident id and attachment id
+inputs.incident_id = incident.id
+inputs.attachment_id = attachment.id
+
+if task is not None:
+  inputs.task_id = task.id
 
 ```
 
-### Post-Process Script:
+### Post-Process Script for Attachment:
 
 ```python
 # Get the results and post to an incident note.
-content = u'isitPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['URL'], results['analysis']['status'])
+content = u"IsItPhishing analysis of attachment document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
 note = helper.createPlainText(content)
 incident.addNote(note)
 
 ```
 
-### Rules:
+### Rule for Attachment:
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ | 
-| Example: isitPhishing Analyze HTML document | `Attachment` | `Example: isitPhishing Analyze HTML document` |
+| Example: IsItPhishing Analyze HTML Document: Attachment | `Attachment` | `Example: IsItPhishing Analyze HTML document: Attachment` |
+
+### Pre-Process Script for Artifact:
+
+```python
+# Required inputs are: incident id and attachment id
+inputs.incident_id = incident.id
+inputs.artifact_id = artifact.id
+
+```
+
+### Post-Process Script for Artifact:
+
+```python
+# Get the results and post to an incident note.
+content = u"IsItPhishing analysis of artifact document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
+
+note = helper.createPlainText(content)
+
+incident.addNote(note)
+
+```
+
+### Rule for Artifact:
+| Rule Name | Object Type | Workflow Triggered |
+| --------- | :---------: | ------------------ | 
+| Example: IsItPhishing Analyze HTML Document: Artifact | `Artifact` | `Example: IsItPhishing Analyze HTML document: Artifact` |
 
 ## Install and run
 To package for distribution,
