@@ -1,6 +1,6 @@
 # About TOR  
  
-The Query TOR Network API is a RESTful Web service allowing TOR Customers to query IP Addresses and Host names to search against TOR network Exit Nodes. This function utilitizes this API to determine if a Resilient artifact is part of the TOR network.
+The Query TOR Network API is a RESTful Web service allowing TOR Customers to query IP Addresses and Host names to search against TOR network Exit Nodes. This function utilizes this API to determine if a Resilient artifact is part of the TOR network.
 
 # Using TOR Function
 This package contains one rule and one workflow as an example.
