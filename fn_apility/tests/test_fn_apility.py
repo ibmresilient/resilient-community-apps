@@ -47,4 +47,10 @@ class TestFnApility:
             "apility_lookup_value": apility_lookup_value
         }
         results = call_fn_apility_function(circuits_app, function_params)
-        assert(expected_results == results)
+        selector = {
+            "Domain": "results['value']['response']['score']",
+            "Email Sender": "results['value']['response']['score']",
+            "IP Address": "results['value']['fullip']['score']",
+        }
+        score = eval(selector.get(apility_lookup_type, None))
+        assert(score is not None)
