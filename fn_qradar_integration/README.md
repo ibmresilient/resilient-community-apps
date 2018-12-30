@@ -30,7 +30,7 @@ The app.config needs the following configuration values, in addition to the appr
 [fn_qradar_integration]  
 host = qradar-server-hostname-or-ip-address    
 username = qradar-login-user-name 
-splunkpassword = qradar-password-keyring-recommended
+qradarpassword = qradar-password-keyring-recommended
 verify_cert = False-to-skip-qradar-cert-validation
 ```
 ## Customize
