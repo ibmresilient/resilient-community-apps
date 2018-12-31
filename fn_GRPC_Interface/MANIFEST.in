@@ -1,0 +1,4 @@
+include README.md
+include fn_GRPC_Interface/util/*
+include fn_GRPC_Interface/LICENSE
+include fn_GRPC_Interface/doc/*
