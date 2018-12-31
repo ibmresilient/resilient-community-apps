@@ -23,7 +23,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "GrpcFunctionComponent = fn_GRPC_Interface.components.grpc:FunctionComponent"
+            "GrpcFunctionComponent = fn_GRPC_Interface.components.function_grpc:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_GRPC_Interface.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_GRPC_Interface.util.customize:customization_data"],

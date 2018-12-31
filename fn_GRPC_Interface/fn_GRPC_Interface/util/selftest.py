@@ -9,7 +9,8 @@ import logging
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
+import grpc
+import grpc_tools
 
 def selftest_function(opts):
     """
@@ -17,4 +18,5 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get("fn_GRPC_Interface", {})
+
     return {"state": "unimplemented"}
