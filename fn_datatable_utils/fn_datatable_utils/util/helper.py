@@ -42,7 +42,7 @@ class RESDatatable:
 
         # Generate uri to POST datatable row
         uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
-        cells = []
+        current_cells = []
         formatted_cells = {}
 
         # Get the row we want to update
@@ -53,10 +53,10 @@ class RESDatatable:
 
         for entry in row["cells"]:
             cell_name = entry
-            cells.append((cell_name, get_cell_value(cell_name, cells_to_update)))
+            current_cells.append((cell_name, get_cell_value(cell_name, cells_to_update)))
 
         # Format the cells
-        for cell in cells:
+        for cell in current_cells:
             formatted_cells[cell[0]] = {"value": cell[1]}
 
         formatted_cells = {
