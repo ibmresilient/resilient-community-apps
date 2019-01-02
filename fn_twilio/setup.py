@@ -6,12 +6,12 @@ from setuptools import setup, find_packages
 setup(
     name='fn_twilio',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_twilio'",
-    long_description="Resilient Circuits Components for 'fn_twilio'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='http://ibm.biz/resilientcommunity',
+    description="This package contains a function to send an SMS via the Twilio platform",
+    long_description="The function uses the Twilio REST API to send an SMS message to a destination number(s)",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'twilio>=6.21.0'
