@@ -1,15 +1,21 @@
 # Resilient Function - Twilio Send SMS
 
-This Resilient Function package can be used to send an SMS via Twilio from a workflow using the Functions feature of the Resilient Circuits integration framework.
+## Table of Contents
+  - [Prerequisites](#prerequisites)
+  - [app.config settings](#appconfig-settings)
 
-Prerequisites:
+**This Resilient Function package can be used to send an SMS via Twilio from a workflow using the Functions feature of the Resilient Circuits integration framework.**
+
+ ![screenshot](./screenshots/1.png)
+
+## Prerequisites:
 ```
 resilient version 30 or later
 resilient_circuits version 30 or later
 twilio version 6.21.0 or later
 ```
 
-## Environment
+## app.config settings
 This package requires that it is installed on a RHEL platform and that the resilient-circuits application is running.
 Install this package with 'pip', or `python setup.py install`.
 To set the config values in the app.config file with a new resilient instance run `resilient-circuits config -c`.
@@ -22,33 +28,32 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 [fn_twilio_send_sms]
 twilio_account_sid=
 twilio_auth_token=
+
 twilio_src_address=
 ```
 
 Run with: `resilient-circuits run`.
 
-## Supported Resilient Functions for Twilio Send SMS
-```
-fn_twilio_send_sms
-```
-## Sample workflows have been provided:
-```
-Example: Send Twilio SMS
-```
-## fn_twilio_send_sms Example
+## Function Inputs
+| Function Name | Type | Required | Example | Info |
+| ------------- | :--: | :-------:| ------- | ---- |
+| `twilio_sms_destination` | `String` | Yes | `"+353861234567,+1234567"` | A comma delimited (CSV) list of destination numbers in international format. |
+| `twilio_sms_message` | `String` | Yes | `"An incident has been created!"` | The message you wish to send |
 
-The fn_twilio_send_sms Function takes 2 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
-- twilio_sms_destnation - a comma delimited (CSV) list of destination numbers
-- twilio_sms_message - the message you wish to send
+## Function Outputs
 
-The following are examples of setup of each parameter using a simple workflow pre-processing script.
+
+## Pre-Process Script
+The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.
 ```
 inputs.twilio_sms_destination = rule.properties.twilio_sms_destination
 inputs.twilio_sms_message = 'An incident ' + incident.name + ' (' + `incident.id` + ') with ' + incident.severity_code + ' priority may require your attention'
 ```
+
+## Post-Process Script
 The results returned to Resilient can be used to determine the status for each destination.
-Below is a post process script which adds a note for each destination.
+Below is an example post process script which adds a note for each destination.
 ```
 for entry in results["twilio_status"]:
   if(entry.success == True):
@@ -64,3 +69,8 @@ for entry in results["twilio_status"]:
                                           
     incident.addNote(helper.createRichText(note_text))
 ```
+## Rules
+
+| Rule Name | Object Type | Workflow Triggered |
+| --------- | :---------: | ------------------ |
+| Example: Send Twilio SMS | `Incident` | `Example: Twilio Send SMS` |
