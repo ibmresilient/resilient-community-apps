@@ -1,6 +1,12 @@
 ## About Apility.IO
 
-Get reputation score for your **Emails, Domain Names and IP Addresses**, in addition you will also receive other necessary information regarding your assets such as **_geoip, as-network, freemail score, disposable score_** and many other useful information. 
+This integration package allows the Resilient user to get the reputation score for your **Emails, Domain Names and IP Addresses**. In addition, receive additional information regarding your assets such as **_geoip, as-network, freemail score, disposable score_**. 
+
+One function is included in support of three capabilities:
+
+* Check an IP addresses reputation
+* Check a domain name's reputation
+* Check an email sender's reputation
 
 ## Using the Ability.IO Function
 
