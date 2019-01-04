@@ -33,6 +33,9 @@ class RESDatatable:
 
     def update_row(self, row_id, cells_to_update):
 
+        err_msg = None
+        return_value = None
+
         def get_cell_value(cell_name, cells_to_update):
             """Function to get the new/old cell value"""
             if cell_name in cells_to_update:
@@ -63,9 +66,40 @@ class RESDatatable:
             "cells": formatted_cells
         }
 
-        res = self.res_client.put(uri, formatted_cells)
+        try:
+            return_value = self.res_client.put(uri, formatted_cells)
 
-        return res
+        except Exception as e:
+            if e.message:
+                err_msg = e.message
+
+                if u"not found" in err_msg.lower():
+                    err_msg = "Data Table {0} could not be found".format(self.api_name)
+
+                return_value = {"error": err_msg}
+
+            else:
+                raise ValueError("Could not update row in {0}. Unknown Error".format(self.api_name))
+
+        return return_value
+
+    def delete_row(self, row_id):
+
+        return_value = None
+
+        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
+
+        try:
+            return_value = self.res_client.delete(uri)
+
+        except Exception as e:
+            if e.message:
+                return_value = {"error": e.message}
+
+            else:
+                raise ValueError("Could not delete row in {0}. Unknown Error".format(self.api_name))
+
+        return return_value
 
 
 def get_function_input(inputs, input_name, optional=False):

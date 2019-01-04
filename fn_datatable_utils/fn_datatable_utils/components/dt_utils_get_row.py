@@ -72,12 +72,14 @@ class FunctionComponent(ResilientComponent):
 
             # If no row found, create a log and set success to False
             if not row:
-                log.info("No row found. row_id: '{0}', search_column: '{1}', search_value: '{2}'".format(
-                    payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
+                yield StatusMessage("No row found in {0} for: search_column: {1}, search_value: {2}".format(
+                    datatable.api_name, payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = False
 
             # Else, set the row in the payload
             else:
+                yield StatusMessage("Row found in {0}. row_id: {1}, search_column: {2}, search_value: {3}".format(
+                    datatable.api_name, row["id"], payload.inputs["dt_utils_search_column"], payload.inputs["dt_utils_search_value"]))
                 payload.success = True
                 payload.row = row
 

@@ -3,10 +3,9 @@
 """Function implementation"""
 
 import logging
-import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import fn_datatable_utils.util.selftest as selftest
 from fn_datatable_utils.util.helper import *
-
 
 class FunctionPayload():
     """Class that contains the payload sent back to UI and available in the post-processing script"""
@@ -21,21 +20,22 @@ class FunctionPayload():
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'dt_utils_update_row"""
+    """Component that implements Resilient function 'dt_utils_delete_row"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
+        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_datatable_utils", {})
 
-    @function("dt_utils_update_row")
-    def _dt_utils_update_row_function(self, event, *args, **kwargs):
-        """Function: Function that takes a JSON String of 'column name/cell value' pairs to update a Data Table row"""
+    @function("dt_utils_delete_row")
+    def _dt_utils_delete_row_function(self, event, *args, **kwargs):
+        """Function: Function that deletes a row from a Data Table given the row's ID"""
 
         log = logging.getLogger(__name__)
 
@@ -46,14 +46,8 @@ class FunctionComponent(ResilientComponent):
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
                 "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id", optional=True),  # number (optional)
-                "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update", optional=True)  # text (optional)
+                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id", optional=True)  # number (optional)
             }
-
-            try:
-                inputs["dt_utils_cells_to_update"] = json.loads(inputs["dt_utils_cells_to_update"])
-            except Exception:
-                raise ValueError("Failed to parse JSON string: {0}".format(inputs["dt_utils_cells_to_update"]))
 
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
@@ -63,20 +57,16 @@ class FunctionComponent(ResilientComponent):
             # Instantiate a new RESDatatable
             datatable = RESDatatable(res_client, payload.inputs["incident_id"], payload.inputs["dt_utils_datatable_api_name"])
 
-            # Get the data table data
-            datatable.get_data()
+            deleted_row = datatable.delete_row(payload.inputs["dt_utils_row_id"])
 
-            # Update the row
-            updated_row = datatable.update_row(payload.inputs["dt_utils_row_id"], payload.inputs["dt_utils_cells_to_update"])
-
-            if "error" in updated_row:
-                yield StatusMessage("Row in {1} NOT updated.".format(datatable.api_name))
+            if "error" in deleted_row:
+                yield StatusMessage("Row {0} in {1} NOT deleted.".format(payload.inputs["dt_utils_row_id"], datatable.api_name))
                 payload.success = False
-                raise ValueError(updated_row["error"])
+                raise ValueError(deleted_row["error"])
 
             else:
-                yield StatusMessage("Row {0} in {1} updated.".format(updated_row["id"], datatable.api_name))
-                payload.row = updated_row
+                yield StatusMessage("Row {0} in {1} deleted.".format(payload.inputs["dt_utils_row_id"], datatable.api_name))
+                payload.row = deleted_row
                 payload.success = True
 
             results = payload.as_dict()
