@@ -20,7 +20,7 @@ function getMidServer(){
 		gr.query();
 
 		while(gr.next()) {
-			if(gr.agent.status == "Up") {
+			if(gr.agent.status.toLowerCase() == "up" && gr.agent.validated == "true") {
 				return gr.agent.name;
 			 }
 		}
@@ -31,7 +31,7 @@ function getMidServer(){
 	}
 
 	errMsg = "No Active Mid-Server with " + MID_SERVER_CAPABILITY + " Capabilities found.";
-	errMsg += "\nEnsure your Mid-Server is 'Up' and has " + MID_SERVER_CAPABILITY + "Capabilities";
+	errMsg += "\nEnsure your Mid-Server is 'Up', has " + MID_SERVER_CAPABILITY + "Capabilities and Validated is 'Yes'";
 	throw errMsg;
 }
 
@@ -87,13 +87,13 @@ function parseJSESSIONID(cookie){
 		else{
 			errMsg = "No JSESSIONID found in the cookie: " + cookie;
 			throw errMsg;
-		}		
+		}
 	}
 	//Throw a custom error if anything fails
 	catch (e){
 		errMsg = "JSESSIONID could not be parsed from the Cookie received from ResilientAPI\n" + e;
 		throw errMsg;
-	}	
+	}
 }
 
 //Function to get the id of an org, handles errors
@@ -130,7 +130,7 @@ function getOrgId(orgs, orgName){
 	catch (e){
 		errMsg = "OrgId could not be found for: " + orgName + "\nReason: " + e;
 		throw errMsg;
-	}	
+	}
 }
 
 //Function to set the Headers of a RESTMessage
