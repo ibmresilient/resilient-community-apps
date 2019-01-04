@@ -26,7 +26,7 @@ features=list_of_fields_for_features_separated_by_comma
 #
 #   Algorithms supported:
 #       Logistic Regression, Decision Tree, Random Forest, Dummy Classifier
-#       SVM, SVM with Gaussian kernel, GaussianNB, BernoulliNB, K-Nearest Neighbors
+#       SVM, SVM with Gaussian kernel, GaussianNB, BernoulliNB, K-Nearest Neighbor
 algorithm=Logistic Regression
 #
 #   Ensemble method is optional, it can be Bagging or Adaptive Boosting (Optional)
