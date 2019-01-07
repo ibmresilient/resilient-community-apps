@@ -55,6 +55,9 @@ class RESDatatable(object):
             if cell_name in cells_to_update:
                 return cells_to_update[cell_name]
 
+            if "value" not in row["cells"][cell_name]:
+                return None
+
             return row["cells"][cell_name]["value"]
 
         # Get the row we want to update
