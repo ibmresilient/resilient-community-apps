@@ -19,7 +19,10 @@ def get_risk_info(config, entityType, queryvalue):
     total = response['Paging']['TotalRecords']
     msg = 'No Records Found'
     if total == 1:
-        return response['Data'][0]['RiskInfo']['Overview']['RiskScore']
+        try:
+            msg = response['Data'][0]['RiskInfo']['Overview']['RiskScore']
+        except:
+            msg = 'No Risk Score'
     elif total > 1:
         msg = 'Multiple Records Found'
     return msg  # { "RiskRating": msg, "RiskScore": msg }
