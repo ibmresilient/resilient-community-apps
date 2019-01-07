@@ -1,19 +1,28 @@
-#!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+#!/usr/bin/env python
 
 from setuptools import setup, find_packages
 
 setup(
     name='fn_grpc_interface',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_grpc_interface'",
-    long_description="Resilient Circuits Components for 'fn_grpc_interface'",
+    long_description="""The gRPC interface provides a general wrapper for the client application and can call methods on
+                     a server application on a different machine as if it was a local object,making it easier for you 
+                     create distributed application and services with IBM resilient.
+                     In this edition we have implemented only simple RPC gRPC Service method.
+                     for more details - https://grpc.io/docs/.
+                     """,
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'grpcio',
+        'grpcio-tools'
     ],
     packages=find_packages(),
     include_package_data=True,

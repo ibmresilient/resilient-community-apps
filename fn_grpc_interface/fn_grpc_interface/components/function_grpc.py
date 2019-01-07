@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -12,7 +13,7 @@ import grpc_tools
 import re
 import inspect
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'function_grpc"""
+    """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -27,11 +28,24 @@ class FunctionComponent(ResilientComponent):
 
 
     def _get_interface_file_names(self, base_dir=None, files_dir=None):
+        """
+        component that return the absolute path of all files in the given directory
+        :param base_dir:  interface pb2 files parent directory
+        :param files_dir:  interface pb2 files directory i.e same as package name
+        :return: lists of all pb2 files absolute path inside the given directory path
+        """
         __dir_path = os.path.join(base_dir, files_dir)
         return os.listdir(__dir_path)
 
 
     def _get_grpc_interface_module(self, interface_files=[], base_dir=None, files_dir=None):
+        """
+        component that imports all the modules in the current workspace and returns the given imported modules objects.
+        :param interface_files: List of all buffer pb2 files absolute path to import in the current work space
+        :param base_dir:  interface pb2 files parent directory.
+        :param files_dir: interface pb2 files directory i.e same as package name.
+        :return: returns imported interface pb2 files module objects on the successful execution, else returns None object.
+        """
         assert isinstance(interface_files, list), "This Parameter "'"interface_files"'" should be list data type"
         assert base_dir is not None, "The param base_dir should contain parents parent directory of gRPC interface \
         files"
@@ -83,6 +97,14 @@ class FunctionComponent(ResilientComponent):
 
 
     def _get_grpc_class(self, grpc_module_list, class_name):
+        """
+        component that return the given class object from the list of given module objects,
+        evaluates based on the given class names.
+        :param grpc_module_list: imported interface pb2 files module objects list
+        :param class_name:  interested class name in the given module objects list
+        :return:  tuple of name and class object of the given class name if class name found in the given module
+        objects, else returns an empty tuple.
+        """
         for grpc_module in grpc_module_list:
             for name, obj in inspect.getmembers(grpc_module, inspect.isclass):
                 logging.info("NAME : {} OBJECT : {}".format(name, obj))
@@ -93,7 +115,14 @@ class FunctionComponent(ResilientComponent):
 
 
     def _get_method_from_stub_object(self, stub_object, comm_type, stub_name =''):
-
+        """
+        component that returns stub method from the given stub class objects, evaluates based on the given stub name and
+        communication type param.
+        :param stub_object:  stub Class object
+        :param comm_type:   communication type (i.e unary, server_stream,client_stream,bidirectional_stream)
+        :param stub_name:   name of the stub method in the stub class
+        :return: returns tuple of name and object of the stub method on success else returns None object
+        """
         stub_elements = inspect.getmembers(stub_object)
         logging.debug("Stub Object Elements : {}".format(stub_elements))
         for name, obj in stub_elements:
@@ -105,7 +134,10 @@ class FunctionComponent(ResilientComponent):
                 if str(obj).lower().find(comm_type) != -1 and name.find(stub_name) != -1:
                     logging.info("found Stub name : {} and object : {}".format(name,obj))
                     return name, obj
-
+                else:
+                    return None
+            else:
+                return None
 
     @function("function_grpc")
     def _function_grpc_function(self, event, *args, **kwargs):
@@ -144,7 +176,8 @@ class FunctionComponent(ResilientComponent):
             # importing grpc protobuf files from the given interface directory
             try:
                 module_files = self._get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
-                grpc_interface_module_list = self._get_grpc_interface_module(module_files, _grpc_interface_file_dir, _grpc_package_name)
+                grpc_interface_module_list = self._get_grpc_interface_module(module_files, _grpc_interface_file_dir,
+                                                                             _grpc_package_name)
                 logging.debug(grpc_interface_module_list)
 
                 grpc_stub_tuple = self._get_grpc_class(grpc_interface_module_list, 'stub')
@@ -169,9 +202,15 @@ class FunctionComponent(ResilientComponent):
                     try:
                         with grpc.insecure_channel(grpc_channel) as channel:
                             stub = grpc_stub_tuple[1](channel)
-                            stub_method = self._get_method_from_stub_object(stub, _grpc_communication_type, stub_name=_grpc_rpc_stub_method_name)
+                            stub_method = self._get_method_from_stub_object(stub, _grpc_communication_type,
+                                                                            stub_name=_grpc_rpc_stub_method_name)
                             if grpc_function_json_data:
-                                response_received = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data))
+                                if stub_method[1] is not None:
+                                    response_received = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data))
+                                else:
+                                    raise FunctionError("Stub method not found, please specify the valid stub method.")
+                            else:
+                                raise FunctionError("Please Specify the valid data input form the Resilient.")
                     except grpc.RpcError as rpc_err:
                         status_code = rpc_err.code()
                         log.info("{}\n connection status :{} \n name : {}\n value : {}".format(rpc_err,rpc_err.details(),status_code.name,status_code.value))
