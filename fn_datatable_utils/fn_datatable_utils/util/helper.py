@@ -1,4 +1,8 @@
-class RESDatatable:
+""" This is a helper module for GET, UPDATE and DELETE
+    Functions for a Resilient Data Table """
+
+class RESDatatable(object):
+    """ A helper class for manipulate a Resilient Data Table"""
     def __init__(self, res_client, incident_id, dt_api_name):
         self.res_client = res_client
         self.incident_id = incident_id
@@ -7,7 +11,11 @@ class RESDatatable:
         self.rows = None
 
     def get_data(self):
+        """ Function that gets all the data and rows of a Data Table
+            using the Resilient API """
+
         uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
+
         try:
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
@@ -15,13 +23,15 @@ class RESDatatable:
             raise ValueError("Failed to get {0} Datatable".format(self.api_name))
 
     def get_row(self, row_id=None, search_column=None, search_value=None):
-        """Returns row if row found, else None"""
+        """ Searches and returns row if row found, else None """
 
+        # Search by row_id if defined
         if row_id:
             for row in self.rows:
                 if row["id"] == row_id:
                     return row
 
+        # Else search by column name and cell value
         else:
             for row in self.rows:
                 cells = row["cells"]
@@ -32,21 +42,20 @@ class RESDatatable:
         return None
 
     def update_row(self, row_id, cells_to_update):
+        """ Updates the row with given updates in cells_to_update.
+            Returns the updated row or dict with the entry 'error'. """
 
-        err_msg = None
-        return_value = None
+        err_msg, return_value = None, None
+        current_cells, formatted_cells = [], {}
+
+        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
 
         def get_cell_value(cell_name, cells_to_update):
             """Function to get the new/old cell value"""
             if cell_name in cells_to_update:
                 return cells_to_update[cell_name]
-            else:
-                return row["cells"][cell_name]["value"]
 
-        # Generate uri to POST datatable row
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row_id)
-        current_cells = []
-        formatted_cells = {}
+            return row["cells"][cell_name]["value"]
 
         # Get the row we want to update
         row = self.get_row(row_id)
@@ -69,9 +78,9 @@ class RESDatatable:
         try:
             return_value = self.res_client.put(uri, formatted_cells)
 
-        except Exception as e:
-            if e.message:
-                err_msg = e.message
+        except Exception as err:
+            if err.message:
+                err_msg = err.message
 
                 if u"not found" in err_msg.lower():
                     err_msg = "Data Table {0} could not be found".format(self.api_name)
@@ -84,6 +93,9 @@ class RESDatatable:
         return return_value
 
     def delete_row(self, row_id):
+        """ Deletes the row.
+            Returns the response from Resilient API
+            or dict with the entry 'error'. """
 
         return_value = None
 
@@ -92,9 +104,9 @@ class RESDatatable:
         try:
             return_value = self.res_client.delete(uri)
 
-        except Exception as e:
-            if e.message:
-                return_value = {"error": e.message}
+        except Exception as err:
+            if err.message:
+                return_value = {"error": err.message}
 
             else:
                 raise ValueError("Could not delete row in {0}. Unknown Error".format(self.api_name))
@@ -104,13 +116,13 @@ class RESDatatable:
 
 def get_function_input(inputs, input_name, optional=False):
     """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
-    input = inputs.get(input_name)
+    the_input = inputs.get(input_name)
 
-    if input is None and optional is False:
+    if the_input is None and optional is False:
         err = "'{0}' is a mandatory function input".format(input_name)
         raise ValueError(err)
     else:
-        return input
+        return the_input
 
 
 def validate_search_inputs(row_id, search_column, search_value):

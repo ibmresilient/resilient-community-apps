@@ -7,7 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_datatable_utils.util.helper import *
 
 
-class FunctionPayload():
+class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True

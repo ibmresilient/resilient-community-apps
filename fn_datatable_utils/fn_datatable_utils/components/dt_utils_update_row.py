@@ -5,10 +5,10 @@
 import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_datatable_utils.util.helper import *
+from fn_datatable_utils.util.helper import RESDatatable, get_function_input
 
 
-class FunctionPayload():
+class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True
