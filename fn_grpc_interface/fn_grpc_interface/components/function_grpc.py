@@ -214,10 +214,11 @@ class FunctionComponent(ResilientComponent):
                     except grpc.RpcError as rpc_err:
                         status_code = rpc_err.code()
                         log.info("{}\n connection status :{} \n name : {}\n value : {}".format(rpc_err,rpc_err.details(),status_code.name,status_code.value))
+                        raise FunctionError("Server Connection status : {}".format(rpc_err.details()))
                     else:
                         log.info("Response received from the server : {}".format(str(response_received)))
                 else:
-                    logging.info("Connection type is Server_Stream or client_stream,Bidirectional or other\n \
+                    raise NotImplementedError("Connection type is Server_Stream or client_stream,Bidirectional or other\n \
                     Not Implemented these {} communication types ".format(_grpc_communication_type))
             else:
                 logging.info("gRPC Channel Connection is Secure..")
