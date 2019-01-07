@@ -15,9 +15,7 @@ def config_section_data():
     config_data = u"""[fn_grpc]
 #interface_dir = <<path to interface buffer pb2 files parent directory>>
 #<<package_name=communication_type,secure connection type,certificate_path or google API token>>
-interface_dir = /home/neetin/gRPC_Project/
-helloword=unary,None,None
-calculator=unary,None,None
+#helloword=unary,None,None
 
 #Note : create a folder same as package name, and copy the interface buffer pb2 files inside the directory.
 #config data settings details as follows :
