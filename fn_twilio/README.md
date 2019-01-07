@@ -3,6 +3,11 @@
 ## Table of Contents
   - [Prerequisites](#prerequisites)
   - [app.config settings](#appconfig-settings)
+  - [Function Inputs](#function-inputs)
+  - [Function Output](#function-output)
+  - [Pre-Process Script](#pre-process-script)
+  - [Post-Process Script](#post-process-script)
+  - [Rules](#rules)
 
 **This Resilient Function package can be used to send an SMS via Twilio from a workflow using the Functions feature of the Resilient Circuits integration framework.**
 
@@ -28,7 +33,8 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 [fn_twilio_send_sms]
 twilio_account_sid=
 twilio_auth_token=
-
+# This is the number that will originate the SMS and must be an active SMS phone number on your Twilio Account 
+# The format should be as per the Twilio console properties for your number, e.g. +1234567890
 twilio_src_address=
 ```
 
@@ -40,8 +46,26 @@ Run with: `resilient-circuits run`.
 | `twilio_sms_destination` | `String` | Yes | `"+353861234567,+1234567"` | A comma delimited (CSV) list of destination numbers in international format. |
 | `twilio_sms_message` | `String` | Yes | `"An incident has been created!"` | The message you wish to send |
 
-## Function Outputs
-
+## Function Output
+```
+{
+  'twilio_status': [
+  {
+    'phone_number': u'+1234', 
+    'error_message': "Unable to create record: The 'To' number  is not a valid phone number.", 
+    'success': False 
+    },{
+    'phone_number': u'+353834463164', 
+    'success': True
+    }
+  ], 
+  'inputs': {
+    'twilio_sms_message': u'An incident test (2096) with Low priority may require your attention', 
+    'twilio_sms_destination': u'1234,353834463164'
+    }
+  , 'success': True
+}
+```
 
 ## Pre-Process Script
 The following is an example of setup of each parameter using a simple workflow pre-processing script.
