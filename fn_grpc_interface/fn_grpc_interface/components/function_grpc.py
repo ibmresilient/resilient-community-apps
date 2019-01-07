@@ -183,7 +183,7 @@ class FunctionComponent(ResilientComponent):
                 grpc_stub_tuple = self._get_grpc_class(grpc_interface_module_list, 'stub')
                 grpc_request_tuple = self._get_grpc_class(grpc_interface_module_list, _grpc_request_method_name.lower())
             except Exception as e:
-                yield StatusMessage("failed to load the grpc protobuf files : {}".format(e))
+                yield StatusMessage("failed to load the grpc proto buff files : {}".format(e))
                 raise FunctionError(e)
 
             # converting resilient input data into json object
@@ -218,11 +218,11 @@ class FunctionComponent(ResilientComponent):
                     else:
                         log.info("Response received from the server : {}".format(str(response_received)))
                 else:
-                    raise NotImplementedError("Connection type is Server_Stream or client_stream,Bidirectional or other\n \
-                    Not Implemented these {} communication types ".format(_grpc_communication_type))
+                    raise NotImplementedError("Not Implemented these {} communication types ".format(_grpc_communication_type))
             else:
                 logging.info("gRPC Channel Connection is Secure..")
-
+                raise NotImplementedError("Not implemented gRPC Secure Channel Connection services")
+            
             yield StatusMessage("done...")
             results = {
                 "server_response": str(response_received),
