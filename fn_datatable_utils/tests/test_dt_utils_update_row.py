@@ -5,6 +5,9 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from test_helper import *
+import json 
+from copy import deepcopy
 
 PACKAGE_NAME = "fn_datatable_utils"
 FUNCTION_NAME = "dt_utils_update_row"
@@ -13,7 +16,7 @@ FUNCTION_NAME = "dt_utils_update_row"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = DTResilientMock
 
 
 def call_dt_utils_update_row_function(circuits, function_params, timeout=10):
@@ -35,17 +38,34 @@ class TestDtUtilsUpdateRow:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, dt_utils_datatable_api_name, dt_utils_row_id, dt_utils_cells_to_update, expected_results", [
-        (123, "text", 123, "text", {"value": "xyz"}),
-        (123, "text", 123, "text", {"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, incident_id, dt_utils_datatable_api_name, dt_utils_row_id, dt_utils_cells_to_update, expected_results):
-        """ Test calling with sample values for the parameters """
-        function_params = { 
-            "incident_id": incident_id,
-            "dt_utils_datatable_api_name": dt_utils_datatable_api_name,
-            "dt_utils_row_id": dt_utils_row_id,
-            "dt_utils_cells_to_update": dt_utils_cells_to_update
+    inputs = {
+        "incident_id": 1001,
+        "dt_utils_datatable_api_name": "mock_data_table",
+        "dt_utils_row_id": 2,
+        "dt_utils_cells_to_update": dict_to_json_str({
+            "dt_col_status": "Complete"
+        })
+    }
+
+    output = {
+        "success": True,
+        "inputs": deepcopy(inputs),
+        "row": {
+            u'id': 1,
+            u'cells': { 
+                u'dt_col_email': {u'id': u'dt_col_email', u'row_id': 1, u'value': u'mary@example.com'},
+                u'dt_col_id': {u'id': u'dt_col_id', u'row_id': 1, u'value': 3002},
+                u'dt_col_name': {u'id': u'dt_col_name', u'row_id': 1, u'value': u'Mary Blogs'},
+                u'dt_col_status': {u'id': u'dt_col_status', u'row_id': 1, u'value': u'Complete'}
+            }
         }
-        results = call_dt_utils_update_row_function(circuits_app, function_params)
+    }
+    output["inputs"]["dt_utils_cells_to_update"] = json.loads(output["inputs"]["dt_utils_cells_to_update"])
+
+
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
+    def test_success(self, circuits_app, inputs, expected_results):
+        """ Test calling with sample values for the parameters """
+
+        results = call_dt_utils_update_row_function(circuits_app, inputs)
         assert(expected_results == results)

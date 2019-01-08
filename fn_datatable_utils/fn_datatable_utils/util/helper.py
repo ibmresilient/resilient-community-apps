@@ -36,6 +36,8 @@ class RESDatatable(object):
             for row in self.rows:
                 cells = row["cells"]
 
+                if search_column not in cells:
+                    raise ValueError("{0} is not a valid column api name in for the data table {1}".format(search_column, self.api_name))
                 if cells[search_column]["value"] == search_value:
                     return row
 
@@ -112,7 +114,7 @@ class RESDatatable(object):
                 return_value = {"error": err.message}
 
             else:
-                raise ValueError("Could not delete row in {0}. Unknown Error".format(self.api_name))
+                raise ValueError("Could not delete row in {0}. Unknown Error: {1}".format(self.api_name, err))
 
         return return_value
 
