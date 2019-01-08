@@ -108,7 +108,7 @@ Uses a JSON String of 'column name/cell value' pairs to update a Data Table row
 | `incident_id` | `Number` | Yes | `2095` | ID of the current Incident |
 | `dt_utils_datatable_api_name` | `String` | Yes | `"dt_utils_test_data_table"` | API name of the Data Table to search |
 | `dt_utils_row_id` | `Number` | Yes | `5` | ID of the Row to update |
-| `dt_utils_cells_to_update` | `JSON String` | Yes | `'{"dt_col_status":"Done","dt_col_time":"Just Now"}'` | A JSON String of column name and cell value pairs to update |
+| `dt_utils_cells_to_update` | `JSON String` | Yes | `'{"dt_col_status":"Done", "dt_col_time":"Just Now"}'` | A JSON String of column name and cell value pairs to update |
 
 
 ### Output:
