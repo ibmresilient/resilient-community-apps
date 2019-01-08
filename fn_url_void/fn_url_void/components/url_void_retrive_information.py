@@ -5,11 +5,10 @@
 
 import logging
 import time
-import requests
 import xmltodict
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib.components.resilient_common import validate_fields
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, ResultPayload
 import fn_url_void.util.selftest as selftest
 try:
     from urlparse import urlparse  # Python 2 import
@@ -41,10 +40,10 @@ class FunctionComponent(ResilientComponent):
         """Function: Retrieves information of a URL from the  URL Void database."""
         try:
             yield StatusMessage("starting...")
-            start_time = time.time()
+            rp = ResultPayload("fn_url_void", **kwargs)
 
-            ## Add support for Requests Common
-            ## req_common = RequestsCommon(self.opts)
+            # Add support for Requests Common
+            req_common = RequestsCommon(self.opts, self.options)
 
             api_key = self.options.get("api_key")
             identifier = self.options.get("identifier", "api1000")
@@ -52,23 +51,20 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             artifact_value = kwargs.get("artifact_value")  # text
             url_void_api = self.get_select_param(kwargs.get("url_void_api", "Retrieve"))  # select
-            validate_fields([artifact_value, url_void_api], kwargs)
+            validate_fields(["artifact_value", "url_void_api"], kwargs)
 
             log.info("artifact_value: %s", artifact_value)
             log.info("url_void_api: %s", url_void_api)
 
-            response = call_url_void_api(artifact_value, identifier, api_key, url_void_api)
+            response = call_url_void_api(req_common, artifact_value, identifier, api_key, url_void_api)
 
             yield StatusMessage("done...")
-            end_time = time.time()
-            results = {
-                "value": "xyz"
-            }
+            results = rp.done(True, None, response)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as e:
+            yield FunctionError(e)
 
 
 def get_netloc(url):
@@ -88,14 +84,12 @@ def get_endpoint(url_api):
         raise ValueError("Update method, unexpected url_api value")
 
 
-def call_url_void_api(artifact_value, identifier, api_key, url_void_api):
+def call_url_void_api(requests_common, artifact_value, identifier, api_key, url_void_api):
     netloc = get_netloc(artifact_value)
     endpoint = get_endpoint(url_void_api)
-    response = requests.get("https://api.urlvoid.com/{}/{}/host/{}/".format(identifier, api_key, netloc, endpoint))
+    url = "https://api.urlvoid.com/{}/{}/host/{}/".format(identifier, api_key, netloc, endpoint)
 
-    if response.status_code > 299 or response.status_code < 200:
-        log.debug(response.content)
-        raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
+    response = requests_common.execute_call("get", url, payload={}, log=log, resp_type="text")
 
     # Convert and return response to a dictionary
-    return xmltodict.parse(response.content)
+    return xmltodict.parse(response)
