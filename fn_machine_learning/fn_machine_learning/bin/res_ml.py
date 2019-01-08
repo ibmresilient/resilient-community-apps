@@ -396,7 +396,7 @@ def show_model_summary(model, model_file):
     :return:
     """
     try:
-        method_name = model.config.method_name
+        method_name = model.config.addition_method
     except Exception:
         method_name = "None"
 
