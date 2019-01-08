@@ -207,6 +207,16 @@ class FunctionComponent(ResilientComponent):
                             if grpc_function_json_data:
                                 if stub_method[1] is not None:
                                     response_received = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data))
+
+                                    #Attempting to convert received data into JSON obejct
+                                    try:
+                                        response_received = json.dumps(response_received)
+                                        response_received = json.loads(response_received)
+                                        log.info("The Received Data is Converted into JSON Object : {}".format(response_received))
+                                    except Exception as e:
+                                        log.info("The Received data is not converted into JSON Object {}".format(e))
+                                        response_received = str(response_received)
+
                                 else:
                                     raise FunctionError("Stub method not found, please specify the valid stub method.")
                             else:
@@ -216,19 +226,19 @@ class FunctionComponent(ResilientComponent):
                         log.info("{}\n connection status :{} \n name : {}\n value : {}".format(rpc_err,rpc_err.details(),status_code.name,status_code.value))
                         raise FunctionError("Server Connection status : {}".format(rpc_err.details()))
                     else:
-                        log.info("Response received from the server : {}".format(str(response_received)))
+                        log.info("Response received from the server : {}".format(response_received))
                 else:
                     raise NotImplementedError("Not Implemented these {} communication types ".format(_grpc_communication_type))
             else:
                 logging.info("gRPC Channel Connection is Secure..")
                 raise NotImplementedError("Not implemented gRPC Secure Channel Connection services")
-            
+
             yield StatusMessage("done...")
+
             results = {
-                "server_response": str(response_received),
+                "content": response_received,
                 "channel": grpc_channel
             }
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
