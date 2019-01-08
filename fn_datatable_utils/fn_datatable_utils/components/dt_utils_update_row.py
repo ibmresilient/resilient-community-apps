@@ -47,8 +47,8 @@ class FunctionComponent(ResilientComponent):
             inputs = {
                 "incident_id": get_function_input(kwargs, "incident_id"),  # number (required)
                 "dt_utils_datatable_api_name": get_function_input(kwargs, "dt_utils_datatable_api_name"),  # text (required)
-                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id", optional=True),  # number (optional)
-                "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update", optional=True)  # text (optional)
+                "dt_utils_row_id": get_function_input(kwargs, "dt_utils_row_id"),  # number (required)
+                "dt_utils_cells_to_update": get_function_input(kwargs, "dt_utils_cells_to_update")  # text (required)
             }
 
             try:
