@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate the Resilient customizations required for fn_datatable_utils"""

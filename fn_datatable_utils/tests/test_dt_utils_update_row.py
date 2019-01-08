@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 

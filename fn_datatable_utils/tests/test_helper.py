@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 import json
