@@ -13,7 +13,7 @@ from resilient_circuits import ResilientComponent, handler, ActionMessage
 
 import logging
 import sys
-import ast
+
 
 logger = logging.getLogger(__name__)
 
