@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_url_void", {})
 
     @function("url_void_function")
-    def _url_void_retrive_information_function(self, event, *args, **kwargs):
+    def _url_void_function(self, event, *args, **kwargs):
         """Function: Retrieves information of a URL from the  URL Void database."""
         try:
             yield StatusMessage("starting...")
@@ -87,7 +87,7 @@ def get_endpoint(url_api):
 def call_url_void_api(requests_common, artifact_value, identifier, api_key, url_void_api):
     netloc = get_netloc(artifact_value)
     endpoint = get_endpoint(url_void_api)
-    url = "https://api.urlvoid.com/{}/{}/host/{}/".format(identifier, api_key, netloc, endpoint)
+    url = "https://api.urlvoid.com/{}/{}/host/{}/{}".format(identifier, api_key, netloc, endpoint)
 
     response = requests_common.execute_call("get", url, payload={}, log=log, resp_type="text")
 
