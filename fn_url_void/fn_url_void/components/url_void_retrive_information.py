@@ -4,7 +4,6 @@
 """Function implementation"""
 
 import logging
-import time
 import xmltodict
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib.components.resilient_common import validate_fields
@@ -28,7 +27,9 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_url_void", {})
 
         validate_fields(["api_key"], self.options)
-        selftest.selftest_function(opts)
+        status = selftest.selftest_function(opts)
+        if status.get("state") == "failed":
+            raise ValueError("Can not communicate with URL Void server.")
 
     @handler("reload")
     def _reload(self, event, opts):

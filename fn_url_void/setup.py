@@ -6,12 +6,11 @@ from setuptools import setup, find_packages
 setup(
     name='fn_url_void',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_url_void'",
-    long_description="Resilient Circuits Components for 'fn_url_void'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    description="Resilient Circuits Component for 'fn_url_void'",
+    long_description="Resilient Circuits Component for 'fn_url_void'",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib',
