@@ -24,7 +24,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "UrlVoidRetriveInformationFunctionComponent = fn_url_void.components.url_void_retrive_information:FunctionComponent"
+            "UrlVoidRetriveInformationFunctionComponent = fn_url_void.components.url_void_function:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_url_void.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_url_void.util.customize:customization_data"],
