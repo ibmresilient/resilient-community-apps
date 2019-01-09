@@ -10,9 +10,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class SqliteFeed(SqlFeedDestinationBase):
+class SqliteFeedDestination(SqlFeedDestinationBase):
     def __init__(self, rest_client, options):
-        super(SqliteFeed, self).__init__(rest_client, options, dialect=SqliteDialect())
+        super(SqliteFeedDestination, self).__init__(rest_client, options, dialect=SqliteDialect())
 
         file_name = options.get('file_name', 'objects.sqlite3')
 

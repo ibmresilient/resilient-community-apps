@@ -4,7 +4,7 @@
 
 
 from rc_data_feed.lib.file_feed import FileFeedDestination
-from rc_data_feed.lib.sqlite_feed import SqliteFeed
+from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
 from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
 from rc_data_feed.lib.type_info import FullTypeInfo, SimpleTypeInfo
 from rc_data_feed.lib.feed import FeedContext
@@ -33,7 +33,7 @@ class FeedComponent(ResilientComponent):
     AVAILABLE_CLASSES = {
         "ODBCFeed": ODBCFeedDestination,
         "FileFeed": FileFeedDestination,
-        "SQLiteFeed": SqliteFeed
+        "SQLiteFeed": SqliteFeedDestination
     }
 
     """Component that ingests data"""
