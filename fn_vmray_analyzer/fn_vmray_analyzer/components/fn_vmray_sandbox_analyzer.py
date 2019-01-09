@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-#import fn_vmray_analyzer.util.selftest as selftest
+import fn_vmray_analyzer.util.selftest as selftest
 
 
 class FunctionComponent(ResilientComponent):
@@ -14,7 +14,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_vmray_analyzer", {})
-        #selftest.selftest_function(opts)
+        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
