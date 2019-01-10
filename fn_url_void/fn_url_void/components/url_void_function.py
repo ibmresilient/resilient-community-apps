@@ -82,7 +82,7 @@ def get_endpoint(url_api):
     elif url_api == "Rescan":
         return "rescan"
     else:
-        raise ValueError("Update method, unexpected url_api value")
+        raise ValueError("Update method internally, unexpected url_api value")
 
 
 def call_url_void_api(requests_common, artifact_value, identifier, api_key, url_void_api):
