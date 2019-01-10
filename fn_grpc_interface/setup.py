@@ -13,10 +13,10 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_grpc_interface'",
-    long_description="""The gRPC interface provides a general wrapper for the client application and can call methods on
+    long_description="""The resilient gRPC interface provides a general wrapper for the client application and can call methods on
                      a server application on a different machine as if it was a local object,making it easier for you 
                      create distributed application and services with IBM resilient.
-                     In this edition we have implemented only simple RPC gRPC Service method.
+                     In this edition we have implemented only simple RPC(Remote Procedure call) gRPC Service method.
                      for more details - https://grpc.io/docs/.
                      """,
     install_requires=[

@@ -1,22 +1,46 @@
-#About gRPC
+#About this Package
 
-The gRPC component provides a general wrapper for the gRPC client application and can call methods on
-    a server application on a different machine as if it was a local object, making it easier for you 
-    to create distributed applications and services with IBM resilient.
-    In this edition we have implemented only simple RPC gRPC Service method.
+This gRPC function provides a general purpose wrapper for use with any gRPC client application. It can be used for request/response style communication during incident response management such as 
 
-For more details - https://grpc.io/docs/
+* artifact enrichment
+* enterprise containment actions
+* commuication and coordination with other enterpise solutions
+
+In this edition we have implemented the `unary` communication type service method.
+
+For more information regarding gRPC, see https://grpc.io/docs/
+
+#Prerequisites:
+
+* resilient version 31 or later
+* resilient_circuits version 30 or later
+
+
+#Resilient Installation
+This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.
+Install this package with 'pip', such as:
+
+`pip install fn-grpc-<version>.tar.gz`
+
+To import the function and example rule and workflows into Resilient, run the following command:
+
+`resilient-circuits customize`
+
+Answer the prompts for the package to import.
+
+To uninstall,
+
+    pip uninstall fn_grpc_interface
+
 
 #Resilient Configuration
-
-Follow the steps to add a gRPC section to your app.config file and updating the fields:
     
-Run the following command to generate the gRPC data in the app.config file
+Run the following command to generate the gRPC configuration section in the app.config file:
 
     resilient-circuits config [-u | -c]  
     
-After running config command data should be generated in the app.config file as below
-    
+The following gRPC configuration data is added:
+   
     [fn_grpc]
     interface_dir = <<path to interface buffer pb2 files parent directory>>
     #<<package_name=communication_type,secure connection type,certificate_path or google API token>>
@@ -29,87 +53,79 @@ After running config command data should be generated in the app.config file as 
     #       certificate_path or google API token(i.e None,path to certificate/token).
     #       for more info on gRPC communication types : https://grpc.io/docs/tutorials/basic/python.html 
     
-Please edit the app.config file as per you application configurations, instruction to update the app.config files are given below.
+Edit the [fn_grpc] properties as follows:
   
-  1.    interface_dir  :  please specify the parent directory path of buffer pb2 files, generated from grpc-tools according
-        to your *.proto file.
+  1.    interface_dir:  the directory containing the gRPC client (pb2) files. These files are auto-generated from your .proto file via the grpc-tools utility
         
-        example : /usr/local/sys_name/helloword/helloworld_pb2.py then,
-        interface_dir = /usr/local/sys_name/
+        Ex. interface_dir = /usr/local/grpc_clients/
         
-  2.    package_name = communication type,secure connection,certificate/google token
-        
-        Create the folder name as package name under the interface directory and keep both interface buffer pb2 files 
-        inside this directory and this is must.
-        
-        communication type : this value can be - unary/server_stream/client_stream/bidirectional_stream
-        
-        gRPC client-server communication type example - unary(Simple RPC)/server_stream(response-streaming RPC)/
-        client_stream(request-streaming RPC)/bidirectional_stream(bidirectionally-streaming RPC))
-        https://grpc.io/docs/tutorials/basic/python.html
-        
-        secure connection : this value can be None/TLS/SSL/OAuth2
-        
-        certificate/google token : if the secure connection type is other than the None, needs to specify either path to 
-        certificate file or token from google
-        
-#using gRPC Function
+  2.    package_name: communication type,secure connection,certificate/google token
 
-This component supports only Simple RPC(unary) communication mechanism.
-Sample Hello word gRPC example - https://grpc.io/docs/quickstart/python.html
-Below is details of Input and outputs of the API
+  	    Ex. helloworld = unary,SSL,/usr/local/grpc_clients/helloworld/helloworld.crt
+        
+        Within interface_dir, create a folder matching package_name where the client pb2 
+        files will reside.
+        
+     a. communication type: this value can be - unary, server\_stream, client\_stream, or bidirectional_stream. Presently, only `unary` is supported.
+        
+        For further information, refer to https://grpc.io/docs/tutorials/basic/python.html
+        
+      b. secure connection: this value can be None, TLS, SSL, OAuth2. Presently only None, TLS and SSL are supported.
+        
+      c. certificate/google token: if the secure connection type is other than the None, specify either a path to the certificate file or token provided from google.
+        
+#Using the gRPC Function
+Below are details of the input fields and outputs results of the function.
 
-Resilient Inputs :
-  1. grpc_channel : localhost:50051 - This is the channel information hostname:port where server 
-                    application is running.
-  2. grpc_function: helloword:SayHello(HelloRequest) - this should be package_name:rpc function name(rpc request function name).
-                    for better understanding compare example data with sample helloword program.
-                    
-      sample gRPC helloword program
-      proto : https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto
-      gRPC Application : https://github.com/grpc/grpc/tree/master/examples/python
-  3. grpc_function_data: This can any artifact value example string,IP Address, DNS name etc
-  
-#Resilient Pre-Process Script Configuration
-    example  Pre-Process Script: 
-    dict_data = {"name":str(artifact.value)}
+##Function Inputs Fields:
+
+  1. grpc\_channel: *hostname:port* Ex. localhost:50051 
+     
+     This is the channel information where the server application is running.
+  2. grpc_function: *package\_name:rpc function name(rpc request)* Ex. helloword:SayHello(HelloRequest) 
+
+     This information is derived from the .proto file similar to the following example:
+     
+     ```
+     package helloworld;
+
+     // The greeting service definition.
+     service Greeter {
+        // Sends a greeting
+        rpc SayHello (HelloRequest) returns (HelloReply) {}
+     }
+     ```
+     
+  3. grpc\_function\_data: Ex. '{ "name": "128.23.43.56" }' 
+     
+     This will contain string formatted json containing artifact data and additional parameters required by the gRPC function call.
+     
+##Function Pre-Process Script
+
+A pre-processor script will build and format the grpc\_function\_data input field similar to this example:
+
+    
+    dict_data = {"name": str(artifact.value)}
     inputs.grpc_function_data = str(dict_data)
     
-   we need to create the json object from the artifact value,here in the above example we have created one key-value 
-   pair json object. key is "name" and value will be str(artifact.value).
    
-   json object key "name" refers to name of the input parameter specified in the proto file server request method 
-   to send the data to gRPC server.
+   "name" refers to name of the input parameter specified in the .proto file request message as in this example:
    
-   if more than one parameter is specified in the request method,then json object should also be included with those 
-   parameters.
+   ```
+   // The request message containing the user's name.
+   message HelloRequest {
+      string name = 1;
+   }
+   ```
+   
+   If more than one parameter is specified in the request method, then the json object should also include those parameters.
     
-   compare this proto : https://github.com/grpc/grpc/blob/master/examples/protos/helloworld.proto file with the 
-   above "name" parameter for better understanding of function input data parameters.
+##Function Post-Process Script
+The result from the client/server response is returned unchanged. If the result is in json format, it can be parsed within the post-process script as `results.content.get("<key>")`. Otherwise, the result will be in string format.  This is the payload returned:
+
+    {
+       "content": response_received,
+       "channel": grpc_channel
+    }
    
-   
-To generate resilient code for the function integration
-
-    resilient-circuits codegen -p fn_grpc_interface [-f function_grpc] [-w ]
-
-
-
-To install in "development mode"
-
-    pip install -e ./fn_grpc_interface/
-
-After installation, the package will be loaded by `resilient-circuits run`.
-
-
-To uninstall,
-
-    pip uninstall fn_grpc_interface
-
-
-To package for distribution,
-
-    python ./fn_grpc_interface/setup.py sdist
-
-The resulting .tar.gz file can be installed using
-
-    pip install <filename>.tar.gz
+The sample helloword gRPC example can be found at `https://grpc.io/docs/quickstart/python.html`.
