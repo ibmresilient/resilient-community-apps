@@ -2,6 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import sys
+
+tests_require=[]
+
+if sys.version_info[0] < 3:
+    tests_require.add('mock')
 
 setup(
     name='rc_data_feed',
@@ -26,5 +32,8 @@ setup(
         "resilient.circuits.components": [
             "FeedComponent = rc_data_feed.components.feed_ingest:FeedComponent"
         ]
-    }
+    },
+    extras_require=dict(
+        tests = tests_require
+    )
 )

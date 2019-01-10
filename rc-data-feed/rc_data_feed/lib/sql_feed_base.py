@@ -1,17 +1,22 @@
+"""Module contains SqlFeedDestinationBase, the base class for all SQL feed destinations."""
 
+import logging
+import json
+import abc
 
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 from rc_data_feed.lib.sql_dialect import PostgreSQL96Dialect, SqliteDialect
 
-import logging
-import json
+LOG = logging.getLogger(__name__)
 
 
-logger = logging.getLogger(__name__)
+class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-public-methods
+    """
+    The base class for all SQL feed destinations.  This class handles as much of the work
+    as possible, leaving only DB or DB library specific elements to subclasses.
+    """
 
-
-class SqlFeedDestinationBase(FeedDestinationBase):
     AVAILABLE_DIALECTS = {
         "PostgreSQL96Dialect": PostgreSQL96Dialect,
         "SqliteDialect": SqliteDialect
@@ -39,23 +44,28 @@ class SqlFeedDestinationBase(FeedDestinationBase):
 
             parent_types = type_dto['parent_types']
 
-            # Only create tables for the types that have incident or task as a parent (or incident itself).
+            # Only create tables for the types that have incident or task as a parent
+            # (or incident itself).
             if type_name == 'incident' or 'incident' in parent_types or 'task' in parent_types:
                 all_fields = list(type_dto['fields'].values())
 
                 self._create_or_update_table(pretty_type_name, all_fields)
 
+    @abc.abstractmethod
     def _start_transaction(self):
-        raise NotImplemented
+        raise NotImplementedError
 
+    @abc.abstractmethod
     def _commit_transaction(self, context):
-        raise NotImplemented
+        raise NotImplementedError
 
+    @abc.abstractmethod
     def _rollback_transaction(self, context):
-        raise NotImplemented
+        raise NotImplementedError
 
+    @abc.abstractmethod
     def _execute_sql(self, cursor, sql, data=None):
-        raise NotImplemented
+        raise NotImplementedError
 
     def _create_or_update_table(self, type_name, all_fields):
         cursor = self._start_transaction()
@@ -82,7 +92,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):
                 # Add the column for the field if it hasn't been already.
                 #
                 if field_name not in self.created_tables[type_name]:
-                    logger.info('Adding field %s to table %s', field_name, type_name)
+                    LOG.info('Adding field %s to table %s', field_name, type_name)
 
                     self._add_field_to_table(cursor, type_name, field)
 
@@ -90,23 +100,29 @@ class SqlFeedDestinationBase(FeedDestinationBase):
                     self.created_tables[type_name].append(field_name)
 
             self._commit_transaction(cursor)
-        except Exception as e:
+        except Exception as db_exception:
             self._rollback_transaction(cursor)
 
-            raise e
+            raise db_exception
 
     def _add_field_to_table(self, cursor, type_name, field):
-        logger.debug("adding field to table; field is %s", json.dumps(field, indent=2))
+        LOG.debug("adding field to table; field is %s", json.dumps(field, indent=2))
 
         try:
+            column_type = self.dialect.get_column_type(field['input_type'])
+
             ddl = self.dialect.get_add_column_to_table(type_name,
                                                        field['name'],
-                                                       self.dialect._get_column_type(field['input_type']))
+                                                       column_type)
 
             self._execute_sql(cursor, ddl)
-        except Exception as e:
-            if not self.dialect.is_column_exists_exception(e):
-                raise e
+        except Exception as db_exception:   # pylint: disable=broad-except
+            # Disabled pylint's broad-except because we specifically want
+            # to catch all exceptions and let the dialect determine if
+            # it's one we want to bypass.
+            #
+            if not self.dialect.is_column_exists_exception(db_exception):
+                raise db_exception
 
     def send_data(self, context, payload):
         # Create a flattened map where each key of the map is the field name.
@@ -128,12 +144,14 @@ class SqlFeedDestinationBase(FeedDestinationBase):
             #
             all_field_names.append('id')
 
-            # Assuming all passed in payload data has an 'id' field here.  This is currently the case for everything.
+            # Assuming all passed in payload data has an 'id' field here.  This is currently
+            # the case for everything.
             #
             flat_payload['id'] = payload['id']
 
-        # Always ensure a special inc_id field exists.  Note that in some cases this may be set to None (e.g.
-        # for email message objects that are not associated with any specific incident ID.
+        # Always ensure a special inc_id field exists.  Note that in some cases
+        # this may be set to None (e.g. for email message objects that are not
+        # associated with any specific incident ID.
         #
         all_field_names.append('inc_id')
 
@@ -143,7 +161,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):
 
         try:
             if context.is_deleted:
-                logger.debug("Deleting %s; id = %d", table_name, flat_payload['id'])
+                LOG.debug("Deleting %s; id = %d", table_name, flat_payload['id'])
 
                 self._execute_sql(
                     cursor,
@@ -151,7 +169,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):
                     [id]
                 )
             else:
-                logger.debug("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
+                LOG.debug("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
                 self._execute_sql(
                     cursor,
@@ -159,7 +177,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):
                     self.dialect.get_parameters(all_field_names, flat_payload))
 
             self._commit_transaction(cursor)
-        except Exception as e:
+        except Exception as db_exception:
             self._rollback_transaction(cursor)
 
-            raise e
+            raise db_exception

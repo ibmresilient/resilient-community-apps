@@ -1,21 +1,18 @@
-# -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-"""Feed component implementation"""
-
-
-from rc_data_feed.lib.file_feed import FileFeedDestination
-from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
-from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
-from rc_data_feed.lib.type_info import FullTypeInfo, SimpleTypeInfo
-from rc_data_feed.lib.feed import FeedContext
-
-from resilient_circuits import ResilientComponent, handler, ActionMessage
+"""Feed component implementation."""
 
 import logging
 import sys
 
+from resilient_circuits import ResilientComponent, handler, ActionMessage
 
-logger = logging.getLogger(__name__)
+from rc_data_feed.lib.file_feed import FileFeedDestination
+from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
+from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
+from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
+from rc_data_feed.lib.feed import FeedContext
+
+
+LOG = logging.getLogger(__name__)
 
 
 def _get_inc_id(payload):
@@ -25,7 +22,14 @@ def _get_inc_id(payload):
     return None
 
 
+def _is_incident_or_task(parent_types):
+    return {'incident', 'task'}.intersection(parent_types)
+
+
 class FeedComponent(ResilientComponent):
+    """This component handles initial population of a feed and ongoing
+    modifications from the associated queue."""
+
     DATATABLE_TYPE_ID = 8
     INCIDENT_TYPE_ID = 0
     INC_PAGE_SIZE = 500
@@ -41,7 +45,7 @@ class FeedComponent(ResilientComponent):
         super(FeedComponent, self).__init__(opts)
 
         self.options = opts.get("feeds", {})
-        logger.debug(self.options)
+        LOG.debug(self.options)
 
         self.channel = "actions." + self.options.get("queue", "feed_data")
 
@@ -62,7 +66,7 @@ class FeedComponent(ResilientComponent):
             self._reload_all()
 
     @handler()
-    def _feed_ingest_data(self, event, *args, **kwargs):
+    def _feed_ingest_data(self, event, *args, **kwargs):    # pylint: disable=unused-argument
         """Ingests data of any type that can be sent to a Resilient message destination"""
         if not isinstance(event, ActionMessage):
             # Some event we are not interested in
@@ -71,13 +75,15 @@ class FeedComponent(ResilientComponent):
         log = logging.getLogger(__name__)
         log.info("ingesting object")
 
-        type_info = SimpleTypeInfo(event.message['object_type'], event.message['type_info'], self.rest_client())
+        type_info = ActionMessageTypeInfo(event.message['object_type'],
+                                          event.message['type_info'],
+                                          self.rest_client())
 
         type_name = type_info.get_pretty_type_name()
 
         inc_id = _get_inc_id(event.message)
 
-        is_deleted = 'deleted' == event.message['operation_type']
+        is_deleted = event.message['operation_type'] == 'deleted'
 
         context = FeedContext(type_info, inc_id, self.rest_client(), is_deleted)
 
@@ -99,23 +105,29 @@ class FeedComponent(ResilientComponent):
         for (type_name, type_dto) in list(rest_client.get("/types").items()):
             parent_types = set(type_dto['parent_types'])
 
-            if type_name == 'incident' or len(set(['incident', 'task']).intersection(parent_types)) > 0:
-                id = type_dto['id']
+            if type_name == 'incident' or _is_incident_or_task(parent_types):
+                real_id = type_dto['id']
                 name = type_dto['type_name']
                 type_id = type_dto['type_id']
 
-                info = FullTypeInfo(id, rest_client, refresh=False, all_fields=list(type_dto['fields'].values()))
+                info = FullTypeInfo(real_id,
+                                    rest_client,
+                                    refresh=False,
+                                    all_fields=list(type_dto['fields'].values()))
 
                 # Index by both name and ID.
-                type_info_index[id] = info
+                type_info_index[real_id] = info
                 type_info_index[name] = info
 
-                if type_id != FeedComponent.DATATABLE_TYPE_ID and type_id != FeedComponent.INCIDENT_TYPE_ID:
+                if type_id not in [FeedComponent.DATATABLE_TYPE_ID, FeedComponent.INCIDENT_TYPE_ID]:
                     search_type_names.append(name)
 
         max_inc_id, min_inc_id = self._populate_incidents(rest_client, type_info_index)
 
-        self._populate_others(rest_client, max_inc_id, min_inc_id, search_type_names, type_info_index)
+        self._populate_others(rest_client,
+                              range(min_inc_id, max_inc_id),
+                              search_type_names,
+                              type_info_index)
 
     def _populate_incidents(self, rest_client, type_info_index):
         min_inc_id = sys.maxsize
@@ -141,36 +153,45 @@ class FeedComponent(ResilientComponent):
 
         return max_inc_id, min_inc_id
 
-    def _populate_others(self, rest_client, max_inc_id, min_inc_id, search_type_names, type_info_index):
-        for r in FeedComponent._range_chunks(min_inc_id, max_inc_id, FeedComponent.SEARCH_PAGE_SIZE):
-            # Handle all the other built-in types using the search endpoint (except the incident type, which was already
-            # handled above.  Make sure we only get data for our org.
-            search_input_dto = {
-                'query': 'inc_id:[{0} TO {1}]'.format(r[0], r[1]),
-                'types': search_type_names,
-                'org_id': rest_client.org_id
-            }
+    def _populate_others(self,
+                         rest_client,
+                         inc_range,
+                         search_type_names,
+                         type_info_index):
+        for chunk in FeedComponent._range_chunks(inc_range,
+                                                 FeedComponent.SEARCH_PAGE_SIZE):
+            # Handle all the other built-in types using the search endpoint (except
+            # the incident type, which was already handled above.  Make sure we only
+            self._populate_others_chunk(chunk, rest_client, search_type_names, type_info_index)
 
-            for result in rest_client.search(search_input_dto)['results']:
-                # We're not consistent about returning IDs vs names of types.  The search
-                # results are returning the type name (even though it's called "type_id").
-                type_name = result['type_id']
+    def _populate_others_chunk(self, chunk, rest_client, search_type_names, type_info_index):
+        # get data for our org.
+        #
+        search_input_dto = {
+            'query': 'inc_id:[{0} TO {1}]'.format(chunk[0], chunk[1]),
+            'types': search_type_names,
+            'org_id': rest_client.org_id
+        }
+        for result in rest_client.search(search_input_dto)['results']:
+            # We're not consistent about returning IDs vs names of types.  The search
+            # results are returning the type name (even though it's called "type_id").
+            type_name = result['type_id']
 
-                result_data = result['result']
+            result_data = result['result']
 
-                if type_name == 'datatable':
-                    # We need the ID of the table, not the ID for the generic "datatable" type.
-                    type_id = result_data['type_id']
-                    type_info = type_info_index[type_id]
-                else:
-                    type_info = type_info_index[type_name]
+            if type_name == 'datatable':
+                # We need the ID of the table, not the ID for the generic "datatable" type.
+                type_id = result_data['type_id']
+                type_info = type_info_index[type_id]
+            else:
+                type_info = type_info_index[type_name]
 
-                inc_id = result['inc_id']
+            inc_id = result['inc_id']
 
-                context = FeedContext(type_info, inc_id, rest_client, is_deleted=False)
+            context = FeedContext(type_info, inc_id, rest_client, is_deleted=False)
 
-                for feed_output in self.feed_outputs:
-                    feed_output.send_data(context, result_data)
+            for feed_output in self.feed_outputs:
+                feed_output.send_data(context, result_data)
 
     @staticmethod
     def _page_incidents(rest_client):
@@ -189,7 +210,7 @@ class FeedComponent(ResilientComponent):
 
         paged_results = rest_client.post(url, query)
 
-        while len(paged_results.get('data')) > 0:
+        while paged_results.get('data'):
             data = paged_results.get('data')
 
             for result in data:
@@ -200,10 +221,10 @@ class FeedComponent(ResilientComponent):
             paged_results = rest_client.post(url, query)
 
     @staticmethod
-    def _range_chunks(in_min, in_max, chunk_size):
-        start = in_min - 1
+    def _range_chunks(chunk_range, chunk_size):
+        start = chunk_range.start - 1
 
-        while start <= in_max:
-            yield (start + 1, min(in_max, start + chunk_size))
+        while start <= chunk_range.stop:
+            yield (start + 1, min(chunk_range.stop, start + chunk_size))
 
             start += chunk_size

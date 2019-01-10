@@ -1,21 +1,22 @@
-
+"""This module contains the definition of the ODBCFeedDestination class."""
+import logging
+import pyodbc
 
 from rc_data_feed.lib.sql_feed_base import SqlFeedDestinationBase
 
-import pyodbc
-import logging
 
-logger = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 
-class ODBCFeedDestination(SqlFeedDestinationBase):
-    """Feed for writing data to an ODBC destination."""
+class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-public-methods
+    """Feed for writing Resilient data to an ODBC destination."""
     def __init__(self, rest_client, options):
         """Initializes a new ODBCFeed.
 
-        :param rest_client: A Resilient SimpleClient object to use for interacting with the REST API.
-            This is expected to be used for loading type information (e.g. loading all of the types so we
-            can create the tables, loading field type information, etc.).
+        :param rest_client: A Resilient SimpleClient object to use for interacting with
+            the REST API.  This is expected to be used for loading type information (e.g.
+            loading all of the types so we can create the tables, loading field type
+            information, etc.).
         :param options: A dict containing the configuration options needed.
         """
         super(ODBCFeedDestination, self).__init__(rest_client, options)
@@ -25,9 +26,10 @@ class ODBCFeedDestination(SqlFeedDestinationBase):
         pwd = options.get("pwd")
         uid = options.get("uid")
 
-        self.db = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
+        # pylint: disable=c-extension-no-member
+        self.connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
 
-        self.dialect.configure_connection(self.db)
+        self.dialect.configure_connection(self.connection)
 
         self._init_tables()
 
@@ -35,15 +37,15 @@ class ODBCFeedDestination(SqlFeedDestinationBase):
         """Creates a new cursor and returns it to the caller.
 
         :returns A new DB cursor."""
-        return self.db.cursor()
+        return self.connection.cursor()
 
-    def _commit_transaction(self, cursor):
+    def _commit_transaction(self, context):
         """Commits the currently open transaction."""
-        self.db.commit()
+        self.connection.commit()
 
-    def _rollback_transaction(self, cursor):
+    def _rollback_transaction(self, context):
         """Rolls back the currently open transaction."""
-        self.db.rollback()
+        self.connection.rollback()
 
     def _execute_sql(self, cursor, sql, data=None):
         """Executes the specified SQL.
