@@ -66,8 +66,6 @@ class FunctionComponent(ResilientComponent):
         # Logout after making connection
         atd_logout(self.atd_url, h, self.trust_cert)
 
-        # check_task_status(self, "144115188075874420")
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
