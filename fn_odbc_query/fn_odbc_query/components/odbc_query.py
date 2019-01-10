@@ -16,7 +16,6 @@ from fn_odbc_query.util import function_utils, odbc_utils
 
 
 LOG = logging.getLogger(__name__)
-SQL_PYODBC_TIMEOUT_ERROR_STATE = 'HY000'
 
 
 class FunctionComponent(ResilientComponent):
@@ -123,17 +122,13 @@ class FunctionComponent(ResilientComponent):
             sql_number_of_records_returned = int(self.options["sql_number_of_records_returned"]) \
                 if "sql_number_of_records_returned" in self.options else None
 
-            sql_pyodbc_timeout_error_state = self.options["sql_pyodbc_timeout_error_state"] \
-                if "sql_pyodbc_timeout_error_state" in self.options else SQL_PYODBC_TIMEOUT_ERROR_STATE
-
             yield StatusMessage("Starting...")
 
             yield StatusMessage("Validating...")
             function_utils.validate_data(sql_restricted_sql_statements, sql_query)
 
             yield StatusMessage("Opening ODBC connection...")
-            odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit,
-                                                        sql_query_timeout, sql_pyodbc_timeout_error_state)
+            odbc_connection = odbc_utils.OdbcConnection(sql_connection_string, sql_autocommit, sql_query_timeout)
             odbc_connection.configure_unicode_settings(sql_database_type)
             odbc_connection.create_cursor()
 
@@ -144,7 +139,7 @@ class FunctionComponent(ResilientComponent):
             if sql_statement == 'select':
 
                 LOG.debug(u"Query: %s. Params: %s. Fetching %s records.",
-                         sql_query, sql_params, sql_number_of_records_returned)
+                          sql_query, sql_params, sql_number_of_records_returned)
 
                 rows = odbc_connection.execute_select_statement(sql_query, sql_params, sql_number_of_records_returned)
                 results = function_utils.prepare_results(odbc_connection.get_cursor_description(), rows)

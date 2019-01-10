@@ -7,7 +7,7 @@
 ## app.config Settings:
 ```python
 [fn_grr_search]
-grr_server=127.0.0.1
+grr_server=http://127.0.0.1:8000
 grr_user=user
 grr_pwd=password
 #Can be True/False

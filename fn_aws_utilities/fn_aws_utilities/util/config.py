@@ -12,7 +12,8 @@ def config_section_data():
     config_data = u"""[fn_aws_utilities]
 aws_access_key_id=
 aws_secret_access_key=
-aws_region_name=us-east-1  # aws region identifier
+# aws region identifier
+aws_region_name=us-east-1
 """
 
     return config_data
