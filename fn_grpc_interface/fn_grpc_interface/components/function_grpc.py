@@ -152,7 +152,7 @@ class FunctionComponent(ResilientComponent):
         assert channel is not None, "channel argument should not be None type"
         assert stub_class is not None, "stub class object should not be None type"
         log = logging.getLogger(__name__)
-        if auth_type.lower() not in ['ssl', 'tls', 'oauth2'] and auth_type.lower().find('none') != -1:
+        if auth_type.lower() not in ['ssl', 'tls', 'oauth2'] and auth_type.lower().strip() == "none":
             log.info("gRPC Channel Connection is not secure.")
             channel_object = grpc.insecure_channel(channel)
             stub_class_obj = stub_class(channel_object)
@@ -226,7 +226,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("Input Data must be in json formatted..!")
 
             # Checking Communication type
-            if _grpc_communication_type.lower().find('unary') != -1:
+            if _grpc_communication_type.lower().strip() == "unary":
                 try:
                     #Connecting to gRPC Server with given Authentication type
                     stub_class_obj,grpc_channel_obj = self._gRPC_Connect_Server(_grpc_secure_connection, grpc_channel, \
@@ -243,7 +243,6 @@ class FunctionComponent(ResilientComponent):
                                 grpc_function_json_data_tmp = grpc_function_json_data
 
                             response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
-
                             # Closing the gRPC Server Connection
                             grpc_channel_obj.close()
                         else:
