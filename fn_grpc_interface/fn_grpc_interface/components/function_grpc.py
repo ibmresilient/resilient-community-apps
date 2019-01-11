@@ -239,13 +239,13 @@ class FunctionComponent(ResilientComponent):
                                 #convert unicode strings to utf-8 for python 2.7
                                 import ast
                                 grpc_function_json_data_tmp = ast.literal_eval(json.dumps(grpc_function_json_data))
-                                response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
-                                # Closing the gRPC Server Connection
-                                grpc_channel_obj.close()
                             else:
-                                response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data))
-                                # Closing the gRPC Server Connection
-                                grpc_channel_obj.close()
+                                grpc_function_json_data_tmp = grpc_function_json_data
+
+                            response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
+
+                            # Closing the gRPC Server Connection
+                            grpc_channel_obj.close()
                         else:
                             raise FunctionError("Stub method not found, please specify the valid stub method.")
                     else:
