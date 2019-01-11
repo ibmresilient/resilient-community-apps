@@ -12,6 +12,18 @@ The function included in this package is shown below:
 
 ![screenshot](./screenshots/URL_void_function.png)
 
+## Create URL Void account
+A URL Void account is needed in order to obtain an API key which is used by the function to make the API calls. An Account can be created [here](https://api.urlvoid.com/).
+
+## app.config settings
+```
+[fn_url_void]
+api_key=<urlvoid_api_key>
+
+# Identifier located on the same page the api key is found (https://api.urlvoid.com/dashboard/). Defaults to 'api1000'
+#identifier=
+```
+
 ## URL Void Function Inputs
 | Function inputs | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |

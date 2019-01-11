@@ -13,7 +13,7 @@ def config_section_data():
     config_data = u"""[fn_url_void]
 api_key=<urlvoid_api_key>
 
-# Identifier located on the same page the api key is found. Defaults to 'api1000'
+# Identifier located on the same page the api key is found (https://api.urlvoid.com/dashboard/). Defaults to 'api1000'
 #identifier=
 """
     return config_data
