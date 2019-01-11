@@ -3,7 +3,8 @@
 
 ==
 
-This function comes with three workflows and rules which retrieves information from a URL, scans a URL, and rescans a URL. An example one is shown below.
+This function comes with three workflows and rules, which retrieve information from a URL, scan a URL, and rescan a URL. An example is shown below.
+
 
 ![screenshot](./screenshots/URL_void_retrieve_workflow.png)
 
@@ -11,14 +12,14 @@ The function included in this package is shown below:
 
 ![screenshot](./screenshots/URL_void_function.png)
 
-## URL Void Function Inputs:
+## URL Void Function Inputs
 | Function inputs | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `artifact_value` | `String` | Yes | `"https://google.com"` |
 | `url_void_api` | `Select` | Yes | `Retrieve/Scan/Rescan` |
 
 
-## URL Void Function Outputs:
+## URL Void Function Outputs
 ```
 {  
    "inputs":{  
@@ -96,14 +97,14 @@ The function included in this package is shown below:
 ```
 
 
-## Pre-Process Scripts:
-This example sets the artifact value **to the value of the Incident's Artifact.**
+## Pre-Process Script
+This example sets the `artifact_value` input to the value of the incident's artifact.
 
 ```python
 inputs.artifact_value = artifact.value
 ```
 
-## Post-Process Script:
+## Post-Process Script
 This example adds a notes to the incident stating how many detections were found on the URL and provides a link to URL Void which contains a graphical display of the information.
 
 ```python
@@ -124,7 +125,7 @@ else:
 incident.addNote(note)
 ```
 
-## Rules:
+## Rules
 | Rule Name | Object Type | Workflow Triggered | Conditions |
 | --------- | :---------: | ------------------ | ---------- |
 | Example: URL Void Retrive | `Artifact` | `Example: URL Void Retrieve Information` | `Type` is equal to `URL`|
@@ -132,21 +133,21 @@ incident.addNote(note)
 | Example: URL Void Rescan | `Artifact` | `Example: URL Void Rescan` | `Type` is equal to `URL`|
 
 
-To install in "development mode"
+To install in "development mode":
 
     pip install -e ./fn_url_void/
 
 
-To uninstall,
+To uninstall:
 
     pip uninstall fn_url_void
 
 
-To package for distribution,
+To package for distribution:
 
     python ./fn_url_void/setup.py sdist
 
-The resulting .tar.gz file can be installed using
+The resulting .tar.gz file can be installed usin:
 
     pip install <filename>.tar.gz
 
