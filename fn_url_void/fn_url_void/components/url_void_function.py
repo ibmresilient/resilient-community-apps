@@ -75,11 +75,11 @@ def get_netloc(url):
 
 
 def get_endpoint(url_api):
-    if url_api == "Retrieve":
+    if url_api.lower() == "retrieve":
         return ""
-    elif url_api == "Scan":
+    elif url_api.lower() == "scan":
         return "scan"
-    elif url_api == "Rescan":
+    elif url_api.lower() == "rescan":
         return "rescan"
     else:
         raise ValueError("Update method internally, unexpected url_api value")
