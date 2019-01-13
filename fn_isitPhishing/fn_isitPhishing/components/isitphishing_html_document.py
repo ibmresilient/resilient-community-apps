@@ -6,12 +6,10 @@
 import sys
 import json
 import base64
-import requests
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib.components.resilient_common import get_file_attachment, validate_fields
-from fn_isitPhishing.lib.isitphishing_util import get_license_key, get_filename_attachment
-import fn_isitPhishing.util.selftest as selftest
+from resilient_lib import get_file_attachment, get_file_attachment_name, validate_fields, RequestsCommon, ResultPayload
+from fn_isitPhishing.lib.isitphishing_util import get_license_key
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
 
@@ -25,7 +23,6 @@ class FunctionComponent(ResilientComponent):
         # Get app.config parameters.
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         self._init_isitPhishing()
-        selftest.selftest_function(opts)
 
     def _init_isitPhishing(self):
         """ validate required fields for app.config """
@@ -35,6 +32,7 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get(CONFIG_DATA_SECTION, {})
+        self.opts = opts
         self._init_isitPhishing()
 
     @function("isitphishing_html_document")
@@ -50,6 +48,8 @@ class FunctionComponent(ResilientComponent):
         "contents" and the "inputs" parameters to the function.
         """
         try:
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the attachment data
             data = get_file_attachment(client, incident_id, artifact_id, task_id, attachment_id)
-            filename = get_filename_attachment(client, incident_id, artifact_id, task_id, attachment_id)
+            filename = get_file_attachment_name(client, incident_id, artifact_id, task_id, attachment_id)
 
             # Base64 encode the document string and build payload.
             base64encoded_doc = base64.b64encode(data).decode("ascii")
@@ -89,26 +89,12 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Query isitPhishing endpoint for status of document.")
 
             # Make API URL request
-            response = requests.post(API_URL, headers=headers, json=payload)
+            rc = RequestsCommon(self.opts, self.options)
+            results_analysis = rc.execute_call("post", API_URL, payload, log=log, headers=headers)
 
-            # Check the results
-            if response.status_code == 200:
-                results_analysis = json.loads(response.content)
-            else:
-                msg = "An error occurred while retrieving the information from isitPhishing with status code: {}"
-                raise ValueError(msg.format(response.status_code))
-
-            yield StatusMessage("Send the results back: {0}.".format(results_analysis["result"]))
-
-            # Send back the results and the input parameter.
-            results = {
-                "content": results_analysis,
-                "inputs": {"incident_id": incident_id,
-                           "task_id": task_id,
-                           "attachment_id": attachment_id,
-                           "artifact_id": artifact_id,
-                           "filename": filename}
-            }
+            results = rp.done(True, results_analysis)
+            # add back in the filename
+            results["inputs"]["filename"] = filename
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
