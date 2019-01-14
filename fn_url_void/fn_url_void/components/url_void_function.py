@@ -51,16 +51,16 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             artifact_value = kwargs.get("artifact_value")  # text
-            url_void_api = self.get_select_param(kwargs.get("url_void_api", "Retrieve"))  # select
-            validate_fields(["artifact_value", "url_void_api"], kwargs)
+            url_void_endpoint = self.get_select_param(kwargs.get("url_void_endpoint", "Retrieve"))  # select
+            validate_fields(["artifact_value", "url_void_endpoint"], kwargs)
 
             log.info("artifact_value: %s", artifact_value)
-            log.info("url_void_api: %s", url_void_api)
+            log.info("url_void_endpoint: %s", url_void_endpoint)
 
-            response = call_url_void_api(req_common, artifact_value, identifier, api_key, url_void_api)
+            response = call_url_void_api(req_common, artifact_value, identifier, api_key, url_void_endpoint)
 
             yield StatusMessage("done...")
-            results = rp.done(True, None, response)
+            results = rp.done(True, response)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
