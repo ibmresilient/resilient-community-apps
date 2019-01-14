@@ -4,12 +4,9 @@
 """Function implementation"""
 
 import logging
-import json
-import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib.components.resilient_common import validate_fields
+from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from fn_isitPhishing.lib.isitphishing_util import get_license_key
-import fn_isitPhishing.util.selftest as selftest
 
 
 CONFIG_DATA_SECTION = 'fn_isitPhishing'
@@ -22,8 +19,8 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
 
         # Get app.config parameters.
+        self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
-        self._init_isitPhishing()
 
     def _init_isitPhishing(self):
         """ validate required fields for app.config """
@@ -45,6 +42,8 @@ class FunctionComponent(ResilientComponent):
         URL input parameter to the function.
         """
         try:
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+
             # Get the function parameters:
             isitphishing_url = kwargs.get("isitphishing_url")  # text
 
@@ -68,16 +67,10 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Query isitPhishing.org endpoint for status of URL {0}.".format(isitphishing_url))
 
             # Make URL request
-            response = requests.post(API_URL, headers=headers, json=payload)
+            rc = RequestsCommon(self.opts, self.options)
+            results_analysis = rc.execute_call("post", API_URL, payload, log=log, headers=headers)
 
-            # Check the results
-            if response.status_code == 200:
-                results_analysis = json.loads(response.content)
-            else:
-                msg = "An error occurred while retrieving the information from isitPhishing with status code: {}"
-                raise ValueError(msg.format(response.status_code))
-
-            yield StatusMessage("Send the results back: {0}.".format(results_analysis["status"]))
+            results = rp.done(True, results_analysis)
 
             # Send back the results and the input parameter.
             results = {
