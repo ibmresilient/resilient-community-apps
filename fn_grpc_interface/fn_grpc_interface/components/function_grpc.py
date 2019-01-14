@@ -243,6 +243,7 @@ class FunctionComponent(ResilientComponent):
                                 grpc_function_json_data_tmp = grpc_function_json_data
 
                             response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
+
                             # Closing the gRPC Server Connection
                             grpc_channel_obj.close()
                         else:
@@ -263,7 +264,10 @@ class FunctionComponent(ResilientComponent):
 
             # Attempting to convert received data into JSON object
             try:
-                response_received = json.loads(response_received_tmp)
+                if isinstance(response_received_tmp, dict):
+                    response_received = response_received_tmp
+                else:
+                    response_received = json.loads(response_received_tmp)
                 log.debug("The Received Data is Converted into JSON Object : {}".format(response_received))
             except Exception as e:
                 log.debug("The Received data is not converted into JSON Object {}".format(e))
