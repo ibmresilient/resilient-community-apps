@@ -25,7 +25,8 @@ handler.setFormatter(formatter)
 logger.addHandler(handler) 
 logger.setLevel(logging.DEBUG)
 
-class MaaS360APIsHelper:
+
+class MaaS360APIsHelper(object):
     
     # responseCode returned if the custom attribute with the provided name already exists
     duplicateAttrResponseCode = 7 
