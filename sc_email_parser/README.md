@@ -41,7 +41,7 @@ newIncidentOwner = "admin@co3sys.com"
 Edit the line:
 ```python
 # The new incident owner
-newIncidentOwner = "SOC_L1@example.com"
+newIncidentOwner = "l1@businessname.com"
 ```
 
 ### Whitelisting
@@ -49,12 +49,12 @@ There are two categories of whitelist - IP address and URL domain - which are co
 
 | Variable Name | Line number | Purpose |
 |:------------- | -----------:|:------- | 
-| `ipV4WhiteList` | 214 | General IP v4 whitelist |
-| `ipV6WhiteList` | 232 | General IP v6 whitelist |
-| `customIPv4WhiteList` | 257 | Additional customer-specific IP v4 whitelist |
-| `customIPv6WhiteList` | 258 | Additional customer-specific IP v6 whitelist |
-| `domainWhiteList` | 261 | General URL domain whitelist |
-| `customDomainWhiteList` | 264 | Additional customer-specific URL domain whitelist |
+| `ipV4WhiteList` | 228 | General IP v4 whitelist |
+| `ipV6WhiteList` | 246 | General IP v6 whitelist |
+| `customIPv4WhiteList` | 271 | Additional customer-specific IP v4 whitelist |
+| `customIPv6WhiteList` | 272 | Additional customer-specific IP v6 whitelist |
+| `domainWhiteList` | 275 | General URL domain whitelist |
+| `customDomainWhiteList` | 278 | Additional customer-specific URL domain whitelist |
 
 #### IP address whitelists
 The IP address whitelists are divided into separate IPv4 and IPv6 lists. These lists apply to the IP addresses retrieved by pattern matching in the body of the email message. If an IP address appears on a whitelist then it is not be added as an artifact to the incident. There are standard whitelists which are expected to be the same for all customers, and customer-specific whitelists which are used in addition to the standard lists. The customer-specific lists are kept separate so that there are four whitelist variables in the script.
@@ -77,17 +77,17 @@ IP v6 whitelists operate similarly. For example to whitelist a V6 CIDR aaaa::/16
 ```python
   # Customer-specific IP address whitelists
   # Add entries to these lists to whitelist the entries without disrupting the standard set above
-  customIPv4WhiteList = []
-  customIPv6WhiteList = []
+  customIPv4WhiteList = WhiteList([])
+  customIPv6WhiteList = WhiteList([])
 ```
 should become:
 ```python
   # Customer-specific IP address whitelists
   # Add entries to these lists to whitelist the entries without disrupting the standard set above
-  customIPv4WhiteList = [ CIDR("9.0.0.0/8"),
-                          IPRange("12.0.0.1-12.5.5.5"),
-                          CIDR("13.13.13.13") ]
-  customIPv6WhiteList = [ CIDR("aaaa::/16") ]
+  customIPv4WhiteList = WhiteList([ CIDR("9.0.0.0/8"),
+                                    IPRange("12.0.0.1-12.5.5.5"),
+                                    CIDR("13.13.13.13") ])
+  customIPv6WhiteList = WhiteList([ CIDR("aaaa::/16") ])
 ```
 
 #### URL domain whitelists
@@ -95,13 +95,13 @@ The domain whitelist applies to URLs found in the body of the email. If a whitel
 
 ```python
   # Customer-specific domain whitelist
-  customDomainWhiteList = []
+  customDomainWhiteList = WhiteList([])
 ```
 would become:
 ```python
   # Customer-specific domain whitelist
-  customDomainWhiteList = [ Domain("mail.example.com"),
-                            Domain("*.secondexample.com") ]
+  customDomainWhiteList = WhiteList([ Domain("mail.example.com"),
+                                      Domain("*.secondexample.com") ])
 ```
 
 # Extension and Customization

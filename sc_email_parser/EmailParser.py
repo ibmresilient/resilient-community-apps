@@ -20,7 +20,6 @@ class Utils:
         lpos = lpos - 8
     return addressAsBinary
 
-
   @staticmethod
   def convertIPV4v6ToInt(address):
     """ A static method that converts a IPv4 and IPv6 address to a binary representation. """
@@ -75,6 +74,21 @@ class WhiteListElement(object):
     would be matched by this white list element.
     """
     return False
+
+
+class WhiteList(list):
+  """ A class that extends the list class to support the white list facility. """
+
+  def checkIsItemNotOnWhiteList(self, anItem):
+    """ A method that checks if an item should be removed from the artifact list because if matches a whitelist element.
+    Parameter "anItem" - the item in question.
+    Return value: True if the item should be kept, false if it should be removed.
+    """
+    for whiteListEntry in self:
+      if whiteListEntry.test(anItem):
+        log.info("Filtering out {0} because it matched with whitelist entry {1}".format(anItem, self))
+        return None
+    return anItem
 
 
 class IPAddress:
@@ -211,7 +225,7 @@ class EmailProcessor(object):
   addedArtifacts = set()
 
   # Standard Whitelist for IP addresses
-  ipV4WhiteList = [
+  ipV4WhiteList = WhiteList([
     CIDR("192.168.0.0/16"),               #   Class B private network local communication (RFC 1918)
     CIDR("198.18.0.0/15"),                #  Testing of inter-network communications between subnets (RFC 2544)
     IPRange("239.0.0.0-239.255.255.255"), #   Administrative Multicast
@@ -227,9 +241,9 @@ class EmailProcessor(object):
     IPRange("234.0.0.0-238.255.255.255"),
     IPRange("225.0.0.0-231.255.255.255"),
     CIDR("127.0.0.1")
-  ]
+  ])
 
-  ipV6WhiteList = [
+  ipV6WhiteList = WhiteList([
     CIDR("fc00::/7"),                     #   Unique Local Addresses (ULA)
     CIDR("fec0::/10"),                    #   Site Local Addresses (deprecated - RFC 3879)
     CIDR("fe80::/10"),
@@ -250,18 +264,18 @@ class EmailProcessor(object):
     CIDR("F000::/5"),
     CIDR("F800::/6"),
     CIDR("FE00::/9")    
-  ]
+  ])
 
   # Customer-specific IP address whitelists
   # Add entries to these lists to whitelist the entries without disrupting the standard set above
-  customIPv4WhiteList = []
-  customIPv6WhiteList = []
+  customIPv4WhiteList = WhiteList([])
+  customIPv6WhiteList = WhiteList([])
 
   # Standard domain whitelist
-  domainWhiteList=[Domain("*.ibm.com")]
+  domainWhiteList = WhiteList([Domain("*.ibm.com")])
 
   # Customer-specific domain whitelist
-  customDomainWhiteList=[]
+  customDomainWhiteList = WhiteList([])
 
   def __init__(self, newBodyText):
     """The EmailProcessor constructor.
@@ -271,7 +285,6 @@ class EmailProcessor(object):
     self.ipV4WhiteList.extend(self.customIPv4WhiteList)
     self.ipV6WhiteList.extend(self.customIPv6WhiteList)
     self.domainWhiteList.extend(self.customDomainWhiteList)
-
 
   def addUniqueArtifact(self, theArtifact, artifactType, description):
     """This method adds a new unique artifact to the incident. Previously added artifacts are added to the 
@@ -289,20 +302,8 @@ class EmailProcessor(object):
       incident.addArtifact(artifactType, theArtifact, description)
       self.addedArtifacts.add((theArtifact, artifactType))
 
-  def addRecipient(self, recipient):
-    """A method to add the email address of the recipient of the email message to the incident as an artifact.
-    If the recipient has a name as well as an address, the name is added as part of the artifact.
-    Parameter "recipient" - an object with a String "address" and "name" attribute.
-    No return value.
-    """
-    fullData = recipient.address
-    if recipient.name:
-      fullData = "{0} <{1}>".format(recipient.name, recipient.address)
-    log.debug("Adding recipient {0}".format(fullData))
-    self.addUniqueArtifact(fullData, "Email Recipient", "Suspicious email recipient")        
-
-
-  def printList(self, name, list):
+  @staticmethod
+  def printList(name, list):
     """A convenience method to log the contents of a list. The method will log each element in a list, along with
     its name and ordinal in the list.
     Parameter "name" - the name of the elements in the list e.g. "IP Address".
@@ -392,7 +393,6 @@ class EmailProcessor(object):
             return anAddress
     return None
 
-
   @staticmethod
   def makeHexPattern(length):
     """A method that returns a regex pattern that matches a case-insensitive hexadecimal number of exactly a specified
@@ -401,7 +401,6 @@ class EmailProcessor(object):
     Returns the corresponding pattern.
     """
     return "[^0-9a-zA-Z]([0-9a-fA-F]{" + str(length) + "})[^0-9a-zA-Z]"
-
 
   def processArtifactCategory(self, regex, artifactType, description, *optionalListModifierFn):
     """A method to process a category of artifact, based on a regular expression. Each match of the regex in the
@@ -428,31 +427,16 @@ class EmailProcessor(object):
       else:
         log.debug("Could not find artifact {0} for regex {1}".format(artifactType,regex))
 
-
-  def checkIsItemNotOnWhiteList(self, anItem, whiteList):
-    """ A method that checks if an IP Address should be removed from the artifact list because if matches a whitelist element.
-    Parameter "anItem" - the item in question.
-    Return value: True if the item should be kept, false if it should be removed.
-    """
-    for whiteListEntry in whiteList:
-      if whiteListEntry.test(anItem):
-        log.info("Filtering out IP Address {0} because it matched with whitelist entry {1}".format(anItem, whiteListEntry))
-        return None
-    return anItem
-
-
   def checkIPWhiteList(self, anAddress):
     """ A method to check a list of IP Addresses aginst the whitelist. """
     whiteList = self.ipV4WhiteList if "." in anAddress.addressAsString else self.ipV6WhiteList
-    log.debug("Going to filter {0} against whitelist ".format(anAddress, whiteList))
-    return self.checkIsItemNotOnWhiteList(anAddress, whiteList)
-
+    log.debug("Going to filter {0} against whitelist {1}".format(anAddress, whiteList))
+    return whiteList.checkIsItemNotOnWhiteList(anAddress)
 
   def checkDomainWhiteList(self, aURL):
     """ A method to check a list of URLs aginst a whitelist. """
-    log.debug("Going to filter {0} against whitelist ".format(aURL, self.domainWhiteList))
-    return self.checkIsItemNotOnWhiteList(aURL,self.domainWhiteList)
-
+    log.debug("Going to filter {0} against whitelist {1}".format(aURL, self.domainWhiteList))
+    return self.domainWhiteList.checkIsItemNotOnWhiteList(aURL)
 
   def processIPFully(self, theAddressAsString):
     """ A method to filter inadvertantly matched IP strings and then filter out IP addresses that appear on the whitelist.
@@ -468,7 +452,6 @@ class EmailProcessor(object):
           return theAddressAsObj.addressAsString                 # Convert back to String
     return None                                                  # The address was filtered out
 
-
   def processAttachments(self):
     """ A method to process the email attachments, if present. Each non-inline email attachment is added as an 
     attachment to the incident, and its name is added as an artifact. Inline attachments are assumed to be unimportant.
@@ -479,14 +462,12 @@ class EmailProcessor(object):
         incident.addEmailAttachment(attachment.id)
         incident.addArtifact("Email Attachment Name", attachment.suggested_filename, "")
 
-
   def addBasicInfoToIncident(self):
     """A method to perform basic information extraction from the email message.
     The email message sender address, including personal name if present, is set as the reporter field
     in the incident. An artifact is created from the email message subject with the type "Email Subject".
     No return value.
     """ 
-  
     newReporterInfo = emailmessage.from.address
     if emailmessage.from.name is not None:
       newReporterInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
