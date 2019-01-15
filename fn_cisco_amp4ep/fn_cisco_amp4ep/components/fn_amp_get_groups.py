@@ -11,10 +11,13 @@
 import logging
 import json
 from datetime import datetime
-
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
+
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_groups' of package fn_cisco_amp4ep.
@@ -32,6 +35,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"group_guid": null, "limit": null, "name": null},
       "response": {
         "version": "v1.2.0",
         "data": [
@@ -111,12 +115,12 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
-            rtn = amp.get_groups(**params)
+            rtn = amp.get_paginated_total(amp.get_groups, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'group' or 'groups' results for group_guid '{}', group name '{}' and limit '{}'"
                                 .format(params["group_guid"], params["name"], params["limit"]))
 

@@ -15,7 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
 
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of
@@ -32,7 +34,10 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api post request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
-      "set_file_lists_file": {u'version': u'v1.2.0',
+      "input_params":{"file_list_guid": "e773a9eb-296c-40df-98d8-bed46322589d",
+                      "file_sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284",
+                      "description": "Sha256 description"},
+      "response": {u'version': u'v1.2.0',
                               u'data': {u'source': u'Created by entering SHA-256 via Public api.',
                                 u'sha256': u'8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284',
                                 u'description': u'Test file sha256',
@@ -86,16 +91,21 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
             rtn = amp.set_file_list_files(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn,"query_execution_time": query_execution_time}
-            yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
+            if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
+                # If this error was trapped user probably tried to re-add a sha256 to a file list.
+                yield StatusMessage(
+                    "Got a 409 error while attempting to set a sha256 '{0}' to list with uid '{1}' because of a possible "
+                    "attempt to redo a set operation."
+                        .format(params["file_sha256"], params["file_list_guid"]))
+            else:
+                yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"], params["description"]))
-
-            yield StatusMessage("Done...")
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

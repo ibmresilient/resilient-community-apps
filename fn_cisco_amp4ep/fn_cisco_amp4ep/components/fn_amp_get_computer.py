@@ -15,6 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
+
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_computer' of
@@ -30,7 +33,8 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
-      "computer": {
+      "input_params": {"conn_guid": "00da1a57-b833-43ba-8ea2-79a5ab21908f"},
+      "response": {
         "version": "v1.2.0",
         "data": {
           "operating_system": "Windows 7, SP 1.0",
@@ -101,12 +105,12 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
             rtn = amp.get_computer(amp_conn_guid)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'computer by guid' results for guid '{}'.".format(params["conn_guid"]))
 
             log.debug(json.dumps(results))

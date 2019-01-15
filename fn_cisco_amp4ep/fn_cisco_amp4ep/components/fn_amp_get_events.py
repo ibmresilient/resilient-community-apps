@@ -15,6 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
+
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_events of package fn_cisco_amp4ep.
@@ -37,6 +40,8 @@ class FunctionComponent(ResilientComponent):
     format similar to the following.
 
     {
+      "input_params": {"detection_sha256": null, "application_sha256": null, "connector_guid": null,
+                       "group_guid": null, "start_date": null, "event_type": null, "limit": null, "offset": null},
       "response": {
         "version": "v1.2.0",
         "data": [
@@ -151,22 +156,21 @@ class FunctionComponent(ResilientComponent):
             log.info("amp_limit: %s", amp_limit)
             log.info("amp_offset: %s", amp_offset)
 
+            yield StatusMessage("Running Cisco AMP get events query...")
+
             params = {"detection_sha256": amp_detection_sha256, "application_sha256": amp_application_sha256,
                       "connector_guid": amp_conn_guid, "group_guid": amp_group_guid, "start_date": amp_start_date,
                       "event_type": amp_event_type, "limit": amp_limit, "offset": amp_offset}
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
-            yield StatusMessage("Running Cisco AMP get computers query...")
-            rtn = amp.get_events(**params)
+            rtn = amp.get_paginated_total(amp.get_events, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'events' results")
-
-            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results

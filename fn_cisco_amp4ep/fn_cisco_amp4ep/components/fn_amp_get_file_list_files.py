@@ -15,7 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
 
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_set_file_list_files' of
@@ -33,7 +35,10 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api get request against a Cisco AMP for endpoints server and returns a result in
     JSON format similar to the following.
     {
-      "file_list_files": {u'version': u'v1.2.0',
+      "input_params": {"file_list_guid": "e773a9eb-296c-40df-98d8-bed46322589d",
+                       "file_sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284", "limit": null,
+                       "offset": null},
+      "response": {u'version': u'v1.2.0',
                           u'data': {u'items': [],
                                     u'guid': u'9710a198-b95a-462a-b184-9e688968fd94',
                                     u'name': u'File Blacklist',
@@ -104,15 +109,13 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
-            rtn = amp.get_file_list_files(**params)
+            rtn = amp.get_paginated_total(amp.get_file_list_files, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn,"query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning 'file list files' results for guid '{}'.".format(params["file_list_guid"]))
-
-            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
 

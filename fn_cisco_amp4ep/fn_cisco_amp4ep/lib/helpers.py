@@ -16,12 +16,14 @@ except:
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
-DOMAIN_REGEX = "((?=[a-z0-9-_]{1,63}\.)(xn--)?[a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,63}" # AMP seems to allow underscore
+DOMAIN_REGEX = "((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}((\.)(xn--)?" \
+               "([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,}))*"
 # in hostnames
-DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX))
+DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX), re.IGNORECASE)
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CLI_ID_PATTERN = re.compile(r"^[a-fA-F0-9]{20}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
+AMP_LIMIT_MAX = 1000
 
 def validate_opts(func):
     """"Check options set correctly.
@@ -45,6 +47,13 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'api_token' not set.")
     if func.options["api_token"] is None or not UUID_PATTERN.match(func.options["api_token"]):
         raise ValueError("Invalid format for config setting 'api_token'.")
+    if not "max_retries" in func.options:
+        raise Exception("Mandatory config setting 'max_retries' not set.")
+    if func.options["max_retries"] is None or not validate_is_int(func.options["max_retries"]):
+        raise ValueError("Invalid format for config setting 'max_retries'.")
+    if "query_limit" in func.options and func.options["query_limit"] is not None and not \
+            validate_is_int(func.options["query_limit"]):
+            raise ValueError("Invalid format for config setting 'query_limit'.")
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
@@ -89,6 +98,19 @@ def validate_is_int(val):
     except ValueError:
         return False
 
+def validate_is_event_type(event_types):
+    """"Validate domain string(s) are in a valid format.
+
+    :param event_types: Ent type or types parameter value
+    :return : boolean
+
+     """
+
+    for et in re.split('\s+|,', event_types):
+        if not validate_is_int(et):
+            return False
+    return True
+
 def validate_params(params):
     """"Check parameter fields for Resilient Function and validate that they are in correct format.
 
@@ -100,9 +122,9 @@ def validate_params(params):
 
     # Now do some validation on input parameters.
     for (k, v) in params.copy().items():
-        if re.match("^(limit|offset)$", k) and v is not None and not type(v) == int:
+        if re.match("^(limit|offset|start_date)$", k) and v is not None and not type(v) == int:
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
-        if re.match("^conn_guid|group_guid$", k) and v is not None and not UUID_PATTERN.match(v):
+        if re.match("^conn_guid|group_guid|file_list_guid$", k) and v is not None and not UUID_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^(internal_ip|external_ip)$", k) and v is not None and not IP_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
@@ -110,8 +132,10 @@ def validate_params(params):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
         if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
-        if re.match("^event_type$", k) and v is not None and not validate_is_int(v):
+        if re.match("^event_type$", k) and v is not None and not validate_is_event_type(v):
             raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+        if re.match("^q|scd_name$", k) and v is not None and v == '':
+            raise ValueError("Invalid empty value '{0}' specified for function parameter '{1}'.".format(v, k))
 
     # If any entry has "None" string change to None value.
     for k, v in params.items():
