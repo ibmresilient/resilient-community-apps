@@ -106,7 +106,7 @@ if [ ! -d "$2" ]; then
 fi
 
 if [ ! -d "$3" ]; then
-  usage "result directory is missing"
+  mkdir "$3"
 fi
 
 TEMPLATE_DIR=$2
@@ -120,17 +120,16 @@ VERSION_LIBS="enum34 circuits investigate pymisp beautifulsoup4 pyodbc"
 RESILIENT_LIBS="rc-webserver rc-cts resilient-circuits"
 GIT_LIBS="williballenthin/vivisect fireeye/flare-floss yeti-platform/pyeti"
 # ex. "github.com/ibmresilient/resilient-community-apps.git"
-MAKESELF=~/Downloads/makeself-2.4.0/makeself.sh
 RESILIENT_COMM_APPS=git@github.ibm.com:Resilient/resilient-community-apps.git
 REPO_BRANCH=public
 
 # expand any directory references to path shortcuts such as ~
 if [ "`command -v greadlink`" != "" ]; then
   BUILD_DIR=`greadlink -f $1`
-  RESULT_DIR=`greadlink -f $2`
+  RESULT_DIR=`greadlink -f $3`
 else
   BUILD_DIR=`readlink -f $1`
-  RESULT_DIR=`readlink -f $2`
+  RESULT_DIR=`readlink -f $3`
 fi
 # complete path into with ${BUILD_DIR}
 LINKS_INFO="--find-links ${BUILD_DIR} --find-links ${BUILD_DIR}/lib -d ${BUILD_DIR}/lib/"
@@ -165,4 +164,4 @@ loadVersion ${VERSION_LIBS}
 ls -1 ${BUILD_DIR} >>${BUILD_DIR}/README
 #
 # end with makeself
-/bin/bash ${MAKESELF} --target resilient-circuits ${BUILD_DIR} ${RESULT_DIR}/resilient-circuits.run "Resilient-Circuits" ./setup
+/bin/bash makeself --target resilient-circuits ${BUILD_DIR} ${RESULT_DIR}/resilient-circuits.run "Resilient-Circuits" ./setup
