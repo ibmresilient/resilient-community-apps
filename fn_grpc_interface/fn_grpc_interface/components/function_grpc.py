@@ -12,6 +12,8 @@ import grpc
 import grpc_tools
 import re
 import inspect
+from google.protobuf.json_format import MessageToDict
+from google.protobuf.json_format import MessageToJson
 class FunctionComponent(ResilientComponent):
     """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
 
@@ -270,8 +272,11 @@ class FunctionComponent(ResilientComponent):
                     response_received = json.loads(response_received_tmp)
                 log.debug("The Received Data is Converted into JSON Object : {}".format(response_received))
             except Exception as e:
-                log.debug("The Received data is not converted into JSON Object {}".format(e))
-                response_received = str(response_received_tmp)
+                try:
+                    response_received = MessageToDict(response_received_tmp)
+                except Exception as e:
+                    log.debug("The Received data is not converted into JSON Object {}".format(e))
+                    response_received = str(response_received_tmp)
 
             yield StatusMessage("done...")
 
