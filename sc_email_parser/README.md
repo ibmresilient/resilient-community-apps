@@ -19,7 +19,7 @@ Before installing, verify that your environment meets the following prerequisite
 1. Select **Proceed**.
 
 ### Result
-After installing, the Resilient platform has a new Python script called "Generic email script" and a new rule called "Process email message". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
+After installing, the Resilient platform has a new Python script called "Generic email script v1.0.1" and a new rule called "Process email message v1.0.1". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
 * Checks if an existing incident exists whose title reflects the email message received.
   * If so, it associates the email message with the existing incident.
   * If not, it:
@@ -29,6 +29,8 @@ After installing, the Resilient platform has a new Python script called "Generic
     * Sets the incident's reporter field to be the email address that sent the message.
 * Parses the email body text looking for URLs, IP addresses and file hashes. After filtering out invalid and whitelisted values, it adds the remaining data to the incident as artifacts.
 * Adds non-inline email message attachments to the incident.
+
+**Note:** Any previously installed older versions of this package will not be replaced by the installation procedure. The new rule will run in addition to any existing rules which are triggered by the creation of an email message. 
 
 ## Configuration
 ### The incident owner
@@ -160,8 +162,8 @@ Scenario: You want to collect email messages related to the same campaign of att
 
 A solution:
 1. Create a new incident custom field for the campaign signifier of type Text.
-1. Copy the generic parsing script into a new script, where this script is used for the category of email messages in question.
-1. Modify the mainline of the new script to create a value for the campaign signfier.
-1. Use the signifier field for the incident search criteria instead of the incident title.
-1. For new incidents, set the campaign signifier field to be the signifier value.
-1. Modify the rules so that the new script runs instead of the generic script.
+2. Copy the generic parsing script into a new script, where this script is used for the category of email messages in question.
+3. Modify the mainline of the new script to create a value for the campaign signfier.
+4. Use the signifier field for the incident search criteria instead of the incident title.
+5. For new incidents, set the campaign signifier field to be the signifier value.
+6. Modify the rules so that the new script runs instead of the generic script.
