@@ -30,7 +30,7 @@ After installing, the Resilient platform has a new Python script called "Generic
 * Parses the email body text looking for URLs, IP addresses and file hashes. After filtering out invalid and whitelisted values, it adds the remaining data to the incident as artifacts.
 * Adds non-inline email message attachments to the incident.
 
-**Note:** Any previously installed older versions of this package will not be replaced by the installation procedure. The new rule will run in addition to any existing rules which are triggered by the creation of an email message. 
+**NOTE:** If you installed the previous version of this script, be aware that the previous rules are not replaced. Therefore, you could have multiple rules that are triggered by the creation of an email message. In this case, you may want to review your rules and remove those that are duplicated. 
 
 ## Configuration
 ### The incident owner
