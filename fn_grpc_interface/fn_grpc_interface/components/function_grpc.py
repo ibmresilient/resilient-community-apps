@@ -9,11 +9,9 @@ import sys
 import os
 import json
 import grpc
-import grpc_tools
 import re
 import inspect
 from google.protobuf.json_format import MessageToDict
-from google.protobuf.json_format import MessageToJson
 class FunctionComponent(ResilientComponent):
     """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
 
