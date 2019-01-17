@@ -60,6 +60,8 @@ Edit the [fn_grpc] properties as follows:
         Ex. interface_dir = /usr/local/grpc_clients/
         
   2.    package_name: communication type,secure connection,certificate/google token
+        
+        Create a separate line for each client application to enable for Resilient.
 
   	    Ex. helloworld = unary,SSL,/usr/local/grpc_clients/helloworld/helloworld.crt
         
@@ -118,36 +120,20 @@ A pre-processor script will build and format the grpc\_function\_data input fiel
    }
    ```
    
-   If more than one parameter is specified in the request method, then the json object should also include those parameters.
+   If more than one parameter is specified in the request message, then the pre-process script's json object should also include those parameters.
     
 ##Function Payload Data Format
-The gRPC server result is converted to JSON format, if received data is supported for conversions.
-otherwise data is converted to string format.
-
-Supported data types to convert as JSON Object:
-* Dictionaries
-* String Formatted JSON Data
-* gRPC Message object 
-
-    ```
-    try:
-        if isinstance(response_received_tmp, dict):
-            response_received = response_received_tmp
-        else:
-            response_received = json.loads(response_received_tmp)
-    except Exception as e:
-        try:
-            response_received = MessageToDict(response_received_tmp)
-        except Exception as e:
-            response_received = str(response_received_tmp)          
-    ```
-    
-##Function Post-Process Script
-The result from the client/server response is returned unchanged. If the result is in json format, it can be parsed within the post-process script as `results.content.get("<key>")`. Otherwise, the result will be in string format.  This is the payload returned:
+The payload from integration will wrap the results of the gRPC server response in the following JSON structure.
+An attempt is made to return `response_recieved` as a dictionary if the response is actually a string representation of JSON or a nature dictionary object. 
+Otherwise, `response_recieved` will be returned as a string representation of the result.
 
     {
        "content": response_received,
        "channel": grpc_channel
     }
-   
+
+
+##Function Post-Process Script
+If `response_received` is in JSON or dictionary format, it can be parsed within the post-process script as `results.content.get("<key>")`. Otherwise, the result will be in string format. 
+
 The sample helloword gRPC example can be found at `https://grpc.io/docs/quickstart/python.html`.
