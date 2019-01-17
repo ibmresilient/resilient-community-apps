@@ -5,7 +5,6 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_datatable_utils.util.selftest as selftest
 from fn_datatable_utils.util.helper import RESDatatable, get_function_input
 
 
@@ -28,7 +27,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_datatable_utils", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
