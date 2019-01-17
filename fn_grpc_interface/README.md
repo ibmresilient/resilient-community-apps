@@ -4,7 +4,7 @@ This gRPC function provides a general purpose wrapper for use with any gRPC clie
 
 * artifact enrichment
 * enterprise containment actions
-* commuication and coordination with other enterpise solutions
+* communication and coordination with other enterprise solutions
 
 In this edition we have implemented the `unary` communication type service method.
 
@@ -14,7 +14,7 @@ For more information regarding gRPC, see https://grpc.io/docs/
 
 * resilient version 31 or later
 * resilient_circuits version 30 or later
-
+* grpcio version latest
 
 #Resilient Installation
 This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.
@@ -55,7 +55,7 @@ The following gRPC configuration data is added:
     
 Edit the [fn_grpc] properties as follows:
   
-  1.    interface_dir:  the directory containing the gRPC client (pb2) files. These files are auto-generated from your .proto file via the grpc-tools utility
+  1.    interface_dir:  the parent directory containing the gRPC client (pb2) files. These files are auto-generated from your .proto file via the grpc-tools utility
         
         Ex. interface_dir = /usr/local/grpc_clients/
         
@@ -66,11 +66,11 @@ Edit the [fn_grpc] properties as follows:
         Within interface_dir, create a folder matching package_name where the client pb2 
         files will reside.
         
-     a. communication type: this value can be - unary, server\_stream, client\_stream, or bidirectional_stream. Presently, only `unary` is supported.
+     a. communication type: this value can be - unary, server_stream, client_stream, or bidirectional_stream. Presently, only `unary` is supported.
         
         For further information, refer to https://grpc.io/docs/tutorials/basic/python.html
         
-      b. secure connection: this value can be None, TLS, SSL, OAuth2. Presently only None, TLS and SSL are supported.
+      b. secure connection: this value can be None, SSL/TLS, OAuth2. Presently only None, SSL/TLS are supported.
         
       c. certificate/google token: if the secure connection type is other than the None, specify either a path to the certificate file or token provided from google.
         
@@ -79,10 +79,10 @@ Below are details of the input fields and outputs results of the function.
 
 ##Function Inputs Fields:
 
-  1. grpc\_channel: *hostname:port* Ex. localhost:50051 
+  1. grpc_channel: *hostname:port* Ex. localhost:50051 
      
-     This is the channel information where the server application is running.
-  2. grpc_function: *package\_name:rpc function name(rpc request)* Ex. helloword:SayHello(HelloRequest) 
+     This is the channel information where the gRPC server application is running.
+  2. grpc_function: *package_name:rpc function name(rpc request)* Ex. helloword:SayHello(HelloRequest) 
 
      This information is derived from the .proto file similar to the following example:
      
@@ -119,6 +119,28 @@ A pre-processor script will build and format the grpc\_function\_data input fiel
    ```
    
    If more than one parameter is specified in the request method, then the json object should also include those parameters.
+    
+##Function Payload Data Format
+The gRPC server result is converted to JSON format, if received data is supported for conversions.
+otherwise data is converted to string format.
+
+Supported data types to convert as JSON Object:
+* Dictionaries
+* String Formatted JSON Data
+* gRPC Message object 
+
+    ```
+    try:
+        if isinstance(response_received_tmp, dict):
+            response_received = response_received_tmp
+        else:
+            response_received = json.loads(response_received_tmp)
+    except Exception as e:
+        try:
+            response_received = MessageToDict(response_received_tmp)
+        except Exception as e:
+            response_received = str(response_received_tmp)          
+    ```
     
 ##Function Post-Process Script
 The result from the client/server response is returned unchanged. If the result is in json format, it can be parsed within the post-process script as `results.content.get("<key>")`. Otherwise, the result will be in string format.  This is the payload returned:
