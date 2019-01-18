@@ -11,10 +11,13 @@
 import json
 import logging
 from datetime import datetime
-
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
+
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_event_types of package fn_cisco_amp4ep.
@@ -78,9 +81,10 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
             yield StatusMessage("Running Cisco AMP get computers query...")
+
             rtn = amp.get_event_types()
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
