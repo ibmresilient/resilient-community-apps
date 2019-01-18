@@ -40,7 +40,7 @@ class FunctionComponent(ResilientComponent):
     def _url_void_function(self, event, *args, **kwargs):
         """Function: Retrieves information of a URL from the  URL Void database."""
         try:
-            yield StatusMessage("starting...")
+            yield StatusMessage("URL Void function started...")
             rp = ResultPayload("fn_url_void", **kwargs)
 
             # Add support for Requests Common
@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
 
             response = call_url_void_api(req_common, artifact_value, identifier, api_key, url_void_endpoint)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("URL Void function completed successfully...")
             results = rp.done(True, response)
 
             # Produce a FunctionResult with the results
@@ -82,7 +82,7 @@ def get_endpoint(url_api):
     elif url_api.lower() == "rescan":
         return "rescan"
     else:
-        raise ValueError("Update method internally, unexpected url_api value")
+        raise ValueError("Unhandled url_api value: {0}. Supported values: retrieve, scan and rescan".format(url_api))
 
 
 def call_url_void_api(requests_common, artifact_value, identifier, api_key, url_void_api):

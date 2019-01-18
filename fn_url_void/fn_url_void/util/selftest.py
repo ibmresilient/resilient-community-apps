@@ -21,8 +21,8 @@ def selftest_function(opts):
     """
     try:
         function_options = opts.get("fn_url_void", {})
-        identifier = function_options.get("identifier")
-        api_key = function_options.get("api_key", "api1000")
+        identifier = function_options.get("identifier", "api1000")
+        api_key = function_options.get("api_key")
         validate_fields(["api_key"], function_options)
         req_common = RequestsCommon(opts, function_options)
 

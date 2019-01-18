@@ -10,9 +10,9 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     description="Resilient Circuits Component for 'fn_url_void'",
-    long_description="Resilient Circuits Component for 'fn_url_void'",
+    long_description="Resilient Circuits Component for calling URL Void APIs 'fn_url_void'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=31.0.0',
         'resilient-lib',
         'xmltodict'
     ],
