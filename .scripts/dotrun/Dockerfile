@@ -16,7 +16,7 @@ RUN yum install -y python-pip
 RUN python -m pip install --upgrade pip setuptools
 
 # Install twine
-RUN pip2.7 install twine
+RUN pip2.7 install twine boxsdk
 
 
 ENTRYPOINT /bin/bash
