@@ -69,7 +69,7 @@ class TestUrlVoidFunction:
         try:
             get_endpoint("something_else")
         except ValueError as e:
-            assert e.args[0] == "Update method internally, unexpected url_api value"
+            assert e.args[0] == "Unhandled url_api value: something_else. Supported values: retrieve, scan and rescan"
 
     @patch("requests.request")
     def test_call_url_void_api(self, mocked_requests_get):
