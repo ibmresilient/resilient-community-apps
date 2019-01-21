@@ -195,7 +195,8 @@ class FunctionComponent(ResilientComponent):
             try:
                 _grpc_package_name = grpc_function.split(':')[0].strip()
                 _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
-                _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1].strip())
+                _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1])
+                _grpc_request_method_name = _grpc_request_method_name.strip()
                 config_file_data = self.options.get(_grpc_package_name).split(',')
                 _grpc_secure_connection = config_file_data[1]
                 _grpc_communication_type = config_file_data[0]
@@ -237,7 +238,6 @@ class FunctionComponent(ResilientComponent):
                                                                grpc_stub_tuple[1],_grpc_certificate_path)
                     stub_method = self._get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
                                                                     stub_name=_grpc_rpc_stub_method_name)
-
                     if grpc_function_json_data:
                         if stub_method[1] is not None:
                             if sys.version[0] == '2':
