@@ -124,20 +124,24 @@ class FunctionComponent(ResilientComponent):
         :param stub_name:   name of the stub method in the stub class
         :return: returns tuple of name and object of the stub method on success else returns None object
         """
+        _found_stub_name = None
+        _found_stub_object = None
         stub_elements = inspect.getmembers(stub_object)
         for name, obj in stub_elements:
-
             if name not in ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__ge__',
                             '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__',
                             '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
-                            '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__']:
-                if str(obj).lower().find(comm_type) != -1 and name.find(stub_name) != -1:
+                            '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '__dir__']:
+
+                if str(obj).lower().find(comm_type) != -1 and name.lower().strip() == stub_name.lower().strip():
                     logging.debug("found Stub name : {} and object : {}".format(name,obj))
-                    return name, obj
+                    _found_stub_name = name
+                    _found_stub_object = obj
                 else:
-                    return None
+                    pass
             else:
-                return None
+                pass
+        return _found_stub_name, _found_stub_object
 
     def _gRPC_Connect_Server(self, auth_type=None, channel=None, stub_class=None, certificate_path=None):
         """
@@ -233,6 +237,7 @@ class FunctionComponent(ResilientComponent):
                                                                grpc_stub_tuple[1],_grpc_certificate_path)
                     stub_method = self._get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
                                                                     stub_name=_grpc_rpc_stub_method_name)
+
                     if grpc_function_json_data:
                         if stub_method[1] is not None:
                             if sys.version[0] == '2':
