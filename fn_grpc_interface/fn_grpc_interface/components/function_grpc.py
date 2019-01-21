@@ -193,9 +193,9 @@ class FunctionComponent(ResilientComponent):
 
             # Parsing the variable data from config file and resilient inputs
             try:
-                _grpc_package_name = grpc_function.split(':')[0]
-                _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0]
-                _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1])
+                _grpc_package_name = grpc_function.split(':')[0].strip()
+                _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
+                _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1].strip())
                 config_file_data = self.options.get(_grpc_package_name).split(',')
                 _grpc_secure_connection = config_file_data[1]
                 _grpc_communication_type = config_file_data[0]
