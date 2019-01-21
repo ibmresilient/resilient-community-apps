@@ -10,7 +10,7 @@ def codegen_reload_data():
     reload_params = {"package": u"fn_maas360",
                     "incident_fields": [], 
                     "action_fields": [u"maas360_rule_device_id", u"maas360_rule_device_name", u"maas360_rule_email", u"maas360_rule_imei_meid", u"maas360_rule_phone_no", u"maas360_rule_platform_name", u"maas360_rule_username"], 
-                    "function_params": [u"maas360_device_id", u"maas360_device_name", u"maas360_email", u"maas360_imei_meid", u"maas360_phone_no", u"maas360_platform_name", u"maas360_username"], 
+                    "function_params": [u"maas360_device_id", u"maas360_email", u"maas360_imei_meid", u"maas360_platform_name"],
                     "datatables": [], 
                     "message_destinations": [u"fn_maas360"], 
                     "functions": [u"maas360_basic_search", u"maas360_locate_device"], 

@@ -41,7 +41,8 @@ def selftest_function(opts):
             + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id + ', App Version: ' + app_version)
 
         state, reason = "", ""
-        maaS360APIsHelper = Maas360Utils(url, billing_id, username, password, app_id, app_version, platform_id, app_access_key)
+        maaS360APIsHelper = Maas360Utils(url, billing_id, username, password, app_id, app_version, platform_id,
+                                         app_access_key, None)
         if maaS360APIsHelper and maaS360APIsHelper.authToken:
             state = "success"
         else:

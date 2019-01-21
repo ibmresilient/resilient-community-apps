@@ -21,14 +21,21 @@ maas360_username=
 maas360_password=
 
 # Basic Search settings
+
+# Required
+
+# Basic search url
 maas360_basic_search_url=/device-apis/devices/2.0/search/customer/
+# Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250 (Default)
+maas360_basic_search_page_size=25
+
+# Optional
+
 # Match 0 (Default) indicates Partial match for Device Name, Username, Phone Number. Match 1 indicates Exact match.
 maas360_basic_search_match=0
-# Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250 (Default)
-maas360_basic_search_pageSize=250
 # Sort attribute. Possible values: lastReported (Default)  or installedDate
-maas360_basic_search_sortAttribute=lastReported
+maas360_basic_search_sort_attribute=lastReported
 # Sort Order. Possible values: asc  or dsc (Default)
-maas360_basic_search_sortOrder=dsc
+maas360_basic_search_sort_order=dsc
     """
     return config_data
