@@ -188,7 +188,7 @@ class Domain(WhiteListElement):
   mailserver.knowngood.com
   """
 
-  # A regular expression to match the domain. Domains of the form "*.customer.com" are converted to ".*.customer.com"
+  # A regular expression to match the domain. Domains of the form "*.example.com" are converted to ".*.example.com"
   processedRegEx = None
   
   def __init__(self, stringRepresentation):
@@ -224,67 +224,56 @@ class EmailProcessor(object):
   # a second time.
   addedArtifacts = set()
 
-  # Standard Whitelist for IP addresses
+  # Whitelist for IP V4 addresses
   ipV4WhiteList = WhiteList([
-    CIDR("192.168.0.0/16"),               #   Class B private network local communication (RFC 1918)
-    CIDR("198.18.0.0/15"),                #  Testing of inter-network communications between subnets (RFC 2544)
-    IPRange("239.0.0.0-239.255.255.255"), #   Administrative Multicast
-    CIDR("169.254.0.0/16"),
-    CIDR("224.0.0.0/4"),
-    CIDR("192.88.99.0/24"),               #   6to4 anycast relays (RFC 3068)
-    CIDR("0.0.0.0/8"),                    #   Broadcast message (RFC 1700)
-    CIDR("192.0.2.0/24"),                 #   TEST-NET examples and documentation (RFC 5737)
-    CIDR("240.0.0.0/4"),                  #   Reserved for  multicast assignments (RFC 5771)
-    CIDR("198.51.100.0/24"),              #   TEST-NET-2 examples and documentation (RFC 5737)
-    CIDR("203.0.113.0/24"),               #   TEST-NET-3 examples and documentation (RFC 5737)
-    CIDR("233.252.0.0/24"),               #   Multicast test network
-    IPRange("234.0.0.0-238.255.255.255"),
-    IPRange("225.0.0.0-231.255.255.255"),
-    CIDR("127.0.0.1")
+    #CIDR("127.0.0.0/8"),                  # Loopback
+    #CIDR("192.168.0.0/16"),               # Class B private network local communication (RFC 1918)
+    #CIDR("198.18.0.0/15"),                # Testing of inter-network communications between subnets (RFC 2544)
+    #CIDR("169.254.0.0/16"),               # Link-local (APIPA)
+    #CIDR("224.0.0.0/4"),                  # Multicast
+    #CIDR("192.88.99.0/24"),               # 6to4 anycast relays (RFC 3068)
+    #CIDR("0.0.0.0/8"),                    # Broadcast message (RFC 1700)
+    #CIDR("192.0.2.0/24"),                 # TEST-NET examples and documentation (RFC 5737)
+    #CIDR("240.0.0.0/4"),                  # Reserved for  multicast assignments (RFC 5771)
+    #CIDR("198.51.100.0/24"),              # TEST-NET-2 examples and documentation (RFC 5737)
+    #CIDR("203.0.113.0/24"),               # TEST-NET-3 examples and documentation (RFC 5737)
+    #CIDR("233.252.0.0/24"),               # Multicast test network
+    #IPRange("225.0.0.0-231.255.255.255"), # Reserved (RFC5771)
+    #IPRange("234.0.0.0-238.255.255.255"), # Unicast-prefix-based
+    #IPRange("239.0.0.0-239.255.255.255")  # Administrative Multicast
   ])
 
+  # Whitelist for IP V6 addresses
   ipV6WhiteList = WhiteList([
-    CIDR("fc00::/7"),                     #   Unique Local Addresses (ULA)
-    CIDR("fec0::/10"),                    #   Site Local Addresses (deprecated - RFC 3879)
-    CIDR("fe80::/10"),
-    CIDR("ff00::/8"),
-    CIDR("ff00::/12"),
-    CIDR("::/8"),
-    CIDR("0100::/8"),
-    CIDR("0200::/7"),
-    CIDR("0400::/6"),
-    CIDR("0800::/5"),
-    CIDR("1000::/4"),
-    CIDR("4000::/3"),
-    CIDR("6000::/3"),
-    CIDR("8000::/3"),
-    CIDR("A000::/3"),
-    CIDR("C000::/3"),
-    CIDR("E000::/4"),
-    CIDR("F000::/5"),
-    CIDR("F800::/6"),
-    CIDR("FE00::/9")    
+    #CIDR("::/8"),                         # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("0100::/8"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("0200::/7"),                     # Reserved by IETF [RFC4048]
+    #CIDR("0400::/6"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("0800::/5"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("1000::/4"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("4000::/3"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("6000::/3"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("8000::/3"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("A000::/3"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("C000::/3"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("E000::/4"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("F000::/5"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("F800::/6"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("FC00::/7"),                     # Unique Local Addresses (ULA)
+    #CIDR("FE00::/9"),                     # Reserved by IETF [RFC3513][RFC4291]
+    #CIDR("FEC0::/10")                     # Reserved by IETF [RFC3879]
   ])
 
-  # Customer-specific IP address whitelists
-  # Add entries to these lists to whitelist the entries without disrupting the standard set above
-  customIPv4WhiteList = WhiteList([])
-  customIPv6WhiteList = WhiteList([])
-
-  # Standard domain whitelist
-  domainWhiteList = WhiteList([Domain("*.ibm.com")])
-
-  # Customer-specific domain whitelist
-  customDomainWhiteList = WhiteList([])
+  # Domain whitelist
+  domainWhiteList = WhiteList([
+    #Domain("*.ibm.com")
+  ])
 
   def __init__(self, newBodyText):
     """The EmailProcessor constructor.
     It takes as its only parameter the body text of email message, expected to be a string.
     """
     self.bodyText = newBodyText
-    self.ipV4WhiteList.extend(self.customIPv4WhiteList)
-    self.ipV6WhiteList.extend(self.customIPv6WhiteList)
-    self.domainWhiteList.extend(self.customDomainWhiteList)
 
   def addUniqueArtifact(self, theArtifact, artifactType, description):
     """This method adds a new unique artifact to the incident. Previously added artifacts are added to the 
