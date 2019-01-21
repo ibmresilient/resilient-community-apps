@@ -137,7 +137,7 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 
 
 def check_status_code(response):
-    log.info(response.content)
+    log.debug(response.content)
     if response.status_code > 299 or response.status_code < 200:
         raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
 

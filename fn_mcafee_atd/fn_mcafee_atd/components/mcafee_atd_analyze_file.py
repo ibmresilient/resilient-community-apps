@@ -4,9 +4,9 @@
 
 import logging
 import time
-from fn_mcafee_atd.util.helper import submit_file, check_job_status, check_task_status, get_atd_report, create_report_file, remove_dir, \
+from fn_mcafee_atd.util.helper import submit_file, check_job_status, get_atd_report, create_report_file, remove_dir, \
     check_status_code, check_timeout, get_incident_id, check_config, _get_atd_session_headers, atd_logout,\
-    get_task_id_list
+    get_task_id_list, check_task_status
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 log = logging.getLogger(__name__)
@@ -126,13 +126,14 @@ class FunctionComponent(ResilientComponent):
                     check_timeout(start, self.polling_interval, timeout_seconds)
 
                 task_id_list = get_task_id_list(self, atd_job_id)
-                log.info(task_id_list)
-                for task_id in task_id_list:
-                    try:
-                        while check_task_status(self, task_id) is False:
-                            check_timeout(start, self.polling_interval, timeout_seconds)
-                    except ValueError:
-                        log.info("ATD analysis probably failed, please check ATD system.")
+                log.debug(task_id_list)
+                task_id = task_id_list[-1]
+                # for task_id in task_id_list:
+                try:
+                    while check_task_status(self, task_id) is False:
+                        check_timeout(start, self.polling_interval, timeout_seconds)
+                except ValueError:
+                    log.info("ATD analysis probably failed, please check ATD system.")
 #                        raise FunctionError()
 
             except ValueError:
@@ -143,7 +144,6 @@ class FunctionComponent(ResilientComponent):
 
             report_list = []
             for task_id in task_id_list:
-#           task_id = task_id_list[-1]
                 if atd_report_type == "pdf" or atd_report_type == "html":
                     yield StatusMessage("Obtaining {} report".format(atd_report_type))
                     report_file = create_report_file(file_name, atd_report_type)
@@ -151,7 +151,7 @@ class FunctionComponent(ResilientComponent):
                 report = get_atd_report(self, task_id, atd_report_type, report_file)
                 # If report does not exist continue to the next task
                 if not report:
-                   continue
+                    continue
 
                 report_list.append(report)
 
