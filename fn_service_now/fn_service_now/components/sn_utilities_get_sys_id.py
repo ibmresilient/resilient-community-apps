@@ -59,37 +59,34 @@ class FunctionComponent(ResilientComponent):
             # Call custom endpoint '/get_sys_id' with 3 params
             get_sys_id_response = res_helper.sn_GET("/get_sys_id", params=payload.inputs)
 
-            # Get status_code and the response as text
-            status_code = get_sys_id_response.status_code
+            # Get response text
             response_result = get_sys_id_response.text
 
-            # If its a success
-            if int(status_code / 100) == 2:
-                # Check if result is there
-                if response_result is not None and "result" in response_result:
-                    response_result = json.loads(response_result)
+            # Check if result is there
+            if response_result is not None and "result" in response_result:
+                response_result = json.loads(response_result)
 
-                    # Check if sys_id is defined
-                    if response_result["result"]["sys_id"]:
-                        payload.success = True
-                        payload.sys_id = response_result["result"]["sys_id"]
-                        yield StatusMessage('"{0}" FOUND in Field: "{1}", Table: "{2}"'.format(
-                            payload.inputs["sn_query_value"],
-                            payload.inputs["sn_query_field"],
-                            payload.inputs["sn_table_name"]))
-                    else:
-                        yield StatusMessage('"{0}" NOT FOUND in Field: "{1}", Table: "{2}"'.format(
-                            payload.inputs["sn_query_value"],
-                            payload.inputs["sn_query_field"],
-                            payload.inputs["sn_table_name"]))
-            else:
-                # Handle error messages
-                if response_result is not None and "error" in response_result:
-                    response_result = json.loads(response_result)
-                    err_msg = response_result["error"]["message"]
-                    if "invalid table name" in err_msg:
-                        err_msg = '"{0}" is an invalid ServiceNow table name'.format(payload.inputs["sn_table_name"])
-                    raise FunctionError(err_msg)
+                # Check if sys_id is defined
+                if response_result["result"]["sys_id"]:
+                    payload.success = True
+                    payload.sys_id = response_result["result"]["sys_id"]
+                    yield StatusMessage('"{0}" FOUND in Field: "{1}", Table: "{2}"'.format(
+                        payload.inputs["sn_query_value"],
+                        payload.inputs["sn_query_field"],
+                        payload.inputs["sn_table_name"]))
+                else:
+                    yield StatusMessage('"{0}" NOT FOUND in Field: "{1}", Table: "{2}"'.format(
+                        payload.inputs["sn_query_value"],
+                        payload.inputs["sn_query_field"],
+                        payload.inputs["sn_table_name"]))
+
+            # Handle error messages
+            elif response_result is not None and "error" in response_result:
+                response_result = json.loads(response_result)
+                err_msg = response_result["error"]["message"]
+                if "invalid table name" in err_msg:
+                    err_msg = '"{0}" is an invalid ServiceNow table name'.format(payload.inputs["sn_table_name"])
+                raise ValueError(err_msg)
 
             # Set results to the payload
             results = payload.as_dict()

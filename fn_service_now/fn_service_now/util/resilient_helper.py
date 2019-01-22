@@ -60,6 +60,17 @@ class ResilientHelper(object):
         # Default headers
         self.headers = {"Content-Type": "application/json", "Accept": "application/json"}
 
+    @classmethod
+    def _byteify(cls, data):
+        """Function that converts unicode dict to str dict"""
+        if isinstance(data, unicode):
+            return data.encode("utf-8")
+
+        elif isinstance(data, dict):
+            return {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
+
+        return None
+
     def get_config_option(self, option_name, optional=False):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
         option = self.app_configs.get(option_name)
@@ -245,8 +256,23 @@ class ResilientHelper(object):
 
         try:
             response = requests.get(url, auth=auth, headers=headers, params=params)
-        except Exception as err:
-            raise ValueError("ServiceNow GET failed. Check url, credentials and params.", err)
+            response.raise_for_status()
+
+        except requests.exceptions.Timeout:
+            raise ValueError('Request to ServiceNow timedout')
+
+        except requests.exceptions.TooManyRedirects:
+            raise ValueError('A bad url request', url)
+
+        except requests.exceptions.HTTPError as err:
+            if err.response.content:
+                custom_error_content = json.loads(err.response.content)
+                raise ValueError(custom_error_content['error']['message'])
+            else:
+                raise ValueError(err)
+
+        except requests.exceptions.RequestException as err:
+            raise ValueError(err)
 
         return response
 
@@ -280,6 +306,7 @@ class ResilientHelper(object):
                 raise ValueError(custom_error_content['error']['message'])
             else:
                 raise ValueError(err)
+
         except requests.exceptions.RequestException as err:
             raise ValueError(err)
 

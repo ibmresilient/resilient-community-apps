@@ -10,7 +10,7 @@ from fn_service_now.util.resilient_helper import ResilientHelper
 from fn_service_now.util.external_ticket_status_datatable import ExternalTicketStatusDatatable
 
 
-class FunctionPayload:
+class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True

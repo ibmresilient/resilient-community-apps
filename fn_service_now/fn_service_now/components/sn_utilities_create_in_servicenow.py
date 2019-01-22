@@ -11,7 +11,6 @@ from fn_service_now.util.resilient_helper import ResilientHelper
 from fn_service_now.util.external_ticket_status_datatable import ExternalTicketStatusDatatable
 
 
-
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
@@ -52,16 +51,6 @@ class FunctionComponent(ResilientComponent):
 
         log = logging.getLogger(__name__)
 
-        # Convert unicode dict to str dict
-        def _byteify(data):
-            if isinstance(data, unicode):
-                return data.encode("utf-8")
-
-            elif isinstance(data, dict):
-                return {_byteify(key): _byteify(value) for key, value in data.items()}
-
-            return None
-
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
@@ -76,7 +65,7 @@ class FunctionComponent(ResilientComponent):
 
             # Convert 'sn_optional_fields' JSON string to Dictionary
             try:
-                inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=_byteify)
+                inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=res_helper._byteify)
             except Exception:
                 raise ValueError("sn_optional_fields JSON String is invalid")
 
@@ -113,15 +102,12 @@ class FunctionComponent(ResilientComponent):
 
                 yield StatusMessage("Record Created")
 
-                # Get current time (*1000 as API does not accept int)
-                now = int(time.time() * 1000)
-
                 # Add values to payload
                 payload.res_id = create_in_sn_response["res_id"]
                 payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
                 payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
                 payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
-                payload.sn_time_created = now
+                payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
 
                 try:
                     yield StatusMessage("Updating Datatable")
