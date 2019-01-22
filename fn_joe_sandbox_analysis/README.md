@@ -1,68 +1,100 @@
-# Function Joe Sandbox Analysis
+# Joe Sandbox Analysis Function for IBM Resilient
 
-This IBM Resilient Function package can be used to execute a **Joe Sandbox Analysis** of a file or URL. 
+## Table of Contents
+  - [app.config settings](#appconfig-settings)
+  - [Function Inputs](#function-inputs)
+  - [Function Output](#function-output)
+  - [Pre-Process Script](#pre-process-script)
+  - [Post-Process Script](#post-process-script)
+  - [Rules](#rules)
+---
 
-Once the analysis is complete, the user is informed if the file or URL is **clean** or **malicious** via a **Resilient Note**. The related Joe Sandbox Analysis report is then uploaded to the Resilient platform as an attachment. The function has the following capabilities:
+**This package contains a function that can that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
+
+ ![screenshot](./screenshots/1.png)
 
 * Supports an attachment or artifact that is a file, or where the artifact's value contains a URL.
 * Allows users to select the type of report, PDF, HTML, or JSON, which is returned from Joe Sandbox.
 * Supports a proxy. Just add your proxy details to the `app.config` file.
-* •	Is dependent on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
+* The function depends on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
 
+---
 
-## To install in *development mode*:
-
-    pip install -e ./fn_joe_sandbox_analysis/
-
-## To uninstall:
-
-    pip uninstall fn_joe_sandbox_analysis
-
-
-## To package for distribution:
-
-    python ./fn_joe_sandbox_analysis/setup.py sdist
-
-The resulting .tar.gz file can be installed using
-
-    pip install <filename>.tar.gz
-
-## Add Joe Sandbox configuration details to the config file:
-
-    resilient-circuits config -u
-
-Set the following values in the config file (`~/.resilient/app.config`) under the `[fn_joe_sandbox_analysis]` section:
-
+## app.config settings:
 ```
+[fn_joe_sandbox_analysis]
+# Accept Terms & Conditions
 jsb_accept_tac=True
+
+# Your JoeSandbox API Key
 jsb_api_key=
-jsb_analysis_url=
-jsb_analysis_report_default_ping_delay=120
+
+# The analysis URL
+jsb_analysis_url=https://jbxcloud.joesecurity.org/analysis
+ 
+# Amount of time in seconds to wait until checking if the report is ready again
+jsb_analysis_report_ping_delay=120
+
+# This is the max time in seconds the function will wait for the report to be generated
 jsb_analysis_report_request_timeout=1800
+
+# Set if you need to use a proxy to access JSB
 #jsb_http_proxy=http://user:pass@10.10.1.10:3128
 #jsb_https_proxy=http://user:pass@10.10.1.10:1080
 ```
 
-## How to use the function
+---
 
-1. Import the necessary customization data into the Resilient platform:
+## Function Inputs:
+| Function Name | Type | Required | Example | Info |
+| ------------- | :--: | :-------:| ------- | ---- |
+| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident |
+| `attachment_id` | `Number` | No | `5` | The ID of the Attachment to be analyzed |
+| `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed |
+| `jsb_report_type` | `Select` | Yes | `"json"` | The type of report to be returned from Joe Sandbox. Options are: `html`, `pdf`, or `json` |
 
-		resilient-circuits customize
+---
 
-	This creates the following customization components:
-	* Function input: `jsb_report_type, ping_delay`
-	* Message Destination: `fn_joe_sandbox_analysis`
-	* Function: `fn_joe_sandbox_analysis`
-	* Workflows: `example_joe_sandbox_analysis_attachment, example_joe_sandbox_artifact`
-	* Rules: `Example: Joe Sandbox Analysis [Artifact], Example: Joe Sandbox Analysis [Attachment]`
+## Function Output:
+```python
+results = {
+    "analysis_report_name": "My Malicious Scan Report",
+    "analysis_report_id": 123,
+    "analysis_report_url": "https://jbxcloud.joesecurity.org/analysis/123/456",
+    "analysis_status": "clean"
+}
+```
+---
 
-2. Update and edit `app.config`:
+## Pre-Process Script:
+This example just sets the function inputs.
+```python
+inputs.incident_id = incident.id
+inputs.artifact_id = artifact.id
+```
+---
 
-		resilient-circuits configure -u
+## Post-Process Script:
+This example adds a Note to the Incident and color codes the `analysis_status` depending if it was **malicious** or **clean**
+```python
+color = "#45bc27"
 
-3. Start Resilient Circuits:
-    ```
-    resilient-circuits run
-    ```
+if (results.analysis_status != "clean"):
+  color = "#ff402b"
+  
+noteText = """<br>Joe Sandbox analysis <b>{0}</b> complete
+              <b>Artifact:</b> '{1}'
+              <b>Report URL:</b> <a href='{2}'>{2}</a>
+              <b>Detection Status:</b> <b style="color: {3}">{4}</b>""".format(results.analysis_report_name, artifact.value, results.analysis_report_url, color, results.analysis_status)
 
-4. Trigger the rule.
+incident.addNote(helper.createRichText(noteText))
+```
+---
+
+## Rules
+| Rule Name | Object Type | Workflow Triggered |
+| --------- | :---------: | ------------------ |
+| Example: Joe Sandbox Analysis [Artifact]| `Artifact` | `Example: Joe Sandbox Analysis [Artifact]` |
+| Example: Joe Sandbox Analysis [Attachment]| `Attachment` | `Example: Joe Sandbox Analysis [Attachment]` |
+
+---

@@ -274,7 +274,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "analysis_report_name": report_name,
-                "analysis_report_pdf_id": jsb_analysis_report["id"],
+                "analysis_report_id": jsb_analysis_report["id"],
                 "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
                 "analysis_status": sample_status["runs"][0]["detection"]
             }
