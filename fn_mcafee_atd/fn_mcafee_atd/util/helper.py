@@ -216,7 +216,7 @@ def check_task_status(g, taskId):
     try:
         status_url = "{}/php/samplestatus.php?iTaskId={}".format(g.atd_url, taskId)
         submission_status = requests.get(status_url, headers=headers, verify=g.trust_cert)
-        log.info(submission_status.content)
+        log.debug(submission_status.content)
         check_status_code(submission_status)
         submit_json = submission_status.json()
         if submit_json['results']['istate'] == 4:
@@ -232,7 +232,7 @@ def check_task_status(g, taskId):
             jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
             res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
             res_json = res.json()
-            log.info(res_json)
+            log.debug("Task istate = 1, response is: {}".format(res_json))
             severity = res_json.get("severity")
             if severity < 0:
                 log.error("Severity is {}".format(str(severity)))
@@ -246,7 +246,7 @@ def check_task_status(g, taskId):
             jobid_url = "{}/php/samplestatus.php?jobId={}".format(g.atd_url, job_id)
             res = requests.get(jobid_url, headers=headers, verify=g.trust_cert)
             res_json = res.json()
-            log.info(res_json)
+            log.debug("Task istate = 2, response is: {}".format(res_json))
             severity = res_json.get("severity")
             if severity < 0:
                 log.error("Severity is {}".format(str(severity)))
@@ -270,15 +270,21 @@ def get_atd_report(g, taskId, report_type, report_file):
         response = requests.get(report_url, headers=headers, verify=g.trust_cert)
         check_status_code(response)
 
-        # Convert content to bytes if needed
-        if type(response.content) is bytes:
-            byte_content = response.content
-        else:
-            byte_content = str.encode(response.content)
+        content = response.content
 
-        # Task does not have a report associated with it
-        if b'Description: File type not supported' in byte_content:
-            return False
+        # Check if task does not have a report associated with it
+        # Check for bytes, if not then check with string
+        if type(content) is bytes:
+            if b'Description: File type not supported' in content or \
+                    b'Description: Report not available' in content:
+                log.debug(content)
+                log.info("No report available")
+                return False
+        else:
+            if "Description: File type not supported" in content or \
+                    "Description: Report not available" in content:
+                log.debug(content)
+                return False
 
         with open(report_file.get("report_file"), 'wb') as f:
             f.write(response.content)
@@ -289,15 +295,20 @@ def get_atd_report(g, taskId, report_type, report_file):
     check_status_code(json_response)
     atd_logout(g.atd_url, headers, g.trust_cert)
 
-    # Convert content to bytes if needed
-    if type(json_response.content) is bytes:
-        json_byte_content = json_response.content
-    else:
-        json_byte_content = str.encode(json_response.content)
+    json_content = json_response.content
 
-    # Task does not have a report associated with it
-    if b'Description: File type not supported' in json_byte_content:
-        return False
+    # Check if task does not have a report associated with it
+    # Check for bytes, if not then check with string
+    if type(json_content) is bytes:
+        if b'Description: File type not supported' in json_content or \
+                b'Description: Report not available' in json_content:
+            log.debug(json_content)
+            return False
+    else:
+        if "Description: File type not supported" in json_content or \
+                "Description: Report not available" in json_content:
+            log.debug(json_content)
+            return False
 
     return json_response.json()
 
