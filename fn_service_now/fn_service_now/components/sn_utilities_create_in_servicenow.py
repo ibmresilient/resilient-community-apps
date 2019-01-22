@@ -7,7 +7,9 @@ import logging
 import json
 import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
+from fn_service_now.util.resilient_helper import ResilientHelper
+from fn_service_now.util.external_ticket_status_datatable import ExternalTicketStatusDatatable
+
 
 
 class FunctionPayload(object):
@@ -95,7 +97,6 @@ class FunctionComponent(ResilientComponent):
             # Generate the request_data
             request_data = res_helper.generate_sn_request_data(
                 res_client,
-                res_helper,
                 datatable,
                 payload.inputs["incident_id"],
                 res_helper.SN_TABLE_NAME,

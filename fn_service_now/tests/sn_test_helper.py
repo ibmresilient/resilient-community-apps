@@ -2,7 +2,8 @@ try:
     from unittest.mock import patch, Mock, MagicMock
 except:
     from mock import patch, Mock, MagicMock
-from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
+from fn_service_now.util.resilient_helper import ResilientHelper
+from fn_service_now.util.external_ticket_status_datatable import ExternalTicketStatusDatatable
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 from mock_data import task

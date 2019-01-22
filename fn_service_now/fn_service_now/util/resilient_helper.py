@@ -6,6 +6,35 @@ from bs4 import BeautifulSoup
 import requests
 
 
+# Define an Incident that gets sent to ServiceNow
+class Incident(object):
+    """Class that represents a Resilient Incident. See API notes for more"""
+    def __init__(self, incident_id, incident_name, incident_description):
+        self.type = "res_incident"
+        self.incident_id = incident_id
+        self.incident_name = incident_name
+        self.incident_description = incident_description
+
+    def as_dict(self):
+        """Returns this class object as a dictionary"""
+        return self.__dict__
+
+
+# Define a Task that gets sent to ServiceNow
+class Task(object):
+    """Class that represents a Resilient Task. See API notes for more"""
+    def __init__(self, incident_id, task_id, task_name, task_instructions):
+        self.type = "res_task"
+        self.incident_id = incident_id
+        self.task_id = task_id
+        self.task_name = task_name
+        self.task_instructions = task_instructions
+
+    def as_dict(self):
+        """Returns this class as a Dictionary"""
+        return self.__dict__
+
+
 class ResilientHelper(object):
     """A helper class for sn_utilities"""
     def __init__(self, app_configs):
@@ -53,30 +82,6 @@ class ResilientHelper(object):
             return the_input
 
     @staticmethod
-    def get_attachment(res_client, attachment_id, incident_id=None, task_id=None):
-        """Function that gets incident/task attachment"""
-        attachment = {"id": None, "name": None, "content_type": None, "contents": None}
-        meta_data_uri, contents_uri = None, None
-
-        if task_id:
-            meta_data_uri = "/tasks/{0}/attachments/{1}".format(task_id, attachment_id)
-            contents_uri = "/tasks/{0}/attachments/{1}/contents".format(task_id, attachment_id)
-        elif incident_id:
-            meta_data_uri = "/incidents/{0}/attachments/{1}".format(incident_id, attachment_id)
-            contents_uri = "/incidents/{0}/attachments/{1}/contents".format(incident_id, attachment_id)
-        else:
-            raise ValueError("Failed to get_attachment. task_id or incident_id must be specified with attachment_id")
-
-        meta_data = res_client.get(meta_data_uri)
-
-        attachment["content_type"] = meta_data["content_type"]
-        attachment["id"] = attachment_id
-        attachment["name"] = meta_data["name"]
-        attachment["contents"] = base64.b64encode(res_client.get_content(contents_uri))
-
-        return attachment
-
-    @staticmethod
     def generate_res_id(incident_id, task_id=None):
         """If incident_id and task_id are valid, returns "RES-1001-2002"
         Else if task_id is None, returns "RES-1001" """
@@ -107,12 +112,82 @@ class ResilientHelper(object):
         return uri
 
     @staticmethod
-    def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, res_link, task_id=None, init_note=None, sn_optional_fields=None):
+    def convert_text_to_richtext(text, color="green"):
+        """Converts text to richtext and adds a color"""
+
+        colors = {
+            "green": "#00b33c",
+            "orange": "#ff9900",
+            "yellow": "#e6e600",
+            "red": "#e60000"
+        }
+
+        color = colors.get(color)
+
+        return """<div style="color:{0}">{1}</div>""".format(color, text)
+
+    @staticmethod
+    def get_incident(client, incident_id):
+        """Function that gets the incident from Resilient"""
+        # Get the incident from resilient api
+        try:
+            incident = client.get("/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id))
+        except:
+            raise ValueError("incident_id {0} not found".format(incident_id))
+
+        return Incident(incident_id, incident["name"], incident["description"])
+
+    @staticmethod
+    def get_task(client, task_id, incident_id):
+        """Function that gets the task from Resilient. Gets the task's instructions too"""
+        # Get the task from resilient api
+        try:
+            task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
+        except:
+            raise ValueError("task_id {0} not found".format(task_id))
+
+        # Get the task_instructions in plaintext
+        try:
+            task_instructions = client.get_content("/tasks/{0}/instructions".format(task_id))
+            soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
+            soup = soup.get_text()
+            task_instructions = soup.replace(u'\xa0', u' ')
+        except:
+            raise ValueError("Error getting task instructions")
+
+        return Task(incident_id, task_id, task["name"], task_instructions)
+
+    @staticmethod
+    def get_attachment(res_client, attachment_id, incident_id=None, task_id=None):
+        """Function that gets incident/task attachment"""
+        attachment = {"id": None, "name": None, "content_type": None, "contents": None}
+        meta_data_uri, contents_uri = None, None
+
+        if task_id:
+            meta_data_uri = "/tasks/{0}/attachments/{1}".format(task_id, attachment_id)
+            contents_uri = "/tasks/{0}/attachments/{1}/contents".format(task_id, attachment_id)
+        elif incident_id:
+            meta_data_uri = "/incidents/{0}/attachments/{1}".format(incident_id, attachment_id)
+            contents_uri = "/incidents/{0}/attachments/{1}/contents".format(incident_id, attachment_id)
+        else:
+            raise ValueError("Failed to get_attachment. task_id or incident_id must be specified with attachment_id")
+
+        meta_data = res_client.get(meta_data_uri)
+
+        attachment["content_type"] = meta_data["content_type"]
+        attachment["id"] = attachment_id
+        attachment["name"] = meta_data["name"]
+        attachment["contents"] = base64.b64encode(res_client.get_content(contents_uri))
+
+        return attachment
+
+    @classmethod
+    def generate_sn_request_data(cls, res_client, res_datatable, incident_id, sn_table_name, res_link, task_id=None, init_note=None, sn_optional_fields=None):
         """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
         request_data = None
 
         # Generate the res_id
-        res_id = res_helper.generate_res_id(incident_id, task_id)
+        res_id = cls.generate_res_id(incident_id, task_id)
 
         # Check if already exists in data table
         sn_ref_id = res_datatable.get_sn_ref_id(res_id)
@@ -130,13 +205,13 @@ class ResilientHelper(object):
 
         if task_id is not None:
             # Get the task
-            task = res_helper.get_task(res_client, task_id, incident_id)
+            task = cls.get_task(res_client, task_id, incident_id)
 
             # Add task to the request_data
             request_data = task.as_dict()
 
         else:
-            incident = res_helper.get_incident(res_client, incident_id)
+            incident = cls.get_incident(res_client, incident_id)
 
             # Add incident to the request_data
             request_data = incident.as_dict()
@@ -158,20 +233,22 @@ class ResilientHelper(object):
 
         return request_data
 
-    @staticmethod
-    def convert_text_to_richtext(text, color="green"):
-        """Converts text to richtext and adds a color"""
+    def sn_GET(self, url, params=None, auth=None, headers=None):
+        """Method to handle a ServiceNow GET request"""
+        if headers is None:
+            headers = self.headers
 
-        colors = {
-            "green": "#00b33c",
-            "orange": "#ff9900",
-            "yellow": "#e6e600",
-            "red": "#e60000"
-        }
+        if auth is None:
+            auth = self.SN_AUTH
 
-        color = colors.get(color)
+        url = self.SN_API_URL + url
 
-        return """<div style="color:{0}">{1}</div>""".format(color, text)
+        try:
+            response = requests.get(url, auth=auth, headers=headers, params=params)
+        except Exception as err:
+            raise ValueError("ServiceNow GET failed. Check url, credentials and params.", err)
+
+        return response
 
     def sn_POST(self, url, data, auth=None, headers=None):
         """Function to handle POSTing to ServiceNow. If successful, returns the response as a Dictionary"""
@@ -207,178 +284,3 @@ class ResilientHelper(object):
             raise ValueError(err)
 
         return return_json
-
-    def sn_GET(self, url, params=None, auth=None, headers=None):
-        """Method to handle a ServiceNow GET request"""
-        if headers is None:
-            headers = self.headers
-
-        if auth is None:
-            auth = self.SN_AUTH
-
-        url = self.SN_API_URL + url
-
-        try:
-            response = requests.get(url, auth=auth, headers=headers, params=params)
-        except Exception as err:
-            raise ValueError("ServiceNow GET failed. Check url, credentials and params.", err)
-
-        return response
-
-    # Define a Task that gets sent to ServiceNow
-    class Task(object):
-        """Class that represents a Resilient Task. See API notes for more"""
-        def __init__(self, incident_id, task_id, task_name, task_instructions):
-            self.type = "res_task"
-            self.incident_id = incident_id
-            self.task_id = task_id
-            self.task_name = task_name
-            self.task_instructions = task_instructions
-
-        def as_dict(self):
-            """Returns this class as a Dictionary"""
-            return self.__dict__
-
-    def get_task(self, client, task_id, incident_id):
-        """Function that gets the task from Resilient. Gets the task's instructions too"""
-        # Get the task from resilient api
-        try:
-            task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
-        except:
-            raise ValueError("task_id {0} not found".format(task_id))
-
-        # Get the task_instructions in plaintext
-        try:
-            task_instructions = client.get_content("/tasks/{0}/instructions".format(task_id))
-            soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
-            soup = soup.get_text()
-            task_instructions = soup.replace(u'\xa0', u' ')
-        except:
-            raise ValueError("Error getting task instructions")
-
-        return self.Task(incident_id, task_id, task["name"], task_instructions)
-
-    # Define an Incident that gets sent to ServiceNow
-    class Incident(object):
-        """Class that represents a Resilient Incident. See API notes for more"""
-        def __init__(self, incident_id, incident_name, incident_description):
-            self.type = "res_incident"
-            self.incident_id = incident_id
-            self.incident_name = incident_name
-            self.incident_description = incident_description
-
-        def as_dict(self):
-            """Returns this class object as a dictionary"""
-            return self.__dict__
-
-    def get_incident(self, client, incident_id):
-        """Function that gets the incident from Resilient"""
-        # Get the incident from resilient api
-        try:
-            incident = client.get("/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id))
-        except:
-            raise ValueError("incident_id {0} not found".format(incident_id))
-
-        return self.Incident(incident_id, incident["name"], incident["description"])
-
-
-class ExternalTicketStatusDatatable(object):
-    """Class that handles the sn_external_ticket_status datatable"""
-    def __init__(self, res_client, incident_id):
-        self.res_client = res_client
-        self.incident_id = incident_id
-        self.api_name = "sn_external_ticket_status"
-        self.data = None
-        self.rows = None
-
-        self.get_data()
-
-    def as_dict(self):
-        """Returns this class object as a dictionary"""
-        return self.__dict__
-
-    def get_data(self):
-        """Gets that data and rows of the data table"""
-        uri = "/incidents/{0}/table_data/{1}?handle_format=names".format(self.incident_id, self.api_name)
-        try:
-            self.data = self.res_client.get(uri)
-            self.rows = self.data["rows"]
-        except Exception as err:
-            raise ValueError("Failed to get sn_external_ticket_status Datatable", err)
-
-    def get_row(self, cell_name, cell_value):
-        """Returns the row if found. Returns None if no matching row found"""
-        for row in self.rows:
-            cells = row["cells"]
-            if cells[cell_name] and cells[cell_name].get("value") and cells[cell_name].get("value") == cell_value:
-                return row
-        return None
-
-    def get_sn_ref_id(self, res_id):
-        """Returns the sn_ref_id that relates to the res_id"""
-        row = self.get_row("res_id", res_id)
-
-        if row is not None:
-            cells = row["cells"]
-            return str(cells["sn_ref_id"]["value"])
-
-        return None
-
-    def add_row(self, time, res_id, sn_ref_id, resilient_status, servicenow_status, link):
-        """Adds a new row to the data table and returns that row"""
-        # Generate uri to POST datatable row
-        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
-
-        cells = [
-            ("time", time),
-            ("res_id", res_id),
-            ("sn_ref_id", sn_ref_id),
-            ("resilient_status", resilient_status),
-            ("servicenow_status", servicenow_status),
-            ("link", link)
-        ]
-
-        formatted_cells = {}
-
-        # Format the cells
-        for cell in cells:
-            formatted_cells[cell[0]] = {"value": cell[1]}
-
-        formatted_cells = {
-            "cells": formatted_cells
-        }
-
-        return self.res_client.post(uri, formatted_cells)
-
-    def update_row(self, row, cells_to_update):
-        """Updates the row with the given cells_to_update and returns the updated row"""
-        # Generate uri to POST datatable row
-        uri = "/incidents/{0}/table_data/{1}/row_data/{2}?handle_format=names".format(self.incident_id, self.api_name, row["id"])
-
-        def get_value(cell_name):
-            """Gets the new or old value of the cell"""
-            if cell_name in cells_to_update:
-                return cells_to_update[cell_name]
-
-            return row["cells"][cell_name]["value"]
-
-        cells = [
-            ("time", get_value("time")),
-            ("res_id", get_value("res_id")),
-            ("sn_ref_id", get_value("sn_ref_id")),
-            ("resilient_status", get_value("resilient_status")),
-            ("servicenow_status", get_value("servicenow_status")),
-            ("link", get_value("link"))
-        ]
-
-        formatted_cells = {}
-
-        # Format the cells
-        for cell in cells:
-            formatted_cells[cell[0]] = {"value": cell[1]}
-
-        formatted_cells = {
-            "cells": formatted_cells
-        }
-
-        return self.res_client.put(uri, formatted_cells)
