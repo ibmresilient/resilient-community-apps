@@ -37,7 +37,7 @@ class TypeInfo:
 
     DATATABLE_TYPE_ID = 8
 
-    SELECT_INPUT_TYPES = ["select_owner", "select"]
+    SELECT_INPUT_TYPES = ["select_owner", "select_user", "select"]
     MULTISELECT_INPUT_TYPES = ["multiselect", "multiselect_members"]
     ALL_SELECT_INPUT_TYPES = SELECT_INPUT_TYPES + MULTISELECT_INPUT_TYPES
 
