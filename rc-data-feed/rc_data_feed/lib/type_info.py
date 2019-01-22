@@ -87,7 +87,7 @@ class TypeInfo:
 
         fields = self.rest_client.get("/types/{}/fields".format(self.type_id))
 
-        ActionMessageTypeInfo.fields_cache[self.type_id] = fields
+        TypeInfo.fields_cache[self.type_id] = fields
 
         return fields
 
