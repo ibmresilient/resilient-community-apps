@@ -1,3 +1,5 @@
+// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
 	//Declare global variables

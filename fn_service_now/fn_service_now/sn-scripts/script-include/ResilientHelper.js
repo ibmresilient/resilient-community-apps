@@ -1,3 +1,5 @@
+// (c) Copyright IBM Corp. 2019. All Rights Reserved.
+
 var JSON_PARSER = new global.JSON();
 
 var ResilientHelper = Class.create();
