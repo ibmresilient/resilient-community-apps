@@ -67,7 +67,7 @@ class WhiteListElement(object):
 
   def __repr__(self):
     """Method to return the text representation of the object."""
-    return "WhiteListElement(\"{0}\")".format(self.asString)
+    return u"WhiteListElement(\"{0}\")".format(self.asString)
 
   def test(self, other):
     """ A function intended to be inherited but overrided by subclasses. It should return True if the "other" object
@@ -86,7 +86,7 @@ class WhiteList(list):
     """
     for whiteListEntry in self:
       if whiteListEntry.test(anItem):
-        log.info("Filtering out {0} because it matched with whitelist entry {1}".format(anItem, self))
+        log.info(u"Filtering out {0} because it matched with whitelist entry {1}".format(anItem, self))
         return None
     return anItem
 
@@ -194,21 +194,21 @@ class Domain(WhiteListElement):
   def __init__(self, stringRepresentation):
     """ Constructor for the Domain class. This takes one parameter - the domain pattern as a String. """
     # Save the string representation in the superclass
-    super(Domain, self).__init__(stringRepresentation)    
-    self.processedRegEx = "://{0}.*".format(stringRepresentation.replace(".","\.").replace("*", ".*"))
+    super(Domain, self).__init__(unicode(stringRepresentation)) 
+    self.processedRegEx = u"://{0}.*".format(stringRepresentation.replace(".","\.").replace("*", ".*"))
 
   def test(self, urlString):
     """ A method that returns true if the value passed in urlString matches the regex in self.processedRegEx. """
-    matches = re.findall(self.processedRegEx, urlString, re.IGNORECASE)
+    matches = re.findall(self.processedRegEx, urlString, re.IGNORECASE | re.UNICODE)
     return (matches != None) and (len(matches) > 0)
 
   def __str__(self):
     """Method to return the text representation of the object."""
-    return "{0}".format(self.asString)
+    return u"{0}".format(self.asString)
 
   def __repr__(self):
     """Method to return the text representation of the object."""
-    return "Domain(\"{0}\")".format(self.asString)
+    return u"Domain(\"{0}\")".format(self.asString)
 
 
 class EmailProcessor(object):
@@ -273,11 +273,11 @@ class EmailProcessor(object):
     """The EmailProcessor constructor.
     It takes as its only parameter the body text of email message, expected to be a string.
     """
-    self.bodyText = newBodyText
+    self.bodyText = unicode(newBodyText)
 
   def addUniqueArtifact(self, theArtifact, artifactType, description):
     """This method adds a new unique artifact to the incident. Previously added artifacts are added to the 
-    "addedArtifacts" set. If the new artifact as already been added to the list then it is not added to the 
+    "addedArtifacts" set. If the new artifact has already been added to the list then it is not added to the 
     incident a second time.
     Parameter "theArtifact" - the value of the artifact to create.
     Parameter "artifactType" - the type of the artifact.
@@ -300,7 +300,7 @@ class EmailProcessor(object):
     No return value.
     """
     for num, value in enumerate(list):
-      log.debug("{0} {1} {2}".format(name, num, value))  
+      log.debug(u"{0} {1} {2}".format(name, num, value))  
 
   @staticmethod
   def makeUrlPattern(scheme = "http"):
@@ -402,29 +402,29 @@ class EmailProcessor(object):
     No return value.
     """
     if self.bodyText is None:
-      log.debug("Body is empty so not able to find artifact {0} for regex {1}".format(artifactType,regex))
+      log.debug(u"Body is empty so not able to find artifact {0} for regex {1}".format(artifactType,regex))
     else:
-      dataList = set(re.findall(regex, self.bodyText))
+      dataList = re.findall(regex, self.bodyText, re.UNICODE)
       if dataList is not None and len(dataList) > 0 :
         if optionalListModifierFn is not None:
           for aFunction in optionalListModifierFn:
             dataList = map(aFunction, dataList)
             dataList = [x for x in dataList if x is not None]
 
-        self.printList("Found {0} ( {1} )".format(artifactType,description), dataList)
+        self.printList(u"Found {0} ( {1} )".format(artifactType,description), dataList)
         map(lambda theArtifact: self.addUniqueArtifact(theArtifact, artifactType, description), dataList)
       else:
-        log.debug("Could not find artifact {0} for regex {1}".format(artifactType,regex))
+        log.debug(u"Could not find artifact {0} for regex {1}".format(artifactType,regex))
 
   def checkIPWhiteList(self, anAddress):
     """ A method to check a list of IP Addresses aginst the whitelist. """
     whiteList = self.ipV4WhiteList if "." in anAddress.addressAsString else self.ipV6WhiteList
-    log.debug("Going to filter {0} against whitelist {1}".format(anAddress, whiteList))
+    log.debug(u"Going to filter {0} against whitelist {1}".format(anAddress, whiteList))
     return whiteList.checkIsItemNotOnWhiteList(anAddress)
 
   def checkDomainWhiteList(self, aURL):
     """ A method to check a list of URLs aginst a whitelist. """
-    log.debug("Going to filter {0} against whitelist {1}".format(aURL, self.domainWhiteList))
+    log.debug(u"Going to filter {0} against whitelist {1}".format(aURL, self.domainWhiteList))
     return self.domainWhiteList.checkIsItemNotOnWhiteList(aURL)
 
   def processIPFully(self, theAddressAsString):

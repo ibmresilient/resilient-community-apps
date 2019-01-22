@@ -170,12 +170,14 @@ if not emailmessage.body.content is None:
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script expects this to have been done already.
 
 ### Campaign identifier
-Scenario: You want to collect email messages related to the same campaign of attack to a single incident.
+Scenario: Email message subject alone is not enough to collect releated emails into one incident.
+It may be that the email message subject is not specific or reliable enough to use as the way to collect related emails. In particular, there may be an attack taking place where multiple attack vectors are being employed in a single campaign, which may result in many different kinds of email messages being received for this one campaign.
+One solution to the problem is to create a new field in an incident to contain a campaign identifer. This identifier could be either derived from the email message contents, or chosen from a hard-coded list when the campaign is recognised by the parsing script.
 
 A solution:
-1. Create a new incident custom field for the campaign signifier of type Text.
-2. Copy the generic parsing script into a new script, where this script is used for the category of email messages in question.
-3. Modify the mainline of the new script to create a value for the campaign signfier.
-4. Use the signifier field for the incident search criteria instead of the incident title.
-5. For new incidents, set the campaign signifier field to be the signifier value.
+1. Create a new incident custom field for the campaign identifier of type Text.
+2. Copy the generic parsing script into a new script.
+3. Modify the new script to create a value for the campaign identifier either by selecting some text from the email message contents, or selecting from a hard-coded list of campaign identifiers if certain criteria are met.
+4. When searching for an existing incident to associate the email message with, search for incidents whose campaign identifier field is the same as the campaign identifier value for the email message. This would replace the search based on email message subject.
+5. No no suitable incident is found, create a new incident and set its campaign identifier field to be the campaign identifier value.
 6. Modify the rules so that the new script runs instead of the generic script.
