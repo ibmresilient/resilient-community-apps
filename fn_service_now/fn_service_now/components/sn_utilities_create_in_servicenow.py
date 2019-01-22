@@ -1,33 +1,32 @@
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import json
 import time
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper, ExternalTicketStatusDatatable
 
-class FunctionPayload:
-  """Class that contains the payload sent back to UI and available in the post-processing script"""
-  def __init__(self, inputs):
-    self.success = True
-    self.inputs = {}
-    self.row_id = None            # The row_id of the row created in Datatable
-    self.res_id = None            # RES-<incId>-<taskId>
-    self.res_link = None          # Link to res incident/task
-    self.sn_ref_id = None         # Local (to its table) unique id of ServiceNow record 
-    self.sn_sys_id = None         # Global unique id of ServiceNow record
-    self.sn_record_link = None    # Link to ServiceNow record
-    self.sn_time_created = None   # Timestamp from Resilient Integration server when record was created
 
-    for input in inputs:
-      self.inputs[input] = inputs[input]
-  
-  def asDict(self):
-    """Return this class as a Dictionary"""
-    return self.__dict__
+class FunctionPayload(object):
+    """Class that contains the payload sent back to UI and available in the post-processing script"""
+    def __init__(self, inputs):
+        self.success = True
+        self.inputs = inputs
+        self.row_id = None            # The row_id of the row created in Datatable
+        self.res_id = None            # RES-<incId>-<taskId>
+        self.res_link = None          # Link to res incident/task
+        self.sn_ref_id = None         # Local (to its table) unique id of ServiceNow record
+        self.sn_sys_id = None         # Global unique id of ServiceNow record
+        self.sn_record_link = None    # Link to ServiceNow record
+        self.sn_time_created = None   # Timestamp from Resilient Integration server when record was created
+
+    def as_dict(self):
+        """Return this class as a Dictionary"""
+        return self.__dict__
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'sn_utilities_create_in_servicenow"""
@@ -50,76 +49,35 @@ class FunctionComponent(ResilientComponent):
         """Function: A function that sends Task or Incident information to a custom endpoint in ServiceNow in order to create an associated ServiceNow record"""
 
         log = logging.getLogger(__name__)
-        
+
         # Convert unicode dict to str dict
         def _byteify(data):
-          if isinstance(data, unicode):
-            return data.encode("utf-8")
-          
-          if isinstance(data, dict):
-            return { _byteify(key): _byteify(value) for key, value in data.items() }
+            if isinstance(data, unicode):
+                return data.encode("utf-8")
 
-        def generate_sn_request_data(res_client, res_helper, res_datatable, incident_id, sn_table_name, res_link, task_id=None, init_note=None, sn_optional_fields=None):
-          """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
-          request_data = None
+            elif isinstance(data, dict):
+                return {_byteify(key): _byteify(value) for key, value in data.items()}
 
-          # Generate the res_id
-          res_id = res_helper.generate_res_id(incident_id, task_id)
-
-          # Get the datatable data and rows
-          sn_ref_id = res_datatable.get_sn_ref_id(res_id)
-
-          if sn_ref_id is not None:
-            raise ValueError("This item is already exists in the ServiceNow as it is in the Datatable")
-
-          if task_id is not None:
-            # Get the task
-            task = res_helper.get_task(res_client, task_id, incident_id)
-          
-            # Add task to the request_data
-            request_data = task.asDict()
-          
-          else:
-            incident = res_helper.get_incident(res_client, incident_id)
-
-            # Add incident to the request_data
-            request_data = incident.asDict()
-
-          # Add sn_table_name, resilient_id, link and init_note to the request_data
-          request_data["sn_table_name"] = sn_table_name
-          request_data["id"] = res_id
-          request_data["link"] = res_link
-          request_data["sn_init_work_note"] = init_note
-
-          # Extend request_data if there is data in 'sn_optional_fields'
-          if sn_optional_fields is not None and len(sn_optional_fields) > 0:
-            fields = []
-            for field in sn_optional_fields:
-              fields.append({"name": field, "value": sn_optional_fields[field]})
-            request_data["sn_optional_fields"] = fields
-          else:
-            request_data["sn_optional_fields"] = None
-          
-          return request_data
+            return None
 
         try:
             # Instansiate helper (which gets appconfigs from file)
             res_helper = ResilientHelper(self.options)
-            
+
             # Get the function inputs:
             inputs = {
-              "incident_id": res_helper.get_function_input(kwargs, "incident_id"), # number (required)
-              "task_id": res_helper.get_function_input(kwargs, "task_id", True), # number
-              "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True), # text
-              "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True) # text, JSON String
+                "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
+                "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
+                "sn_init_work_note": res_helper.get_function_input(kwargs, "sn_init_work_note", True),  # text (optional)
+                "sn_optional_fields": res_helper.get_function_input(kwargs, "sn_optional_fields", True)  # text, JSON String (optional)
             }
 
             # Convert 'sn_optional_fields' JSON string to Dictionary
             try:
-              inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=_byteify)
-            except Exception as e:
-              raise ValueError("sn_optional_fields JSON String is invalid")
-            
+                inputs["sn_optional_fields"] = json.loads(inputs["sn_optional_fields"], object_hook=_byteify)
+            except Exception:
+                raise ValueError("sn_optional_fields JSON String is invalid")
+
             # Create payload dict with inputs
             payload = FunctionPayload(inputs)
 
@@ -127,7 +85,7 @@ class FunctionComponent(ResilientComponent):
 
             # Instansiate new Resilient API object
             res_client = self.rest_client()
-            
+
             # Instansiate a reference to the ServiceNow Datatable
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
 
@@ -135,13 +93,16 @@ class FunctionComponent(ResilientComponent):
             payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
 
             # Generate the request_data
-            request_data = generate_sn_request_data(res_client, res_helper, datatable,
-                                                payload.inputs["incident_id"],
-                                                res_helper.SN_TABLE_NAME,
-                                                payload.res_link,
-                                                payload.inputs["task_id"],
-                                                payload.inputs["sn_init_work_note"],
-                                                payload.inputs["sn_optional_fields"])
+            request_data = res_helper.generate_sn_request_data(
+                res_client,
+                res_helper,
+                datatable,
+                payload.inputs["incident_id"],
+                res_helper.SN_TABLE_NAME,
+                payload.res_link,
+                payload.inputs["task_id"],
+                payload.inputs["sn_init_work_note"],
+                payload.inputs["sn_optional_fields"])
 
             yield StatusMessage("Creating a new record in ServiceNow")
             # Call POST and get response
@@ -149,39 +110,39 @@ class FunctionComponent(ResilientComponent):
 
             if create_in_sn_response is not None:
 
-              yield StatusMessage("Record Created")
-              
-              # Get current time (*1000 as API does not accept int)
-              now = int(time.time()*1000)
+                yield StatusMessage("Record Created")
 
-              # Add values to payload
-              payload.res_id = create_in_sn_response["res_id"]
-              payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
-              payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
-              payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
-              payload.sn_time_created = now
+                # Get current time (*1000 as API does not accept int)
+                now = int(time.time() * 1000)
 
-              try:
-                yield StatusMessage("Updating Datatable")
-                # Add row to the datatable
-                add_row_response = datatable.add_row(
-                  payload.sn_time_created,
-                  payload.res_id,
-                  payload.sn_ref_id,
-                  res_helper.convert_text_to_richtext("Active"),
-                  res_helper.convert_text_to_richtext("Sent to ServiceNow"),
-                  """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link)
-                )
-                payload.row_id = add_row_response["id"]
+                # Add values to payload
+                payload.res_id = create_in_sn_response["res_id"]
+                payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
+                payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
+                payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
+                payload.sn_time_created = now
 
-              except Exception as e:
-                payload.success = False
-                raise ValueError("Failed to add row to datatable {0}".format(e))
+                try:
+                    yield StatusMessage("Updating Datatable")
+                    # Add row to the datatable
+                    add_row_response = datatable.add_row(
+                        payload.sn_time_created,
+                        payload.res_id,
+                        payload.sn_ref_id,
+                        res_helper.convert_text_to_richtext("Active"),
+                        res_helper.convert_text_to_richtext("Sent to ServiceNow"),
+                        """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
+
+                    payload.row_id = add_row_response["id"]
+
+                except Exception as err_msg:
+                    payload.success = False
+                    raise ValueError("Failed to add row to datatable {0}".format(err_msg))
 
             else:
-              payload.success = False
+                payload.success = False
 
-            results = payload.asDict()
+            results = payload.as_dict()
 
             log.info("Complete")
 

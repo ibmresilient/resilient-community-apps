@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -8,9 +9,10 @@ import logging
 import json
 from fn_service_now.util.resilient_helper import ResilientHelper
 
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
+LOG.addHandler(logging.StreamHandler())
+
 
 def selftest_function(opts):
     """
@@ -18,49 +20,64 @@ def selftest_function(opts):
     To try and get a status_code=200, else its a failure
     """
     options = opts.get("fn_service_now", {})
-    
+
     res_helper = ResilientHelper(options)
 
     try:
-        
-      res = res_helper.sn_GET('/test_connection')
 
-      status_code = res.status_code
+        res = res_helper.sn_GET('/test_connection')
 
-      if status_code == 200:
-        return {"state": "success"}
+        status_code = res.status_code
 
-      else:
+        LOG.error(status_code)
 
-        if res is not None and res.content is not None:
-          response_result = json.loads(res.content)
-          err_msg = response_result["error"]["message"]
-          err_detail = response_result["error"]["detail"]
+        if status_code == 200:
+            return {"state": "success"}
 
         else:
-          err_msg = "Could not connect to ServiceNow"
-          err_detail = "Unknown"
 
-        reason_msg = """Could not connect to ServiceNow.
-        status_code: {0}
-        reason: {1}
-        detail: {2}
-        ---------
-        Configs::
-        ---------
-        sn_host: {3}
-        sn_username: {4}\n""".format(status_code, err_msg, err_detail, res_helper.SN_HOST, res_helper.SN_USERNAME)
+            if res is not None and res.content is not None:
+                response_result = json.loads(res.content)
+                err_msg = response_result["error"]["message"]
+                err_detail = response_result["error"]["detail"]
 
-        log and log.error(reason_msg)
+            else:
+                err_msg = "Could not connect to ServiceNow"
+                err_detail = "Unknown"
+
+            err_reason_msg = """Could not connect to ServiceNow.
+            status_code: {0}
+            reason: {1}
+            detail: {2}
+            ---------
+            Current Configs in app.config file::
+            ---------
+            sn_host: {3}
+            sn_username: {4}
+            sn_table_name: {5}
+            sn_api_uri: {6}\n""".format(status_code, err_msg, err_detail, res_helper.SN_HOST, res_helper.SN_USERNAME, res_helper.SN_TABLE_NAME, res_helper.SN_API_URI)
+
+            LOG.error(err_reason_msg)
+
+            return {
+                "state": "failure",
+                "reason": err_reason_msg
+            }
+
+    except Exception as err:
+        err_reason_msg = """Could not connect to ServiceNow.
+            error: {0}
+            ---------
+            Current Configs in app.config file::
+            ---------
+            sn_host: {1}
+            sn_username: {2}
+            sn_table_name: {3}
+            sn_api_uri: {4}\n""".format(err, res_helper.SN_HOST, res_helper.SN_USERNAME, res_helper.SN_TABLE_NAME, res_helper.SN_API_URI)
+
+        LOG.error(err_reason_msg)
 
         return {
-          "state": "failure",
-          "reason": reason_msg
+            "state": "failure",
+            "reason": err_reason_msg
         }
-
-    except Exception as e:
-      log and log.error(e)
-      return {
-        "state": "failure",
-        "reason": e
-      }

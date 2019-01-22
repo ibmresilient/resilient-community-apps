@@ -249,7 +249,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
 | record | GlideRecord | The current ServiceNow record |
 | snRecordId | String | Is the ID of the record, unique to its table. E.g. 'INC123456' |
 | caseName | String | The name of the Incident/Task to create in IBM Resilient |
-| options | Object | There are 3 valid options that are all optional: `incidentId`: a String, if defined will create a Task in Resilient. `initSnNote`: a String, if defined will add it as a Work Note to the record. `optionalFields`: an Object, if defined will take each key/value pair and will set those fields in Resilient when creating the Incident/Task |
+| options | Object | There are 3 valid options that are all optional: `incidentId`: a String, if defined will create a Task in Resilient. `initSnNote`: a String, if defined will add it as a Work Note to the ServiceNow record. `optionalFields`: an Object, if defined will take each key/value pair and will set those fields in Resilient when creating the Incident/Task |
 
 
 #### Return:
