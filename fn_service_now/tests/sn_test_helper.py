@@ -23,18 +23,20 @@ def mock_pre_scrip_dict_to_json_str(d):
      Supports nested directories.
      If the value is None, it sets it to False"""
 
-  json_str = '"{ {0} }"'
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
   entries = [] 
-  
+
   for entry in d:
     key = entry
     value = d[entry]
-    
+
     if value is None:
       value = False
-      
+
+    if isinstance(value, list):
+      raise ValueError('dict_to_json_str does not support Python Lists')
+
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
@@ -42,14 +44,14 @@ def mock_pre_scrip_dict_to_json_str(d):
     elif isinstance(value, bool):
       value = 'true' if value == True else 'false'
       entries.append(json_entry.format(key, value))
-    
+
     elif isinstance(value, dict):
       entries.append(json_entry.format(key, mock_pre_scrip_dict_to_json_str(value)))
-    
+
     else:
       entries.append(json_entry.format(key, value))
-  
-  return '{' + ','.join(entries) + '}'
+
+  return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
 # Convert unicode dict to str dict
 def mock_byteify(data):
@@ -99,6 +101,25 @@ class SNResilientMock(BasicResilientMock):
         "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
         "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
         "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+      }
+    ]
+
+    updated_datatable_rows = [
+        {
+            "time": 1543333316605,
+            "res_id": "RES-1001-2002",
+            "sn_ref_id": "INC123456",
+            "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+            "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+        },
+        {
+            "time": 1543333316605,
+            "res_id": "RES-1001",
+            "sn_ref_id": "INC123457",
+            "resilient_status": """<div style="color: rgb(0,179,60);">Closed</div>""",
+            "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 
@@ -165,6 +186,16 @@ class SNResilientMock(BasicResilientMock):
         """ GET sn_external_ticket_status datatable """
 
         data = {"rows": SNResilientMock.get_datatable_rows(self.datatable_rows)}
+
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             content=json.dumps(data))
+
+    @resilient_endpoint("PUT", "/incidents/[0-9]+/table_data/sn_external_ticket_status/row_data/[0-9]+\?handle_format=names")
+    def datatable_incident_put(self, request):
+        """ PUT sn_external_ticket_status datatable """
+
+        data = SNResilientMock.get_datatable_rows(self.updated_datatable_rows)[0]
 
         return requests_mock.create_response(request,
                                              status_code=200,

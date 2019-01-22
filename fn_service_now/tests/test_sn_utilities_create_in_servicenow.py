@@ -61,7 +61,7 @@ class TestSnUtilitiesCreateInServicenow:
     def test_success(self, circuits_app, inputs, expected_results, request):
         """ Test calling with sample values for the parameters """
 
-        res_host = request.config.getoption("--resilient_host")        
+        res_host = request.config.getoption("--resilient_host")
         expected_results["res_link"] = expected_results["res_link"].replace("{***}", res_host)
 
         mock_post_response = {
