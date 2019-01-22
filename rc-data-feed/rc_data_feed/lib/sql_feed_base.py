@@ -92,8 +92,6 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 # Add the column for the field if it hasn't been already.
                 #
                 if field_name not in self.created_tables[type_name]:
-                    LOG.info('Adding field %s to table %s', field_name, type_name)
-
                     self._add_field_to_table(cursor, type_name, field)
 
                     # remember that we've added the field.
@@ -106,13 +104,16 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             raise db_exception
 
     def _add_field_to_table(self, cursor, type_name, field):
-        LOG.debug("adding field to table; field is %s", json.dumps(field, indent=2))
+        input_type = field['input_type']
+        field_name = field['name']
+
+        LOG.debug("adding field to table; type=%s; field=%s; type=%s", type_name, field_name, input_type)
 
         try:
-            column_type = self.dialect.get_column_type(field['input_type'])
+            column_type = self.dialect.get_column_type(input_type)
 
             ddl = self.dialect.get_add_column_to_table(type_name,
-                                                       field['name'],
+                                                       field_name,
                                                        column_type)
 
             self._execute_sql(cursor, ddl)
