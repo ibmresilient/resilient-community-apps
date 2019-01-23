@@ -9,7 +9,7 @@
   - [Rules](#rules)
 ---
 
-**This package contains a function that can that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
+**This package contains a function that executes a Joe Sandbox Analysis of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
 
  ![screenshot](./screenshots/1.png)
 
