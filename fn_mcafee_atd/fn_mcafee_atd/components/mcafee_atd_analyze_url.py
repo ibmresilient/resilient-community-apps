@@ -90,7 +90,6 @@ class FunctionComponent(ResilientComponent):
                     check_timeout(start, self.polling_interval, timeout_seconds)
 
                 task_id_list = get_task_id_list(self, atd_job_id)
-                # for task_id in task_id_list:
                 task_id = task_id_list[-1]
                 try:
                     while check_task_status(self, task_id) is False:

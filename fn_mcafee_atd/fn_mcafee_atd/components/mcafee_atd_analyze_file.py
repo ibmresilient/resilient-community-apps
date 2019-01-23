@@ -128,13 +128,11 @@ class FunctionComponent(ResilientComponent):
                 task_id_list = get_task_id_list(self, atd_job_id)
                 log.debug(task_id_list)
                 task_id = task_id_list[-1]
-                # for task_id in task_id_list:
                 try:
                     while check_task_status(self, task_id) is False:
                         check_timeout(start, self.polling_interval, timeout_seconds)
                 except ValueError:
                     log.info("ATD analysis probably failed, please check ATD system.")
-#                        raise FunctionError()
 
             except ValueError:
                 yield StatusMessage("ATD analysis probably failed, please check ATD system.")

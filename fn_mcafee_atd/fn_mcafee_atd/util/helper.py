@@ -274,7 +274,7 @@ def get_atd_report(g, taskId, report_type, report_file):
 
         # Check if task does not have a report associated with it
         # Check for bytes, if not then check with string
-        if type(content) is bytes:
+        if isinstance(content, bytes):
             if b'Description: File type not supported' in content or \
                     b'Description: Report not available' in content:
                 log.debug(content)
@@ -299,7 +299,7 @@ def get_atd_report(g, taskId, report_type, report_file):
 
     # Check if task does not have a report associated with it
     # Check for bytes, if not then check with string
-    if type(json_content) is bytes:
+    if isinstance(json_content, bytes):
         if b'Description: File type not supported' in json_content or \
                 b'Description: Report not available' in json_content:
             log.debug(json_content)
