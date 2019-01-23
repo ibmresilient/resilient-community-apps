@@ -34,15 +34,15 @@ After installing, the Resilient platform has a new Python script called "Generic
 
 ## Configuration
 ### The incident owner
-New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 507 of the script:
+New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin@co3sys.com. This should be changed to reflect your Resilient platform. For example, to change the owner to l1@businessname.com, locate line 477 of the script:
 
 ```python
-# The new incident owner
+# The new incident owner, the email address of a user or the name of a group. Change this value to reflect who will be the owner of the incident.
 newIncidentOwner = "admin@co3sys.com"
 ```
 Edit the line:
 ```python
-# The new incident owner
+# The new incident owner, the email address of a user or the name of a group. Change this value to reflect who will be the owner of the incident.
 newIncidentOwner = "l1@businessname.com"
 ```
 
@@ -179,5 +179,5 @@ A solution:
 2. Copy the generic parsing script into a new script.
 3. Modify the new script to create a value for the campaign identifier either by selecting some text from the email message contents, or selecting from a hard-coded list of campaign identifiers if certain criteria are met.
 4. When searching for an existing incident to associate the email message with, search for incidents whose campaign identifier field is the same as the campaign identifier value for the email message. This would replace the search based on email message subject.
-5. No no suitable incident is found, create a new incident and set its campaign identifier field to be the campaign identifier value.
+5. If no suitable incident is found, create a new incident and set its campaign identifier field to be the campaign identifier value.
 6. Modify the rules so that the new script runs instead of the generic script.

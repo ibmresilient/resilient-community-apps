@@ -82,7 +82,7 @@ class WhiteList(list):
   def checkIsItemNotOnWhiteList(self, anItem):
     """ A method that checks if an item should be removed from the artifact list because if matches a whitelist element.
     Parameter "anItem" - the item in question.
-    Return value: True if the item should be kept, false if it should be removed.
+    Return value: The item if it should be kept, None if it should be removed.
     """
     for whiteListEntry in self:
       if whiteListEntry.test(anItem):
@@ -473,7 +473,7 @@ class EmailProcessor(object):
 # Create the email processor object, loading it with the email message body content.
 processor = EmailProcessor(emailmessage.body.content)
 
-# The new incident owner
+# The new incident owner, the email address of a user or the name of a group. Change this value to reflect who will be the owner of the incident.
 newIncidentOwner = "admin@co3sys.com"
 
 # Create a suitable title for an incident based on the email
