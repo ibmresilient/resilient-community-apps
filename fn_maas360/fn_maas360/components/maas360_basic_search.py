@@ -7,11 +7,10 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_maas360.lib.maas360_common import Maas360Utils
+from fn_maas360.lib.maas360_common import MaaS360Utils
 from resilient_lib.components.function_result import ResultPayload
 from resilient_lib.components.resilient_common import validate_fields
 from resilient_lib.components.requests_common import RequestsCommon
-import json
 
 CONFIG_DATA_SECTION = 'fn_maas360'
 LOG = logging.getLogger(__name__)
@@ -42,7 +41,7 @@ class FunctionComponent(ResilientComponent):
                 &imeiMeid=99000032580168&pageSize=250&sortAttribute=lastReported&sortOrder=dsc
                 &partialUsername=dlind&platformName=Android&email=TEST%40EXAMPLE.COM&match=0
 
-        The Maas360 Basic Search (v2) will return a result in JSON format with an entry consisting of key value pairs.
+        The MaaS360 Basic Search (v2) will return a result in JSON format with an entry consisting of key value pairs.
 
             1 result
 
@@ -55,7 +54,7 @@ class FunctionComponent(ResilientComponent):
                         "deviceType": "Smartphone",
                         "lastReported": "2011-05-09T17:13:15",
                         "deviceStatus": "Active",
-                        ...}
+                        ...},
                     "count": 1,
                     "pageNumber": 1,
                     "pageSize": 1
@@ -81,7 +80,7 @@ class FunctionComponent(ResilientComponent):
                             "deviceType": "Smartphone",
                             "lastReported": "2011-05-09T17:13:15",
                             "deviceStatus": "Active",
-                        ...}]
+                        ...}],
                     "count": 2,
                     "pageNumber": 1,
                     "pageSize": 1
@@ -119,8 +118,8 @@ class FunctionComponent(ResilientComponent):
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
-            validate_fields(['maas360_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-                             'maas360_app_version', 'maas360_app_access_key', 'maas360_username',
+            validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
+                             'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
                              'maas360_password', 'maas360_basic_search_url', 'maas360_basic_search_page_size'],
                             self.options)
 
@@ -151,12 +150,12 @@ class FunctionComponent(ResilientComponent):
             add_to_dict("platformName", platform_name, query_string)
             add_to_dict("email", email, query_string)
 
-            # At least one of the search parameters should be set, otherwise we can query the whole Maas360 database.
+            # At least one of the search parameters should be set, otherwise we can query the whole MaaS360 database.
             if not query_string:
-                raise FunctionError(u"At least one of input function fields needs to be set for Maas360 Basic Search.")
+                raise FunctionError(u"At least one of input function fields needs to be set for MaaS360 Basic Search.")
 
             # Read configuration settings:
-            maas360_url = self.options["maas360_url"]
+            host_url = self.options["maas360_host_url"]
             billing_id = self.options["maas360_billing_id"]
             platform_id = self.options["maas360_platform_id"]
             app_id = self.options["maas360_app_id"]
@@ -164,6 +163,7 @@ class FunctionComponent(ResilientComponent):
             app_access_key = self.options["maas360_app_access_key"]
             username = self.options["maas360_username"]
             password = self.options["maas360_password"]
+            auth_url = self.options["maas360_auth_url"]
 
             basic_search_url = self.options["maas360_basic_search_url"]
             match = self.options.get("maas360_basic_search_match")
@@ -182,10 +182,10 @@ class FunctionComponent(ResilientComponent):
             # Make URL request
             rc = RequestsCommon(self.opts, self.options)
 
-            maas360_utils = Maas360Utils(maas360_url, billing_id, username, password, app_id, app_version, platform_id,
-                                         app_access_key, rc)
+            maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
+                                         app_access_key, auth_url, rc)
 
-            count, devices = maas360_utils.get_devices(basic_search_url, query_string, LOG)
+            count, devices = maas360_utils.get_devices(basic_search_url, query_string)
             if not count:
                 yield StatusMessage("No devices were found")
             else:
