@@ -29,3 +29,77 @@ To package for distribution,
 The resulting .tar.gz file can be installed using
 
     pip install <filename>.tar.gz
+    
+Basic Search JSON Results
+```
+{
+  "inputs": {
+    "maas360_platform_name": null, 
+    "maas360_device_id": null, 
+    "maas360_partial_device_name": "Colin's iPhone", 
+    "maas360_partial_username": null, 
+    "maas360_email": null, 
+    "maas360_imei_meid": null, 
+    "maas360_partial_phone_no": null
+  }, 
+  "metrics": {
+    "package": "fn-maas360", 
+    "timestamp": "2019-01-24 14:47:12", 
+    "package_version": "1.0.0", 
+    "host": "tarmaras-mbp.cambridge.ibm.com", 
+    "version": "1.0", 
+    "execution_time_ms": 762
+  }, 
+  "success": true, 
+  "content": {
+    "device": {
+      "deviceName": "Colin's iPhone", 
+      "deviceStatus": "Active", 
+      "mdmMailboxDeviceId": "86A64L79KP4BF9C2Q9IIJ9U15S", 
+      "mailboxManaged": "", 
+      "policyComplianceState": "In Compliance", 
+      "appComplianceState": "In Compliance", 
+      "unifiedTravelerDeviceId": "86A64L79KP4BF9C2Q9IIJ9U15S", 
+      "mailboxLastReportedInEpochms": "", 
+      "imeiEsn": 359161076062584, 
+      "phoneNumber": "+16104571838", 
+      "isSupervisedDevice": false, 
+      "maas360ManagedStatus": "Enrolled", 
+      "deviceType": "Smartphone", 
+      "customAssetNumber": "", 
+      "platformName": "iOS", 
+      "username": "sean.gordon@ibm.com", 
+      "passcodeCompliance": "Compliant", 
+      "ruleComplianceState": "", 
+      "sourceID": 1, 
+      "jailbreakStatus": "No", 
+      "maas360DeviceID": "ApplC7CSG5PBHG75", 
+      "emailAddress": "sean.gordon@ibm.com", 
+      "lastReported": "2019-01-15T18:32:44", 
+      "ownership": "Employee Owned", 
+      "encryptionStatus": "Block-level & File-level", 
+      "manufacturer": "Apple", 
+      "testDevice": false, 
+      "lastReportedInEpochms": 1547577164605, 
+      "userDomain": "ibmemm.edu", 
+      "udid": "d5cc416776d033d2f8357c503de4911c8a7d1030", 
+      "osServicePack": "", 
+      "mailboxDeviceId": "", 
+      "deviceOwner": "", 
+      "osName": "iOS 12", 
+      "installedDateInEpochms": 1541452720215, 
+      "mailboxLastReported": "", 
+      "selectiveWipeStatus": "N/a", 
+      "model": "iPhone 7", 
+      "wifiMacAddress": "20:ab:37:3a:5f:84", 
+      "installedDate": "2018-11-05T21:18:40"
+    }, 
+    "count": 1, 
+    "pageNumber": 1, 
+    "pageSize": 1
+  }, 
+  "raw": "{\"device\": {\"deviceName\": \"Colin's iPhone\", \"deviceStatus\": \"Active\", \"mdmMailboxDeviceId\": \"86A64L79KP4BF9C2Q9IIJ9U15S\", \"mailboxManaged\": \"\", \"policyComplianceState\": \"In Compliance\", \"appComplianceState\": \"In Compliance\", \"unifiedTravelerDeviceId\": \"86A64L79KP4BF9C2Q9IIJ9U15S\", \"mailboxLastReportedInEpochms\": \"\", \"imeiEsn\": 359161076062584, \"phoneNumber\": \"+16104571838\", \"isSupervisedDevice\": false, \"maas360ManagedStatus\": \"Enrolled\", \"deviceType\": \"Smartphone\", \"customAssetNumber\": \"\", \"platformName\": \"iOS\", \"username\": \"sean.gordon@ibm.com\", \"passcodeCompliance\": \"Compliant\", \"ruleComplianceState\": \"\", \"sourceID\": 1, \"jailbreakStatus\": \"No\", \"maas360DeviceID\": \"ApplC7CSG5PBHG75\", \"emailAddress\": \"sean.gordon@ibm.com\", \"lastReported\": \"2019-01-15T18:32:44\", \"ownership\": \"Employee Owned\", \"encryptionStatus\": \"Block-level & File-level\", \"manufacturer\": \"Apple\", \"testDevice\": false, \"lastReportedInEpochms\": 1547577164605, \"userDomain\": \"ibmemm.edu\", \"udid\": \"d5cc416776d033d2f8357c503de4911c8a7d1030\", \"osServicePack\": \"\", \"mailboxDeviceId\": \"\", \"deviceOwner\": \"\", \"osName\": \"iOS 12\", \"installedDateInEpochms\": 1541452720215, \"mailboxLastReported\": \"\", \"selectiveWipeStatus\": \"N/a\", \"model\": \"iPhone 7\", \"wifiMacAddress\": \"20:ab:37:3a:5f:84\", \"installedDate\": \"2018-11-05T21:18:40\"}, \"count\": 1, \"pageNumber\": 1, \"pageSize\": 1}", 
+  "reason": null, 
+  "version": "1.0"
+}
+```

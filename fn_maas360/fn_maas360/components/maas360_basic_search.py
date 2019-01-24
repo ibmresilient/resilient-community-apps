@@ -11,6 +11,7 @@ from fn_maas360.lib.maas360_common import Maas360Utils
 from resilient_lib.components.function_result import ResultPayload
 from resilient_lib.components.resilient_common import validate_fields
 from resilient_lib.components.requests_common import RequestsCommon
+import json
 
 CONFIG_DATA_SECTION = 'fn_maas360'
 LOG = logging.getLogger(__name__)
@@ -45,8 +46,7 @@ class FunctionComponent(ResilientComponent):
 
             1 result
 
-            {
-                "devices":{
+                "content": {
                     "device": {
                         "maas360DeviceID": "androidc60775214",
                         "deviceName": "glindsey-ADR6400L",
@@ -59,37 +59,33 @@ class FunctionComponent(ResilientComponent):
                     "count": 1,
                     "pageNumber": 1,
                     "pageSize": 1
-                }
-            }
+                    }
 
             2 or more results
 
-            {
-                "devices":
-                {
+                "content": {
                     "device": [{
-                        "maas360DeviceID": "androidc60775214",
-                        "deviceName": "glindsey-ADR6400L",
-                        "username": "dlindsey",
-                        "platformName": "Android",
-                        "deviceType": "Smartphone",
-                        "lastReported": "2011-05-09T17:13:15",
-                        "deviceStatus": "Active",
-                        ...},
-                    {   "maas360DeviceID": "androidc60775214",
-                        "deviceName": "glindsey-ADR6400L",
-                        "username": "dlindsey",
-                        "platformName": "Android",
-                        "deviceType": "Smartphone",
-                        "lastReported": "2011-05-09T17:13:15",
-                        "deviceStatus": "Active",
-                        ...
-                    }]
+                            "maas360DeviceID": "androidc60775214",
+                            "deviceName": "glindsey-ADR6400L",
+                            "username": "dlindsey",
+                            "platformName": "Android",
+                            "deviceType": "Smartphone",
+                            "lastReported": "2011-05-09T17:13:15",
+                            "deviceStatus": "Active",
+                            ...},
+                        {
+                            "maas360DeviceID": "androidc60775214",
+                            "deviceName": "glindsey-ADR6400L",
+                            "username": "dlindsey",
+                            "platformName": "Android",
+                            "deviceType": "Smartphone",
+                            "lastReported": "2011-05-09T17:13:15",
+                            "deviceStatus": "Active",
+                        ...}]
                     "count": 2,
                     "pageNumber": 1,
                     "pageSize": 1
-                }
-            }
+                    }
     """
 
     def __init__(self, opts):
@@ -145,7 +141,19 @@ class FunctionComponent(ResilientComponent):
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_email: %s", email)
 
-            # TODO - do we need validation? at least one of the params should be defined or let Maas360 throw an error?
+            # Add function inputs to Basic Search params
+            query_string = {}
+
+            add_to_dict("partialDeviceName", partial_device_name, query_string)
+            add_to_dict("partialUsername", partial_username, query_string)
+            add_to_dict("partialPhoneNumber", partial_phone_no, query_string)
+            add_to_dict("imeiMeid", imei_meid, query_string)
+            add_to_dict("platformName", platform_name, query_string)
+            add_to_dict("email", email, query_string)
+
+            # At least one of the search parameters should be set, otherwise we can query the whole Maas360 database.
+            if not query_string:
+                raise FunctionError(u"At least one of input function fields needs to be set for Maas360 Basic Search.")
 
             # Read configuration settings:
             maas360_url = self.options["maas360_url"]
@@ -163,15 +171,7 @@ class FunctionComponent(ResilientComponent):
             sort_attribute = self.options.get("maas360_basic_search_sort_attribute")
             sort_order = self.options.get("maas360_basic_search_sort_order")
 
-            # Add function params to basic search params
-            query_string = {}
-
-            add_to_dict("partialDeviceName", partial_device_name, query_string)
-            add_to_dict("partialUsername", partial_username, query_string)
-            add_to_dict("partialPhoneNumber", partial_phone_no, query_string)
-            add_to_dict("imeiMeid", imei_meid, query_string)
-            add_to_dict("platformName", platform_name, query_string)
-            add_to_dict("email", email, query_string)
+            # Add config params to Basic Search params
             add_to_dict("match", match, query_string)
             add_to_dict("pageSize", page_size, query_string)
             add_to_dict("sortAttribute", sort_attribute, query_string)
