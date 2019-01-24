@@ -13,6 +13,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
 from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
+from resilient_lib.components.resilient_common import validate_fields
 import resilient_circuits.template_functions as template_functions
 
 
@@ -27,6 +28,10 @@ class IntegrationComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(IntegrationComponent, self).__init__(opts)
         self.options = opts.get("fn_microsoft_security_graph", {})
+
+        # Validate required fields in app.config are set
+        required_fields = ["microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
+        validate_fields(required_fields, self.options)
 
         self.Microsoft_security_graph_helper = MicrosoftGraphHelper(self.options.get("tenant_id"),
                                                                     self.options.get("client_id"),
