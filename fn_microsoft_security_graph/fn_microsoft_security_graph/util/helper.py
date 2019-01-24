@@ -39,6 +39,7 @@ class MicrosoftGraphHelper:
             "grant_type": "client_credentials"
         }
         r = requests.post(token_url, data=post_data)
+        log.debug(r.content)
         json = r.json()
         return json.get("access_token")
 

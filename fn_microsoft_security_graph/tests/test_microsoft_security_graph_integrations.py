@@ -10,7 +10,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
 from fn_microsoft_security_graph.components.microsoft_security_graph_alerts_integrations import alert_search, \
-    update_alert, create_query, get_alert_details, ds_to_millis, build_incident_dto, get_alerts
+    update_alert, create_query, get_alert_details, ds_to_millis, build_incident_dto, get_alerts, escape_illegal_chars
 from resilient_circuits.template_functions import environment
 
 PACKAGE_NAME = "fn_microsoft_security_graph"
@@ -277,3 +277,12 @@ class TestMicrosoftSecurityGraphfunctions:
         alerts = get_alerts(opts, ms_helper)
 
         assert alerts == {"alert_details": {"details": 1234}}
+
+    def test_escape_illegal_chars(self):
+        test_string = "userStates/any(user: user/accountName eq 'brianwal_ibm') & filter(top)"
+        actual_string = escape_illegal_chars(test_string)
+        assert actual_string == "userStates%2Fany(user:%20user%2FaccountName%20eq%20'brianwal_ibm')%20%26%20filter(top)"
+
+        test_string = "%+/?#& "
+        actual_string = escape_illegal_chars(test_string)
+        assert actual_string == "%25%2B%2F%3F%23%26%20"

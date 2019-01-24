@@ -5,7 +5,6 @@ import jinja2
 import time
 import json
 import calendar
-from requests.utils import quote
 from datetime import datetime
 from threading import Thread
 from os.path import join, pardir, os
@@ -22,7 +21,7 @@ MSG_FIELD_NAME = "microsoft_security_graph_alert_id"
 
 
 class IntegrationComponent(ResilientComponent):
-    """Component that polling MSG for alerts and creates an incident is one doesn't exist"""
+    """Component that polling MSG for alerts and creates an incident if one doesn't exist"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -54,7 +53,7 @@ class IntegrationComponent(ResilientComponent):
         ms_graph_helper = self.Microsoft_security_graph_helper
         try:
             start_time = time.time()
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Microsoft security graph alert search function...")
 
             # Get the function parameters:
             microsoft_security_graph_alert_search_query = kwargs.get(
@@ -67,9 +66,9 @@ class IntegrationComponent(ResilientComponent):
             r = alert_search(options.get("microsoft_graph_url"), ms_graph_helper,
                              microsoft_security_graph_alert_search_query)
             if not r:
-                raise FunctionError("Problem with the access_token")
+                raise FunctionError("Request failed, please check the log.")
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Microsoft security graph alert search function complete...")
             end_time = time.time()
             results = {
                 "inputs": {
@@ -91,7 +90,7 @@ class IntegrationComponent(ResilientComponent):
         ms_graph_helper = self.Microsoft_security_graph_helper
         try:
             start_time = time.time()
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Microsoft security graph get alert details function...")
 
             # Get the function parameters:
             microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
@@ -104,9 +103,9 @@ class IntegrationComponent(ResilientComponent):
             r = get_alert_details(options.get("microsoft_graph_url"), ms_graph_helper,
                                   microsoft_security_graph_alert_id)
             if not r:
-                raise FunctionError("Problem with the access_token")
+                raise FunctionError("Request failed, please check the log.")
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Microsoft security graph get alert details function complete...")
             end_time = time.time()
             results = {
                 "inputs": {
@@ -128,7 +127,7 @@ class IntegrationComponent(ResilientComponent):
         ms_graph_helper = self.Microsoft_security_graph_helper
         try:
             start_time = time.time()
-            yield StatusMessage("starting...")
+            yield StatusMessage("Starting Microsoft security graph update alert function...")
 
             # Get the function parameters:
             microsoft_security_graph_alert_id = kwargs.get("microsoft_security_graph_alert_id")  # text
@@ -147,9 +146,9 @@ class IntegrationComponent(ResilientComponent):
             r = update_alert(options.get("microsoft_graph_url"), ms_graph_helper, microsoft_security_graph_alert_id,
                              microsoft_security_graph_alert_data)
             if not r:
-                raise FunctionError("Problem with the access_token")
+                raise FunctionError("Request failed, please check the log.")
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Microsoft security graph update alert function complete...")
             end_time = time.time()
             results = {
                 "inputs": {
@@ -171,7 +170,7 @@ class IntegrationComponent(ResilientComponent):
         options = self.options
 
         if int(options.get("msg_polling_interval", 0)) > 0:
-            # Add ds_to_millis to global for use in filters
+            # Add ds_to_millis to global for use in Jinja templates
             ds_filter = {"ds_to_millis": ds_to_millis}
             env = environment()
             env.globals.update(ds_filter)
@@ -281,8 +280,10 @@ def get_alerts(options, ms_graph_helper):
     }
     url = "{}security/alerts/{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
-    safe_url = quote(url, safe='')
-    r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
+    safe_url = escape_illegal_chars(url)
+    r = ms_graph_helper.microsoft_graph_request("GET", safe_url, headers)
+    if not r:
+        raise FunctionError("Request failed, please check the log.")
 
     response_json = r.json()
     return response_json.get("value")
@@ -290,10 +291,10 @@ def get_alerts(options, ms_graph_helper):
 
 def build_incident_dto(alert, custom_temp_file=None):
     current_path = os.path.dirname(os.path.realpath(__file__))
-    default_temp_file = join(current_path, pardir, "data/templates/msg_incident_mapping.jinja")
     if custom_temp_file:
         template_file = custom_temp_file
     else:
+        default_temp_file = join(current_path, pardir, "data/templates/msg_incident_mapping.jinja")
         template_file = default_temp_file
 
     try:
@@ -317,8 +318,8 @@ def alert_search(url, ms_helper, search_query=None):
         start_query = "?$"
 
     url = "{}security/alerts/{}{}".format(url, start_query, search_query)
-    safe_url = quote(url, safe='')
-    r = ms_helper.microsoft_graph_request("GET", url, headers)
+    safe_url = escape_illegal_chars(url)
+    r = ms_helper.microsoft_graph_request("GET", safe_url, headers)
 
     return r
 
@@ -363,26 +364,35 @@ def create_query(alert_query, createDateTime_filter):
     if len(createDateTime_filter) > 0:
         # Query is currently empty
         if query == "":
-            query = "?$filter="
-            query = query + createDateTime_filter
+            query = "?$filter={}".format(createDateTime_filter)
         # Query already has a filter section in it and the date filter should just be added to the end of that section
         elif "$filter=" in query:
             query_sections = query.split('&$')
             i = 0
             while i < len(query_sections):
                 if "filter" in query_sections[i]:
-                    query_sections[i] = query_sections[i] + "%20and%20" + createDateTime_filter
+                    query_sections[i] = "{}%20and%20{}".format(query_sections[i], createDateTime_filter)
                     break
             query = '&$'.join(query_sections)
-            print(query)
 
         # Query has other sections but not a filter section, add filter to the end
         else:
-            query = "&$filter="
-            query = query + createDateTime_filter
+            query = "&$filter={}".format(createDateTime_filter)
 
-    log.debug(query)
+    log.debug("Query: []".format(query))
     return query
+
+
+def escape_illegal_chars(string):
+    string = string.replace('%', '%25')
+    string = string.replace('+', '%2B')
+    string = string.replace('/', '%2F')
+    string = string.replace('?', '%3F')
+    string = string.replace('#', '%23')
+    string = string.replace('&', '%26')
+    string = string.replace(' ', '%20')
+
+    return string
 
 
 # Converts string datetime to milliseconds epoch
