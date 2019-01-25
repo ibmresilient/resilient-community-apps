@@ -101,22 +101,24 @@ The example:
 ########################
 def dict_to_json_str(d):
   """Function that converts a dictionary into a JSON string.
-     Supports types: basestring, bool and int. 
-     Supports nested directories.
-     If the value is None, it sets it to False"""
+     Supports types: basestring, bool, int and nested dicts.
+     Does not support lists.
+     If the value is None, it sets it to False."""
 
-  json_str = '"{ {0} }"'
   json_entry = '"{0}":{1}'
   json_entry_str = '"{0}":"{1}"'
   entries = [] 
-  
+
   for entry in d:
     key = entry
     value = d[entry]
-    
+
     if value is None:
       value = False
-      
+
+    if isinstance(value, list):
+      helper.fail('dict_to_json_str does not support Python Lists')
+
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
       entries.append(json_entry_str.format(key, value))
@@ -124,14 +126,14 @@ def dict_to_json_str(d):
     elif isinstance(value, bool):
       value = 'true' if value == True else 'false'
       entries.append(json_entry.format(key, value))
-    
+
     elif isinstance(value, dict):
       entries.append(json_entry.format(key, dict_to_json_str(value)))
-    
+
     else:
       entries.append(json_entry.format(key, value))
-  
-  return '{' + ','.join(entries) + '}'
+
+  return '{0} {1} {2}'.format('{', ','.join(entries), '}')
 
 #####################
 ### Define Inputs ###
