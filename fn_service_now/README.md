@@ -156,10 +156,14 @@ inputs.sn_optional_fields = dict_to_json_str({
 ```
 
 ### Post-Process Script:
-* This example **adds a Note to the Incident** with a link to the ServiceNow Record.
+* This example updates the fields **sn_snow_record_id** and **sn_snow_record_link** then **adds a Note to the Incident**
 ```python
 if results.success:
 
+  # Set incident fields sn_snow_record_id and sn_snow_record_link
+  incident.sn_snow_record_id = results.sn_ref_id
+  incident.sn_snow_record_link = """<a href='{0}'>Link</a>""".format(results.sn_record_link)
+  
   noteText = """<br>This Incident has been created in <b>ServiceNow</b>
               <br><b>ServiceNow ID:</b>  {0}
               <br><b>ServiceNow Link:</b> <a href='{1}'>{1}</a>""".format(results.sn_ref_id, results.sn_record_link)
