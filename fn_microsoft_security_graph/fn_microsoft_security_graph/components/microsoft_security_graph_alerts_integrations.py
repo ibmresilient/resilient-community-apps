@@ -12,7 +12,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_circuits.template_functions import environment
 from resilient import SimpleHTTPException
 from fn_microsoft_security_graph.util.helper import MicrosoftGraphHelper
-from resilient_lib.components.resilient_common import validate_fields
+from resilient_lib import validate_fields
 import resilient_circuits.template_functions as template_functions
 
 
