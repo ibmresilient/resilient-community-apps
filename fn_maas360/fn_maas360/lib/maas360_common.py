@@ -4,6 +4,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
 import logging
+import json
 from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
@@ -32,6 +33,7 @@ class MaaS360Utils(object):
         self.host = host
         self.billingId = billingId
         self.rc = requests_common
+
         # generating auth token and setting it in the object, to be used in further api calls
         self.authToken = self.generate_auth_token(host, billingId, userName, password, appID, appVersion, platformID,
                                                   appAccessKey, auth_url)
@@ -65,15 +67,20 @@ class MaaS360Utils(object):
         }
         auth_headers = {'Accept': 'application/json'}
         try:
-            auth_response_json = self.rc.execute_call("post", complete_auth_url, auth_request_body, headers=auth_headers)
+            results = self.rc.execute_call("post", complete_auth_url, auth_request_body, headers=auth_headers)
         except IntegrationError as err:
             raise err
 
-        if auth_response_json:
-            if auth_response_json.get("authResponse") and auth_response_json.get("authResponse").get("errorCode") == 0:
-                return auth_response_json.get("authResponse").get("authToken")
+        if results:
+            auth_response = results.get("authResponse")
+            if auth_response and auth_response.get("errorCode") == 0:
+                return auth_response.get("authToken")
+            else:
+                raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
+                                       "subsequent api calls will be cancelled " + json.dumps(auth_response))
         else:
-            raise IntegrationError(auth_response_json)
+            raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
+                                   "subsequent api calls will be cancelled " + json.dumps(results))
 
     def get_devices(self, basic_search_url, query_string):
         """

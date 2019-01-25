@@ -9,6 +9,7 @@
 from fn_maas360.lib.maas360_common import MaaS360Utils
 from resilient_lib.components.requests_common import RequestsCommon
 from resilient_lib.components.resilient_common import validate_fields
+from resilient_lib.components.integration_errors import IntegrationError
 import logging
 
 log = logging.getLogger(__name__)
@@ -50,10 +51,10 @@ def selftest_function(opts):
             state = "success"
         else:
             state = "failure"
-            reason = maas360_utils.errorCode if maas360_utils else "N/A"
-    except Exception as ex:
+            reason = "N/A"
+    except IntegrationError as err:
         state = "failure"
-        reason = str(ex)
+        reason = err.value
 
     result = {
         "state": state,
