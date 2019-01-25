@@ -383,16 +383,16 @@ def create_query(alert_query, createDateTime_filter):
     return query
 
 
-def escape_illegal_chars(string):
-    string = string.replace('%', '%25')
-    string = string.replace('+', '%2B')
-    string = string.replace('/', '%2F')
-    string = string.replace('?', '%3F')
-    string = string.replace('#', '%23')
-    string = string.replace('&', '%26')
-    string = string.replace(' ', '%20')
+def escape_illegal_chars(s):
+    s = s.replace('%', '%25')
+    s = s.replace('+', '%2B')
+    s = s.replace('/', '%2F')
+    s = s.replace('?', '%3F')
+    s = s.replace('#', '%23')
+    s = s.replace('&', '%26')
+    s = s.replace(' ', '%20')
 
-    return string
+    return s
 
 
 # Converts string datetime to milliseconds epoch
