@@ -2,6 +2,9 @@ import time
 import random
 
 import requests
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class SandboxError(Exception):
@@ -106,14 +109,17 @@ class VMRayAPI(object):
         """
         # multipart post files.
         files = {"sample_file": (filename, handle)}
+        log.info("files: " + str(files))
 
         # ensure the handle is at offset 0.
         handle.seek(0)
 
         response = self._request("/sample/submit", method='POST', files=files, headers=self.headers)
-
+        log.info("response after submit a file to VMRay Analyzer: ")
+        log.info(response.json())
         try:
-            if response.status_code == 200 and not response.json()['data']['errors']:
+            if response.status_code == 200:
+                # if response.status_code == 200 and not response.json()['data']['errors']:
                 # only support single-file submissions; just grab the first one.
                 return response.json()['data']['samples'][0]['sample_id']
             else:
@@ -121,14 +127,14 @@ class VMRayAPI(object):
         except (ValueError, KeyError, IndexError) as e:
             raise SandboxError("error in analyze: {e}".format(e=e))
 
-    def check(self, item_id):
+    def check(self, sample_id):
         """Check if an analysis is complete.
-        :type  item_id: str
-        :param item_id: File ID to check.
+        :type  sample_id: str
+        :param sample_id_id: File ID to check.
         :rtype:  bool
         :return: Boolean indicating if a report is done or not.
         """
-        response = self._request("/submission/sample/{sample_id}".format(sample_id=item_id), headers=self.headers)
+        response = self._request("/submission/sample/{sample_id}".format(sample_id=sample_id), headers=self.headers)
 
         if response.status_code == 404:
             # unknown id
@@ -174,23 +180,26 @@ class VMRayAPI(object):
         self.server_available = False
         return False
 
-    def report(self, item_id, report_format="json"):
+    def report(self, sample_id, report_format="json"):
         """Retrieves the specified report for the analyzed item, referenced by item_id.
         Available formats include: json.
-        :type  item_id:       str
-        :param item_id:       File ID number
+        :type  sample_id:       str
+        :param sample_id:       File ID number
         :type  report_format: str
         :param report_format: Return format
         :rtype:  dict
         :return: Dictionary representing the JSON parsed data or raw, for other
                  formats / JSON parsing failure.
         """
+
         if report_format == "html":
             return "Report Unavailable"
 
         # grab an analysis id from the submission id.
-        response = self._request("/analysis/sample/{sample_id}".format(sample_id=item_id),
+        response = self._request("/analysis/sample/{sample_id}".format(sample_id=sample_id),
                                  headers=self.headers)
+
+        log.info("sample_report:  " + str(response.json()) + "\n")
 
         try:
             # the highest score is probably the most interesting.
@@ -202,21 +211,23 @@ class VMRayAPI(object):
                     top_score = analysis['analysis_vti_score']
                     analysis_id = analysis['analysis_id']
 
+
         except (ValueError, KeyError) as e:
             raise SandboxError(e)
 
         # assume report format json.
         response = self._request("/analysis/{analysis_id}/archive/logs/summary.json".format(analysis_id=analysis_id),
                                  headers=self.headers)
+        archive = self._request("/analysis/{analysis_id}/archive".format(analysis_id=analysis_id), headers=self.headers)
 
         # if response is JSON, return it as an object.
         try:
-            return response.json()
+            return analysis_id, response.json(), archive.content
         except ValueError:
             pass
 
         # otherwise, return the raw content.
-        return response.content
+        return analysis_id, response.content, archive.content
 
     def score(self, report):
         """Pass in the report from self.report(), get back an int 0-100"""

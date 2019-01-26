@@ -35,17 +35,17 @@ class TestFnVmraySandboxAnalyzer:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, artifact_id, attachment_id, vsb_report_type, expected_results", [
-        (123, 123, 123, "text", {"value": "xyz"}),
-        (123, 123, 123, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, artifact_id, attachment_id, analysis_report_status, expected_results", [
+        (123, 123, 123, True, {"value": "xyz"}),
+        (123, 123, 123, True, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, incident_id, artifact_id, attachment_id, vsb_report_type, expected_results):
+    def test_success(self, circuits_app, incident_id, artifact_id, attachment_id, analysis_report_status, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "incident_id": incident_id,
             "artifact_id": artifact_id,
             "attachment_id": attachment_id,
-            "vsb_report_type": vsb_report_type
+            "analysis_report_status": analysis_report_status
         }
         results = call_fn_vmray_sandbox_analyzer_function(circuits_app, function_params)
         assert(expected_results == results)
