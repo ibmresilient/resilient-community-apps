@@ -37,5 +37,9 @@ maas360_basic_search_match=0
 maas360_basic_search_sort_attribute=lastReported
 # Sort Order. Possible values: asc  or dsc (Default)
 maas360_basic_search_sort_order=dsc
+
+# Locate Device settings
+# ---------------------
+maas360_locate_device_url=/device-apis/devices/1.0/locateDevice/
     """
     return config_data

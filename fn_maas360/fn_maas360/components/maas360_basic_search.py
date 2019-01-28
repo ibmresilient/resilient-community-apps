@@ -20,7 +20,7 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'maas360_basic_search
 
         Function searches for devices by Device Name, Username, Phone Number, Platform, Device Status and other
-            Device Identifiers.
+        Device Identifiers.
 
         An example of optional search parameters are:
 
@@ -41,7 +41,7 @@ class FunctionComponent(ResilientComponent):
                 &imeiMeid=99000032580168&pageSize=250&sortAttribute=lastReported&sortOrder=dsc
                 &partialUsername=dlind&platformName=Android&email=TEST%40EXAMPLE.COM&match=0
 
-        The MaaS360 Basic Search (v2) will return a result in JSON format with an entry consisting of key value pairs.
+        Basic Search returns a result in JSON format with an entry consisting of key value pairs:
 
             1 result
 
@@ -185,7 +185,11 @@ class FunctionComponent(ResilientComponent):
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
                                          app_access_key, auth_url, rc)
 
-            count, devices = maas360_utils.get_devices(basic_search_url, query_string)
+            devices = maas360_utils.get_devices(basic_search_url, query_string)
+            if not devices:
+                yield StatusMessage("No devices were found")
+
+            count = devices.get("count")
             if not count:
                 yield StatusMessage("No devices were found")
             else:

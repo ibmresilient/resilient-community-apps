@@ -8,6 +8,8 @@ import json
 from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
+JSON_CONTENT_TYPE_HEADER = "application/json"
+DEFAULT_CONTENT_TYPE_HEADER = "application/x-www-form-urlencoded"
 
 
 class MaaS360Utils(object):
@@ -69,18 +71,19 @@ class MaaS360Utils(object):
         try:
             results = self.rc.execute_call("post", complete_auth_url, auth_request_body, headers=auth_headers)
         except IntegrationError as err:
-            raise err
+            raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
+                                   "subsequent api calls will be cancelled: {}".format(err))
 
-        if results:
-            auth_response = results.get("authResponse")
-            if auth_response and auth_response.get("errorCode") == 0:
-                return auth_response.get("authToken")
-            else:
-                raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
-                                       "subsequent api calls will be cancelled " + json.dumps(auth_response))
+        if results is None:
+            raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
+                                   "subsequent api calls will be cancelled : {}".format(json.dumps(results)))
+
+        auth_response = results.get("authResponse")
+        if auth_response and auth_response.get("errorCode") == 0:  # 0 no error
+            return auth_response.get("authToken")
         else:
             raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
-                                   "subsequent api calls will be cancelled " + json.dumps(results))
+                                   "subsequent api calls will be cancelled: {}".format(json.dumps(auth_response)))
 
     def get_devices(self, basic_search_url, query_string):
         """
@@ -88,25 +91,60 @@ class MaaS360Utils(object):
         Support for partial match for Device Name, Username, Phone Number.
         :param basic_search_url:
         :param query_string:
-        :return: count, device or list of devices or None if there aren't any found
+        :return: device or list of devices or None if there aren't any found
         """
 
         url_endpoint = self.host + basic_search_url + self.billingId
+        auth_headers = self.get_auth_headers(JSON_CONTENT_TYPE_HEADER)
 
-        auth_headers = {'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'MaaS token="' + self.authToken + '"'}
         try:
-            results_basic_search = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+            results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
         except IntegrationError as err:
-            raise err
+            raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
 
-        devices = results_basic_search.get("devices")
-        if not devices:
-            return None, None
+        if results is None:
+            raise IntegrationError("Unable to execute call Basic Search: {}".format(json.dumps(results)))
 
-        count = devices.get("count")
-        if not count:
-            return None, None
+        devices = results.get("devices")
+        return devices
 
-        return count, devices
+    def get_auth_headers(self, content_type_header):
+        """
+        Generate auth headers.
+        :return:
+        """
+        auth_headers = {"Accept": "application/json",
+                        "Content-Type": u"{}".format(content_type_header),
+                        "Authorization": u"MaaS token='{}'".format(self.authToken)}
+        return auth_headers
+
+    def locate_device(self, locate_device_url, device_id):
+        """
+        Function performs a real-time lookup on Android devices or  provides Last Known location on iOS
+        and Windows Phone devices. The results is latitude and longitude information.
+        :param locate_device_url:
+        :param device_id
+        :return: results_locate_device
+        """
+        url_endpoint = self.host + locate_device_url + self.billingId
+        auth_headers = self.get_auth_headers(DEFAULT_CONTENT_TYPE_HEADER)
+        locate_device_request_body = {"deviceId": u"{}".format(device_id)}
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, locate_device_request_body, log=LOG,
+                                           headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
+
+        if results is None:
+            raise IntegrationError("Unable to execute call Locate Device: {}".format(json.dumps(results)))
+
+        action_response = results.get("actionResponse")
+        if action_response is None:
+            return None
+
+        action_status = action_response.get("actionStatus")  # 0:success; 1:error
+        if action_status == 1:
+            raise IntegrationError(u"Unable to execute call Locate Device: {}".format(action_response.get("description")))
+
+        return action_response
