@@ -52,6 +52,7 @@ class FunctionComponent(ResilientComponent):
             inputs = {
                 "incident_id": res_helper.get_function_input(kwargs, "incident_id"),  # number (required)
                 "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
+                "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id", True),  # number (optional)
                 "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"),  # number (required)
                 "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True),  # text (optional)
                 "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code", True),  # text (required)
@@ -69,7 +70,7 @@ class FunctionComponent(ResilientComponent):
             datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_id
-            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
+            res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"], payload.inputs["sn_res_id"])
 
             # Get the sn_ref_id
             sn_ref_id = datatable.get_sn_ref_id(res_id)

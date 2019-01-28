@@ -29,6 +29,7 @@ setup(
             "SnUtilitiesCreateInServicenowFunctionComponent = fn_service_now.components.sn_utilities_create_in_servicenow:FunctionComponent",
             "SnUtilitiesAddNoteToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_note_to_servicenow_record:FunctionComponent",
             "SnUtilitiesAddAttachmentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_attachment_to_servicenow_record:FunctionComponent",
+            "SnowHelperAddTaskNoteFunctionComponent = fn_service_now.components.snow_helper_add_task_note:FunctionComponent",
             "SnUtilitiesGetSysIdFunctionComponent = fn_service_now.components.sn_utilities_get_sys_id:FunctionComponent",
             "SnUtilitiesUpdateDatatableFunctionComponent = fn_service_now.components.sn_utilities_update_datatable:FunctionComponent"
         ],

@@ -93,14 +93,31 @@ class ResilientHelper(object):
             return the_input
 
     @staticmethod
-    def generate_res_id(incident_id, task_id=None):
+    def generate_res_id(incident_id, task_id=None, sn_res_id=None):
         """If incident_id and task_id are valid, returns "RES-1001-2002"
-        Else if task_id is None, returns "RES-1001" """
+        Else if task_id is None, returns "RES-1001". If sn_res_id if defined
+        just return it. """
+
+        # If sn_res_id is defined, just return it. This helps us with closing from Data Table
+        if sn_res_id is not None:
+            return sn_res_id
 
         res_id = ["RES", str(incident_id)]
         if task_id is not None:
             res_id.append(str(task_id))
         return "-".join(res_id)
+
+    @staticmethod
+    def parse_res_id(res_id):
+        """Parse res_id (RES-1001-2002) and return a dict with incident_id and task_id"""
+        incident_id, task_id = None, None
+        ids = res_id.split("-")
+
+        incident_id = ids[1]
+        if len(ids) == 3:
+            task_id = ids[2]
+
+        return {"incident_id": incident_id, "task_id": task_id}
 
     @staticmethod
     def generate_res_link(incident_id, host, task_id=None):

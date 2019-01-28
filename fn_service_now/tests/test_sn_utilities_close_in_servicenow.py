@@ -38,6 +38,7 @@ class TestSnUtilitiesCloseInServicenow:
     inputs1 = {
       "incident_id": 1001,
       "task_id": 2002,
+      "sn_res_id": None,
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
       "sn_close_code": "Solved (Permanently)"
@@ -52,6 +53,7 @@ class TestSnUtilitiesCloseInServicenow:
     inputs2 = {
       "incident_id": 1001,
       "task_id": None,
+      "sn_res_id": None,
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
       "sn_close_code": "Solved (Permanently)"
@@ -59,6 +61,21 @@ class TestSnUtilitiesCloseInServicenow:
 
     output2 = {
       "inputs": deepcopy(inputs2),
+      "success": True,
+      "sn_ref_id": "INC123457"
+    }
+
+    inputs3 = {
+      "incident_id": 1001,
+      "task_id": None,
+      "sn_res_id": "RES-1001-2002",
+      "sn_record_state": 7,
+      "sn_close_notes": "We have fixed this",
+      "sn_close_code": "Solved (Permanently)"
+    }
+
+    output3 = {
+      "inputs": deepcopy(inputs3),
       "success": True,
       "sn_ref_id": "INC123457"
     }
