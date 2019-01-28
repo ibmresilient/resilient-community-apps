@@ -108,11 +108,11 @@ class FunctionComponent(ResilientComponent):
                 try:
                     yield StatusMessage("Updating ServiceNow Status to {0}".format(close_in_sn_response["sn_state"]))
 
-                    row_to_update = datatable.get_row("sn_ref_id", sn_ref_id)
+                    row_to_update = datatable.get_row("sn_records_dt_sn_ref_id", sn_ref_id)
 
                     cells_to_update = {
-                        "time": int(time.time() * 1000),
-                        "servicenow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
+                        "sn_records_dt_time": int(time.time() * 1000),
+                        "sn_records_dt_snow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
                     }
 
                     # Update the row

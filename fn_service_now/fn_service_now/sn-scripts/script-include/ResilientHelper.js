@@ -111,6 +111,9 @@ ResilientHelper.prototype = {
 		}
 
 		if(res){
+			//Get record name
+			var record_name = record.getValue("short_description");
+
 			//Set required values on SN record
 			record.setValue("x_261673_resilient_reference_id", res_reference_id);
 			record.setValue("x_261673_resilient_type", res_reference_type);
@@ -122,14 +125,14 @@ ResilientHelper.prototype = {
 			}
 
 			//Add a new row to the Resilient Datatable
-			this.addNewRowToRESDatatable(res_reference_id, snRecordId, res_reference_link, snLink);
+			this.addNewRowToRESDatatable(record_name, res_reference_type, res_reference_id, snRecordId, res_reference_link, snLink);
 
 			returnValue = {
 				res_reference_id: res_reference_id,
 				res_reference_link: res_reference_link,
 				res_reference_type: res_reference_type,
 				snLink: snLink
-			}
+			};
 		}
 
 		return returnValue;
@@ -315,7 +318,7 @@ ResilientHelper.prototype = {
 		}
 	},
 	
-	addNewRowToRESDatatable: function(res_reference_id, sn_ref_id, res_link, sn_link){
+	addNewRowToRESDatatable: function(record_name, res_type, res_reference_id, sn_ref_id, res_link, sn_link){
 		var colors = {
 			"green": "#00b33c",
 			"orange": "#ff9900",
@@ -334,14 +337,16 @@ ResilientHelper.prototype = {
 				var snTicketStateRichText = '<div style="color:' + colors["green"] +'">Sent to Resilient</div>';
 
 				var cells = [
-					["time", now],
-					["res_id", res_reference_id],
-					["sn_ref_id", sn_ref_id],
-					["resilient_status", resTicketStateRichText],
-					["servicenow_status", snTicketStateRichText],
-					["link", links]
+					["sn_records_dt_time", now],
+					["sn_records_dt_name", record_name],
+					["sn_records_dt_type", res_type],
+					["sn_records_dt_res_id", res_reference_id],
+					["sn_records_dt_sn_ref_id", sn_ref_id],
+					["sn_records_dt_res_status", resTicketStateRichText],
+					["sn_records_dt_snow_status", snTicketStateRichText],
+					["sn_records_dt_links", links]
 				];
-				
+
 				var formattedCells = {};
 				
 				for (var j=0; j<cells.length; j++){
@@ -378,7 +383,7 @@ ResilientHelper.prototype = {
 			var rowToUpdate = null;
 			
 			for (var i=0; i<rows.length; i++){
-				if(rows[i].cells.res_id.value == res_reference_id){
+				if(rows[i].cells.sn_records_dt_res_id.value == res_reference_id){
 					rowToUpdate = rows[i];
 					break;
 				}
@@ -396,12 +401,14 @@ ResilientHelper.prototype = {
 				var snTicketStateRichText = '<div style="color:' + colors[snTicketStateColor] +'">' + snTicketState + '</div>';
 
 				var cells = [
-					["time", now],
-					["res_id", rowToUpdate.cells.res_id.value],
-					["sn_ref_id", rowToUpdate.cells.sn_ref_id.value],
-					["resilient_status", rowToUpdate.cells.resilient_status.value],
-					["servicenow_status", snTicketStateRichText],
-					["link", rowToUpdate.cells.link.value]
+					["sn_records_dt_time", now],
+					["sn_records_dt_name", rowToUpdate.cells.sn_records_dt_name.value],
+					["sn_records_dt_type", rowToUpdate.cells.sn_records_dt_type.value],
+					["sn_records_dt_res_id", rowToUpdate.cells.sn_records_dt_res_id.value],
+					["sn_records_dt_sn_ref_id", rowToUpdate.cells.sn_records_dt_sn_ref_id.value],
+					["sn_records_dt_res_status", rowToUpdate.cells.sn_records_dt_res_status.value],
+					["sn_records_dt_snow_status", snTicketStateRichText],
+					["sn_records_dt_links", rowToUpdate.cells.sn_records_dt_links.value]
 				];
 				
 				var formattedCells = {};
@@ -415,7 +422,7 @@ ResilientHelper.prototype = {
 			}
 		}
 		catch(e){
-			var errMsg = "Failed to send updateStateInResilient to " + snTicketState;
+			var errMsg = "Failed to update SNOW Status column in data table in Resilient to " + snTicketState;
 			gs.error(errMsg);
 			throw e;
 		}

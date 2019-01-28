@@ -3,7 +3,7 @@
 //Use to convert JavaScript JSON Object to JSON String and back
 var JSON_PARSER = new global.JSON();
 
-var RES_DATATABLE_NAME = "sn_external_ticket_status";
+var RES_DATATABLE_NAME = "sn_records_dt";
 
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){

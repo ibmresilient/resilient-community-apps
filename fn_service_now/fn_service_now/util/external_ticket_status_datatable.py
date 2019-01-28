@@ -6,7 +6,7 @@ class ExternalTicketStatusDatatable(object):
     def __init__(self, res_client, incident_id):
         self.res_client = res_client
         self.incident_id = incident_id
-        self.api_name = "sn_external_ticket_status"
+        self.api_name = "sn_records_dt"
         self.data = None
         self.rows = None
 
@@ -23,7 +23,7 @@ class ExternalTicketStatusDatatable(object):
             self.data = self.res_client.get(uri)
             self.rows = self.data["rows"]
         except Exception as err:
-            raise ValueError("Failed to get sn_external_ticket_status Datatable", err)
+            raise ValueError("Failed to get sn_records_dt Datatable", err)
 
     def get_row(self, cell_name, cell_value):
         """Returns the row if found. Returns None if no matching row found"""
@@ -35,26 +35,28 @@ class ExternalTicketStatusDatatable(object):
 
     def get_sn_ref_id(self, res_id):
         """Returns the sn_ref_id that relates to the res_id"""
-        row = self.get_row("res_id", res_id)
+        row = self.get_row("sn_records_dt_res_id", res_id)
 
         if row is not None:
             cells = row["cells"]
-            return str(cells["sn_ref_id"]["value"])
+            return str(cells["sn_records_dt_sn_ref_id"]["value"])
 
         return None
 
-    def add_row(self, time, res_id, sn_ref_id, resilient_status, servicenow_status, link):
+    def add_row(self, time, name, res_type, res_id, sn_ref_id, res_status, snow_status, link):
         """Adds a new row to the data table and returns that row"""
         # Generate uri to POST datatable row
         uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(self.incident_id, self.api_name)
 
         cells = [
-            ("time", time),
-            ("res_id", res_id),
-            ("sn_ref_id", sn_ref_id),
-            ("resilient_status", resilient_status),
-            ("servicenow_status", servicenow_status),
-            ("link", link)
+            ("sn_records_dt_time", time),
+            ("sn_records_dt_name", name),
+            ("sn_records_dt_type", res_type),
+            ("sn_records_dt_res_id", res_id),
+            ("sn_records_dt_sn_ref_id", sn_ref_id),
+            ("sn_records_dt_res_status", res_status),
+            ("sn_records_dt_snow_status", snow_status),
+            ("sn_records_dt_links", link)
         ]
 
         formatted_cells = {}
@@ -82,12 +84,14 @@ class ExternalTicketStatusDatatable(object):
             return row["cells"][cell_name]["value"]
 
         cells = [
-            ("time", get_value("time")),
-            ("res_id", get_value("res_id")),
-            ("sn_ref_id", get_value("sn_ref_id")),
-            ("resilient_status", get_value("resilient_status")),
-            ("servicenow_status", get_value("servicenow_status")),
-            ("link", get_value("link"))
+            ("sn_records_dt_time", get_value("sn_records_dt_time")),
+            ("sn_records_dt_name", get_value("sn_records_dt_name")),
+            ("sn_records_dt_type", get_value("sn_records_dt_type")),
+            ("sn_records_dt_res_id", get_value("sn_records_dt_res_id")),
+            ("sn_records_dt_sn_ref_id", get_value("sn_records_dt_sn_ref_id")),
+            ("sn_records_dt_res_status", get_value("sn_records_dt_res_status")),
+            ("sn_records_dt_snow_status", get_value("sn_records_dt_snow_status")),
+            ("sn_records_dt_links", get_value("sn_records_dt_links"))
         ]
 
         formatted_cells = {}

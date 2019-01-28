@@ -114,6 +114,8 @@ class FunctionComponent(ResilientComponent):
                     # Add row to the datatable
                     add_row_response = datatable.add_row(
                         payload.sn_time_created,
+                        request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name"),
+                        "Incident" if request_data.get("type") is "res_incident" else "Task",
                         payload.res_id,
                         payload.sn_ref_id,
                         res_helper.convert_text_to_richtext("Active"),

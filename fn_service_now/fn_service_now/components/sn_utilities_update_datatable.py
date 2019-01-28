@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
             payload.res_id = res_helper.generate_res_id(payload.inputs["incident_id"], payload.inputs["task_id"])
 
             # Search for a row that contains the res_id
-            row_found = res_datatable.get_row("res_id", payload.res_id)
+            row_found = res_datatable.get_row("sn_records_dt_res_id", payload.res_id)
 
             # Get current time (*1000 as API does not accept int)
             now = int(time.time() * 1000)
@@ -96,8 +96,8 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("{0} is not a handled status option".format(payload.inputs["sn_resilient_status"]))
 
                 cells_to_update = {
-                    "time": now,
-                    "resilient_status": resilient_status
+                    "sn_records_dt_time": now,
+                    "sn_records_dt_res_status": resilient_status
                 }
 
                 # Update the row
