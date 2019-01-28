@@ -5,12 +5,13 @@ import docker
 
 
 LOG = logging.getLogger(__name__)
-
+import os
 
 class DockerUtils:
 
     def __init__(self):
         self.client = None
+        self.api_client = None
 
     def setup_docker_connection(self, options):
         """
@@ -40,7 +41,9 @@ class DockerUtils:
         """
         try:
             self.client = docker.DockerClient(base_url=docker_server_url)
+            self.api_client = docker.APIClient(base_url=os.environ.get('DOCKER_HOST', 'unix://var/run/docker.sock'))
             self.client.ping()
+            self.api_client.ping()
         except ConnectionError:
             LOG.debug('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
@@ -54,7 +57,9 @@ class DockerUtils:
         """
         try:
             self.client = docker.from_env()
+            self.api_client = docker.APIClient(base_url=os.environ.get('DOCKER_HOST', 'unix://var/run/docker.sock'))
             self.client.ping()
+            self.api_client.ping()
         except ConnectionError:
             LOG.debug('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
@@ -103,8 +108,13 @@ class DockerUtils:
         :param options:
         :return: dict which can be fed into the docker run command using **name_of_result, same as kwargs
         """
+
         return {k.replace('docker_extra_', ''): v
                 for k, v in options.items()
                 if 'docker_extra' in k}
+
+    def inspect_container(self, containerid):
+        return self.api_client.inspect_container(containerid)
+
 
 

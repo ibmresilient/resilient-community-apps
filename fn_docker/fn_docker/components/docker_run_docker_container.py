@@ -18,6 +18,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_docker", {})
+        self.all_options = {k:v for k,v in opts.items() if 'fn_docker' in k}
         selftest.selftest_function(opts)
 
     @handler("reload")
@@ -58,21 +59,56 @@ class FunctionComponent(ResilientComponent):
 
             image_to_use = helper.get_config_option("docker_image", True) or docker_image
 
+            if image_to_use not in helper.get_config_option("docker_image", True).split(","):
+                raise ValueError("Image is not in list of approved images. Review your app.config")
+
+            # Acquire any specific configs for this image
+            command = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_volatility', {}), option_name="cmd")
+
+            output_vol = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="output_dir")
+
+            internal_vol = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="vol_internal_dir")
+
+            vol_operation = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="volcmd")
+
+            container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
+
+            if docker_extra_kwargs.get('volumes', False):
+                log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
+
+                for volume in docker_extra_kwargs.get('volumes').split(','):
+
+                    extra_volume = volume.split(':')
+
+                    container_volume_bind.update(
+                        helper.merge_two_dicts(
+                            container_volume_bind,
+                            {extra_volume[0]: {'bind': extra_volume[1], 'mode': extra_volume[2]}}))
+
+                # After we finish looping
+                del docker_extra_kwargs['volumes']  # Remove the volume to prevent multiple keyword error
+                log.info("Attempted to delete volume from extra kwargs, now returns {}".format('volumes' in docker_extra_kwargs))
+
+            actual_command = command.format(internal_vol, vol_operation)
+            log.info("Command {} \n Volume Bind {}".format(actual_command, container_volume_bind))
             # Now Get the Image
             docker_interface.get_image(image_to_use)
 
             # Get the Client
             docker_client = docker_interface.get_client()
-
+            yield StatusMessage("Now starting container with input")
             # Run container using client
             container = docker_client.containers.run(
                 image=image_to_use,
-                command="vol.py -f /home/nonroot/memdumps/silentbanker.vmem pslist",
-                detach=True,
+                command=actual_command,
+                detach=True,  # Detach from container
+                volumes=container_volume_bind,
+                remove=False,  # Remove set to false as will be removed manually after gathering info
                 **docker_extra_kwargs)
 
-            container_logs = container.logs().decode('utf-8')
-
+            container_logs = container.logs(follow=True)
+            log.info(container_logs)
+            yield StatusMessage("Container has finished and logs gathered")
             """
             Block until the container has finished its execution in some form, returns the status
             
@@ -81,13 +117,27 @@ class FunctionComponent(ResilientComponent):
             anywhere below this line, it will result in a 404 as by the time this resolves; 
             the container will be removed
             """
-            container_status = container.wait()
+            print(docker_interface.inspect_container(container.id))
 
             try:
                 """
                 Attempt to remove the container now we have finished.
                 Will throw an exception if the container has already been removed"""
+
+                container_status = container.wait()
+                container_stats_gen = container.stats()
+
+                """
+                import itertools
+                container_stats = None
+                container_stats_gen = container.stats()
+                for line in container_stats_gen:
+                    print(line)
+                print(container_stats)
+                
+                """
                 container.remove()
+
             except requests.exceptions.HTTPError as e:
                 yield StatusMessage("Encountered issue when trying to remove container: {} \n {}".format(str(e),
                                     "If you supplied an extra app.config value to remove the container this is fine."))
@@ -97,8 +147,9 @@ class FunctionComponent(ResilientComponent):
                 # If container had no errors, 0 will be returned. Use a falsey check to ensure we get 0 else False
                 success=True if not container_status.get("StatusCode", 1) else False,
                 content={
-                    "logs": container_logs,
-                    "container_status": container_status,
+                    "logs": container_logs.decode('utf-8'),
+                    "container_exit_status": container_status,
+                    "container_stats": container_stats
 
                 }
             ))
