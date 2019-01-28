@@ -2,24 +2,26 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #
 """
     RES-ML
     ------
     A command line tool to build machine learning model. It supports:
-        1. download. Download incidents and save in CSV format.
-        2. build. Build machine model and save it into a file
-        3. count-value. Value count for a given field. Useful for discovering imbalanced dataset
-        4. view. View the summary of a saved model.
-        5. rebuild. Rebuild a saved model with latest data
+        1. config.      Generate a sample ml.config
+        2. download.    Download incidents and save in CSV format.
+        3. build.       Build machine model and save it into a file
+        4. count-value. Value count for a given field. Useful for discovering imbalanced dataset
+        5. view.        View the summary of a saved model.
+        6. rebuild.     Rebuild a saved model with latest data
 
     Note the recommended steps to use our res-ml package are:
-        1. Use this command line tool to
+        1. Use this command line tool to generate a sample ml.config
+        2. Use this command line tool to
             a. download incidents
             b. build and save a machine learning model
-        2. Use our function component to do prediction, by pointing to the saved model file
-        3. Rebuild the saved model periodically with updated incidents/samples.
+        3. Use our function component to do prediction, by pointing to the saved model file
+        4. Rebuild the saved model periodically with updated incidents/samples.
 """
 
 from __future__ import absolute_import
@@ -34,6 +36,7 @@ from fn_machine_learning.lib.ml_config import MlConfig
 import fn_machine_learning.lib.resilient_utils as resilient_utils
 import fn_machine_learning.lib.model_utils as model_utils
 from fn_machine_learning.lib.incident_time_filter import IncidentTimeFilter
+import fn_machine_learning.lib.res_ml_config as res_ml_config
 import requests
 
 try:
@@ -92,20 +95,21 @@ class OptParser(resilient.ArgumentParser):
 
 def main():
     """
-    We support 5 sub-commands: build, rebuild, view, download, and count_value.
-        1. build: build a new model
+    We support 6 sub-commands: config, build, rebuild, view, download, and count_value.
+        1. config: create a smaple config file
+        2. build: build a new model
             -o  Required flag, pointing to a file we can save the model to
             -c  Optional flag, pointing to a CSV file with samples. If this is absent, we will
                 download incidents and use them as samples.
             Example: res-ml build -o logReg_adaboost.ml
-        2. rebuild: Rebuild a saved model
+        3. rebuild: Rebuild a saved model
             -i  Required flag, file of saved model to rebuild
             -c  Optional falg, same as -c of build above
-        3. view: show summary of a saved model
+        4. view: show summary of a saved model
             -i  Required flag, pointing to a saved model file
-        4. download: Download incidents and save as CSV file
+        5. download: Download incidents and save as CSV file
             -o  Required flag, file of saved incidents in CSV
-        5. count_value: show value count for a given field. Normally this is the field to be predict.
+        6. count_value: show value count for a given field. Normally this is the field to be predict.
                         This can help to determine whether the dataset is imbalance regarding this field
             -i  Required flag, pointing to a CSV file with samples
             -f  Required flag, the field to check value count
@@ -120,6 +124,9 @@ def main():
                                        dest="cmd")
     subparsers.required = True
 
+    config_parser = subparsers.add_parser("config",
+                                          help="Generate a sample config file")
+
     build_parser = subparsers.add_parser("build",
                                          help="Build a machine model")
     rebuild_parser = subparsers.add_parser("rebuild",
@@ -131,13 +138,28 @@ def main():
     count_value_parser = subparsers.add_parser("count_value",
                                                help="Count value of a field")
 
-    # 1. build process
+    # 1. config
+    #   -o (Optional) name of sample config file. If not specified, ml.config will be used
     #
-    #   -c Specifiy a CSV file with samples. Otherwise download incidents
+    config_parser.add_argument("-o", "--output",
+                               help="Create sample config file as",
+                               default=None)
+
+    # 2. build process
     #
+    #   -c (Optional) Specify a CSV file with samples. Otherwise download incidents
+
     build_parser.add_argument("-c", "--csv",
                               help="Use samples from CSV file",
                               default=None)
+
+    #
+    #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
+    #
+    build_parser.add_argument("-f", "--config",
+                              help="Use config file",
+                              default=None)
+
     #
     #   -o Save model as
     #
@@ -146,7 +168,7 @@ def main():
                               required=True,
                               default=None)
 
-    # 2. rebuild process
+    # 3. rebuild process
     #
     #   -c Specify a CSV file with samples. Otherwise download incidents
     #
@@ -161,7 +183,14 @@ def main():
                                 required=True,
                                 default=None)
 
-    # 3. View
+    #
+    #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
+    #
+    rebuild_parser.add_argument("-f", "--config",
+                                help="Use config file",
+                                default=None)
+
+    # 4. View
     #
     #   -i Model file to view
     #
@@ -170,7 +199,7 @@ def main():
                              required=True,
                              default=None)
 
-    # 4. Download
+    # 5. Download
     #
     #   -o file to save
     #
@@ -179,7 +208,7 @@ def main():
                                  required=True,
                                  default=None)
 
-    # 5. Value count
+    # 6. Value count
     #
     #   -i  input CSV file with samples
     #   -f  field to check
@@ -207,7 +236,9 @@ def main():
     LOG.addHandler(fh)
 
     opt_parser = OptParser()
-    if args.cmd == "build":
+    if args.cmd == "config":
+        create_sample_config(args)
+    elif args.cmd == "build":
         build_new_model(args, opt_parser)
     elif args.cmd == "rebuild":
         rebuild_model(args, opt_parser)
@@ -220,6 +251,33 @@ def main():
         count_value(args)
     else:
         LOG.error("Unknown command: " + args.cmd)
+
+
+def create_sample_config(args):
+    """
+    Create a sample config
+    :param args:
+    :param opt_parser:
+    :return:
+    """
+    config_data = res_ml_config.get_config_data()
+    config_file = "ml.config"
+
+    #
+    # Check if config_file specified
+    #
+    if args.output is not None:
+        config_file = args.output
+
+    #
+    # Check if file already exists. If so, print out error message and quit
+    #
+    if os.path.isfile(config_file):
+        LOG.info("{} already exists. Please use another file name.".format(config_file))
+        return
+
+    with open(config_file, "w") as outfile:
+        outfile.write(config_data)
 
 
 def count_value(args):
