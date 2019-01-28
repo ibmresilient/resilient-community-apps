@@ -85,42 +85,50 @@ class SNResilientMock(BasicResilientMock):
             "id": 2,
         }
     }
-    
+
     datatable_rows = [
       {
-        "time": 1543333316605,
-        "res_id": "RES-1001-2002",
-        "sn_ref_id": "INC123456",
-        "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
-        "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-        "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+        "sn_records_dt_time": 1543333316605,
+        "sn_records_dt_name": "Mock Task Name",
+        "sn_records_dt_type": "Task",
+        "sn_records_dt_res_id": "RES-1001-2002",
+        "sn_records_dt_sn_ref_id": "INC123456",
+        "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+        "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       },
       {
-        "time": 1543333316605,
-        "res_id": "RES-1001",
-        "sn_ref_id": "INC123457",
-        "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
-        "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-        "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+        "sn_records_dt_time": 1543333316605,
+        "sn_records_dt_res_id": "RES-1001",
+        "sn_records_dt_name": "Mock Incident Name",
+        "sn_records_dt_type": "Incident",
+        "sn_records_dt_sn_ref_id": "INC123457",
+        "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+        "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+        "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 
     updated_datatable_rows = [
         {
-            "time": 1543333316605,
-            "res_id": "RES-1001-2002",
-            "sn_ref_id": "INC123456",
-            "resilient_status": """<div style="color: rgb(0,179,60);">Active</div>""",
-            "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-            "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+            "sn_records_dt_time": 1543333316605,
+            "sn_records_dt_res_id": "RES-1001-2002",
+            "sn_records_dt_sn_ref_id": "INC123456",
+            "sn_records_dt_name": "Mock Task Name",
+            "sn_records_dt_type": "Task",
+            "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Active</div>""",
+            "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
         },
         {
-            "time": 1543333316605,
-            "res_id": "RES-1001",
-            "sn_ref_id": "INC123457",
-            "resilient_status": """<div style="color: rgb(0,179,60);">Closed</div>""",
-            "servicenow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
-            "link": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
+            "sn_records_dt_time": 1543333316605,
+            "sn_records_dt_res_id": "RES-1001",
+            "sn_records_dt_name": "Mock Incident Name",
+            "sn_records_dt_type": "Incident",
+            "sn_records_dt_sn_ref_id": "INC123457",
+            "sn_records_dt_res_status": """<div style="color: rgb(0,179,60);">Closed</div>""",
+            "sn_records_dt_snow_status": """<div style="color: rgb(230,0,0);">Resolved</div>""",
+            "sn_records_dt_links": """<a href="https://0.0.0.0/#incidents/2105?task_id=2251401">RES</a> <a href="https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC0010459">SN</a>"""
       }
     ]
 
@@ -182,9 +190,9 @@ class SNResilientMock(BasicResilientMock):
                                              status_code=200,
                                              content=data)
 
-    @resilient_endpoint("GET", "/incidents/[0-9]+/table_data/sn_external_ticket_status\?handle_format=names")
+    @resilient_endpoint("GET", "/incidents/[0-9]+/table_data/sn_records_dt\?handle_format=names")
     def datatable_incident_get(self, request):
-        """ GET sn_external_ticket_status datatable """
+        """ GET sn_records_dt datatable """
 
         data = {"rows": SNResilientMock.get_datatable_rows(self.datatable_rows)}
 
@@ -192,9 +200,9 @@ class SNResilientMock(BasicResilientMock):
                                              status_code=200,
                                              content=json.dumps(data))
 
-    @resilient_endpoint("PUT", "/incidents/[0-9]+/table_data/sn_external_ticket_status/row_data/[0-9]+\?handle_format=names")
+    @resilient_endpoint("PUT", "/incidents/[0-9]+/table_data/sn_records_dt/row_data/[0-9]+\?handle_format=names")
     def datatable_incident_put(self, request):
-        """ PUT sn_external_ticket_status datatable """
+        """ PUT sn_records_dt datatable """
 
         data = SNResilientMock.get_datatable_rows(self.updated_datatable_rows)[0]
 
