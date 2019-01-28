@@ -207,7 +207,12 @@ def main():
                                  help="CSV file to save samples",
                                  required=True,
                                  default=None)
-
+    #
+    #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
+    #
+    download_parser.add_argument("-f", "--config",
+                                 help="Use config file",
+                                 default=None)
     # 6. Value count
     #
     #   -i  input CSV file with samples
@@ -235,7 +240,20 @@ def main():
         LOG.setLevel(logging.DEBUG)
     LOG.addHandler(fh)
 
-    opt_parser = OptParser()
+    #
+    #   Get config file
+    #
+    config_file = None
+    if args.cmd == "download" or args.cmd == "build" or args.cmd == "rebuild":
+        # Uer can use -f to specify config file for machine learning
+        config_file = args.config
+        if config_file is None and os.path.isfile("./ml.config"):
+            #
+            # If ./ml.config exits and user doesn't specify what to use, use ./ml.config
+            #
+            config_file = "./ml.config"
+
+    opt_parser = OptParser(config_file=config_file)
     if args.cmd == "config":
         create_sample_config(args)
     elif args.cmd == "build":
