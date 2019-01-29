@@ -62,35 +62,11 @@ class FunctionComponent(ResilientComponent):
             if image_to_use not in helper.get_config_option("docker_image", True).split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
-            # Acquire any specific configs for this image
-            command = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_volatility', {}), option_name="cmd")
+            # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
+            command, docker_extra_kwargs = docker_interface.gather_image_args_and_volumes(
+                helper, image_to_use, self.all_options, docker_extra_kwargs)
 
-            output_vol = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="output_dir")
-
-            internal_vol = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="vol_internal_dir")
-
-            vol_operation = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_'+image_to_use.split("/", 1)[1]), option_name="volcmd")
-
-            container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
-
-            if docker_extra_kwargs.get('volumes', False):
-                log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
-
-                for volume in docker_extra_kwargs.get('volumes').split(','):
-
-                    extra_volume = volume.split(':')
-
-                    container_volume_bind.update(
-                        helper.merge_two_dicts(
-                            container_volume_bind,
-                            {extra_volume[0]: {'bind': extra_volume[1], 'mode': extra_volume[2]}}))
-
-                # After we finish looping
-                del docker_extra_kwargs['volumes']  # Remove the volume to prevent multiple keyword error
-                log.info("Attempted to delete volume from extra kwargs, now returns {}".format('volumes' in docker_extra_kwargs))
-
-            actual_command = command.format(internal_vol, vol_operation)
-            log.info("Command {} \n Volume Bind {}".format(actual_command, container_volume_bind))
+            log.info("Command {} \n Volume Bind {}".format(command, docker_extra_kwargs["volumes"]))
             # Now Get the Image
             docker_interface.get_image(image_to_use)
 
@@ -100,24 +76,15 @@ class FunctionComponent(ResilientComponent):
             # Run container using client
             container = docker_client.containers.run(
                 image=image_to_use,
-                command=actual_command,
+                command=command,
                 detach=True,  # Detach from container
-                volumes=container_volume_bind,
                 remove=False,  # Remove set to false as will be removed manually after gathering info
                 **docker_extra_kwargs)
 
+            # Gather the logs as the happen, until the container finishes.
             container_logs = container.logs(follow=True)
             log.info(container_logs)
             yield StatusMessage("Container has finished and logs gathered")
-            """
-            Block until the container has finished its execution in some form, returns the status
-            
-            
-            If the kwarg 'remove' was set to true in docker run, you will not be able to access the container 
-            anywhere below this line, it will result in a 404 as by the time this resolves; 
-            the container will be removed
-            """
-            print(docker_interface.inspect_container(container.id))
 
             try:
                 """
@@ -149,11 +116,26 @@ class FunctionComponent(ResilientComponent):
                 content={
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,
-                    "container_stats": container_stats
+                    #"container_stats": container_stats
 
                 }
             ))
             log.info("Complete")
         except Exception:
             yield FunctionError()
+
+    def gather_image_args_and_volumes(self, helper, image_to_use):
+        # Acquire any specific configs for this image
+        command = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_volatility', {}),
+                                                          option_name="cmd")
+        output_vol = helper.get_image_specific_config_option(
+            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
+            option_name="primary_output_dir")
+        internal_vol = helper.get_image_specific_config_option(
+            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
+            option_name="primary__internal_dir")
+        vol_operation = helper.get_image_specific_config_option(
+            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="volcmd")
+        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
+        return command, container_volume_bind, internal_vol, vol_operation
 

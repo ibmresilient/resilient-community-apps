@@ -7,11 +7,15 @@ import docker
 LOG = logging.getLogger(__name__)
 import os
 
+log = logging.getLogger(__name__)
+
+
 class DockerUtils:
 
     def __init__(self):
         self.client = None
         self.api_client = None
+
 
     def setup_docker_connection(self, options):
         """
@@ -115,6 +119,56 @@ class DockerUtils:
 
     def inspect_container(self, containerid):
         return self.api_client.inspect_container(containerid)
+
+    def gather_image_args_and_volumes(self, helper, image_to_use, all_options, docker_extra_kwargs):
+        """
+        A helper function used to gather the command to be run aswell as format the kwargs to used on run.
+
+        Depending on the image, there may exist the need for a specific type of volume binding.
+        You have options in how you can set this value.
+
+        You can either set it in fn_docker app.config section.
+        Or if you intend to run multiple images, which each require their own separate volume binding
+        you can instead configure an app.config section for each image
+        where you can specify the internal and external volume primary volume bind.
+
+        :param helper:
+        :param image_to_use:
+        :param all_options:
+        :param docker_extra_kwargs:
+        :return:
+        """
+        # Acquire any specific configs for this image
+        command = helper.get_image_specific_config_option(options=all_options.get('fn_docker_volatility', {}),
+                                                          option_name="cmd")
+        output_vol = helper.get_image_specific_config_option(
+            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
+            option_name="primary_output_dir")
+        internal_vol = helper.get_image_specific_config_option(
+            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
+            option_name="primary__internal_dir")
+        vol_operation = helper.get_image_specific_config_option(
+            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation")
+        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
+
+        if docker_extra_kwargs.get('volumes', False):
+            log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
+
+            # Split the volumes string by commas to get each volume binding
+            for volume in docker_extra_kwargs.get('volumes').split(','):
+                # Split the volume into each of its params
+                volume_params = volume.split(':')
+                # Format the volume data into a dict and update.
+                container_volume_bind.update({volume_params[0]: {'bind': volume_params[1], 'mode': volume_params[2]}})
+
+            # After we finish looping
+            del docker_extra_kwargs['volumes']  # Remove the volume
+            docker_extra_kwargs['volumes'] = container_volume_bind
+            log.info(
+                "Attempted to format volume from extra kwargs, now is type {}".format(
+                    type(docker_extra_kwargs['volumes'])))
+
+        return command.format(internal_vol, vol_operation), docker_extra_kwargs
 
 
 
