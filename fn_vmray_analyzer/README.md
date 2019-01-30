@@ -16,7 +16,6 @@
 * Supports an attachment or artifact that is a file, or where the artifact's value contains a URL.
 * Allows users to select the type of report, PDF, HTML, or JSON, which is returned from Joe Sandbox.
 * Supports a proxy. Just add your proxy details to the `app.config` file.
-* The function depends on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
 
 ---
 
