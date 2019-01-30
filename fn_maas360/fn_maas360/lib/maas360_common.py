@@ -6,6 +6,7 @@
 import logging
 import json
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib.components.requests_common import RequestsCommon
 
 LOG = logging.getLogger(__name__)
 JSON_CONTENT_TYPE_HEADER = "application/json"
@@ -16,7 +17,8 @@ class MaaS360Utils(object):
     """
     Helper object MaaS360Utils.
     """
-    def __init__(self, host, billingId, userName, password, appID, appVersion, platformID, appAccessKey, auth_url, requests_common):
+    def __init__(self, host, billingId, userName, password, appID, appVersion, platformID, appAccessKey, auth_url,
+                 opts=None, options=None):
         """
         Constructor for MaaS360Utils
         Note: Object will not be created if auth token is not generated successfully
@@ -30,15 +32,23 @@ class MaaS360Utils(object):
         :param platformID:
         :param appAccessKey:
         :param auth_url:
-        :param requests_common:
+        :param opts
+        :param options
         """
         self.host = host
         self.billingId = billingId
-        self.rc = requests_common
+        self.rc = RequestsCommon(opts, options)
 
         # generating auth token and setting it in the object, to be used in further api calls
         self.authToken = self.generate_auth_token(host, billingId, userName, password, appID, appVersion, platformID,
                                                   appAccessKey, auth_url)
+
+    def get_auth_token(self):
+        """
+        Return instance variable authToken.
+        :return: authToken
+        """
+        return self.authToken
 
     def generate_auth_token(self, host, billingId, userName, password, appID, appVersion, platformID, appAccessKey, auth_url):
         """
@@ -74,10 +84,6 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
                                    "subsequent api calls will be cancelled: {}".format(err))
 
-        if results is None:
-            raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
-                                   "subsequent api calls will be cancelled : {}".format(json.dumps(results)))
-
         auth_response = results.get("authResponse")
         if auth_response and auth_response.get("errorCode") == 0:  # 0 no error
             return auth_response.get("authToken")
@@ -85,7 +91,7 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
                                    "subsequent api calls will be cancelled: {}".format(json.dumps(auth_response)))
 
-    def get_devices(self, basic_search_url, query_string):
+    def basic_search(self, basic_search_url, query_string):
         """
         Search for devices by Device Name, Username, Phone Number, Platform, Device Status and other Device Identifiers.
         Support for partial match for Device Name, Username, Phone Number.
@@ -101,9 +107,6 @@ class MaaS360Utils(object):
             results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
-
-        if results is None:
-            raise IntegrationError("Unable to execute call Basic Search: {}".format(json.dumps(results)))
 
         devices = results.get("devices")
         return devices
@@ -135,9 +138,6 @@ class MaaS360Utils(object):
                                            headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
-
-        if results is None:
-            raise IntegrationError("Unable to execute call Locate Device: {}".format(json.dumps(results)))
 
         action_response = results.get("actionResponse")
         if action_response is None:

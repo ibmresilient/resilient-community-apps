@@ -43,10 +43,9 @@ def selftest_function(opts):
             'Calling createPartnerConfigurations with WS Server base: ' + url + ', Blling ID: ' + billing_id + ', User: '
             + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id + ', App Version: ' + app_version)
 
-        rc = RequestsCommon()
         state, reason = "", ""
         maas360_utils = MaaS360Utils(url, billing_id, username, password, app_id, app_version, platform_id,
-                                     app_access_key, auth_url, rc)
+                                     app_access_key, auth_url, opts, options)
         if maas360_utils and maas360_utils.authToken:
             state = "success"
         else:

@@ -79,11 +79,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting the Locate Device function")
 
-            # Make URL request
-            rc = RequestsCommon(self.opts, self.options)
-
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
-                                         app_access_key, auth_url, rc)
+                                         app_access_key, auth_url, self.opts, self.options)
 
             location = maas360_utils.locate_device(locate_device_url, device_id)
             if not location:

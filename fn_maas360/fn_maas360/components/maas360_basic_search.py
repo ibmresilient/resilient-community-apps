@@ -10,7 +10,6 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_maas360.lib.maas360_common import MaaS360Utils
 from resilient_lib.components.function_result import ResultPayload
 from resilient_lib.components.resilient_common import validate_fields
-from resilient_lib.components.requests_common import RequestsCommon
 
 CONFIG_DATA_SECTION = 'fn_maas360'
 LOG = logging.getLogger(__name__)
@@ -179,13 +178,10 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting the Basic Search lookup")
 
-            # Make URL request
-            rc = RequestsCommon(self.opts, self.options)
-
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
-                                         app_access_key, auth_url, rc)
+                                         app_access_key, auth_url, self.opts, self.options)
 
-            devices = maas360_utils.get_devices(basic_search_url, query_string)
+            devices = maas360_utils.basic_search(basic_search_url, query_string)
             if not devices:
                 yield StatusMessage("No devices were found")
 
