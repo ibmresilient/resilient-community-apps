@@ -123,7 +123,7 @@ class FunctionComponent(ResilientComponent):
                     analysis_report_status = True
 
             results = {
-                "analysis_report_status": analysis_report_status,
+                "analysis_report_status":
                 "incident_id": incident_id,
                 "artifact_id": artifact_id,
                 "attachment_id": attachment_id,

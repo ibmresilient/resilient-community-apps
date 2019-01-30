@@ -11,45 +11,38 @@
 
 **This package contains a function that executes a VMRay Sandbox Analyzer of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
 
- ![screenshot](./screenshots/1.png)
+ ![screenshot](./screenshots/workflow_attachment.png)
 
-* Supports an attachment or artifact that is a file, or where the artifact's value contains a URL.
-* Allows users to select the type of report, PDF, HTML, or JSON, which is returned from Joe Sandbox.
-* Supports a proxy. Just add your proxy details to the `app.config` file.
+* Supports an attachment or artifact that is a file.
+* In future it will allows users to select the type of report, PDF, HTML, or JSON, which is returned from VMRay Sandbox, now only support JSON.
+* Supports a proxy. Just add your proxy details to the `proxy` section in `app.config` file.
 
----
-
-## app.config settings:
-```
-# Your VMRay Analyzer API Key
+## app.config settings:  
+---               
+```                                                                         
+# Your VMRay Analyzer API Key                                                         
 vmray_api_key=
 
 # Your VMRay Server URL, using https://cloud.vmray.com if empty.
 vmray_analyzer_url=https://cloud.vmray.com
-
+             
 # Amont of time in seconds to wait until checking if the report is ready again.
-vmray_analyzer_report_request_timeout=60
-
+vmray_analyzer_report_request_timeout=60 
 ```
-
-
----
+---                                               
 
 ## Function Inputs:
-| Function Name | Type | Required | Example | Info |
 
-| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|
-
+| Function Name | Type | Required | Example  | Info |
+| --------- | :---------: | ------------------ | ------| ----|
+| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|            
 | `attachment_id` | `Number` | No | `5` | The ID of the Attachment to be analyzed|
-
 | `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed 
-
-| `analyzer_report_status` | `Boolean` | Yes | `"False""` | Has the analysis report generated successfully. Options are: `True` or `False` |
-
+| `analyzer_report_status` | `Boolean` | Yes | `False` | Has the analysis report generated successfully. Options are: `True` or `False` |
 ---
 
 ## Function Output:
-```python
+```python                                    
 results = {
                 "analysis_report_status": analysis_report_status,
                 "incident_id": incident_id,
@@ -79,7 +72,8 @@ inputs.artifact_id = artifact.id
 
 ## Post-Process Script:
 This example adds a Note to the Incident and color codes the `analysis_status` depending if it was **malicious** or **clean**
-```python
+
+```
 def  font_color(vti_score,sample_severity):
   color = "green"
   try:
@@ -141,7 +135,11 @@ for sample in results.sample_final_result:
   noteText += u"""Reputation lookup result:  <b style= "color:{color}">{reputation_lookup_severity} </b> <br>""".format(color=color, reputation_lookup_severity=reputation_lookup_severity)
   
 incident.addNote(helper.createRichText(noteText))
+
 ```
+
+<b>Example of adding a incident note from post-processing scripts:</b><br>
+ ![screenshot](./screenshots/results_addnote.png)
 ---
 
 ## Rules
@@ -151,3 +149,4 @@ incident.addNote(helper.createRichText(noteText))
 | Example: VMRay Sandbox Analyzer [Attachment]| `Attachment` | `Example: VMRay Sandbox Analyzer [Attachment]` |
 
 ---
+                                                                               
