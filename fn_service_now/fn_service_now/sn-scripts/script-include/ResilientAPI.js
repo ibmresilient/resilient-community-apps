@@ -38,37 +38,65 @@ function getMidServer(){
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
-function executeRESTMessage(rm){
+function executeRESTMessage(rm, usingMidServer, baseURL){
 	var response, statusCode, responseBody, responseHeaders, errMsg = null;
+
+	//Set timeout to 60s
+	rm.setHttpTimeout(60000);
+
+	try{
 		response = rm.execute();
-		statusCode = response.getStatusCode();
-		
-		if(statusCode == 200){
-			responseBody = JSON_PARSER.decode(response.getBody());
-			responseHeaders = response.getHeaders();
-			return {
-				body: responseBody,
-				headers: responseHeaders
-			};
-		}
-		else if (statusCode >= 400){
-			responseBody = JSON_PARSER.decode(response.getBody());
-			errMsg = "Resilient API call FAILED\nStatus Code: " + statusCode + "\nReason: " + responseBody.message;
-			throw errMsg;
-		}
-		else if (response.haveError()){
-			var reason = response.getErrorMessage();
-			if (reason.toLowerCase().indexOf("unknown host")){
-				reason += "\n(Hint: Your Resilient Host may be incorrect or not accessible.";
-				reason += "\nCheck your Resilient Host is correct and Mid-Server is correctly configured)";
+
+		// If using a mid-server, wait max 60s for response
+		response.waitForResponse(60);
+	}
+	catch (e){
+		if (e.message.indexOf("No response for ECC message request") !== -1){
+			errMsg = "Timedout getting response.";
+			if (usingMidServer){
+				errMsg += "\nCheck Mid Server. Login to the machine hosting your Mid Server and ensure you can ping IBM Resilient at " + baseURL;
 			}
-			errMsg = "Reason: " + reason;
-			throw errMsg;
+			else{
+				errMsg += "\nEnsure you can access and login to IBM Resilient at " + baseURL;
+			}
 		}
-		else {
-			errMsg = "Failed to call Resilient API: Unknown Error";
-			throw errMsg;
+		else{
+			errMsg = "Failed to executeREST message. Unhandled error. " + e;
 		}
+		throw errMsg;
+	}
+
+	statusCode = response.getStatusCode();
+
+	if(statusCode == 200){
+		responseBody = JSON_PARSER.decode(response.getBody());
+		responseHeaders = response.getHeaders();
+		return {
+			body: responseBody,
+			headers: responseHeaders
+		};
+	}
+	else if (statusCode >= 400){
+		responseBody = JSON_PARSER.decode(response.getBody());
+		errMsg = "Resilient API call FAILED\nStatus Code: " + statusCode + "\nReason: " + responseBody.message;
+		throw errMsg;
+	}
+	else if (response.haveError()){
+		var reason = response.getErrorMessage();
+		if (reason.toLowerCase().indexOf("unknown host")){
+			reason += "\nYour Resilient Host may be incorrect or not accessible.";
+			reason += "\nCheck your Resilient Host is up and running.";
+			if(usingMidServer){
+				reason += "Check your Mid-Server is correctly configured";
+			}
+		}
+		errMsg = "Reason: " + reason;
+		throw errMsg;
+	}
+	else {
+		errMsg = "Failed to call Resilient API: Unknown Error";
+		throw errMsg;
+	}
 }
 
 //Function to parse the JSESSIONID from a cookie
@@ -99,7 +127,7 @@ function parseJSESSIONID(cookie){
 }
 
 //Function to get the id of an org, handles errors
-function getOrgId(orgs, orgName){
+function getOrgId(orgs, orgName, resilientUser){
 	var orgId, errMsg = null;
 	
 	try{
@@ -113,7 +141,7 @@ function getOrgId(orgs, orgName){
 
 				//If user does not have permission throw error
 				if (!orgs[i].enabled){
-					errMsg = "Resilient user does not have permission to access org: " + orgName;
+					errMsg = resilientUser + " does not have permission to access the Resilient Organization: " + orgName;
 					throw errMsg;
 				}
 				break;
@@ -121,7 +149,7 @@ function getOrgId(orgs, orgName){
 		}
 		//If no orgId found, throw error
 		if (!orgId){
-			errMsg = "Resilient user is not a member of specified org: " + orgName;
+			errMsg = resilientUser + " is not a member of specified of the Resilient Organization: " + orgName;
 			throw errMsg;
 		}
 
@@ -189,24 +217,26 @@ ResilientAPI.prototype = {
 			this.connect();
 		}
 		catch (e){
-			errMsg = "Failed to connect to Resilient\n" + e;
+			errMsg = "Failed to connect to IBM Resilient Host at " + this.baseURL + ".\n" + e;
 			throw errMsg;
 		}
 	},
 	
 	connect: function(){
 		
+		var rm, authData, requestBody, res = null;
+
 		//Instaniate new REST Message
-		var rm = new sn_ws.RESTMessageV2();
+		rm = new sn_ws.RESTMessageV2();
 		rm.setHttpMethod("post");
 		rm.setEndpoint(this.baseURL + "/rest/session");
 		rm.setRequestHeader("content-type", "application/json");
 
 		//Set authData for the request
-		var authData = { "email": this.userEmail, "password": getPassword() };
+		authData = { "email": this.userEmail, "password": getPassword() };
 		
 		//Set Request Body
-		var requestBody = JSON_PARSER.encode(authData);
+		requestBody = JSON_PARSER.encode(authData);
 		rm.setRequestBody(requestBody);
 
 		// If we're using a Mid-Server, get its name
@@ -220,7 +250,7 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute and get response
-		var res = executeRESTMessage(rm);
+		res = executeRESTMessage(rm, this.usingMidServer, this.baseURL);
 		
 		//Get csrfToken and JSESSIONID
 		this.csrfToken = res.body.csrf_token;
@@ -237,7 +267,7 @@ ResilientAPI.prototype = {
 		
 		var url = this.baseURL + "/rest" + endpoint;
 		
-		//Instaniate new REST Message
+		//Instantiate new REST Message
 		var rm = new sn_ws.RESTMessageV2();
 		
 		//If using a midServer, set it
