@@ -166,10 +166,11 @@ ResilientAPI.prototype = {
 			throw errMsg;
 		}
 
-		if (!hostName) {throw "Resilient Host cannot be null";}
-		if (!orgName) {throw "Resilient Organization cannot be null";}
-		if (!userEmail) {throw "Resilient Email Address cannot be null";}
-		if (!userPassword) {throw "Resilient Password cannot be null";}
+		errMsg = " property cannot be null. Please update your properties clicking the link below the Test Connection button";
+		if (!hostName) {throw "Resilient Host" + errMsg;}
+		if (!orgName) {throw "Resilient Organization" + errMsg;}
+		if (!userEmail) {throw "Resilient Email" + errMsg;}
+		if (!userPassword) {throw "Resilient Password" + errMsg;}
 
 		//Set Resilient Configuration Settings
 		this.baseURL = "https://" + hostName;

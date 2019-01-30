@@ -36,6 +36,11 @@
 			width: 35%;
 		}
 
+		.res-container p{
+			text-align: center;
+			margin: 5px;
+		}
+
 	</style>
 	<div class="res-container">
 		<img class="res-logo" alt="ibm_resilient_logo" src="ibm_resilient_logo.png"/>
@@ -43,6 +48,9 @@
 			<h3>Test IBM Resilient Connection</h3>
 			<button class="btn btn-primary" type="submit" onclick="doTestConnection()">Test Connection</button>
 		</g:ui_form>
+		<a target="_blank" href="system_properties_ui.do?sysparm_title=IBM Resilient Properties$[AMP]sysparm_category=Resilient Properties"> 
+			<p>Click here to update IBM Resilient Properties</p>
+		</a>
 	</div>
 </j:jelly>
 
