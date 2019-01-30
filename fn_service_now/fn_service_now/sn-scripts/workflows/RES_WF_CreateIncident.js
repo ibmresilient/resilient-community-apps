@@ -9,7 +9,7 @@
 		//Get the required parameters to create an Incident
 		record = current;
 		snRecordId = record.getValue("number");
-		caseName = "SN-[" + snRecordId + "]: " + record.getValue("short_description");
+		caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
 
 		//Map ServiceNow severity in digits to Resilient strings
 		//TIP: use the 'finfo' command on Resilient Integrations Server

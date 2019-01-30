@@ -9,7 +9,7 @@
 		//Get the required parameters to create a Task
 		record = current;
 		snRecordId = record.getValue("number");
-		caseName = "SN-[" + snRecordId + "]: " + record.getValue("short_description");
+		caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
 		incidentId = workflow.variables.u_ibm_resilient_incident_id;
 		
 		//Initialize options
