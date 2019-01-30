@@ -139,16 +139,18 @@ class DockerUtils:
         :return:
         """
         # Acquire any specific configs for this image
-        command = helper.get_image_specific_config_option(options=all_options.get('fn_docker_volatility', {}),
+        command = helper.get_image_specific_config_option(options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
                                                           option_name="cmd")
         output_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
-            option_name="primary_output_dir")
+            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            option_name="primary_output_dir", optional=True)
         internal_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
-            option_name="primary__internal_dir")
+            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            option_name="primary__internal_dir", optional=True)
         vol_operation = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation")
+            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation",
+            optional=True)
+
         container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
 
         if docker_extra_kwargs.get('volumes', False):
@@ -167,8 +169,9 @@ class DockerUtils:
             log.info(
                 "Attempted to format volume from extra kwargs, now is type {}".format(
                     type(docker_extra_kwargs['volumes'])))
+            command.format(internal_vol, vol_operation)
 
-        return command.format(internal_vol, vol_operation), docker_extra_kwargs
+        return command, docker_extra_kwargs
 
 
 

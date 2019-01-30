@@ -10,6 +10,8 @@ import requests
 from fn_docker.util.docker_utils import DockerUtils
 from fn_docker.util.helper import ResDockerHelper
 from resilient_lib import ResultPayload
+from resilient_circuits.template_functions import render
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'docker_run_docker_container"""
@@ -49,14 +51,15 @@ class FunctionComponent(ResilientComponent):
             log.info("docker_input: %s", docker_input)
 
             helper = ResDockerHelper(self.options)
-
             docker_interface = DockerUtils()
 
+            escaped_args = {
+                "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs)
+            }
+            print(escaped_args)
             # Decide whether to use local connection or remote
             docker_interface.setup_docker_connection(options=self.options)
-
             docker_extra_kwargs = docker_interface.parse_extra_kwargs(options=self.options)
-
             image_to_use = helper.get_config_option("docker_image", True) or docker_image
 
             if image_to_use not in helper.get_config_option("docker_image", True).split(","):
@@ -66,17 +69,18 @@ class FunctionComponent(ResilientComponent):
             command, docker_extra_kwargs = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, docker_extra_kwargs)
 
-            log.info("Command {} \n Volume Bind {}".format(command, docker_extra_kwargs["volumes"]))
+
+            log.info("Command {} \n Volume Bind {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_to_use)
-
+            print(render(command,escaped_args))
             # Get the Client
             docker_client = docker_interface.get_client()
             yield StatusMessage("Now starting container with input")
             # Run container using client
             container = docker_client.containers.run(
                 image=image_to_use,
-                command=command,
+                command=render(command, escaped_args),
                 detach=True,  # Detach from container
                 remove=False,  # Remove set to false as will be removed manually after gathering info
                 **docker_extra_kwargs)
