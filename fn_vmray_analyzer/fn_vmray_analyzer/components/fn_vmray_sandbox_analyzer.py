@@ -2,15 +2,21 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import logging
 import tempfile, time, json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon
+from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon, build_incident_url, build_resilient_url
 
 from fn_vmray_analyzer.util.vmrapi import VMRayAPI
 
 CONFIG_DATA_SECTION = "fn_vmray_analyzer"
+CHECK_REPORTS_SLEEP_TIME = 60
 
 
 class FunctionComponent(ResilientComponent):
@@ -56,13 +62,12 @@ class FunctionComponent(ResilientComponent):
             VMRAY_API_KEY = self.options.get("vmray_api_key")
             VMRAY_ANALYZER_URL = self.options.get("vmray_analyzer_url")
             VMRAY_ANALYSIS_REPORT_REQUEST_TIMEOUT = float(self.options.get("vmray_analyzer_report_request_timeout"))
-            VMRAY_ANALYZER_REPORT_VTI_SCORE_THRESHOLD = int(self.options.get("vmray_analyzer_report_vti_score_threshold")) or 25
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
-            analysis_report_status = kwargs.get("analysis_report_status")  # True or False
+            analysis_report_status = kwargs.get("analysis_report_status")  # Boolean
 
             if not incident_id:
                 raise ValueError("incident_id is required")
@@ -81,7 +86,8 @@ class FunctionComponent(ResilientComponent):
                 vmray = VMRayAPI(VMRAY_API_KEY, url=VMRAY_ANALYZER_URL, proxies=RequestsCommon().get_proxies())
                 resilient = self.rest_client()
 
-                # Get entity we are dealing with (either attachment or artifact)
+                # Get attachment entity we are dealing with (either attachment or artifact)
+                # then submit it to VMRay Analyzer
 
                 sample_file = get_file_attachment(res_client=resilient, incident_id=incident_id,
                                                   artifact_id=artifact_id,
@@ -89,54 +95,40 @@ class FunctionComponent(ResilientComponent):
                 sample_name = get_file_attachment_name(res_client=resilient, incident_id=incident_id,
                                                        artifact_id=artifact_id, attachment_id=attachment_id)
 
-                # Submit to VMRay Cloud, and if succesful return the sample_id
-
                 with open(write_temp_file(sample_file, sample_name), "rb") as handle:
-                    sample_id = vmray.analyze(handle, sample_name)
+                    sample_ids = [sample["sample_id"] for sample in vmray.submit_samples(handle, sample_name)]
 
-                # new sample might need  take as long as hours to finished, need to check the if the analysises have been done.
+                # New samples submission might need take as long as hours to finished,
+                # need to check the if the analysis have been done.
                 time_of_begin_check_report = time.time()
+                is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 
-                while not vmray.check(sample_id):
+                while not is_samples_analysis_finished:
                     if time.time() - time_of_begin_check_report > VMRAY_ANALYSIS_REPORT_REQUEST_TIMEOUT:
                         yield StatusMessage(
                             "Analysis processing still running at Cloud VMRay Analyzer,please check it later. ")
                         break
-                    yield StatusMessage("Analysis Report not done yet, Fetch every 5 second")
-                    time.sleep(5)
+                    yield StatusMessage("Analysis Report not done yet, Fetch every {} second".format(CHECK_REPORTS_SLEEP_TIME))
+                    time.sleep(CHECK_REPORTS_SLEEP_TIME)
+                    is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 
-                if vmray.check(sample_id):
+                sample_final_result = []
+                if is_samples_analysis_finished:
+                    for sample_id in sample_ids:
+                        sample_final_result.append({"sample_id": sample_id,
+                                                    "sample_report": vmray.get_sample_report(sample_id)["data"],
+                                                    "sample_reputation_report": vmray.get_sample_reputation_report(sample_id)["data"],
+                                                    "sample_analysis_report": vmray.get_sample_anlysis_report(sample_id)["data"]})
 
-                    # one sample file will get multi analysises, and only get analysis id with highest vti score.
-                    analysis_id, analysis_report, report_archive_download = vmray.report(sample_id)
-
-                    # some sample file format will not be recoginzed, so no analysis will generated, and analysis always = 0
-                    # vti score in [25,75] The sample is considered to be suspicious because this analysis has a mid VTI score.
-                    # vit score in [75,100], The sample is considered to be malicious because this analysis has a high VTI score.
-                    if analysis_id and analysis_report["vti"]["vit_score"] >= VMRAY_ANALYZER_REPORT_VTI_SCORE_THRESHOLD:
-                        path = write_temp_file(report_archive_download, sample_name + "_analysis_report.zip")
-
-                        analysis_report_attachment = resilient.post_attachment(
-                            '/incidents/{}/attachments'.format(incident_id), path)
-                        analysis_report_status = True
-
-                    else:
-                        yield StatusMessage("report error: " + str(analysis_report["error_msg"]))
-
-            else:
-
-                analysis_report = None
-                analysis_report_attachment = None
+                    analysis_report_status = True
 
             results = {
                 "analysis_report_status": analysis_report_status,
                 "incident_id": incident_id,
                 "artifact_id": artifact_id,
                 "attachment_id": attachment_id,
-                "analysis_report": analysis_report,
-                "analysis_report_attachment": analysis_report_attachment
-            }
-            yield FunctionResult(results)
+                "sample_final_result": sample_final_result}
+
             log.info("results: " + str(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

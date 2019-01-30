@@ -89,39 +89,33 @@ class VMRayAPI(object):
         self.server_available = False
 
         # raise an exception.
-        msg = "exceeded 3 attempts with sandbox API: {u}, p:{p}, f:{f}".format(u=full_url,
-                                                                               p=params, f=files)
+        msg = "exceeded 3 attempts with sandbox API: {u}, p:{p}, f:{f}".format(u=full_url, p=params, f=files)
         try:
             msg += "\n" + response.content.decode('utf-8')
         except AttributeError:
             pass
-
         raise SandboxError(msg)
 
-    def analyze(self, handle, filename):
+    def submit_samples(self, handle, filename):
         """Submit a file for analysis.
         :type  handle:   File handle
         :param handle:   Handle to file to upload for analysis.
         :type  filename: str
         :param filename: File name.
         :rtype:  str
-        :return: File ID as a string
+        :return: Json dict.
         """
         # multipart post files.
         files = {"sample_file": (filename, handle)}
-        log.info("files: " + str(files))
 
         # ensure the handle is at offset 0.
         handle.seek(0)
 
         response = self._request("/sample/submit", method='POST', files=files, headers=self.headers)
-        log.info("response after submit a file to VMRay Analyzer: ")
-        log.info(response.json())
+
         try:
             if response.status_code == 200:
-                # if response.status_code == 200 and not response.json()['data']['errors']:
-                # only support single-file submissions; just grab the first one.
-                return response.json()['data']['samples'][0]['sample_id']
+                return response.json()['data']['samples']
             else:
                 raise SandboxError("api error in analyze ({u}): {r}".format(u=response.url, r=response.content))
         except (ValueError, KeyError, IndexError) as e:
@@ -158,9 +152,6 @@ class VMRayAPI(object):
         :return: True if service is available, False otherwise.
         """
         # if the availability flag is raised, return True immediately.
-        # NOTE: subsequent API failures will lower this flag. we do this here
-        # to ensure we don't keep hitting VMRay with requests while
-        # availability is there.
         if self.server_available:
             return True
 
@@ -169,19 +160,18 @@ class VMRayAPI(object):
             try:
                 response = self._request("/system_info", headers=self.headers)
 
-                # we've got vmray.
+                # VMRay is reachable!
                 if response.status_code == 200:
                     self.server_available = True
                     return True
-
             except SandboxError:
                 pass
 
         self.server_available = False
         return False
 
-    def report(self, sample_id, report_format="json"):
-        """Retrieves the specified report for the analyzed item, referenced by item_id.
+    def get_sample_report(self, sample_id, report_format="json"):
+        """Retrieves the specified report for the sample item, referenced by sample_id.
         Available formats include: json.
         :type  sample_id:       str
         :param sample_id:       File ID number
@@ -194,44 +184,85 @@ class VMRayAPI(object):
 
         if report_format == "html":
             return "Report Unavailable"
-
-        # grab an analysis id from the submission id.
-        response = self._request("/analysis/sample/{sample_id}".format(sample_id=sample_id),
-                                 headers=self.headers)
-
-        log.info("sample_report:  " + str(response.json()) + "\n")
-
         try:
-            # the highest score is probably the most interesting.
-            # vmray uses this internally with sample_highest_vti_score so this seems like a safe assumption.
-            analysis_id = 0
-            top_score = -1
-            for analysis in response.json()['data']:
-                if analysis['analysis_vti_score'] > top_score:
-                    top_score = analysis['analysis_vti_score']
-                    analysis_id = analysis['analysis_id']
-
+            sample_report = self._request("/sample/{sample_id}".format(sample_id=sample_id),
+                                          headers=self.headers)
+            return sample_report.json()
 
         except (ValueError, KeyError) as e:
             raise SandboxError(e)
 
-        # assume report format json.
-        response = self._request("/analysis/{analysis_id}/archive/logs/summary.json".format(analysis_id=analysis_id),
-                                 headers=self.headers)
-        archive = self._request("/analysis/{analysis_id}/archive".format(analysis_id=analysis_id), headers=self.headers)
+    def get_sample_anlysis_report(self, sample_id, report_format="json"):
+        """Retrieves the specified report for the sample item, referenced by sample_id.
+        Available formats include: json.
+        :type  sample_id:       str
+        :param sample_id:       File ID number
+        :type  report_format: str
+        :param report_format: Return format
+        :rtype:  dict
+        :return: Dictionary representing the JSON parsed data or raw, for other
+                 formats / JSON parsing failure.
+        """
 
-        # if response is JSON, return it as an object.
+        if report_format == "html":
+            return "Report Unavailable"
         try:
-            return analysis_id, response.json(), archive.content
-        except ValueError:
+            sample_analysis_report = self._request("/analysis/sample/{sample_id}".format(sample_id=sample_id),
+                                                   headers=self.headers)
+            return sample_analysis_report.json()
+
+        except (ValueError, KeyError) as e:
+            raise SandboxError(e)
+
+    def get_sample_reputation_report(self, sample_id, report_format="json"):
+        """Retrieves the specified report for the sample item, referenced by sample_id.
+        Available formats include: json.
+        :type  sample_id:       str
+        :param sample_id:       File ID number
+        :type  report_format: str
+        :param report_format: Return format
+        :rtype:  dict
+        :return: Dictionary representing the JSON parsed data or raw, for other
+                 formats / JSON parsing failure.
+        """
+
+        if report_format == "html":
+            return "Report Unavailable"
+        try:
+            # grab an analysis id from the submission id.
+            sample_analysis_report = self._request("/reputation_lookup/sample/{sample_id}".format(sample_id=sample_id),
+                                                   headers=self.headers)
+
+            return sample_analysis_report.json()
+
+        except (ValueError, KeyError) as e:
+            raise SandboxError(e)
+
+    def get_analysis_report(self, analysis_id):
+        """Retrieves the specified report for analysis items, referenced by analysis_id
+        :type   analysis_id: str
+        :param analysis_id:  Analysis ID
+
+        :rtype: dict
+        :return:    Dictionary representing the JSON parsed data or raw, for other
+                 formats / JSON parsing failure.
+        """
+        try:
+            analysis_report = self._request(
+                "/analysis/{analysis_id}/archive/logs/summary.json".format(analysis_id=analysis_id),
+                headers=self.headers)
+        except SandboxError:
             pass
 
-        # otherwise, return the raw content.
-        return analysis_id, response.content, archive.content
+        return analysis_report.json()
 
-    def score(self, report):
-        """Pass in the report from self.report(), get back an int 0-100"""
+    def get_analysis_report_archive(self, analysis_id):
+        """Retrieve  the archive zip file for analysis object, referenced by analysis_id
+        :param analysis_id:  str
+        :return:  zip file
+        """
         try:
-            return report['vti']['vti_score']
-        except KeyError:
-            return 0
+            archive = self._request("/analysis/{analysis_id}/archive".format(analysis_id=analysis_id), headers=self.headers)
+        except SandboxError:
+            pass
+        return archive.content

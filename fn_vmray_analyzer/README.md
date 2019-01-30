@@ -1,68 +1,154 @@
-# Function Joe Sandbox Analysis
+# VMRay Sandbox Analyzer Function for IBM Resilient
 
-This IBM Resilient Function package can be used to execute a **Joe Sandbox Analysis** of a file or URL. 
+## Table of Contents
+  - [app.config settings](#appconfig-settings)
+  - [Function Inputs](#function-inputs)
+  - [Function Output](#function-output)
+  - [Pre-Process Script](#pre-process-script)
+  - [Post-Process Script](#post-process-script)
+  - [Rules](#rules)
+---
 
-Once the analysis is complete, the user is informed if the file or URL is **clean** or **malicious** via a **Resilient Note**. The related Joe Sandbox Analysis report is then uploaded to the Resilient platform as an attachment. The function has the following capabilities:
+**This package contains a function that executes a VMRay Sandbox Analyzer of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
+
+ ![screenshot](./screenshots/1.png)
 
 * Supports an attachment or artifact that is a file, or where the artifact's value contains a URL.
 * Allows users to select the type of report, PDF, HTML, or JSON, which is returned from Joe Sandbox.
 * Supports a proxy. Just add your proxy details to the `app.config` file.
-* •	Is dependent on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
+* The function depends on **Joe Security's python module, jbxapi**.See [here](https://github.com/joesecurity/joesandboxcloudapi) for more details
 
+---
 
-## To install in *development mode*:
+## app.config settings:
+```
+# Your VMRay Analyzer API Key
+vmray_api_key=
 
-    pip install -e ./fn_joe_sandbox_analysis/
+# Your VMRay Server URL, using https://cloud.vmray.com if empty.
+vmray_analyzer_url=https://cloud.vmray.com
 
-## To uninstall:
-
-    pip uninstall fn_joe_sandbox_analysis
-
-
-## To package for distribution:
-
-    python ./fn_joe_sandbox_analysis/setup.py sdist
-
-The resulting .tar.gz file can be installed using
-
-    pip install <filename>.tar.gz
-
-## Add Joe Sandbox configuration details to the config file:
-
-    resilient-circuits config -u
-
-Set the following values in the config file (`~/.resilient/app.config`) under the `[fn_joe_sandbox_analysis]` section:
+# Amont of time in seconds to wait until checking if the report is ready again.
+vmray_analyzer_report_request_timeout=60
 
 ```
-jsb_accept_tac=True
-jsb_api_key=
-jsb_analysis_url=
-jsb_analysis_report_default_ping_delay=120
-jsb_analysis_report_request_timeout=1800
-#jsb_http_proxy=http://user:pass@10.10.1.10:3128
-#jsb_https_proxy=http://user:pass@10.10.1.10:1080
+
+
+---
+
+## Function Inputs:
+| Function Name | Type | Required | Example | Info |
+
+| `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|
+
+| `attachment_id` | `Number` | No | `5` | The ID of the Attachment to be analyzed|
+
+| `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed 
+
+| `analyzer_report_status` | `Boolean` | Yes | `"False""` | Has the analysis report generated successfully. Options are: `True` or `False` |
+
+---
+
+## Function Output:
+```python
+results = {
+                "analysis_report_status": analysis_report_status,
+                "incident_id": incident_id,
+                "artifact_id": artifact_id,
+                "attachment_id": attachment_id,
+                "sample_final_result": sample_final_result
+            }
+
+```
+---
+
+## Pre-Process Script:
+Example: VMRAY Sandbox Analyzer [Attachment]
+
+```
+inputs.incident_id = incident.id
+inputs.attachment_id = attatchment.id
+```
+Example: VMRAY Sandbox Analyzer [Artifact]
+
+```
+inputs.incident_id = incident.id
+inputs.artifact_id = artifact.id
 ```
 
-## How to use the function
+---
 
-1. Import the necessary customization data into the Resilient platform:
+## Post-Process Script:
+This example adds a Note to the Incident and color codes the `analysis_status` depending if it was **malicious** or **clean**
+```python
+def  font_color(vti_score,sample_severity):
+  color = "green"
+  try:
+    if sample_severity in ["malicious"] or int(vti_score) >= 75:
+      color = "red"
+    elif sample_severity in ["blacklisted","suspicious"] or int(vti_score) >= 50:
+      color = "yellow"
+  except:
+      pass
+  return color
 
-		resilient-circuits customize
+noteText = u"""Successful submit <b>{}</b> to VMRay Analyzer.Check the results below: <br>""".format(attachment.name)
 
-	This creates the following customization components:
-	* Function input: `jsb_report_type, ping_delay`
-	* Message Destination: `fn_joe_sandbox_analysis`
-	* Function: `fn_joe_sandbox_analysis`
-	* Workflows: `example_joe_sandbox_analysis_attachment, example_joe_sandbox_artifact`
-	* Rules: `Example: Joe Sandbox Analysis [Artifact], Example: Joe Sandbox Analysis [Attachment]`
+for sample in results.sample_final_result:
+  noteText += u"""-----------------------------------------------------------------------"""
+  color = font_color(sample["sample_report"]["sample_score"],sample["sample_report"]["sample_last_reputation_severity"])
+  noteText += u"""<br>VMRay Sandbox Analysis: <b>{sample_filename}</b> complete.<br>
+                  VMRAY Online Attachment: <a href={sample_online_report}>{sample_online_report}</a><br>
+                  VMRay Analyzer result:  VTI Score: <b style= "color:{color}">{sample_vti_score}</b>,  Severity: <b style= "color:{color}">{sample_severity}</b> <br>
+              """.format(sample_filename=sample["sample_report"]["sample_filename"],
+                          sample_online_report=sample["sample_report"]["sample_webif_url"],
+                          color = color,
+                          sample_vti_score = sample["sample_report"]["sample_score"],
+                          sample_severity = sample["sample_report"]["sample_last_reputation_severity"])
 
-2. Update and edit `app.config`:
+  noteText += u"""<br>| analysis_id | analysis_job_started | analysis_vti_score | analysis_severity |<br>"""
+  
+  for analysis in sample["sample_analysis_report"]:
+    color = font_color(analysis["analysis_vti_score"],analysis["analysis_severity"])
+    noteText += u"""| <a href={analysis_link}>  {analysis_id} </a> | {analysis_job_started} |  <b style= "color:{color}"> {analysis_vti_score}</b>  | <b style= "color:{color}">{analysis_severity}</b> |<br>
+                """.format(analysis_link=analysis["analysis_webif_url"],
+                          analysis_id=analysis["analysis_id"],
+                          analysis_job_started=analysis["analysis_job_started"],
+                          analysis_vti_score=analysis["analysis_vti_score"],
+                          analysis_severity=analysis["analysis_severity"],
+                          color=color)
 
-		resilient-circuits configure -u
+  reputations = [str(reputation["reputation_lookup_severity"]) for reputation in sample["sample_reputation_report"]]
+  
+  if "malicious" in reputations:
+    color = "red"
+    reputation_lookup_severity = "malicious"
+  elif "suspicious" in reputations:
+    color = "yellow"
+    reputation_lookup_severity = "suspicious"
+  elif "blacklisted" in reputations:
+    color = "yellow"
+    reputation_lookup_severity = "blacklisted"
+  elif "not_suspicious" in reputations:
+    color = "green"
+    reputation_lookup_severity = "not_suspicious"
+  elif "whitelisted" in reputations:
+    color = "green"
+    reputation_lookup_severity = "whitelisted"
+  else:
+    color = "green"
+    reputation_lookup_severity = "unknown"
+    
+  noteText += u"""Reputation lookup result:  <b style= "color:{color}">{reputation_lookup_severity} </b> <br>""".format(color=color, reputation_lookup_severity=reputation_lookup_severity)
+  
+incident.addNote(helper.createRichText(noteText))
+```
+---
 
-3. Start Resilient Circuits:
-    ```
-    resilient-circuits run
-    ```
+## Rules
+| Rule Name | Object Type | Workflow Triggered |
+| --------- | :---------: | ------------------ |
+| Example: Joe Sandbox Analysis [Artifact]| `Artifact` | `Example: VMRay Sandbox Analyzer [Artifact]` |
+| Example: VMRay Sandbox Analyzer [Attachment]| `Attachment` | `Example: VMRay Sandbox Analyzer [Attachment]` |
 
-4. Trigger the rule.
+---
