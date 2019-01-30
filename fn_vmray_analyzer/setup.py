@@ -4,16 +4,16 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fn_vmray_analyzer',
+    name='fn_isitPhishing',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_vmray_analyzer'",
-    long_description="Resilient Circuits Components for 'fn_vmray_analyzer'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
+    long_description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=31.0.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
