@@ -74,7 +74,7 @@ ResilientHelper.prototype = {
 			}
 		}
 
-		// Generate the snLink for the Resilient Datatable Entry
+		// Generate the snLink for the Resilient Data Table Entry
 		snLink = this.res_api.generateSNlink(record);
 
 		//If no incidentId, we are creating an Incident
@@ -89,6 +89,15 @@ ResilientHelper.prototype = {
 
 			//Set the discovered_date, which is mandatory to create an incident
 			caseData["discovered_date"] = discoveredDate;
+
+			// Check if custom field object, properties has been defined in optionalFields
+			if (!caseData.properties){
+				caseData.properties = {};
+			}
+
+			// Set our two required custom fields
+			caseData.properties["sn_snow_record_link"] = "<a href='"+snLink+"'>Link</a>";
+			caseData.properties["sn_snow_record_id"] = snRecordId;
 
 			//Create the incident and get response
 			res = this.res_api.createIncident(caseData);
@@ -124,7 +133,7 @@ ResilientHelper.prototype = {
 				record.work_notes = initSnNote;
 			}
 
-			//Add a new row to the Resilient Datatable
+			//Add a new row to the Resilient Data Table
 			this.addNewRowToRESDatatable(record_name, res_reference_type, res_reference_id, snRecordId, res_reference_link, snLink);
 
 			returnValue = {
