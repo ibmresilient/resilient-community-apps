@@ -3,7 +3,7 @@
 /////////////////
 /// Condition ///
 /////////////////
-current.isValidField("x_261673_resilient_reference_id") && current.getValue("x_261673_resilient_reference_id") == null
+current.isValidField("x_261673_resilient_reference_id") && current.getValue("x_261673_resilient_reference_id") == null && gs.hasRole('x_261673_resilient.user')
 
 //////////////////
 ///   Script   ///
