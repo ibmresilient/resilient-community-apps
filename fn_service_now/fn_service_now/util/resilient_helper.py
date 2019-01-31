@@ -4,7 +4,13 @@ import base64
 import json
 from bs4 import BeautifulSoup
 import requests
+import six
 
+# Handle unicode in 2.x and 3.x
+try:
+    unicode
+except NameError:
+    unicode = str
 
 # Define an Incident that gets sent to ServiceNow
 class Incident(object):
@@ -62,14 +68,46 @@ class ResilientHelper(object):
 
     @classmethod
     def _byteify(cls, data):
-        """Function that converts unicode dict to str dict"""
-        if isinstance(data, unicode):
-            return data.encode("utf-8")
+        """Function to handle json.dumps and json.loads object_hook for supporting Python 2 and 3"""
 
-        elif isinstance(data, dict):
-            return {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
+        if six.PY2:
+            if isinstance(data, unicode):
+                return data.encode("utf-8")
 
-        return None
+            elif isinstance(data, dict):
+                return {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
+
+            return None
+
+        elif six.PY3:
+            data_as_utf8_str = None
+
+            if isinstance(data, unicode):
+                data_as_utf8_str = data.encode("utf-8")
+
+                # if Python 3.x data_as_utf8_str will be bytes, so we convert back to str
+                if isinstance(data_as_utf8_str, bytes):
+                    data_as_utf8_str = data_as_utf8_str.decode(("utf-8"))
+
+            elif isinstance(data, dict):
+                data_as_utf8_str = {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
+
+            return data_as_utf8_str
+        else:
+            raise ValueError("We do not support this version of Python")
+
+    @staticmethod
+    def _encodeBase64(str_to_encode):
+        """A helper function to encode a base64 string for Python 3 and 3 support"""
+        if six.PY2:
+            return base64.b64encode(str_to_encode)
+
+        elif six.PY3:
+            str_to_encode = base64.b64encode(str_to_encode)
+            return str_to_encode.decode("utf-8")
+
+        else:
+            raise ValueError("We do not support this version of Python")
 
     def get_config_option(self, option_name, optional=False):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
@@ -185,8 +223,8 @@ class ResilientHelper(object):
 
         return Task(incident_id, task_id, task["name"], task_instructions)
 
-    @staticmethod
-    def get_attachment(res_client, attachment_id, incident_id=None, task_id=None):
+    @classmethod
+    def get_attachment(cls, res_client, attachment_id, incident_id=None, task_id=None):
         """Function that gets incident/task attachment"""
         attachment = {"id": None, "name": None, "content_type": None, "contents": None}
         meta_data_uri, contents_uri = None, None
@@ -205,7 +243,7 @@ class ResilientHelper(object):
         attachment["content_type"] = meta_data["content_type"]
         attachment["id"] = attachment_id
         attachment["name"] = meta_data["name"]
-        attachment["contents"] = base64.b64encode(res_client.get_content(contents_uri))
+        attachment["contents"] = cls._encodeBase64(res_client.get_content(contents_uri))
 
         return attachment
 

@@ -8,6 +8,19 @@ from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 from mock_data import task
 import json
+import six
+
+# Handle basestring in 2.x and 3.x
+try:
+  basestring
+except NameError:
+  basestring = str
+
+# Handle unicode in 2.x and 3.x
+try:
+    unicode
+except NameError:
+    unicode = str
 
 def get_mock_config_data():
   return u"""[fn_service_now]
@@ -56,11 +69,21 @@ def mock_pre_scrip_dict_to_json_str(d):
 
 # Convert unicode dict to str dict
 def mock_byteify(data):
-  if isinstance(data, unicode):
-    return data.encode("utf-8")
-  
-  if isinstance(data, dict):
-    return { mock_byteify(key): mock_byteify(value) for key, value in data.items() }
+    """Function that converts unicode dict to str dict"""
+
+    data_as_utf8_str_dict = None
+
+    if isinstance(data, unicode):
+        data_as_utf8_str_dict = data.encode("utf-8")
+        
+        # if Python 3.x data_as_utf8_str_dict will be bytes, so we convert back to str
+        if isinstance(data_as_utf8_str_dict, bytes):
+            data_as_utf8_str_dict = data_as_utf8_str_dict.decode(("utf-8"))
+
+    elif isinstance(data, dict):
+        data_as_utf8_str_dict = {mock_byteify(key): mock_byteify(value) for key, value in data.items()}
+
+    return data_as_utf8_str_dict
 
 class MockedResponse:
   def __init__(self, status_code, text):
@@ -176,19 +199,19 @@ class SNResilientMock(BasicResilientMock):
     def attachments_contents_incident_get(self, request):
         """ GET the file contents of an attachment """
         attachment_id = request.url.split("/")[-2]
-        data = "test data"
+        data = {"data": "test data"}
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=data)
+                                             content=six.b(json.dumps(data)))
 
     @resilient_endpoint("GET", "/tasks/[0-9]+/attachments/[0-9]+/contents$")
     def attachments_contents_task_get(self, request):
         """ GET the file contents of an attachment """
         attachment_id = request.url.split("/")[-2]
-        data = "test data"
+        data = {"data": "test data"}
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=data)
+                                             content=six.b(json.dumps(data)))
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/table_data/sn_records_dt\?handle_format=names")
     def datatable_incident_get(self, request):
@@ -198,7 +221,7 @@ class SNResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(data))
+                                             content=six.b(json.dumps(data)))
 
     @resilient_endpoint("PUT", "/incidents/[0-9]+/table_data/sn_records_dt/row_data/[0-9]+\?handle_format=names")
     def datatable_incident_put(self, request):
@@ -208,7 +231,7 @@ class SNResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(data))
+                                             content=six.b(json.dumps(data)))
 
     @resilient_endpoint("GET", "/tasks/[0-9]+\?text_content_output_format\=always_text\&handle_format\=names$")
     def tasks_get_with_parameters(self, request):
@@ -216,7 +239,7 @@ class SNResilientMock(BasicResilientMock):
 
         return requests_mock.create_response(request,
                                              status_code=200,
-                                             content=json.dumps(task.get_mocked_task()))
+                                             content=six.b(json.dumps(task.get_mocked_task())))
 
     @resilient_endpoint("GET", "/tasks/[0-9]+/instructions")
     def tasks_get_instructions(self, request):
