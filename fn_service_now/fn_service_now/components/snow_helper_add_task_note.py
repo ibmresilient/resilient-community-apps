@@ -63,8 +63,6 @@ class FunctionComponent(ResilientComponent):
             # url for POST
             url = "/tasks/{0}/comments".format(ids.get("task_id"))
 
-            yield StatusMessage("Creating Note Request")
-
             # Create data for POST
             request_data = {
                 "text": {
@@ -73,7 +71,7 @@ class FunctionComponent(ResilientComponent):
                 }
             }
 
-            yield StatusMessage("Adding Note to {0}".format(payload.inputs["sn_res_id"]))
+            yield StatusMessage("Adding Task Note to {0}".format(payload.inputs["sn_res_id"]))
 
             # POST to Resilient API, add the Note
             res_client.post(url, request_data)

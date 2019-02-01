@@ -56,6 +56,9 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Function Inputs OK")
 
+            yield StatusMessage("Querying ServiceNow for a sys_id. table: {0} field: {1} value: {2}".format(
+                payload.inputs.get("sn_table_name"), payload.inputs.get("sn_query_field"), payload.inputs.get("sn_query_value")))
+
             # Call custom endpoint '/get_sys_id' with 3 params
             get_sys_id_response = res_helper.sn_GET("/get_sys_id", params=payload.inputs)
 
@@ -70,15 +73,9 @@ class FunctionComponent(ResilientComponent):
                 if response_result["result"]["sys_id"]:
                     payload.success = True
                     payload.sys_id = response_result["result"]["sys_id"]
-                    yield StatusMessage('"{0}" FOUND in Field: "{1}", Table: "{2}"'.format(
-                        payload.inputs["sn_query_value"],
-                        payload.inputs["sn_query_field"],
-                        payload.inputs["sn_table_name"]))
+                    yield StatusMessage("sys_id found: {0}".format(payload.sys_id))
                 else:
-                    yield StatusMessage('"{0}" NOT FOUND in Field: "{1}", Table: "{2}"'.format(
-                        payload.inputs["sn_query_value"],
-                        payload.inputs["sn_query_field"],
-                        payload.inputs["sn_table_name"]))
+                    yield StatusMessage("No sys_id found")
 
             # Handle error messages
             elif response_result is not None and "error" in response_result:

@@ -94,13 +94,13 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs["sn_init_work_note"],
                 payload.inputs["sn_optional_fields"])
 
-            yield StatusMessage("Creating a new record in ServiceNow")
+            yield StatusMessage("Creating a new ServiceNow Record for the {0}: {1}".format(
+                "Incident" if request_data.get("type") is "res_incident" else "Task", request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")))
+
             # Call POST and get response
             create_in_sn_response = res_helper.sn_POST("/create", data=json.dumps(request_data))
 
             if create_in_sn_response is not None:
-
-                yield StatusMessage("Record Created")
 
                 # Add values to payload
                 payload.res_id = create_in_sn_response["res_id"]
@@ -109,8 +109,11 @@ class FunctionComponent(ResilientComponent):
                 payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
                 payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
 
+                yield StatusMessage("New ServiceNow Record created {0}".format(payload.sn_ref_id))
+
                 try:
-                    yield StatusMessage("Updating Datatable")
+                    yield StatusMessage("Adding a new row to the ServiceNow Records Data Table")
+
                     # Add row to the datatable
                     add_row_response = datatable.add_row(
                         payload.sn_time_created,

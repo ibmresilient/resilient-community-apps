@@ -63,6 +63,8 @@ class FunctionComponent(ResilientComponent):
             # Instansiate new Resilient API object
             res_client = self.rest_client()
 
+            yield StatusMessage("Getting attachment data. ID: {0}".format(payload.inputs["attachment_id"]))
+
             # Get the attachment
             attachment = res_helper.get_attachment(res_client,
                                                    payload.inputs["attachment_id"],
@@ -101,7 +103,7 @@ class FunctionComponent(ResilientComponent):
                     "attachment_content_type": attachment["content_type"]
                 }
 
-                yield StatusMessage("Add Attachment to ServiceNow")
+                yield StatusMessage("Adding Attachment to ServiceNow Record {0}".format(sn_ref_id))
 
                 # Call POST and get response
                 add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))

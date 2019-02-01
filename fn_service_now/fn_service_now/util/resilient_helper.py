@@ -1,10 +1,13 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 """ResilientHelper Module"""
+import logging
 import base64
 import json
 from bs4 import BeautifulSoup
 import requests
 import six
+from resilient_circuits import StatusMessage
+from resilient import SimpleHTTPException
 
 # Handle unicode in 2.x and 3.x
 try:
@@ -44,6 +47,10 @@ class Task(object):
 class ResilientHelper(object):
     """A helper class for sn_utilities"""
     def __init__(self, app_configs):
+
+        log = logging.getLogger(__name__)
+        log.debug("Initializing ResilientHelper")
+
         self.app_configs = app_configs
 
         self.SN_HOST = self.get_config_option("sn_host")
@@ -65,6 +72,10 @@ class ResilientHelper(object):
 
         # Default headers
         self.headers = {"Content-Type": "application/json", "Accept": "application/json"}
+
+        log.debug("ResilientHelper initialized")
+        log.debug("App Configs: sn_host: %s sn_api_uri: %s sn_api_url: %s sn_table_name: %s sn_username: %s",
+            self.SN_HOST, self.SN_API_URI, self.SN_API_URL, self.SN_TABLE_NAME, self.SN_USERNAME)
 
     @classmethod
     def _byteify(cls, data):
@@ -122,12 +133,17 @@ class ResilientHelper(object):
     @staticmethod
     def get_function_input(inputs, input_name, optional=False):
         """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
+
+        log = logging.getLogger(__name__)
+        log.debug("Trying to get function input: %s from %s. optional = %s", input_name, inputs, optional)
+
         the_input = inputs.get(input_name)
 
         if the_input is None and optional is False:
             err = "'{0}' is a mandatory function input".format(input_name)
             raise ValueError(err)
         else:
+            log.debug("Got function input: %s", input_name)
             return the_input
 
     @staticmethod
@@ -193,67 +209,161 @@ class ResilientHelper(object):
         return """<div style="color:{0}">{1}</div>""".format(color, text)
 
     @staticmethod
+    def state_to_text(state):
+        """Converts O/A to Active and C to Closed"""
+        if state == "O" or state == "A":
+            return "Active"
+        elif state == "C":
+            return "Closed"
+        else:
+            raise ValueError("{0} is not a valid Resilient State. O=Open Task, A=Active Incident, C=Closed Incident/Task".format(state))
+
+    @staticmethod
     def get_incident(client, incident_id):
         """Function that gets the incident from Resilient"""
+
+        log = logging.getLogger(__name__)
+        err_msg = None
+        get_url = "/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id)
+
         # Get the incident from resilient api
         try:
-            incident = client.get("/incidents/{0}?text_content_output_format=always_text&handle_format=names".format(incident_id))
-        except:
-            raise ValueError("incident_id {0} not found".format(incident_id))
+            log.debug("GET Incident from Resilient: ID %s URL: %s", incident_id, get_url)
+            incident = client.get(get_url)
+            log.debug("Incident got successfully: %s", incident)
+        except Exception as err:
+            err_msg = "Error trying to get Incident {0}.".format(incident_id)
+
+            if err.message and "not found" in err.message.lower():
+                err_msg = "{0} Could not find Incident with ID {1}".format(err_msg, incident_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
 
         return Incident(incident_id, incident["name"], incident["description"])
 
     @staticmethod
     def get_task(client, task_id, incident_id):
         """Function that gets the task from Resilient. Gets the task's instructions too"""
+
+        log = logging.getLogger(__name__)
+        err_msg = None
+
         # Get the task from resilient api
         try:
-            task = client.get("/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id))
-        except:
-            raise ValueError("task_id {0} not found".format(task_id))
+            get_url = "/tasks/{0}?text_content_output_format=always_text&handle_format=names".format(task_id)
+            log.debug("GET Task from Resilient: ID %s URL: %s", task_id, get_url)
+            task = client.get(get_url)
+            log.debug("Task got successfully: %s", task)
+        except Exception as err:
+            err_msg = "Error trying to get Task {0}.".format(task_id)
+
+            if err.message and "not found" in err.message.lower():
+                err_msg = "{0} Could not find Task with ID {1}".format(err_msg, task_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
+
 
         # Get the task_instructions in plaintext
         try:
-            task_instructions = client.get_content("/tasks/{0}/instructions".format(task_id))
+            get_url = "/tasks/{0}/instructions".format(task_id)
+            log.debug("GET task_instructions for: ID %s URL: %s", task_id, get_url)
+            task_instructions = client.get_content(get_url)
             soup = BeautifulSoup(unicode(task_instructions, "utf-8"), 'html.parser')
             soup = soup.get_text()
             task_instructions = soup.replace(u'\xa0', u' ')
-        except:
-            raise ValueError("Error getting task instructions")
+            log.debug("task_instructions got successfully")
+        except Exception as err:
+            err_msg = "Error trying to get task_instructions for Task {0}.".format(task_id)
+
+            if isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
+
 
         return Task(incident_id, task_id, task["name"], task_instructions)
 
     @classmethod
     def get_attachment(cls, res_client, attachment_id, incident_id=None, task_id=None):
         """Function that gets incident/task attachment"""
-        attachment = {"id": None, "name": None, "content_type": None, "contents": None}
-        meta_data_uri, contents_uri = None, None
 
+        log = logging.getLogger(__name__)
+        attachment = {"id": None, "name": None, "content_type": None, "contents": None}
+        err_msg, get_url = None, None
+
+        # Get attachment metadata url
         if task_id:
-            meta_data_uri = "/tasks/{0}/attachments/{1}".format(task_id, attachment_id)
-            contents_uri = "/tasks/{0}/attachments/{1}/contents".format(task_id, attachment_id)
+            get_url = "/tasks/{0}/attachments/{1}".format(task_id, attachment_id)
         elif incident_id:
-            meta_data_uri = "/incidents/{0}/attachments/{1}".format(incident_id, attachment_id)
-            contents_uri = "/incidents/{0}/attachments/{1}/contents".format(incident_id, attachment_id)
+            get_url = "/incidents/{0}/attachments/{1}".format(incident_id, attachment_id)
         else:
             raise ValueError("Failed to get_attachment. task_id or incident_id must be specified with attachment_id")
 
-        meta_data = res_client.get(meta_data_uri)
+        # Get attachment metadata
+        try:
+            log.debug("GET Attachment metadata: ID %s URL: %s", attachment_id, get_url)
+            meta_data = res_client.get(get_url)
+            log.debug("Attachment metadata got successfully")
+        except Exception as err:
+            err_msg = "Error trying to get Attachment {0}.".format(attachment_id)
+
+            if err.message and "not found" in err.message.lower():
+                err_msg = "{0} Could not find Attachment with ID {1}. incident_id: {2} task_id: {3}".format(err_msg, attachment_id, incident_id, task_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
+
+            raise ValueError(err_msg)
 
         attachment["content_type"] = meta_data["content_type"]
         attachment["id"] = attachment_id
         attachment["name"] = meta_data["name"]
-        attachment["contents"] = cls._encodeBase64(res_client.get_content(contents_uri))
+
+        # Get attachment contencts url
+        get_contents_url = "{0}/contents".format(get_url)
+
+        # Get attachment contents
+        try:
+            log.debug("GET Attachment contents: ID %s URL: %s", attachment_id, get_url)
+            attachment["contents"] = cls._encodeBase64(res_client.get_content(get_contents_url))
+            log.debug("Attachment contents got successfully")
+        except Exception as err:
+            err_msg = "Error trying to get Attachment contents for ID: {0}.".format(attachment_id)
+
+            if err.message and "not found" in err.message.lower():
+                err_msg = "{0} Could not find Attachment with ID {1}. incident_id: {2} task_id: {3}".format(err_msg, attachment_id, incident_id, task_id)
+            elif isinstance(err, SimpleHTTPException):
+                err_msg = "{0}\nServer Error.\nStatus Code: {1}\nURL: {2}\n{3}".format(err_msg, err.response.status_code, err.response.url, err.message)
+            else:
+                err_msg = "{0} {1}".format(err_msg, err)
 
         return attachment
 
     @classmethod
     def generate_sn_request_data(cls, res_client, res_datatable, incident_id, sn_table_name, res_link, task_id=None, init_note=None, sn_optional_fields=None):
         """Function that generates the data that is sent in the request to the /create endpoint in ServiceNow"""
-        request_data = None
+
+        log = logging.getLogger(__name__)
+        err_msg, request_data = None, None
+
+        log.debug("Generating request for ServiceNow. incident_id: %s task_id: %s sn_table_name: %s res_link: %s init_note: %s sn_optional_fields: %s res_datatable: %s",
+            incident_id, task_id, sn_table_name, res_link, init_note, sn_optional_fields, res_datatable)
 
         # Generate the res_id
         res_id = cls.generate_res_id(incident_id, task_id)
+
+        log.debug("res_id: {0}".format(res_id))
 
         # Check if already exists in data table
         sn_ref_id = res_datatable.get_sn_ref_id(res_id)
@@ -297,32 +407,43 @@ class ResilientHelper(object):
         else:
             request_data["sn_optional_fields"] = None
 
+        log.debug("sn_request_data %s", request_data)
+
         return request_data
 
     def sn_GET(self, url, params=None, auth=None, headers=None):
         """Method to handle a ServiceNow GET request"""
+
+        log = logging.getLogger(__name__)
+        err_msg, response_content = None, None
+
         if headers is None:
             headers = self.headers
 
         if auth is None:
             auth = self.SN_AUTH
 
-        url = self.SN_API_URL + url
+        url = "{0}{1}".format(self.SN_API_URL, url)
 
         try:
+            log.debug("GET Request to ServiceNow. url: %s headers: %s params: %s", url, headers, params)
             response = requests.get(url, auth=auth, headers=headers, params=params)
             response.raise_for_status()
+            log.debug("GET Request successful")
 
         except requests.exceptions.Timeout:
-            raise ValueError('Request to ServiceNow timedout')
+            err_msg = "GET request to ServiceNow timedout"
+            raise ValueError(err_msg)
 
         except requests.exceptions.TooManyRedirects:
-            raise ValueError('A bad url request', url)
+            err_msg = "Too Many Redirects for: {0}".format(url)
+            raise ValueError(err_msg)
 
         except requests.exceptions.HTTPError as err:
             if err.response.content:
-                custom_error_content = json.loads(err.response.content)
-                raise ValueError(custom_error_content['error']['message'])
+                response_content = json.loads(err.response.content)
+                err_msg = response_content["error"]["message"]
+                raise ValueError(err_msg)
             else:
                 raise ValueError(err)
 
@@ -332,35 +453,45 @@ class ResilientHelper(object):
         return response
 
     def sn_POST(self, url, data, auth=None, headers=None):
-        """Function to handle POSTing to ServiceNow. If successful, returns the response as a Dictionary"""
+        """Method to handle ServiceNow POST request. If successful, returns the response as a Dictionary"""
+        
+        log = logging.getLogger(__name__)
+        return_json, err_msg, response_content = None, None, None
+
         if headers is None:
             headers = self.headers
 
         if auth is None:
             auth = self.SN_AUTH
 
-        url = self.SN_API_URL + url
-
-        return_json = None
+        url = "{0}{1}".format(self.SN_API_URL, url)
 
         try:
+            log.debug("POST Request to ServiceNow. url: %s headers: %s data: %s", url, headers, data)
             response = requests.post(url, auth=auth, headers=headers, data=data)
             response.raise_for_status()
+            log.debug("POST Request successful")
 
             return_json = response.json()['result']
 
         except requests.exceptions.Timeout:
-            raise ValueError('Request to ServiceNow timedout')
+            err_msg = "GET request to ServiceNow timedout"
+            raise ValueError(err_msg)
 
         except requests.exceptions.TooManyRedirects:
-            raise ValueError('A bad url request', url)
+            err_msg = "Too Many Redirects for: {0}".format(url)
+            raise ValueError(err_msg)
 
         except requests.exceptions.HTTPError as err:
             if err.response.content:
-                custom_error_content = json.loads(err.response.content)
-                raise ValueError(custom_error_content['error']['message'])
+                response_content = json.loads(err.response.content)
+                err_msg = response_content["error"]["message"]
+                raise ValueError(err_msg)
             else:
                 raise ValueError(err)
+
+        except requests.exceptions.RequestException as err:
+            raise ValueError(err)
 
         except requests.exceptions.RequestException as err:
             raise ValueError(err)

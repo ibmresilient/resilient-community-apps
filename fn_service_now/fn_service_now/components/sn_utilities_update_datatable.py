@@ -80,20 +80,17 @@ class FunctionComponent(ResilientComponent):
             now = int(time.time() * 1000)
 
             if row_found:
-                yield StatusMessage("Row found. Updating Datatable")
 
-                resilient_status = None
+                resilient_status = res_helper.state_to_text(payload.inputs.get("sn_resilient_status"))
 
-                # A=Active Incident, O=Open Task
-                if payload.inputs["sn_resilient_status"] == "A" or payload.inputs["sn_resilient_status"] == "O":
+                yield StatusMessage("Row found for {0}. Updating resilient_status to {1}".format(
+                    payload.res_id, resilient_status))
+
+                if resilient_status == "Active":
                     resilient_status = res_helper.convert_text_to_richtext("Active", "green")
 
-                # C=Closed Incident/Task
-                elif payload.inputs["sn_resilient_status"] == "C":
-                    resilient_status = res_helper.convert_text_to_richtext("Closed", "red")
-
                 else:
-                    raise ValueError("{0} is not a handled status option".format(payload.inputs["sn_resilient_status"]))
+                    resilient_status = res_helper.convert_text_to_richtext("Closed", "red")
 
                 cells_to_update = {
                     "sn_records_dt_time": now,
@@ -106,7 +103,7 @@ class FunctionComponent(ResilientComponent):
 
             else:
                 payload.success = False
-                err_msg = "No related ServiceNow ticket found for the {0}: {1}. Not changing Data Table state."
+                err_msg = "No row found for the {0} {1}"
 
                 if payload.inputs["task_id"]:
                     err_msg = err_msg.format("Task", payload.inputs["task_id"])

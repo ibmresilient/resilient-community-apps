@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
                     "sn_note_type": payload.inputs["sn_note_type"]
                 }
 
-                yield StatusMessage("Add Note to ServiceNow")
+                yield StatusMessage("Adding Note to ServiceNow Record {0}".format(sn_ref_id))
 
                 # Call POST and get response
                 add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))

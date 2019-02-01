@@ -98,16 +98,16 @@ class FunctionComponent(ResilientComponent):
                 }
 
                 try:
-                    yield StatusMessage("Closing in ServiceNow {0}".format(sn_ref_id))
+                    yield StatusMessage("Closing ServiceNow Record {0}".format(sn_ref_id))
                     close_in_sn_response = res_helper.sn_POST("/close_record", data=json.dumps(request_data))
                     payload.sn_ref_id = sn_ref_id
 
                 except Exception as err:
                     payload.success = False
-                    raise ValueError("Failed to close in ServiceNow: {0}".format(err))
+                    raise ValueError("Failed to ServiceNow Record {0}".format(err))
 
                 try:
-                    yield StatusMessage("Updating ServiceNow Status to {0}".format(close_in_sn_response["sn_state"]))
+                    yield StatusMessage("Updating ServiceNow Records Data Table Status to {0}".format(close_in_sn_response["sn_state"]))
 
                     row_to_update = datatable.get_row("sn_records_dt_sn_ref_id", sn_ref_id)
 
