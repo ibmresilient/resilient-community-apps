@@ -316,6 +316,7 @@ Returns an object with the following keys:
   * **Name:** CUSTOM_RES_WF_CreateIncident
   * **Table:** Incident
   * **Description:** Our custom Workflow that creates an Incident in IBM Resilient from a record in our ServiceNow Incident Table
+* Ensure **if condition matches** is set to **None** in the dropdown
 * Click **Submit**
  ![screenshot](./screenshots/3.png)
 
@@ -397,3 +398,8 @@ Returns an object with the following keys:
 > ![screenshot](./screenshots/14.png)
 
 ---
+
+## Troubleshooting
+
+### Your CUSTOM Workflow is running twice?
+* 
