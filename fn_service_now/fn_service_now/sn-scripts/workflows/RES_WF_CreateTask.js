@@ -14,7 +14,7 @@
 		
 		//Initialize options
 		options = {
-			initSnNote: "Sent to IBM Resilient",
+			initSnNote: "Task created in IBM Resilient",
 			incidentId: incidentId,
 			optionalFields: {
 				"instr_text": record.getValue("description")

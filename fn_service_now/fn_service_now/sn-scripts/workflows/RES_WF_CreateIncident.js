@@ -22,8 +22,9 @@
 
 		//Initialize options
 		options = {
-			initSnNote: "Sent to IBM Resilient",
+			initSnNote: "Incident created in IBM Resilient",
 			optionalFields: {
+				"description": record.getValue("description"),
 				"severity_code": resSeverityMap[record.getValue("severity").toString()]
 			}
 		};
