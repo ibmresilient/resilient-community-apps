@@ -6,7 +6,7 @@ import abc
 
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
-from rc_data_feed.lib.sql_dialect import PostgreSQL96Dialect, SqliteDialect
+from rc_data_feed.lib.sql_dialect import PostgreSQL96Dialect, SqliteDialect, MySqlDialect, SqlServerDialect
 
 LOG = logging.getLogger(__name__)
 
@@ -19,7 +19,10 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
     AVAILABLE_DIALECTS = {
         "PostgreSQL96Dialect": PostgreSQL96Dialect,
-        "SqliteDialect": SqliteDialect
+        "SqliteDialect": SqliteDialect,
+        "MariaDBDialect": MySqlDialect,
+        "MySQLDialect": MySqlDialect,
+        "SQLServerDialect": SqlServerDialect
     }
 
     def __init__(self, rest_client, options, dialect=None):
@@ -167,7 +170,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                 self._execute_sql(
                     cursor,
                     self.dialect.get_delete(table_name),
-                    [id]
+                    [flat_payload['id']]
                 )
             else:
                 LOG.debug("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
