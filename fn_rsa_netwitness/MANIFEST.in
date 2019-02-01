@@ -1,0 +1,5 @@
+include README.md
+include fn_rsa_netwitness/util/*
+include fn_rsa_netwitness/LICENSE
+include fn_rsa_netwitness/doc/*
+include fn_rsa_netwitness/components
