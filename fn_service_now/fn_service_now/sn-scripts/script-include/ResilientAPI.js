@@ -194,7 +194,7 @@ ResilientAPI.prototype = {
 			throw errMsg;
 		}
 
-		errMsg = " property cannot be null. Please update your properties clicking the link below the Test Connection button";
+		errMsg = " property cannot be null. Please update your IBM Resilient Properties";
 		if (!hostName) {throw "Resilient Host" + errMsg;}
 		if (!orgName) {throw "Resilient Organization" + errMsg;}
 		if (!userEmail) {throw "Resilient Email" + errMsg;}

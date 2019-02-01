@@ -34,6 +34,7 @@
 		}
 	}
 	catch(errMsg){
+		current.work_notes = "Failed to update state in IBM Resilient.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();
