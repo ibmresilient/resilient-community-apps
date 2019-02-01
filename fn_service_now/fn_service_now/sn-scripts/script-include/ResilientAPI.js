@@ -134,7 +134,7 @@ function getOrgId(orgs, orgName, resilientUser){
 		//Loop the orgs
 		for (var i = 0; i < orgs.length; i++){
 			
-			//Find org with same name as specified in System Properties
+			//Find org with same name as orgName
 			if (orgs[i].name === orgName){
 
 				orgId = orgs[i].id;
@@ -158,7 +158,7 @@ function getOrgId(orgs, orgName, resilientUser){
 
 	//Throw a custom error if anything fails
 	catch (e){
-		errMsg = "OrgId could not be found for: " + orgName + "\nReason: " + e;
+		errMsg = "Could not find the Resilient Organization: " + orgName + ".\n" + e;
 		throw errMsg;
 	}
 }
