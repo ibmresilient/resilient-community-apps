@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -68,6 +69,8 @@ class FunctionComponent(ResilientComponent):
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
             analysis_report_status = kwargs.get("analysis_report_status")  # Boolean
+            sample_ids = kwargs.get("sample_ids") or []  # List
+
 
             if not incident_id:
                 raise ValueError("incident_id is required")
@@ -79,6 +82,7 @@ class FunctionComponent(ResilientComponent):
             log.info("artifact_id: %s", artifact_id)
             log.info("attachment_id: %s", attachment_id)
             log.info("analysis_report_status: %s", analysis_report_status)
+            log.info("sample_ids: %s", sample_ids)
 
             if not analysis_report_status:
 
@@ -95,8 +99,14 @@ class FunctionComponent(ResilientComponent):
                 sample_name = get_file_attachment_name(res_client=resilient, incident_id=incident_id,
                                                        artifact_id=artifact_id, attachment_id=attachment_id)
 
+                # with tempfile.NamedTemporaryFile('w+b', bufsize=0, delete=True) as temp_file_binary:
+                #     temp_file_binary.write(sample_file)
+                #     sample_ids = [sample["sample_id"] for sample in vmray.submit_samples(temp_file_binary.name, sample_name)]
+
                 with open(write_temp_file(sample_file, sample_name), "rb") as handle:
                     sample_ids = [sample["sample_id"] for sample in vmray.submit_samples(handle, sample_name)]
+
+                log.info("sample_ids: " +str(sample_ids))
 
                 # New samples submission might need take as long as hours to finished,
                 # need to check the if the analysis have been done.
@@ -106,9 +116,9 @@ class FunctionComponent(ResilientComponent):
                 while not is_samples_analysis_finished:
                     if time.time() - time_of_begin_check_report > VMRAY_ANALYSIS_REPORT_REQUEST_TIMEOUT:
                         yield StatusMessage(
-                            "Analysis processing still running at Cloud VMRay Analyzer,please check it later. ")
+                            "Analysis processing still running at Cloud VMRay Analyzer, please check it later. ")
                         break
-                    yield StatusMessage("Analysis Report not done yet, Fetch every {} second".format(CHECK_REPORTS_SLEEP_TIME))
+                    yield StatusMessage("Analysis Report not done yet, retrieve every {} second".format(CHECK_REPORTS_SLEEP_TIME))
                     time.sleep(CHECK_REPORTS_SLEEP_TIME)
                     is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 

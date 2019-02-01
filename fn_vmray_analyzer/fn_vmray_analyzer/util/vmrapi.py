@@ -108,9 +108,6 @@ class VMRayAPI(object):
         # multipart post files.
         files = {"sample_file": (filename, handle)}
 
-        # ensure the handle is at offset 0.
-        handle.seek(0)
-
         response = self._request("/sample/submit", method='POST', files=files, headers=self.headers)
 
         try:

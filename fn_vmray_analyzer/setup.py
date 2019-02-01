@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='fn_vmray_analyzer',
     version='1.0.0',
-    license='<<insert here>>',
+    license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits VMRay Analyzer Functions",

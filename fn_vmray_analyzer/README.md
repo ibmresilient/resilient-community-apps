@@ -9,12 +9,12 @@
   - [Rules](#rules)
 ---
 
-**This package contains a function that executes a VMRay Sandbox Analyzer of an Attachment or Artifact and returns the Analysis Report to IBM Resilient.**
+**This package contains a function that executes a VMRay Sandbox Analysis**
 
  ![screenshot](./screenshots/workflow_attachment.png)
 
 * Supports an attachment or artifact that is a file.
-* In future it will allows users to select the type of report, PDF, HTML, or JSON, which is returned from VMRay Sandbox, now only support JSON.
+* The report only support Type of JSON, not Support HTML and PDF.
 * Supports a proxy. Just add your proxy details to the `proxy` section in `app.config` file.
 
 ## app.config settings:  
