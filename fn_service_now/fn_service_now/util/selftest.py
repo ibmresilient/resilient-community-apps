@@ -25,13 +25,16 @@ def selftest_function(opts):
 
     try:
 
+        LOG.info("Trying to connect to %s", res_helper.SN_HOST)
+
         res = res_helper.sn_GET('/test_connection')
 
         status_code = res.status_code
 
-        LOG.error(status_code)
+        LOG.info("Status Code: %s", status_code)
 
         if status_code == 200:
+            LOG.info("Test was successful!")
             return {"state": "success"}
 
         else:
