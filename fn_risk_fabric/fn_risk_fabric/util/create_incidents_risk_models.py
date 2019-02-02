@@ -7,7 +7,7 @@ from __future__ import print_function
 import time
 import logging
 import resilient
-import ConfigParser
+import configparser
 from fn_risk_fabric.util.risk_fabric import get_risk_model_instances
 
 
@@ -50,7 +50,7 @@ def main():
     try:
         uri = '/incidents'
 
-        rf_config = ConfigParser.ConfigParser()
+        rf_config = configparser.ConfigParser()
         rf_config.read(config_file)
         rf_opts = dict(rf_config.items('fn_risk_fabric'))
         params = {

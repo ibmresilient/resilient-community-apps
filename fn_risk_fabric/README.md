@@ -57,10 +57,25 @@ Set the following values in the config file under the `[fn_risk_fabric]` section
 
 ## Example Create Incident Scripts
 
-Loading Action Plans data for a Queue. Be sure to set the correct Incident Type ID:
+Resilient Incidents can be created through the Resilient Web Console, via the REST API, or with the Python resilient library. 
 
-    python create_incidents_action_plans.py -q resilient
+Here we copied the example create_incident.py python script and are using Risk Fabric Action Plans and Risk Models as sources of data.
 
-Loading Risk Models with the Incident Type and Limit passed as a parameter:
+Be sure to setup your config for Risk Fabric as described above and review the resilent example script documentation here:
 
-    python create_incidents_risk_models.py --itype "Risk Model" --limit 1
+https://github.com/ibmresilient/resilient-python-examples/tree/master/create-incident
+
+### Example Create Incidents with Action Plans
+
+This example script will create incidents for any Risk Fabric Action Plan that is attached to a Queue (--queue) called "resilient". 
+It will also add a comment to the Action Plan record with the Resilient Incident ID.
+Be sure to use an existing Incident Type or create one within Resilient.
+
+    python create_incidents_action_plans.py --itype "Action Plan" --queue resilient
+
+### Example Create Incidents with Risk Models
+
+This example script will create Resilient incidents for Risk Models limited (--limit) to 10 records. 
+Be sure to use an existing Incident Type or create one within Resilient.
+
+    python create_incidents_risk_models.py --itype "Risk Model" --limit 10

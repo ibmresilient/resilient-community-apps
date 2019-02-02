@@ -7,7 +7,7 @@ from __future__ import print_function
 import time
 import logging
 import resilient
-import ConfigParser
+import configparser
 from fn_risk_fabric.util.risk_fabric import get_action_plans, set_action_plan_comment
 
 
@@ -19,6 +19,10 @@ class ExampleArgumentParser(resilient.ArgumentParser):
 
     def __init__(self, config_file=None):
         super(ExampleArgumentParser, self).__init__(config_file=config_file)
+
+        self.add_argument('--itype', '-t',
+                          action='append',
+                          help="The incident type(s).  Multiple arguments may be supplied.")
 
         self.add_argument('--queue', '-q',
                           required=True,
@@ -34,6 +38,7 @@ def main():
     parser = ExampleArgumentParser(config_file)
     opts = parser.parse_args()
 
+    inc_types = opts["itype"]
     inc_queue = opts["queue"]
 
     # Create SimpleClient for a REST connection to the Resilient services
@@ -45,7 +50,7 @@ def main():
     try:
         uri = '/incidents'
 
-        rf_config = ConfigParser.ConfigParser()
+        rf_config = configparser.ConfigParser()
         rf_config.read(config_file)
         rf_opts = dict(rf_config.items('fn_risk_fabric'))
         result = get_action_plans(rf_opts)
@@ -58,7 +63,7 @@ def main():
                 description = ap['Notes'] if 'Notes' in ap else ""
                 new_incident = {"name": ap['Title'],
                         "description": description,
-                        "incident_type_ids": [1003],
+                        "incident_type_ids": inc_types,
                         "discovered_date": time_now}
 
                 # Create the incident
