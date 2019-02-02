@@ -62,7 +62,15 @@
 <!-- Processing Script -->
 <!-- try {
 	var res_helper = new ResilientHelper();
-	gs.addInfoMessage("Connection Test Successful!");
+
+	var snUsername = gs.getProperty("x_261673_resilient.ServiceNowUsername");
+
+	if(res_helper.isValidSnUsername(snUsername) == false){
+		throw snUsername + " is not a valid ServiceNow user. Please check your IBM Resilient Properties.";
+	}
+	else{
+		gs.addInfoMessage("Connection Test Successful!");
+	}
 }
 catch (errMsg){
 	gs.addErrorMessage("Connection Test Failed! Check Application Logs");

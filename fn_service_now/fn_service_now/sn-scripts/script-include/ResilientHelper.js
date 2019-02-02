@@ -451,5 +451,19 @@ ResilientHelper.prototype = {
 			gs.error(errMsg);
 			throw e;
 		}
+	},
+	
+	isValidSnUsername: function(snUsername){
+		var gr = new GlideRecord("sys_user");
+
+		gr.addQuery("user_name", snUsername);
+		gr.query();
+
+		if(gr.next()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 };

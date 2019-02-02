@@ -179,7 +179,7 @@ ResilientAPI.prototype = {
 	
 		initialize: function() {
 		
-		var hostName, orgName, userEmail, userPassword, usingMidServer, errMsg = null;
+		var hostName, orgName, userEmail, userPassword, snUsername, usingMidServer, errMsg = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -187,6 +187,7 @@ ResilientAPI.prototype = {
 			orgName = gs.getProperty("x_261673_resilient.ResilientOrgName");
 			userEmail = gs.getProperty("x_261673_resilient.ResilientUserEmail");
 			userPassword = gs.getProperty("x_261673_resilient.ResilientUserPassword");
+			snUsername = gs.getProperty("x_261673_resilient.ServiceNowUsername");
 			usingMidServer = gs.getProperty("x_261673_resilient.UseMidServer");
 		}
 		catch (e){
@@ -199,6 +200,7 @@ ResilientAPI.prototype = {
 		if (!orgName) {throw "Resilient Organization" + errMsg;}
 		if (!userEmail) {throw "Resilient Email" + errMsg;}
 		if (!userPassword) {throw "Resilient Password" + errMsg;}
+		if (!snUsername) {throw "ServiceNow Username" + errMsg;}
 
 		//Set Resilient Configuration Settings
 		this.baseURL = "https://" + hostName;
