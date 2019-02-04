@@ -84,7 +84,7 @@ class FunctionComponent(ResilientComponent):
             payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])
 
             # Generate the request_data
-            request_data = res_helper.generate_sn_request_data(
+            req = res_helper.generate_sn_request_data(
                 res_client,
                 datatable,
                 payload.inputs["incident_id"],
@@ -94,45 +94,55 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs["sn_init_work_note"],
                 payload.inputs["sn_optional_fields"])
 
-            yield StatusMessage("Creating a new ServiceNow Record for the {0}: {1}".format(
-                "Incident" if request_data.get("type") is "res_incident" else "Task", request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")))
-
-            # Call POST and get response
-            create_in_sn_response = res_helper.sn_POST("/create", data=json.dumps(request_data))
-
-            if create_in_sn_response is not None:
-
-                # Add values to payload
-                payload.res_id = create_in_sn_response["res_id"]
-                payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
-                payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
-                payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
-                payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
-
-                yield StatusMessage("New ServiceNow Record created {0}".format(payload.sn_ref_id))
-
-                try:
-                    yield StatusMessage("Adding a new row to the ServiceNow Records Data Table")
-
-                    # Add row to the datatable
-                    add_row_response = datatable.add_row(
-                        payload.sn_time_created,
-                        request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name"),
-                        "Incident" if request_data.get("type") is "res_incident" else "Task",
-                        payload.res_id,
-                        payload.sn_ref_id,
-                        res_helper.convert_text_to_richtext("Active"),
-                        res_helper.convert_text_to_richtext("Sent to ServiceNow"),
-                        """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
-
-                    payload.row_id = add_row_response["id"]
-
-                except Exception as err_msg:
-                    payload.success = False
-                    raise ValueError("Failed to add row to datatable {0}".format(err_msg))
+            # If we fail to generate the request_data (because the ServiceNow record already exists) 
+            # raise an Action Status message and set success to False
+            if not req.get("success"):
+                yield StatusMessage(req.get("data"))
+                payload.success = False
 
             else:
-                payload.success = False
+                request_data = req.get("data")
+
+                yield StatusMessage("Creating a new ServiceNow Record for the {0}: {1}".format(
+                    "Incident" if request_data.get("type") is "res_incident" else "Task", request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")))
+
+                # Call POST and get response
+                create_in_sn_response = res_helper.sn_POST("/create", data=json.dumps(request_data))
+
+                if create_in_sn_response is not None:
+
+                    # Add values to payload
+                    payload.res_id = create_in_sn_response["res_id"]
+                    payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
+                    payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
+                    payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
+                    payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
+
+                    yield StatusMessage("New ServiceNow Record created {0}".format(payload.sn_ref_id))
+
+                    try:
+                        yield StatusMessage("Adding a new row to the ServiceNow Records Data Table")
+
+                        # Add row to the datatable
+                        add_row_response = datatable.add_row(
+                            payload.sn_time_created,
+                            request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name"),
+                            "Incident" if request_data.get("type") is "res_incident" else "Task",
+                            payload.res_id,
+                            payload.sn_ref_id,
+                            res_helper.convert_text_to_richtext("Active"),
+                            res_helper.convert_text_to_richtext("Sent to ServiceNow"),
+                            """<a href="{0}">RES</a> <a href="{1}">SN</a>""".format(payload.res_link, payload.sn_record_link))
+
+                        payload.row_id = add_row_response["id"]
+
+                    except Exception as err_msg:
+                        payload.success = False
+                        raise ValueError("Failed to add row to datatable {0}".format(err_msg))
+
+                else:
+                    payload.success = False
+                    raise ValueError("The response from ServiceNow was empty")
 
             results = payload.as_dict()
 

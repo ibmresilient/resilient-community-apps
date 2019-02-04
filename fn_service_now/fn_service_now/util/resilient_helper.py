@@ -369,7 +369,7 @@ class ResilientHelper(object):
         sn_ref_id = res_datatable.get_sn_ref_id(res_id)
 
         if sn_ref_id:
-            err_msg = "Failed to create in ServiceNow. This {0} already exists in ServiceNow. {0} ID: {1}. sn_ref_id: {2}"
+            err_msg = "Failed to create a ServiceNow Record. This {0} already exists in ServiceNow. {0} ID: {1}. sn_ref_id: {2}"
 
             if task_id:
                 err_msg = err_msg.format("Task", task_id, sn_ref_id)
@@ -377,7 +377,10 @@ class ResilientHelper(object):
             else:
                 err_msg = err_msg.format("Incident", incident_id, sn_ref_id)
 
-            raise ValueError(err_msg)
+            return {
+                "success": False,
+                "data": err_msg
+            }
 
         if task_id is not None:
             # Get the task
@@ -409,7 +412,10 @@ class ResilientHelper(object):
 
         log.debug("sn_request_data %s", request_data)
 
-        return request_data
+        return {
+            "success": True,
+            "data": request_data
+        }
 
     def sn_GET(self, url, params=None, auth=None, headers=None):
         """Method to handle a ServiceNow GET request"""
