@@ -19,7 +19,7 @@ sn_api_uri=/api/x_261673_resilient/api
 sn_table_name=incident
 
 # Username + Password of ServiceNow user with permissions to use IBM Resilient App
-sn_username=
-sn_password=
+sn_username=<ServiceNow Username>
+sn_password=<ServiceNow Password>
 """
   return config_data

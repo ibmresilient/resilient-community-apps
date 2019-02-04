@@ -53,16 +53,16 @@ class ResilientHelper(object):
 
         self.app_configs = app_configs
 
-        self.SN_HOST = self.get_config_option("sn_host")
+        self.SN_HOST = self.get_config_option("sn_host", placeholder="https://instance.service-now.com")
         self.SN_API_URI = self.get_config_option("sn_api_uri")
 
         # https://service-now-host.com/api/<app-name>/<custom-api-name/
         self.SN_API_URL = "{0}{1}".format(self.SN_HOST, self.SN_API_URI)
         self.SN_TABLE_NAME = str(self.get_config_option("sn_table_name"))
-        self.SN_USERNAME = str(self.get_config_option("sn_username"))
+        self.SN_USERNAME = str(self.get_config_option("sn_username", placeholder="<ServiceNow Username>"))
 
         # Handle password surrounded by ' or "
-        pwd = str(self.get_config_option("sn_password"))
+        pwd = str(self.get_config_option("sn_password", placeholder="<ServiceNow Password>"))
         if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
             self.SN_PASSWORD = pwd[1:-1]
         else:
@@ -120,12 +120,14 @@ class ResilientHelper(object):
         else:
             raise ValueError("We do not support this version of Python")
 
-    def get_config_option(self, option_name, optional=False):
+    def get_config_option(self, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
         option = self.app_configs.get(option_name)
+        err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
 
         if not option and optional is False:
-            err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
+            raise ValueError(err)
+        elif optional is False and placeholder is not None and option == placeholder:
             raise ValueError(err)
         else:
             return option
