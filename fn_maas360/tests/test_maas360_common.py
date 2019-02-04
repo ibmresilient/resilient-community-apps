@@ -40,7 +40,6 @@ class TestMaaS360(object):
         }
 
         maas360_utils = self._create_maas360_utils()
-
         assert maas360_utils.get_auth_token() == "d817df94"
 
     @pytest.mark.parametrize("results", [
@@ -88,9 +87,7 @@ class TestMaaS360(object):
         }
 
         maas360_utils = self._create_maas360_utils()
-
         devices = maas360_utils.basic_search("basic_search_url", "query_string")
-
         assert devices == {"device": {"maas360DeviceID": "androidc60775214"}, "count": 1}
 
     @patch('fn_maas360.lib.maas360_common.MaaS360Utils.generate_auth_token')
@@ -114,9 +111,9 @@ class TestMaaS360(object):
         """ Test get auth headers"""
         print("Test get auth headers\n")
         mocked_auth_token.return_value = "mocked_auth_token"
+
         maas360_utils = self._create_maas360_utils()
         headers = maas360_utils.get_auth_headers("content_type_header")
-
         assert headers == {"Accept": "application/json",
                            "Content-Type": "content_type_header",
                            "Authorization": "MaaS token='mocked_auth_token'"}
@@ -145,9 +142,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = inputs
 
         maas360_utils = self._create_maas360_utils()
-
         action_response = maas360_utils.locate_device("locate_device_url", "device_id")
-
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.MaaS360Utils.generate_auth_token')
@@ -161,7 +156,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self._create_maas360_utils()
-            maas360_utils.locate_device("basic_search_url", "query_string")
+            maas360_utils.locate_device("locate_device_url", "query_string")
             assert False
         except IntegrationError:
             assert True
@@ -181,8 +176,44 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self._create_maas360_utils()
-            maas360_utils.locate_device("basic_search_url", "query_string")
+            maas360_utils.locate_device("locate_device_url", "query_string")
             assert False
         except IntegrationError:
             assert True
+
+    @pytest.mark.parametrize("inputs,results", [
+        ({"deviceSoftwares": {"deviceSw": "mock_value"}},
+         {"deviceSw": "mock_value"}),
+        ({"deviceSoftwares": None}, None)
+    ])
+    @patch('fn_maas360.lib.maas360_common.MaaS360Utils.generate_auth_token')
+    @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call')
+    def test_get_software_installed(self, mocked_api_call, mocked_auth_token, inputs, results):
+        """ Test Get Software installed"""
+        print("Test Get Software installed\n")
+
+        mocked_auth_token.return_value = "mocked_auth_token"
+        mocked_api_call.return_value = inputs
+
+        maas360_utils = self._create_maas360_utils()
+        action_response = maas360_utils.get_software_installed("soft_install_url", "device_id")
+        assert action_response == results
+
+    @patch('fn_maas360.lib.maas360_common.MaaS360Utils.generate_auth_token')
+    @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call')
+    def test_lget_software_installed_side_effect_error(self, mocked_api_call, mocked_auth_token):
+        """ Test Get Software installed side effect error"""
+        print("Test Get Software installed side effect error\n")
+
+        mocked_auth_token.return_value = "mocked_auth_token"
+        mocked_api_call.side_effect = IntegrationError('Some error here')
+
+        try:
+            maas360_utils = self._create_maas360_utils()
+            maas360_utils.get_software_installed("soft_install_url", "query_string")
+            assert False
+        except IntegrationError:
+            assert True
+
+
 
