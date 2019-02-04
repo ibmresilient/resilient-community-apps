@@ -41,7 +41,7 @@
 		}
 	}
 	catch (errMsg){
-		current.work_notes = "Failed to create in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to create an Incident in IBM Resilient.\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

@@ -33,7 +33,7 @@
 		}
 	}
 	catch (errMsg){
-		current.work_notes = "Failed to create in IBM Resilient.\nReason: " + errMsg;
+		current.work_notes = "Failed to create a Task in IBM Resilient for Incident "+incidentId+".\nReason: " + errMsg;
 		gs.error(errMsg);
 	}
 })();

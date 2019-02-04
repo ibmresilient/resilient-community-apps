@@ -35,7 +35,7 @@ ResilientHelper.prototype = {
 		}
 
 		if(!snRecordId || typeof snRecordId !== "string"){
-			errMsg = "ResilientHelper.create(): 'snRecord' parameter must be a defined String object";
+			errMsg = "ResilientHelper.create(): 'snRecordId' parameter must be a defined String object";
 			throw errMsg;
 		}
 
