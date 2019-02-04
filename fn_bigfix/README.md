@@ -34,6 +34,8 @@ bigfix_pass=MyPassword
 bigfix_polling_interval=30
 bigfix_polling_timeout=1800
 hunt_results_limit=200
+#Optional setting, with time in seconds, to wait for all endpoints to respond. 
+#bigfix_endpoints_wait=30
 ```
 
 Run with: `resilient-circuits run`.

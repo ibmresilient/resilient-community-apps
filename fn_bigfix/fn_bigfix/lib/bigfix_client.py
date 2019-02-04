@@ -31,6 +31,8 @@ class BigFixClient(object):
         self.headers = {'content-type': 'application/json'}
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))
+        if options.get("bigfix_endpoints_wait") is not None:
+            self.endpoints_wait = int(options.get("bigfix_endpoints_wait"))
         # Endpoints
         self.client_query_endpoint = '/api/clientquery'
         self.client_query_results_endpoint = '/api/clientqueryresults/'
@@ -342,18 +344,19 @@ class BigFixClient(object):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
-        :param wait: Interval to wait before checking status - value in ms
+        :param wait: Interval to wait while checking status - value in ms
         :param timeout: Timeout value in ms - give some time to BigFix to get all the data. Value of 0 means try once.
-        :return result: Result (list of resposes) for query id
+        :return result: Result (list of responses) for query id
 
         """
         # Let's give some time (5 secs) to BigFix to get all the data
         time.sleep(5)
         clientq_restapi = 'api/clientqueryresults'
         req_url = "%s/%s/%d?stats=1&output=json" % (self.base_url, clientq_restapi, query_id)
+        wait_for_endpoints = False
 
-        result = []
         while timeout > 0:
+            result = []
             r = requests.get(req_url, auth=(self.bf_user, self.bf_pass), verify=False)
             if r.status_code == 200:
                 try:
@@ -372,7 +375,16 @@ class BigFixClient(object):
                                 "resp_time": response['results'][i]['ResponseTime']
                                 }
                             )
-                        break
+                        if hasattr(self, "endpoints_wait") and self.endpoints_wait is not None:
+                            # Set new timeout value to wait for all results.
+                            if not wait_for_endpoints:
+                                LOG.info("Waiting %s seconds for all endpoints to report.", self.endpoints_wait)
+                                # Reset timeout value to 'self.endpoints_wait' and add 'wait' value as it will
+                                # be stripped off immediately.
+                                timeout = self.endpoints_wait + wait
+                                wait_for_endpoints = True
+                        else:
+                            break
                     else:
                         LOG.exception("Got unexpected number of results (%d)", response['totalResults'])
                         break
