@@ -8,7 +8,7 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
 
 PACKAGE_NAME = "fn_service_now"
-FUNCTION_NAME = "sn_utilities_add_attachment_to_servicenow_record"
+FUNCTION_NAME = "fn_snow_add_attachment_to_record"
 
 # Get mock config data
 config_data = get_mock_config_data()
@@ -16,19 +16,19 @@ config_data = get_mock_config_data()
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = SNResilientMock
 
-def call_sn_utilities_add_attachment_to_servicenow_record_function(circuits, function_params, timeout=10):
+def call_fn_snow_add_attachment_to_record_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("sn_utilities_add_attachment_to_servicenow_record", function_params)
+    evt = SubmitTestFunction("fn_snow_add_attachment_to_record", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("sn_utilities_add_attachment_to_servicenow_record_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_snow_add_attachment_to_record_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestSnUtilitiesAddAttachmentToServicenowRecord:
-    """ Tests for the sn_utilities_add_attachment_to_servicenow_record function"""
+class TestFnSnowAddAttachmentToRecord:
+    """ Tests for the fn_snow_add_attachment_to_record function"""
 
     inputs = {
       "attachment_id": 1,
@@ -58,5 +58,5 @@ class TestSnUtilitiesAddAttachmentToServicenowRecord:
 
         ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
 
-        results = call_sn_utilities_add_attachment_to_servicenow_record_function(circuits_app, inputs)
+        results = call_fn_snow_add_attachment_to_record_function(circuits_app, inputs)
         assert(expected_results == results)

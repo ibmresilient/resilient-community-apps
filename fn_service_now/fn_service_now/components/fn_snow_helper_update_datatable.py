@@ -24,7 +24,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_update_datatable"""
+    """Component that implements Resilient function 'fn_snow_helper_update_datatable"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -39,9 +39,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_update_datatable")
-    def _sn_utilities_update_datatable_function(self, event, *args, **kwargs):
-        """Function: Function that updates the ServiceNow Datatable when an Incident/Task is added/updated"""
+    @function("fn_snow_helper_update_datatable")
+    def _fn_snow_helper_update_datatable_function(self, event, *args, **kwargs):
+        """Function: A helper function that updates the ServiceNow Records Data Table when the status of an Incident/Task is changed."""
 
         log = logging.getLogger(__name__)
 

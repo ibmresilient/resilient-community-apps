@@ -10,7 +10,7 @@ from copy import deepcopy
 
 
 PACKAGE_NAME = "fn_service_now"
-FUNCTION_NAME = "sn_utilities_update_datatable"
+FUNCTION_NAME = "fn_snow_helper_update_datatable"
 
 # Read the default configuration-data section from the package
 config_data = get_mock_config_data()
@@ -19,19 +19,19 @@ config_data = get_mock_config_data()
 resilient_mock = SNResilientMock
 
 
-def call_sn_utilities_update_datatable_function(circuits, function_params, timeout=10):
+def call_fn_snow_helper_update_datatable_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("sn_utilities_update_datatable", function_params)
+    evt = SubmitTestFunction("fn_snow_helper_update_datatable", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("sn_utilities_update_datatable_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_snow_helper_update_datatable_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestSnUtilitiesUpdateDatatable:
-    """ Tests for the sn_utilities_update_datatable function"""
+class TestFnSnowHelperUpdateDatatable:
+    """ Tests for the fn_snow_helper_update_datatable function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -55,5 +55,5 @@ class TestSnUtilitiesUpdateDatatable:
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        results = call_sn_utilities_update_datatable_function(circuits_app, inputs)
+        results = call_fn_snow_helper_update_datatable_function(circuits_app, inputs)
         assert(expected_results == results)

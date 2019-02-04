@@ -22,7 +22,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_get_sys_id"""
+    """Component that implements Resilient function 'fn_snow_lookup_sysid"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -34,9 +34,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_get_sys_id")
-    def _sn_utilities_get_sys_id_function(self, event, *args, **kwargs):
-        """Function: Function that gets the 'sys_id' of a ServiceNow record"""
+    @function("fn_snow_lookup_sysid")
+    def _fn_snow_lookup_sysid_function(self, event, *args, **kwargs):
+        """Function: Function that gets the 'sys_id' of a ServiceNow Record."""
 
         log = logging.getLogger(__name__)
 

@@ -9,7 +9,7 @@ from sn_test_helper import *
 from copy import deepcopy
 
 PACKAGE_NAME = "fn_service_now"
-FUNCTION_NAME = "sn_utilities_close_in_servicenow"
+FUNCTION_NAME = "fn_snow_close_record"
 
 # Get mock config data
 config_data = get_mock_config_data()
@@ -17,18 +17,18 @@ config_data = get_mock_config_data()
 # Use custom resilient_mock
 resilient_mock = SNResilientMock
 
-def call_sn_utilities_close_in_servicenow_function(circuits, function_params, timeout=10):
+def call_fn_snow_close_record_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("sn_utilities_close_in_servicenow", function_params)
+    evt = SubmitTestFunction("fn_snow_close_record", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("sn_utilities_close_in_servicenow_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_snow_close_record_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
-class TestSnUtilitiesCloseInServicenow:
-    """ Tests for the sn_utilities_close_in_servicenow function"""
+class TestFnSnowCloseRecord:
+    """ Tests for the fn_snow_close_record function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -88,5 +88,5 @@ class TestSnUtilitiesCloseInServicenow:
 
         ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
 
-        results = call_sn_utilities_close_in_servicenow_function(circuits_app, inputs)
+        results = call_fn_snow_close_record_function(circuits_app, inputs)
         assert(expected_results == results)

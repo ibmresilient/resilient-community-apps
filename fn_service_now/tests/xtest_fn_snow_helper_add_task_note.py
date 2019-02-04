@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_service_now"
-FUNCTION_NAME = "snow_helper_add_task_note"
+FUNCTION_NAME = "fn_snow_helper_add_task_note"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,19 +16,19 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_snow_helper_add_task_note_function(circuits, function_params, timeout=10):
+def call_fn_snow_helper_add_task_note_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("snow_helper_add_task_note", function_params)
+    evt = SubmitTestFunction("fn_snow_helper_add_task_note", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("snow_helper_add_task_note_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_snow_helper_add_task_note_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestSnowHelperAddTaskNote:
-    """ Tests for the snow_helper_add_task_note function"""
+class TestFnSnowHelperAddTaskNote:
+    """ Tests for the fn_snow_helper_add_task_note function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -45,5 +45,5 @@ class TestSnowHelperAddTaskNote:
             "task_id": task_id,
             "sn_note_text": sn_note_text
         }
-        results = call_snow_helper_add_task_note_function(circuits_app, function_params)
+        results = call_fn_snow_helper_add_task_note_function(circuits_app, function_params)
         assert(expected_results == results)

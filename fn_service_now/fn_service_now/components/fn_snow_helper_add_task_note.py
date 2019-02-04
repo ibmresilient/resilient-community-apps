@@ -20,7 +20,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'snow_helper_add_task_note"""
+    """Component that implements Resilient function 'fn_snow_helper_add_task_note"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -32,8 +32,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("snow_helper_add_task_note")
-    def _snow_helper_add_task_note_function(self, event, *args, **kwargs):
+    @function("fn_snow_helper_add_task_note")
+    def _fn_snow_helper_add_task_note_function(self, event, *args, **kwargs):
         """Function: A helper function to add a Note to a Task from a Workflow with a different parent object type"""
 
         log = logging.getLogger(__name__)

@@ -30,7 +30,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_create_in_servicenow"""
+    """Component that implements Resilient function 'fn_snow_create_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -45,9 +45,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_create_in_servicenow")
-    def _sn_utilities_create_in_servicenow_function(self, event, *args, **kwargs):
-        """Function: A function that sends Task or Incident information to a custom endpoint in ServiceNow in order to create an associated ServiceNow record"""
+    @function("fn_snow_create_record")
+    def _fn_snow_create_record_function(self, event, *args, **kwargs):
+        """Function: Function that uses the '/create' custom endpoint in ServiceNow to create a ServiceNow record from an IBM Resilient Incident or Task"""
 
         log = logging.getLogger(__name__)
 

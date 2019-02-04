@@ -25,7 +25,7 @@ class FunctionPayload(object):
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'sn_utilities_add_note_to_servicenow_record"""
+    """Component that implements Resilient function 'fn_snow_add_note_to_record"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -37,9 +37,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_service_now", {})
 
-    @function("sn_utilities_add_note_to_servicenow_record")
-    def _sn_utilities_add_note_to_servicenow_record_function(self, event, *args, **kwargs):
-        """Function: A function that adds a Resilient Note to a ServiceNow record as either a 'Work Note' or 'Additional Comment'"""
+    @function("fn_snow_add_note_to_record")
+    def _fn_snow_add_note_to_record_function(self, event, *args, **kwargs):
+        """Function: Function that adds a Note to a ServiceNow Record. Option to add the note as a 'Work Note' or 'Additional Comment'."""
 
         log = logging.getLogger(__name__)
 

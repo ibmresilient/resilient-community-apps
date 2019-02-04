@@ -25,13 +25,13 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "SnUtilitiesCloseInServicenowFunctionComponent = fn_service_now.components.sn_utilities_close_in_servicenow:FunctionComponent",
-            "SnUtilitiesCreateInServicenowFunctionComponent = fn_service_now.components.sn_utilities_create_in_servicenow:FunctionComponent",
-            "SnUtilitiesAddNoteToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_note_to_servicenow_record:FunctionComponent",
-            "SnUtilitiesAddAttachmentToServicenowRecordFunctionComponent = fn_service_now.components.sn_utilities_add_attachment_to_servicenow_record:FunctionComponent",
-            "SnowHelperAddTaskNoteFunctionComponent = fn_service_now.components.snow_helper_add_task_note:FunctionComponent",
-            "SnUtilitiesGetSysIdFunctionComponent = fn_service_now.components.sn_utilities_get_sys_id:FunctionComponent",
-            "SnUtilitiesUpdateDatatableFunctionComponent = fn_service_now.components.sn_utilities_update_datatable:FunctionComponent"
+            "FnSnowCloseRecordFunctionComponent = fn_service_now.components.fn_snow_close_record:FunctionComponent",
+            "FnSnowCreateRecordFunctionComponent = fn_service_now.components.fn_snow_create_record:FunctionComponent",
+            "FnSnowAddNoteToRecordFunctionComponent = fn_service_now.components.fn_snow_add_note_to_record:FunctionComponent",
+            "FnSnowAddAttachmentToRecordFunctionComponent = fn_service_now.components.fn_snow_add_attachment_to_record:FunctionComponent",
+            "FnSnowHelperAddTaskNoteFunctionComponent = fn_service_now.components.fn_snow_helper_add_task_note:FunctionComponent",
+            "FnSnowLookupSysidFunctionComponent = fn_service_now.components.fn_snow_lookup_sysid:FunctionComponent",
+            "FnSnowHelperUpdateDatatableFunctionComponent = fn_service_now.components.fn_snow_helper_update_datatable:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_service_now.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_service_now.util.customize:customization_data"],
