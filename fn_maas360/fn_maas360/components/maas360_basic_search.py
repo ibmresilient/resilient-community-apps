@@ -39,51 +39,6 @@ class FunctionComponent(ResilientComponent):
             GET /device-apis/devices/2.0/search/customer/<billingId>?partialPhoneNumber=%2B1858
                 &imeiMeid=99000032580168&pageSize=250&sortAttribute=lastReported&sortOrder=dsc
                 &partialUsername=dlind&platformName=Android&email=TEST%40EXAMPLE.COM&match=0
-
-        Basic Search returns a result in JSON format with an entry consisting of key value pairs:
-
-            1 result
-
-                "content": {
-                    "device": {
-                        "maas360DeviceID": "androidc60775214",
-                        "deviceName": "glindsey-ADR6400L",
-                        "username": "dlindsey",
-                        "platformName": "Android",
-                        "deviceType": "Smartphone",
-                        "lastReported": "2011-05-09T17:13:15",
-                        "deviceStatus": "Active",
-                        ...},
-                    "count": 1,
-                    "pageNumber": 1,
-                    "pageSize": 1
-                    }
-
-            2 or more results
-
-                "content": {
-                    "device": [{
-                            "maas360DeviceID": "androidc60775214",
-                            "deviceName": "glindsey-ADR6400L",
-                            "username": "dlindsey",
-                            "platformName": "Android",
-                            "deviceType": "Smartphone",
-                            "lastReported": "2011-05-09T17:13:15",
-                            "deviceStatus": "Active",
-                            ...},
-                        {
-                            "maas360DeviceID": "androidc60775214",
-                            "deviceName": "glindsey-ADR6400L",
-                            "username": "dlindsey",
-                            "platformName": "Android",
-                            "deviceType": "Smartphone",
-                            "lastReported": "2011-05-09T17:13:15",
-                            "deviceStatus": "Active",
-                        ...}],
-                    "count": 2,
-                    "pageNumber": 1,
-                    "pageSize": 1
-                    }
     """
 
     def __init__(self, opts):

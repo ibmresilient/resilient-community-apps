@@ -24,7 +24,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "Maas360BasicSearchFunctionComponent = fn_maas360.components.maas360_basic_search:FunctionComponent",
-            "Maas360LocateDeviceFunctionComponent = fn_maas360.components.maas360_locate_device:FunctionComponent"
+            "Maas360ActionFunctionComponent = fn_maas360.components.maas360_action:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_maas360.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_maas360.util.customize:customization_data"],

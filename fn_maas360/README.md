@@ -30,7 +30,56 @@ The resulting .tar.gz file can be installed using
 
     pip install <filename>.tar.gz
     
-Basic Search JSON Results
+Basic Search Function
+
+Function searches for devices by Device Name, Username, Phone Number, Platform, Device Status and other Device Identifiers.
+
+Basic Search returns a result in JSON format with an entry consisting of key value pairs:
+```
+1 result:
+
+    "content": {
+        "device": {
+            "maas360DeviceID": "androidc60775214",
+            "deviceName": "glindsey-ADR6400L",
+            "username": "dlindsey",
+            "platformName": "Android",
+            "deviceType": "Smartphone",
+            "lastReported": "2011-05-09T17:13:15",
+            "deviceStatus": "Active",
+            ...},
+        "count": 1,
+        "pageNumber": 1,
+        "pageSize": 1
+        }
+
+2 or more results:
+
+    "content": {
+        "device": [{
+                "maas360DeviceID": "androidc60775214",
+                "deviceName": "glindsey-ADR6400L",
+                "username": "dlindsey",
+                "platformName": "Android",
+                "deviceType": "Smartphone",
+                "lastReported": "2011-05-09T17:13:15",
+                "deviceStatus": "Active",
+                ...},
+            {
+                "maas360DeviceID": "androidc60775214",
+                "deviceName": "glindsey-ADR6400L",
+                "username": "dlindsey",
+                "platformName": "Android",
+                "deviceType": "Smartphone",
+                "lastReported": "2011-05-09T17:13:15",
+                "deviceStatus": "Active",
+            ...}],
+        "count": 2,
+        "pageNumber": 1,
+        "pageSize": 1
+        }
+```
+Complete Results
 ```
 {
   "inputs": {
@@ -102,4 +151,78 @@ Basic Search JSON Results
   "reason": null, 
   "version": "1.0"
 }
+```
+Locate Device
+
+Function performs a real-time lookup on Android devices or provides Last Known location on iOS and Windows Phone devices.
+The results is latitude and longitude information.
+
+Locate Device returns a result in JSON format with an entry consisting of key value pairs:
+```
+"content": {
+        "actionStatus":0, # 0:success; 1:error
+        "description":"The action was executed successfully on the device.",
+        "maas360DeviceID":"a2e13f",
+        "latitude":39.955994,
+        "locatedTime":"2018-11-05 21:34:08.0",
+        "longitude":-75.167178
+        }
+ ```
+Get Software Installed
+
+Function gets installed software for a device.
+
+Get Software Installed returns a result in JSON format with an entry consisting of key value pairs:
+```
+"content": {
+    u'deviceSw': [
+    {
+        u'swAttrs': [
+        {
+            u'type': u'string',
+            u'value': u'com.fiberlink.maas360forios',
+            u'key': u'Application ID'},
+        {
+            u'type': u'string',
+            u'value': u'3.70.111',
+            u'key': u'Version'},
+        {
+            u'type': u'string',
+            u'value': 3.79,
+            u'key': u'AppDataSize'},
+        {
+            u'type': u'string',
+            u'value': 175.18,
+            u'key': u'File Size'},
+        {
+            u'type': u'string',
+            u'value': u'Installed by MDM',
+            u'key': u'Manage Status'}],
+        u'swName': u'MaaS360'},
+    {
+        u'swAttrs': [
+        {
+            u'type': u'string',
+            u'value': u'com.sap.fiori.client.release',
+            u'key': u'Application ID'},
+        {
+            u'type': u'string',
+            u'value': u'1.11.6',
+            u'key': u'Version'},
+        {
+            u'type': u'string',
+            u'value': 0.94,
+            u'key': u'AppDataSize'},
+        {
+            u'type': u'string',
+            u'value': 46.1,
+            u'key': u'File Size'},
+        {
+            u'type': u'string',
+            u'value': u'Installed by MDM',
+            u'key': u'Manage Status'}],
+        u'swName': u'SAP Fiori'}
+    }],
+    u'lastSoftwareDataRefreshDate': u'2019-01-15T00:00:00',
+    u'maas360DeviceID': u'ApplC7CSG5PBHG75'
 ```

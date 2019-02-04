@@ -9,8 +9,8 @@ from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib.components.requests_common import RequestsCommon
 
 LOG = logging.getLogger(__name__)
-JSON_CONTENT_TYPE_HEADER = "application/json"
-DEFAULT_CONTENT_TYPE_HEADER = "application/x-www-form-urlencoded"
+JSON_CONTENT_TYPE = "application/json"
+URL_ENCODED_FORM = "application/x-www-form-urlencoded"
 
 
 class MaaS360Utils(object):
@@ -101,7 +101,7 @@ class MaaS360Utils(object):
         """
 
         url_endpoint = self.host + basic_search_url + self.billingId
-        auth_headers = self.get_auth_headers(JSON_CONTENT_TYPE_HEADER)
+        auth_headers = self.get_auth_headers(JSON_CONTENT_TYPE)
 
         try:
             results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
@@ -121,21 +121,20 @@ class MaaS360Utils(object):
                         "Authorization": u"MaaS token='{}'".format(self.authToken)}
         return auth_headers
 
-    def locate_device(self, locate_device_url, device_id):
+    def locate_device(self, url, device_id):
         """
-        Function performs a real-time lookup on Android devices or  provides Last Known location on iOS
+        Function performs a real-time lookup on Android devices or provides Last Known location on iOS
         and Windows Phone devices. The results is latitude and longitude information.
-        :param locate_device_url:
+        :param url:
         :param device_id
-        :return: results_locate_device
+        :return: action_response
         """
-        url_endpoint = self.host + locate_device_url + self.billingId
-        auth_headers = self.get_auth_headers(DEFAULT_CONTENT_TYPE_HEADER)
-        locate_device_request_body = {"deviceId": u"{}".format(device_id)}
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(URL_ENCODED_FORM)
+        request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, locate_device_request_body, log=LOG,
-                                           headers=auth_headers)
+            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
 
@@ -148,3 +147,22 @@ class MaaS360Utils(object):
             raise IntegrationError(u"Unable to execute call Locate Device: {}".format(action_response.get("description")))
 
         return action_response
+
+    def get_software_installed(self, url, device_id):
+        """
+        Function gets software installed for a device.
+        :param url:
+        :param device_id
+        :return: device_softwares
+        """
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(JSON_CONTENT_TYPE)
+        query_string = {"deviceId": u"{}".format(device_id)}
+
+        try:
+            results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Get Software Installed: {}".format(err))
+
+        device_softwares = results.get("deviceSoftwares")
+        return device_softwares
