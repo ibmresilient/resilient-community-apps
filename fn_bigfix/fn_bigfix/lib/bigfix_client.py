@@ -342,7 +342,7 @@ class BigFixClient(object):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
-        :param wait: Value name in ms
+        :param wait: Interval to wait before checking status - value in ms
         :param timeout: Timeout value in ms - give some time to BigFix to get all the data. Value of 0 means try once.
         :return result: Result (list of resposes) for query id
 
@@ -353,7 +353,7 @@ class BigFixClient(object):
         req_url = "%s/%s/%d?stats=1&output=json" % (self.base_url, clientq_restapi, query_id)
 
         result = []
-        while timeout >= 0:
+        while timeout > 0:
             r = requests.get(req_url, auth=(self.bf_user, self.bf_pass), verify=False)
             if r.status_code == 200:
                 try:
@@ -383,9 +383,9 @@ class BigFixClient(object):
             else:
                 LOG.exception("Unexpected HTTP status code: %d", r.status_code)
 
-            timeout = timeout - 1000
+            timeout = timeout - wait
             if timeout > 0:
-                time.sleep(1)
+                time.sleep(wait)
         return result
 
     def post_bfclientquery(self, query, computer_id=None):
