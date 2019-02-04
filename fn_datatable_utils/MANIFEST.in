@@ -1,0 +1,4 @@
+include README.md
+include fn_datatable_utils/util/*
+include fn_datatable_utils/LICENSE
+include screenshots/*

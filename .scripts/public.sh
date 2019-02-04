@@ -34,6 +34,7 @@ fn_clamav
 fn_cloud_foundry
 fn_create_webex_meeting
 fn_create_zoom_meeting
+fn_datatable_utils
 fn_digital_shadows_search
 fn_elasticsearch
 fn_email_header_validation
@@ -47,8 +48,10 @@ fn_hibp
 fn_html2pdf
 fn_ioc_parser
 fn_ipinfo
+fn_isitPhishing
 fn_jira
 fn_ldap_utilities
+fn_machine_learning
 fn_mcafee_atd
 fn_mcafee_epo
 fn_mcafee_esm
@@ -66,6 +69,7 @@ fn_query_tor_network
 fn_slack
 fn_splunk_integration
 fn_thug
+fn_twilio
 fn_twitter_most_popular
 fn_urlscanio
 fn_utilities
