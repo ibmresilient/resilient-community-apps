@@ -10,6 +10,7 @@ import requests
 from fn_docker.util.docker_utils import DockerUtils
 from fn_docker.util.helper import ResDockerHelper
 from resilient_lib import ResultPayload
+import resilient_lib as resilient_lib
 from resilient_circuits.template_functions import render
 
 
@@ -51,29 +52,74 @@ class FunctionComponent(ResilientComponent):
             log.info("docker_input: %s", docker_input)
 
             helper = ResDockerHelper(self.options)
+            image_to_use = helper.get_config_option("docker_image", True) or docker_image
+
+            # Check whether we are dealing with an attachment or artifact
+            if (artifact_id or attachment_id or task_id) and docker_input is None:
+
+                yield StatusMessage("Input appears to be an attachment, attempting to parse.")
+                # Get the files data
+                attachment_input = resilient_lib.get_file_attachment(
+                    incident_id=incident_id, artifact_id=artifact_id,
+                    attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
+
+                # Get the files name
+                attachment_name = resilient_lib.get_file_attachment_name(
+                    incident_id=incident_id, artifact_id=artifact_id,
+                    attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
+                # Get the external directory in which to save the file
+                output_vol = helper.get_image_specific_config_option(
+                    options=self.all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+                    option_name="primary_output_dir", optional=True)
+
+                yield StatusMessage("Writing attachment to bind folder")
+                # TODO: Move imports to top
+                import tempfile, base64, os
+                # Convert to named temp file
+                with tempfile.NamedTemporaryFile(delete=False, prefix='.docker_integration_input_',
+                                                 suffix=attachment_name, dir=output_vol) as temp_file:
+                    try:
+
+                        # temp_file.name = file_name
+                        temp_file.write(attachment_input)
+                        temp_file.close()
+                        print("File location"+temp_file.name)
+                        # We should now have a temp file
+                    finally:
+                        #os.unlink(temp_file.name)
+                        print(temp_file.name)
+                        umask = os.umask(0)
+                        #os.umask(umask)
+                        #os.chmod(temp_file.name, 0o666 & ~umask)
+
+            else:
+                # We are not dealing with an attachment
+                print("Dealing with an artifact")
+
             docker_interface = DockerUtils()
 
-            escaped_args = {
-                "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs)
-            }
-            print(escaped_args)
             # Decide whether to use local connection or remote
             docker_interface.setup_docker_connection(options=self.options)
             docker_extra_kwargs = docker_interface.parse_extra_kwargs(options=self.options)
-            image_to_use = helper.get_config_option("docker_image", True) or docker_image
 
-            if image_to_use not in helper.get_config_option("docker_image", True).split(","):
+            # Ensure the specified image is an approved one
+            if image_to_use not in helper.get_config_option("docker_approved_images", True).split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
+            # Prepare the values which will be rendered into the app.config cmd
+            escaped_args = {
+                "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs),
+                "attachment_input": render("{{attachment_input|%s}}" % "sh",
+                                           {"attachment_input": os.path.split(temp_file.name)[1]}),
+            }
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
             command, docker_extra_kwargs = docker_interface.gather_image_args_and_volumes(
-                helper, image_to_use, self.all_options, docker_extra_kwargs)
-
+                helper, image_to_use, self.all_options, docker_extra_kwargs, escaped_args)
 
             log.info("Command {} \n Volume Bind {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_to_use)
-            print(render(command,escaped_args))
+
             # Get the Client
             docker_client = docker_interface.get_client()
             yield StatusMessage("Now starting container with input")

@@ -6,6 +6,7 @@ import docker
 
 LOG = logging.getLogger(__name__)
 import os
+from resilient_circuits.template_functions import render
 
 log = logging.getLogger(__name__)
 
@@ -120,7 +121,7 @@ class DockerUtils:
     def inspect_container(self, containerid):
         return self.api_client.inspect_container(containerid)
 
-    def gather_image_args_and_volumes(self, helper, image_to_use, all_options, docker_extra_kwargs):
+    def gather_image_args_and_volumes(self, helper, image_to_use, all_options, docker_extra_kwargs, escaped_args):
         """
         A helper function used to gather the command to be run aswell as format the kwargs to used on run.
 
@@ -138,15 +139,17 @@ class DockerUtils:
         :param docker_extra_kwargs:
         :return:
         """
-        # Acquire any specific configs for this image
-        command = helper.get_image_specific_config_option(options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
-                                                          option_name="cmd")
+
+        command = helper.get_image_specific_config_option(
+            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            option_name="cmd")
+
         output_vol = helper.get_image_specific_config_option(
             options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
             option_name="primary_output_dir", optional=True)
         internal_vol = helper.get_image_specific_config_option(
             options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
-            option_name="primary__internal_dir", optional=True)
+            option_name="primary_internal_dir", optional=True)
         vol_operation = helper.get_image_specific_config_option(
             options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation",
             optional=True)
@@ -165,13 +168,17 @@ class DockerUtils:
 
             # After we finish looping
             del docker_extra_kwargs['volumes']  # Remove the volume
-            docker_extra_kwargs['volumes'] = container_volume_bind
-            log.info(
-                "Attempted to format volume from extra kwargs, now is type {}".format(
-                    type(docker_extra_kwargs['volumes'])))
-            command.format(internal_vol, vol_operation)
+        docker_extra_kwargs['volumes'] = container_volume_bind
+        log.info(
+            "Attempted to format volume from extra kwargs, now is type {}".format(
+                type(docker_extra_kwargs['volumes'])))
 
-        return command, docker_extra_kwargs
+        escaped_args.update({
+            "internal_vol": render("{{internal_vol|%s}}" % "sh", {"internal_vol": internal_vol}),
+            "operation": render("{{operation|%s}}" % "sh",
+                                {"operation": vol_operation})
+        })
+        return render(command,escaped_args), docker_extra_kwargs
 
 
 
