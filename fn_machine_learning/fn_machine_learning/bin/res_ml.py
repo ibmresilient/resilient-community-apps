@@ -156,7 +156,7 @@ def main():
     #
     #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
     #
-    build_parser.add_argument("-f", "--config",
+    build_parser.add_argument("-f", "--file_config",
                               help="Use config file",
                               default=None)
 
@@ -244,9 +244,12 @@ def main():
     #   Get config file
     #
     config_file = None
-    if args.cmd == "download" or args.cmd == "build" or args.cmd == "rebuild":
-        # Uer can use -f to specify config file for machine learning
-        config_file = args.config
+    if args.cmd in ("download", "build", "rebuild"):
+        #
+        # For these three subcommands,
+        # uer can use -f to specify config file for machine learning
+        #
+        config_file = args.file_config
         if config_file is None and os.path.isfile("./ml.config"):
             #
             # If ./ml.config exits and user doesn't specify what to use, use ./ml.config
