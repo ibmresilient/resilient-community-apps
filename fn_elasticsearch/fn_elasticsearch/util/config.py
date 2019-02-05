@@ -1,4 +1,4 @@
-  # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Generate a default configuration-file section for fn_elasticsearch"""
@@ -18,4 +18,3 @@ es_auth_password = <ELASTICSEARCH_PASSWORD>
 es_cafile = <CA_FILE_TO_BE_USED>
 """
     return config_data
-    

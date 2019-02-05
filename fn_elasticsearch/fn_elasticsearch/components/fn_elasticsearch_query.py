@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use,
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
 import logging
-import json
 from ssl import create_default_context
+
+from elasticsearch import Elasticsearch
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
 FunctionResult, FunctionError
-from elasticsearch import Elasticsearch
+
 from fn_elasticsearch.util.helper import ElasticSearchHelper
 
 
@@ -76,29 +77,27 @@ class FunctionComponent(ResilientComponent):
                     es = Elasticsearch([ELASTICSEARCH_URL],
                                        verify_certs=False,
                                        cafile=ELASTICSEARCH_CERT)
-            except:
-                raise FunctionError("Encountered error while connecting to ElasticSearch")
+            except Exception as e:
+                raise FunctionError("Encountered error while connecting to ElasticSearch {0}".format(e))
             # Start query results as None
-            query_results = None 
+            query_results = None
             matched_records = 0
 
             try:
                 es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
-            except:
-                raise FunctionError("Encountered error while submitting query to ElasticSearch")
+            except Exception as e:
+                raise FunctionError("Encountered error while submitting query to ElasticSearch {0}".format(e))
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
-                # Could do some extra stuff with results here
-                
                 # Prepare the results object
                 query_results = es_results["hits"]["hits"]
                 matched_records = es_results["hits"]["total"]
-                
+
             # Check if we have a status attribute indicating an error we could raise
             elif 'status' in es_results:
                 # If we encounter either a 404 (Not found) or 400 error return the reason
-                
+
                 if es_results['status'] in (400, 404, 500):
                     # Can raise the root_cause of the failure
                     log.error(es_results["error"]["root_cause"])
@@ -107,21 +106,25 @@ class FunctionComponent(ResilientComponent):
                     if es_results['status'] == 400:
                         # es_results["error"]["root_cause"][1]["reason"] is only available on exceptions of type 400
                         yield StatusMessage("Exception with code 400 encountered. Error: "+str(es_results["error"]["root_cause"]))
-                        
+
                     elif es_results['status'] == 404:
                         # Give reason that 404 happened; index not found?
                         yield StatusMessage("Exception encounted during query : "+str(es_results["error"]["reason"]))
                     elif es_results['status'] == 500:
                         yield StatusMessage("Unexpected 500 error encountered. Error: "+str(es_results["error"]["reason"]))
 
-
-           # Prepare the results object
+            # Prepare the results object
             results = {
+                "inputs": {
+                    "es_query": es_query,
+                    "es_doc_type": es_doc_type,
+                    "es_index" : es_index
+                },
                 "query_results": query_results,
                 "success": (True if query_results is not None else False),
-                "matched_records": matched_records
+                "matched_records": matched_records,
+                "returned_records": len(query_results)
             }
-            
             yield StatusMessage("Successful: "+str(results["success"]))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
