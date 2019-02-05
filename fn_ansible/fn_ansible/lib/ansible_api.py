@@ -7,10 +7,17 @@ from ansible.parsing.dataloader import DataLoader
 from ansible.vars.manager import VariableManager
 from ansible.inventory.manager import InventoryManager
 from ansible.executor.playbook_executor import PlaybookExecutor
+from ansible.module_utils._text import to_bytes
+from ansible.parsing.vault import VaultSecret
+import yaml
+import os
 
 
-def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_extra_vars):
+def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_extra_vars, playbook_become_method, playbook_become_user, vault_password_file=None, connection_type="smart"):
     loader = DataLoader()
+    if(vault_password_file):
+        vault_password = read_secret(vault_password_file, 'vault_pass')
+        loader.set_vault_secrets([('default', VaultSecret(_bytes=to_bytes(vault_password)))])
     inventory = InventoryManager(loader=loader, sources=hosts_path)
     variable_manager = VariableManager(loader=loader, inventory=inventory)
     if playbook_extra_vars:
@@ -38,7 +45,7 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
                         'sudo_user',
                         'sudo',
                         'diff'])
-    options = Options(connection='smart',
+    options = Options(connection=connection_type,
                         remote_user=user_name,
                         ack_pass=None,
                         sudo_user=None,
@@ -48,8 +55,8 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
                         verbosity=5,
                         module_path=None,
                         become=True,
-                        become_method='sudo',
-                        become_user='root',
+                        become_method=playbook_become_method,
+                        become_user=playbook_become_user,
                         check=False,
                         diff=False,
                         listhosts=None,
@@ -67,3 +74,13 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
         result = {h: stats.summarize(h)}
     
     return result
+
+
+def read_secret(file,key):
+    if(os.path.exists(file)):
+        with open(file) as f:
+            data = yaml.safe_load(f)
+        return data[key]
+    else:
+        raise ValueError("File not present in following path: '%s'" %file)
+

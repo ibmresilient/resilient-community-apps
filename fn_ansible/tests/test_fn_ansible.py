@@ -29,20 +29,23 @@ def call_fn_ansible_function(circuits, function_params, timeout=10):
 
 
 class TestFnAnsible:
-    """ Tests for the fn_ansible function"""
+    """ Tests for the function_ansible function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
+    
+    inputs = {
+        "ansible_playbook_name": "playbook1", 
+        "ansible_parameters": None
+    }
 
-    @pytest.mark.parametrize("expected_results", [
-        ({"value": "xyz"}),
-        ({"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, expected_results):
+    output = {'192.168.1.4': {'ok': 1, 'failures': 0, 'unreachable': 0, 'changed': 0, 'skipped': 0}}
+
+    @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
+    def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
-        }
-        results = call_fn_ansible_function(circuits_app, function_params)
+        results = call_fn_ansible_function(circuits_app, inputs)
         assert(expected_results == results)
+        # assert(1 == 1)

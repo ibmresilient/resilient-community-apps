@@ -45,6 +45,10 @@ class FunctionComponent(ResilientComponent):
             playbook_dir = self.options["playbook_dir"]
             hosts_path = self.options["hosts_path"]
             root_password = self.options["root_password"]
+            playbook_become_method = self.options["playbook_become_method"]
+            playbook_become_user = self.options["playbook_become_user"]
+            vault_password_file = self.options["vault_password_file"]
+            connection_type = self.options["connection_type"]
             
             # Prepare playbook vars
             extra_vars = {}
@@ -69,7 +73,11 @@ class FunctionComponent(ResilientComponent):
                                     user_name=user_name, 
                                     root_password=root_password, 
                                     playbook_path=target_playbook, 
-                                    playbook_extra_vars=extra_vars)
+                                    playbook_extra_vars=extra_vars,
+                                    playbook_become_method=playbook_become_method,
+                                    playbook_become_user=playbook_become_user,
+                                    vault_password_file=vault_password_file,
+                                    connection_type=connection_type)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
