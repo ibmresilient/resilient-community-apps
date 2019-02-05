@@ -129,8 +129,6 @@
   ```
   $ resilient-circuits run
   ```
-<!-- TODO -->
-* Import Data Table and Summary Section Fields
 --- 
 
 ## Step 6a: *Install Mid-Server (if needed)*
