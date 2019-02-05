@@ -1,8 +1,8 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
-"""Class to handle manipulating the External ServiceNow Ticket Status Data table"""
+"""Class to handle manipulating the ServiceNow Records Data Table"""
 
-class ExternalTicketStatusDatatable(object):
-    """Class that handles the sn_external_ticket_status datatable"""
+class ServiceNowRecordsDataTable(object):
+    """Class that handles the sn_records_dt datatable"""
     def __init__(self, res_client, incident_id):
         self.res_client = res_client
         self.incident_id = incident_id

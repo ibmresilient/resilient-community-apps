@@ -8,7 +8,7 @@ import json
 import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_service_now.util.resilient_helper import ResilientHelper
-from fn_service_now.util.external_ticket_status_datatable import ExternalTicketStatusDatatable
+from fn_service_now.util.sn_records_dt import ServiceNowRecordsDataTable
 
 
 class FunctionPayload(object):
@@ -78,7 +78,7 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
 
             # Instansiate a reference to the ServiceNow Datatable
-            datatable = ExternalTicketStatusDatatable(res_client, payload.inputs["incident_id"])
+            datatable = ServiceNowRecordsDataTable(res_client, payload.inputs["incident_id"])
 
             # Generate the res_link
             payload.res_link = res_helper.generate_res_link(payload.inputs["incident_id"], self.host, payload.inputs["task_id"])

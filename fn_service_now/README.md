@@ -466,7 +466,7 @@ inputs.sn_resilient_status = task.status
  ![screenshot](./screenshots/3.png)
 
 ### API Name:
-sn_external_ticket_status
+sn_records_dt
 
 ### Columns:
 | Column Name | API Access Name | Type |

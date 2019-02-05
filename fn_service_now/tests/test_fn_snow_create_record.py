@@ -77,7 +77,7 @@ class TestFnSnowCreateRecord:
           "id": 3
         }
 
-        ExternalTicketStatusDatatable.add_row = MagicMock(return_value=mock_add_row_response)
+        ServiceNowRecordsDataTable.add_row = MagicMock(return_value=mock_add_row_response)
 
         results = call_fn_snow_create_record_function(circuits_app, inputs)
 
