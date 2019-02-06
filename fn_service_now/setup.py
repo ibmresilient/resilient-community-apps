@@ -25,13 +25,14 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "FnSnowAddAttachmentToRecordFunctionComponent = fn_service_now.components.fn_snow_add_attachment_to_record:FunctionComponent",
+            "FnSnowAddNoteToRecordFunctionComponent = fn_service_now.components.fn_snow_add_note_to_record:FunctionComponent",
             "FnSnowCloseRecordFunctionComponent = fn_service_now.components.fn_snow_close_record:FunctionComponent",
             "FnSnowCreateRecordFunctionComponent = fn_service_now.components.fn_snow_create_record:FunctionComponent",
-            "FnSnowAddNoteToRecordFunctionComponent = fn_service_now.components.fn_snow_add_note_to_record:FunctionComponent",
-            "FnSnowAddAttachmentToRecordFunctionComponent = fn_service_now.components.fn_snow_add_attachment_to_record:FunctionComponent",
             "FnSnowHelperAddTaskNoteFunctionComponent = fn_service_now.components.fn_snow_helper_add_task_note:FunctionComponent",
+            "FnSnowHelperUpdateDatatableFunctionComponent = fn_service_now.components.fn_snow_helper_update_datatable:FunctionComponent",
             "FnSnowLookupSysidFunctionComponent = fn_service_now.components.fn_snow_lookup_sysid:FunctionComponent",
-            "FnSnowHelperUpdateDatatableFunctionComponent = fn_service_now.components.fn_snow_helper_update_datatable:FunctionComponent"
+            "FnSnowUpdateRecordFunctionComponent = fn_service_now.components.fn_snow_update_record:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_service_now.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_service_now.util.customize:customization_data"],

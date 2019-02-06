@@ -106,7 +106,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Adding Attachment to ServiceNow Record {0}".format(sn_ref_id))
 
                 # Call POST and get response
-                add_in_sn_response = res_helper.sn_POST("/add", data=json.dumps(request_data))
+                add_in_sn_response = res_helper.sn_api_request("POST", "/add", data=json.dumps(request_data))
                 payload.res_id = res_id
                 payload.sn_ref_id = sn_ref_id
                 payload.attachment_name = attachment["name"]

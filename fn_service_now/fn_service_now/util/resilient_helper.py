@@ -79,7 +79,7 @@ class ResilientHelper(object):
 
     @classmethod
     def _byteify(cls, data):
-        """Function to handle json.dumps and json.loads object_hook for supporting Python 2 and 3"""
+        """Function to handle json.loads object_hook for supporting Python 2 and 3"""
 
         if six.PY2:
             if isinstance(data, unicode):
@@ -88,10 +88,10 @@ class ResilientHelper(object):
             elif isinstance(data, dict):
                 return {cls._byteify(key): cls._byteify(value) for key, value in data.items()}
 
-            return None
+            return data
 
         elif six.PY3:
-            data_as_utf8_str = None
+            data_as_utf8_str = data
 
             if isinstance(data, unicode):
                 data_as_utf8_str = data.encode("utf-8")
@@ -419,28 +419,42 @@ class ResilientHelper(object):
             "data": request_data
         }
 
-    def sn_GET(self, url, params=None, auth=None, headers=None):
-        """Method to handle a ServiceNow GET request"""
-
+    def sn_api_request(self, method, endpoint, params=None, data=None, headers=None):
+        """Method to handle resquests to our custom APIs in ServiceNow"""
         log = logging.getLogger(__name__)
-        err_msg, response_content = None, None
 
-        if headers is None:
-            headers = self.headers
+        response, return_value = None, None
 
-        if auth is None:
-            auth = self.SN_AUTH
+        SUPPORTED_METHODS = ["GET", "POST", "PATCH"]
 
-        url = "{0}{1}".format(self.SN_API_URL, url)
+        if method not in SUPPORTED_METHODS:
+            raise ValueError("{0} is not a supported ServiceNow API Request. Supported methods are: {1}".format(method, SUPPORTED_METHODS))
+
+        headers = self.headers if headers is None else headers
+        url = "{0}{1}".format(self.SN_API_URL, endpoint)
 
         try:
-            log.debug("GET Request to ServiceNow. url: %s headers: %s params: %s", url, headers, params)
-            response = requests.get(url, auth=auth, headers=headers, params=params)
-            response.raise_for_status()
-            log.debug("GET Request successful")
+            log.debug("%s ServiceNow API Request. url: %s headers: %s data: %s", method, url, headers, data)
+
+            if method is "GET":
+                response = requests.get(url, auth=self.SN_AUTH, headers=headers, params=params)
+                response.raise_for_status()
+                return_value = response
+            
+            elif method is "POST":
+                response = requests.post(url, auth=self.SN_AUTH, headers=headers, data=data)
+                response.raise_for_status()
+                return_value = response.json()['result']
+
+            elif method is "PATCH":
+                response = requests.patch(url, auth=self.SN_AUTH, headers=headers, data=data)
+                response.raise_for_status()
+                return_value = response.json()['result']
+
+            log.debug("%s Request successful", method)
 
         except requests.exceptions.Timeout:
-            err_msg = "GET request to ServiceNow timedout"
+            err_msg = "{0} ServiceNow API Request timed out".format(method)
             raise ValueError(err_msg)
 
         except requests.exceptions.TooManyRedirects:
@@ -450,50 +464,7 @@ class ResilientHelper(object):
         except requests.exceptions.HTTPError as err:
             if err.response.content:
                 response_content = json.loads(err.response.content)
-                err_msg = response_content["error"]["message"]
-                raise ValueError(err_msg)
-            else:
-                raise ValueError(err)
-
-        except requests.exceptions.RequestException as err:
-            raise ValueError(err)
-
-        return response
-
-    def sn_POST(self, url, data, auth=None, headers=None):
-        """Method to handle ServiceNow POST request. If successful, returns the response as a Dictionary"""
-        
-        log = logging.getLogger(__name__)
-        return_json, err_msg, response_content = None, None, None
-
-        if headers is None:
-            headers = self.headers
-
-        if auth is None:
-            auth = self.SN_AUTH
-
-        url = "{0}{1}".format(self.SN_API_URL, url)
-
-        try:
-            log.debug("POST Request to ServiceNow. url: %s headers: %s data: %s", url, headers, data)
-            response = requests.post(url, auth=auth, headers=headers, data=data)
-            response.raise_for_status()
-            log.debug("POST Request successful")
-
-            return_json = response.json()['result']
-
-        except requests.exceptions.Timeout:
-            err_msg = "GET request to ServiceNow timedout"
-            raise ValueError(err_msg)
-
-        except requests.exceptions.TooManyRedirects:
-            err_msg = "Too Many Redirects for: {0}".format(url)
-            raise ValueError(err_msg)
-
-        except requests.exceptions.HTTPError as err:
-            if err.response.content:
-                response_content = json.loads(err.response.content)
-                err_msg = response_content["error"]["message"]
+                err_msg = "Error from ServiceNow: {0}".format(response_content["error"]["message"])
                 raise ValueError(err_msg)
             else:
                 raise ValueError(err)
@@ -504,4 +475,4 @@ class ResilientHelper(object):
         except requests.exceptions.RequestException as err:
             raise ValueError(err)
 
-        return return_json
+        return return_value

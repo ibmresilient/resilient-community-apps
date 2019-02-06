@@ -86,7 +86,7 @@ class TestFnSnowCloseRecord:
 
         mock_response = {"sn_ref_id": "INC123456", "sn_state": "Closed"}
 
-        ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
+        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
 
         results = call_fn_snow_close_record_function(circuits_app, inputs)
         assert(expected_results == results)

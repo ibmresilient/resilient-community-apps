@@ -107,7 +107,7 @@ class FunctionComponent(ResilientComponent):
                     "Incident" if request_data.get("type") is "res_incident" else "Task", request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")))
 
                 # Call POST and get response
-                create_in_sn_response = res_helper.sn_POST("/create", data=json.dumps(request_data))
+                create_in_sn_response = res_helper.sn_api_request("POST", "/create", data=json.dumps(request_data))
 
                 if create_in_sn_response is not None:
 

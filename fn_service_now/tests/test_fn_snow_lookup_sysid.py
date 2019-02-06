@@ -52,7 +52,7 @@ class TestFnSnowLookupSysid:
 
         mock_response = MockedResponse(200, json.dumps({"result": {"sys_id": "19JHGF7686GFDf6789"}})) 
 
-        ResilientHelper.sn_GET = MagicMock(return_value=mock_response)
+        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
 
         results = call_fn_snow_lookup_sysid_function(circuits_app, inputs)
         assert(expected_results == results)

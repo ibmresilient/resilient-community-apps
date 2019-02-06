@@ -4,7 +4,7 @@
 	
 	//Declare global variables
 	var record, response_body = null;
-    var req = request.body.data;
+	var req = request.body.data;
 	
 	//Function that converts miliseconds to a GlideDateTime Object
 	function ms_to_glideDateTime(ms){
@@ -50,12 +50,15 @@
 	}
 
 	//Function that sets the optional_fields of the record
-	function set_record_optional_fields(record, fields){
+	function set_record_optional_fields(record, fields, sn_table_name){
 		for (var i=0; i<fields.length; i++){
 			var field = fields[i];
 			if(record.isValidField(field.name)){
 				record[field.name] = field.value;
 				record.setValue(field.name, field.value);
+			}
+			else{
+				gs.warning(field.name + " is not a valid field in the " + sn_table_name + " table!");
 			}
 		}
 	}
@@ -74,18 +77,17 @@
 	}
 	else {
 		response.setError(new sn_ws_err.BadRequestError('The Resilient Type must be defined and valid. Either "res_task" or "res_incident". Current value: ' + req.type));
-		
 		return response;
 	}
 	
 	//Set the optional_fields that the user defines in the Resilient pre-process script
 	if(req.sn_optional_fields){
-		set_record_optional_fields(record, req.sn_optional_fields);
+		set_record_optional_fields(record, req.sn_optional_fields, req.sn_table_name);
 	}
 
 	//Insert the record
 	record.insert();
-		
+
 	//Create the response body
 	response_body = generate_response_body(record);
 	response.setBody(response_body);
@@ -93,4 +95,3 @@
 	return response;
 
 })(request, response);
-

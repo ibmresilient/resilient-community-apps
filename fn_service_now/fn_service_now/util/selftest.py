@@ -27,7 +27,7 @@ def selftest_function(opts):
 
         LOG.info("Trying to connect to %s", res_helper.SN_HOST)
 
-        res = res_helper.sn_GET('/test_connection')
+        res = res_helper.sn_api_request("GET", "/test_connection")
 
         status_code = res.status_code
 

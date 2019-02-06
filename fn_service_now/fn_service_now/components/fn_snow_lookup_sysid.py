@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
                 payload.inputs.get("sn_table_name"), payload.inputs.get("sn_query_field"), payload.inputs.get("sn_query_value")))
 
             # Call custom endpoint '/get_sys_id' with 3 params
-            get_sys_id_response = res_helper.sn_GET("/get_sys_id", params=payload.inputs)
+            get_sys_id_response = res_helper.sn_api_request("GET", "/get_sys_id", params=payload.inputs)
 
             # Get response text
             response_result = get_sys_id_response.text

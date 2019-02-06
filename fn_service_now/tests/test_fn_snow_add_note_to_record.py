@@ -71,7 +71,7 @@ class TestFnSnowAddNoteToRecord:
 
         mock_response = {"sn_ref_id": "INC0010459"}
 
-        ResilientHelper.sn_POST = MagicMock(return_value=mock_response)
+        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
 
         results = call_fn_snow_add_note_to_record_function(circuits_app, inputs)
         assert(expected_results == results)

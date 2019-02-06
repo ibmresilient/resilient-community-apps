@@ -71,7 +71,7 @@ class TestFnSnowCreateRecord:
           "sn_sys_id": "12558dfsasd43a5sdf32df"
         }
 
-        ResilientHelper.sn_POST = MagicMock(return_value=mock_post_response)
+        ResilientHelper.sn_api_request = MagicMock(return_value=mock_post_response)
 
         mock_add_row_response = {
           "id": 3

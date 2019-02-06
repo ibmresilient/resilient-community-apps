@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
 
                 try:
                     yield StatusMessage("Closing ServiceNow Record {0}".format(sn_ref_id))
-                    close_in_sn_response = res_helper.sn_POST("/close_record", data=json.dumps(request_data))
+                    close_in_sn_response = res_helper.sn_api_request("POST", "/close_record", data=json.dumps(request_data))
                     payload.sn_ref_id = sn_ref_id
 
                 except Exception as err:
