@@ -186,7 +186,7 @@ def main():
     #
     #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
     #
-    rebuild_parser.add_argument("-f", "--config",
+    rebuild_parser.add_argument("-f", "--file_config",
                                 help="Use config file",
                                 default=None)
 
@@ -210,7 +210,7 @@ def main():
     #
     #   -f (Optional) Specify a config file for ml. Otherwise use ml.config
     #
-    download_parser.add_argument("-f", "--config",
+    download_parser.add_argument("-f", "--file_config",
                                  help="Use config file",
                                  default=None)
     # 6. Value count
