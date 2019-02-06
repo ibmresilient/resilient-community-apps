@@ -106,7 +106,7 @@ class FunctionComponent(ResilientComponent):
                 with open(write_temp_file(sample_file, sample_name), "rb") as handle:
                     sample_ids = [sample["sample_id"] for sample in vmray.submit_samples(handle, sample_name)]
 
-                log.info("sample_ids: " +str(sample_ids))
+                log.info("sample_ids: " + str(sample_ids))
 
                 # New samples submission might need take as long as hours to finished,
                 # need to check the if the analysis have been done.
@@ -118,7 +118,7 @@ class FunctionComponent(ResilientComponent):
                         yield StatusMessage(
                             "Analysis processing still running at Cloud VMRay Analyzer, please check it later. ")
                         break
-                    yield StatusMessage("Analysis Report not done yet, retrieve every {} second".format(CHECK_REPORTS_SLEEP_TIME))
+                    yield StatusMessage("Analysis Report not done yet, retrieve every {} seconds".format(CHECK_REPORTS_SLEEP_TIME))
                     time.sleep(CHECK_REPORTS_SLEEP_TIME)
                     is_samples_analysis_finished = all(vmray.check(sample_id) for sample_id in sample_ids)
 
