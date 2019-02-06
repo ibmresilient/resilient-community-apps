@@ -33,7 +33,6 @@ class FunctionComponent(ResilientComponent):
         """Function: Ansible is simple IT engine for automation, it is designed for manage many systems, rather than just one at a time."""
         try:
             # Get the function parameters:
-            host = kwargs.get("ansible_host") # text
             playbook_name = kwargs.get("ansible_playbook_name") # text
             ansible_parameters = kwargs.get("ansible_parameters") # text
 
@@ -41,14 +40,15 @@ class FunctionComponent(ResilientComponent):
             log.info("playbook_name: %s", playbook_name)
             log.info("ansible_parameters: %s", ansible_parameters)
 
-            user_name = self.options["user_name"]
-            playbook_dir = self.options["playbook_dir"]
-            hosts_path = self.options["hosts_path"]
-            root_password = self.options["root_password"]
-            playbook_become_method = self.options["playbook_become_method"]
-            playbook_become_user = self.options["playbook_become_user"]
-            vault_password_file = self.options["vault_password_file"]
-            connection_type = self.options["connection_type"]
+
+            user_name = self.options.get("user_name")
+            playbook_dir = self.options.get("playbook_dir")
+            hosts_path = self.options.get("hosts_path")
+            root_password = self.options.get("root_password")
+            playbook_become_method = self.options.get("playbook_become_method")
+            playbook_become_user = self.options.get("playbook_become_user")
+            vault_password_file = self.options.get("vault_password_file")
+            connection_type = self.options.get("connection_type")
             
             # Prepare playbook vars
             extra_vars = {}
@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
                 playbook_name = "{}.yml".format(playbook_name)
             # check for playbook's availability in the dir
             os.chdir(playbook_dir)
-            if playbook_name in os.listdir():
+            if playbook_name in os.listdir(playbook_dir):
                 target_playbook = '/'.join((playbook_dir, playbook_name)), # As per ansible convention a trailing ',' given
             else:
                 raise ValueError("Target playbook not present in following path: '%s'" %playbook_dir)

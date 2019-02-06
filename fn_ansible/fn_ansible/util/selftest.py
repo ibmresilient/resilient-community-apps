@@ -19,12 +19,9 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get("fn_ansible", {})
-    # user_name = options["user_name"]
     playbook_path = "/home/sudip/ansible-playbooks/playbook_encrypted.yml",
-    # hosts_path = options["hosts_path"]
-    # root_password = options["root_password"]
-    playbook_become_method = options["playbook_become_method"]
-    playbook_become_user = options["playbook_become_user"]
+    playbook_become_user = options.get("playbook_become_user")
+    playbook_become_method = options.get("playbook_become_method")
     control_machine_username = options.get("control_machine_username")
     control_machine_password = options.get("control_machine_password")
     vault_password_file = options.get("vault_password_file")
