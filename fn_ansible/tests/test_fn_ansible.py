@@ -14,15 +14,15 @@ FUNCTION_NAME = "fn_ansible"
 def get_mocked_config():
   return """[fn_ansible]
 playbook_dir=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils
-user_name=sudip
-root_password=Andhadhun@2018
+user_name=
+root_password=
 hosts_path=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/hosts
 playbook_become_method=sudo
 playbook_become_user=root
 vault_password_file=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/my_passwords.yml
 connection_type=smart
-control_machine_username=sudip
-control_machine_password=Andhadhun@2018
+control_machine_username=
+control_machine_password=
 """
 
 config_data = get_mocked_config()
