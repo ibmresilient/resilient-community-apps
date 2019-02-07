@@ -54,7 +54,9 @@ class FunctionComponent(ResilientComponent):
             extra_vars = {}
             if ansible_parameters:
                 for item in ansible_parameters.split(","):
-                    item = item.replace(" ", "") # removing whitespaces if any
+                    # removing whitespaces around comma(,) and = character
+                    for pair in [[" ,", ","], [", ", ","], [" =", "="], ["= ", "="]]:
+                        item = item.replace(pair[0], pair[1])
                     k, v = item.split("=")
                     extra_vars[k] = v
 
