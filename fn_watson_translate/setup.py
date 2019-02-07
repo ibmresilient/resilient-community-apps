@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_watson_translate',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
