@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+
+"""Function implementation"""
+
+import logging
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_maas360.lib.maas360_common import MaaS360Utils
+from resilient_lib.components.function_result import ResultPayload
+from resilient_lib.components.resilient_common import validate_fields
+
+CONFIG_DATA_SECTION = 'fn_maas360'
+LOG = logging.getLogger(__name__)
+
+
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'maas360_stop_app_distribution"""
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+
+        # Get app.config parameters.
+        self.opts = opts
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+    @function("maas360_stop_app_distribution")
+    def _maas360_stop_app_distribution_function(self, event, *args, **kwargs):
+        """Function: Function stops a specific distributions of an app."""
+
+        def add_to_dict(key, value, params):
+            """
+            Adds a key-value pair to a dictionary.
+            :param params
+            :param key:
+            :param value:
+            """
+            if value:
+                params[key] = value
+
+        try:
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+
+            # Validate fields
+            validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
+                             'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
+                             'maas360_password', 'maas360_stop_app_distribution_url'], self.options)
+            validate_fields(['maas360_device_id'], kwargs)
+
+            # Get the function parameters:
+            app_type = self.get_select_param(kwargs.get("maas360_app_type"))  # select, values: "iOS Enterprise Application", "iOS App Store Application", "Android Enterprise Application", "Android Market Application"
+            app_id = kwargs.get("maas360_app_id")  # text
+            device_id = kwargs.get("maas360_device_id")  # text
+
+            LOG.info("maas360_app_type: %s", app_type)
+            LOG.info("maas360_app_id: %s", app_id)
+            LOG.info("maas360_device_id: %s", device_id)
+
+            # Add function inputs to payload
+            query_string = {}
+
+            add_to_dict("appType", app_type, query_string)
+            add_to_dict("appId", app_id, query_string)
+            add_to_dict("targetDevices", 2, query_string)  # Possible values: 0: All Devices  1: Device Group 2: Specific Device
+            add_to_dict("deviceId", device_id, query_string)
+
+            # Read configuration settings:
+            host_url = self.options["maas360_host_url"]
+            billing_id = self.options["maas360_billing_id"]
+            platform_id = self.options["maas360_platform_id"]
+            app_id = self.options["maas360_app_id"]
+            app_version = self.options["maas360_app_version"]
+            app_access_key = self.options["maas360_app_access_key"]
+            username = self.options["maas360_username"]
+            password = self.options["maas360_password"]
+            auth_url = self.options["maas360_auth_url"]
+
+            stop_app_dist_url = self.options["maas360_stop_app_distribution_url"]
+
+            yield StatusMessage("Starting the Stop App Distribution")
+
+            maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
+                                         app_access_key, auth_url, self.opts, self.options)
+
+            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, query_string)
+            if not stop_app_results:
+                yield StatusMessage("Location for device id {} isn't available".format(device_id))
+            else:
+                yield StatusMessage("Location found for device id {}".format(device_id))
+
+            results = rp.done(True, stop_app_results)
+
+            LOG.info(results)
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception as err:
+            LOG.error(err)
+            yield FunctionError(err)

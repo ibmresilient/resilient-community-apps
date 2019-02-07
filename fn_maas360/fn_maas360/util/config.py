@@ -48,9 +48,9 @@ maas360_wipe_device_notifyUser=Yes
 maas360_wipe_device_notifyOthers=email1, email2
 maas360_cancel_pending_wipe_url= /device-apis/devices/1.0/cancelPendingWipe/
 
-# Delete App Fn settings
+# Stop App Distribution Fn settings
 # ---------------------
-maas360_delete_app_url=/application-apis/applications/1.0/deleteApp/
+maas360_stop_app_distribution_url=/application-apis/applications/1.0/stopAppDistribution/
 
 # Search Installed Apps Fn settings
 # ---------------------

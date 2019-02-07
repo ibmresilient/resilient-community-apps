@@ -45,6 +45,7 @@ class FunctionComponent(ResilientComponent):
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
+            # Validate fields
             validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
                              'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
                              'maas360_password'],
@@ -53,8 +54,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             device_id = kwargs.get("maas360_device_id")  # text
-            action_type = self.get_select_param(kwargs.get(
-                "maas360_action_type"))  # select, values: "Get Software Installed", "Locate Device", "Lock Device", "Wipe Device", "Cancel Pending Wipe"
+            action_type = self.get_select_param(kwargs.get("maas360_action_type"))  # select, values: "Get Software Installed", "Locate Device", "Lock Device", "Wipe Device", "Cancel Pending Wipe"
 
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_action_type: %s", action_type)

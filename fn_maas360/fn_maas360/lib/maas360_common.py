@@ -213,7 +213,7 @@ class MaaS360Utils(object):
 
     def cancel_pending_wipe(self, url, device_id):
         """
-        Cancel outstanding Remote Wipe sent to the device
+        Function cancels outstanding Remote Wipe sent to the device.
         :param url:
         :param device_id:
         :return: action_response
@@ -226,6 +226,24 @@ class MaaS360Utils(object):
             results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
+
+        action_response = results.get("actionResponse")
+        return action_response
+
+    def stop_app_distribution(self, url, query_string):
+        """
+        Function stops a specific distributions of an app.
+        :param url:
+        :param query_string:
+        :return: action_response
+        """
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(URL_ENCODED_FORM)
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, query_string, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Stop App Distribution: {}".format(err))
 
         action_response = results.get("actionResponse")
         return action_response

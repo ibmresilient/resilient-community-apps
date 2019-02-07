@@ -6,6 +6,7 @@
 """Function implementation"""
 
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_maas360.lib.maas360_common import MaaS360Utils
 from resilient_lib.components.function_result import ResultPayload
@@ -72,6 +73,7 @@ class FunctionComponent(ResilientComponent):
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
+            # Validate fields
             validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
                              'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
                              'maas360_password', 'maas360_basic_search_url', 'maas360_basic_search_page_size'],
@@ -138,13 +140,13 @@ class FunctionComponent(ResilientComponent):
 
             devices = maas360_utils.basic_search(basic_search_url, query_string)
             if not devices:
-                yield StatusMessage("No devices were found")
+                yield StatusMessage("No devices were found for the search params: {}".format(json.dumps(query_string)))
 
             count = devices.get("count")
             if not count:
-                yield StatusMessage("No devices were found")
+                yield StatusMessage("No devices were found for the search params: {}".format(json.dumps(query_string)))
             else:
-                yield StatusMessage("{} device/s were found".format(count))
+                yield StatusMessage("{} device/s were found for the search params: {}".format(count, json.dumps(query_string)))
 
             results = rp.done(True, devices)
 
