@@ -157,12 +157,76 @@ class MaaS360Utils(object):
         """
         url_endpoint = self.host + url + self.billingId
         auth_headers = self.get_auth_headers(JSON_CONTENT_TYPE)
-        query_string = {"deviceId": u"{}".format(device_id)}
+        request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+            results = self.rc.execute_call("get", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Get Software Installed: {}".format(err))
 
         device_softwares = results.get("deviceSoftwares")
         return device_softwares
+
+    def lock_device(self, url, device_id):
+        """
+        Function locks the device .
+        :param url:
+        :param device_id
+        :return: action_response
+        """
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(URL_ENCODED_FORM)
+        request_body = {"deviceId": u"{}".format(device_id)}
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
+
+        action_response = results.get("actionResponse")
+        return action_response
+
+    def wipe_device(self, url, device_id, notify_me, notify_user, notify_others):
+        """
+        Function performs a remote Wipe of the device.
+        :param url:
+        :param device_id:
+        :param notify_me:
+        :param notify_user:
+        :param notify_others:
+        :return: action_response
+        """
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(URL_ENCODED_FORM)
+        request_body = {"deviceId": u"{}".format(device_id),
+                        "notifyMe": u"{}".format(notify_me),
+                        "notifyUser": u"{}".format(notify_user),
+                        "notifyOthers": u"{}".format(notify_others)}
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
+
+        action_response = results.get("actionResponse")
+        return action_response
+
+    def cancel_pending_wipe(self, url, device_id):
+        """
+        Cancel outstanding Remote Wipe sent to the device
+        :param url:
+        :param device_id:
+        :return: action_response
+        """
+        url_endpoint = self.host + url + self.billingId
+        auth_headers = self.get_auth_headers(URL_ENCODED_FORM)
+        request_body = {"deviceId": u"{}".format(device_id)}
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
+
+        action_response = results.get("actionResponse")
+        return action_response
+

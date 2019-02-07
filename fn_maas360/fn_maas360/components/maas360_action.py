@@ -41,6 +41,7 @@ class FunctionComponent(ResilientComponent):
 
         Get Software Installed Function gets installed software for a device.
         """
+
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -101,21 +102,41 @@ class FunctionComponent(ResilientComponent):
                 validate_fields(['maas360_lock_device_url'], self.options)
                 lock_device_url = self.options["maas360_lock_device_url"]
 
+                action_results = maas360_utils.lock_device(lock_device_url, device_id)
+                if not action_results:
+                    yield StatusMessage("Locking device with device id {} wasn't successful".format(device_id))
+                else:
+                    yield StatusMessage("Locking device with device id {} was successful".format(device_id))
+
             elif action_type == "Wipe Device":
                 yield StatusMessage("Starting the Wipe Device function")
 
                 validate_fields(['maas360_wipe_device_url', 'maas360_wipe_device_notifyMe',
-                                 'maas360_wipe_device_notifyUser'], self.options)
+                                 'maas360_wipe_device_notifyUser', 'maas360_wipe_device_notifyOthers'], self.options)
                 wipe_device_url = self.options["maas360_wipe_device_url"]
-                wipe_notify_me = self.options["maas360_wipe_device_notifyMe"]
-                wipe_notify_user = self.options["maas360_wipe_device_notifyUser"]
-                wipe_notify_others = self.options.get("maas360_wipe_device_notifyOthers")
+                notify_me = self.options["maas360_wipe_device_notifyMe"]
+                notify_user = self.options["maas360_wipe_device_notifyUser"]
+                notify_others = self.options["maas360_wipe_device_notifyOthers"]
+
+                action_results = maas360_utils.lock_device(wipe_device_url, device_id, notify_me, notify_user, notify_others)
+                if not action_results:
+                    yield StatusMessage("Remote Wipe Device with device id {} wasn't successful".format(device_id))
+                else:
+                    yield StatusMessage("Remote Wipe Device with device id {} was successful".format(device_id))
 
             elif action_type == "Cancel Pending Wipe":
                 yield StatusMessage("Starting the Cancel Pending Wipe function")
 
                 validate_fields(['maas360_cancel_pending_wipe_url'], self.options)
                 cancel_wipe_url = self.options["maas360_cancel_pending_wipe_url"]
+
+                action_results = maas360_utils.cancel_pending_wipe(cancel_wipe_url, device_id)
+                if not action_results:
+                    yield StatusMessage("Cancel outstanding Remote Wipe sent to the device"
+                                        " with device id {} wasn't successful".format(device_id))
+                else:
+                    yield StatusMessage("Cancel outstanding Remote Wipe sent to the device"
+                                        " with device id {} was successful".format(device_id))
 
             else:
                 raise FunctionError("Chosen action type {} doesn't match any of supported MaaS360 functions".
