@@ -21,7 +21,7 @@
 ## Using the Ansible Function
 
 Make sure that you have ansible v2.7 installed in your system(control machine). 
-One Function and one Workflow added as example we encourage you to explore that for better understanding.
+One Function and one Workflow added as example.
 If you are using ansible-vault please provide full path of your password file( Recommended format below: ) -
 > vault_password.yml
 
@@ -59,8 +59,6 @@ To uninstall, run: `pip uninstall fn_ansible`
 ## Resilient Configuration
 
 Follow the steps to add a fn_ansible section to your `app.config` file by running `resilient-circuits config [-u | -c]` and updating the fields:
-
-  
 
 ```
 [fn_ansible]

@@ -13,17 +13,26 @@ import yaml
 import os
 
 
+NUM_OF_FORKS=5
+VAULT_PASS_KEY='vault_pass'
+DEFAULT_VAULT_ID='default'
+
 def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_extra_vars, playbook_become_method, playbook_become_user, vault_password_file=None, connection_type="smart"):
+    
+    """This function is responsible for running a playbook 
+    and returns the results of the queries that the playbook 
+    contains.
+    """
+       
     loader = DataLoader()
     if(vault_password_file):
-        vault_password = read_secret(vault_password_file, 'vault_pass')
-        loader.set_vault_secrets([('default', VaultSecret(_bytes=to_bytes(vault_password)))])
+        vault_password = read_secret(vault_password_file, VAULT_PASS_KEY)
+        loader.set_vault_secrets([(DEFAULT_VAULT_ID, VaultSecret(_bytes=to_bytes(vault_password)))])
     inventory = InventoryManager(loader=loader, sources=hosts_path)
     variable_manager = VariableManager(loader=loader, inventory=inventory)
     if playbook_extra_vars:
         variable_manager.extra_vars = playbook_extra_vars
 
-    # Todo - Scope for vault password
     passwords={'become_pass': root_password}
 
     Options = namedtuple('Options',
@@ -49,7 +58,7 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
                         remote_user=user_name,
                         ack_pass=None,
                         sudo_user=None,
-                        forks=5,
+                        forks=NUM_OF_FORKS,
                         sudo=None,
                         ask_sudo_pass=False,
                         verbosity=5,

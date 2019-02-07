@@ -11,8 +11,8 @@ setup(
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_ansible'",
-    long_description="Resilient Circuits Components for 'fn_ansible'",
+    description="Simple agentless IT automation tool.",
+    long_description="Automation scripts are written in YAML files called playbook, which are besically tasks and instructions. Those tasks can be performed on a remote system from resilient using this function.",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
