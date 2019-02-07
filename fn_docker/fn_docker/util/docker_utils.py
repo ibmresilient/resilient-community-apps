@@ -46,7 +46,7 @@ class DockerUtils:
         """
         try:
             self.client = docker.DockerClient(base_url=docker_server_url)
-            self.api_client = docker.APIClient(base_url=os.environ.get('DOCKER_HOST', 'unix://var/run/docker.sock'))
+            self.api_client = docker.APIClient(base_url=docker_server_url)
             self.client.ping()
             self.api_client.ping()
         except ConnectionError:
@@ -93,6 +93,9 @@ class DockerUtils:
     def get_client(self):
         return self.client
 
+    def get_api_client(self):
+        return self.api_client
+
     def parse_extra_kwargs(self, options):
         """
         A helper function which allows you to add extra docker run configs
@@ -116,7 +119,7 @@ class DockerUtils:
 
         return {k.replace('docker_extra_', ''): v
                 for k, v in options.items()
-                if 'docker_extra' in k}
+                if 'docker_extra_' in k}
 
     def inspect_container(self, containerid):
         return self.api_client.inspect_container(containerid)
@@ -154,7 +157,7 @@ class DockerUtils:
             options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation",
             optional=True)
 
-        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
+        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else None
 
         if docker_extra_kwargs.get('volumes', False):
             log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
@@ -179,6 +182,11 @@ class DockerUtils:
                                 {"operation": vol_operation})
         })
         return render(command,escaped_args), docker_extra_kwargs
+
+    def gather_container_stats(self, container_id):
+        return self.api_client.stats(container=container_id, stream=False)
+
+
 
 
 

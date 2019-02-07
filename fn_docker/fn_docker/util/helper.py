@@ -42,7 +42,6 @@ class ResDockerHelper:
             return option
 
     def merge_two_dicts(self, x, y):
-        print(type(y))
         z = x.copy()  # start with x's keys and values
         z.update(y)  # modifies z with y's keys and values & returns None
         return z

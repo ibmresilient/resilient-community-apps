@@ -4,6 +4,8 @@
 """Function implementation"""
 
 import logging
+import tempfile
+import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_docker.util.selftest as selftest
 import requests
@@ -54,8 +56,14 @@ class FunctionComponent(ResilientComponent):
             helper = ResDockerHelper(self.options)
             image_to_use = helper.get_config_option("docker_image", True) or docker_image
 
+            # Prepare the args which will be rendered into the app.config cmd
+            escaped_args = {
+                "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs),
+            }
+
             # Check whether we are dealing with an attachment or artifact
             if (artifact_id or attachment_id or task_id) and docker_input is None:
+                log.debug("Working with an attachment")
 
                 yield StatusMessage("Input appears to be an attachment, attempting to parse.")
                 # Get the files data
@@ -73,28 +81,25 @@ class FunctionComponent(ResilientComponent):
                     option_name="primary_output_dir", optional=True)
 
                 yield StatusMessage("Writing attachment to bind folder")
-                # TODO: Move imports to top
-                import tempfile, base64, os
+
                 # Convert to named temp file
                 with tempfile.NamedTemporaryFile(delete=False, prefix='.docker_integration_input_',
                                                  suffix=attachment_name, dir=output_vol) as temp_file:
                     try:
-
-                        # temp_file.name = file_name
                         temp_file.write(attachment_input)
                         temp_file.close()
-                        print("File location"+temp_file.name)
-                        # We should now have a temp file
                     finally:
-                        #os.unlink(temp_file.name)
-                        print(temp_file.name)
-                        umask = os.umask(0)
-                        #os.umask(umask)
-                        #os.chmod(temp_file.name, 0o666 & ~umask)
+                        attachment_file_name = os.path.split(temp_file.name)[1]
+                        # Add a attachment_input arg to be rendered into the cmd command
+                        escaped_args.update({
+                            "attachment_input": render("{{attachment_input|%s}}" % "sh",
+                                                       {"attachment_input": attachment_file_name}),
+                        })
+                        yield StatusMessage("Added this as an Attachment Input: {}".format(attachment_file_name))
 
             else:
                 # We are not dealing with an attachment
-                print("Dealing with an artifact")
+                log.debug("Working with an artifact")
 
             docker_interface = DockerUtils()
 
@@ -106,17 +111,11 @@ class FunctionComponent(ResilientComponent):
             if image_to_use not in helper.get_config_option("docker_approved_images", True).split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
-            # Prepare the values which will be rendered into the app.config cmd
-            escaped_args = {
-                "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs),
-                "attachment_input": render("{{attachment_input|%s}}" % "sh",
-                                           {"attachment_input": os.path.split(temp_file.name)[1]}),
-            }
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
             command, docker_extra_kwargs = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, docker_extra_kwargs, escaped_args)
 
-            log.info("Command {} \n Volume Bind {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
+            log.info("Command: {} \n Volume Bind: {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_to_use)
 
@@ -131,9 +130,10 @@ class FunctionComponent(ResilientComponent):
                 remove=False,  # Remove set to false as will be removed manually after gathering info
                 **docker_extra_kwargs)
 
-            # Gather the logs as the happen, until the container finishes.
+            container_stats = docker_interface.gather_container_stats(container_id=container.id)
+
+            # Gather the logs as they happen, until the container finishes.
             container_logs = container.logs(follow=True)
-            log.info(container_logs)
             yield StatusMessage("Container has finished and logs gathered")
 
             try:
@@ -142,22 +142,11 @@ class FunctionComponent(ResilientComponent):
                 Will throw an exception if the container has already been removed"""
 
                 container_status = container.wait()
-                container_stats_gen = container.stats()
-
-                """
-                import itertools
-                container_stats = None
-                container_stats_gen = container.stats()
-                for line in container_stats_gen:
-                    print(line)
-                print(container_stats)
-                
-                """
                 container.remove()
 
             except requests.exceptions.HTTPError as e:
                 yield StatusMessage("Encountered issue when trying to remove container: {} \n {}".format(str(e),
-                                    "If you supplied an extra app.config value to remove the container this is fine."))
+                                    "If you supplied an extra app.config value to remove the container this is expected."))
 
             # Produce a FunctionResult with the results using the FunctionPayload
             yield FunctionResult(payload.done(
@@ -166,26 +155,22 @@ class FunctionComponent(ResilientComponent):
                 content={
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,
-                    #"container_stats": container_stats
+                    "container_stats": container_stats
 
                 }
             ))
             log.info("Complete")
         except Exception:
             yield FunctionError()
+        finally:
+            try:
+                os.unlink(temp_file.name)
+            except NameError:
+                log.debug("Error when trying to unlink file.")
+            else:
+                log.debug("Successfully cleaned up file")
 
-    def gather_image_args_and_volumes(self, helper, image_to_use):
-        # Acquire any specific configs for this image
-        command = helper.get_image_specific_config_option(options=self.all_options.get('fn_docker_volatility', {}),
-                                                          option_name="cmd")
-        output_vol = helper.get_image_specific_config_option(
-            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
-            option_name="primary_output_dir")
-        internal_vol = helper.get_image_specific_config_option(
-            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]),
-            option_name="primary__internal_dir")
-        vol_operation = helper.get_image_specific_config_option(
-            options=self.all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="volcmd")
-        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}}
-        return command, container_volume_bind, internal_vol, vol_operation
+
+
+
 
