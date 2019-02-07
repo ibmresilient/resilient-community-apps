@@ -1,14 +1,18 @@
-# Copyright © IBM Corporation 2010, 2019
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright © IBM Corporation 2010, 2019
 """Function implementation"""
 
 import logging
 import base64
 import json
+import tempfile
+import shutil
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
 
+
+log = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'netwitness_query_event_session"""
@@ -26,7 +30,6 @@ class FunctionComponent(ResilientComponent):
         else:
             self.options["cafile"] = True
 
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -35,6 +38,7 @@ class FunctionComponent(ResilientComponent):
     @function("netwitness_query_event_session")
     def _netwitness_query_event_session_function(self, event, *args, **kwargs):
         """Function: """
+        temp_d = None
         try:
             yield StatusMessage("Starting...")
             # Initialize resilient_lib objects
@@ -47,7 +51,6 @@ class FunctionComponent(ResilientComponent):
 
 #            validate_fields(["nw_event_session_id"], **kwargs)
 
-            log = logging.getLogger(__name__)
             log.info("nw_event_session_id: %s", nw_event_session_id)
             log.info("incident_id: %s", incident_id)
 
@@ -56,9 +59,11 @@ class FunctionComponent(ResilientComponent):
                                                      self.options.get("nw_user"), self.options.get("nw_password"),
                                                      self.options.get("cafile"), nw_event_session_id, req_common)
 
+                temp_d, temp_f = create_tmp_file(pcap_file)
+
                 resilient_client = self.rest_client()
                 resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                                 pcap_file, filename="pcap file for session IDs: {}".format(nw_event_session_id))
+                                                 temp_f, filename="pcap file for session IDs: {}".format(nw_event_session_id))
                 yield StatusMessage("pcap file added to incident {} as Attachment".format(str(incident_id)))
             except Exception:
                 log.info("Failed gathering or posting the attachment to the incident. Here just to not break the whole function")
@@ -78,6 +83,26 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+        finally:
+            if temp_d:
+                remove_dir(temp_d)
+
+
+def create_tmp_file(contents):
+    temp_d = tempfile.mkdtemp("tmp")
+    temp_f = tempfile.mkstemp(dir=temp_d)
+    report_file = temp_f[1]
+
+    with open(report_file, 'wb') as f:
+        f.write(contents)
+#        log.info("Saved ATD report")
+
+    return temp_d, report_file
+
+
+def remove_dir(dir):
+    shutil.rmtree(dir)
+#    log.debug("Tmp directory removed")
 
 
 def get_nw_session_logs_json(url, port, user, pw, cafile, event_session_id, req_common):
@@ -91,7 +116,7 @@ def get_nw_session_logs_json(url, port, user, pw, cafile, event_session_id, req_
     }
     request_url = "{}:{}/sdk/packets?sessions={}&render=application/json".format(url, port, event_session_id)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type='bytes')
+    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
 
 
 def get_nw_session_logs_file(url, port, user, pw, cafile, event_session_id, req_common):
@@ -105,4 +130,4 @@ def get_nw_session_logs_file(url, port, user, pw, cafile, event_session_id, req_
     }
     request_url = "{}:{}/sdk/packets?sessions={}".format(url, port, event_session_id)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type='bytes')
