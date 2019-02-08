@@ -1,0 +1,4 @@
+include README.md
+include fn_threatminer/util/*
+include fn_threatminer/LICENSE
+include fn_threatminer/doc/*
