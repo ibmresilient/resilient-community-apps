@@ -25,6 +25,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "ThreatminerDomainWhoisFunctionComponent = fn_threatminer.components.threatminer_domain_whois:FunctionComponent",
+            "ThreatminerEmailReverseFunctionComponent = fn_threatminer.components.threatminer_email_reverse:FunctionComponent",
             "ThreatminerIpWhoisFunctionComponent = fn_threatminer.components.threatminer_ip_whois:FunctionComponent",
             "ThreatminerDomainSubdomainsFunctionComponent = fn_threatminer.components.threatminer_domain_subdomains:FunctionComponent"
         ],
