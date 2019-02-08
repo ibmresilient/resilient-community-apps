@@ -4,9 +4,10 @@
 """Function implementation"""
 
 import logging
-import json
 from bs4 import BeautifulSoup
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+
 from watson_developer_cloud import LanguageTranslatorV3
 from watson_developer_cloud.watson_service import WatsonApiException
 
@@ -38,7 +39,7 @@ class FunctionComponent(ResilientComponent):
             source_text = kwargs.get("fn_watson_translate_source_text", None)  # text
 
             if source_text is None or target_lang is None:
-                raise ValueError("Neither source_text nor target_lang can be unspecified.")
+                raise ValueError("source_text and target_lang are required.")
 
             # get rid of the HTML tags that notes can have.
             source_text = self._get_text_from_html(source_text)
@@ -59,8 +60,7 @@ class FunctionComponent(ResilientComponent):
                     text=source_text,
                     source=source_lang,
                     target=target_lang
-                ).get_result()
-                log.debug(translation)
+                )
             except WatsonApiException as e:
                 # if it couldn't be translated, return this message
                 log.error(str(e))
@@ -69,12 +69,12 @@ class FunctionComponent(ResilientComponent):
                 return
 
             # if the translation went through, but nothing was returned
-            if len(translation['translations']) == 0:
+            if len(translation.result['translations']) == 0:
                 raise ValueError("Wasn't translated.")
 
             yield StatusMessage("Finished translating.")
             results = {
-                "value": translation["translations"][0]["translation"],
+                "value": translation.result["translations"][0]["translation"],
                 "confidence": confidence,
                 "language": target_lang,
                 "source_lang": source_lang
@@ -119,14 +119,12 @@ class FunctionComponent(ResilientComponent):
             source language : String, confidence : Number
             Returns source language name, and confidence it is correct
         """
-        log = logging.getLogger(__name__)
-        source_lang_query = language_translator.identify(text).get_result()
-        log.debug(source_lang_query)
-        source_lang = source_lang_query['languages']
+        source_lang_query = language_translator.identify(text)
+
+        source_lang = source_lang_query.result['languages']
         if len(source_lang) > 0:
             confidence = source_lang[0]['confidence']
             source_lang = source_lang[0]['language']
         else:
-            raise ValueError("The language wasn't identified.")
+            raise ValueError("The language wasn't identified. Rerun and specify source language")
         return source_lang, confidence
-
