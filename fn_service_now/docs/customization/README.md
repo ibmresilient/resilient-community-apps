@@ -316,6 +316,7 @@ Returns an object with the following keys:
   * **Name:** CUSTOM_RES_WF_CreateIncident
   * **Table:** Incident
   * **Description:** Our custom Workflow that creates an Incident in IBM Resilient from a record in our ServiceNow Incident Table
+* Ensure **if condition matches** is set to **None** in the dropdown
 * Click **Submit**
  ![screenshot](./screenshots/3.png)
 
@@ -340,9 +341,9 @@ Returns an object with the following keys:
  ![screenshot](./screenshots/6.png)
 * In the **popup** that appears, copy the below script and paste it into the Script Editor:
     ```javascript
-    (function CUSTOM_RES_WF_CreateIncident(){
+    (function RES_WF_CreateIncident(){
 
-        var resHelper, record, snRecordId, caseName, options, res, noteText = null;
+        var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit = null;
         
         try{
             //Instantiate new ResilientHelper
@@ -351,12 +352,23 @@ Returns an object with the following keys:
             //Get the required parameters to create an Incident
             record = current;
             snRecordId = record.getValue("number");
-            caseName = "SN-[" + snRecordId + "]: " + record.getValue("short_description");
+            caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
+
+            //Map ServiceNow severity in digits to Resilient strings
+            //TIP: use the 'finfo' command on Resilient Integrations Server
+            //to get Resilient field information
+            resSeverityMap = {
+                "1": "High",
+                "2": "Medium",
+                "3": "Low"
+            };
 
             //Initialize options
             options = {
                 initSnNote: "Created a Phishing Incident in IBM Resilient",
                 optionalFields: {
+                    "description": record.getValue("description"),
+                    "severity_code": resSeverityMap[record.getValue("severity").toString()],
                     "incident_type_ids": ["Phishing"]
                 }
             };
@@ -365,14 +377,29 @@ Returns an object with the following keys:
             res = resHelper.create(record, snRecordId, caseName, options);
 
             if (res){
-                // Create the RES Note
+                // Create the initial RES Note
                 noteText = "<br>This " + res.res_reference_type + " has been sent from <b>ServiceNow</b>";
                 noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
                 noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
                 resHelper.addNote(res.res_reference_id, noteText, "html");
+                
+                // Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
+                workNotes = current.work_notes.getJournalEntry(-1);
+
+                //Split the Work Notes on '\n\n'
+                workNotesSplit = workNotes.split("\n\n");
+
+                //Loop each Work Note and add a Resilient Note
+                for (var i = 0; i < workNotesSplit.length; i++){
+                    noteText = workNotesSplit[i];
+                    if(noteText && noteText.length > 0){
+                        resHelper.addNote(res.res_reference_id, workNotesSplit[i]);
+                    }
+                }
             }
         }
         catch (errMsg){
+            current.work_notes = "Failed to create an Incident in IBM Resilient.\nReason: " + errMsg;
             gs.error(errMsg);
         }
     })();
@@ -397,3 +424,8 @@ Returns an object with the following keys:
 > ![screenshot](./screenshots/14.png)
 
 ---
+
+## Troubleshooting
+
+### Your CUSTOM Workflow is running twice?
+* 
