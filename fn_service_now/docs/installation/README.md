@@ -41,7 +41,7 @@
 * A new tab will open, click **Import from Source Control**
  ![screenshot](./screenshots/4.png)
 * Copy this url, paste it into the **URL input** and click **Import**
-  * https://gitlab.com/Curtin/service-now-resilient-app.git
+  * https://github.com/ibmresilient/resilient-servicenow
  ![screenshot](./screenshots/5.png)
 * Wait for it to import successfully. Then click **Select Application**
  ![screenshot](./screenshots/6.png)
@@ -129,6 +129,8 @@
   ```
   $ resilient-circuits run
   ```
+<!-- TODO -->
+* Import Data Table and Summary Section Fields
 --- 
 
 ## Step 6a: *Install Mid-Server (if needed)*
