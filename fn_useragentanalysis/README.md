@@ -29,3 +29,9 @@ To package for distribution,
 The resulting .tar.gz file can be installed using
 
     pip install <filename>.tar.gz
+
+
+Update for config file 
+[fn_useragentanalysis]
+url=WHAT_IS_MY_BROWSER_API_URL
+api_key=WHAT_IS_MY_BROWSER_API_KEY
