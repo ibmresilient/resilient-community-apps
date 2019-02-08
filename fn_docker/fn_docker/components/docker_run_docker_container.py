@@ -108,7 +108,7 @@ class FunctionComponent(ResilientComponent):
             docker_extra_kwargs = docker_interface.parse_extra_kwargs(options=self.options)
 
             # Ensure the specified image is an approved one
-            if image_to_use not in helper.get_config_option("docker_approved_images", True).split(","):
+            if image_to_use not in helper.get_config_option("docker_approved_images").split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
