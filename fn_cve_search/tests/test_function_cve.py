@@ -36,11 +36,11 @@ class TestFunctionCve:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("cve_search_data, cve_search_criteria, cve_id, cve_vendor, cve_product, published_date_from, published_date_to, expected_results", [
+    @pytest.mark.parametrize("cve_search_data, cve_search_criteria, cve_id, cve_vendor, cve_product, cve_published_date_from, cve_published_date_to, expected_results", [
         ("text", "text", "text", "text", "text", 1518480000000, 1518480000000, {"value": "xyz"}),
         ("text", "text", "text", "text", "text", 1518480000000, 1518480000000, {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, cve_search_data, cve_search_criteria, cve_id, cve_vendor, cve_product, published_date_from, published_date_to, expected_results):
+    def test_success(self, circuits_app, cve_search_data, cve_search_criteria, cve_id, cve_vendor, cve_product, cve_published_date_from, cve_published_date_to, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "cve_search_data": cve_search_data,
@@ -48,8 +48,8 @@ class TestFunctionCve:
             "cve_id": cve_id,
             "cve_vendor": cve_vendor,
             "cve_product": cve_product,
-            "published_date_from": published_date_from,
-            "published_date_to": published_date_to
+            "cve_published_date_from": cve_published_date_from,
+            "cve_published_date_to": cve_published_date_to
         }
         results = call_function_cve_function(circuits_app, function_params)
         assert(expected_results == results)

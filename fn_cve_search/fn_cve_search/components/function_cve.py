@@ -26,6 +26,10 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_cve_search", {})
 
     def _get_gm_epoch_time_stamp(self,date_string):
+        """
+        :param date_string:
+        :return:
+        """
         string_format_date = date_string.split('T')[0]
         time_tuple = time.strptime(string_format_date, "%Y-%m-%d")
         time_miliseconds = calendar.timegm(time_tuple) * 1000
@@ -33,7 +37,6 @@ class FunctionComponent(ResilientComponent):
 
     def _make_rest_api_get_call(self, rest_url, api_call=None):
         """
-
         :param rest_url: Rest Api URL
         :param api_call: Just reference
         :return: JSON Object Returned from the Call
@@ -42,7 +45,6 @@ class FunctionComponent(ResilientComponent):
         try:
             _response_object = requests.get(url=rest_url)
             _response_code = _response_object.status_code
-            print("%%%%%%%%%%%%%%%%%%%%{}%%%%%%%%%%%%%%%%".format(_response_code))
             if _response_code == 200:
                 _response_json_object['content'] = _response_object.json()
                 _response_json_object['api_call'] = api_call
@@ -59,14 +61,12 @@ class FunctionComponent(ResilientComponent):
         :return: if vendor_name=None  then returns JSON with all the vendors, otherwise JSON with all the products
         associated to a vendor
         """
-        print("####################calling Browse API###########################")
         log = logging.getLogger(__name__)
 
         if vendor_name:
             _browse_api = '{}/{}'.format(self.cve_base_url.format('browse'), vendor_name)
         else:
             _browse_api = self.cve_base_url.format('browse')
-        print("browse api $$$$$$$$$$$$$$$$$$$$$$$${}".format(_browse_api))
         return self._make_rest_api_get_call(_browse_api, api_call='browse')
 
     def _search_cve_api(self, vendor_name=None, product=None):
@@ -75,14 +75,12 @@ class FunctionComponent(ResilientComponent):
         :param product:   Name of the Product
         :return:JSON with all the vulnerabilities per vendor and a specific product
         """
-        print("####################calling Search API###########################")
         if vendor_name is not None and product is not None:
             _search_api = '{}/{}/{}'.format(self.cve_base_url.format('search'), vendor_name, product)
         elif vendor_name is not None and product is None:
             _search_api = '{}/{}'.format(self.cve_base_url.format('search'), vendor_name)
         elif vendor_name is None and product is not None:
             _search_api = '{}/{}'.format(self.cve_base_url.format('search'), product)
-        print("search api $$$$$$$$$$$$$$$$$$$$$$$${}".format(_search_api))
         return self._make_rest_api_get_call(_search_api, api_call='search')
 
     def _get_specific_cve_data(self, cve_id=None):
@@ -90,10 +88,8 @@ class FunctionComponent(ResilientComponent):
         :param cve_id: Specific CVE ID
         :return:a JSON of a specific CVE ID
         """
-        print("####################calling Specific CVE ID  API###########################")
         if cve_id:
             _specific_cve_url = '{}/{}'.format(self.cve_base_url.format('cve'), cve_id)
-            print("specific api $$$$$$$$$$$$$$$$$$$$$$$${}".format(_specific_cve_url))
             return self._make_rest_api_get_call(_specific_cve_url, api_call='cve')
         else:
             raise FunctionError("Please Specify the CVE ID to search for Vulnerability")
@@ -102,7 +98,6 @@ class FunctionComponent(ResilientComponent):
         """
         :return:a JSON of the last 30 CVEs including CAPEC, CWE and CPE expansions
         """
-        print("####################calling last 30 CVES API###########################")
         _last_url = '{}'.format(self.cve_base_url.format('last'))
         return self._make_rest_api_get_call(_last_url, api_call='last')
 
@@ -110,7 +105,6 @@ class FunctionComponent(ResilientComponent):
         """
         :return:more information about the current databases in use and when it was updated
         """
-        print("####################calling DB Info API###########################")
         _db_info_url = '{}'.format(self.cve_base_url.format('dbInfo'))
         return self._make_rest_api_get_call(_db_info_url, api_call='db')
 
@@ -122,10 +116,16 @@ class FunctionComponent(ResilientComponent):
             cve_search_data = kwargs.get("cve_search_data")  # text
             cve_search_criteria = kwargs.get("cve_search_criteria")  # text
             cve_id = kwargs.get("cve_id")  # text
+            if cve_id:
+                cve_id = cve_id.strip()
             cve_vendor = kwargs.get("cve_vendor")  # text
+            if cve_vendor:
+                cve_vendor = cve_vendor.strip()
             cve_product = kwargs.get("cve_product")  # text
-            published_date_from = kwargs.get("published_date_from")  # datepicker
-            published_date_to = kwargs.get("published_date_to")  # datepicker
+            if cve_product:
+                cve_product = cve_product.strip()
+            cve_published_date_from = kwargs.get("cve_published_date_from")  # datepicker
+            cve_published_date_to = kwargs.get("cve_published_date_to")  # datepicker
 
             _MAX_RESULTS_RETURN = int(self.options.get('max_results_display'))
 
@@ -137,8 +137,8 @@ class FunctionComponent(ResilientComponent):
             log.info("cve_id: %s type : %s", cve_id,type(cve_id))
             log.info("cve_vendor: %s type : %s", cve_vendor,type(cve_vendor))
             log.info("cve_product: %s type : %s", cve_product,type(cve_product))
-            log.info("published_date_from: %s type : %s", published_date_from,type(published_date_from))
-            log.info("published_date_to: %s type : %s", published_date_to,type(published_date_to))
+            log.info("cve_published_date_from: %s type : %s", cve_published_date_from,type(cve_published_date_from))
+            log.info("cve_published_date_to: %s type : %s", cve_published_date_to,type(cve_published_date_to))
 
             yield StatusMessage("starting...")
             _browse_data = None   # A variable to store the returned JSON Data
@@ -168,7 +168,6 @@ class FunctionComponent(ResilientComponent):
             print("API CALL TYPE : {}".format(_api_call_type))
             # Rest Api Response Data
             _browse_data_content = _browse_data['content']
-            print("@@@@@@@@@@@@@@@@@@@@@@@@@",_browse_data_content)
             if _api_call_type == 'browse':
                 _result_data_dict['api_call'] = 'browse'
                 if isinstance(_browse_data_content, list):
@@ -191,9 +190,13 @@ class FunctionComponent(ResilientComponent):
                     for search_data_dict in _search_data:
                         _search_pub_date = search_data_dict.get('Published')
                         _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
-                        if published_date_from is not None and published_date_to is not None:
-                            if (_search_pub_date_timestamp >= published_date_from) and (
-                                    _search_pub_date_timestamp <= published_date_to):
+
+                        # Changing The date format to milli seconds to store in the resilient table
+                        search_data_dict['Published'] = _search_pub_date_timestamp
+
+                        if cve_published_date_from is not None and cve_published_date_to is not None:
+                            if (_search_pub_date_timestamp >= cve_published_date_from) and (
+                                    _search_pub_date_timestamp <= cve_published_date_to):
                                 if _MAX_RESULTS_RETURN != 0:
                                     _result_data_dict['content'].append(search_data_dict)
                                     _MAX_RESULTS_RETURN -= 1
@@ -201,8 +204,8 @@ class FunctionComponent(ResilientComponent):
                                     pass
                             else:
                                 pass
-                        elif published_date_from is not None and published_date_to is None:
-                            if _search_pub_date_timestamp >= published_date_from:
+                        elif cve_published_date_from is not None and cve_published_date_to is None:
+                            if _search_pub_date_timestamp >= cve_published_date_from:
                                 if _MAX_RESULTS_RETURN != 0:
                                     _result_data_dict['content'].append(search_data_dict)
                                     _MAX_RESULTS_RETURN -= 1
@@ -210,8 +213,8 @@ class FunctionComponent(ResilientComponent):
                                     pass
                             else:
                                 pass
-                        elif published_date_from is None and published_date_to is not None:
-                            if _search_pub_date_timestamp <= published_date_to:
+                        elif cve_published_date_from is None and cve_published_date_to is not None:
+                            if _search_pub_date_timestamp <= cve_published_date_to:
                                 if _MAX_RESULTS_RETURN != 0:
                                     _result_data_dict['content'].append(search_data_dict)
                                     _MAX_RESULTS_RETURN -= 1
@@ -230,6 +233,12 @@ class FunctionComponent(ResilientComponent):
                 if isinstance(_browse_data_content, list):
                     for last_data_dict in _browse_data_content:
                         if _MAX_RESULTS_RETURN != 0:
+
+                            # Changing The date format to milli seconds to store in the resilient table
+                            _search_pub_date = last_data_dict.get('Published')
+                            _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
+                            last_data_dict['Published'] = _search_pub_date_timestamp
+
                             _result_data_dict['content'].append(last_data_dict)
                             _MAX_RESULTS_RETURN -= 1
                         else:
@@ -240,14 +249,20 @@ class FunctionComponent(ResilientComponent):
                     raise NotImplementedError()
             elif _api_call_type == 'cve':
                 _result_data_dict['api_call'] = 'cve'
+
+                # Changing The date format to milli seconds to store in the resilient table
+                _search_pub_date = _browse_data_content.get('Published')
+                _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
+                _browse_data_content['Published'] = _search_pub_date_timestamp
+
                 _result_data_dict['content'].append(_browse_data_content)
             else:
                 _result_data_dict['api_call'] = 'db'
                 _result_data_dict['content'].append(_browse_data_content)
-            print("$$$$$$$$$$$$$$$$$$${}$$$$$$$$$$$$$$$$$$$$$$$$$".format(_result_data_dict))
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(_result_data_dict)
+
         except Exception as er:
             yield FunctionError(er)
