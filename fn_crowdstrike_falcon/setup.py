@@ -24,7 +24,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnCsFalconSearchFunctionComponent = fn_crowdstrike_falcon.components.fn_cs_falcon_search:FunctionComponent"
+            "FnCsFalconSearchFunctionComponent = fn_crowdstrike_falcon.components.fn_cs_falcon_search:FunctionComponent",
+            "FnCsFalconDeviceActionsFunctionComponent = fn_crowdstrike_falcon.components.fn_cs_falcon_device_actions:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_crowdstrike_falcon.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_crowdstrike_falcon.util.customize:customization_data"],

@@ -1,8 +1,11 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """CrowdStrikeHelper Module"""
 
 import logging
 import datetime
+import requests
 
 
 class CrowdStrikeHelper(object):
@@ -10,7 +13,7 @@ class CrowdStrikeHelper(object):
 
     app_config_section = "fn_crowdstrike_falcon"
     class_vars_loaded = False
-    oauth2_base_url, oauth2_cid, oauth2_key, bauth_base_url, bauth_api_uuid, bauth_api_key, request_timeout, ping_delay = None, None, None, None, None, None, None, None
+    oauth2_base_url, oauth2_cid, oauth2_key, oauth2_token, bauth_base_url, bauth_api_uuid, bauth_api_key, request_timeout, ping_delay = None, None, None, None, None, None, None, None, None
     json_header = {"Content-Type": "application/json"}
 
     def __init__(self, app_configs):
@@ -75,3 +78,90 @@ class CrowdStrikeHelper(object):
         epoch = datetime.datetime(1970, 1, 1)
         utc_time = datetime.datetime.strptime(str_timestamp, timestamp_format)
         return int((utc_time - epoch).total_seconds() * 1000.0)
+
+    @classmethod
+    def get_oauth2_token(cls):
+        """Calls /oauth2/token endpoint and sets CrowdStrikeHelper.oauth2_token to the new token"""
+        log = logging.getLogger(__name__)
+
+        # Set request url, headers and data
+        get_oauth2_token_url = "{0}{1}".format(cls.oauth2_base_url, "/oauth2/token")
+        get_oauth2_headers = {"accept": "application/json", "Content-Type": "application/x-www-form-urlencoded"}
+
+        # As per CS APIs, this must be url-encoded string with client_id and client_secret
+        get_oauth2_token_data = "client_id={0}&client_secret={1}".format(cls.oauth2_cid, cls.oauth2_key)
+
+        log.info("Requesting new oauth2 Token from %s", get_oauth2_token_url)
+
+        get_oauth2_token_response = cls.cs_api_request(
+            method="POST",
+            url=get_oauth2_token_url,
+            data=get_oauth2_token_data,
+            headers=get_oauth2_headers)
+
+        # Handle custom error
+        if get_oauth2_token_response.get("error"):
+            raise ValueError("Error getting new oauth2 Token from CrowdStrike: {0}".format(get_oauth2_token_response.get("err_msg")))
+
+        # Set the new token
+        cls.oauth2_token = get_oauth2_token_response.get("access_token")
+
+        log.info("New oauth2 Token set successfully")
+
+    @classmethod
+    def cs_api_request(cls, method, url, headers=None, basicauth=None, params=None, data=None, json_data=None):
+        """Method to handle resquests to CrowdStrike APIs"""
+        log = logging.getLogger(__name__)
+
+        response, return_value = None, None
+
+        SUPPORTED_METHODS = ["GET", "POST"]
+
+        if method not in SUPPORTED_METHODS:
+            raise ValueError("{0} is not a supported CrowdStrike API Request. Supported methods are: {1}".format(method, SUPPORTED_METHODS))
+
+        headers = cls.json_header if headers is None else headers
+
+        try:
+            log.debug("%s CrowdStrike API Request. url: %s headers: %s data: %s", method, url, headers, data)
+
+            if method == "GET":
+                response = requests.get(url, auth=basicauth, headers=headers, params=params)
+                response.raise_for_status()
+                return_value = response
+
+            elif method == "POST":
+                response = requests.post(url, auth=basicauth, headers=headers, params=params, data=data, json=json_data)
+                response.raise_for_status()
+                return_value = response.json()
+
+            log.debug("%s Request successful", method)
+
+        except requests.exceptions.Timeout:
+            err_msg = "{0} CrowdStrike API Request timed out".format(method)
+            raise ValueError(err_msg)
+
+        except requests.exceptions.TooManyRedirects:
+            err_msg = "Too Many Redirects for: {0}".format(url)
+            raise ValueError(err_msg)
+
+        except requests.exceptions.HTTPError as err:
+            if err.response.content:
+                response_content = response.json()
+                response_errors = response_content.get("errors")
+                response_error_code = response_errors[0].get("code")
+
+                if response_errors and len(response_errors) > 0 and (response_error_code == 403 or response_error_code == 409):
+                    return_value = {
+                        "error": True,
+                        "err_code": response_errors[0].get("code"),
+                        "err_msg": response_errors[0].get("message"),
+                    }
+                    return return_value
+
+            raise ValueError(err)
+
+        except requests.exceptions.RequestException as err:
+            raise ValueError(err)
+
+        return return_value

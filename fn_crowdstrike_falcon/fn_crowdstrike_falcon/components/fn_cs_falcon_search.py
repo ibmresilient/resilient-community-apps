@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
         log = logging.getLogger(__name__)
 
         try:
-            # # Instansiate helper (which gets appconfigs)
+            # Instansiate helper (which gets appconfigs)
             cs_helper = CrowdStrikeHelper(self.function_opts)
 
             # Get the function inputs:
