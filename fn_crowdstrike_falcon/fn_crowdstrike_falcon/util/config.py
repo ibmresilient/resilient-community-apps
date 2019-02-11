@@ -20,8 +20,5 @@ cs_falcon_oauth2_key=
 cs_falcon_bauth_base_url=https://falconapi.crowdstrike.com
 cs_falcon_bauth_api_uuid=
 cs_falcon_bauth_api_key=
-
-cs_falcon_timeout=200
-cs_falcon_ping_delay=2
 """
     return config_data
