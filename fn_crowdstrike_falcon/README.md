@@ -1,7 +1,12 @@
 # CrowdStrike Falcon Functions for IBM Resilient
 
 ## Table of Contents
-
+  - [App Config Settings](#appconfig-settings)
+  - [Function - CS Falcon: Search](#function---cs-falcon-search)
+  - [Function - CS Falcon: Device Actions](#function---cs-falcon-device-actions)
+  - [Rules](#rules)
+  - [CS Falcon: Devices Data Table](#cs-falcon-devices)
+    - [Display the Datatable in an Incident](#display-the-datatable-in-an-incident)
 ---
 
 **This package contains 2 functions that help you integrate with CrowdStrike Falcon APIs**
