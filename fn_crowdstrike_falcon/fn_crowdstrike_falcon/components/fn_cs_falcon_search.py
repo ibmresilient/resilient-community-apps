@@ -53,7 +53,7 @@ class FunctionComponent(ResilientComponent):
             if cs_filter_string is None and cs_query is None:
                 raise IntegrationError("Function Input cs_filter_string or cs_query must be defined")
 
-            yield StatusMessage("Function Inputs OK")
+            yield StatusMessage("> Function Inputs OK")
 
             # Instansiate new RequestCommon object to facilitate CrowdStrike REST API calls
             rqc = RequestsCommon(self.opts, self.function_opts)
@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             if cs_query is not None:
                 get_device_ids_payload["q"] = cs_query
 
-            yield StatusMessage('Searching CrowdStrike for devices. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query))
+            yield StatusMessage('> Searching CrowdStrike for devices. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query))
 
             # Make GET request for device_ids
             get_device_ids_response = rqc.execute_call(
@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
 
             if device_ids is not None and len(device_ids) > 0:
                 # Then we get device_details for each device_id
-                yield StatusMessage("Devices found. Getting device details")
+                yield StatusMessage("> Devices found. Getting device details")
 
                 get_device_details_url = "{0}{1}".format(cs_helper.bauth_base_url, "/devices/entities/devices/v1")
                 get_device_details_payload = {
@@ -100,7 +100,7 @@ class FunctionComponent(ResilientComponent):
                 device_details = get_device_details_response.get("resources")
 
                 if device_details is not None:
-                    yield StatusMessage("Device details got. Finishing...")
+                    yield StatusMessage("> Device details got. Finishing...")
 
                     # For each device, convert their string timestamps to utc_time in ms
                     for device in device_details:
@@ -112,12 +112,12 @@ class FunctionComponent(ResilientComponent):
                     payload = payload.done(True, device_details)
 
                 else:
-                    err_msg = 'Could not get device details from CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
+                    err_msg = '> Could not get device details from CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
                     yield StatusMessage(err_msg)
                     payload = payload.done(False, None, reason=err_msg)
 
             else:
-                err_msg = 'No devices found in CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
+                err_msg = '> No devices found in CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
                 yield StatusMessage(err_msg)
                 payload = payload.done(False, None, reason=err_msg)
 
