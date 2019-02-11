@@ -27,8 +27,9 @@ class FunctionComponent(ResilientComponent):
 
     def _get_gm_epoch_time_stamp(self,date_string):
         """
-        :param date_string:
-        :return:
+        :param date_string:  date string like 2018-09-11
+        :return: time stamp in milli seconds
+
         """
         string_format_date = date_string.split('T')[0]
         time_tuple = time.strptime(string_format_date, "%Y-%m-%d")
@@ -266,3 +267,4 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as er:
             yield FunctionError(er)
+ 
