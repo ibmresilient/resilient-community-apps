@@ -11,7 +11,7 @@ setup(
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Functions to Integration with your CrowdStrike Falcon Platform",
-    long_description="This Integration has provides the ability to Search Devices, Contain or Lift Containment on Devices and List Devices an IOC Ran On",
+    long_description="This Integration has provides the ability to Search Devices and Contain or Lift Containment on Devices",
     install_requires=[
         'resilient_circuits>=32.0.0',
         'resilient-lib>=32.0.0'
