@@ -166,7 +166,6 @@ class FunctionComponent(ResilientComponent):
 
             # Type Of the rest api call like browse,search,specific cve,last, db info
             _api_call_type = _browse_data['api_call']
-            print("API CALL TYPE : {}".format(_api_call_type))
             # Rest Api Response Data
             _browse_data_content = _browse_data['content']
             if _api_call_type == 'browse':
@@ -260,6 +259,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 _result_data_dict['api_call'] = 'db'
                 _result_data_dict['content'].append(_browse_data_content)
+            log.debug("The Data Received from CVE DB : {}".format(_result_data_dict))
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
@@ -267,4 +267,3 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as er:
             yield FunctionError(er)
- 
