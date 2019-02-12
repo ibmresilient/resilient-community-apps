@@ -6,6 +6,7 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from resilient_circuits import FunctionResult, FunctionError
 
 PACKAGE_NAME = "fn_docker"
 FUNCTION_NAME = "docker_run_docker_container"
@@ -35,20 +36,3 @@ class TestDockerRunDockerContainer:
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-
-    @pytest.mark.parametrize("artifact_id, attachment_id, incident_id, task_id, docker_image, docker_input, expected_results", [
-        (123, 123, 123, 123, "text", "text", {"value": "xyz"}),
-        (123, 123, 123, 123, "text", "text", {"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, artifact_id, attachment_id, incident_id, task_id, docker_image, docker_input, expected_results):
-        """ Test calling with sample values for the parameters """
-        function_params = { 
-            "artifact_id": artifact_id,
-            "attachment_id": attachment_id,
-            "incident_id": incident_id,
-            "task_id": task_id,
-            "docker_image": docker_image,
-            "docker_input": docker_input
-        }
-        results = call_docker_run_docker_container_function(circuits_app, function_params)
-        assert(expected_results == results)

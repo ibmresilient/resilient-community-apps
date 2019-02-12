@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
                 # Get the external directory in which to save the file
                 output_vol = helper.get_image_specific_config_option(
-                    options=self.all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+                    options=self.all_options.get('fn_docker_{}'.format(image_to_use)),
                     option_name="primary_output_dir", optional=True)
 
                 yield StatusMessage("Writing attachment to bind folder")
@@ -105,33 +105,33 @@ class FunctionComponent(ResilientComponent):
 
             # Decide whether to use local connection or remote
             docker_interface.setup_docker_connection(options=self.options)
-            docker_extra_kwargs = docker_interface.parse_extra_kwargs(options=self.options)
+            docker_extra_kwargs = dict()
 
             # Ensure the specified image is an approved one
             if image_to_use not in helper.get_config_option("docker_approved_images").split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
+            image_fullname = None
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
-            command, docker_extra_kwargs = docker_interface.gather_image_args_and_volumes(
-                helper, image_to_use, self.all_options, docker_extra_kwargs, escaped_args)
+            command, docker_extra_kwargs, image_fullname = docker_interface.gather_image_args_and_volumes(
+                helper, image_to_use, self.all_options, escaped_args)
 
             log.info("Command: {} \n Volume Bind: {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
-            docker_interface.get_image(image_to_use)
-
+            docker_interface.get_image(image_fullname)
             # Get the Client
             docker_client = docker_interface.get_client()
             yield StatusMessage("Now starting container with input")
             # Run container using client
             container = docker_client.containers.run(
-                image=image_to_use,
+                image=image_fullname,
                 command=render(command, escaped_args),
                 detach=True,  # Detach from container
                 remove=False,  # Remove set to false as will be removed manually after gathering info
                 **docker_extra_kwargs)
 
             container_stats = docker_interface.gather_container_stats(container_id=container.id)
-
+            container_id = container.id
             # Gather the logs as they happen, until the container finishes.
             container_logs = container.logs(follow=True)
             yield StatusMessage("Container has finished and logs gathered")
@@ -148,17 +148,50 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Encountered issue when trying to remove container: {} \n {}".format(str(e),
                                     "If you supplied an extra app.config value to remove the container this is expected."))
 
-            # Produce a FunctionResult with the results using the FunctionPayload
-            yield FunctionResult(payload.done(
+            # Setup tempfile
+            with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:
+                try:
+                    # Write and close tempfile
+                    temp_upload_file.write(container_logs.decode('utf-8'))
+                    temp_upload_file.close()
+
+                    #  Access Resilient API
+                    client = self.rest_client()
+
+                    # Create POST uri
+                    # ..for a task, if task_id is defined
+                    if task_id:
+                        attachment_uri = '/tasks/{}/attachments'.format(task_id)
+                    # ...else for an attachment
+                    else:
+                        attachment_uri = '/incidents/{}/attachments'.format(incident_id)
+
+                    # POST the new attachment
+                    new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
+                                                            filename="{}{}".format("logs-from-",container_id), mimetype='text/plain')
+
+                finally:
+                    os.unlink(temp_upload_file.name)
+
+
+            result = payload.done(
                 # If container had no errors, 0 will be returned. Use a falsey check to ensure we get 0 else False
                 success=True if not container_status.get("StatusCode", 1) else False,
                 content={
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,
-                    "container_stats": container_stats
+                    "container_stats": container_stats,
+                    "container_id": container_id
 
                 }
-            ))
+            )
+            from datetime import datetime
+            dt_obj = datetime.strptime(result["metrics"]["timestamp"],
+                                       '%Y-%m-%d %H:%M:%S')
+            millisec = dt_obj.timestamp() * 1000
+
+            # Produce a FunctionResult with the results using the FunctionPayload
+            yield FunctionResult(result)
             log.info("Complete")
         except Exception:
             yield FunctionError()

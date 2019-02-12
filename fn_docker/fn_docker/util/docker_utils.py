@@ -47,8 +47,9 @@ class DockerUtils:
         try:
             self.client = docker.DockerClient(base_url=docker_server_url)
             self.api_client = docker.APIClient(base_url=docker_server_url)
-            self.client.ping()
+
             self.api_client.ping()
+            self.client.ping()
         except ConnectionError:
             LOG.debug('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
@@ -124,7 +125,7 @@ class DockerUtils:
     def inspect_container(self, containerid):
         return self.api_client.inspect_container(containerid)
 
-    def gather_image_args_and_volumes(self, helper, image_to_use, all_options, docker_extra_kwargs, escaped_args):
+    def gather_image_args_and_volumes(self, helper, image_to_use, all_options, escaped_args):
         """
         A helper function used to gather the command to be run aswell as format the kwargs to used on run.
 
@@ -142,30 +143,40 @@ class DockerUtils:
         :param docker_extra_kwargs:
         :return:
         """
-
+        image_kwargs = {"options": all_options.get('fn_docker_{}'.format(image_to_use))}
         command = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            options=all_options.get('fn_docker_{}'.format(image_to_use)),
             option_name="cmd")
 
         output_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            options=all_options.get('fn_docker_{}'.format(image_to_use)),
             option_name="primary_output_dir", optional=True)
         internal_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use.split("/", 1)[1])),
+            options=all_options.get('fn_docker_{}'.format(image_to_use)),
             option_name="primary_internal_dir", optional=True)
         vol_operation = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_' + image_to_use.split("/", 1)[1]), option_name="cmd_operation",
+            options=all_options.get('fn_docker_{}'.format(image_to_use)), option_name="cmd_operation",
             optional=True)
 
-        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else None
+        image_fullname = helper.get_image_specific_config_option(
+            options=all_options.get('fn_docker_{}'.format(image_to_use)), option_name="docker_image",
+            optional=True)
+
+        docker_extra_kwargs = self.parse_extra_kwargs(options=all_options.get('fn_docker_{}'.format(image_to_use)))
+
+        container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else dict()
 
         if docker_extra_kwargs.get('volumes', False):
             log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
 
             # Split the volumes string by commas to get each volume binding
             for volume in docker_extra_kwargs.get('volumes').split(','):
+
                 # Split the volume into each of its params
                 volume_params = volume.split(':')
+
+                if volume == docker_extra_kwargs.get('volumes').split(',')[0] and not internal_vol:
+                    internal_vol = volume_params[1]
                 # Format the volume data into a dict and update.
                 container_volume_bind.update({volume_params[0]: {'bind': volume_params[1], 'mode': volume_params[2]}})
 
@@ -181,7 +192,7 @@ class DockerUtils:
             "operation": render("{{operation|%s}}" % "sh",
                                 {"operation": vol_operation})
         })
-        return render(command,escaped_args), docker_extra_kwargs
+        return render(command,escaped_args), docker_extra_kwargs, image_fullname
 
     def gather_container_stats(self, container_id):
         return self.api_client.stats(container=container_id, stream=False)
