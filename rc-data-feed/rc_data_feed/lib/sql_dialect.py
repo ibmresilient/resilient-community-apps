@@ -9,13 +9,14 @@ class SqlDialect:
     def __init__(self):
         pass
 
-    def get_upsert(self, table_name, field_names):
+    def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
         the specified field names.
 
         :param table_name: The name of the table being inserted into/updated.
         :param field_names: The names of the files being inserted/updated.
+        :param field_types: The field types needed for specific type conversions
 
         :returns The SQL for the upsert.
         """
@@ -144,7 +145,7 @@ class SqliteDialect(SqlDialect):
     sqlite3 library directly.  If using SQLite with ODBC, you'll need a different
     dialect (which as of this writing does not exist).
     """
-    def get_upsert(self, table_name, field_names):
+    def get_upsert(self, table_name, field_names, field_types):
         # The API wants :field_name for the bind parameters, so prepend that for all of the fields.
         #
         value_names = [':' + name for name in field_names]
@@ -182,7 +183,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
     PostgreSQL 9.6 dialect.  Note that you cannot use a DB less than 9.6 because we use the
     "insert/on conflict/do update" capability and that wasn't introduced until 9.6.
     """
-    def get_upsert(self, table_name, field_names):
+    def get_upsert(self, table_name, field_names, field_types):
         # The pyodbc API wants ? for the bind parameters, so prepend that for all of the
         # fields.  Note that self.get_parameters will eventually be called and that will
         # ensure that binding is done in the right order (that the values for a field
@@ -222,7 +223,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         connection.setencoding(encoding='utf-8')
 
 class MySqlDialect(ODBCDialectBase):
-    def get_upsert(self, table_name, field_names):
+    def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
         the specified field names.
@@ -300,7 +301,7 @@ class MySqlDialect(ODBCDialectBase):
         return True
 
 class SqlServerDialect(ODBCDialectBase):
-    def get_upsert(self, table_name, field_names):
+    def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
         the specified field names.
@@ -309,31 +310,38 @@ class SqlServerDialect(ODBCDialectBase):
 
         :param table_name: The name of the table being inserted into/updated.
         :param field_names: The names of the files being inserted/updated.
+        :param field_types: dictionary of field type, some of which need special processing, such as datetime
 
         :returns The SQL for the upsert.
         """
 
-        select_values = ["? as {}".format(name) for name in field_names]
-        value_setters = ["[target].{0} = [source].{0}".format(name) for name in field_names]
-        value_placeholders = ['[source].{}'.format(name) for name in field_names]
+        select_values = []
+        clean_field_names = self.clean_keywords(field_names)
+        for name in clean_field_names:
+            if field_types.get(name, '').startswith("date"):
+                type = self.get_column_type(field_types[name])
+                select_values.append("convert({}, ?, 126) as {}".format(type, name))
+            else:
+                select_values.append("? as {}".format(name))
+
+        value_setters = ["[target].{0} = [source].{0}".format(name.lower()) for name in clean_field_names]
+        value_placeholders = ['[source].{}'.format(name.lower()) for name in clean_field_names]
 
         template = """
         MERGE INTO {0} as [target] USING (
                SELECT {1}
             ) AS [source]
-        ON [target].Id = [source].Id
+        ON [target].id = [source].id
         WHEN MATCHED THEN  UPDATE SET {2}
         WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4});
         """
-        #template = 'replace into {0} ({2}) values ({3})'
 
         sql_stmt = template.format(table_name,
                                ','.join(select_values),
                                ','.join(value_setters),
-                               ','.join(field_names),
+                               ','.join(clean_field_names),
                                ','.join(value_placeholders))
 
-        print (sql_stmt)
         return sql_stmt
 
     def get_delete(self, table_name):
@@ -365,7 +373,6 @@ class SqlServerDialect(ODBCDialectBase):
         {1}
     );"""
         return cmd.format(table_name, ','.join(specs))
-        #return 'create table if not exists {0} ({1})'.format(table_name, ','.join(specs))
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         """
@@ -382,9 +389,9 @@ class SqlServerDialect(ODBCDialectBase):
         :returns The SQL DDL needed to add the column.
         """
         sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
-                                                           column_name,
-                                                           column_spec)
-        print (sql_stmt)
+                                                          self.clean_keywords(column_name),
+                                                          column_spec)
+
         return sql_stmt
 
     def is_column_exists_exception(self, the_exception):    # pylint: disable=unused-argument,no-self-use
@@ -410,9 +417,9 @@ class SqlServerDialect(ODBCDialectBase):
         :returns The DB type to use for this dialect.
         """
         type_dict = dict(
-            number='INTEGER',
+            number='INT',
             datepicker='DATE',
-            datetimepicker='DATETIME',
+            datetimepicker='DATETIME2',
             boolean='BIT'
         )
 
@@ -420,5 +427,42 @@ class SqlServerDialect(ODBCDialectBase):
             return type_dict[input_type]
 
         return 'TEXT'
+
+    def get_parameters(self, parameter_names, parameters):
+        # Need to get a list that contains all the values in the same order as parameter_names.
+        bind_parameters = list()
+
+        for name in parameter_names:
+            bind_parameters.append(parameters[name])
+
+        return bind_parameters
+
+    def clean_keywords(self, args):
+        """
+        cleanup keywords used which cannot be column names on this database
+        :param args: list or individual field name
+        :return: cleaned up list of field_name
+        """
+        RESERVE_LIST = ('rule')
+
+        def clean_field_name(field_name):
+            """
+            inner routine to convert keywords
+            :param field_name:
+            :return: field_name so not to conflict with a keyword
+            """
+            if field_name in RESERVE_LIST:
+                return field_name+"_"
+            else:
+                return field_name
+
+        if type(args) == list:
+            new_args = []
+            for arg in args:
+                new_args.append(clean_field_name(arg))
+
+            return new_args
+        else:
+            return clean_field_name(args)
 
 

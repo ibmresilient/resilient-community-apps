@@ -143,6 +143,11 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         all_field_names = [field['name'] for field in all_fields]
 
+        # some data types, such as datetime, will need a conversion routine
+        all_field_types = dict()
+        for field in all_fields:
+            all_field_types[field['name']] = field['input_type']
+
         if 'id' not in all_field_names:
             # id is not an explicit field - this happens for data tables.  Make sure it exists.
             #
@@ -177,7 +182,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
                 self._execute_sql(
                     cursor,
-                    self.dialect.get_upsert(table_name, all_field_names),
+                    self.dialect.get_upsert(table_name, all_field_names, all_field_types),
                     self.dialect.get_parameters(all_field_names, flat_payload))
 
             self._commit_transaction(cursor)

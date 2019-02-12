@@ -25,7 +25,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "FeedComponent = rc_data_feed.components.feed_ingest:FeedComponent"
-        ]
+        ],
+        "resilient.circuits.configsection": ["gen_config = rc_data_feed.util.config:config_section_data"],
+        "resilient.circuits.customize": ["customize = rc_data_feed.util.customize:customization_data"],
     },
     tests_require=["pytest < 4.0.0",
                    "pytest_resilient_circuits"]
