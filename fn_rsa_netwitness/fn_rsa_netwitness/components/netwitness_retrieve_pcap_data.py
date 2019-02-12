@@ -6,13 +6,12 @@
 import logging
 import base64
 import json
-import tempfile
-import shutil
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
-
+from fn_rsa_netwitness.util.helper import remove_dir, create_tmp_file
 
 log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'netwitness_query_event_session"""
@@ -81,28 +80,11 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as e:
+            yield FunctionError(e)
         finally:
             if temp_d:
                 remove_dir(temp_d)
-
-
-def create_tmp_file(contents):
-    temp_d = tempfile.mkdtemp("tmp")
-    temp_f = tempfile.mkstemp(dir=temp_d)
-    report_file = temp_f[1]
-
-    with open(report_file, 'wb') as f:
-        f.write(contents)
-#        log.info("Saved ATD report")
-
-    return temp_d, report_file
-
-
-def remove_dir(dir):
-    shutil.rmtree(dir)
-#    log.debug("Tmp directory removed")
 
 
 def get_nw_session_logs_json(url, port, user, pw, cafile, event_session_id, req_common):
