@@ -61,9 +61,14 @@ def main():
 
                 # Construct the basic incident DTO that will be posted
                 description = ap['Notes'] if 'Notes' in ap else ""
+                ActionPlanGUID = ap['ActionPlanGUID']
+                properties = {
+                    "rf_actionplanguid": ActionPlanGUID
+                }
                 new_incident = {"name": ap['Title'],
                         "description": description,
                         "incident_type_ids": inc_types,
+                        "properties": properties,
                         "discovered_date": time_now}
 
                 # Create the incident
@@ -71,7 +76,7 @@ def main():
                 inc_id = incident["id"]
 
                 params = {
-                    'ActionPlanGUID': ap['ActionPlanGUID'],
+                    'ActionPlanGUID': ActionPlanGUID,
                     'Comment': "Created Resilient Incident ID #" + str(inc_id)
                 }
                 result = set_action_plan_comment(rf_opts, params)

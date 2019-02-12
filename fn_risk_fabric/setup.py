@@ -27,10 +27,10 @@ setup(
             "RfGetHostRiskFunctionComponent = fn_risk_fabric.components.rf_get_host_risk:FunctionComponent",
             "RfSetEventClassificationsFunctionComponent = fn_risk_fabric.components.rf_set_event_classifications:FunctionComponent",
             "RfGetRiskModelInstanceDetailsFunctionComponent = fn_risk_fabric.components.rf_get_risk_model_instance_details:FunctionComponent",
-            "RfGetUserRiskFunctionComponent = fn_risk_fabric.components.rf_get_user_risk:FunctionComponent",
+            "RfGetRiskModelInstancesFunctionComponent = fn_risk_fabric.components.rf_get_risk_model_instances:FunctionComponent",
             "RfGetIpRiskFunctionComponent = fn_risk_fabric.components.rf_get_ip_risk:FunctionComponent",
             "RfGetActionPlansFunctionComponent = fn_risk_fabric.components.rf_get_action_plans:FunctionComponent",
-            "RfGetRiskModelInstancesFunctionComponent = fn_risk_fabric.components.rf_get_risk_model_instances:FunctionComponent"
+            "RfGetUserRiskFunctionComponent = fn_risk_fabric.components.rf_get_user_risk:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_risk_fabric.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_risk_fabric.util.customize:customization_data"]

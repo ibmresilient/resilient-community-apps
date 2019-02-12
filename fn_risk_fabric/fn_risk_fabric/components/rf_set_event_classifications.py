@@ -29,18 +29,22 @@ class FunctionComponent(ResilientComponent):
             rf_cardinstanceid = kwargs.get("rf_cardinstanceid")  # text
             rf_focusentityid = kwargs.get("rf_focusentityid")  # text
             rf_actionplanguid = kwargs.get("rf_actionplanguid")  # text
+            rf_classification = kwargs.get("rf_classification")  # multiselect, values: "Acceptable", "Investigate", "Violation"
 
             log = logging.getLogger(__name__)
             log.info("rf_riskmodelinstanceid: %s", rf_riskmodelinstanceid)
             log.info("rf_cardinstanceid: %s", rf_cardinstanceid)
             log.info("rf_focusentityid: %s", rf_focusentityid)
             log.info("rf_actionplanguid: %s", rf_actionplanguid)
+            log.info("rf_classification: %s", rf_classification)
 
+            Classification = rf_classification[0]["name"]
             params = {
                 'RiskModelInstanceID': rf_riskmodelinstanceid,
                 'CardInstanceID': rf_cardinstanceid,
                 'FocusEntityID': rf_focusentityid,
                 'ActionPlanGUID': rf_actionplanguid,
+                'Classification': Classification,
             }
 
             yield StatusMessage("starting...")
