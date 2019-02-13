@@ -15,6 +15,7 @@ class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True
+        self.reason = None
         self.inputs = inputs
         self.sn_ref_id = None
         self.sn_record_state = None
@@ -78,7 +79,6 @@ class FunctionComponent(ResilientComponent):
             sn_ref_id = datatable.get_sn_ref_id(res_id)
 
             if not sn_ref_id:
-                payload.success = False
                 err_msg = "Failed to close this {0} in ServiceNow. This {0} has not been created in ServiceNow yet. {0} ID: {1}"
 
                 if payload.inputs["task_id"]:
@@ -87,7 +87,9 @@ class FunctionComponent(ResilientComponent):
                 else:
                     err_msg = err_msg.format("Incident", payload.inputs["incident_id"])
 
-                raise ValueError(err_msg)
+                payload.success = False
+                payload.reason = err_msg
+                yield StatusMessage(err_msg)
 
             else:
                 # Generate the request_data
