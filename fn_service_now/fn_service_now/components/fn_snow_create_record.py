@@ -104,8 +104,8 @@ class FunctionComponent(ResilientComponent):
             else:
                 request_data = req.get("data")
 
-                yield StatusMessage("Creating a new ServiceNow Record for the {0}: {1}".format(
-                    "Incident" if request_data.get("type") is "res_incident" else "Task", request_data.get("incident_name") if request_data.get("incident_name") is not None else request_data.get("task_name")))
+                yield StatusMessage(u"Creating a new ServiceNow Record for the {0}: {1}".format(
+                    "Incident" if request_data.get("type") is "res_incident" else "Task", unicode(request_data.get("incident_name")) if request_data.get("incident_name") is not None else unicode(request_data.get("task_name"))))
 
                 # Call POST and get response
                 create_in_sn_response = res_helper.sn_api_request("POST", "/create", data=json.dumps(request_data))
