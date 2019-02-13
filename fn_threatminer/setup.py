@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_threatminer',
-    version='1.0.1',
+    version='1.0.0',
     license='MIT License',
     author='Michael Piekarski',
     author_email='mpiekarski@essextec.com',
@@ -26,6 +26,7 @@ setup(
         "resilient.circuits.components": [
             "ThreatminerDomainWhoisFunctionComponent = fn_threatminer.components.threatminer_domain_whois:FunctionComponent",
             "ThreatminerEmailReverseFunctionComponent = fn_threatminer.components.threatminer_email_reverse:FunctionComponent",
+            "ThreatminerSamplesMetadataFunctionComponent = fn_threatminer.components.threatminer_samples_metadata:FunctionComponent",
             "ThreatminerIpWhoisFunctionComponent = fn_threatminer.components.threatminer_ip_whois:FunctionComponent",
             "ThreatminerDomainSubdomainsFunctionComponent = fn_threatminer.components.threatminer_domain_subdomains:FunctionComponent"
         ],

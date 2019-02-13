@@ -22,10 +22,6 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values
 
-        Default:
-
-        [fn_threatminer]
-        url=https://api.threatminer.org/v2
         """
 
         self.options = opts.get("fn_threatminer", {})
@@ -45,7 +41,7 @@ class FunctionComponent(ResilientComponent):
 
             url = self.options.get('url', None)
             if not url:
-                raise LookupError('missing url from [fn_threatminer] in app_config')
+                raise ValueError('missing url from [fn_threatminer] in app_config')
 
             response = requests.get('{}/host.php?q={}&rt={}'.format(url, ip_address, '1'))
 

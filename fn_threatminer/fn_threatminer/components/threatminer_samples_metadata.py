@@ -3,12 +3,13 @@
 """Function implementation"""
 
 import logging
+import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_threatminer.util.selftest as selftest
-import requests
+
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'threatminer_domain_subdomains"""
+    """Component that implements Resilient function 'threatminer_samples_metadata"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -18,44 +19,45 @@ class FunctionComponent(ResilientComponent):
 
     @handler("reload")
     def _reload(self, event, opts):
-        """Configuration options have changed, save new values
-
-        """
+        """Configuration options have changed, save new values"""
         self.options = opts.get("fn_threatminer", {})
 
-    @function("threatminer_domain_subdomains")
-    def _threatminer_domain_subdomains_function(self, event, *args, **kwargs):
-        """Function: Grab all Subdomains for a Domain from Threatminer"""
+    @function("threatminer_samples_metadata")
+    def _threatminer_samples_metadata_function(self, event, *args, **kwargs):
+        """Function: Query Threatminer Samples API for File MD5 Hash and return Metadata"""
         try:
             # Get the function parameters:
-            domain_name = kwargs.get("domain_name")  # text
+            md5_hash = kwargs.get("md5_hash")  # text
 
             log = logging.getLogger(__name__)
-            log.info("domain_name: %s", domain_name)
+            log.info("md5_hash: %s", md5_hash)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
+
             url = self.options.get('url', None)
             if not url:
                 raise ValueError('missing url from [fn_threatminer] in app_config')
 
-            response = requests.get("{}/domain.php?q={}&rt={}".format(url,domain_name,'5'))
+            response = requests.get('{}/sample.php?q={}&rt=1'.format(url, md5_hash))
 
             if response.status_code == 200:
-                yield StatusMessage("Results Returned for {}".format(domain_name))
+                yield StatusMessage('Results returned for {}'.format(md5_hash))
             elif response.status_code == 404:
-                yield StatusMessage("No Results Returned for {}".format(domain_name))
+                yield StatusMessage('No Results Returned for {}'.format(md5_hash))
             else:
-                raise Exception("Unexpected return code of {}".format(response.status_code))
+                yield StatusMessage('Unexpected return code of {}'.format(response.status_code))
 
-            domain_subdomain_data = response.text
+            metadata = response.text
 
-
+            yield StatusMessage("done...")
 
             results = {
-                "subdomains": domain_subdomain_data
+                "metadata": metadata
             }
-            yield StatusMessage("done...")
+
+            #  yield StatusMessage("done...")
+
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

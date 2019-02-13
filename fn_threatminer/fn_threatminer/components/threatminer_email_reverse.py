@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             url = self.options.get('url', None)
             if not url:
-                raise LookupError('missing url from [fn_threatminer] in app_config')
+                raise ValueError('missing url from [fn_threatminer] in app_config')
 
             response = requests.get('{}/email.php?q={}'.format(url, email_hash))
 
