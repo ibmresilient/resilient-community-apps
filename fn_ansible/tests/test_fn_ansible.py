@@ -20,7 +20,7 @@ hosts_path=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/host
 playbook_become_method=sudo
 playbook_become_user=root
 vault_password_file=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/my_passwords.yml
-connection_type=smart
+connection_type=local
 control_machine_username=
 control_machine_password=
 """
@@ -47,7 +47,7 @@ def call_fn_ansible_function(circuits, function_params, timeout=20):
 class TestFnAnsible:
     """ Tests for the function_ansible function"""
 
-    TARGET_HOST = "localhost"
+    TARGET_HOST = "192.168.1.3"
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -59,7 +59,7 @@ class TestFnAnsible:
             "ansible_parameters": "host_names={}".format(TARGET_HOST)
         }
 
-    output = {'localhost': {'ok': 1, 'failures': 0, 'unreachable': 0, 'changed': 0, 'skipped': 0}}
+    output = {TARGET_HOST: {'ok': 1, 'failures': 0, 'unreachable': 0, 'changed': 0, 'skipped': 0}}
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs, output)])
     def test_success(self, circuits_app, inputs, expected_results):
