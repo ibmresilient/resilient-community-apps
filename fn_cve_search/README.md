@@ -17,6 +17,7 @@ For More Information see https://www.circl.lu/services/cve-search/
 * resilient_circuits version 30 or later
     
 #Resilient Installation
+
 This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.
 Install this package with 'pip', such as:
 

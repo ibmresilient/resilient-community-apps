@@ -8,10 +8,10 @@ from setuptools import setup, find_packages
 setup(
     name='fn_cve_search',
     version='1.0.0',
-    license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    license='<<insert here>>',
+    author='<<your name here>>',
+    author_email='you@example.com',
+    url='<<your company url>>',
     description="Resilient Circuits Components for 'fn_cve_search'",
     long_description="Resilient Circuits Components for 'fn_cve_search'",
     install_requires=[
@@ -25,7 +25,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FunctionCveFunctionComponent = fn_cve_search.components.function_cve:FunctionComponent"
+            "FunctionCveBrowseFunctionComponent = fn_cve_search.components.function_cve_browse:FunctionComponent",
+            "FunctionCveSearchFunctionComponent = fn_cve_search.components.function_cve_search:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cve_search.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_cve_search.util.customize:customization_data"],

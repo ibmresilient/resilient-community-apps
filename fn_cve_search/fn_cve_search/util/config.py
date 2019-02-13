@@ -11,6 +11,9 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_cve_search]
+# Flag display maximum CVE Entries on the resilient table
 max_results_display = 50
+# Base URL of Common Vulnerability Exposures Data Base.
+cve_base_url = https://cve.circl.lu/api
 """
     return config_data
