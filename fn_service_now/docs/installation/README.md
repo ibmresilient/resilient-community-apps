@@ -33,7 +33,7 @@
   * **Email:** snow_integration@example.com
 --- 
 
-## Step 2: *Get IBM Resilient ServiceNow App from GitLab*
+## Step 2: *Get IBM Resilient ServiceNow App from GitHub*
 ***NOTE: this is temporary and will be replaced by an App on the ServiceNow App Store shortly***
 * Login to your ServiceNow instance with a user that has an **admin role**
 * In the navigation panel on the left, go to **System Applications > Studio**
