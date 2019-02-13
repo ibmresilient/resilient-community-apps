@@ -55,8 +55,9 @@ class FunctionComponent(ResilientComponent):
                 "task_id": res_helper.get_function_input(kwargs, "task_id", True),  # number (optional)
                 "sn_res_id": res_helper.get_function_input(kwargs, "sn_res_id", True),  # number (optional)
                 "sn_record_state": res_helper.get_function_input(kwargs, "sn_record_state"),  # number (required)
-                "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes", True),  # text (optional)
-                "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code", True),  # text (required)
+                "sn_close_notes": res_helper.get_function_input(kwargs, "sn_close_notes"),  # text (required)
+                "sn_close_code": res_helper.get_function_input(kwargs, "sn_close_code"),  # text (required)
+                "sn_close_work_note": res_helper.get_function_input(kwargs, "sn_close_work_note", True),  # text (optional)
             }
 
             # Create payload dict with inputs
@@ -95,7 +96,8 @@ class FunctionComponent(ResilientComponent):
                     "sn_table_name": res_helper.SN_TABLE_NAME,
                     "sn_close_code": payload.inputs["sn_close_code"],
                     "sn_close_notes": payload.inputs["sn_close_notes"],
-                    "sn_record_state": payload.inputs["sn_record_state"]
+                    "sn_record_state": payload.inputs["sn_record_state"],
+                    "sn_close_work_note": payload.inputs["sn_close_work_note"]
                 }
 
                 try:

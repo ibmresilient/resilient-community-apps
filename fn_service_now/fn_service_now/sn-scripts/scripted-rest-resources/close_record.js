@@ -7,7 +7,7 @@
 	
 	//Declare global variables
 	var record = null;
-    var req = request.body.data;
+	var req = request.body.data;
 	
 	//Function that generates the response body
 	function generate_response_body(record){
@@ -31,7 +31,12 @@
 		record.close_notes = req.sn_close_notes;
 		record.close_code = req.sn_close_code;
 		record.state = req.sn_record_state;
-		
+
+		//If a close work note is defined, add it
+		if(req.sn_close_work_note != null){
+			record.work_notes = req.sn_close_work_note;
+		}
+
 		//Update the record
 		record.update();
 		
