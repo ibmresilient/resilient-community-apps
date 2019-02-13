@@ -108,26 +108,28 @@ class FunctionComponent(ResilientComponent):
                     payload.sn_ref_id = sn_ref_id
                     payload.sn_record_state = close_in_sn_response["sn_state"]
 
+                    try:
+                        yield StatusMessage("Updating ServiceNow Records Data Table Status to {0}".format(close_in_sn_response["sn_state"]))
+
+                        row_to_update = datatable.get_row("sn_records_dt_sn_ref_id", sn_ref_id)
+
+                        cells_to_update = {
+                            "sn_records_dt_time": int(time.time() * 1000),
+                            "sn_records_dt_snow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
+                        }
+
+                        # Update the row
+                        datatable.update_row(row_to_update, cells_to_update)
+
+                    except Exception as err:
+                        payload.success = False
+                        raise ValueError("Failed to update ServiceNow Status in Datatable: {0}".format(err))
+
                 except Exception as err:
+                    err_msg = "Failed to close ServiceNow Record {0}".format(err)
                     payload.success = False
-                    raise ValueError("Failed to close ServiceNow Record {0}".format(err))
-
-                try:
-                    yield StatusMessage("Updating ServiceNow Records Data Table Status to {0}".format(close_in_sn_response["sn_state"]))
-
-                    row_to_update = datatable.get_row("sn_records_dt_sn_ref_id", sn_ref_id)
-
-                    cells_to_update = {
-                        "sn_records_dt_time": int(time.time() * 1000),
-                        "sn_records_dt_snow_status": res_helper.convert_text_to_richtext(close_in_sn_response["sn_state"], "red")
-                    }
-
-                    # Update the row
-                    datatable.update_row(row_to_update, cells_to_update)
-
-                except Exception as err:
-                    payload.success = False
-                    raise ValueError("Failed to update ServiceNow Status in Datatable: {0}".format(err))
+                    payload.reason = err_msg
+                    yield StatusMessage(err_msg)
 
             results = payload.as_dict()
 
