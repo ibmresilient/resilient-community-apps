@@ -41,13 +41,16 @@ class TestFnSnowCloseRecord:
       "sn_res_id": None,
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
-      "sn_close_code": "Solved (Permanently)"
+      "sn_close_code": "Solved (Permanently)",
+      "sn_close_work_note": "This was fixed by IBM Resilient team"
     }
 
     output1 = {
       "inputs": deepcopy(inputs1),
       "success": True,
-      "sn_ref_id": "INC123456"
+      "reason": None,
+      "sn_ref_id": "INC123456",
+      "sn_record_state": "Closed"
     }
 
     inputs2 = {
@@ -56,13 +59,16 @@ class TestFnSnowCloseRecord:
       "sn_res_id": None,
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
-      "sn_close_code": "Solved (Permanently)"
+      "sn_close_code": "Solved (Permanently)",
+      "sn_close_work_note": "This was fixed by IBM Resilient team"
     }
 
     output2 = {
       "inputs": deepcopy(inputs2),
       "success": True,
-      "sn_ref_id": "INC123457"
+      "reason": None,
+      "sn_ref_id": "INC123457",
+      "sn_record_state": "Closed"
     }
 
     inputs3 = {
@@ -71,13 +77,16 @@ class TestFnSnowCloseRecord:
       "sn_res_id": "RES-1001-2002",
       "sn_record_state": 7,
       "sn_close_notes": "We have fixed this",
-      "sn_close_code": "Solved (Permanently)"
+      "sn_close_code": "Solved (Permanently)",
+      "sn_close_work_note": "This was fixed by IBM Resilient team"
     }
 
     output3 = {
       "inputs": deepcopy(inputs3),
       "success": True,
-      "sn_ref_id": "INC123457"
+      "reason": None,
+      "sn_ref_id": "INC123457",
+      "sn_record_state": "Closed"
     }
 
     @pytest.mark.parametrize("inputs, expected_results", [(inputs1, output1), (inputs2, output2)])

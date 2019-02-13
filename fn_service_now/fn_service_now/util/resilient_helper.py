@@ -120,6 +120,17 @@ class ResilientHelper(object):
         else:
             raise ValueError("We do not support this version of Python")
 
+    @staticmethod
+    def str_to_unicode(str_to_convert):
+        if six.PY2:
+            return unicode(str_to_convert)
+
+        elif six.PY3:
+            return str(str_to_convert)
+
+        else:
+            raise ValueError("We do not support this version of Python")
+
     def get_config_option(self, option_name, optional=False, placeholder=None):
         """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
         option = self.app_configs.get(option_name)

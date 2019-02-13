@@ -54,6 +54,7 @@ class TestFnSnowCreateRecord:
       "res_link": "https://{***}/#incidents/3003?task_id=4004",
       "sn_ref_id": "INC123459",
       "sn_sys_id": "12558dfsasd43a5sdf32df",
+      "sn_record_state": "New",
       "sn_record_link": "https://test.service-now.com/nav_to.do?uri=incident.do?sysparm_query=number=INC123459"
     }
     output1["inputs"]["sn_optional_fields"] = json.loads(output1["inputs"]["sn_optional_fields"], object_hook=mock_byteify)
@@ -68,7 +69,8 @@ class TestFnSnowCreateRecord:
         mock_post_response = {
           "res_id": expected_results["res_id"],
           "sn_ref_id": expected_results["sn_ref_id"],
-          "sn_sys_id": "12558dfsasd43a5sdf32df"
+          "sn_sys_id": "12558dfsasd43a5sdf32df",
+          "sn_state": "New"
         }
 
         ResilientHelper.sn_api_request = MagicMock(return_value=mock_post_response)
