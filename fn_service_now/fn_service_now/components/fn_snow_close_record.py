@@ -17,6 +17,7 @@ class FunctionPayload(object):
         self.success = True
         self.inputs = inputs
         self.sn_ref_id = None
+        self.sn_record_state = None
 
     def as_dict(self):
         """Return this class as a Dictionary"""
@@ -101,6 +102,7 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage("Closing ServiceNow Record {0}".format(sn_ref_id))
                     close_in_sn_response = res_helper.sn_api_request("POST", "/close_record", data=json.dumps(request_data))
                     payload.sn_ref_id = sn_ref_id
+                    payload.sn_record_state = close_in_sn_response["sn_state"]
 
                 except Exception as err:
                     payload.success = False
