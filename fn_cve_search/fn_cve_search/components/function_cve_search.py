@@ -46,11 +46,9 @@ class FunctionComponent(ResilientComponent):
             if _response_code == 200:
                 _response_json_object['content'] = _response_object.json()
                 _response_json_object['api_call'] = api_call
-                print("JSON DATA RETURNED : {}".format(_response_json_object))
                 return _response_json_object
             else:
                 raise FunctionError("CVE Api Call Failed with status code : {}".format(_response_code))
-
         except Exception as call_err:
             raise FunctionError("CVE Api Call Failed : {}".format(call_err))
 
@@ -66,7 +64,6 @@ class FunctionComponent(ResilientComponent):
             _search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name)
         elif vendor_name is None and product is not None:
             _search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), product)
-        print("SSSSSSSSSSSSSSSSSSSSSS{}".format(_search_api))
         return self._make_rest_api_get_call(_search_api, api_call='search')
 
     def _get_specific_cve_data(self, cve_id=None):
@@ -101,8 +98,6 @@ class FunctionComponent(ResilientComponent):
             _search_data = api_data.get('data')
         else:
             raise NotImplementedError()
-        print("SSSSSSSEEEEEERRRRRRRRRRRCCCCCCCCCCCCCCCHHHHHHHH:{}".format(_search_data))
-        print("MAX_RESULTS_RETURN : {}".format(self.MAX_RESULTS_RETURN))
         if _search_data is not None:
             for search_data_dict in _search_data:
                 _search_pub_date = search_data_dict.get('Published')
@@ -260,7 +255,7 @@ class FunctionComponent(ResilientComponent):
                 self._result_data_dict['api_call'] = 'last'
                 self._parse_last_cve_results(_browse_data_content)
 
-            log.info("The Data Received from CVE DB : {}".format(self._result_data_dict))
+            log.debug("The Data Received from CVE DB : {}".format(self._result_data_dict))
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
