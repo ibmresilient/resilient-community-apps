@@ -17,29 +17,33 @@ function promptForResilientIncidentId(){
 	
 	//Prompt user to enter incidentId
 	incidentId = prompt("Enter Resilient Incident ID to add task to:");
-	
-	//Validate incidentId
-	if(!re.test(incidentId)){
-		alert("ERROR: "+incidentId+" is NOT a valid Resilient Incident ID");
-	}
-	
-	else{
-		//Create new GlideAjax on our CreateTask Script Include
-		ga = new GlideAjax("CreateTask");
 
-		//Set the name of the function we want to call
-		ga.addParam("sysparm_name", "createTask");
+	// IncidentId will be null if the user clicks cancel
+	if(incidentId != null){
 
-		//Set the variables 
-		ga.addParam("sysparm_snTableName", g_form.getTableName());
-		ga.addParam("sysparm_recordSysId", g_form.getUniqueValue());
-		ga.addParam("sysparm_incidentId", incidentId);
+		//Validate incidentId
+		if(!re.test(incidentId)){
+			alert("ERROR: "+incidentId+" is NOT a valid Resilient Incident ID");
+		}
 		
-		//Call the function createTask()
-		ga.getXML();
+		else{
+			//Create new GlideAjax on our CreateTask Script Include
+			ga = new GlideAjax("CreateTask");
 
-		//Call this UI Action and skip the "onclick" function 
-		gsftSubmit(null, g_form.getFormElement(), "create_new_ibm_resilient_task");
+			//Set the name of the function we want to call
+			ga.addParam("sysparm_name", "createTask");
+
+			//Set the variables 
+			ga.addParam("sysparm_snTableName", g_form.getTableName());
+			ga.addParam("sysparm_recordSysId", g_form.getUniqueValue());
+			ga.addParam("sysparm_incidentId", incidentId);
+			
+			//Call the function createTask()
+			ga.getXML();
+
+			//Call this UI Action and skip the "onclick" function 
+			gsftSubmit(null, g_form.getFormElement(), "create_new_ibm_resilient_task");
+		}
 	}
 }
 
