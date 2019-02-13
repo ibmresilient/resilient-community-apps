@@ -106,7 +106,7 @@ class FunctionComponent(ResilientComponent):
 
                 except Exception as err:
                     payload.success = False
-                    raise ValueError("Failed to ServiceNow Record {0}".format(err))
+                    raise ValueError("Failed to close ServiceNow Record {0}".format(err))
 
                 try:
                     yield StatusMessage("Updating ServiceNow Records Data Table Status to {0}".format(close_in_sn_response["sn_state"]))

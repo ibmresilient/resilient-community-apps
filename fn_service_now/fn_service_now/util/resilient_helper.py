@@ -472,7 +472,4 @@ class ResilientHelper(object):
         except requests.exceptions.RequestException as err:
             raise ValueError(err)
 
-        except requests.exceptions.RequestException as err:
-            raise ValueError(err)
-
         return return_value

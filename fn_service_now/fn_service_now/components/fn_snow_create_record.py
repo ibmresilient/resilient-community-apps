@@ -21,6 +21,7 @@ class FunctionPayload(object):
         self.res_link = None          # Link to res incident/task
         self.sn_ref_id = None         # Local (to its table) unique id of ServiceNow record
         self.sn_sys_id = None         # Global unique id of ServiceNow record
+        self.sn_record_state = None   # Current state of the Record in ServiceNow
         self.sn_record_link = None    # Link to ServiceNow record
         self.sn_time_created = None   # Timestamp from Resilient Integration server when record was created
 
@@ -115,6 +116,7 @@ class FunctionComponent(ResilientComponent):
                     payload.res_id = create_in_sn_response["res_id"]
                     payload.sn_ref_id = create_in_sn_response["sn_ref_id"]
                     payload.sn_sys_id = create_in_sn_response["sn_sys_id"]
+                    payload.sn_record_state = create_in_sn_response["sn_state"]
                     payload.sn_record_link = res_helper.generate_sn_link("number={0}".format(payload.sn_ref_id))
                     payload.sn_time_created = int(time.time() * 1000)  # Get current time (*1000 as API does not accept int)
 

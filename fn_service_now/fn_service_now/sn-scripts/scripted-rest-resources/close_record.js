@@ -7,8 +7,15 @@
 	
 	//Declare global variables
 	var record = null;
-	var response_body = {};
     var req = request.body.data;
+	
+	//Function that generates the response body
+	function generate_response_body(record){
+		return {
+			"sn_ref_id": req.sn_ref_id,
+			"sn_state": record.state.getChoiceValue()
+		};
+	}
 	
 	record = new GlideRecord(req.sn_table_name);
 
@@ -28,15 +35,15 @@
 		//Update the record
 		record.update();
 		
-		response_body["sn_ref_id"] = req.sn_ref_id;
-		response.setBody(response_body);
+		//Set the response body
+		response.setBody(generate_response_body(record));
+
+		return response;
 	
 	}
 	else{
 		err_msg = req.sn_ref_id + " state is already " + record.state + ". Cannot update the record.";
 		return new sn_ws_err.BadRequestError(err_msg);
 	}
-
-	return response;
 
 })(request, response);
