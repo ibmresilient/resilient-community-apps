@@ -33,12 +33,11 @@ An integration function is required, sending an artifact string of user agent in
 
             log = logging.getLogger(__name__)
             log.info("user_agent_string: %s", user_agent_string)
-            print('hello world')
 
             url = self.options.get('url', None)
             api_key = self.options.get('api_key', None)
             if not url or not api_key:
-                raise LookupError('missing url and/or api_key from [fn_useragentanalysis] app_config')
+                raise ValueError('missing url and/or api_key from [fn_useragentanalysis] app_config')
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
