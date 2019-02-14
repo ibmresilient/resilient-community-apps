@@ -35,16 +35,6 @@ class FunctionComponent(ResilientComponent):
     def _maas360_stop_app_distribution_function(self, event, *args, **kwargs):
         """Function: Function stops a specific distributions of an app."""
 
-        def add_to_dict(key, value, params):
-            """
-            Adds a key-value pair to a dictionary.
-            :param params
-            :param key:
-            :param value:
-            """
-            if value:
-                params[key] = value
-
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -52,24 +42,16 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
                              'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
                              'maas360_password', 'maas360_stop_app_distribution_url'], self.options)
-            validate_fields(['maas360_device_id'], kwargs)
+            validate_fields(['maas360_device_id', 'maas360_app_id', 'maas360_app_type'], kwargs)
 
             # Get the function parameters:
             app_type = self.get_select_param(kwargs.get("maas360_app_type"))  # select, values: "iOS Enterprise Application", "iOS App Store Application", "Android Enterprise Application", "Android Market Application"
-            app_id = kwargs.get("maas360_app_id")  # text
+            installed_app_id = kwargs.get("maas360_app_id")  # text
             device_id = kwargs.get("maas360_device_id")  # text
 
             LOG.info("maas360_app_type: %s", app_type)
-            LOG.info("maas360_app_id: %s", app_id)
+            LOG.info("maas360_app_id: %s", installed_app_id)
             LOG.info("maas360_device_id: %s", device_id)
-
-            # Add function inputs to payload
-            query_string = {}
-
-            add_to_dict("appType", app_type, query_string)
-            add_to_dict("appId", app_id, query_string)
-            add_to_dict("targetDevices", 2, query_string)  # Possible values: 0: All Devices  1: Device Group 2: Specific Device
-            add_to_dict("deviceId", device_id, query_string)
 
             # Read configuration settings:
             host_url = self.options["maas360_host_url"]
@@ -89,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
                                          app_access_key, auth_url, self.opts, self.options)
 
-            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, query_string)
+            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id, device_id)
             if not stop_app_results:
                 yield StatusMessage("Location for device id {} isn't available".format(device_id))
             else:

@@ -111,12 +111,12 @@ class FunctionComponent(ResilientComponent):
             elif action_type == "Wipe Device":
                 yield StatusMessage("Starting the Wipe Device function")
 
-                validate_fields(['maas360_wipe_device_url', 'maas360_wipe_device_notifyMe',
-                                 'maas360_wipe_device_notifyUser', 'maas360_wipe_device_notifyOthers'], self.options)
+                validate_fields(['maas360_wipe_device_url', 'maas360_wipe_device_notify_me',
+                                 'maas360_wipe_device_notify_user', 'maas360_wipe_device_notify_others'], self.options)
                 wipe_device_url = self.options["maas360_wipe_device_url"]
-                notify_me = self.options["maas360_wipe_device_notifyMe"]
-                notify_user = self.options["maas360_wipe_device_notifyUser"]
-                notify_others = self.options["maas360_wipe_device_notifyOthers"]
+                notify_me = self.options["maas360_wipe_device_notify_me"]
+                notify_user = self.options["maas360_wipe_device_notify_user"]
+                notify_others = self.options["maas360_wipe_device_notify_others"]
 
                 action_results = maas360_utils.lock_device(wipe_device_url, device_id, notify_me, notify_user, notify_others)
                 if not action_results:

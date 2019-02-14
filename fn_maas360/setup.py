@@ -25,7 +25,8 @@ setup(
         "resilient.circuits.components": [
             "Maas360BasicSearchFunctionComponent = fn_maas360.components.maas360_basic_search:FunctionComponent",
             "Maas360ActionFunctionComponent = fn_maas360.components.maas360_action:FunctionComponent",
-            "Maas360StopAppDistFunctionComponent = fn_maas360.components.maas360_stop_app_distribution:FunctionComponent"
+            "Maas360StopAppDistFunctionComponent = fn_maas360.components.maas360_stop_app_distribution:FunctionComponent",
+            "Maas360SearchInstalledAppsFunctionComponent = fn_maas360.components.maas360_search_installed_apps:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_maas360.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_maas360.util.customize:customization_data"],

@@ -33,13 +33,9 @@ class FunctionComponent(ResilientComponent):
             email - Full Email address string that needs to be searched for - example "TEST@EXAMPLE.COM""
 
             match - 0 (Default) indicates Partial match for Device Name, Username, Phone Number, 1 indicates Exact match
-            pageSize - Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 250 
-            sortAttribute - Possible values: lastReported (Default)  or installedDate
-            sortOrder - Possible values: asc  or dsc (Default)
-
-            GET /device-apis/devices/2.0/search/customer/<billingId>?partialPhoneNumber=%2B1858
-                &imeiMeid=99000032580168&pageSize=250&sortAttribute=lastReported&sortOrder=dsc
-                &partialUsername=dlind&platformName=Android&email=TEST%40EXAMPLE.COM&match=0
+            pageSize - Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 250
+            sortAttribute - Possible values: lastReported (Default) or installedDate
+            sortOrder - Possible values: asc or dsc (Default)
     """
 
     def __init__(self, opts):
@@ -108,7 +104,8 @@ class FunctionComponent(ResilientComponent):
 
             # At least one of the search parameters should be set, otherwise we can query the whole MaaS360 database.
             if not query_string:
-                raise FunctionError(u"At least one of input function fields needs to be set for MaaS360 Basic Search.")
+                raise FunctionError(u"At least one of input function fields needs to be set for running "
+                                    u"Basic Search function")
 
             # Read configuration settings:
             host_url = self.options["maas360_host_url"]
@@ -133,7 +130,7 @@ class FunctionComponent(ResilientComponent):
             add_to_dict("sortAttribute", sort_attribute, query_string)
             add_to_dict("sortOrder", sort_order, query_string)
 
-            yield StatusMessage("Starting the Basic Search lookup")
+            yield StatusMessage("Starting the Basic Search")
 
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
                                          app_access_key, auth_url, self.opts, self.options)
