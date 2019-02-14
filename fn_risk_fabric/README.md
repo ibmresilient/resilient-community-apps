@@ -35,7 +35,7 @@ Used by the example Menu Item rule with the same name to run this workflow.
 ### RF Example: Mitigate Persistent Insider Threats
 Example workflow for classifying and mitigating persistent insider threats. Add other
 integration functions such as disabling users in LDAP and notifying managers to create a
-fully-automated mitigation process. Currently, workflow just adds Tasks as examples.
+fully-automated mitigation process. Currently, workflow only adds Tasks as examples.
 
 ![RF Example: Mitigate Persistent Insider Threats](./screenshots/rf-example-mitigate-persistent-insider-threats.png)
 
