@@ -34,44 +34,52 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
 
-    @function("netwitness_query_event_session")
-    def _netwitness_query_event_session_function(self, event, *args, **kwargs):
+    @function("netwitness_retrieve_session_data")
+    def _netwitness_retrieve_session_data(self, event, *args, **kwargs):
         """Function: """
-        temp_d = None
+#        temp_d = None
         try:
             yield StatusMessage("Starting...")
             # Initialize resilient_lib objects
-            rp = ResultPayload("netwitness_query_event_session", **kwargs)
+            rp = ResultPayload("netwitness_retrieve_session_data", **kwargs)
             req_common = RequestsCommon(self.opts)
 
             # Get the function parameters:
-            nw_event_session_id = str(kwargs.get("nw_event_session_id"))  # number
-            incident_id = str(kwargs.get("incident_id"))
+            nw_event_session_ids = kwargs.get("nw_event_session_ids")  # text
+            nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
 
 #            validate_fields(["nw_event_session_id"], **kwargs)
 
-            log.info("nw_event_session_id: %s", nw_event_session_id)
-            log.info("incident_id: %s", incident_id)
+            log.info("nw_event_session_ids: %s", nw_event_session_ids)
 
-            try:
-                pcap_file = get_nw_session_logs_file(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
+            session_data = None
+            if nw_data_format == "pcap":
+                session_data = get_nw_session_logs_file(self.options.get("nw_url"), str(self.options.get("nw_port")),
                                                      self.options.get("nw_user"), self.options.get("nw_password"),
-                                                     self.options.get("cafile"), nw_event_session_id, req_common)
+                                                     self.options.get("cafile"), nw_event_session_ids, req_common)
+            elif nw_data_format == "logs_json":
+                session_data = get_nw_session_logs_json(self.options.get("nw_url"), str(self.options.get("nw_port")),
+#                                                     self.options.get("nw_user"), self.options.get("nw_password"),
+#                                                     self.options.get("cafile"), nw_event_session_ids, req_common)
+#            try:
+#                pcap_file = get_nw_session_logs_file(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
+#                                                     self.options.get("nw_user"), self.options.get("nw_password"),
+#                                                     self.options.get("cafile"), nw_event_session_ids, req_common)
 
-                temp_d, temp_f = create_tmp_file(pcap_file)
+#                temp_d, temp_f = create_tmp_file(pcap_file)
 
-                resilient_client = self.rest_client()
-                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-                                                 temp_f, filename="pcap file for session IDs: {}".format(nw_event_session_id))
-                yield StatusMessage("pcap file added to incident {} as Attachment".format(str(incident_id)))
-            except Exception:
-                log.info("Failed gathering or posting the attachment to the incident. Here just to not break the whole function")
+#                resilient_client = self.rest_client()
+#                resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
+#                                                 temp_f, filename="pcap file for session IDs: {}".format(nw_event_session_ids))
+#                yield StatusMessage("pcap file added to incident {} as Attachment".format(str(incident_id)))
+#            except Exception:
+#                log.info("Failed gathering or posting the attachment to the incident. Here just to not break the whole function")
 
-            json_response = get_nw_session_logs_json(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
-                                                     self.options.get("nw_user"), self.options.get("nw_password"),
-                                                     self.options.get("cafile"), nw_event_session_id, req_common)
+#            json_response = get_nw_session_logs_json(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
+#                                                     self.options.get("nw_user"), self.options.get("nw_password"),
+#                                                     self.options.get("cafile"), nw_event_session_ids, req_common)
 
-            log.info(json.dumps(json_response), sort_keys=True, indent=4, separators=(',', ': '))
+            log.debug(session_data)
 
             results = rp.done(True, json_response)
 
@@ -82,9 +90,9 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-        finally:
-            if temp_d:
-                remove_dir(temp_d)
+#        finally:
+#            if temp_d:
+#                remove_dir(temp_d)
 
 
 def get_nw_session_logs_json(url, port, user, pw, cafile, event_session_id, req_common):
