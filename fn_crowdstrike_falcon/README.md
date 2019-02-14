@@ -16,6 +16,12 @@
 CS Falcon: Search gives you the ability to search your CrowdStrike Falcon platform for a list of Devices, then using the CS Falcon: Device Actions function we can 'contain' or 'lift_containment' on that device
 
 ---
+## Prerequisites + Dependencies
+* Your Integration Server must be running `Python v2.15.x or v3.6.x` and `resilient-circuits >= v32.0.0`
+* This Integration depends on our **Data Table Helper Functions**: `fn_datatable_utils >= v1.0.0`
+  * You must download + install `fn_datatable_utils` prior to installing this Integration
+  * `fn_datatable_utils` is available on [GitHub](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_datatable_utils) or the [App Exchange](https://exchange.xforce.ibmcloud.com/hub/extension/c3b2e7a1a38f3e249c540d3b49fad459)
+---
 ## app.config settings:
 * At time of development, CrowdStrike Falcon are currently in the process of migrating their APIs. Therefore we are required to provide two different sets of credentials: **API Client** and **API Key**
 * See their documentation here [https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers#before_you_begin](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers#before_you_begin) on how to obtain your two sets of API Credentials
@@ -140,12 +146,19 @@ inputs.cs_query = "JohnsMacBook"
 ### Post-Process Script:
 This post-process loops each found device and adds its details to the `cs_falcon_devices_dt` Data Table
 ```python
+# Import Date
+from java.util import Date
+
 # If the function found some devices
 if results.success:
-
-# For each device, add a row to the cs_falcon_devices_dt
-for device in results.content:
+  
+  # Get the current time
+  dt_now = Date()
+  
+  # For each device, add a row to the cs_falcon_devices_dt
+  for device in results.content:
     new_row = incident.addRow("cs_falcon_devices_dt")
+    new_row.timestamp = dt_now
     new_row.device_id = device.device_id
     new_row.hostname = device.hostname
     new_row.ip = device.local_ip
@@ -154,8 +167,8 @@ for device in results.content:
     new_row.status = device.status
 
 else:
-# Else, no devices found, add Note to Incident with reason
-    incident.addNote(results.reason)
+  # Else, no devices found, add Note to Incident with reason
+  incident.addNote(results.reason)
 ```
 
 ---
@@ -218,10 +231,30 @@ inputs.cs_device_id = row.device_id
 # inputs.cs_action_name is a select field and is set to "contain" in the Workflow's Input tab
 ```
 ### Post-Process Script:
-This post-process adds a Note to the Incident
+This post-process creates a formatted timestamp, updates the Data Table and adds a Note to the Incident
 ```python
-# If the function successfully sent a "contain device" or "lift_containment" request to CrowdStrike, add a Note to the Incident
+# Import Date
+from java.util import Date
+
+def get_formatted_timestamp():
+  """Function that returns the current Resilient Appliance time in the format: mm/dd/yyyy hh:mm:ss"""
+  dt = Date()
+  return u"{0}/{1}/{2} {3}:{4}:{5}".format(
+    dt.getMonth() + 1, dt.getDate(), dt.getYear() + 1900, dt.getHours(), dt.getMinutes(), dt.getSeconds())
+
+
+# If the function successfully sent a "contain device" request to CrowdStrike, updated the Data Table and add a Note to the Incident
 if results.success:
+  
+  # Get the current time in the format 'mm/dd/yyyy hh:mm:ss'
+  formatted_date = get_formatted_timestamp()
+  
+  # Generate the value we want to update the cell to
+  latest_action_text = u"Action: {0}. Time: {1}".format(unicode(workflow.properties.cs_action.inputs.cs_action_name), formatted_date)
+
+  # Update the Data Table cell
+  row.latest_action = latest_action_text
+  
   note_text = """<br><b>device-action request sent to CrowdStrike</b>
                  <br><b>Action:</b> {0}
                  <br><b>Device ID:</b> {1}""".format(results.inputs.cs_action_name, results.content.device_id)
@@ -247,14 +280,16 @@ if results.success:
 cs_falcon_devices_dt
 
 #### Columns:
-| Column Name | API Access Name | Type |
-| ----------- | --------------- | -----|
-| Device ID | `device_id` | `Text` |
-| Hostname | `hostname` | `Text` |
-| IP | `ip` | `Text` |
-| MAC | `mac` | `Text` |
-| Last Seen | `last_seen` | `Text` |
-| Status | `status` | `Text` |
+| Column Name | API Access Name | Type | Info |
+| ----------- | --------------- | ---- | ---- |
+| Timestamp | `timestamp` | `DateTime` | Timestamp when this entry was added |
+| Device ID | `device_id` | `Text` | Unique CrowdStrike ID for the Device |
+| Hostname | `hostname` | `Text` | Hostname of the Device |
+| IP | `ip` | `Text` | Local IP Address of the Device |
+| MAC | `mac` | `Text` | MAC Address of the Device |
+| Last Seen | `last_seen` | `DateTime` | Datetime the Device was Last Seen |
+| Status | `status` | `Text` | The Containment Status of the Device |
+| Latest Action | `latest_action` | `Text` | Name of the latest CrowdStrike action to run on this device |
 
 
 #### Display the Datatable in an Incident
