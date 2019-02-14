@@ -1,13 +1,13 @@
 #About This Package
 
-This Common Vulnerability Exposures function provides a way to search vulnerabilities from CVE Database, 
+This Common Vulnerability Exposures function provides a way to search for vulnerabilities from CVE Database, 
      function offers below mentioned ways to search for vulnerabilities.
 
 * Browse
 * Search
 * Specific CVE ID
 * Last 30 CVE's
-* Database Information
+* CVE Database Information
  
 For More Information see https://www.circl.lu/services/cve-search/
 
@@ -42,23 +42,39 @@ Run the following command to generate the cve configuration section in the app.c
 
 The following gRPC configuration data is added:
                     
-    [fn_cve_search] 
-    max_results_display = 5
+    [fn_cve_search]
+    # Flag display maximum CVE Entries on the resilient table
+    max_results_display = 50
+    # Base URL of Common Vulnerability Exposures Data Base.
+    cve_base_url = https://cve.circl.lu/api
+
     
 Edit the [fn_cve_search] properties as follows:
     
-   1. max_results_display : The Vulnerabilities to display on the resilient tables from search results.
+   1. max_results_display : Max Vulnerabilities to display on the resilient `CVE searched Data` table from search results.
 
 #Using the CVE Function
+There are two functions a) Example: CVE Browse  b) Example: CVE Search
+
+Example CVE Browse : 
+
+   This function can be accessed on the incidents. which offers the capabilities to browse for vendors and products,
+    current CVE  data base information.
+    
+Example: CVE Search : 
+
+   This function can be accessed on the artifacts. which offers the capabilities to search for product & vendor 
+    vulnerabilities, search for specific CVE's data, latest vulnerabilities added to databases.
+     
 Below are details of the input fields and outputs results of the function.
 
 ##Function Inputs Fields:
    1. CVE Search Criteria       - Vulnerabilities search options
-   2. Vendor                    - Name of the Vendor
-   3. Product                   - Name of the Product
-   4. CVE ID                    - specific Vulnerability ID
-   5. CVE Published Date From   - Date Range to filter search data
-   6. CVE Published Date To     - Date Range to filter search data
+   2. Vendor                    - Name of the vendor
+   3. Product                   - Name of the product
+   4. CVE ID                    - Specific vulnerability ID
+   5. CVE Published Date From   - Date range to filter searched vulnerability data
+   6. CVE Published Date To     - Date range to filter searched vulnerability data
  
  CVE Function offers below search configurations to query vulnerabilities from DB
  
@@ -66,24 +82,21 @@ Below are details of the input fields and outputs results of the function.
     
     * Select Browse and all other inputs are empty results all the vendor list from Database
     * Select Browse with vendor name given returns all the products associated with the vendor
-    * Select Browse with Vendor, Product name given returns all the vulnerabilities associated with 
-        given vendor's product, and no of results returned will be limited by given date range and 
-        `max_results_display` flag.
- 
+    
  2. Search :
     * Select Search with all other inputs are empty results all the vendor list from Database
-    * Select Search with Vendor name given returns all the vulnerabilities associated with 
+    * Select Search with vendor name given returns all the vulnerabilities associated with 
         given vendor and no of results returned will be limited by given date range and 
         `max_results_display` flag.
-    * Select Search with Product name given returns all the vulnerabilities associated with 
+    * Select Search with product name given returns all the vulnerabilities associated with 
         given product and no of results returned will be limited by given date range and 
         `max_results_display` flag.
-    * Select Search with Vendor, Product name given returns all the vulnerabilities associated with 
+    * Select Search with vendor, product name given returns all the vulnerabilities associated with 
         given vendor's product, and no of results returned will be limited by given date range and 
         `max_results_display` flag.
         
  3. Specific CVE ID
-    * Select Specific CVE ID Option from CVE Search Criteria with CVE ID of Vulnerability, returns
+    * Select Specific CVE ID option from CVE Search Criteria with CVE ID of Vulnerability, returns
       data related to specific CVE ID & populates into CVE table.
       
  4. Last 30 CVES
@@ -107,9 +120,9 @@ Below are details of the input fields and outputs results of the function.
 ##Function Post-Process Script
    It can be parsed within the post-process script as `results.get("content")`. Based on the api_call type 
    the data can be represented as user needs.
-    By default browse and db api call type data is displayed on incident Notes, and other type data displayed 
-    on the CVE Table
+   
+   By default `Example: CVE Browse` function data is displayed on incident Notes, 
+    and `Example: CVE Search` function data displayed on the `CVE searched Data` Table.
 
-    
     
     
