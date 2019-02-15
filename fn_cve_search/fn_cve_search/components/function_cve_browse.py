@@ -6,9 +6,8 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_cve_search.util.selftest as selftest
-import requests
-import time
-import calendar
+from fn_cve_search.util.cve import make_rest_api_get_call
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'function_cve_browse"""
@@ -22,37 +21,6 @@ class FunctionComponent(ResilientComponent):
         # Getting CVE DataBase URL from app.config file
         self.CVE_BASE_URL = self.options.get('cve_base_url')+'/{}'
 
-    def _get_gm_epoch_time_stamp(self, date_string):
-        """
-        :param date_string:  date string like 2018-09-11
-        :return: time stamp in milli seconds
-
-        """
-        string_format_date = date_string.split('T')[0]
-        time_tuple = time.strptime(string_format_date, "%Y-%m-%d")
-        time_miliseconds = calendar.timegm(time_tuple) * 1000
-        return time_miliseconds
-
-    def _make_rest_api_get_call(self, rest_url, api_call=None):
-        """
-        :param rest_url: Rest Api URL
-        :param api_call: Just reference
-        :return: JSON Object Returned from the Call
-        """
-        _response_json_object = dict()
-        try:
-            _response_object = requests.get(url=rest_url)
-            _response_code = _response_object.status_code
-            if _response_code == 200:
-                _response_json_object['content'] = _response_object.json()
-                _response_json_object['api_call'] = api_call
-                return _response_json_object
-            else:
-                raise FunctionError("CVE Api Call Failed with status code : {}".format(_response_code))
-
-        except Exception as call_err:
-            raise FunctionError("CVE Api Call Failed : {}".format(call_err))
-
     def _browse_cve_api(self, vendor_name=None):
         """
         :param vendor_name: Vendor Name to search for Vulnerabilities from CVE DB
@@ -61,29 +29,30 @@ class FunctionComponent(ResilientComponent):
         """
 
         if vendor_name:
-            _browse_api = '{}/{}'.format(self.CVE_BASE_URL.format('browse'), vendor_name)
+            browse_api = '{}/{}'.format(self.CVE_BASE_URL.format('browse'), vendor_name)
         else:
-            _browse_api = self.CVE_BASE_URL.format('browse')
-        return self._make_rest_api_get_call(_browse_api, api_call='browse')
+            browse_api = self.CVE_BASE_URL.format('browse')
+        return make_rest_api_get_call(browse_api, api_call='browse')
 
     def _cve_db_information(self):
         """
         :return:more information about the current databases in use and when it was updated
         """
-        _db_info_url = '{}'.format(self.CVE_BASE_URL.format('dbInfo'))
-        return self._make_rest_api_get_call(_db_info_url, api_call='db')
+        db_info_url = '{}'.format(self.CVE_BASE_URL.format('dbInfo'))
+        return make_rest_api_get_call(db_info_url, api_call='db')
 
     def _parse_browse_results(self, api_data):
         """
         :param api_data: Rest API Call Result Data to Parsed.
-        :return: assigning parsed data to class attribute  - _result_data_dict which is a dictionary
+        :return: returning an array  of product and vendor data
         """
-
+        tmp_browse_list = []
         if isinstance(api_data, list):
             raise NotImplementedError()
         elif isinstance(api_data, dict):
             for key_data, value_data in api_data.items():
-                self._result_data_dict['content'].append({key_data: value_data})
+                tmp_browse_list.append({key_data: value_data})
+            return tmp_browse_list
         else:
             raise NotImplementedError()
 
@@ -110,7 +79,7 @@ class FunctionComponent(ResilientComponent):
                 cve_vendor = cve_vendor.strip()
 
             # Variables to Store Parsed CVE API Data
-            self._result_data_dict = dict()
+            result_data_dict = dict()
 
             log = logging.getLogger(__name__)
             log.info("cve_browse_data: %s", cve_browse_data)
@@ -119,32 +88,33 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
 
-            _browse_data = None  # A variable to store the returned JSON Data
             if cve_browse_criteria.lower().find('browse') != -1:
-                _browse_data = self._browse_cve_api(vendor_name=cve_vendor)
+                browse_data = self._browse_cve_api(vendor_name=cve_vendor)
+            elif cve_browse_criteria.lower().find('db') != -1:
+                browse_data = self._cve_db_information()
             else:
-                _browse_data = self._cve_db_information()
+                raise ValueError("CVE Browse Criteria is not recognized..!")
 
             # Defining a key in result dictionary to store parsed data
-            self._result_data_dict['content'] = []
+            result_data_dict['content'] = []
 
             # Type Of the rest api call like browse,search,specific cve,last, db info
-            _api_call_type = _browse_data['api_call']
+            api_call_type = browse_data['api_call']
 
             # Rest Api Response Data
-            _browse_data_content = _browse_data['content']
+            browse_data_content = browse_data['content']
 
-            if _api_call_type == 'browse':
-                self._result_data_dict['api_call'] = 'browse'
+            if api_call_type == 'browse':
+                result_data_dict['api_call'] = 'browse'
+                _browse_dict_list = self._parse_browse_results(api_data=browse_data_content)
+                result_data_dict['content'].extend(_browse_dict_list)
+            elif api_call_type == 'db':
+                result_data_dict['api_call'] = 'db'
+                result_data_dict['content'].append(browse_data_content)
 
-                self._parse_browse_results(api_data=_browse_data_content)
-            else:
-                self._result_data_dict['api_call'] = 'db'
-                self._result_data_dict['content'].append(_browse_data_content)
-
-            log.debug("The Data Received from CVE: {}".format(self._result_data_dict))
+            log.debug("The Data Received from CVE: {}".format(result_data_dict))
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
-            yield FunctionResult(self._result_data_dict)
+            yield FunctionResult(result_data_dict)
         except Exception as er:
             yield FunctionError(er)

@@ -17,11 +17,13 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
+    # Reading configuration variables from app.config file
     options = opts.get("fn_cve_search", {})
 
     try:
         _response = requests.get(url=options.get('cve_base_url'))
         if _response.status_code == 200:
+            log.debug("Common vulnerability exposures URL: {}".format(options.get('cve_base_url')))
             log.info("Successfully Established connection to CVE Database : {}".format(_response.status_code))
             return {"state": "Success"}
         else:

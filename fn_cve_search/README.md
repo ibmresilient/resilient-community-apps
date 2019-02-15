@@ -54,6 +54,7 @@ Edit the [fn_cve_search] properties as follows:
    1. max_results_display : Max Vulnerabilities to display on the resilient `CVE searched Data` table from search results.
 
 #Using the CVE Function
+
 There are two functions a) Example: CVE Browse  b) Example: CVE Search
 
 Example CVE Browse : 

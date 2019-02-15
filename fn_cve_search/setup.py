@@ -8,12 +8,17 @@ from setuptools import setup, find_packages
 setup(
     name='fn_cve_search',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_cve_search'",
-    long_description="Resilient Circuits Components for 'fn_cve_search'",
+    long_description="""The CVE search API is a RESTful web service allowing to search for vulnerabilities.
+                         by using this api vulnerabilities can be searched based on vendor name, product name,
+                         specific CVE Id's.
+                         the searched results will be updated in CVE Data Table and Incidents Notes section.
+                         """,
+
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],

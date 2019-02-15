@@ -6,9 +6,8 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_cve_search.util.selftest as selftest
-import requests
-import time
-import calendar
+from fn_cve_search.util.cve import make_rest_api_get_call, get_gm_epoch_time_stamp
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'function_cve_search"""
@@ -22,49 +21,19 @@ class FunctionComponent(ResilientComponent):
         # Getting CVE DataBase URL from app.config file
         self.CVE_BASE_URL = self.options.get('cve_base_url') + '/{}'
 
-    def _get_gm_epoch_time_stamp(self, date_string):
-        """
-        :param date_string:  date string like 2018-09-11
-        :return: time stamp in milli seconds
-
-        """
-        string_format_date = date_string.split('T')[0]
-        time_tuple = time.strptime(string_format_date, "%Y-%m-%d")
-        time_miliseconds = calendar.timegm(time_tuple) * 1000
-        return time_miliseconds
-
-    def _make_rest_api_get_call(self, rest_url, api_call=None):
-        """
-        :param rest_url: Rest Api URL
-        :param api_call: Just reference
-        :return: JSON Object Returned from the Call
-        """
-        _response_json_object = dict()
-        try:
-            _response_object = requests.get(url=rest_url)
-            _response_code = _response_object.status_code
-            if _response_code == 200:
-                _response_json_object['content'] = _response_object.json()
-                _response_json_object['api_call'] = api_call
-                return _response_json_object
-            else:
-                raise FunctionError("CVE Api Call Failed with status code : {}".format(_response_code))
-        except Exception as call_err:
-            raise FunctionError("CVE Api Call Failed : {}".format(call_err))
-
     def _search_cve_api(self, vendor_name=None, product=None):
         """
         :param vendor_name:  Name of the Vendor
         :param product:   Name of the Product
-        :return:JSON with all the vulnerabilities per vendor and a specific product
+        :return:JSON with all the vulnerabilities as per vendor and product
         """
         if vendor_name is not None and product is not None:
-            _search_api = '{}/{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name, product)
+            search_api = '{}/{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name, product)
         elif vendor_name is not None and product is None:
-            _search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name)
+            search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), vendor_name)
         elif vendor_name is None and product is not None:
-            _search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), product)
-        return self._make_rest_api_get_call(_search_api, api_call='search')
+            search_api = '{}/{}'.format(self.CVE_BASE_URL.format('search'), product)
+        return make_rest_api_get_call(search_api, api_call='search')
 
     def _get_specific_cve_data(self, cve_id=None):
         """
@@ -72,8 +41,8 @@ class FunctionComponent(ResilientComponent):
         :return:a JSON of a specific CVE ID
         """
         if cve_id:
-            _specific_cve_url = '{}/{}'.format(self.CVE_BASE_URL.format('cve'), cve_id)
-            return self._make_rest_api_get_call(_specific_cve_url, api_call='cve')
+            specific_cve_url = '{}/{}'.format(self.CVE_BASE_URL.format('cve'), cve_id)
+            return make_rest_api_get_call(specific_cve_url, api_call='cve')
         else:
             raise FunctionError("Please Specify the CVE ID to search for Vulnerability")
 
@@ -81,100 +50,106 @@ class FunctionComponent(ResilientComponent):
         """
         :return:a JSON of the last 30 CVEs including CAPEC, CWE and CPE expansions
         """
-        _last_url = '{}'.format(self.CVE_BASE_URL.format('last'))
-        return self._make_rest_api_get_call(_last_url, api_call='last')
+        last_url = '{}'.format(self.CVE_BASE_URL.format('last'))
+        return make_rest_api_get_call(last_url, api_call='last')
 
-    def _parse_search_results(self, api_data, cve_pub_date_from, cve_pub_date_to):
+    def _parse_search_results(self, api_data, cve_pub_date_from, cve_pub_date_to, max_res_counter):
         """
-        :param api_data:CVE Search Rest API Call Result Data to Parsed
+        :param api_data:CVE Search Rest API Call Result Data to be Parsed
         :param cve_pub_date_from: User Given from Published date
         :param cve_pub_date_to: User Given up to Published date
-        :return:assigning parsed data to class attribute  - _result_data_dict which is a dictionary
+        :param max_res_counter : maximum no of vulnerabilities to return
+        :return: Array of search data dictionaries
         """
-        _search_data = None
+        search_data = None
+        tmp_search_data = []
         if isinstance(api_data, list):
-            _search_data = api_data
+            search_data = api_data
         elif isinstance(api_data, dict):
-            _search_data = api_data.get('data')
+            search_data = api_data.get('data')
         else:
-            raise NotImplementedError()
-        if _search_data is not None:
-            for search_data_dict in _search_data:
-                _search_pub_date = search_data_dict.get('Published')
-                _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
+            raise NotImplementedError("Search Data type is not recognized")
+        if search_data is not None:
+            for search_data_dict in search_data:
+                search_pub_date = search_data_dict.get('Published')
+                search_pub_date_timestamp = get_gm_epoch_time_stamp(date_string=search_pub_date)
 
                 # Changing The date format to milli seconds to store in the resilient table
-                search_data_dict['Published'] = _search_pub_date_timestamp
+                search_data_dict['Published'] = search_pub_date_timestamp
 
                 if cve_pub_date_from is not None and cve_pub_date_to is not None:
-                    if (_search_pub_date_timestamp >= cve_pub_date_from) and (
-                            _search_pub_date_timestamp <= cve_pub_date_to):
-                        if self.MAX_RESULTS_RETURN != 0:
-                            self._result_data_dict['content'].append(search_data_dict)
-                            self.MAX_RESULTS_RETURN -= 1
+                    if (search_pub_date_timestamp >= cve_pub_date_from) and (
+                            search_pub_date_timestamp <= cve_pub_date_to):
+                        if max_res_counter != 0:
+                            tmp_search_data.append(search_data_dict)
+                            max_res_counter -= 1
                         else:
                             pass
                     else:
                         pass
                 elif cve_pub_date_from is not None and cve_pub_date_to is None:
-                    if _search_pub_date_timestamp >= cve_pub_date_from:
-                        if self.MAX_RESULTS_RETURN != 0:
-                            self._result_data_dict['content'].append(search_data_dict)
-                            self.MAX_RESULTS_RETURN -= 1
+                    if search_pub_date_timestamp >= cve_pub_date_from:
+                        if max_res_counter != 0:
+                            tmp_search_data.append(search_data_dict)
+                            max_res_counter -= 1
                         else:
                             pass
                     else:
                         pass
                 elif cve_pub_date_from is None and cve_pub_date_to is not None:
-                    if _search_pub_date_timestamp <= cve_pub_date_to:
-                        if self.MAX_RESULTS_RETURN != 0:
-                            self._result_data_dict['content'].append(search_data_dict)
-                            self.MAX_RESULTS_RETURN -= 1
+                    if search_pub_date_timestamp <= cve_pub_date_to:
+                        if max_res_counter != 0:
+                            tmp_search_data.append(search_data_dict)
+                            max_res_counter -= 1
                         else:
                             pass
                     else:
                         pass
                 else:
-                    if self.MAX_RESULTS_RETURN != 0:
-                        self._result_data_dict['content'].append(search_data_dict)
-                        self.MAX_RESULTS_RETURN -= 1
+                    if max_res_counter != 0:
+                        tmp_search_data.append(search_data_dict)
+                        max_res_counter -= 1
                     else:
                         pass
+            return tmp_search_data
 
-    def _parse_last_cve_results(self, api_data):
+    def _parse_last_cve_results(self, api_data, max_res_counter):
         """
         :param api_data:CVE Last 30 CVE's Rest API Call Result Data to Parsed
-        :return:assigning parsed data to class attribute  - _result_data_dict which is a dictionary
+        :param max_res_counter : maximum no of vulnerabilities to return
+        :return:an array of latest CVE's
         """
+        tmp_last_cve_data = []
         if isinstance(api_data, list):
             for last_data_dict in api_data:
-                if self.MAX_RESULTS_RETURN != 0:
-
+                if max_res_counter != 0:
                     # Changing The date format to milli seconds to store in the resilient table
-                    _search_pub_date = last_data_dict.get('Published')
-                    _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
-                    last_data_dict['Published'] = _search_pub_date_timestamp
-
-                    self._result_data_dict['content'].append(last_data_dict)
-                    self.MAX_RESULTS_RETURN -= 1
+                    search_pub_date = last_data_dict.get('Published')
+                    search_pub_date_timestamp = get_gm_epoch_time_stamp(date_string=search_pub_date)
+                    last_data_dict['Published'] = search_pub_date_timestamp
+                    tmp_last_cve_data.append(last_data_dict)
+                    max_res_counter -= 1
                 else:
-                    pass
+                    break
+            return tmp_last_cve_data
         elif isinstance(api_data, dict):
-            raise NotImplementedError()
+            raise NotImplementedError("Not implemented this type of last cve data parser")
         else:
-            raise NotImplementedError()
+            raise NotImplementedError("result last cve call data is not recognized")
 
     def _parse_cve_results(self, api_data):
         """
 
         :param api_data: Specific CVE Rest API Call Result Data to Parsed
-        :return:assigning parsed data to class attribute  - _result_data_dict which is a dictionary
+        :return:an array of specific cve data
         """
+        tmp_cve_list = []
         # Changing The date format to milli seconds to store in the resilient table
-        _search_pub_date = api_data.get('Published')
-        _search_pub_date_timestamp = self._get_gm_epoch_time_stamp(date_string=_search_pub_date)
-        api_data['Published'] = _search_pub_date_timestamp
-        self._result_data_dict['content'].append(api_data)
+        search_pub_date = api_data.get('Published')
+        search_pub_date_timestamp = get_gm_epoch_time_stamp(date_string=search_pub_date)
+        api_data['Published'] = search_pub_date_timestamp
+        tmp_cve_list.append(api_data)
+        return tmp_cve_list
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -210,10 +185,10 @@ class FunctionComponent(ResilientComponent):
             cve_published_date_to = kwargs.get("cve_published_date_to")  # datepicker
 
             # Getting Max Result Display Flag from app.config
-            self.MAX_RESULTS_RETURN = int(self.options.get('max_results_display'))
+            MAX_RESULTS_RETURN = int(self.options.get('max_results_display'))
 
             # Variables to Store Parsed CVE API Data
-            self._result_data_dict = dict()
+            _result_search_data = dict()
 
             log = logging.getLogger(__name__)
             log.info("cve_search_data: %s", cve_search_data)
@@ -233,32 +208,36 @@ class FunctionComponent(ResilientComponent):
                     _browse_data = self._search_cve_api(vendor_name=cve_vendor, product=cve_product)
             elif cve_search_criteria.lower().find('specific') != -1:
                 _browse_data = self._get_specific_cve_data(cve_id=cve_id)
-            else:
+            elif cve_search_criteria.lower().find('last') != -1:
                 _browse_data = self._last_30_cves()
-
+            else:
+                raise ValueError("CVE Browse Criteria is not recognized..!")
             # Defining a key in result dictionary to store parsed data
-            self._result_data_dict['content'] = []
+            _result_search_data['content'] = []
 
             # Type Of the rest api call like browse,search,specific cve,last, db info
-            _api_call_type = _browse_data['api_call']
+            api_call_type = _browse_data['api_call']
 
             # Rest Api Response Data
             _browse_data_content = _browse_data['content']
-
-            if _api_call_type == 'search':
-                self._result_data_dict['api_call'] = 'search'
-                self._parse_search_results(_browse_data_content, cve_published_date_from, cve_published_date_to)
-            elif _api_call_type == 'cve':
-                self._result_data_dict['api_call'] = 'cve'
-                self._parse_cve_results(_browse_data_content)
-            else:
-                self._result_data_dict['api_call'] = 'last'
-                self._parse_last_cve_results(_browse_data_content)
-
-            log.debug("The Data Received from CVE DB : {}".format(self._result_data_dict))
+            if _browse_data_content:
+                if api_call_type == 'search':
+                    _result_search_data['api_call'] = 'search'
+                    search_data_list = self._parse_search_results(_browse_data_content, cve_published_date_from,
+                                                                  cve_published_date_to, MAX_RESULTS_RETURN)
+                    _result_search_data['content'].extend(search_data_list)
+                elif api_call_type == 'cve':
+                    _result_search_data['api_call'] = 'cve'
+                    cve_data_list = self._parse_cve_results(_browse_data_content)
+                    _result_search_data['content'].extend(cve_data_list)
+                elif api_call_type == 'last':
+                    _result_search_data['api_call'] = 'last'
+                    last_data_list = self._parse_last_cve_results(_browse_data_content, MAX_RESULTS_RETURN)
+                    _result_search_data['content'].extend(last_data_list)
+            log.debug("The Data Received from CVE DB : {}".format(_result_search_data))
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(self._result_data_dict)
+            yield FunctionResult(_result_search_data)
         except Exception as er:
             yield FunctionError(er)
