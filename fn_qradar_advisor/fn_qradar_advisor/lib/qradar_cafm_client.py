@@ -19,14 +19,14 @@ class GetAllMappingsError(Exception):
         super(GetAllMappingsError, self).__init__(fail_msg)
 
 
-class QRadarCfmaClient(object):
+class QRadarCafmClient(object):
     """
     QRadar Cyber Adversary Framework Mapping Client
     """
-    def __init__(self, qradar_host, cfma_app_id, cfma_token, cafile, log):
+    def __init__(self, qradar_host, cafm_app_id, cafm_token, cafile, log):
         self.http_info = HttpInfo(qradar_host=qradar_host,
-                                  advisor_app_id=cfma_app_id,
-                                  qradar_token=cfma_token,
+                                  advisor_app_id=cafm_app_id,
+                                  qradar_token=cafm_token,
                                   cafile=cafile,
                                   log=log)
         self.log = log
@@ -86,6 +86,16 @@ class QRadarCfmaClient(object):
 
         return response.json()
 
+    def find_tactic_mapping(self, rule_name):
+        """
+        Find the MITRE Tactic that maps to a given QRadar rule
+        :param rule_name: QRadar rule
+        :return:
+        """
+        all_mappings = self.get_all_mapping()
 
+        ret = all_mappings.get(rule_name, {})
+
+        return ret
 
 
