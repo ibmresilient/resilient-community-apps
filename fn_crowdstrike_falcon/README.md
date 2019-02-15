@@ -47,7 +47,7 @@ cs_falcon_ping_timeout=
 ```
 
 ---
-## Function - CS Falcon: Search:
+## Function - CS Falcon: Search
 Queries your CrowdStrike Falcon Hosts for a list of Devices using a Filter and/or Query. If Devices are found they are returned as a Python List
 
  ![screenshot](./screenshots/1.png)
@@ -179,7 +179,7 @@ else:
 
 ---
 
-## Function - CS Falcon: Device Actions:
+## Function - CS Falcon: Device Actions
 * Function that uses the CrowdStrike Falcon '/devices/entities/devices-actions/' endpoint to Contain or Lit Containment on a Device
 * Sends the `contain` or `life_containment` request to CrowdStrike.
 * Then pings every x seconds to get the `device_status`
