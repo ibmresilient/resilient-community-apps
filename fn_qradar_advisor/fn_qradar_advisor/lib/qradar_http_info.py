@@ -126,6 +126,9 @@ class HttpInfo(object):
         if "X-XSRF-TOKEN" in self.session.headers:
             del self.session.headers["X-XSRF-TOKEN"]
 
+        if "X-TACTICS-XSRF-TOKEN" in self.session.headers:
+            del self.session.headers["X-TACTICS-XSRF-TOKEN"]
+
     def update_session(self, cookies):
         """
         Extract the CSRF token from the cookies and store it in the
@@ -133,8 +136,12 @@ class HttpInfo(object):
         :param cookies:
         :return:
         """
-        self.session.headers["X-XSRF-TOKEN"] = cookies["XSRF-TOKEN"]
-        self.xsrf_token = cookies["XSRF-TOKEN"]
+        if "XSRF-TOKEN" in cookies:
+            self.session.headers["X-XSRF-TOKEN"] = cookies["XSRF-TOKEN"]
+            self.xsrf_token = cookies["XSRF-TOKEN"]
+
+        if "TACTICS-XSRF-TOKEN" in cookies:
+            self.update_session_tactics(cookies)
 
     def update_session_tactics(self, cookies):
         self.session.headers["X-TACTICS-XSRF-TOKEN"] = cookies["TACTICS-XSRF-TOKEN"]
