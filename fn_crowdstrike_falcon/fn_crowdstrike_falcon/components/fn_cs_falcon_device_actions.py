@@ -4,6 +4,7 @@
 """Function implementation"""
 
 import logging
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_crowdstrike_falcon.util.cs_helper import CrowdStrikeHelper
@@ -32,8 +33,20 @@ class FunctionComponent(ResilientComponent):
             err_msg = None
             log = logging.getLogger(__name__)
 
+            # Get the wf_instance_id so we can raise an error if the workflow was terminated by the user
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
+            # Map cs actions to their status
+            cs_action_name_to_status_map = {
+                "contain": "contained",
+                "lift_containment": "normal"
+            }
+
             # Instansiate helper (which gets appconfigs)
             cs_helper = CrowdStrikeHelper(self.function_opts)
+
+            # Instansiate new Resilient API object
+            res_client = self.rest_client()
 
             # Get the function inputs:
             fn_inputs = {
@@ -101,9 +114,33 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("> Failed to {0} device {1}. {2}".format(
                         cs_action_name, cs_device_id, err_msg))
 
+            # Get current time in seconds
+            start_time = time.time()
+
+            # Get the status of the device
+            device_status = cs_helper.get_device_status(cs_device_id)
+
+            # While the status is not 'normal' or 'contained'
+            while device_status.get("status") != cs_action_name_to_status_map.get(cs_action_name):
+
+                if device_status.get("error"):
+                    raise ValueError(device_status.get("err_msg"))
+
+                 # Check if workflow has been terminated by user"
+                if cs_helper.is_workflow_terminated(wf_instance_id, res_client):
+                    raise ValueError("> Workflow terminated by user.")
+
+                if cs_helper.should_timeout(start_time):
+                    yield StatusMessage("> Workflow timed out trying to latest status of the device_id {0}".format(cs_device_id))
+                    break
+
+                yield StatusMessage("> Device Status: {0}. Fetching again every {1} seconds".format(device_status.get("status"), cs_helper.ping_delay))
+                device_status = cs_helper.get_device_status(cs_device_id)
+
             payload = payload.done(True, {
                 "meta": post_device_action_response.get("meta"),
-                "device_id": post_device_action_response.get("resources")[0].get("id")
+                "device_id": post_device_action_response.get("resources")[0].get("id"),
+                "device_status": device_status.get("status")
             })
 
             results = payload

@@ -11,7 +11,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_crowdstrike_falcon]
-# API Client Authentication, CrowdStrike's newer standard based on OAuth2
+# API Client Authentication, CrowdStrike's newer standard based on OAuth2. See README doc on how to obtain credentials
 cs_falcon_oauth2_base_url=https://api.crowdstrike.com
 cs_falcon_oauth2_cid=
 cs_falcon_oauth2_key=
@@ -20,5 +20,11 @@ cs_falcon_oauth2_key=
 cs_falcon_bauth_base_url=https://falconapi.crowdstrike.com
 cs_falcon_bauth_api_uuid=
 cs_falcon_bauth_api_key=
+
+# Number of seconds to wait before next request to CrowdStrike. Default=5
+cs_falcon_ping_delay=
+
+# Max number of seconds to wait to get response from CrowdStrike. Default=120
+cs_falcon_ping_timeout=
 """
     return config_data

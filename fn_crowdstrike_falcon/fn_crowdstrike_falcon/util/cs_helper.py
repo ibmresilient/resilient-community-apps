@@ -5,6 +5,7 @@
 
 import logging
 import datetime
+import time
 import requests
 
 
@@ -37,8 +38,20 @@ class CrowdStrikeHelper(object):
         cls.bauth_base_url = cls.__get_config_option(app_configs, "cs_falcon_bauth_base_url")
         cls.bauth_api_uuid = cls.__get_config_option(app_configs, "cs_falcon_bauth_api_uuid")
         cls.bauth_api_key = cls.__get_config_option(app_configs, "cs_falcon_bauth_api_key")
-        cls.request_timeout = cls.__get_config_option(app_configs, "cs_falcon_request_timeout")
-        cls.ping_delay = cls.__get_config_option(app_configs, "cs_falcon_ping_delay")
+        cls.ping_delay = cls.__get_config_option(app_configs, "cs_falcon_ping_delay", True)
+        cls.ping_timeout = cls.__get_config_option(app_configs, "cs_falcon_ping_timeout", True)
+
+        # Set defaults ping_delay=5s and ping_timeout=120s
+        if not cls.ping_delay:
+            cls.ping_delay = 5
+        else:
+            cls.ping_delay = int(cls.ping_delay)
+
+        if not cls.ping_timeout:
+            cls.ping_timeout = 120
+        else:
+            cls.ping_timeout = int(cls.ping_timeout)
+
         cls.class_vars_set = True
 
     @staticmethod
@@ -78,6 +91,52 @@ class CrowdStrikeHelper(object):
         epoch = datetime.datetime(1970, 1, 1)
         utc_time = datetime.datetime.strptime(str_timestamp, timestamp_format)
         return int((utc_time - epoch).total_seconds() * 1000.0)
+
+    @staticmethod
+    def is_workflow_terminated(workflow_instance_id, res_client):
+        """Function to check if the current workflow has been terminated via the UI"""
+        resp = res_client.get("/workflow_instances/{0}".format(workflow_instance_id))
+        wf_status = resp.get("status")
+        return True if wf_status == "terminated" else False
+
+    @classmethod
+    def should_timeout(cls, start_time):
+        """Return if the time running is longer than the timeout"""
+        return (time.time() - start_time) > cls.ping_timeout
+
+    @classmethod
+    def get_device_status(cls, device_id):
+        """Wait for x seconds then get and return the status of the device in CrowdStrike
+
+        :param device_id: Unique CrowdStrike ID of the device
+        """
+        log = logging.getLogger(__name__)
+
+        log.info("Waiting for %s seconds. Then getting the device status for device_id %s", cls.ping_delay, device_id)
+        time.sleep(cls.ping_delay)
+
+        get_device_details_url = "{0}{1}".format(cls.bauth_base_url, "/devices/entities/devices/v1")
+        get_device_details_payload = {
+            "ids": device_id
+        }
+
+        get_device_details_response = cls.cs_api_request(
+            method="GET",
+            url=get_device_details_url,
+            basicauth=(cls.bauth_api_uuid, cls.bauth_api_key),
+            params=get_device_details_payload)
+
+        device_details = get_device_details_response.get("resources")
+
+        if device_details is None:
+            return {
+                "error": True,
+                "err_msg": "Could not get device status for device_id {0}.".format(device_id)
+            }
+
+        return {
+            "status": device_details[0].get("status")
+        }
 
     @classmethod
     def get_oauth2_token(cls):
@@ -128,7 +187,7 @@ class CrowdStrikeHelper(object):
             if method == "GET":
                 response = requests.get(url, auth=basicauth, headers=headers, params=params)
                 response.raise_for_status()
-                return_value = response
+                return_value = response.json()
 
             elif method == "POST":
                 response = requests.post(url, auth=basicauth, headers=headers, params=params, data=data, json=json_data)

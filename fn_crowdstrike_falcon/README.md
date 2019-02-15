@@ -38,6 +38,12 @@ cs_falcon_oauth2_key=
 cs_falcon_bauth_base_url=https://falconapi.crowdstrike.com
 cs_falcon_bauth_api_uuid=
 cs_falcon_bauth_api_key=
+
+# Number of seconds to wait before next device-action request to CrowdStrike. Default=5
+cs_falcon_ping_delay=
+
+# Max number of seconds to wait to get device-action response from CrowdStrike. Default=120
+cs_falcon_ping_timeout=
 ```
 
 ---
@@ -174,7 +180,10 @@ else:
 ---
 
 ## Function - CS Falcon: Device Actions:
-Function that uses the CrowdStrike Falcon '/devices/entities/devices-actions/' endpoint to Contain or Lit Containment on a Device
+* Function that uses the CrowdStrike Falcon '/devices/entities/devices-actions/' endpoint to Contain or Lit Containment on a Device
+* Sends the `contain` or `life_containment` request to CrowdStrike.
+* Then pings every x seconds to get the `device_status`
+* Ends when the `device_status` is `normal` or `contained` or when the request times out
 
 **Contain Device:**
 
@@ -217,7 +226,8 @@ results = {
             "trace_id": "349764c9-721f-4a90-bc48-74d793c0e151",
             "powered_by": "device-api"
         },
-        "device_id": "606e693c6ac040107c07dcc7c7ed6785"
+        "device_id": "606e693c6ac040107c07dcc7c7ed6785",
+        "device_status": "contained"
     }
 }
 ```
@@ -252,12 +262,16 @@ if results.success:
   # Generate the value we want to update the cell to
   latest_action_text = u"Action: {0}. Time: {1}".format(unicode(workflow.properties.cs_action.inputs.cs_action_name), formatted_date)
 
-  # Update the Data Table cell
+  # Update the latest_action Data Table cell
   row.latest_action = latest_action_text
+  
+  # Update the device_status Data Table cell
+  row.status = results.content.device_status
   
   note_text = """<br><b>device-action request sent to CrowdStrike</b>
                  <br><b>Action:</b> {0}
-                 <br><b>Device ID:</b> {1}""".format(results.inputs.cs_action_name, results.content.device_id)
+                 <br><b>Device ID:</b> {1}
+                 <br><b>Device Status:</b> {2}""".format(results.inputs.cs_action_name, results.content.device_id, results.content.device_status)
 
   incident.addNote(helper.createRichText(note_text))
 ```
@@ -290,7 +304,6 @@ cs_falcon_devices_dt
 | Last Seen | `last_seen` | `DateTime` | Datetime the Device was Last Seen |
 | Status | `status` | `Text` | The Containment Status of the Device |
 | Latest Action | `latest_action` | `Text` | Name of the latest CrowdStrike action to run on this device |
-
 
 #### Display the Datatable in an Incident
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
