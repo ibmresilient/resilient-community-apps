@@ -172,7 +172,13 @@ class MitreAttack(object):
         # STIX type for technique is attack-pattern
         #
         tech_filter = Filter("type", "=", "attack-pattern")
-        tactic_filter = Filter("kill_chain_phases.phase_name", "=", tactic_name.lower())
+        #
+        #   Not found in MITRE document. We actually need to use lower case for the tactic
+        #   name, and also replace space with -.
+        #
+        t_name = tactic_name.replace(' ', '-')
+        t_name = t_name.lower()
+        tactic_filter = Filter("kill_chain_phases.phase_name", "=", t_name)
         #
         #   Only look for Enterprise ATT&CK at this point
         #
