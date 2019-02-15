@@ -1,0 +1,3 @@
+include README.md
+include fn_mitre_integration/util/*
+include fn_mitre_integration/LICENSE
