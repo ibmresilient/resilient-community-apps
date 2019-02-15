@@ -79,9 +79,9 @@ class FunctionComponent(ResilientComponent):
                 basicauth=(cs_helper.bauth_api_uuid, cs_helper.bauth_api_key),
                 headers=cs_helper.json_header)
 
-            device_ids = get_device_ids_response.get("resources")
+            device_ids = get_device_ids_response.get("resources", [])
 
-            if device_ids is not None and len(device_ids) > 0:
+            if len(device_ids) > 0:
                 # Then we get device_details for each device_id
                 yield StatusMessage("> Devices found. Getting device details")
 
