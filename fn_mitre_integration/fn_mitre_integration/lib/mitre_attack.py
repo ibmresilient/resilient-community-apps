@@ -123,6 +123,8 @@ class MitreAttack(object):
         :return:
         """
         ret_item = None
+        if self.attack_server is None:
+            self.connect_server()
         try:
             collection = self.collection_dict[collection_title]
             tc_source = TAXIICollectionSource(collection)
@@ -161,6 +163,32 @@ class MitreAttack(object):
         url = "{}/{}/".format(BASE_URL, t_id)
 
         return url
+
+
+    def get_items(self, filters, collection_title="Enterprise ATT&CK"):
+        """
+        Get items using filters
+        Reference:
+        https://github.com/mitre/cti/blob/master/USAGE.md
+        :param filters: list of filter
+        :return:
+        """
+        if self.attack_server is None:
+            self.connect_server()
+
+        collection = self.collection_dict[collection_title]
+        tc_source = TAXIICollectionSource(collection)
+
+        items = tc_source.query(filters)
+
+        return items
+
+    def get_all_techniques(self):
+        """
+        Get all techs
+        :return:
+        """
+        return self.get_items([Filter("type", '=', "attack-pattern")])
 
     def get_tactic_techniques(self, tactic_name):
         """
@@ -210,15 +238,29 @@ class MitreAttack(object):
 
                 refs.append(ref)
             tech = {
-                "name":                 mitre_tech["name"],
-                "description":          mitre_tech["description"],
+                "name":                 mitre_tech.get("name", ""),
+                "description":          mitre_tech.get("description", ""),
                 "external_references":  refs,
-                "x_mitre_detection":    mitre_tech["x_mitre_detection"],
+                "x_mitre_detection":    mitre_tech.get("x_mitre_detection", ""),
                 "mitre_tech_id":        mitre_tech_id
             }
             techs.append(tech)
 
         return techs
+
+    def get_external_id(self, mitre_tech):
+        """
+        Figure out the MITRE ATT&CK tech id, which is not in the
+        STIX struture
+        :param mitre_tech:
+        :return:
+        """
+        mitre_tech_id = None
+        for r in mitre_tech["external_references"]:
+            if r.get("source_name", None) == "mitre-attack":
+                mitre_tech_id = r.get("external_id", "")
+                break
+        return mitre_tech_id
 
     def get_tech_mitigation(self, tech_id):
         """
