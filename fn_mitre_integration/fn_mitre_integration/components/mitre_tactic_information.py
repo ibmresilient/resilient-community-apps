@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+#
 """Function implementation"""
 
 import logging
@@ -12,6 +15,8 @@ class FunctionComponent(ResilientComponent):
 
         This function takes a tactic name or id and returns techniques this
         tactic uses
+
+        Note the tactic id is not supported yet
 
     """
 
@@ -38,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             log.info("mitre_tactic_name: %s", mitre_tactic_name)
 
             yield StatusMessage("starting...")
-            yield StatusMessage("Query MITRE TAXII server, and it can take several minutes....")
+            yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 
             tactics = mitre_attack_utils.get_techniques(mitre_tactic_name)
 

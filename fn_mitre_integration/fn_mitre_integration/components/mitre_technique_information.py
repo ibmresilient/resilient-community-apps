@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+#
 """Function implementation"""
 
 import logging
@@ -7,7 +10,11 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_mitre_integration.lib import mitre_attack
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_technique_information"""
+    """Component that implements Resilient function 'mitre_technique_information
+
+    This function takes a MITRE ATT&CK technique id, and fetch the mitigation from the
+    MITRE STIX TAXII server
+    """
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -33,7 +40,7 @@ class FunctionComponent(ResilientComponent):
 
 
             yield StatusMessage("starting...")
-            yield StatusMessage("query MITRE TAXII server. It might take several minutes...")
+            yield StatusMessage("query MITRE STIX TAXII server. It might take several minutes...")
 
             mitre_att = mitre_attack.MitreAttack()
             mitigations = mitre_att.get_tech_mitigation(mitre_technique_id)

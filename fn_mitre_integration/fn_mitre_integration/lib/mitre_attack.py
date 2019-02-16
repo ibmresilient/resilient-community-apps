@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #
 
 #
@@ -16,6 +16,11 @@ MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
 
 
 class MitreAttackTactic(object):
+    """
+    Note that this class is necessary because the current MITRE STIX TAXII server
+    does not provide tactic information yet.
+    """
+
     mitre_tactics = []
 
     @staticmethod
@@ -26,22 +31,11 @@ class MitreAttackTactic(object):
         """
         MitreAttackTactic.mitre_tactics = [
             MitreAttackTactic("Initial Access",
-                              "TA0001",
-                              """The initial access tactic represents the vectors 
-                              adversaries use to gain an initial foothold within a network. """),
+                              "TA0001"),
             MitreAttackTactic("Execution",
-                              "TA0002",
-                              """The execution tactic represents techniques that result in execution 
-                              of adversary-controlled code on a local or remote system. This tactic 
-                              is often used in conjunction with initial access as the means of executing 
-                              code once access is obtained, and lateral movement to expand access to remote 
-                              systems on a network. """),
+                              "TA0002"),
             MitreAttackTactic("Persistence",
-                              "TA0003",
-                              """Persistence is any access, action, or configuration change to a system that 
-                              gives an adversary a persistent presence on that system. Adversaries will often 
-                              need to maintain access to systems through interruptions such as system restart
-                              to restart or alternate backdoor for them to regain access. """),
+                              "TA0003"),
             MitreAttackTactic("Privilege Escalation",
                               "TA0004"),
             MitreAttackTactic("Defense Evasion",
@@ -78,7 +72,6 @@ class MitreAttackTactic(object):
 
         return id
 
-
     def __init__(self, name=None, id=None, description=""):
         """
         :param name:
@@ -89,10 +82,16 @@ class MitreAttackTactic(object):
         self.id = id
         self.description = description
 
-
+"""
+    MitreAttack:
+    -----------
+    
+    A facet class to encapsulate all the features related to fetchig the
+    MITRE STIX TAXII server
+"""
 class MitreAttack(object):
     """
-    Facet design pattern.
+    Facet design pattern. Outside calls shall go through this class
     """
     def __init__(self):
         MitreAttackTactic.populate()
@@ -117,7 +116,7 @@ class MitreAttack(object):
                     collection_title="Enterprise ATT&CK",
                     type_name="attack-pattern"):
         """
-
+        Look up an item using item name
         :param item_name:
         :param collection_title:
         :param type_name:
@@ -142,13 +141,18 @@ class MitreAttack(object):
     @staticmethod
     def get_all_tactics():
         """
-
+        Get all the tactics
         :return:
         """
         return MitreAttackTactic.mitre_tactics
 
     @staticmethod
     def get_tactic_url(tactic_name):
+        """
+        Get the url link for a tactic
+        :param tactic_name:
+        :return:
+        """
         t_id = MitreAttackTactic.get_id(tactic_name)
         if t_id is None:
             return None
@@ -160,10 +164,12 @@ class MitreAttack(object):
 
     def get_tactic_techniques(self, tactic_name):
         """
+        Get all the techniques for a give tactic
+        Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
 
-        :param tactic_name:
-        :return:
+        :param tactic_name: tactic name
+        :return:            techs
         """
 
         if self.attack_server is None:
@@ -189,7 +195,7 @@ class MitreAttack(object):
                                       tactic_filter])
 
         #
-        # The AttackPattern is not serializable. Pick the fields we want
+        # The returned AttackPattern is not serializable. Pick the fields we want
         #
         techs = []
         for mitre_tech in mitre_techs:
@@ -216,6 +222,8 @@ class MitreAttack(object):
 
     def get_tech_mitigation(self, tech_id):
         """
+        Get mitigation for a given tech
+        Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
         :param tech_id: STIX id for mitre tech
         :return:

@@ -12,7 +12,9 @@ setup(
     description="Resilient Circuits Components for 'fn_mitre_integration'",
     long_description="Resilient Circuits Components for 'fn_mitre_integration'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'stix2',
+        'taxii2client'
     ],
     packages=find_packages(),
     include_package_data=True,
