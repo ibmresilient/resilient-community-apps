@@ -11,7 +11,7 @@
     - [Display a Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 3 functions that help you integrate with CrowdStrike Falcon APIs**
+**This package contains 3 Functions, 6 Workflows, 6 Rules and 2 Data Tables that help you integrate with CrowdStrike Falcon APIs**
 
  ![screenshot](./screenshots/0.png)
 
