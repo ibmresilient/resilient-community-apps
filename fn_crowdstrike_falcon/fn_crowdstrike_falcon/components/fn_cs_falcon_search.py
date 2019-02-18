@@ -100,7 +100,7 @@ class FunctionComponent(ResilientComponent):
                 device_details = get_device_details_response.get("resources")
 
                 if device_details is not None:
-                    yield StatusMessage("> Device details got. Finishing...")
+                    yield StatusMessage("> Device details received. Finishing...")
 
                     # For each device, convert their string timestamps to utc_time in ms
                     for device in device_details:
