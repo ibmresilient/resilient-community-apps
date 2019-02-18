@@ -5,6 +5,10 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 #
 
+#
+#   Debugging tool to lookup an item from MITRE ATT&CK STIX TAXII server
+#
+
 import sys
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
 import json

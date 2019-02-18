@@ -6,9 +6,9 @@
 #
 
 #
-#
-#
-#
+#   Debugging tool to list out all the items
+#   Example:
+#   python list
 
 from stix2 import TAXIICollectionSource, Filter
 from taxii2client import Server

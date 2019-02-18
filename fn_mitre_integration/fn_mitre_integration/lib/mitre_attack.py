@@ -86,9 +86,11 @@ class MitreAttackTactic(object):
     MitreAttack:
     -----------
     
-    A facet class to encapsulate all the features related to fetchig the
+    A facet class to encapsulate all the features related to fetching the
     MITRE STIX TAXII server
 """
+
+
 class MitreAttack(object):
     """
     Facet design pattern. Outside calls shall go through this class
@@ -163,7 +165,6 @@ class MitreAttack(object):
         url = "{}/{}/".format(BASE_URL, t_id)
 
         return url
-
 
     def get_items(self, filters, collection_title="Enterprise ATT&CK"):
         """
@@ -284,7 +285,6 @@ class MitreAttack(object):
             Filter("external_references.external_id", '=', tech_id)
         ]
         tech = tc_source.query(filt)
-
 
         relations = tc_source.relationships(tech[0].id, "mitigates", target_only=True)
 

@@ -1,6 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+"""
+    Debugging tool:
+
+    Example:
+        get_tech_mitigation.py AppleScript
+"""
 import sys
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
 import json

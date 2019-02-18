@@ -1,13 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+    Debugging tool
+        get_tech_mitigation AppleScript
 
+"""
 import sys
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
 from fn_mitre_integration.lib.mitre_attack_utils import get_techniques
 import json
 
 if len(sys.argv) < 2:
-    print("Usage get_tech_tactic.py tactic_name")
+    print("Usage get_tech_mitigation.py <tech name>")
     sys.exit()
 
 tactic_name = sys.argv[1]

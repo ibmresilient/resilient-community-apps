@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+"""
+    Debugging tool:
+    example:
+    get_tactic_url.py "Initial Access"
+"""
 import sys
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
 import json

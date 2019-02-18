@@ -6,15 +6,15 @@ from setuptools import setup, find_packages
 setup(
     name='fn_mitre_integration',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
+    license='MIT License',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_mitre_integration'",
-    long_description="Resilient Circuits Components for 'fn_mitre_integration'",
+    long_description="fn_mitre_integration support retrieving information related to MITRE ATT&CK tactics and technique from MITRE STIX TAXII server.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'stix2',
-        'taxii2client'
+        'taxii2-client'
     ],
     packages=find_packages(),
     include_package_data=True,
