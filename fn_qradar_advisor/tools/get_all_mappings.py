@@ -7,6 +7,16 @@ from ToolCommand import ToolCommand
 import logging
 logging.basicConfig(filename="testing.log", level=logging.DEBUG)
 
+"""
+    Debugging tool. Used to extract all the mappings of QRadar rules to
+    MITRE ATT&CK tactic.
+    
+    Usage:
+        get_all_mappings.py -i <CAFM app id>
+    or:
+        get_all_mappings.py -i <CAFM app id> -r <rule name>
+"""
+
 HELP_STR = """
 	Usage:\n
 	\t get_all_mappings.py -i app_id -r <optional rule name>
