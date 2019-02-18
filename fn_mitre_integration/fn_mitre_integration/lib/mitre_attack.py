@@ -13,7 +13,7 @@ from stix2 import TAXIICollectionSource, Filter
 from taxii2client import Server
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
-
+TACTIC_BASE_URL = "https://attack.mitre.org/tactics"
 
 class MitreAttackTactic(object):
     """
@@ -161,8 +161,7 @@ class MitreAttack(object):
         if t_id is None:
             return None
 
-        BASE_URL = "https://attack.mitre.org/tactics"
-        url = "{}/{}/".format(BASE_URL, t_id)
+        url = "{}/{}/".format(TACTIC_BASE_URL, t_id)
 
         return url
 
