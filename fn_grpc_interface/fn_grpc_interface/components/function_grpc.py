@@ -12,6 +12,8 @@ import grpc
 import re
 import inspect
 from google.protobuf.json_format import MessageToDict
+
+
 class FunctionComponent(ResilientComponent):
     """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
 
@@ -20,12 +22,10 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_grpc", {})
 
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_grpc", {})
-
 
     def _get_interface_file_names(self, base_dir=None, files_dir=None):
         """
@@ -36,7 +36,6 @@ class FunctionComponent(ResilientComponent):
         """
         __dir_path = os.path.join(base_dir, files_dir)
         return os.listdir(__dir_path)
-
 
     def _get_grpc_interface_module(self, interface_files=[], base_dir=None, files_dir=None):
         """
@@ -96,7 +95,6 @@ class FunctionComponent(ResilientComponent):
             logging.debug("No Interface file found, please specify the interface file")
             return None
 
-
     def _get_grpc_class(self, grpc_module_list, class_name):
         """
         component that return the given class object from the list of given module objects,
@@ -114,8 +112,7 @@ class FunctionComponent(ResilientComponent):
         else:
             return ()
 
-
-    def _get_method_from_stub_object(self, stub_object, comm_type, stub_name =''):
+    def _get_method_from_stub_object(self, stub_object, comm_type, stub_name=''):
         """
         component that returns stub method from the given stub class objects, evaluates based on the given stub name and
         communication type param.
@@ -134,7 +131,7 @@ class FunctionComponent(ResilientComponent):
                             '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '__dir__']:
 
                 if str(obj).lower().find(comm_type) != -1 and name.lower().strip() == stub_name.lower().strip():
-                    logging.debug("found Stub name : {} and object : {}".format(name,obj))
+                    logging.debug("found Stub name : {} and object : {}".format(name, obj))
                     _found_stub_name = name
                     _found_stub_object = obj
                 else:
@@ -204,7 +201,7 @@ class FunctionComponent(ResilientComponent):
                 _grpc_certificate_path = config_file_data[2]
                 _grpc_interface_file_dir = self.options.get('interface_dir')
 
-                log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}"\
+                log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}" \
                          .format(_grpc_package_name, _grpc_rpc_stub_method_name, _grpc_request_method_name))
             except Exception as e:
                 yield StatusMessage("failed to parse the function parameters.{}".format(e))
@@ -233,15 +230,16 @@ class FunctionComponent(ResilientComponent):
             # Checking Communication type
             if _grpc_communication_type.lower().strip() == "unary":
                 try:
-                    #Connecting to gRPC Server with given Authentication type
-                    stub_class_obj,grpc_channel_obj = self._gRPC_Connect_Server(_grpc_secure_connection, grpc_channel, \
-                                                               grpc_stub_tuple[1],_grpc_certificate_path)
+                    # Connecting to gRPC Server with given Authentication type
+                    stub_class_obj, grpc_channel_obj = self._gRPC_Connect_Server(_grpc_secure_connection, grpc_channel, \
+                                                                                 grpc_stub_tuple[1],
+                                                                                 _grpc_certificate_path)
                     stub_method = self._get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
                                                                     stub_name=_grpc_rpc_stub_method_name)
                     if grpc_function_json_data:
                         if stub_method[1] is not None:
                             if sys.version[0] == '2':
-                                #convert unicode strings to utf-8 for python 2.7
+                                # convert unicode strings to utf-8 for python 2.7
                                 import ast
                                 grpc_function_json_data_tmp = ast.literal_eval(json.dumps(grpc_function_json_data))
                             else:
@@ -265,7 +263,8 @@ class FunctionComponent(ResilientComponent):
                 else:
                     log.info("Response received from the server : {}".format(response_received_tmp))
             else:
-                raise NotImplementedError("Not Implemented these {} communication types ".format(_grpc_communication_type))
+                raise NotImplementedError(
+                    "Not Implemented these {} communication types ".format(_grpc_communication_type))
 
             # Attempting to convert received data into JSON object
             try:
