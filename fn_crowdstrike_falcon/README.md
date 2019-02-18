@@ -277,6 +277,99 @@ if results.success:
 ```
 
 ---
+## Function - CS Falcon: Get Devices IOC Ran On
+Queries your CrowdStrike Falcon Hosts with a String Representation of an IOC and returns a list of Device IDs that the IOC Ran On
+
+ ![screenshot](./screenshots/5.png)
+
+### Inputs:
+| Name | Type | Required | Example | Info |
+| ------------- | :--: | :-------:| ------- | ---- |
+| `cs_ioc_type` | `String` | Yes | `"DNS Name"`, `"Malware SHA-256 Hash"`, `"Malware SHA-1 Hash"`, or `"Malware MD5 Hash"` | Normally set using the `artifact.type` property |
+| `cs_ioc_value` | `String` | Yes | `"a-malicious-domain.com"`, `"728ee069b76107e9e2930dbffd50dfc52f440823e5f252935eb8607a47b11efc"` | Normally set using the `artifact.value` property |
+| `cs_return_limit` | `Number` | No | `10` | Sets the max number of devices to return from the request |
+
+
+### Output:
+```python
+results = {
+    'version': '1.0',
+    'success': True,
+    'reason': None,
+
+    'inputs': {
+        'cs_ioc_type': 'DNS Name',
+        'cs_ioc_value': 'google.com',
+        'cs_return_limit': None
+    },
+
+    'metrics': {
+        'package': 'fn-crowdstrike-falcon',
+        'timestamp': '2019-02-18 13:32:52',
+        'package_version': '1.0.0',
+        'host': 'localhost',
+        'version': '1.0',
+        'execution_time_ms': 930
+    },
+
+    'content': {
+        'meta': {
+            'query_time': 0.046912103,
+            'entity': '/devices/entities/devices/v1{?ids*}',
+            'pagination': {
+                'limit': 100,
+                'offset': ''
+            },
+            'trace_id': '676d1be7-4d96-4ba0-ae6c-dd8aaae30c54'
+        },
+        'device_ids': [
+            '889e958fb8354a0e4f9f5abcb3016bfa',
+            '9fc8f81b962541b26d1e0feaf2c1523e'
+        ]
+    }
+}
+```
+
+### Pre-Process Script:
+* This example uses the Artifact Value and Type properties when defining the inputs
+```python
+# Set the ioc type
+inputs.cs_ioc_type = artifact.type
+
+# Set the ioc value
+inputs.cs_ioc_value = artifact.value
+
+# Set the max number of devices to return
+# inputs.cs_return_limit = 10
+```
+### Post-Process Script:
+* This post-process loops each device_id found and adds its details to the `cs_falcon_devices_ioc_ran_on_results_dt` Data Table
+* If no devices were found for the IOC or an error occurred, a Note is added to the Incident with the reason why
+```python
+# Import Date
+from java.util import Date
+
+# If the function found some devices
+if results.success:
+  
+  # Get the current time
+  dt_now = Date()
+  
+  # For each device, add a row to the cs_falcon_devices_dt
+  for device_id in results.content.device_ids:
+    new_row = incident.addRow("cs_falcon_devices_ioc_ran_on_results_dt")
+    new_row.timestamp = dt_now
+    new_row.ioc_type = results.inputs.cs_ioc_type
+    new_row.ioc_value = results.inputs.cs_ioc_value
+    new_row.device_id = device_id
+
+else:
+  # Else, the function did not get any devices. Add a note with the reason why
+  incident.addNote(results.reason)
+```
+
+---
+
 ## Rules
 | Rule Name | Object Type | Conditions | Workflow Triggered |
 | --------- | :---------: | ---------- | ------------------ |
@@ -284,11 +377,12 @@ if results.success:
 | Example: CS Falcon: Contain Device | `Data Table` | `cs_falcon_devices_dt.device_id` must have a value | `Example: CS Falcon: Contain Device` |
 | Example: CS Falcon: Lift Containment | `Data Table` | `cs_falcon_devices_dt.device_id` must have a value | `Example: CS Falcon: Lift Containment` |
 | Example: CS Falcon: Get Latest Device Details | `Data Table` | `cs_falcon_devices_dt.device_id` must have a value | `Example: CS Falcon: Get Latest Device Details` |
+| Example: CS Falcon: Get Devices IOC Ran On | `Artifact` | `Type` must be equal to `"DNS Name"`, `"Malware SHA-256 Hash"`, `"Malware SHA-1 Hash"`, or `"Malware MD5 Hash"` | `Example: CS Falcon: Get Devices IOC Ran On` |
 
 ---
-## Data table
+## Data Tables
 ### CS Falcon: Devices
- ![screenshot](./screenshots/dt_0.png)
+ ![screenshot](./screenshots/dt_0_i.png)
 
 #### API Name:
 cs_falcon_devices_dt
@@ -305,7 +399,21 @@ cs_falcon_devices_dt
 | Status | `status` | `Text` | The Containment Status of the Device |
 | Latest Action | `latest_action` | `Text` | Name of the latest CrowdStrike action to run on this device |
 
-#### Display the Datatable in an Incident
+### CS Falcon: Devices IOC Ran On Results
+ ![screenshot](./screenshots/dt_0_ii.png)
+
+#### API Name:
+cs_falcon_devices_ioc_ran_on_results_dt
+
+#### Columns:
+| Column Name | API Access Name | Type | Info |
+| ----------- | --------------- | ---- | ---- |
+| Timestamp | `timestamp` | `DateTime` | Timestamp when this entry was added |
+| IOC Type | `ioc_type` | `Text` | The IOC Type |
+| IOC Value | `ioc_value` | `Text` | String Representation of the IOC |
+| Device ID | `device_id` | `Text` | The unique CrowdStrike ID of the Device|
+
+### Display the Datatable in an Incident
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**

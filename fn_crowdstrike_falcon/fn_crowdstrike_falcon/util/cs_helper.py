@@ -210,7 +210,7 @@ class CrowdStrikeHelper(object):
                 response_errors = response_content.get("errors")
                 response_error_code = response_errors[0].get("code")
 
-                if response_errors and len(response_errors) > 0 and (response_error_code == 403 or response_error_code == 409):
+                if response_errors and len(response_errors) > 0 and (response_error_code == 403 or response_error_code == 409 or response_error_code == 404):
                     return_value = {
                         "error": True,
                         "err_code": response_errors[0].get("code"),
