@@ -56,7 +56,7 @@ Queries your CrowdStrike Falcon Hosts for a list of Devices using a Filter and/o
 ### Inputs:
 | Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ---- |
-| `cs_filter_string` | `String` | No | `"hostname:'{0}*'+platform_name:'{1}'".format(artifact.value, "Linux")` | See: [https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#devicesearch](https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#devicesearch) for filter syntax |
+| `cs_filter_string` | `String` | No | `"hostname:'{0}*'+platform_name:'{1}'" .format(artifact.value, "Linux")` | See: [https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#devicesearch](https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#devicesearch) for filter syntax |
 | `cs_query` | `String` | No | `"JohnsMacBook"` | This query searches the meta data of devices after applying the above filter. Here it would search all fields for "JohnsMacBook" |
 
 
