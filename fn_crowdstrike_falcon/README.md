@@ -1,26 +1,24 @@
 # CrowdStrike Falcon Functions for IBM Resilient
 
 ## Table of Contents
-  - [App Config Settings](#appconfig-settings)
   - [Function - CS Falcon: Search](#function---cs-falcon-search)
   - [Function - CS Falcon: Device Actions](#function---cs-falcon-device-actions)
+  - [Function - CS Falcon: Get Devices IOC Ran On](#function---cs-falcon-get-devices-ioc-ran-on)
   - [Rules](#rules)
-  - [CS Falcon: Devices Data Table](#cs-falcon-devices)
-    - [Display the Datatable in an Incident](#display-the-datatable-in-an-incident)
+  - [Data Tables](#data-tables)
+    - [CS Falcon: Devices](#cs-falcon-devices)
+    - [CS Falcon: Devices IOC Ran On Results](#cs-falcon-devices-ioc-ran-on-results)
+    - [Display a Data Table in an Incident](#display-the-datatable-in-an-incident)
 ---
 
-**This package contains 2 functions that help you integrate with CrowdStrike Falcon APIs**
+**This package contains 3 functions that help you integrate with CrowdStrike Falcon APIs**
 
  ![screenshot](./screenshots/0.png)
 
-CS Falcon: Search gives you the ability to search your CrowdStrike Falcon platform for a list of Devices, then using the CS Falcon: Device Actions function we can 'contain' or 'lift_containment' on that device
+* CS Falcon: Search gives you the ability to search your CrowdStrike Falcon platform for a list of Devices
+* CS Falcon: Device Actions allows you to 'contain' or 'lift_containment' on a CrowdStrike device
+* CS Falcon: Get Devices IOC Ran On returns a list of CrowdStrike devices that the given IOC Ran On
 
----
-## Prerequisites + Dependencies
-* Your Integration Server must be running `Python v2.15.x or v3.6.x` and `resilient-circuits >= v32.0.0`
-* This Integration depends on our **Data Table Helper Functions**: `fn_datatable_utils >= v1.0.0`
-  * You must download + install `fn_datatable_utils` prior to installing this Integration
-  * `fn_datatable_utils` is available on [GitHub](https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_datatable_utils) or the [App Exchange](https://exchange.xforce.ibmcloud.com/hub/extension/c3b2e7a1a38f3e249c540d3b49fad459)
 ---
 ## app.config settings:
 * At time of development, CrowdStrike Falcon are currently in the process of migrating their APIs. Therefore we are required to provide two different sets of credentials: **API Client** and **API Key**
@@ -413,7 +411,7 @@ cs_falcon_devices_ioc_ran_on_results_dt
 | IOC Value | `ioc_value` | `Text` | String Representation of the IOC |
 | Device ID | `device_id` | `Text` | The unique CrowdStrike ID of the Device|
 
-### Display the Datatable in an Incident
+### Display a Data Table in an Incident
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
