@@ -145,7 +145,7 @@ incident.addNote(note)
 | Example: URL Void Rescan | `Artifact` | `Example: URL Void Rescan` | `Type` is equal to `URL`|
 
 
-To install in "development mode":
+To debug or alter the code install in "development mode":
 
     pip install -e ./fn_url_void/
 
@@ -159,7 +159,7 @@ To package for distribution:
 
     python ./fn_url_void/setup.py sdist
 
-The resulting .tar.gz file can be installed usin:
+The resulting .tar.gz file can be installed for production using:
 
     pip install <filename>.tar.gz
 
