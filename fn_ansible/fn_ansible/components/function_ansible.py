@@ -11,7 +11,6 @@ import json
 import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_ansible.lib.ansible_api import run_playbook
-import fn_ansible.util.selftest as selftest
 
 
 class FunctionComponent(ResilientComponent):
@@ -21,7 +20,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_ansible", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):

@@ -76,7 +76,11 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
     playbook = PlaybookExecutor(playbooks=playbook_path,inventory=inventory,
                 variable_manager=variable_manager,
                 loader=loader,options=options,passwords=passwords)
-    playbook.run()
+    
+    try:
+        playbook.run()
+    except Exception:
+        raise ValueError("That didn't work, please check 3 important things: \n\t 1. Configuration in app.config file \n\t 2. Playbook variables provided in correct format without extra space \n\t 3. Playbook syntax.")
     stats = playbook._tqm._stats
     hosts = sorted(stats.processed.keys())
     for h in hosts:
