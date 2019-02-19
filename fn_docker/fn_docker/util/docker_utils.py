@@ -1,13 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 import logging
-import docker
-
-
-LOG = logging.getLogger(__name__)
 import os
+import docker
 from resilient_circuits.template_functions import render
-
+import resilient_lib
 log = logging.getLogger(__name__)
 
 
@@ -16,7 +13,6 @@ class DockerUtils:
     def __init__(self):
         self.client = None
         self.api_client = None
-
 
     def setup_docker_connection(self, options):
         """
@@ -30,7 +26,8 @@ class DockerUtils:
         :return: void
         """
 
-        if options.get("docker_use_remote_conn", False):
+        if resilient_lib.str_to_bool(options.get("docker_use_remote_conn", "False")):
+            print(resilient_lib.str_to_bool(options.get("docker_use_remote_conn", "False")))
             self.initiate_remote_docker_connection(options.get("docker_remote_url", None))
         else:
             self.initiate_local_docker_connection()
@@ -47,11 +44,10 @@ class DockerUtils:
         try:
             self.client = docker.DockerClient(base_url=docker_server_url)
             self.api_client = docker.APIClient(base_url=docker_server_url)
-
-            self.api_client.ping()
+            log.debug("The DockerClient version is {}".format(self.client.version()['Version']))
             self.client.ping()
         except ConnectionError:
-            LOG.debug('Error connecting to docker')
+            log.debug('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
 
     def initiate_local_docker_connection(self):
@@ -67,7 +63,7 @@ class DockerUtils:
             self.client.ping()
             self.api_client.ping()
         except ConnectionError:
-            LOG.debug('Error connecting to docker')
+            log.debug('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
 
     def get_image(self, image_to_get):
@@ -83,13 +79,13 @@ class DockerUtils:
         :return: void
         """
         try:
-            LOG.info("Image that will be pulled {}".format(image_to_get))
+            log.info("Image that will be pulled {}".format(image_to_get))
             self.client.images.get(image_to_get)
         except docker.errors.ImageNotFound:
-            LOG.info('Docker image was not found, please ensure the image you want to use is on your Docker host')
+            log.info('Docker image was not found, please ensure the image you want to use is on your Docker host')
 
         except docker.errors.NullResource:
-            LOG.info('No image was passed to this function, please check your app.config')
+            log.info('No image was passed to this function, please check your app.config')
 
     def get_client(self):
         return self.client
@@ -143,7 +139,6 @@ class DockerUtils:
         :param docker_extra_kwargs:
         :return:
         """
-        image_kwargs = {"options": all_options.get('fn_docker_{}'.format(image_to_use))}
         command = helper.get_image_specific_config_option(
             options=all_options.get('fn_docker_{}'.format(image_to_use)),
             option_name="cmd")
@@ -165,6 +160,7 @@ class DockerUtils:
         docker_extra_kwargs = self.parse_extra_kwargs(options=all_options.get('fn_docker_{}'.format(image_to_use)))
 
         container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else dict()
+
 
         if docker_extra_kwargs.get('volumes', False):
             log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
