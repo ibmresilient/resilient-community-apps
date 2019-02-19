@@ -1,0 +1,5 @@
+include README.md
+include rc_data_feed/util/*
+include rc_data_feed/lib/*
+include rc_data_feed/LICENSE
+#include rc_data_feed/doc/*

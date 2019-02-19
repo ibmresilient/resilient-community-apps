@@ -14,7 +14,8 @@ setup(
     install_requires=[
         'resilient_circuits>=31.0.0',
         'resilient>=31.0.0',
-        'pyodbc'
+        'pyodbc',
+        'six'
     ],
     packages=find_packages(),
     include_package_data=True,
