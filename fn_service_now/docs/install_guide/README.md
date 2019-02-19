@@ -1,11 +1,11 @@
-# IBM Resilient Integration for ServiceNow - Installation Guide *(Pre-Certification Process)*
+# Installation Guide for ServiceNow Integration *(Pre-Certification Process)*
 **Please note that this guide has been created prior to the ServiceNow certification. Once we have completed that process, this guide will be refactored accordingly**
 
 ---
 ## Table of Contents
   - [Prerequisites](#prerequisites)
   - [Step 1: *Create a User on the Resilient Appliance*](#step-1-create-a-user-on-the-resilient-appliance)
-  - [Step 2: *Get IBM Resilient ServiceNow App from GitLab*](#step-2-get-ibm-resilient-servicenow-app-from-gitlab)
+  - [Step 2: *Install IBM Resilient ServiceNow Application from GitHub*](#step-2-install-ibm-resilient-servicenow-application-from-github)
   - [Step 3: *Create a User in ServiceNow and assign it the correct Role*](#step-3-create-a-user-in-servicenow-and-assign-it-the-correct-role)
   - [Step 4: *Enter IBM Resilient Configurations*](#step-4-enter-ibm-resilient-configurations)
   - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fnservicenow-integration)
@@ -13,12 +13,13 @@
   - [Step 6b: *Configure Mid-Server (if needed)*](#step-6b-configure-mid-server-if-needed)
   - [Step 7: *Test*](#step-7-test)
   - [Step 8: *How to Import Updates in ServiceNow*](#step-8-how-to-import-updates-in-servicenow)
-  - [Where Next?](#where-next)
 ---
 
 ## Prerequisites 
 * Resilient Appliance updated to at least `v31.0.0`
 * An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
+* ServiceNow instance running `Kingston` or later
+* ServiceNow user with an `admin` role
 ---
 
 ## Step 1: *Create a User on the Resilient Appliance*
@@ -27,14 +28,15 @@
   ```
   $ sudo resutil newuser -org "<org-name>" -email snow_integration@example.com -first "SNOW" -last "Integration"
   ```
-* This creates a user with the following attributes:
+* You can use any email address you desire
+* This creates a new user in that Organization with the following attributes:
   * **First Name:** SNOW
   * **Last Name:** Integration
   * **Email:** snow_integration@example.com
 --- 
 
-## Step 2: *Get IBM Resilient ServiceNow App from GitHub*
-***NOTE: this is temporary and will be replaced by an App on the ServiceNow App Store shortly***
+## Step 2: *Install IBM Resilient ServiceNow Application from GitHub*
+> **NOTE:** ***this is temporary and will be replaced by an App on the ServiceNow App Store once the ServiceNow certification process is complete***
 * Login to your ServiceNow instance with a user that has an **admin role**
 * In the navigation panel on the left, go to **System Applications > Studio**
  ![screenshot](./screenshots/3.png)
@@ -43,7 +45,8 @@
 * Copy this url, paste it into the **URL input** and click **Import**
   * https://github.com/ibmresilient/resilient-servicenow
  ![screenshot](./screenshots/5.png)
-* Wait for it to import successfully. Then click **Select Application**
+* Wait for it to import successfully
+* Then click **Select Application**
  ![screenshot](./screenshots/6.png)
 * Click **IBM Resilient** to initialize and open the app
  ![screenshot](./screenshots/7.png)
@@ -63,7 +66,7 @@
   * **Last Name:** Resilient
   * **Password:** #########
 * Enter an **email address**
-  >**NOTE:** this email address **MUST** be the same email address of your Resilient Integrations Server user. In other words, open your **app.config** file and use the email specified under the **[resilient]** heading at the top of the file
+  >**NOTE:** this email address **MUST** be the same email address of your Resilient Integrations Server user. In other words, SSH into your Integrations Server, open your **app.config** file and use the email address specified under the **[resilient]** heading at the top of the file
 * Set the **Timezone** to the same timezone of your Resilient Integrations Server
  ![screenshot](./screenshots/10.png)
 * Click **Submit**
@@ -79,7 +82,7 @@
 * In ServiceNow, look for the **IBM Resilient** menu in the navigation panel
  ![screenshot](./screenshots/8.png)
 * Click **Properties**, a new tab will open
- ![screenshot](./screenshots/13.png)
+  ![screenshot](./screenshots/13.png)
 * Enter your configurations:
   * **Resilient Host:** this is the Hostname/IP Address of your Resilient Appliance, **relative to your ServiceNow Instance**, but **if you use a Mid-Server, it is relative to the Mid-Server** *(See later step on setting up your Mid-Server)*
   * **Resilient Organization:** this is the Org Name you used in **Step 1**
@@ -87,6 +90,8 @@
   * **Password:** this is the Password you used in **Step 1**
   * **ServiceNow Username:** this is the **User ID** you entered in **Step 3**
   * **Using MidServer:** tick this box if **you will be using a Mid-Server** with this Integration *(See Step 6 for more)*
+  * **Logging Verbosity:** set this to **error**. Can be changed to **debug** if needed later
+  * **Logging Destination:** set this to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later
 * Click **Save**
 * You should see a **Properties updated** banner at the top of the page if the save was successful
 * **Close** the tab
@@ -113,9 +118,9 @@
   ```
   * **sn_host:** this is the host you use to access your ServiceNow Instance
     ![screenshot](./screenshots/14.png)
-  * **sn_api_uri:** generally left as its default setting. This is the URL for the custom APIs that gets installed with the app. If you decide to implement your own endpoints, you would change this URL
-  * **sn_table_name:** this is the Name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced
-    >**NOTE:** currently this version (v1) only supports the **incident table in ServiceNow**. There are plans to release another update that will enable this integration to work with any table in ServiceNow, in the near future
+  * **sn_api_uri:** generally left as its default setting. This is the URL for the custom APIs that get installed with the app. If you decide to implement your own endpoints, you would change this URL
+  * **sn_table_name:** this is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced
+    >**NOTE:** currently this version (v1.x.x) only supports the **incident table in ServiceNow**. There are plans to release another update that will enable this integration to work with any table in ServiceNow.
   * **sn_username:** the **User ID** from **Step 3**
   * **sn_password:** the **Password** from **Step 3**
 * **Save** and **Close** the app.config file
@@ -129,15 +134,24 @@
   ```
   $ resilient-circuits run
   ```
-<!-- TODO -->
-* Import Data Table and Summary Section Fields
+* **Login** to the Resilient Appliance and select the Organization used in Step 1
+* Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **Summary Section**
+* Under **Fields**, search for **snow**
+* Drag the two **SNOW Fields** into the **Summary Section** as per the screenshot below
+  ![screenshot](./screenshots/31.png)
+* Click **Save**
+* In the same view, click **Add Tab**
+* In the popup modal, enter **ServiceNow** and click **Add**
+  ![screenshot](./screenshots/32.png)
+* Click the **ServiceNow** tab, drag in the **ServiceNow Records** Data Table and click **Save**
+  ![screenshot](./screenshots/33.png)
 --- 
 
 ## Step 6a: *Install Mid-Server (if needed)*
 >**NOTE:** If you already have the correct Mid-Server installed, you can **skip to Step 6b** to configure your server
 * A ServiceNow Mid-Server is needed if your Resilient Instance is **not directly accessible from your ServiceNow instance**
 * The ServiceNow Mid-Server must be setup on the same network as your Resilient Instance
-* The Resilient Host Address you input in the previous step must be relevant to your Mid Server
+* The Resilient Host Address you input in the previous **Step 4** must be relevant to your Mid Server
 * To install, type mid-server into your ServiceNow search box and click Installation Instructions
   ![screenshot](./screenshots/16.png)
 --- 
@@ -159,7 +173,7 @@
 * Click the green **Test Connection** button and wait until you see a page banner
 * The **page banner** will inform you if your Test was successful or not and print any errors you may have
   ![screenshot](./screenshots/29.png)
-* If your test was successful, we can now do a **real test:**
+* If your test was successful, we can now do a **real test!**
 * In ServiceNow, go to the **Incident Table**
   ![screenshot](./screenshots/20.png)
 * Create a **New Incident** and **Save** it
@@ -199,8 +213,3 @@
   ![screenshot](./screenshots/27.png)
 * Go back to ServiceNow Homepage and **refresh the browser**
 * We recommend using the **Test Connection** functionality after each update
-
-# Where Next?
-* **Import the Datatable** and **Customize the Workflows** in Resilient to suit your needs 
-* Get help from the **Function documentation provided with the package**
-* Follow the **ServiceNow Customization Guide** to configure the ServiceNow part of this Integration to suit your needs
