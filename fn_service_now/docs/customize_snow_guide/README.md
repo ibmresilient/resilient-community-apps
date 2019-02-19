@@ -23,7 +23,9 @@
 ## Prerequisites 
 * Resilient Appliance updated to at least `v31.0.0`
 * An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
-* All steps in the **Installation Guide** complete
+* All steps in the **[Installation Guide](./docs/install_guide)** complete
+* ServiceNow instance running `Kingston` or later
+* ServiceNow user with an `admin` role
 * A basic understanding of **IBM Resilient Workflows**
 * A basic understanding of **ServiceNow Workflows**
 ---
@@ -33,9 +35,9 @@
 
 ---
 ## Overview
-When this Integration is installed, on your ServiceNow instance, you will now have access to the **ResilientHelper** class in any Workflow, UI Action or Script Include.
+When this Integration is installed, on your ServiceNow instance, you will have access to the **ResilientHelper** class in any ServiceNow `Workflow`, `UI Action` or `Script Include`.
 
-From the architectural diagram above, within ServiceNow, any IBM Resilient action must start with a ServiceNow workflow and ServiceNow workflows are invoked from UI Actions or Business Rules
+From the architectural diagram above, within ServiceNow, any IBM Resilient action must start with a ServiceNow `Workflow`. ServiceNow `Workflows` are invoked from `UI Actions` or `Business Rules`.
 
 This app comes with **4 pre-defined ServiceNow Workflows:**
 1. RES_WF_CreateIncident
@@ -44,19 +46,21 @@ This app comes with **4 pre-defined ServiceNow Workflows:**
 4. RES_WF_AddWorkNote
 5. RES_WF_UpdateState
 
-The **ResilientHelper API** will help you to create your own ServiceNow workflows that call IBM Resilient Actions
+The **ResilientHelper API** will help you to create your own ServiceNow `Workflows` that use the **ResilientHelper** class to call IBM Resilient Actions
 
 ---
 
 ## Pre-Defined ServiceNow Workflows
-* Below is the code for each **Run Script** of the pre-defined workflows
-* Use this code for guidance along with the **ResilientHelper API** (below) when creating your own Custom Workflows
+* Each of the installed 'out-of-the-box' `Workflows` contain a `Run Script`
+* It is in that `Run Script` where we use the **ResilientHelper** class to invoke IBM Resilient Actions
+* Following this is the code for each **Run Script** of the pre-defined workflows
+* Use this code for guidance along with the **[ResilientHelper API](#resilienthelper-api)** (below) when creating your own Custom Workflows
 
 ### RES_WF_CreateIncident
 ```javascript
 (function RES_WF_CreateIncident(){
     
-    var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText = null;
+    var resHelper, record, snRecordId, caseName, options, resSeverityMap, res, noteText, workNotes, workNotesSplit = null;
     
     try{
         //Instantiate new ResilientHelper
@@ -65,7 +69,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         //Get the required parameters to create an Incident
         record = current;
         snRecordId = record.getValue("number");
-        caseName = "SN-[" + snRecordId + "]: " + record.getValue("short_description");
+        caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
 
         //Map ServiceNow severity in digits to Resilient strings
         //TIP: use the 'finfo' command on Resilient Integrations Server
@@ -78,8 +82,9 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
 
         //Initialize options
         options = {
-            initSnNote: "Sent to IBM Resilient",
+            initSnNote: "Incident created in IBM Resilient",
             optionalFields: {
+                "description": record.getValue("description"),
                 "severity_code": resSeverityMap[record.getValue("severity").toString()]
             }
         };
@@ -88,14 +93,29 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         res = resHelper.create(record, snRecordId, caseName, options);
 
         if (res){
-            // Create the RES Note
+            // Create the initial RES Note
             noteText = "<br>This " + res.res_reference_type + " has been sent from <b>ServiceNow</b>";
             noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
             noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
             resHelper.addNote(res.res_reference_id, noteText, "html");
+            
+            // Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
+            workNotes = current.work_notes.getJournalEntry(-1);
+
+            //Split the Work Notes on '\n\n'
+            workNotesSplit = workNotes.split("\n\n");
+
+            //Loop each Work Note and add a Resilient Note
+            for (var i = 0; i < workNotesSplit.length; i++){
+                noteText = workNotesSplit[i];
+                if(noteText && noteText.length > 0){
+                    resHelper.addNote(res.res_reference_id, workNotesSplit[i]);
+                }
+            }
         }
     }
     catch (errMsg){
+        current.work_notes = "Failed to create an Incident in IBM Resilient.\nReason: " + errMsg;
         gs.error(errMsg);
     }
 })();
@@ -104,7 +124,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
 ```javascript
 (function RES_WF_CreateTask(){
     
-    var resHelper, record, snRecordId, caseName, incidentId, options, res, noteText = null;
+    var resHelper, record, snRecordId, caseName, incidentId, options, res, noteText, workNotes, workNotesSplit = null;
 
     try{
         //Instantiate new ResilientHelper
@@ -113,12 +133,12 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         //Get the required parameters to create a Task
         record = current;
         snRecordId = record.getValue("number");
-        caseName = "SN-[" + snRecordId + "]: " + record.getValue("short_description");
+        caseName = "SN: " + record.getValue("short_description") + " [" + snRecordId + "]";
         incidentId = workflow.variables.u_ibm_resilient_incident_id;
         
         //Initialize options
         options = {
-            initSnNote: "Sent to IBM Resilient",
+            initSnNote: "Task created in IBM Resilient",
             incidentId: incidentId,
             optionalFields: {
                 "instr_text": record.getValue("description")
@@ -129,14 +149,29 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         res = resHelper.create(record, snRecordId, caseName, options);
         
         if (res){
-            // Create the RES Note
+            // Create the initial RES Note
             noteText = "<br>This " + res.res_reference_type + " has been sent from <b>ServiceNow</b>";
             noteText += "<br><b>ServiceNow ID:</b> " + snRecordId;
             noteText += '<br><b>ServiceNow Link:</b> <a href="'+res.snLink+'">'+res.snLink+'</a></div>';
             resHelper.addNote(res.res_reference_id, noteText, "html");
+            
+            // Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'
+            workNotes = current.work_notes.getJournalEntry(-1);
+
+            //Split the Work Notes on '\n\n'
+            workNotesSplit = workNotes.split("\n\n");
+
+            //Loop each Work Note and add a Resilient Note
+            for (var i = 0; i < workNotesSplit.length; i++){
+                noteText = workNotesSplit[i];
+                if(noteText && noteText.length > 0){
+                    resHelper.addNote(res.res_reference_id, workNotesSplit[i]);
+                }
+            }
         }
     }
     catch (errMsg){
+        current.work_notes = "Failed to create a Task in IBM Resilient for Incident "+incidentId+".\nReason: " + errMsg;
         gs.error(errMsg);
     }
 })();
@@ -161,6 +196,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         resHelper.addNote(res_reference_id, noteText);
     }
     catch (errMsg){
+        current.work_notes = "Failed to add a note in IBM Resilient.\nReason: " + errMsg;
         gs.error(errMsg);
     }
 })();
@@ -185,6 +221,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         resHelper.addNote(res_reference_id, noteText);
     }
     catch (errMsg){
+        current.work_notes = "Failed to add a note in IBM Resilient.\nReason: " + errMsg;
         gs.error(errMsg);
     }
 })();
@@ -227,6 +264,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
         }
     }
     catch(errMsg){
+        current.work_notes = "Failed to update state in IBM Resilient.\nReason: " + errMsg;
         gs.error(errMsg);
     }
 })();
@@ -241,7 +279,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow workflow
   * x_261673_resilient_reference_id
   * x_261673_resilient_type
   * x_261673_resilient_reference_link
-* Adds a new row to the Datatable in IBM Resilient
+* Adds a new row to the Data Table in IBM Resilient
 
 #### Parameters:
 | Name | Type | Description |
@@ -279,7 +317,7 @@ Returns an object with the following keys:
 
 ### updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)
 
-* Updates the `servicenow_status` column in the Datatable in IBM Resilient with the `snTicketState`
+* Updates the `servicenow_status` column in the Data Table in IBM Resilient with the `snTicketState`
 
 #### Parameters:
 | Name | Type | Description |
@@ -424,8 +462,3 @@ Returns an object with the following keys:
 > ![screenshot](./screenshots/14.png)
 
 ---
-
-## Troubleshooting
-
-### Your CUSTOM Workflow is running twice?
-* 
