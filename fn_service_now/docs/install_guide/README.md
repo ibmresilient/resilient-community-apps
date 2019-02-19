@@ -11,8 +11,9 @@
   - [Step 5: *Download & Install fn_service_now Integration*](#step-5-download--install-fnservicenow-integration)
   - [Step 6a: *Install Mid-Server (if needed)*](#step-6a-install-mid-server-if-needed)
   - [Step 6b: *Configure Mid-Server (if needed)*](#step-6b-configure-mid-server-if-needed)
-  - [Step 7: *Test*](#step-7-test)
-  - [Step 8: *How to Import Updates in ServiceNow*](#step-8-how-to-import-updates-in-servicenow)
+  - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
+  - [Step 8: *Test*](#step-8-test)
+  - [Step 9: *How to Import Updates in ServiceNow*](#step-9-how-to-import-updates-in-servicenow)
 ---
 
 ## Prerequisites 
@@ -167,14 +168,25 @@
 * Click **Save**
 ---
 
-## Step 7: *Test*
+## Step 7: *Give your ServiceNow users the correct Role*
+* For a ServiceNow user to have the permission to escalate an Incident to IBM Resilient, they must be explicitly given the correct role
+* In ServiceNow, go to the **Users Table** and open the user you want to give the permissions to
+* Scroll down. Under **Roles**, click **Edit**
+ ![screenshot](./screenshots/34.png)
+* Give the user the `x_261673_resilient.user` role
+ ![screenshot](./screenshots/35.png)
+* Click **Save**
+---
+
+## Step 8: *Test*
 * In ServiceNow, in the navigation panel, go to **IBM Resilient > Test Connection**
 * A **new tab** opens
 * Click the green **Test Connection** button and wait until you see a page banner
 * The **page banner** will inform you if your Test was successful or not and print any errors you may have
   ![screenshot](./screenshots/29.png)
 * If your test was successful, we can now do a **real test!**
-* In ServiceNow, go to the **Incident Table**
+* **Login** to ServiceNow with a user that has the `x_261673_resilient.admin` or `x_261673_resilient.user` role
+* Go to the **Incident Table**
   ![screenshot](./screenshots/20.png)
 * Create a **New Incident** and **Save** it
 * Open the incident you just created and **scroll to the bottom**
@@ -200,7 +212,7 @@
   ![screenshot](./screenshots/25.png)
 ---
 
-## Step 8: *How to Import Updates in ServiceNow*
+## Step 9: *How to Import Updates in ServiceNow*
 ***Still in a testing stage, so updates will be delivered frequently***
 >**NOTE:** this will **clear the Reference ID, Type and Link for ALL of your Incidents** that you have synced with Resilient. This is a current limitation on how we update the App using Git:
 > ![screenshot](./screenshots/30.png)
