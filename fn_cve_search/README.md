@@ -29,6 +29,16 @@ To import the function and example rule and workflows into Resilient, run the fo
 
 Answer the prompts for the package to import.
 
+To import the data table into Resilient after customization, follow below instructions:
+ 
+    
+   1. Go to Resilient Customization Settings > Layouts > Incident Tabs > + Add Tab
+   
+   2. Enter Tab Text: My Test Tab and click Add
+   
+   3. Drag the Data table into the middle and click Save 
+
+For more information : https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_datatable_utils#display-the-datatable-in-an-incident 
 
 To uninstall,
 
