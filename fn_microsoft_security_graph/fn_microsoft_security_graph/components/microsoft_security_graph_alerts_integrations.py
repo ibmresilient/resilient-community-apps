@@ -4,6 +4,7 @@ import logging
 import jinja2
 import time
 import json
+import ast
 import calendar
 from datetime import datetime
 from threading import Thread
@@ -342,7 +343,7 @@ def update_alert(url, ms_helper, alert_id, alert_data):
         "Prefer": "return=representation"
     }
     try:
-        data = json.loads(alert_data)
+        data = ast.literal_eval(alert_data)
     except ValueError as e:
         raise FunctionError("microsoft_security_graph_alert_data needs to be in dict format; " + e.message)
 
