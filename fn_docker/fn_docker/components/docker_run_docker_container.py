@@ -9,6 +9,7 @@ import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_docker.util.selftest as selftest
 import requests
+from resilient_circuits.actions_component import Actions
 from fn_docker.util.docker_utils import DockerUtils
 from fn_docker.util.helper import ResDockerHelper
 from resilient_lib import ResultPayload
@@ -22,8 +23,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.org_id = Actions(opts=opts).org_id
+        print("Org ID is {}".format(self.org_id))
+
         self.options = opts.get("fn_docker", {})
         self.all_options = {k:v for k,v in opts.items() if 'fn_docker' in k}
+        self.host_config = (opts.get("host"), opts.get("org"))
         selftest.selftest_function(opts)
 
     @handler("reload")
@@ -35,12 +40,13 @@ class FunctionComponent(ResilientComponent):
     def _docker_run_docker_container_function(self, event, *args, **kwargs):
         """Function: A function intended to be used to create a Docker Container from an image, feed an input to the container and then return the results."""
         try:
+
             # Get the function parameters:
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
-            docker_image = kwargs.get("docker_image")  # text
+            docker_image = self.get_select_param(kwargs.get("docker_image"))  # select, values: "volatility", "nsrl", "plaso", "bloodhound"
             docker_input = kwargs.get("docker_input")  # text
 
             payload = ResultPayload("fn_docker", **kwargs)
@@ -122,6 +128,7 @@ class FunctionComponent(ResilientComponent):
             # Get the Client
             docker_client = docker_interface.get_client()
             yield StatusMessage("Now starting container with input")
+
             # Run container using client
             container = docker_client.containers.run(
                 image=image_fullname,
@@ -134,6 +141,7 @@ class FunctionComponent(ResilientComponent):
             container_id = container.id
             # Gather the logs as they happen, until the container finishes.
             container_logs = container.logs(follow=True)
+
             yield StatusMessage("Container has finished and logs gathered")
 
             try:
@@ -170,9 +178,10 @@ class FunctionComponent(ResilientComponent):
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
                                                             filename="{}{}".format("logs-from-",container_id), mimetype='text/plain')
 
+
+
                 finally:
                     os.unlink(temp_upload_file.name)
-
 
             result = payload.done(
                 # If container had no errors, 0 will be returned. Use a falsey check to ensure we get 0 else False
@@ -181,15 +190,30 @@ class FunctionComponent(ResilientComponent):
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,
                     "container_stats": container_stats,
-                    "container_id": container_id
+                    "container_id": container_id,
+                    "res_links": {
+                        "input_attachment": '<a href="{}"> Input</a>'.format(helper.prepare_attachment_link(
+                            host=self.host_config[0],org_id=self.org_id,
+                            attachment_id=attachment_id, incident_id=incident_id,
+                            task_id=task_id)),
+                        "res_object": helper.prepare_res_link(host=self.host_config[0], incident_id=incident_id, task_id=task_id)
+                    }
 
                 }
             )
+            import pprint
+            pprint.pprint(result)
             from datetime import datetime
             dt_obj = datetime.strptime(result["metrics"]["timestamp"],
                                        '%Y-%m-%d %H:%M:%S')
-            millisec = dt_obj.timestamp() * 1000
+            millisec = dt_obj.timestamp()
 
+            result["metrics"]["timestamp_epoch"] = int(millisec * 1000)
+
+
+            #helper.add_row(incident_id=incident_id, apiname="docker_integration_invocations",client=self.rest_client(), time=result["metrics"]["timestamp_epoch"], id=container_id, link=result["content"]["res_links"]["input_attachment"])
+            import pprint
+            pprint.pprint(result)
             # Produce a FunctionResult with the results using the FunctionPayload
             yield FunctionResult(result)
             log.info("Complete")

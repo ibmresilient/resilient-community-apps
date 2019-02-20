@@ -45,3 +45,45 @@ class ResDockerHelper:
         z = x.copy()  # start with x's keys and values
         z.update(y)  # modifies z with y's keys and values & returns None
         return z
+
+    def prepare_res_link(self,incident_id, host, task_id=None):
+        # https://192.168.57.101/rest/orgs/202/incidents/2096/attachments/39/contents
+        # https://192.168.57.101/rest/orgs/202/tasks/2251279/attachments/6/contents
+        link = "https://{0}/#incidents/{1}".format(host, incident_id)
+
+        if task_id is not None:
+            link += "?task_id={0}".format(task_id)
+
+        return link
+
+
+    def prepare_attachment_link(self,host, org_id, attachment_id, incident_id, task_id=None):
+        param = ("tasks",task_id) if task_id else ("incidents",incident_id)
+
+        link = "https://{host}/rest/orgs/{org_id}/{object}/{object_id}/attachments/{attach_id}/contents".format(
+            host=host, org_id=org_id, object=param[0], object_id=param[1], attach_id=attachment_id)
+
+        return link
+
+    def add_row(self, client, apiname, incident_id, time, id, link):
+        """Adds a new row to the data table and returns that row"""
+        # Generate uri to POST datatable row
+        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(incident_id, apiname)
+        print(link)
+        cells = [
+            ("timestamp", time),
+            ("container_id", id),
+            ("links", link)
+        ]
+
+        formatted_cells = {}
+
+        # Format the cells
+        for cell in cells:
+            formatted_cells[cell[0]] = {"value": cell[1]}
+
+        formatted_cells = {
+            "cells": formatted_cells
+        }
+
+        return client.post(uri, formatted_cells)
