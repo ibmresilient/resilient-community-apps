@@ -185,6 +185,7 @@ class IntegrationComponent(ResilientComponent):
 
     def msg_polling_thread(self):
         while True:
+            log.debug("Polling for alerts")
             alert_list = get_alerts(self.options, self.Microsoft_security_graph_helper)
             # Amount of time (seconds) to wait to check alerts again, defaults to 10 mins if not set
             wait_time = int(self.options.get("msg_polling_interval", 600))
@@ -278,10 +279,9 @@ def get_alerts(options, ms_graph_helper):
         "Content-type": "application/json",
         "Authorization": "Bearer " + ms_graph_helper.get_access_token()
     }
-    url = "{}security/alerts/{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
+    url = "{}security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),
                                                                                          createdDateTime_filter))
-    safe_url = escape_illegal_chars(url)
-    r = ms_graph_helper.microsoft_graph_request("GET", safe_url, headers)
+    r = ms_graph_helper.microsoft_graph_request("GET", url, headers)
     if not r:
         raise FunctionError("Request failed, please check the log.")
 
@@ -318,8 +318,7 @@ def alert_search(url, ms_helper, search_query=None):
         start_query = "?$"
 
     url = "{}security/alerts/{}{}".format(url, start_query, search_query)
-    safe_url = escape_illegal_chars(url)
-    r = ms_helper.microsoft_graph_request("GET", safe_url, headers)
+    r = ms_helper.microsoft_graph_request("GET", url, headers)
 
     return r
 
@@ -381,18 +380,6 @@ def create_query(alert_query, createDateTime_filter):
 
     log.debug("Query: []".format(query))
     return query
-
-
-def escape_illegal_chars(s):
-    s = s.replace('%', '%25')
-    s = s.replace('+', '%2B')
-    s = s.replace('/', '%2F')
-    s = s.replace('?', '%3F')
-    s = s.replace('#', '%23')
-    s = s.replace('&', '%26')
-    s = s.replace(' ', '%20')
-
-    return s
 
 
 # Converts string datetime to milliseconds epoch
