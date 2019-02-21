@@ -6,6 +6,8 @@
 """
 
 import logging
+from fn_docker.util.docker_utils import DockerUtils
+
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -18,4 +20,12 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     options = opts.get("fn_docker", {})
-    return {"state": "unimplemented"}
+    try:
+        docker_interface = DockerUtils()
+
+        # Decide whether to use local connection or remote
+        docker_interface.setup_docker_connection(options=options)
+    except Exception:
+        return {"state": "failed", "reason": "Could not establish a connection to a docker daemon"}
+    else:  # If no exceptions raised
+        return {"state": "success"}

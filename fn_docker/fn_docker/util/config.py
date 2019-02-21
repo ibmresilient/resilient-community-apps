@@ -10,8 +10,24 @@ def config_section_data():
     """Produce the default configuration section for app.config,
        when called by `resilient-circuits config [-c|-u]`
     """
-#    config_data = u"""[fn_docker]
-#setting=xxx
-#"""
-#    return config_data
-    return None
+    config_data = u"""[fn_docker]
+docker_approved_images=volatility,nsrl,amass
+docker_use_remote_conn=False
+docker_remote_url=<ssh | tcp connection string>
+[fn_docker_volatility]
+docker_image=remnux/volatility
+primary_output_dir=/tmp/bind_folder
+primary_internal_dir=/home/nonroot/memdumps
+cmd_operation=pslist
+cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
+
+[fn_docker_nsrl]
+#The default NSRL image expects an optional -v flag and an MD5 hash
+cmd= -v "{{docker_input}}"
+docker_image=blacktop/nsrl
+
+[fn_docker_amass]
+docker_image=amass
+cmd=--passive -d "{{docker_input}}"
+"""
+    return config_data

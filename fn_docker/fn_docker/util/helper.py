@@ -47,8 +47,6 @@ class ResDockerHelper:
         return z
 
     def prepare_res_link(self,incident_id, host, task_id=None):
-        # https://192.168.57.101/rest/orgs/202/incidents/2096/attachments/39/contents
-        # https://192.168.57.101/rest/orgs/202/tasks/2251279/attachments/6/contents
         link = "https://{0}/#incidents/{1}".format(host, incident_id)
 
         if task_id is not None:
