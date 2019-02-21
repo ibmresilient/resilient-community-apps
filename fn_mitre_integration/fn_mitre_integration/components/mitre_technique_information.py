@@ -9,11 +9,12 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_mitre_integration.lib import mitre_attack
 
-class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'mitre_technique_information
 
-    This function takes a MITRE ATT&CK technique id, and fetch the mitigation from the
-    MITRE STIX TAXII server
+class FunctionComponent(ResilientComponent):
+    """Component that implements Resilient function 'mitre_technique_information'
+
+    This function fetches the MITRE technique information from the
+    MITRE STIX TAXII server.
     """
 
     def __init__(self, opts):
@@ -33,24 +34,30 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             mitre_technique_name = kwargs.get("mitre_technique_name")  # text
             mitre_technique_id = kwargs.get("mitre_technique_id")  # text
+            mitre_technique_mitigation_only = kwargs.get("mitre_technique_mitigation_only")  # boolean
 
             log = logging.getLogger(__name__)
             log.info("mitre_technique_name: %s", mitre_technique_name)
             log.info("mitre_technique_id: %s", mitre_technique_id)
-
+            log.info("mitre_technique_mitigation_only: %s", mitre_technique_mitigation_only)
 
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server. It might take several minutes...")
 
             mitre_att = mitre_attack.MitreAttack()
-            mitigations = mitre_att.get_tech_mitigation(mitre_technique_id)
+            tech = {}
+            if mitre_technique_mitigation_only:
+                tech = {
+                    "name": mitre_technique_name,
+                    "mitre_mitigation": mitre_att.get_tech_mitigation(mitre_technique_id)
+                }
+            else:
+                tech = mitre_att.get_tech(name=mitre_technique_name,
+                                          ext_id=mitre_technique_id)
 
             yield StatusMessage("done...")
-
-            results = {
-                "tech_name": mitre_technique_name,
-                "tech_mitigations": mitigations
-            }
+            log.info("MITRE tech: " + str(tech))
+            results = tech
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

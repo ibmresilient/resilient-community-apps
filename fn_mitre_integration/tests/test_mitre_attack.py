@@ -81,3 +81,20 @@ def test_mitre_attack_util():
     techs = get_techniques(tactics)
     print(len(techs))
     assert(len(techs[0]["techs"]) + len(techs[1]["techs"]) == 91)
+
+
+def test_get_tech_info():
+
+    tech = mitre_attack.get_tech(name="AppleScript")
+    print(tech)
+    assert(tech["name"] == "AppleScript")
+
+    tech = mitre_attack.get_tech(ext_id="T1156")
+    print(tech)
+    assert(tech["mitre_tech_id"] == "T1156")
+
+    #
+    #   Error handling
+    #
+    tech = mitre_attack.get_tech()
+    assert tech is None

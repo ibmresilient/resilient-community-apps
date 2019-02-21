@@ -165,6 +165,50 @@ class MitreAttack(object):
 
         return url
 
+    def get_tech(self, name=None, ext_id=None):
+        """
+        Use tech name or external id to retrieve tech
+        :param name:
+        :param ext_id:
+        :return:
+        """
+        if name is None and ext_id is None:
+            return None
+
+        type_filter = Filter("type", '=', "attack-pattern")
+
+        filt = None
+        if name is not None:
+            filt = Filter("name", '=', name)
+        else:
+            filt = Filter("external_references.external_id", '=', ext_id)
+
+        items = self.get_items([type_filter, filt])
+
+        tech = {}
+
+        if items is not None:
+            mitre_tech_id = ""
+            refs = []
+            for r in items[0]["external_references"]:
+                ref = {
+                    "url": r.get("url", "")
+                }
+                if r.get("source_name", None) == "mitre-attack":
+                    mitre_tech_id = r.get("external_id", "")
+
+                refs.append(ref)
+            tech = {
+                "name": items[0].get("name", ""),
+                "description": items[0].get("description", ""),
+                "external_references": refs,
+                "x_mitre_detection": items[0].get("x_mitre_detection", ""),
+                "mitre_mitigation" : self.get_tech_mitigation(mitre_tech_id),
+                "mitre_tech_id": mitre_tech_id
+            }
+
+        return tech
+
     def get_items(self, filters, collection_title="Enterprise ATT&CK"):
         """
         Get items using filters
