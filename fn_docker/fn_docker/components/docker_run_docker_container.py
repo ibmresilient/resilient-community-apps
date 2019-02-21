@@ -18,7 +18,6 @@ import resilient_lib as resilient_lib
 from resilient_circuits.template_functions import render
 
 
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'docker_run_docker_container"""
 
@@ -29,7 +28,7 @@ class FunctionComponent(ResilientComponent):
         print("Org ID is {}".format(self.org_id))
 
         self.options = opts.get("fn_docker", {})
-        self.all_options = {k:v for k,v in opts.items() if 'fn_docker' in k}
+        self.all_options = {k: v for k, v in opts.items() if 'fn_docker' in k}
         self.host_config = (opts.get("host"), opts.get("org"))
         selftest.selftest_function(opts)
 
@@ -113,13 +112,11 @@ class FunctionComponent(ResilientComponent):
 
             # Decide whether to use local connection or remote
             docker_interface.setup_docker_connection(options=self.options)
-            docker_extra_kwargs = dict()
 
             # Ensure the specified image is an approved one
             if image_to_use not in helper.get_config_option("docker_approved_images").split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
-            image_fullname = None
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
             command, docker_extra_kwargs, image_fullname = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, escaped_args)
@@ -178,9 +175,7 @@ class FunctionComponent(ResilientComponent):
 
                     # POST the new attachment
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
-                                                            filename="{}{}".format("logs-from-",container_id), mimetype='text/plain')
-
-
+                                                            filename="{}{}".format("logs-from-", container_id), mimetype='text/plain')
 
                 finally:
                     os.unlink(temp_upload_file.name)
@@ -195,7 +190,7 @@ class FunctionComponent(ResilientComponent):
                     "container_id": container_id,
                     "res_links": {
                         "input_attachment": '<a href="{}"> Input</a>'.format(helper.prepare_attachment_link(
-                            host=self.host_config[0],org_id=self.org_id,
+                            host=self.host_config[0], org_id=self.org_id,
                             attachment_id=attachment_id, incident_id=incident_id,
                             task_id=task_id)),
                         "res_object": helper.prepare_res_link(host=self.host_config[0], incident_id=incident_id, task_id=task_id)
@@ -216,8 +211,3 @@ class FunctionComponent(ResilientComponent):
                 log.debug("Error when trying to unlink file.")
             else:
                 log.debug("Successfully cleaned up file")
-
-
-
-
-
