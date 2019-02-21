@@ -15,6 +15,7 @@ class FunctionPayload(object):
     """Class that contains the payload sent back to UI and available in the post-processing script"""
     def __init__(self, inputs):
         self.success = True
+        self.reason = None
         self.inputs = inputs
         self.row_id = None            # The row_id of the row created in Datatable
         self.res_id = None            # RES-<incId>-<taskId>
@@ -98,7 +99,9 @@ class FunctionComponent(ResilientComponent):
             # If we fail to generate the request_data (because the ServiceNow record already exists) 
             # raise an Action Status message and set success to False
             if not req.get("success"):
-                yield StatusMessage(req.get("data"))
+                err_msg = req.get("data")
+                yield StatusMessage(err_msg)
+                payload.reason = err_msg
                 payload.success = False
 
             else:
@@ -148,6 +151,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.as_dict()
 
+            log.debug("RESULTS: %s", results)
             log.info("Complete")
 
             # Produce a FunctionResult with the results

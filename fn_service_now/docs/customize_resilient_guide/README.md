@@ -79,6 +79,7 @@ results = {
     'sn_record_state': 'New',
     'res_link': 'https://192.168.58.3/#incidents/2095',
     'success': True,
+    'reason': None  # A string error message if success is false
     'sn_time_created': 1550596132530,
     'sn_sys_id': '6ae67f94dbf3230044ccd426ca961920',
     'sn_ref_id': 'INC0010698',
