@@ -77,7 +77,7 @@ class ArielSearch(SearchWaitCommand):
     """
 
     def __init__(self, timeout=600, poll=5):
-        self.range_start = 1
+        self.range_start = 0
         self.range_end = 50
         super(ArielSearch, self).__init__(timeout, poll)
 
