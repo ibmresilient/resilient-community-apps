@@ -48,6 +48,7 @@ class TestFnSnowCreateRecord:
 
     output1 = {
       "success": True,
+      "reason": None,
       "inputs": deepcopy(inputs1),
       "row_id": 3,
       "res_id": "RES-3003-4004",
