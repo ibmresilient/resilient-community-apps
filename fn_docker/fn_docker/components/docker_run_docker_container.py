@@ -6,6 +6,7 @@
 import logging
 import tempfile
 import os
+import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_docker.util.selftest as selftest
 import requests
@@ -15,6 +16,7 @@ from fn_docker.util.helper import ResDockerHelper
 from resilient_lib import ResultPayload
 import resilient_lib as resilient_lib
 from resilient_circuits.template_functions import render
+
 
 
 class FunctionComponent(ResilientComponent):
@@ -201,19 +203,7 @@ class FunctionComponent(ResilientComponent):
 
                 }
             )
-            import pprint
-            pprint.pprint(result)
-            from datetime import datetime
-            dt_obj = datetime.strptime(result["metrics"]["timestamp"],
-                                       '%Y-%m-%d %H:%M:%S')
-            millisec = dt_obj.timestamp()
-
-            result["metrics"]["timestamp_epoch"] = int(millisec * 1000)
-
-
-            #helper.add_row(incident_id=incident_id, apiname="docker_integration_invocations",client=self.rest_client(), time=result["metrics"]["timestamp_epoch"], id=container_id, link=result["content"]["res_links"]["input_attachment"])
-            import pprint
-            pprint.pprint(result)
+            result["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
             # Produce a FunctionResult with the results using the FunctionPayload
             yield FunctionResult(result)
             log.info("Complete")
