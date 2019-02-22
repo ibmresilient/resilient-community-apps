@@ -14,7 +14,8 @@ setup(
     long_description="This Integration has provides the ability to Search Devices and Contain or Lift Containment on Devices",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'resilient-lib>=32.0.0'
+        'resilient-lib>=32.0.0',
+        'six>=1.12.0'
     ],
     packages=find_packages(),
     include_package_data=True,

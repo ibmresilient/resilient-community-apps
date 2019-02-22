@@ -7,7 +7,7 @@ import logging
 import datetime
 import time
 import requests
-
+import six
 
 class CrowdStrikeHelper(object):
     """A helper class for fn_crowdstrike_falcon"""
@@ -103,6 +103,17 @@ class CrowdStrikeHelper(object):
     def should_timeout(cls, start_time):
         """Return if the time running is longer than the timeout"""
         return (time.time() - start_time) > cls.ping_timeout
+
+    @staticmethod
+    def str_to_unicode(str_to_convert):
+        if six.PY2:
+            return unicode(str_to_convert)
+
+        elif six.PY3:
+            return str(str_to_convert)
+
+        else:
+            raise ValueError("We do not support this version of Python")
 
     @classmethod
     def get_device_status(cls, device_id):

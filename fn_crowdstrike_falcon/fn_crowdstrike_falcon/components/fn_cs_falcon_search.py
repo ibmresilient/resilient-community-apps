@@ -65,11 +65,11 @@ class FunctionComponent(ResilientComponent):
 
             if cs_filter_string is not None:
                 get_device_ids_payload["filter"] = cs_filter_string
-            
+
             if cs_query is not None:
                 get_device_ids_payload["q"] = cs_query
 
-            yield StatusMessage('> Searching CrowdStrike for devices. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query))
+            yield StatusMessage(u'> Searching CrowdStrike for devices. Filter: "{0}" Query: {1}'.format(cs_helper.str_to_unicode(cs_filter_string), cs_query))
 
             # Make GET request for device_ids
             get_device_ids_response = rqc.execute_call(
@@ -112,12 +112,12 @@ class FunctionComponent(ResilientComponent):
                     payload = payload.done(True, device_details)
 
                 else:
-                    err_msg = '> Could not get device details from CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
+                    err_msg = u'> Could not get device details from CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_helper.str_to_unicode(cs_filter_string), cs_query)
                     yield StatusMessage(err_msg)
                     payload = payload.done(False, None, reason=err_msg)
 
             else:
-                err_msg = '> No devices found in CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_filter_string, cs_query)
+                err_msg = u'> No devices found in CrowdStrike. Filter: "{0}" Query: {1}'.format(cs_helper.str_to_unicode(cs_filter_string), cs_query)
                 yield StatusMessage(err_msg)
                 payload = payload.done(False, None, reason=err_msg)
 

@@ -142,7 +142,7 @@ results = {
 This example uses the Artifact Value to create the `cs_filter_string`
 ```python
 # Example: "hostname:'sampleName*'+platform_name:'Windows'" ==> Searches CrowdStrike for devices who's hostname contains 'sampleName' and platform is 'Windows'
-inputs.cs_filter_string = "hostname:'{0}*'".format(artifact.value)
+inputs.cs_filter_string = u"hostname:'{0}*'".format(artifact.value)
 
 # This query searches the meta data of devices after applying the above filter
 inputs.cs_query = "JohnsMacBook"
