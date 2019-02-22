@@ -21,27 +21,38 @@
 
 ---
 ## app.config settings:
-* At time of development, CrowdStrike Falcon are currently in the process of migrating their APIs. Therefore we are required to provide two different sets of credentials: **API Client** and **API Key**
-* See their documentation here [https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers#before_you_begin](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers#before_you_begin) on how to obtain your two sets of API Credentials
+
+* Two different sets of API Keys are need for this Integration with CrowdStrike:
+  * New Keys: CrowdStrike's **API Client Authentication API Keys** - based on OAuth2
+    * `cs_falcon_oauth2_cid`
+    * `cs_falcon_oauth2_key`
+  * Old Keys: CrowdStrike's **API Key Authentication** - their legacy authentication standard
+    * `cs_falcon_bauth_api_uuid`
+    * `cs_falcon_oauth2_key`
+* Some features rely on the legacy standard while other features have been migrated to work with the new OAuth2 standard
+* This Integration **requires both sets of keys**
+* You can generate and obtain the *New Keys* from the CrowdStrike Console. Information on how to do this can be found in the [CrowdStrike documentation](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers#intro) under the heading **Authenticate via API client**
+* As for the *Old Keys*, you need to contact CrowdStrike Support directly to obtain them:
+ ![screenshot](./screenshots/6.png)
 * Also, the `base_url` may be different depending on your environment. Below are the common `base_urls` used for each set of credentials
 ```
 [fn_crowdstrike_falcon]
 
 # API Client Authentication, CrowdStrike's newer standard based on OAuth2
 cs_falcon_oauth2_base_url=https://api.crowdstrike.com
-cs_falcon_oauth2_cid=
-cs_falcon_oauth2_key=
+cs_falcon_oauth2_cid=<YOUR CROWDSTRIKE CLIENT ID>
+cs_falcon_oauth2_key=<YOUR CROWDSTRIKE OAUTH2 KEY>
 
 # API Key Authentication, CrowdStrike's legacy authentication standard
 cs_falcon_bauth_base_url=https://falconapi.crowdstrike.com
-cs_falcon_bauth_api_uuid=
-cs_falcon_bauth_api_key=
+cs_falcon_bauth_api_uuid=<YOUR CROWDSTRIKE UUID>
+cs_falcon_bauth_api_key=<YOUR CROWDSTRIKE API KEY>
 
 # Number of seconds to wait before next device-action request to CrowdStrike. Default=5
-cs_falcon_ping_delay=
+cs_falcon_ping_delay=5
 
 # Max number of seconds to wait to get device-action response from CrowdStrike. Default=120
-cs_falcon_ping_timeout=
+cs_falcon_ping_timeout=10
 ```
 
 ---
