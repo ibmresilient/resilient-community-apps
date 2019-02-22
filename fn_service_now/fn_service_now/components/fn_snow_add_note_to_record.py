@@ -107,6 +107,7 @@ class FunctionComponent(ResilientComponent):
                 payload.sn_ref_id = add_in_sn_response["sn_ref_id"]
 
             results = payload.as_dict()
+            log.debug("RESULTS: %s", results)
 
             log.info("Complete")
 

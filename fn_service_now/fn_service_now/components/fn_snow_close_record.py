@@ -132,7 +132,7 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage(err_msg)
 
             results = payload.as_dict()
-
+            log.debug("RESULTS: %s", results)
             log.info("Complete")
 
             # Produce a FunctionResult with the results

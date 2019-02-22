@@ -8,10 +8,10 @@
 This package contains 8 Functions, 11 Workflows, 11 Rules and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance
 <!-- TODO: link these to functions below -->
 * **SNOW: Create Record** gives you the ability to create a Record in ServiceNow from a Resilient Incident or Task
+* **SNOW: Update Record** allows you to update multiple column fields in a ServiceNow Record
 * **SNOW: Close Record** lets you close a related Record in ServiceNow from a Resilient Incident or Task
 * **SNOW: Add Note to Record** allows you to send a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`
 * **SNOW: Add Attachment to Record** gives you the ability to send a Resilient Attachment to a ServiceNow Record
-* **SNOW: Update Record** allows you to update multiple column fields in a ServiceNow Record
 * **SNOW: Lookup sys_id** queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record
 
 # app.config settings:
@@ -182,7 +182,7 @@ inputs.sn_optional_fields = dict_to_json_str({
 ```
 
 ### Post-Process Script:
-* This example updates the fields **sn_snow_record_id** and **sn_snow_record_link** then **adds a Note to the Incident**
+* This example updates two Custom Incident Fields **sn_snow_record_id** and **sn_snow_record_link** then **adds a Note to the Incident**
 ```python
 if results.success:
 
@@ -196,6 +196,118 @@ if results.success:
 
   incident.addNote(helper.createRichText(noteText))
 ```
+---
+
+## SNOW: Update Record:
+Uses the '/update' custom endpoint in ServiceNow to update a ServiceNow Record with a given dictionary of field name/value pairs.
+
+ ![screenshot](./screenshots/8.png)
+
+
+### Inputs:
+| Name | Type | Required | Example | Info |
+| ---- | :--: | :------: | ------- | ---- |
+| `incident_id` | `Number` | Yes | `1001` | The ID of the Resilient Incident |
+| `task_id` | `Number` | No | `20000002` or `None` | The ID of the Resilient Task |
+| `sn_res_id` | `String` | No | `"RES-1001"` or `"RES-1001-20000002"` | This ID is an accumulation of the Resilient Incident and/or Task ID. It is stored in the `sn_records_dt` Data Table |
+| `sn_update_fields` | `JSON String` | No | `'{"assignment_group": "IT Security"}'` | A JSON String of the ServiceNow field name and values you want to update. In our examples below we use the `dict_to_json_str(d)` Python Function to generate this JSON String. |
+
+### Output:
+```python
+results = {
+    'inputs': {
+        'incident_id': 1001,
+        'task_id': None,
+        'sn_res_id': None,
+        'sn_update_fields': {
+            'severity': 1
+        },
+        'task_id': None,
+        'sn_res_id': None
+    },
+    'sn_time_updated': 1550843019456,
+    'sn_ref_id': 'INC0010701',
+    'success': True
+}
+```
+
+### Pre-Process Script:
+* This example uses `dict_to_json_str()` to generate a JSON String for the `sn_update_fields` input
+
+```python
+#######################################
+### Define pre-processing functions ###
+#######################################
+def dict_to_json_str(d):
+  """Function that converts a dictionary into a JSON string.
+     Supports types: basestring, bool, int and nested dicts.
+     Does not support lists.
+     If the value is None, it sets it to False."""
+
+  json_entry = u'"{0}":{1}'
+  json_entry_str = u'"{0}":"{1}"'
+  entries = [] 
+
+  for entry in d:
+    key = entry
+    value = d[entry]
+
+    if value is None:
+      value = False
+
+    if isinstance(value, list):
+      helper.fail('dict_to_json_str does not support Python Lists')
+
+    if isinstance(value, basestring):
+      value = value.replace(u'"', u'\\"')
+      entries.append(json_entry_str.format(unicode(key), unicode(value)))
+      
+    elif isinstance(value, unicode):
+      entries.append(json_entry.format(unicode(key), unicode(value)))
+    
+    elif isinstance(value, bool):
+      value = 'true' if value == True else 'false'
+      entries.append(json_entry.format(key, value))
+
+    elif isinstance(value, int):
+      entries.append(json_entry.format(unicode(key), value))
+
+    elif isinstance(value, dict):
+      entries.append(json_entry.format(key, dict_to_json_str(value)))
+
+    else:
+      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+
+  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+
+# Map IBM Resilient severity values to ServiceNow severity values
+sn_severity_map = {
+  "High": 1,
+  "Medium": 2,
+  "Low": 3
+}
+
+#####################
+### Define Inputs ###
+#####################
+
+# Get the id of this incident
+inputs.incident_id = incident.id
+
+# List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key
+inputs.sn_update_fields = dict_to_json_str({
+  "severity": sn_severity_map[incident.severity_code],
+})
+```
+
+### Post-Process Script:
+* This example **adds a Note to the Incident**
+```python
+# Add a Note to the Incident
+note_text = u"The Severity of this Incident was updated to {0} in IBM Resilient".format(incident.severity_code)
+incident.addNote(note_text)
+```
+---
 
 ## SNOW: Close Record:
 Uses the '/close_record' custom endpoint in ServiceNow to change the state of a ServiceNow Record and add Close Notes and a Close Code to the Record.
@@ -301,33 +413,33 @@ else:
   
 incident.addNote(helper.createRichText(note_text))
 ```
+---
 
+## *SNOW: Add Note to Record**
+Uses the '/add' custom endpoint in ServiceNow to add a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`.
 
-<!-- TODO: refactor from here down -->
+ ![screenshot](./screenshots/6.png)
 
-## **3: Add Note to ServiceNow Record**
+### Inputs:
+| Input Name | Type | Required | Example | Info |
+| ---------- | :--: | :-------:| ------- | ---- |
+| `incident_id` | `Number` | Yes | `2105` | |
+| `task_id` | `Number` | No | `2251401` | |
+| `sn_note_text` | `String` | Yes | `"Can your team look into this please"` | |
+| `sn_note_type` | `Select` | Yes | `"work_note"` OR `"additional_comment"` | |
 
-### Function Inputs:
-| Input Name | Type | Required | Example |
-| ------------- | :--: | :-------:| ------- |
-| `incident_id` | `Number` | Yes | `2105` |
-| `task_id` | `Number` | No | `2251401` |
-| `sn_note_text` | `String` | Yes | `"Can your team look into this please` |
-| `sn_note_type` | `Select` | Yes | `"work_note"` OR `"additional_comment"` |
-
-### Function Output:
+### Output:
 ```python
 results = {
-  success: True,
-
-  inputs: {
-    incident_id: 2105,
-    sn_note_text: "Can your team look into this please",
-    task_id: 2251401,
-    sn_note_type: "work_note"
-    }, 
-  res_id: "RES-2105-2251401",
-  sn_ref_id: "INC0010455"
+    'inputs': {
+        'incident_id': 2095,
+        'sn_note_text': 'What is the status of this ticket?',
+        'task_id': 2251213,
+        'sn_note_type': 'work_note'
+    },
+    'res_id': 'RES-2095-2251213',
+    'sn_ref_id': 'INC0010699',
+    'success': True
 }
 ```
 
@@ -349,18 +461,32 @@ inputs.sn_note_text = note.text.content
 ```
 
 ### Post-Process Script:
-*There is no Post-Process Script for this Function.*
+* This example prepends a timestamp to the Resilient Note to track when the Note was sent to ServiceNow.
+```python
+# Import Date
+from java.util import Date
 
-## **4: Add Attachment to ServiceNow Record**
+# Get the current time
+dt_now = Date()
 
-### Function Inputs:
+# Prepends message and time to the note
+note.text = u"<b>Sent to ServiceNow at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
+```
+---
+
+## **SNOW: Add Attachment to Record**
+Uses the '/add' custom endpoint in ServiceNow to add a Resilient Attachment to a ServiceNow Record
+
+ ![screenshot](./screenshots/7.png)
+
+### Inputs:
 | Input Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `attachment_id` | `Number` | Yes | `39` |
 | `incident_id` | `Number` | Yes | `2105` |
 | `task_id` | `Number` | No | `2251401` |
 
-### Function Output:
+### Output:
 ```python
 results = {
   success: True,
@@ -395,9 +521,9 @@ if attachment.type == 'task':
 ```python
 if results.success:
 
-  noteText = """<br>An Attachment was added to <b>ServiceNow</b>
-              <br><b>Attachment Name:</b>  {0}
-              <br><b>ServiceNow ID:</b>  {1}""".format(results.attachment_name, results.sn_ref_id)
+  noteText = u"""<br>{0} has added an attachment to <b>ServiceNow</b>
+              <br><b>Attachment Name:</b>  {1}
+              <br><b>ServiceNow ID:</b>  {2}""".format(unicode(principal.display_name), unicode(results.attachment_name), results.sn_ref_id)
 
   # If this is a task attachment, add a note to the Task
   if task:
@@ -406,8 +532,14 @@ if results.success:
   else:
     incident.addNote(helper.createRichText(noteText))
 ```
+---
 
-## **5: Get sys_id**
+<!-- TO Do here down -->
+
+## *SNOW: Lookup sys_id**
+Uses the '/add' custom endpoint in ServiceNow to add a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`.
+
+ ![screenshot](./screenshots/6.png)
 
 ### Function Inputs:
 | Input Name | Type | Required | Example |
