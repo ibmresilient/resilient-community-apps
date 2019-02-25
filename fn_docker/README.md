@@ -2,10 +2,10 @@
 
 The Resilient Integration with Docker provides tools to integrate Docker into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for Dockerised tools that can be used for Malware Research and Incident Response.
 
+**This package contains 1 Function, 3 Workflows, 3 Rules and 1 Data Table that help you integrate with Docker**
+
+ ![screenshot](./screenshots/1.png)
 ## Table of Contents
-[Resilient Integration with Docker](#resilient-integration-with-docker)
-
-
 - [Integration app.config settings:](#integration-appconfig-settings)
 - [Image specific app.config sections](#image-specific-appconfig-sections)
 - [Function: Run Docker Container](#1-run-docker-container)
@@ -158,20 +158,20 @@ results = {
 
 ```
 
-## Workflows
+## Workflows
 
-## **1: Send Artifact To Docker Container**
+### **1: Send Artifact To Docker Container**
 
 An example workflow scoped for Artifacts which will, when invoked, send the artifact to a Docker container, perform some operation on the input and returns information to Resilient.
 
-### 1: Pre-Process Script:
+### Pre-Process Script:
 
 ```python
 inputs.docker_input = artifact.value
 inputs.incident_id = incident.id
 ```
 
-### 1: Post-Process Script:
+### Post-Process Script:
 
 ```python
 noteText = u"""Container exit code : <b>{0}</b>
@@ -200,7 +200,7 @@ row["docker_exit_status"] = u"""<b style="color:{}">{}</b>""".format("green" if 
 ```
 
 
-## **2: Send Attachment To Docker Container**
+### **2: Send Attachment To Docker Container**
 
 An example workflow scoped for Attachments which will, when invoked, send the attachment to a Docker container, perform some operation on the input and returns information to Resilient.
 
