@@ -9,6 +9,7 @@ from resilient_lib import ResultPayload, RequestsCommon
 from resilient_lib.components.integration_errors import IntegrationError
 from fn_crowdstrike_falcon.util.cs_helper import CrowdStrikeHelper
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_cs_falcon_search"""
 
@@ -97,9 +98,9 @@ class FunctionComponent(ResilientComponent):
                     basicauth=(cs_helper.bauth_api_uuid, cs_helper.bauth_api_key),
                     headers=cs_helper.json_header)
 
-                device_details = get_device_details_response.get("resources")
+                device_details = get_device_details_response.get("resources", [])
 
-                if device_details is not None:
+                if len(device_details) > 0:
                     yield StatusMessage("> Device details received. Finishing...")
 
                     # For each device, convert their string timestamps to utc_time in ms
