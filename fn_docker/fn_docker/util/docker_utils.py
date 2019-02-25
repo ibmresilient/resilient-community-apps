@@ -7,12 +7,14 @@ from resilient_circuits.template_functions import render
 import resilient_lib
 log = logging.getLogger(__name__)
 
+CONFIGSECTIONPREFIX = 'fn_docker_'  # A constant prefix used for an images app.config section.
 
 class DockerUtils:
 
     def __init__(self):
         self.client = None
         self.api_client = None
+
 
     def setup_docker_connection(self, options):
         """
@@ -27,7 +29,6 @@ class DockerUtils:
         """
 
         if resilient_lib.str_to_bool(options.get("docker_use_remote_conn", "False")):
-            print(resilient_lib.str_to_bool(options.get("docker_use_remote_conn", "False")))
             self.initiate_remote_docker_connection(options.get("docker_remote_url", None))
         else:
             self.initiate_local_docker_connection()
@@ -119,6 +120,12 @@ class DockerUtils:
                 if 'docker_extra_' in k}
 
     def inspect_container(self, containerid):
+        """
+        A helper function which is used to return some low-level information about a container
+
+        :param containerid:
+        :return:
+        """
         return self.api_client.inspect_container(containerid)
 
     def gather_image_args_and_volumes(self, helper, image_to_use, all_options, escaped_args):
@@ -140,27 +147,26 @@ class DockerUtils:
         :return:
         """
         command = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use)),
+            options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
             option_name="cmd")
 
         output_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use)),
+            options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
             option_name="primary_output_dir", optional=True)
         internal_vol = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use)),
+            options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
             option_name="primary_internal_dir", optional=True)
         vol_operation = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use)), option_name="cmd_operation",
+            options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="cmd_operation",
             optional=True)
 
         image_fullname = helper.get_image_specific_config_option(
-            options=all_options.get('fn_docker_{}'.format(image_to_use)), option_name="docker_image",
+            options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="docker_image",
             optional=True)
 
-        docker_extra_kwargs = self.parse_extra_kwargs(options=all_options.get('fn_docker_{}'.format(image_to_use)))
+        docker_extra_kwargs = self.parse_extra_kwargs(options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)))
 
         container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else dict()
-
 
         if docker_extra_kwargs.get('volumes', False):
             log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")

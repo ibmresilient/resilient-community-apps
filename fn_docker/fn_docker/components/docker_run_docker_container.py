@@ -7,15 +7,19 @@ import logging
 import tempfile
 import os
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_docker.util.selftest as selftest
 import requests
-from resilient_circuits.actions_component import Actions
+
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits.template_functions import render
+
+import resilient_lib
+from resilient_lib import ResultPayload
+
 from fn_docker.util.docker_utils import DockerUtils
 from fn_docker.util.helper import ResDockerHelper
-from resilient_lib import ResultPayload
-import resilient_lib as resilient_lib
-from resilient_circuits.template_functions import render
+
+
+DOCKERATTACHMENTPREFIX = '.docker_integration_input_'
 
 
 class FunctionComponent(ResilientComponent):
@@ -24,13 +28,9 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.org_id = Actions(opts=opts).org_id
-        print("Org ID is {}".format(self.org_id))
-
         self.options = opts.get("fn_docker", {})
         self.all_options = {k: v for k, v in opts.items() if 'fn_docker' in k}
         self.host_config = (opts.get("host"), opts.get("org"))
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -90,8 +90,8 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Writing attachment to bind folder")
 
                 # Convert to named temp file
-                with tempfile.NamedTemporaryFile(delete=False, prefix='.docker_integration_input_',
-                                                 suffix=attachment_name, dir=output_vol) as temp_file:
+                with tempfile.NamedTemporaryFile(delete=False, prefix=DOCKERATTACHMENTPREFIX,
+                                                 dir=output_vol) as temp_file:
                     try:
                         temp_file.write(attachment_input)
                         temp_file.close()
@@ -100,9 +100,9 @@ class FunctionComponent(ResilientComponent):
                         # Add a attachment_input arg to be rendered into the cmd command
                         escaped_args.update({
                             "attachment_input": render("{{attachment_input|%s}}" % "sh",
-                                                       {"attachment_input": attachment_file_name}),
+                                                       {u"attachment_input": attachment_file_name}),
                         })
-                        yield StatusMessage("Added this as an Attachment Input: {}".format(attachment_file_name))
+                        yield StatusMessage(u"Added this as an Attachment Input: {}".format(attachment_file_name))
 
             else:
                 # We are not dealing with an attachment
@@ -121,7 +121,7 @@ class FunctionComponent(ResilientComponent):
             command, docker_extra_kwargs, image_fullname = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, escaped_args)
 
-            log.info("Command: {} \n Volume Bind: {}".format(command, docker_extra_kwargs.get('volumes', "No Volumes")))
+            log.info("Command: %s \n Volume Bind: %s" % (command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_fullname)
             # Get the Client
@@ -180,27 +180,24 @@ class FunctionComponent(ResilientComponent):
                 finally:
                     os.unlink(temp_upload_file.name)
 
-            result = payload.done(
+            results = payload.done(
                 # If container had no errors, 0 will be returned. Use a falsey check to ensure we get 0 else False
-                success=True if not container_status.get("StatusCode", 1) else False,
+                success=bool(container_status.get("StatusCode", 1)),
                 content={
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,
                     "container_stats": container_stats,
                     "container_id": container_id,
                     "res_links": {
-                        "input_attachment": '<a href="{}"> Input</a>'.format(helper.prepare_attachment_link(
-                            host=self.host_config[0], org_id=self.org_id,
-                            attachment_id=attachment_id, incident_id=incident_id,
-                            task_id=task_id)),
                         "res_object": helper.prepare_res_link(host=self.host_config[0], incident_id=incident_id, task_id=task_id)
                     }
 
                 }
             )
-            result["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
+            results["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
             # Produce a FunctionResult with the results using the FunctionPayload
-            yield FunctionResult(result)
+            yield FunctionResult(results)
+            log.debug("RESULTS: %s", results)
             log.info("Complete")
         except Exception:
             yield FunctionError()

@@ -12,11 +12,12 @@ setup(
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_docker'",
-    long_description="Resilient Circuits Components for 'fn_docker'",
+    description="The Resilient Integration with Docker provides tools to integrate Docker into your Incident Response Plan.",
+    long_description="This Integration provides the ability to use either existing well-known Docker Images or to create your own, from which a Docker Container will be created and started.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'docker[ssh]'
+        'resilient_circuits>=31.0.0',
+        'docker[ssh]>=3.7.0',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,

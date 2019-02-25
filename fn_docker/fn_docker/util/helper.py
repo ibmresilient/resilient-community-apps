@@ -63,25 +63,3 @@ class ResDockerHelper:
 
         return link
 
-    def add_row(self, client, apiname, incident_id, time, id, link):
-        """Adds a new row to the data table and returns that row"""
-        # Generate uri to POST datatable row
-        uri = "/incidents/{0}/table_data/{1}/row_data?handle_format=names".format(incident_id, apiname)
-        print(link)
-        cells = [
-            ("timestamp", time),
-            ("container_id", id),
-            ("links", link)
-        ]
-
-        formatted_cells = {}
-
-        # Format the cells
-        for cell in cells:
-            formatted_cells[cell[0]] = {"value": cell[1]}
-
-        formatted_cells = {
-            "cells": formatted_cells
-        }
-
-        return client.post(uri, formatted_cells)
