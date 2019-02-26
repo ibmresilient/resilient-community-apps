@@ -88,6 +88,7 @@ class FunctionComponent(ResilientComponent):
             # Set results to the payload
             results = payload.as_dict()
 
+            log.debug("RESULTS: %s", results)
             log.info("Complete")
 
             # Produce a FunctionResult with the results

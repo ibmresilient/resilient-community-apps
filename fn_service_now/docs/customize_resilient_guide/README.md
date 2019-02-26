@@ -13,6 +13,10 @@ This package contains 8 Functions, 11 Workflows, 11 Rules and 1 Data Table that,
 * **SNOW: Add Note to Record** allows you to send a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`
 * **SNOW: Add Attachment to Record** gives you the ability to send a Resilient Attachment to a ServiceNow Record
 * **SNOW: Lookup sys_id** queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record
+* **SNOW Helper: Add Task Note** helper function to add a Note to a Task from a Workflow with a different parent object type
+* **SNOW Helper: Update Data Table** helper function that updates the ServiceNow Records Data Table status
+
+---
 
 # app.config settings:
 ```
@@ -31,6 +35,8 @@ sn_username=ibmresilient
 sn_password=MyPassword
 ```
 
+---
+
 # Functions:
 
  ![screenshot](./screenshots/1.png)
@@ -40,14 +46,13 @@ Uses the '/create' custom endpoint in ServiceNow to create a ServiceNow Record f
 
  ![screenshot](./screenshots/2.png)
 
-
 ### Inputs:
-| Input Name | Type | Required | Example |
-| ------------- | :--: | :-------:| ------- |
-| `incident_id` | `Number` | Yes | `2105` |
-| `task_id` | `Number` | No | `None` |
-| `sn_init_work_note` | `String` | No | `"This Incident originated from our Cyber Security Team using the IBM Resilient platform"` |
-| `sn_optional_fields` | `JSON String` | No | `'{"assignment_group": "IT Security"}'` |
+| Input Name | Type | Required | Example | Info |
+| ---------- | :--: | :-------:| ------- | ---- |
+| `incident_id` | `Number` | Yes | `2105` | ID of the Resilient Incident |
+| `task_id` | `Number` | No | `None` | ID of the Resilient Task |
+| `sn_init_work_note` | `String` | No | `"This Incident originated from our Cyber Security Team using the IBM Resilient platform"` | Initial Work Note to be added to the new ServiceNow Record |
+| `sn_optional_fields` | `JSON String` | No | `'{"assignment_group": "IT Security"}'` | An extensible JSON String of the field names and values to set in the new ServiceNow Record |
 
 >**NOTE:** by default this function:
 > * sets `short_description` in ServiceNow as the `incident.name` or `task.name`
@@ -196,6 +201,7 @@ if results.success:
 
   incident.addNote(helper.createRichText(noteText))
 ```
+
 ---
 
 ## SNOW: Update Record:
@@ -203,11 +209,10 @@ Uses the '/update' custom endpoint in ServiceNow to update a ServiceNow Record w
 
  ![screenshot](./screenshots/8.png)
 
-
 ### Inputs:
 | Name | Type | Required | Example | Info |
 | ---- | :--: | :------: | ------- | ---- |
-| `incident_id` | `Number` | Yes | `1001` | The ID of the Resilient Incident |
+| `incident_id` | `Number` | Yes | `1001` | ID of the Resilient Incident |
 | `task_id` | `Number` | No | `20000002` or `None` | The ID of the Resilient Task |
 | `sn_res_id` | `String` | No | `"RES-1001"` or `"RES-1001-20000002"` | This ID is an accumulation of the Resilient Incident and/or Task ID. It is stored in the `sn_records_dt` Data Table |
 | `sn_update_fields` | `JSON String` | No | `'{"assignment_group": "IT Security"}'` | A JSON String of the ServiceNow field name and values you want to update. In our examples below we use the `dict_to_json_str(d)` Python Function to generate this JSON String. |
@@ -307,6 +312,7 @@ inputs.sn_update_fields = dict_to_json_str({
 note_text = u"The Severity of this Incident was updated to {0} in IBM Resilient".format(incident.severity_code)
 incident.addNote(note_text)
 ```
+
 ---
 
 ## SNOW: Close Record:
@@ -317,8 +323,8 @@ Uses the '/close_record' custom endpoint in ServiceNow to change the state of a 
 ### Inputs:
 | Input Name | Type | Required | Example | Info |
 | ---------- | :--: | :-------:| ------- | ---- |
-| `incident_id` | `Number` | Yes | `2105` | |
-| `task_id` | `Number` | No | `2251401` | |
+| `incident_id` | `Number` | Yes | `2105` | ID of the Resilient Incident |
+| `task_id` | `Number` | No | `2251401` | ID of the Resilient Task |
 | `sn_record_state` | `Number` | Yes | `7` | These are defined in ServiceNow (See Note below) |
 | `sn_close_notes` | `String` | Yes | `"We have closed this Incident"` | The notes required to close an Incident Record in ServiceNow |
 | `sn_close_code` | `String` | Yes | `"Solved (Work Around)"` | These are defined in ServiceNow (See Note below). We use an Activity Field in the Rule to define a Select field, where we list all the possible close_codes |
@@ -413,9 +419,10 @@ else:
   
 incident.addNote(helper.createRichText(note_text))
 ```
+
 ---
 
-## *SNOW: Add Note to Record**
+## SNOW: Add Note to Record:
 Uses the '/add' custom endpoint in ServiceNow to add a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`.
 
  ![screenshot](./screenshots/6.png)
@@ -423,10 +430,10 @@ Uses the '/add' custom endpoint in ServiceNow to add a Resilient Note to a Servi
 ### Inputs:
 | Input Name | Type | Required | Example | Info |
 | ---------- | :--: | :-------:| ------- | ---- |
-| `incident_id` | `Number` | Yes | `2105` | |
-| `task_id` | `Number` | No | `2251401` | |
-| `sn_note_text` | `String` | Yes | `"Can your team look into this please"` | |
-| `sn_note_type` | `Select` | Yes | `"work_note"` OR `"additional_comment"` | |
+| `incident_id` | `Number` | Yes | `2105` | ID of the Resilient Incident |
+| `task_id` | `Number` | No | `2251401` | ID of the Resilient Task |
+| `sn_note_text` | `String` | Yes | `"Can your team look into this please"` | Text of the new ServiceNow Note |
+| `sn_note_type` | `Select` | Yes | `"work_note"` OR `"additional_comment"` | Note type. Either `Work Note` or `Additional Comment` |
 
 ### Output:
 ```python
@@ -472,19 +479,20 @@ dt_now = Date()
 # Prepends message and time to the note
 note.text = u"<b>Sent to ServiceNow at {0}</b><br>{1}".format(dt_now, unicode(note.text.content))
 ```
+
 ---
 
-## **SNOW: Add Attachment to Record**
+## SNOW: Add Attachment to Record:
 Uses the '/add' custom endpoint in ServiceNow to add a Resilient Attachment to a ServiceNow Record
 
  ![screenshot](./screenshots/7.png)
 
 ### Inputs:
-| Input Name | Type | Required | Example |
-| ------------- | :--: | :-------:| ------- |
-| `attachment_id` | `Number` | Yes | `39` |
-| `incident_id` | `Number` | Yes | `2105` |
-| `task_id` | `Number` | No | `2251401` |
+| Input Name | Type | Required | Example | Info |
+| ---------- | :--: | :-------:| ------- | ---- |
+| `attachment_id` | `Number` | Yes | `39` | ID of the Resilient Attachment |
+| `incident_id` | `Number` | Yes | `2105` | ID of the Resilient Incident |
+| `task_id` | `Number` | No | `2251401` | ID of the Resilient Task |
 
 ### Output:
 ```python
@@ -532,23 +540,23 @@ if results.success:
   else:
     incident.addNote(helper.createRichText(noteText))
 ```
+
 ---
 
-<!-- TO Do here down -->
+## SNOW: Lookup sys_id:
+* Gets the `sys_id` of a ServiceNow Record
+* Used when creating a ServiceNow Record to get the `sys_id` of the `assignment_group` to assign the new Record to
 
-## *SNOW: Lookup sys_id**
-Uses the '/add' custom endpoint in ServiceNow to add a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`.
+ ![screenshot](./screenshots/2.png)
 
- ![screenshot](./screenshots/6.png)
+### Inputs:
+| Input Name | Type | Required | Example | Info |
+| ---------- | :--: | :-------:| ------- | ---- |
+| `sn_table_name` | `String` | Yes | `"sys_user_group"` | The table name in ServiceNow to query |
+| `sn_query_field` | `String` | Yes | `"name"` | The column name in the table you want to query |
+| `sn_query_value` | `String` | Yes | `"IT Securities"` | The cell value in the column you want to query |
 
-### Function Inputs:
-| Input Name | Type | Required | Example |
-| ------------- | :--: | :-------:| ------- |
-| `sn_table_name` | `String` | Yes | `"sys_user_group"` |
-| `sn_query_field` | `String` | Yes | `"name"` *(This is the column name in the table you want to query)* |
-| `sn_query_value` | `String` | Yes | `"IT Securities"` *(This is the cell value in the column you want to query)* |
-
-### Function Output:
+### Output:
 ```python
 results = {
   success: True,
@@ -558,7 +566,7 @@ results = {
     sn_query_value: "IT Securities",
     sn_query_field: "name"
   },
-  
+
   sys_id: "5f6441efc0a8010e0177fcb589156352"
 }
 ```
@@ -582,14 +590,16 @@ inputs.sn_query_value = rule.properties.sn_assignment_group
 ### Post-Process Script:
 *There is generally no Post-Process Script for this Function. Its output is normally used as an input to the **Create in ServiceNow** function.*
 
-## **6: Update Datatable**
+---
 
-### Function Inputs:
-| Input Name | Type | Required | Example |
-| ------------- | :--: | :-------:| ------- |
-| `incident_id` | `Number` | Yes | `2105` |
-| `task_id` | `Number` | No | `2251401` |
-| `sn_resilient_status` | `String` | Yes | `"C"` *("A"=Active Incident, "O"=Open Task, "C"=Closed Incident/Task)*|
+## SNOW Helper: Update Data Table:
+
+### Inputs:
+| Input Name | Type | Required | Example | Info |
+| ---------- | :--: | :-------:| ------- | ---- |
+| `incident_id` | `Number` | Yes | `2105` | ID of the Incident |
+| `task_id` | `Number` | No | `2251401` | ID of the Task |
+| `sn_resilient_status` | `String` | Yes | `"C"` | "A"=Active Incident, "O"=Open Task, "C"=Closed Incident/Task |
 
 ### Function Output:
 ```python
@@ -622,6 +632,8 @@ inputs.sn_resilient_status = task.status
 ### Post-Process Script:
 *There is generally no Post-Process Script for this Function.*
 
+---
+
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered | Conditions |
 | --------- | :---------: | --------------- | ------------------ | ---------- |
@@ -635,7 +647,9 @@ inputs.sn_resilient_status = task.status
 | Update SN Datatable on Incident Status Change | `Incident` | None | `Example: SN Utilities: Update Datatable Incident Status Change` | Status is changed |
 | Update SN Datatable on Task Status Change | `Task` | None | `Example: SN Utilities: Update Datatable Task Status Change` | Status is changed |
 
-# Datatable:
+---
+
+# Data Table:
 
 ## **ServiceNow External Ticket Status Datatable**
  ![screenshot](./screenshots/3.png)
