@@ -1,4 +1,4 @@
-# Resilient Functions Integration for Microsoft Security Graph
+# Resilient Functions Integration for Microsoft Graph Security API
 <br/>
 This is just a brief overview of the integration, please review the main doc to see the full length of installation instructions.
 ## Installation
