@@ -1,24 +1,35 @@
 # IBM Resilient Integration for ServiceNow
 
 ## Table of Contents
-<!-- TO DO -->
+- [App Config Settings](#appconfig-settings)
+- [Functions](#functions)
+  - [SNOW: Create Record](#snow-create-record)
+  - [SNOW: Update Record](#snow-update-record)
+  - [SNOW: Close Record](#snow-close-record)
+  - [SNOW: Add Note to Record](#snow-add-note-to-record)
+  - [SNOW: Add Attachment to Record](#snow-add-attachment-to-record)
+  - [SNOW: Lookup sys_id](#snow-lookup-sysid)
+  - [SNOW Helper: Update Data Table](#snow-helper-update-data-table)
+- [Rules](#rules)
+- [ServiceNow Records Data Table](#servicenow-records)
+  - [Display a Data Table in an Incident](#display-a-data-table-in-an-incident)
+
 ---
 
-# Summary of Functions:
+# Overview:
 This package contains 8 Functions, 11 Workflows, 11 Rules and 1 Data Table that, when used along side our ServiceNow App help you integrate with your ServiceNow Instance
-<!-- TODO: link these to functions below -->
-* **SNOW: Create Record** gives you the ability to create a Record in ServiceNow from a Resilient Incident or Task
-* **SNOW: Update Record** allows you to update multiple column fields in a ServiceNow Record
-* **SNOW: Close Record** lets you close a related Record in ServiceNow from a Resilient Incident or Task
-* **SNOW: Add Note to Record** allows you to send a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`
-* **SNOW: Add Attachment to Record** gives you the ability to send a Resilient Attachment to a ServiceNow Record
-* **SNOW: Lookup sys_id** queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record
-* **SNOW Helper: Add Task Note** helper function to add a Note to a Task from a Workflow with a different parent object type
-* **SNOW Helper: Update Data Table** helper function that updates the ServiceNow Records Data Table status
+
+* [SNOW: Create Record](#snow-create-record) gives you the ability to create a Record in ServiceNow from a Resilient Incident or Task
+* [SNOW: Update Record](#snow-update-record) allows you to update multiple column fields in a ServiceNow Record
+* [SNOW: Close Record](#snow-close-record) lets you close a related Record in ServiceNow from a Resilient Incident or Task
+* [SNOW: Add Note to Record](#snow-add-note-to-record) allows you to send a Resilient Note to a ServiceNow Record as a `Work Note` or `Additional Comment`
+* [SNOW: Add Attachment to Record](#snow-add-attachment-to-record) gives you the ability to send a Resilient Attachment to a ServiceNow Record
+* [SNOW: Lookup sys_id](#snow-lookup-sysid) queries your ServiceNow Instance for a Record and returns the `sys_id` of that Record
+* [SNOW Helper: Update Data Table](#snow-helper-update-data-table) helper function that updates the ServiceNow Records Data Table status
 
 ---
 
-# app.config settings:
+# App Config Settings (app.config):
 ```
 [fn_service_now]
 # Link to your ServiceNow Instance
@@ -637,22 +648,23 @@ inputs.sn_resilient_status = task.status
 # Rules:
 | Rule Name | Object Type | Activity Fields | Workflow Triggered | Conditions |
 | --------- | :---------: | --------------- | ------------------ | ---------- |
-| Create Incident in ServiceNow | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Incident in ServiceNow` | None |
-| Create Task in ServiceNow | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SN Utilities: Create Task in ServiceNow` | None |
-| Close Incident in ServiceNow | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Incident in ServiceNow` | None |
-| Close Task in ServiceNow | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SN Utilities: Close Task in ServiceNow` | None |
-| Send as Additional Comment | `Note` | None | `Example: SN Utilities: Add Comment to ServiceNow Record` | None |
-| Send as Work Note | `Note` | None | `Example: SN Utilities: Add Work Note to ServiceNow Record` | None |
-| Add Attachment to ServiceNow Record | `Attachment` | None | `Example: SN Utilities: Add Attachment to ServiceNow Record` | None |
-| Update SN Datatable on Incident Status Change | `Incident` | None | `Example: SN Utilities: Update Datatable Incident Status Change` | Status is changed |
-| Update SN Datatable on Task Status Change | `Task` | None | `Example: SN Utilities: Update Datatable Task Status Change` | Status is changed |
+| SNOW: Create Record [Incident] | `Incident` | `SN Assignment Group`, `SN Initial Note` | `Example: SNOW: Create Record [Incident]` | `SNOW Record ID` does not have a value |
+| SNOW: Create Record [Task] | `Task` | `SN Assignment Group`, `SN Initial Note` | `Example: SNOW: Create Record [Task]` | None |
+| SNOW: Close Record [Incident] | `Incident` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SNOW: Close Record [Incident]` | `SNOW Record ID` has a value |
+| SNOW: Close Record [Task] | `Task` | `SN Record State`, `SN Close Code`, `SN Close Notes` | `Example: SNOW: Close Record [Task]` | None |
+| SNOW: Send as Additional Comment | `Note` | None | `Example: SNOW: Add Comment to Record` | `Note Text` does not contain "Sent to ServiceNow at" |
+| SNOW: Send as Work Note | `Note` | None | `Example: SNOW: Add Work Note to Record` | `Note Text` does not contain "Sent to ServiceNow at" |
+| SNOW: Add Attachment to Record | `Attachment` | None | `Example: SNOW: Add Attachment to Record` | None |
+| SNOW: Update Record on Severity Change  | `Incident` | None | `Example: SNOW: Update Record on Severity Change` | `Severity` is changed AND `SNOW Record ID` has a value |
+| SNOW: Update Data Table on Status Change [Incident] | `Incident` | None | `Example: SNOW: Update Data Table on Status Change [Incident]` | `Status` is changed |
+| SNOW: Update Data Table on Status Change [Task] | `Task` | None | `Example: SNOW: Update Data Table on Status Change [Task]` | `Status` is changed |
 
 ---
 
 # Data Table:
 
-## **ServiceNow External Ticket Status Datatable**
- ![screenshot](./screenshots/3.png)
+## ServiceNow Records
+ ![screenshot](./screenshots/9.png)
 
 ### API Name:
 sn_records_dt
@@ -660,21 +672,28 @@ sn_records_dt
 ### Columns:
 | Column Name | API Access Name | Type |
 | ----------- | --------------- | -----|
-| Time Last Updated | `time` | `DateTimePicker` |
-| res_id | `res_id` | `Text` |
-| sn_ref_id | `sn_ref_id` | `Text` |
-| Resilient Status | `resilient_status` | `Rich Text Area` |
-| ServiceNow Status | `servicenow_status` | `Rich Text Area` |
-| Links | `link` | `Rich Text Area` |
+| Last Updated | `sn_records_dt_time` | `DateTimePicker` |
+| Name | `sn_records_dt_name` | `Text` |
+| Type | `sn_records_dt_type` | `Text` |
+| RES ID | `sn_records_dt_res_id` | `Text` |
+| SNOW ID | `sn_records_dt_sn_ref_id` | `Text` |
+| RES Status | `sn_records_dt_res_status` | `Rich Text` |
+| SNOW Status | `sn_records_dt_snow_status` | `Rich Text` |
+| Links | `sn_records_dt_links` | `Rich Text` |
 
-### Display the Datatable in an Incident
-* In IBM Resilient, each Incident can have one ServiceNow External Ticket Status Datatable
-* In order to display the Datatable in your Incident, you must **modify your Layout Settings**
+### Display a Data Table in an Incident
+* In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**
 
 1. Go to **Customization Settings** > **Layouts** > **Incident Tabs** > **+ Add Tab**
- ![screenshot](./screenshots/4.png)
-2. Enter **Tab Text**: `ServiceNow` and click **Add**
- ![screenshot](./screenshots/5.png)
-3. **Drag** the Datatable into the middle and click **Save**
- ![screenshot](./screenshots/6.png)
-4. Create a new Incident and you will now see the **ServiceNow Tab** with the Datatable
+   
+ ![screenshot](./screenshots/dt_1.png)
+
+2. Enter **Tab Text**: `My Test Tab` and click **Add**
+ 
+ ![screenshot](./screenshots/dt_2.png)
+
+3. **Drag** the Data table into the middle and click **Save**
+ 
+ ![screenshot](./screenshots/dt_3.png)
+
+4. Create a new Incident and you will now see the **My Test Tab** with the **Test Data Table**
