@@ -2,6 +2,7 @@
 
 ## Documentation
   - [Overview](#overview)
+  - [Current Limitations](#current-limitations)
   - [Install Guide](./docs/install_guide)
   - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
   - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
