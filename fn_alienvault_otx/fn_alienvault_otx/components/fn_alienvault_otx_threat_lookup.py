@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             # Connection to Alien Vault OTX to make a GET request call for given URL.
             _api_response = _request_session.get(alien_vault_get_url, headers=CALL_HEADER, proxies=AV_PROXY)
 
-            _api_response_json = ApiCallController.response_handle_errors(response=_api_response).json()
+            _api_response_json = ApiCallController_instance.response_handle_errors(response=_api_response).json()
 
             yield StatusMessage("done...")
 
@@ -78,9 +78,15 @@ class FunctionComponent(ResilientComponent):
             }
             log.info("API CALL URL : {}".format(alien_vault_get_url))
             log.info("RESULT : {}".format(results))
+
+            # Closing Connection
+            requests.session().close()
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except requests.exceptions.RetryError:
             raise RetryError()
         except Exception as er:
+            # Closing Connection
+            requests.session().close()
             yield FunctionError(er)

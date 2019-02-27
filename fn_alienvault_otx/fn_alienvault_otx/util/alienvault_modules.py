@@ -7,6 +7,7 @@ import requests
 from requests.packages.urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 
+
 class InvalidAPIKey(Exception):
     def __init__(self, value=None):
         self.value = value or "Invalid API Key"
@@ -58,25 +59,8 @@ class ApiCallController(object):
         return proxies
 
     @classmethod
-    def response_handle_errors(cls, response):
-        def _response_json():
-            try:
-                return response.json()
-            except Exception as e:
-                return {'internal_error': 'Unable to decode response json: {}'.format(e)}
-
-        if response.status_code == 403:
-            raise InvalidAPIKey()
-        elif response.status_code == 400:
-            raise BadRequest(_response_json())
-        elif str(response.status_code)[0] != "2":
-            raise Exception("Unexpected http code: %r, response=%r", response.status_code, _response_json())
-
-        return response
-
-    @classmethod
     def create_alienvault_indicators_url(cls, base_url, search_value, search_type, search_section):
-        _indicator_url = base_url+"/indicators/{}/{}/{}"
+        _indicator_url = base_url + "/indicators/{}/{}/{}"
         _indicator_full_url = None
         if search_value is not None and search_type is not None and search_section is not None:
             if search_type.find('IP Address') != -1:
@@ -101,6 +85,22 @@ class ApiCallController(object):
             raise InvalidInputParam()
 
         return _indicator_full_url
+
+    def response_handle_errors(self, response):
+        def _response_json():
+            try:
+                return response.json()
+            except Exception as e:
+                return {'internal_error': 'Unable to decode response json: {}'.format(e)}
+
+        if response.status_code == 403:
+            raise InvalidAPIKey()
+        elif response.status_code == 400:
+            raise BadRequest(_response_json())
+        elif str(response.status_code)[0] != "2":
+            raise Exception("Unexpected http code: %r, response=%r", response.status_code, _response_json())
+
+        return response
 
     def session(self):
         if self.request_session is None:

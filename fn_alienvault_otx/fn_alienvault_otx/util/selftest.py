@@ -40,7 +40,7 @@ def selftest_function(opts):
 
         response = _request_session.get(ALIEN_VAULT_URL, headers=HEADER, proxies=PROXIES)
 
-        response_data = ApiCallController.response_handle_errors(response).json()
+        response_data = ApiCallController_instance.response_handle_errors(response).json()
         log.info("Successfully Established Connection to Alien Vault OTX")
 
         for k, v in response_data.items():
