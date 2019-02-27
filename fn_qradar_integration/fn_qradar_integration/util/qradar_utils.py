@@ -317,11 +317,11 @@ class QRadarClient(object):
         :return:
         """
         ref_sets = QRadarClient.get_all_ref_set()
-        LOG.debug("All reference sets: {}".format(ref_sets))
+        LOG.debug(u"All reference sets: {}".format(ref_sets))
 
         ret = []
         for r_set in ref_sets:
-            LOG.info("Looking for {} in reference set {}".format(value, r_set["name"]))
+            LOG.info(u"Looking for {} in reference set {}".format(value, r_set["name"]))
             element = QRadarClient.search_ref_set(r_set["name"], value)
             if element["found"] == "True":
 
@@ -338,8 +338,16 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = urllib.quote(ref_set, '')
-        url = "{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
+
+        try:
+            #
+            #   urllib.quote has trouble to handle unicode
+            #
+            ref_set_link = urllib.quote(ref_set, '')
+        except:
+            ref_set_link = ref_set
+
+        url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
