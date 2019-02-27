@@ -17,8 +17,10 @@ function getMidServer(){
 	var MID_SERVER_CAPABILITY = "IBMResilientAccess";
 	
 	try{
+		//A mid-server must have ALL or IBMResilientAccess capabilities enabled
 		var gr = new GlideRecord(MID_SERVER_TABLE_NAME);
-		gr.addQuery("capability.capability", MID_SERVER_CAPABILITY);
+		var grQuery = "ALL," + MID_SERVER_CAPABILITY;
+		gr.addQuery("capability.capability", "IN", grQuery);
 		gr.query();
 
 		while(gr.next()) {
