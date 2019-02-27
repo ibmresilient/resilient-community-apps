@@ -80,5 +80,7 @@ class FunctionComponent(ResilientComponent):
             log.info("RESULT : {}".format(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+        except requests.exceptions.RetryError:
+            raise RetryError()
         except Exception as er:
             yield FunctionError(er)

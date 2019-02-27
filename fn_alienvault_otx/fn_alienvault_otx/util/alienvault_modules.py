@@ -96,7 +96,7 @@ class ApiCallController(object):
             elif search_type.find('CVE') != -1:
                 _indicator_full_url = _indicator_url.format("cve", search_value, search_section)
             else:
-                InvalidInputParam()
+                raise InvalidInputParam("Invalid Function Input Type Parameter.")
         else:
             raise InvalidInputParam()
 

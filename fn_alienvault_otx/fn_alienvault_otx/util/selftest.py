@@ -37,6 +37,7 @@ def selftest_function(opts):
 
     # Connection to Alien Vault OTX
     try:
+
         response = _request_session.get(ALIEN_VAULT_URL, headers=HEADER, proxies=PROXIES)
 
         response_data = ApiCallController.response_handle_errors(response).json()
@@ -47,8 +48,9 @@ def selftest_function(opts):
 
         # Closing Connection
         requests.session().close()
-
         return {"state": "Success"}
+    except requests.exceptions.RetryError:
+        raise RetryError()
     except Exception as e:
         log.info(" Failed Connection to Alien Vault OTX : {}".format(e))
 
