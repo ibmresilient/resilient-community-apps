@@ -25,3 +25,13 @@ Both components work in conjunction with each other and allow for a **bi-directi
 
 Follow our [Install Guide](./docs/install_guide) to get up and running. Then using our customization guides (links above), adapt the Integration to suit your Incident Response Workflow
 
+## Current Limitations:
+While we put our IBM Resilient ServiceNow App through the ServiceNow Certification process, this Integration has some current limitations:
+
+* The current ServiceNow App is **pre-certified** which really means that we have a ServiceNow App developed, but not hosted on the ServiceNow App Store.
+* In order to distribute the App, we host it on a Public GitHub Repository. 
+* To install the App the SNOW admin must get the App from GitHub. 
+* The limitations are:
+  * There is no 'clean' way to update the App once installed. 
+  * If the SNOW admin pulls in the latest version of the ServiceNow App from GitHub, the Integration will break as **all 'references' between ServiceNow Records and Resilient Incidents/Tasks will be deleted**. Once we have it 'certified' and on the ServiceNow App Store the update process will be more seamless and this will not be an issue.
+
