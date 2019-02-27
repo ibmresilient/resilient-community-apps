@@ -5,5 +5,5 @@ resilient-circuits codegen \
 --field mitre_tactic_name mitre_technique_name \
 --workflow mitre_technique_task mitre_get_tactic_information mitre_get_technique_information \
 --rule "Create Task For Technique" "Get MITRE technique information" "Get MITRE tactic information" \
---datatable mitre_attack_of_incident mitre_attack_of_incident \
+--datatable mitre_attack_of_incident mitre_attack_of_artifact mitre_attack_techniques \
 --exportfile export.res
