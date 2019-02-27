@@ -31,8 +31,8 @@ While we put our IBM Resilient ServiceNow App through the ServiceNow Certificati
 
 * The current ServiceNow App is **pre-certified** which really means that we have a ServiceNow App developed, but not hosted on the ServiceNow App Store.
 * In order to distribute the App, we host it on a Public GitHub Repository. 
-* To install the App the SNOW admin must get the App from GitHub. 
+* To install the App the ServiceNow admin must get the App from GitHub. 
 * The limitations are:
   * There is no 'clean' way to update the App once installed. 
-  * If the SNOW admin pulls in the latest version of the ServiceNow App from GitHub, the Integration will break as **all 'references' between ServiceNow Records and Resilient Incidents/Tasks will be deleted**. Once we have it 'certified' and on the ServiceNow App Store the update process will be more seamless and this will not be an issue.
+  * If the ServiceNow admin pulls in the latest version of the ServiceNow App from GitHub, the Integration will break as **all 'references' between ServiceNow Records and Resilient Incidents/Tasks will be deleted**. Once we have it 'certified' and on the ServiceNow App Store the update process will be more seamless and this will not be an issue.
 
