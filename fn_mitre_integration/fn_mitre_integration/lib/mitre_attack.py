@@ -203,7 +203,7 @@ class MitreAttack(object):
                 "description": items[0].get("description", ""),
                 "external_references": refs,
                 "x_mitre_detection": items[0].get("x_mitre_detection", ""),
-                "mitre_mitigation" : self.get_tech_mitigation(mitre_tech_id),
+                "mitre_mitigation" : self.get_tech_mitigation(tech_id=mitre_tech_id),
                 "mitre_tech_id": mitre_tech_id
             }
 
@@ -306,7 +306,7 @@ class MitreAttack(object):
                 break
         return mitre_tech_id
 
-    def get_tech_mitigation(self, tech_id):
+    def get_tech_mitigation(self, tech_id=None, tech_name=None):
         """
         Get mitigation for a given tech
         Reference:
@@ -323,9 +323,15 @@ class MitreAttack(object):
         tc_source = TAXIICollectionSource(collection)
 
         # Need to get the obj first and then the STIX id
+        tech_filter = None
+        if tech_id is not None:
+            tech_filter = Filter("external_references.external_id", '=', tech_id)
+        elif tech_name is not None:
+            tech_filter = Filter("name", '=', tech_name)
+
         filt = [
             Filter("type", '=', "attack-pattern"),
-            Filter("external_references.external_id", '=', tech_id)
+            tech_filter
         ]
         tech = tc_source.query(filt)
 

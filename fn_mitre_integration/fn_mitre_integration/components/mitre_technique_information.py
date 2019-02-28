@@ -49,7 +49,12 @@ class FunctionComponent(ResilientComponent):
             if mitre_technique_mitigation_only:
                 tech = {
                     "name": mitre_technique_name,
-                    "mitre_mitigation": mitre_att.get_tech_mitigation(mitre_technique_id)
+                    "description": "",
+                    "external_references": [{"url":""}],
+                    "x_mitre_detection": "",
+                    "mitre_tech_id": "",
+                    "mitre_mitigation": mitre_att.get_tech_mitigation(tech_id=mitre_technique_id,
+                                                                      tech_name=mitre_technique_name)
                 }
             else:
                 tech = mitre_att.get_tech(name=mitre_technique_name,
