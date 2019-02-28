@@ -67,11 +67,15 @@ def test_get_tech_mitigation():
             id = mitre_attack.get_external_id(tech)
             assert(id)
 
-            mitigation = mitre_attack.get_tech_mitigation(id)
+            mitigation = mitre_attack.get_tech_mitigation(tech_id=id)
             print(mitigation)
             count += 1
             if count > 5:
                 break
+
+            # Test getting mitigation using name
+            mitigation = mitre_attack.get_tech_mitigation(tech_name=tech["name"])
+            print(mitigation)
     except:
         assert(False)
 
