@@ -69,18 +69,30 @@ class FunctionComponent(ResilientComponent):
             # Connection to Alien Vault OTX to make a GET request call for given URL.
             _api_response = _request_session.get(alien_vault_get_url, headers=CALL_HEADER, proxies=AV_PROXY)
 
-            _api_response_json = ApiCallController_instance.response_handle_errors(response=_api_response).json()
+            _api_response.raise_for_status()
 
-            yield StatusMessage("done...")
+            # api_response_json = ApiCallController_instance.response_handle_errors(response=_api_response).json()
+            # Just to check received response is json object
+            _api_response_json = _api_response.json()
+
+            # Converts a String Timestamp to an int in milliseconds since 1970 epoch
+            _api_response_text = _api_response.text
+            _api_response_text = ApiCallController.convert_date_string_to_ms_epoch(response_data=_api_response_text)
+
+            # converting string response to json object after changing the time format
+            try:
+                _api_response_json = json.loads(_api_response_text)
+            except Exception as e:
+                log.info("Error occurred while converting time stamp to epoch, time stamp is not converted")
 
             results = {
                 "content": _api_response_json
             }
             log.info("API CALL URL : {}".format(alien_vault_get_url))
-            log.info("RESULT : {}".format(results))
 
             # Closing Connection
             requests.session().close()
+            yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
