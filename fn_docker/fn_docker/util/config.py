@@ -16,8 +16,8 @@ docker_use_remote_conn=False
 docker_remote_url=<ssh | tcp connection string>
 [docker_volatility]
 docker_image=remnux/volatility
-primary_output_dir=/tmp/bind_folder
-primary_internal_dir=/home/nonroot/memdumps
+primary_source_dir=/tmp/bind_folder
+primary_dest_dir=/home/nonroot/memdumps
 cmd_operation=pslist
 cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
 
