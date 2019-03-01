@@ -18,12 +18,61 @@ The Resilient Integration with Docker provides tools to integrate Docker into yo
     - [Columns:](#columns)
     - [Display the Datatable in an Incident](#display-the-datatable-in-an-incident)
 
-# Connection options and installation:  
+# Pre-Requisite Steps and Info: 
 
+### Install Docker 
 This integration requires access to a Docker daemon, in order to run containers and get output. Typically the Docker daemon would be on the same machine that you intend to run the containers from so this would mean installing Docker on your integration server itself.
-To install Docker on your Integration Server see [this link](https://docs.docker.com/install/linux/docker-ee/rhel/). 
+To install Docker on your Integration Server see [this link](https://docs.docker.com/install/linux/docker-ee/rhel/) for RHEL, [this one](https://docs.docker.com/docker-for-mac/install/) for MacOS or [this one](https://docs.docker.com/install/) for everything else. 
 
-Alternatively, if you have an exposed Docker daemon that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server. This is done by specifying the `docker_remote_url` value in the app.config section which will specify the location of the Docker daemon and also which remote connection option to use, of which there are two: TCP and SSH.
+
+### Pulling Images
+This integration package does not pull docker images for you. This is intentional to reduce the chance of downloading an unintended image for use in your organisation. 
+Images you wish to use with the integration will need to be pulled separately either from a registry or a Github repo using the `docker pull` command.
+
+Git Repo Example: `docker build -t amass https://github.com/OWASP/Amass.git` 
+Dockerhub Example: `docker pull blacktop/nsrl`  
+### Connection options and installation:  
+There are a number of connection options for this integration. The easiest to setup and maintain is using a local Docker connection by installing Docker on the Integration Server.
+Alternatively, if you already have an Docker daemon exposed on a port that you can connect to and use, you may instead opt to connect to and run containers using this daemon instead of installing Docker on your integration server. 
+This is done by specifying the `docker_remote_url` value in the app.config section which will specify the location of the Docker daemon and also which remote connection option to use, of which there are two: TCP and SSH.
+
+### SSH Connection Setup 
+SSH as a connection option is a relatively new connection option, first announced in [2018](https://blog.docker.com/2018/09/join-the-beta-for-docker-engine-18-09/) 
+ is also provided to enable secure connections to a Docker daemon without the need to modify existing Docker setup.
+Docker SSH support requires Docker version 18.09 or higher. 
+
+Docker SSH requires using SSH Keys rather than a username and password and use the Paramiko library to do it.
+
+A good tutorial on generating SSH Keys can be found [here](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) 
+
+After you have generated your SSH Key, you will need to ensure it is an authorized key on the machine you intend to connect to. 
+For information on copying SSH keys to another machine as an authorized key, [see here](https://www.ssh.com/ssh/copy-id)
+
+### Known Issues 
+Currently there is limited support for Attachment Workflows when using remote connections. 
+This is due to how the remote volume bindings are established, where if the source directory does not exist on the destination host, it will attempt to create it.
+For this reason when using remote connections it is advised your source volume directory is in a common directory such as `/tmp/`.
+
+Additionally, for images which do not run as root, you will need to ensure the attachments have the right permissions on the destination source to be accessible from a remote source. e.g `chmod a+xwr ~/<dest_dir>`
+
+# About the provided UseCases 
+
+## Volatility 
+The Volatility Framework is a completely open collection of tools,
+implemented in Python, [[source]](https://github.com/volatilityfoundation/volatility) used to analyze volatile memory (RAM) samples.
+
+[View this image on DockerHub](https://hub.docker.com/r/remnux/volatility)
+## NSRL Whitelist
+
+The National Software Reference Library (NSRL) is designed to collect software from various sources and incorporate file profiles computed from this software into a Reference Data Set (RDS) of information.
+The RDS is a collection of digital signatures of known, traceable software applications.[Source](https://www.nist.gov/software-quality-group/about-nsrl)
+
+[View this image on DockerHub](https://hub.docker.com/r/blacktop/nsrl)
+
+## Amass 
+The OWASP Amass tool suite obtains subdomain names by scraping data sources, recursive brute forcing, crawling web archives, permuting/altering names and reverse DNS sweeping.[Source](https://github.com/OWASP/Amass) 
+
+[View this image on Github](https://github.com/OWASP/Amass)
 
 # app.config settings:
 There are two ways to configure settings for this Integration. You can choose to configure general settings for the Integration itself such as which method to use for connections. 
