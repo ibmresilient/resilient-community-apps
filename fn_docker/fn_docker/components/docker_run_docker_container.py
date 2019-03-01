@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
                 # Get the external directory in which to save the file
                 output_vol = helper.get_image_specific_config_option(
-                    options=self.all_options.get('CONFIGSECTIONPREFIX{}'.format(image_to_use)),
+                    options=self.all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
                     option_name="primary_source_dir", optional=True)
 
                 yield StatusMessage("Writing attachment to bind folder")
