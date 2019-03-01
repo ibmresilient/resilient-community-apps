@@ -20,6 +20,7 @@ from fn_docker.util.helper import ResDockerHelper
 
 
 DOCKERATTACHMENTPREFIX = '.docker_integration_input_'
+CONFIGSECTIONPREFIX = 'docker_'  # A constant prefix used for an images app.config section.
 
 
 class FunctionComponent(ResilientComponent):
@@ -29,7 +30,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_docker", {})
-        self.all_options = {k: v for k, v in opts.items() if 'fn_docker' in k}
+        self.all_options = {k: v for k, v in opts.items() if CONFIGSECTIONPREFIX in k}
         self.host_config = (opts.get("host"), opts.get("org"))
 
     @handler("reload")
@@ -84,26 +85,30 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
                 # Get the external directory in which to save the file
                 output_vol = helper.get_image_specific_config_option(
-                    options=self.all_options.get('fn_docker_{}'.format(image_to_use)),
-                    option_name="primary_output_dir", optional=True)
+                    options=self.all_options.get('CONFIGSECTIONPREFIX{}'.format(image_to_use)),
+                    option_name="primary_source_dir", optional=True)
 
                 yield StatusMessage("Writing attachment to bind folder")
 
-                # Convert to named temp file
-                with tempfile.NamedTemporaryFile(delete=False, prefix=DOCKERATTACHMENTPREFIX,
-                                                 dir=output_vol) as temp_file:
-                    try:
-                        temp_file.write(attachment_input)
-                        temp_file.close()
-                    finally:
-                        attachment_file_name = os.path.split(temp_file.name)[1]
-                        # Add a attachment_input arg to be rendered into the cmd command
-                        escaped_args.update({
-                            "attachment_input": render("{{attachment_input|%s}}" % "sh",
-                                                       {u"attachment_input": attachment_file_name}),
-                        })
-                        yield StatusMessage(u"Added this as an Attachment Input: {}".format(attachment_file_name))
+                if os.path.isdir(output_vol):
+                    # Convert to named temp file
+                    with tempfile.NamedTemporaryFile(delete=False, prefix=DOCKERATTACHMENTPREFIX,
+                                                     dir=output_vol) as temp_file:
+                        try:
+                            temp_file.write(attachment_input)
+                            temp_file.close()
 
+                        finally:
+                            attachment_file_name = os.path.split(temp_file.name)[1]
+                            # Add a attachment_input arg to be rendered into the cmd command
+                            escaped_args.update({
+                                "attachment_input": render("{{attachment_input|%s}}" % "sh",
+                                                           {u"attachment_input": attachment_file_name}),
+                            })
+                            yield StatusMessage(u"Added this as an Attachment Input: {}".format(attachment_file_name))
+                else:
+                    errMsg = u"""Could not write file to directory, does the directory {0} exist? If not create it with mkdir {0}""".format(output_vol)
+                    raise FunctionError(errMsg)
             else:
                 # We are not dealing with an attachment
                 log.debug("Working with an artifact")
@@ -152,8 +157,8 @@ class FunctionComponent(ResilientComponent):
                 container.remove()
 
             except requests.exceptions.HTTPError as e:
-                yield StatusMessage("Encountered issue when trying to remove container: {} \n {}".format(str(e),
-                                    "If you supplied an extra app.config value to remove the container this is expected."))
+                yield StatusMessage(u"""Encountered issue when trying to remove container: {} \n {}""".format(str(e),
+                                    u"""If you supplied an extra app.config value to remove the container this is expected."""))
 
             # Setup tempfile
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:

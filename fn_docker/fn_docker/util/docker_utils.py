@@ -7,7 +7,7 @@ from resilient_circuits.template_functions import render
 import resilient_lib
 log = logging.getLogger(__name__)
 
-CONFIGSECTIONPREFIX = 'fn_docker_'  # A constant prefix used for an images app.config section.
+CONFIGSECTIONPREFIX = 'docker_'  # A constant prefix used for an images app.config section.
 
 class DockerUtils:
 
@@ -84,9 +84,11 @@ class DockerUtils:
             self.client.images.get(image_to_get)
         except docker.errors.ImageNotFound:
             log.info('Docker image was not found, please ensure the image you want to use is on your Docker host')
+            raise ValueError('Docker image was not found, please ensure the image you want to use is on your Docker host')
 
         except docker.errors.NullResource:
             log.info('No image was passed to this function, please check your app.config')
+
 
     def get_client(self):
         return self.client
@@ -143,20 +145,21 @@ class DockerUtils:
         :param helper:
         :param image_to_use:
         :param all_options:
-        :param docker_extra_kwargs:
+        :param escaped_args:
         :return:
         """
+        log.debug(all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)))
         command = helper.get_image_specific_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
             option_name="cmd")
 
         output_vol = helper.get_image_specific_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
-            option_name="primary_output_dir", optional=True)
+            option_name="primary_source_dir", optional=True)
         internal_vol = helper.get_image_specific_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
-            option_name="primary_internal_dir", optional=True)
-        vol_operation = helper.get_image_specific_config_option(
+            option_name="primary_dest_dir", optional=True)
+        command_operation = helper.get_image_specific_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="cmd_operation",
             optional=True)
 
@@ -169,7 +172,7 @@ class DockerUtils:
         container_volume_bind = {output_vol: {'bind': internal_vol, 'mode': 'rw'}} if output_vol and internal_vol else dict()
 
         if docker_extra_kwargs.get('volumes', False):
-            log.info("Found a Volume in Extra Kwargs. Appending to existing volume definition")
+            log.debug("Found a Volume in Extra Kwargs. Appending to existing volume definition")
 
             # Split the volumes string by commas to get each volume binding
             for volume in docker_extra_kwargs.get('volumes').split(','):
@@ -185,14 +188,14 @@ class DockerUtils:
             # After we finish looping
             del docker_extra_kwargs['volumes']  # Remove the volume
         docker_extra_kwargs['volumes'] = container_volume_bind
-        log.info(
+        log.debug(
             "Attempted to format volume from extra kwargs, now is type {}".format(
                 type(docker_extra_kwargs['volumes'])))
 
         escaped_args.update({
             "internal_vol": render("{{internal_vol|%s}}" % "sh", {"internal_vol": internal_vol}),
             "operation": render("{{operation|%s}}" % "sh",
-                                {"operation": vol_operation})
+                                {"operation": command_operation})
         })
         return render(command,escaped_args), docker_extra_kwargs, image_fullname
 
