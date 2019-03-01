@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_alienvault_otx_threat_lookup")
     def _fn_alienvault_otx_threat_lookup_function(self, event, *args, **kwargs):
-        """Function: A Function to lookup Threat Intelligence information from Alien Vault OTX for given artifact value."""
+        """Function: A function to lookup threat intelligence information from Alien Vault OTX for given artifact value."""
         try:
             # Get the function parameters:
             alienvault_search_value = kwargs.get("alienvault_search_value")  # text
@@ -47,7 +47,6 @@ class FunctionComponent(ResilientComponent):
                                                                                      alienvault_search_value,
                                                                                      alienvault_search_type,
                                                                                      alienvault_section)
-
             # Getting Alien Vault API Key From app.config
             AV_API_KEY = self.options.get('av_api_key')
 

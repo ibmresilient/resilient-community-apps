@@ -7,6 +7,7 @@
 
 import logging
 from fn_alienvault_otx.util.alienvault_modules import *
+
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
