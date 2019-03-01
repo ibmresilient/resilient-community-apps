@@ -21,6 +21,7 @@ class ResDockerHelper:
 
     def get_config_option(self, option_name, optional=False):
         """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
+
         option = self.options.get(option_name)
 
         if option is None and optional is False:
