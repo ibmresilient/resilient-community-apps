@@ -25,7 +25,7 @@ except NameError:
 def get_mock_config_data():
   return u"""[fn_service_now]
 sn_host=https://test.service-now.com
-sn_api_uri=/api/x_261673_resilient/api
+sn_api_uri=/api/x_ibmrt_resilient/api
 sn_table_name=incident
 sn_username=ibmresilient
 sn_password="$testpassword"

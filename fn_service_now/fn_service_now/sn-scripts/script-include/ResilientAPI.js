@@ -7,7 +7,7 @@ var RES_DATATABLE_NAME = "sn_records_dt";
 
 //Function to get Resilient Password so we don't have to set Variable in Memory
 function getPassword(){
-	return gs.getProperty("x_261673_resilient.ResilientUserPassword");
+	return gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 }
 
 //Function to get the name of the MidServer that has IBMResilientAccess Capabilities and is Running
@@ -185,12 +185,12 @@ ResilientAPI.prototype = {
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
-			hostName = gs.getProperty("x_261673_resilient.ResilientHost");
-			orgName = gs.getProperty("x_261673_resilient.ResilientOrgName");
-			userEmail = gs.getProperty("x_261673_resilient.ResilientUserEmail");
-			userPassword = gs.getProperty("x_261673_resilient.ResilientUserPassword");
-			snUsername = gs.getProperty("x_261673_resilient.ServiceNowUsername");
-			usingMidServer = gs.getProperty("x_261673_resilient.UseMidServer");
+			hostName = gs.getProperty("x_ibmrt_resilient.ResilientHost");
+			orgName = gs.getProperty("x_ibmrt_resilient.ResilientOrgName");
+			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail");
+			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
+			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
+			usingMidServer = gs.getProperty("x_ibmrt_resilient.UseMidServer");
 		}
 		catch (e){
 			errMsg = "Failed getting Resilient Configuration Properties. Check the System Properties\n" + e;

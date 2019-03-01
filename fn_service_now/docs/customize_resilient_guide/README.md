@@ -36,7 +36,7 @@ This package contains 8 Functions, 11 Workflows, 11 Rules and 1 Data Table that,
 sn_host=https://instance.service-now.com
 
 # The URI to the ServiceNow App that handles the requests from Resilient
-sn_api_uri=/api/x_261673_resilient/api
+sn_api_uri=/api/x_ibmrt_resilient/api
 
 # The name of the table in ServiceNow you want to integrate with
 sn_table_name=incident

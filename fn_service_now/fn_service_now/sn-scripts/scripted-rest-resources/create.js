@@ -6,14 +6,6 @@
 	var record, response_body = null;
 	var req = request.body.data;
 	
-	//Function that converts miliseconds to a GlideDateTime Object
-	function ms_to_glideDateTime(ms){
-		var gdt = new GlideDateTime();
-		gdt.subtract(gdt.getNumericValue()); // sets the date to 0 
-		gdt.add(ms); //Set to ms you want
-		return gdt;
-	}
-	
 	//Function that creates and initializes a new GlideRecord
 	function new_record(table_name){
 		var rec = new GlideRecord(table_name);
@@ -34,9 +26,9 @@
 	//Function to set all common table column fields
 	function set_record_required_fields(record, request, type, short_description, description){
 		//Set custom table column fields
-		record.setValue("x_261673_resilient_reference_id", request.id);
-		record.setValue("x_261673_resilient_type", type);
-		record.setValue("x_261673_resilient_reference_link", request.link);
+		record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", request.id);
+		record.setValue("x_ibmrt_resilient_ibm_resilient_type", type);
+		record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", request.link);
 		
 		//Set system table column fields
 		record.short_description = short_description;

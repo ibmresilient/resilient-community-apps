@@ -187,7 +187,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
         resHelper = new ResilientHelper();
     
         //Get resilient_reference_id
-        res_reference_id = current.getValue("x_261673_resilient_reference_id");
+        res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
         
         //Set noteText to last additional comment added
         noteText = current.comments.getJournalEntry(1);
@@ -212,7 +212,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
         resHelper = new ResilientHelper();
     
         //Get resilient_reference_id
-        res_reference_id = current.getValue("x_261673_resilient_reference_id");
+        res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
         
         //Set noteText to last additional comment added
         noteText = current.work_notes.getJournalEntry(1);
@@ -248,7 +248,7 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
         };
         
         //Get the required values
-        res_reference_id = current.getValue("x_261673_resilient_reference_id");
+        res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
         snTicketState = current.state.getChoiceValue();
         snTicketStateColor = stateToColorMap[snTicketState];
         
@@ -276,9 +276,9 @@ The **ResilientHelper API** will help you to create your own ServiceNow `Workflo
 
 * Creates an Incident/Task in IBM Resilient
 * Sets the the following Columns in ServiceNow:
-  * x_261673_resilient_reference_id
-  * x_261673_resilient_type
-  * x_261673_resilient_reference_link
+  * x_ibmrt_resilient_ibm_resilient_reference_id
+  * x_ibmrt_resilient_ibm_resilient_type
+  * x_ibmrt_resilient_ibm_resilient_reference_link
 * Adds a new row to the Data Table in IBM Resilient
 
 #### Parameters:

@@ -44,7 +44,7 @@
 * A new tab will open, click **Import from Source Control.**
  ![screenshot](./screenshots/4.png)
 * Copy the following URL, paste it into the **URL input** and click **Import.**
-  * https://github.com/ibmresilient/resilient-servicenow
+  * https://github.com/ibmresilient/resilient-servicenow-app
  ![screenshot](./screenshots/5.png)
 * Wait for it to import successfully then click **Select Application.**
  ![screenshot](./screenshots/6.png)
@@ -73,7 +73,7 @@
 * Still in the users table, search and open the user you just created.
  ![screenshot](./screenshots/11.png)
 * Scroll down. Under **Roles**, click **Edit**
-* Give the user the `x_261673_resilient.admin` role.
+* Give the user the `x_ibmrt_resilient.admin` role.
  ![screenshot](./screenshots/12.png)
 * Click **Save.**
 ---
@@ -169,7 +169,7 @@ Once **installed** and **validated:**
 * In ServiceNow, go to the **Users Table** and open the user you want to give the permissions to
 * Scroll down. Under **Roles**, click **Edit**
  ![screenshot](./screenshots/34.png)
-* Give the user the `x_261673_resilient.user` role
+* Give the user the `x_ibmrt_resilient.user` role
  ![screenshot](./screenshots/35.png)
 * Click **Save**
 ---
@@ -181,7 +181,7 @@ Once **installed** and **validated:**
 * The **page banner** will inform you if your Test was successful or not and print any errors you may have
   ![screenshot](./screenshots/29.png)
 * If your test was successful, we can now do a **real test!**
-* **Login** to ServiceNow with a user that has the `x_261673_resilient.admin` or `x_261673_resilient.user` role
+* **Login** to ServiceNow with a user that has the `x_ibmrt_resilient.admin` or `x_ibmrt_resilient.user` role
 * Go to the **Incident Table**
   ![screenshot](./screenshots/20.png)
 * Create a **New Incident** and **Save** it

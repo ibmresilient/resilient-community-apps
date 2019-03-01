@@ -124,9 +124,9 @@ ResilientHelper.prototype = {
 			var record_name = record.getValue("short_description");
 
 			//Set required values on SN record
-			record.setValue("x_261673_resilient_reference_id", res_reference_id);
-			record.setValue("x_261673_resilient_type", res_reference_type);
-			record.setValue("x_261673_resilient_reference_link", res_reference_link);
+			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_id", res_reference_id);
+			record.setValue("x_ibmrt_resilient_ibm_resilient_type", res_reference_type);
+			record.setValue("x_ibmrt_resilient_ibm_resilient_reference_link", res_reference_link);
 
 			//If user specifies initial ServiceNow note, add it
 			if(initSnNote){
@@ -206,7 +206,7 @@ ResilientHelper.prototype = {
 	},
 	
 	close: function(record, roc_fields){
-		var res_reference_id = record.getValue("x_261673_resilient_reference_id");
+		var res_reference_id = record.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
 		var errMsg = null;
 		var resTicket = null;
 		var resTicketType = null;
