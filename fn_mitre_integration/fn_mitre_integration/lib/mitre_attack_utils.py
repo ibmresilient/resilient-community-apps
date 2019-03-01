@@ -13,18 +13,24 @@ from fn_mitre_integration.lib.mitre_attack import MitreAttack
 from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic
 
 
-def get_techniques(tactics_str):
+def get_techniques(tactic_names=None, tactic_ids=None):
     """
     Get techniques for all input tactics
-    :param tactics_str: string of tactics separated by comma
-    :return:            techniques
+    :param tactic_names:    string of tactic names separated by comma
+    :param tactic_ids:      string of tactic ids separated by comma
+    :return:                techniques
     """
-    tactics = tactics_str.split(', ')
+    tactics = []
+    if tactic_names is not None:
+        tactics = tactic_names.split(', ')
+    elif tactic_ids is not None:
+        t_ids = tactic_ids.split(', ')
+        tactics =[MitreAttackTactic.get_name(tid) for tid in t_ids ]
 
     ret = []
     mitre_attack = MitreAttack()
     for tactic in tactics:
-        techs = mitre_attack.get_tactic_techniques(tactic)
+        techs = mitre_attack.get_tactic_techniques(tactic_name=tactic)
 
         tactic_dict = {
             "tactic_name": tactic,

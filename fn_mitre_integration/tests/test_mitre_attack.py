@@ -50,9 +50,15 @@ def test_get_tactic_techniques():
 
     for tactic in tactics:
         print(tactic.name)
-        techs = mitre_attack.get_tactic_techniques(tactic.name)
+        techs = mitre_attack.get_tactic_techniques(tactic_name=tactic.name)
         print(len(techs))
         assert(len(techs) > 0)
+
+    #
+    # Test using tactic id as well
+    #
+    techs = mitre_attack.get_tactic_techniques(tactic_id="TA0001")
+    assert (len(techs) > 1)
 
 
 def test_get_tech_mitigation():
@@ -82,9 +88,14 @@ def test_get_tech_mitigation():
 
 def test_mitre_attack_util():
     tactics = "Execution, Persistence"
-    techs = get_techniques(tactics)
+    techs = get_techniques(tactic_names=tactics)
     print(len(techs))
     assert(len(techs[0]["techs"]) + len(techs[1]["techs"]) == 91)
+
+    tactics = "TA0001, TA0002, TA0008"
+    techs = get_techniques(tactic_ids=tactics)
+    print(len(techs))
+    assert(len(techs) > 0)
 
 
 def test_get_tech_info():
