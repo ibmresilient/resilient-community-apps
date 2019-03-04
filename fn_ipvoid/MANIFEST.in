@@ -1,0 +1,4 @@
+include README.md
+include fn_ipvoid/util/*
+include fn_ipvoid/LICENSE
+include fn_ipvoid/doc/*
