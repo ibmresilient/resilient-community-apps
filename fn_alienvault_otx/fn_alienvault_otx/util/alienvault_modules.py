@@ -8,6 +8,8 @@ import requests
 from requests.packages.urllib3.util import Retry
 from requests.adapters import HTTPAdapter
 
+TOTAL_RETRIES = 3
+BACK_OFF_FACTOR = 5
 
 class InvalidInputParam(Exception):
     def __init__(self, value=None):
@@ -142,9 +144,9 @@ class ApiCallController(object):
             # This will allow 5 tries at a url, with an increasing backoff.  Only applies to a specific set of codes
             self.request_session.mount('https://', HTTPAdapter(
                     max_retries=Retry(
-                        total=3,
+                        total=TOTAL_RETRIES,
                         status_forcelist=[429, 500, 502, 503],
-                        backoff_factor=5,
+                        backoff_factor=BACK_OFF_FACTOR,
                     )
             ))
         return self.request_session

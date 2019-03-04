@@ -1,7 +1,7 @@
 #About This Package
 
-This Common Vulnerability Exposures function provides a way to search for vulnerabilities from CVE Database, 
-     function offers below mentioned ways to search for vulnerabilities.
+The Common Vulnerability Exposures (CVE) database is . This function provides a way to search for vulnerabilities from 
+the CVE database and it implements different ways to search the database such as:
 
 * Browse
 * Search
@@ -27,9 +27,9 @@ To import the function and example rule and workflows into Resilient, run the fo
 
 `resilient-circuits customize`
 
-Answer the prompts for the package to import.
+Reply to the prompt for package import.
 
-To import the data table into Resilient after customization, follow below instructions:
+The layout can be extended to add the CVE function datatable by following these instructions:
  
     
    1. Go to Resilient Customization Settings > Layouts > Incident Tabs > + Add Tab

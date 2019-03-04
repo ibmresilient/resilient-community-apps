@@ -84,8 +84,14 @@ class FunctionComponent(ResilientComponent):
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
                         else:
+                            """
+                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
+                            """
                             pass
                     else:
+                        """
+                        If given Published Date is not in range data should not be accumulated.
+                        """
                         pass
                 elif cve_pub_date_from is not None and cve_pub_date_to is None:
                     if search_pub_date_timestamp >= cve_pub_date_from:
@@ -93,8 +99,14 @@ class FunctionComponent(ResilientComponent):
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
                         else:
+                            """
+                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
+                            """
                             pass
                     else:
+                        """
+                        If given Published Date is not in range data should not be accumulated.
+                        """
                         pass
                 elif cve_pub_date_from is None and cve_pub_date_to is not None:
                     if search_pub_date_timestamp <= cve_pub_date_to:
@@ -102,14 +114,23 @@ class FunctionComponent(ResilientComponent):
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
                         else:
+                            """
+                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
+                            """
                             pass
                     else:
+                        """
+                        If given Published Date is not in range data should not be accumulated.
+                        """
                         pass
                 else:
                     if max_res_counter != 0:
                         tmp_search_data.append(search_data_dict)
                         max_res_counter -= 1
                     else:
+                        """
+                        If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
+                        """
                         pass
             return tmp_search_data
 
@@ -133,9 +154,9 @@ class FunctionComponent(ResilientComponent):
                     break
             return tmp_last_cve_data
         elif isinstance(api_data, dict):
-            raise NotImplementedError("Not implemented this type of last cve data parser")
+            raise NotImplementedError("dictionary datatypes are not supported")
         else:
-            raise NotImplementedError("result last cve call data is not recognized")
+            raise NotImplementedError("result last cve call datatypes is not recognized")
 
     def _parse_cve_results(self, api_data):
         """

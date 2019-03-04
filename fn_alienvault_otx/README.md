@@ -1,8 +1,8 @@
+
 #About This Package
 
-This Alien Vault OTX function is RESTful Web service API, provides a way to search for threat intelligence information from the alien vault database.
-
-   threat intelligence indicators information can be searched for IP Address, Domain, Host Name, File Hashes, URL, CVE.
+This Alien Vault OTX function is RESTful Web service API providing a way to search for threat intelligence information from the Alien Vault database.
+   Threat intelligence indicators information can be searched for IP Address, Domain, Host Name, File Hashes, URL, CVE.
  
    For more information on alien vault OTX : https://otx.alienvault.com/api
     
@@ -29,7 +29,8 @@ Install this package with 'pip', such as:
 To import the function and example rule and workflows into Resilient, run the following command:
 
     resilient-circuits customize
- Answer the prompts for the package to import.
+    
+ Reply to the prompt for package import. 
 
 To uninstall,
 
