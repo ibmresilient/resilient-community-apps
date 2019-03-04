@@ -50,6 +50,7 @@ class FunctionComponent(ResilientComponent):
             task_id = kwargs.get("task_id")  # number
             docker_image = self.get_select_param(kwargs.get("docker_image"))  # select, values: "volatility", "nsrl", "plaso", "bloodhound"
             docker_input = kwargs.get("docker_input")  # text
+            attachment_name = None  # Initialise attachment name as none
 
             payload = ResultPayload("fn_docker", **kwargs)
 
@@ -195,7 +196,9 @@ class FunctionComponent(ResilientComponent):
                     "container_id": container_id,
                     "res_links": {
                         "res_object": helper.prepare_res_link(host=self.host_config[0], incident_id=incident_id, task_id=task_id)
-                    }
+                    },
+                    "attachment_name": attachment_name or None,
+
 
                 }
             )
