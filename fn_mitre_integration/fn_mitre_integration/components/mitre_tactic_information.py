@@ -16,8 +16,6 @@ class FunctionComponent(ResilientComponent):
         This function takes a tactic name or id and returns techniques this
         tactic uses
 
-        Note the tactic id is not supported yet
-
     """
 
     def __init__(self, opts):
@@ -45,7 +43,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 
-            tactics = mitre_attack_utils.get_techniques(mitre_tactic_name)
+            tactics = mitre_attack_utils.get_techniques(tactic_names=mitre_tactic_name,
+                                                        tactic_ids=mitre_tactic_id)
 
             yield StatusMessage("done...")
 

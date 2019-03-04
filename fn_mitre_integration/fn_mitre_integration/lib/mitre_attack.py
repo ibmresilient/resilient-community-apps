@@ -72,6 +72,21 @@ class MitreAttackTactic(object):
 
         return id
 
+    @staticmethod
+    def get_name(id):
+        """
+        Given a tatic id, return the name
+        :param id: tactic id
+        :return: name
+        """
+        name = None
+        for tactic in MitreAttackTactic.mitre_tactics:
+            if id.lower() == tactic.id.lower():
+                name = tactic.name
+                break
+
+        return name
+
     def __init__(self, name=None, id=None, description=""):
         """
         :param name:
@@ -234,13 +249,14 @@ class MitreAttack(object):
         """
         return self.get_items([Filter("type", '=', "attack-pattern")])
 
-    def get_tactic_techniques(self, tactic_name):
+    def get_tactic_techniques(self, tactic_name=None, tactic_id=None):
         """
         Get all the techniques for a give tactic
         Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
 
         :param tactic_name: tactic name
+        :param tactic_id:   tactic ID
         :return:            techs
         """
 
@@ -250,6 +266,13 @@ class MitreAttack(object):
         # STIX type for technique is attack-pattern
         #
         tech_filter = Filter("type", "=", "attack-pattern")
+        #
+        # Find name if id is given
+        #
+        if tactic_name is None:
+            if tactic_id is not None:
+                tactic_name = MitreAttackTactic.get_name(tactic_id)
+
         #
         #   Not found in MITRE document. We actually need to use lower case for the tactic
         #   name, and also replace space with -.
