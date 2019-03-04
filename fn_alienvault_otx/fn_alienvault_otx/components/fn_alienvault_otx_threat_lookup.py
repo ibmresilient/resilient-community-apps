@@ -90,14 +90,13 @@ class FunctionComponent(ResilientComponent):
             log.info("API CALL URL : {}".format(alien_vault_get_url))
 
             # Closing Connection
-            requests.session().close()
+            _api_response.connection.close()
             yield StatusMessage("done...")
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except requests.exceptions.RetryError:
             raise RetryError()
         except Exception as er:
             # Closing Connection
-            requests.session().close()
+            _api_response.connection.close()
             yield FunctionError(er)

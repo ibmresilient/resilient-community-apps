@@ -48,7 +48,7 @@ def selftest_function(opts):
             log.info("{}:{}".format(k, v))
 
         # Closing Connection
-        requests.session().close()
+        response.connection.close()
         return {"state": "Success"}
     except requests.exceptions.RetryError:
         raise RetryError()
@@ -56,5 +56,5 @@ def selftest_function(opts):
         log.info(" Failed Connection to Alien Vault OTX : {}".format(e))
 
         # Closing Connection
-        requests.session().close()
+        response.connection.close()
         return {"state": "Failed"}
