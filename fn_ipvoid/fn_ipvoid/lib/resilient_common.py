@@ -16,6 +16,11 @@ def get_url(api_key, query_type, value):
         'SSL Info': ['sslinfo', 'host={}']
     }
 
-    url_pattern1 = type_api_pattern_mapping.get(query_type)[0]
-    url_pattern2 = type_api_pattern_mapping.get(query_type)[1].format(value)
+    # Checking for invalid key
+    if type_api_pattern_mapping.get(query_type) is not None:
+        url_pattern1 = type_api_pattern_mapping.get(query_type)[0]
+        url_pattern2 = type_api_pattern_mapping.get(query_type)[1].format(value)
+    else:
+        raise ValueError("Invalid IPVOID request type or request type not present.")
+
     return BASE_URL.format(url_pattern1, api_key, url_pattern2)
