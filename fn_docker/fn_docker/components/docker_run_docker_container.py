@@ -50,6 +50,7 @@ class FunctionComponent(ResilientComponent):
             task_id = kwargs.get("task_id")  # number
             docker_image = self.get_select_param(kwargs.get("docker_image"))  # select, values: "volatility", "nsrl", "plaso", "bloodhound"
             docker_input = kwargs.get("docker_input")  # text
+            docker_operation = kwargs.get("docker_operation")  # text
             attachment_name = None  # Initialise attachment name as none
 
             payload = ResultPayload("fn_docker", **kwargs)
@@ -61,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             log.info("task_id: %s", task_id)
             log.info("docker_image: %s", docker_image)
             log.info("docker_input: %s", docker_input)
+            log.info("docker_operation: %s", docker_operation)
 
             helper = ResDockerHelper(self.options)
             image_to_use = helper.get_config_option("docker_image", True) or docker_image
@@ -86,7 +88,7 @@ class FunctionComponent(ResilientComponent):
                     attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
                 # Get the external directory in which to save the file
                 output_vol = helper.get_image_specific_config_option(
-                    options=self.all_options.get('{}{}'.format(CONFIGSECTIONPREFIX,image_to_use)),
+                    options=self.all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
                     option_name="primary_source_dir", optional=True)
 
                 yield StatusMessage("Writing attachment to bind folder")
@@ -124,14 +126,16 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
-            command, docker_extra_kwargs, image_fullname = docker_interface.gather_image_args_and_volumes(
-                helper, image_to_use, self.all_options, escaped_args)
+            command, docker_extra_kwargs, image_fullname, docker_operation = docker_interface.gather_image_args_and_volumes(
+                helper, image_to_use, self.all_options, escaped_args, docker_operation)
 
             log.info("Command: %s \n Volume Bind: %s" % (command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_fullname)
             # Get the Client
             docker_client = docker_interface.get_client()
+
+
             yield StatusMessage("Now starting container with input")
 
             # Run container using client
@@ -157,8 +161,8 @@ class FunctionComponent(ResilientComponent):
                 container_status = container.wait()
                 container.remove()
 
-            except requests.exceptions.HTTPError as e:
-                yield StatusMessage(u"""Encountered issue when trying to remove container: {} \n {}""".format(str(e),
+            except requests.exceptions.HTTPError as request_exception:
+                yield StatusMessage(u"""Encountered issue when trying to remove container: {} \n {}""".format(str(request_exception),
                                     u"""If you supplied an extra app.config value to remove the container this is expected."""))
 
             # Setup tempfile
@@ -203,6 +207,9 @@ class FunctionComponent(ResilientComponent):
                 }
             )
             results["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
+
+            # Update the docker_operation input to ensure we have captured the operation done, if any
+            results["inputs"]["docker_operation"] = docker_operation
             # Produce a FunctionResult with the results using the FunctionPayload
             yield FunctionResult(results)
             log.debug("RESULTS: %s", results)

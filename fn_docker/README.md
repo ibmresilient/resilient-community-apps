@@ -124,86 +124,85 @@ There are a number of arguements which you cannot modify as they are explicity s
 | `artifact_id` | `Number` | No | `None` | ------- |
 | `attachment_id` | `Number` | No | `None` | ------- |
 | `docker_image` | `Select` | Yes | `nsrl` | `Which image will be used by the function` |
-| `docker_input` | `String` | No | `60B7C0FEAD45F2066E5B805A91F4F0FC` | `The input being fed to the container, only used for artifact level workflwos ` |
+| `docker_input` | `String` | No | `60B7C0FEAD45F2066E5B805A91F4F0FC` | `The input being fed to the container, only used for artifact level workflows` |
+| `docker_artifact_type` | `String` | No | `Malware MD5 Hash` | `The type of artifact that this integration was ran against. Not used for attachment workflows.` |
+| `docker_operation` | `String` | No | `pslist` | `A param value to be fed to a container's run command specifying a particular entrypoint or function for that image. Used for containers which have multiple possible operations you can perform in them such as Volatility` |
+
 
 ### Function Output:
 
 ```python
 results = {
-    'content': {
-        'container_exit_status': {
-            'Error': None,
-            'StatusCode': 0
-        },
-        'container_id': '0ce1ece10633d13ea159a2b013ae0256f0e2ae29e247492c811b8525d560b30c',
-        'container_stats': {
-            'blkio_stats': {
-                'io_merged_recursive': None,
-                'io_queue_recursive': None,
-                'io_service_bytes_recursive': None,
-                'io_service_time_recursive': None,
-                'io_serviced_recursive': None,
-                'io_time_recursive': None,
-                'io_wait_time_recursive': None,
-                'sectors_recursive': None
-            },
-            'cpu_stats': {
-                'cpu_usage': {
-                    'total_usage': 0,
-                    'usage_in_kernelmode': 0,
-                    'usage_in_usermode': 0
-                },
-                'throttling_data': {
-                    'periods': 0,
-                    'throttled_periods': 0,
-                    'throttled_time': 0
-                }
-            },
-            'id': '0ce1ece10633d13ea159a2b013ae0256f0e2ae29e247492c811b8525d560b30c',
-            'memory_stats': {},
-            'name': '/tender_goldwasser',
-            'num_procs': 0,
-            'pids_stats': {},
-            'precpu_stats': {
-                'cpu_usage': {
-                    'total_usage': 0,
-                    'usage_in_kernelmode': 0,
-                    'usage_in_usermode': 0
-                },
-                'throttling_data': {
-                    'periods': 0,
-                    'throttled_periods': 0,
-                    'throttled_time': 0
-                }
-            },
-            'preread': '0001-01-01T00:00:00Z',
-            'read': '0001-01-01T00:00:00Z',
-            'storage_stats': {}
-        },
-        'logs': 'Hash 0252d45ca21c8e43c9742285c48e91ad was NOT found in '
-        'NSRL Database.\n'
-    },
-    'inputs': {
-        'docker_image': {
-            'id': 1801,
-            'name': 'nsrl'
-        },
-        'docker_input': '0252d45ca21c8e43c9742285c48e91ad',
-        'incident_id': 2095
-    },
-    'metrics': {
-        'execution_time_ms': 7414,
-        'host': 'Ryans-MacBook-Pro.local',
-        'package': 'fn-docker',
-        'package_version': '1.0.0',
-        'timestamp': '2019-02-15 14:06:11',
-        'version': '1.0'
-    },
-    'raw': '<the raw output of the function payload>',
-    'reason': None,
-    'success': True,
-    'version': '1.0'
-}
+    'content': {'attachment_name': None,
+             'container_exit_status': {'Error': None, 'StatusCode': 0},
+             'container_id': '2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39',
+             'container_stats': {'blkio_stats': {'io_merged_recursive': None,
+                                                 'io_queue_recursive': None,
+                                                 'io_service_bytes_recursive': None,
+                                                 'io_service_time_recursive': None,
+                                                 'io_serviced_recursive': None,
+                                                 'io_time_recursive': None,
+                                                 'io_wait_time_recursive': None,
+                                                 'sectors_recursive': None},
+                                 'cpu_stats': {'cpu_usage': {'total_usage': 0,
+                                                             'usage_in_kernelmode': 0,
+                                                             'usage_in_usermode': 0},
+                                               'throttling_data': {'periods': 0,
+                                                                   'throttled_periods': 0,
+                                                                   'throttled_time': 0}},
+                                 'id': '2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39',
+                                 'memory_stats': {},
+                                 'name': '/zealous_chaplygin',
+                                 'num_procs': 0,
+                                 'pids_stats': {},
+                                 'precpu_stats': {'cpu_usage': {'total_usage': 0,
+                                                                'usage_in_kernelmode': 0,
+                                                                'usage_in_usermode': 0},
+                                                  'throttling_data': {'periods': 0,
+                                                                      'throttled_periods': 0,
+                                                                      'throttled_time': 0}},
+                                 'preread': '0001-01-01T00:00:00Z',
+                                 'read': '0001-01-01T00:00:00Z',
+                                 'storage_stats': {}},
+             'logs': 'Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL '
+                     'Database.\n',
+             'res_links': {'res_object': 'https://192.168.57.101/#incidents/2097'}},
+ 'inputs': {'docker_artifact_type': 'Malware MD5 Hash',
+            'docker_image': {'id': 1851, 'name': 'nsrl'},
+            'docker_input': '60B7C0FEAD45F2066E5B805A91F4F0FC',
+            'docker_operation': None,
+            'incident_id': 2097},
+ 'metrics': {'execution_time_ms': 2844,
+             'host': 'RyanG-MBP-18.local',
+             'package': 'fn-docker',
+             'package_version': '1.0.0',
+             'timestamp': '2019-03-05 11:40:34',
+             'timestamp_epoch': 1551786034614,
+             'version': '1.0'},
+ 'raw': '{"logs": "Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL '
+        'Database.\\n", "container_exit_status": {"Error": null, "StatusCode": '
+        '0}, "container_stats": {"read": "0001-01-01T00:00:00Z", "preread": '
+        '"0001-01-01T00:00:00Z", "pids_stats": {}, "blkio_stats": '
+        '{"io_service_bytes_recursive": null, "io_serviced_recursive": null, '
+        '"io_queue_recursive": null, "io_service_time_recursive": null, '
+        '"io_wait_time_recursive": null, "io_merged_recursive": null, '
+        '"io_time_recursive": null, "sectors_recursive": null}, "num_procs": '
+        '0, "storage_stats": {}, "cpu_stats": {"cpu_usage": {"total_usage": 0, '
+        '"usage_in_kernelmode": 0, "usage_in_usermode": 0}, "throttling_data": '
+        '{"periods": 0, "throttled_periods": 0, "throttled_time": 0}}, '
+        '"precpu_stats": {"cpu_usage": {"total_usage": 0, '
+        '"usage_in_kernelmode": 0, "usage_in_usermode": 0}, "throttling_data": '
+        '{"periods": 0, "throttled_periods": 0, "throttled_time": 0}}, '
+        '"memory_stats": {}, "name": "/zealous_chaplygin", "id": '
+        '"2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39"}, '
+        '"container_id": '
+        '"2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39", '
+        '"res_links": {"res_object": '
+        '"https://192.168.57.101/#incidents/2097"}, "attachment_name": null}',
+ 'reason': None,
+ 'success': False,
+ 'version': '1.0'
+    }
 
 ```
 
@@ -213,21 +212,40 @@ results = {
 
 An example workflow scoped for Artifacts which will, when invoked, send the artifact to a Docker container, perform some operation on the input and returns information to Resilient.
 
+There are two provided use cases which each have their own Send Artifact To Docker Container workflow, showing how you can customize your own workflow to target a different image and usecase
 ### Pre-Process Script:
 
 ```python
 inputs.docker_input = artifact.value
-inputs.incident_id = incident.id
+inputs.incident_id = incident.id 
+inputs.docker_artifact_type = artifact.type
 ```
 
 ### Post-Process Script:
 
 ```python
-noteText = u"""Container exit code : <b>{0}</b>
-              <br> Container Stats : <b>{1}</b>
-              <br> Container Logs has been saved as an attachment""".format(results.content["container_exit_status"], results.content["container_stats"])
+note_text_start = u"""<b>Docker Integration</b>
+              <br><br>A container was ran using the image <b>{0}</b>""".format(results.inputs["docker_image"]["name"])
+              
+# If the Attachment attribute of the content payload is set; we are dealing with an attachment
+if results.content["attachment_name"] != None:
+  note_text_attachment = u"""<br> On an Attachment with name {0} """.format(results.content["attachment_name"])
+  note_text_start += note_text_attachment
 
-incident.addNote(helper.createRichText(noteText))
+# Otherwise we are dealing with an artifact
+else:
+  note_text_artifact = u"""<br> On an Artifact of Type: <b>{0}</b>
+                          <br> Artifact Value: <b>{1}</b>""".format(results.inputs["docker_artifact_type"], results.inputs["docker_input"])
+  note_text_start += note_text_artifact
+              
+note_text_end = """<br>Container ID : <b>{0}</b>
+              <br>Container exit code : <b>{1}</b>
+              <br><br> Container Logs have been saved as an attachment.
+              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload""".format(
+                results.content["container_id"], results.content["container_exit_status"])
+
+note_text = note_text_start+note_text_end
+incident.addNote(helper.createRichText(note_text))
 
 try:
     des = artifact.description.content
@@ -235,17 +253,26 @@ except Exception:
   des = None
   
 if des is None:
-  artifact.description = u"""Results from Docker Integration: \n{}""".format(results.content["logs"])
+  
+  artifact.description = u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}  \n{1}""".format(results.inputs["docker_image"]["name"],results.content["logs"])
+  # Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact
+  #artifact.description = u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])
 else:
-  artifact.description = des + u"""\nResults from Docker Integration: \n{}""".format(results.content["logs"])
+  
+  artifact.description = des + u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}  \n{1}""".format(results.inputs["docker_image"]["name"],results.content["logs"])
+  
+  # Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact
+  #artifact.description = des + u"""<b>Docker Integration:</b><br> Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])
   
   
 row = incident.addRow("docker_integration_invocations")
-row["docker_links"] = u"""<a href="{}">{}</a>""".format(results.content["res_links"]["res_object"], "Task Link" if "task" in results.content["res_links"]["res_object"] else "Incident Link")
 row["docker_timestamp"] = results["metrics"]["timestamp_epoch"] or 0
 row["docker_container_id"] = results.content["container_id"]
 row["docker_image"] = results.inputs["docker_image"]["name"]
-row["docker_exit_status"] = u"""<b style="color:{}">{}</b>""".format("green" if not results.content["container_exit_status"]["StatusCode"] else "red",results.content["container_exit_status"]["StatusCode"])
+
+row["docker_artifact_type"] = results.inputs["docker_artifact_type"]
+row["docker_artifact_value"] = results.inputs["docker_input"]
+
 ```
 
 
@@ -276,28 +303,53 @@ except:
 ### 2: Post-Process Script:
 
 ```python
-noteText = u"""Container exit code : <b>{0}</b>
-              <br> Container Stats : <b>{1}</b>
-              <br> Container Logs has been saved as an attachment""".format(results.content["container_exit_status"], results.content["container_stats"])
+note_text_start = u"""<b>Docker Integration</b>
+              <br><br>A container was ran using the image <b>{0}</b>""".format(results.inputs["docker_image"]["name"])
+              
+# If the Attachment attribute of the content payload is set; we are dealing with an attachment
+if results.content["attachment_name"] != None:
+  note_text_attachment = u"""<br> On an Attachment with name {0} """.format(results.content["attachment_name"])
+  note_text_start += note_text_attachment
 
-incident.addNote(helper.createRichText(noteText))
+# Otherwise we are dealing with an artifact
+else:
+  note_text_artifact = u"""<br> On an Artifact of Type: <b>{0}</b>
+                          <br> Artifact Value: <b>{1}</b>""".format(results.inputs["docker_artifact_type"], results.inputs["docker_input"])
+  note_text_start += note_text_artifact
+              
+note_text_end = """<br>Container ID : <b>{0}</b>
+              <br>Container exit code : <b>{1}</b>
+              <br><br> Container Logs have been saved as an attachment.
+              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload""".format(
+                results.content["container_id"], results.content["container_exit_status"])
 
+note_text = note_text_start+note_text_end
+
+# If we are dealing with a task level attachment, then add a note to the task not the incident
+if task:
+  task.addNote(helper.createRichText(note_text))
+else:
+  incident.addNote(helper.createRichText(note_text))
+
+# Add an entry to the docker_integration_invocations Datatable
 row = incident.addRow("docker_integration_invocations")
-row["docker_links"] = u"""<a href="{}">{}</a>""".format(results.content["res_links"]["res_object"], "Task Link" if "task" in results.content["res_links"]["res_object"] else "Incident Link")
+
+if "task" in results.content["res_links"]["res_object"]:
+  row["docker_links"] = u"""<a href="{}">{}</a>""".format(results.content["res_links"]["res_object"], "Task Link")
+
 row["docker_timestamp"] = results["metrics"]["timestamp_epoch"] or 0
 row["docker_container_id"] = results.content["container_id"]
-row["docker_image"] = results.inputs["docker_image"]["name"]
-row["docker_exit_status"] = u"""<b style="color:{}">{}</b>""".format("green" if not results.content["container_exit_status"]["StatusCode"] else "red",results.content["container_exit_status"]["StatusCode"])
+row["docker_image"] = u":".join([results.inputs["docker_image"]["name"], results.inputs["docker_operation"]])
+row["docker_attachment_name"] = results.content["attachment_name"]
 
 ```
 
 ## Rules:
 | Rule Name | Object Type | Workflow Triggered | Conditions |
 | --------- | :---------: | ------------------ | ---------- |
-| Analyze Memory Sample with Volatility | `Attachment` | `Docker: Send Attachment To Docker Container` | None |
-| Validate MD5 is in NSRL Whitelist | `Attachment` | `Docker: Send Artifact To Docker Container` | None |
-| Analyze Memory Sample with Volatility | `Attachment` | `Send Attachment To Docker Container` | None |
-| Analyze Memory Sample with Volatility | `Attachment` | `Send Attachment To Docker Container` | None |
+| Docker: Volatility: Analyze Memory Sample | `Attachment` | `Example: Docker: Send Attachment To Docker Container` | `Attachment Name contains '.vmem'` |
+| Docker: NSRL: Validate MD5 from Whitelist | `Artifact` | `Example: Docker: Send Artifact To Docker Container (NSRL)` | None |
+| Docker: Amass: Search for Subdomains | `Artifact` | `Example: Docker: Send Artifact To Docker Container (Amass)` | None |
 
 
 ## Datatable:
@@ -312,14 +364,13 @@ docker_integration_invocations
 #### Columns:
 | Column Name | API Access Name | Type | Info |
 | ----------- | --------------- | ---- | ---- |
-| Timestamp | `timestamp` | `DateTime` | Timestamp when this entry was added |
-| Device ID | `device_id` | `Text` | Unique CrowdStrike ID for the Device |
-| Hostname | `hostname` | `Text` | Hostname of the Device |
-| IP | `ip` | `Text` | Local IP Address of the Device |
-| MAC | `mac` | `Text` | MAC Address of the Device |
-| Last Seen | `last_seen` | `DateTime` | Datetime the Device was Last Seen |
-| Status | `status` | `Text` | The Containment Status of the Device |
-| Latest Action | `latest_action` | `Text` | Name of the latest CrowdStrike action to run on this device |
+| Integration Run Time | `docker_timestamp` | `DateTime Picker` | The time that the function finished. |
+| Artifact Type | `docker_artifact_type` | `Text` | The type of artifact that was used as an input. Will be blank if ran at an attachment level. |
+| Artifact Value | `docker_artifact_value` | `Text` | The artifact that was sent to the Docker container. Will be blank if ran at an attachment level. |
+| Attachment Name | `docker_attachment_name` | `Text` | The name of the attachment that was sent to the Docker container. Will be blank if ran at an artifact level. |
+| Docker Container ID | `docker_container_id` | `Text` | The ID of the container that was used.  |
+| Docker Image & Operation | `docker_image` | `Text` | The name of the image that was used. In some cases a specified operation will be sent to the container in cases where there are multiple possible entrypoints. |
+| Links | `docker_links` | `Text Area: RichText` | Relevant links back to the task, if task based |
 
 ### Display a Data Table in an Incident
 * In order to **display** the Test Data Table in your Incident, you must **modify your Layout Settings**

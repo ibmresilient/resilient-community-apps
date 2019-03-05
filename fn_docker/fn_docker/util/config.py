@@ -20,6 +20,7 @@ primary_source_dir=/tmp/bind_folder
 primary_dest_dir=/home/nonroot/memdumps
 cmd_operation=pslist
 cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
+volatility_approved_operations=pslist,kdbgscan
 
 [docker_nsrl]
 #The default NSRL image expects an optional -v flag and an MD5 hash
