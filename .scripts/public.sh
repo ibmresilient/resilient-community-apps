@@ -57,6 +57,7 @@ fn_mcafee_epo
 fn_mcafee_esm
 fn_mcafee_opendxl
 fn_mcafee_tie
+fn_microsoft_security_graph
 fn_mxtoolbox
 fn_odbc_query
 fn_pagerduty
@@ -71,6 +72,7 @@ fn_splunk_integration
 fn_thug
 fn_twilio
 fn_twitter_most_popular
+fn_url_void
 fn_urlscanio
 fn_utilities
 fn_virustotal
