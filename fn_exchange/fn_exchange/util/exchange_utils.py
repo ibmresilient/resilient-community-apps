@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, CalendarItem, IMPERSONATION
+from exchangelib import Credentials, Account, DELEGATE, Configuration, EWSDateTime, EWSTimeZone, Message, HTMLBody, CalendarItem, IMPERSONATION
 from exchangelib.folders import FolderCollection
 from exchangelib.attachments import FileAttachment
 from exchangelib.protocol import BaseProtocol, NoVerifyHTTPAdapter
@@ -174,11 +174,12 @@ class exchange_utils:
     def create_email_message(self, username, subject, body, to_recipients):
         """Create an email message object"""
         account = self.connect_to_account(username, impersonation=(username != self.email))
+        html_body = HTMLBody('<html><body>{}</body></html>').format(body)
         email = Message(
             account=account,
             folder=account.sent,
             subject=subject,
-            body=body,
+            body=html_body,
             to_recipients=[recipient.strip() for recipient in to_recipients.split(',')]
         )
         return email
