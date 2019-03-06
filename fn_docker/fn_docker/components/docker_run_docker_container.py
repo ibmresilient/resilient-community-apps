@@ -129,12 +129,11 @@ class FunctionComponent(ResilientComponent):
             command, docker_extra_kwargs, image_fullname, docker_operation = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, escaped_args, docker_operation)
 
-            log.info("Command: %s \n Volume Bind: %s" % (command, docker_extra_kwargs.get('volumes', "No Volumes")))
+            log.info("Command: %s \n Volume Bind: %s", (command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_fullname)
             # Get the Client
             docker_client = docker_interface.get_client()
-
 
             yield StatusMessage("Now starting container with input")
 
@@ -185,7 +184,7 @@ class FunctionComponent(ResilientComponent):
 
                     # POST the new attachment
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
-                                                            filename="{}{}".format("logs-from-", container_id), mimetype='text/plain')
+                                                            filename=u"Docker {} output for attachment {}".format(image_to_use, attachment_name), mimetype='text/plain')
 
                 finally:
                     os.unlink(temp_upload_file.name)
@@ -202,8 +201,6 @@ class FunctionComponent(ResilientComponent):
                         "res_object": helper.prepare_res_link(host=self.host_config[0], incident_id=incident_id, task_id=task_id)
                     },
                     "attachment_name": attachment_name or None,
-
-
                 }
             )
             results["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
