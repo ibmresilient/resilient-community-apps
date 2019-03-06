@@ -68,8 +68,9 @@ The following gRPC configuration data is added:
  # OTX API Key to Access the Alien Vault OTX Service      
  av_api_key=<<DirectConnect OTX API Key>>    
  #Base URL Path of Alien Vault OTX        
- av_base_url=https://otx.alienvault.com/api/v1 # Proxy Server by Default it   
-will be None proxy=None 
+ av_base_url=https://otx.alienvault.com/api/v1 
+ # Proxy Server by Default will be None 
+ proxy=None 
 ```  
   Edit the [fn_alienvault_otx] properties as follows:  
         
