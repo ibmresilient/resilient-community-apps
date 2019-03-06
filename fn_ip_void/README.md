@@ -12,7 +12,7 @@
 **This package contains a function that searches using your IPVOID account/subscription with the given query**
 
  ![screenshot](./screenshots/screen1.png)
-, , , , , 
+
 The function makes use of the IPVOID's Rest API calls to get information on a given query, followings are the available services :-
 -	IP Reputation `/iprep/v1/pay-as-you-go/`
 -	SSL Info `/sslinfo/v1/pay-as-you-go/`
