@@ -18,7 +18,7 @@ sn_api_uri=/api/x_ibmrt_resilient/api
 # v1.0.0 only supports the incident table
 sn_table_name=incident
 
-# Username + Password of ServiceNow user with permissions to use IBM Resilient App
+# Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role
 sn_username=<ServiceNow Username>
 sn_password=<ServiceNow Password>
 """
