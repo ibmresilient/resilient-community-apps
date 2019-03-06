@@ -4,13 +4,14 @@
  - [About This Package](#about-this-package)  
  - [Prerequisites](#prerequisites)  
  - [Resilient Installation](#resilient-installation)  
- - [Resilient Configuration](#app.config-settings)  
+ - [Resilient Configuration](#resilient-configuration)  
  - [Function Inputs](#function-inputs)  
  - [Function Output](#function-output)  
  - [Pre-Process Script](#pre-process-script)  
  - [Post-Process Script](#post-process-script)  
  - [Rules](#rules)  
  ---
+ 
 ## About This Package:    
  This Alien Vault OTX function is RESTful Web service API providing a way to search for threat intelligence information from the Alien Vault database.    
    Threat intelligence indicators information can be searched for IP Address, Domain, Host Name, File Hashes, URL, CVE.    
@@ -55,7 +56,7 @@ Install this package with 'pip', such as:
  To uninstall,    
  `pip uninstall fn_alienvault_otx`   
 
-## app.config settings 
+## Resilient Configuration 
 
 Run the following command to generate the alien vault configuration section in the app.config file:    
     
