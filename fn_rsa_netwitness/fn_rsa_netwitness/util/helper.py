@@ -5,6 +5,7 @@
 import tempfile
 import shutil
 import logging
+import base64
 
 
 log = logging.getLogger(__name__)
@@ -25,3 +26,16 @@ def create_tmp_file(contents):
 def remove_dir(dir):
     shutil.rmtree(dir)
     log.debug("Tmp directory removed")
+
+
+def get_headers(username, password):
+    login_string = "{}:{}".format(username, password)
+    base64_login = base64.b64encode(str.encode(login_string))
+
+    headers = {
+        "Authorization": "Basic {}".format(base64_login),
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cache-Control": "no-cache"
+    }
+
+    return headers

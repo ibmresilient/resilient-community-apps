@@ -4,10 +4,10 @@
 """Function implementation"""
 
 import logging
-import base64
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon
-from fn_rsa_netwitness.util.helper import remove_dir, create_tmp_file
+from resilient_lib import ResultPayload, RequestsCommon
+from fn_rsa_netwitness.util.helper import get_headers
+
 
 log = logging.getLogger(__name__)
 
@@ -20,6 +20,11 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_rsa_netwitness", {})
 
+        if self.options.get("cafile").lower() == "false":
+            self.options["cafile"] = False
+        elif self.options.get("cafile").lower() == "true":
+            self.options["cafile"] = True
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -28,96 +33,43 @@ class FunctionComponent(ResilientComponent):
     @function("netwitness_query")
     def _netwitness_query_function(self, event, *args, **kwargs):
         """Function: Queries NetWitness and returns back a list of session IDs based on the provided query"""
-#        temp_d = None
         try:
             yield StatusMessage("Starting...")
+            # Get the function parameters:
+            nw_query = self.get_textarea_param(kwargs.get("nw_query"))  # textarea
+            nw_results_size = str(kwargs.get("nw_results_size"))  # number
+
             # Initialize resilient_lib objects
-            rp = ResultPayload("netwitness_query", **kwargs)
+            rp = ResultPayload("netwitness_query", **{"nw_query": nw_query, "nw_results_size": nw_results_size})
             req_common = RequestsCommon(self.opts)
 
-            # Get the function parameters:
-            nw_query = kwargs.get("nw_query")  # text
-
-            log = logging.getLogger(__name__)
             log.info("nw_query: %s", nw_query)
+            log.info("nw_results_size: %s", nw_results_size)
 
-            # Get metadata
-            # nw_query_metadata = query_netwitness(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
-            #                                     self.options.get("nw_user"), self.options.get("nw_password"),
-            #                                     self.options.get("cafile"), nw_query, req_common)
-            nw_query_metadata = {
-                "results": {
-                    "fields": [
-                        {"group": 123456789},
-                        {"group": 987654321}
-                    ]
-                }
-            }
+            # Query Netwitness
+            nw_query_metadata = query_netwitness(self.options.get("nw_url"), self.options.get("nw_port"),
+                                                 self.options.get("nw_user"), self.options.get("nw_password"),
+                                                 self.options.get("cafile"), nw_query, req_common, size=nw_results_size)
+
             log.debug(nw_query_metadata)
 
-            # Basing this off what I think, this might have to be updated
-#            session_id_list = []
-#            for session_id in json_session_ids["results"]["fields"]:
-#                session_id_list.append(str(session_id.get("group")))
-#            session_id_str = ", ".join(session_id_list)
-#            log.info(session_id_str)
-
-            # Get pcap files from session ids
-#            pcap_file = get_nw_session_logs_file(self.options.get("nw_url"), str(int(self.options.get("nw_port")) + 100),
-#                                                 self.options.get("nw_user"), self.options.get("nw_password"),
-#                                                 self.options.get("cafile"), session_id_str, req_common)
-
-#            temp_d, temp_f = create_tmp_file(pcap_file)
-            # Upload pcap file
-            resilient_client = self.rest_client()
-#            resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
-#                                             pcap_file,
-#                                             filename="pcap file for session IDs: {}".format(session_id_list))
-#            yield StatusMessage("pcap file added to incident {} as Attachment".format(str(incident_id)))
-
             if nw_query_metadata:
-                StatusMessage("Metadata found")
+                StatusMessage("Query results found")
             else:
-                StatusMessage("No metadata found")
+                StatusMessage("No query results found")
             yield StatusMessage("Complete...")
             results = rp.done(True, nw_query_metadata)
-#            results = {
-#                "list": session_id_str,
-#                "meta_data": nw_query_metadata
-#            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
             yield FunctionError(e)
-#        finally:
-#            if temp_d:
-#                remove_dir(temp_d)
 
 
-def query_netwitness(url, port, user, pw, cafile, query, req_common):
-    login_string = "{}:{}".format(user, pw)
-    base64_login = base64.b64encode(str.encode(login_string))
-
-    headers = {
-        "Authorization": "Basic {}".format(base64_login),
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Cache-Control": "no-cache"
-    }
-    request_url = "{}:{}/sdk?msg=query&query={}&render=application/json".format(url, port, query)
+def query_netwitness(url, port, user, pw, cafile, query, req_common, size=""):
+    headers = get_headers(user, pw)
+    if size:
+        size = "&size={}".format(size)
+    request_url = "{}:{}/sdk?msg=query&query={}&force-content-type=application/json{}".format(url, port, query, size)
 
     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
-
-
-# def get_nw_session_logs_file(url, port, user, pw, cafile, event_session_id, req_common):
-#     login_string = "{}:{}".format(user, pw)
-#     base64_login = base64.b64encode(str.encode(login_string))
-#
-#     headers = {
-#         "Authorization": "Basic {}".format(base64_login),
-#         "Content-Type": "application/x-www-form-urlencoded",
-#         "Cache-Control": "no-cache"
-#     }
-#     request_url = "{}:{}/sdk/packets?sessions={}".format(url, port, event_session_id)
-#
-#     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type='bytes')
