@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'netwitness_get_meta_id_ranges"""
+    """Component that implements Resilient function 'netwitness_get_meta_values"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -34,7 +34,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("netwitness_get_meta_id_ranges")
     def _netwitness_get_meta_id_ranges(self, event, *args, **kwargs):
-        """Function: Returns back the meta id ranges for a single session or consecutive sessions"""
+        """Function: Returns back the meta values for a single session or consecutive sessions"""
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
@@ -48,11 +48,11 @@ class FunctionComponent(ResilientComponent):
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_results_size: %s", nw_results_size)
 
-            # Get meta id ranges from Netwitness
-            nw_query_metadata = get_meta_id_ranges(self.options.get("nw_url"), self.options.get("nw_port"),
-                                                   self.options.get("nw_user"), self.options.get("nw_password"),
-                                                   self.options.get("cafile"), nw_event_session_ids, req_common,
-                                                   size=nw_results_size)
+            # Get meta values from Netwitness
+            nw_query_metadata = get_meta_values(self.options.get("nw_url"), self.options.get("nw_port"),
+                                                self.options.get("nw_user"), self.options.get("nw_password"),
+                                                self.options.get("cafile"), nw_event_session_ids, req_common,
+                                                size=nw_results_size)
 
             log.debug(nw_query_metadata)
 
@@ -69,11 +69,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(e)
 
 
-def get_meta_id_ranges(url, port, user, pw, cafile, event_session_id, req_common, size=""):
+def get_meta_values(url, port, user, pw, cafile, id1, id2, req_common, size=""):
     headers = get_headers(user, pw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{0}:{1}/sdk?msg=session&id1={2}&id2={2}&render=application/json{3}".format(url, port,
-                                                                                              event_session_id, size)
+    request_url = "{}:{}/sdk?msg=query&force-content-type=application/json&id1={}&id2={}&query=select%20*{}"\
+        .format(url, port, id1, id2, size)
 
     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
