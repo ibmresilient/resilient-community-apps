@@ -77,7 +77,7 @@ class ArielSearch(SearchWaitCommand):
     """
 
     def __init__(self, timeout=600, poll=5):
-        self.range_start = 1
+        self.range_start = 0
         self.range_end = 50
         super(ArielSearch, self).__init__(timeout, poll)
 
@@ -274,6 +274,62 @@ class QRadarClient(object):
         return connected
 
     @staticmethod
+    def get_all_ref_set():
+        """
+        Get a list of all the reference sets.
+        :return: list of reference set names
+        """
+        auth_info = AuthInfo.get_authInfo()
+        url = "{}{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL)
+        ret = []
+        try:
+            response = requests.Session().get(url=url,
+                                              headers=auth_info.headers,
+                                              verify=auth_info.cafile)
+            #
+            # Sample return:
+            """
+            [
+                {
+                    "timeout_type": "FIRST_SEEN",
+                    "number_of_elements": 0,
+                    "creation_time": 1516812810600,
+                    "name": "Watson Advisor: File Action Blocked",
+                    "element_type": "ALNIC"
+                },
+                ...
+            ]
+            """
+            #
+            ret = response.json()
+        except Exception as e:
+            LOG.error(str(e))
+            raise RequestError(url, "get_all_ref_set call failed with exception {}".format(str(e)))
+
+        return ret
+
+    @staticmethod
+    def find_all_ref_set_contains(value, type=None):
+        """
+
+        :param value:
+        :param type:
+        :return:
+        """
+        ref_sets = QRadarClient.get_all_ref_set()
+        LOG.debug(u"All reference sets: {}".format(ref_sets))
+
+        ret = []
+        for r_set in ref_sets:
+            LOG.info(u"Looking for {} in reference set {}".format(value, r_set["name"]))
+            element = QRadarClient.search_ref_set(r_set["name"], value)
+            if element["found"] == "True":
+
+                ret.append(element["content"])
+
+        return ret
+
+    @staticmethod
     def search_ref_set(ref_set, filter=None):
         """
         Search a reference set using the filter
@@ -282,8 +338,16 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = urllib.quote(ref_set, '')
-        url = "{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
+
+        try:
+            #
+            #   urllib.quote has trouble to handle unicode
+            #
+            ref_set_link = urllib.quote(ref_set, '')
+        except:
+            ref_set_link = ref_set
+
+        url = u"{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:

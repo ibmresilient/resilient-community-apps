@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_mxtoolbox',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
