@@ -13,7 +13,7 @@ from resilient_circuits import (
     FunctionError,
 )
 import requests
-from fn_ip_void.util.ipvoid_helper import *
+from fn_ip_void.util.ipvoid_helper import get_url, get_config_option
 
 
 class FunctionComponent(ResilientComponent):
@@ -36,15 +36,13 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             ip_void_request_type = self.get_select_param(
                 kwargs.get("ip_void_request_type")
-            )  # select, values: "IP Reputation", "Domain Blacklist", "DNS Lookup", 
+            )  # select, values: "IP Reputation", "Domain Blacklist", "DNS Lookup",
             # "Email Verify", "Threat Log", "SSL Info"
             ip_void_artifact_type = kwargs.get("ip_void_artifact_type")  # text
             ip_void_artifact_value = kwargs.get("ip_void_artifact_value")  # text
 
             yield StatusMessage("Getting Intelligence for {} : {}".format(
-                    ip_void_artifact_type, ip_void_artifact_value
-                )
-            )
+                ip_void_artifact_type, ip_void_artifact_value))
 
             base_url = get_config_option("ipvoid_base_url", self.options)
             api_key = get_config_option("ipvoid_api_key", self.options)

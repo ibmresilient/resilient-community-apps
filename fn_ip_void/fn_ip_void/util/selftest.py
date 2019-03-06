@@ -18,8 +18,10 @@ SUB_URL = "iprep/v1/pay-as-you-go/?key={}&stats"
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Placeholder for selftest function. An example 
+    use would be to test package api connectivity.
+    Suggested return values are be unimplemented, 
+    success, or failure.
     """
     options = opts.get("fn_ipvoid", {})
     api_token = get_config_option("ipvoid_api_key", options)

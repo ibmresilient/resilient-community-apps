@@ -5,21 +5,41 @@
 from __future__ import print_function
 from resilient_circuits.util import *
 
+
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_ip_void package"""
-    reload_params = {"package": u"fn_ip_void",
-                    "incident_fields": [], 
-                    "action_fields": [], 
-                    "function_params": [u"ip_void_artifact_type", u"ip_void_artifact_value", u"ip_void_request_type"], 
-                    "datatables": [], 
-                    "message_destinations": [u"fn_ip_void"], 
-                    "functions": [u"fn_ip_void_request"], 
-                    "phases": [], 
-                    "automatic_tasks": [], 
-                    "scripts": [], 
-                    "workflows": [u"example_ipvoid_dns_lookup", u"example_ipvoid_domain_blacklist_check", u"example_ipvoid_get_ssl_certificate_information", u"example_ipvoid_threat_log", u"example_ipvoid_verify_email_domain", u"example_ipvoidip_reputation"], 
-                    "actions": [u"Example: IPVOID API Check IP Address", u"Example: IPVOID API Domain name", u"Example: IPVOID API Email Domain Check", u"Example: IPVOID API SSL Certificate Information", u"Example: IPVOID API Threat Log Check", u"Example: IPVOID Domain Blacklist Check"] 
-                    }
+    reload_params = {
+        "package": u"fn_ip_void",
+        "incident_fields": [],
+        "action_fields": [],
+        "function_params": [
+            u"ip_void_artifact_type",
+            u"ip_void_artifact_value",
+            u"ip_void_request_type",
+        ],
+        "datatables": [],
+        "message_destinations": [u"fn_ip_void"],
+        "functions": [u"fn_ip_void_request"],
+        "phases": [],
+        "automatic_tasks": [],
+        "scripts": [],
+        "workflows": [
+            u"example_ipvoid_dns_lookup",
+            u"example_ipvoid_domain_blacklist_check",
+            u"example_ipvoid_get_ssl_certificate_information",
+            u"example_ipvoid_threat_log",
+            u"example_ipvoid_verify_email_domain",
+            u"example_ipvoidip_reputation",
+        ],
+        "actions": [
+            u"Example: IPVOID API Check IP Address",
+            u"Example: IPVOID API Domain name",
+            u"Example: IPVOID API Email Domain Check",
+            u"Example: IPVOID API SSL Certificate Information",
+            u"Example: IPVOID API Threat Log Check",
+            u"Example: IPVOID Domain Blacklist Check",
+        ],
+    }
     return reload_params
 
 
@@ -52,8 +72,8 @@ def customization_data(client=None):
     #     Example: IPVOID API Threat Log Check
     #     Example: IPVOID Domain Blacklist Check
 
-
-    yield ImportDefinition(u"""
+    yield ImportDefinition(
+        u"""
 eyJzZXJ2ZXJfdmVyc2lvbiI6IHsibWFqb3IiOiAzMSwgIm1pbm9yIjogMSwgImJ1aWxkX251bWJl
 ciI6IDc2LCAidmVyc2lvbiI6ICIzMS4xLjc2In0sICJleHBvcnRfZm9ybWF0X3ZlcnNpb24iOiAy
 LCAiaWQiOiA3OSwgImV4cG9ydF9kYXRlIjogMTU1MTgwOTE2NjkyNCwgImZpZWxkcyI6IFt7Imlk
