@@ -15,14 +15,15 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Test connection to AlienVault OTX API
     """
     options = opts.get("fn_alienvault_otx", {})
 
     # Getting Configuration Data
-    ALIEN_VAULT_URL = options.get('av_base_url')+"/user/me"
+    ALIEN_VAULT_URL = options.get('av_base_url') + "/user/me"
     ALIEN_VAULT_KEY = options.get('av_api_key')
+    if not ALIEN_VAULT_KEY:
+        raise ValueError("alien vault api key should be defined in app.config file.")
 
     # Api Controller Class Instance
     ApiCallController_instance = ApiCallController()
@@ -38,23 +39,20 @@ def selftest_function(opts):
 
     # Connection to Alien Vault OTX
     try:
-
         response = _request_session.get(ALIEN_VAULT_URL, headers=HEADER, proxies=PROXIES)
         response.raise_for_status()
         response_data = response.json()
         log.info("Successfully Established Connection to Alien Vault OTX")
 
         for k, v in response_data.items():
-            log.info("{}:{}".format(k, v))
+            log.info("%s:%s", k, v)
 
-        # Closing Connection
-        response.connection.close()
         return {"state": "Success"}
     except requests.exceptions.RetryError:
         raise RetryError()
     except Exception as e:
-        log.info(" Failed Connection to Alien Vault OTX : {}".format(e))
-
-        # Closing Connection
-        response.connection.close()
+        log.info(" Failed Connection to Alien Vault OTX : %s", e)
         return {"state": "Failed"}
+    finally:
+        # Closing Connection
+        response.close()

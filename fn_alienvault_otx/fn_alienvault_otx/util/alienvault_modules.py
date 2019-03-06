@@ -11,6 +11,7 @@ from requests.adapters import HTTPAdapter
 TOTAL_RETRIES = 3
 BACK_OFF_FACTOR = 5
 
+
 class InvalidInputParam(Exception):
     def __init__(self, value=None):
         self.value = value or "Invalid Function Input Parameters"
@@ -50,7 +51,7 @@ class ApiCallController(object):
         :param proxy_data: Proxy Server Address, None if no proxy is defined.
         :return: Dictionary Containing http and https proxy settings
         """
-        proxies = {'http': proxy_data, 'https': proxy_data,} if proxy_data not in ['None', 'none'] else {}
+        proxies = {'http': proxy_data, 'https': proxy_data, } if proxy_data not in ['None', 'none'] else {}
         return proxies
 
     @classmethod
@@ -64,28 +65,34 @@ class ApiCallController(object):
         """
         _indicator_url = base_url + "/indicators/{}/{}/{}"
         _indicator_full_url = None
-        if search_value is not None and search_type is not None and search_section is not None:
-            if search_type == "IP Address":
-                if search_value.find(":") != -1:
-                    _indicator_full_url = _indicator_url.format("IPv6", search_value, search_section)
-                else:
-                    _indicator_full_url = _indicator_url.format("IPv4", search_value, search_section)
+        if search_value is not None:
+            if search_type is not None:
+                if search_section is not None:
+                    if search_type == "IP Address":
+                        if search_value.find(":") != -1:
+                            _indicator_full_url = _indicator_url.format("IPv6", search_value, search_section)
+                        else:
+                            _indicator_full_url = _indicator_url.format("IPv4", search_value, search_section)
 
-            elif search_type == "DNS Name":
-                _indicator_full_url = _indicator_url.format("domain", search_value, search_section)
-            elif search_type == "System Name":
-                _indicator_full_url = _indicator_url.format("hostname", search_value, search_section)
-            elif search_type in ["Malware Sample Fuzzy Hash", "Malware SHA-1 Hash", "Malware MD5 Hash",
-                                 "Malware SHA-256 Hash"]:
-                _indicator_full_url = _indicator_url.format("file", search_value, search_section)
-            elif search_type in ["URL", "URL Referer"]:
-                _indicator_full_url = _indicator_url.format("url", search_value, search_section)
-            elif search_type == "Threat CVE ID":
-                _indicator_full_url = _indicator_url.format("cve", search_value, search_section)
+                    elif search_type == "DNS Name":
+                        _indicator_full_url = _indicator_url.format("domain", search_value, search_section)
+                    elif search_type == "System Name":
+                        _indicator_full_url = _indicator_url.format("hostname", search_value, search_section)
+                    elif search_type in ["Malware Sample Fuzzy Hash", "Malware SHA-1 Hash", "Malware MD5 Hash",
+                                         "Malware SHA-256 Hash"]:
+                        _indicator_full_url = _indicator_url.format("file", search_value, search_section)
+                    elif search_type in ["URL", "URL Referer"]:
+                        _indicator_full_url = _indicator_url.format("url", search_value, search_section)
+                    elif search_type == "Threat CVE ID":
+                        _indicator_full_url = _indicator_url.format("cve", search_value, search_section)
+                    else:
+                        raise InvalidInputParam("%s is not a supported search type.", search_type)
+                else:
+                    raise InvalidInputParam("The value of Search section Parameter is invalid.")
             else:
-                raise InvalidInputParam("Invalid Function Input Type Parameter.")
+                raise InvalidInputParam("The value of Search type Parameter is invalid.")
         else:
-            raise InvalidInputParam()
+            raise InvalidInputParam("The Search value Parameter is invalid.")
 
         return _indicator_full_url
 
@@ -143,11 +150,10 @@ class ApiCallController(object):
             self.request_session = requests.Session()
             # This will allow 5 tries at a url, with an increasing backoff.  Only applies to a specific set of codes
             self.request_session.mount('https://', HTTPAdapter(
-                    max_retries=Retry(
-                        total=TOTAL_RETRIES,
-                        status_forcelist=[429, 500, 502, 503],
-                        backoff_factor=BACK_OFF_FACTOR,
-                    )
+                max_retries=Retry(
+                    total=TOTAL_RETRIES,
+                    status_forcelist=[429, 500, 502, 503],
+                    backoff_factor=BACK_OFF_FACTOR,
+                )
             ))
         return self.request_session
-

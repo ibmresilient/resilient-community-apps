@@ -12,10 +12,10 @@ def config_section_data():
     """
     config_data = u"""[fn_alienvault_otx]
 # OTX API Key to Access the Alien Vault OTX Service 
-av_api_key=None
+av_api_key=
 #Base URL Path of Alien Vault OTX
 av_base_url=https://otx.alienvault.com/api/v1
 # Proxy Server by Default it will be None
-proxy=None
+proxy=
     """
     return config_data

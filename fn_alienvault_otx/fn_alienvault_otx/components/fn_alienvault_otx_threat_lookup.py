@@ -5,7 +5,6 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_alienvault_otx.util.selftest as selftest
 from fn_alienvault_otx.util.alienvault_modules import *
 
 
@@ -16,7 +15,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_alienvault_otx", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -42,8 +40,16 @@ class FunctionComponent(ResilientComponent):
             log.info("alienvault_search_type: %s", alienvault_search_type)
             log.info("alienvault_section: %s", alienvault_section)
 
-            yield StatusMessage("starting...")
-            alien_vault_get_url = ApiCallController.create_alienvault_indicators_url(self.options.get('av_base_url'),
+            yield StatusMessage(
+                "Getting Threat Intelligence from AlienVault OTX for {}:{}".format(alienvault_search_type,
+                                                                                   alienvault_search_value))
+            # Getting Alien Vault Base URL from app.config
+            AV_BASE_URL = self.options.get('av_base_url')
+            if not AV_BASE_URL:
+                raise ValueError("alien vault base url should be defined in app.config file.")
+
+            # creating API get call url
+            alien_vault_get_url = ApiCallController.create_alienvault_indicators_url(AV_BASE_URL,
                                                                                      alienvault_search_value,
                                                                                      alienvault_search_type,
                                                                                      alienvault_section)
@@ -54,7 +60,10 @@ class FunctionComponent(ResilientComponent):
             PROXY = self.options.get('proxy')
 
             # Creating API Call Header
-            CALL_HEADER = ApiCallController.create_header(api_key=AV_API_KEY)
+            if AV_API_KEY:
+                CALL_HEADER = ApiCallController.create_header(api_key=AV_API_KEY)
+            else:
+                raise ValueError("alien vault api key should be defined in app.config file.")
 
             # proxy data to be sent through the api call
             AV_PROXY = ApiCallController.format_proxy_data(proxy_data=PROXY)
@@ -70,7 +79,6 @@ class FunctionComponent(ResilientComponent):
 
             _api_response.raise_for_status()
 
-            # api_response_json = ApiCallController_instance.response_handle_errors(response=_api_response).json()
             # Just to check received response is json object
             _api_response_json = _api_response.json()
 
@@ -82,21 +90,24 @@ class FunctionComponent(ResilientComponent):
             try:
                 _api_response_json = json.loads(_api_response_text)
             except Exception as e:
-                log.info("Error occurred while converting time stamp to epoch, time stamp is not converted")
+                log.info("Error occurred while converting time stamp to epoch, time stamp is not converted. Error : %s",
+                         e)
 
             results = {
                 "content": _api_response_json
             }
-            log.info("API CALL URL : {}".format(alien_vault_get_url))
 
-            # Closing Connection
-            _api_response.connection.close()
-            yield StatusMessage("done...")
+            yield StatusMessage("AlienVault OTX Threat Intel received")
+            log.info("API CALL URL : %s", alien_vault_get_url)
+            log.debug("RESULTS: %s", results)
+            log.info("Complete")
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except requests.exceptions.RetryError:
             raise RetryError()
         except Exception as er:
-            # Closing Connection
-            _api_response.connection.close()
             yield FunctionError(er)
+        finally:
+            # Closing Connection
+            _api_response.close()
