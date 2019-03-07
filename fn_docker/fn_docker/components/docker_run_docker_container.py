@@ -51,6 +51,7 @@ class FunctionComponent(ResilientComponent):
             docker_image = self.get_select_param(kwargs.get("docker_image"))  # select, values: "volatility", "nsrl", "plaso", "bloodhound"
             docker_input = kwargs.get("docker_input")  # text
             docker_operation = kwargs.get("docker_operation")  # text
+            docker_artifact_type = kwargs.get("docker_artifact_type")
             attachment_name = None  # Initialise attachment name as none
 
             payload = ResultPayload("fn_docker", **kwargs)
@@ -62,6 +63,7 @@ class FunctionComponent(ResilientComponent):
             log.info("task_id: %s", task_id)
             log.info("docker_image: %s", docker_image)
             log.info("docker_input: %s", docker_input)
+            log.info("docker_artifact_type: %s", docker_artifact_type)
             log.info("docker_operation: %s", docker_operation)
 
             helper = ResDockerHelper(self.options)
@@ -184,7 +186,7 @@ class FunctionComponent(ResilientComponent):
 
                     # POST the new attachment
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
-                                                            filename=u"Docker {} output for attachment {}".format(image_to_use, attachment_name), mimetype='text/plain')
+                                                            filename=u"Docker {} output for {}".format(image_to_use, container_id), mimetype='text/plain')
 
                 finally:
                     os.unlink(temp_upload_file.name)
