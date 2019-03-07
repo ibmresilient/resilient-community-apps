@@ -33,21 +33,23 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
-            nw_event_session_ids = self.get_textarea_param(kwargs.get("nw_event_session_ids"))  # text
+            nw_session_id1 = str(kwargs.get("nw_session_id1"))  # number
+            nw_session_id2 = str(kwargs.get("nw_session_id2"))  # number
             nw_results_size = str(kwargs.get("nw_results_size"))  # number
 
             # Initialize resilient_lib objects
             rp = ResultPayload("netwitness_get_meta_id_ranges", **kwargs)
             req_common = RequestsCommon(self.opts)
 
-            log.info("nw_event_session_ids: %s", nw_event_session_ids)
+            log.info("nw_event_session_id1: %s", nw_session_id1)
+            log.info("nw_event_session_id2: %s", nw_session_id2)
             log.info("nw_results_size: %s", nw_results_size)
 
             # Get meta values from Netwitness
             nw_query_metadata = get_meta_values(self.options.get("nw_url"), self.options.get("nw_port"),
                                                 self.options.get("nw_user"), self.options.get("nw_password"),
-                                                self.options.get("cafile"), nw_event_session_ids, req_common,
-                                                size=nw_results_size)
+                                                self.options.get("cafile"), nw_session_id1, nw_session_id2,
+                                                req_common, size=nw_results_size)
 
             log.debug(nw_query_metadata)
 
