@@ -22,11 +22,6 @@ class FunctionComponent(ResilientComponent):
         # Validate app.config fields
         validate_fields(["nw_url", "nw_user", "nw_password", "nw_port"], self.options)
 
-        if self.options.get("cafile").lower() == "false":
-            self.options["cafile"] = False
-        elif self.options.get("cafile").lower() == "true":
-            self.options["cafile"] = True
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""

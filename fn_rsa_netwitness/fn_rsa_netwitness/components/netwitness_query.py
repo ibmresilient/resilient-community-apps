@@ -20,11 +20,6 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_rsa_netwitness", {})
 
-        if self.options.get("cafile").lower() == "false":
-            self.options["cafile"] = False
-        elif self.options.get("cafile").lower() == "true":
-            self.options["cafile"] = True
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""

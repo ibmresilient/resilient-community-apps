@@ -24,8 +24,10 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "NetwitnessRetrievePcapData = fn_rsa_netwitness.components.netwitness_retrieve_session_data:FunctionComponent",
-            "NetwitnessQuery = fn_rsa_netwitness.components.netwitness_query:FunctionComponent"
+            "NetwitnessRetrieveSessionData = fn_rsa_netwitness.components.netwitness_retrieve_session_data:FunctionComponent",
+            "NetwitnessQuery = fn_rsa_netwitness.components.netwitness_query:FunctionComponent",
+            "NetwitnessGetMetaIdRanges = fn_rsa_netwitness.components.netwitness_get_meta_id_ranges:FunctionComponent",
+            "NetwitnessGetMetaValues = fn_rsa_netwitness.components.netwitness_get_meta_values:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_rsa_netwitness.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_rsa_netwitness.util.customize:customization_data"],
