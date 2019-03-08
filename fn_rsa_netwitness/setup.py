@@ -24,7 +24,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "NetwitnessRetrieveSessionData = fn_rsa_netwitness.components.netwitness_retrieve_session_data:FunctionComponent",
+            "NetwitnessRetrievePcapFile = fn_rsa_netwitness.components.netwitness_retrieve_pcap_file:FunctionComponent",
+            "NetwitnessRetrieveLogData = fn_rsa_netwitness.components.netwitness_retrieve_log_data:FunctionComponent",
             "NetwitnessQuery = fn_rsa_netwitness.components.netwitness_query:FunctionComponent",
             "NetwitnessGetMetaIdRanges = fn_rsa_netwitness.components.netwitness_get_meta_id_ranges:FunctionComponent",
             "NetwitnessGetMetaValues = fn_rsa_netwitness.components.netwitness_get_meta_values:FunctionComponent"
