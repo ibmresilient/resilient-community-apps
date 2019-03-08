@@ -33,8 +33,8 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
-            nw_session_id1 = str(kwargs.get("nw_session_id1"))  # number
-            nw_session_id2 = str(kwargs.get("nw_session_id2"))  # number
+            nw_session_id1 = str(kwargs.get("nw_meta_id1"))  # number
+            nw_session_id2 = str(kwargs.get("nw_meta_id2"))  # number
             nw_results_size = str(kwargs.get("nw_results_size"))  # number
 
             # Initialize resilient_lib objects
