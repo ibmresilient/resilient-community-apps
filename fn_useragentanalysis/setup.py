@@ -11,7 +11,7 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_useragentanalysis'",
-    long_description="Resilient Circuits Components for 'fn_useragentanalysis' to perform broswer user agent analysis",
+    long_description="Resilient Circuits Components for 'fn_useragentanalysis' to perform browser user agent analysis",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
