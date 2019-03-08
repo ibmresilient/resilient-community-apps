@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             escaped_args = {
                 "docker_input": render(u"{{docker_input|%s}}" % "sh", kwargs),
             }
-
+            attachment_file_name = None  # Initialise filename as None to avoid reference errors
             # Check whether we are dealing with an attachment or artifact
             if (artifact_id or attachment_id or task_id) and docker_input is None:
                 log.debug("Working with an attachment")
@@ -163,14 +163,22 @@ class FunctionComponent(ResilientComponent):
                 container.remove()
 
             except requests.exceptions.HTTPError as request_exception:
-                yield StatusMessage(u"""Encountered issue when trying to remove container: {} \n {}""".format(str(request_exception),
-                                    u"""If you supplied an extra app.config value to remove the container this is expected."""))
+                yield StatusMessage(u"""Encountered issue when trying to remove container: {} \n {}""".format(
+                    request_exception,
+                    u"""If you supplied an extra app.config value to remove the container this is expected."""))
 
             # Setup tempfile
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:
                 try:
+                    new_attachment_name = helper.format_result_attachment_name(image_to_use, container_id)
+
                     # Write and close tempfile
-                    temp_upload_file.write(container_logs.decode('utf-8'))
+                    temp_upload_file.write(helper.format_output_attachment_body(container_id,
+                                                                                docker_operation,
+                                                                                attachment_file_name,
+                                                                                docker_artifact_type,
+                                                                                docker_input,
+                                                                                container_logs.decode('utf-8')))
                     temp_upload_file.close()
 
                     #  Access Resilient API
@@ -186,7 +194,7 @@ class FunctionComponent(ResilientComponent):
 
                     # POST the new attachment
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
-                                                            filename=u"Docker {} output for {}".format(image_to_use, container_id), mimetype='text/plain')
+                                                            filename=new_attachment_name, mimetype='text/plain')
 
                 finally:
                     os.unlink(temp_upload_file.name)

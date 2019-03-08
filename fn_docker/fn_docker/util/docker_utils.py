@@ -31,7 +31,8 @@ class DockerUtils:
         if resilient_lib.str_to_bool(options.get("docker_use_remote_conn", "False")):
             LOG.debug("Use Remote Connection config set to true.")
             LOG.debug("Docker Remote URL provided %s", options.get("docker_remote_url", None))
-            if 'ssh://' and 'tcp://' not in options.get("docker_remote_url", None):
+            if 'ssh://' not in options.get("docker_remote_url", "No URL Provided") \
+                    and 'tcp://' not in options.get("docker_remote_url", "No URL Provided"):
                 raise ValueError("docker_remote_url does not appear to be configured correctly. Current value {}".format(options.get("docker_remote_url", None)))
             self.initiate_remote_docker_connection(options.get("docker_remote_url"))
         else:
