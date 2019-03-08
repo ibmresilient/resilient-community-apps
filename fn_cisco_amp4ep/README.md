@@ -1,21 +1,21 @@
-# Resilient Function - fn_cisco_amp4ep
+# Resilient Function Integration for Cisco AMP for Endpoints
 
-This Resilient Function package can be used to perform the following actions from a workflow using the Functions feature of the Resilient
+This Resilient function package can be used to perform the following actions from a workflow using the Functions feature of the Resilient
 Circuits integration framework.
-```
-Retrieve list of all computers with agents deployed on them, in a Cisco AMP for endpoints environment.
-Get information about a specific computer by guid
-Get list of all activities associated with a particular computer, search by guid.
-Search all computers for any events or activities associated with a file or network operation
-```
 
-Prerequisites:
+* Retrieve list of all computers with agents deployed on them, in a Cisco AMP for endpoints environment.
+* Get information about a specific computer by guid
+* Get list of all activities associated with a particular computer, search by guid.
+* Search all computers for any events or activities associated with a file or network operation
+
+
+##Prerequisites:
 ```
-resilient version 30 or later
+Resilient version 31 or later
 resilient_circuits version 30 or later
 ```
-* For more info about Cisco AMP for endpoints, please visit https://www.cisco.com/c/en/us/products/security/amp-for-endpoints/index.html
-* For more info about Cisco AMP for endpoints Rest API, please visit https://api-docs.amp.cisco.com/
+* For more info about Cisco AMP for Endpoints, please visit https://www.cisco.com/c/en/us/products/security/amp-for-endpoints/index.html
+* For more info about Cisco AMP for Endpoints Rest API, please visit https://api-docs.amp.cisco.com/
 
 
 ## Environment
@@ -47,7 +47,7 @@ max_retries=3
 
 Run with: `resilient-circuits run`.
 
-## Supported Resilient Functions for Cisco AMP for endpoints.
+## Supported functions:
 ```
 fn_amp_get_computer
 fn_amp_get_computers
@@ -62,21 +62,58 @@ fn_amp_get_events
 fn_amp_get_groups
 fn_amp_move_computer
 ```
-## Sample workflows have been provided:
+## Sample workflows provided:
 ```
-
+Example: AMP add artifact from activity
+Example: AMP Add artifact from event
+Example: AMP add artifact from trajectory
+Example: AMP delete file from list
+Example: AMP get computer by guid
+Example: AMP get computer by name
+Example: AMP get computers with activity
+Example: AMP get computer trajectory
+Example: AMP get computer trajectory by activity
+Example: AMP get events
+Example: AMP get events by type
+Example: AMP get event types
+Example: AMP get file lists
+Example: AMP get files from list
+Example: AMP get group name by guid
+Example: AMP get groups
+Example: AMP move computer
+Example: AMP set file in list
 ```
-## fn_amp_get_computer Example
+## Sample rules provided:
+```
+Example: AMP add artifact from activity
+Example: AMP add artifact from event
+Example: AMP add artifact from trajectory
+Example: AMP delete file from list
+Example: AMP get computer by guid
+Example: AMP get computer by name
+Example: AMP get computers with activity
+Example: AMP get computer trajectory
+Example: AMP get computer trajectory by activity
+Example: AMP get events
+Example: AMP get events by type
+Example: AMP get event types
+Example: AMP get file lists
+Example: AMP get files from list
+Example: AMP get group name by guid
+Example: AMP get groups
+Example: AMP move computer
+Example: AMP set file in list
+```
+## Get Computer Example
 
-The amp_conn_guid Function requires 1 input parameter. The parameter is setup from a Resilient systems workflow on the Resilient console.
-The following are examples of setup of the parameter using a simple workflow pre-processing script.
+The fn_amp_get_computer function requires one input parameter: amp_conn_guid. 
+The following example shows the configuration of the parameter using a simple workflow pre-processing script:
 
 ```
 inputs.amp_conn_guid = artifact.value
 ```
-For example if artifact.value gets set to guid 00da1a57-b833-43ba-8ea2-79a5ab21908f, the results
-returned to Resilient will be in JSON format and will be similar to the following format.
-Note: Each Resilient Function will return a different result.
+For example, if artifact.value is set to guid 00da1a57-b833-43ba-8ea2-79a5ab21908f, the results
+returned to will be in JSON format similar to the following:
 ```
 {
   "response": {
