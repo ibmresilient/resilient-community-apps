@@ -31,12 +31,12 @@ class FunctionComponent(ResilientComponent):
             email_address = kwargs.get("email_address")  # text
 
             log = logging.getLogger(__name__)
-            log.info("email_address: %s", email_address)
+            log.info(u"email_address: %s", email_address)
 
             yield StatusMessage("starting...")
 
             m = hashlib.sha1()
-            m.update(email_address)
+            m.update(email_address.encode('utf-8'))
 
             email_hash = m.hexdigest()
 

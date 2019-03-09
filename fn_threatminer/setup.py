@@ -10,8 +10,8 @@ setup(
     author='Michael Piekarski',
     author_email='mpiekarski@essextec.com',
     url='https://essextec.com',
-    description="Resilient Circuits integration for Threatminer domain",
-    long_description="Resilient Circuits integration for Threatminer API to gather additional information for artifacts",
+    description="Resilient Circuits integration for ThreatMiner domain",
+    long_description="Resilient Circuits integration for ThreatMiner API to gather additional information for artifacts",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'requests',

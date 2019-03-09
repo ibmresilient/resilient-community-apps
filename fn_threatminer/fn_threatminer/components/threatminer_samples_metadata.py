@@ -56,9 +56,6 @@ class FunctionComponent(ResilientComponent):
                 "metadata": metadata
             }
 
-            #  yield StatusMessage("done...")
-
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

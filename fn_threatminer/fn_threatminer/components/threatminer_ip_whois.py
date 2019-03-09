@@ -66,5 +66,4 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            print "Error"
             yield FunctionError(e)
