@@ -27,8 +27,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
 
-    @function("netwitness_get_meta_id_ranges")
-    def _netwitness_get_meta_id_ranges(self, event, *args, **kwargs):
+    @function("netwitness_get_meta_values")
+    def _netwitness_get_meta_values(self, event, *args, **kwargs):
         """Function: Returns back the meta values for a single session or consecutive sessions"""
         try:
             yield StatusMessage("Starting...")

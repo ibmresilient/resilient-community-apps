@@ -32,8 +32,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
 
-    @function("netwitness_retrieve_session_data")
-    def _netwitness_retrieve_session_data(self, event, *args, **kwargs):
+    @function("netwitness_retrieve_pcap_file")
+    def _netwitness_retrieve_pcap_file(self, event, *args, **kwargs):
         """Function: Returns back either a log or pcap file from Netwitness,
         attaches it to an incident if it is a pcap file."""
         temp_d = None
@@ -41,19 +41,16 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             # Get the function parameters:
             nw_event_session_ids = kwargs.get("nw_event_session_ids")  # text
-            nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
             incident_id = str(kwargs.get("incident_id"))  # number
 
             # Initialize resilient_lib objects (handles the select input)
             rp = ResultPayload("netwitness_retrieve_session_data", **{"nw_event_session_ids": nw_event_session_ids,
-                                                                      "nw_data_format": nw_data_format,
                                                                       "incident_id": incident_id})
             req_common = RequestsCommon(self.opts)
 
-            validate_fields(["nw_event_session_id", "nw_data_format", "incident_id"], **kwargs)
+            validate_fields(["nw_event_session_id", "incident_id"], **kwargs)
 
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
-            log.info("nw_data_format: %s", nw_data_format)
             log.info("incident_id: %s", incident_id)
 
             # Get all common variables from app.config

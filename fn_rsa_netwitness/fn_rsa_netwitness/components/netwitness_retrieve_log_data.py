@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
 
-    @function("netwitness_retrieve_session_data")
+    @function("netwitness_retrieve_log_data")
     def _netwitness_retrieve_log_data(self, event, *args, **kwargs):
         """Function: Returns back either a log or pcap file from Netwitness,
         attaches it to an incident if it is a pcap file."""
