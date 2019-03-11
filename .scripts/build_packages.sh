@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # Build python packages with setup.py
+# This section builds all the feature packages implemented in
+# python. It searches for all folders that contains setup.py
+#
 
 setup_files=(`find .. -type f -name 'setup.py'`);
 dist_dir=$( cd $(dirname $0) ; pwd -P )
@@ -17,6 +20,10 @@ do
 done;
 
 # Build content packages with resilient-res-package.sh
+# This section builds all the content/resource only package. No setup.py
+# It searches for a script called resilient-res-package.sh, and calls it.
+# Most likely you only need to zip some files folders. Follow the example
+# in the ../res_qraw_mitre folder.
 
 build_scripts=(`find .. -type f -name 'resilient-res-package.sh'`);
 
