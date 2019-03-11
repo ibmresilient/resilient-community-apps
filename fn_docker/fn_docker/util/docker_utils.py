@@ -5,6 +5,7 @@ import os
 import docker
 from resilient_circuits.template_functions import render
 import resilient_lib
+from requests.exceptions import ConnectionError
 LOG = logging.getLogger(__name__)
 
 CONFIGSECTIONPREFIX = 'docker_'  # A constant prefix used for an images app.config section.
