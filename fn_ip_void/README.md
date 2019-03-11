@@ -6,7 +6,6 @@
   - [Function Output](#function-output)
   - [Pre-Process Script](#pre-process-script)
   - [Post-Process Script](#post-process-script)
-  - [Rules](#rules)
 ---
 
 **This package contains a function that searches using your IPVOID account/subscription with the given query**
