@@ -1,4 +1,4 @@
-# Resilient Content Package for QRadar Advisor and MITREA
+# Resilient Content Package for QRadar Advisor and Mitre Att&ck
 
 ## Description
 
