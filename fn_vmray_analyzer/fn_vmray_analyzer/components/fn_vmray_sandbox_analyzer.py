@@ -3,11 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 import logging
 import tempfile, time, json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
