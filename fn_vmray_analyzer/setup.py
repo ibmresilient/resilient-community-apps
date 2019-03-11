@@ -8,11 +8,12 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits VMRay Analyzer Functions",
-    long_description="Resilient Circuits VMRay Analyzer Functions",
+    long_description="Resilient Circuits VMRay Analyzer Functions that submits an attached file to VMRAY Cloud for Malware analysis and returns the results in an incident note. ",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=31.0.0'
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
