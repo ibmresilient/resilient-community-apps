@@ -19,7 +19,7 @@ def create_tmp_file(contents):
 
     with open(report_file, 'wb') as f:
         f.write(contents)
-        log.info("Saved ATD report")
+        log.info("Saved PCAP data locally.")
 
     return temp_d, report_file
 
