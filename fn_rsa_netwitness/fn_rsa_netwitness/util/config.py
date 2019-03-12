@@ -11,15 +11,13 @@ def config_section_data():
     """
     config_data = u"""[fn_rsa_netwitness]
 nw_packet_server_url=<http://test.nw_packet_server.com:50104>
-nw_packet_server_port=<port for communication>
 nw_packet_server_user=<nw_packet_server_username>
 nw_packet_server_password=<nw_packet_server_password>
-nw_packet_server_cafile=[true|false]
+nw_packet_server_verify=[true|false]
 
 nw_log_server_url=<http://test.nw_log_server.com:50102>
-nw_log_server_port=<port for communication>
 nw_log_server_user=<nw_log_server_username>
 nw_log_server_password=<nw_log_server_password>
-nw_log_server_cafile=[true|false]
+nw_log_server_verify=[true|false]
 """
     return config_data

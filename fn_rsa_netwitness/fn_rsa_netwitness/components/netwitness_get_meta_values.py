@@ -20,7 +20,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_url", "nw_user", "nw_password", "nw_port"], self.options)
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             nw_session_id1 = str(kwargs.get("nw_meta_id1"))  # number
             nw_session_id2 = str(kwargs.get("nw_meta_id2"))  # number
-            nw_results_size = str(kwargs.get("nw_results_size"))  # number
+            nw_results_size = str(kwargs.get("nw_results_size", ''))  # number
 
             # Initialize resilient_lib objects
             rp = ResultPayload("netwitness_get_meta_id_ranges", **kwargs)
@@ -46,9 +46,11 @@ class FunctionComponent(ResilientComponent):
             log.info("nw_results_size: %s", nw_results_size)
 
             # Get meta values from Netwitness
-            nw_query_metadata = get_meta_values(self.options.get("nw_url"), self.options.get("nw_port"),
-                                                self.options.get("nw_user"), self.options.get("nw_password"),
-                                                self.options.get("cafile"), nw_session_id1, nw_session_id2,
+            nw_query_metadata = get_meta_values(self.options.get("nw_packet_server_url"),
+                                                self.options.get("nw_packet_server_user"),
+                                                self.options.get("nw_packet_server_password"),
+                                                self.options.get("nw_packet_server_verify"),
+                                                nw_session_id1, nw_session_id2,
                                                 req_common, size=nw_results_size)
 
             log.debug(nw_query_metadata)
@@ -66,11 +68,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(e)
 
 
-def get_meta_values(url, port, user, pw, cafile, id1, id2, req_common, size=""):
+def get_meta_values(url, user, pw, cafile, id1, id2, req_common, size=""):
     headers = get_headers(user, pw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}:{}/sdk?msg=query&force-content-type=application/json&id1={}&id2={}&query=select%20*{}"\
-        .format(url, port, id1, id2, size)
+    request_url = "{}/sdk?msg=query&force-content-type=application/json&id1={}&id2={}&query=select%20*{}"\
+        .format(url, id1, id2, size)
 
     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)

@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
             # Get the function parameters:
             nw_query = self.get_textarea_param(kwargs.get("nw_query"))  # textarea
-            nw_results_size = str(kwargs.get("nw_results_size"))  # number
+            nw_results_size = str(kwargs.get("nw_results_size", ''))  # number
 
             # Initialize resilient_lib objects
             rp = ResultPayload("netwitness_query", **{"nw_query": nw_query, "nw_results_size": nw_results_size})
@@ -42,9 +42,12 @@ class FunctionComponent(ResilientComponent):
             log.info("nw_results_size: %s", nw_results_size)
 
             # Query Netwitness
-            nw_query_results = query_netwitness(self.options.get("nw_url"), self.options.get("nw_port"),
-                                                self.options.get("nw_user"), self.options.get("nw_password"),
-                                                self.options.get("cafile"), nw_query, req_common, size=nw_results_size)
+            nw_query_results = query_netwitness(self.options.get("nw_packet_server_url"),
+                                                self.options.get("nw_packet_server_user"),
+                                                self.options.get("nw_packet_server_password"),
+                                                self.options.get("nw_packet_server_verify"),
+                                                query=nw_query, req_common=req_common,
+                                                size=nw_results_size)
 
             log.debug(nw_query_results)
 
@@ -61,10 +64,10 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(e)
 
 
-def query_netwitness(url, port, user, pw, cafile, query, req_common, size=""):
+def query_netwitness(url, user, pw, cafile, query, req_common, size=""):
     headers = get_headers(user, pw)
     if size:
         size = "&size={}".format(size)
-    request_url = "{}:{}/sdk?msg=query&query={}&force-content-type=application/json{}".format(url, port, query, size)
+    request_url = "{}/sdk?msg=query&query={}&force-content-type=application/json{}".format(url, query, size)
 
     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)

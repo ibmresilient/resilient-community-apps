@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
-from fn_rsa_netwitness.util.helper import get_headers
+from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
 
@@ -20,12 +20,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_rsa_netwitness", {})
 
         # Validate app.config fields
-        validate_fields(["nw_url", "nw_user", "nw_password", "nw_port"], self.options)
-
-        if self.options.get("cafile").lower() == "false":
-            self.options["cafile"] = False
-        elif self.options.get("cafile").lower() == "true":
-            self.options["cafile"] = True
+        validate_fields(["nw_log_server_url", "nw_log_server_user", "nw_log_server_password"], self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -39,49 +34,46 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Starting...")
             # Get the function parameters:
-            nw_event_session_ids = kwargs.get("nw_event_session_ids")  # text
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
-            incident_id = str(kwargs.get("incident_id"))  # number
+            nw_start_time = kwargs.get("nw_start_time")  # text
+            nw_end_time = kwargs.get("nw_end_time")  # text
 
             # Initialize resilient_lib objects (handles the select input)
-            rp = ResultPayload("netwitness_retrieve_session_data", **{"nw_event_session_ids": nw_event_session_ids,
-                                                                      "nw_data_format": nw_data_format,
-                                                                      "incident_id": incident_id})
+            rp = ResultPayload("netwitness_retrieve_session_data", **kwargs)
             req_common = RequestsCommon(self.opts)
 
-            validate_fields(["nw_event_session_id", "nw_data_format", "incident_id"], **kwargs)
-
-            log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_data_format: %s", nw_data_format)
-            log.info("incident_id: %s", incident_id)
+            log.info("nw_start_time: %s", nw_start_time)
+            log.info("nw_end_time: %s", nw_end_time)
 
             data_file = {}
+            start_time = convert_to_nw_time(nw_start_time)
+            end_time = convert_to_nw_time(nw_end_time)
 
             # Get all common variables from app.config
-            url = self.options.get("nw_url")
-            port = self.options.get("nw_port")
-            username = self.options.get("nw_user")
-            password = self.options.get("nw_password")
-            nw_cafile = self.options.get("cafile")
+            url = self.options.get("nw_log_server_url")
+            username = self.options.get("nw_log_server_user")
+            password = self.options.get("nw_log_server_password")
+            nw_verify = self.options.get("nw_log_server_verify")
 
             # Get log data as a line delimited text format
             if nw_data_format == "logs_text":
-                data_file = get_nw_session_logs_file(url, port, username, password, nw_cafile, nw_event_session_ids,
+                data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
                                                      req_common, render_format="logs")
 
             # Get log data in csv format
             elif nw_data_format == "logs_csv":
-                data_file = get_nw_session_logs_file(url, port, username, password, nw_cafile, nw_event_session_ids,
+                data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
                                                      req_common, render_format="text/csv")
 
             # Get log data in xml format
             elif nw_data_format == "logs_xml":
-                data_file = get_nw_session_logs_file(url, port, username, password, nw_cafile, nw_event_session_ids,
+                data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
                                                      req_common, render_format="text/xml")
 
             # Get log data in json format
             elif nw_data_format == "logs_json":
-                data_file = get_nw_session_json_file(url, port, username, password, nw_cafile, nw_event_session_ids,
+                data_file = get_nw_session_json_file(url, username, password, nw_verify, start_time, end_time,
                                                      req_common)
 
             log.debug("data_file: {}".format(data_file))
@@ -94,15 +86,15 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(e)
 
 
-def get_nw_session_logs_file(url, port, user, pw, cafile, event_session_id, req_common, render_format):
+def get_nw_session_logs_file(url, user, pw, cafile, time1, time2, req_common, render_format):
     headers = get_headers(user, pw)
-    request_url = "{}:{}/sdk/packets?sessions={}&render={}".format(url, port, event_session_id, render_format)
+    request_url = "{}/sdk/packets?time1={}&time2={}&render={}".format(url, time1, time2, render_format)
 
-    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)
+    return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers, resp_type="text")
 
 
-def get_nw_session_json_file(url, port, user, pw, cafile, event_session_id, req_common):
+def get_nw_session_json_file(url, user, pw, cafile, time1, time2, req_common):
     headers = get_headers(user, pw)
-    request_url = "{}:{}/sdk/packets?sessions={}&render=application/json".format(url, port, event_session_id)
+    request_url = "{}/sdk/packets?time1={}&time2={}&render=application/json".format(url, time1, time2)
 
     return req_common.execute_call("GET", request_url, verify_flag=cafile, headers=headers)

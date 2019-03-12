@@ -6,6 +6,7 @@ import tempfile
 import shutil
 import logging
 import base64
+import datetime
 
 
 log = logging.getLogger(__name__)
@@ -39,3 +40,10 @@ def get_headers(username, password):
     }
 
     return headers
+
+
+# Converts Resilient epoch time to time format for NetWitness server
+def convert_to_nw_time(resilient_time):
+    time = int(resilient_time)/1000
+
+    return datetime.datetime.fromtimestamp(time).strftime('%Y-%b-%d %H:%M:%S')
