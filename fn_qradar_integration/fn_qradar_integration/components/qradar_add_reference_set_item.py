@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# (c) Copyright IBM Corp. 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 #
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -43,9 +43,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options["username"],
-                                         password=self.options["qradarpassword"],
-                                         token=None,
+                                         username=self.options.get("username", None),
+                                         password=self.options.get("qradarpassword", None),
+                                         token=self.options.get("qradartoken", None),
                                          cafile=qradar_verify_cert)
 
             result = qradar_client.add_ref_element(qradar_reference_set_name,

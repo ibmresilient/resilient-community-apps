@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 import requests
 import base64
 
@@ -14,6 +14,8 @@ QRADAR_ANALYSIS_URL = "/offense/{offense_id}/analysis"
 QRADAR_ANALYSIS_STATUS_URL = "/offense/{offense_id}/analysis/status"
 QRADAR_ANALYSIS_RESULT_URL = "/offense/{offense_id}/analysis/{stage}/stix"
 
+QRADAR_CFMA_MAPPINGS = "/mappings"
+QRADAR_CFMA_TUNING="/config/tuning"
 
 class HttpInfo(object):
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
@@ -29,6 +31,20 @@ class HttpInfo(object):
         self.session.headers["Accept"] = "application/json"
         self.session.headers["Content-Type"] = "application/json"
         self.session.cookies["SEC"] = self.token
+
+    def get_all_mappings(self):
+        """
+        Get the url to api/mappings
+        :return:
+        """
+        return self.api_base_url + QRADAR_CFMA_MAPPINGS
+
+    def get_tuning_url(self):
+        """
+        Get the url tp api/config/tuning endpoint
+        :return:
+        """
+        return self.api_base_url + QRADAR_CFMA_TUNING
 
     def get_about_url(self):
         """
@@ -110,6 +126,9 @@ class HttpInfo(object):
         if "X-XSRF-TOKEN" in self.session.headers:
             del self.session.headers["X-XSRF-TOKEN"]
 
+        if "X-TACTICS-XSRF-TOKEN" in self.session.headers:
+            del self.session.headers["X-TACTICS-XSRF-TOKEN"]
+
     def update_session(self, cookies):
         """
         Extract the CSRF token from the cookies and store it in the
@@ -117,8 +136,16 @@ class HttpInfo(object):
         :param cookies:
         :return:
         """
-        self.session.headers["X-XSRF-TOKEN"] = cookies["XSRF-TOKEN"]
-        self.xsrf_token = cookies["XSRF-TOKEN"]
+        if "XSRF-TOKEN" in cookies:
+            self.session.headers["X-XSRF-TOKEN"] = cookies["XSRF-TOKEN"]
+            self.xsrf_token = cookies["XSRF-TOKEN"]
+
+        if "TACTICS-XSRF-TOKEN" in cookies:
+            self.update_session_tactics(cookies)
+
+    def update_session_tactics(self, cookies):
+        self.session.headers["X-TACTICS-XSRF-TOKEN"] = cookies["TACTICS-XSRF-TOKEN"]
+        self.xsrf_token = cookies["TACTICS-XSRF-TOKEN"]
 
     def get_session(self):
         """

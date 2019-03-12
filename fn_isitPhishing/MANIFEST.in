@@ -1,0 +1,4 @@
+include README.md
+include fn_isitPhishing/util/*
+include fn_isitPhishing/LICENSE
+include fn_isitPhishing/doc/*

@@ -1,0 +1,4 @@
+include README.md
+include fn_clamav/util/*
+include fn_clamav/LICENSE
+include fn_clamav/doc/*

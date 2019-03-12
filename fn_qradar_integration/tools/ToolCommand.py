@@ -1,7 +1,16 @@
 system_host_env = "QRADAR_HOST"
 system_user_env = "QRADAR_USER"
 system_password_env = "QRADAR_PASSWORD"
+system_token_env = "QRADAR_TOKEN"
 system_verify_env = "QRADAR_VERIFY"
+
+import os
+import argparse
+try:
+    # For all python < 3.2
+    import backports.configparser as configparser
+except ImportError:
+    import configparser
 
 
 class ToolCommand(object):
@@ -10,6 +19,7 @@ class ToolCommand(object):
     system_host = None
     system_user = None
     system_password = None
+    system_token = None
     system_verify = False
 
     def __init__(self, help_string):
@@ -26,6 +36,8 @@ class ToolCommand(object):
 
         if system_password_env in os.environ:
             self.system_password = os.environ[system_password_env]
+        elif system_token_env in os.environ:
+            self.system_token = os.environ[system_token_env]
         else:
             print("Environment variable " + system_password_env + " is missing")
 
@@ -35,7 +47,7 @@ class ToolCommand(object):
         self.help_string = help_string
 
         self.opts_dict = {}
-
+        self.config = {}
 
     def run_command(self, argv, arg_str, arg_list):
         import sys, getopt

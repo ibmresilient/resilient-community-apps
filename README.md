@@ -1,4 +1,4 @@
-# Resilient Community Applications
+# Resilient Community Applications 
 
 This repository contains the source-code for packaged Resilient integrations.
 
