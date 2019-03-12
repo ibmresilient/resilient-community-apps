@@ -6,6 +6,7 @@ from six import string_types
 
 
 MAX_ORACLE_VARCHAR = 4000
+MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
 
 
 class SqlDialect:
@@ -304,6 +305,40 @@ class MySqlDialect(ODBCDialectBase):
         """
         return True
 
+    def get_parameters(self, parameter_names, parameters):
+        # Need to get a list that contains all the values in the same order as parameter_names.
+        bind_parameters = list()
+
+        for name in parameter_names:
+            bind_parameters.append(parameters[name][:MAX_MARIADB_TEXT] if isinstance(parameters[name], string_types) else parameters[name])
+
+        return bind_parameters
+
+    def get_column_type(self, input_type):  # pylint: disable=no-self-use
+        """
+        Gets the DB column type for the specified Resilient 'input type'
+
+        :param input_type: The Resilient input type value (e.g. datepicker, boolean, number,
+            text, text_area, etc.)
+
+        :returns The DB type to use for this dialect.
+        """
+        type_dict = dict(
+            number='INT',
+            datepicker='DATE',
+            datetimepicker='TIMESTAMP',
+            boolean='TINYINT'
+        )
+
+        if input_type in type_dict:
+            return type_dict[input_type]
+
+        return 'TEXT'
+
+    def configure_connection(self, connection):
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
+        connection.setencoding(encoding='utf-8')
+
 class SqlServerDialect(ODBCDialectBase):
     def get_upsert(self, table_name, field_names, field_types):
         """
@@ -578,7 +613,8 @@ EXCEPTION
       END IF;
 END; """
 
-        return cmd.format(table_name, ','.join(specs))
+        formatted = cmd.format(table_name, ','.join(specs))
+        return formatted
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         """
@@ -682,3 +718,7 @@ END; """
             return new_args
         else:
             return clean_field_name(args)
+
+        def configure_connection(self, connection):
+            connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
+            connection.setencoding(encoding='utf-8')

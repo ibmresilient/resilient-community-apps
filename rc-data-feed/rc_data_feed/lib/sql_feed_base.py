@@ -41,19 +41,20 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         self.created_tables = {}
 
     def _init_tables(self):
-        types_map = self.rest_client.get('/types')
+        if self.rest_client:
+            types_map = self.rest_client.get('/types')
 
-        for (type_name, type_dto) in list(types_map.items()):
-            pretty_type_name = TypeInfo.pretify_type_name(type_name)
+            for (type_name, type_dto) in list(types_map.items()):
+                pretty_type_name = TypeInfo.pretify_type_name(type_name)
 
-            parent_types = type_dto['parent_types']
+                parent_types = type_dto['parent_types']
 
-            # Only create tables for the types that have incident or task as a parent
-            # (or incident itself).
-            if type_name == 'incident' or 'incident' in parent_types or 'task' in parent_types:
-                all_fields = list(type_dto['fields'].values())
+                # Only create tables for the types that have incident or task as a parent
+                # (or incident itself).
+                if type_name == 'incident' or 'incident' in parent_types or 'task' in parent_types:
+                    all_fields = list(type_dto['fields'].values())
 
-                self._create_or_update_table(pretty_type_name, all_fields)
+                    self._create_or_update_table(pretty_type_name, all_fields)
 
     @abc.abstractmethod
     def _start_transaction(self):

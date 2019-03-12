@@ -59,3 +59,7 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
             data = []
 
         return cursor.execute(sql, data)
+
+    def _close_connection(self):
+        """Close the connection to the database"""
+        self.connection.close()

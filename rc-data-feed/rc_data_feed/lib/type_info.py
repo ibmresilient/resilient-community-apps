@@ -219,7 +219,7 @@ class TypeInfo:
         if self.is_data_table():
             field_id = field['id']
 
-            obj = payload['cells'][str(field_id)]['value']
+            obj = payload['cells'][str(field_id)].get('value', None) # 'value' is not always present for datatables
         else:
             prefix = field.get('prefix')
 
