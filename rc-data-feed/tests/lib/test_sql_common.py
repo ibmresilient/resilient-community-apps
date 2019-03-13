@@ -32,11 +32,12 @@ flat_payload = OrderedDict({ "id":  10,
 
 
 class SQLCommon():
-    def __init__(self, app_config, table_name=TABLE_NAME, table_def=all_fields, inspect_cols_query=FIND_COLUMNS_QUERY):
+    def __init__(self, app_config, table_name=TABLE_NAME, table_def=all_fields, inspect_cols_query=FIND_COLUMNS_QUERY, baseClass=ODBCFeedDestination):
         self.app_config = app_config
         self.table_name = table_name
         self.table_def = table_def
         self.inspect_cols_query = inspect_cols_query.format(table_name=self.table_name)
+        self.baseClass = baseClass
 
 
         self.all_field_names = [field['name'] for field in table_def]
@@ -45,7 +46,7 @@ class SQLCommon():
             self.all_field_types[field['name']] = field['input_type']
 
     def test_get_parameters(self, all_field_names=None, payload=flat_payload):
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
 
         if not all_field_names:
             all_field_names = self.all_field_names
@@ -53,15 +54,21 @@ class SQLCommon():
         try:
             parameters = connection.dialect.get_parameters(all_field_names, payload)
 
-            payload_keys = [key for key in payload.values()]
-            for ndx in range(len(flat_payload)):
-                assert parameters[ndx] == payload_keys[ndx]
+            # sqlite returned the original dictionary
+            if isinstance(parameters, list):
+                payload_keys = [key for key in payload.values()]
+                for ndx in range(len(flat_payload)):
+                    assert parameters[ndx] == payload_keys[ndx]
+            else:
+                for key in payload.keys():
+                    assert parameters[key] == payload[key]
 
         finally:
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
     def test_createtable(self):
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         try:
             # find all the columns types by column name we expect
             exected_col_types = {}
@@ -94,13 +101,14 @@ class SQLCommon():
             finally:
                 cursor.close()
         finally:
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
 
     def test_insert_row(self, result_payload):
         global flat_payload
 
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         try:
             payload = flat_payload.copy()
             # convert data for the fields
@@ -138,13 +146,14 @@ class SQLCommon():
 
         finally:
             cursor.close()
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
 
     def test_update_row(self, MAX_TEXT_SIZE, result_payload):
         global flat_payload
 
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         try:
             payload = flat_payload.copy()
             # convert data for the fields
@@ -186,11 +195,12 @@ class SQLCommon():
 
         finally:
             cursor.close()
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
     def test_delete_row(self):
         global flat_payload
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         cursor = connection._start_transaction()
 
         try:
@@ -205,14 +215,15 @@ class SQLCommon():
             assert delete_result.rowcount == 1
         finally:
             cursor.close()
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
 
     def test_altertable(self):
         global flat_payload
 
         ALTER_COL = "alter_col"
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         cursor = connection._start_transaction()
         try:
             print (connection.dialect.get_add_column_to_table(TABLE_NAME, ALTER_COL, "text"))
@@ -231,11 +242,12 @@ class SQLCommon():
 
         finally:
             cursor.close()
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
 
 
     def test_droptable(self):
-        connection = ODBCFeedDestination(None, self.app_config)
+        connection = self.baseClass(None, self.app_config)
         cursor = connection._start_transaction()
         try:
             alter_result = connection._execute_sql(
@@ -246,4 +258,5 @@ class SQLCommon():
 
         finally:
             cursor.close()
-            connection._close_connection()
+            if hasattr(connection, "_close_connection"):
+                connection._close_connection()
