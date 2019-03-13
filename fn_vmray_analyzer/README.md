@@ -7,14 +7,16 @@
   - [Pre-Process Script](#pre-process-script)
   - [Post-Process Script](#post-process-script)
   - [Rules](#rules)
----
+  
+--- 
+ 
+**This package contains a function that executes a VMRay Malware Sandbox Analysis using VMRay Cloud APIs, also included are two example workflows and two example rules that demonstrate how to use this function.**
 
-**This package contains a function that executes a VMRay Sandbox Analysis**
 
  ![screenshot](./screenshots/workflow_attachment.jpeg)
 
-* Supports an attachment or artifact that is a file.
-* The report only support Type of JSON, not Support HTML and PDF.
+* an attachment or artifact must be a file.
+* The report only supports Type of JSON. HTML and PDF are not supported
 * Supports a proxy. Just add your proxy details to the `proxy` section in `app.config` file.
 
 ## app.config settings:  
@@ -38,7 +40,7 @@ vmray_analyzer_report_request_timeout=60
 | `incident_id` | `Number` | Yes | `1001` | The ID of the current Incident|            
 | `attachment_id` | `Number` | No | `5` | The ID of the Attachment to be analyzed|
 | `artifact_id` | `Number` | No | `6` | The ID of the Artifact to be analyzed 
-| `analyzer_report_status` | `Boolean` | Yes | `False` | Has the analysis report generated successfully. Options are: `True` or `False` |
+| `analyzer_report_status` | `Boolean` | Yes | `No` | Has the analysis report generated successfully. Options are: `Yes` or `No` |
 ---
 
 ## Function Output:
@@ -149,7 +151,16 @@ incident.addNote(helper.createRichText(noteText))
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ |
 | Example: VMRay Sandbox Analysis [Artifact]| `Artifact` | `Example: VMRay Sandbox Analyzer [Artifact]` |
+
+![screenshot](./screenshots/rule_artifact.jpeg)
+
+| Rule Name | Object Type | Workflow Triggered |
+| --------- | :---------: | ------------------ |
 | Example: VMRay Sandbox Analyzer [Attachment]| `Attachment` | `Example: VMRay Sandbox Analyzer [Attachment]` |
+
+
+![screenshot](./screenshots/rule_attachment.jpeg)
+
 
 ---
                                                                                
