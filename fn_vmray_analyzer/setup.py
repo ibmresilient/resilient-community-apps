@@ -12,7 +12,7 @@ setup(
     description="Resilient Circuits VMRay Analyzer Functions",
     long_description="Resilient Circuits VMRay Analyzer Functions that submits an attached file to VMRAY Cloud for Malware analysis and returns the results in an incident note. ",
     install_requires=[
-        'resilient_circuits>=31.0.0'
+        'resilient_circuits>=31.0.0',
         'resilient-lib'
     ],
     packages=find_packages(),

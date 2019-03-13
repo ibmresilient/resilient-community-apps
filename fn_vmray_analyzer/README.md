@@ -154,6 +154,7 @@ incident.addNote(helper.createRichText(noteText))
 
 ![screenshot](./screenshots/rule_artifact.jpeg)
 
+---
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ |
 | Example: VMRay Sandbox Analyzer [Attachment]| `Attachment` | `Example: VMRay Sandbox Analyzer [Attachment]` |
