@@ -1,0 +1,4 @@
+include README.md
+include fn_ansible/util/*
+include fn_ansible/LICENSE
+include fn_ansible/doc/*
