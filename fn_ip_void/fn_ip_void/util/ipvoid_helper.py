@@ -32,16 +32,14 @@ def get_url(base_url, api_key, query_type, value):
     return url_skeleton.format(url_pattern1, api_key, url_pattern2)
 
 
-def get_config_option(option_name, opts, optional=False):
-    """Given option_name, checks if it is in appconfig.
-        Raises ValueError if a mandatory option is missing
-    """
-    option_value = opts.get(option_name)
+def get_config_option(app_configs, option_name, optional=False, placeholder=None):
+    """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
+    option = app_configs.get(option_name)
+    err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(option_name)
 
-    if not option_value and optional is False:
-        msg = "'{0}' is mandatory and is not set in the app.config \
-            file. You must set this value to run this function"
-        err = msg.format(option_name)
+    if not option and optional is False:
+        raise ValueError(err)
+    elif optional is False and placeholder is not None and option == placeholder:
         raise ValueError(err)
     else:
-        return option_value
+        return option

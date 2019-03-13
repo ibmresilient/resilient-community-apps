@@ -118,7 +118,17 @@ inputs.ip_void_artifact_type = artifact.type
 ```
 
 ## Post-Process Script:
-This example then adds `results` to Notes section.
+This example then updates the artifact with `results`.
 ```python
-incident.addNote(str(results))
+try:
+    des = artifact.description.content
+except Exception:
+  des = None
+  
+if des is None:
+ 
+  artifact.description = u"""IPVOID threat intelligence {0}""".format(results["data"])
+else:
+
+  artifact.description = des + u"""IPVOID threat intelligence {0}""".format(results["data"])
 ```

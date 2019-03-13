@@ -44,8 +44,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting Intelligence for {} : {}".format(
                 ip_void_artifact_type, ip_void_artifact_value))
 
-            base_url = get_config_option("ipvoid_base_url", self.options)
-            api_key = get_config_option("ipvoid_api_key", self.options)
+            base_url = get_config_option(self.options, "ipvoid_base_url", placeholder="<ip-void-base-url>")
+            api_key = get_config_option(self.options, "ipvoid_api_key", placeholder="<your-api-key>")
             url = get_url(
                 base_url, api_key, ip_void_request_type, ip_void_artifact_value
             )
@@ -63,7 +63,9 @@ class FunctionComponent(ResilientComponent):
                 msg = response.json()
                 raise ValueError(msg["error"])
 
-            results = res
+            results = {
+                "data": res
+            }
             yield StatusMessage("IPVOID Intel received.")
             log.debug("RESULTS: %s", results)
             log.info("Complete")

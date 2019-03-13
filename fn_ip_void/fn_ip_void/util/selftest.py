@@ -7,13 +7,11 @@
 
 import logging
 import requests
-from fn_ip_void.util.ipvoid_helper import get_config_option
+from fn_ip_void.util.ipvoid_helper import get_config_option, SUB_URL
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-SUB_URL = "iprep/v1/pay-as-you-go/?key={}&stats"
 
 
 def selftest_function(opts):
@@ -23,10 +21,10 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, 
     success, or failure.
     """
-    options = opts.get("fn_ipvoid", {})
-    api_token = get_config_option("ipvoid_api_key", options)
-    base_url = get_config_option("ipvoid_base_url", options)
-    url = "/".join((base_url, SUB_URL)).format(api_token)
+    options = opts.get("fn_ip_void", {})
+    api_token = get_config_option(options, "ipvoid_api_key")
+    base_url = get_config_option(options, "ipvoid_base_url")
+    url = "/".join((base_url, SUB_URL)).format('iprep', api_token,'stats')
     try:
         res = requests.get(url)
         if res.status_code == 200:
