@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-class ElasticSearchHelper:
+
+
+class ElasticSearchHelper():
 
   def str_to_bool(self, str):
     """Convert unicode string to equivalent boolean value. Converts a "true" or "false" string to a boolean value , string is case insensitive."""

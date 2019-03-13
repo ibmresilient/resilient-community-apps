@@ -13,5 +13,7 @@ def config_section_data():
 host=localhost
 username=admin
 qradarpassword=changeme
+#Note, if both qradarpassword and qadartoken are given, password will be used
+qradartoken=changeme
 '''
     return config_data

@@ -6,9 +6,10 @@
 #
 import pyodbc
 import sys
+import logging
 
-SQL_ATTR_CONNECTION_TIMEOUT = 113
 SINGLE_ENCODING_DATABASES = ["mariadb", "postgresql", "mysql"]
+LOG = logging.getLogger(__name__)
 
 """ Unicode objects don’t exist in python 3.6. """
 if sys.version_info >= (3, 0):
@@ -16,23 +17,21 @@ if sys.version_info >= (3, 0):
 
 
 class OdbcConnection(object):
-    # member variables
+
     db_connection = None
     db_cursor = None
 
-    def __init__(self, sql_connection_string, sql_autocommit, sql_query_timeout, sql_pyodbc_timeout_error_state):
-        self.db_connection = self.setup_odbc_connection(sql_connection_string, sql_autocommit,
-                                                        sql_query_timeout, sql_pyodbc_timeout_error_state)
+    def __init__(self, sql_connection_string, sql_autocommit, sql_query_timeout):
+        self.db_connection = self.setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout)
 
     @staticmethod
-    def setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout, sql_pyodbc_timeout_error_state):
+    def setup_odbc_connection(sql_connection_string, sql_autocommit, sql_query_timeout):
         """
         Setup ODBC connection to a SQL server using connection string obtained from the config file.
         Set autocommit and query timeout values based on the information in config file.
         :param sql_connection_string: config setting
         :param sql_autocommit: config setting
         :param sql_query_timeout: config setting
-        :param sql_pyodbc_timeout_error_state: config setting
         :return: pyodbc Connection
         """
         # ODBC connection pooling is turned ON by default.
@@ -53,16 +52,19 @@ class OdbcConnection(object):
                 db_connection.autocommit = True
 
             if sql_query_timeout:
-                # Some ODBC drivers might throw an error while setting db_connection.timeout:
-                # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
+                # Some ODBC drivers do not implement the connection timeout and will throw pyodbc.Error while trying
+                # to set it.
+                #
                 # The connection timeout period is set through SQLSetConnectAttr, SQL_ATTR_CONNECTION_TIMEOUT.
-                # SQL_ATTR_CONNECTION_TIMEOUT represents value 113,
-                # this constant can be found in ODBC specification file "sqlext.h".
-
+                #
                 # SQL_ATTR_CONNECTION_TIMEOUT appears not be supported by the psqlodbc driver (PostgreSQL).
-                # Psqlodbc throws a general error 'HY000' for which there was no specific SQLSTATE and for which no
-                # implementation-specific SQLSTATE was defined.
-                # Try to catch a pyodbc.Error, verify if it includes 'HY000' and '113' and pass.
+                # Psqlodbc throws a general error 'HY000' for which no implementation-specific SQLSTATE was defined:
+                # ('HY000', u"[HY000] Couldn't set unsupported connect attribute 113 (216) (SQLSetConnectAttr)")
+                #
+                # Oracle11g driver (Oracle database) also appears not support timeout and throws an error:
+                # ('HYC00', u'[HYC00] [Oracle][ODBC]Optional feature not implemented ....(0) (SQLSetConnectAttr)')))
+                #
+                # Try to catch a pyodbc.Error, log it as warning and pass.
                 try:
                     # Query statement timeout defaults to 0, which means "no timeout"
                     db_connection.timeout = sql_query_timeout
@@ -70,10 +72,9 @@ class OdbcConnection(object):
                 except pyodbc.Error as e:
                     sql_state = e.args[0]
                     error_message = e.args[1]
-                    if sql_state == sql_pyodbc_timeout_error_state and str(SQL_ATTR_CONNECTION_TIMEOUT) in error_message:
-                        pass
-                    else:
-                        raise Exception("Could not setup the ODBC connection, Exception %s", e)
+                    LOG.warning("ODBC driver does not implement the connection timeout attribute. "
+                                "Error code: %s - %s", sql_state, error_message)
+                    pass
 
         except Exception as e:
             raise Exception("Could not setup the ODBC connection, Exception %s", e)

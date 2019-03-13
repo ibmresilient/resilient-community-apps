@@ -21,6 +21,9 @@ def get_config():
         "bigfix_port": "12345",
         "bigfix_user": "BigFixAdmin",
         "bigfix_pass": "MyPassword",
+        "bigfix_polling_interval": 30,
+        "bigfix_polling_timeout":  600,
+        "hunt_results_limit": 200
     })
 
 class TestGetBfComputerProperties:
