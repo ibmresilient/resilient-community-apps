@@ -54,7 +54,7 @@ function executeRESTMessage(rm, usingMidServer, baseURL){
 	}
 	catch (e){
 		if (e.message.indexOf("No response for ECC message request") !== -1){
-			errMsg = "Timedout getting response.";
+			errMsg = "Timed out getting response.";
 			if (usingMidServer){
 				errMsg += "\nCheck Mid Server. Login to the machine hosting your Mid Server and ensure you can ping IBM Resilient at " + baseURL;
 			}
@@ -63,7 +63,7 @@ function executeRESTMessage(rm, usingMidServer, baseURL){
 			}
 		}
 		else{
-			errMsg = "Failed to executeREST message. Unhandled error. " + e;
+			errMsg = "Failed to execute REST message. Unhandled error. " + e;
 		}
 		throw errMsg;
 	}
@@ -89,7 +89,7 @@ function executeRESTMessage(rm, usingMidServer, baseURL){
 			reason += "\nYour Resilient Host may be incorrect or not accessible.";
 			reason += "\nCheck your Resilient Host is up and running.";
 			if(usingMidServer){
-				reason += "Check your Mid-Server is correctly configured";
+				reason += "\nCheck your Mid-Server is correctly configured";
 			}
 		}
 		errMsg = "Reason: " + reason;
@@ -160,7 +160,7 @@ function getOrgId(orgs, orgName, resilientUser){
 
 	//Throw a custom error if anything fails
 	catch (e){
-		errMsg = "Could not find the Resilient Organization: " + orgName + ".\n" + e;
+		errMsg = "Error trying to find the Resilient Organization: " + orgName + ".\n" + e;
 		throw errMsg;
 	}
 }
@@ -193,7 +193,7 @@ ResilientAPI.prototype = {
 			usingMidServer = gs.getProperty("x_ibmrt_resilient.UseMidServer");
 		}
 		catch (e){
-			errMsg = "Failed getting Resilient Configuration Properties. Check the System Properties\n" + e;
+			errMsg = "Failed getting Resilient Configuration Properties. Check your Properties for IBM Resilient\n" + e;
 			throw errMsg;
 		}
 
@@ -208,7 +208,7 @@ ResilientAPI.prototype = {
 		this.baseURL = "https://" + hostName;
 		this.orgName = orgName;
 		this.userEmail = userEmail;
-		this.usingMidServer = usingMidServer;
+		this.usingMidServer = (usingMidServer == "true") ? true : false;
 
 		//Initialise other class variables that will be set in the connect() method
 		this.midServerName = null;
@@ -230,7 +230,7 @@ ResilientAPI.prototype = {
 		
 		var rm, authData, requestBody, res = null;
 
-		//Instaniate new REST Message
+		//Instantiate new REST Message
 		rm = new sn_ws.RESTMessageV2();
 		rm.setHttpMethod("post");
 		rm.setEndpoint(this.baseURL + "/rest/session");
@@ -251,6 +251,7 @@ ResilientAPI.prototype = {
 		//If its valid, set it
 		if (this.midServerName){
 			rm.setMIDServer(this.midServerName);
+			rm.setECCParameter("skip_sensor", true);
 		}
 		
 		//Execute and get response
@@ -275,7 +276,10 @@ ResilientAPI.prototype = {
 		var rm = new sn_ws.RESTMessageV2();
 		
 		//If using a midServer, set it
-		if (this.midServerName){ rm.setMIDServer(this.midServerName);}
+		if (this.midServerName){ 
+			rm.setMIDServer(this.midServerName);
+			rm.setECCParameter("skip_sensor", true);
+		}
 		
 		//Set the method 'get', 'post', 'delete'
 		rm.setHttpMethod(method);

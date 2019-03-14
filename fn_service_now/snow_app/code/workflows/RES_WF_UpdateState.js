@@ -25,6 +25,9 @@
 		//Update that status in the res datatable
 		resHelper.updateStateInResilient(res_reference_id, snTicketState, snTicketStateColor);
 		
+		//Add a note to the resilient incident/task stating the change
+		resHelper.addNote(res_reference_id, "ServiceNow Record state changed to: " + snTicketState);
+		
 		//Get resolution notes if there are any
 		resolutionNotes = current.getValue("close_notes");
 		
