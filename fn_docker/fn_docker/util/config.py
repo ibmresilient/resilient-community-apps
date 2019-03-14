@@ -27,8 +27,7 @@ docker_image=remnux/volatility
 primary_source_dir=/tmp/bind_folder
 # The folder within the container which will be used for volume binding
 primary_dest_dir=/home/nonroot/memdumps
-#The operation that will be done with the image, used only for images which have multiple entrypoint operations
-cmd_operation=pslist
+
 # The command that will be send to the container 
 cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
 # A comma separated list of approved operations. Leave this blank/commented out to allow all operations

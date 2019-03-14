@@ -208,7 +208,6 @@ class DockerUtils:
             del docker_extra_kwargs['volumes']  # Remove the volume
         docker_extra_kwargs['volumes'] = container_volume_bind
 
-
         # If config is not set at all for approved operations, all operations are approved
         # Ensure the operation that will be done is an approved one
         # An operation set as a function field will take priority over one set as a app.config to enable multiple workflows with different operations

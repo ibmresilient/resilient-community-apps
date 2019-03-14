@@ -167,6 +167,7 @@ class FunctionComponent(ResilientComponent):
                     request_exception,
                     u"""If you supplied an extra app.config value to remove the container this is expected."""))
 
+            timestamp_epoch = int(time.time() * 1000)
             # Setup tempfile
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:
                 try:
@@ -178,7 +179,8 @@ class FunctionComponent(ResilientComponent):
                                                                                 attachment_file_name,
                                                                                 docker_artifact_type,
                                                                                 docker_input,
-                                                                                container_logs.decode('utf-8')))
+                                                                                container_logs.decode('utf-8'),
+                                                                                timestamp_epoch))
                     temp_upload_file.close()
 
                     #  Access Resilient API
@@ -213,7 +215,7 @@ class FunctionComponent(ResilientComponent):
                     "attachment_name": attachment_name or None,
                 }
             )
-            results["metrics"]["timestamp_epoch"] = int(time.time() * 1000)
+            results["metrics"]["timestamp_epoch"] = timestamp_epoch
 
             # Update the docker_operation input to ensure we have captured the operation done, if any
             results["inputs"]["docker_operation"] = docker_operation

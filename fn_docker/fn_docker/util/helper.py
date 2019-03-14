@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
-
+import time
 class ResDockerHelper:
 
     def __init__(self, options):
@@ -102,7 +102,9 @@ class ResDockerHelper:
         return attachment_name
 
     @staticmethod
-    def format_output_attachment_body(container_id, docker_operation, new_attachment_name, docker_artifact_type, docker_input, container_logs):
+    def format_output_attachment_body(container_id, docker_operation, new_attachment_name,
+                                      docker_artifact_type, docker_input, container_logs,
+                                      timestamp):
         """
         A function that is used to increase the amount of information returned back to resilient as an attachment
         Instead of just providing the logs/output we can include the container_id and what we used as an input
@@ -116,8 +118,10 @@ class ResDockerHelper:
         :param container_logs:
         :return:
         """
-        new_attachment_body = u"""Docker Logs from Container : {container_id} \n{operation}{input_to_container}\nOutput from Container : \n{container_logs}""".format(
+
+        new_attachment_body = u"""Docker Logs from Container : {container_id} \n Integration Server Time {timestamp}\n{operation}{input_to_container}\nOutput from Container : \n{container_logs}""".format(
             container_id=container_id,
+            timestamp=time.strftime('%Y-%m-%d %H:%M', time.localtime(timestamp/1000)),
             input_to_container=u"""Performed on Attachment : {attachment_name}""".format(
                 attachment_name=new_attachment_name)
             if new_attachment_name
