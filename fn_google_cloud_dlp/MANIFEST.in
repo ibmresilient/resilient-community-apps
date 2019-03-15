@@ -1,0 +1,5 @@
+include README.md
+include fn_google_cloud_dlp/util/*
+include fn_google_cloud_dlp/LICENSE
+include fn_google_cloud_dlp/doc/*
+include fn_google_cloud_dlp/screenshots/*
