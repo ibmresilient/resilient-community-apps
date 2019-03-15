@@ -10,10 +10,10 @@ PACKAGE_NAME = "fn_rsa_netwitness"
 FUNCTION_NAME = "netwitness_retrieve_log_data"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+# resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
 def call_netwitness_retrieve_log_data_function(circuits, function_params, timeout=10):
@@ -36,8 +36,7 @@ class TestNetwitnessRetrieveLogData:
         assert func is not None
 
     @pytest.mark.parametrize("nw_start_time, nw_end_time, nw_data_format, expected_results", [
-        ("text", "text", 'logs_json', {"value": "xyz"}),
-        ("text", "text", 'logs_text', {"value": "xyz"})
+        ("1545157725000", "1545158725000", 'logs_text', {"value": "xyz"})
     ])
     def test_success(self, circuits_app, nw_start_time, nw_end_time, nw_data_format, expected_results):
         """ Test calling with sample values for the parameters """
@@ -47,4 +46,4 @@ class TestNetwitnessRetrieveLogData:
             "nw_data_format": nw_data_format
         }
         results = call_netwitness_retrieve_log_data_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert results.get("content") is not None
