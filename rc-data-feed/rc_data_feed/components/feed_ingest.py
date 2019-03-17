@@ -8,6 +8,7 @@ from resilient_circuits import ResilientComponent, handler, ActionMessage
 from rc_data_feed.lib.file_feed import FileFeedDestination
 from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
 from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
+from rc_data_feed.lib.elastic_feed import ElasticFeedDestination
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.feed import FeedContext
 
@@ -37,6 +38,7 @@ class FeedComponent(ResilientComponent):
     AVAILABLE_CLASSES = {
         "ODBCFeed": ODBCFeedDestination,
         "FileFeed": FileFeedDestination,
+        "ElasticFeed": ElasticFeedDestination,
         "SQLiteFeed": SqliteFeedDestination
     }
 

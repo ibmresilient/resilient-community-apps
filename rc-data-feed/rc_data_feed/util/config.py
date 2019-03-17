@@ -21,5 +21,15 @@ queue=feed_data
 #sql_dialect=SQLServerDialect
 #uid=sa
 #pwd=sa
+
+#[elastic_feed]
+#class=ElasticFeed
+#url=https://your_org.com
+#port=9200
+# if using multiple organizations, consider indexes such as resilient<org_ID>
+#index=resilient
+#auth_user=
+#auth_password=
+#cafile=false
 """
     return config_data

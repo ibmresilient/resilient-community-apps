@@ -1,122 +1,111 @@
-import json
-import os
+import pytest
+import time
 from collections import OrderedDict
-from rc_data_feed.lib.file_feed import FileFeedDestination
+from rc_data_feed.lib.elastic_feed import ElasticFeedDestination
 from rc_data_feed.lib.type_info import ActionMessageTypeInfo
 
-DIRECTORY= "/tmp/filefeed"
-
-TYPE_NAME = "incident"
+TYPE_NAME = "all_types"
 
 APP_CONFIG = {
-                "class": "FileFeed",
-                "directory": DIRECTORY
-             }
+    "class": "ElasticFeed",
+    "url": "http://localhost",
+    "port": "9200",
+    "index": "res_test",
+    "cafile": "false"
+}
 
-RESULT_PAYLOAD = {  "id":  10,
+ts = int(time.time())
+
+MSG_PAYLOAD = OrderedDict({"id":  ts,
+                           "inc_id": 2301,
+                           "test_text": u"ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ",
+                           "test_int": 1000,
+                           "test_date": 1550073347448,
+                           "test_datetime": 1550073347448,
+                           "test_bool": True
+                           })
+
+RESULT_PAYLOAD = {  "id":  ts,
                     "inc_id": 2301,
-                    "test_text": "this is a text field",
+                    "test_text": u"ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ",
                     "test_int": 1000,
                     "test_date": '2019-02-13T15:55:47.448000',
                     "test_datetime": '2019-02-13T15:55:47.448000',
-                    "test_bool": 1
-                  }
+                    "test_bool": 1,
+                 }
 
-MSG_PAYLOAD = OrderedDict({"id":  10,
-                             "inc_id": 2301,
-                             "test_text": u"this is a text field",
-                             "test_int": 1000,
-                             "test_date": 1550073347448,
-                             "test_datetime": 1550073347448,
-                             "test_bool": True
-                           })
-
-def test_file_feed():
+def test_index():
     """
     test that all fields sent for a file_feed are present
     :return:
     """
-    if not os.path.exists(DIRECTORY):
-        os.mkdir(DIRECTORY)
-
-    file_feed = FileFeedDestination(None, APP_CONFIG)
+    es_feed = ElasticFeedDestination(None, APP_CONFIG)
 
     context = Context()
-    file_feed.send_data(context, MSG_PAYLOAD)
+    es_feed.send_data(context, MSG_PAYLOAD)
 
     # test the results
-    name = context.type_info.get_pretty_type_name()
+    result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
 
-    output_file = file_feed._make_file_path(context, name, MSG_PAYLOAD)
-    assert os.path.exists(output_file)
-
-    with open(output_file, "r") as result_file:
-        result = json.loads(result_file.read())
-
-        for key, value in RESULT_PAYLOAD.items():
-            assert result[key] == value
+    for key, value in RESULT_PAYLOAD.items():
+        assert result["_source"][key] == value
 
 def test_update():
     """
-    test that changed data appears after the first write
+    test that all fields sent for a file_feed are present
     :return:
     """
-    if not os.path.exists(DIRECTORY):
-        os.mkdir(DIRECTORY)
-
-    file_feed = FileFeedDestination(None, APP_CONFIG)
-
-    new_payload = MSG_PAYLOAD.copy()
-    new_payload['test_text'] = u"a" * 1000  # changed data
-
-    new_result = RESULT_PAYLOAD.copy()
-    new_result["test_text"] = new_payload['test_text']
+    es_feed = ElasticFeedDestination(None, APP_CONFIG)
 
     context = Context()
-    file_feed.send_data(context, new_payload)
+
+    update_payload = MSG_PAYLOAD.copy()
+    update_payload['test_text'] = "a" * 4000
+    update_result = RESULT_PAYLOAD.copy()
+    update_result['test_text'] = update_payload['test_text']
+
+    es_feed.send_data(context, update_payload)
 
     # test the results
-    name = context.type_info.get_pretty_type_name()
+    result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=update_payload['id'])
 
-    output_file = file_feed._make_file_path(context, name, new_payload)
-    assert os.path.exists(output_file)
-
-    with open(output_file, "r") as result_file:
-        result = json.loads(result_file.read())
-
-        for key, value in new_result.items():
-            assert result[key] == value
+    for key, value in update_result.items():
+        assert result["_source"][key] == value
 
 def test_alter():
     """
-    add a new field and confirm it's added
+    test that all fields sent for a file_feed are present
     :return:
     """
-    if not os.path.exists(DIRECTORY):
-        os.mkdir(DIRECTORY)
-
-    file_feed = FileFeedDestination(None, APP_CONFIG)
-
-    new_payload = MSG_PAYLOAD.copy()
-    new_payload['alter_text'] = u"a" * 1000 # new field
-
-    new_result = RESULT_PAYLOAD.copy()
-    new_result["alter_text"] = new_payload['alter_text']
+    es_feed = ElasticFeedDestination(None, APP_CONFIG)
 
     context = Context()
-    file_feed.send_data(context, new_payload)
+
+    update_payload = MSG_PAYLOAD.copy()
+    update_payload['alter_text'] = "this is a new column"
+    update_result = RESULT_PAYLOAD.copy()
+    update_result['alter_text'] = update_payload['alter_text']
+    print(update_payload)
+    result = es_feed.send_data(context, update_payload)
 
     # test the results
-    name = context.type_info.get_pretty_type_name()
+    test_result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=update_payload['id'])
 
-    output_file = file_feed._make_file_path(context, name, new_payload)
-    assert os.path.exists(output_file)
+    for key, value in update_result.items():
+        assert test_result["_source"][key] == value
 
-    with open(output_file, "r") as result_file:
-        result = json.loads(result_file.read())
+def test_delete():
+    es_feed = ElasticFeedDestination(None, APP_CONFIG)
 
-        for key, value in new_result.items():
-            assert result[key] == value
+    context = Context(is_deleted=True)
+
+    es_feed.send_data(context, MSG_PAYLOAD)
+
+    # test the results
+    with pytest.raises(Exception) as err:
+        test_result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+        assert err['found'] == False
+
 
 class Context():
     """
@@ -130,7 +119,7 @@ class Context():
         # patch the two functions which make calls back to resilient to use our own dto objects
         self.type_info.get_all_fields = self.get_all_fields
         self.type_info.get_type = self.get_type
-        self.is_deleted=is_deleted
+        self.is_deleted = is_deleted
 
     def get_all_fields(self, refresh=False):
         """
@@ -210,8 +199,8 @@ FIELDS = {
         "name": "alter_text",
         "prefix": None,
         "internal": False,
-        "type_id": 5,
-        "input_type": "boolean"
+        "type_id": 2,
+        "input_type": "text"
     }
 }
 
