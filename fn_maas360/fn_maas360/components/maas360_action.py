@@ -118,7 +118,7 @@ class FunctionComponent(ResilientComponent):
                 notify_user = self.options["maas360_wipe_device_notify_user"]
                 notify_others = self.options["maas360_wipe_device_notify_others"]
 
-                action_results = maas360_utils.lock_device(wipe_device_url, device_id, notify_me, notify_user, notify_others)
+                action_results = maas360_utils.wipe_device(wipe_device_url, device_id, notify_me, notify_user, notify_others)
                 if not action_results:
                     yield StatusMessage("Remote Wipe Device with device id {} wasn't successful".format(device_id))
                 else:

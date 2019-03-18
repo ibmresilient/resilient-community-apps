@@ -100,6 +100,7 @@ class FunctionComponent(ResilientComponent):
             add_to_dict("partialPhoneNumber", partial_phone_no, query_string)
             add_to_dict("imeiMeid", imei_meid, query_string)
             add_to_dict("platformName", platform_name, query_string)
+            add_to_dict("maas360DeviceId", device_id, query_string)
             add_to_dict("email", email, query_string)
 
             # At least one of the search parameters should be set, otherwise we can query the whole MaaS360 database.

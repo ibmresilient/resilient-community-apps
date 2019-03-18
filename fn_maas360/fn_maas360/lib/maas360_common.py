@@ -258,22 +258,3 @@ class MaaS360Utils(object):
 
         action_response = results.get("actionResponse")
         return action_response
-
-    def search_installed_apps(self, url, query_string):
-        """
-        Search for all installed Apps across all devices by App Name, App ID and Platform
-        :param url:
-        :param query_string:
-        :return: device or list of devices or None if there aren't any found
-        """
-
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_JSON)
-
-        try:
-            results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
-        except IntegrationError as err:
-            raise IntegrationError("Unable to execute call Search Installed Apps: {}".format(err))
-
-        installed_apps = results.get("installedApps")
-        return installed_apps
