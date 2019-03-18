@@ -27,7 +27,11 @@ for file in ./fn_*.zip; do
   echo $fileUpload
 done
 
-
+for file in ./res_*.zip; do
+  echo Uploading file... ${file##*/}
+  fileUpload=$(curl --data-binary @./${file##*/} -H "Authorization: token $GIT_HUB_AUTH_TOKEN" -H "Content-Type: application/octet-stream" https://github.ibm.com/api/uploads/repos/Resilient/resilient-community-apps/releases/"$id"/assets?name=${file##*/} )
+  echo $fileUpload
+done
 
 
 
