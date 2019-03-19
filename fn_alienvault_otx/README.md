@@ -39,7 +39,7 @@
 
 ## Prerequisites:
 * Resilient Appliance >= v31.0.0
-* Integrations Server running resilient_circuits >= v30.0.0 30
+* Integrations Server running resilient_circuits >= v30.0.0
 * Account with [Alien Vault OTX](https://otx.alienvault.com/)
 * A `DirectConnect OTX` API Key from Alien Vault
 
@@ -66,7 +66,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     # OTX API Key to Access the Alien Vault OTX Service
     av_api_key=<<DirectConnect OTX API Key>>
 
-    #Base URL Path of Alien Vault OTX        
+    #Base URL Path of Alien Vault OTX
     av_base_url=https://otx.alienvault.com/api/v1 
 
     # Proxy Server by Default will be None 
@@ -78,7 +78,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     ```
 * To uninstall:
     ```
-    $ pip uninstall fn_alienvault_otx
+    $ pip uninstall fn-alienvault-otx
     ```
 
  ## Function Inputs  
