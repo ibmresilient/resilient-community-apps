@@ -12,11 +12,10 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_alienvault_otx'",
-    long_description="""The Alien vault OTX is a RESTFul web service, using OTX Direct Connect API allows you to easily 
-                        Synchronize the threat Intelligence available on OTX.using the API you can detect the threats 
-                        targeting your environment.
-                    """,
+    description="Resilient Function to integrate with the AlienVault OTX api/v1/indicators API",
+    long_description="""The AlienVault OTX is a RESTFul web service. Using an OTX Direct Connect API allows you to easily 
+                        synchronize the threat Intelligence available on OTX. Using the API you can detect the threats 
+                        targeting your environment.""",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],
