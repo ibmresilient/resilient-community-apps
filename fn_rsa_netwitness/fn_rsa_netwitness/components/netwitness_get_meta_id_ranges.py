@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             nw_results_size = str(kwargs.get("nw_results_size", ''))  # number
 
             # Initialize resilient_lib objects
-            rp = ResultPayload("netwitness_get_meta_id_ranges", **kwargs)
+            rp = ResultPayload("fn_rsa_netwitness", **kwargs)
             req_common = RequestsCommon(self.opts)
 
             log.info("nw_event_session_id1: %s", nw_session_id1)

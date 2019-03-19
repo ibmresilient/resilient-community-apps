@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool
 from fn_rsa_netwitness.util.helper import remove_dir, create_tmp_file, get_headers, convert_to_nw_time
 
 log = logging.getLogger(__name__)
@@ -22,10 +22,7 @@ class FunctionComponent(ResilientComponent):
         # Validate app.config fields
         validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
 
-        if self.options.get("nw_packet_server_verify").lower() == "false":
-            self.options["nw_packet_server_verify"] = False
-        elif self.options.get("nw_packet_server_verify").lower() == "true":
-            self.options["nw_packet_server_verify"] = True
+        self.options["nw_packet_server_verify"] = str_to_bool(self.options.get("nw_packet_server_verify"))
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -46,7 +43,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = str(kwargs.get("incident_id"))  # number
 
             # Initialize resilient_lib objects (handles the select input)
-            rp = ResultPayload("netwitness_retrieve_session_data", **{"nw_event_session_ids": nw_event_session_ids,
+            rp = ResultPayload("fn_rsa_netwitness", **{"nw_event_session_ids": nw_event_session_ids,
                                                                       "incident_id": incident_id})
             req_common = RequestsCommon(self.opts)
 
