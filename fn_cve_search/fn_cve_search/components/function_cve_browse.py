@@ -5,7 +5,6 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_cve_search.util.selftest as selftest
 from fn_cve_search.util.cve import make_rest_api_get_call
 
 
@@ -16,7 +15,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_cve_search", {})
-        selftest.selftest_function(opts)
 
         # Getting CVE DataBase URL from app.config file
         self.CVE_BASE_URL = self.options.get('cve_base_url')+'/{}'
