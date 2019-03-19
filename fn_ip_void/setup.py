@@ -12,8 +12,8 @@ setup(
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_ip_void'",
-    long_description="Resilient Circuits Components for 'fn_ip_void'",
+    description="A Resilient Function to integrate with the IPVOID API",
+    long_description="Integrates with IPVOID's vast range of IP Address tools to discover details about IP address helping you get enriched information about a Resilient Artifact",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],

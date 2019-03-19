@@ -15,7 +15,7 @@
 
  ![screenshot](./screenshots/screen1.png)
 
-* The function makes use of the IPVOID's Rest API calls to get information on a given query
+* Integrates with IPVOID's vast range of IP Address tools to discover details about IP address helping you get enriched information about a Resilient Artifact
 * This package supports the following API calls:
   * IP Reputation `/iprep/v1/pay-as-you-go/`
   * SSL Info `/sslinfo/v1/pay-as-you-go/`
