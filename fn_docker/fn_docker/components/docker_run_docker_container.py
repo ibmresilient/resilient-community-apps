@@ -76,9 +76,9 @@ class FunctionComponent(ResilientComponent):
             attachment_file_name = None  # Initialise filename as None to avoid reference errors
             # Check whether we are dealing with an attachment or artifact
             if (artifact_id or attachment_id or task_id) and docker_input is None:
-                log.debug("Working with an attachment")
+                log.debug("Input appears to be an attachment, attempting to parse.")
 
-                yield StatusMessage("Input appears to be an attachment, attempting to parse.")
+                yield StatusMessage("Downloading Attachment from REST API")
                 # Get the files data
                 attachment_input = resilient_lib.get_file_attachment(
                     incident_id=incident_id, artifact_id=artifact_id,
