@@ -1,4 +1,4 @@
-# IPVOID Search Function for IBM Resilient
+# IPVOID Lookup Function for IBM Resilient
 
 ## Table of Contents
   - [About This Package](#about-this-package)
@@ -13,7 +13,7 @@
 ## About This Package:
 **This package contains a Function that integrates with your IPVOID account using their APIs**
 
- ![screenshot](./screenshots/screen1.png)
+ ![screenshot](./screenshots/0.png)
 
 * Integrates with IPVOID's vast range of IP Address tools to discover details about IP address helping you get enriched information about a Resilient Artifact
 * This package supports the following API calls:
@@ -23,6 +23,9 @@
   * Email Verify `/emailverify/v1/pay-as-you-go/`
   * DNS Lookup `/dnslookup/v1/pay-as-you-go/`
   * Domain Blacklist `/domainbl/v1/pay-as-you-go/`
+
+### Sample Workflow:
+ ![screenshot](./screenshots/1.png)
 
 ## Prerequisites:
 * Resilient Appliance >= v31.0.0
