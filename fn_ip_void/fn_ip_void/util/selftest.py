@@ -22,9 +22,9 @@ def selftest_function(opts):
     success, or failure.
     """
     options = opts.get("fn_ip_void", {})
-    api_token = get_config_option(options, "ipvoid_api_key")
-    base_url = get_config_option(options, "ipvoid_base_url")
-    url = "/".join((base_url, SUB_URL)).format('iprep', api_token,'stats')
+    api_token = get_config_option(app_configs=options, option_name="ipvoid_api_key", placeholder="<your-api-key>")
+    base_url = get_config_option(app_configs=options, option_name="ipvoid_base_url")
+    url = "/".join((base_url, SUB_URL)).format('iprep', api_token, 'stats')
     try:
         res = requests.get(url)
         if res.status_code == 200:
