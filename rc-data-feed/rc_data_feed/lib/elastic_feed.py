@@ -66,6 +66,9 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         elastic_payload = context.type_info.flatten(payload, TypeInfo.translate_value)
 
+        # add the incident id to all payloads, if needed
+        elastic_payload['inc_id'] = context.inc_id
+
         if context.is_deleted:
             LOG.debug('deleting %s(%s) on index %s', name, payload['id'], self.index)
             self._fn_elasticsearch_delete(self.index, name, payload['id'])

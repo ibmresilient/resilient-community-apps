@@ -6,7 +6,7 @@ from datetime import datetime
 LOG = logging.getLogger(__name__)
 
 
-class TypeInfo:
+class TypeInfo(object):
     """
     Base TypeInfo class.  There are two situations where type info is made
     available from the Resilient server.  The first situation is an action

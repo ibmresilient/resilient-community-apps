@@ -14,6 +14,7 @@ setup(
     install_requires=[
         'resilient_circuits>=31.0.0',
         'resilient>=31.0.0',
+        'elasticsearch',
         'pyodbc',
         'six'
     ],

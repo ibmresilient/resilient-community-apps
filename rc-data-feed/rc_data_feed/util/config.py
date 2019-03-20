@@ -31,5 +31,32 @@ queue=feed_data
 #auth_user=
 #auth_password=
 #cafile=false
+
+#[splunk_hec_feed]
+#class=SplunkHECFeed
+#token=<token>
+#host=<host>
+#port=8088
+#index=data_feeder
+# only use source_type if using one type. otherwise, the resilient object type (incident, note, artifact, etc.) is used
+#event_source_type=txt
+#event_host=
+#event_source=resilient
+#use_ssl=true
+
+#[elastic_feed]
+#class=ElasticFeed
+#url=http://localhost
+#port=9200
+# if using multiple organizations, consider indexes such as resilient<org_ID>
+#index=resilient
+#auth_user=
+#auth_password=
+#cafile=false
+
+#[my_sqlite_feed]
+#class=SQLiteFeed
+#file_name=/tmp/feed.sqlite3
+
 """
     return config_data

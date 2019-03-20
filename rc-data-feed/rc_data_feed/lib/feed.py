@@ -3,7 +3,7 @@
 import abc
 
 
-class FeedContext:  # pylint: disable=too-few-public-methods
+class FeedContext(object):  # pylint: disable=too-few-public-methods
     """
     This is a simple data structure used to hold things needed by the
     different feed destination classes.
@@ -15,7 +15,7 @@ class FeedContext:  # pylint: disable=too-few-public-methods
         self.is_deleted = is_deleted
 
 
-class FeedDestinationBase:  # pylint: disable=too-few-public-methods
+class FeedDestinationBase(object):  # pylint: disable=too-few-public-methods
     """Base class for all feeds."""
     def __init__(self):
         pass

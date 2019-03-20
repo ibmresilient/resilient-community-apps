@@ -9,6 +9,7 @@ from rc_data_feed.lib.file_feed import FileFeedDestination
 from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
 from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
 from rc_data_feed.lib.elastic_feed import ElasticFeedDestination
+from rc_data_feed.lib.splunk_hec_feed import SplunkHECFeedDestination
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.feed import FeedContext
 
@@ -39,7 +40,8 @@ class FeedComponent(ResilientComponent):
         "ODBCFeed": ODBCFeedDestination,
         "FileFeed": FileFeedDestination,
         "ElasticFeed": ElasticFeedDestination,
-        "SQLiteFeed": SqliteFeedDestination
+        "SQLiteFeed": SqliteFeedDestination,
+        "SplunkHECFeed": SplunkHECFeedDestination
     }
 
     """Component that ingests data"""
@@ -64,7 +66,7 @@ class FeedComponent(ResilientComponent):
 
             self.feed_outputs.append(obj)
 
-        if bool(self.options.get('reload', False)):
+        if self.options.get('reload', 'false').lower() == 'true':
             self._reload_all()
 
     @handler()
@@ -99,6 +101,8 @@ class FeedComponent(ResilientComponent):
 
     def _reload_all(self):
         rest_client = self.rest_client()
+
+        LOG.debug("reload all")
 
         # We want to search all of the types that have incident or task as a parent.
         type_info_index = {}
