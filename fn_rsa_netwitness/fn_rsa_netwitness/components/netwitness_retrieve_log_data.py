@@ -28,17 +28,24 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
+        # Validate app.config fields
+        validate_fields(["nw_log_server_url", "nw_log_server_user", "nw_log_server_password"], self.options)
 
     @function("netwitness_retrieve_log_data")
     def _netwitness_retrieve_log_data(self, event, *args, **kwargs):
-        """Function: Returns back either a log or pcap file from Netwitness,
-        attaches it to an incident if it is a pcap file."""
+        """Function: Returns back either a log file from Netwitness."""
         try:
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Retrieving logs...")
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
+
             nw_start_time = kwargs.get("nw_start_time")  # text
+            if len(nw_start_time) < 1:
+                raise FunctionError("nw_start_time must be set in order to run this function.")
+
             nw_end_time = kwargs.get("nw_end_time")  # text
+            if len(nw_end_time) < 1:
+                raise FunctionError("nw_end_time must be set in order to run this function.")
 
             # Initialize resilient_lib objects (handles the select input)
             rp = ResultPayload("fn_rsa_netwitness", **kwargs)
@@ -66,6 +73,10 @@ class FunctionComponent(ResilientComponent):
                 "logs_json": "application/json"
             }
 
+            # Make sure format is a supported case
+            if nw_data_format not in render_format_dict:
+                raise FunctionError("{} is not a supported format to retrieve logs".format(nw_data_format))
+
             # Return log data in json format
             if nw_data_format == "logs_json":
                 data_file = get_nw_session_logs_file(url, username, password, nw_verify, start_time, end_time,
@@ -79,6 +90,7 @@ class FunctionComponent(ResilientComponent):
 
             log.debug("data_file: {}".format(data_file))
             results = rp.done(True, data_file)
+            log.debug("RESULTS: %s", results)
             yield StatusMessage("Done...")
 
             # Produce a FunctionResult with the results

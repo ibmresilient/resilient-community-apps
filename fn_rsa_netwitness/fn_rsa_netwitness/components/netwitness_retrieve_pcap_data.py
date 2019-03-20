@@ -31,8 +31,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("netwitness_retrieve_pcap_data")
     def _netwitness_retrieve_pcap_data(self, event, *args, **kwargs):
-        """Function: Returns back either a log or pcap file from Netwitness,
-        attaches it to an incident if it is a pcap file."""
+        """Function: Returns back either a pcap file from Netwitness,
+        and attaches it to an incident."""
         temp_d = None
         try:
             yield StatusMessage("Starting...")
@@ -80,6 +80,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, {})
             yield StatusMessage("Done...")
+            log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

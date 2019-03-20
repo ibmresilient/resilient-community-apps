@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# Copyright © IBM Corporation 2010, 2019
 """Function implementation
    test with: resilient-circuits selftest -l fn_rsa_netwitness
 """
@@ -46,5 +47,26 @@ def selftest_function(opts):
         rc.execute_call("GET", request_url, verify_flag=nw_log_server_verify, headers=headers, resp_type="text")
 
         return {"state": "success"}
-    except Exception:
+    except Exception as err:
+        err_reason_msg = """Could not connect to NetWitness.
+                    error: {0}
+                    ---------
+                    Current Configs in app.config file::
+                    ---------
+                    nw_packet_server_url: {1}
+                    nw_packet_server_user: {2}
+                    nw_packet_server_verify: {3}
+                    nw_log_server_url: {4}
+                    nw_log_server_user: {5}
+                    nw_log_server_verify: {6}\n""".format(
+            err,
+            nw_packet_server_url,
+            nw_packet_server_user,
+            nw_packet_server_verify,
+            nw_log_server_url,
+            nw_log_server_user,
+            nw_log_server_verify)
+
+        log.error(err_reason_msg)
+
         return {"state": "failed"}

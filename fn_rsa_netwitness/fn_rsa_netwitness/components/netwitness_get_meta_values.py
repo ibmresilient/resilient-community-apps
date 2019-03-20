@@ -26,12 +26,14 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_rsa_netwitness", {})
+        # Validate app.config fields
+        validate_fields(["nw_packet_server_url", "nw_packet_server_user", "nw_packet_server_password"], self.options)
 
     @function("netwitness_get_meta_values")
     def _netwitness_get_meta_values(self, event, *args, **kwargs):
         """Function: Returns back the meta values for a single session or consecutive sessions"""
         try:
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Getting meta values...")
             # Get the function parameters:
             nw_session_id1 = str(kwargs.get("nw_meta_id1"))  # number
             nw_session_id2 = str(kwargs.get("nw_meta_id2"))  # number
@@ -56,11 +58,12 @@ class FunctionComponent(ResilientComponent):
             log.debug(nw_query_metadata)
 
             if nw_query_metadata:
-                StatusMessage("Meta ID ranges found")
+                yield StatusMessage("Meta ID ranges found")
             else:
-                StatusMessage("No meta ID ranges found")
+                yield StatusMessage("No meta ID ranges found")
             yield StatusMessage("Complete...")
             results = rp.done(True, nw_query_metadata)
+            log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

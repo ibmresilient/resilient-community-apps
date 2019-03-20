@@ -29,10 +29,14 @@ class FunctionComponent(ResilientComponent):
     def _netwitness_query_function(self, event, *args, **kwargs):
         """Function: Queries NetWitness and returns back a list of session IDs based on the provided query"""
         try:
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Querying NetWitness...")
             # Get the function parameters:
             nw_query = self.get_textarea_param(kwargs.get("nw_query"))  # textarea
             nw_results_size = str(kwargs.get("nw_results_size", ''))  # number
+
+            # Fail if query is not set
+            if len(nw_query) < 1:
+                raise FunctionError("nw_query must be set in order to run this function.")
 
             # Initialize resilient_lib objects
             rp = ResultPayload("fn_rsa_netwitness", **{"nw_query": nw_query, "nw_results_size": nw_results_size})
@@ -57,6 +61,7 @@ class FunctionComponent(ResilientComponent):
                 StatusMessage("No query results found")
             yield StatusMessage("Complete...")
             results = rp.done(True, nw_query_results)
+            log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
