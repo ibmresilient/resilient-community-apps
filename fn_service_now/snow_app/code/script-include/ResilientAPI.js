@@ -10,22 +10,20 @@ function getPassword(){
 	return gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 }
 
-//Function to get the name of the MidServer that has IBMResilientAccess Capabilities and is Running
-function getMidServer(){
+function validateMidServer(midServerName){
 	var errMsg = null;
 	var MID_SERVER_TABLE_NAME = "ecc_agent_capability_m2m";
-	var MID_SERVER_CAPABILITY = "IBMResilientAccess";
-	
+
 	try{
-		//A mid-server must have ALL or IBMResilientAccess capabilities enabled
+		
 		var gr = new GlideRecord(MID_SERVER_TABLE_NAME);
-		var grQuery = "ALL," + MID_SERVER_CAPABILITY;
-		gr.addQuery("capability.capability", "IN", grQuery);
+		gr.addQuery("agent.name", midServerName);
 		gr.query();
 
 		while(gr.next()) {
 			if(gr.agent.status.toLowerCase() == "up" && gr.agent.validated == "true") {
-				return gr.agent.name;
+				gs.debug("Mid-Server '"+midServerName+"' found and is valid.");
+				return true;
 			 }
 		}
 	}
@@ -34,13 +32,13 @@ function getMidServer(){
 		throw errMsg;
 	}
 
-	errMsg = "No Active Mid-Server with " + MID_SERVER_CAPABILITY + " Capabilities found.";
-	errMsg += "\nEnsure your Mid-Server is 'Up', has " + MID_SERVER_CAPABILITY + "Capabilities and Validated is 'Yes'";
+	errMsg = "No Active Mid-Server by the name of " + midServerName + " found that is Validated and Active";
+	errMsg += "\nEnsure your Mid-Server is 'Up' and 'Validated'";
 	throw errMsg;
 }
 
 //Function to execute a RESTMessage. Handles errors. Returns response if successful
-function executeRESTMessage(rm, usingMidServer, baseURL){
+function executeRESTMessage(rm, midServerName, baseURL){
 	var response, statusCode, responseBody, responseHeaders, errMsg = null;
 
 	//Set timeout to 60s
@@ -50,13 +48,15 @@ function executeRESTMessage(rm, usingMidServer, baseURL){
 		response = rm.execute();
 
 		// If using a mid-server, wait max 60s for response
-		response.waitForResponse(60);
+		if(midServerName){
+			response.waitForResponse(60);
+		}
 	}
 	catch (e){
 		if (e.message.indexOf("No response for ECC message request") !== -1){
 			errMsg = "Timed out getting response.";
-			if (usingMidServer){
-				errMsg += "\nCheck Mid Server. Login to the machine hosting your Mid Server and ensure you can ping IBM Resilient at " + baseURL;
+			if (midServerName){
+				errMsg += "\nCheck Mid Server. Login to the machine hosting your '" +midServerName+ "' Mid-Server and ensure you can ping IBM Resilient at " + baseURL;
 			}
 			else{
 				errMsg += "\nEnsure you can access and login to IBM Resilient at " + baseURL;
@@ -88,8 +88,8 @@ function executeRESTMessage(rm, usingMidServer, baseURL){
 		if (reason.toLowerCase().indexOf("unknown host")){
 			reason += "\nYour Resilient Host may be incorrect or not accessible.";
 			reason += "\nCheck your Resilient Host is up and running.";
-			if(usingMidServer){
-				reason += "\nCheck your Mid-Server is correctly configured";
+			if(midServerName){
+				reason += "\nCheck your '" +midServerName+ "' Mid-Server is correctly configured";
 			}
 		}
 		errMsg = "Reason: " + reason;
@@ -181,7 +181,7 @@ ResilientAPI.prototype = {
 	
 		initialize: function() {
 		
-		var hostName, orgName, userEmail, userPassword, snUsername, usingMidServer, errMsg = null;
+		var hostName, orgName, userEmail, userPassword, snUsername, midServerName, errMsg = null;
 		
 		//Ensure all the required System Properties are available before continuing
 		try{
@@ -190,7 +190,7 @@ ResilientAPI.prototype = {
 			userEmail = gs.getProperty("x_ibmrt_resilient.ResilientUserEmail");
 			userPassword = gs.getProperty("x_ibmrt_resilient.ResilientUserPassword");
 			snUsername = gs.getProperty("x_ibmrt_resilient.ServiceNowUsername");
-			usingMidServer = gs.getProperty("x_ibmrt_resilient.UseMidServer");
+			midServerName = gs.getProperty("x_ibmrt_resilient.ServiceNowMidServerName");
 		}
 		catch (e){
 			errMsg = "Failed getting Resilient Configuration Properties. Check your Properties for IBM Resilient\n" + e;
@@ -204,14 +204,19 @@ ResilientAPI.prototype = {
 		if (!userPassword) {throw "Resilient Password" + errMsg;}
 		if (!snUsername) {throw "ServiceNow Username" + errMsg;}
 
+		//Setup MID Server
+		midServerName = midServerName.trim();
+		if (midServerName.length == 0){
+			midServerName = null;
+		}
+		this.midServerName = midServerName;
+
 		//Set Resilient Configuration Settings
 		this.baseURL = "https://" + hostName;
 		this.orgName = orgName;
 		this.userEmail = userEmail;
-		this.usingMidServer = (usingMidServer == "true") ? true : false;
 
 		//Initialise other class variables that will be set in the connect() method
-		this.midServerName = null;
 		this.XSESSID = null;
 		this.csrfToken = null;
 		this.JSESSIONID = null;
@@ -243,19 +248,15 @@ ResilientAPI.prototype = {
 		requestBody = JSON_PARSER.encode(authData);
 		rm.setRequestBody(requestBody);
 
-		// If we're using a Mid-Server, get its name
-		if(!this.midServerName && this.usingMidServer){
-			//Check if there is an Active Mid-Server with IBMResilientAccess Capabilities
-			this.midServerName = getMidServer();
-		}
-		//If its valid, set it
+		//If a mid server has been specified, check it is up and validated, then set it in the RESTMessage
 		if (this.midServerName){
+			validateMidServer(this.midServerName); //will throw an error if not valid
 			rm.setMIDServer(this.midServerName);
-			rm.setECCParameter("skip_sensor", true);
+			rm.setEccParameter("skip_sensor", true);
 		}
-		
+
 		//Execute and get response
-		res = executeRESTMessage(rm, this.usingMidServer, this.baseURL);
+		res = executeRESTMessage(rm, this.midServerName, this.baseURL);
 		
 		//Get csrfToken and JSESSIONID
 		this.csrfToken = res.body.csrf_token;
@@ -277,8 +278,9 @@ ResilientAPI.prototype = {
 		
 		//If using a midServer, set it
 		if (this.midServerName){ 
+			validateMidServer(this.midServerName); //will throw an error if not valid
 			rm.setMIDServer(this.midServerName);
-			rm.setECCParameter("skip_sensor", true);
+			rm.setEccParameter("skip_sensor", true);
 		}
 		
 		//Set the method 'get', 'post', 'delete'
@@ -299,7 +301,7 @@ ResilientAPI.prototype = {
 		}
 		
 		//Execute the request
-		var res = executeRESTMessage(rm);
+		var res = executeRESTMessage(rm, this.midServerName, this.baseURL);
 		return res.body;
 	},
 	
