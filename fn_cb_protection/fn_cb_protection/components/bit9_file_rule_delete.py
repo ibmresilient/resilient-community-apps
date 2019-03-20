@@ -40,6 +40,6 @@ class FunctionComponent(ResilientComponent):
             log.debug(results)
 
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult({"content": results})
         except Exception:
             yield FunctionError()

@@ -63,6 +63,13 @@ class CbProtectClient(object):
         response.raise_for_status()
         return response.json()
 
+    def delete(self, specific_uri):
+        """generic delete"""
+        uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
+        response = requests.delete(uri, headers=self._headers(), verify=self.verify)
+        response.raise_for_status()
+        return response.text
+
     def get_approval_request(self, request_id):
         """get an approval request"""
         return self.get(u"approvalRequest/{}".format(request_id))
@@ -105,3 +112,7 @@ class CbProtectClient(object):
         if file_rule_id is None:
             return self.post("fileRule", payload=payload)
         return self.put(u"fileRule/{}".format(file_rule_id), payload=payload)
+
+    def delete_file_rule(self, file_rule_id):
+        """Deletes a file rule by ID"""
+        return self.delete(u"fileRule/{}".format(file_rule_id))
