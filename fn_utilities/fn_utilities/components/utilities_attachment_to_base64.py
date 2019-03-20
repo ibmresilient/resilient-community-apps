@@ -23,25 +23,40 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
+            artifact_id = kwargs.get("artifact_id") # number
 
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
             log.info("attachment_id: %s", attachment_id)
+            log.info("artifact_id: %s", artifact_id)
+            
             if incident_id is None and task_id is None:
                 raise FunctionError("Error: incident_id or task_id must be specified.")
-            if attachment_id is None:
+            if artifact_id is None and attachment_id is None:
                 raise FunctionError("Error: attachment_id must be specified.")
 
             yield StatusMessage("Reading attachment...")
+            
+            client = self.rest_client()
+
             if task_id:
                 metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
                 data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            elif artifact_id:
+                metadata_uri = "/incidents/{0}/artifacts/{1}".format(incident_id, artifact_id)
+                metadata = client.get(metadata_uri)
+                metadata = metadata['attachment']
+                if metadata:
+                    data_uri = "/incidents/{0}/artifacts/{1}/contents".format(incident_id, artifact_id)
+                else:
+                    raise FunctionError("Artifact has no attachment or supported URI")
             else:
                 metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
                 data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
 
-            client = self.rest_client()
-            metadata = client.get(metadata_uri)
+            # Condition prevents a duplicate call
+            if metadata is None:
+                metadata = client.get(metadata_uri)
             data = client.get_content(data_uri)
 
             results = {
@@ -49,8 +64,10 @@ class FunctionComponent(ResilientComponent):
                 "content_type": metadata["content_type"],
                 "size": metadata["size"],
                 "created": metadata["created"],
-                "content": base64.b64encode(data)
+                "content": str(base64.b64encode(data))
             }
+
+            yield StatusMessage("Complete...")
 
             # Produce a FunctionResult with the return value
             log.debug(json.dumps(results, indent=2))
