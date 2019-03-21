@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cb_protection',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -34,7 +34,8 @@ setup(
             "Bit9FileRuleGetFunctionComponent = fn_cb_protection.components.bit9_file_rule_get:FunctionComponent",
             "Bit9FileCatalogQueryFunctionComponent = fn_cb_protection.components.bit9_file_catalog_query:FunctionComponent",
             "Bit9FileRuleQueryFunctionComponent = fn_cb_protection.components.bit9_file_rule_query:FunctionComponent",
-            "Bit9PollComponent = fn_cb_protection.components.bit9_poll:Bit9PollComponent"
+            "Bit9PollComponent = fn_cb_protection.components.bit9_poll:Bit9PollComponent",
+            "Bit9FileDeleteFunctionComponent = fn_cb_protection.components.bit9_file_delete:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cb_protection.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_cb_protection.util.customize:customization_data"]

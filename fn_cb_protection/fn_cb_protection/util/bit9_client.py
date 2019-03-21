@@ -116,3 +116,7 @@ class CbProtectClient(object):
     def delete_file_rule(self, file_rule_id):
         """Deletes a file rule by ID"""
         return self.delete(u"fileRule/{}".format(file_rule_id))
+
+    def delete_file(self, payload):
+        """Deletes a file from all or a specific system"""
+        return self.post(u"restricted/fileAction", payload=payload)
