@@ -4,44 +4,64 @@
 // https://service-now-host.com/api/x_ibmrt_resilient/api/add
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	
+
 	//Declare global variables
-	var record = null;
-	var response_body = {};
-	var req = request.body.data;
+	var snowHelper, params, tableName, record, responseBody, errMsg = null;
 	
-	record = new GlideRecord(req.sn_table_name);
+	//Instantiate new SNOWRESTHelper
+	snowHelper = new SNOWRESTHelper();
 
-	//Get the record using sn_ref_id
-	record.addQuery("number", req.sn_ref_id);
-	record.query();
-	record.next();
+	//Get the params from the request (because its a POST we use request body)
+	params = request.body.data;
 
-	//Switch on the type: "comment", "attachment" or "artifact"
-	switch(req.type){
-		case "comment":
-			var note_type = req.sn_note_type;
-			var note_text = req.sn_note_text;
-			if(note_type == "work_note"){
-				record.work_notes = note_text;
-			}
-			else if(note_type == "additional_comment"){
-				record.comments = note_text;
-			}
-			break;
+	//Initialize responseBody to empty object
+	responseBody = {};
+
+	//Get the tableName
+	tableName = params.sn_table_name;
+	
+	//If the table is allowed to be accessed, continue
+	if(snowHelper.tableIsAllowed(tableName)){
+
+		//Initialize a new record
+		record = new GlideRecord(tableName);
+
+		//Get the record using sn_ref_id
+		record.addQuery("number", params.sn_ref_id);
+		record.query();
+		record.next();
+
+		//Switch on the type: "comment" or "attachment"
+		switch(params.type){
+			//Add a work_note or additional_comment
+			case "comment":
+				var note_type = params.sn_note_type;
+				var note_text = params.sn_note_text;
+				if(note_type == "work_note"){
+					record.work_notes = note_text;
+				}
+				else if(note_type == "additional_comment"){
+					record.comments = note_text;
+				}
+				break;
+			
+			//Add an attachment
+			case "attachment":
+				var sys_attachment = new GlideSysAttachment();
+				responseBody["attachment_id"] = sys_attachment.writeBase64(record, params.attachment_name, params.attachment_content_type, params.attachment_base64);
+		}
+
+		//Update the record
+		record.update();
 		
-		case "attachment":
-			var sys_attachment = new GlideSysAttachment();
-			response_body["attachment_id"] = sys_attachment.writeBase64(record, req.attachment_name, req.attachment_content_type, req.attachment_base64);
+		//Set and return the response
+		responseBody["sn_ref_id"] = params.sn_ref_id;
+		response.setBody(responseBody);
+		return response;
 	}
-
-	//Update the record
-	record.update();
-	
-	response_body["sn_ref_id"] = req.sn_ref_id;
-	
-	response.setBody(response_body);
-	
-	return response;
+	else{
+		errMsg = "Do not have permission to access the table '"+tableName+"'. It needs to be included in the ServiceNowAllowedTables CSV list.";
+		return new sn_ws_err.BadRequestError(errMsg);
+	}
 
 })(request, response);

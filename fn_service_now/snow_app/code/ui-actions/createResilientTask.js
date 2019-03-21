@@ -48,7 +48,7 @@ function promptForResilientIncidentId(){
 }
 
 if(typeof window == "undefined"){
-	//This is called from line 32L gsftSubmit... because Action Name == create_new_ibm_resilient_task
+	//This is called from line 45 gsftSubmit... because Action Name == create_new_ibm_resilient_task
 	action.setRedirectURL(current);
 	gs.addInfoMessage("Creating a Task in Resilient from this record");
 }

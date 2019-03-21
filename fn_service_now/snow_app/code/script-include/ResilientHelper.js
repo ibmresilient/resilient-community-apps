@@ -7,7 +7,7 @@ ResilientHelper.prototype = {
 	type: 'ResilientHelper',
 	
 	initialize: function() {
-			this.res_api = new ResilientAPI();
+		this.res_api = new ResilientAPI();
 	},
 	
 	parseRefId: function(res_reference_id){
@@ -270,20 +270,6 @@ ResilientHelper.prototype = {
 			var errMsg = "Failed to send note to IBM Resilient";
 			gs.error(errMsg);
 			throw e;
-		}
-	},
-	
-	isValidSnUsername: function(snUsername){
-		var gr = new GlideRecord("sys_user");
-
-		gr.addQuery("user_name", snUsername);
-		gr.query();
-
-		if(gr.next()){
-			return true;
-		}
-		else{
-			return false;
 		}
 	}
 };

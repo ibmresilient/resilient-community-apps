@@ -4,51 +4,67 @@
 // https://service-now-host.com/api/x_ibmrt_resilient/api/close_record
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
-	
+
 	//Declare global variables
-	var record = null;
-	var req = request.body.data;
-	
+	var snowHelper, params, tableName, record, responseBody, errMsg = null;
+
 	//Function that generates the response body
-	function generate_response_body(record){
+	function generateResponseBody(record){
 		return {
-			"sn_ref_id": req.sn_ref_id,
+			"sn_ref_id": params.sn_ref_id,
 			"sn_state": record.state.getChoiceValue()
 		};
 	}
+
+	//Instantiate new SNOWRESTHelper
+	snowHelper = new SNOWRESTHelper();
+
+	//Get the params from the request (because its a POST we use request body)
+	params = request.body.data;
+
+	//Get the tableName
+	tableName = params.sn_table_name;
 	
-	record = new GlideRecord(req.sn_table_name);
+	//If the table is allowed to be accessed, continue
+	if(snowHelper.tableIsAllowed(tableName)){
 
-	//Get the record using sn_ref_id
-	record.addQuery("number", req.sn_ref_id);
-	record.query();
-	record.next();
+		//Initialize a new record
+		record = new GlideRecord(tableName);
 
-	//Only update if the sn_record_state is different to the records current state
-	if(req.sn_record_state != record.state){
-		
-		//Set the attributes required to close a record
-		record.close_notes = req.sn_close_notes;
-		record.close_code = req.sn_close_code;
-		record.state = req.sn_record_state;
+		//Get the record using sn_ref_id
+		record.addQuery("number", params.sn_ref_id);
+		record.query();
+		record.next();
 
-		//If a close work note is defined, add it
-		if(req.sn_close_work_note != null){
-			record.work_notes = req.sn_close_work_note;
+		//Only update if the sn_record_state is different to the records current state
+		if(params.sn_record_state != record.state){
+			
+			//Set the attributes required to close a record
+			record.close_notes = params.sn_close_notes;
+			record.close_code = params.sn_close_code;
+			record.state = params.sn_record_state;
+
+			//If a close work_note is defined, add it
+			if(params.sn_close_work_note != null){
+				record.work_notes = params.sn_close_work_note;
+			}
+
+			//Update the record
+			record.update();
+			
+			//Set and return the response
+			response.setBody(generateResponseBody(record));
+			return response;
+
 		}
-
-		//Update the record
-		record.update();
-		
-		//Set the response body
-		response.setBody(generate_response_body(record));
-
-		return response;
-	
+		else{
+			errMsg = params.sn_ref_id + " state is already " + record.state + ". Cannot update the record.";
+			return new sn_ws_err.BadRequestError(errMsg);
+		}
 	}
 	else{
-		err_msg = req.sn_ref_id + " state is already " + record.state + ". Cannot update the record.";
-		return new sn_ws_err.BadRequestError(err_msg);
+		errMsg = "Do not have permission to access the table '"+tableName+"'. It needs to be included in the ServiceNowAllowedTables CSV list.";
+		return new sn_ws_err.BadRequestError(errMsg);
 	}
 
 })(request, response);

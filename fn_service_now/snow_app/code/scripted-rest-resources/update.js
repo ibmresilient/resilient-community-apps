@@ -7,43 +7,65 @@
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	
 	//Declare global variables
-	var record, field, fields = null;
-	var response_body = {};
-	var req = request.body.data;
+	var snowHelper, params, tableName, record, responseBody, i, fields, field, errMsg = null;
 	
-	record = new GlideRecord(req.sn_table_name);
+	//Instantiate new SNOWRESTHelper
+	snowHelper = new SNOWRESTHelper();
 
-	//Get the record using sn_ref_id
-	record.addQuery("number", req.sn_ref_id);
-	record.query();
-	record.next();
+	//Get the params from the request (because its a PATCH we use request body)
+	params = request.body.data;
 
-	// If record not found, respond with error
-	if(!record.isValid()){
-		response.setError(new sn_ws_err.BadRequestError("Could not find a ServiceNow Record with Number: " + req.sn_ref_id + " in table: " + req.sn_table_name));
+	//Initialize responseBody to empty object
+	responseBody = {};
+
+	//Get the tableName
+	tableName = params.sn_table_name;
+
+	//If the table is allowed to be accessed, continue
+	if(snowHelper.tableIsAllowed(tableName)){
+
+		//Initialize a new record
+		record = new GlideRecord(tableName);
+
+		//Get the record using sn_ref_id
+		record.addQuery("number", params.sn_ref_id);
+		record.query();
+		record.next();
+
+		// If record not found, return an error
+		if(!record.isValid()){
+			errMsg = "Could not find a ServiceNow Record with Number: " + params.sn_ref_id + " in table: " + tableName;
+			return new sn_ws_err.BadRequestError(errMsg);
+		}
+
+		//Get the fields to update
+		fields = params.sn_update_fields;
+
+		//Loop the fields. Each field has a 'name' and 'value' key
+		for (i = 0 ; i < fields.length; i++){
+			field = fields[i];
+
+			//If the field is valid, update its value
+			if(record.isValidField(field.name)){
+				record[field.name] = field.value;
+				record.setValue(field.name, field.value);
+			}
+			else{
+				gs.warning(field.name + " is not a valid field in the " + tableName + " table!");
+			}
+		}
+
+		//Update the record
+		record.update();
+		
+		//Set and return the response
+		responseBody["sn_ref_id"] = params.sn_ref_id;	
+		response.setBody(responseBody);
 		return response;
 	}
-
-	fields = req.sn_update_fields;
-
-	for (var i=0; i<fields.length; i++){
-		field = fields[i];
-		if(record.isValidField(field.name)){
-			record[field.name] = field.value;
-			record.setValue(field.name, field.value);
-		}
-		else{
-			gs.warning(field.name + " is not a valid field in the " + sn_table_name + " table!");
-		}
+	else{
+		errMsg = "Do not have permission to access the table '"+tableName+"'. It needs to be included in the ServiceNowAllowedTables CSV list.";
+		return new sn_ws_err.BadRequestError(errMsg);
 	}
-
-	//Update the record
-	record.update();
-	
-	response_body["sn_ref_id"] = req.sn_ref_id;
-	
-	response.setBody(response_body);
-	
-	return response;
 
 })(request, response);

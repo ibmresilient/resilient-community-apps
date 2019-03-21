@@ -5,18 +5,34 @@
 
 (function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 
-	var response_body = {};
-  var query_params = request.queryParams;
-		
-	var record = new GlideRecord(query_params.sn_table_name);
+	var snowHelper, params, tableName, record, errMsg = null;
 
-	record.addQuery(query_params.sn_query_field, query_params.sn_query_value);
-	record.query();
-	record.next();
-	response_body["sys_id"] = record.getValue("sys_id");
+	//Instantiate new SNOWRESTHelper
+	snowHelper = new SNOWRESTHelper();
 
-	response.setBody(response_body);
+	//Get the params from the request
+	params = request.queryParams;
+
+	//Get the tableName
+	tableName = params.sn_table_name;
+
+	//If the table is allowed to be accessed, continue
+	if(snowHelper.tableIsAllowed(tableName)){
+		record = new GlideRecord(tableName);
+		record.addQuery(params.sn_query_field, params.sn_query_value);
+		record.query();
+		record.next();
 	
-	return response;
+		response.setBody({
+			"sys_id": record.getValue("sys_id")
+		});
+
+		return response;
+	}
+	//Else return an error
+	else{
+		errMsg = "Do not have permission to access the table '"+tableName+"'. It needs to be included in the ServiceNowAllowedTables CSV list.";
+		return new sn_ws_err.BadRequestError(errMsg);
+	}
 
 })(request, response);
