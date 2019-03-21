@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -81,55 +81,20 @@ class FunctionComponent(ResilientComponent):
                         if max_res_counter != 0:
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
-                        else:
-                            """
-                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
-                            """
-                            pass
-                    else:
-                        """
-                        If given Published Date is not in range data should not be accumulated.
-                        """
-                        pass
                 elif cve_pub_date_from is not None and cve_pub_date_to is None:
                     if search_pub_date_timestamp >= cve_pub_date_from:
                         if max_res_counter != 0:
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
-                        else:
-                            """
-                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
-                            """
-                            pass
-                    else:
-                        """
-                        If given Published Date is not in range data should not be accumulated.
-                        """
-                        pass
                 elif cve_pub_date_from is None and cve_pub_date_to is not None:
                     if search_pub_date_timestamp <= cve_pub_date_to:
                         if max_res_counter != 0:
                             tmp_search_data.append(search_data_dict)
                             max_res_counter -= 1
-                        else:
-                            """
-                            If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
-                            """
-                            pass
-                    else:
-                        """
-                        If given Published Date is not in range data should not be accumulated.
-                        """
-                        pass
                 else:
                     if max_res_counter != 0:
                         tmp_search_data.append(search_data_dict)
                         max_res_counter -= 1
-                    else:
-                        """
-                        If 'max_res_counter' Counter Value reaches to '0' data should not be accumulated.
-                        """
-                        pass
             return tmp_search_data
 
     def _parse_last_cve_results(self, api_data, max_res_counter):
@@ -218,7 +183,8 @@ class FunctionComponent(ResilientComponent):
             log.info("cve_published_date_from: %s", cve_published_date_from)
             log.info("cve_published_date_to: %s", cve_published_date_to)
 
-            yield StatusMessage("starting...")
+            yield StatusMessage(
+                "Searching the CVE Database. ID:{}, Vendor:{}, Product:{}".format(cve_id, cve_vendor, cve_product))
 
             if cve_search_criteria.lower().find('search') != -1:
                 if cve_vendor is None and cve_product is None:
@@ -254,7 +220,7 @@ class FunctionComponent(ResilientComponent):
                     last_data_list = self._parse_last_cve_results(_browse_data_content, MAX_RESULTS_RETURN)
                     _result_search_data['content'].extend(last_data_list)
             log.debug("The Data Received from CVE DB : {}".format(_result_search_data))
-            yield StatusMessage("done...")
+            yield StatusMessage("Successfully searched the CVE Database.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(_result_search_data)

@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """ A common library functions for CVE"""
@@ -35,7 +35,7 @@ def make_rest_api_get_call(rest_url, api_call=None):
             response_json_object['api_call'] = api_call
             return response_json_object
         else:
-            raise FunctionError("CVE API Call Failed with status code : {}".format(response_code))
+            raise ValueError("CVE API Call Failed with status code : {}".format(response_code))
 
     except Exception as call_err:
-        raise FunctionError("CVE API Call Failed : {}".format(call_err))
+        raise ValueError("CVE API Call Failed : {}".format(call_err))

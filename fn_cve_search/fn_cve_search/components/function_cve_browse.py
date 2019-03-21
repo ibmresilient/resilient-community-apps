@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -84,7 +84,7 @@ class FunctionComponent(ResilientComponent):
             log.info("cve_browse_criteria: %s", cve_browse_criteria)
             log.info("cve_vendor: %s", cve_vendor)
 
-            yield StatusMessage("starting...")
+            yield StatusMessage("Getting list of Vendors and Products from the CVE Database")
 
             if cve_browse_criteria.lower().find('browse') != -1:
                 browse_data = self._browse_cve_api(vendor_name=cve_vendor)
@@ -110,7 +110,7 @@ class FunctionComponent(ResilientComponent):
                 result_data_dict['api_call'] = 'db'
                 result_data_dict['content'].append(browse_data_content)
 
-            log.debug("The Data Received from CVE: {}".format(result_data_dict))
+            log.debug("Vendor and Products Received from CVE Database: {}".format(result_data_dict))
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
             yield FunctionResult(result_data_dict)
