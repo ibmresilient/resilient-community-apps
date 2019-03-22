@@ -1,5 +1,5 @@
-#fn_URLhaus
-##Introduction
+# fn_URLhaus
+## Introduction
 This function incorporates APIs available from URLhaus (https://urlhaus.abuse.ch/) to enrich 
 data on:
 
@@ -13,7 +13,7 @@ It also includes the capability to submit a url as distributing malware to a pub
 
 This package include 2 functions, 2 workflows and 2 example rules.  
 
-##Installation
+## Installation
 
 
 To install in "development mode"
@@ -38,12 +38,12 @@ To uninstall:
 
     pip uninstall fn-urlhaus
 
-##Results
+## Results
 The resulting data is placed in an incident note for review. Your process may parse
 and process the data differently.
 Below are sample results from different queries:
 
-###URLs
+### URLs
 ```
 {
   u'larted': u'true',
@@ -86,7 +86,7 @@ Below are sample results from different queries:
 }
 ```
 
-###Hashes
+### Hashes
 ```
 {
   u'sha256_hash': u'bde429df1f93e30af80c336d375ee9a014ea8b76266092f292a76abfcce9588d',
@@ -118,7 +118,7 @@ Below are sample results from different queries:
 }
 ```
 
-###IP Addresses
+### IP Addresses
 ```
 {
   u'firstseen': u'2019-03-20 22:22:07 UTC',
@@ -150,7 +150,7 @@ Below are sample results from different queries:
 }
 ```
 
-###Domains
+### Domains
 ```
 {
   u'firstseen': u'2019-03-20 19:26:19 UTC',
@@ -179,7 +179,7 @@ Below are sample results from different queries:
 }
 ```
 
-###Tags
+### Tags
 ```
 {
   u'firstseen': u'2018-09-20 16:56:05',
@@ -209,7 +209,7 @@ Below are sample results from different queries:
 }
 ```
 
-###No results
+### No results
 ```
 {u'query_status': u'no_results'}
 ```
