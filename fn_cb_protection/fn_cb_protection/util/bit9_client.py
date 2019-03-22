@@ -5,9 +5,11 @@
 
 import json
 import requests
+import logging
 
 
 URI_PATH = "api/bit9platform/v1"
+log = logging.getLogger(__name__)
 
 
 def _is_true(flag):
@@ -46,6 +48,7 @@ class CbProtectClient(object):
         """generic get"""
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.get(uri, headers=self._headers(), verify=self.verify)
+        log.debug("Response: {}".format(response.text))
         response.raise_for_status()
         return response.json()
 
@@ -53,6 +56,7 @@ class CbProtectClient(object):
         """generic update"""
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.put(uri, json.dumps(payload), headers=self._headers(), verify=self.verify)
+        log.debug("Response: {}".format(response.text))
         response.raise_for_status()
         return response.json()
 
@@ -60,6 +64,7 @@ class CbProtectClient(object):
         """generic post"""
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
+        log.debug("Response: {}".format(response.text))
         response.raise_for_status()
         return response.json()
 
@@ -67,6 +72,7 @@ class CbProtectClient(object):
         """generic delete"""
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.delete(uri, headers=self._headers(), verify=self.verify)
+        log.debug("Response: {}".format(response.text))
         response.raise_for_status()
         return response.text
 

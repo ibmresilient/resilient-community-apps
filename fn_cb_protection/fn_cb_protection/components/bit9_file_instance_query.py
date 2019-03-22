@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
                 log.info("%d results", len(results))
                 results = {
                     "count": len(results),
-                    "items": results
+                    "item_list": results
                 }
                 log.debug(results)
             else:
