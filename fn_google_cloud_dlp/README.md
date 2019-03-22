@@ -7,8 +7,6 @@ The Resilient Integration with Google Cloud DLP provides tools to integrate into
  ![screenshot](./screenshots/1.png)
 ## Table of Contents
 
-[IBM Resilient Integration with Google Cloud DLP](#ibm-resilient-integration-with-google-cloud-dlp)
-- [Table of Contents](#table-of-contents)
 - [app.config settings:](#appconfig-settings)
 - [Authenticating to Google Cloud](#authenticating-to-google-cloud)
 - [Functions:](#functions)
@@ -19,7 +17,9 @@ The Resilient Integration with Google Cloud DLP provides tools to integrate into
 
 
 ```bash
-
+[fn_google_cloud_dlp]
+gcp_project=<YOUR-PROJECT-ID>
+gcp_dlp_masking_char=#
 ```
 
 ## Authenticating to Google Cloud 
@@ -38,7 +38,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="/Users/<user>/<path_to_keyfile>.json"
 See here for more information on [authenticating with Google Cloud DLP ](https://cloud.google.com/dlp/docs/auth)
 ## Functions:
 
-## ** Google Cloud DLP: De-Identify Content **
+### Google Cloud DLP: De-Identify Content
 
 ### Function Inputs:
 
@@ -255,7 +255,7 @@ results = {
 
 ```
 
-## ** Google Cloud DLP: Inspect Content **
+### Google Cloud DLP: Inspect Content
 
 A Function which takes either an Attachment or an Artifact as an input in addition to a number of defined information types to search the input for.
 
