@@ -28,8 +28,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Delete a file from all systems or a specific system"""
         try:
             # Get the function parameters:
-            StatusMessage("Deleting file...")
-            bit9_file_action = kwargs.get("bit9_file_action")  # number
+            yield StatusMessage("Deleting file...")
+            bit9_file_action = self.get_select_param(kwargs.get("bit9_file_action"))  # select
             if bit9_file_action is None:
                 raise FunctionError("bit9_file_action must be set to run this function.")
 
@@ -51,13 +51,23 @@ class FunctionComponent(ResilientComponent):
             log.info("bit9_file_hash: %s", bit9_file_hash)
             log.info("bit9_file_name: %s", bit9_file_name)
 
+            # Supported file actions
+            supported_file_actions = {
+                "DeleteFileByName": 8,
+                "DeleteFileByHash": 9
+            }
+
             payload = {}
             if bit9_file_catalog_id:
                 payload["fileCatalogId"] = bit9_file_catalog_id
-            if bit9_computer_id:
+            if bit9_computer_id is not None:
                 payload["computerId"] = bit9_computer_id
-            if bit9_file_action:
-                payload["action"] = bit9_file_action
+            if bit9_file_action in supported_file_actions:
+                payload["action"] = supported_file_actions.get(bit9_file_action)
+            else:
+                raise FunctionError("{} is not one of the support file actions: {}".format(bit9_file_name,
+                                                                                           list(supported_file_actions
+                                                                                                .keys())))
             if bit9_file_hash:
                 payload["hash"] = bit9_file_hash
             if bit9_file_name:
@@ -67,7 +77,7 @@ class FunctionComponent(ResilientComponent):
             results = bit9_client.delete_file(payload)
 
             log.info("Done")
-            StatusMessage("File deleted...")
+            yield StatusMessage("File deleted...")
             log.debug(results)
 
             # Produce a FunctionResult with the results

@@ -119,4 +119,7 @@ class CbProtectClient(object):
 
     def delete_file(self, payload):
         """Deletes a file from all or a specific system"""
-        return self.post(u"restricted/fileAction", payload=payload)
+        uri = u"https://{}/{}".format(self.server, "api/bit9platform/restricted/fileAction")
+        response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
+        response.raise_for_status()
+        return response.json()
