@@ -96,15 +96,15 @@ Image specific app.config sections are found by searching for the image shortnam
 docker_image=remnux/volatility
 primary_output_dir=/tmp/bind_folder
 primary_internal_dir=/home/nonroot/memdumps
-docker_extra_<arguement>=<string> # Allows you to pass an extra arguement used for docker container creation. See documentation
+docker_extra_<argument>=<string> # Allows you to pass an extra argument used for docker container creation. See documentation
 cmd_operation=pslist
 cmd=vol.py -f {{internal_vol}}/{{attachment_input}} {{operation}}
 
 ```
 
-Each image app.config section has the opportunity to include a number of extra arguements which will be used during container creation/invocation. This brings you, the designer, flexibility to configure different aspects of how the container will be run. For a list of which arguements you can modify this way [see here](). 
+Each image app.config section has the opportunity to include a number of extra arguments which will be used during container creation/invocation. This brings you, the designer, flexibility to configure different aspects of how the container will be run. For a list of which arguments you can modify this way [see here](). 
 
-There are a number of arguements which you cannot modify as they are explicity set by the integration, these are :
+There are a number of arguments which you cannot modify as they are explicity set by the integration, these are :
 
 + Image -- The image is set in the app.config
 + Command -- The command is set in the app.config

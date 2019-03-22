@@ -41,7 +41,7 @@ def selftest_function(opts):
         docker_interface.setup_docker_connection(options=options)
 
     except Exception as e:
-        log.debug("Encounted an exception when establishing Docker connection. Exception message: %s", str(e))
+        log.debug("Encounted an exception when establishing Docker connection. Exception message: %s", e)
         return {"state": "failed", "reason": "Could not establish a connection to a docker daemon"}
     else:  # If no exceptions raised
         return {"state": "success"}

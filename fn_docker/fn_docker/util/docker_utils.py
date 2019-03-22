@@ -54,7 +54,7 @@ class DockerUtils:
             LOG.debug("The DockerClient version is {}".format(self.client.version()['Version']))
             self.client.ping()
         except ConnectionError:
-            LOG.debug('Error connecting to docker')
+            LOG.error('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
 
     def initiate_local_docker_connection(self):
@@ -70,7 +70,7 @@ class DockerUtils:
             self.client.ping()
             self.api_client.ping()
         except ConnectionError:
-            LOG.debug('Error connecting to docker')
+            LOG.error('Error connecting to docker')
             raise ValueError("Could not setup Docker connection, is docker running ?")
 
     def get_image(self, image_to_get):
@@ -164,25 +164,25 @@ class DockerUtils:
         :return:
         """
         LOG.debug(all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)))
-        command = helper.get_image_specific_config_option(
+        command = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
             option_name="cmd")
 
-        output_vol = helper.get_image_specific_config_option(
+        output_vol = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
             option_name="primary_source_dir", optional=True)
-        internal_vol = helper.get_image_specific_config_option(
+        internal_vol = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
             option_name="primary_dest_dir", optional=True)
-        docker_config_operation = helper.get_image_specific_config_option(
+        docker_config_operation = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="cmd_operation",
             optional=True)
 
-        approved_operations = helper.get_image_specific_config_option(
+        approved_operations = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="{}_approved_operations".format(image_to_use),
             optional=True)
 
-        image_fullname = helper.get_image_specific_config_option(
+        image_fullname = helper.get_config_option(
             options=all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)), option_name="docker_image",
             optional=True)
 

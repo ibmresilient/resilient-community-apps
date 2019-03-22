@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
             log.info("docker_operation: %s", docker_operation)
 
             helper = ResDockerHelper(self.options)
-            image_to_use = helper.get_config_option("docker_image", True) or docker_image
+            image_to_use = helper.get_config_option(self.options, "docker_image", True) or docker_image
 
             # Prepare the args which will be rendered into the app.config cmd
             escaped_args = {
@@ -89,11 +89,11 @@ class FunctionComponent(ResilientComponent):
                     incident_id=incident_id, artifact_id=artifact_id,
                     attachment_id=attachment_id, task_id=task_id, res_client=self.rest_client())
                 # Get the external directory in which to save the file
-                output_vol = helper.get_image_specific_config_option(
+                output_vol = helper.get_config_option(
                     options=self.all_options.get('{}{}'.format(CONFIGSECTIONPREFIX, image_to_use)),
                     option_name="primary_source_dir", optional=True)
 
-                yield StatusMessage("Writing attachment to bind folder")
+                log.debug("Writing attachment to bind folder")
 
                 if os.path.isdir(output_vol):
                     # Convert to named temp file
@@ -110,7 +110,7 @@ class FunctionComponent(ResilientComponent):
                                 "attachment_input": render("{{attachment_input|%s}}" % "sh",
                                                            {u"attachment_input": attachment_file_name}),
                             })
-                            yield StatusMessage(u"Added this as an Attachment Input: {}".format(attachment_file_name))
+                            yield StatusMessage(u"Added this as an Attachment Input: {}".format(attachment_name))
                 else:
                     errMsg = u"""Could not write file to directory, does the directory {0} exist? If not create it with mkdir {0}""".format(output_vol)
                     raise FunctionError(errMsg)
@@ -124,13 +124,14 @@ class FunctionComponent(ResilientComponent):
             docker_interface.setup_docker_connection(options=self.options)
 
             # Ensure the specified image is an approved one
-            if image_to_use not in helper.get_config_option("docker_approved_images").split(","):
+            if image_to_use not in helper.get_config_option(self.options, "docker_approved_images").split(","):
                 raise ValueError("Image is not in list of approved images. Review your app.config")
 
             # Gather the command to send to the image and format docker_extra_kwargs for any image specific volumes
             command, docker_extra_kwargs, image_fullname, docker_operation = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, escaped_args, docker_operation)
 
+            yield StatusMessage("Gathered app.config values")
             log.info("Command: %s \n Volume Bind: %s", (command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_fullname)
@@ -138,23 +139,23 @@ class FunctionComponent(ResilientComponent):
             docker_client = docker_interface.get_client()
 
             yield StatusMessage("Now starting container with input")
-
-            # Run container using client
-            container = docker_client.containers.run(
-                image=image_fullname,
-                command=render(command, escaped_args),
-                detach=True,  # Detach from container
-                remove=False,  # Remove set to false as will be removed manually after gathering info
-                **docker_extra_kwargs)
-
-            container_stats = docker_interface.gather_container_stats(container_id=container.id)
-            container_id = container.id
-            # Gather the logs as they happen, until the container finishes.
-            container_logs = container.logs(follow=True)
-
-            yield StatusMessage("Container has finished and logs gathered")
-
             try:
+                # Run container using client
+                container = docker_client.containers.run(
+                    image=image_fullname,
+                    command=render(command, escaped_args),
+                    detach=True,  # Detach from container
+                    remove=False,  # Remove set to false as will be removed manually after gathering info
+                    **docker_extra_kwargs)
+
+                container_stats = docker_interface.gather_container_stats(container_id=container.id)
+                container_id = container.id
+                # Gather the logs as they happen, until the container finishes.
+                container_logs = container.logs(follow=True)
+
+                yield StatusMessage("Container has finished and logs gathered")
+
+
                 """
                 Attempt to remove the container now we have finished.
                 Will throw an exception if the container has already been removed"""
@@ -168,7 +169,7 @@ class FunctionComponent(ResilientComponent):
                     u"""If you supplied an extra app.config value to remove the container this is expected."""))
 
             timestamp_epoch = int(time.time() * 1000)
-            # Setup tempfile
+            # Setup tempfile to write back the attachment
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:
                 try:
                     new_attachment_name = helper.format_result_attachment_name(image_to_use, container_id)
@@ -182,7 +183,6 @@ class FunctionComponent(ResilientComponent):
                                                                                 container_logs.decode('utf-8'),
                                                                                 timestamp_epoch))
                     temp_upload_file.close()
-
                     #  Access Resilient API
                     client = self.rest_client()
 
@@ -203,7 +203,7 @@ class FunctionComponent(ResilientComponent):
 
             results = payload.done(
                 # If container had no errors, 0 will be returned. Use a falsey check to ensure we get 0 else False
-                success=bool(container_status.get("StatusCode", 1)),
+                success=True if not container_status.get("StatusCode", 1) else False,
                 content={
                     "logs": container_logs.decode('utf-8'),
                     "container_exit_status": container_status,

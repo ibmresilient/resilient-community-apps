@@ -17,21 +17,10 @@ class ResDockerHelper:
         else:
             return the_input
 
-    def get_config_option(self, option_name, optional=False):
-        """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
-
-        option = self.options.get(option_name)
-
-        if option is None and optional is False:
-            err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function properly".format(
-                option_name)
-            raise ValueError(err)
-        else:
-            return option
-
     @staticmethod
-    def get_image_specific_config_option(options, option_name, optional=False):
+    def get_config_option(options, option_name, optional=False):
         """Given option_name, checks if it is in app.config. Raises ValueError if a mandatory option is missing"""
+
         option = options.get(option_name)
 
         if option is None and optional is False:
@@ -110,7 +99,7 @@ class ResDockerHelper:
         Instead of just providing the logs/output we can include the container_id and what we used as an input
 
         The functions main purpose is to prepare a body text so the main operations done are string manipulation
-        Keyword arguements are used on the format() function in the hopes it makes the logic more readable.
+        Keyword arguments are used on the format() function in the hopes it makes the logic more readable.
 
         :param container_id:
         :param docker_operation:
@@ -125,10 +114,9 @@ class ResDockerHelper:
             input_to_container=u"""Performed on Attachment : {attachment_name}""".format(
                 attachment_name=new_attachment_name)
             if new_attachment_name
-            else u"""Performed on {artifact_type} : {artifact_value}""".format(
+            else u"""Performed on an Artifact {artifact_type} : {artifact_value}""".format(
                 artifact_type=docker_artifact_type, artifact_value=docker_input),
-            operation=u"Operation Performed : {}\n\n".format(
-                docker_operation) if docker_operation else u"\n\n",
+            operation=u"Operation Performed : {}\n\n".format(docker_operation) if docker_operation else u"\n\n",
             container_logs=container_logs)
 
         return new_attachment_body
