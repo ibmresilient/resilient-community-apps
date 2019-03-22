@@ -37,7 +37,7 @@
 ### CVE Browse Pre-Process Script
 ![screenshot](./screenshots/3_1.png)
 ### CVE Browse Post-Process Script
-![screenshot](./screenshots/3.png)
+![screenshot](./screenshots/3_2.png)
 ## Prerequisites:  
   
 * Resilient Appliance >= v31.0.0
@@ -124,7 +124,8 @@ cve_data
     $ resilient-circuits run --loglevel=DEBUG
     ```
 ## Pre-Process Script
-* CVE Browse 
+* CVE Browse
+
 This example sets the `cve_browse_data`, `cve_browse_criteria`, `cve_vendor` inputs to the name of incident and entered vendor name  and selections to user took action on 
 ```python
 # Name of the Incident
@@ -135,6 +136,7 @@ inputs.cve_browse_criteria = rule.properties.cve_browse_criteria
 inputs.cve_vendor = rule.properties.vendor
 ```
 * CVE Search  
+
 This example sets the `cve_search_data`, `cve_search_criteria`, `cve_id`, `cve_vendor`, `cve_product`, `cve_published_date_from`, `cve_published_date_to`
 inputs to search selections user took on action and name of vendor , product and date range to limit the search results. 
 ```python
