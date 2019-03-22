@@ -1,6 +1,6 @@
 # gRPC Function for IBM Resilient
 
-# Table of Contents  
+## Table of Contents  
  - [About This Package](#about-this-package)
  - [Prerequisites](#prerequisites)
  - [Installation](#installation)
@@ -13,19 +13,15 @@
  ---
  
 ## About this Package 
-  
-This gRPC function provides a general purpose wrapper for use with any gRPC client application. It can be used for request/response style communication during incident response management such as   
-  
-* artifact enrichment  
-* enterprise containment actions  
-* communication and coordination with other enterprise solutions  
-  
-In this edition we have implemented the `unary` communication type service method.  
-  
-For more information on [gRPC](https://grpc.io/docs/)  
+**This gRPC function provides a general purpose wrapper for use with any gRPC client application.** 
+* It can be used for request/response style communication during incident response management such as     
+	* artifact enrichment  
+	* enterprise containment actions  
+	* communication and coordination with other enterprise solutions   
+* In this edition we have implemented the `unary` communication type service method.  
+* For more information on [gRPC](https://grpc.io/docs/)  
   
 ![screenshot](./screenshots/1.png)
-
 ## Prerequisites:  
   
 * Resilient Appliance >= v31.0.0
