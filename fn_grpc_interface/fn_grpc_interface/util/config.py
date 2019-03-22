@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
@@ -12,7 +12,7 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
 
-    config_data = u"""[fn_grpc]
+    config_data = u"""[fn_grpc_interface]
 #interface_dir = <<path to interface buffer pb2 files parent directory>>
 #<<package_name=communication_type,secure connection type,certificate_path or google API token>>
 

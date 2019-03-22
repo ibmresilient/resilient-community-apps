@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 #!/usr/bin/env python
@@ -21,8 +21,8 @@ setup(
                      """,
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'grpcio',
-        'grpcio-tools'
+        'grpcio>=1.19.0',
+        'grpcio-tools>=1.19.0'
     ],
     packages=find_packages(),
     include_package_data=True,

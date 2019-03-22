@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -20,12 +20,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_grpc", {})
+        self.options = opts.get("fn_grpc_interface", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_grpc", {})
+        self.options = opts.get("fn_grpc_interface", {})
 
     def _get_interface_file_names(self, base_dir=None, files_dir=None):
         """
@@ -55,16 +55,14 @@ class FunctionComponent(ResilientComponent):
             interface_module = []
 
             # creating files abs path
-            for file in interface_files:
-                abs_file_path = os.path.join(base_dir, files_dir, file)
-                abs_file_path_json[file] = abs_file_path
+            for file_name in interface_files:
+                abs_file_path = os.path.join(base_dir, files_dir, file_name)
+                abs_file_path_json[file_name] = abs_file_path
 
             # Adding Module path into sys.path variable
             interface_dir_path = os.path.join(base_dir, files_dir)
             if interface_dir_path not in sys.path:
                 sys.path.append(interface_dir_path)
-            else:
-                pass
 
             # compatibility for python 2.7 and 3.6
             logging.info("Loading The Modules : {}".format(interface_files))
