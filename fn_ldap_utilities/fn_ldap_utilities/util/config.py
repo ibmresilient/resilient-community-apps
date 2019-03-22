@@ -15,6 +15,7 @@ ldap_port=389
 ldap_use_ssl=False
 ldap_auth=SIMPLE
 ldap_user_dn=CN=Username,CN=Users,DC=example,DC=com
+ldap_user_ntlm=Domain\User
 ldap_password=password
 ldap_is_active_directory=False
 ldap_connect_timeout=10
