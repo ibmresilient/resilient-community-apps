@@ -172,8 +172,8 @@ class FunctionComponent(ResilientComponent):
             try:
               # Bind to the connection
               c.bind()
-            except Exception as e:
-              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
+            except Exception as err:
+              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
 
             # Inform user
             msg = ""
@@ -226,7 +226,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             LOG.info("Completed")
-            LOG.debug(json.dumps(results))
+            LOG.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the return value.
             yield FunctionResult(results)
