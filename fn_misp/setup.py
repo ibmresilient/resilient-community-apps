@@ -5,8 +5,8 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_misp',
-    version='1.0.1',
-    license='Apache 2.0',
+    version='1.0.0',
+    license='MIT',
     author='Craig',
     author_email='craig@resilientlab.co.uk',
     url='resilientsystems.com',
