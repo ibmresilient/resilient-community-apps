@@ -38,6 +38,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Reading attachment...")
             
             client = self.rest_client()
+            metadata = None
 
             if task_id:
                 metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
