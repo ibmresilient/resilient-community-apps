@@ -17,7 +17,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_cve_search", {})
 
         # Getting CVE DataBase URL from app.config file
-        self.CVE_BASE_URL = self.options.get('cve_base_url')+'/{}'
+        self.CVE_BASE_URL = self.options.get('cve_base_url') + '/{}'
 
     def _browse_cve_api(self, vendor_name=None):
         """
