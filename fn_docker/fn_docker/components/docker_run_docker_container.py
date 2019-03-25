@@ -131,7 +131,7 @@ class FunctionComponent(ResilientComponent):
             command, docker_extra_kwargs, image_fullname, docker_operation = docker_interface.gather_image_args_and_volumes(
                 helper, image_to_use, self.all_options, escaped_args, docker_operation)
 
-            yield StatusMessage("Gathered app.config values")
+            
             log.info("Command: %s \n Volume Bind: %s", (command, docker_extra_kwargs.get('volumes', "No Volumes")))
             # Now Get the Image
             docker_interface.get_image(image_fullname)
