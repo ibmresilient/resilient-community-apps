@@ -12,7 +12,17 @@ import grpc
 import re
 import inspect
 from google.protobuf.json_format import MessageToDict
+import six
 
+try:
+    #PY3
+    import importlib.util
+except ImportError as e:
+    #PY2
+    logging.debug("The Import Error raised for the module importlib trying with imp module : {}".format(e))
+    import imp
+
+log = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
@@ -45,10 +55,12 @@ class FunctionComponent(ResilientComponent):
         :param files_dir: interface pb2 files directory i.e same as package name.
         :return: returns imported interface pb2 files module objects on the successful execution, else returns None object.
         """
-        assert isinstance(interface_files, list), "This Parameter "'"interface_files"'" should be list data type"
-        assert base_dir is not None, "The param base_dir should contain parents parent directory of gRPC interface \
-        files"
-        assert files_dir is not None, "The param files_dir should points to parent directory of gRPC interface files"
+        if not isinstance(interface_files, list):
+            raise ValueError("This Parameter "'"interface_files"'" should be list data type")
+        if base_dir is None:
+            raise ValueError("The param base_dir should contain parents parent directory of gRPC interface files")
+        if files_dir is None:
+            raise ValueError("The param files_dir should points to parent directory of gRPC interface files")
 
         if interface_files:
             abs_file_path_json = dict()
@@ -65,10 +77,9 @@ class FunctionComponent(ResilientComponent):
                 sys.path.append(interface_dir_path)
 
             # compatibility for python 2.7 and 3.6
-            logging.info("Loading The Modules : {}".format(interface_files))
+            log.info("Loading The Modules : {}".format(interface_files))
 
-            try:
-                import importlib.util
+            if six.PY3:
                 for file_name in interface_files:
                     if file_name.endswith('.py'):
                         module_name = file_name.split('.')[0]
@@ -78,19 +89,19 @@ class FunctionComponent(ResilientComponent):
                             spec.loader.exec_module(module_obj)
                             interface_module.append(module_obj)
                     else:
-                        logging.debug("No python modules found to import.")
-
-            except ImportError as e:
-                logging.debug("The Import Error raised for the module importlib trying with imp module : {}".format(e))
-                import imp
+                        log.debug("No python modules found to import.")
+            elif six.PY2:
                 for file_name in interface_files:
                     if file_name.endswith('.py'):
                         module_name = file_name.split('.')[0]
                         module_obj = imp.load_source(module_name, abs_file_path_json[file_name])
                         interface_module.append(module_obj)
+            else:
+                raise ValueError("We do not support this version of python")
+
             return interface_module
         else:
-            logging.debug("No Interface file found, please specify the interface file")
+            log.debug("No Interface file found, please specify the interface file")
             return None
 
     def _get_grpc_class(self, grpc_module_list, class_name):
@@ -104,7 +115,7 @@ class FunctionComponent(ResilientComponent):
         """
         for grpc_module in grpc_module_list:
             for name, obj in inspect.getmembers(grpc_module, inspect.isclass):
-                logging.debug("Class Name : {} Object : {}".format(name, obj))
+                log.debug("Class Name : {} Object : {}".format(name, obj))
                 if name.lower().find(class_name.lower()) != -1:
                     return name, obj
         else:
@@ -129,13 +140,10 @@ class FunctionComponent(ResilientComponent):
                             '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '__dir__']:
 
                 if str(obj).lower().find(comm_type) != -1 and name.lower().strip() == stub_name.lower().strip():
-                    logging.debug("found Stub name : {} and object : {}".format(name, obj))
+                    log.debug("found Stub name : {} and object : {}".format(name, obj))
                     _found_stub_name = name
                     _found_stub_object = obj
-                else:
-                    pass
-            else:
-                pass
+
         return _found_stub_name, _found_stub_object
 
     def _gRPC_Connect_Server(self, auth_type=None, channel=None, stub_class=None, certificate_path=None):
@@ -148,25 +156,29 @@ class FunctionComponent(ResilientComponent):
         :return: stub class object
         """
         # Checking supplied Input Arguments
-        assert channel is not None, "channel argument should not be None type"
-        assert stub_class is not None, "stub class object should not be None type"
-        log = logging.getLogger(__name__)
-        if auth_type.lower() not in ['ssl', 'tls', 'oauth2'] and auth_type.lower().strip() == "none":
+        if channel is None:
+            raise ValueError("channel argument should not be None type")
+        if stub_class is None:
+            raise ValueError("stub class object should not be None type")
+
+        if auth_type.lower().strip() not in ['ssl', 'tls', 'oauth2'] and auth_type.lower().strip() == "none":
             log.info("gRPC Channel Connection is not secure.")
             channel_object = grpc.insecure_channel(channel)
             stub_class_obj = stub_class(channel_object)
             return stub_class_obj, channel_object
-        elif auth_type.lower().find('ssl') != -1 or auth_type.lower().find('tls') != -1:
-            log.info("Channel Authentication is secure : {}".format(auth_type))
-            assert certificate_path is not None, "Please specify the valid certificate path"
-            assert certificate_path.lower() != 'none', "Please specify the valid certificate path"
+        elif auth_type.lower().strip().find('ssl') != -1 or auth_type.lower().strip().find('tls') != -1:
+            log.info("Channel Authentication is secure : {0}".format(auth_type))
+            if certificate_path is None:
+                raise ValueError("Please specify the valid certificate path")
+            if certificate_path.lower() == 'none':
+                raise ValueError("Please specify the valid certificate path")
             with open(certificate_path, 'rb') as certificate:
                 channel_cred = grpc.ssl_channel_credentials(root_certificates=certificate.read())
             channel_object = grpc.secure_channel(channel, channel_cred)
             stub_class_obj = stub_class(channel_object)
             return stub_class_obj, channel_object
         else:
-            raise NotImplementedError("Not Implemented these {} Authentication types ".format(auth_type))
+            raise NotImplementedError("The authentication type {0} is not supported".format(auth_type))
 
     @function("function_grpc")
     def _function_grpc_function(self, event, *args, **kwargs):
@@ -177,12 +189,12 @@ class FunctionComponent(ResilientComponent):
             grpc_function = kwargs.get("grpc_function")  # text
             grpc_function_data = kwargs.get("grpc_function_data")  # text
 
-            log = logging.getLogger(__name__)
+
             log.info("grpc_channel: %s", grpc_channel)
             log.info("grpc_function: %s", grpc_function)
             log.info("grpc_function_data: %s", grpc_function_data)
 
-            yield StatusMessage("starting...")
+            yield StatusMessage("Connecting to gRPC Server...!")
             response_received = None
             grpc_function_json_data = None
 
@@ -210,7 +222,7 @@ class FunctionComponent(ResilientComponent):
                 module_files = self._get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
                 grpc_interface_module_list = self._get_grpc_interface_module(module_files, _grpc_interface_file_dir,
                                                                              _grpc_package_name)
-                logging.debug(grpc_interface_module_list)
+                log.debug(grpc_interface_module_list)
 
                 grpc_stub_tuple = self._get_grpc_class(grpc_interface_module_list, 'stub')
                 grpc_request_tuple = self._get_grpc_class(grpc_interface_module_list, _grpc_request_method_name.lower())
@@ -221,6 +233,7 @@ class FunctionComponent(ResilientComponent):
             # Converting resilient function input data into json object
             try:
                 grpc_function_data = re.sub("'", '"', grpc_function_data)
+                grpc_function_data = re.sub("u", "", grpc_function_data)
                 grpc_function_json_data = json.loads(grpc_function_data)
             except Exception as e:
                 raise FunctionError("Input Data must be in json formatted..!")
@@ -278,12 +291,14 @@ class FunctionComponent(ResilientComponent):
                     log.debug("The Received data is not converted into JSON Object {}".format(e))
                     response_received = str(response_received_tmp)
 
-            yield StatusMessage("done...")
+            yield StatusMessage("Received Data from gRPC Server...!")
 
             results = {
                 "content": response_received,
                 "channel": grpc_channel
             }
+            log.debug("RESULTS: %s", results)
+            log.info("Complete")
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

@@ -68,23 +68,13 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 	#       for more info on gRPC communication types : https://grpc.io/docs/tutorials/basic/python.html
 	```
 	Edit the `interface_dir` and `package_name` as described:
-  * interface_dir:  the parent directory containing the gRPC client (pb2) files. These files are auto-generated from your .proto file via the grpc-tools utility  
-          
-       `Ex. interface_dir = /usr/local/grpc_clients/`  
-          
-  * package_name: communication type,secure connection,certificate/google token  
-          Create a separate line for each client application to enable for Resilient.  
-       `Ex. helloworld = unary,SSL,/usr/local/grpc_clients/helloworld/helloworld.crt`  
-          
-	   Within interface_dir, create a folder matching package_name where the client pb2   
-        files will reside.  
-          
-	 a. communication type: this value can be - unary, server_stream, client_stream, or 	bidirectional_stream. Presently, only `unary` is supported.         For further information, refer to https://grpc.io/docs/tutorials/basic/python.html  
-       
-       b. secure connection: this value can be None, SSL/TLS, OAuth2. Presently only None, SSL/TLS are supported.  
-       
-       c. certificate/google token: if the secure connection type is other than the None, specify either a path to the certificate file or token provided from google. 
-       
+ 
+|Configuration Parameters| Description 					|Example|
+|------------------------|------------------------------|-------|
+|*interface_dir*  |The parent directory containing the gRPC client (pb2) files. These files are auto-generated from your .proto file via the grpc-tools utility.  |*interface_dir = /usr/local/grpc_clients/*|
+|*package_name=communication_type,secure connection type,certificate_path or google API token*| Create a separate line for each client application to enable for Resilient. Within interface_dir, create a folder matching package_name where the client pb2files will reside. <br><br>*communication type:* This value can be - unary, server_stream, client_stream, or 	bidirectional_stream. Presently, only `unary` is supported.         For further information, refer to https://grpc.io/docs/tutorials/basic/python.html  <br><br>*secure connection:* This value can be None, SSL/TLS, OAuth2. Presently only None, SSL/TLS are supported.<br><br>*certificate/google token:* if the secure connection type is other than the None, specify either a path to the certificate file or token provided from google. |*helloworld = unary,None,None*|
+
+
 * To uninstall gRPC Function from Resilient Run the following:  
   
 	 `pip uninstall fn_grpc_interface`  
@@ -116,7 +106,11 @@ The payload from integration will wrap the results of the gRPC server response i
 An attempt is made to return response received as a dictionary if the response is actually a string representation of JSON or a nature dictionary object.   
 Otherwise, response received will be returned as a string representation of the result.  
   { "content": response received, "channel": grpc channel }  
-  
+* To see the output of each of the  Function, we recommend running `resilient-circuits` in `DEBUG` mode.
+* To do this run:
+    ```
+    $ resilient-circuits run --loglevel=DEBUG
+    ```
 ## Pre-Process Script
   This example sets `grpc_function_data` to the artifact value ,
 A pre-processor script will build and format the grpc_function_data input field similar to this example:
