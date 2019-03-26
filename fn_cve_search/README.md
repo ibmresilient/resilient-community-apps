@@ -23,7 +23,7 @@
 	* CVE Database Information  
 	
 * The function makes use of the CVE `https://cve.circl.lu/api/{search param}/{vendor name}/{product name}` API call to get  information on a given query   
-* More Information on [CVE Search Database](https://www.circl.lu/services/cve-search/)
+* For more information see: [CVE Search Database](https://www.circl.lu/services/cve-search/)
 
 ![screenshot](./screenshots/1.png)
 ### CVE Search Function layout:
@@ -49,15 +49,18 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 * Download the `.zip` file from our App Exchange and extract it. You will find a file called: `fn_cve_search-<version>.tar.gz`
 * Copy this file to your Integrations Server
  * To install the package, run:
-`pip install fn_cve_search-<version>.tar.gz`  
+    ```
+    $ pip install fn_cve_search-<version>.tar.gz
+    ```
 
 * To import the function, example rules,data tables and workflows into your Resilient Appliance, run:
     ```
     $ resilient-circuits customize -y -l fn-cve-search
     ``` 
 * To update your `app.config` file with the required CVE Search configurations, run:
- 
-	 `resilient-circuits config -u`   
+    ```
+    $ resilient-circuits config -u
+    ```
 * Then open your `app.config` file and check the following configuration data is added:
 	```
 	[fn_cve_search]
@@ -67,9 +70,11 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 	cve_base_url = https://cve.circl.lu/api
 	```  
 	Edit the `max_results_display` counter value to limit the maximum no of search results to display on table.
-*  To uninstall CVE Function from Resilient Run the following :
- `pip uninstall fn_cve_search` 
- 
+*  To uninstall CVE Function from Resilient, run:
+    ```
+    $ pip uninstall fn_cve_search
+    ``` 
+
 ## Data Table
 ### Data Table Utils: CVE Searched Data
 ![screenshot](./screenshots/4.png)
@@ -118,6 +123,13 @@ cve_data
 |`cve_vendor`|`text`|yes | `apple`|a vendor name to browse for cve |
 
 ## Function Output  
+* The payload from the function will contain the JSON from the CVE API Call and the name of the API Call
+    ```
+    results = {
+        "content": #JSON returned from CVE API Call,
+        "api_call": #"last"/"browse"/"search"/"cve"/"db"
+    }
+    ```
 * To see the output of each of the API calls for this Function, we recommend running `resilient-circuits` in `DEBUG` mode.
 * To do this run:
     ```
@@ -274,24 +286,13 @@ incident.addNote(browse_rich_text_final)
        
  5. CVE DB Info  
     * To get more information about the current databases in use and when it was updated   
-          
-       
-## Function Payload Data Format  
-  The Payload from the function will be always in the JSON format sample out format is given.  
-  Basically `api_call` key is used to segregate the data.  
-    
- { "content": [list of Retruned JSON Object], "api_call": last/browse/search/cve/db } 
-    
+
 ## Using the CVE Function  
   
-There are two functions a) Example: CVE Browse  b) Example: CVE Search  
+There are two functions `Example: CVE Browse`  and `Example: CVE Search`
   
-* Example CVE Browse :   
-* 
-   This function can be accessed on the incidents. which offers the capabilities to browse 	for vendors and products,  
-    current CVE  data base information.  
-      
-* Example: CVE Search :   
-  
-   This function can be accessed on the artifacts. which offers the capabilities to search for product & vendor   
-    vulnerabilities, search for specific CVE's data, latest vulnerabilities added to databases.  
+### Example CVE Browse :
+* This function can be accessed on an Incident Object which offers the capabilities to `browse` for vendors and products and current CVE database information.
+
+### Example: CVE Search :   
+* This function can be accessed on an Artifact Object which offers the capabilities to search for product & vendor vulnerabilities, specific CVE data and the latest vulnerabilities in database.
