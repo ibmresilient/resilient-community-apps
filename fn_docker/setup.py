@@ -17,7 +17,7 @@ setup(
     install_requires=[
         'resilient_circuits>=31.0.0',
         'docker[ssh]>=3.7.0',
-        'resilient-lib'
+        'resilient-lib>=32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
