@@ -64,10 +64,6 @@ class FunctionComponent(ResilientComponent):
         """Function: A Function to Browse Common Vulnerability Exposures  Vendors and Product & Database information from https://cve.circl.lu Data Base."""
         try:
             # Get the function parameters:
-            cve_browse_data = kwargs.get("cve_browse_data")  # text
-            if cve_browse_data:
-                cve_browse_data = cve_browse_data.strip()
-
             cve_browse_criteria = kwargs.get("cve_browse_criteria")  # text
             if cve_browse_criteria:
                 cve_browse_criteria = cve_browse_criteria.strip()
@@ -80,7 +76,6 @@ class FunctionComponent(ResilientComponent):
             result_data_dict = dict()
 
             log = logging.getLogger(__name__)
-            log.info("cve_browse_data: %s", cve_browse_data)
             log.info("cve_browse_criteria: %s", cve_browse_criteria)
             log.info("cve_vendor: %s", cve_vendor)
 
@@ -116,3 +111,4 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(result_data_dict)
         except Exception as er:
             yield FunctionError(er)
+        
