@@ -4,47 +4,14 @@
 """Function implementation"""
 
 import logging
+import json
+import xmltodict
 from resilient_lib import RequestsCommon, ResultPayload
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import json
-import requests
-import sys
-import xmltodict
-import datetime
+
 
 PACKAGE = "fn_bluecoat_site_review"
 HEADERS = {"User-Agent": "Mozilla/5.0", "Content-Type": "application/json"}
-
-"""
-class SiteReview(object):
-    def __init__(self, baseurl):
-        self.baseurl = baseurl
-        self.headers = {"User-Agent": "Mozilla/5.0", "Content-Type": "application/json"}
-
-    def sitereview(self, url):
-        payload = {"url": url, "captcha":""}
-
-        try:
-            self.req = requests.post(
-                self.baseurl,
-                headers=self.headers,
-                data=json.dumps(payload),
-            )
-
-        except requests.ConnectionError:
-            sys.exit("[-] ConnectionError: " \
-                     "A connection error occurred")
-
-        return(json.dumps(xmltodict.parse(self.req.content), sort_keys=True, indent=4))
-
-    def check_response(self, response):
-        if self.req.status_code != 200:
-            sys.exit("[-] HTTP {} returned".format(req.status_code))
-        else:
-            self.category = response["categorization"][0]["name"]
-            self.date = response["translatedRateDates"][0]["text"][0:35]
-            self.url = response["url"]
-"""
 
 
 class FunctionComponent(ResilientComponent):
@@ -77,7 +44,6 @@ class FunctionComponent(ResilientComponent):
             # Assignment for successful completion of the code
             results_flag = True
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
             response_json = self.sitereview(self.options['url'], artifact_value)
@@ -93,18 +59,6 @@ class FunctionComponent(ResilientComponent):
                 if response_json.get('FailedResult'):
                     results_flag = False
                     msg = response_json.get('FailedResult')
-
-                else:
-                    if isinstance(response_json['CategorizationResult']['categorization']['categorization'],list):
-                        categorization_name = response_json['CategorizationResult']['categorization']['categorization'][1]['name']
-                    else:
-                        categorization_name = response_json['CategorizationResult']['categorization']['categorization']['name']
-
-                    bluecoat_object = {
-                        "url": response_json['CategorizationResult']['url'],
-                        "categorization_name": categorization_name,
-                        "timestamp": datetime.datetime.utcnow().strftime("%a %b %d %H:%M:%S UTC %Y")
-                    }
 
             yield StatusMessage("done...")
 
