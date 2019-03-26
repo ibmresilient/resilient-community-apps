@@ -26,8 +26,18 @@ class FunctionComponent(ResilientComponent):
 
     @function("utilities_timer")
     def _utilities_timer_function(self, event, *args, **kwargs):
-        """Function: This function implements a simple timer.  A workflow will pause fo.  The f"""
+        """This function implements a simple timer.  A workflow using this function will sleep for the
+        specified amount of time. The input string is of format “time value” concatenated with a
+        “time unit” character, where character is:
+        ‘s’ for seconds
+        ‘m’ for minutes
+        ‘h’ for hours
+        ‘d’ for days
+        For example: '30s' = 30 seconds; '40m' = 40 minutes;
+        The function periodically checks the status of the calling workflow and will end
+        function execution if the workflow has been terminated."""
         try:
+            # Initialize results payload
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
@@ -38,16 +48,19 @@ class FunctionComponent(ResilientComponent):
 
             # Parse the input time string and compute the total time to sleep
             # and the workflow check interval in seconds.
-            total_time_in_seconds, wf_check_interval = get_time_and_interval_time_in_seconds(utilities_time)
+            total_time_in_seconds = get_sleep_time_in_seconds(utilities_time)
+            wf_check_interval = compute_interval_time(total_time_in_seconds)
 
+            # Get workflow instance ID
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
             res_client = self.rest_client()
 
+            # Initialize before the while loop
             current_sleep_time = 0
             wf_status = get_workflow_status(res_client, wf_instance_id)
 
-            # Loop and sleep while workflow is not terminated and
-            while (current_sleep_time < total_time_in_seconds) and not wf_status.is_terminated:
+            # Loop and sleep till total time to sleep achieved and while workflow is not terminated
+            while (current_sleep_time < total_time_in_seconds) and (total_time_in_seconds > 0) and not wf_status.is_terminated:
                 yield StatusMessage('Sleeping for {} out of {} seconds.'.format(wf_check_interval, total_time_in_seconds))
 
                 # Sleep interval time
@@ -59,8 +72,13 @@ class FunctionComponent(ResilientComponent):
                 # Check the status of the workflow
                 wf_status = get_workflow_status(res_client, wf_instance_id)
 
+            yield StatusMessage('Total sleep time {} seconds complete.'.format(current_sleep_time))
+
             # Return the workflow status
-            results = rp.done(True, wf_status)
+            results = rp.done(True, wf_status.as_dict(), wf_status.reason)
+
+            log.debug("RESULTS: %s", results)
+            log.info("> Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -68,42 +86,50 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError(err)
 
 
-def get_time_and_interval_time_in_seconds(time_string):
+def get_sleep_time_in_seconds(time_string):
     """
-    Parse the input time string into "time value" and "time unit".
+    Parse the input time string into "time value" and "time unit" and compute the time in seconds.
     The input string will be in format time_value with the time unit character concatenated on the end.
-    Time unit will be: 's' for seconds, 'm for minutes, 'h' for hours or 'd' for days.
+    Time unit will be: 's' for seconds, 'm' for minutes, 'h' for hours or 'd' for days.
     For example '30s' = 30 seconds; '20m' = 20 minutes; '2h' = 2 hours; '5d' = 5 days.
     """
+    # Parse the time string
     time_unit = time_string.rstrip()[-1]
     time_value = int(time_string[:-1])
-    time_wf_check_interval = 0
 
     # Compute the total time to sleep in seconds
     if time_unit == 's':
-        total_time_in_seconds = time_value
+        time_in_seconds = time_value
     elif time_unit == 'm':
-        total_time_in_seconds = time_value * SECONDS_IN_MINUTE
+        time_in_seconds = time_value * SECONDS_IN_MINUTE
     elif time_unit == 'h':
-        total_time_in_seconds = time_value * SECONDS_IN_HOUR
-    elif time == 'd':
+        time_in_seconds = time_value * SECONDS_IN_HOUR
+    elif time_unit == 'd':
         # In the case of sleeping for days check workflow every hour
-        total_time_in_seconds = time_value * SECONDS_IN_DAY
+        time_in_seconds = time_value * SECONDS_IN_DAY
     else:
         raise ValueError("Invalid utilities_time string format: should end in 's' for seconds, 'm for minutes, 'h' for hours or 'd' for days")
 
-    # Compute time interval (in seconds) to check if the workflow terminated
-    if total_time_in_seconds <= SECONDS_IN_MINUTE:
-        # Less than 1 minute
-        time_wf_check_interval = total_time_in_seconds / 2
-    elif total_time_in_seconds <= SECONDS_IN_HOUR:
-        # Less than an hour, check
-        time_wf_check_interval = total_time_in_seconds / 4
-    elif total_time_in_seconds <= SECONDS_IN_DAY:
-        # Less than a day, check
-        time_wf_check_interval = total_time_in_seconds / 10
+    return time_in_seconds
+
+def compute_interval_time(time_in_seconds):
+    """
+    Compute time interval (in seconds) that is used to check if the workflow has been terminated.
+    """
+    if time_in_seconds <= SECONDS_IN_MINUTE:
+        if time_in_seconds > 1:
+            # Less than 1 minute, but more than 2 seconds
+            time_interval = time_in_seconds / 2
+        else:
+            time_interval = time_in_seconds
+    elif time_in_seconds <= SECONDS_IN_HOUR:
+        # Less than an hour, check 4 times
+        time_interval = time_in_seconds / 4
+    elif time_in_seconds <= SECONDS_IN_DAY:
+        # Less than a day, check 10 times
+        time_interval = time_in_seconds / 10
     else:
         # More than a day, check every hour
-        time_wf_check_interval = SECONDS_IN_HOUR
+        time_interval = SECONDS_IN_HOUR
 
-    return total_time_in_seconds, time_wf_check_interval
+    return time_interval
