@@ -192,6 +192,7 @@ class Bit9PollComponent(ResilientComponent):
         self.log.info(u"Processed all approval requests")
         self.fire(PollCompleted())
 
+    """Queries resilient for if an incident has already been created for the approval request"""
     def _find_resilient_incident_for_req(self, req_id):
         r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
