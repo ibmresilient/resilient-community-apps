@@ -145,14 +145,6 @@ class FunctionComponent(ResilientComponent):
         """Function: A Function to Search  Common Vulnerability Exposures Data from https://cve.circl.lu Data Base."""
         try:
             # Get the function parameters:
-            cve_search_data = kwargs.get("cve_search_data")  # text
-            if cve_search_data:
-                cve_search_data = cve_search_data.strip()
-
-            cve_search_criteria = kwargs.get("cve_search_criteria")  # text
-            if cve_search_criteria:
-                cve_search_criteria = cve_search_criteria.strip()
-
             cve_id = kwargs.get("cve_id")  # text
             if cve_id:
                 cve_id = cve_id.strip()
@@ -175,8 +167,6 @@ class FunctionComponent(ResilientComponent):
             _result_search_data = dict()
 
             log = logging.getLogger(__name__)
-            log.info("cve_search_data: %s", cve_search_data)
-            log.info("cve_search_criteria: %s", cve_search_criteria)
             log.info("cve_id: %s", cve_id)
             log.info("cve_vendor: %s", cve_vendor)
             log.info("cve_product: %s", cve_product)
@@ -186,17 +176,19 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(
                 "Searching the CVE Database. ID:{}, Vendor:{}, Product:{}".format(cve_id, cve_vendor, cve_product))
 
-            if cve_search_criteria.lower().find('search') != -1:
-                if cve_vendor is None and cve_product is None:
-                    raise FunctionError('Please Provide Vendor or Product Name')
-                else:
-                    _browse_data = self._search_cve_api(vendor_name=cve_vendor, product=cve_product)
-            elif cve_search_criteria.lower().find('specific') != -1:
+            if cve_id is None and ((cve_vendor is None and cve_product) or (cve_vendor and cve_product is None)):
+                raise ValueError("Specify both cve_vendor and cve_product or cve-id")
+            if cve_id and (cve_product or cve_vendor):
+                raise ValueError("Specify both cve_vendor and cve_product or cve-id")
+
+            if cve_id:
                 _browse_data = self._get_specific_cve_data(cve_id=cve_id)
-            elif cve_search_criteria.lower().find('last') != -1:
-                _browse_data = self._last_30_cves()
+
+            elif cve_vendor and cve_product:
+                _browse_data = self._search_cve_api(vendor_name=cve_vendor, product=cve_product)
             else:
-                raise ValueError("CVE Browse Criteria is not recognized..!")
+                _browse_data = self._last_30_cves()
+
             # Defining a key in result dictionary to store parsed data
             _result_search_data['content'] = []
 
