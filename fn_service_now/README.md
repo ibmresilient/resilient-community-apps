@@ -8,10 +8,24 @@
   - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
 
 ## Overview
-In order to integrate with ServiceNow, two components are required **fn_service_now** and the **IBM Resilient ServiceNow App** to be installed on your Resilient Integrations Server and ServiceNow Instance, respectively
+Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Professionals to communicate security incidents in realtime. This integration allows for bi-directional synchronization of notes and incidents enabling the security and operations teams to be aligned during critical security events.
+
+## Key Features
+* Bi-directional integration between Records in the ServiceNow Incident Table and Incidents/Tasks in IBM Resilient
+* Create an IBM Resilient Incident/Task from a ServiceNow Record in the Incident Table
+* Create a ServiceNow Record in the Incident Table from a IBM Resilient Incident/Task
+* Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record
+* Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record
+
+## Requirements
+* ServiceNow Instance running >= Kingston release
+* The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance
+* Access to the Incident Table in ServiceNow
+* If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
+* IBM Resilient >= `v31.0.0`
+* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed
 
 ### fn_service_now:
-* This is what we are familiar with, a Python package
 * Hosted on our public GitHub and Community App Exchange
 * You download, install and run it on your Resilient Integrations Server
 * The package includes *customizations* that are imported into your Resilient Appliance using the `resilient-circuits customize` command
