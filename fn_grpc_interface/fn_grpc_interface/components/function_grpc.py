@@ -15,14 +15,19 @@ from google.protobuf.json_format import MessageToDict
 import six
 
 try:
-    #PY3
+    # PY3
     import importlib.util
 except ImportError as e:
-    #PY2
+    # PY2
     logging.debug("The Import Error raised for the module importlib trying with imp module : {}".format(e))
     import imp
 
+if six.PY2:
+    # Used to Convert unicode strings to utf-8 for python 2.7
+    import ast
+
 log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements generic wrapper for the gRPC client on the Resilient platform"""
@@ -36,16 +41,6 @@ class FunctionComponent(ResilientComponent):
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_grpc_interface", {})
-
-    def _get_interface_file_names(self, base_dir=None, files_dir=None):
-        """
-        component that return the absolute path of all files in the given directory
-        :param base_dir:  interface pb2 files parent directory
-        :param files_dir:  interface pb2 files directory i.e same as package name
-        :return: lists of all pb2 files absolute path inside the given directory path
-        """
-        __dir_path = os.path.join(base_dir, files_dir)
-        return os.listdir(__dir_path)
 
     def _get_grpc_interface_module(self, interface_files=[], base_dir=None, files_dir=None):
         """
@@ -121,31 +116,6 @@ class FunctionComponent(ResilientComponent):
         else:
             return ()
 
-    def _get_method_from_stub_object(self, stub_object, comm_type, stub_name=''):
-        """
-        component that returns stub method from the given stub class objects, evaluates based on the given stub name and
-        communication type param.
-        :param stub_object:  stub Class object
-        :param comm_type:   communication type (i.e unary, server_stream,client_stream,bidirectional_stream)
-        :param stub_name:   name of the stub method in the stub class
-        :return: returns tuple of name and object of the stub method on success else returns None object
-        """
-        _found_stub_name = None
-        _found_stub_object = None
-        stub_elements = inspect.getmembers(stub_object)
-        for name, obj in stub_elements:
-            if name not in ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__ge__',
-                            '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__',
-                            '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
-                            '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '__dir__']:
-
-                if str(obj).lower().find(comm_type) != -1 and name.lower().strip() == stub_name.lower().strip():
-                    log.debug("found Stub name : {} and object : {}".format(name, obj))
-                    _found_stub_name = name
-                    _found_stub_object = obj
-
-        return _found_stub_name, _found_stub_object
-
     def _gRPC_Connect_Server(self, auth_type=None, channel=None, stub_class=None, certificate_path=None):
         """
 
@@ -183,27 +153,69 @@ class FunctionComponent(ResilientComponent):
     @function("function_grpc")
     def _function_grpc_function(self, event, *args, **kwargs):
         """Function: A function to communicate with GRPC Servers based on the Communication Methods Specified."""
+
+        def _get_interface_file_names(base_dir=None, files_dir=None):
+            """
+            component that return the absolute path of all files in the given directory
+            :param base_dir:  interface pb2 files parent directory
+            :param files_dir:  interface pb2 files directory i.e same as package name
+            :return: lists of all pb2 files absolute path inside the given directory path
+            """
+            __dir_path = os.path.join(base_dir, files_dir)
+            return os.listdir(__dir_path)
+
+        def _get_method_from_stub_object(stub_object, comm_type, stub_name=''):
+            """
+            component that returns stub method from the given stub class objects, evaluates based on the given stub name and
+            communication type param.
+            :param stub_object:  stub Class object
+            :param comm_type:   communication type (i.e unary, server_stream,client_stream,bidirectional_stream)
+            :param stub_name:   name of the stub method in the stub class
+            :return: returns tuple of name and object of the stub method on success else returns None object
+            """
+            _found_stub_name = None
+            _found_stub_object = None
+            stub_elements = inspect.getmembers(stub_object)
+            for name, obj in stub_elements:
+                if name not in ['__class__', '__delattr__', '__dict__', '__doc__', '__eq__', '__format__', '__ge__',
+                                '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__',
+                                '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__',
+                                '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '__dir__']:
+
+                    if str(obj).lower().find(comm_type) != -1 and name.lower().strip() == stub_name.lower().strip():
+                        log.debug("found Stub name : {} and object : {}".format(name, obj))
+                        _found_stub_name = name
+                        _found_stub_object = obj
+
+            return _found_stub_name, _found_stub_object
+
         try:
             # Get the function parameters:
             grpc_channel = kwargs.get("grpc_channel")  # text
             grpc_function = kwargs.get("grpc_function")  # text
             grpc_function_data = kwargs.get("grpc_function_data")  # text
 
-
             log.info("grpc_channel: %s", grpc_channel)
             log.info("grpc_function: %s", grpc_function)
             log.info("grpc_function_data: %s", grpc_function_data)
 
             yield StatusMessage("Connecting to gRPC Server...!")
-            response_received = None
-            grpc_function_json_data = None
 
             # Parsing the variable data from config file and resilient inputs
             try:
+                # validate the gRPC Function Parameter to make sure data in this `helloword:SayHello(HelloRequest)`
+                match_found = re.match(r'\w+\:\w+\(\w+\)$', grpc_function, re.IGNORECASE)
+                if match_found:
+                    log.info("gRPC Function input parameter 'grpc_function' data is validated.")
+                else:
+                    raise ValueError(
+                        "Please provide gRPC input parameter 'grpc_function' data correctly in resilient input section.value")
+
                 _grpc_package_name = grpc_function.split(':')[0].strip()
                 _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
                 _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1])
                 _grpc_request_method_name = _grpc_request_method_name.strip()
+
                 config_file_data = self.options.get(_grpc_package_name).split(',')
                 _grpc_secure_connection = config_file_data[1]
                 _grpc_communication_type = config_file_data[0]
@@ -213,29 +225,26 @@ class FunctionComponent(ResilientComponent):
 
                 log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}" \
                          .format(_grpc_package_name, _grpc_rpc_stub_method_name, _grpc_request_method_name))
-            except Exception as e:
-                yield StatusMessage("failed to parse the function parameters.{}".format(e))
-                raise FunctionError(e)
+            except Exception as err:
+                raise ValueError("failed to parse the function parameters.{0}".format(err))
 
             # Importing gRPC proto buff files from the given interface directory.
             try:
-                module_files = self._get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
+                module_files = _get_interface_file_names(_grpc_interface_file_dir, _grpc_package_name)
                 grpc_interface_module_list = self._get_grpc_interface_module(module_files, _grpc_interface_file_dir,
                                                                              _grpc_package_name)
                 log.debug(grpc_interface_module_list)
 
                 grpc_stub_tuple = self._get_grpc_class(grpc_interface_module_list, 'stub')
                 grpc_request_tuple = self._get_grpc_class(grpc_interface_module_list, _grpc_request_method_name.lower())
-            except Exception as e:
-                yield StatusMessage("failed to load the gRPC proto buff files : {}".format(e))
-                raise FunctionError(e)
+            except Exception as error_msg:
+                raise ValueError("failed to load the gRPC proto buff files : {0}".format(error_msg))
 
             # Converting resilient function input data into json object
             try:
-                grpc_function_data = re.sub("'", '"', grpc_function_data)
-                grpc_function_data = re.sub("u", "", grpc_function_data)
+                # Inside Function Component
                 grpc_function_json_data = json.loads(grpc_function_data)
-            except Exception as e:
+            except Exception:
                 raise FunctionError("Input Data must be in json formatted..!")
 
             # Checking Communication type
@@ -245,13 +254,12 @@ class FunctionComponent(ResilientComponent):
                     stub_class_obj, grpc_channel_obj = self._gRPC_Connect_Server(_grpc_secure_connection, grpc_channel, \
                                                                                  grpc_stub_tuple[1],
                                                                                  _grpc_certificate_path)
-                    stub_method = self._get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
-                                                                    stub_name=_grpc_rpc_stub_method_name)
+                    stub_method = _get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
+                                                               stub_name=_grpc_rpc_stub_method_name)
                     if grpc_function_json_data:
                         if stub_method[1] is not None:
-                            if sys.version[0] == '2':
+                            if six.PY2:
                                 # convert unicode strings to utf-8 for python 2.7
-                                import ast
                                 grpc_function_json_data_tmp = ast.literal_eval(json.dumps(grpc_function_json_data))
                             else:
                                 grpc_function_json_data_tmp = grpc_function_json_data
@@ -291,14 +299,15 @@ class FunctionComponent(ResilientComponent):
                     log.debug("The Received data is not converted into JSON Object {}".format(e))
                     response_received = str(response_received_tmp)
 
-            yield StatusMessage("Received Data from gRPC Server...!")
-
             results = {
                 "content": response_received,
                 "channel": grpc_channel
             }
+
+            yield StatusMessage("Received Data from gRPC Server...!")
             log.debug("RESULTS: %s", results)
             log.info("Complete")
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

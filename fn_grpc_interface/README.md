@@ -115,8 +115,49 @@ Otherwise, response received will be returned as a string representation of the 
   This example sets `grpc_function_data` to the artifact value ,
 A pre-processor script will build and format the grpc_function_data input field similar to this example:
   ```python
-	    dict_data = {"name":str(artifact.value)}
-	    inputs.grpc_function_data = str(dict_data)
+	def dict_to_json_str(d):
+		  """Function that converts a dictionary into a JSON string.
+	     Supports types: basestring, unicode, bool, int and nested dicts.
+	     Does not support lists.
+	     If the value is None, it sets it to False."""
+
+	  json_entry = u'"{0}":{1}'
+	  json_entry_str = u'"{0}":"{1}"'
+	  entries = []
+
+	  for entry in d:
+	    key = entry
+	    value = d[entry]
+		  if value is None:
+			  value = False
+
+		  if isinstance(value, list):
+	      helper.fail('dict_to_json_str does not support Python Lists')
+
+		  if isinstance(value, basestring):
+	      value = value.replace(u'"', u'\\"')
+	      entries.append(json_entry_str.format(unicode(key), unicode(value)))
+
+	    elif isinstance(value, unicode):
+	      entries.append(json_entry.format(unicode(key), unicode(value)))
+    
+	    elif isinstance(value, bool):
+	      value = 'true' if value == True else 'false'
+	      entries.append(json_entry.format(key, value))
+
+	    elif isinstance(value, int):
+	      entries.append(json_entry.format(unicode(key), value))
+
+	    elif isinstance(value, dict):
+	      entries.append(json_entry.format(key, dict_to_json_str(value)))
+
+    else:
+      helper.fail('dict_to_json_str does not support this type: {0}'.format(type(value)))
+	  return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
+
+inputs.grpc_function_data = dict_to_json_str({"name": "IBM Resilient System"})
+
+
   ```
       
 "name" refers to name of the input parameter specified in the .proto file request message as in this example:
