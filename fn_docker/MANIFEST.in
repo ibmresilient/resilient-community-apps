@@ -1,0 +1,4 @@
+include README.md
+include fn_docker/util/*
+include fn_docker/LICENSE
+include fn_docker/screenshots/*
