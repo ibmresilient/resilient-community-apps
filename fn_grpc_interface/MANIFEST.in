@@ -1,4 +1,4 @@
 include README.md
 include fn_grpc_interface/util/*
 include fn_grpc_interface/LICENSE
-include fn_grpc_interface/screenshots
+include screenshots/*
