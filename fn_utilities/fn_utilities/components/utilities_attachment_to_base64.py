@@ -30,10 +30,12 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_id: %s", artifact_id)
             
-            if incident_id is None and task_id is None:
-                raise FunctionError("Error: incident_id or task_id must be specified.")
-            if artifact_id is None and attachment_id is None:
-                raise FunctionError("Error: attachment_id must be specified.")
+            input_err_msg = lambda msg: "Error: {0} must be specified.".format(msg)
+
+            if incident_id is None:
+                raise FunctionError(input_err_msg("incident_id"))
+            elif attachment_id is None and artifact_id is None:
+                raise FunctionError(input_err_msg("attachment_id or artifact_id"))
 
             yield StatusMessage("Reading attachment...")
             
@@ -45,8 +47,8 @@ class FunctionComponent(ResilientComponent):
                 data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
             elif artifact_id:
                 metadata_uri = "/incidents/{0}/artifacts/{1}".format(incident_id, artifact_id)
-                metadata = client.get(metadata_uri)
-                metadata = metadata['attachment']
+                artifact = client.get(metadata_uri)
+                metadata = artifact.get('attachment') # only interested in attachment of the artifact
                 if metadata:
                     data_uri = "/incidents/{0}/artifacts/{1}/contents".format(incident_id, artifact_id)
                 else:
