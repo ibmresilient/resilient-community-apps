@@ -123,7 +123,7 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
-            yield StatusMessage("Returning all 'computers' results")
+            yield StatusMessage("Returning 'computers' results")
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
