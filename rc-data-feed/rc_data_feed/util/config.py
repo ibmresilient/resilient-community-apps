@@ -26,8 +26,9 @@ queue=feed_data
 #class=ElasticFeed
 #url=https://your_org.com
 #port=9200
-# if using multiple organizations, consider indexes such as resilient<org_ID>
-#index=resilient
+# if using multiple organizations, consider indexes such as resilient_<org_ID>
+# each document type will append to this index as elastic 6.0 onlyl supports one document type per index
+#index_prefix=resilient_
 #auth_user=
 #auth_password=
 #cafile=false

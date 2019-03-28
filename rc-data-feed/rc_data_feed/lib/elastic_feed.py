@@ -27,7 +27,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         self.port = options.get("port")
         self.user = options.get("auth_user")
         self.password = options.get("auth_password")
-        self.index = options.get("index")
+        self.index_prefix = options.get("index_prefix")
         self.cafile = options.get("cafile")
 
         self.init_elastic()
@@ -69,12 +69,14 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         # add the incident id to all payloads, if needed
         elastic_payload['inc_id'] = context.inc_id
 
+        index = "{}{}".format(self.index_prefix, name)
+
         if context.is_deleted:
-            LOG.debug('deleting %s(%s) on index %s', name, payload['id'], self.index)
-            self._fn_elasticsearch_delete(self.index, name, payload['id'])
+            LOG.debug('deleting %s(%s) on index %s', name, payload['id'], index)
+            self._fn_elasticsearch_delete(index, name, payload['id'])
         else:
-            LOG.debug('indexing %s(%s) on index %s', name, payload['id'], self.index)
-            self._fn_elasticsearch_index(self.index, name, payload['id'], elastic_payload)
+            LOG.debug('indexing %s(%s) on index %s', name, payload['id'], index)
+            self._fn_elasticsearch_index(index, name, payload['id'], elastic_payload)
 
 
     def _fn_elasticsearch_index(self, index, type, type_id, payload):

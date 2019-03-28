@@ -112,7 +112,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         input_type = field['input_type']
         field_name = field['name']
 
-        LOG.debug("adding field to table; type=%s; field=%s; type=%s", type_name, field_name, input_type)
+        LOG.info("adding field to table; type=%s; field=%s; type=%s", type_name, field_name, input_type)
 
         try:
             column_type = self.dialect.get_column_type(input_type)
@@ -172,7 +172,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
         try:
             if context.is_deleted:
-                LOG.debug("Deleting %s; id = %d", table_name, flat_payload['id'])
+                LOG.info("Deleting %s; id = %d", table_name, flat_payload['id'])
 
                 self._execute_sql(
                     cursor,
@@ -180,10 +180,10 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
                     [flat_payload['id']]
                 )
             else:
-                LOG.debug("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
+                LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
-                print (self.dialect.get_upsert(table_name, all_field_names, all_field_types)) # TODO
-                print (self.dialect.get_parameters(all_field_names, flat_payload)) # TODO
+                LOG.debug (self.dialect.get_upsert(table_name, all_field_names, all_field_types)) # TODO
+                LOG.debug (self.dialect.get_parameters(all_field_names, flat_payload)) # TODO
 
                 self._execute_sql(
                     cursor,
