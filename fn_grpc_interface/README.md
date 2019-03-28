@@ -84,11 +84,11 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
    |Input Name |Type  |Required|Example|Info|
 | --------------|-------| ----------|----------|--------------|
 |`grpc_channel`|`String`|yes|`localhost:50051`|this field contain the channel info of the GRPC Server Running ex:hostIP:Port
-|`grpc_function`|`String`|yes|`helloword:SayHello(HelloRequest)`|This fields contains data from .proto file i.e package_name : rpc function name(grpc request function) |
+|`grpc_function`|`String`|yes|`helloworld:SayHello(HelloRequest)`|This fields contains data from .proto file i.e package_name : rpc function name(grpc request function) |
 |`grpc_function_data`|`String`|yes|`'{ "name": "128.23.43.56" }' `|This will contain string formatted json containing artifact data and additional parameters required by the gRPC function call|
 	 
 #### More Information on  grpc function Input:
-*package_name:rpc function name(rpc request)* Ex. helloword:SayHello(HelloRequest)  
+*package_name:rpc function name(rpc request)* Ex. helloworld:SayHello(HelloRequest)  
 	 
 This information is derived from the .proto file similar to the following example:  	 	 
 	
@@ -185,4 +185,4 @@ inputs.grpc_function_data = dict_to_json_str({"name": "IBM Resilient System"})
 | --------- | :---------: | ------------------ |---------------|  
 |`Example: GRPC Communication Interface`| `Artifact` | `Example: GRPC Communication Interface` ||
   
-The sample helloword gRPC example can be found at [gRPC helloword program](https://grpc.io/docs/quickstart/python.html).
+The sample helloworld gRPC example can be found at [gRPC helloworld program](https://grpc.io/docs/quickstart/python.html).
