@@ -75,7 +75,7 @@ class LDAPUtilitiesHelper:
         self.LDAP_SERVER = self.__get_config_option(app_configs=app_configs, option_name="ldap_server", optional=False, placeholder="xxx.xxx.xxx.xxx")
         self.LDAP_PORT = int(self.__get_config_option(app_configs=app_configs, option_name="ldap_port", optional=False))
         self.LDAP_USE_SSL = self.str_to_bool(self.__get_config_option(app_configs=app_configs, option_name="ldap_use_ssl", optional=False))
-        self.LDAP_AUTH_TYPE = self.__get_config_option(app_configs=app_configs, option_name="ldap_auth", optional=False)
+        self.LDAP_AUTH_TYPE = self.__get_config_option(app_configs=app_configs, option_name="ldap_auth", optional=False).upper()
         self.LDAP_USER_DN = self.__get_config_option(app_configs=app_configs, option_name="ldap_user_dn", optional=True)
         self.LDAP_USER_NTLM = self.__get_config_option(app_configs=app_configs, option_name="ldap_user_ntlm", optional=True)
         self.LDAP_PASSWORD = self.__get_config_option(app_configs=app_configs, option_name="ldap_password", optional=True)
