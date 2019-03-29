@@ -24,7 +24,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     def __init__(self, rest_client, options):   # pylint: disable=unused-argument
         super(ElasticFeedDestination, self).__init__()
         self.url = options.get("url")
-        self.port = options.get("port")
+        self.port = int(options.get("port", 9200))
         self.user = options.get("auth_user")
         self.password = options.get("auth_password")
         self.index_prefix = options.get("index_prefix")
