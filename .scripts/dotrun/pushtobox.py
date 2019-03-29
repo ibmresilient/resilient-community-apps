@@ -1,13 +1,8 @@
-from boxsdk import Client, OAuth2, JWTAuth
-
+from boxsdk import Client, JWTAuth
+import os
 
 
 def upload_run_file():
-    # CLIENT_ID = "81giljjokwjt5zj1skm3lkgsgrlnjlmk"
-    # CLIENT_SECRET = "zHMmbFzHzDbObU3mpH087hC95rFFZllK"
-    #
-    #
-    # oauth2 = OAuth2(CLIENT_ID, CLIENT_SECRET, access_token=ACCESS_TOKEN)
 
     config = {
         "boxAppSettings": {
@@ -22,16 +17,13 @@ def upload_run_file():
         "enterpriseID": "455328"
     }
 
-    # jwka = JWTAuth(client_id="81giljjokwjt5zj1skm3lkgsgrlnjlmk", client_secret="zHMmbFzHzDbObU3mpH087hC95rFFZllK", enterprise_id="455328")
-
     sdk = JWTAuth.from_settings_dictionary(config)
     client = Client(sdk)
 
-    import os
-    file = os.path.dirname(os.path.realpath(__file__)) + "/makedotrun.sh"
-    upload_file = client.folder("64205016338").upload(file)
+    run_file = os.path.dirname(os.path.realpath(__file__)) + "/result/resilient-circuits.run"
+    client.folder("64205016338").upload(run_file)
 
-    print(client)
+    print("resilient-circuits.run file uploaded to Box")
 
 
 if __name__ == '__main__':

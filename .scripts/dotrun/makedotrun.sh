@@ -11,7 +11,7 @@ function usage {
   if [ "$1" != "" ]; then
     echo $1
   fi
-  echo "usage: $0 <directory to build> <template directory> <result directory>"
+  echo "usage: $0 <directory to build> <template directory>"
   exit 1
 }
 
@@ -97,7 +97,7 @@ function buildCommApps {
 }
 
 # B E G I N
-if [ $# -ne 3 ]; then
+if [ $# -ne 2 ]; then
   usage
 fi
 
@@ -105,9 +105,7 @@ if [ ! -d "$2" ]; then
   usage "template directory is missing"
 fi
 
-if [ ! -d "$3" ]; then
-  mkdir "$3"
-fi
+mkdir "result"
 
 TEMPLATE_DIR=$2
 TMP_DIR=/tmp
@@ -126,10 +124,10 @@ REPO_BRANCH=public
 # expand any directory references to path shortcuts such as ~
 if [ "`command -v greadlink`" != "" ]; then
   BUILD_DIR=`greadlink -f $1`
-  RESULT_DIR=`greadlink -f $3`
+  RESULT_DIR=`greadlink -f result`
 else
   BUILD_DIR=`readlink -f $1`
-  RESULT_DIR=`readlink -f $3`
+  RESULT_DIR=`readlink -f result`
 fi
 # complete path into with ${BUILD_DIR}
 LINKS_INFO="--find-links ${BUILD_DIR} --find-links ${BUILD_DIR}/lib -d ${BUILD_DIR}/lib/"
