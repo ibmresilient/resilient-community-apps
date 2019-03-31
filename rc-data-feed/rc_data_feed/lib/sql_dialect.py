@@ -126,6 +126,34 @@ class SqlDialect:
 
         return 'TEXT'
 
+    def clean_keywords(self, reserved_words, args):
+        """
+        cleanup keywords used which cannot be column names on this database
+        :param reserved_words: list of words which cannot be used for this database
+        :param args: list or individual field name
+        :return: cleaned up list of field_name
+        """
+
+        def clean_field_name(field_name):
+            """
+            inner routine to convert keywords
+            :param field_name:
+            :return: field_name so not to conflict with a keyword
+            """
+            if field_name in reserved_words:
+                return field_name+"_"
+            else:
+                return field_name
+
+        if type(args) == list:
+            new_args = []
+            for arg in args:
+                new_args.append(clean_field_name(arg))
+
+            return new_args
+        else:
+            return clean_field_name(args)
+
 class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
     """
     Base class for all ODBC-based databases.  Note that this is an
@@ -188,6 +216,16 @@ class PostgreSQL96Dialect(ODBCDialectBase):
     PostgreSQL 9.6 dialect.  Note that you cannot use a DB less than 9.6 because we use the
     "insert/on conflict/do update" capability and that wasn't introduced until 9.6.
     """
+
+    RESERVE_LIST = ['all', 'analyse', 'analyze', 'and', 'any', 'array', 'as', 'asc', 'asymmetric', 'both', 'case', 'cast',
+                    'check', 'collate', 'column', 'constraint', 'create', 'current_date', 'current_role', 'current_time',
+                    'current_timestamp', 'current_user', 'default', 'deferrable', 'desc', 'distinct', 'do', 'else', 'end',
+                    'except', 'false', 'for', 'foreign', 'from', 'grant', 'group', 'having', 'in', 'initially', 'intersect',
+                    'into', 'leading', 'limit', 'localtime', 'localtimestamp', 'new', 'not', 'null', 'off', 'offset', 'old',
+                    'on', 'only', 'or', 'order', 'placing', 'primary', 'references', 'select', 'session_user', 'some',
+                    'symmetric', 'table', 'then', 'to', 'trailing', 'true', 'union', 'unique', 'user', 'using', 'when', 'where'
+                    ]
+
     def get_upsert(self, table_name, field_names, field_types):
         # The pyodbc API wants ? for the bind parameters, so prepend that for all of the
         # fields.  Note that self.get_parameters will eventually be called and that will
@@ -196,13 +234,15 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         #
         value_placeholders = ['?' for name in field_names]
 
+        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
+
         # set field_name = EXCLUDED.field_name
-        conflict_stmt = ['{0} = EXCLUDED.{0}'.format(field_name) for field_name in field_names]
+        conflict_stmt = ['{0} = EXCLUDED.{0}'.format(field_name) for field_name in clean_field_names]
 
         template = 'insert into {0} ({1}) values ({2}) on conflict (id) do update set {3}'
 
         return template.format(table_name,
-                               ','.join(field_names),
+                               ','.join(clean_field_names),
                                ','.join(value_placeholders),
                                ','.join(conflict_stmt))
 
@@ -216,7 +256,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         return 'alter table {0} add column if not exists {1} {2}'.format(table_name,
-                                                                         column_name,
+                                                                         self.clean_keywords(self.RESERVE_LIST, column_name),
                                                                          column_spec)
 
     def is_column_exists_exception(self, the_exception):
@@ -227,7 +267,26 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
         connection.setencoding(encoding='utf-8')
 
+
 class MySqlDialect(ODBCDialectBase):
+    RESERVE_LIST = ['add', 'all', 'alter', 'analyze', 'and', 'as', 'asc', 'auto_increment', 'bdb', 'berkeleydb', 'between', 'bigint',
+                    'binary', 'blob', 'both', 'btree', 'by', 'cascade', 'case', 'change', 'char', 'character', 'check', 'collate', 'column',
+                    'columns', 'constraint', 'create', 'cross', 'current_date', 'current_time', 'current_timestamp', 'database', 'databases',
+                    'day_hour', 'day_minute', 'day_second', 'dec', 'decimal', 'default', 'delayed', 'delete', 'desc', 'describe', 'distinct',
+                    'distinctrow', 'div', 'double', 'drop', 'else', 'enclosed', 'errors', 'escaped', 'exists', 'explain', 'false', 'fields',
+                    'float', 'for', 'force', 'foreign', 'from', 'fulltext', 'function', 'geometry', 'grant', 'group', 'hash', 'having',
+                    'help', 'high_priority', 'hour_minute', 'hour_second', 'if', 'ignore', 'in', 'index', 'infile', 'inner', 'innodb',
+                    'insert', 'int', 'integer', 'interval', 'into', 'is', 'join', 'key', 'keys', 'kill', 'leading', 'left', 'like', 'limit',
+                    'lines', 'load', 'localtime', 'localtimestamp', 'lock', 'long', 'longblob', 'longtext', 'low_priority', 'master_server_id',
+                    'match', 'mediumblob', 'mediumint', 'mediumtext', 'middleint', 'minute_second', 'mod', 'mrg_myisam', 'natural', 'not',
+                    'null', 'numeric', 'on', 'optimize', 'option', 'optionally', 'or', 'order', 'outer', 'outfile', 'precision', 'primary',
+                    'privileges', 'procedure', 'purge', 'read', 'real', 'references', 'regexp', 'rename', 'replace', 'require', 'restrict',
+                    'returns', 'revoke', 'right', 'rlike', 'rtree', 'select', 'set', 'show', 'smallint', 'some', 'soname', 'spatial',
+                    'sql_big_result', 'sql_calc_found_rows', 'sql_small_result', 'ssl', 'starting', 'straight_join', 'striped', 'table',
+                    'tables', 'terminated', 'text', 'then', 'tinyblob', 'tinyint', 'tinytext', 'to', 'trailing', 'true', 'types', 'union', 'unique',
+                    'unlock', 'unsigned', 'update', 'usage', 'use', 'user_resources', 'using', 'values', 'varbinary', 'varchar', 'varcharacter',
+                    'varying', 'warnings', 'when', 'where', 'with', 'write', 'xor', 'year_month', 'zerofill']
+
     def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
@@ -241,11 +300,13 @@ class MySqlDialect(ODBCDialectBase):
         :returns The SQL for the upsert.
         """
 
-        value_placeholders = ['?' for name in field_names]
+        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
+
+        value_placeholders = ['?' for name in clean_field_names]
         template = 'replace into {0} ({1}) values ({2})'
 
         return template.format(table_name,
-                               ','.join(field_names),
+                               ','.join(clean_field_names),
                                ','.join(value_placeholders))
 
     def get_delete(self, table_name):
@@ -288,9 +349,11 @@ class MySqlDialect(ODBCDialectBase):
 
         :returns The SQL DDL needed to add the column.
         """
-        return 'alter table {0} add column {1} {2}'.format(table_name,
-                                                           column_name,
-                                                           column_spec)
+        sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
+                                                          self.clean_keywords(self.RESERVE_LIST, column_name),
+                                                          column_spec)
+
+        return sql_stmt
 
     def is_column_exists_exception(self, the_exception):    # pylint: disable=unused-argument,no-self-use
         """
@@ -337,9 +400,28 @@ class MySqlDialect(ODBCDialectBase):
 
     def configure_connection(self, connection):
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-        connection.setencoding(encoding='utf-8')
+        connection.setencoding(encoding='utf-8') # utf-8
+
 
 class SqlServerDialect(ODBCDialectBase):
+    RESERVE_LIST = ['add', 'all', 'alter', 'and', 'any', 'as', 'asc', 'authorization', 'backup', 'begin', 'between', 'break', 'browse',
+                    'bulk', 'by', 'cascade', 'case', 'check', 'checkpoint', 'close', 'clustered', 'coalesce', 'collate', 'column', 'commit',
+                    'compute', 'constraint', 'contains', 'containstable', 'continue', 'convert', 'create', 'cross', 'current', 'current_date',
+                    'current_time', 'current_timestamp', 'current_user', 'cursor', 'database', 'dbcc', 'deallocate', 'declare', 'default',
+                    'delete', 'deny', 'desc', 'disk', 'distinct', 'distributed', 'double', 'drop', 'dump', 'else', 'end', 'errlvl', 'escape',
+                    'except', 'exec', 'execute', 'exists', 'exit', 'external', 'fetch', 'file', 'fillfactor', 'for', 'foreign', 'freetext',
+                    'freetexttable', 'from', 'full', 'function', 'goto', 'grant', 'group', 'group', 'having', 'holdlock', 'identity',
+                    'identitycol', 'identity_insert', 'if', 'in', 'index', 'inner', 'insert', 'intersect', 'into', 'is', 'join', 'key',
+                    'kill', 'left', 'like', 'lineno', 'load', 'merge', 'national', 'nocheck', 'nonclustered', 'not', 'null', 'nullif', 'of',
+                    'off', 'offsets', 'on', 'open', 'opendatasource', 'openquery', 'openrowset', 'openxml', 'option', 'or', 'order', 'outer',
+                    'over', 'percent', 'pivot', 'plan', 'precision', 'primary', 'print', 'proc', 'procedure', 'public', 'raiserror', 'read',
+                    'readtext', 'reconfigure', 'references', 'replication', 'restore', 'restrict', 'return', 'revert', 'revoke', 'right',
+                    'rollback', 'rowcount', 'rowguidcol', 'rule', 'save', 'schema', 'securityaudit', 'select', 'semantickeyphrasetable',
+                    'semanticsimilaritydetailstable', 'semanticsimilaritytable', 'session_user', 'set', 'setuser', 'shutdown', 'some',
+                    'statistics', 'system_user', 'table', 'tablesample', 'textsize', 'then', 'to', 'top', 'tran', 'transaction', 'trigger',
+                    'truncate', 'try_convert', 'tsequal', 'union', 'unique', 'unpivot', 'update', 'updatetext', 'use', 'user', 'values',
+                    'varying', 'view', 'waitfor', 'when', 'where', 'while', 'with', 'within', 'writetext']
+
     def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
@@ -355,15 +437,15 @@ class SqlServerDialect(ODBCDialectBase):
         """
 
         select_values = []
-        clean_field_names = self.clean_keywords(field_names)
         for name in field_names:
-            clean_name = self.clean_keywords(name)
+            clean_name = self.clean_keywords(self.RESERVE_LIST, name)
             if field_types.get(name, '').startswith("date"):
                 type = self.get_column_type(field_types[name])
                 select_values.append("convert({}, ?, 126) as {}".format(type, clean_name))
             else:
                 select_values.append("? as {}".format(clean_name))
 
+        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
         value_setters = ["[target].{0} = [source].{0}".format(name.lower()) for name in clean_field_names]
         value_placeholders = ['[source].{}'.format(name.lower()) for name in clean_field_names]
 
@@ -429,7 +511,7 @@ class SqlServerDialect(ODBCDialectBase):
         :returns The SQL DDL needed to add the column.
         """
         sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
-                                                          self.clean_keywords(column_name),
+                                                          self.clean_keywords(self.RESERVE_LIST, column_name),
                                                           column_spec)
 
         return sql_stmt
@@ -477,52 +559,19 @@ class SqlServerDialect(ODBCDialectBase):
 
         return bind_parameters
 
-    def clean_keywords(self, args):
-        """
-        cleanup keywords used which cannot be column names on this database
-        :param args: list or individual field name
-        :return: cleaned up list of field_name
-        """
-        RESERVE_LIST = ['add', 'all', 'alter', 'and', 'any', 'as', 'asc', 'authorization', 'backup', 'begin', 'between', 'break', 'browse',
-                        'bulk', 'by', 'cascade', 'case', 'check', 'checkpoint', 'close', 'clustered', 'coalesce', 'collate', 'column', 'commit',
-                        'compute', 'constraint', 'contains', 'containstable', 'continue', 'convert', 'create', 'cross', 'current', 'current_date',
-                        'current_time', 'current_timestamp', 'current_user', 'cursor', 'database', 'dbcc', 'deallocate', 'declare', 'default',
-                        'delete', 'deny', 'desc', 'disk', 'distinct', 'distributed', 'double', 'drop', 'dump', 'else', 'end', 'errlvl', 'escape',
-                        'except', 'exec', 'execute', 'exists', 'exit', 'external', 'fetch', 'file', 'fillfactor', 'for', 'foreign', 'freetext',
-                        'freetexttable', 'from', 'full', 'function', 'goto', 'grant', 'group', 'group', 'having', 'holdlock', 'identity',
-                        'identitycol', 'identity_insert', 'if', 'in', 'index', 'inner', 'insert', 'intersect', 'into', 'is', 'join', 'key',
-                        'kill', 'left', 'like', 'lineno', 'load', 'merge', 'national', 'nocheck', 'nonclustered', 'not', 'null', 'nullif', 'of',
-                        'off', 'offsets', 'on', 'open', 'opendatasource', 'openquery', 'openrowset', 'openxml', 'option', 'or', 'order', 'outer',
-                        'over', 'percent', 'pivot', 'plan', 'precision', 'primary', 'print', 'proc', 'procedure', 'public', 'raiserror', 'read',
-                        'readtext', 'reconfigure', 'references', 'replication', 'restore', 'restrict', 'return', 'revert', 'revoke', 'right',
-                        'rollback', 'rowcount', 'rowguidcol', 'rule', 'save', 'schema', 'securityaudit', 'select', 'semantickeyphrasetable',
-                        'semanticsimilaritydetailstable', 'semanticsimilaritytable', 'session_user', 'set', 'setuser', 'shutdown', 'some',
-                        'statistics', 'system_user', 'table', 'tablesample', 'textsize', 'then', 'to', 'top', 'tran', 'transaction', 'trigger',
-                        'truncate', 'try_convert', 'tsequal', 'union', 'unique', 'unpivot', 'update', 'updatetext', 'use', 'user', 'values',
-                        'varying', 'view', 'waitfor', 'when', 'where', 'while', 'with', 'within', 'writetext']
-
-        def clean_field_name(field_name):
-            """
-            inner routine to convert keywords
-            :param field_name:
-            :return: field_name so not to conflict with a keyword
-            """
-            if field_name in RESERVE_LIST:
-                return field_name+"_"
-            else:
-                return field_name
-
-        if type(args) == list:
-            new_args = []
-            for arg in args:
-                new_args.append(clean_field_name(arg))
-
-            return new_args
-        else:
-            return clean_field_name(args)
-
 
 class OracleDialect(ODBCDialectBase):
+    RESERVE_LIST = ['access', 'add', 'all', 'alter', 'and', 'any', 'as', 'asc', 'audit', 'between', 'by', 'char', 'check', 'cluster',
+                    'column', 'comment', 'compress', 'connect', 'create', 'current', 'date', 'decimal', 'default', 'delete', 'desc',
+                    'distinct', 'drop', 'else', 'exclusive', 'exists', 'file', 'float', 'for', 'from', 'grant', 'group', 'having',
+                    'identified', 'immediate', 'in', 'increment', 'index', 'initial', 'insert', 'integer', 'intersect', 'into', 'is',
+                    'level', 'like', 'lock', 'long', 'maxextents', 'minus', 'mlslabel', 'mode', 'modify', 'noaudit', 'nocompress',
+                    'not', 'nowait', 'null', 'number', 'of', 'offline', 'on', 'online', 'option', 'or', 'order', 'pctfree', 'prior',
+                    'privileges', 'public', 'raw', 'rename', 'resource', 'revoke', 'row', 'rowid', 'rownum', 'rows', 'select', 'session',
+                    'set', 'share', 'size', 'smallint', 'start', 'successful', 'synonym', 'sysdate', 'table', 'then', 'to', 'trigger',
+                    'uid', 'union', 'unique', 'update', 'user', 'validate', 'values', 'varchar', 'varchar2', 'view', 'whenever', 'where',
+                    'with']
+
     def get_upsert(self, table_name, field_names, field_types):
         """
         Gets SQL that implements an 'upsert' for the specified table name with
@@ -538,9 +587,9 @@ class OracleDialect(ODBCDialectBase):
         """
 
         select_values = []
-        clean_field_names = self.clean_keywords(field_names)
+        clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
         for name in field_names:
-            clean_name = self.clean_keywords(name)
+            clean_name = self.clean_keywords(self.RESERVE_LIST, name)
             if field_types.get(name, '').startswith("date"):
                 select_values.append("to_date(?, 'YYYY-MM-DD\"T\"HH24:MI:SS.######') as {}".format(clean_name))
             elif field_types.get(name, '') == "datetimepicker":
@@ -631,7 +680,7 @@ END; """
         :returns The SQL DDL needed to add the column.
         """
         sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
-                                                          self.clean_keywords(column_name),
+                                                          self.clean_keywords(self.RESERVE_LIST, column_name),
                                                           column_spec)
 
         return sql_stmt
@@ -682,43 +731,6 @@ END; """
 
         return bind_parameters
 
-    def clean_keywords(self, args):
-        """
-        cleanup keywords used which cannot be column names on this database
-        :param args: list or individual field name
-        :return: cleaned up list of field_name
-        """
-        RESERVE_LIST = ['access', 'add', 'all', 'alter', 'and', 'any', 'as', 'asc', 'audit', 'between', 'by', 'char', 'check', 'cluster',
-                        'column', 'comment', 'compress', 'connect', 'create', 'current', 'date', 'decimal', 'default', 'delete', 'desc',
-                        'distinct', 'drop', 'else', 'exclusive', 'exists', 'file', 'float', 'for', 'from', 'grant', 'group', 'having',
-                        'identified', 'immediate', 'in', 'increment', 'index', 'initial', 'insert', 'integer', 'intersect', 'into', 'is',
-                        'level', 'like', 'lock', 'long', 'maxextents', 'minus', 'mlslabel', 'mode', 'modify', 'noaudit', 'nocompress',
-                        'not', 'nowait', 'null', 'number', 'of', 'offline', 'on', 'online', 'option', 'or', 'order', 'pctfree', 'prior',
-                        'privileges', 'public', 'raw', 'rename', 'resource', 'revoke', 'row', 'rowid', 'rownum', 'rows', 'select', 'session',
-                        'set', 'share', 'size', 'smallint', 'start', 'successful', 'synonym', 'sysdate', 'table', 'then', 'to', 'trigger',
-                        'uid', 'union', 'unique', 'update', 'user', 'validate', 'values', 'varchar', 'varchar2', 'view', 'whenever', 'where',
-                        'with']
-
-        def clean_field_name(field_name):
-            """
-            inner routine to convert keywords
-            :param field_name:
-            :return: field_name so not to conflict with a keyword
-            """
-            if field_name in RESERVE_LIST:
-                return field_name+"_"
-            else:
-                return field_name
-
-        if type(args) == list:
-            new_args = []
-            for arg in args:
-                new_args.append(clean_field_name(arg))
-
-            return new_args
-        else:
-            return clean_field_name(args)
-
-        def configure_connection(self, connection):
-            connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-            connection.setencoding(encoding='utf-8')
+    def configure_connection(self, connection):
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
+        connection.setencoding(encoding='utf-8')

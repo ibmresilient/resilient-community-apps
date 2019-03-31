@@ -89,18 +89,21 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
 
                 self._execute_sql(cursor, ddl)
 
-                self.created_tables[type_name] = list(column_spec.keys())
+                self.created_tables[type_name] = { k: v for k, v in column_spec.items() }
 
             for field in all_fields:
                 field_name = field['name']
+                field_type = field['input_type']
 
                 # Add the column for the field if it hasn't been already.
                 #
-                if field_name not in self.created_tables[type_name]:
+                if field_name not in self.created_tables[type_name].keys():
                     self._add_field_to_table(cursor, type_name, field)
 
                     # remember that we've added the field.
-                    self.created_tables[type_name].append(field_name)
+                    self.created_tables[type_name][field_name] = field['input_type']
+                elif field_name != 'id' and field_type != self.created_tables[type_name][field_name]:
+                    LOG.warn("Field {}.{} type was {}. Will be altered to {}".format(type_name, field_name, self.created_tables[type_name][field_name], field_type))
 
             self._commit_transaction(cursor)
         except Exception as db_exception:
@@ -182,8 +185,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             else:
                 LOG.info("Inserting/updating %s; id = %d", table_name, flat_payload['id'])
 
-                LOG.debug (self.dialect.get_upsert(table_name, all_field_names, all_field_types)) # TODO
-                LOG.debug (self.dialect.get_parameters(all_field_names, flat_payload)) # TODO
+                LOG.debug (self.dialect.get_upsert(table_name, all_field_names, all_field_types))
+                LOG.debug (self.dialect.get_parameters(all_field_names, flat_payload))
 
                 self._execute_sql(
                     cursor,
