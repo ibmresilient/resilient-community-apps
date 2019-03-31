@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
 
             # Loop and sleep till total time to sleep achieved and while workflow is not terminated
             while (current_sleep_time < total_time_in_seconds) and (total_time_in_seconds > 0) and not wf_status.is_terminated:
-                yield StatusMessage('Sleeping for {} out of {} seconds.'.format(wf_check_interval, total_time_in_seconds))
+                yield StatusMessage('Starting sleep for {} seconds.  {} out of {} sleep seconds complete.'.format(wf_check_interval, current_sleep_time, total_time_in_seconds))
 
                 # Sleep interval time
                 time.sleep(wf_check_interval)
@@ -71,6 +71,14 @@ class FunctionComponent(ResilientComponent):
 
                 # Check the status of the workflow
                 wf_status = get_workflow_status(res_client, wf_instance_id)
+
+                # This case will be True where total_time_in_seconds is odd and it is the
+                # final time through the while-loop.  For example: total_time_in_seconds=5
+                # will have awf_check_interval=2, the last time through the loop the sleep
+                # time should be 1.
+                if (current_sleep_time + wf_check_interval) > total_time_in_seconds:
+                    wf_check_interval = total_time_in_seconds - current_sleep_time
+
 
             yield StatusMessage('Total sleep time {} seconds complete.'.format(current_sleep_time))
 
@@ -105,7 +113,6 @@ def get_sleep_time_in_seconds(time_string):
     elif time_unit == 'h':
         time_in_seconds = time_value * SECONDS_IN_HOUR
     elif time_unit == 'd':
-        # In the case of sleeping for days check workflow every hour
         time_in_seconds = time_value * SECONDS_IN_DAY
     else:
         raise ValueError("Invalid utilities_time string format: should end in 's' for seconds, 'm for minutes, 'h' for hours or 'd' for days")
@@ -116,6 +123,11 @@ def compute_interval_time(time_in_seconds):
     """
     Compute time interval (in seconds) that is used to check if the workflow has been terminated.
     """
+    if time_in_seconds < 0:
+        raise ValueError("Invalid utilities_time: can't sleep less than zero.")
+    elif time_in_seconds == 0:
+        return 0
+
     if time_in_seconds <= SECONDS_IN_MINUTE:
         if time_in_seconds > 1:
             # Less than 1 minute, but more than 2 seconds
@@ -132,4 +144,4 @@ def compute_interval_time(time_in_seconds):
         # More than a day, check every hour
         time_interval = SECONDS_IN_HOUR
 
-    return time_interval
+    return int(time_interval)
