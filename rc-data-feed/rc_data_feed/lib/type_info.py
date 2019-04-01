@@ -1,5 +1,6 @@
 """This module contains code for processing Resilient types and fields."""
 import abc
+import json
 import logging
 from datetime import datetime
 
@@ -263,7 +264,10 @@ class TypeInfo(object):
                 # return the list if the callers are going to need to do something
                 # else with it (like write data to a join table).
                 #
-                value = ', '.join(value)
+                try:
+                    value = ', '.join(value)
+                except:
+                    value = json.dumps(value)
 
             if input_type == 'textarea' and isinstance(value, dict):
                 value = value['content']

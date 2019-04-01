@@ -226,6 +226,27 @@ class PostgreSQL96Dialect(ODBCDialectBase):
                     'symmetric', 'table', 'then', 'to', 'trailing', 'true', 'union', 'unique', 'user', 'using', 'when', 'where'
                     ]
 
+    def get_column_type(self, input_type):  # pylint: disable=no-self-use
+        """
+        Gets the DB column type for the specified Resilient 'input type'
+
+        :param input_type: The Resilient input type value (e.g. datepicker, boolean, number,
+            text, text_area, etc.)
+
+        :returns The DB type to use for this dialect.
+        """
+        type_dict = dict(
+            number='BIGINT',
+            datepicker='DATE',
+            datetimepicker='TIMESTAMP',
+            boolean='BOOLEAN'
+        )
+
+        if input_type in type_dict:
+            return type_dict[input_type]
+
+        return 'TEXT'
+
     def get_upsert(self, table_name, field_names, field_types):
         # The pyodbc API wants ? for the bind parameters, so prepend that for all of the
         # fields.  Note that self.get_parameters will eventually be called and that will
