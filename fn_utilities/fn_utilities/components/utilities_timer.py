@@ -101,9 +101,14 @@ def get_sleep_time_in_seconds(time_string):
     Time unit will be: 's' for seconds, 'm' for minutes, 'h' for hours or 'd' for days.
     For example '30s' = 30 seconds; '20m' = 20 minutes; '2h' = 2 hours; '5d' = 5 days.
     """
-    # Parse the time string
-    time_unit = time_string.rstrip()[-1]
-    time_value = int(time_string[:-1])
+    # Parse time string time value which should be integer.
+    try:
+        time_value = int(time_string[:-1])
+    except:
+        raise ValueError("Invalid utilities_time string format: time value should be integer. For example: 5s, 10m, or 1d")
+
+    # Get the time units from input string.
+    time_unit = time_string.rstrip()[-1].lower()
 
     # Compute the total time to sleep in seconds
     if time_unit == 's':

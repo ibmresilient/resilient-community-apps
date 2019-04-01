@@ -27,7 +27,7 @@ setup(
     long_description="Resilient Circuits Utility Functions",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib',
+        'resilient-lib>=32.0.129',
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.3',
