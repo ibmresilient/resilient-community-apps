@@ -182,21 +182,24 @@ class SqliteDialect(SqlDialect):
         # The API wants :field_name for the bind parameters, so prepend that for all of the fields.
         #
         value_names = [':' + name for name in field_names]
+        clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
-        return 'insert or replace into {0} ({1}) values ({2})'.format(table_name,
+        return 'insert or replace into {0} ({1}) values ({2})'.format(clean_table_name,
                                                                       ','.join(field_names),
                                                                       ','.join(value_names))
 
     def get_delete(self, table_name):
-        return 'delete from {0} where id = :id'.format(table_name)
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        return 'delete from {0} where id = :id'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         specs = []
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         for (key, value) in list(column_spec_dict.items()):
             specs.append("{0} {1}".format(key, value))
 
-        return 'create table if not exists {0} ({1})'.format(table_name, ','.join(specs))
+        return 'create table if not exists {0} ({1})'.format(clean_name, ','.join(specs))
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         return 'alter table {0} add column {1} {2}'.format(table_name,
@@ -254,6 +257,7 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         # correspond to the order in which it appears in our list of bind parameters).
         #
         value_placeholders = ['?' for name in field_names]
+        clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
 
@@ -262,21 +266,23 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
         template = 'insert into {0} ({1}) values ({2}) on conflict (id) do update set {3}'
 
-        return template.format(table_name,
+        return template.format(clean_table_name,
                                ','.join(clean_field_names),
                                ','.join(value_placeholders),
                                ','.join(conflict_stmt))
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         specs = []
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         for (key, value) in list(column_spec_dict.items()):
             specs.append("{0} {1}".format(key, value))
 
-        return 'create table if not exists {0} ({1})'.format(table_name, ','.join(specs))
+        return 'create table if not exists {0} ({1})'.format(clean_name, ','.join(specs))
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
-        return 'alter table {0} add column if not exists {1} {2}'.format(table_name,
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        return 'alter table {0} add column if not exists {1} {2}'.format(clean_name,
                                                                          self.clean_keywords(self.RESERVE_LIST, column_name),
                                                                          column_spec)
 
@@ -320,13 +326,13 @@ class MySqlDialect(ODBCDialectBase):
 
         :returns The SQL for the upsert.
         """
-
+        clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
         clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
 
         value_placeholders = ['?' for name in clean_field_names]
         template = 'replace into {0} ({1}) values ({2})'
 
-        return template.format(table_name,
+        return template.format(clean_table_name,
                                ','.join(clean_field_names),
                                ','.join(value_placeholders))
 
@@ -340,7 +346,8 @@ class MySqlDialect(ODBCDialectBase):
         :returns The SQL for the delete (note that this will require a single bind
             parameter named "id"
         """
-        return 'delete from {0} where id = ?'.format(table_name)
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        return 'delete from {0} where id = ?'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
@@ -350,11 +357,12 @@ class MySqlDialect(ODBCDialectBase):
             mapping.  For example, it will contain something like {'id': 'integer
             primary key'}."""
         specs = []
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         for (key, value) in list(column_spec_dict.items()):
             specs.append("{0} {1}".format(key, value))
 
-        return 'create table if not exists {0} ({1})'.format(table_name, ','.join(specs))
+        return 'create table if not exists {0} ({1})'.format(clean_name, ','.join(specs))
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         """
@@ -370,7 +378,8 @@ class MySqlDialect(ODBCDialectBase):
 
         :returns The SQL DDL needed to add the column.
         """
-        sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        sql_stmt =  'alter table {0} add {1} {2};'.format(clean_name,
                                                           self.clean_keywords(self.RESERVE_LIST, column_name),
                                                           column_spec)
 
@@ -408,7 +417,7 @@ class MySqlDialect(ODBCDialectBase):
         :returns The DB type to use for this dialect.
         """
         type_dict = dict(
-            number='INT',
+            number='BIGINT',
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
             boolean='TINYINT'
@@ -456,6 +465,7 @@ class SqlServerDialect(ODBCDialectBase):
 
         :returns The SQL for the upsert.
         """
+        clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         select_values = []
         for name in field_names:
@@ -479,7 +489,7 @@ class SqlServerDialect(ODBCDialectBase):
         WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4});
         """
 
-        sql_stmt = template.format(table_name,
+        sql_stmt = template.format(clean_table_name,
                                ','.join(select_values),
                                ','.join(value_setters),
                                ','.join(clean_field_names),
@@ -497,7 +507,8 @@ class SqlServerDialect(ODBCDialectBase):
         :returns The SQL for the delete (note that this will require a single bind
             parameter named "id"
         """
-        return 'delete from {0} where id = ?;'.format(table_name)
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        return 'delete from {0} where id = ?;'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
@@ -507,6 +518,7 @@ class SqlServerDialect(ODBCDialectBase):
             mapping.  For example, it will contain something like {'id': 'integer
             primary key'}."""
         specs = []
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         for (key, value) in list(column_spec_dict.items()):
             specs.append("{0} {1}".format(key, value))
@@ -515,7 +527,7 @@ class SqlServerDialect(ODBCDialectBase):
     CREATE TABLE {0} (
         {1}
     );"""
-        return cmd.format(table_name, ','.join(specs))
+        return cmd.format(clean_name, ','.join(specs))
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
         """
@@ -531,7 +543,8 @@ class SqlServerDialect(ODBCDialectBase):
 
         :returns The SQL DDL needed to add the column.
         """
-        sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        sql_stmt =  'alter table {0} add {1} {2};'.format(clean_name,
                                                           self.clean_keywords(self.RESERVE_LIST, column_name),
                                                           column_spec)
 
@@ -560,7 +573,7 @@ class SqlServerDialect(ODBCDialectBase):
         :returns The DB type to use for this dialect.
         """
         type_dict = dict(
-            number='INT',
+            number='BIGINT',
             datepicker='DATE',
             datetimepicker='DATETIME2',
             boolean='BIT'
@@ -606,6 +619,7 @@ class OracleDialect(ODBCDialectBase):
 
         :returns The SQL for the upsert.
         """
+        clean_table_name = self.clean_keywords(self.RESERVE_LIST, table_name)
 
         select_values = []
         clean_field_names = self.clean_keywords(self.RESERVE_LIST, field_names)
@@ -632,7 +646,7 @@ class OracleDialect(ODBCDialectBase):
         WHEN NOT MATCHED THEN  INSERT ({3}) VALUES ({4});
         """
 
-        sql_stmt = template.format(table_name,
+        sql_stmt = template.format(clean_table_name,
                                    ','.join(select_values),
                                    ','.join(filtered_value_setters),
                                    ','.join(clean_field_names),
@@ -650,7 +664,8 @@ class OracleDialect(ODBCDialectBase):
         :returns The SQL for the delete (note that this will require a single bind
             parameter named "id"
         """
-        return 'delete from {0} where id = ?;'.format(table_name)
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        return 'delete from {0} where id = ?;'.format(clean_name)
 
     def get_create_table_if_not_exists(self, table_name, column_spec_dict):
         """Gets SQL that will create the specified table if it doesn't exist already.
@@ -660,6 +675,8 @@ class OracleDialect(ODBCDialectBase):
             mapping.  For example, it will contain something like {'id': 'integer
             primary key'}."""
         specs = []
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+
 
         for (key, value) in list(column_spec_dict.items()):
             specs.append("{0} {1}".format(key, value))
@@ -683,7 +700,7 @@ EXCEPTION
       END IF;
 END; """
 
-        formatted = cmd.format(table_name, ','.join(specs))
+        formatted = cmd.format(clean_name, ','.join(specs))
         return formatted
 
     def get_add_column_to_table(self, table_name, column_name, column_spec):
@@ -700,7 +717,8 @@ END; """
 
         :returns The SQL DDL needed to add the column.
         """
-        sql_stmt =  'alter table {0} add {1} {2};'.format(table_name,
+        clean_name = self.clean_keywords(self.RESERVE_LIST, table_name)
+        sql_stmt =  'alter table {0} add {1} {2};'.format(clean_name,
                                                           self.clean_keywords(self.RESERVE_LIST, column_name),
                                                           column_spec)
 
@@ -729,7 +747,7 @@ END; """
         :returns The DB type to use for this dialect.
         """
         type_dict = dict(
-            number='INT',
+            number='BIGINT',
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
             boolean='NUMBER(1)'
