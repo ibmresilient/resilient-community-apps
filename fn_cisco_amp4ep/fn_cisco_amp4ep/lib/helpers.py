@@ -8,6 +8,7 @@
 from __future__ import print_function
 import logging
 import re
+from sys import version_info
 
 try:
     from urllib.parse import urlparse
@@ -123,24 +124,33 @@ def validate_params(params):
     # Now do some validation on input parameters.
     for (k, v) in params.copy().items():
         if re.match("^(limit|offset|start_date)$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^conn_guid|group_guid|file_list_guid$", k) and v is not None and not UUID_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^(internal_ip|external_ip)$", k) and v is not None and not IP_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^hostname$", k) and v is not None  and not validate_domain_name(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^event_type$", k) and v is not None and not validate_is_event_type(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^q|scd_name$", k) and v is not None and v == '':
-            raise ValueError("Invalid empty value '{0}' specified for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k, "Invalid or empty value")
+
 
     # If any entry has "None" string change to None value.
     for k, v in params.items():
         if type(v) == str and v.lower() == 'none':
             params[k] = None
+
+def raise_value_error(v, k, msg=None):
+    if msg is None:
+        msg = "Invalid value"
+    if version_info.major == 2:
+        raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v.encode('utf-8'), k, msg))
+    else:
+        raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v, k, msg))
 
 def is_none(param):
     """Test if a parameter is None value or string 'None'.
