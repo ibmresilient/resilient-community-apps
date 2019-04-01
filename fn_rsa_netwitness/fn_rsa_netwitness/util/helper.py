@@ -31,10 +31,13 @@ def remove_dir(dir):
 
 def get_headers(username, password):
     login_string = "{}:{}".format(username, password)
+
+    # Python 2.7 and 3.6 support
     base64_login = base64.b64encode(str.encode(login_string))
+    str_base64_login = base64_login.decode("utf-8")
 
     headers = {
-        "Authorization": "Basic {}".format(base64_login),
+        "Authorization": "Basic {}".format(str_base64_login),
         "Content-Type": "application/x-www-form-urlencoded",
         "Cache-Control": "no-cache"
     }
