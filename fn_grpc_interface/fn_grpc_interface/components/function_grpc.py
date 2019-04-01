@@ -1,6 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -55,11 +55,11 @@ class FunctionComponent(ResilientComponent):
             # validate the gRPC Function Parameter to make sure data in this `helloworld:SayHello(HelloRequest)`
             match_found = re.match(r'\w+\:\w+\(\w+\)$', grpc_function, re.IGNORECASE)
             if match_found:
-                log.info("gRPC Function input parameter 'grpc_function' data is validated.")
+                log.info("Function input 'grpc_function' is valid")
             else:
                 raise ValueError(
                     "The grpc_function function input is in an incorrect format. Excepted " \
-                    "format example:'helloworld:SayHello(HelloRequest)'")
+                    "format: 'helloworld:SayHello(HelloRequest)'")
             try:
                 _grpc_package_name = grpc_function.split(':')[0].strip()
                 _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
@@ -67,14 +67,12 @@ class FunctionComponent(ResilientComponent):
                 _grpc_request_method_name = _grpc_request_method_name.strip()
             except Exception as err:
                 raise ValueError("The grpc_function function input is in an incorrect format. Excepted " \
-                                 "format example:'helloworld:SayHello(HelloRequest)'. {0}".format(err))
+                                 "format: 'helloworld:SayHello(HelloRequest)'.\nERROR: {0}".format(err))
 
             # Parsing the service configuration data
             service_config_data = self.options.get(_grpc_package_name)
             if not service_config_data:
-                raise ValueError(
-                    "Configuration parameter not found in Resilient configuration file for service : {0}".format(
-                        _grpc_package_name))
+                raise ValueError("No configurations found for the gRPC server '{0}' in the app.config file".format(_grpc_package_name))
             else:
                 try:
                     config_file_data = service_config_data.split(',')
@@ -82,12 +80,12 @@ class FunctionComponent(ResilientComponent):
                     _grpc_communication_type = config_file_data[0]
                     _grpc_certificate_path = config_file_data[2]
                 except Exception:
-                    raise ValueError("Failed to parse service {0} config params,"\
-                    "please define in the correct format in Resilient config file.".format(_grpc_package_name))
+                    raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file.
+                        Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
 
             _grpc_interface_file_dir = self.options.get('interface_dir')
             if not _grpc_interface_file_dir:
-                raise ValueError("Interface directory not found in Resilient config file.")
+                raise ValueError("'interface_dir' is not defined in the app.config file")
 
             log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}" \
                      .format(_grpc_package_name, _grpc_rpc_stub_method_name, _grpc_request_method_name))
@@ -103,15 +101,11 @@ class FunctionComponent(ResilientComponent):
                     module_files.pop(pycache_index)
 
                 if not module_files:
-                    raise ValueError(
-                        "Interface gRPC proto buff Files not Found.please copy the files in the interface directory")
+                    raise ValueError("No gRPC protocol buffer files found in your interface_dir for the service '{0}'. Please copy the {0}_pb2.py and {0}_pb2_grpc.py files to your interface_dir".format(_grpc_package_name))
                 else:
                     for file_name in module_files:
-                        if file_name.endswith('.py') or file_name.endswith('.pyc'):
-                            if file_name.find('pb') == -1:
-                                raise ValueError("Interface gRPC proto buff Files Error Please Copy Correct Files.")
-                        else:
-                            raise ValueError("Interface gRPC proto buff Files Error Please Copy Correct Files.")
+                        if not (file_name.endswith('.py') or file_name.endswith('.pyc')) and 'pb' not in file_name:
+                            raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'. Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
 
                 grpc_interface_module_list = grpc_helper_obj.get_grpc_interface_module(module_files,
                                                                                        _grpc_interface_file_dir,
@@ -120,19 +114,18 @@ class FunctionComponent(ResilientComponent):
 
                 grpc_stub_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list, 'stub')
                 if not grpc_stub_tuple:
-                    raise ValueError("gRPC Interface Buffer pb2 files error not found any stub objects")
+                    raise ValueError("No gRPC 'stub' class found in the protocol buffer files in the interface_dir")
 
                 grpc_request_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list,
                                                                     _grpc_request_method_name.lower())
             except Exception as error_msg:
-                raise ValueError("failed to load the gRPC proto buff files : {0}".format(error_msg))
+                raise ValueError("Failed to load the gRPC protocol buffer files:\nERROR: {0}".format(error_msg))
 
             # Converting resilient function input data into json object
             try:
-                # Inside Function Component
                 grpc_function_json_data = json.loads(grpc_function_data)
             except Exception:
-                raise FunctionError("Input Data must be in json formatted..!")
+                raise FunctionError(u"Function input 'grpc_function_data' must be a JSON formatted String: {0}".format(grpc_function_json_data))
 
             # Checking Communication type
             if _grpc_communication_type.lower().strip() == "unary":
