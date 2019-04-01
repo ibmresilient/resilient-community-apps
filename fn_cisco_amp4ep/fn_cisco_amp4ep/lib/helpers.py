@@ -17,10 +17,6 @@ except:
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
-DOMAIN_REGEX = "((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}((\.)(xn--)?" \
-               "([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,}))*"
-# in hostnames
-DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX), re.IGNORECASE)
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CLI_ID_PATTERN = re.compile(r"^[a-fA-F0-9]{20}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
@@ -72,19 +68,6 @@ def validate_url(url):
     except:
         return False
 
-def validate_domain_name(domain_or_hostname):
-    """"Validate domain string(s) are in a valid format.
-
-    :param domain_or_hostname: Domain or hostname parameter value
-    :return : boolean
-
-     """
-
-    for d in re.split('\s+|,', domain_or_hostname):
-        if not DOMAIN_PATTERN.match(d):
-            return False
-    return True
-
 def validate_is_int(val):
     """"Validate value is in a valid int format.
 
@@ -128,8 +111,6 @@ def validate_params(params):
         if re.match("^conn_guid|group_guid|file_list_guid$", k) and v is not None and not UUID_PATTERN.match(v):
             raise_value_error(v, k)
         if re.match("^(internal_ip|external_ip)$", k) and v is not None and not IP_PATTERN.match(v):
-            raise_value_error(v, k)
-        if re.match("^hostname$", k) and v is not None  and not validate_domain_name(v):
             raise_value_error(v, k)
         if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
             raise_value_error(v, k)
