@@ -1,23 +1,24 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Copyright IBM Corp. - Confidential Information
+
 from setuptools import setup, find_packages
-
-PUBLISH_VERSION = "1.0.0"
-
 
 setup(
     name='fn_ioc_parser',
-    version=PUBLISH_VERSION,
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    version='1.0.0',
     license='MIT',
-    author='IBM Resilient Labs',
+    author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'IOC_parser' function",
-    long_description="Resilient Circuits Components for 'IOC_parser' function",
+    url='https://github.com/ibmresilient/resilient-community-apps',
+    description="Resilient Circuits Components for 'fn_ioc_parser'",
+    long_description="Resilient Circuits Components for 'fn_ioc_parser'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'ioc_parser'
+        'iocparser>=1.0.14',
+        'resilient-lib>=32.0.126',
+        'pdfminer.six >=20181108',
+        'python-docx>=0.8.10'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -27,9 +28,10 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "IocParserFunctionComponent = fn_ioc_parser.components.ioc_parser:FunctionComponent"
+            "FunctionIocParserFunctionComponent = fn_ioc_parser.components.function_ioc_parser:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_ioc_parser.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_ioc_parser.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_ioc_parser.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_ioc_parser.util.selftest:selftest_function"]
     }
 )

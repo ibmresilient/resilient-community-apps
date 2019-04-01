@@ -1,18 +1,17 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_ioc_parser"""
-# Copyright IBM Corp. - Confidential Information
 
 from __future__ import print_function
 
 
-CONFIG_SECTION = "fn_ioc_parser"
-
-
 def config_section_data():
-
-    config_result = """
-[fn_ioc_parser]
-filepath=
+    """Produce the default configuration section for app.config,
+       when called by `resilient-circuits config [-c|-u]`
     """
-    return config_result
+#    config_data = u"""[fn_ioc_parser]
+#setting=xxx
+#"""
+#    return config_data
+    return None
