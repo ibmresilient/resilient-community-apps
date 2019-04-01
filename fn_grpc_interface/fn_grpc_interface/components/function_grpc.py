@@ -9,6 +9,7 @@ from google.protobuf.json_format import MessageToDict
 from fn_grpc_interface.util.grpc_helper import *
 import logging
 import six
+import re
 
 if six.PY2:
     # Used to Convert unicode strings to utf-8 for python 2.7
