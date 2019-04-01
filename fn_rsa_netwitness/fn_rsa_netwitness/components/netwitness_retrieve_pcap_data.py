@@ -49,12 +49,9 @@ class FunctionComponent(ResilientComponent):
 
             # Verify inputs are set correctly
             if nw_event_session_ids is None:
-                if nw_start_time is None and nw_end_time is None:
+                if nw_start_time is None or nw_end_time is None:
                     raise FunctionError("Either nw_event_session_ids or nw_start_time and nw_end_time must be set for "
                                         "this function to run correctly.")
-                elif nw_start_time is None or nw_end_time is None:
-                    raise FunctionError("nw_start_time and nw_end_time must both be set in order to retrieve data "
-                                        "based on time.")
 
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_start_time: %s", nw_start_time)
