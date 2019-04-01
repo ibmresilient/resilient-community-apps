@@ -101,10 +101,13 @@ class FunctionComponent(ResilientComponent):
                                                      dir=output_vol) as temp_file:
                         try:
                             temp_file.write(attachment_input)
+                            os.chmod(temp_file.name, 0o666)
                             temp_file.close()
 
                         finally:
                             attachment_file_name = os.path.split(temp_file.name)[1]
+                            log.debug("Saving file to %s", temp_file.name)
+
                             # Add a attachment_input arg to be rendered into the cmd command
                             escaped_args.update({
                                 "attachment_input": render("{{attachment_input|%s}}" % "sh",
@@ -198,6 +201,10 @@ class FunctionComponent(ResilientComponent):
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
                                                             filename=new_attachment_name, mimetype='text/plain')
 
+                except Exception as upload_exception:
+                    err_msg = u"""Encountered issue when saving results to a file and uploading via REST API. Exception:  {0}""".format(
+                        upload_exception)
+                    raise FunctionError(err_msg)
                 finally:
                     os.unlink(temp_upload_file.name)
 
@@ -229,6 +236,6 @@ class FunctionComponent(ResilientComponent):
             try:
                 os.unlink(temp_file.name)
             except NameError:
-                log.debug("Error when trying to unlink file.")
+                log.debug("Error when trying to unlink file, appears file does not exist.")
             else:
                 log.debug("Successfully cleaned up file")
