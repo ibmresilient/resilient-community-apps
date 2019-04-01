@@ -18,7 +18,8 @@ setup(
         'cryptography>=2.3',
         'pywinrm>=0.3.0',
         'json2html',
-        'lxml'
+        'lxml',
+        'resilient_lib>=32.0.126'
     ],
     packages=find_packages(),
     include_package_data=True,
