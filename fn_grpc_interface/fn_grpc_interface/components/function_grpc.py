@@ -58,14 +58,16 @@ class FunctionComponent(ResilientComponent):
                 log.info("gRPC Function input parameter 'grpc_function' data is validated.")
             else:
                 raise ValueError(
-                    "Please provide gRPC input parameter 'grpc_function' data correctly in resilient input section")
+                    "The grpc_function function input is in an incorrect format. Excepted " \
+                    "format example:'helloworld:SayHello(HelloRequest)'")
             try:
                 _grpc_package_name = grpc_function.split(':')[0].strip()
                 _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
                 _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1])
                 _grpc_request_method_name = _grpc_request_method_name.strip()
             except Exception as err:
-                raise ValueError("failed to parse the function parameters.{0}".format(err))
+                raise ValueError("The grpc_function function input is in an incorrect format. Excepted " \
+                                 "format example:'helloworld:SayHello(HelloRequest)'. {0}".format(err))
 
             # Parsing the service configuration data
             service_config_data = self.options.get(_grpc_package_name)
@@ -78,7 +80,6 @@ class FunctionComponent(ResilientComponent):
                     config_file_data = service_config_data.split(',')
                     _grpc_secure_connection = config_file_data[1]
                     _grpc_communication_type = config_file_data[0]
-                    _grpc_google_tocken = config_file_data[2]
                     _grpc_certificate_path = config_file_data[2]
                 except Exception:
                     raise ValueError("Failed to parse service {0} config params,"\
@@ -106,7 +107,7 @@ class FunctionComponent(ResilientComponent):
                         "Interface gRPC proto buff Files not Found.please copy the files in the interface directory")
                 else:
                     for file_name in module_files:
-                        if file_name.endswith('.py'):
+                        if file_name.endswith('.py') or file_name.endswith('.pyc'):
                             if file_name.find('pb') == -1:
                                 raise ValueError("Interface gRPC proto buff Files Error Please Copy Correct Files.")
                         else:
@@ -161,7 +162,7 @@ class FunctionComponent(ResilientComponent):
                         raise FunctionError("Please Specify the valid data input form the Resilient.")
                 except grpc.RpcError as rpc_err:
                     status_code = rpc_err.code()
-                    log.debug(
+                    log.info("Failed to connect to gRPC Server" \
                         "{}\n connection status :{} \n name : {}\n value : {}".format(rpc_err, rpc_err.details(),
                                                                                       status_code.name,
                                                                                       status_code.value))
