@@ -47,6 +47,15 @@ class FunctionComponent(ResilientComponent):
                                                                       "incident_id": incident_id})
             req_common = RequestsCommon(self.opts)
 
+            # Verify inputs are set correctly
+            if nw_event_session_ids is None:
+                if nw_start_time is None and nw_end_time is None:
+                    raise FunctionError("Either nw_event_session_ids or nw_start_time and nw_end_time must be set for "
+                                        "this function to run correctly.")
+                elif nw_start_time is None or nw_end_time is None:
+                    raise FunctionError("nw_start_time and nw_end_time must both be set in order to retrieve data "
+                                        "based on time.")
+
             log.info("nw_event_session_ids: %s", nw_event_session_ids)
             log.info("nw_start_time: %s", nw_start_time)
             log.info("nw_end_time: %s", nw_end_time)
@@ -77,6 +86,7 @@ class FunctionComponent(ResilientComponent):
             resilient_client = self.rest_client()
             resilient_client.post_attachment("/incidents/{}/attachments/".format(incident_id),
                                              temp_f, filename=file_name)
+            yield StatusMessage("PCAP file added as attachment to Incident {}".format(str(incident_id)))
 
             results = rp.done(True, {})
             yield StatusMessage("Done...")

@@ -39,12 +39,12 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             nw_data_format = self.get_select_param(kwargs.get("nw_data_format"))  # select
 
-            nw_start_time = kwargs.get("nw_start_time")  # text
-            if len(nw_start_time) < 1:
+            nw_start_time = kwargs.get("nw_start_time")  # int
+            if nw_start_time is None:
                 raise FunctionError("nw_start_time must be set in order to run this function.")
 
-            nw_end_time = kwargs.get("nw_end_time")  # text
-            if len(nw_end_time) < 1:
+            nw_end_time = kwargs.get("nw_end_time")  # int
+            if nw_end_time is None:
                 raise FunctionError("nw_end_time must be set in order to run this function.")
 
             # Initialize resilient_lib objects (handles the select input)
