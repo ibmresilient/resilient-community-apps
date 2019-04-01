@@ -162,4 +162,6 @@ loadVersion ${VERSION_LIBS}
 ls -1 ${BUILD_DIR} >>${BUILD_DIR}/README
 #
 # end with makeself
-/bin/bash makeself --target resilient-circuits ${BUILD_DIR} ${RESULT_DIR}/resilient-circuits.run "Resilient-Circuits" ./setup
+
+TODAY=`date +"%m-%d-%y"`
+/bin/bash makeself --target resilient-circuits ${BUILD_DIR} ${RESULT_DIR}/resilient-circuits_${TODAY}.run "Resilient-Circuits" ./setup

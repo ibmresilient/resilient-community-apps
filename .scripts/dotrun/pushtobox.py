@@ -1,5 +1,6 @@
 from boxsdk import Client, JWTAuth
 import os
+import glob
 
 
 def upload_run_file():
@@ -20,8 +21,9 @@ def upload_run_file():
     sdk = JWTAuth.from_settings_dictionary(config)
     client = Client(sdk)
 
-    run_file = os.path.dirname(os.path.realpath(__file__)) + "/result/resilient-circuits.run"
-    client.folder("64205016338").upload(run_file)
+    run_file_list = glob.glob(os.path.dirname(os.path.realpath(__file__)) + "/result/resilient-circuits_*.run")
+    # List will only contain one item so choose the first item
+    client.folder("64205016338").upload(run_file_list[0])
 
     print("resilient-circuits.run file uploaded to Box")
 
