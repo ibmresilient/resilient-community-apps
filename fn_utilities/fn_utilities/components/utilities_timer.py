@@ -140,10 +140,10 @@ def compute_interval_time(time_in_seconds):
         else:
             time_interval = time_in_seconds
     elif time_in_seconds <= SECONDS_IN_HOUR:
-        # Less than an hour, check 4 times
+        # Less than an hour
         time_interval = time_in_seconds / 4
     elif time_in_seconds <= SECONDS_IN_DAY:
-        # Less than a day, check 10 times
+        # Less than a day
         time_interval = time_in_seconds / 10
     else:
         # More than a day, check every hour
