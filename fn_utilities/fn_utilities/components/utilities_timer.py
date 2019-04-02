@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
 
             # Loop and sleep till total time to sleep achieved and while workflow is not terminated
             while (current_sleep_time < total_time_in_seconds) and (total_time_in_seconds > 0) and not wf_status.is_terminated:
-                yield StatusMessage('Starting sleep for {} seconds.  {} out of {} sleep seconds complete.'.format(wf_check_interval, current_sleep_time, total_time_in_seconds))
+                yield StatusMessage('Sleeping for {}s.  {}/{}s complete.'.format(wf_check_interval, current_sleep_time, total_time_in_seconds))
 
                 # Sleep interval time
                 time.sleep(wf_check_interval)
