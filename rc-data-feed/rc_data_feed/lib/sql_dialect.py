@@ -5,7 +5,7 @@ import pyodbc
 from six import string_types
 
 
-MAX_ORACLE_VARCHAR = 4000
+MAX_ORACLE_VARCHAR = 2000
 MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
 
 
@@ -747,7 +747,7 @@ END; """
         :returns The DB type to use for this dialect.
         """
         type_dict = dict(
-            number='BIGINT',
+            number='NUMBER(16)',
             datepicker='DATE',
             datetimepicker='TIMESTAMP',
             boolean='NUMBER(1)'
@@ -756,7 +756,7 @@ END; """
         if input_type in type_dict:
             return type_dict[input_type]
 
-        return 'VARCHAR2(4000)'
+        return 'NVARCHAR2(2000)'
 
     def get_parameters(self, parameter_names, parameters):
         # Need to get a list that contains all the values in the same order as parameter_names.
@@ -771,5 +771,5 @@ END; """
         return bind_parameters
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-        connection.setencoding(encoding='utf-8')
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='UTF-8')  # pylint: disable=c-extension-no-member
+        connection.setencoding(encoding='UTF-8')
