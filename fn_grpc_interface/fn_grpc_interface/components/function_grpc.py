@@ -44,6 +44,9 @@ class FunctionComponent(ResilientComponent):
             grpc_function = kwargs.get("grpc_function")  # text
             grpc_function_data = kwargs.get("grpc_function_data")  # text
 
+            # Supported Communication types
+            SUPPORTED_COMM_METHODS = ["unary"]
+
             log.info("grpc_channel: %s", grpc_channel)
             log.info("grpc_function: %s", grpc_function)
             log.info("grpc_function_data: %s", grpc_function_data)
@@ -57,17 +60,14 @@ class FunctionComponent(ResilientComponent):
             if match_found:
                 log.info("Function input 'grpc_function' is valid")
             else:
-                raise ValueError(
-                    "The grpc_function function input is in an incorrect format. Excepted " \
-                    "format: 'helloworld:SayHello(HelloRequest)'")
+                raise ValueError("The grpc_function function input is in an incorrect format. Excepted format: 'helloworld:SayHello(HelloRequest)'")
             try:
                 _grpc_package_name = grpc_function.split(':')[0].strip()
                 _grpc_rpc_stub_method_name = grpc_function.split(':')[1].split("(")[0].strip()
                 _grpc_request_method_name = re.sub("\)", '', grpc_function.split(':')[1].split("(")[1])
                 _grpc_request_method_name = _grpc_request_method_name.strip()
             except Exception as err:
-                raise ValueError("The grpc_function function input is in an incorrect format. Excepted " \
-                                 "format: 'helloworld:SayHello(HelloRequest)'.\nERROR: {0}".format(err))
+                raise ValueError("The grpc_function function input is in an incorrect format. Excepted format: 'helloworld:SayHello(HelloRequest)'.\nERROR: {0}".format(err))
 
             # Parsing the service configuration data
             service_config_data = self.options.get(_grpc_package_name)
@@ -80,16 +80,13 @@ class FunctionComponent(ResilientComponent):
                     _grpc_communication_type = config_file_data[0]
                     _grpc_certificate_path = config_file_data[2]
                 except Exception:
-                    raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file.
-                        Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
+                    raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file. Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
 
             _grpc_interface_file_dir = self.options.get('interface_dir')
             if not _grpc_interface_file_dir:
                 raise ValueError("'interface_dir' is not defined in the app.config file")
 
-            log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}" \
-                     .format(_grpc_package_name, _grpc_rpc_stub_method_name, _grpc_request_method_name))
-
+            log.info("gRPC Package Name : {} gRPC Stub Method Name : {} gRPC Request Class Name : {}".format(_grpc_package_name, _grpc_rpc_stub_method_name, _grpc_request_method_name))
 
             # Importing gRPC proto buff files from the given interface directory.
             try:
@@ -105,19 +102,16 @@ class FunctionComponent(ResilientComponent):
                 else:
                     for file_name in module_files:
                         if not (file_name.endswith('.py') or file_name.endswith('.pyc')) and 'pb' not in file_name:
-                            raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'. Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
+                            raise ValueError("Invalid file '{0}' found in your interface_dir for the service '{1}'.Please only copy the {1}_pb2.py and {1}_pb2_grpc.py files to your interface_dir".format(file_name, _grpc_package_name))
 
-                grpc_interface_module_list = grpc_helper_obj.get_grpc_interface_module(module_files,
-                                                                                       _grpc_interface_file_dir,
-                                                                                       _grpc_package_name)
+                grpc_interface_module_list = grpc_helper_obj.get_grpc_interface_module(module_files, _grpc_interface_file_dir, _grpc_package_name)
                 log.debug(grpc_interface_module_list)
 
                 grpc_stub_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list, 'stub')
                 if not grpc_stub_tuple:
                     raise ValueError("No gRPC 'stub' class found in the protocol buffer files in the interface_dir")
 
-                grpc_request_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list,
-                                                                    _grpc_request_method_name.lower())
+                grpc_request_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list, _grpc_request_method_name.lower())
             except Exception as error_msg:
                 raise ValueError("Failed to load the gRPC protocol buffer files:\nERROR: {0}".format(error_msg))
 
@@ -125,46 +119,38 @@ class FunctionComponent(ResilientComponent):
             try:
                 grpc_function_json_data = json.loads(grpc_function_data)
             except Exception:
-                raise FunctionError(u"Function input 'grpc_function_data' must be a JSON formatted String: {0}".format(grpc_function_json_data))
+                raise FunctionError(u"Function input 'grpc_function_data' must be a JSON formatted String: {0}".format(grpc_function_data))
 
             # Checking Communication type
-            if _grpc_communication_type.lower().strip() == "unary":
-                try:
-                    # Connecting to gRPC Server with given Authentication type
-                    stub_class_obj, grpc_channel_obj = grpc_helper_obj.gRPC_Connect_Server(_grpc_secure_connection,
-                                                                                           grpc_channel,
-                                                                                           grpc_stub_tuple[1],
-                                                                                           _grpc_certificate_path)
-                    stub_method = grpc_helper_obj.get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
-                                                                              stub_name=_grpc_rpc_stub_method_name)
-                    if grpc_function_json_data:
-                        if stub_method[1] is not None:
-                            if six.PY2:
-                                # convert unicode strings to utf-8 for python 2.7
-                                grpc_function_json_data_tmp = ast.literal_eval(json.dumps(grpc_function_json_data))
-                            else:
-                                grpc_function_json_data_tmp = grpc_function_json_data
-
-                            response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
-
-                            # Closing the gRPC Server Connection
-                            grpc_channel_obj.close()
+            if _grpc_communication_type.lower().strip() not in SUPPORTED_COMM_METHODS:
+                raise ValueError("{0} is not a supported Communication Type.Supported types are: {1}".format(_grpc_communication_type, SUPPORTED_COMM_METHODS))
+            try:
+                # Connecting to gRPC Server with given Authentication type
+                stub_class_obj, grpc_channel_obj = grpc_helper_obj.gRPC_Connect_Server(_grpc_secure_connection,
+                                                                                       grpc_channel,
+                                                                                       grpc_stub_tuple[1],
+                                                                                       _grpc_certificate_path)
+                stub_method = grpc_helper_obj.get_method_from_stub_object(stub_class_obj, _grpc_communication_type,
+                                                                          stub_name=_grpc_rpc_stub_method_name)
+                if stub_method[1] is not None:
+                    try:
+                        if six.PY2:
+                            # convert unicode strings to utf-8 for python 2.7
+                            grpc_function_json_data_tmp = ast.literal_eval(json.dumps(grpc_function_json_data))
                         else:
-                            raise FunctionError("Stub method not found, please specify the valid stub method.")
-                    else:
-                        raise FunctionError("Please Specify the valid data input form the Resilient.")
-                except grpc.RpcError as rpc_err:
-                    status_code = rpc_err.code()
-                    log.debug("Failed to connect to gRPC Server" \
-                        "{}\n connection status :{} \n name : {}\n value : {}".format(rpc_err, rpc_err.details(),
-                                                                                      status_code.name,
-                                                                                      status_code.value))
-                    raise FunctionError("Server Connection status : {}".format(rpc_err.details()))
+                            grpc_function_json_data_tmp = grpc_function_json_data
+
+                        response_received_tmp = stub_method[1](grpc_request_tuple[1](**grpc_function_json_data_tmp))
+                        log.info("Response received from the server : {}".format(response_received_tmp))
+                    finally:
+                        # Closing the gRPC Server Connection
+                        grpc_channel_obj.close()
                 else:
-                    log.info("Response received from the server : {}".format(response_received_tmp))
-            else:
-                raise NotImplementedError(
-                    "Not Implemented these {} communication types ".format(_grpc_communication_type))
+                    raise FunctionError("Stub method not found, please specify the valid stub method.")
+            except grpc.RpcError as rpc_err:
+                status_code = rpc_err.code()
+                log.debug("Failed to connect to gRPC Server {}\n connection status: {} \n name: {}\n value: {}".format(rpc_err, rpc_err.details(), status_code.name, status_code.value))
+                raise FunctionError("Server Connection status : {}".format(rpc_err.details()))
 
             # Attempting to convert received data into JSON object
             try:
@@ -172,12 +158,12 @@ class FunctionComponent(ResilientComponent):
                     response_received = response_received_tmp
                 else:
                     response_received = json.loads(response_received_tmp)
-                log.debug("The Received Data is Converted into JSON Object : {}".format(response_received))
+                log.debug("The response data received from the gRPC Server is a Python Dictionary")
             except Exception as e:
                 try:
                     response_received = MessageToDict(response_received_tmp)
                 except Exception as e:
-                    log.debug("The Received data is not converted into JSON Object {}".format(e))
+                    log.debug("The response data received from the gRPC Server has been converted to a String")
                     response_received = str(response_received_tmp)
 
             results = {
