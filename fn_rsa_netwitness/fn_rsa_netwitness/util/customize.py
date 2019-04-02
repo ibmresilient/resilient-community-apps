@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 
 """Generate the Resilient customizations required for fn_rsa_netwitness"""
 
