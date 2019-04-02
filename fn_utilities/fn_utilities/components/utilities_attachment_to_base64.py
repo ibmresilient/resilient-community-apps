@@ -14,8 +14,6 @@ from resilient_circuits import (
     FunctionResult,
     FunctionError,
 )
-from resilient_lib.components.integration_errors import IntegrationError
-from resilient_lib import ResultPayload
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'attachment_base64"""
@@ -25,8 +23,6 @@ class FunctionComponent(ResilientComponent):
         """Function: Produce base64 content of a file attachment."""
         try:
             log = logging.getLogger(__name__)
-
-            payload = ResultPayload('fn_utilities', **kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -40,9 +36,9 @@ class FunctionComponent(ResilientComponent):
             log.info("artifact_id: %s", artifact_id)
 
             if incident_id is None:
-                raise IntegrationError("Error: incident_id must be specified.")
+                raise FunctionError("Error: incident_id must be specified.")
             elif attachment_id is None and artifact_id is None:
-                raise IntegrationError("Error: attachment_id or artifact_id must be specified.")
+                raise FunctionError("Error: attachment_id or artifact_id must be specified.")
             else:
                 yield StatusMessage("> Function inputs OK")
 
@@ -61,7 +57,7 @@ class FunctionComponent(ResilientComponent):
                 if metadata:
                     data_uri = "/incidents/{0}/artifacts/{1}/contents".format(incident_id, artifact_id)
                 else:
-                    raise IntegrationError("Artifact has no attachment or supported URI")
+                    raise FunctionError("Artifact has no attachment or supported URI")
             else:
                 metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
                 data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
@@ -78,10 +74,7 @@ class FunctionComponent(ResilientComponent):
                 "created": metadata["created"],
                 "content": str(base64.b64encode(data)),
             }
-
             yield StatusMessage("> Complete...")
-
-            results = payload.done(True, results)
             # Produce a FunctionResult with the return value
             log.debug(json.dumps(results, indent=2))
             yield FunctionResult(results)
