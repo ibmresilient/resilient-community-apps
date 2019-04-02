@@ -19,7 +19,8 @@
 	* communication and coordination with other enterprise solutions   
 * In this edition we have implemented the `unary` communication type service method.  
 * For more information on [gRPC](https://grpc.io/docs/)
-
+* We recommend following the gRPC `helloworld` example [here](https://grpc.io/docs/quickstart/python.html) to help get this Integration up and running.
+  
  ![screenshot](./screenshots/1.png)
  
 ### gRPC Function layout:
@@ -184,5 +185,3 @@ inputs.grpc_function_data = dict_to_json_str({"name": "IBM Resilient System"})
 | Rule Name | Object Type | Workflow Triggered |Activity Fields|  
 | --------- | :---------: | ------------------ |---------------|  
 |`Example: GRPC Communication Interface`| `Artifact` | `Example: GRPC Communication Interface` ||
-  
-The sample helloworld gRPC example can be found at [gRPC helloworld program](https://grpc.io/docs/quickstart/python.html).
