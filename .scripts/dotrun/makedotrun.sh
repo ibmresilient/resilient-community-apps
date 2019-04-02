@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 # This script creates a self-extracting .run file in order to install resilient-circuits and other
 # community apps on linux base systems. The intent is to support air-gapped environments and to use
 # virtualenv so as not to effect system level pyton libraries.
