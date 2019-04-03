@@ -1,7 +1,6 @@
-# IBM Resilient Integration for ServiceNow - Customization Guide *(Pre-Certification Process)*
-**Please note that this guide has been created prior to the ServiceNow certification. Once we have completed that process, this guide will be refactored accordingly**
+# IBM Resilient Integration for ServiceNow - Customization Guide
 
-*This guide will show you how to customize and configure this integration to suit your specific needs*
+*This guide will show you how to adapt the Integration to suit your Incident Response Workflow*
 
 - [Prerequisites](#prerequisites)
 - [Architectural Diagram](#architectural-diagram)
