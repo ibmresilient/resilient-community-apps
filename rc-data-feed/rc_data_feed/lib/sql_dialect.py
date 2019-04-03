@@ -292,7 +292,12 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
     def configure_connection(self, connection):
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-        connection.setencoding(encoding='utf-8')
+        try: # to set encoding on python 2  
+            connection.setencoding(str, encoding='utf-8')
+            connection.setencoding(unicode,encoding='utf-8')
+        except: # an issue and try encoding without specifying fromtype
+            connection.setencoding(encoding='utf-8')
+        
 
 
 class MySqlDialect(ODBCDialectBase):
