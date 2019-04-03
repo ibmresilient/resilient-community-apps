@@ -11,7 +11,6 @@
   - [Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*](#step-6-install-and-configure-servicenow-mid-server-if-needed)
   - [Step 7: *Give your ServiceNow users the correct Role*](#step-7-give-your-servicenow-users-the-correct-role)
   - [Step 8: *Test*](#step-8-test)
-  - [Step 9: *How to Import Updates in ServiceNow*](#step-9-how-to-import-updates-in-servicenow)
 ---
 
 ## Prerequisites 
