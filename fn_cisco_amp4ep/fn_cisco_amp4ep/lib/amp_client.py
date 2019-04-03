@@ -312,7 +312,7 @@ class Ampclient(object):
         return r_json
 
     def get_events(self, detection_sha256=None, application_sha256=None, connector_guid=None,
-                   group_guid=None, start_date=None, event_type=None, limit=None, offset=None):
+                   group_guid=None, start_date=None, event_type=None, severity=None, limit=None, offset=None):
         """Get a list of events. Filter by criteria set by parameter values. The criteria types
         are logically ORed.
 
@@ -324,6 +324,7 @@ class Ampclient(object):
         :param group_guid: Filter by group guid
         :param start_date: Filter by start date
         :param event_type: Filter by event types
+        :param severity: Filter by severity type, default none, only used for function signature.
         :param limit: Limit number of results
         :param offset: Results from offset
         :return: Response in json format
@@ -339,7 +340,7 @@ class Ampclient(object):
 
         params = {"detection_sha256": detection_sha256, "application_sha256": application_sha256,
                   "connector_guid[]": connector_guid, "group_guid[]": group_guid, "start_date": start_date,
-                  "event_type[]": event_type, "limit": limit, "offset": offset }
+                  "event_type[]": event_type, "severity": severity,"limit": limit, "offset": offset }
         r_json = self._req(uri, params=params)
         return r_json
 
@@ -403,6 +404,11 @@ class Ampclient(object):
 
         """
         results_total = None
+        offset=None
+        filters = {}
+        filtered_item_count = 0
+        filter_limit = 0
+
         # Set query limit to max 1000 by default.
         limit_max_count = AMP_LIMIT_DEFAULT
 
@@ -413,6 +419,10 @@ class Ampclient(object):
             # Set limit to global override value.
             limit_max_count = self.query_limit
 
+        if "offset" in params and params["offset"] is not None:
+            # Set offset variable
+            offset = params.get('offset')
+
         if get_method.__name__ == "get_computer_trajectory":
             # Rest call get_computer_trajectory doesn't return a 'results' sub-dict.
             # If method is get_computer_trajectory get total in case limit is lower that total.
@@ -420,39 +430,97 @@ class Ampclient(object):
             results_total = len(rtn["data"]["events"])
 
         if limit_max_count < AMP_LIMIT_REST_MAX or get_method.__name__ == "get_computer_trajectory":
-                # Reset limit to query_limit if less than default limit.
-                # Limit defined for "get_computer_trajectory" set to default for results calculation.
-                params["limit"] = limit_max_count
+            # Reset limit to query_limit if less than default limit.
+            # Limit defined for "get_computer_trajectory" set to default for results calculation.
+            params["limit"] = limit_max_count
+
+        if "severity" in params and params["severity"] is not None:
+            # Update run environment if filtering by "severity"
+            filters.update({"severity": params.pop('severity', None)})
+            if "limit" in params and params["limit"] is not None:
+                filter_limit = params.pop('limit')
+            else:
+                filter_limit = limit_max_count
 
         if get_method.__name__ != "get_computer_trajectory":
-            rtn = get_method(**params)
+            # Get the inital result so we can get metadata for the overall get request.
+            rtn = self.filter_by(get_method(**params), filters)
 
         if "results" in rtn["metadata"]:
             # The 'get_computer_trajectory' Rest call doesn't return a 'results' sub-dict so assuming it returns all
             # results in that case.
             max_count = rtn["metadata"]["results"]["total"]
-            if limit_max_count < max_count:
+            if not filters and limit_max_count < max_count:
+                # If limit_max_count is lt max_count then reset max_count to the lower value.
                 max_count = limit_max_count
 
-            offset = items_per_page = rtn["metadata"]["results"]["items_per_page"]
-            if "offset" in params and params["offset"] is not None:
-                # If offset parameter set add to offset value
-                offset += int(params["offset"])
+            # Get cumulative item count.
             current_item_count = rtn["metadata"]["results"]["current_item_count"]
+
+            # Seed run_offset for subsequent requests if needed.
+            run_offset = items_per_page = rtn["metadata"]["results"]["items_per_page"]
+            if offset is not None:
+                # If offset parameter is set, add to offset calculated from metadata.
+                run_offset += offset
+
+            if filters:
+                # If we have a filter then set filter specific values.
+                filtered_item_count = rtn["metadata"]["results"]["filtered_item_count"]
+                if offset is not None:
+                    filter_limit += offset
+
             if not current_item_count < items_per_page:
-                while max_count > current_item_count:
+                while (filter_limit >= filtered_item_count and  max_count > current_item_count):
+
+                    remaining_count = max_count - current_item_count
+
+                    if not filters and not params["limit"] and remaining_count < AMP_LIMIT_REST_MAX:
+                        params["limit"] = remaining_count
+
                     if "offset" in params:
                         # Certain get methods don't have offset in their parameter signature
-                        params["offset"] = offset
-                    rtn_sub = get_method(**params)
+                        params["offset"] = run_offset
+
+                    # Re-run request and filter results with new offset set.
+                    rtn_sub = self.filter_by(get_method(**params), filters)
                     rtn["data"].extend(rtn_sub["data"])
                     rtn["metadata"] = rtn_sub["metadata"]
                     current_item_count += rtn["metadata"]["results"]["current_item_count"]
-                    offset += items_per_page
+                    if filters:
+                        filtered_item_count += rtn["metadata"]["results"]["filtered_item_count"]
+                    run_offset += items_per_page
 
         if results_total is not None:
             rtn["total"] = results_total
             # Return slice of rtn["data"]["events"] up to limit for "get_computer_trajectory"
             rtn["data"]["events"] = rtn["data"]["events"][:int(params["limit"])]
 
+        if filters:
+            # Return a slice of filtered rtn["data"] based on limit and offset values.
+            rtn["data"] = rtn["data"][offset:filter_limit]
+
         return rtn
+
+    def filter_by(self, rtn, filters):
+        """Filter returned results.
+
+        Filter results by result property value e.g. for "severity" = "High".
+
+        :param: rtn: Result from Cisco AMP.
+        :param: filters: Dict of properties to filter by .
+        :return Filtered result in json format.
+
+        """
+        if filters:
+            # Extract events based on filter(s)
+            d = [i for (k, v) in filters.items() for i in rtn["data"] if k in i and i[k] == v  ]
+            # Remove duplicate entries
+            data = [i for n, i in enumerate(d) if i not in d[n + 1:]]
+            rtn["data"] = data
+            if "filtered_item_count" not in rtn["metadata"]["results"]:
+                rtn["metadata"]["results"]["filtered_item_count"] = len(data)
+            else:
+                rtn["metadata"]["results"]["filtered_item_count"] += len(data)
+            return rtn
+        else:
+            return rtn
