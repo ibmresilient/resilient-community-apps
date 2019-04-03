@@ -39,3 +39,8 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
   - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
 
 ---
+
+## Documentation
+* See [ibm.biz/res-snow-docs](http://ibm.biz/res-snow-docs) for our latest documentation
+
+---
