@@ -1,6 +1,5 @@
 # IBM Resilient Integration for ServiceNow
 
-- [Documentation](#documentation)
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Requirements](#requirements)
