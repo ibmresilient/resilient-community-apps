@@ -19,34 +19,14 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 
 ## Requirements
 * ServiceNow Instance running >= Kingston release
-* The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance
+* The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the Incident Table in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
 * IBM Resilient >= `v31.0.0`
-* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed
+* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
-### fn_service_now:
-* Hosted on our public GitHub and Community App Exchange
-* You download, install and run it on your Resilient Integrations Server
-* The package includes *customizations* that are imported into your Resilient Appliance using the `resilient-circuits customize` command
-
-### IBM Resilient ServiceNow App:
-* This is new
-* Currently hosted on GitHub
-* Will be available on the ServiceNow App Store in the future
-* You download and install it on your ServiceNow instance
-
-Both components work in conjunction with each other and allow for a **bi-directional Integration** that gives you the ability to create Incidents in Resilient from ServiceNow Records and Records in ServiceNow from Resilient Incidents - and MUCH more...
-
-Follow our [Install Guide](./docs/install_guide) to get up and running. Then using our customization guides (links above), adapt the Integration to suit your Incident Response Workflow
-
-## Current Limitations:
-While we put our IBM Resilient ServiceNow App through the ServiceNow Certification process, this Integration has some current limitations:
-
-* The current ServiceNow App is **pre-certified** which really means that we have a ServiceNow App developed, but not hosted on the ServiceNow App Store.
-* In order to distribute the App, we host it on a Public GitHub Repository. 
-* To install the App the ServiceNow admin must get the App from GitHub. 
-* The limitations are:
-  * There is no 'clean' way to update the App once installed. 
-  * If the ServiceNow admin pulls in the latest version of the ServiceNow App from GitHub, the Integration will break as **all 'references' between ServiceNow Records and Resilient Incidents/Tasks will be deleted**. Once we have it 'certified' and on the ServiceNow App Store the update process will be more seamless and this will not be an issue.
-
+## Install
+* Follow our [Install Guide](./docs/install_guide) to get up and running. 
+* Out-of-the-box we meet a lot of use cases, however to adapt the Integration to suit your Incident Response Workflow follow our Customize guides:
+  - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
+  - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
