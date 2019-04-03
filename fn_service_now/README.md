@@ -25,7 +25,7 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 * IBM Resilient >= `v31.0.0`
 * An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_service_now >= v1.0.0` installed which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
-## Install
+## Install + Customize
 * Follow our [Install Guide](./docs/install_guide) to get up and running. 
 * Out-of-the-box we meet a lot of use cases, however to adapt the Integration to suit your Incident Response Workflow follow our Customize guides:
   - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
