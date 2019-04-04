@@ -130,10 +130,13 @@ class FeedComponent(ResilientComponent):
 
         max_inc_id, min_inc_id = self._populate_incidents(rest_client, type_info_index)
 
-        self._populate_others(rest_client,
-                              range(min_inc_id, max_inc_id),
-                              search_type_names,
-                              type_info_index)
+        rng = range(min_inc_id, max_inc_id)
+
+        if (len(rng) > 0):
+            self._populate_others(rest_client,
+                                  rng,
+                                  search_type_names,
+                                  type_info_index)
 
     def _populate_incidents(self, rest_client, type_info_index):
         min_inc_id = sys.maxsize
@@ -228,15 +231,14 @@ class FeedComponent(ResilientComponent):
 
     @staticmethod
     def _range_chunks(chunk_range, chunk_size):
-        if (isinstance(chunk_range, list) and len(chunk_range) > 0) or isinstance(chunk_range, range):
-            if isinstance(chunk_range, list):
-                start = chunk_range[0]-1
-                stop = chunk_range[-1]
-            else:
-                start = chunk_range.start - 1
-                stop = chunk_range.stop
+        if isinstance(chunk_range, list):
+            start = chunk_range[0]-1
+            stop = chunk_range[-1]
+        else:
+            start = chunk_range.start - 1
+            stop = chunk_range.stop
 
-            while start <= stop:
-                yield (start + 1, min(stop, start + chunk_size))
+        while start <= stop:
+            yield (start + 1, min(stop, start + chunk_size))
 
-                start += chunk_size
+            start += chunk_size
