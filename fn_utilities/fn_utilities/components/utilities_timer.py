@@ -2,6 +2,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 import time
+import datetime
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, get_workflow_status
@@ -42,13 +43,26 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             utilities_time = kwargs.get("utilities_time")  # text
+            utilities_epoch = kwargs.get("utilities_epoch")  # datetime picker
 
             log = logging.getLogger(__name__)
             log.info("utilities_time: %s", utilities_time)
+            log.info("utilities_epoch: %s", utilities_epoch)
 
-            # Parse the input time string and compute the total time to sleep
-            # and the workflow check interval in seconds.
-            total_time_in_seconds = get_sleep_time_in_seconds(utilities_time)
+            # Get max timer to sleep from app.config setting and convert to seconds.
+            max_timer = self.options.get("max_timer")
+            max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
+
+            # Compute the time to wait in seconds
+            if utilities_epoch != None:
+                total_time_in_seconds = get_sleep_time_from_epoch(utilities_epoch)
+            else:
+                total_time_in_seconds = get_sleep_time_in_seconds(utilities_time)
+
+            if total_time_in_seconds > max_timer_in_seconds:
+                raise ValueError('Requested sleep timer {}s is greater than max_timer {}s set in app.config'.format(total_time_in_seconds, max_timer_in_seconds))
+
+            # Compute the workflow check interval time based on the total time in seconds.
             wf_check_interval = compute_interval_time(total_time_in_seconds)
 
             # Get workflow instance ID
@@ -125,6 +139,22 @@ def get_sleep_time_in_seconds(time_string):
         raise ValueError("Invalid utilities_time string format: should end in 's' for seconds, 'm for minutes, 'h' for hours or 'd' for days")
 
     return time_in_seconds
+
+def get_sleep_time_from_epoch(end_epoch):
+    """
+    Given the epoch time to end the timer, compute the total number of seconds to sleep.
+    """
+    # Make sure timer end is not in the past.
+    now_utc = datetime.datetime.utcnow()
+    end_timer_utc = datetime.datetime.utcfromtimestamp(end_epoch / 1000)
+
+    if now_utc > end_timer_utc:
+        raise ValueError("Date and time for timer end is in the past.")
+
+    # Compute total time to sleep in seconds.
+    num_seconds = (end_timer_utc - now_utc).total_seconds()
+
+    return int(num_seconds)
 
 def compute_interval_time(time_in_seconds):
     """
