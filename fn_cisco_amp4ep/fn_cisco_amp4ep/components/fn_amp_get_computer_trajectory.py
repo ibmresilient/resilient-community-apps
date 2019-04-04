@@ -11,6 +11,7 @@
 import logging
 import json
 from datetime import datetime
+from sys import version_info
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
@@ -151,9 +152,12 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "total": total, "query_execution_time": query_execution_time,
                        "input_params": params}
-            yield StatusMessage(u"Returning 'computer trajectory' results for guid '{0}' and query '{1}'."
-                                .format(params["connector_guid"], unicode(params["q"]) ))
-
+            if version_info.major == 2:
+                yield StatusMessage(u"Returning 'computer trajectory' results for guid '{0}' and query '{1}'."
+                                    .format(params["connector_guid"], (params["q"]).encode('utf-8') ))
+            else:
+                yield StatusMessage(u"Returning 'computer trajectory' results for guid '{0}' and query '{1}'."
+                                    .format(params["connector_guid"], (params["q"]) ))
             log.debug(json.dumps(results))
 
             # Produce a FunctionResult with the results
