@@ -1,5 +1,6 @@
 """This module contains all of the SqlDialect implementations that we support."""
 
+import sys
 import sqlite3
 import pyodbc
 from six import string_types
@@ -292,10 +293,10 @@ class PostgreSQL96Dialect(ODBCDialectBase):
 
     def configure_connection(self, connection):
         connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-        try: # to set encoding on python 2  
+        if sys.version_info.major == 2: # to set encoding on python 2  
             connection.setencoding(str, encoding='utf-8')
-            connection.setencoding(unicode,encoding='utf-8')
-        except: # an issue and try encoding without specifying fromtype
+            connection.setencoding(unicode, encoding='utf-8')
+        else: # an issue and try encoding without specifying fromtype
             connection.setencoding(encoding='utf-8')
         
 
