@@ -1,5 +1,4 @@
 # Ansible Integration Function for IBM Resilient
-
 ## Table of Contents
   - [About This Package](#about-this-package)
   - [Prerequisites](#prerequisites)
@@ -102,7 +101,7 @@ The resilient package includes a utility to add all of the keystore-based values
 | Input Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ---- |
 | `ansible_playbook_name` | `String` | Yes | `"my_playbook" or "my_playbook.yml"` | Identifies target playbook to be run |
-| `ip_void_artifact_value` | `String` | No | `"host_names=192.168.1.4"` | Replaces Variables with acutal values in Playbool during runtime. In example here Function will assume that 'host_name' is the variable and used in target playbook and will  replace it with '192.168.1.4'. Be careful with any extra space and unwanted character(s) as it will cause failure in runtime.|
+| `ansible_parameters` | `String` | No | `"host_names=192.168.1.4"` | Replaces Variables with acutal values in Playbool during runtime. In example here Function will assume that 'host_name' is the variable and used in target playbook and will  replace it with '192.168.1.4'. Be careful with any extra space and unwanted character(s) as it will cause failure in runtime.|
 
  ![screenshot](./screenshots/2.png)
 ## Function Output:
