@@ -27,16 +27,23 @@ class FunctionComponent(ResilientComponent):
 
     @function("utilities_timer")
     def _utilities_timer_function(self, event, *args, **kwargs):
-        """This function implements a simple timer.  A workflow using this function will sleep for the
-        specified amount of time. The input string is of format “time value” concatenated with a
+        """
+        This function implements a simple timer.  A workflow using this function will sleep for the
+        specified amount of time. The function takes as input utilities_time or utilities_epoch as input.
+        The function periodically checks the status of the calling workflow and will end
+        function execution if the workflow has been terminated.
+
+        The utilities_time parameter is a string is of format “time value” concatenated with a
         “time unit” character, where character is:
         ‘s’ for seconds
         ‘m’ for minutes
         ‘h’ for hours
         ‘d’ for days
         For example: '30s' = 30 seconds; '40m' = 40 minutes;
-        The function periodically checks the status of the calling workflow and will end
-        function execution if the workflow has been terminated."""
+
+        The utilities_epoch parameter is an epoch time value that specifies the time the timer should
+        stop sleeping. The timer function computes the total sleep time needed.
+        """
         try:
             # Initialize results payload
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
