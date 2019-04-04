@@ -11,6 +11,7 @@ from ansible.module_utils._text import to_bytes
 from ansible.parsing.vault import VaultSecret
 import yaml
 import os
+import traceback
 
 
 NUM_OF_FORKS=5
@@ -77,14 +78,20 @@ def run_playbook(playbook_path, hosts_path, user_name, root_password, playbook_e
                 variable_manager=variable_manager,
                 loader=loader,options=options,passwords=passwords)
     
+    result = {}
     try:
         playbook.run()
-    except Exception:
-        raise ValueError("That didn't work, please check 3 important things: \n\t 1. Configuration in app.config file \n\t 2. Playbook variables provided in correct format without extra space \n\t 3. Playbook syntax.")
-    stats = playbook._tqm._stats
-    hosts = sorted(stats.processed.keys())
-    for h in hosts:
-        result = {h: stats.summarize(h)}
+        stats = playbook._tqm._stats
+        hosts = sorted(stats.processed.keys())
+        for h in hosts:
+            result = {h: stats.summarize(h)}
+    except Exception as e:
+        original_error = traceback.format_exc(e)
+        caution_text = "> That didn't work, please check 3 important things: \
+        \n\t > 1. Configuration in app.config file \n\t \
+        > 2. Playbook variables provided in correct format without extra space \
+        \n\t > 3. Playbook syntax."
+        raise ValueError(original_error + "\n\t" + caution_text)
     
     return result
 

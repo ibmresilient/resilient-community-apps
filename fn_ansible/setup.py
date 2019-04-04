@@ -14,7 +14,8 @@ setup(
     description="Simple agentless IT automation tool.",
     long_description="Automation scripts are written in YAML files called playbook, which are besically tasks and instructions. Those tasks can be performed on a remote system from resilient using this function.",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'ansible==2.7.9'
     ],
     packages=find_packages(),
     include_package_data=True,
