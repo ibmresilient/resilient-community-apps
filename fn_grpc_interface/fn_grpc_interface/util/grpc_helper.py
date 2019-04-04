@@ -20,20 +20,20 @@ class GrpcHelperClass(object):
     def __init__(self, logger_object):
         self.log_object = logger_object
 
-    def get_grpc_interface_module(self, interface_files=[], base_dir=None, files_dir=None):
+    def get_grpc_interface_module(self, interface_files=[], base_dir=None, package_name=None):
         """
         component that imports all the modules in the current workspace and returns the given imported modules objects.
         :param interface_files: List of all buffer pb2 files absolute path to import in the current work space
         :param base_dir:  interface pb2 files parent directory.
-        :param files_dir: interface pb2 files directory i.e same as package name.
+        :param package_name: interface pb2 files directory i.e same as package name.
         :return: returns imported interface pb2 files module objects on the successful execution, else returns None object.
         """
         if not isinstance(interface_files, list):
-            raise ValueError("This Parameter "'"interface_files"'" should be list data type")
+            raise ValueError("'interface_files' should be a Python List")
         if base_dir is None:
-            raise ValueError("The param base_dir should contain parents parent directory of gRPC interface files")
-        if files_dir is None:
-            raise ValueError("The param files_dir should points to parent directory of gRPC interface files")
+            raise ValueError("'base_dir' is not defined. 'base_dir' is the path to your interface_files directory")
+        if package_name is None:
+            raise ValueError("The name of the package should be the same as parent directory of gRPC interface files")
 
         if interface_files:
             abs_file_path_json = dict()
@@ -41,11 +41,11 @@ class GrpcHelperClass(object):
 
             # creating files abs path
             for file_name in interface_files:
-                abs_file_path = os.path.join(base_dir, files_dir, file_name)
+                abs_file_path = os.path.join(base_dir, package_name, file_name)
                 abs_file_path_json[file_name] = abs_file_path
 
             # Adding Module path into sys.path variable
-            interface_dir_path = os.path.join(base_dir, files_dir)
+            interface_dir_path = os.path.join(base_dir, package_name)
             if interface_dir_path not in sys.path:
                 sys.path.append(interface_dir_path)
 
@@ -74,8 +74,8 @@ class GrpcHelperClass(object):
 
             return interface_module
         else:
-            self.log_object.debug("No Interface file found, please specify the interface file")
-            return None
+            raise ValueError("No Interface file found, please specify the interface file")
+
 
     def get_grpc_class(self, grpc_module_list, class_name):
         """
@@ -109,16 +109,14 @@ class GrpcHelperClass(object):
         if stub_class is None:
             raise ValueError("stub class object should not be None type")
 
-        if auth_type.lower().strip() not in ['ssl', 'tls', 'oauth2'] and auth_type.lower().strip() == "none":
+        if auth_type not in ['ssl', 'tls', 'oauth2'] and auth_type is None:
             self.log_object.info("gRPC Channel Connection is not secure.")
             channel_object = grpc.insecure_channel(channel)
             stub_class_obj = stub_class(channel_object)
             return stub_class_obj, channel_object
-        elif auth_type.lower().strip().find('ssl') != -1 or auth_type.lower().strip().find('tls') != -1:
+        elif auth_type.find('ssl') != -1 or auth_type.find('tls') != -1:
             self.log_object.info("Channel Authentication is secure : {0}".format(auth_type))
             if certificate_path is None:
-                raise ValueError("Please specify the valid certificate path")
-            if certificate_path.lower() == 'none':
                 raise ValueError("Please specify the valid certificate path")
             with open(certificate_path, 'rb') as certificate:
                 channel_cred = grpc.ssl_channel_credentials(root_certificates=certificate.read())

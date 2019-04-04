@@ -79,6 +79,16 @@ class FunctionComponent(ResilientComponent):
                     _grpc_secure_connection = config_file_data[1]
                     _grpc_communication_type = config_file_data[0]
                     _grpc_certificate_path = config_file_data[2]
+
+                    # Converting to correct python type
+                    if _grpc_certificate_path.lower().strip() == 'none':
+                        _grpc_certificate_path = None
+
+                    if _grpc_secure_connection.lower().strip() == 'none':
+                        _grpc_secure_connection = None
+                    else:
+                        _grpc_secure_connection = _grpc_secure_connection.lower().strip()
+
                 except Exception:
                     raise ValueError("""Failed to parse the configurations for '{0}' in the app.config file. Ensure it is in the correct CSV format. e.g. {0}=unary,None,None""".format(_grpc_package_name))
 
