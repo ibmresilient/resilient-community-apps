@@ -228,9 +228,14 @@ class FeedComponent(ResilientComponent):
 
     @staticmethod
     def _range_chunks(chunk_range, chunk_size):
-        start = chunk_range.start - 1
+        if isinstance(chunk_range, list):
+            start = chunk_range[0]-1
+            stop = chunk_range[-1]
+        else:
+            start = chunk_range.start - 1
+            stop = chunk_range.stop
 
-        while start <= chunk_range.stop:
-            yield (start + 1, min(chunk_range.stop, start + chunk_size))
+        while start <= stop:
+            yield (start + 1, min(stop, start + chunk_size))
 
             start += chunk_size
