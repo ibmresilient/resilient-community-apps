@@ -21,14 +21,14 @@ all_fields = [
 ]
 
 
-flat_payload = OrderedDict({ "id":  10,
-                             "inc_id": 2301,
-                             "test_text": u"this is a text field",
-                             "test_int": 1000,
-                             "test_date": 1550073347448,
-                             "test_datetime": 1550073347448,
-                             "test_bool": True
-                             })
+flat_payload = OrderedDict()
+flat_payload["id"] =  101
+flat_payload["inc_id"] = 2301
+flat_payload["test_text"] = u"this is a text field"
+flat_payload["test_int"] = 1000
+flat_payload["test_date"] = 1550073347448
+flat_payload["test_datetime"] = 1550073347448
+flat_payload["test_bool"] = True
 
 
 class SQLCommon():
@@ -57,7 +57,7 @@ class SQLCommon():
             # sqlite returned the original dictionary
             if isinstance(parameters, list):
                 payload_keys = [key for key in payload.values()]
-                for ndx in range(len(flat_payload)):
+                for ndx in range(len(payload)):
                     assert parameters[ndx] == payload_keys[ndx]
             else:
                 for key in payload.keys():
@@ -97,7 +97,10 @@ class SQLCommon():
 
                 for col in exected_col_types.keys():
                     print(col, table_cols.get(col, ''), exected_col_types[col])
-                    assert table_cols.get(col, '').startswith(exected_col_types[col])
+                    if col in ('id', 'inc_id'):
+                        assert table_cols.get(col, '').startswith('int')
+                    else:
+                        assert table_cols.get(col, '').startswith(exected_col_types[col])
             finally:
                 cursor.close()
         finally:

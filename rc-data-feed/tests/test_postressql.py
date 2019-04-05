@@ -1,8 +1,9 @@
 import logging
 import datetime
 import pytest
+import sys
 
-from lib.test_sql_common import SQLCommon
+from .lib.test_sql_common import SQLCommon
 
 LOG = logging.getLogger(__name__)
 
@@ -22,14 +23,18 @@ app_config = {
 }
 
 
-result_payload = {  "id":  10,
+result_payload = {  "id":  101,
                     "inc_id": 2301,
                     "test_text": "this is a text field",
                     "test_int": 1000,
                     "test_date": datetime.date(2019, 2, 13),
-                    "test_datetime": datetime.datetime(2019, 2, 13, 15, 55, 47, 448000),
                     "test_bool": "1"
                     }
+
+if sys.version_info.major == 2:
+    result_payload['test_datetime'] = datetime.datetime(2019, 2, 13, 15, 55, 47)
+else:
+    result_payload['test_datetime'] = datetime.datetime(2019, 2, 13, 15, 55, 47, 448000)
 
 @pytest.mark.order1
 def test_get_parameters():

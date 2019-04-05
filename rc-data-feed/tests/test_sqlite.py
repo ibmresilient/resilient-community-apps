@@ -1,8 +1,9 @@
 import logging
 import datetime
 import pytest
+import sys
 
-from lib.test_sql_common import SQLCommon
+from .lib.test_sql_common import SQLCommon
 from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
 
 LOG = logging.getLogger(__name__)
@@ -26,14 +27,20 @@ app_config = {
     "file_name": "/tmp/test.sqlite3"
 }
 
-result_payload = {  "id":  10,
+result_payload = {  "id":  101,
                     "inc_id": 2301,
                     "test_text": "this is a text field",
                     "test_int": 1000,
-                    "test_date": "2019-02-13T15:55:47.448000",
-                    "test_datetime": "2019-02-13T15:55:47.448000",
                     "test_bool": 1
                     }
+
+if sys.version_info.major == 2:
+    result_payload['test_date']     = "2019-02-13T15:55:47"
+    result_payload['test_datetime'] = "2019-02-13T15:55:47"
+else:
+    result_payload['test_date']     = "2019-02-13T15:55:47"
+    result_payload['test_datetime'] = "2019-02-13T15:55:47"
+
 
 @pytest.mark.order1
 def test_get_parameters():

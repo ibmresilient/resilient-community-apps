@@ -174,6 +174,8 @@ class ODBCDialectBase(SqlDialect):  # pylint: disable=abstract-method
         return bind_parameters
 
 class SqliteDialect(SqlDialect):
+    RESERVE_LIST = []
+
     """
     Dialect for SQLite database...note only use this if you are using the
     sqlite3 library directly.  If using SQLite with ODBC, you'll need a different
