@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
 
             # Compute the time to wait in seconds
-            if utilities_epoch != None:
+            if utilities_epoch is not None:
                 total_time_in_seconds = get_sleep_time_from_epoch(utilities_epoch)
             else:
                 total_time_in_seconds = get_sleep_time_in_seconds(utilities_time)
