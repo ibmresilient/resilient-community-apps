@@ -419,9 +419,7 @@ class Ampclient(object):
             # Set limit to global override value.
             limit_max_count = self.query_limit
 
-        if "offset" in params and params["offset"] is not None:
-            # Set offset variable
-            offset = params.get('offset')
+        offset = params.get('offset', None)
 
         if get_method.__name__ == "get_computer_trajectory":
             # Rest call get_computer_trajectory doesn't return a 'results' sub-dict.
@@ -478,7 +476,8 @@ class Ampclient(object):
                         params["limit"] = remaining_count
 
                     if "offset" in params:
-                        # Certain get methods don't have offset in their parameter signature
+                        # Certain get methods don't have offset in their parameter signature.
+                        run_offset += items_per_page
                         params["offset"] = run_offset
 
                     # Re-run request and filter results with new offset set.
@@ -488,7 +487,6 @@ class Ampclient(object):
                     current_item_count += rtn["metadata"]["results"]["current_item_count"]
                     if filters:
                         filtered_item_count += rtn["metadata"]["results"]["filtered_item_count"]
-                    run_offset += items_per_page
 
         if results_total is not None:
             rtn["total"] = results_total
@@ -514,13 +512,12 @@ class Ampclient(object):
         if filters:
             # Extract events based on filter(s)
             d = [i for (k, v) in filters.items() for i in rtn["data"] if k in i and i[k] == v  ]
-            # Remove duplicate entries
-            data = [i for n, i in enumerate(d) if i not in d[n + 1:]]
-            rtn["data"] = data
+            # Remove duplicate entries and update rtn.
+            rtn["data"] = [i for n, i in enumerate(d) if i not in d[n + 1:]]
             if "filtered_item_count" not in rtn["metadata"]["results"]:
-                rtn["metadata"]["results"]["filtered_item_count"] = len(data)
+                rtn["metadata"]["results"]["filtered_item_count"] = len(rtn["data"])
             else:
-                rtn["metadata"]["results"]["filtered_item_count"] += len(data)
+                rtn["metadata"]["results"]["filtered_item_count"] += len(rtn["data"])
             return rtn
         else:
             return rtn

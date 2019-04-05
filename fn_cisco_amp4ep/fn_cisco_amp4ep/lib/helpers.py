@@ -129,9 +129,8 @@ def raise_value_error(v, k, msg=None):
     if msg is None:
         msg = "Invalid value"
     if version_info.major == 2:
-        raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v.encode('utf-8'), k, msg))
-    else:
-        raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v, k, msg))
+        v = v.encode('utf-8')
+    raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v, k, msg))
 
 def is_none(param):
     """Test if a parameter is None value or string 'None'.
