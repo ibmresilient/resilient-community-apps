@@ -11,6 +11,7 @@
 import logging
 import json
 from datetime import datetime
+from sys import version_info
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
@@ -116,6 +117,17 @@ class FunctionComponent(ResilientComponent):
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+
+        except ValueError as ve:
+            # Trap ValueErrors so we can send unicode ValueErrors back to safely to Resilient
+            # as a StatusMessage.
+            if version_info.major == 2:
+                ve_msg  = ve.message
+            else:
+                ve_msg = ve.args[0]
+            yield StatusMessage("{0}".format(ve_msg))
+            raise ValueError("A ValueError exception was raised by function fn_amp_get_computer")
+
         except Exception:
             log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
             yield FunctionError()
