@@ -126,6 +126,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 ve_msg = ve.args[0]
             yield StatusMessage("{0}".format(ve_msg))
+            log.exception("ValueError in Resilient Function for Cisco AMP for endpoints.".format(ve_msg))
             raise ValueError("A ValueError exception was raised by function fn_amp_get_computer")
 
         except Exception:
