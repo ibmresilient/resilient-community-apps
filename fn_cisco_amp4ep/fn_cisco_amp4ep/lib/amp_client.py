@@ -152,6 +152,12 @@ class Ampclient(object):
                     LOG.error("Got '409' error, possible attempt to redo a successfull update operation.")
                     # Allow error to bubble up to the Resilient function.
                     break
+                elif e.response.status_code == 404 and method == "GET" and \
+                        re.match("^https://.*/v1/computers/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", url):
+                    # We are probably trying to get a computer guid which doesn't exist here.
+                    LOG.error("Got '404' error, possible attempt get a computer guid which doesn't exist.")
+                    # Allow error to bubble up to the Resilient function.
+                    break
                 else:
                     raise
 
