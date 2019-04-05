@@ -56,6 +56,9 @@ class FunctionComponent(ResilientComponent):
             log.info("utilities_time: %s", utilities_time)
             log.info("utilities_epoch: %s", utilities_epoch)
 
+            if utilities_time is not None and utilities_epoch is not None:
+                raise ValueError("Utilities timer function takes one parameter as input: utilities_time OR utilities_epoch.")
+
             # Get max timer to sleep from app.config setting and convert to seconds.
             max_timer = self.options.get("max_timer")
             max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
