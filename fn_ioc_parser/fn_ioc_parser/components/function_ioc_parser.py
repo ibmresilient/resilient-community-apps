@@ -1,10 +1,10 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_ioc_parser.util.selftest as selftest
 from iocparser import IOCParser
 from fn_ioc_parser.util.ioc_parser_helper import *
 
@@ -16,7 +16,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_ioc_parser", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -51,8 +50,6 @@ class FunctionComponent(ResilientComponent):
             # Initialising the IOC Parser Helper class
             IOCHelp_obj = IOCParserHelper()
 
-            function_result = dict()  # Function result data
-
             if ioc_parser_artifact_id:
                 # A block to parse and download the data from Artifact
                 if ioc_parser_artifact_type.lower().strip() == 'string':
@@ -63,7 +60,6 @@ class FunctionComponent(ResilientComponent):
 
                     # Getting the Meta data from the Resilient for an artifact
                     metadata_data = resilient_client.get(metadata_uri)
-                    print("################ATTACHMENT DATA###################\n",metadata_data)
                     if metadata_data.get('attachment'):
 
                         # Getting the file content from Resilient system
@@ -71,6 +67,7 @@ class FunctionComponent(ResilientComponent):
 
                         attachment_file_name = metadata_data.get('attachment').get('name')
                         ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
+                        print(ioc_parser_data)
                     else:
                         ioc_parser_data = metadata_data.get('description')
             elif ioc_parser_attachment_id:
@@ -83,31 +80,24 @@ class FunctionComponent(ResilientComponent):
 
                 # Getting the Meta data from the Resilient for an artifact
                 metadata_data = resilient_client.get(metadata_uri)
-                print("################ATTACHMENT DATA###################\n", metadata_data)
 
                 # Getting the file content from Resilient system
                 attachment_data = resilient_client.get_content(data_uri)
 
                 attachment_file_name = metadata_data.get('name')
                 ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
+                print(ioc_parser_data)
             else:
                 raise FunctionError("IOC Parser can be called on artifacts or attachments")
 
             if not ioc_parser_data:
                 raise ValueError("These {0} file types are not supported for IOC Parsing,Please use string based files.".format(attachment_file_name))
             else:
-                print("--------------------------->DATA CONTENT-----------------------------------\n", ioc_parser_data)
                 textobj = IOCParser(ioc_parser_data)
                 ioc_results = textobj.parse()
-                for ioc_res_obj in ioc_results:
-                    print("{}------------------->{}".format(ioc_res_obj.kind, ioc_res_obj.value))
-                    if not function_result.get(ioc_res_obj.kind):
-                        function_result[ioc_res_obj.kind] = []
-                        function_result[ioc_res_obj.kind].append(ioc_res_obj.value)
-                    else:
-                        function_result[ioc_res_obj.kind].append(ioc_res_obj.value)
+                function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
-            log.info("Function Result : {0}".format(function_result))
+            log.debug("Function Result : {0}".format(function_result))
             results = {
                 "value": function_result
             }

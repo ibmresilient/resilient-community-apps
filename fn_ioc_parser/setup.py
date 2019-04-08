@@ -18,7 +18,8 @@ setup(
         'iocparser>=1.0.14',
         'resilient-lib>=32.0.126',
         'pdfminer.six >=20181108',
-        'python-docx>=0.8.10'
+        'python-docx>=0.8.10',
+        'xlrd>=1.2.0'
     ],
     packages=find_packages(),
     include_package_data=True,

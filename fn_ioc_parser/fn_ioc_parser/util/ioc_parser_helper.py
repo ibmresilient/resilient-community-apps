@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 import os
 import tempfile
 from docx import Document
@@ -6,7 +7,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-
+import xlrd
 
 
 class IOCParserHelper(object):
@@ -31,6 +32,11 @@ class IOCParserHelper(object):
             Converting .docx file data to plain text format
             """
             file_string_data = IOCParserHelper.extract_text_from_docx(file_data_bytes)
+        elif filename.find('.xls') != -1 or filename.find('.xlsx') != -1:
+            """
+            Converting .xls/.xlsx file data to plain text format
+            """
+            file_string_data = IOCParserHelper.extract_text_from_xls_xlsx(file_data_bytes)
         elif filename.split('.')[-1].strip() in ['doc', 'odt', 'ott', 'dot']:
             file_string_data = None
         else:
@@ -40,6 +46,7 @@ class IOCParserHelper(object):
             file_string_data = str(file_string_data)
 
         return file_string_data
+
     @classmethod
     def extract_text_from_pdf(cls, attachment_input):
         """
@@ -56,9 +63,8 @@ class IOCParserHelper(object):
 
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
             try:
-                # Write and close tempfile
+                # Write and close temp file
                 temp_pdf_file.write(attachment_input)
-                print(temp_pdf_file.name)
 
                 # Reading the Data from Created Temp File
                 for page in PDFPage.get_pages(temp_pdf_file, caching=True, check_extractable=True):
@@ -82,7 +88,7 @@ class IOCParserHelper(object):
         extracted_input = u""
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_doc_file:
             try:
-                # Write and close tempfile
+                # Write and close temp file
                 temp_doc_file.write(attachment_input)
                 read_doc = Document(temp_doc_file)
                 for paragraph in read_doc.paragraphs:
@@ -91,3 +97,56 @@ class IOCParserHelper(object):
                 os.unlink(temp_doc_file.name)
         return extracted_input
 
+    @classmethod
+    def extract_text_from_xls_xlsx(cls, attachment_input):
+        """
+        Wrapper to convert bytes data in into .xls/.xlsx file and extracting the text data from .xls/.xlsx file
+        :param attachment_input:
+        :return: Text Data
+        """
+        extracted_input = ""
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_doc_file:
+            try:
+                # Write and close temp file
+                temp_doc_file.write(attachment_input)
+                workbook_object = xlrd.open_workbook(temp_doc_file.name)
+                total_sheets = workbook_object.nsheets
+                for sheet_index in range(0, total_sheets):
+                    each_sheet_obj = workbook_object.sheet_by_index(sheet_index)
+                    total_rows_each_sheet = each_sheet_obj.nrows
+                    for row_no in range(0, total_rows_each_sheet):
+                        row_data_list = each_sheet_obj.row_values(row_no)
+                        for data in row_data_list:
+                            extracted_input += str(data) + " "
+            finally:
+                os.unlink(temp_doc_file.name)
+        return extracted_input
+
+    def _correct_ioc_value(self, kind, value):
+        _formatted_value = ''
+        if kind == 'uri':
+            if value.find('https://') != -1 or value.find('http://') != -1:
+                _formatted_value = value
+            else:
+                _formatted_value = "{0}{1}".format('https://', value)
+        else:
+            _formatted_value = value
+        return _formatted_value
+
+    def correct_iocs_format(self, ioc_parser_obj_list):
+        """
+        A wrapper to remove/correct invalid ioc's generated from IOC parser compatible to resilient artifacts
+        :param ioc_parser_obj_list:  IOC Parser Library result object List
+        :return:a python dict of result data
+        """
+        kind_map = {'uri': 'URL', 'IP': 'IP Address', 'md5': 'Malware MD5 Hash', 'sha1': 'Malware SHA-1 Hash',
+                    'sha256': 'Malware SHA-256 Hash', 'CVE': 'Threat CVE ID', 'email': 'Email Body',
+                    'filename': 'File Name'}
+        temp_result_dict = dict()
+        for ioc_res_obj in ioc_parser_obj_list:
+            if not temp_result_dict.get(kind_map.get(ioc_res_obj.kind)):
+                temp_result_dict[kind_map.get(ioc_res_obj.kind)] = []
+
+            temp_result_dict[kind_map.get(ioc_res_obj.kind)].append(
+                self._correct_ioc_value(ioc_res_obj.kind, ioc_res_obj.value))
+        return temp_result_dict
