@@ -8,6 +8,7 @@
 from __future__ import print_function
 import logging
 import re
+from sys import version_info
 
 try:
     from urllib.parse import urlparse
@@ -16,10 +17,6 @@ except:
 
 LOG = logging.getLogger(__name__)
 IP_PATTERN = re.compile(r"^(\d{1,3}\.){3}\d{1,3}$")
-DOMAIN_REGEX = "((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}((\.)(xn--)?" \
-               "([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,}))*"
-# in hostnames
-DOMAIN_PATTERN = re.compile(r"^\b{}\b$".format(DOMAIN_REGEX), re.IGNORECASE)
 UUID_PATTERN = re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
 CLI_ID_PATTERN = re.compile(r"^[a-fA-F0-9]{20}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
@@ -71,19 +68,6 @@ def validate_url(url):
     except:
         return False
 
-def validate_domain_name(domain_or_hostname):
-    """"Validate domain string(s) are in a valid format.
-
-    :param domain_or_hostname: Domain or hostname parameter value
-    :return : boolean
-
-     """
-
-    for d in re.split('\s+|,', domain_or_hostname):
-        if not DOMAIN_PATTERN.match(d):
-            return False
-    return True
-
 def validate_is_int(val):
     """"Validate value is in a valid int format.
 
@@ -123,24 +107,30 @@ def validate_params(params):
     # Now do some validation on input parameters.
     for (k, v) in params.copy().items():
         if re.match("^(limit|offset|start_date)$", k) and v is not None and not type(v) == int:
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^conn_guid|group_guid|file_list_guid$", k) and v is not None and not UUID_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^(internal_ip|external_ip)$", k) and v is not None and not IP_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
-        if re.match("^hostname$", k) and v is not None  and not validate_domain_name(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^detection_sha256|application_sha256|file_sha256$", k) and v is not None and not SHA256_PATTERN.match(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^event_type$", k) and v is not None and not validate_is_event_type(v):
-            raise ValueError("Invalid value '{0}' for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k)
         if re.match("^q|scd_name$", k) and v is not None and v == '':
-            raise ValueError("Invalid empty value '{0}' specified for function parameter '{1}'.".format(v, k))
+            raise_value_error(v, k, "Invalid or empty value")
+
 
     # If any entry has "None" string change to None value.
     for k, v in params.items():
         if type(v) == str and v.lower() == 'none':
             params[k] = None
+
+def raise_value_error(v, k, msg=None):
+    if msg is None:
+        msg = "Invalid value"
+    if version_info.major == 2:
+        v = v.encode('utf-8')
+    raise ValueError("{2} '{0}' for function parameter '{1}'.".format(v, k, msg))
 
 def is_none(param):
     """Test if a parameter is None value or string 'None'.

@@ -143,6 +143,7 @@ class FunctionComponent(ResilientComponent):
             amp_group_guid = kwargs.get("amp_group_guid")  # text
             amp_start_date = kwargs.get("amp_start_date")  # datetimepicker
             amp_event_type = kwargs.get("amp_event_type")  # text
+            amp_severity = self.get_select_param(kwargs.get("amp_severity"))  # select, values: "High","Medium","Low"
             amp_limit = kwargs.get("amp_limit")  # number
             amp_offset = kwargs.get("amp_offset")  # number
 
@@ -153,6 +154,7 @@ class FunctionComponent(ResilientComponent):
             log.info("amp_group_guid: %s", amp_group_guid)
             log.info("amp_start_date: %s", amp_start_date)
             log.info("amp_event_type: %s", amp_event_type)
+            log.info("amp_severity: %s", amp_severity)
             log.info("amp_limit: %s", amp_limit)
             log.info("amp_offset: %s", amp_offset)
 
@@ -160,7 +162,7 @@ class FunctionComponent(ResilientComponent):
 
             params = {"detection_sha256": amp_detection_sha256, "application_sha256": amp_application_sha256,
                       "connector_guid": amp_conn_guid, "group_guid": amp_group_guid, "start_date": amp_start_date,
-                      "event_type": amp_event_type, "limit": amp_limit, "offset": amp_offset}
+                      "event_type": amp_event_type, "severity": amp_severity, "limit": amp_limit, "offset": amp_offset}
 
             validate_params(params)
 

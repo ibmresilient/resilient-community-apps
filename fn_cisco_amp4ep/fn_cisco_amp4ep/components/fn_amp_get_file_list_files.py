@@ -85,7 +85,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_amp_get_file_list_files")
     def _fn_amp_get_file_list_files_function(self, event, *args, **kwargs):
-        """Function: Returns a list of items for a particular file_list. You need to provide file_list_guid to retrieve these items."""
+        """Function: Returns a list of items for a particular file_list. You need to provide file_list_guid
+        to retrieve these items."""
         try:
             # Get the function parameters:
             amp_file_list_guid = kwargs.get("amp_file_list_guid")  # text
@@ -115,7 +116,7 @@ class FunctionComponent(ResilientComponent):
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
-            yield StatusMessage("Returning 'file list files' results for guid '{}'.".format(params["file_list_guid"]))
+            yield StatusMessage("Returning 'file list files' results for file list guid '{}'.".format(params["file_list_guid"]))
 
             log.debug(json.dumps(results))
 
