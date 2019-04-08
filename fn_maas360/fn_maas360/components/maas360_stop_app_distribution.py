@@ -42,16 +42,22 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
                              'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
                              'maas360_password', 'maas360_stop_app_distribution_url'], self.options)
-            validate_fields(['maas360_device_id', 'maas360_app_id', 'maas360_app_type'], kwargs)
+            validate_fields(['maas360_app_id', 'maas360_app_type', 'maas360_target_devices'], kwargs)
 
             # Get the function parameters:
             app_type = self.get_select_param(kwargs.get("maas360_app_type"))  # select, values: "iOS Enterprise Application", "iOS App Store Application", "Android Enterprise Application", "Android Market Application"
             installed_app_id = kwargs.get("maas360_app_id")  # text
+            target_devices = self.get_select_param(kwargs.get("maas360_target_devices"))  # select, values: "All Devices", "Device Group", "Specific Device"
             device_id = kwargs.get("maas360_device_id")  # text
+            device_group_id = kwargs.get("maas360_device_group_id")  # text
 
             LOG.info("maas360_app_type: %s", app_type)
             LOG.info("maas360_app_id: %s", installed_app_id)
+            LOG.info("maas360_target_devices: %s", target_devices)
             LOG.info("maas360_device_id: %s", device_id)
+            LOG.info("maas360_device_group_id: %s", device_group_id)
+
+            # TODO: add validation for device id/ group device id
 
             # Read configuration settings:
             host_url = self.options["maas360_host_url"]
