@@ -1,0 +1,3 @@
+include README.md
+include fn_cloud_foundry/util/*
+include fn_cloud_foundry/LICENSE

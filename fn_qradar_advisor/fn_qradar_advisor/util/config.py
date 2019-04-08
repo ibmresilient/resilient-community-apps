@@ -14,5 +14,8 @@ qradar_host=myhost
 qradar_advisor_token=
 qradar_advisor_app_id=
 verify_cert=
+# Cyber Adversary Framwork Mapping Application
+qradar_cafm_token=
+qradar_cafm_app_id=
 """
     return config_data

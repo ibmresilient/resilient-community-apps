@@ -151,7 +151,7 @@ def test_qradar_client(mocked_session_post,
 
 
 @patch("fn_qradar_integration.util.SearchWaitCommand.SearchWaitCommand.perform_search")
-def test_ariel_search(mocked_perform_search):
+def test_ariel_search_more(mocked_perform_search):
     qradar_client = qradar_utils.QRadarClient(host,
                                               username=username,
                                               password=password,
@@ -160,6 +160,7 @@ def test_ariel_search(mocked_perform_search):
     query_string = "SELECT * FROM events"
     range_start = 1
     range_end = 10
+    time_out = 1000
     ret_events = {
                    "events":[
                             {"starttime":"12345","category":"cat1"},
@@ -167,7 +168,7 @@ def test_ariel_search(mocked_perform_search):
                             ]
                   }
     mocked_perform_search.return_value = ret_events
-    ret = qradar_client.ariel_search(query_string, range_start, range_end)
+    ret = qradar_client.ariel_search(query_string, range_start, range_end, time_out)
 
 
     assert ret == ret_events
@@ -186,6 +187,10 @@ def test_ariel_search(mocked_session_post,
     search_cmd = qradar_utils.ArielSearch(timeout, poll)
     assert search_cmd.search_timeout == timeout
     assert search_cmd.polling_period == poll
+
+    timeout = 100
+    search_cmd.set_timeout(timeout)
+    assert search_cmd.search_timeout == timeout
 
     search_cmd.set_range_start(range_start)
     search_cmd.set_range_end(range_end)
@@ -247,3 +252,80 @@ def test_ariel_search(mocked_session_post,
         assert True
 
 
+@patch("fn_qradar_integration.util.qradar_utils.QRadarClient.get_all_ref_set")
+@patch("fn_qradar_integration.util.qradar_utils.QRadarClient.search_ref_set")
+def test_find_all_ref_set_contains(mocked_search_ref_set, mocked_get_all_ref_set):
+
+    qradar_client = qradar_utils.QRadarClient(host,
+                                              username=username,
+                                              password=password,
+                                              token=None,
+                                              cafile=cafile)
+
+    all_sets = [
+        {
+            "timeout_type": "FIRST_SEEN",
+            "name": "Reference Set 1",
+            "element_type": "IP"
+        },
+        {
+            "timeout_type": "FIRST_SEEN",
+            "name": "Reference Set 2",
+            "element_type": "Hash-512"
+        }
+    ]
+
+    mocked_get_all_ref_set.return_value = all_sets
+
+    ret1 = {
+        "found": "False",
+        "content": None
+    }
+    content = {
+        "item_name": "Item1"
+    }
+    ret2 = {
+        "found": "True",
+        "content": content
+    }
+
+    mocked_search_ref_set.side_effect=[ret1, ret2]
+
+    ret = qradar_client.find_all_ref_set_contains("Item1")
+
+    assert len(ret) == 1
+    assert ret[0] == content
+
+@patch("requests.Session.get")
+def test_get_ref_set(mocked_session_get):
+    qradar_client = qradar_utils.QRadarClient(host,
+                                              username=username,
+                                              password=password,
+                                              token=None,
+                                              cafile=cafile)
+
+    all_sets = [
+        {
+            "timeout_type": "FIRST_SEEN",
+            "name": "Reference Set 1",
+            "element_type": "IP"
+        },
+        {
+            "timeout_type": "FIRST_SEEN",
+            "name": "Reference Set 2",
+            "element_type": "Hash-512"
+        }
+    ]
+    mocked_session_get.return_value = _generateResponse(all_sets, 200)
+
+    ret = qradar_client.get_all_ref_set()
+
+    assert len(ret) == 2
+
+    mocked_session_get.side_effect = Exception("Error!")
+
+    try:
+        ret = qradar_client.get_all_ref_set()
+        assert False
+    except qradar_utils.RequestError:
+        assert True

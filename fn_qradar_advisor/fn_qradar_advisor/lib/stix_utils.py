@@ -155,8 +155,8 @@ def get_observable(stix_obj, log):
     if stix_obj[u"type"] == "relationship":
         return None
 
-    res_obj[u"toxicity"] = stix_obj[IBM_TOXICITY]
-    res_obj[u"relevance"] = stix_obj[IBM_RELEVANCE]
+    res_obj[u"toxicity"] = stix_obj.get(IBM_TOXICITY, "")
+    res_obj[u"relevance"] = stix_obj.get(IBM_RELEVANCE, "")
     res_obj[u"description"] = get_observable_description(stix_obj, log)
     res_obj[u"type"] = get_observable_type(stix_obj, log)
 

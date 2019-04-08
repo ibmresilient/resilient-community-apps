@@ -1,0 +1,4 @@
+include README.md
+include fn_elasticsearch/util/*
+include fn_elasticsearch/LICENSE
+include fn_elasticsearch/doc/*

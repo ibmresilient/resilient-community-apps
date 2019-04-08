@@ -10,17 +10,14 @@ if are hits on any of the BigFix endpoints"""
 # Destination: a Queue named "bigfix_artifact".
 # Manual Action: Execute a REST query against a BigFix server return hits.
 
-"""Function implementation"""
-
 import logging
+import datetime
+import json
+
 from fn_bigfix.util.helpers import validate_opts, validate_params, create_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
 from fn_bigfix.lib.bigfix_helpers import get_hits
-import datetime
-import json
-
-LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_artifact' of package fn_bigfix.
@@ -98,22 +95,28 @@ class FunctionComponent(ResilientComponent):
                                 .format(params["artifact_id"], params["artifact_value"] ))
             bigfix_client = BigFixClient(self.options)
 
-            if params["incident_plan_status"] != 'C':
-                # If incident isn't closed
-                if params["artifact_type"] == "IP Address":
-                    artifact_data = bigfix_client.get_bf_computer_by_ip(bigfix_artifact_value)
-                elif params["artifact_type"] == "File Path":
-                    artifact_data = bigfix_client.get_bf_computer_by_file_path(bigfix_artifact_value)
-                elif params["artifact_type"] == "Process Name":
-                    artifact_data = bigfix_client.get_bf_computer_by_process_name(bigfix_artifact_value)
-                elif params["artifact_type"] == "Service":
-                    artifact_data = bigfix_client.get_bf_computer_by_service_name(bigfix_artifact_value)
-                elif params["artifact_type"] == "Registry Key":
-                    artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(bigfix_artifact_value,
-                                                                                           params["artifact_properties_name"],
-                                                                                           params["artifact_properties_value"])
-                else:
-                    raise ValueError("Unsupported artifact type {}.".format(bigfix_artifact_type))
+            try:
+                artifact_data = None
+                if params["incident_plan_status"] != 'C':
+                    # If incident isn't closed
+                    if params["artifact_type"] == "IP Address":
+                        artifact_data = bigfix_client.get_bf_computer_by_ip(bigfix_artifact_value)
+                    elif params["artifact_type"] == "File Path":
+                        artifact_data = bigfix_client.get_bf_computer_by_file_path(bigfix_artifact_value)
+                    elif params["artifact_type"] == "Process Name":
+                        artifact_data = bigfix_client.get_bf_computer_by_process_name(bigfix_artifact_value)
+                    elif params["artifact_type"] == "Service":
+                        artifact_data = bigfix_client.get_bf_computer_by_service_name(bigfix_artifact_value)
+                    elif params["artifact_type"] == "Registry Key":
+                        artifact_data = bigfix_client.get_bf_computer_by_registry_key_name_value(bigfix_artifact_value,
+                                                                                               params["artifact_properties_name"],
+                                                                                               params["artifact_properties_value"])
+                    else:
+                        raise ValueError("Unsupported artifact type {}.".format(bigfix_artifact_type))
+            except Exception as e:
+                log.exception("Failed to query BigFix.")
+                yield StatusMessage("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
+                raise Exception("Failed with exception '{}' while trying to query BigFix.".format(type(e).__name__))
 
             if bigfix_incident_plan_status == 'C':
                 yield StatusMessage("Ignoring action, incident {} is closed".format(params["incident_id"]))

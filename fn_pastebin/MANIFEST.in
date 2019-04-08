@@ -1,0 +1,3 @@
+include README.md
+include fn_pastebin/util/*
+include fn_pastebin/LICENSE

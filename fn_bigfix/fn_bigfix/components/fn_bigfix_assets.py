@@ -11,14 +11,11 @@ BigFix properties for the endpoint"""
 # Manual Action: Execute a REST query against a BigFix server return endpoint properties.
 
 import logging
+import datetime
+
 from fn_bigfix.util.helpers import validate_opts, validate_params, create_attachment
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_bigfix.lib.bigfix_client import BigFixClient
-import json
-import os
-import datetime
-
-LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_bigfix_assets' of package fn_bigfix.
@@ -78,14 +75,14 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Running BigFix Query for Endpoint id {0}, with name {1} ..."
                                 .format(params["asset_id"], params["asset_name"]))
             bigfix_client = BigFixClient(self.options)
+
             try:
-                rest_client = self.rest_client()
                 # Perform the BigFix Query
                 response = bigfix_client.get_bf_computer_properties(params["asset_id"])
-
-            except Exception as ex:
-                log.error(ex)
-                raise ex
+            except Exception as e:
+                log.exception("Failed to query a BigFix asset.")
+                yield StatusMessage("Failed with exception '{}' while trying to query a BigFix asset".format(type(e).__name__))
+                raise Exception("Failed with exception '{}' while trying to query a BigFix asset".format(type(e).__name__))
 
             if not response:
                 yield StatusMessage("No properties retrieved for the asset id '{}'".format(params["asset_id"]))

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_jira',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -28,6 +28,7 @@ setup(
             "JiraCreateCommentFunctionComponent = fn_jira.components.jira_create_comment:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_jira.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_jira.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_jira.util.selftest:selftest_function"]
     }
 )

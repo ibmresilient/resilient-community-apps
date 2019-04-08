@@ -60,7 +60,8 @@ def build_tree(stix_objects, log):
     #
     for obj in stix_objects:
         if obj["type"] != "relationship" and obj["type"] != "sighting":
-            tree = MultiRootTree(TreeNode().init_with_object(obj))
+            tree = MultiRootTree(TreeNode().init_with_object(stix_obj=obj,
+                                                             log=log))
             break
     if tree is None:
         log.error("Failed to start up a tree.")

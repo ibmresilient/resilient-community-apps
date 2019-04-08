@@ -73,14 +73,14 @@ class SafeBrowsingAPI(object):
                 'threatEntries': threat_entries
             }
         }
+
+        LOG.debug(reqbody)
         
         headers = {'Content-Type': 'application/json'}
         r = requests.post(self.apiurl, 
                           data=json.dumps(reqbody), 
                           headers=headers)
-        #
-        # need to include exceptions here 
-        #
+
         return r.json()
 
 
@@ -99,7 +99,7 @@ class GoogleSafeBrowsingThreatSearcher(BaseComponent):
             exc = "Configuration value `google_api_key=XXX` is missing in [{}] section".format(CONFIG_SECTION)
             raise Exception(exc)
 
-    @handler("net.uri")
+    @handler("net.uri", "net.uri.path")
     def _lookup_net_uri(self, event, *args, **kwargs):
         LOG.info("Looking up with Google Safe Browsing API")
 
@@ -109,6 +109,7 @@ class GoogleSafeBrowsingThreatSearcher(BaseComponent):
         sb = SafeBrowsingAPI(self.apikey)
         resp = sb.lookup_urls(value)
         hits = []
+        LOG.debug(resp)
         for match in resp.get("matches", []):
             linkurl = match["threat"]["url"]
             link = LINK_URL.format(match["threat"]["url"])

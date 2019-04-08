@@ -1,0 +1,4 @@
+include README.md
+include fn_ldap_utilities/util/*
+include fn_ldap_utilities/LICENSE
+include docs/*

@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
             source_text = kwargs.get("fn_watson_translate_source_text", None)  # text
 
             if source_text is None or target_lang is None:
-                raise ValueError("Neither source_text nor target_lang can be unspecified.")
+                raise ValueError("source_text and target_lang are required.")
 
             # get rid of the HTML tags that notes can have.
             source_text = self._get_text_from_html(source_text)
@@ -69,12 +69,12 @@ class FunctionComponent(ResilientComponent):
                 return
 
             # if the translation went through, but nothing was returned
-            if len(translation['translations']) == 0:
+            if len(translation.result['translations']) == 0:
                 raise ValueError("Wasn't translated.")
 
             yield StatusMessage("Finished translating.")
             results = {
-                "value": translation["translations"][0]["translation"],
+                "value": translation.result["translations"][0]["translation"],
                 "confidence": confidence,
                 "language": target_lang,
                 "source_lang": source_lang
@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             raise ValueError("Options do not have necessary information")
         return LanguageTranslatorV3(
                 version=self.options["fn_watson_translate_version"],
-                iam_api_key=self.options["fn_watson_translate_api"],
+                iam_apikey=self.options["fn_watson_translate_api"],
                 url=self.options["fn_watson_translate_url"]
             )
 
@@ -120,10 +120,11 @@ class FunctionComponent(ResilientComponent):
             Returns source language name, and confidence it is correct
         """
         source_lang_query = language_translator.identify(text)
-        source_lang = source_lang_query['languages']
+
+        source_lang = source_lang_query.result['languages']
         if len(source_lang) > 0:
             confidence = source_lang[0]['confidence']
             source_lang = source_lang[0]['language']
         else:
-            raise ValueError("The language wasn't identified.")
+            raise ValueError("The language wasn't identified. Rerun and specify source language")
         return source_lang, confidence

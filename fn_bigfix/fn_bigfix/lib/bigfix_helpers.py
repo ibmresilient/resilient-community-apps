@@ -7,7 +7,6 @@
 import logging
 import time
 
-# TODO: Check how should be defined this logger
 LOG = logging.getLogger(__name__)
 
 __author__ = 'Resilient'
@@ -30,7 +29,7 @@ def get_hits(artifact_data, params):
             hits.append(d)
     # if no hits result will be an empty list.
     if hits:
-        LOG.info("Detected hits on %s endpoints." % (len(hits)))
+        LOG.info("Detected hits on %s endpoints.", len(hits))
     else:
         LOG.info("Detected no hits.")
 
@@ -48,7 +47,7 @@ def poll_retry_sleep(retry_timeout, retry_interval, finished):
         time.sleep(retry_interval)
     return retry_timeout
 
-def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=1800):
+def poll_action_status(bigfix_client, bigfix_action_id, retry_interval=30, retry_timeout=600):
     """"Poll Bigfix for status of action by id.
 
     :param bigfix_action_id: Bigfix action id to poll status
