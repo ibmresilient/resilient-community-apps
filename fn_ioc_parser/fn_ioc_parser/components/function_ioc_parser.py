@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
 
             if ioc_parser_artifact_id:
                 # A block to parse and download the data from Artifact
-                if ioc_parser_artifact_type.lower().strip() == 'string':
+                if ioc_parser_artifact_type.lower().strip() in ['string', 'email subject']:
                     ioc_parser_data = ioc_parser_artifact_value
                 else:
                     metadata_uri = IOCHelp_obj.ARTIFACT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("IOC Parser can be called on artifacts or attachments")
 
             if not ioc_parser_data:
-                raise ValueError("These {0} file types are not supported for IOC Parsing,Please use string based files.".format(attachment_file_name))
+                raise ValueError("These attachment/artifact types are not supported for IOC Parsing,Please use string based files.")
             else:
                 textobj = IOCParser(ioc_parser_data)
                 ioc_results = textobj.parse()
