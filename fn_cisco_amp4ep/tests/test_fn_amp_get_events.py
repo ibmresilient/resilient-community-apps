@@ -42,13 +42,14 @@ class TestFnAmpGetEvents:
 
     @patch('fn_cisco_amp4ep.components.fn_amp_get_events.Ampclient', side_effect=mocked_amp_client)
     @pytest.mark.parametrize("amp_detection_sha256, amp_application_sha256, amp_conn_guid, amp_group_guid, "
-                             " amp_start_date, amp_event_type, amp_limit, amp_offset, expected_results_1, "
+                             " amp_start_date, amp_event_type, amp_limit, amp_offset, amp_severity, expected_results_1, "
                              "expected_results_2, expected_results_3", [
-        (None, None, None, None, None, None, None, None, "v1.2.0", 1, "WIN-S1AC1PI6L5L"),
+        (None, None, None, None, None, None, None, None, None, "v1.2.0", 1, "WIN-S1AC1PI6L5L"),
+        (None, None, None, None, None, None, None, None, "High", "v1.2.0", 1, "WIN-S1AC1PI6L5L"),
         (None, None, None, None, None, "1090519054,1090519084", None, None, "v1.2.0", 1, "WIN-S1AC1PI6L5L")
     ])
     def test_success(self, mock_get, circuits_app, amp_detection_sha256, amp_application_sha256, amp_conn_guid, amp_group_guid,
-                     amp_start_date, amp_event_type, amp_limit, amp_offset, expected_results_1,
+                     amp_start_date, amp_event_type, amp_limit, amp_offset, amp_severity, expected_results_1,
                      expected_results_2, expected_results_3):
         """ Test calling with sample values for the parameters """
 

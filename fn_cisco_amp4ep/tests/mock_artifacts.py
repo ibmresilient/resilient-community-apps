@@ -307,6 +307,7 @@ def get_events():
                             '"hostname": "WIN-S1AC1PI6L5L",'
                             '"external_ip": "10.200.65.31",'
                             '"active": true,'
+                            '"severity": "High",'
                             '"network_addresses": ['
                               '{'
                                 '"ip": "10.0.2.15",'
@@ -517,7 +518,7 @@ def mocked_amp_client(*args):
             return self.r.json()
 
         def get_events(self, detection_sha256, application_sha256, connector_guid, group_guid, start_date, event_type,
-                       limit, offset):
+                       severity, limit, offset):
             self.r._content = get_events()
             return self.r.json()
 
