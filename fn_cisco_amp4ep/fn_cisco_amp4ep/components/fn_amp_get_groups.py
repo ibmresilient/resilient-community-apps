@@ -122,7 +122,7 @@ class FunctionComponent(ResilientComponent):
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             param_name = None if params["name"] is None else params["name"].encode('utf-8')
-            yield StatusMessage("Returning 'group' or 'groups' results for group_guid '{}', group name '{}' and limit '{}'"
+            yield StatusMessage("Returning 'group' or 'groups' results for group guid '{}', group name '{}' and limit '{}'"
                                 .format(params["group_guid"], param_name, params["limit"]))
 
             log.debug(json.dumps(results))

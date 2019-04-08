@@ -94,7 +94,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_amp_get_computers")
     def _fn_amp_get_computers_function(self, event, *args, **kwargs):
-        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
+        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the
+        search by IP address or hostname."""
         try:
             # Get the function parameters:
             amp_group_guid = kwargs.get("amp_group_guid")  # text

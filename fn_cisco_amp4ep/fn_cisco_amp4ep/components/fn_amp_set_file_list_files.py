@@ -99,12 +99,13 @@ class FunctionComponent(ResilientComponent):
             if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
                 # If this error was trapped user probably tried to re-add a sha256 to a file list.
                 yield StatusMessage(
-                    "Got a 409 error while attempting to set a sha256 '{0}' to list with uid '{1}' because of a possible "
+                    "Got a 409 error while attempting to set a sha256 '{0}' to list with guid '{1}' because of a possible "
                     "attempt to redo a set operation."
                         .format(params["file_sha256"], params["file_list_guid"]))
             else:
-                yield StatusMessage("Returning 'set file lists files' results for guid '{}', sha256 value '{}' and description '{}'."
-                                .format(params["file_list_guid"], params["file_sha256"], params["description"]))
+                yield StatusMessage("Returning 'set file lists files' results for file list guid '{}', sha256 value "
+                                    "'{}' and description '{}'."
+                                    .format(params["file_list_guid"], params["file_sha256"], params["description"]))
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
 
             log.debug(json.dumps(results))

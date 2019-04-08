@@ -117,7 +117,8 @@ class FunctionComponent(ResilientComponent):
                     "Got a 404 error while attempting to get computer information for connector guid '{0}' "
                     "because of a possible invalid or deleted guid.".format(params["conn_guid"]))
             else:
-                yield StatusMessage("Returning 'computer by guid' results for guid '{}'.".format(params["conn_guid"]))
+                yield StatusMessage("Returning 'computer by guid' results for connector guid '{}'."
+                                    .format(params["conn_guid"]))
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
 
             log.debug(json.dumps(results))
