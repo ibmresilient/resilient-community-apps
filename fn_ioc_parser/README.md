@@ -13,7 +13,7 @@
  ---
  
 ## About This Package
-**This function is to extract IOC's(Indicators of Compromise) from text-based Data/files**
+**This function is to extract IOC's(Indicators of Compromise) from text-based Data/files.**
 * It can be used to parse Indicators of Compromise from text  based files/data can be called on : 
 	*	Text Based Files/Data Artifacts of Resilient 
 	*  Text Based Files/Data Incidents Attachments of Resilient 
@@ -70,9 +70,9 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 |Input Name		|Type      	|Required 	|Example 	| Info	|
 |---------------|-----------|-----------|----------|--------|  
 |`ioc_parser_incident_id`|  Number|Yes	|	2123| This is the incident ID, passed from Pre-Pocess Script to Function.
-|`ioc_parser_artifact_id`|Number|Optional|246|This is the artifact ID of which data can be parsed for IOC's. Passed to function from Resilient Pre-Process script|
-|`ioc_parser_artifact_type`|Text |Optional|Other File,String etc.|This is the artifact type of which data can be parsed for IOC's. Passed to function from Resilient Pre-Process script|
-|`ioc_parser_artifact_value`|Text|Optional|holiday2019.xlsx,"string data" etc.|This is the artifact value of which data can be parsed for IOC's. Passed to function from Resilient Pre-Process script|
+|`ioc_parser_artifact_id`|Number|Optional|246|This is the artifact ID of which data can be parsed for IOC's. passed to function from Resilient Pre-Process script|
+|`ioc_parser_artifact_type`|Text |Optional|Other File,String etc.|This is the artifact type of which data can be parsed for IOC's. passed to function from Resilient Pre-Process script|
+|`ioc_parser_artifact_value`|Text|Optional|holiday2019.xlsx,"string data" etc.|This is the artifact value of which data can be parsed for IOC's. passed to function from Resilient Pre-Process script|
 |`ioc_parser_attachment_id`|Number|Optional|2222|This is the attachment ID of which data can be parsed for IOC's. passed to function from Resilient Pre-Process Script.|
 |`ioc_parser_task_id`|Number|Optional|2222|This is a task ID of which data can be parsed for IOC's. passed to function from Resilient Pre-Process Script|
 
