@@ -159,7 +159,7 @@ def get_sleep_time_from_epoch(end_epoch):
     end_timer_utc = datetime.datetime.utcfromtimestamp(end_epoch / 1000)
 
     if now_utc > end_timer_utc:
-        raise ValueError("Date and time for timer end is in the past.")
+        raise ValueError("Timer end date is in the past: {0}".format(end_epoch))
 
     # Compute total time to sleep in seconds.
     num_seconds = (end_timer_utc - now_utc).total_seconds()
