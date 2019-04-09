@@ -92,7 +92,6 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("These attachment/artifact types are not supported for IOC Parsing,"
                                  "Please use string based data or files lik: .docx, .txt, .pdf, .xls, .xlsx etc.")
             else:
-                print("$$$$$$$$$$$$$$$$$$$$$$$ PARSING DATA $$$$$$$$$$$$$$$$$$$$$$$",ioc_parser_data)
                 textobj = IOCParser(ioc_parser_data)
                 ioc_results = textobj.parse()
                 function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
@@ -102,7 +101,6 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "value": function_result
             }
-            print("\n\n\n\n FINAL OUTPUT $$$$$$$$$$$$$\n", results)
             yield FunctionResult(results)
         except Exception as com_err:
             yield FunctionError(com_err)
