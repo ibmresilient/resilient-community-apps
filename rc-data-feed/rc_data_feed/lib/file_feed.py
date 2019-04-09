@@ -6,6 +6,7 @@ to a local directory.
 import os
 import json
 import logging
+import sys
 from io import open
 
 from rc_data_feed.lib.feed import FeedDestinationBase
@@ -36,7 +37,10 @@ class FileFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-publi
         payload = context.type_info.flatten(payload, TypeInfo.translate_value)
 
         with open(output_file, 'w') as out:
-            out.write(json.dumps(payload, indent=2))
+            if sys.version_info.major == 2:
+                out.write(json.dumps(payload, indent=2).decode('utf-8'))
+            else:
+                out.write(json.dumps(payload, indent=2))
 
     def _make_file_path(self, context, type_name, payload):
         """Makes a file name where we can write the payload"""

@@ -48,26 +48,37 @@ class FeedComponent(ResilientComponent):
     def __init__(self, opts):
         super(FeedComponent, self).__init__(opts)
 
-        self.options = opts.get("feeds", {})
-        LOG.debug(self.options)
+        try:
+            self.options = opts.get("feeds", {})
+            LOG.debug(self.options)
 
-        self.channel = "actions." + self.options.get("queue", "feed_data")
+            self.channel = "actions." + self.options.get("queue", "feed_data")
 
-        feed_config_names = [name.strip() for name in self.options.get("feed_names").split(',')]
+            if self.options.get("feed_names") is None:
+                LOG.error("No feed_names are specified")
+            else:
+                feed_config_names = [name.strip() for name in self.options.get("feed_names", None).split(',')]
 
-        self.feed_outputs = list()
+                self.feed_outputs = list()
 
-        for feed_config_name in feed_config_names:
-            feed_options = opts.get(feed_config_name, {})
+                for feed_config_name in feed_config_names:
+                    feed_options = opts.get(feed_config_name, {})
 
-            class_name = feed_options.get("class")
+                    class_name = feed_options.get("class")
 
-            obj = FeedComponent.AVAILABLE_CLASSES[class_name](self.rest_client(), feed_options)
+                    if FeedComponent.AVAILABLE_CLASSES.get(class_name) is None:
+                        LOG.error("Incorrect feed class %s, skipping", class_name)
 
-            self.feed_outputs.append(obj)
+                    else:
+                        obj = FeedComponent.AVAILABLE_CLASSES[class_name](self.rest_client(), feed_options)
 
-        if self.options.get('reload', 'false').lower() == 'true':
-            self._reload_all()
+                        self.feed_outputs.append(obj)
+
+                if self.options.get('reload', 'false').lower() == 'true':
+                    self._reload_all()
+
+        except Exception as err:
+            LOG.error("exception: %s", err)
 
     @handler()
     def _feed_ingest_data(self, event, *args, **kwargs):    # pylint: disable=unused-argument
@@ -76,28 +87,37 @@ class FeedComponent(ResilientComponent):
             # Some event we are not interested in
             return
 
-        log = logging.getLogger(__name__)
-        log.info("ingesting object")
+        try:
+            log = logging.getLogger(__name__)
+            log.info("ingesting object")
 
-        type_info = ActionMessageTypeInfo(event.message['object_type'],
-                                          event.message['type_info'],
-                                          self.rest_client())
+            type_info = ActionMessageTypeInfo(event.message['object_type'],
+                                              event.message['type_info'],
+                                              self.rest_client())
 
-        type_name = type_info.get_pretty_type_name()
+            type_name = type_info.get_pretty_type_name()
 
-        inc_id = _get_inc_id(event.message)
+            inc_id = _get_inc_id(event.message)
 
-        is_deleted = event.message['operation_type'] == 'deleted'
+            is_deleted = event.message['operation_type'] == 'deleted'
 
-        context = FeedContext(type_info, inc_id, self.rest_client(), is_deleted)
+            context = FeedContext(type_info, inc_id, self.rest_client(), is_deleted)
 
-        if type_info.is_data_table():
-            payload = event.message['row']
-        else:
-            payload = event.message[type_name]
+            if type_info.is_data_table():
+                payload = event.message['row']
+            else:
+                payload = event.message[type_name]
 
-        for feed_output in self.feed_outputs:
-            feed_output.send_data(context, payload)
+            for feed_output in self.feed_outputs:
+                # don't let a failure in one feed break all the rest
+                try:
+                    feed_output.send_data(context, payload)
+                except Exception as err:
+                    LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
+
+        except Exception as err:
+            LOG.error("Failure on action %s object %s type_info %s",
+                      event.message['operation_type'], event.message['object_type'], event.message['type_info'])
 
     def _reload_all(self):
         rest_client = self.rest_client()
@@ -155,7 +175,10 @@ class FeedComponent(ResilientComponent):
 
                 # Handle the incident data.
                 for feed_output in self.feed_outputs:
-                    feed_output.send_data(incident_context, incident)
+                    try:
+                        feed_output.send_data(incident_context, incident)
+                    except Exception as err:
+                        LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
 
         except StopIteration:
             pass
@@ -200,7 +223,10 @@ class FeedComponent(ResilientComponent):
             context = FeedContext(type_info, inc_id, rest_client, is_deleted=False)
 
             for feed_output in self.feed_outputs:
-                feed_output.send_data(context, result_data)
+                try:
+                    feed_output.send_data(context, result_data)
+                except Exception as err:
+                    LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
 
     @staticmethod
     def _page_incidents(rest_client):

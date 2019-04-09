@@ -36,7 +36,10 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         else:
             dialect_name = options.get("sql_dialect")
 
-            self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
+            if dialect_name is None or SqlFeedDestinationBase.AVAILABLE_DIALECTS.get(dialect_name) is None:
+                raise ValueError("sql_dialect is incorrect: {}".format(dialect_name))
+            else:
+                self.dialect = SqlFeedDestinationBase.AVAILABLE_DIALECTS[dialect_name]()
 
         self.created_tables = {}
 
