@@ -7,8 +7,11 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
+from pdfminer.layout import LAParams
 import xlrd
-
+import ast
+import six
+import codecs
 
 class IOCParserHelper(object):
     def __init__(self):
@@ -22,22 +25,22 @@ class IOCParserHelper(object):
 
     @classmethod
     def extract_text_from_bytes_data(cls, filename, file_data_bytes):
-        if filename.find('.pdf') != -1:
+        if filename.endswith('.pdf'):
             """
             Converting .pdf file data to plain text format
             """
             file_string_data = IOCParserHelper.extract_text_from_pdf(file_data_bytes)
-        elif filename.find('.docx') != -1:
+        elif filename.endswith('.docx'):
             """
             Converting .docx file data to plain text format
             """
             file_string_data = IOCParserHelper.extract_text_from_docx(file_data_bytes)
-        elif filename.find('.xls') != -1 or filename.find('.xlsx') != -1:
+        elif filename.endswith('.xls') or filename.endswith('.xlsx'):
             """
             Converting .xls/.xlsx file data to plain text format
             """
             file_string_data = IOCParserHelper.extract_text_from_xls_xlsx(file_data_bytes)
-        elif filename.split('.')[-1].strip() in ['doc', 'odt', 'ott', 'dot']:
+        elif filename.split('.')[-1].strip() in ['doc', 'odt', 'ott', 'dot', 'gz', 'zip', 'tar', 'ods']:
             file_string_data = None
         else:
             file_string_data = file_data_bytes
@@ -61,21 +64,21 @@ class IOCParserHelper(object):
 
         extracted_input = u""
 
-        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as temp_pdf_file:
             try:
-                # Write and close temp file
+            # Write and close temp file
                 temp_pdf_file.write(attachment_input)
-
-                # Reading the Data from Created Temp File
+                    # Reading the Data from Created Temp File
                 for page in PDFPage.get_pages(temp_pdf_file, caching=True, check_extractable=True):
                     page_interpreter.process_page(page)
 
                 extracted_input = fake_file_handle.getvalue()
+            except Exception as error_msg:
+                raise ValueError("Failed Convert .pdf files data to string format. Error: {0}".format(error_msg))
             finally:
                 # close open handles
                 converter.close()
                 fake_file_handle.close()
-                os.unlink(temp_pdf_file.name)
         return extracted_input
 
     @classmethod
@@ -86,15 +89,15 @@ class IOCParserHelper(object):
         :return: Text Data
         """
         extracted_input = u""
-        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_doc_file:
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as temp_doc_file:
             try:
                 # Write and close temp file
                 temp_doc_file.write(attachment_input)
                 read_doc = Document(temp_doc_file)
                 for paragraph in read_doc.paragraphs:
                     extracted_input += paragraph.text
-            finally:
-                os.unlink(temp_doc_file.name)
+            except Exception as error_msg:
+                raise ValueError("Failed Convert .docx files data to string format. Error: {0}".format(error_msg))
         return extracted_input
 
     @classmethod
@@ -105,7 +108,7 @@ class IOCParserHelper(object):
         :return: Text Data
         """
         extracted_input = ""
-        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_doc_file:
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as temp_doc_file:
             try:
                 # Write and close temp file
                 temp_doc_file.write(attachment_input)
@@ -118,14 +121,14 @@ class IOCParserHelper(object):
                         row_data_list = each_sheet_obj.row_values(row_no)
                         for data in row_data_list:
                             extracted_input += str(data) + " "
-            finally:
-                os.unlink(temp_doc_file.name)
+            except Exception as error_msg:
+                raise ValueError("Failed Convert .xlsx/.xls files data to string format. Error: {0}".format(error_msg))
         return extracted_input
 
     def _correct_ioc_value(self, kind, value):
         _formatted_value = ''
         if kind == 'uri':
-            if value.find('https://') != -1 or value.find('http://') != -1:
+            if value.startswith('https://') or value.startswith('http://'):
                 _formatted_value = value
             else:
                 _formatted_value = "{0}{1}".format('https://', value)

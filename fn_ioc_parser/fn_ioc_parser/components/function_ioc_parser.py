@@ -67,7 +67,6 @@ class FunctionComponent(ResilientComponent):
 
                         attachment_file_name = metadata_data.get('attachment').get('name')
                         ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
-                        print(ioc_parser_data)
                     else:
                         ioc_parser_data = metadata_data.get('description')
             elif ioc_parser_attachment_id:
@@ -86,21 +85,24 @@ class FunctionComponent(ResilientComponent):
 
                 attachment_file_name = metadata_data.get('name')
                 ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
-                print(ioc_parser_data)
             else:
-                raise FunctionError("IOC Parser can be called on artifacts or attachments")
+                raise FunctionError("IOC Parser can be called on artifacts or attachments or task attachments.")
 
             if not ioc_parser_data:
-                raise ValueError("These attachment/artifact types are not supported for IOC Parsing,Please use string based files.")
+                raise ValueError("These attachment/artifact types are not supported for IOC Parsing,"
+                                 "Please use string based data or files lik: .docx, .txt, .pdf, .xls, .xlsx etc.")
             else:
+                print("$$$$$$$$$$$$$$$$$$$$$$$ PARSING DATA $$$$$$$$$$$$$$$$$$$$$$$",ioc_parser_data)
                 textobj = IOCParser(ioc_parser_data)
                 ioc_results = textobj.parse()
                 function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
+
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
             log.debug("Function Result : {0}".format(function_result))
             results = {
                 "value": function_result
             }
+            print("\n\n\n\n FINAL OUTPUT $$$$$$$$$$$$$\n", results)
             yield FunctionResult(results)
         except Exception as com_err:
             yield FunctionError(com_err)
