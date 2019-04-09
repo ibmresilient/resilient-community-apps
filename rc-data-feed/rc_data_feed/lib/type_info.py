@@ -217,10 +217,14 @@ class TypeInfo(object):
         return type_str
 
     def _get_raw_value_for_field(self, payload, field):
+        obj = None
         if self.is_data_table():
-            field_id = field['id']
+            field_id = str(field['id'])
 
-            obj = payload['cells'][str(field_id)].get('value', None) # 'value' is not always present for datatables
+            if payload['cells'].get(field_id):
+                obj = payload['cells'][field_id].get('value', None) # 'value' is not always present for datatables
+            else:
+                LOG.warning("field_id no longer exists: %s", field_id)
         else:
             prefix = field.get('prefix')
 

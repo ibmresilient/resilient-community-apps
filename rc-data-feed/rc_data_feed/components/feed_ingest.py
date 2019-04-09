@@ -116,6 +116,7 @@ class FeedComponent(ResilientComponent):
                     LOG.error("Failure in update to %s %s", feed_output.__class__.__name__, err)
 
         except Exception as err:
+            LOG.error(err)
             LOG.error("Failure on action %s object %s type_info %s",
                       event.message['operation_type'], event.message['object_type'], event.message['type_info'])
 
