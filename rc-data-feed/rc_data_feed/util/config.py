@@ -10,7 +10,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[feeds]
-feed_names=sqlserver_feed
+# comma separated section names. ex. sqlserver_feed,file_feed
+feed_names=<your feeds>
 reload=True
 # feed_data is the default message destination that will be listened to
 queue=feed_data
