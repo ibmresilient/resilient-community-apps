@@ -61,6 +61,10 @@ class FunctionComponent(ResilientComponent):
 
             # Get max timer to sleep from app.config setting and convert to seconds.
             max_timer = self.options.get("max_timer")
+
+            if max_timer is None:
+                raise ValueError("Please specify [fn_utilities] max_timer in app.config")
+
             max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
 
             # Compute the time to wait in seconds
