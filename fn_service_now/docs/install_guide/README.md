@@ -89,8 +89,12 @@
 ---
 
 ## Step 5: *Download & Install fn_service_now Integration*
-* Source the `.tar.gz` package internally.
-* Copy the package to your Integrations Server and SSH into it.
+* Download fn_service_now.zip from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+* Copy the .zip to your Integrations Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip fn_service_now-x.x.x.zip
+  ```
 * **Install** the package:
   ```
   $ pip install fn_service_now-x.x.x.tar.gz
