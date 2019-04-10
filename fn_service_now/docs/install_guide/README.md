@@ -38,9 +38,9 @@
 --- 
 
 ## Step 2: *Install ServiceNow IBM Resilient App*
-* Go to the [ServiceNow Store](https://store.servicenow.com/)
+* Go to the [ServiceNow Store]((http://ibm.biz/get-ibm-resilient-service-now-app)
 * Login with your **ServiceNow HI Credentials**.
-* Search for **IBM Resilient**.
+* Look for **IBM Resilient**.
 * Click **more,** a new page opens.
 * On the top-right click **Get** and follow the on screen instructions to install the app on your ServiceNow instance.
 * Log in to your ServiceNow instance with a user that has an **admin** role.
