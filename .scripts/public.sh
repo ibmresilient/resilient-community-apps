@@ -73,6 +73,7 @@ fn_qradar_advisor
 fn_qradar_integration
 fn_query_tor_network
 fn_risk_fabric
+fn_service_now
 fn_slack
 fn_splunk_integration
 fn_thug
