@@ -7,11 +7,9 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-from pdfminer.layout import LAParams
 import xlrd
-import ast
 import six
-import codecs
+
 
 class IOCParserHelper(object):
     def __init__(self):
@@ -41,13 +39,23 @@ class IOCParserHelper(object):
             """
             file_string_data = IOCParserHelper.extract_text_from_xls_xlsx(file_data_bytes)
         elif filename.split('.')[-1].strip() in ['doc', 'odt', 'ott', 'dot', 'gz', 'zip', 'tar', 'ods']:
-            file_string_data = None
+            raise ValueError("These attachment/artifact types are not supported for IOC Parsing,"
+                             "Please use string based data or files lik: .docx, .txt, .pdf, .xls, .xlsx etc.")
         else:
             file_string_data = file_data_bytes
 
         if file_string_data:
-            file_string_data = str(file_string_data)
-
+            if six.PY2:
+                # this removes the ascii character and encodes back to string
+                if isinstance(file_string_data, str):
+                    file_string_data = file_string_data.decode('ascii', 'ignore').encode('ascii')
+                else:
+                    file_string_data = file_string_data.encode('ascii', 'ignore')
+            elif six.PY3:
+                try:
+                    file_string_data = str(file_string_data)
+                except Exception:
+                    file_string_data = file_string_data
         return file_string_data
 
     @classmethod
@@ -58,7 +66,12 @@ class IOCParserHelper(object):
         :return:  Text Data
         """
         resource_manager = PDFResourceManager()
-        fake_file_handle = io.StringIO()
+        # To Handle unicode conversion in python 2 and python 3
+        if six.PY2:
+            fake_file_handle = io.BytesIO()
+        else:
+            fake_file_handle = io.StringIO()
+
         converter = TextConverter(resource_manager, fake_file_handle)
         page_interpreter = PDFPageInterpreter(resource_manager, converter)
 
@@ -66,9 +79,10 @@ class IOCParserHelper(object):
 
         with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as temp_pdf_file:
             try:
-            # Write and close temp file
+                # Write and close temp file
                 temp_pdf_file.write(attachment_input)
-                    # Reading the Data from Created Temp File
+
+                # Reading the Data from Created Temp File
                 for page in PDFPage.get_pages(temp_pdf_file, caching=True, check_extractable=True):
                     page_interpreter.process_page(page)
 
