@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
             if max_timer is None:
                 # max_timer is not set in the app.config, so set a default and output a message.
                 max_timer = "30d"
-                yield StatusMessage("Please specify [fn_utilities] max_timer in app.config")
+                yield StatusMessage("Please specify [fn_utilities] max_timer in app.config. Setting default max_timer to '30d'.")
 
             max_timer_in_seconds = get_sleep_time_in_seconds(max_timer)
 
