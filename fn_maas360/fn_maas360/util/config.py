@@ -48,6 +48,9 @@ maas360_cancel_pending_wipe_url= /device-apis/devices/1.0/cancelPendingWipe/
 # Stop App Distribution Fn settings
 maas360_stop_app_distribution_url=/application-apis/applications/1.0/stopAppDistribution/
 
+# Delete App Fn settings
+maas360_delete_app_url=/application-apis/applications/1.0/deleteApp/
+
 # Search Installed Apps Fn settings
 maas360_search_installed_apps_url=/application-apis/installedApps/1.0/search/
 # Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 50

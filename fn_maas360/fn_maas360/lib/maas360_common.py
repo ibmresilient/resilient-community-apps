@@ -235,26 +235,92 @@ class MaaS360Utils(object):
         action_response = results.get("actionResponse")
         return action_response
 
-    def stop_app_distribution(self, url, app_type, installed_app_id, device_id):
+    def stop_app_distribution(self, url, app_type, installed_app_id, target_devices, device_id, device_group_id):
         """
         Function stops a specific distributions of an app.
         :param url:
         :param app_type:
         :param installed_app_id
+        :param target_devices
         :param device_id
+        :param device_group_id
         :return: action_response
         """
+        # Map targetDevice to a value
+        # Possible values:
+        # 0: All Devices
+        #  1: Device Group
+        # 2: Specific Device
+        if target_devices == "All Devices":
+            target = 0
+        elif target_devices == "Device Group":
+            target = 1
+        elif target_devices == "Specific Device":
+            target = 2
+
+        # Map appType to a value
+        # Possible values:
+        # 1: iOS Enterprise Application
+        # 2: iOS App Store Application
+        # 3: Android Enterprise Application
+        # 4: Android Market Application
+        if app_type == "iOS Enterprise Application":
+            atype = 1
+        elif app_type == "iOS App Store Application":
+            atype = 2
+        elif app_type == "Android Enterprise Application":
+            atype = 3
+        elif app_type == "Android Market Application":
+            atype = 4
+
         url_endpoint = self.get_url_endpoint(url)
         auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
-        request_body = {"appType": u"{}".format(app_type),
+        request_body = {"appType": u"{}".format(atype),
                         "appId": u"{}".format(installed_app_id),
-                        "targetDevices": u"{}".format(2),  # Possible values: 0: All Devices  1: Device Group 2: Specific Device
-                        "deviceId": u"{}".format(device_id)}
+                        "targetDevices": u"{}".format(target),
+                        "deviceId": u"{}".format(device_id),
+                        "deviceGroupId": u"{}".format(device_group_id)}
 
         try:
             results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Stop App Distribution: {}".format(err))
+
+        action_response = results.get("actionResponse")
+        return action_response
+
+    def delete_app(self, url, app_type, installed_app_id):
+        """
+        Function stop all distributions of the app and deletes the app.
+        :param url:
+        :param app_type:
+        :param installed_app_id
+        :return: action_response
+        """
+        # Map appType to a value
+        # Possible values:
+        # 1: iOS Enterprise Application
+        # 2: iOS App Store Application
+        # 3: Android Enterprise Application
+        # 4: Android Market Application
+        if app_type == "iOS Enterprise Application":
+            atype = 1
+        elif app_type == "iOS App Store Application":
+            atype = 2
+        elif app_type == "Android Enterprise Application":
+            atype = 3
+        elif app_type == "Android Market Application":
+            atype = 4
+
+        url_endpoint = self.get_url_endpoint(url)
+        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
+        request_body = {"appType": u"{}".format(atype),
+                        "appId": u"{}".format(installed_app_id)}
+
+        try:
+            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+        except IntegrationError as err:
+            raise IntegrationError("Unable to execute call Delete App: {}".format(err))
 
         action_response = results.get("actionResponse")
         return action_response

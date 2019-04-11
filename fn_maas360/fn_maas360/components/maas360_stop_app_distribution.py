@@ -57,7 +57,10 @@ class FunctionComponent(ResilientComponent):
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_device_group_id: %s", device_group_id)
 
-            # TODO: add validation for device id/ group device id
+            if target_devices == "Device Group" and device_group_id is None:
+                raise FunctionError(u"maas360_device_group_id must be defined")
+            if target_devices == "Specific Device" and device_id is None:
+                raise FunctionError(u"maas360_device_id must be defined")
 
             # Read configuration settings:
             host_url = self.options["maas360_host_url"]
@@ -77,11 +80,12 @@ class FunctionComponent(ResilientComponent):
             maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
                                          app_access_key, auth_url, self.opts, self.options)
 
-            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id, device_id)
+            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id,
+                                                                   target_devices, device_id, device_group_id)
             if not stop_app_results:
-                yield StatusMessage("Location for device id {} isn't available".format(device_id))
+                yield StatusMessage("Stop App Distribution for app id {} wasn't successful".format(installed_app_id))
             else:
-                yield StatusMessage("Location found for device id {}".format(device_id))
+                yield StatusMessage("Stop App Distribution for app id {} was successful".format(installed_app_id))
 
             results = rp.done(True, stop_app_results)
 
