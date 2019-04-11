@@ -133,6 +133,16 @@ class TypeInfo(object):
         if not set(message_field_names).issubset(set(all_field_names)):
             all_fields = self.get_all_fields(refresh=True)
 
+        try:
+            values = self._get_field_values(payload, all_fields, translate_func)
+        except ValueError:
+            # this will trigger when a field ID is not found
+            all_fields = self.get_all_fields(refresh=True)
+            values = self._get_field_values(payload, all_fields, translate_func)
+
+        return values
+
+    def _get_field_values(self, payload, all_fields, translate_func):
         values = {}
 
         if self.is_data_table():
@@ -217,6 +227,13 @@ class TypeInfo(object):
         return type_str
 
     def _get_raw_value_for_field(self, payload, field):
+        """
+        this function will raise ValueError if a schema field is not found in the payload. This is used to trap changes in the
+        schema not reflected in the cached schema
+        :param payload:
+        :param field:
+        :return: payload object found
+        """
         obj = None
         if self.is_data_table():
             field_id = str(field['id'])
@@ -225,6 +242,8 @@ class TypeInfo(object):
                 obj = payload['cells'][field_id].get('value', None) # 'value' is not always present for datatables
             else:
                 LOG.warning("field_id no longer exists: %s", field_id)
+                raise ValueError()
+
         else:
             prefix = field.get('prefix')
 
