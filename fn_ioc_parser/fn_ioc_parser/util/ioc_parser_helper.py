@@ -23,6 +23,8 @@ class IOCParserHelper(object):
 
     @classmethod
     def extract_text_from_bytes_data(cls, filename, file_data_bytes):
+        if not file_data_bytes:
+            raise ValueError("{0} is an empty file. Can't be processed for IOC's.".format(filename))
         if filename.endswith('.pdf'):
             """
             Converting .pdf file data to plain text format
@@ -55,7 +57,8 @@ class IOCParserHelper(object):
                 try:
                     file_string_data = str(file_string_data)
                 except Exception:
-                    file_string_data = file_string_data
+                    raise ValueError("Error while converting file :{0} data to string, "
+                                     "ioc parsing can't be processed.".format(filename))
         return file_string_data
 
     @classmethod
@@ -122,21 +125,23 @@ class IOCParserHelper(object):
         :return: Text Data
         """
         extracted_input = ""
-        with tempfile.NamedTemporaryFile(mode="w+b", delete=True) as temp_doc_file:
-            try:
-                # Write and close temp file
-                temp_doc_file.write(attachment_input)
-                workbook_object = xlrd.open_workbook(temp_doc_file.name)
-                total_sheets = workbook_object.nsheets
-                for sheet_index in range(0, total_sheets):
-                    each_sheet_obj = workbook_object.sheet_by_index(sheet_index)
-                    total_rows_each_sheet = each_sheet_obj.nrows
-                    for row_no in range(0, total_rows_each_sheet):
-                        row_data_list = each_sheet_obj.row_values(row_no)
-                        for data in row_data_list:
-                            extracted_input += str(data) + " "
-            except Exception as error_msg:
-                raise ValueError("Failed Convert .xlsx/.xls files data to string format. Error: {0}".format(error_msg))
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=False, suffix='.xlsx') as temp_doc_file:
+            # Write and close temp file
+            temp_doc_file.write(attachment_input)
+        try:
+            workbook_object = xlrd.open_workbook(temp_doc_file.name)
+            total_sheets = workbook_object.nsheets
+            for sheet_index in range(0, total_sheets):
+                each_sheet_obj = workbook_object.sheet_by_index(sheet_index)
+                total_rows_each_sheet = each_sheet_obj.nrows
+                for row_no in range(0, total_rows_each_sheet):
+                    row_data_list = each_sheet_obj.row_values(row_no)
+                    for data in row_data_list:
+                        extracted_input += str(data) + " "
+        except Exception as error_msg:
+            raise ValueError("Failed Convert .xlsx/.xls files data to string format. Error: {0}".format(error_msg))
+        finally:
+            os.unlink(temp_doc_file.name)
         return extracted_input
 
     def _correct_ioc_value(self, kind, value):

@@ -24,7 +24,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("function_ioc_parser")
     def _function_ioc_parser_function(self, event, *args, **kwargs):
-        """Function: A function to extract IOC's(Indicators of Compromise) from (text-based Data) Artifact and attachments."""
+        """A function to extract IOC's(Indicators of Compromise) from (text-based Data) Artifacts & attachments."""
         try:
             # Get the function parameters:
             ioc_parser_incident_id = kwargs.get("ioc_parser_incident_id")  # number
@@ -51,8 +51,8 @@ class FunctionComponent(ResilientComponent):
             IOCHelp_obj = IOCParserHelper()
 
             if ioc_parser_artifact_id:
-                # A block to parse and download the data from Artifact
-                if ioc_parser_artifact_type.lower().strip() in ['string', 'email subject']:
+                # A block to parse and download the data from Artifacts
+                if ioc_parser_artifact_type.lower().strip() in ['string', 'email subject', 'email body']:
                     ioc_parser_data = ioc_parser_artifact_value
                 else:
                     metadata_uri = IOCHelp_obj.ARTIFACT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
@@ -61,16 +61,15 @@ class FunctionComponent(ResilientComponent):
                     # Getting the Meta data from the Resilient for an artifact
                     metadata_data = resilient_client.get(metadata_uri)
                     if metadata_data.get('attachment'):
-
                         # Getting the file content from Resilient system
                         attachment_data = resilient_client.get_content(data_uri)
 
                         attachment_file_name = metadata_data.get('attachment').get('name')
                         ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
                     else:
-                        ioc_parser_data = metadata_data.get('description')
-            elif ioc_parser_attachment_id:
-                # A block to parse and download the data from attachment
+                        ioc_parser_data = ioc_parser_artifact_value
+            else:
+                # A block to parse and download the data from attachments
                 metadata_uri = IOCHelp_obj.ATTACHMENT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
                 data_uri = IOCHelp_obj.ATTACHMENT_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
                 if ioc_parser_task_id:
@@ -85,16 +84,10 @@ class FunctionComponent(ResilientComponent):
 
                 attachment_file_name = metadata_data.get('name')
                 ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
-            else:
-                raise FunctionError("IOC Parser can be called on artifacts or attachments or task attachments.")
 
-            if not ioc_parser_data:
-                raise ValueError("These attachment/artifact types are not supported for IOC Parsing,"
-                                 "Please use string based data or files lik: .docx, .txt, .pdf, .xls, .xlsx etc.")
-            else:
-                textobj = IOCParser(ioc_parser_data)
-                ioc_results = textobj.parse()
-                function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
+            ioc_text_obj = IOCParser(ioc_parser_data)
+            ioc_results = ioc_text_obj.parse()
+            function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
 
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
             log.debug("Function Result : {0}".format(function_result))
