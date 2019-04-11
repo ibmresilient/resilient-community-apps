@@ -156,7 +156,7 @@ class FunctionComponent(ResilientComponent):
                         # Closing the gRPC Server Connection
                         grpc_channel_obj.close()
                 else:
-                    raise FunctionError("Stub method not found, please specify the valid stub method.")
+                    raise FunctionError("{0} Stub method not found, please specify the valid stub method.".format(_grpc_rpc_stub_method_name))
             except grpc.RpcError as rpc_err:
                 status_code = rpc_err.code()
                 log.debug("Failed to connect to gRPC Server {}\n connection status: {} \n name: {}\n value: {}".format(rpc_err, rpc_err.details(), status_code.name, status_code.value))
