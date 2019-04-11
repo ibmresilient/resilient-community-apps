@@ -122,6 +122,8 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("No gRPC 'stub' class found in the protocol buffer files in the interface_dir")
 
                 grpc_request_tuple = grpc_helper_obj.get_grpc_class(grpc_interface_module_list, _grpc_request_method_name.lower())
+                if not grpc_request_tuple:
+                    raise ValueError("{0} Request method not found, please specify the valid Request method.".format(_grpc_request_method_name))
             except Exception as error_msg:
                 raise ValueError("Failed to load the gRPC protocol buffer files:\nERROR: {0}".format(error_msg))
 
