@@ -13,17 +13,17 @@ def config_section_data():
     """
 
     config_data = u"""[fn_grpc_interface]
-#interface_dir = <<path to interface buffer pb2 files parent directory>>
-#<<package_name=communication_type,secure connection type,certificate_path or google API token>>
+interface_dir=<<path to the parent directory of your Protocol Buffer (pb2) files>>
+#<<package_name>>=<<communication_type>>, <<secure connection type>>, <<certificate_path or google API token>>
 
-#Note : create a folder same as package name, and copy the interface buffer pb2 files inside the directory.
-# package name variable contains CSV config parameters
-# 1. package_Name(gRPC package name) 
-# 2. communication type(i.e gRPC client-server communication type example - unary(Simple RPC),
-#    server_stream(response-streaming RPC),client_stream(request-streaming RPC),
-#    bidirectional_stream(bidirectionally-streaming RPC))
-# 3. secure connection type(i.e None,SSL/TLS,OAuth2)
-# 4. certificate_path or google API token(i.e None,path to certificate/token).
-#    For more info on gRPC communication types : https://grpc.io/docs/tutorials/basic/python.html
-     """
+# 'package_name' is a CSV list of length 3, where each possible value is described in the documentation
+
+# Note: to setup, in your interface_dir, create a sub-directory that has
+# the same name as your package, and copy the Protocol Buffer pb2 files
+# into that directory.
+#
+# If the package_name was 'helloworld', your app.config would look like:
+# [fn_grpc_interface]
+# interface_dir=/home/admin/integrations/grpc_interface_files
+# helloworld=unary, None, None"""
     return config_data
