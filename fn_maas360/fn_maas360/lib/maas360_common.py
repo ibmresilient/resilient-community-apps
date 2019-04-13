@@ -11,6 +11,13 @@ from resilient_lib.components.requests_common import RequestsCommon
 LOG = logging.getLogger(__name__)
 CON_TYPE_JSON = "application/json"
 CON_TYPE_FORM_ENCODED = "application/x-www-form-urlencoded"
+APP_TYPE_DICT = {"iOS Enterprise Application": 1,
+                 "iOS App Store Application": 2,
+                 "Android Enterprise Application": 3,
+                 "Android Market Application": 4}
+TARGET_DEVICES_DICT = {"All Devices": 0,
+                       "Device Group": 1,
+                       "Specific Device": 2}
 
 
 class MaaS360Utils(object):
@@ -246,38 +253,11 @@ class MaaS360Utils(object):
         :param device_group_id
         :return: action_response
         """
-        # Map targetDevice to a value
-        # Possible values:
-        # 0: All Devices
-        #  1: Device Group
-        # 2: Specific Device
-        if target_devices == "All Devices":
-            target = 0
-        elif target_devices == "Device Group":
-            target = 1
-        elif target_devices == "Specific Device":
-            target = 2
-
-        # Map appType to a value
-        # Possible values:
-        # 1: iOS Enterprise Application
-        # 2: iOS App Store Application
-        # 3: Android Enterprise Application
-        # 4: Android Market Application
-        if app_type == "iOS Enterprise Application":
-            atype = 1
-        elif app_type == "iOS App Store Application":
-            atype = 2
-        elif app_type == "Android Enterprise Application":
-            atype = 3
-        elif app_type == "Android Market Application":
-            atype = 4
-
         url_endpoint = self.get_url_endpoint(url)
         auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
-        request_body = {"appType": u"{}".format(atype),
+        request_body = {"appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
                         "appId": u"{}".format(installed_app_id),
-                        "targetDevices": u"{}".format(target),
+                        "targetDevices": u"{}".format(TARGET_DEVICES_DICT.get(target_devices)),
                         "deviceId": u"{}".format(device_id),
                         "deviceGroupId": u"{}".format(device_group_id)}
 
@@ -297,24 +277,9 @@ class MaaS360Utils(object):
         :param installed_app_id
         :return: action_response
         """
-        # Map appType to a value
-        # Possible values:
-        # 1: iOS Enterprise Application
-        # 2: iOS App Store Application
-        # 3: Android Enterprise Application
-        # 4: Android Market Application
-        if app_type == "iOS Enterprise Application":
-            atype = 1
-        elif app_type == "iOS App Store Application":
-            atype = 2
-        elif app_type == "Android Enterprise Application":
-            atype = 3
-        elif app_type == "Android Market Application":
-            atype = 4
-
         url_endpoint = self.get_url_endpoint(url)
         auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
-        request_body = {"appType": u"{}".format(atype),
+        request_body = {"appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
                         "appId": u"{}".format(installed_app_id)}
 
         try:

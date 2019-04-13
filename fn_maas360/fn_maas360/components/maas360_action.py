@@ -55,6 +55,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             device_id = kwargs.get("maas360_device_id")  # text
             action_type = self.get_select_param(kwargs.get("maas360_action_type"))  # select, values: "Get Software Installed", "Locate Device", "Lock Device", "Wipe Device", "Cancel Pending Wipe"
+            # TODO: verify if action type names haven't changed
 
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_action_type: %s", action_type)
