@@ -2,7 +2,7 @@
 
 ## Table of Contents
   - [About](#about)
-  - [Prerequisites](#prerequisites)
+  - [Requirements](#requirements)
   - [Installation](#installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
@@ -14,19 +14,19 @@
 
 ## About
 **This Function provides a general purpose wrapper that allows you to call gRPC services from within IBM Resilient**
-* It can be used for request/response style communication during incident response management
+* Using gRPC you can efficiently connect services in and across data centers to help with your Incident Response
 * This version supports **Unary RPCs** where the client sends a single request to the server and gets a single response back, just like a normal function call.
-* See [here] (https://grpc.io/docs/) for more information on gRPC
+* See https://grpc.io/ for more information on gRPC
 * We recommend following the gRPC `helloworld` example [here](https://grpc.io/docs/quickstart/python.html) to help get this Integration up and running.
 
  ![screenshot](./screenshots/1.png)
 
 ---
 
-## Prerequisites
+## Requirements
 * Resilient Appliance >= v31.0.0
 * Integrations Server running resilient_circuits >= v30.0.0
-* grpcio version >=v1.19.0
+* A knowledge of Remote Procedure Calls (RPCs) and [gRPC](https://grpc.io/)
 
 ---
 
