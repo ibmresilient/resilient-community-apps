@@ -90,10 +90,10 @@ class FunctionComponent(ResilientComponent):
             function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
 
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
-            log.debug("Function Result : {0}".format(function_result))
             results = {
                 "value": function_result
             }
+            log.debug("Function Result : %s", results)
             yield FunctionResult(results)
         except Exception as com_err:
             yield FunctionError(com_err)
