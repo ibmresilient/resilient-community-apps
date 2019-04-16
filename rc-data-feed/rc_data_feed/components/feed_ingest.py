@@ -242,7 +242,7 @@ class FeedComponent(ResilientComponent):
             ]
         }
 
-        url = '/incidents/query_paged?return_level=normal'
+        url = '/incidents/query_paged?return_level=full'
 
         paged_results = rest_client.post(url, query)
 

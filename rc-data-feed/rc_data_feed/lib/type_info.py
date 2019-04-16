@@ -88,9 +88,69 @@ class TypeInfo(object):
 
         fields = self.rest_client.get("/types/{}/fields".format(self.type_id))
 
+        # some fields for an incident are not part of the /types/0/fields api call, so add them
+        if self.type_id == 0:
+            fields = self.add_incident_fields(fields)
+
         TypeInfo.fields_cache[self.type_id] = fields
 
         return fields
+
+
+    def add_incident_fields(self, fields):
+        """
+        add fields which are included in the types schema
+        :param fields:
+        :return: new fields array
+        """
+        all_field_names = [field["name"] for field in fields]
+
+        # new fields
+        include_fields = [
+          (None, "org_id", "number"),
+          ("hipaa", "hipaa_acquired_comment", "text"),
+          ("hipaa", "hipaa_additional_misuse_comment", "text"),
+          ("hipaa", "hipaa_additional_misuse", "boolean"),
+          ("hipaa", "hipaa_adverse_comment", "text"),
+          ("hipaa", "hipaa_breach_comment", "text"),
+          ("hipaa", "hipaa_breach", "boolean"),
+          ("hipaa", "hipaa_adverse", "boolean"),
+          ("hipaa", "hipaa_acquired", "boolean"),
+          ("hipaa", "hipaa_misused_comment", "text"),
+          ("hipaa", "hipaa_misused", "boolean")
+        ]
+
+        field_id = 10000     # our start of Ids
+        for prefix, field_name, field_type in include_fields:
+            # don't repeat fields if already included
+            if field_name not in all_field_names:
+                field_id += 1
+                fields.append(self.make_field(0, field_id, prefix, field_name, field_type))
+
+        return fields
+
+
+    def make_field(self, type_id, field_id, prefix, field_name, field_type):
+        """
+        Make a field object with key fields for adding to datastore
+        :param type_id:
+        :param field_id:
+        :param prefix
+        :param field_name:
+        :param field_type:
+        :return: field object
+        """
+        field = {
+            "type_id": type_id,
+            "id": field_id,
+            "name": field_name,
+            "text": field_name,
+            "prefix": prefix,
+            "input_type": field_type,
+            "internal": True
+        }
+
+        return field
 
     def is_data_table(self):
         """Determines if self.type_id is a datatable."""
