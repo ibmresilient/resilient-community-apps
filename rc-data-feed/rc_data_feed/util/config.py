@@ -16,12 +16,33 @@ reload=True
 # feed_data is the default message destination that will be listened to
 queue=feed_data
 
+#[postgres_feed]
+#class=ODBCFeed
+#odbc_connect=Driver={PostresSQL Driver};Server=127.0.0.1;DB=<db>;Port=5432;connectTimeout=0
+#sql_dialect=PostgreSQL96Dialect
+#uid=<acct>
+#pwd=<pwd>
+
+#[oracle_feed]
+#class=ODBCFeed
+#odbc_connect=Driver={Oracle 12c ODBC driver};DBQ=ORCLCDB
+#sql_dialect=OracleDialect
+#uid=<acct>
+#pwd=<pwd>
+
 #[sqlserver_feed]
 #class=ODBCFeed
-#odbc_connect=DRIVER={ODBC Driver 17 for SQL Server};SERVER=127.0.0.1;PORT=1443;DATABASE=res_test;UID=sa;PWD=Passw0rd
+#odbc_connect=DRIVER={ODBC Driver 17 for SQL Server};SERVER=127.0.0.1;PORT=1443;DATABASE=<db>
 #sql_dialect=SQLServerDialect
-#uid=sa
-#pwd=sa
+#uid=<acct>
+#pwd=<pwd>
+
+#[mysql_feed]
+#class=ODBCFeed
+#odbc_connect=Driver={MariaDB ODBC 3.0 Driver};Server=127.0.0.1;DB=<db>;Port=3306;connectTimeout=0
+#sql_dialect=MariaDBDialect
+#uid=<acct>
+#pwd=<pwd>
 
 #[elastic_feed]
 #class=ElasticFeed
@@ -45,16 +66,6 @@ queue=feed_data
 #event_host=
 #event_source=resilient
 #use_ssl=true
-
-#[elastic_feed]
-#class=ElasticFeed
-#url=http://localhost
-#port=9200
-# if using multiple organizations, consider indexes such as resilient<org_ID>
-#index=resilient
-#auth_user=
-#auth_password=
-#cafile=false
 
 #[my_sqlite_feed]
 #class=SQLiteFeed
