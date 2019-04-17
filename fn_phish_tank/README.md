@@ -17,9 +17,9 @@
    * URL Artifacts of Resilient   
 
   
-After successful completion of checking phishing status on given URL updating the artifact description with result status message.
+After successful completion of checking phishing status on given URL, updates the artifact description field with result status message.
   
-### PhishTank function layout:  
+### PhishTank Function Layout:  
 ![screenshot](screenshots/1.png)
     
 ### PhishTank Inputs:  
@@ -75,7 +75,7 @@ After installation & configuration, the package will be loaded by
 ## Function Inputs
 |Input Name    |Type          |Required  |Example   | Info |  
 |---------------|-----------|-----------|----------|--------| 
-|`phish_tank_check_url`|  String|Yes |  https://www.google.com| This is the url artifact to checked for phishing status.| 
+|`phish_tank_check_url`|  String|Yes |  https://www.google.com| This is the artifact value to be checked for phishing status.| 
 
 ## Function Output  
 The payload from integration will wrap the results of the IPhishTank response in the following JSON structure.    
@@ -91,7 +91,7 @@ The payload from integration will wrap the results of the IPhishTank response in
 ## Pre-Process Script  
  
 This example sets `Example: PhishTank: Submit URL` inputs to the artifact values.  
-A Pre-Process script will relay the Resilient artifact data to function inputs similar to this example:  
+A Pre-Process script will relay the Resilient artifact value data to function inputs similar to this example:  
 ```python  
 inputs.phish_tank_check_url = artifact.value  
 ```
@@ -121,9 +121,12 @@ artifact.description = rich_text
 ```
 
 ## Rules  
+
 This PhishTank rule is configured with condition that it only works on URL Artifacts.
+
+
 | Rule Name | Object Type | Workflow Triggered |Activity Fields| 
 | --------- | :---------: | ------------------ |---------------|
- |`Example: PhishTank: Submit URL`| `Artifact` | `Example: PhishTank: Submit URL` |-----|  
+|`Example: PhishTank: Submit URL`| `Artifact` | `Example: PhishTank: Submit URL` |-----|  
 
-:copyright:IBM Corp. 2010, 2019. All Rights Reserved
+:copyright:IBM Corp. 2010, 2019. All Rights Reserved.
