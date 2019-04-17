@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -6,12 +7,14 @@ from setuptools import setup, find_packages
 setup(
     name='fn_phish_tank',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_phish_tank'",
-    long_description="Resilient Circuits Components for 'fn_phish_tank'",
+    long_description="""Check URL's against PhishTanks(https://www.phishtank.com/) Data base to see URL 
+                        is flagged as phishing or not phishing. and then update the phishing status on 
+                        artifact description field.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'python-dateutil>=2.8.0',

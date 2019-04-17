@@ -1,4 +1,4 @@
-# needs to update license
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -82,11 +82,7 @@ class FunctionComponent(ResilientComponent):
 
             results = _result_obj.done(True, _api_response_json)
 
-            print(results)
             # Produce a FunctionResult with the results
-            import json
-            with open('a.txt', 'w+') as fh:
-                json.dump(results, fh)
             yield StatusMessage("Checking Phishing Status Completed.")
             log.debug("RESULTS: %s", results)
             yield FunctionResult(results)

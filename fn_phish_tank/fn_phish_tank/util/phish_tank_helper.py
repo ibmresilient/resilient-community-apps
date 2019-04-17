@@ -10,6 +10,7 @@ from dateutil import parser
 TOTAL_RETRIES = 3
 BACK_OFF_FACTOR = 5
 
+
 class phish_tank_helper(object):
     def __init__(self, req_session=None):
         self.request_session = req_session
@@ -45,7 +46,6 @@ class phish_tank_helper(object):
     def timestamp_to_ms_epoch(str_timestamp):
         """Converts a String Timestamp to an int in milliseconds since 1970 epoch, a format that
         Resilient DateTime field type accepts"""
-        print("ZZZZZZZZZZZZZZZZZZ", str_timestamp)
         epoch = int(calendar.timegm(parser.parse(str_timestamp).timetuple()) * 1000.0)
         return epoch
 

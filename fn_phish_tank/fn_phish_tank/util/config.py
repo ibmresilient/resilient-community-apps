@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_phish_tank"""
@@ -13,7 +14,7 @@ def config_section_data():
 # PhishTank API Access URL
 phish_tank_api_url=http://checkurl.phishtank.com/checkurl/
 # PhishTank API Key.
-phish_tank_api_key=xxx
+phish_tank_api_key=
 # Proxy Server by Default it will be None.
 proxy=
 """
