@@ -1,0 +1,4 @@
+include README.md
+include fn_sndbox_analyzer/util/*
+include fn_sndbox_analyzer/LICENSE
+include fn_sndbox_analyzer/doc/*
