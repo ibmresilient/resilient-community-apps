@@ -1,0 +1,70 @@
+"""This module contains the definition of the ODBCFeedDestination class."""
+import logging
+import pyodbc
+
+from rc_data_feed.lib.sql_feed_base import SqlFeedDestinationBase
+
+
+LOG = logging.getLogger(__name__)
+
+
+class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-public-methods
+    """Feed for writing Resilient data to an ODBC destination."""
+    def __init__(self, rest_client, options):
+        """Initializes a new ODBCFeed.
+
+        :param rest_client: A Resilient SimpleClient object to use for interacting with
+            the REST API.  This is expected to be used for loading type information (e.g.
+            loading all of the types so we can create the tables, loading field type
+            information, etc.).
+        :param options: A dict containing the configuration options needed.
+        """
+        super(ODBCFeedDestination, self).__init__(rest_client, options)
+
+        connect_str = options.get("odbc_connect")
+
+        pwd = options.get("pwd")
+        uid = options.get("uid")
+
+        # pylint: disable=c-extension-no-member
+        self.connection = pyodbc.connect(connect_str, uid=uid, pwd=pwd)
+
+        self.dialect.configure_connection(self.connection)
+
+        self._init_tables()
+
+    def _start_transaction(self):
+        """Creates a new cursor and returns it to the caller.
+
+        :returns A new DB cursor."""
+        return self.connection.cursor()
+
+    def _commit_transaction(self, context):
+        """Commits the currently open transaction."""
+        self.connection.commit()
+
+    def _rollback_transaction(self, context):
+        """Rolls back the currently open transaction."""
+        self.connection.rollback()
+
+    def _execute_sql(self, cursor, sql, data=None):
+        """Executes the specified SQL.
+
+        :param cursor: The cursor returned by a previous _start_transaction call.
+        :param sql: The SQL to execute.
+        :param data: The bind parameters in whatever format was returned by
+            self.dialect.get_parameters.  In our case, we assume that it's
+            an array (since that's what the pyodbc API wants."""
+        if data is None:
+            data = []
+
+        try:
+            return cursor.execute(sql, data)
+        except Exception as err:
+            LOG.error("failure on %s", sql)
+            raise err
+
+
+    def _close_connection(self):
+        """Close the connection to the database"""
+        self.connection.close()
