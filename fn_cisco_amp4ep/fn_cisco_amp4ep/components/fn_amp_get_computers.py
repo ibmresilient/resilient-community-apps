@@ -15,7 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
 
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_amp_get_computers' of
@@ -35,6 +37,7 @@ class FunctionComponent(ResilientComponent):
     JSON format similar to the following.
 
     {
+      "input_params": {"group_guid": null, "limit": null, "hostname": null, "internal_ip": null, "external_ip": null},
       "query_execution_time": "2018-08-09 12:34:15",
       "computer_trajectory": {
         "version": "v1.2.0",
@@ -114,12 +117,12 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
-            rtn = amp.get_computers(**params)
+            rtn = amp.get_paginated_total(amp.get_computers, **params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": rtn, "query_execution_time": query_execution_time}
+            results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
             yield StatusMessage("Returning all 'computers' results")
 
             log.debug(json.dumps(results))

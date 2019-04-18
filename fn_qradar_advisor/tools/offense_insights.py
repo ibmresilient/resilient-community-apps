@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from ToolCommand import ToolCommand
 import sys
 from fn_qradar_advisor.lib.qradar_advisor_client import QRadarAdvisorClient
@@ -21,7 +23,7 @@ class SampleCmd(ToolCommand):
                                      cafile=False,
                                      log=logging)
         resp = client.offense_insights(self.opts_dict["offense"])
-        print("Status: {}\n Content: {}".format(str(resp), resp.content))
+        print("Return: {}".format(str(resp)))
 
 if __name__ == "__main__":
 	sample_cmd = SampleCmd(HELP_STR)

@@ -15,6 +15,9 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
 from fn_cisco_amp4ep.lib.helpers import validate_opts, validate_params, is_none
+from fn_cisco_amp4ep.lib.amp_ratelimit import AmpRateLimit
+
+RATE_LIMITER = AmpRateLimit()
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'amp_delete_file_list_files' of
@@ -32,7 +35,9 @@ class FunctionComponent(ResilientComponent):
     in JSON format similar to the following.
 
     {
-     "delete_file_list_files": {u'version': u'v1.2.0',
+      "input_params": {"file_list_guid": "e773a9eb-296c-40df-98d8-bed46322589d",
+                       "file_sha256": "8a68fc7ffd25e12cb92e3cb8a51bf219cada775baef73991bee384b3656fa284"}
+      "response": {u'version': u'v1.2.0',
                                 u'data': {},
                                 u'metadata': {u'links': {
                                                 u'self': u'https://api.amp.cisco.com/v1/file_lists/e773a9eb-296c-40df-98d8-bed46322589d/files/4ce4e7ab22a8900bf438ff84baebe74d3ef3828a716b933b6e2a85b991b36f31'}
@@ -76,16 +81,15 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params)
 
-            amp = Ampclient(self.options)
+            amp = Ampclient(self.options, RATE_LIMITER)
 
             rtn = amp.delete_file_list_files(**params)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
-            results = {"response": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time}
+            results = {"response": json.loads(json.dumps(rtn)),"query_execution_time": query_execution_time,
+                       "input_params": params}
             yield StatusMessage("Returning 'delete file lists files' results for guid '{}' and sha256 value '{}'."
                                 .format(params["file_list_guid"], params["file_sha256"]))
-
-            yield StatusMessage("Done...")
 
             log.debug(json.dumps(results))
 

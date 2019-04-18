@@ -1,0 +1,5 @@
+include README.md
+include fn_microsoft_security_graph/util/*
+include fn_microsoft_security_graph/components/*
+include fn_microsoft_security_graph/LICENSE
+include doc/*

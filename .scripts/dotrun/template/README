@@ -1,0 +1,32 @@
+
+
+
+                                    - - -         R E S I L I E N T - C I R C U I T S   B O O T S T R A P       - - -
+
+This .run file is designed to extract resilient-circuits and all the published community apps into a runtime environment. It contains all the libraries needed for the community apps in an air-gapped environment which can be installed manually at any time.
+
+When executed, this self-extracting file will automatically install resilient-circuits (see –confirm).
+
+Usage:
+
+/bin/bash resilient-circuits.run [--confirm] [--target dir]
+--confirm will prompt the user to extract the files and also prompt before installing resilient-circuits. If omitted, all files are extracted and resilient-circuits will be installed into the environment using ‘pip’.
+--target will retain the unpacked files in a directory of your choice. The default is to retain the files in the current working directory.
+
+By default, all functions and custom threat services are retained for future use in the current working directory under resilient-circuits/.
+
+Virtualenv is used to save all the libraries installed for resilient-circuits and the integrations. To use, first enable virtualenv:
+~/venv/resilient-circuits/bin/activate
+
+Use the command ‘resilient-circuits config -c’ to build the app.config file before running.
+
+Integration Installation:
+
+When installing an integration, use this syntax:
+cd resilient-circuits
+pip install --no-index --find-links=. --find-links=./lib <integration>.tar.gz
+
+Once installed in the environment, use the command ‘resilient-circuits customize’ to import into Resilient and ‘resilient-circuits config -u’ to build out the configuration settings in the app.config file.
+
+File extracted:
+ 

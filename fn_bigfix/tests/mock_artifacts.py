@@ -348,6 +348,16 @@ def get_artifact_data_2():
                   'result': False, 'computer_name': u'DESKTOP-TUKM3HF-3'}
     ])
 
+def get_check_exists_subkey():
+    return list([{'computer_id': 12315195, 'failure': False, 'resp_time': 0, 'query_id': 1,
+                  'result': u'False', 'computer_name': u'bigfix.test-1'}
+    ])
+
+def get_check_is_folder():
+    return list([{'computer_id': 12315195, 'failure': False, 'resp_time': 0, 'query_id': 1,
+                  'result': u'False', 'computer_name': u'bigfix.test-1'}
+    ])
+
 def mocked_res_client(*args):
 
     """Function will be used by the mock to replace resilient client"""
@@ -417,6 +427,12 @@ def mocked_bigfix_client(*args):
 
         def get_bf_computer_properties(self, bigfix_asset_id):
             return  self._get_bf_computer_properties()
+
+        def check_exists_subkey(self, artifact_value, computer_id):
+            return get_check_exists_subkey()
+
+        def check_is_folder(self, artifact_value, computer_id):
+            return get_check_is_folder()
 
         @staticmethod
         def _get_bf_action_status(bigfix_action_id):
@@ -502,14 +518,14 @@ def mocked_requests(*args, **kwargs):
                 self.text = get_response_artifact_data(query_id)
                 test=1
             elif arg and "/api/clientquery" in arg[0]:
-                if "exists file" in kwargs["data"]:
+                if "exists file".encode() in kwargs["data"]:
                     self.text = post_response_artifact_query("DeleteFile")
-                elif "exists process" in kwargs["data"]:
+                elif "exists process".encode() in kwargs["data"]:
                     self.text = post_response_artifact_query("KillProcess")
             elif arg and "/api/actions" in arg[0]:
-                if "Delete File" in kwargs["data"]:
+                if "Delete File".encode() in kwargs["data"]:
                     self.text = post_response_artifact_remediate("DeleteFile")
-                elif "Delete Registry Key" in kwargs["data"]:
+                elif "Delete Registry Key".encode() in kwargs["data"]:
                     self.text = post_response_artifact_remediate("DeleteRegKey")
             elif arg and "/response_text" in arg[0]:
                 self.text = get_response_text_asset_props(arg[1])

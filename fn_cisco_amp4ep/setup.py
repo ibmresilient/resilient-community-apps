@@ -36,6 +36,7 @@ setup(
             "FnAmpDeleteFileListFilesFunctionComponent = fn_cisco_amp4ep.components.fn_amp_delete_file_list_files:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_cisco_amp4ep.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_cisco_amp4ep.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_cisco_amp4ep.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_cisco_amp4ep.util.selftest:selftest_function"]
     }
 )
