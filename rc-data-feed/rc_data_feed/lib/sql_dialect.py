@@ -593,7 +593,7 @@ class SqlServerDialect(ODBCDialectBase):
         if input_type in type_dict:
             return type_dict[input_type]
 
-        return 'TEXT'
+        return 'NTEXT'
 
     def get_parameters(self, parameter_names, parameters):
         # Need to get a list that contains all the values in the same order as parameter_names.

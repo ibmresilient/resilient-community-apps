@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import json
 import os
 from collections import OrderedDict
@@ -15,7 +17,7 @@ APP_CONFIG = {
 
 RESULT_PAYLOAD = {  "id":  10,
                     "inc_id": 2301,
-                    "test_text": "this is a text field",
+                    "test_text": u"this is a text fieldँ ं ः अ आ इ ई उ ऊ ऋ ऌ ऍ ऎ",
                     "test_int": 1000,
                     "test_date": '2019-02-13T15:55:47.448000',
                     "test_datetime": '2019-02-13T15:55:47.448000',
@@ -24,7 +26,7 @@ RESULT_PAYLOAD = {  "id":  10,
 
 MSG_PAYLOAD = OrderedDict({"id":  10,
                              "inc_id": 2301,
-                             "test_text": u"this is a text field",
+                             "test_text": u"this is a text fieldँ ं ः अ आ इ ई उ ऊ ऋ ऌ ऍ ऎ",
                              "test_int": 1000,
                              "test_date": 1550073347448,
                              "test_datetime": 1550073347448,

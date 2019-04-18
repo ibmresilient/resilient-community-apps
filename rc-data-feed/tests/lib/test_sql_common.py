@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 from collections import OrderedDict
 from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
@@ -24,7 +26,7 @@ all_fields = [
 flat_payload = OrderedDict()
 flat_payload["id"] =  101
 flat_payload["inc_id"] = 2301
-flat_payload["test_text"] = u"this is a text field"
+flat_payload["test_text"] = u"this is a text fieldँ ं ः अ आ इ ई उ ऊ ऋ ऌ ऍ ऎ"
 flat_payload["test_int"] = 1000
 flat_payload["test_date"] = 1550073347448
 flat_payload["test_datetime"] = 1550073347448

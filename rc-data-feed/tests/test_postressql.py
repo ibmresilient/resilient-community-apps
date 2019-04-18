@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import logging
 import datetime
 import pytest
@@ -25,7 +27,7 @@ app_config = {
 
 result_payload = {  "id":  101,
                     "inc_id": 2301,
-                    "test_text": "this is a text field",
+                    "test_text": u"this is a text fieldँ ं ः अ आ इ ई उ ऊ ऋ ऌ ऍ ऎ",
                     "test_int": 1000,
                     "test_date": datetime.date(2019, 2, 13),
                     "test_bool": "1"

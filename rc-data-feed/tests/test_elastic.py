@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pytest
 import time
 from collections import OrderedDict
