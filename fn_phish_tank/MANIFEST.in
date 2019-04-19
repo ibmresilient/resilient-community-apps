@@ -1,0 +1,4 @@
+include README.md
+include fn_phish_tank/util/*
+include fn_phish_tank/LICENSE
+include screenshots/*
