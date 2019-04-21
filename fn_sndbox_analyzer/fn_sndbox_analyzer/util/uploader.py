@@ -142,39 +142,24 @@ class ApiUploader(object):
 
         return False
 
-    def get_sample_report(self, analysis_id, report_format="json"):
+    def get_sample_report(self, analysis_id):
         """Retrieves the specified report for the sample item, referenced by sample_id.
         Available formats include: json, pcap.
         :type  analysis_id:       str
         :param analysis_id:       Analysis ID number
-        :type  report_format: str
-        :param report_format: Return format
         :rtype:  dict
-        :return: Dictionary representing the JSON parsed data or raw, for other
-                 formats / JSON parsing failure.
+        :return: Dictionary representing the JSON parsed data or raw / JSON parsing failure.
         """
 
-        if report_format == "html":
-            return "Report Unavailable"
-
         try:
-            response = self._request(
-                "/{analysis_id}/{report_format}".format(analysis_id=analysis_id, report_format=report_format))
-            buffer = StringIO(response.content)
-            deflatedContent = gzip.GzipFile(fileobj=buffer)
-            return json.loads(deflatedContent.read())
+            response = self._request("/{}".format(analysis_id))
+            if response.status_code == requests.codes.not_found:
+                # unknown id
+                return False
+
+            report = response.json()
+            report['sample_url'] = 'https://app.sndbox.com/sample/' + analysis_id
+            return report
 
         except (ValueError, KeyError) as e:
             raise SandboxError(e)
-
-
-if __name__ == "__main__":
-    uploader = ApiUploader(api_key="46a0bdc1-29da-4920-aa04-79034fc24cf7",
-                           url="https://staging-api.sndbox.com/developers/files")
-    # with open("/Users/tomerf/Downloads/ab8c7e4ab0ba8b200ff7b17fb0553401_loki_trojan.bin", 'rb') as f:
-    #     analysis_id = uploader.submit_samples(f)
-    #     print(analysis_id)
-    analysis_id = '5267af43-4b23-4f68-9e39-4f9cb6947f75'
-    print uploader.check(analysis_id)
-
-    print uploader.get_sample_report(analysis_id)
