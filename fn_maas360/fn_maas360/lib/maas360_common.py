@@ -196,6 +196,7 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
 
         action_response = results.get("actionResponse")
+
         return action_response
 
     def wipe_device(self, url, device_id, notify_me, notify_user, notify_others):
@@ -221,6 +222,7 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
 
         action_response = results.get("actionResponse")
+
         return action_response
 
     def cancel_pending_wipe(self, url, device_id):
@@ -240,6 +242,7 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
 
         action_response = results.get("actionResponse")
+
         return action_response
 
     def stop_app_distribution(self, url, app_type, installed_app_id, target_devices, device_id, device_group_id):
@@ -261,12 +264,22 @@ class MaaS360Utils(object):
                         "deviceId": u"{}".format(device_id),
                         "deviceGroupId": u"{}".format(device_group_id)}
 
+        # TODO - test the deviceGroupId vs deviceId one will be None will the endpoint be happy?
+
         try:
             results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Stop App Distribution: {}".format(err))
 
         action_response = results.get("actionResponse")
+        # TODO test this
+        # expected results
+        # <actionResponse>
+        #   <status>Success</status>
+        #   <description>Application deleted successfully.</description>
+        # </actionResponse>
+        # Mandatory attributes in Response
+        # - status
         return action_response
 
     def delete_app(self, url, app_type, installed_app_id):
@@ -288,4 +301,12 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Delete App: {}".format(err))
 
         action_response = results.get("actionResponse")
+        # TODO test this
+        # expected results
+        # <actionResponse>
+        #   <status>Success</status>
+        #   <description>Application deleted successfully.</description>
+        # </actionResponse>
+        # Mandatory attributes in Response
+        #  - status
         return action_response
