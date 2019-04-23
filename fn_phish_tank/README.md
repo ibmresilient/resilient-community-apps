@@ -13,7 +13,7 @@
  ## About This Package  
  
 **This function checks URLs against [PhishTank](https://www.phishtank.com/) database to see if the URL is flagged as Phishing or not Phishing.**
-* It can be called on :   
+Provided in this Integration package is an example Rule configured to be ran against URL Artifacts in Resilient :   
    * URL Artifacts of Resilient   
 
   
