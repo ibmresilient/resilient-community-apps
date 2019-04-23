@@ -12,7 +12,7 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_phish_tank'",
-    long_description="""This function checks URLs against [PhishTank](https://www.phishtank.com/)
+    long_description="""This function checks URLs against PhishTank(https://www.phishtank.com/)
      database to see if the URL is flagged as Phishing or not Phishing.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
