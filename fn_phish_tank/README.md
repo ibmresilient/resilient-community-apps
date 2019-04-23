@@ -12,7 +12,7 @@
  ---  
  ## About This Package  
  
-**This function checks URLs against [PhishTank](https://www.phishtank.com/) database to see URL is flagged as Phishing or not Phishing.**
+**This function checks URLs against [PhishTank](https://www.phishtank.com/) database to see if the URL is flagged as Phishing or not Phishing.**
 * It can be called on :   
    * URL Artifacts of Resilient   
 
