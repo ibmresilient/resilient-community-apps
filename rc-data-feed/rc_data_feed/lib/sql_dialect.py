@@ -445,23 +445,31 @@ class MySqlDialect(ODBCDialectBase):
 
 
 class SqlServerDialect(ODBCDialectBase):
-    RESERVE_LIST = ['add', 'all', 'alter', 'and', 'any', 'as', 'asc', 'authorization', 'backup', 'begin', 'between', 'break', 'browse',
-                    'bulk', 'by', 'cascade', 'case', 'check', 'checkpoint', 'close', 'clustered', 'coalesce', 'collate', 'column', 'commit',
-                    'compute', 'constraint', 'contains', 'containstable', 'continue', 'convert', 'create', 'cross', 'current', 'current_date',
-                    'current_time', 'current_timestamp', 'current_user', 'cursor', 'database', 'dbcc', 'deallocate', 'declare', 'default',
-                    'delete', 'deny', 'desc', 'disk', 'distinct', 'distributed', 'double', 'drop', 'dump', 'else', 'end', 'errlvl', 'escape',
-                    'except', 'exec', 'execute', 'exists', 'exit', 'external', 'fetch', 'file', 'fillfactor', 'for', 'foreign', 'freetext',
-                    'freetexttable', 'from', 'full', 'function', 'goto', 'grant', 'group', 'group', 'having', 'holdlock', 'identity',
-                    'identitycol', 'identity_insert', 'if', 'in', 'index', 'inner', 'insert', 'intersect', 'into', 'is', 'join', 'key',
-                    'kill', 'left', 'like', 'lineno', 'load', 'merge', 'national', 'nocheck', 'nonclustered', 'not', 'null', 'nullif', 'of',
-                    'off', 'offsets', 'on', 'open', 'opendatasource', 'openquery', 'openrowset', 'openxml', 'option', 'or', 'order', 'outer',
-                    'over', 'percent', 'pivot', 'plan', 'precision', 'primary', 'print', 'proc', 'procedure', 'public', 'raiserror', 'read',
-                    'readtext', 'reconfigure', 'references', 'replication', 'restore', 'restrict', 'return', 'revert', 'revoke', 'right',
-                    'rollback', 'rowcount', 'rowguidcol', 'rule', 'save', 'schema', 'securityaudit', 'select', 'semantickeyphrasetable',
-                    'semanticsimilaritydetailstable', 'semanticsimilaritytable', 'session_user', 'set', 'setuser', 'shutdown', 'some',
-                    'statistics', 'system_user', 'table', 'tablesample', 'textsize', 'then', 'to', 'top', 'tran', 'transaction', 'trigger',
-                    'truncate', 'try_convert', 'tsequal', 'union', 'unique', 'unpivot', 'update', 'updatetext', 'use', 'user', 'values',
-                    'varying', 'view', 'waitfor', 'when', 'where', 'while', 'with', 'within', 'writetext']
+    RESERVE_LIST = ['absolute', 'action', 'ada', 'add', 'all', 'allocate', 'alter', 'and', 'any', 'are', 'as', 'asc',
+                    'assertion', 'at', 'authorization', 'avg', 'begin', 'between', 'bit', 'bit_length', 'both', 'by',
+                    'cascade', 'cascaded', 'case', 'cast', 'catalog', 'char', 'character', 'character_length', 'char_length',
+                    'check', 'close', 'coalesce', 'collate', 'collation', 'column', 'commit', 'connect', 'connection',
+                    'constraint', 'constraints', 'continue', 'convert', 'corresponding', 'count', 'create', 'cross',
+                    'current', 'current_date', 'current_time', 'current_timestamp', 'current_user', 'cursor', 'date',
+                    'day', 'deallocate', 'dec', 'decimal', 'declare', 'default', 'deferrable', 'deferred', 'delete',
+                    'desc', 'describe', 'descriptor', 'diagnostics', 'disconnect', 'distinct', 'domain', 'double', 'drop',
+                    'else', 'end', 'end-exec', 'escape', 'except', 'exception', 'exec', 'execute', 'exists', 'external',
+                    'extract', 'false', 'fetch', 'first', 'float', 'for', 'foreign', 'fortran', 'found', 'from', 'full',
+                    'get', 'global', 'go', 'goto', 'grant', 'group', 'having', 'hour', 'identity', 'immediate', 'in',
+                    'include', 'index', 'indicator', 'initially', 'inner', 'input', 'insensitive', 'insert', 'int',
+                    'integer', 'intersect', 'interval', 'into', 'is', 'isolation', 'join', 'key', 'language', 'last',
+                    'leading', 'left', 'level', 'like', 'local', 'lower', 'match', 'max', 'min', 'minute', 'module',
+                    'month', 'names', 'national', 'natural', 'nchar', 'next', 'no', 'none', 'not', 'null', 'nullif',
+                    'numeric', 'octet_length', 'of', 'on', 'only', 'open', 'option', 'or', 'order', 'outer', 'output',
+                    'overlaps', 'pad', 'partial', 'pascal', 'position', 'precision', 'prepare', 'preserve', 'primary',
+                    'prior', 'privileges', 'procedure', 'public', 'read', 'real', 'references', 'relative', 'restrict',
+                    'revoke', 'right', 'rollback', 'rows', 'schema', 'scroll', 'second', 'section', 'select', 'session',
+                    'session_user', 'set', 'size', 'smallint', 'some', 'space', 'sql', 'sqlca', 'sqlcode', 'sqlerror',
+                    'sqlstate', 'sqlwarning', 'substring', 'sum', 'system_user', 'table', 'temporary', 'then', 'time',
+                    'timestamp', 'timezone_hour', 'timezone_minute', 'to', 'trailing', 'transaction', 'translate',
+                    'translation', 'trim', 'true', 'union', 'unique', 'unknown', 'update', 'upper', 'usage', 'user',
+                    'using', 'value', 'values', 'varchar', 'varying', 'view', 'when', 'whenever', 'where', 'with',
+                    'work', 'write', 'year', 'zone']
 
     def get_upsert(self, table_name, field_names, field_types):
         """
