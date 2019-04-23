@@ -11,7 +11,7 @@ from fn_phish_tank.util.phish_tank_helper import *
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_phish_tank_submitt_url"""
+    """Component that implements Resilient function 'fn_phish_tank_submit_url"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -24,9 +24,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_phish_tank", {})
 
-    @function("fn_phish_tank_submitt_url")
-    def _fn_phish_tank_submitt_url_function(self, event, *args, **kwargs):
-        """Function: Function to check URL against PhishTanks(https://www.phishtank.com/) Database to see URL is flagged as phishing or not."""
+    @function("fn_phish_tank_submit_url")
+    def _fn_phish_tank_submit_url_function(self, event, *args, **kwargs):
+        """Function: Function to check URLs against PhishTanks(https://www.phishtank.com/) Database to see URL is flagged as phishing or not phishing."""
         try:
             # Get the function parameters:
             phish_tank_check_url = kwargs.get("phish_tank_check_url")  # text
@@ -75,16 +75,15 @@ class FunctionComponent(ResilientComponent):
             if _verified_status:
                 _received_verified_time = _api_response_json.get('results').get('verified_at')
                 _epoch_verified_time = phish_tank_helper.timestamp_to_ms_epoch(_received_verified_time)
-                _api_response_json['results']['verified_at'] = _epoch_verified_time
+                _api_response_json['results']['verified_at_modified'] = _epoch_verified_time
 
             # Replacing string time with epoch converted time
-            _api_response_json['meta']['timestamp'] = _epoch_time
+            _api_response_json['meta']['timestamp_modified'] = _epoch_time
 
             results = _result_obj.done(True, _api_response_json)
 
             # Produce a FunctionResult with the results
             yield StatusMessage("Checking Phishing Status Completed.")
-            log.debug("RESULTS: %s", results)
             yield FunctionResult(results)
         except Exception as err_msg:
             yield FunctionError(err_msg)

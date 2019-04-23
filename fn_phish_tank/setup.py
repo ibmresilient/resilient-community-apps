@@ -29,7 +29,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnPhishTankSubmittUrlFunctionComponent = fn_phish_tank.components.fn_phish_tank_submitt_url:FunctionComponent"
+            "FnPhishTankSubmitUrlFunctionComponent = fn_phish_tank.components.fn_phish_tank_submit_url:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_phish_tank.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_phish_tank.util.customize:customization_data"],
