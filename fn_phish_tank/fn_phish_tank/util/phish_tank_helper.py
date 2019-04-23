@@ -55,7 +55,7 @@ class phish_tank_helper(object):
         """
         if self.request_session is None:
             self.request_session = requests.Session()
-            # This will allow 5 tries at a url, with an increasing backoff.  Only applies to a specific set of codes
+            # This will allow 3 tries at a url, with an increasing backoff.  Only applies to a specific set of codes
             self.request_session.mount('https://', HTTPAdapter(
                 max_retries=Retry(
                     total=TOTAL_RETRIES,

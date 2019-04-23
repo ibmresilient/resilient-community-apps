@@ -54,7 +54,7 @@ Run the following command to generate the PhishTank  configuration section in th
     
 ` resilient-circuits config [-u | -c]`   
 
-The following phish tank configuration data is added:    
+The following PhishTank configuration data is added:    
 ```                   
 [fn_phish_tank]
 # PhishTank API Access URL

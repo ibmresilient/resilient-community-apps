@@ -5,7 +5,6 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_phish_tank.util.selftest as selftest
 from resilient_lib import ResultPayload
 from fn_phish_tank.util.phish_tank_helper import *
 
@@ -17,7 +16,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_phish_tank", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -26,7 +24,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_phish_tank_submit_url")
     def _fn_phish_tank_submit_url_function(self, event, *args, **kwargs):
-        """Function: Function to check URLs against PhishTanks(https://www.phishtank.com/) Database to see URL is flagged as phishing or not phishing."""
+        """This function checks URLs against PhishTank(https://www.phishtank.com/) database to see if the URL is flagged as Phishing or not Phishing"""
         try:
             # Get the function parameters:
             phish_tank_check_url = kwargs.get("phish_tank_check_url")  # text
@@ -46,7 +44,7 @@ class FunctionComponent(ResilientComponent):
 
             # Initialing the resilient result object
             _result_obj = ResultPayload('fn_phish_tank',
-                                        function_inputs=[phish_tank_api_url, phish_tank_check_url, phish_tank_api_key])
+                                        function_inputs=[phish_tank_check_url, phish_tank_api_url])
 
             # PhihshTank Proxy Data
             pt_proxy = phish_tank_helper.format_proxy_data(proxy_data=proxy)
