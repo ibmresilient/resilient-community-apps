@@ -17,7 +17,7 @@ Provided in this Integration package is an example Rule configured to be ran aga
    * URL Artifacts of Resilient   
 
   
-After successful completion of checking phishing status on given URL, updates the artifact description field with result status message.
+After the successful scan of a given URL, the Artifact's description field is updated with the results.
   
 ### PhishTank Function Layout:  
 ![screenshot](screenshots/1.png)
