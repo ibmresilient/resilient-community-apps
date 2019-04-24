@@ -43,8 +43,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Checking Phishing Status Against URL: {}".format(phish_tank_check_url))
 
             # Initialing the resilient result object
-            _result_obj = ResultPayload('fn_phish_tank',
-                                        function_inputs=[phish_tank_check_url, phish_tank_api_url])
+            _result_obj = ResultPayload('fn_phish_tank', **kwargs)
 
             # PhihshTank Proxy Data
             pt_proxy = phish_tank_helper.format_proxy_data(proxy_data=proxy)
@@ -65,14 +64,12 @@ class FunctionComponent(ResilientComponent):
             _api_response_json = _api_response.json()
 
             # Converting string time to epoch format
-            _received_time_stamp = _api_response_json.get('meta').get('timestamp')
-            _epoch_time = phish_tank_helper.timestamp_to_ms_epoch(_received_time_stamp)
+            _epoch_time = phish_tank_helper.timestamp_to_ms_epoch(_api_response_json.get('meta').get('timestamp'))
 
             # Converting verified string time to epoch format if verified is true from api_response
             _verified_status = _api_response_json.get('results').get('verified')
             if _verified_status:
-                _received_verified_time = _api_response_json.get('results').get('verified_at')
-                _epoch_verified_time = phish_tank_helper.timestamp_to_ms_epoch(_received_verified_time)
+                _epoch_verified_time = phish_tank_helper.timestamp_to_ms_epoch(_api_response_json.get('results').get('verified_at'))
                 _api_response_json['results']['verified_at_modified'] = _epoch_verified_time
 
             # Replacing string time with epoch converted time
