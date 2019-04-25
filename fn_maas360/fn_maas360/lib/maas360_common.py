@@ -258,28 +258,26 @@ class MaaS360Utils(object):
         """
         url_endpoint = self.get_url_endpoint(url)
         auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
-        request_body = {"appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
-                        "appId": u"{}".format(installed_app_id),
-                        "targetDevices": u"{}".format(TARGET_DEVICES_DICT.get(target_devices)),
-                        "deviceId": u"{}".format(device_id),
-                        "deviceGroupId": u"{}".format(device_group_id)}
+        request_body = {"appId": u"{}".format(installed_app_id),
+                        "appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
+                        "targetDevices": u"{}".format(TARGET_DEVICES_DICT.get(target_devices))}
 
-        # TODO - test the deviceGroupId vs deviceId one will be None will the endpoint be happy?
+        # add to request_body of not None
+        self.add_to_dict("deviceId", device_id, request_body)
+        self.add_to_dict("deviceGroupId", device_group_id, request_body)
 
         try:
             results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
         except IntegrationError as err:
-            raise IntegrationError("Unable to execute call Stop App Distribution: {}".format(err))
+            # The Response 400 doesn't return with a meaningful message.
+            # We're adding a msg to recheck the combination of inputs on the activity prompt.
+            if "status_code: 400, msg: N/A" in err.value:
+                raise IntegrationError("Unable to execute call Stop App Distribution: {}. Check combination of your "
+                                       "function input values (App Type and Target Devices).".format(err))
+            else:
+                raise IntegrationError("Unable to execute call Stop App Distribution: {}".format(err))
 
         action_response = results.get("actionResponse")
-        # TODO test this
-        # expected results
-        # <actionResponse>
-        #   <status>Success</status>
-        #   <description>Application deleted successfully.</description>
-        # </actionResponse>
-        # Mandatory attributes in Response
-        # - status
         return action_response
 
     def delete_app(self, url, app_type, installed_app_id):
@@ -301,12 +299,16 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Delete App: {}".format(err))
 
         action_response = results.get("actionResponse")
-        # TODO test this
-        # expected results
-        # <actionResponse>
-        #   <status>Success</status>
-        #   <description>Application deleted successfully.</description>
-        # </actionResponse>
-        # Mandatory attributes in Response
-        #  - status
+
         return action_response
+
+    @staticmethod
+    def add_to_dict(key, value, params):
+        """
+        Adds a key-value pair to a dictionary if value is not None or "".
+        :param params
+        :param key:
+        :param value:
+        """
+        if value:
+            params[key] = value

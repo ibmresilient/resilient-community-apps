@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
 
         def add_to_dict(key, value, params):
             """
-            Adds a key-value pair to a dictionary.
+            Adds a key-value pair to a dictionary if value is not None or "".
             :param params
             :param key:
             :param value:
@@ -84,9 +84,9 @@ class FunctionComponent(ResilientComponent):
             device_id = kwargs.get("maas360_device_id")  # text
             email = kwargs.get("maas360_email")  # text
 
-            LOG.info("maas360_device_name: %s", partial_device_name)
-            LOG.info("maas360_username: %s", partial_username)
-            LOG.info("maas360_phone_no: %s", partial_phone_no)
+            LOG.info("maas360_partial_device_name: %s", partial_device_name)
+            LOG.info("maas360_partial_username: %s", partial_username)
+            LOG.info("maas360_partial_phone_no: %s", partial_phone_no)
             LOG.info("maas360_imei_meid: %s", imei_meid)
             LOG.info("maas360_platform_name: %s", platform_name)
             LOG.info("maas360_device_id: %s", device_id)
