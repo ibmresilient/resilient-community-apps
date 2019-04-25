@@ -12,7 +12,7 @@ APP_CONFIG = {
     "class": "ElasticFeed",
     "url": "http://localhost",
     "port": "9200",
-    "index": "res_test",
+    "index_prefix": "res_test_",
     "cafile": "false"
 }
 
@@ -31,8 +31,8 @@ RESULT_PAYLOAD = {  "id":  ts,
                     "inc_id": 2301,
                     "test_text": u"ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ",
                     "test_int": 1000,
-                    "test_date": '2019-02-13T15:55:47.448000',
-                    "test_datetime": '2019-02-13T15:55:47.448000',
+                    "test_date": '2019-02-13T15:55:47',
+                    "test_datetime": '2019-02-13T15:55:47',
                     "test_bool": 1,
                  }
 
@@ -47,7 +47,8 @@ def test_index():
     es_feed.send_data(context, MSG_PAYLOAD)
 
     # test the results
-    result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
+    result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
 
     for key, value in RESULT_PAYLOAD.items():
         assert result["_source"][key] == value
@@ -69,7 +70,8 @@ def test_update():
     es_feed.send_data(context, update_payload)
 
     # test the results
-    result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=update_payload['id'])
+    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
+    result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert result["_source"][key] == value
@@ -91,7 +93,8 @@ def test_alter():
     result = es_feed.send_data(context, update_payload)
 
     # test the results
-    test_result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=update_payload['id'])
+    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
+    test_result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert test_result["_source"][key] == value
@@ -105,7 +108,8 @@ def test_delete():
 
     # test the results
     with pytest.raises(Exception) as err:
-        test_result = es_feed.es.get(index=APP_CONFIG['index'], doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+        index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
+        test_result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
         assert err['found'] == False
 
 

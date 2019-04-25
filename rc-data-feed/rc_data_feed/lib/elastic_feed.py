@@ -18,6 +18,15 @@ from rc_data_feed.lib.type_info import TypeInfo
 
 LOG = logging.getLogger(__name__)
 
+DEF_INDEX_SETTINGS = {
+    "settings": {
+        "index": {
+            "blocks": {
+                "read_only_allow_delete": "false"
+            }
+        }
+    }
+}
 
 class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-public-methods
     """Feed destination for writing Resilient data to a local directory."""
@@ -57,6 +66,12 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
                                http_auth=http_auth)
 
 
+    def _create_index(self, index):
+        if not self.es.indices.exists(index):
+            results = self.es.indices.create(index, body=DEF_INDEX_SETTINGS)
+            LOG.debug(u"settings on {}: {}".format(index, results))
+
+
     def send_data(self, context, payload):
         """
         Write a simplified version of the payload to a creatively named
@@ -69,7 +84,9 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         # add the incident id to all payloads, if needed
         elastic_payload['inc_id'] = context.inc_id
 
-        index = "{}{}".format(self.index_prefix, name)
+        index = u"{}{}".format(self.index_prefix, name)
+        # set index permissions
+        self._create_index(index)
 
         if context.is_deleted:
             LOG.debug('deleting %s(%s) on index %s', name, payload['id'], index)
@@ -83,8 +100,6 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
         """Function: Allows a user to index a specified payload"""
 
         result = self.es.index(index=index, doc_type=type, id=type_id, body=payload)
-        print (result)
-        print (payload)
 
         if result.get("result") not in ("created", "updated"):
             msg_error = u"Unable to index {}, {}, {} ({})".format(index, type, type_id, payload)
