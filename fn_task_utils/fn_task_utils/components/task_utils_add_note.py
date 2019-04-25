@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
 
             task_note_json = {
                 "text": {
-                    "format": task_utils_note_type['name'],
+                    "format": task_utils_note_type,
                     "content": task_utils_note_body
                 }
             }

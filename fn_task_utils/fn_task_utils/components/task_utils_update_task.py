@@ -32,6 +32,8 @@ class FunctionComponent(ResilientComponent):
             task_utils_payload = self.get_textarea_param(kwargs.get("task_utils_payload"))  # textarea
 
             log = logging.getLogger(__name__)
+            log.info(kwargs.get("task_utils_payload"))
+
             log.info("task_id: %s", task_id)
             log.info("task_utils_payload: %s", task_utils_payload)
 
@@ -42,12 +44,33 @@ class FunctionComponent(ResilientComponent):
                 log.error(err_msg)
                 raise FunctionError(err_msg)
 
+            res_client = self.rest_client()
+
+            log.info("Sending new task info to res")
+            updated_task = {}
+
+            def update_task(task):
+                task.update(json.loads(task_utils_payload))
+                updated_task.update(task)
+
+            task_url = "/tasks/{}".format(task_id)
+            try:
+                res_client.get_put(task_url, lambda task: update_task(task))
+            except Exception as update_exception:
+                err_msg = "Encountered exception while trying to update task. Error: {}", update_exception
+                log.error(err_msg)
+                raise FunctionError(err_msg)
+
+            yield StatusMessage("Task {} has been updated".format(task_id))
+
             results = payload.done(
                 success=True,
                 content={
-                    "task_id": task_id
+                    "task_id": task_id,
+                    "task": updated_task
                 }
             )
+            log.info("Complete")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

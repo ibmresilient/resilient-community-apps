@@ -5,6 +5,8 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from test_helper import TasksResilientMock
+
 
 PACKAGE_NAME = "fn_task_utils"
 FUNCTION_NAME = "task_utils_update_task"
@@ -13,18 +15,29 @@ FUNCTION_NAME = "task_utils_update_task"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = TasksResilientMock
 
 
 def call_task_utils_update_task_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("task_utils_update_task", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("task_utils_update_task_result", parent=evt, timeout=timeout)
-    assert event
-    assert isinstance(event.kwargs["result"], FunctionResult)
-    pytest.wait_for(event, "complete", True)
-    return event.kwargs["result"].value
+
+    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
+    # return this exception if it is raised
+    exception_event = circuits.watcher.wait("exception", parent=None)
+
+    if exception_event is not False:
+        exception = exception_event.args[1].args[1]
+        raise exception
+
+        # else return the FunctionComponent's results
+    else:
+        event = circuits.watcher.wait("task_utils_update_task_result", parent=evt, timeout=timeout)
+        assert event
+        assert isinstance(event.kwargs["result"], FunctionResult)
+        pytest.wait_for(event, "complete", True)
+        return event.kwargs["result"].value
 
 
 class TestTaskUtilsUpdateTask:
@@ -36,8 +49,8 @@ class TestTaskUtilsUpdateTask:
         assert func is not None
 
     @pytest.mark.parametrize("task_id, task_utils_payload, expected_results", [
-        (123, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"}),
-        (123, {"type": "text", "content": "line1\nline2"}, {"value": "xyz"})
+        (123, {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (123, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, task_id, task_utils_payload, expected_results):
         """ Test calling with sample values for the parameters """
@@ -45,6 +58,36 @@ class TestTaskUtilsUpdateTask:
             "task_id": task_id,
             "task_utils_payload": task_utils_payload
         }
-        pytest.skip("Not Implemented")
         results = call_task_utils_update_task_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(task_id == results["content"]["task_id"])
+
+    @pytest.mark.parametrize("task_id, task_utils_payload, expected_results", [
+        (123, {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (444, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
+    ])
+    def test_modifying_required(self, circuits_app, task_id, task_utils_payload, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "task_id": task_id,
+            "task_utils_payload": task_utils_payload
+        }
+        results = call_task_utils_update_task_function(circuits_app, function_params)
+
+        assert (results["content"]["task"]["required"] in (True, False))  # Assert required is either True or False
+        # Assert the new value of required matches our provided one
+        assert str(results["content"]["task"]["required"]).lower() in task_utils_payload["content"]
+
+    @pytest.mark.parametrize("task_id, task_utils_payload, expected_results", [
+        (9999, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
+    ])
+    def test_failure_not_found(self, circuits_app, task_id, task_utils_payload, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "task_id": task_id,
+            "task_utils_payload": task_utils_payload
+        }
+        with pytest.raises(ValueError) as err:
+            call_task_utils_update_task_function(circuits_app, function_params)
+
+            assert u"Unable to find object with ID" in err.value.args[0]
+

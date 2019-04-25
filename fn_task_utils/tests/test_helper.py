@@ -103,9 +103,21 @@ class TasksResilientMock(BasicResilientMock):
     def task_get(self, request):
         """ Callback for GET to /orgs/<org_id>/tasks/<inc_id> """
         LOG.debug("task_get")
-        return requests_mock.create_response(request,
-                                             status_code=200,
-                                             json=self.task_mock)
+
+        if "9999" in request.url: # Sentinel Task ID used for when we want to fail task get
+            return requests_mock.create_response(request,
+                                                 status_code=404,
+                                                 json={
+                                                  "success": False,
+                                                  "title": None,
+                                                  "message": "Unable to find object with ID 9,999",
+                                                  "hints": [],
+                                                  "error_code": "generic"
+                                                })
+        else:
+            return requests_mock.create_response(request,
+                                                 status_code=200,
+                                                 json=self.task_mock)
 
     @resilient_endpoint("PUT", "/tasks/[0-9]+$")
     def task_put(self, request):
@@ -129,9 +141,10 @@ class TasksResilientMock(BasicResilientMock):
     def task_create(self, request):
         """ Callback for GET to /orgs/<org_id>/tasks/<inc_id> """
         LOG.debug("task_post")
+        self.task_mock["name"] = request.json()["name"]
 
         return requests_mock.create_response(request,
-                                             status_code=201,
+                                             status_code=200,
                                              json=self.task_mock)
 
     @resilient_endpoint("GET", "/incidents/[0-9]+/tasks\?want_layouts=false\&want_notes=false$")

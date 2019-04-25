@@ -42,18 +42,11 @@ class FunctionComponent(ResilientComponent):
                 err_msg = "Could not load task_utils_payload as JSON. Error: {}", json_exception
                 log.error(err_msg)
                 raise FunctionError(err_msg)
+            else:
+                log.debug("Successfully parsed task_utils_payload as valid JSON")
 
             yield StatusMessage("Setting up API Client")
             resilient_client = self.rest_client()
-
-            """ TODO: Remove mock details
-            task_utils_payload = {
-                "owner_id": "alfred@waynecorp.com",
-                "instr_text": "Some Instruction Set",
-                "phase_id": "Initial"
-                
-            }
-            """
 
             # Replace task_json["name"] if task_name is set and task_json["name"] is not set; otherwise use default name
             # If task_json["name"] is set, do nothing, use that
@@ -72,7 +65,8 @@ class FunctionComponent(ResilientComponent):
             results = payload.done(
                 success=True,
                 content={
-                    "task_id": task_id
+                    "task_id": task_id,
+                    "task": task_response
                 }
             )
 

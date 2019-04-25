@@ -35,9 +35,6 @@ class FunctionComponent(ResilientComponent):
             log.info("task_id: %s", task_id)
             log.info("task_name: %s", task_name)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
             res_client = self.rest_client()
 
             if task_id:
@@ -56,15 +53,20 @@ class FunctionComponent(ResilientComponent):
                 if not task_id:
                     raise FunctionError(u"Could not find task with name {}".format(task_name))
 
-                # function to update the task description
-
-            def update_with_result(task):
+            def close_task_status(task):
+                """
+                A inner function which is used as a lambda
+                Get_put from the res_client gets our data and this lambda decides what to do with the data
+                The return value of this lambda is then sent to Resilient as a PUT.
+                :param task:
+                :return:
+                """
                 task["status"] = "C"
-                task_name = task["name"]
+                log.debug("Changed status to closed for task with name %s" % task["name"])
                 return task
 
             task_url = "/tasks/{}".format(task_id)
-            res_client.get_put(task_url, lambda task: update_with_result(task))
+            res_client.get_put(task_url, lambda task: close_task_status(task))
             yield StatusMessage("Task {} has been closed".format(task_id))
 
             results = payload.done(

@@ -14,20 +14,31 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = TasksResilientMock
-import json
-mock_task = json.dumps({
-              "task_name": "test"
-})
 
+
+# TODO: Remove
+mock_task = {
+
+}
 def call_task_utils_create_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("task_utils_create", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("task_utils_create_result", parent=evt, timeout=timeout)
-    assert event
-    assert isinstance(event.kwargs["result"], FunctionResult)
-    pytest.wait_for(event, "complete", True)
-    return event.kwargs["result"].value
+    # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
+    # return this exception if it is raised
+    exception_event = circuits.watcher.wait("exception", parent=None)
+
+    if exception_event is not False:
+        exception = exception_event.args[1].args[1]
+        raise exception
+
+        # else return the FunctionComponent's results
+    else:
+        event = circuits.watcher.wait("task_utils_create_result", parent=evt, timeout=timeout)
+        assert event
+        assert isinstance(event.kwargs["result"], FunctionResult)
+        pytest.wait_for(event, "complete", True)
+        return event.kwargs["result"].value
 
 
 class TestTskUtilsCreate:
@@ -40,8 +51,8 @@ class TestTskUtilsCreate:
 
 
     @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
-        (123, "text", {"type": "text", "content": mock_task}, {"value": "xyz"}),
-        (123, "text", {"type": "text", "content": mock_task}, {"value": "xyz"})
+        (123, "New Task Name", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (123, "My New Task", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
         """ Test calling with sample values for the parameters """
@@ -50,7 +61,50 @@ class TestTskUtilsCreate:
             "task_name": task_name,
             "task_utils_payload": task_utils_payload
         }
-        pytest.skip("Not Implemented")
         results = call_task_utils_create_function(circuits_app, function_params)
         assert(results["content"]["task_id"])
+
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
+        (123, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (123, " Й К Л М Н О П Р С Т ", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    ])
+    def test_success_unicode(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "incident_id": incident_id,
+            "task_name": task_name,
+            "task_utils_payload": task_utils_payload
+        }
+        results = call_task_utils_create_function(circuits_app, function_params)
+        assert (results["content"]["task_id"])
+        assert function_params["task_name"] == results["content"]["task"]["name"]
+
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    ])
+    def test_owner_as_email_user(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "incident_id": incident_id,
+            "task_name": task_name,
+            "task_utils_payload": task_utils_payload
+        }
+        results = call_task_utils_create_function(circuits_app, function_params)
+        assert (results["content"]["task_id"])
+
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    ])
+    def test_owner_as_user_id(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = {
+            "incident_id": incident_id,
+            "task_name": task_name,
+            "task_utils_payload": task_utils_payload
+        }
+        results = call_task_utils_create_function(circuits_app, function_params)
+        assert (results["content"]["task_id"])
+        assert results["content"]["task_id"]
 
