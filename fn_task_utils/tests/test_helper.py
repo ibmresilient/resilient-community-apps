@@ -97,7 +97,8 @@ class TasksResilientMock(BasicResilientMock):
         "private": None
   }
 
-
+    # A list of mock comments
+    task_notes_mock = []
 
     @resilient_endpoint("GET", "/tasks/[0-9]+$")
     def task_get(self, request):
@@ -154,6 +155,32 @@ class TasksResilientMock(BasicResilientMock):
         return requests_mock.create_response(request,
                                              status_code=200,
                                              json=self.mock_tasks_list)
+
+    """
+    Task Note Mock Endpoints
+    """
+
+    @resilient_endpoint("GET", "/tasks/[0-9]+/comments")
+    def task_note_get(self, request):
+        """ Callback for GET to /orgs/<org_id>/tasks/<task_id>/comments"""
+        LOG.debug("task_get")
+
+        return requests_mock.create_response(request,
+                                                 status_code=200,
+                                                 json=self.task_notes_mock)
+
+    @resilient_endpoint("POST", "/tasks/[0-9]+/comments")
+    def task_note_post(self, request):
+        """ Callback for POST to /orgs/<org_id>/tasks/<task_id>/comments"""
+        LOG.debug("task_put")
+
+        # A new note is added to the task. Append it to our common TaskNoteMock
+        self.task_notes_mock.append(request.json())
+        LOG.info(self.task_notes_mock)
+
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json=self.task_notes_mock)
 
     @resilient_endpoint("POST", "/rest/session")
     def session_post(self, request):

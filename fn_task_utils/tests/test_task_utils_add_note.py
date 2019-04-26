@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from test_helper import TasksResilientMock
+
 
 PACKAGE_NAME = "fn_task_utils"
 FUNCTION_NAME = "task_utils_add_note"
@@ -13,8 +15,7 @@ FUNCTION_NAME = "task_utils_add_note"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
-
+resilient_mock = TasksResilientMock
 
 def call_task_utils_add_note_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -36,16 +37,55 @@ class TestTaskUtilsAddNote:
         assert func is not None
 
     @pytest.mark.parametrize("task_id, task_utils_note_type, task_utils_note_body, expected_results", [
-        (123, 'text', "text", {"value": "xyz"}),
-        (123, 'html', "text", {"value": "xyz"})
+        (123, 'text', "Progress made on Task.", {"value": "xyz"}),
+        (123, 'html', "Task overdue for closure, provide progress report", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, task_id, task_utils_note_type, task_utils_note_body, expected_results):
-        """ Test calling with sample values for the parameters """
+    def test_notes_are_present(self, circuits_app, task_id, task_utils_note_type, task_utils_note_body, expected_results):
+        """ Test adding a note to a Task and then check if the response sent contains at least 1 task note. """
         function_params = { 
             "task_id": task_id,
             "task_utils_note_type": task_utils_note_type,
             "task_utils_note_body": task_utils_note_body
         }
-        pytest.skip("Not Implemented")
         results = call_task_utils_add_note_function(circuits_app, function_params)
-        assert(expected_results == results)
+
+        # Asset there is at least one task note
+        assert(len(results["content"]["task_notes"]))
+
+    @pytest.mark.parametrize("task_id, task_utils_note_type, task_utils_note_body, expected_results", [
+        (123, 'text', "Progress made on Task.", {"value": "xyz"}),
+        (123, 'html', "Task overdue for closure, provide progress report", {"value": "xyz"})
+    ])
+    def test_last_note_is_added_note(self, circuits_app, task_id, task_utils_note_type, task_utils_note_body,
+                               expected_results):
+        """ Test adding a note to a Task and then check if the response sent contains at least 1 task note. """
+        function_params = {
+            "task_id": task_id,
+            "task_utils_note_type": task_utils_note_type,
+            "task_utils_note_body": task_utils_note_body
+        }
+        results = call_task_utils_add_note_function(circuits_app, function_params)
+
+        newest_task_note = results["content"]["task_notes"].pop()
+        assert newest_task_note
+        assert task_utils_note_body in newest_task_note["text"]["content"]
+
+
+
+    @pytest.mark.parametrize("task_id, task_utils_note_type, task_utils_note_body, expected_results", [
+        (123, 'text', "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"value": "xyz"}),
+        (123, 'html', " Й К Л М Н О П Р С Т ", {"value": "xyz"})
+    ])
+    def test_notes_with_unicode_text(self, circuits_app, task_id, task_utils_note_type, task_utils_note_body,
+                               expected_results):
+        """ Test adding a note to a Task and then check if the response sent contains at least 1 task note. """
+        function_params = {
+            "task_id": task_id,
+            "task_utils_note_type": task_utils_note_type,
+            "task_utils_note_body": task_utils_note_body
+        }
+        results = call_task_utils_add_note_function(circuits_app, function_params)
+
+        newest_task_note = results["content"]["task_notes"].pop()
+        assert newest_task_note
+        assert task_utils_note_body in newest_task_note["text"]["content"]
