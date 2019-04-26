@@ -5,6 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
+from fn_task_utils.lib.task_common import find_task_by_name
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'task_utils_add_note"""
@@ -25,12 +26,16 @@ class FunctionComponent(ResilientComponent):
         try:
             payload = ResultPayload("task_utils_add_note", **kwargs)
             # Get the function parameters:
+            incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
+            task_name = kwargs.get("task_name")  # text
             task_utils_note_type = self.get_select_param(kwargs.get("task_utils_note_type"))  # select, values: "text", "html"
             task_utils_note_body = kwargs.get("task_utils_note_body")  # text
 
             log = logging.getLogger(__name__)
+            log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
+            log.info("task_name: %s", task_name)
             log.info("task_utils_note_type: %s", task_utils_note_type)
             log.info("task_utils_note_body: %s", task_utils_note_body)
 
@@ -45,6 +50,12 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Posting note to API")
 
+            if task_name:
+                task_id = find_task_by_name(res_client, incident_id, task_name)
+
+                if not task_id:
+                    raise ValueError("task_name not found: %s", task_name)
+
             task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
             task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
             yield StatusMessage("Completed API call")
@@ -56,7 +67,7 @@ class FunctionComponent(ResilientComponent):
                     "task_notes": task_notes
                 }
             )
-            log.debug("RESULTS: %s", results)
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
