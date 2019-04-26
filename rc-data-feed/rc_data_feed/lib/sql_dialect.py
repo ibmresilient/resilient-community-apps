@@ -8,7 +8,7 @@ from six import string_types
 
 MAX_ORACLE_VARCHAR = 2000
 MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
-
+ENCODING="utf-8"
 
 class SqlDialect:
     """Base class for all SQL dialects that we will support."""
@@ -297,12 +297,12 @@ class PostgreSQL96Dialect(ODBCDialectBase):
         return False
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2  
-            connection.setencoding(str, encoding='utf-8')
-            connection.setencoding(unicode, encoding='utf-8')
+            connection.setencoding(str, encoding=ENCODING)
+            connection.setencoding(unicode, encoding=ENCODING)
         else: # an issue and try encoding without specifying fromtype
-            connection.setencoding(encoding='utf-8')
+            connection.setencoding(encoding=ENCODING)
         
 
 
@@ -440,8 +440,8 @@ class MySqlDialect(ODBCDialectBase):
         return 'TEXT'
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='utf-8')  # pylint: disable=c-extension-no-member
-        connection.setencoding(encoding='utf-8') # utf-8
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
+        connection.setencoding(encoding=ENCODING) # utf-8
 
 
 class SqlServerDialect(ODBCDialectBase):
@@ -789,6 +789,11 @@ END; """
 
         return bind_parameters
 
+
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding='UTF-8')  # pylint: disable=c-extension-no-member
-        connection.setencoding(encoding='UTF-8')
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
+        if sys.version_info.major == 2: # to set encoding on python 2
+            connection.setencoding(str, encoding=ENCODING)
+            connection.setencoding(unicode, encoding=ENCODING)
+        else: # an issue and try encoding without specifying fromtype
+            connection.setencoding(encoding=ENCODING)
