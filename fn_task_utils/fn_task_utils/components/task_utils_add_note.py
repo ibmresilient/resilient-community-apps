@@ -45,17 +45,18 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Posting note to API")
 
-            response = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
-
+            task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
+            task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
             yield StatusMessage("Completed API call")
 
             results = payload.done(
                 success=True,
                 content={
-                    "response": response
+                    "task": task,
+                    "task_notes": task_notes
                 }
             )
-
+            log.debug("RESULTS: %s", results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

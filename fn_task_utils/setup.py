@@ -21,14 +21,14 @@ def snake_to_camel(word):
 setup(
     name='fn_task_utils',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_task_utils'",
-    long_description="Resilient Circuits Components for 'fn_task_utils'",
+    long_description="Resilient Circuits Components which can be used to manipulate existing tasks or create new ones. Provides functions which can be invoked through standalone example rules or can be integrated as part of a custom workflow",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient-lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,
