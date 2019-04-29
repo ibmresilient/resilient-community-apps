@@ -32,13 +32,11 @@ class FunctionComponent(ResilientComponent):
             ipaddress = kwargs.get("ipaddress")  # text
             domain_name = kwargs.get("domain_name")  # text
 
-            # Getting Configuration parameters from app.config
+            # Get the app.config parameters:
             spamhaus_wqs_url = self.options.get("spamhaus_wqs_url")
             spamhaus_dqs_key = self.options.get("spamhaus_dqs_key")
             ip_resource_list = self.options.get("ip_resource_list")
             domain_resource_list = self.options.get("domain_resource_list")
-
-            proxies = {'http': self.options.get('http_proxy'), 'https': self.options.get('https_proxy')}
 
             log = logging.getLogger(__name__)
             log.info("ipaddress: %s", ipaddress)
@@ -52,58 +50,79 @@ class FunctionComponent(ResilientComponent):
             if not spamhaus_dqs_key:
                 raise ValueError("API key must be defined in App.config file Spamhaus section.")
 
-            # Initialising the Result Object
-            result_object = ResultPayload("fn_spamhaus_query", kwargs)
+            # Initialising the Result payload object
+            result_object = ResultPayload("fn_spamhaus_query", **kwargs)
 
-            # Initialising the RequestCommon to make REST API Calls
-            requestcommon_obj = RequestsCommon()
+            # Initialising the RequestCommon to make REST API Calls to spamhaus
+            requestcommon_obj = RequestsCommon(function_opts=self.options)
 
-            # Constructing call header with api key
+            # Get proxy Configuration
+            proxies = requestcommon_obj.get_proxies()
+
+            # Construct call header with api key
             header_data = {'Authorization': 'Bearer {}'.format(spamhaus_dqs_key)}
 
             if ipaddress:
                 """
-                Wrapper is called IP Address Artifact
+                Function is called on IP Address
                 """
                 _resource_list = ip_resource_list
                 _query_string = ipaddress.strip()
             else:
                 """
-                Wrapper is called on Domain Name Artifacts
+                Function is called on Domain Names
                 """
                 _resource_list = domain_resource_list
                 _query_string = domain_name.strip()
 
-            response_dict = dict()
+            response_dict = dict()   # dictionary to hold the result data
             for resource in _resource_list:
                 try:
+                    # Make Get Call to Spamhause website
                     response_json = requestcommon_obj.execute_call('GET',
                                                                    spamhaus_wqs_url.format(resource, _query_string),
                                                                    headers=header_data, proxies=proxies)
                     response_dict[resource] = response_json
                 except Exception as err_msg:
+                    """If Artifact is not found in spamhaus block list then returned error message will be status:404, 
+                    for 404 error message assign the particular resource with 'None' Object. 
+                    for any other errors raise an Function Error. 
+                    """
                     if response_json.get('status') == 404:
                         response_dict[resource] = None
                     else:
                         raise FunctionError(err_msg)
-            for resource_name, data in response_dict:
-                if data:
-                    resp_code_list = data.get("resp")
 
+            # check to see if spamhaus block list database has given artifact
+            status = None
+            for resource_name, data in response_dict.items():
+                if data:
+                    status = True   # Flag to make sure we found data
+                    resp_code_list = data.get("resp")
                     # Checking Existing static data for response code more information
                     for code in resp_code_list:
                         info = STATIC_INFO_RESPONSE.get(code)
 
-                        # not found locally hence getting from Spamhaus Database
+                        # If information not found in `STATIC_INFO_RESPONSE`, Then trying with info API Call
                         if not info:
-                            info = requestcommon_obj.execute_call('GET',
-                                                                   spamhaus_wqs_url.format('info', code),
-                                                                   headers=header_data, proxies=proxies)
-
+                            try:
+                                info = requestcommon_obj.execute_call('GET', spamhaus_wqs_url.format('info', code), headers=header_data, proxies=proxies)
+                            except Exception as err_msg:
+                                if info.get('status') == 404:
+                                    info = None
+                                else:
+                                    raise FunctionError(err_msg)
                         response_dict[resource_name][code] = info
+            if status:
+                sucess_bol = True
+                msg = "Success"
+            else:
+                sucess_bol = False
+                msg = "Artifact is : {} is Not listed on Spamhaus Database.".format(_query_string)
+
 
             # Producing the result object
-            result = result_object.done(success= True, content=response_dict)
+            result = result_object.done(success=sucess_bol, content=response_dict, reason=msg)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(result)
