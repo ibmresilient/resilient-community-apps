@@ -4,7 +4,11 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_pa_panorama.util.selftest as selftest
+from resilient_lib import ResultPayload
+from fn_pa_panorama.util.panorama_util import PanoramaClient
+
+
+log = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
@@ -14,7 +18,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_pa_panorama", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -23,21 +26,31 @@ class FunctionComponent(ResilientComponent):
 
     @function("panorama_edit_address_group")
     def _panorama_edit_address_group_function(self, event, *args, **kwargs):
-        """Function: """
+        """Function: Panorama edit address group edits an address group,
+        ie: add or remove ip addresses from the group"""
         try:
+            yield StatusMessage("Starting...")
+            rp = ResultPayload("fn_pa_panorama", **kwargs)
+
             # Get the function parameters:
+            location = kwargs.get("panorama_location")  # text
+            vsys = kwargs.get("panorama_vsys")  # text
+            body = self.get_textarea_param(kwargs.get("panorama_request_body"))  # textarea
 
-            log = logging.getLogger(__name__)
+            # Log inputs
+            if location is None:
+                raise ValueError("panorama_location needs to be set.")
+            log.info("panorama_location: {}".format(location))
+            log.info("panorama_vsys: {}".format(vsys))
+            log.info("panorama_request_body: {}".format(body))
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            panorama_util = PanoramaClient(self.opts, location, vsys)
+            response = panorama_util.edit_address_groups(body)
 
-            results = {
-                "value": "xyz"
-            }
+            yield StatusMessage("Address Group Updated")
+            results = rp.done(True, response)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as e:
+            yield FunctionError(e)

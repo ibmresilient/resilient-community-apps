@@ -13,9 +13,5 @@ def config_section_data():
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 api_key=<Panorama_api_key>
-location=
-
-# Name of the vsys is needed when location is vsys or Panorama-pushed
-#vsys=
 """
     return config_data

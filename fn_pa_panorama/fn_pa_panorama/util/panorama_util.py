@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
 import logging
+import requests
 from resilient_lib.components.resilient_common import validate_fields, str_to_bool
 from resilient_lib.components.requests_common import RequestsCommon
 
@@ -15,15 +16,16 @@ class PanoramaClient:
     """
     Object to handle the communication and authentication between the integration and Panorama
     """
-    def __init__(self, opts):
+    def __init__(self, opts, location, vsys=None):
         pan_config = opts.get("fn_pa_panorama")
+        pan_config["location"] = location
 
         # validate config fields
         validate_fields(["panorama_host", "api_key", "location"], pan_config)
 
         self.__key = pan_config["api_key"]
         self.__location = pan_config["location"]
-        self.__vsys = pan_config.get("vsys", None)
+        self.__vsys = vsys
         self.__output_format = "json"
 
         self.verify = str_to_bool(pan_config.get("verify_cert"))
@@ -41,13 +43,43 @@ class PanoramaClient:
 
         return query_params
 
-    def get(self, resource_uri):
+    def __get(self, resource_uri, parameters):
         """Generic GET"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = self.rc.execute_call("GET", uri, payload=self.query_parameters, log=log, verify_flag=self.verify)
+        response = self.rc.execute_call("GET", uri, payload=parameters, log=log, verify_flag=self.verify)
         log.debug("Response: {}".format(response))
         return response
 
-    def get_address_groups(self):
+    def __post(self, resource_uri, payload):
+        """Generic POST"""
+        uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        response = self.rc.execute_call("POST", uri, payload=payload, log=log, verify_flag=self.verify)
+        log.debug("Response: {}".format(response))
+        return response
+
+    def __put(self, resource_uri, payload):
+        """Generic PUT"""
+        uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        response = requests.put(uri, uri, params=self.query_parameters, json=payload, verify=self.verify)
+        log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
+        response.raise_for_status()
+        return response.json()
+
+    def get_addresses(self):
+        """Get list of addresses"""
+        return self.__get("Object/Addresses", self.query_parameters)
+
+    def get_address_groups(self, name_param=None):
         """Get list of address groups"""
-        return self.get("Objects/AddressGroups")
+        params = self.query_parameters
+        if name_param:
+            params["name"] = name_param
+        return self.__get("Objects/AddressGroups", params)
+
+    def edit_address_groups(self, payload):
+        """Edits an address group, adds/removes addresses"""
+        return self.__get("Object/AddressGroups", payload)
+
+    def add_address(self, payload):
+        """Creates a new address"""
+        return self.__post("Objects/Addresses", payload)

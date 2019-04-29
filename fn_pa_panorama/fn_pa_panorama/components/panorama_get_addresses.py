@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'panorama_get_address_groups"""
+    """Component that implements Resilient function 'panorama_edit_address_group"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -24,29 +24,27 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_pa_panorama", {})
 
-    @function("panorama_get_address_groups")
-    def _panorama_get_address_groups_function(self, event, *args, **kwargs):
-        """Function: Panorama get address groups returns the list of address groups """
+    @function("panorama_edit_address_group")
+    def _panorama_edit_address_group_function(self, event, *args, **kwargs):
+        """Function: Panorama get addresses returns a list of the address objects"""
         try:
-            yield StatusMessage("Getting list of Address Groups")
+            yield StatusMessage("Getting list of addresses")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             # Get the function parameters:
             location = kwargs.get("panorama_location")  # text
             vsys = kwargs.get("panorama_vsys")  # text
-            name = kwargs.get("panorama_name_parameter")  # text (optional parameter)
 
             # Log inputs
             if location is None:
                 raise ValueError("panorama_location needs to be set.")
             log.info("panorama_location: {}".format(location))
             log.info("panorama_vsys: {}".format(vsys))
-            log.info("panorama_name_parameter: {}".format(name))
 
             panorama_util = PanoramaClient(self.opts, location, vsys)
-            response = panorama_util.get_address_groups(name)
+            response = panorama_util.get_addresses()
 
-            yield StatusMessage("{} groups returned.".format(response["result"]["@count"]))
+            yield StatusMessage("{} addresses returned.".format(response["result"]["@count"]))
             results = rp.done(True, response)
 
             # Produce a FunctionResult with the results
