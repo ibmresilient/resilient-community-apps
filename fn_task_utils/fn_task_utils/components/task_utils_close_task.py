@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
                 Get_put from the res_client gets our data and this lambda decides what to do with the data
                 The return value of this lambda is then sent to Resilient as a PUT.
                 :param task:
-                :return:
+                :return task:
                 """
                 task["status"] = "C"
                 log.debug("Changed status to closed for task with name %s" % task["name"])
@@ -76,7 +76,6 @@ class FunctionComponent(ResilientComponent):
                     "task_name": task_name
                 }
             )
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

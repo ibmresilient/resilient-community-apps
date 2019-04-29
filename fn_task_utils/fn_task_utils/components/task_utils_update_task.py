@@ -6,6 +6,8 @@ import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
+from fn_task_utils.lib.task_common import find_task_by_name
+
 
 
 class FunctionComponent(ResilientComponent):
@@ -28,13 +30,17 @@ class FunctionComponent(ResilientComponent):
             payload = ResultPayload("task_utils_update_task", **kwargs)
 
             # Get the function parameters:
+            incident_id = kwargs.get("incident_id")  # number
             task_id = kwargs.get("task_id")  # number
+            task_name = kwargs.get("task_name")  # text
             task_utils_payload = self.get_textarea_param(kwargs.get("task_utils_payload"))  # textarea
 
             log = logging.getLogger(__name__)
             log.info(kwargs.get("task_utils_payload"))
 
+            log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
+            log.info("task_name: %s", task_name)
             log.info("task_utils_payload: %s", task_utils_payload)
 
             try:
@@ -46,12 +52,30 @@ class FunctionComponent(ResilientComponent):
 
             res_client = self.rest_client()
 
+            # If task name was provided try to find its ID
+            if task_name:
+                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format( incident_id, task_name))
+                task_id = find_task_by_name(res_client, incident_id, task_name)
+
+                if not task_id:
+                    raise ValueError("task_name not found: %s", task_name)
+
             log.info("Sending new task info to res")
             updated_task = {}
 
             def update_task(task):
+                """
+                A inner function which is used as a lambda
+                The return value of this lambda is then sent to Resilient as a PUT.
+
+                In this case we also update an outer scope variable called updated_task
+                 with the value of the newly modified task object before returning it
+                :param task:
+                :return:
+                """
                 task.update(json.loads(task_utils_payload))
                 updated_task.update(task)
+                return task
 
             task_url = "/tasks/{}".format(task_id)
             try:

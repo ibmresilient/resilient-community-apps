@@ -1,10 +1,6 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
-
-import requests_mock
-import json
 import logging
 LOG = logging.getLogger(__name__)
 

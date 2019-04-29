@@ -69,7 +69,6 @@ class FunctionComponent(ResilientComponent):
                     "task": task_response
                 }
             )
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

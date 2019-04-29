@@ -48,13 +48,15 @@ class FunctionComponent(ResilientComponent):
 
             res_client = self.rest_client()
 
-            yield StatusMessage("Posting note to API")
-
             if task_name:
+                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format( incident_id, task_name))
+
                 task_id = find_task_by_name(res_client, incident_id, task_name)
 
                 if not task_id:
                     raise ValueError("task_name not found: %s", task_name)
+
+            yield StatusMessage("Posting note to API")
 
             task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
             task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
@@ -67,7 +69,6 @@ class FunctionComponent(ResilientComponent):
                     "task_notes": task_notes
                 }
             )
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
