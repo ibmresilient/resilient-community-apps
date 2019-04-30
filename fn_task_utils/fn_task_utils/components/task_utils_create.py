@@ -7,6 +7,7 @@ import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
+from fn_task_utils.lib.task_common import get_function_input
 
 
 class FunctionComponent(ResilientComponent):
@@ -28,8 +29,8 @@ class FunctionComponent(ResilientComponent):
         try:
             payload = ResultPayload("task_utils_create", **kwargs)
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_name = kwargs.get("task_name")  # text
+            incident_id = get_function_input(kwargs, "incident_id")  # number
+            task_name = get_function_input(kwargs, "task_name", optional=True)  # text
             task_utils_payload = self.get_textarea_param(kwargs.get("task_utils_payload"))  # textarea
 
             log = logging.getLogger(__name__)
@@ -46,7 +47,6 @@ class FunctionComponent(ResilientComponent):
             else:
                 log.debug("Successfully parsed task_utils_payload as valid JSON")
 
-            yield StatusMessage("Setting up API Client")
             resilient_client = self.rest_client()
 
             # Replace task_json["name"] if task_name is set and task_json["name"] is not set; otherwise use default name
@@ -64,14 +64,11 @@ class FunctionComponent(ResilientComponent):
 
             log.info("Response from Resilient %s", task_response)
 
-            task_id = task_response.get('id', 'No task ID found')
-
-            yield StatusMessage("Created task with ID: {}".format(task_id))
+            yield StatusMessage("Created task with ID: {}".format(task_response.get('id', 'No task ID found')))
 
             results = payload.done(
                 success=True,
                 content={
-                    "task_id": task_id,
                     "task": task_response
                 }
             )

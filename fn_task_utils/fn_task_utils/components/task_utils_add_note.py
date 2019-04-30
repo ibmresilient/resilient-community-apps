@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_task_utils.lib.task_common import find_task_by_name
+from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'task_utils_add_note"""
@@ -27,11 +27,11 @@ class FunctionComponent(ResilientComponent):
         try:
             payload = ResultPayload("task_utils_add_note", **kwargs)
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            task_name = kwargs.get("task_name")  # text
+            incident_id = get_function_input(kwargs, "incident_id")  # number
+            task_id = get_function_input(kwargs, "task_id", optional=True)  # number
+            task_name = get_function_input(kwargs, "task_name", optional=True)  # text
             task_utils_note_type = self.get_select_param(kwargs.get("task_utils_note_type"))  # select, values: "text", "html"
-            task_utils_note_body = kwargs.get("task_utils_note_body")  # text
+            task_utils_note_body = get_function_input(kwargs, "task_utils_note_body", optional=True)  # text
 
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
@@ -39,6 +39,9 @@ class FunctionComponent(ResilientComponent):
             log.info("task_name: %s", task_name)
             log.info("task_utils_note_type: %s", task_utils_note_type)
             log.info("task_utils_note_body: %s", task_utils_note_body)
+
+            if not task_name and not task_id:
+                raise ValueError("Either a Task ID or a Task Name to search for must be provided.")
 
             task_note_json = {
                 "text": {
@@ -55,15 +58,14 @@ class FunctionComponent(ResilientComponent):
                 task_id = find_task_by_name(res_client, incident_id, task_name)
 
                 if not task_id:
-                    raise ValueError("task_name not found: %s", task_name)
+                    raise ValueError(u"Could not find task with name {}".format(task_name))
 
             yield StatusMessage("Posting note to API")
             try:
                 task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
                 task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
             except Exception as add_note_exception:
-                err_msg = "Encountered exception while trying to add note to task. Error: {}", add_note_exception
-                log.error(err_msg)
+                err_msg = "Encountered exception while trying to add note to task. Error: %s", add_note_exception
                 raise ValueError(err_msg)
 
             yield StatusMessage("Completed API call")
@@ -72,9 +74,10 @@ class FunctionComponent(ResilientComponent):
                 success=True,
                 content={
                     "task": task,
-                    "task_notes": task_notes
+                    "task_notes": task_notes.pop()  # Remove newly created note from end of the list
                 }
             )
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 
 """Generate a default configuration-file section for fn_task_utils"""
 

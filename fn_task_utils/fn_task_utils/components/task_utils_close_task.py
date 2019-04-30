@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_task_utils.lib.task_common import find_task_by_name
+from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
 
 
@@ -26,12 +26,25 @@ class FunctionComponent(ResilientComponent):
     @function("task_utils_close_task")
     def _task_utils_close_task_function(self, event, *args, **kwargs):
         """Function: A function which will attempt to close either a System or Custom task using the REST API."""
+
+        def close_task_status(task):
+            """
+            A inner function which is used as a lambda
+            Get_put from the res_client gets our data and this lambda decides what to do with the data
+            The return value of this lambda is then sent to Resilient as a PUT.
+            :param task:
+            :return task:
+            """
+            task["status"] = "C"
+            log.debug("Changed status to closed for task with name %s" % task["name"])
+            return task
+
         try:
             payload = ResultPayload("task_utils_close_task", **kwargs)
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            task_name = kwargs.get("task_name")  # text
+            incident_id = get_function_input(kwargs, "incident_id")  # number
+            task_id = get_function_input(kwargs, "task_id", optional=True)  # number
+            task_name = get_function_input(kwargs, "task_name", optional=True)  # text
 
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
@@ -39,6 +52,9 @@ class FunctionComponent(ResilientComponent):
             log.info("task_name: %s", task_name)
 
             res_client = self.rest_client()
+
+            if not task_name and not task_id:
+                raise ValueError("Either a Task ID or a Task Name to search for must be provided.")
 
             if task_id:
                 log.debug("Task ID was provided, using this to contact REST API")
@@ -53,18 +69,6 @@ class FunctionComponent(ResilientComponent):
 
                     if not task_id:
                         raise ValueError(u"Could not find task with name {}".format(task_name))
-
-            def close_task_status(task):
-                """
-                A inner function which is used as a lambda
-                Get_put from the res_client gets our data and this lambda decides what to do with the data
-                The return value of this lambda is then sent to Resilient as a PUT.
-                :param task:
-                :return task:
-                """
-                task["status"] = "C"
-                log.debug("Changed status to closed for task with name %s" % task["name"])
-                return task
 
             task_url = "/tasks/{}".format(task_id)
             try:

@@ -7,7 +7,7 @@ import logging
 import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_task_utils.lib.task_common import find_task_by_name
+from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
 
 
@@ -24,17 +24,37 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_task_utils", {})
 
+
+
     @function("task_utils_update_task")
     def _task_utils_update_task_function(self, event, *args, **kwargs):
         """Function: A function which takes in the ID of an existing Task and a task_utils_payload which is a JSON String of the task details to update."""
+
+        def update_task(task):
+            """
+            A inner function which is used as a lambda
+            The return value of this lambda is then sent to Resilient as a PUT.
+
+            In this case we also update an outer scope variable called updated_task
+             with the value of the newly modified task object before returning it
+            :param task:
+            :return:
+            """
+            task.update(json.loads(task_utils_payload))
+            updated_task.update(task)
+            return task
+
         try:
             payload = ResultPayload("task_utils_update_task", **kwargs)
 
             # Get the function parameters:
-            incident_id = kwargs.get("incident_id")  # number
-            task_id = kwargs.get("task_id")  # number
-            task_name = kwargs.get("task_name")  # text
+            incident_id = get_function_input(kwargs, "incident_id")  # number
+            task_id = get_function_input(kwargs, "task_id", optional=True)  # number
+            task_name = get_function_input(kwargs, "task_name", optional=True)  # text
             task_utils_payload = self.get_textarea_param(kwargs.get("task_utils_payload"))  # textarea
+
+            if not task_name and not task_id:
+                raise ValueError("Either a Task ID or a Task Name to search for must be provided.")
 
             log = logging.getLogger(__name__)
             log.info(kwargs.get("task_utils_payload"))
@@ -55,7 +75,7 @@ class FunctionComponent(ResilientComponent):
 
             # If task name was provided try to find its ID
             if task_name:
-                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format( incident_id, task_name))
+                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format(incident_id, task_name))
                 task_id = find_task_by_name(res_client, incident_id, task_name)
 
                 if not task_id:
@@ -63,20 +83,6 @@ class FunctionComponent(ResilientComponent):
 
             log.info("Sending new task info to res")
             updated_task = {}
-
-            def update_task(task):
-                """
-                A inner function which is used as a lambda
-                The return value of this lambda is then sent to Resilient as a PUT.
-
-                In this case we also update an outer scope variable called updated_task
-                 with the value of the newly modified task object before returning it
-                :param task:
-                :return:
-                """
-                task.update(json.loads(task_utils_payload))
-                updated_task.update(task)
-                return task
 
             task_url = "/tasks/{}".format(task_id)
             try:
