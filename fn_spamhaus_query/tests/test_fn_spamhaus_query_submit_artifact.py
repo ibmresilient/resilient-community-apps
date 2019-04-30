@@ -35,15 +35,15 @@ class TestFnSpamhausQuerySubmitArtifact:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("ipaddress, domain_name, expected_results", [
+    @pytest.mark.parametrize("spamhaus_query_string, spamhause_search_resource, expected_results", [
         ("text", "text", {"value": "xyz"}),
         ("text", "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, ipaddress, domain_name, expected_results):
+    def test_success(self, circuits_app, spamhaus_query_string, spamhause_search_resource, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "ipaddress": ipaddress,
-            "domain_name": domain_name
+            "spamhaus_query_string": spamhaus_query_string,
+            "spamhause_search_resource": spamhause_search_resource
         }
         results = call_fn_spamhaus_query_submit_artifact_function(circuits_app, function_params)
         assert(expected_results == results)

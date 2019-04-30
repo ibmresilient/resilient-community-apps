@@ -8,6 +8,7 @@
 import logging
 from resilient_lib import ResultPayload, RequestsCommon
 
+
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
@@ -18,6 +19,7 @@ def selftest_function(opts):
     Placeholder for selftest function. An example use would be to test package api connectivity.
     Suggested return values are be unimplemented, success, or failure.
     """
+
     # Getting the Config file parameters.
     options = opts.get("fn_spamhaus_query", {})
     wqs_url = options.get('spamhaus_wqs_url')
@@ -35,5 +37,3 @@ def selftest_function(opts):
         return {"state": "Success"}
     except Exception as err_msg:
         return {"state": "Failed"}
-
-
