@@ -755,7 +755,11 @@ END; """
 
         :returns True if the exception was due to the column already existing; False otherwise.
         """
-        return True if the_exception.get('HY000') else False
+
+        if len(the_exception.args) > 1:
+            return True if the_exception.args[1].find('ORA-01430') != -1 else False
+
+        return False
 
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use

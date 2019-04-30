@@ -61,7 +61,6 @@ class ODBCFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-pu
         try:
             return cursor.execute(sql, data)
         except Exception as err:
-            LOG.error("failure on %s", sql)
             raise err
 
 
