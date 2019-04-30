@@ -1,5 +1,7 @@
 """Tests using pytest_resilient_circuits"""
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 from __future__ import print_function, unicode_literals
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -81,7 +83,6 @@ class TestTskUtilsCreate:
 
     @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
         (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
     ])
     def test_owner_as_email_user(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
         """ Test calling with sample values for the parameters """

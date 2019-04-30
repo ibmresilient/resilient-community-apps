@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -48,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             except Exception as json_exception:
                 err_msg = "Could not load task_utils_payload as JSON. Error: {}", json_exception
                 log.error(err_msg)
-                raise FunctionError(err_msg)
+                raise TypeError(err_msg)
 
             res_client = self.rest_client()
 
@@ -83,7 +84,7 @@ class FunctionComponent(ResilientComponent):
             except Exception as update_exception:
                 err_msg = "Encountered exception while trying to update task. Error: {}", update_exception
                 log.error(err_msg)
-                raise FunctionError(err_msg)
+                raise ValueError(err_msg)
 
             yield StatusMessage("Task {} has been updated".format(task_id))
 

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function, unicode_literals
@@ -79,7 +81,6 @@ class TestTaskUtilsCloseTask:
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 0, "text", {"task_id": 2251301}),
         (2096, 0, "text", {"task_id": 2251301})
     ])
     def test_close_task_failure(self, circuits_app, incident_id, task_id, task_name, expected_results):
@@ -97,7 +98,6 @@ class TestTaskUtilsCloseTask:
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 2251301, "text", {"task_id": 2251301}),
         (2096, 2251301, "text", {"task_id": 2251301})
     ])
     def test_close_task_status(self, circuits_app, incident_id, task_id, task_name, expected_results):

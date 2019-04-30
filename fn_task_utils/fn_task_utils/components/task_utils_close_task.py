@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
+from fn_task_utils.lib.task_common import find_task_by_name
+
 
 
 class FunctionComponent(ResilientComponent):
@@ -41,17 +44,15 @@ class FunctionComponent(ResilientComponent):
                 log.debug("Task ID was provided, using this to contact REST API")
 
             else:
-                inc_tasks = res_client.get(
-                    '/incidents/{}/tasks?want_layouts=false&want_notes=false'.format(incident_id))
-                yield StatusMessage("Task Name was provided, searching the incident for task")
+                if task_name:
+                    yield StatusMessage(
+                        "task_name was provided; Searching incident {} for first matching task with name '{}'".format(
+                            incident_id, task_name))
 
-                for t in inc_tasks:
-                    if t['name'] == task_name:
-                        yield StatusMessage(u"Found task which matches at ID {}".format(t['id']))
-                        task_id = t['id']
-                        break
-                if not task_id:
-                    raise FunctionError(u"Could not find task with name {}".format(task_name))
+                    task_id = find_task_by_name(res_client, incident_id, task_name)
+
+                    if not task_id:
+                        raise ValueError(u"Could not find task with name {}".format(task_name))
 
             def close_task_status(task):
                 """
@@ -66,7 +67,12 @@ class FunctionComponent(ResilientComponent):
                 return task
 
             task_url = "/tasks/{}".format(task_id)
-            res_client.get_put(task_url, lambda task: close_task_status(task))
+            try:
+                res_client.get_put(task_url, lambda task: close_task_status(task))
+            except Exception as close_exception:
+                err_msg = "Encountered exception while trying to close task. Error: {}", close_exception
+                log.error(err_msg)
+                raise ValueError(err_msg)
             yield StatusMessage("Task {} has been closed".format(task_id))
 
             results = payload.done(

@@ -27,8 +27,9 @@ No app.config values are used for this integration.
 
 | Input Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ------- |
-| `task_id` | `Number` | Yes | `2105`  | ------- |
-| `task_id` | `Number` | No | `None` | ------- |
+| `incident_id` | `Number` | Yes | `2105`  | ------- |
+| `task_id` | `Number` | No | `221205` | ------- |
+| `task_name` | `String` | No | `New Task` | ------- |
 | `task_utils_note_type` | `Select` | No | `None` | ------- |
 | `task_utils_note_body` | `Text` | No | `None` | ------- |
 
@@ -484,7 +485,8 @@ results = {
 | Input Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ------- |
 | `incident_id` | `Number` | Yes | `2105`  | ------- |
-| `task_id` | `Number` | No | `None` | ------- |
+| `task_id` | `Number` | No | `221205` | ------- |
+| `task_name` | `String` | No | `New Task` | ------- |
 | `task_utils_payload` | `Number` | No | `{"required": false}` | ------- |
 
 

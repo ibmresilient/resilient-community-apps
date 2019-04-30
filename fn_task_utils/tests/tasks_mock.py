@@ -1,5 +1,6 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 from __future__ import unicode_literals
 import logging
 LOG = logging.getLogger(__name__)

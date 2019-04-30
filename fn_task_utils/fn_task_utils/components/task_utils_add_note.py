@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -57,9 +58,14 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("task_name not found: %s", task_name)
 
             yield StatusMessage("Posting note to API")
+            try:
+                task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
+                task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
+            except Exception as add_note_exception:
+                err_msg = "Encountered exception while trying to add note to task. Error: {}", add_note_exception
+                log.error(err_msg)
+                raise ValueError(err_msg)
 
-            task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
-            task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
             yield StatusMessage("Completed API call")
 
             results = payload.done(

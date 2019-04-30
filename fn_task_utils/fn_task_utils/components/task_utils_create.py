@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -41,7 +42,7 @@ class FunctionComponent(ResilientComponent):
             except Exception as json_exception:
                 err_msg = "Could not load task_utils_payload as JSON. Error: {}", json_exception
                 log.error(err_msg)
-                raise FunctionError(err_msg)
+                raise TypeError(err_msg)
             else:
                 log.debug("Successfully parsed task_utils_payload as valid JSON")
 
@@ -54,8 +55,13 @@ class FunctionComponent(ResilientComponent):
 
             log.debug("New task will be saved with name %s", task_utils_payload["name"])
             yield StatusMessage("Posting to API")
+            try:
+                task_response = resilient_client.post('/incidents/{}/tasks'.format(incident_id), task_utils_payload)
+            except Exception as add_note_exception:
+                err_msg = "Encountered exception while trying to create task. Error: {}", add_note_exception
+                log.error(err_msg)
+                raise ValueError(err_msg)
 
-            task_response = resilient_client.post('/incidents/{}/tasks'.format(incident_id), task_utils_payload)
             log.info("Response from Resilient %s", task_response)
 
             task_id = task_response.get('id', 'No task ID found')

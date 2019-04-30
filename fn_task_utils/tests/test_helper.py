@@ -1,5 +1,6 @@
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 from __future__ import unicode_literals
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 
