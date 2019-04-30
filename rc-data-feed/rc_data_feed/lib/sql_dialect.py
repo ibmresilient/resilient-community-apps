@@ -9,6 +9,7 @@ from six import string_types
 MAX_ORACLE_VARCHAR = 2000
 MAX_MARIADB_TEXT = 32000  # roughly 1/2 of 65535 limit to account for unicode
 ENCODING="utf-8"
+ORACLE_ENCODING="utf-16le"
 
 class SqlDialect:
     """Base class for all SQL dialects that we will support."""
@@ -754,7 +755,8 @@ END; """
 
         :returns True if the exception was due to the column already existing; False otherwise.
         """
-        return True
+        return True if the_exception.get('HY000') else False
+
 
     def get_column_type(self, input_type):  # pylint: disable=no-self-use
         """
@@ -791,9 +793,10 @@ END; """
 
 
     def configure_connection(self, connection):
-        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ENCODING)  # pylint: disable=c-extension-no-member
+        connection.setdecoding(pyodbc.SQL_WCHAR, encoding=ORACLE_ENCODING)  # pylint: disable=c-extension-no-member
         if sys.version_info.major == 2: # to set encoding on python 2
-            connection.setencoding(str, encoding=ENCODING)
-            connection.setencoding(unicode, encoding=ENCODING)
+            connection.setencoding(str, encoding=ORACLE_ENCODING)
+            connection.setencoding(unicode, encoding=ORACLE_ENCODING)
         else: # an issue and try encoding without specifying fromtype
-            connection.setencoding(encoding=ENCODING)
+            connection.setencoding(encoding=ORACLE_ENCODING)
+

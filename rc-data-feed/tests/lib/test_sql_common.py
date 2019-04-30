@@ -98,11 +98,12 @@ class SQLCommon():
                     table_cols[col_name.lower()] = col_type.lower()
 
                 for col in exected_col_types.keys():
-                    print(col, table_cols.get(col, ''), exected_col_types[col])
                     if col in ('id', 'inc_id'):
-                        assert table_cols.get(col, '').startswith('int')
+                        assert table_cols.get(col, '').startswith('int') or table_cols.get(col, '').startswith("number")
                     else:
-                        assert table_cols.get(col, '').startswith(exected_col_types[col])
+                        db_col = table_cols.get(col, '')
+                        col_type = db_col.split("(")[0]
+                        assert exected_col_types[col].startswith(col_type)
             finally:
                 cursor.close()
         finally:
@@ -127,14 +128,20 @@ class SQLCommon():
             # add data to table
             cursor = connection._start_transaction()
 
+            cmd = connection.dialect.get_upsert(TABLE_NAME, self.all_field_names, self.all_field_types)
+            params = connection.dialect.get_parameters(self.all_field_names, payload)
+
             insert_result = connection._execute_sql(
                 cursor,
-                connection.dialect.get_upsert(TABLE_NAME, self.all_field_names, self.all_field_types),
-                connection.dialect.get_parameters(self.all_field_names, payload))
+                cmd,
+                params
+            )
 
             connection._commit_transaction(cursor)
 
-            assert insert_result.rowcount == 1
+            while insert_result.nextset():
+                row_count = insert_result.rowcount
+                assert row_count == 1
 
             # get the row and confirm the values
             select_stmt = "select * from {} where id = {}".format(TABLE_NAME, payload["id"])
@@ -145,8 +152,7 @@ class SQLCommon():
             rows = cursor.fetchall()
             for row in rows:
                 for ndx in range(len(select_result.description)):
-                    col_name = select_result.description[ndx][0]
-                    print (row[ndx])
+                    col_name = select_result.description[ndx][0].lower()
                     assert row[ndx] == result_payload[col_name]
 
         finally:
@@ -195,7 +201,7 @@ class SQLCommon():
             rows = cursor.fetchall()
             for row in rows:
                 for ndx in range(len(select_result.description)):
-                    col_name = select_result.description[ndx][0]
+                    col_name = select_result.description[ndx][0].lower()
                     assert row[ndx] == payload_result[col_name]
 
         finally:
@@ -224,17 +230,16 @@ class SQLCommon():
                 connection._close_connection()
 
 
-    def test_altertable(self):
+    def test_altertable(self, col_type='text'):
         global flat_payload
 
         ALTER_COL = "alter_col"
         connection = self.baseClass(None, self.app_config)
         cursor = connection._start_transaction()
         try:
-            print (connection.dialect.get_add_column_to_table(TABLE_NAME, ALTER_COL, "text"))
             alter_result = connection._execute_sql(
                 cursor,
-                connection.dialect.get_add_column_to_table(TABLE_NAME, ALTER_COL, "text"))
+                connection.dialect.get_add_column_to_table(TABLE_NAME, ALTER_COL, col_type))
 
             connection._commit_transaction(cursor)
 
