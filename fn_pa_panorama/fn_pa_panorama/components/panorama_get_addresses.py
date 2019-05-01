@@ -24,15 +24,15 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_pa_panorama", {})
 
-    @function("panorama_edit_address_group")
-    def _panorama_edit_address_group_function(self, event, *args, **kwargs):
+    @function("panorama_get_addresses")
+    def _panorama_get_addresses_function(self, event, *args, **kwargs):
         """Function: Panorama get addresses returns a list of the address objects"""
         try:
             yield StatusMessage("Getting list of addresses")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             # Get the function parameters:
-            location = kwargs.get("panorama_location")  # text
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
             vsys = kwargs.get("panorama_vsys")  # text
 
             # Log inputs

@@ -24,17 +24,17 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_pa_panorama", {})
 
-    @function("panorama_edit_address_group")
-    def _panorama_edit_address_group_function(self, event, *args, **kwargs):
+    @function("panorama_create_address")
+    def _panorama_create_address_function(self, event, *args, **kwargs):
         """Function: Panorama create new address"""
         try:
             yield StatusMessage("Creating new address")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             # Get the function parameters:
-            location = kwargs.get("panorama_location")  # text
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
             vsys = kwargs.get("panorama_vsys")  # text
-            body = kwargs.get("panorama_request_body")
+            body = self.get_textarea_param(kwargs.get("panorama_request_body"))  # textarea
 
             # Log inputs
             if location is None:
@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             log.info("panorama_request_body: {}".format(body))
 
             panorama_util = PanoramaClient(self.opts, location, vsys)
-            response = panorama_util.get_addresses()
+            response = panorama_util.add_address(body)
 
             yield StatusMessage("Address created")
             results = rp.done(True, response)

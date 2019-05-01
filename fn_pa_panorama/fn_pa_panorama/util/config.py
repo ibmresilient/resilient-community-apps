@@ -13,5 +13,6 @@ def config_section_data():
 # URL/IP of Panorama
 panorama_host=<https://0.0.0.0>
 api_key=<Panorama_api_key>
+verify_vert=[True|False]
 """
     return config_data

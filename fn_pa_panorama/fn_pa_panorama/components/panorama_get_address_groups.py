@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             # Get the function parameters:
-            location = kwargs.get("panorama_location")  # text
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
             vsys = kwargs.get("panorama_vsys")  # text
             name = kwargs.get("panorama_name_parameter")  # text (optional parameter)
 

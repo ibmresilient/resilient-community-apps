@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
 import logging
+import json
 import requests
 from resilient_lib.components.resilient_common import validate_fields, str_to_bool
 from resilient_lib.components.requests_common import RequestsCommon
@@ -28,7 +29,7 @@ class PanoramaClient:
         self.__vsys = vsys
         self.__output_format = "json"
 
-        self.verify = str_to_bool(pan_config.get("verify_cert"))
+        self.verify = str_to_bool(pan_config.get("verify_cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
         self.query_parameters = self.__build_query_parameters()
@@ -53,21 +54,21 @@ class PanoramaClient:
     def __post(self, resource_uri, payload):
         """Generic POST"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = self.rc.execute_call("POST", uri, payload=payload, log=log, verify_flag=self.verify)
+        response = self.rc.execute_call("POST", uri, payload=json.loads(payload), log=log, verify_flag=self.verify)
         log.debug("Response: {}".format(response))
         return response
 
-    def __put(self, resource_uri, payload):
+    def __put(self, resource_uri, params, payload):
         """Generic PUT"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = requests.put(uri, uri, params=self.query_parameters, json=payload, verify=self.verify)
+        response = requests.put(uri, params=params, json=json.loads(payload), verify=self.verify)
         log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
         response.raise_for_status()
         return response.json()
 
     def get_addresses(self):
         """Get list of addresses"""
-        return self.__get("Object/Addresses", self.query_parameters)
+        return self.__get("Objects/Addresses", self.query_parameters)
 
     def get_address_groups(self, name_param=None):
         """Get list of address groups"""
@@ -76,9 +77,11 @@ class PanoramaClient:
             params["name"] = name_param
         return self.__get("Objects/AddressGroups", params)
 
-    def edit_address_groups(self, payload):
+    def edit_address_groups(self, name_param, payload):
         """Edits an address group, adds/removes addresses"""
-        return self.__get("Object/AddressGroups", payload)
+        params = self.query_parameters
+        params["name"] = name_param
+        return self.__put("Objects/AddressGroups", params, payload)
 
     def add_address(self, payload):
         """Creates a new address"""

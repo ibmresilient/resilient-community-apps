@@ -33,19 +33,22 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             # Get the function parameters:
-            location = kwargs.get("panorama_location")  # text
+            location = self.get_select_param(kwargs.get("panorama_location"))  # select
             vsys = kwargs.get("panorama_vsys")  # text
+            name = kwargs.get("panorama_name_parameter")  # text
             body = self.get_textarea_param(kwargs.get("panorama_request_body"))  # textarea
 
             # Log inputs
+            import json
             if location is None:
                 raise ValueError("panorama_location needs to be set.")
             log.info("panorama_location: {}".format(location))
             log.info("panorama_vsys: {}".format(vsys))
+            log.info("panorama_name_parameter: {}".format(name))
             log.info("panorama_request_body: {}".format(body))
 
             panorama_util = PanoramaClient(self.opts, location, vsys)
-            response = panorama_util.edit_address_groups(body)
+            response = panorama_util.edit_address_groups(name, body)
 
             yield StatusMessage("Address Group Updated")
             results = rp.done(True, response)

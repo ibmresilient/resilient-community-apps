@@ -24,7 +24,9 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "PanoramaEditAddressGroupFunctionComponent = fn_pa_panorama.components.panorama_edit_address_group:FunctionComponent",
-            "PanoramaGetAddressGroupsFunctionComponent = fn_pa_panorama.components.panorama_get_address_groups:FunctionComponent"
+            "PanoramaGetAddressGroupsFunctionComponent = fn_pa_panorama.components.panorama_get_address_groups:FunctionComponent",
+            "PanoramaGetAddressesFunctionComponent = fn_pa_panorama.components.panorama_get_addresses:FunctionComponent",
+            "PanoramaCreateAddressesFunctionComponent = fn_pa_panorama.components.panorama_create_address:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_pa_panorama.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_pa_panorama.util.customize:customization_data"],
