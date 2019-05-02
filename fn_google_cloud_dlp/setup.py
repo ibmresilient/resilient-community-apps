@@ -10,11 +10,12 @@ setup(
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
     description="Resilient Circuits Components for 'fn_google_cloud_dlp'",
-    long_description="An integration with Google Cloud DLP which enables you to inspect an Attachment for Personally Indentifiable Information or to De-Identify an Attachment or Artifact.",
+    long_description="An integration with Google Cloud DLP which enables you to inspect an Attachment for Personally Identifiable Information or to De-Identify an Attachment or Artifact.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'google-cloud-dlp>=0.10.0',
-        'PyPDF2>=1.26.0'
+        'PyPDF2>=1.26.0',
+        'python-docx>=0.8.10'
     ],
     packages=find_packages(),
     include_package_data=True,

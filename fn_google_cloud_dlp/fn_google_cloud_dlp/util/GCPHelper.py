@@ -4,11 +4,16 @@
 import logging
 import os
 import tempfile
-import PyPDF2
 
 # Import the client library
 import google.cloud.dlp
 import resilient_lib
+
+# Used to parse different file formats
+import PyPDF2
+import xml.dom.minidom
+import zipfile
+import docx
 
 log = logging.getLogger(__name__)
 
@@ -86,12 +91,50 @@ class GCPHelper:
             if '.pdf' in attachment_name:
                 log.info("Dealing with a PDF")
                 attachment_input = cls.extract_text_from_pdf(attachment_input)
+            elif '.odt' in attachment_name:
+                attachment_input = cls.extract_text_from_odt(attachment_input)
+            elif '.docx' in attachment_name:
+                attachment_input = cls.extract_text_from_docx(attachment_input)
 
         else:
             # We are not dealing with an attachment
             log.debug("Working with an artifact")
 
-        return attachment_input, attachment_name
+        return cls.attempt_to_parse_as_utf8(attachment_input), attachment_name
+
+    @classmethod
+    def extract_text_from_docx(cls, attachment_input):
+        extracted_input = u""
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
+            # Write and close tempfile
+            temp_pdf_file.write(attachment_input)
+            temp_pdf_file.close()  # Close the file so we can access it using Zipfile
+            doc = docx.Document(temp_pdf_file.name)
+            docx_paragraphs = []
+            for para in doc.paragraphs:
+                docx_paragraphs.append(para.text)
+            attachment_input = '\n'.join(docx_paragraphs).encode('utf-8')
+        return attachment_input
+
+    @classmethod
+    def extract_text_from_odt(cls, attachment_input):
+        extracted_input = u""
+        with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
+            # Write and close tempfile
+            temp_pdf_file.write(attachment_input)
+            temp_pdf_file.close() # Close the file so we can access it using Zipfile
+            m_odf = zipfile.ZipFile(temp_pdf_file.name)  # Parse the ODT as a Zipfile
+            ostr = m_odf.read("content.xml") # content.xml has what we want
+            doc = xml.dom.minidom.parseString(ostr)  # Parse the XML tree for text elements
+            paras = doc.getElementsByTagName('text:p')  # Get a list of text tags to parse
+            odt_paragraphs = []
+            for p in paras:
+                for ch in p.childNodes:
+                    if ch.nodeType == ch.TEXT_NODE:
+                        odt_paragraphs.append(ch.data)
+
+            extracted_input = "".join(odt_paragraphs).encode('utf-8')
+        return extracted_input
 
     @classmethod
     def extract_text_from_pdf(cls, attachment_input):
@@ -142,6 +185,39 @@ class GCPHelper:
 
                 finally:
                     os.unlink(temp_upload_file.name)
+
+    @staticmethod
+    def attempt_to_parse_as_utf8(string_input):
+        """
+        Takes in 1 param as a string and attempts to format it and return it as UTF8 encoding.
+
+        First try to parse the input as UTF8, if okay return cause this means we have UTF8
+        Else try to parse the input as latin-1 (ISO-8859-1) encoding, if this is successful reencode as UTF8 and return
+        :param string_input:
+        :return:
+        """
+        from six import string_types
+        assert isinstance(string_input, string_types) or isinstance(string_input, bytes)  # If the input isin't a str type, throw
+
+        try:
+            log.info("Attempting to parse as utf-8 encoding")
+            string_input.decode('utf-8')
+        except Exception as e:  # TODO: Rename to more defined exception
+            log.info("Encountered an issue trying to decode input as UTF-8")
+            log.info(str(e))
+        else:  # No exception raised, input is valid UTF-8
+            return string_input
+
+        try:
+            log.info("Attempting to parse as latin-1 encoding")
+            string_input.decode('latin-1')
+        except Exception as e:  # TODO: Rename to more defined exception
+            log.debug("Encountered an issue trying to decode input as latin-1")
+        else:  # No exception raised, input is valid UTF-8
+            return string_input.decode('latin-1')
+
+
+
 
 
     @classmethod
