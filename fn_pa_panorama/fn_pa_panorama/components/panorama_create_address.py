@@ -34,6 +34,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             location = self.get_select_param(kwargs.get("panorama_location"))  # select
             vsys = kwargs.get("panorama_vsys")  # text
+            name = kwargs.get("panorama_name_parameter")  # text
             body = self.get_textarea_param(kwargs.get("panorama_request_body"))  # textarea
 
             # Log inputs
@@ -42,9 +43,10 @@ class FunctionComponent(ResilientComponent):
             log.info("panorama_location: {}".format(location))
             log.info("panorama_vsys: {}".format(vsys))
             log.info("panorama_request_body: {}".format(body))
+            log.info("panorama_name_parameter: {}".format(name))
 
             panorama_util = PanoramaClient(self.opts, location, vsys)
-            response = panorama_util.add_address(body)
+            response = panorama_util.add_address(name, body)
 
             yield StatusMessage("Address created")
             results = rp.done(True, response)

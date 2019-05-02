@@ -51,12 +51,17 @@ class PanoramaClient:
         log.debug("Response: {}".format(response))
         return response
 
-    def __post(self, resource_uri, payload):
+    def __post(self, resource_uri, params, payload):
         """Generic POST"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = self.rc.execute_call("POST", uri, payload=json.loads(payload), log=log, verify_flag=self.verify)
-        log.debug("Response: {}".format(response))
-        return response
+        response = requests.post(uri, params=params, json=json.loads(payload), verify=self.verify)
+        log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
+        response.raise_for_status()
+        return response.json()
+        # uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
+        # response = self.rc.execute_call("POST", uri, payload=json.loads(payload), log=log, verify_flag=self.verify)
+        # log.debug("Response: {}".format(response))
+        # return response
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
@@ -83,6 +88,8 @@ class PanoramaClient:
         params["name"] = name_param
         return self.__put("Objects/AddressGroups", params, payload)
 
-    def add_address(self, payload):
+    def add_address(self, name_param, payload):
         """Creates a new address"""
-        return self.__post("Objects/Addresses", payload)
+        params = self.query_parameters
+        params["name"] = name_param
+        return self.__post("Objects/Addresses", params, payload)
