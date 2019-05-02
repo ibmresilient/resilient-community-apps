@@ -9,7 +9,7 @@ import fn_spamhaus_query.util.selftest as selftest
 from resilient_lib import RequestsCommon, ResultPayload
 from fn_spamhaus_query.util.info_response import STATIC_INFO_RESPONSE
 from fn_spamhaus_query.util.spamhause_helper import *
-
+import json
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_spamhaus_query_submit_artifact"""
@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
 
             # Get Received data in JSON format.
             response_json = response_object.json()
-            print("$$$$$$$$$$$$$$$",response_json)
+            print("$$$$$$$$$$$$$$$", response_json)
             if not response_json:
                 raise SpamhauseRequestCallError("No Response Returned from Api call")
 
@@ -87,8 +87,9 @@ class FunctionComponent(ResilientComponent):
             spamhause_call_error(response_object)
 
             if response_object.status_code == 404:
-                response_json = dict()
+                response_json['is_in_blocklist'] = False          # a bool flag to for block list status
             elif response_object.status_code == 200:
+                response_json['is_in_blocklist'] = True
                 resp_code_list = response_json.get('resp')
                 # Checking STATIC_INFO_RESPONSE for more information on returned info code.
                 for code in resp_code_list:
@@ -109,9 +110,14 @@ class FunctionComponent(ResilientComponent):
                     else:
                         response_json[code] = code_information
             yield StatusMessage("Completed Checking artifact against Spamhaus block list.")
-            print(response_json)
-            results = {}
+
+            # populating the result output set
+            results = result_object.done(success=True, content=response_json)
+
+            with open('a.txt', 'w+') as fh:
+                json.dump(results, fh)
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err_msg:
+            yield FunctionError(err_msg)
