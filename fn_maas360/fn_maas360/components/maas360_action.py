@@ -83,7 +83,7 @@ class FunctionComponent(ResilientComponent):
                 if not action_results:
                     yield StatusMessage("No installed software found for the device id {}".format(device_id))
                 else:
-                    yield StatusMessage("Installed software was found for the device if {}".format(device_id))
+                    yield StatusMessage("Installed software was found for the device id {}".format(device_id))
 
             elif action_type == "Locate Device":
                 yield StatusMessage("Starting the Locate Device function")

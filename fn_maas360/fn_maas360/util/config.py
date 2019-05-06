@@ -40,7 +40,7 @@ maas360_wipe_device_url=/device-apis/devices/1.0/wipeDevice/
 # Required - Whether to notify the administrator on successful device wipe. “yes” value enables this flag
 maas360_wipe_device_notify_me=Yes
 # Required - Whether to notify the user on successful device wipe. “yes” value enables this flag.
-maas360_wipe_device_notify_user=Yes
+maas360_wipe_device_notify_user=No
 # Required - Comma separated list of other email addresses to notify on successful device wipe
 maas360_wipe_device_notify_others=email1, email2
 maas360_cancel_pending_wipe_url= /device-apis/devices/1.0/cancelPendingWipe/

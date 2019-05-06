@@ -7,6 +7,7 @@ import logging
 import json
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib.components.requests_common import RequestsCommon
+from resilient_lib.components.resilient_common import validate_fields
 
 LOG = logging.getLogger(__name__)
 CON_TYPE_JSON = "application/json"
@@ -19,66 +20,74 @@ TARGET_DEVICES_DICT = {"All Devices": 0,
                        "Device Group": 1,
                        "Specific Device": 2}
 
+_the_maas360_utils = None
+
 
 class MaaS360Utils(object):
     """
     Helper object MaaS360Utils.
     """
-    def __init__(self, host, billingId, userName, password, appID, appVersion, platformID, appAccessKey, auth_url,
-                 opts=None, options=None):
+
+    def __init__(self, opts, options):
         """
         Constructor for MaaS360Utils
         Note: Object will not be created if auth token is not generated successfully
 
-        :param host: web-services host
-        :param billingId: billingId of the customer
-        :param userName: user name of the portal admin
-        :param password: password of the portal admin
-        :param appID:
-        :param appVersion:
-        :param platformID:
-        :param appAccessKey:
-        :param auth_url:
         :param opts
         :param options
         """
-        self.host = host
-        self.billingId = billingId
+        # Validate fields
+        validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
+                         'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
+                         'maas360_password'], options)
+
+        # Read configuration settings:
+        self.host_url = self.options["maas360_host_url"]
+        self.billing_id = self.options["maas360_billing_id"]
+        self.platform_id = self.options["maas360_platform_id"]
+        self.app_id = self.options["maas360_app_id"]
+        self.app_version = self.options["maas360_app_version"]
+        self.app_access_key = self.options["maas360_app_access_key"]
+        self.username = self.options["maas360_username"]
+        self.password = self.options["maas360_password"]
+        self.auth_url = self.options["maas360_auth_url"]
+
         self.rc = RequestsCommon(opts, options)
 
         # generating auth token and setting it in the object, to be used in further api calls
-        self.authToken = self.generate_auth_token(userName, password, appID, appVersion, platformID,
-                                                  appAccessKey, auth_url)
+        self.auth_token = self.generate_auth_token(self.username, self.password, self.app_id, self.app_version,
+                                                   self.platform_id, self.app_access_key, self.auth_url)
 
     def get_auth_token(self):
         """
-        Return instance variable authToken.
+        Return instance variable auth_token.
         :return: authToken
         """
-        return self.authToken
+        return self.auth_token
 
-    def generate_auth_token(self, userName, password, appID, appVersion, platformID, appAccessKey, auth_url):
+    def generate_auth_token(self, username, password, app_id, app_version, platform_id, app_access_key, auth_url):
         """
         Generates auth token with given user credentials.
-        :param userName:
+        :param username:
         :param password:
-        :param appID:
-        :param appVersion:
-        :param platformID:
-        :param appAccessKey:
+        :param app_id:
+        :param app_version:
+        :param platform_id:
+        :param app_access_key:
+        :param auth_url:
         :return: String, auth token, if auth token is generated for portal admin or an error
         """
         complete_auth_url = self.get_url_endpoint(auth_url)
         auth_request_body = {
             "authRequest": {
                 "maaS360AdminAuth": {
-                    "billingID": self.billingId,
+                    "billingID": self.billing_id,
                     "password": password,
-                    "userName": userName,
-                    "appID": appID,
-                    "appVersion": appVersion,
-                    "platformID": platformID,
-                    "appAccessKey": appAccessKey
+                    "userName": username,
+                    "appID": app_id,
+                    "appVersion": app_version,
+                    "platformID": platform_id,
+                    "appAccessKey": app_access_key
                 }
             }
         }
@@ -103,7 +112,7 @@ class MaaS360Utils(object):
         """
         auth_headers = {"Accept": "application/json",
                         "Content-Type": u"{}".format(content_type_header),
-                        "Authorization": u"MaaS token='{}'".format(self.authToken)}
+                        "Authorization": u"MaaS token='{}'".format(self.auth_token)}
         return auth_headers
 
     def get_url_endpoint(self, url):
@@ -111,7 +120,7 @@ class MaaS360Utils(object):
         Returns url of the endpoint.
         :return: url
         """
-        return self.host + url + self.billingId
+        return self.host_url + url + self.billing_id
 
     def basic_search(self, url, query_string):
         """
