@@ -18,6 +18,7 @@ setup(
         'resilient_circuits>=30.0.0',
         'python-dateutil>=2.8.0',
         'requests>=2.21.0',
+        'resilient-lib>=32.0.140',
 
     ],
     packages=find_packages(),
