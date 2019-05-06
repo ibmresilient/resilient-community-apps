@@ -40,8 +40,6 @@ class FunctionComponent(ResilientComponent):
             # Get proxy Configuration
             proxies = {"http": self.options.get('http_proxy'), "https": self.options.get('https_proxy')}
 
-            print("PROXY SERVER : {}".format(proxies))
-
             log = logging.getLogger(__name__)
             log.info("spamhaus_query_string: %s", spamhaus_query_string)
             log.info("spamhause_search_resource: %s", spamhause_search_resource)
@@ -59,27 +57,16 @@ class FunctionComponent(ResilientComponent):
             # Initialising the Result payload object
             result_object = ResultPayload("fn_spamhaus_query", **kwargs)
 
-            # Initialising the RequestCommon to make REST API Calls to spamhaus
-            # requestcommon_obj = RequestsCommon(function_opts=self.options)
-
             # Construct call header with api key
             header_data = {'Authorization': 'Bearer {}'.format(spamhaus_dqs_key)}
 
             # Make Get Call to Spamhause website
-            """
-            try:
-                response_json = requestcommon_obj.execute_call('GET', spamhaus_wqs_url.format(spamhause_search_resource,
-                                                                                              spamhaus_query_string),
-                                                               headers=header_data, proxies=proxies)
-            except Exception as err_msg:
-                print(err_msg)
-            """
+
             response_object = requests.get(spamhaus_wqs_url.format(spamhause_search_resource, spamhaus_query_string),
                                            headers=header_data, proxies=proxies)
 
             # Get Received data in JSON format.
             response_json = response_object.json()
-            print("$$$$$$$$$$$$$$$", response_json)
             if not response_json:
                 raise SpamhauseRequestCallError("No Response Returned from Api call")
 
@@ -93,13 +80,10 @@ class FunctionComponent(ResilientComponent):
                 resp_code_list = response_json.get('resp')
                 # Checking STATIC_INFO_RESPONSE for more information on returned info code.
                 for code in resp_code_list:
-                    print("{}>>>>>>>>>>>>>>>>>>{}".format(type(code), code))
                     code_information = STATIC_INFO_RESPONSE.get(code)
-                    print("STATIC CODE INFO---------------", code_information)
                     # If information not found in `STATIC_INFO_RESPONSE`, Then trying with Spamhaus info API Call
                     if not code_information:
                         code_reponse_obj = requests.get(spamhaus_wqs_url.format('info', code), headers=header_data, proxies=proxies)
-                        print("INFO CODE--------------------", code_reponse_obj.status_code)
                         # Checking for returned status code error messages.
                         spamhause_call_error(code_reponse_obj)
 
@@ -113,10 +97,8 @@ class FunctionComponent(ResilientComponent):
 
             # populating the result output set
             results = result_object.done(success=True, content=response_json)
-
             with open('a.txt', 'w+') as fh:
                 json.dump(results, fh)
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err_msg:

@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 STATIC_INFO_RESPONSE = {
    1002: {
        "dataset":       "SBL",
