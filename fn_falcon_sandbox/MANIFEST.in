@@ -1,0 +1,4 @@
+include README.md
+include fn_falcon_sandbox/util/*
+include fn_falcon_sandbox/LICENSE
+include fn_falcon_sandbox/doc/*
