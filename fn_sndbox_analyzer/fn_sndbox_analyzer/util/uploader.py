@@ -26,7 +26,7 @@ class ApiUploader(object):
         :param proxies: Optional proxies dict passed to requests calls.
         """
 
-        self.api_url = url or 'https://api.sndbox.com/developers/files'
+        self.api_url = url or 'https://api.sndbox.com'
 
         # turn SSL verify on by default
         self.verify_ssl = True
@@ -68,7 +68,7 @@ class ApiUploader(object):
         # exponential back-off delay
         for i in range(3):
             try:
-                full_url = '{b}{u}?apikey={a}'.format(
+                full_url = '{b}/developers/files{u}?apikey={a}'.format(
                     b=self.api_url, u=uri, a=self.api_key)
 
                 response = None
@@ -105,7 +105,7 @@ class ApiUploader(object):
         :type  handle:   File handle
         :param handle:   Handle to file to upload for analysis.
         :rtype:  str
-        :return: Json dict.
+        :return: Analysis ID.
         """
         # multipart post files.
         files = {"file": handle}

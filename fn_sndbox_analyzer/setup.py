@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits SNDBOX Analyzer Functions that submits an attached file to SNDBOX Cloud for Malware analysis and returns the results in an incident note. ",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'resilient-lib'
+        'resilient-lib>=32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -16,7 +16,7 @@ sndbox_api_key=
 # Your SNDBOX Server URL, using https://api.sndbox.com if empty.
 sndbox_analyzer_url=https://api.sndbox.com
              
-# Amount of time in seconds to wait until checking if the report is ready again.
-sndbox_analyzer_report_request_timeout=60 
+# Amount of time in seconds to wait until timeout.
+sndbox_analyzer_report_request_timeout=300 
 """
     return config_data

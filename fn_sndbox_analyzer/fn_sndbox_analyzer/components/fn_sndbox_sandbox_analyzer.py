@@ -100,16 +100,14 @@ class FunctionComponent(ResilientComponent):
                                                        artifact_id=artifact_id, attachment_id=attachment_id)
 
                 with open(write_temp_file(sample_file, sample_name), "rb") as handle:
-                    sample_ids = [sample["sample_id"]
-                                  for sample in uploader.submit_samples(handle, sample_name)]
+                    sample_id = uploader.submit_samples(handle, sample_name)
 
-                log.info("sample_ids: " + str(sample_ids))
+                log.info("sample_id: " + str(sample_id))
 
                 # New samples submission might need take as long as hours to finished,
                 # need to check the if the analysis have been done.
                 time_of_begin_check_report = time.time()
-                is_samples_analysis_finished = all(
-                    uploader.check(sample_id) for sample_id in sample_ids)
+                is_samples_analysis_finished = uploader.check(sample_id)
 
                 while not is_samples_analysis_finished:
                     if time.time() - time_of_begin_check_report > SNDBOX_ANALYSIS_REPORT_REQUEST_TIMEOUT:
@@ -118,14 +116,12 @@ class FunctionComponent(ResilientComponent):
                         break
                     yield StatusMessage("Analysis Report not done yet, retrieve every {} seconds".format(CHECK_REPORTS_SLEEP_TIME))
                     time.sleep(CHECK_REPORTS_SLEEP_TIME)
-                    is_samples_analysis_finished = all(
-                        uploader.check(sample_id) for sample_id in sample_ids)
+                    is_samples_analysis_finished = uploader.check(sample_id)
 
                 sample_final_result = []
                 if is_samples_analysis_finished:
-                    for sample_id in sample_ids:
-                        sample_final_result.append({"sample_id": sample_id,
-                                                    "sample_report": uploader.get_sample_report(sample_id)})
+                    sample_final_result.append({"sample_id": sample_id,
+                                                "sample_report": uploader.get_sample_report(sample_id)})
 
                     analysis_report_status = True
 
