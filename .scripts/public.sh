@@ -29,6 +29,7 @@ fn_aws_utilities
 fn_bigfix
 fn_bluecoat_site_review
 fn_calendar_invite
+fn_cisco_amp4ep
 fn_cisco_enforcement
 fn_cisco_umbrella_inv
 fn_clamav
@@ -49,10 +50,12 @@ fn_google_maps_directions
 fn_grr_search
 fn_hibp
 fn_html2pdf
+fn_icdx
 fn_ioc_parser
 fn_ipinfo
 fn_isitPhishing
 fn_jira
+fn_joe_sandbox_analysis
 fn_ldap_utilities
 fn_machine_learning
 fn_mcafee_atd
@@ -73,6 +76,7 @@ fn_qradar_advisor
 fn_qradar_integration
 fn_query_tor_network
 fn_risk_fabric
+fn_rsa_netwitness
 fn_service_now
 fn_slack
 fn_splunk_integration
