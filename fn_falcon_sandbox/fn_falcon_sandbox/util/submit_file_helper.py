@@ -74,42 +74,43 @@ def get_submission_queue_size(host_url, api_key):
     response_json = response.json()
     return response_json['value']
 
-def get_attachment_uri(incident_id, task_id, artifact_id, attachment_id):
-    """ This function determines user's choice from inputs 
-        and then returns attachment URI and metadata URI
+def get_file_attachment_and_metadata(res_client, incident_id, artifact_id=None, task_id=None, attachment_id=None):
     """
-    attachment_src = 'incident'
-    if task_id:
-        file_metadata_uri = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
-        file_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
-    elif artifact_id:
-        file_metadata_uri = "/incidents/{0}/artifacts/{1}".format(incident_id, artifact_id)
-        file_uri = "/incidents/{0}/artifacts/{1}/contents".format(incident_id, artifact_id)
-        attachment_src = 'artifact'
+    call the Resilient REST API to get the attachment or artifact data
+    :param res_client: required for communication back to resilient
+    :param incident_id: required
+    :param artifact_id: optional
+    :param task_id: optional
+    :param attachment_id: optional
+    :return: byte string of attachment
+    """
+    metadata = None
+    if incident_id and artifact_id:
+        data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+        metadata_url = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
+        metadata = res_client.get(metadata_url)["attachment"]
+    elif attachment_id:
+        if task_id:
+            data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            metadata_url = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
+        elif incident_id:
+            data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
+            metadata_url = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+        else:
+            raise ValueError("task_id or incident_id must be specified with attachment")
     else:
-        file_metadata_uri = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
-        file_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
-        attachment_src = 'task'
+        raise ValueError("artifact or attachment or incident id must be specified")
 
-    return file_uri, file_metadata_uri, attachment_src
+    # Get the data
+    attachment = res_client.get_content(data_uri)
+    if not metadata:
+        metadata = res_client.get(metadata_url)
+
+    return attachment, metadata
+
 
 def get_environment_id(env_name):
     return AVAILABLE_ENVS.get(env_name)
 
 def get_runtime_action_script(action_script):
     return AVAILABLE_RUNTIME_ACTION_SCRIPTS.get(action_script)
-
-def submit_file_to_falcon_sandbox(host_url, header, submit_payload):
-    url = "{}/submit/file".format(host_url)
-    response = requests.post(url, headers=header, data=submit_payload)
-    return response.json()
-
-def get_report_status(host_url, header, job_id):
-    url = "{}/report/{}/state".format(host_url, job_id)
-    response = requests.get(url, headers=header)
-    return response.json()
-
-def get_report_summary(host_url, header, job_id):
-    url = "{}/report/{}/summary".format(host_url, job_id)
-    response = requests.get(url, headers=header)
-    return response.json()

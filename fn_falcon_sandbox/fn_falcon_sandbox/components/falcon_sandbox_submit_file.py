@@ -6,7 +6,7 @@ import logging
 from requests_toolbelt import MultipartEncoder
 import json
 import time
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, RequestsCommon
 from resilient_circuits import (
     ResilientComponent,
     function,
@@ -17,13 +17,10 @@ from resilient_circuits import (
 )
 from fn_falcon_sandbox.util.submit_file_helper import (
     get_submission_queue_size,
-    get_attachment_uri,
     get_environment_id,
-    get_report_summary,
     get_runtime_action_script,
     falcon_sandbox_request_header,
-    get_report_status,
-    submit_file_to_falcon_sandbox,
+    get_file_attachment_and_metadata,
     write_temp_file,
     remove_temp_files,
     LIST_OF_RUNTIME_PARAMS,
@@ -136,6 +133,7 @@ class FunctionComponent(ResilientComponent):
             API_KEY = self.options.get("falcon_sandbox_api_key")
             API_HOST = self.options.get("falcon_sandbox_api_host")
             FETCH_REP_TIMEOUT = self.options.get("fetch_report_timeout")
+            SUBMIT_FILE_URL = "{}/submit/file".format(API_HOST)
             falcon_sandbox_environment_id = get_environment_id(
                 falcon_sandbox_environment
             )
@@ -158,29 +156,27 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield StatusMessage("> Function inputs OK")
 
+            # Making sure all param names are following naming conventions 
+            for p in kwargs:
+                if not "falcon_sandbox_" in p: 
+                    FunctionError("Input parameter name must start with 'falcon_sandbox_'")
+
             client = self.rest_client()
             time_now = str(time.time())
+            request_common = RequestsCommon(self.options, kwargs)
 
             ## Get the file for submission
             yield StatusMessage(
                 "Getting Attachment from Incident {}".format(falcon_sandbox_incident_id)
             )
-            attachment_uri, attachment_metadata_uri, attachment_src = get_attachment_uri(
+
+            attachment, attachment_metadata = get_file_attachment_and_metadata(
+                client,
                 falcon_sandbox_incident_id,
-                falcon_sandbox_task_id,
                 falcon_sandbox_artifact_id,
+                falcon_sandbox_task_id,
                 falcon_sandbox_attachment_id,
             )
-
-            try:
-                attachment_metadata = client.get(attachment_metadata_uri)
-                attachment = client.get_content(attachment_uri)
-            except Exception:
-                raise FunctionError(
-                    "Error fetching Or no attachment found for target {}.".format(
-                        attachment_src
-                    )
-                )
 
             attachment_path, temp_files = write_temp_file(
                 attachment, "attachment_{}".format(time_now)
@@ -201,6 +197,7 @@ class FunctionComponent(ResilientComponent):
             form_data = {
                 "file": (attachment_name, open(attachment_path, "rb"), attachment_type)
             }
+
             # Todo - need to discuss about validity of this logic
             for p in LIST_OF_RUNTIME_PARAMS:
                 k = p.split("falcon_sandbox_")[1]
@@ -214,19 +211,25 @@ class FunctionComponent(ResilientComponent):
 
             ## Submit file to falcon sandbox
             yield StatusMessage("Submitting...")
-            response = submit_file_to_falcon_sandbox(
-                API_HOST, submit_header, submit_payload
-            )
+            response = request_common.execute_call('post', 
+                                                    SUBMIT_FILE_URL, 
+                                                    submit_payload, 
+                                                    log=log, 
+                                                    headers=submit_header)
             job_id = response["job_id"]
+            GET_REPORT_STATE_URL = "{}/report/{}/state".format(API_HOST, job_id)
+            GET_REPORT_SUMMARY_URL = "{}/report/{}/summary".format(API_HOST, job_id)
             yield StatusMessage("Successfully Submitted. \n Job ID: {}".format(job_id))
-
             ## Get Status of Analysis
             has_completed = ["ERROR", "SUCCESS"]
             req_header = falcon_sandbox_request_header(API_KEY)
             completed = False
             time_running = 0
             while not completed:
-                scan_status = get_report_status(API_HOST, req_header, job_id)
+                scan_status = request_common.execute_call('get', 
+                                                    GET_REPORT_STATE_URL, 
+                                                    log=log, 
+                                                    headers=req_header)
                 status = scan_status["state"]
                 if status in has_completed:
                     yield StatusMessage("Scan Completed with status {}".format(status))
@@ -248,12 +251,14 @@ class FunctionComponent(ResilientComponent):
                     break
 
             ## Get scan report summary
-            scan_report = get_report_summary(API_HOST, req_header, job_id)
+            scan_report = request_common.execute_call('get', 
+                                                    GET_REPORT_SUMMARY_URL, 
+                                                    log=log, 
+                                                    headers=req_header)
 
             ## Return result to resilient
             pb = ResultPayload("falcon_sandbox_submit_file", **kwargs)
             results_payload = pb.done(True, scan_report, status)
-            log.info(results_payload)
             yield FunctionResult(results_payload)
 
         except Exception:
