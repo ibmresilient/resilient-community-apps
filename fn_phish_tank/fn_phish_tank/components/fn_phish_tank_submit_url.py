@@ -45,6 +45,10 @@ class FunctionComponent(ResilientComponent):
             # Initialing the resilient result object
             _result_obj = ResultPayload('fn_phish_tank', **kwargs)
 
+            # Validating the Phish Tank Check URL
+            if (not phish_tank_check_url.startswith('http')) and (not phish_tank_check_url.startswith('https')):
+                phish_tank_check_url = "http://{}".format(phish_tank_check_url)
+                
             # PhihshTank Proxy Data
             pt_proxy = phish_tank_helper.format_proxy_data(proxy_data=proxy)
 
