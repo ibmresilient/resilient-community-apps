@@ -16,6 +16,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.140',
+        'requests>=2.21.0',
     ],
     packages=find_packages(),
     include_package_data=True,

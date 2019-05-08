@@ -13,7 +13,8 @@
  ## About This Package  
 **This function checks IP Address & Domain Names Artifacts against [Spamhaus](https://www.spamhaustech.com/) database to see whether artifact is in block list records or not.if given artifact appears in one of the block list record, then artifacts description filed will be updated with additional information**
 
-Provided in this Integration package is an example Rule configured to be ran against IP Address and Domain Names Artifacts in Resilient :   
+Provided in this Integration package is an example rule configured to be ran against 
+IP Address and Domain Names Artifacts in Resilient :   
    * IP Address Artifacts of Resilient
    * Domain Names Artifacts of Resilient
    
@@ -36,23 +37,23 @@ After the successful scan of a given artifact, the Artifact's description field 
 ![screenshot](screenshots/5.png)  
 
 ### Spamhaus Post-Process Script :
-##### For Domain Names:
-##### For IP Address:
+![screenshot](screenshots/6.png)  
 
 ## Prerequisites
 * Resilient Appliance >= v31.0.0  
 * Integrations Server running resilient_circuits >= v30.0.0
-* requests >=  2.21.0
+* requests >=  v2.21.0
 
 ## Installation
 This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.  
-* Download the `.zip` file from our App Exchange and extract it. You will find a file called: `fn_spamhaus_query-<version>.tar.gz`  
+* Download the `.zip` file from our App Exchange and extract it. 
+You will find a file called: `fn_spamhaus_query-<version>.tar.gz`  
 * Copy this file to your Integrations Server  
  * To install the package, run:     
  `pip install fn_spamhaus_query-<version>.tar.gz`  
  * To import the function, example rules,data tables and workflows into your Resilient	appliance, run:   
    `resilient-circuits customize -y -l fn-spamhaus-query`    
- * To uninstall IOC Parser Function from Resilient Run the following:    
+ * To uninstall Spamhaus function from Resilient run the following:    
     `pip uninstall fn_spamhaus_query`
     
 ## Resilient Configuration 
@@ -61,7 +62,7 @@ Run the following command to generate the Spamhaus  configuration section in the
     
 ` resilient-circuits config [-u | -c]`   
 
-The following PhishTank configuration data is added:    
+The following Spamhaus configuration data is added:    
 ```                   
 [fn_spamhaus_query]
 # The API endpoint URL to query Spamhaus Web Query Service
@@ -73,8 +74,8 @@ https_proxy=
 ```  
   Edit the [fn_spamhaus_query] properties as follows:  
         
- 1. spamhaus_dqs_key : Spamhaus API Key. 
- 2. http_proxy/https_proxy : proxy server address if any 
+ 1. *spamhaus_dqs_key* : Spamhaus API Key. 
+ 2. *http_proxy/https_proxy* : proxy server address if any 
         
 After installation & configuration, the package will be loaded by   
 `resilient-circuits run`    
@@ -83,7 +84,7 @@ After installation & configuration, the package will be loaded by
 |Input Name    |Type          |Required  |Example   | Info |  
 |---------------|-----------|-----------|----------|--------| 
 |`spamhaus_query_string`|  String|Yes | `127.0.0.2`/`test` | IP Adress or Domain Name to be checked against Spamhaus database.| 
-|`spamhause_search_resource`|  String|Yes | `SBL,XBL,PBL,SBL-XBL,ZEN,MSR,AUTHBL,ZRD (domains only),DBL (domains only).` |resource-name is a required enumerated field that represents which blocklist should be queried. | 
+|`spamhause_search_resource`|  String|Yes | `SBL,XBL,PBL,SBL-XBL,ZEN,MSR,AUTHBL,ZRD (domains only),DBL (domains only).` |resource-name is a required enumerated field that represents which block list should be queried. | 
 
 
 ## Function Output  
@@ -116,7 +117,28 @@ inputs.spamhause_search_resource = rule.properties.spamhaus_ip_resource
 ## Post-Process Script    
 This Post-Process script is used to update `artifact description` field in the Resilient incidents, based on the returned Spamhaus block list status data .  
 ```python
-
+# Get the actual data from results
+results_data = results.get('content')
+tmp_text = ""
+tmp_desc = artifact.description
+if results_data.get('is_in_blocklist'):
+     tmp_text = "<br><br><b>This artifact checked against Spamhaus and it is in block list.</b>"
+     resp_list = results_data.get('resp')
+     for code in resp_list:
+          code = str(code)
+          tmp_text += "<br><b>code :</b> {}</br>".format(code)
+          tmp_text += "<br><b>dataset :</b> {}</br>".format(results_data.get(code).get('dataset'))
+          tmp_text += "<br><b>explanation :</b> {}</br>".format(results_data.get(code).get('explanation'))
+          tmp_text += "<br><b>URL :</b> </br>{}</br>".format(results_data.get(code).get('URL'))
+else:
+     tmp_text = "<br><br><b>This artifact checked against Spamhaus and it is not in block list.</b></br></br>"
+if tmp_desc:
+     tmp_desc = tmp_desc.get('content')
+else:
+     tmp_desc = "" 
+complete_tmp_text = tmp_desc+tmp_text
+rich_text = helper.createRichText(complete_tmp_text)
+artifact.description = rich_text
 ```
 
 ## Rules  

@@ -6,10 +6,9 @@ import requests
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_spamhaus_query.util.selftest as selftest
-from resilient_lib import RequestsCommon, ResultPayload
+from resilient_lib import ResultPayload
 from fn_spamhaus_query.util.info_response import STATIC_INFO_RESPONSE
 from fn_spamhaus_query.util.spamhause_helper import *
-import json
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_spamhaus_query_submit_artifact"""
@@ -97,8 +96,6 @@ class FunctionComponent(ResilientComponent):
 
             # populating the result output set
             results = result_object.done(success=True, content=response_json)
-            with open('a.txt', 'w+') as fh:
-                json.dump(results, fh)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err_msg:
