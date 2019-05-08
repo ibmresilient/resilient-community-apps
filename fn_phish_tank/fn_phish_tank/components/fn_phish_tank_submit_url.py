@@ -46,9 +46,9 @@ class FunctionComponent(ResilientComponent):
             _result_obj = ResultPayload('fn_phish_tank', **kwargs)
 
             # Validating the Phish Tank Check URL
-            if (not phish_tank_check_url.startswith('http')) and (not phish_tank_check_url.startswith('https')):
+            if (not phish_tank_check_url.lower().startswith('http')) and (not phish_tank_check_url.lower().startswith('https')):
                 phish_tank_check_url = "http://{}".format(phish_tank_check_url)
-                
+
             # PhihshTank Proxy Data
             pt_proxy = phish_tank_helper.format_proxy_data(proxy_data=proxy)
 
@@ -73,7 +73,8 @@ class FunctionComponent(ResilientComponent):
             # Converting verified string time to epoch format if verified is true from api_response
             _verified_status = _api_response_json.get('results').get('verified')
             if _verified_status:
-                _epoch_verified_time = phish_tank_helper.timestamp_to_ms_epoch(_api_response_json.get('results').get('verified_at'))
+                _epoch_verified_time = phish_tank_helper.timestamp_to_ms_epoch(
+                    _api_response_json.get('results').get('verified_at'))
                 _api_response_json['results']['verified_at_modified'] = _epoch_verified_time
 
             # Replacing string time with epoch converted time
