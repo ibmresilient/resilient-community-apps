@@ -5,8 +5,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_google_cloud_dlp.util.GCPHelper import GCPHelper
 from resilient_lib import ResultPayload
+from fn_google_cloud_dlp.util.gcp_helper import GCPHelper
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'google_cloud_dlp_inspect_content"""
@@ -51,7 +51,6 @@ class FunctionComponent(ResilientComponent):
                                                                                         attachment_id,
                                                                                         gcp_artifact_input,
                                                                                         incident_id,
-                                                                                        log,
                                                                                         task_id)
 
             yield StatusMessage("Sending Data to Google Cloud DLP")

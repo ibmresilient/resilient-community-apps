@@ -4,11 +4,10 @@
 """Function implementation"""
 
 import logging
-import tempfile
-import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_google_cloud_dlp.util.GCPHelper import GCPHelper
 from resilient_lib import ResultPayload
+from fn_google_cloud_dlp.util.gcp_helper import GCPHelper
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'google_cloud_dlp_deidentify_content"""
@@ -53,7 +52,6 @@ class FunctionComponent(ResilientComponent):
                                                                                         attachment_id,
                                                                                         gcp_artifact_input,
                                                                                         incident_id,
-                                                                                        log,
                                                                                         task_id)
 
             yield StatusMessage("Sending Data to Google Cloud DLP")
@@ -63,8 +61,8 @@ class FunctionComponent(ResilientComponent):
                     content_string=gcp_artifact_input or attachment_input, info_types=gcp_dlp_info_types)
             except Exception as general_exception:
                 log.debug("Encountered exception with Google API : %s", general_exception)
-                raise FunctionError(u"""Encountered an unexpected exception. 
-                            Exception Message: """.format(general_exception))
+                raise FunctionError(u"""Encountered an unexpected exception.
+                            Exception Message: {}""".format(general_exception))
             else:
                 yield StatusMessage("Data Sent to Google Cloud DLP successfully and response received")
 

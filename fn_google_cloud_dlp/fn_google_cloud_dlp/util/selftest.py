@@ -5,7 +5,7 @@
 """
 
 import logging
-from fn_google_cloud_dlp.util.GCPHelper import GCPHelper
+from fn_google_cloud_dlp.util.gcp_helper import GCPHelper
 from resilient_circuits.rest_helper import get_resilient_client
 
 log = logging.getLogger(__name__)
@@ -32,6 +32,6 @@ def selftest_function(opts):
         helper.inspect_string(content_string="Test", info_types=[])
     except Exception as dlp_exception:
         log.error(u"Encountered Exception when interfacing with DLP; Exception: {}".format(dlp_exception))
-        return {"state":"failure", "reason": dlp_exception}
+        return {"state": "failure", "reason": dlp_exception}
 
     return {"state": "success"}

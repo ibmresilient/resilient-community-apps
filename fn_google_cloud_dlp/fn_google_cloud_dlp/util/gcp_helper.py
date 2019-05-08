@@ -4,6 +4,9 @@
 import logging
 import os
 import tempfile
+import xml.dom.minidom
+import zipfile
+
 
 # Import the client library
 import google.cloud.dlp
@@ -11,11 +14,12 @@ import resilient_lib
 
 # Used to parse different file formats
 import PyPDF2
-import xml.dom.minidom
-import zipfile
 import docx
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
+
+
+ODT_CONTENT_FILE = "content.xml"  # Constant location where we will look for text when parsing a ODT file
 
 
 class GCPHelper:
@@ -27,7 +31,6 @@ class GCPHelper:
 
     @classmethod
     def load_class_variables(cls, app_configs, res_client):
-        # TODO: Add connection option by specifying path to keyfile
         cls.dlp_client = google.cloud.dlp.DlpServiceClient()
         cls.project = cls.get_config_option(app_configs=app_configs,
                                             option_name="gcp_project",
@@ -56,8 +59,7 @@ class GCPHelper:
     @staticmethod
     def get_function_input(inputs, input_name, optional=False):
         """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
-        log = logging.getLogger(__name__)
-        log.debug("Trying to get function input: %s from %s. optional = %s", input_name, inputs, optional)
+        LOG.debug("Trying to get function input: %s from %s. optional = %s", input_name, inputs, optional)
 
         the_input = inputs.get(input_name)
 
@@ -65,17 +67,26 @@ class GCPHelper:
             err = "'{0}' is a mandatory function input".format(input_name)
             raise ValueError(err)
         else:
-            log.debug("Got function input: %s", input_name)
+            LOG.debug("Got function input: %s", input_name)
             return the_input
 
     @classmethod
-    def download_attachment_if_available(cls, artifact_id, attachment_id, gcp_artifact_input, incident_id, log,
+    def download_attachment_if_available(cls, artifact_id, attachment_id, gcp_artifact_input, incident_id,
                                          task_id):
+        """
+        Attempts to download an attachment if an artifact input was not specified.
+        :param artifact_id:
+        :param attachment_id:
+        :param gcp_artifact_input:
+        :param incident_id:
+        :param task_id:
+        :return:
+        """
         attachment_input = None
         attachment_name = None
         # Check whether we are dealing with an attachment or artifact
         if (artifact_id or attachment_id or task_id) and gcp_artifact_input is None:
-            log.info("Input appears to be an attachment, downloading from REST API")
+            LOG.info("Input appears to be an attachment, downloading from REST API")
 
             # Get the files data
             attachment_input = resilient_lib.get_file_attachment(
@@ -89,22 +100,28 @@ class GCPHelper:
 
             # Perform some special handling to get the text out of a PDF
             if '.pdf' in attachment_name:
-                log.info("Dealing with a PDF")
+                LOG.debug("Dealing with a PDF")
                 attachment_input = cls.extract_text_from_pdf(attachment_input)
             elif '.odt' in attachment_name:
+                LOG.debug("Dealing with a ODT")
                 attachment_input = cls.extract_text_from_odt(attachment_input)
             elif '.docx' in attachment_name:
+                LOG.debug("Dealing with a docx")
                 attachment_input = cls.extract_text_from_docx(attachment_input)
 
         else:
             # We are not dealing with an attachment
-            log.debug("Working with an artifact")
+            LOG.debug("Working with an artifact")
 
         return cls.attempt_to_parse_as_utf8(attachment_input), attachment_name
 
     @classmethod
     def extract_text_from_docx(cls, attachment_input):
-        extracted_input = u""
+        """
+        Takes an attachment and attempts to parse it as a docx file.
+        :param attachment_input:
+        :return:
+        """
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
             # Write and close tempfile
             temp_pdf_file.write(attachment_input)
@@ -118,13 +135,19 @@ class GCPHelper:
 
     @classmethod
     def extract_text_from_odt(cls, attachment_input):
+        """
+        Takes an attachment and attempts to parse it as a ODT file.
+        Returns the text of the file gathered from the content.xml.
+        :param attachment_input:
+        :return:
+        """
         extracted_input = u""
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
             # Write and close tempfile
             temp_pdf_file.write(attachment_input)
-            temp_pdf_file.close() # Close the file so we can access it using Zipfile
+            temp_pdf_file.close()  # Close the file so we can access it using Zipfile
             m_odf = zipfile.ZipFile(temp_pdf_file.name)  # Parse the ODT as a Zipfile
-            ostr = m_odf.read("content.xml") # content.xml has what we want
+            ostr = m_odf.read(ODT_CONTENT_FILE)  # content.xml has what we want
             doc = xml.dom.minidom.parseString(ostr)  # Parse the XML tree for text elements
             paras = doc.getElementsByTagName('text:p')  # Get a list of text tags to parse
             odt_paragraphs = []
@@ -138,6 +161,12 @@ class GCPHelper:
 
     @classmethod
     def extract_text_from_pdf(cls, attachment_input):
+        """
+        Takes an attachment and attempts to parse it as a PDF file.
+        Returns the text of the file gathered page by page.
+        :param attachment_input:
+        :return:
+        """
         extracted_input = u""
         with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_pdf_file:
             try:
@@ -146,7 +175,6 @@ class GCPHelper:
 
                 read_pdf = PyPDF2.PdfFileReader(temp_pdf_file)
                 number_of_pages = read_pdf.getNumPages()
-                full_output = u""
                 for page_num in range(0, number_of_pages):
                     page = read_pdf.getPage(page_num)
 
@@ -159,6 +187,17 @@ class GCPHelper:
     @classmethod
     def upload_attachment_to_resilient(cls, artifact_id, attachment_id, attachment_name, de_identified_text,
                                        gcp_artifact_input, incident_id, task_id):
+        """
+        Takes an input and then uploads it to Resilient as an attachment.
+        :param artifact_id:
+        :param attachment_id:
+        :param attachment_name:
+        :param de_identified_text:
+        :param gcp_artifact_input:
+        :param incident_id:
+        :param task_id:
+        :return:
+        """
         # Check whether we are dealing with an attachment or artifact
         if (artifact_id or attachment_id or task_id) and gcp_artifact_input is None:
             with tempfile.NamedTemporaryFile(mode="w+t", delete=False) as temp_upload_file:
@@ -197,22 +236,24 @@ class GCPHelper:
         :return:
         """
         from six import string_types
-        assert isinstance(string_input, string_types) or isinstance(string_input, bytes)  # If the input isin't a str type, throw
+        if not isinstance(string_input, (string_types, bytes)):  # If the input isin't a str type, throw
+            raise ValueError("Gathered an input which is not bytes or a string type")
 
         try:
-            log.info("Attempting to parse as utf-8 encoding")
+            LOG.info("Attempting to parse as utf-8 encoding")
             string_input.decode('utf-8')
-        except Exception as e:  # TODO: Rename to more defined exception
-            log.info("Encountered an issue trying to decode input as UTF-8")
-            log.info(str(e))
+        except Exception as utf8_encoding_ex:
+            LOG.debug("Encountered an issue trying to decode input as UTF-8")
+            LOG.debug(str(utf8_encoding_ex))
         else:  # No exception raised, input is valid UTF-8
             return string_input
 
         try:
-            log.info("Attempting to parse as latin-1 encoding")
+            LOG.info("Attempting to parse as latin-1 encoding")
             string_input.decode('latin-1')
-        except Exception as e:  # TODO: Rename to more defined exception
-            log.debug("Encountered an issue trying to decode input as latin-1")
+        except Exception as latin1_encoding_ex:
+            LOG.debug("Encountered an issue trying to decode input as latin-1")
+            LOG.debug(str(latin1_encoding_ex))
         else:  # No exception raised, input is valid UTF-8
             return string_input.decode('latin-1')
 
@@ -333,16 +374,16 @@ class GCPHelper:
         findings = list()
         # Print out the results.
         if response.result.findings:
-            log.info('Findings were found from DLP Inspection')
+            LOG.info('Findings were found from DLP Inspection')
             for finding in response.result.findings:
                 findings.append({'quote': finding.quote, 'info_type': finding.info_type.name, 'likelihood': finding.likelihood})
                 try:
                     if finding.quote:
-                        log.debug('Quote: {}'.format(finding.quote))
+                        LOG.debug('Quote: %s', finding.quote)
                 except AttributeError:
                     pass
-                log.debug('Info type: {}'.format(finding.info_type.name))
-                log.debug('Likelihood: {}'.format(finding.likelihood))
+                LOG.debug('Info type: %s', finding.info_type.name)
+                LOG.debug('Likelihood: %s', finding.likelihood)
         else:
-            log.info('No findings were found from DLP Inspection')
+            LOG.info('No findings were found from DLP Inspection')
         return findings
