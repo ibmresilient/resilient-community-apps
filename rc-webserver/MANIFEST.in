@@ -1,3 +1,0 @@
-include README.md
-include rc_webserver/data/*
-include rc_webserver/LICENSE
