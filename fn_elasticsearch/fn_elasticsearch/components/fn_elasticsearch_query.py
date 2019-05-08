@@ -7,6 +7,7 @@ import logging
 from ssl import create_default_context
 
 from elasticsearch import Elasticsearch
+from resilient_lib import str_to_bool
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, \
 FunctionResult, FunctionError
 
@@ -34,7 +35,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting")
             helper = ElasticSearchHelper(self.options)
-            # Get Elasticsearch params
+
+            ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(value=helper.get_config_option("es_use_http", True))
             ELASTICSEARCH_URL = helper.get_config_option("es_datastore_url")
             ELASTICSEARCH_CERT = helper.get_config_option("es_cafile", True)
             ELASTICSEARCH_SCHEME = helper.get_config_option("es_datastore_scheme", True)
@@ -73,10 +75,11 @@ class FunctionComponent(ResilientComponent):
                     # Connect to the ElasticSearch instance
                     es = Elasticsearch(ELASTICSEARCH_SCHEME.lower() + "://" + ELASTICSEARCH_URL, ssl_context=context, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
                 else:
-                    # Connect without to Elastic without HTTPS
-                    es = Elasticsearch([ELASTICSEARCH_URL],
-                                       verify_certs=False,
-                                       cafile=ELASTICSEARCH_CERT)
+                    #This handles for HTTP statements
+                    if ELASTICSEARCH_BOOL_HTTP_AUTH:
+                        es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+                    else:
+                        es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT)
             except Exception as e:
                 raise FunctionError("Encountered error while connecting to ElasticSearch {0}".format(e))
             # Start query results as None

@@ -8,6 +8,7 @@
 import logging
 from ssl import create_default_context
 from elasticsearch import Elasticsearch
+from resilient_lib import str_to_bool
 
 
 from fn_elasticsearch.util.helper import ElasticSearchHelper
@@ -22,6 +23,7 @@ def selftest_function(opts):
     """
     helper = ElasticSearchHelper(opts.get("fn_elasticsearch", {}))
     # Get Elasticsearch params
+    ELASTICSEARCH_BOOL_HTTP_AUTH = str_to_bool(value=helper.get_config_option("es_use_http", True))
     ELASTICSEARCH_URL = helper.get_config_option("es_datastore_url")
     ELASTICSEARCH_CERT = helper.get_config_option("es_cafile", True)
     ELASTICSEARCH_SCHEME = helper.get_config_option("es_datastore_scheme", True)
@@ -46,10 +48,10 @@ def selftest_function(opts):
                                http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
         else:
             # Connect without to Elastic without HTTPS
-            es = Elasticsearch([ELASTICSEARCH_URL],
-                               verify_certs=False,
-                               cafile=ELASTICSEARCH_CERT)
-
+            if ELASTICSEARCH_BOOL_HTTP_AUTH:
+                es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT, http_auth=(ELASTICSEARCH_USERNAME, ELASTICSEARCH_PASSWORD))
+            else:
+                es = Elasticsearch([ELASTICSEARCH_URL], verify_certs=False, cafile=ELASTICSEARCH_CERT)
         try:
             # If we cant ping the ES instance we can't query it
             if not es.ping():
