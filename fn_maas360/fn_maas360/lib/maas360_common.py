@@ -20,43 +20,45 @@ TARGET_DEVICES_DICT = {"All Devices": 0,
                        "Device Group": 1,
                        "Specific Device": 2}
 
-_the_maas360_utils = None
+CONFIG_DATA_SECTION = 'fn_maas360'
 
 
 class MaaS360Utils(object):
     """
     Helper object MaaS360Utils.
     """
+    _the_maas360_utils = None
 
-    def __init__(self, opts, options):
+    @staticmethod
+    def get_the_maas360_utils(opts):
+        if not MaaS360Utils._the_maas360_utils:
+            MaaS360Utils._the_maas360_utils = MaaS360Utils(opts)
+        return MaaS360Utils._the_maas360_utils
+
+    def __init__(self, opts):
         """
         Constructor for MaaS360Utils
         Note: Object will not be created if auth token is not generated successfully
-
         :param opts
-        :param options
         """
-        # Validate fields
-        validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-                         'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
-                         'maas360_password'], options)
+        # Initialize instance variables
+        self.host_url = None
+        self.billing_id = None
+        self.platform_id = None
+        self.app_id = None
+        self.app_version = None
+        self.app_access_key = None
+        self.username = None
+        self.password = None
+        self.auth_url = None
+        self.rc = None
+        self.auth_token = None
 
-        # Read configuration settings:
-        self.host_url = self.options["maas360_host_url"]
-        self.billing_id = self.options["maas360_billing_id"]
-        self.platform_id = self.options["maas360_platform_id"]
-        self.app_id = self.options["maas360_app_id"]
-        self.app_version = self.options["maas360_app_version"]
-        self.app_access_key = self.options["maas360_app_access_key"]
-        self.username = self.options["maas360_username"]
-        self.password = self.options["maas360_password"]
-        self.auth_url = self.options["maas360_auth_url"]
+        # Read configuration settings
+        self.reload_options(opts)
 
-        self.rc = RequestsCommon(opts, options)
-
-        # generating auth token and setting it in the object, to be used in further api calls
-        self.auth_token = self.generate_auth_token(self.username, self.password, self.app_id, self.app_version,
-                                                   self.platform_id, self.app_access_key, self.auth_url)
+        # Generating auth token
+        self.reconnect()
 
     def get_auth_token(self):
         """
@@ -65,29 +67,22 @@ class MaaS360Utils(object):
         """
         return self.auth_token
 
-    def generate_auth_token(self, username, password, app_id, app_version, platform_id, app_access_key, auth_url):
+    def generate_auth_token(self):
         """
         Generates auth token with given user credentials.
-        :param username:
-        :param password:
-        :param app_id:
-        :param app_version:
-        :param platform_id:
-        :param app_access_key:
-        :param auth_url:
         :return: String, auth token, if auth token is generated for portal admin or an error
         """
-        complete_auth_url = self.get_url_endpoint(auth_url)
+        complete_auth_url = self.get_url_endpoint(self.auth_url)
         auth_request_body = {
             "authRequest": {
                 "maaS360AdminAuth": {
                     "billingID": self.billing_id,
-                    "password": password,
-                    "userName": username,
-                    "appID": app_id,
-                    "appVersion": app_version,
-                    "platformID": platform_id,
-                    "appAccessKey": app_access_key
+                    "password": self.password,
+                    "userName": self.username,
+                    "appID": self.app_id,
+                    "appVersion": self.app_version,
+                    "platformID": self.platform_id,
+                    "appAccessKey": self.app_access_key
                 }
             }
         }
@@ -122,6 +117,45 @@ class MaaS360Utils(object):
         """
         return self.host_url + url + self.billing_id
 
+    def reload_options(self, opts):
+
+        options = opts.get(CONFIG_DATA_SECTION, {})
+
+        # Validate fields
+        validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
+                         'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
+                         'maas360_password'], options)
+
+        # Read configuration settings:
+        self.host_url = options["maas360_host_url"]
+        self.billing_id = options["maas360_billing_id"]
+        self.platform_id = options["maas360_platform_id"]
+        self.app_id = options["maas360_app_id"]
+        self.app_version = options["maas360_app_version"]
+        self.app_access_key = options["maas360_app_access_key"]
+        self.username = options["maas360_username"]
+        self.password = options["maas360_password"]
+        self.auth_url = options["maas360_auth_url"]
+
+        self.rc = RequestsCommon(opts, options)
+
+    def reconnect(self):
+        # generating auth token and setting it in the object, to be used in further api calls
+        self.auth_token = self.generate_auth_token()
+
+    def execute_with_retry(self, verb, url, payload={}, log=None, headers=None):
+        for _ in range(2):
+            try:
+                return self.rc.execute_call(verb, url, payload, log=log, headers=headers)
+
+            except IntegrationError as err:
+                # catch expired token error
+                if err.value == "I have expired":  # FIXME: status code 401
+                    self.reconnect()
+                    continue
+                # any other error
+                raise err
+
     def basic_search(self, url, query_string):
         """
         Search for devices by Device Name, Username, Phone Number, Platform, Device Status and other Device Identifiers.
@@ -135,7 +169,8 @@ class MaaS360Utils(object):
         auth_headers = self.get_auth_headers(CON_TYPE_JSON)
 
         try:
-            results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+            #results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+            results = self.execute_with_retry("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
 
