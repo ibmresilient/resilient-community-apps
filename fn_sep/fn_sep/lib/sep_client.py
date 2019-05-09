@@ -2,11 +2,12 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
-""" Class for Resilient circuits Functions supporting REST API client for Cisco AMP for endpoints  """
+""" Class for Resilient circuits Functions supporting REST API client for Symantec SEP  """
 import logging
 import re
 import json
-from fn_sep.lib.helpers import setup_eoc_command
+from textwrap import dedent
+
 from fn_sep.lib.requests_sep import RequestsSep
 
 try:
@@ -15,7 +16,12 @@ except:
     from urlparse import urljoin
 
 LOG = logging.getLogger(__name__)
-SEP_LIMIT_DEFAULT = 1000
+
+HASH_LENGTH_TO_TYPE = {
+    64: "SHA256",
+    40: "SHA-1",
+    32: "MD5",
+}
 
 class Sepclient(object):
     """
@@ -40,22 +46,91 @@ class Sepclient(object):
         # Rest request endpoints
         self._endpoints = {
             # Admin endpoints
-            "auth":                     self.auth_path,
-            "version":                  self.base_path+"/version",
-            "domains":                  self.base_path+"/domains",
-            "computers":                self.base_path+"/computers",
-            "groups":                   self.base_path+"/groups",
-            "upload_file":              self.base_path+"/command-queue/files",
-            "file_details":             self.base_path+"/command-queue/file/{}/details",
-            "quarantine_endpoints":     self.base_path+"command-queue/quarantine",
-            "policies":                 self.base_path+"/policies/summary",
-            "policies_by_type":         self.base_path+"/policies/summary/{}",
-            "scan_endpoints":           self.base_path+"/command-queue/eoc",
-            "fingerprints_list":        self.base_path+"/policy-objects/fingerprints",
-            "fingerprints_list_by_id":  self.base_path+"/policy-objects/fingerprints/{}"
+            "auth":                                     self.auth_path,
+            "version":                                  self.base_path+"/version",
+            "domains":                                  self.base_path+"/domains",
+            "computers":                                self.base_path+"/computers",
+            "groups":                                   self.base_path+"/groups",
+            "clients_online_status":                    self.base_path+"/stats/client/onlinestatus",
+            "scan_endpoints":                           self.base_path+"/command-queue/eoc",
+            "upload_file":                              self.base_path+"/command-queue/files",
+            "command_status":                           self.base_path+"/command-queue/{}",
+            "file_content":                             self.base_path+"/command-queue/file/{}/content",
+            "quarantine_endpoints":                     self.base_path+"/command-queue/quarantine",
+            "policies":                                 self.base_path+"/policies/summary",
+            "policies_by_type":                         self.base_path+"/policies/summary/{}",
+            "fingerprints_list":                        self.base_path+"/policy-objects/fingerprints",
+            "fingerprints_list_by_id":                  self.base_path+"/policy-objects/fingerprints/{}",
+            "assign_fingerprint_list_to_group":         self.base_path+"/groups/{0}/system-lockdown/fingerprints/{1}"
          }
         self._req = RequestsSep(options, function_params)
         self._headers = {"content-type": "application/json", "Authorization": "Bearer {0}".format(self._get_token())}
+
+    @staticmethod
+    def get_hash_type(hash):
+        """ Find hash type from size for sha256, sha-1 and md5.
+        :param hash: The hash value.
+        :return: Hash type info.
+        """
+        if len(hash) in HASH_LENGTH_TO_TYPE:
+            return HASH_LENGTH_TO_TYPE[len(hash)]
+        else:
+            raise ValueError('Unknown hash type for value: ' + hash)
+
+    @staticmethod
+    def setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action):
+        """ Set up xml payload for an eoc or remediation scan.
+
+        :param scan_type: Type of scan e.g. 'QUICK_SCAN', 'FULL_SCAN'.
+        :param file_path: Can be a file path or name or None value. (Optional parameter)
+        :param sha256: Sha256 hash value. (Optional parameter)
+        :param sha1: Sha1 hash value.(Optional parameter)
+        :param md5: Sha1 hash value. (Optional parameter)
+        :param description: Description of scan.
+        :param scan_action: Used to set action for remediation scans.
+        :return An xml payload string.
+        """
+        if scan_action is not None and scan_action.lower() == "remediate":
+            action = "<RemediationAction>REMEDIATE</RemediationAction>"
+        else:
+            action = ''
+
+        # Reset 'None' values to blanks'
+        file_path = '' if file_path is None else file_path
+        hvs = ['' if hv is None else hv for hv in [sha256, sha1, md5]]
+
+        scan_xml = dedent(u"""\
+            <?xml version="1.0" encoding="UTF-8"?>
+            <EOC creator="Resilient" version="1.0" id="id">
+              <DataSource name="name" id="id" version="version"/>
+              <ScanType>{0}</ScanType>
+              {6}
+              <Threat category="" type="" severity="" time="">
+                <Description>{5}</Description>
+                <Attacker/>
+              </Threat>
+              <Activity>
+                <OS id="0" name="name" version="version">
+                  <Process/>
+                  <Files>
+                    <File name="{1}" action="create">
+                      <Hash name="SHA256" value="{2}"/>
+                    </File>
+                    <File name="{1}" action="create">
+                      <Hash name="SHA1" value="{3}"/>
+                    </File>
+                    <File name="{1}" action="create">
+                      <Hash name="MD5" value="{4}"/>
+                    </File>
+                  </Files>
+                  <Registry/>
+                  <Network/>
+                </OS>
+              </Activity>
+            </EOC>""").format(scan_type, file_path, hvs[0], hvs[1], hvs[2], description.encode('utf-8'), action)
+
+        return scan_xml
+
 
     def _get_token(self):
         """Get the authorization token to be used in subsequent requests.
@@ -63,8 +138,9 @@ class Sepclient(object):
         :return: Token
         """
         url = urljoin(self.base_url, self._endpoints["auth"])
-        data = {"username": self.username, "password": self.password, "domain": self.domain}
-        r = self._req.execute_call('post', url, verify_flag=False, payload=data)
+        json = {"username": self.username, "password": self.password, "domain": self.domain}
+        r = self._req.execute_call('post', url, verify_flag=False, json=json)
+
         return r["token"]
 
     def get_version(self):
@@ -73,7 +149,9 @@ class Sepclient(object):
         :return: Result in json format
         """
         url = urljoin(self.base_url, self._endpoints["version"])
+
         r =  self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+
         return r
 
     def test_connectivity(self):
@@ -84,7 +162,9 @@ class Sepclient(object):
         :return: Result in json format
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
+
         r = self._req.execute_call('head', url, verify_flag=False, resp_type='bytes', headers=self._headers)
+
         return r
 
     def get_domains(self):
@@ -93,12 +173,14 @@ class Sepclient(object):
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["domains"])
+
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+
         return r
 
     def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
                       pagesize=None, sort=None):
-        """Get a list of computers. The paramaters are all optiional the default is to return results for all computers/
+        """Get a list of computers. The paramaters are all optional the default is to return results for all computers/
         endpoints.
 
         :param computername: The host name of computer. Wild card is supported as '*'.
@@ -114,7 +196,20 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["computers"])
         params = {"computerName": computername, "domain": domain, "lastUpdate": lastupdate, "order":order, "os":os,
                   "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
+
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+
+        return r
+
+    def get_clients_online_status(self):
+        """Gets a list and count of the online and offline clients.
+
+        :return Result in json format.
+        """
+        url = urljoin(self.base_url, self._endpoints["clients_online_status"])
+
+        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+
         return r
 
     def get_groups(self, domain=None, fullpathname=None, mode=None, order=None, os=None, pageindex=None,
@@ -131,10 +226,14 @@ class Sepclient(object):
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["groups"])
+
         params = {"domain": domain, "fullPathName": fullpathname, "order":order,
                   "pageIndex": pageindex , "pageSize": pagesize, "sort": sort}
+
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+
         return r
+
 
     def get_policies_summary(self, policy_type=None, domainid=None):
         """ Get list of policies.
@@ -148,60 +247,112 @@ class Sepclient(object):
         if policy_type is None:
             url = urljoin(self.base_url, self._endpoints["policies"])
         else:
-            url = urljoin(self.base_url, self._endpoints["policies_by_type"]).format(policy_type["name"])
-        params = {"policy_type": policy_type["name"], "domainId": domainid}
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
+            url = urljoin(self.base_url, self._endpoints["policies_by_type"]).format(policy_type)
+
+        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
 
         return r
 
-    def get_fingerprint_list(self, id=None, domainid=None, name=None):
-        """ Gets the file fingerprint list for a specified name as a set of hash values.
+    def get_fingerprint_list(self, fingerprintlist_id=None, domainid=None, fingerprintlist_name=None):
+        """ Gets the fingerprint list for a specified name as a set of hash values. Either parameter fingerprintlist_id
+        or fingerprintlist_name can be used but not at the same time.
 
-        :param id:
+        :param fingerprintlist_id: Id of fingerprint list.
         :param domainid: If present, get policies from this domain. Otherwise, get policies from the logged-on domain.
-        :param policy_type: If present gets a summary for all the policies of this type..
+        :param fingerprintlist_name: Name of a fingerprint list.
         :return Result in json format.
         """
-        if id is None:
+        if fingerprintlist_id is None:
             url = urljoin(self.base_url, self._endpoints["fingerprints_list"])
         else:
-            url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(id)
+            url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
 
-        params = {"domainId": domainid, "name": name}
+        params = {"domainId": domainid, "name": fingerprintlist_name}
+
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
 
         return r
 
-    def add_fingerprint_list(self, data=None, description=None, domainid=None, hashtype=None, name=None):
-        """ Add a blacklist as a file fingerprint list.
+    def delete_fingerprint_list(self, fingerprintlist_id=None):
+        """ Delete a file fingerprint list.
 
-        :param data: The blacklist file’s data.
+        :param fingerprintlist_id: The fingerprint list  id.
+        :return Result in json format.
+        """
+        url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
+
+        r = self._req.execute_call('delete', url, verify_flag=False, headers=self._headers)
+
+        return r
+
+    def add_fingerprint_list(self, fingerprintlist_name=None, description=None, domainid=None, hash_value=None):
+        """ Add a blacklist as a file fingerprint list with hash value.
+
+        :param name: The blacklist file’s ID. This field is not required at the blacklist file’s creation,
+                    but when the blacklist file is updated, this field is required.
         :param description: The blacklist file’s description.
         :param domainid: If present, get policies from this domain. Otherwise, get policies from the logged-on domain.
-        :param hashtype: The blacklist file’s hash type. Possible values are MD5 or SHA256.
-        :param name: The blacklist file’s ID. This field is not required at the blacklist file’s creation, but when the blacklist file is updated, this field is required.
+        :param hash_type: The blacklist file’s hash type. Possible values are MD5 or SHA256.
+        :param hash_value: The blacklist file’s hash type. Possible values are MD5 or SHA256.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["fingerprints_list"])
 
-        payload = json.dumps({"data": [{"name":"myEnterprise", "departments":"HR"}], "description": description, "domainId": domainid, "hashType": hashtype["name"]})
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, payload=payload)
+        hash_type = "MD5" if hash_value in [None, ''] else self.get_hash_type(hash_value)
 
-    def update_fingerprint_list(self, id=None, data=None, description=None, domainid=None, hashtype=None, name=None):
-        """ Update ingerprint list.
+        if hash_value is None:
+            hash_value = ''
+        if hash_type not in ["MD5", "SHA256"]:
+            raise ValueError("Unsupported hash type for value: " + hash)
 
-        :param data: The blacklist file’s data.
+        payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid, "hashType": hash_type,
+                              "data": [hash_value]})
+
+        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+
+        return r
+
+    def update_fingerprint_list(self, fingerprintlist_id=None, fingerprintlist_name=None, description=None, domainid=None, hash_value=None):
+        """ Update fingerprint list.
+
+        :param fingerprint_id: The fingerprint list id.
         :param description: The blacklist file’s description.
         :param domainid: If present, get policies from this domain. Otherwise, get policies from the logged-on domain.
-        :param hashtype: The blacklist file’s hash type. Possible values are MD5 or SHA256.
+        :param hash_type: The blacklist file’s hash type. Possible values are MD5 or SHA256.
         :param name: The blacklist file’s ID. This field is not required at the blacklist file’s creation, but when the blacklist file is updated, this field is required.
         :return Result in json format.
         """
-        url = urljoin(self.base_url, self._endpoints["fingerprints_list_byid"]).format(id)
+        url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
 
-        payload = {"data": data, "description": description, "domainId": domainid, "hashType": hashtype["name"],
-                   "name": name}
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, payload=payload)
+        if hash_value is not None:
+            hash_values =  re.split('\s+|,', hash_value)
+
+        hash_type = self.get_hash_type(hash_values[0])
+
+        if hash_type not in ["MD5", "SHA256"]:
+            raise ValueError("Unsupported hash type for value: " + hash)
+
+        payload = json.dumps({"name": fingerprintlist_name,"description": description, "domainId": domainid,
+                              "hashType": hash_type, "data": hash_values})
+        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
+
+        return r
+
+    def assign_fingerprint_list_to_group(self, group_id, fingerprintlist_id=None):
+        """ Assign a fingerprint list to a group for lockdown purposes.
+
+        :param group_id: The group id to assign fingerprint iud.
+        :param fingerprintlist_id: The fingerprint list id.
+        :return Result in json format.
+        """
+        url = urljoin(self.base_url, self._endpoints["assign_fingerprint_list_to_group"])\
+            .format(group_id, fingerprintlist_id)
+
+        payload = json.dumps({"group_id": group_id, "fingerprint_id": fingerprintlist_id})
+
+        r = self._req.execute_call('put', url, verify_flag=False, headers=self._headers, data=payload)
+
+        return r
 
     def upload_file(self, file_path=None, computer_ids=None, sha256=None, md5=None, sha1=None, source=None ):
         """Upload a suspicious file to the SEPM server.
@@ -215,38 +366,64 @@ class Sepclient(object):
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["upload_file"])
+
+        if computer_ids is not None:
+            computer_ids =  re.split('\s+|,', computer_ids)
+
         params = {"file_path": file_path, "computer_ids": computer_ids, "sha256": sha256, "md5": md5, "sha1": sha1,
                   "source": source}
+
         r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params)
 
         return r
 
-    def get_file_details(self, file_id=None):
-        """Get the details of a binary file, such as the checksum and the file size.
+    def get_command_status(self, commandid=None, order=None, pageindex=None, pagesize=None, sort=None, status_type=None):
+        """Get command status from command id.
 
-        :param file_id: The file ID from which to get detailed information.
+        :param commandid: The command id.
+        :param order: Specifies whether the results are in ascending order (ASC) or descending order (DESC).
+        :param pageindex: The index page that is used for the returned results. The default page index is 1.
+        :param pagesize: The number of results to include on each page. The default is 20.
+        :param sort: The column by which the results are sorted.
+        :param status_type: The type of command status requested. Used by the integration, Not in REST call signature.
+        :return Result in json format.
         """
-        url = urljoin(self.base_url, self._endpoints["file_details"]).format(file_id)
+        url = urljoin(self.base_url, self._endpoints["command_status"]).format(commandid)
+
+        params = {"order": order, "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
 
         return r
 
+    def get_file_content(self, file_id=None):
+        """Get the details of a binary file, such as the checksum and the file size.
+
+        :param file_id: The file ID from which to get detailed information.
+        """
+        url = urljoin(self.base_url, self._endpoints["file_content"]).format(file_id)
+        headers = self._headers
+        headers.update({"content-type":"application/json; charset=UTF-8", "Accept-Encoding": "gzip, deflate, compress"})
+        r = self._req.execute_call('get', url, verify_flag=False, headers=headers, stream=True)
+
+        return r
 
     def quarantine_endpoints(self, group_ids=None, computer_ids=None, undo=None ):
         """Quarantine an endpoint in the SEP environment my moving to a quarantine group.
 
-        :param group_ids: Id of quarntine group.
+        :param group_ids: Id of quarantine group.
         :param computer_ids: List of computer ids.
         :param undo: Boolean value  set to unquarantine endpoint.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["quarantine_endpoints"])
 
-        group_ids = re.split('\s+|,', group_ids)
-        computer_ids = re.split('\s+|,', computer_ids)
+        if group_ids is not None:
+            group_ids = re.split('\s+|,', group_ids)
+        if computer_ids is not None:
+            computer_ids =  re.split('\s+|,', computer_ids)
 
-        params = {"computer_ids": str(computer_ids), "group_ids": str(group_ids) }
+        params = {"computer_ids": computer_ids, "group_ids": group_ids,  }
 
         if undo is not None:
             params.update({"undo": undo})
@@ -255,27 +432,33 @@ class Sepclient(object):
 
         return r
 
-    def scan_endpoints(self, computer_ids=None, group_ids=None, scan_type=None, file_name=None, sha256=None,
-                       description=None):
-        """Run an 'Evidence of Compromise' scan on an endpoint.
+    def scan_endpoints(self, computer_ids=None, group_ids=None, scan_type=None, file_path=None, sha256=None,sha1=None,
+                       md5=None, description=None, scan_action=None):
+        """Run an 'eoc' or "Remediation" scan on endpoint(s).
 
         :param computer_ids: List of computer ids.
         :param group_ids: List of groups ids.
         :param scan_type: Select value for scan type e.g. "FULL_SCAN".
-        :param file_name: File name to be scanned.
-        :param sha_256: Sha256 of file.
+        :param file_path: File name or path to be scanned.
+        :param sha256: Sha256 hash value.
+        :param sha1: Sha1 hash value.
+        :param md5: Sha1 hash value.
+        :param remediate: Perform a remediation scan.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["scan_endpoints"])
+
         if group_ids is not None:
             group_ids = re.split('\s+|,', group_ids)
+
         if computer_ids is not None:
-            computer_ids = re.split('\s+|,', computer_ids)
+            computer_ids =  re.split('\s+|,', computer_ids)
 
         params = {"computer_ids": computer_ids, "group_ids": group_ids}
-        payload = setup_eoc_command(scan_type["name"], file_name, sha256)
 
-        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params, payload=payload)
+        payload = self.setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action)
+
+        r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, params=params, data=payload)
 
         return r
 
@@ -287,6 +470,9 @@ class Sepclient(object):
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
+
         payload = json.dumps([{"group": {"id": group_id}, "hardwareKey": hardwarekey}])
-        r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, payload=payload)
+
+        r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, data=payload)
+
         return r
