@@ -1,4 +1,9 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+"""
+The following is the full list of responses for the info API.
+To avoid added queries that would increase latency we imbedding these responses in codebase.
+and relying on an API call only in case of unknown error codes.
+"""
 STATIC_INFO_RESPONSE = {
    1002: {
        "dataset":       "SBL",
