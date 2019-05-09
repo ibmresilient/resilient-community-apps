@@ -11,27 +11,28 @@ from fn_sep.lib.helpers import transform_kwargs
 from os import path
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_scan_endpoints' of package fn_sep.
 
     The Function takes the following parameter:
-        sep_policy_type, sep_domainid
+            sep_group_ids, sep_computer_ids, sep_scan_type, sep_file_name, sep_sha256, sep_description
 
     An example of a set of query parameter might look like the following:
-            sep_policy_type = fw
-            sep_domainid = None
+            sep_group_ids =
+            sep_computer_ids =
+            sep_scan_type = "QUICK_SCAN"
+            sep_file_name =
+            sep_sha256 =
+            sep_sha1 =
+            sep_md5 =
+            sep_description =
+            sep_scan_action = "scan"
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
     {
-        "inputs": {'sep_hardwarekey': 'DC7D24D6465566D2941F35BC8D17801E', 'sep_group_id': '8E20F39B0946C25D118925C2E28C2D59'},
-        "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-07 11:39:14', 'package_version': '1.0.0',
-        "host": 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 9555},
-        "success": True,
-        "content": [{'responseMessage': 'OK', 'responseCode': '200'}],
-        "raw": '<<a string representation of content.>>',
-        "reason": None, 'version': '1.0'
     }
     """
     def __init__(self, opts):
@@ -48,16 +49,21 @@ class FunctionComponent(ResilientComponent):
     def _fn_sep_scan_endpoints_function(self, event, *args, **kwargs):
         """Function: Run a Evidence of Compromise (EOC) scan on Symantec Endpoint Protection endpoints."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
+
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
             sep_group_ids = kwargs.get("sep_group_ids")  # text
             sep_computer_ids = kwargs.get("sep_computer_ids")  # text
-            sep_scan_type = self.get_select_param(kwargs.get("sep_scan_type"))  # select, values: "FULL_SCAN"
+            sep_scan_type = self.get_select_param(kwargs.get("sep_scan_type"))  # select, values: "QUICK_SCAN", "FULL_SCAN"
             sep_file_name = kwargs.get("sep_file_path")  # text
             sep_sha256 = kwargs.get("sep_sha256")  # text
+            sep_sha1 = kwargs.get("sep_sha1")  # text
+            sep_md5 = kwargs.get("sep_md5")  # text
             sep_description = kwargs.get("sep_description")  # text
+            sep_scan_action = self.get_select_param(kwargs.get("sep_scan_action"))  # select, values: "scan", "remediate"
 
             log = logging.getLogger(__name__)
             log.info("sep_group_ids: %s", sep_group_ids)
@@ -65,18 +71,19 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_scan_type: %s", sep_scan_type)
             log.info("sep_file_path: %s", sep_file_name)
             log.info("sep_sha256: %s", sep_sha256)
+            log.info("sep_sha1: %s", sep_sha1)
+            log.info("sep_md5: %s", sep_md5)
             log.info("sep_description: %s", sep_description)
+            log.info("sep_scan_action: %s", sep_scan_action)
 
-            validate_fields(["sep_group_ids", "sep_computer_ids", "sep_scan_type",
-                             "sep_file_path", "sep_sha256", "sep_description"], kwargs)
+            validate_fields(["sep_scan_type", "sep_description", "sep_scan_action" ], kwargs)
 
             yield StatusMessage("Running Symantec SEP scan endpoints command...")
 
-            if kwargs:
-                transform_kwargs(kwargs)
-            sep = Sepclient(self.options, kwargs)
 
-            rtn = sep.scan_endpoints(**kwargs)
+            sep = Sepclient(self.options, params)
+
+            rtn = sep.scan_endpoints(**params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'scan endpoints' results")
@@ -86,5 +93,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()
