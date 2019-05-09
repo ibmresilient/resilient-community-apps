@@ -11,6 +11,7 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_upload_file_to_sepm' of
@@ -31,10 +32,6 @@ class FunctionComponent(ResilientComponent):
     returns a result in JSON format similar to the following.
 
     {
-      "input_params": {},
-      "query_execution_time": "2018-08-09 12:34:15",
-      "content": {
-      }
     }
     """
     def __init__(self, opts):
@@ -48,9 +45,10 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_sep", {})
 
     @function("fn_sep_upload_file_to_sepm")
-    def _fn_sep_quarantine_file_function(self, event, *args, **kwargs):
+    def _fn_sep_upload_file_to_sepm_function(self, event, *args, **kwargs):
         """Function: Upload suspicious file from endpoint back to SEPM server."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -70,15 +68,13 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_md5: %s", sep_md5)
             log.info("sep_source: %s", sep_source)
 
-            validate_fields(["sep_file_path", "sep_computer_ids", "sep_sha256", "sep_source"], kwargs)
+            validate_fields(["sep_file_path", "sep_computer_ids", "sep_source"], kwargs)
 
             yield StatusMessage("Running Symantec SEP - Upload file to SEPM ...")
-            if kwargs:
-                transform_kwargs(kwargs)
 
-            sep = Sepclient(self.options, kwargs)
+            sep = Sepclient(self.options, params)
 
-            rtn = sep.upload_file(**kwargs)
+            rtn = sep.upload_file(**params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Upload file to SEPM' results")
@@ -88,5 +84,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

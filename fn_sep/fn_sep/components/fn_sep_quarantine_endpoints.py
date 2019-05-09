@@ -6,10 +6,11 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_quarantine_endpoints' of package fn_sep.
@@ -50,6 +51,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_sep_quarantine_endpoints_function(self, event, *args, **kwargs):
         """Function: Quarantine/unquarantine Symantec Endpoint Protection endpoints."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -63,16 +65,16 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_computer_ids: %s", sep_computer_ids)
             log.info("sep_undo: %s", sep_undo)
 
-            yield StatusMessage("Running Symantec SEP Get Groups query...")
+            validate_fields(["sep_undo"], kwargs)
 
-            if kwargs:
-                transform_kwargs(kwargs)
-            sep = Sepclient(self.options, kwargs)
+            yield StatusMessage("Running Symantec SEP Quarantine endpoint or group...")
 
-            rtn = sep.quarantine_endpoints(**kwargs)
+            sep = Sepclient(self.options, params)
+
+            rtn = sep.quarantine_endpoints(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning all 'groups' results")
+            yield StatusMessage("Returning Symantec SEP Quarantine endpoint or group results")
 
             import json
             log.debug(json.dumps(results["content"]))
@@ -80,5 +82,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

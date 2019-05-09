@@ -14,16 +14,17 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_policies' of package fn_sep.
 
     The Function takes the following parameter:
-        sep_policy_type, sep_domainid
+            sep_hardwarekey, sep_group_id'
 
     An example of a set of query parameter might look like the following:
-            sep_policy_type = fw
-            sep_domainid = None
+            sep_hardwarekey = "DC7D24D6465566D2941F35BC8D17801E"
+            sep_group_id' = "8E20F39B0946C25D118925C2E28C2D59"
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
@@ -51,6 +52,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_sep_move_client_function(self, event, *args, **kwargs):
         """Function: Checks and moves a client computer to a specified group."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -66,11 +68,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Symantec SEP get computers query...")
 
-            if kwargs:
-                transform_kwargs(kwargs)
-
-            sep = Sepclient(self.options, kwargs)
-            rtn = sep.move_client(**kwargs)
+            sep = Sepclient(self.options, params)
+            rtn = sep.move_client(**params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning all 'computers' results")
@@ -80,5 +79,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()
