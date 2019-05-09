@@ -2,13 +2,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
-import requests
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 import fn_spamhaus_query.util.selftest as selftest
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, RequestsCommon
 from fn_spamhaus_query.util.info_response import STATIC_INFO_RESPONSE
 from fn_spamhaus_query.util.spamhause_helper import *
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_spamhaus_query_submit_artifact"""
@@ -36,9 +36,6 @@ class FunctionComponent(ResilientComponent):
             spamhaus_wqs_url = self.options.get("spamhaus_wqs_url")
             spamhaus_dqs_key = self.options.get("spamhaus_dqs_key")
 
-            # Get proxy Configuration
-            proxies = {"http": self.options.get('http_proxy'), "https": self.options.get('https_proxy')}
-
             log = logging.getLogger(__name__)
             log.info("spamhaus_query_string: %s", spamhaus_query_string)
             log.info("spamhause_search_resource: %s", spamhause_search_resource)
@@ -56,24 +53,28 @@ class FunctionComponent(ResilientComponent):
             # Initialising the Result payload object
             result_object = ResultPayload("fn_spamhaus_query", **kwargs)
 
+            # Initialising Request Common for REST Api Call
+            request_common_obj = RequestsCommon(opts=self.options)
+
+            # Get proxy Configuration
+            proxies = request_common_obj.get_proxies()
+
             # Construct call header with api key
             header_data = {'Authorization': 'Bearer {}'.format(spamhaus_dqs_key)}
 
             # Make Get Call to Spamhause website
-
-            response_object = requests.get(spamhaus_wqs_url.format(spamhause_search_resource, spamhaus_query_string),
-                                           headers=header_data, proxies=proxies)
-
+            response_object = request_common_obj.execute_call(verb='GET',
+                                                              url=spamhaus_wqs_url.format(spamhause_search_resource,
+                                                                                          spamhaus_query_string),
+                                                              headers=header_data, proxies=proxies,
+                                                              callback=spamhause_call_error)
             # Get Received data in JSON format.
             response_json = response_object.json()
             if not response_json:
                 raise SpamhauseRequestCallError("No Response Returned from Api call")
 
-            # Checking for returned status code error messages.
-            spamhause_call_error(response_object)
-
             if response_object.status_code == 404:
-                response_json['is_in_blocklist'] = False          # a bool flag to for block list status
+                response_json['is_in_blocklist'] = False  # a bool flag to for block list status
             elif response_object.status_code == 200:
                 response_json['is_in_blocklist'] = True
                 resp_code_list = response_json.get('resp')
@@ -82,10 +83,10 @@ class FunctionComponent(ResilientComponent):
                     code_information = STATIC_INFO_RESPONSE.get(code)
                     # If information not found in `STATIC_INFO_RESPONSE`, Then trying with Spamhaus info API Call
                     if not code_information:
-                        code_reponse_obj = requests.get(spamhaus_wqs_url.format('info', code), headers=header_data, proxies=proxies)
-                        # Checking for returned status code error messages.
-                        spamhause_call_error(code_reponse_obj)
-
+                        code_reponse_obj = request_common_obj.execute_call(verb='GET',
+                                                                           url=spamhaus_wqs_url.format('info', code),
+                                                                           headers=header_data, proxies=proxies,
+                                                                           callback=spamhause_call_error)
                         if code_reponse_obj.status_code == 404:
                             response_json[code] = None
                         elif code_reponse_obj.status_code == 200:

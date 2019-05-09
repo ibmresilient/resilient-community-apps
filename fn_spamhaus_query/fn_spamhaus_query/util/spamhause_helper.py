@@ -20,7 +20,8 @@ class SpamhauseRequestCallError(Exception):
 def spamhause_call_error(response_object):
     """
     :param response_object: Object returned from request.get call
-    :return: on 404 returns empty dict , on 200 returns resp code list
+    :return: if response object doesn't fall any below specified category returns response object else raises respective
+    errors.
     """
     # Checking for status code
     if response_object.status_code == 400:
@@ -35,3 +36,5 @@ def spamhause_call_error(response_object):
         raise SpamhauseRequestCallError("Too Many Requests - Rate limiting in effect, please decrease query rate")
     elif response_object.status_code == 504:
         raise SpamhauseRequestCallError("Gateway timeout - Query could not be successfully sent")
+    else:
+        return response_object

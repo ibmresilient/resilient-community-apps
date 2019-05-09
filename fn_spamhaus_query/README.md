@@ -7,18 +7,19 @@
  - [Function Inputs](#function-inputs)  
  - [Function Output](#function-output)  
  - [Pre-Process Script](#pre-process-script)  
- - [Post-Process Script](#post-process-script)  
+ - [Post-Process Script](#post-process-script)
  - [Rules](#rules)  
  ---  
  ## About This Package  
-**This function checks IP Address & Domain Names Artifacts against [Spamhaus](https://www.spamhaustech.com/) database to see whether artifact is in block list records or not.if given artifact appears in one of the block list record, then artifacts description filed will be updated with additional information**
+**This function checks IP Address & Domain Names Artifacts against [Spamhaus](https://www.spamhaustech.com/) database to see whether artifact is in block list records or not. 
+if given artifact appears in one of the block list record, then artifacts description filed will be updated with additional information.**
 
 Provided in this Integration package is an example rule configured to be ran against 
 IP Address and Domain Names Artifacts in Resilient :   
    * IP Address Artifacts of Resilient
    * Domain Names Artifacts of Resilient
    
-After the successful scan of a given artifact, the Artifact's description field is updated with the results.
+After the successful scan of a given artifact, the Artifact's description field will be updated with the results.
 
   
 ### Spamhaus Function Layout: 
@@ -51,7 +52,7 @@ You will find a file called: `fn_spamhaus_query-<version>.tar.gz`
 * Copy this file to your Integrations Server  
  * To install the package, run:     
  `pip install fn_spamhaus_query-<version>.tar.gz`  
- * To import the function, example rules,data tables and workflows into your Resilient	appliance, run:   
+ * To import the function, example rules,message destinations and workflows into your Resilient	appliance, run:   
    `resilient-circuits customize -y -l fn-spamhaus-query`    
  * To uninstall Spamhaus function from Resilient run the following:    
     `pip uninstall fn_spamhaus_query`
