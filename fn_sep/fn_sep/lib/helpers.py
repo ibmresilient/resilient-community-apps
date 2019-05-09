@@ -9,6 +9,8 @@ import logging
 import re
 from textwrap import dedent
 
+from resilient_circuits.actions_component import ResilientComponent
+
 LOG = logging.getLogger(__name__)
 
 
@@ -18,42 +20,22 @@ def transform_kwargs(kwargs):
     :param kwargs: Dictionary of Resilient Function parameters.
 
      """
+    params = {}
 
     # Remove  "sep_" from the kwargs key names.
     for (k, v) in kwargs.copy().items():
-            kwargs[re.split('_', k, 1)[1]] = kwargs.pop(k)
+            v = kwargs.pop(k)
 
-    # If any entry has "None" string change to None value.
+            if isinstance(k, list):
+                k =  [ResilientComponent.get_select_param(val) for val in v]
+            elif isinstance(v, dict):
+                v =  v.get("name")
+            kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
+            params[re.split('_', k, 1)[1]] = v.rstrip().lstrip() if isinstance(v, str)  else v
+
+    # If any entry has "None" string chaßnge to None value.
     for k, v in kwargs.items():
         if type(v) == str and v.lower() == 'none':
-            kwargs[k] = None
+            params[k] = None
 
-def setup_eoc_command(scan_type, file_name, sha256, description):
-    eoc_xml = dedent("""\
-        <?xml version="1.0" encoding="UTF-8"?>
-        <EOC creator="Creator" version="1.1" id="60">
-          <DataSource name="Third-Party Provider" id="23" version="1.0"/>
-          <ScanType>{0}</ScanType>
-          <Threat category="Suspects" type="to_investigate" severity="Medium" time="2017-01-29 4:54:01 PM">
-            <Description>{}</Description>
-            <Attacker>
-            </Attacker>
-          </Threat>
-          <Activity>
-            <OS id="1" name="" version="" patch="">
-              <Process>
-              </Process>
-              <Files>
-                <File name="{1}" action="write">
-                  <Hash name="SHA256" value="{2}"/>
-                </File>
-              </Files>
-              <Registry>
-              </Registry>
-              <Network>
-              </Network>
-            </OS>ß
-          </Activity>
-        </EOC>""").format(scan_type, file_name, sha256)
-
-    return eoc_xml
+    return params
