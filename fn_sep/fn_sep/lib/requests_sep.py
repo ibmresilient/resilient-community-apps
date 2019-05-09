@@ -1,103 +1,145 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
+import base64
+import logging
+from requests import request, HTTPError
+import re
+from zipfile import ZipFile
+from io import BytesIO
+import xml.etree.ElementTree as ET
+try:
+    from urllib.parse import urljoin
+except:
+    from urlparse import urljoin
 
-import requests
-from resilient_lib import RequestsCommon
-from resilient_lib.components.integration_errors import IntegrationError
-from resilient_lib.components.requests_common import verify_headers
+LOG = logging.getLogger(__name__)
 
-class RequestsSep(RequestsCommon):
+class RequestsSep(object):
     """
     This class inherits from class RequestsCommon and over-rides the execute_call method.
     The class will be used to manage REST calls.
 
     """
-    def __init__(self, opts, function_opts):
-        RequestsCommon.__init__(self, opts, function_opts)
+    def __init__(self, opts=None, function_opts=None):
+        # capture the properties for the integration as well as the global settings for all integrations for proxy urls
+        self.integration_options = opts.get('integrations', None) if opts else None
+        self.function_opts = function_opts
 
-    def execute_call(self, verb, url, params=None, payload=None, log=None, basicauth=None, verify_flag=True, headers=None,
-                     proxies=None, timeout=None, resp_type='json', callback=None):
-        """
-        Function: perform the http API call. Different types of http operations are supported:
-        GET, HEAD, PATCH, POST, PUT, DELETE
-        Errors raise IntegrationError
-        If a callback method is provided, then it's called to handle the error
+    def get_proxies(self):
+        """ proxies can be specified globally for all integrations or specifically per function """
+        proxies = None
+        if self.integration_options and (self.integration_options.get("http_proxy") or self.integration_options.get("https_proxy")):
+            proxies = {'http': self.integration_options.get("http_proxy"), 'https': self.integration_options.get("https_proxy")}
 
-        Using the 'json' parameter in the request will change the Content-Type in the header to application/json.
-        If the headers you send include a specific Content-Type, your payload will be send as 'data' and not 'json'.
+        if self.function_opts and (self.function_opts.get("http_proxy") or self.function_opts.get("https_proxy")):
+            proxies = {'http': self.function_opts.get("http_proxy"), 'https': self.function_opts.get("https_proxy")}
 
+        return proxies
+
+    def execute_call(self, verb, url, params=None, data=None, json=None, log=None, basicauth=None, verify_flag=True,
+                     headers=None, proxies=None, timeout=None, stream=False):
+        """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH and
+        DELETE. Retries are attempted if a Rate limit exception (429) is  detected.
+
+        :param uri: Used to form url
         :param verb: GET, HEAD, PATCH, POST, PUT, DELETE
-        :param url:
-        :param basicauth: used for basic authentication - (user, password)
-        :param params: (optional) Dictionary or bytes to be sent in the query of the request.
-        :param payload:
-        :param log: optional log statement
-        :param verify_flag: True/False - False used for debugging generally
-        :param headers: dictionary of http headers
-        :param proxies: http and https proxies for call
-        :param timeout: timeout before call should abort
-        :param resp_type: type of output to return: json, text, bytes
-        :param callback: callback routine used to handle errors
-        :return: json of returned data
+        :param params: Parameters used by session request to form finished request
+        :param data: Data body used in post requests
+        :return: Response in json format
+
         """
+        magic_zip_types = {
+            "\x1f\x8b\x08": "gz",
+            "\x42\x5a\x68": "bz2",
+            "\x50\x4b\x03\x04": "zip"
+        }
 
-        try:
-            (payload and log) and log.debug(payload)
+        if proxies is None:
+            proxies = self.get_proxies()
 
-            if verb.lower() not in ('get', 'post', 'put', 'patch', 'delete', 'head'):
-                raise IntegrationError("unknown verb {}".format(verb))
+        if verb.upper() in ["GET", "HEAD", "PATCH", "POST", "PUT", "DELETE"]:
+            try:
+                r = request(verb.upper(), url, verify=verify_flag, headers=headers, params=params,
+                                     auth=basicauth, timeout=timeout, stream=stream, proxies=proxies, data=data, json=json)
 
-            if proxies is None:
-                proxies = self.get_proxies()
+                r.raise_for_status()  # If the request fails throw an error.
 
-            if verb.lower() in {"post", "patch", "put"}:
-                if verify_headers(headers):
-                    # If headers dict specifies Content-Type,
-                    # pass the payload to the data argument.
-                    # Use Content-Type specified in headers.
-                    resp = requests.request(verb.upper(), url, verify=verify_flag, headers=headers, params=params, data=payload,
-                                            auth=basicauth, timeout=timeout, proxies=proxies)
+            except HTTPError as e:
+                if e.response.status_code == 410 and verb.upper() in ["GET", "DELETE"] and \
+                        re.match("^https://.*/sepm/api/v1/policy-objects/fingerprints.*$", url, ):
+                        # We are probably trying to access/delete fingerprint list which doesn't exist.
+                    LOG.error("Got '410' error, possible attempt to {} a fingerprint list which doesn't exist."
+                              .format(verb))
+                    # Allow error to bubble up to the Resilient function.
+                    pass
+                elif e.response.status_code == 409 and verb.upper() in ["POST"] and \
+                        re.match("^https://.*/sepm/api/v1/policy-objects/fingerprints.*$", url, ):
+                        # We are probably trying to re-add a hash to fingerprint list which already exists.
+                    LOG.error("Got '409' error, possible attempt to re-add a hash to a fingerprint list.")
+                    # Allow error to bubble up to the Resilient function.
+                    pass
                 else:
-                    # If headers dict does not specify Content-Type,
-                    # pass payload to the json argument.
-                    # Content-Type will automatically set to application/json.
-                    resp = requests.request(verb.upper(), url, verify=verify_flag, headers=headers, params=params, json=payload,
-                                            auth=basicauth, timeout=timeout, proxies=proxies)
-            else:
-                resp = requests.request(verb.upper(), url, verify=verify_flag, headers=headers, params=params,
-                                        auth=basicauth, timeout=timeout, proxies=proxies)
+                    # Re-raise
+                    raise
+        else:
+            raise ValueError("Unsupported request method '{}'.".format(verb))
 
-            if resp is None:
-                raise IntegrationError('no response returned')
+        #  Firstly check if a zip file is returned.
+        key = content = None
+        for magic, filetype in magic_zip_types.items():
+            if r.content.startswith(magic):
+                (key, content) = self.get_unzipped_contents(r.content)
+                return self.decrypt_xor(content, key)
+        #  Else try to see if is json.
+        try:
+            return r.json()
+        except ValueError:
+            # Default response likely not in json format just return content as is.
+            return r.content
 
-            # custom handler for response handling?
-            if callback:
-                return callback(resp)
+    @staticmethod
+    def get_unzipped_contents(content):
+        """ Unzip file content zip file returned in response.
+        Response zip will have contents as follows:
 
-            # standard error handling
-            if resp.status_code >= 300:
-                # get the result
-                # log resp.status_code in case resp.text isn't available
-                raise IntegrationError(
-                    "status_code: {}, msg: {}".format(resp.status_code, resp.text if resp.text else "N/A"))
+            |- <file with hash (sha256) as name>
+            |- metadata.xml
 
-            # check if anything returned
-            log and log.debug(resp.text)
+        :param content: Response content.
+        :return: Tuple with Unzipped file with hash as name and key.
+        """
+        key = c_unzipped = None
+        try:
+            zfile = ZipFile(BytesIO(content), 'r')
+            for file in zfile.namelist():
+                if len(file) in [64, 40, 32] or file == "metadata.xml":
+                    f = zfile.open(file)
+                    if len(file) in [64, 40, 32]:
+                        # Get the hash file name.
+                        c_unzipped = f.read()
+                    elif file == "metadata.xml":
+                        # Get the key.
+                        meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
+                        for item in meta.findall('File'):
+                            key = item.attrib["Key"]
+                else:
+                    raise ValueError('Unknown hash type or key for zipfile contents: ' + file)
 
-            # get the result
-            if resp_type == 'json':
-                r = resp.json()
-            elif resp_type == 'text':
-                r = resp.text
-            elif resp_type == 'bytes':
-                r = resp.content
-            else:
-                raise IntegrationError("incorrect response type: {}".format(resp_type))
+            return (key, c_unzipped)
 
-            # Produce a IntegrationError with the return value
-            return r      # json object needed, not a string representation
-        except Exception as err:
-            msg = str(err)
-            log and log.error(msg)
-            raise IntegrationError(msg)
+        except ET.ParseError as e:
+            LOG.error("There was an error trying to process content XML.", e.__repr__(), e.message)
+            raise e
+
+    @staticmethod
+    def decrypt_xor(data, key):
+        """ Unencrypt XORed data.
+
+        :param data: XORed zip file data.
+        :return: Unencrypted data.
+        """
+        data = bytearray(data)
+        for i in xrange(len(data)):
+            data[i] ^= int(key)
+        return data
