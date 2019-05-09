@@ -8,6 +8,8 @@
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
 import json
 import logging
+import time
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload
@@ -15,6 +17,7 @@ from fn_sep.lib.helpers import transform_kwargs
 from datetime import datetime
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_computers' of
@@ -124,9 +127,11 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_sep_get_computers")
-    def _func_symc_get_computers_function(self, event, *args, **kwargs):
+    def _fn_sep_get_computers_function(self, event, *args, **kwargs):
         """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
+
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -152,24 +157,25 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Symantec SEP Get Computers query...")
 
-            if kwargs:
-                transform_kwargs(kwargs)
+            sep = Sepclient(self.options, params)
 
-            sep = Sepclient(self.options, kwargs)
-
-            rtn = sep.get_computers(**kwargs)
-
+            rtn = sep.get_computers(**params)
+            now = time.time()
             if "content" in rtn and rtn["content"]:
                 # Add a human readable date stamp dict entry for timestamps for each computer.
                 for i in range(len(rtn["content"])):
                     for f in ["lastScanTime", "lastUpdateTime", "lastVirusTime"]:
                         try:
                             secs = int(rtn["content"][i][f]) / 1000
+                            timediff = now - secs
                             ts_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
                             # New keys will be "readableLastScanTime", "readableLastUpdateTime", "readableLastVirusTime"
                             rtn["content"][i]["readable"+f[0].capitalize()+f[1:]] = ts_readable
+                            rtn["content"][i]["timediff" + f[0].capitalize() + f[1:]] = timediff
                         except ValueError:
                             yield FunctionError('A timestamp value was incorrectly specified.')
+
+            # Add timestamp in secs to facilitate live update calculation in post-processing
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning Get Computers results")
@@ -179,5 +185,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

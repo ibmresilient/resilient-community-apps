@@ -14,6 +14,7 @@ from resilient_lib import ResultPayload
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_policies' of package fn_sep.
@@ -90,6 +91,7 @@ class FunctionComponent(ResilientComponent):
     def _fn_sep_get_policies_function(self, event, *args, **kwargs):
         """Function: Get the policy summary for specified policy type; get the list of groups to which the policies are assigned"""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
@@ -103,11 +105,9 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Running Symantec SEP get computers query...")
 
-            if kwargs:
-                transform_kwargs(kwargs)
-            sep = Sepclient(self.options, kwargs)
+            sep = Sepclient(self.options, params)
 
-            rtn = sep.get_policies_summary(**kwargs)
+            rtn = sep.get_policies_summary(**params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning all 'computers' results")
@@ -117,5 +117,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

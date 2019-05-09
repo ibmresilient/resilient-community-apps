@@ -14,6 +14,7 @@ from resilient_lib import ResultPayload
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_domains' of
@@ -72,21 +73,22 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("fn_sep_get_domains")
-    def _func_symc_get_computers_function(self, event, *args, **kwargs):
+    def _fn_sep_get_domains_function(self, event, *args, **kwargs):
         """Function: Gets a list of all accessible domains."""
         try:
+            params = transform_kwargs(kwargs) if kwargs else {}
+
             # Instantiate result payload object.
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
 
+            log = logging.getLogger(__name__)
+
             yield StatusMessage("Running Symantec SEP Get Domains query...")
 
-            if kwargs:
-                transform_kwargs(kwargs)
-
-            sep = Sepclient(self.options, kwargs)
-            rtn = sep.get_domains(**kwargs)
+            sep = Sepclient(self.options, params)
+            rtn = sep.get_domains(**params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning Get Domains results")
@@ -96,5 +98,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()
