@@ -16,19 +16,17 @@ from fn_sep.lib.helpers import transform_kwargs
 CONFIG_DATA_SECTION = "fn_sep"
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_add_fingerprint_list' of
+    """Component that implements Resilient function 'fn_sep_assign_fingerprint_list_to_group' of
     package fn_sep.
 
     The Function takes the following parameters:
-            sep_fingerprintlist_name, sep_description, sep_domainid, sep_hash_value
+            sep_fingerprintlist_id, sep_group_id
 
     An example of a set of query parameter might look like the following:
-            sep_fingerprintlist_name =
-            sep_description =
-            sep_domainid =
-            sep_hash_value =
+            sep_fingerprintlist_id =
+            sep_group_id =
 
-    The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
+    The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
@@ -44,8 +42,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-    @function("fn_sep_add_fingerprint_list")
-    def _fn_sep_add_fingerprint_list_function(self, event, *args, **kwargs):
+    @function("fn_sep_assign_fingerprint_list_to_group")
+    def _fn_sep_assign_fingerprint_list_to_group_function(self, event, *args, **kwargs):
         """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
@@ -54,32 +52,22 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
-            sep_fingerprintlist_name = kwargs.get("sep_fingerprintlist_name")  # text
-            sep_description = kwargs.get("sep_description")  # text
-            sep_domainid = kwargs.get("sep_domainid")  # text
-            sep_hash_value = kwargs.get("sep_hash_value")  # text
+            sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
+            sep_group_id = kwargs.get("sep_group_id")  # text
 
             log = logging.getLogger(__name__)
-            log.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
-            log.info("sep_description: %s", sep_description)
-            log.info("sep_domainid: %s", sep_domainid)
-            log.info("sep_hash_value: %s", sep_hash_value)
+            log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+            log.info("sep_group_id: %s", sep_group_id)
 
-            yield StatusMessage("Running Symantec SEP add fingerprint list action ...")
+
+            yield StatusMessage("Running Symantec SEP assign fingerprint list to group for lock-down action ...")
 
             sep = Sepclient(self.options, params)
 
-            rtn = sep.add_fingerprint_list(**params)
-            if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
-                # If this error was trapped user probably tried to re-add a hash to a fingerprint list.
-                yield StatusMessage(
-                    "Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' "
-                    "because of a possible invalid or deleted id.".format(sep_fingerprintlist_name))
-            else:
-                yield StatusMessage("Returning 'add fingerprint list status' results for fingerprint name '{}'."
-                                    .format(sep_fingerprintlist_name))
+            rtn = sep.assign_fingerprint_list_to_group(**params)
 
             results = rp.done(True, rtn)
+            yield StatusMessage("Returning 'assign fingerprint list to group fro lock-down' results")
 
             log.debug(json.dumps(results["content"]))
 
