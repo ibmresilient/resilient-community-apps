@@ -302,8 +302,9 @@ class Sepclient(object):
 
         if hash_value is None:
             hash_value = ''
-        if hash_type not in ["MD5", "SHA256"]:
-            raise ValueError("Unsupported hash type for value: " + hash)
+
+        if hash_type not in ["MD5"]:
+            raise ValueError("Unsupported hash type for value: " + hash_value)
 
         payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid, "hashType": hash_type,
                               "data": [hash_value]})
@@ -329,8 +330,8 @@ class Sepclient(object):
 
         hash_type = self.get_hash_type(hash_values[0])
 
-        if hash_type not in ["MD5", "SHA256"]:
-            raise ValueError("Unsupported hash type for value: " + hash)
+        if hash_type not in ["MD5"]:
+            raise ValueError("Unsupported hash type for value: " + hash_value)
 
         payload = json.dumps({"name": fingerprintlist_name,"description": description, "domainId": domainid,
                               "hashType": hash_type, "data": hash_values})
