@@ -17,7 +17,7 @@ CONFIG_DATA_SECTION = "fn_sep"
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_sep_get_policies' of package fn_sep.
+    """Component that implements Resilient function 'fn_sep_move_endpoint' of package fn_sep.
 
     The Function takes the following parameter:
             sep_hardwarekey, sep_group_id'
@@ -48,8 +48,8 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-    @function("fn_sep_move_client")
-    def _fn_sep_move_client_function(self, event, *args, **kwargs):
+    @function("fn_sep_move_endpoint")
+    def _fn_sep_move_endpoint_function(self, event, *args, **kwargs):
         """Function: Checks and moves a client computer to a specified group."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
@@ -66,13 +66,13 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_group_id", "sep_hardwarekey"], kwargs)
 
-            yield StatusMessage("Running Symantec SEP get computers query...")
+            yield StatusMessage("Running Symantec SEP move endpoint action...")
 
             sep = Sepclient(self.options, params)
-            rtn = sep.move_client(**params)
+            rtn = sep.move_endpoint(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning all 'computers' results")
+            yield StatusMessage("Returning move endpoint results")
 
             log.debug(json.dumps(results["content"]))
 

@@ -463,8 +463,8 @@ class Sepclient(object):
 
         return r
 
-    def move_client(self, group_id, hardwarekey):
-        """ Move a clinet computer to a group
+    def move_endpoint(self, group_id, hardwarekey):
+        """ Move an endpoint computer to a group.
 
         :param group_id: Id of group to move.
         :param hardwarekey: The computer’s hardware key.
