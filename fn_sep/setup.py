@@ -2,6 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_sep',
@@ -23,21 +37,8 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "FnSepGetFileContentAsBase64FunctionComponent = fn_sep.components.fn_sep_get_file_content_as_base64:FunctionComponent",
-            "FnSepUploadFileToSepmFunctionComponent = fn_sep.components.fn_sep_upload_file_to_sepm:FunctionComponent",
-            "FnSepAddFingerprintListFunctionComponent = fn_sep.components.fn_sep_add_fingerprint_list:FunctionComponent",
-            "FnSepGetFingerprintListFunctionComponent = fn_sep.components.fn_sep_get_fingerprint_list:FunctionComponent",
-            "FnSepUpdateFingerprintListFunctionComponent = fn_sep.components.fn_sep_update_fingerprint_list:FunctionComponent",
-            "FnSepDeleteFingerprintListFunctionComponent = fn_sep.components.fn_sep_delete_fingerprint_list:FunctionComponent",
-            "FnSepMoveClientFunctionComponent = fn_sep.components.fn_sep_move_client:FunctionComponent",
-            "FnSepGetPoliciesFunctionComponent = fn_sep.components.fn_sep_get_policies:FunctionComponent",
-            "FnSepGetComputersFunctionComponent = fn_sep.components.fn_sep_get_computers:FunctionComponent",
-            "FnSepGetDomainsFunctionComponent = fn_sep.components.fn_sep_get_domains:FunctionComponent",
-            "FnSepQuarantineEndpointsFunctionComponent = fn_sep.components.fn_sep_quarantine_endpoints:FunctionComponent",
-            "FnSepScanEndpointsFunctionComponent = fn_sep.components.fn_sep_scan_endpoints:FunctionComponent",
-            "FnSepGetGroupsFunctionComponent = fn_sep.components.fn_sep_get_groups:FunctionComponent",
-            "FnSepGetCommandStatusFunctionComponent = fn_sep.components.fn_sep_get_command_status:FunctionComponent",
-            "FnSepAssignFingerprintListToGroupFunctionComponent = fn_sep.components.fn_sep_assign_fingerprint_list_to_group:FunctionComponent",
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_sep.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_sep/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_sep.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_sep.util.customize:customization_data"],
