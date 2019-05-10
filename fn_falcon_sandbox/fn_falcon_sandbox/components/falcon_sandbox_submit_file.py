@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -15,17 +16,20 @@ from resilient_circuits import (
     FunctionResult,
     FunctionError,
 )
-from fn_falcon_sandbox.util.submit_file_helper import (
+from fn_falcon_sandbox.util.submit_helper import (
     get_submission_queue_size,
     get_environment_id,
     get_runtime_action_script,
     falcon_sandbox_request_header,
     get_file_attachment_and_metadata,
     write_temp_file,
-    remove_temp_files,
-    LIST_OF_RUNTIME_PARAMS,
+    remove_temp_files
 )
-
+from fn_falcon_sandbox.util.constants import (
+    HA_REST_API_URLS,
+    HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_FILE,
+    HA_COMPLETED_STATUSES
+)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'falcon_sandbox_submit_file"""
@@ -45,86 +49,36 @@ class FunctionComponent(ResilientComponent):
         """Function: Submit a file to Falcon Sandbox for analysis."""
         try:
             ## Get the function parameters:
-            falcon_sandbox_environment = self.get_select_param(
-                kwargs.get("falcon_sandbox_environment")
-            )  # select, values: "Android Static Analysis", "Linux (Ubuntu 16.04, 64 bit)", "Windows 7 32 bit", "Windows 7 32 bit (HWP Support)", "Windows 7 64 bit"
-            falcon_sandbox_action_script = self.get_select_param(
-                kwargs.get("falcon_sandbox_action_script")
-            )  # select, values: "Default analysis", "Heavy Anti-Evasion", "Random desktop files", "Random desktop theme", "Open Internet Explorer", "Default browser analysis"
-            falcon_sandbox_no_share_third_party = kwargs.get(
-                "falcon_sandbox_no_share_third_party"
-            )  # boolean
-            falcon_sandbox_allow_community_access = kwargs.get(
-                "falcon_sandbox_allow_community_access"
-            )  # boolean
+            falcon_sandbox_environment = self.get_select_param(kwargs.get("falcon_sandbox_environment"))  # select, values: "Android Static Analysis", "Linux (Ubuntu 16.04, 64 bit)", "Windows 7 32 bit", "Windows 7 32 bit (HWP Support)", "Windows 7 64 bit"
+            falcon_sandbox_action_script = self.get_select_param(kwargs.get("falcon_sandbox_action_script"))  # select, values: "Default analysis", "Heavy Anti-Evasion", "Random desktop files", "Random desktop theme", "Open Internet Explorer", "Default browser analysis"
+            falcon_sandbox_no_share_third_party = kwargs.get("falcon_sandbox_no_share_third_party")  # boolean
+            falcon_sandbox_allow_community_access = kwargs.get("falcon_sandbox_allow_community_access")  # boolean
             falcon_sandbox_comment = kwargs.get("falcon_sandbox_comment")  # text
             falcon_sandbox_priority = kwargs.get("falcon_sandbox_priority")  # number
-            falcon_sandbox_environment_variable = kwargs.get(
-                "falcon_sandbox_environment_variable"
-            )  # text
-            falcon_sandbox_custom_run_time = kwargs.get(
-                "falcon_sandbox_custom_run_time"
-            )  # text
-            falcon_sandbox_submit_name = kwargs.get(
-                "falcon_sandbox_submit_name"
-            )  # text
-            falcon_sandbox_custom_date_time = kwargs.get(
-                "falcon_sandbox_custom_date_time"
-            )  # text
-            falcon_sandbox_offline_analysis = kwargs.get(
-                "falcon_sandbox_offline_analysis"
-            )  # boolean
-            falcon_sandbox_document_password = kwargs.get(
-                "falcon_sandbox_document_password"
-            )  # text
-            falcon_sandbox_tor_enabled_analysis = kwargs.get(
-                "falcon_sandbox_tor_enabled_analysis"
-            )  # boolean
-            falcon_sandbox_incident_id = kwargs.get(
-                "falcon_sandbox_incident_id"
-            )  # number
+            falcon_sandbox_environment_variable = kwargs.get("falcon_sandbox_environment_variable")  # text
+            falcon_sandbox_custom_run_time = kwargs.get("falcon_sandbox_custom_run_time")  # text
+            falcon_sandbox_submit_name = kwargs.get("falcon_sandbox_submit_name")  # text
+            falcon_sandbox_custom_date_time = kwargs.get("falcon_sandbox_custom_date_time")  # text
+            falcon_sandbox_document_password = kwargs.get("falcon_sandbox_document_password")  # text
+            falcon_sandbox_tor_enabled_analysis = kwargs.get("falcon_sandbox_tor_enabled_analysis")  # boolean
+            falcon_sandbox_incident_id = kwargs.get("falcon_sandbox_incident_id")  # number
             falcon_sandbox_task_id = kwargs.get("falcon_sandbox_task_id")  # number
-            falcon_sandbox_attachment_id = kwargs.get(
-                "falcon_sandbox_attachment_id"
-            )  # number
-            falcon_sandbox_artifact_id = kwargs.get(
-                "falcon_sandbox_artifact_id"
-            )  # number
+            falcon_sandbox_attachment_id = kwargs.get("falcon_sandbox_attachment_id")  # number
+            falcon_sandbox_artifact_id = kwargs.get("falcon_sandbox_artifact_id")  # number
 
             log = logging.getLogger(__name__)
             log.info("falcon_sandbox_environment: %s", falcon_sandbox_environment)
             log.info("falcon_sandbox_action_script: %s", falcon_sandbox_action_script)
-            log.info(
-                "falcon_sandbox_no_share_third_party: %s",
-                falcon_sandbox_no_share_third_party,
-            )
-            log.info(
-                "falcon_sandbox_allow_community_access: %s",
-                falcon_sandbox_allow_community_access,
-            )
+            log.info("falcon_sandbox_no_share_third_party: %s", falcon_sandbox_no_share_third_party)
+            log.info("falcon_sandbox_allow_community_access: %s", falcon_sandbox_allow_community_access)
             log.info("falcon_sandbox_comment: %s", falcon_sandbox_comment)
             log.info("falcon_sandbox_priority: %s", falcon_sandbox_priority)
-            log.info(
-                "falcon_sandbox_environment_variable: %s",
-                falcon_sandbox_environment_variable,
-            )
-            log.info(
-                "falcon_sandbox_custom_run_time: %s", falcon_sandbox_custom_run_time
-            )
+            log.info("falcon_sandbox_environment_variable: %s", falcon_sandbox_environment_variable)
+            log.info("falcon_sandbox_custom_run_time: %s", falcon_sandbox_custom_run_time)
             log.info("falcon_sandbox_submit_name: %s", falcon_sandbox_submit_name)
-            log.info(
-                "falcon_sandbox_custom_date_time: %s", falcon_sandbox_custom_date_time
-            )
-            log.info(
-                "falcon_sandbox_offline_analysis: %s", falcon_sandbox_offline_analysis
-            )
-            log.info(
-                "falcon_sandbox_document_password: %s", falcon_sandbox_document_password
-            )
-            log.info(
-                "falcon_sandbox_tor_enabled_analysis: %s",
-                falcon_sandbox_tor_enabled_analysis,
-            )
+            log.info("falcon_sandbox_custom_date_time: %s", falcon_sandbox_custom_date_time)
+            log.info("falcon_sandbox_document_password: %s", falcon_sandbox_document_password)
+            log.info("falcon_sandbox_tor_enabled_analysis: %s", falcon_sandbox_tor_enabled_analysis)
             log.info("falcon_sandbox_incident_id: %s", falcon_sandbox_incident_id)
             log.info("falcon_sandbox_task_id: %s", falcon_sandbox_task_id)
             log.info("falcon_sandbox_attachment_id: %s", falcon_sandbox_attachment_id)
@@ -133,15 +87,8 @@ class FunctionComponent(ResilientComponent):
             API_KEY = self.options.get("falcon_sandbox_api_key")
             API_HOST = self.options.get("falcon_sandbox_api_host")
             FETCH_REP_TIMEOUT = self.options.get("fetch_report_timeout")
-            SUBMIT_FILE_URL = "{}/submit/file".format(API_HOST)
-            falcon_sandbox_environment_id = get_environment_id(
-                falcon_sandbox_environment
-            )
-            falcon_sandbox_action_script = get_runtime_action_script(
-                falcon_sandbox_action_script
-            )
 
-            ## Checking inputs
+            ## Checking and preparing inputs
             if falcon_sandbox_incident_id is None:
                 raise FunctionError(
                     "Error: falcon_sandbox_incident_id must be specified."
@@ -156,7 +103,10 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield StatusMessage("> Function inputs OK")
 
-            # Making sure all param names are following naming conventions 
+            falcon_sandbox_environment_id = get_environment_id(falcon_sandbox_environment)
+            falcon_sandbox_action_script = get_runtime_action_script(falcon_sandbox_action_script)
+
+            ## Making sure all param names are following naming conventions 
             for p in kwargs:
                 if not "falcon_sandbox_" in p: 
                     FunctionError("Input parameter name must start with 'falcon_sandbox_'")
@@ -182,10 +132,6 @@ class FunctionComponent(ResilientComponent):
                 attachment, "attachment_{}".format(time_now)
             )
 
-            ## Since Artifact attachment's metadata json structure is differnt than incident and task
-            if attachment_metadata.get("name") is None:
-                attachment_metadata = attachment_metadata["attachment"]
-
             attachment_name = attachment_metadata.get("name")
             attachment_type = attachment_metadata["content_type"]
 
@@ -194,12 +140,13 @@ class FunctionComponent(ResilientComponent):
             )
 
             ## Prepare for submission
+            url, http_method = HA_REST_API_URLS.get("submit_file")
+            url = url.format(API_HOST)
             form_data = {
                 "file": (attachment_name, open(attachment_path, "rb"), attachment_type)
             }
 
-            # Todo - need to discuss about validity of this logic
-            for p in LIST_OF_RUNTIME_PARAMS:
+            for p in HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_FILE:
                 k = p.split("falcon_sandbox_")[1]
                 v = eval(p)
                 form_data[k] = v
@@ -211,48 +158,45 @@ class FunctionComponent(ResilientComponent):
 
             ## Submit file to falcon sandbox
             yield StatusMessage("Submitting...")
-            response = request_common.execute_call('post', 
-                                                    SUBMIT_FILE_URL, 
+            response = request_common.execute_call(http_method, 
+                                                    url, 
                                                     submit_payload, 
                                                     log=log, 
                                                     headers=submit_header)
             job_id = response["job_id"]
-            GET_REPORT_STATE_URL = "{}/report/{}/state".format(API_HOST, job_id)
-            GET_REPORT_SUMMARY_URL = "{}/report/{}/summary".format(API_HOST, job_id)
+            url, http_method = HA_REST_API_URLS.get("get_state")
+            url = url.format(API_HOST, job_id)
             yield StatusMessage("Successfully Submitted. \n Job ID: {}".format(job_id))
             ## Get Status of Analysis
-            has_completed = ["ERROR", "SUCCESS"]
             req_header = falcon_sandbox_request_header(API_KEY)
-            completed = False
             time_running = 0
-            while not completed:
-                scan_status = request_common.execute_call('get', 
-                                                    GET_REPORT_STATE_URL, 
+            while True:
+                scan_status = request_common.execute_call(http_method, 
+                                                    url, 
                                                     log=log, 
                                                     headers=req_header)
                 status = scan_status["state"]
-                if status in has_completed:
+                if status in HA_COMPLETED_STATUSES:
                     yield StatusMessage("Scan Completed with status {}".format(status))
                     break
-                yield StatusMessage(
-                    "Scan running as {} for {} mins".format(status, time_running)
-                )
-                for i in range(12):
-                    time.sleep(5)
-                    yield StatusMessage("Time elapsed {} Sec".format((i + 1) * 5))
-
-                time_running = time_running + 1
-
                 # Timeout condition
                 if int(FETCH_REP_TIMEOUT) <= (time_running * 60):
-                    yield StatusMessage(
+                    yield FunctionError(
                         "Function Timeout after {} mins".format(time_running)
                     )
                     break
 
+                time.sleep(60)
+                time_running = time_running + 1
+                yield StatusMessage(
+                    "Scan running as {}. Time Elapsed {} mins".format(status, time_running)                
+                )
+
             ## Get scan report summary
-            scan_report = request_common.execute_call('get', 
-                                                    GET_REPORT_SUMMARY_URL, 
+            url, http_method = HA_REST_API_URLS.get("get_summary")
+            url = url.format(API_HOST, job_id)            
+            scan_report = request_common.execute_call(http_method, 
+                                                    url, 
                                                     log=log, 
                                                     headers=req_header)
 

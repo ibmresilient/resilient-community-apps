@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 """Generate a default configuration-file section for fn_falcon_sandbox"""
@@ -12,7 +13,6 @@ def config_section_data():
    config_data = u"""[fn_falcon_sandbox]
 falcon_sandbox_api_key=
 falcon_sandbox_api_host=https://www.hybrid-analysis.com/api/v2
-fetch_report_timeout=300
-
+fetch_report_timeout=600
 """
    return config_data

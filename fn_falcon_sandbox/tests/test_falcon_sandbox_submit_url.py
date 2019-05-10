@@ -35,13 +35,24 @@ class TestFalconSandboxSubmitUrl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results", [
-        (123, 123, "text", {"value": "xyz"}),
-        (123, 123, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("falcon_sandbox_environment, falcon_sandbox_comment, falcon_sandbox_custom_date_time, falcon_sandbox_no_share_third_party, falcon_sandbox_environment_variable, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_allow_community_access, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_priority, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results", [
+        ('Android Static Analysis', "text", "text", True, "text", True, True, "text", "text", 123, 'Default analysis', 123, 123, "text", {"value": "xyz"}),
+        ('Windows 7 32 bit', "text", "text", True, "text", True, True, "text", "text", 123, 'Heavy Anti-Evasion', 123, 123, "text", {"value": "xyz"})
     ])
-    def test_success(self, circuits_app, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results):
+    def test_success(self, circuits_app, falcon_sandbox_environment, falcon_sandbox_comment, falcon_sandbox_custom_date_time, falcon_sandbox_no_share_third_party, falcon_sandbox_environment_variable, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_allow_community_access, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_priority, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
+            "falcon_sandbox_environment": falcon_sandbox_environment,
+            "falcon_sandbox_comment": falcon_sandbox_comment,
+            "falcon_sandbox_custom_date_time": falcon_sandbox_custom_date_time,
+            "falcon_sandbox_no_share_third_party": falcon_sandbox_no_share_third_party,
+            "falcon_sandbox_environment_variable": falcon_sandbox_environment_variable,
+            "falcon_sandbox_tor_enabled_analysis": falcon_sandbox_tor_enabled_analysis,
+            "falcon_sandbox_allow_community_access": falcon_sandbox_allow_community_access,
+            "falcon_sandbox_custom_run_time": falcon_sandbox_custom_run_time,
+            "falcon_sandbox_submit_name": falcon_sandbox_submit_name,
+            "falcon_sandbox_priority": falcon_sandbox_priority,
+            "falcon_sandbox_action_script": falcon_sandbox_action_script,
             "falcon_sandbox_incident_id": falcon_sandbox_incident_id,
             "falcon_sandbox_artifact_id": falcon_sandbox_artifact_id,
             "falcon_sandbox_input_url": falcon_sandbox_input_url
