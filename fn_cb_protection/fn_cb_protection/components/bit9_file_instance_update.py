@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient
-
+from resilient_lib import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_instance_update"""
@@ -27,13 +27,14 @@ class FunctionComponent(ResilientComponent):
     def _bit9_file_instance_update_function(self, event, *args, **kwargs):
         """Function: Update the approval state of a file instance"""
         try:
+            validate_fields(["bit9_file_instance_id", "bit9_file_instance_localstate"], kwargs)
             # Get the function parameters:
             bit9_file_instance_id = kwargs.get("bit9_file_instance_id")  # number
             bit9_file_instance_localstate = kwargs.get("bit9_file_instance_localstate")  # number
 
             log = logging.getLogger(__name__)
-            log.info("bit9_file_instance_id: %s", bit9_file_instance_id)
-            log.info("bit9_file_instance_localstate: %s", bit9_file_instance_localstate)
+            log.info(u"bit9_file_instance_id: %s", bit9_file_instance_id)
+            log.info(u"bit9_file_instance_localstate: %s", bit9_file_instance_localstate)
 
             payload = {
                 "localState": bit9_file_instance_localstate

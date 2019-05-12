@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient
-
+from resilient_lib import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_rule_update"""
@@ -27,15 +27,11 @@ class FunctionComponent(ResilientComponent):
     def _bit9_file_delete_function(self, event, *args, **kwargs):
         """Function: Delete a file from all systems or a specific system"""
         try:
+            validate_fields(["bit9_file_action"], kwargs)
             # Get the function parameters:
             yield StatusMessage("Deleting file...")
             bit9_file_action = self.get_select_param(kwargs.get("bit9_file_action"))  # select
-            if bit9_file_action is None:
-                raise FunctionError("bit9_file_action must be set to run this function.")
-
             bit9_computer_id = kwargs.get("bit9_computer_id")  # number
-            if bit9_computer_id is None:
-                raise FunctionError("bit9_computer_id must be set in order to run this function.")
 
             bit9_file_catalog_id = kwargs.get("bit9_file_catalog_id")  # number
             bit9_file_hash = kwargs.get("bit9_file_hash")  # text
@@ -65,7 +61,7 @@ class FunctionComponent(ResilientComponent):
             if bit9_file_action in supported_file_actions:
                 payload["action"] = supported_file_actions.get(bit9_file_action)
             else:
-                raise FunctionError("{} is not one of the support file actions: {}".format(bit9_file_name,
+                raise FunctionError(u"{} is not one of the support file actions: {}".format(bit9_file_name,
                                                                                            list(supported_file_actions
                                                                                                 .keys())))
             if bit9_file_hash:
@@ -73,6 +69,7 @@ class FunctionComponent(ResilientComponent):
             if bit9_file_name:
                 payload["fileName"] = bit9_file_name
 
+            log.debug("uPayload: {}".format(payload))
             bit9_client = CbProtectClient(self.options)
             results = bit9_client.delete_file(payload)
 

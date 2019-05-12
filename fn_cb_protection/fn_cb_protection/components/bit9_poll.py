@@ -77,8 +77,9 @@ class Bit9PollComponent(ResilientComponent):
         env.filters.update({"timestamp_to_millis": timestamp_to_millis})
 
         # Set up a one-off timer for polling the first time
-        self.log.info(u"CbProtect escalation initialized, polling interval %s seconds", self.escalation_interval)
-        Timer(min((self.escalation_interval, 5)), Poll(), persist=False).register(self)
+        if self.escalation_interval:
+            self.log.info(u"CbProtect escalation initialized, polling interval %s seconds", self.escalation_interval)
+            Timer(min((self.escalation_interval, 5)), Poll(), persist=False).register(self)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -112,6 +113,7 @@ class Bit9PollComponent(ResilientComponent):
         # Conditions for which incidents are escalated
         # By default this is "all unresolved approval requests"
         self.escalation_query = self.options.get("escalation_query", "resolution:0")
+        self.log.debug(u"escalation_query: {}".format(self.escalation_query))
 
     def _escalate(self):
         """Query the CbProtect server for approval requests, and raise them to Resilient"""
@@ -137,7 +139,7 @@ class Bit9PollComponent(ResilientComponent):
             # For efficiency, find them and filter them out from this batch.
             # Then we're left only with "un-escalated" incidents.
             req_ids = [result["id"] for result in results]
-            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+            query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
             query = {
                 'filters': [{
                     'conditions': [
@@ -160,7 +162,7 @@ class Bit9PollComponent(ResilientComponent):
             except SimpleHTTPException:
                 # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
                 # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-                query_uri = "/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+                query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
                 query = {
                     'filters': [{
                         'conditions': [
@@ -221,7 +223,7 @@ class Bit9PollComponent(ResilientComponent):
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = "/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+            query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
             query = {
                 'filters': [{
                     'conditions': [

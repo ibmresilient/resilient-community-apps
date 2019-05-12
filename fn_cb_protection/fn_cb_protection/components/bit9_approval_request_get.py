@@ -8,6 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient
+from resilient_lib import validate_fields
 
 
 class FunctionComponent(ResilientComponent):
@@ -27,11 +28,12 @@ class FunctionComponent(ResilientComponent):
     def _bit9_approval_request_get_function(self, event, *args, **kwargs):
         """Function: Get an approval request by ID"""
         try:
+            validate_fields(["bit9_approval_request_id"], kwargs)
             # Get the function parameters:
             bit9_approval_request_id = kwargs.get("bit9_approval_request_id")  # number
 
             log = logging.getLogger(__name__)
-            log.info("bit9_approval_request_id: %s", bit9_approval_request_id)
+            log.info(u"bit9_approval_request_id: %s", bit9_approval_request_id)
 
             bit9_client = CbProtectClient(self.options)
             results = bit9_client.get_approval_request(bit9_approval_request_id)
@@ -40,7 +42,7 @@ class FunctionComponent(ResilientComponent):
                 bit9_client.server,
                 bit9_approval_request_id
             )
-            log.info("Request Status :%d", results.get("status"))
+            log.info(u"Request Status :%d", results.get("status"))
             log.debug(results)
 
             # Produce a FunctionResult with the results

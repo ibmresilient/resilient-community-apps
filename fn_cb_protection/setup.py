@@ -8,12 +8,13 @@ setup(
     name='fn_cb_protection',
     version='1.0.2',
     license='MIT',
-    author='IBM Resilient',
-    author_email='support@resilientsystems.com',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_cb_protection'",
     long_description="Resilient Circuits Components for 'fn_cb_protection'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,

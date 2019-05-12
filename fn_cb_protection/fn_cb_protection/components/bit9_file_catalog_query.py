@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient, escape
-
+from resilient_lib import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_catalog_query"""
@@ -27,11 +27,12 @@ class FunctionComponent(ResilientComponent):
     def _bit9_file_catalog_query_function(self, event, *args, **kwargs):
         """Function: Return file catalog objects that match the given criteria."""
         try:
+            validate_fields(["bit9_query"], kwargs)
             # Get the function parameters:
             bit9_query = kwargs.get("bit9_query")  # text
 
             log = logging.getLogger(__name__)
-            log.info("bit9_query: %s", bit9_query)
+            log.info(u"bit9_query: %s", bit9_query)
 
             # Query example: 'id:6' (see https://<server>/api/bit9platform/v1 for details)
             bit9_client = CbProtectClient(self.options)

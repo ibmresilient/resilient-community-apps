@@ -8,7 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient
-
+from resilient_lib import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_rule_get"""
@@ -27,11 +27,12 @@ class FunctionComponent(ResilientComponent):
     def _bit9_file_rule_get_function(self, event, *args, **kwargs):
         """Function: Get a file rule by ID"""
         try:
+            validate_fields(["bit9_file_rule_id"], kwargs)
             # Get the function parameters:
             bit9_file_rule_id = kwargs.get("bit9_file_rule_id")  # number
 
             log = logging.getLogger(__name__)
-            log.info("bit9_file_rule_id: %s", bit9_file_rule_id)
+            log.info(u"bit9_file_rule_id: %s", bit9_file_rule_id)
 
             bit9_client = CbProtectClient(self.options)
             results = bit9_client.get_file_rule(bit9_file_rule_id)

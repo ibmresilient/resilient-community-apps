@@ -11,7 +11,6 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_cb_protection]
-    
 # Name or IP address of your CbProtect server
 server=10.200.1.1
 
@@ -23,6 +22,7 @@ token=XXXXX-XXXX-XXXXX-XXXX
 
 # Interval (seconds) for automatic escalation of approval requests, set 0 to disable
 # Suggest 300 as a starting point, which will check CbProtect every 5 minutes
+# default is 600 (10 minutes)
 escalation_interval=0
 
 # Optional: query for which requests to escalate; default is to escalate all open approval requests

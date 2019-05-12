@@ -34,10 +34,10 @@ class FunctionComponent(ResilientComponent):
             bit9_file_instance_localstate = kwargs.get("bit9_file_instance_localstate")  # number
 
             log = logging.getLogger(__name__)
-            log.info("bit9_computer_id: %s", bit9_computer_id)
-            log.info("bit9_file_catalog_id: %s", bit9_file_catalog_id)
-            log.info("bit9_file_path: %s", bit9_file_path)
-            log.info("bit9_file_instance_localstate: %s", bit9_file_instance_localstate)
+            log.info(u"bit9_computer_id: %s", bit9_computer_id)
+            log.info(u"bit9_file_catalog_id: %s", bit9_file_catalog_id)
+            log.info(u"bit9_file_path: %s", bit9_file_path)
+            log.info(u"bit9_file_instance_localstate: %s", bit9_file_instance_localstate)
 
             # At least the file catalog id or computer id must be specified.
             if bit9_computer_id is None and bit9_file_catalog_id is None:
@@ -46,14 +46,14 @@ class FunctionComponent(ResilientComponent):
             # Construct the query string.
             query = []
             if bit9_computer_id:
-                query.append("computerId:{}".format(bit9_computer_id))
+                query.append(u"computerId:{}".format(bit9_computer_id))
             if bit9_file_catalog_id:
-                query.append("fileCatalogId:{}".format(bit9_file_catalog_id))
+                query.append(u"fileCatalogId:{}".format(bit9_file_catalog_id))
             if bit9_file_path:
-                query.append("pathName:{}".format(escape(bit9_file_path)))
+                query.append(u"pathName:{}".format(escape(bit9_file_path)))
             if bit9_file_instance_localstate:
-                query.append("localState:{}".format(bit9_file_instance_localstate))
-            bit9_query = "&q=".join(query)
+                query.append(u"localState:{}".format(bit9_file_instance_localstate))
+            bit9_query = u"&q=".join(query)
             bit9_client = CbProtectClient(self.options)
             results = bit9_client.query_file_instance(bit9_query)
 
