@@ -86,8 +86,8 @@ def get_overall_progress(rtn):
             # scan status to "In progress".
             overall_state = in_prog_state
             break
-
-    rtn["command_state"] = overall_state
+    # Set the overall command state across multiple endpoints.
+    rtn["overall_command_state"] = overall_state
     return overall_state
 
 
@@ -102,7 +102,7 @@ def process_results(rtn, status_type):
     if get_overall_progress(rtn) == "Processed":
         for i in range(len(rtn["content"])):
             rtn["content"][i]["command_status_id"] = rtn["content"][i]["stateId"]
-            if status_type.lower() == "scan":
+            if status_type.lower() in ["scan", "remediation"]:
                 rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
 
         if status_type.lower() == "scan":
