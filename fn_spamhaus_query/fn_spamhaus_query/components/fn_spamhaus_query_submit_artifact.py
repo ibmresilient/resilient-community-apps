@@ -43,8 +43,8 @@ class FunctionComponent(ResilientComponent):
             log.info("spamhaus_dqs_key: %s", spamhaus_dqs_key)
 
             yield StatusMessage(
-                "Checking Artifact: {} against Spamhaus block list resource {} database.".format(spamhaus_query_string,
-                                                                                                 spamhause_search_resource))
+                u"Checking Artifact: {} against Spamhaus block list resource {} database.".format(spamhaus_query_string,
+                                                                                                  spamhause_search_resource))
 
             # Checking API Key
             if not spamhaus_dqs_key:
@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                             response_json[code] = code_reponse_obj.json()
                     else:
                         response_json[code] = code_information
-            yield StatusMessage("Completed Checking artifact against Spamhaus block list.")
+            yield StatusMessage(u"Completed Checking artifact against Spamhaus block list.")
 
             # populating the result output set
             results = result_object.done(success=True, content=response_json)

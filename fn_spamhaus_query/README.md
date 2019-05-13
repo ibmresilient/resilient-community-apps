@@ -11,9 +11,9 @@
  - [Rules](#rules)  
  ---  
  ## About This Package  
-**This function checks IP Address & Domain Names Artifacts against [Spamhaus](https://www.spamhaustech.com/) database to see whether artifact is in block list records or not. 
-if given artifact appears in one of the block list record, then artifacts description filed will be updated with additional information.**
-
+ 
+**This function checks IP Address & Domain Name type Artifacts against the [Spamhaus](https://www.spamhaustech.com/) database to determine whether a given Artifact is found in a blocklist. 
+if a given Artifact appears in one of the block list record, then the Artifacts description will be updated with additional enrichment information.**
 Provided in this Integration package is an example rule configured to be ran against 
 IP Address and Domain Names Artifacts in Resilient :   
    * IP Address Artifacts of Resilient
