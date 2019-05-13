@@ -14,6 +14,8 @@ except:
     from urlparse import urljoin
 
 LOG = logging.getLogger(__name__)
+# Magic number for zip file
+ZIP_MAGIC = "\x50\x4b\x03\x04"
 
 class RequestsSep(object):
     """
@@ -49,11 +51,6 @@ class RequestsSep(object):
         :return: Response in json format
 
         """
-        magic_zip_types = {
-            "\x1f\x8b\x08": "gz",
-            "\x42\x5a\x68": "bz2",
-            "\x50\x4b\x03\x04": "zip"
-        }
 
         if proxies is None:
             proxies = self.get_proxies()
@@ -87,8 +84,7 @@ class RequestsSep(object):
 
         #  Firstly check if a zip file is returned.
         key = content = None
-        for magic, filetype in magic_zip_types.items():
-            if r.content.startswith(magic):
+        if r.content.startswith(ZIP_MAGIC):
                 (key, content) = self.get_unzipped_contents(r.content)
                 return self.decrypt_xor(content, key)
         #  Else try to see if is json.
