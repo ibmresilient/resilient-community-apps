@@ -46,8 +46,8 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Create auth tokens
-        MaaS360Utils.get_the_maas360_utils(opts, options)
+        # Create MaaS360Utils
+        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Reload options in maas360_utils and reconnect to get a new token
-        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts)
+        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
         maas360_utils.reload_options(opts)
         maas360_utils.reconnect()
 
@@ -81,10 +81,6 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            # validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-            #                  'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
-            #                  'maas360_password', 'maas360_basic_search_url', 'maas360_basic_search_page_size'],
-            #                 self.options)
             validate_fields(['maas360_basic_search_url', 'maas360_basic_search_page_size'], self.options)
 
             # Get the function parameters:
@@ -121,16 +117,6 @@ class FunctionComponent(ResilientComponent):
                                     u"Basic Search function")
 
             # Read configuration settings:
-            # host_url = self.options["maas360_host_url"]
-            # billing_id = self.options["maas360_billing_id"]
-            # platform_id = self.options["maas360_platform_id"]
-            # app_id = self.options["maas360_app_id"]
-            # app_version = self.options["maas360_app_version"]
-            # app_access_key = self.options["maas360_app_access_key"]
-            # username = self.options["maas360_username"]
-            # password = self.options["maas360_password"]
-            # auth_url = self.options["maas360_auth_url"]
-
             basic_search_url = self.options["maas360_basic_search_url"]
             match = self.options.get("maas360_basic_search_match")
             page_size = self.options.get("maas360_basic_search_page_size")
@@ -145,9 +131,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting the Basic Search")
 
-            # maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
-            #                              app_access_key, auth_url, self.opts, self.options)
-            maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts)
+            maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
 
             devices = maas360_utils.basic_search(basic_search_url, query_string)
             if not devices:
@@ -162,6 +146,8 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, devices)
 
             LOG.info(results)
+
+            yield FunctionResult(results)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

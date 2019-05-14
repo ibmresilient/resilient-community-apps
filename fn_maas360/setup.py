@@ -21,20 +21,12 @@ setup(
     classifiers=[
         'Programming Language :: Python',
     ],
-    # entry_points={
-    #     "resilient.circuits.components": [
-    #         "Maas360BasicSearchFunctionComponent = fn_maas360.components.maas360_basic_search:FunctionComponent",
-    #         "Maas360ActionFunctionComponent = fn_maas360.components.maas360_action:FunctionComponent",
-    #         "Maas360StopAppDistFunctionComponent = fn_maas360.components.maas360_stop_app_distribution:FunctionComponent",
-    #         "Maas360DeleteAppFunctionComponent = fn_maas360.components.maas360_delete_app:FunctionComponent"
-    #     ],
-    #     "resilient.circuits.configsection": ["gen_config = fn_maas360.util.config:config_section_data"],
-    #     "resilient.circuits.customize": ["customize = fn_maas360.util.customize:customization_data"],
-    #     "resilient.circuits.selftest": ["selftest = fn_maas360.util.selftest:selftest_function"]
-    # }
     entry_points={
         "resilient.circuits.components": [
-            "Maas360BasicSearchFunctionComponent = fn_maas360.components.maas360_basic_search:FunctionComponent"
+            "Maas360BasicSearchFunctionComponent = fn_maas360.components.maas360_basic_search:FunctionComponent",
+            "Maas360ActionFunctionComponent = fn_maas360.components.maas360_action:FunctionComponent",
+            "Maas360StopAppDistFunctionComponent = fn_maas360.components.maas360_stop_app_distribution:FunctionComponent",
+            "Maas360DeleteAppFunctionComponent = fn_maas360.components.maas360_delete_app:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_maas360.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_maas360.util.customize:customization_data"],

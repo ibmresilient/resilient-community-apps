@@ -20,8 +20,6 @@ TARGET_DEVICES_DICT = {"All Devices": 0,
                        "Device Group": 1,
                        "Specific Device": 2}
 
-CONFIG_DATA_SECTION = 'fn_maas360'
-
 
 class MaaS360Utils(object):
     """
@@ -30,17 +28,19 @@ class MaaS360Utils(object):
     _the_maas360_utils = None
 
     @staticmethod
-    def get_the_maas360_utils(opts):
+    def get_the_maas360_utils(opts, config_data_selection):
         if not MaaS360Utils._the_maas360_utils:
-            MaaS360Utils._the_maas360_utils = MaaS360Utils(opts)
+            MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
         return MaaS360Utils._the_maas360_utils
 
-    def __init__(self, opts):
+    def __init__(self, opts, config_data_selection):
         """
         Constructor for MaaS360Utils
         Note: Object will not be created if auth token is not generated successfully
         :param opts
         """
+        self.config_data_selection = config_data_selection
+
         # Initialize instance variables
         self.host_url = None
         self.billing_id = None
@@ -119,7 +119,7 @@ class MaaS360Utils(object):
 
     def reload_options(self, opts):
 
-        options = opts.get(CONFIG_DATA_SECTION, {})
+        options = opts.get(self.config_data_selection, {})
 
         # Validate fields
         validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
@@ -150,7 +150,7 @@ class MaaS360Utils(object):
 
             except IntegrationError as err:
                 # catch expired token error
-                if err.value == "I have expired":  # FIXME: status code 401
+                if err.value == "I have expired":  # FIXME: catch status code 401
                     self.reconnect()
                     continue
                 # any other error

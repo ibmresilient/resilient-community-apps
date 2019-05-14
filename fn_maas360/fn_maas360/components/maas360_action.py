@@ -26,10 +26,20 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
+        # Create MaaS360Utils
+        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        # Reload app.config parameters.
+        self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
+
+        # Reload options in maas360_utils and reconnect to get a new token
+        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
+        maas360_utils.reload_options(opts)
+        maas360_utils.reconnect()
 
     @function("maas360_action")
     def _maas360_action_function(self, event, *args, **kwargs):
@@ -46,33 +56,16 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-                             'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
-                             'maas360_password'],
-                            self.options)
             validate_fields(['maas360_device_id'], kwargs)
 
             # Get the function parameters:
             device_id = kwargs.get("maas360_device_id")  # text
             action_type = self.get_select_param(kwargs.get("maas360_action_type"))  # select, values: "Get Software Installed", "Locate Device", "Lock Device", "Wipe Device", "Cancel Pending Wipe"
-            # TODO: verify if action type names haven't changed
 
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_action_type: %s", action_type)
 
-            # Read configuration settings:
-            host_url = self.options["maas360_host_url"]
-            billing_id = self.options["maas360_billing_id"]
-            platform_id = self.options["maas360_platform_id"]
-            app_id = self.options["maas360_app_id"]
-            app_version = self.options["maas360_app_version"]
-            app_access_key = self.options["maas360_app_access_key"]
-            username = self.options["maas360_username"]
-            password = self.options["maas360_password"]
-            auth_url = self.options["maas360_auth_url"]
-
-            maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
-                                         app_access_key, auth_url, self.opts, self.options)
+            maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
 
             if action_type == "Get Software Installed":
                 yield StatusMessage("Starting the Get Software Installed function")
