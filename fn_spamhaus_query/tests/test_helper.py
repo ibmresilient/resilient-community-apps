@@ -2,7 +2,7 @@ def get_mock_config_data():
     return u"""[fn_spamhaus_query]
 # The API endpoint URL to query Spamhaus Web Query Service
 spamhaus_wqs_url = https://apibl.spamhaus.net/lookup/v1/{}/{}
-spamhaus_dqs_key = gkoga24t6zag5tpj6rsbxz722e
+spamhaus_dqs_key = 
 # Proxy Configuration if any by default will be None
 http_proxy=
 https_proxy=
