@@ -25,14 +25,30 @@ class FunctionComponent(ResilientComponent):
             sep_domainid, sep_fingerprintlist_name , sep_fingerprintlist_id
 
     An example of a set of query parameter might look like the following:
-            sep_domainid =
-            sep_fingerprintlist_name =
-            sep_fingerprintlist_id =
+            sep_domainid = 'A9B4B7160946C25D24B6AA458EF5557F'
+            sep_fingerprintlist_name = 'Blacklist_2'
+            sep_fingerprintlist_id = None
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
+          'inputs': {u'sep_fingerprintlist_name': u'Blacklist_2', u'sep_domainid': u'A9B4B7160946C25D24B6AA458EF5557F'},
+          'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 10:41:01', 'package_version': '1.0.0',
+                      'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1059},
+          'success': True,
+          'content': {u'description': u'Hash of type Malware MD5 Hash', u'hashType': u'MD5',
+                      u'source': u'WEBSERVICE', u'groupIds': [],
+                      u'data': [u'482F9B6E0CC4C1DBBD772AAAF088CB3A'],
+                      u'id': u'D132F4BA85D64E9F941906C2ECBF3F5F',
+                      u'name': u'Blacklist'},
+          'raw': '{"description": "Hash of type Malware MD5 Hash", "hashType": "MD5",
+                   "source": "WEBSERVICE", "groupIds": [],
+                   "data": ["482F9B6E0CC4C1DBBD772AAAF088CB3A"],
+                   "id": "D132F4BA85D64E9F941906C2ECBF3F5F",
+                   "name": "Blacklist"}',
+          'reason': None,
+          'version': '1.0'
     }
     """
     def __init__(self, opts):

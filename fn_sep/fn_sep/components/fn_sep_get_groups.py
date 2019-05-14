@@ -39,7 +39,7 @@ class FunctionComponent(ResilientComponent):
         "inputs": {"sep_domain": null, "sep_fullpathname": null, "sep_mode": null, "sep_order: null,
                    "sep_pageindex": null, "sep_pagesize": null, "sep_sort": null},
         "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-01 12:46:27', 'package_version': '1.0.0',
-        "host": 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 1085},
+        "host": 'myhost, 'version': '1.0', 'execution_time_ms': 1085},
         "success': True,
         'content': {
                       "sort": [

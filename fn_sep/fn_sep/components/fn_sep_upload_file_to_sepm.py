@@ -21,17 +21,28 @@ class FunctionComponent(ResilientComponent):
             sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source
 
     An example of a set of query parameter might look like the following:
-            sep_file_path    =
-            sep_computer_ids =
-            sep_sha256
-            sep_sha1
-            sep_md5
-            sep_source
+            sep_file_path = 'C:\\temp\\New Text Document.txt'
+            sep_computer_ids = '89AD1BBB0946C25D25E6C0984E971D8A'
+            sep_sha256 = '590f9895c2cbe93d47c3f7a3104fb843edfb5d5741330593d7d302a1e11e0ba5'
+            sep_sha1 = None
+            sep_md5 = None
+            sep_source = 'FILESYSTEM'
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
+        'inputs': {u'sep_sha256': u'590f9895c2cbe93d47c3f7a3104fb843edfb5d5741330593d7d302a1e11e0ba5', u'sep_source': u'FILESYSTEM',
+                   u'sep_computer_ids': u'89AD1BBB0946C25D25E6C0984E971D8A', u'sep_file_path': u'C:\\temp\\New Text Document.txt',
+                   u'sep_sha1': None, u'sep_md5': None
+                   },
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 14:46:08', 'package_version': '1.0.0',
+                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1226
+                   }, 'success': True,
+        'content': {u'commandID': u'1BFD8C9B3FD74FF4A2490FFE63314E7A'},
+        'raw': '{"commandID": "1BFD8C9B3FD74FF4A2490FFE63314E7A"}',
+        'reason': None,
+        'version': '1.0'
     }
     """
     def __init__(self, opts):

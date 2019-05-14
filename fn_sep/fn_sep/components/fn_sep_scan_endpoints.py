@@ -28,11 +28,24 @@ class FunctionComponent(ResilientComponent):
             sep_sha1 =
             sep_md5 =
             sep_description =
-            sep_scan_action = "scan"
+            sep_scan_action = None
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
     {
+        'inputs': {u'sep_description': u'Scan eoc for file in the SEP environment.',
+                   u'sep_computer_ids': u'D31AA16E0946C25D40C83823C500518B,89AD1BBB0946C25D25E6C0984E971D8A',
+                   u'sep_scan_action': None,  u'sep_file_path': u'C:\\temp\\New Text Document.txt',
+                   u'sep_sha1': None, u'sep_sha256': None, u'sep_md5': None, u'sep_scan_type': u'QUICK_SCAN'
+                  },
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 14:26:03', 'package_version': '1.0.0',
+                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1079
+                   },
+        'success': True,
+        'content': {u'commandID_computer': u'E50FDD8C541D4405A3B5CDB83EC7E1DC'},
+        'raw': '{"commandID_computer": "E50FDD8C541D4405A3B5CDB83EC7E1DC"}',
+        'reason': None,
+        'version': '1.0'
     }
     """
     def __init__(self, opts):

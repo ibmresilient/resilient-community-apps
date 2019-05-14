@@ -23,12 +23,21 @@ class FunctionComponent(ResilientComponent):
             sep_fingerprintlist_id
 
     An example of a set of query parameter might look like the following:
-            sep_fingerprintlist_id =
+            sep_fingerprintlist_id = '2728515A08A4481B8207623558254F60'
 
     The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
+        'inputs': {u'sep_fingerprintlist_id': u'2728515A08A4481B8207623558254F60'},
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 11:49:38', 'package_version': '1.0.0',
+                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1137
+                    },
+         'success': True,
+         'content': '',
+         'raw': '""',
+         'reason': None,
+         'version': '1.0'
     }
     """
     def __init__(self, opts):

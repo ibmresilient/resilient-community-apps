@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
     {
          "inputs": {'sep_policy_type': {'name': 'fw', 'id': 201}},
          "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-01 12:46:27', 'package_version': '1.0.0',
-                     'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 1085},
+                     'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1085},
          "success": True,
          "content":  {
                       "sort": null,

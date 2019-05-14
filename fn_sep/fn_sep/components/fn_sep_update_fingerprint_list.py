@@ -20,18 +20,32 @@ class FunctionComponent(ResilientComponent):
     package fn_sep.
 
     The Function takes the following parameters:
-            sep_fingerprintlist_id, sep_description, sep_domainid, sep_hash_value
+            sep_fingerprintlist_id, sep_fingerprintlist_name, sep_description, sep_domainid, sep_hash_value
 
     An example of a set of query parameter might look like the following:
-            sep_fingerprintlist_id =
-            sep_description =
-            sep_domainid =
-            sep_hash_value =
+            sep_fingerprintlist_id = 'A9B4B7160946C25D24B6AA458EF5557F'
+            sep_fingerprintlist_name = 'Blacklist_2'
+            sep_description = 'Hash of type Malware MD5 Hash'
+            sep_domainid = 'A9B4B7160946C25D24B6AA458EF5557F'
+            sep_hash_value = '0B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A'
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
+        'inputs': {u'sep_description': u'Hash of type Malware MD5 Hash', u'sep_fingerprintlist_name': u'Blacklist_2',
+                   u'sep_hash_value': u'0B26E313ED4A7CA6904B0E9369E5B957,482F9B6E0CC4C1DBBD772AAAF088CB3A',
+                   u'sep_domainid': u'A9B4B7160946C25D24B6AA458EF5557F',
+                   u'sep_fingerprintlist_id': u'D132F4BA85D64E9F941906C2ECBF3F5F'
+                   },
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 10:48:45', 'package_version': '1.0.0',
+                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1131
+                    }, 'success': True,
+                    'content': '',
+                    'raw': '""',
+                    'reason': None,
+                    'version': '1.0'
+
     }
     """
     def __init__(self, opts):

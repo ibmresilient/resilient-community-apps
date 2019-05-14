@@ -26,17 +26,44 @@ class FunctionComponent(ResilientComponent):
             sep_commandid, sep_order, sep_pageindex, sep_pagesize, sep_sort
 
     An example of a set of query parameter might look like the following:
-            sep_commandid = None
+            sep_commandid = '7D3670DDF5A64A99B3721BF8A375B302'
             sep_order = None
             sep_pageindex = None
             sep_pagesize = None
             sep_sort = None
-            sep_status_type = "scan"
+            sep_status_type = 'quarantine'
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
     {
+        'inputs': {u'sep_status_type': u'quarantine', u'sep_commandid': u'7D3670DDF5A64A99B3721BF8A375B302'},
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-04-26 15:25:55', 'package_version': '1.0.0',
+                      'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1256},
+        'success': True,
+        'content': {u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}],
+                    u'command_state': 'Completed', u'number': 0, u'firstPage': True, ': 0,
+                    u'content': [{u'computerName': u'WIN-N5KGH4CP3N3', u'subStateId u'binaryFileId': None,
+                                  u'lastUpdateTime': u'2019-04-26T11:05:27Z', u'domainName': u'Default',
+                                  u'hardwareKey': u'DC7D24D6465566D2941F35BC8D17801E', u'subStateDesc': u'',
+                                  u'stateId': 3, u'computerId': u'89AD1BBB0946C25D25E6C0984E971D8A',
+                                  u'computerIp': u'9.70.194.94', u'beginTime': u'2019-04-26T11:05:27Z',
+                                  u'currentLoginUserName': u'Administrator', u'resultInXML': u'',
+                                  'command_status_id': 3}
+                                 ],
+                     u'lastPage': True, u'totalPages': 1, u'numberOfElements': 1, u'totalElements': 1, u'size': 20
+                    },
+        'raw': '{"sort": [{"direction": "ASC", "property": "Begintime", "ascending": true}],
+                "command_state": "Completed", "number": 0, "firstPage": true,
+                "content": [{"computerName": "WIN-N5KGH4CP3N3", "subStateId": 0, "binaryFileId": null,
+                "lastUpdateTime": "2019-04-26T11:05:27Z", "domainName": "Default",
+                "hardwareKey": "DC7D24D6465566D2941F35BC8D17801E", "subStateDesc": "",
+                "stateId": 3, "computerId": "89AD1BBB0946C25D25E6C0984E971D8A",
+                "computerIp": "9.70.194.94", "beginTime": "2019-04-26T11:05:27Z",
+                "currentLoginUserName": "Administrator", "resultInXML": "", "command_status_id": 3}],
+                "lastPage": true, "totalPages": 1, "numberOfElements": 1, "totalElements": 1, "size": 20}',
+        'reason': None,
+        'version': '1.0'
     }
     """
     def __init__(self, opts):

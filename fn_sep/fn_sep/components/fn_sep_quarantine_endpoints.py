@@ -19,22 +19,21 @@ class FunctionComponent(ResilientComponent):
             sep_group_ids, sep_computer_ids, sep_undo
 
     An example of a set of query parameter might look like the following:
-            sep_group_ids =
-            sep_computer_ids =
-            sep_undo =
+            sep_group_ids = None
+            sep_computer_ids = '89AD1BBB0946C25D25E6C0984E971D8A'
+            sep_undo = False
 
     The function will execute a REST api get request against a SYMANTEC  SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
     {
-        "inputs": {'sep_group_ids': 'DC7D24D6465566D2941F35BC8D17801E', 'sep_group_id': '8E20F39B0946C25D118925C2E28C2D59',
-                   'sep_undo' = null},
-        "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-07 11:39:14', 'package_version': '1.0.0',
-        "host": 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 9555},
-        "success": True,
-        "content": {
-         }
-        "raw": '',
-        "reason": None, 'version': '1.0'
+        'inputs': {u'sep_undo': False, u'sep_computer_ids': u'89AD1BBB0946C25D25E6C0984E971D8A'},
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-14 14:42:09', 'package_version': '1.0.0',
+                    'host': 'myhost', 'version': '1.0', 'execution_time_ms': 1102
+                   }, 'success': True,
+        'content': {u'commandID_computer': u'79AD5636B73A4C0D828938AE1E5B2C13'},
+        'raw': '{"commandID_computer": "79AD5636B73A4C0D828938AE1E5B2C13"}',
+        'reason': None,
+        'version': '1.0'
     }
     """
     def __init__(self, opts):

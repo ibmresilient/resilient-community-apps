@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
     {
         "inputs": {'sep_hardwarekey': 'DC7D24D6465566D2941F35BC8D17801E', 'sep_group_id': '8E20F39B0946C25D118925C2E28C2D59'},
         "metrics": {'package': 'fn-sep', 'timestamp': '2019-03-07 11:39:14', 'package_version': '1.0.0',
-        "host": 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 9555},
+        "host": 'myhost', 'version': '1.0', 'execution_time_ms': 9555},
         "success": True,
         "content": [{'responseMessage': 'OK', 'responseCode': '200'}],
         "raw": '<<a string representation of content.>>',
