@@ -65,15 +65,17 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 ## Function Inputs:
  ![screenshot](./screenshots/Selection_02.png)
 
+
 * Submit URL
+
 | Input Name | Type | Required | Info |
-| ------------- | :--: | :-------:| ------- | ---- |
+| ------------- | :--: | :-------:| ---- |
 | `falcon_sandbox_environment` | `Select` | Yes | Select an Environment form list |
 | `falcon_sandbox_action_script` | `Select` | No | Action scripts simulate human behaviour and interact with the client during an analysis (e.g. reboot during analysis). This feature is configurable in the standalone version |
 | `falcon_sandbox_priority` | `Number` | No | priority value between 0 (default) and 100 (highest) |
 | `falcon_sandbox_submit_name` | `String` | No | Optional ‘submission name’ field that will be used for file type detection and analysis |
 | `falcon_sandbox_custom_run_time` | Date-time picker `String` | No | Optional runtime duration (in seconds) |
-| `falcon_sandbox_environment_variable` | `String` | No |  |
+| `falcon_sandbox_environment_variable` | `String` | No | |
 | `falcon_sandbox_tor_enabled_analysis` | `Boolean` | No | Route the TCP based traffic (HTTP/S, DNS, TLS, etc.) via TOR to avoid e.g. external IP fingerprinting. |
 | `falcon_sandbox_allow_community_access` | `Boolean` | No | Please check 'Do not submit my sample to unaffiliated third parties' in order to toggle this access control. |
 | `falcon_sandbox_no_share_third_party` | `Boolean` | No | The file will not be shared with an unaffiliated third party if you select this option. However, all reports are always shared with the community and include screenshots and extracted strings from the input file, its execution, and memory analysis. |
@@ -82,27 +84,28 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 | `falcon_sandbox_incident_id` | `Number` | Yes | Takes form selected incident |
 | `falcon_sandbox_artifact_id` | `Number` | Yes | Takes form selected artifact |
 
+  
 
 * Submit File
+
 | Input Name | Type | Required | Info |
-| ------------- | :--: | :-------:| ------- | ---- |
+| ------------- | :--: | :-------:| ---- |
 | `falcon_sandbox_environment` | `Select` | Yes | Select an Environment form list |
 | `falcon_sandbox_action_script` | `Select` | No | Action scripts simulate human behaviour and interact with the client during an analysis (e.g. reboot during analysis). This feature is configurable in the standalone version |
 | `falcon_sandbox_priority` | `Number` | No | priority value between 0 (default) and 100 (highest) |
 | `falcon_sandbox_submit_name` | `String` | No | Optional ‘submission name’ field that will be used for file type detection and analysis |
 | `falcon_sandbox_custom_run_time` | Date-time picker `String` | No | Optional runtime duration (in seconds) |
-| `falcon_sandbox_environment_variable` | `String` | No |  |
+| `falcon_sandbox_environment_variable` | `String` | No | |
 | `falcon_sandbox_tor_enabled_analysis` | `Boolean` | No | Route the TCP based traffic (HTTP/S, DNS, TLS, etc.) via TOR to avoid e.g. external IP fingerprinting. |
 | `falcon_sandbox_allow_community_access` | `Boolean` | No | Please check 'Do not submit my sample to unaffiliated third parties' in order to toggle this access control. |
 | `falcon_sandbox_no_share_third_party` | `Boolean` | No | The file will not be shared with an unaffiliated third party if you select this option. However, all reports are always shared with the community and include screenshots and extracted strings from the input file, its execution, and memory analysis. |
 | `falcon_sandbox_custom_date_time` | Date-time picker `String` | No | Optional custom date/time that can be set for the analysis system. Expected format: yyyy-MM-dd HH:mm |
 | `falcon_sandbox_document_password` | `String` | No | Must provide if uploading a password protected file/document. |
 | `falcon_sandbox_comment` | `String` | No | Your comment here.. |
-| `falcon_sandbox_artifact_id` | `Number` | Yes if Artifact Attachment|  |
+| `falcon_sandbox_artifact_id` | `Number` | Yes if Artifact Attachment| |
 | `falcon_sandbox_incident_id` | `Number` | Yes | `NA` | Takes form selected incident |
 | `falcon_sandbox_task_id` | `Number` | No | Takes form selected incident's selected task |
 | `falcon_sandbox_attachment_id` | `Number` | Yes | Takes form selected incident's selected attachment |
-
 ## Function Output:
 * To see the output of each of the API calls for this Function, we recommend running `resilient-circuits` in `DEBUG` mode.
 * To do this run:
