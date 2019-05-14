@@ -16,6 +16,8 @@ except:
 LOG = logging.getLogger(__name__)
 # Magic number for zip file
 ZIP_MAGIC = "\x50\x4b\x03\x04"
+# Hash lengths: SHA256 = 64, SHA-1 = 40, MD5 = 32
+HASH_LENGTHS = [64, 40, 32]
 
 class RequestsSep(object):
     """
@@ -109,9 +111,9 @@ class RequestsSep(object):
         try:
             zfile = ZipFile(BytesIO(content), 'r')
             for file in zfile.namelist():
-                if len(file) in [64, 40, 32] or file == "metadata.xml":
+                if len(file) in HASH_LENGTHS or file == "metadata.xml":
                     f = zfile.open(file)
-                    if len(file) in [64, 40, 32]:
+                    if len(file) in HASH_LENGTHS:
                         # Get the hash file name.
                         c_unzipped = f.read()
                     elif file == "metadata.xml":
