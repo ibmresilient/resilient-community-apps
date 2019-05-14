@@ -10,14 +10,15 @@ class ApikeyError(Exception):
         return repr(self.message)
 
 
-class SpamhauseRequestCallError(Exception):
+class SpamhausRequestCallError(Exception):
     def __init__(self, error_msg):
         self.error_msg = error_msg
 
     def __str__(self):
         return repr(self.error_msg)
 
-def spamhause_call_error(response_object):
+
+def spamhaus_call_error(response_object):
     """
     :param response_object: Object returned from request.get call
     :return: if response object doesn't fall any below specified category returns response object else raises respective
@@ -25,16 +26,16 @@ def spamhause_call_error(response_object):
     """
     # Checking for status code
     if response_object.status_code == 400:
-        raise SpamhauseRequestCallError("Bad request - there was a syntax error in the request")
+        raise SpamhausRequestCallError("Bad request - there was a syntax error in the request")
     elif response_object.status_code == 401:
-        raise SpamhauseRequestCallError("Authorization failed - please verify a valid DQS key was supplied")
+        raise SpamhausRequestCallError("Authorization failed - please verify a valid DQS key was supplied")
     elif response_object.status_code == 403:
-        raise SpamhauseRequestCallError("Forbidden - Authorization denied")
+        raise SpamhausRequestCallError("Forbidden - Authorization denied")
     elif response_object.status_code == 406:
-        raise SpamhauseRequestCallError("Not Acceptable - The requested Content-Type is not supported")
+        raise SpamhausRequestCallError("Not Acceptable - The requested Content-Type is not supported")
     elif response_object.status_code == 429:
-        raise SpamhauseRequestCallError("Too Many Requests - Rate limiting in effect, please decrease query rate")
+        raise SpamhausRequestCallError("Too Many Requests - Rate limiting in effect, please decrease query rate")
     elif response_object.status_code == 504:
-        raise SpamhauseRequestCallError("Gateway timeout - Query could not be successfully sent")
+        raise SpamhausRequestCallError("Gateway timeout - Query could not be successfully sent")
     else:
         return response_object

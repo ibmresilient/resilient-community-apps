@@ -7,7 +7,7 @@
 
 import logging
 from resilient_lib import RequestsCommon
-from fn_spamhaus_query.util.spamhause_helper import *
+from fn_spamhaus_query.util.spamhaus_helper import *
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -34,7 +34,7 @@ def selftest_function(opts):
     try:
         response_json = requestcommon_object.execute_call('GET', wqs_url.format('AUTHBL', '127.0.0.2'),
                                                           headers=header_data, proxies=proxies_data,
-                                                          callback=spamhause_call_error)
+                                                          callback=spamhaus_call_error)
         return {"state": "Success"}
     except Exception as err_msg:
         log.info(err_msg)

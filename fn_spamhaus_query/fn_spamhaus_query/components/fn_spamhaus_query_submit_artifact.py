@@ -7,7 +7,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 import fn_spamhaus_query.util.selftest as selftest
 from resilient_lib import ResultPayload, RequestsCommon
 from fn_spamhaus_query.util.info_response import STATIC_INFO_RESPONSE
-from fn_spamhaus_query.util.spamhause_helper import *
+from fn_spamhaus_query.util.spamhaus_helper import *
 
 
 class FunctionComponent(ResilientComponent):
@@ -30,7 +30,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the function parameters:
             spamhaus_query_string = kwargs.get("spamhaus_query_string")  # text
-            spamhause_search_resource = kwargs.get("spamhause_search_resource")  # text
+            spamhaus_search_resource = kwargs.get("spamhaus_search_resource")  # text
 
             # Get the app.config parameters:
             spamhaus_wqs_url = self.options.get("spamhaus_wqs_url")
@@ -38,13 +38,13 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
             log.info("spamhaus_query_string: %s", spamhaus_query_string)
-            log.info("spamhause_search_resource: %s", spamhause_search_resource)
+            log.info("spamhaus_search_resource: %s", spamhaus_search_resource)
             log.info("spamhaus_wqs_url: %s", spamhaus_wqs_url)
             log.info("spamhaus_dqs_key: %s", spamhaus_dqs_key)
 
             yield StatusMessage(
                 u"Checking Artifact: {} against Spamhaus block list resource {} database.".format(spamhaus_query_string,
-                                                                                                  spamhause_search_resource))
+                                                                                                  spamhaus_search_resource))
 
             # Checking API Key
             if not spamhaus_dqs_key:
@@ -62,16 +62,16 @@ class FunctionComponent(ResilientComponent):
             # Construct call header with api key
             header_data = {'Authorization': 'Bearer {}'.format(spamhaus_dqs_key)}
 
-            # Make Get Call to Spamhause website
+            # Make Get Call to Spamhaus website
             response_object = request_common_obj.execute_call(verb='GET',
-                                                              url=spamhaus_wqs_url.format(spamhause_search_resource,
+                                                              url=spamhaus_wqs_url.format(spamhaus_search_resource,
                                                                                           spamhaus_query_string),
                                                               headers=header_data, proxies=proxies,
-                                                              callback=spamhause_call_error)
+                                                              callback=spamhaus_call_error)
             # Get Received data in JSON format.
             response_json = response_object.json()
             if not response_json:
-                raise SpamhauseRequestCallError("No Response Returned from Api call")
+                raise SpamhausRequestCallError("No Response Returned from Api call")
 
             if response_object.status_code == 404:
                 response_json['is_in_blocklist'] = False  # a bool flag to for block list status
@@ -86,7 +86,7 @@ class FunctionComponent(ResilientComponent):
                         code_reponse_obj = request_common_obj.execute_call(verb='GET',
                                                                            url=spamhaus_wqs_url.format('info', code),
                                                                            headers=header_data, proxies=proxies,
-                                                                           callback=spamhause_call_error)
+                                                                           callback=spamhaus_call_error)
                         if code_reponse_obj.status_code == 404:
                             response_json[code] = None
                         elif code_reponse_obj.status_code == 200:
