@@ -5,6 +5,10 @@ from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+import logging
+
+log = logging.getLogger(__name__)
+
 
 PACKAGE_NAME = "fn_falcon_sandbox"
 FUNCTION_NAME = "falcon_sandbox_submit_url"
@@ -26,6 +30,16 @@ def call_falcon_sandbox_submit_url_function(circuits, function_params, timeout=1
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
+INPUT_OUTPUT = (
+    'Windows 7 64 bit', 'Default analysis', 2120, 341, 
+    'http://malware.wicar.org/data/ms14_064_ole_xp.html',
+    {
+        "job_id": "5cd9dff1038838e10f0c7c8a", 
+        "environment_id": 120, 
+        "environment_description": "Windows 7 64 bit", 
+        "state": "SUCCESS"
+    }
+)
 
 class TestFalconSandboxSubmitUrl:
     """ Tests for the falcon_sandbox_submit_url function"""
@@ -35,27 +49,23 @@ class TestFalconSandboxSubmitUrl:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("falcon_sandbox_environment, falcon_sandbox_comment, falcon_sandbox_custom_date_time, falcon_sandbox_no_share_third_party, falcon_sandbox_environment_variable, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_allow_community_access, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_priority, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results", [
-        ('Android Static Analysis', "text", "text", True, "text", True, True, "text", "text", 123, 'Default analysis', 123, 123, "text", {"value": "xyz"}),
-        ('Windows 7 32 bit', "text", "text", True, "text", True, True, "text", "text", 123, 'Heavy Anti-Evasion', 123, 123, "text", {"value": "xyz"})
+    @pytest.mark.parametrize("falcon_sandbox_environment, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_url, expected_results", [
+        INPUT_OUTPUT
     ])
-    def test_success(self, circuits_app, falcon_sandbox_environment, falcon_sandbox_comment, falcon_sandbox_custom_date_time, falcon_sandbox_no_share_third_party, falcon_sandbox_environment_variable, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_allow_community_access, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_priority, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_input_url, expected_results):
+    def test_success(self, circuits_app, falcon_sandbox_environment, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_url, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "falcon_sandbox_environment": falcon_sandbox_environment,
-            "falcon_sandbox_comment": falcon_sandbox_comment,
-            "falcon_sandbox_custom_date_time": falcon_sandbox_custom_date_time,
-            "falcon_sandbox_no_share_third_party": falcon_sandbox_no_share_third_party,
-            "falcon_sandbox_environment_variable": falcon_sandbox_environment_variable,
-            "falcon_sandbox_tor_enabled_analysis": falcon_sandbox_tor_enabled_analysis,
-            "falcon_sandbox_allow_community_access": falcon_sandbox_allow_community_access,
-            "falcon_sandbox_custom_run_time": falcon_sandbox_custom_run_time,
-            "falcon_sandbox_submit_name": falcon_sandbox_submit_name,
-            "falcon_sandbox_priority": falcon_sandbox_priority,
             "falcon_sandbox_action_script": falcon_sandbox_action_script,
             "falcon_sandbox_incident_id": falcon_sandbox_incident_id,
             "falcon_sandbox_artifact_id": falcon_sandbox_artifact_id,
-            "falcon_sandbox_input_url": falcon_sandbox_input_url
+            "falcon_sandbox_url": falcon_sandbox_url
         }
+
         results = call_falcon_sandbox_submit_url_function(circuits_app, function_params)
-        assert(expected_results == results)
+        log.info('======================+++++++++++++++=============================')
+        log.info(results)
+        results = results['raw']
+        assert(expected_results['environment_id'] == results['environment_id'])
+        assert(results['job_id'] is not None)
+        assert(results['state'] in ["ERROR", "SUCCESS"])

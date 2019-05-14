@@ -80,7 +80,7 @@ class FunctionComponent(ResilientComponent):
             log.info("falcon_sandbox_artifact_id: %s", falcon_sandbox_artifact_id)
             log.info("falcon_sandbox_url: %s", falcon_sandbox_url)
 
-            API_KEY = self.options.get("falcon_sandbox_api_key")
+            API_KEY = str(self.options.get("falcon_sandbox_api_key"))
             API_HOST = self.options.get("falcon_sandbox_api_host")
             FETCH_REP_TIMEOUT = self.options.get("fetch_report_timeout")
 
@@ -110,7 +110,10 @@ class FunctionComponent(ResilientComponent):
 
             submit_header = falcon_sandbox_request_header(API_KEY)
             submit_header["content-type"] = HA_SUBMIT_URL_CONTENT_TYPE
-
+            log.info(form_data)
+            log.info('===============================')
+            log.info(submit_header)
+            log.info('===============================')
             ## Submit url to falcon sandbox
             yield StatusMessage("Submitting...")
             response = request_common.execute_call(http_method, 

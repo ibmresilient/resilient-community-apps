@@ -27,37 +27,36 @@ def call_falcon_sandbox_submit_file_function(circuits, function_params, timeout=
     return event.kwargs["result"].value
 
 
+INPUT_OUTPUT = (
+    'Windows 7 64 bit', 'Default analysis', 2120, 341, 
+    'http://malware.wicar.org/data/ms14_064_ole_xp.html',
+    {
+        "job_id": "5cd9dff1038838e10f0c7c8a", 
+        "environment_id": 120, 
+        "environment_description": "Windows 7 64 bit", 
+        "state": "SUCCESS"
+    }
+)
 class TestFalconSandboxSubmitFile:
     """ Tests for the falcon_sandbox_submit_file function"""
-
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("falcon_sandbox_environment, falcon_sandbox_action_script, falcon_sandbox_no_share_third_party, falcon_sandbox_allow_community_access, falcon_sandbox_comment, falcon_sandbox_priority, falcon_sandbox_environment_variable, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_custom_date_time, falcon_sandbox_document_password, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_incident_id, falcon_sandbox_task_id, falcon_sandbox_attachment_id, falcon_sandbox_artifact_id, expected_results", [
-        ('Android Static Analysis', 'Random desktop theme', True, True, "text", 123, "text", "text", "text", "text", "text", True, 123, 123, 123, 123, {"value": "xyz"}),
-        ('Windows 7 64 bit', 'Open Internet Explorer', True, True, "text", 123, "text", "text", "text", "text", "text", True, 123, 123, 123, 123, {"value": "xyz"})
+    @pytest.mark.parametrize("falcon_sandbox_environment, falcon_sandbox_action_script, falcon_sandbox_incident_id, falcon_sandbox_artifact_id, falcon_sandbox_url, expected_results", [
+        INPUT_OUTPUT
     ])
     def test_success(self, circuits_app, falcon_sandbox_environment, falcon_sandbox_action_script, falcon_sandbox_no_share_third_party, falcon_sandbox_allow_community_access, falcon_sandbox_comment, falcon_sandbox_priority, falcon_sandbox_environment_variable, falcon_sandbox_custom_run_time, falcon_sandbox_submit_name, falcon_sandbox_custom_date_time, falcon_sandbox_document_password, falcon_sandbox_tor_enabled_analysis, falcon_sandbox_incident_id, falcon_sandbox_task_id, falcon_sandbox_attachment_id, falcon_sandbox_artifact_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
             "falcon_sandbox_environment": falcon_sandbox_environment,
             "falcon_sandbox_action_script": falcon_sandbox_action_script,
-            "falcon_sandbox_no_share_third_party": falcon_sandbox_no_share_third_party,
-            "falcon_sandbox_allow_community_access": falcon_sandbox_allow_community_access,
-            "falcon_sandbox_comment": falcon_sandbox_comment,
-            "falcon_sandbox_priority": falcon_sandbox_priority,
-            "falcon_sandbox_environment_variable": falcon_sandbox_environment_variable,
-            "falcon_sandbox_custom_run_time": falcon_sandbox_custom_run_time,
-            "falcon_sandbox_submit_name": falcon_sandbox_submit_name,
-            "falcon_sandbox_custom_date_time": falcon_sandbox_custom_date_time,
-            "falcon_sandbox_document_password": falcon_sandbox_document_password,
-            "falcon_sandbox_tor_enabled_analysis": falcon_sandbox_tor_enabled_analysis,
             "falcon_sandbox_incident_id": falcon_sandbox_incident_id,
-            "falcon_sandbox_task_id": falcon_sandbox_task_id,
-            "falcon_sandbox_attachment_id": falcon_sandbox_attachment_id,
-            "falcon_sandbox_artifact_id": falcon_sandbox_artifact_id
+            "falcon_sandbox_artifact_id": falcon_sandbox_artifact_id,
+            "falcon_sandbox_url": falcon_sandbox_url,
         }
         results = call_falcon_sandbox_submit_file_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results['environment_id'] == results['environment_id'])
+        assert(results['job_id'] is not None)
+        assert(results['state'] in ["ERROR", "SUCCESS"])

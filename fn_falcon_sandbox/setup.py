@@ -13,7 +13,10 @@ setup(
     description="Resilient Circuits Components for 'fn_falcon_sandbox'",
     long_description="Resilient Circuits Components for 'fn_falcon_sandbox'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib>=30.0.0',
+        'requests_toolbelt'
+
     ],
     packages=find_packages(),
     include_package_data=True,
