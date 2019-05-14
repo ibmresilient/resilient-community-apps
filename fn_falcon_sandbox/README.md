@@ -62,12 +62,13 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     ```
     $ pip uninstall fn-falcon-sandbox
     ```
+
 ## Function Inputs:
  ![screenshot](./screenshots/Selection_02.png)
 
 
-* Submit URL
 
+### Submit URL
 | Input Name | Type | Required | Info |
 | ------------- | :--: | :-------:| ---- |
 | `falcon_sandbox_environment` | `Select` | Yes | Select an Environment form list |
@@ -86,8 +87,7 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 
   
 
-* Submit File
-
+### Submit File
 | Input Name | Type | Required | Info |
 | ------------- | :--: | :-------:| ---- |
 | `falcon_sandbox_environment` | `Select` | Yes | Select an Environment form list |
@@ -106,6 +106,8 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
 | `falcon_sandbox_incident_id` | `Number` | Yes | `NA` | Takes form selected incident |
 | `falcon_sandbox_task_id` | `Number` | No | Takes form selected incident's selected task |
 | `falcon_sandbox_attachment_id` | `Number` | Yes | Takes form selected incident's selected attachment |
+
+
 ## Function Output:
 * To see the output of each of the API calls for this Function, we recommend running `resilient-circuits` in `DEBUG` mode.
 * To do this run:
