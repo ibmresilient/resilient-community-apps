@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 """Tests using pytest_resilient_circuits"""
 
@@ -63,9 +64,6 @@ class TestFalconSandboxSubmitUrl:
         }
 
         results = call_falcon_sandbox_submit_url_function(circuits_app, function_params)
-        log.info('======================+++++++++++++++=============================')
-        log.info(results)
-        results = results['raw']
         assert(expected_results['environment_id'] == results['environment_id'])
         assert(results['job_id'] is not None)
         assert(results['state'] in ["ERROR", "SUCCESS"])

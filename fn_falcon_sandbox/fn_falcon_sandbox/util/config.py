@@ -11,7 +11,7 @@ def config_section_data():
       when called by `resilient-circuits config [-c|-u]`
    """
     return u"""[fn_falcon_sandbox]
-falcon_sandbox_api_key=0wc8s84sc044wwokg0g0gogw4o0sogoo08sk8k80kgo8s4oc8ksoo0g8wok04g8k
+falcon_sandbox_api_key=
 falcon_sandbox_api_host=https://www.hybrid-analysis.com/api/v2
 fetch_report_timeout=600
 """

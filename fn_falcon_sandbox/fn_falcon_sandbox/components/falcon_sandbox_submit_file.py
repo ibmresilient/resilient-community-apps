@@ -23,13 +23,14 @@ from fn_falcon_sandbox.util.submit_helper import (
     falcon_sandbox_request_header,
     get_file_attachment_and_metadata,
     write_temp_file,
-    remove_temp_files
+    remove_temp_files,
 )
 from fn_falcon_sandbox.util.constants import (
     HA_REST_API_URLS,
     HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_FILE,
-    HA_COMPLETED_STATUSES
+    HA_COMPLETED_STATUSES,
 )
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'falcon_sandbox_submit_file"""
@@ -103,13 +104,19 @@ class FunctionComponent(ResilientComponent):
             else:
                 yield StatusMessage("> Function inputs OK")
 
-            falcon_sandbox_environment_id = get_environment_id(falcon_sandbox_environment)
-            falcon_sandbox_action_script = get_runtime_action_script(falcon_sandbox_action_script)
+            falcon_sandbox_environment_id = get_environment_id(
+                falcon_sandbox_environment
+            )
+            falcon_sandbox_action_script = get_runtime_action_script(
+                falcon_sandbox_action_script
+            )
 
-            ## Making sure all param names are following naming conventions 
+            ## Making sure all param names are following naming conventions
             for p in kwargs:
-                if not "falcon_sandbox_" in p: 
-                    FunctionError("Input parameter name must start with 'falcon_sandbox_'")
+                if not "falcon_sandbox_" in p:
+                    FunctionError(
+                        "Input parameter name must start with 'falcon_sandbox_'"
+                    )
 
             client = self.rest_client()
             time_now = str(time.time())
@@ -158,11 +165,9 @@ class FunctionComponent(ResilientComponent):
 
             ## Submit file to falcon sandbox
             yield StatusMessage("Submitting...")
-            response = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    submit_payload, 
-                                                    log=log, 
-                                                    headers=submit_header)
+            response = request_common.execute_call(
+                http_method, url, submit_payload, log=log, headers=submit_header
+            )
             job_id = response["job_id"]
             url, http_method = HA_REST_API_URLS.get("get_state")
             url = url.format(API_HOST, job_id)
@@ -171,10 +176,9 @@ class FunctionComponent(ResilientComponent):
             req_header = falcon_sandbox_request_header(API_KEY)
             time_running = 0
             while True:
-                scan_status = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    log=log, 
-                                                    headers=req_header)
+                scan_status = request_common.execute_call(
+                    http_method, url, log=log, headers=req_header
+                )
                 status = scan_status["state"]
                 if status in HA_COMPLETED_STATUSES:
                     yield StatusMessage("Scan Completed with status {}".format(status))
@@ -189,16 +193,17 @@ class FunctionComponent(ResilientComponent):
                 time.sleep(60)
                 time_running = time_running + 1
                 yield StatusMessage(
-                    "Scan running as {}. Time Elapsed {} mins".format(status, time_running)                
+                    "Scan running as {}. Time Elapsed {} mins".format(
+                        status, time_running
+                    )
                 )
 
             ## Get scan report summary
             url, http_method = HA_REST_API_URLS.get("get_summary")
-            url = url.format(API_HOST, job_id)            
-            scan_report = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    log=log, 
-                                                    headers=req_header)
+            url = url.format(API_HOST, job_id)
+            scan_report = request_common.execute_call(
+                http_method, url, log=log, headers=req_header
+            )
 
             ## Return result to resilient
             pb = ResultPayload("falcon_sandbox_submit_file", **kwargs)

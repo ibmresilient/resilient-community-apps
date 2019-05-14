@@ -9,35 +9,48 @@ from requests_toolbelt import MultipartEncoder
 from resilient_circuits import FunctionError
 from fn_falcon_sandbox.util.constants import (
     HA_AVAILABLE_ENVS,
-    HA_AVAILABLE_RUNTIME_ACTION_SCRIPTS
+    HA_AVAILABLE_RUNTIME_ACTION_SCRIPTS,
 )
 
+
 def write_temp_file(data, name=None):
+    """This function writes content to a temporary file and 
+        returns file path and list of files.
+    """
     temp_files = []
     path = None
 
-    if (name):
+    if name:
         path = "{0}/{1}".format(tempfile.gettempdir(), name)
     else:
         tf = tempfile.mkstemp()
         path = tf[1]
 
-    fo = open(path, 'wb')
+    fo = open(path, "wb")
     temp_files.append(path)
     fo.write(data)
     fo.close()
     return path, temp_files
 
+
 def remove_temp_files(files):
+    """This function removes all temporary files 
+        created by this function.
+    """
     for f in files:
         os.remove(f)
 
+
 def falcon_sandbox_request_header(api_key):
+    """ This function add API Key and 
+        returns request header 
+    """
     return {
-            "accept": "application/json", 
-            "user-agent": "Falcon Sandbox",
-            "api-key": api_key
+        "accept": "application/json",
+        "user-agent": "Falcon Sandbox",
+        "api-key": api_key,
     }
+
 
 def get_submission_queue_size(host_url, api_key):
     """ This function returns current submission queue size of Falcon Sandbox"""
@@ -46,9 +59,12 @@ def get_submission_queue_size(host_url, api_key):
     url = "{}/system/queue-size".format(host_url)
     response = requests.get(url, headers=headers)
     response_json = response.json()
-    return response_json['value']
+    return response_json["value"]
 
-def get_file_attachment_and_metadata(res_client, incident_id, artifact_id=None, task_id=None, attachment_id=None):
+
+def get_file_attachment_and_metadata(
+    res_client, incident_id, artifact_id=None, task_id=None, attachment_id=None
+):
     """
     call the Resilient REST API to get the attachment or artifact data
     :param res_client: required for communication back to resilient
@@ -60,16 +76,24 @@ def get_file_attachment_and_metadata(res_client, incident_id, artifact_id=None, 
     """
     metadata = None
     if incident_id and artifact_id:
-        data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+        data_uri = "/incidents/{}/artifacts/{}/contents".format(
+            incident_id, artifact_id
+        )
         metadata_url = "/incidents/{}/artifacts/{}".format(incident_id, artifact_id)
         metadata = res_client.get(metadata_url)["attachment"]
     elif attachment_id:
         if task_id:
-            data_uri = "/tasks/{}/attachments/{}/contents".format(task_id, attachment_id)
+            data_uri = "/tasks/{}/attachments/{}/contents".format(
+                task_id, attachment_id
+            )
             metadata_url = "/tasks/{}/attachments/{}".format(task_id, attachment_id)
         elif incident_id:
-            data_uri = "/incidents/{}/attachments/{}/contents".format(incident_id, attachment_id)
-            metadata_url = "/incidents/{}/attachments/{}".format(incident_id, attachment_id)
+            data_uri = "/incidents/{}/attachments/{}/contents".format(
+                incident_id, attachment_id
+            )
+            metadata_url = "/incidents/{}/attachments/{}".format(
+                incident_id, attachment_id
+            )
         else:
             raise ValueError("task_id or incident_id must be specified with attachment")
     else:
@@ -84,7 +108,10 @@ def get_file_attachment_and_metadata(res_client, incident_id, artifact_id=None, 
 
 
 def get_environment_id(env_name):
+    """Returns corrresponding environment id"""
     return HA_AVAILABLE_ENVS.get(env_name)
 
+
 def get_runtime_action_script(action_script):
+    """Returns corrresponding action script code"""
     return HA_AVAILABLE_RUNTIME_ACTION_SCRIPTS.get(action_script)

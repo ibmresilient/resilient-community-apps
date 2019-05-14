@@ -27,7 +27,7 @@ from fn_falcon_sandbox.util.constants import (
     HA_REST_API_URLS,
     HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_URL,
     HA_COMPLETED_STATUSES,
-    HA_SUBMIT_URL_CONTENT_TYPE
+    HA_SUBMIT_URL_CONTENT_TYPE,
 )
 
 
@@ -84,24 +84,30 @@ class FunctionComponent(ResilientComponent):
             API_HOST = self.options.get("falcon_sandbox_api_host")
             FETCH_REP_TIMEOUT = self.options.get("fetch_report_timeout")
 
-            ## Making sure all param names are following naming conventions 
-            # Function input variable name should be same as in Hybrid Analysis API followed by 'falcon_sandbox_' 
+            ## Making sure all param names are following naming conventions
+            # Function input variable name should be same as in Hybrid Analysis API followed by 'falcon_sandbox_'
             for p in kwargs:
-                if not "falcon_sandbox_" in p: 
-                    FunctionError("Input parameter name must start with 'falcon_sandbox_'")
+                if not "falcon_sandbox_" in p:
+                    FunctionError(
+                        "Input parameter name must start with 'falcon_sandbox_'"
+                    )
 
             client = self.rest_client()
             time_now = str(time.time())
             request_common = RequestsCommon(self.options, kwargs)
 
             ## preparing inputs
-            falcon_sandbox_environment_id = get_environment_id(falcon_sandbox_environment)
-            falcon_sandbox_action_script = get_runtime_action_script(falcon_sandbox_action_script)
-            
+            falcon_sandbox_environment_id = get_environment_id(
+                falcon_sandbox_environment
+            )
+            falcon_sandbox_action_script = get_runtime_action_script(
+                falcon_sandbox_action_script
+            )
+
             ## Prepare for submission
             url, http_method = HA_REST_API_URLS.get("submit_url")
-            url = url.format(API_HOST)            
-            form_data = {'url': falcon_sandbox_url}
+            url = url.format(API_HOST)
+            form_data = {"url": falcon_sandbox_url}
 
             for p in HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_URL:
                 k = p.split("falcon_sandbox_")[1]
@@ -110,30 +116,23 @@ class FunctionComponent(ResilientComponent):
 
             submit_header = falcon_sandbox_request_header(API_KEY)
             submit_header["content-type"] = HA_SUBMIT_URL_CONTENT_TYPE
-            log.info(form_data)
-            log.info('===============================')
-            log.info(submit_header)
-            log.info('===============================')
             ## Submit url to falcon sandbox
             yield StatusMessage("Submitting...")
-            response = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    form_data, 
-                                                    log=log, 
-                                                    headers=submit_header)
+            response = request_common.execute_call(
+                http_method, url, form_data, log=log, headers=submit_header
+            )
             job_id = response["job_id"]
             url, http_method = HA_REST_API_URLS.get("get_state")
             url = url.format(API_HOST, job_id)
-            yield StatusMessage("Successfully Submitted. \n Job ID: {}".format(job_id))                        
+            yield StatusMessage("Successfully Submitted. \n Job ID: {}".format(job_id))
 
             ## Get Status of Analysis
             req_header = falcon_sandbox_request_header(API_KEY)
             time_running = 0
             while True:
-                scan_status = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    log=log, 
-                                                    headers=req_header)
+                scan_status = request_common.execute_call(
+                    http_method, url, log=log, headers=req_header
+                )
                 status = scan_status["state"]
                 if status in HA_COMPLETED_STATUSES:
                     yield StatusMessage("Scan Completed with status {}".format(status))
@@ -148,19 +147,20 @@ class FunctionComponent(ResilientComponent):
                 time.sleep(60)
                 time_running = time_running + 1
                 yield StatusMessage(
-                    "Scan running as {}. Time Elapsed {} mins".format(status, time_running)                
+                    "Scan running as {}. Time Elapsed {} mins".format(
+                        status, time_running
+                    )
                 )
 
             ## Get scan report summary
             url, http_method = HA_REST_API_URLS.get("get_summary")
             url = url.format(API_HOST, job_id)
-            scan_report = request_common.execute_call(http_method, 
-                                                    url, 
-                                                    log=log, 
-                                                    headers=req_header)
+            scan_report = request_common.execute_call(
+                http_method, url, log=log, headers=req_header
+            )
 
             ## Return result to resilient
-            pb = ResultPayload("falcon_sandbox_submit_file", **kwargs)
+            pb = ResultPayload("falcon_sandbox_submit_url", **kwargs)
             results_payload = pb.done(True, scan_report, status)
             yield FunctionResult(results_payload)
         except Exception:
