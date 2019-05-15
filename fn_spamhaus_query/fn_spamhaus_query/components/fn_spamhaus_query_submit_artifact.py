@@ -33,7 +33,8 @@ class FunctionComponent(ResilientComponent):
             spamhaus_search_resource = kwargs.get("spamhaus_search_resource")  # text
 
             # Get the app.config parameters:
-            spamhaus_wqs_url = self.options.get("spamhaus_wqs_url")
+            spamhaus_wqs_url = self.options.get("spamhaus_wqs_url")+"{}/{}"
+            print("#######################", spamhaus_wqs_url)
             spamhaus_dqs_key = self.options.get("spamhaus_dqs_key")
 
             log = logging.getLogger(__name__)

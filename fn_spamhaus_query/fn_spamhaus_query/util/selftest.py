@@ -22,7 +22,7 @@ def selftest_function(opts):
 
     # Getting the Config file parameters.
     options = opts.get("fn_spamhaus_query", {})
-    wqs_url = options.get('spamhaus_wqs_url')
+    wqs_url = options.get('spamhaus_wqs_url')+"{}/{}"
     dqs_key = options.get('spamhaus_dqs_key')
 
     # Header data

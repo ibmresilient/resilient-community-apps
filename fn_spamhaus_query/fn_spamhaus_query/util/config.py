@@ -12,7 +12,7 @@ def config_section_data():
     """
     config_data = u"""[fn_spamhaus_query]
 # The API endpoint URL to query Spamhaus Web Query Service
-spamhaus_wqs_url = https://apibl.spamhaus.net/lookup/v1/{}/{}
+spamhaus_wqs_url = https://apibl.spamhaus.net/lookup/v1/
 spamhaus_dqs_key = 
 # Proxy Configuration if any by default will be None
 http_proxy=
