@@ -143,6 +143,15 @@ class MaaS360Utils(object):
         # generating auth token and setting it in the object, to be used in further api calls
         self.auth_token = self.generate_auth_token()
 
+    def callback(self, response):
+        """
+
+        :param response:
+        :return:
+        """
+        if response.status_code == 401:
+
+
     def execute_with_retry(self, verb, url, payload={}, log=None, headers=None):
         for _ in range(2):
             try:
