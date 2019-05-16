@@ -34,7 +34,6 @@ class Sepclient(object):
         self.host = options.get("host")
         self.port = options.get("port")
         self.base_path = options.get("base_path")
-        self.ws_base_path = options.get("ws_base_path")
         self.auth_path = options.get("auth_path")
         self.username = options.get("username")
         self.password = options.get("password")
