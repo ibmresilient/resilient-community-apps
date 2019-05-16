@@ -3,6 +3,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 import base64
 import logging
+from itertools import cycle
+
 from requests import request, HTTPError
 import re
 from zipfile import ZipFile
@@ -12,10 +14,11 @@ try:
     from urllib.parse import urljoin
 except:
     from urlparse import urljoin
+from sys import version_info
 
 LOG = logging.getLogger(__name__)
 # Magic number for zip file
-ZIP_MAGIC = "\x50\x4b\x03\x04"
+ZIP_MAGIC = b"\x50\x4b\x03\x04"
 # Hash lengths: SHA256 = 64, SHA-1 = 40, MD5 = 32
 HASH_LENGTHS = [64, 40, 32]
 
@@ -107,7 +110,7 @@ class RequestsSep(object):
         :param content: Response content.
         :return: Tuple with Unzipped file with hash as name and key.
         """
-        key = c_unzipped = None
+        key = c_unzipped = meta = None
         try:
             zfile = ZipFile(BytesIO(content), 'r')
             for file in zfile.namelist():
@@ -118,7 +121,10 @@ class RequestsSep(object):
                         c_unzipped = f.read()
                     elif file == "metadata.xml":
                         # Get the key.
-                        meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
+                        if version_info.major == 3:
+                            meta = ET.fromstring(f.read())
+                        else:
+                            meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
                         for item in meta.findall('File'):
                             key = item.attrib["Key"]
                 else:
@@ -138,6 +144,7 @@ class RequestsSep(object):
         :return: Unencrypted data.
         """
         data = bytearray(data)
-        for i in xrange(len(data)):
+        for i in range(len(data)):
             data[i] ^= int(key)
+            pass
         return data

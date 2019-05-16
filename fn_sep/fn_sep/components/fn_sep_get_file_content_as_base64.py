@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
 
             sep = Sepclient(self.options, params)
 
-            rtn = base64.b64encode(sep.get_file_content(**params))
+            rtn = base64.b64encode(sep.get_file_content(**params)).decode("utf-8")
 
             results = rp.done(True, rtn)
 
