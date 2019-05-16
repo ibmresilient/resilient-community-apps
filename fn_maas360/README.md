@@ -4,7 +4,8 @@
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Install & Customize](#install--customize)
-- [App Config Settings](#appconfig-settings)
+- [Documentation](#documentation)
+- [App Config Settings](#configuration-settings)
 - [Functions](#functions)
 
 # Overview
@@ -14,6 +15,7 @@ The MaaS360 function package enables users to perform certain Mobile device mana
 
 # Requirements
 * IBM Resilient >= `v31.0.0`
+* resilient-lib >= `Brian's new version FIXME!!!`
 * An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_maas360 >= v1.0.0` installed which you can download from our [App Exchange](xxxxxxx)
 
 ---
@@ -29,7 +31,7 @@ The MaaS360 function package enables users to perform certain Mobile device mana
 
 ---
 
-# App Config Settings (app.config):
+# Configuration Settings:
 
 ```
 [fn_maas360]
@@ -79,6 +81,9 @@ maas360_search_installed_apps_url=/application-apis/installedApps/1.0/search/
 # Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 50
 maas360_search_installed_apps_page_size=50
 ```
+
+---
+
 # Functions:
     
 ## MaaS360 Basic Search Function
