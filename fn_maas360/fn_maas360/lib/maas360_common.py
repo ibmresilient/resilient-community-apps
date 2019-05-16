@@ -3,13 +3,11 @@
 
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
-import logging
 import json
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib.components.requests_common import RequestsCommon
 from resilient_lib.components.resilient_common import validate_fields
 
-LOG = logging.getLogger(__name__)
 CON_TYPE_JSON = "application/json"
 CON_TYPE_FORM_ENCODED = "application/x-www-form-urlencoded"
 APP_TYPE_DICT = {"iOS Enterprise Application": 1,
@@ -88,7 +86,9 @@ class MaaS360Utils(object):
         }
         auth_headers = {'Accept': 'application/json'}
         try:
-            results = self.rc.execute_call("post", complete_auth_url, auth_request_body, headers=auth_headers)
+            response = self.rc.execute_call_v2("post", complete_auth_url, json=auth_request_body, headers=auth_headers)
+            results = response.json()
+
         except IntegrationError as err:
             raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
                                    "subsequent api calls will be cancelled: {}".format(err))
@@ -118,6 +118,11 @@ class MaaS360Utils(object):
         return self.host_url + url + self.billing_id
 
     def reload_options(self, opts):
+        """
+        Reload all the options from the config file.
+        :param opts:
+        :return:
+        """
 
         options = opts.get(self.config_data_selection, {})
 
@@ -140,29 +145,30 @@ class MaaS360Utils(object):
         self.rc = RequestsCommon(opts, options)
 
     def reconnect(self):
-        # generating auth token and setting it in the object, to be used in further api calls
+        """
+        Generate auth token and set it in the MaaS360Utils object, to be used in further api calls
+        :return:
+        """
         self.auth_token = self.generate_auth_token()
 
-    # def callback(self, response):
-    #     """
-    #
-    #     :param response:
-    #     :return:
-    #     """
-    #     if response.status_code == 401:
-
-
-    def execute_with_retry(self, verb, url, payload={}, log=None, headers=None):
-        for _ in range(2):
+    def execute_with_retry(self, verb, url, **kwargs):
+        """
+        If the response message comes back as '401 Client Error',
+        reconnect and try to execute the request the second time.
+        :param verb:
+        :param url:
+        :param kwargs:
+        :return:
+        """
+        for i in range(2):
             try:
-                return self.rc.execute_call(verb, url, payload, log=log, headers=headers)
-
+                return self.rc.execute_call_v2(verb, url, **kwargs)
             except IntegrationError as err:
-                # catch expired token error
-                if err.value == "I have expired":  # FIXME: catch status code 401
+                # catch expired token/unauthorized error
+                if i == 0 and "401 Client Error" in err.value:
                     self.reconnect()
                     continue
-                # any other error
+                # any other error or second iteration raise an error
                 raise err
 
     def basic_search(self, url, query_string):
@@ -178,8 +184,8 @@ class MaaS360Utils(object):
         auth_headers = self.get_auth_headers(CON_TYPE_JSON)
 
         try:
-            #results = self.rc.execute_call("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
-            results = self.execute_with_retry("get", url_endpoint, query_string, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("get", url_endpoint, params=query_string, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
 
@@ -199,7 +205,8 @@ class MaaS360Utils(object):
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
 
@@ -225,7 +232,8 @@ class MaaS360Utils(object):
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("get", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("get", url_endpoint, params=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Get Software Installed: {}".format(err))
 
@@ -244,7 +252,8 @@ class MaaS360Utils(object):
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
 
@@ -270,7 +279,8 @@ class MaaS360Utils(object):
                         "notifyOthers": u"{}".format(notify_others)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
 
@@ -290,7 +300,8 @@ class MaaS360Utils(object):
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
 
@@ -320,11 +331,12 @@ class MaaS360Utils(object):
         self.add_to_dict("deviceGroupId", device_group_id, request_body)
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             # The Response 400 doesn't return with a meaningful message.
             # We're adding a msg to recheck the combination of inputs on the activity prompt.
-            if "status_code: 400, msg: N/A" in err.value:
+            if "400" in err.value:
                 raise IntegrationError("Unable to execute call Stop App Distribution: {}. Check combination of your "
                                        "function input values (App Type and Target Devices).".format(err))
             else:
@@ -347,7 +359,8 @@ class MaaS360Utils(object):
                         "appId": u"{}".format(installed_app_id)}
 
         try:
-            results = self.rc.execute_call("post", url_endpoint, request_body, log=LOG, headers=auth_headers)
+            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Delete App: {}".format(err))
 

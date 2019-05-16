@@ -49,9 +49,6 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            # validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-            #                  'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
-            #                  'maas360_password', 'maas360_stop_app_distribution_url'], self.options)
             validate_fields(['maas360_stop_app_distribution_url'], self.options)
             validate_fields(['maas360_app_id', 'maas360_app_type', 'maas360_target_devices'], kwargs)
 
@@ -74,25 +71,11 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError(u"maas360_device_id must be defined")
 
             # Read configuration settings:
-            # host_url = self.options["maas360_host_url"]
-            # billing_id = self.options["maas360_billing_id"]
-            # platform_id = self.options["maas360_platform_id"]
-            # app_id = self.options["maas360_app_id"]
-            # app_version = self.options["maas360_app_version"]
-            # app_access_key = self.options["maas360_app_access_key"]
-            # username = self.options["maas360_username"]
-            # password = self.options["maas360_password"]
-            # auth_url = self.options["maas360_auth_url"]
-
             stop_app_dist_url = self.options["maas360_stop_app_distribution_url"]
 
             yield StatusMessage("Starting the Stop App Distribution")
 
-            # maas360_utils = MaaS360Utils(host_url, billing_id, username, password, app_id, app_version, platform_id,
-            #                              app_access_key, auth_url, self.opts, self.options)
-
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-
             stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id,
                                                                    target_devices, device_id, device_group_id)
             if not stop_app_results:
@@ -103,8 +86,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, stop_app_results)
 
             LOG.info(results)
-            import json
-            print(json.dumps(results, sort_keys=True, indent=4, separators=(',', ': ')))
+
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:

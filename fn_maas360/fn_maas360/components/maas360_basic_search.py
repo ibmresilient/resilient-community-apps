@@ -132,7 +132,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting the Basic Search")
 
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-
             devices = maas360_utils.basic_search(basic_search_url, query_string)
             if not devices:
                 yield StatusMessage("No devices were found for the search params: {}".format(json.dumps(query_string)))

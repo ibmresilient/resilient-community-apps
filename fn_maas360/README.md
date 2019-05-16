@@ -640,26 +640,153 @@ Function that stops a specific distribution of an app on target devices.
 ### Inputs:
 | Input Name | Type | Required | Example | Info |
 | ---------- | :--: | :-------:| ------- | ---- |
-| ` maas360_device_id` | `String` | Yes | `ApplD8DTH6RCIH86` | Full MaaS360 Device ID string that needs to be searched for |
-| ` maas360_action_type` | `Select` | Yes | `Get Software Installed, Locate Device, Lock Device, Wipe Device, Cancel Pending Wipe` | Action |
+| ` maas360_app_type` | `Select` | Yes | `iOS Enterprise Application, iOS App Store Application, Android Enterprise Application, Android Market Application` | Type of the app |
+| ` maas360_app_id` | `String` | Yes | `com.fiberlink.maas360forios` | Unique ID of the application |
+| ` maas360_target_devices` | `Select` | Yes | `All Devices, Device Group, Specific Device` | Target Devices |
+| ` maas360_device_id` | `String` | Yes if Target Device is `Specific Device` | `ApplD8DTH6RCIH86` | Full MaaS360 Device ID string that needs to be searched for |
+| ` maas360_device_group_id` | `String` | Yes if Target Device is `Device Group` | | MaaS360 Device Group ID |
 
 ### Outputs:
-
+```python
+{
+    "content": {
+        "description": "Distribution stopped successfully.",
+        "status": "Success"
+    },
+    "inputs": {
+        "maas360_app_id": "com.some.app",
+        "maas360_app_type": {
+            "id": 250,
+            "name": "iOS Enterprise Application"
+        },
+        "maas360_device_group_id": None,
+        "maas360_device_id": " deviceid",
+        "maas360_target_devices": {
+            "id": 352,
+            "name": "Specific Device"
+        }
+    },
+    "metrics": {
+        "execution_time_ms": 11353,
+        "host": "host",
+        "package": "fn-maas360",
+        "package_version": "1.0.0",
+        "timestamp": "2019-05-16 10:23:59",
+        "version": "1.0"
+    },
+    "raw": "{\"status\": \"Success\", \"description\": \"Distribution stopped successfully.\"}",
+    "reason": None,
+    "success": True,
+    "version": "1.0"
+}
+```
 ### Pre-Process Script:
-
+```python
+inputs.maas360_app_type = rule.properties.maas360_rule_app_type if rule.properties.maas360_rule_app_type is not None else inputs.maas360_app_type
+inputs.maas360_app_id = artifact.value
+inputs.maas360_target_devices = rule.properties.maas360_target_devices if rule.properties.maas360_target_devices is not None else inputs.maas360_target_devices
+inputs.maas360_device_id = rule.properties.maas360_rule_device_id if rule.properties.maas360_rule_device_id is not None else inputs.maas360_device_id
+inputs.maas360_device_group_id = rule.properties.maas360_device_group_id if rule.properties.maas360_device_group_id is not None else inputs.maas360_device_group_id
+```
 ### Post-Process Script:
+```python
+# Print empty string instead of None
+def string_value(value):
+  return value if value is not None else ""
+  
+def add_results_note(inputs, response_desc):
+  noteText = u"""Stop App Distribution - {} for input params: 
+    - appId: '{}' 
+    - appType: '{}'
+    - targetDevices: '{}'
+    - deviceId: '{}'
+    - deviceGroupId: '{}'.""".format(
+      response_desc,
+      inputs.get("maas360_app_id"), 
+      inputs.get("maas360_app_type").name, 
+      inputs.get("maas360_target_devices").name, 
+      string_value(inputs.get("maas360_device_id")),
+      string_value(inputs.get("maas360_device_group_id"))
+      )
+  incident.addNote(noteText)
+  
+########################
+# Mainline starts here #
+########################
 
+if results and results.get("success"):
+  content = results.get("content")
+  if content:
+    # Write results to a Note
+    inputs = results.get("inputs")
+    add_results_note(inputs, content.get("description"))
+```
 ## MaaS360 Delete App
 Function that stops all distributions of the app and deletes the app.
 
 ### Inputs:
 | Input Name | Type | Required | Example | Info |
 | ---------- | :--: | :-------:| ------- | ---- |
-| ` maas360_device_id` | `String` | Yes | `ApplD8DTH6RCIH86` | Full MaaS360 Device ID string that needs to be searched for |
-| ` maas360_action_type` | `Select` | Yes | `Get Software Installed, Locate Device, Lock Device, Wipe Device, Cancel Pending Wipe` | Action |
+| ` maas360_app_type` | `Select` | Yes | `iOS Enterprise Application, iOS App Store Application, Android Enterprise Application, Android Market Application` | Type of the app |
+| ` maas360_app_id` | `String` | Yes | `com.fiberlink.maas360forios` | Unique ID of the application |
 
 ### Outputs:
-
+```python
+{
+    "content": {
+        "description": "Application deleted successfully.",
+        "status": "Success"
+    },
+    "inputs": {
+        "maas360_app_id": "com.some.app",
+        "maas360_app_type": {
+            "id": 251,
+            "name": "iOS App Store Application"
+        }
+    },
+    "metrics": {
+        "execution_time_ms": 16402,
+        "host": "host",
+        "package": "fn-maas360",
+        "package_version": "1.0.0",
+        "timestamp": "2019-05-16 10:34:50",
+        "version": "1.0"
+    },
+    "raw": "{\"status\": \"Success\", \"description\": \"Application deleted successfully.\"}",
+    "reason": None,
+    "success": True,
+    "version": "1.0"
+}
+```
 ### Pre-Process Script:
-
+```python
+inputs.maas360_app_type = rule.properties.maas360_rule_app_type if rule.properties.maas360_rule_app_type is not None else inputs.maas360_app_type
+inputs.maas360_app_id = artifact.value
+```
 ### Post-Process Script:
+```python
+# Print empty string instead of None
+def string_value(value):
+  return value if value is not None else ""
+  
+def add_results_note(inputs, response_desc):
+  noteText = u"""Delete App - {} for input params: 
+    - appId: '{}' 
+    - appType: '{}'""".format(
+      response_desc,
+      inputs.get("maas360_app_id"), 
+      inputs.get("maas360_app_type").name
+      )
+  incident.addNote(noteText)
+  
+########################
+# Mainline starts here #
+########################
+
+if results and results.get("success"):
+  content = results.get("content")
+  if content:
+    # Write results to a Note
+    inputs = results.get("inputs")
+    add_results_note(inputs, content.get("description"))
+```
