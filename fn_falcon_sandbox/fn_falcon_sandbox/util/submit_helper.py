@@ -6,7 +6,6 @@ import requests
 import tempfile
 import os
 from requests_toolbelt import MultipartEncoder
-from resilient_circuits import FunctionError
 from fn_falcon_sandbox.util.constants import (
     HA_AVAILABLE_ENVS,
     HA_AVAILABLE_RUNTIME_ACTION_SCRIPTS,
@@ -21,7 +20,9 @@ def write_temp_file(data, name=None):
     path = None
 
     if name:
-        path = "{0}/{1}".format(tempfile.gettempdir(), name)
+        path = os.path.abspath(
+            "{0}/{1}".format(tempfile.gettempdir(), name)
+        )
     else:
         tf = tempfile.mkstemp()
         path = tf[1]
@@ -59,7 +60,7 @@ def get_submission_queue_size(host_url, api_key):
     url = "{}/system/queue-size".format(host_url)
     response = requests.get(url, headers=headers)
     response_json = response.json()
-    return response_json["value"]
+    return response_json.get("value")
 
 
 def get_file_attachment_and_metadata(

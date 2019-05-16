@@ -6,6 +6,7 @@ import logging
 import json
 import time
 from resilient_lib import ResultPayload, RequestsCommon
+import fn_falcon_sandbox.util.selftest as selftest
 from resilient_circuits import (
     ResilientComponent,
     function,
@@ -38,6 +39,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_falcon_sandbox", {})
+        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -82,8 +84,19 @@ class FunctionComponent(ResilientComponent):
 
             API_KEY = str(self.options.get("falcon_sandbox_api_key"))
             API_HOST = self.options.get("falcon_sandbox_api_host")
-            FETCH_REP_TIMEOUT = self.options.get("fetch_report_timeout")
-
+            FETCH_REP_TIMEOUT = int(self.options.get("fetch_report_timeout"))
+            FETCH_REP_STAT_INTRVL = int(self.options.get("fetch_report_status_interval"))
+            
+            ## This condition will prevent quering Falcon Sandbox for Status in small intervals
+            if FETCH_REP_STAT_INTRVL and FETCH_REP_STAT_INTRVL:
+                if FETCH_REP_STAT_INTRVL < 60 or FETCH_REP_TIMEOUT < 60:
+                    raise FunctionError(
+                        "Error: [App Config] Minimum value for fetch_report_timeout and fetch_report_status_interval should be 60."
+                    )
+            else:
+                raise FunctionError(
+                    "Error: [App Config] fetch_report_timeout and fetch_report_status_interval cannot left empty."
+                )
             ## Making sure all param names are following naming conventions
             # Function input variable name should be same as in Hybrid Analysis API followed by 'falcon_sandbox_'
             for p in kwargs:
@@ -138,14 +151,14 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage("Scan Completed with status {}".format(status))
                     break
                 # Timeout condition
-                if int(FETCH_REP_TIMEOUT) <= (time_running * 60):
+                if FETCH_REP_TIMEOUT <= (time_running * 60):
                     yield FunctionError(
                         "Function Timeout after {} mins".format(time_running)
                     )
                     break
 
-                time.sleep(60)
-                time_running = time_running + 1
+                time.sleep(FETCH_REP_STAT_INTRVL)
+                time_running = time_running + (FETCH_REP_STAT_INTRVL/60)
                 yield StatusMessage(
                     "Scan running as {}. Time Elapsed {} mins".format(
                         status, time_running

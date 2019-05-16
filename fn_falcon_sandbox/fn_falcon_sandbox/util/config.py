@@ -13,5 +13,6 @@ def config_section_data():
     return u"""[fn_falcon_sandbox]
 falcon_sandbox_api_key=
 falcon_sandbox_api_host=https://www.hybrid-analysis.com/api/v2
+fetch_report_status_interval=60
 fetch_report_timeout=600
 """

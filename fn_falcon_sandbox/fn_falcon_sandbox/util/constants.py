@@ -38,7 +38,7 @@ HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_FILE = [
     "falcon_sandbox_document_password",
     "falcon_sandbox_tor_enabled_analysis",
 ]
-# List of runtime resilient function parameters for Submit File function
+# List of runtime resilient function parameters for Submit URL function
 HA_LIST_OF_RUNTIME_PARAMS_SUBMIT_URL = [
     "falcon_sandbox_environment_id",
     "falcon_sandbox_action_script",

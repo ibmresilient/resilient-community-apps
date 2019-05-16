@@ -53,7 +53,9 @@ This package requires that it is installed on a RHEL or CentOS platform and uses
     falcon_sandbox_api_key=<hybrid-analysis-api-key-here>
     falcon_sandbox_api_host=https://www.hybrid-analysis.com/api/v2
     fetch_report_timeout=600
+    fetch_report_status_interval=60
     ```
+    Please make sure minimum value for both `fetch_report_timeout` and `fetch_report_status_interval` is 60
 * Run resilient-circuits:
     ```
     $ resilient-circuits run

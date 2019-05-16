@@ -16,7 +16,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient_lib>=30.0.0',
-        'requests_toolbelt'
+        'requests_toolbelt>=0.9.0'
 
     ],
     packages=find_packages(),
