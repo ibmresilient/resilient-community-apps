@@ -33,7 +33,7 @@ def transform_kwargs(kwargs):
             kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
             params[re.split('_', k, 1)[1]] = v.rstrip().lstrip() if isinstance(v, str)  else v
 
-    # If any entry has "None" string chaßnge to None value.
+    # If any entry has "None" string change to None value.
     for k, v in kwargs.items():
         if type(v) == str and v.lower() == 'none':
             params[k] = None
