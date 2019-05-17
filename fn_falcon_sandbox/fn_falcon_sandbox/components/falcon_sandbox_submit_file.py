@@ -25,6 +25,8 @@ from fn_falcon_sandbox.util.submit_helper import (
     get_file_attachment_and_metadata,
     write_temp_file,
     remove_temp_files,
+    get_submission_queue_size,
+    is_correct_naming_convention
 )
 from fn_falcon_sandbox.util.constants import (
     HA_REST_API_URLS,
@@ -93,7 +95,7 @@ class FunctionComponent(ResilientComponent):
             FETCH_REP_STAT_INTRVL = int(self.options.get("fetch_report_status_interval"))
             
             ## This condition will prevent quering Falcon Sandbox for Status in small intervals
-            if FETCH_REP_STAT_INTRVL and FETCH_REP_STAT_INTRVL:
+            if FETCH_REP_STAT_INTRVL and FETCH_REP_TIMEOUT:
                 if FETCH_REP_STAT_INTRVL < 60 or FETCH_REP_TIMEOUT < 60:
                     raise FunctionError(
                         "Error: [App Config] Minimum value for fetch_report_timeout and fetch_report_status_interval should be 60."
@@ -126,7 +128,7 @@ class FunctionComponent(ResilientComponent):
 
             ## Making sure all param names are following naming conventions
             for p in kwargs:
-                if not "falcon_sandbox_" in p:
+                if not is_correct_naming_convention(p):
                     FunctionError(
                         "Input parameter name must start with 'falcon_sandbox_'"
                     )
@@ -134,6 +136,7 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
             time_now = str(time.time())
             request_common = RequestsCommon(self.options, kwargs)
+            pb = ResultPayload("falcon_sandbox_submit_file", **kwargs)
 
             ## Get the file for submission
             yield StatusMessage(
@@ -185,6 +188,12 @@ class FunctionComponent(ResilientComponent):
             url, http_method = HA_REST_API_URLS.get("get_state")
             url = url.format(API_HOST, job_id)
             yield StatusMessage("Successfully Submitted. \n Job ID: {}".format(job_id))
+
+            ## Get submission queue size
+            queue_size = get_submission_queue_size(API_HOST, API_KEY)
+            if queue_size is not None:
+                yield StatusMessage("Current queue size: {}".format(queue_size))
+
             ## Get Status of Analysis
             req_header = falcon_sandbox_request_header(API_KEY)
             time_running = 0
@@ -219,7 +228,6 @@ class FunctionComponent(ResilientComponent):
             )
 
             ## Return result to resilient
-            pb = ResultPayload("falcon_sandbox_submit_file", **kwargs)
             results_payload = pb.done(True, scan_report, status)
             yield FunctionResult(results_payload)
 

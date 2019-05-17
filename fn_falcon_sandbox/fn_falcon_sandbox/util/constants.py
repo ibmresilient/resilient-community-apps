@@ -1,5 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+
+PARAM_NAMING_CONVENTION_RE = '^falcon_sandbox_.*$'
 HA_REST_API_URLS = {
     "submit_file": ("{}/submit/file", "post"),
     "submit_url": ("{}/submit/url-for-analysis", "post"),

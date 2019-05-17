@@ -5,12 +5,20 @@ import time
 import requests
 import tempfile
 import os
+import re
 from requests_toolbelt import MultipartEncoder
 from fn_falcon_sandbox.util.constants import (
     HA_AVAILABLE_ENVS,
     HA_AVAILABLE_RUNTIME_ACTION_SCRIPTS,
+    PARAM_NAMING_CONVENTION_RE,
 )
 
+
+def is_correct_naming_convention(test_str):
+    """This function will return Boolean value based on whether or not 
+        Parameter naming convention has been followed.
+    """
+    return re.search(PARAM_NAMING_CONVENTION_RE, test_str)
 
 def write_temp_file(data, name=None):
     """This function writes content to a temporary file and 
