@@ -27,7 +27,8 @@ setup(
     description="Resilient Circuits Components for 'fn_sep'",
     long_description="Resilient Circuits Components for 'fn_sep'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=32.0.0',
+        'resilient_lib>=32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
