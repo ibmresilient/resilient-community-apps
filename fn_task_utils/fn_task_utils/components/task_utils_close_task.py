@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             else:
                 if task_name:
                     yield StatusMessage(
-                        "task_name was provided; Searching incident {} for first matching task with name '{}'".format(
+                        u"task_name was provided; Searching incident {} for first matching task with name '{}'".format(
                             incident_id, task_name))
 
                     task_id = find_task_by_name(res_client, incident_id, task_name)

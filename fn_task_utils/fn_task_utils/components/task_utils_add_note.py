@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                 success=True,
                 content={
                     "task": task,
-                    "task_notes": task_notes.pop()  # Remove newly created note from end of the list
+                    "task_note": task_notes.pop()  # Remove newly created note from end of the list
                 }
             )
 

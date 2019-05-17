@@ -22,6 +22,8 @@ resilient_mock = TasksResilientMock
 mock_task = {
 
 }
+
+
 def call_task_utils_create_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("task_utils_create", function_params)
@@ -64,7 +66,7 @@ class TestTskUtilsCreate:
             "task_utils_payload": task_utils_payload
         }
         results = call_task_utils_create_function(circuits_app, function_params)
-        assert(results["content"]["task_id"])
+        assert(results["content"]["task"])
 
     @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
         (123, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
@@ -78,7 +80,7 @@ class TestTskUtilsCreate:
             "task_utils_payload": task_utils_payload
         }
         results = call_task_utils_create_function(circuits_app, function_params)
-        assert (results["content"]["task_id"])
+        assert (results["content"]["task"])
         assert function_params["task_name"] == results["content"]["task"]["name"]
 
     @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
@@ -92,7 +94,7 @@ class TestTskUtilsCreate:
             "task_utils_payload": task_utils_payload
         }
         results = call_task_utils_create_function(circuits_app, function_params)
-        assert (results["content"]["task_id"])
+        assert (results["content"]["task"])
 
     @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
         (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
@@ -106,6 +108,5 @@ class TestTskUtilsCreate:
             "task_utils_payload": task_utils_payload
         }
         results = call_task_utils_create_function(circuits_app, function_params)
-        assert (results["content"]["task_id"])
-        assert results["content"]["task_id"]
+        assert results["content"]["task"]
 
