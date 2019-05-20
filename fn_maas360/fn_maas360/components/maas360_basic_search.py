@@ -46,9 +46,6 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Create MaaS360Utils
-        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -66,16 +63,6 @@ class FunctionComponent(ResilientComponent):
     def _maas360_basic_search_function(self, event, *args, **kwargs):
         """Function: Function searches for devices by Device Name, Username, Phone Number, Platform,
         Device Status and other Device Identifiers."""
-
-        def add_to_dict(key, value, params):
-            """
-            Adds a key-value pair to a dictionary if value is not None or "".
-            :param params
-            :param key:
-            :param value:
-            """
-            if value:
-                params[key] = value
 
         try:
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
@@ -103,13 +90,13 @@ class FunctionComponent(ResilientComponent):
             # Add function inputs to Basic Search params
             query_string = {}
 
-            add_to_dict("partialDeviceName", partial_device_name, query_string)
-            add_to_dict("partialUsername", partial_username, query_string)
-            add_to_dict("partialPhoneNumber", partial_phone_no, query_string)
-            add_to_dict("imeiMeid", imei_meid, query_string)
-            add_to_dict("platformName", platform_name, query_string)
-            add_to_dict("maas360DeviceId", device_id, query_string)
-            add_to_dict("email", email, query_string)
+            MaaS360Utils.add_to_dict("partialDeviceName", partial_device_name, query_string)
+            MaaS360Utils.add_to_dict("partialUsername", partial_username, query_string)
+            MaaS360Utils.add_to_dict("partialPhoneNumber", partial_phone_no, query_string)
+            MaaS360Utils.add_to_dict("imeiMeid", imei_meid, query_string)
+            MaaS360Utils.add_to_dict("platformName", platform_name, query_string)
+            MaaS360Utils.add_to_dict("maas360DeviceId", device_id, query_string)
+            MaaS360Utils.add_to_dict("email", email, query_string)
 
             # At least one of the search parameters should be set, otherwise we can query the whole MaaS360 database.
             if not query_string:
@@ -124,13 +111,14 @@ class FunctionComponent(ResilientComponent):
             sort_order = self.options.get("maas360_basic_search_sort_order")
 
             # Add config params to Basic Search params
-            add_to_dict("match", match, query_string)
-            add_to_dict("pageSize", page_size, query_string)
-            add_to_dict("sortAttribute", sort_attribute, query_string)
-            add_to_dict("sortOrder", sort_order, query_string)
+            MaaS360Utils.add_to_dict("match", match, query_string)
+            MaaS360Utils.add_to_dict("pageSize", page_size, query_string)
+            MaaS360Utils.add_to_dict("sortAttribute", sort_attribute, query_string)
+            MaaS360Utils.add_to_dict("sortOrder", sort_order, query_string)
 
             yield StatusMessage("Starting the Basic Search")
 
+            # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
             devices = maas360_utils.basic_search(basic_search_url, query_string)
             if not devices:

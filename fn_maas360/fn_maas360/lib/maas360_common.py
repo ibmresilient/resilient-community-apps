@@ -4,6 +4,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
 import json
+import threading
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib.components.requests_common import RequestsCommon
 from resilient_lib.components.resilient_common import validate_fields
@@ -24,11 +25,20 @@ class MaaS360Utils(object):
     Helper object MaaS360Utils.
     """
     _the_maas360_utils = None
+    lock = threading.Lock()
 
     @staticmethod
     def get_the_maas360_utils(opts, config_data_selection):
+        """
+        This method creates a singleton, and it shall be called only during init.
+        :param opts:
+        :param config_data_selection:
+        :return:
+        """
         if not MaaS360Utils._the_maas360_utils:
-            MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
+            with MaaS360Utils.lock:
+                # code here will be single threaded
+                MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
         return MaaS360Utils._the_maas360_utils
 
     def __init__(self, opts, config_data_selection):
@@ -216,7 +226,8 @@ class MaaS360Utils(object):
 
         action_status = action_response.get("actionStatus")  # 0:success; 1:error
         if action_status == 1:
-            raise IntegrationError(u"Unable to execute call Locate Device: {}".format(action_response.get("description")))
+            raise IntegrationError(
+                u"Unable to execute call Locate Device: {}".format(action_response.get("description")))
 
         return action_response
 
@@ -258,6 +269,13 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
 
         action_response = results.get("actionResponse")
+        if action_response is None:
+            return None
+
+        action_status = action_response.get("actionStatus")  # 0:success; 1:error
+        if action_status == 1:
+            raise IntegrationError(
+                u"Unable to execute call Lock Device: {}".format(action_response.get("description")))
 
         return action_response
 
@@ -285,6 +303,13 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
 
         action_response = results.get("actionResponse")
+        if action_response is None:
+            return None
+
+        action_status = action_response.get("actionStatus")  # 0:success; 1:error
+        if action_status == 1:
+            raise IntegrationError(
+                u"Unable to execute call Wipe Device: {}".format(action_response.get("description")))
 
         return action_response
 
@@ -306,6 +331,13 @@ class MaaS360Utils(object):
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
 
         action_response = results.get("actionResponse")
+        if action_response is None:
+            return None
+
+        action_status = action_response.get("actionStatus")  # 0:success; 1:error
+        if action_status == 1:
+            raise IntegrationError(
+                u"Unable to execute call Cancel Pending Wipe: {}".format(action_response.get("description")))
 
         return action_response
 

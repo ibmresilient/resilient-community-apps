@@ -26,9 +26,6 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Create MaaS360Utils
-        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -75,6 +72,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting the Stop App Distribution")
 
+            # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
             stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id,
                                                                    target_devices, device_id, device_group_id)

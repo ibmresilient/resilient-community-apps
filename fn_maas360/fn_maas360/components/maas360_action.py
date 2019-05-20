@@ -26,9 +26,6 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Create MaaS360Utils
-        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -65,7 +62,9 @@ class FunctionComponent(ResilientComponent):
             LOG.info("maas360_device_id: %s", device_id)
             LOG.info("maas360_action_type: %s", action_type)
 
+            # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
+            print("TOKEN: {}".format(maas360_utils.auth_token))
 
             if action_type == "Get Software Installed":
                 yield StatusMessage("Starting the Get Software Installed function")

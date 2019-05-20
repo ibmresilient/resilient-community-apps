@@ -26,9 +26,6 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Create MaaS360Utils
-        MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
-
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
@@ -63,6 +60,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Starting the Delete App")
 
+            # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
             delete_app_results = maas360_utils.delete_app(delete_app_url, app_type, installed_app_id)
             if not delete_app_results:

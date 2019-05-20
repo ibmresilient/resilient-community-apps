@@ -590,7 +590,7 @@ if results and results.get("success"):
     "version": "1.0"
 }
 ```
-### MaaS360 Action - Wipe Device
+### MaaS360 Action - Cancel Pending Wipe
 Function that cancels outstanding Remote Wipe sent to the device.
 
 ### Pre-Process Script:
