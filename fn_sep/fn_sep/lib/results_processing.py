@@ -36,7 +36,9 @@ def parse_scan_results(xml):
     scan_result = {
         "MATCH": False,
         "FULL_MATCHES": [],
-        "HASH_MATCHES": []
+        "HASH_MATCHES": [],
+        "match_count": 0,
+        "remediation_count": 0,
     }
 
     try:
@@ -50,9 +52,14 @@ def parse_scan_results(xml):
                 scan_result["MATCH"] = True
                 if item.attrib["result"] == "FULL_MATCH" and not item.attrib in scan_result["FULL_MATCHES"]:
                     scan_result["FULL_MATCHES"].append(item.attrib)
+                    scan_result["match_count"] += 1
+                    if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
+                        scan_result["remediation_count"] += 1
                 elif item.attrib["result"] == "HASH_MATCH" and not item.attrib in scan_result["HASH_MATCHES"]:
                     scan_result["HASH_MATCHES"].append(item.attrib)
-
+                    scan_result["match_count"] += 1
+                    if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
+                        scan_result["remediation_count"] += 1
         return scan_result
 
     except ET.ParseError as e:
@@ -99,11 +106,17 @@ def process_results(rtn, status_type):
     """
 
     # If all endpoints have completed scan then process results
+    rtn["total_match_count"] = 0
+
     if get_overall_progress(rtn) == "Processed":
+
         for i in range(len(rtn["content"])):
             rtn["content"][i]["command_status_id"] = rtn["content"][i]["stateId"]
             if status_type.lower() in ["scan", "remediation"]:
                 rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
+                # Reset total count.
+                rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
+                rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
 
         if status_type.lower() == "scan":
             filter_hits(rtn)
