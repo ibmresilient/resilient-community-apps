@@ -66,14 +66,14 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_undo"], kwargs)
 
-            yield StatusMessage("Running Symantec SEP Quarantine endpoint or group...")
+            yield StatusMessage("Running Symantec SEP Quarantine Endpoint or group...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.quarantine_endpoints(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning Symantec SEP Quarantine endpoint or group results")
+            yield StatusMessage("Returning 'Symantec SEP Quarantine Endpoint' or group results")
 
             import json
             log.debug(json.dumps(results["content"]))

@@ -178,7 +178,7 @@ class FunctionComponent(ResilientComponent):
             # Add timestamp in secs to facilitate live update calculation in post-processing
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning Get Computers results")
+            yield StatusMessage("Returning 'Get Computers' results")
 
             log.debug(json.dumps(results["content"]))
 

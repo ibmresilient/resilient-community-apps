@@ -103,7 +103,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_commandid", "sep_status_type"], kwargs)
 
-            yield StatusMessage("Running Symantec SEP Get Computers query...")
+            yield StatusMessage("Running Symantec SEP Get Command Status query...")
 
             sep = Sepclient(self.options, params)
 
@@ -111,7 +111,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, rtn)
 
-            yield StatusMessage("Returning Get Command Status results")
+            yield StatusMessage("Returning Returning 'Symantec SEP Get Command Status' results")
 
             log.debug(json.dumps(results["content"]))
 

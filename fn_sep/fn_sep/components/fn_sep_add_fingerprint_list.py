@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_domainid: %s", sep_domainid)
             log.info("sep_hash_value: %s", sep_hash_value)
 
-            yield StatusMessage("Running Symantec SEP add fingerprint list action ...")
+            yield StatusMessage("Running Symantec SEP Add Fingerprint List action ...")
 
             sep = Sepclient(self.options, params)
 
@@ -88,7 +88,7 @@ class FunctionComponent(ResilientComponent):
                     "Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' "
                     "because of a possible invalid or deleted id.".format(sep_fingerprintlist_name))
             else:
-                yield StatusMessage("Returning 'add fingerprint list status' results for fingerprint name '{}'."
+                yield StatusMessage("Returning 'Symantec SEP Add Fingerprint List' results for fingerprint name '{}'."
                                     .format(sep_fingerprintlist_name))
 
             results = rp.done(True, rtn)

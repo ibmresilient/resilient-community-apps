@@ -81,14 +81,14 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_domainid: %s", sep_domainid)
             log.info("sep_hash_value: %s", sep_hash_value)
 
-            yield StatusMessage("Running Symantec SEP update fingerprint list action ...")
+            yield StatusMessage("Running Symantec SEP Update Fingerprint List action ...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.update_fingerprint_list(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'update fingerprint list' results")
+            yield StatusMessage("Returning 'Symantec SEP Update Fingerprint List' results")
 
             log.debug(json.dumps(results["content"]))
 

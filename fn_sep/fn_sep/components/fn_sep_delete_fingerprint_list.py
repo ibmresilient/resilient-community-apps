@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
 
-            yield StatusMessage("Running Symantec SEP delete fingerprint list action ...")
+            yield StatusMessage("Running Symantec SEP Delete Fingerprint List action ...")
 
             sep = Sepclient(self.options, params)
             rtn = sep.delete_fingerprint_list(**params)
@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
                     "Got a 410 error while attempting to delete fingerprint list fingerprint id  '{0}' "
                     "because of a possible deleted id.".format(params["sep_fingerprintlist_id"]))
             else:
-                yield StatusMessage("Returning 'delete fingerprint list status' results for fingerprint id '{}'."
+                yield StatusMessage("Returning 'Symantec SEP Delete Fingerprint List' results for fingerprint id '{}'."
                                     .format(sep_fingerprintlist_id))
 
             log.debug(json.dumps(results["content"]))

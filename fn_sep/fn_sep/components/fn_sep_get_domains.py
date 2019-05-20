@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
             rtn = sep.get_domains(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning Get Domains results")
+            yield StatusMessage("Returning 'Get Domains' results")
 
             log.debug(json.dumps(results["content"]))
 

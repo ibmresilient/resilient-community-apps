@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_scan_type", "sep_description", "sep_scan_action" ], kwargs)
 
-            yield StatusMessage("Running Symantec SEP scan endpoints command...")
+            yield StatusMessage("Running Symantec SEP Scan Endpoints command...")
 
 
             sep = Sepclient(self.options, params)
@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
             rtn = sep.scan_endpoints(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'scan endpoints' results")
+            yield StatusMessage("Returning 'Symantec SEP Scan Endpoints' results")
 
             log.debug(json.dumps(results["content"]))
 

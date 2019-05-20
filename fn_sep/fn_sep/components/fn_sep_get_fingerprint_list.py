@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
             log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
 
-            yield StatusMessage("Running Symantec SEP Get file fingerprint list query...")
+            yield StatusMessage("Running Symantec SEP Get File Fingerprint List query...")
 
             sep = Sepclient(self.options, params)
             rtn = sep.get_fingerprint_list(**params)
@@ -92,7 +92,7 @@ class FunctionComponent(ResilientComponent):
                     "Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' "
                     "because of a possible invalid or deleted id.".format(sep_fingerprintlist_name))
             else:
-                yield StatusMessage("Returning 'Get fingerprint list query' results for fingerprint name '{}'."
+                yield StatusMessage("Returning 'Symantec SEP Get File Fingerprint List' results for fingerprint name '{}'."
                                     .format(sep_fingerprintlist_name))
 
             log.debug(json.dumps(results["content"]))

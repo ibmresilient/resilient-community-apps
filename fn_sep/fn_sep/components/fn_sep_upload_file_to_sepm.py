@@ -81,14 +81,14 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_file_path", "sep_computer_ids", "sep_source"], kwargs)
 
-            yield StatusMessage("Running Symantec SEP - Upload file to SEPM ...")
+            yield StatusMessage("Running Symantec SEP Upload File to SEPM ...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.upload_file(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Upload file to SEPM' results")
+            yield StatusMessage("Returning 'Symantec SEP Upload File to SEPM' results")
 
             log.debug(json.dumps(results["content"]))
 

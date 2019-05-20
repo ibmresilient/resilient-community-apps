@@ -125,7 +125,7 @@ class FunctionComponent(ResilientComponent):
             rtn = sep.get_groups(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Get Groups' results")
+            yield StatusMessage("Returning 'Symantec SEP Get Groups' results")
 
             log.debug(json.dumps(results["content"]))
 

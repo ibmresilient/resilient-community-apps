@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("sep_file_id: %s", sep_file_id)
 
-            yield StatusMessage("Running Symantec SEP Get File Content as base64 ...")
+            yield StatusMessage("Running Symantec SEP Get File Content as Base64 ...")
 
             sep = Sepclient(self.options, params)
 
@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, rtn)
 
-            yield StatusMessage("Returning file content as base64' results")
+            yield StatusMessage("Returning 'Symantec SEP Get File Content as Base64' results")
 
             log.debug(json.dumps(results["content"]))
 

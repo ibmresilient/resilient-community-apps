@@ -60,14 +60,14 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_group_id: %s", sep_group_id)
 
 
-            yield StatusMessage("Running Symantec SEP assign fingerprint list to group for lock-down action ...")
+            yield StatusMessage("Running Symantec SEP Assign Fingerprint List to Group for Lock-down action ...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.assign_fingerprint_list_to_group(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'assign fingerprint list to group fro lock-down' results")
+            yield StatusMessage("Returning 'Symantec SEP Assign Fingerprint List to Group for Lock-down' results")
 
             log.debug(json.dumps(results["content"]))
 

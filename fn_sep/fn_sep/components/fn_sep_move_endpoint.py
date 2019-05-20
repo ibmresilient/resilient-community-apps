@@ -66,13 +66,13 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["sep_group_id", "sep_hardwarekey"], kwargs)
 
-            yield StatusMessage("Running Symantec SEP move endpoint action...")
+            yield StatusMessage("Running Symantec SEP Move Endpoint action...")
 
             sep = Sepclient(self.options, params)
             rtn = sep.move_endpoint(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning move endpoint results")
+            yield StatusMessage("Returning 'Symantec SEP Move Endpoint' results")
 
             log.debug(json.dumps(results["content"]))
 
