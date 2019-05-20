@@ -17,7 +17,7 @@ def find_task_by_name(res_client, incident_id, task_name):
         '/incidents/{}/tasks?want_layouts=false&want_notes=false'.format(incident_id))
 
     for t in inc_tasks:
-        if t['name'].lower() == task_name.lower():
+        if t.get('name', "").lower() == task_name.lower():
             return t['id']
 
     return None
