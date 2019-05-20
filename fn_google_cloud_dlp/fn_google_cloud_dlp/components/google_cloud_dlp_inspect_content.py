@@ -73,7 +73,6 @@ class FunctionComponent(ResilientComponent):
                 }
             )
             log.info("Complete")
-            log.debug("Results %s ", results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
