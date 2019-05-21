@@ -28,9 +28,7 @@ def write_temp_file(data, name=None):
     path = None
 
     if name:
-        path = os.path.abspath(
-            "{0}/{1}".format(tempfile.gettempdir(), name)
-        )
+        path = os.path.join(tempfile.gettempdir(), name)
     else:
         tf = tempfile.mkstemp()
         path = tf[1]

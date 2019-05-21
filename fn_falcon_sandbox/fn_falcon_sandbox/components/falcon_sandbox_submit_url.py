@@ -6,7 +6,6 @@ import logging
 import json
 import time
 from resilient_lib import ResultPayload, RequestsCommon
-import fn_falcon_sandbox.util.selftest as selftest
 from resilient_circuits import (
     ResilientComponent,
     function,
@@ -39,7 +38,6 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_falcon_sandbox", {})
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
