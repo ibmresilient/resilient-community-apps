@@ -22,7 +22,7 @@ STATIC_INFO_RESPONSE = {
     },
     1009: {
         "dataset": "DROP",
-        "explanation": "IP part of a netblock that is ‘hijacked’ or leased by professional spam or cyber-crime operations and therefore used for dissemination of malware, trojan downloaders, botnet controllers, etc.",
+        "explanation": "IP part of a netblock that is 'hijacked' or leased by professional spam or cyber-crime operations and therefore used for dissemination of malware, trojan downloaders, botnet controllers, etc.",
         "URL": "https://www.spamhaus.org/drop/"
     },
     1010: {
@@ -32,7 +32,7 @@ STATIC_INFO_RESPONSE = {
     },
     1011: {
         "dataset": "PBL",
-        "explanation": "IP address ranges which -according to Spamhaus’s systems assessment- are not expected be delivering unauthenticated SMTP email to any Internet mail server, such as dynamic and residential IP space.",
+        "explanation": "IP address ranges which -according to Spamhaus's systems assessment- are not expected be delivering unauthenticated SMTP email to any Internet mail server, such as dynamic and residential IP space.",
         "URL": "https://www.spamhaus.org/pbl/"
     },
     1020: {
