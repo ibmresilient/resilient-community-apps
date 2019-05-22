@@ -8,7 +8,7 @@ import base64
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -61,6 +61,8 @@ class FunctionComponent(ResilientComponent):
 
             log = logging.getLogger(__name__)
             log.info("sep_file_id: %s", sep_file_id)
+
+            validate_fields(["sep_file_id"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Get File Content as Base64 ...")
 

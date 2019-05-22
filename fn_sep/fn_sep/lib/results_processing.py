@@ -106,7 +106,7 @@ def process_results(rtn, status_type):
     """
 
     # If all endpoints have completed scan then process results
-    rtn["total_match_count"] = 0
+    rtn["total_match_count"] = rtn["total_remediation_count"] = 0
 
     if get_overall_progress(rtn) == "Processed":
 

@@ -10,7 +10,7 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -59,6 +59,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
             log.info("sep_group_id: %s", sep_group_id)
 
+            validate_fields(["sep_fingerprintlist_id", "sep_group_id"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Assign Fingerprint List to Group for Lock-down action ...")
 

@@ -10,7 +10,7 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -77,11 +77,15 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_domainid: %s", sep_domainid)
             log.info("sep_hash_value: %s", sep_hash_value)
 
+            validate_fields(["sep_fingerprintlist_name", "sep_description", "sep_domainid",
+                             "sep_hash_value"], kwargs)
+
             yield StatusMessage("Running Symantec SEP Add Fingerprint List action ...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.add_fingerprint_list(**params)
+
             if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
                 # If this error was trapped user probably tried to re-add a hash to a fingerprint list.
                 yield StatusMessage(

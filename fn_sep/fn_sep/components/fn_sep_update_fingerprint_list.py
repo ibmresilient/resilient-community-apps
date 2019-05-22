@@ -10,7 +10,7 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -80,6 +80,9 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_description: %s", sep_description)
             log.info("sep_domainid: %s", sep_domainid)
             log.info("sep_hash_value: %s", sep_hash_value)
+
+            validate_fields(["sep_fingerprintlist_id", "sep_fingerprintlist_name", "sep_description",
+                             "sep_domainid", "sep_hash_value"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Update Fingerprint List action ...")
 

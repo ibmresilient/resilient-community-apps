@@ -10,7 +10,7 @@ import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.helpers import transform_kwargs
 from datetime import datetime
 
@@ -78,6 +78,8 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_domainid: %s", sep_domainid)
             log.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
             log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+
+            validate_fields(["sep_domainid"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Get File Fingerprint List query...")
 
