@@ -215,7 +215,7 @@ class Sepclient(object):
                       pagesize=None, sort=None):
         """Get a list of groups. The paramaters are all optional the default is to return results for all groups.
 
-        :param domain: The file path of the suspicious file.
+        :param domain: The SEP domain name.
         :param fullpathname: The full path name of the group.
         :param mode: The presentation mode for the results, as a list (default) or as a tree.
         :param order: Specifies whether the results are in ascending order (ASC) or descending order (DESC).
@@ -233,13 +233,10 @@ class Sepclient(object):
 
         return r
 
-
     def get_policies_summary(self, policy_type=None, domainid=None):
         """ Get list of policies.
-
         Supported types are: av, fw, lu, hi, hid adc, ips, or exceptions.
-
-        :param policy_type: If present gets a summary for all the policies of this type..
+        :param policy_type: If present gets a summary for all the policies of this type.
         :param domainid: If present, get policies from this domain. Otherwise, get policies from the logged-on domain.
         :return Result in json format.
         """
@@ -462,16 +459,16 @@ class Sepclient(object):
 
         return r
 
-    def move_endpoint(self, group_id, hardwarekey):
+    def move_endpoint(self, groupid, hardwarekey):
         """ Move an endpoint computer to a group.
 
-        :param group_id: Id of group to move.
+        :param groupid: Id of group to move.
         :param hardwarekey: The computer’s hardware key.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
 
-        payload = json.dumps([{"group": {"id": group_id}, "hardwareKey": hardwarekey}])
+        payload = json.dumps([{"group": {"id": groupid}, "hardwareKey": hardwarekey}])
 
         r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, data=payload)
 

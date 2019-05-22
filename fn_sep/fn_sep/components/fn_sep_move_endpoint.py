@@ -57,14 +57,14 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
-            sep_group_id = kwargs.get("sep_group_id")  # text
+            sep_group_id = kwargs.get("sep_groupid")  # text
             sep_hardwarekey = kwargs.get("sep_hardwarekey")  # text
 
             log = logging.getLogger(__name__)
-            log.info("sep_group_id: %s", sep_group_id)
+            log.info("sep_groupid: %s", sep_groupid)
             log.info("sep_hardwarekey: %s", sep_hardwarekey)
 
-            validate_fields(["sep_group_id", "sep_hardwarekey"], kwargs)
+            validate_fields(["sep_groupid", "sep_hardwarekey"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Move Endpoint action...")
 
