@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-""" Resilient functions component to run a Symantec SEPM query - get computers """
+""" Resilient functions component to run a Symantec SEPM query - get fingerprint list. """
 
 # Set up:
 # Destination: a Queue named "fn_sep".

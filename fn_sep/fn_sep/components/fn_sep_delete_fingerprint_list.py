@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-""" Resilient functions component to run a Symantec SEPM query - get fingerprint list """
+""" Resilient functions component to run a Symantec SEPM action - delete fingerprint list. """
 
 # Set up:
 # Destination: a Queue named "fn_sep".
-# Manual Action: Execute a REST query against a SYMANTEC SEPM server.
+# Manual Action: Execute a REST action against a SYMANTEC SEPM server.
 import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError

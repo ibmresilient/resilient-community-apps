@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+""" Resilient functions component to run a Symantec SEPM query - get file content as base64. """
+
+# Set up:
+# Destination: a Queue named "fn_sep".
+# Manual Action: Execute a REST query against a SYMANTEC SEPM server.
 import json
 import logging
 import base64

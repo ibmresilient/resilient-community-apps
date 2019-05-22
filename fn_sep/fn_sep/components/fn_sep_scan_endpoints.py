@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+""" Resilient functions component to run a Symantec SEPM action - initiate eoc scan. """
+
+# Set up:
+# Destination: a Queue named "fn_sep".
+# Manual Action: Execute a REST action against a SYMANTEC SEPM server.import json
 import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
