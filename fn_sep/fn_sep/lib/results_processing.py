@@ -35,11 +35,14 @@ def parse_scan_results(xml):
     # Create empty result dict.
     scan_result = {
         "MATCH": False,
+        "artifact_value": '',
+        "artifact_type": '',
         "FULL_MATCHES": [],
         "HASH_MATCHES": [],
         "match_count": 0,
         "remediation_count": 0,
     }
+    file_seps = ['\\', '/']
 
     try:
         results = ET.fromstring(xml.encode('utf8', 'ignore'))
@@ -51,11 +54,24 @@ def parse_scan_results(xml):
             elif item.attrib["result"] in ["FULL_MATCH", "HASH_MATCH"]:
                 scan_result["MATCH"] = True
                 if item.attrib["result"] == "FULL_MATCH" and not item.attrib in scan_result["FULL_MATCHES"]:
+                    # File name or path match.
+                    for file in results.findall('Activity/OS/Files/File'):
+                        if not scan_result["artifact_value"]:
+                            scan_result["artifact_value"] = file.attrib["name"]
+                            if any(fs in file for fs in file_seps):
+                                scan_result["artifact_type"] = "File Path"
+                            else:
+                                scan_result["artifact_type"] = "File Name"
                     scan_result["FULL_MATCHES"].append(item.attrib)
                     scan_result["match_count"] += 1
                     if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
                         scan_result["remediation_count"] += 1
                 elif item.attrib["result"] == "HASH_MATCH" and not item.attrib in scan_result["HASH_MATCHES"]:
+                    # Hash match.
+                    for hash in results.findall('Activity/OS/Files/File/Hash'):
+                        if not scan_result["artifact_value"]:
+                            scan_result["artifact_type"] = "{} hash".format(hash.attrib["name"])
+                            scan_result["artifact_value"] = hash.attrib["value"]
                     scan_result["HASH_MATCHES"].append(item.attrib)
                     scan_result["match_count"] += 1
                     if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":

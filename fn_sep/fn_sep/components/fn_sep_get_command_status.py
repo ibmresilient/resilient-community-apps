@@ -8,15 +8,17 @@
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
 import json
 import logging
+import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs
+from fn_sep.lib.helpers import transform_kwargs, create_attachment, generate_result_cvs
 from fn_sep.lib.results_processing import process_results
 
 CONFIG_DATA_SECTION = "fn_sep"
 LOG = logging.getLogger(__name__)
+RESULTS_LIMIT_DEF = 200
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_command_status' of
@@ -86,6 +88,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
+            sep_incident_id = kwargs.get("sep_incident_id")  # number
             sep_commandid = kwargs.get("sep_commandid")  # text
             sep_order = kwargs.get("sep_order")  # text
             sep_pageindex = kwargs.get("sep_pageindex")  # number
@@ -94,6 +97,8 @@ class FunctionComponent(ResilientComponent):
             sep_status_type = kwargs.get("sep_status_type")  # text
 
             log = logging.getLogger(__name__)
+
+            log.info("sep_incident_id: %s", sep_incident_id)
             log.info("sep_commandid: %s", sep_commandid)
             log.info("sep_order: %s", sep_order)
             log.info("sep_pageindex: %s", sep_pageindex)
@@ -109,9 +114,23 @@ class FunctionComponent(ResilientComponent):
 
             rtn = process_results(sep.get_command_status(**params), sep_status_type)
 
-            results = rp.done(True, rtn)
+            results = None
+            if sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
+                    self.options.get("results_limit", RESULTS_LIMIT_DEF)):
+                yield StatusMessage(
+                    "Adding EOC scan data for commandid {} as an incident attachment".format(sep_commandid))
+                results = rp.done(True, {})
+                # Get csv attachment file name and content.
+                (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
 
-            yield StatusMessage("Returning Returning 'Symantec SEP Get Command Status' results")
+                # Create an attachment
+                att_report = create_attachment(self.rest_client(), file_name, file_content, params)
+                results = rp.done(True, {"scan_eoc_hits_over_limit": True, "att_name":
+                    att_report["name"], "scan_count": rtn["total_match_count"]})
+            else:
+                yield StatusMessage("Returning 'Symantec SEP Get Command Status' results for commandid {}"
+                                    .format(sep_commandid))
+                results = rp.done(True, rtn)
 
             log.debug(json.dumps(results["content"]))
 

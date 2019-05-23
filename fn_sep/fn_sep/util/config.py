@@ -18,7 +18,7 @@ port=8446
 username=admin
 password=password
 domain=''
-# Query results global limit override for the integration global default which is set to 1000.
-#query_limit=1000
+# Results limit value.
+results_limit=200
 """
     return config_data
