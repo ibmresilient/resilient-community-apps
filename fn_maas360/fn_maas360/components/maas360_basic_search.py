@@ -54,8 +54,8 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Reload options in maas360_utils and reconnect to get a new token
-        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
+        # Reload options in maas360_utils singleton and reconnect to get a new token
+        maas360_utils = MaaS360Utils.get_the_maas360_utils()
         maas360_utils.reload_options(opts)
         maas360_utils.reconnect()
 

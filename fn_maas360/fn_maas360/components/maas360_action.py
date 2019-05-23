@@ -33,8 +33,8 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Reload options in maas360_utils and reconnect to get a new token
-        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
+        # Reload options in maas360_utils singleton and reconnect to get a new token
+        maas360_utils = MaaS360Utils.get_the_maas360_utils()
         maas360_utils.reload_options(opts)
         maas360_utils.reconnect()
 
@@ -64,7 +64,6 @@ class FunctionComponent(ResilientComponent):
 
             # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-            print("TOKEN: {}".format(maas360_utils.auth_token))
 
             if action_type == "Get Software Installed":
                 yield StatusMessage("Starting the Get Software Installed function")

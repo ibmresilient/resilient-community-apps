@@ -28,14 +28,14 @@ class MaaS360Utils(object):
     lock = threading.Lock()
 
     @staticmethod
-    def get_the_maas360_utils(opts, config_data_selection):
+    def get_the_maas360_utils(opts=None, config_data_selection=None):
         """
-        This method creates a singleton, and it shall be called only during init.
-        :param opts:
-        :param config_data_selection:
+        This method creates a singleton.
+        :param opts: opts from configuration file needed to generate the singleton object
+        :param config_data_selection: config_data_selection needed to generate the singleton object
         :return:
         """
-        if not MaaS360Utils._the_maas360_utils:
+        if MaaS360Utils._the_maas360_utils is None:
             with MaaS360Utils.lock:
                 # code here will be single threaded
                 MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
@@ -43,9 +43,10 @@ class MaaS360Utils(object):
 
     def __init__(self, opts, config_data_selection):
         """
-        Constructor for MaaS360Utils
+        Constructor for MaaS360Utils.
         Note: Object will not be created if auth token is not generated successfully
         :param opts
+        :param config_data_selection
         """
         self.config_data_selection = config_data_selection
 
@@ -66,14 +67,7 @@ class MaaS360Utils(object):
         self.reload_options(opts)
 
         # Generating auth token
-        self.reconnect()
-
-    def get_auth_token(self):
-        """
-        Return instance variable auth_token.
-        :return: authToken
-        """
-        return self.auth_token
+        self.generate_auth_token()
 
     def generate_auth_token(self):
         """
@@ -105,10 +99,26 @@ class MaaS360Utils(object):
 
         auth_response = results.get("authResponse")
         if auth_response and auth_response.get("errorCode") == 0:  # 0 no error
-            return auth_response.get("authToken")
+            self.auth_token = auth_response.get("authToken")
         else:
             raise IntegrationError("Unable to create MaaS360APIsHelper instance, "
                                    "subsequent api calls will be cancelled: {}".format(json.dumps(auth_response)))
+
+    def get_auth_token(self):
+        """
+        Return instance variable auth_token.
+        :return: authToken
+        """
+        return self.auth_token
+
+    def reconnect(self):
+        """
+        This method reauthenticates with MaaS360 - creates new self.auth_token.
+        :return:
+        """
+        with MaaS360Utils.lock:
+            # code here will be single threaded
+            self.generate_auth_token()
 
     def get_auth_headers(self, content_type_header):
         """
@@ -133,7 +143,6 @@ class MaaS360Utils(object):
         :param opts:
         :return:
         """
-
         options = opts.get(self.config_data_selection, {})
 
         # Validate fields
@@ -154,25 +163,22 @@ class MaaS360Utils(object):
 
         self.rc = RequestsCommon(opts, options)
 
-    def reconnect(self):
-        """
-        Generate auth token and set it in the MaaS360Utils object, to be used in further api calls
-        :return:
-        """
-        self.auth_token = self.generate_auth_token()
-
-    def execute_with_retry(self, verb, url, **kwargs):
+    def execute_with_retry(self, verb, url, content_type_header, **kwargs):
         """
         If the response message comes back as '401 Client Error',
         reconnect and try to execute the request the second time.
         :param verb:
         :param url:
+        :param content_type_header:
         :param kwargs:
         :return:
         """
         for i in range(2):
             try:
-                return self.rc.execute_call_v2(verb, url, **kwargs)
+                url_endpoint = self.get_url_endpoint(url)
+                auth_headers = self.get_auth_headers(content_type_header)
+
+                return self.rc.execute_call_v2(verb, url_endpoint, headers=auth_headers, **kwargs)
             except IntegrationError as err:
                 # catch expired token/unauthorized error
                 if i == 0 and "401 Client Error" in err.value:
@@ -189,12 +195,8 @@ class MaaS360Utils(object):
         :param query_string:
         :return: device or list of devices or None if there aren't any found
         """
-
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_JSON)
-
         try:
-            response = self.execute_with_retry("get", url_endpoint, params=query_string, headers=auth_headers)
+            response = self.execute_with_retry("get", url, CON_TYPE_JSON, params=query_string)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
@@ -210,12 +212,10 @@ class MaaS360Utils(object):
         :param device_id
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
@@ -238,12 +238,10 @@ class MaaS360Utils(object):
         :param device_id
         :return: device_softwares
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_JSON)
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("get", url_endpoint, params=request_body, headers=auth_headers)
+            response = self.execute_with_retry("get", url, CON_TYPE_JSON, params=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Get Software Installed: {}".format(err))
@@ -258,12 +256,10 @@ class MaaS360Utils(object):
         :param device_id
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
@@ -289,15 +285,13 @@ class MaaS360Utils(object):
         :param notify_others:
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"deviceId": u"{}".format(device_id),
                         "notifyMe": u"{}".format(notify_me),
                         "notifyUser": u"{}".format(notify_user),
                         "notifyOthers": u"{}".format(notify_others)}
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
@@ -320,12 +314,10 @@ class MaaS360Utils(object):
         :param device_id:
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
@@ -352,8 +344,6 @@ class MaaS360Utils(object):
         :param device_group_id
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"appId": u"{}".format(installed_app_id),
                         "appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
                         "targetDevices": u"{}".format(TARGET_DEVICES_DICT.get(target_devices))}
@@ -363,7 +353,7 @@ class MaaS360Utils(object):
         self.add_to_dict("deviceGroupId", device_group_id, request_body)
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             # The Response 400 doesn't return with a meaningful message.
@@ -385,13 +375,11 @@ class MaaS360Utils(object):
         :param installed_app_id
         :return: action_response
         """
-        url_endpoint = self.get_url_endpoint(url)
-        auth_headers = self.get_auth_headers(CON_TYPE_FORM_ENCODED)
         request_body = {"appType": u"{}".format(APP_TYPE_DICT.get(app_type)),
                         "appId": u"{}".format(installed_app_id)}
 
         try:
-            response = self.execute_with_retry("post", url_endpoint, data=request_body, headers=auth_headers)
+            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Delete App: {}".format(err))

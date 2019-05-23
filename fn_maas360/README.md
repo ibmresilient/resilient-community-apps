@@ -95,6 +95,7 @@ Function searches for devices by Device Name, Username, Phone Number, Platform, 
 | ` maas360_partial_device_name` | `String` | No | `Jane's iPhone` | Partial (Starts with) or full Device Name string that needs to be searched for |
 | `maas360_partial_username` | `String` | No | `jane@example.com` | Partial (Starts with) or full Username string that needs to be searched for |
 | ` maas360_partial_phone_no ` | `String` | No | `+16175000000` | Partial (Starts with) or full Phone Number that needs to be searched for |
+| ` maas360_imei_meid` | `String` | No | `460272187173695` | Full IMEI or MEID of the device |
 | ` maas360_platform_name` | `Select` | No | `Windows,  Mac , iOS,  BlackBerry,  Android , Windows Mobile,  Symbian,  Windows Phone 7,  Others` | Platform name |
 | ` maas360_device_id` | `String` | No | `ApplD8DTH6RCIH86` | Full MaaS360 Device ID string that needs to be searched for |
 | ` maas360_email` | `String` | No | `jane@example.com` | Full Email address string that needs to be searched for |
