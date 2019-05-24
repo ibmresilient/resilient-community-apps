@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
-            sep_group_id = kwargs.get("sep_groupid")  # text
+            sep_groupid = kwargs.get("sep_groupid")  # text
             sep_hardwarekey = kwargs.get("sep_hardwarekey")  # text
 
             log = logging.getLogger(__name__)

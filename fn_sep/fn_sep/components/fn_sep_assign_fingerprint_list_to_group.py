@@ -53,13 +53,13 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
-            sep_group_id = kwargs.get("sep_group_id")  # text
+            sep_groupid = kwargs.get("sep_groupid")  # text
 
             log = logging.getLogger(__name__)
             log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
-            log.info("sep_group_id: %s", sep_group_id)
+            log.info("sep_groupid: %s", sep_groupid)
 
-            validate_fields(["sep_fingerprintlist_id", "sep_group_id"], kwargs)
+            validate_fields(["sep_fingerprintlist_id", "sep_groupid"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Assign Fingerprint List to Group for Lock-down action ...")
 
