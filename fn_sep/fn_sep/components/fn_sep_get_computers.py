@@ -13,7 +13,7 @@ import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload
-from fn_sep.lib.helpers import transform_kwargs
+from fn_sep.lib.helpers import transform_kwargs, get_endpoints_status, get_endpoints_status_details
 from datetime import datetime
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -28,6 +28,8 @@ class FunctionComponent(ResilientComponent):
 
     An example of a set of query parameter might look like the following:
             sep_computername = None
+            sep_status = None
+            sep_status_details = None
             sep_domain = None
             sep_lastupdate = None
             sep_order = None
@@ -81,7 +83,7 @@ class FunctionComponent(ResilientComponent):
                       "operatingSystem": "Windows Server 2012 ",
                       ...
                       "ipAddresses": [
-                        "9.70.194.93",
+                        "9.70.194.9ß3",
                         "FE80:0000:0000:0000:FC67:074E:CD22:0188"
                       ],
                       ...
@@ -137,6 +139,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             sep_computername = kwargs.get("sep_computername")  # text
+            sep_status = kwargs.get("sep_status")  # boolean
+            sep_status_details = kwargs.get("sep_status_details")  # boolean
             sep_domain = kwargs.get("sep_domain")  # text
             sep_lastupdate = kwargs.get("sep_lastupdate")  # text
             sep_order = kwargs.get("sep_order")  # text
@@ -146,7 +150,10 @@ class FunctionComponent(ResilientComponent):
             sep_sort = kwargs.get("sep_sort")  # text
 
             log = logging.getLogger(__name__)
+
             log.info("sep_computername: %s", sep_computername)
+            log.info("sep_status: %s", sep_status)
+            log.info("sep_status_details: %s", sep_status_details)
             log.info("sep_domain: %s", sep_domain)
             log.info("sep_lastupdate: %s", sep_lastupdate)
             log.info("sep_order: %s", sep_order)
@@ -161,6 +168,7 @@ class FunctionComponent(ResilientComponent):
 
             rtn = sep.get_computers(**params)
             now = time.time()
+
             if "content" in rtn and rtn["content"]:
                 # Add a human readable date stamp dict entry for timestamps for each computer.
                 for i in range(len(rtn["content"])):
@@ -175,8 +183,10 @@ class FunctionComponent(ResilientComponent):
                         except ValueError:
                             yield FunctionError('A timestamp value was incorrectly specified.')
 
-            # Add timestamp in secs to facilitate live update calculation in post-processing
-
+            if sep_status is not None:
+                rtn = get_endpoints_status(rtn)
+            elif sep_status_details is not None:
+                rtn = get_endpoints_status_details(rtn)
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Get Computers' results")
 

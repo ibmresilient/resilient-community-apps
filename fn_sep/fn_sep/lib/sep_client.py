@@ -178,7 +178,7 @@ class Sepclient(object):
         return r
 
     def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None):
+                      pagesize=None, sort=None, status=None, status_details=None):
         """Get a list of computers. The paramaters are all optional the default is to return results for all computers/
         endpoints.
 
@@ -190,6 +190,8 @@ class Sepclient(object):
         :param pageindex: The index page that is used for the returned results. The default page index is 1.
         :param pagesize: The number of results to include on each page. The default is 20.
         :param sort: The column by which the results are sorted.
+        :param status: Overall endpoints status. Used by the integration, Not in REST call signature.
+        :param status_details: Endpoints status details. Used by the integration, Not in REST call signature.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
@@ -335,7 +337,7 @@ class Sepclient(object):
 
         return r
 
-    def assign_fingerprint_list_to_group(self, group_id, fingerprintlist_id=None):
+    def assign_fingerprint_list_to_group(self, groupid, fingerprintlist_id=None):
         """ Assign a fingerprint list to a group for lockdown purposes.
 
         :param group_id: The group id to assign fingerprint iud.
@@ -343,9 +345,9 @@ class Sepclient(object):
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["assign_fingerprint_list_to_group"])\
-            .format(group_id, fingerprintlist_id)
+            .format(groupid, fingerprintlist_id)
 
-        payload = json.dumps({"group_id": group_id, "fingerprint_id": fingerprintlist_id})
+        payload = json.dumps({"group_id": groupid, "fingerprint_id": fingerprintlist_id})
 
         r = self._req.execute_call('put', url, verify_flag=False, headers=self._headers, data=payload)
 
