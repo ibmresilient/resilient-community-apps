@@ -1,19 +1,12 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-import base64
 import logging
-from itertools import cycle
-
 from requests import request, HTTPError
 import re
 from zipfile import ZipFile
 from io import BytesIO
 import xml.etree.ElementTree as ET
-try:
-    from urllib.parse import urljoin
-except:
-    from urlparse import urljoin
 from sys import version_info
 
 LOG = logging.getLogger(__name__)
