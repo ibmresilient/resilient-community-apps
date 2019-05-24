@@ -19,7 +19,7 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_res_to_icd", {})
+        self.options = opts.get("fn_res_to_icd", {})    
 
     @function("fn_res_to_icd")
     def _fn_res_to_icd_function(self, event, *args, **kwargs):
@@ -27,9 +27,10 @@ class FunctionComponent(ResilientComponent):
         try:
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            incident_id=kwargs.get("incident_id")
             res_client = self.rest_client()
          
-            content=res_client.get('/incidents/2101/')
+            content=res_client.get('/incidents/'+str(incident_id)+'/')
             
             pprint.pprint(content)
             qradar_sev = content['properties']['qradar_severity']  # number
