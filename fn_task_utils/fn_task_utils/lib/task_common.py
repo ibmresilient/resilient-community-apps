@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
 # Copyright © IBM Corporation 2010, 2019
+# pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 import logging
 

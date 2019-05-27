@@ -30,8 +30,8 @@ No app.config values are used for this integration.
 | `incident_id` | `Number` | Yes | `2105`  | ------- |
 | `task_id` | `Number` | No | `221205` | ------- |
 | `task_name` | `String` | No | `New Task` | ------- |
-| `task_utils_note_type` | `Select` | No | `None` | ------- |
-| `task_utils_note_body` | `Text` | No | `None` | ------- |
+| `task_utils_note_type` | `Select` | No | `None` | `What type of note we are adding; html or text` |
+| `task_utils_note_body` | `Text` | No | `None` | `The note content in a format specified by task_utils_note_type` |
 
 ### Function Output:
 
@@ -401,7 +401,7 @@ results = {
 | ------------- | :--: | :-------:| ------- | ------- |
 | `incident_id` | `Number` | Yes | `2105`  | ------- |
 | `task_id` | `Number` | No | `221205` | ------- |
-| `task_name` | `String` | No | `Task Name` | ------- |
+| `task_name` | `String` | No | `Task Name` | `A Task name which can be supplied instead of task_id to search an incident for a task with that name` |
 
 ### Function Output:
 
@@ -440,7 +440,7 @@ results = {
 | ------------- | :--: | :-------:| ------- | ------- |
 | `incident_id` | `Number` | Yes | `2105`  | ------- |
 | `task_name` | `String` | No | `Task Name` | ------- |
-| `task_utils_payload` | `Number` | No | `{"required": false}` | ------- |
+| `task_utils_payload` | `String` | No | `{"required": false}` | `A Dict which contains details about the new task. Refer to the TaskDTO object schema to understand what inputs can be supplied` |
 
 ### Function Output:
 
@@ -487,8 +487,7 @@ results = {
 | `incident_id` | `Number` | Yes | `2105`  | ------- |
 | `task_id` | `Number` | No | `221205` | ------- |
 | `task_name` | `String` | No | `New Task` | ------- |
-| `task_utils_payload` | `Number` | No | `{"required": false}` | ------- |
-
+| `task_utils_payload` | `String` | No | `{"required": false}` | `A Dict which contains details about the new task. Refer to the TaskDTO object schema to understand what inputs can be supplied` |
 
 ### Function Output:
 
@@ -666,8 +665,7 @@ results = {
 ## Rules:
 | Rule Name | Object Type | Workflow Triggered | Conditions |
 | --------- | :---------: | ------------------ | ---------- |
-| Task Utils: Add Note to Task | `Incident` | `task_utils_add_note_to_task` | None |
-| Task Utils: Close Task (Activity Field) | `Incident` | `task_utils_close_task_activity_field` | None |
-| Task Utils: Create Custom Task | `Incident` | `task_utils_create_custom_task` | None |
-| Task Utils: Create Custom Task (Pre-Process JSON)| `Incident` | `task_utils_create_custom_task_preprocess` | None |
-| Task Utils: Make this Task Optional | `Task` | `task_utils_mark_task_optional` | None |
+| Example: Task Utils - Add Note to Task | `Incident` | `task_utils_add_note_to_task` | None |
+| Example: Task Utils - Close Task | `Incident` | `task_utils_close_task` | None |
+| Example: Task Utils - Create Custom Task | `Incident` | `task_utils_create_custom_task` | None |
+| Example: Task Utils - Make this Task Optional | `Task` | `task_utils_mark_task_optional` | None |

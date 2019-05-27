@@ -50,11 +50,11 @@ class TestTaskUtilsUpdateTask:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload, expected_results", [
-        (2096, 123, {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (2097, 123, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload", [
+        (2096, 123, {"type": "text", "content": '{\n"required": false\n}'}),
+        (2097, 123, {"type": "text", "content": '{\n"required": true\n}'})
     ])
-    def test_success(self, circuits_app, incident_id, task_id, task_utils_payload, expected_results):
+    def test_success(self, circuits_app, incident_id, task_id, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -64,11 +64,11 @@ class TestTaskUtilsUpdateTask:
         results = call_task_utils_update_task_function(circuits_app, function_params)
         assert(task_id == results["content"]["task_id"])
 
-    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload, expected_results", [
-        (2096, 123, {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (2097, 444, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload", [
+        (2096, 123, {"type": "text", "content": '{\n"required": false\n}'}),
+        (2097, 444, {"type": "text", "content": '{\n"required": true\n}'})
     ])
-    def test_modifying_required(self, circuits_app, incident_id, task_id, task_utils_payload, expected_results):
+    def test_modifying_required(self, circuits_app, incident_id, task_id, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -81,10 +81,10 @@ class TestTaskUtilsUpdateTask:
         # Assert the new value of required matches our provided one
         assert str(results["content"]["task"]["required"]).lower() in task_utils_payload["content"]
 
-    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload, expected_results", [
-        (2096, 9999, {"type": "text", "content": '{\n"required": true\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_id, task_utils_payload", [
+        (2096, 9999, {"type": "text", "content": '{\n"required": true\n}'})
     ])
-    def test_failure_not_found(self, circuits_app, incident_id, task_id, task_utils_payload, expected_results):
+    def test_failure_not_found(self, circuits_app, incident_id, task_id, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,

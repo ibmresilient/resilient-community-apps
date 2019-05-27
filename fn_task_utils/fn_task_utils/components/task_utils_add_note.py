@@ -8,6 +8,7 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from resilient_lib import ResultPayload
 from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'task_utils_add_note"""
 
@@ -53,7 +54,7 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
 
             if task_name:
-                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format( incident_id, task_name))
+                yield StatusMessage("task_name was provided; Searching incident {} for first matching task with name '{}'".format(incident_id, task_name))
 
                 task_id = find_task_by_name(res_client, incident_id, task_name)
 
@@ -62,8 +63,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Posting note to API")
             try:
-                task = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
-                task_notes = res_client.get('/tasks/{}/comments'.format(task_id))
+                task_response = res_client.post('/tasks/{}/comments'.format(task_id), task_note_json)
             except Exception as add_note_exception:
                 err_msg = "Encountered exception while trying to add note to task. Error: %s", add_note_exception
                 raise ValueError(err_msg)
@@ -73,8 +73,7 @@ class FunctionComponent(ResilientComponent):
             results = payload.done(
                 success=True,
                 content={
-                    "task": task,
-                    "task_note": task_notes.pop()  # Remove newly created note from end of the list
+                    "task_note": task_response.pop()
                 }
             )
 

@@ -9,7 +9,6 @@ from resilient_lib import ResultPayload
 from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
 
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'task_utils_close_task"""
 
@@ -75,7 +74,6 @@ class FunctionComponent(ResilientComponent):
                 res_client.get_put(task_url, lambda task: close_task_status(task))
             except Exception as close_exception:
                 err_msg = "Encountered exception while trying to close task. Error: {}", close_exception
-                log.error(err_msg)
                 raise ValueError(err_msg)
             yield StatusMessage("Task {} has been closed".format(task_id))
 

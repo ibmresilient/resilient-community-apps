@@ -59,7 +59,6 @@ class FunctionComponent(ResilientComponent):
                 task_response = resilient_client.post('/incidents/{}/tasks'.format(incident_id), task_utils_payload)
             except Exception as add_note_exception:
                 err_msg = "Encountered exception while trying to create task. Error: {}", add_note_exception
-                log.error(err_msg)
                 raise ValueError(err_msg)
 
             log.info("Response from Resilient %s", task_response)

@@ -65,11 +65,11 @@ class TestTaskUtilsCloseTask:
         assert(expected_results["task_id"] == results["content"]["task_id"])
 
     @pytest.mark.mock_test
-    @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 0, "Determine if illegal activity is involved", {"task_id": 2251301}),
-        (2096, 0, "Ensure updated antivirus signatures are deployed", {"task_id": 2251301})
+    @pytest.mark.parametrize("incident_id, task_id, task_name", [
+        (2096, 0, "Determine if illegal activity is involved"),
+        (2096, 0, "Ensure updated antivirus signatures are deployed")
     ])
-    def test_close_task_by_name_success(self, circuits_app, incident_id, task_id, task_name, expected_results):
+    def test_close_task_by_name_success(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -80,10 +80,10 @@ class TestTaskUtilsCloseTask:
         assert (function_params["task_name"] == results["content"]["task_name"])
 
     @pytest.mark.mock_test
-    @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 0, "text", {"task_id": 2251301})
+    @pytest.mark.parametrize("incident_id, task_id, task_name", [
+        (2096, 0, "text")
     ])
-    def test_close_task_failure(self, circuits_app, incident_id, task_id, task_name, expected_results):
+    def test_close_task_failure(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -113,11 +113,11 @@ class TestTaskUtilsCloseTask:
         assert (results["content"]["status"] == 'C')
 
     @pytest.mark.mock_test
-    @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 0, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"task_id": 2251218}),
-        (2096, 0, " Й К Л М Н О П Р С Т ", {"task_id": 2251216})
+    @pytest.mark.parametrize("incident_id, task_id, task_name", [
+        (2096, 0, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ"),
+        (2096, 0, " Й К Л М Н О П Р С Т ")
     ])
-    def test_close_task_by_name_unicode(self, circuits_app, incident_id, task_id, task_name, expected_results):
+    def test_close_task_by_name_unicode(self, circuits_app, incident_id, task_id, task_name):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -130,7 +130,7 @@ class TestTaskUtilsCloseTask:
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
         (2096, 2251218, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"task_id": 2251218}),
-        (2096, 2251218, " Й К Л М Н О П Р С Т ", {"task_id": 2251216})
+        (2096, 2251216, " Й К Л М Н О П Р С Т ", {"task_id": 2251216})
     ])
     def test_close_task_by_id_unicode(self, circuits_app, incident_id, task_id, task_name, expected_results):
         """ Test calling with sample values for the parameters """
@@ -140,4 +140,4 @@ class TestTaskUtilsCloseTask:
             "task_name": task_name
         }
         results = call_task_utils_close_task_function(circuits_app, function_params)
-        assert (function_params["task_name"] == results["content"]["task_name"])
+        assert (expected_results["task_id"] == results["content"]["task_id"])

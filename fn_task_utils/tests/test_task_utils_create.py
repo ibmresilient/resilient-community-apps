@@ -53,12 +53,11 @@ class TestTskUtilsCreate:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-
-    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
-        (123, "New Task Name", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (123, "My New Task", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload", [
+        (123, "New Task Name", {"type": "text", "content": '{\n"required": false\n}'}),
+        (123, "My New Task", {"type": "text", "content": '{\n"required": false\n}'})
     ])
-    def test_success(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+    def test_success(self, circuits_app, incident_id, task_name, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -68,11 +67,11 @@ class TestTskUtilsCreate:
         results = call_task_utils_create_function(circuits_app, function_params)
         assert(results["content"]["task"])
 
-    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
-        (123, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (123, " Й К Л М Н О П Р С Т ", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload", [
+        (123, "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ", {"type": "text", "content": '{\n"required": false\n}'}),
+        (123, " Й К Л М Н О П Р С Т ", {"type": "text", "content": '{\n"required": false\n}'})
     ])
-    def test_success_unicode(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+    def test_success_unicode(self, circuits_app, incident_id, task_name, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -83,10 +82,10 @@ class TestTskUtilsCreate:
         assert (results["content"]["task"])
         assert function_params["task_name"] == results["content"]["task"]["name"]
 
-    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
-        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload", [
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}),
     ])
-    def test_owner_as_email_user(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+    def test_owner_as_email_user(self, circuits_app, incident_id, task_name, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
@@ -96,11 +95,11 @@ class TestTskUtilsCreate:
         results = call_task_utils_create_function(circuits_app, function_params)
         assert (results["content"]["task"])
 
-    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload, expected_results", [
-        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"}),
-        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}, {"value": "xyz"})
+    @pytest.mark.parametrize("incident_id, task_name, task_utils_payload", [
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'}),
+        (123, "text", {"type": "text", "content": '{\n"required": false\n}'})
     ])
-    def test_owner_as_user_id(self, circuits_app, incident_id, task_name, task_utils_payload, expected_results):
+    def test_owner_as_user_id(self, circuits_app, incident_id, task_name, task_utils_payload):
         """ Test calling with sample values for the parameters """
         function_params = {
             "incident_id": incident_id,
