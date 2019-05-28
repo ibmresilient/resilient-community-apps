@@ -14,7 +14,6 @@ setup(
     long_description="Contains Functions to sync Incidents, Tasks, Notes and Attachments between IBM Resilient and ServiceNow",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'requests',
         'beautifulsoup4>=4.6.3'
     ],
     packages=find_packages(),
