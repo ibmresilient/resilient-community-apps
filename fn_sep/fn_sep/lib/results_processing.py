@@ -21,7 +21,7 @@ def filter_hits(rtn):
     """
     # Extract events based on filter(s)
     content = rtn["content"]
-    rtn["content"] = [i for i in content if i["scan_result"]["MATCH"]]
+    rtn["content"] = [i for i in content if "scan_result" in i and i["scan_result"]["MATCH"]]
     rtn["numberOfElements"] = len(rtn["content"])
     rtn["totalElements"] = len(rtn["content"])
 
@@ -123,17 +123,20 @@ def process_results(rtn, status_type):
 
     # If all endpoints have completed scan then process results
     rtn["total_match_count"] = rtn["total_remediation_count"] = 0
-
+    rtn["total_not_completed"] = 0
     if get_overall_progress(rtn) == "Processed":
 
         for i in range(len(rtn["content"])):
             rtn["content"][i]["command_status_id"] = rtn["content"][i]["stateId"]
-            if status_type.lower() in ["scan", "remediation"]:
-                rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
-                # Reset total count.
-                rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
-                rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
-
+            if rtn["content"][i]["command_status_id"] == 3:
+                if status_type.lower() in ["scan", "remediation"]:
+                    rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
+                    # Reset total count.
+                    rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
+                    rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
+            else:
+                # Increment if endpoint status ne 3
+                rtn["total_not_completed"] += 1
         if status_type.lower() == "scan":
             filter_hits(rtn)
 

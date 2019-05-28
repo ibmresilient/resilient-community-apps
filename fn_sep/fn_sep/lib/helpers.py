@@ -195,7 +195,7 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
         "disabled": 0
     }
     hb_def = 900  # Default heart-beat in seconds (15 mins)
-    data_tbl_fields = ["total", "offline", "timediffLastUpdateTime", "quarantineDesc"]
+    data_tbl_fields = ["onlineStatus", "timediffLastUpdateTime", "quarantineDesc"]
 
     if non_compliant_endpoints is None:
         non_compliant_endpoints = []
@@ -208,7 +208,7 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
             for i in range(len(eps)):
                 ep_name = eps[i]["computerName"]
                 for f in data_tbl_fields:
-                    if f == "onlineStatus" and not eps[i][f]:
+                    if f == "onlineStatus" and int(eps[i][f]) == 0:
                         results["offline"] += 1
                         if not ep_name in non_compliant_endpoints:
                             non_compliant_endpoints.append(ep_name)
