@@ -112,7 +112,7 @@ class FunctionComponent(ResilientComponent):
 
             sep = Sepclient(self.options, params)
 
-            rtn = process_results(sep.get_command_status(**params), sep_status_type)
+            rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), sep_status_type)
 
             results = None
             if sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(

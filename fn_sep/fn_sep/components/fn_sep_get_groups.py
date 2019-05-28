@@ -122,7 +122,7 @@ class FunctionComponent(ResilientComponent):
 
             sep = Sepclient(self.options, params)
 
-            rtn = sep.get_groups(**params)
+            rtn = sep.get_paginated_results(sep.get_groups, **params)
 
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Get Groups' results")
