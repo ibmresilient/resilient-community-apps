@@ -3,10 +3,16 @@
 """Function implementation"""
 
 import logging
+import collections
 import requests,json
 import pprint
 import xmltodict
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from functools import reduce  # forward compatibility for Python 3
+import operator
+
+def getFromDict(dataDict, mapList):
+    return reduce(operator.getitem, mapList, dataDict)
 
 
 class FunctionComponent(ResilientComponent):
@@ -33,7 +39,7 @@ class FunctionComponent(ResilientComponent):
 
             res_client = self.rest_client()
             incident_str='/incidents/{incident_id}/'.format(incident_id=incident_id)
-            artifact_str='/incidents/{incident_id}/artifacts/'.format(incident_id=incident_id)
+            artifact_str='/incidents/{incident_id}/artifacts'.format(incident_id=incident_id)
          
             content=res_client.get(incident_str)
             art_content=res_client.get(artifact_str)
@@ -58,7 +64,7 @@ class FunctionComponent(ResilientComponent):
 
             log.info("qradar_sev: %s", qradar_sev)
             params = dict([ ("DESCRIPTION", "My name is SEAN"),
-            ("DESCRIPTION_LONGDESCRIPTION", art_content),
+            ("DESCRIPTION_LONGDESCRIPTION", art_content[1]),
             ("REPORTEDBYID", "resilient_test@in.ibm.com"),
             ("logtype", "CLIENTNOTE"),
             ("worklog.1.description", "Test Incident"),
@@ -74,23 +80,16 @@ class FunctionComponent(ResilientComponent):
             #pprint.pprint(response.text)
             response_dict=xmltodict.parse(response.text)
             
-            #pprint.pprint({key:value for key, value in response_dict["CreateMXINCIDENTResponse"]["@xmlns"].items() if key == "TICKETID"})
-           
-            #d =response_dict
-
-            #pprint.pprint(response_dict[["CreateMXINCIDENTResponse"]["@xmlns"]["MXINCIDENTSet'"]["INCIDENT"]["@rowstamp"]["WORKLOG"]["@rowstamp"]["RECORDKEY"])
-            #l= ("TICKETID")
+            map_list= ["CreateMXINCIDENTResponse","MXINCIDENTSet","INCIDENT","TICKETID"]
+            icd_id = getFromDict(response_dict,map_list)
+            pprint.pprint(icd_id)
             
-            
-            #pprint.pprint({k:d[k] for k in l if k in d})
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
 
             results = {
-                "Incident escalated" : str(incident_id)
+                "Incident escalated" : incident_id,
+                "icd_id":icd_id
             }
-
+            
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
