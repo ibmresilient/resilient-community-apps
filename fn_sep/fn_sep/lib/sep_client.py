@@ -477,3 +477,43 @@ class Sepclient(object):
         r = self._req.execute_call('patch', url, verify_flag=False, headers=self._headers, data=payload)
 
         return r
+
+    def get_paginated_results(self, get_method, **params):
+        """Get multiple pages of paginated data to get cumulmative result.
+
+        :param: get_method: Reference to instance get method e.g. self.get_groups etc.
+        :param: params: Parameters for get method .
+
+        :return Result in json format.
+
+        """
+
+        rtn = get_method(**params)
+        if "content" in rtn and len(rtn["content"]) > 0:
+            # Set page index to 1 if parameter not set in ther action.
+            page_index = params.get('pageindex', 1)
+            items_per_page = rtn["size"]
+            total_pages = rtn["totalPages"]
+            max_count = rtn["totalElements"]
+
+
+            # Get initial cumulative item count.
+            current_item_count = rtn["numberOfElements"]
+
+            if not current_item_count < items_per_page:
+                while (max_count > current_item_count and total_pages > page_index):
+
+                    remaining_count = max_count - current_item_count
+
+                    page_index += 1
+                    params["pageindex"] = page_index
+
+                    # Re-run request and filter results with new offset set.
+                    rtn_sub = get_method(**params)
+                    rtn["content"].extend(rtn_sub["content"])
+                    for v in ["firstPage", "lastPage", "numberOfElements"]:
+                        rtn[v] = rtn_sub[v]
+                    # Update initial cumulative item count.
+                    current_item_count += rtn["numberOfElements"]
+
+        return rtn
