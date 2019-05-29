@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             utc_ts = content['create_date']
             tz_dt = tz_from_utc_ms_ts(utc_ts, pytz.timezone('Etc/GMT+6'))
             timeval=tz_dt.isoformat()
-            time="Date and Time: {1}".format(timeval)
+            time="Date and Time: {0}".format(timeval)
 
             #for i in art_content:
             #    pprint.pprint(type(i))

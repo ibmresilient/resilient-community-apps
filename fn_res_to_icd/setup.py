@@ -13,7 +13,9 @@ setup(
     description="Resilient Circuits Components for 'fn_res_to_icd'",
     long_description="Resilient Circuits Components for 'fn_res_to_icd'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'xmltodict>=1.0.0',
+        'resilient-lib>=1.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
