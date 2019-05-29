@@ -6,10 +6,10 @@ from setuptools import setup, find_packages
 setup(
     name='fn_res_to_icd',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Sean O Gorman',
+    author_email='sean.gorman@ibm.com',
+    url='IBM Security',
     description="Resilient Circuits Components for 'fn_res_to_icd'",
     long_description="Resilient Circuits Components for 'fn_res_to_icd'",
     install_requires=[
