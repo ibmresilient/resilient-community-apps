@@ -67,7 +67,7 @@ class FunctionComponent(ResilientComponent):
             #for i in art_content:
             #    pprint.pprint(type(i))
             details_payload=''
-            artifact_limit=1
+            artifact_limit=0
             i = 0
             try:
                 artifact_limit=int(input("How many artifacts do you wish to populate?"))
