@@ -3,9 +3,11 @@
 - [Overview](#overview)
 - [Key Features](#key-features)
 - [Requirements](#requirements)
-- [Install + Customize](#install--customize)
-  - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
-  - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
+- [Install](#install)
+- [Customize](#customize)
+- [Documentation](#documentation)
+
+---
 
 ## Overview
 Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Professionals to communicate security incidents in realtime. This integration allows for bi-directional synchronization of Incidents, Tasks, Notes and Attachments enabling the security and operations teams to be aligned during critical security events.
@@ -31,8 +33,12 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 
 ---
 
-## Install + Customize
+## Install
 * Follow our [Install Guide](./docs/install_guide) to get up and running. 
+
+---
+
+## Customize
 * Out-of-the-box we meet a lot of use cases, however to adapt the Integration to suit your Incident Response Workflow follow our Customize guides:
   - [Customize ServiceNow App Guide](./docs/customize_snow_guide)
   - [Customize Resilient Functions Guide](./docs/customize_resilient_guide)
