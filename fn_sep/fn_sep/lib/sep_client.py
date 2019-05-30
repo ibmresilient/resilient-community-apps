@@ -247,7 +247,9 @@ class Sepclient(object):
         else:
             url = urljoin(self.base_url, self._endpoints["policies_by_type"]).format(policy_type)
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        params = {"domainId": domainid}
+
+        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
 
         return r
 
