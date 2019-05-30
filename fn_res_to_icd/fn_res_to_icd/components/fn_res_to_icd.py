@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
         """Function: This function transfers an qradar severity to a priority on the icd ticket"""
         try:
             # Get the function parameters
-            time_date =options.get("time_date")
+            #time_date =options.get("time_date")
             incident_id=kwargs.get("incident_id")
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
