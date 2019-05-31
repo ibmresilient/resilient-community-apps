@@ -64,8 +64,14 @@ class RequestsSep(object):
                 if e.response.status_code == 410 and verb.upper() in ["GET", "DELETE"] and \
                         re.match("^https://.*/sepm/api/v1/policy-objects/fingerprints.*$", url, ):
                         # We are probably trying to access/delete fingerprint list which doesn't exist.
-                    LOG.error("Got '410' error, possible attempt to {} a fingerprint list which doesn't exist."
+                    LOG.error("Got '410' error, possible attempt to '{}' a fingerprint list which doesn't exist."
                               .format(verb))
+                    # Allow error to bubble up to the Resilient function.
+                    pass
+                elif e.response.status_code == 400 and verb.upper() in ["PUT"] and \
+                        re.match("^https://.*/sepm/api/v1/groups/.*/system-lockdown/fingerprints/.*$", url, ):
+                        # We are probably trying to re-add a hash to fingerprint list which already exists.
+                    LOG.error("Got '400' error, possible attempt to access a fingerprint list which doesn't exist.")
                     # Allow error to bubble up to the Resilient function.
                     pass
                 elif e.response.status_code == 409 and verb.upper() in ["POST"] and \

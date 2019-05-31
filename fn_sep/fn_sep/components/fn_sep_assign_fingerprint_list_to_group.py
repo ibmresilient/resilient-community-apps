@@ -68,7 +68,15 @@ class FunctionComponent(ResilientComponent):
             rtn = sep.assign_fingerprint_list_to_group(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning 'Symantec SEP Assign Fingerprint List to Group for Lock-down' results")
+
+            if "errorCode" in rtn and int(rtn["errorCode"]) == 400:
+                # If this error was trapped user probably tried to get an invalid fingerprint list.
+                yield StatusMessage("Symantec SEP Assign Fingerprint List to Group for Lock-down: Got a 400 error "
+                                    "while attempting to assign a fingerprint list for fingerprint id '{0}' because of a "
+                                    "possible invalid or deleted fingerprintlist id.".format(sep_fingerprintlist_id))
+            else:
+                yield StatusMessage("Returning 'Symantec SEP Assign Fingerprint List to Group for Lock-down' results for "
+                                    "fingerprintlist_id '{0}' and groupid '{1}'".format(sep_fingerprintlist_id, sep_groupid))
 
             log.debug(json.dumps(results["content"]))
 
