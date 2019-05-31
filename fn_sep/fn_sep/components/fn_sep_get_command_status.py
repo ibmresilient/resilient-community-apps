@@ -6,6 +6,7 @@
 # Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
+import copy
 import json
 import logging
 import datetime
@@ -95,7 +96,7 @@ class FunctionComponent(ResilientComponent):
             sep_pagesize = kwargs.get("sep_pagesize")  # number
             sep_sort = kwargs.get("sep_sort")  # text
             sep_status_type = kwargs.get("sep_status_type")  # text
-
+            sep_matching_endpoints = kwargs.get("sep_matching_endpoints")  # boolean
             log = logging.getLogger(__name__)
 
             log.info("sep_incident_id: %s", sep_incident_id)
@@ -105,6 +106,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_pagesize: %s", sep_pagesize)
             log.info("sep_sort: %s", sep_sort)
             log.info("sep_status_type: %s", sep_status_type)
+            log.info("sep_matching_endpoints: %s", sep_matching_endpoints)
 
             validate_fields(["sep_commandid", "sep_status_type"], kwargs)
 
@@ -113,24 +115,55 @@ class FunctionComponent(ResilientComponent):
             sep = Sepclient(self.options, params)
 
             rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), sep_status_type)
-
-            results = None
-            if sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
+            if sep_status_type.lower() == "scan" and sep_matching_endpoints:
+                # Return only endpoint ids for artifact matches.
+                content_copy = copy.deepcopy(rtn["content"])
+                rtn = {"endpoints_matching_ids": []}
+                for i in range(len(content_copy)):
+                    rtn["endpoints_matching_ids"].append(content_copy[i]["computerId"])
+                del content_copy
+            elif sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
                     self.options.get("results_limit", RESULTS_LIMIT_DEF)):
+                # Over results limit. Send full result back as an attachement and also return an actual
+                # result truncated to the results limit.
+                results_limit = int(self.options.get("results_limit", RESULTS_LIMIT_DEF))
+                result_limit_complete = False
+
                 yield StatusMessage(
                     "Adding EOC scan data for commandid {} as an incident attachment".format(sep_commandid))
-                results = rp.done(True, {})
+                total_match_count = 0
                 # Get csv attachment file name and content.
                 (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
 
                 # Create an attachment
                 att_report = create_attachment(self.rest_client(), file_name, file_content, params)
-                results = rp.done(True, {"scan_eoc_hits_over_limit": True, "att_name":
-                    att_report["name"], "scan_count": rtn["total_match_count"]})
+
+                # Truncate the result to 'results_limit'.
+                for i in range(len(rtn["content"])):
+                    if result_limit_complete:
+                        del rtn["content"][i]
+                    else:
+                        if total_match_count <= results_limit:
+                            match_count = rtn["content"][i]["scan_result"]["match_count"]
+                            if  total_match_count + match_count <= results_limit:
+                                total_match_count += rtn["content"][i]["scan_result"]["match_count"]
+                            else:
+                                if len(rtn["content"][i]["scan_result"]["FULL_MATCHES"]) > 0:
+                                    rtn["content"][i]["scan_result"]["FULL_MATCHES"] = \
+                                        rtn["content"][i]["scan_result"]["FULL_MATCHES"][:results_limit - total_match_count]
+                                else:
+                                    rtn["content"][i]["scan_result"]["HASH_MATCHES"] = \
+                                        rtn["content"][i]["scan_result"]["HASH_MATCHES"][:results_limit - total_match_count]
+                                rtn["content"][i]["scan_result"]["match_count"] = results_limit - total_match_count
+                                result_limit_complete = True
+
+                rtn["scan_eoc_hits_over_limit"] = True
+                rtn["att_name"] = att_report["name"]
+                rtn["truncated_count"] = results_limit
             else:
                 yield StatusMessage("Returning 'Symantec SEP Get Command Status' results for commandid {}"
                                     .format(sep_commandid))
-                results = rp.done(True, rtn)
+            results = rp.done(True, rtn)
 
             log.debug(json.dumps(results["content"]))
 
