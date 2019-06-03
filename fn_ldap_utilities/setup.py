@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_ldap_utilities',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits components to allow reading and manipulation of your LDAP Server'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'ldap3'
+        'ldap3>=2.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
