@@ -10,18 +10,20 @@ import xml.etree.ElementTree as ET
 
 LOG = logging.getLogger(__name__)
 
-
-def filter_hits(rtn):
+def filter_hits(rtn, status_type):
     """ For scan commands results screen out endpoints with no hits.
-
-
     :param: Result returned from SEPM server with status updates.
     :return Result with endpoints with no hits filtered out.
 
     """
-    # Extract events based on filter(s)
+    # Extract content based on action type.
+    if status_type == "scan":
+        pattern = "MATCH"
+    elif status_type == "remediation":
+        pattern = "remediation_count"
+
     content = rtn["content"]
-    rtn["content"] = [i for i in content if "scan_result" in i and i["scan_result"]["MATCH"]]
+    rtn["content"] = [i for i in content if "scan_result" in i and i["scan_result"][pattern]]
     rtn["numberOfElements"] = len(rtn["content"])
     rtn["totalElements"] = len(rtn["content"])
 
@@ -39,43 +41,43 @@ def parse_scan_results(xml):
         "artifact_type": '',
         "FULL_MATCHES": [],
         "HASH_MATCHES": [],
+        "PARTIAL_MATCHES": [],
         "match_count": 0,
         "remediation_count": 0,
     }
     file_seps = ['\\', '/']
+    match_types = ["HASH_MATCH", "FULL_MATCH", "PARTIAL_MATCH", "NO_MATCH"]
 
     try:
         results = ET.fromstring(xml.encode('utf8', 'ignore'))
 
         for item in results.findall('Activity/OS/Files/File/Matched'):
             LOG.debug(item.attrib)
-            if item.attrib["result"] == "NO_MATCH":
+            if item.attrib["result"] == match_types[-1:]: # No match
                 continue
-            elif item.attrib["result"] in ["FULL_MATCH", "HASH_MATCH"]:
+            elif item.attrib["result"] in match_types[:-1]: # Actual Match
                 scan_result["MATCH"] = True
-                if item.attrib["result"] == "FULL_MATCH" and not item.attrib in scan_result["FULL_MATCHES"]:
-                    # File name or path match.
-                    for file in results.findall('Activity/OS/Files/File'):
-                        if not scan_result["artifact_value"]:
-                            scan_result["artifact_value"] = file.attrib["name"]
-                            if any(fs in file for fs in file_seps):
-                                scan_result["artifact_type"] = "File Path"
-                            else:
-                                scan_result["artifact_type"] = "File Name"
-                    scan_result["FULL_MATCHES"].append(item.attrib)
-                    scan_result["match_count"] += 1
-                    if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
-                        scan_result["remediation_count"] += 1
-                elif item.attrib["result"] == "HASH_MATCH" and not item.attrib in scan_result["HASH_MATCHES"]:
-                    # Hash match.
-                    for hash in results.findall('Activity/OS/Files/File/Hash'):
-                        if not scan_result["artifact_value"]:
-                            scan_result["artifact_type"] = "{} hash".format(hash.attrib["name"])
-                            scan_result["artifact_value"] = hash.attrib["value"]
-                    scan_result["HASH_MATCHES"].append(item.attrib)
-                    scan_result["match_count"] += 1
-                    if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
-                        scan_result["remediation_count"] += 1
+                for match_type in match_types[:-1]:
+                    if item.attrib["result"] == match_type and not item.attrib in scan_result[match_type+'ES']:
+                        # File name or path match.
+                        if item.attrib["result"] in match_types[1:-1]: # Full or partial match
+                            for file in results.findall('Activity/OS/Files/File'):
+                                if not scan_result["artifact_value"]:
+                                    scan_result["artifact_value"] = file.attrib["name"]
+                                    if any(fs in file for fs in file_seps):
+                                        scan_result["artifact_type"] = "File Path"
+                                    else:
+                                        scan_result["artifact_type"] = "File Name"
+                        else:
+                            # Hash match.
+                            for hash in results.findall('Activity/OS/Files/File/Hash'):
+                                if not scan_result["artifact_value"]:
+                                    scan_result["artifact_type"] = "{} hash".format(hash.attrib["name"])
+                                    scan_result["artifact_value"] = hash.attrib["value"]
+                        scan_result[match_type+'ES'].append(item.attrib)
+                        scan_result["match_count"] += 1
+                        if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
+                            scan_result["remediation_count"] += 1
         return scan_result
 
     except ET.ParseError as e:
@@ -99,16 +101,23 @@ def get_overall_progress(rtn):
     :return Return overall command state.
     """
 
-    inprogress_state_ids = [0, 1, 2]
-    overall_state = "Processed"
-    in_prog_state = "In progress"
+    states = {
+        0: "Waiting/Not received",
+        1: "Received",
+        2: "In progress"
+    }
+    overall_state = 'Completed'
 
-    for i in range(len(rtn["content"])):
-        if rtn["content"][i]["stateId"] in inprogress_state_ids:
-            # If any of the endpoint statuses is still in an in-progress state, reset overall
-            # scan status to "In progress".
-            overall_state = in_prog_state
-            break
+    if len(rtn["content"]) == 0:
+        # When the scan command initially launched the content dect is typically empty.
+        overall_state = states[0]
+    else:
+        for i in range(len(rtn["content"])):
+            if rtn["content"][i]["stateId"] in [0, 1, 2]:
+                # If any of the endpoint statuses is still in any of the non-completed states  reset overall
+                # scan status to "In progress".
+                overall_state = states[2]
+                break
     # Set the overall command state across multiple endpoints.
     rtn["overall_command_state"] = overall_state
     return overall_state
@@ -122,22 +131,34 @@ def process_results(rtn, status_type):
     """
 
     # If all endpoints have completed scan then process results
-    rtn["total_match_count"] = rtn["total_remediation_count"] = 0
+    # Set top level counters to 0 value.
+    # total_match_count =  Total artifact matches across target endpoints.
+    # total_match_ep_count =  Total number of target endpoints with matched artifacts.
+    # total_remediation_count =  Total artifacts remediated across target endpoints.
+    # total_remediation_ep_count =  Total number of target endpoints with remediated artifacts.
+    rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
+        = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
-    if get_overall_progress(rtn) == "Processed":
+    rtn["total_ep_count"] = len(rtn["content"])
 
-        for i in range(len(rtn["content"])):
-            rtn["content"][i]["command_status_id"] = rtn["content"][i]["stateId"]
-            if rtn["content"][i]["command_status_id"] == 3:
-                if status_type.lower() in ["scan", "remediation"]:
-                    rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
-                    # Reset total count.
-                    rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
-                    rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
-            else:
-                # Increment if endpoint status ne 3
-                rtn["total_not_completed"] += 1
-        if status_type.lower() == "scan":
-            filter_hits(rtn)
+    get_overall_progress(rtn)
+
+    for i in range(len(rtn["content"])):
+        if rtn["content"][i]["stateId"] == 3:
+            if status_type.lower() in ["scan", "remediation"]:
+                rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
+                # Reset total count.
+                rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
+                rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
+                if rtn["content"][i]["scan_result"]["match_count"] > 0:
+                    rtn["total_match_ep_count"] += 1
+                if rtn["content"][i]["scan_result"]["remediation_count"] > 0:
+                    rtn["total_remediation_ep_count"] += 1
+        else:
+            # Increment if endpoint status ne 3
+            rtn["total_not_completed"] += 1
+
+    if status_type.lower() in ["scan", "remediation"]:
+        filter_hits(rtn, status_type)
 
     return rtn
