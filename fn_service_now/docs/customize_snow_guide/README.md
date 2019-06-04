@@ -7,15 +7,14 @@
 - [Overview](#overview)
 - [Pre-Defined ServiceNow Workflows](#pre-defined-servicenow-workflows)
 - [ResilientHelper API](#resilienthelper-api)
-  - [create(GlideRecord record, String snRecordId, String caseName, Object options)](#creategliderecord-record-string-snrecordid-string-casename-object-options)
-  - [addNote(String res_reference_id, String noteText, String noteFormat)](#addnotestring-resreferenceid-string-notetext-string-noteformat)
-  - [updateStateInResilient(String res_reference_id, String snTicketState, String snTicketStateColor)](#updatestateinresilientstring-resreferenceid-string-snticketstate-string-snticketstatecolor)
+  - [create()](#creategliderecord-record-string-snrecordid-string-casename-object-options)
+  - [addNote()](#addnotestring-resreferenceid-string-notetext-string-noteformat)
+  - [updateStateInResilient()](#updatestateinresilientstring-resreferenceid-string-snticketstate-string-snticketstatecolor)
 - [Create Own Custom ServiceNow Workflow](#create-own-custom-servicenow-workflow)
   - [Step 1: *Use Correct Application Scope*](#step-1-use-correct-application-scope)
-  - [Step 2: *Create a new Workflow*](#step-2-create-a-new-workflow)
-  - [Step 3: *Add a Timer to the Workflow*](#step-3-add-a-timer-to-the-workflow)
-  - [Step 4: *Add a Run Script to the Workflow*](#step-4-add-a-run-script-to-the-workflow)
-  - [Step 5: *Test Your New Custom Workflow*](#step-5-test-your-new-custom-workflow)
+  - [Step 2: *Create a Copy of Existing RES Workflow*](#step-2-create-a-copy-of-existing-res-workflow)
+  - [Step 3: *Modify the Run Script*](#step-3-modify-the-run-script)
+  - [Step 4: *Test Your New Custom Workflow*](#step-4-test-your-new-custom-workflow)
 
 ---
 
@@ -23,7 +22,7 @@
 * Resilient Appliance updated to at least `v31.0.0`
 * An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
 * All steps in the **[Installation Guide](../install_guide)** complete
-* ServiceNow instance running `Kingston` or later
+* ServiceNow instance running `Kingston` or `London`
 * ServiceNow user with an `admin` role
 * A basic understanding of **IBM Resilient Workflows**
 * A basic understanding of **ServiceNow Workflows**
@@ -323,7 +322,7 @@ Returns an object with the following keys:
 | ---- | ---- | ----------- |
 | res_reference_id | String | Unique ID relative to the Incident/Task created in IBM Resilient. E.g: RES-1234-100001 |
 | snTicketState | String | The current state of the record. E.g.: 'In Progress' |
-| snTicketStateColor | String | "green", "orange", "yellow" or "red" |
+| snTicketStateColor | String | Accepted values: `"green"`, `"orange"`, `"yellow"`, `"red"` or `null` |
 
 #### Return:
 *Does not return anything*
@@ -345,36 +344,22 @@ Returns an object with the following keys:
  ![screenshot](./screenshots/1.png)
 * **Close** the popup
 ---
-### Step 2: *Create a new Workflow*
-* Using the Navigation Panel, open the **Workflow Editor:**
+### Step 2: *Create a Copy of Existing RES Workflow*
+* Using the Navigation Panel, open the **Workflow Editor**
  ![screenshot](./screenshots/2.png)
-* Click **New Workflow**
-* Enter the following for the Workflow's properties:
-  * **Name:** CUSTOM_RES_WF_CreateIncident
-  * **Table:** Incident
-  * **Description:** Our custom Workflow that creates an Incident in IBM Resilient from a record in our ServiceNow Incident Table
-* Ensure **if condition matches** is set to **None** in the dropdown
-* Click **Submit**
+* On the right-hand side of the Workflow Editor, search for **res_wf**
  ![screenshot](./screenshots/3.png)
+* Click the Workflow you want to *overwrite*. The Workflow will open.
+* Click the **Burger Menu** on the top left and then **Copy**
+ ![screenshot](./screenshots/4.png)
+* In the popup enter the Workflow Name. Ensure you use the **correct naming convention:** `CUSTOM_<original_workflow_name>`
+ ![screenshot](./screenshots/5.png)
+* Click **OK**
 
 ---
-### Step 3: *Add a Timer to the Workflow*
-* On the right-hand side of the Workflow Editor, click the **Core** Tab
-* Search for **Timer**
-* Click and hold the **Timer** icon then **drag** it into your Workflow
-* Place it on the **black line** that joins **Begin** and **End**, until the line **turns blue**
-* Then **drop** it
- ![screenshot](./screenshots/4.png)
-* In the **popup** that appears, enter **01** seconds (like in the screenshot below) and click **Submit**
- ![screenshot](./screenshots/5.png)
->**NOTE:** this timer is required to allow this Workflow to **run asynchronously.** Without it, this Workflow will freeze/hang the ServiceNow UI when invoked.
----
-### Step 4: *Add a Run Script to the Workflow*
-* Similar to the previous step, on the right-hand side of the Workflow Editor, click the **Core** Tab
-* Search for **Run Script**
-* Click and hold the **Run Script** icon then **drag** it into your Workflow
-* Place it on the **black line** that joins **Timer** and **End**, until the line **turns blue**
-* Then **drop** it
+
+### Step 3: *Modify the Run Script*
+* Double click the **Run Script**
  ![screenshot](./screenshots/6.png)
 * In the **popup** that appears, copy the below script and paste it into the Script Editor:
     ```javascript
@@ -443,13 +428,11 @@ Returns an object with the following keys:
     ```
 * Click **Submit**
  ![screenshot](./screenshots/7.png)
-* **Tidy your Workflow,** by dragging the components around:
- ![screenshot](./screenshots/8.png)
 * **Publish your Workflow,** by clicking the **burger menu** then clicking **Publish**
  ![screenshot](./screenshots/9.png)
 * **Close** the tab that contains the Workflow Editor
 ---
-### Step 5: *Test Your New Custom Workflow*
+### Step 4: *Test Your New Custom Workflow*
 * **Create a new Incident** in ServiceNow
  ![screenshot](./screenshots/10.png)
 * Scroll to the end of the Incident and click the **Create Resilient Incident** UI Action

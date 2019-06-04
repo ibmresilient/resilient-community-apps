@@ -1,6 +1,5 @@
 # Installation Guide for ServiceNow Integration
 
----
 ## Table of Contents
   - [Prerequisites](#prerequisites)
   - [Step 1: *Create a User on the Resilient Appliance*](#step-1-create-a-user-on-the-resilient-appliance)
@@ -14,7 +13,7 @@
 ---
 
 ## Prerequisites 
-* ServiceNow Instance running >= `Kingston` release
+* ServiceNow Instance running `Kingston` or `London` release
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Resilient >= `v31.0.0`
@@ -75,15 +74,19 @@
 * Click **Properties.** A new tab opens.
   ![screenshot](./screenshots/7.png)
 * Enter your configurations:
-  * **Resilient Host:** this is the Hostname or IP address of your Resilient Appliance, **relative to your ServiceNow Instance**, but **if you use a Mid-Server, it is relative to the Mid-Server** *(See  Step 6 on setting up your Mid-Server).*
-  * **Resilient Organization:** this is the Org Name you used in **Step 1.**
-  * **Email Address:** this is the Email Address you used in **Step 1.**
-  * **Password:** this is the Password you used in **Step 1.**
-  * **ServiceNow Username:** this is the **User ID** you entered in **Step 3.**
-  * **ServiceNow MID Server Name:** enter the name of the MID Server to use with this Integration or leave blank if not using a MID Server
-  * **ServiceNowAllowedTableNames:** is a CSV list of all the **Table Names** in ServiceNow IBM Resilient is allowed to integrate with. *Out-of-the-box this integration requires access to the `incident`, `sys_user` and `sys_user_group` tables.*
-  * **Logging Verbosity:** set this to **error**. Can be changed to **debug** if needed later.
-  * **Logging Destination:** set this to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later.
+
+  | Config | Required | Description |
+  | ------ | :------: | ----------- |
+  | Resilient Host | Yes | The Hostname or IP address of your Resilient Appliance, **relative to your ServiceNow Instance**, but **if you use a MID Server, it is relative to the MID Server** *(See  Step 6 on setting up your Mid-Server).* |
+  | Resilient Organization | Yes | The Org Name you used in **Step 1.** |
+  | Email Address | Yes | The Email Address you used in **Step 1.** |
+  | Password | Yes | The Password you used in **Step 1.** |
+  | ServiceNow Username | Yes | The **User ID** you entered in **Step 3.** |
+  | ServiceNow MID Server Name | No | The MID Server to use with this Integration or leave blank if not using a MID Server |
+  | ServiceNowAllowedTableNames | Yes | is a CSV list of all the **Table Names** in ServiceNow IBM Resilient is allowed to integrate with. *Out-of-the-box this integration requires access to the `incident`, `sys_user` and `sys_user_group` tables.* |
+  | Logging Verbosity | Yes | Defaults to **error**. Can be changed to **debug** if needed later. |
+  | Logging Destination | Yes | Defaults to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later. |
+
 * Click **Save.** You should see a **Properties updated** banner at the top of the page if the save was successful.
 * **Close** the tab.
 ---
@@ -111,13 +114,14 @@
   ```
   $ nano ~/.resilient/app.config
   ```
-  * **sn_host:** this is the host you use to access your ServiceNow Instance.
-    ![screenshot](./screenshots/14.png)
-  * **sn_api_uri:** generally left as its default setting. This is the URL for the custom APIs that get installed with the app. If you decide to implement your own endpoints, you would change this URL.
-  * **sn_table_name:** this is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced
-    >**NOTE:** currently this version (v1.0.0) only supports the **incident table in ServiceNow**
-  * **sn_username:** the **User ID** from **Step 3.**
-  * **sn_password:** the **Password** from **Step 3.**
+  | Config | Required | Description |
+  | ------ | :------: | ----------- |
+  | sn_host | Yes | The host you use to access your ServiceNow Instance. E.g: `https://instance.service-now.com` |
+  | sn_api_uri | Yes | This is the URI for the custom APIs that get exposed by your ServiceNow Instance when you install the app. Generally left as its default setting: `/api/x_ibmrt_resilient/api`. If you decide to implement your own endpoints, you would change this URI. |
+  | sn_table_name | Yes | This is the name of the Table in ServiceNow to Integrate with. It is where any Incidents/Tasks from Resilient will be created and synced. **NOTE:** *currently this version (v1.0.1) only supports the **Incident table** in ServiceNow* |
+  | sn_username | Yes | The **User ID** from **Step 3.** |
+  | sn_password | Yes | The **Password** from **Step 3.** |
+
 * **Save** and **Close** the app.config file.
 * **Test** your Connection to ServiceNow:
   ```
@@ -142,19 +146,19 @@
   ![screenshot](./screenshots/33.png)
 --- 
 
-## Step 6: *Install and Configure ServiceNow Mid-Server (if needed)*
-A ServiceNow Mid-Server is needed if your Resilient instance is not directly accessible from your ServiceNow instance. If using a Mid-Server, verify the following:
-  * The ServiceNow Mid-Server must be setup on the same network as your Resilient Appliance.
-  * The Resilient Host Address you input in **Step 4** must be relevant to your Mid Server.
+## Step 6: *Install and Configure ServiceNow MID Server (if needed)*
+A ServiceNow MID Server is needed if your Resilient instance is not directly accessible from your ServiceNow instance. If using a MID Server, verify the following:
+  * The ServiceNow MID Server must be setup on the same network as your Resilient Appliance.
+  * The Resilient Host Address you input in **Step 4** must be relevant to and accessible from your MID Server.
 
 If not already installed:
-* Type **mid-server** into your ServiceNow search box and click **Installation Instructions.**
+* Type **mid server** into your ServiceNow search box and click **Installation Instructions.**
   ![screenshot](./screenshots/16.png)
 
 Once **installed** and **validated:**
-* In ServiceNow, go to your List of Mid Servers.
+* In ServiceNow, go to your List of MID Servers.
   ![screenshot](./screenshots/17.png)
-* Copy the **Name** of the Mid Server you will be using with IBM Resilient.
+* Copy the **Name** of the MID Server you will be using with IBM Resilient.
 * In the Navigation Panel, open **IBM Resilient Properties**.
   ![screenshot](./screenshots/36.png)
 * Paste the name into the **ServiceNow MID Server Name** field.
@@ -193,7 +197,6 @@ Once **installed** and **validated:**
   > To view the Application Logs in ServiceNow:
   > * In the navigation panel, go to **System Logs > System Log > Application Logs**
   >  ![screenshot](./screenshots/28.png)
-  > * If you are using a Mid-Server but there is a log: "No Mid-Server being used", either your Mid-Server is not "Up" or it does not have the **IBMResilientAccess Capability,** *see **Step 6***
 
 * Sign into your Resilient Appliance and see if it created successfully
 * Open the incident that was created
