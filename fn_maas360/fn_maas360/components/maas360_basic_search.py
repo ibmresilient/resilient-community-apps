@@ -132,8 +132,6 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, devices)
 
-            LOG.info(results)
-
             yield FunctionResult(results)
 
             # Produce a FunctionResult with the results

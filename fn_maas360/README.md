@@ -16,13 +16,13 @@ The MaaS360 function package enables users to perform certain Mobile device mana
 # Requirements
 * IBM Resilient >= `v31.0.0`
 * resilient-lib >= `Brian's new version FIXME!!!`
-* An Integrations Server running `resilient-circuits >= v31.0.0` with `fn_maas360 >= v1.0.0` installed which you can download from our [App Exchange](xxxxxxx)
+* An Integrations Server running `resilient-circuits >= v30.0.0` with `fn_maas360 >= v1.0.0` installed
 
 ---
 
 # Install & Customize
 * You download the function package to a Resilient integration server, and from there you deploy the functions and components to a Resilient platform. These procedures are provided in the [Resilient SOAR Integration Server Guide (PDF)](https://github.com/ibmresilient/resilient-reference/blob/master/developer_guides/Integration%20Server%20Guide.pdf).
-*This guide provides a description of the functions and components within the function package, any additional requirements, and a list of settings that need to be added to the Resilient Circuits app.config file.
+* This guide provides a description of the functions and components within the function package, any additional requirements, and a list of settings that need to be added to the Resilient Circuits app.config file.
 
 ---
 

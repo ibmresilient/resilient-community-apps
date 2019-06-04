@@ -70,8 +70,6 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, delete_app_results)
 
-            LOG.info(results)
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
