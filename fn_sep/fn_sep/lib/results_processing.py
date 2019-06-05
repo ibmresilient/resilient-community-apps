@@ -113,7 +113,7 @@ def get_overall_progress(rtn):
         overall_state = states[0]
     else:
         for i in range(len(rtn["content"])):
-            if rtn["content"][i]["stateId"] in [0, 1, 2]:
+            if rtn["content"][i]["stateId"] in states.keys():
                 # If any of the endpoint statuses is still in any of the non-completed states  reset overall
                 # scan status to "In progress".
                 overall_state = states[2]
