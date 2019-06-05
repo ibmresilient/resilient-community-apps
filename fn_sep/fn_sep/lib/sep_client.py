@@ -379,7 +379,7 @@ class Sepclient(object):
         return r
 
     def get_command_status(self, commandid=None, order=None, pageindex=None, pagesize=None, sort=None, status_type=None,
-                           matching_endpoints=None, incident_id=None):
+                           matching_endpoint_ids=None, incident_id=None):
         """Get command status from command id.
 
         :param commandid: The command id.
@@ -389,7 +389,7 @@ class Sepclient(object):
         :param sort: The column by which the results are sorted.
         :param status_type: The type of command status requested. Used by the integration, Not in REST call signature.
         :param incident_id: Resilient incident id. Used by the integration, Not in REST call signature.
-        :param matching_endpoints: Return matching endpoints in scan. Used by the integration, Not in REST call signature.
+        :param matching_endpoint_ids: Return matching endpoint ids in scan. Used by the integration, Not in REST call signature.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["command_status"]).format(commandid)

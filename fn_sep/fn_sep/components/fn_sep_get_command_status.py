@@ -96,7 +96,7 @@ class FunctionComponent(ResilientComponent):
             sep_pagesize = kwargs.get("sep_pagesize")  # number
             sep_sort = kwargs.get("sep_sort")  # text
             sep_status_type = kwargs.get("sep_status_type")  # text
-            sep_matching_endpoints = kwargs.get("sep_matching_endpoints")  # boolean
+            sep_matching_endpoint_ids = kwargs.get("sep_matching_endpoint_ids")  # boolean
             log = logging.getLogger(__name__)
 
             log.info("sep_incident_id: %s", sep_incident_id)
@@ -106,7 +106,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_pagesize: %s", sep_pagesize)
             log.info("sep_sort: %s", sep_sort)
             log.info("sep_status_type: %s", sep_status_type)
-            log.info("sep_matching_endpoints: %s", sep_matching_endpoints)
+            log.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
 
             validate_fields(["sep_commandid", "sep_status_type"], kwargs)
 
@@ -115,7 +115,7 @@ class FunctionComponent(ResilientComponent):
             sep = Sepclient(self.options, params)
 
             rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), sep_status_type)
-            if sep_status_type.lower() == "scan" and sep_matching_endpoints:
+            if sep_status_type.lower() == "scan" and sep_matching_endpoint_ids:
                 # Return only endpoint ids for artifact matches.
                 content_copy = copy.deepcopy(rtn["content"])
                 rtn = {"endpoints_matching_ids": []}
