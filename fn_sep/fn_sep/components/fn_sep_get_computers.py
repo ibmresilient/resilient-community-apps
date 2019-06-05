@@ -6,6 +6,7 @@
 # Set up:
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
+import copy
 import json
 import logging
 import time
@@ -148,6 +149,7 @@ class FunctionComponent(ResilientComponent):
             sep_pageindex = kwargs.get("sep_pageindex")  # number
             sep_pagesize = kwargs.get("sep_pagesize")  # number
             sep_sort = kwargs.get("sep_sort")  # text
+            sep_matching_endpoint_ids = kwargs.get("sep_matching_endpoint_ids")  # boolean
 
             log = logging.getLogger(__name__)
 
@@ -161,6 +163,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_pageindex: %s", sep_pageindex)
             log.info("sep_pagesize: %s", sep_pagesize)
             log.info("sep_sort: %s", sep_sort)
+            log.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
 
             yield StatusMessage("Running Symantec SEP Get Computers query...")
 
@@ -183,7 +186,14 @@ class FunctionComponent(ResilientComponent):
                         except ValueError:
                             yield FunctionError('A timestamp value was incorrectly specified.')
 
-            if sep_status is not None:
+            if sep_matching_endpoint_ids:
+                # Return only endpoint ids since post-processing may timeout processing large numer of ids.
+                content_copy = copy.deepcopy(rtn["content"])
+                rtn = {"endpoints_matching_ids": []}
+                for i in range(len(content_copy)):
+                    rtn["endpoints_matching_ids"].append(content_copy[i]["uniqueId"])
+                del content_copy
+            elif sep_status is not None:
                 rtn = get_endpoints_status(rtn)
             elif sep_status_details is not None:
                 rtn = get_endpoints_status_details(rtn)

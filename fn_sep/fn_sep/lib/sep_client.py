@@ -178,7 +178,7 @@ class Sepclient(object):
         return r
 
     def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None, status=None, status_details=None):
+                      pagesize=None, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
         """Get a list of computers. The paramaters are all optional the default is to return results for all computers/
         endpoints.
 
@@ -192,6 +192,7 @@ class Sepclient(object):
         :param sort: The column by which the results are sorted.
         :param status: Overall endpoints status. Used by the integration, Not in REST call signature.
         :param status_details: Endpoints status details. Used by the integration, Not in REST call signature.
+        :param matching_endpoint_ids: Return matching endpoint ids in scan. Used by the integration, Not in REST call signature.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
