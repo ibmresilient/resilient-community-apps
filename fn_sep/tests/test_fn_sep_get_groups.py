@@ -42,15 +42,14 @@ class TestFnSepGetGroups:
 
     @patch('fn_sep.components.fn_sep_get_groups.Sepclient', side_effect=mocked_sep_client)
     @pytest.mark.parametrize("sep_domain, sep_fullpathname, sep_mode, sep_pageindex, sep_pagesize, sep_order, sep_sort, expected_results", [
-        ("text", "text", "text", 123, 123, "text", "text", {"value": "xyz"}),
-        ("text", "text", "text", 123, 123, "text", "text", {"value": "xyz"})
+        (None, None, None, None, None, None, None, 2)
     ])
     def test_success(self, mock_get, circuits_app, sep_domain, sep_fullpathname, sep_mode, sep_pageindex, sep_pagesize, sep_order, sep_sort, expected_results):
         """ Test calling with sample values for the parameters """
 
-        keys = ["response", "query_execution_time"]
-        keys_c = ["data", "metadata"]
-        keys_c_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
+        keys_2 = ["content", "firstPage", "lastPage", "number", "numberOfElements", "size", "sort", "totalElements",
+                  "totalPages"]
 
         function_params = {
             "sep_domain": sep_domain,
@@ -62,10 +61,10 @@ class TestFnSepGetGroups:
             "sep_sort": sep_sort
         }
         results = call_fn_sep_get_groups_function(circuits_app, function_params)
-        assert(expected_results == results)
-        assert expected_results == results["response"]["version"]
         assert_keys_in(results, *keys)
-        computer = results["response"]
-        assert_keys_in(computer, *keys_c)
-        data = results["response"]["data"]
-        assert_keys_in(data, *keys_c_d)
+        content = results["content"]
+        content_2 = content["content"]
+        assert_keys_in(content, *keys_2)
+        assert expected_results == content["numberOfElements"]
+        assert expected_results == content["totalElements"]
+        assert expected_results == len(content_2)

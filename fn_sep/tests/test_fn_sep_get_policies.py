@@ -43,25 +43,26 @@ class TestFnSepGetPolicies:
 
     @patch('fn_sep.components.fn_sep_get_policies.Sepclient', side_effect=mocked_sep_client)
     @pytest.mark.parametrize("sep_policy_type, sep_domainid, expected_results", [
-        ('fw', "text", {"value": "xyz"}),
-        ('hid adc', "text", {"value": "xyz"})
+        ('fw', "908090000946C25D330E919313D23887", 2),
+        ('hid adc', None, 2)
     ])
     def test_success(self, mock_get, circuits_app, sep_policy_type, sep_domainid, expected_results):
         """ Test calling with sample values for the parameters """
 
-        keys = ["response", "query_execution_time"]
-        keys_c = ["data", "metadata"]
-        keys_c_d = ["operating_system", "connector_guid", "connector_version", "hostname", "active", "links"]
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
+        keys_2 = ["content", "firstPage", "lastPage", "number", "numberOfElements", "size", "sort", "totalElements",
+                  "totalPages"]
+
 
         function_params = {
             "sep_policy_type": sep_policy_type,
             "sep_domainid": sep_domainid
         }
         results = call_fn_sep_get_policies_function(circuits_app, function_params)
-        assert(expected_results == results)
-        assert expected_results == results["response"]["version"]
         assert_keys_in(results, *keys)
-        computer = results["response"]
-        assert_keys_in(computer, *keys_c)
-        data = results["response"]["data"]
-        assert_keys_in(data, *keys_c_d)
+        content = results["content"]
+        content_2 = content["content"]
+        assert_keys_in(content, *keys_2)
+        assert expected_results == content["numberOfElements"]
+        assert expected_results == content["totalElements"]
+        assert expected_results == len(content_2)

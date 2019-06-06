@@ -10,6 +10,27 @@ from requests import HTTPError
 from requests.models import Response
 
 # Responses for standalone tests
+def get_fingerprint_list():
+
+    response = {"description": "Hash of type Malware MD5 Hash", "hashType": "MD5", "source": "WEBSERVICE",
+                "groupIds": [], "data": ["582F9B6E0CC4C1DBBD772AAAF088CB3A"], "id": "B5F9985ED6C449A6905A0D570A5733FC",
+                "name": "Blacklist"}
+
+    return response
+
+
+def add_fingerprint_list():
+    return {u"id": u"B5F9985ED6C449A6905A0D570A5733FC"}
+
+def delete_fingerprint_list():
+    return ""
+
+def update_fingerprint_list():
+    return ""
+
+def assign_fingerprint_list_to_group():
+    return ""
+
 def get_token():
     token = "abcd1234-a123-123a-123a-123456abcdef"
     return token
@@ -42,7 +63,26 @@ def get_computers(type):
     return response[type]
 
 def get_groups():
-    response = None
+    response = {u'sort': [{u'direction': u'ASC', u'property': u'NAME', u'ascending': True}], u'number': 0, u'firstPage': False,
+                 u'content': [{u'policyDate': 1556542282626, u'domain': {u'id': u'908090000946C25D330E919313D23887', u'name': u'Default'},
+                               u'numberOfRegisteredUsers': 0, u'description': u'', u'created': 1548481072007,
+                               u'policySerialNumber': u'4CBD-04/29/2019 12:51:22 626', u'lastModified': 1548481072007,
+                               u'fullPathName': u'My Company\\Default Group', u'createdBy': u'AF3C39A10A320801000000DBF200C60A',
+                               u'numberOfPhysicalComputers': 0, u'customIpsNumber': u'', u'id': u'4CBD63EE0946C25D1011DB1872A1736A',
+                               u'policyInheritanceEnabled': True, u'name': u'Default Group'},
+                              {u'policyDate': 1556542282626, u'domain': {u'id': u'908090000946C25D330E919313D23887', u'name': u'Default'},
+                               u'numberOfRegisteredUsers': 0, u'description': u'', u'created': 1551787280561,
+                               u'policySerialNumber': u'36E0-04/29/2019 12:51:22 626', u'lastModified': 1551787280561,
+                               u'fullPathName': u'My Company\\G_0027', u'createdBy': u'AF3C39A10A320801000000DBF200C60A',
+                               u'numberOfPhysicalComputers': 0, u'customIpsNumber': u'', u'id': u'36E0B28B0946C25D06A29515DE448CF6',
+                               u'policyInheritanceEnabled': True, u'name': u'G_0027'}
+                              ],
+                 u'lastPage': True,
+                 u'totalPages': 1,
+                 u'size': 2,
+                 u'totalElements': 2,
+                 u'numberOfElements': 2}
+
     return response
 
 def get_policies_summary():
@@ -55,6 +95,52 @@ def move_client():
     response = [{u'responseMessage': u'OK', u'responseCode': u'200'}]
     return response
 
+def quarantine_endpoints():
+    response = {'commandID_computer': '09114E42730A479993DD6D94CF9CAA53'}
+    return response
+
+def scan_endpoints():
+    response = {u'commandID_computer': u'0F0CBDD7EDFF4634B23FA11F5AB81FFC',
+                u'commandID_group': u'BB37F78894DB451B8E8921EC127667A3'}
+    return response
+
+def get_command_status():
+    response = {u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}], u'number': 0,
+                u'firstPage': True,
+                u'content': [{u'computerName': u'johnq1', u'subStateId': 0, u'binaryFileId': None, u'lastUpdateTime': None,
+                   u'domainName': u'Default', u'hardwareKey': u'B791D1DF2BB8AA77D19B10E3BB395B81',
+                   u'subStateDesc': None, u'stateId': 0, u'computerId': u'236A7100A9FE9DC50A4F1AC2819C158E',
+                   u'computerIp': u'192.168.56.104', u'beginTime': None, u'currentLoginUserName': u'root',
+                   u'resultInXML': None}, {u'computerName': u'WIN-N5KGH4CP3N3', u'subStateId': 0, u'binaryFileId': None,
+                                           u'lastUpdateTime': u'2019-06-06T10:45:39Z', u'domainName': u'Default',
+                                           u'hardwareKey': u'DC7D24D6465566D2941F35BC8D17801E', u'subStateDesc': u'',
+                                           u'stateId': 3, u'computerId': u'89AD1BBB0946C25D25E6C0984E971D8A',
+                                           u'computerIp': u'9.70.194.94', u'beginTime': u'2019-06-06T10:42:37Z',
+                                           u'currentLoginUserName': u'Administrator',
+                                           u'resultInXML': u'<EOC creator="Resilient" version="1.0" id="id">\n    <DataSource name="name" id="id" version="version"/>\n    <ScanType>QUICK_SCAN</ScanType>\n    <Threat time="" severity="" type="" category="">\n        <Description>Scan eoc for for suspicious hash of type Malware MD5 Hash and value 582F9B6E0CC4C1DBBD772AAAF088CB3A in the SEP environment.</Description>\n        <URL></URL>\n        <User></User>\n        <Attacker>\n        </Attacker>\n        <proxy ip=""/>\n        <Application></Application>\n    </Threat>\n    <Activity>\n        <OS id="0" name="name" version="version">\n            <Process>\n            </Process>\n            <Files>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Hash name="MD5" value="582f9b6e0cc4c1dbbd772aaaf088cb3a"/>\n                    <Matched result="NO_MATCH"/></File>\n            </Files>\n            <Registry>\n            </Registry>\n            <Network/>\n        </OS>\n    </Activity>\n</EOC>'},
+                  {u'computerName': u'jqbf957root', u'subStateId': 0, u'binaryFileId': None,
+                   u'lastUpdateTime': u'2019-06-06T10:53:53Z', u'domainName': u'Default',
+                   u'hardwareKey': u'9FACFF634F892674CA3BF7EE995B565D', u'subStateDesc': u'', u'stateId': 3,
+                   u'computerId': u'5FA95F22A9FE9DC50A4F1AC22197CDF4', u'computerIp': u'9.162.166.16',
+                   u'beginTime': u'2019-06-06T10:42:37Z', u'currentLoginUserName': u'Administrator',
+                   u'resultInXML': u'<EOC creator="Resilient" version="1.0" id="id">\n    <DataSource name="name" id="id" version="version"/>\n    <ScanType>QUICK_SCAN</ScanType>\n    <Threat time="" severity="" type="" category="">\n        <Description>Scan eoc for for suspicious hash of type Malware MD5 Hash and value 582F9B6E0CC4C1DBBD772AAAF088CB3A in the SEP environment.</Description>\n        <URL></URL>\n        <User></User>\n        <Attacker>\n        </Attacker>\n        <proxy ip=""/>\n        <Application></Application>\n    </Threat>\n    <Activity>\n        <OS id="0" name="name" version="version">\n            <Process>\n            </Process>\n            <Files>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Hash name="MD5" value="582f9b6e0cc4c1dbbd772aaaf088cb3a"/>\n                    <Matched result="NO_MATCH"/></File>\n            </Files>\n            <Registry>\n            </Registry>\n            <Network/>\n        </OS>\n    </Activity>\n</EOC>'},
+                  {u'computerName': u'WIN-4OA0GKJN830', u'subStateId': 0, u'binaryFileId': None,
+                   u'lastUpdateTime': u'2019-06-06T10:50:35Z', u'domainName': u'Default',
+                   u'hardwareKey': u'1771D79454E53469DF4B290C06C104C9', u'subStateDesc': u'', u'stateId': 3,
+                   u'computerId': u'D31AA16E0946C25D40C83823C500518B', u'computerIp': u'9.70.194.93',
+                   u'beginTime': u'2019-06-06T10:42:39Z', u'currentLoginUserName': u'Administrator',
+                   u'resultInXML': u'<EOC creator="Resilient" version="1.0" id="id">\n    <DataSource name="name" id="id" version="version"/>\n    <ScanType>QUICK_SCAN</ScanType>\n    <Threat time="" severity="" type="" category="">\n        <Description>Scan eoc for for suspicious hash of type Malware MD5 Hash and value 582F9B6E0CC4C1DBBD772AAAF088CB3A in the SEP environment.</Description>\n        <URL></URL>\n        <User></User>\n        <Attacker>\n        </Attacker>\n        <proxy ip=""/>\n        <Application></Application>\n    </Threat>\n    <Activity>\n        <OS id="0" name="name" version="version">\n            <Process>\n            </Process>\n            <Files>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Matched result="NO_MATCH"/></File>\n                <File name="" action="create">\n                    <Hash name="MD5" value="582f9b6e0cc4c1dbbd772aaaf088cb3a"/>\n                    <Matched result="NO_MATCH"/></File>\n            </Files>\n            <Registry>\n            </Registry>\n            <Network/>\n        </OS>\n    </Activity>\n</EOC>'}],
+                u'lastPage': True, u'totalPages': 1, u'size': 20, u'totalElements': 4, u'numberOfElements': 4}
+    return response
+
+def get_file_content():
+    response = "SGkgdGhlcmU="
+    return response
+
+def upload_file():
+    response = {"commandID": "171969C124D54C069D7018914AA02184"}
+    return response
+
 def mocked_sep_client(*args):
 
     class MockResponse:
@@ -65,8 +151,24 @@ def mocked_sep_client(*args):
         def __contains__(self, key):
             return True if key in self.__dict__.keys() else False
 
+        def add_fingerprint_list(self, fingerprintlist_name=None, description=None, domainid=None, hash_value=None):
+            return add_fingerprint_list()
+
+        def get_fingerprint_list(self, fingerprintlist_id=None, domainid=None, fingerprintlist_name=None):
+            return get_fingerprint_list()
+
+        def update_fingerprint_list(self, fingerprintlist_id=None, fingerprintlist_name=None, description=None,
+                                    domainid=None, hash_value=None):
+            return update_fingerprint_list()
+
+        def delete_fingerprint_list(self, fingerprintlist_id=None):
+            return delete_fingerprint_list()
+
+        def assign_fingerprint_list_to_group(self, groupid, fingerprintlist_id=None):
+            return assign_fingerprint_list_to_group()
+
         def get_computers(self, computername=None, domain=None, lastupdate=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None):
+                          pagesize=None, sort=None, status=None, status_details=None, matching_endpoint_ids=None):
             if computername:
                 return get_computers("hostname")
             else:
@@ -82,8 +184,29 @@ def mocked_sep_client(*args):
         def get_policies_summary(self, policy_type=None, domainid=None):
             return get_policies_summary()
 
-        def move_client(self, group_id, hardwarekey):
+        def move_endpoint(self, groupid, hardwarekey):
             return move_client()
+
+        def quarantine_endpoints(self, group_ids=None, computer_ids=None, undo=None):
+            return quarantine_endpoints()
+
+        def scan_endpoints(self, computer_ids=None, group_ids=None, scan_type=None, file_path=None, sha256=None,
+                           sha1=None, md5=None, description=None, scan_action=None):
+            return scan_endpoints()
+
+        def get_command_status(self, commandid=None, order=None, pageindex=None, pagesize=None, sort=None,
+                               status_type=None, matching_endpoint_ids=None, incident_id=None):
+            return get_command_status()
+
+        def get_file_content(self, file_id=None):
+            return get_file_content()
+
+        def upload_file(self, file_path=None, computer_ids=None, sha256=None, md5=None, sha1=None, source=None):
+            return upload_file()
+
+        def get_paginated_results(self, get_method, **params):
+            return get_method(**params)
+
     return MockResponse(*args)
 
 
@@ -142,5 +265,6 @@ port=8446
 username=admin
 password=password
 domain=Default
+results_limit=6
 """
     return config_data

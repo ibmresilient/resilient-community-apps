@@ -3,18 +3,24 @@
 
 from __future__ import print_function
 import pytest
+from mock import patch
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from mock_artifacts import mocked_sep_client, get_mock_config
 
 PACKAGE_NAME = "fn_sep"
 FUNCTION_NAME = "fn_sep_upload_file_to_sepm"
 
 # Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+config_data = get_mock_config()
+
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
+def assert_keys_in(json_obj, *keys):
+    for key in keys:
+        assert key in json_obj
 
 def call_fn_sep_upload_file_to_sepm_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -35,13 +41,21 @@ class TestFnSepUploadFileToSepm:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @patch('fn_sep.components.fn_sep_upload_file_to_sepm.Sepclient', side_effect=mocked_sep_client)
     @pytest.mark.parametrize("sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results", [
-        ("text", "text", "text", "text", "text", "text", {"value": "xyz"}),
-        ("text", "text", "text", "text", "text", "text", {"value": "xyz"})
+        ("C:\temp\test_file.exe", "89AD1BBB0946C25D25E6C0984E971D8A",
+         "bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a", None, None, None, "171969C124D54C069D7018914AA02184")
     ])
-    def test_success(self, circuits_app, sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results):
+    def test_success(self, mock_post, circuits_app, sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
+        keys_2 = ["overall_command_state", "total_ep_count", "total_match_count", "total_match_ep_count",
+                  "total_not_completed", "total_remediation_count", "total_remediation_ep_count"]
+
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
+        keys_2 = ["commandID"]
+
+        function_params = {
             "sep_file_path": sep_file_path,
             "sep_computer_ids": sep_computer_ids,
             "sep_sha256": sep_sha256,
@@ -50,4 +64,7 @@ class TestFnSepUploadFileToSepm:
             "sep_source": sep_source
         }
         results = call_fn_sep_upload_file_to_sepm_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert_keys_in(results, *keys)
+        content = results["content"]
+        assert_keys_in(content, *keys_2)
+        assert expected_results == content["commandID"]

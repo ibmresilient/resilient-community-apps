@@ -41,13 +41,14 @@ class TestFnSepGetComputers:
         assert func is not None
 
     @patch('fn_sep.components.fn_sep_get_computers.Sepclient', side_effect=mocked_sep_client)
-    @pytest.mark.parametrize("sep_computername, sep_domain, sep_lastupdate, sep_order, sep_os, sep_pageindex, "
-                             "sep_pagesize, sep_sort, expected_results", [
-        (None, None, None, None, None, None, None, None, 2),
-        ("Myhost", None, None, None, None, None, None, None, 1)
+    @pytest.mark.parametrize("sep_computername, sep_status, sep_status_details, sep_domain, sep_lastupdate, sep_order, "
+                             "sep_os, sep_pageindex, sep_pagesize, sep_sort, sep_matching_endpoint_ids, expected_results", [
+        (None, False, False, None, None, None, None, None, None, None, False, 2),
+        ("Myhost", False, False, None, None, None, None, None, None, None, False, 1)
     ])
-    def test_success(self, mock_get, circuits_app, sep_computername, sep_domain, sep_lastupdate, sep_order, sep_os,
-                     sep_pageindex, sep_pagesize, sep_sort, expected_results):
+    def test_success(self, mock_get, circuits_app, sep_computername, sep_status, sep_status_details, sep_domain,
+                     sep_lastupdate, sep_order, sep_os, sep_pageindex, sep_pagesize, sep_sort, sep_matching_endpoint_ids,
+                     expected_results):
         """ Test calling with sample values for the parameters """
 
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
@@ -56,17 +57,22 @@ class TestFnSepGetComputers:
 
         function_params = {
             "sep_computername": sep_computername,
+            "sep_status": sep_status,
+            "sep_status_details": sep_status_details,
             "sep_domain": sep_domain,
             "sep_lastupdate": sep_lastupdate,
             "sep_order": sep_order,
             "sep_os": sep_os,
             "sep_pageindex": sep_pageindex,
             "sep_pagesize": sep_pagesize,
-            "sep_sort": sep_sort
+            "sep_sort": sep_sort,
+            "sep_matching_endpoint_ids": sep_matching_endpoint_ids
         }
         results = call_fn_sep_get_computers_function(circuits_app, function_params)
         assert_keys_in(results, *keys)
         content = results["content"]
+        content_2 = content["content"]
         assert_keys_in(content, *keys_2)
         assert expected_results == content["numberOfElements"]
         assert expected_results == content["totalElements"]
+        assert expected_results == len(content_2)
