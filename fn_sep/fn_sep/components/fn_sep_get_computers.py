@@ -193,10 +193,11 @@ class FunctionComponent(ResilientComponent):
                 for i in range(len(content_copy)):
                     rtn["endpoints_matching_ids"].append(content_copy[i]["uniqueId"])
                 del content_copy
-            elif sep_status is not None:
+            elif sep_status:
                 rtn = get_endpoints_status(rtn)
-            elif sep_status_details is not None:
+            elif sep_status_details:
                 rtn = get_endpoints_status_details(rtn)
+
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Get Computers' results")
 

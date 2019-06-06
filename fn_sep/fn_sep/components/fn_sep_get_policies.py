@@ -103,14 +103,14 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_policy_type: %s", sep_policy_type)
             log.info("sep_domainid: %s", sep_domainid)
 
-            yield StatusMessage("Running Symantec SEP get computers query...")
+            yield StatusMessage("Running Symantec SEP get policies query...")
 
             sep = Sepclient(self.options, params)
 
             rtn = sep.get_policies_summary(**params)
 
             results = rp.done(True, rtn)
-            yield StatusMessage("Returning all 'computers' results")
+            yield StatusMessage("Returning all 'policies' results")
 
             log.debug(json.dumps(results["content"]))
 
