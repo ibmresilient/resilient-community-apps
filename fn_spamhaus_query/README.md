@@ -125,7 +125,7 @@ inputs.spamhause_search_resource = rule.properties.spamhaus_ip_resource
 ## Post-Process Script
 This post-process script is used to update the `artifact description` field in the Resilient incidents, based on the returned Spamhaus block list status data.
 
-```
+```python
 # Get the actual data from results
 results_data = results.get('content')
 tmp_text = ""
