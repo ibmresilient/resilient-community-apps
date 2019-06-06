@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Utility helper to move things around on the internal repo
+# Utility helper to move things around on the internal repo.
+# Run from the `.scripts/` directory
 
 # get the latest 'master'
 git checkout master && git pull
@@ -104,4 +105,13 @@ rc-cts-urlscanio
 rc-cts-yeti
 res_qraw_mitre
 sc_email_parser
+EOM
+
+# Specify directories to exclude
+while read line
+do
+    # Removes specific directories
+    rm -rf ../$line
+done <<EOM
+fn_service_now/snow_app
 EOM
