@@ -136,6 +136,8 @@ def process_results(rtn, status_type):
     # total_match_ep_count =  Total number of target endpoints with matched artifacts.
     # total_remediation_count =  Total artifacts remediated across target endpoints.
     # total_remediation_ep_count =  Total number of target endpoints with remediated artifacts.
+    # total_ep_count = Total endpoint count for the command.
+    # total_not_completed = Total endpoints which have not completed command.
     rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
         = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
