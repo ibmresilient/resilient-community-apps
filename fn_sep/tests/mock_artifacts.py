@@ -91,7 +91,7 @@ def get_policies_summary():
          {u'domainid': u'908090000946C25D330E919313D23887', u'name': u'Quarantine Firewall policy', u'subtype': None, u'enabled': True, u'sources': [], u'assignedtocloudgroups': None, u'policytype': u'fw', u'assignedtolocations': None, u'id': u'2867FBA60946C25D300A05176DC01DE0', u'desc': u'Created automatically during product installation.'}], u'lastPage': True, u'totalPages': 1, u'size': 2, u'totalElements': 2, u'numberOfElements': 2}
     return response
 
-def move_client():
+def move_endpoint():
     response = [{u'responseMessage': u'OK', u'responseCode': u'200'}]
     return response
 
@@ -185,7 +185,7 @@ def mocked_sep_client(*args):
             return get_policies_summary()
 
         def move_endpoint(self, groupid, hardwarekey):
-            return move_client()
+            return move_endpoint()
 
         def quarantine_endpoints(self, group_ids=None, computer_ids=None, undo=None):
             return quarantine_endpoints()
@@ -220,20 +220,45 @@ def mocked_request(*args, **kwargs):
             if args[0].lower() == "post":
                 if re.match("^https://192.168.1.2:8446/sepm/api/v1/identity/authenticate$", args[1]):
                     return MockGetResponse(get_token(), None, 200)
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policy-objects/fingerprints$", args[1]):
+                    return add_fingerprint_list()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policy-objects/fingerprints/.*$", args[1]):
+                    return update_fingerprint_list()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/files", args[1]):
+                    return upload_file()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/quarantine$", args[1]):
+                    return quarantine_endpoints()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/eoc$", args[1]):
+                    return scan_endpoints()
             elif args[0].lower() == "get":
                 if re.match("^https://192.168.1.2:8446/sepm/api/v1/version$", args[1]):
                     return get_version()
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/domains$", args[1]):
                     return get_domains()
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/computers$", args[1]):
-                    return get_computers()
+                    if kwargs["params"]["computerName"] is None:
+                        return get_computers("all")
+                    else:
+                        return get_computers("hostname")
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/groups$", args[1]):
                     return get_groups()
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policies/summary", args[1]):
                     return get_policies_summary()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policy-objects/fingerprints", args[1]):
+                    return get_fingerprint_list()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/file/.*/content$", args[1]):
+                    return get_file_content()
+                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/.*", args[1]):
+                    return get_command_status()
             elif args[0].lower() == "patch":
                 if re.match("^https://192.168.1.2:8446/sepm/api/v1/computers$", args[1]):
-                    return move_client()
+                    return move_endpoint()
+            elif args[0].lower() == "delete":
+                if re.match("^https://192.168.1.2:8446/sepm/api/v1/policy-objects/fingerprints", args[1]):
+                    return delete_fingerprint_list()
+            elif args[0].lower() == "put":
+                if re.match("^https://192.168.1.2:8446/sepm/api/v1/groups/.*/system-lockdown/fingerprints", args[1]):
+                    return assign_fingerprint_list_to_group()
 
         def __getitem__(self, key):
             return getattr(self, key)
