@@ -45,7 +45,6 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['maas360_delete_app_url'], self.options)
             validate_fields(['maas360_app_id', 'maas360_app_type'], kwargs)
 
             # Get the function parameters:
@@ -55,14 +54,11 @@ class FunctionComponent(ResilientComponent):
             LOG.info("maas360_app_type: %s", app_type)
             LOG.info("maas360_app_id: %s", installed_app_id)
 
-            # Read configuration settings:
-            delete_app_url = self.options["maas360_delete_app_url"]
-
             yield StatusMessage("Starting the Delete App")
 
             # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-            delete_app_results = maas360_utils.delete_app(delete_app_url, app_type, installed_app_id)
+            delete_app_results = maas360_utils.delete_app(app_type, installed_app_id)
             if not delete_app_results:
                 yield StatusMessage("Delete App for app id {} wasn't successful".format(installed_app_id))
             else:

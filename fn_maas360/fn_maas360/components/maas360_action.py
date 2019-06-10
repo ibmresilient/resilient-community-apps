@@ -68,9 +68,7 @@ class FunctionComponent(ResilientComponent):
             if action_type == "Get Software Installed":
                 yield StatusMessage("Starting the Get Software Installed function")
 
-                validate_fields(['maas360_get_software_installed_url'], self.options)
-                soft_installed_url = self.options["maas360_get_software_installed_url"]
-                action_results = maas360_utils.get_software_installed(soft_installed_url, device_id)
+                action_results = maas360_utils.get_software_installed(device_id)
                 if not action_results:
                     yield StatusMessage("No installed software found for the device id {}".format(device_id))
                 else:
@@ -79,10 +77,7 @@ class FunctionComponent(ResilientComponent):
             elif action_type == "Locate Device":
                 yield StatusMessage("Starting the Locate Device function")
 
-                validate_fields(['maas360_locate_device_url'], self.options)
-                locate_device_url = self.options["maas360_locate_device_url"]
-
-                action_results = maas360_utils.locate_device(locate_device_url, device_id)
+                action_results = maas360_utils.locate_device(device_id)
                 if not action_results:
                     yield StatusMessage("Location for device id {} isn't available".format(device_id))
                 else:
@@ -91,10 +86,7 @@ class FunctionComponent(ResilientComponent):
             elif action_type == "Lock Device":
                 yield StatusMessage("Starting the Lock Device function")
 
-                validate_fields(['maas360_lock_device_url'], self.options)
-                lock_device_url = self.options["maas360_lock_device_url"]
-
-                action_results = maas360_utils.lock_device(lock_device_url, device_id)
+                action_results = maas360_utils.lock_device(device_id)
                 if not action_results:
                     yield StatusMessage("Locking device with device id {} wasn't successful".format(device_id))
                 else:
@@ -103,14 +95,13 @@ class FunctionComponent(ResilientComponent):
             elif action_type == "Wipe Device":
                 yield StatusMessage("Starting the Wipe Device function")
 
-                validate_fields(['maas360_wipe_device_url', 'maas360_wipe_device_notify_me',
-                                 'maas360_wipe_device_notify_user', 'maas360_wipe_device_notify_others'], self.options)
-                wipe_device_url = self.options["maas360_wipe_device_url"]
+                validate_fields(['maas360_wipe_device_notify_me', 'maas360_wipe_device_notify_user',
+                                 'maas360_wipe_device_notify_others'], self.options)
                 notify_me = self.options["maas360_wipe_device_notify_me"]
                 notify_user = self.options["maas360_wipe_device_notify_user"]
                 notify_others = self.options["maas360_wipe_device_notify_others"]
 
-                action_results = maas360_utils.wipe_device(wipe_device_url, device_id, notify_me, notify_user, notify_others)
+                action_results = maas360_utils.wipe_device(device_id, notify_me, notify_user, notify_others)
                 if not action_results:
                     yield StatusMessage("Remote Wipe Device with device id {} wasn't successful".format(device_id))
                 else:
@@ -119,10 +110,7 @@ class FunctionComponent(ResilientComponent):
             elif action_type == "Cancel Pending Wipe":
                 yield StatusMessage("Starting the Cancel Pending Wipe function")
 
-                validate_fields(['maas360_cancel_pending_wipe_url'], self.options)
-                cancel_wipe_url = self.options["maas360_cancel_pending_wipe_url"]
-
-                action_results = maas360_utils.cancel_pending_wipe(cancel_wipe_url, device_id)
+                action_results = maas360_utils.cancel_pending_wipe(device_id)
                 if not action_results:
                     yield StatusMessage("Cancel outstanding Remote Wipe sent to the device"
                                         " with device id {} wasn't successful".format(device_id))

@@ -46,7 +46,6 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['maas360_stop_app_distribution_url'], self.options)
             validate_fields(['maas360_app_id', 'maas360_app_type', 'maas360_target_devices'], kwargs)
 
             # Get the function parameters:
@@ -67,15 +66,12 @@ class FunctionComponent(ResilientComponent):
             if target_devices == "Specific Device" and device_id is None:
                 raise FunctionError(u"maas360_device_id must be defined")
 
-            # Read configuration settings:
-            stop_app_dist_url = self.options["maas360_stop_app_distribution_url"]
-
             yield StatusMessage("Starting the Stop App Distribution")
 
             # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-            stop_app_results = maas360_utils.stop_app_distribution(stop_app_dist_url, app_type, installed_app_id,
-                                                                   target_devices, device_id, device_group_id)
+            stop_app_results = maas360_utils.stop_app_distribution(app_type, installed_app_id, target_devices,
+                                                                   device_id, device_group_id)
             if not stop_app_results:
                 yield StatusMessage("Stop App Distribution for app id {} wasn't successful".format(installed_app_id))
             else:

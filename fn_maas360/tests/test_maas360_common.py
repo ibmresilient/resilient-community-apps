@@ -9,9 +9,9 @@ from fn_maas360.lib.maas360_common import MaaS360Utils, APP_TYPE_DICT, TARGET_DE
 from resilient_lib.components.integration_errors import IntegrationError
 
 if sys.version_info.major == 2:
-    from mock import patch, Mock
+    from mock import patch
 else:
-    from unittest.mock import patch, Mock
+    from unittest.mock import patch
 
 MOCKED_OPS = {
     "mocked_config_data_section": {
@@ -22,8 +22,7 @@ MOCKED_OPS = {
         "maas360_app_version": "maas360_app_version",
         "maas360_app_access_key": "maas360_app_access_key",
         "maas360_username": "maas360_username",
-        "maas360_password": "maas360_password",
-        "maas360_auth_url": "maas360_auth_url"
+        "maas360_password": "maas360_password"
     }
 }
 
@@ -104,7 +103,7 @@ class TestMaaS360(object):
         )
 
         maas360_utils = self.get_the_maas360_utils()
-        devices = maas360_utils.basic_search("basic_search_url", "query_string")
+        devices = maas360_utils.basic_search("query_string")
         assert devices == {"device": {"maas360DeviceID": "androidc60775214"}, "count": 1}
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -116,7 +115,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.basic_search("basic_search_url", "query_string")
+            maas360_utils.basic_search("query_string")
             assert False
         except IntegrationError:
             assert True
@@ -153,7 +152,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.locate_device("locate_device_url", "device_id")
+        action_response = maas360_utils.locate_device("device_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call')
@@ -165,7 +164,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.locate_device("locate_device_url", "query_string")
+            maas360_utils.locate_device("query_string")
             assert False
         except IntegrationError:
             assert True
@@ -185,7 +184,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.locate_device("locate_device_url", "query_string")
+            maas360_utils.locate_device("query_string")
             assert False
         except IntegrationError:
             assert True
@@ -202,7 +201,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.get_software_installed("soft_install_url", "device_id")
+        action_response = maas360_utils.get_software_installed("device_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -214,7 +213,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.get_software_installed("soft_install_url", "query_string")
+            maas360_utils.get_software_installed("query_string")
             assert False
         except IntegrationError:
             assert True
@@ -232,7 +231,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.lock_device("lock_url", "device_id")
+        action_response = maas360_utils.lock_device("device_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -244,7 +243,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.lock_device("lock_url", "device_id")
+            maas360_utils.lock_device("device_id")
             assert False
         except IntegrationError:
             assert True
@@ -264,7 +263,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.lock_device("lock_url", "device_id")
+            maas360_utils.lock_device("device_id")
             assert False
         except IntegrationError:
             assert True
@@ -282,7 +281,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.wipe_device("wipe_url", "device_id", "notify_me", "notify_user", "notify_others")
+        action_response = maas360_utils.wipe_device("device_id", "notify_me", "notify_user", "notify_others")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -294,7 +293,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.wipe_device("wipe_url", "device_id", "notify_me", "notify_user", "notify_others")
+            maas360_utils.wipe_device("device_id", "notify_me", "notify_user", "notify_others")
             assert False
         except IntegrationError:
             assert True
@@ -314,7 +313,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.wipe_device("wipe_url", "device_id", "notify_me", "notify_user", "notify_others")
+            maas360_utils.wipe_device("device_id", "notify_me", "notify_user", "notify_others")
             assert False
         except IntegrationError:
             assert True
@@ -332,7 +331,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.cancel_pending_wipe("cancel_wipe_url", "device_id")
+        action_response = maas360_utils.cancel_pending_wipe("device_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -344,7 +343,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.cancel_pending_wipe("cancel_wipe_url", "device_id")
+            maas360_utils.cancel_pending_wipe("device_id")
             assert False
         except IntegrationError:
             assert True
@@ -364,7 +363,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.cancel_pending_wipe("cancel_wipe_url", "device_id")
+            maas360_utils.cancel_pending_wipe("device_id")
             assert False
         except IntegrationError:
             assert True
@@ -420,9 +419,8 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.stop_app_distribution("cancel_wipe_url", "iOS Enterprise Application",
-                                                              "installed_app_id", "Specific Device", "device_id",
-                                                              "device_group_id")
+        action_response = maas360_utils.stop_app_distribution("iOS Enterprise Application", "installed_app_id",
+                                                              "Specific Device", "device_id", "device_group_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -434,7 +432,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.stop_app_distribution("cancel_wipe_url", "iOS Enterprise Application", "installed_app_id",
+            maas360_utils.stop_app_distribution("iOS Enterprise Application", "installed_app_id",
                                                 "Specific Device", "device_id", "device_group_id")
             assert False
         except IntegrationError as err:
@@ -452,7 +450,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.stop_app_distribution("cancel_wipe_url", "iOS Enterprise Application", "installed_app_id",
+            maas360_utils.stop_app_distribution("iOS Enterprise Application", "installed_app_id",
                                                 "Specific Device", "device_id", "device_group_id")
             assert False
         except IntegrationError as err:
@@ -473,7 +471,7 @@ class TestMaaS360(object):
         mocked_api_call.return_value = MockedResponse(inputs)
 
         maas360_utils = self.get_the_maas360_utils()
-        action_response = maas360_utils.delete_app("cancel_wipe_url", "iOS Enterprise Application", "installed_app_id")
+        action_response = maas360_utils.delete_app("iOS Enterprise Application", "installed_app_id")
         assert action_response == results
 
     @patch('fn_maas360.lib.maas360_common.RequestsCommon.execute_call_v2')
@@ -485,7 +483,7 @@ class TestMaaS360(object):
 
         try:
             maas360_utils = self.get_the_maas360_utils()
-            maas360_utils.delete_app("cancel_wipe_url", "iOS Enterprise Application", "installed_app_id")
+            maas360_utils.delete_app("iOS Enterprise Application", "installed_app_id")
             assert False
         except IntegrationError:
             assert True

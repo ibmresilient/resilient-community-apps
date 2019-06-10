@@ -19,6 +19,16 @@ TARGET_DEVICES_DICT = {"All Devices": 0,
                        "Device Group": 1,
                        "Specific Device": 2}
 
+AUTH_URL = "/auth-apis/auth/1.0/authenticate/"
+BASIC_SEARCH_URL = "/device-apis/devices/2.0/search/customer/"
+LOCATE_DEVICE_URL = "/device-apis/devices/1.0/locateDevice/"
+SOFT_INSTALLED_URL = "/device-apis/devices/1.0/softwareInstalled/"
+LOCK_DEVICE_URL = "/device-apis/devices/1.0/lockDevice/"
+WIPE_DEVICE_URL = "/device-apis/devices/1.0/wipeDevice/"
+CANCEL_PENDING_WIPE_URL = "/device-apis/devices/1.0/cancelPendingWipe/"
+STOP_APP_DISTR_URL = "/application-apis/applications/1.0/stopAppDistribution/"
+DELETE_APP_URL = "/application-apis/applications/1.0/deleteApp/"
+
 
 class MaaS360Utils(object):
     """
@@ -59,7 +69,6 @@ class MaaS360Utils(object):
         self.app_access_key = None
         self.username = None
         self.password = None
-        self.auth_url = None
         self.rc = None
         self.auth_token = None
 
@@ -74,7 +83,7 @@ class MaaS360Utils(object):
         Generates auth token with given user credentials.
         :return: String, auth token, if auth token is generated for portal admin or an error
         """
-        complete_auth_url = self.get_url_endpoint(self.auth_url)
+        complete_auth_url = self.get_url_endpoint(AUTH_URL)
         auth_request_body = {
             "authRequest": {
                 "maaS360AdminAuth": {
@@ -113,7 +122,7 @@ class MaaS360Utils(object):
 
     def reconnect(self):
         """
-        This method reauthenticates with MaaS360 - creates new self.auth_token.
+        This method re-authenticates with MaaS360 - creates new self.auth_token.
         :return:
         """
         with MaaS360Utils.lock:
@@ -147,8 +156,8 @@ class MaaS360Utils(object):
 
         # Validate fields
         validate_fields(['maas360_host_url', 'maas360_billing_id', 'maas360_platform_id', 'maas360_app_id',
-                         'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_auth_url',
-                         'maas360_password'], options)
+                         'maas360_app_version', 'maas360_app_access_key', 'maas360_username', 'maas360_password'],
+                        options)
 
         # Read configuration settings:
         self.host_url = options["maas360_host_url"]
@@ -159,7 +168,6 @@ class MaaS360Utils(object):
         self.app_access_key = options["maas360_app_access_key"]
         self.username = options["maas360_username"]
         self.password = options["maas360_password"]
-        self.auth_url = options["maas360_auth_url"]
 
         self.rc = RequestsCommon(opts, options)
 
@@ -187,16 +195,15 @@ class MaaS360Utils(object):
                 # any other error or second iteration raise an error
                 raise err
 
-    def basic_search(self, url, query_string):
+    def basic_search(self, query_string):
         """
         Search for devices by Device Name, Username, Phone Number, Platform, Device Status and other Device Identifiers.
         Support for partial match for Device Name, Username, Phone Number.
-        :param url:
         :param query_string:
         :return: device or list of devices or None if there aren't any found
         """
         try:
-            response = self.execute_with_retry("get", url, CON_TYPE_JSON, params=query_string)
+            response = self.execute_with_retry("get", BASIC_SEARCH_URL, CON_TYPE_JSON, params=query_string)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Basic Search: {}".format(err))
@@ -204,18 +211,17 @@ class MaaS360Utils(object):
         devices = results.get("devices")
         return devices
 
-    def locate_device(self, url, device_id):
+    def locate_device(self, device_id):
         """
         Function performs a real-time lookup on Android devices or provides Last Known location on iOS
         and Windows Phone devices. The results is latitude and longitude information.
-        :param url:
         :param device_id
         :return: action_response
         """
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", LOCATE_DEVICE_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Locate Device: {}".format(err))
@@ -231,17 +237,16 @@ class MaaS360Utils(object):
 
         return action_response
 
-    def get_software_installed(self, url, device_id):
+    def get_software_installed(self, device_id):
         """
         Function gets software installed for a device.
-        :param url:
         :param device_id
         :return: device_softwares
         """
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("get", url, CON_TYPE_JSON, params=request_body)
+            response = self.execute_with_retry("get", SOFT_INSTALLED_URL, CON_TYPE_JSON, params=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Get Software Installed: {}".format(err))
@@ -249,17 +254,16 @@ class MaaS360Utils(object):
         device_softwares = results.get("deviceSoftwares")
         return device_softwares
 
-    def lock_device(self, url, device_id):
+    def lock_device(self, device_id):
         """
         Function locks the device .
-        :param url:
         :param device_id
         :return: action_response
         """
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", LOCK_DEVICE_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Lock Device: {}".format(err))
@@ -275,10 +279,9 @@ class MaaS360Utils(object):
 
         return action_response
 
-    def wipe_device(self, url, device_id, notify_me, notify_user, notify_others):
+    def wipe_device(self, device_id, notify_me, notify_user, notify_others):
         """
         Function performs a remote Wipe of the device.
-        :param url:
         :param device_id:
         :param notify_me:
         :param notify_user:
@@ -291,7 +294,7 @@ class MaaS360Utils(object):
                         "notifyOthers": u"{}".format(notify_others)}
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", WIPE_DEVICE_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Wipe Device: {}".format(err))
@@ -307,17 +310,16 @@ class MaaS360Utils(object):
 
         return action_response
 
-    def cancel_pending_wipe(self, url, device_id):
+    def cancel_pending_wipe(self, device_id):
         """
         Function cancels outstanding Remote Wipe sent to the device.
-        :param url:
         :param device_id:
         :return: action_response
         """
         request_body = {"deviceId": u"{}".format(device_id)}
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", CANCEL_PENDING_WIPE_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Cancel Pending Wipe: {}".format(err))
@@ -333,10 +335,9 @@ class MaaS360Utils(object):
 
         return action_response
 
-    def stop_app_distribution(self, url, app_type, installed_app_id, target_devices, device_id, device_group_id):
+    def stop_app_distribution(self, app_type, installed_app_id, target_devices, device_id, device_group_id):
         """
         Function stops a specific distributions of an app.
-        :param url:
         :param app_type:
         :param installed_app_id
         :param target_devices
@@ -353,7 +354,7 @@ class MaaS360Utils(object):
         self.add_to_dict("deviceGroupId", device_group_id, request_body)
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", STOP_APP_DISTR_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             # The Response 400 doesn't return with a meaningful message.
@@ -367,10 +368,9 @@ class MaaS360Utils(object):
         action_response = results.get("actionResponse")
         return action_response
 
-    def delete_app(self, url, app_type, installed_app_id):
+    def delete_app(self, app_type, installed_app_id):
         """
         Function stop all distributions of the app and deletes the app.
-        :param url:
         :param app_type:
         :param installed_app_id
         :return: action_response
@@ -379,7 +379,7 @@ class MaaS360Utils(object):
                         "appId": u"{}".format(installed_app_id)}
 
         try:
-            response = self.execute_with_retry("post", url, CON_TYPE_FORM_ENCODED, data=request_body)
+            response = self.execute_with_retry("post", DELETE_APP_URL, CON_TYPE_FORM_ENCODED, data=request_body)
             results = response.json()
         except IntegrationError as err:
             raise IntegrationError("Unable to execute call Delete App: {}".format(err))

@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['maas360_basic_search_url', 'maas360_basic_search_page_size'], self.options)
+            validate_fields(['maas360_basic_search_page_size'], self.options)
 
             # Get the function parameters:
             partial_device_name = kwargs.get("maas360_partial_device_name")  # text
@@ -104,7 +104,6 @@ class FunctionComponent(ResilientComponent):
                                     u"Basic Search function")
 
             # Read configuration settings:
-            basic_search_url = self.options["maas360_basic_search_url"]
             match = self.options.get("maas360_basic_search_match")
             page_size = self.options.get("maas360_basic_search_page_size")
             sort_attribute = self.options.get("maas360_basic_search_sort_attribute")
@@ -120,7 +119,7 @@ class FunctionComponent(ResilientComponent):
 
             # Create MaaS360Utils singleton
             maas360_utils = MaaS360Utils.get_the_maas360_utils(self.opts, CONFIG_DATA_SECTION)
-            devices = maas360_utils.basic_search(basic_search_url, query_string)
+            devices = maas360_utils.basic_search(query_string)
             if not devices:
                 yield StatusMessage("No devices were found for the search params: {}".format(json.dumps(query_string)))
 

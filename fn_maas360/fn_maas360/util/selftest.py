@@ -38,8 +38,9 @@ def selftest_function(opts):
 
     try:
         LOG.info(
-            'Calling createPartnerConfigurations with WS Server base: ' + url + ', Blling ID: ' + billing_id + ', User: '
-            + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id + ', App Version: ' + app_version)
+            'Calling createPartnerConfigurations with WS Server base: ' + url + ', Blling ID: ' + billing_id +
+            ', User: ' + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id +
+            ', App Version: ' + app_version)
 
         state, reason = "", ""
         # Create MaaS360Utils singleton
