@@ -5,6 +5,10 @@
 """Test helper functions"""
 import pytest
 from fn_sep.lib.helpers import *
+from mock_artifacts import mocked_res_client, get_computers, get_command_status_processed
+import time
+from datetime import datetime
+
 from xml.etree import ElementTree as ElementTree
 import json
 import xmltodict
@@ -12,46 +16,9 @@ import xmltodict
 Suites of tests to test the Symantec SEP Helper functions
 """
 
-def setup_test_xml():
-    test_xml = dedent("""\
-        <?xml version="1.0" encoding="UTF-8"?>
-        <EOC creator="Creator" version="1.1" id="60">
-          <DataSource name="Third-Party Provider" id="23" version="1.0"/>
-          <ScanType>FULL_SCAN</ScanType>
-          <Threat category="Suspects" type="to_investigate" severity="Medium" time="2017-01-29 4:54:01 PM">
-            <Description>Just a test.</Description>
-            <Attacker>
-            </Attacker>
-          </Threat>
-          <Activity>
-            <OS id="1" name="" version="" patch="">
-              <Process>
-              </Process>
-              <Files>
-                <File name="C:\temp\eicar.zip" action="write">
-                  <Hash name="SHA256" value="131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267"/>
-                </File>
-              </Files>
-              <Registry>
-              </Registry>
-              <Network>
-              </Network>
-            </OS>
-          </Activity>
-        </EOC>""")
-
-    return test_xml
-
-def xml_to_json(xml):
-    """Receive 1 lxml etree object and return a json string"""
-
-    def recursive_dict(element):
-        return (element.tag.split('}')[1],
-                dict(map(recursive_dict, element.getchildren()),
-                     **element.attrib))
-
-    return json.dumps(dict([recursive_dict(xml)]),
-                      default=lambda x: str(x))
+def assert_keys_in(json_obj, *keys):
+    for key in keys:
+        assert key in json_obj
 
 def convert_value_to_none(v):
     # Convert "None" string value to None value.
@@ -59,58 +26,107 @@ def convert_value_to_none(v):
         v = None
     return v
 
+def add_readable_timestamps(rtn):
+    now = time.time()
+    for i in range(len(rtn["content"])):
+        for f in ["lastScanTime", "lastUpdateTime", "lastVirusTime"]:
+            try:
+                secs = int(rtn["content"][i][f]) / 1000
+                timediff = now - secs
+                ts_readable = datetime.fromtimestamp(secs).strftime('%Y-%m-%d %H:%M:%S')
+                # New keys will be "readableLastScanTime", "readableLastUpdateTime", "readableLastVirusTime"
+                rtn["content"][i]["readable" + f[0].capitalize() + f[1:]] = ts_readable
+                rtn["content"][i]["timediff" + f[0].capitalize() + f[1:]] = timediff
+            except ValueError:
+                raise ValueError("A timestamp value was incorrectly specified")
+    return rtn
 
 class TestSepHelpersTransformKwargs:
     """Test transform_kwargs function"""
 
-    @pytest.mark.parametrize("sep_hardwarekey, sep_group_id", [
+    @pytest.mark.parametrize("sep_hardwarekey, sep_groupid", [
         ("DC7D24D6465566D2941F35BC8D17801E","8E20F39B0946C25D118925C2E28C2D59"),
         (None, None),
         ('none', 'None')
     ])
-    def test_transform_kwargs(self, sep_hardwarekey, sep_group_id):
+    def test_transform_kwargs(self, sep_hardwarekey, sep_groupid):
         new_kwargs = {
             "hardwarekey": convert_value_to_none(sep_hardwarekey),
-            "group_id": convert_value_to_none(sep_group_id)
+            "groupid": convert_value_to_none(sep_groupid)
         }
         kwargs = {
             "sep_hardwarekey": sep_hardwarekey,
-            "sep_group_id": sep_group_id
+            "sep_groupid": sep_groupid
         }
-        transform_kwargs(kwargs)
+        params = transform_kwargs(kwargs)
         for key in new_kwargs:
-            assert (key in kwargs)
-            assert(kwargs[key] == new_kwargs[key])
+            assert (key in params)
 
-class TestSepHelpersSetupEocCommand:
-    """Test transform_kwargs function"""
+class TestSepHelpersGetEndpointsStatus:
+    """Test get_endpoints_status function"""
 
-    def xml_to_json(self, xml):
-        """Receive 1 lxml etree object and return a json string"""
-
-        def recursive_dict(element):
-            return (element.tag.split('}')[1],
-                    dict(map(recursive_dict, element.getchildren()),
-                         **element.attrib))
-
-        return json.dumps(dict([recursive_dict(xml)]),
-                          default=lambda x: str(x))
-
-    def assertEqualXML(self, xml_real, xml_expected):
-        """Receive 2 objectify objects and show a diff assert if exists."""
-        xml_expected_str = json.loads(self.xml_to_json(xml_expected))
-        xml_real_str = json.loads(self.xml_to_json(xml_real))
-        self.maxDiff = None
-        self.assertEqual(xml_real_str, xml_expected_str)
-
-    @pytest.mark.parametrize("scan_type, file_path, sha256, description", [
-        ("FULL_SCAN","C:\\temp\\eicar.zip", "131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267", "Just a test."),
+    @pytest.mark.parametrize("rtn, expected_results", [
+        (add_readable_timestamps(get_computers("non-compliant")), [1, 2, 2, 1, 2, 2, 0])
     ])
-    def test_setup_eoc_command(self, scan_type, file_path, sha256, description):
+    def test_get_endpoints_status(self, rtn, expected_results):
 
-        eoc_xml = setup_eoc_command(scan_type, file_path, sha256, description)
-        test_xml = setup_test_xml()
-        eoc_xml_dict = xmltodict.parse(eoc_xml)
-        test_xml_dict = xmltodict.parse(test_xml)
-        #root = ElementTree.fromstring("eoc_xml")
-        test=1
+        keys = ["disabled", "hi_failed", "non_compliant", "offline", "out_of_date", "total", "up_to_date"]
+
+        response = get_endpoints_status(rtn)
+        assert_keys_in(response, *keys)
+        for i in range(len(keys)):
+            assert expected_results[i] == response[keys[i]]
+
+class TestSepHelpersGetEndpointsStatusDetails:
+    """Test get_endpoints_status_details function"""
+
+    @pytest.mark.parametrize("rtn, expected_results", [
+        (add_readable_timestamps(get_computers("non-compliant")), [1, None, 2, 2, 1, 2, 2, 0])
+    ])
+    def test_get_endpoints_status_details(self, rtn, expected_results):
+
+        keys = ["disabled", "eps", "hi_failed", "non_compliant", "offline", "out_of_date", "total", "up_to_date"]
+        keys_2 = ["readableLastScanTime", "daOnOff", "elamOnOff", "readableLastVirusTime", "avEngineOnOff",
+                  "pepOnOff", "tamperOnOff", "onlineStatus", "cidsBrowserIeOnOff", "readableLastUpdateTime", "apOnOff",
+                  "computer_name", "firewallOnOff", "cidsDrvOnOff", "host_integrity_check", "ptpOnOff", "cidsBrowserFfOnOff"]
+        response = get_endpoints_status_details(rtn)
+        assert_keys_in(response, *keys)
+        for i in range(len(keys)):
+            if keys[i] !=  "eps":
+                assert expected_results[i] == response[keys[i]]
+        eps = response["eps"]
+        for j in range(len(eps)):
+            assert_keys_in(eps[j], *keys_2)
+
+
+
+class TestHelpersCreateAttachment:
+    """ Tests for the create_attachment function"""
+
+    @pytest.mark.parametrize("file_name, file_content, params", [
+        ("test_file.xml", 'My test data', {"incident_id": 12345})
+    ])
+    def test_create_attachment(self, file_name, file_content, params):
+        """ Test create_attachment using mocked data.  """
+        keys = ["name", "inc_id"]
+
+        results = create_attachment(mocked_res_client("post_attachment", file_name, params["incident_id"]), file_name, file_content, params)
+        assert_keys_in(results, *keys)
+        assert results["name"] == file_name
+        assert results["inc_id"] == params["incident_id"]
+
+class TestHelpersGenerateResultCvs:
+    """ Tests for the generate_result_cvs function"""
+
+    @pytest.mark.parametrize("rtn, sep_commandid, expected_results", [
+        (get_command_status_processed(), "3FEB081B2A144479A32980272C9C1E23",
+         ["3FEB081B2A144479A32980272C9C1E23", ",C:\\temp\\My_file_1.txt,", ",SHA256,b82758fc5f737a58078d3c60e2798a70d895443a86aa39adf52dec70e98c2bed"])
+    ])
+    def test_generate_result_cvs(self, rtn, sep_commandid, expected_results):
+        """ Test  generate_result_cvs using mocked data.  """
+        content_values = expected_results[1:]
+        result_time = datetime.today().strftime('%Y%m%d%H%M%S"')
+        (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
+        assert "EOC_scan_results_for_commandid_"+expected_results[0]+"_"+result_time+".csv" == file_name
+        for c in file_content.split('\n'):
+            assert_keys_in(file_content, *content_values)
