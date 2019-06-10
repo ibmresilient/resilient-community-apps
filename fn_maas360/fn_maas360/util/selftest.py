@@ -42,7 +42,8 @@ def selftest_function(opts):
             + username + ', App Id: ' + app_id + ', Platform Id: ' + platform_id + ', App Version: ' + app_version)
 
         state, reason = "", ""
-        maas360_utils = MaaS360Utils(opts, CONFIG_DATA_SECTION)
+        # Create MaaS360Utils singleton
+        maas360_utils = MaaS360Utils.get_the_maas360_utils(opts, CONFIG_DATA_SECTION)
 
         if maas360_utils and maas360_utils.get_auth_token():
             state = "success"

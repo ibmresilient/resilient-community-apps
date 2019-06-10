@@ -13,7 +13,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_maas360'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib'
+        'resilient-lib>32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -15,7 +15,7 @@ The MaaS360 function package enables users to perform certain Mobile device mana
 
 # Requirements
 * IBM Resilient >= `v31.0.0`
-* resilient-lib >= `Brian's new version FIXME!!!`
+* resilient-lib > `v32.0.140`
 * An Integrations Server running `resilient-circuits >= v30.0.0` with `fn_maas360 >= v1.0.0` installed
 
 ---
