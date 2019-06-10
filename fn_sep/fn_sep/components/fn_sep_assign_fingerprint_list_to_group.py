@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_sep_assign_fingerprint_list_to_group")
     def _fn_sep_assign_fingerprint_list_to_group_function(self, event, *args, **kwargs):
-        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
+        """Function: Assign a fingerprint list to a group for lock-down."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
 

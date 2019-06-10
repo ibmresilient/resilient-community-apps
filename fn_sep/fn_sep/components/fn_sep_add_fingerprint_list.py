@@ -58,7 +58,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_sep_add_fingerprint_list")
     def _fn_sep_add_fingerprint_list_function(self, event, *args, **kwargs):
-        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
+        """Function: Add a hash to a new fingerprint list."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
 

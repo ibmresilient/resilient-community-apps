@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_sep_delete_fingerprint_list")
     def _fn_sep_delete_fingerprint_list_function(self, event, *args, **kwargs):
-        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
+        """Function: Delete  a file fingerprint list."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
 

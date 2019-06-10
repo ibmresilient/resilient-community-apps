@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_sep_get_command_status")
     def _fn_sep_get_command_status_function(self, event, *args, **kwargs):
-        """Function: Returns a list of computers with agents deployed on them. You can use parameters to narrow the search by IP address or hostname."""
+        """Function: Gets the details of a command status from a command id."""
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
 
