@@ -128,10 +128,11 @@ class FunctionComponent(ResilientComponent):
                 # result truncated to the results limit.
                 results_limit = int(self.options.get("results_limit", RESULTS_LIMIT_DEF))
                 result_limit_complete = False
+                total_match_count = 0
+                match_types = ["HASH_MATCHES", "FULL_MATCHES", "PARTIAL_MATCHES"]
 
                 yield StatusMessage(
                     "Adding EOC scan data for commandid {} as an incident attachment".format(sep_commandid))
-                total_match_count = 0
                 # Get csv attachment file name and content.
                 (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
 
@@ -148,12 +149,11 @@ class FunctionComponent(ResilientComponent):
                             if  total_match_count + match_count <= results_limit:
                                 total_match_count += rtn["content"][i]["scan_result"]["match_count"]
                             else:
-                                if len(rtn["content"][i]["scan_result"]["FULL_MATCHES"]) > 0:
-                                    rtn["content"][i]["scan_result"]["FULL_MATCHES"] = \
-                                        rtn["content"][i]["scan_result"]["FULL_MATCHES"][:results_limit - total_match_count]
-                                else:
-                                    rtn["content"][i]["scan_result"]["HASH_MATCHES"] = \
-                                        rtn["content"][i]["scan_result"]["HASH_MATCHES"][:results_limit - total_match_count]
+                                for match_type in match_types:
+                                    if len(rtn["content"][i]["scan_result"][match_type]) > 0:
+                                        # Truncate matches to limit value.
+                                        rtn["content"][i]["scan_result"][match_type] = \
+                                            rtn["content"][i]["scan_result"][match_type][:results_limit - total_match_count]
                                 rtn["content"][i]["scan_result"]["match_count"] = results_limit - total_match_count
                                 result_limit_complete = True
 
