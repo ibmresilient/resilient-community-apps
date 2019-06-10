@@ -45,16 +45,7 @@ def transform_kwargs(kwargs):
 
     return params
 
-def validate_fields(field_list, kwargs):
-    """
-    ensure required fields are present. Throw ValueError if not
-    :param field_list:
-    :param kwargs:
-    :return: no return
-    """
-    for field in field_list:
-        if field not in kwargs or kwargs.get(field) == '':
-            raise ValueError('Required field is missing or empty: '+field)
+
 
 def create_attachment(rest_client, file_name, file_content, params):
     """"Add file as Resilient incident attachment.
