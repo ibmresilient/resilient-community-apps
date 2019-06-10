@@ -90,7 +90,7 @@ def generate_result_cvs(rtn, sep_commandid):
     """
     file_content = ""
     file_name = "EOC_scan_results_for_commandid_{0}_{1}.csv" \
-        .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d'))
+        .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S"'))
     file_content = "Computer name,Computer id,Artifact type,Artifact value,Match type,Match value\n"
 
     eps = rtn["content"]
