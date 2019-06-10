@@ -5,13 +5,11 @@
 """Test Bigfix client  class"""
 from __future__ import print_function
 from mock import patch
-from resilient_circuits.util import get_config_data, get_function_definition
-from resilient_circuits import SubmitTestFunction, FunctionResult
 import pytest
 from fn_sep.lib.sep_client import *
 from  mock_artifacts import mocked_request
 from fn_sep.lib.helpers import transform_kwargs
-
+import xml.etree.ElementTree as ET
 """
 Suite of tests to test Symantec SEP client class
 """
@@ -30,6 +28,39 @@ def get_config():
         "password":     "password",
         "domain":       "Default"
     })
+
+def setup_test_xml():
+    test_xml = dedent(u"""\
+        <?xml version="1.0" encoding="UTF-8"?>
+        <EOC creator="Resilient" version="1.0" id="id">
+            <DataSource name="name" id="id" version="version"/>
+            <ScanType>QUICK_SCAN</ScanType>
+
+            <Threat category="" type="" severity="" time="">
+                <Description>Just a test.</Description>
+                <Attacker/>
+            </Threat>
+            <Activity>
+                <OS id="0" name="name" version="version">
+                    <Process/>
+                    <Files>
+                        <File name="C:\\temp\\eicar.zip" action="create">
+                            <Hash name="SHA256" value="131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267"/>
+                        </File>
+                        <File name="C:\\temp\\eicar.zip" action="create">
+                            <Hash name="SHA1" value=""/>
+                        </File>
+                        <File name="C:\\temp\\eicar.zip" action="create">
+                            <Hash name="MD5" value=""/>
+                        </File>
+                    </Files>
+                    <Registry/>
+                    <Network/>
+                </OS>
+            </Activity>
+        </EOC>""")
+
+    return test_xml
 
 class TestSEPClient:
     """ Test sep_client using mocked data.  """
@@ -377,3 +408,25 @@ class TestSEPClient:
         response = sep_client.get_paginated_results(sep_client.get_groups, **params)
         assert_keys_in(response, *keys)
         assert expected_results == len(response["content"])
+
+    """ Test setup xml  """
+    @patch("fn_sep.lib.sep_client.RequestsSep", side_effect=mocked_request)
+    @pytest.mark.parametrize("scan_type, file_path, sha256, sha1, md5, description, scan_action, expected_results", [
+        ("QUICK_SCAN", "C:\\temp\\eicar.zip", "131f95c51cc819465fa1797f6ccacf9d494aaaff46fa3eac73ae63ffbdfd8267", None,
+         None, "Just a test.", None, setup_test_xml())
+    ])
+    def test_setup_xml(self, mock, scan_type, file_path, sha256, sha1, md5, description, scan_action, expected_results):
+
+        sep_client = Sepclient(get_config())
+        result = sep_client.setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action)
+        test_results_parsed = ET.fromstring(expected_results.encode('utf8', 'ignore'))
+        results_parsed = ET.fromstring(result.encode('utf8', 'ignore'))
+        assert test_results_parsed.tag  ==  results_parsed.tag
+        test_items_file = test_results_parsed.findall('Activity/OS/Files/File')
+        result_items_file =  results_parsed.findall('Activity/OS/Files/File')
+        for i in range(len(test_items_file)):
+            assert test_items_file[i].attrib["name"] == result_items_file[i].attrib["name"]
+        test_items_hash = test_results_parsed.findall('Activity/OS/Files/File/Hash')
+        result_items_hash = results_parsed.findall('Activity/OS/Files/File/Hash')
+        for i in range(len(test_items_hash)):
+            assert test_items_hash[i].attrib["value"] == result_items_hash[i].attrib["value"]

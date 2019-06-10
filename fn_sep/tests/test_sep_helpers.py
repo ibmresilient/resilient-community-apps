@@ -8,10 +8,6 @@ from fn_sep.lib.helpers import *
 from mock_artifacts import mocked_res_client, get_computers, get_command_status_processed
 import time
 from datetime import datetime
-
-from xml.etree import ElementTree as ElementTree
-import json
-import xmltodict
 """
 Suites of tests to test the Symantec SEP Helper functions
 """
