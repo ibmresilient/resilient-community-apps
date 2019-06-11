@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             results = payload.done(
                 success=True,
                 content={
-                    "task_note": task_response.pop()
+                    "task_note": task_response
                 }
             )
 
