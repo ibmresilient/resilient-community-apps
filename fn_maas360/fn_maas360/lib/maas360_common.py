@@ -48,7 +48,11 @@ class MaaS360Utils(object):
         if MaaS360Utils._the_maas360_utils is None:
             with MaaS360Utils.lock:
                 # code here will be single threaded
-                MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
+                if MaaS360Utils._the_maas360_utils is None:  # We check for the second time if singleton is set
+                    # in case of multiple threads entering line 49 at the same time (during start up).
+                    # The first thread will generate a token, the subsequent will not.
+                    MaaS360Utils._the_maas360_utils = MaaS360Utils(opts, config_data_selection)
+
         return MaaS360Utils._the_maas360_utils
 
     def __init__(self, opts, config_data_selection):
