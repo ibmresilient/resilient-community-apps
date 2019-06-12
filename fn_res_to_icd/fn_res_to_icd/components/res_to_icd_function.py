@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
         try:
             # Variables
             icd_email=kwargs.get("icd_email")
-            icd_pass=kwarg.get("icd_pass")
+            icd_pass=kwargs.get("icd_pass")
             icd_qradar_severity=kwargs.get('icd_qradar_severity')
             incident_id=kwargs.get("incident_id")
             icd_priority=kwargs.get("icd_priority")
@@ -108,7 +108,6 @@ class FunctionComponent(ResilientComponent):
                 else:
                     log.warning("You have not set a Qradar priority, icd priority will be min value (4)")
                     icd_priority = 4
-            else:
 
             
             payload = ResultPayload('fn_res_to_icd', **kwargs)
@@ -119,7 +118,7 @@ class FunctionComponent(ResilientComponent):
              "logtype": "CLIENTNOTE" ,
              "worklog.1.description": "SECURITY ISSUE" ,
              "worklog.1.DESCRIPTION_LONGDESCRIPTION": "SECURITY ISSUE" ,
-             "INTERNALPRIORITY": icd_priority ,
+             "INTERNALPRIORITY": icd_priority,
              "SITEID":"APPOPINT" ,
              "CLASSIFICATIONID": "SECURITY ISSUE" ,
              "_lid": "resilient_test@in.ibm.com" ,
