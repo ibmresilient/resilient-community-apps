@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Generate Mock responses to simulate Cisco AMP for endpoinst for Unit and function tests """
-import time
 import re
+import json
 
 from requests import HTTPError
 from requests.models import Response
@@ -266,6 +266,11 @@ def post_res_att(file_name, incident_id):
                 }
     )
 
+def get_test_zip():
+    with open('mock.zip', 'r') as mockzip:
+        data = mockzip.read()
+    return data
+
 def mocked_res_client(*args):
 
     """Function will be used by the mock to replace resilient client"""
@@ -427,6 +432,47 @@ class MockGetResponse:
     def __getitem__(self, key):
         return getattr(self, key)
 
+
+def mocked_request_session(*args, **kwargs):
+    class MockGetResponseSession:
+        """Class will be used by the mock to replace get and post requests in standalone tests"""
+        def __init__(self, *args, **kwargs):
+            self.headers = {}
+            self.r = Response()
+            if args[0].lower() == "get":
+                if re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/file/.*/content$", args[1]):
+                    self.content = get_test_zip()
+                else:
+                    self.content = json.dumps(get_computers("all"))
+                self.status_code = 200
+            elif args[0].lower() == "patch":
+                self.content = json.dumps(move_endpoint())
+                self.status_code = 200
+            elif args[0].lower() == "post":
+                self.content = json.dumps(upload_file())
+                self.status_code = 200
+            elif args[0].lower() == "put":
+                self.content = json.dumps(assign_fingerprint_list_to_group())
+                self.status_code = 200
+            elif args[0].lower() == "delete":
+                self.content = json.dumps(delete_fingerprint_list())
+                self.status_code = 200
+        def json(self):
+            return json.loads(self.content)
+
+        def raise_for_status(self):
+            """Raises stored :class:`HTTPError`, if one occurred."""
+
+            http_error_msg = ''
+
+            if self.status_code in range(200, 203):
+                pass
+            elif self.status_code == 429:
+                http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)
+
+            if http_error_msg:
+                raise HTTPError(http_error_msg, response=self)
+    return MockGetResponseSession(*args, **kwargs)
 
 def get_mock_config():
     config_data = u"""[fn_cisco_amp4ep]
