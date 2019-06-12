@@ -139,6 +139,21 @@ def get_command_status():
                 u'lastPage': True, u'totalPages': 1, u'size': 20, u'totalElements': 4, u'numberOfElements': 4}
     return response
 
+def get_command_status_remediation():
+
+    response =  {u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}], u'number': 0,
+                 u'firstPage': True, u'content': [{u'computerName': u'WIN-N5KGH4CP3N3', u'subStateId': 0,
+                                                   u'binaryFileId': None, u'lastUpdateTime': u'2019-06-11T11:14:53Z',
+                                                   u'domainName': u'Default', u'hardwareKey': u'DC7D24D6465566D2941F35BC8D17801E',
+                                                   u'subStateDesc': u'', u'stateId': 3,
+                                                   u'computerId': u'89AD1BBB0946C25D25E6C0984E971D8A',
+                                                   u'computerIp': u'9.70.194.94', u'beginTime': u'2019-06-11T11:14:48Z',
+                                                   u'currentLoginUserName': u'Administrator',
+                                                   u'resultInXML': u'<EOC creator="Resilient" version="1.0" id="id">\n    <DataSource name="name" id="id" version="version"/>\n    <ScanType>FULL_SCAN</ScanType>\n    <RemediationAction>REMEDIATE</RemediationAction>\n    <Threat time="" severity="" type="" category="">\n        <Description>Remediate endpoint for suspect file C:\\temp\\where_copy.exe</Description>\n        <URL></URL>\n        <User></User>\n        <Attacker>\n        </Attacker>\n        <proxy ip=""/>\n        <Application></Application>\n    </Threat>\n    <Activity>\n        <OS id="0" name="name" version="version">\n            <Process>\n            </Process>\n            <Files>\n                <File name="C:\\temp\\where_copy.exe" action="create">\n                    <Hash name="SHA256" value="bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a"/>\n                    <Matched result="HASH_MATCH" value="C:\\$Recycle.Bin\\S-1-5-21-3046121036-4288610245-94028597-500\\$REPUASN.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\$Recycle.Bin\\S-1-5-21-3046121036-4288610245-94028597-500\\$RMRY4I0.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\temp\\where-copy.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\temp\\where.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\temp\\where_copy.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\Users\\Administrator\\Desktop\\where-copy(2).exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\Users\\Administrator\\Desktop\\where-copy.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\Users\\Administrator\\Documents\\where_copy.exe" remediation="FAILED" hashType="SHA256"/>\n                    <Matched result="HASH_MATCH" value="C:\\Windows\\SysWOW64\\where.exe" remediation="FAILED" hashType="SHA256"/></File>\n                <File name="C:\\temp\\where_copy.exe" action="create">\n                    <Matched result="FULL_MATCH" value="C:\\temp\\where_copy.exe" remediation="UNSUPPORTED" hashType="SHA256" hashValue="bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a"/></File>\n                <File name="C:\\temp\\where_copy.exe" action="create">\n                    <Matched result="FULL_MATCH" value="C:\\temp\\where_copy.exe" remediation="UNSUPPORTED" hashType="SHA256" hashValue="bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a"/></File>\n            </Files>\n            <Registry>\n            </Registry>\n            <Network/>\n        </OS>\n    </Activity>\n</EOC>'}],
+                 u'lastPage': True, u'totalPages': 1, u'size': 20, u'totalElements': 1, u'numberOfElements': 1
+                 }
+    return response
+
 def get_command_status_processed():
     response =  {u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}], 'total_match_ep_count': 2,
                 'total_remediation_count': 0, 'total_ep_count': 4, u'number': 0, u'firstPage': True, 'total_match_count': 2,
@@ -168,7 +183,70 @@ def get_command_status_processed():
                  }
     return response
 
-
+def get_command_status_prefilter(type):
+    response = {"match": ({ u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}],
+                            'total_match_ep_count': 1, 'total_remediation_count': 2, 'total_ep_count': 1, u'number': 0,
+                             u'firstPage': True, 'total_match_count': 3,
+                             u'content': [{u'computerName': u'WIN-N5KGH4CP3N3', u'subStateId': 0, u'binaryFileId': None,
+                                           u'lastUpdateTime': u'2019-06-11T11:14:53Z', u'domainName': u'Default',
+                                           u'hardwareKey': u'DC7D24D6465566D2941F35BC8D17801E', u'subStateDesc': u'', u'stateId': 3,
+                                           'scan_result': {'match_count': 3, 'remediation_count': 2, 'PARTIAL_MATCHES': [],
+                                                           'HASH_MATCHES': [{'remediation': 'SUCCEEDED', 'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\temp\\where-copy.exe'},
+                                                                            {'remediation': 'SUCCEEDED', 'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\temp\\where.exe'}],
+                                                           'artifact_type': 'SHA256 hash', 'FULL_MATCHES': [{'remediation': 'UNSUPPORTED', 'hashType': 'SHA256', 'hashValue': 'bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a', 'result': 'FULL_MATCH', 'value': 'C:\\temp\\where_copy.exe'}],
+                                                           'artifact_value': 'bfe4fd780b47e8d4e5661d4c3881d114e8631e84a686e3bb8aad85d4af20454a', 'fail_remediation_count': 9, 'MATCH': True},
+                                           u'computerId': u'89AD1BBB0946C25D25E6C0984E971D8A', u'computerIp': u'9.70.194.94', u'beginTime': u'2019-06-11T11:14:48Z',
+                                           u'currentLoginUserName': u'Administrator', u'resultInXML': u''}],
+                             u'lastPage': True, 'total_fail_remediation_count': 0, 'total_remediation_ep_count': 1, u'totalPages': 1,
+                             u'size': 20, u'totalElements': 1, 'total_not_completed': 0, 'overall_command_state': 'Completed',
+                             u'numberOfElements': 1
+                        }),
+                "no_match":   ({u'sort': [{u'direction': u'ASC', u'property': u'Begintime', u'ascending': True}],
+                                'total_match_ep_count': 0, 'total_remediation_count': 0, 'total_ep_count': 4, u'number': 0,
+                                u'firstPage': True, 'total_match_count': 0,
+                                u'content': [
+                                   {u'computerName': u'johnq1', u'subStateId': 0, u'binaryFileId': None,
+                                    u'lastUpdateTime': None, u'domainName': u'Default',
+                                    u'hardwareKey': u'B791D1DF2BB8AA77D19B10E3BB395B81', u'subStateDesc': None,
+                                    u'stateId': 0, u'computerId': u'236A7100A9FE9DC50A4F1AC2819C158E',
+                                    u'computerIp': u'192.168.56.104', u'beginTime': None, u'currentLoginUserName': u'root',
+                                    u'resultInXML': None},
+                                   {u'computerName': u'jqbf957root', u'subStateId': 0, u'binaryFileId': None,
+                                    u'lastUpdateTime': u'2019-06-12T09:28:54Z', u'domainName': u'Default',
+                                    u'hardwareKey': u'9FACFF634F892674CA3BF7EE995B565D', u'subStateDesc': u'',
+                                    u'stateId': 3,
+                                    'scan_result': {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [],
+                                                    'HASH_MATCHES': [], 'artifact_type': '', 'FULL_MATCHES': [],
+                                                    'artifact_value': '', 'fail_remediation_count': 0, 'MATCH': False},
+                                    u'computerId': u'5FA95F22A9FE9DC50A4F1AC22197CDF4', u'computerIp': u'9.162.166.16',
+                                    u'beginTime': u'2019-06-12T09:28:49Z', u'currentLoginUserName': u'Administrator',
+                                    u'resultInXML': u''},
+                                   {u'computerName': u'WIN-N5KGH4CP3N3', u'subStateId': 0, u'binaryFileId': None,
+                                    u'lastUpdateTime': u'2019-06-12T09:28:55Z', u'domainName': u'Default',
+                                    u'hardwareKey': u'DC7D24D6465566D2941F35BC8D17801E', u'subStateDesc': u'',
+                                    u'stateId': 3,
+                                    'scan_result': {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [],
+                                                    'HASH_MATCHES': [], 'artifact_type': '', 'FULL_MATCHES': [],
+                                                    'artifact_value': '', 'fail_remediation_count': 0, 'MATCH': False},
+                                    u'computerId': u'89AD1BBB0946C25D25E6C0984E971D8A', u'computerIp': u'9.70.194.94',
+                                    u'beginTime': u'2019-06-12T09:28:50Z', u'currentLoginUserName': u'Administrator',
+                                    u'resultInXML': u''},
+                                   {u'computerName': u'WIN-4OA0GKJN830', u'subStateId': 0, u'binaryFileId': None,
+                                    u'lastUpdateTime': u'2019-06-12T09:28:57Z', u'domainName': u'Default',
+                                    u'hardwareKey': u'1771D79454E53469DF4B290C06C104C9', u'subStateDesc': u'',
+                                    u'stateId': 3,
+                                    'scan_result': {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [],
+                                                    'HASH_MATCHES': [], 'artifact_type': '', 'FULL_MATCHES': [],
+                                                    'artifact_value': '', 'fail_remediation_count': 0, 'MATCH': False},
+                                    u'computerId': u'D31AA16E0946C25D40C83823C500518B', u'computerIp': u'9.70.194.93',
+                                    u'beginTime': u'2019-06-12T09:28:52Z', u'currentLoginUserName': u'Administrator',
+                                    u'resultInXML': u''}],
+                                u'lastPage': True, 'total_fail_remediation_count': 0, 'total_remediation_ep_count': 0,
+                                u'totalPages': 1, u'size': 20, u'totalElements': 4, 'total_not_completed': 1,
+                                'overall_command_state': 'In progress', u'numberOfElements': 4}
+                           )
+                }
+    return response[type]
 
 def get_file_content():
     response = "SGkgdGhlcmU="
