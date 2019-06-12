@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -31,25 +32,25 @@ def tz_from_utc_ms_ts(utc_ms_ts, tz_info):
     # set the timezone to UTC, and then convert to desired timezone
     return utc_datetime.replace(tzinfo=pytz.timezone('UTC')).astimezone(tz_info)
 
-
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_res_to_icd"""
-    
+    """Component that implements Resilient function 'res_to_icd_function"""
+
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_res_to_icd", {})
-        
+        self.options = opts.get("fn_res_to_icd_india", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_res_to_icd", {})
+        self.options = opts.get("fn_res_to_icd_india", {})
 
-    @function("fn_res_to_icd")
-    def _fn_res_to_icd_function(self, event, *args, **kwargs):
-        """Function: This function transfers an qradar severity to a priority on the icd ticket"""
+    @function("res_to_icd_function")
+    def _res_to_icd_function_function(self, event, *args, **kwargs):
+        """Function: This function transfers a resilient with a qradar severity (1-10) to an icd ticket with a priority (4-1)"""
         try:
+            # Get the wf_instance_id of the workflow this Function was called in
+            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
             
             incident_id=kwargs.get("incident_id")
             log = logging.getLogger(__name__)
@@ -83,7 +84,9 @@ class FunctionComponent(ResilientComponent):
             
             ## QRadar severity checking
 
-            qradar_sev = content['properties']['qradar_severity']  # number
+            qradar_sev = content['properties']['qradar_severity']
+            if not qradar_sev:
+                qradar_sev=1  # number
             log.info("qradar_sev: %s", qradar_sev)
             payload = ResultPayload('fn_res_to_icd', **kwargs)
 

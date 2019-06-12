@@ -6,8 +6,8 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_res_to_icd"
-FUNCTION_NAME = "fn_res_to_icd"
+PACKAGE_NAME = "fn_res_to_india"
+FUNCTION_NAME = "res_to_icd_function"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,19 +16,19 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_fn_res_to_icd_function(circuits, function_params, timeout=10):
+def call_res_to_icd_function_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("fn_res_to_icd", function_params)
+    evt = SubmitTestFunction("res_to_icd_function", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("fn_res_to_icd_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("res_to_icd_function_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestFnResToIcd:
-    """ Tests for the fn_res_to_icd function"""
+class TestResToIcdFunction:
+    """ Tests for the res_to_icd_function function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -44,5 +44,5 @@ class TestFnResToIcd:
         function_params = { 
             "incident_id": incident_id
         }
-        results = call_fn_res_to_icd_function(circuits_app, function_params)
+        results = call_res_to_icd_function_function(circuits_app, function_params)
         assert(expected_results == results)
