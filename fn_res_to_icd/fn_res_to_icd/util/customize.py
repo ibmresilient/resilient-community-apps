@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_res_to_india"""
+"""Generate the Resilient customizations required for fn_res_to_icd"""
 
 from __future__ import print_function
 from resilient_circuits.util import *
 
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_res_to_india package"""
-    reload_params = {"package": u"fn_res_to_india",
+    reload_params = {"package": u"fn_res_to_icd",
                     "incident_fields": [], 
                     "action_fields": [], 
                     "function_params": [u"incident_id"], 

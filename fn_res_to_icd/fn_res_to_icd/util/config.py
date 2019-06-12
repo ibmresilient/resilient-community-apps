@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Generate a default configuration-file section for fn_res_to_india"""
+"""Generate a default configuration-file section for fn_res_to_icd"""
 
 from __future__ import print_function
 

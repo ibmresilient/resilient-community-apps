@@ -1,4 +1,4 @@
 include README.md
-include fn_res_to_india/util/*
-include fn_res_to_india/LICENSE
+include fn_res_to_icd/util/*
+include fn_res_to_icd/LICENSE
 include doc/*

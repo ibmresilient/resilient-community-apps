@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_res_to_india
+   test with: resilient-circuits selftest -l fn_res_to_icd
 """
 
 import logging
