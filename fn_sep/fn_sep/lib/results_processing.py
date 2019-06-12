@@ -44,6 +44,7 @@ def parse_scan_results(xml):
         "PARTIAL_MATCHES": [],
         "match_count": 0,
         "remediation_count": 0,
+        "fail_remediation_count": 0
     }
     file_seps = ['\\', '/']
     match_types = ["HASH_MATCH", "FULL_MATCH", "PARTIAL_MATCH", "NO_MATCH"]
@@ -78,6 +79,8 @@ def parse_scan_results(xml):
                         scan_result["match_count"] += 1
                         if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
                             scan_result["remediation_count"] += 1
+                        if "remediation" in  item.attrib and item.attrib["remediation"] == "FAILED":
+                            scan_result["fail_remediation_count"] += 1
         return scan_result
 
     except ET.ParseError as e:
@@ -138,8 +141,9 @@ def process_results(rtn, status_type):
     # total_remediation_ep_count =  Total number of target endpoints with remediated artifacts.
     # total_ep_count = Total endpoint count for the command.
     # total_not_completed = Total endpoints which have not completed command.
+    # total_fail_remediation_count = Total remediation failures.
     rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
-        = rtn["total_remediation_ep_count"] = 0
+        = rtn["total_fail_remediation_count"] = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
     rtn["total_ep_count"] = len(rtn["content"])
 
@@ -152,6 +156,7 @@ def process_results(rtn, status_type):
                 # Reset total count.
                 rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
                 rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
+                rtn["total_fail_remediation_count"] += rtn["content"][i]["scan_result"]["fail_remediation_count"]
                 if rtn["content"][i]["scan_result"]["match_count"] > 0:
                     rtn["total_match_ep_count"] += 1
                 if rtn["content"][i]["scan_result"]["remediation_count"] > 0:
