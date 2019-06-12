@@ -38,24 +38,32 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_res_to_icd_india", {})
+        self.options = opts.get("fn_res_to_icd", {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_res_to_icd_india", {})
+        self.options = opts.get("fn_res_to_icd", {})
 
     @function("res_to_icd_function")
     def _res_to_icd_function_function(self, event, *args, **kwargs):
         """Function: This function transfers a resilient with a qradar severity (1-10) to an icd ticket with a priority (4-1)"""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
-            
+            # Variables
+            icd_email=kwargs.get("icd_email")
+            icd_pass=kwarg.get("icd_pass")
+            icd_qradar_severity=kwargs.get('icd_qradar_severity')
             incident_id=kwargs.get("incident_id")
+            icd_priority=kwargs.get("icd_priority")
+            
+            #loging
             log = logging.getLogger(__name__)
+            log.info("icd_email: %s", icd_email)
+            log.info("icd_password: %s", icd_pass)
+            log.info("icd_qradar_severity: %s", icd_qradar_severity)
+            log.info("icd_priority: %s", icd_priority)
             log.info("incident_id: %s", incident_id)
-
+            
             # Resilient client and api calls
             res_client = self.rest_client()
             incident_str='/incidents/{incident_id}/'.format(incident_id=incident_id)
@@ -80,28 +88,30 @@ class FunctionComponent(ResilientComponent):
                         details_payload +='ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'],art_content[i]['id'],art_content[i]['properties'][0]['name'].capitalize())
                         i += 1
             except:
+                details_payload += 'No artifacts populated from resilient'
                 log.error("Some artifacts may not have populated, please double check on icd desk")
             
             ## QRadar severity checking
-
-            qradar_sev = content['properties']['qradar_severity']
-            if not qradar_sev:
-                qradar_sev=1  # number
-            log.info("qradar_sev: %s", qradar_sev)
-            payload = ResultPayload('fn_res_to_icd', **kwargs)
-
-            if qradar_sev >= 1 and qradar_sev <= 3:
-                icd_priority = 4
-            elif qradar_sev == 4:
-                icd_priority = 3
-            elif qradar_sev >= 5 and qradar_sev <=6:
-                icd_priority = 2
-            elif qradar_sev >=7:
-                icd_priority = 1
+            if icd_qradar_severity:
+                qradar_sev = content['properties']['qradar_severity']
+                if not qradar_sev:
+                    qradar_sev=1  # number
+                log.info("qradar_sev: %s", qradar_sev)
+                if qradar_sev >= 1 and qradar_sev <= 3:
+                    icd_priority = 4
+                elif qradar_sev == 4:
+                    icd_priority = 3
+                elif qradar_sev >= 5 and qradar_sev <=6:
+                    icd_priority = 2
+                elif qradar_sev >=7:
+                    icd_priority = 1
+                else:
+                    log.warning("You have not set a Qradar priority, icd priority will be min value (4)")
+                    icd_priority = 4
             else:
-                log.warning("You have not set a Qradar priority, icd priority will be min value (4)")
-                icd_priority = 4
+
             
+            payload = ResultPayload('fn_res_to_icd', **kwargs)
             # Params and Desk call
             params =  { "DESCRIPTION": time ,
              "DESCRIPTION_LONGDESCRIPTION": details_payload ,
