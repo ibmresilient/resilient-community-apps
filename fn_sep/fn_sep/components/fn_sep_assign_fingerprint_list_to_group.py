@@ -29,7 +29,14 @@ class FunctionComponent(ResilientComponent):
     The function will execute a REST api get request against a SYMANTEC SEPM server for information on endpoints and
     returns a result in JSON format similar to the following.
 
-    {
+    {   'inputs': {u'sep_fingerprintlist_id': u'E60B061FDD844EBF9778D4BD2AC3942A', u'sep_groupid': u'7E4BB119A9FE9DC526EDABFB1EE261B8'},
+        'metrics': {'package': 'fn-sep', 'timestamp': '2019-05-28 17:53:52', 'package_version': '1.0.0', 'host': 'myhost',
+                   'version': '1.0', 'execution_time_ms': 1225},
+        'success': True,
+        'content': '',
+        'raw': '""',
+        'reason': None,
+        'version': '1.0'
     }
     """
     def __init__(self, opts):
