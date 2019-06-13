@@ -12,7 +12,7 @@ def config_section_data():
     config_data = u"""[fn_res_to_icd]
 icd_email=<YOUR ICD EMAIL>
 icd_pass=<YOUR ICD PASSWORD>
-icd_qradar_severity=False
-icd_priority=1
+icd_qradar_severity=<True or False>
+icd_priority=<1-4>
 """
     return config_data

@@ -40,7 +40,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_res_to_icd.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_res_to_india/components/[a-zA-Z]*.py")
+            "{}FunctionComponent = fn_res_to_icd.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_res_to_icd/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_res_to_icd.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_res_to_icd.util.customize:customization_data"],

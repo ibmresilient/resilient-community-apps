@@ -6,7 +6,7 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
-PACKAGE_NAME = "fn_res_to_india"
+PACKAGE_NAME = "fn_res_to_icd"
 FUNCTION_NAME = "res_to_icd_function"
 
 # Read the default configuration-data section from the package

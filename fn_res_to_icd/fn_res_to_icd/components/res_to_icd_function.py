@@ -49,14 +49,15 @@ class FunctionComponent(ResilientComponent):
     def _res_to_icd_function_function(self, event, *args, **kwargs):
         """Function: This function transfers a resilient with a qradar severity (1-10) to an icd ticket with a priority (4-1)"""
         try:
-            # Variables
-            icd_email=kwargs.get("icd_email")
-            icd_pass=kwargs.get("icd_pass")
-            icd_qradar_severity=kwargs.get('icd_qradar_severity')
+            # taken from config section
+            icd_email=self.options.get("icd_email")
+            icd_pass=self.options.get("icd_pass")
             incident_id=kwargs.get("incident_id")
-            icd_priority=kwargs.get("icd_priority")
+            icd_priority=self.options.get("icd_priority")
             
-            #loging
+            icd_qradar_severity=resilient_lib.str_to_bool(self.options.get('icd_qradar_severity'))
+
+            #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
             log.info("icd_password: %s", icd_pass)
@@ -78,7 +79,6 @@ class FunctionComponent(ResilientComponent):
             time="Date and Time: {0}".format(timeval)
 
             #artifact population to icd ticket 
-            icd_priority = 1
             details_payload=''
             artifact_limit=len(art_content)
             i = 0
@@ -121,8 +121,8 @@ class FunctionComponent(ResilientComponent):
              "INTERNALPRIORITY": icd_priority,
              "SITEID":"APPOPINT" ,
              "CLASSIFICATIONID": "SECURITY ISSUE" ,
-             "_lid": "resilient_test@in.ibm.com" ,
-             "_lpwd": "Welcome@1234"  } 
+             "_lid": icd_email ,
+             "_lpwd": icd_pass  } 
             response = requests.post("https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/", params=params, verify=False)
         
             # xml conversion to dict and reading

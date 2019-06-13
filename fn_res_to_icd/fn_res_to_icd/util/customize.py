@@ -6,8 +6,8 @@ from __future__ import print_function
 from resilient_circuits.util import *
 
 def codegen_reload_data():
-    """Parameters to codegen used to generate the fn_res_to_india package"""
-    reload_params = {"package": u"fn_res_to_icd",
+    """Parameters to codegen used to generate the fn_res_to_icd package"""
+    reload_params = {"package": u"fn_res_to_india",
                     "incident_fields": [], 
                     "action_fields": [], 
                     "function_params": [u"incident_id"], 
