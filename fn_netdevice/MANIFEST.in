@@ -1,0 +1,4 @@
+include README.md
+include fn_netdevice/util/*
+include fn_netdevice/LICENSE
+include doc/*
