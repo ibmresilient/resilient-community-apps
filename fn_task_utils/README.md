@@ -2,18 +2,28 @@
  
 This Resilient Integration provides tools to improve interoperability between the different Object Types in Resilient. 
 
-**This package contains 4 Functions, 5 Workflows and 5 Rules that help you orchestrate the creation, updating and closure of Tasks as a part of your SOAR plan**
+**This package contains 4 Functions, 4 Workflows and 4 Rules that help you orchestrate the creation, updating and closure of Tasks as a part of your SOAR plan**
 
  ![screenshot](./screenshots/1.png)
 ## Table of Contents
  
+- [IBM Resilient - Task Helper Functions](#ibm-resilient---task-helper-functions)
+  - [Table of Contents](#table-of-contents)
 - [app.config settings:](#appconfig-settings)
-- [Functions:](#functions)
-	1. [Task Utils - Add Note](#task-utils---add-note)
-	2. [Task Utils - Close Task](#task-utils---close-task)
-	3. [Task Utils - Create Custom Task](#task-utils---create-custom-task)
-	4. [Task Utils - Update Task](#task-utils---update-task)
-- [Rules:](#rules)
+  - [Functions:](#functions)
+  - [Task Utils - Add Note](#task-utils---add-note)
+    - [Function Inputs:](#function-inputs)
+    - [Function Output:](#function-output)
+  - [Task Utils - Close Task](#task-utils---close-task)
+    - [Function Inputs:](#function-inputs-1)
+    - [Function Output:](#function-output-1)
+  - [Task Utils - Create Custom Task](#task-utils---create-custom-task)
+    - [Function Inputs:](#function-inputs-2)
+    - [Function Output:](#function-output-2)
+  - [Task Utils - Update Task](#task-utils---update-task)
+    - [Function Inputs:](#function-inputs-3)
+    - [Function Output:](#function-output-3)
+  - [Rules:](#rules)
 
 # app.config settings:
 
