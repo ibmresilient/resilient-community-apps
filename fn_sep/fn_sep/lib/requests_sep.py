@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
+
+""" Process https requests """
 import logging
 from requests import request, HTTPError
 import re
@@ -89,8 +91,8 @@ class RequestsSep(object):
         #  Firstly check if a zip file is returned.
         key = content = None
         if r.content.startswith(ZIP_MAGIC):
-                (key, content) = self.get_unzipped_contents(r.content)
-                return self.decrypt_xor(content, key)
+            (key, content) = self.get_unzipped_contents(r.content)
+            return self.decrypt_xor(content, key)
         #  Else try to see if is json.
         try:
             return r.json()
