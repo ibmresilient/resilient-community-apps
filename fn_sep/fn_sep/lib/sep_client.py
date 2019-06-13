@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """ Class for Resilient circuits Functions supporting REST API client for Symantec SEP  """
 import logging

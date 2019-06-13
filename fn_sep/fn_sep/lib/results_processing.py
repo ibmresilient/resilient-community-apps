@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """ Process results from command status received form Symantec SEPM server. """
-
 from __future__ import print_function
 import logging
 import xml.etree.ElementTree as ET
