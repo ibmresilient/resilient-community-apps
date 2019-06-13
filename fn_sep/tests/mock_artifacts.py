@@ -471,8 +471,6 @@ def mocked_request_session(*args, **kwargs):
 
             if self.status_code in range(200, 203):
                 pass
-            elif self.status_code == 429:
-                http_error_msg = u'%s Server Error: %s for url: %s' % (self.status_code, reason, self.url)
 
             if http_error_msg:
                 raise HTTPError(http_error_msg, response=self)

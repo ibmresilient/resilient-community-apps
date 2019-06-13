@@ -83,7 +83,7 @@ def parse_scan_results(xml):
         return scan_result
 
     except ET.ParseError as e:
-        LOG.error("There was an error trying to process scan result XML.", e.__repr__(), e.message)
+        LOG.error("During scan result XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
         raise e
 
 def get_overall_progress(rtn):

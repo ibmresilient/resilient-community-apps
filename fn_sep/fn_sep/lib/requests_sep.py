@@ -134,7 +134,7 @@ class RequestsSep(object):
             return (key, c_unzipped)
 
         except ET.ParseError as e:
-            LOG.error("There was an error trying to process content XML.", e.__repr__(), e.message)
+            LOG.error("During metadata file XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
             raise e
 
     @staticmethod
