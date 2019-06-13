@@ -11,7 +11,7 @@ from fn_netdevice.lib.netmiko import execute
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'network_device_locker"""
+    """Component that implements Resilient function 'fn-netdevice"""
 
     SECTION_HDR = "fn_netdevice"
 
