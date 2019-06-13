@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Test Sep client  class"""
+"""Test Sep client  class."""
 from __future__ import print_function
 from mock import patch
 import pytest

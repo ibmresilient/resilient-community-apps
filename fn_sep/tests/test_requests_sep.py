@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-"""Test helper functions"""
+"""Test requests functionality."""
 from __future__ import print_function
 from mock import patch
 import pytest

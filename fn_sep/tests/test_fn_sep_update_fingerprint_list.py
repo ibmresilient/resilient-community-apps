@@ -1,6 +1,8 @@
-# -*- coding: utf-8 -*-
-"""Tests using pytest_resilient_circuits"""
+## -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
+"""Tests for fn_sep_update_fingerprint_list function."""
 from __future__ import print_function
 import pytest
 from mock import patch

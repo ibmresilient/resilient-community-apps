@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-"""Generate Mock responses to simulate Cisco AMP for endpoinst for Unit and function tests """
+"""Generate Mock responses to simulate Symantec SEP for Unit and function tests """
 import re
 import json
 

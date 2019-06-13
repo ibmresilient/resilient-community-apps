@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
-"""Test helper functions"""
+"""Test results processing functionality."""
 from __future__ import print_function
-from mock import patch
 import pytest
-from fn_sep.lib.requests_sep import *
+from fn_sep.lib.results_processing import *
 from  mock_artifacts import get_command_status, get_command_status_remediation, get_command_status_prefilter
 """
 Suites of tests to test the Symantec SEP results_processing functions
 """
-from fn_sep.lib.results_processing import *
 
 def assert_keys_in(json_obj, *keys):
     for key in keys:
