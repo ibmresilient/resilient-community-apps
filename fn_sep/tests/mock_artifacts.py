@@ -5,7 +5,7 @@
 """Generate Mock responses to simulate Symantec SEP for Unit and function tests """
 import re
 import json
-
+from sys import version_info
 from requests import HTTPError
 from requests.models import Response
 
@@ -249,7 +249,7 @@ def get_command_status_prefilter(type):
     return response[type]
 
 def get_file_content():
-    response = "SGkgdGhlcmU="
+    response = bytearray(u"SGkgdGhlcmU=", "utf8")
     return response
 
 def upload_file():
@@ -267,7 +267,7 @@ def post_res_att(file_name, incident_id):
     )
 
 def get_test_zip():
-    with open('mock.zip', 'r') as mockzip:
+    with open('mock.zip', 'rb') as mockzip:
         data = mockzip.read()
     return data
 
@@ -457,6 +457,10 @@ def mocked_request_session(*args, **kwargs):
             elif args[0].lower() == "delete":
                 self.content = json.dumps(delete_fingerprint_list())
                 self.status_code = 200
+            if version_info.major == 3:
+                if not isinstance(self.content, bytes):
+                    self.content = bytes(self.content, "utf8")
+
         def json(self):
             return json.loads(self.content)
 

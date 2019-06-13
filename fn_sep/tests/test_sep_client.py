@@ -316,7 +316,7 @@ class TestSEPClient:
     """ Test sep_client.get_file_content """
     @patch("fn_sep.lib.sep_client.RequestsSep", side_effect=mocked_request)
     @pytest.mark.parametrize("sep_file_id, expected_results", [
-        ("A6954725A9FE9DC55AFCE85840A2483B", "SGkgdGhlcmU=")
+        ("A6954725A9FE9DC55AFCE85840A2483B", b"SGkgdGhlcmU=")
     ])
     def test_get_file_content(self, mock_get, sep_file_id, expected_results):
 

@@ -87,7 +87,7 @@ class TestSEPRequests:
 
     """Test get_unzipped_contents function"""
     @pytest.mark.parametrize("zip,  expected_results", [
-        (get_test_zip(),  ["10", "^oy~*nk~k"]),
+        (get_test_zip(),  ["10", b"^oy~*nk~k"]),
     ])
     def test_unzip(self, zip, expected_results):
         req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
@@ -97,7 +97,7 @@ class TestSEPRequests:
 
     """Test decrypt_xor function"""
     @pytest.mark.parametrize("xored_data, key, expected_results", [
-        ("^oy~*nk~k", "10" , "Test data"),
+        (b"^oy~*nk~k", "10" , b"Test data"),
     ])
     def test_decrypt_xor(self, xored_data, key, expected_results):
         req_sep = RequestsSep(get_config(), FUNCTION_PARAMS)
@@ -182,7 +182,7 @@ class TestSEPRequests:
     """Test get content function"""
     @patch('fn_sep.lib.requests_sep.request', side_effect=mocked_request_session)
     @pytest.mark.parametrize("req_data, expected_results", [
-        (get_req_data("get_content"), "Test data")
+        (get_req_data("get_content"), b"Test data")
     ])
     def test_get_content(self, mock_post, req_data, expected_results):
         keys = ["responseCode", ""]
@@ -192,6 +192,3 @@ class TestSEPRequests:
         url = req_data.pop("url")
         results = req_sep.execute_call(method, url, **req_data)
         assert expected_results == results
-
-
-

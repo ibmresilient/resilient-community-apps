@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-"""Test helper functionality."""
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+"""Test helper functions"""
 import pytest
 from fn_sep.lib.helpers import *
 from mock_artifacts import mocked_res_client, get_computers, get_command_status_processed
@@ -121,7 +121,7 @@ class TestHelpersGenerateResultCvs:
     def test_generate_result_cvs(self, rtn, sep_commandid, expected_results):
         """ Test  generate_result_cvs using mocked data.  """
         content_values = expected_results[1:]
-        result_time = datetime.today().strftime('%Y%m%d%H%M%S"')
+        result_time = datetime.today().strftime('%Y%m%d%H%M%S')
         (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
         assert "EOC_scan_results_for_commandid_"+expected_results[0]+"_"+result_time+".csv" == file_name
         for c in file_content.split('\n'):
