@@ -43,8 +43,6 @@ class FunctionComponent(ResilientComponent):
 
     @function("res_to_icd_function")
     def _res_to_icd_function_function(self, event, *args, **kwargs):
-        """Function: This function transfers a resilient with a qradar severity (1-10)
-        to an icd ticket with a priority (4-1)"""
         try:
             # taken from config section
             icd_email = self.options.get("icd_email")
@@ -74,18 +72,19 @@ class FunctionComponent(ResilientComponent):
             details_payload = ''
             artifact_limit = len(art_content)-1
             i = 0
-            try:
-                while i <= artifact_limit:
-                    if art_content[i].get('properties', False):
-                        if art_content[i]['properties'][0]['name'] in ('source', 'destination'): 
-                            details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
-                            log.info(i)
-                        else:
-                            log.error("This artifact did not populate")
-                    i += 1
-            except Exception as artifact_error:
-                log.info(artifact_error)
-                log.error("Encountered an error parsing artifacts")
+            if icd_qradar_severity:
+                try:
+                    while i <= artifact_limit:
+                        if art_content[i].get('properties', False):
+                            if art_content[i]['properties'][0]['name'] in ('source', 'destination'): 
+                                details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
+                                log.info(i)
+                            else:
+                                log.error("This artifact did not populate")
+                        i += 1
+                except Exception as artifact_error:
+                    log.info(artifact_error)
+                    log.error("Encountered an error parsing artifacts")
             ## QRadar severity checking
             if icd_qradar_severity:
                 qradar_sev = content['properties']['qradar_severity']
