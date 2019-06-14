@@ -24,6 +24,7 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_task_utils'",
     long_description="Resilient Circuits Components which can be used to manipulate existing tasks or create new ones. Provides functions which can be invoked through standalone example rules or can be integrated as part of a custom workflow",
     install_requires=[
