@@ -4,19 +4,19 @@ This community app allows for the escalation of a incident from resilient to the
 
 To install the package,
 
-pip install dist/fn-res-to-icd-1.0.0.tar.gz
+`pip install dist/fn-res-to-icd-1.0.0.tar.gz`
 
 To install in "development mode"
 
-pip install -e ./fn_res_to_icd/
+`pip install -e ./fn_res_to_icd/`
 
 Please update the config settings via:
 
-resilient-circuits config -c [-u]
+`resilient-circuits config -c [-u]`
 
 Customize with:
 
-resilient-circuits customize 
+`resilient-circuits customize` 
 
 After installation, the package will be loaded by `resilient-circuits run`.
 
@@ -31,7 +31,8 @@ After installation, the package will be loaded by `resilient-circuits run`.
 
 * res-to-icd-function: gives you the ability to escalate the incident from resilient to icd
 
-# Config settings and prerequisites
+# res-to-icd-function
+## Config settings and prerequisites
 Package dependencies are included, import errors between python 2 and 3 are handled.
 
 ```
