@@ -1,0 +1,4 @@
+include README.md
+include fn_misp/util/*
+include fn_misp/LICENSE
+include  screenshots/*

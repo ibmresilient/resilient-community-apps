@@ -6,11 +6,23 @@ Before installing, verify that your environment meets the following prerequisite
 * Resilient platform is version 30 or later. 
 * You have a Resilient account to use for the integrations. This can be any account that has the permission to view and modify administrator and customization settings, and read and update incidents. You need to know the account username and password.
 * You have access to a Resilient integration server where you will deploy and run the functions code. If not, you need to install and configure the server as described in the [Integration Server Guide](https://github.com/ibmresilient/resilient-reference/blob/master/developer_guides/Integration%20Server%20Guide.pdf).
-* Because of dependencies on other libraries, including GCC, the system hosting the integration server must allow additional components to be installed. Therefore, it cannot be installed on the default Resilient appliance.
-* The ODBC function uses pyodbc, an open source Python module. For an integration server on Linux, you need to install additional packages to support compiling pyodbc, before installing the function. When installing pyodbc on Linux, the pip utility downloads and compiles the pyodbc source code. This requires that related components and source files are available for the compile to succeed. Got to [GitHub Pyodbc Wiki page](https://github.com/mkleehammer/pyodbc/wiki/Install) for the list of all needed packages and installation instructions.
+* The ODBC function uses pyodbc, an open source Python module.
+    * For an integration server on Linux, you need to install additional packages to support compiling pyodbc, before installing the function. 
+    * For an integration server on RHEL that does not have GCC compiler, you can install a pyodbc wheel file, a binary distribution for pyodbc for RHEL platform, included with the function package, located in lib folder. The wheel installs the pyodbc library and negates the need for the GCC library.
+    * When installing pyodbc on Linux, the pip utility downloads and compiles the pyodbc source code. This requires that other related components and libraries, including GCC, are available for the compile to succeed. Go to [GitHub Pyodbc Wiki page](https://github.com/mkleehammer/pyodbc/wiki/Install) for the list of all needed packages and installation instructions.
+    NOTE: Downloading and compiling the pyodbc module yourself ensures that you have the latest version of pyodbc; however, the integration server must be on a system separate from the Resilient platform.
+    * For an integration server on Windows, installing fn_odbc_query.tar.gz installs the pyodbc module automatically.
 * resilient-circuits >=v30.0.0
 
 ## Environment
+If using the wheel file, install the appropriate file as follows: 
+
+* If using Python 2.7:
+    `pip install pyodbc-4.0.25-cp27-cp27m-linux_x86_64.whl`
+    
+* If using Python 3.6:
+    `pip install pyodbc-4.0.25-cp36-cp36m-linux_x86_64.whl`
+
 To install in "development mode"
     `pip install -e ./fn_odbc_query/`
     

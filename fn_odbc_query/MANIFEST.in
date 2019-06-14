@@ -1,4 +1,5 @@
 include README.md
 include fn_odbc_query/util/*
 include fn_odbc_query/LICENSE
-include fn_odbc_query/doc/*
+include doc/*
+include lib/*

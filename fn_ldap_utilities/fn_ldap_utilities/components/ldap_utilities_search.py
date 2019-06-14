@@ -1,21 +1,16 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2018. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 """ Resilient functions component to execute queries against an LDAP server """
 
 import logging
 import json
 import re
-
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import ldap3
-from ldap3 import Server, Connection, ALL
-from ldap3.core.exceptions import LDAPSocketOpenError, LDAPNoSuchObjectResult, LDAPInvalidCredentialsResult, \
-    LDAPInvalidFilterError, LDAPAttributeError, LDAPObjectClassError
-from ldap3.utils.conv import escape_filter_chars, to_unicode
-from ldap3.utils.config import get_config_parameter
-
+from ldap3 import ALL_ATTRIBUTES
+from ldap3.core.exceptions import LDAPSocketOpenError
+from ldap3.utils.conv import escape_filter_chars
 from fn_ldap_utilities.util.helper import LDAPUtilitiesHelper
 
 class FunctionComponent(ResilientComponent):
@@ -64,72 +59,23 @@ class FunctionComponent(ResilientComponent):
     def _ldap_utilities_search_function(self, event, *args, **kwargs):
         """Resilient Function: entry point """
 
-        LOG = logging.getLogger(__name__)
+        log = logging.getLogger(__name__)
 
-        def escape_chars(str, encoding=None):
-          """ Escape some characters in filter.
+        def replace_ldap_param(ldap_param_value=None, ldap_search_filter=""):
 
-          Escape a set of characters in the filter string to help to mitigate against possibility of injection.
-          This has a subset of characters escaped in ldap3 function escape_filter_chars.
+            re_pattern = "%ldap_param%"
 
-          """
-          if encoding is None:
-              encoding = get_config_parameter('DEFAULT_ENCODING')
+            # if "ldap_param" in ldap_search_filter:
 
-          str = to_unicode(str, encoding)
-          escaped_str = str.replace('\\', '\\5c')
-          escaped_str = escaped_str.replace('*', '\\2a')
-          escaped_str = escaped_str.replace('\x00', '\\00')
+            if re.search(re_pattern, ldap_search_filter) is not None:
+                if ldap_param_value is None:
+                    raise ValueError("The LDAP Search Filter '{0}' contains the key '%ldap_param%' but no value has been given for ldap_search_param.".format(ldap_search_filter))
 
-          return escaped_str
-
-        def validate_params(search_params):
-          """"Check mandatory fields
-
-          Do a number of checks on input fields.
-
-          """
-          for k in search_params:
-            if re.match(r'^search_filter$', k):
-                # Do some basic checks on filter.
-                if not re.match(r'^\(.*\)$', search_params[k]):
-                    # Outer parentheses not found thus invalid filter
-                    raise ValueError("LDAP search filter invalid format")
-                if not search_params[k].count('(') == search_params[k].count(')'):
-                    # The count of '(' and ')' characters need to match in filter.
-                    raise LDAPInvalidFilterError("Invalid filter because of unmatched parentheses.")
-
-        def update_param_fields(search_params):
-          """"Update %ldap_param% fields
-
-          Escape some characters in search_params[search_filter].
-          If search_params[search_filter] hash key has %ldap_param% set in it's value, update
-          value replacing %param% with actual escaped value from param.
-
-          """
-          for k in search_params:
-            if re.match('^search_filter$', k):
-              # Escape some characters in search_filter which might cause LDAP injection.
-              search_params[k] = escape_chars(search_params[k])
-
-              # Search for "%ldap_param% token in parameter.
-              if re.search("%ldap_param%", search_params[k]):
-
-                # Only allow "%ldap_param% in search_filter field.
-                if re.match('^search_filter$', k):
-                  
-                  if "param" not in search_params:
-                    raise Exception ("The parameter '{}' contains string token '%ldap_param%' but the input '{}' is blank.".format(k, "ldap_search_param"))
-                  
-                  else:
-                    # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
-                    search_params[k] = re.sub("%ldap_param%", search_params["param"].replace('\\', '\\\\'), search_params[k])
-                    LOG.debug(('Transformed parameter'+k+' to '+search_params[k]))
-                
                 else:
-                  raise Exception("The string %ldap_param% not allowed in parameter '{}' ".format(k))
+                    # Insert escaped param value in filter, need to escape any backslashes X 2 for regex.
+                    ldap_search_filter = re.sub(re_pattern, ldap_param_value.replace('\\', '\\\\'), ldap_search_filter)
 
-          return search_params
+            return ldap_search_filter
 
         try:
             yield StatusMessage("Starting ldap_utilities_search")
@@ -144,89 +90,79 @@ class FunctionComponent(ResilientComponent):
             input_ldap_search_attributes = helper.get_function_input(kwargs, "ldap_search_attributes", optional=True)  # text (optional)
             input_ldap_search_param = helper.get_function_input(kwargs, "ldap_search_param", optional=True)  # text (optional)
 
+            # If search_attributes is not specified, request that ALL_ATTRIBUTES for the DN be returned
             if input_ldap_search_attributes is None:
-              input_ldap_search_attributes = ""
+                input_ldap_search_attributes = ALL_ATTRIBUTES
             else:
-              attributes = input_ldap_search_attributes.split(',')
-              input_ldap_search_attributes = [str(attr) for attr in attributes]
+                input_ldap_search_attributes = [str(attr) for attr in input_ldap_search_attributes.split(',')]
+
+            if input_ldap_search_param is not None:
+                # Escape special chars from the search_param
+                input_ldap_search_param = escape_filter_chars(input_ldap_search_param)
 
             yield StatusMessage("Function Inputs OK")
 
-            search_params = {
-              'search_base': input_ldap_search_base, 
-              'search_filter': input_ldap_search_filter,
-              'search_attributes': input_ldap_search_attributes
-            }
-
-            if input_ldap_search_param:
-              # Escape 'param' parameter.
-              search_params.setdefault('param', escape_filter_chars(input_ldap_search_param))
-            
-            yield StatusMessage("Validating LDAP Parameters")
-            validate_params(search_params)
-            search_params = update_param_fields(search_params)
+            input_ldap_search_filter = replace_ldap_param(input_ldap_search_param, input_ldap_search_filter)
 
             # Instansiate LDAP Server and Connection
-            c = helper.get_ldap_connection()
+            conn = helper.get_ldap_connection()
 
             try:
-              # Bind to the connection
-              c.bind()
-            except Exception as e:
-              raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct")
-
-            # Inform user
-            msg = ""
-            if helper.LDAP_IS_ACTIVE_DIRECTORY:
-              msg = "Connected to {0}".format("Active Directory")
-            else:
-              msg = "Connected to {0}".format("LDAP Server")
-            yield StatusMessage(msg)
-
-            res = False
-            entries = []
-            success = False
+                # Bind to the connection
+                conn.bind()
+            except Exception as err:
+                raise ValueError("Cannot connect to LDAP Server. Ensure credentials are correct\n Error: {0}".format(err))
 
             try:
-              yield StatusMessage("Attempting to Search")
-              res = c.search(search_params["search_base"], search_params["search_filter"], attributes=search_params["search_attributes"])
+                # Inform user
+                yield StatusMessage("Connected to {0}".format("Active Directory" if helper.LDAP_IS_ACTIVE_DIRECTORY else "LDAP Server"))
 
-              if res and len(c.entries) > 0:
-
-                entries = json.loads(c.response_to_json())["entries"]
-                LOG.info("Result contains %s entries", len(entries))
-
-                # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.
-                for entry in entries:
-                  LOG.debug(json.dumps(entry))
-                  entry.update(entry.pop("attributes", None))
-            
-                yield StatusMessage("{0} entries found".format(len(entries)))
-                success = True
-
-              else:
-                yield StatusMessage("No entries found")
+                res = None
+                entries = []
                 success = False
 
-            except LDAPSocketOpenError:
-              success = False
-              raise ValueError("Invalid Search Base", input_ldap_search_base)
+                yield StatusMessage("Attempting to Search")
 
-            except Exception as e:
-              success = False
-              raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", e)
+                res = conn.search(
+                    search_base=input_ldap_search_base,
+                    search_filter=input_ldap_search_filter,
+                    attributes=input_ldap_search_attributes)
+
+                if res and len(conn.entries) > 0:
+
+                    entries = json.loads(conn.response_to_json())["entries"]
+                    log.info("Result contains %s entries", len(entries))
+
+                    # Each entry has 'dn' and dict of 'attributes'. Move attributes to the top level for easier processing.
+                    for entry in entries:
+                        entry.update(entry.pop("attributes", None))
+
+                    yield StatusMessage("{0} entries found".format(len(entries)))
+                    success = True
+
+                else:
+                    yield StatusMessage("No entries found")
+                    success = False
+
+            except LDAPSocketOpenError:
+                success = False
+                raise ValueError("Invalid Search Base", input_ldap_search_base)
+
+            except Exception as err:
+                success = False
+                raise ValueError("Could not Search the LDAP Server. Ensure 'ldap_search_base' is valid", err)
 
             finally:
-              # Unbind connection
-              c.unbind()
+                # Unbind connection
+                conn.unbind()
 
             results = {
-              "success": success,
-              "entries": entries
+                "success": success,
+                "entries": entries
             }
 
-            LOG.info("Completed")
-            LOG.debug(json.dumps(results))
+            log.info("Completed")
+            log.debug("RESULTS: %s", results)
 
             # Produce a FunctionResult with the return value.
             yield FunctionResult(results)
