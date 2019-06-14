@@ -19,7 +19,13 @@ QRADAR_CFMA_TUNING="/config/tuning"
 
 class HttpInfo(object):
     def __init__(self, qradar_host, advisor_app_id, qradar_token, cafile, log):
-        self.host = qradar_host
+        if qradar_host.startswith("http"):
+            # User wants to specify http or https
+            self.host = qradar_host
+        else:
+            # Always assume https
+            self.host = "https://" + qradar_host
+
         self.cafile = cafile
         self.app_id = advisor_app_id
         self.token = qradar_token

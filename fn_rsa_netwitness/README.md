@@ -1,0 +1,1 @@
+### The RSA NetWitness functions query for metadata and return pcap and log files for specific times and sessions. It requires that the fn_utilities integration is also deployed to the Resilient platform. Refer to the documentation for further details.

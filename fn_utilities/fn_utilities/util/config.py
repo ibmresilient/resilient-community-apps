@@ -54,4 +54,9 @@ whois=whois "{{shell_param1}}"
 
 # directory of xml stylesheets to use for xml transformations
 # xml_stylesheet_dir=
+
+# Max Timer sleep timeThe input string is of format “time value” concatenated with a
+# “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours
+# ‘d’ for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes;
+max_timer=30d
 """
