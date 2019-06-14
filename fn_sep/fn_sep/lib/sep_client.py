@@ -56,8 +56,6 @@ class Sepclient(object):
             "command_status":                           self.base_path+"/command-queue/{}",
             "file_content":                             self.base_path+"/command-queue/file/{}/content",
             "quarantine_endpoints":                     self.base_path+"/command-queue/quarantine",
-            "policies":                                 self.base_path+"/policies/summary",
-            "policies_by_type":                         self.base_path+"/policies/summary/{}",
             "fingerprints_list":                        self.base_path+"/policy-objects/fingerprints",
             "fingerprints_list_by_id":                  self.base_path+"/policy-objects/fingerprints/{}",
             "assign_fingerprint_list_to_group":         self.base_path+"/groups/{0}/system-lockdown/fingerprints/{1}"
@@ -231,24 +229,6 @@ class Sepclient(object):
 
         params = {"domain": domain, "fullPathName": fullpathname, "order":order,
                   "pageIndex": pageindex , "pageSize": pagesize, "sort": sort}
-
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
-
-        return r
-
-    def get_policies_summary(self, policy_type=None, domainid=None):
-        """ Get list of policies.
-        Supported types are: av, fw, lu, hi, hid adc, ips, or exceptions.
-        :param policy_type: If present gets a summary for all the policies of this type.
-        :param domainid: If present, get policies from this domain. Otherwise, get policies from the logged-on domain.
-        :return Result in json format.
-        """
-        if policy_type is None:
-            url = urljoin(self.base_url, self._endpoints["policies"])
-        else:
-            url = urljoin(self.base_url, self._endpoints["policies_by_type"]).format(policy_type)
-
-        params = {"domainId": domainid}
 
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
 

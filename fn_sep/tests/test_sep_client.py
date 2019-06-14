@@ -150,26 +150,6 @@ class TestSEPClient:
         assert_keys_in(response, *keys)
         assert expected_result == len(response["content"])
 
-    """ Test sep_client.get_policies_summary  """
-    @patch("fn_sep.lib.sep_client.RequestsSep", side_effect=mocked_request)
-    @pytest.mark.parametrize("sep_domainid, sep_policy_type, expected_result", [
-        ("908090000946C25D330E919313D23887", {'name': 'fw', 'id': 201}, 2)
-    ])
-    def test_get_policies_summary(self, mock_get, sep_domainid, sep_policy_type, expected_result):
-
-        keys = ["content", "firstPage", "lastPage", "number", "numberOfElements", "size", "sort", "totalElements",
-                  "totalPages"]
-
-        test_kwargs = {
-            "sep_domainid": sep_domainid,
-            "sep_policy_type": sep_policy_type
-        }
-        params = transform_kwargs(test_kwargs)
-        sep_client = Sepclient(get_config())
-        response = sep_client.get_policies_summary(**params)
-        assert_keys_in(response, *keys)
-        assert expected_result == len(response["content"])
-
     """ Test sep_client.get_fingerprint_list """
     @patch("fn_sep.lib.sep_client.RequestsSep", side_effect=mocked_request)
     @pytest.mark.parametrize("sep_domainid, sep_fingerprintlist_id, sep_fingerprintlist_name, expected_result", [

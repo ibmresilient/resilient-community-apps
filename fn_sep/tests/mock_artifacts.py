@@ -91,12 +91,6 @@ def get_groups():
 
     return response
 
-def get_policies_summary():
-    response = {u'sort': None, u'number': 0, u'firstPage': True, u'content':
-        [{u'domainid': u'908090000946C25D330E919313D23887', u'name': u'Firewall policy', u'subtype': None, u'enabled': True, u'sources': [], u'assignedtocloudgroups': None, u'policytype': u'fw', u'assignedtolocations': [{u'defaultLocationId': u'EC7E378A0946C25D39A1D3E8C5FB589B', u'locationIds': [u'EC7E378A0946C25D39A1D3E8C5FB589B'], u'groupId': u'CAD80F000946C25D6C150831060AA326'}], u'id': u'846A39040946C25D3AA897754E2EC515', u'desc': u'Created automatically during product installation.'},
-         {u'domainid': u'908090000946C25D330E919313D23887', u'name': u'Quarantine Firewall policy', u'subtype': None, u'enabled': True, u'sources': [], u'assignedtocloudgroups': None, u'policytype': u'fw', u'assignedtolocations': None, u'id': u'2867FBA60946C25D300A05176DC01DE0', u'desc': u'Created automatically during product installation.'}], u'lastPage': True, u'totalPages': 1, u'size': 2, u'totalElements': 2, u'numberOfElements': 2}
-    return response
-
 def move_endpoint():
     response = [{u'responseMessage': u'OK', u'responseCode': u'200'}]
     return response
@@ -333,9 +327,6 @@ def mocked_sep_client(*args):
                        pagesize=None, sort=None):
             return get_groups()
 
-        def get_policies_summary(self, policy_type=None, domainid=None):
-            return get_policies_summary()
-
         def move_endpoint(self, groupid, hardwarekey):
             return move_endpoint()
 
@@ -394,8 +385,6 @@ def mocked_request(*args, **kwargs):
                         return get_computers("hostname")
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/groups$", args[1]):
                     return get_groups()
-                elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policies/summary", args[1]):
-                    return get_policies_summary()
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/policy-objects/fingerprints", args[1]):
                     return get_fingerprint_list()
                 elif re.match("^https://192.168.1.2:8446/sepm/api/v1/command-queue/file/.*/content$", args[1]):
