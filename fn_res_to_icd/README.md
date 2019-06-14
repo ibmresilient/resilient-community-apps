@@ -32,7 +32,7 @@ After installation, the package will be loaded by `resilient-circuits run`.
 * res-to-icd-function: gives you the ability to escalate the incident from resilient to icd
 
 # Config settings and prerequisites
-After installing of the package via "pip install dist/fn_res_to_icd-1.0.0.tar.gz", these app.config settings can be populated via "resilient-circuits config -c [or -u]"
+Package dependencies are included, import errors between python 2 and 3 are handled.
 
 ```
 [fn_res_to_icd]
@@ -48,5 +48,5 @@ As a further testing of credentials, the developer may run command:
 
 To verify that input credentials to icd dashboard are valid via an api call.
 
- ![screenshot](./screenshots/1.png)
 ![screenshot](./screenshots/1.png)
+![screenshot](./screenshots/2.png)
