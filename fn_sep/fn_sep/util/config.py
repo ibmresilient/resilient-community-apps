@@ -13,12 +13,12 @@ def config_section_data():
     config_data = u"""[fn_sep]
 base_path=/sepm/api/v1
 auth_path=/sepm/api/v1/identity/authenticate
-host=9.70.194.93
+host=<SEPM server dns name or ip address>
 port=8446
-username=admin
-password=password
-domain=''
-# Results limit value.
+username=<username>
+password=<password>
+domain=<SEP domain name>
 results_limit=200
+
 """
     return config_data
