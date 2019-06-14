@@ -80,16 +80,20 @@ class FunctionComponent(ResilientComponent):
 
             #artifact population to icd ticket 
             details_payload=''
-            artifact_limit=len(art_content)
+            artifact_limit=len(art_content)-1
             i = 0
             try:
-                while i < artifact_limit:
-                    if art_content[i]['properties'][0]['name'] in ('source' , 'destination'): 
-                        details_payload +='ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'],art_content[i]['id'],art_content[i]['properties'][0]['name'].capitalize())
-                        i += 1
-            except:
-                details_payload += 'No artifacts populated from resilient'
-                log.error("Some artifacts may not have populated, please double check on icd desk")
+                while i <= artifact_limit:
+                    if art_content[i].get('properties',False):
+                        if art_content[i]['properties'][0]['name'] in ('source' , 'destination'): 
+                            details_payload +='ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'],art_content[i]['id'],art_content[i]['properties'][0]['name'].capitalize())
+                            log.info(i)
+                        else:
+                            pprint.pprint("This artifact did not populate")
+                    i += 1
+            except Exception as artifact_error:
+                log.info(artifact_error)
+                log.error("Encountered an error parsing artifacts")
             
             ## QRadar severity checking
             if icd_qradar_severity:
