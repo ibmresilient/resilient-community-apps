@@ -10,7 +10,7 @@ To install in "development mode"
 
 `pip install -e ./fn_res_to_icd/`
 
-Please update the config settings via:
+Please create (or update) the config settings via:
 
 `resilient-circuits config -c [-u]`
 
@@ -27,9 +27,11 @@ After installation, the package will be loaded by `resilient-circuits run`.
 
 **This package contains 1 Function, 1 Workflow, and 1 Manual Rule (at the resilient incident level) that helps you to escalate a resilient incident to an icd ticket**
 
- ![screenshot](./screenshots/0.png)
+![screenshot](./screenshots/0.png)
 
-* res-to-icd-function: gives you the ability to escalate the incident from resilient to icd
+* res-to-icd-workflow: gives you the ability to escalate the incident from resilient to icd
+
+![screenshot](./screenshots/1.png)
 
 # res-to-icd-function
 ## Config settings and prerequisites
@@ -49,5 +51,9 @@ As a further testing of credentials, the developer may run command:
 
 To verify that input credentials to icd dashboard are valid via an api call.
 
-![screenshot](./screenshots/1.png)
+An incident on the resilient can be escalated to the icd desk with IP Address artifacts  if Qradar severity has been set to true. An example incident is displayed below:
 ![screenshot](./screenshots/2.png)
+
+When the manual rule is pressed, a correpsponding ticket will be created on the ICD dashboard:
+![screenshot](./screenshots/3.png)
+
