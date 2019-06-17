@@ -112,7 +112,10 @@ class FunctionComponent(ResilientComponent):
             "_lid" : icd_email, "_lpwd" : icd_pass} 
             response = requests.post("https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/", params=params, verify=False)
             # xml conversion to dict and reading
-            response_dict = xmltodict.parse(response.text)
+            try:
+                response_dict = xmltodict.parse(response.text)
+            except xmltodict.expat.ExpatError:
+                log.error("Error parsing xml response from icd, check app.config and run selftest, ignore subsequent messages")
             map_list = ["CreateMXINCIDENTResponse", "MXINCIDENTSet", "INCIDENT", "TICKETID"]
             icd_id = get_from_dict(response_dict, map_list)
             yield StatusMessage("Completed successfully")
@@ -123,7 +126,7 @@ class FunctionComponent(ResilientComponent):
             })
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-            log.debug("RESULTS: %s", results)
+            log.info("RESULTS: %s", results)
             log.info("Complete")
         except Exception:
             yield FunctionError()
