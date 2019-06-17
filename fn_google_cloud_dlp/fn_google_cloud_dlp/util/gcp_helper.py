@@ -6,6 +6,7 @@ import os
 import tempfile
 import xml.dom.minidom
 import zipfile
+from six import string_types
 
 
 # Import the client library
@@ -216,7 +217,8 @@ class GCPHelper:
                     # ...else for an attachment
                     else:
                         attachment_uri = '/incidents/{}/attachments'.format(incident_id)
-                    new_attachment_name = u"""[PII Removed]{}.txt""".format(attachment_name)
+                    # Format our new attachment name to upload result. If filename does not end in .txt, add the .txt extension else leave it alone.
+                    new_attachment_name = u"""[PII Removed]{}{}""".format(attachment_name, ".txt" if os.path.splitext(attachment_name)[1] != ".txt" else "")
                     # POST the new attachment
                     new_attachment = client.post_attachment(attachment_uri, temp_upload_file.name,
                                                             filename=new_attachment_name,
@@ -235,7 +237,7 @@ class GCPHelper:
         :param string_input:
         :return:
         """
-        from six import string_types
+        
         if not isinstance(string_input, (string_types, bytes)):  # If the input isin't a str type, throw
             raise ValueError("Gathered an input which is not bytes or a string type")
 

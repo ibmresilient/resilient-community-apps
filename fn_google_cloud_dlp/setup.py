@@ -9,6 +9,7 @@ setup(
     license='MIT',
     author='Ryan',
     author_email='ryan@resilientlab.co.uk',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_google_cloud_dlp'",
     long_description="An integration with Google Cloud DLP which enables you to inspect an Attachment for Personally Identifiable Information or to De-Identify an Attachment or Artifact.",
     install_requires=[
