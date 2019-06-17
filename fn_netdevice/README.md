@@ -1,18 +1,18 @@
 # Overview
 This integration uses netMiko to access network devices, such as firewalls, to run command-line queries
-and execute firewall configuration settings. SSH is used to access the hosts and results from the operations are returned as an Resilient incident note.
+and execute firewall configuration settings. SSH is used to access the hosts and results from the operations are returned as a Resilient incident note.
 
 This implementation utilizes all the functionality of netMiko including:
 
 * Multiple host execution
 * Configuration setting execution with commits
-* TextFSM enablement
+* Result parsing using TextFSM templates
 
 # Components
-Function: fn_netdevice
-Message Destination: fn_netdevice
-Workflow: Example: Execute Netdevice Commands
-Rule: Example: Execute Netdevice Commands
+* Function: fn_netdevice
+* Message Destination: fn_netdevice
+* Workflow: Example: Execute Netdevice Commands
+* Rule: Example: Execute Netdevice Commands
 
 ![Workflow](doc/readme_workflow.png)
 # Installation
@@ -40,17 +40,17 @@ Run `resilient-circuits codegen -u -l fn-netdevice` to add configuration data to
 #use_commit=False
 ```
 
-Copy, uncomment, rename and configuration each [device_id] section one per each device you'll be accessing. Passwords can be stored in your
+Copy, uncomment, rename and configure each [device_id] section one per each device you'll be accessing. Passwords can be stored in your
 keystore using the $password convention as documented in the [Function Developer's Guide](https://github.com/ibmresilient/resilient-reference/blob/master/developer_guides/Resilient%20IRP%20Function%20Developer%20Guide.pdf)
 
-After installation, the package will be loaded and ready for execution by `resilient-circuits run`.
+After installation, the package will be loaded and ready for execution by invoking `resilient-circuits run`.
 
 # Function Execution
 When running the sample rule and workflow, a dialog is presented to enter:
 
 * Devices IDs (comma separated)
 * Query Command (optional)
-* Configuration Commands (optional, but specify either one or both prompts)
+* Configuration Commands (optional, but specify either query command and/or configuration commands)
 * Use TextFSM Templates (associated with Query Commands)
 
 ![Rule Dialog](doc/readme_rule_dialog.png)
