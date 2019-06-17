@@ -5,6 +5,8 @@
   - [Overview](#overview)
   - [Key Features](#key-features)
   - [Requirements](#requirements)
+  - [Authenticating to Google Cloud](#authenticating-to-google-cloud)
+  - [It is recommended to create a new service or user account with the `DLP.User` permission. You will then be given a keyfile which you can set as the GOOGLE_APPLICATION_CREDENTIALS bash value which will be the absolute path to your Keyfile](#it-is-recommended-to-create-a-new-service-or-user-account-with-the-dlpuser-permission-you-will-then-be-given-a-keyfile-which-you-can-set-as-the-googleapplicationcredentials-bash-value-which-will-be-the-absolute-path-to-your-keyfile)
   - [Installation](#installation)
   - [Uninstall](#uninstall)
   - [Troubleshooting](#troubleshooting)
@@ -22,7 +24,7 @@
  ![screenshot: main](./doc/screenshots/main.png)
 
 <!-- This description is taken from the in the "long_description" attribute setup.py file -->
-An integration with Google Cloud DLP which enables you to inspect an Attachment for Personally Identifiable Information or to De-Identify an Attachment or Artifact
+The Resilient Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.
 
 ---
 ## Key Features
@@ -37,6 +39,14 @@ An integration with Google Cloud DLP which enables you to inspect an Attachment 
 * An Integrations Server running `resilient-circuits >= v31.0.0`
   * To setup an Integrations Server see: [ibm.biz/res-int-server-guide](ibm.biz/res-int-server-guide)
 
+## Authenticating to Google Cloud 
+
+
+Application Default Credentials:
+Application Default Credentials are the prefereed way to authenticate when using a client library to interface with Google Cloud.
+
+Services using ADC look for credentials within a GOOGLE_APPLICATION_CREDENTIALS environment variable. Unless you specifically want to have ADC use other credentials (for example, user credentials), set this environment variable to point to your service account key file.
+It is recommended to create a new service or user account with the `DLP.User` permission. You will then be given a keyfile which you can set as the GOOGLE_APPLICATION_CREDENTIALS bash value which will be the absolute path to your Keyfile
 ---
 ## Installation
 * Download the `fn_google_cloud_dlp.zip`
@@ -63,8 +73,8 @@ An integration with Google Cloud DLP which enables you to inspect an Attachment 
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **gcp_project** | Yes | `<YOUR_GOOGLE_PROJECT_ID>` | *Enter a description of the config here* |
-  | **gcp_dlp_masking_char** | Yes | `#` | *Enter a description of the config here* |
+  | **gcp_project** | Yes | `<YOUR_GOOGLE_PROJECT_ID>` | *The Google Cloud Project that will be used with DLP* |
+  | **gcp_dlp_masking_char** | Yes | `#` | *What character will be used to mask PII* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run **selftest** to test you the Integration is configured:

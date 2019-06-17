@@ -11,7 +11,7 @@ setup(
     author_email='ryan@resilientlab.co.uk',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_google_cloud_dlp'",
-    long_description="An integration with Google Cloud DLP which enables you to inspect an Attachment for Personally Identifiable Information or to De-Identify an Attachment or Artifact.",
+    long_description="The Resilient Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'google-cloud-dlp>=0.10.0',
