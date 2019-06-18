@@ -14,6 +14,7 @@ setup(
     long_description="The Resilient Integration with Google Cloud DLP provides tools to integrate into your Incident Response Plan. The integration brings Automation and Orchestration capabilities for either identifying, redacting or de-identifying Personally identifiable information (PII) in a body of text.",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient-lib>=32.0.140',
         'google-cloud-dlp>=0.10.0',
         'PyPDF2>=1.26.0',
         'python-docx>=0.8.10'
