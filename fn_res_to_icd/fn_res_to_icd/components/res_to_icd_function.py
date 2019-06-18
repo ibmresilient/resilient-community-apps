@@ -12,7 +12,6 @@ import xmltodict
 from resilient_circuits import ResilientComponent, function, handler 
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
 import resilient_lib
-from resilient_lib import ResultPayload
 
 def get_from_dict(data_Dict, map_List):
     return reduce(operator.getitem, map_List, data_Dict)
@@ -126,7 +125,6 @@ class FunctionComponent(ResilientComponent):
             })
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-            log.info("RESULTS: %s", results)
             log.info("Complete")
         except Exception:
             yield FunctionError()
