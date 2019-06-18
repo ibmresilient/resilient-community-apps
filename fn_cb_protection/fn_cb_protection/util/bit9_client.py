@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """CbProtection (aka bit9) API client"""
 
 import json
 import requests
 import logging
-
 
 URI_PATH = "api/bit9platform/v1"
 log = logging.getLogger(__name__)
@@ -49,7 +48,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.get(uri, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        response.raise_for_status()
+        self.raise_for_status_include_content(response)
         return response.json()
 
     def put(self, specific_uri, payload):
@@ -57,7 +56,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.put(uri, json.dumps(payload), headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        response.raise_for_status()
+        self.raise_for_status_include_content(response)
         return response.json()
 
     def post(self, specific_uri, payload):
@@ -65,7 +64,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        response.raise_for_status()
+        self.raise_for_status_include_content(response)
         return response.json()
 
     def delete(self, specific_uri):
@@ -73,7 +72,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.delete(uri, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        response.raise_for_status()
+        self.raise_for_status_include_content(response)
         return response.text
 
     def get_approval_request(self, request_id):
@@ -127,5 +126,25 @@ class CbProtectClient(object):
         """Deletes a file from all or a specific system"""
         uri = u"https://{}/{}".format(self.server, "api/bit9platform/restricted/fileAction")
         response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
-        response.raise_for_status()
+        self.raise_for_status_include_content(response)
         return response.json()
+
+    @staticmethod
+    def raise_for_status_include_content(response):
+        """
+        Raises stored :class:`HTTPError`, if one occurred.
+        :param response:
+        :return:
+        """
+        try:
+            # Debug logging
+            log.debug(response.status_code)
+            log.debug(response.content)
+
+            # Raises stored :class:`HTTPError`, if one occurred.
+            response.raise_for_status()
+
+        except requests.HTTPError as err:
+            # add content to the error message
+            new_msg = err.message + " " + response.content
+            raise requests.HTTPError(new_msg)

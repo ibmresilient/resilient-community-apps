@@ -46,7 +46,7 @@ Config values example:
 
 Run with: `resilient-circuits run`.
 
-## Resilient Functions for CbProtection
+## Resilient Functions for CbProtection - FIXME! - rename functions
 ```
 CbProtect Approval Request Get
 CbProtect Approval Request Query
@@ -61,7 +61,7 @@ CbProtect File Rule Query
 CbProtect File Rule Update
 CbProtect File Delete
 ```
-## Rules and workflows have been provided:
+## Rules and workflows have been provided: FIXME! - rename rules and workflows
 ```
 (Example) CbProtection: Get Approval Request
 (Example) CbProtection: Approve File Globally and Close Request
