@@ -10,17 +10,20 @@
   
 --- 
  
-**This package contains a function that executes a SNDBOX Malware Sandbox Analysis using SNDBOX Cloud APIs, also included are two example workflows and two example rules that demonstrate how to use this function.**
+This package contains a function that executes a SNDBOX Malware Sandbox Analysis using SNDBOX Cloud APIs, also included are two example workflows and two example rules that demonstrate how to use this function.
 
 
  ![screenshot](./screenshots/workflow_attachment.jpeg)
 
-* an attachment or artifact must be a file.
-* The report only supports Type of JSON. HTML and PDF are not supported
-* Supports a proxy. Just add your proxy details to the `proxy` section in `app.config` file.
+### Notes
+
+* an attachment or artifact must be a file. Please refer https://app.sndbox.com/docs/files for the supported file list.
+* The report only supports Type of JSON. HTML and PDF are not supported.
+
+---
 
 ## app.config settings:  
----               
+
 ```                                                                         
 # Your SNDBOX Analyzer API Key                                                         
 sndbox_api_key=
@@ -44,6 +47,7 @@ sndbox_analyzer_report_request_timeout=300
 ---
 
 ## Function Output:
+
 ```python                                    
 results = {
                 "analysis_report_status": analysis_report_status,
@@ -54,18 +58,20 @@ results = {
             }
 
 ```
+
 ---
 
 ## Pre-Process Script:
+
 Example: SNDBOX Sandbox Analyzer [Attachment]
 
-```
+```python
 inputs.incident_id = incident.id
 inputs.attachment_id = attatchment.id
 ```
 Example: SNDBOX Sandbox Analyzer [Artifact]
 
-```
+```python
 inputs.incident_id = incident.id
 inputs.artifact_id = artifact.id
 ```
@@ -73,9 +79,10 @@ inputs.artifact_id = artifact.id
 ---
 
 ## Post-Process Script:
+
 This example adds a Note to the Incident and color codes the `analysis_status` depending if it was **malicious** or **clean**
 
-```
+```python
 def font_color(score):
     color = "green"
     try:
@@ -85,6 +92,8 @@ def font_color(score):
         pass
     return color
 
+def sample_score(score):
+    return round(score * 100) if score else 0
 
 if not results.analysis_report_status:
     noteText = u"""Successful submit <b>{}</b> to SNDBOX Platform. However it will take time to generate an analysis report, please submit it again later. <br>""".format(
@@ -103,30 +112,29 @@ else:
                """.format(sample_filename=sample["sample_report"]["name"],
                           sample_online_report=sample["sample_report"]["sample_url"],
                           color=color,
-                          sample_score=sample["sample_report"]["score"])
+                          sample_score=sample_score(sample["sample_report"]["score"]))
 
 incident.addNote(helper.createRichText(noteText))
 ```
 
-<b>Example of adding a incident note from post-processing scripts:</b><br>
+**Example of adding a incident note from post-processing scripts:**
+
  ![screenshot](./screenshots/results_addnote.png)
+
 ---
 
 ## Rules
+
 | Rule Name | Object Type | Workflow Triggered |
 | --------- | :---------: | ------------------ |
 | Example: SNDBOX Sandbox Analysis [Artifact]| `Artifact` | `Example: SNDBOX Sandbox Analyzer [Artifact]` |
 
 ![screenshot](./screenshots/rule_artifact.jpeg)
 
----
-| Rule Name | Object Type | Workflow Triggered |
+
+| Rule Name | Object Type | Workflow Triggered2 |
 | --------- | :---------: | ------------------ |
 | Example: SNDBOX Sandbox Analyzer [Attachment]| `Attachment` | `Example: SNDBOX Sandbox Analyzer [Attachment]` |
 
 
 ![screenshot](./screenshots/rule_attachment.jpeg)
-
-
----
-                                                                               

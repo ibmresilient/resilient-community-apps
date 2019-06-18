@@ -1,7 +1,5 @@
 import time
 import random
-from StringIO import StringIO
-import gzip
 import json
 import requests
 import logging

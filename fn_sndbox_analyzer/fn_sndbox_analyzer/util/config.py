@@ -17,6 +17,6 @@ sndbox_api_key=
 sndbox_analyzer_url=https://api.sndbox.com
              
 # Amount of time in seconds to wait until timeout.
-sndbox_analyzer_report_request_timeout=300 
+sndbox_analyzer_report_request_timeout=600 
 """
     return config_data
