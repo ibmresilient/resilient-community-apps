@@ -1,6 +1,6 @@
 # Escalation of resilient incidents to ICD ticket for IBM Resilient
 
-This community app allows for the escalation of a incident from resilient to the icd desk, via a manual rule on each incident. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases, this integration is full customizable. If the custom qradar_severity field is not defined, the INTERNAL PRIORITY on icd desk (4) will can be set in the app config. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_qradar_severity is set to true in the app config settings.
+This community app allows for the escalation of a incident from Resilient to the ICD desk, via a manual rule on each incident. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases, this integration is full customizable. If the custom qradar_severity field is not defined, the INTERNAL PRIORITY on icd desk (4) will can be set in the app config. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_qradar_severity is set to true in the app config settings.
 
 To install the package,
 

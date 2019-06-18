@@ -23,7 +23,7 @@ def call_res_to_icd_function_function(circuits, function_params, timeout=10):
     event = circuits.watcher.wait("res_to_icd_function_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
-    pytest.wait_for(event, "complete", True)
+    pytest..wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 

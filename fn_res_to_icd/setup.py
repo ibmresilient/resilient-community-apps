@@ -21,15 +21,15 @@ setup(
     name='fn_res_to_icd',
     version='1.0.0',
     license='MIT',
-    author='Sean O Gorman',
-    author_email='Sean.OGorman@ibm.com',
-    url='https://www.ibm.com/security/intelligent-orchestration/resilient',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_res_to_icd'",
     long_description="Resilient Circuits Components for 'fn_res_to_icd'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib',
-        'xmltodict'
+        'resilient-lib>=32.0.0',
+        'xmltodict=0.12.0'
     ],
     packages=find_packages(),
     include_package_data=True,

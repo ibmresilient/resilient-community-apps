@@ -11,7 +11,7 @@ import pytz
 import xmltodict
 from resilient_circuits import ResilientComponent, function, handler 
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
-import resilient_lib
+from resilient_lib import *
 
 def get_from_dict(data_Dict, map_List):
     return reduce(operator.getitem, map_List, data_Dict)
@@ -119,7 +119,7 @@ class FunctionComponent(ResilientComponent):
             icd_id = get_from_dict(response_dict, map_list)
             yield StatusMessage("Completed successfully")
             results = payload.done(success=True,content={
-                "Incident escalated" : incident_id,
+                "Incident_escalated" : incident_id,
                 "icd_id" : icd_id,
                 "Details" : details_payload
             })
