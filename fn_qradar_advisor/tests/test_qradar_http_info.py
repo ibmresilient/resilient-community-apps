@@ -60,6 +60,12 @@ class TestQRadarHttpInfo(object):
         # offense insights
         assert http_info.get_offense_insights_url(offense_id) == api_base_url + "/offense/" + str(offense_id) + "/insights"
 
+        # all mappings
+        assert http_info.get_all_mappings() == api_base_url + "/mappings"
+
+        # tuning
+        assert http_info.get_tuning_url() == api_base_url + "/config/tuning"
+
         # verify cert
         assert http_info.get_cafile() == cafile
 
@@ -70,6 +76,7 @@ class TestQRadarHttpInfo(object):
         http_info.get_session().headers["X-XSRF-TOKEN"] = "Fake CSRF Token"
         http_info.reset_session()
         assert "X-XSRF-TOKEN" not in http_info.get_session().headers
+        assert "X-TACTICS-XSRF-TOKEN" not in http_info.get_session().headers
 
         cookies = {
             "XSRF-TOKEN": "New CSRF Token from QRadar Advidor"
@@ -77,4 +84,15 @@ class TestQRadarHttpInfo(object):
         http_info.update_session(cookies)
         assert http_info.get_session().headers["X-XSRF-TOKEN"] == cookies["XSRF-TOKEN"]
 
+        cookies = {
+            "TACTICS-XSRF-TOKEN" : "New Tactic token from QRadar advisor"
+        }
+        http_info.update_session_tactics(cookies)
+        assert http_info.get_session().headers["X-TACTICS-XSRF-TOKEN"] == cookies["TACTICS-XSRF-TOKEN"]
 
+        http_info.reset_session()
+        cookies = {
+            "TACTICS-XSRF-TOKEN": "New Tactic token from QRadar advisor"
+        }
+        http_info.update_session(cookies)
+        assert http_info.get_session().headers["X-TACTICS-XSRF-TOKEN"] == cookies["TACTICS-XSRF-TOKEN"]

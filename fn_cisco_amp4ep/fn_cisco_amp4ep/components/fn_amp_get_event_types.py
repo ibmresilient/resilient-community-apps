@@ -75,7 +75,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_amp_get_event_types")
     def _fn_amp_get_event_types_function(self, event, *args, **kwargs):
-        """Function: Events are identified and filtered by a unique ID. Provides a human readable name, and short description of each event by ID."""
+        """Function: Events are identified and filtered by a unique ID. Provides a human readable name, and short
+        description of each event by ID."""
         try:
             # Get the function parameters:
 

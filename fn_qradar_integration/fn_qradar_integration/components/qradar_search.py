@@ -69,9 +69,9 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("starting...")
             qradar_client = QRadarClient(host=self.options["host"],
-                                         username=self.options["username"],
-                                         password=self.options["qradarpassword"],
-                                         token=None,
+                                         username=self.options.get("username", None),
+                                         password=self.options.get("qradarpassword", None),
+                                         token=self.options.get("qradartoken", None),
                                          cafile=qradar_verify_cert)
 
             result = qradar_client.ariel_search(query_string,

@@ -28,13 +28,21 @@ class FunctionComponent(ResilientComponent):
     @function("fn_joe_sandbox_analysis")
     def _fn_joe_sandbox_analysis_function(self, event, *args, **kwargs):
         """Function: A function that allows an Attachment or Artifact (File/URL) to be analyzed by Joe Sandbox"""
-        
+
+        # Get the workflow_instance_id so we can raise an error if the workflow was terminated by the user
+        workflow_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+
         # List to store paths of created temp files
         TEMP_FILES = []
 
         # Dict to reference related mimetype
         MIMETYPES = {"pdf": "application/pdf", "json": "application/json", "html": "text/html"}
         
+        def get_workflow_status(workflow_instance_id, res_client):
+          """Function to get the status of the current running workflow"""
+          res = res_client.get("/workflow_instances/{0}".format(workflow_instance_id))
+          return res["status"]
+
         def remove_temp_files(files):
           for f in files:
             os.remove(f)
@@ -236,12 +244,19 @@ class FunctionComponent(ResilientComponent):
             # Generate report name
             report_name = generate_report_name(entity, jsb_report_type, sample_webid)
 
-            yield StatusMessage("{} being analyized by Joe Sandbox".format(report_name))
+            yield StatusMessage("{} being analyzed by Joe Sandbox".format(report_name))
 
             # Keep requesting sample status until the analysis report is ready for download or ANALYSIS_REPORT_REQUEST_TIMEOUT in seconds has passed
             while (sample_status["status"].lower() != "finished"):
+              
+              # Check workflow status, if "terminated, raise error"
+              workflow_status = get_workflow_status(workflow_instance_id, client)
+
+              if workflow_status == "terminated":
+                raise ValueError("Analysis report not fetched. Workflow was Terminated")
+
               if (should_timeout(ANALYSIS_REPORT_REQUEST_TIMEOUT, start_time)):
-                raise FunctionError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQUEST_TIMEOUT))
+                raise ValueError("Timed out trying to get Analysis Report after {0} seconds".format(ANALYSIS_REPORT_REQUEST_TIMEOUT))
               
               yield StatusMessage("Analysis Status: {0}. Fetch every {1}s".format(sample_status["status"], ANALYSIS_REPORT_PING_DELAY))
               sample_status = fetch_report(joesandbox, sample_webid, ANALYSIS_REPORT_PING_DELAY)
@@ -259,7 +274,7 @@ class FunctionComponent(ResilientComponent):
 
             results = {
                 "analysis_report_name": report_name,
-                "analysis_report_pdf_id": jsb_analysis_report["id"],
+                "analysis_report_id": jsb_analysis_report["id"],
                 "analysis_report_url": "{0}/{1}".format(ANALYSIS_URL, sample_webid),
                 "analysis_status": sample_status["runs"][0]["detection"]
             }

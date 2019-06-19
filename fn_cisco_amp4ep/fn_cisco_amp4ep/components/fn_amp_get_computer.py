@@ -11,6 +11,7 @@
 import logging
 import json
 from datetime import datetime
+from sys import version_info
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cisco_amp4ep.lib.amp_client import Ampclient
@@ -109,13 +110,32 @@ class FunctionComponent(ResilientComponent):
 
             rtn = amp.get_computer(amp_conn_guid)
             query_execution_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            # Add in "query_execution_time" and "ip_address" to result to facilitate post-processing.
+            # Add in "query_execution_time" to facilitate post-processing.
+            if "errors" in rtn and rtn["errors"][0]["error_code"] == 404:
+                # If this error was trapped user probably tried to get information on invalid connector guid.
+                yield StatusMessage(
+                    "Got a 404 error while attempting to get computer information for connector guid '{0}' "
+                    "because of a possible invalid or deleted guid.".format(params["conn_guid"]))
+            else:
+                yield StatusMessage("Returning 'computer by guid' results for connector guid '{}'."
+                                    .format(params["conn_guid"]))
             results = {"response": rtn, "query_execution_time": query_execution_time, "input_params": params}
-            yield StatusMessage("Returning 'computer by guid' results for guid '{}'.".format(params["conn_guid"]))
 
             log.debug(json.dumps(results))
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+
+        except ValueError as ve:
+            # Trap ValueErrors so we can send unicode ValueErrors back to safely to Resilient
+            # as a StatusMessage.
+            if version_info.major == 2:
+                ve_msg  = ve.message
+            else:
+                ve_msg = ve.args[0]
+            yield StatusMessage("{0}".format(ve_msg))
+            log.exception("ValueError in Resilient Function for Cisco AMP for endpoints.".format(ve_msg))
+            raise ValueError("A ValueError exception was raised by function fn_amp_get_computer")
+
         except Exception:
             log.exception("Exception in Resilient Function for Cisco AMP for endpoints.")
             yield FunctionError()

@@ -84,7 +84,8 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_amp_get_activity")
     def _fn_amp_get_activity_function(self, event, *args, **kwargs):
-        """Function: Search all computers in Cisco AMP environment for any events or activities associated with a file or network operation, and returns computers matching that criteria."""
+        """Function: Search all computers in Cisco AMP environment for any events or activities associated with a
+        file or network operation, and returns computers matching that criteria."""
         try:
             # Get the function parameters:
             amp_q = kwargs.get("amp_q")  # text

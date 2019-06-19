@@ -28,6 +28,7 @@ If you wish to connect to a resource with a self signed cert can provide a cafil
 [fn_elasticsearch]
 es_datastore_url = <YOUR_URL>
 es_datastore_scheme = <https OR http>
+es_use_http= <True OR False>
 es_auth_username = <YOUR_USERNAME>
 es_auth_password = <YOUR_PASSWORD>
 es_cafile = <PATH_TO_CERT_FILE>

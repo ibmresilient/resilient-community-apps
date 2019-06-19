@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_qradar_integration',
-    version='1.0.1',
+    version='2.0.1',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -22,6 +22,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
+            "QradarFindReferenceSetsFunctionComponent = fn_qradar_integration.components.qradar_find_reference_sets:FunctionComponent",
             "QradarDeleteReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_delete_reference_set_item:FunctionComponent",
             "QradarAddReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_add_reference_set_item:FunctionComponent",
             "QradarFindReferenceSetItemFunctionComponent = fn_qradar_integration.components.qradar_find_reference_set_item:FunctionComponent",

@@ -22,6 +22,7 @@ class FunctionComponent(ResilientComponent):
             rest_method = self.get_select_param(kwargs.get("rest_method"))  # select, values: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS"
             rest_url = kwargs.get("rest_url")  # text
             rest_headers = self.get_textarea_param(kwargs.get("rest_headers"))  # textarea
+            rest_cookies = self.get_textarea_param(kwargs.get("rest_cookies"))  # textarea
             rest_body = self.get_textarea_param(kwargs.get("rest_body"))  # textarea
             rest_verify = kwargs.get("rest_verify")  # boolean
 
@@ -29,6 +30,7 @@ class FunctionComponent(ResilientComponent):
             log.info("rest_method: %s", rest_method)
             log.info("rest_url: %s", rest_url)
             log.info("rest_headers: %s", rest_headers)
+            log.info("rest_cookies: %s", rest_cookies)
             log.info("rest_body: %s", rest_body)
             log.info("rest_verify: %s", rest_verify)
 
@@ -41,8 +43,18 @@ class FunctionComponent(ResilientComponent):
                     if len(keyval) == 2:
                         headers_dict[keyval[0].strip()] = keyval[1].strip()
 
+            # Read newline-separated 'rest_cookies' into a dictionary
+            cookies_dict = {}
+            if rest_cookies is not None:
+                lines = rest_cookies.split("\n")
+                for line in lines:
+                    keyval = line.strip().split(":", 1)
+                    if len(keyval) == 2:
+                        cookies_dict[keyval[0].strip()] = keyval[1].strip()
+
             resp = requests.request(rest_method, rest_url,
                                     headers=headers_dict,
+                                    cookies=cookies_dict,
                                     data=rest_body,
                                     verify=rest_verify)
 
