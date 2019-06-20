@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cb_protection.util.bit9_client import CbProtectClient
 from resilient_lib import validate_fields
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_rule_update"""
@@ -41,7 +43,6 @@ class FunctionComponent(ResilientComponent):
                 raise FunctionError("bit9_file_catalog_id, bit9_file_hash, or bit9_file_name mush be set in order to "
                                     "run this function.")
 
-            log = logging.getLogger(__name__)
             log.info("bit9_file_action: %s", bit9_file_action)
             log.info("bit9_computer_id: %s", bit9_computer_id)
             log.info("bit9_file_catalog_id: %s", bit9_file_catalog_id)

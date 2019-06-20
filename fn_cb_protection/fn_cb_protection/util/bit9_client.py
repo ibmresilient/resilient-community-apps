@@ -115,8 +115,8 @@ class CbProtectClient(object):
         """Update a file rule"""
         # The file rule id can be None
         if file_rule_id is None:
-            return self.post("fileRule", payload=payload)
-        return self.put(u"fileRule/{}".format(file_rule_id), payload=payload)
+            return self.post("fileRule", payload=payload)  # create
+        return self.put(u"fileRule/{}".format(file_rule_id), payload=payload)  # update a specific one
 
     def delete_file_rule(self, file_rule_id):
         """Deletes a file rule by ID"""
@@ -146,5 +146,5 @@ class CbProtectClient(object):
 
         except requests.HTTPError as err:
             # add content to the error message
-            new_msg = err.message + " " + response.content
+            new_msg = u"{} {}".format(err.message, response.content)
             raise requests.HTTPError(new_msg)

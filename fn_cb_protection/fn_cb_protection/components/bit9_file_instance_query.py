@@ -9,6 +9,8 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient, escape
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_instance_query"""
@@ -33,7 +35,6 @@ class FunctionComponent(ResilientComponent):
             bit9_file_path = kwargs.get("bit9_file_path")  # text
             bit9_file_instance_localstate = kwargs.get("bit9_file_instance_localstate")  # number
 
-            log = logging.getLogger(__name__)
             log.info(u"bit9_computer_id: %s", bit9_computer_id)
             log.info(u"bit9_file_catalog_id: %s", bit9_file_catalog_id)
             log.info(u"bit9_file_path: %s", bit9_file_path)

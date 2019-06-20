@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cb_protection.util.bit9_client import CbProtectClient
 from resilient_lib import validate_fields
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_rule_update"""
@@ -28,7 +30,6 @@ class FunctionComponent(ResilientComponent):
     def _bit9_file_rule_update_function(self, event, *args, **kwargs):
         """Function: Create or update a File Rule"""
         try:
-            validate_fields(["bit9_file_rule_id"], kwargs)
             # Get the function parameters:
             bit9_file_rule_id = kwargs.get("bit9_file_rule_id")  # number
             bit9_file_catalog_id = kwargs.get("bit9_file_catalog_id")  # number
@@ -39,7 +40,6 @@ class FunctionComponent(ResilientComponent):
             bit9_file_rule_policyids = kwargs.get("bit9_file_rule_policyids")  # text
             bit9_file_rule_hash = kwargs.get("bit9_file_rule_hash")  # text
 
-            log = logging.getLogger(__name__)
             log.info(u"bit9_file_rule_id: %s", bit9_file_rule_id)
             log.info(u"bit9_file_catalog_id: %s", bit9_file_catalog_id)
             log.info(u"bit9_file_rule_name: %s", bit9_file_rule_name)
@@ -51,11 +51,11 @@ class FunctionComponent(ResilientComponent):
 
             # This can be called with a "file rule id", to update an existing rule.
             # Or, it can be called with no file rule id, to create a new rule for a hash or filename.
-
-            if not (bit9_file_catalog_id and bit9_file_rule_name and bit9_file_rule_description and bit9_file_rule_filestate
-                    and bit9_file_rule_sourcetype and bit9_file_rule_hash and bit9_file_rule_policyids):
-                raise FunctionError("Specify at least one attribute to update: bit9_file_catalog_id, bit9_file_rule_name, \
-bit9_file_rule_description, bit9_file_rule_filestate, bit9_file_rule_sourcetype, bit9_file_rule_hash or bit9_file_rule_policyids")
+            if not (bit9_file_rule_name or bit9_file_rule_description or bit9_file_rule_filestate
+                    or bit9_file_rule_sourcetype or bit9_file_rule_hash or bit9_file_rule_policyids):
+                raise FunctionError("Specify at least one attribute to update: bit9_file_rule_name, "
+                                    "bit9_file_rule_description, bit9_file_rule_filestate, bit9_file_rule_sourcetype, "
+                                    "bit9_file_rule_hash or bit9_file_rule_policyids")
 
             payload = {}
             if bit9_file_catalog_id:

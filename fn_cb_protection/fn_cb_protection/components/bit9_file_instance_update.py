@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cb_protection.util.bit9_client import CbProtectClient
 from resilient_lib import validate_fields
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_instance_update"""
@@ -33,7 +35,6 @@ class FunctionComponent(ResilientComponent):
             bit9_file_instance_id = kwargs.get("bit9_file_instance_id")  # number
             bit9_file_instance_localstate = kwargs.get("bit9_file_instance_localstate")  # number
 
-            log = logging.getLogger(__name__)
             log.info(u"bit9_file_instance_id: %s", bit9_file_instance_id)
             log.info(u"bit9_file_instance_localstate: %s", bit9_file_instance_localstate)
 

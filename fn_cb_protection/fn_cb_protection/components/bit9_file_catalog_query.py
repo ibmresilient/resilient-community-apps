@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cb_protection.util.bit9_client import CbProtectClient, escape
 from resilient_lib import validate_fields
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_file_catalog_query"""
@@ -32,7 +34,6 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             bit9_query = kwargs.get("bit9_query")  # text
 
-            log = logging.getLogger(__name__)
             log.info(u"bit9_query: %s", bit9_query)
 
             # Query example: 'id:6' (see https://<server>/api/bit9platform/v1 for details)

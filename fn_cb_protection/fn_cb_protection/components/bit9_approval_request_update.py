@@ -10,6 +10,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 from fn_cb_protection.util.bit9_client import CbProtectClient
 from resilient_lib import validate_fields
 
+log = logging.getLogger(__name__)
+
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'bit9_approval_request_update"""
@@ -35,7 +37,6 @@ class FunctionComponent(ResilientComponent):
             bit9_approval_request_resolution_comments = kwargs.get("bit9_approval_request_resolution_comments")  # text
             bit9_approval_request_status = kwargs.get("bit9_approval_request_status")  # number
 
-            log = logging.getLogger(__name__)
             log.info("bit9_approval_request_id: %s", bit9_approval_request_id)
             log.info("bit9_approval_request_resolution: %s", bit9_approval_request_resolution)
             log.info("bit9_approval_request_resolution_comments: %s", bit9_approval_request_resolution_comments)
