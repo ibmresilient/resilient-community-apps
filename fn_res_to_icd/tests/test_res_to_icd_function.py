@@ -23,7 +23,7 @@ def call_res_to_icd_function_function(circuits, function_params, timeout=10):
     event = circuits.watcher.wait("res_to_icd_function_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
-    pytest..wait_for(event, "complete", True)
+    pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
@@ -36,8 +36,8 @@ class TestResToIcdFunction:
         assert func is not None
 
     @pytest.mark.parametrize("incident_id, expected_results", [
-        (123, {"value": "xyz"}),
-        (123, {"value": "xyz"})
+        (2097, {'success':True}),
+        (2098, {'success':True})
     ])
     def test_success(self, circuits_app, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
@@ -45,4 +45,4 @@ class TestResToIcdFunction:
             "incident_id": incident_id
         }
         results = call_res_to_icd_function_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert(expected_results['success'] == results['success'])

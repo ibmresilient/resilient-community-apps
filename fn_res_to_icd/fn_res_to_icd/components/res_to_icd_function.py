@@ -11,7 +11,7 @@ import pytz
 import xmltodict
 from resilient_circuits import ResilientComponent, function, handler 
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
-from resilient_lib import *
+from resilient_lib import ResultPayload,RequestsCommon,str_to_bool, tz_from_utc_ms_ts
 
 def get_from_dict(data_Dict, map_List):
     return reduce(operator.getitem, map_List, data_Dict)
@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
             icd_pass = self.options.get("icd_pass")
             incident_id = kwargs.get("incident_id")
             icd_priority = self.options.get("icd_priority")
-            icd_qradar_severity = resilient_lib.str_to_bool(self.options.get('icd_qradar_severity'))
+            icd_qradar_severity = str_to_bool(self.options.get('icd_qradar_severity'))
             #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
@@ -105,7 +105,7 @@ class FunctionComponent(ResilientComponent):
             payload = ResultPayload('fn_res_to_icd', **kwargs)
             # Params and Desk call
             params = {"DESCRIPTION" : time, "DESCRIPTION_LONGDESCRIPTION" : details_payload,
-            "REPORTEDBYID" : "resilient_test@in.ibm.com", "logtype" : "CLIENTNOTE",
+            "REPORTEDBYID" : icd_email, "logtype" : "CLIENTNOTE",
             "worklog.1.description" : "SECURITY ISSUE", "worklog.1.DESCRIPTION_LONGDESCRIPTION" : "SECURITY ISSUE",
             "INTERNALPRIORITY" : icd_priority, "SITEID" : "APPOPINT", "CLASSIFICATIONID" : "SECURITY ISSUE",
             "_lid" : icd_email, "_lpwd" : icd_pass} 
