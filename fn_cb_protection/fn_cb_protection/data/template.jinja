@@ -3,14 +3,14 @@
 
   {# This just sets minimal field values - more are set by an automatic rule after creation. #}
 
-  "name": "Cb Protection Approval Request for {{fileName|js}}",
+  "name": "Cb Protection Approval Request for {{fileName|js}} - Cb Protect Request ID {{id|string}}",
 
   "start_date": {{dateCreated|timestamp_to_millis}},
   "discovered_date": {{dateCreated|timestamp_to_millis}},
 
   "description": {
     "format": "html",
-    "content": <div><p>{{requestorComments|js}}</p></div>
+    "content": "<div><p>{{requestorComments|js}}</p></div>"
   },
 
   "incident_type_ids": [
