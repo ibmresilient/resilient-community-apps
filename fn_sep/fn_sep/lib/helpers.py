@@ -17,10 +17,17 @@ LOG = logging.getLogger(__name__)
 EP_ENGINE_STATUS_FIELDS = ["apOnOff", "avEngineOnOff", "cidsBrowserFfOnOff", "cidsBrowserIeOnOff", "cidsDrvOnOff",
                             "daOnOff", "elamOnOff", "firewallOnOff", "pepOnOff", "ptpOnOff", "tamperOnOff"]
 READABLE_TIME_FIELDS = ["readableLastScanTime", "readableLastVirusTime", "readableLastUpdateTime"]
+EP_PROP_FIELDS = ["onlineStatus", "timediffLastUpdateTime", "quarantineDesc"]
+HB_DEF = 900  # Default heart-beat in seconds (15 mins)
 
 def transform_kwargs(kwargs):
     """"Update kwargs dictionary.
-
+    This function will perform following actions:
+        - Copy kwargs to a new 'params' dict which will be used to call the apis.
+        - Strip whitespaces from beginning and end of parametrs in 'kwargs' and 'params' taking into
+          account lists or dicts.
+        - Remove "sep_" from beginning of parameters in 'params'.
+        - Convert any case insensitive "None" values to None in 'params'.
     :param kwargs: Dictionary of Resilient Function parameters.
 
      """
@@ -35,18 +42,18 @@ def transform_kwargs(kwargs):
             elif isinstance(v, dict):
                 v =  v.get("name")
             kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
-            params[re.split('_', k, 1)[1]] = v.rstrip().lstrip() if isinstance(v, str)  else v
+            params[k.split('_', 1)[1]] = v.rstrip().lstrip() if isinstance(v, str) \
+                                                                and v.lower().startswith("sep_") else v
 
-    # If any entry has "None" string change to None value.
-    for k, v in kwargs.items():
-        if type(v) == str and v.lower() == 'none':
+    # If any entry has "None" string change to None value for params.
+    for k, v in params.items():
+        if isinstance(v, str) and v.lower() == 'none':
             params[k] = None
 
     return params
 
 
-
-def create_attachment(rest_client, file_name, file_content, params):
+def create_attachment(rest_client, file_name, file_content, incident_id):
     """"Add file as Resilient incident attachment.
 
     :param rest_client: Resilient Rest client
@@ -62,25 +69,28 @@ def create_attachment(rest_client, file_name, file_content, params):
         temp_file_obj = tempfile.NamedTemporaryFile('w+b', delete=False)
 
     # Create the temporary file save results in json format.
-    with temp_file_obj as temp_file:
-        temp_file.write(file_content)
-        temp_file.close()
-        try:
+    try:
+        with temp_file_obj as temp_file:
+            temp_file.write(file_content)
+
             # Post file to Resilient
-            att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),
-                                                     temp_file.name,
-                                                     file_name,
-                                                     "text/plain",
-                                                     "")
-            LOG.info("New attachment added to incident %s", params["incident_id"])
-        except Exception as err:
-            raise err
-        finally:
-            os.unlink(temp_file.name)
+            att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(incident_id),
+                                                        temp_file.name,
+                                                        file_name,
+                                                        "text/plain",
+                                                        "")
+            LOG.info("New attachment added to incident %s", incident_id)
+
+    except IOError as ioerr:
+        raise IOError("Unexpected IO error '{0}' for file '{1}".format(ioerr, file_name))
+
+    except Exception as err:
+        raise Exception("Exception '{0}' while trying to create attachment on incident '{1}' for file '{2}'."
+                        .format(err, incident_id, file_name))
 
     return att_report
 
-def generate_result_cvs(rtn, sep_commandid):
+def generate_result_csv(rtn, sep_commandid):
     """"Generate file content for attachment from eoc scan results.
 
     :param rtn: Result returned from SEPM server after scan result processed.
@@ -107,13 +117,18 @@ def generate_result_cvs(rtn, sep_commandid):
             else:
                 file_content += "{0},{1},{2},{3},{4},{5}\n"\
                     .format(ep_name, ep_id, artifact_type, artifact_value, "File path", m["value"])
-                pass
 
     return(file_name, file_content)
 
 def get_engine_status(eps, non_compliant_endpoints):
-    global EP_ENGINE_STATUS_FIELDS
+    """"Check overall status of all SEP av engines for an endpoint.
+    Generate overall 'disabled_status' status of SEP av engines for an endpoint and
+    update list non_compliant_endpoints if at least one installed engine disabled on an endpoint.
 
+    :param eps: Dict with an endpoint properties.
+    :param non_compliant_endpoints: List of non-compliant endpoints.
+    :return disabled_status: Return disabled status, value > 0 indicated at least one disabled.
+    """
     disabled_status = 0
 
     for i in range(len(eps)):
@@ -138,7 +153,7 @@ def add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results):
     :param results: Copy of results dict.
     :return results: Return updated results dict.
     """
-    global EP_ENGINE_STATUS_FIELDS, READABLE_TIME_FIELDS
+
     results["eps"] = []
     eps = rtn["content"]
 
@@ -147,7 +162,7 @@ def add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results):
         ep_name = eps[i]["computerName"]
         if ep_name in non_compliant_endpoints:
             ep["computer_name"] = ep_name
-            if ( eps[i]["quarantineDesc"].find("Host Integrity check passed") == -1):
+            if "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
                 ep["host_integrity_check"] = "Failed"
             else:
                 ep["host_integrity_check"] = "Passed"
@@ -185,8 +200,6 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
         "out_of_date": 0,
         "disabled": 0
     }
-    hb_def = 900  # Default heart-beat in seconds (15 mins)
-    data_tbl_fields = ["onlineStatus", "timediffLastUpdateTime", "quarantineDesc"]
 
     if non_compliant_endpoints is None:
         non_compliant_endpoints = []
@@ -198,17 +211,18 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
             results["disabled"] = get_engine_status(eps, non_compliant_endpoints)
             for i in range(len(eps)):
                 ep_name = eps[i]["computerName"]
-                for f in data_tbl_fields:
+                for f in EP_PROP_FIELDS:
                     if f == "onlineStatus" and int(eps[i][f]) == 0:
                         results["offline"] += 1
                         if not ep_name in non_compliant_endpoints:
                             non_compliant_endpoints.append(ep_name)
-                    if f == "quarantineDesc" and (eps[i][f].find("Host Integrity check passed") == -1):
+
+                    if f == "quarantineDesc" and "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
                         results["hi_failed"] += 1
                         if not ep_name in non_compliant_endpoints:
                             non_compliant_endpoints.append(ep_name)
                     if f == "timediffLastUpdateTime":
-                        if eps[i][f] > hb_def:
+                        if eps[i][f] > HB_DEF:
                             results["out_of_date"] += 1
                             if not ep_name in non_compliant_endpoints:
                                 non_compliant_endpoints.append(ep_name)

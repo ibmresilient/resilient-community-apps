@@ -7,6 +7,7 @@
 # Destination: a Queue named "fn_sep".
 # Manual Action: Execute a REST action against a SYMANTEC SEPM server.import json
 import logging
+import json
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
@@ -78,7 +79,6 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Quarantine Endpoint' or group results")
 
-            import json
             log.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results

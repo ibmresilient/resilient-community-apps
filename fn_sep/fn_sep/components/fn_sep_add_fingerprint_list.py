@@ -89,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             if "errors" in rtn and rtn["errors"][0]["error_code"] == 409:
                 # If this error was trapped user probably tried to re-add a hash to a fingerprint list.
                 yield StatusMessage(
-                    "Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' "
+                    "Got a 409 error while attempting to get a fingerprint list for fingerprint name '{0}' "
                     "because of a possible invalid or deleted id.".format(sep_fingerprintlist_name))
             else:
                 yield StatusMessage("Returning 'Symantec SEP Add Fingerprint List' results for fingerprint name '{}'."

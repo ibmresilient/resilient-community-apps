@@ -14,7 +14,7 @@ import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs, create_attachment, generate_result_cvs
+from fn_sep.lib.helpers import transform_kwargs, create_attachment, generate_result_csv
 from fn_sep.lib.results_processing import process_results
 
 CONFIG_DATA_SECTION = "fn_sep"
@@ -134,10 +134,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(
                     "Adding EOC scan data for commandid {} as an incident attachment".format(sep_commandid))
                 # Get csv attachment file name and content.
-                (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
+                (file_name, file_content) = generate_result_csv(rtn, sep_commandid)
 
                 # Create an attachment
-                att_report = create_attachment(self.rest_client(), file_name, file_content, params)
+                att_report = create_attachment(self.rest_client(), file_name, file_content, params["incident_id"])
 
                 # Truncate the result to 'results_limit'.
                 for i in range(len(rtn["content"])):
