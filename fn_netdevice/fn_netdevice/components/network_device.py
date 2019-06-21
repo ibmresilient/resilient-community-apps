@@ -7,7 +7,7 @@ import logging
 import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, str_to_bool
-from fn_netdevice.lib.netmiko import execute
+from fn_netdevice.lib.netmiko_core import execute
 
 
 class FunctionComponent(ResilientComponent):
@@ -36,12 +36,12 @@ class FunctionComponent(ResilientComponent):
         """
         configure the environment for netmiko
         """
-        template_dir = self.options.get("template_dir")
-        if template_dir:
-            if not os.path.isdir(template_dir):
-                raise ValueError("Template directory not found %s", template_dir)
+        self.template_dir = self.options.get("template_dir")
+        if  self.template_dir:
+            if not os.path.isdir(self.template_dir):
+                raise ValueError("Template directory not found %s", self.template_dir)
 
-            os.environ["NET_TEXTFSM"] = template_dir
+            os.environ["NET_TEXTFSM"] = self.template_dir
 
     @function("fn_netdevice")
     def _network_device_function(self, event, *args, **kwargs):
@@ -64,11 +64,15 @@ class FunctionComponent(ResilientComponent):
             if not netdevice_cmd and not netdevice_config:
                 raise ValueError("Specify at least netdevice_send_cmd or netdevice_config_cmd")
 
+            if use_textfsm and not self.template_dir:
+                raise ValueError("'netdevice_use_textfsm' set but no template directory is specified in app.config")
+
             yield StatusMessage("starting...")
 
             result_payload = ResultPayload(FunctionComponent.SECTION_HDR, **kwargs)
 
             result = {}
+            rc = True
             for device_id in netdevice_ids.split(','):
 
                 # find the access information
@@ -79,6 +83,7 @@ class FunctionComponent(ResilientComponent):
                         "status": 'failure',
                         "reason": msg
                     }
+                    rc = False
 
                     log.warning(msg)
                     yield StatusMessage(msg)
@@ -88,7 +93,7 @@ class FunctionComponent(ResilientComponent):
 
                 result[device_id] = execute(device_info, netdevice_cmd, netdevice_config, device_commit, use_textfsm)
 
-            status = result_payload.done(True, result)
+            status = result_payload.done(rc, result)
 
             yield StatusMessage("done")
 

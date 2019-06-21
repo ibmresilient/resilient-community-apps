@@ -3,7 +3,7 @@
 
 from __future__ import print_function
 import pytest
-from fn_netdevice.lib.netmiko import execute
+from fn_netdevice.lib.netmiko_core import execute
 
 connection =  {
     'device_type': 'linux',
@@ -15,7 +15,7 @@ connection =  {
     'verbose': True     # optional, defaults to False
 }
 
-
+@pytest.mark.live
 def test_success():
 
     my_connection = connection.copy()
@@ -26,6 +26,7 @@ def test_success():
     assert result['status'] == 'success'
     assert result['send_result'].find('inet') != -1
 
+@pytest.mark.live
 def test_bad_password():
 
     my_connection = connection.copy()
