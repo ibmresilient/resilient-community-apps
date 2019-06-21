@@ -284,7 +284,7 @@ class Bit9PollComponent(ResilientComponent):
 
             log.info(u"Template file: %s", template_file_path)
             with open(template_file_path, "r") as definition:
-                escalate_template = definition.read().decode('utf-8')
+                escalate_template = definition.read()
 
             # Render the template.  Be sure to set the CbProtect ID in the result!
             new_resilient_inc = render_json(escalate_template, request)
