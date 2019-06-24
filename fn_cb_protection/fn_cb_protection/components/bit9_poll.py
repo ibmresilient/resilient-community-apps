@@ -119,56 +119,34 @@ class Bit9PollComponent(ResilientComponent):
         """Query the CbProtect server for approval requests, and raise them to Resilient"""
         self.log.info(u"Getting list of open approval requests")
 
-        # This just queries for all requests that match the escalation conditions.
-        # For cases with many thousands of open requests, a more scalable approach could
-        # use "paged" queries, i.e. send a "limit" and then process each page of results.
+        try:
+            # This just queries for all requests that match the escalation conditions.
+            # For cases with many thousands of open requests, a more scalable approach could
+            # use "paged" queries, i.e. send a "limit" and then process each page of results.
+            results = self.bit9_client.query_approval_request(self.escalation_query)
 
-        results = self.bit9_client.query_approval_request(self.escalation_query)
+            # Query results should be a list
+            if not isinstance(results, list):
+                self.log.warn(u"Query produced unexpected value: %s", results)
+                return
 
-        # Query results should be a list
-        if not isinstance(results, list):
-            self.log.warn(u"Query produced unexpected value: %s", results)
-            return
+            self.log.info("%d results", len(results))
+            self.log.debug(results)
 
-        self.log.info("%d results", len(results))
-        self.log.debug(results)
-
-        r_incidents = []
-        if len(results) > 0:
-            # Some (many!) of these approval requests will already have been escalated to Resilient.
-            # For efficiency, find them and filter them out from this batch.
-            # Then we're left only with "un-escalated" incidents.
-            req_ids = [result["id"] for result in results]
-            query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
-            query = {
-                'filters': [{
-                    'conditions': [
-                        {
-                            'field_name': 'properties.{}'.format(REQUEST_ID_FIELDNAME),
-                            'method': 'in',
-                            'value': req_ids
-                        },
-                        {
-                            'field_name': 'plan_status',
-                            'method': 'equals',
-                            'value': 'A'
-                        }
-                    ]
-                }]
-            }
-            self.log.debug(query)
-            try:
-                r_incidents = self.rest_client().post(query_uri, query)
-            except SimpleHTTPException:
-                # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
-                # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+            r_incidents = []
+            if len(results) > 0:
+                # Some (many!) of these approval requests will already have been escalated to Resilient.
+                # For efficiency, find them and filter them out from this batch.
+                # Then we're left only with "un-escalated" incidents.
+                req_ids = [result["id"] for result in results]
                 query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
                 query = {
                     'filters': [{
                         'conditions': [
                             {
                                 'field_name': 'properties.{}'.format(REQUEST_ID_FIELDNAME),
-                                'method': 'has_a_value'
+                                'method': 'in',
+                                'value': req_ids
                             },
                             {
                                 'field_name': 'plan_status',
@@ -179,20 +157,46 @@ class Bit9PollComponent(ResilientComponent):
                     }]
                 }
                 self.log.debug(query)
-                r_incidents_tmp = self.rest_client().post(query_uri, query)
-                r_incidents = [r_inc for r_inc in r_incidents_tmp
-                               if r_inc["properties"].get(REQUEST_ID_FIELDNAME) in req_ids]
+                try:
+                    r_incidents = self.rest_client().post(query_uri, query)
+                except SimpleHTTPException:
+                    # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+                    # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+                    query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(REQUEST_ID_FIELDNAME)
+                    query = {
+                        'filters': [{
+                            'conditions': [
+                                {
+                                    'field_name': 'properties.{}'.format(REQUEST_ID_FIELDNAME),
+                                    'method': 'has_a_value'
+                                },
+                                {
+                                    'field_name': 'plan_status',
+                                    'method': 'equals',
+                                    'value': 'A'
+                                }
+                            ]
+                        }]
+                    }
+                    self.log.debug(query)
+                    r_incidents_tmp = self.rest_client().post(query_uri, query)
+                    r_incidents = [r_inc for r_inc in r_incidents_tmp
+                                   if r_inc["properties"].get(REQUEST_ID_FIELDNAME) in req_ids]
 
-        escalated_ids = [r_inc["properties"].get(REQUEST_ID_FIELDNAME) for r_inc in r_incidents]
+            escalated_ids = [r_inc["properties"].get(REQUEST_ID_FIELDNAME) for r_inc in r_incidents]
 
-        unescalated_requests = [result for result in results if str(result["id"]) not in escalated_ids]
+            unescalated_requests = [result for result in results if str(result["id"]) not in escalated_ids]
 
-        # Process each approval-request in the batch
-        for req in unescalated_requests:
-            self.fire(ProcessApprovalRequest(request=req))
+            # Process each approval-request in the batch
+            for req in unescalated_requests:
+                self.fire(ProcessApprovalRequest(request=req))
 
-        self.log.info(u"Processed all approval requests")
-        self.fire(PollCompleted())
+            self.log.info(u"Processed all approval requests")
+
+        except Exception as err:
+            raise err
+        finally:
+            self.fire(PollCompleted())
 
     """Queries resilient for if an incident has already been created for the approval request"""
     def _find_resilient_incident_for_req(self, req_id):
