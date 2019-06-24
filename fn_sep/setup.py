@@ -24,8 +24,11 @@ setup(
     author='IBM Resilient Support',
     author_email='support@resilientsystems.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_sep'",
-    long_description="Resilient Circuits Components for 'fn_sep'",
+    description="Symantec Endpoint Protection Integration for Resilient",
+    long_description="Integration with Symantec Endpoint Protection to facilitate manual enrichment and targeted "
+                     "remediation actions. Teams can investigate an attack by hunting for IOCs or suspect Endpoints "
+                     "across an enterprise, and quickly respond to attacks by executing endpoint remediation actions, "
+                     "such as deleting or blacklisting suspicious files from within the Resilient platform.",
     install_requires=[
         'resilient_circuits>=32.0.0',
         'resilient_lib>=32.0.0'

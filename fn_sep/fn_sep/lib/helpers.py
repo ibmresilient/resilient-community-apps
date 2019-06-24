@@ -5,17 +5,15 @@
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function
 import logging
-import re
-import os
 import sys
 import datetime
 import tempfile
 from resilient_circuits.actions_component import ResilientComponent
 
 LOG = logging.getLogger(__name__)
-
+CONFIG_DATA_SECTION = "fn_sep"
 EP_ENGINE_STATUS_FIELDS = ["apOnOff", "avEngineOnOff", "cidsBrowserFfOnOff", "cidsBrowserIeOnOff", "cidsDrvOnOff",
-                            "daOnOff", "elamOnOff", "firewallOnOff", "pepOnOff", "ptpOnOff", "tamperOnOff"]
+                           "daOnOff", "elamOnOff", "firewallOnOff", "pepOnOff", "ptpOnOff", "tamperOnOff"]
 READABLE_TIME_FIELDS = ["readableLastScanTime", "readableLastVirusTime", "readableLastUpdateTime"]
 EP_PROP_FIELDS = ["onlineStatus", "timediffLastUpdateTime", "quarantineDesc"]
 HB_DEF = 900  # Default heart-beat in seconds (15 mins)
@@ -35,14 +33,14 @@ def transform_kwargs(kwargs):
 
     # Remove  "sep_" from the kwargs key names.
     for (k, v) in kwargs.copy().items():
-            v = kwargs.pop(k)
+        v = kwargs.pop(k)
 
-            if isinstance(k, list):
-                k =  [ResilientComponent.get_select_param(val) for val in v]
-            elif isinstance(v, dict):
-                v =  v.get("name")
-            kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
-            params[k.split('_', 1)[1]] = v.rstrip().lstrip() if isinstance(v, str) \
+        if isinstance(k, list):
+            k = [ResilientComponent.get_select_param(val) for val in v]
+        elif isinstance(v, dict):
+            v = v.get("name")
+        kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
+        params[k.split('_', 1)[1]] = v.rstrip().lstrip() if isinstance(v, str) \
                                                                 and v.lower().startswith("sep_") else v
 
     # If any entry has "None" string change to None value for params.
@@ -75,10 +73,9 @@ def create_attachment(rest_client, file_name, file_content, incident_id):
 
             # Post file to Resilient
             att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(incident_id),
-                                                        temp_file.name,
-                                                        file_name,
-                                                        "text/plain",
-                                                        "")
+                                                     temp_file.name, file_name,
+                                                     "text/plain",
+                                                     "")
             LOG.info("New attachment added to incident %s", incident_id)
 
     except IOError as ioerr:
@@ -112,11 +109,11 @@ def generate_result_csv(rtn, sep_commandid):
             else eps[i]["scan_result"]["HASH_MATCHES"]
         for m in matches:
             if "File" in artifact_type:
-                file_content += "{0},{1},{2},{3},{4},{5}\n"\
-                    .format(ep_name, ep_id, artifact_type, artifact_value, m["hashType"],m["hashValue"])
+                file_content += ("{0}\n".format(",".join([ep_name, ep_id, artifact_type, artifact_value,
+                                                          m["hashType"], m["hashValue"]])))
             else:
-                file_content += "{0},{1},{2},{3},{4},{5}\n"\
-                    .format(ep_name, ep_id, artifact_type, artifact_value, "File path", m["value"])
+                file_content += ("{0}\n".format(",".join([ep_name, ep_id, artifact_type, artifact_value,
+                                                          "File path", m["value"]])))
 
     return(file_name, file_content)
 
@@ -204,10 +201,10 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
     if non_compliant_endpoints is None:
         non_compliant_endpoints = []
 
-    if rtn is not None and len(rtn["content"]) > 0:
+    if rtn is not None and rtn["content"]:
         results["total"] = len(rtn["content"])
         eps = rtn["content"]
-        if len(eps) > 0:
+        if eps:
             results["disabled"] = get_engine_status(eps, non_compliant_endpoints)
             for i in range(len(eps)):
                 ep_name = eps[i]["computerName"]
@@ -242,7 +239,7 @@ def get_endpoints_status_details(rtn):
 
     results = get_endpoints_status(rtn, non_compliant_endpoints)
 
-    if len(non_compliant_endpoints) > 0:
+    if non_compliant_endpoints:
         results = add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results)
 
     return results

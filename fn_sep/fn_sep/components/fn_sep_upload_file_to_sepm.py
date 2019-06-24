@@ -10,11 +10,10 @@ import json
 import logging
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
-CONFIG_DATA_SECTION = "fn_sep"
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):

@@ -8,13 +8,13 @@
 # Manual Action: Execute a REST action against a SYMANTEC SEPM server.import json
 import json
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs
 from os import path
 
-CONFIG_DATA_SECTION = "fn_sep"
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload, validate_fields
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
             log.info("sep_description: %s", sep_description)
             log.info("sep_scan_action: %s", sep_scan_action)
 
-            validate_fields(["sep_scan_type", "sep_description", "sep_scan_action" ], kwargs)
+            validate_fields(["sep_scan_type", "sep_description", "sep_scan_action"], kwargs)
 
             yield StatusMessage("Running Symantec SEP Scan Endpoints command...")
 

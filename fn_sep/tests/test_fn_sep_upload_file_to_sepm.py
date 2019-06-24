@@ -50,9 +50,6 @@ class TestFnSepUploadFileToSepm:
     ])
     def test_success(self, mock_post, circuits_app, sep_file_path, sep_computer_ids, sep_sha256, sep_sha1, sep_md5, sep_source, expected_results):
         """ Test calling with sample values for the parameters """
-        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
-        keys_2 = ["overall_command_state", "total_ep_count", "total_match_count", "total_match_ep_count",
-                  "total_not_completed", "total_remediation_count", "total_remediation_ep_count"]
 
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
         keys_2 = ["commandID"]

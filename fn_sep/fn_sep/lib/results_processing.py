@@ -29,6 +29,58 @@ def filter_hits(rtn, status_type):
 
 def parse_scan_results(xml):
     """"Parse scan eoc xml results and convert to dict.
+        Example xml:
+        ============
+                <EOC creator="Resilient" version="1.0" id="id">
+                 <DataSource name="name" id="id" version="version"/>
+                 <ScanType>FULL_SCAN</ScanType>
+                 <RemediationAction>REMEDIATE</RemediationAction>
+                 <Threat time="" severity="" type="" category="">
+                     <Description>None</Description>
+                     <URL></URL>
+                     <User></User>
+                     <Attacker>
+                     </Attacker>
+                     <proxy ip=""/>
+                     <Application></Application>
+                 </Threat>
+                 <Activity>
+                     <OS id="0" name="name" version="version">
+                         <Process>
+                         </Process>
+                         <Files>
+                             <File name="C:\temp\test.ext" action="create">
+                                 <Hash name="SHA256" value="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/>
+                                 <Matched result="HASH_MATCH" value="C:\temp\test.ext" remediation="SUCCEEDED" hashType="SHA256"/></File>
+                             <File name="C:\temp\test.ext" action="create">
+                                 <Matched result="FULL_MATCH" value="C:\temp\test.ext" remediation="UNSUPPORTED"
+                                 hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
+                             <File name="C:\temp\test.ext" action="create">
+                                 <Matched result="FULL_MATCH" value="C:\temp\test.ext" remediation="UNSUPPORTED"
+                                 hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
+                         </Files>
+                         <Registry>
+                         </Registry>
+                         <Network/>
+                     </OS>
+                 </Activity>
+             </EOC>
+        Example: result
+        ===============
+            scan_result = {
+                "MATCH": True,
+                "artifact_value": 'C:\temp\test.ext',
+                "artifact_type": '',
+                "FULL_MATCHES": [{'hashType': 'SHA256', 'hashValue': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37',
+                       'result': 'FULL_MATCH', 'value': 'C:\\temp\\test.ext', "remediation": "UNSUPPORTED"}, 'action': 'create'],
+                "HASH_MATCHES": [{{'name': 'C:\\temp\\test.ext', 'hashType': 'SHA256', 'result': 'HASH_MATCH',
+                       'value': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37', 'remediation': 'SUCCEEDED'},
+                       'action': 'create'}],
+                "PARTIAL_MATCHES": [],
+                "match_count": 1,
+                "remediation_count": 1,
+                "fail_remediation_count": 0
+            }
 
     :param xml: Status in xml for endpoint.
     :return Scan result in a dict.
@@ -36,13 +88,13 @@ def parse_scan_results(xml):
     # Create empty result dict.
     scan_result = {
         "MATCH": False,
-        "artifact_value": '',
-        "artifact_type": '',
+        "artifact_value": 'C:\temp\test.ext',
+        "artifact_type": 'File Path',
         "FULL_MATCHES": [],
         "HASH_MATCHES": [],
         "PARTIAL_MATCHES": [],
         "match_count": 0,
-        "remediation_count": 0,
+        "remediation_count": 1,
         "fail_remediation_count": 0
     }
     file_seps = ['\\', '/']
@@ -61,19 +113,19 @@ def parse_scan_results(xml):
                     if item.attrib["result"] == match_type and not item.attrib in scan_result[match_type+'ES']:
                         # File name or path match.
                         if item.attrib["result"] in match_types[1:-1]: # Full or partial match
-                            for file in results.findall('Activity/OS/Files/File'):
+                            for matched_file in results.findall('Activity/OS/Files/File'):
                                 if not scan_result["artifact_value"]:
-                                    scan_result["artifact_value"] = file.attrib["name"]
-                                    if any(fs in file for fs in file_seps):
+                                    scan_result["artifact_value"] = matched_file.attrib["name"]
+                                    if any(fs in matched_file for fs in file_seps):
                                         scan_result["artifact_type"] = "File Path"
                                     else:
                                         scan_result["artifact_type"] = "File Name"
                         else:
                             # Hash match.
-                            for hash in results.findall('Activity/OS/Files/File/Hash'):
+                            for matched_hash in results.findall('Activity/OS/Files/File/Hash'):
                                 if not scan_result["artifact_value"]:
-                                    scan_result["artifact_type"] = "{} hash".format(hash.attrib["name"])
-                                    scan_result["artifact_value"] = hash.attrib["value"]
+                                    scan_result["artifact_type"] = "{} hash".format(matched_hash.attrib["name"])
+                                    scan_result["artifact_value"] = matched_hash.attrib["value"]
                         scan_result[match_type+'ES'].append(item.attrib)
                         scan_result["match_count"] += 1
                         if "remediation" in  item.attrib and item.attrib["remediation"] == "SUCCEEDED":
@@ -110,8 +162,8 @@ def get_overall_progress(rtn):
     }
     overall_state = 'Completed'
 
-    if len(rtn["content"]) == 0:
-        # When the scan command initially launched the content dect is typically empty.
+    if not rtn["content"]:
+        # When the scan command initially launched the content dict is typically empty.
         overall_state = states[0]
     else:
         for i in range(len(rtn["content"])):

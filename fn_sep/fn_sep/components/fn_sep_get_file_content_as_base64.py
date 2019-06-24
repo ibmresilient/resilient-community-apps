@@ -11,11 +11,9 @@ import logging
 import base64
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs
-
-CONFIG_DATA_SECTION = "fn_sep"
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_get_file_content_as_base64' of

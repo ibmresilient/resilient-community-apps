@@ -19,6 +19,5 @@ username=<username>
 password=<password>
 domain=<SEP domain name>
 results_limit=200
-
 """
     return config_data

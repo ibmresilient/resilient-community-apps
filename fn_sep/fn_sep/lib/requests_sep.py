@@ -4,12 +4,12 @@
 
 """ Process https requests """
 import logging
-from requests import request, HTTPError
 import re
+import xml.etree.ElementTree as ET
 from zipfile import ZipFile
 from io import BytesIO
-import xml.etree.ElementTree as ET
 from sys import version_info
+from requests import request, HTTPError
 
 LOG = logging.getLogger(__name__)
 # Magic number for zip file
@@ -17,15 +17,16 @@ ZIP_MAGIC = b"\x50\x4b\x03\x04"
 # Hash lengths: SHA256 = 64, SHA-1 = 40, MD5 = 32
 HASH_LENGTHS = [64, 40, 32]
 
+
 class RequestsSep(object):
     """
-    This class inherits from class RequestsCommon and over-rides the execute_call method.
     The class will be used to manage REST calls.
 
     """
     def __init__(self, opts=None, function_opts=None):
         # capture the properties for the integration as well as the global settings for all integrations for proxy urls
         self.integration_options = opts.get('integrations', None) if opts else None
+        self.base_path = opts.get("base_path")
         self.function_opts = function_opts
 
     def get_proxies(self):
@@ -39,10 +40,10 @@ class RequestsSep(object):
 
         return proxies
 
-    def execute_call(self, verb, url, params=None, data=None, json=None, log=None, basicauth=None, verify_flag=True,
+    def execute_call(self, verb, url, params=None, data=None, json=None, basicauth=None, verify_flag=True,
                      headers=None, proxies=None, timeout=None, stream=False):
-        """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH and
-        DELETE. Retries are attempted if a Rate limit exception (429) is  detected.
+        """Method which initiates the REST API call. Default method is the GET method also supports POST, PATCH,
+        PUT, DELETE AND HEAD. Retries are attempted if a Rate limit exception (429) is  detected.
 
         :param uri: Used to form url
         :param verb: GET, HEAD, PATCH, POST, PUT, DELETE
@@ -58,30 +59,27 @@ class RequestsSep(object):
         if verb.upper() in ["GET", "HEAD", "PATCH", "POST", "PUT", "DELETE"]:
             try:
                 r = request(verb.upper(), url, verify=verify_flag, headers=headers, params=params,
-                                     auth=basicauth, timeout=timeout, stream=stream, proxies=proxies, data=data, json=json)
+                            auth=basicauth, timeout=timeout, stream=stream, proxies=proxies, data=data, json=json)
 
                 r.raise_for_status()  # If the request fails throw an error.
 
             except HTTPError as e:
                 if e.response.status_code == 410 and verb.upper() in ["GET", "DELETE"] and \
-                        re.match("^https://.*/sepm/api/v1/policy-objects/fingerprints.*$", url, ):
+                        re.match("^https://.*"+ self.base_path + "/policy-objects/fingerprints.*$", url, ):
                         # We are probably trying to access/delete fingerprint list which doesn't exist.
-                    LOG.error("Got '410' error, possible attempt to '{}' a fingerprint list which doesn't exist."
-                              .format(verb))
+                    LOG.error("Got '410' error, possible attempt to '%s' a fingerprint list which doesn't exist.",
+                              verb)
                     # Allow error to bubble up to the Resilient function.
-                    pass
                 elif e.response.status_code == 400 and verb.upper() in ["PUT"] and \
-                        re.match("^https://.*/sepm/api/v1/groups/.*/system-lockdown/fingerprints/.*$", url, ):
+                        re.match("^https://.*"+ self.base_path + "/groups/.*/system-lockdown/fingerprints/.*$", url, ):
                         # We are probably trying to re-add a hash to fingerprint list which already exists.
                     LOG.error("Got '400' error, possible attempt to access a fingerprint list which doesn't exist.")
                     # Allow error to bubble up to the Resilient function.
-                    pass
                 elif e.response.status_code == 409 and verb.upper() in ["POST"] and \
-                        re.match("^https://.*/sepm/api/v1/policy-objects/fingerprints.*$", url, ):
+                        re.match("^https://.*"+ self.base_path + "/policy-objects/fingerprints.*$", url):
                         # We are probably trying to re-add a hash to fingerprint list which already exists.
                     LOG.error("Got '409' error, possible attempt to re-add a hash to a fingerprint list.")
                     # Allow error to bubble up to the Resilient function.
-                    pass
                 else:
                     # Re-raise
                     raise
@@ -113,24 +111,23 @@ class RequestsSep(object):
         """
         key = c_unzipped = meta = None
         try:
-            zfile = ZipFile(BytesIO(content), 'r')
-            for file in zfile.namelist():
-                if len(file) in HASH_LENGTHS or file == "metadata.xml":
-                    f = zfile.open(file)
-                    if len(file) in HASH_LENGTHS:
-                        # Get the hash file name.
-                        c_unzipped = f.read()
-                    elif file == "metadata.xml":
-                        # Get the key.
-                        if version_info.major == 3:
-                            meta = ET.fromstring(f.read())
-                        else:
-                            meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
-                        for item in meta.findall('File'):
-                            key = item.attrib["Key"]
-                else:
-                    raise ValueError('Unknown hash type or key for zipfile contents: ' + file)
-
+            with ZipFile(BytesIO(content), 'r') as zfile:
+                for zip_file_name in zfile.namelist():
+                    if len(zip_file_name) in HASH_LENGTHS or zip_file_name == "metadata.xml":
+                        f = zfile.open(zip_file_name)
+                        if len(zip_file_name) in HASH_LENGTHS:
+                            # Get the hash file name.
+                            c_unzipped = f.read()
+                        elif zip_file_name == "metadata.xml":
+                            # Get the key.
+                            if version_info.major == 3:
+                                meta = ET.fromstring(f.read())
+                            else:
+                                meta = ET.fromstring(f.read().encode('utf8', 'ignore'))
+                            for item in meta.findall('File'):
+                                key = item.attrib["Key"]
+                    else:
+                        raise ValueError('Unknown hash type or key for zipfile contents: ' + zip_file_name)
             return (key, c_unzipped)
 
         except ET.ParseError as e:
@@ -147,5 +144,4 @@ class RequestsSep(object):
         data = bytearray(data)
         for i in range(len(data)):
             data[i] ^= int(key)
-            pass
         return data

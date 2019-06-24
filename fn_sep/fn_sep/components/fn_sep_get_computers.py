@@ -10,14 +10,13 @@ import copy
 import json
 import logging
 import time
-
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload
-from fn_sep.lib.helpers import transform_kwargs, get_endpoints_status, get_endpoints_status_details
 from datetime import datetime
 
-CONFIG_DATA_SECTION = "fn_sep"
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, get_endpoints_status, get_endpoints_status_details
+
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):

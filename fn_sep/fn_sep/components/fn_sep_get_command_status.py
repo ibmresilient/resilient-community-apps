@@ -9,15 +9,13 @@
 import copy
 import json
 import logging
-import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
 from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs, create_attachment, generate_result_csv
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, create_attachment, generate_result_csv
 from fn_sep.lib.results_processing import process_results
 
-CONFIG_DATA_SECTION = "fn_sep"
 LOG = logging.getLogger(__name__)
 RESULTS_LIMIT_DEF = 200
 
@@ -150,7 +148,7 @@ class FunctionComponent(ResilientComponent):
                                 total_match_count += rtn["content"][i]["scan_result"]["match_count"]
                             else:
                                 for match_type in match_types:
-                                    if len(rtn["content"][i]["scan_result"][match_type]) > 0:
+                                    if rtn["content"][i]["scan_result"][match_type]:
                                         # Truncate matches to limit value.
                                         rtn["content"][i]["scan_result"][match_type] = \
                                             rtn["content"][i]["scan_result"][match_type][:results_limit - total_match_count]

@@ -8,13 +8,12 @@
 # Manual Action: Execute a REST query against a SYMANTEC SEPM server.
 import json
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_sep.lib.sep_client import Sepclient
-from resilient_lib import ResultPayload, validate_fields
-from fn_sep.lib.helpers import transform_kwargs
-from datetime import datetime
 
-CONFIG_DATA_SECTION = "fn_sep"
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload, validate_fields
+from fn_sep.lib.sep_client import Sepclient
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):

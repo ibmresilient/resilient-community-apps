@@ -59,7 +59,7 @@ class Sepclient(object):
             "fingerprints_list":                        self.base_path+"/policy-objects/fingerprints",
             "fingerprints_list_by_id":                  self.base_path+"/policy-objects/fingerprints/{}",
             "assign_fingerprint_list_to_group":         self.base_path+"/groups/{0}/system-lockdown/fingerprints/{1}"
-         }
+        }
         self._req = RequestsSep(options, function_params)
         self._headers = {"content-type": "application/json", "Authorization": "Bearer {0}".format(self._get_token())}
 
@@ -147,7 +147,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["version"])
 
-        r =  self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
 
         return r
 
@@ -160,7 +160,7 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["computers"])
 
-        r = self._req.execute_call('head', url, verify_flag=False, resp_type='bytes', headers=self._headers)
+        r = self._req.execute_call('head', url, verify_flag=False, headers=self._headers)
 
         return r
 
@@ -213,7 +213,7 @@ class Sepclient(object):
         return r
 
     def get_groups(self, domain=None, fullpathname=None, mode=None, order=None, os=None, pageindex=None,
-                      pagesize=None, sort=None):
+                   pagesize=None, sort=None):
         """Get a list of groups. The paramaters are all optional the default is to return results for all groups.
 
         :param domain: The SEP domain name.
@@ -227,8 +227,8 @@ class Sepclient(object):
         """
         url = urljoin(self.base_url, self._endpoints["groups"])
 
-        params = {"domain": domain, "fullPathName": fullpathname, "order":order,
-                  "pageIndex": pageindex , "pageSize": pagesize, "sort": sort}
+        params = {"domain": domain, "fullPathName": fullpathname, "order": order, "pageIndex": pageindex,
+                  "pageSize": pagesize, "sort": sort}
 
         r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
 
@@ -307,14 +307,14 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["fingerprints_list_by_id"]).format(fingerprintlist_id)
 
         if hash_value is not None:
-            hash_values =  re.split('\s+|,', hash_value)
+            hash_values = re.split('\s+|,', hash_value)
 
         hash_type = self.get_hash_type(hash_values[0])
 
         if hash_type not in ["MD5"]:
             raise ValueError("Unsupported hash type for value: " + hash_value)
 
-        payload = json.dumps({"name": fingerprintlist_name,"description": description, "domainId": domainid,
+        payload = json.dumps({"name": fingerprintlist_name, "description": description, "domainId": domainid,
                               "hashType": hash_type, "data": hash_values})
         r = self._req.execute_call('post', url, verify_flag=False, headers=self._headers, data=payload)
 
@@ -336,7 +336,7 @@ class Sepclient(object):
 
         return r
 
-    def upload_file(self, file_path=None, computer_ids=None, sha256=None, md5=None, sha1=None, source=None ):
+    def upload_file(self, file_path=None, computer_ids=None, sha256=None, md5=None, sha1=None, source=None):
         """Upload a suspicious file to the SEPM server.
 
         :param file_path: The file path of the suspicious file.
@@ -350,7 +350,7 @@ class Sepclient(object):
         url = urljoin(self.base_url, self._endpoints["upload_file"])
 
         if computer_ids is not None:
-            computer_ids =  re.split('\s+|,', computer_ids)
+            computer_ids = re.split('\s+|,', computer_ids)
 
         params = {"file_path": file_path, "computer_ids": computer_ids, "sha256": sha256, "md5": md5, "sha1": sha1,
                   "source": source}
@@ -377,7 +377,7 @@ class Sepclient(object):
 
         params = {"order": order, "pageIndex": pageindex, "pageSize": pagesize, "sort": sort}
 
-        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers)
+        r = self._req.execute_call('get', url, verify_flag=False, headers=self._headers, params=params)
 
         return r
 
@@ -393,7 +393,7 @@ class Sepclient(object):
 
         return r
 
-    def quarantine_endpoints(self, group_ids=None, computer_ids=None, undo=None ):
+    def quarantine_endpoints(self, group_ids=None, computer_ids=None, undo=None):
         """Quarantine an endpoint in the SEP environment my moving to a quarantine group.
 
         :param group_ids: Id of quarantine group.
@@ -406,7 +406,7 @@ class Sepclient(object):
         if group_ids is not None:
             group_ids = re.split('\s+|,', group_ids)
         if computer_ids is not None:
-            computer_ids =  re.split('\s+|,', computer_ids)
+            computer_ids = re.split('\s+|,', computer_ids)
 
         params = {"computer_ids": computer_ids, "group_ids": group_ids,  }
 
@@ -417,8 +417,8 @@ class Sepclient(object):
 
         return r
 
-    def scan_endpoints(self, computer_ids=None, group_ids=None, scan_type=None, file_path=None, sha256=None,sha1=None,
-                       md5=None, description=None, scan_action=None):
+    def scan_endpoints(self, computer_ids=None, group_ids=None, scan_type=None, file_path=None, sha256=None,
+                       sha1=None, md5=None, description=None, scan_action=None):
         """Run an 'eoc' or "Remediation" scan on endpoint(s).
 
         :param computer_ids: List of computer ids.
@@ -428,7 +428,8 @@ class Sepclient(object):
         :param sha256: Sha256 hash value.
         :param sha1: Sha1 hash value.
         :param md5: Sha1 hash value.
-        :param remediate: Perform a remediation scan.
+        :param description: Description for scan..
+        :param scan_action: Perform an action e.g 'remediation' with the scan.
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["scan_endpoints"])
@@ -437,7 +438,7 @@ class Sepclient(object):
             group_ids = re.split('\s+|,', group_ids)
 
         if computer_ids is not None:
-            computer_ids =  re.split('\s+|,', computer_ids)
+            computer_ids = re.split('\s+|,', computer_ids)
 
         params = {"computer_ids": computer_ids, "group_ids": group_ids}
 
@@ -473,7 +474,7 @@ class Sepclient(object):
         """
 
         rtn = get_method(**params)
-        if "content" in rtn and len(rtn["content"]) > 0:
+        if "content" in rtn and rtn["content"]:
             # Set page index to 1 if parameter not set in ther action.
             page_index = params.get('pageindex', 1)
             items_per_page = rtn["size"]
@@ -487,12 +488,10 @@ class Sepclient(object):
             if not current_item_count < items_per_page:
                 while (max_count > current_item_count and total_pages > page_index):
 
-                    remaining_count = max_count - current_item_count
-
                     page_index += 1
                     params["pageindex"] = page_index
 
-                    # Re-run request and filter results with new offset set.
+                    # Re-run request and filter results with new page index set.
                     rtn_sub = get_method(**params)
                     rtn["content"].extend(rtn_sub["content"])
                     for v in ["firstPage", "lastPage", "numberOfElements"]:
