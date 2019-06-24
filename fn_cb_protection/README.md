@@ -46,33 +46,33 @@ Config values example:
 
 Run with: `resilient-circuits run`.
 
-## Resilient Functions for CbProtection - FIXME! - rename functions
+## Resilient Functions for CbProtection
 ```
-CbProtect Approval Request Get
-CbProtect Approval Request Query
-CbProtect Approval Request Update
-CbProtect File Catalog Get
-CbProtect File Catalog Query
-CbProtect File Instance Query
-CbProtect File Instance Update
-CbProtect File Rule Delete
-CbProtect File Rule Get
-CbProtect File Rule Query
-CbProtect File Rule Update
-CbProtect File Delete
+CbProtect Delete File	
+CbProtect Delete File Rule for Id
+CbProtect Get Approval Request for Id
+CbProtect Get Approval Request for Query Condition
+CbProtect Get File Catalog for Id
+CbProtect Get File Catalog for Query Condition
+CbProtect Get File Instance for Query Conditions 
+CbProtect Get File Rule for Id
+CbProtect Get File Rule for Query Condition
+CbProtect Update Approval Request
+CbProtect Update File Instance Local State
+CbProtect Update File Rule
 ```
-## Rules and workflows have been provided: FIXME! - rename rules and workflows
+## Rules and workflows have been provided:
 ```
-(Example) CbProtection: Get Approval Request
-(Example) CbProtection: Approve File Globally and Close Request
-(Example) CbProtection: Approve File Locally and Close Request
-(Example) CbProtection: Ban File Globally and Close Request
-(Example) CbProtect Delete File
-(Example) CbProtection Delete File Rule
-(Example) CbProtection File Rule Get
-(Example) CbProtection Query Approval Request
-(Example) CbProtection Query File Catalog
-(Example) CbProtection Query File Rule
+(Example) CbProtect Get Approval Request
+(Example) CbProtect Approve File Globally and Close Request
+(Example) CbProtect Approve File Locally and Close Request
+(Example) CbProtect Ban File Globally and Close Request
+(Example) CbProtect Delete File By Hash
+(Example) CbProtect Delete File Rule for Id 1
+(Example) CbProtect Get Approval Request for Query 'fileName:notepad.exe'
+(Example) CbProtect Get File Catalog for Query 'trust:1'
+(Example) CbProtect Get File Rule for Id 1
+(Example) CbProtect Get File Rule for Query 'name:notepad.exe'
 ```
 > Use these as reference to create your own from.
 

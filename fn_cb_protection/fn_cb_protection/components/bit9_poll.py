@@ -196,6 +196,7 @@ class Bit9PollComponent(ResilientComponent):
         except Exception as err:
             raise err
         finally:
+            # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
 
     """Queries resilient for if an incident has already been created for the approval request"""
