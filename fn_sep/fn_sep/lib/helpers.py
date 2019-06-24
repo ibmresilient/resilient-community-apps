@@ -99,7 +99,7 @@ def generate_result_csv(rtn, sep_commandid):
         .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S'))
     file_content = "Computer name,Computer id,Artifact type,Artifact value,Match type,Match value\n"
 
-    eps = rtn["content"]
+    eps = rtn.get("content",[])
     for i in range(len(eps)):
         ep_name = eps[i]["computerName"]
         ep_id = eps[i]["computerId"]
