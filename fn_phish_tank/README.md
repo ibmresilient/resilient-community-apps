@@ -108,4 +108,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_phish_tank | 1.0.0 | Resilient Labs | https://github.com/ibmresilient/resilient-community-apps |
+| fn_phish_tank | 1.0.0 | Resilient Labs | http://ibm.biz/resilientcommunity |

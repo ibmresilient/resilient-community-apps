@@ -10,7 +10,7 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    url='http://ibm.biz/resilientcommunity',
     description="PhishTank Lookup URL Function for IBM Resilient",
     long_description="""Lookup a URL against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is Phishing or not.
     The Artifacts Description is updated and a Note is added to the Incident, detailing the information returned from PhishTank""",
