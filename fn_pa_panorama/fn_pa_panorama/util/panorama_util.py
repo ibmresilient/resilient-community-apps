@@ -4,7 +4,6 @@
 
 import logging
 import json
-import requests
 from resilient_lib.components.resilient_common import validate_fields, str_to_bool
 from resilient_lib.components.requests_common import RequestsCommon
 
@@ -47,26 +46,22 @@ class PanoramaClient:
     def __get(self, resource_uri, parameters):
         """Generic GET"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = self.rc.execute_call("GET", uri, payload=parameters, log=log, verify_flag=self.verify)
+        response = self.rc.execute_call_v2("GET", uri, params=parameters, verify=self.verify)
         log.debug("Response: {}".format(response))
-        return response
+        return response.json()
 
     def __post(self, resource_uri, params, payload):
         """Generic POST"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = requests.post(uri, params=params, json=json.loads(payload), verify=self.verify)
+        response = self.rc.execute_call_v2("POST", uri, params=params, json=json.loads(payload), verify=self.verify)
         log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
         response.raise_for_status()
         return response.json()
-        # uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        # response = self.rc.execute_call("POST", uri, payload=json.loads(payload), log=log, verify_flag=self.verify)
-        # log.debug("Response: {}".format(response))
-        # return response
 
     def __put(self, resource_uri, params, payload):
         """Generic PUT"""
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
-        response = requests.put(uri, params=params, json=json.loads(payload), verify=self.verify)
+        response = self.rc.execute_call_v2("PUT", uri, params=params, json=json.loads(payload), verify=self.verify)
         log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
         response.raise_for_status()
         return response.json()
