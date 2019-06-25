@@ -137,26 +137,28 @@ class FunctionComponent(ResilientComponent):
                 att_report = create_attachment(self.rest_client(), file_name, file_content, params["incident_id"])
 
                 # Truncate the result to 'results_limit'.
-                for i in range(len(rtn["content"])):
+                content_copy = copy.deepcopy(rtn["content"])
+                for i in range(len(content_copy)):
                     if result_limit_complete:
                         del rtn["content"][i]
                     else:
                         if total_match_count <= results_limit:
-                            match_count = rtn["content"][i]["scan_result"]["match_count"]
+                            match_count = content_copy[i]["scan_result"]["match_count"]
                             if  total_match_count + match_count <= results_limit:
-                                total_match_count += rtn["content"][i]["scan_result"]["match_count"]
+                                total_match_count += content_copy[i]["scan_result"]["match_count"]
                             else:
                                 for match_type in match_types:
-                                    if rtn["content"][i]["scan_result"][match_type]:
+                                    if content_copy[i]["scan_result"][match_type]:
                                         # Truncate matches to limit value.
                                         rtn["content"][i]["scan_result"][match_type] = \
-                                            rtn["content"][i]["scan_result"][match_type][:results_limit - total_match_count]
+                                            content_copy[i]["scan_result"][match_type][:results_limit - total_match_count]
                                 rtn["content"][i]["scan_result"]["match_count"] = results_limit - total_match_count
                                 result_limit_complete = True
 
                 rtn["scan_eoc_hits_over_limit"] = True
                 rtn["att_name"] = att_report["name"]
                 rtn["truncated_count"] = results_limit
+                del content_copy
             else:
                 yield StatusMessage("Returning 'Symantec SEP Get Command Status' results for command id {}"
                                     .format(sep_commandid))
