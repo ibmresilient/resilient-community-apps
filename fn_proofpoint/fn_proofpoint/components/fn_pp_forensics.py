@@ -106,23 +106,25 @@ class FunctionComponent(ResilientComponent):
             if res.status_code == 200:
                 data = []
                 forensics = json.loads(res.text)
-                for forensic in forensics['reports']['forensics']:
-                    if not forensic:
-                        # no object?
-                        yield StatusMessage('no forensic')
-                        continue
-                    if malicious_flag and not forensic.get('malicious'):
-                        # non-malicious result and we're only interested in malicious ones
-                        yield StatusMessage('not malicious')
-                        continue
-                    try:
-                        yield StatusMessage('forensic data {}'.format(json.dumps(forensic, indent=2)))
-                        data.append(template_functions.render(self.forensics_template, forensic))
-                        yield StatusMessage('now data {}'.format(data))
+                log.debug('got {}'.format(json.dumps(forensics, indent=2)))
+                for report in forensics['reports']:
+                    for forensic in report['forensics']:
+                        if not forensic:
+                            # no object?
+                            yield StatusMessage('no forensic')
+                            continue
+                        if malicious_flag and not forensic.get('malicious'):
+                            # non-malicious result and we're only interested in malicious ones
+                            yield StatusMessage('not malicious')
+                            continue
+                        try:
+                            yield StatusMessage('forensic data {}'.format(json.dumps(forensic, indent=2)))
+                            data.append(template_functions.render(self.forensics_template, forensic))
+                            yield StatusMessage('now data {}'.format(data))
 
-                    except jinja2.exceptions.TemplateSyntaxError:
-                        log.info('forensics template is not set correctly in config file')
-                        continue
+                        except jinja2.exceptions.TemplateSyntaxError:
+                            log.info('forensics template is not set correctly in config file')
+                            continue
 
                 yield StatusMessage('final data {}'.format(data))
 
