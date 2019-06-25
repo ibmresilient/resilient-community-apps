@@ -2,3 +2,4 @@ include README.md
 include fn_cb_protection/util/*
 include fn_cb_protection/data/*
 include fn_cb_protection/LICENSE
+include doc/*
