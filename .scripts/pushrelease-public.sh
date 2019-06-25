@@ -15,7 +15,7 @@ rm json.json
 
 id=$(getJsonVal "$output" "['id']")
 echo Release Id: $id
-for file in ./rc-*.tar.gz; do
+for file in ./rc[-_]*.tar.gz; do
   echo Uploading file... ${file##*/}
   fileUpload=$(curl --data-binary @./${file##*/} -H "Authorization: token $GIT_HUB_AUTH_TOKEN" -H "Content-Type: application/octet-stream" https://uploads.github.com/repos/ibmresilient/resilient-community-apps/releases/"$id"/assets?name=${file##*/} )
   echo $fileUpload
