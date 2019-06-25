@@ -130,7 +130,7 @@ class FunctionComponent(ResilientComponent):
                 match_types = ["HASH_MATCHES", "FULL_MATCHES", "PARTIAL_MATCHES"]
 
                 yield StatusMessage(
-                    "Adding EOC scan data for commandid {} as an incident attachment".format(sep_commandid))
+                    "Adding EOC scan data for command id {} as an incident attachment".format(sep_commandid))
                 # Get csv attachment file name and content.
                 (file_name, file_content) = generate_result_csv(rtn, sep_commandid)
 
@@ -159,7 +159,7 @@ class FunctionComponent(ResilientComponent):
                 rtn["att_name"] = att_report["name"]
                 rtn["truncated_count"] = results_limit
             else:
-                yield StatusMessage("Returning 'Symantec SEP Get Command Status' results for commandid {}"
+                yield StatusMessage("Returning 'Symantec SEP Get Command Status' results for command id {}"
                                     .format(sep_commandid))
             results = rp.done(True, rtn)
 
