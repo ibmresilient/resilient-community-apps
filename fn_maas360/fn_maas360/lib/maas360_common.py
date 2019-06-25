@@ -174,8 +174,7 @@ class MaaS360Utils(object):
         self.app_access_key = options["maas360_app_access_key"]
         self.username = options["maas360_username"]
         self.password = options["maas360_password"]
-        self.request_timeout = int(options.get("maas360_request_timeout")) \
-            if options.get("maas360_request_timeout") else 30  # 30 second is default timeout value. Don't allow "None" as a timeout value - "None" tells Requests to wait forever for a response.
+        self.request_timeout = int(options.get("maas360_request_timeout", "30"))  # 30 second is default timeout value. Don't allow "None" as a timeout value - "None" tells Requests to wait forever for a response.
 
         self.rc = RequestsCommon(opts, options)
 
