@@ -20,7 +20,7 @@ maas360_app_access_key=
 maas360_username=
 maas360_password=
 
-# Optional - If you seeing read timeout=30 error you can override the timeout value.
+# Optional - If you are seeing read timeout=30 error you can override the timeout value
 #maas360_request_timeout=60
 
 # Basic Search Fn settings
