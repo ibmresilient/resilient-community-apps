@@ -49,14 +49,14 @@ def parse_scan_results(xml):
                          <Process>
                          </Process>
                          <Files>
-                             <File name="C:\temp\test.ext" action="create">
+                             <File name="C:\temp\test.txt" action="create">
                                  <Hash name="SHA256" value="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/>
                                  <Matched result="HASH_MATCH" value="C:\temp\test.ext" remediation="SUCCEEDED" hashType="SHA256"/></File>
-                             <File name="C:\temp\test.ext" action="create">
-                                 <Matched result="FULL_MATCH" value="C:\temp\test.ext" remediation="UNSUPPORTED"
+                             <File name="C:\temp\test.txt" action="create">
+                                 <Matched result="FULL_MATCH" value="C:\temp\test.txt" remediation="UNSUPPORTED"
                                  hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
-                             <File name="C:\temp\test.ext" action="create">
-                                 <Matched result="FULL_MATCH" value="C:\temp\test.ext" remediation="UNSUPPORTED"
+                             <File name="C:\temp\test.txt" action="create">
+                                 <Matched result="FULL_MATCH" value="C:\temp\test.txt" remediation="UNSUPPORTED"
                                  hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
                          </Files>
                          <Registry>
@@ -69,11 +69,11 @@ def parse_scan_results(xml):
         ===============
             scan_result = {
                 "MATCH": True,
-                "artifact_value": 'C:\temp\test.ext',
+                "artifact_value": 'C:\temp\test.txt',
                 "artifact_type": '',
                 "FULL_MATCHES": [{'hashType': 'SHA256', 'hashValue': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37',
-                       'result': 'FULL_MATCH', 'value': 'C:\\temp\\test.ext', "remediation": "UNSUPPORTED"}, 'action': 'create'],
-                "HASH_MATCHES": [{{'name': 'C:\\temp\\test.ext', 'hashType': 'SHA256', 'result': 'HASH_MATCH',
+                       'result': 'FULL_MATCH', 'value': 'C:\\temp\\test.ext', "remediation": "UNSUPPORTED", 'action': 'create'}],
+                "HASH_MATCHES": [{{'name': 'C:\\temp\\test.txt', 'hashType': 'SHA256', 'result': 'HASH_MATCH',
                        'value': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37', 'remediation': 'SUCCEEDED'},
                        'action': 'create'}],
                 "PARTIAL_MATCHES": [],
@@ -88,13 +88,13 @@ def parse_scan_results(xml):
     # Create empty result dict.
     scan_result = {
         "MATCH": False,
-        "artifact_value": 'C:\temp\test.ext',
-        "artifact_type": 'File Path',
+        "artifact_value": '',
+        "artifact_type": '',
         "FULL_MATCHES": [],
         "HASH_MATCHES": [],
         "PARTIAL_MATCHES": [],
         "match_count": 0,
-        "remediation_count": 1,
+        "remediation_count": 0,
         "fail_remediation_count": 0
     }
     file_seps = ['\\', '/']
