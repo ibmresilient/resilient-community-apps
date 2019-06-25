@@ -10,13 +10,13 @@ Before installing, verify that your environment meets the following prerequisite
 ### Procedure
 
 1. Log on to the Resilient platform using a suitable account.
-1. Navigate to **Administrator Settings**.
-1. Select the **Organization** tab.
-1. Select the **Import** link.
-1. Select the **+ Import settings** button.
-1. If you are upgrading from a previous version of this package select the **ScriptAlone.res** file from the installation bundle. Otherwise choose the **RuleAndScript.res** file.
-1. Select **Open**.
-1. Select **Proceed**.
+2. Navigate to **Administrator Settings**.
+3. Select the **Organization** tab.
+4. Select the **Import** link.
+5. Select the **+ Import settings** button.
+6. If you are upgrading from a previous version of this package select the **ScriptAlone.res** file from the installation bundle. Otherwise, choose the **RuleAndScript.res** file.
+7. Select **Open**.
+8. Select **Proceed**.
 
 ### Result
 After installing from **RuleAndScript.res**, the Resilient platform will have a new Python script called "Generic email script v2.0" and a new rule called "Process email message v2.0". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
@@ -60,11 +60,11 @@ There are two categories of whitelist used in the script: IP address and URL dom
 | `ipV6WhiteList` | 30 | IP v6 whitelist |
 | `domainWhiteList` | 51 | URL domain whitelist |
 
-Initially these whitelists are comprised of commented out entries which serve as examples of the data you might want to exclude from consideration. The whitelists will have no effect unless you uncomment the entries and make a gramatically correct list, or add some entries of your own.
+Initially these whitelists are comprised of commented out entries which serve as examples of the data you might want to exclude from consideration. The whitelists will have no effect unless you uncomment the entries and make a grammatically correct list, or add some entries of your own.
 Please note that, compared to version v1 of the script, the whitelist variable location has changed and formats of the entries have been simplified. 
 
 #### IP address whitelists
-The IP address whitelists are divided into separate IPv4 and IPv6 lists. These lists apply to the IP addresses retrieved by pattern matching in the body of the email message. If an IP address appears on a whitelist then it is not be added as an artifact to the incident.
+The IP address whitelists are divided into separate IPv4 and IPv6 lists. These lists apply to the IP addresses retrieved by pattern matching in the body of the email message. If an IP address appears on a whitelist, it is not added as an artifact to the incident.
 
 There are two categories of IP whitelist entry, CIDR (Classless Inter-Domain Routing) and IPRange. For example, in IP V4, IBM owns the `9` class A network. You may want to also whitelist an IP range, such as `12.0.0.1 - 12.5.5.5`. To add these criteria to the whitelist you would add the following to ipV4WhiteList:
 ```python
@@ -166,7 +166,7 @@ if emailmessage.from.name is not None:
   reportingUserInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
 incident.addArtifact("Email Recipient", reportingUserInfo, "Recipient of suspicious email")
 
-# Extract email sender information on the assumption that a fishing email is being forwarded
+# Extract email sender information on the assumption that a phishing email is being forwarded
 if not emailmessage.body.content is None:
   addArtifact(r"From: (.*)\n", "Email Sender", "Suspicious email sender")
   addArtifact(r"Reply-To: (.*)\n", "Email Sender", "Suspicious email sender (Reply-To)")
@@ -174,14 +174,14 @@ if not emailmessage.body.content is None:
 Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the `incident` variable to be set, and the phishing-specific script shown above expects this to have been done already.
 
 ### Campaign identifier
-Scenario: The email message subject on its own might not be enough to collect releated email messages into one incident.
+Scenario: The email message subject on its own might not be enough to collect related email messages into one incident.
 It may be that the email message subject is not specific or reliable enough to use as the way to collect related emails. In particular, there may be an attack taking place where multiple attack vectors are being employed in a single campaign, which may result in many different kinds of email messages being received for this one campaign.
-One solution to the problem is to create a new field in an incident to contain a campaign identifer. This identifier could be either derived from the email message contents, or chosen from a hard-coded list when the campaign is recognised by the parsing script.
+One solution to the problem is to create a new field in an incident to contain a campaign identifier. This identifier could be either derived from the email message contents, or chosen from a hard-coded list when the campaign is recognized by the parsing script.
 
 A solution:
 1. Create a new incident custom field for the campaign identifier of type Text.
 2. Copy the generic parsing script into a new script.
 3. Modify the new script to create a value for the campaign identifier either by selecting some text from the email message contents, or selecting from a hard-coded list of campaign identifiers if certain criteria are met.
-4. When searching for an existing incident to associate the email message with, search for incidents whose campaign identifier field is the same as the campaign identifier value for the email message. This would replace the search based on email message subject.
+4. To associate the email message with a relevant existing incident, search for incidents whose campaign identifier field is the same as the campaign identifier value for the email message. This would replace the search based on email message subject.
 5. If no suitable incident is found, create a new incident and set its campaign identifier field to be the campaign identifier value.
 6. Modify the rules so that the new script runs instead of the generic script.
