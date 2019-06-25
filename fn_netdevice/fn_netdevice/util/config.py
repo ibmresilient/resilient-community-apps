@@ -10,11 +10,13 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_netdevice]
+# identify the device_name section names below for selftest, separated by commas
+selftest=
 # specify the directory if using textFSM templates
 #template_dir=
 
-# for each network device to communicate with, define it's section below to match the device_ids field in the function input parameter
-#[device_id]
+# for each network device to communicate with, uniquely define it's section below to match the device_ids field in the function input parameter
+#[unique_device_name]
 #device_type=<see devices defined here https://github.com/ktbyers/netmiko/blob/master/netmiko/ssh_dispatcher.py>
 #ip=
 #username=

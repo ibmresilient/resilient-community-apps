@@ -27,6 +27,7 @@ setup(
             "NetworkDeviceFunctionComponent = fn_netdevice.components.network_device:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_netdevice.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_netdevice.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_netdevice.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_netdevice.util.selftest:selftest_function"]
     }
 )

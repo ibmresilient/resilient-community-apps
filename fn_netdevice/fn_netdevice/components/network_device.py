@@ -52,17 +52,15 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             netdevice_ids = kwargs.get("netdevice_ids")  # text
             netdevice_cmd = kwargs.get("netdevice_send_cmd")  # text
-            netdevice_config = kwargs.get("netdevice_config_cmd")  # text
-            use_textfsm = kwargs.get("netdevice_use_textfsm", False) # bool
+            use_textfsm = str_to_bool(kwargs.get("netdevice_use_textfsm", 'False')) # bool
 
             log = logging.getLogger(__name__)
             log.info("netdevice_ids: %s", netdevice_ids)
             log.info("netdevice_cmd: %s", netdevice_cmd)
-            log.info("netdevice_config: %s", netdevice_config)
             log.info("netdevice_use_textfsm: %s", use_textfsm)
 
-            if not netdevice_cmd and not netdevice_config:
-                raise ValueError("Specify at least netdevice_send_cmd or netdevice_config_cmd")
+            if not netdevice_cmd:
+                raise ValueError("Specify netdevice_send_cmd")
 
             if use_textfsm and not self.template_dir:
                 raise ValueError("'netdevice_use_textfsm' set but no template directory is specified in app.config")
@@ -89,9 +87,60 @@ class FunctionComponent(ResilientComponent):
                     yield StatusMessage(msg)
                     continue
 
+                device_info.pop('use_commit', None) # pop but don't use
+                result[device_id] = execute(device_info, netdevice_cmd, None, False, use_textfsm)
+
+            status = result_payload.done(rc, result)
+
+            yield StatusMessage("done")
+
+            # Produce a FunctionResult with the results
+            yield FunctionResult(status)
+        except Exception:
+            yield FunctionError()
+
+    @function("fn_netdevice_config")
+    def _network_device_config_function(self, event, *args, **kwargs):
+        """Function: function to connect with firewalls via ssh to retrieve stats or to perform configuration changes.
+         This integration uses the netMiko library to access the hosts.
+        """
+        try:
+            # Get the function parameters:
+            netdevice_ids = kwargs.get("netdevice_ids")  # text
+            netdevice_config = kwargs.get("netdevice_config_cmd")  # text
+
+            log = logging.getLogger(__name__)
+            log.info("netdevice_ids: %s", netdevice_ids)
+            log.info("netdevice_config: %s", netdevice_config)
+
+            if not netdevice_config:
+                raise ValueError("Specify netdevice_config_cmd")
+
+            yield StatusMessage("starting...")
+
+            result_payload = ResultPayload(FunctionComponent.SECTION_HDR, **kwargs)
+
+            result = {}
+            rc = True
+            for device_id in netdevice_ids.split(','):
+
+                # find the access information
+                device_info = self.opts.get(device_id.strip(), None)
+                if not device_info:
+                    msg = u"Unable to find section for {}".format(device_id)
+                    result[device_id] = {
+                        "status": 'failure',
+                        "reason": msg
+                    }
+                    rc = False
+
+                    log.warning(msg)
+                    yield StatusMessage(msg)
+                    continue
+
                 device_commit = str_to_bool(device_info.pop('use_commit', 'False'))
 
-                result[device_id] = execute(device_info, netdevice_cmd, netdevice_config, device_commit, use_textfsm)
+                result[device_id] = execute(device_info, None, netdevice_config, device_commit, False)
 
             status = result_payload.done(rc, result)
 
