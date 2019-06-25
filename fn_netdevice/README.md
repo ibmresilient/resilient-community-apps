@@ -53,7 +53,7 @@ selftest=
 #use_commit=False
 ```
 
-Copy, uncomment, rename and configure each [unique_device_name] section one per each device you'll be accessing. Passwords can be stored in your keystore using the $password convention as documented in the [Function Developer's Guide](https://github.com/ibmresilient/resilient-reference/blob/master/developer_guides/Resilient%20IRP%20Function%20Developer%20Guide.pdf)
+Copy, uncomment, rename and configure each [unique_device_name] section one per each device you'll be accessing. Passwords can be stored in your keystore using the ^password convention as documented in the [Integration Server Guide](https://github.com/ibmresilient/resilient-reference/blob/master/developer_guides/Integration%20Server%20Guide.pdf).
 
 After installation, the package will be loaded and ready for execution by invoking `resilient-circuits run`.
 
