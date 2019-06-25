@@ -11,15 +11,14 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_phish_tank'",
-    long_description="""This function checks URLs against PhishTank(https://www.phishtank.com/)
-     database to see if the URL is flagged as Phishing or not Phishing.""",
+    description="PhishTank Lookup URL Function for IBM Resilient",
+    long_description="""Lookup a URL against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is Phishing or not.
+    The Artifacts Description is updated and a Note is added to the Incident, detailing the information returned from PhishTank""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'python-dateutil>=2.8.0',
         'requests>=2.21.0',
         'resilient-lib>=32.0.140',
-
     ],
     packages=find_packages(),
     include_package_data=True,
