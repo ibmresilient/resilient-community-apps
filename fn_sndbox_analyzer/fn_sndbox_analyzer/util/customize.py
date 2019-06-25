@@ -10,7 +10,7 @@ def codegen_reload_data():
     reload_params = {"package": u"fn_sndbox_analyzer",
                     "incident_fields": [], 
                     "action_fields": [], 
-                    "function_params": [u"analysis_report_status", u"artifact_id", u"attachment_id", u"incident_id"], 
+                    "function_params": [u"sndbox_analysis_report_status", u"artifact_id", u"attachment_id", u"incident_id"], 
                     "datatables": [], 
                     "message_destinations": [u"sndbox_sandbox_message_destination"], 
                     "functions": [u"fn_sndbox_sandbox_analyzer"], 
@@ -31,7 +31,7 @@ def customization_data(client=None):
 
     # This import data contains:
     #   Function inputs:
-    #     analysis_report_status
+    #     sndbox_analysis_report_status
     #     artifact_id
     #     attachment_id
     #     incident_id

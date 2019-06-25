@@ -7,6 +7,7 @@ import logging
 import tempfile
 import time
 import json
+import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 from resilient_lib import validate_fields, get_file_attachment, get_file_attachment_name, RequestsCommon, build_incident_url, build_resilient_url
@@ -45,7 +46,7 @@ class FunctionComponent(ResilientComponent):
 
         def write_temp_file(data, name=None):
             if name:
-                path = "{0}/{1}".format(tempfile.gettempdir(), name)
+                path = os.path.join(tempfile.gettempdir(), name)
 
             else:
                 tf = tempfile.mkstemp()
@@ -67,8 +68,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")  # number
             artifact_id = kwargs.get("artifact_id")  # number
             attachment_id = kwargs.get("attachment_id")  # number
-            analysis_report_status = kwargs.get(
-                "analysis_report_status")  # Boolean
+            sndbox_analysis_report_status = kwargs.get("sndbox_analysis_report_status")  # Boolean
             sample_ids = kwargs.get("sample_ids") or []  # List
 
             if not incident_id:
@@ -80,10 +80,10 @@ class FunctionComponent(ResilientComponent):
             log.info("incident_id: %s", incident_id)
             log.info("artifact_id: %s", artifact_id)
             log.info("attachment_id: %s", attachment_id)
-            log.info("analysis_report_status: %s", analysis_report_status)
+            log.info("sndbox_analysis_report_status: %s", sndbox_analysis_report_status)
             log.info("sample_ids: %s", sample_ids)
 
-            if not analysis_report_status:
+            if not sndbox_analysis_report_status:
 
                 # SNDBOX client and Resilient client
                 uploader = ApiUploader(
@@ -123,10 +123,10 @@ class FunctionComponent(ResilientComponent):
                     sample_final_result.append({"sample_id": sample_id,
                                                 "sample_report": uploader.get_sample_report(sample_id)})
 
-                    analysis_report_status = True
+                    sndbox_analysis_report_status = True
 
             results = {
-                "analysis_report_status": analysis_report_status,
+                "sndbox_analysis_report_status": sndbox_analysis_report_status,
                 "incident_id": incident_id,
                 "artifact_id": artifact_id,
                 "attachment_id": attachment_id,
