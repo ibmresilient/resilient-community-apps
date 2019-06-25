@@ -69,27 +69,7 @@ class FunctionComponent(ResilientComponent):
 
             result_payload = ResultPayload(FunctionComponent.SECTION_HDR, **kwargs)
 
-            result = {}
-            rc = True
-            for device_id in netdevice_ids.split(','):
-
-                # find the access information
-                device_info = self.opts.get(device_id.strip(), None)
-                if not device_info:
-                    msg = u"Unable to find section for {}".format(device_id)
-                    result[device_id] = {
-                        "status": 'failure',
-                        "reason": msg
-                    }
-                    rc = False
-
-                    log.warning(msg)
-                    yield StatusMessage(msg)
-                    continue
-
-                device_info.pop('use_commit', None) # pop but don't use
-                result[device_id] = execute(device_info, netdevice_cmd, None, False, use_textfsm)
-
+            rc, result = self._run_netdevice(netdevice_ids, netdevice_cmd, None, use_textfsm)
             status = result_payload.done(rc, result)
 
             yield StatusMessage("done")
@@ -120,27 +100,7 @@ class FunctionComponent(ResilientComponent):
 
             result_payload = ResultPayload(FunctionComponent.SECTION_HDR, **kwargs)
 
-            result = {}
-            rc = True
-            for device_id in netdevice_ids.split(','):
-
-                # find the access information
-                device_info = self.opts.get(device_id.strip(), None)
-                if not device_info:
-                    msg = u"Unable to find section for {}".format(device_id)
-                    result[device_id] = {
-                        "status": 'failure',
-                        "reason": msg
-                    }
-                    rc = False
-
-                    log.warning(msg)
-                    yield StatusMessage(msg)
-                    continue
-
-                device_commit = str_to_bool(device_info.pop('use_commit', 'False'))
-
-                result[device_id] = execute(device_info, None, netdevice_config, device_commit, False)
+            rc, result = self._run_netdevice(netdevice_ids, None, netdevice_config, False)
 
             status = result_payload.done(rc, result)
 
@@ -150,3 +110,38 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(status)
         except Exception:
             yield FunctionError()
+
+    def _run_netdevice(self, netdevice_ids, netdevice_cmd, netdevice_config, use_textfsm):
+        """
+        Perform the netdevice execution
+        :param netdevice_ids:
+        :param netdevice_cmd:
+        :param net_device_config:
+        :param use_textfsm:
+        :param kwargs:
+        :return: json of status object
+        """
+
+        log = logging.getLogger(__name__)
+
+        result = {}
+        rc = True
+        for device_id in netdevice_ids.split(','):
+
+            # find the access information
+            device_info = self.opts.get(device_id.strip(), None)
+            if not device_info:
+                msg = u"Unable to find section for '{}'".format(device_id)
+                result[device_id] = {
+                    "status": 'failure',
+                    "reason": msg
+                }
+                rc = False
+
+                log.warning(msg)
+                continue
+
+            device_commit = str_to_bool(device_info.pop('use_commit', 'False')) # pop
+            result[device_id] = execute(device_info, netdevice_cmd, netdevice_config, device_commit, use_textfsm)
+
+        return rc, result
