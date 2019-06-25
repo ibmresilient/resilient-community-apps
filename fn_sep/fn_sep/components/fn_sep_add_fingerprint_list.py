@@ -14,6 +14,8 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.sep_client import Sepclient
 from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
+LOG = logging.getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_add_fingerprint_list' of
     package fn_sep.
@@ -70,11 +72,10 @@ class FunctionComponent(ResilientComponent):
             sep_domainid = kwargs.get("sep_domainid")  # text
             sep_hash_value = kwargs.get("sep_hash_value")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
-            log.info("sep_description: %s", sep_description)
-            log.info("sep_domainid: %s", sep_domainid)
-            log.info("sep_hash_value: %s", sep_hash_value)
+            LOG.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
+            LOG.info("sep_description: %s", sep_description)
+            LOG.info("sep_domainid: %s", sep_domainid)
+            LOG.info("sep_hash_value: %s", sep_hash_value)
 
             validate_fields(["sep_fingerprintlist_name", "sep_description", "sep_domainid",
                              "sep_hash_value"], kwargs)
@@ -96,10 +97,10 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(True, rtn)
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

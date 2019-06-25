@@ -74,13 +74,12 @@ class FunctionComponent(ResilientComponent):
             sep_md5 = kwargs.get("sep_md5")  # text
             sep_source = kwargs.get("sep_source")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_file_path: %s", sep_file_path)
-            log.info("sep_computer_ids: %s", sep_computer_ids)
-            log.info("sep_sha256: %s", sep_sha256)
-            log.info("sep_sha1: %s", sep_sha1)
-            log.info("sep_md5: %s", sep_md5)
-            log.info("sep_source: %s", sep_source)
+            LOG.info("sep_file_path: %s", sep_file_path)
+            LOG.info("sep_computer_ids: %s", sep_computer_ids)
+            LOG.info("sep_sha256: %s", sep_sha256)
+            LOG.info("sep_sha1: %s", sep_sha1)
+            LOG.info("sep_md5: %s", sep_md5)
+            LOG.info("sep_source: %s", sep_source)
 
             validate_fields(["sep_file_path", "sep_computer_ids", "sep_source"], kwargs)
 
@@ -93,7 +92,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Upload File to SEPM' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

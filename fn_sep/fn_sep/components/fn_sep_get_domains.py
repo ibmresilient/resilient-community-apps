@@ -83,8 +83,6 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
 
-            log = logging.getLogger(__name__)
-
             yield StatusMessage("Running Symantec SEP Get Domains query...")
 
             sep = Sepclient(self.options, params)
@@ -93,7 +91,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Get Domains' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

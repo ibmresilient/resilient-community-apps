@@ -95,16 +95,15 @@ class FunctionComponent(ResilientComponent):
             sep_sort = kwargs.get("sep_sort")  # text
             sep_status_type = kwargs.get("sep_status_type")  # text
             sep_matching_endpoint_ids = kwargs.get("sep_matching_endpoint_ids")  # boolean
-            log = logging.getLogger(__name__)
 
-            log.info("sep_incident_id: %s", sep_incident_id)
-            log.info("sep_commandid: %s", sep_commandid)
-            log.info("sep_order: %s", sep_order)
-            log.info("sep_pageindex: %s", sep_pageindex)
-            log.info("sep_pagesize: %s", sep_pagesize)
-            log.info("sep_sort: %s", sep_sort)
-            log.info("sep_status_type: %s", sep_status_type)
-            log.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
+            LOG.info("sep_incident_id: %s", sep_incident_id)
+            LOG.info("sep_commandid: %s", sep_commandid)
+            LOG.info("sep_order: %s", sep_order)
+            LOG.info("sep_pageindex: %s", sep_pageindex)
+            LOG.info("sep_pagesize: %s", sep_pagesize)
+            LOG.info("sep_sort: %s", sep_sort)
+            LOG.info("sep_status_type: %s", sep_status_type)
+            LOG.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
 
             validate_fields(["sep_commandid", "sep_status_type"], kwargs)
 
@@ -163,7 +162,7 @@ class FunctionComponent(ResilientComponent):
                                     .format(sep_commandid))
             results = rp.done(True, rtn)
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

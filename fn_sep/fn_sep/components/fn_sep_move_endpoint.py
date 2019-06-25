@@ -60,9 +60,8 @@ class FunctionComponent(ResilientComponent):
             sep_groupid = kwargs.get("sep_groupid")  # text
             sep_hardwarekey = kwargs.get("sep_hardwarekey")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_groupid: %s", sep_groupid)
-            log.info("sep_hardwarekey: %s", sep_hardwarekey)
+            LOG.info("sep_groupid: %s", sep_groupid)
+            LOG.info("sep_hardwarekey: %s", sep_hardwarekey)
 
             validate_fields(["sep_groupid", "sep_hardwarekey"], kwargs)
 
@@ -74,7 +73,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Move Endpoint' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

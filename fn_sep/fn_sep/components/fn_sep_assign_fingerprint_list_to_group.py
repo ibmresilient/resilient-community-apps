@@ -14,6 +14,8 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.sep_client import Sepclient
 from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
+LOG = logging.getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_assign_fingerprint_list_to_group' of
     package fn_sep.
@@ -61,9 +63,8 @@ class FunctionComponent(ResilientComponent):
             sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
             sep_groupid = kwargs.get("sep_groupid")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
-            log.info("sep_groupid: %s", sep_groupid)
+            LOG.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+            LOG.info("sep_groupid: %s", sep_groupid)
 
             validate_fields(["sep_fingerprintlist_id", "sep_groupid"], kwargs)
 
@@ -84,10 +85,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Returning 'Symantec SEP Assign Fingerprint List to Group for Lock-down' results for "
                                     "fingerprintlist_id '{0}' and groupid '{1}'".format(sep_fingerprintlist_id, sep_groupid))
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()

@@ -82,16 +82,15 @@ class FunctionComponent(ResilientComponent):
             sep_description = kwargs.get("sep_description")  # text
             sep_scan_action = self.get_select_param(kwargs.get("sep_scan_action"))  # select, values: "scan", "remediate"
 
-            log = logging.getLogger(__name__)
-            log.info("sep_group_ids: %s", sep_group_ids)
-            log.info("sep_computer_ids: %s", sep_computer_ids)
-            log.info("sep_scan_type: %s", sep_scan_type)
-            log.info("sep_file_path: %s", sep_file_name)
-            log.info("sep_sha256: %s", sep_sha256)
-            log.info("sep_sha1: %s", sep_sha1)
-            log.info("sep_md5: %s", sep_md5)
-            log.info("sep_description: %s", sep_description)
-            log.info("sep_scan_action: %s", sep_scan_action)
+            LOG.info("sep_group_ids: %s", sep_group_ids)
+            LOG.info("sep_computer_ids: %s", sep_computer_ids)
+            LOG.info("sep_scan_type: %s", sep_scan_type)
+            LOG.info("sep_file_path: %s", sep_file_name)
+            LOG.info("sep_sha256: %s", sep_sha256)
+            LOG.info("sep_sha1: %s", sep_sha1)
+            LOG.info("sep_md5: %s", sep_md5)
+            LOG.info("sep_description: %s", sep_description)
+            LOG.info("sep_scan_action: %s", sep_scan_action)
 
             validate_fields(["sep_scan_type", "sep_description", "sep_scan_action"], kwargs)
 
@@ -105,7 +104,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Scan Endpoints' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

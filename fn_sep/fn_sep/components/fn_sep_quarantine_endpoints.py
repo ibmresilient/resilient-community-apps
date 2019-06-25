@@ -63,10 +63,9 @@ class FunctionComponent(ResilientComponent):
             sep_computer_ids = kwargs.get("sep_computer_ids")  # text
             sep_undo = kwargs.get("sep_undo")  # boolean
 
-            log = logging.getLogger(__name__)
-            log.info("sep_group_ids: %s", sep_group_ids)
-            log.info("sep_computer_ids: %s", sep_computer_ids)
-            log.info("sep_undo: %s", sep_undo)
+            LOG.info("sep_group_ids: %s", sep_group_ids)
+            LOG.info("sep_computer_ids: %s", sep_computer_ids)
+            LOG.info("sep_undo: %s", sep_undo)
 
             validate_fields(["sep_undo"], kwargs)
 
@@ -79,7 +78,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Quarantine Endpoint' or group results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

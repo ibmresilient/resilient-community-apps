@@ -109,14 +109,13 @@ class FunctionComponent(ResilientComponent):
             sep_pagesize = kwargs.get("sep_pagesize")  # number
             sep_sort = kwargs.get("sep_sort")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_domain: %s", sep_domain)
-            log.info("sep_fullpathname: %s", sep_fullpathname)
-            log.info("sep_mode: %s", sep_mode)
-            log.info("sep_order: %s", sep_order)
-            log.info("sep_pageindex: %s", sep_pageindex)
-            log.info("sep_pagesize: %s", sep_pagesize)
-            log.info("sep_sort: %s", sep_sort)
+            LOG.info("sep_domain: %s", sep_domain)
+            LOG.info("sep_fullpathname: %s", sep_fullpathname)
+            LOG.info("sep_mode: %s", sep_mode)
+            LOG.info("sep_order: %s", sep_order)
+            LOG.info("sep_pageindex: %s", sep_pageindex)
+            LOG.info("sep_pagesize: %s", sep_pagesize)
+            LOG.info("sep_sort: %s", sep_sort)
 
             yield StatusMessage("Running Symantec SEP Get Groups query...")
 
@@ -127,7 +126,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Symantec SEP Get Groups' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

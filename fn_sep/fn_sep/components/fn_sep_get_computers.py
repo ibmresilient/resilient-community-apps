@@ -150,19 +150,17 @@ class FunctionComponent(ResilientComponent):
             sep_sort = kwargs.get("sep_sort")  # text
             sep_matching_endpoint_ids = kwargs.get("sep_matching_endpoint_ids")  # boolean
 
-            log = logging.getLogger(__name__)
-
-            log.info("sep_computername: %s", sep_computername)
-            log.info("sep_status: %s", sep_status)
-            log.info("sep_status_details: %s", sep_status_details)
-            log.info("sep_domain: %s", sep_domain)
-            log.info("sep_lastupdate: %s", sep_lastupdate)
-            log.info("sep_order: %s", sep_order)
-            log.info("sep_os: %s", sep_os)
-            log.info("sep_pageindex: %s", sep_pageindex)
-            log.info("sep_pagesize: %s", sep_pagesize)
-            log.info("sep_sort: %s", sep_sort)
-            log.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
+            LOG.info("sep_computername: %s", sep_computername)
+            LOG.info("sep_status: %s", sep_status)
+            LOG.info("sep_status_details: %s", sep_status_details)
+            LOG.info("sep_domain: %s", sep_domain)
+            LOG.info("sep_lastupdate: %s", sep_lastupdate)
+            LOG.info("sep_order: %s", sep_order)
+            LOG.info("sep_os: %s", sep_os)
+            LOG.info("sep_pageindex: %s", sep_pageindex)
+            LOG.info("sep_pagesize: %s", sep_pagesize)
+            LOG.info("sep_sort: %s", sep_sort)
+            LOG.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
 
             yield StatusMessage("Running Symantec SEP Get Computers query...")
 
@@ -200,7 +198,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(True, rtn)
             yield StatusMessage("Returning 'Get Computers' results")
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

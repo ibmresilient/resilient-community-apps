@@ -73,10 +73,9 @@ class FunctionComponent(ResilientComponent):
             sep_fingerprintlist_name = kwargs.get("sep_fingerprintlist_name")  # text
             sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("sep_domainid: %s", sep_domainid)
-            log.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
-            log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+            LOG.info("sep_domainid: %s", sep_domainid)
+            LOG.info("sep_fingerprintlist_name: %s", sep_fingerprintlist_name)
+            LOG.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
 
             validate_fields(["sep_domainid"], kwargs)
 
@@ -96,7 +95,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Returning 'Symantec SEP Get File Fingerprint List' results for fingerprint name '{}'."
                                     .format(sep_fingerprintlist_name))
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

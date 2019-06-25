@@ -14,6 +14,8 @@ from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.sep_client import Sepclient
 from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
 
+LOG = logging.getLogger(__name__)
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_sep_delete_fingerprint_list' of
     package fn_sep.
@@ -61,9 +63,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             sep_fingerprintlist_id = kwargs.get("sep_fingerprintlist_id")  # text
 
-
-            log = logging.getLogger(__name__)
-            log.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
+            LOG.info("sep_fingerprintlist_id: %s", sep_fingerprintlist_id)
 
             validate_fields(["sep_fingerprintlist_id"], kwargs)
 
@@ -83,10 +83,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Returning 'Symantec SEP Delete Fingerprint List' results for fingerprint id '{}'."
                                     .format(sep_fingerprintlist_id))
 
-            log.debug(json.dumps(results["content"]))
+            LOG.debug(json.dumps(results["content"]))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            LOG.exception("Exception in Resilient Function for Symantec SEP.")
             yield FunctionError()
