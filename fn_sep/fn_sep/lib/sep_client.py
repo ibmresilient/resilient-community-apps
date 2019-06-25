@@ -31,17 +31,17 @@ class Sepclient(object):
         """
         Class constructor
         """
-        self.host = options.get("host")
-        self.port = options.get("port")
-        self.base_path = options.get("base_path")
-        self.auth_path = options.get("auth_path")
-        self.username = options.get("username")
-        self.password = options.get("password")
-        self.domain = options.get("domain")
+        self.host = options.get("sep_host")
+        self.port = options.get("sep_port")
+        self.base_path = options.get("sep_base_path")
+        self.auth_path = options.get("sep_auth_path")
+        self.username = options.get("sep_username")
+        self.password = options.get("sep_password")
+        self.domain = options.get("sep_domain")
         self.base_url = "https://{0}:{1}".format(self.host, self.port)
         self.auth_url = self.base_url + self.auth_path
-        if options.get("query_limit") is not None:
-            self.query_limit = int(options.get("query_limit"))
+        if options.get("sep_query_limit") is not None:
+            self.query_limit = int(options.get("sep_query_limit"))
         # Rest request endpoints
         self._endpoints = {
             # Admin endpoints

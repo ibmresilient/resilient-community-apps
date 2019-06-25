@@ -26,7 +26,7 @@ class RequestsSep(object):
     def __init__(self, opts=None, function_opts=None):
         # capture the properties for the integration as well as the global settings for all integrations for proxy urls
         self.integration_options = opts.get('integrations', None) if opts else None
-        self.base_path = opts.get("base_path")
+        self.base_path = opts.get("sep_base_path")
         self.function_opts = function_opts
 
     def get_proxies(self):

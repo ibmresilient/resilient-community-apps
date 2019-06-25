@@ -11,13 +11,14 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_sep]
-base_path=/sepm/api/v1
-auth_path=/sepm/api/v1/identity/authenticate
-host=<SEPM server dns name or ip address>
-port=8446
-username=<username>
-password=<password>
-domain=<SEP domain name>
-results_limit=200
+sep_base_path=/sepm/api/v1
+sep_auth_path=/sepm/api/v1/identity/authenticate
+sep_host=<SEPM server dns name or ip address>
+sep_port=8446
+sep_username=<username>
+sep_password=<password>
+sep_domain=<SEP domain name>
+# Limit result sent to Resilient, add full result as an attachment.
+sep_results_limit=200
 """
     return config_data
