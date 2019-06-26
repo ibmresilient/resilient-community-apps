@@ -28,7 +28,7 @@ TIMEDELTA_PATTERN =  re.compile(r"^-*(\d+)(seconds|minutes|hours|days|weeks)$")
 MD5_PATTERN = re.compile(r"^[a-fA-F0-9]{32}$")
 SHA1_PATTERN = re.compile(r"\b[a-fA-F0-9]{40}$")
 SHA256_PATTERN = re.compile(r"\b[a-fA-F0-9]{64}$")
-CONFIG_PARAMS = ["api_token", "base_url", "results_limit"]
+MANDATORY_CONFIG_PARAMS = ["api_token", "base_url", "results_limit"]
 
 def validate_opts(func):
     """"Check options set correctly.
@@ -36,11 +36,14 @@ def validate_opts(func):
     :param func: Resilient Function instance reference
 
      """
-    for param in CONFIG_PARAMS:
-        if not param in func.options:
+    for param in MANDATORY_CONFIG_PARAMS:
+        param_value = func.options.get(param, None)
+
+        if param_value is None:
             raise Exception("Mandatory config setting '{}' not set.".format(param))
-        if not func.options[param] or func.options[param] is None:
-            raise ValueError("Invalid value for config setting '{}'.".format())
+        if not param_value:
+            raise ValueError("Invalid value for config setting '{}'.".format(param))
+
 
 def validate_url(url):
     """"Validate url string in a valid format and can be parsed ok.
