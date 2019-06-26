@@ -88,3 +88,22 @@ class PanoramaClient:
         params = self.query_parameters
         params["name"] = name_param
         return self.__post("Objects/Addresses", params, payload)
+
+    def get_users_in_a_group(self, xpath):
+        """Gets list of users in a group, uses custom POST method due to this being a SOAP based call.
+           Returns XML string
+        """
+        uri = "{}/api/?type=config&action=get&key={}&xpath={}".format(self.host, self.__key, xpath)
+        response = self.rc.execute_call_v2("POST", uri, verify=self.verify)
+        response.raise_for_status()
+        return response.content
+
+    def edit_users_in_a_group(self, xpath, xml_object):
+        """Edits list of users in a group, uses custom POST method due to this being a SOAP based call.
+           Returns XML string
+        """
+        uri = "{}/api/?type=config&action=edit&key={}&xpath={}&element={}".format(self.host, self.__key, xpath,
+                                                                                  xml_object)
+        response = self.rc.execute_call_v2("POST", uri, verify=self.verify)
+        response.raise_for_status()
+        return response.content

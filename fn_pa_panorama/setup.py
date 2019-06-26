@@ -14,8 +14,8 @@ setup(
     long_description="Resilient Circuits Components for 'fn_pa_panorama'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'fn-utilities>=1.0.6',
-        'resilient-lib>32.0.0.140'
+        'resilient-lib>32.0.0.140',
+        'xmltodict'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -28,7 +28,9 @@ setup(
             "PanoramaEditAddressGroupFunctionComponent = fn_pa_panorama.components.panorama_edit_address_group:FunctionComponent",
             "PanoramaGetAddressGroupsFunctionComponent = fn_pa_panorama.components.panorama_get_address_groups:FunctionComponent",
             "PanoramaGetAddressesFunctionComponent = fn_pa_panorama.components.panorama_get_addresses:FunctionComponent",
-            "PanoramaCreateAddressesFunctionComponent = fn_pa_panorama.components.panorama_create_address:FunctionComponent"
+            "PanoramaCreateAddressesFunctionComponent = fn_pa_panorama.components.panorama_create_address:FunctionComponent",
+            "PanoramaGetUsersInAGroupFunctionComponent = fn_pa_panorama.components.panorama_get_users_in_a_group:FunctionComponent",
+            "PanoramaEditUsersInAGroupFunctionComponent = fn_pa_panorama.components.panorama_edit_users_in_a_group:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_pa_panorama.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_pa_panorama.util.customize:customization_data"],

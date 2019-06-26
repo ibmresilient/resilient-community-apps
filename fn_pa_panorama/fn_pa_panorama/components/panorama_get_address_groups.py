@@ -5,6 +5,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
+from resilient_lib.components.resilient_common import validate_fields
 from fn_pa_panorama.util.panorama_util import PanoramaClient
 
 
@@ -30,6 +31,8 @@ class FunctionComponent(ResilientComponent):
         try:
             yield StatusMessage("Getting list of Address Groups")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
+
+            validate_fields(["panorama_name_parameter"], kwargs)
 
             # Get the function parameters:
             location = self.get_select_param(kwargs.get("panorama_location"))  # select
