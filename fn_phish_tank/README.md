@@ -1,6 +1,7 @@
 # PhishTank Lookup Function for IBM Resilient
 
 - [Overview](#overview)
+- [Note on Partial URL Support](#Note-on-Partial-URL-Support)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Uninstall](#uninstall)
@@ -14,6 +15,19 @@
  ![screenshot: main](./doc/screenshots/main.png)
 
 Lookup a URL against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is Phishing or not. The Artifacts Description is updated and a Note is added to the Incident, detailing the information returned from PhishTank
+
+### Note on Partial URL Support
+Due to the differences in implementation of PhishTank's API and the functionality behind their online User Interface, partial URLs are not supported with this Integration
+
+* The UI matches part of the provided URL
+* Whereas the API only matches the full URL
+
+**For example:**
+
+| URL to Check | PhishTank UI Result | PhishTank API Result |
+| ------------ | ------------------- | -------------------- |
+| `https://safrainternet-br.com/Atualizar.html` | `https://safrainternet-br.com/Atualizar.html is a Valid Phish` | `https://safrainternet-br.com/Atualizar.html is a Valid Phish` |
+| `https://safrainternet-br.com/` | `https://safrainternet-br.com/Atualizar.html is a Valid Phish` | `https://safrainternet-br.com/ not found in Database` |
 
 ---
 ## Requirements
