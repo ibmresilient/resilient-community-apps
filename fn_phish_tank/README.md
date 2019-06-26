@@ -36,7 +36,7 @@ Due to the differences in implementation of PhishTank's API and the functionalit
 -->
 * IBM Resilient >= `v31.0.4254`
 * An Integration Server running `resilient_circuits>=30.0.0`
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](ibm.biz/res-int-server-guide)
+  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
 ## Installation
