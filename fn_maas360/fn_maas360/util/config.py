@@ -20,6 +20,9 @@ maas360_app_access_key=
 maas360_username=
 maas360_password=
 
+# Optional - If you are seeing read timeout=30 error you can override the timeout value
+#maas360_request_timeout=60
+
 # Basic Search Fn settings
 # Limit number of devices returned at one time. Allowed page sizes: 25, 50, 100, 200, 250. Default value: 250
 maas360_basic_search_page_size=25

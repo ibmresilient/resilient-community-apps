@@ -75,6 +75,7 @@ class MaaS360Utils(object):
         self.password = None
         self.rc = None
         self.auth_token = None
+        self.request_timeout = None
 
         # Read configuration settings
         self.reload_options(opts)
@@ -103,7 +104,8 @@ class MaaS360Utils(object):
         }
         auth_headers = {'Accept': 'application/json'}
         try:
-            response = self.rc.execute_call_v2("post", complete_auth_url, json=auth_request_body, headers=auth_headers)
+            response = self.rc.execute_call_v2("post", complete_auth_url, json=auth_request_body, headers=auth_headers,
+                                               timeout=self.request_timeout)
             results = response.json()
 
         except IntegrationError as err:
@@ -172,6 +174,7 @@ class MaaS360Utils(object):
         self.app_access_key = options["maas360_app_access_key"]
         self.username = options["maas360_username"]
         self.password = options["maas360_password"]
+        self.request_timeout = int(options.get("maas360_request_timeout", "30"))  # 30 second is default timeout value. Don't allow "None" as a timeout value - "None" tells Requests to wait forever for a response.
 
         self.rc = RequestsCommon(opts, options)
 
@@ -190,7 +193,8 @@ class MaaS360Utils(object):
                 url_endpoint = self.get_url_endpoint(url)
                 auth_headers = self.get_auth_headers(content_type_header)
 
-                return self.rc.execute_call_v2(verb, url_endpoint, headers=auth_headers, **kwargs)
+                return self.rc.execute_call_v2(verb, url_endpoint, headers=auth_headers, timeout=self.request_timeout,
+                                               **kwargs)
             except IntegrationError as err:
                 # catch expired token/unauthorized error
                 if i == 0 and "401 Client Error" in err.value:
