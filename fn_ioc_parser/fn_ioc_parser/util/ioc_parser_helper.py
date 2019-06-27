@@ -112,7 +112,7 @@ class IOCParserHelper(object):
                 temp_doc_file.write(attachment_input)
                 read_doc = Document(temp_doc_file)
                 for paragraph in read_doc.paragraphs:
-                    extracted_input += paragraph.text
+                    extracted_input = u"{0} {1}".format(extracted_input, paragraph.text)
             except Exception as error_msg:
                 raise ValueError("Failed Convert .docx files data to string format. Error: {0}".format(error_msg))
         return extracted_input
@@ -155,20 +155,45 @@ class IOCParserHelper(object):
             _formatted_value = value
         return _formatted_value
 
-    def correct_iocs_format(self, ioc_parser_obj_list):
+    def format_iocs(self, ioc_parser_obj_list):
+        """Loop each ioc_obj in ioc_parser_obj_list and get its Kind and Value.
+        Map each ioc_obj.kind to a Resilient Artifact Type.
+        If the kind is not in our map, default it to a String.
+        If the ioc.value is found more than once just increment the count.
+        Return a List of Dictionaries with the attributes: artifact_type, artifact_value and count
         """
-        A wrapper to remove/correct invalid ioc's generated from IOC parser compatible to resilient artifacts
-        :param ioc_parser_obj_list:  IOC Parser Library result object List
-        :return:a python dict of result data
-        """
-        kind_map = {'uri': 'URL', 'IP': 'IP Address', 'md5': 'Malware MD5 Hash', 'sha1': 'Malware SHA-1 Hash',
-                    'sha256': 'Malware SHA-256 Hash', 'CVE': 'Threat CVE ID', 'email': 'Email Body',
-                    'filename': 'File Name'}
-        temp_result_dict = dict()
-        for ioc_res_obj in ioc_parser_obj_list:
-            if not temp_result_dict.get(kind_map.get(ioc_res_obj.kind)):
-                temp_result_dict[kind_map.get(ioc_res_obj.kind)] = []
 
-            temp_result_dict[kind_map.get(ioc_res_obj.kind)].append(
-                self._correct_ioc_value(ioc_res_obj.kind, ioc_res_obj.value))
-        return temp_result_dict
+        return_list = []
+
+        ioc_kind_to_artifact_type_map = {
+            'uri': 'URL',
+            'IP': 'IP Address',
+            'md5': 'Malware MD5 Hash',
+            'sha1': 'Malware SHA-1 Hash',
+            'sha256': 'Malware SHA-256 Hash',
+            'CVE': 'Threat CVE ID',
+            'email': 'Email Body',
+            'filename': 'File Name',
+            'string': 'String'
+        }
+
+        for ioc_obj in ioc_parser_obj_list:
+
+            ioc_value = self._correct_ioc_value(ioc_obj.kind, ioc_obj.value)
+
+            formatted_ioc_obj = next((ioc
+                                     for ioc
+                                     in return_list
+                                     if ioc.get("artifact_value", None) == ioc_value), None)
+
+            if formatted_ioc_obj is not None:
+                formatted_ioc_obj["count"] = formatted_ioc_obj.get("count") + 1
+
+            else:
+                return_list.append({
+                    "artifact_type": ioc_kind_to_artifact_type_map.get(ioc_obj.kind, "string"),
+                    "artifact_value": ioc_value,
+                    "count": 1
+                })
+
+        return return_list

@@ -50,6 +50,8 @@ class FunctionComponent(ResilientComponent):
             # Initialising the IOC Parser Helper class
             IOCHelp_obj = IOCParserHelper()
 
+            attachment_file_name = None
+
             if ioc_parser_artifact_id:
                 # A block to parse and download the data from Artifacts
                 if ioc_parser_artifact_type.lower().strip() in ['string', 'email subject', 'email body']:
@@ -87,11 +89,12 @@ class FunctionComponent(ResilientComponent):
 
             ioc_text_obj = IOCParser(ioc_parser_data)
             ioc_results = ioc_text_obj.parse()
-            function_result = IOCHelp_obj.correct_iocs_format(ioc_results)
+            function_result = IOCHelp_obj.format_iocs(ioc_results)
 
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
             results = {
-                "value": function_result
+                "attachment_file_name": attachment_file_name,
+                "ioc_objects": function_result
             }
             log.debug("Function Result : %s", results)
             yield FunctionResult(results)
