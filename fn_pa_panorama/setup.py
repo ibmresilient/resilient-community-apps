@@ -6,12 +6,12 @@ from setuptools import setup, find_packages
 setup(
     name='fn_pa_panorama',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_pa_panorama'",
-    long_description="Resilient Circuits Components for 'fn_pa_panorama'",
+    license='MIT',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
+    url='www.resilientsystems.com',
+    description="Resilient Circuits Components to Integrate with the Panorama Platform",
+    long_description="Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>32.0.0.140',
