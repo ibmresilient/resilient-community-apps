@@ -9,6 +9,8 @@
 import copy
 import json
 import logging
+import time
+from datetime import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -95,6 +97,7 @@ class FunctionComponent(ResilientComponent):
             sep_sort = kwargs.get("sep_sort")  # text
             sep_status_type = kwargs.get("sep_status_type")  # text
             sep_matching_endpoint_ids = kwargs.get("sep_matching_endpoint_ids")  # boolean
+            sep_scan_date = kwargs.get("sep_scan_date")  # text
 
             LOG.info("sep_incident_id: %s", sep_incident_id)
             LOG.info("sep_commandid: %s", sep_commandid)
@@ -104,6 +107,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("sep_sort: %s", sep_sort)
             LOG.info("sep_status_type: %s", sep_status_type)
             LOG.info("sep_matching_endpoint_ids: %s", sep_matching_endpoint_ids)
+            LOG.info("sep_scan_date: %s", sep_scan_date)
 
             validate_fields(["sep_commandid", "sep_status_type"], kwargs)
 
@@ -111,7 +115,8 @@ class FunctionComponent(ResilientComponent):
 
             sep = Sepclient(self.options, params)
 
-            rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), sep_status_type)
+            rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), self.options,
+                                  sep_status_type, sep_scan_date)
             if sep_status_type.lower() == "scan" and sep_matching_endpoint_ids:
                 # Return only endpoint ids for artifact matches.
                 content_copy = copy.deepcopy(rtn["content"])

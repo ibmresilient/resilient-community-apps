@@ -6,6 +6,8 @@
 from __future__ import print_function
 import logging
 import xml.etree.ElementTree as ET
+import time
+from datetime import datetime
 
 LOG = logging.getLogger(__name__)
 
@@ -138,7 +140,7 @@ def parse_scan_results(xml):
         LOG.error("During scan result XML processing, Got exception type: %s, msg: %s", e.__repr__(), e.message)
         raise e
 
-def get_overall_progress(rtn):
+def get_overall_progress(rtn, sep_scan_timeout=None, scan_date=None):
     """ Calculate overall progress of a command.
 
     The command states are as follows:
@@ -155,13 +157,18 @@ def get_overall_progress(rtn):
     :return Return overall command state.
     """
 
+    if scan_date is not None and sep_scan_timeout:
+        scan_time = int(time.mktime(datetime.strptime(scan_date, "%Y-%m-%d %H:%M:%S").timetuple()))
+        now_time = int(time.time())
+        time_since_scan = now_time - scan_time
+
     states = {
         0: "Waiting/Not received",
         1: "Received",
         2: "In progress"
     }
-    overall_state = 'Completed'
-
+    overall_state = "Completed"
+    timedout_state = "Timedout"
     if not rtn["content"]:
         # When the scan command initially launched the content dict is typically empty.
         overall_state = states[0]
@@ -172,12 +179,18 @@ def get_overall_progress(rtn):
                 # scan status to "In progress".
                 overall_state = states[2]
                 break
+
     # Set the overall command state across multiple endpoints.
     rtn["overall_command_state"] = overall_state
+    # Reset the overall command state if all endpoints have not responded within 'sep_scan_timeout' period.
+    if overall_state != "Completed" and sep_scan_timeout is not None and scan_date is not None:
+        if sep_scan_timeout is not None and time_since_scan >= int(sep_scan_timeout):
+            rtn["overall_command_state"] = timedout_state
+
     return overall_state
 
 
-def process_results(rtn, status_type):
+def process_results(rtn, options, status_type, scan_date):
     """"Process command status for types 'scan, ''upload', 'remediation, 'quarantine'.
 
     :param rtn: Result return from SEPM server.
@@ -193,12 +206,13 @@ def process_results(rtn, status_type):
     # total_ep_count = Total endpoint count for the command.
     # total_not_completed = Total endpoints which have not completed command.
     # total_fail_remediation_count = Total remediation failures.
+    sep_scan_timeout = options.get("sep_scan_timeout", None)
     rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
         = rtn["total_fail_remediation_count"] = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
     rtn["total_ep_count"] = len(rtn["content"])
 
-    get_overall_progress(rtn)
+    get_overall_progress(rtn, sep_scan_timeout, scan_date)
 
     for i in range(len(rtn["content"])):
         if rtn["content"][i]["stateId"] == 3:
