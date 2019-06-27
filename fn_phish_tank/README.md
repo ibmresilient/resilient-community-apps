@@ -1,7 +1,7 @@
 # PhishTank Lookup Function for IBM Resilient
 
 - [Overview](#overview)
-- [Note on Partial URL Support](#Note-on-Partial-URL-Support)
+- [Note on Partial URL Support](#note-on-partial-url-support)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Uninstall](#uninstall)
