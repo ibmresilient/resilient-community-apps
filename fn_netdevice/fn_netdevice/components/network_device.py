@@ -31,21 +31,20 @@ class FunctionComponent(ResilientComponent):
 
         self.init_function()
 
-
     def init_function(self):
         """
         configure the environment for netmiko
         """
         self.template_dir = self.options.get("template_dir")
-        if  self.template_dir:
+        if self.template_dir:
             if not os.path.isdir(self.template_dir):
                 raise ValueError("Template directory not found %s", self.template_dir)
 
             os.environ["NET_TEXTFSM"] = self.template_dir
 
-    @function("fn_netdevice")
-    def _network_device_function(self, event, *args, **kwargs):
-        """Function: function to connect with firewalls via ssh to retrieve stats or to perform configuration changes.
+    @function("fn_netdevice_query")
+    def _network_device_query_function(self, event, *args, **kwargs):
+        """Function: function to connect with firewalls via ssh to retrieve stats
          This integration uses the netMiko library to access the hosts.
         """
         try:
@@ -81,7 +80,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_netdevice_config")
     def _network_device_config_function(self, event, *args, **kwargs):
-        """Function: function to connect with firewalls via ssh to retrieve stats or to perform configuration changes.
+        """Function: function to connect with firewalls via ssh to perform configuration changes.
          This integration uses the netMiko library to access the hosts.
         """
         try:

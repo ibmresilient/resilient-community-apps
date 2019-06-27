@@ -11,7 +11,7 @@ pytest --resilient_app_config=/<user>/<path>/resilient-community-apps/fn_netdevi
 """
 
 PACKAGE_NAME = "fn_netdevice"
-FUNCTION_NAME = "fn_netdevice"
+FUNCTION_NAME = "fn_netdevice_query"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -22,16 +22,16 @@ resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 def call_netdevice_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction(FUNCTION_NAME, function_params)
+    evt = SubmitTestFunction("fn_netdevice_query", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("fn_netdevice_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("fn_netdevice_query_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestIocParser:
+class TestNetMiko:
     """ Tests for the ioc_parser function"""
 
     def test_function_definition(self):
@@ -56,8 +56,8 @@ class TestIocParser:
         assert(results['success'] == False)
 
     @pytest.mark.parametrize("netdevice_ids, netdevice_send_cmd, netdevice_config_cmd,  netdevice_use_textfsm, expected_results", [
-        ('192.168.56.3', None, None, False, {"value": "xyz"}),
-        ('192.168.56.3', None, None, True, {"value": "xyz"})
+        ('ansible-linux', None, None, False, {"value": "xyz"}),
+        ('ansible-linux', None, None, True, {"value": "xyz"})
     ])
     def test_failure_exceptions(self, circuits_app,
                   netdevice_ids, netdevice_send_cmd, netdevice_config_cmd, netdevice_use_textfsm,
@@ -75,7 +75,7 @@ class TestIocParser:
 
     @pytest.mark.parametrize("netdevice_ids, netdevice_send_cmd, netdevice_config_cmd,  netdevice_use_textfsm, expected_results", [
         ('ansible-linux', 'df', None, False,
-        'Filesystem              1K-blocks   Used Available Use% Mounted on\n/dev/mapper/centos-root   6486016 932672   5553344  15% /\n'
+        'Filesystem              1K-blocks   Used Available Use% Mounted on\n/dev/mapper/centos-root   6486016 935832   5550184  15%/\n'
         )
     ])
     def test_failure_success(self, circuits_app,

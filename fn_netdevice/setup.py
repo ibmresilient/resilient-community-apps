@@ -14,6 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_netdevice'",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient-lib',
         'netmiko>=2.3.3'
     ],
     packages=find_packages(),
