@@ -9,6 +9,7 @@ from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 import xlrd
 import six
+import re
 
 
 class IOCParserHelper(object):
@@ -144,55 +145,41 @@ class IOCParserHelper(object):
             os.unlink(temp_doc_file.name)
         return extracted_input
 
-    def _correct_ioc_value(self, kind, value):
-        _formatted_value = ''
-        if kind == 'uri':
-            if value.startswith('https://') or value.startswith('http://'):
-                _formatted_value = value
-            else:
-                _formatted_value = "{0}{1}".format('https://', value)
-        else:
-            _formatted_value = value
-        return _formatted_value
-
     def format_iocs(self, ioc_parser_obj_list):
         """Loop each ioc_obj in ioc_parser_obj_list and get its Kind and Value.
-        Map each ioc_obj.kind to a Resilient Artifact Type.
-        If the kind is not in our map, default it to a String.
         If the ioc.value is found more than once just increment the count.
-        Return a List of Dictionaries with the attributes: artifact_type, artifact_value and count
+        Return a List of Dictionaries with the attributes: type, value and count
         """
 
         return_list = []
 
-        ioc_kind_to_artifact_type_map = {
-            'uri': 'URL',
-            'IP': 'IP Address',
-            'md5': 'Malware MD5 Hash',
-            'sha1': 'Malware SHA-1 Hash',
-            'sha256': 'Malware SHA-256 Hash',
-            'CVE': 'Threat CVE ID',
-            'email': 'Email Body',
-            'filename': 'File Name',
-            'string': 'String'
-        }
-
+        # Loop each IOC
         for ioc_obj in ioc_parser_obj_list:
 
-            ioc_value = self._correct_ioc_value(ioc_obj.kind, ioc_obj.value)
+            # Regex to check for http:// or https:// at the start of a string
+            regex = re.compile(r"^(http|https):\/\/")
 
-            formatted_ioc_obj = next((ioc
-                                     for ioc
-                                     in return_list
-                                     if ioc.get("artifact_value", None) == ioc_value), None)
+            # If the IOC's kind is uri and does not start with regex, set the kind to other
+            if ioc_obj.kind is "uri" and not re.match(regex, ioc_obj.value):
+                ioc_obj.kind = "other"
 
-            if formatted_ioc_obj is not None:
-                formatted_ioc_obj["count"] = formatted_ioc_obj.get("count") + 1
+            # The IOC's kind contains 'file' (handle 'file' or 'filename')
+            # and it starts with http or https, then set its kind to uri
+            if "file" in ioc_obj.kind and re.match(regex, ioc_obj.value):
+                ioc_obj.kind = "uri"
+
+            existing_ioc = next((ioc
+                                 for ioc
+                                 in return_list
+                                 if ioc.get("value", None) == ioc_obj.value), None)
+
+            if existing_ioc is not None:
+                existing_ioc["count"] = existing_ioc.get("count") + 1
 
             else:
                 return_list.append({
-                    "artifact_type": ioc_kind_to_artifact_type_map.get(ioc_obj.kind, "string"),
-                    "artifact_value": ioc_value,
+                    "type": ioc_obj.kind,
+                    "value": ioc_obj.value,
                     "count": 1
                 })
 

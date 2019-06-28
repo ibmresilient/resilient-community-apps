@@ -94,7 +94,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
             results = {
                 "attachment_file_name": attachment_file_name,
-                "ioc_objects": function_result
+                "iocs": function_result
             }
             log.debug("Function Result : %s", results)
             yield FunctionResult(results)
