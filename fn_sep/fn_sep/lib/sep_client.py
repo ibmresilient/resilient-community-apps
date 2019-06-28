@@ -124,7 +124,7 @@ class Sepclient(object):
                   <Network/>
                 </OS>
               </Activity>
-            </EOC>""").format(scan_type, file_path, hvs[0], hvs[1], hvs[2], description.encode('utf-8'), action)
+            </EOC>""").format(scan_type, file_path.decode(), hvs[0], hvs[1], hvs[2], description.decode(), action)
 
         return scan_xml
 
@@ -370,7 +370,7 @@ class Sepclient(object):
         :param sort: The column by which the results are sorted.
         :param status_type: The type of command status requested. Used by the integration, Not in REST call signature.
         :param incident_id: Resilient incident id. Used by the integration, Not in REST call signature.
-        :param scan_date: The datetime when sscan was initiated. Used by the integration, Not in REST call signature.
+        :param scan_date: The datetime when scan was initiated. Used by the integration, Not in REST call signature.
         :param matching_endpoint_ids: Return matching endpoint ids in scan. Used by the integration, Not in REST call signature.
         :return Result in json format.
         """
