@@ -24,26 +24,28 @@ class IOCParserHelper(object):
 
     @classmethod
     def extract_text_from_bytes_data(cls, filename, file_data_bytes):
+        SUPPORTED_FILE_TYPES = (
+            ".docx", ".rtf", ".pdf", ".xls", ".xlsx", ".txt", ".csv", ".log", ".dat", ".xml", "htm", "html",
+            ".bak", ".cfg", ".dmp", ".ini", ".sys", ".tmp", ".eml"
+        )
+
         if not file_data_bytes:
             raise ValueError("{0} is an empty file. Can't be processed for IOC's.".format(filename))
-        if filename.endswith('.pdf'):
-            """
-            Converting .pdf file data to plain text format
-            """
+
+        file_extension = os.path.splitext(filename)[1]
+
+        if file_extension not in SUPPORTED_FILE_TYPES:
+            raise ValueError("{0} is not a supported file type.\nSupported file types are: {1}".format(file_extension, SUPPORTED_FILE_TYPES))
+
+        elif file_extension is '.pdf':
             file_string_data = IOCParserHelper.extract_text_from_pdf(file_data_bytes)
-        elif filename.endswith('.docx'):
-            """
-            Converting .docx file data to plain text format
-            """
+
+        elif file_extension is '.docx':
             file_string_data = IOCParserHelper.extract_text_from_docx(file_data_bytes)
-        elif filename.endswith('.xls') or filename.endswith('.xlsx'):
-            """
-            Converting .xls/.xlsx file data to plain text format
-            """
+
+        elif file_extension in ('.xls', '.xlsx'):
             file_string_data = IOCParserHelper.extract_text_from_xls_xlsx(file_data_bytes)
-        elif filename.split('.')[-1].strip() in ['doc', 'odt', 'ott', 'dot', 'gz', 'zip', 'tar', 'ods']:
-            raise ValueError("These attachment/artifact types are not supported for IOC Parsing,"
-                             "Please use string based data or files lik: .docx, .txt, .pdf, .xls, .xlsx etc.")
+
         else:
             file_string_data = file_data_bytes
 
