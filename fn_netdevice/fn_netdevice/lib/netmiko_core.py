@@ -26,18 +26,24 @@ def execute(opts, net_cmd, net_config, device_commit, use_textfsm):
     result = {}
     connection = None
     try:
+        # if secret is specified, use enable_mode
+        bEnable_mode = len(opts.get('secret', '')) > 0
+
         connection = ConnectHandler(**opts)
+
+        if bEnable_mode:
+            connection.enable()
 
         # standard commands to execute
         if net_cmd:
-            send_result = connection.send_command(net_cmd, use_textfsm=use_textfsm)
             result['send_command'] = net_cmd
+            send_result = connection.send_command(net_cmd, use_textfsm=use_textfsm)
             result['send_result'] = send_result
 
         # configuration commands to execute
         if net_config:
-            config_result = connection.send_config_set(net_config.split("\n"))
             result['config_command'] = net_config
+            config_result = connection.send_config_set(net_config.split("\n"))
             result['config_result'] = config_result
             if device_commit:
                 connection.commit()
@@ -49,6 +55,9 @@ def execute(opts, net_cmd, net_config, device_commit, use_textfsm):
 
     finally:
         if connection:
+            if bEnable_mode:
+                connection.exit_enable_mode()
+
             connection.disconnect()
 
     return result
