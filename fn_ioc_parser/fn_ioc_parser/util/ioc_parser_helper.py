@@ -159,10 +159,6 @@ class IOCParserHelper(object):
             # Regex to check for http:// or https:// at the start of a string
             regex = re.compile(r"^(http|https):\/\/")
 
-            # If the IOC's kind is uri and does not start with regex, set the kind to other
-            if ioc_obj.kind is "uri" and not re.match(regex, ioc_obj.value):
-                ioc_obj.kind = "other"
-
             # The IOC's kind contains 'file' (handle 'file' or 'filename')
             # and it starts with http or https, then set its kind to uri
             if "file" in ioc_obj.kind and re.match(regex, ioc_obj.value):
