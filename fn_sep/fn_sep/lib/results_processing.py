@@ -168,7 +168,7 @@ def get_overall_progress(rtn, sep_scan_timeout=None, scan_date=None):
         2: "In progress"
     }
     overall_state = "Completed"
-    timedout_state = "Timedout"
+    timeout_state = "Timeout"
     if not rtn["content"]:
         # When the scan command initially launched the content dict is typically empty.
         overall_state = states[0]
@@ -185,7 +185,7 @@ def get_overall_progress(rtn, sep_scan_timeout=None, scan_date=None):
     # Reset the overall command state if all endpoints have not responded within 'sep_scan_timeout' period.
     if overall_state != "Completed" and sep_scan_timeout is not None and scan_date is not None:
         if sep_scan_timeout is not None and time_since_scan >= int(sep_scan_timeout):
-            rtn["overall_command_state"] = timedout_state
+            rtn["overall_command_state"] = timeout_state
 
     return overall_state
 
