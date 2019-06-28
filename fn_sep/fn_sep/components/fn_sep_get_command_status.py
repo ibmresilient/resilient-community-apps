@@ -125,10 +125,10 @@ class FunctionComponent(ResilientComponent):
                     rtn["endpoints_matching_ids"].append(content_copy[i]["computerId"])
                 del content_copy
             elif sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
-                    self.options.get("results_limit", RESULTS_LIMIT_DEF)):
+                    self.options.get("sep_results_limit", RESULTS_LIMIT_DEF)):
                 # Over results limit. Send full result back as an attachement and also return an actual
                 # result truncated to the results limit.
-                results_limit = int(self.options.get("results_limit", RESULTS_LIMIT_DEF))
+                results_limit = int(self.options.get("sep_results_limit", RESULTS_LIMIT_DEF))
                 result_limit_complete = False
                 total_match_count = 0
                 match_types = ["HASH_MATCHES", "FULL_MATCHES", "PARTIAL_MATCHES"]
