@@ -1,31 +1,13 @@
-
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-from functools import reduce  # forward compatibility for Python 3
-import operator
-import datetime as dt
 import logging
 import requests
-import pytz
-import xmltodict
-from resilient_circuits import ResilientComponent, function, handler 
+from bs4 import BeautifulSoup as bsoup
+from resilient_circuits import ResilientComponent, function, handler
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload,RequestsCommon,str_to_bool, tz_from_utc_ms_ts
-
-def get_from_dict(data_Dict, map_List):
-    return reduce(operator.getitem, map_List, data_Dict)
-
-def tz_from_utc_ms_ts(utc_ms_ts, tz_info):
-    """Given millisecond utc timestamp and a timezone return datetimes
-    :param utc_ms_ts: Unix UTC timestamp in milliseconds
-    :param tz_info: timezone info
-    :return: timezone aware datetime
-    """
-    # convert from time stamp to datetime
-    utc_datetime = dt.datetime.utcfromtimestamp(utc_ms_ts / 1000.)
-    # set the timezone to UTC, and then convert to desired timezone
-    return utc_datetime.replace(tzinfo=pytz.timezone('UTC')).astimezone(tz_info)
+from resilient_lib import ResultPayload, readable_datetime
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'res_to_icd_function"""
@@ -48,77 +30,78 @@ class FunctionComponent(ResilientComponent):
             icd_pass = self.options.get("icd_pass")
             incident_id = kwargs.get("incident_id")
             icd_priority = self.options.get("icd_priority")
-            icd_qradar_severity = str_to_bool(self.options.get('icd_qradar_severity'))
+            icd_field_severity = self.options.get('icd_field_severity')
+
             #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
             log.info("icd_password: %s", icd_pass)
-            log.info("icd_qradar_severity: %s", icd_qradar_severity)
+            log.info("icd_field_severity: %s", icd_field_severity)
             log.info("icd_priority: %s", icd_priority)
             log.info("incident_id: %s", incident_id)
             # Resilient client and api calls
             res_client = self.rest_client()
             incident_str = '/incidents/{incident_id}/'.format(incident_id=incident_id)
             artifact_str = '/incidents/{incident_id}/artifacts'.format(incident_id=incident_id)
+            fieldsev_str = '/types/{type}/fields/{field}'.format(type='incident', field=icd_field_severity)
             content = res_client.get(incident_str)
             art_content = res_client.get(artifact_str)
+            field_severity = res_client.get(fieldsev_str)
             # Time and date
-            utc_ts = content['create_date']
-            tz_dt = tz_from_utc_ms_ts(utc_ts, pytz.timezone('Etc/GMT+6'))
-            timeval = tz_dt.isoformat()
+            timestamp = content['create_date']/1000
+            timeval = readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ')
             time = "Date and Time: {0}".format(timeval)
-            #artifact population to icd ticket 
+            #artifact population to icd ticket
             details_payload = ''
             artifact_limit = len(art_content)-1
             i = 0
-            if icd_qradar_severity:
+            if field_severity:
                 try:
-                    while i <= artifact_limit:
+                    for i in range(0, min(artifact_limit, len(art_content))):
                         if art_content[i].get('properties', False):
-                            if art_content[i]['properties'][0]['name'] in ('source', 'destination'): 
+                            if art_content[i]['properties'][0]['name'] in ('source', 'destination'):
                                 details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
                                 log.info(i)
                             else:
                                 log.error("This artifact did not populate")
-                        i += 1
                 except Exception as artifact_error:
                     log.info(artifact_error)
                     log.error("Encountered an error parsing artifacts")
             ## QRadar severity checking
-            if icd_qradar_severity:
-                qradar_sev = content['properties']['qradar_severity']
-                if not qradar_sev:
-                    qradar_sev = 1  # number
-                log.info("qradar_sev: %s", qradar_sev)
-                if qradar_sev >= 1 and qradar_sev <= 3:
-                    icd_priority = 4
-                elif qradar_sev == 4:
-                    icd_priority = 3
-                elif qradar_sev >= 5 and qradar_sev <= 6:
-                    icd_priority = 2
-                elif qradar_sev >= 7:
-                    icd_priority = 1
-                else:
+            if field_severity:
+                try:
+                    field_sev = field_severity['values']
+                except:
+                    field_sev = field_severity['name']
+                if not field_sev:
+                    field_sev = 1  # number
+                log.info("field_sev: %s", field_sev)
+                icd_priority_lookup = [0, 4, 4, 4, 3, 2, 2, 1]
+                try:
+                    icd_priority = icd_priority_lookup[field_sev]
+                except:
                     log.warning("You have not set a Qradar priority, icd priority will be min value (4)")
                     icd_priority = 4
-            #take parameters into payload        
+            #take parameters into payload
             payload = ResultPayload('fn_res_to_icd', **kwargs)
             # Params and Desk call
-            params = {"DESCRIPTION" : time, "DESCRIPTION_LONGDESCRIPTION" : details_payload,
-            "REPORTEDBYID" : icd_email, "logtype" : "CLIENTNOTE",
-            "worklog.1.description" : "SECURITY ISSUE", "worklog.1.DESCRIPTION_LONGDESCRIPTION" : "SECURITY ISSUE",
-            "INTERNALPRIORITY" : icd_priority, "SITEID" : "APPOPINT", "CLASSIFICATIONID" : "SECURITY ISSUE",
-            "_lid" : icd_email, "_lpwd" : icd_pass} 
-            response = requests.post("https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/", params=params, verify=False)
-            # xml conversion to dict and reading
-            try:
-                response_dict = xmltodict.parse(response.text)
-            except xmltodict.expat.ExpatError:
-                log.error("Error parsing xml response from icd, check app.config and run selftest, ignore subsequent messages")
-            map_list = ["CreateMXINCIDENTResponse", "MXINCIDENTSet", "INCIDENT", "TICKETID"]
-            icd_id = get_from_dict(response_dict, map_list)
+            params = {"DESCRIPTION" : time,
+            "DESCRIPTION_LONGDESCRIPTION" : details_payload,
+            "REPORTEDBYID" : icd_email,
+            "logtype" : "CLIENTNOTE",
+            "worklog.1.description" : "SECURITY ISSUE",
+            "worklog.1.DESCRIPTION_LONGDESCRIPTION" : "SECURITY ISSUE",
+            "INTERNALPRIORITY" : icd_priority,
+            "SITEID" : "APPOPINT", "CLASSIFICATIONID" : "SECURITY ISSUE",
+            "_lid" : icd_email,
+            "_lpwd" : icd_pass}
+            base_url = "https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/"
+            response = requests.post(url=base_url, params=params, verify=False)
+            xmldata = bsoup(response.text)
+            icd_id = '{0}'.format(xmldata.createmxincidentresponse.mxincidentset.incident.ticketid)
+            icd_id = re.sub('[ticket<>/d]', '', icd_id)
             yield StatusMessage("Completed successfully")
-            results = payload.done(success=True,content={
+            results = payload.done(success=True, content={
                 "Incident_escalated" : incident_id,
                 "icd_id" : icd_id,
                 "Details" : details_payload

@@ -4,7 +4,7 @@ This community app allows for the escalation of a incident from Resilient to the
 
 To install the package,
 
-`pip install dist/fn-res-to-icd-1.0.0.tar.gz`
+`pip install dist/fn-res-to-icd-x.x.x.tar.gz`
 
 To install in "development mode"
 

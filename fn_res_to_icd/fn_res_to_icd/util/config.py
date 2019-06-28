@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 
 """Generate a default configuration-file section for fn_res_to_icd"""
 
@@ -17,7 +19,7 @@ icd_pass=<YOUR ICD PASSWORD>
 
 #QRadar severity for the resilient incident, maps to an ICD priority if true
 #Depends on a custom field on the details incident tab
-icd_qradar_severity=<True or False>
+icd_field_severity=<qradar_severity>
 
 #If you wish to specify  what ICD ticket priority each resilient incident should map to
 # 1 meaning highest priority with 4 being the lowest

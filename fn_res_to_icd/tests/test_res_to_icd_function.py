@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use 
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function

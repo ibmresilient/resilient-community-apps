@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
    test with: resilient-circuits selftest -l fn_res_to_icd
