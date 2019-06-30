@@ -26,65 +26,56 @@ class FunctionComponent(ResilientComponent):
     def _function_ioc_parser_function(self, event, *args, **kwargs):
         """A function to extract IOC's(Indicators of Compromise) from (text-based Data) Artifacts & attachments."""
         try:
-            # Get the function parameters:
-            ioc_parser_incident_id = kwargs.get("ioc_parser_incident_id")  # number
-            ioc_parser_task_id = kwargs.get("ioc_parser_task_id")  # number
-            ioc_parser_attachment_id = kwargs.get("ioc_parser_attachment_id")  # number
-            ioc_parser_artifact_id = kwargs.get("ioc_parser_artifact_id")  # number
-            ioc_parser_artifact_type = kwargs.get("ioc_parser_artifact_type")  # text
-            ioc_parser_artifact_value = kwargs.get("ioc_parser_artifact_value")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("ioc_parser_incident_id: %s", ioc_parser_incident_id)
-            log.info("ioc_parser_task_id: %s", ioc_parser_task_id)
-            log.info("ioc_parser_attachment_id: %s", ioc_parser_attachment_id)
-            log.info("ioc_parser_artifact_id: %s", ioc_parser_artifact_id)
-            log.info("ioc_parser_artifact_type: %s", ioc_parser_artifact_type)
-            log.info("ioc_parser_artifact_value: %s", ioc_parser_artifact_value)
+            # Initializing the IOC Parser Helper class
+            IOCHelp_obj = IOCParserHelper()
+
+            # Get the function parameters:
+            ioc_parser_incident_id = IOCHelp_obj.get_function_input(kwargs, "ioc_parser_incident_id")
+            ioc_parser_task_id = IOCHelp_obj.get_function_input(kwargs, "ioc_parser_task_id", optional=True)
+            ioc_parser_attachment_id = IOCHelp_obj.get_function_input(kwargs, "ioc_parser_attachment_id", optional=True)
+            ioc_parser_artifact_id = IOCHelp_obj.get_function_input(kwargs, "ioc_parser_artifact_id", optional=True)
+            ioc_parser_artifact_value = IOCHelp_obj.get_function_input(kwargs, "ioc_parser_artifact_value", optional=True)
+
+            resilient_client = self.rest_client()
+
+            ioc_parser_data = attachment_file_name = None
 
             yield StatusMessage("Extracting IOCs from given Artifact/attachment data")
 
-            # Initialising the Resilient Rest client for making api calls to Resilient system
-            resilient_client = self.rest_client()
-
-            # Initialising the IOC Parser Helper class
-            IOCHelp_obj = IOCParserHelper()
-
-            attachment_file_name = None
-
             if ioc_parser_artifact_id:
-                # A block to parse and download the data from Artifacts
-                if ioc_parser_artifact_type.lower().strip() in ['string', 'email subject', 'email body']:
+
+                artifact_metadata_uri = IOCHelp_obj.ARTIFACT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
+                artifact_file_data_uri = IOCHelp_obj.ARTIFACT_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
+                artifact_metadata = resilient_client.get(artifact_metadata_uri)
+
+                if artifact_metadata.get('attachment'):
+                    artifact_file_data = resilient_client.get_content(artifact_file_data_uri)
+                    attachment_file_name = artifact_metadata.get('attachment', {}).get('name')
+                    ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, artifact_file_data)
+
+                elif ioc_parser_artifact_value:
                     ioc_parser_data = ioc_parser_artifact_value
+
                 else:
-                    metadata_uri = IOCHelp_obj.ARTIFACT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
-                    data_uri = IOCHelp_obj.ARTIFACT_DATA_URL.format(ioc_parser_incident_id, ioc_parser_artifact_id)
+                    raise ValueError("Failed to get Artifact Value for Artifact: {0}".format(ioc_parser_artifact_id))
 
-                    # Getting the Meta data from the Resilient for an artifact
-                    metadata_data = resilient_client.get(metadata_uri)
-                    if metadata_data.get('attachment'):
-                        # Getting the file content from Resilient system
-                        attachment_data = resilient_client.get_content(data_uri)
+            elif ioc_parser_attachment_id:
 
-                        attachment_file_name = metadata_data.get('attachment').get('name')
-                        ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
-                    else:
-                        ioc_parser_data = ioc_parser_artifact_value
-            else:
-                # A block to parse and download the data from attachments
-                metadata_uri = IOCHelp_obj.ATTACHMENT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
-                data_uri = IOCHelp_obj.ATTACHMENT_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
+                attachment_metadata_uri = attachment_data_uri = None
+
                 if ioc_parser_task_id:
-                    metadata_uri = IOCHelp_obj.TASK_META_DATA_URL.format(ioc_parser_task_id, ioc_parser_attachment_id)
-                    data_uri = IOCHelp_obj.TASK_DATA_URL.format(ioc_parser_task_id, ioc_parser_attachment_id)
+                    attachment_metadata_uri = IOCHelp_obj.TASK_META_DATA_URL.format(ioc_parser_task_id, ioc_parser_attachment_id)
+                    attachment_data_uri = IOCHelp_obj.TASK_DATA_URL.format(ioc_parser_task_id, ioc_parser_attachment_id)
 
-                # Getting the Meta data from the Resilient for an artifact
-                metadata_data = resilient_client.get(metadata_uri)
+                else:
+                    attachment_metadata_uri = IOCHelp_obj.ATTACHMENT_META_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
+                    attachment_data_uri = IOCHelp_obj.ATTACHMENT_DATA_URL.format(ioc_parser_incident_id, ioc_parser_attachment_id)
 
-                # Getting the file content from Resilient system
-                attachment_data = resilient_client.get_content(data_uri)
+                attachment_metadata = resilient_client.get(attachment_metadata_uri)
+                attachment_data = resilient_client.get_content(attachment_data_uri)
 
-                attachment_file_name = metadata_data.get('name')
+                attachment_file_name = attachment_metadata.get('name')
                 ioc_parser_data = IOCParserHelper.extract_text_from_bytes_data(attachment_file_name, attachment_data)
 
             ioc_text_obj = IOCParser(ioc_parser_data)
@@ -92,11 +83,13 @@ class FunctionComponent(ResilientComponent):
             function_result = IOCHelp_obj.format_iocs(ioc_results)
 
             yield StatusMessage("Completed IOC Parsing on artifact/attachment data")
+
             results = {
                 "attachment_file_name": attachment_file_name,
                 "iocs": function_result
             }
-            log.debug("Function Result : %s", results)
+
             yield FunctionResult(results)
+
         except Exception as com_err:
             yield FunctionError(com_err)

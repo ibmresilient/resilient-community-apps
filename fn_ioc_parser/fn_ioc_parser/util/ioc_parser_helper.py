@@ -1,6 +1,7 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 import os
 import tempfile
+import logging
 from docx import Document
 import io
 from pdfminer.converter import TextConverter
@@ -22,25 +23,34 @@ class IOCParserHelper(object):
         self.TASK_META_DATA_URL = "/tasks/{0}/attachments/{1}"
         self.TASK_DATA_URL = "/tasks/{0}/attachments/{1}/contents"
 
+    @staticmethod
+    def get_function_input(inputs, input_name, optional=False):
+        """Given input_name, checks if it defined. Raises ValueError if a mandatory input is None"""
+
+        log = logging.getLogger(__name__)
+        log.debug("Trying to get function input: %s from %s. optional = %s", input_name, inputs, optional)
+
+        the_input = inputs.get(input_name)
+
+        if the_input is None and optional is False:
+            err = "'{0}' is a mandatory function input".format(input_name)
+            raise ValueError(err)
+        else:
+            log.debug("Got function input: %s", input_name)
+            return the_input
+
     @classmethod
     def extract_text_from_bytes_data(cls, filename, file_data_bytes):
-        SUPPORTED_FILE_TYPES = (
-            ".docx", ".rtf", ".pdf", ".xls", ".xlsx", ".txt", ".csv", ".log", ".dat", ".xml", "htm", "html",
-            ".bak", ".cfg", ".dmp", ".ini", ".sys", ".tmp", ".eml"
-        )
 
         if not file_data_bytes:
             raise ValueError("{0} is an empty file. Can't be processed for IOC's.".format(filename))
 
         file_extension = os.path.splitext(filename)[1]
 
-        if file_extension not in SUPPORTED_FILE_TYPES:
-            raise ValueError("{0} is not a supported file type.\nSupported file types are: {1}".format(file_extension, SUPPORTED_FILE_TYPES))
-
-        elif file_extension is '.pdf':
+        if file_extension == '.pdf':
             file_string_data = IOCParserHelper.extract_text_from_pdf(file_data_bytes)
 
-        elif file_extension is '.docx':
+        elif file_extension == '.docx':
             file_string_data = IOCParserHelper.extract_text_from_docx(file_data_bytes)
 
         elif file_extension in ('.xls', '.xlsx'):
@@ -60,8 +70,8 @@ class IOCParserHelper(object):
                 try:
                     file_string_data = str(file_string_data)
                 except Exception:
-                    raise ValueError("Error while converting file :{0} data to string, "
-                                     "ioc parsing can't be processed.".format(filename))
+                    raise ValueError("Error while converting file: {0} data to string, "
+                                     "IOC parsing can't be processed.".format(filename))
         return file_string_data
 
     @classmethod
