@@ -6,17 +6,17 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_ioc_parser',
-    version='1.0.1',
+    version='2.0.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_ioc_parser'",
-    long_description="Resilient Circuits Components for 'fn_ioc_parser'",
+    url='http://ibm.biz/resilientcommunity',
+    description="Resilient Function to extract Indicators of Compromise from Attachments + Artifact Files",
+    long_description="""Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. 
+                        All unique IOCs that are found are added to the Resilient Incident as an Artifact""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'iocparser>=1.0.14',
-        'resilient-lib>=32.0.126',
         'pdfminer.six >=20181108',
         'python-docx>=0.8.10',
         'xlrd>=1.2.0'

@@ -1,139 +1,123 @@
+# IOC Parser Functions for IBM Resilient
 
-# IOC Parser Function for IBM Resilient
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Uninstall](#uninstall)
+- [Troubleshooting](#troubleshooting)
+- [Support](#support)
+- [Release Notes](#release-notes)
 
-## Table of Contents  
- - [About This Package](#about-this-package)
- - [Prerequisites](#prerequisites)
- - [Installation](#installation)
- - [Function Inputs](#function-inputs)
- - [Function Output](#function-output)
- - [Pre-Process Script](#pre-process-script)
- - [Post-Process Script](#post-process-script)
- - [Rules](#rules)
- ---
- 
-## About This Package
-**This function extracts IOC's(Indicators of Compromise) from text-based Data/files.**
-* It can be used to parse Indicators of Compromise from text  based files/data can be called on : 
-	*	Text Based Files/Data Artifacts of Resilient 
-	*  Text Based Files/Data Incidents Attachments of Resilient 
-	*  Text Based Files/Data Incident Task Attachments of Resilient 
+---
+## Overview
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+**Resilient Function to extract Indicators of Compromise from Attachments + Artifact Files**
 
-After successful completion of parsing of files/data, artifacts are created based on the returned ioc's.
- 
-![screenshot](screenshots/1.png)
+ ![screenshot: main](./doc/screenshots/main.png)
 
-### IOC Parser Artifact function layout:
-![screenshot](screenshots/2.png)
+Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. All unique IOCs that are found are added to the Resilient Incident as an Artifact
 
-### IOC Parser attachment function layout:
-![screenshot](screenshots/333.png)
+---
+## Requirements
+<!--
+  List any Requirements 
+-->
+* IBM Resilient >= `v31.0.4254`
+* An Integration Server running `resilient_circuits>=30.0.0`
+  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
-### IOC Parser Inputs
-![screenshot](screenshots/4.png)
-
-### IOC Parser Artifact Pre-Process Script
-![screenshot](screenshots/5.png)
-
-### IOC Parser Artifact Post-Process Script
-![screenshot](screenshots/66.png)
-
-### IOC Parser Attachment Pre-Process Script
-![screenshot](screenshots/attachment_pre.png)
-
-### IOC Parser Attachment Post-Process Script
-![screenshot](screenshots/attachment_post.png)
-
-## Prerequisites
-* Resilient Appliance >= v31.0.0
-* Integrations Server running resilient_circuits >= v30.0.0
-* iocparser >= v1.0.14  
-* pdfminer.six >= v20181108  
-* python-docx >= 0.8.10  
-* xlrd >= 1.2.0
-
+---
 ## Installation
+* Download the `fn_ioc_parser.zip`
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip fn_ioc_parser-x.x.x.zip
+  ```
+* **Change Directory** into the unzipped Directory:
+  ```
+  $ cd fn_ioc_parser-x.x.x
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_ioc_parser-x.x.x.tar.gz
+  ```
+* Import the fn_ioc_parser **customizations** into the Resilient Appliance:
+  ```
+  $ resilient-circuits customize -y -l fn-ioc-parser
+  ```
+* [Optional]: Run selftest to test the Integration you configured:
+  ```
+  $ resilient-circuits selftest -l fn-ioc-parser
+  ```
+* **Run** resilient-circuits or restart the Service on Windows/Linux:
+  ```
+  $ resilient-circuits run
+  ```
 
-This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.
-* Download the `.zip` file from our App Exchange and extract it. You will find a file called: `fn_ioc_parser-<version>.tar.gz`
-* Copy this file to your Integrations Server
- * To install the package, run:   
- `pip install fn_ioc_parser-<version>.tar.gz`
- 
- * To import the function, example rules,data tables and workflows into your Resilient Appliance, run: 
-	`resilient-circuits customize -y -l fn-ioc-parser`  
-	
-* To uninstall IOC Parser Function from Resilient Run the following:  
-	 `pip uninstall fn_ioc_parser` 
-	 
-## Function Inputs
-|Input Name		|Type      	|Required 	|Example 	| Info	|
-|---------------|-----------|-----------|----------|--------|  
-|`ioc_parser_incident_id`|  Number|Yes	|	2123| This is the incident ID to be parsed for IOC's.|
-|`ioc_parser_artifact_id`|Number|Optional|246|This is the artifact ID to be parsed for IOC's.|
-|`ioc_parser_artifact_type`|Text |Optional|Other File,String etc.|This is the artifact type to be parsed for IOC's.|
-|`ioc_parser_artifact_value`|Text|Optional|holiday2019.xlsx,"string data" etc.|This is the artifact value to be parsed for IOC's.|
-|`ioc_parser_attachment_id`|Number|Optional|2222|This is the attachment ID to be parsed for IOC's.|
-|`ioc_parser_task_id`|Number|Optional|2222|This is a task ID to be parsed for IOC's.|
 
+---
+## Uninstall
+* SSH into your Integration Server
+* **Uninstall** the package:
+  ```
+  $ pip uninstall fn-ioc-parser
+  ```
 
+---
+## Troubleshooting
+There are several ways to verify the successful operation of a function.
 
-## Function Output
-The payload from integration will wrap the results of the IOC parser response in the following JSON structure.  
-response received will be returned as a string representation of the result.  
-```python
-{"value":{"IP Adress":[],"URL":[],"Malware MD5 Hash":[],"Malware SHA-1 Hash":[],"Malware SHA-256 Hash":[],"Threat CVE ID":[],"Email Body":[],"File Name":[]}}
-```
-* To see the output of  of the  Function, we recommend running `resilient-circuits` in `DEBUG` mode.
-* To do this run:
-    ```
-    $ resilient-circuits run --loglevel=DEBUG
-    ```
-## Pre-Process Script
-### <u>For Artifact </u>
-This example sets `Example: Parse IOCs Artifact` inputs to the artifact values.
-A Pre-Process script will relay the Resilient artifact data to function inputs similar to this example:
-```python
-inputs.ioc_parser_incident_id = incident.id
-inputs.ioc_parser_artifact_id = artifact.id
-inputs.ioc_parser_artifact_type = artifact.type
-inputs.ioc_parser_artifact_value = artifact.value
+### Resilient Action Status
+* When viewing an incident, use the Actions menu to view **Action Status**.
+* By default, pending and errors are displayed.
+* Modify the filter for actions to also show Completed actions.
+* Clicking on an action displays additional information on the progress made or what error occurred.
 
-```
-### <u>For Attachments</u>
-This example sets `Example: Parse IOCs Attachment` inputs to the attachments & task values.
-A Pre-Process script will relay the Resilient incident and task attachments  data to function inputs similar to this example:
-```python
-inputs.ioc_parser_incident_id = incident.id
-inputs.ioc_parser_attachment_id = attachment.id
-if task:
-     inputs.ioc_parser_task_id = task.id
-```
-## Post-Process Script
+### Resilient Scripting Log
+* A separate log file is available to review scripting errors.
+* This is useful when issues occur in the pre-processing or post-processing scripts.
+* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
-### <u>For Artifact</u> 
-This Post-Process script is used to create an `Artifacts`  in the Resilient incidents, based on the returned ioc's from the artifact function.
-```python
-ioc_parser_data = results['value']
-if ioc_parser_data:
-     for ioc_kind, ioc_value in ioc_parser_data.items():
-          for value_data in ioc_value:
-               incident.addArtifact(ioc_kind, value_data, ioc_kind)
-```
-### <u>For Attachments</u>
-This Post- Process script code snippet is used to create the 	`Artifacts` in the Resilient incidents, based on the returned ioc's from the attachment function.
-```python
-# creating artifacts based on IOC's
-ioc_parser_data = results['value']
-if ioc_parser_data:
-     for ioc_kind, ioc_value in ioc_parser_data.items():
-          for value_data in ioc_value:
-               incident.addArtifact(ioc_kind, value_data, ioc_kind)
-```
-## Rules
-| Rule Name | Object Type | Workflow Triggered |Activity Fields|  
-| --------- | :---------: | ------------------ |---------------|  
-|`Example: Parse IOCs - Artifact`| `Artifact` | `Example: Parse IOCs Artifact` |-----|
-|`Example: Parse IOCs - Attachment`|`Attachment`|`Example: Parse IOCs Attachment`|-----|
- 
-:copyright:IBM Corp. 2010, 2019. All Rights Reserved
+### Resilient Logs
+* By default, Resilient logs are retained at `/usr/share/co3/logs`.
+* The `client.log` may contain additional information regarding the execution of functions.
+
+### Resilient-Circuits
+* The log is controlled in the `.resilient/app.config` file under the section [resilient] and the property `logdir`.
+* The default file name is `app.log`.
+* Each function will create progress information.
+* Failures will show up as errors and may contain python trace statements.
+---
+
+## Support
+| Name | Version | Author | Support URL |
+| ---- | ------- | ------ | ----------- |
+| fn_ioc_parser | 2.0.0 | Resilient Labs | http://ibm.biz/resilientcommunity |
+
+## Release Notes
+
+### v2.0.0
+* Message Destination renamed from `iocpdest` to `fn_ioc_parser`
+* Function renamed from `ioc_parser` to `function_ioc_parser`
+* Removed Function Inputs: `incidentId`, `inputType` and `artifactId`
+* Python FunctionComponent file renamed from `ioc_parser.py` to `function-ioc-parser.py`
+* New Function Result:
+  ```python
+  results = {
+    "iocs": [{
+      'count': 1,
+      'type': 'IP',
+      'value': '127.0.0.0'
+    }, {
+      'count': 1,
+      'type': 'uri',
+      'value': 'https://www.example.com'
+    }],
+    "attachment_file_name": u'test_file_name.pdf'
+  }
+  ```
+* Added *Example* Rules and Workflows

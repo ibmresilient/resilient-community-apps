@@ -81,6 +81,9 @@ class IOCParserHelper(object):
         :param attachment_input:  attachment Bytes data from resilient api call
         :return:  Text Data
         """
+        # Set logs for pdfminer to ERROR as too much noise in logs
+        logging.getLogger('pdfminer').setLevel(logging.ERROR)
+
         resource_manager = PDFResourceManager()
         # To Handle unicode conversion in python 2 and python 3
         if six.PY2:
