@@ -44,10 +44,11 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
             incident_str = '/incidents/{incident_id}/'.format(incident_id=incident_id)
             artifact_str = '/incidents/{incident_id}/artifacts'.format(incident_id=incident_id)
-            fieldsev_str = '/types/{type}/fields/{field}'.format(type='incident', field=icd_field_severity)
+            if icd_field_severity:
+                fieldsev_str = '/types/{type}/fields/{field}'.format(type='incident', field=icd_field_severity)
+                field_severity = res_client.get(fieldsev_str)
             content = res_client.get(incident_str)
             art_content = res_client.get(artifact_str)
-            field_severity = res_client.get(fieldsev_str)
             # Time and date
             timestamp = content['create_date']
             timeval = readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ')
@@ -81,7 +82,7 @@ class FunctionComponent(ResilientComponent):
                 try:
                     icd_priority = icd_priority_lookup[field_sev]
                 except:
-                    log.warning("You have not set a Qradar priority, icd priority will be min value (4)")
+                    log.warning("You have not set a priority, icd priority will be set to min value (4)")
                     icd_priority = 4
             #take parameters into payload
             payload = ResultPayload('fn_res_to_icd', **kwargs)

@@ -26,6 +26,7 @@ Customize with:
 After installation, the package will be loaded by `resilient-circuits run`.
 
 ---
+
 ## res-to-icd-function
 
 **This package contains 1 Function, 1 Workflow, and 1 Manual Rule (at the resilient incident level) that helps you to escalate a resilient incident to an icd ticket**
@@ -34,7 +35,7 @@ After installation, the package will be loaded by `resilient-circuits run`.
 
 ## res-to-icd-workflow
 
-* res-to-icd-workflow: gives you the ability to escalate the incident from resilient to icd
+*res-to-icd-workflow: gives you the ability to escalate the incident from resilient to icd
 
 ![screenshot](./screenshots/0.png)
 
