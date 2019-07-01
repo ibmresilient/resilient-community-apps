@@ -1,4 +1,4 @@
 include README.md
 include fn_pa_panorama/util/*
 include fn_pa_panorama/LICENSE
-include fn_pa_panorama/doc/*
+include fn_pa_panorama/docs/*

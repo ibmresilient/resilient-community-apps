@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 """Function implementation
    test with: resilient-circuits selftest -l fn_pa_panorama
 """
@@ -21,7 +22,28 @@ def selftest_function(opts):
     # Call the getAddresses API with the hardcoded 'vsys' and 'vsys1' for the location since those are typically
     # function inputs. Returns success if the call is successful
     options = opts.get("fn_pa_panorama", {})
-    panorama_util = PanoramaClient(options, "vsys", "vsys1")
-    panorama_util.get_addresses()
+    try:
+        panorama_util = PanoramaClient(options, "vsys", "vsys1")
+        panorama_util.get_addresses()
 
-    return {"status": "success"}
+        return {"status": "success"}
+
+    except Exception as err:
+        err_reason_msg = """Could not connect to Panorama.
+        error: {}
+        ---------
+        Current Configs in app.config file:
+        ---------
+        api_key: {}
+        panorama_host: {}
+        cert: {}""".format(
+            err,
+            options.get("api_key"),
+            options.get("panorama_host"),
+            options.get("cert")
+        )
+
+        return {
+            "status": "failure",
+            "reason": err_reason_msg
+        }

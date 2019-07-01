@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -30,6 +31,9 @@ class FunctionComponent(ResilientComponent):
     def _panorama_edit_users_in_a_group_function(self, event, *args, **kwargs):
         """Function: Panorama get address groups returns the list of address groups """
         try:
+            # Response code should equal 20 indicating the call went through successfully
+            PASS_CONSTANT = "20"
+
             yield StatusMessage("Editing list of users in a group")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
@@ -48,7 +52,7 @@ class FunctionComponent(ResilientComponent):
             dict_response = xmltodict.parse(xml_response)
 
             try:
-                if dict_response["response"].get("@code") == "20":
+                if dict_response["response"].get("@code") == PASS_CONSTANT:
                     yield StatusMessage("User group was successfully edited.")
                 else:
                     raise FunctionError("Editing the user group was unsuccessful with code{}, raising FunctionError.".

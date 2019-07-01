@@ -6,7 +6,7 @@
 - [Install + Customize](#install--customize)
 
 ## Overview
-Integration with Resilient and Panorama for adding and removing IP addresses, DNS entries, and users from groups.
+Integration with Resilient and Palo Alto Panorama for adding and removing IP addresses, DNS entries, and users from groups.
 
 ---
 

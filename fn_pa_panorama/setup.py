@@ -9,7 +9,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='www.resilientsystems.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components to Integrate with the Panorama Platform",
     long_description="Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama.",
     install_requires=[

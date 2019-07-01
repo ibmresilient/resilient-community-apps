@@ -28,7 +28,7 @@ class PanoramaClient:
         self.__vsys = vsys
         self.__output_format = "json"
 
-        self.verify = str_to_bool(pan_config.get("verify_cert", "True"))
+        self.verify = str_to_bool(pan_config.get("cert", "True"))
         self.host = pan_config["panorama_host"]
         self.rc = RequestsCommon(opts, pan_config)
         self.query_parameters = self.__build_query_parameters()
@@ -55,7 +55,6 @@ class PanoramaClient:
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
         response = self.rc.execute_call_v2("POST", uri, params=params, json=json.loads(payload), verify=self.verify)
         log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
-        response.raise_for_status()
         return response.json()
 
     def __put(self, resource_uri, params, payload):
@@ -63,7 +62,6 @@ class PanoramaClient:
         uri = u"{}/{}/{}".format(self.host, URI_PATH, resource_uri)
         response = self.rc.execute_call_v2("PUT", uri, params=params, json=json.loads(payload), verify=self.verify)
         log.debug("Status code: {}, Response: {}".format(response.status_code, response.content))
-        response.raise_for_status()
         return response.json()
 
     def get_addresses(self):
@@ -93,8 +91,14 @@ class PanoramaClient:
         """Gets list of users in a group, uses custom POST method due to this being a SOAP based call.
            Returns XML string
         """
-        uri = "{}/api/?type=config&action=get&key={}&xpath={}".format(self.host, self.__key, xpath)
-        response = self.rc.execute_call_v2("POST", uri, verify=self.verify)
+        params = {
+            "type": "config",
+            "action": "get",
+            "key": self.__key,
+            "xpath": xpath
+        }
+        uri = "{}/api/".format(self.host)
+        response = self.rc.execute_call_v2("POST", uri, params=params, verify=self.verify)
         response.raise_for_status()
         return response.content
 
@@ -102,8 +106,14 @@ class PanoramaClient:
         """Edits list of users in a group, uses custom POST method due to this being a SOAP based call.
            Returns XML string
         """
-        uri = "{}/api/?type=config&action=edit&key={}&xpath={}&element={}".format(self.host, self.__key, xpath,
-                                                                                  xml_object)
-        response = self.rc.execute_call_v2("POST", uri, verify=self.verify)
+        params = {
+            "type": "config",
+            "action": "edit",
+            "key": self.__key,
+            "xpath": xpath,
+            "element": xml_object
+        }
+        uri = "{}/api/?".format(self.host)
+        response = self.rc.execute_call_v2("POST", uri, params=params, verify=self.verify)
         response.raise_for_status()
         return response.content
