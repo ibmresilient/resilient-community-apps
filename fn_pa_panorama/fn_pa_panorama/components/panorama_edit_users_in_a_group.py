@@ -55,10 +55,11 @@ class FunctionComponent(ResilientComponent):
                 if dict_response["response"].get("@code") == PASS_CONSTANT:
                     yield StatusMessage("User group was successfully edited.")
                 else:
-                    raise FunctionError("Editing the user group was unsuccessful with code{}, raising FunctionError.".
+                    raise FunctionError("Editing the user group was unsuccessful with code {}, raising FunctionError.".
                                         format(dict_response["response"]["@code"]))
-            except KeyError:
-                raise FunctionError()
+            except KeyError as e:
+                yield StatusMessage("Editing the user group was unsuccessful.")
+                raise FunctionError(e)
 
             # add to dict_response to allow for more options in Resilient scripting and make some actions easier
             dict_response["xml_response"] = xml_response
