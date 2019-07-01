@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import logging
+import re
 import requests
 from bs4 import BeautifulSoup as bsoup
 from resilient_circuits import ResilientComponent, function, handler
@@ -67,7 +68,7 @@ class FunctionComponent(ResilientComponent):
                 except Exception as artifact_error:
                     log.info(artifact_error)
                     log.error("Encountered an error parsing artifacts")
-            ## QRadar severity checking
+            ## General field severity checking
             if field_severity:
                 try:
                     field_sev = field_severity['values']
@@ -97,7 +98,7 @@ class FunctionComponent(ResilientComponent):
             "_lpwd" : icd_pass}
             base_url = "https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/"
             response = requests.post(url=base_url, params=params, verify=False)
-            xmldata = bsoup(response.text)
+            xmldata = bsoup(response.text,"html.parser")
             icd_id = '{0}'.format(xmldata.createmxincidentresponse.mxincidentset.incident.ticketid)
             icd_id = re.sub('[ticket<>/d]', '', icd_id)
             yield StatusMessage("Completed successfully")
