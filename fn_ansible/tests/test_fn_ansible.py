@@ -10,22 +10,11 @@ from resilient_circuits import SubmitTestFunction, FunctionResult
 PACKAGE_NAME = "fn_ansible"
 FUNCTION_NAME = "fn_ansible"
 
-# Read the default configuration-data section from the package
-def get_mocked_config():
-  return """[fn_ansible]
-playbook_dir=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils
-user_name=
-root_password=
-hosts_path=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/hosts
-playbook_become_method=sudo
-playbook_become_user=root
-vault_password_file=/home/sudip/resilient-community-apps/fn_ansible/tests/test_utils/my_passwords.yml
-connection_type=local
-control_machine_username=
-control_machine_password=
+# The default configuration-data section from the package
+config_data = """[fn_ansible]
+runner_dir=/Users/markscherfling/ansible/
+artifact_dir=/tmp/artifacts
 """
-
-config_data = get_mocked_config()
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 

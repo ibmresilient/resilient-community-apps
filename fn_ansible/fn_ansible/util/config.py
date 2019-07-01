@@ -11,15 +11,9 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_ansible]
-playbook_dir=</full/path/to/your/playbook/directory>
-user_name=<USERNAME-OF-HOSTS>
-root_password=<PASSWORD-OF-HOSTS>
-hosts_path=</full/path/of/your/inventory/file>
-playbook_become_method=<SUPER-USER-METHOD e.g. sudo>
-playbook_become_user=<NAME-OF-ROOT-USER e.g. root>
-vault_password_file=<OPTIONAL: /full/path/of/password/file>
-connection_type=<OPTIONAL: e.g. local, smart etc.>
-control_machine_username=<OPTIONAL: for user, REQUIRED: for developers and testers>
-control_machine_password=<OPTIONAL: for user, REQUIRED: for developers and testers>
+runner_dir=</full/path/to/your/ansible/directory>
+artifact_dir=</full/path/to/artifacts/directory>
+# change this value to trim the collection of previous process runs
+artifact_retention_num=0
 """
     return config_data

@@ -5,133 +5,159 @@
   - [Installation](#installation)
   - [Function Inputs](#function-inputs)
   - [Function Output](#function-output)
-  - [Pre-Process Script](#pre-process-script)
-  - [Post-Process Script](#post-process-script)
+  - [Considerations](#considerations)
 ---
 
 ## About This Package:
-**This package contains a Function that integrates with Ansible installed in Control Machine.**
+This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.
 
- ![screenshot](./screenshots/0.png)
+## Features:
+* Run pre-written Ansible Playbooks from the Resilient platform, using parameter substitution.
+* Run Ansible Modules for ad-hoc command execution.
+* Run Resilient Rules at the Incident and Artifact levels.
 
-* User can run pre-written Playbooks.
-* User can also supply extra variables(if applicable) on 1 or more target machines.
-* User have the option to avail Ansible Vault features and can run Encrypted Playbook(s).
+Additional documentation on Ansible can be found at [the Ansible website](https://docs.ansible.com/).
 
-### Sample Workflow:
- ![screenshot](./screenshots/1.png)
+### Package Components
+* Functions:
+  - fn_ansible
+  - fn_ansible_module
+* Workflows:
+  - Example: Ansible - Run a Module
+  - Example: Ansible - Run a Playbook from an Incident
+  - Example: Ansible - Run a Playbook on an Artifact
+* Rules:
+  - Example: Ansible - Run a Module
+  - Example: Ansible - Run a Playbook
+  - Example: Ansible - Run a Playbook from an Artifact
 
 ## Prerequisites:
-* Resilient Appliance >= v31.0.0
-* Integrations Server running resilient_circuits >= v30.0.0
-* Ansible config file and Host file configured as per convention.
+This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed [here](https://docs.ansible.com/ansible/latest/installation_guide/).
 
+* ansible >= 2.8.1
+* ansible-runner >= 1.3.4
+* Resilient platform >= v31.0.0
+* Integrations Server Resilient Circuits >= v30.0.0
+* Ansible config directory per the [ansible-runner convention](https://ansible-runner.readthedocs.io/en/latest/index.html)
+
+* Ansible relies on a system library `sshpass`. Depending on your Integration Server operation system, different procedures are required to install this system library.
 
 ## Installation    
-This package requires that it is installed on a RHEL or CentOS platform and uses the resilient-circuits framework.    
-* Install this package using `pip`:
-* Download the `.zip` file from our App Exchange and extract it. You will find a file called: `fn-ansible-<version>.tar.gz`
-* Copy this file to your Integrations Server
+This package requires that it is installed on a RHEL or CentOS platform and uses the Resilient Circuits framework. 
+
+* Unzip the package downloaded from the IBM App Exchange
 * To install the package, run:
+
     ```
-    $ pip install pip install fn-ansible-<version>.tar.gz
+    $ [sudo] pip install fn_ansible-<version>.tar.gz
     ```
-* To import the function, example rules and workflows into your Resilient Appliance, run:
+   
+* To import the function, example rules and workflows into your Resilient platform, run:
+
     ```
-    $ resilient-circuits customize -y -l fn-ansible
+    $ resilient-circuits customize -l fn-ansible
     ```
 * To update your `app.config` file with the required Ansible configurations, run:
+
     ```
-    $ resilient-circuits config -u
+    $ resilient-circuits config -u -l fn-ansible
     ```
-* Then open your `app.config` file and the following configuration data is added:
+
+* Within the `app.config` file, edit the following configuration data:
+
     ```
     [fn_ansible]
-    playbook_dir=</full/path/to/your/playbook/directory>
-    user_name=<USERNAME-OF-HOSTS>
-    root_password=<PASSWORD-OF-HOSTS>
-    hosts_path=</full/path/of/your/inventory/file>
-    playbook_become_method=<SUPER-USER-METHOD e.g. sudo>
-    playbook_become_user=<NAME-OF-ROOT-USER e.g. root>
-    vault_password_file=<OPTIONAL: /full/path/of/password/file>
-    connection_type=<OPTIONAL: e.g. local, smart etc.>
-    control_machine_username=<OPTIONAL: for user; REQUIRED: for developers and testers>
-    control_machine_password=<OPTIONAL: for user; REQUIRED: for developers and testers>
+    runner_dir=</full/path/to/your/ansible/directory>
+    artifact_dir=</full/path/to/artifacts/directory>
+    # change this value to trim the collection of previous process runs
+    artifact_retention_num=0
     ```
 
-If you are using ansible-vault please provide full path of your password file( Recommended format below: ) -
-> vault_password.yml
-    ---
-    vault_pass: <your-password>
+* To uninstall:
 
-* Configuration Values From Keystore
-Values in the config file can be pulled from a compatible keystore system on your OS. To retrieve a value named `yourkey` from a keystore, set it to `^yourkey`.
+    ```
+    $ [sudo] pip uninstall fn-ansible
+    ```
 
-Example from app.confg:
+* Run Resilient Circuits:
 
-```
-[fn_ansible]
-root_password=^root_password
-
-```
-* Adding the Values to Keystore
-The resilient package includes a utility to add all of the keystore-based values from your app.config file to your system's compatible keystore system. Once you have referenced the keys in your app.config file, run `res-keyring` and you will be prompted for the secure values to store.
-
-```
-  $ res-keyring 
-  Configuration file: /Users/example/.resilient/app.config
-  Secrets are stored with 'keyring.backends.OS_X'
-  [fn_ansible] root_password: <not set>
-  Enter new value (or <ENTER> to leave unchanged): <enter-your-password>
-  Confirm new value: <re-enter-your-password>
-  Value set.
-  Done.
-
-```
-* Run resilient-circuits:
     ```
     $ resilient-circuits run
     ```
-* To uninstall:
-    ```
-    $ pip uninstall fn-ansible
-    ```
+
+### Sample Workflow:
+ ![screenshot](./screenshots/sample_workflow.png)
 
 ## Function Inputs:
 | Input Name | Type | Required | Example | Info |
 | ------------- | :--: | :-------:| ------- | ---- |
-| `ansible_playbook_name` | `String` | Yes | `"my_playbook" or "my_playbook.yml"` | Identifies target playbook to be run |
-| `ansible_parameters` | `String` | No | `"host_names=192.168.1.4"` | Replaces Variables with acutal values in Playbool during runtime. In example here Function will assume that 'host_name' is the variable and used in target playbook and will  replace it with '192.168.1.4'. Be careful with any extra space and unwanted character(s) as it will cause failure in runtime.|
+| ansible_playbook_name | String | Yes | "my_playbook" or "my_playbook.yml" | Identifies target playbook to run |
+| ansible_parameters | String | No | "host_names=192.168.1.4" | Substitution variables for a Playbook at runtime. For example, a Playbook containing `hosts: "{{host_names}}"` will be replaced using the example value of 196.168.1.4. Use semi-colons (;) to separate different parameters. |
+
+Some parameters can contain more than one value. In these cases, use a comma (,) to separate the values. Example: `host_names=192.168.56.1,192.168.56.2`.
+
+When using playbooks run against artifacts, an additional parameter is sent specifying the artifact value to the playbook as `artifact_value=<artifact_value>`. Therefore, in your playbook, ensure to add `{{artifact_value}}` for value substitution.
 
  ![screenshot](./screenshots/2.png)
 ## Function Output:
-* To see the output of each of the API calls for this Function, we recommend running `resilient-circuits` in `DEBUG` mode.
-* To do this run:
-    ```
-    $ resilient-circuits run --loglevel=DEBUG
-    ```
+Results returned to the Resilient platform from an Ansible function are in the following payload pattern:
 
-### An Example Output:
-```python
-results = {'192.168.1.4': { 
-    'failures': 0, 
-    'unreachable': 0, 
-    'ok': 1, 
-    'changed': 0, 
-    'skipped': 0
+```
+{
+  'version': '1.0',
+  'success': True,
+  'reason': None,
+  'inputs': {
+    u'ansible_playbook_name': u'find_files2',
+    u'ansible_parameters': u'age=-2d; host_names=192.168.56.3,192.168.56.4; path=/usr/local/bin/'
+  },
+  'metrics': {
+    'package': 'fn-ansible',
+    'timestamp': '2019-06-19 11:06:39',
+    'package_version': '1.0.0',
+    'host': 'xxx.cambridge.ibm.com',
+    'version': '1.0',
+    'execution_time_ms': 12549
+  },
+  'content': {
+    u'192.168.56.4': {
+      'detail': 'fatal: [192.168.56.4]: UNREACHABLE! => {"changed": false, "msg": "timed out", "unreachable": true}',
+      'summary': 'failed'
+    },
+    u'192.168.56.3': {
+      'detail': '',
+      'summary': 'failed'
     }
+  },
+  'raw': '{"192.168.56.4": {"detail": "fatal: [192.168.56.4]: UNREACHABLE! => {\\"changed\\": false, \\"msg\\": \\"timed out\\", \\"unreachable\\": true}", "summary": "failed"}, "192.168.56.3": {"detail": "", "summary": "failed"}'
 }
 ```
-## Pre-Process Script:
 
-```python
-inputs.ansible_playbook_name = rule.properties.ansible_playbook_name
-inputs.ansible_parameters = rule.properties.ansible_playbook_variables
+The following Post-Processing Script cleans up the payload and adds it as an incident note:
+
+```
+import re
+
+pp = '(\\x1b\[\d*(;\d*)*m)'
+note = u''
+
+if len(results['content'].keys()) == 0:
+  note = u"No results returned on parameters: {}".format(results['inputs'])
+else:
+
+  for item in results['content']:
+    note = note + u"{} - {}\n".format(item, results['inputs'])
+    note = note + re.sub(pp, '', results['content'][item]['detail']).replace('\\r\\n', '\\n') + '\n'
+
+incident.addNote(helper.createPlainText(note))
 ```
 
-## Post-Process Script:
-* This example appends the Threat Intelligences to the Artifact's Description:.
-```python
-# We are only displaying the status of the tasks
-incident.addNote(str(results))
-```
+For very large data results, it may not be practical to save the results as a Note. Instead, the fn_utilities function `Utilities: String to Attachment` can be added to your workflow to send your Ansible results to an attachment. In this case, workflow properties are used to retain the results of this function for use by downstream functions. 
+
+## Considerations
+* Only the ansible-runner `synchronous` capability is supported.
+* Playbook and artifact names must not contain unicode characters. This is a limitation in the ansible-runner package ( <= 2.8.1) which should be resolved in a future release.
+* The app.config setting `artifact_retention_num` is available to clean up previous execution files older than the specified days. Use a value of 0 to specify no deletion.
+* Consider using Rule Activity Field select lists for Ansible module name and parameter restrictions. This ensures that only specific commands are used for ad-hoc executions.
+* Also consider using Rule Activity Field select lists for Ansible playbook names for similar reasons to ensure only specific playbooks are supported through Resilient.
+* The workflow associated with a module or playbook function will remain blocked until all host executions are complete and the results are returned. The ansible-runner `Asynchronous` operation corrects this restriction but remains a future enhancement.

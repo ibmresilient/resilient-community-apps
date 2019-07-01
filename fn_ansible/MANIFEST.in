@@ -1,4 +1,8 @@
 include README.md
 include fn_ansible/util/*
+include fn_ansible/lib/*
 include fn_ansible/LICENSE
-include fn_ansible/screenshots/*
+include screenshots/*
+include tests/*
+include tests/test_utils/*
+

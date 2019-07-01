@@ -12,10 +12,12 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Simple agentless IT automation tool.",
-    long_description="Automation scripts are written in YAML files called playbook, which are besically tasks and instructions. Those tasks can be performed on a remote system from resilient using this function.",
+    long_description="Automation scripts are written in YAML files called playbook, which are basically tasks and instructions. Those tasks can be performed on a remote system from resilient using this function.",
     install_requires=[
+        'ansible>=2.8.1',
+        'ansible-runner>=1.3.4',
         'resilient_circuits>=30.0.0',
-        'ansible==2.7.9'
+        'resilient_lib>=32.0.140'
     ],
     packages=find_packages(),
     include_package_data=True,
