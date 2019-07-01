@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             art_content = res_client.get(artifact_str)
             field_severity = res_client.get(fieldsev_str)
             # Time and date
-            timestamp = content['create_date']/1000
+            timestamp = content['create_date']
             timeval = readable_datetime(timestamp, milliseconds=True, rtn_format='%Y-%m-%dT%H:%M:%SZ')
             time = "Date and Time: {0}".format(timeval)
             #artifact population to icd ticket
