@@ -1,6 +1,6 @@
 # Escalation of resilient incidents to ICD ticket for IBM Resilient
 
-This community app allows for the escalation of a incident from Resilient to the ICD desk, via a manual rule on each incident. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases. This integration is customizable and allows for rearrangement of those use cases. If the icd_field_severity or icd_priority is not defined, the INTERNAL PRIORITY on icd desk (4) will be set on the escalated ticket corresponding to that resilient incident. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None in the app config settings.
+This community app allows for the escalation of a incident from Resilient to the ICD desk, via a manual rule on each incident. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases. This integration is customizable and allows for rearrangement of those use cases. If the icd_field_severity or icd_priority is not defined, the INTERNAL PRIORITY on icd desk (4) will be set on the escalated ticket corresponding to that resilient incident. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app config settings.
 
 To install the package,
 
@@ -47,15 +47,14 @@ icd_severity_value=<custom_severity>
 icd_priority=<1-4>
 ```
 
-As a further testing of credentials, the developer may run command:
+For testing of credentials and icd endpoint, the developer may run the command:
 
 "resilient-circuits selftest"
 
-To verify that input credentials to icd dashboard are valid via an api call.
+To verify that input credentials to icd dashboard are valid via an api call. A failing test here indicate that credentials are invalid or the endpoint is down.
 
 An incident on the resilient can be escalated to the icd desk by running the "Escalate to ICD" manual rule. An example incident is displayed below:
 ![screenshot](./screenshots/2.png)
 
 When the manual rule is pressed, a correpsponding ticket will be created on the ICD dashboard:
 ![screenshot](./screenshots/3.png)
-
