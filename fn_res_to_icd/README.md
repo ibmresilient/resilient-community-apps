@@ -51,6 +51,10 @@ icd_severity_value=<custom_severity>
 icd_priority=<1-4>
 ```
 
+A custom field can be specified (qradar_severity in this case) in the UI that can correspond to the icd_severity_value:
+
+![screenshot](./screenshots/4.png)
+
 For testing of credentials and icd endpoint, the developer may run the command:
 
 "resilient-circuits selftest"
