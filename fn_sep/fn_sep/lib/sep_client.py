@@ -124,9 +124,9 @@ class Sepclient(object):
                   <Network/>
                 </OS>
               </Activity>
-            </EOC>""").format(scan_type, file_path.decode(), hvs[0], hvs[1], hvs[2], description.decode(), action)
+            </EOC>""").format(scan_type, file_path, hvs[0], hvs[1], hvs[2], description, action)
 
-        return scan_xml
+        return scan_xml.encode('utf-8')
 
 
     def _get_token(self):
