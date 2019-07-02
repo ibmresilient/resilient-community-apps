@@ -29,7 +29,8 @@ setup(
     long_description="Resilient Circuits Components for 'fn_res_to_icd'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.0'
+        'resilient-lib>=32.0.0',
+        'beautifulsoup4>=4.7.1'
     ],
     packages=find_packages(),
     include_package_data=True,

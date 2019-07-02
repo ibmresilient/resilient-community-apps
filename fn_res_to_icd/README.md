@@ -47,8 +47,9 @@ All packages used are supported by pypi, import errors between python 2 and 3 ar
 [fn_res_to_icd]
 icd_email=<YOUR ICD EMAIL>
 icd_pass=<YOUR ICD PASSWORD>
-icd_severity_value=<custom_severity>
+icd_severity_value=custom_severity
 icd_priority=<1-4>
+icd_url=https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2
 ```
 
 A custom field can be specified (qradar_severity in this case) in the UI that can correspond to the icd_severity_value:

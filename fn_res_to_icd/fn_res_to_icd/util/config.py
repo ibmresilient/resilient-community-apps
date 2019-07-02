@@ -19,10 +19,13 @@ icd_pass=<YOUR ICD PASSWORD>
 
 #QRadar severity for the resilient incident, maps to an ICD priority if true
 #Depends on a custom field on the details incident tab
-icd_field_severity=<qradar_severity>
+icd_field_severity=qradar_severity
 
 #If you wish to specify  what ICD ticket priority each resilient incident should map to
 # 1 meaning highest priority with 4 being the lowest
 icd_priority=<1-4>
+
+#Current URL of icd dashboard
+icd_url=https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2
 """
     return config_data
