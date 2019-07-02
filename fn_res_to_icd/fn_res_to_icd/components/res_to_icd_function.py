@@ -33,7 +33,9 @@ class FunctionComponent(ResilientComponent):
             icd_priority = self.options.get("icd_priority")
             icd_field_severity = self.options.get('icd_field_severity')
             icd_url = self.options.get('icd_url')
-
+            # Payload and validation
+            payload = ResultPayload('fn_res_to_icd', **kwargs)
+            validate_fields(['icd_email','icd_pass','icd_field_severity','icd_priority'],kwargs)
             #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
@@ -86,9 +88,6 @@ class FunctionComponent(ResilientComponent):
                 except:
                     log.warning("You have not set a priority, icd priority will be set to min value (4)")
                     icd_priority = 4
-            #take parameters into payload
-            payload = ResultPayload('fn_res_to_icd', **kwargs)
-            validate_fields(['icd_email','icd_pass','icd_severity'],kwargs)
             # Params and Desk call
             params = {"DESCRIPTION" : time,
             "DESCRIPTION_LONGDESCRIPTION" : details_payload,
