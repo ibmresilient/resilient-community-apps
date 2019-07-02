@@ -68,8 +68,6 @@ class FunctionComponent(ResilientComponent):
                             if art_content[i]['properties'][0]['name'] in ('source', 'destination'):
                                 details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
                                 log.info(i)
-                            else:
-                                log.error("This artifact did not populate")
                 except Exception as artifact_error:
                     log.info(artifact_error)
                     log.error("Encountered an error parsing artifacts")
