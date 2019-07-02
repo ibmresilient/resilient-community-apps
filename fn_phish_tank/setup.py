@@ -12,8 +12,8 @@ setup(
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="PhishTank Lookup URL Function for IBM Resilient",
-    long_description="""Lookup a URL against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is Phishing or not.
-    The Artifacts Description is updated and a Note is added to the Incident, detailing the information returned from PhishTank""",
+    long_description="""Searches the PhishTank database (https://www.phishtank.com/) to determine if a URL is a phishing URL or not. 
+    The information returned from PhishTank is used to update the Artifacts description and add a note to the incident.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'python-dateutil>=2.8.0',

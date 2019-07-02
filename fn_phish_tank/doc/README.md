@@ -31,7 +31,7 @@
 ---
 
 ## Function - Phish Tank Submit URL
-Lookup URLs against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is related to Phishing or not.
+Searches the PhishTank database (https://www.phishtank.com/) to determine if a URL is a phishing URL or not. The information returned from PhishTank is used to update the Artifacts description and add a note to the incident.
 
  ![screenshot: fn-phish-tank-submit-url ](./screenshots/fn-phish-tank-submit-url.png)
 

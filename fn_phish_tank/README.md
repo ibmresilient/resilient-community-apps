@@ -6,6 +6,7 @@
 - [Installation](#installation)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
+- [Release Notes](#release-notes)
 - [Support](#support)
 
 ---
@@ -14,13 +15,10 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Lookup a URL against PhishTank's (https://www.phishtank.com/) Database to verify if the URL is Phishing or not. The Artifacts Description is updated and a Note is added to the Incident, detailing the information returned from PhishTank
+Searches the PhishTank database (https://www.phishtank.com/) to determine if a URL is a phishing URL or not. The information returned from PhishTank is used to update the Artifacts description and add a note to the incident
 
 ### Note on Partial URL Support
-Due to the differences in implementation of PhishTank's API and the functionality behind their online User Interface, partial URLs are not supported with this Integration
-
-* The UI matches part of the provided URL
-* Whereas the API only matches the full URL
+Partial URLs are not supported with this integration since the PhishTank API supports full URL matches only, although the PhishTank user interface supports partial matches.
 
 **For example:**
 
@@ -58,11 +56,11 @@ Due to the differences in implementation of PhishTank's API and the functionalit
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn_phish_tank **customizations** into the Resilient Appliance:
+* Import the fn_phish_tank **customizations** into the Resilient platform:
   ```
   $ resilient-circuits customize -y -l fn-phish-tank
   ```
-* Open the config file, scroll to the bottom and edit your fn_phish_tank **configurations**:
+* Open the config file, scroll to the bottom and edit your fn_phish_tank configurations:
   ```
   $ nano ~/.resilient/app.config
   ```
@@ -70,7 +68,7 @@ Due to the differences in implementation of PhishTank's API and the functionalit
   | ------ | :------: | ------- | ----------- |
   | **phish_tank_api_url** | Yes | `http://checkurl.phishtank.com/checkurl/` | PhishTank API Access URL |
   | **phish_tank_api_key** | Yes | - | PhishTank API Key |
-  | **proxy** | Yes | `127.0.0.1` | Proxy Server Address. By default it will be `None` |
+  | **proxy** | No | `127.0.0.1` | Proxy Server Address. Default is `None` |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -119,6 +117,15 @@ There are several ways to verify the successful operation of a function.
 * Failures will show up as errors and may contain python trace statements.
 ---
 
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.0.0
+* Initial Release
+
+---
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
