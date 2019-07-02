@@ -8,7 +8,7 @@ import requests
 from bs4 import BeautifulSoup as bsoup
 from resilient_circuits import ResilientComponent, function, handler
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, readable_datetime
+from resilient_lib import ResultPayload, readable_datetime, validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'res_to_icd_function"""
@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id")
             icd_priority = self.options.get("icd_priority")
             icd_field_severity = self.options.get('icd_field_severity')
+            icd_url = self.options.get('icd_url')
 
             #logging
             log = logging.getLogger(__name__)
@@ -40,6 +41,7 @@ class FunctionComponent(ResilientComponent):
             log.info("icd_field_severity: %s", icd_field_severity)
             log.info("icd_priority: %s", icd_priority)
             log.info("incident_id: %s", incident_id)
+            log.info("icd_url: %s", icd_url)
             # Resilient client and api calls
             res_client = self.rest_client()
             incident_str = '/incidents/{incident_id}/'.format(incident_id=incident_id)
@@ -64,8 +66,6 @@ class FunctionComponent(ResilientComponent):
                             if art_content[i]['properties'][0]['name'] in ('source', 'destination'):
                                 details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
                                 log.info(i)
-                            else:
-                                log.error("This artifact did not populate")
                 except Exception as artifact_error:
                     log.info(artifact_error)
                     log.error("Encountered an error parsing artifacts")
@@ -86,6 +86,7 @@ class FunctionComponent(ResilientComponent):
                     icd_priority = 4
             #take parameters into payload
             payload = ResultPayload('fn_res_to_icd', **kwargs)
+            validate_fields(['icd_email','icd_pass','icd_url'],kwargs)
             # Params and Desk call
             params = {"DESCRIPTION" : time,
             "DESCRIPTION_LONGDESCRIPTION" : details_payload,
@@ -97,16 +98,17 @@ class FunctionComponent(ResilientComponent):
             "SITEID" : "APPOPINT", "CLASSIFICATIONID" : "SECURITY ISSUE",
             "_lid" : icd_email,
             "_lpwd" : icd_pass}
-            base_url = "https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/rest/os/MXINCIDENT/"
+            endpoint = "/rest/os/MXINCIDENT/"
+            base_url= icd_url + endpoint
             response = requests.post(url=base_url, params=params, verify=False)
             xmldata = bsoup(response.text,"html.parser")
             icd_id = '{0}'.format(xmldata.createmxincidentresponse.mxincidentset.incident.ticketid)
             icd_id = re.sub('[ticket<>/d]', '', icd_id)
             yield StatusMessage("Completed successfully")
             results = payload.done(success=True, content={
-                "Incident_escalated" : incident_id,
+                "incident_escalated" : incident_id,
                 "icd_id" : icd_id,
-                "Details" : details_payload
+                "details" : details_payload
             })
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
