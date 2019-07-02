@@ -9,45 +9,45 @@
   "id": 78,
   "export_date": 1554679272982,
   "fields": [
-  {
-    "id": 51,
-    "name": "inc_training",
-    "text": "Simulation",
-    "prefix": null,
-    "type_id": 0,
-    "tooltip": "Whether the incident is a simulation or a regular incident.  This field is read-only.",
-    "input_type": "boolean",
-    "hide_notification": false,
-    "chosen": false,
-    "default_chosen_by_server": false,
-    "blank_option": false,
-    "internal": false,
-    "uuid": "c3f0e3ed-21e1-4d53-affb-fe5ca3308cca",
-    "operations": [
+    {
+      "id": 51,
+      "name": "inc_training",
+      "text": "Simulation",
+      "prefix": null,
+      "type_id": 0,
+      "tooltip": "Whether the incident is a simulation or a regular incident.  This field is read-only.",
+      "input_type": "boolean",
+      "hide_notification": false,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "blank_option": false,
+      "internal": false,
+      "uuid": "c3f0e3ed-21e1-4d53-affb-fe5ca3308cca",
+      "operations": [
 
-    ],
-    "operation_perms": {
+      ],
+      "operation_perms": {
 
+      },
+      "values": [
+
+      ],
+      "read_only": true,
+      "changeable": true,
+      "rich_text": false,
+      "export_key": "incident/inc_training",
+      "templates": [
+
+      ],
+      "deprecated": false
     },
-    "values": [
-
-    ],
-    "read_only": true,
-    "changeable": true,
-    "rich_text": false,
-    "export_key": "incident/inc_training",
-    "templates": [
-
-    ],
-    "deprecated": false
-  },
     {
       "id": 193,
       "name": "artifact_id",
       "text": "artifact_id",
       "prefix": null,
       "type_id": 11,
-      "tooltip": "",
+      "tooltip": "artifact_id for function actions",
       "placeholder": "",
       "input_type": "number",
       "hide_notification": false,
@@ -80,7 +80,7 @@
       "text": "incident_id",
       "prefix": null,
       "type_id": 11,
-      "tooltip": "",
+      "tooltip": "incident_id for function actions",
       "placeholder": "",
       "input_type": "number",
       "required": "always",
@@ -114,7 +114,7 @@
       "text": "attachment_id",
       "prefix": null,
       "type_id": 11,
-      "tooltip": "",
+      "tooltip": "attachment_id for function actions",
       "placeholder": "",
       "input_type": "number",
       "hide_notification": false,
@@ -147,7 +147,7 @@
       "text": "task_id",
       "prefix": null,
       "type_id": 11,
-      "tooltip": "",
+      "tooltip": "task_id for function actions",
       "placeholder": "",
       "input_type": "number",
       "hide_notification": false,
@@ -176,19 +176,7 @@
     }
   ],
   "incident_types": [
-    {
-      "update_date": 1554726887694,
-      "create_date": 1554726887694,
-      "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0",
-      "description": "Customization Packages (internal)",
-      "export_key": "Customization Packages (internal)",
-      "name": "Customization Packages (internal)",
-      "enabled": false,
-      "system": false,
-      "parent_id": null,
-      "hidden": false,
-      "id": 0
-    }
+  
   ],
   "phases": [
 
