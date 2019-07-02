@@ -46,9 +46,9 @@ Creates a new address object in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `panorama_location` | `select` | Yes | `-` | The location of the entry |
-| `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
+| `panorama_location` | `select` | Yes | `-` | Location of the entry. |
+| `panorama_vsys` | `text` | No | `-` | Name of the vsys when location type is 'vsys' or 'panorama-pushed'. |
+| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group. |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 
 </p>
@@ -116,15 +116,6 @@ inputs.panorama_request_body = body
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-```
-
-</p>
-</details>
-
 ---
 ## Function - Panorama Edit Address Group
 Edits an address group in Panorama.
@@ -136,9 +127,9 @@ Edits an address group in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `panorama_location` | `select` | Yes | `-` | The location of the entry |
-| `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
+| `panorama_location` | `select` | Yes | `-` | Location of the entry. |
+| `panorama_vsys` | `text` | No | `-` | Name of the vsys when location type is 'vsys' or 'panorama-pushed'. |
+| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group. |
 | `panorama_request_body` | `textarea` | No | `-` | - |
 
 </p>
@@ -242,15 +233,6 @@ inputs.panorama_request_body = body
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-```
-
-</p>
-</details>
-
 ---
 ## Function - Panorama Edit Users in a Group
 Edits users in a group in Panorama.
@@ -347,15 +329,6 @@ inputs.panorama_user_group_xml = panorama_xml
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-```
-
-</p>
-</details>
-
 ---
 ## Function - Panorama Get Address Groups
 List address groups in Panorama.
@@ -367,9 +340,9 @@ List address groups in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `panorama_location` | `select` | Yes | `-` | The location of the entry |
-| `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
-| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group |
+| `panorama_location` | `select` | Yes | `-` | Location of the entry. |
+| `panorama_vsys` | `text` | No | `-` | Name of the vsys when location type is 'vsys' or 'panorama-pushed'. |
+| `panorama_name_parameter` | `text` | No | `-` | Useful to return back one item, ie: 1 Address Group. |
 
 </p>
 </details>
@@ -439,15 +412,6 @@ inputs.panorama_name_parameter = "Blocked Group"
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-```
-
-</p>
-</details>
-
 ---
 ## Function - Panorama Get Addresses
 List addresses in Panorama.
@@ -459,8 +423,8 @@ List addresses in Panorama.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `panorama_location` | `select` | Yes | `-` | The location of the entry |
-| `panorama_vsys` | `text` | No | `-` | The name of the vsys when location type is 'vsys' or 'panorama-pushed' |
+| `panorama_location` | `select` | Yes | `-` | Location of the entry. |
+| `panorama_vsys` | `text` | No | `-` | Name of the vsys when location type is 'vsys' or 'panorama-pushed'. |
 
 </p>
 </details>
@@ -536,15 +500,6 @@ inputs.panorama_vsys = "vsys1"
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-```
-
-</p>
-</details>
-
 ---
 ## Function - Panorama Get Users in a Group
 Lists users part of a group in Panorama.
@@ -611,15 +566,6 @@ results = {
 ```python
 # Set this to the xpath of the group you are interested in
 inputs.panorama_user_group_xpath = "/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
 ```
 
 </p>

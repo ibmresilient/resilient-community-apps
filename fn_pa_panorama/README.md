@@ -14,15 +14,23 @@
 
 # fn-pa-panorama Functions for IBM Resilient
 
+- [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
-- [Release Notes](#release-notes)
 - [Support](#support)
 
 ---
+## Release Notes
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
+### v1.0.0
+* Initial Release
+
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
@@ -32,7 +40,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama
+Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama.
 
 ---
 ## Requirements
@@ -47,7 +55,7 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
 
 ---
 ## Installation
-* Download the `fn_pa_panorama.zip`
+* Download the `fn_pa_panorama.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
   ```
@@ -65,7 +73,7 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn\_pa\_panorama **customizations** into the Resilient Appliance:
+* Import the fn\_pa\_panorama **customizations** into the Resilient platform:
   ```
   $ resilient-circuits customize -y -l fn-pa-panorama
   ```
@@ -80,9 +88,9 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
   
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **panorama_host** | Yes | `https://0.0.0.0` | *The location where your Panorama software is running* |
+  | **panorama_host** | Yes | `https://0.0.0.0` | *The location where your Panorama software is running.* |
   | **api_key** | Yes | `<Panorama_api_key>` | *API key generated in the step above* |
-  | **cert** | Yes | `[True|False]` | *True or False* |
+  | **cert** | Yes | `[True/False]` | *True or False* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -97,7 +105,7 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
 
 ---
 ## Uninstall
-* SSH into your Integration Server
+* SSH into your Integration Server.
 * **Uninstall** the package:
   ```
   $ pip uninstall fn-pa-panorama
@@ -143,14 +151,6 @@ There are several ways to verify the successful operation of a function.
 * Step Three
 ---
 -->
-
-## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
-### v1.0.0
-* Initial Release
 
 ## Support
 | Name | Version | Author | Support URL |
