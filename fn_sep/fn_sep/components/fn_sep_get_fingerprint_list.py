@@ -89,11 +89,11 @@ class FunctionComponent(ResilientComponent):
             if "errorCode" in rtn and int(rtn["errorCode"]) == 410:
                 # If this error was trapped user probably tried to get an invalid fingerprint list.
                 yield StatusMessage(
-                    "Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' and "
+                    u"Got a 410 error while attempting to get a fingerprint list for fingerprint name '{0}' and "
                     "domain id '{1}' because of a possible invalid or deleted id.".format(sep_fingerprintlist_name,
                                                                                           sep_domainid))
             else:
-                yield StatusMessage("Returning 'Symantec SEP Get File Fingerprint List' results for fingerprint name "
+                yield StatusMessage(u"Returning 'Symantec SEP Get File Fingerprint List' results for fingerprint name "
                                     "'{0}' and domain id '{1}' .".format(sep_fingerprintlist_name, sep_domainid))
 
             LOG.debug(json.dumps(results["content"]))
