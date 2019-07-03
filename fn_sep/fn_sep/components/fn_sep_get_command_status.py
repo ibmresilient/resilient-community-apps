@@ -145,7 +145,8 @@ class FunctionComponent(ResilientComponent):
                 content_copy = copy.deepcopy(rtn["content"])
                 for i in range(len(content_copy)):
                     if result_limit_complete:
-                        del rtn["content"][i]
+                        rtn["content"] = rtn["content"][:i]
+                        break
                     else:
                         if total_match_count <= results_limit:
                             match_count = content_copy[i]["scan_result"]["match_count"]
