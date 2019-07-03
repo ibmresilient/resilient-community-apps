@@ -1,12 +1,12 @@
 # IOC Parser Functions for IBM Resilient
 
 - [Overview](#overview)
+- [Release Notes](#release-notes)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
-- [Release Notes](#release-notes)
 
 ---
 ## Overview
@@ -21,6 +21,36 @@
 Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. All unique IOCs that are found are added to the Resilient Incident as an Artifact
 
 ---
+
+## Release Notes
+
+### v1.0.0
+* Initial Release
+
+### v2.0.0
+* Message Destination renamed from `iocpdest` to `fn_ioc_parser`
+* Function renamed from `ioc_parser` to `function_ioc_parser`
+* Removed Function Inputs: `incidentId`, `inputType` and `artifactId`
+* Python FunctionComponent file renamed from `ioc_parser.py` to `function-ioc-parser.py`
+* Added *Example* Rules and Workflows
+* New Function Result:
+  ```python
+  results = {
+    "iocs": [{
+      'count': 1,
+      'type': 'IP',
+      'value': '127.0.0.0'
+    }, {
+      'count': 1,
+      'type': 'uri',
+      'value': 'https://www.example.com'
+    }],
+    "attachment_file_name": u'test_file_name.pdf'
+  }
+  ```
+
+---
+
 ## Requirements
 <!--
   List any Requirements 
@@ -97,27 +127,3 @@ There are several ways to verify the successful operation of a function.
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
 | fn_ioc_parser | 2.0.0 | Resilient Labs | http://ibm.biz/resilientcommunity |
-
-## Release Notes
-
-### v2.0.0
-* Message Destination renamed from `iocpdest` to `fn_ioc_parser`
-* Function renamed from `ioc_parser` to `function_ioc_parser`
-* Removed Function Inputs: `incidentId`, `inputType` and `artifactId`
-* Python FunctionComponent file renamed from `ioc_parser.py` to `function-ioc-parser.py`
-* New Function Result:
-  ```python
-  results = {
-    "iocs": [{
-      'count': 1,
-      'type': 'IP',
-      'value': '127.0.0.0'
-    }, {
-      'count': 1,
-      'type': 'uri',
-      'value': 'https://www.example.com'
-    }],
-    "attachment_file_name": u'test_file_name.pdf'
-  }
-  ```
-* Added *Example* Rules and Workflows
