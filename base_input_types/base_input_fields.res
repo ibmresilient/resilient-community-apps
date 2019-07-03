@@ -176,7 +176,19 @@
     }
   ],
   "incident_types": [
-  
+    {
+      "update_date": 1554726887694,
+      "create_date": 1554726887694,
+      "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0",
+      "description": "Customization Packages (internal)",
+      "export_key": "Customization Packages (internal)",
+      "name": "Customization Packages (internal)",
+      "enabled": false,
+      "system": false,
+      "parent_id": null,
+      "hidden": false,
+      "id": 0
+    }
   ],
   "phases": [
 
