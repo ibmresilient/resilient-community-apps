@@ -39,6 +39,7 @@
 * Python FunctionComponent file renamed from `ioc_parser.py` to `function-ioc-parser.py`
 * Added *Example* Rules and Workflows
 * New Function Result:
+
   ```python
   results = {
     "iocs": [{
