@@ -43,7 +43,7 @@
 4. **Configure PSQL**
     * Open the PSQL connection 
       ```
-      psql -h localhost -p 5555 -U postgres -W postgres
+      sudo -u postgres -i psql postgres
       ```
 
     * Paste the following command then hit enter
@@ -265,6 +265,11 @@
 * Can also see **DEBUG Information** in the **Action Status** which is located just under the navigation bar on the right-hand side:
   <img src="./screenshots/48.png" alt="screenshot" width="30%"/>
   <img src="./screenshots/15.png" alt="screenshot" width="69%"/>
+* You may find that `traceroute` is not installed on your VM. Ctrl+C quit resilient-circuits and then install with:
+  ```
+  $ sudo yum install -y traceroute
+  ```
+  * Restart `resilient-circuits run` after
   
 ---
 ## Step 9: *Create new Custom Workflow that uses our Shell Command Function*
@@ -412,7 +417,6 @@
   ![screenshot](./screenshots/56.png)
 ---
 ## Step 17: *View LDAP Search Results in Resilient UI*
-* Go to your **Incident**
 * Go to Customization Settings -> Layouts -> Manage Tabs
 * Add a **New Tab:**
   * Incident Tabs > Manage Tabs > + Add Tab
