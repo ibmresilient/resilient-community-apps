@@ -89,7 +89,8 @@ def _get_atd_session_headers(g):
         "VE-SDK-API": base64_login
     }
     r = requests.get(session_url, headers=headers, verify=g.trust_cert)
-    check_status_code(r)
+    try:
+        check_status_code(r)
     log.debug("User logged in successfully")
     content = r.json()
     session_string = "{}:{}".format(content["results"]["session"], content["results"]["userId"])
@@ -139,6 +140,8 @@ def _file_upload(g, submit_type, f=None, file_name=None, url=""):
 def check_status_code(response):
     log.debug(response.content)
     if response.status_code > 299 or response.status_code < 200:
+        if response.status_code == 401:
+            log.error("Request refused, consider McAfee latency")
         raise ValueError("Request not successful. Status code: {}".format(str(response.status_code)))
 
 
