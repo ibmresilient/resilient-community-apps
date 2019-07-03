@@ -11,9 +11,9 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
-    description="Resilient Function to extract Indicators of Compromise from Attachments + Artifact Files",
+    description="These functions extract Indicators of Compromise (IOCs) from Resilient attachments and files.",
     long_description="""Uses the IOCParser Python Library to extract IOCs from Resilient Attachments and Artifacts. 
-                        All unique IOCs that are found are added to the Resilient Incident as an Artifact""",
+                        All unique IOCs that are found are added to the Resilient Incident as an Artifact.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'iocparser>=1.0.14',
