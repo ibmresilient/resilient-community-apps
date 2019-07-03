@@ -8,7 +8,8 @@ import requests
 from bs4 import BeautifulSoup as bsoup
 from resilient_circuits import ResilientComponent, function, handler
 from resilient_circuits import StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, readable_datetime, validate_fields
+from resilient_lib import ResultPayload, readable_datetime
+from resilient_lib.components.resilient_common import validate_fields
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'res_to_icd_function"""
@@ -35,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             icd_url = self.options.get('icd_url')
             # Payload and validation
             payload = ResultPayload('fn_res_to_icd', **kwargs)
-            validate_fields(['icd_email','icd_pass','icd_field_severity','icd_priority'],kwargs)
+            validate_fields(['icd_email','icd_pass','icd_priority'],self.options)
             #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
