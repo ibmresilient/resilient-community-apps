@@ -1,4 +1,4 @@
-# fn-res-to-icd Functions for IBM Resilient
+# fn-res-to-icd: ICD Ticket Escalation from IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
