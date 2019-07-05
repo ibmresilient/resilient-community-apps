@@ -28,7 +28,7 @@
 
 This community app allows for the escalation of a Resilient incident to the ICD dashboard via a manual rule. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases. If the icd_field_severity or icd_priority is not defined, the INTERNAL PRIORITY on icd desk (4) will be set on the escalated ticket corresponding to that resilient incident. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app config settings.
 
-**This package contains 1 Function, 1 Workflow, and 1 Manual Rule (at the resilient incident level) that helps you to escalate a resilient incident to an icd ticket**
+**This package contains 1 Function, 1 Workflow, and 1 Manual Rule (at the resilient incident level) that helps you to escalate a Resilient incident to an ICD ticket**
 
 ---
 ## Requirements
