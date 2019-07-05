@@ -8,8 +8,8 @@
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
-- [Function - Escalate Resilient incident to ICD dashboard](#function---res-to-icd-function)
-- [Workflow - Example: res-to-icd](#workflow---example:res-to-icd)
+- [Function, Workflow and ICD - Escalate Resilient incident to ICD dashboard](#function---res-to-icd-function)
+
 
 ## Release Notes
 <!--
@@ -131,11 +131,10 @@ There are several ways to verify the successful operation of a function.
 
 ![screenshot](./screenshots/1.png)
 
-## Example: res-to-icd
-
 ![screenshot](./screenshots/0.png)
 
 An incident on the resilient can be escalated to the icd desk by running the "Escalate to ICD" manual rule. An example incident is displayed below:
+
 ![screenshot](./screenshots/2.png)
 
 When the manual rule is pressed, a correpsponding ticket will be created on the ICD dashboard:
