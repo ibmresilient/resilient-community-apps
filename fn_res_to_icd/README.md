@@ -132,8 +132,6 @@ There are several ways to verify the successful operation of a function.
 
 ## res-to-icd-workflow
 
-*res-to-icd-workflow: gives you the ability to escalate the incident from resilient to icd
-
 ![screenshot](./screenshots/0.png)
 
 An incident on the resilient can be escalated to the icd desk by running the "Escalate to ICD" manual rule. An example incident is displayed below:
