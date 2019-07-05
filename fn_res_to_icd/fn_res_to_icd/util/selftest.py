@@ -6,26 +6,25 @@
 """
 import logging
 import requests
+from resilient_lib.components.resilient_common import validate_fields
 
-LOG = logging.getLogger(__name__)
-LOG.setLevel(logging.INFO)
-LOG.addHandler(logging.StreamHandler())
+log = logging.getLogger(__name__)
+log.setlevel(logging.INFO)
+log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     try:
         options = opts.get("fn_res_to_icd", {})
         icd_email = options.get("icd_email")
         icd_pass = options.get("icd_pass")
-        LOG.info(icd_email)
-        LOG.info(icd_pass)
+        icd_url = options.get('icd_url')
+        log.info(icd_email)
         params = {"_lid": icd_email, "_lpwd": icd_pass}
-        LOG.info('executing api call with credentials')
-        response = requests.post("https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2/oslc/ping/", params=params, verify=False)
-        LOG.info(response.status_code)
+        validate_fields(['icd_email','icd_pass','icd_url'], options)
+        log.info('executing api call with credentials')
+        response = requests.post(icd_url, params=params, verify=False)
+        log.info(response.status_code)
         return {"state": "success"}
     except Exception as err:
-        LOG.error(err)
-        return {"state": "failure"}
-
-
-  
+        log.error(err)
+        return {"state": "failure"}  

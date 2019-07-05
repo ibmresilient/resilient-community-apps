@@ -1,15 +1,14 @@
-# fn-res-to-icd: ICD tickets generated from IBM Resilient
+# fn-res-to-icd Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Config Settings](#config-settings)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
-- [Function, Workflow and ICD - Escalate Resilient incident to ICD dashboard](#function---res-to-icd-function)
 
+---
 
 ## Release Notes
 <!--
@@ -19,74 +18,72 @@
 ### v1.0.0
 * Initial Release
 
+---
+
 ## Overview
-<!--
-  Provide a high-level description of the function itself and its remote software or application.
-  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
--->
-**Resilient Circuits Components to Integrate with the ICD Platform**
 
-This community app allows for the escalation of a Resilient incident to the ICD dashboard via a manual rule. A word document is attached which explains the mapping of resilient fields to the icd ticket fields for specific use cases. If the icd_field_severity or icd_priority is not defined, the INTERNAL PRIORITY on icd desk (4) will be set on the escalated ticket corresponding to that resilient incident. IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app config settings.
+**Resilient Circuits Components for 'fn_res_to_icd**
 
-**This package contains 1 Function, 1 Workflow, and 1 Manual Rule that allows escalation of a Resilient incident to the ICD Platform**
+ ![screenshot: main](./doc/screenshots/main.png)
+
+Resilient Circuits Components for 'fn_res_to_icd'
 
 ---
+
 ## Requirements
-<!--
-  List any Requirements 
--->
+
 * IBM Resilient >= `v31.0.4254`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-* `resilient-lib>32.0.140`
-* beautifulsoup4 >= `4.7.1`
+* `resilient-lib>=32.0.140`
+* `beautifulsoup4>=4.7.1`
 
 ---
+
 ## Installation
-
-* To install the package,
-
-`pip install dist/fn-res-to-icd-x.x.x.tar.gz`
-
-To install in "development mode"
-
-`pip install -e ./fn_res_to_icd/`
-
-Please create (or update) the config settings via:
-
-`resilient-circuits config -c [-u]`
-
-Default settings in your app.config file:
-
-```bash
-[fn_res_to_icd]
-icd_email=<YOUR ICD EMAIL>
-icd_pass=<YOUR ICD PASSWORD>
-icd_severity_value=custom_severity
-icd_priority=<1-4>
-icd_url=https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2
-```
-
-Customize with:
-
-`resilient-circuits customize`
-
-After installation, the package will be loaded by `resilient-circuits run`.
-
----
-
-## Config settings
+* Download the `fn_res_to_icd.zip`.
+* Copy the `.zip` to your Integration Server and SSH into it.
+* **Unzip** the package:
+  ```
+  $ unzip fn_res_to_icd-x.x.x.zip
+  ```
+* **Change Directory** into the unzipped directory:
+  ```
+  $ cd fn_res_to_icd-x.x.x
+  ```
+* **Install** the package:
+  ```
+  $ pip install fn_res_to_icd-x.x.x.tar.gz
+  ```
+* Import the **configurations** into your app.config file:
+  ```
+  $ resilient-circuits config -u
+  ```
+* Import the fn_res_to_icd **customizations** into the Resilient platform:
+  ```
+  $ resilient-circuits customize -y -l fn-res-to-icd
+  ```
+* Open the config file, scroll to the bottom and edit your fn_res_to_icd configurations:
+  ```
+  $ nano ~/.resilient/app.config
+  ```
+  | Config | Required | Example | Description |
+  | ------ | :------: | ------- | ----------- |
+  | **icd_email** | Yes | `<YOUR ICD EMAIL>` | *email for ICD Platform* |
+  | **icd_pass** | Yes | `<YOUR ICD PASSWORD>` | *password for ICD Platform* |
+  | **icd_field_severity** | Yes | `custom_severity` | *custom UI severity value* |
+  | **icd_priority** | Yes | `<1-4>` | *ICD Platform ticket priority* |
+  | **icd_url** | Yes | `https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2` | *ICD Platform URL* |
 
 A custom field can be specified (qradar_severity in this case) in the UI that can correspond to the icd_severity_value:
 
-![screenshot](./screenshots/4.png)
+![screenshot](./doc/screenshots/4.png)
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
   ```
-  $ resilient-circuits selftest -l fn-res-to-icd 
+  $ resilient-circuits selftest -l fn-res-to-icd
   ```
-This verifies that input credentials to icd dashboard are valid via an api call. A failing test here indicate that credentials are invalid or the endpoint is down.
 * **Run** resilient-circuits or restart the Service on Windows/Linux:
   ```
   $ resilient-circuits run
@@ -99,10 +96,11 @@ This verifies that input credentials to icd dashboard are valid via an api call.
   ```
   $ pip uninstall fn-res-to-icd
   ```
-* Open the config file, scroll to the `[fn_res_to_icd]` section and remove the section or prefix `#` to comment out the section.
+* Open the config file, scroll to the [fn_res_to_icd] section and remove the section or prefix `#` to comment out the section.
 * **Save** and **Close** the app.config file.
 
 ---
+
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
@@ -127,15 +125,9 @@ There are several ways to verify the successful operation of a function.
 * Each function will create progress information.
 * Failures will show up as errors and may contain python trace statements.
 
-## res-to-icd-function
+---
 
-![screenshot](./screenshots/1.png)
-
-![screenshot](./screenshots/0.png)
-
-An incident on the resilient can be escalated to the icd desk by running the "Escalate to ICD" manual rule. An example incident is displayed below:
-
-![screenshot](./screenshots/2.png)
-
-When the manual rule is pressed, a correpsponding ticket will be created on the ICD dashboard:
-![screenshot](./screenshots/3.png)
+## Support
+| Name | Version | Author | Support URL |
+| ---- | ------- | ------ | ----------- |
+| fn_res_to_icd | 1.0.0 | Resilient Labs | https://github.com/ibmresilient/resilient-community-apps |

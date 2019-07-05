@@ -24,12 +24,12 @@ setup(
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='http://ibm.biz/resilientcommunity',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_res_to_icd'",
     long_description="Resilient Circuits Components for 'fn_res_to_icd'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.0',
+        'resilient-lib>=32.0.140',
         'beautifulsoup4>=4.7.1'
     ],
     packages=find_packages(),

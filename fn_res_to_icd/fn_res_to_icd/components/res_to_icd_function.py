@@ -30,17 +30,17 @@ class FunctionComponent(ResilientComponent):
             # taken from config section
             icd_email = self.options.get("icd_email")
             icd_pass = self.options.get("icd_pass")
-            incident_id = kwargs.get("incident_id")
             icd_priority = self.options.get("icd_priority")
             icd_field_severity = self.options.get('icd_field_severity')
             icd_url = self.options.get('icd_url')
+            incident_id = kwargs.get("incident_id")
             # Payload and validation
             payload = ResultPayload('fn_res_to_icd', **kwargs)
-            validate_fields(['icd_email','icd_pass','icd_priority'],self.options)
+            validate_fields(['icd_email','icd_pass','icd_priority','icd_url','icd_field_severity'], self.options)
+            validate_fields(['incident_id'], kwargs)
             #logging
             log = logging.getLogger(__name__)
             log.info("icd_email: %s", icd_email)
-            log.info("icd_password: %s", icd_pass)
             log.info("icd_field_severity: %s", icd_field_severity)
             log.info("icd_priority: %s", icd_priority)
             log.info("incident_id: %s", incident_id)
@@ -62,13 +62,15 @@ class FunctionComponent(ResilientComponent):
             details_payload = ''
             artifact_limit = len(art_content)-1
             i = 0
+            j = 0
             if field_severity:
                 try:
                     for i in range(0, min(artifact_limit, len(art_content))):
                         if art_content[i].get('properties', False):
                             if art_content[i]['properties'][0]['name'] in ('source', 'destination'):
+                                j+=1
                                 details_payload += 'ID: {1} IP Address {2}: {0} \n'.format(art_content[i]['value'], art_content[i]['id'], art_content[i]['properties'][0]['name'].capitalize())
-                                log.info(i)
+                                log.info("Artifacts added to ICD ticket: {0}".format(j))
                 except Exception as artifact_error:
                     log.info(artifact_error)
                     log.error("Encountered an error parsing artifacts")
@@ -80,10 +82,11 @@ class FunctionComponent(ResilientComponent):
                     field_sev = field_severity['name']
                 if not field_sev:
                     field_sev = 1  # number
-                log.info("field_sev: %s", field_sev)
+                log.info("field_severity: %s", field_sev)
                 icd_priority_lookup = [0, 4, 4, 4, 3, 2, 2, 1]
                 try:
                     icd_priority = icd_priority_lookup[field_sev]
+                    log.info("icd_priority: %s", field_sev)
                 except:
                     log.warning("You have not set a priority, icd priority will be set to min value (4)")
                     icd_priority = 4
