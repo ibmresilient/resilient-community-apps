@@ -8,7 +8,7 @@
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
 - [Function - Escalate Resilient incident to ICD dashboard](#function---res-to-icd-function)
-- [Workflow - Example: res-to-icd](#workflow---Example:-res-to-icd)
+- [Workflow - Example:res-to-icd](#workflow---Example:-res-to-icd)
 
 ## Release Notes
 <!--
@@ -130,7 +130,7 @@ There are several ways to verify the successful operation of a function.
 
 ![screenshot](./screenshots/1.png)
 
-## Example: res-to-icd
+## Example:res-to-icd
 
 ![screenshot](./screenshots/0.png)
 
