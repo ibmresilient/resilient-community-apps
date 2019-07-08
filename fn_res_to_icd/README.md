@@ -22,7 +22,7 @@
 
 ## Overview
 
-**Resilient Circuits Components for 'fn_res_to_icd**
+**Resilient Circuits Components for 'fn_res_to_icd'**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
