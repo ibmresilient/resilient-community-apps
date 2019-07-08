@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+
 """Integrations between Resilient and Jira
     It supports: transitioning a jira issue with a comment
 
@@ -17,9 +18,10 @@ See config.py for properties needed for jira access
 """
 
 import logging
+import fn_jira.lib.constants as constants
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from .jira_common import transition_issue
-from fn_jira.lib.resilient_common import validateFields, html2markdwn, parse_bool
+from .jira_common import JiraCommon
+from resilient_lib import validate_fields, MarkdownParser, str_to_bool
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'jira_transition_issue"""
@@ -27,12 +29,14 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get("jira", {})
         self.log = logging.getLogger(__name__)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get("jira", {})
 
     @function("jira_transition_issue")
@@ -47,7 +51,8 @@ class FunctionComponent(ResilientComponent):
             appDict = self._build_transitionIssue_appDict(kwargs)
 
             yield StatusMessage("starting...")
-            r = transition_issue(self.log, appDict)
+            jira_common = JiraCommon(self.opts, self.options)
+            r = jira_common.transition_issue(self.log, appDict)
 
             # Produce a FunctionResult with the return value
             yield FunctionResult({"issue": r})      # json object needed, not a string representation
@@ -62,20 +67,24 @@ class FunctionComponent(ResilientComponent):
         '''
 
         # test for required fields
-        validateFields(['jira_url', 'jira_transition_id'], kwargs)
+        validate_fields(['jira_url', 'jira_transition_id'], kwargs)
 
         appDict = {
             'user': self.options['user'],
             'password': self.options['password'],
             'url': kwargs['jira_url'],
-            'verifyFlag': parse_bool(self.options.get('verify_cert', True)),
+            'verifyFlag': str_to_bool(self.options.get('verify_cert', 'True')),
             'transitionId': kwargs['jira_transition_id'],
-            'resolution': kwargs['jira_resolution']
         }
+
+        if kwargs.get('jira_resolution'):
+            appDict['resolution'] = kwargs['jira_resolution']
 
         # optional
         if kwargs.get('jira_comment', None):
-            appDict['comment'] = html2markdwn(kwargs['jira_comment'])
+            html2markdwn = MarkdownParser(strikeout=constants.STRIKEOUT_CHAR, bold=constants.BOLD_CHAR,
+                                          underline=constants.UNDERLINE_CHAR, italic=constants.ITALIC_CHAR)
+            appDict['comment'] = html2markdwn.convert(kwargs['jira_comment'])
 
         return appDict
 
