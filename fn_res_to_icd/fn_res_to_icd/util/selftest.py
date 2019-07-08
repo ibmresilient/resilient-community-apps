@@ -18,11 +18,12 @@ def selftest_function(opts):
         icd_email = options.get("icd_email")
         icd_pass = options.get("icd_pass")
         icd_url = options.get('icd_url')
+        test_endpoint = '/oslc/ping/'
         log.info(icd_email)
         params = {"_lid": icd_email, "_lpwd": icd_pass}
         validate_fields(['icd_email','icd_pass','icd_url'], options)
         log.info('executing api call with credentials')
-        response = requests.post(icd_url, params=params, verify=False)
+        response = requests.post(icd_url + test_endpoint, params=params, verify=False)
         log.info(response.status_code)
         return {"state": "success"}
     except Exception as err:

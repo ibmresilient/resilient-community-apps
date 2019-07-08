@@ -25,8 +25,10 @@ setup(
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Components for 'fn_res_to_icd'",
-    long_description="Resilient Circuits Components for 'fn_res_to_icd'",
+    description="Manual escalation of Resilient incidents to the ICD Platform",
+    long_description="""This integration allows a SOC Analyst to escalate a Resilient incident to the ICD dashboard. 
+    If the icd_field_severity or icd_priority is not defined in app.config file, the INTERNAL PRIORITY on ICD platform (4) will be set on the escalated ticket corresponding to that Resilient incident. 
+    IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app.config file.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.140',

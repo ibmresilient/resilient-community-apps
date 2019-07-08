@@ -15,6 +15,7 @@
 # **User Guide:** fn_res_to_icd_v1.0.0
 
 ## Table of Contents
+
 - [Key Features](#key-features)
 - [Function - res_to_icd_function](#function---restoicdfunction)
 - [Rules](#rules)
@@ -22,9 +23,11 @@
 ---
 
 ## Key Features
+
 <!--
   List the Key Features of the Integration
 -->
+
 * Escalates a Resilient incident to the ICD Platform
 * If custom severity is specified, populates IP Artifacts to ICD description field
 
@@ -76,7 +79,9 @@ else:
 </details>
 
 ---
+
 ## Function - res_to_icd_function
+
 This function transfers a resilient with a custom severity (1-10) to an icd ticket with a priority (4-1)
 
  ![screenshot: fn-restoicdfunction ](./screenshots/1.png)
@@ -91,6 +96,7 @@ When the manual rule is pressed, a correpsponding ticket will be created on the 
 ![screenshot](./screenshots/3.png)
 
 ## Rules
+
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | Example: Escalate to ICD | incident | `example_res_to_icd` |
