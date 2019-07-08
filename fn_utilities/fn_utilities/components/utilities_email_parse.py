@@ -6,25 +6,14 @@
 
 import logging
 import sys
+import os
 import time
 import email
 import json
 import base64
-from fn_utilities.util.mailtojson import MailJson
+import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-
-
-def _parse_date_millis(value):
-    if value is None:
-        return int(time.time() * 1000)
-
-    ttuple = email.utils.parsedate_tz(value)
-
-    if ttuple is None:
-        return int(time.time() * 1000)
-
-    timestamp = email.utils.mktime_tz(ttuple)
-    return int(timestamp * 1000)
+from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_app_config_option, get_all_function_inputs, write_to_tmp_file, remove_dir
 
 
 class FunctionComponent(ResilientComponent):
@@ -36,41 +25,94 @@ class FunctionComponent(ResilientComponent):
         try:
             log = logging.getLogger(__name__)
 
-            # NOTE: This function only works when run on Python2
-            # (due to the way the current version of the utility function is written).
-            if sys.version_info[0] >= 3:
-                raise FunctionError("This function cannot run on Python 3")
+            # Set variables
+            parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
 
-            # Get the function parameters:
-            base64content = kwargs.get("base64content")  # text
-            if base64content is None or base64content == "":
-                raise FunctionError("No message was supplied.")
+            # Get the function inputs:
+            fn_inputs = get_all_function_inputs(kwargs, ["incident_id"])
 
-            log = logging.getLogger(__name__)
-            log.debug("base64content: %s", base64content)
+            # Instansiate ResultPayload
+            rp = ResultPayload("utilities_email_parse", **kwargs)
 
-            yield StatusMessage("Reading email message...")
-            data = base64.b64decode(base64content)
+            # If its just base64content as input, use parse_from_string
+            if fn_inputs.get("base64content"):
+                yield StatusMessage("Processing provided base64content")
+                parsed_email = mailparser.parse_from_string(base64.b64decode(fn_inputs.get("base64content")))
+                yield StatusMessage("Provided base64content processed")
 
-            # Parse the email content
-            mmj = MailJson(data.decode("utf-8"))
-            mmj.parse()
-            results = mmj.get_data()
+            else:
+                # Instansiate new Resilient API object
+                res_client = self.rest_client()
 
-            # For convenience, produce an epoch-millis timestamp
-            results["timestamp"] = _parse_date_millis(results["headers"].get("date", None))
+                # Get attachment metadata
+                attachment_metadata = get_file_attachment_metadata(
+                    res_client=res_client,
+                    incident_id=fn_inputs.get("incident_id"),
+                    artifact_id=fn_inputs.get("artifact_id"),
+                    task_id=fn_inputs.get("task_id"),
+                    attachment_id=fn_inputs.get("attachment_id")
+                )
 
-            # For convenience, find the plaintext and html body
-            results["body_text"] = None
-            results["body_html"] = None
-            for part in results.get("parts", []):
-                if part.get("content_type") == "text/plain":
-                    results["body_text"] = part.get("content")
-                if part.get("content_type") == "text/html":
-                    results["body_html"] = part.get("content")
+                # Get attachment content
+                attachment_contents = get_file_attachment(
+                    res_client=res_client,
+                    incident_id=fn_inputs.get("incident_id"),
+                    artifact_id=fn_inputs.get("artifact_id"),
+                    task_id=fn_inputs.get("task_id"),
+                    attachment_id=fn_inputs.get("attachment_id")
+                )
 
-            log.info(json.dumps(results, indent=2))
+                # Write the attachment_contents to a temp file
+                path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, tmp_file_name=attachment_metadata.get("name"))
+
+                # Get the file_extension
+                file_extension = os.path.splitext(path_tmp_file)[1]
+
+                if file_extension == ".msg":
+                    yield StatusMessage("Processing MSG File")
+                    try:
+                        parsed_email = mailparser.parse_from_file_msg(path_tmp_file)
+                        yield StatusMessage("MSG File processed")
+                    except Exception as err:
+                        reason = u"Could not parse {0} MSG File".format(attachment_metadata.get("name"))
+                        yield StatusMessage(reason)
+                        results = rp.done(success=False, content=None, reason=reason)
+                        log.error(err)
+
+                else:
+                    yield StatusMessage("Processing Raw Email File")
+                    try:
+                        parsed_email = mailparser.parse_from_file(path_tmp_file)
+                        yield StatusMessage("Raw Email File processed")
+                    except Exception as err:
+                        reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
+                        yield StatusMessage(reason)
+                        results = rp.done(success=False, content=None, reason=reason)
+                        log.error(err)
+
+            if parsed_email is not None:
+                if not parsed_email.mail:
+                    reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
+                    yield StatusMessage(reason)
+                    results = rp.done(success=False, content=None, reason=reason)
+
+                else:
+                    # Load all parsed email attributes into a Python Dict
+                    parsed_email_dict = json.loads(parsed_email.mail_json, encoding="utf-8")
+                    parsed_email_dict["plain_body"] = parsed_email.text_plain_json
+                    parsed_email_dict["html_body"] = parsed_email.text_html_json
+                    results = rp.done(True, parsed_email_dict)
+                    yield StatusMessage("Email parsed")
+
+            else:
+                reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
+                yield StatusMessage(reason)
+                results = rp.done(success=False, content=None, reason=reason)
 
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+        finally:
+            # Remove the tmp directory
+            remove_dir(path_tmp_dir)

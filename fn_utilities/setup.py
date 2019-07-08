@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_utilities',
-    version='1.0.9',
+    version='1.0.10',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -33,7 +33,8 @@ setup(
         'cryptography>=2.3',
         'pywinrm>=0.3.0',
         'json2html',
-        'lxml'
+        'lxml',
+        'mail-parser>=3.9.3'
     ],
     packages=find_packages(),
     include_package_data=True,
