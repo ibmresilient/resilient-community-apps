@@ -12,7 +12,7 @@
 `panorama_get_users_in_a_group`
 
 ### Function Output Name
-`None`
+`panorama_users`
 
 ### Pre-Processing Script
 ```python

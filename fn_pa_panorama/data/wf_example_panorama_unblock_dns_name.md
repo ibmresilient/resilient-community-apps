@@ -12,7 +12,7 @@
 `panorama_get_address_groups`
 
 ### Function Output Name
-`None`
+`panorama_address_groups`
 
 ### Pre-Processing Script
 ```python
@@ -59,7 +59,7 @@ Example Response:
   },
   "metrics": {
     "execution_time_ms": 243,
-    "host": "brians-mbp.cambridge.ibm.com",
+    "host": "",
     "package": "fn-pa-panorama",
     "package_version": "1.0.0",
     "timestamp": "2019-06-25 15:21:21",
@@ -80,7 +80,7 @@ Example Response:
 `panorama_get_addresses`
 
 ### Function Output Name
-`None`
+`panorama_address_list`
 
 ### Pre-Processing Script
 ```python

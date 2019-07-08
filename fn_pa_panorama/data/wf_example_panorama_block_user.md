@@ -12,7 +12,7 @@
 `panorama_get_users_in_a_group`
 
 ### Function Output Name
-`None`
+`panorama_users`
 
 ### Pre-Processing Script
 ```python
@@ -42,7 +42,7 @@ Example Response:
                 }
             }
         }, 
-        "user_list": [], 
+        "user_list": ["Blocked_user", "Blocked_user2"], 
         "xml_response": "<response status=\"success\" code=\"19\"><result total-count=\"1\" count=\"1\">\n  <entry name=\"Blocked_Users\" admin=\"admin\" dirtyId=\"14\" time=\"2019/06/27 07:45:48\"/>\n</result></response>"
     }, 
     "inputs": {
@@ -56,7 +56,7 @@ Example Response:
         "timestamp": "2019-06-27 10:47:52", 
         "version": "1.0"
     }, 
-    "raw": "{\"response\": {\"@status\": \"success\", \"@code\": \"19\", \"result\": {\"@total-count\": \"1\", \"@count\": \"1\", \"entry\": {\"@name\": \"Blocked_Users\", \"@admin\": \"admin\", \"@dirtyId\": \"14\", \"@time\": \"2019/06/27 07:45:48\"}}}, \"user_list\": [], \"xml_response\": \"<response status=\\\"success\\\" code=\\\"19\\\"><result total-count=\\\"1\\\" count=\\\"1\\\">\\n  <entry name=\\\"Blocked_Users\\\" admin=\\\"admin\\\" dirtyId=\\\"14\\\" time=\\\"2019/06/27 07:45:48\\\"/>\\n</result></response>\"}", 
+    "raw": "{\"response\": {\"@status\": \"success\", \"@code\": \"19\", \"result\": {\"@total-count\": \"1\", \"@count\": \"1\", \"entry\": {\"@name\": \"Blocked_Users\", \"@admin\": \"admin\", \"@dirtyId\": \"14\", \"@time\": \"2019/06/27 07:45:48\"}}}, \"user_list\": ["Blocked_user", "Blocked_user2"], \"xml_response\": \"<response status=\\\"success\\\" code=\\\"19\\\"><result total-count=\\\"1\\\" count=\\\"1\\\">\\n  <entry name=\\\"Blocked_Users\\\" admin=\\\"admin\\\" dirtyId=\\\"14\\\" time=\\\"2019/06/27 07:45:48\\\"/>\\n</result></response>\"}", 
     "reason": null, 
     "success": true, 
     "version": "1.0"

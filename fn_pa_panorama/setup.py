@@ -14,7 +14,7 @@ setup(
     long_description="Contains Functions to get and edit addresses groups, get and create addresses, and get and edit users in a group within Panorama.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>32.0.0.140',
+        'resilient-lib>=32.0.0.186',
         'xmltodict>=0.12.0'
     ],
     packages=find_packages(),

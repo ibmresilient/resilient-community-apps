@@ -12,7 +12,7 @@
 `panorama_get_addresses`
 
 ### Function Output Name
-`None`
+`panorama_address_list`
 
 ### Pre-Processing Script
 ```python
@@ -86,7 +86,7 @@ Example response:
 `panorama_get_address_groups`
 
 ### Function Output Name
-`None`
+`panorama_address_groups`
 
 ### Pre-Processing Script
 ```python
