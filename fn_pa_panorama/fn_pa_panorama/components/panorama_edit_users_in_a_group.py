@@ -44,8 +44,8 @@ class FunctionComponent(ResilientComponent):
             user_group_xml = self.get_textarea_param(kwargs.get("panorama_user_group_xml"))  # textarea
 
             # Log inputs
-            log.info("panorama_user_group_xpath: {}".format(user_group_xpath))
-            log.info("panorama_user_group_xml: {}".format(user_group_xml))
+            log.info(u"panorama_user_group_xpath: {}".format(user_group_xpath))
+            log.info(u"panorama_user_group_xml: {}".format(user_group_xml))
 
             panorama_util = PanoramaClient(self.opts, None)
             xml_response = panorama_util.edit_users_in_a_group(user_group_xpath, user_group_xml)
