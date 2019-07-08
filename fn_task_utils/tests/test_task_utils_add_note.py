@@ -71,7 +71,7 @@ class TestTaskUtilsAddNote:
 
         newest_task_note = results["content"]["task_note"]
         assert newest_task_note
-        assert task_utils_note_body in newest_task_note["text"]["content"]
+        assert task_utils_note_body in newest_task_note[len(newest_task_note)-1]["text"]["content"]
 
     @pytest.mark.parametrize("incident_id, task_id, task_utils_note_type, task_utils_note_body", [
         (2096, 123, 'text', "Η Θ Ι Κ Λ Μ Ν Ξ Ο Π Ρ"),
@@ -90,4 +90,4 @@ class TestTaskUtilsAddNote:
         newest_task_note = results["content"]["task_note"]
 
         assert newest_task_note
-        assert task_utils_note_body in newest_task_note["text"]["content"]
+        assert task_utils_note_body in newest_task_note[len(newest_task_note)-1]["text"]["content"]

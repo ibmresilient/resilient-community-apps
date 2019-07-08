@@ -1,6 +1,14 @@
 language: python
-python: 2.6
+python: 2.7
 
+os: linux
+# Add a cache for pip to reduce the download time of the most common packages 
+cache:
+- pip
+directories:
+  - $HOME/.cache/pip
+
+# Enviroment variables such as security tokens 
 env:
   global:
   - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
@@ -10,49 +18,67 @@ env:
   - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
 
 matrix:
-  fast_finish: true
-  exclude:
-    # This is to exclude the default build job
-    - python: 2.6
-
   include:
-  - python: 2.7
+  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
+  # ==========
+  # Below jobs are used to run tests against the most recently modified integration. 
+  # We determine the most recent one using ls. 
+  - name: "Python 3.6 Build and Run Tests"
+    if: branch != master AND type=push 
+    python: 2.7
+    name: "Python 2.7 Build and Run Tests"
     env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient PS - Test"
-  - python: 3.4
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 push test" && .scripts/build_most_recent_package.sh && .scripts/run_most_recent_tests.sh 
+ 
+  - name: "Python 3.6 Build and Run Tests"
+    if: branch != master AND type=push 
+    python: 3.6
     env:
-    - TOXENV=py34 TEST_RESILIENT_ORG="Resilient PS - Test2"
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test" 
+    script:
+      - echo "3.6 push test" && .scripts/build_most_recent_package.sh && .scripts/run_most_recent_tests.sh 
 
+
+before_install:
+  - echo "About to install"
+# Install all the packages we might need for our jobs. Most of these will be cached to make further builds more efficient.
 install:
   - pip install --upgrade pip
   - pip install --upgrade setuptools
   - pip install tox
+  - pip install pylint
   - pip install sphinx
+  - pip install pytest==4.0.1 # Install 4.0.1 to avoid namespace issue 
+  - pip install resilient
+  - pip install resilient-circuits
+  - pip install resilient-lib
+  - pip install pytest-resilient-circuits
 
-before_script:
-  - git clone -b master --single-branch git@github.ibm.com:Resilient/resilient-python-api.git --depth 1
-  - (cd resilient-python-api && ./buildall.sh 999);
-  - mkdir pkgs
-  - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
-
+# The script that will run for all jobs which don't explicitly set a `script` param
 script:
   - .scripts/build_packages.sh && .scripts/run_tests.sh
 
+# Show which packages will be deployed to github releases
 after_script:
   - echo "Packages To Deploy"
   - ls -l .scripts/*.tar.gz
 
-deploy:
-  provider: releases
-  api_key: "$GITHUB_OAUTH_TOKEN"
-  file_glob: true
-  file: .scripts/rc-*.tar.gz
-  skip_cleanup: true
-  on:
-    tags: true
-    python: 2.7
+# Deploy step to be run after the jobs, commented out as the internal releases are handled differently now.
+# deploy:
+#   provider: releases
+#   api_key: "$GITHUB_OAUTH_TOKEN"
+#   file_glob: true
+#   file: .scripts/rc-*.tar.gz
+#   skip_cleanup: true
+#   on:
+#     tags: true
+#     python: 2.7
 
-#notifications:
+notifications:
+  # Turn off email notifications 
+  email: false
 #  slack:
 #    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
 #    on_success: change
