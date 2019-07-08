@@ -26,8 +26,6 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_res_to_icd'
-
 ---
 
 ## Requirements
