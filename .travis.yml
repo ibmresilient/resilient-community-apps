@@ -3,10 +3,10 @@ python: 2.7
 
 os: linux
 # Add a cache for pip to reduce the download time of the most common packages 
-cache:
-- pip
-directories:
-  - $HOME/.cache/pip
+# cache:
+# - pip
+# directories:
+#   - $HOME/.cache/pip
 
 # Enviroment variables such as security tokens 
 env:
@@ -23,10 +23,9 @@ matrix:
   # ==========
   # Below jobs are used to run tests against the most recently modified integration. 
   # We determine the most recent one using ls. 
-  - name: "Python 3.6 Build and Run Tests"
+  - name: "Python 2.7 Build and Run Tests"
     if: branch != master AND type=push 
     python: 2.7
-    name: "Python 2.7 Build and Run Tests"
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
@@ -47,16 +46,15 @@ matrix:
     name: "Py27 Master Build and Run tests"
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    
     script:
-    - echo "2.7 push test" && .scripts/build_packages.sh && .scripts/run_tests.sh 
+    - echo "2.7 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh 
   - if: branch == master AND type != pull_request
     python: 3.6
     name: "Py36 Master Build and Run tests"
     env:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
-    - echo "3.6 push test" && .scripts/build_packages.sh && .scripts/run_tests.sh 
+    - echo "3.6 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh 
 
 
 before_install:
@@ -67,11 +65,9 @@ install:
   - pip install --upgrade setuptools
   - pip install tox
   - pip install pylint
-  - pip install sphinx
   - pip install pytest==4.0.1 # Install 4.0.1 to avoid namespace issue 
   - pip install resilient
   - pip install resilient-circuits
-  - pip install resilient-lib
   - pip install pytest-resilient-circuits
 
 # The script that will run for all jobs which don't explicitly set a `script` param
@@ -82,6 +78,7 @@ script:
 after_script:
   - echo "Packages To Deploy"
   - ls -l .scripts/*.tar.gz
+  - ls -l .scripts/*.zip
 
 # Deploy step to be run after the jobs, commented out as the internal releases are handled differently now.
 # deploy:

@@ -4,19 +4,8 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-
-while read line
-do
-    # check out a specific directory from the master branch
-    setup_files=(`find ./$line -type f -name 'setup.py'`);
-    dist_dir=$( cd $(dirname $0) ; pwd -P )
-
-# A list of the integration packages which has known good tests and can be included in the build. 
-# Eventually all integrations should be in the build and this should be removed 
-# It is used at the moment to ensure all packages built are ones with working tests.
-done <<EOM
-fn_task_utils
-EOM
+setup_files=(`find ./fn_* -type f -name 'setup.py'`);
+dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 echo "Building these packages:";
 printf '  %s\n' "${setup_files[@]}";
@@ -26,7 +15,7 @@ do
     # Run the Build
     pkg_dir=$(dirname "${setup}")
     echo "Running build from $pkg_dir";
-    (cd $pkg_dir && python setup.py -q sdist --dist-dir $dist_dir);
+    (cd $pkg_dir && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
 done;
 
 # Build content packages with resilient-res-package.sh
@@ -35,7 +24,7 @@ done;
 # Most likely you only need to zip some files folders. Follow the example
 # in the ../res_qraw_mitre folder.
 
-build_scripts=(`find .. -type f -name 'resilient-res-package.sh'`);
+build_scripts=(`find ./ -type f -name 'resilient-res-package.sh'`);
 
 echo "Building these packages:";
 printf '  %s\n' "${build_scripts[@]}";

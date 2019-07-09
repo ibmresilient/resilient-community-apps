@@ -1,18 +1,15 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 
-# Run tests for any package with a tox.ini file
+# Map the listed integrations into a list 
+mapfile -t INTEGRATIONS < .scripts/integration_list.txt
 
-while read line
-do
-    # check out a specific directory from the master branch
-    toxfiles=(`find ./$line -type f -name 'tox.ini'`);
+for INTEGRATION in ${INTEGRATIONS[@]};
+do  
+    echo ">>> Searching for ${INTEGRATION} tox.ini";
+    # For each listed integration until EOM gather the setup.py paths
+    toxfiles=(`find ./$INTEGRATION -type f -name 'tox.ini'`);
+done
 
-# A list of the integration packages which has known good tests and can be included in the build. 
-# Eventually all integrations should be in the build and this should be removed 
-# It is used at the moment to ensure all packages built are ones with working tests.
-done <<EOM
-fn_task_utils
-EOM
 
 status=0;
 for toxfile in ${toxfiles[@]};
@@ -22,7 +19,7 @@ do
     #echo "Supported Environments: $valid_envs" 
     if [[ "$valid_envs" =~ "$TOXENV" ]]
     then
-        tox -c $toxfile -- tests;
+        tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'TestOrg' tests;
         last_status=$?;
         if [ $last_status -ne 0 ]; then
             printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
