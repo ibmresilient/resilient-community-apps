@@ -2,41 +2,17 @@
 
 # Run tests for any package with a tox.ini file
 
-# Some package must be run first b/c others depend on them, list them here
-must_run_first=( rc-query-runner rc-webserver);
-match=$( IFS='|'; echo "${must_run_first[*]}" );
-
-
-# Some package must be run second b/c others depend on them and they depend on ones run first, list them here
-must_run_second=( rc-cts/ );
-match_second=$( IFS='|'; echo "${must_run_second[*]}" );
-
-
-echo "$match";
-toxfiles=(`find .. -type f -name 'tox.ini'`);
-first_runs=();
-second_runs=();
-third_runs=();
-for i in ${!toxfiles[@]};
+while read line
 do
-    #echo "look for " ${toxfiles[$i]} " in " $match;
-    if [[ ${toxfiles[$i]} =~ $match ]]
-    then
-      first_runs+=(${toxfiles[$i]});
-    elif [[ ${toxfiles[$i]} =~ $match_second ]]
-    then
-      second_runs+=(${toxfiles[$i]});
-    else
-      third_runs+=(${toxfiles[$i]});
-    fi
-done;
-echo "Running these first:";
-printf '  %s\n' "${first_runs[@]}";
-echo "Running these second:";
-printf '  %s\n' "${second_runs[@]}";
-echo "Running these third:";
-printf '  %s\n' "${third_runs[@]}";
-toxfiles=("${first_runs[@]}" "${second_runs[@]}" "${third_runs[@]}");
+    # check out a specific directory from the master branch
+    toxfiles=(`find ./$line -type f -name 'tox.ini'`);
+
+# A list of the integration packages which has known good tests and can be included in the build. 
+# Eventually all integrations should be in the build and this should be removed 
+# It is used at the moment to ensure all packages built are ones with working tests.
+done <<EOM
+fn_task_utils
+EOM
 
 status=0;
 for toxfile in ${toxfiles[@]};

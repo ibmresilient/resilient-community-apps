@@ -5,8 +5,18 @@
 # python. It searches for all folders that contains setup.py
 #
 
-setup_files=(`find .. -type f -name 'setup.py'`);
-dist_dir=$( cd $(dirname $0) ; pwd -P )
+while read line
+do
+    # check out a specific directory from the master branch
+    setup_files=(`find ./$line -type f -name 'setup.py'`);
+    dist_dir=$( cd $(dirname $0) ; pwd -P )
+
+# A list of the integration packages which has known good tests and can be included in the build. 
+# Eventually all integrations should be in the build and this should be removed 
+# It is used at the moment to ensure all packages built are ones with working tests.
+done <<EOM
+fn_task_utils
+EOM
 
 echo "Building these packages:";
 printf '  %s\n' "${setup_files[@]}";

@@ -39,6 +39,24 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test" 
     script:
       - echo "3.6 push test" && .scripts/build_most_recent_package.sh && .scripts/run_most_recent_tests.sh 
+  # Jobs below this line are reserved for master branch 
+  # Master branch is where all the integrations should be tested, its okay if it takes a while 
+  # As we have the push jobs above to handle individual commits
+  - if: branch == master AND type != pull_request
+    python: 2.7
+    name: "Py27 Master Build and Run tests"
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    
+    script:
+    - echo "2.7 push test" && .scripts/build_packages.sh && .scripts/run_tests.sh 
+  - if: branch == master AND type != pull_request
+    python: 3.6
+    name: "Py36 Master Build and Run tests"
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 push test" && .scripts/build_packages.sh && .scripts/run_tests.sh 
 
 
 before_install:
