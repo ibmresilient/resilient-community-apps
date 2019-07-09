@@ -13,7 +13,7 @@ import json
 import base64
 import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_app_config_option, get_all_function_inputs, write_to_tmp_file, remove_dir
+from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_all_function_inputs, write_to_tmp_file, remove_dir
 
 
 class FunctionComponent(ResilientComponent):
