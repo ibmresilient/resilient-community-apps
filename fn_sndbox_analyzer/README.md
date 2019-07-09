@@ -95,7 +95,7 @@ def font_color(score):
 def sample_score(score):
     return round(score * 100) if score else 0
 
-if not results.analysis_report_status:
+if not results.sndbox_analysis_report_status:
     noteText = u"""Successful submit <b>{}</b> to SNDBOX Platform. However it will take time to generate an analysis report, please submit it again later. <br>""".format(
         artifact.value)
 
