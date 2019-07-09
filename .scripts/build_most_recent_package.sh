@@ -4,16 +4,17 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-most_recent_package=$(ls -td ../fn_* | head -1)
-echo "Most Recent package shows as : ${most_recent_package}/setup.py";
+most_recent_package=$(ls -td ./fn_* | head -1)
+setup_file="${most_recent_package}/setup.py"
+echo "Most Recent package shows as : $setup_file";
 
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 echo "Building this package:";
-printf '  %s\n' "${most_recent_package}/setup.py";
+printf '  %s\n' "$setup_file";
 echo "Storing packages to: $dist_dir";
 
 # Run the Build
-pkg_dir=$(dirname "${most_recent_package}/setup.py")
+pkg_dir=$(dirname "$setup_file")
 echo "Running build from $pkg_dir";
 (cd $pkg_dir && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
