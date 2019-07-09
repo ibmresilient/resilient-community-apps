@@ -90,7 +90,7 @@ if artifact.value not in users_list:
   users_list.append(artifact.value)
 
 # Build xml which the funciton will send to Panorama
-panorama_xml = '''
+panorama_xml = u'''
 <entry name="{}">
     <user>'''.format(group_name)
 

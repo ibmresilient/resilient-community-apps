@@ -96,7 +96,7 @@ if len(users_list) == 0:
 
 # Multiple members, build xml which the funciton will send to Panorama
 else:
-  panorama_xml = '''
+  panorama_xml = u'''
   <entry name="{}">
       <user>'''.format(group_name)
   

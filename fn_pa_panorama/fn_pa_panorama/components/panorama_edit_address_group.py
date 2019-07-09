@@ -31,7 +31,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Panorama edit address group edits an address group,
         ie: add or remove ip addresses from the group"""
         try:
-            yield StatusMessage("Starting...")
+            yield StatusMessage("Editing address group...")
             rp = ResultPayload("fn_pa_panorama", **kwargs)
 
             validate_fields(["panorama_name_parameter", "panorama_request_body"], kwargs)
@@ -43,7 +43,6 @@ class FunctionComponent(ResilientComponent):
             body = self.get_textarea_param(kwargs.get("panorama_request_body"))  # textarea
 
             # Log inputs
-            import json
             if location is None:
                 raise ValueError("panorama_location needs to be set.")
             log.info("panorama_location: {}".format(location))

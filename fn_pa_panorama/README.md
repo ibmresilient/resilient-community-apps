@@ -51,7 +51,7 @@ Contains Functions to get and edit addresses groups, get and create addresses, a
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * `resilient-lib>32.0.140`
-* Pan-OS >= `9.0`
+* Panorama `9.0`
 
 ---
 ## Installation
