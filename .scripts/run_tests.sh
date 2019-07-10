@@ -19,7 +19,7 @@ do
     #echo "Supported Environments: $valid_envs" 
     if [[ "$valid_envs" =~ "$TOXENV" ]]
     then
-        tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'TestOrg' tests;
+        tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'TestOrg' -m "not livetest" tests;
         last_status=$?;
         if [ $last_status -ne 0 ]; then
             printf 'FAILURE %s: [%d]\n' $toxfile $last_status;

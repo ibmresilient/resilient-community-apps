@@ -12,7 +12,7 @@ echo "Environments supported by toxfile: $toxfile $valid_envs"
 if [[ "$valid_envs" =~ "$TOXENV" ]]
 then
     # Run tox with dummy details which will serve as the user when running tests 
-    tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'TestOrg' tests;
+    tox -c $toxfile -- --resilient_email 'integrations@example.org' --resilient_password 'supersecret' --resilient_host 'example.com' --resilient_org 'TestOrg' -m "not livetest" tests;
     last_status=$?;
     if [ $last_status -ne 0 ]; then
         printf 'FAILURE %s: [%d]\n' $toxfile $last_status;
