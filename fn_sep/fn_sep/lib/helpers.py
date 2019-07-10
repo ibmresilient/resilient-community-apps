@@ -14,6 +14,13 @@ LOG = logging.getLogger(__name__)
 CONFIG_DATA_SECTION = "fn_sep"
 EP_ENGINE_STATUS_FIELDS = ["apOnOff", "avEngineOnOff", "cidsBrowserFfOnOff", "cidsBrowserIeOnOff", "cidsDrvOnOff",
                            "daOnOff", "elamOnOff", "firewallOnOff", "pepOnOff", "ptpOnOff", "tamperOnOff"]
+EP_ENGINE_STATUSES = {
+    0: "Disabled",
+    1: "Enabled",
+    2: "Not installed",
+    4: "Malfunctioning",
+    127: "Client not reporting"
+}
 READABLE_TIME_FIELDS = ["readableLastScanTime", "readableLastVirusTime", "readableLastUpdateTime"]
 EP_PROP_FIELDS = ["onlineStatus", "timediffLastUpdateTime", "quarantineDesc"]
 HB_DEF = 900  # Default heart-beat in seconds (15 mins)
@@ -132,7 +139,8 @@ def get_engine_status(eps, non_compliant_endpoints):
         ep_name = eps[i]["computerName"]
         status = 0
         for sf in EP_ENGINE_STATUS_FIELDS:
-            if not eps[i][sf]:
+            # If engine is installed and not enabled.
+            if not eps[i][sf] != 2 and not eps[i][sf]:
                 if not ep_name in non_compliant_endpoints:
                     non_compliant_endpoints.append(ep_name)
                     status = 1
@@ -170,11 +178,10 @@ def add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results):
             for f in READABLE_TIME_FIELDS:
                 ep[f] = eps[i][f]
             for f in EP_ENGINE_STATUS_FIELDS:
-
-                if eps[i][f]:
-                    ep[f] = "On"
+                if eps[i][f] in EP_ENGINE_STATUSES:
+                    ep[f] = EP_ENGINE_STATUSES[eps[i][f]]
                 else:
-                    ep[f] = "Off"
+                    ep[f] = "Unexpected status"
         if ep:
             results["eps"].append(ep)
 
