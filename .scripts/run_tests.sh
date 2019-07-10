@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/bin/bash
 
 # Map the listed integrations into a list 
 mapfile -t INTEGRATIONS < .scripts/integration_list.txt

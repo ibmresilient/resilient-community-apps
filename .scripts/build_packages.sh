@@ -4,7 +4,7 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-setup_files=(`find ./fn_* -type f -name 'setup.py'`);
+setup_files=(`find ./* -maxdepth 1 -type f -name 'setup.py'`);
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 echo "Building these packages:";
