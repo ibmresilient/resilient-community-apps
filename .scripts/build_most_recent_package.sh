@@ -4,7 +4,9 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-most_recent_package=$(ls -td ./fn_* | head -1)
+echo "Running this command : $setup_file";
+
+most_recent_package=$(ls -I="*."{zip,gz} -td ./* | head -1)
 setup_file="${most_recent_package}/setup.py"
 echo "Most Recent package shows as : $setup_file";
 
