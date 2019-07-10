@@ -100,7 +100,7 @@ class PanoramaClient:
         uri = "{}/api/".format(self.host)
         response = self.rc.execute_call_v2("POST", uri, params=params, verify=self.verify)
         response.raise_for_status()
-        return response.content
+        return response.text
 
     def edit_users_in_a_group(self, xpath, xml_object):
         """Edits list of users in a group, uses custom POST method due to this being a SOAP based call.
@@ -116,4 +116,4 @@ class PanoramaClient:
         uri = "{}/api/?".format(self.host)
         response = self.rc.execute_call_v2("POST", uri, params=params, verify=self.verify)
         response.raise_for_status()
-        return response.content
+        return response.text
