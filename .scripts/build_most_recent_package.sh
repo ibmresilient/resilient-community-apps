@@ -5,8 +5,9 @@
 # python. It searches for all folders that contains setup.py
 #
 #echo "Running this command : ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1";
+most_recent_package=$(ls -td ./* | head -1)
+
 echo "$(ls -tld `find ./* -maxdepth 1 -type f -name 'setup.py'`)"
-most_recent_package=$(ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1)
 
 echo "Most Recent package shows as : $most_recent_package";
 

@@ -3,7 +3,7 @@ echo "`realpath .scripts/integration_list.txt`"
 
 echo "`pwd .scripts/integration_list.txt`"
 # Map the listed integrations into a list 
-mapfile -t INTEGRATIONS < .scripts/integration_list.txt
+mapfile -t INTEGRATIONS < /home/travis/build/Resilient/resilient-community-apps/.scripts/integration_list.txt
 
 for INTEGRATION in ${INTEGRATIONS[@]};
 do  
