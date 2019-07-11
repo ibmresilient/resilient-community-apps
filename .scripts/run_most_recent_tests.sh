@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run tests for the most recently modified package
-most_recent_package=$(ls -I="*."{zip,gz} -I="./sc*" -I="./workshop*" -td ./* | head -1)
+most_recent_package=$(ls -I="*."{zip,gz} -I="sc*" -I="workshop*" -td ./* | head -1)
 echo "Most Recent package shows as : ${most_recent_package}";
 toxfile="${most_recent_package}/tox.ini"
 
