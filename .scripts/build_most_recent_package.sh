@@ -4,13 +4,13 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-echo "Running this command : ls -I="*."{zip,gz} -td ./* | head -1";
+echo "Running this command : ls -I="*."{zip,gz} -I="./sc*" -td ./* | head -1";
 
-most_recent_package=$(ls -I="*."{zip,gz} -td ./* | head -1)
+most_recent_package=$(ls -I="*."{zip,gz} -I="./sc*" -td ./* | head -1)
 
 echo "Most Recent package shows as : $most_recent_package";
 
-setup_file="./fn_task_utils/setup.py"
+setup_file="${most_recent_package}/setup.py"
 
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 

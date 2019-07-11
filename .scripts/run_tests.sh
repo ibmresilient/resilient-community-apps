@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Map the listed integrations into a list 
-mapfile -t INTEGRATIONS < .scripts/integration_list.txt
+mapfile -t INTEGRATIONS < integration_list.txt
 
 for INTEGRATION in ${INTEGRATIONS[@]};
 do  
