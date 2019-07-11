@@ -4,15 +4,15 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-echo "Running this command : ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1";
-
+#echo "Running this command : ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1";
+echo "$(ls -tld `find ./* -maxdepth 1 -type f -name 'setup.py'`)"
 most_recent_package=$(ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1)
 
 echo "Most Recent package shows as : $most_recent_package";
 
-setup_file="${most_recent_package}/setup.py"
-
-dist_dir=$( cd $(dirname $0) ; pwd -P )
+setup_file="${most_recent_package}"
+echo "${setup_file}"
+dist_dir=$( cd $(dirname $most_recent_package) ; pwd -P )
 
 echo "Building this package:";
 printf '  %s\n' "$setup_file";
