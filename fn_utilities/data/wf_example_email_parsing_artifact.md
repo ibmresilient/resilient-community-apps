@@ -12,7 +12,7 @@
 `utilities_email_parse`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_utilities`
@@ -40,9 +40,7 @@ else:
   
   # Get Email Subject
   eml_subject = email.get("subject", "BLANK SUBJECT LINE")
-  note_text = u"""Subject: {0}""".format(unicode(email.get("subject")))
-  incident.addNote(helper.createRichText(note_text))
-  
+
   #########################################
   # Add Artifacts for Email Recipient: to #
   #########################################
