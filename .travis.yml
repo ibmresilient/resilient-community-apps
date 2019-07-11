@@ -1,6 +1,7 @@
 language: python
 python: 2.7
-
+git:
+  depth: false
 os: linux
 # Add a cache for pip to reduce the download time of the most common packages 
 # cache:
