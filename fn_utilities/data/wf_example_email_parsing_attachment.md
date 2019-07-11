@@ -12,20 +12,23 @@
 `utilities_email_parse`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_utilities`
 
 ### Pre-Processing Script
 ```python
-# Required inputs are: the incident id and attachment id
+# Define incident_id and attachment_id
 inputs.incident_id = incident.id
 inputs.attachment_id = attachment.id
 
 # If this is a "task attachment" then we will additionally have a task-id
 if task is not None:
   inputs.task_id = task.id
+
+# Setting this to True will add any found attachments as an Email Attachment Artifact
+inputs.utilities_parse_email_attachments = True
 ```
 
 ### Post-Processing Script
