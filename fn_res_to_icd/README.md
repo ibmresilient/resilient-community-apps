@@ -1,12 +1,18 @@
 # fn-res-to-icd: ICD Ticket Escalation from IBM Resilient
 
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Uninstall](#uninstall)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
+- [fn-res-to-icd: ICD Ticket Escalation from IBM Resilient](#fn-res-to-icd-ICD-Ticket-Escalation-from-IBM-Resilient)
+  - [Release Notes](#Release-Notes)
+    - [v1.0.0](#v100)
+  - [Overview](#Overview)
+  - [Requirements](#Requirements)
+  - [Installation](#Installation)
+  - [Uninstall](#Uninstall)
+  - [Troubleshooting](#Troubleshooting)
+    - [Resilient Action Status](#Resilient-Action-Status)
+    - [Resilient Scripting Log](#Resilient-Scripting-Log)
+    - [Resilient Logs](#Resilient-Logs)
+    - [Resilient-Circuits](#Resilient-Circuits)
+  - [Support](#Support)
 
 ---
 
@@ -27,7 +33,7 @@
  ![screenshot: main](./doc/screenshots/main.png)
 
 This integration allows a SOC Analyst to escalate a Resilient incident to the ICD dashboard. 
-If the icd_field_severity or icd_priority is not defined in app.config file, the INTERNAL PRIORITY on ICD platform (4) will be set on the escalated ticket corresponding to that Resilient incident. 
+If the icd_priority parameter is not defined in app.config file, the INTERNAL PRIORITY on the ICD platform (4) will be set on the escalated ticket corresponding to that Resilient incident.
 IP Sources or Destination Artifacts will be automatically added to the icd ticket if the icd_field_severity is not None (or a negative number) in the app.config file.
 
 ---
@@ -74,7 +80,7 @@ IP Sources or Destination Artifacts will be automatically added to the icd ticke
   | **icd_email** | Yes | `<YOUR ICD EMAIL>` | *email for ICD Platform* |
   | **icd_pass** | Yes | `<YOUR ICD PASSWORD>` | *password for ICD Platform* |
   | **icd_field_severity** | Yes | `custom_severity` | *custom UI severity value* |
-  | **icd_priority** | Yes | `<1-4>` | *ICD Platform ticket priority* |
+  | **icd_priority** | No | `<1-4>` | *ICD Platform ticket priority* |
   | **icd_url** | Yes | `https://icdaas.sccd.ibmserviceengage.com/maximo_cbs-dev2` | *ICD Platform URL* |
 
 A custom field can be specified (qradar_severity in this case) in the UI that can correspond to the icd_severity_value:

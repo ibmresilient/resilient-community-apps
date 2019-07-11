@@ -16,9 +16,12 @@
 
 ## Table of Contents
 
-- [Key Features](#key-features)
-- [Function - res_to_icd_function](#function---restoicdfunction)
-- [Rules](#rules)
+- [**User Guide:** fn_res_to_icd_v1.0.0](#User-Guide-fnrestoicdv100)
+  - [Table of Contents](#Table-of-Contents)
+  - [Key Features](#Key-Features)
+  - [Function - res_to_icd_function](#Function---restoicdfunction)
+  - [Rules](#Rules)
+  - [Inform Resilient Users](#Inform-Resilient-Users)
 
 ---
 
@@ -82,13 +85,13 @@ else:
 
 ## Function - res_to_icd_function
 
-This function transfers a resilient with a custom severity (1-10) to an icd ticket with a priority (4-1)
+This function transfers a Resilient with a custom severity (1-10) to an ICD ticket with a priority (4-1)
 
  ![screenshot: fn-restoicdfunction ](./screenshots/1.png)
 
 ![screenshot](./screenshots/main.png)
 
-An incident on the resilient can be escalated to the icd desk by running the "Escalate to ICD" manual rule. An example incident is displayed below:
+An incident on the Resilient platform can be escalated to the ICD platform by running the "Escalate to ICD" manual rule. An example incident is displayed below:
 
 ![screenshot](./screenshots/2.png)
 
