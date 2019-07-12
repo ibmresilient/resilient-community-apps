@@ -6,11 +6,12 @@
 
 import logging
 import os
+import shutil
 import json
 import base64
 import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_all_function_inputs, write_to_tmp_file, remove_dir
+from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_all_function_inputs, write_to_tmp_file
 
 EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
@@ -138,10 +139,13 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(reason)
                 results = rp.done(success=False, content=None, reason=reason)
 
+            log.info("Done")
+
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
 
         finally:
             # Remove the tmp directory
-            remove_dir(path_tmp_dir)
+            if path_tmp_dir and os.path.isdir(path_tmp_dir):
+                shutil.rmtree(path_tmp_dir)
