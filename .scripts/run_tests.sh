@@ -6,6 +6,19 @@ echo "`ls .scripts`"
 # Map the listed integrations into a list 
 mapfile -t INTEGRATIONS < .scripts/integration_list.txt
 
+while read line
+do
+    echo ">>> Searching for ${line} tox.ini";
+    # check out a specific directory from the master branch
+    toxfiles=(`find ./$line -maxdepth 1 -type f -name 'tox.ini'`);
+
+# A list of the integration packages which has known good tests and can be included in the build. 
+# Eventually all integrations should be in the build and this should be removed 
+# It is used at the moment to ensure all packages built are ones with working tests.
+done <<EOM
+fn_task_utils
+EOM
+
 for INTEGRATION in ${INTEGRATIONS[@]};
 do  
     echo ">>> Searching for ${INTEGRATION} tox.ini";
