@@ -11,7 +11,7 @@ import json
 import base64
 import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, get_file_attachment_metadata, get_file_attachment, get_all_function_inputs, write_to_tmp_file
+from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
 
 EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
             parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
 
             # Get the function inputs:
-            fn_inputs = get_all_function_inputs(kwargs, ["incident_id"])
+            fn_inputs = validate_fields(["incident_id"], kwargs)
 
             # Instansiate ResultPayload
             rp = ResultPayload("utilities_email_parse", **kwargs)
