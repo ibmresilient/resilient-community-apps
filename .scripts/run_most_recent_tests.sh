@@ -3,7 +3,7 @@
 # Run tests for the most recently modified package
 most_recent_package=$(ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1)
 echo "Most Recent package shows as : ${most_recent_package}";
-toxfile="${most_recent_package}/tox.ini"
+toxfile="$(dirname $most_recent_package)/tox.ini"
 
 # Run the tests if current TOXENV is applicable for this tox.ini file
 valid_envs=`env -u TOXENV tox -c $toxfile --listenvs;`
