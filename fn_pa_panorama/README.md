@@ -155,4 +155,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_pa_panorama | 1.0.0 | IBM Resilient | https://github.com/ibmresilient/resilient-community-apps |
+| fn\_pa\_panorama | 1.0.0 | IBM Resilient | https://github.com/ibmresilient/resilient-community-apps |
