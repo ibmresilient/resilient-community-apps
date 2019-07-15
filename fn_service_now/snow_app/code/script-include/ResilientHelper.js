@@ -22,7 +22,25 @@ ResilientHelper.prototype = {
 		
 		return {"incidentId": incidentId, "taskId": taskId};
 	},
-	
+
+	getHexColor: function(colorName){
+		var colors = {
+			"green": "#00b33c",
+			"orange": "#ff9900",
+			"yellow": "#e6e600",
+			"red": "#e60000"
+		};
+
+		try{
+			return colors[colorName.toLowerCase()];
+		}
+		catch(errMsg){
+			gs.debug("Failed to get Hex Value for "+colorName+". Defaulting to Green: #00b33c\n"+errMsg);
+			return colors["green"];
+		}
+
+	},
+
 	create: function(record, snRecordId, caseName, options){
 		var caseData = {};
 		var snLink, res, res_reference_id, res_reference_type, res_reference_link, returnValue, errMsg = null;
@@ -148,12 +166,6 @@ ResilientHelper.prototype = {
 	},
 
 	addNewRowToRESDatatable: function(record_name, res_type, res_reference_id, sn_ref_id, res_link, sn_link){
-		var colors = {
-			"green": "#00b33c",
-			"orange": "#ff9900",
-			"yellow": "#e6e600",
-			"red": "#e60000"
-		};
 
 		try{
 				var ids = this.parseRefId(res_reference_id);
@@ -162,8 +174,8 @@ ResilientHelper.prototype = {
 
 				var links = '<a target="_blank" href="'+res_link+'">RES</a> <a href="'+sn_link+'">SN</a>';
 
-				var resTicketStateRichText = '<div style="color:' + colors["green"] +'">Active</div>';
-				var snTicketStateRichText = '<div style="color:' + colors["green"] +'">Sent to Resilient</div>';
+				var resTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Active</div>';
+				var snTicketStateRichText = '<div style="color:' + this.getHexColor("green") +'">Sent to Resilient</div>';
 
 				var cells = [
 					["sn_records_dt_time", now],
@@ -186,23 +198,15 @@ ResilientHelper.prototype = {
 				this.res_api.addDatatableRow(ids.incidentId, formattedCells);
 			}
 		catch(e){
-			var errMsg = "Failed to send add row in Resilient Datatable for " + res_reference_id;
+			var errMsg = "Failed to add a new row to Resilient Data Table for " + res_reference_id;
 			gs.error(errMsg);
 			throw e;
 		}
 	},
 	
 	updateStateInResilient: function(res_reference_id, snTicketState, snTicketStateColor){
-		var colors = {
-			"green": "#00b33c",
-			"orange": "#ff9900",
-			"yellow": "#e6e600",
-			"red": "#e60000"
-		};
 
-		if (!snTicketStateColor){
-			snTicketStateColor = "green";
-		}
+		var textColor = this.getHexColor(snTicketStateColor);
 
 		try{
 			var ids = this.parseRefId(res_reference_id);
@@ -227,7 +231,7 @@ ResilientHelper.prototype = {
 				var gdt = new GlideDateTime();
 				var now = gdt.getNumericValue();
 
-				var snTicketStateRichText = '<div style="color:' + colors[snTicketStateColor] +'">' + snTicketState + '</div>';
+				var snTicketStateRichText = '<div style="color:' + textColor +'">' + snTicketState + '</div>';
 
 				var cells = [
 					["sn_records_dt_time", now],
