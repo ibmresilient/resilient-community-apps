@@ -23,8 +23,13 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    description="Resilient Circuits Utility Functions",
-    long_description="Resilient Circuits Utility Functions",
+    url="http://ibm.biz/resilientcommunity",
+    description="Useful workflow functions for common automation and integration activities in Resilient.",
+    long_description="""Resilient Functions simplify development of integrations by wrapping each external activity
+    into an individual workflow component. These components can be easily installed, then used and combined in Resilient
+    workflows. The Resilient platform sends data to the function component that performs an activity then returns the results
+    to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate
+    the security incident response activities.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.129',
