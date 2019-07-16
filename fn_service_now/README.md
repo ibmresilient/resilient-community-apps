@@ -24,7 +24,7 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 ---
 
 ## Requirements
-* ServiceNow Instance running Kingston or London release
+* ServiceNow Instance running `Kingston`, `London` or `Madrid` release
 * The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
