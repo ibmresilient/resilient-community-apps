@@ -20,7 +20,15 @@
 		//Get the required values
 		res_reference_id = current.getValue("x_ibmrt_resilient_ibm_resilient_reference_id");
 		snTicketState = current.state.getChoiceValue();
-		snTicketStateColor = stateToColorMap[snTicketState];
+		
+		// Try get the snTicketStateColor that matches the snTicketState
+		try{
+			snTicketStateColor = stateToColorMap[snTicketState];
+		}
+		// If it does not exist, default to green
+		catch(errMsg){
+			snTicketStateColor = "green";
+		}
 		
 		//Update that status in the res datatable
 		resHelper.updateStateInResilient(res_reference_id, snTicketState, snTicketStateColor);
