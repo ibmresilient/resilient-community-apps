@@ -71,7 +71,7 @@ inputs.incident_id=incident.id
 
 ```python
 if results.success:
-  note_text ="{0} has been added to icd desk priority with icd_id {1}".format(incident.id,results.icd_id)
+  note_text ="{0} has been added to icd desk priority with icd_id {1}".format(incident.id,results.content.icd_id)
   incident.addNote(helper.createPlainText(note_text))
 else:
   note_text = "Error adding custom severity {}".format(incident.value)
