@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-utilities Functions for IBM Resilient
+# Utility Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -30,21 +30,25 @@
   notes of a previous release
 -->
 ### v1.0.10
-<!-- TODO -->
+* Update utilities_email_parse Function to use `mail-parser>=3.9.3`: https://github.com/SpamScope/mail-parser.
+* Remove dependency of `MailtoJson` from utilities_email_parse function.
+* utilities_email_parse now supports parsing `.eml` and `.msg` files.
+* utilities_email_parse can now be invoked from Artifacts or Attachment Manual Rules.
+* FunctionResult of utilities_email_parse has changed. See the User Guide in `/doc` for more.
+* Added updated documentation.
 
 ### v1.0.9
-* Updated the Function utilities_attachment_to_base64
-* utilities_attachment_to_base64 now supports both Resilient Attachments and Resilient Artifacts that are of type File
+* Updated the Function utilities_attachment_to_base64.
+* utilities_attachment_to_base64 now supports both Resilient Attachments and Resilient Artifacts that are of type File.
 
 ### v1.0.8
-* Bug fix for attachment_to_hash on Python 3.6
+* Bug fix for attachment_to_hash on Python 3.6.
 
 ### v1.0.7
 * A Timer function is new in this release of the Utility Functions. The function will allow a workflow to pause for a specified amount of time.
 
 ### v1.0.6
-* Bug fix for Call Rest API function
-
+* Bug fix for Call Rest API function.
 ### v1.0.5
 * Pushed a fix related to some functions firing twice.
 
@@ -102,16 +106,10 @@ Resilient Functions simplify development of integrations by wrapping each extern
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **shell_escaping** | Yes | `sh` | *Enter a description of the config here* |
-  | **remote_powershell_extensions** | Yes | `ps1` | *Enter a description of the config here* |
-  | **remote_auth_transport** | Yes | `ntlm` | *Enter a description of the config here* |
-  | **remote_computer** | Yes | `(username:password@server)` | *Enter a description of the config here* |
-  | **remote_command** | Yes | `[remote path to script]` | *Enter a description of the config here* |
-  | **nslookup** | Yes | `nslookup "{{shell_param1}}"` | *Enter a description of the config here* |
-  | **dig** | Yes | `dig "{{shell_param1}}"` | *Enter a description of the config here* |
-  | **traceroute** | Yes | `traceroute -m 15 "{{shell_param1}}"` | *Enter a description of the config here* |
-  | **whois** | Yes | `whois "{{shell_param1}}"` | *Enter a description of the config here* |
-  | **max_timer** | Yes | `30d` | *Enter a description of the config here* |
+  | **shell_escaping** | No | `sh` | For safety, shell_command parameter values are escaped. Set this to `sh` (Bash) or `ps` (PowerShell). |
+  | **remote_powershell_extensions** | No | `ps1, psm1` | A CSV list of extensions a remote PowerShell is trusted to run. |
+  | **remote_auth_transport** | No | `ntlm` | Transport authentication method for a remote PowerShell. Can be NTLM or basic. |
+  | **max_timer** | No | `30d` | Max Timer sleep time. The input string is of format “time value” concatenated with a “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours ‘d’ for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes; |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
