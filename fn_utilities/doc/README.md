@@ -73,9 +73,16 @@ Calculate hashes for a file attachment.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'sha1': '6c97644ea50f922b8bb2671c772d006b2abf4c87',
+  'created': 1563376076661,
+  'sha224': 'fc76d04a9c02b99e72fd0ec519c1a713ebf4d1ac451cf2542d6c1f9b',
+  'filename': 'sample_ioc.pdf',
+  'sha256': '578711d047bbce6542b5c4f17224d2042ae4ae93a045e0a7b27765f7be226be2',
+  'content_type': 'application/pdf',
+  'sha384': 'e6b21c2c6a7bd3e0143bfb8d16e354ccbbbe39df6a586bf6d28443319b4e432816c7a931790f264ac167de6cfd53444e',
+  'size': 123852,
+  'sha512': '74150483cc49014ff7a83caa2afb71dad62fdb0ec567e4a34fd4fa87a1037b2c5373cc06df0c6ac18e6d399f5bf498e4643c216ad6c7d6b51ab1e506d6768b2a',
+  'md5': 'fd83928b1530399aa355301ccab3620c'
 }
 ```
 
@@ -136,9 +143,11 @@ Read a file attachment as a Base64 string.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'content': 'JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdG...',
+    'size': 123852,
+    'created': 1563376076661,
+    'content_type': u 'application/pdf',
+    'filename': u 'sample_ioc.pdf'
 }
 ```
 
@@ -197,9 +206,24 @@ Extract a file from a zipfile attachment, producing a base64 string.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+     'info': {
+        'comment': '',
+        'external_attr': 2175025152,
+        'create_version': 21,
+        'extract_version': 20,
+        'header_offset': 110334,
+        'volume': 0,
+        'CRC': 1976166170,
+        'compress_type': 8,
+        'file_size': 123852,
+        'date_time': 1562684228000,
+        'filename': 'sample_ioc_1.pdf',
+        'compress_size': 109933,
+        'flag_bits': 8,
+        'create_system': 3,
+        'internal_attr': 0
+    },
+    'content': 'JVBERi0xLjcNCiW1tbW1DQoxIDAgb2JqDQo8PC9UeXBlL0NhdGFsb2cvUGFnZXMgMiAwIFIvTGFuZyhlbi1VUyk...'
 }
 ```
 
@@ -261,9 +285,40 @@ For a zipfile attachment, return a list of its contents.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'namelist': ['sample_ioc_2.pdf', 'sample_ioc_1.pdf'],
+  'infolist': [{
+    'comment': '',
+    'external_attr': 2175025152,
+    'create_version': 21,
+    'extract_version': 20,
+    'header_offset': 0,
+    'volume': 0,
+    'CRC': 1976166170,
+    'compress_type': 8,
+    'file_size': 123852,
+    'date_time': 1562684228000,
+    'filename': 'sample_ioc_2.pdf',
+    'compress_size': 109933,
+    'flag_bits': 8,
+    'create_system': 3,
+    'internal_attr': 0
+  }, {
+    'comment': '',
+    'external_attr': 2175025152,
+    'create_version': 21,
+    'extract_version': 20,
+    'header_offset': 110334,
+    'volume': 0,
+    'CRC': 1976166170,
+    'compress_type': 8,
+    'file_size': 123852,
+    'date_time': 1562684228000,
+    'filename': 'sample_ioc_1.pdf',
+    'compress_size': 109933,
+    'flag_bits': 8,
+    'create_system': 3,
+    'internal_attr': 0
+  }]
 }
 ```
 
@@ -318,6 +373,9 @@ incident.addNote(helper.createRichText(html))
 ---
 ## Function - Utilities: Base64 to Artifact
 Create a new artifact from a Base64 string
+
+<!-- TODO -->
+<!-- No Example Workflow Provided... -->
 
  ![screenshot: fn-utilities-base64-to-artifact ](./screenshots/fn-utilities-base64-to-artifact.png)
 
@@ -374,6 +432,9 @@ None
 ## Function - Utilities: Base64 to Attachment
 Create a new attachment from a base64 string.
 
+<!-- TODO -->
+<!-- No Example Workflow Provided... -->
+
  ![screenshot: fn-utilities-base64-to-attachment ](./screenshots/fn-utilities-base64-to-attachment.png)
 
 <details><summary>Inputs:</summary>
@@ -395,9 +456,23 @@ Create a new attachment from a base64 string.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  "task_at_id": null,
+  "vers": 9,
+  "name": "thumbnail.jpeg",
+  "task_id": null,
+  "created": 1563376723766,
+  "inc_owner": 71,
+  "task_members": null,
+  "task_custom": null,
+  "task_name": null,
+  "inc_name": "Get example outputs fn-utilities",
+  "creator_id": 38,
+  "content_type": "image/jpeg",
+  "inc_id": 2095,
+  "size": 123852,
+  "type": "incident",
+  "id": 7,
+  "uuid": "5a31ce96-954a-4d3f-a193-a83618055d22"
 }
 ```
 
@@ -459,9 +534,44 @@ The function parameters determine the type of call (GET, POST, etc), the URL, an
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'cookies': {
+        '__cfduid': 'df6a42088e8cb3550f4b3266137fdea731563377650'
+    },
+    'links': {},
+    'text': u '{\n  "userId": 1,\n  "id": 1,\n  "title": "delectus aut autem",\n  "completed": false\n}',
+    'elapsed': 263,
+    'apparent_encoding': 'ascii',
+    'reason': 'OK',
+    'ok': True,
+    'url': u 'https://jsonplaceholder.typicode.com/todos/1',
+    'headers': {
+        'Expires': 'Wed, 17 Jul 2019 19:34:11 GMT',
+        'X-Content-Type-Options': 'nosniff',
+        'X-Powered-By': 'Express',
+        'Transfer-Encoding': 'chunked',
+        'Set-Cookie': '__cfduid=df6a42088e8cb3550f4b3266137fdea731563377650; expires=Thu, 16-Jul-20 15:34:10 GMT; path=/; domain=.typicode.com; HttpOnly',
+        'CF-Cache-Status': 'HIT',
+        'Cache-Control': 'public, max-age=14400',
+        'Vary': 'Origin, Accept-Encoding',
+        'Content-Encoding': 'gzip',
+        'Server': 'cloudflare',
+        'Connection': 'keep-alive',
+        'Etag': 'W/"53-hfEnumeNh6YirfjyjaujcOPPT+s"',
+        'Pragma': 'no-cache',
+        'Access-Control-Allow-Credentials': 'true',
+        'Date': 'Wed, 17 Jul 2019 15:34:11 GMT',
+        'CF-RAY': '4f7d474ebce8ce2b-LHR',
+        'Content-Type': 'application/json; charset=utf-8',
+        'Age': '791',
+        'Via': '1.1 vegur'
+    },
+    'json': {
+        u 'completed': False,
+        u 'userId': 1,
+        u 'id': 1,
+        u 'title': u 'delectus aut autem'
+    },
+    'status_code': 200
 }
 ```
 
@@ -540,9 +650,17 @@ Identifies similarity between a suspicious domain name and a list of valid domai
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'distances': {
+    'resilientsystems.com': 6,
+    'ibmcloud.com': 11,
+    'ibm.com': 9,
+    'bluemix.com': 9
+  },
+  'domain_name': 'ressystems.com',
+  'closest': {
+    'distance': 6,
+    'name': 'resilientsystems.com'
+  }
 }
 ```
 
@@ -608,9 +726,78 @@ Extract message headers and body parts from an email message (.eml or .msg). Any
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'inputs': {
+        'incident_id': 2095,
+        'attachment_id': 8,
+        'utilities_parse_email_attachments': True
+    },
+    'metrics': {
+        'package': 'unknown',
+        'timestamp': '2019-07-17 16:38:18',
+        'package_version': 'unknown',
+        'host': 'xxx.ie.ibm.com',
+        'version': '1.0',
+        'execution_time_ms': 2132
+    },
+    'success': True,
+    'content': {
+        'body': 'After reviewing your profile with our management, we are pleased to...',
+        'received': [{
+            'from': 'info@example.com',
+            'by': 'exmaple.com Postfix',
+            'delay': 0,
+            'date_utc': '2017-11-16T05:48:58',
+            'hop': 1,
+            'date': 'Thu, 16 Nov 2017 13:48:58 +0800 SGT',
+            'with': 'ESMTPSA',
+            'id': '80EABD601B2'
+        }, {
+            'from': 'example.com unknown x.x.x.x',
+            'by': 'secure1.example.com Postfix',
+            'delay': 78.0,
+            'date_utc': '2017-11-16T05:50:16',
+            'hop': 2,
+            'date': 'Thu, 16 Nov 2017 13:50:16 +0800 SGT',
+            'with': 'ESMTP',
+            'id': '4A2A41561A55'
+        }, {
+            'from': '103.15.233.228',
+            'delay': 474.0,
+            'date_utc': '2017-11-16T05:58:10',
+            'hop': 3,
+            'date': 'Thu, 16 Nov 2017 05:58:10 +0000',
+            'by': 'removed'
+        }],
+        'from': [
+            ['Monika Bakun', 'admin@example.com']
+        ],
+        'attachments': [{
+            'binary': True,
+            'mail_content_type': 'application/msword',
+            'charset': None,
+            'filename': 'SKMBT_C201711xxxx.doc',
+            'content-id': '',
+            'content_transfer_encoding': 'base64',
+            'payload': 'e1xydGZIMigxMS0xMyksSHVhbm...'
+        }],
+        'plain_body': '["After reviewing your profile with our management, we are pleased to..."]',
+        'content-type': 'multipart/mixed; boundary="===============1876313359=="',
+        'x-sf-rx-return-path': '<admin@example.com>',
+        'to_domains': ['ibm.com'],
+        'to': [
+            ['Recipients', 'joe.bloggs@ibm.com']
+        ],
+        'html_body': '["<HTML><head><meta charset=iso-8859-1\\"/></head><BODY><P>After reviewing your profile with our management, we are pleased to ...</BODY></HTML>"]',
+        'x-sf-helo-domain': 'secure1.example.com',
+        'x-sf-originating-ip': '0.0.0.0',
+        'date': '2017-11-16T05:49:54',
+        'timezone': '+0',
+        'mime-version': '1.0',
+        'has_defects': False,
+        'subject': 'Request For Quotation'
+    },
+    'reason': None,
+    'version': '1.0'
 }
 ```
 
@@ -748,9 +935,18 @@ Extract ranges of data or named ranges specified by the user from an excel docum
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'titles': ['Sheet1'], 
+    'sheets': {
+        '_keys': ['Sheet1'],
+        'Sheet1': {
+            '_keys': ['A3:B5'],
+            'A3:B5': [
+                ['user one', 'one@example.com'],
+                ['user two', 'two@example.com'],
+                ['user three', 'three@example.com']
+            ]
+        }
+    }
 }
 ```
 
@@ -842,9 +1038,7 @@ Take a url (mostly shortened) and follow it through redirects as it's expanded
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'urllist': ['https://example-domain-one.com', 'https://example-domain-two.com']
 }
 ```
 
@@ -894,9 +1088,8 @@ Outputs: Certificate file encoded in JSON.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'successful': True,
+  'certificate': '"-----BEGIN CERTIFICATE-----\\nMIIGjTCCBXxxxxxx==\\n-----END CERTIFICATE-----\\n"'
 }
 ```
 
@@ -946,9 +1139,16 @@ Retrieve contact information for an incidents owner and members or those from a 
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'owner': {
+    'cell': None,
+    'display_name': 'Admin User',
+    'title': None,
+    'lname': 'User',
+    'phone': None,
+    'fname': 'Admin',
+    'email': 'admin@example.com'
+  },
+  'members': []
 }
 ```
 
