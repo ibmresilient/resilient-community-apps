@@ -4,6 +4,7 @@
 
 import logging
 import re
+import sys
 import requests
 from bs4 import BeautifulSoup as bsoup
 from resilient_circuits import ResilientComponent, function, handler
@@ -52,9 +53,14 @@ class FunctionComponent(ResilientComponent):
             res_client = self.rest_client()
             incident_str = '/incidents/{incident_id}/'.format(incident_id=incident_id)
             artifact_str = '/incidents/{incident_id}/artifacts'.format(incident_id=incident_id)
+            field_severity = {}
             if icd_field_severity:
-                fieldsev_str = '/types/{type}/fields/{field}'.format(type='incident', field=icd_field_severity)
-                field_severity = res_client.get(fieldsev_str)
+            # If api call for custom severity field is not successful, Ticket defaults to minimum priority
+                try:
+                    fieldsev_str = '/types/{type}/fields/{field}'.format(type='incident', field=icd_field_severity)
+                    field_severity = res_client.get(fieldsev_str)
+                except:
+                    field_severity['values'] = MIN_PRIORITY_ICD
             content = res_client.get(incident_str)
             art_content = res_client.get(artifact_str)
             # Time and date
@@ -65,7 +71,7 @@ class FunctionComponent(ResilientComponent):
             details_payload = ''
             i = 0
             j = 0
-            if field_severity:
+            if icd_field_severity:
                 try:
                     for i in range(0, len(art_content)):
                         if art_content[i].get('properties', False):
@@ -76,8 +82,8 @@ class FunctionComponent(ResilientComponent):
                 except Exception as artifact_error:
                     log.error(artifact_error)
                     log.error("Encountered an error parsing artifacts")
-            ## General field severity checking
-            if field_severity:
+            ##If you custom field isn't specified, it defaults to min priority
+            if icd_field_severity:
                 try:
                     field_sev = field_severity['values']
                 except:
