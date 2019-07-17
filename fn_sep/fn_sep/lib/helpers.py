@@ -140,7 +140,7 @@ def get_engine_status(eps, non_compliant_endpoints):
         status = 0
         for sf in EP_ENGINE_STATUS_FIELDS:
             # If engine is installed and not enabled.
-            if not eps[i][sf] != 2 and not eps[i][sf]:
+            if eps[i][sf] != 2 and not eps[i][sf]:
                 if not ep_name in non_compliant_endpoints:
                     non_compliant_endpoints.append(ep_name)
                     status = 1
