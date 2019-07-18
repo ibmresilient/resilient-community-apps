@@ -122,7 +122,7 @@ class TestHelpersGenerateResultCvs:
         """ Test  generate_result_cvs using mocked data.  """
         content_values = expected_results[1:]
         result_time = datetime.today().strftime('%Y%m%d%H%M%S')
-        (file_name, file_content) = generate_result_cvs(rtn, sep_commandid)
+        (file_name, file_content) = generate_result_csv(rtn, sep_commandid)
         assert "EOC_scan_results_for_commandid_"+expected_results[0]+"_"+result_time+".csv" == file_name
         for c in file_content.split('\n'):
             assert_keys_in(file_content, *content_values)

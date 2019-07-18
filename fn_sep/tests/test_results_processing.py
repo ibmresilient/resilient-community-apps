@@ -15,6 +15,19 @@ def assert_keys_in(json_obj, *keys):
     for key in keys:
         assert key in json_obj
 
+def get_config():
+    return dict({
+        "sep_base_path":    "/sepm/api/v1",
+        "sep_auth_path":    "/sepm/api/v1/identity/authenticate",
+        "sep_host":         "192.168.1.2",
+        "sep_port":         "8446",
+        "sep_username":     "admin",
+        "sep_password":     "password",
+        "sep_domain":       "Default",
+        "sep_results_limit": 200,
+        "sep_scan_timeout": 1800
+    })
+
 class TestGetOverallProgress:
 
     """Test get_overall_progress function"""
@@ -85,7 +98,7 @@ class TestProcessResults:
         keys_2 = ["overall_command_state", "total_ep_count", "total_match_count", "total_match_ep_count",
                   "total_not_completed", "total_remediation_count", "total_remediation_ep_count"]
 
-        results = process_results(rtn, status_type)
+        results = process_results(rtn, get_config(), status_type, None)
         assert_keys_in(results, *keys)
         assert_keys_in(results, *keys_2)
         assert expected_results == results["overall_command_state"]

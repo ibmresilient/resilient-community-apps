@@ -20,13 +20,15 @@ def assert_keys_in(json_obj, *keys):
 
 def get_config():
     return dict({
-        "base_path":    "/sepm/api/v1",
-        "auth_path":    "/sepm/api/v1/identity/authenticate",
-        "host":         "192.168.1.2",
-        "port":         "8446",
-        "username":     "admin",
-        "password":     "password",
-        "domain":       "Default"
+        "sep_base_path":    "/sepm/api/v1",
+        "sep_auth_path":    "/sepm/api/v1/identity/authenticate",
+        "sep_host":         "192.168.1.2",
+        "sep_port":         "8446",
+        "sep_username":     "admin",
+        "sep_password":     "password",
+        "sep_domain":       "Default",
+        "sep_results_limit": 200,
+        "sep_scan_timeout": 1800
     })
 
 def setup_test_xml():
