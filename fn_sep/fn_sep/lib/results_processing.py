@@ -33,56 +33,53 @@ def parse_scan_results(xml):
     """"Parse scan eoc xml results and convert to dict.
         Example xml:
         ============
-                <EOC creator="Resilient" version="1.0" id="id">
-                 <DataSource name="name" id="id" version="version"/>
-                 <ScanType>FULL_SCAN</ScanType>
-                 <RemediationAction>REMEDIATE</RemediationAction>
-                 <Threat time="" severity="" type="" category="">
-                     <Description>None</Description>
-                     <URL></URL>
-                     <User></User>
-                     <Attacker>
-                     </Attacker>
-                     <proxy ip=""/>
-                     <Application></Application>
-                 </Threat>
-                 <Activity>
-                     <OS id="0" name="name" version="version">
-                         <Process>
-                         </Process>
-                         <Files>
-                             <File name="C:\temp\test.txt" action="create">
-                                 <Hash name="SHA256" value="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/>
-                                 <Matched result="HASH_MATCH" value="C:\temp\test.ext" remediation="SUCCEEDED" hashType="SHA256"/></File>
-                             <File name="C:\temp\test.txt" action="create">
-                                 <Matched result="FULL_MATCH" value="C:\temp\test.txt" remediation="UNSUPPORTED"
-                                 hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
-                             <File name="C:\temp\test.txt" action="create">
-                                 <Matched result="FULL_MATCH" value="C:\temp\test.txt" remediation="UNSUPPORTED"
-                                 hashType="SHA256" hashValue="42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37"/></File>
-                         </Files>
-                         <Registry>
-                         </Registry>
-                         <Network/>
-                     </OS>
-                 </Activity>
-             </EOC>
+        <EOC creator="Resilient" version="1.0" id="id">
+            <DataSource name="name" id="id" version="version"/>
+            <ScanType>QUICK_SCAN</ScanType>
+            <Threat time="" severity="" type="" category="">
+                <Description>Scan eoc for for suspicious hash.</Description>
+                <URL></URL>
+                <User></User>
+                <Attacker>
+                </Attacker>
+                <proxy ip=""/>
+                <Application></Application>
+            </Threat>
+            <Activity>
+                <OS id="0" name="name" version="version">
+                    <Process>
+                    </Process>
+                    <Files>
+                        <File name="" action="create">
+                            <Hash name="SHA256" value="8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83"/>
+                            <Matched result="HASH_MATCH" value="C:\temp\suspicious_exe.exe" hashType="SHA256"/>
+                            <Matched result="HASH_MATCH" value="C:\Users\Administrator\Desktop\suspicious_exe.exe" hashType="SHA256"/>
+                            <Matched result="HASH_MATCH" value="C:\Users\Administrator\Desktop\suspicious_exe_copy.exe" hashType="SHA256"/></File>
+                        <File name="" action="create">
+                            <Matched result="NO_MATCH"/></File>
+                        <File name="" action="create">
+                            <Matched result="NO_MATCH"/></File>
+                    </Files>
+                    <Registry>
+                    </Registry>
+                    <Network/>
+                </OS>
+            </Activity>
+        </EOC>
         Example: result
         ===============
-            scan_result = {
-                "MATCH": True,
-                "artifact_value": 'C:\temp\test.txt',
-                "artifact_type": '',
-                "FULL_MATCHES": [{'hashType': 'SHA256', 'hashValue': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37',
-                       'result': 'FULL_MATCH', 'value': 'C:\\temp\\test.ext', "remediation": "UNSUPPORTED", 'action': 'create'}],
-                "HASH_MATCHES": [{{'name': 'C:\\temp\\test.txt', 'hashType': 'SHA256', 'result': 'HASH_MATCH',
-                       'value': '42e006bf94256d661b751c50ec218f46e58df188cf06cb04ebd717c04a43fe37', 'remediation': 'SUCCEEDED'},
-                       'action': 'create'}],
-                "PARTIAL_MATCHES": [],
-                "match_count": 1,
-                "remediation_count": 1,
-                "fail_remediation_count": 0
-            }
+        scan_result = {
+            'match_count': 3,
+            'remediation_count': 0,
+            'PARTIAL_MATCHES': [],
+            'HASH_MATCHES': [{'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\temp\\suspicious_exe.exe'},
+                             {'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\Users\\Administrator\\Desktop\\suspicious_exe.exe'},
+                             {'hashType': 'SHA256', 'result': 'HASH_MATCH', 'value': 'C:\\Users\\Administrator\\Desktop\\suspicious_exe_copy.exe'}],
+            'FULL_MATCHES': [], 'artifact_value': '8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83',
+            'artifact_type': 'SHA256 hash',
+            'fail_remediation_count': 0,
+            'MATCH': True
+        }
 
     :param xml: Status in xml for endpoint.
     :return Scan result in a dict.
