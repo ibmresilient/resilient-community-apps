@@ -30,11 +30,11 @@
   notes of a previous release
 -->
 ### v1.0.10
-* Update utilities_email_parse Function to use `mail-parser>=3.9.3`: https://github.com/SpamScope/mail-parser.
+* Update utilities_email_parse Function to use `mail-parser>=3.9.3`: https://github.com/SpamScope/mail-parser
 * Remove dependency of `MailtoJson` from utilities_email_parse function.
 * utilities_email_parse now supports parsing `.eml` and `.msg` files.
-* utilities_email_parse can now be invoked from Artifacts or Attachment Manual Rules.
-* FunctionResult of utilities_email_parse has changed. See the User Guide in `/doc` for more.
+* utilities_email_parse can now be invoked from the menu item rules with an Object Type of Artifact or Attachment.
+* FunctionResult of utilities_email_parse has changed. See the User Guide in `/doc` for more information.
 * Added updated documentation.
 
 ### v1.0.9
