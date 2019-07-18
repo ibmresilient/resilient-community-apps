@@ -21,7 +21,6 @@ class KafkaFeedDestination(FeedDestinationBase):
 
         ## Get all options, needed as we just blind pass kwargs to support all kafka options
         self.all_options = options.copy()
-        LOG.debug(self.all_options)
 
         ## Get the mapping of topics
         topic_map = self.all_options['topic_map']
