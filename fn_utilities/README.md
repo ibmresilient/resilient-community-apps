@@ -59,11 +59,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Useful workflow functions for common automation and integration activities in Resilient**
+**Useful workflow functions for common automation and integration activities in the Resilient platform**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Functions simplify development of integrations by wrapping each external activity into an individual workflow component. These components can be easily installed, then used and combined in Resilient workflows. The Resilient platform sends data to the function component that performs an activity then returns the results to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate the security incident response activities
+Resilient functions simplify development of integrations by wrapping each external activity into an individual workflow component. These components can be easily installed, then used and combined in Resilient workflows. The Resilient platform sends data to the function component that performs an activity then returns the results to the workflow. The results can be acted upon by scripts, rules, and workflow decision points to dynamically orchestrate the security incident response activities
 
 ---
 
@@ -71,9 +71,9 @@ Resilient Functions simplify development of integrations by wrapping each extern
 <!--
   List any Requirements 
 -->
-* IBM Resilient >= `v31.0.4254`
+* Resilient platform >= `v31.0.4254`
 * An Integration Server running `resilient_circuits>=30.0.0`
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
 
