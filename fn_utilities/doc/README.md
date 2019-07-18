@@ -543,7 +543,7 @@ results = {
     'apparent_encoding': 'ascii',
     'reason': 'OK',
     'ok': True,
-    'url': u 'https://jsonplaceholder.typicode.com/todos/1',
+    'url': 'https://jsonplaceholder.typicode.com/todos/1',
     'headers': {
         'Expires': 'Wed, 17 Jul 2019 19:34:11 GMT',
         'X-Content-Type-Options': 'nosniff',
@@ -566,10 +566,10 @@ results = {
         'Via': '1.1 vegur'
     },
     'json': {
-        u 'completed': False,
-        u 'userId': 1,
-        u 'id': 1,
-        u 'title': u 'delectus aut autem'
+        'completed': False,
+        'userId': 1,
+        'id': 1,
+        'title': 'delectus aut autem'
     },
     'status_code': 200
 }
@@ -1199,9 +1199,7 @@ Produce an HTML representation of JSON data. All data is converted into tables o
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'content': u'<ul><li>1</li><li>2</li><li>3</li><li><table border="1"><tr><th>keen1n</th><td>m1ch</td></tr><tr><th>ibm</th><td>None</td></tr></table></li></ul>'
 }
 ```
 
@@ -1255,9 +1253,19 @@ Attempts to parse information from this certificate and return it.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'public_key': '-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiGxxxxx-----END PUBLIC KEY-----\n',
+  'version': 2,
+  'signature_algorithm': 'sha256WithRSAEncryption',
+  'extensions': {
+    'issuerAltNames': '[]',
+    'subjectAltNames': '["*.ibm.com", "ibm.com"]',
+    'basicConstraints': 'false'
+  },
+  'notBefore': '2018-03-16 00:00:00',
+  'issuer': '"xxxx"',
+  'expiration_status': 'Valid',
+  'notAfter': '2020-03-15 12:00:00',
+  'subject': '"[(\'C\', \'US\'), (\'ST\', \'New York\'), (\'L\', \'Armonk\'), (\'O\', \'International Business Machines Corporation\'), (\'CN\', \'*.ibm.com\')]"'
 }
 ```
 
@@ -1316,9 +1324,29 @@ Produces summary information about the structure of a PDF file, using Didier Ste
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  '/JS': 0,
+  'stream': 9,
+  '/ObjStm': 1,
+  'header': '%PDF-1.7',
+  '/AcroForm': 0,
+  'xref': 2,
+  'endobj': 34,
+  '/JavaScript': 0,
+  '/XFA': 0,
+  '/Page': 1,
+  '/Colors > 2^24': 0,
+  '/OpenAction': 0,
+  'endstream': 9,
+  'startxref': 2,
+  '/EmbeddedFile': 0,
+  '/Encrypt': 0,
+  'isPdf': 'True',
+  '/Launch': 0,
+  'obj': 34,
+  '/AA': 0,
+  '/RichMedia': 0,
+  '/JBIG2Decode': 0,
+  'trailer': 2
 }
 ```
 
@@ -1403,9 +1431,212 @@ NOTE: The results may include data from incidents that the current user cannot a
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'results': [{
+    'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>',
+    'inc_name': 'incident with same attachment 2',
+    'task_id': None,
+    'type_id': 'attachment',
+    'obj_creator_id': 71,
+    'inc_owner_id': 71,
+    'obj_id': 12,
+    'org_id': 201,
+    'task_name': None,
+    'score': 2.1267257,
+    'match_highlights': [{
+      'match_field_name': 'Content Type',
+      'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>'
+    }, {
+      'match_field_name': 'Name',
+      'match_field_value': '<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>'
+    }],
+    'obj_create_date': 1563445289222,
+    'obj_name': 'sample_ioc_1.pdf',
+    'match_field_name': 'Content Type',
+    'inc_id': 2097,
+    'result': {
+      'task_at_id': None,
+      'uuid': 'ffb6bee8-7cef-47fa-a2cc-2daf57bd28a2',
+      'vers': 4,
+      'inc_name': 'incident with same attachment 2',
+      'task_id': None,
+      'created': 1563445289222,
+      'task_members': None,
+      'task_custom': None,
+      'task_name': None,
+      'actions': [],
+      'inc_owner': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'creator_id': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'content_type': 'application/pdf',
+      'inc_id': 2097,
+      'size': 123852,
+      'type': 'incident',
+      'id': 12,
+      'name': 'sample_ioc_1.pdf'
+    }
+  }, {
+    'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>',
+    'inc_name': 'Get example outputs fn-utilities',
+    'task_id': None,
+    'type_id': 'attachment',
+    'obj_creator_id': 71,
+    'inc_owner_id': 71,
+    'obj_id': 13,
+    'org_id': 201,
+    'task_name': None,
+    'score': 1.7914013,
+    'match_highlights': [{
+      'match_field_name': 'Content Type',
+      'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>'
+    }, {
+      'match_field_name': 'Name',
+      'match_field_value': '<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>'
+    }],
+    'obj_create_date': 1563445301367,
+    'obj_name': 'sample_ioc_1.pdf',
+    'match_field_name': 'Content Type',
+    'inc_id': 2095,
+    'result': {
+      'task_at_id': None,
+      'uuid': 'e8537737-1887-486f-92f5-76ea5091e970',
+      'vers': 14,
+      'inc_name': 'Get example outputs fn-utilities',
+      'task_id': None,
+      'created': 1563445301367,
+      'task_members': None,
+      'task_custom': None,
+      'task_name': None,
+      'actions': [],
+      'inc_owner': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'creator_id': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'content_type': 'application/pdf',
+      'inc_id': 2095,
+      'size': 123852,
+      'type': 'incident',
+      'id': 13,
+      'name': 'sample_ioc_1.pdf'
+    }
+  }, {
+    'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>',
+    'inc_name': 'incident with same attachment 1',
+    'task_id': None,
+    'type_id': 'attachment',
+    'obj_creator_id': 71,
+    'inc_owner_id': 71,
+    'obj_id': 11,
+    'org_id': 201,
+    'task_name': None,
+    'score': 1.3419329,
+    'match_highlights': [{
+      'match_field_name': 'Content Type',
+      'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>'
+    }, {
+      'match_field_name': 'Name',
+      'match_field_value': '<ResilientHighlight>sample_ioc_1</ResilientHighlight>.<ResilientHighlight>pdf</ResilientHighlight>'
+    }],
+    'obj_create_date': 1563445261781,
+    'obj_name': 'sample_ioc_1.pdf',
+    'match_field_name': 'Content Type',
+    'inc_id': 2096,
+    'result': {
+      'task_at_id': None,
+      'uuid': '034199ca-f3d2-4e4f-8542-886753bd859e',
+      'vers': 4,
+      'inc_name': 'incident with same attachment 1',
+      'task_id': None,
+      'created': 1563445261781,
+      'task_members': None,
+      'task_custom': None,
+      'task_name': None,
+      'actions': [],
+      'inc_owner': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'creator_id': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'content_type': 'application/pdf',
+      'inc_id': 2096,
+      'size': 123852,
+      'type': 'incident',
+      'id': 11,
+      'name': 'sample_ioc_1.pdf'
+    }
+  }, {
+    'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>',
+    'inc_name': 'Get example outputs fn-utilities',
+    'task_id': None,
+    'type_id': 'attachment',
+    'obj_creator_id': 71,
+    'inc_owner_id': 71,
+    'obj_id': 1,
+    'org_id': 201,
+    'task_name': None,
+    'score': 0.517004,
+    'match_highlights': [{
+      'match_field_name': 'Content Type',
+      'match_field_value': 'application/<ResilientHighlight>pdf</ResilientHighlight>'
+    }],
+    'obj_create_date': 1563376076661,
+    'obj_name': 'sample_ioc.pdf',
+    'match_field_name': 'Content Type',
+    'inc_id': 2095,
+    'result': {
+      'task_at_id': None,
+      'uuid': '3fc6114e-6465-4fc0-a150-1e961869d34b',
+      'vers': 13,
+      'inc_name': 'Get example outputs fn-utilities',
+      'task_id': None,
+      'created': 1563376076661,
+      'task_members': None,
+      'task_custom': None,
+      'task_name': None,
+      'actions': [],
+      'inc_owner': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'creator_id': {
+        'type': 'user',
+        'display_name': 'Admin User',
+        'id': 71,
+        'name': 'admin@example.com'
+      },
+      'content_type': 'application/pdf',
+      'inc_id': 2095,
+      'size': 123852,
+      'type': 'incident',
+      'id': 1,
+      'name': 'sample_ioc.pdf'
+    }
+  }]
 }
 ```
 
@@ -1478,9 +1709,15 @@ Runs a shell command.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'start': 1563446215136,
+  'stderr_json': None,
+  'end': 1563446215476,
+  'stderr': '',
+  'stdout': 'Server:\t\t9.0.138.50\nAddress:\t9.0.138.50#53\n\nName:\tibm.com\nAddress: 129.42.38.10\n\n',
+  'stdout_json': None,
+  'commandline': 'nslookup "ibm.com"',
+  'exitcode': 0,
+  'elapsed': 339
 }
 ```
 
@@ -1557,9 +1794,7 @@ Creates an attachment of an inputted string
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'attachment_id': 14
 }
 ```
 
@@ -1626,9 +1861,29 @@ The utilities_epoch parameter is an epoch time value specifying when the timer s
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'inputs': {
+    'utilities_epoch': 1563446488000
+  },
+  'metrics': {
+    'package': 'fn-utilities',
+    'timestamp': '2019-07-18 11:41:27',
+    'package_version': '1.0.10',
+    'host': 'xxx.ibm.com',
+    'version': '1.0',
+    'execution_time_ms': 105319
+  },
+  'success': False,
+  'content': {
+    'status': 'running',
+    'end_date': None,
+    'is_terminated': False,
+    'instance_id': 33,
+    'reason': None,
+    'start_date': 1563446381032
+  },
+  'raw': '{"status": "running", "end_date": null, "is_terminated": false, "instance_id": 33, "reason": null, "start_date": 1563446381032}',
+  'reason': None,
+  'version': '1.0'
 }
 ```
 
@@ -1678,9 +1933,7 @@ Perform a transformation of an xml document based on a given stylesheet
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'content': '<html><body><h2>My CD Collection</h2><table border="1"><tr bgcolor="#9acd32"><th style="text-align:left">Title</th><th style="text-align:left">Artist</th></tr><tr><td>Empire Burlesque</td><td>Bob Dylan</td></tr><tr><td>Hide your heart</td><td>Bonnie Tyler</td></tr><tr><td>Greatest Hits</td><td>Dolly Parton</td></tr><tr><td>Still got the blues</td><td>Gary Moore</td></tr></table></body></html>'
 }
 ```
 
