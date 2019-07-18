@@ -156,28 +156,28 @@ def get_overall_progress(rtn, sep_scan_timeout=None, scan_date=None):
     :param rtn: Result returned from SEPM server.
     :return Return overall command state.
     """
+    overall_state = "Completed"
+    timeout_state = "Timeout"
+    in_progress_states = {
+        0: "Waiting/Not received",
+        1: "Received",
+        2: "In progress"
+    }
 
     if scan_date is not None and sep_scan_timeout:
         scan_time = int(time.mktime(datetime.strptime(scan_date, "%Y-%m-%d %H:%M:%S").timetuple()))
         now_time = int(time.time())
         time_since_scan = now_time - scan_time
 
-    states = {
-        0: "Waiting/Not received",
-        1: "Received",
-        2: "In progress"
-    }
-    overall_state = "Completed"
-    timeout_state = "Timeout"
     if not rtn["content"]:
         # When the scan command initially launched the content dict is typically empty.
-        overall_state = states[0]
+        overall_state = in_progress_states[0]
     else:
         for i in range(len(rtn["content"])):
-            if rtn["content"][i]["stateId"] in states.keys():
-                # If any of the endpoint statuses is still in any of the non-completed states  reset overall
+            if rtn["content"][i]["stateId"] in in_progress_states.keys():
+                # If any of the endpoint statuses is still in any of the non-completed states reset overall
                 # scan status to "In progress".
-                overall_state = states[2]
+                overall_state = in_progress_states[2]
                 break
 
     # Set the overall command state across multiple endpoints.
