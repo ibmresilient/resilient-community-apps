@@ -22,7 +22,7 @@
 * Resilient Appliance updated to at least `v31.0.0`
 * An Integrations Server setup with `resilient-circuits >= 31.0.0` installed
 * All steps in the **[Installation Guide](../install_guide)** complete
-* ServiceNow instance running `Kingston`, `London` or `Madrid`
+* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
 * ServiceNow user with an `admin` role
 * A basic understanding of **IBM Resilient Workflows**
 * A basic understanding of **ServiceNow Workflows**

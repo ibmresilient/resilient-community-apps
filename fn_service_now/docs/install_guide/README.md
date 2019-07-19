@@ -13,7 +13,7 @@
 ---
 
 ## Prerequisites 
-* ServiceNow Instance running `Kingston`, `London` or `Madrid` release
+* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Resilient >= `v31.0.0`
