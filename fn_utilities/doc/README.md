@@ -554,8 +554,9 @@ None
 
 ---
 ## Function - Utilities: Call REST API
-Call a REST web service.
-The function parameters determine the type of call (GET, POST, etc), the URL, and optionally the headers and body.
+This function calls a REST web service. It supports the standard REST methods: GET, HEAD, POST, PUT, DELETE and OPTIONS.
+
+The function parameters determine the type of call, the URL, and optionally the headers and body. The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.
 
  ![screenshot: fn-utilities-call-rest-api ](./screenshots/fn-utilities-call-rest-api.png)
 
@@ -654,18 +655,8 @@ inputs.rest_verify = True
 <p>
 
 ```python
-# The result has:
-#    "ok": true if the request was successful
-#    "url": the actual URL
-#    "status_code": the HTTP status code (200 , 404, etc)
-#    "reason": the text corresponding to the status code
-#    "cookies": any response cookies
-#    "headers": the response headers
-#    "elapsed": elapsed time in milliseconds
-#    "apparent_encoding": the apparent character encoding (ascii, etc)
-#    "text": the response body as text
-#    "json": the response body as a map (if the response is JSON)
-#    "links": any parsed URL links from the headers
+# Set the artifact description to the Response (in plain text) of the REST call
+
 artifact.description = results.text
 
 ```
@@ -747,7 +738,9 @@ if results.closest.distance <= 1:
 
 ---
 ## Function - Utilities: Email Parse
-Extract message headers and body parts from an email message (.eml or .msg). Any attachments found are added to the Incident as Artifacts if 'utilities_parse_email_attachments' is set to True
+Extract message headers and body parts from an email message (.eml or .msg).
+
+Any attachments found are added to the Incident as Artifacts if `utilities_parse_email_attachments` is set to True
 
  ![screenshot: fn-utilities-email-parse ](./screenshots/fn-utilities-email-parse.png)
 
@@ -1015,48 +1008,30 @@ if task is not None:
 <p>
 
 ```python
-# This is an illustratory example of the structure that result data has.
-# The “_keys” list in every dictionary object can be used to iterate over the dictionaries which is otherwise impossible in post-processing script.
-# { 
-#   "titles": [List of String names of the sheets],
-#   "sheets": {
-#     "_keys": ["Sheet Name", "Other sheet", ...],
-#     "Sheet Name": {
-#       "_keys": ["A1:B5", "Other range"],
-#       "A1:B5": list of rows,
-#       "Other range": [[row0], [...], [...]]
-#     },
-#     "Other sheet": {}
-#   },
-#   "defined_names": {
-#     "_keys": ["defined range 1"],
-#     "defined range 1": {
-#       The name structure as in "sheets”, but with an extra defined_names layer
-#     }
-#   }
-# }
+# This example shows how to iterate over the sheets and create artifacts from the returned data
+'''
+keys = results.sheets["_keys"]
+for sheet in keys:
+  ranges = results.sheets[sheet]["_keys"]
+  for range_name in ranges:
+    rng = results.sheets[sheet][range_name]
+    for row in rng:
+      incident.addArtifact("IP Address", row[0], "Sheet Region {0}  Priority {1}".format(row[1], row[2]))
+'''
 
-
-# This is an example on how to iterate over the sheets and create artifacts from the return data
-# keys = results.sheets["_keys"]
-# for sheet in keys:
-#   ranges = results.sheets[sheet]["_keys"]
-#   for range_name in ranges:
-#     rng = results.sheets[sheet][range_name]
-#     for row in rng:
-#       incident.addArtifact("IP Address", row[0], "Sheet Region {0}  Priority {1}".format(row[1], row[2]))
-
-# This is an example on how to iterate through the named ranges and create artifacts from them
+# This example shows how to iterate through the named ranges and create artifacts from them
 # It is pretty much the same as the previous example, with an exception of extra layer of iterating through the named ranges
-# keys = results.named_ranges["_keys"]
-# for named_range in keys:
-#   sheets = results.named_ranges[named_range]["_keys"]
-#   for sheet in sheets:
-#     range_names = results.named_ranges[named_range][sheet]["_keys"]
-#     for range_name in range_names:
-#       rng = results.named_ranges[named_range][sheet][range_name]
-#       for row in rng:
-#         incident.addArtifact("IP Address", row[0], "Named Range Region {0}  Priority {1}".format(row[1], row[2]))
+'''
+keys = results.named_ranges["_keys"]
+for named_range in keys:
+  sheets = results.named_ranges[named_range]["_keys"]
+  for sheet in sheets:
+    range_names = results.named_ranges[named_range][sheet]["_keys"]
+    for range_name in range_names:
+      rng = results.named_ranges[named_range][sheet][range_name]
+      for row in rng:
+        incident.addArtifact("IP Address", row[0], "Named Range Region {0}  Priority {1}".format(row[1], row[2]))
+'''
 ```
 
 </p>
@@ -1104,7 +1079,10 @@ inputs.resilient_url = artifact.value
 <p>
 
 ```python
-artifact.description = "Expansions: "+ str(results.results)
+# Add the url expansions to the Artifact Description
+expansions = results.get("urllist", [])
+
+artifact.description = "Expansions:\n\n{0}".format("\n\n".join(expansions))
 ```
 
 </p>
@@ -1112,9 +1090,9 @@ artifact.description = "Expansions: "+ str(results.results)
 
 ---
 ## Function - Utilities: Extract SSL Cert From Url
-This function takes in a HTTPS URL and attempts to acquire its Certificate, saving it as an artifact.
-Inputs: A HTTPS_URL.
-Outputs: Certificate file encoded in JSON.
+This function takes in a HTTPS URL or DNS input, establishes a connection and then attempts to acquire the SSL certificate. If successful, the function then saves the certificate as an artifact of type ‘X509 Certificate File’. Works on most URLs including those with self-signed or expired certificates.
+
+The output of this function is a string representation of the certificate saved in PEM format.
 
  ![screenshot: fn-utilities-extract-ssl-cert-from-url ](./screenshots/fn-utilities-extract-ssl-cert-from-url.png)
 
@@ -1224,7 +1202,9 @@ inputs.incident_id = incident.id
 
 ---
 ## Function - Utilities: JSON2HTML
-Produce an HTML representation of JSON data. All data is converted into tables of key / value pairs or lists. Provide an optional parameter (json2html_keys) to limit the JSON data to display.
+Produce an HTML representation of JSON data. All data is converted into tables of key / value pairs or lists.
+
+Provide an optional parameter `json2html_keys` to limit the JSON data to display. For the example below, specifying `key1.key2.key3` will only convert the JSON data associated with that key path.
 
  ![screenshot: fn-utilities-json2html ](./screenshots/fn-utilities-json2html.png)
 
@@ -1276,8 +1256,13 @@ results = {
 
 ---
 ## Function - Utilities: Parse SSL Certificate
-Function: Takes in an SSL Certificate.
-Attempts to parse information from this certificate and return it.
+This function produces the structured data from a provided SSL certificate. Three inputs are accepted by the function. There are 2 defined ways to use this function for parsing certificates.
+
+Option 1 involves providing a JSON-encoded representation of a certificate. In this case the certificate input parameter should be this JSON string.
+
+Option 2 involves providing a certificate file for parsing. When the rule is triggered on an artifact, both the incident_id for that incident and the artifact_id for the specified certificate file must be provided.
+
+NOTE: The Parse SSL Certificate function expects a certificate of type PEM. If you require a way to get a PEM formatted certificate from a URL consider using this in conjunction with the Extract SSL Cert from URL function.
 
  ![screenshot: fn-utilities-parse-ssl-certificate ](./screenshots/fn-utilities-parse-ssl-certificate.png)
 
@@ -1350,7 +1335,7 @@ incident.addNote(helper.createRichText(noteText))
 
 ---
 ## Function - Utilities: PDFiD
-Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/)
+Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/). Provide the PDF file content as a base64- encoded string, for example the output from the “Attachment to Base64” function.
 
  ![screenshot: fn-utilities-pdfid ](./screenshots/fn-utilities-pdfid.png)
 
@@ -1455,8 +1440,9 @@ else:
 
 ---
 ## Function - Utilities: Resilient Search
-Searches Resilient for incident data.
-NOTE: The results may include data from incidents that the current user cannot access.  Use with caution, to avoid information disclosure.
+This function searches the Resilient platform for incident data according to the criteria specified, and returns the results to your workflow. It can be used to find incidents containing data that matches any string, or incidents currently assigned to a given user, or a very wide range of other search conditions.
+
+**NOTE:** The search results may include data from incidents that the current Resilient user (the person who triggered the workflow) cannot access. Often your Resilient users have the `Default` role that allows them to only see incidents where they are members. This function runs with the permissions of your integration account, which typically may have much wider access privileges. **Use with caution, to avoid information disclosure.**
 
  ![screenshot: fn-utilities-resilient-search ](./screenshots/fn-utilities-resilient-search.png)
 
@@ -1731,9 +1717,55 @@ incident.addNote(helper.createRichText(html))
 
 ---
 ## Function - Utilities: Shell Command
-Runs a shell command.
+This function allows your workflows to execute shell-scripts locally or remotely, and return the result into the workflow. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.
+
+These functions can be run on any platform. If you install and run the resilient-circuits framework on Windows, this allows you to configure this function to run PowerShell scripts.
 
  ![screenshot: fn-utilities-shell-command ](./screenshots/fn-utilities-shell-command.png)
+
+* Remote commands must specify a target Windows machine that has Windows Remote Management (WinRM) enabled. This can be done by running `winrm qc` in the remote computer’s command prompt.
+* Remote shells have a max memory that may not be sufficient to run your script; to change this value you must set `MaxMemoryPerShellMB`.
+* For security, the list of available shell commands must be **configured explicitly by the administrator**. To do this, edit the [fn_utilities] section of the `app.config` file.
+* **NOTE:** The parameter values `{{shell_param1}}`, `{{shell_param2}}`, `{{shell_param3}}` may contain spaces, dashes and other characters. In your command configuration, they must be surrounded with double-quotes. Failure to properly quote your command parameters creates a security risk, since the parameter values usually come from artifacts and other untrusted data.
+For remote powershell scripts the, `shell_param2`, and `shell_param3` values map `$args[0]`, `$args[1]`, and `$args[2]` respectively in the Powershell script.
+
+### app.config examples:
+* Unix Operating Systems basic examples:
+  ```
+  nslookup=nslookup "{{shell_param1}}"
+  dig=dig "{{shell_param1}}" traceroute=traceroute -m 15 "{{shell_param1}}"
+  ```
+
+* In these examples using the Volatility forensics framework, the first parameter is filename of the memory image, assuming $VOLATILITY_LOCATION is set in the environment (such as in the system unit configuration). The second parameter is the Volatility profile ("Win7SP0x64" etc).
+  ```
+  imageinfo=python /path/to/vol.py -f "{{shell_param1}}" imageinfo -- output=json
+  kdbgscan=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" kdbgscan --output=json
+  psscan=python /pathto/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" psscan --output=json
+  dlllist=python /path/to/vol.py -f "{{shell_param1}}" -- profile="{{shell_param2}}" dlllist --output=json
+  ```
+
+### Running Scripts Remotely:
+To configure running scripts remotely, the user must make these changes to the config file:
+- Specify acceptable powershell compatible extensions of script files:
+  - `remote_powershell_extensions=ps1`
+- Specify the transport authentication method
+  - `remote_auth_transport=ntlm`
+- Specify remote commands in the config file wrapped in square brackets []
+  - `remote_command=[C:\remote_directory\remote_script.ps1]`
+- Specify a remote computer in the config file to run the script wrapped in parentheses ()
+  - `remote_computer=(username:password@server)`
+
+
+### Examples of remote commands:
+```
+# Remote commands
+remote_command1=[C:\scripts\remote_script.ps1]
+remote_command2=[C:\scripts\another_script.ps1]
+
+# Remote computers
+remote_computer1=(domain\administrator:password@server1)
+remote_computer2=(domain\admin:P@ssw0rd@server2)
+```
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1817,7 +1849,7 @@ incident.addNote(helper.createPlainText(note_text))
 
 ---
 ## Function - Utilities: String to Attachment
-Creates an attachment of an inputted string
+Creates a new file (.txt) attachment in the incident or task from a string that your workflow provides as input.
 
  ![screenshot: fn-utilities-string-to-attachment ](./screenshots/fn-utilities-string-to-attachment.png)
 
@@ -1875,18 +1907,19 @@ None
 
 ---
 ## Function - Utilities: Timer
-This function implements a simple timer.  A workflow using this function will sleep for the specified amount of time (utilities_time) or until the specified timer (utilities_epoch). The function also periodically checks the status of the calling workflow and will end function execution if the workflow has been terminated.
+This function implements a timer (sleep) function that when called from a workflow will cause the workflow to pause for the specified amount of time. The function takes one of two parameters as input: `utilities_time` or `utilities_epoch`.
 
-The function can be called with the sleep time specified as a string (utilities_time) or with the epoch time the timer should end sleep (utilities_epoch).  
+The utilities_time parameter is a string that specifies the total amount of time to pause. The input string is of format `time value` concatenated with a `time unit` character, where character is:
+• `s` for seconds
+• `m` for minutes
+• `h` for hours
+• `d` for days
 
-The utilities_time parameter is a string of format “time value” concatenated with a “time unit” character, where character is: 
-•	‘s’ for seconds
-•	‘m’ for minutes
-•	‘h’ for hours
-•	‘d’ for days
-For example: '30s' = 30 seconds; '40m' = 40 minutes; 
+For example: `30s` = 30 seconds; `20m` = 20 minutes; `5h` = 5 hours; `6d` = 6 days
 
-The utilities_epoch parameter is an epoch time value specifying when the timer should stop.
+The `utilities_epoch` parameter is the epoch time that the timer function should stop sleeping. An epoch time value is returned from the date time picker UI widget.
+
+The timer function will break down the total amount of time to pause into smaller sleep time intervals and check in between sleep time whether the workflow has been terminated while the function is running. If the workflow has been terminated, the function will end execution.
 
  ![screenshot: fn-utilities-timer ](./screenshots/fn-utilities-timer.png)
 
@@ -1958,7 +1991,7 @@ None
 
 ---
 ## Function - Utilities: XML Transformation
-Perform a transformation of an xml document based on a given stylesheet
+Transforms an XML document using a preexisting `xsl` stylesheet. The resulting content is returned.
 
  ![screenshot: fn-utilities-xml-transformation ](./screenshots/fn-utilities-xml-transformation.png)
 
