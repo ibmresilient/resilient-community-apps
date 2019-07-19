@@ -15,7 +15,6 @@
 # **User Guide:** fn_utilities_v1.0.10
 
 ## Table of Contents
-- [Key Features](#key-features)
 - [Function - Utilities: Attachment Hash](#function---utilities-attachment-hash)
 - [Function - Utilities: Attachment to Base64](#function---utilities-attachment-to-base64)
 - [Function - Utilities: Attachment Zip Extract](#function---utilities-attachment-zip-extract)
@@ -38,16 +37,6 @@
 - [Function - Utilities: Timer](#function---utilities-timer)
 - [Function - Utilities: XML Transformation](#function---utilities-xml-transformation)
 - [Rules](#rules)
-
----
-
-## Key Features
-<!--
-  List the Key Features of the Integration
--->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
 
 ---
 
