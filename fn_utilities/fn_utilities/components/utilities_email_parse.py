@@ -13,6 +13,7 @@ import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
 
+CONFIG_DATA_SECTION = 'fn_utilities'
 EMAIL_ATTACHMENT_ARTIFACT_ID = 7
 ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
@@ -35,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             fn_inputs = validate_fields(["incident_id"], kwargs)
 
             # Instansiate ResultPayload
-            rp = ResultPayload("utilities_email_parse", **kwargs)
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # If its just base64content as input, use parse_from_string
             if fn_inputs.get("base64content"):
