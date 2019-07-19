@@ -52,7 +52,7 @@
 ---
 
 ## Function - Utilities: Attachment Hash
-Calculate hashes for a file attachment.
+Calculate hashes for a file attachment. Returns md5, sha1, sha256 and other hashes of the file content.
 
  ![screenshot: fn-utilities-attachment-hash ](./screenshots/fn-utilities-attachment-hash.png)
 
@@ -121,7 +121,7 @@ incident.addArtifact("Malware MD5 Hash", results.md5, u"MD5 hash of '{}'".format
 
 ---
 ## Function - Utilities: Attachment to Base64
-Read a file attachment as a Base64 string.
+Read a file attachment or artifact as a Base64 string.
 
  ![screenshot: fn-utilities-attachment-to-base64 ](./screenshots/fn-utilities-attachment-to-base64.png)
 
@@ -158,7 +158,7 @@ results = {
 <p>
 
 ```python
-# Required inputs are: the incident id and attachment id
+# Required inputs are: incident_id artifact_id
 inputs.incident_id = incident.id
 inputs.artifact_id = artifact.id
 ```
@@ -374,9 +374,6 @@ incident.addNote(helper.createRichText(html))
 ## Function - Utilities: Base64 to Artifact
 Create a new artifact from a Base64 string
 
-<!-- TODO -->
-<!-- No Example Workflow Provided... -->
-
  ![screenshot: fn-utilities-base64-to-artifact ](./screenshots/fn-utilities-base64-to-artifact.png)
 
 <details><summary>Inputs:</summary>
@@ -399,9 +396,60 @@ Create a new artifact from a Base64 string
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+  'hits': [],
+  'hash': '8ed1d04c56843f357af60e98f6178c5b19e89306bc7f132e49a0951326d90bb9',
+  'description': 'Test description',
+  'creator': {
+    'status': 'A',
+    'password_changed': False,
+    'display_name': 'Orchestration Engine',
+    'is_external': False,
+    'email': 'integrations@example.com',
+    'lname': 'Engine',
+    'create_date': 1542400059674,
+    'last_login': 1563536472570,
+    'fname': 'Orchestration',
+    'last_modified_time': 1563536472571,
+    'locked': False,
+    'id': 38
+  },
+  'inc_owner': 71,
+  'perms': None,
+  'created': 1563536572548,
+  'relating': None,
+  'value': 'tmptpFuFK',
+  'properties': None,
+  'parent_id': None,
+  'attachment': {
+    'task_at_id': None,
+    'vers': 4,
+    'name': 'tmptpFuFK',
+    'task_id': None,
+    'created': 1563536572692,
+    'inc_owner': 71,
+    'task_members': None,
+    'task_custom': None,
+    'task_name': None,
+    'inc_name': 'Test fn_utilities',
+    'creator_id': 38,
+    'content_type': 'application/pdf',
+    'inc_id': 2095,
+    'type': 'artifact',
+    'id': 2,
+    'size': 220184
+  },
+  'inc_name': 'Test fn_utilities',
+  'creator_principal': {
+    'display_name': 'Orchestration Engine',
+    'type': 'user',
+    'id': 38,
+    'name': 'integrations@example.com'
+  },
+  'inc_id': 2095,
+  'type': 16,
+  'id': 1,
+  'actions': [],
+  'pending_sources': []
 }
 ```
 
@@ -431,9 +479,6 @@ None
 ---
 ## Function - Utilities: Base64 to Attachment
 Create a new attachment from a base64 string.
-
-<!-- TODO -->
-<!-- No Example Workflow Provided... -->
 
  ![screenshot: fn-utilities-base64-to-attachment ](./screenshots/fn-utilities-base64-to-attachment.png)
 
