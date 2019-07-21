@@ -733,6 +733,14 @@ Any attachments found are added to the Incident as Artifacts if `utilities_parse
 
  ![screenshot: fn-utilities-email-parse ](./screenshots/fn-utilities-email-parse.png)
 
+### Supporting Outlook .msg files
+* This function relies on `mail-parser>=3.9.3`
+* To support parsing of Outlook email files (`.msg`), you need to install the `libemail-outlook-message-perl` package. For Debian based systems:
+  ```
+  $ apt-get install libemail-outlook-message-perl
+  ```
+* See https://github.com/SpamScope/mail-parser for more
+
 <details><summary>Inputs:</summary>
 <p>
 
