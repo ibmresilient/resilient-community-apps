@@ -30,7 +30,7 @@ def filter_hits(rtn, status_type):
 
 
 def parse_scan_results(xml):
-    """"Parse scan eoc xml results and convert to dict.
+    """ Parse scan eoc xml results and convert to dict.
         Example xml:
         ============
         <EOC creator="Resilient" version="1.0" id="id">
@@ -52,9 +52,9 @@ def parse_scan_results(xml):
                     <Files>
                         <File name="" action="create">
                             <Hash name="SHA256" value="8f5cae16ef5cfd3fcd9a4d6d58de14137b92a845ce00f69b64c5b04b6b712a83"/>
-                            <Matched result="HASH_MATCH" value="C:\temp\suspicious_exe.exe" hashType="SHA256"/>
-                            <Matched result="HASH_MATCH" value="C:\Users\Administrator\Desktop\suspicious_exe.exe" hashType="SHA256"/>
-                            <Matched result="HASH_MATCH" value="C:\Users\Administrator\Desktop\suspicious_exe_copy.exe" hashType="SHA256"/></File>
+                            <Matched result="HASH_MATCH" value="C:\\temp\\suspicious_exe.exe" hashType="SHA256"/>
+                            <Matched result="HASH_MATCH" value="C:\\Users\\Administrator\\Desktop\\suspicious_exe.exe" hashType="SHA256"/>
+                            <Matched result="HASH_MATCH" value="C:\\Users\\Administrator\\Desktop\\suspicious_exe_copy.exe" hashType="SHA256"/></File>
                         <File name="" action="create">
                             <Matched result="NO_MATCH"/></File>
                         <File name="" action="create">
