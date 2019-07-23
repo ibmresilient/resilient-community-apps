@@ -19,6 +19,7 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = TasksResilientMock
 
+
 def call_task_utils_update_task_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("task_utils_update_task", function_params)

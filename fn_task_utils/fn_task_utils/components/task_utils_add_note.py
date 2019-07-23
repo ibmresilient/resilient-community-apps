@@ -10,7 +10,7 @@ from fn_task_utils.lib.task_common import find_task_by_name, get_function_input
 
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'task_utils_add_note' """
+    """Component that implements Resilient function 'task_utils_add_note"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""

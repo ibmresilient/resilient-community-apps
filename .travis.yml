@@ -11,6 +11,10 @@ env:
 matrix:
   fast_finish: true
   include:
+  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
+  # ==========	
+  # Below jobs are used to run tests against the most recently modified integration. 	
+  # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
   - name: Python 2.7 Build and Run Tests
     stage: Most Recent Integration
     if: branch != master AND type=push
@@ -26,6 +30,9 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
+  # Jobs below this line are reserved for master branch 	
+  # Master branch is where all the integrations should be tested, its okay if it takes a while 	
+  # As we have the push jobs above to handle individual commits
   - if: branch = master AND type != pull_request
     python: 2.7
     name: Py27 Master Build and Run tests
@@ -33,7 +40,7 @@ matrix:
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
-    - echo "2.7 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh
+    - echo "2.7 Master Build" && .scripts/run_tests.sh
   - if: branch = master AND type != pull_request
     stage: Mock Tests
     python: 3.6
@@ -41,7 +48,7 @@ matrix:
     env:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
-    - echo "3.6 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh
+    - echo "3.6 Master Build" && .scripts/run_tests.sh
 before_install:
 - echo "About to install"
 install:

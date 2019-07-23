@@ -13,7 +13,7 @@ def get_module_name(module_path):
 
 def snake_to_camel(word):
     """
-    Convert a word from snake_case to  CamelCase
+    Convert a word from snake_case to CamelCase
     """
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
