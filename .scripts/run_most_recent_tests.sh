@@ -16,8 +16,15 @@ done
 
 # Make a new array which acts as a Set to gather only unique package names 
 INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
-echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
 
+
+if [ -z "$INTEGRATIONS" ]
+then
+      echo "Did not find any integrations that were modified"
+else
+      echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
+fi
+      
 for integration in ${INTEGRATIONS[@]};
 do 
     echo "Running tox tests for this package: $integration" 

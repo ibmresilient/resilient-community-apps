@@ -104,6 +104,6 @@ after_script:
 notifications:
   # Turn off email notifications 
   email: false
-#  slack:
-#    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
-#    on_success: change
+  slack:
+   slack: ibm-security:c6VG4K1qjurRuLB110kcJFqu
+   on_success: always
