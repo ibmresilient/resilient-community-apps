@@ -10,7 +10,7 @@ do
     if [[ $file =~ (fn_|rc_)+ ]]; 
     then 
     # Strip everything except the first directory in the path (integration name) and append to an array
-    packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $2}')); 
+    packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}')); 
     fi
 done
 
