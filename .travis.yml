@@ -1,13 +1,6 @@
 language: python
 python: 2.7
 os: linux
-# Add a cache for pip to reduce the download time of the most common packages 
-# cache:
-# - pip
-# directories:
-#   - $HOME/.cache/pip
-
-# Enviroment variables such as security tokens 
 env:
   global:
   - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
@@ -15,95 +8,60 @@ env:
   - PIP_FIND_LINKS="$TRAVIS_BUILD_DIR/pkgs"
   - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
   - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
-
-# stages: 
-#   # - name: Most Recent Integration
-#   #   if: branch != master AND type=push 
-#   - name: Mock Tests
-#     if: branch = master AND type != pull_request
-    
-
 matrix:
   fast_finish: true
   include:
-  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
-  # ==========
-  # Below jobs are used to run tests against the most recently modified integration. 
-  # We determine the most recent one using ls. 
-  - name: "Python 2.7 Build and Run Tests"
+  - name: Python 2.7 Build and Run Tests
     stage: Most Recent Integration
-    if: branch != master AND type=push 
+    if: branch != master AND type=push
     python: 2.7
     env:
     - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
-    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh 
- 
-  - name: "Python 3.6 Build and Run Tests"
-    if: branch != master AND type=push 
+    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
+  - name: Python 3.6 Build and Run Tests
+    if: branch != master AND type=push
     python: 3.6
-    env:
-    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test" 
-    script:
-      - echo "3.6 push test" && .scripts/run_most_recent_tests.sh 
-  # Jobs below this line are reserved for master branch 
-  # Master branch is where all the integrations should be tested, its okay if it takes a while 
-  # As we have the push jobs above to handle individual commits
-  - if: branch = master AND type != pull_request
-    python: 2.7
-    name: "Py27 Master Build and Run tests"
-    stage: Mock Tests
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
-    script:
-    - echo "2.7 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh 
-  - if: branch = master AND type != pull_request
-    stage: Mock Tests
-    python: 3.6
-    name: "Py36 Master Build and Run tests"
     env:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
-    - echo "3.6 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh 
-
-
+    - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
+  - if: branch = master AND type != pull_request
+    python: 2.7
+    name: Py27 Master Build and Run tests
+    stage: Mock Tests
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh
+  - if: branch = master AND type != pull_request
+    stage: Mock Tests
+    python: 3.6
+    name: Py36 Master Build and Run tests
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 Master Build" && .scripts/build_packages.sh && .scripts/run_tests.sh
 before_install:
-  - echo "About to install"
-# Install all the packages we might need for our jobs. Most of these will be cached to make further builds more efficient.
+- echo "About to install"
 install:
-  - pip install --upgrade pip
-  - pip install --upgrade setuptools
-  - pip install tox
-  - pip install pylint
-  - pip install pytest==4.0.1 # Install 4.0.1 to avoid namespace issue 
-  - pip install resilient
-  - pip install resilient-circuits
-  - pip install pytest-resilient-circuits
-
-# The script that will run for all jobs which don't explicitly set a `script` param
+- pip install --upgrade pip
+- pip install --upgrade setuptools
+- pip install tox
+- pip install pylint
+- pip install pytest==4.0.1
+- pip install resilient
+- pip install resilient-circuits
+- pip install pytest-resilient-circuits
 script:
-  - .scripts/build_packages.sh && .scripts/run_tests.sh
-
-# Show which packages will be deployed to github releases
+- ".scripts/build_packages.sh && .scripts/run_tests.sh"
 after_script:
-  - echo "Packages To Deploy"
-  - ls -l .scripts/*.tar.gz
-  - ls -l .scripts/*.zip
-
-# Deploy step to be run after the jobs, commented out as the internal releases are handled differently now.
-# deploy:
-#   provider: releases
-#   api_key: "$GITHUB_OAUTH_TOKEN"
-#   file_glob: true
-#   file: .scripts/rc-*.tar.gz
-#   skip_cleanup: true
-#   on:
-#     tags: true
-#     python: 2.7
-
+- echo "Packages To Deploy"
+- ls -l .scripts/*.tar.gz
+- ls -l .scripts/*.zip
 notifications:
-  # Turn off email notifications 
-  email: false
   slack:
-   slack: ibm-security:c6VG4K1qjurRuLB110kcJFqu
-   on_success: always
+    secure: c6VKYIu0lxoNf8qav7lXHFpeSTT4XQs+Q3v/pDgMm5G7uhcR2GwkK+DfLBvPa31W07I4mNF2eN8KJM4Hoa0y8q7s36ndYczL09NWn7qzB3b9R/vBH2Kz5vo16SelDaLtof4PShh/1IFdygh0w8138BjZGrxGVdNLAEhS/VFIchemeLSy77vIvbHme/XziWyPFtObcR+h9cf5RIkY58QpgBYlN7OIpSI8nDwWnso2Q5RHtKUi0J/JgE9cITOXlRGDpJuuZeLX4nhMgugZFBmQpc8fZpA/XSGLgn176TirIUjFRKin0G86nbJp0QHBeHos+uEYhyk/Y2lbE0kC+N+xDw70q5EnIGthY785te/GCKOw6h9Ox7ObogpF10jk6i2qZxQwQjooMdJ/9Y6rPcOf7fmN2QTxVSNCduXN2b0hbSM3A+zCoT3D8/x+51o/HKVyUHCewmY7ljWrn5XWNpI6p5+wODmEMGX1YlYY0O1zx/NA4O5p/M2tjM7J9v+l+DDNsy716vPdUgdAWcRGZHBqqBO9mQcEeHR/4shdw8eU1M35GAELsgdD5UwKNEhbrrAr8TsHH0JqXujIxiufFvIFFlQ2GUxojj6JhHCy2LqGY6qzanpwJR/Y9QW2AqI8ToUOJS6cCKFv7CZA+qva+kQqjvD0kE9RepjLjzpFkqjxSmY=
+    on_success: always
+  email: false
+  
