@@ -4,21 +4,41 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-#echo "Running this command : ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1";
-echo "$(ls -tld `find ./* -maxdepth 1 -type f -name 'setup.py'`)"
-most_recent_package=$(ls -td `find ./* -maxdepth 1 -type f -name 'setup.py'` | head -1)
 
-echo "Most Recent package shows as : $most_recent_package";
+# Declare an array that will hold the fn_ or rc_ packages 
+packages_that_have_been_changed=()
 
-setup_file="${most_recent_package}"
-echo "${setup_file}"
-dist_dir=$( cd $(dirname $most_recent_package) ; pwd -P )
+# For every file in the diff 
+for file in $(git diff --name-only HEAD~0 HEAD~1); 
+do 
+    # If the file contains either fn_ or rc_ in the path 
+    if [[ $file =~ (fn_|rc_)+ ]]; 
+    then 
+    # Strip everything except the first directory in the path (integration name) and append to an array
+    packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $2}')); 
+    fi
+done
 
-echo "Building this package:";
-printf '  %s\n' "$setup_file";
-echo "Storing packages to: $dist_dir";
+# Make a new array which acts as a Set to gather only unique package names 
+INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";done| sort| uniq| xargs));
 
-# Run the Build
-pkg_dir=$(dirname "$setup_file")
-echo "Running build from $pkg_dir";
-(cd $pkg_dir && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
+
+if [ -z "$INTEGRATIONS" ]
+then
+      echo "Did not find any integrations that were modified"
+else
+      echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
+fi
+      
+for integration in ${INTEGRATIONS[@]};
+do 
+    echo "For package: $integration"
+    dist_dir=$( cd $(dirname $integration) ; pwd -P )
+    echo "Storing package to: $dist_dir";
+    # Build the python package storing the output as a zip
+    (cd $integration && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
+done
+printf 'Building complete.  Final Status [%d]\n' $status;
+exit $status
+
+
