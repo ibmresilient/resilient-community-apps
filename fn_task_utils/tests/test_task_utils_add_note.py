@@ -90,4 +90,4 @@ class TestTaskUtilsAddNote:
         newest_task_note = results["content"]["task_note"]
 
         assert newest_task_note
-        assert task_utils_note_body in newest_task_note[len(newest_task_note)-1]["text"]["content"]
+        assert task_utils_note_body in newest_task_note["text"]["content"]
