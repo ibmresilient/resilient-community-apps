@@ -24,14 +24,18 @@ startup_interval=
 # choices:  malware, phishing, spam, other, all
 # if this configuration value is missing or blank, no filtering
 type_filter=
+
 # minimum Proofpoint score required to import into Resilient
 # scores are floating point values from 0 to 100
 # no entry specifies no score filtering
-score_threshold=
+#score_threshold=
+
 # optional Jinja template to override default threat description format
-threat_template=
+#threat_template=
+
 # optional Jinja template to override default forensic format
-forensics_template=
+#forensics_template=
+
 cafile=
 """
     return config_data
