@@ -67,10 +67,7 @@ IP Sources or Destination Artifacts will be automatically added to the icd ticke
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn_res_to_icd **customizations** into the Resilient platform:
-  ```
-  $ resilient-circuits customize -y -l fn-res-to-icd
-  ```
+* Import the export.res file which contains the fn_res_to_icd **customizations** into the Resilient platform via the Adminstrators settings.
 * Open the config file, scroll to the bottom and edit your fn_res_to_icd configurations:
   ```
   $ nano ~/.resilient/app.config
