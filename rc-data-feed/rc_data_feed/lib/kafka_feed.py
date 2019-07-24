@@ -24,7 +24,7 @@ class KafkaFeedDestination(FeedDestinationBase):
 
         ## Get the mapping of topics
         topic_map = self.all_options['topic_map']
-        self.topic_dict = dict(item.strip(" ").split("=") for item in topic_map.strip(" ").split(";"))
+        self.topic_dict = dict(item.split('=') for item in topic_map.replace(' ', '').split(';'))
         LOG.debug("Topic Map is: %s", self.topic_dict)
 
         ## Tidy up to remove our options vs kafkas options
