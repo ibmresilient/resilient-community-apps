@@ -76,6 +76,8 @@ def create_attachment(rest_client, file_name, file_content, incident_id):
     # Create the temporary file save results in json format.
     try:
         with temp_file_obj as temp_file:
+            if sys.version_info.major == 2:
+                file_content = file_content.encode('utf-8')
             temp_file.write(file_content)
             temp_file.flush()
             # Post file to Resilient
@@ -101,10 +103,10 @@ def generate_remediate_result_csv(rtn, sep_commandid):
     :param sep_commandid: Result commandid.
     :return (file_name, file_content): Return tuple of file name and  content
     """
-    file_content = ""
+    file_content = u""
     file_name = "Remediation_results_for_commandid_{0}_{1}.csv"\
         .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S'))
-    file_content += "Result for remediation(delete) scan of artifact '{0}' for commandid '{1}'\n"\
+    file_content += "Result for remediation(delete) scan of artifact '{0}' for commandid '{1}'.\n"\
         .format(rtn["remediate_artifact_value"], sep_commandid)
     file_content += "Computer name,Hash type,Hash value,File Path\n"
     eps = rtn.get("content",[])
@@ -115,7 +117,7 @@ def generate_remediate_result_csv(rtn, sep_commandid):
         artifact_value = eps[i]["scan_result"]["artifact_value"]
         matches = eps[i]["scan_result"]["HASH_MATCHES"]
         for m in matches:
-            file_content += ("{0}\n".format(",".join([ep_name, artifact_type, artifact_value, m["value"]])))
+            file_content += ("{0}\n".format(",".join([ep_name,artifact_type,artifact_value,m["value"]])))
 
     return(file_name, file_content)
 
@@ -126,10 +128,12 @@ def generate_scan_result_csv(rtn, sep_commandid):
     :param sep_commandid: Result commandid.
     :return (file_name, file_content): Return tuple of file name and  content
     """
-    file_content = ""
+    file_content = u""
     file_name = "EOC_scan_results_for_commandid_{0}_{1}.csv" \
         .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S'))
-    file_content = "Computer name,Computer id,Artifact type,Artifact value,Match type,Match value\n"
+    file_content += u"Eoc scan results of artifact '{0}' for commandid '{1}'.\n" \
+        .format(rtn["scan_artifact_value"], sep_commandid)
+    file_content += u"Computer name,Computer id,Artifact type,Artifact value,File path,Hash value\n"
 
     eps = rtn.get("content",[])
     for i in range(len(eps)):
@@ -141,11 +145,11 @@ def generate_scan_result_csv(rtn, sep_commandid):
             else eps[i]["scan_result"]["HASH_MATCHES"]
         for m in matches:
             if "File" in artifact_type:
-                file_content += ("{0}\n".format(",".join([ep_name, ep_id, artifact_type, artifact_value,
-                                                          m["hashType"], m["hashValue"]])))
+                file_content += (u"{0}\n".format(",".join([ep_name, ep_id,artifact_type,artifact_value,
+                                                          m["value"],m["hashValue"]])))
             else:
-                file_content += ("{0}\n".format(",".join([ep_name, ep_id, artifact_type, artifact_value,
-                                                          "File path", m["value"]])))
+                file_content += (u"{0}\n".format(",".join([ep_name, ep_id, artifact_type,artifact_value,
+                                                          m["value"],artifact_value])))
 
     return(file_name, file_content)
 

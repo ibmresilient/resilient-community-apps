@@ -215,12 +215,14 @@ def process_results(rtn, options, status_type, scan_date):
     # total_ep_count = Total endpoint count for the command.
     # total_not_completed = Total endpoints which have not completed command.
     # total_fail_remediation_count = Total remediation failures.
-    # remediate_artifact_value = The originating artifcat for remediate scan.
+    # scan_artifact_value = The originating artifact value for eoc scan.
+    # remediate_artifact_value = The originating artifact value for remediate scan.
     sep_scan_timeout = options.get("sep_scan_timeout", None)
     rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
         = rtn["total_fail_remediation_count"] = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
     rtn["total_ep_count"] = len(rtn["content"])
+    rtn["scan_artifact_value"] = ''
     rtn["remediate_artifact_value"] = ''
     get_overall_progress(rtn, sep_scan_timeout, scan_date)
 
@@ -234,6 +236,8 @@ def process_results(rtn, options, status_type, scan_date):
                 rtn["total_fail_remediation_count"] += rtn["content"][i]["scan_result"]["fail_remediation_count"]
                 if rtn["content"][i]["scan_result"]["match_count"] > 0:
                     rtn["total_match_ep_count"] += 1
+                    if not rtn["scan_artifact_value"]:
+                        rtn["scan_artifact_value"] = rtn["content"][i]["scan_result"]["artifact_value"]
                 if rtn["content"][i]["scan_result"]["remediation_count"] > 0:
                     rtn["total_remediation_ep_count"] += 1
                     if not rtn["remediate_artifact_value"]:
