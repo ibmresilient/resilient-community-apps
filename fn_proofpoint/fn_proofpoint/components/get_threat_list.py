@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+
 import requests
 import json
 from requests.auth import HTTPBasicAuth

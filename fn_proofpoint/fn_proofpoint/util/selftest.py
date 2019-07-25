@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 """Function implementation
    test with: resilient-circuits selftest -l fn_proofpoint_campaign
 """

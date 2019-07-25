@@ -6,17 +6,13 @@ from setuptools import setup, find_packages
 setup(
     name='fn_proofpoint',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
     description="Resilient Circuits Components for 'fn_proofpoint'",
     long_description="Resilient Circuits Components for 'fn_proofpoint'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient',
-        'requests',
-        'jinja2',
+        'resilient_circuits>=30.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
