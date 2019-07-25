@@ -77,7 +77,7 @@ def create_attachment(rest_client, file_name, file_content, incident_id):
     try:
         with temp_file_obj as temp_file:
             temp_file.write(file_content)
-
+            temp_file.flush()
             # Post file to Resilient
             att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(incident_id),
                                                      temp_file.name, file_name,
@@ -94,7 +94,32 @@ def create_attachment(rest_client, file_name, file_content, incident_id):
 
     return att_report
 
-def generate_result_csv(rtn, sep_commandid):
+def generate_remediate_result_csv(rtn, sep_commandid):
+    """"Generate file content for attachment from remediation scan results.
+
+    :param rtn: Result returned from SEPM server after scan result processed.
+    :param sep_commandid: Result commandid.
+    :return (file_name, file_content): Return tuple of file name and  content
+    """
+    file_content = ""
+    file_name = "Remediation_results_for_commandid_{0}_{1}.csv"\
+        .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S'))
+    file_content += "Result for remediation(delete) scan of artifact '{0}' for commandid '{1}'\n"\
+        .format(rtn["remediate_artifact_value"], sep_commandid)
+    file_content += "Computer name,Hash type,Hash value,File Path\n"
+    eps = rtn.get("content",[])
+    for i in range(len(eps)):
+        ep_name = eps[i]["computerName"]
+        ep_id = eps[i]["computerId"]
+        artifact_type = eps[i]["scan_result"]["artifact_type"]
+        artifact_value = eps[i]["scan_result"]["artifact_value"]
+        matches = eps[i]["scan_result"]["HASH_MATCHES"]
+        for m in matches:
+            file_content += ("{0}\n".format(",".join([ep_name, artifact_type, artifact_value, m["value"]])))
+
+    return(file_name, file_content)
+
+def generate_scan_result_csv(rtn, sep_commandid):
     """"Generate file content for attachment from eoc scan results.
 
     :param rtn: Result returned from SEPM server after scan result processed.
@@ -167,10 +192,14 @@ def add_non_compliant_ep_properties(rtn, non_compliant_endpoints, results):
         ep_name = eps[i]["computerName"]
         if ep_name in non_compliant_endpoints:
             ep["computer_name"] = ep_name
-            if "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
-                ep["host_integrity_check"] = "Failed"
+            ep_osname = eps[i]["osname"]
+            if "windows" in ep_osname.lower(): # Only applicable for MS Windows OSes
+                if "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
+                    ep["host_integrity_check"] = "Failed"
+                else:
+                    ep["host_integrity_check"] = "Passed"
             else:
-                ep["host_integrity_check"] = "Passed"
+                ep["host_integrity_check"] = "N/A"
             if  eps[i]["onlineStatus"]:
                 ep["onlineStatus"] = "Online"
             else:
@@ -215,16 +244,17 @@ def get_endpoints_status(rtn, non_compliant_endpoints=None):
             results["disabled"] = get_engine_status(eps, non_compliant_endpoints)
             for i in range(len(eps)):
                 ep_name = eps[i]["computerName"]
+                ep_osname = eps[i]["osname"]
                 for f in EP_PROP_FIELDS:
                     if f == "onlineStatus" and int(eps[i][f]) == 0:
                         results["offline"] += 1
                         if not ep_name in non_compliant_endpoints:
                             non_compliant_endpoints.append(ep_name)
-
-                    if f == "quarantineDesc" and "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
-                        results["hi_failed"] += 1
-                        if not ep_name in non_compliant_endpoints:
-                            non_compliant_endpoints.append(ep_name)
+                    if "windows" in ep_osname.lower():  # Only applicable for MS Windows OSes
+                        if f == "quarantineDesc" and "host integrity check passed" not in eps[i].get("quarantineDesc", "").lower():
+                            results["hi_failed"] += 1
+                            if not ep_name in non_compliant_endpoints:
+                                non_compliant_endpoints.append(ep_name)
                     if f == "timediffLastUpdateTime":
                         if eps[i][f] > HB_DEF:
                             results["out_of_date"] += 1
