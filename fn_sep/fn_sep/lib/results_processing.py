@@ -29,7 +29,7 @@ def filter_hits(rtn, status_type):
     rtn["totalElements"] = len(rtn["content"])
 
 
-def parse_scan_results(xml):
+def parse_scan_results(xml, status_type):
     """ Parse scan eoc xml results and convert to dict.
         Example xml:
         ============
@@ -82,6 +82,7 @@ def parse_scan_results(xml):
         }
 
     :param xml: Status in xml for endpoint.
+    :param status_type: Scan type (scan or remediation).
     :return Scan result in a dict.
     """
     # Create empty result dict.
@@ -89,6 +90,7 @@ def parse_scan_results(xml):
         "MATCH": False,
         "artifact_value": '',
         "artifact_type": '',
+        "remediate_artifact_value": '',
         "FULL_MATCHES": [],
         "HASH_MATCHES": [],
         "PARTIAL_MATCHES": [],
@@ -104,9 +106,19 @@ def parse_scan_results(xml):
 
         for item in results.findall('Activity/OS/Files/File/Matched'):
             LOG.debug(item.attrib)
-            if item.attrib["result"] == match_types[-1:]: # No match
+            test = match_types[-1:]
+            if item.attrib["result"] in match_types[-1:]: # No match
+                continue
+            elif status_type.lower() == "remediation" and item.attrib["remediation"].lower() != "succeeded":  # Remediation not successful
+                if item.attrib["remediation"].lower == "failed":
+                    scan_result["fail_remediation_count"] += 1
                 continue
             elif item.attrib["result"] in match_types[:-1]: # Actual Match
+                if status_type.lower() == "remediation":
+                    for matched_file in results.findall('Activity/OS/Files/File'):
+                        if not scan_result["remediate_artifact_value"]:
+                            scan_result["remediate_artifact_value"] = matched_file.attrib["name"]
+                            break
                 scan_result["MATCH"] = True
                 for match_type in match_types[:-1]:
                     if item.attrib["result"] == match_type and not item.attrib in scan_result[match_type+'ES']:
@@ -203,18 +215,19 @@ def process_results(rtn, options, status_type, scan_date):
     # total_ep_count = Total endpoint count for the command.
     # total_not_completed = Total endpoints which have not completed command.
     # total_fail_remediation_count = Total remediation failures.
+    # remediate_artifact_value = The originating artifcat for remediate scan.
     sep_scan_timeout = options.get("sep_scan_timeout", None)
     rtn["total_match_count"] = rtn["total_match_ep_count"] = rtn["total_remediation_count"] \
         = rtn["total_fail_remediation_count"] = rtn["total_remediation_ep_count"] = 0
     rtn["total_not_completed"] = 0
     rtn["total_ep_count"] = len(rtn["content"])
-
+    rtn["remediate_artifact_value"] = ''
     get_overall_progress(rtn, sep_scan_timeout, scan_date)
 
     for i in range(len(rtn["content"])):
         if rtn["content"][i]["stateId"] == 3:
             if status_type.lower() in ["scan", "remediation"]:
-                rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"])
+                rtn["content"][i]["scan_result"] = parse_scan_results(rtn["content"][i]["resultInXML"], status_type)
                 # Reset total count.
                 rtn["total_match_count"] += rtn["content"][i]["scan_result"]["match_count"]
                 rtn["total_remediation_count"] += rtn["content"][i]["scan_result"]["remediation_count"]
@@ -223,6 +236,8 @@ def process_results(rtn, options, status_type, scan_date):
                     rtn["total_match_ep_count"] += 1
                 if rtn["content"][i]["scan_result"]["remediation_count"] > 0:
                     rtn["total_remediation_ep_count"] += 1
+                    if not rtn["remediate_artifact_value"]:
+                        rtn["remediate_artifact_value"] = rtn["content"][i]["scan_result"]["remediate_artifact_value"]
         else:
             # Increment if endpoint status ne 3
             rtn["total_not_completed"] += 1
