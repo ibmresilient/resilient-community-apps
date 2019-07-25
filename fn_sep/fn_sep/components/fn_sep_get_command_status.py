@@ -15,7 +15,8 @@ from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_sep.lib.sep_client import Sepclient
-from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, create_attachment, generate_result_csv
+from fn_sep.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, create_attachment, generate_scan_result_csv, \
+    generate_remediate_result_csv
 from fn_sep.lib.results_processing import process_results
 
 LOG = logging.getLogger(__name__)
@@ -117,7 +118,21 @@ class FunctionComponent(ResilientComponent):
 
             rtn = process_results(sep.get_paginated_results(sep.get_command_status, **params), self.options,
                                   sep_status_type, sep_scan_date)
-            if sep_status_type.lower() == "scan" and sep_matching_endpoint_ids:
+            if sep_status_type.lower() == "remediation" and rtn["total_remediation_count"] > 0:
+                # Artifact may be remediated in multiple locations on multiple endpoints so send
+                # back remediation details as an incident attachment
+                # Get csv attachment file name and content.
+                (file_name, file_content) = generate_remediate_result_csv(rtn, sep_commandid)
+
+                yield StatusMessage(
+                    "Adding remediation data for command id {} as an incident attachment {}".format(sep_commandid,
+                                                                                                    file_name))
+                # Create an attachment
+                att_report = create_attachment(self.rest_client(), file_name, file_content, params["incident_id"])
+                # Add attachment name to result
+                rtn["att_name"] = att_report["name"]
+
+            elif sep_status_type.lower() == "scan" and sep_matching_endpoint_ids:
                 # Return only endpoint ids for artifact matches.
                 content_copy = copy.deepcopy(rtn["content"])
                 rtn = {"endpoints_matching_ids": []}
@@ -126,7 +141,7 @@ class FunctionComponent(ResilientComponent):
                 del content_copy
             elif sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
                     self.options.get("sep_results_limit", RESULTS_LIMIT_DEF)):
-                # Over results limit. Send full result back as an attachement and also return an actual
+                # Over results limit. Send full result back as an attachment and also return an actual
                 # result truncated to the results limit.
                 results_limit = int(self.options.get("sep_results_limit", RESULTS_LIMIT_DEF))
                 result_limit_complete = False
@@ -136,7 +151,7 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage(
                     "Adding EOC scan data for command id {} as an incident attachment".format(sep_commandid))
                 # Get csv attachment file name and content.
-                (file_name, file_content) = generate_result_csv(rtn, sep_commandid)
+                (file_name, file_content) = generate_scan_result_csv(rtn, sep_commandid)
 
                 # Create an attachment
                 att_report = create_attachment(self.rest_client(), file_name, file_content, params["incident_id"])
