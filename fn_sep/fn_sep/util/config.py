@@ -20,7 +20,7 @@ sep_password=<password>
 sep_domain=<SEP domain name>
 # Limit result sent to Resilient, add full result as an attachment.
 sep_results_limit=200
-# Period of time to wait for all endpoints to return a scan result.
+# Period of time (seconds) to wait for all endpoints to return a scan result.
 sep_scan_timeout=1800
 """
     return config_data
