@@ -14,6 +14,10 @@ from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult
 from fn_proofpoint.util.helpers import get_config_option
 import fn_proofpoint.util.selftest as selftest
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 
 class FunctionComponent(ResilientComponent):
@@ -150,7 +154,7 @@ class FunctionComponent(ResilientComponent):
             if err.response.content is not None:
                 try:
                     custom_error_content = json.loads(err.response.content)
-                except json.decoder.JSONDecodeError:
+                except JSONDecodeError:
                     raise ValueError(err)
                 # raise ValueError(custom_error_content)
                 yield FunctionResult(custom_error_content)

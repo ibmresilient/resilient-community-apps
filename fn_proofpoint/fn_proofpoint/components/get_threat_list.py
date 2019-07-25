@@ -6,6 +6,10 @@
 import requests
 import json
 from requests.auth import HTTPBasicAuth
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 
 def get_threat_list(options, lastupdate, bundle):
@@ -43,7 +47,7 @@ def get_threat_list(options, lastupdate, bundle):
         if err.response.content is not None:
             try:
                 custom_error_content = json.loads(err.response.content)
-            except json.decoder.JSONDecodeError:
+            except JSONDecodeError:
                 return {'error': 'JSON decode error {}'.format(err)}
             return custom_error_content
         return {'error': 'HTTP error {}'.format(err)}
