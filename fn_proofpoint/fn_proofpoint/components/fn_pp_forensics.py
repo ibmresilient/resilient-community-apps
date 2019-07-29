@@ -108,6 +108,10 @@ class FunctionComponent(ResilientComponent):
 
             res = requests.get(url, auth=basic_auth, verify=bundle)
 
+            # Debug logging
+            log.debug("Response status_code: {}".format(res.status_code))
+            log.debug("Response content: {}".format(res.content))
+
             res.raise_for_status()
 
             if res.status_code == 200:

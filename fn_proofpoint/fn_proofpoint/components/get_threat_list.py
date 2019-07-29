@@ -5,12 +5,14 @@
 
 import requests
 import json
+import logging
 from requests.auth import HTTPBasicAuth
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
 
+log = logging.getLogger(__name__)
 
 def get_threat_list(options, lastupdate, bundle):
     base_url = options['base_url']
@@ -28,6 +30,10 @@ def get_threat_list(options, lastupdate, bundle):
 
     try:
         res = requests.get(url, auth=basic_auth, verify=bundle)
+
+        # Debug logging
+        log.debug("Response status_code: {}".format(res.status_code))
+        log.debug("Response content: {}".format(res.content))
 
         res.raise_for_status()
 
