@@ -44,26 +44,26 @@ class TestParseScanResults:
 
 
     """Test parse_scan_results scan function"""
-    @pytest.mark.parametrize("rtn, expected_results", [
-        (get_command_status(), {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [], 'HASH_MATCHES': [], 'artifact_type': '',
-     'FULL_MATCHES': [], 'artifact_value': '', 'fail_remediation_count': 0, 'MATCH': False})
+    @pytest.mark.parametrize("rtn, status_type, expected_results", [
+        (get_command_status(), "scan", {'match_count': 0, 'remediation_count': 0, 'PARTIAL_MATCHES': [], 'HASH_MATCHES': [], 'artifact_type': '',
+     'FULL_MATCHES': [], 'artifact_value': '', 'fail_remediation_count': 0, 'remediate_artifact_value': '', 'MATCH': False})
     ])
-    def test_parse_scan_results_scan(self, rtn, expected_results):
+    def test_parse_scan_results_scan(self, rtn, status_type, expected_results):
         for c in rtn["content"]:
             if c["resultInXML"] is not None:
                 xml = c["resultInXML"]
-                results = parse_scan_results(xml)
+                results = parse_scan_results(xml, status_type)
                 assert expected_results == results
 
     """Test parse_scan_results remediation function"""
-    @pytest.mark.parametrize("rtn, expected_results", [
-        (get_command_status_remediation(), {'match_count': 10, 'remediation_count': 0,  'fail_remediation_count': 9, 'MATCH': True}),
+    @pytest.mark.parametrize("rtn, scan_type, expected_results", [
+        (get_command_status_remediation(), "scan", {'match_count': 10, 'remediation_count': 0,  'fail_remediation_count': 9, 'MATCH': True}),
     ])
-    def test_parse_scan_results_remediation(self, rtn, expected_results):
+    def test_parse_scan_results_remediation(self, rtn, scan_type, expected_results):
         for c in rtn["content"]:
             if c["resultInXML"] is not None:
                 xml = c["resultInXML"]
-                results = parse_scan_results(xml)
+                results = parse_scan_results(xml, scan_type)
                 assert expected_results["MATCH"] == results["MATCH"]
                 assert expected_results["match_count"] == results["match_count"]
                 assert expected_results["remediation_count"] == results["remediation_count"]

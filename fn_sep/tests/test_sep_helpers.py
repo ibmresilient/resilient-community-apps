@@ -116,13 +116,13 @@ class TestHelpersGenerateResultCvs:
 
     @pytest.mark.parametrize("rtn, sep_commandid, expected_results", [
         (get_command_status_processed(), "3FEB081B2A144479A32980272C9C1E23",
-         ["3FEB081B2A144479A32980272C9C1E23", ",C:\\temp\\My_file_1.txt,", ",SHA256,b82758fc5f737a58078d3c60e2798a70d895443a86aa39adf52dec70e98c2bed"])
+         ["3FEB081B2A144479A32980272C9C1E23", ",C:\\temp\\My_file_1.txt,", ",C:\\temp\\My_file_1.txt,b82758fc5f737a58078d3c60e2798a70d895443a86aa39adf52dec70e98c2bed"])
     ])
     def test_generate_result_cvs(self, rtn, sep_commandid, expected_results):
         """ Test  generate_result_cvs using mocked data.  """
         content_values = expected_results[1:]
         result_time = datetime.today().strftime('%Y%m%d%H%M%S')
-        (file_name, file_content) = generate_result_csv(rtn, sep_commandid)
+        (file_name, file_content) = generate_scan_result_csv(rtn, sep_commandid)
         assert "EOC_scan_results_for_commandid_"+expected_results[0]+"_"+result_time+".csv" == file_name
         for c in file_content.split('\n'):
             assert_keys_in(file_content, *content_values)

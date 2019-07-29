@@ -10,6 +10,7 @@ from fn_sep.lib.sep_client import *
 from  mock_artifacts import mocked_request
 from fn_sep.lib.helpers import transform_kwargs
 import xml.etree.ElementTree as ET
+from sys import version_info
 """
 Suite of tests to test Symantec SEP client class
 """
@@ -401,8 +402,12 @@ class TestSEPClient:
 
         sep_client = Sepclient(get_config())
         result = sep_client.setup_scan_xml(scan_type, file_path, sha256, sha1, md5, description, scan_action)
-        test_results_parsed = ET.fromstring(expected_results.encode('utf8', 'ignore'))
-        results_parsed = ET.fromstring(result.encode('utf8', 'ignore'))
+        if version_info.major == 3:
+            test_results_parsed = ET.fromstring(expected_results)
+            results_parsed = ET.fromstring(result)
+        else:
+            test_results_parsed = ET.fromstring(expected_results.encode('utf8', 'ignore'))
+            results_parsed = ET.fromstring(result.encode('utf8', 'ignore'))
         assert test_results_parsed.tag  ==  results_parsed.tag
         test_items_file = test_results_parsed.findall('Activity/OS/Files/File')
         result_items_file =  results_parsed.findall('Activity/OS/Files/File')
