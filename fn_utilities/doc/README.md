@@ -41,7 +41,7 @@
 ---
 
 ## Function - Utilities: Attachment Hash
-Calculate hashes for a file attachment. Returns md5, sha1, sha256 and other hashes of the file content.
+Calculate hashes for a file attachment. Returns `md5`, `sha1`, `sha256` and other hashes of the file content. Those hashes can then be used as artifacts or in other parts of your workflows.
 
  ![screenshot: fn-utilities-attachment-hash ](./screenshots/fn-utilities-attachment-hash.png)
 
@@ -110,7 +110,7 @@ incident.addArtifact("Malware MD5 Hash", results.md5, u"MD5 hash of '{}'".format
 
 ---
 ## Function - Utilities: Attachment to Base64
-Read a file attachment or artifact as a Base64 string.
+Reads a file attachment in the incident, and produces a base64-encoded string with the file attachment content. This content can then be used in combination with other workflow functions to create an artifact, a new file attachment, or to analyze the contents using various tools.
 
  ![screenshot: fn-utilities-attachment-to-base64 ](./screenshots/fn-utilities-attachment-to-base64.png)
 
@@ -172,7 +172,9 @@ if results.get("content", None) is not None:
 
 ---
 ## Function - Utilities: Attachment Zip Extract
-Extract a file from a zipfile attachment, producing a base64 string.
+Extracts a file from a ZIP file attachment, producing a base64 string.
+
+That string can then be used as input to subsequent functions that might write it as a file attachment, as a malware sample artifact, or in other ways.
 
  ![screenshot: fn-utilities-attachment-zip-extract ](./screenshots/fn-utilities-attachment-zip-extract.png)
 
@@ -253,7 +255,7 @@ None
 
 ---
 ## Function - Utilities: Attachment Zip List
-For a zipfile attachment, return a list of its contents.
+Reads a ZIP file and produces a list of the file paths, and a list with detailed information about each file.
 
  ![screenshot: fn-utilities-attachment-zip-list ](./screenshots/fn-utilities-attachment-zip-list.png)
 
@@ -361,7 +363,7 @@ incident.addNote(helper.createRichText(html))
 
 ---
 ## Function - Utilities: Base64 to Artifact
-Create a new artifact from a Base64 string
+Creates a new artifact from a Base64 string. You can  specify the artifact type and description.
 
  ![screenshot: fn-utilities-base64-to-artifact ](./screenshots/fn-utilities-base64-to-artifact.png)
 
@@ -467,7 +469,7 @@ None
 
 ---
 ## Function - Utilities: Base64 to Attachment
-Create a new attachment from a base64 string.
+Creates a new attachment from a base64 string.
 
  ![screenshot: fn-utilities-base64-to-attachment ](./screenshots/fn-utilities-base64-to-attachment.png)
 
@@ -727,9 +729,9 @@ if results.closest.distance <= 1:
 
 ---
 ## Function - Utilities: Email Parse
-Extract message headers and body parts from an email message (.eml or .msg).
+Extracts message headers and body parts from an email message (.eml or .msg).
 
-Any attachments found are added to the Incident as Artifacts if `utilities_parse_email_attachments` is set to True
+Any attachments found are added to the incident as artifacts if `utilities_parse_email_attachments` is set to True.
 
  ![screenshot: fn-utilities-email-parse ](./screenshots/fn-utilities-email-parse.png)
 
@@ -947,7 +949,9 @@ else:
 
 ---
 ## Function - Utilities: Excel Query
-Extract ranges of data or named ranges specified by the user from an excel document.
+Extracts ranges of data or named ranges specified by the user from a Microsoft Excel document.
+
+The function uses a Python library called openpyxl (http://openpyxl.readthedocs.io/en/stable/) to interface with Excel files.
 
  ![screenshot: fn-utilities-excel-query ](./screenshots/fn-utilities-excel-query.png)
 
@@ -1036,7 +1040,7 @@ for named_range in keys:
 
 ---
 ## Function - Utilities: Expand URL
-Take a url (mostly shortened) and follow it through redirects as it's expanded
+Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.
 
  ![screenshot: fn-utilities-expand-url ](./screenshots/fn-utilities-expand-url.png)
 
@@ -1139,7 +1143,7 @@ incident.addArtifact('X509 Certificate File', results.certificate, 'A certificat
 
 ---
 ## Function - Utilities: Get Contact Info
-Retrieve contact information for an incidents owner and members or those from a task
+Retrieves contact information of the owner and members of an incident or task.
 
  ![screenshot: fn-utilities-get-contact-info ](./screenshots/fn-utilities-get-contact-info.png)
 
@@ -1199,9 +1203,11 @@ inputs.incident_id = incident.id
 
 ---
 ## Function - Utilities: JSON2HTML
-Produce an HTML representation of JSON data. All data is converted into tables of key / value pairs or lists.
+Produces an HTML representation of JSON data. All data is converted into tables of key / value pairs or lists.
 
-Provide an optional parameter `json2html_keys` to limit the JSON data to display. For the example below, specifying `key1.key2.key3` will only convert the JSON data associated with that key path.
+Provide an optional parameter `json2html_keys` to limit the JSON data to display.
+
+For the example below, specifying `key1.key2.key3` will only convert the JSON data associated with that key path.
 
  ![screenshot: fn-utilities-json2html ](./screenshots/fn-utilities-json2html.png)
 
@@ -1332,7 +1338,9 @@ incident.addNote(helper.createRichText(noteText))
 
 ---
 ## Function - Utilities: PDFiD
-Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/). Provide the PDF file content as a base64- encoded string, for example the output from the “Attachment to Base64” function.
+Produces summary information about the structure of a PDF file, using Didier Stevens' pdfid (https://blog.didierstevens.com/programs/pdf-tools/). Provide the PDF file content as a base64-encoded string, for example the output from the “Attachment to Base64” function.
+
+This function is useful in initial triage of suspicious email attachments and other files. It allows you to identify PDF documents that contain (for example) JavaScript or that execute an action when opened. PDFiD also handles name obfuscation. The combination of PDF automatic action and JavaScript makes a document very suspicious.
 
  ![screenshot: fn-utilities-pdfid ](./screenshots/fn-utilities-pdfid.png)
 
@@ -1763,6 +1771,12 @@ remote_command2=[C:\scripts\another_script.ps1]
 remote_computer1=(domain\administrator:password@server1)
 remote_computer2=(domain\admin:P@ssw0rd@server2)
 ```
+
+- These remote commands can then be run in the workflow using the syntax `remote_command:remote_computer` as the input for shell_command. Examples:
+  - `remote_command1:remote_computer1` runs `remote_command1` remotely on `remote_computer1`
+  - `remote_command2:remote_computer1` runs `remote_command2` remotely on `remote_computer1`
+  - `remote_command1:remote_computer2` runs `remote_command1` remotely on `remote_computer2`
+  - `remote_command2:remote_computer2` runs `remote_command2` remotely on `remote_computer2`
 
 <details><summary>Inputs:</summary>
 <p>
