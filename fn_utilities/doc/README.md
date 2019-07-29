@@ -737,11 +737,19 @@ Any attachments found are added to the incident as artifacts if `utilities_parse
 
 ### Supporting Outlook .msg files
 * This function relies on `mail-parser>=3.9.3`
-* To support parsing of Outlook email files (`.msg`), you need to install the `libemail-outlook-message-perl` package. For Debian based systems:
-  ```
-  $ apt-get install libemail-outlook-message-perl
-  ```
+* To support parsing of Outlook email files (`.msg`), you need to install the `msgconvert` tool
+* `msgconvert` is a tool written in Perl and can be found in `libemail-outlook-message-perl` (Debian) or `Email::Outlook::Message` (Linux).
 * See https://github.com/SpamScope/mail-parser for more
+
+#### For Debian based systems:
+```
+$ apt-get install libemail-outlook-message-perl
+```
+#### For CentOS/Linux based systems:
+```
+$ sudo yum install cpan
+$ sudo cpan install Email::Outlook::Message
+```
 
 <details><summary>Inputs:</summary>
 <p>
