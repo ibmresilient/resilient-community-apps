@@ -47,6 +47,12 @@ class KafkaFeedDestination(FeedDestinationBase):
 
         kafka_message = context.type_info.flatten(payload, TypeInfo.translate_value)
 
+        # add the incident_id and object id to all payloads, if needed
+        kafka_message['inc_id'] = context.inc_id
+        if payload.get('id'):
+            kafka_message['id'] = payload['id']
+
+
         # find the topic to use, either an explicit one or the default
         kafka_topic = None
         if self.topic_dict.get(name):
