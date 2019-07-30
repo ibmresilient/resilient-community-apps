@@ -18,6 +18,7 @@
 - [Key Features](#key-features)
 - [Function - Get Campaign](#function---get-campaign)
 - [Function - Get Forensics](#function---get-forensics)
+- [Custom Fields](#custom-fields)
 - [Rules](#rules)
 
 ---
@@ -140,6 +141,12 @@ incident.addNote(results.data)
 ---
 
 
+## Custom Fields
+| Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
+| ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Message ID | `messageID` | `text` | `properties` | - | - |
+
+---
 
 
 ## Rules

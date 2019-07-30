@@ -86,13 +86,16 @@ Resilient Circuits Components for 'fn_proofpoint
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *Enter a description of the config here* |
-  | **username** | Yes | `` | *Enter a description of the config here* |
-  | **password** | Yes | `` | *Enter a description of the config here* |
-  | **polling_interval** | Yes | `` | *Enter a description of the config here* |
-  | **startup_interval** | Yes | `` | *Enter a description of the config here* |
-  | **type_filter** | Yes | `` | *Enter a description of the config here* |
-  | **cafile** | Yes | `` | *Enter a description of the config here* |
+  | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *URL and credentials to authenticate to Proofpoint TAP* |
+  | **username** | Yes | `` |  |
+  | **password** | Yes | `` |  |
+  | **polling_interval** | Yes | `` | *how often, in minutes, to check for new incidents* |
+  | **startup_interval** | Yes | `` | *how long, in minutes (max 60) to check for previous events at startup* |
+  | **type_filter** | No | `` | *comma separated list of types of incidents to import into Resilient* |
+  | **score_threshold** | No | `` | *minimum Proofpoint score required to import into Resilient* |
+  | **threat_template** | No | `` | *optional Jinja template to override default threat description format* |
+  | **forensics_template** | No | `` | *optional Jinja template to override default forensic format* |
+  | **cafile** | No | `` | |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -104,6 +107,15 @@ Resilient Circuits Components for 'fn_proofpoint
   $ resilient-circuits run
   ```
 
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
 
