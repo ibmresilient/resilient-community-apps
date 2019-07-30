@@ -106,10 +106,22 @@ def generate_remediate_result_csv(rtn, sep_commandid):
     file_content = u""
     file_name = "Remediation_results_for_commandid_{0}_{1}.csv"\
         .format(sep_commandid, datetime.datetime.today().strftime('%Y%m%d%H%M%S'))
-    file_content += "Result for remediation(delete) scan of artifact '{0}' for commandid '{1}'.\n"\
-        .format(rtn["remediate_artifact_value"], sep_commandid)
-    file_content += "Computer name,Hash type,Hash value,File Path\n"
+    path_value = rtn.get("remediate_artifact_value", None)
+
+    if path_value is None:
+        raise ValueError("Expected remediation result missing property 'artifact_value'")
+
     eps = rtn.get("content",[])
+
+    if not eps:
+        raise ValueError("Expected remediation result 'content' is empty")
+
+    hash_value = eps[0]["scan_result"]["artifact_value"]
+
+    file_content += "Result for remediation of hash {0} and path '{1}' for commandid '{2}'.\n"\
+        .format(hash_value, path_value, sep_commandid)
+    file_content += "Computer name,Hash type,Hash value,File Path\n"
+
     for i in range(len(eps)):
         ep_name = eps[i]["computerName"]
         ep_id = eps[i]["computerId"]
