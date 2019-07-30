@@ -110,7 +110,7 @@ def parse_scan_results(xml, status_type):
             if item.attrib["result"] in match_types[-1:]: # No match
                 continue
             elif status_type.lower() == "remediation" and item.attrib["remediation"].lower() != "succeeded":  # Remediation not successful
-                if item.attrib["remediation"].lower == "failed":
+                if item.attrib["remediation"].lower() == "failed":
                     scan_result["fail_remediation_count"] += 1
                 continue
             elif item.attrib["result"] in match_types[:-1]: # Actual Match
