@@ -17,7 +17,7 @@ In line with recent changes to HIBP, from August 2019 an API key is required and
 ## Function Inputs:
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `hibp_email_address` | `String` | Yes | `"test@resilientsystems.com"` |
+| `email_address` | `String` | Yes | `"test@resilientsystems.com"` |
 
 
 ## Function Outputs:

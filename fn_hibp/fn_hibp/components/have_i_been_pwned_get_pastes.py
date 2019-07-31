@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
                 HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v3/pasteaccount/"
 
                 # Get the function parameters:
-                email_address = kwargs.get("hibp_email_address")  # text
+                email_address = kwargs.get("email_address")  # text
 
                 log = logging.getLogger(__name__)
                 if email_address is not None:
