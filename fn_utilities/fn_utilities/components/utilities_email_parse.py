@@ -45,6 +45,12 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Provided base64content processed")
 
             else:
+
+                # Validate that either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id) is defined
+                if not (fn_inputs.get("incident_id") and (fn_inputs.get("attachment_id") or fn_inputs.get("artifact_id"))) and \
+                   not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
+                    raise FunctionError("You must define either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id)")
+
                 # Instansiate new Resilient API object
                 res_client = self.rest_client()
 
