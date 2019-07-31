@@ -14,7 +14,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("hibp", {})
+        self.options = opts.get("fn_hibp", {})
 
         self.PROXIES = {}
         # Get proxies
@@ -47,7 +47,9 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("starting...")
                 start = time.time()
 
-                HAVE_I_BEEN_PWNED_BREACH_URL = "https://haveibeenpwned.com/api/v2/breachedaccount/"
+                HAVE_I_BEEN_PWNED_BREACH_URL = "https://haveibeenpwned.com/api/v3/breachedaccount/"
+
+                hibp_api_key = self.get_config_option("hibp_api_key")
 
                 # Get the function parameters:
                 email_address = kwargs.get("email_address")  # text
@@ -58,9 +60,13 @@ class FunctionComponent(ResilientComponent):
                 else:
                     raise ValueError("email_address is required to run this function")
 
+                headers={
+                            'User-Agent': 'Resilient HIBP',
+                            'hibp-api-key': hibp_api_key
+                        }
+
                 breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_BREACH_URL, email_address)
-                breaches_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'},
-                                                 proxies=self.PROXIES)
+                breaches_response = requests.get(breach_url, headers=headers, proxies=self.PROXIES)
 
                 breaches = None
                 # Good response

@@ -10,11 +10,14 @@ Set if using a proxy
     ## Proxy settings if needed
     #hibp_proxy_http=
     #hibp_proxy_https=
+    hibp_api_key=
+
+In line with recent changes to HIBP, from August 2019 an API key is required and v3 of the API is released. This app uses both - for an API key there is a charge from HIBP of $3.50 
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
-| `email_address` | `String` | Yes | `"test@resilientsystems.com"` |
+| `hibp_email_address` | `String` | Yes | `"test@resilientsystems.com"` |
 
 
 ## Function Outputs:
@@ -132,11 +135,6 @@ if results.Breaches:
   else:
     artifact.description = des + "\nBreaches: " + str(len(results.Breaches))
 ```
-
-## Rules
-| Rule Name | Object Type | Workflow Triggered | Conditions |
-| --------- | :---------: | ------------------ | ---------- |
-| Have I Been Pwned Search | `Artifact` | `Have I Been Pwned Search` | `Type` has one of `["Email Recipient", "Email Sender"]`
 
 To package for distribution,
 

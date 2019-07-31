@@ -14,7 +14,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("hibp", {})
+        self.options = opts.get("fn_hibp", {})
 
         self.PROXIES = {}
         # Get proxies
@@ -47,10 +47,10 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("starting...")
                 start = time.time()
 
-                HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v2/pasteaccount/"
+                HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v3/pasteaccount/"
 
                 # Get the function parameters:
-                email_address = kwargs.get("email_address")  # text
+                email_address = kwargs.get("hibp_email_address")  # text
 
                 log = logging.getLogger(__name__)
                 if email_address is not None:
@@ -58,9 +58,15 @@ class FunctionComponent(ResilientComponent):
                 else:
                     raise ValueError("email_address is required to run this function")
 
+                hibp_api_key = self.get_config_option("hibp_api_key")
+
+                headers={
+                            'User-Agent': 'Resilient HIBP',
+                            'hibp-api-key': hibp_api_key
+                        }
+
                 breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
-                pastes_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'},
-                                               proxies=self.PROXIES)
+                pastes_response = requests.get(breach_url, headers=headers,proxies=self.PROXIES)
 
                 pastes = None
                 # Good response
@@ -87,7 +93,7 @@ class FunctionComponent(ResilientComponent):
                     "Pastes": pastes
                 }
 
-                yield StatusMessage("done...")
+                yield StatusMessage("Lookup complete")
                 # Produce a FunctionResult with the results
                 yield FunctionResult(results)
             except Exception as e:
