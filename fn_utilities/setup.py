@@ -32,7 +32,7 @@ setup(
     the security incident response activities.""",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.129',
+        'resilient-lib>=33.0.0',
         'openpyxl>=2.5.3',
         'pyOpenSSL>=18.0.0',
         'cryptography>=2.3',
