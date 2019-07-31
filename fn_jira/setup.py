@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_jira'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient-lib>=32.0.140',
+        'resilient-lib>=32.0.186',
         'beautifulsoup4'
     ],
     packages=find_packages(),
