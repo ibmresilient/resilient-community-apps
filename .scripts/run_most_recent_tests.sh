@@ -7,7 +7,7 @@ packages_that_have_been_changed=()
 for file in $(git diff --name-only HEAD~0 HEAD~1); 
 do 
     # If the file contains either fn_ or rc_ in the path 
-    if [[ $file =~ (fn_|rc_)+ ]]; 
+    if [[ $file =~ (fn_|rc-)+ ]]; 
     then 
     # Strip everything except the first directory in the path (integration name) and append to an array
     packages_that_have_been_changed+=($(echo "$file" | awk -F "/" '{print $1}')); 
@@ -21,6 +21,7 @@ INTEGRATIONS=($(for v in "${packages_that_have_been_changed[@]}"; do echo "$v";d
 if [ -z "$INTEGRATIONS" ]
 then
       echo "Did not find any integrations that were modified"
+      exit 0
 else
       echo "Most recently modified integrations from last commit show as : ${INTEGRATIONS}"
 fi
