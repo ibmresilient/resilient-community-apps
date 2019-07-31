@@ -134,10 +134,16 @@ class FunctionComponent(ResilientComponent):
 
             elif sep_status_type.lower() == "scan" and sep_matching_endpoint_ids:
                 # Return only endpoint ids for artifact matches.
-                content_copy = copy.deepcopy(rtn["content"])
+                content_copy = rtn.get("content", [])
+
+                if not content_copy :
+                    raise ValueError("Expected remediation result 'content' is empty")
+
                 rtn = {"endpoints_matching_ids": []}
+
                 for i in range(len(content_copy)):
                     rtn["endpoints_matching_ids"].append(content_copy[i]["computerId"])
+
                 del content_copy
             elif sep_status_type.lower() == "scan" and rtn["total_match_count"] > int(
                     self.options.get("sep_results_limit", RESULTS_LIMIT_DEF)):

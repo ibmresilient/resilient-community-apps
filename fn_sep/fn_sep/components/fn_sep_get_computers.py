@@ -184,11 +184,17 @@ class FunctionComponent(ResilientComponent):
                             yield FunctionError('A timestamp value was incorrectly specified.')
 
             if sep_matching_endpoint_ids:
-                # Return only endpoint ids since post-processing may timeout processing large numer of ids.
-                content_copy = copy.deepcopy(rtn["content"])
+                # Return only endpoint ids since post-processing may timeout processing large number of ids.
+                content_copy = rtn.get("content", [])
+
+                if not content_copy:
+                    raise ValueError("Expected remediation result 'content' is empty")
+
                 rtn = {"endpoints_matching_ids": []}
+
                 for i in range(len(content_copy)):
                     rtn["endpoints_matching_ids"].append(content_copy[i]["uniqueId"])
+
                 del content_copy
             elif sep_status:
                 rtn = get_endpoints_status(rtn)
