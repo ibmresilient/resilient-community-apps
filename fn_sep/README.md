@@ -6,7 +6,7 @@ Circuits integration framework.
 •	Execute an Evidence of Compromise (EOC) scan for artifacts of type file (name or path) and hash (md5, sha1 or sha256).
 •	Upload a file from an endpoint to the Symantec Endpoint Protect Manager (SEPM).
 •	Download a file from the SEPM as base64.
-•	Remediate (delete) files (by hash match) discovered in an EOC scan.
+•	Remediate (quarantine) files (by hash match) discovered in an EOC scan.
 •	Get endpoint details or status.
 •	Get groups.
 •	Get fingerprint lists.
@@ -45,9 +45,11 @@ sep_port=8446
 sep_username=admin
 sep_password=password
 sep_domain=Default
+#http_proxy=http://proxy:80
+#https_proxy=http://proxy:80
 # Limit result sent to Resilient, add full result as an attachment.
 sep_results_limit=200
-# Period of time to wait for all endpoints to return a scan result.
+# Period of time (seconds) to wait for all endpoints to return a scan result.
 sep_scan_timeout=1800
 ```
 
