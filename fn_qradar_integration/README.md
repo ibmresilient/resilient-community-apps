@@ -17,7 +17,7 @@ This function package provides the following features which can be used in workf
 
 ## Package Dependences
 - resilient_circuits version 30 or later
-- python version 2.7.10 or later, or 3.6 or later
+- python version 2.7.10 or later
 ## Installation
 Install this package with 'pip', or run `python setup.py install`
 
