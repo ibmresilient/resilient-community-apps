@@ -38,7 +38,6 @@ class JiraCommon:
 
         resp = self.req_common.execute_call_v2('post', issue_url,  auth=(appDict['user'], appDict['password']),
                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
-        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -53,11 +52,8 @@ class JiraCommon:
 
         #find_transitions(log, appDict) # uncomment to see transitions for this enterprise
 
-        log and log.debug(payload)
-
         resp = self.req_common.execute_call_v2('post', url,  auth=(appDict['user'], appDict['password']),
                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
-        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -72,7 +68,6 @@ class JiraCommon:
 
         resp = self.req_common.execute_call_v2('get', url,  auth=(appDict['user'], appDict['password']),
                                               verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
-        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -88,8 +83,6 @@ class JiraCommon:
 
         resp =  self.req_common.execute_call_v2('post', url,  auth=(appDict['user'], appDict['password']),
                                                data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
-
-        log and log.debug(resp)
 
         # successfully added comments return an empty dictionary: { }
         return self.get_json_result(resp)
@@ -176,4 +169,3 @@ class JiraCommon:
             payload['fields'] = resolution
 
         return json.dumps(payload)
-
