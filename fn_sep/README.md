@@ -123,8 +123,8 @@ Example: SEP - Remediate Artifact on Endpoint
 Example: SEP - Un-Quarantine Endpoint
 Example: SEP - Upload file to SEPM server
 ```
-## SEP - Scan Endpoints (fn_sep_scan_endpoints) Example
-## Sample workflow `Example: SEP - Initiate EOC Scan for Artifact` has been provided:
+
+## Sample workflow **Initiate EOC Scan for Artifact** has been provided:
  
  ![screenshot: fn-sep-scan-endpoints ](./screenshots/wf-sep-initiate-eoc-scan-for-artifact.png)
 
