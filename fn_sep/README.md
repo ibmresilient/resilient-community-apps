@@ -124,7 +124,7 @@ Example: SEP - Un-Quarantine Endpoint
 Example: SEP - Upload file to SEPM server
 ```
 
-## Sample workflow **Initiate EOC Scan for Artifact** has been provided:
+Sample workflow **Initiate EOC Scan for Artifact** has been provided:
  
  ![screenshot: fn-sep-scan-endpoints ](./screenshots/wf-sep-initiate-eoc-scan-for-artifact.png)
 
