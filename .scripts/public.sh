@@ -25,6 +25,7 @@ done <<EOM
 CONTRIBUTING.md
 LICENSE
 README.md
+fn_ansible
 fn_apility
 fn_aws_utilities
 fn_bigfix
@@ -46,6 +47,7 @@ fn_email_header_validation
 fn_exchange
 fn_floss
 fn_geocoding
+fn_google_cloud_dlp
 fn_google_cloud_functions
 fn_google_maps_directions
 fn_grr_search
@@ -68,6 +70,7 @@ fn_microsoft_security_graph
 fn_misp
 fn_mitre_integration
 fn_mxtoolbox
+fn_netdevice
 fn_odbc_query
 fn_pagerduty
 fn_pastebin
@@ -81,6 +84,7 @@ fn_rsa_netwitness
 fn_service_now
 fn_slack
 fn_splunk_integration
+fn_task_utils
 fn_thug
 fn_twilio
 fn_twitter_most_popular
@@ -103,6 +107,7 @@ rc-cts-passivetotal
 rc-cts-shadowserver
 rc-cts-urlscanio
 rc-cts-yeti
+rc-data-feed
 res_qraw_mitre
 sc_email_parser
 EOM

@@ -15,16 +15,16 @@ Bi-directional integration with ServiceNow and IBM Resilient allowing SEC Ops Pr
 ---
 
 ## Key Features
-* Bi-directional integration between Records in the ServiceNow Incident Table and Incidents/Tasks in IBM Resilient
-* Create an IBM Resilient Incident/Task from a ServiceNow Record in the Incident Table
-* Create a ServiceNow Record in the Incident Table from an IBM Resilient Incident/Task
-* Sync notes between a related IBM Resilient Incident/Task and a ServiceNow Record
-* Send Attachments from an IBM Resilient Incident/Task to a related ServiceNow Record
+* Bi-directional integration between Records in the ServiceNow Incident Table and Incidents and Tasks in the IBM Resilient platform.
+* Create a Resilient Incident or Task from a ServiceNow Record in the Incident Table.
+* Create a ServiceNow Record in the Incident Table from a Resilient Incident or Task.
+* Sync notes between a related Resilient Incident or Task and a ServiceNow Record.
+* Send Attachments from a Resilient Incident or Task to a related ServiceNow Record.
 
 ---
 
 ## Requirements
-* ServiceNow Instance running Kingston or London release
+* ServiceNow Instance with ITSM enabled and running a `Kingston`, `London` or `Madrid` release
 * The ServiceNow `IBM Resilient App >= v1.0.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
 * Access to the **Incident Table** in ServiceNow
 * If IBM Resilient is not publicly accessible (behind firewall) a ServiceNow MID Server is required
