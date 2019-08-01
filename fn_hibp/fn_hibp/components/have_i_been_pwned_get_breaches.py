@@ -50,6 +50,10 @@ class FunctionComponent(ResilientComponent):
                 HAVE_I_BEEN_PWNED_BREACH_URL = "https://haveibeenpwned.com/api/v3/breachedaccount/"
 
                 hibp_api_key = self.get_config_option("hibp_api_key")
+                if hibp_api_key is not "":
+                    log.info("hibp_api_key", hibp_api_key)
+                else:
+                    raise ValueError("API Key is required to use HIBP API")
 
                 # Get the function parameters:
                 email_address = kwargs.get("email_address")  # text

@@ -13,6 +13,6 @@ def config_section_data():
 ## Proxy settings if needed
 #hibp_proxy_http=
 #hibp_proxy_https=
-hibp_api_key=xxxxxxxx
+hibp_api_key=
 """
     return config_data

@@ -59,6 +59,10 @@ class FunctionComponent(ResilientComponent):
                     raise ValueError("email_address is required to run this function")
 
                 hibp_api_key = self.get_config_option("hibp_api_key")
+                if hibp_api_key is not "":
+                    log.info("hibp_api_key", hibp_api_key)
+                else:
+                    raise ValueError("API Key is required to use HIBP API")
 
                 headers={
                             'User-Agent': 'Resilient HIBP',
