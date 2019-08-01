@@ -12,7 +12,7 @@ Set if using a proxy
     #hibp_proxy_https=
     hibp_api_key=
 
-As of recent July 2019 changes, HIBP now requires V3 of the API and usage of an API Key. The app requires both prerequisites to be satisfied for usage and offers an API service fee of $3.50/month or a monthly subscription service: https://haveibeenpwned.com/API/Key
+As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key)
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |
