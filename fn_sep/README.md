@@ -1,28 +1,27 @@
 # Resilient Function - fn_sep
 
-This Resilient Function package can be used to perform the following queries and actions against in a Symantec Endpoint Protection (SEP) environment from workflows using the Functions feature of the Resilient
-Circuits integration framework.
+This Resilient Function package can be used to perform the following queries and actions against a Symantec Endpoint Protection (SEP) environment:
 ```
-•	Execute an Evidence of Compromise (EOC) scan for artifacts of type file (name or path) and hash (md5, sha1 or sha256).
+•	Execute an Evidence of Compromise (EOC) scan for artifacts of type file (name or path) and hash (MD5, SHA1 or SHA256).
 •	Upload a file from an endpoint to the Symantec Endpoint Protect Manager (SEPM).
 •	Download a file from the SEPM as base64.
 •	Remediate (quarantine) files (by hash match) discovered in an EOC scan.
 •	Get endpoint details or status.
 •	Get groups.
 •	Get fingerprint lists.
-•	Add or delete an md5 hash value to a fingerprint list which can be used to blacklist files.
+•	Add or delete an MD5 hash value from a fingerprint list, which can be used to blacklist files.
 •	Assign a fingerprint list to a group for system lockdown.
 •	Delete a fingerprint list.
-•	Move a endpoint to a new group.
+•	Move an endpoint to a new group.
 •	Quarantine an endpoint.
 ```
 
 Prerequisites:
 ```
-resilient version 32 or later
-resilient_circuits version 32 or later
-resilient Generic Email Parsing Script 1.0.1 or later.
-Symantec Endpoint Protection 14.2 or later.
+Resilient version 32 or later
+Resilient circuits version 32 or later
+Resilient Generic Email Parsing Script 1.0.1 or later
+Symantec Endpoint Protection 14.2 or later
 ```
 * For more info about Symantec Endpoint Protection V14, please visit https://support.symantec.com/us/en/article.howto124729.html#sep14
 * For more info about Symantec Endpoint Protection Rest API, please visit https://apidocs.symantec.com/home/saep
@@ -32,8 +31,8 @@ Symantec Endpoint Protection 14.2 or later.
 
 This package requires that it is installed on a RHEL or CentOS platform and that the resilient-circuits application is running.
 Install this package with 'pip', or `python setup.py install`.
-To set the config values in the app.config file with a new resilient instance run `resilient-circuits config -c`.
-To set the config values in the app.config file with an existing resilient instance run `resilient-circuits config -u`.
+To set the config values in the app.config file with a new Resilient instance run `resilient-circuits config -c`.
+To set the config values in the app.config file with an existing Resilient instance run `resilient-circuits config -u`.
 
 Config values example:
 ```
@@ -55,7 +54,7 @@ sep_scan_timeout=1800
 
 Run with: `resilient-circuits run`.
 
-## Supported Resilient Functions for Symantec Endpoint Protection.
+## Supported Resilient Functions for Symantec Endpoint Protection:
 ```
 SEP - Scan Endpoints (fn_sep_scan_endpoints)
 SEP - Upload File to SEPM (fn_sep_upload_file_to_sepm)
@@ -125,11 +124,11 @@ Example: SEP - Upload file to SEPM server
 ```
 
 ## Example
-For function **SEP - Scan Endpoints** the sample workflow **Initiate EOC Scan for Artifact** has been provided:
+The provided **SEP - Scan Endpoints** function with the **Initiate EOC Scan for Artifact** workflow initiates an Evidence of Compromise (EOC) scan of an artifact value against a list of endpoints or groups. 
  
  ![screenshot: fn-sep-scan-endpoints ](./screenshots/wf-sep-initiate-eoc-scan-for-artifact.png)
 
-Initiates an Evidence of Compromise (EOC) scan of an artifact value against a list of endpoints or groups. The function can also be used to complete a remediation delete action on a sha256 hash value in conjunction with a scan.
+The function can also be used to complete a remediation delete action on a SHA256 hash value in conjunction with a scan.
  
  ![screenshot: fn-sep-scan-endpoints ](./screenshots/fn-sep-scan-endpoints.png)
 
