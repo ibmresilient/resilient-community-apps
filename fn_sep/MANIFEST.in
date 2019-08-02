@@ -1,0 +1,4 @@
+include README.md
+include fn_sep/util/*
+include fn_sep/LICENSE
+include fn_sep/doc/*
