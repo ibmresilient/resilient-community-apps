@@ -14,6 +14,7 @@ The data can be written to any or all of the following destinations:
 - Local directory (one file per object)
 - ElasticSearch
 - Splunk
+- Kafka
 
 The extension was written to allow other destinations to be created with relative ease. The following diagram shows the overall data flow from Resilient to the existing feeds.
 

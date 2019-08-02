@@ -5,26 +5,17 @@
 """Function implementation"""
 
 import logging
-import sys
-import time
-import email
+import os
+import shutil
 import json
 import base64
-from fn_utilities.util.mailtojson import MailJson
+import mailparser
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload, validate_fields, get_file_attachment_metadata, get_file_attachment, write_to_tmp_file
 
-
-def _parse_date_millis(value):
-    if value is None:
-        return int(time.time() * 1000)
-
-    ttuple = email.utils.parsedate_tz(value)
-
-    if ttuple is None:
-        return int(time.time() * 1000)
-
-    timestamp = email.utils.mktime_tz(ttuple)
-    return int(timestamp * 1000)
+CONFIG_DATA_SECTION = 'fn_utilities'
+EMAIL_ATTACHMENT_ARTIFACT_ID = 7
+ARTIFACT_URI = "/incidents/{0}/artifacts/files"
 
 
 class FunctionComponent(ResilientComponent):
@@ -32,45 +23,136 @@ class FunctionComponent(ResilientComponent):
 
     @function("utilities_email_parse")
     def _email_parse_function(self, event, *args, **kwargs):
-        """Function: Extract message headers and body parts from an EML email message."""
+        """Function: Extract message headers and body parts from an email message (.eml or .msg).
+        Any attachments found are added to the Incident as Artifacts if 'utilities_parse_email_attachments' is set to True"""
+
         try:
             log = logging.getLogger(__name__)
 
-            # NOTE: This function only works when run on Python2
-            # (due to the way the current version of the utility function is written).
-            if sys.version_info[0] >= 3:
-                raise FunctionError("This function cannot run on Python 3")
+            # Set variables
+            parsed_email = path_tmp_file = path_tmp_dir = reason = results = None
 
-            # Get the function parameters:
-            base64content = kwargs.get("base64content")  # text
-            if base64content is None or base64content == "":
-                raise FunctionError("No message was supplied.")
+            # Get the function inputs:
+            fn_inputs = validate_fields(["incident_id"], kwargs)
 
-            log = logging.getLogger(__name__)
-            log.debug("base64content: %s", base64content)
+            # Instansiate ResultPayload
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
-            yield StatusMessage("Reading email message...")
-            data = base64.b64decode(base64content)
+            # If its just base64content as input, use parse_from_string
+            if fn_inputs.get("base64content"):
+                yield StatusMessage("Processing provided base64content")
+                parsed_email = mailparser.parse_from_string(base64.b64decode(fn_inputs.get("base64content")))
+                yield StatusMessage("Provided base64content processed")
 
-            # Parse the email content
-            mmj = MailJson(data.decode("utf-8"))
-            mmj.parse()
-            results = mmj.get_data()
+            else:
 
-            # For convenience, produce an epoch-millis timestamp
-            results["timestamp"] = _parse_date_millis(results["headers"].get("date", None))
+                # Validate that either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id) is defined
+                if not (fn_inputs.get("incident_id") and (fn_inputs.get("attachment_id") or fn_inputs.get("artifact_id"))) and \
+                   not (fn_inputs.get("task_id") and fn_inputs.get("attachment_id")):
+                    raise FunctionError("You must define either: (incident_id AND attachment_id OR artifact_id) OR (task_id AND attachment_id)")
 
-            # For convenience, find the plaintext and html body
-            results["body_text"] = None
-            results["body_html"] = None
-            for part in results.get("parts", []):
-                if part.get("content_type") == "text/plain":
-                    results["body_text"] = part.get("content")
-                if part.get("content_type") == "text/html":
-                    results["body_html"] = part.get("content")
+                # Instansiate new Resilient API object
+                res_client = self.rest_client()
 
-            log.info(json.dumps(results, indent=2))
+                # Get attachment metadata
+                attachment_metadata = get_file_attachment_metadata(
+                    res_client=res_client,
+                    incident_id=fn_inputs.get("incident_id"),
+                    artifact_id=fn_inputs.get("artifact_id"),
+                    task_id=fn_inputs.get("task_id"),
+                    attachment_id=fn_inputs.get("attachment_id")
+                )
+
+                # Get attachment content
+                attachment_contents = get_file_attachment(
+                    res_client=res_client,
+                    incident_id=fn_inputs.get("incident_id"),
+                    artifact_id=fn_inputs.get("artifact_id"),
+                    task_id=fn_inputs.get("task_id"),
+                    attachment_id=fn_inputs.get("attachment_id")
+                )
+
+                # Write the attachment_contents to a temp file
+                path_tmp_file, path_tmp_dir = write_to_tmp_file(attachment_contents, tmp_file_name=attachment_metadata.get("name"))
+
+                # Get the file_extension
+                file_extension = os.path.splitext(path_tmp_file)[1]
+
+                if file_extension == ".msg":
+                    yield StatusMessage("Processing MSG File")
+                    try:
+                        parsed_email = mailparser.parse_from_file_msg(path_tmp_file)
+                        yield StatusMessage("MSG File processed")
+                    except Exception as err:
+                        reason = u"Could not parse {0} MSG File".format(attachment_metadata.get("name"))
+                        yield StatusMessage(reason)
+                        results = rp.done(success=False, content=None, reason=reason)
+                        log.error(err)
+
+                else:
+                    yield StatusMessage("Processing Raw Email File")
+                    try:
+                        parsed_email = mailparser.parse_from_file(path_tmp_file)
+                        yield StatusMessage("Raw Email File processed")
+                    except Exception as err:
+                        reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
+                        yield StatusMessage(reason)
+                        results = rp.done(success=False, content=None, reason=reason)
+                        log.error(err)
+
+            if parsed_email is not None:
+                if not parsed_email.mail:
+                    reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
+                    yield StatusMessage(reason)
+                    results = rp.done(success=False, content=None, reason=reason)
+
+                else:
+                    # Load all parsed email attributes into a Python Dict
+                    parsed_email_dict = json.loads(parsed_email.mail_json, encoding="utf-8")
+                    parsed_email_dict["plain_body"] = parsed_email.text_plain_json
+                    parsed_email_dict["html_body"] = parsed_email.text_html_json
+                    yield StatusMessage("Email parsed")
+
+                    # If the input 'utilities_parse_email_attachments' is true and some attachments were found
+                    if fn_inputs.get("utilities_parse_email_attachments") and parsed_email_dict.get("attachments"):
+
+                        yield StatusMessage("Attachments found in email message")
+                        attachments_found = parsed_email_dict.get("attachments")
+
+                        # Loop attachments found
+                        for attachment in attachments_found:
+
+                            yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("incident_id")))
+
+                            # Write the attachment.payload to a temp file
+                            path_tmp_file, path_tmp_dir = write_to_tmp_file(data=attachment.get("payload"),
+                                                                            tmp_file_name=attachment.get("filename"),
+                                                                            path_tmp_dir=path_tmp_dir)
+
+                            artifact_description = u"This email attachment was found in the parsed email message from: '{0}'".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
+
+                            # POST the artifact to Resilient as an 'Email Attachment' Artifact
+                            res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("incident_id")),
+                                                          artifact_type=EMAIL_ATTACHMENT_ARTIFACT_ID,
+                                                          artifact_filepath=path_tmp_file,
+                                                          description=artifact_description,
+                                                          value=attachment.get("filename"),
+                                                          mimetype=attachment.get("mail_content_type"))
+
+                    results = rp.done(True, parsed_email_dict)
+
+            else:
+                reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("base64content") else attachment_metadata.get("name"))
+                yield StatusMessage(reason)
+                results = rp.done(success=False, content=None, reason=reason)
+
+            log.info("Done")
 
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+        finally:
+            # Remove the tmp directory
+            if path_tmp_dir and os.path.isdir(path_tmp_dir):
+                shutil.rmtree(path_tmp_dir)
