@@ -80,8 +80,8 @@ Example: SEP - Delete Hash from Blacklist
 Example: SEP - Get Blacklist information
 Example: SEP - Get Endpoint Details
 Example: SEP - Get Endpoint Details for artifact
-Example: SEP - Get Endpoints status
-Example: SEP - Get Endpoints status (refresh)
+Example: SEP - Get Endpoints status summary
+Example: SEP - Get Endpoints status summary (refresh)
 Example: SEP - Get File Content as Base64 string
 Example: SEP - Get Groups information
 Example: SEP - Get Non-Compliant Endpoints status details
@@ -105,8 +105,8 @@ Example: SEP - Delete Hash from Blacklist
 Example: SEP - Get Blacklist information
 Example: SEP - Get Endpoint Details
 Example: SEP - Get Endpoint Details for artifact
-Example: SEP - Get Endpoints status
-Example: SEP - Get Endpoints status (refresh)
+Example: SEP - Get Endpoints status summary
+Example: SEP - Get Endpoints status summary (refresh)
 Example: SEP - Get File Content as Base64 string
 Example: SEP - Get Groups information
 Example: SEP - Get Non-Compliant Endpoints status details
