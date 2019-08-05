@@ -19,7 +19,7 @@ def get_threat_list(options, lastupdate, bundle):
     username = options['username']
     password = options['password']
     basic_auth = HTTPBasicAuth(username, password)
-    url = '{0}/siem/all?format=JSON'.format(base_url, lastupdate)
+    url = '{0}/siem/all?format=JSON'.format(base_url, lastupdate)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
     if type(lastupdate) is str:
         url += '&sinceTime={}'.format(lastupdate)
     else:

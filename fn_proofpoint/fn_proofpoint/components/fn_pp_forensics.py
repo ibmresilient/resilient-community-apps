@@ -101,7 +101,7 @@ class FunctionComponent(ResilientComponent):
         yield StatusMessage("Certificate verify {0}".format(bundle))
 
         basic_auth = HTTPBasicAuth(username, password)
-        url = '{0}/forensics?{1}'.format(base_url, params)
+        url = '{0}/forensics?{1}'.format(base_url, params)  # /v2/forensics Fetch forensic information for a given threat or campaign.
 
         try:
             yield StatusMessage('Sending GET request to {0}'.format(url))

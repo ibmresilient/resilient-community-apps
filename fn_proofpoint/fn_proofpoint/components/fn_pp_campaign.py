@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Certificate verify {0}".format(bundle))
 
             basic_auth = HTTPBasicAuth(username, password)
-            url = '{0}/campaign/{1}'.format(base_url, campaign_id)
+            url = '{0}/campaign/{1}'.format(base_url, campaign_id)  # /v2/campaign/<campaignId> Fetch detailed information for a given campaign
 
             try:
                 yield StatusMessage('Sending GET request to {0}'.format(url))
