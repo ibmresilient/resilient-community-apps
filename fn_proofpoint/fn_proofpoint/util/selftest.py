@@ -39,11 +39,13 @@ def selftest_function(opts):
     base_url = get_config_option('base_url', options)
     username = get_config_option('username', options)
     password = get_config_option('password', options)
+    polling_interval = get_config_option('polling_interval', options)
+
     cafile = options.get('cafile')
     bundle = os.path.expanduser(cafile) if cafile else False
 
     basic_auth = HTTPBasicAuth(username, password)
-    lastupdate = int(options['polling_interval']) * 60
+    lastupdate = int(polling_interval) * 60
     url = '{}/siem/all?format=JSON&sinceSeconds={}'.format(base_url, lastupdate)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
 
     try:
