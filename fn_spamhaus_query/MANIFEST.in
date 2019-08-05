@@ -1,0 +1,4 @@
+include README.md
+include fn_spamhaus_query/util/*
+include fn_spamhaus_query/LICENSE
+include screenshots/*

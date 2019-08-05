@@ -1,0 +1,4 @@
+include README.md
+include fn_alienvault_otx/util/*
+include fn_alienvault_otx/LICENSE
+include fn_alienvault_otx/doc/*
