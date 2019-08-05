@@ -39,7 +39,7 @@ def get_threat_list(options, lastupdate, bundle):
         res.raise_for_status()
 
         if res.status_code == 200:
-            data = json.loads(res.text)
+            data = res.json()
             return data
         else:
             return {'error': 'request to {0} failed with code {1}'.format(url, res.status_code)}

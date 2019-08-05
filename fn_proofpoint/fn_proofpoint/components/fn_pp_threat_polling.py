@@ -15,6 +15,7 @@ from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
 from pkg_resources import Requirement, resource_filename
 from fn_proofpoint.components.get_threat_list import get_threat_list
+from resilient_lib.components.integration_errors import IntegrationError
 
 
 log = logging.getLogger(__name__)
@@ -149,7 +150,7 @@ class PP_ThreatPolling(ResilientComponent):
             threat_list = get_threat_list(self.options, self.lastupdate, bundle)
 
             if 'error' in threat_list:
-                log.warning(threat_list.get('error'))
+                raise IntegrationError(threat_list.get('error'))
             else:
                 for kind, datas in threat_list.items():
                     if kind == 'queryEndTime':
