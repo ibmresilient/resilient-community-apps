@@ -13,6 +13,7 @@ from datetime import datetime
 from threading import Thread
 from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
+from pkg_resources import Requirement, resource_filename
 from fn_proofpoint.components.get_threat_list import get_threat_list
 
 
@@ -61,6 +62,7 @@ class PP_ThreatPolling(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(PP_ThreatPolling, self).__init__(opts)
+
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.default_path = os.path.join(current_path, os.path.pardir, "data/templates/pp_threat_description.jinja")
         self.class2typeids = self.getclass2typeids()
@@ -76,11 +78,28 @@ class PP_ThreatPolling(ResilientComponent):
     def _parseopts(self, opts):
         """Parse and process configuration options, called from __init__ and _reload"""
         self.options = opts.get("fn_proofpoint", {})
+
+        # Proofpoint score
         self.score_threshold = self.getfloat('score_threshold')
+        # Types of incidents to import to Resilient
         self.type_filter = self.gettypefilter()
+
+        # Create a new Resilient incident from this event
+        # using an optional JSON (JINJA2) template file
         threat_path = self.options.get("threat_template", self.default_path)
-        with open(threat_path) as threat_file:
+        if threat_path and not os.path.exists(threat_path):
+            log.warn(u"Template file '%s' not found.", threat_path)
+            threat_path = None
+        if not threat_path:
+            # Use the template file installed by this package
+            threat_path = resource_filename(Requirement("fn-proofpoint"), "fn_proofpoint/data/templates/pp_threat_description.jinja")
+            if not os.path.exists(threat_path):
+                raise Exception(u"Template file '{}' not found".format(threat_path))
+
+        log.info(u"Template file: %s", threat_path)
+        with open(threat_path, "r") as threat_file:
             self.threat_template = threat_file.read()
+
         # initialize last update to startup interval if present, otherwise update interval
         interval = self.options.get('startup_interval')
         if interval is not None:
@@ -90,7 +109,7 @@ class PP_ThreatPolling(ResilientComponent):
     def getfloat(self, key):
         """get floating point representation of an option if it exists, otherwise None"""
         if key in self.options:
-            return float(self.options.get(key))
+            return float(self.options.get(key)) if self.options.get(key) else None
 
     def gettypefilter(self):
         """get lowercase set of type filter options if set, otherwise None"""
