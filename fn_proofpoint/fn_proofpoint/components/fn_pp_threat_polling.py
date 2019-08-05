@@ -103,9 +103,10 @@ class PP_ThreatPolling(ResilientComponent):
 
         # initialize last update to startup interval if present, otherwise update interval
         interval = self.options.get('startup_interval')
-        if interval is not None:
-            interval = 60 * int(interval)
-        self.lastupdate = interval
+        if interval is None or interval.strip() == "":
+            self.lastupdate = None
+        else:
+            self.lastupdate = 60 * int(interval)
 
     def getfloat(self, key):
         """get floating point representation of an option if it exists, otherwise None"""
