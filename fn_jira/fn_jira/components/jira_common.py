@@ -17,7 +17,7 @@ This module implements the calls needed for jira api access. API operations supp
 """
 
 # URL fragments needed along with the base jira URL
-ISSUE_URL  = 'rest/api/2/issue'
+ISSUE_URL = 'rest/api/2/issue'
 TRANSITION_PARAM = 'transitions'
 
 COMMENT_PARAM = 'comment'
@@ -36,8 +36,9 @@ class JiraCommon:
 
         payload = self._mkCreatePayload(appDict)
 
-        resp = self.req_common.execute_call_v2('post', issue_url,  auth=(appDict['user'], appDict['password']),
-                                              data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        resp = self.req_common.execute_call_v2('post', issue_url, auth=(appDict['user'], appDict['password']),
+                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -52,8 +53,11 @@ class JiraCommon:
 
         #find_transitions(log, appDict) # uncomment to see transitions for this enterprise
 
-        resp = self.req_common.execute_call_v2('post', url,  auth=(appDict['user'], appDict['password']),
-                                              data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(payload)
+
+        resp = self.req_common.execute_call_v2('post', url, auth=(appDict['user'], appDict['password']),
+                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -66,8 +70,9 @@ class JiraCommon:
         """
         url = '/'.join((appDict['url'], TRANSITION_PARAM))
 
-        resp = self.req_common.execute_call_v2('get', url,  auth=(appDict['user'], appDict['password']),
-                                              verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        resp = self.req_common.execute_call_v2('get', url, auth=(appDict['user'], appDict['password']),
+                                               verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
         return self.get_json_result(resp)
 
@@ -81,8 +86,10 @@ class JiraCommon:
 
         payload = self._mkCommentPayload(appDict)
 
-        resp =  self.req_common.execute_call_v2('post', url,  auth=(appDict['user'], appDict['password']),
+        resp = self.req_common.execute_call_v2('post', url, auth=(appDict['user'], appDict['password']),
                                                data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+
+        log and log.debug(resp)
 
         # successfully added comments return an empty dictionary: { }
         return self.get_json_result(resp)
@@ -130,7 +137,7 @@ class JiraCommon:
         :return: json payload for jira update
         '''
 
-        payload = { "body": appDict['comment'] }
+        payload = {"body": appDict['comment']}
 
         return json.dumps(payload)
 
@@ -149,7 +156,7 @@ class JiraCommon:
 
         if appDict.get('comment'):
             comment = \
-            { "comment":
+            {"comment":
                 [
                     {
                         "add": {

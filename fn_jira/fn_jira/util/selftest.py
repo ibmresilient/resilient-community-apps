@@ -6,8 +6,7 @@
 """
 import logging
 import json
-from fn_jira.lib.requests_common import execute_call
-from fn_jira.lib.resilient_common import parse_bool
+from resilient_lib import RequestsCommon, str_to_bool
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -31,17 +30,20 @@ def selftest_function(opts):
         "password": options['password']
     }
 
-    verify_flag = parse_bool(options['verify_cert'])
+    verify_flag = str_to_bool(options['verify_cert'])
 
     try:
-        result = execute_call(log, 'post', url, None, None, json.dumps(payload), verify_flag, HTTP_HEADERS)
+        req_common = RequestsCommon(opts=opts, function_opts=options)
+        result = req_common.execute_call_v2('post', url,  auth=(options['user'], options['password']),
+                                               data=json.dumps(payload), verify=verify_flag, headers=HTTP_HEADERS)
+        resp = result.json()
 
         jsessionID = HTTP_HEADERS.copy()
-        jsessionID['cookie'] = "{}={}".format(result['session']['name'], result['session']['value'])
-        result = execute_call(log, 'delete', url, None, None, None, verify_flag, jsessionID)
+        jsessionID['cookie'] = "{}={}".format(resp['session']['name'], resp['session']['value'])
+        result = req_common.execute_call_v2('delete', url, verify=verify_flag, headers=jsessionID)
         return {"state": "success"}
     except Exception as e:
         log and log.error(e)
         return {"state": "failure",
                 "reason": e
-                }
+               }
