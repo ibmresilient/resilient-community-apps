@@ -40,7 +40,6 @@ def get_techniques(tactic_names=None, tactic_ids=None):
             "techs": techs
         }
 
-        ret.append(tactic_dict)
-      
+        ret.append(tactic_dict) 
     return ret
 

@@ -30,28 +30,6 @@ class MitreAttackTactic(object):
         :return:
         """
         MitreAttackTactic.mitre_tactics = [
-            MitreAttackTactic("Initial Access",
-                              "TA0001"),
-            MitreAttackTactic("Execution",
-                              "TA0002"),
-            MitreAttackTactic("Persistence",
-                              "TA0003"),
-            MitreAttackTactic("Privilege Escalation",
-                              "TA0004"),
-            MitreAttackTactic("Defense Evasion",
-                              "TA0005"),
-            MitreAttackTactic("Credential Access",
-                              "TA0006"),
-            MitreAttackTactic("Discovery",
-                              "TA0007"),
-            MitreAttackTactic("Lateral Movement",
-                              "TA0008"),
-            MitreAttackTactic("Collection",
-                              "TA0009"),
-            MitreAttackTactic("Exfiltration",
-                              "TA0010"),
-            MitreAttackTactic("Command and Control",
-                              "TA0011")
         ]
 
     @staticmethod
