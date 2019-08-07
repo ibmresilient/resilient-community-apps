@@ -13,6 +13,8 @@ def config_section_data():
 ## Proxy settings if needed
 #hibp_proxy_http=
 #hibp_proxy_https=
-hibp_api_key=
+
+#As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key)
+hibp_api_key=< Have I Been Pwned API Key>
 """
     return config_data
