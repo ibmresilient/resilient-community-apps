@@ -10,7 +10,7 @@
 #
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttack
-from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic
+from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic, MitreAttackTechnique
 
 
 def get_techniques(tactic_names=None, tactic_ids=None):
@@ -27,19 +27,19 @@ def get_techniques(tactic_names=None, tactic_ids=None):
         tactics = tactic_names.split(', ')
     elif tactic_ids is not None:
         t_ids = tactic_ids.split(', ')
-        tactics =[MitreAttackTactic.get_name(tid) for tid in t_ids ]
+        tactics =[MitreAttackTactic.get_by_id(mitre_attack, tid).name for tid in t_ids]
 
     ret = []
     for tactic in tactics:
-        techs = mitre_attack.get_tactic_techniques(tactic_name=tactic)
-
+        t_obj = MitreAttackTactic.get_by_name(mitre_attack, tactic)
+        techs = MitreAttackTechnique.get_by_tactic(mitre_attack, t_obj)
         tactic_dict = {
-            "tactic_name": tactic,
-            "tactic_id": MitreAttackTactic.get_id(tactic),
-            "tactic_ref": MitreAttack.get_tactic_url(tactic),
-            "techs": techs
+            "tactic_name": t_obj.name,
+            "tactic_id": t_obj.id,
+            "tactic_ref": t_obj.get_url(),
+            "techs": [tech.dict_repr() for tech in techs]
         }
 
-        ret.append(tactic_dict) 
+        ret.append(tactic_dict)
     return ret
 

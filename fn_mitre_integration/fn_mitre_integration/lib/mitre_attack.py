@@ -20,12 +20,17 @@ class MitreAttackBase(object):
     To use, subclass and override MITRE_TYPE, and all other needed methods.
     """
     MITRE_TYPE = "replace"
+    _cached_obj = {}
 
     def __init__(self, doc):
         self._stix = doc
         self.name = self.get_name(doc)
         self.id = self.get_id(doc)
         self.description = doc.get("description", "")
+        if self.id is not None:
+            self._cached_obj[self.id] = self
+        if self.name is not None:
+            self._cached_obj[self.name] = self
 
     @staticmethod
     def get_name(doc):
@@ -79,6 +84,9 @@ class MitreAttackBase(object):
         :return: instance of the class for given name
         :rtype: self.__class__
         """
+        if name in cls._cached_obj:
+            return cls._cached_obj[name]
+
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
         items = conn.get_items([type_filter, name_filter])
@@ -97,6 +105,9 @@ class MitreAttackBase(object):
         :return: instance of the class for given id
         :rtype: self.__class__
         """
+        if type_id in cls._cached_obj:
+            return cls._cached_obj[type_id]
+
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
         items = conn.get_items([type_filter, id_filter])
@@ -120,45 +131,8 @@ class MitreAttackTactic(MitreAttackBase):
         return url
 
     def get_techniques(conn):
-        """
-        Get all the techniques for a given tactic
-        Reference:
-        https://github.com/mitre/cti/blob/master/USAGE.md
+        return MitreAttackTechnique.get_by_tactic(conn, self)
 
-        :return:
-        """
-        tech_filter = Filter("type", "=", "attack-pattern")
-
-        t_name = self.name.replace(' ', '-')
-        t_name = t_name.lower()
-        tactic_filter = Filter("kill_chain_phases.phase_name", "=", t_name)
-
-        mitre_techs = conn.get_items([tech_filter, tactic_filter])
-        #
-        # The returned AttackPattern is not serializable. Pick the fields we want
-        #
-        techs = []
-        for mitre_tech in mitre_techs:
-            refs = []
-            mitre_tech_id = ""
-            for r in mitre_tech["external_references"]:
-                ref = {
-                    "url": r.get("url", "")
-                }
-                if r.get("source_name", None) == "mitre-attack":
-                    mitre_tech_id = r.get("external_id", "")
-
-                refs.append(ref)
-            tech = {
-                "name":                 mitre_tech.get("name", ""),
-                "description":          mitre_tech.get("description", ""),
-                "external_references":  refs,
-                "x_mitre_detection":    mitre_tech.get("x_mitre_detection", ""),
-                "mitre_tech_id":        mitre_tech_id
-            }
-            techs.append(tech)
-
-        return techs
 
 class MitreAttackTechnique(MitreAttackBase):
     MITRE_TYPE = "attack-pattern"
@@ -227,17 +201,16 @@ class MitreAttack(object):
         :param type_name:
         :return:
         """
-        ret_item = None
         query_filter = Filter("type", "=", type_name)
         name_filter = Filter("name", "=", item_name)
-        items = self.get_items(query_filter)
+        items = self.get_items([query_filter, name_filter])
 
         if not len(items):
             return None
 
         return items[0]
 
-    def get_tech(self, name=None, ext_id=None):
+    def get_technique(self, name=None, ext_id=None):
         """
         Use tech name or external id to retrieve tech
         :param name:
@@ -292,7 +265,7 @@ class MitreAttack(object):
             tactic = MitreAttackTactic.get_by_id(self, tactic_id)
         if not tactic:
             return None
-        return MitreAttackTechnique.get_by_tactic(self, tactic)
+        return [tech.dict_repr() for tech in MitreAttackTechnique.get_by_tactic(self, tactic)]
 
     def get_tech_mitigation(self, tech_id=None, tech_name=None):
         """

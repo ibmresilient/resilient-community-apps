@@ -30,13 +30,9 @@ class TestMitre(object):
         # As 8/5/19 there are 40 tactics
         assert len(tactics) >= 40
 
-    def test_get_id_works(self):
-        assert mitre_attack.get_id("Collection") is not None
-        assert mitre_attack.get_id("Clearly Absurd") is None
-
-    def test_get_name_works(self):
-        assert mitre_attack.lookup_item("TA0007") is not None
-        assert mitre_attack.lookup_item("Clearly Absurd") is None
+    def test_get_by_id_works(self):
+        assert MitreAttackTactic.get_by_id(mitre_attack, "Collection") is not None
+        assert MitreAttackTactic.get_by_id(mitre_attack, "Clearly Absurd") is None
 
     def test_get_tactic_url(self):
         tactics = mitre_attack.get_all_tactics()
@@ -79,17 +75,17 @@ class TestMitre(object):
             #
             count = 0
             for tech in techs:
-                id = mitre_attack.get_external_id(tech)
+                id = tech.id
                 assert(id)
-
                 mitigation = mitre_attack.get_tech_mitigation(tech_id=id)
+                assert mitigation
                 print(mitigation)
                 count += 1
                 if count > 5:
                     break
-
                 # Test getting mitigation using name
-                mitigation = mitre_attack.get_tech_mitigation(tech_name=tech["name"])
+                mitigation = mitre_attack.get_tech_mitigation(tech_name=tech.name)
+                assert mitigation
                 print(mitigation)
         except:
             assert(False)
@@ -98,7 +94,7 @@ class TestMitre(object):
         tactics = "Execution, Persistence"
         techs = get_techniques(tactic_names=tactics)
         print(len(techs))
-        assert(len(techs[0]["techs"]) + len(techs[1]["techs"]) == 92)
+        assert(len(techs[0]["techs"]) + len(techs[1]["techs"]) == 98)
 
         tactics = "TA0001, TA0002, TA0008"
         techs = get_techniques(tactic_ids=tactics)
@@ -106,17 +102,17 @@ class TestMitre(object):
         assert(len(techs) > 0)
 
     def test_get_tech_info(self):
-        tech = mitre_attack.get_tech(name="AppleScript")
+        tech = mitre_attack.get_technique(name="AppleScript")
         print(tech)
         assert(tech["name"] == "AppleScript")
 
-        tech = mitre_attack.get_tech(ext_id="T1156")
+        tech = mitre_attack.get_technique(ext_id="T1156")
         print(tech)
         assert(tech["mitre_tech_id"] == "T1156")
 
         #
         #   Error handling
         #
-        tech = mitre_attack.get_tech()
+        tech = mitre_attack.get_technique()
         assert tech is None
 
