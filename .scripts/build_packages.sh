@@ -15,7 +15,7 @@ do
     # Run the Build
     pkg_dir=$(dirname "${setup}")
     echo "Running build from $pkg_dir";
-    (cd $pkg_dir && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
+    (cd $pkg_dir && python setup.py -q sdist --dist-dir $dist_dir);
 done;
 
 # Build content packages with resilient-res-package.sh

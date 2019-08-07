@@ -37,7 +37,7 @@ do
     dist_dir=$( cd $(dirname $integration) ; pwd -P )
     echo "Storing package to: $dist_dir";
     # Build the python package storing the output as a zip
-    (cd $integration && python setup.py -q sdist --formats=zip --dist-dir $dist_dir);
+    (cd $integration && python setup.py -q sdist --dist-dir $dist_dir);
 done
 printf 'Building complete.  Final Status [%d]\n' $status;
 exit $status
