@@ -12,7 +12,6 @@ from fn_mitre_integration.lib.mitre_attack_utils import get_techniques
 import requests
 
 mitre_attack = MitreAttack()
-MitreAttackTactic.populate()
 
 def url_get(url):
     ret = False
@@ -37,7 +36,7 @@ class TestMitre(object):
 
     def test_get_name_works(self):
         assert mitre_attack.lookup_item("TA0007") is not None
-        assert mitre_attack.lookup_item("Absurd") is None
+        assert mitre_attack.lookup_item("Clearly Absurd") is None
 
     def test_get_tactic_url(self):
         tactics = mitre_attack.get_all_tactics()

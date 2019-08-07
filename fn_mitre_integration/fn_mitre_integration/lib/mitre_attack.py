@@ -9,264 +9,131 @@
 #   ------------
 #
 
-from stix2 import TAXIICollectionSource, Filter
+from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from taxii2client import Server
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
-TACTIC_BASE_URL = "https://attack.mitre.org/tactics"
 
-class MitreAttackTactic(object):
+class MitreAttackBase(object):
     """
-    Note that this class is necessary because the current MITRE STIX TAXII server
-    does not provide tactic information yet.
+    Base class for creation of other MitreAttack types.
+    To use, subclass and override MITRE_TYPE, and all other needed methods.
     """
+    MITRE_TYPE = "replace"
 
-    mitre_tactics = []
-
-    @staticmethod
-    def populate():
-        """
-        Populate a static list
-        :return:
-        """
-        MitreAttackTactic.mitre_tactics = [
-        ]
+    def __init__(self, doc):
+        self._stix = doc
+        self.name = self.get_name(doc)
+        self.id = self.get_id(doc)
+        self.description = doc.get("description", "")
 
     @staticmethod
-    def get_id(name):
+    def get_name(doc):
         """
-        Given a tactic name, return the id
-        :param name: tactic name
-        :return: id
+        Gets name from STIX document for this particular class.
+        Override for classes with other definition.
+        :param doc: stix structured dictionary
+        :type doc: dict
+        :return: name of the object described by doc
+        :rtype: str
         """
-        id = None
-        for tactic in MitreAttackTactic.mitre_tactics:
-            #
-            # Just in case the name is case-insensitive
-            #
-            if name.lower() == tactic.name.lower():
-                id = tactic.id
-                break
-
-        return id
+        return doc["name"]
 
     @staticmethod
-    def get_name(id):
+    def get_id(doc):
         """
-        Given a tatic id, return the name
-        :param id: tactic id
-        :return: name
+        Get id from STIX document for this particular class.
+        Override for classes with other structure.
+        :param doc: stix structured dictionary
+        :type doc: dict
+        :return: id of the object described by doc
+        :rtype: str
         """
-        name = None
-        for tactic in MitreAttackTactic.mitre_tactics:
-            if id.lower() == tactic.id.lower():
-                name = tactic.name
-                break
-
-        return name
-
-    def __init__(self, name=None, id=None, description=""):
-        """
-        :param name:
-        :param id:
-        :param description:
-        """
-        self.name = name
-        self.id = id
-        self.description = description
-
-"""
-    MitreAttack:
-    -----------
-    
-    A facet class to encapsulate all the features related to fetching the
-    MITRE STIX TAXII server
-"""
-
-
-class MitreAttack(object):
-    """
-    Facet design pattern. Outside calls shall go through this class
-    """
-    def __init__(self):
-        MitreAttackTactic.populate()
-        self.attack_server = None
-        self.collection_dict = {}
-
-    def connect_server(self, url=None):
-        """
-        Allow user to specify what url to use
-        :param url:
-        :return:
-        """
-        server_url = MITRE_URL if url is None else url
-        self.attack_server = Server(server_url)
-        api_root = self.attack_server.api_roots[0]
-
-        for collection in api_root.collections:
-            self.collection_dict[collection.title] = collection
-
-    def lookup_item(self,
-                    item_name,
-                    collection_title="Enterprise ATT&CK",
-                    type_name="attack-pattern"):
-        """
-        Look up an item using item name
-        :param item_name:
-        :param collection_title:
-        :param type_name:
-        :return:
-        """
-        ret_item = None
-        if self.attack_server is None:
-            self.connect_server()
-        try:
-            collection = self.collection_dict[collection_title]
-            tc_source = TAXIICollectionSource(collection)
-            query_filter = Filter("type", "=", type_name)
-
-            attack = tc_source.query(query_filter)
-            for item in attack:
-                if item["name"] == item_name:
-                    ret_item = item
-                    break
-        except:
-            ret_item = None
-
-        return ret_item
-
-    @staticmethod
-    def get_all_tactics():
-        """
-        Get all the tactics
-        :return:
-        """
-        return MitreAttackTactic.mitre_tactics
-
-    @staticmethod
-    def get_tactic_url(tactic_name):
-        """
-        Get the url link for a tactic
-        :param tactic_name:
-        :return:
-        """
-        t_id = MitreAttackTactic.get_id(tactic_name)
-        if t_id is None:
+        ext = doc.get("external_references")
+        if not ext or not len(ext):
             return None
+        for i in ext:
+            name = i.get("external_id")
+            if name:
+                return name
+        return None
 
-        url = "{}/{}/".format(TACTIC_BASE_URL, t_id)
+    @classmethod
+    def get_all(cls, conn):
+        """
+        Query the connection for all the elements of the class's type.
+        :return: list of class instances
+        :rtype: list(self.__class__)
+        """
+        type_filter = Filter("type", "=", cls.MITRE_TYPE)
+        return [cls(x) for x in conn.get_items(type_filter)]
 
+    @classmethod
+    def get_by_name(cls, conn, name):
+        """
+        Queries the connection to get an instance of this class with given name.
+        :param conn: Connection object
+        :type conn: MitreAttack
+        :param type_id: name of the type to query
+        :type type_id: str
+        :return: instance of the class for given name
+        :rtype: self.__class__
+        """
+        type_filter = Filter("type", "=", cls.MITRE_TYPE)
+        name_filter = Filter("name", "=", name)
+        items = conn.get_items([type_filter, name_filter])
+        if not len(items):
+            return None
+        return cls(items[0])
+
+    @classmethod
+    def get_by_id(cls, conn, type_id):
+        """
+        Queries the connection to get an instance of this class with given type.
+        :param conn: Connection object
+        :type conn: MitreAttack
+        :param type_id: id of the type to query
+        :type type_id: str
+        :return: instance of the class for given id
+        :rtype: self.__class__
+        """
+        type_filter = Filter("type", "=", cls.MITRE_TYPE)
+        id_filter = Filter("external_references.external_id", "=", type_id)
+        items = conn.get_items([type_filter, id_filter])
+        if not len(items):
+            return None
+        return cls(items[0])
+
+
+class MitreAttackTactic(MitreAttackBase):
+    MITRE_TYPE = "x-mitre-tactic"
+    TACTIC_BASE_URL = "https://attack.mitre.org/tactics"
+
+    def get_url(self):
+        """
+        Get the url link for the current class.
+        :return: url string
+        :rtype: str
+        """
+        item_id = self.id
+        url = "{}/{}/".format(self.TACTIC_BASE_URL, item_id)
         return url
 
-    def get_tech(self, name=None, ext_id=None):
+    def get_techniques(conn):
         """
-        Use tech name or external id to retrieve tech
-        :param name:
-        :param ext_id:
-        :return:
-        """
-        if name is None and ext_id is None:
-            return None
-
-        type_filter = Filter("type", '=', "attack-pattern")
-
-        filt = None
-        if name is not None:
-            filt = Filter("name", '=', name)
-        else:
-            filt = Filter("external_references.external_id", '=', ext_id)
-
-        items = self.get_items([type_filter, filt])
-
-        tech = {}
-
-        if items is not None:
-            mitre_tech_id = ""
-            refs = []
-            for r in items[0]["external_references"]:
-                ref = {
-                    "url": r.get("url", "")
-                }
-                if r.get("source_name", None) == "mitre-attack":
-                    mitre_tech_id = r.get("external_id", "")
-
-                refs.append(ref)
-            tech = {
-                "name": items[0].get("name", ""),
-                "description": items[0].get("description", ""),
-                "external_references": refs,
-                "x_mitre_detection": items[0].get("x_mitre_detection", ""),
-                "mitre_mitigation" : self.get_tech_mitigation(tech_id=mitre_tech_id),
-                "mitre_tech_id": mitre_tech_id
-            }
-
-        return tech
-
-    def get_items(self, filters, collection_title="Enterprise ATT&CK"):
-        """
-        Get items using filters
-        Reference:
-        https://github.com/mitre/cti/blob/master/USAGE.md
-        :param filters: list of filter
-        :return:
-        """
-        if self.attack_server is None:
-            self.connect_server()
-
-        collection = self.collection_dict[collection_title]
-        tc_source = TAXIICollectionSource(collection)
-
-        items = tc_source.query(filters)
-
-        return items
-
-    def get_all_techniques(self):
-        """
-        Get all techs
-        :return:
-        """
-        return self.get_items([Filter("type", '=', "attack-pattern")])
-
-    def get_tactic_techniques(self, tactic_name=None, tactic_id=None):
-        """
-        Get all the techniques for a give tactic
+        Get all the techniques for a given tactic
         Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
 
-        :param tactic_name: tactic name
-        :param tactic_id:   tactic ID
-        :return:            techs
+        :return:
         """
-
-        if self.attack_server is None:
-            self.connect_server()
-        #
-        # STIX type for technique is attack-pattern
-        #
         tech_filter = Filter("type", "=", "attack-pattern")
-        #
-        # Find name if id is given
-        #
-        if tactic_name is None:
-            if tactic_id is not None:
-                tactic_name = MitreAttackTactic.get_name(tactic_id)
 
-        #
-        #   Not found in MITRE document. We actually need to use lower case for the tactic
-        #   name, and also replace space with -.
-        #
-        t_name = tactic_name.replace(' ', '-')
+        t_name = self.name.replace(' ', '-')
         t_name = t_name.lower()
         tactic_filter = Filter("kill_chain_phases.phase_name", "=", t_name)
-        #
-        #   Only look for Enterprise ATT&CK at this point
-        #
-        collection_title = "Enterprise ATT&CK"
-        collection = self.collection_dict[collection_title]
-        tc_source = TAXIICollectionSource(collection)
-        mitre_techs = tc_source.query([tech_filter,
-                                      tactic_filter])
 
+        mitre_techs = conn.get_items([tech_filter, tactic_filter])
         #
         # The returned AttackPattern is not serializable. Pick the fields we want
         #
@@ -293,19 +160,139 @@ class MitreAttack(object):
 
         return techs
 
-    def get_external_id(self, mitre_tech):
+class MitreAttackTechnique(MitreAttackBase):
+    MITRE_TYPE = "attack-pattern"
+
+    @classmethod
+    def get_by_tactic(cls, conn, tactic):
         """
-        Figure out the MITRE ATT&CK tech id, which is not in the
-        STIX struture
-        :param mitre_tech:
+        Creates a filter for techniques related to the given tactic.
+        :param conn: connection object for making requests
+        :type conn: MitreAttack
+        :param tactic: tactic which techniques interest us
+        :type tactic: MitreAttachTactic
+        :return: list of Technique instances related to tactic
+        :rtype: list(MitreAttackTechnique)
+        """
+        kill_chain = tactic.name.replace(' ','-').lower()
+        tact_filter = Filter("kill_chain_phases.phase_name", "=", kill_chain)
+        tech_filter = Filter("type", "=", cls.MITRE_TYPE)
+        techs = conn.get_items([tact_filter, tech_filter])
+        if not techs:
+            return None
+        return [cls(x) for x in techs]
+
+    def dict_repr(self):
+        refs = [{"url": r.get("url", "")} for r in self._stix["external_references"]]
+        return {
+            "name": self.name,
+            "description": self.description,
+            "external_references": refs,
+            "x_mitre_detection": self._stix.get("x_mitre_detection", ""),
+            "mitre_tech_id": self.id
+        }
+
+class MitreAttack(object):
+    """
+    MitreAttack:
+    -----------
+    A facet class to encapsulate all the features related to fetching the
+    MITRE STIX TAXII server
+    """
+    def __init__(self):
+        self.attack_server = None
+        self.composite_ds = None
+
+    def connect_server(self, url=None):
+        """
+        Allow user to specify what url to use
+        :param url:
         :return:
         """
-        mitre_tech_id = None
-        for r in mitre_tech["external_references"]:
-            if r.get("source_name", None) == "mitre-attack":
-                mitre_tech_id = r.get("external_id", "")
-                break
-        return mitre_tech_id
+        server_url = MITRE_URL if url is None else url
+        self.attack_server = Server(server_url)
+        api_root = self.attack_server.api_roots[0]
+        # CompositeSource to query all the collections at once
+        c_sources = [TAXIICollectionSource(collection) for collection in api_root.collections]
+        self.composite_ds = CompositeDataSource()
+        self.composite_ds.add_data_sources(c_sources)
+
+    def lookup_item(self,
+                    item_name,
+                    type_name="attack-pattern"):
+        """
+        Look up an item using item name
+        :param item_name:
+        :param collection_title:
+        :param type_name:
+        :return:
+        """
+        ret_item = None
+        query_filter = Filter("type", "=", type_name)
+        name_filter = Filter("name", "=", item_name)
+        items = self.get_items(query_filter)
+
+        if not len(items):
+            return None
+
+        return items[0]
+
+    def get_tech(self, name=None, ext_id=None):
+        """
+        Use tech name or external id to retrieve tech
+        :param name:
+        :param ext_id:
+        :return:
+        """
+        if name is None and ext_id is None:
+            return None
+        tech = None
+        if name is not None:
+            tech = MitreAttackTechnique.get_by_name(self, name)
+        else:
+            tech = MitreAttackTechnique.get_by_id(self, ext_id)
+
+        return tech.dict_repr()
+
+    def get_items(self, filters):
+        """
+        Get items using filters
+        Reference:
+        https://github.com/mitre/cti/blob/master/USAGE.md
+        :param filters: list of filter
+        :return:
+        """
+        if self.attack_server is None:
+            self.connect_server()
+        items = self.composite_ds.query(filters)
+        return items
+
+    def get_all_tactics(self):
+        return MitreAttackTactic.get_all(self)
+
+    def get_all_techniques(self):
+        """
+        Get all techs
+        :return:
+        """
+        return MitreAttackTechnique.get_all(self)
+
+    def get_tactic_url(self, name):
+        tactic = MitreAttackTactic.get_by_name(self, name)
+        if tactic is None:
+            return None
+        return tactic.get_url()
+
+    def get_tactic_techniques(self, tactic_name=None, tactic_id=None):
+        if not tactic_name and not tactic_id:
+            return None
+        if tactic_name:
+            tactic = MitreAttackTactic.get_by_name(self, tactic_name)
+        elif tactic_id:
+            tactic = MitreAttackTactic.get_by_id(self, tactic_id)
+        if not tactic:
+            return None
+        return MitreAttackTechnique.get_by_tactic(self, tactic)
 
     def get_tech_mitigation(self, tech_id=None, tech_name=None):
         """
@@ -315,34 +302,19 @@ class MitreAttack(object):
         :param tech_id: STIX id for mitre tech
         :return:
         """
-
-        # Connect first if not already
-        if self.attack_server is None:
-            self.connect_server()
-        collection_title = "Enterprise ATT&CK"
-        collection = self.collection_dict[collection_title]
-        tc_source = TAXIICollectionSource(collection)
-
-        # Need to get the obj first and then the STIX id
-        tech_filter = None
+        tech = None
         if tech_id is not None:
-            tech_filter = Filter("external_references.external_id", '=', tech_id)
+            tech = MitreAttackTechnique.get_by_id(self, tech_id)
         elif tech_name is not None:
-            tech_filter = Filter("name", '=', tech_name)
+            tech = MitreAttackTechnique.get_by_name(self, tech_name)
 
-        filt = [
-            Filter("type", '=', "attack-pattern"),
-            tech_filter
-        ]
-        tech = tc_source.query(filt)
-
-        relations = tc_source.relationships(tech[0].id, "mitigates", target_only=True)
+        relations = self.composite_ds.relationships(tech._stix, "mitigates", target_only=True)
 
         filters = [
             Filter("type", '=', "course-of-action"),
             Filter("id", "in", [r.source_ref for r in relations])
-        ]
+            ]
 
-        ret = tc_source.query(filters)
+        ret = self.get_items(filters)
 
         return ret[0].get("description", "")
