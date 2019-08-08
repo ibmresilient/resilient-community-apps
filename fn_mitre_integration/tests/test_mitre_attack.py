@@ -68,7 +68,7 @@ class TestMitre(object):
 
     def test_get_tech_mitigation(self):
         techs = mitre_attack.get_all_techniques()
-        print(len(techs))
+        assert len(techs)
         try:
             #
             #   There are more than 200 techs. Try first 5 only
@@ -81,7 +81,7 @@ class TestMitre(object):
                 assert mitigation
                 print(mitigation)
                 count += 1
-                if count > 5:
+                if count > 2:
                     break
                 # Test getting mitigation using name
                 mitigation = mitre_attack.get_tech_mitigation(tech_name=tech.name)

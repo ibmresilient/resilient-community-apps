@@ -10,6 +10,7 @@
 #
 
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
+from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
@@ -237,7 +238,14 @@ class MitreAttack(object):
         """
         if self.attack_server is None:
             self.connect_server()
-        items = self.composite_ds.query(filters)
+        items = []
+        for data_source in self.composite_ds.get_all_data_sources():
+            try:
+                ds_items = data_source.query(filters)
+                items.extend(ds_items)
+            except DataSourceError as e:
+                # happens if data_source finds no elements with given filter
+                pass
         return items
 
     def get_all_tactics(self):
@@ -281,12 +289,11 @@ class MitreAttack(object):
         elif tech_name is not None:
             tech = MitreAttackTechnique.get_by_name(self, tech_name)
 
-        relations = self.composite_ds.relationships(tech._stix, "mitigates", target_only=True)
-
+        relations = self.composite_ds.relationships(tech.id, "mitigates", target_only=True)
         filters = [
-            Filter("type", '=', "course-of-action"),
-            Filter("id", "in", [r.source_ref for r in relations])
-            ]
+                Filter("type", '=', "course-of-action"),
+                Filter("id", "in", [r.source_ref for r in relations])
+        ]
 
         ret = self.get_items(filters)
 
