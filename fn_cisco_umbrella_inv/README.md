@@ -9,7 +9,7 @@ Circuits integration framework.
 -->
 ### v1.0.1 - August 2019
 * Configuration settings checking less restrictive.
-### v1.0.1 - June 2018
+### v1.0.0 - June 2018
 * Original release.
 ## Prerequisites:
 ```
