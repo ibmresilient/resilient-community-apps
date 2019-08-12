@@ -38,9 +38,9 @@ class FunctionComponent(ResilientComponent):
         log = logging.getLogger(__name__)
 
         # Get the function parameters:
-        campaign_id = kwargs.get("campaign_id")  # text
+        campaign_id = kwargs.get("proofpoint_campaign_id")  # text
 
-        log.info("campaign_id: %s", campaign_id)
+        log.info("proofpoint_campaign_id: %s", campaign_id)
 
         yield StatusMessage("starting...")
 

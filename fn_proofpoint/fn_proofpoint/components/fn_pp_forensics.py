@@ -44,17 +44,17 @@ class FunctionComponent(ResilientComponent):
         """Function: Function to retrieve Forensics data from the ProofPoint API by Campaign or Threat ID"""
         # Get the function parameters:
         incident_id = kwargs.get('incident_id')
-        campaign_id = kwargs.get('campaign_id')
-        threat_id = kwargs.get('threat_id')
-        aggregate_flag = kwargs.get('aggregate_flag')
-        malicious_flag = kwargs.get('malicious_flag')
+        campaign_id = kwargs.get('proofpoint_campaign_id')
+        threat_id = kwargs.get('proofpoint_threat_id')
+        aggregate_flag = kwargs.get('proofpoint_aggregate_flag')
+        malicious_flag = kwargs.get('proofpoint_malicious_flag')
 
         log = logging.getLogger(__name__)
         log.info('incident_id: {}'.format(incident_id))
-        log.info('campaign_id: {}'.format(campaign_id))
-        log.info('threat_id: {}'.format(threat_id))
-        log.info('aggregate_flag: {}'.format(aggregate_flag))
-        log.info('malicious_flag: {}'.format(malicious_flag))
+        log.info('proofpoint_campaign_id: {}'.format(campaign_id))
+        log.info('proofpoint_threat_id: {}'.format(threat_id))
+        log.info('proofpoint_aggregate_flag: {}'.format(aggregate_flag))
+        log.info('proofpoint_malicious_flag: {}'.format(malicious_flag))
 
         yield StatusMessage("starting...")
 

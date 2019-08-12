@@ -38,6 +38,7 @@ threat_template=
 # optional - Jinja template to override default forensic format
 #forensics_template=
 
+# optional
 cafile=
 """
     return config_data
