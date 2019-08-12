@@ -3,17 +3,13 @@
 #
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #
-
-#
-#   MitreAttack:
-#   ------------
-#
-
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
+import time
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
+
 
 class MitreAttackBase(object):
     """
@@ -21,17 +17,26 @@ class MitreAttackBase(object):
     To use, subclass and override MITRE_TYPE, and all other needed methods.
     """
     MITRE_TYPE = "replace"
-    _cached_obj = {}
+    _cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
+    SECONDS_IN_A_DAY = 84600
 
     def __init__(self, doc):
+        if time.time() - self._cached_obj["last"] > self.SECONDS_IN_A_DAY:
+            self._reset_cache()
+
         self._stix = doc
         self.name = self.get_name(doc)
         self.id = self.get_id(doc)
         self.description = doc.get("description", "")
+
         if self.id is not None:
-            self._cached_obj[self.id] = self
+            self._cached_obj["id"][self.id] = self
         if self.name is not None:
-            self._cached_obj[self.name] = self
+            self._cached_obj["name"][self.name] = self
+
+    @classmethod
+    def _reset_cache(cls):
+        cls._cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
 
     @staticmethod
     def get_name(doc):
@@ -71,8 +76,13 @@ class MitreAttackBase(object):
         :return: list of class instances
         :rtype: list(self.__class__)
         """
+        if cls._cached_obj["all"] is not None:
+            return cls._cached_obj["all"]
+
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
-        return [cls(x) for x in conn.get_items(type_filter)]
+        all = [cls(x) for x in conn.get_items(type_filter)]
+        cls._cached_obj["all"] = all
+        return all
 
     @classmethod
     def get_by_name(cls, conn, name):
@@ -85,8 +95,8 @@ class MitreAttackBase(object):
         :return: instance of the class for given name
         :rtype: self.__class__
         """
-        if name in cls._cached_obj:
-            return cls._cached_obj[name]
+        if name in cls._cached_obj["name"]:
+            return cls._cached_obj["name"][name]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
@@ -106,8 +116,8 @@ class MitreAttackBase(object):
         :return: instance of the class for given id
         :rtype: self.__class__
         """
-        if type_id in cls._cached_obj:
-            return cls._cached_obj[type_id]
+        if type_id in cls._cached_obj["id"]:
+            return cls._cached_obj["id"][type_id]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
@@ -149,6 +159,8 @@ class MitreAttackTechnique(MitreAttackBase):
         :return: list of Technique instances related to tactic
         :rtype: list(MitreAttackTechnique)
         """
+        if tactic is None:
+            return None
         kill_chain = tactic.name.replace(' ','-').lower()
         tact_filter = Filter("kill_chain_phases.phase_name", "=", kill_chain)
         tech_filter = Filter("type", "=", cls.MITRE_TYPE)
@@ -166,6 +178,26 @@ class MitreAttackTechnique(MitreAttackBase):
             "x_mitre_detection": self._stix.get("x_mitre_detection", ""),
             "mitre_tech_id": self.id
         }
+
+
+class MitreAttackMitigation(MitreAttackBase):
+    MITRE_TYPE = "course-of-action"
+
+    @classmethod
+    def get_by_technique(cls, conn, technique):
+        """
+        Gets mitigations that mitigates provided technique
+        :param conn: connection object for making requests
+        :type conn: MitreAttack
+        :param technique: technique to mitigate
+        :type technique: MitreAttackTechnique
+        :return: List of mitigations for the given technique
+        :rtype: list(MitreAttackMitigation)
+        """
+        if technique is None:
+            return None
+        return [cls(x) for x in conn.get_related_to(technique._stix, "mitigates", target_only=True)]
+
 
 class MitreAttack(object):
     """
@@ -191,6 +223,37 @@ class MitreAttack(object):
         c_sources = [TAXIICollectionSource(collection) for collection in api_root.collections]
         self.composite_ds = CompositeDataSource()
         self.composite_ds.add_data_sources(c_sources)
+
+    def get_items(self, filters):
+        """
+        Get items using filters
+        Reference:
+        https://github.com/mitre/cti/blob/master/USAGE.md
+        :param filters: list of filter
+        :return: list of objects
+        :rtype: list(dict)
+        """
+        if self.attack_server is None:
+            self.connect_server()
+        items = []
+        for data_source in self.composite_ds.get_all_data_sources():
+            try:
+                ds_items = data_source.query(filters)
+                items.extend(ds_items)
+            except DataSourceError as e:
+                # happens if data_source finds no elements with given filter
+                pass
+        return items
+
+    def get_related_to(self, *args, **kwargs):
+        """
+        Facade for `related_to` of composite data source. Needed to abstract out DataSource from
+        classes using AttackMitre.
+        :return: objects with the provided relationships
+        """
+        if self.attack_server is None:
+            self.connect_server()
+        return self.composite_ds.related_to(*args, **kwargs)
 
     def lookup_item(self,
                     item_name,
@@ -226,27 +289,9 @@ class MitreAttack(object):
         else:
             tech = MitreAttackTechnique.get_by_id(self, ext_id)
 
-        return tech.dict_repr()
-
-    def get_items(self, filters):
-        """
-        Get items using filters
-        Reference:
-        https://github.com/mitre/cti/blob/master/USAGE.md
-        :param filters: list of filter
-        :return:
-        """
-        if self.attack_server is None:
-            self.connect_server()
-        items = []
-        for data_source in self.composite_ds.get_all_data_sources():
-            try:
-                ds_items = data_source.query(filters)
-                items.extend(ds_items)
-            except DataSourceError as e:
-                # happens if data_source finds no elements with given filter
-                pass
-        return items
+        if tech is not None:
+            return tech.dict_repr()
+        return None
 
     def get_all_tactics(self):
         return MitreAttackTactic.get_all(self)
@@ -275,7 +320,7 @@ class MitreAttack(object):
             return None
         return [tech.dict_repr() for tech in MitreAttackTechnique.get_by_tactic(self, tactic)]
 
-    def get_tech_mitigation(self, tech_id=None, tech_name=None):
+    def get_technique_mitigation(self, tech_id=None, tech_name=None):
         """
         Get mitigation for a given tech
         Reference:
@@ -289,12 +334,8 @@ class MitreAttack(object):
         elif tech_name is not None:
             tech = MitreAttackTechnique.get_by_name(self, tech_name)
 
-        relations = self.composite_ds.relationships(tech.id, "mitigates", target_only=True)
-        filters = [
-                Filter("type", '=', "course-of-action"),
-                Filter("id", "in", [r.source_ref for r in relations])
-        ]
+        if not tech:
+            return None
 
-        ret = self.get_items(filters)
-
-        return ret[0].get("description", "")
+        mitigations = MitreAttackMitigation.get_by_technique(self, tech)
+        return mitigations[0].description

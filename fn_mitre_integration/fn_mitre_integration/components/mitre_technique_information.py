@@ -50,15 +50,17 @@ class FunctionComponent(ResilientComponent):
                 tech = {
                     "name": mitre_technique_name,
                     "description": "",
-                    "external_references": [{"url":""}],
+                    "external_references": [{"url": ""}],
                     "x_mitre_detection": "",
                     "mitre_tech_id": "",
-                    "mitre_mitigation": mitre_att.get_tech_mitigation(tech_id=mitre_technique_id,
+                    "mitre_mitigation": mitre_att.get_technique_mitigation(tech_id=mitre_technique_id,
                                                                       tech_name=mitre_technique_name)
                 }
             else:
-                tech = mitre_att.get_tech(name=mitre_technique_name,
+                tech = mitre_att.get_technique(name=mitre_technique_name,
                                           ext_id=mitre_technique_id)
+                if tech is None:
+                    raise ValueError("Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
 
             yield StatusMessage("done...")
             log.info("MITRE tech: " + str(tech))

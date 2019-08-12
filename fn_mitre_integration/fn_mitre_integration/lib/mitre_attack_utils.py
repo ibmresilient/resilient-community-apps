@@ -20,6 +20,8 @@ def get_techniques(tactic_names=None, tactic_ids=None):
     :param tactic_ids:      string of tactic ids separated by comma
     :return:                techniques
     """
+    if not tactic_names and not tactic_ids:
+        raise ValueError("Neither name nor id is provided for getting techniques.")
     mitre_attack = MitreAttack()
 
     tactics = []
@@ -27,8 +29,13 @@ def get_techniques(tactic_names=None, tactic_ids=None):
         tactics = tactic_names.split(', ')
     elif tactic_ids is not None:
         t_ids = tactic_ids.split(', ')
-        tactics =[MitreAttackTactic.get_by_id(mitre_attack, tid).name for tid in t_ids]
-
+        tactics = []
+        for tid in t_ids:
+            tactic = MitreAttackTactic.get_by_id(mitre_attack, tid)
+            if tactic is not None:
+                tactics.append(tactic.name)
+            else:
+                raise ValueError("Tactic with id {} does not exist.".format(tid))
     ret = []
     for tactic in tactics:
         t_obj = MitreAttackTactic.get_by_name(mitre_attack, tactic)
