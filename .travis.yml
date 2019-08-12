@@ -1,6 +1,6 @@
 language: python
-python: 2.6
-
+python: 2.7
+os: linux
 env:
   global:
   - TEST_RESILIENT_APPLIANCE=staging2.internal.resilientsystems.com
@@ -9,50 +9,70 @@ env:
   - secure: VU1PL2bWOE+E3ieBz/0Oa2hIRXGeSFYubE9SYh3dH541h8V8FWE0kGt8P6xdZOGmf9xNsDL/O+rKqrq5TCKTdUQqFXm7RCD//iQrHUcbu2YU38XPpBQrWxSZs29sR3R6UkUypZahHmn/ghjgZnRxQIWGscYPvvNCiOP9X85ckmVaKLYPwW0HPH7vIKs9zcT8tEyRDANokc0BQDjeVu0s29FeKGyy9JVbuye8/1TmVkQWBvutvcQ/z/mOQ7dOO3fW0wkVwOHPF9FtBc79WzjK5w/Ej30EWHC5zdRG46+2FLcqKSHvkyuV59f0ojxLzRmeR1ueS37pNncmXfVMREwtiIYN/Dd3isLsg14RK1leu/JHiPxfQtz2TV4+yeVO4aZk+Bs/JLf1ZbXAE+A71hIH6rTUpEBq1S8qjKsfTPEWLg1cuq1ujf2WOAumdIf8rSOnQ9EbEfBlm3N8Wo9RjXbEx6hq+UHr7L28tw0u00gcAex6Ky2eRk+USFnXBHs/Kf5i29CWzw4Lcnb2hPa0bup3yNQuss/Yy+cQO5tDW8jJPP8joR5Fvr8fJZVtGlTGp09odHcrDGKvbdlf0gVmVDYawKi0v4m0URCKVy0vYAbzVOgZF46nW+VfcexiLxomwYpKeltigk+L52aV5DIodfuxS9aB6IJtEYSTO8Mf+Yo2x8Q=
   - secure: kr5Zz5frfrGOeuAylefGbDhY5s/YwyRhktuAly1ovOn/7Q3OJYjTq6h7wvnt1KQ/YeSdA+bxwOhWKbYHPQHAhovyo/5gsII7LruSs7VjdcD9tDoaYEoDBP7nki+NGr+dBVwrooGJ3f7TbuZs+4OSyPWD2FdN4PsOYLof4soDEW7C0cTP2KZ/wNGDjBGB2stOb6a5h4MQSohx+7B795noUoK5ojmygZObIGSDWmahR4kzCm+rEVLlMV0ptDCBXvn4xmJLCz5UOZhR27ckuiW342vNxShlms+rwWcvoxwbj61Qn3MEf9S9D59aJ+n4+u9Kb3VD4HJjlQ3rWZ/DADPfp7h6XOmfrQq3Xj3sQ4K2+8RMSFHdxWPsmhWd/Aty+YmWjoOnewoBfFaDUzFRURqwO3K+oh1H0IALTOTYQSYEeuVfi/+mwJRkKh0+IgvgscL5/bo+nVnQBk4FpWJRHV0x2fWiG8DHCKmInkkFSDHax3dHc9pYZXQTdNdfvsJRtc0rEn6GyVnRMia1TKLpB1joRhb7mkyc7pgDSatvV9W6+v6+evplHFxS7lkm9gqlW/ygJzPVYx7UaFuqo9cOi/c8sR6qf7NUTUi9Aa4aqY6qHNrkxfh7+5ck7wLTWmE0WL+0r3Z09Zg746SIGYqLrFQJZPn+JanFEy0q7kAU2Zr8vgE=
 
+# Exclude these branches from having jobs ran.
+branches:
+  except:
+    - public
+    - /^_.*$/
 matrix:
   fast_finish: true
-  exclude:
-    # This is to exclude the default build job
-    - python: 2.6
-
   include:
-  - python: 2.7
-    env:
-    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient PS - Test"
-  - python: 3.4
-    env:
-    - TOXENV=py34 TEST_RESILIENT_ORG="Resilient PS - Test2"
-
-install:
-  - pip install --upgrade pip
-  - pip install --upgrade setuptools
-  - pip install tox
-  - pip install sphinx
-
-before_script:
-  - git clone -b master --single-branch git@github.ibm.com:Resilient/resilient-python-api.git --depth 1
-  - (cd resilient-python-api && ./buildall.sh 999);
-  - mkdir pkgs
-  - cp resilient-python-api/*/dist/*.tar.gz ./pkgs
-
-script:
-  - .scripts/build_packages.sh && .scripts/run_tests.sh
-
-after_script:
-  - echo "Packages To Deploy"
-  - ls -l .scripts/*.tar.gz
-
-deploy:
-  provider: releases
-  api_key: "$GITHUB_OAUTH_TOKEN"
-  file_glob: true
-  file: .scripts/rc-*.tar.gz
-  skip_cleanup: true
-  on:
-    tags: true
+  # Jobs below this line are reserved for push contributions i.e when someone pushes changes
+  # ==========	
+  # Below jobs are used to run tests against the most recently modified integration. 	
+  # We determine the most recent one using git diff and then ensure to only run tests against a package once. 
+  - name: Python 2.7 Build and Run Tests
+    stage: Most Recent Integration
+    if: branch != master AND type=push
     python: 2.7
-
-#notifications:
-#  slack:
-#    rooms: ibm-security:9xGeUjQaqaNY1qgBG6ORFaSl
-#    on_success: change
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 push test" && .scripts/run_most_recent_tests.sh
+  - name: Python 3.6 Build and Run Tests
+    if: branch != master AND type=push
+    python: 3.6
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 push test" && .scripts/run_most_recent_tests.sh
+  # Jobs below this line are reserved for master branch 	
+  # Master branch is where all the integrations should be tested, its okay if it takes a while 	
+  # As we have the push jobs above to handle individual commits
+  - if: branch = master AND type != pull_request
+    python: 2.7
+    name: Py27 Master Build and Run tests
+    stage: Mock Tests
+    env:
+    - TOXENV=py27 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "2.7 Master Build" && .scripts/run_tests.sh
+  - if: branch = master AND type != pull_request
+    stage: Mock Tests
+    python: 3.6
+    name: Py36 Master Build and Run tests
+    env:
+    - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
+    script:
+    - echo "3.6 Master Build" && .scripts/run_tests.sh
+before_install:
+- echo "About to install"
+install:
+- pip install --upgrade pip
+- pip install --upgrade setuptools
+- pip install tox
+- pip install pylint
+- pip install pytest==4.0.1
+- pip install resilient
+- pip install resilient-circuits
+- pip install pytest-resilient-circuits
+script:
+- ".scripts/build_packages.sh && .scripts/run_tests.sh"
+after_script:
+- echo "Packages To Deploy"
+- ls -l .scripts/*.tar.gz
+- ls -l .scripts/*.zip
+notifications:
+  slack:
+    secure: RIoi5pMfKCvSDA1GUZbVKk5dCr2MyGwncvvIUYb495SJxamfQ3fSOp/yGQEqb6mbWl3+4bj5zjxam4kkB4icrxeJxBvjN5xpnK/Xc/OKDIcXg99qrtKudfkWQZEWRpwamHjGSHmPovRiIfxZ5Zh5hKCsTWd/GAaeTK+RmUSo+N0Tsh4LUesMFrsEt0GobvaHB9MTDLzXNyiHZArKO5WIguzwSaF0vWC/1pIAQA2dYnSpe2ijGPJ1NlPsSCedqJZRP2wfOHyxsL/MdAEkQttOP5RuN0ipyWjmzwwN9777A7F8SwenpSzysSLRtCa/ouCjKtHyYX0Ni71bDUvvefK5F009vOgXtujHJz9QiWyDMKNlA3DlGJvwIID271iAYwVJ+gBbf/9icSyXlJxV/asQrDfvX4BUhltclzAo9VGVE4OcHY0m1b8TNpW+c1O9nSwEGKRmYuAlQNZ+13/JqJck/xoEp7ra+9vnN2fsalXnRZfMVuVdXlERWCJpeJgjxHYXcSdj8IizUuaA0nQkfXp9yoOUJ5Dcqb6MYOukpFQxHragrZl4xKjgngUKi4J+W0HPLk0sxsawa1EDnq42SxQIegBIRc01ghfiW+ig2+aehGzirb+qqIuRpVwskjCDeM52JgaPTTQKEMltY54o+29b4LULUt6nWHMaau1OUExIJMw=
+  email: false
