@@ -1,0 +1,4 @@
+{
+    "name": "Incident from DLP with Jinja",
+    "discovered_date": {%- if incident.get('eventDate', False) -%}{{incident.eventDate}}{% else %} 0 {%- endif -%}
+}
