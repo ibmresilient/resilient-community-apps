@@ -1,19 +1,10 @@
 
 import logging
-import resilient_circuits.template_functions as template_functions
-
-import zeep
-from requests import Session
-from requests.auth import HTTPBasicAuth, AuthBase
-import requests_mock
-from zeep.transports import Transport
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
-
-from circuits import Component, Event, Timer, handler
-from resilient_circuits import ResilientComponent
+from resilient_circuits import ResilientComponent, template_functions
+import datetime
 
 log = logging.getLogger(__name__)
-
 
 class DLPListener(ResilientComponent):
 
@@ -24,12 +15,15 @@ class DLPListener(ResilientComponent):
 
         # A REST Client to interface with Resilient
         self.rest_client = self.rest_client()
-        #print(self.soap_client.service.incidentList(savedReportId=121,incidentCreationDateLaterThan='2019-07-20'))
-        #incident_list = self.soap_client.service.incidentList(savedReportId=121,incidentCreationDateLaterThan='2019-07-20')
-        # for id in incident_list['incidentId']:
-        #     if id == 121:
-        #         incident_detail = self.soap_client.service.incidentDetail(incidentId=id)
-        #         print(incident_detail)
-        #         binaries = self.soap_client.service.incidentBinaries(incidentId=id,includeOriginalMessage=False, includeAllComponents='?') 
-     
-    
+
+    def start_poller(self):
+
+        log.debug("Started Poller")
+        # gather the list of incidents from a saved report
+        res = DLPSoapClient.incident_list(savedReportId=121,
+                                          incidentCreationDateLaterThan=datetime.datetime.now() - datetime.timedelta(days=14))
+
+        # gather the incident_details for incidents returned
+        incidents = DLPSoapClient.incident_detail(incidentId=res['incidentLongId'])
+
+        
