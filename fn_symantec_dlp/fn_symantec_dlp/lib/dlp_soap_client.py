@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
+import zeep
+from requests import Session
+from requests.auth import HTTPBasicAuth, AuthBase
+import requests_mock
+from zeep.transports import Transport
 
 import datetime
 
@@ -35,7 +40,26 @@ class DLPSoapClient():
         cls.host = cls.get_config_option(app_configs=app_configs,
                                             option_name="sdlp_host",
                                             optional=False)
+        cls.wsdl = cls.get_config_option(app_configs=app_configs,
+                                            option_name="sdlp_wsdl",
+                                            optional=False)
+        # Gather the DLP User Name
+        cls.dlp_username = cls.get_config_option(app_configs=app_configs,
+                                            option_name="sdlp_username",
+                                            optional=False)
+        # Gather the DLP User Password
+        cls.dlp_password = cls.get_config_option(app_configs=app_configs,
+                                                      option_name="sdlp_password",
+                                                      optional=False)
 
+        cls.session = Session()
+        cls.session.verify = False # TODO: Expose as app.config
+
+        # Setup Transport with our credentials
+        cls.transport = zeep.Transport(session=cls.session)
+        # Create a soap_client from the wsdl and transport
+        cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
+        cls.class_vars_loaded= True
 
 
     @staticmethod
@@ -83,4 +107,20 @@ class DLPSoapClient():
 
         return incident_list
 
+    @classmethod
+    def incident_detail(cls, incidentId=None):
+        """incident_detail API Call to gather the details for a specified incident
+        Even though incidentLongId isin't exposed in the function call,
+        that is usable for a query also
+
+        :param incidentId: the ID of the incident to retreive, defaults to None
+        :type incidentId: [type], optional
+        :return: [description]
+        :rtype: [type]
+        """
+
+
+        incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
+
+        return incident_detail
 
