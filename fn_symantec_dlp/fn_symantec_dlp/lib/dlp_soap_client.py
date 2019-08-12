@@ -9,6 +9,31 @@ from zeep.transports import Transport
 
 import datetime
 
+class SymantecAuth(AuthBase):
+    """SymantecAuth a class which inherits from requests.AuthBase,
+    if the URL starts with our DLP Instance hostname, add Basic Authentication to requests
+    otherwise send a request without credentials.
+
+    Needed due to a call to www.w3.org/2005/05/xmlmime which fails if credentials are passed
+
+    :param AuthBase: [description]
+    :type AuthBase: [type]
+    :return: [description]
+    :rtype: [type]
+    """
+    def __init__(self, username, password, host):
+        self.basic = HTTPBasicAuth(username, password)
+        self.host = host
+
+    def __call__(self, r):
+        if r.url.startswith(self.host):
+            return self.basic(r)
+        else:
+            # In some cases the call to w3.org can fail with http
+            # If we encounter a http url, replace with https
+            if r.url.startswith("http"):
+                r.url = r.url.replace("http", "https")
+            return r
 
 class DLPSoapClient():
     class_vars_loaded = False
@@ -54,12 +79,13 @@ class DLPSoapClient():
 
         cls.session = Session()
         cls.session.verify = False # TODO: Expose as app.config
+        cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
         # Setup Transport with our credentials
         cls.transport = zeep.Transport(session=cls.session)
         # Create a soap_client from the wsdl and transport
         cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
-        cls.class_vars_loaded= True
+        cls.class_vars_loaded = True
 
 
     @staticmethod
@@ -118,9 +144,10 @@ class DLPSoapClient():
         :return: [description]
         :rtype: [type]
         """
-
+        # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
 
         incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
 
         return incident_detail
+
 
