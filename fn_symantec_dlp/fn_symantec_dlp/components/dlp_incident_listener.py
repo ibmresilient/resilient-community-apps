@@ -8,6 +8,7 @@ import threading
 from fn_symantec_dlp.util.dlp_listener_component import DLPListener
 from resilient_lib import str_to_bool
 
+from circuits import Event, Timer, handler
 
 log = logging.getLogger(__name__)
 
@@ -31,7 +32,11 @@ class FunctionComponent(ResilientComponent):
             if str_to_bool(self.options.get("sdlp_listener_toggle", None)):
                 self.setup_listener()
 
-
+                """Use a circuits timer to fire off an event every N seconds.
+                    When the event is fired, a function with the decorator @handler(name_of_event)
+                    will be used to handle the event and perform some task"""
+                Timer(interval=60, event=Event.create(
+                    "DLPListenerPollingEvent"), persist=True).register(self)
 
     def setup_listener(self):
         # Init the consumer class with needed app.config values
@@ -53,4 +58,15 @@ class FunctionComponent(ResilientComponent):
             log.error(
                 u"Encountered an issue when starting the thread: {}".format(str(e)))
 
+    @handler("DLPListenerPollingEvent")
+    def dlp_thread_start(self):
+        log.info("DLP Listener initiated.!")
 
+        # If the poller is not already running
+        if self.res_daemon_thread.is_alive():
+            log.debug(
+                "dlp_threat_start: poller_thread is still alive, not creating a new thread.")
+        else:
+            log.debug(
+                "dlp_thread_start: Creating a thread to poll DLP")
+            self.setup_listener()
