@@ -35,6 +35,7 @@ class SymantecAuth(AuthBase):
                 r.url = r.url.replace("http", "https")
             return r
 
+
 class DLPSoapClient():
     class_vars_loaded = False
 
@@ -149,5 +150,22 @@ class DLPSoapClient():
         incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
 
         return incident_detail
+
+    @classmethod
+    def incident_binaries(cls, incidentId=None, includeOriginalMessage=False, includeAllComponents='?'):
+        """incident_binaries API Call to gather the binaries (Attachments) for an incident.
+
+        :param incidentId: [description], defaults to None
+        :type incidentId: [type], optional
+        :param includeOriginalMessage:  defaults to False
+        :type includeOriginalMessage: bool, optional
+        :param includeAllComponents: defaults to '?'
+        :type includeAllComponents: str, optional
+        """
+        binaries = cls.soap_client.service.incidentBinaries(
+            incidentId=incidentId,
+            includeOriginalMessage=includeOriginalMessage,
+            includeAllComponents=includeAllComponents)
+        return binaries
 
 
