@@ -60,9 +60,26 @@ class DLPListener(ResilientComponent):
                         }
                     ]
                 }
+                default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
+
+                payload = self.map_values(
+                    template_file=os.path.abspath(default_dir+"/_dlp_incident_template.jinja2"),
+                    message_dict={"incident": {"eventDate": incident['incident']['eventDate'].timestamp()*1000}})
+
+                    # {
+                    #     "incident": thing,
+                    #     "res_severity": thing,
+                    # }
+
+                # Create the Incident
+                # self.rest_client.post('/incidents',
+                # incident_create_dto)
 
 
-    def filter_existing_incidents(self, incidents):
+
+
+    @staticmethod
+    def filter_existing_incidents(incidents):
         for incident in incidents:
             if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
                 for groupset in incident['incident'].customAttributeGroup:  # for each group
@@ -84,4 +101,17 @@ class DLPListener(ResilientComponent):
         res = self.rest_client.search(search_ex_dto)
         return res['results']
 
+    @staticmethod
+    def map_values(template_file, message_dict):
+        """Map_Values is used to :
+        Take in a forwarded Event from DLP
+        Import a Jinja template
+        Map Event data to a new Incidents data including artifact data"""
+        log.debug("Attempting to map message to an IncidentDTO. Message provided : {}".format(message_dict))
+        with open(template_file, 'r') as template:
+
+            incident_template = template.read()
+            incident_data = template_functions.render(incident_template, message_dict)
+            log.debug(incident_data)
+            return incident_data
 
