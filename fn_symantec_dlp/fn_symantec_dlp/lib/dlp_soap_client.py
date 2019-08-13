@@ -147,6 +147,7 @@ class DLPSoapClient():
         """
         # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
 
+
         incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
 
         return incident_detail
@@ -168,4 +169,24 @@ class DLPSoapClient():
             includeAllComponents=includeAllComponents)
         return binaries
 
+    @classmethod
+    def incident_status(cls):
+        """incident_status Used to retreive the incident status
 
+        :return: [description]
+        :rtype: incidentStatusList Object
+        """
+        status = cls.soap_client.service.listIncidentStatus()
+
+        return status
+
+    @classmethod
+    def list_custom_attributes(cls):
+        """list_custom_attributes return a list of all custom attribute names
+
+        :return: [description]
+        :rtype: list
+        """
+        custom_attributes = cls.soap_client.service.listCustomAttributes()
+
+        return custom_attributes
