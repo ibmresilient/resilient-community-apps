@@ -6,6 +6,7 @@ import datetime
 
 log = logging.getLogger(__name__)
 
+
 class DLPListener(ResilientComponent):
 
     def __init__(self, opts):
@@ -25,5 +26,25 @@ class DLPListener(ResilientComponent):
 
         # gather the incident_details for incidents returned
         incidents = DLPSoapClient.incident_detail(incidentId=res['incidentLongId'])
+        print(len(incidents))
+        # Drop all incidents which have a res_id custom attribute
+        incidents = list(self.filter_existing_incidents(incidents))
 
-        
+        print(len(incidents))
+        # Get the sdlp_incident_id field
+        sdlp_id_type = self.rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
+
+
+    def filter_existing_incidents(self, incidents):
+        for incident in incidents:
+            if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
+                for groupset in incident['incident'].customAttributeGroup:  # for each group
+                    if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
+                        for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
+                            # If the attribute is the resilient one and has no value
+                            if attribute.name == "resilient_incidentid" and attribute.value is None:
+                                yield incident
+
+
+    
+
