@@ -1,5 +1,7 @@
 
 import logging
+import os
+import tempfile
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 from resilient_circuits import ResilientComponent, template_functions
 import datetime
@@ -34,6 +36,31 @@ class DLPListener(ResilientComponent):
         # Get the sdlp_incident_id field
         sdlp_id_type = self.rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
 
+        for incident in incidents:
+            # For each incident; Take in Incident ID's and check if theres an existing resilient incident
+            if not self.does_incident_exist_in_res(sdlp_id_type):
+                # There is no resilient incident with the given DLP Incident ID
+                # Create the incident
+                log.debug("Found no Resilient incident with the given DLP Incident ID, creating an incident.")
+                incident_to_create = incidents[0]
+                # Prepare a Jinja Payload with the Artifacts
+                incident_create_dto = {
+                    "name": "Incident from DLP",
+                    "discovered_date": round(incident_to_create['incident']['eventDate'].timestamp()*1000),
+                    "properties": {
+                        sdlp_id_type['name']: 119
+                    },
+                    "comments": [
+                        {
+                            "text": {
+                                "format": "text",
+                                "content": incident_to_create['incident']['incidentHistory'][0]['detail']
+                            },
+                            "create_date": round(incident_to_create['incident']['eventDate'].timestamp()*1000)#round(incident_to_create['incident']['incidentHistory'][1]['date'].timestamp()*1000)
+                        }
+                    ]
+                }
+
 
     def filter_existing_incidents(self, incidents):
         for incident in incidents:
@@ -45,6 +72,16 @@ class DLPListener(ResilientComponent):
                             if attribute.name == "resilient_incidentid" and attribute.value is None:
                                 yield incident
 
+    def does_incident_exist_in_res(self, sdlp_id_type):
+        # For each incident; Take in Incident ID's and check if theres an existing resilient incident
+        search_ex_dto = {
+            "org_id": self.rest_client.org_id,
+            "query": u"incident.{}.{}: 119".format(sdlp_id_type['id'], sdlp_id_type['name']),
+            "types": [
+              "incident"
+            ]
+          }
+        res = self.rest_client.search(search_ex_dto)
+        return res['results']
 
-    
 
