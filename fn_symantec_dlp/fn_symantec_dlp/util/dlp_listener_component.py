@@ -2,6 +2,7 @@
 import logging
 import os
 import tempfile
+import json
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 from resilient_circuits import ResilientComponent, template_functions
 import datetime
@@ -38,7 +39,7 @@ class DLPListener(ResilientComponent):
 
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
-            if not self.does_incident_exist_in_res(sdlp_id_type):
+            if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
                 # There is no resilient incident with the given DLP Incident ID
                 # Create the incident
                 log.debug("Found no Resilient incident with the given DLP Incident ID, creating an incident.")
@@ -60,23 +61,38 @@ class DLPListener(ResilientComponent):
                         }
                     ]
                 }
-                default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
 
-                payload = self.map_values(
-                    template_file=os.path.abspath(default_dir+"/_dlp_incident_template.jinja2"),
-                    message_dict={"incident": {"eventDate": incident['incident']['eventDate'].timestamp()*1000}})
-
-                    # {
-                    #     "incident": thing,
-                    #     "res_severity": thing,
-                    # }
-
+                payload = self.prepare_incident_dto(incident)
+                log.debug("Creating Incident")
+                jsonpayload = json.loads(payload)
                 # Create the Incident
-                # self.rest_client.post('/incidents',
-                # incident_create_dto)
+                new_incident = self.rest_client.post('/incidents', json.loads(payload))
 
+                self.upload_dlp_binaries(incident, new_incident['id'])
 
+    def upload_dlp_binaries(self, incident, res_incident_id):
+        # Upload remaining parts such as the Attachments
+        binaries = self.soap_client.incident_binaries(incidentId=incident['incidentId'], includeOriginalMessage=False,
+                                                      includeAllComponents='?')
+        if binaries:
+            for component in binaries['Component']:
+                try:
+                    with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_upload_file:
+                        temp_upload_file.write(component['content'])
 
+                        temp_upload_file.close()
+                        self.rest_client.post_attachment('/incidents/{}/attachments'.format(res_incident_id),
+                                                         temp_upload_file.name, component['name'])
+                finally:
+                    os.unlink(temp_upload_file.name)
+
+    def prepare_incident_dto(self, incident):
+        from zeep.helpers import serialize_object
+        default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
+        payload = self.map_values(
+            template_file=os.path.abspath(default_dir + "/_dlp_incident_template.jinja2"),
+            message_dict={"incident": {"incident": serialize_object(incident['incident']), "incidentId": incident['incidentId'], "eventDate": round(incident['incident']['eventDate'].timestamp() * 1000)}})
+        return payload
 
     @staticmethod
     def filter_existing_incidents(incidents):
@@ -89,11 +105,11 @@ class DLPListener(ResilientComponent):
                             if attribute.name == "resilient_incidentid" and attribute.value is None:
                                 yield incident
 
-    def does_incident_exist_in_res(self, sdlp_id_type):
+    def does_incident_exist_in_res(self, sdlp_id_type, sdlp_incident_id):
         # For each incident; Take in Incident ID's and check if theres an existing resilient incident
         search_ex_dto = {
             "org_id": self.rest_client.org_id,
-            "query": u"incident.{}.{}: 119".format(sdlp_id_type['id'], sdlp_id_type['name']),
+            "query": u"incident.{}.{}: {}".format(sdlp_id_type['id'], sdlp_id_type['name'], sdlp_incident_id),
             "types": [
               "incident"
             ]
