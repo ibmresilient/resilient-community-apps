@@ -146,11 +146,11 @@ class DLPSoapClient():
         :rtype: [type]
         """
         # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
+        with cls.soap_client.settings(strict=False):
 
+            incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
 
-        incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
-
-        return incident_detail
+            return incident_detail
 
     @classmethod
     def incident_binaries(cls, incidentId=None, includeOriginalMessage=False, includeAllComponents='?'):
