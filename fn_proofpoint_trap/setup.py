@@ -25,7 +25,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "FnProofpointTrapGetIncidentDetailsFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_get_incident_details:FunctionComponent",
-            "FnPptIncidentPolling = fn_proofpoint_trap.components.fn_proofpoint_trap_polling:PPT_IncidentPolling",
+            "FnPptrIncidentPolling = fn_proofpoint_trap.components.fn_proofpoint_trap_polling:PPTRIncidentPolling",
         ],
         "resilient.circuits.configsection": ["gen_config = fn_proofpoint_trap.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_proofpoint_trap.util.customize:customization_data"],
