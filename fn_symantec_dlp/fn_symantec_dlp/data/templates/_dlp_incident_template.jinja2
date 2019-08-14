@@ -15,8 +15,9 @@
         
         {%- if incident.incident.get('userName', False) -%}
         {{- comma() }}
-        {"type": {"name": "User Account"}, "value": "{{incident.incident.userName}}",
+        {"type": {"name": "User Account"}, "value": "{{incident.incident.userName|replace("\\", "\\\\")}}",
             "description" : {"format" : "html", "content" : "User Account of the machine that generated this incident. Includes the machine name. Generated from DLP Incident with an ID of {{incident.incidentId}}"}}
         {%- endif -%}
+        
     ]
 }
