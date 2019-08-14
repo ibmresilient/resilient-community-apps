@@ -24,6 +24,10 @@
             "description" : {"format" : "html", "content" : "File Path of the application in which the incident occured. Generated from DLP Incident with an ID of {{incident.incidentId}}"}}
         {%- endif -%}
 
-        
+        {%- if incident.incident.get('machineName', False) -%}
+        {{- comma() }}
+        {"type": {"name": "System Name"}, "value": "{{incident.incident.machineName}}",
+            "description" : {"format" : "html", "content" : "System Name of the machine that generated this incident. Includes the machine name. Generated from DLP Incident with an ID of {{incident.incidentId}}"}}
+        {%- endif -%}
     ]
 }
