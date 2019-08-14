@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-"""Function implementation"""
+""" Resilient functions component to run a ProofPoint TRAP query - get incident details. """
+
+# Set up:
+# Destination: a Queue named "fn_proofpoint_trap".
+# Manual Action: Execute a REST query against a ProofPoint TRAP server.
 
 import logging
 import requests

@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
+
+""" Helper functions for Resilient circuits Functions supporting ProofPoint TRAP """
+
 import requests
 import json
 import datetime

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
-   test with: resilient-circuits selftest -l fn_proofpoint_trap
+   test with: resilient-circuits selftest -l fn_sep
 """
-
 import logging
 
 log = logging.getLogger(__name__)
