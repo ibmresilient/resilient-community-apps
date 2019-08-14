@@ -10,8 +10,9 @@
 import logging
 import requests
 import json
+import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-
+from fn_proofpoint_trap.lib.helpers import validate_opts
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_proofpoint_trap_get_incident_details"""
@@ -20,18 +21,22 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_proofpoint_trap", {})
-
+        validate_opts(self)
     @function("fn_proofpoint_trap_get_incident_details")
     def _fn_proofpoint_trap_get_incident_details_function(self, event, *args, **kwargs):
         """Function: Fetch Incident Details from Proofpoint TRAP"""
 
         # Get the function parameters:
         trap_incident_id = kwargs.get("trap_incident_id")  # number
+
+        if trap_incident_id is None or not trap_incident_id:
+            raise ValueError("Required field is missing or empty: "+"trap_incident_id")
 
         log = logging.getLogger(__name__)
 
@@ -88,13 +93,11 @@ def get_incident_details(options, incident_id):
 
             res.raise_for_status()
 
-            if res.status_code == 200:
-                results['success'] = True
-                # results['data'] = json.loads(res.text)
-                results['data'] = json.dumps(json.loads(res.text), indent=4)
-                results['href'] = url
-            else:
-                raise ValueError('request to {0} failed with code {1}'.format(url, res.status_code))
+
+            results['success'] = True
+            # results['data'] = json.loads(res.text)
+            results['data'] = res.json
+            results['href'] = url
 
         except requests.exceptions.Timeout:
             raise ValueError('request to {0} timed out'.format(url))
@@ -118,5 +121,6 @@ def get_incident_details(options, incident_id):
 
         # Produce a FunctionResult with the results
         yield FunctionResult(results)
+
     except Exception:
         yield FunctionError()
