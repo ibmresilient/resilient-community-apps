@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-"""Polling implementation"""
+# pragma pylint: disable=unused-argument, no-self-use
+""" Incident poller for a ProofPoint TRAP server """
 
 import logging
 import os
