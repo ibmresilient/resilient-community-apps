@@ -11,7 +11,7 @@ import re
 from threading import Thread
 from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
-from fn_proofpoint_trap.components.get_incident_list import get_incident_list
+from fn_proofpoint_trap.lib.helpers import get_incident_list, validate_opts
 
 """
 Summary: 
@@ -406,36 +406,38 @@ regex_defs = {
 
 log = logging.getLogger(__name__)
 
-class PPT_IncidentPolling(ResilientComponent):
+class PPTRIncidentPolling(ResilientComponent):
     """Component that polls for new data arriving from Proofpoint TRAP"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(PPT_IncidentPolling, self).__init__(opts)
+        super(PPTRIncidentPolling, self).__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
+        validate_opts(self)
         # initialize last update to startup interval if present, otherwise update interval
-        interval = self.options.get('startup_interval')
-        if interval is not None:
-            interval = int(interval)
-        self.lastupdate = interval
+        startup_interval = self.options.get('startup_interval', None)
+        if startup_interval is not None:
+            startup_interval = int(startup_interval)
+        self.lastupdate = startup_interval
         self.main()
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_proofpoint_trap", {})
+        validate_opts(self)
 
     def main(self):
         """main entry point, instiantiate polling thread"""
         options = self.options
-        interval = int(options.get("polling_interval", 0))
+        polling_interval = int(options.get("polling_interval", 0))
 
-        if interval > 0:
+        if polling_interval  > 0:
             # Create and start polling thread
             thread = Thread(target=self.polling_thread)
             thread.daemon = True
             thread.start()
-            log.info("Polling for incidents in Proofpoint TRAP every {0} minutes".format(interval))
+            log.info("Polling for incidents in Proofpoint TRAP every {0} minutes".format(polling_interval))
         else:
             log.info("Polling for incidents in Proofpoint TRAP not enabled")
 
