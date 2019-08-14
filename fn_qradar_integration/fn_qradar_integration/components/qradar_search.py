@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
 
             timeout = None
             if "search_timeout" in self.options:
-                timeout = self.options["search_timeout"]
+                timeout = float(self.options["search_timeout"])
 
             log.debug("Connection to {} using {}".format(self.options["host"], self.options["username"]))
 
