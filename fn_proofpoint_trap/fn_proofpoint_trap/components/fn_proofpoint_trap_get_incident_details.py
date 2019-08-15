@@ -93,7 +93,6 @@ def get_incident_details(options, incident_id):
 
             res.raise_for_status()
 
-
             results['success'] = True
             # results['data'] = json.loads(res.text)
             results['data'] = res.json

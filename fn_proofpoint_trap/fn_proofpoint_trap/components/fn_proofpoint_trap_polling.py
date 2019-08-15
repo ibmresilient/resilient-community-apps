@@ -785,7 +785,13 @@ class PPTRIncidentPolling(ResilientComponent):
                     ]
                 }]
             }
-            r_incidents_tmp = self.rest_client().post(query_uri, query)
+
+            try:
+                r_incidents_tmp = self.rest_client().post(query_uri, query)
+
+            except Exception as err:
+                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
+
             r_incidents = [r_inc for r_inc in r_incidents_tmp
                            if r_inc['properties'].get(idtype) == id]
 
