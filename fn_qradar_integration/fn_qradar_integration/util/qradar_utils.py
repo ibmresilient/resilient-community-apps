@@ -8,7 +8,6 @@ import requests
 import json
 import fn_qradar_integration.util.qradar_constants as qradar_constants
 import base64
-import urllib
 import logging
 from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
 import fn_qradar_integration.util.function_utils as function_utils
