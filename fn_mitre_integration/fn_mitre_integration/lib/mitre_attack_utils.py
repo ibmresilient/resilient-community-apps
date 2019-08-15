@@ -39,6 +39,8 @@ def get_techniques(tactic_names=None, tactic_ids=None):
     ret = []
     for tactic in tactics:
         t_obj = MitreAttackTactic.get_by_name(mitre_attack, tactic)
+        if t_obj is None:
+            raise ValueError("Tactic with name {} does not exist.".format(tactic))
         techs = MitreAttackTechnique.get_by_tactic(mitre_attack, t_obj)
         tactic_dict = {
             "tactic_name": t_obj.name,
