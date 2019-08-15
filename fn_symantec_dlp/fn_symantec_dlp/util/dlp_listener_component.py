@@ -6,6 +6,7 @@ import json
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 from resilient_circuits import ResilientComponent, template_functions
 import datetime
+import uuid
 
 log = logging.getLogger(__name__)
 
@@ -64,11 +65,42 @@ class DLPListener(ResilientComponent):
 
                 payload = self.prepare_incident_dto(incident)
                 log.debug("Creating Incident")
-                jsonpayload = json.loads(payload)
                 # Create the Incident
                 new_incident = self.rest_client.post('/incidents', json.loads(payload))
 
                 self.upload_dlp_binaries(incident, new_incident['id'])
+
+                self.send_res_id_to_dlp(new_incident)
+
+    def send_res_id_to_dlp(self, new_incident):
+        headers = {'content-type': 'text/xml'}
+        body = """<?xml version="1.0" encoding="UTF-8"?>
+                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
+                        <soapenv:Header/>
+                        <soapenv:Body>
+                            <sch:incidentUpdateRequest>
+                                <!--1 or more repetitions:-->
+                                <updateBatch>
+                                    <batchId>{batch}</batchId>
+                                    <!--Zero or more repetitions:-->
+                                    <incidentId>173</incidentId>
+                                    <incidentAttributes>
+                                    <!--Zero or more repetitions:-->
+                                    <customAttribute>
+                                        <sch1:name>resilient_incidentid</sch1:name>
+                                        <!--Optional:-->
+                                        <sch1:value>{resilient_id}</sch1:value>
+                                    </customAttribute>
+                                    </incidentAttributes>
+                                    <!--Zero or more repetitions:-->
+                                    <incidentLongId>173</incidentLongId>
+                                </updateBatch>
+                            </sch:incidentUpdateRequest>
+                        </soapenv:Body>
+                        </soapenv:Envelope>""".format(batch="_{}".format(uuid.uuid4()), resilient_id=new_incident['id'])
+        response = DLPSoapClient.session.post("https://9.70.194.103:8443/ProtectManager/services/v2011/incidents",
+                                              data=body, headers=headers)
+        response.raise_for_status()
 
     def upload_dlp_binaries(self, incident, res_incident_id):
         # Upload remaining parts such as the Attachments
