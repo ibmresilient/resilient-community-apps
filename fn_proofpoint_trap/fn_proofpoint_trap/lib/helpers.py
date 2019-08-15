@@ -48,11 +48,8 @@ def get_incident_list(options, lastupdate, bundle):
 
         res.raise_for_status()
 
-        if res.status_code == 200:
-            data = json.loads(res.text)
-            return data
-        else:
-            return {'error': 'request to {0} failed with code {1}'.format(url, res.status_code)}
+        data = res.json
+        return data
 
     except requests.exceptions.Timeout:
         return {'error': 'request to {0} timed out'.format(url)}
