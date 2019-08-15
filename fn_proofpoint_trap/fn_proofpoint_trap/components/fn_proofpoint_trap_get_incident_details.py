@@ -13,6 +13,10 @@ import json
 import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_proofpoint_trap.lib.helpers import validate_opts
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_proofpoint_trap_get_incident_details"""
@@ -108,7 +112,7 @@ def get_incident_details(options, incident_id):
             if err.response.content is not None:
                 try:
                     custom_error_content = json.loads(err.response.content)
-                except json.decoder.JSONDecodeError:
+                except JSONDecodeError:
                     raise ValueError(err)                    # raise ValueError(custom_error_content)
                 yield FunctionResult(custom_error_content)
             raise ValueError(err)

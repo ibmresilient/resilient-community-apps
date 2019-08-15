@@ -7,6 +7,10 @@
 import requests
 import json
 import datetime
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
 
 mandatory_config_params = ["base_url", "api_key", "polling_interval", "startup_interval", "state" ]
 
@@ -61,8 +65,8 @@ def get_incident_list(options, lastupdate, bundle):
         if err.response.content is not None:
             try:
                 custom_error_content = json.loads(err.response.content)
-            except json.decoder.JSONDecodeError:
-                return {'error': 'JSON decode error {}'.format(err)}
+            except JSONDecodeError:
+                return {'error': '{}'.format(err)}
             return custom_error_content
         return {'error': 'HTTP error {}'.format(err)}
 
