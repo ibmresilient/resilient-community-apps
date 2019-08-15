@@ -12,7 +12,7 @@ from threading import Thread
 from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
 from fn_proofpoint_trap.lib.helpers import get_incident_list, validate_opts
-
+from resilient_lib.components.integration_errors import IntegrationError
 """
 Summary: 
 
@@ -452,6 +452,7 @@ class PPTRIncidentPolling(ResilientComponent):
             self.lastupdate = int(self.options.get("polling_interval",2))
             if 'error' in incident_list:
                 log.warning(incident_list.get('error'))
+                raise IntegrationError(incident_list.get('error'))
             else:
                 try:
                     ### BEGIN Processing incidents
