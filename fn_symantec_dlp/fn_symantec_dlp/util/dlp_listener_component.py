@@ -13,6 +13,9 @@ log = logging.getLogger(__name__)
 
 
 class DLPListener(ResilientComponent):
+    """DLPListener class which is used to Poll DLP and listen as new Incidents come occur. 
+    The DLP Listener is instantiated once and for each subsequent poll the start_poller function is targeted.
+    """
 
     def __init__(self, opts):
         super(DLPListener, self).__init__(opts)
@@ -23,6 +26,10 @@ class DLPListener(ResilientComponent):
         self.rest_client = self.rest_client()
 
     def start_poller(self):
+        """start_poller begins the Polling process for DLP to search for any Incidents to bring to Resilient 
+        
+        It calls all the other functions in this class as it filters out duplicate incidents, prepares new Incidents and uploads attachments
+        """
 
         log.debug("Started Poller")
         # gather the list of incidents from a saved report
@@ -74,6 +81,13 @@ class DLPListener(ResilientComponent):
                 self.send_res_id_to_dlp(new_incident)
 
     def send_res_id_to_dlp(self, new_incident):
+        """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
+        This reduces the amount of API calls made to Resilient on each Poll as any DLP Incidents with a resilient_incidentid are filtered out before we check Resilient
+        
+        :param new_incident: Resilient Incident
+        :type new_incident: dict
+        """
+
         headers = {'content-type': 'text/xml'}
         body = """<?xml version="1.0" encoding="UTF-8"?>
                         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
@@ -104,6 +118,14 @@ class DLPListener(ResilientComponent):
         response.raise_for_status()
 
     def upload_dlp_binaries(self, incident, res_incident_id):
+        """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
+        Any returning binaries are then sent to Resilient as an Attachment, retaining its name and extension type.
+        
+        :param incident: DLP Incident
+        :type incident: Zeep object
+        :param res_incident_id: A Resilient Incident ID to send the attachments too 
+        :type res_incident_id: int
+        """
         # Upload remaining parts such as the Attachments
         binaries = self.soap_client.incident_binaries(incidentId=incident['incidentId'], includeOriginalMessage=False,
                                                       includeAllComponents='?')
@@ -120,6 +142,14 @@ class DLPListener(ResilientComponent):
                     os.unlink(temp_upload_file.name)
 
     def prepare_incident_dto(self, incident):
+        """prepare_incident_dto uses a Jinja template located in the data/templates directory and prepares an incident DTO.
+        A DLP Incident is parsed and artifacts are templated into the DTO which is then sent to create an incident.
+        
+        :param incident: DLP Incident
+        :type incident: Zeep object
+        :return: a dict with the dto ready to send
+        :rtype: dict
+        """
         from zeep.helpers import serialize_object
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
         payload = self.map_values(
@@ -129,6 +159,14 @@ class DLPListener(ResilientComponent):
 
     @staticmethod
     def filter_existing_incidents(incidents):
+        """filter_existing_incidents function used to filter out any DLP Incidents which already have an associated Resilient Incident ID. 
+        Done to avoid duplication, the function iterates over a list of incidents, searching the customAttributes for a resilient_incidentid attribute.
+        If this value is empty, we yield that incident back to the caller, if a value is set, do nothing.
+        
+        
+        :param incidents: A number of incidents which did not have a resilient_incidentid customAttribute set
+        :type incidents: generator
+        """
         for incident in incidents:
             if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
                 for groupset in incident['incident'].customAttributeGroup:  # for each group
@@ -139,6 +177,15 @@ class DLPListener(ResilientComponent):
                                 yield incident
 
     def does_incident_exist_in_res(self, sdlp_id_type, sdlp_incident_id):
+        """does_incident_exist_in_res function used to check if a given DLP incident has already been imported into Resilient. 
+        
+        :param sdlp_id_type: the sdlp_id custom field type acquired from the REST API, we use the name and ID properties
+        :type sdlp_id_type: Custom Field
+        :param sdlp_incident_id: The Incident ID from DLP
+        :type sdlp_incident_id: int
+        :return: returns a results object of results, in the code we perform a truth value check to determine if this function returned successfuly
+        :rtype: list of results
+        """
         # For each incident; Take in Incident ID's and check if theres an existing resilient incident
         search_ex_dto = {
             "org_id": self.rest_client.org_id,

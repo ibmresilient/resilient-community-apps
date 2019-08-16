@@ -36,6 +36,7 @@ class FunctionComponent(ResilientComponent):
                 """Use a circuits timer to fire off an event every N seconds.
                     When the event is fired, a function with the decorator @handler(name_of_event)
                     will be used to handle the event and perform some task"""
+                    # TODO: Make app.config value
                 Timer(interval=60, event=Event.create(
                     "DLPListenerPollingEvent"), persist=True).register(self)
 
@@ -61,6 +62,9 @@ class FunctionComponent(ResilientComponent):
 
     @handler("DLPListenerPollingEvent")
     def dlp_thread_start(self):
+        """dlp_thread_start function which checks if the current thread is still running.
+        If not setup and new one and Poll DLP for Incidents
+        """
         log.info("DLP Listener initiated.!")
 
         # If the poller is not already running

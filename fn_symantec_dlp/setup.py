@@ -20,14 +20,16 @@ def snake_to_camel(word):
 setup(
     name='fn_symantec_dlp',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
+    license='MIT',
+    author='IBM Resilient',
     author_email='you@example.com',
     url='<<your company url>>',
     description="Resilient Circuits Components for 'fn_symantec_dlp'",
     long_description="Resilient Circuits Components for 'fn_symantec_dlp'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient-lib>=32.0.140',
+        'zeep>=3.4.0'
     ],
     packages=find_packages(),
     include_package_data=True,
