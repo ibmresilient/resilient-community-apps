@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
+
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -35,13 +37,4 @@ class TestFnSymantecDlpUpdateIncident:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    @pytest.mark.parametrize("expected_results", [
-        ({"value": "xyz"}),
-        ({"value": "xyz"})
-    ])
-    def test_success(self, circuits_app, expected_results):
-        """ Test calling with sample values for the parameters """
-        function_params = { 
-        }
-        results = call_fn_symantec_dlp_update_incident_function(circuits_app, function_params)
-        assert(expected_results == results)
+    

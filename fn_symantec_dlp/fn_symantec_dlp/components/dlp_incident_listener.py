@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Copyright © IBM Corporation 2010, 2019
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 import logging
