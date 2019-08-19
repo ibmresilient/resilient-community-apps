@@ -36,9 +36,10 @@ class FunctionComponent(ResilientComponent):
                 """Use a circuits timer to fire off an event every N seconds.
                     When the event is fired, a function with the decorator @handler(name_of_event)
                     will be used to handle the event and perform some task"""
-                    # TODO: Make app.config value
-                Timer(interval=60, event=Event.create(
-                    "DLPListenerPollingEvent"), persist=True).register(self)
+                log.debug(u"DLP Polling interval will be %s seconds", self.options.get("sdlp_listener_timer", 600))
+                Timer(interval=int(self.options.get("sdlp_listener_timer", 600)), 
+                event=Event.create("DLPListenerPollingEvent"), 
+                persist=True).register(self)
 
     def setup_listener(self):
         # Init the consumer class with needed app.config values

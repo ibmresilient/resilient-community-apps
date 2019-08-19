@@ -79,8 +79,13 @@ class DLPSoapClient():
                                                       option_name="sdlp_password",
                                                       optional=False)
 
+        # Gather the DLP User Password
+        cls.dlp_cert = cls.get_config_option(app_configs=app_configs,
+                                                      option_name="sdlp_cafile",
+                                                      optional=True)
         cls.session = Session()
-        cls.session.verify = False # TODO: Expose as app.config
+        # Use DLP Cert if provided or if None, set verify to false
+        cls.session.verify = cls.dlp_cert or False 
         cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
         # Setup Transport with our credentials
