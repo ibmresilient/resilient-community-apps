@@ -4,12 +4,14 @@
 
 import logging
 import sys
-from resilient_circuits import ResilientComponent
 import threading
-from fn_symantec_dlp.util.dlp_listener_component import DLPListener
-from resilient_lib import str_to_bool
 
 from circuits import Event, Timer, handler
+from resilient_circuits import ResilientComponent
+from resilient_lib import str_to_bool
+
+from fn_symantec_dlp.util.dlp_listener_component import DLPListener
+
 
 log = logging.getLogger(__name__)
 
@@ -21,32 +23,30 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_symantec_dlp", {})
         self.dlp_listener = DLPListener(opts)
-        
+
         if "pytest" in sys.modules:
-            """
-            Reaching here indicates that the component is invoked from within a testing session.
-            In this case, don't start the Poller
-            """
+            # Reaching here indicates that the component is invoked from within a testing session.
+            # In this case, don't start the Poller
+
             log.info("Running within a test environment. Not starting listener")
         else:
             # The dlp_listener_toggle will determine whether the Poller will run
             if str_to_bool(self.options.get("sdlp_listener_toggle", None)):
                 self.setup_listener()
 
-                """Use a circuits timer to fire off an event every N seconds.
-                    When the event is fired, a function with the decorator @handler(name_of_event)
-                    will be used to handle the event and perform some task"""
+                # Use a circuits timer to fire off an event every N seconds.
+                #     When the event is fired, a function with the decorator @handler(name_of_event)
+                #     will be used to handle the event and perform some task
                 log.debug(u"DLP Polling interval will be %s seconds", self.options.get("sdlp_listener_timer", 600))
-                Timer(interval=int(self.options.get("sdlp_listener_timer", 600)), 
-                event=Event.create("DLPListenerPollingEvent"), 
-                persist=True).register(self)
+                Timer(interval=int(self.options.get("sdlp_listener_timer", 600)),
+                      event=Event.create("DLPListenerPollingEvent"),
+                      persist=True).register(self)
 
     def setup_listener(self):
-        # Init the consumer class with needed app.config values
+        """setup_listener Start our consumer, which will attempt a connection to DLP
+        """
         log.debug("Now spawning a new daemon thread that DLP Listener will run inside of")
-        """
-        Start our consumer, which will attempt a connection to DLP
-        """
+
         try:
             # Create a thread which targets the observers run function
             # N.B note the lack of parentheses on the target function
@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as e:
             log.error(
-                u"Encountered an issue when starting the thread: {}".format(str(e)))
+                u"Encountered an issue when starting the thread: %s", e)
 
     @handler("DLPListenerPollingEvent")
     def dlp_thread_start(self):

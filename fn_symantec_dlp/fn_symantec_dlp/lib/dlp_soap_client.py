@@ -5,8 +5,6 @@
 import zeep
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
-import requests_mock
-from zeep.transports import Transport
 
 import datetime
 
@@ -52,7 +50,6 @@ class DLPSoapClient():
         if not self.class_vars_loaded:
             self.load_class_variables(app_configs)
 
-
     @classmethod
     def load_class_variables(cls, app_configs):
         """load_class_variables loads in the app_configs dict
@@ -65,24 +62,24 @@ class DLPSoapClient():
         """
 
         cls.host = cls.get_config_option(app_configs=app_configs,
-                                            option_name="sdlp_host",
-                                            optional=False)
+                                         option_name="sdlp_host",
+                                         optional=False)
         cls.wsdl = cls.get_config_option(app_configs=app_configs,
-                                            option_name="sdlp_wsdl",
-                                            optional=False)
+                                         option_name="sdlp_wsdl",
+                                         optional=False)
         # Gather the DLP User Name
         cls.dlp_username = cls.get_config_option(app_configs=app_configs,
-                                            option_name="sdlp_username",
-                                            optional=False)
+                                                 option_name="sdlp_username",
+                                                 optional=False)
         # Gather the DLP User Password
         cls.dlp_password = cls.get_config_option(app_configs=app_configs,
-                                                      option_name="sdlp_password",
-                                                      optional=False)
+                                                 option_name="sdlp_password",
+                                                 optional=False)
 
         # Gather the DLP User Password
         cls.dlp_cert = cls.get_config_option(app_configs=app_configs,
-                                                      option_name="sdlp_cafile",
-                                                      optional=True)
+                                             option_name="sdlp_cafile",
+                                             optional=True)
         cls.session = Session()
         # Use DLP Cert if provided or if None, set verify to false
         cls.session.verify = cls.dlp_cert or False 
@@ -93,7 +90,6 @@ class DLPSoapClient():
         # Create a soap_client from the wsdl and transport
         cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
         cls.class_vars_loaded = True
-
 
     @staticmethod
     def get_config_option(app_configs, option_name, optional=False, placeholder=None):
@@ -123,56 +119,56 @@ class DLPSoapClient():
             return option
 
     @classmethod
-    def incident_list(cls, savedReportId=0, incidentCreationDateLaterThan=datetime.datetime.now()):
+    def incident_list(cls, saved_report_id=0, incident_creation_date_later_than=datetime.datetime.now()):
         """incident_list API Call to gather a list of incidents from a saved report.
 
-        :param savedReportId: the ID of a saved report,
+        :param saved_report_id: the ID of a saved report,
         if not provided no incidents will be found, defaults to 0
-        :type savedReportId: int, optional
-        :param incidentCreationDateLaterThan: Only incidents that were created after the incidentCreationDateLaterThan date will be returned, defaults to datetime.datetime.now()
-        :type incidentCreationDateLaterThan: datetime, required
+        :type saved_report_id: int, optional
+        :param incident_creation_date_later_than: Only incidents that were created after the incidentCreationDateLaterThan date will be returned, defaults to datetime.datetime.now()
+        :type incident_creation_date_later_than: datetime, required
         :return: A list of incidentIds and incidentLongIds
         :rtype: [type]
         """
         incident_list = cls.soap_client.service.incidentList(
-            savedReportId=savedReportId,
-            incidentCreationDateLaterThan=incidentCreationDateLaterThan)
+            savedReportId=saved_report_id,
+            incidentCreationDateLaterThan=incident_creation_date_later_than)
 
         return incident_list
 
     @classmethod
-    def incident_detail(cls, incidentId=None):
+    def incident_detail(cls, incident_id=None):
         """incident_detail API Call to gather the details for a specified incident
         Even though incidentLongId isin't exposed in the function call,
         that is usable for a query also
 
-        :param incidentId: the ID of the incident to retreive, defaults to None
-        :type incidentId: [type], optional
+        :param incident_id: the ID of the incident to retreive, defaults to None
+        :type incident_id: [type], optional
         :return: [description]
         :rtype: [type]
         """
         # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
         with cls.soap_client.settings(strict=False):
 
-            incident_detail = cls.soap_client.service.incidentDetail(incidentId=incidentId)
+            incident_detail = cls.soap_client.service.incidentDetail(incidentId=incident_id)
 
             return incident_detail
 
     @classmethod
-    def incident_binaries(cls, incidentId=None, includeOriginalMessage=False, includeAllComponents='?'):
+    def incident_binaries(cls, incident_id=None, include_original_message=False, include_all_components='?'):
         """incident_binaries API Call to gather the binaries (Attachments) for an incident.
 
-        :param incidentId: [description], defaults to None
-        :type incidentId: [type], optional
-        :param includeOriginalMessage:  defaults to False
-        :type includeOriginalMessage: bool, optional
-        :param includeAllComponents: defaults to '?'
-        :type includeAllComponents: str, optional
+        :param incident_id: [description], defaults to None
+        :type incident_id: [type], optional
+        :param include_original_message:  defaults to False
+        :type include_original_message: bool, optional
+        :param include_all_components: defaults to '?'
+        :type include_all_components: str, optional
         """
         binaries = cls.soap_client.service.incidentBinaries(
-            incidentId=incidentId,
-            includeOriginalMessage=includeOriginalMessage,
-            includeAllComponents=includeAllComponents)
+            incidentId=incident_id,
+            includeOriginalMessage=include_original_message,
+            includeAllComponents=include_all_components)
         return binaries
 
     @classmethod
