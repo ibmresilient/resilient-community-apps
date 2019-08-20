@@ -100,7 +100,7 @@ class DLPListener(ResilientComponent):
                             </sch:incidentUpdateRequest>
                         </soapenv:Body>
                         </soapenv:Envelope>""".format(batch="_{}".format(uuid.uuid4()), resilient_id=new_incident['id'], dlp_id=dlp_incident_id)
-        response = DLPSoapClient.session.post("https://9.70.194.103:8443/ProtectManager/services/v2011/incidents",
+        response = DLPSoapClient.session.post(DLPSoapClient.sdlp_incident_endpoint,
                                               data=body, headers=headers)
         response.raise_for_status()
         log.info("Sent new Resilient Incident ID back to the original DLP Incident as a custom attribute")

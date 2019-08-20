@@ -76,15 +76,22 @@ class DLPSoapClient():
                                                  option_name="sdlp_password",
                                                  optional=False)
 
-        # Gather the DLP User Password
+        # Gather the DLP Cert
         cls.dlp_cert = cls.get_config_option(app_configs=app_configs,
                                              option_name="sdlp_cafile",
                                              optional=True)
 
-        # Gather the DLP User Password
+        # Gather the DLP Saved Report ID 
         cls.dlp_saved_report_id = cls.get_config_option(app_configs=app_configs,
                                              option_name="sdlp_savedreportid",
                                              optional=False)
+
+        # Gather the DLP Incident Endpoint
+        cls.sdlp_incident_endpoint = cls.get_config_option(app_configs=app_configs,
+                                             option_name="sdlp_incident_endpoint",
+                                             optional=False)
+
+                                             
         cls.session = Session()
         # Use DLP Cert if provided or if None, set verify to false
         cls.session.verify = cls.dlp_cert or False 
