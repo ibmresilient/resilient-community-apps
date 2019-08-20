@@ -1,19 +1,23 @@
 # -*- coding: utf-8 -*-
 # Copyright © IBM Corporation 2010, 2019
+# pylint: disable=C0303
 import logging
 import os
 import tempfile
 import json
-from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
-from resilient_circuits import ResilientComponent, template_functions
 import datetime
 import uuid
+import calendar
+from resilient_circuits import ResilientComponent, template_functions
+from zeep.helpers import serialize_object
+
+from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
 log = logging.getLogger(__name__)
 
 
 class DLPListener(ResilientComponent):
-    """DLPListener class which is used to Poll DLP and listen as new Incidents come occur. 
+    """DLPListener class which is used to Poll DLP and listen as new Incidents come occur.
     The DLP Listener is instantiated once and for each subsequent poll the start_poller function is targeted.
     """
 
@@ -24,20 +28,20 @@ class DLPListener(ResilientComponent):
 
         # A REST Client to interface with Resilient
         self.rest_client = self.rest_client()
+        self.add_filters_to_jinja(self)
 
     def start_poller(self):
-        """start_poller begins the Polling process for DLP to search for any Incidents to bring to Resilient 
-        
+        """start_poller begins the Polling process for DLP to search for any Incidents to bring to Resilient
         It calls all the other functions in this class as it filters out duplicate incidents, prepares new Incidents and uploads attachments
         """
 
         log.debug("Started Poller")
         # gather the list of incidents from a saved report
-        res = DLPSoapClient.incident_list(savedReportId=121,
-                                          incidentCreationDateLaterThan=datetime.datetime.now() - datetime.timedelta(days=14))
+        res = DLPSoapClient.incident_list(saved_report_id=121,
+                                          incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(days=14))
 
         # gather the incident_details for incidents returned
-        incidents = DLPSoapClient.incident_detail(incidentId=res['incidentLongId'])
+        incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
         print(len(incidents))
         # Drop all incidents which have a res_id custom attribute
         incidents = list(self.filter_existing_incidents(incidents))
@@ -52,24 +56,6 @@ class DLPListener(ResilientComponent):
                 # There is no resilient incident with the given DLP Incident ID
                 # Create the incident
                 log.debug("Found no Resilient incident with the given DLP Incident ID, creating an incident.")
-                incident_to_create = incidents[0]
-                # Prepare a Jinja Payload with the Artifacts
-                incident_create_dto = {
-                    "name": "Incident from DLP",
-                    "discovered_date": round(incident_to_create['incident']['eventDate'].timestamp()*1000),
-                    "properties": {
-                        sdlp_id_type['name']: 119
-                    },
-                    "comments": [
-                        {
-                            "text": {
-                                "format": "text",
-                                "content": incident_to_create['incident']['incidentHistory'][0]['detail']
-                            },
-                            "create_date": round(incident_to_create['incident']['eventDate'].timestamp()*1000)#round(incident_to_create['incident']['incidentHistory'][1]['date'].timestamp()*1000)
-                        }
-                    ]
-                }
 
                 payload = self.prepare_incident_dto(incident)
                 log.debug("Creating Incident")
@@ -78,16 +64,15 @@ class DLPListener(ResilientComponent):
 
                 self.upload_dlp_binaries(incident, new_incident['id'])
 
-                self.send_res_id_to_dlp(new_incident)
+                #self.send_res_id_to_dlp(new_incident, incident['incidentId'])
 
-    def send_res_id_to_dlp(self, new_incident):
+    def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
         """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
         This reduces the amount of API calls made to Resilient on each Poll as any DLP Incidents with a resilient_incidentid are filtered out before we check Resilient
-        
+
         :param new_incident: Resilient Incident
         :type new_incident: dict
         """
-
         headers = {'content-type': 'text/xml'}
         body = """<?xml version="1.0" encoding="UTF-8"?>
                         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
@@ -98,7 +83,7 @@ class DLPListener(ResilientComponent):
                                 <updateBatch>
                                     <batchId>{batch}</batchId>
                                     <!--Zero or more repetitions:-->
-                                    <incidentId>173</incidentId>
+                                    <incidentId>{dlp_id}</incidentId>
                                     <incidentAttributes>
                                     <!--Zero or more repetitions:-->
                                     <customAttribute>
@@ -107,15 +92,15 @@ class DLPListener(ResilientComponent):
                                         <sch1:value>{resilient_id}</sch1:value>
                                     </customAttribute>
                                     </incidentAttributes>
-                                    <!--Zero or more repetitions:-->
-                                    <incidentLongId>173</incidentLongId>
                                 </updateBatch>
                             </sch:incidentUpdateRequest>
                         </soapenv:Body>
-                        </soapenv:Envelope>""".format(batch="_{}".format(uuid.uuid4()), resilient_id=new_incident['id'])
+                        </soapenv:Envelope>""".format(batch="_{}".format(uuid.uuid4()), resilient_id=new_incident['id'], dlp_id=dlp_incident_id)
         response = DLPSoapClient.session.post("https://9.70.194.103:8443/ProtectManager/services/v2011/incidents",
                                               data=body, headers=headers)
         response.raise_for_status()
+
+        
 
     def upload_dlp_binaries(self, incident, res_incident_id):
         """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
@@ -127,8 +112,8 @@ class DLPListener(ResilientComponent):
         :type res_incident_id: int
         """
         # Upload remaining parts such as the Attachments
-        binaries = self.soap_client.incident_binaries(incidentId=incident['incidentId'], includeOriginalMessage=False,
-                                                      includeAllComponents='?')
+        binaries = self.soap_client.incident_binaries(incident_id=incident['incidentId'], include_original_message=False,
+                                                      include_all_components='?')
         if binaries:
             for component in binaries['Component']:
                 try:
@@ -154,7 +139,10 @@ class DLPListener(ResilientComponent):
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
         payload = self.map_values(
             template_file=os.path.abspath(default_dir + "/_dlp_incident_template.jinja2"),
-            message_dict={"incident": {"incident": serialize_object(incident['incident']), "incidentId": incident['incidentId'], "eventDate": round(incident['incident']['eventDate'].timestamp() * 1000)}})
+            message_dict={"incident":
+                              {"incident": serialize_object(incident['incident']),
+                               "incidentId": incident['incidentId'],
+                               "eventDate": incident['incident']['eventDate']}})
         return payload
 
     @staticmethod
@@ -191,9 +179,9 @@ class DLPListener(ResilientComponent):
             "org_id": self.rest_client.org_id,
             "query": u"incident.{}.{}: {}".format(sdlp_id_type['id'], sdlp_id_type['name'], sdlp_incident_id),
             "types": [
-              "incident"
+                "incident"
             ]
-          }
+            }
         res = self.rest_client.search(search_ex_dto)
         return res['results']
 
@@ -210,4 +198,32 @@ class DLPListener(ResilientComponent):
             incident_data = template_functions.render(incident_template, message_dict)
             log.debug(incident_data)
             return incident_data
+    @staticmethod
+    def add_filters_to_jinja(self):
+        ds_filter = {
+            "regex_escape": self.regex_escape,
+            "dt_to_milli_epoch": self.dt_to_milli_epoch
+        }
+        env = template_functions.environment()
+        env.globals.update(ds_filter)
 
+    def regex_escape(self, val):
+        return val.replace('\\', r'\\')
+
+    def dt_to_milli_epoch(self, dt):
+        """dt_to_milli_epoch Jinja Helper function which takes
+        a datetime object and attempts to strip to a millesecond epoch
+        strips the timezone of the incoming datetime.
+        
+        :param dt: datetime object to be converted
+        :type dt: [type]
+        :return: millesecond epoch
+        :rtype: int
+        """
+        try: 
+            epoch = datetime.datetime.utcfromtimestamp(0)
+            naive = dt.replace(tzinfo=None)
+
+            return int((naive - epoch).total_seconds() * 1000.0)
+        except Exception as e:
+            log.debug("Encountered exception when converting datetime to an epoch; Error %s", e)

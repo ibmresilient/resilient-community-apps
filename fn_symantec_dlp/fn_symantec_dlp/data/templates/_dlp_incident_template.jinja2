@@ -1,7 +1,7 @@
 {
     {%- set comma = joiner(",") -%}
     "name": "Incident from DLP with Jinja",
-    "discovered_date": {%- if incident.get('eventDate', False) -%}{{incident.eventDate}}{% else %} 0 {%- endif -%},
+    "discovered_date": {%- if incident.get('eventDate', False) -%}{{dt_to_milli_epoch(incident.eventDate)}}{% else %} 0 {%- endif -%},
     "properties": {
         "sdlp_incident_id": {{incident.incidentId}}
     },
