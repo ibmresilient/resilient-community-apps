@@ -25,5 +25,7 @@ def config_section_data():
     #sdlp_cafile=./dlp.cer
     # Used to set how often the Listener should poll, default is 10 mins (600)
     sdlp_listener_timer=600
+    # The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail
+    sdlp_savedreportid=0
     """
     return config_data
