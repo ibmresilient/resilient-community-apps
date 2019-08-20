@@ -59,8 +59,9 @@ class DLPListener(ResilientComponent):
 
                 payload = self.prepare_incident_dto(incident)
                 log.debug("Creating Incident")
+                
                 # Create the Incident
-                new_incident = self.rest_client.post('/incidents', json.loads(payload))
+                new_incident = self.rest_client.post('/incidents', json.loads(payload,strict=False))
 
                 self.upload_dlp_binaries(incident, new_incident['id'])
 
@@ -135,6 +136,24 @@ class DLPListener(ResilientComponent):
         :return: a dict with the dto ready to send
         :rtype: dict
         """
+
+        # Gather Incident Notes 
+        notes_to_be_added = []
+        for historyItem in incident['incident']['incidentHistory']:
+            if historyItem['actionType']['_value_1'] == "Note Added":
+                    # Convert Date to a UTC time stamp for visual purposes
+                    historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
+                    notes_to_be_added.append(u"""<b>Note gathered from Symantec DLP Incident</b>
+                        <br>
+                        <b>Event Time: </b><p>{time}</p>
+                        <br><br>
+                        <b>Event Detail</b>: <p>{detail}</p>
+                        <p> performed by user <b>{user}</b></p""".format(
+                            time=historyItem['date'], 
+                            detail=historyItem['detail'],
+                            user=historyItem['user']
+                        ))
+    
         from zeep.helpers import serialize_object
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
         payload = self.map_values(
@@ -142,8 +161,20 @@ class DLPListener(ResilientComponent):
             message_dict={"incident":
                               {"incident": serialize_object(incident['incident']),
                                "incidentId": incident['incidentId'],
-                               "eventDate": incident['incident']['eventDate']}})
+                               "event_date": incident['incident']['eventDate'],
+                               "notes": notes_to_be_added,
+                               "detection_date": incident['incident']['detectionDate'],
+                               "severity": self.return_res_severity(incident['incident']['severity'])}})
         return payload
+
+    @staticmethod
+    def return_res_severity(dlp_severity):
+        if dlp_severity == 'high':
+            return "High"
+        elif dlp_severity == 'medium':
+            return "Medium"
+        else: 
+            return "Low"
 
     @staticmethod
     def filter_existing_incidents(incidents):
