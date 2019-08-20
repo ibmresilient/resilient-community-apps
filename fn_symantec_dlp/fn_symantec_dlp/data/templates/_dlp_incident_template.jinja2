@@ -1,7 +1,10 @@
 {
     {%- set comma = joiner(",") -%}
     "name": "Incident from DLP with Jinja",
-    "discovered_date": {%- if incident.get('eventDate', False) -%}{{dt_to_milli_epoch(incident.eventDate)}}{% else %} 0 {%- endif -%},
+    "discovered_date": {%- if incident.incident.get('detectionDate', False) -%}{{dt_to_milli_epoch(incident.incident.detectionDate)}}{% else %} 0 {%- endif -%},
+    "incident_type_ids": [16],
+    "severity_code": "{{incident.severity}}",
+    {%- if incident.get('event_date', False) -%} "start_date": {{dt_to_milli_epoch(incident.event_date)}}, {%-endif -%}
     "properties": {
         "sdlp_incident_id": {{incident.incidentId}}
     },
@@ -29,5 +32,48 @@
         {"type": {"name": "System Name"}, "value": "{{incident.incident.machineName}}",
             "description" : {"format" : "html", "content" : "System Name of the machine that generated this incident. Includes the machine name. Generated from DLP Incident with an ID of {{incident.incidentId}}"}}
         {%- endif -%}
+
+        {%- if incident.incident.get('recipient', False) -%}
+        {%- for recipient in incident.incident.recipient -%}
+        
+        {%- if recipient.get('IPAddress', False) -%}
+        {{- comma() }}
+        {"type": {"name": "IP Address"}, "value": "{{recipient.IPAddress}}",
+                   "description" : {"format" : "html","content" : "Destination IP Address. Generated from DLP Incident with an ID of {{incident.incidentId}}"},
+                   "properties": [{"name": "destination", "value": true}]}
+        {%- endif -%}
+
+        {%- if recipient.get('recipientIdentifier', False) -%}
+        {{- comma() }}
+        {"type": {"name": "URL"}, "value": "{{recipient.recipientIdentifier}}",
+                   "description" : {"format" : "html","content" : "Destination URL Identifier. Generated from DLP Incident with an ID of {{incident.incidentId}}"},
+                   "properties": []}
+        {%- endif -%}
+        {%- endfor -%}
+        {# end recipient parsing #}
+        {%- endif -%}
+    ],
+    "comments": [
+        {%- for note_text in incident.notes -%}
+        {%- if incident.notes|length > 1 -%}
+        {%- if note_text != incident.notes|first -%}
+        {{- comma() }}
+        {%- endif -%}{%- endif -%}
+        {    
+            "text": {
+                "format": "html",
+                "content": "{{note_text}}"
+            }        
+        }
+        {%- endfor -%}
+        {%- if incident.notes|length > 1 -%}
+        {{- comma() }}
+        {%- endif -%}
+        {    
+            "text": {
+                "format": "html",
+                "content": "<b>The marked detection date of this Incident is {{incident.detection_date}} and the event time is {{incident.event_date}}"
+            }        
+        }
     ]
 }
