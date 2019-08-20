@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_bigfix',
-    version='1.1.0',
+    version='1.1.1',
     license='Resilient License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
