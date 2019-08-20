@@ -131,7 +131,7 @@ class FunctionComponent(ResilientComponent):
                                         .format(params["artifact_id"], params["artifact_value"],
                                                 params["artifact_type"]))
                     results = {}
-                elif len(hits) > int(self.options.get("hunt_results_limit", "200")):
+                elif len(hits) > int(self.options.get("bigfix_hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
                     file_name = "query_for_artifact_{0}_{1}_{2}.txt" \

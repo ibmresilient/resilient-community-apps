@@ -30,8 +30,8 @@ def validate_opts(func):
         raise Exception("Mandatory config setting 'bigfix_user' not set.")
     if not "bigfix_pass" in func.options or len(func.options["bigfix_pass"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_pass' not set.")
-    if not "hunt_results_limit" in func.options or len(func.options["hunt_results_limit"]) == 0:
-        raise Exception("Mandatory config setting 'hunt_results_limit' not set.")
+    if not "bigfix_hunt_results_limit" in func.options or len(func.options["bigfix_hunt_results_limit"]) == 0:
+        raise Exception("Mandatory config setting 'bigfix_hunt_results_limit' not set.")
     if not "bigfix_polling_interval" in func.options or len(func.options["bigfix_polling_interval"]) == 0:
         raise Exception("Mandatory config setting 'bigfix_polling_interval' not set.")
     if not "bigfix_polling_timeout" in func.options or len(func.options["bigfix_polling_timeout"]) == 0:
