@@ -37,16 +37,18 @@ class DLPListener(ResilientComponent):
 
         log.debug("Started Poller")
         # gather the list of incidents from a saved report
-        res = DLPSoapClient.incident_list(saved_report_id=121,
+        res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
                                           incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(days=14))
 
         # gather the incident_details for incidents returned
         incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
-        print(len(incidents))
+        log.info("Now filtering out Incidents which already have a Resilient Incident ID")
+        log.info("Number of Incidents before filtering: %d", len(incidents))
+
         # Drop all incidents which have a res_id custom attribute
         incidents = list(self.filter_existing_incidents(incidents))
 
-        print(len(incidents))
+        log.info("Number of Incidents after filtering: %d", len(incidents))
         # Get the sdlp_incident_id field
         sdlp_id_type = self.rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
 
@@ -55,17 +57,18 @@ class DLPListener(ResilientComponent):
             if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
                 # There is no resilient incident with the given DLP Incident ID
                 # Create the incident
-                log.debug("Found no Resilient incident with the given DLP Incident ID, creating an incident.")
+                log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
 
                 payload = self.prepare_incident_dto(incident)
                 log.debug("Creating Incident")
                 
                 # Create the Incident
                 new_incident = self.rest_client.post('/incidents', json.loads(payload,strict=False))
+                log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
 
                 self.upload_dlp_binaries(incident, new_incident['id'])
 
-                #self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+                self.send_res_id_to_dlp(new_incident, incident['incidentId'])
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
         """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
@@ -100,6 +103,7 @@ class DLPListener(ResilientComponent):
         response = DLPSoapClient.session.post("https://9.70.194.103:8443/ProtectManager/services/v2011/incidents",
                                               data=body, headers=headers)
         response.raise_for_status()
+        log.info("Sent new Resilient Incident ID back to the original DLP Incident as a custom attribute")
 
         
 
@@ -154,7 +158,6 @@ class DLPListener(ResilientComponent):
                             user=historyItem['user']
                         ))
     
-        from zeep.helpers import serialize_object
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
         payload = self.map_values(
             template_file=os.path.abspath(default_dir + "/_dlp_incident_template.jinja2"),
