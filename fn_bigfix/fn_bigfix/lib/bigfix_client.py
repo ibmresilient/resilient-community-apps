@@ -344,8 +344,8 @@ class BigFixClient(object):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
-        :param wait: Interval to wait while checking status - value in ms
-        :param timeout: Timeout value in ms - give some time to BigFix to get all the data. Value of 0 means try once.
+        :param wait: Interval to wait while checking status - value in secs
+        :param timeout: Timeout value in secs - give some time to BigFix to get all the data. Value of 0 means try once.
         :return result: Result (list of responses) for query id
 
         """
