@@ -7,11 +7,13 @@
 import requests
 import json
 import datetime
+import logging
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
 
+log = logging.getLogger(__name__)
 mandatory_config_params = ["base_url", "api_key", "polling_interval", "startup_interval", "state" ]
 
 def timestamp_minutes_ago(minutes):
@@ -44,8 +46,7 @@ def get_incident_list(options, lastupdate, bundle):
     else:
         if lastupdate is None:
             # first run, fetch all
-            # TODO: Logger instead of print
-            print("First Run in progress - this may take a while")
+            log.info("First Run in progress - this may take a while.")
 
     try:
         res = requests.get(url, headers=headers, params=params, verify=bundle)
