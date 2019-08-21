@@ -99,7 +99,7 @@ def get_incident_details(options, incident_id):
 
             results['success'] = True
             # results['data'] = json.loads(res.text)
-            results['data'] = res.json
+            results['data'] = res.json()
             results['href'] = url
 
         except requests.exceptions.Timeout:

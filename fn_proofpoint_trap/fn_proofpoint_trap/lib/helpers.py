@@ -52,7 +52,7 @@ def get_incident_list(options, lastupdate, bundle):
 
         res.raise_for_status()
 
-        data = res.json
+        data = res.json()
         return data
 
     except requests.exceptions.Timeout:
