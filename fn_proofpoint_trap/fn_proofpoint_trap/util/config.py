@@ -16,9 +16,9 @@ def config_section_data():
 base_url=
 # API Key for Proofpoint TRAP
 api_key=
-# Interval to poll TRAP in Minutes
+# Interval to poll TRAP in minutes
 polling_interval=2
-# Initial Import Look-back Interval (default: 2 weeks)
+# Initial Import Look-back Interval in minutes (default: 2 weeks)
 startup_interval=20160
 # State of Incidents to Query
 state=open
