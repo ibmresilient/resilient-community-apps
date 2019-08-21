@@ -15,13 +15,15 @@ def config_section_data():
     sdlp_listener_toggle=True
     # The URL or the DLP Installation
     sdlp_host=https://<serverip>:<port>
-    # The location of your wsdl file 
+    # The location of your WSDL file used to construct requests when dealing with the Incident and Reporting API
     sdlp_wsdl=https://<serverip>:<port>/ProtectManager/services/v2011/incidents?wsdl
+    # The URL of the Incident and Reporting API for your DLP Installation
+    sdlp_incident_endpoint=https://<serverip>:<port>/ProtectManager/services/v2011/incidents
     # Username for DLP 
-    sdlp_username=admin
+    sdlp_username=<SDLP Username>
     # Password for DLP
-    sdlp_password=admin
-    # Location of the CA file for DLP, leave blank for unverified
+    sdlp_password=<SDLP Password>
+    # Location of the CA file for DLP, leave Blank or ‘comment out’ for unverified requests
     #sdlp_cafile=./dlp.cer
     # Used to set how often the Listener should poll, default is 10 mins (600)
     sdlp_listener_timer=600
