@@ -12,7 +12,7 @@ setup(
     description="Resilient Circuits Components for 'fn_bigfix'",
     long_description="Resilient Circuits Components for 'fn_bigfix'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=31.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
