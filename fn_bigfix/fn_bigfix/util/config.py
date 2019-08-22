@@ -17,6 +17,6 @@ bigfix_pass=MyPassword
 bigfix_polling_interval=30
 bigfix_polling_timeout=600
 bigfix_hunt_results_limit=200
-#bigfix_endpoints_wait=30
+bigfix_endpoints_wait=30
 """
     return config_data
