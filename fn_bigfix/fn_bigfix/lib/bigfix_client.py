@@ -397,7 +397,10 @@ class BigFixClient(object):
 
             timeout = timeout - wait
             if timeout > 0:
-                time.sleep(wait)
+                if timeout < wait:
+                    time.sleep(timeout)
+                else:
+                    time.sleep(wait)
         return result
 
     def post_bfclientquery(self, query, computer_id=None):
