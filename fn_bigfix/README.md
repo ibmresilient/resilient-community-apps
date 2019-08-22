@@ -11,8 +11,8 @@ Update status of a Bigfix remediating action.
 
 Prerequisites:
 ```
-resilient version 30 or later
-resilient_circuits version 30 or later
+resilient version 31 or later
+resilient_circuits version 31 or later
 ```
 * For more info about BigFix, please visit https://www.ibm.com/support/knowledgecenter/en/SSQL82_9.5.0/com.ibm.bigfix.doc/welcome/BigFix_Platform_welcome.html
 
