@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Helper module containing REST API client for BigFix  """
 import logging
@@ -354,6 +354,7 @@ class BigFixClient(object):
         clientq_restapi = 'api/clientqueryresults'
         req_url = "%s/%s/%d?stats=1&output=json" % (self.base_url, clientq_restapi, query_id)
         wait_for_endpoints = False
+        response_timedout = True
 
         while timeout > 0:
             result = []
@@ -364,6 +365,7 @@ class BigFixClient(object):
                     if response['totalResults'] == 0:
                         LOG.debug("No results yet, retrying")
                     elif response['totalResults'] > 0:
+                        response_timedout = False
                         LOG.debug("Received responses from %s endpoints.", response['totalResults'])
                         for i in range(response['totalResults']):
                             result.append({
@@ -380,7 +382,7 @@ class BigFixClient(object):
                             if not wait_for_endpoints:
                                 LOG.info("Waiting %s seconds for all endpoints to report.", self.endpoints_wait)
                                 # Reset timeout value to 'self.endpoints_wait' and add 'wait' value as it will
-                                # be stripped off immediately.
+                                # be stripped off again below.
                                 timeout = self.endpoints_wait + wait
                                 wait_for_endpoints = True
                         else:
@@ -401,6 +403,10 @@ class BigFixClient(object):
                     time.sleep(timeout)
                 else:
                     time.sleep(wait)
+
+        if response_timedout:
+            LOG.info("Timed out waiting for a result.")
+
         return result
 
     def post_bfclientquery(self, query, computer_id=None):
