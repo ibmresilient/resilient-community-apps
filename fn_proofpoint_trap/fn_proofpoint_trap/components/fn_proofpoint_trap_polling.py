@@ -401,7 +401,7 @@ custom_fields = [
 regex_defs = {
     'URL': '^((?:http(?:s)?\://)[a-zA-Z0-9\.\?\#\&\=\/_-]{1,})$',
     'IP Address':  '^((?:[0-9]{1,3}\.){3}(?:[0-9]{1,3}))$',
-    'DNS Name': '^([^(?:http(?:s)?\://)](?:(?:[\w-]{1,}[\.])){1,}([a-zA-Z]{2,}))$',
+    'DNS Name': '^((?!(?:http(s)?:\/\/?))(?:(?:[\w-]{1,}[\.])){1,}([a-zA-Z]{2,}))$',
 }
 
 log = logging.getLogger(__name__)
@@ -727,18 +727,22 @@ class PPTRIncidentPolling(ResilientComponent):
         :param data: The hosts section of the TRAP Incident
         :return: Dictionary of Artifacts for event
         """
-
+        host_categories = self.options.get('host_categories', None)
+        if host_categories is not None:
+            host_categories = host_categories.split(",")
+        else:
+            host_categories = ["forensics"]
         artifacts = {}
-
+        hosts = incident['hosts']
         if 'hosts' in incident:
-            # Process Forensics data - TODO: Add cnc data
-            if 'forensics' in incident['hosts']:
-                for k,v in regex_defs.items():
-                    artifacts[k] = [ x for x in incident['hosts']['forensics'] if re.match(v, x) ]
-
+            # Process the selected categories under hosts.
+            for c in host_categories:
+                if c in incident['hosts']:
+                    for k,v in regex_defs.items():
+                        if k not in artifacts:
+                            artifacts[k] = []
+                        artifacts[k].extend([x for x in incident['hosts'][type] if re.match(v, x) and x not in artifacts[k]])
         return artifacts
-
-
 
 
     def _find_resilient_incident_for_req(self, id, idtype):
