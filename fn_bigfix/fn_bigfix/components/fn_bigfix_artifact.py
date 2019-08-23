@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Resilient functions component to run a Bigfix Query against a Bigfix server for an artifact to determine
 if are hits on any of the BigFix endpoints"""
@@ -131,7 +131,7 @@ class FunctionComponent(ResilientComponent):
                                         .format(params["artifact_id"], params["artifact_value"],
                                                 params["artifact_type"]))
                     results = {}
-                elif len(hits) > int(self.options.get("hunt_results_limit", "200")):
+                elif len(hits) > int(self.options.get("bigfix_hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
                     file_name = "query_for_artifact_{0}_{1}_{2}.txt" \

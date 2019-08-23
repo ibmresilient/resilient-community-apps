@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Helper module containing REST API client for BigFix  """
 import logging
@@ -31,6 +31,8 @@ class BigFixClient(object):
         self.headers = {'content-type': 'application/json'}
         self.retry_interval = int(options.get("bigfix_polling_interval"))
         self.retry_timeout = int(options.get("bigfix_polling_timeout"))
+        if options.get("bigfix_endpoints_wait") is not None:
+            self.endpoints_wait = int(options.get("bigfix_endpoints_wait"))
         # Endpoints
         self.client_query_endpoint = '/api/clientquery'
         self.client_query_results_endpoint = '/api/clientqueryresults/'
@@ -342,18 +344,20 @@ class BigFixClient(object):
         """ Get Bigfix query results.
 
         :param query_id: Bigfix query id from post request
-        :param wait: Value name in ms
-        :param timeout: Timeout value in ms - give some time to BigFix to get all the data. Value of 0 means try once.
-        :return result: Result (list of resposes) for query id
+        :param wait: Interval to wait while checking status - value in secs
+        :param timeout: Timeout value in secs - give some time to BigFix to get all the data. Value of 0 means try once.
+        :return result: Result (list of responses) for query id
 
         """
         # Let's give some time (5 secs) to BigFix to get all the data
         time.sleep(5)
         clientq_restapi = 'api/clientqueryresults'
         req_url = "%s/%s/%d?stats=1&output=json" % (self.base_url, clientq_restapi, query_id)
+        wait_for_endpoints = False
+        response_timedout = True
 
-        result = []
-        while timeout >= 0:
+        while timeout > 0:
+            result = []
             r = requests.get(req_url, auth=(self.bf_user, self.bf_pass), verify=False)
             if r.status_code == 200:
                 try:
@@ -361,6 +365,7 @@ class BigFixClient(object):
                     if response['totalResults'] == 0:
                         LOG.debug("No results yet, retrying")
                     elif response['totalResults'] > 0:
+                        response_timedout = False
                         LOG.debug("Received responses from %s endpoints.", response['totalResults'])
                         for i in range(response['totalResults']):
                             result.append({
@@ -372,7 +377,16 @@ class BigFixClient(object):
                                 "resp_time": response['results'][i]['ResponseTime']
                                 }
                             )
-                        break
+                        if hasattr(self, "endpoints_wait") and self.endpoints_wait is not None:
+                            # Set new timeout value to wait for all results.
+                            if not wait_for_endpoints:
+                                LOG.info("Waiting %s seconds for all endpoints to report.", self.endpoints_wait)
+                                # Reset timeout value to 'self.endpoints_wait' and add 'wait' value as it will
+                                # be stripped off again below.
+                                timeout = self.endpoints_wait + wait
+                                wait_for_endpoints = True
+                        else:
+                            break
                     else:
                         LOG.exception("Got unexpected number of results (%d)", response['totalResults'])
                         break
@@ -383,9 +397,16 @@ class BigFixClient(object):
             else:
                 LOG.exception("Unexpected HTTP status code: %d", r.status_code)
 
-            timeout = timeout - 1000
+            timeout = timeout - wait
             if timeout > 0:
-                time.sleep(1)
+                if timeout < wait:
+                    time.sleep(timeout)
+                else:
+                    time.sleep(wait)
+
+        if response_timedout:
+            LOG.info("Timed out waiting for a result.")
+
         return result
 
     def post_bfclientquery(self, query, computer_id=None):
