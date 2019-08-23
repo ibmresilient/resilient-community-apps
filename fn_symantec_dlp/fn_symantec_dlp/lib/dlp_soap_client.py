@@ -3,10 +3,14 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 import zeep
+import traceback
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 
 import datetime
+import logging 
+
+log = logging.getLogger(__name__)
 
 class SymantecAuth(AuthBase):
     """SymantecAuth a class which inherits from requests.AuthBase,
@@ -59,7 +63,8 @@ class DLPSoapClient():
         :param app_configs: a dictionary containing key-value pairs used for 
         setting up a client with Symantec DLP. 
         :type app_configs: dict
-        """
+        """ 
+        cls.is_connected = False # Set is_connected to false initially
 
         cls.host = cls.get_config_option(app_configs=app_configs,
                                          option_name="sdlp_host",
@@ -99,8 +104,16 @@ class DLPSoapClient():
 
         # Setup Transport with our credentials
         cls.transport = zeep.Transport(session=cls.session)
-        # Create a soap_client from the wsdl and transport
-        cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
+        
+        try: # Try to create a soap_client from the wsdl and transport
+            cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
+        except Exception as e: # We got an error when setting up a client, catch and release the error in logs so circuits doesn't stop
+            # Put the traceback into DEBUG 
+            log.debug(traceback.format_exc())
+            # Log the Connection error to the user
+            log.error(u"[Symantec DLP] Encounted an exception when setting up the SOAP Client, Problem: %s", repr(e))
+        else: # No connection error, client is setup with the URL. Allow the poller to be setup
+            cls.is_connected = True
         cls.class_vars_loaded = True
 
     @staticmethod

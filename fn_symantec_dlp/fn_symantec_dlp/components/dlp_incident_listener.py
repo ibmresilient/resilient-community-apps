@@ -24,6 +24,7 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_symantec_dlp", {})
         self.dlp_listener = DLPListener(opts)
 
+        
         if "pytest" in sys.modules:
             # Reaching here indicates that the component is invoked from within a testing session.
             # In this case, don't start the Poller
@@ -32,15 +33,16 @@ class FunctionComponent(ResilientComponent):
         else:
             # The dlp_listener_toggle will determine whether the Poller will run
             if str_to_bool(self.options.get("sdlp_listener_toggle", None)):
-                self.setup_listener()
+                if self.dlp_listener.soap_client.is_connected:
+                    self.setup_listener()
 
-                # Use a circuits timer to fire off an event every N seconds.
-                #     When the event is fired, a function with the decorator @handler(name_of_event)
-                #     will be used to handle the event and perform some task
-                log.debug(u"DLP Polling interval will be %s seconds", self.options.get("sdlp_listener_timer", 600))
-                Timer(interval=int(self.options.get("sdlp_listener_timer", 600)),
-                      event=Event.create("DLPListenerPollingEvent"),
-                      persist=True).register(self)
+                    # Use a circuits timer to fire off an event every N seconds.
+                    #     When the event is fired, a function with the decorator @handler(name_of_event)
+                    #     will be used to handle the event and perform some task
+                    log.debug(u"DLP Polling interval will be %s seconds", self.options.get("sdlp_listener_timer", 600))
+                    Timer(interval=int(self.options.get("sdlp_listener_timer", 600)),
+                        event=Event.create("DLPListenerPollingEvent"),
+                        persist=True).register(self)
 
     def setup_listener(self):
         """setup_listener Start our consumer, which will attempt a connection to DLP
