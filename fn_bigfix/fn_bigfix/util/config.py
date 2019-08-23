@@ -10,13 +10,14 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_bigfix]
+# Refer to BigFix Function integration guide for configuration option guidelines.
 bigfix_url=https://bigfix-url.com
 bigfix_port=12345
 bigfix_user=BigFixAdmin
 bigfix_pass=MyPassword
 bigfix_polling_interval=30
 bigfix_polling_timeout=600
-bigfix_hunt_results_limit=200
 bigfix_endpoints_wait=30
+bigfix_hunt_results_limit=200
 """
     return config_data
