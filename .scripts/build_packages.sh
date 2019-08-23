@@ -4,7 +4,8 @@
 # This section builds all the feature packages implemented in
 # python. It searches for all folders that contains setup.py
 #
-setup_files=(`find ./* -maxdepth 1 -type f -name 'setup.py'`);
+
+setup_files=(`find .. -type f -name 'setup.py'`);
 dist_dir=$( cd $(dirname $0) ; pwd -P )
 
 echo "Building these packages:";
@@ -24,7 +25,7 @@ done;
 # Most likely you only need to zip some files folders. Follow the example
 # in the ../res_qraw_mitre folder.
 
-build_scripts=(`find ./ -type f -name 'resilient-res-package.sh'`);
+build_scripts=(`find .. -type f -name 'resilient-res-package.sh'`);
 
 echo "Building these packages:";
 printf '  %s\n' "${build_scripts[@]}";
