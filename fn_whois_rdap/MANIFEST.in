@@ -1,0 +1,4 @@
+include README.md
+include fn_whois_rdap/util/*
+include fn_whois_rdap/LICENSE
+include doc/*
