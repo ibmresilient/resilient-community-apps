@@ -9,11 +9,11 @@
 #   --------------------------------
 #
 
-from fn_mitre_integration.lib.mitre_attack import MitreAttack
+from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection
 from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic, MitreAttackTechnique
 
 
-def get_techniques(tactic_names=None, tactic_ids=None):
+def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
     """
     Get techniques for all input tactics
     :param tactic_names:    string of tactic names separated by comma
@@ -22,32 +22,40 @@ def get_techniques(tactic_names=None, tactic_ids=None):
     """
     if not tactic_names and not tactic_ids:
         raise ValueError("Neither name nor id is provided for getting techniques.")
-    mitre_attack = MitreAttack()
+    mitre_conn = MitreAttackConnection()
 
     tactics = []
     if tactic_names is not None:
-        tactics = tactic_names.split(', ')
+        # It's possible for multiple tactics to have the same name
+        # And we want to make sure that all of them are processed in that case
+        tactic_names = tactic_names.split(', ')
+        for t_name in tactic_names:
+            tactic = MitreAttackTactic.get_by_name(mitre_conn, t_name)
+            if tactic is None:
+                raise ValueError("Tactic with name {} does not exist.".format(t_name))
+            elif isinstance(tactic, list):
+                for t in tactic:
+                    tactics.append(t.id)
+            else:
+                tactics.append(tactic.id)
     elif tactic_ids is not None:
         t_ids = tactic_ids.split(', ')
-        tactics = []
         for tid in t_ids:
-            tactic = MitreAttackTactic.get_by_id(mitre_attack, tid)
+            tactic = MitreAttackTactic.get_by_id(mitre_conn, tid)
             if tactic is not None:
-                tactics.append(tactic.name)
+                tactics.append(tactic.id)
             else:
                 raise ValueError("Tactic with id {} does not exist.".format(tid))
+
     ret = []
-    for tactic in tactics:
-        t_obj = MitreAttackTactic.get_by_name(mitre_attack, tactic)
-        if t_obj is None:
-            raise ValueError("Tactic with name {} does not exist.".format(tactic))
-        techs = MitreAttackTechnique.get_by_tactic(mitre_attack, t_obj)
-        tactic_dict = {
-            "tactic_name": t_obj.name,
-            "tactic_id": t_obj.id,
-            "tactic_ref": t_obj.get_url(),
-            "techs": [tech.dict_repr() for tech in techs]
-        }
+    for tactic_id in tactics:
+        t_obj = MitreAttackTactic.get_by_id(mitre_conn, tactic_id)
+        techs = t_obj.get_techniques(mitre_conn)
+
+        # get the dict for tactic and include techniques into it
+        tactic_dict = t_obj.dict_form().update({
+            "techniques": [tech.dict_form() for tech in techs]
+        })
 
         ret.append(tactic_dict)
     return ret

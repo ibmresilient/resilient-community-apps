@@ -25,6 +25,7 @@ class MitreAttackBase(object):
             self._reset_cache()
 
         self._stix = doc
+        self.collection = self.get_collection(doc)
         self.name = self.get_name(doc)
         self.id = self.get_id(doc)
         self.description = doc.get("description", "")
@@ -34,9 +35,44 @@ class MitreAttackBase(object):
         if self.name is not None:
             self._cached_obj["name"][self.name] = self
 
+    def dict_form(self):
+        """
+        Method to override to convert the data into what is expected.
+        :return: dictionary with object's data
+        """
+        return {
+            "name": self.name,
+            "id": self.id
+        }
+
+    @staticmethod
+    def object_to_dict(obj):
+        """
+        Takes STIX object's every value and copies it to a dictionary.
+        We do so, because certain STIX objects are immutable.
+        :param obj: STIX object
+        :return: dict
+        """
+        res = {}
+        for key in obj.keys():
+            res[key] = obj[key]
+        return res
+
     @classmethod
     def _reset_cache(cls):
         cls._cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
+
+    @staticmethod
+    def get_collection(doc):
+        """
+        Gets collection that was added by lookup method.
+        Override for classes with other definition.
+        :param data: stix structured dictionary
+        :type data: dict
+        :return: collection where the object was found
+        :rtype: str
+        """
+        return doc.get("collection", "")
 
     @staticmethod
     def get_name(doc):
@@ -80,20 +116,48 @@ class MitreAttackBase(object):
             return cls._cached_obj["all"]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
-        all = [cls(x) for x in conn.get_items(type_filter)]
-        cls._cached_obj["all"] = all
-        return all
+        all_items = [cls(x) for x in conn.get_items(type_filter)]
+        cls._cached_obj["all"] = all_items
+        return all_items
+
+    @classmethod
+    def get(cls, conn, name=None, id=None):
+        """
+        Queries and returns a list of instances that fit the given criteria.
+        If id is given it will be prioritized, since id is unique to all collections, but the
+        name doesn't have to be.
+        :type conn: MitreAttackConnection
+        :param name: name to query for
+        :param id: id to query for
+        :return: list of objects of the class requested
+        """
+        ext_id = id
+        if name is None and ext_id is None:
+            return None
+
+        if ext_id is not None:
+            objs = cls.get_by_id(conn, ext_id)
+        else:
+            objs = cls.get_by_name(conn, name)
+
+        if objs is None:
+            return None
+
+        if not isinstance(objs, list):
+            objs = [objs]
+        return objs
 
     @classmethod
     def get_by_name(cls, conn, name):
         """
-        Queries the connection to get an instance of this class with given name.
+        Queries the connection to get instances of this class with given name.
+        Since multiple types of objects can have the same name across collections, returns a list of objects.
         :param conn: Connection object
-        :type conn: MitreAttack
+        :type conn: MitreAttackConnection
         :param type_id: name of the type to query
         :type type_id: str
-        :return: instance of the class for given name
-        :rtype: self.__class__
+        :return: list of objects of the class with given name
+        :rtype: list(self.__class__)
         """
         if name in cls._cached_obj["name"]:
             return cls._cached_obj["name"][name]
@@ -103,18 +167,20 @@ class MitreAttackBase(object):
         items = conn.get_items([type_filter, name_filter])
         if not len(items):
             return None
-        return cls(items[0])
+        return [cls(x) for x in items]  # if multiple collections have the item
 
     @classmethod
     def get_by_id(cls, conn, type_id):
         """
-        Queries the connection to get an instance of this class with given type.
+        Queries the connection to get a list of instances of this class with given type.
+        List should have a length of 1, since ids are unique, but for purposes of being not
+        being different with `get_by_name` returns a list.
         :param conn: Connection object
-        :type conn: MitreAttack
+        :type conn: MitreAttackConnection
         :param type_id: id of the type to query
         :type type_id: str
-        :return: instance of the class for given id
-        :rtype: self.__class__
+        :return: list of instances of the class for given id
+        :rtype: list(self.__class__)
         """
         if type_id in cls._cached_obj["id"]:
             return cls._cached_obj["id"][type_id]
@@ -124,7 +190,7 @@ class MitreAttackBase(object):
         items = conn.get_items([type_filter, id_filter])
         if not len(items):
             return None
-        return cls(items[0])
+        return [cls(item) for item in items]
 
 
 class MitreAttackTactic(MitreAttackBase):
@@ -141,19 +207,30 @@ class MitreAttackTactic(MitreAttackBase):
         url = "{}/{}/".format(self.TACTIC_BASE_URL, item_id)
         return url
 
-    def get_techniques(conn):
+    def get_techniques(self, conn):
         return MitreAttackTechnique.get_by_tactic(conn, self)
+
+    def dict_form(self):
+        return {
+            "name": self.name,
+            "id": self.id,
+            "ref": self.get_url(),
+            "collection": self.collection
+        }
 
 
 class MitreAttackTechnique(MitreAttackBase):
     MITRE_TYPE = "attack-pattern"
+
+    def get_mitigations(self, conn):
+        return MitreAttackMitigation.get_by_technique(conn, self)
 
     @classmethod
     def get_by_tactic(cls, conn, tactic):
         """
         Creates a filter for techniques related to the given tactic.
         :param conn: connection object for making requests
-        :type conn: MitreAttack
+        :type conn: MitreAttackConnection
         :param tactic: tactic which techniques interest us
         :type tactic: MitreAttachTactic
         :return: list of Technique instances related to tactic
@@ -169,14 +246,15 @@ class MitreAttackTechnique(MitreAttackBase):
             return None
         return [cls(x) for x in techs]
 
-    def dict_repr(self):
+    def dict_form(self):
         refs = [{"url": r.get("url", "")} for r in self._stix["external_references"]]
         return {
             "name": self.name,
             "description": self.description,
             "external_references": refs,
             "x_mitre_detection": self._stix.get("x_mitre_detection", ""),
-            "mitre_tech_id": self.id
+            "id": self.id,
+            "collection": self.collection
         }
 
 
@@ -188,7 +266,7 @@ class MitreAttackMitigation(MitreAttackBase):
         """
         Gets mitigations that mitigates provided technique
         :param conn: connection object for making requests
-        :type conn: MitreAttack
+        :type conn: MitreAttackConnection
         :param technique: technique to mitigate
         :type technique: MitreAttackTechnique
         :return: List of mitigations for the given technique
@@ -196,15 +274,24 @@ class MitreAttackMitigation(MitreAttackBase):
         """
         if technique is None:
             return None
-        return [cls(x) for x in conn.get_related_to(technique._stix, "mitigates", target_only=True)]
+        res = [cls(x) for x in conn.get_related_to(technique._stix, "mitigates", target_only=True)]
+        for mitigation in res:
+            mitigation.collection = technique.collection
+        return res
+
+    def dict(self):
+        return {
+            "description": self.description,
+            "name": self.name,
+            "id": self.id,
+            "collection": self.collection
+        }
 
 
-class MitreAttack(object):
+class MitreAttackConnection(object):
     """
-    MitreAttack:
-    -----------
-    A facet class to encapsulate all the features related to fetching the
-    MITRE STIX TAXII server
+    Collection of methods for extracting data from MitreServer.
+    Includes the logic of using multiple data sources.
     """
     def __init__(self):
         self.attack_server = None
@@ -226,11 +313,11 @@ class MitreAttack(object):
 
     def get_items(self, filters):
         """
-        Get items using filters
+        Get items using filters, convert them to dictionaries.
         Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
         :param filters: list of filter
-        :return: list of objects
+        :return: list of dictionaries representing stix objects
         :rtype: list(dict)
         """
         if self.attack_server is None:
@@ -239,7 +326,10 @@ class MitreAttack(object):
         for data_source in self.composite_ds.get_all_data_sources():
             try:
                 ds_items = data_source.query(filters)
-                items.extend(ds_items)
+                updated_items = [MitreAttackBase.object_to_dict(x) for x in ds_items]
+                for item in updated_items:
+                    item["collection"] = data_source.collection.title
+                items.extend(updated_items)
             except DataSourceError as e:
                 # happens if data_source finds no elements with given filter
                 pass
@@ -259,7 +349,7 @@ class MitreAttack(object):
                     item_name,
                     type_name="attack-pattern"):
         """
-        Look up an item using item name
+        Look up items using item name
         :param item_name:
         :param collection_title:
         :param type_name:
@@ -272,57 +362,86 @@ class MitreAttack(object):
         if not len(items):
             return None
 
-        return items[0]
+        return items
+
+
+class MitreAttack(object):
+    """
+    Facet class for accessing data from Mitre Attack
+    """
+    def __init__(self):
+        self.conn = MitreAttackConnection()
 
     def get_technique(self, name=None, ext_id=None):
         """
-        Use tech name or external id to retrieve tech
-        :param name:
-        :param ext_id:
-        :return:
+        Use tech name or external id to retrieve a technique.
+        :param name: name of the technique to look up
+        :param ext_id: if of the technique to look up
+        :return: List of dictionaries representing techniques that fit the query
         """
         if name is None and ext_id is None:
             return None
         tech = None
         if name is not None:
-            tech = MitreAttackTechnique.get_by_name(self, name)
+            tech = MitreAttackTechnique.get_by_name(self.conn, name)
         else:
-            tech = MitreAttackTechnique.get_by_id(self, ext_id)
+            tech = MitreAttackTechnique.get_by_id(self.conn, ext_id)
 
-        if tech is not None:
-            return tech.dict_repr()
-        return None
+        if tech is None:
+            return None
+
+        if not isinstance(tech, list):
+            tech = [tech]
+        return [repr(x) for x in tech]
 
     def get_all_tactics(self):
-        return MitreAttackTactic.get_all(self)
+        """
+        Get all tactics from all the collections
+        :return:
+        """
+        return MitreAttackTactic.get_all(self.conn)
 
     def get_all_techniques(self):
         """
-        Get all techs
+        Get all techniques from all the tactics from all the collections.
         :return:
         """
-        return MitreAttackTechnique.get_all(self)
+        return MitreAttackTechnique.get_all(self.conn)
 
     def get_tactic_url(self, name):
-        tactic = MitreAttackTactic.get_by_name(self, name)
+        tactic = MitreAttackTactic.get_by_name(self.conn, name)
         if tactic is None:
             return None
         return tactic.get_url()
 
     def get_tactic_techniques(self, tactic_name=None, tactic_id=None):
+        """
+        Returns a list of tactic's techniques. If multiple tactics have the same name
+        the list will include techniques for each.
+        :param tactic_name:
+        :param tactic_id:
+        :return:
+        """
         if not tactic_name and not tactic_id:
             return None
-        if tactic_name:
-            tactic = MitreAttackTactic.get_by_name(self, tactic_name)
-        elif tactic_id:
-            tactic = MitreAttackTactic.get_by_id(self, tactic_id)
+        if tactic_id:
+            tactic = MitreAttackTactic.get_by_id(self.conn, tactic_id)
+        elif tactic_name:
+            tactic = MitreAttackTactic.get_by_name(self.conn, tactic_name)
+            if isinstance(tactic, list):
+                res = []
+                for t in tactic:
+                    res.extend(self.get_tactic_techniques(tactic_id=t.id))
+                return res
+
         if not tactic:
             return None
-        return [tech.dict_repr() for tech in MitreAttackTechnique.get_by_tactic(self, tactic)]
+        return [repr(tech) for tech in MitreAttackTechnique.get_by_tactic(self.conn, tactic)]
 
-    def get_technique_mitigation(self, tech_id=None, tech_name=None):
+    def get_technique_mitigations(self, tech_id=None, tech_name=None):
         """
-        Get mitigation for a given tech
+        Returns a list of mitigations. If multiple techniques
+        have the same name, combines the lists into 1.
         Reference:
         https://github.com/mitre/cti/blob/master/USAGE.md
         :param tech_id: STIX id for mitre tech
@@ -330,12 +449,20 @@ class MitreAttack(object):
         """
         tech = None
         if tech_id is not None:
-            tech = MitreAttackTechnique.get_by_id(self, tech_id)
+            tech = MitreAttackTechnique.get_by_id(self.conn, tech_id)
         elif tech_name is not None:
-            tech = MitreAttackTechnique.get_by_name(self, tech_name)
+            tech = MitreAttackTechnique.get_by_name(self.conn, tech_name)
+            if isinstance(tech, list):
+                res = []
+                for t in tech:
+                    res.extend(self.get_technique_mitigations(tech_id = t.id))
+                return res
 
         if not tech:
             return None
 
-        mitigations = MitreAttackMitigation.get_by_technique(self, tech)
-        return mitigations[0].description
+        mitigations = MitreAttackMitigation.get_by_technique(self.conn, tech)
+        if not len(mitigations):
+            return None
+
+        return mitigations

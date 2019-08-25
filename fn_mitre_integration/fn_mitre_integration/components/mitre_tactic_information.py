@@ -43,8 +43,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 
-            tactics = mitre_attack_utils.get_techniques(tactic_names=mitre_tactic_name,
-                                                        tactic_ids=mitre_tactic_id)
+            tactics = mitre_attack_utils.get_tactics_and_techniques(tactic_names=mitre_tactic_name,
+                                                                    tactic_ids=mitre_tactic_id)
 
             yield StatusMessage("done...")
 

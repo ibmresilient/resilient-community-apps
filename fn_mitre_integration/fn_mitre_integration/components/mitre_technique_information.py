@@ -44,27 +44,24 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server. It might take several minutes...")
 
-            mitre_att = mitre_attack.MitreAttack()
-            tech = {}
-            if mitre_technique_mitigation_only:
-                tech = {
-                    "name": mitre_technique_name,
-                    "description": "",
-                    "external_references": [{"url": ""}],
-                    "x_mitre_detection": "",
-                    "mitre_tech_id": "",
-                    "mitre_mitigation": mitre_att.get_technique_mitigation(tech_id=mitre_technique_id,
-                                                                      tech_name=mitre_technique_name)
-                }
-            else:
-                tech = mitre_att.get_technique(name=mitre_technique_name,
-                                          ext_id=mitre_technique_id)
-                if tech is None:
-                    raise ValueError("Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
+            mitre_conn = mitre_attack.MitreAttackConnection()
+            techniques = mitre_attack.MitreAttackTechnique.get(mitre_conn, name=mitre_technique_name,
+                                                               id=mitre_technique_id)
+            if techniques is None or not len(techniques):
+                raise ValueError(
+                    "Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
+
+            techs = []
+            for technique in techniques:
+                techs.techs.append(technique.dict_form()).update({
+                    "mitre_mitigations": technique.get_mitigations(mitre_conn)
+                })
 
             yield StatusMessage("done...")
-            log.info("MITRE tech: " + str(tech))
-            results = tech
+            log.info("MITRE tech: " + str(techs))
+            results = {
+                "mitre_techniques": techs
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
