@@ -110,8 +110,11 @@ def create_attachment(rest_client, file_name, file_content, params):
 
     # Create the temporary file save results in json format.
     with temp_file_obj as temp_file:
-        json.dump(file_content, temp_file)
-        temp_file.close()
+        if sys.version_info.major == 3:
+            temp_file.write(file_content)
+        else:
+            temp_file.write(file_content.encode('utf-8'))
+        temp_file.flush()
         try:
             # Post file to Resilient
             att_report = rest_client.post_attachment("/incidents/{0}/attachments".format(params["incident_id"]),

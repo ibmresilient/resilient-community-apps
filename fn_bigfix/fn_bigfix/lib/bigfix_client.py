@@ -520,7 +520,7 @@ class BigFixClient(object):
             if len(results) == 0:
                 return None
             else:
-                response = "<?xml version='1.0' ?>\n<report> %s: \n" % title
+                response = "<?xml version='1.0'?>\n<report> %s: \n" % title
                 insertion_count = 0
                 for elt in results:
                     if insertion_count == 0:
@@ -528,7 +528,11 @@ class BigFixClient(object):
                     elif insertion_count == 1:
                         response += "\t\t<name> %s </name> \n" % elt.text
                     elif insertion_count == 2:
-                        response += "\t\t<value> %s </value> \n" % elt.text
+                        v = elt.text
+                        # Convert "<none>" value to "None" else xml will be un-readable.
+                        if v == "<none>":
+                            v = v.replace("<none>", "None")
+                        response += "\t\t<value> %s </value> \n" % v
 
                     insertion_count += 1
                     if insertion_count == number_of_tuples:
