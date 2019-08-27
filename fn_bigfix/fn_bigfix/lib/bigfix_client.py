@@ -117,7 +117,7 @@ class BigFixClient(object):
 
         """
         head, tail = ntpath.split(file_path)
-        query = "exists file \"{0}\"".format(head)
+        query = u"exists file \"{0}\"".format(head)
         if tail:
             query = u"exists file \"{0}\" of folder \"{1}\"".format(tail, head)
         LOG.debug("get_bf_computer_by_file_path triggered")
