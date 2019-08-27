@@ -134,12 +134,12 @@ class FunctionComponent(ResilientComponent):
                 elif len(hits) > int(self.options.get("bigfix_hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
-                    file_name = "query_for_artifact_{0}_{1}_{2}.txt" \
+                    file_name = u"query_for_artifact_{0}_{1}_{2}.txt" \
                         .format(params["artifact_id"], params["artifact_type"],
                                 datetime.datetime.today().strftime('%Y%m%d'))
                     file_content = ""
                     for data in hits:
-                        file_content += "Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
+                        file_content += u"Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
                             .format(data["computer_id"], data["computer_name"], params["artifact_value"],
                                     params["artifact_type"])
                     # Create an attachment
