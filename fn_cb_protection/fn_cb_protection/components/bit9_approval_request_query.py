@@ -9,6 +9,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_cb_protection.util.bit9_client import CbProtectClient, escape
 from resilient_lib import validate_fields
+import json
 
 log = logging.getLogger(__name__)
 
@@ -40,12 +41,15 @@ class FunctionComponent(ResilientComponent):
             bit9_client = CbProtectClient(self.options)
             results = bit9_client.query_approval_request(bit9_query)
 
+            pretty_string = json.dumps(results, sort_keys=True, indent=4, separators=(',', ':'))
+
             # Query results should be a list
             if isinstance(results, list):
                 log.info("%d results", len(results))
                 results = {
                     "count": len(results),
-                    "items": results
+                    "items": results,
+                    "pretty_results": pretty_string
                 }
                 log.debug(results)
             else:
