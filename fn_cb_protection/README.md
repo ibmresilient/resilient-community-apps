@@ -68,11 +68,8 @@ CbProtect Update File Rule
 (Example) CbProtect Approve File Locally and Close Request
 (Example) CbProtect Ban File Globally and Close Request
 (Example) CbProtect Delete File By Hash
-(Example) CbProtect Delete File Rule for Id 1
-(Example) CbProtect Get Approval Request for Query 'fileName:notepad.exe'
-(Example) CbProtect Get File Catalog for Query 'trust:1'
-(Example) CbProtect Get File Rule for Id 1
-(Example) CbProtect Get File Rule for Query 'name:notepad.exe'
+(Example) CbProtect Get Approval Request for Query Condition
+(Example) CbProtect Get File Catalog for Query Condition
 ```
 > Use these as reference to create your own from.
 
