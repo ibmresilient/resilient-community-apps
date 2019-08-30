@@ -127,8 +127,12 @@ class DLPListener(ResilientComponent):
                         temp_upload_file.write(component['content'])
 
                         temp_upload_file.close()
-                        self.res_rest_client.post_attachment('/incidents/{}/attachments'.format(res_incident_id),
-                                                             temp_upload_file.name, component['name'])
+                        artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
+                        self.res_rest_client.post_artifact_file(artifact_uri,
+                                                            16,
+                                                             temp_upload_file.name,
+                                                             value=component['name'],
+                                                             description="Binary File imported from Symantec DLP")
                 finally:
                     os.unlink(temp_upload_file.name)
 
