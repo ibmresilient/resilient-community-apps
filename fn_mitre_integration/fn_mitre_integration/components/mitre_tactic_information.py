@@ -45,13 +45,12 @@ class FunctionComponent(ResilientComponent):
 
             tactics = mitre_attack_utils.get_tactics_and_techniques(tactic_names=mitre_tactic_name,
                                                                     tactic_ids=mitre_tactic_id)
-
             yield StatusMessage("done...")
 
             results = {
                 "mitre_tactics": tactics
             }
-
+            logging.warning(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

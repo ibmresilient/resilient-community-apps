@@ -53,8 +53,9 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
         techs = t_obj.get_techniques(mitre_conn)
 
         # get the dict for tactic and include techniques into it
-        tactic_dict = t_obj.dict_form().update({
-            "techniques": [tech.dict_form() for tech in techs]
+        tactic_dict = t_obj.dict_form()
+        tactic_dict.update({
+            "mitre_techniques": [tech.dict_form() for tech in techs]
         })
 
         ret.append(tactic_dict)

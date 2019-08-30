@@ -42,27 +42,34 @@ class FunctionComponent(ResilientComponent):
             log.info("mitre_technique_mitigation_only: %s", mitre_technique_mitigation_only)
 
             yield StatusMessage("starting...")
-            yield StatusMessage("query MITRE STIX TAXII server. It might take several minutes...")
+            yield StatusMessage("querying MITRE STIX TAXII server. It might take several minutes...")
 
             mitre_conn = mitre_attack.MitreAttackConnection()
             techniques = mitre_attack.MitreAttackTechnique.get(mitre_conn, name=mitre_technique_name,
                                                                id=mitre_technique_id)
+
+            log.warning(techniques)
+
             if techniques is None or not len(techniques):
                 raise ValueError(
                     "Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
 
             techs = []
             for technique in techniques:
-                techs.techs.append(technique.dict_form()).update({
-                    "mitre_mitigations": technique.get_mitigations(mitre_conn)
-                })
+                tech_dict = technique.dict_form()
+                tech_dict.update(
+                    {
+                        "mitre_mitigations": [x.dict_form() for x in technique.get_mitigations(mitre_conn)]
+                    }
+                )
+                techs.append(tech_dict)
 
             yield StatusMessage("done...")
-            log.info("MITRE tech: " + str(techs))
+
             results = {
                 "mitre_techniques": techs
             }
-
+            logging.warning(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

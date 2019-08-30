@@ -17,10 +17,14 @@ class MitreAttackBase(object):
     To use, subclass and override MITRE_TYPE, and all other needed methods.
     """
     MITRE_TYPE = "replace"
-    _cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
+    _cached_obj = None
     SECONDS_IN_A_DAY = 84600
 
     def __init__(self, doc):
+        # if the cash is not instantiated, create cash
+        if not self._cached_obj:
+            self._reset_cache()
+        # if it's been more than a day, clear the cache
         if time.time() - self._cached_obj["last"] > self.SECONDS_IN_A_DAY:
             self._reset_cache()
 
@@ -30,6 +34,7 @@ class MitreAttackBase(object):
         self.id = self.get_id(doc)
         self.description = doc.get("description", "")
 
+        # if id and name exist, cache the object
         if self.id is not None:
             self._cached_obj["id"][self.id] = self
         if self.name is not None:
@@ -60,6 +65,11 @@ class MitreAttackBase(object):
 
     @classmethod
     def _reset_cache(cls):
+        """
+        Resets cache to the object where the results of querying for given class will be stored.
+        Will get reset after a day.
+        :return:
+        """
         cls._cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
 
     @staticmethod
@@ -112,7 +122,7 @@ class MitreAttackBase(object):
         :return: list of class instances
         :rtype: list(self.__class__)
         """
-        if cls._cached_obj["all"] is not None:
+        if cls._cached_obj and cls._cached_obj["all"] is not None:
             return cls._cached_obj["all"]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
@@ -159,7 +169,7 @@ class MitreAttackBase(object):
         :return: list of objects of the class with given name
         :rtype: list(self.__class__)
         """
-        if name in cls._cached_obj["name"]:
+        if cls._cached_obj and name in cls._cached_obj["name"]:
             return cls._cached_obj["name"][name]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
@@ -182,7 +192,7 @@ class MitreAttackBase(object):
         :return: list of instances of the class for given id
         :rtype: list(self.__class__)
         """
-        if type_id in cls._cached_obj["id"]:
+        if cls._cached_obj and type_id in cls._cached_obj["id"]:
             return cls._cached_obj["id"][type_id]
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
