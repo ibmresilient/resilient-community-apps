@@ -741,7 +741,7 @@ class PPTRIncidentPolling(ResilientComponent):
                     for k,v in regex_defs.items():
                         if k not in artifacts:
                             artifacts[k] = []
-                        artifacts[k].extend([x for x in incident['hosts'][type] if re.match(v, x) and x not in artifacts[k]])
+                        artifacts[k].extend([x for x in incident['hosts'][c] if re.match(v, x) and x not in artifacts[k]])
         return artifacts
 
 
