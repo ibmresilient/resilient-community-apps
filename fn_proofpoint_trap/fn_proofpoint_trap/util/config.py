@@ -22,5 +22,10 @@ polling_interval=2
 startup_interval=20160
 # State of Incidents to Query
 state=open
+# Comma separated list of host categories to check for artifacts 
+# to import into Resilient. The default is forensics.
+# other options include attacker, cnc and url.
+# e.g. host_categories=attacker,cnc,forensics,url
+host_categories=forensics
 """
     return config_data
