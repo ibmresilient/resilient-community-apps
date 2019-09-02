@@ -40,7 +40,7 @@
 * Initial Release
 
 ---
-
+This integration allows for gathering of WHOIS registry information using the improved RDAP protocol from an IP address, domain name or URL artifacts on a Resilient Incident. 
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.

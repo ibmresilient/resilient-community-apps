@@ -27,14 +27,12 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* This integration return WHOIS registry enrichment information via the improved RDAP protocol
 
 ---
 
 ## Function - RDAP: Query
-Using ipwhois library to make general queries is RDAP format
+Using ipwhois library to make general queries using improved RDAP protocol
 
  ![screenshot: fn-rdap-query ](./screenshots/fn-rdap-query.png)
 
@@ -44,7 +42,7 @@ Using ipwhois library to make general queries is RDAP format
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `rdap_depth` | `number` | Yes | `1` | 1 |
-| `rdap_query` | `text` | Yes | `ibm.com` | IP or domain name |
+| `rdap_query` | `text` | Yes | `ibm.com` | IP or domain name or URL|
 
 </p>
 </details>
