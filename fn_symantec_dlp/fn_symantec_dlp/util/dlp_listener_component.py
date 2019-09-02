@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 # Copyright © IBM Corporation 2010, 2019
 # pylint: disable=C0303
+""" Helper Module used to handle all the needed operations for gathering Incidents
+DLPListener is the class which performs all operations needed with DLP such as starting the poller, preparing and sending results.
+It HAS-A instance of DLPSoapClient to delagate any API operations to.
+"""
 import logging
 import os
 import tempfile
 import json
 import datetime
 import uuid
-import calendar
 from resilient_circuits import ResilientComponent, template_functions
+from resilient_lib import build_incident_url, build_resilient_url, str_to_bool
+
 from zeep.helpers import serialize_object
 
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
-from resilient_lib import build_incident_url, build_resilient_url, str_to_bool
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 
 class DLPListener(ResilientComponent):
@@ -31,27 +35,27 @@ class DLPListener(ResilientComponent):
                 "sdlp_should_search_res"))
         # A REST Client to interface with Resilient
         self.res_rest_client = ResilientComponent.rest_client(self)
-        self.add_filters_to_jinja(self)
+        DLPListener.add_filters_to_jinja()
 
     def start_poller(self):
         """start_poller begins the Polling process for DLP to search for any Incidents to bring to Resilient
         It calls all the other functions in this class as it filters out duplicate incidents, prepares new Incidents and uploads attachments
         """
 
-        log.debug("Started Poller")
+        LOG.debug("Started Poller")
         # gather the list of incidents from a saved report
         res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
                                           incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(days=14))
 
         # gather the incident_details for incidents returned
         incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
-        log.info("Now filtering out Incidents which already have a Resilient Incident ID")
-        log.info("Number of Incidents before filtering: %d", len(incidents))
+        LOG.info("Now filtering out Incidents which already have a Resilient Incident ID")
+        LOG.info("Number of Incidents before filtering: %d", len(incidents))
 
         # Drop all incidents which have a res_id custom attribute
         incidents = list(self.filter_existing_incidents(incidents))
 
-        log.info("Number of Incidents after filtering: %d", len(incidents))
+        LOG.info("Number of Incidents after filtering: %d", len(incidents))
         # Get the sdlp_incident_id field
         sdlp_id_type = self.res_rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
 
@@ -60,19 +64,19 @@ class DLPListener(ResilientComponent):
             if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
                 # There is no resilient incident with the given DLP Incident ID
                 # Create the incident
-                log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
+                LOG.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
 
                 payload = self.prepare_incident_dto(incident, notes_to_be_added=self.gather_incident_notes(incident))
                 
                 # Create the Incident
                 new_incident = self.res_rest_client.post('/incidents', json.loads(payload, strict=False))
-                log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
+                LOG.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
 
                 self.upload_dlp_binaries(incident, new_incident['id'])
                 self.submit_summary_note(payload, incident, new_incident['id'])
 
                 self.send_res_id_to_dlp(new_incident, incident['incidentId'])
-        log.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
+        LOG.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
         """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
@@ -83,7 +87,7 @@ class DLPListener(ResilientComponent):
         """
 
         resilient_incident_url = build_incident_url(
-            url=build_resilient_url(self.opts.get('host'), self.opts.get('port')),incidentId=new_incident['id'])
+            url=build_resilient_url(self.opts.get('host'), self.opts.get('port')), incidentId=new_incident['id'])
         headers = {'content-type': 'text/xml'}
         body = """<?xml version="1.0" encoding="UTF-8"?>
                         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
@@ -121,7 +125,7 @@ class DLPListener(ResilientComponent):
                                               data=body, headers=headers)
 
         response.raise_for_status()
-        log.info("Sent new Resilient Incident ID back to the original DLP Incident as a custom attribute")
+        LOG.info("Sent new Resilient Incident ID back to the original DLP Incident as a custom attribute")
 
         
 
@@ -146,10 +150,10 @@ class DLPListener(ResilientComponent):
                         temp_upload_file.close()
                         artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
                         self.res_rest_client.post_artifact_file(artifact_uri,
-                                                            16,
-                                                             temp_upload_file.name,
-                                                             value=component['name'],
-                                                             description="Binary File imported from Symantec DLP")
+                                                                16,
+                                                                temp_upload_file.name,
+                                                                value=component['name'],
+                                                                description="Binary File imported from Symantec DLP")
                 finally:
                     os.unlink(temp_upload_file.name)
 
@@ -173,26 +177,42 @@ class DLPListener(ResilientComponent):
                                "notes": notes_to_be_added,
                                "detection_date": incident['incident']['detectionDate'],
                                "severity": self.return_res_severity(incident['incident']['severity']),
-                               "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], 
-                               host=self.soap_client.host)}})
+                               "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], host=self.soap_client.host)}})
         return payload
 
     @staticmethod
     def build_dlp_url(incidentid, host):
+        """build_dlp_url helper function used to compose a URL to the DLP Incident
+        
+        :param incidentid: the DLP Incident ID
+        :type incidentid: int
+        :param host: The Host of the DLP Installation
+        :type host: string
+        :return: The full URL for the Incident
+        :rtype: string
+        """
         
         return "{host}/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id&value(operator_1)=incident.id_in&value(operand_1)={incidentId}".format(
             host=host, incidentId=incidentid)
 
 
+    @staticmethod
+    def gather_incident_notes(incident):
+        """gather_incident_notes helper function used to extract all Notes from the DLP Incident
+        Searches the IncidentHistory object for items of type "Note Added" and extracts these.
+        
+        :param incidentid: the DLP Incident
+        :type incidentid: dict
+        """
 
-    def gather_incident_notes(self, incident):
+
         # Gather Incident Notes
         notes_to_be_added = []
-        for historyItem in incident['incident']['incidentHistory']:
-            if historyItem['actionType']['_value_1'] == "Note Added":
+        for history_item in incident['incident']['incidentHistory']:
+            if history_item['actionType']['_value_1'] == "Note Added":
                 # Convert Date to a UTC time stamp for visual purposes
-                if isinstance(historyItem['date'],datetime.datetime):
-                    historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
+                if isinstance(history_item['date'], datetime.datetime):
+                    history_item['date'] = history_item['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
                 #historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
                 notes_to_be_added.append(u"""<b>Note gathered from Symantec DLP Incident</b>
                         <br>
@@ -200,20 +220,27 @@ class DLPListener(ResilientComponent):
                         <br><br>
                         <b>Event Detail</b>: <p>{detail}</p>
                         <p> performed by user <b>{user}</b></p""".format(
-                    time=historyItem['date'],
-                    detail=historyItem['detail'],
-                    user=historyItem['user']
-                ))
+                            time=history_item['date'],
+                            detail=history_item['detail'],
+                            user=history_item['user']
+                        ))
         return notes_to_be_added
 
     @staticmethod
     def return_res_severity(dlp_severity):
+        """return_res_severity takes in a DLP severity and attempts to map it to one of the default Res severities
+        
+        :param dlp_severity: the dlp severity (lowercase)
+        :type dlp_severity: string
+        :return: The resultant Resilient Severity 
+        :rtype: string
+        """
         if dlp_severity == 'high':
             return "High"
         elif dlp_severity == 'medium':
             return "Medium"
-        else: 
-            return "Low"
+        
+        return "Low"
 
     @staticmethod
     def filter_existing_incidents(incidents):
@@ -264,26 +291,37 @@ class DLPListener(ResilientComponent):
         Take in a forwarded Event from DLP
         Import a Jinja template
         Map Event data to a new Incidents data including artifact data"""
-        log.debug("Attempting to map message to an IncidentDTO. Message provided : {}".format(message_dict))
+        LOG.debug("Attempting to map message to an IncidentDTO. Message provided : %d", message_dict)
         with open(template_file, 'r') as template:
 
             incident_template = template.read()
             incident_data = template_functions.render(incident_template, message_dict)
-            log.debug(incident_data)
+            LOG.debug(incident_data)
             return incident_data
-    @staticmethod
-    def add_filters_to_jinja(self):
+
+    def add_filters_to_jinja():
+        """add_filters_to_jinja used to setup the jinja filters as a part of the environment
+        """
         ds_filter = {
-            "regex_escape": self.regex_escape,
-            "dt_to_milli_epoch": self.dt_to_milli_epoch
+            "regex_escape": DLPListener.regex_escape,
+            "dt_to_milli_epoch": DLPListener.dt_to_milli_epoch
         }
         env = template_functions.environment()
         env.globals.update(ds_filter)
 
-    def regex_escape(self, val):
+    @staticmethod
+    def regex_escape(val):
+        """regex_escape jinja filter used to escape filepaths
+        
+        :param val: a string to be escaped
+        :type val: string
+        :return: The input string with any '\\' chars escaped
+        :rtype: string
+        """
         return val.replace('\\', r'\\')
 
-    def dt_to_milli_epoch(self, dt):
+    @staticmethod
+    def dt_to_milli_epoch(dt):
         """dt_to_milli_epoch Jinja Helper function which takes
         a datetime object and attempts to strip to a millesecond epoch
         strips the timezone of the incoming datetime.
@@ -299,9 +337,12 @@ class DLPListener(ResilientComponent):
 
             return int((naive - epoch).total_seconds() * 1000.0)
         except Exception as e:
-            log.debug("Encountered exception when converting datetime to an epoch; Error %s", e)
+            LOG.debug("Encountered exception when converting datetime to an epoch; Error %s", e)
 
     def prepare_incident_summary_note(self, incident, payload):
+        """prepare_incident_summary_note is used to prepare a final summary note for the incident
+        This is a good place to place artifacts which may not suit the artifact tab such as the User Justification
+        """
 
         return u"""<b> A Symantec DLP Incident has been imported into Resilient</b>
         <p>Incident Notes, Artifacts and Attachments found (if any) have been imported into this Incident.</p>
@@ -322,4 +363,4 @@ class DLPListener(ResilientComponent):
     
     def submit_summary_note(self, payload, incident, new_incident_id):
         self.res_rest_client.post('/incidents/{}/comments'.format(new_incident_id), 
-        {"text":{"format":"html", "content": self.prepare_incident_summary_note(incident, payload)}})
+            {"text":{"format":"html", "content": self.prepare_incident_summary_note(incident, payload)}})

@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 # Copyright © IBM Corporation 2010, 2019
 # pragma pylint: disable=unused-argument, no-self-use
+import datetime
+import logging
+import traceback
 
 import zeep
-import traceback
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 
-import datetime
-import logging 
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
+
 
 class SymantecAuth(AuthBase):
     """SymantecAuth a class which inherits from requests.AuthBase,
@@ -40,15 +41,21 @@ class SymantecAuth(AuthBase):
 
 
 class DLPSoapClient():
+    """DLPSoapClient a class which is used to interface with the Incident and Reporting API for Symantec DLP
+    Contains methods which encapsulate SOAP calls to your DLP Instance
+
+    Takes config values such as the host through an app_configs dict exposed in the init.
+    DLPSoapClient has a number of class variables which are shared among invocations
+    """
     class_vars_loaded = False
 
     def __init__(self, app_configs):
-        """__init__ setup the DLPSOAPClient; 
+        """__init__ setup the DLPSOAPClient;
         loading in the parameters from app_configs
         then initialise a soap_client with the details
-        
-        :param app_configs: a dictionary containing key-value pairs used for 
-        setting up a client with Symantec DLP. 
+
+        :param app_configs: a dictionary containing key-value pairs used for
+        setting up a client with Symantec DLP.
         :type app_configs: dict
         """
         if not self.class_vars_loaded:
@@ -59,11 +66,11 @@ class DLPSoapClient():
         """load_class_variables loads in the app_configs dict
         and assigned each value as a class variable.
         After loading, a zeep SOAP Client is created with our credentials
-        
-        :param app_configs: a dictionary containing key-value pairs used for 
-        setting up a client with Symantec DLP. 
+
+        :param app_configs: a dictionary containing key-value pairs used for
+        setting up a client with Symantec DLP.
         :type app_configs: dict
-        """ 
+        """
         cls.is_connected = False # Set is_connected to false initially
 
         cls.host = cls.get_config_option(app_configs=app_configs,
@@ -86,33 +93,32 @@ class DLPSoapClient():
                                              option_name="sdlp_cafile",
                                              optional=True)
 
-        # Gather the DLP Saved Report ID 
+        # Gather the DLP Saved Report ID
         cls.dlp_saved_report_id = cls.get_config_option(app_configs=app_configs,
-                                             option_name="sdlp_savedreportid",
-                                             optional=False)
+                                                        option_name="sdlp_savedreportid",
+                                                        optional=False)
 
         # Gather the DLP Incident Endpoint
         cls.sdlp_incident_endpoint = cls.get_config_option(app_configs=app_configs,
-                                             option_name="sdlp_incident_endpoint",
-                                             optional=False)
+                                                           option_name="sdlp_incident_endpoint",
+                                                           optional=False)
 
-                                             
         cls.session = Session()
         # Use DLP Cert if provided or if None, set verify to false
-        cls.session.verify = cls.dlp_cert or False 
+        cls.session.verify = cls.dlp_cert or False
         cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
         # Setup Transport with our credentials
         cls.transport = zeep.Transport(session=cls.session)
-        
+
         try: # Try to create a soap_client from the wsdl and transport
             cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
-        except Exception as e: # We got an error when setting up a client, catch and release the error in logs so circuits doesn't stop
-            # Put the traceback into DEBUG 
-            log.debug(traceback.format_exc())
+        except Exception as caught_exc: # We got an error when setting up a client, catch and release the error in logs so circuits doesn't stop
+            # Put the traceback into DEBUG
+            LOG.debug(traceback.format_exc())
             # Log the Connection error to the user
-            log.error(u"[Symantec DLP] Encounted an exception when setting up the SOAP Client")
-            log.error(u"Problem: %s", repr(e))
+            LOG.error(u"[Symantec DLP] Encounted an exception when setting up the SOAP Client")
+            LOG.error(u"Problem: %s", repr(caught_exc))
         else: # No connection error, client is setup with the URL. Allow the poller to be setup
             cls.is_connected = True
         cls.class_vars_loaded = True
