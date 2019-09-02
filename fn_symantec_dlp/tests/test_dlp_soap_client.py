@@ -17,13 +17,11 @@ logger = logging.getLogger('fn_symantec_dlp.lib.dlp_soap_client')
 
 class TestDLPSOAPClient():
 
-    def setup_method(self, method):
-        """ setup any state tied to the execution of the given method in a
-        class.  setup_method is invoked for every test method of a class.
-        """
+    @pytest.fixture()
+    def setup_dlp_client(self):
         opts = AppArgumentParser(
             config_file=resilient.get_config_file()).parse_args("", None)
-        self.client = DLPSoapClient(
+        return DLPSoapClient(
             app_configs=opts.get("fn_symantec_dlp", {}))
 
     def teardown_method(self, method):
@@ -60,9 +58,10 @@ class TestDLPSOAPClient():
             DLPSoapClient.class_vars_loaded = False
 
     @pytest.mark.livetest
-    def test_incident_list_soap_call(cls):
-        assert cls.client.class_vars_loaded
-        assert cls.client.is_connected
+    def test_incident_list_soap_call(cls, setup_dlp_client):
+        client = setup_dlp_client
+        assert client.class_vars_loaded
+        assert client.is_connected
         # Mock Data
         mock_resp = """<?xml version="1.0" ?>
                      <S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
@@ -82,10 +81,10 @@ class TestDLPSOAPClient():
 
         with requests_mock.Mocker() as m:
             mock_url = "{host_url}ProtectManager/services/v2011/incidents".format(
-                host_url=cls.client.host)
+                host_url=client.host)
             m.post(mock_url, text=mock_resp)
 
-            resp = cls.client.incident_list(
+            resp = client.incident_list(
                 saved_report_id=121, incident_creation_date_later_than='2019-07-20')
 
             assert resp is not None
