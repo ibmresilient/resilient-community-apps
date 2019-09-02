@@ -9,18 +9,7 @@ import pytest
 
 class TestDLPListener():
 
-    @classmethod
-    def setup_class(self):
-        """ setup any state specific to the execution of the given class (which
-        usually contains tests).
-        """
-
-        parser = resilient.ArgumentParser(
-            config_file=resilient.get_config_file())
-
-        opts = parser.parse_args(args="")
-        print(opts)
-
+   
     @pytest.mark.parametrize("dlp_host", [
         ("my-soc-instance.acme.com"),
         ("dlp-installation.soc.company.com")
@@ -34,3 +23,18 @@ class TestDLPListener():
         assert url is not None
         assert "ProtectManager" in url
         assert dlp_host in url
+
+    @pytest.mark.parametrize("dlp_severity", [
+        ("high"),
+        ("medium"),
+        ('low'),
+        ('unknown')
+    ])
+    def test_build_dlp_url(self, dlp_severity):
+        function_params = {
+            "dlp_severity": dlp_severity
+        }
+
+        severity = DLPListener.return_res_severity(dlp_severity=dlp_severity)
+        assert severity is not None
+        assert severity.lower() == dlp_severity or severity == "Low"
