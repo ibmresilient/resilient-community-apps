@@ -59,6 +59,7 @@ class TestDLPSOAPClient():
             # Modify the class and set vars loaded to false so the next test can load new ones
             DLPSoapClient.class_vars_loaded = False
 
+    @pytest.mark.livetest
     def test_incident_list_soap_call(cls):
         assert cls.client.class_vars_loaded
         assert cls.client.is_connected
