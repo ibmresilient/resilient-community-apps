@@ -12,7 +12,7 @@ from resilient_circuits import ResilientComponent, template_functions
 from zeep.helpers import serialize_object
 
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
-from resilient_lib import build_incident_url, build_resilient_url
+from resilient_lib import build_incident_url, build_resilient_url, str_to_bool
 
 log = logging.getLogger(__name__)
 
@@ -26,7 +26,9 @@ class DLPListener(ResilientComponent):
         super(DLPListener, self).__init__(opts)
         # A SOAP Client to interface with DLP Incident and Reporting API
         self.soap_client = DLPSoapClient(app_configs=opts.get("fn_symantec_dlp", {}))
-
+        self.should_search_res = str_to_bool(opts.get(
+            "fn_symantec_dlp", {}).get(
+                "sdlp_should_search_res"))
         # A REST Client to interface with Resilient
         self.res_rest_client = ResilientComponent.rest_client(self)
         self.add_filters_to_jinja(self)
@@ -55,21 +57,21 @@ class DLPListener(ResilientComponent):
 
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
-            #if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
-            # There is no resilient incident with the given DLP Incident ID
-            # Create the incident
-            log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
+            if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
+                # There is no resilient incident with the given DLP Incident ID
+                # Create the incident
+                log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
 
-            payload = self.prepare_incident_dto(incident, notes_to_be_added=self.gather_incident_notes(incident))
-            
-            # Create the Incident
-            new_incident = self.res_rest_client.post('/incidents', json.loads(payload, strict=False))
-            log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
+                payload = self.prepare_incident_dto(incident, notes_to_be_added=self.gather_incident_notes(incident))
+                
+                # Create the Incident
+                new_incident = self.res_rest_client.post('/incidents', json.loads(payload, strict=False))
+                log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
 
-            self.upload_dlp_binaries(incident, new_incident['id'])
-            self.submit_summary_note(payload, incident, new_incident['id'])
+                self.upload_dlp_binaries(incident, new_incident['id'])
+                self.submit_summary_note(payload, incident, new_incident['id'])
 
-            self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+                self.send_res_id_to_dlp(new_incident, incident['incidentId'])
         log.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
@@ -242,6 +244,9 @@ class DLPListener(ResilientComponent):
         :return: returns a results object of results, in the code we perform a truth value check to determine if this function returned successfuly
         :rtype: list of results
         """
+        # If should_search_res app.config is false or undefined; return false so incident is created without searching res
+        if not self.should_search_res:
+            return False
         # For each incident; Take in Incident ID's and check if theres an existing resilient incident
         search_ex_dto = {
             "org_id": self.res_rest_client.org_id,

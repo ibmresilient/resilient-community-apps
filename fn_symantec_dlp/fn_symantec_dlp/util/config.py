@@ -29,5 +29,9 @@ def config_section_data():
     sdlp_listener_timer=600
     # The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail
     sdlp_savedreportid=0
+    # An optional app.config that, if set to True will perform an additional filter on DLP Incident results 
+    # to ensure no Resilient incident exists with the same DLP Incident ID. 
+    # Uses search_ex to query for incidents with an sdlp_incident_id custom field 
+    sdlp_should_search_res=False
     """
     return config_data
