@@ -1,0 +1,7 @@
+include README.md
+include fn_ioc_parser_v2/util/*
+include fn_ioc_parser_v2/LICENSE
+include doc/*.md
+include doc/*.docx
+include doc/*.pdf
+include doc/screenshots/*

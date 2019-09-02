@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Resilient functions component to run a Bigfix Query against a Bigfix server for an artifact to determine
 if are hits on any of the BigFix endpoints"""
@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_artifact")
 
-            yield StatusMessage("Running BigFix Query for Artifact id {0}, with value {1} ..."
+            yield StatusMessage(u"Running BigFix Query for Artifact id {0}, with value {1} ..."
                                 .format(params["artifact_id"], params["artifact_value"] ))
             bigfix_client = BigFixClient(self.options)
 
@@ -131,15 +131,15 @@ class FunctionComponent(ResilientComponent):
                                         .format(params["artifact_id"], params["artifact_value"],
                                                 params["artifact_type"]))
                     results = {}
-                elif len(hits) > int(self.options.get("hunt_results_limit", "200")):
+                elif len(hits) > int(self.options.get("bigfix_hunt_results_limit", "200")):
                     yield StatusMessage("Adding artifact data as an incident attachment")
                     # Define file name and content to add as an attachment
-                    file_name = "query_for_artifact_{0}_{1}_{2}.txt" \
+                    file_name = u"query_for_artifact_{0}_{1}_{2}.txt" \
                         .format(params["artifact_id"], params["artifact_type"],
                                 datetime.datetime.today().strftime('%Y%m%d'))
-                    file_content = ""
+                    file_content = u""
                     for data in hits:
-                        file_content += "Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
+                        file_content += u"Resource ID: {0}. Resource Name: {1}. Artifact value: {2}. Artifact Type: {3} \n" \
                             .format(data["computer_id"], data["computer_name"], params["artifact_value"],
                                     params["artifact_type"])
                     # Create an attachment
