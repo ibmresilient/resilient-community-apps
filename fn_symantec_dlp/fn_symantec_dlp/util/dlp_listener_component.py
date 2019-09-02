@@ -12,6 +12,7 @@ from resilient_circuits import ResilientComponent, template_functions
 from zeep.helpers import serialize_object
 
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
+from resilient_lib import build_incident_url, build_resilient_url
 
 log = logging.getLogger(__name__)
 
@@ -27,7 +28,7 @@ class DLPListener(ResilientComponent):
         self.soap_client = DLPSoapClient(app_configs=opts.get("fn_symantec_dlp", {}))
 
         # A REST Client to interface with Resilient
-        self.res_rest_client = self.rest_client()
+        self.res_rest_client = ResilientComponent.rest_client(self)
         self.add_filters_to_jinja(self)
 
     def start_poller(self):
@@ -54,22 +55,22 @@ class DLPListener(ResilientComponent):
 
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
-            if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
-                # There is no resilient incident with the given DLP Incident ID
-                # Create the incident
-                log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
+            #if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
+            # There is no resilient incident with the given DLP Incident ID
+            # Create the incident
+            log.info("Found no Resilient Incident with given DLP Incident ID %d, creating an incident.", incident['incidentId'])
 
-                payload = self.prepare_incident_dto(incident, notes_to_be_added=self.gather_incident_notes(incident))
-                log.debug("Creating Incident")
-                
-                # Create the Incident
-                new_incident = self.res_rest_client.post('/incidents', json.loads(payload, strict=False))
-                log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
+            payload = self.prepare_incident_dto(incident, notes_to_be_added=self.gather_incident_notes(incident))
+            
+            # Create the Incident
+            new_incident = self.res_rest_client.post('/incidents', json.loads(payload, strict=False))
+            log.info("Created new Resilient Incident with ID %d for DLP Incident with ID %d", new_incident['id'], incident['incidentId'])
 
-                self.upload_dlp_binaries(incident, new_incident['id'])
-                self.submit_summary_note(payload, incident, new_incident['id'])
+            self.upload_dlp_binaries(incident, new_incident['id'])
+            self.submit_summary_note(payload, incident, new_incident['id'])
 
-                self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+            self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+        log.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
         """send_res_id_to_dlp takes a newly created incident from Resilient and attempts to send its Incident ID to the corressponding DLP Incident
@@ -78,6 +79,9 @@ class DLPListener(ResilientComponent):
         :param new_incident: Resilient Incident
         :type new_incident: dict
         """
+
+        resilient_incident_url = build_incident_url(
+            url=build_resilient_url(self.opts.get('host'), self.opts.get('port')),incidentId=new_incident['id'])
         headers = {'content-type': 'text/xml'}
         body = """<?xml version="1.0" encoding="UTF-8"?>
                         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
@@ -96,13 +100,24 @@ class DLPListener(ResilientComponent):
                                         <!--Optional:-->
                                         <sch1:value>{resilient_id}</sch1:value>
                                     </customAttribute>
+                                    <customAttribute>
+                                        <sch1:name>resilient_incident_url</sch1:name>
+                                        <!--Optional:-->
+                                        <sch1:value>{resilient_url}</sch1:value>
+                                    </customAttribute>
                                     </incidentAttributes>
                                 </updateBatch>
                             </sch:incidentUpdateRequest>
                         </soapenv:Body>
-                        </soapenv:Envelope>""".format(batch="_{}".format(uuid.uuid4()), resilient_id=new_incident['id'], dlp_id=dlp_incident_id)
+                        </soapenv:Envelope>""".format(
+                            batch="_{}".format(uuid.uuid4()), 
+                            resilient_id=new_incident['id'], 
+                            dlp_id=dlp_incident_id, 
+                            resilient_url=resilient_incident_url)
+
         response = DLPSoapClient.session.post(DLPSoapClient.sdlp_incident_endpoint,
                                               data=body, headers=headers)
+
         response.raise_for_status()
         log.info("Sent new Resilient Incident ID back to the original DLP Incident as a custom attribute")
 
@@ -155,8 +170,18 @@ class DLPListener(ResilientComponent):
                                "event_date": incident['incident']['eventDate'],
                                "notes": notes_to_be_added,
                                "detection_date": incident['incident']['detectionDate'],
-                               "severity": self.return_res_severity(incident['incident']['severity'])}})
+                               "severity": self.return_res_severity(incident['incident']['severity']),
+                               "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], 
+                               host=self.soap_client.host)}})
         return payload
+
+    @staticmethod
+    def build_dlp_url(incidentid, host):
+        
+        return "{host}/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id&value(operator_1)=incident.id_in&value(operand_1)={incidentId}".format(
+            host=host, incidentId=incidentid)
+
+
 
     def gather_incident_notes(self, incident):
         # Gather Incident Notes
@@ -164,7 +189,9 @@ class DLPListener(ResilientComponent):
         for historyItem in incident['incident']['incidentHistory']:
             if historyItem['actionType']['_value_1'] == "Note Added":
                 # Convert Date to a UTC time stamp for visual purposes
-                historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
+                if isinstance(historyItem['date'],datetime.datetime):
+                    historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
+                #historyItem['date'] = historyItem['date'].strftime('%Y-%M-%dT%H:%M:%SZ')
                 notes_to_be_added.append(u"""<b>Note gathered from Symantec DLP Incident</b>
                         <br>
                         <b>Event Time: </b><p>{time}</p>
@@ -284,7 +311,7 @@ class DLPListener(ResilientComponent):
             blocked_status=incident['incident']['blockedStatus'],
             user_justification=incident['incident']['userJustification'],
             detection_server=incident['incident']['detectionServer'],
-            num_of_artifacts=len(json.loads(payload)["artifacts"]),
+            num_of_artifacts=len(json.loads(payload, strict=False)["artifacts"]),
             num_of_notes=len(self.gather_incident_notes(incident))
         )
     
