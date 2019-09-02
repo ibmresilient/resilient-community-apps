@@ -53,7 +53,8 @@ class FunctionComponent(ResilientComponent):
             # Create a thread which targets the observers run function
             # N.B note the lack of parentheses on the target function
             self.res_daemon_thread = threading.Thread(
-                target=self.dlp_listener.start_poller)
+                target=self.dlp_listener.start_poller,
+                name="Symantec DLP Listener Component")
             # Make the thread a daemon (background)
             self.res_daemon_thread.daemon = True
             # Start daemon thread in bg so rest of resilient-circuits is not blocked

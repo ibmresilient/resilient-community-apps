@@ -111,7 +111,8 @@ class DLPSoapClient():
             # Put the traceback into DEBUG 
             log.debug(traceback.format_exc())
             # Log the Connection error to the user
-            log.error(u"[Symantec DLP] Encounted an exception when setting up the SOAP Client, Problem: %s", repr(e))
+            log.error(u"[Symantec DLP] Encounted an exception when setting up the SOAP Client")
+            log.error(u"Problem: %s", repr(e))
         else: # No connection error, client is setup with the URL. Allow the poller to be setup
             cls.is_connected = True
         cls.class_vars_loaded = True

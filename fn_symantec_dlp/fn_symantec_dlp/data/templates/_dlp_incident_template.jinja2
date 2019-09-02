@@ -7,7 +7,8 @@
     "severity_code": "{{incident.severity}}",
     {%- if incident.get('event_date', False) -%} "start_date": {{dt_to_milli_epoch(incident.event_date)}}, {%-endif -%}
     "properties": {
-        "sdlp_incident_id": {{incident.incidentId}}
+        "sdlp_incident_id": {{incident.incidentId}},
+        "sdlp_incident_url": {"format" : "html", "content" : "<a href={{incident.dlp_incident_url}}>{{incident.dlp_incident_url}}</a>"}
     },
     "artifacts": [
         {%- if incident.incident.get('machineIP', False) -%}
