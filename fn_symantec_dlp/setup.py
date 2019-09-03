@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
@@ -22,10 +23,10 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_symantec_dlp'",
-    long_description="Resilient Circuits Components for 'fn_symantec_dlp'",
+    author_email='support@resilientsystems.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
+    description="Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient",
+    long_description="Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient.",
     install_requires=[
         'resilient_circuits>=30.0.0',
         'resilient-lib>=32.0.140',

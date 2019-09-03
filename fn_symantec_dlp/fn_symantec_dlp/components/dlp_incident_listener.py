@@ -19,7 +19,7 @@ from fn_symantec_dlp.util.dlp_listener_component import DLPListener
 
 
 LOG = logging.getLogger(__name__)
-
+DEFAULT_POLLING_INTERVAL = 600
 class FunctionComponent(ResilientComponent):
     """Component that sets up a Listener to Poll DLP for Incidents, which are then added to Resilient"""
 
@@ -35,22 +35,24 @@ class FunctionComponent(ResilientComponent):
             LOG.info("Running within a test environment. Not starting listener")
         else:
             # The dlp_listener_toggle will determine whether the Poller will run
-            if str_to_bool(self.options.get("sdlp_listener_toggle", None)):
+            if str_to_bool(self.options.get("sdlp_should_poller_run", None)):
                 if self.dlp_listener.soap_client.is_connected:
                     self.setup_listener()
 
                     # Use a circuits timer to fire off an event every N seconds.
                     #     When the event is fired, a function with the decorator @handler(name_of_event)
                     #     will be used to handle the event and perform some task
-                    LOG.debug(u"DLP Polling interval will be %s seconds", self.options.get("sdlp_listener_timer", 600))
-                    Timer(interval=int(self.options.get("sdlp_listener_timer", 600)),
+                    polling_interval = int(self.options.get("sdlp_listener_timer", DEFAULT_POLLING_INTERVAL))
+                    LOG.debug(u"DLP Polling interval will be %s seconds", polling_interval)
+                    
+                    Timer(interval=polling_interval,
                           event=Event.create("DLPListenerPollingEvent"),
                           persist=True).register(self)
 
     def setup_listener(self):
         """setup_listener Start our consumer, which will attempt a connection to DLP
         """
-        LOG.debug("Now spawning a new daemon thread that DLP Listener will run inside of")
+        LOG.info("Now spawning a new daemon thread that DLP Listener will run inside of")
 
         try:
             # Create a thread which targets the observers run function
@@ -72,7 +74,7 @@ class FunctionComponent(ResilientComponent):
         """dlp_thread_start function which checks if the current thread is still running.
         If not setup and new one and Poll DLP for Incidents
         """
-        LOG.info("DLP Listener initiated.!")
+        LOG.info("DLP Listener Polling Event received. Checking if any previous thread is still alive")
 
         # If the poller is not already running
         if self.res_daemon_thread.is_alive():

@@ -12,7 +12,7 @@ def config_section_data():
     """
     config_data = u"""[fn_symantec_dlp]
     # Whether or not to start the listener
-    sdlp_listener_toggle=True
+    sdlp_should_poller_run=True
     # The URL or the DLP Installation
     sdlp_host=https://<serverip>:<port>
     # The location of your WSDL file used to construct requests when dealing with the Incident and Reporting API
