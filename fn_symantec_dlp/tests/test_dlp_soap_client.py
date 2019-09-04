@@ -16,13 +16,33 @@ logger = logging.getLogger('fn_symantec_dlp.lib.dlp_soap_client')
 
 
 class TestDLPSOAPClient():
+    """TestDLPSOAPClient class used to test the SOAP client
+    Contains:
+    Pytest Fixtures for setting up a Mocked or Live Client
+
+    Lifecycle methods
+
+    Tests
+    """
 
     @pytest.fixture()
-    def setup_dlp_client(self):
+    def setup_live_dlp_client(self):
         opts = AppArgumentParser(
             config_file=resilient.get_config_file()).parse_args("", None)
         return DLPSoapClient(
             app_configs=opts.get("fn_symantec_dlp", {}))
+
+    @pytest.fixture()
+    @mock.patch('zeep.Client')
+    def setup_mocked_dlp_connection(self, MockedZeep):
+            return DLPSoapClient(app_configs={
+                "sdlp_wsdl": "https://localhost:8443/",
+                "sdlp_host": "https://localhost:8443/",
+                "sdlp_username": "admin",
+                "sdlp_password": "admin",
+                "sdlp_savedreportid": 111,
+                "sdlp_incident_endpoint": "urls"
+            })
 
     def teardown_method(self, method):
         """ teardown any state that was previously setup with a setup_method
@@ -30,7 +50,14 @@ class TestDLPSOAPClient():
         """
         DLPSoapClient.class_vars_loaded = False
 
-    def test_exception_is_thrown(cls):
+
+    def test_mocked_client_connection(self, setup_mocked_dlp_connection):
+        client = setup_mocked_dlp_connection
+        assert client.is_connected
+        assert client.class_vars_loaded
+
+
+    def test_exception_is_thrown(self):
         """ 
      test_exception_is_thrown; Used to ensure if we pass in some bad values an exception is raised
       and our desired error message is printed once
@@ -40,9 +67,9 @@ class TestDLPSOAPClient():
         # The setup_method will instantiate a DLPSoapClient
         if DLPSoapClient.class_vars_loaded:
             DLPSoapClient.class_vars_loaded = False
-        with mock.patch.object(logger, 'error') as mock_debug:
+        with mock.patch('fn_symantec_dlp.lib.dlp_soap_client.LOG') as mock_debug:
             print(mock_debug)
-            cls.dummy_client = DLPSoapClient(app_configs={
+            self.dummy_client = DLPSoapClient(app_configs={
                 "sdlp_wsdl": "https://localhost:8443/",
                 "sdlp_host": "https://localhost:8443/",
                 "sdlp_username": "admin",
@@ -51,15 +78,17 @@ class TestDLPSOAPClient():
                 "sdlp_incident_endpoint": "urls"
             })
 
-            assert bool(mock_debug.called)
-            mock_debug.assert_any_call(
-                u"[Symantec DLP] Encounted an exception when setting up the SOAP Client")
+            assert bool(mock_debug.error.called)
+            mock_debug.error.assert_called_with(
+                "[Symantec DLP] Encountered an exception when setting up the SOAP Client"
+                )
             # Modify the class and set vars loaded to false so the next test can load new ones
             DLPSoapClient.class_vars_loaded = False
 
+     
     @pytest.mark.livetest
-    def test_incident_list_soap_call(cls, setup_dlp_client):
-        client = setup_dlp_client
+    def test_incident_list_soap_call(self, setup_live_dlp_client):
+        client = setup_live_dlp_client
         assert client.class_vars_loaded
         assert client.is_connected
         # Mock Data

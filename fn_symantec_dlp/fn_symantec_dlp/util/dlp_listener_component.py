@@ -11,8 +11,10 @@ import tempfile
 import json
 import datetime
 import uuid
+import traceback
+import shutil
 from resilient_circuits import ResilientComponent, template_functions
-from resilient_lib import build_incident_url, build_resilient_url, str_to_bool
+from resilient_lib import build_incident_url, build_resilient_url, str_to_bool, write_to_tmp_file
 
 from zeep.helpers import serialize_object
 
@@ -22,19 +24,19 @@ LOG = logging.getLogger(__name__)
 
 
 class DLPListener(ResilientComponent):
-    """DLPListener class which is used to Poll DLP and listen as new Incidents come occur.
+    """DLPListener class which is used to Poll DLP for Incidents and then import them into Resilient.
     The DLP Listener is instantiated once and for each subsequent poll the start_poller function is targeted.
     """
 
     def __init__(self, opts):
         super(DLPListener, self).__init__(opts)
         # A SOAP Client to interface with DLP Incident and Reporting API
-        self.soap_client = DLPSoapClient(app_configs=opts.get("fn_symantec_dlp", {}))
-        self.should_search_res = str_to_bool(opts.get(
-            "fn_symantec_dlp", {}).get(
-                "sdlp_should_search_res"))
+        self.dlp_opts = opts.get("fn_symantec_dlp", {})
+        self.soap_client = DLPSoapClient(app_configs=self.dlp_opts)
+        self.should_search_res = str_to_bool(self.dlp_opts.get("sdlp_should_search_res"))
         # A REST Client to interface with Resilient
         self.res_rest_client = ResilientComponent.rest_client(self)
+        self.default_artifact_type_id = 16 # When uploading DLP Binaries as attachments, they will be uploaded at 'Other File'
         DLPListener.add_filters_to_jinja()
 
     def start_poller(self):
@@ -131,31 +133,37 @@ class DLPListener(ResilientComponent):
 
     def upload_dlp_binaries(self, incident, res_incident_id):
         """upload_dlp_binaries takes an incident and a resilient incident ID and then attempts to query DLP for any incident_binaries
-        Any returning binaries are then sent to Resilient as an Attachment, retaining its name and extension type.
+        Any returning binaries are then sent to Resilient as an Artifact, retaining its name and extension type.
         
         :param incident: DLP Incident
         :type incident: Zeep object
-        :param res_incident_id: A Resilient Incident ID to send the attachments too 
+        :param res_incident_id: A Resilient Incident ID to send the Artifacts too 
         :type res_incident_id: int
         """
         # Upload remaining parts such as the Attachments
-        binaries = self.soap_client.incident_binaries(incident_id=incident['incidentId'], include_original_message=False,
-                                                      include_all_components='?')
+        binaries = self.soap_client.incident_binaries(incident_id=incident['incidentId'], include_original_message=False)
         if binaries:
             for component in binaries['Component']:
                 try:
-                    with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_upload_file:
-                        temp_upload_file.write(component['content'])
+                    path_tmp_file, path_tmp_dir = write_to_tmp_file(component['content'])
+                    
+                    artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
+                    self.res_rest_client.post_artifact_file(artifact_uri,
+                                                            self.default_artifact_type_id,
+                                                            path_tmp_file,
+                                                            value=component['name'],
+                                                            description="Binary File imported from Symantec DLP")
 
-                        temp_upload_file.close()
-                        artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
-                        self.res_rest_client.post_artifact_file(artifact_uri,
-                                                                16,
-                                                                temp_upload_file.name,
-                                                                value=component['name'],
-                                                                description="Binary File imported from Symantec DLP")
+                except Exception as upload_ex:
+                    LOG.debug(traceback.format_exc())
+                    # Log the Connection error to the user
+                    LOG.error(u"Problem: %s", repr(upload_ex))
+                    LOG.error(u"[Symantec DLP] Encountered an exception when uploading a Binary to Resilient.")
+    
                 finally:
-                    os.unlink(temp_upload_file.name)
+                    # Clean up the tmp_file 
+                    if path_tmp_dir and os.path.isdir(path_tmp_dir):
+                        shutil.rmtree(path_tmp_dir)
 
     def prepare_incident_dto(self, incident, notes_to_be_added):
         """prepare_incident_dto uses a Jinja template located in the data/templates directory and prepares an incident DTO.
@@ -201,8 +209,8 @@ class DLPListener(ResilientComponent):
         """gather_incident_notes helper function used to extract all Notes from the DLP Incident
         Searches the IncidentHistory object for items of type "Note Added" and extracts these.
         
-        :param incidentid: the DLP Incident
-        :type incidentid: dict
+        :param incident: the DLP Incident
+        :type incident: dict or Zeep object
         """
 
 
@@ -250,7 +258,9 @@ class DLPListener(ResilientComponent):
         
         
         :param incidents: A number of incidents which did not have a resilient_incidentid customAttribute set
-        :type incidents: generator
+        :type incidents: dict or Zeep Object
+        :return: returns a generator of all the matching incidents which can then be cast to an iterable 
+        :rtype: generator
         """
         for incident in incidents:
             if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
@@ -258,7 +268,7 @@ class DLPListener(ResilientComponent):
                     if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
                         for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
                             # If the attribute is the resilient one and has no value
-                            if attribute.name == "resilient_incidentid" and attribute.value is None:
+                            if attribute.name == "resilient_incident_id" and attribute.value is None:
                                 yield incident
 
     def does_incident_exist_in_res(self, sdlp_id_type, sdlp_incident_id):
@@ -274,7 +284,7 @@ class DLPListener(ResilientComponent):
         # If should_search_res app.config is false or undefined; return false so incident is created without searching res
         if not self.should_search_res:
             return False
-        # For each incident; Take in Incident ID's and check if theres an existing resilient incident
+        # For a given Incident; Take in Incident's ID and check if theres an existing resilient incident
         search_ex_dto = {
             "org_id": self.res_rest_client.org_id,
             "query": u"incident.{}.{}: {}".format(sdlp_id_type['id'], sdlp_id_type['name'], sdlp_incident_id),
@@ -338,6 +348,7 @@ class DLPListener(ResilientComponent):
             return int((naive - epoch).total_seconds() * 1000.0)
         except Exception as e:
             LOG.debug("Encountered exception when converting datetime to an epoch; Error %s", e)
+            return 0
 
     def prepare_incident_summary_note(self, incident, payload):
         """prepare_incident_summary_note is used to prepare a final summary note for the incident

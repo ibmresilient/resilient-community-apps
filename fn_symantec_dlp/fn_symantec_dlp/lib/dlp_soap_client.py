@@ -8,7 +8,7 @@ import traceback
 import zeep
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
-
+from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
@@ -72,40 +72,31 @@ class DLPSoapClient():
         :type app_configs: dict
         """
         cls.is_connected = False # Set is_connected to false initially
+        # TODO: Look up validate_fields instead of this 
 
-        cls.host = cls.get_config_option(app_configs=app_configs,
-                                         option_name="sdlp_host",
-                                         optional=False)
-        cls.wsdl = cls.get_config_option(app_configs=app_configs,
-                                         option_name="sdlp_wsdl",
-                                         optional=False)
+        validate_fields(['sdlp_host', 'sdlp_wsdl', 'sdlp_username', 'sdlp_password', 'sdlp_savedreportid', 'sdlp_incident_endpoint'], kwargs=app_configs)
+
+        LOG.debug("Validated Mandatory app.configs for DLPSoapClient")
+
+        cls.host = app_configs.get('sdlp_host')
+        cls.wsdl = app_configs.get('sdlp_wsdl')
         # Gather the DLP User Name
-        cls.dlp_username = cls.get_config_option(app_configs=app_configs,
-                                                 option_name="sdlp_username",
-                                                 optional=False)
+        cls.dlp_username = app_configs.get('sdlp_username')
         # Gather the DLP User Password
-        cls.dlp_password = cls.get_config_option(app_configs=app_configs,
-                                                 option_name="sdlp_password",
-                                                 optional=False)
+        cls.dlp_password = app_configs.get('sdlp_password')
 
         # Gather the DLP Cert
-        cls.dlp_cert = cls.get_config_option(app_configs=app_configs,
-                                             option_name="sdlp_cafile",
-                                             optional=True)
+        cls.dlp_cert = app_configs.get('sdlp_cafile', False)
 
         # Gather the DLP Saved Report ID
-        cls.dlp_saved_report_id = cls.get_config_option(app_configs=app_configs,
-                                                        option_name="sdlp_savedreportid",
-                                                        optional=False)
+        cls.dlp_saved_report_id = app_configs.get('sdlp_savedreportid')
 
         # Gather the DLP Incident Endpoint
-        cls.sdlp_incident_endpoint = cls.get_config_option(app_configs=app_configs,
-                                                           option_name="sdlp_incident_endpoint",
-                                                           optional=False)
+        cls.sdlp_incident_endpoint = app_configs.get('sdlp_incident_endpoint')
 
         cls.session = Session()
         # Use DLP Cert if provided or if None, set verify to false
-        cls.session.verify = cls.dlp_cert or False
+        cls.session.verify = cls.dlp_cert
         cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
         # Setup Transport with our credentials
@@ -117,8 +108,9 @@ class DLPSoapClient():
             # Put the traceback into DEBUG
             LOG.debug(traceback.format_exc())
             # Log the Connection error to the user
-            LOG.error(u"[Symantec DLP] Encountered an exception when setting up the SOAP Client")
             LOG.error(u"Problem: %s", repr(caught_exc))
+            LOG.error(u"[Symantec DLP] Encountered an exception when setting up the SOAP Client")
+            
         else: # No connection error, client is setup with the URL. Allow the poller to be setup
             cls.is_connected = True
         cls.class_vars_loaded = True
@@ -155,7 +147,7 @@ class DLPSoapClient():
         """incident_list API Call to gather a list of incidents from a saved report.
 
         :param saved_report_id: the ID of a saved report,
-        if not provided no incidents will be found, defaults to 0
+        defaults to 0 which means if not provided no incidents will be found, 
         :type saved_report_id: int, optional
         :param incident_creation_date_later_than: Only incidents that were created after the incidentCreationDateLaterThan date will be returned, defaults to datetime.datetime.now()
         :type incident_creation_date_later_than: datetime, required
@@ -194,7 +186,8 @@ class DLPSoapClient():
         :type incident_id: [type], optional
         :param include_original_message:  defaults to False
         :type include_original_message: bool, optional
-        :param include_all_components: defaults to '?'
+        :param include_all_components: optional element which indicates whether the Web Service should include all message components
+        defaults to '?'
         :type include_all_components: str, optional
         """
         binaries = cls.soap_client.service.incidentBinaries(
