@@ -48,8 +48,6 @@ class FunctionComponent(ResilientComponent):
             techniques = mitre_attack.MitreAttackTechnique.get(mitre_conn, name=mitre_technique_name,
                                                                id=mitre_technique_id)
 
-            log.warning(techniques)
-
             if techniques is None or not len(techniques):
                 raise ValueError(
                     "Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
@@ -69,7 +67,6 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "mitre_techniques": techs
             }
-            logging.warning(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:

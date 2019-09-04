@@ -50,7 +50,6 @@ class FunctionComponent(ResilientComponent):
             results = {
                 "mitre_tactics": tactics
             }
-            logging.warning(results)
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
