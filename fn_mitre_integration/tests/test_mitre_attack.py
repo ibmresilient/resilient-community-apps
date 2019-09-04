@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """
 Note that the mitre_attack class encapsulates the
@@ -25,8 +26,6 @@ def url_get(url):
     except:
         ret = False
     return ret
-
-
 
 
 class TestMitreTactic(object):

@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+
 class MitreQueryMocker(object):
     """
     Whole class exists to patch MitreAttackConnection's query to return data from saved data.
