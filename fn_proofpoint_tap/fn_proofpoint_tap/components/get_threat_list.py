@@ -7,6 +7,7 @@ import requests
 import json
 import logging
 from requests.auth import HTTPBasicAuth
+from six import string_types
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -21,7 +22,8 @@ def get_threat_list(options, lastupdate, bundle):
     password = options['password']
     basic_auth = HTTPBasicAuth(username, password)
     url = '{0}/siem/all?format=JSON'.format(base_url)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
-    if type(lastupdate) is str:
+
+    if isinstance(lastupdate, string_types):
         url += '&sinceTime={}'.format(lastupdate)
     else:
         if lastupdate is None:
@@ -55,7 +57,7 @@ def get_threat_list(options, lastupdate, bundle):
             try:
                 custom_error_content = json.loads(err.response.content)
             except JSONDecodeError:
-                return {'error': 'JSON decode error {}'.format(err)}
+                 return {'error': 'JSON decode error {}'.format(err)}
             return custom_error_content
         return {'error': 'HTTP error {}'.format(err)}
 
