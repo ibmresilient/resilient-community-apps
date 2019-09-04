@@ -28,6 +28,7 @@ setup(
             "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mitre_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_mitre_integration.util.selftest:selftest_function"]
     }
 )
