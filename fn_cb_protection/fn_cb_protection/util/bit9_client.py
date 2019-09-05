@@ -3,6 +3,7 @@
 
 """CbProtection (aka bit9) API client"""
 
+import sys
 import json
 import requests
 import logging
@@ -145,6 +146,9 @@ class CbProtectClient(object):
             response.raise_for_status()
 
         except requests.HTTPError as err:
-            # add content to the error message
-            new_msg = u"{} {}".format(err.message, response.content)
-            raise requests.HTTPError(new_msg)
+            if sys.version_info[0] < 3:
+                # add content to the error message
+                new_msg = u"{} {}".format(err.message, response.content)
+                raise requests.HTTPError(new_msg)
+            else:
+                raise requests.HTTPError(err)
