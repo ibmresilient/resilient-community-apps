@@ -13,11 +13,14 @@ import requests
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult
 from fn_proofpoint_tap.util.helpers import get_config_option
+from pkg_resources import Requirement, resource_filename
 import fn_proofpoint_tap.util.selftest as selftest
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
+
+log = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
@@ -26,12 +29,10 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+
         self.options = opts.get("fn_proofpoint_tap", {})
         current_path = os.path.dirname(os.path.realpath(__file__))
-        default_path = os.path.join(current_path, os.path.pardir, "data/templates/pp_threat_forensics.jinja")
-        forensics_path = self.options.get("forensics_template", default_path)
-        with open(forensics_path) as forensics_file:
-            self.forensics_template = forensics_file.read()
+        self.default_path = os.path.join(current_path, os.path.pardir, "data/templates/pp_threat_forensics.jinja")
         selftest.selftest_function(opts)
 
     @handler("reload")
@@ -49,7 +50,6 @@ class FunctionComponent(ResilientComponent):
         aggregate_flag = kwargs.get('proofpoint_aggregate_flag')
         malicious_flag = kwargs.get('proofpoint_malicious_flag')
 
-        log = logging.getLogger(__name__)
         log.info('incident_id: {}'.format(incident_id))
         log.info('proofpoint_campaign_id: {}'.format(campaign_id))
         log.info('proofpoint_threat_id: {}'.format(threat_id))
@@ -130,6 +130,9 @@ class FunctionComponent(ResilientComponent):
                             continue
                         try:
                             yield StatusMessage('forensic data {}'.format(json.dumps(forensic, indent=2)))
+                            # load the forensics jinja template
+                            self._parse_opts()
+                            # render it
                             data.append(template_functions.render(self.forensics_template, forensic))
                             yield StatusMessage('now data {}'.format(data))
 
@@ -171,3 +174,24 @@ class FunctionComponent(ResilientComponent):
         yield StatusMessage("done...")
         # Produce a FunctionResult with the results
         yield FunctionResult(results)
+
+    def _parse_opts(self):
+        """
+        Open jinja template file.
+        :return:
+        """
+        forensics_path = self.options.get("forensics_template", self.default_path)
+        if forensics_path and not os.path.exists(forensics_path):
+            log.warn(u"Template file '%s' not found.", forensics_path)
+            forensics_path = None
+        if not forensics_path:
+            # Use the template file installed by this package
+            forensics_path = resource_filename(Requirement("fn-proofpoint_tap"),
+                                               "fn_proofpoint_tap/data/templates/pp_threat_forensics.jinja")
+            if not os.path.exists(forensics_path):
+                raise Exception(u"Template file '{}' not found".format(forensics_path))
+
+        log.info(u"Template file: %s", forensics_path)
+        with open(forensics_path, "r") as forensics_file:
+            self.forensics_path = forensics_file.read()
+
