@@ -41,6 +41,9 @@ setup(
         "resilient.circuits.components": [
             "FnProofpointTrapGetIncidentDetailsFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_get_incident_details:FunctionComponent",
             "FnProofpointTrapGetListMembersFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_get_list_members:FunctionComponent",
+            "FnProofpointTrapAddMembersToListFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_add_members_to_list:FunctionComponent",
+            "FnProofpointTrapUpdateListMemberFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_update_list_member:FunctionComponent",
+            "FnProofpointTrapDeleteListMemberFunctionComponent = fn_proofpoint_trap.components.fn_proofpoint_trap_delete_list_member:FunctionComponent",
             "FnPptrIncidentPolling = fn_proofpoint_trap.components.fn_proofpoint_trap_polling:PPTRIncidentPolling"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_proofpoint_trap.util.config:config_section_data"],
