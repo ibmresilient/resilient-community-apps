@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """ Class for Resilient circuits Functions supporting REST API client for Proofpoint TRAP  """
 import logging
 import json
