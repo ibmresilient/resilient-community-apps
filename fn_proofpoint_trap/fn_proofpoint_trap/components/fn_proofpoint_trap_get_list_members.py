@@ -54,5 +54,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Symantec SEP.")
+            log.exception("Exception in Resilient Function for Proofpoint TRAP.")
             yield FunctionError()
