@@ -5,11 +5,12 @@
 import logging
 import json
 from datetime import datetime
-from resilient_lib import RequestsCommon
+from sys import version_info
 try:
     from urllib.parse import urljoin
 except:
     from urlparse import urljoin
+from resilient_lib import RequestsCommon
 
 LOG = logging.getLogger(__name__)
 
@@ -125,5 +126,10 @@ class PPTRClient(object):
             return r.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
-            return r.content
+            # Covert bypes to string fro python 3.
+            if version_info.major < 3:
+                return r.content
+            else:
+                return r.content.decode('utf-8')
+
         return r
