@@ -20,8 +20,6 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
     :param tactic_ids:      string of tactic ids separated by comma
     :return:                techniques
     """
-    if not tactic_names and not tactic_ids:
-        raise ValueError("Neither name nor id is provided for getting techniques.")
     mitre_conn = MitreAttackConnection()
 
     tactics = []

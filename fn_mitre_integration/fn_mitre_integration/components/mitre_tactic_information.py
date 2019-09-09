@@ -40,6 +40,9 @@ class FunctionComponent(ResilientComponent):
             log.info("mitre_tactic_id: %s", mitre_tactic_id)
             log.info("mitre_tactic_name: %s", mitre_tactic_name)
 
+            if not mitre_tactic_id and not mitre_tactic_name:
+                raise ValueError("Neither name nor id is provided for getting tactic information.")
+
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 

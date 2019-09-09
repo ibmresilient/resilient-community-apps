@@ -41,6 +41,9 @@ class FunctionComponent(ResilientComponent):
             log.info("mitre_technique_id: %s", mitre_technique_id)
             log.info("mitre_technique_mitigation_only: %s", mitre_technique_mitigation_only)
 
+            if not mitre_technique_name and not mitre_technique_id:
+                raise ValueError("Neither name nor id is provided for getting technique information.")
+
             yield StatusMessage("starting...")
             yield StatusMessage("querying MITRE STIX TAXII server. It might take several minutes...")
 
