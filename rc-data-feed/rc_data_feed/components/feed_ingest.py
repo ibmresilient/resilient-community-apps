@@ -95,6 +95,10 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
     """
     context = FeedContext(type_info, inc_id, rest_client_helper.inst_rest_client, is_deleted)
 
+    # make sure the incident has a org_name
+    if type_info.get_pretty_type_name() == 'incident':
+        payload['org_name'] = type_info.get_org_name(payload['org_id'])
+
     for feed_output in feed_outputs:
         # don't let a failure in one feed break all the rest
         try:
