@@ -89,5 +89,9 @@ queue=feed_data
 #sasl.kerberos.service.name=kafka
 #sasl.kerberos.principal=kafka/server.example.com
 
+#[file_feed]
+#class=FileFeed
+#directory=/path/to/feed_directory
+
 """
     return config_data
