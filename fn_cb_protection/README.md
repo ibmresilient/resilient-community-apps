@@ -67,7 +67,6 @@ CbProtect Update File Rule
 (Example) CbProtect Approve File Globally and Close Request
 (Example) CbProtect Approve File Locally and Close Request
 (Example) CbProtect Ban File Globally and Close Request
-(Example) CbProtect Delete File By Hash
 (Example) CbProtect Get Approval Request for Query Condition
 (Example) CbProtect Get File Catalog for Query Condition
 ```
