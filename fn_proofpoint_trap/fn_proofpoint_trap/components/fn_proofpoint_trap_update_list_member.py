@@ -4,7 +4,6 @@
 """Function implementation"""
 
 import logging
-import json
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields

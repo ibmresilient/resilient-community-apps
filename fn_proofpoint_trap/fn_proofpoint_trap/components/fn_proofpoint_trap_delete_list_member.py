@@ -4,7 +4,6 @@
 """Function implementation"""
 
 import logging
-import json
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -33,6 +32,7 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
             params = transform_kwargs(kwargs) if kwargs else {}
+
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:

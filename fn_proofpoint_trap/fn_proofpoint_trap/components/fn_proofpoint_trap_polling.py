@@ -462,16 +462,19 @@ class PPTRIncidentPolling(ResilientComponent):
                         if len(self._find_resilient_incident_for_req(incident['id'],custom_fields[0])) == 0:
                             # Assemble Data table for incident
                             i_table = self.make_data_table(incident['events'])
-                            # Create Incident Name for querying
-                            i_name = self.make_incident_name(incident)
+
                             # Get Extra Incident Fields
                             i_fields = self.make_incident_fields(incident)
+
                             # Build out artifacts for incident
                             i_artifacts = self.make_incident_artifacts(incident)
+
                             # Create incident and return response
                             i_response = self.create_incident(i_fields, i_table)
+
                             # Add Artifacts
                             self.create_incident_artifact(i_response['id'], i_artifacts)
+
                             # Add raw event payload as note
                             i_comment = self.create_incident_comment(i_response['id'], incident)
                         else:
@@ -534,11 +537,7 @@ class PPTRIncidentPolling(ResilientComponent):
         i_summary = incident['summary']
         if i_summary == '':
             i_summary = 'No Summary Provided'
-        # Grab the number of events for the incident
-        if 'events' in incident:
-            i_event_count = len(incident['events'])
-        else:
-            i_event_count = 0
+
         iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
         log.debug("Incident Label Assembled: {}".format(iname))
 
@@ -735,7 +734,7 @@ class PPTRIncidentPolling(ResilientComponent):
         else:
             host_categories = ["forensics"]
         artifacts = {}
-        hosts = incident['hosts']
+
         if 'hosts' in incident:
             # Process the selected categories under hosts.
             for c in host_categories:
