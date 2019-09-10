@@ -49,7 +49,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.get(uri, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        self.raise_for_status_include_content(response)
+        response.raise_for_status()
         return response.json()
 
     def put(self, specific_uri, payload):
@@ -57,7 +57,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.put(uri, json.dumps(payload), headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        self.raise_for_status_include_content(response)
+        response.raise_for_status()
         return response.json()
 
     def post(self, specific_uri, payload):
@@ -65,7 +65,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        self.raise_for_status_include_content(response)
+        response.raise_for_status()
         return response.json()
 
     def delete(self, specific_uri):
@@ -73,7 +73,7 @@ class CbProtectClient(object):
         uri = u"https://{}/{}/{}".format(self.server, URI_PATH, specific_uri)
         response = requests.delete(uri, headers=self._headers(), verify=self.verify)
         log.debug(u"Response: {}".format(response.text))
-        self.raise_for_status_include_content(response)
+        response.raise_for_status()
         return response.text
 
     def get_approval_request(self, request_id):
@@ -127,28 +127,6 @@ class CbProtectClient(object):
         """Deletes a file from all or a specific system"""
         uri = u"https://{}/{}".format(self.server, "api/bit9platform/restricted/fileAction")
         response = requests.post(uri, json=payload, headers=self._headers(), verify=self.verify)
-        self.raise_for_status_include_content(response)
+        response.raise_for_status()
         return response.json()
 
-    @staticmethod
-    def raise_for_status_include_content(response):
-        """
-        Raises stored :class:`HTTPError`, if one occurred.
-        :param response:
-        :return:
-        """
-        try:
-            # Debug logging
-            log.debug(response.status_code)
-            log.debug(response.content)
-
-            # Raises stored :class:`HTTPError`, if one occurred.
-            response.raise_for_status()
-
-        except requests.HTTPError as err:
-            if sys.version_info[0] < 3:
-                # add content to the error message
-                new_msg = u"{} {}".format(err.message, response.content)
-                raise requests.HTTPError(new_msg)
-            else:
-                raise requests.HTTPError(err)
