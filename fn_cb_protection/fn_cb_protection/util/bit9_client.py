@@ -3,7 +3,6 @@
 
 """CbProtection (aka bit9) API client"""
 
-import sys
 import json
 import requests
 import logging
