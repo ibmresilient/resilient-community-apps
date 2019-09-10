@@ -13,6 +13,7 @@ from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
 from fn_proofpoint_trap.lib.helpers import get_incident_list, validate_opts
 from resilient_lib.components.integration_errors import IntegrationError
+
 """
 Summary: 
 
@@ -449,7 +450,7 @@ class PPTRIncidentPolling(ResilientComponent):
         while True:
 
             incident_list = get_incident_list(self.options, self.lastupdate, bundle)
-            self.lastupdate = int(self.options.get("polling_interval",2))
+            self.lastupdate = int(self.options.get("polling_interval", 2))
             if 'error' in incident_list:
                 log.warning(incident_list.get('error'))
                 raise IntegrationError(incident_list.get('error'))
@@ -539,7 +540,8 @@ class PPTRIncidentPolling(ResilientComponent):
         else:
             i_event_count = 0
         iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
-        log.debug("Incident Lable Assembled: {}".format(iname))
+        log.debug("Incident Label Assembled: {}".format(iname))
+
         return iname
 
     def get_resilient_incidents(self):
@@ -610,7 +612,7 @@ class PPTRIncidentPolling(ResilientComponent):
             return incident_response
 
         except SimpleHTTPException as ex:
-            log.info('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            log.error('Something went wrong when attempting to create the Incident: {}'.format(ex))
 
 
     def create_incident_comment(self, id, data):

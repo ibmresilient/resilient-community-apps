@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_proofpoint_trap", {})
         validate_opts(self)
+
     @function("fn_proofpoint_trap_get_incident_details")
     def _fn_proofpoint_trap_get_incident_details_function(self, event, *args, **kwargs):
         """Function: Fetch Incident Details from Proofpoint TRAP"""
