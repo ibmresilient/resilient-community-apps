@@ -9,6 +9,18 @@ from taxii2client import Server
 import time
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
+CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update for platform's rich text
+
+
+def replace_code_tags(text):
+    """
+    STIX description/mitigation, might contain HTML tag <code> to highlight the code, which doesn't work
+    with out rich text, so we update it to something we support.
+    :param text: text from stix
+    :type text: str
+    :return:
+    """
+    return text.replace("<code>", "<{}>".format(CODE_TAG)).replace("</code>", "</{}>".format(CODE_TAG))
 
 
 class MitreAttackBase(object):
@@ -260,9 +272,9 @@ class MitreAttackTechnique(MitreAttackBase):
         refs = [{"url": r.get("url", "")} for r in self._stix["external_references"]]
         return {
             "name": self.name,
-            "description": self.description,
+            "description": replace_code_tags(self.description),
             "external_references": refs,
-            "x_mitre_detection": self._stix.get("x_mitre_detection", ""),
+            "x_mitre_detection": replace_code_tags(self._stix.get("x_mitre_detection", "")),
             "id": self.id,
             "collection": self.collection
         }
@@ -291,7 +303,7 @@ class MitreAttackMitigation(MitreAttackBase):
 
     def dict(self):
         return {
-            "description": self.description,
+            "description": replace_code_tags(self.description),
             "name": self.name,
             "id": self.id,
             "collection": self.collection
