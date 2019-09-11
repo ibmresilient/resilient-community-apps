@@ -7,6 +7,7 @@ from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
 import time
+import re
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
 CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update for platform's rich text
@@ -18,9 +19,9 @@ def replace_code_tags(text):
     with out rich text, so we update it to something we support.
     :param text: text from stix
     :type text: str
-    :return:
+    :return: text with unsupported tags replaced with supported
     """
-    return text.replace("<code>", "<{}>".format(CODE_TAG)).replace("</code>", "</{}>".format(CODE_TAG))
+    return re.sub("<(/*)code>", r"<\{}>".format(CODE_TAG), text)
 
 
 class MitreAttackBase(object):

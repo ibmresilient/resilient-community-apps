@@ -63,6 +63,14 @@ class TestMitreTactic(object):
         tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
         assert isinstance(tactics, list)
 
+    def test_tactic_representation_doesnt_have_unsupported_tags(self):
+        """
+        Mocked Impact has code tags added on purpose
+        """
+        tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
+        dict_reps = [tactic.dict_form() for tactic in tactics]
+        # check for every tactic that every field of their representation doesn't container the tag.
+        assert all([("<code>" not in tactic_repr[key] for key in tactic_repr) for tactic_repr in dict_reps])
 
 class TestMitreTechnique(object):
     mitre_attack = MitreAttackConnection()
@@ -118,6 +126,14 @@ class TestMitreTechnique(object):
         assert techniques[0].collection is not None and techniques[1].collection is not None
         assert techniques[0].collection != techniques[1].collection
 
+    def test_technique_representation_doesnt_have_unsupported_tags(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Domain Generation Algorithms")
+        dict_reps = [technique.dict_form() for technique in techniques]
+        # check for every technique's representation that all the field don't have the tag
+        assert all([("<code>" not in technique_repr[key] for key in technique_repr) for technique_repr in dict_reps])
 
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
@@ -127,7 +143,12 @@ class TestMitreMitigation(object):
         MitreAttackTactic._reset_cache()
         MitreAttackTechnique._reset_cache()
 
+    @pytest.mark.livetest
     def test_mitigation_of_tech(self):
+        """
+        This one isn't mocked, because it would require mocking relationships
+        :return:
+        """
         mitigations = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")[0]\
             .get_mitigations(self.mitre_attack)
         assert mitigations is not None
@@ -138,6 +159,17 @@ class TestMitreMitigation(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             assert len(MitreAttackMitigation.get_all(self.mitre_attack)) == len(MitreQueryMocker.MITIGATIONS[0]) + len(
                 MitreQueryMocker.MITIGATIONS[1]) + len(MitreQueryMocker.MITIGATIONS[2])
+
+    def test_mitigation_representation_doesnt_have_unsupported_tags(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
+            dict_reps = [mitigation.dict_form() for mitigation in mitigations]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([("<code>" not in mitigation_repr[key] for key in mitigation_repr) for mitigation_repr in dict_reps])
 
 
 class TestMitre(object):
