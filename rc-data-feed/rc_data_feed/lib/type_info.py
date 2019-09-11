@@ -41,6 +41,9 @@ class TypeInfo(object):
 
     types_cache = {}
 
+    # preserve the org_name
+    org_name_cache = None
+
     DATATABLE_TYPE_ID = 8
 
     SELECT_INPUT_TYPES = ["select_owner", "select_user", "select"]
@@ -50,6 +53,7 @@ class TypeInfo(object):
     # fields not defined in the schema for an Incident but should be recorded in the datastore
     INCIDENT_INCLUDE_FIELDS = [
         (None, "org_id", "number"),
+        (None, "org_name", "text"),
         ("hipaa", "hipaa_acquired_comment", "text"),
         ("hipaa", "hipaa_additional_misuse_comment", "text"),
         ("hipaa", "hipaa_additional_misuse", "boolean"),
@@ -262,6 +266,18 @@ class TypeInfo(object):
             TypeInfo.types_cache[type_id] = type_dto
 
         return type_dto
+
+    def get_org_name(self, org_id):
+        """
+        get the org_name from the org_id for the incident. Value will be cached
+        :param org_id:
+        :return: org_name
+        """
+        if not self.org_name_cache:
+            org_info = self.rest_client_helper.get("")
+            self.org_name_cache = org_info["org_info"]["name"]
+
+        return self.org_name_cache
 
     def get_type_name(self, type_id, pretty=True):
         """
