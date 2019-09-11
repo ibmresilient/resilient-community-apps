@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_qradar_integration',
-    version='2.0.1',
+    version='2.0.2',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',

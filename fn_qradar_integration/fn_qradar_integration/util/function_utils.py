@@ -34,8 +34,8 @@ def fix_dict_value(events):
     for event in events:
         # event is a dict
         if isinstance(event, dict):
-            for key, value in event.iteritems():
-                if not isinstance(value, str):
-                    event[key] = str(value)
+            for key in event:
+                if not isinstance(event[key], str):
+                    event[key] = str(event[key])
 
     return events
