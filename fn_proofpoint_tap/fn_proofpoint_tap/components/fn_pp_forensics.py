@@ -193,5 +193,5 @@ class FunctionComponent(ResilientComponent):
 
         log.info(u"Template file: %s", forensics_path)
         with open(forensics_path, "r") as forensics_file:
-            self.forensics_path = forensics_file.read()
+            self.forensics_template = forensics_file.read()
 
