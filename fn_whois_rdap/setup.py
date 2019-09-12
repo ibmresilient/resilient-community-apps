@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# (c) Copyright IBM Corp. 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
