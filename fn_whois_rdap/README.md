@@ -40,17 +40,17 @@
 * Initial Release
 
 ---
-This integration allows for gathering of WHOIS registry information using the improved RDAP protocol from an IP address, domain name or URL artifacts on a Resilient Incident. 
+
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_whois_rdap**
+**Retrieving registry information for IP, URL or DNS Artifacts**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_whois_rdap
+This integration retrieves registry information (via legacy WHOIS or new RDAP protocol) for IP, URL or DNS Artifacts that provides enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include dns-zone, asn and asn description & other useful metadata. 
 
 ---
 
@@ -59,7 +59,7 @@ Resilient Circuits Components for 'fn_whois_rdap
   List any Requirements 
 -->
 * IBM Resilient >= `v31.0.4254`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* An Integration Server running `resilient_circuits>=31.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---

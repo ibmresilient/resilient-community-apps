@@ -20,12 +20,14 @@ def snake_to_camel(word):
 setup(
     name='fn_whois_rdap',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
-    description="Resilient Circuits Components for 'fn_whois_rdap'",
-    long_description="Resilient Circuits Components for 'fn_whois_rdap'",
+    license='MIT',
+    author='Resilient Labs',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
+    description="Retrieving registry information for IP, URL or DNS Artifacts",
+    long_description="""This integration retrieves registry information (via the RDAP protocol) for IP, URL or DNS Artifacts that provides
+    enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include
+    dns-zone, asn and asn description & other useful metadata. """,
     install_requires=[
         'resilient_circuits>=31.0.0',
         'resilient_lib>=33.0.189',

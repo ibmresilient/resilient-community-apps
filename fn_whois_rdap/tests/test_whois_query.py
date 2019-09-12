@@ -7,7 +7,7 @@ from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
 PACKAGE_NAME = "fn_whois_rdap"
-FUNCTION_NAME = "rdap_query"
+FUNCTION_NAME = "whois_query"
 
 # Read the default configuration-data section from the package
 config_data = get_config_data(PACKAGE_NAME)
@@ -16,19 +16,19 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_rdap_query_function(circuits, function_params, timeout=10):
+def call_whois_query_function(circuits, function_params, timeout=10):
     # Fire a message to the function
-    evt = SubmitTestFunction("rdap_query", function_params)
+    evt = SubmitTestFunction("whois_query", function_params)
     circuits.manager.fire(evt)
-    event = circuits.watcher.wait("rdap_query_result", parent=evt, timeout=timeout)
+    event = circuits.watcher.wait("whois_query_result", parent=evt, timeout=timeout)
     assert event
     assert isinstance(event.kwargs["result"], FunctionResult)
     pytest.wait_for(event, "complete", True)
     return event.kwargs["result"].value
 
 
-class TestRdapQuery:
-    """ Tests for the rdap_query function"""
+class TestWhoisQuery:
+    """ Tests for the whois_query function"""
 
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
@@ -39,10 +39,10 @@ class TestRdapQuery:
         ("https://www.ibm.com")
     ],
     ids=['Test-with-ibm-website'])
-    def test_success(self, circuits_app, rdap_depth, expected_results):
+    def test_success(self, circuits_app, whois_query):
         """ Test calling with sample values for the parameters """
         function_params = { 
-            "rdap_depth": rdap_depth
+            "whois_query": whois_query
         }
-        results = call_rdap_query_function(circuits_app, function_params)
+        results = call_whois_query_function(circuits_app, function_params)
         assert(results["success"] == True)
