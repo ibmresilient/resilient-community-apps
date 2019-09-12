@@ -28,7 +28,9 @@ setup(
     long_description="Resilient Circuits Components for 'fn_whois_rdap'",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'resilient_lib>=33.0.189'
+        'resilient_lib>=33.0.189',
+        'ipwhois>=1.1.0',
+        'tldextract>=2.2.1'
     ],
     packages=find_packages(),
     include_package_data=True,
