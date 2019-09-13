@@ -107,7 +107,7 @@ class MitreAttackBase(object):
         :rtype: str
         """
         ext = doc.get("external_references")
-        if not ext or not len(ext):
+        if not ext:
             return None
         for i in ext:
             name = i.get("external_id")

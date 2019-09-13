@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             techniques = mitre_attack.MitreAttackTechnique.get(mitre_conn, name=mitre_technique_name,
                                                                id=mitre_technique_id)
 
-            if techniques is None or not len(techniques):
+            if not techniques:
                 raise ValueError(
                     "Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
 
