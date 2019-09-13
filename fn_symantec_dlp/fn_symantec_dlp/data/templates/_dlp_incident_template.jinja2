@@ -68,7 +68,7 @@
             }        
         }
         {%- endfor -%}
-        {%- if incident.notes|length > 1 -%}
+        {%- if incident.notes|length > 0 -%}
         {{- comma() }}
         {%- endif -%}
         {    

@@ -14,7 +14,7 @@ import uuid
 import traceback
 import shutil
 from resilient_circuits import ResilientComponent, template_functions
-from resilient_lib import build_incident_url, build_resilient_url, str_to_bool, write_to_tmp_file
+from resilient_lib import build_incident_url, build_resilient_url, str_to_bool
 
 from zeep.helpers import serialize_object
 
@@ -104,7 +104,7 @@ class DLPListener(ResilientComponent):
                                     <incidentAttributes>
                                     <!--Zero or more repetitions:-->
                                     <customAttribute>
-                                        <sch1:name>resilient_incidentid</sch1:name>
+                                        <sch1:name>resilient_incident_id</sch1:name>
                                         <!--Optional:-->
                                         <sch1:value>{resilient_id}</sch1:value>
                                     </customAttribute>
@@ -145,14 +145,25 @@ class DLPListener(ResilientComponent):
         if binaries:
             for component in binaries['Component']:
                 try:
-                    path_tmp_file, path_tmp_dir = write_to_tmp_file(component['content'])
+
+                    with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_upload_file:
+                        temp_upload_file.write(component['content'])
+
+                        temp_upload_file.close()
+                        artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
+                        self.res_rest_client.post_artifact_file(artifact_uri,
+                                                                16,
+                                                                temp_upload_file.name,
+                                                                value=component['name'],
+                                                                description="Binary File imported from Symantec DLP")
+                    # path_tmp_file, path_tmp_dir = write_to_tmp_file(component['content'])
                     
-                    artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
-                    self.res_rest_client.post_artifact_file(artifact_uri,
-                                                            self.default_artifact_type_id,
-                                                            path_tmp_file,
-                                                            value=component['name'],
-                                                            description="Binary File imported from Symantec DLP")
+                    # artifact_uri = "/incidents/{}/artifacts/files".format(res_incident_id)
+                    # self.res_rest_client.post_artifact_file(artifact_uri,
+                    #                                         self.default_artifact_type_id,
+                    #                                         path_tmp_file,
+                    #                                         value=component['name'],
+                    #                                         description="Binary File imported from Symantec DLP")
 
                 except Exception as upload_ex:
                     LOG.debug(traceback.format_exc())
@@ -161,9 +172,10 @@ class DLPListener(ResilientComponent):
                     LOG.error(u"[Symantec DLP] Encountered an exception when uploading a Binary to Resilient.")
     
                 finally:
-                    # Clean up the tmp_file 
-                    if path_tmp_dir and os.path.isdir(path_tmp_dir):
-                        shutil.rmtree(path_tmp_dir)
+                    # # Clean up the tmp_file 
+                    # if path_tmp_dir and os.path.isdir(path_tmp_dir):
+                    #     shutil.rmtree(path_tmp_dir)
+                    os.unlink(temp_upload_file.name)
 
     def prepare_incident_dto(self, incident, notes_to_be_added):
         """prepare_incident_dto uses a Jinja template located in the data/templates directory and prepares an incident DTO.
