@@ -26,24 +26,25 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
     if tactic_names is not None:
         # It's possible for multiple tactics to have the same name
         # And we want to make sure that all of them are processed in that case
-        tactic_names = tactic_names.split(', ')
+        tactic_names = tactic_names.split(',')
+
         for t_name in tactic_names:
-            tactic = MitreAttackTactic.get_by_name(mitre_conn, t_name)
-            if tactic is None:
-                raise ValueError("Tactic with name {} does not exist.".format(t_name))
-            elif isinstance(tactic, list):
-                for t in tactic:
-                    tactics.append(t.id)
+            tactics_named = MitreAttackTactic.get_by_name(mitre_conn, t_name)
+            if not tactics_named:
+                raise ValueError("Tactics with name {} do not exist.".format(t_name))
             else:
-                tactics.append(tactic.id)
+                for tactic in tactics_named:
+                    tactics.append(tactic.id)
     elif tactic_ids is not None:
-        t_ids = tactic_ids.split(', ')
+        t_ids = tactic_ids.split(',')
+
         for tid in t_ids:
-            tactic = MitreAttackTactic.get_by_id(mitre_conn, tid)
-            if tactic is not None:
-                tactics.append(tactic.id)
+            tactics_id = MitreAttackTactic.get_by_id(mitre_conn, tid)
+            if tactics_id is not None:
+                for tactic in tactics_id:
+                    tactics.append(tactic.id)
             else:
-                raise ValueError("Tactic with id {} does not exist.".format(tid))
+                raise ValueError("Tactics with id {} do not exist.".format(tid))
 
     ret = []
     for tactic_id in tactics:

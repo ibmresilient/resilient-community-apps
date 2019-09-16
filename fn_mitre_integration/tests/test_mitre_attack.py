@@ -50,6 +50,10 @@ class TestMitreTactic(object):
         assert MitreAttackTactic.get_by_name(self.mitre_attack, "Collection") is not None
         assert MitreAttackTactic.get_by_name(self.mitre_attack, "Absurd Search") is None
 
+    def test_extra_spaces_doent_fail_search(self):
+        assert MitreAttackTactic.get_by_id(self.mitre_attack, " TA0007") is not None
+        assert MitreAttackTactic.get_by_name(self.mitre_attack, " Collection  ") is not None
+
     def test_get_all(self):
         assert len(MitreAttackTactic.get_all(self.mitre_attack)) == len(MitreQueryMocker.TACTICS[0])+len(MitreQueryMocker.TACTICS[1])+len(MitreQueryMocker.TACTICS[2])
 

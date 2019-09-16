@@ -37,8 +37,6 @@ class MitreAttackBase(object):
         # if id and name exist, cache the object
         if self.id is not None:
             self._cached_obj["id"][self.id] = self
-        if self.name is not None:
-            self._cached_obj["name"][self.name] = self
 
     def dict_form(self):
         """
@@ -169,8 +167,7 @@ class MitreAttackBase(object):
         :return: list of objects of the class with given name
         :rtype: list(self.__class__)
         """
-        if cls._cached_obj and name in cls._cached_obj["name"]:
-            return cls._cached_obj["name"][name]
+        name = name.strip()
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
@@ -194,6 +191,8 @@ class MitreAttackBase(object):
         """
         if cls._cached_obj and type_id in cls._cached_obj["id"]:
             return cls._cached_obj["id"][type_id]
+
+        type_id = type_id.strip()
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
