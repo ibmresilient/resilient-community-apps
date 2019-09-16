@@ -32,6 +32,7 @@ fn_aws_utilities
 fn_bigfix
 fn_bluecoat_site_review
 fn_calendar_invite
+fn_cb_protection
 fn_cisco_amp4ep
 fn_cisco_enforcement
 fn_cisco_umbrella_inv
@@ -88,6 +89,7 @@ fn_query_tor_network
 fn_res_to_icd
 fn_risk_fabric
 fn_rsa_netwitness
+fn_sep
 fn_service_now
 fn_slack
 fn_spamhaus_query
