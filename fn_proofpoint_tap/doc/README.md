@@ -27,9 +27,9 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* Escalate threats to Resilient as new Incidents
+* Enrich Incident data with TAP campaign information
+* Collect detailed forensic data on individual threats or campaigns
 
 ---
 
