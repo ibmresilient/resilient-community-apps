@@ -151,7 +151,7 @@ class MitreAttackBase(object):
         if not len(items):
             return None
 
-        return [cls(x) for x in items]  # if multiple collections have the item
+        return [cls(x) for x in items]  # create a list of class instances from query data
 
     @classmethod
     def get_by_id(cls, conn, type_id):
@@ -174,7 +174,7 @@ class MitreAttackBase(object):
         if not len(items):
             return None
 
-        return [cls(item) for item in items]
+        return [cls(item) for item in items]  # create a list of class instances from query data
 
 
 class MitreAttackTactic(MitreAttackBase):
