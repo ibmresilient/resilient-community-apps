@@ -48,7 +48,8 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
 
     ret = []
     for tactic_id in tactics:
-        t_obj = MitreAttackTactic.get_by_id(mitre_conn, tactic_id)
+        t_obj = MitreAttackTactic.get_by_id(mitre_conn, tactic_id)[0]  # since we search by id, its unique
+
         techs = t_obj.get_techniques(mitre_conn)
 
         # get the dict for tactic and include techniques into it

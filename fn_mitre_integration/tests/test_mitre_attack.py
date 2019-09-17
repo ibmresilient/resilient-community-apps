@@ -189,9 +189,9 @@ class TestMitre(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             tactics = "Impact, Collection"
             techs = get_tactics_and_techniques(tactic_names=tactics)
-            assert len(techs) == 2
+            assert len(techs) == 3
 
-            tactics = "TA0004, TA0007, TA0009"
+            tactics = "TA0040, TA0007, TA0009"
             techs = get_tactics_and_techniques(tactic_ids=tactics)
             assert(len(techs) > 0)
 
@@ -199,7 +199,7 @@ class TestMitre(object):
         data_mocker = MitreQueryMocker()
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             tech = MitreAttackTechnique.get_by_name(self.mitre_conn, "Port Knocking")
-            assert(tech.name == "Port Knocking")
+            assert(tech[0].name == "Port Knocking")
 
             tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
-            assert(tech.id == "T1205")
+            assert(tech[0].id == "T1205")

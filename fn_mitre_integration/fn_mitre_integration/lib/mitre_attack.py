@@ -34,10 +34,6 @@ class MitreAttackBase(object):
         self.id = self.get_id(doc)
         self.description = doc.get("description", "")
 
-        # if id and name exist, cache the object
-        if self.id is not None:
-            self._cached_obj["id"][self.id] = self
-
     def dict_form(self):
         """
         Method to override to convert the data into what is expected.
@@ -69,6 +65,28 @@ class MitreAttackBase(object):
         :return:
         """
         cls._cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
+
+    @classmethod
+    def _cache_name(cls, name, items):
+        if not cls._cached_obj["name"].get(name) or len(cls._cached_obj["name"][name]) != len(items):
+            cls._cached_obj["name"][name] = items
+
+    @classmethod
+    def _cache_get_name(cls, name):
+        if cls._cached_obj:
+            return cls._cached_obj["name"].get(name)
+        return None
+
+    @classmethod
+    def _cache_id(cls, tid, items):
+        if not cls._cached_obj["id"].get(tid) or len(cls._cached_obj["id"][tid]) != len(items):
+            cls._cached_obj["id"][tid] = items
+
+    @classmethod
+    def _cache_get_id(cls, tid):
+        if cls._cached_obj:
+            return cls._cached_obj["id"].get(tid)
+        return None
 
     @staticmethod
     def get_collection(doc):
@@ -169,12 +187,19 @@ class MitreAttackBase(object):
         """
         name = name.strip()
 
+        if cls._cache_get_name(name):
+            return cls._cache_get_name(name)
+
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
         items = conn.get_items([type_filter, name_filter])
         if not len(items):
             return None
-        return [cls(x) for x in items]  # if multiple collections have the item
+
+        items = [cls(x) for x in items]  # if multiple collections have the item
+
+        cls._cache_name(name, items)
+        return items
 
     @classmethod
     def get_by_id(cls, conn, type_id):
@@ -189,17 +214,21 @@ class MitreAttackBase(object):
         :return: list of instances of the class for given id
         :rtype: list(self.__class__)
         """
-        if cls._cached_obj and type_id in cls._cached_obj["id"]:
-            return cls._cached_obj["id"][type_id]
-
         type_id = type_id.strip()
+
+        if cls._cache_get_id(type_id):
+            return cls._cache_get_id(type_id)
 
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
         items = conn.get_items([type_filter, id_filter])
         if not len(items):
             return None
-        return [cls(item) for item in items]
+
+        items = [cls(item) for item in items]
+
+        cls._cache_id(type_id, items)
+        return items
 
 
 class MitreAttackTactic(MitreAttackBase):

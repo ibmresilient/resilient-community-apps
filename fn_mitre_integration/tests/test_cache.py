@@ -23,12 +23,9 @@ class TestCache(object):
             yield
 
     def test_cache_not_shared_between_classes(self):
-        print(mitre_attack.MitreAttackTechnique._cached_obj)
         mitre_attack.MitreAttackTechnique.get(self.mitre_attack, name="Port Knocking")
         mitre_attack.MitreAttackTactic.get(self.mitre_attack, name="Impact")
-        print(mitre_attack.MitreAttackTechnique._cached_obj)
-        print(mitre_attack.MitreAttackTactic._cached_obj)
-        print(mitre_attack.MitreAttackBase._cached_obj)
+
         assert "Port Knocking" in mitre_attack.MitreAttackTechnique._cached_obj["name"]
         assert not "Port Knocking" in mitre_attack.MitreAttackTactic._cached_obj["name"]
 
@@ -36,12 +33,9 @@ class TestCache(object):
         assert "Impact" in mitre_attack.MitreAttackTactic._cached_obj["name"]
 
     def test_cache_not_shared_between_classes_module_import(self):
-        print(mitre_attack.MitreAttackTechnique._cached_obj)
         tech = mitre_attack.MitreAttackTechnique.get(self.mitre_attack, name="Port Knocking")
         tact = mitre_attack.MitreAttackTactic.get(self.mitre_attack, name="Impact")
-        print(mitre_attack.MitreAttackTechnique._cached_obj)
-        print(mitre_attack.MitreAttackTactic._cached_obj)
-        print(mitre_attack.MitreAttackBase._cached_obj)
+
         assert "Port Knocking" in tech[0]._cached_obj["name"] and not "Port Knocking" in tact[0]._cached_obj["name"]
         assert not "Impact" in tech[0]._cached_obj["name"] and "Impact" in tact[0]._cached_obj["name"]
 
