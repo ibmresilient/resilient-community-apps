@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """
 Note that the mitre_attack class encapsulates the
@@ -7,11 +8,14 @@ MITRE ATTACK STIX TAXII server. Since that sever is
 available to public, this file is a system level test
 """
 
-from fn_mitre_integration.lib.mitre_attack import MitreAttack
-from fn_mitre_integration.lib.mitre_attack_utils import get_techniques
+from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, MitreAttackMitigation
+from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques
 import requests
+import pytest
+import mock
+from .mock_stix import MitreQueryMocker
+from mock import patch
 
-mitre_attack = MitreAttack()
 
 def url_get(url):
     ret = False
@@ -21,95 +25,166 @@ def url_get(url):
             ret = True
     except:
         ret = False
-
     return ret
 
 
-def test_get_tactic_url():
-    tactics = mitre_attack.get_all_tactics()
+class TestMitreTactic(object):
+    mitre_attack = MitreAttackConnection()
 
-    for tactic in tactics:
-        url = mitre_attack.get_tactic_url(tactic.name)
-        assert url_get(url)
+    @pytest.fixture(autouse=True)
+    def set_up_mock_for_query(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            yield
 
-    # Test error handling
-    url = mitre_attack.get_tactic_url("Fake Tactic")
-    assert (url is None)
+    def test_get_by_id_works(self):
+        assert MitreAttackTactic.get_by_id(self.mitre_attack, "TA0007") is not None
+        assert MitreAttackTactic.get_by_id(self.mitre_attack, "TA00007") is None
 
-def test_lookup_item():
-    item_name = "Remote Services"
+    def test_get_by_name_works(self):
+        assert MitreAttackTactic.get_by_name(self.mitre_attack, "Collection") is not None
+        assert MitreAttackTactic.get_by_name(self.mitre_attack, "Absurd Search") is None
 
-    item = mitre_attack.lookup_item(item_name=item_name)
-    assert item
-    print(item)
+    def test_extra_spaces_doent_fail_search(self):
+        assert MitreAttackTactic.get_by_id(self.mitre_attack, " TA0007") is not None
+        assert MitreAttackTactic.get_by_name(self.mitre_attack, " Collection  ") is not None
 
+    def test_get_all(self):
+        assert len(MitreAttackTactic.get_all(self.mitre_attack)) == len(MitreQueryMocker.TACTICS[0])+len(MitreQueryMocker.TACTICS[1])+len(MitreQueryMocker.TACTICS[2])
 
+    def test_collection_name_included(self):
+        tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
+        assert len(tactics) == 2
+        assert tactics[0].collection is not None and tactics[1].collection is not None
+        assert tactics[0].collection != tactics[1].collection
 
-def test_get_tactic_techniques():
-    tactics = mitre_attack.get_all_tactics()
-
-    for tactic in tactics:
-        print(tactic.name)
-        techs = mitre_attack.get_tactic_techniques(tactic_name=tactic.name)
-        print(len(techs))
-        assert(len(techs) > 0)
-
-    #
-    # Test using tactic id as well
-    #
-    techs = mitre_attack.get_tactic_techniques(tactic_id="TA0001")
-    assert (len(techs) > 1)
-
-
-def test_get_tech_mitigation():
-    techs = mitre_attack.get_all_techniques()
-    print(len(techs))
-    try:
-        #
-        #   There are more than 200 techs. Try first 5 only
-        #
-        count = 0
-        for tech in techs:
-            id = mitre_attack.get_external_id(tech)
-            assert(id)
-
-            mitigation = mitre_attack.get_tech_mitigation(tech_id=id)
-            print(mitigation)
-            count += 1
-            if count > 5:
-                break
-
-            # Test getting mitigation using name
-            mitigation = mitre_attack.get_tech_mitigation(tech_name=tech["name"])
-            print(mitigation)
-    except:
-        assert(False)
+    def test_mutiple_of_same_name_returns_list(self):
+        tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
+        assert isinstance(tactics, list)
 
 
-def test_mitre_attack_util():
-    tactics = "Execution, Persistence"
-    techs = get_techniques(tactic_names=tactics)
-    print(len(techs))
-    assert(len(techs[0]["techs"]) + len(techs[1]["techs"]) == 91)
+class TestMitreTechnique(object):
+    mitre_attack = MitreAttackConnection()
 
-    tactics = "TA0001, TA0002, TA0008"
-    techs = get_techniques(tactic_ids=tactics)
-    print(len(techs))
-    assert(len(techs) > 0)
+    @pytest.fixture(autouse=True)
+    def set_up_mock_for_query(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            yield
+
+    def test_tech_of_tactic(self):
+        collection_tech = MitreAttackTechnique.get_by_tactic(self.mitre_attack,
+                                                             MitreAttackTactic.get_by_name(self.mitre_attack,
+                                                                                           "Collection")[0])
+        assert collection_tech is not None
+        assert len(collection_tech) > 1
+
+        assert MitreAttackTactic.get_by_name(self.mitre_attack, "Command and Control")[0]\
+                   .get_techniques(self.mitre_attack) is not None
+
+    def test_all_searches_returns_list(self):
+        techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")
+        assert isinstance(techniques, list)
+        assert len(techniques) > 1
+        techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Domain Generation Algorithms")
+        assert isinstance(techniques, list)
+        assert len(techniques) == 1
+
+    def test_by_id_works(self):
+        tech = MitreAttackTechnique.get_by_id(self.mitre_attack,"T1205")
+        assert tech is not None
+        tech = MitreAttackTechnique.get_by_id(self.mitre_attack,"Made up id")
+        assert tech is None
+
+    def test_by_name_works(self):
+        tech = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")
+        assert tech is not None
+        tech = MitreAttackTechnique.get_by_name(self.mitre_attack, "Absolutely made up name")
+        assert tech is None
+
+    def test_tech_get_all(self):
+        assert len(MitreAttackTechnique.get_all(self.mitre_attack)) == len(MitreQueryMocker.TECHNIQUES[0]) + len(
+            MitreQueryMocker.TECHNIQUES[1]) + len(MitreQueryMocker.TECHNIQUES[2])
+
+    def test_collection_name_included(self):
+        techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")
+        assert len(techniques) == 2
+        assert techniques[0].collection is not None and techniques[1].collection is not None
+        assert techniques[0].collection != techniques[1].collection
 
 
-def test_get_tech_info():
+class TestMitreMitigation(object):
+    mitre_attack = MitreAttackConnection()
 
-    tech = mitre_attack.get_tech(name="AppleScript")
-    print(tech)
-    assert(tech["name"] == "AppleScript")
+    def test_mitigation_of_tech(self):
+        mitigations = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")[0]\
+            .get_mitigations(self.mitre_attack)
+        assert mitigations is not None
+        assert len(mitigations)
 
-    tech = mitre_attack.get_tech(ext_id="T1156")
-    print(tech)
-    assert(tech["mitre_tech_id"] == "T1156")
+    def test_mitigation_get_all(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            assert len(MitreAttackMitigation.get_all(self.mitre_attack)) == len(MitreQueryMocker.MITIGATIONS[0]) + len(
+                MitreQueryMocker.MITIGATIONS[1]) + len(MitreQueryMocker.MITIGATIONS[2])
 
-    #
-    #   Error handling
-    #
-    tech = mitre_attack.get_tech()
-    assert tech is None
+
+class TestMitre(object):
+    mitre_conn = MitreAttackConnection()
+
+    @pytest.mark.livetest
+    def test_get_all_tactics_from_all_frameworks(self):
+        tactics = MitreAttackTactic.get_all(self.mitre_conn)
+        # As 8/5/19 there are 40 tactics
+        assert len(tactics) >= 40
+
+    @pytest.mark.livetest
+    def test_get_tactic_url(self):
+        tactics = MitreAttackTactic.get_all(self.mitre_conn)
+
+        for tactic in tactics[:1]:
+            url = tactic.get_url()
+            assert url_get(url)
+
+    @pytest.mark.livetest
+    def test_get_tech_mitigation(self):
+        techs = MitreAttackTechnique.get_all(self.mitre_conn)
+        assert len(techs)
+        try:
+            #
+            #   There are more than 200 techs. Try first 5 only
+            #
+            count = 0
+            for tech in techs:
+                id = tech.id
+                assert(id)
+                mitigation = tech.get_mitigations(self.mitre_conn)
+                assert mitigation
+                count += 1
+                if count > 2:
+                    break
+                # Test getting mitigation using name
+                mitigation = tech.get_mitigations(self.mitre_conn)
+                assert mitigation
+        except Exception as e:
+            assert(False)
+
+    def test_mitre_attack_util(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            tactics = "Impact, Collection"
+            techs = get_tactics_and_techniques(tactic_names=tactics)
+            assert len(techs) == 3
+
+            tactics = "TA0040, TA0007, TA0009"
+            techs = get_tactics_and_techniques(tactic_ids=tactics)
+            assert(len(techs) > 0)
+
+    def test_get_tech_info(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            tech = MitreAttackTechnique.get_by_name(self.mitre_conn, "Port Knocking")
+            assert(tech[0].name == "Port Knocking")
+
+            tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
+            assert(tech[0].id == "T1205")

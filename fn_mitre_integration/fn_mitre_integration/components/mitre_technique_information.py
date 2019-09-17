@@ -8,6 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_mitre_integration.lib import mitre_attack
+from resilient_lib import ResultPayload
 
 
 class FunctionComponent(ResilientComponent):
@@ -41,31 +42,40 @@ class FunctionComponent(ResilientComponent):
             log.info("mitre_technique_id: %s", mitre_technique_id)
             log.info("mitre_technique_mitigation_only: %s", mitre_technique_mitigation_only)
 
-            yield StatusMessage("starting...")
-            yield StatusMessage("query MITRE STIX TAXII server. It might take several minutes...")
+            if not mitre_technique_name and not mitre_technique_id:
+                raise ValueError("Neither name nor id is provided for getting technique information.")
 
-            mitre_att = mitre_attack.MitreAttack()
-            tech = {}
-            if mitre_technique_mitigation_only:
-                tech = {
-                    "name": mitre_technique_name,
-                    "description": "",
-                    "external_references": [{"url":""}],
-                    "x_mitre_detection": "",
-                    "mitre_tech_id": "",
-                    "mitre_mitigation": mitre_att.get_tech_mitigation(tech_id=mitre_technique_id,
-                                                                      tech_name=mitre_technique_name)
-                }
-            else:
-                tech = mitre_att.get_tech(name=mitre_technique_name,
-                                          ext_id=mitre_technique_id)
+            result_payload = ResultPayload("fn_mitre_integration", mitre_technique_name=mitre_technique_name,
+                                           mitre_technique_id=mitre_technique_id,
+                                           mitre_technique_mitigation_only= mitre_technique_mitigation_only)
+            yield StatusMessage("starting...")
+            yield StatusMessage("querying MITRE STIX TAXII server. It might take several minutes...")
+
+            mitre_conn = mitre_attack.MitreAttackConnection()
+            techniques = mitre_attack.MitreAttackTechnique.get(mitre_conn, name=mitre_technique_name,
+                                                               id=mitre_technique_id)
+
+            if not techniques:
+                raise ValueError(
+                    "Technique with name/id {}/{} can't be found".format(mitre_technique_name, mitre_technique_id))
+
+            techs = []
+            for technique in techniques:
+                tech_dict = technique.dict_form()
+                tech_dict.update(
+                    {
+                        "mitre_mitigations": [x.dict_form() for x in technique.get_mitigations(mitre_conn)]
+                    }
+                )
+                techs.append(tech_dict)
 
             yield StatusMessage("done...")
-            log.info("MITRE tech: " + str(tech))
-            results = tech
 
+            results = {
+                "mitre_techniques": techs
+            }
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result_payload.done(True, results))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()

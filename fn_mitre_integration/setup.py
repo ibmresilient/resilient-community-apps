@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_mitre_integration',
-    version='1.0.1',
+    version='2.0.0',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
@@ -28,6 +28,7 @@ setup(
             "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mitre_integration.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_mitre_integration.util.selftest:selftest_function"]
     }
 )
