@@ -39,11 +39,9 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_proofpoint_tap**
+**Resilient Circuits Components for fn_proofpoint_tap**
 
  ![screenshot: main](./doc/screenshots/main.png)
-
-Resilient Circuits Components for 'fn_proofpoint_tap
 
 ---
 
@@ -105,18 +103,6 @@ Resilient Circuits Components for 'fn_proofpoint_tap
   ```
   $ resilient-circuits run
   ```
-
-### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
----
 
 ## Uninstall
 * SSH into your Integration Server.
