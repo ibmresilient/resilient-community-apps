@@ -8,6 +8,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_mitre_integration.lib import mitre_attack_utils
+from resilient_lib import ResultPayload
 
 
 class FunctionComponent(ResilientComponent):
@@ -43,6 +44,8 @@ class FunctionComponent(ResilientComponent):
             if not mitre_tactic_id and not mitre_tactic_name:
                 raise ValueError("Neither name nor id is provided for getting tactic information.")
 
+            result_payload = ResultPayload("fn_mitre_integration", mitre_tactic_id=mitre_tactic_id,
+                                           mitre_tactic_name=mitre_tactic_name)
             yield StatusMessage("starting...")
             yield StatusMessage("query MITRE STIX TAXII server, and it can take several minutes....")
 
@@ -54,7 +57,7 @@ class FunctionComponent(ResilientComponent):
                 "mitre_tactics": tactics
             }
             # Produce a FunctionResult with the results
-            yield FunctionResult(results)
+            yield FunctionResult(result_payload.done(True, results))
         except Exception as e:
             log.exception(str(e))
             yield FunctionError()

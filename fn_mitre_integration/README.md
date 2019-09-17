@@ -53,7 +53,7 @@ MITRE Integration includes 2 functions:
 -->
 
 * IBM Resilient >= `v32.3.12`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* An Integration Server running `resilient_circuits>=32.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 * `stix` and `taxiiclient` Python libraries 
 ---
