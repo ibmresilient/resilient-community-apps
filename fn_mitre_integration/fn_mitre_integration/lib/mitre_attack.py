@@ -101,7 +101,7 @@ class MitreAttackBase(object):
         :rtype: list(self.__class__)
         """
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
-        all_items = [cls(x) for x in conn.get_items(type_filter)]
+        all_items = [cls(x) for x in conn.get_items(type_filter)]  # create a list of class instances from query data
         return all_items
 
     @classmethod
