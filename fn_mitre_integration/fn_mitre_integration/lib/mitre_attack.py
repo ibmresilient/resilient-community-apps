@@ -50,63 +50,6 @@ class MitreAttackBase(object):
             res[key] = obj[key]
         return res
 
-    @classmethod
-    def validate_cache(cls):
-        """
-        If cached doesn't exists - create it.
-        If cache is expired, reset it.
-        """
-        # if the cash is not instantiated, create cash
-        if not cls._cached_obj:
-            cls._reset_cache()
-        # if it's been more than a day, clear the cache
-        elif time.time() - cls._cached_obj["last"] > cls.SECONDS_IN_A_DAY:
-            cls._reset_cache()
-
-    @classmethod
-    def _reset_cache(cls):
-        """
-        Resets cache to the object where the results of querying for given class will be stored.
-        Will get reset after a day.
-        :return:
-        """
-        cls._cached_obj = {"all": None, "id": {}, "name": {}, "last": time.time()}
-
-    @classmethod
-    def _cache_name(cls, name, items):
-        """
-        Cache the results of `name` query.
-        :param name: Name of the type searched
-        :param items: List of class instances returned by `get_by_name`
-        """
-        cls.validate_cache()
-        if not cls._cached_obj["name"].get(name) or len(cls._cached_obj["name"][name]) != len(items):
-            cls._cached_obj["name"][name] = items
-
-    @classmethod
-    def _cache_get_name(cls, name):
-        """
-        Returns the cached
-        :param name:
-        :return:
-        """
-        cls.validate_cache()
-        if cls._cached_obj:
-            return cls._cached_obj["name"].get(name)
-        return None
-
-    @classmethod
-    def _cache_id(cls, tid, items):
-        if not cls._cached_obj["id"].get(tid) or len(cls._cached_obj["id"][tid]) != len(items):
-            cls._cached_obj["id"][tid] = items
-
-    @classmethod
-    def _cache_get_id(cls, tid):
-        cls.validate_cache()
-        if cls._cached_obj:
-            return cls._cached_obj["id"].get(tid)
-        return None
-
     @staticmethod
     def get_collection(doc):
         """
@@ -202,19 +145,13 @@ class MitreAttackBase(object):
         """
         name = name.strip()
 
-        if cls._cache_get_name(name):
-            return cls._cache_get_name(name)
-
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("name", "=", name)
         items = conn.get_items([type_filter, name_filter])
         if not len(items):
             return None
 
-        items = [cls(x) for x in items]  # if multiple collections have the item
-
-        cls._cache_name(name, items)
-        return items
+        return [cls(x) for x in items]  # if multiple collections have the item
 
     @classmethod
     def get_by_id(cls, conn, type_id):
@@ -231,19 +168,13 @@ class MitreAttackBase(object):
         """
         type_id = type_id.strip()
 
-        if cls._cache_get_id(type_id):
-            return cls._cache_get_id(type_id)
-
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         id_filter = Filter("external_references.external_id", "=", type_id)
         items = conn.get_items([type_filter, id_filter])
         if not len(items):
             return None
 
-        items = [cls(item) for item in items]
-
-        cls._cache_id(type_id, items)
-        return items
+        return [cls(item) for item in items]
 
 
 class MitreAttackTactic(MitreAttackBase):

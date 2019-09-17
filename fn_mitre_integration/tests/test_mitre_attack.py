@@ -32,11 +32,6 @@ class TestMitreTactic(object):
     mitre_attack = MitreAttackConnection()
 
     @pytest.fixture(autouse=True)
-    def clear_caches(self):
-        MitreAttackTactic._reset_cache()
-        MitreAttackTechnique._reset_cache()
-
-    @pytest.fixture(autouse=True)
     def set_up_mock_for_query(self):
         data_mocker = MitreQueryMocker()
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
@@ -70,11 +65,6 @@ class TestMitreTactic(object):
 
 class TestMitreTechnique(object):
     mitre_attack = MitreAttackConnection()
-
-    @pytest.fixture(autouse=True)
-    def clear_caches(self):
-        MitreAttackTactic._reset_cache()
-        MitreAttackTechnique._reset_cache()
 
     @pytest.fixture(autouse=True)
     def set_up_mock_for_query(self):
@@ -125,11 +115,6 @@ class TestMitreTechnique(object):
 
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
-
-    @pytest.fixture(autouse=True)
-    def clear_caches(self):
-        MitreAttackTactic._reset_cache()
-        MitreAttackTechnique._reset_cache()
 
     def test_mitigation_of_tech(self):
         mitigations = MitreAttackTechnique.get_by_name(self.mitre_attack, "Port Knocking")[0]\
