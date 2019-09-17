@@ -36,7 +36,7 @@ score_threshold=
 threat_template=
 
 # optional - Jinja template to override default forensic format
-#forensics_template=
+forensics_template=
 
 # optional
 cafile=
