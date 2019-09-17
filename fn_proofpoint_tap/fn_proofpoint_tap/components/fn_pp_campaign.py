@@ -49,11 +49,13 @@ class FunctionComponent(ResilientComponent):
                 'pp_campaign_id': campaign_id,
             }
 
-            # payload = FunctionPayload(inputs)
             results = {
                 'inputs': inputs,
                 'success': False,
             }
+
+            if campaign_id is None:
+                raise FunctionError(u"campaign_id is required")
 
             yield StatusMessage("function inputs OK")
 

@@ -11,7 +11,7 @@ import json
 import os
 import requests
 from requests.auth import HTTPBasicAuth
-from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult
+from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
 from fn_proofpoint_tap.util.helpers import get_config_option
 from pkg_resources import Requirement, resource_filename
 import fn_proofpoint_tap.util.selftest as selftest
@@ -73,18 +73,14 @@ class FunctionComponent(ResilientComponent):
 
         if campaign_id is None:
             if threat_id is None:
-                results['error'] = 'either campaign_id or threat_id is required'
-                yield FunctionResult(results)
-                return
+                raise FunctionError(u"either campaign_id or threat_id is required")
 
             params = 'threatId={0}'.format(threat_id)
             if aggregate_flag:
                 params += '&includeCampaignForensics=true'
         else:
             if threat_id is not None:
-                results['error'] = 'only one of campaign_id or threat_id is allowed'
-                yield FunctionResult(results)
-                return
+                raise FunctionError(u"only one of campaign_id or threat_id is allowed")
 
             params = 'campaignId={0}'.format(campaign_id)
 
