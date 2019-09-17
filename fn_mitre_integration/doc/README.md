@@ -45,8 +45,8 @@ Get information about MITRE tactic
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mitre_tactic_id` | `text` | No | `-` | MITRE ATT&CK Tactic ID |
-| `mitre_tactic_name` | `text` | No | `-` | MITRE Tactic Name |
+| `mitre_tactic_id` | `text` | No | `TA0002` | MITRE ATT&CK Tactic ID |
+| `mitre_tactic_name` | `text` | No | `Execution` | MITRE Tactic Name |
 
 </p>
 </details>
@@ -181,9 +181,9 @@ Get ATT&CK information about MITRE ATT&CK technique
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `mitre_technique_id` | `text` | No | `-` | - |
+| `mitre_technique_id` | `text` | No | `T1155` | - |
 | `mitre_technique_mitigation_only` | `boolean` | No | `-` | Retrieve the mitigation only |
-| `mitre_technique_name` | `text` | No | `-` | - |
+| `mitre_technique_name` | `text` | No | `AppleScript` | - |
 
 </p>
 </details>

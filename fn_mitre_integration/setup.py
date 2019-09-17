@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_mitre_integration',
-    version='1.0.1',
+    version='2.0.0',
     license='MIT License',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',

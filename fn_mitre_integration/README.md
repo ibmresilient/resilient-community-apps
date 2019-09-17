@@ -25,6 +25,8 @@
 ---
 
 ## Release Notes
+
+### v2.0
 - Added support for all of the MITRE's collections
 - New column `Collection` was added to the data tables to specify what collection
 the technique/task comes from.
@@ -49,6 +51,7 @@ MITRE Integration includes 2 functions:
 <!--
   List any Requirements 
 -->
+
 * IBM Resilient >= `v32.3.12`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
