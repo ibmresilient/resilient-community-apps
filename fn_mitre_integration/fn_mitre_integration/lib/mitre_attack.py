@@ -21,13 +21,6 @@ class MitreAttackBase(object):
     SECONDS_IN_A_DAY = 84600
 
     def __init__(self, doc):
-        # if the cash is not instantiated, create cash
-        if not self._cached_obj:
-            self._reset_cache()
-        # if it's been more than a day, clear the cache
-        if time.time() - self._cached_obj["last"] > self.SECONDS_IN_A_DAY:
-            self._reset_cache()
-
         self._stix = doc
         self.collection = self.get_collection(doc)
         self.name = self.get_name(doc)
@@ -58,6 +51,19 @@ class MitreAttackBase(object):
         return res
 
     @classmethod
+    def validate_cache(cls):
+        """
+        If cached doesn't exists - create it.
+        If cache is expired, reset it.
+        """
+        # if the cash is not instantiated, create cash
+        if not cls._cached_obj:
+            cls._reset_cache()
+        # if it's been more than a day, clear the cache
+        elif time.time() - cls._cached_obj["last"] > cls.SECONDS_IN_A_DAY:
+            cls._reset_cache()
+
+    @classmethod
     def _reset_cache(cls):
         """
         Resets cache to the object where the results of querying for given class will be stored.
@@ -68,11 +74,23 @@ class MitreAttackBase(object):
 
     @classmethod
     def _cache_name(cls, name, items):
+        """
+        Cache the results of `name` query.
+        :param name: Name of the type searched
+        :param items: List of class instances returned by `get_by_name`
+        """
+        cls.validate_cache()
         if not cls._cached_obj["name"].get(name) or len(cls._cached_obj["name"][name]) != len(items):
             cls._cached_obj["name"][name] = items
 
     @classmethod
     def _cache_get_name(cls, name):
+        """
+        Returns the cached
+        :param name:
+        :return:
+        """
+        cls.validate_cache()
         if cls._cached_obj:
             return cls._cached_obj["name"].get(name)
         return None
@@ -84,6 +102,7 @@ class MitreAttackBase(object):
 
     @classmethod
     def _cache_get_id(cls, tid):
+        cls.validate_cache()
         if cls._cached_obj:
             return cls._cached_obj["id"].get(tid)
         return None
@@ -138,12 +157,8 @@ class MitreAttackBase(object):
         :return: list of class instances
         :rtype: list(self.__class__)
         """
-        if cls._cached_obj and cls._cached_obj["all"] is not None:
-            return cls._cached_obj["all"]
-
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         all_items = [cls(x) for x in conn.get_items(type_filter)]
-        cls._cached_obj["all"] = all_items
         return all_items
 
     @classmethod
