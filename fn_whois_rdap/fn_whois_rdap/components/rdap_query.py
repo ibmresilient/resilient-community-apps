@@ -54,6 +54,9 @@ class FunctionComponent(ResilientComponent):
                     rdap_response["dns_zone"] = internet_protocol_address_object.dns_zone
                 results = payload_object.done(True, rdap_response)
             log.info("RDAP Query complete, Threat Intelligence added to Artifact description")
+            #import pprint
+            #pprint.pprint(results)
+            #results = None
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

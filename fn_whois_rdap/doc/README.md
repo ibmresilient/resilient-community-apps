@@ -18,6 +18,7 @@
 - [**User Guide:** fn_whois_rdap_v1.0.0](#user-guide-fnwhoisrdapv100)
   - [Table of Contents](#table-of-contents)
   - [Key Features](#key-features)
+  - [Workflows - See "./data/" directory for further details](#workflows---see-%22data%22-directory-for-further-details)
   - [Function - RDAP: Query](#function---rdap-query)
   - [Function - WHOIS: query](#function---whois-query)
   - [Inform Resilient Users](#inform-resilient-users)
@@ -33,6 +34,10 @@
 * Information is sent directly to the Artifact Description
 
 ---
+
+## Workflows - See "./data/" directory for further details
+
+ ![screenshot: fn-rdap-query ](./screenshots/workflows.png)
 
 ## Function - RDAP: Query
 Using ipwhois library to make general queries in RDAP format
@@ -100,7 +105,7 @@ else:
 ## Function - WHOIS: query
 Using ipwhois library to make general queries in whois format
 
- ![screenshot: fn-whois-query ](./screenshots/fn-whois-query.png)
+ ![screenshot: fn-whois-query ](./screenshots/fn-rdap-query.png)
 
 <details><summary>Inputs:</summary>
 <p>

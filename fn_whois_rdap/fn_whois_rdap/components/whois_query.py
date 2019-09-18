@@ -52,7 +52,6 @@ class FunctionComponent(ResilientComponent):
                     whois_response["dns_zone"] = internet_protocol_address_object.dns_zone
                 results = payload_object.done(True, whois_response)
             log.info("WHOIS Query complete, Threat Intelligence added to Artifact description")
-            #results = {"test": "dict"}
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)
