@@ -6,10 +6,12 @@
     "incident_type_ids": [16],
     "severity_code": "{{incident.severity}}",
     {%- if incident.get('event_date', False) -%} "start_date": {{dt_to_milli_epoch(incident.event_date)}}, {%-endif -%}
+    {#  Custom properties for DLP Attributes #}
     "properties": {
         "sdlp_incident_id": {{incident.incidentId}},
         "sdlp_incident_url": {"format" : "html", "content" : "<a href={{incident.dlp_incident_url}}>{{incident.dlp_incident_url}}</a>"}
     },
+    {# Artifacts which we will try to pull out of the Incident #}
     "artifacts": [
         {%- if incident.incident.get('machineIP', False) -%}
         {{- comma() }}
@@ -34,7 +36,7 @@
         {"type": {"name": "System Name"}, "value": "{{incident.incident.machineName}}",
             "description" : {"format" : "html", "content" : "System Name of the machine that generated this incident. Includes the machine name. Generated from DLP Incident with an ID of {{incident.incidentId}}"}}
         {%- endif -%}
-
+        {# If we have one or more recipients, iterate through them looking for potential artifacts #}
         {%- if incident.incident.get('recipient', False) -%}
         {%- for recipient in incident.incident.recipient -%}
         
@@ -57,6 +59,7 @@
     ],
     "comments": [
         {%- for note_text in incident.notes -%}
+        {# If there is more than 1 note we aren't dealing with the very first note, add a comma #}
         {%- if incident.notes|length > 1 -%}
         {%- if note_text != incident.notes|first -%}
         {{- comma() }}
@@ -68,6 +71,7 @@
             }        
         }
         {%- endfor -%}
+        {# If there is one or more note in the incident, add a comma here to avoid JSON issues #}
         {%- if incident.notes|length > 0 -%}
         {{- comma() }}
         {%- endif -%}
