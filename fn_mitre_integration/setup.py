@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_mitre_integration'",
     long_description="fn_mitre_integration support retrieving information related to MITRE ATT&CK tactics and technique from MITRE STIX TAXII server.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_lib'
+        'resilient_circuits>=32.0.0',
         'stix2',
         'taxii2-client'
     ],
