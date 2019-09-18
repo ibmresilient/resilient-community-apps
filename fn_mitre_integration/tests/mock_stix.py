@@ -23,6 +23,11 @@ class MitreQueryMocker(object):
                 [{"type": "course-of-action",    "id": "course-of-action--20f6a9df-37c4-4e20-9e47-025983b1b39d",    "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",    "created": "2019-06-11T16:33:55.337Z",    "modified": "2019-06-11T16:33:55.337Z",    "name": "Filter Network Traffic",    "description": "Use network appliances to filter ingress or egress traffic and perform protocol-based filtering.",    "external_references": [        {            "source_name": "mitre-attack",            "url": "https://attack.mitre.org/mitigations/M1037",            "external_id": "M1037"        }    ],    "object_marking_refs": [        "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"    ],    "x_mitre_version": "1.0"}],
                 []
                 ]
+    SOFTWARE =  [
+                [{'created_by_ref': 'identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5', 'description': '[Pegasus for iOS](https://attack.mitre.org/software/S0289) is the iOS version of malware that has reportedly been linked to the NSO Group. It has been advertised and sold to target high-value victims. (Citation: Lookout-Pegasus) (Citation: PegasusCitizenLab) The Android version is tracked separately under [Pegasus for Android](https://attack.mitre.org/software/S0316).', 'id': 'malware--33d9d91d-aad9-49d5-a516-220ce101ac8a', 'external_references': [{'external_id': 'S0289', 'source_name': 'mitre-mobile-attack', 'url': 'https://attack.mitre.org/software/S0289'}, {'source_name': 'Pegasus for iOS', 'description': '(Citation: Lookout-Pegasus) (Citation: PegasusCitizenLab)'}, {'source_name': 'Lookout-Pegasus', 'description': 'Lookout. (2016). Technical Analysis of Pegasus Spyware. Retrieved December 12, 2016.', 'url': 'https://info.lookout.com/rs/051-ESQ-475/images/lookout-pegasus-technical-analysis.pdf'}, {'source_name': 'PegasusCitizenLab', 'description': 'Bill Marczak and John Scott-Railton. (2016, August 24). The Million Dollar Dissident: NSO Group’s iPhone Zero-Days used against a UAE Human Rights Defender. Retrieved December 12, 2016.', 'url': 'https://citizenlab.org/2016/08/million-dollar-dissident-iphone-zero-day-nso-group-uae/'}], 'object_marking_refs': ['marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168'], 'modified': '2018-12-11 20:40:31.461000+00:00', 'type': 'malware', 'created': '2017-10-25 14:48:44.238000+00:00', 'name': 'Pegasus for iOS', 'labels': ['malware'], 'x_mitre_old_attack_id': 'MOB-S0005', 'x_mitre_version': '1.1', 'x_mitre_platforms': ['iOS'], 'x_mitre_aliases': ['Pegasus for iOS'], 'revoked': 'False'}],
+                [{'created_by_ref': 'identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5', 'description': '[Adups](https://attack.mitre.org/software/S0309) is software that was pre-installed onto Android devices, including those made by BLU Products. The software was reportedly designed to help a Chinese phone manufacturer monitor user behavior, transferring sensitive data to a Chinese server. (Citation: NYTimes-BackDoor) (Citation: BankInfoSecurity-BackDoor)', 'id': 'malware--f6ac21b6-2592-400c-8472-10d0e2f1bfaf', 'external_references': [{'external_id': 'S0309', 'source_name': 'mitre-mobile-attack', 'url': 'https://attack.mitre.org/software/S0309'}, {'source_name': 'Adups', 'description': '(Citation: NYTimes-BackDoor) (Citation: BankInfoSecurity-BackDoor)'}, {'source_name': 'NYTimes-BackDoor', 'description': 'Matt Apuzzo and Michael S. Schmidt. (2016, November 15). Secret Back Door in Some U.S. Phones Sent Data to China, Analysts Say. Retrieved February 6, 2017.', 'url': 'https://www.nytimes.com/2016/11/16/us/politics/china-phones-software-security.html'}, {'source_name': 'BankInfoSecurity-BackDoor', 'description': 'Jeremy Kirk. (2016, November 16). Why Did Chinese Spyware Linger in U.S. Phones?. Retrieved February 6, 2017.', 'url': 'http://www.bankinfosecurity.com/did-chinese-spyware-linger-in-us-phones-a-9534'}], 'object_marking_refs': ['marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168'], 'modified': '2018-12-11 20:40:31.461000+00:00', 'type': 'malware', 'created': '2017-10-25 14:48:47.038000+00:00', 'name': 'Adups', 'labels': ['malware'], 'x_mitre_old_attack_id': 'MOB-S0025', 'x_mitre_version': '1.1', 'x_mitre_platforms': ['Android'], 'x_mitre_aliases': ['Adups'], 'revoked': 'False'}],
+                []
+    ]
 
     def __init__(self):
         self.call = 0
@@ -43,6 +48,10 @@ class MitreQueryMocker(object):
                     break
                 elif filt.value == "course-of-action":
                     res = self.mitigations(filters)
+                    break
+                elif (isinstance(filt.value, (list, tuple)) and filt.value[0] in ["tool", "malware"] and filt.value[1] in ["tool", "malware"]) or \
+                    filt.value in ["tool", "malware"]:
+                    res = self.software(filters)
                     break
         self.call += 1
         self.call %= 3
@@ -77,3 +86,6 @@ class MitreQueryMocker(object):
 
     def mitigations(self, filters):
         return self.apply_fiters(self.MITIGATIONS[self.call], filters)
+
+    def software(self, filters):
+        return self.apply_fiters(self.SOFTWARE[self.call], filters)

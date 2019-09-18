@@ -8,13 +8,15 @@ MITRE ATTACK STIX TAXII server. Since that sever is
 available to public, this file is a system level test
 """
 
-from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, MitreAttackMitigation
+from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, \
+    MitreAttackMitigation, MitreAttackSoftware
 from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques
 import requests
 import pytest
 import mock
 from .mock_stix import MitreQueryMocker
 from mock import patch
+import re
 
 
 def url_get(url):
@@ -70,6 +72,7 @@ class TestMitreTactic(object):
         dict_reps = [tactic.dict_form() for tactic in tactics]
         # check for every tactic that every field of their representation doesn't container the tag.
         assert all([("<code>" not in tactic_repr[key] for key in tactic_repr) for tactic_repr in dict_reps])
+
 
 class TestMitreTechnique(object):
     mitre_attack = MitreAttackConnection()
@@ -129,6 +132,7 @@ class TestMitreTechnique(object):
         # check for every technique's representation that all the field don't have the tag
         assert all([("<code>" not in technique_repr[key] for key in technique_repr) for technique_repr in dict_reps])
 
+
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
 
@@ -158,6 +162,37 @@ class TestMitreMitigation(object):
             dict_reps = [mitigation.dict_form() for mitigation in mitigations]
             # check for every technique's representation that all the field don't have the tag
             assert all([("<code>" not in mitigation_repr[key] for key in mitigation_repr) for mitigation_repr in dict_reps])
+
+    def test_mitigation_doesnt_have_mardown_links(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            mitigation = MitreAttackMitigation.get_all(self.mitre_attack)
+            dict_reps = [s.dict_form() for s in mitigation]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+
+class TestMitreSoftware(object):
+    mitre_attack = MitreAttackConnection()
+
+    def test_software_doesnt_have_mardown_links(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            software = MitreAttackSoftware.get_all(self.mitre_attack)
+            dict_reps = [s.dict_form() for s in software]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+
+    def test_get_all(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            assert len(MitreAttackSoftware.get_all(self.mitre_attack)) == len(MitreQueryMocker.SOFTWARE[0]) + len(
+                MitreQueryMocker.SOFTWARE[1]) + len(MitreQueryMocker.SOFTWARE[2])
 
 
 class TestMitre(object):
