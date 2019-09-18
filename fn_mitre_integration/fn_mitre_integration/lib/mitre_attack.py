@@ -308,12 +308,13 @@ class MitreAttackMitigation(MitreAttackBase):
 
 class MitreAttackSoftware(MitreAttackBase):
     MITRE_TYPE = ["tool", "malware"]
-    SOFTWARE_BASE_URL = "https://attack.mitre.org/software/"
+    SOFTWARE_BASE_URL = "https://attack.mitre.org/software"
 
     def __init__(self, doc):
         super(MitreAttackSoftware, self).__init__(doc)
         self.type = self.get_type(doc)
         self.platforms = self.get_platforms(doc)
+        self.technique_id = None
 
     def get_url(self):
         """
@@ -354,14 +355,18 @@ class MitreAttackSoftware(MitreAttackBase):
         if technique is None:
             return None
 
-        rels = conn.get_related_to(technique._stix, "uses", target_only=True)  # get stix objects
-        rels = filter(lambda x: x["type"] in cls.MITRE_TYPE, rels)  # filter to keep only software types
-        rels = [cls(x) for x in rels]  # initialize class instances
+        soft = conn.get_related_to(technique._stix, "uses", target_only=True)  # get stix objects
+        soft = filter(lambda x: x["type"] in cls.MITRE_TYPE, soft)  # filter to keep only software types
+        soft = [cls(x) for x in soft]  # initialize class instances
 
-        return rels
+        for s in soft:
+            s.technique_id = technique.id
+
+        return soft
 
     def dict_form(self):
         return {
+            "technique": self.technique_id,
             "name": self.name,
             "id": self.id,
             "ref": self.get_url(),
