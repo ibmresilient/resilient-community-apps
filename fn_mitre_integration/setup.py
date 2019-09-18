@@ -26,7 +26,8 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             "MitreTechniqueInformationFunctionComponent = fn_mitre_integration.components.mitre_technique_information:FunctionComponent",
-            "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent"
+            "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent",
+            "MitreTechniquesSoftwareFunctionComponent = fn_mitre_integration.components.mitre_techniques_software:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mitre_integration.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"],
