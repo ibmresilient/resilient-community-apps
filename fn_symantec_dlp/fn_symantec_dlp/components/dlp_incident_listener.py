@@ -48,6 +48,19 @@ class FunctionComponent(ResilientComponent):
                     Timer(interval=polling_interval,
                           event=Event.create("DLPListenerPollingEvent"),
                           persist=True).register(self)
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        # Compare the existing options with what we just pulled, has ANY value changed?
+        LOG.debug("Reloading event triggered, comparing app.config values")
+        if self.options != opts.get("fn_symantec_dlp", {}):
+            self.options = opts.get("fn_symantec_dlp", {})
+            # Toggle the shared class_vars_loaded so the init of DLPSoapClient isin't skipped
+            self.dlp_listener.soap_client.class_vars_loaded = False 
+            # Reinit the Listener class which will reinit the SoapClient
+            self.dlp_listener = DLPListener(opts)
+            # Once here, the Listener should be reloaded and the Timer component should not need re-registration
+
 
     def setup_listener(self):
         """setup_listener Start our consumer, which will attempt a connection to DLP
