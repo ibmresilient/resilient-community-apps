@@ -21,7 +21,7 @@ def replace_code_tags(text):
     :type text: str
     :return: text with unsupported tags replaced with supported
     """
-    return re.sub("<(/*)code>", r"<\{}>".format(CODE_TAG), text)
+    return re.sub("<(/*)code>", r"<\1{}>".format(CODE_TAG), text)
 
 
 class MitreAttackBase(object):
