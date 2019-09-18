@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_mitre_integration_v1.0.1
+# **User Guide:** fn_mitre_integration_v2.0.0
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -32,6 +32,7 @@
 * Query tactics/techniques by name or id
 * Queries all of MITRE ATT&CK collections
 * Create a task from a queried technique that would include mitigation information
+* Get software associated with given technique(s)
 
 ---
 
@@ -55,6 +56,7 @@ Get information about MITRE tactic
 <p>
 
 ```python
+# Data returned as a part of ResultPayload:
 results = {
   "mitre_tactics": [
     {
@@ -106,7 +108,31 @@ elif incident_propery_given:
 <p>
 
 ```python
-tactics = results.mitre_tactics
+""" Example of data returned in ResultPayload's content
+{
+  "mitre_tactics": [
+    {
+      
+      "name": String,
+      "id": String,
+      "ref": "String",
+      "collection": "String", 
+      "mitre_techniques": [
+        {
+          "name": "String", 
+          "description": "String",
+          "external_references": [{"url": "String"}],
+          "x_mitre_detection": "String",
+          "id": "String",
+          "collection": "String"
+        }
+      ]
+    }
+  ]
+}
+"""
+
+tactics = results.content["mitre_tactics"]
 
 for tactic in tactics:
   #
@@ -129,7 +155,7 @@ for tactic in tactics:
     tech_row["tactic"] = tactic["name"]
 
     tech_row["technique_name"] = att_tech["name"]
-    tech_row["technique_description"] = att_tech["description"]
+    tech_row["technique_description"] = helper.createRichText(att_tech["description"])
     refs = att_tech["external_references"]
     ref_html = ""
     for ref in refs:
@@ -161,7 +187,7 @@ for tactic in tactics:
       
       ref_html = ref_html + '<a href="' + ref["url"] + '">' + display_str + '</a><br>'
     tech_row["references"] = helper.createRichText(ref_html)
-    tech_row["detection"] = att_tech["x_mitre_detection"]
+    tech_row["detection"] = helper.createRichText(att_tech["x_mitre_detection"])
     tech_row["technique_id"] = att_tech["id"]
 
 
@@ -192,6 +218,7 @@ Get ATT&CK information about MITRE ATT&CK technique
 <p>
 
 ```python
+# Data returned as a part of ResultPayload:
 results = {
   "mitre_techniques": [
     {
@@ -224,13 +251,28 @@ inputs.mitre_technique_name = row.technique_name
 <p>
 
 ```python
-techniques = results.mitre_techniques
+""" An example of returned data in ResultPayload. Whether it's queried by id or name a list will be returned.
+{
+  "mitre_techniques": [
+    {
+      "name": "String", 
+      "description": "String",
+      "external_references": [{"url": "String"}],
+      "x_mitre_detection": "String",
+      "id": "String",
+      "collection": "String"
+    }
+  ]
+}
+"""
+
+techniques = results.content["mitre_techniques"]
 
 if not isinstance(techniques, list):
   techniques = [techniques]
 
 for technique in techniques:
-  task_title = "MITRE ATT&CK Technique: " + results.name
+  task_title = "MITRE ATT&CK Technique: " + technique["name"]
   task_summary=u"""
   <h1> Description </h1>
   {des}
@@ -238,8 +280,98 @@ for technique in techniques:
   {det}
   <h1> Mitigation </h1>
   {miti}
-  """.format(des=row.tech_description, det=row.detection, miti=technique["mitre_mitigation"])
+  """.format(des=technique.get("description", ""), det=technique.get("x_mitre_detection", ""), miti=technique.get("mitre_mitigation",""))
   incident.addTask(task_title, "Detect/Analyze", helper.createRichText(task_summary))
+```
+
+</p>
+</details>
+
+---
+## Function - MITRE Technique's Software
+Gets a list of software used by each of the techniques queried.
+For each, it will create a row in the corresponding data table for MITRE software.
+
+ ![screenshot: fn-mitre-techniques-software ](./screenshots/fn-mitre-techniques-software.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `mitre_technique_id` | `text` | No | `T1155 , T1104` | - |
+| `mitre_technique_name` | `text` | No | `AppleScript` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+# Data returned as a part of ResultPayload:
+{
+    "technique": "STIX ID of the technique",
+    "name": "Software's name",
+    "id": "Software's id",
+    "ref": "URL of software on MITRE's website",
+    "description": "description of the website",
+    "platforms": "platforms the software runs on",
+    "type": "Type - 'malware' or 'tool'"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
+incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
+
+if activity_field_given:
+  inputs.mitre_technique_name = rule.properties.mitre_technique_name
+  inputs.mitre_technique_id = rule.properties.mitre_technique_id
+elif incident_properties_given:
+  inputs.mitre_technique_id = incident.properties.mitre_technique_id
+  inputs.mitre_technique_name = incident.properties.mitre_technique_name
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+"""
+Data returned as a part of ResultPayload:
+        {
+            "technique": "STIX ID of the technique",
+            "name": "Software's name",
+            "id": "Software's id",
+            "ref": "URL of software on MITRE's website",
+            "description": "description of the website",
+            "platforms": "platforms the software runs on",
+            "type": "Type - 'malware' or 'tool'"
+        }
+"""
+software = results.content["mitre_software"]
+
+for soft in software:
+  soft_row = incident.addRow("mitre_attack_software")
+  soft_row["software_technique"] = soft["technique"]
+  
+  ref = '<a href="{}">'.format(soft["ref"]) +'{}</a> '
+  soft_row["software_name"] = helper.createRichText(ref.format(soft["name"]))
+  soft_row["software_id"]   = helper.createRichText(ref.format(soft["id"]))
+  
+  soft_row["software_description"] = helper.createRichText(soft["description"])
+  soft_row["software_type"] = soft["type"]
+  soft_row["software_platform"] = ",".join(soft["platforms"])
+  soft_row["software_description"] = helper.createRichText(soft["description"])
 ```
 
 </p>
@@ -262,6 +394,24 @@ mitre_attack_of_incident
 | Confidence | `confidence` | `text` | confidence of the mapping |
 | Reference | `reference` | `textarea` | url links for MITRE ATT&CK Tactic |
 | Tactic Code | `tactic_code` | `text` | tactic code |
+
+---
+## Data Table - MITRE ATT&CK Software
+
+ ![screenshot: dt-mitre-attck-software](./screenshots/dt-mitre-attck-software.png)
+
+#### API Name:
+mitre_attack_software
+
+#### Columns:
+| Column Name | API Access Name | Type | Tooltip |
+| ----------- | --------------- | ---- | ------- |
+| Description | `software_description` | `textarea` | - |
+| ID | `software_id` | `textarea` | Software's ID in MITRE ATT&CK |
+| Name | `software_name` | `textarea` | Name of the software |
+| Platform | `software_platform` | `text` | Platform where the software can be used |
+| Technique | `software_technique` | `text` | ID of the technique queried for the list of software |
+| Type | `software_type` | `text` | Category for this software in ATT&CK |
 
 ---
 ## Data Table - MITRE ATT&CK Techniques
@@ -287,10 +437,10 @@ mitre_attack_techniques
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| MITRE ATT&CK Technique ID | `mitre_technique_id` | `text` | `properties` | - | MITRE ID for technique |
-| MITRE ATT&CK Tactic name | `mitre_tactic_name` | `text` | `properties` | MITRE tactic name | MITRE ATT&CK Tactic name |
 | MITRE ATT&CK Technique name | `mitre_technique_name` | `text` | `properties` | MITRE technique name | MITRE ATT&CK Technique name |
+| MITRE ATT&CK Technique ID | `mitre_technique_id` | `text` | `properties` | - | MITRE ID for technique |
 | MITRE ATT&CK Tactic ID | `mitre_tactic_id` | `text` | `properties` | - | MITRE ID for Tactic |
+| MITRE ATT&CK Tactic name | `mitre_tactic_name` | `text` | `properties` | MITRE tactic name | MITRE ATT&CK Tactic name |
 
 ---
 
@@ -301,6 +451,7 @@ mitre_attack_techniques
 | Create Task for MITRE ATT&CK technique | mitre_attack_techniques | `mitre_technique_task` |
 | Get MITRE tactic information | incident | `mitre_get_tactic_information` |
 | Get MITRE technique information | incident | `mitre_get_technique_information` |
+| Get MITRE technique's software | incident | `mitre_get_software_for_a_technique` |
 
 ---
 
