@@ -276,7 +276,7 @@ class MitreAttackMitigation(MitreAttackBase):
             mitigation.collection = technique.collection
         return res
 
-    def dict(self):
+    def dict_form(self):
         return {
             "description": replace_code_tags(self.description),
             "name": self.name,
