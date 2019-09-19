@@ -42,5 +42,12 @@ sdlp_savedreportid=0
 # to ensure no Resilient incident exists with the same DLP Incident ID. 
 # Uses search_ex to query for incidents with an sdlp_incident_id custom field 
 sdlp_should_search_res=False
+
+# When getting a list of Incidents from a saved report, a parameter incident_creation_date_later_than
+# must be provided to make a query. This value represents the earliest date for Incidents that will be queried. 
+# For this app.config, specify a number of days in the past to look back on.
+# For example to pull any Incidents in the last year, set this value to 365.
+# The default value used if this is not set is 14 days
+#sdlp_incident_creation_date_later_than=365
 """
     return config_data

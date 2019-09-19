@@ -21,7 +21,7 @@ from zeep.helpers import serialize_object
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
 LOG = logging.getLogger(__name__)
-
+DEFAULT_NUM_OF_DAYS = 14
 
 class DLPListener(ResilientComponent):
     """DLPListener class which is used to Poll DLP for Incidents and then import them into Resilient.
@@ -45,9 +45,13 @@ class DLPListener(ResilientComponent):
         """
 
         LOG.debug("Started Poller")
+        # Gather the sdlp_incident_creation_date_later_than if its set or use the default value 
+        incident_creation_date_later_than = datetime.datetime.now() - datetime.timedelta(
+            days=int(self.dlp_opts.get("sdlp_incident_creation_date_later_than", DEFAULT_NUM_OF_DAYS)))
+        LOG.debug("Searching for Incidents which were created after %s", incident_creation_date_later_than)
         # gather the list of incidents from a saved report
         res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
-                                          incident_creation_date_later_than=datetime.datetime.now() - datetime.timedelta(days=14))
+                                          incident_creation_date_later_than=incident_creation_date_later_than)
 
         # gather the incident_details for incidents returned
         incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
