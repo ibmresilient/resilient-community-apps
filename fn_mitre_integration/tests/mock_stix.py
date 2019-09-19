@@ -5,7 +5,8 @@
 class MitreQueryMocker(object):
     """
     Whole class exists to patch MitreAttackConnection's query to return data from saved data.
-    query is called 3 times each `get_items` call, for each collection, so we return 3 times.
+    query is called 3 times during each of `get_items` calls; 1 time per collection, so we have 3 arrays of data
+    per category, and return one at a time, counting the number of calls made.
     We mod the index we return, just in case more collections get added down the road.
     """
     TACTICS =   [
@@ -30,9 +31,15 @@ class MitreQueryMocker(object):
     ]
 
     def __init__(self):
-        self.call = 0
+        self.call = 0  # call keeps track of the array position to return. We expect to always have 3 calls in a row
 
     def query(self, filters):
+        """
+        Look through the filters to see what type of data is requested.
+        For supported types return one collection of data.
+        We expect to get 3 calls,  for each of the collections, so we track the number of function calls to
+        make sure we return all of the data.
+        """
         res = None
 
         if not isinstance(filters, list):
@@ -49,15 +56,20 @@ class MitreQueryMocker(object):
                 elif filt.value == "course-of-action":
                     res = self.mitigations(filters)
                     break
+                # software supports 2 types, so we handle the situation when each or a combination is queried
                 elif (isinstance(filt.value, (list, tuple)) and filt.value[0] in ["tool", "malware"] and filt.value[1] in ["tool", "malware"]) or \
                     filt.value in ["tool", "malware"]:
                     res = self.software(filters)
                     break
-        self.call += 1
-        self.call %= 3
+        self.call += 1  # next collection
+        self.call %= 3  # loop through the data we have.
         return res
 
     def apply_fiters(self, data, filters):
+        """
+        Simulate some of the basic filters for the purpose of testing.
+        Supports selecting items by their id and name.
+        """
         result = []
         filtered = False
 
@@ -82,10 +94,19 @@ class MitreQueryMocker(object):
         return self.apply_fiters(self.TACTICS[self.call], filters)
 
     def techniques(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
         return self.apply_fiters(self.TECHNIQUES[self.call], filters)
 
     def mitigations(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
         return self.apply_fiters(self.MITIGATIONS[self.call], filters)
 
     def software(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
         return self.apply_fiters(self.SOFTWARE[self.call], filters)

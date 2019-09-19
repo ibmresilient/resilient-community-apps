@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+#
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -71,8 +73,6 @@ For each, it will create a row in the corresponding data table for MITRE softwar
             results = {
                 "mitre_software": software
             }
-            print("Result software")
-            print(software)
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload.done(True, results))
         except Exception as e:
