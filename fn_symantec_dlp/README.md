@@ -134,7 +134,7 @@ There are several ways to verify the successful operation of a function.
 
 
 ## Configure Symantec DLP 
-This Integration with Symantec DLP works by querying a Saved Report for Incidents. When hitting this saved report, any Incidents within it which does not have a value for the `resilient_incident_id` custom attribute will be marked for import into Resilient and after this happens, the `resilient_incident_id` custom attribute will be filled with the new Incident ID. With this in mind, Saved Reports can be used to specify which Incidents should be imported to Resilient and if desired, another Saved Report can be setup to show which Incidents have already been imported to Resilient.
+This integration with Symantec DLP works by querying a DLP Saved Report for Incidents. When the saved report results are retrieved, any Incident which does not have a value for the `resilient_incident_id` custom attribute is imported into Resilient. Afterward, the `resilient_incident_id` custom DLP attribute will be filled in with the new Resilient Incident ID. This Saved Report can be customized to specify which Incidents should be imported to Resilient.
 
 To setup a basic Saved Report for the integration follow these high level steps: 
 * Login to Symantec DLP and navagate to the Incidents View 
