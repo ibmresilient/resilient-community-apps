@@ -23,7 +23,19 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
     mitre_conn = MitreAttackConnection()
 
     tactics = []
-    if tactic_names is not None:
+
+    # Check ids first, as it takes priority in querying
+    if tactic_ids is not None:
+        t_ids = tactic_ids.split(',')
+
+        for tid in t_ids:
+            tactics_id = MitreAttackTactic.get_by_id(mitre_conn, tid)
+            if tactics_id is not None:
+                for tactic in tactics_id:
+                    tactics.append(tactic.id)
+            else:
+                raise ValueError("Tactics with id {} do not exist.".format(tid))
+    elif tactic_names is not None:
         # It's possible for multiple tactics to have the same name
         # And we want to make sure that all of them are processed in that case
         tactic_names = tactic_names.split(',')
@@ -35,16 +47,6 @@ def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
             else:
                 for tactic in tactics_named:
                     tactics.append(tactic.id)
-    elif tactic_ids is not None:
-        t_ids = tactic_ids.split(',')
-
-        for tid in t_ids:
-            tactics_id = MitreAttackTactic.get_by_id(mitre_conn, tid)
-            if tactics_id is not None:
-                for tactic in tactics_id:
-                    tactics.append(tactic.id)
-            else:
-                raise ValueError("Tactics with id {} do not exist.".format(tid))
 
     ret = []
     for tactic_id in tactics:

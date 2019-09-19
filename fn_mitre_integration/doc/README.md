@@ -15,6 +15,7 @@
 # **User Guide:** fn_mitre_integration_v2.0.0
 
 ## Table of Contents
+- [Note](#note)
 - [Key Features](#key-features)
 - [Function - MITRE Tactic Information](#function---mitre-tactic-information)
 - [Function - MITRE Technique Information](#function---mitre-technique-information)
@@ -24,6 +25,10 @@
 - [Rules](#rules)
 
 ---
+
+## Note
+All functions provide input fields for querying MITRE by both ID and name, however
+in case both are provided ID will take priority, and name input will be ignored. 
 
 ## Key Features
 <!--

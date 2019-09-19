@@ -42,8 +42,10 @@ have examples of what the data looks like.
 
 ## Overview
 
-MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
-MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a tactic or technique has been identified. This information can help security analyst response quickly to a (potential) breach. 
+MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. 
+This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
+MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a 
+tactic or technique has been identified. This information can help security analyst response quickly to a (potential) breach. 
 MITRE Integration includes 2 functions:
 
 - Query ATT&CK information for a MITRE tactic
