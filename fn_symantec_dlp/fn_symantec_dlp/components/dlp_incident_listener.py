@@ -86,9 +86,6 @@ class FunctionComponent(ResilientComponent):
         """dlp_thread_start function which checks if the current thread is still running.
         If not setup and new one and Poll DLP for Incidents
         """
-        # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
-        # The rest_client function returns a 'connected' instance of SimpleClient, so if the session is still valid, reuse that.
-        self.dlp_listener.res_rest_client = ResilientComponent.rest_client(self.dlp_listener)
         LOG.info("DLP Listener Polling Event received. Checking if any previous thread is still alive")
 
         # If the poller is not already running

@@ -57,6 +57,11 @@ class DLPListener(ResilientComponent):
         # Drop all incidents which have a res_id custom attribute
         incidents = list(self.filter_existing_incidents(incidents))
 
+        if incidents: # If theres more than one incident after first filter 
+            # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
+            # The rest_client function returns a 'connected' instance of SimpleClient, so if the session is still valid, reuse that.
+            self.res_rest_client = ResilientComponent.rest_client(self)
+        
         LOG.info("Number of Incidents after filtering: %d", len(incidents))
         # Get the sdlp_incident_id field
         sdlp_id_type = self.res_rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
