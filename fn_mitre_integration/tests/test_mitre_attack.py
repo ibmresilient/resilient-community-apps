@@ -71,6 +71,15 @@ class TestMitreTactic(object):
         # check for every tactic that every field of their representation doesn't container the tag.
         assert all([("<code>" not in tactic_repr[key] for key in tactic_repr) for tactic_repr in dict_reps])
 
+    def test_deprecated_tactic_states_so_in_description(self):
+        """
+        Gets tactics with name Impact, and checks that deprecation message was added.
+        Deprecation flag was added to one of the mocked tactics.
+        """
+        tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
+        assert any(x.description.startswith("Deprecated") for x in tactics)
+
+
 class TestMitreTechnique(object):
     mitre_attack = MitreAttackConnection()
 
@@ -129,6 +138,15 @@ class TestMitreTechnique(object):
         # check for every technique's representation that all the field don't have the tag
         assert all([("<code>" not in technique_repr[key] for key in technique_repr) for technique_repr in dict_reps])
 
+    def test_deprecated_technique_states_so_in_description(self):
+        """
+        Gets tactics with name Impact, and checks that deprecation message was added.
+        Deprecation flag was added to one of the mocked techniques.
+        """
+        techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Domain Generation Algorithms")
+        assert any(x.description.startswith("Deprecated") for x in techniques)
+
+
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
 
@@ -158,6 +176,16 @@ class TestMitreMitigation(object):
             dict_reps = [mitigation.dict_form() for mitigation in mitigations]
             # check for every technique's representation that all the field don't have the tag
             assert all([("<code>" not in mitigation_repr[key] for key in mitigation_repr) for mitigation_repr in dict_reps])
+
+    def test_deprecated_mitigation_states_so_in_description(self):
+        """
+        Gets tactics with name Impact, and checks that deprecation message was added.
+        Deprecation flag was added to one of the mocked mitigations.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
+            assert any(x.description.startswith("Deprecated") for x in mitigations)
 
 
 class TestMitre(object):

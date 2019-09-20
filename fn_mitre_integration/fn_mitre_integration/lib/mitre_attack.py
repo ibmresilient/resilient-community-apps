@@ -38,7 +38,11 @@ class MitreAttackBase(object):
         self.collection = self.get_collection(doc)
         self.name = self.get_name(doc)
         self.id = self.get_id(doc)
+        self.deprecated = self.get_deprecation(doc)
         self.description = doc.get("description", "")
+
+        if self.deprecated:
+            self.description = "Deprecated. " + self.description
 
     def dict_form(self):
         """
@@ -62,6 +66,10 @@ class MitreAttackBase(object):
         for key in obj.keys():
             res[key] = obj[key]
         return res
+
+    @staticmethod
+    def get_deprecation(doc):
+        return doc.get("x_mitre_deprecated", False)
 
     @staticmethod
     def get_collection(doc):
