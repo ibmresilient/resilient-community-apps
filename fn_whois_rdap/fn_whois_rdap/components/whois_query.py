@@ -29,8 +29,7 @@ class FunctionComponent(ResilientComponent):
             input_is_ip, registered_domain = helper.check_input_ip(whois_query)
 
             if not input_is_ip:
-                obj = socket.getaddrinfo(registered_domain, None)
-                ip_from_domain = [x[4] for x in obj].pop()[0]
+                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
                 whois_response = helper.get_whois_registry_info(ip_from_domain)
                 results = payload_object.done(True, whois_response)
             else:

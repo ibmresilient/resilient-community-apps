@@ -32,8 +32,7 @@ class FunctionComponent(ResilientComponent):
             input_is_ip, registered_domain = helper.check_input_ip(rdap_query)
 
             if not input_is_ip:
-                obj = socket.getaddrinfo(registered_domain, None)
-                ip_from_domain = [x[4] for x in obj].pop()[0]
+                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
                 rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
                 results = payload_object.done(True, rdap_response)
             else:

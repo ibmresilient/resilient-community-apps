@@ -29,7 +29,7 @@ def call_whois_query_function(circuits, function_params, timeout=10):
 
 
 class TestWhoisQuery:
-    @pytest.mark.livetest
+    #@pytest.mark.livetest These are livetest but not marking due to failing build
 
     @pytest.mark.parametrize("whois_query, expected_results", [
         ("ibm.com", {"success" : True}),
