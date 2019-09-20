@@ -14,7 +14,6 @@ from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
 from fn_proofpoint_tap.util.helpers import get_config_option
 from pkg_resources import Requirement, resource_filename
-import fn_proofpoint_tap.util.selftest as selftest
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -33,7 +32,6 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_proofpoint_tap", {})
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.default_path = os.path.join(current_path, os.path.pardir, "data/templates/pp_threat_forensics.jinja")
-        selftest.selftest_function(opts)
 
     @handler("reload")
     def _reload(self, event, opts):

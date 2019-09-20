@@ -38,7 +38,7 @@ threat_template=
 # optional - Jinja template to override default forensic format
 forensics_template=
 
-# optional
+# optional - If required by Proofpoint
 cafile=
 """
     return config_data

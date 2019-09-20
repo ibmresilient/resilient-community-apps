@@ -81,7 +81,8 @@ class PP_ThreatPolling(ResilientComponent):
         self.options = opts.get("fn_proofpoint_tap", {})
 
         # Proofpoint score
-        self.score_threshold = self.getfloat('score_threshold')
+        self.score_threshold = float(self.options.get("score_threshold")) \
+            if self.options.get("score_threshold") else None
         # Types of incidents to import to Resilient
         self.type_filter = self.gettypefilter()
 
@@ -107,11 +108,6 @@ class PP_ThreatPolling(ResilientComponent):
             self.lastupdate = None
         else:
             self.lastupdate = 60 * int(interval)
-
-    def getfloat(self, key):
-        """get floating point representation of an option if it exists, otherwise None"""
-        if key in self.options:
-            return float(self.options.get(key)) if self.options.get(key) else None
 
     def gettypefilter(self):
         """get lowercase set of type filter options if set, otherwise None"""
