@@ -7,8 +7,7 @@ import logging
 import socket
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
-from resilient_lib.components.resilient_common import validate_fields
+from resilient_lib import ResultPayload, validate_fields
 from fn_whois_rdap.util import helper
 
 class FunctionComponent(ResilientComponent):
@@ -33,7 +32,8 @@ class FunctionComponent(ResilientComponent):
             input_is_ip, registered_domain = helper.check_input_ip(rdap_query)
 
             if not input_is_ip:
-                ip_from_domain = socket.gethostbyname(registered_domain)
+                obj = socket.getaddrinfo(registered_domain, None)
+                ip_from_domain = [x[4] for x in obj].pop()[0]
                 rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
                 results = payload_object.done(True, rdap_response)
             else:

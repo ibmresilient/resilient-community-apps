@@ -25,7 +25,7 @@ inputs.whois_query = artifact.value
 ### Post-Processing Script
 ```python
 try:
-    des = artifact.description.content
+  des = artifact.description.content
 except Exception:
   des = None
 dummy ={}

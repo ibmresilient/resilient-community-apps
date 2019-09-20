@@ -26,6 +26,7 @@ def call_rdap_query_function(circuits, function_params, timeout=10):
 
 
 class TestRdapQuery:
+    @pytest.mark.livetest
     
     @pytest.mark.parametrize("rdap_depth, rdap_query, expected_results", [
         (0, "ibm.com", {"success" : True}),

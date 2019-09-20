@@ -11,10 +11,10 @@ def check_input_ip(query):
     """This function checks if the input is an IP, URL or DNS
 
     Arguments:
-        query {[string]} -- Artifact.value
+        query {string} -- Artifact.value
 
     Returns:
-        [bool, str] -- True or False, registered domain
+        {bool, str} -- True or False, registered domain
     """
     input_is_ip = True
     ext = tldextract.extract(query)
@@ -28,7 +28,7 @@ def get_whois_registry_info(ip_input):
     Arguments:
         ip_input {string} -- Artifact.value
     Returns:
-        object -- Contains all registry information
+        {object} -- Contains all registry information
     """
     internet_protocol_address_object = IPWhois(ip_input)
     whois_response = internet_protocol_address_object.lookup_whois()
@@ -44,7 +44,7 @@ def get_rdap_registry_info(ip_input, rdap_depth):
         rdap_depth {int} -- 0,1 or 2
 
     Returns:
-        object -- Registry info, RDAP Protocol
+        {object} -- Registry info, RDAP Protocol
     """
     internet_protocol_address_object = IPWhois(ip_input)
     rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
