@@ -4,8 +4,10 @@
 import datetime
 import logging
 import traceback
+import uuid
 
 import zeep
+from zeep.helpers import serialize_object
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 from resilient_lib import validate_fields
@@ -220,10 +222,16 @@ class DLPSoapClient():
 
 
     @classmethod
-    def update_incident(cls, status, custom_attributes):
+    def update_incident(cls, incident_id, status, custom_attributes):
         """update_incident is used to send changes to a DLP Incident
+        Each request to DLP sets up an UpdateBatchRequest SOAP Type and then sends the request to DLP
 
-        
+        :param incident_id: The ID of the DLP Incident to update. The input is casted to an int, input itself should be a number or string representation of one
+        :type incident_id: int
+        :param status: Used to update the status of a DLP Incident, the provided status value must be a valid, 
+        existing Incident Status option on your DLP Installation
+        :type status: string
+
         :return: the response of the request
         :rtype: dict
         """
@@ -232,4 +240,13 @@ class DLPSoapClient():
         # Get the type constructor for the IncidentAttributes type
         batch.incidentAttributes = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentAttributes')
         
+        if status:
+            batch.incidentAttributes.status = status
         
+        req = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateRequest')
+        updatebatch = batch(batchId="_{}".format(uuid.uuid4()), incidentLongId=[incident_id], incidentAttributes=batch.incidentAttributes)
+        # Init the IncidentUpdateRequest type providing our updateBatch, then serialize the whole thing as a dict.
+        new_req = serialize_object(req(updateBatch=[updatebatch]), target_cls=dict)
+        # # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
+        with cls.soap_client.settings(strict=False):
+            return cls.soap_client.service.updateIncidents(new_req)
