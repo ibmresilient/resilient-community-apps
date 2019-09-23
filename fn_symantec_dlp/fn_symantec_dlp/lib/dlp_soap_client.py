@@ -5,12 +5,16 @@ import datetime
 import logging
 import traceback
 import uuid
+import os
+
+
 
 import zeep
 from zeep.helpers import serialize_object
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 from resilient_lib import validate_fields
+from resilient_circuits import template_functions
 
 LOG = logging.getLogger(__name__)
 
@@ -222,7 +226,7 @@ class DLPSoapClient():
 
 
     @classmethod
-    def update_incident(cls, incident_id, status, custom_attributes):
+    def update_incident(cls, incident_id, status, note, custom_attributes=None):
         """update_incident is used to send changes to a DLP Incident
         Each request to DLP sets up an UpdateBatchRequest SOAP Type and then sends the request to DLP
 
@@ -239,27 +243,37 @@ class DLPSoapClient():
         :return: the response of the request
         :rtype: dict
         """
-        # Get the batch type which will be filled with our uodates
-        batch = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateBatch')
+        # Get the batch type which will be filled with our updates
+        batch = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateBatch')()
         # Get the type constructor for the IncidentAttributes type
-        batch.incidentAttributes = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentAttributes')
-        
+        incidentAttributes = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentAttributes')()
+        # incidentAttributes = incidentAttributesType()
+        batch.batchId = "_{}".format(uuid.uuid4())
         if status:
-            batch.incidentAttributes.status = status
+            incidentAttributes.status = status
+
         # Prepare an empty list for all the attributes
         attributes = []
         # Get the type constructor for the CustomAttributeType type
         attr = cls.soap_client.get_type(
                     '{http://www.vontu.com/v2011/enforce/webservice/incident/common/schema}CustomAttributeType')
-        for attribute in custom_attributes:
-            # Construct a CustomAttributeType with the kwargs from each attribute. Then append to our list
-            attributes.append(attr(**attribute))
-        # Add the list of customAttribute types to the incidentAttributes type
-        batch.incidentAttributes.customAttribute = attributes
+        if custom_attributes:
+            for attribute in custom_attributes:
+                # Construct a CustomAttributeType with the kwargs from each attribute. Then append to our list
+                attributes.append(attr(**attribute))
+            # Add the list of customAttribute types to the incidentAttributes type
+            incidentAttributes.customAttribute = attributes
         req = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateRequest')
-        updatebatch = batch(batchId="_{}".format(uuid.uuid4()), incidentLongId=[incident_id], incidentAttributes=batch.incidentAttributes)
+        batch.incidentAttributes = incidentAttributes
+        batch.incidentId = [incident_id]
         # Init the IncidentUpdateRequest type providing our updateBatch, then serialize the whole thing as a dict.
-        new_req = serialize_object(req(updateBatch=[updatebatch]), target_cls=dict)
+        new_req = serialize_object(req(updateBatch=[batch]), target_cls=dict)
         # # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
-        with cls.soap_client.settings(strict=False):
-            return cls.soap_client.service.updateIncidents(new_req)
+        request = req(updateBatch=batch)
+        # request.updateBatch = batch
+        with cls.soap_client.settings(strict=True):
+            
+            LOG.info(request)
+            return cls.soap_client.service.updateIncidents(request)
+
+    
