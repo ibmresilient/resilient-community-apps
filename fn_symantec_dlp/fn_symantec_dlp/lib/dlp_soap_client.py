@@ -231,7 +231,11 @@ class DLPSoapClient():
         :param status: Used to update the status of a DLP Incident, the provided status value must be a valid, 
         existing Incident Status option on your DLP Installation
         :type status: string
+        :param custom_attributes: any custom attributes you want to update on the DLP Incident.
+        Passed in attributes must be done as a list of dict objects and each custom attribute needs to be provided with this format 
+        {"name": <custom attribute name>, "value": <custom attribute name>}
 
+        :type custom_attributes: list , optional
         :return: the response of the request
         :rtype: dict
         """
@@ -242,7 +246,16 @@ class DLPSoapClient():
         
         if status:
             batch.incidentAttributes.status = status
-        
+        # Prepare an empty list for all the attributes
+        attributes = []
+        # Get the type constructor for the CustomAttributeType type
+        attr = cls.soap_client.get_type(
+                    '{http://www.vontu.com/v2011/enforce/webservice/incident/common/schema}CustomAttributeType')
+        for attribute in custom_attributes:
+            # Construct a CustomAttributeType with the kwargs from each attribute. Then append to our list
+            attributes.append(attr(**attribute))
+        # Add the list of customAttribute types to the incidentAttributes type
+        batch.incidentAttributes.customAttribute = attributes
         req = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateRequest')
         updatebatch = batch(batchId="_{}".format(uuid.uuid4()), incidentLongId=[incident_id], incidentAttributes=batch.incidentAttributes)
         # Init the IncidentUpdateRequest type providing our updateBatch, then serialize the whole thing as a dict.
