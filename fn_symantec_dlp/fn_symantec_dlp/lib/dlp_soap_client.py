@@ -14,7 +14,6 @@ from zeep.helpers import serialize_object
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 from resilient_lib import validate_fields
-from resilient_circuits import template_functions
 
 LOG = logging.getLogger(__name__)
 
@@ -276,4 +275,49 @@ class DLPSoapClient():
             LOG.info(request)
             return cls.soap_client.service.updateIncidents(request)
 
-    
+    @classmethod
+    def update_incident_raw(cls, incident_id, status=None, note=None, custom_attributes=None):
+        headers = {'content-type': 'text/xml'}
+        body = """<?xml version="1.0" encoding="UTF-8"?>
+                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
+                        <soapenv:Header/>
+                        <soapenv:Body>
+                            <sch:incidentUpdateRequest>
+                                <!--1 or more repetitions:-->
+                                <updateBatch>
+                                    <batchId>{batch}</batchId>
+                                    <!--Zero or more repetitions:-->
+                                    <incidentId>{dlp_id}</incidentId>
+                                    <incidentAttributes>
+                                            <status>{status}</status>
+                                            <note>
+                                                <!--Optional:-->
+                                                <dateAndTime>?</dateAndTime>
+                                                <note>{note}</note>
+                                            </note>
+                                    </incidentAttributes>
+                                </updateBatch>
+                            </sch:incidentUpdateRequest>
+                        </soapenv:Body>
+                        </soapenv:Envelope>""".format(
+                            batch="_{}".format(uuid.uuid4()),  
+                            dlp_id=incident_id,
+                            status=status or "Imported to Resilient",
+                            note=note
+                            ) 
+        try:
+            response = cls.session.post(cls.sdlp_incident_endpoint,
+                                                data=body, headers=headers)
+
+            response.raise_for_status()
+
+            if b"<statusCode>SUCCESS</statusCode>" not in response.content:
+                raise ValueError("API Call did not Return a Success code")
+            LOG.info("Sent new update to DLP Incident %s", incident_id)
+
+            return response
+        except Exception as upload_ex:
+            LOG.debug(traceback.format_exc())
+            # Log the Connection error to the user
+            LOG.error(u"Problem: %s", repr(upload_ex))
+            LOG.error(u"[Symantec DLP] Encountered an exception when sending an UpdateRequest to DLP.")
