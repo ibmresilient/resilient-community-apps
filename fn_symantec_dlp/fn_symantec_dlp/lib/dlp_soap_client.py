@@ -217,3 +217,19 @@ class DLPSoapClient():
         custom_attributes = cls.soap_client.service.listCustomAttributes()
 
         return custom_attributes
+
+
+    @classmethod
+    def update_incident(cls, status, custom_attributes):
+        """update_incident is used to send changes to a DLP Incident
+
+        
+        :return: the response of the request
+        :rtype: dict
+        """
+        # Get the batch type which will be filled with our uodates
+        batch = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateBatch')
+        # Get the type constructor for the IncidentAttributes type
+        batch.incidentAttributes = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentAttributes')
+        
+        
