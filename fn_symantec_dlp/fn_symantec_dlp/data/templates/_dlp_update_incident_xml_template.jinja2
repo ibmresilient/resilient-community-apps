@@ -22,6 +22,16 @@
                             <note>{{note}}</note>
                         </note>
                         {%- endif -%}
+
+                        {# Custom Attributes #}
+                        {%- if custom_attributes -%}
+                            {%- for attribute in custom_attributes -%}
+                                <customAttribute>
+                                    <sch1:name>{{attribute.name}}</sch1:name>
+                                    <sch1:value>{{attribute.value}}</sch1:value>
+                                </customAttribute>
+                            {%-endfor-%}
+                        {%- endif -%}
                 </incidentAttributes>
             </updateBatch>
         </sch:incidentUpdateRequest>

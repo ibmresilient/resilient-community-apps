@@ -277,8 +277,7 @@ class DLPSoapClient():
             return cls.soap_client.service.updateIncidents(request)
 
     @classmethod
-    def update_incident_raw(cls, incident_id, status=None, note=None, custom_attributes=None):        
-
+    def update_incident_raw(cls, incident_id, **kwargs):        
         headers = {'content-type': 'text/xml'}
         try:
 
@@ -288,10 +287,9 @@ class DLPSoapClient():
                 message_dict={
                     "batchId":"_{}".format(uuid.uuid4()),  
                     "dlp_id":incident_id,
-                    "status":status or "Imported to Resilient",
-                    "note":note})
+                    **kwargs})
             response = cls.session.post(cls.sdlp_incident_endpoint,
-                                                data=rendered_xml, headers=headers)
+                                        data=rendered_xml, headers=headers)
 
             response.raise_for_status()
             print(response.content)
