@@ -9,10 +9,15 @@
                 <!--Zero or more repetitions:-->
                 <incidentId>{{dlp_id}}</incidentId>
                 <incidentAttributes>
+                        {%- if severity -%}<severity>{{severity}}</severity>{%- endif -%}
                         {%- if status -%}<status>{{status}}</status>{%- endif -%}
+                        {%- if remediationStatus -%}<remediationStatus>{{remediationStatus}}</remediationStatus>{%- endif -%}
+                        {%- if remediationLocation -%}<remediationLocation>{{remediationLocation}}</remediationLocation>{%- endif -%}
+
                         {%- if note -%}
                         <note>
                             <!--Optional:-->
+                            {# Date and Time can be provided but is optional so our sent note is the most recent one #}
                             <dateAndTime>?</dateAndTime>
                             <note>{{note}}</note>
                         </note>
