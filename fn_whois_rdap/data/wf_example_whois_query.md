@@ -32,10 +32,10 @@ dummy ={}
 dummy = results["content"]
 
 if des is None:
-  note =u"""<div><p>WHOIS threat intelligence: \n\n {}""".format(dummy)
+  note =u"""<div><p>WHOIS threat intelligence: </div></p> \n\n {}""".format(dummy)
   artifact.description = helper.createRichText(note)
 else:
-  note = des + u"""<div><p>WHOIS threat intelligence:\n\n {}""".format(dummy)
+  note = des + u"""<div><p>WHOIS threat intelligence: </div></p> \n\n {}""".format(dummy)
   artifact.description = helper.createRichText(note)
 ```
 

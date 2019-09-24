@@ -33,10 +33,10 @@ dummy ={}
 dummy = results["content"]
 
 if des is None:
-  note =u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p>""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
+  note =u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p> \n\n""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
   artifact.description = helper.createRichText(note)
 else:
-  note = des + u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p>""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
+  note = des + u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p> \n\n""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
   artifact.description = helper.createRichText(note)
 
 #incident.addNote(helper.createRichText(noteText))

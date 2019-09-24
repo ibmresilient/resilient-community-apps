@@ -35,8 +35,8 @@ This integration retrieves registry information (via legacy WHOIS or new RDAP pr
 
 ## Requirements
 
-* IBM Resilient >= `v31.0.4254`
-* An Integration Server running `resilient_circuits>=31.0.0`
+* IBM Resilient >= `v32.0.4502`
+* An Integration Server running `resilient_circuits>=32.0.0`
   * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
