@@ -5,6 +5,7 @@
 
 import logging
 import socket
+import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -39,7 +40,8 @@ class FunctionComponent(ResilientComponent):
                 rdap_response = helper.get_rdap_registry_info(rdap_query, rdap_depth)
                 results = payload_object.done(True, rdap_response)
 
-            log.info("RDAP Query complete, Threat Intelligence added to Artifact description")
+            timenow = str(datetime.time) + " " + str(datetime.date)
+            yield StatusMessage("RDAP Query complete, Threat Intelligence added to Artifact {} at {}".format(rdap_query, timenow))
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

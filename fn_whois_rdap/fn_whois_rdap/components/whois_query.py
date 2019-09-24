@@ -5,6 +5,7 @@
 
 import logging
 import socket
+import datetime
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -36,7 +37,8 @@ class FunctionComponent(ResilientComponent):
                 whois_response = helper.get_whois_registry_info(whois_query)
                 results = payload_object.done(True, whois_response)
 
-            log.info("WHOIS Query complete, Threat Intelligence added to Artifact description")
+            timenow = str(datetime.time) + " " + str(datetime.date)
+            yield StatusMessage("WHOIS Query complete, Threat Intelligence added to Artifact {} at {}".format(whois_query, timenow))
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

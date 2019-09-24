@@ -4,6 +4,7 @@
 
 import tldextract
 from ipwhois import IPWhois
+import ipaddress
 
 ip_from_domain = None
 
@@ -30,7 +31,13 @@ def get_whois_registry_info(ip_input):
     Returns:
         {object} -- Contains all registry information
     """
-    internet_protocol_address_object = IPWhois(ip_input)
+    #ipaddress.IPv4Address(ip_input):
+    #import pprint
+    #ip_input=int(ipaddress.IPv6Address(ip_input))
+    #ip_input=ipaddress.v6_int_to_packed(ip_input)
+    #ip_input=str(ipaddress.IPv4Address(str(ip_input)))
+    #pprint.pprint(ip_input)
+    internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
     whois_response = internet_protocol_address_object.lookup_whois()
     if internet_protocol_address_object.dns_zone:
         whois_response["dns_zone"] = internet_protocol_address_object.dns_zone
