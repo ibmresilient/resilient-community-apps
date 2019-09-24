@@ -30,7 +30,7 @@ setup(
     enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include
     dns-zone, asn and asn description & other useful metadata. """,
     install_requires=[
-        'resilient_circuits>=31.0.0',
+        'resilient_circuits>=32.0.0',
         'resilient_lib>=33.0.189',
         'ipwhois>=1.1.0',
         'tldextract>=2.2.1'
