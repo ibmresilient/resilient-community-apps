@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <sch:incidentUpdateRequest>
+            <!--1 or more repetitions:-->
+            <updateBatch>
+                <batchId>{{batchId}}</batchId>
+                <!--Zero or more repetitions:-->
+                <incidentId>{{dlp_id}}</incidentId>
+                <incidentAttributes>
+                        {%- if status -%}<status>{{status}}</status>{%- endif -%}
+                        {%- if note -%}
+                        <note>
+                            <!--Optional:-->
+                            <dateAndTime>?</dateAndTime>
+                            <note>{{note}}</note>
+                        </note>
+                        {%- endif -%}
+                </incidentAttributes>
+            </updateBatch>
+        </sch:incidentUpdateRequest>
+    </soapenv:Body>
+    </soapenv:Envelope>

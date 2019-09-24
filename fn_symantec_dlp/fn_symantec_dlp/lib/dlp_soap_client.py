@@ -14,6 +14,7 @@ from zeep.helpers import serialize_object
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
 from resilient_lib import validate_fields
+from resilient_circuits import template_functions
 
 LOG = logging.getLogger(__name__)
 
@@ -276,41 +277,24 @@ class DLPSoapClient():
             return cls.soap_client.service.updateIncidents(request)
 
     @classmethod
-    def update_incident_raw(cls, incident_id, status=None, note=None, custom_attributes=None):
+    def update_incident_raw(cls, incident_id, status=None, note=None, custom_attributes=None):        
+
         headers = {'content-type': 'text/xml'}
-        body = """<?xml version="1.0" encoding="UTF-8"?>
-                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
-                        <soapenv:Header/>
-                        <soapenv:Body>
-                            <sch:incidentUpdateRequest>
-                                <!--1 or more repetitions:-->
-                                <updateBatch>
-                                    <batchId>{batch}</batchId>
-                                    <!--Zero or more repetitions:-->
-                                    <incidentId>{dlp_id}</incidentId>
-                                    <incidentAttributes>
-                                            <status>{status}</status>
-                                            <note>
-                                                <!--Optional:-->
-                                                <dateAndTime>?</dateAndTime>
-                                                <note>{note}</note>
-                                            </note>
-                                    </incidentAttributes>
-                                </updateBatch>
-                            </sch:incidentUpdateRequest>
-                        </soapenv:Body>
-                        </soapenv:Envelope>""".format(
-                            batch="_{}".format(uuid.uuid4()),  
-                            dlp_id=incident_id,
-                            status=status or "Imported to Resilient",
-                            note=note
-                            ) 
         try:
+
+            default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
+            rendered_xml = cls.map_values(
+                template_file=os.path.abspath(default_dir + "/_dlp_update_incident_xml_template.jinja2"),
+                message_dict={
+                    "batchId":"_{}".format(uuid.uuid4()),  
+                    "dlp_id":incident_id,
+                    "status":status or "Imported to Resilient",
+                    "note":note})
             response = cls.session.post(cls.sdlp_incident_endpoint,
-                                                data=body, headers=headers)
+                                                data=rendered_xml, headers=headers)
 
             response.raise_for_status()
-
+            print(response.content)
             if b"<statusCode>SUCCESS</statusCode>" not in response.content:
                 raise ValueError("API Call did not Return a Success code")
             LOG.info("Sent new update to DLP Incident %s", incident_id)
@@ -321,3 +305,18 @@ class DLPSoapClient():
             # Log the Connection error to the user
             LOG.error(u"Problem: %s", repr(upload_ex))
             LOG.error(u"[Symantec DLP] Encountered an exception when sending an UpdateRequest to DLP.")
+
+        
+    @staticmethod
+    def map_values(template_file, message_dict):
+        """Map_Values is used to :
+        Take in a forwarded Event from DLP
+        Import a Jinja template
+        Map Event data to a new Incidents data including artifact data"""
+        LOG.debug("Attempting to map message to an IncidentDTO. Message provided : %d", message_dict)
+        with open(template_file, 'r') as template:
+
+            incident_template = template.read()
+            incident_data = template_functions.render(incident_template, message_dict)
+            LOG.debug(incident_data)
+            return incident_data
