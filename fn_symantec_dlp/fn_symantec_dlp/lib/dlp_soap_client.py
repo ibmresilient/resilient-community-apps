@@ -121,33 +121,6 @@ class DLPSoapClient():
             cls.is_connected = True
         cls.class_vars_loaded = True
 
-    @staticmethod
-    def get_config_option(app_configs, option_name, optional=False, placeholder=None):
-        """get_config_option Given option_name, checks if it is in appconfig.
-        Raises ValueError if a mandatory option is missing
-
-        :param app_configs: a dictionary containing key-value pairs used for
-        setting up a client with Symantec DLP.
-        :type app_configs: dict
-        :param option_name: the name of the option to get
-        :type option_name: string
-        :param optional: defaults to False
-        :type optional: bool, optional
-        :param placeholder: defaults to None
-        :type placeholder: optional
-        :return: returns the specified app.config if found
-        """
-        option = app_configs.get(option_name)
-        err = "'{0}' is mandatory and is not set in app.config file. You must set this value to run this function".format(
-            option_name)
-
-        if not option and optional is False:
-            raise ValueError(err)
-        elif optional is False and placeholder is not None and option == placeholder:
-            raise ValueError(err)
-        else:
-            return option
-
     @classmethod
     def incident_list(cls, saved_report_id=0, incident_creation_date_later_than=datetime.datetime.now()):
         """incident_list API Call to gather a list of incidents from a saved report.
@@ -223,58 +196,6 @@ class DLPSoapClient():
         custom_attributes = cls.soap_client.service.listCustomAttributes()
 
         return custom_attributes
-
-
-    @classmethod
-    def update_incident(cls, incident_id, status, note, custom_attributes=None):
-        """update_incident is used to send changes to a DLP Incident
-        Each request to DLP sets up an UpdateBatchRequest SOAP Type and then sends the request to DLP
-
-        :param incident_id: The ID of the DLP Incident to update. The input is casted to an int, input itself should be a number or string representation of one
-        :type incident_id: int
-        :param status: Used to update the status of a DLP Incident, the provided status value must be a valid, 
-        existing Incident Status option on your DLP Installation
-        :type status: string
-        :param custom_attributes: any custom attributes you want to update on the DLP Incident.
-        Passed in attributes must be done as a list of dict objects and each custom attribute needs to be provided with this format 
-        {"name": <custom attribute name>, "value": <custom attribute name>}
-
-        :type custom_attributes: list , optional
-        :return: the response of the request
-        :rtype: dict
-        """
-        # Get the batch type which will be filled with our updates
-        batch = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateBatch')()
-        # Get the type constructor for the IncidentAttributes type
-        incidentAttributes = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentAttributes')()
-        # incidentAttributes = incidentAttributesType()
-        batch.batchId = "_{}".format(uuid.uuid4())
-        if status:
-            incidentAttributes.status = status
-
-        # Prepare an empty list for all the attributes
-        attributes = []
-        # Get the type constructor for the CustomAttributeType type
-        attr = cls.soap_client.get_type(
-                    '{http://www.vontu.com/v2011/enforce/webservice/incident/common/schema}CustomAttributeType')
-        if custom_attributes:
-            for attribute in custom_attributes:
-                # Construct a CustomAttributeType with the kwargs from each attribute. Then append to our list
-                attributes.append(attr(**attribute))
-            # Add the list of customAttribute types to the incidentAttributes type
-            incidentAttributes.customAttribute = attributes
-        req = cls.soap_client.get_type('{http://www.vontu.com/v2011/enforce/webservice/incident/schema}IncidentUpdateRequest')
-        batch.incidentAttributes = incidentAttributes
-        batch.incidentId = [incident_id]
-        # Init the IncidentUpdateRequest type providing our updateBatch, then serialize the whole thing as a dict.
-        new_req = serialize_object(req(updateBatch=[batch]), target_cls=dict)
-        # # Strict mode off to avoid an XMLParseError for custom attributes that are not expected
-        request = req(updateBatch=batch)
-        # request.updateBatch = batch
-        with cls.soap_client.settings(strict=True):
-            
-            LOG.info(request)
-            return cls.soap_client.service.updateIncidents(request)
 
     @classmethod
     def update_incident_raw(cls, incident_id, **kwargs):        
