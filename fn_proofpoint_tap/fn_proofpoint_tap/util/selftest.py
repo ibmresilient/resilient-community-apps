@@ -8,25 +8,12 @@
 
 import logging
 import os
-import requests
 from requests.auth import HTTPBasicAuth
+from resilient_lib import RequestsCommon, validate_fields
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-
-def get_config_option(option_name, opts, optional=False):
-    """Given option_name, check if it is in appconfig.
-       Raises ValueError if it is missing and mandatory.
-    """
-    option = opts.get(option_name)
-
-    if not option and not optional:
-        err = '"{0}" is mandatory and not set in the app.config file.'.format(option_name)
-        raise ValueError(err)
-    else:
-        return option
 
 
 def selftest_function(opts):
@@ -36,11 +23,12 @@ def selftest_function(opts):
     """
     options = opts.get('fn_proofpoint_tap', {})
 
-    base_url = get_config_option('base_url', options)
-    username = get_config_option('username', options)
-    password = get_config_option('password', options)
-    polling_interval = get_config_option('polling_interval', options)
+    validate_fields(['base_url', 'username', 'password', 'polling_interval'], options)
 
+    base_url = options.get('base_url')
+    username = options.get('username')
+    password = options.get('password')
+    polling_interval = options.get('polling_interval')
     cafile = options.get('cafile')
     bundle = os.path.expanduser(cafile) if cafile else False
 
@@ -48,14 +36,9 @@ def selftest_function(opts):
     lastupdate = int(polling_interval) * 60
     url = '{}/siem/all?format=JSON&sinceSeconds={}'.format(base_url, lastupdate)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
 
+    rc = RequestsCommon(opts=opts, function_opts=options)
     try:
-        res = requests.get(
-            url,
-            auth=basic_auth,
-            verify=bundle
-        )
-
-        res.raise_for_status()
+        res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
         if res.status_code == 200:
             return {'state': 'success'}

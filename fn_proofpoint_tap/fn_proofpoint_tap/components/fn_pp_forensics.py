@@ -9,10 +9,9 @@ import logging
 import jinja2
 import json
 import os
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
-from fn_proofpoint_tap.util.helpers import get_config_option
 from pkg_resources import Requirement, resource_filename
 try:
     from json.decoder import JSONDecodeError
@@ -87,9 +86,11 @@ class FunctionComponent(ResilientComponent):
         yield StatusMessage("function inputs OK")
 
         # get configuration values
-        base_url = get_config_option(self.options, 'base_url')
-        username = get_config_option(self.options, 'username')
-        password = get_config_option(self.options, 'password')
+        validate_fields(['base_url', 'username', 'password'], self.options)
+
+        base_url = self.options.get('base_url')
+        username = self.options.get('username')
+        password = self.options.get('password')
         cafile = self.options.get('cafile')
         bundle = os.path.expanduser(cafile) if cafile else False
 
@@ -103,8 +104,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
-            forensics = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
+            forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
+            forensics = forensics_response.json()
 
             # Debug logging
             log.debug("Response content: {}".format(forensics))

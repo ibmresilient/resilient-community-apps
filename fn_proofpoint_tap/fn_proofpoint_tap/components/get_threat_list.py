@@ -12,6 +12,7 @@ except ImportError:
 
 log = logging.getLogger(__name__)
 
+
 def get_threat_list(rc, options, lastupdate, bundle):
     base_url = options['base_url']
     username = options['username']
@@ -28,8 +29,7 @@ def get_threat_list(rc, options, lastupdate, bundle):
         url += '&sinceSeconds={}'.format(lastupdate)
 
         res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
-
+        
         # Debug logging
         log.debug("Response content: {}".format(res))
-        return res
-
+        return res.json()

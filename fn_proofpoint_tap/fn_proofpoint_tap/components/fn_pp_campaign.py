@@ -7,10 +7,9 @@
 
 import logging
 import os
-from resilient_lib import RequestsCommon
+from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_proofpoint_tap.util.helpers import get_config_option
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -63,9 +62,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("function inputs OK")
 
             # get configuration values
-            base_url = get_config_option(self.options, 'base_url')
-            username = get_config_option(self.options, 'username')
-            password = get_config_option(self.options, 'password')
+            validate_fields(['base_url', 'username', 'password'], self.options)
+
+            base_url = self.options.get('base_url')
+            username = self.options.get('username')
+            password = self.options.get('password')
             cafile = self.options.get('cafile')
             bundle = os.path.expanduser(cafile) if cafile else False
 
@@ -83,7 +84,7 @@ class FunctionComponent(ResilientComponent):
             log.debug("Response content: {}".format(res))
 
             results['success'] = True
-            results['data'] = res
+            results['data'] = res.json()
             results['href'] = url
 
             yield StatusMessage("done...")
