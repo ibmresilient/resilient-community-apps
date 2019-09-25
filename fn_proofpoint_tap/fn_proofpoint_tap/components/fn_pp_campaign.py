@@ -6,9 +6,8 @@
 """Function implementation"""
 
 import logging
-import json
 import os
-import requests
+from resilient_lib import RequestsCommon
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_proofpoint_tap.util.helpers import get_config_option
@@ -24,11 +23,13 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
+        self.opts = opts
         self.options = opts.get('fn_proofpoint_tap', {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        self.opts = opts
         self.options = opts.get('fn_proofpoint_tap', {})
 
     @function("fn_pp_campaign")
@@ -36,6 +37,8 @@ class FunctionComponent(ResilientComponent):
         """Function: Function to retrieve Campaign data from the ProofPoint API by Campaign ID"""
 
         log = logging.getLogger(__name__)
+
+        rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
         # Get the function parameters:
         campaign_id = kwargs.get("proofpoint_campaign_id")  # text
@@ -72,42 +75,16 @@ class FunctionComponent(ResilientComponent):
             basic_auth = HTTPBasicAuth(username, password)
             url = '{0}/campaign/{1}'.format(base_url, campaign_id)  # /v2/campaign/<campaignId> Fetch detailed information for a given campaign
 
-            try:
-                yield StatusMessage('Sending GET request to {0}'.format(url))
+            yield StatusMessage('Sending GET request to {0}'.format(url))
 
-                res = requests.get(url, auth=basic_auth, verify=bundle)
+            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
-                # Debug logging
-                log.debug("Response status_code: {}".format(res.status_code))
-                log.debug("Response content: {}".format(res.content))
+            # Debug logging
+            log.debug("Response content: {}".format(res))
 
-                res.raise_for_status()
-
-                if res.status_code == 200:
-                    results['success'] = True
-                    # results['data'] = json.loads(res.text)
-                    results['data'] = json.dumps(json.loads(res.text), indent=4)
-                    results['href'] = url
-                else:
-                    raise ValueError('request to {0} failed with code {1}'.format(url, res.status_code))
-
-            except requests.exceptions.Timeout:
-                raise ValueError('request to {0} timed out'.format(url))
-
-            except requests.exceptions.TooManyRedirects:
-                raise ValueError('URL redirection loop?', url)
-
-            except requests.exceptions.HTTPError as err:
-                if err.response.content is not None:
-                    try:
-                        custom_error_content = json.loads(err.response.content)
-                    except JSONDecodeError:
-                        raise ValueError(err)                    # raise ValueError(custom_error_content)
-                    yield FunctionResult(custom_error_content)
-                raise ValueError(err)
-
-            except requests.exceptions.RequestException as ex:
-                raise ValueError(ex)
+            results['success'] = True
+            results['data'] = res
+            results['href'] = url
 
             yield StatusMessage("done...")
 

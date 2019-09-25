@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
-import requests
-import json
 import logging
 from requests.auth import HTTPBasicAuth
 from six import string_types
@@ -15,8 +12,7 @@ except ImportError:
 
 log = logging.getLogger(__name__)
 
-
-def get_threat_list(options, lastupdate, bundle):
+def get_threat_list(rc, options, lastupdate, bundle):
     base_url = options['base_url']
     username = options['username']
     password = options['password']
@@ -31,37 +27,9 @@ def get_threat_list(options, lastupdate, bundle):
             lastupdate = int(options['polling_interval']) * 60
         url += '&sinceSeconds={}'.format(lastupdate)
 
-    try:
-        res = requests.get(url, auth=basic_auth, verify=bundle)
+        res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
         # Debug logging
-        log.debug("Response status_code: {}".format(res.status_code))
-        log.debug("Response content: {}".format(res.content))
+        log.debug("Response content: {}".format(res))
+        return res
 
-        res.raise_for_status()
-
-        if res.status_code == 200:
-            data = res.json()
-            return data
-        else:
-            return {'error': 'request to {0} failed with code {1}'.format(url, res.status_code)}
-
-    except requests.exceptions.Timeout:
-        return {'error': 'request to {0} timed out'.format(url)}
-
-    except requests.exceptions.TooManyRedirects:
-        return {'error': 'URL redirection loop?'}
-
-    except requests.exceptions.HTTPError as err:
-        if err.response.content is not None:
-            try:
-                custom_error_content = json.loads(err.response.content)
-                # Adding "error" key to the custom_error_content dictionary for error handling
-                custom_error_content['error'] = err.response.content
-            except JSONDecodeError:
-                 return {'error': 'JSON decode error {}'.format(err)}
-            return custom_error_content
-        return {'error': 'HTTP error {}'.format(err)}
-
-    except requests.exceptions.RequestException as ex:
-        return {'error': 'request exception {}'.format(ex)}

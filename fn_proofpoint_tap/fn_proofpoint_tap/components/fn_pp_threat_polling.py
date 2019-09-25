@@ -15,7 +15,7 @@ from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
 from pkg_resources import Requirement, resource_filename
 from fn_proofpoint_tap.components.get_threat_list import get_threat_list
-from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import RequestsCommon, IntegrationError
 
 
 log = logging.getLogger(__name__)
@@ -78,6 +78,7 @@ class PP_ThreatPolling(ResilientComponent):
 
     def _parseopts(self, opts):
         """Parse and process configuration options, called from __init__ and _reload"""
+        self.opts = opts
         self.options = opts.get("fn_proofpoint_tap", {})
 
         # Proofpoint score
@@ -142,10 +143,11 @@ class PP_ThreatPolling(ResilientComponent):
         """contents of polling thread, alternately check for new data and wait"""
         cafile = self.options.get('cafile')
         bundle = os.path.expanduser(cafile) if cafile else False
+        rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
         while True:
             try:
-                threat_list = get_threat_list(self.options, self.lastupdate, bundle)
+                threat_list = get_threat_list(rc, self.options, self.lastupdate, bundle)
 
                 if 'error' in threat_list:
                     raise IntegrationError(threat_list.get('error'))
