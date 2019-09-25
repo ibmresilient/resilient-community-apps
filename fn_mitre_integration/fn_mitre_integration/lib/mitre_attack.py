@@ -313,6 +313,8 @@ class MitreAttackMitigation(MitreAttackBase):
             "collection": self.collection
         }
 
+class MitreAttackGroup(MitreAttackBase):
+    MITRE_TYPE = ""
 
 class MitreAttackSoftware(MitreAttackBase):
     MITRE_TYPE = ["tool", "malware"]
