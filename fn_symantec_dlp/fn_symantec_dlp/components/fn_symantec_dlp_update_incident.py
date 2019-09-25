@@ -4,8 +4,11 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import json 
 
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
+from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_symantec_dlp_update_incident"""
@@ -15,29 +18,32 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_symantec_dlp", {})
 
-    @handler("reload")
-    def _reload(self, event, opts):
-        """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_symantec_dlp", {})
 
     @function("fn_symantec_dlp_update_incident")
     def _fn_symantec_dlp_update_incident_function(self, event, *args, **kwargs):
         """Function: """
         try:
             # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
+            res_payload = ResultPayload("fn_symantec_dlp_update", **kwargs)
             # Get the function parameters:
+            sdlp_update_payload = self.get_textarea_param(kwargs.get("sdlp_update_payload"))  # textarea
 
             log = logging.getLogger(__name__)
+            log.info("sdlp_update_payload: %s", sdlp_update_payload)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
-            #  yield StatusMessage("starting...")
-            #  yield StatusMessage("done...")
+            if sdlp_update_payload is None:
+                raise ValueError("Encountered error: sdlp_update_payload may not be None")
 
-            results = {
-                "value": "xyz"
-            }
+            updatepayload = json.loads(sdlp_update_payload)
+
+            soap_client = DLPSoapClient(app_configs=self.options)
+
+            
+            resp = soap_client.update_incident_raw(**updatepayload)
+            # Currently, there is nothing to return on the response that isin't an input
+            # If we reach this line, we can assume we have made a succesful update as the update function has handling to ensure SUCCESS is returned
+            results = res_payload.done(success=True, content={})
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
