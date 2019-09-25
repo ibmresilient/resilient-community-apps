@@ -144,36 +144,39 @@ class PP_ThreatPolling(ResilientComponent):
         bundle = os.path.expanduser(cafile) if cafile else False
 
         while True:
-            threat_list = get_threat_list(self.options, self.lastupdate, bundle)
+            try:
+                threat_list = get_threat_list(self.options, self.lastupdate, bundle)
 
-            if 'error' in threat_list:
-                raise IntegrationError(threat_list.get('error'))
-            else:
-                for kind, datas in threat_list.items():
-                    if kind == 'queryEndTime':
-                        self.lastupdate = datas
-                    else:
-                        for data in datas:
-                            incident_id = None
-                            threat_id, idtype = self.find_id(data)
-                            existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
-                            if len(existing_incidents) == 0:
-                                # incident doesn't already exist, create Incident data
-                                incident_payload = self.build_incident_dto(data, kind, threat_id)
-                                if incident_payload is not None:
-                                    incident_id = self.create_incident(incident_payload)
-                                    log.debug('created Incident ID {}'.format(incident_id))
+                if 'error' in threat_list:
+                    raise IntegrationError(threat_list.get('error'))
+                else:
+                    for kind, datas in threat_list.items():
+                        if kind == 'queryEndTime':
+                            self.lastupdate = datas
+                        else:
+                            for data in datas:
+                                incident_id = None
+                                threat_id, idtype = self.find_id(data)
+                                existing_incidents = self._find_resilient_incident_for_req(threat_id, idtype)
+                                if len(existing_incidents) == 0:
+                                    # incident doesn't already exist, create Incident data
+                                    incident_payload = self.build_incident_dto(data, kind, threat_id)
+                                    if incident_payload is not None:
+                                        incident_id = self.create_incident(incident_payload)
+                                        log.debug('created Incident ID {}'.format(incident_id))
+                                    else:
+                                        log.debug('Incident filtered')
                                 else:
-                                    log.debug('Incident filtered')
-                            else:
-                                # incident already exists, extract its ID
-                                log.debug('incident {} {} already exists'.format(idtype, threat_id))
-                                incident_id = existing_incidents[0]['id']
+                                    # incident already exists, extract its ID
+                                    log.debug('incident {} {} already exists'.format(idtype, threat_id))
+                                    incident_id = existing_incidents[0]['id']
 
-                            if incident_id is not None:
-                                # created or found an Incident, attach any (possibly new) artifacts
-                                artifact_payloads = self.build_artifacts(data)
-                                self.update_incident(incident_id, artifact_payloads)
+                                if incident_id is not None:
+                                    # created or found an Incident, attach any (possibly new) artifacts
+                                    artifact_payloads = self.build_artifacts(data)
+                                    self.update_incident(incident_id, artifact_payloads)
+            except Exception as err:
+                log.error(err)
 
             # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
             time.sleep(int(self.options.get("polling_interval", 10)) * 60)

@@ -56,6 +56,8 @@ def get_threat_list(options, lastupdate, bundle):
         if err.response.content is not None:
             try:
                 custom_error_content = json.loads(err.response.content)
+                # Adding "error" key to the custom_error_content dictionary for error handling
+                custom_error_content['error'] = err.response.content
             except JSONDecodeError:
                  return {'error': 'JSON decode error {}'.format(err)}
             return custom_error_content
