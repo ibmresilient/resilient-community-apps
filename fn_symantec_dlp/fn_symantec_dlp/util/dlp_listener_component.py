@@ -236,7 +236,7 @@ class DLPListener(ResilientComponent):
                         <b>Event Time: </b><p>{time}</p>
                         <br><br>
                         <b>Event Detail</b>: <p>{detail}</p>
-                        <p> performed by user <b>{user}</b></p""".format(
+                        <p> performed by user <b>{user}</b></p>""".format(
                             time=history_item['date'],
                             detail=history_item['detail'],
                             user=history_item['user']
