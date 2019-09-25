@@ -94,6 +94,8 @@
   | **threat_template** | Yes | `` | *Enter a description of the config here* |
   | **cafile** | Yes | `` | *Enter a description of the config here* |
 
+Optionally, proxy support can be added by adding **http_proxy** and **https_proxy** to the fn_proofpoint_trap section
+
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
   ```
