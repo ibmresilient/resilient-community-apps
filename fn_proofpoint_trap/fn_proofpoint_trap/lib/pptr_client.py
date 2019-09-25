@@ -50,7 +50,7 @@ class PPTRClient(object):
         else:
             url = urljoin(self.base_url, self._endpoints["list_members"]).format(list_id, members_type)
 
-        r = self._req.execute_call_v2('get', url, verify=False, headers=self._headers)
+        r = self._req.execute_call_v2('get', url, verify=False, headers=self._headers, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -77,7 +77,7 @@ class PPTRClient(object):
                 "member": member, "description": description, "expiration": expiration, "duration": duration
             }
         )
-        r = self._req.execute_call_v2('post', url, verify=False, headers=self._headers, json=payload)
+        r = self._req.execute_call_v2('post', url, verify=False, headers=self._headers, json=payload, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -104,7 +104,7 @@ class PPTRClient(object):
                 "description": description, "expiration": expiration, "duration": duration
             }
         )
-        r = self._req.execute_call_v2('put', url, verify=False, headers=self._headers, json=payload)
+        r = self._req.execute_call_v2('put', url, verify=False, headers=self._headers, json=payload, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -121,7 +121,7 @@ class PPTRClient(object):
         """
         url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
 
-        r = self._req.execute_call_v2('delete', url, verify=False, headers=self._headers)
+        r = self._req.execute_call_v2('delete', url, verify=False, headers=self._headers, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
