@@ -190,6 +190,7 @@ class TestMitreMitigation(object):
             # check for every technique's representation that all the field don't have the tag
             assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
 
+
 class TestMitreSoftware(object):
     mitre_attack = MitreAttackConnection()
 
@@ -219,6 +220,70 @@ class TestMitreSoftware(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
             assert any(x.description.startswith("Deprecated") for x in mitigations)
+
+
+class TestMitreGroup(object):
+    class MockGroupID(object):
+        def __init__(self, group_id):
+            self.id = group_id
+
+    mitre_attack = MitreAttackConnection()
+
+    def test_groups_dont_have_mardown_links(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            software = MitreAttackSoftware.get_all(self.mitre_attack)
+            dict_reps = [s.dict_form() for s in software]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+
+    def test_group_single_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        Group with id 42 is in every sublist.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3)],
+                     [GROUP(10), GROUP(11), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42)],
+                     [GROUP(30), GROUP(31), GROUP(32), GROUP(42)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 1
+        assert 42 in intersection
+
+    def test_group_multiple_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        Groupswith id 42 and 123 are in every sublist.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],
+                     [GROUP(10), GROUP(11), GROUP(123), GROUP(122), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42), GROUP(123), GROUP(122)],
+                     [GROUP(123), GROUP(30), GROUP(31), GROUP(32), GROUP(42)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 2
+        assert 42 in intersection
+        assert 123 in intersection
+
+    def test_group_no_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        Groupswith id 42 and 123 are in every sublist.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],
+                     [GROUP(10), GROUP(11), GROUP(123), GROUP(122), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42), GROUP(122)],
+                     [GROUP(123), GROUP(30), GROUP(31), GROUP(32)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 0
 
 
 class TestMitre(object):
