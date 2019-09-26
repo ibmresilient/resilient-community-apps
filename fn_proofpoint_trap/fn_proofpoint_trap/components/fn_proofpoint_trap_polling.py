@@ -13,6 +13,7 @@ from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
 from fn_proofpoint_trap.lib.helpers import get_incident_list, validate_opts
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import RequestsCommon
 
 """
 Summary: 
@@ -431,6 +432,7 @@ class PPTRIncidentPolling(ResilientComponent):
     def main(self):
         """main entry point, instiantiate polling thread"""
         options = self.options
+        self.req = RequestsCommon(self.opts, self.options)
         polling_interval = int(options.get("polling_interval", 0))
 
         if polling_interval  > 0:
@@ -449,7 +451,7 @@ class PPTRIncidentPolling(ResilientComponent):
 
         while True:
 
-            incident_list = get_incident_list(self.options, self.lastupdate, bundle)
+            incident_list = get_incident_list(self.options, self.lastupdate, bundle, self.req)
             self.lastupdate = int(self.options.get("polling_interval", 2))
             if 'error' in incident_list:
                 log.warning(incident_list.get('error'))

@@ -61,17 +61,19 @@ def transform_kwargs(kwargs):
 
     return params
 
-def get_incident_list(options, lastupdate, bundle):
+def get_incident_list(options, lastupdate, bundle, req):
     """
     Grab incident list from TRAP
     :param options: - Configuration Options pulled from app.config
     :param lastupdate: - Minutes since last update
     :param bundle: - Pass bundle options or False
+    :param req: - Instance of resilient_lib.RequestCommon.
     :return:
     """
     base_url = options['base_url']
     api_key = options['api_key']
     headers = {'Authorization': api_key }
+
     # TODO: Possibly break out into different STATEs
     params = {}
     url = '{0}/incidents'.format(base_url)
@@ -83,7 +85,7 @@ def get_incident_list(options, lastupdate, bundle):
             log.info("First Run in progress - this may take a while.")
 
     try:
-        res = requests.get(url, headers=headers, params=params, verify=bundle)
+        res = requests.get(url, headers=headers, params=params, verify=bundle, proxies=req.get_proxies())
 
         res.raise_for_status()
 
