@@ -12,7 +12,9 @@ import requests
 import json
 import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import RequestsCommon
 from fn_proofpoint_trap.lib.helpers import validate_opts
+
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -47,9 +49,11 @@ class FunctionComponent(ResilientComponent):
 
         log.info("trap_incident_id: %s", trap_incident_id)
 
+        req = RequestsCommon(self.opts, self.options)
+
         yield StatusMessage("starting...")
 
-        for yvalue in get_incident_details(self.options, trap_incident_id):
+        for yvalue in get_incident_details(self.options, trap_incident_id, req):
             yield yvalue
 
 
@@ -65,7 +69,14 @@ def get_config_option(options, option_name, optional=False):
 
     return option
 
-def get_incident_details(options, incident_id):
+def get_incident_details(options, incident_id, req):
+    """ Get andincident details from TRAP
+
+    :param options: - Configuration Options pulled from app.config
+    :param incident_id: - Incident id to look up.
+    :param req: - Instance of resilient_lib.RequestCommon.
+    :return response data:
+    """
     try:
         inputs = {
             'trap_incident_id': incident_id,
@@ -94,7 +105,7 @@ def get_incident_details(options, incident_id):
         try:
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
-            res = requests.get(url, headers=headers, verify=bundle)
+            res = requests.get(url, headers=headers, verify=bundle, proxies=req.get_proxies())
 
             res.raise_for_status()
 
