@@ -51,6 +51,18 @@ results = {'content': {'asn': '16807',
              'asn_date': '1987-07-29',
              'asn_description': 'IBM-EI - IBM - Events Infrastructure, US',
              'asn_registry': 'arin',
+             'display_content': '{ '
+                                '"nir":false,"asn_registry":"arin","asn":"16807","asn_cidr":"129.42.38.0/24","asn_country_code":"US","asn_date":"1987-07-29","asn_description":"IBM-EI '
+                                '- IBM - Events Infrastructure, '
+                                'US","query":"129.42.38.10","network":{ '
+                                '"handle":"NET-129-42-0-0-1","remarks":false,"raw":false,"start_address":"129.42.0.0","end_address":"129.42.255.255","cidr":"129.42.0.0/16","ip_version":"v4","type":"DIRECT '
+                                'ASSIGNMENT","name":"IBM-RSCH-NET2","country":false,"parent_handle":"NET-129-0-0-0-0" '
+                                '},"objects":{ "IBM-1":{ '
+                                '"handle":"IBM-1","status":false,"remarks":false,"notices":false,"raw":false,"contact":{ '
+                                '"name":"IBM","kind":"org","phone":false,"email":false,"role":false,"title":false '
+                                '},"events_actor":false } '
+                                '},"raw":false,"dns_zone":"10.38.42.129.origin.asn.cymru.com" '
+                                '}',
              'dns_zone': '10.38.42.129.origin.asn.cymru.com',
              'entities': ['IBM-1'],
              'network': {'cidr': '129.42.0.0/16',
@@ -125,12 +137,12 @@ results = {'content': {'asn': '16807',
                                    'status': None}},
              'query': '129.42.38.10',
              'raw': None},
- 'inputs': {'rdap_depth': 0, 'rdap_query': 'ibm.com'},
- 'metrics': {'execution_time_ms': 1650,
+ 'inputs': {'rdap_depth': 0, 'rdap_query': 'https://www.ibm.com'},
+ 'metrics': {'execution_time_ms': 337,
              'host': 'your@hostname.com',
              'package': 'fn-whois-rdap',
              'package_version': '1.0.0',
-             'timestamp': '2019-09-19 10:52:10',
+             'timestamp': '2019-09-26 15:52:48',
              'version': '1.0'},
  'raw': '{"nir": null, "asn_registry": "arin", "asn": "16807", "asn_cidr": '
         '"129.42.38.0/24", "asn_country_code": "US", "asn_date": "1987-07-29", '
@@ -166,7 +178,18 @@ results = {'content': {'asn': '16807',
         'Park\\nNC\\n27709-2195\\nUnited States"}], "phone": null, "email": '
         'null, "role": null, "title": null}, "events_actor": null, "entities": '
         '["RAIN-ARIN"]}}, "raw": null, "dns_zone": '
-        '"10.38.42.129.origin.asn.cymru.com"}',
+        '"10.38.42.129.origin.asn.cymru.com", "display_content": "{ '
+        '\\"nir\\":false,\\"asn_registry\\":\\"arin\\",\\"asn\\":\\"16807\\",\\"asn_cidr\\":\\"129.42.38.0/24\\",\\"asn_country_code\\":\\"US\\",\\"asn_date\\":\\"1987-07-29\\",\\"asn_description\\":\\"IBM-EI '
+        '- IBM - Events Infrastructure, '
+        'US\\",\\"query\\":\\"129.42.38.10\\",\\"network\\":{ '
+        '\\"handle\\":\\"NET-129-42-0-0-1\\",\\"remarks\\":false,\\"raw\\":false,\\"start_address\\":\\"129.42.0.0\\",\\"end_address\\":\\"129.42.255.255\\",\\"cidr\\":\\"129.42.0.0/16\\",\\"ip_version\\":\\"v4\\",\\"type\\":\\"DIRECT '
+        'ASSIGNMENT\\",\\"name\\":\\"IBM-RSCH-NET2\\",\\"country\\":false,\\"parent_handle\\":\\"NET-129-0-0-0-0\\" '
+        '},\\"objects\\":{ \\"IBM-1\\":{ '
+        '\\"handle\\":\\"IBM-1\\",\\"status\\":false,\\"remarks\\":false,\\"notices\\":false,\\"raw\\":false,\\"contact\\":{ '
+        '\\"name\\":\\"IBM\\",\\"kind\\":\\"org\\",\\"phone\\":false,\\"email\\":false,\\"role\\":false,\\"title\\":false '
+        '},\\"events_actor\\":false } '
+        '},\\"raw\\":false,\\"dns_zone\\":\\"10.38.42.129.origin.asn.cymru.com\\" '
+        '}"}',
  'reason': None,
  'success': True,
  'version': '1.0'}
@@ -191,20 +214,26 @@ inputs.rdap_depth = 0
 
 ```python
 try:
-    des = artifact.description.content
+  des = artifact.description.content
 except Exception:
   des = None
-dummy ={}
-dummy = results["content"]
 
-if des is None:
-  note =u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p>""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
-  artifact.description = helper.createRichText(note)
+if results["success"]:
+  if des is None:
+    note = u"""<div><p><br><b>RDAP threat intelligence at {2}:</b></br>\n\n
+    <br><b>{0}</b></br></div></p>\n\n
+    <div><p><br><b> Possible accessible keys:</b></br>\n\n
+    <br><b>{1}</b></br>\n\n""".format(results["content"]["display_content"],results["content"].keys(),results["metrics"]["timestamp"])
+    artifact.description = helper.createRichText(note)
+  else:
+    note =des +u"""<div><p><br><b>RDAP threat intelligence at {2}:</b></br>\n\n
+    <br><b>{0}</b></br></div></p>\n\n
+    <div><p><br><b> Possible accessible keys:</b></br>\n\n
+    <br><b>{1}</b></br>\n\n""".format(results["content"]["display_content"],results["content"].keys(),results["metrics"]["timestamp"])
+    artifact.description = helper.createRichText(note)
 else:
-  note = des + u"""<div><p>RDAP threat intelligence:\n\n <br> Possible dictonary keys: <br> \n {0} \n\n <br> Associated objects <br> \n {1} \n\n <br> DNS zone: <br> \n {2}<div><p>""".format(dummy.keys(), dummy.get(u'objects'),dummy.get('dns_zone'))
+  note = u"""RDAP threat intelligence at {}:\n\n  This Artifact has no ans registry information, \n\n so no intelligence was gathered.  \n\n""".format(results["metrics"]["timestamp"])
   artifact.description = helper.createRichText(note)
-
-#incident.addNote(helper.createRichText(noteText))
 ```
 
 </p>
@@ -236,6 +265,11 @@ results = {'content': {'asn': '16807',
              'asn_date': '1987-07-29',
              'asn_description': 'IBM-EI - IBM - Events Infrastructure, US',
              'asn_registry': 'arin',
+             'display_content': '{ '
+                                '"nir":false,"asn_registry":"arin","asn":"16807","asn_cidr":"129.42.38.0/24","asn_country_code":"US","asn_date":"1987-07-29","asn_description":"IBM-EI '
+                                '- IBM - Events Infrastructure, '
+                                'US","query":"129.42.38.10","raw":false,"referral":false,"raw_referral":false,"dns_zone":"10.38.42.129.origin.asn.cymru.com" '
+                                '}',
              'dns_zone': '10.38.42.129.origin.asn.cymru.com',
              'nets': [{'address': '3039 Cornwallis Road',
                        'cidr': '129.42.0.0/16',
@@ -255,12 +289,12 @@ results = {'content': {'asn': '16807',
              'raw': None,
              'raw_referral': None,
              'referral': None},
- 'inputs': {'whois_query': 'ibm.com'},
- 'metrics': {'execution_time_ms': 570,
+ 'inputs': {'whois_query': 'https://www.ibm.com'},
+ 'metrics': {'execution_time_ms': 2362,
              'host': 'your@hostname.com',
              'package': 'fn-whois-rdap',
              'package_version': '1.0.0',
-             'timestamp': '2019-09-19 10:53:12',
+             'timestamp': '2019-09-26 15:57:35',
              'version': '1.0'},
  'raw': '{"nir": null, "asn_registry": "arin", "asn": "16807", "asn_cidr": '
         '"129.42.38.0/24", "asn_country_code": "US", "asn_date": "1987-07-29", '
@@ -272,7 +306,11 @@ results = {'content': {'asn': '16807',
         'Road", "postal_code": "27709-2195", "emails": ["ipreg@us.ibm.com"], '
         '"created": "1987-07-28", "updated": "2015-10-20"}], "raw": null, '
         '"referral": null, "raw_referral": null, "dns_zone": '
-        '"10.38.42.129.origin.asn.cymru.com"}',
+        '"10.38.42.129.origin.asn.cymru.com", "display_content": "{ '
+        '\\"nir\\":false,\\"asn_registry\\":\\"arin\\",\\"asn\\":\\"16807\\",\\"asn_cidr\\":\\"129.42.38.0/24\\",\\"asn_country_code\\":\\"US\\",\\"asn_date\\":\\"1987-07-29\\",\\"asn_description\\":\\"IBM-EI '
+        '- IBM - Events Infrastructure, '
+        'US\\",\\"query\\":\\"129.42.38.10\\",\\"raw\\":false,\\"referral\\":false,\\"raw_referral\\":false,\\"dns_zone\\":\\"10.38.42.129.origin.asn.cymru.com\\" '
+        '}"}',
  'reason': None,
  'success': True,
  'version': '1.0'}
@@ -296,17 +334,25 @@ inputs.whois_query = artifact.value
 
 ```python
 try:
-    des = artifact.description.content
+  des = artifact.description.content
 except Exception:
   des = None
-dummy ={}
-dummy = results["content"]
 
-if des is None:
-  note =u"""<div><p>WHOIS threat intelligence: \n\n {}""".format(dummy)
-  artifact.description = helper.createRichText(note)
+if results["success"]:
+  if des is None:
+    note = u"""<div><p><br><b>WHOIS threat intelligence at {2}:</b></br>\n\n
+    <br><b>{0}</b></br></div></p>\n\n
+    <div><p><br><b> Possible accessible keys:</b></br>\n\n
+    <br><b>{1}</b></br>\n\n""".format(results["content"]["display_content"],results["content"].keys(),results["metrics"]["timestamp"])
+    artifact.description = helper.createRichText(note)
+  else:
+    note =des +u"""<div><p><br><b>WHOIS threat intelligence at {2}:</b></br>\n\n
+    <br><b>{0}</b></br></div></p>\n\n
+    <div><p><br><b> Possible accessible keys:</b></br>\n\n
+    <br><b>{1}</b></br>\n\n""".format(results["content"]["display_content"],results["content"].keys(),results["metrics"]["timestamp"])
+    artifact.description = helper.createRichText(note)
 else:
-  note = des + u"""<div><p>WHOIS threat intelligence:\n\n {}""".format(dummy)
+  note = u"""WHOIS threat intelligence at {}:\n\n  This Artifact has no ans registry information, \n\n so no intelligence was gathered.  \n\n""".format(results["metrics"]["timestamp"])
   artifact.description = helper.createRichText(note)
 ```
 

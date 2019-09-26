@@ -5,7 +5,7 @@
 
 import logging
 import socket
-import datetime
+import pprint
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
@@ -35,13 +35,14 @@ class FunctionComponent(ResilientComponent):
             if not input_is_ip:
                 ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
                 rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
-                results = payload_object.done(True, rdap_response)
+                results = helper.check_response(rdap_response, payload_object)
             else:
                 rdap_response = helper.get_rdap_registry_info(rdap_query, rdap_depth)
-                results = payload_object.done(True, rdap_response)
+                results = helper.check_response(rdap_response, payload_object)
+            
+            timenow = helper.time_str()
 
-            timenow = str(datetime.time) + " " + str(datetime.date)
-            yield StatusMessage("RDAP Query complete, Threat Intelligence added to Artifact {} at {}".format(rdap_query, timenow))
+            yield StatusMessage("RDAP Query complete, Threat Intelligence added to Artifact '{}' at {}".format(rdap_query, timenow))
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

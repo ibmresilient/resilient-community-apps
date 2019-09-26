@@ -26,14 +26,16 @@ setup(
     author_email='resil.labs@gmail.com',
     url='https://github.com/ibmresilient/resilient-community-apps',
     description="Retrieving registry information for IP, URL or DNS Artifacts",
-    long_description="""This integration retrieves registry information (via the RDAP protocol) for IP, URL or DNS Artifacts that provides
-    enrichment and threat intelligence on suspicious address. The information is added directly to artifact description and can include
-    dns-zone, asn and asn description & other useful metadata. """,
+    long_description="""This integration retrieves registry information (via the RDAP or legacy WHOIS protocol) for IP, URL or DNS Artifacts.
+    This information can be used as threat enrichment and intelligence on suspicious address. The information is added directly to artifact description
+    with a timestame and keys to other useful metadata. """,
     install_requires=[
         'resilient_circuits>=32.0.0',
         'resilient_lib>=33.0.189',
         'ipwhois>=1.1.0',
-        'tldextract>=2.2.1'
+        'tldextract>=2.2.1',
+        'futures',
+        'six'
     ],
     packages=find_packages(),
     include_package_data=True,
