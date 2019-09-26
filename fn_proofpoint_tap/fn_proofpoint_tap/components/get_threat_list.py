@@ -28,8 +28,8 @@ def get_threat_list(rc, options, lastupdate, bundle):
             lastupdate = int(options['polling_interval']) * 60
         url += '&sinceSeconds={}'.format(lastupdate)
 
-        res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
-        
-        # Debug logging
-        log.debug("Response content: {}".format(res))
-        return res.json()
+    res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
+
+    # Debug logging
+    log.debug("Response content: {}".format(res))
+    return res.json()
