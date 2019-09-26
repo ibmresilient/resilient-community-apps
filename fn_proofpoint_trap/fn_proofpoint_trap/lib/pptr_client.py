@@ -18,12 +18,12 @@ class PPTRClient(object):
     """
     Client class used to expose Proof Point TRAP api.
     """
-    def __init__(self, options, function_params=None):
+    def __init__(self, options, function_options=None):
         """
         Class constructor
         """
-        self.base_url = options['base_url']
-        self.api_key = options['api_key']
+        self.base_url = function_options['base_url']
+        self.api_key = function_options['api_key']
         # Rest request endpoints
         self._endpoints = {
             # REST endpoints
@@ -31,7 +31,7 @@ class PPTRClient(object):
             "list_members":     "/lists/{}/{}",
             "add_members":      "/lists/{}/members.json",
         }
-        self._req = RequestsCommon(options, function_params)
+        self._req = RequestsCommon(options, function_options)
         self._headers = {"Authorization": "{0}".format(self.api_key)}
 
     def get_list_members(self, list_id=None, member_id=None, members_type=None):

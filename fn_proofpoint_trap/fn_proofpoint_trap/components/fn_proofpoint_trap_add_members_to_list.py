@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             validate_fields(["trap_list_id", "trap_member", "trap_description", "trap_expiration",
                              "trap_duration"], kwargs)
 
-            pptr = PPTRClient(self.options, params)
+            pptr = PPTRClient(self.opts, self.options)
             rtn = pptr.add_list_member(**params)
 
             results = rp.done(True, rtn)
