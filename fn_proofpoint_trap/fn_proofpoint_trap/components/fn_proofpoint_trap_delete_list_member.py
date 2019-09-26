@@ -29,8 +29,6 @@ class FunctionComponent(ResilientComponent):
     def _fn_proofpoint_trap_delete_list_member_function(self, event, *args, **kwargs):
         """Function: Delete the member of a list."""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
             params = transform_kwargs(kwargs) if kwargs else {}
 
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
