@@ -201,14 +201,17 @@ class DLPSoapClient():
     def update_incident_raw(cls, incident_id, **kwargs):        
         headers = {'content-type': 'text/xml'}
         try:
-
+            update_payload = {
+                "batchId":"_{}".format(uuid.uuid4()),  
+                "dlp_id":incident_id
+            }
+            # Originally was getting an issue trying to pass **kwargs to the jinja template on py2
+            # Now we prepare a dict with our custom values and then update that dict with the kwargs
+            update_payload.update(kwargs)
             default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
             rendered_xml = cls.map_values(
                 template_file=os.path.abspath(default_dir + "/_dlp_update_incident_xml_template.jinja2"),
-                message_dict={
-                    "batchId":"_{}".format(uuid.uuid4()),  
-                    "dlp_id":incident_id,
-                    **kwargs})
+                message_dict=update_payload)
             response = cls.session.post(cls.sdlp_incident_endpoint,
                                         data=rendered_xml, headers=headers)
 
