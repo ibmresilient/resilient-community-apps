@@ -78,8 +78,7 @@ class DLPSoapClient():
         :type app_configs: dict
         """
         cls.is_connected = False # Set is_connected to false initially
-        # TODO: Look up validate_fields instead of this 
-
+        
         validate_fields(['sdlp_host', 'sdlp_wsdl', 'sdlp_username', 'sdlp_password', 'sdlp_savedreportid', 'sdlp_incident_endpoint'], kwargs=app_configs)
 
         LOG.debug("Validated Mandatory app.configs for DLPSoapClient")
@@ -216,7 +215,6 @@ class DLPSoapClient():
                                         data=rendered_xml, headers=headers)
 
             response.raise_for_status()
-            print(response.content)
             if b"<statusCode>SUCCESS</statusCode>" not in response.content:
                 raise ValueError("API Call did not Return a Success code")
             LOG.info("Sent new update to DLP Incident %s", incident_id)

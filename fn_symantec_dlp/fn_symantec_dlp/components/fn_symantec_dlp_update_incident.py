@@ -7,7 +7,7 @@ import logging
 import json 
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
 class FunctionComponent(ResilientComponent):
@@ -23,17 +23,16 @@ class FunctionComponent(ResilientComponent):
     def _fn_symantec_dlp_update_incident_function(self, event, *args, **kwargs):
         """Function: """
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-
             res_payload = ResultPayload("fn_symantec_dlp_update", **kwargs)
+
             # Get the function parameters:
             sdlp_update_payload = self.get_textarea_param(kwargs.get("sdlp_update_payload"))  # textarea
+
+            validate_fields(['sdlp_update_payload'], kwargs)
 
             log = logging.getLogger(__name__)
             log.info("sdlp_update_payload: %s", sdlp_update_payload)
 
-            if sdlp_update_payload is None:
-                raise ValueError("Encountered error: sdlp_update_payload may not be None")
 
             updatepayload = json.loads(sdlp_update_payload)
 

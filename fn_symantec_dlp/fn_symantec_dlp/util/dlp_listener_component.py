@@ -37,7 +37,7 @@ class DLPListener(ResilientComponent):
         # A REST Client to interface with Resilient
         self.res_rest_client = ResilientComponent.rest_client(self)
         self.default_artifact_type_id = 16 # When uploading DLP Binaries as attachments, they will be uploaded at 'Other File'
-        DLPListener.add_filters_to_jinja()
+        self.add_filters_to_jinja()
 
     def start_poller(self):
         """start_poller begins the Polling process for DLP to search for any Incidents to bring to Resilient
@@ -318,7 +318,7 @@ class DLPListener(ResilientComponent):
             LOG.debug(incident_data)
             return incident_data
 
-    def add_filters_to_jinja():
+    def add_filters_to_jinja(self):
         """add_filters_to_jinja used to setup the jinja filters as a part of the environment
         """
         ds_filter = {
