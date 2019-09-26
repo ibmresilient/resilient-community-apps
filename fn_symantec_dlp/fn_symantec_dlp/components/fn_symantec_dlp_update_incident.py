@@ -39,7 +39,11 @@ class FunctionComponent(ResilientComponent):
 
             soap_client = DLPSoapClient(app_configs=self.options)
 
-            
+            if updatepayload.get('status'):
+                log.info("A status property was provided with the update payload. This will be checked against the DLP Instance to ensure its a valid Status")
+                available_status_values = soap_client.incident_status()
+                if updatepayload['status'] not in available_status_values:
+                    raise ValueError(u"Encountered Validation Error; the provided Status value was not found on the DLP Instance. These status values are active on DLP Instance : %s", available_status_values)
             resp = soap_client.update_incident_raw(**updatepayload)
             # Currently, there is nothing to return on the response that isin't an input
             # If we reach this line, we can assume we have made a succesful update as the update function has handling to ensure SUCCESS is returned
