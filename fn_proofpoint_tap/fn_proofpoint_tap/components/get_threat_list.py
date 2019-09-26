@@ -31,5 +31,5 @@ def get_threat_list(rc, options, lastupdate, bundle):
     res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
     # Debug logging
-    log.debug("Response content: {}".format(res))
+    log.debug("Response content: {}".format(res.content))
     return res.json()
