@@ -5,7 +5,6 @@
 
 import logging
 import socket
-import pprint
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields

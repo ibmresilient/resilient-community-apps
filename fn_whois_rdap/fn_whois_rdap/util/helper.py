@@ -103,7 +103,6 @@ def dict_to_json_str(d):
 
     if isinstance(value, list):
       dummy = {}
-      #logging.error('dict_to_json_str does not support Python Lists')
 
     if isinstance(value, basestring):
       value = value.replace(u'"', u'\\"')
@@ -124,7 +123,6 @@ def dict_to_json_str(d):
 
     else:
       dummy = {}
-      #logging.error('dict_to_json_str does not support this type: {0}'.format(type(value)))
 
   return u'{0} {1} {2}'.format(u'{', ','.join(entries), u'}')
 
