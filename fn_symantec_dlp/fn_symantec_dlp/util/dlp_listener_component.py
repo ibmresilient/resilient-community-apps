@@ -59,7 +59,7 @@ class DLPListener(ResilientComponent):
         LOG.info("Number of Incidents before filtering: %d", len(incidents))
 
         # Drop all incidents which have a res_id custom attribute
-        incidents = list(self.filter_existing_incidents(incidents))
+        incidents = list(filter(self.filter_existing_incidents, incidents))
 
         if incidents: # If theres more than one incident after first filter 
             # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
@@ -260,25 +260,24 @@ class DLPListener(ResilientComponent):
         return "Low"
 
     @staticmethod
-    def filter_existing_incidents(incidents):
+    def filter_existing_incidents(incident):
         """filter_existing_incidents function used to filter out any DLP Incidents which already have an associated Resilient Incident ID. 
-        Done to avoid duplication, the function iterates over a list of incidents, searching the customAttributes for a resilient_incidentid attribute.
-        If this value is empty, we yield that incident back to the caller, if a value is set, do nothing.
+        Done to avoid duplication, the function iterates over a list of incidents, searching the customAttributes for a resilient_incident_id attribute.
+        If this value is empty, we return True so it can be collected, if a value is set, do nothing.
         
         
         :param incidents: A number of incidents which did not have a resilient_incidentid customAttribute set
         :type incidents: dict or Zeep Object
-        :return: returns a generator of all the matching incidents which can then be cast to an iterable 
-        :rtype: generator
+        :return: returns a boolean which can be used with filter() as the predicate
+        :rtype: boolean
         """
-        for incident in incidents:
-            if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
-                for groupset in incident['incident'].customAttributeGroup:  # for each group
-                    if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
-                        for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
-                            # If the attribute is the resilient one and has no value
-                            if attribute.name == "resilient_incident_id" and attribute.value is None:
-                                yield incident
+        if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
+            for groupset in incident['incident'].customAttributeGroup:  # for each group
+                if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
+                    for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
+                        # If the attribute is the resilient one and has no value
+                        if attribute.name == "resilient_incident_id" and attribute.value is None:
+                            return True
 
     def does_incident_exist_in_res(self, sdlp_id_type, sdlp_incident_id):
         """does_incident_exist_in_res function used to check if a given DLP incident has already been imported into Resilient. 
