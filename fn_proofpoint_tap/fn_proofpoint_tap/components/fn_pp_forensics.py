@@ -109,7 +109,7 @@ class FunctionComponent(ResilientComponent):
             forensics = forensics_response.json()
 
             # Debug logging
-            log.debug("Response content: {}".format(forensics.content))
+            log.debug("Response content: {}".format(forensics))
 
             data = []
 
