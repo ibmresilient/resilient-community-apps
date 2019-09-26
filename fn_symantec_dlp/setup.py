@@ -30,7 +30,8 @@ setup(
     install_requires=[
         'resilient_circuits>=33.0.189',
         'resilient-lib>=33.0.189',
-        'zeep>=3.4.0'
+        'zeep>=3.4.0',
+        'requests>=2.7.0'
     ],
     packages=find_packages(),
     include_package_data=True,
