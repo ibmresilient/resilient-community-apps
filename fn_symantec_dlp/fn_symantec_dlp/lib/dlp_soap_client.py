@@ -207,14 +207,18 @@ class DLPSoapClient():
             # Originally was getting an issue trying to pass **kwargs to the jinja template on py2
             # Now we prepare a dict with our custom values and then update that dict with the kwargs
             update_payload.update(kwargs)
+
             default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
             rendered_xml = cls.map_values(
                 template_file=os.path.abspath(default_dir + "/_dlp_update_incident_xml_template.jinja2"),
                 message_dict=update_payload)
+
             response = cls.session.post(cls.sdlp_incident_endpoint,
                                         data=rendered_xml, headers=headers)
 
-            response.raise_for_status()
+            # Catch any request issues and raise them
+            response.raise_for_status() 
+            # If the request returns with a success code but does not have a SUCCESS status, return an error
             if b"<statusCode>SUCCESS</statusCode>" not in response.content:
                 raise ValueError("API Call did not Return a Success code")
             LOG.info("Sent new update to DLP Incident %s", incident_id)

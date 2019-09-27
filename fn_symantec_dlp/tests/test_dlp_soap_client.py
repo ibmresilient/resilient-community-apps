@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright © IBM Corporation 2010, 2019
-import uuid 
-import os 
-
-import configparser
-import mock
-from mock import patch
-import pytest
+import uuid
+import os
 import logging
+
+import mock
+import pytest
 
 import resilient
 
