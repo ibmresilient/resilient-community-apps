@@ -6,7 +6,6 @@
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
-import time
 import re
 
 MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
@@ -321,6 +320,7 @@ class MitreAttackGroup(MitreAttackBase):
     def __init__(self, doc):
         super(MitreAttackGroup, self).__init__(doc)
         self.aliases = self.get_aliases(doc)
+        self.technique_id = None
 
     def get_url(self):
         """
@@ -371,15 +371,10 @@ class MitreAttackGroup(MitreAttackBase):
             return None
         # get groups that each techniques is associated with
         groups_per_technique = [cls.get_by_technique(conn, technique) for technique in techniques]
-        if not groups_per_technique:
-            return None
 
         # get a list of ids of groups using all the techniques
         intersection = cls.get_intersection_of_groups(groups_per_technique)
         groups = [x for x in groups_per_technique[0] if x.id in intersection]
-
-        if not groups:
-            return None
 
         return groups
 

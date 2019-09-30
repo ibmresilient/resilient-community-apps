@@ -229,6 +229,17 @@ class TestMitreGroup(object):
 
     mitre_attack = MitreAttackConnection()
 
+    def test_groups_done_have_mardown_links(self):
+        """
+        Test that links are sanitized.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            groups = MitreAttackGroup.get_all(self.mitre_attack)
+            dict_reps = [g.dict_form() for g in groups]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", group["description"]) is None) for group in dict_reps])
+
     def test_groups_dont_have_mardown_links(self):
         """
         Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
@@ -275,7 +286,7 @@ class TestMitreGroup(object):
         """
         test_list is a list of lists.
         Each sublist is the groups that use a technique.
-        Groupswith id 42 and 123 are in every sublist.
+        There aren't any groups in each of the subsets.
         """
         GROUP = self.MockGroupID
         test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],
