@@ -54,14 +54,20 @@ For each, it will create a row in the corresponding data table for MITRE softwar
                 technique_ids = mitre_technique_id.split(',')
                 techniques = []
                 for t_id in technique_ids:
-                    techniques.extend(mitre_attack.MitreAttackTechnique.get_by_id(mitre_conn, t_id))
+                    technique = mitre_attack.MitreAttackTechnique.get_by_id(mitre_conn, t_id)
+                    if not technique:
+                        raise ValueError("Technique with id {} doesn't exist".format(t_id))
+                    techniques.extend(technique)
             else:
                 # It's possible for multiple tactics to have the same name
                 # And we want to make sure that all of them are processed in that case
                 technique_names = mitre_technique_name.split(',')
                 techniques = []
                 for name in technique_names:
-                    techniques.extend(mitre_attack.MitreAttackTactic.get_by_name(mitre_conn, name))
+                    technique = mitre_attack.MitreAttackTechnique.get_by_name(mitre_conn, name)
+                    if not technique:
+                        raise ValueError("Techniques with name {} don't exist".format(name))
+                    techniques.extend(technique)
 
             yield StatusMessage("Getting software information...")
             software = []
