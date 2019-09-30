@@ -9,7 +9,7 @@ available to public, this file is a system level test
 """
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, \
-    MitreAttackMitigation, MitreAttackSoftware
+    MitreAttackMitigation, MitreAttackSoftware, MitreAttackGroup
 from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques
 import requests
 import pytest

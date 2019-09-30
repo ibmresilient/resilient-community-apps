@@ -29,6 +29,7 @@ setup(
             "MitreTacticInformationFunctionComponent = fn_mitre_integration.components.mitre_tactic_information:FunctionComponent",
             "MitreTechniquesSoftwareFunctionComponent = fn_mitre_integration.components.mitre_techniques_software:FunctionComponent",
             "MitreGroupsUsingTechniqueFunctionComponent = fn_mitre_integration.components.mitre_groups_using_technique:FunctionComponent",
+            "MitreGroupsTechniqueIntersectionFunctionComponent = fn_mitre_integration.components.mitre_groups_technique_intersection:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_mitre_integration.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_mitre_integration.util.customize:customization_data"],
