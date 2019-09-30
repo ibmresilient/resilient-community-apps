@@ -27,16 +27,16 @@ class FunctionComponent(ResilientComponent):
             mitre_technique_name = kwargs.get("mitre_technique_name")  # text
             mitre_technique_id = kwargs.get("mitre_technique_id")  # text
 
+            log = logging.getLogger(__name__)
+            log.info("mitre_technique_name: %s", mitre_technique_name)
+            log.info("mitre_technique_id: %s", mitre_technique_id)
+
             result_payload = ResultPayload("fn_mitre_integration", mitre_technique_name=mitre_technique_name,
                                            mitre_technique_id=mitre_technique_id)
 
             if not mitre_technique_id and not mitre_technique_name:
                 raise ValueError("At least one of the inputs(mitre_technique_name or mitre_technique_id) "
                                  "should be provided.")
-
-            log = logging.getLogger(__name__)
-            log.info("mitre_technique_name: %s", mitre_technique_name)
-            log.info("mitre_technique_id: %s", mitre_technique_id)
 
             yield StatusMessage("starting...")
             yield StatusMessage("Getting technique information...")
