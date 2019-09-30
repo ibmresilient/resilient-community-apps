@@ -24,9 +24,6 @@ class FunctionComponent(ResilientComponent):
     def _mitre_groups_using_technique_function(self, event, *args, **kwargs):
         """Function: Get a list of groups that are using the given technique(s)."""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
-
             mitre_technique_name = kwargs.get("mitre_technique_name")  # text
             mitre_technique_id = kwargs.get("mitre_technique_id")  # text
 
@@ -60,15 +57,17 @@ class FunctionComponent(ResilientComponent):
                 for name in technique_names:
                     techniques.extend(mitre_attack.MitreAttackTactic.get_by_name(mitre_conn, name))
 
-            yield StatusMessage("Getting software information...")
-            software = []
+            yield StatusMessage("Getting group information...")
+            groups = []
             for technique in techniques:
-                software.extend(mitre_attack.MitreAttackSoftware.get_by_technique(mitre_conn, technique))
+                groups.extend(mitre_attack.MitreAttackGroup.get_by_technique(mitre_conn, technique))
 
             yield StatusMessage("Done. Returning results")
-            software = [x.dict_form() for x in software]  # prepare the data for viewing
+            groups = [x.dict_form() for x in groups]  # prepare the data for viewing
+            print("Groups")
+            print(groups)
             results = {
-                "mitre_software": software
+                "mitre_groups": groups
             }
             # Produce a FunctionResult with the results
             yield FunctionResult(result_payload.done(True, results))
