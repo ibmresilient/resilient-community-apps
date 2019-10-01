@@ -33,11 +33,10 @@ def timestamp_minutes_ago(minutes):
     past = now - dt.timedelta(minutes=minutes)
     return past.isoformat()
 
-def incident_details_exception_handler(response, url):
+def incident_details_exception_handler(response):
     """ Callback to process incident details HTTPError exceptions.
 
     :param response: Request response.
-    :param url: Request url.
     :return:
     """
     try:
@@ -56,11 +55,10 @@ def incident_details_exception_handler(response, url):
         raise ValueError(err)
 
 
-def incidents_exception_handler(response, url):
+def incidents_exception_handler(response):
     """ Callback to process incident details HTTPError exceptions.
 
     :param response: Request response.
-    :param url: Request url.
     :return:
     """
     try:
