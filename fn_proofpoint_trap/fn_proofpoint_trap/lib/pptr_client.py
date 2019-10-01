@@ -4,15 +4,79 @@
 """ Class for Resilient circuits Functions supporting REST API client for Proofpoint TRAP  """
 import logging
 import json
+import datetime as dt
 from datetime import datetime
 from sys import version_info
+import os
+import requests
 try:
     from urllib.parse import urljoin
 except:
     from urlparse import urljoin
+try:
+    from json.decoder import JSONDecodeError
+except ImportError:
+    JSONDecodeError = ValueError
+
 from resilient_lib import RequestsCommon
+from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
+
+def timestamp_minutes_ago(minutes):
+    """
+    Return ISO 8601 Timestamp of X minutes ago
+    :param minutes:
+    :return:
+    """
+    now = dt.datetime.now()
+    past = now - dt.timedelta(minutes=minutes)
+    return past.isoformat()
+
+def incident_details_exception_handler(response, url):
+    """ Callback to process incident details HTTPError exceptions.
+
+    :param response: Request response.
+    :param url: Request url.
+    :return:
+    """
+    try:
+        response.raise_for_status()
+
+        # Return requests.Response object
+        return response
+
+    except requests.exceptions.HTTPError as err:
+        if err.response.content is not None:
+            try:
+                custom_error_content = json.loads(err.response.content)
+            except JSONDecodeError:
+                raise ValueError(err)  # raise ValueError(custom_error_content)
+            return custom_error_content
+        raise ValueError(err)
+
+
+def incidents_exception_handler(response, url):
+    """ Callback to process incident details HTTPError exceptions.
+
+    :param response: Request response.
+    :param url: Request url.
+    :return:
+    """
+    try:
+        response.raise_for_status()
+
+        # Return requests.Response object
+        return response
+
+    except requests.exceptions.HTTPError as err:
+        if err.response.content is not None:
+            try:
+                custom_error_content = json.loads(err.response.content)
+            except JSONDecodeError:
+                return {'error': '{}'.format(err)}
+            return custom_error_content
+        return {'error': 'HTTP error {}'.format(err)}
 
 class PPTRClient(object):
     """
@@ -24,15 +88,76 @@ class PPTRClient(object):
         """
         self.base_url = function_options['base_url']
         self.api_key = function_options['api_key']
+        cafile = function_options.get('cafile')
+        self.bundle = os.path.expanduser(cafile) if cafile else False
         # Rest request endpoints
         self._endpoints = {
             # REST endpoints
+            "incident":         "/incidents/{}.json",
+            "incidents":        "/incidents",
             "list_member":      "/lists/{}/members/{}.json",
             "list_members":     "/lists/{}/{}",
             "add_members":      "/lists/{}/members.json",
         }
         self._req = RequestsCommon(options, function_options)
         self._headers = {"Authorization": "{0}".format(self.api_key)}
+
+    def get_incidents(self, lastupdate=None):
+        """Get incidents in TRAP. The amount of incidends returned can be filtered by parameter lastupdate.
+
+        :param lastupdate: - Minutes since last update
+        :return Result in json format.
+        """
+        url = urljoin(self.base_url, self._endpoints["incidents"])
+        params = {}
+        if type(lastupdate) is int:
+            params['created_after'] = timestamp_minutes_ago(lastupdate)
+        else:
+            if lastupdate is None:
+                # first run, fetch all
+                LOG.info("First Run in progress - this may take a while.")
+        try:
+            r = self._req.execute_call_v2('get', url, callback=incidents_exception_handler, headers=self._headers,
+                                          params=params, verify=self.bundle, proxies=self._req.get_proxies())
+
+        except IntegrationError as ierr:
+            msg = str(ierr)
+            return {'error': 'Request to {0} failed with error {1}.'.format(url, msg)}
+
+        try:
+            return r.json()
+        except ValueError:
+            # Default response likely not in json format just return content as is.
+            return r.content
+        return r
+
+    def get_incident_details(self, incident_id=None):
+        """Get incident details for an  incident id.
+
+        :param incident_id: - Incident id for request.
+        :return Result in json format.
+        """
+        rtn = {}
+        url = urljoin(self.base_url, self._endpoints["incident"]).format(incident_id)
+
+        try:
+            r = self._req.execute_call_v2('get', url, callback=incident_details_exception_handler,
+                                          headers=self._headers, verify=self.bundle, proxies=self._req.get_proxies())
+
+        except IntegrationError as ierr:
+            msg = str(ierr)
+            raise Exception('Request to {0} failed with error {1}.'.format(url, msg))
+
+        if isinstance(r, dict) and "error" in r:
+            return r
+        else:
+            rtn['href'] = url
+            try:
+                rtn['data'] = r.json()
+            except ValueError:
+                # Default response likely not in json format just return content as is.
+                rtn['data'] = r.content
+            return rtn
 
     def get_list_members(self, list_id=None, member_id=None, members_type=None):
         """Gets member(s) from a list.

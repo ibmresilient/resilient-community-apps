@@ -12,13 +12,11 @@ import requests
 import json
 import os
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon
-from fn_proofpoint_trap.lib.helpers import validate_opts
+from resilient_lib import ResultPayload, validate_fields
+from fn_proofpoint_trap.lib.pptr_client import PPTRClient
+from fn_proofpoint_trap.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
-try:
-    from json.decoder import JSONDecodeError
-except ImportError:
-    JSONDecodeError = ValueError
+log = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_proofpoint_trap_get_incident_details"""
@@ -39,103 +37,31 @@ class FunctionComponent(ResilientComponent):
     def _fn_proofpoint_trap_get_incident_details_function(self, event, *args, **kwargs):
         """Function: Fetch Incident Details from Proofpoint TRAP"""
 
-        # Get the function parameters:
-        trap_incident_id = kwargs.get("trap_incident_id")  # number
-
-        if trap_incident_id is None or not trap_incident_id:
-            raise ValueError("Required field is missing or empty: "+"trap_incident_id")
-
-        log = logging.getLogger(__name__)
-
-        log.info("trap_incident_id: %s", trap_incident_id)
-
-        req = RequestsCommon(self.opts, self.options)
-
-        yield StatusMessage("starting...")
-
-        for yvalue in get_incident_details(self.options, trap_incident_id, req):
-            yield yvalue
-
-
-
-def get_config_option(options, option_name, optional=False):
-    """Given option_name, check and return it if it is in appconfig.
-       Raises ValueError if it is missing and mandatory
-    """
-    option = options.get(option_name)
-
-    if not option and not optional:
-        raise ValueError('"{0}" is mandatory and is not set in the app.config file'.format(option_name))
-
-    return option
-
-def get_incident_details(options, incident_id, req):
-    """ Get andincident details from TRAP
-
-    :param options: - Configuration Options pulled from app.config
-    :param incident_id: - Incident id to look up.
-    :param req: - Instance of resilient_lib.RequestCommon.
-    :return response data:
-    """
-    try:
-        inputs = {
-            'trap_incident_id': incident_id,
-        }
-
-        # payload = FunctionPayload(inputs)
-        results = {
-            'inputs': inputs,
-            'success': False,
-        }
-
-        yield StatusMessage("function inputs OK")
-
-        # get configuration values
-        base_url = get_config_option(options, 'base_url')
-        api_key = get_config_option(options, 'api_key')
-        cafile = options.get('cafile')
-        bundle = os.path.expanduser(cafile) if cafile else False
-
-        yield StatusMessage("configuration values OK")
-        yield StatusMessage("Certificate verify {0}".format(bundle))
-
-        headers = {'Authorization': api_key}
-        url = '{0}/incidents/{1}.json'.format(base_url, incident_id)
-
         try:
-            yield StatusMessage('Sending GET request to {0}'.format(url))
+            params = transform_kwargs(kwargs) if kwargs else {}
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            # Get the function parameters:
+            trap_incident_id = kwargs.get("trap_incident_id")  # number
 
-            res = requests.get(url, headers=headers, verify=bundle, proxies=req.get_proxies())
+            log.info("trap_incident_id: %s", trap_incident_id)
 
-            res.raise_for_status()
 
-            results['success'] = True
-            # results['data'] = json.loads(res.text)
-            results['data'] = res.json()
-            results['href'] = url
+            validate_fields(["trap_incident_id"], kwargs)
 
-        except requests.exceptions.Timeout:
-            raise ValueError('request to {0} timed out'.format(url))
+            pptr = PPTRClient(self.opts, self.options)
+            rtn = pptr.get_incident_details(**params)
+            if isinstance(rtn, dict) and "error" in rtn:
+                results = rtn
+            else:
+                results = rp.done(True, rtn)
+                results["data"] = rtn["data"]
+                results["href"] = rtn["href"]
 
-        except requests.exceptions.TooManyRedirects:
-            raise ValueError('URL redirection loop?', url)
+            # Produce a FunctionResult with the results
+            yield FunctionResult(results)
+        except Exception:
+            log.exception("Exception in Resilient Function for Proofpoint TRAP.")
+            yield FunctionError()
 
-        except requests.exceptions.HTTPError as err:
-            if err.response.content is not None:
-                try:
-                    custom_error_content = json.loads(err.response.content)
-                except JSONDecodeError:
-                    raise ValueError(err)                    # raise ValueError(custom_error_content)
-                yield FunctionResult(custom_error_content)
-            raise ValueError(err)
 
-        except requests.exceptions.RequestException as ex:
-            raise ValueError(ex)
 
-        yield StatusMessage("done...")
-
-        # Produce a FunctionResult with the results
-        yield FunctionResult(results)
-
-    except Exception:
-        yield FunctionError()
