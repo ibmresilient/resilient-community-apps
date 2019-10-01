@@ -8,7 +8,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
-from fn_proofpoint_trap.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+from fn_proofpoint_trap.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
 log = logging.getLogger(__name__)
 
@@ -19,11 +19,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_proofpoint_trap", {})
+        validate_opts(self)
 
     @function("fn_proofpoint_trap_delete_list_member")
     def _fn_proofpoint_trap_delete_list_member_function(self, event, *args, **kwargs):
