@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """
  These are methods for accessing Jira. The Jira REST API is used for general access.
  Requirements: JIRA URL and basic authentication user/password
 """
 import json
-from fn_jira.lib.requests_common import execute_call
+import fn_jira.lib.constants as constants
+from resilient_lib import RequestsCommon
 
 """
 This module implements the calls needed for jira api access. API operations supported:
@@ -16,143 +17,162 @@ This module implements the calls needed for jira api access. API operations supp
 """
 
 # URL fragments needed along with the base jira URL
-ISSUE_URL  = 'rest/api/2/issue'
+ISSUE_URL = 'rest/api/2/issue'
 TRANSITION_PARAM = 'transitions'
-HTTP_HEADERS = {'content-type': 'application/json'}
 
 COMMENT_PARAM = 'comment'
 
-
-def create_issue(log, appDict):
-    """Function: create a jira issue.
-    :return the raw JSON returned from the api call
-    """
-
-    issue_url = '/'.join((appDict['url'], ISSUE_URL))
-
-    payload = _mkCreatePayload(appDict)
-    log and log.debug(payload)
-
-    result = execute_call(log, 'post', issue_url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
-    log and log.debug(result)
-
-    return result
+class JiraCommon:
+    def __init__(self, opts, function_opts):
+        self.req_common = RequestsCommon(opts=opts, function_opts=function_opts)
 
 
-def transition_issue(log, appDict):
-    """Function: transition a jira issue.
-    :return: the raw JSON returned from the api call
-    """
+    def create_issue(self, log, appDict):
+        """Function: create a jira issue.
+        :return the raw JSON returned from the api call
+        """
 
-    url = '/'.join((appDict['url'], TRANSITION_PARAM))
-    payload = _mkTransitionPayload(appDict)
-    log and log.debug(payload)
+        issue_url = '/'.join((appDict['url'], ISSUE_URL))
 
-    #find_transitions(log, appDict) # uncomment to see transitions for this enterprise
+        payload = self._mkCreatePayload(appDict)
 
-    result = execute_call(log, 'post', url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
-    log and log.debug(result)
+        resp = self.req_common.execute_call_v2('post', issue_url, auth=(appDict['user'], appDict['password']),
+                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
-    return result
-
-def find_transitions(log, appDict):
-    """
-    determine the ticket transitions for a given issue
-    :param log: 
-    :param appDict: 
-    :return: None
-    """
-    url = '/'.join((appDict['url'], TRANSITION_PARAM))
-
-    result = execute_call(log, 'get', url, appDict['user'], appDict['password'], None, appDict['verifyFlag'], HTTP_HEADERS)
-    log and log.debug(result)
-
-    return result
+        return self.get_json_result(resp)
 
 
-def create_comment(log, appDict):
-    """Function: create a jira comment in a Jira issue. No JSON is returned on success
-        :return: dictionary for a comment
-    """
+    def transition_issue(self, log, appDict):
+        """Function: transition a jira issue.
+        :return: the raw JSON returned from the api call
+        """
 
-    url = '/'.join((appDict['url'], COMMENT_PARAM))
+        url = '/'.join((appDict['url'], TRANSITION_PARAM))
+        payload = self._mkTransitionPayload(appDict)
 
-    payload = _mkCommentPayload(appDict)
-    log and log.debug(payload)
+        #find_transitions(log, appDict) # uncomment to see transitions for this enterprise
 
-    result =  execute_call(log, 'post', url, appDict['user'], appDict['password'], payload, appDict['verifyFlag'], HTTP_HEADERS)
-    log and log.debug(result)
+        log and log.debug(payload)
 
-    # successfully added comments return an empty dictionary: { }
-    return result
+        resp = self.req_common.execute_call_v2('post', url, auth=(appDict['user'], appDict['password']),
+                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
-def _mkCreatePayload(appDict):
-    '''
-    Build the payload for creating a Jira issue
-    :param **dict could be **kwargs:
-    :return: json payload for jira update
-    '''
-    
-    payload = {
-        "fields": {
-            "project": {
-                "key": appDict.get('project')
-            },
-            "issuetype": {
-                "name": appDict.get('issuetype')
-            }
-        }
-    }
+        return self.get_json_result(resp)
 
-    for key in appDict['fields']:
-        payload['fields'][key] = appDict['fields'][key]
+    def find_transitions(self, log, appDict):
+        """
+        determine the ticket transitions for a given issue
+        :param log:
+        :param appDict:
+        :return: None
+        """
+        url = '/'.join((appDict['url'], TRANSITION_PARAM))
 
-    return json.dumps(payload)
+        resp = self.req_common.execute_call_v2('get', url, auth=(appDict['user'], appDict['password']),
+                                               verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+        log and log.debug(resp)
 
-def _mkCommentPayload(appDict):
-    '''
-    Build the payload for adding a Jira comment
-    :param **dict could be **kwargs:
-    :return: json payload for jira update
-    '''
-    
-    payload = { "body": appDict['comment'] }
+        return self.get_json_result(resp)
 
-    return json.dumps(payload)
 
-def _mkTransitionPayload(appDict):
-    '''
-    Build the payload needed to transition a Jira issue
-    :param **dict could be **kwargs:
-    :return: json payload for jira call
-    '''
+    def create_comment(self, log, appDict):
+        """Function: create a jira comment in a Jira issue. No JSON is returned on success
+            :return: dictionary for a comment
+        """
 
-    payload = {
-        "transition": {
-            "id": appDict['transitionId']
-        }
-    }
+        url = '/'.join((appDict['url'], COMMENT_PARAM))
 
-    if appDict.get('comment'):
-        comment = \
-        { "comment":
-            [
-                {
-                    "add": {
-                        "body": appDict['comment']
-                    }
+        payload = self._mkCommentPayload(appDict)
+
+        resp = self.req_common.execute_call_v2('post', url, auth=(appDict['user'], appDict['password']),
+                                               data=payload, verify=appDict['verifyFlag'], headers=constants.HTTP_HEADERS)
+
+        log and log.debug(resp)
+
+        # successfully added comments return an empty dictionary: { }
+        return self.get_json_result(resp)
+
+    def get_json_result(self, resp):
+        """
+        get the response in json format, if possible
+        :param resp:
+        :return: None if errors or not json
+        """
+        try:
+            result = resp.json() if resp and resp.content else None
+        except:
+            result = None
+
+        return result
+
+    def _mkCreatePayload(self, appDict):
+        '''
+        Build the payload for creating a Jira issue
+        :param **dict could be **kwargs:
+        :return: json payload for jira update
+        '''
+
+        payload = {
+            "fields": {
+                "project": {
+                    "key": appDict.get('project')
+                },
+                "issuetype": {
+                    "name": appDict.get('issuetype')
                 }
-            ]
-        }
-        payload['update'] = comment
-
-    if appDict.get('resolution'):
-        resolution = {
-            "resolution": {
-                "name": appDict['resolution']
             }
         }
-        payload['fields'] = resolution
 
-    return json.dumps(payload)
+        for key in appDict['fields']:
+            payload['fields'][key] = appDict['fields'][key]
 
+        return json.dumps(payload)
+
+    def _mkCommentPayload(self, appDict):
+        '''
+        Build the payload for adding a Jira comment
+        :param **dict could be **kwargs:
+        :return: json payload for jira update
+        '''
+
+        payload = {"body": appDict['comment']}
+
+        return json.dumps(payload)
+
+    def _mkTransitionPayload(self, appDict):
+        '''
+        Build the payload needed to transition a Jira issue
+        :param **dict could be **kwargs:
+        :return: json payload for jira call
+        '''
+
+        payload = {
+            "transition": {
+                "id": appDict['transitionId']
+            }
+        }
+
+        if appDict.get('comment'):
+            comment = \
+            {"comment":
+                [
+                    {
+                        "add": {
+                            "body": appDict['comment']
+                        }
+                    }
+                ]
+            }
+            payload['update'] = comment
+
+        if appDict.get('resolution'):
+            resolution = {
+                "resolution": {
+                    "name": appDict['resolution']
+                }
+            }
+            payload['fields'] = resolution
+
+        return json.dumps(payload)
