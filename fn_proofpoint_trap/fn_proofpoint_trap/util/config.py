@@ -18,8 +18,8 @@ base_url=
 api_key=
 # Interval to poll TRAP in minutes
 polling_interval=2
-# Initial Import Look-back Interval in minutes (default: 2 weeks)
-startup_interval=20160
+# Initial Import Look-back Interval in minutes (default: 1 hour)
+startup_interval=60
 # State of Incidents to Query
 state=open
 # Comma separated list of host categories to check for artifacts 
