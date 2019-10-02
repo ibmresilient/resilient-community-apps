@@ -86,7 +86,7 @@ class PPTRClient(object):
         """
         self.base_url = function_options['base_url']
         self.api_key = function_options['api_key']
-        cafile = function_options.get('cafile')
+        cafile = function_options.get('cafile', False)
         self.bundle = os.path.expanduser(cafile) if cafile else False
         # Rest request endpoints
         self._endpoints = {
@@ -173,7 +173,7 @@ class PPTRClient(object):
         else:
             url = urljoin(self.base_url, self._endpoints["list_members"]).format(list_id, members_type)
 
-        r = self._req.execute_call_v2('get', url, verify=False, headers=self._headers, proxies=self._req.get_proxies())
+        r = self._req.execute_call_v2('get', url, verify=self.bundle, headers=self._headers, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -200,7 +200,7 @@ class PPTRClient(object):
                 "member": member, "description": description, "expiration": expiration, "duration": duration
             }
         )
-        r = self._req.execute_call_v2('post', url, verify=False, headers=self._headers, json=payload, proxies=self._req.get_proxies())
+        r = self._req.execute_call_v2('post', url, verify=self.bundle, headers=self._headers, json=payload, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -227,7 +227,7 @@ class PPTRClient(object):
                 "description": description, "expiration": expiration, "duration": duration
             }
         )
-        r = self._req.execute_call_v2('put', url, verify=False, headers=self._headers, json=payload, proxies=self._req.get_proxies())
+        r = self._req.execute_call_v2('put', url, verify=self.bundle, headers=self._headers, json=payload, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:
@@ -244,7 +244,7 @@ class PPTRClient(object):
         """
         url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
 
-        r = self._req.execute_call_v2('delete', url, verify=False, headers=self._headers, proxies=self._req.get_proxies())
+        r = self._req.execute_call_v2('delete', url, verify=self.bundle, headers=self._headers, proxies=self._req.get_proxies())
         try:
             return r.json()
         except ValueError:

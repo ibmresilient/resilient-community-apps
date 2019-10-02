@@ -27,6 +27,9 @@ state=open
 # other options include attacker, cnc and url.
 # e.g. host_categories=attacker,cnc,forensics,url
 host_categories=forensics
+# Optional setting to use a ca certificate to access Proofpoint TRAP.
+# Specify the path to the certificate e.g. cafile=<path_name>/cert.cer.
+#cafile=
 # Optional settings for access to Proofpoint TRAP via a proxy.
 #http_proxy=http://proxyhost:8080
 #https_proxy=https://proxyhost:8080
