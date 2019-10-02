@@ -8,26 +8,16 @@ import logging
 import datetime
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 
+lastupdate = 60
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
-
-def timestamp_minutes_ago(minutes):
-    """
-    Return ISO 8601 Timestamp of X minutes ago
-    :param minutes:
-    :return:
-    """
-    now = datetime.datetime.now()
-    past = now - datetime.timedelta(minutes=minutes)
-    return past.isoformat()
 
 def selftest_function(opts):
     """
     Simple test to verify ProofPoint Trap connectivity.
     """
     options = opts.get("fn_proofpoint_trap", {})
-    lastupdate = 60
     try:
         pptr = PPTRClient(opts, options)
         r = pptr.get_incidents(lastupdate)
