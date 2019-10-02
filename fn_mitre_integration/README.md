@@ -25,8 +25,13 @@
 ---
 
 ## Release Notes
-
+<!--
+  Specify all changes in this release. Do not remove the release 
+  notes of a previous release
+-->
 ### v2.0
+- Added customizations allowing to find groups that use all of the techniques given
+- Added customizations allowing to find groups for each of the techniques given
 - Added Workflow/Rule/Data table to get software used by a technique/techniques
 - Added support for all of the MITRE's collections
 - New column `Collection` was added to technique and tactic data tables 
@@ -41,15 +46,26 @@ have examples of what the data looks like.
 ---
 
 ## Overview
+<!--
+  Provide a high-level description of the function itself and its remote software or application.
+  The text below is parsed from the "description" and "long_description" attributes in the setup.py file
+-->
+**Resilient Circuits Components for 'fn_mitre_integration**
+
+ ![screenshot: main](./doc/screenshots/main.png)
 
 MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. 
 This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
 MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a 
 tactic or technique has been identified. This information can help security analyst response quickly to a (potential) breach. 
-MITRE Integration includes 2 functions:
 
-- Query ATT&CK information for a MITRE tactic
-- Query ATT&CK information for a MITRE technique
+It comes with a set of customizations allowing to query MITRE ATT&CK for
+- Techniques
+- Tactics
+- Software used in techniques
+- Groups using techniques
+- Groups that use a specific set of techniques
+- Mitigations
 
 ---
 
@@ -57,11 +73,10 @@ MITRE Integration includes 2 functions:
 <!--
   List any Requirements 
 -->
-
-* IBM Resilient >= `v32.3.12`
+* Resilient platform >= `v32.3.12`
 * An Integration Server running `resilient_circuits>=32.0.0`
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-* `stix` and `taxiiclient` Python libraries 
+  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+
 ---
 
 ## Installation
@@ -98,10 +113,7 @@ MITRE Integration includes 2 functions:
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-Data Tables need to be added to the layout for incident to function properly.
-One of the suggested layouts is the following:
-
-* Create a new tab with the Custom Field and Data Tables added to it
+* Import the Data Tables and Custom Fields like the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -158,4 +170,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_mitre_integration | 1.0.1 | IBM Resilient |  |
+| fn_mitre_integration | 2.0.0 | IBM Resilient |  |
