@@ -4,6 +4,7 @@
 """Function implementation"""
 
 import logging
+from apscheduler.jobstores.base import JobLookupError
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient_lib import validate_fields, ResultPayload
 from fn_scheduler.components import SECTION_SCHEDULER
@@ -34,11 +35,17 @@ class FunctionComponent(ResilientComponent):
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
             scheduler = ResilientScheduler.get_scheduler()
-            scheduler.remove_job(scheduler_label)
 
-            yield StatusMessage("Scheduled rule removed")
+            try:
+                scheduler.remove_job(scheduler_label)
+                log.info(u"Rule '{}' deleted".format(scheduler_label))
 
-            result = rc.done(True, None)
+                yield StatusMessage("Scheduled rule removed")
+                result = rc.done(True, None)
+            except JobLookupError:
+                yield StatusMessage("Scheduled rule not found")
+                result = rc.done(False, None)
+
             yield FunctionResult(result)
         except Exception:
             yield FunctionError()

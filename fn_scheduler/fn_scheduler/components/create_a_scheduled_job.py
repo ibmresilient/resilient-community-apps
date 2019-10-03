@@ -150,17 +150,23 @@ def triggered_job(incident_id, object_id, row_id,
 
     # get the rest client
     rest_client = get_resilient_client(opts)
+    scheduler = ResilientScheduler.get_scheduler()
 
     # make sure the incident is still open
     resp = get_incident(rest_client, incident_id)
     if not resp or resp['end_date'] is not None:
         log.warning(u"Incident %s is not found or closed. Removing scheduled job: %s", incident_id, rule_name)
-        scheduler = ResilientScheduler.get_scheduler()
         scheduler.remove_job(scheduler_label)
         return
 
     # make sure the rule is still enabled
-    get_rule_by_id(rest_client, rule_id)
+    try:
+        get_rule_by_id(rest_client, rule_id)
+    except KeyError as err:
+        # remove rules which no longer exist
+        add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+        scheduler.remove_job(scheduler_label)
+        return
 
     # build url for invoking a rule
     url = "/incidents/{}".format(incident_id)

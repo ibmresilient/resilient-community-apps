@@ -14,7 +14,7 @@ def get_rule_by_name(rest_client, rule_name):
     for rule in rules['entities']:
         if rule['name'].lower() == rule_name.lower():
             if not rule['enabled']:
-                raise AttributeError("Rule is disabled")
+                raise AttributeError(u"Rule '{}' is disabled".format(rule_name))
 
             return (rule['id'], rule["object_type"])
 
@@ -36,7 +36,7 @@ def get_rule_by_id(rest_client, rule_id):
             else:
                 raise AttributeError("Rule is disabled")
 
-    raise KeyError("Rule id %s is not found", rule_id)
+    raise KeyError("Rule id {} is not found".format(rule_id))
 
 def get_rules(rest_client):
     url = "/actions"
