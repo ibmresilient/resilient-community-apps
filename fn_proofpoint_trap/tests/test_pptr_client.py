@@ -152,3 +152,25 @@ class TestPPTRClient:
         pptr = PPTRClient(None, get_config())
         response = pptr.delete_list_member(**params)
         assert (expected_results == response)
+
+    """ Test pptr.get_incident_details """
+    @patch("fn_proofpoint_trap.lib.pptr_client.RequestsCommon", side_effect=mocked_request)
+    @pytest.mark.parametrize("trap_incident_id, expected_result", [
+        (123, "https://traptesthost/incidents/123.json")
+    ])
+    def test_get_incident_details(self, mock_get, trap_incident_id, expected_result):
+
+        keys = ["data", "href"]
+        keys_data = ["assignee", "created_at", "description", "hosts", "event_count", "events", "score", "type"]
+
+        test_kwargs = {
+            "trap_incident_id": trap_incident_id
+        }
+
+        params = transform_kwargs(test_kwargs)
+        pptr = PPTRClient(None, get_config())
+        response = pptr.get_incident_details(**params)
+        assert_keys_in(response, *keys)
+        assert expected_result == response["href"]
+        data = response["data"]
+        assert_keys_in(data, *keys_data)

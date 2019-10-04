@@ -58,6 +58,37 @@ def update_list_member():
                 }
     return response
 
+def get_incident_details():
+
+    response =  {"assignee":"Unassigned","created_at":"2018-05-26T21:07:17Z","description":"EvilScheme test message",
+                 "event_count":3,"event_sources":["Proofpoint TAP"],
+                 "events":[{"attackDirection":"inbound","category":"malware","classified":False,
+                            "description":"Infection.PDF.File.Exploit.CVE-2010-0188_LibTIFF.","id":3,
+                            "malwareName":"Infection.PDF.File.Exploit.CVE-2010-0188_LibTIFF.",
+                            "received":"2018-05-26T21:07:17Z","severity":"Info","source":"Proofpoint TAP",
+                            "state":"Linked","threatname":"Infection.PDF.File.Exploit.CVE-2010-0188_LibTIFF."
+                            },
+                           {"attackDirection":"inbound","category":"spam","classified":False,"id":1,
+                            "received":"2018-05-26T21:07:17Z","severity":"Critical","source":"Proofpoint TAP",
+                            "state":"Linked","threatname":"Unsolicited Bulk Email"},
+                           {"attackDirection":"inbound","category":"spam","classified":False,"id":2,
+                            "received":"2018-05-26T21:07:17Z","severity":"Critical","source":"Proofpoint TAP",
+                            "state":"Linked","threatname":"Unsolicited Bulk Email"}],"failed_quarantines":0,
+                 "hosts":{"attacker":["54.214.13.31","http://tapdemo.evilscheme.org/files/313532373336373133382e33.pdf"],
+                          "forensics":["http://tapdemo.evilscheme.org/files/313532373336373133382e33.pdf","tapdemo.evilscheme.org"]
+                         },
+                 "id":3,
+                 "incident_field_values":[{"name":"Attack Vector","value":"Email"},
+                                          {"name":"Classification","value":"Spam"},
+                                          {"name":"Severity","value":"Critical"}
+                                          ],"pending_quarantines":0,
+                 "quarantine_results":[],"score":4200,"state":"Open","successful_quarantines":0,
+                 "summary":"Unsolicited Bulk Email","team":"Unassigned","type":"Malware","users":["nbadguy"]
+                 }
+
+
+    return response
+
 def delete_list_member():
 
     response = "OK"
@@ -85,6 +116,11 @@ def mocked_pptr_client(*args):
         def delete_list_member(self, list_id=None, member_id=None):
             return delete_list_member()
 
+        def get_incident_details(self, incident_id=None):
+            return {
+                "href": "https://traptesthost/incidents/{}.json".format(incident_id),
+                "data": get_incident_details()
+            }
     return MockResponse(*args)
 
 def mocked_request(*args, **kwargs):
@@ -101,6 +137,8 @@ def mocked_request(*args, **kwargs):
             if args[0].lower() == "get":
                 if re.match("^https://traptesthost/lists/1/members.json", args[1]):
                     return MockGetResponse(json.dumps(get_list_members()), None, 200)
+                elif re.match("^https://traptesthost/incidents/123.json", args[1]):
+                    return MockGetResponse(json.dumps(get_incident_details()), None, 200)
             elif args[0].lower() == "post":
                 if re.match("^https://traptesthost/lists/1/members.json$", args[1]):
                     return MockGetResponse(json.dumps(add_list_member()), None, 200)
