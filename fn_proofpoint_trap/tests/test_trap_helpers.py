@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Test helper functions"""
 
 import pytest
 from fn_proofpoint_trap.lib.helpers import *
 """
-Suites of tests to test the Symantec SEP Helper functions
+Suites of tests to test the Proofpoint TRAP Helper functions
 """
 class Func(object):
     def __init__(self, options={}):
