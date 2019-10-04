@@ -13,16 +13,6 @@ CONFIG_DATA_SECTION = "fn_proofpoint_trap"
 log = logging.getLogger(__name__)
 mandatory_config_params = ["base_url", "api_key", "polling_interval", "startup_interval", "state", "host_categories"]
 
-def timestamp_minutes_ago(minutes):
-    """
-    Return ISO 8601 Timestamp of X minutes ago
-    :param minutes:
-    :return:
-    """
-    now = datetime.datetime.now()
-    past = now - datetime.timedelta(minutes=minutes)
-    return past.isoformat()
-
 def transform_kwargs(kwargs):
     """"Update kwargs dictionary.
     This function will perform following actions:
