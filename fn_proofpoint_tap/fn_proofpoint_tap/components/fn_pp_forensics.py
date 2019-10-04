@@ -174,19 +174,19 @@ class FunctionComponent(ResilientComponent):
         with open(forensics_path, "r") as forensics_file:
             self.forensics_template = forensics_file.read()
 
-    def custom_response_err_msg(self, forensics_response):
+    def custom_response_err_msg(self, response):
         try:
             # Raise error is bad status code is returned
-            forensics_response.raise_for_status()
+            response.raise_for_status()
 
             # Return requests.Response object
-            return forensics_response
+            return response
 
         except Exception as err:
             msg = str(err)
 
-            if isinstance(err, HTTPError) and err.response.status_code == 404:
-                msg = err.response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
+            if isinstance(err, HTTPError) and response.status_code == 404:
+                msg = response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
 
             log and log.error(msg)
             raise IntegrationError(msg)

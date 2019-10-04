@@ -7,6 +7,8 @@
 
 import logging
 import os
+from requests.exceptions import HTTPError
+from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -14,6 +16,8 @@ try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
+
+log = logging.getLogger(__name__)
 
 
 class FunctionComponent(ResilientComponent):
@@ -34,8 +38,6 @@ class FunctionComponent(ResilientComponent):
     @function("fn_pp_campaign")
     def _fn_pp_campaign_function(self, event, *args, **kwargs):
         """Function: Function to retrieve Campaign data from the ProofPoint API by Campaign ID"""
-
-        log = logging.getLogger(__name__)
 
         rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
@@ -78,7 +80,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
-            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
+            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
+                                     callback=self.custom_response_err_msg)
 
             # Debug logging
             log.debug("Response content: {}".format(res.content))
@@ -93,3 +96,20 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    def custom_response_err_msg(self, response):
+        try:
+            # Raise error is bad status code is returned
+            response.raise_for_status()
+
+            # Return requests.Response object
+            return response
+
+        except Exception as err:
+            msg = str(err)
+
+            if isinstance(err, HTTPError) and response.status_code == 404:
+                msg = response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
+
+            log and log.error(msg)
+            raise IntegrationError(msg)
