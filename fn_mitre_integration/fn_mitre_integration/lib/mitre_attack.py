@@ -6,7 +6,6 @@
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
-import time
 import re
 
 MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
@@ -317,7 +316,7 @@ class MitreAttackMitigation(MitreAttackBase):
 
 class MitreAttackSoftware(MitreAttackBase):
     MITRE_TYPE = ["tool", "malware"]
-    SOFTWARE_BASE_URL = "https://attack.mitre.org/software"
+    MITRE_URL_TYPE = "software"
 
     def __init__(self, doc):
         super(MitreAttackSoftware, self).__init__(doc)
@@ -332,7 +331,7 @@ class MitreAttackSoftware(MitreAttackBase):
         :rtype: str
         """
         item_id = self.id
-        url = "{}/{}/".format(self.SOFTWARE_BASE_URL, item_id)
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
         return url
 
     def get_platforms(selfs, doc):
