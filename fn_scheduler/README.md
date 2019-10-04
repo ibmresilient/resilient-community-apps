@@ -50,13 +50,13 @@ This package of functions allows an enterprise to schedule a rule to run in the 
 3) date (ex. 2019/10/23 12:00:00)
 4) delta (ex. 1h for one hour in the future)
 
-Jobs using `cron` and `interval` are reocurring whereas `date` and `delta` are single event schedules. Scheduled jobs are persisted so that restarts of resilient-circuits will resume already scheduled jobs.
+Schedule rules using `cron` and `interval` are reocurring whereas `date` and `delta` are single event schedules. Scheduled rules are persisted so that restarts of resilient-circuits will resume already scheduled rules.
 
 Functions available include:
 
-1) Scheduling a job
-2) Listing scheduled jobs
-3) Removing a scheduled job
+1) Scheduling a rule
+2) Listing scheduled rules
+3) Removing a scheduled rule
 
 ---
 
@@ -99,8 +99,8 @@ Functions available include:
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled jobs should follow* |
-  | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered jobs run for very short time to kick off a Resilient rule.* |
+  | **timezone** | Yes | `utc` | *Specify the timezone (ex. America/New_York) which scheduled rules should follow* |
+  | **thread_max** | Yes | `20` | *Number of threads which can run at the same. Typically, triggered rules run for a very short time to kick off a Resilient rule.* |
   | **datastore_dir** | Yes | `` | *Specify a data path and file name for the sqlite persistent datafile (ex. /path/to/scheduler.sqlite)* |
 
 * **Save** and **Close** the app.config file.
