@@ -8,7 +8,8 @@ from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
 import re
 
-MITRE_URL = "https://cti-taxii.mitre.org/taxii/"
+MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
+MITRE_BASE_URL = "https://attack.mitre.org"
 CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update for platform's rich text
 
 
@@ -220,7 +221,7 @@ class MitreAttackBase(object):
 
 class MitreAttackTactic(MitreAttackBase):
     MITRE_TYPE = "x-mitre-tactic"
-    TACTIC_BASE_URL = "https://attack.mitre.org/tactics"
+    MITRE_URL_TYPE = "tactics"
 
     def get_url(self):
         """
@@ -229,7 +230,7 @@ class MitreAttackTactic(MitreAttackBase):
         :rtype: str
         """
         item_id = self.id
-        url = "{}/{}/".format(self.TACTIC_BASE_URL, item_id)
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
         return url
 
     def get_techniques(self, conn):
@@ -407,7 +408,7 @@ class MitreAttackGroup(MitreAttackBase):
 
 class MitreAttackSoftware(MitreAttackBase):
     MITRE_TYPE = ["tool", "malware"]
-    SOFTWARE_BASE_URL = "https://attack.mitre.org/software"
+    MITRE_URL_TYPE = "software"
 
     def __init__(self, doc):
         super(MitreAttackSoftware, self).__init__(doc)
@@ -422,7 +423,7 @@ class MitreAttackSoftware(MitreAttackBase):
         :rtype: str
         """
         item_id = self.id
-        url = "{}/{}/".format(self.SOFTWARE_BASE_URL, item_id)
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
         return url
 
     def get_platforms(selfs, doc):
@@ -490,7 +491,7 @@ class MitreAttackConnection(object):
         :param url:
         :return:
         """
-        server_url = MITRE_URL if url is None else url
+        server_url = MITRE_TAXII_URL if url is None else url
         self.attack_server = Server(server_url)
         api_root = self.attack_server.api_roots[0]
         # CompositeSource to query all the collections at once
