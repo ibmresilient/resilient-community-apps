@@ -316,7 +316,7 @@ class MitreAttackMitigation(MitreAttackBase):
 
 class MitreAttackGroup(MitreAttackBase):
     MITRE_TYPE = "intrusion-set"
-    GROUP_BASE_URL = "https://attack.mitre.org/groups"
+    MITRE_URL_TYPE = "groups"
 
     def __init__(self, doc):
         super(MitreAttackGroup, self).__init__(doc)
@@ -330,7 +330,7 @@ class MitreAttackGroup(MitreAttackBase):
         :rtype: str
         """
         item_id = self.id
-        url = "{}/{}/".format(self.GROUP_BASE_URL, item_id)
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
         return url
 
     @staticmethod
