@@ -9,6 +9,8 @@ import logging
 import jinja2
 import json
 import os
+from requests.exceptions import HTTPError
+from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
@@ -104,7 +106,9 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
-            forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
+
+            forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
+                                                    callback=self.custom_response_err_msg)
 
             forensics = forensics_response.json()
 
@@ -135,7 +139,11 @@ class FunctionComponent(ResilientComponent):
                         log.info('forensics template is not set correctly in config file')
                         continue
 
-            yield StatusMessage('final data {}'.format(data))
+            if data:
+                yield StatusMessage('final data {}'.format(data))
+
+            else:
+                yield StatusMessage('no forensics data found')
 
             results['success'] = True
             results['data'] = data
@@ -145,7 +153,6 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
-
 
     def _parse_opts(self):
         """
@@ -166,4 +173,21 @@ class FunctionComponent(ResilientComponent):
         log.info(u"Template file: %s", forensics_path)
         with open(forensics_path, "r") as forensics_file:
             self.forensics_template = forensics_file.read()
+
+    def custom_response_err_msg(self, forensics_response):
+        try:
+            # Raise error is bad status code is returned
+            forensics_response.raise_for_status()
+
+            # Return requests.Response object
+            return forensics_response
+
+        except Exception as err:
+            msg = str(err)
+
+            if isinstance(err, HTTPError) and err.response.status_code == 404:
+                msg = err.response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
+
+            log and log.error(msg)
+            raise IntegrationError(msg)
 
