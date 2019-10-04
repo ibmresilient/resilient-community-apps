@@ -23,7 +23,7 @@ class FunctionComponent(ResilientComponent):
                                                 options.get("thread_max"),
                                                 options.get("timezone"))
 
-    @function("list_scheduled_jobs")
+    @function("list_scheduled_rules")
     def _create_a_schedule_function(self, event, *args, **kwargs):
         try:
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)

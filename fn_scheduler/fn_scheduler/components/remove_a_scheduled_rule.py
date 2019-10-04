@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
                                                 options.get("thread_max"),
                                                 options.get("timezone"))
 
-    @function("remove_a_scheduled_job")
+    @function("remove_a_scheduled_rule")
     def _remove_a_scheduled_job(self, event, *args, **kwargs):
         try:
             scheduler_label = kwargs.get("scheduler_label")  # text

@@ -16,9 +16,9 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
-- [Function - Create a Scheduled Rule](#function---create-a-scheduled-job)
-- [Function - List Scheduled Rules](#function---list-scheduled-jobs)
-- [Function - Remove a Scheduled Rule](#function---remove-a-scheduled-job)
+- [Function - Create a Scheduled Rule](#function---create-a-scheduled-rule)
+- [Function - List Scheduled Rules](#function---list-scheduled-rules)
+- [Function - Remove a Scheduled Rule](#function---remove-a-scheduled-rule)
 - [Rules](#rules)
 
 ---
@@ -47,7 +47,7 @@ Functions available include:
 ## Function - Create a Scheduled Rule
 Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc.
 
- ![screenshot: fn-create-a-scheduled-job ](./screenshots/combined_worflow_activity_fields.png)
+ ![screenshot: fn-create-a-scheduled-rule ](./screenshots/combined_worflow_activity_fields.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -84,7 +84,7 @@ results = {
     None),
     'executor': 'default',
     'max_instances': 1,
-    'func': 'fn_scheduler.components.create_a_scheduled_job:triggered_job',
+    'func': 'fn_scheduler.components.create_a_scheduled_rule:triggered_job',
     'id': u'rule3',
     'next_run_time': 'Oct 03 2019 12:35PM',
     'name': 'triggered_job',
@@ -134,7 +134,7 @@ None
 ## Function - List Scheduled Rules
 List the schedules presently defined
 
- ![screenshot: fn-list-scheduled-jobs ](./screenshots/list_scheduled_jobs.png)
+ ![screenshot: fn-list-scheduled-rules ](./screenshots/list_scheduled_jobs.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -189,12 +189,12 @@ None
 import java.util.Date as Date
 
 if not results['content']:
-  row = incident.addRow("scheduler_jobs")
+  row = incident.addRow("scheduler_rules")
   row['reported_on'] = str(Date())
-  row['schedule_label'] = "-- no scheduled jobs --"
+  row['schedule_label'] = "-- no scheduled rules --"
 else:
   for job in results['content']:
-    row = incident.addRow("scheduler_jobs")
+    row = incident.addRow("scheduler_rules")
     row['schedule_label'] = job['id']
     row['schedule_type'] = job['type']
     row['incident_id'] = job['args'][0]
@@ -212,7 +212,7 @@ else:
 ## Function - Remove a Scheduled Rule
 Stop a schedule
 
- ![screenshot: fn-remove-a-scheduled-job ](./screenshots/remove_a_job.png)
+ ![screenshot: fn-remove-a-scheduled-rule ](./screenshots/remove_a_job.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -269,7 +269,7 @@ else:
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
 | List Scheduled Rules | incident | `list_schedules` |
-| Remove a Scheduled Rule | scheduler_jobs | `remove_a_schedule` |
+| Remove a Scheduled Rule | scheduler_rules | `remove_a_schedule` |
 | Schedule a Rule to Run | incident | `schedule_rule_to_run` |
 | Schedule a Rule to Run - Artifact| artifact | `schedule_a_rule_to_run_artifact` |
 | Schedule a Rule to Run - Task| task | `schedule_a_rule_to_run__task` |
@@ -288,7 +288,7 @@ else:
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.
 * Incident notes are created each time a scheduled rule is excuted documenting the rule invocation.
-* Scheduled rules will not show up under Action Status and Workflow Status.
+* Scheduled rules will not show up under Action Status and Workflow Status. Refer instead to the incident notes.
 
 ### Datatables
 * Datatable scheduled rules are not part of this package, but can be easily created for a specific Datatable.

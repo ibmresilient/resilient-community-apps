@@ -27,7 +27,7 @@ class FunctionComponent(ResilientComponent):
                                                 options.get("timezone"))
 
 
-    @function("create_a_scheduled_job")
+    @function("create_a_scheduled_rule")
     def _create_a_schedule_function(self, event, *args, **kwargs):
         """Function: Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc."""
         try:
