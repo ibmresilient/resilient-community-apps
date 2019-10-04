@@ -5,6 +5,7 @@
 import re
 import threading
 from datetime import datetime, timedelta
+from dateutil.relativedelta import *
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.jobstores.sqlalchemy import SQLAlchemyJobStore
@@ -50,52 +51,6 @@ class ResilientScheduler:
     def get_scheduler():
         return _scheduler_
 
-    """
-    def the_job(oid):
-        print('Run job: object.id={}, datetime={}'.format(oid, datetime.now()))
-    
-    
-    def main():
-        sqlite_file = 'apscheduler-jobs.sqlite'
-        os.system('rm -f {}'.format(sqlite_file))
-        jobstores = {
-            'default': SQLAlchemyJobStore(url='sqlite:///{}'.format(sqlite_file)),
-        }
-        executors = {
-            'default': ThreadPoolExecutor(20),
-        }
-        job_defaults = {
-            'coalesce': False,
-            'max_instances': 1
-        }
-        scheduler = BackgroundScheduler(
-            jobstores=jobstores, executors=executors,
-            job_defaults=job_defaults, timezone=utc
-        )
-        scheduler.start()
-    
-        def add_job(oid):
-            trigger = DateTrigger(
-                run_date=datetime.now() + timedelta(seconds=oid),
-                timezone=timezone('Asia/Shanghai')
-            )
-            # scheduler.add_job(myfunc, 'interval', minutes=2, id='my_job_id')
-            scheduler.add_job(the_job, args=[oid],
-                              trigger=trigger,
-                              id='task-{}'.format(oid),
-                              name='Task({})'.format(oid),
-                              coalesce=True, max_instances=1)
-        add_job(3)
-        add_job(6)
-        add_job(9)
-        try:
-            print('Press <Ctrl + C> to stop! datetime={}'.format(datetime.now()))
-            time.sleep(1000000000)
-        except KeyboardInterrupt:
-            print('Stopping...')
-            scheduler.shutdown()
-    """
-
     def build_trigger(self, type, value):
         """
 
@@ -127,24 +82,23 @@ class ResilientScheduler:
                                   day_of_week=split_cron[4])
 
         elif type == "interval":
-            seconds = self.get_sleep_time_in_seconds(value)
+            seconds = self.get_interval(value)
             trigger = IntervalTrigger(seconds=seconds)
 
         elif type == "date":
             trigger = DateTrigger(run_date=value, timezone=self.timezone)
 
         elif type == "delta":
-            seconds = self.get_sleep_time_in_seconds(value)
-            delta_dt = datetime.now() + timedelta(seconds=seconds)
+            dt = self.get_interval(value, date=True)
 
-            trigger = DateTrigger(run_date=delta_dt, timezone=self.timezone)
+            trigger = DateTrigger(run_date=dt, timezone=self.timezone)
 
         else:
             ValueError("Unrecognized type %s", type)
 
         return trigger
 
-    def get_sleep_time_in_seconds(self, time_string):
+    def get_interval(self, time_string, date=False):
         """
         Parse the input time string into "time value" and "time unit" and compute the time in seconds.
         The input string will be in format time_value with the time unit character concatenated on the end.
@@ -155,26 +109,33 @@ class ResilientScheduler:
         try:
             time_value = int(time_string[:-1])
         except:
-            raise ValueError("Invalid interval format: time value should be integer. For example: 5s, 10m, 1d, 2w")
+            raise ValueError("Invalid interval format: time value should be integer. For example: 5s, 10m, 1d, 2w, 1M")
 
         # Get the time units from input string.
-        time_unit = time_string.rstrip()[-1].lower()
+        time_unit = time_string.rstrip()[-1]
+
+        now_dt = datetime.now()
 
         # Compute the total time to sleep in seconds
         if time_unit == 's':
-            time_in_seconds = time_value
+            m_dt = now_dt + relativedelta(seconds=+time_value)
         elif time_unit == 'm':
-            time_in_seconds = time_value * SECONDS_IN_MINUTE
+            m_dt = now_dt + relativedelta(minutes=+time_value)
         elif time_unit == 'h':
-            time_in_seconds = time_value * SECONDS_IN_HOUR
+            m_dt = now_dt + relativedelta(hours=+time_value)
         elif time_unit == 'd':
-            time_in_seconds = time_value * SECONDS_IN_DAY
+            m_dt = now_dt + relativedelta(days=+time_value)
         elif time_unit == 'w':
-            time_in_seconds = time_value * SECONDS_IN_WEEK
+            m_dt = now_dt + relativedelta(weeks=+time_value)
+        elif time_unit == 'M':
+            m_dt = now_dt + relativedelta(months=+time_value)
         else:
-            raise ValueError("Invalid interval format: should end in 's' = seconds, 'm = minutes, 'h' = hours, 'd' = days, 'w' = weeks")
+            raise ValueError("Invalid interval format: should end in 's' = seconds, 'm = minutes, 'h' = hours, 'd' = days, 'w' = weeks, 'M' = Months")
 
-        return time_in_seconds
+        if date:
+            return m_dt
+        else:
+            return int((m_dt - now_dt).total_seconds())
 
     def job_to_json(self, job):
         result = {
@@ -185,6 +146,7 @@ class ResilientScheduler:
         if isinstance(job.trigger, IntervalTrigger):
             result['type'] = 'interval'
             value = None
+
             if int(job.trigger.interval_length % SECONDS_IN_WEEK) == 0:
                 value = str(int(job.trigger.interval_length / SECONDS_IN_WEEK)) + "w"
             elif int(job.trigger.interval_length % SECONDS_IN_DAY) == 0:

@@ -169,11 +169,14 @@ def triggered_job(incident_id, object_id, row_id,
         return
 
     # build url for invoking a rule
-    url = "/incidents/{}".format(incident_id)
-
     rule_type = lookup_object_type(rest_client, rule_object_type_id)
-    if rule_type != '':
-        url = url + "/{}/{}".format(rule_type, object_id)
+    if rule_type == "tasks":
+        url = "/{}/{}".format(rule_type, object_id)
+    else:
+        url = "/incidents/{}".format(incident_id)
+
+        if rule_type != '':
+            url = url + "/{}/{}".format(rule_type, object_id)
 
     if row_id:
         url = url + "/row_data/{}".format(row_id)

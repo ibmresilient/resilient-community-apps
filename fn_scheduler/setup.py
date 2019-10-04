@@ -30,7 +30,8 @@ setup(
         'resilient_circuits>=30.0.0',
         'pytz',
         'APScheduler>=3.6.1',
-        'SQLAlchemy>=1.3.8'
+        'SQLAlchemy>=1.3.8',
+        'python-dateutil'
     ],
     packages=find_packages(),
     include_package_data=True,
