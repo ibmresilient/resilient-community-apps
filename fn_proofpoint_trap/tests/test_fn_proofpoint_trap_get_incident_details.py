@@ -49,10 +49,10 @@ class TestFnProofpointTrapGetIncidentDetails:
         assert func is not None
 
     @patch('fn_proofpoint_trap.components.fn_proofpoint_trap_get_incident_details.PPTRClient', side_effect=mocked_pptr_client)
-    @pytest.mark.parametrize("trap_incident_id, expected_results", [
-        (123, None)
+    @pytest.mark.parametrize("trap_incident_id, expected_result", [
+        (123, "https://traptesthost/incidents/123.json")
     ])
-    def test_success(self, mock_get, circuits_app, trap_incident_id, expected_results):
+    def test_success(self, mock_get, circuits_app, trap_incident_id, expected_result):
         """ Test calling with sample values for the parameters """
 
         keys = ["content", "data", "href", "inputs", "metrics", "raw", "reason", "success", "version"]
@@ -62,5 +62,6 @@ class TestFnProofpointTrapGetIncidentDetails:
         }
         results = call_fn_proofpoint_trap_get_incident_details_function(circuits_app, function_params)
         assert_keys_in(results, *keys)
+        assert expected_result == results["href"]
         data = results["data"]
         assert_keys_in(data, *keys_data)
