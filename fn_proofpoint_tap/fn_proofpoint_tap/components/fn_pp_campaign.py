@@ -98,6 +98,11 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError()
 
     def custom_response_err_msg(self, response):
+        """
+        Custom handler for response handling.
+        :param response:
+        :return: response
+        """
         try:
             # Raise error is bad status code is returned
             response.raise_for_status()
