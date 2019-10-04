@@ -8,6 +8,7 @@ import json
 from sys import version_info
 from requests import HTTPError
 from requests.models import Response
+import datetime
 
 # Responses for standalone tests
 
@@ -86,6 +87,52 @@ def mocked_pptr_client(*args):
 
     return MockResponse(*args)
 
+def mocked_request(*args, **kwargs):
+    class MockSession:
+        """Class will be used by the mock to replace RequestsCommon in pptr_client tests"""
+        def __init__(self, *arg, **kwargs):
+            pass
+
+        def get_proxies(self):
+            proxies = None
+            return proxies
+
+        def execute_call_v2(self, *args, **kwargs):
+            if args[0].lower() == "get":
+                if re.match("^https://traptesthost/lists/1/members.json", args[1]):
+                    return MockGetResponse(json.dumps(get_list_members()), None, 200)
+            elif args[0].lower() == "post":
+                if re.match("^https://traptesthost/lists/1/members.json$", args[1]):
+                    return MockGetResponse(json.dumps(add_list_member()), None, 200)
+            elif args[0].lower() == "delete":
+                if re.match("^https://traptesthost/lists/1/members/8.json", args[1]):
+                    return MockGetResponse(json.dumps(delete_list_member()), None, 200)
+            elif args[0].lower() == "put":
+                if re.match("^https://traptesthost/lists/1/members/192.168.1.2.json", args[1]):
+                    return MockGetResponse(json.dumps(update_list_member()), None, 200)
+
+        def __getitem__(self, key):
+            return getattr(self, key)
+
+    return MockSession(*args, **kwargs)
+
+class MockGetResponse:
+    """Class will be used by the mock to replace response for RequestsCommon in pptr_client tests"""
+    def __init__(self, *args, **kwargs):
+        self.headers = {}
+        self.r = Response()
+        if args[0]:
+            self.content = self.r._content = args[0].encode()
+        self.status_code = args[2]
+        self.r.status_code = args[2]
+
+    def json(self):
+        res = self.r.json()
+        pass
+        return self.r.json()
+
+    def __getitem__(self, key):
+        return getattr(self, key)
 
 def get_mock_config():
     config_data = u"""[fn_proofpoint_trap]
