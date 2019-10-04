@@ -2,7 +2,7 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
-"""Test Sep client  class."""
+"""Test REST client class."""
 from __future__ import print_function
 from mock import patch
 import pytest
@@ -11,7 +11,7 @@ from fn_proofpoint_trap.lib.pptr_client import *
 from fn_proofpoint_trap.lib.helpers import transform_kwargs
 from  mock_artifacts import mocked_request
 """
-Suite of tests to test Symantec SEP client class
+Suite of tests to test Proofpoint TRAP REST client class
 """
 
 def assert_keys_in(json_obj, *keys):
