@@ -58,8 +58,10 @@ class DLPListener(ResilientComponent):
         LOG.info("Now filtering out Incidents which already have a Resilient Incident ID")
         LOG.info("Number of Incidents before filtering: %d", len(incidents))
 
-        # Drop all incidents which have a res_id custom attribute
-        incidents = list(filter(self.filter_existing_incidents, incidents))
+        if 'resilient_incident_id' not in self.soap_client.list_custom_attributes():
+            LOG.warning("The Custom Attribute 'resilient_incident_id' was not found on your DLP Instance, this may result in duplicate Incidents being found in Resilient as no filtering will be done on the DLP Side")
+            # Drop all incidents which have a res_id custom attribute
+            incidents = list(filter(self.filter_existing_incidents, incidents))
 
         if incidents: # If theres more than one incident after first filter 
             # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
