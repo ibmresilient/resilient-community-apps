@@ -25,6 +25,7 @@ done <<EOM
 CONTRIBUTING.md
 LICENSE
 README.md
+base_input_types
 fn_alienvault_otx
 fn_ansible
 fn_apility
