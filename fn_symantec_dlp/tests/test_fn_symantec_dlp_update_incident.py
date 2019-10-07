@@ -30,7 +30,7 @@ def call_fn_symantec_dlp_update_incident_function(circuits, function_params, tim
     exception_event = circuits.watcher.wait("exception", parent=None, timeout=DEFAULT_EXCEPTION_TIMEOUT)
 
     if exception_event is not False:
-        exception = exception_event.args[1].args[1]
+        exception = exception_event.args[1]
         raise exception
     event = circuits.watcher.wait("fn_symantec_dlp_update_incident_result", parent=evt, timeout=timeout)
     assert event
