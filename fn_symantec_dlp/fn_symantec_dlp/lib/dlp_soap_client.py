@@ -197,11 +197,11 @@ class DLPSoapClient():
         return custom_attributes
 
     @classmethod
-    def update_incident_raw(cls, incident_id, **kwargs):        
+    def update_incident(cls, incident_id, **kwargs):        
         headers = {'content-type': 'text/xml'}
         try:
             update_payload = {
-                "batchId":"_{}".format(uuid.uuid4()),  
+                "batchId":"_{}".format(uuid.uuid4()),
                 "dlp_id":incident_id
             }
             # Originally was getting an issue trying to pass **kwargs to the jinja template on py2

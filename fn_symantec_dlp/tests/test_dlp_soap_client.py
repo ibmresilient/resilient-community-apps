@@ -55,6 +55,8 @@ class TestDLPSOAPClient():
 
 
     def test_mocked_client_connection(self, setup_mocked_dlp_connection):
+        """test_mocked_client_connection ensure the mocked connection done through a fixture has been setup
+        """
         client = setup_mocked_dlp_connection
         assert client.is_connected
         assert client.class_vars_loaded
@@ -91,6 +93,9 @@ class TestDLPSOAPClient():
      
     @pytest.mark.livetest
     def test_incident_list_soap_call(self, setup_live_dlp_client):
+        """test_incident_list_soap_call test used to test parts of the underlying workings for test_incident_list_soap_call
+        Mocks the actual SOAP call so the DLP Server is not affected but validates that app.config values against a real instance.
+        """
         client = setup_live_dlp_client
         assert client.class_vars_loaded
         assert client.is_connected
@@ -124,6 +129,9 @@ class TestDLPSOAPClient():
 
     @mock.patch('fn_symantec_dlp.lib.dlp_soap_client.DLPSoapClient.soap_client.service.incidentBinaries')
     def test_incident_binaries_call(self, mocked_soap_call, setup_mocked_dlp_connection):
+        """test_incident_binaries_call test used to test parts of the underlying workings for test_incident_binaries_call
+        Mocks the generated SOAP function and tests to ensure this function was called with the right value and only once
+        """
         client = setup_mocked_dlp_connection
         resp = client.incident_binaries(123)
         assert resp
@@ -131,6 +139,9 @@ class TestDLPSOAPClient():
 
     @mock.patch('fn_symantec_dlp.lib.dlp_soap_client.DLPSoapClient.soap_client.service.listIncidentStatus')
     def test_incident_status_call(self, mocked_soap_call):
+        """test_incident_status_call test used to test the return_value for incident_status
+        Mocks the generated SOAP function and tests to ensure 'Closed' is in the list
+        """
         mocked_soap_call.return_value = "['Closed', 'New']"
         resp = DLPSoapClient.incident_status()
 
@@ -139,12 +150,17 @@ class TestDLPSOAPClient():
     
     @mock.patch('fn_symantec_dlp.lib.dlp_soap_client.DLPSoapClient.soap_client.service.incidentDetail')
     def test_incident_detail_call(self, mocked_soap_call):
+        """test_incident_detail_call test used to test parts of the underlying workings for incident_detail
+        Mocks the generated SOAP function and tests to ensure this function was called with the right value and only once
+        """
         resp = DLPSoapClient.incident_detail(incident_id=999)
         assert resp
         mocked_soap_call.assert_called_with(incidentId=999)
         mocked_soap_call.assert_called_once()
 
     def test_map_values_call(self):
+        """test_map_values_call used to ensure that when a payload is made with jinja, that it has a batchId, needed by the DLP API
+        """
         batch = "_{}".format(uuid.uuid4())
         incident_id = 999
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "fn_symantec_dlp/data/templates")

@@ -5,11 +5,13 @@
 
 import logging
 import json
+import traceback
 
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
+LOG = logging.getLogger(__name__)
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_symantec_dlp_update_incident"""
 
@@ -18,6 +20,17 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_symantec_dlp", {})
 
+    @handler("reload")
+    def _reload(self, event, opts):
+        """Configuration options have changed, save new values"""
+        # Compare the existing options with what we just pulled, has ANY value changed?
+        LOG.debug("Reloading event triggered, comparing app.config values")
+        if self.options != opts.get("fn_symantec_dlp", {}):
+            self.options = opts.get("fn_symantec_dlp", {})
+            # Toggle the shared class_vars_loaded so the init of DLPSoapClient isin't skipped
+            DLPSoapClient.class_vars_loaded = False 
+            DLPSoapClient(app_configs=self.options)
+
 
     @function("fn_symantec_dlp_update_incident")
     def _fn_symantec_dlp_update_incident_function(self, event, *args, **kwargs):
@@ -25,18 +38,26 @@ class FunctionComponent(ResilientComponent):
         try:
             res_payload = ResultPayload("fn_symantec_dlp_update", **kwargs)
 
+            validate_fields(['sdlp_update_payload'], kwargs)
+
             # Get the function parameters:
             sdlp_update_payload = self.get_textarea_param(kwargs.get("sdlp_update_payload"))  # textarea
 
-            validate_fields(['sdlp_update_payload'], kwargs)
 
             log = logging.getLogger(__name__)
             log.info("sdlp_update_payload: %s", sdlp_update_payload)
 
-            # TODO: Should we put try catch logic to give a custom error or let the function fail if it can't parse
-            updatepayload = json.loads(sdlp_update_payload)
+            try:
+                updatepayload = json.loads(sdlp_update_payload)
+            except Exception as parsing_ex:
+                LOG.debug(traceback.format_exc())
+                # Log the Connection error to the user
+                LOG.error(u"Problem: %s", repr(parsing_ex))
+                LOG.error(u"[Symantec DLP] Encountered an exception when parsing the update payload.")
+            else:
+                yield StatusMessage("Loaded and validated sdlp_update_payload successfully, now sending update request to DLP")
 
-            yield StatusMessage("Loaded and validated sdlp_update_payload successfully, now sending update request to DLP")
+                
 
             soap_client = DLPSoapClient(app_configs=self.options)
 
@@ -49,8 +70,7 @@ class FunctionComponent(ResilientComponent):
                 if updatepayload['status'] not in available_status_values:
                     raise ValueError(u"Encountered Validation Error; the provided Status value was not found on the DLP Instance. These status values are active on DLP Instance : %s", available_status_values)
 
-            # TODO: current resp is unused, should be renamed and used if we decide to use it or removed
-            resp = soap_client.update_incident_raw(**updatepayload)
+            resp = soap_client.update_incident(**updatepayload)
             # Currently, there is nothing to return on the response that isin't an input
             # If we reach this line, we can assume we have made a succesful update as the update function has handling to ensure SUCCESS is returned
             results = res_payload.done(success=True, content={})

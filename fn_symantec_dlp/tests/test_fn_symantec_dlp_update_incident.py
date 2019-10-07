@@ -19,14 +19,15 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
-
-def call_fn_symantec_dlp_update_incident_function(circuits, function_params, timeout=3):
+DEFAULT_TIMEOUT = 3 
+DEFAULT_EXCEPTION_TIMEOUT = 1
+def call_fn_symantec_dlp_update_incident_function(circuits, function_params, timeout=DEFAULT_TIMEOUT):
     # Fire a message to the function
     evt = SubmitTestFunction("fn_symantec_dlp_update_incident", function_params)
     circuits.manager.fire(evt)
     # circuits will fire an "exception" event if an exception is raised in the FunctionComponent
     # return this exception if it is raised
-    exception_event = circuits.watcher.wait("exception", parent=None, timeout=1)
+    exception_event = circuits.watcher.wait("exception", parent=None, timeout=DEFAULT_EXCEPTION_TIMEOUT)
 
     if exception_event is not False:
         exception = exception_event.args[1].args[1]
