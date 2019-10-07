@@ -70,7 +70,7 @@ class TestFnSymantecDlpUpdateIncident:
         from resilient_lib import ResultPayload
 
         res_payload = ResultPayload("fn_symantec_dlp_update", **function_params)      
-        with mock.patch.object(DLPSoapClient, 'update_incident_raw', return_value="200"):
+        with mock.patch.object(DLPSoapClient, 'update_incident', return_value="200"):
             with mock.patch.object(DLPSoapClient, 'incident_status', return_value=['Closed', 'New']):
                 results = call_fn_symantec_dlp_update_incident_function(circuits_app, function_params)
         expected_results = res_payload.done(success=True, content={})
@@ -90,7 +90,7 @@ class TestFnSymantecDlpUpdateIncident:
             "sdlp_update_payload": sdlp_update_payload
         }
         with pytest.raises(ValueError):        
-            with mock.patch.object(DLPSoapClient, 'update_incident_raw', return_value="200"):
+            with mock.patch.object(DLPSoapClient, 'update_incident', return_value="200"):
                 with mock.patch.object(DLPSoapClient, 'incident_status', return_value=['Closed', 'New']):
                     results = call_fn_symantec_dlp_update_incident_function(circuits_app, function_params)
         

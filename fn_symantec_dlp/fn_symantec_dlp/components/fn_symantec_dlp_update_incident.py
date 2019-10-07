@@ -47,13 +47,14 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("sdlp_update_payload: %s", sdlp_update_payload)
 
+            updatepayload = {}
             try:
                 updatepayload = json.loads(sdlp_update_payload)
             except Exception as parsing_ex:
                 LOG.debug(traceback.format_exc())
                 # Log the Connection error to the user
                 LOG.error(u"Problem: %s", repr(parsing_ex))
-                LOG.error(u"[Symantec DLP] Encountered an exception when parsing the update payload.")
+                raise ValueError(u"[Symantec DLP] Encountered an exception when parsing the update payload.")
             else:
                 yield StatusMessage("Loaded and validated sdlp_update_payload successfully, now sending update request to DLP")
 

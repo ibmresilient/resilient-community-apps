@@ -192,7 +192,7 @@ class TestDLPSOAPClient():
             mock_url = "{host_url}ProtectManager/services/v2011/incidents".format(
                 host_url=setup_mocked_dlp_connection.host)
             res = m.post(mock_url, text=mock_response)
-            resp = setup_mocked_dlp_connection.update_incident_raw(incident_id=1, status="Closed")
+            resp = setup_mocked_dlp_connection.update_incident(incident_id=1, status="Closed")
 
             assert resp is not None
             assert b"<statusCode>SUCCESS</statusCode>" in resp.content
@@ -214,7 +214,7 @@ class TestDLPSOAPClient():
             mock_url = "{host_url}ProtectManager/services/v2011/incidents".format(
                 host_url=setup_mocked_dlp_connection.host)
             m.post(mock_url, text=mock_response)
-            setup_mocked_dlp_connection.update_incident_raw(incident_id=1, status="Closed")
+            setup_mocked_dlp_connection.update_incident(incident_id=1, status="Closed")
             
     
             
