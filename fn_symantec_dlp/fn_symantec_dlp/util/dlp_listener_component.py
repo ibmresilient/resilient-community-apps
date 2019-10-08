@@ -361,7 +361,7 @@ class DLPListener(ResilientComponent):
             LOG.debug("Encountered exception when converting datetime to an epoch; Error %s", e)
             return 0
 
-    def prepare_incident_summary_note(self, incident, payload):
+    def prepare_incident_summary_note(self, incident, payload, new_incident_id):
         """prepare_incident_summary_note is used to prepare a final summary note for the incident
         This is a good place to place artifacts which may not suit the artifact tab such as the User Justification
         """
@@ -369,7 +369,12 @@ class DLPListener(ResilientComponent):
         """Gather the artifacts that were parsed and sent to resilient and display their Type and Value as list items
         Done with a list comprehension to iterate over the list of artifacts found in the payload input.
         """
-        artifact_string = ["<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
+        artifact_list = ["<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
+        
+        # Make a call to the resilient API to find File Artifacts, they are not a part of the jinja payload
+        artifacts = self.res_rest_client.get('/incidents/{}/artifacts'.format(new_incident_id))
+        # Extend the list of artifacts we already have with any File Artifacts we can get from the API. 16, 15, 12, 4, 36 are all type ids for File Artifacts such as Log File
+        artifact_list.extend(["<li>File Artifact : <b>{}</b></li>".format(artifact["value"]) for artifact in artifacts if artifact["type"] in [16, 15, 12, 4, 36]])
         return u"""<b> A Symantec DLP Incident has been imported into Resilient</b>
         <p>Incident Notes, Artifacts and Attachments found (if any) have been imported into this Incident.</p>
         <p>Status Type for this Incident: <b>{status}</b></p>
@@ -383,10 +388,10 @@ class DLPListener(ResilientComponent):
             blocked_status=incident['incident']['blockedStatus'],
             user_justification=incident['incident']['userJustification'],
             detection_server=incident['incident']['detectionServer'],
-            artifacts=u"".join(artifact_string)
+            artifacts=u"".join(artifact_list)
         )
     
     def submit_summary_note(self, payload, incident, new_incident_id):
-        summary_note_text = self.prepare_incident_summary_note(incident, payload)
+        summary_note_text = self.prepare_incident_summary_note(incident, payload, new_incident_id)
         self.res_rest_client.post('/incidents/{}/comments'.format(new_incident_id), 
             {"text":{"format":"html", "content": summary_note_text}})
