@@ -14,7 +14,7 @@ from threading import Thread
 from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
 from pkg_resources import Requirement, resource_filename
-from fn_proofpoint_tap.components.get_threat_list import get_threat_list
+from fn_proofpoint_tap.util.proofpoint_common import get_threat_list
 from resilient_lib import RequestsCommon
 
 

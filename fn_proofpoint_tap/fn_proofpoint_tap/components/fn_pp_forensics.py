@@ -9,10 +9,9 @@ import logging
 import jinja2
 import json
 import os
-from requests.exceptions import HTTPError
-from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
+from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
 from pkg_resources import Requirement, resource_filename
 try:
@@ -105,7 +104,7 @@ class FunctionComponent(ResilientComponent):
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
-                                                    callback=self.custom_response_err_msg)
+                                                    callback=custom_response_err_msg)
 
             forensics = forensics_response.json()
 
@@ -170,26 +169,3 @@ class FunctionComponent(ResilientComponent):
         log.info(u"Template file: %s", forensics_path)
         with open(forensics_path, "r") as forensics_file:
             self.forensics_template = forensics_file.read()
-
-    def custom_response_err_msg(self, response):
-        """
-        Custom handler for response handling.
-        :param response:
-        :return: response
-        """
-        try:
-            # Raise error is bad status code is returned
-            response.raise_for_status()
-
-            # Return requests.Response object
-            return response
-
-        except Exception as err:
-            msg = str(err)
-
-            if isinstance(err, HTTPError) and response.status_code == 404:
-                msg = response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
-
-            log and log.error(msg)
-            raise IntegrationError(msg)
-
