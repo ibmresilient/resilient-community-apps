@@ -25,6 +25,9 @@ class FunctionComponent(ResilientComponent):
 
     @function("list_scheduled_rules")
     def _create_a_schedule_function(self, event, *args, **kwargs):
+        incident_id = kwargs.get("incident_id")  # number
+        log.info("incident_id: %s", incident_id)
+
         try:
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
@@ -36,12 +39,14 @@ class FunctionComponent(ResilientComponent):
 
             for job in jobs:
                 job_json = self.res_scheduler.job_to_json(job)
-
-                # hide settings with contain passwords
                 params = list(job_json['args'])
-                params[8] = None
-                job_json['args'] = tuple(params)
-                list_jobs.append(job_json)
+
+                if incident_id is None or incident_id == 0 or \
+                    incident_id == params[0]:
+                    # hide settings with contain passwords
+                    params[8] = None
+                    job_json['args'] = tuple(params)
+                    list_jobs.append(job_json)
 
             log.debug(list_jobs)
             if len(list_jobs) == 0:

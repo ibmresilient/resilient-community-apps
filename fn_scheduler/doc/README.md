@@ -139,8 +139,9 @@ List the schedules presently defined
 <details><summary>Inputs:</summary>
 <p>
 
--- No Input Parameters --
-
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | Incident Id to limit returned schedules. 0 or None return all |
 </p>
 </details>
 
@@ -176,7 +177,10 @@ results = {
 <p>
 
 ```python
-None
+if rule.properties.incidents_returned == "All":
+  inputs.incident_id = 0
+else:
+  inputs.incident_id = incident.id
 ```
 
 </p>
