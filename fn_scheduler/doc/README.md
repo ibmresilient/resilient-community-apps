@@ -16,6 +16,7 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
+- [Layout](#layout)
 - [Function - Create a Scheduled Rule](#function---create-a-scheduled-rule)
 - [Function - List Scheduled Rules](#function---list-scheduled-rules)
 - [Function - Pause a Scheduled Rule](#function---pause-scheduled-rule)
@@ -24,7 +25,6 @@
 - [Rules](#rules)
 
 ---
-
 ## Key Features
 
 This package of functions allows an enterprise to schedule a rule to run in the future associated with a incident, task, artifact, and datatable. Schedule times to run can be specified in the following ways:
@@ -44,6 +44,12 @@ Functions available include:
 * List scheduled rule
 * Remove a scheduled rule
 
+---
+## Layout
+
+A datatable is used to display scheduled rules and to take actions such as pause, resume and remove a rule. This datatable can be added to your incident layout by adding a new tab and by dragging the `Scheduler Rules` datatable to the new tab. Remember to save the layout change.
+
+![screenshot: fn-create-a-scheduled-rule ](./screenshots/layout.png)
 ---
 
 ## Function - Create a Scheduled Rule
@@ -451,7 +457,7 @@ else:
 ### Rules
 * Rules must be enabled to be scheduled and are again checked when the scheduled rule is triggered.
 * Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`. 
-* All schedules must be in the future
+* All schedules must be in the future.
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.
 * Incident notes are created each time a scheduled rule is excuted documenting the rule invocation.
