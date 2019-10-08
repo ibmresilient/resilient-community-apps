@@ -38,14 +38,11 @@ class FunctionComponent(ResilientComponent):
             list_jobs = []
 
             for job in jobs:
-                job_json = self.res_scheduler.job_to_json(job)
+                job_json = ResilientScheduler.sanitize_job(job)
                 params = list(job_json['args'])
 
                 if incident_id is None or incident_id == 0 or \
                     incident_id == params[0]:
-                    # hide settings with contain passwords
-                    params[8] = None
-                    job_json['args'] = tuple(params)
                     list_jobs.append(job_json)
 
             log.debug(list_jobs)

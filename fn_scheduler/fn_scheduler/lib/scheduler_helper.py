@@ -22,6 +22,10 @@ SECONDS_IN_WEEK = SECONDS_IN_DAY*7
 _scheduler_ = None
 
 class ResilientScheduler:
+    """
+    This class builds a singleton instance of the schuduler.
+    It also contains helper functions for building and managing scheduler jobs
+    """
 
     def __init__(self, datastore_dir, threat_max, timezone):
         global _scheduler_
@@ -49,14 +53,18 @@ class ResilientScheduler:
 
     @staticmethod
     def get_scheduler():
+        """
+        return the instance of the scheduler
+        :return:
+        """
         return _scheduler_
 
     def build_trigger(self, type, value):
         """
-
-        :param type:
-        :param value:
-        :return:
+        build a trigger for a schuduled job
+        :param type: cron, interval, delta, date
+        :param value: value to convert for a scheduled job
+        :return: appropriate trigger
         """
 
         validate_crontab_time_format_regex = re.compile( \
@@ -137,10 +145,16 @@ class ResilientScheduler:
 
         if date:
             return m_dt
-        else:
-            return int((m_dt - now_dt).total_seconds())
 
-    def job_to_json(self, job):
+        return int((m_dt - now_dt).total_seconds())
+
+    @staticmethod
+    def job_to_json(job):
+        """
+        rebuild type of scheduled job
+        :param job:
+        :return: json string with argument similar to use when job originally scheduled
+        """
         result = {
             "id": job.id,
             "args": job.args
@@ -186,7 +200,7 @@ class ResilientScheduler:
         elif isinstance(job.trigger, DateTrigger):
             result['type'] = 'date'
             job_state = job.trigger.__getstate__()
-            result['value'] = self.get_str_date(job_state['run_date'])
+            result['value'] = ResilientScheduler.get_str_date(job_state['run_date'])
 
         else:
             result['type'] = 'unknown'
@@ -194,7 +208,8 @@ class ResilientScheduler:
 
         return result
 
-    def get_str_date(self, dt):
+    @staticmethod
+    def get_str_date(dt):
         """
         convert a python date into a string
         :param dt: datetime
@@ -203,3 +218,18 @@ class ResilientScheduler:
         format = '%b %d %Y %I:%M%p' # The format
 
         return dt.strftime(format) if dt else None
+
+    @staticmethod
+    def sanitize_job(job):
+        """
+        convert job to json for presentation, removing sensitive data
+        :return: json formatted job
+        """
+        job_json = ResilientScheduler.job_to_json(job)
+        params = list(job_json['args'])
+
+        # hide settings with contain passwords
+        params[8] = None
+        job_json['args'] = tuple(params)
+
+        return job_json
