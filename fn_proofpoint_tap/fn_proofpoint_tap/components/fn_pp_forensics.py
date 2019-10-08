@@ -109,7 +109,7 @@ class FunctionComponent(ResilientComponent):
             forensics = forensics_response.json()
 
             # Debug logging
-            log.debug("Response content: {}".format(forensics))
+            log.debug('Response content: {}'.format(forensics))
 
             data = []
 
@@ -117,26 +117,24 @@ class FunctionComponent(ResilientComponent):
                 for forensic in report['forensics']:
                     if not forensic:
                         # no object?
-                        yield StatusMessage('no forensic')
                         continue
                     if malicious_flag and not forensic.get('malicious'):
                         # non-malicious result and we're only interested in malicious ones
-                        yield StatusMessage('not malicious')
                         continue
                     try:
-                        yield StatusMessage('forensic data {}'.format(json.dumps(forensic, indent=2)))
+                        log.debug('malicious forensic data {}'.format(json.dumps(forensic, indent=2)))
+
                         # load the forensics jinja template
                         self._parse_opts()
                         # render it
                         data.append(template_functions.render(self.forensics_template, forensic))
-                        yield StatusMessage('now data {}'.format(data))
 
                     except jinja2.exceptions.TemplateSyntaxError:
                         log.info('forensics template is not set correctly in config file')
                         continue
 
             if data:
-                yield StatusMessage('final data {}'.format(data))
+                yield StatusMessage('found malicious forensic data {}'.format(data))
 
             else:
                 yield StatusMessage('no forensics data found')
