@@ -60,6 +60,7 @@ class DLPListener(ResilientComponent):
 
         if 'resilient_incident_id' not in self.soap_client.list_custom_attributes():
             LOG.warning("The Custom Attribute 'resilient_incident_id' was not found on your DLP Instance, this may result in duplicate Incidents being found in Resilient as no filtering will be done on the DLP Side")
+        else:
             # Drop all incidents which have a res_id custom attribute
             incidents = list(filter(self.filter_existing_incidents, incidents))
 
@@ -365,6 +366,10 @@ class DLPListener(ResilientComponent):
         This is a good place to place artifacts which may not suit the artifact tab such as the User Justification
         """
 
+        """Gather the artifacts that were parsed and sent to resilient and display their Type and Value as list items
+        Done with a list comprehension to iterate over the list of artifacts found in the payload input.
+        """
+        artifact_string = ["<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
         return u"""<b> A Symantec DLP Incident has been imported into Resilient</b>
         <p>Incident Notes, Artifacts and Attachments found (if any) have been imported into this Incident.</p>
         <p>Status Type for this Incident: <b>{status}</b></p>
@@ -372,16 +377,16 @@ class DLPListener(ResilientComponent):
         <p>The User provided this as a User Justification: <b>{user_justification}</b> </p>
         <p>The Incident was detected with the detection server: <b>{detection_server}</b></p>
         <br><br>
-        <p>After parsing the Incident; <b>{num_of_artifacts}</b> artifacts were found. </p>
-        <p>Notes Imported: <b>{num_of_notes}</b></p>""".format(
+        <p>The following Artifacts Types were added to the Resilient Incident:</p>
+        <ul>{artifacts}</ul>""".format(
             status=incident['incident']['status'],
             blocked_status=incident['incident']['blockedStatus'],
             user_justification=incident['incident']['userJustification'],
             detection_server=incident['incident']['detectionServer'],
-            num_of_artifacts=len(json.loads(payload, strict=False)["artifacts"]),
-            num_of_notes=len(self.gather_incident_notes(incident))
+            artifacts=u"".join(artifact_string)
         )
     
     def submit_summary_note(self, payload, incident, new_incident_id):
+        summary_note_text = self.prepare_incident_summary_note(incident, payload)
         self.res_rest_client.post('/incidents/{}/comments'.format(new_incident_id), 
-            {"text":{"format":"html", "content": self.prepare_incident_summary_note(incident, payload)}})
+            {"text":{"format":"html", "content": summary_note_text}})

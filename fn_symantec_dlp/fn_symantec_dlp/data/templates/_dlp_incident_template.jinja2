@@ -71,15 +71,5 @@
             }        
         }
         {%- endfor -%}
-        {# If there is one or more note in the incident, add a comma here to avoid JSON issues #}
-        {%- if incident.notes|length > 0 -%}
-        {{- comma() }}
-        {%- endif -%}
-        {    
-            "text": {
-                "format": "html",
-                "content": "<p>The marked detection date of this Incident is <b>{{incident.detection_date}}</b> and the event time is <b>{{incident.event_date}}</b>"
-            }        
-        }
     ]
 }
