@@ -18,6 +18,8 @@
 - [Key Features](#key-features)
 - [Function - Create a Scheduled Rule](#function---create-a-scheduled-rule)
 - [Function - List Scheduled Rules](#function---list-scheduled-rules)
+- [Function - Pause a Scheduled Rule](#function---pause-scheduled-rule)
+- [Function - Resume a Scheduled Rule](#function---resume-scheduled-rule)
 - [Function - Remove a Scheduled Rule](#function---remove-a-scheduled-rule)
 - [Rules](#rules)
 
@@ -213,6 +215,166 @@ else:
 </details>
 
 ---
+## Function - Pause a Scheduled Rule
+Pause an existing scheduled rule
+
+ ![screenshot: fn-pause-a-scheduled-rule ](./screenshots/pause_a_scheduled_rule.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label` | `string` | Yes | `-` | Label of scheduled job to pause|
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'inputs': {
+    u'scheduler_label': u'2225'
+  },
+  'metrics': {
+    'package': 'fn-scheduler',
+    'timestamp': '2019-10-08 15:38:04',
+    'package_version': '1.0.0',
+    'host': 'marks-mbp.cambridge.ibm.com',
+    'version': '1.0',
+    'execution_time_ms': 21
+  },
+  'success': True,
+  'content': {
+    'args': (2225,
+    None,
+    None,
+    u'2225',
+    u'Demo Scheduler',
+    39,
+    0,
+    {
+      u'scheduler_demo': u'yes'
+    },
+    None),
+    'type': 'interval',
+    'id': u'2225',
+    'value': '2m'
+  },
+  'raw': '{"args": [2225, null, null, "2225", "Demo Scheduler", 39, 0, {"scheduler_demo": "yes"}, null], "type": "interval", "id": "2225", "value": "2m"}',
+  'reason': None,
+  'version': '1.0'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row.schedule_label
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  row['status'] = 'Paused'
+else:
+  row['status'] = row['status'] + " (Error)"
+```
+
+</p>
+</details>
+
+---
+## Function - Resume a Scheduled Rule
+Resume an existing scheduled rule
+
+ ![screenshot: fn-list-scheduled-rules ](./screenshots/resume_a_scheduled_rule.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `scheduler_label` | `string` | Yes | `-` | Label of scheduled job to resume|
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+  'inputs': {
+    u'scheduler_label': u'2225'
+  },
+  'metrics': {
+    'package': 'fn-scheduler',
+    'timestamp': '2019-10-08 15:38:04',
+    'package_version': '1.0.0',
+    'host': 'marks-mbp.cambridge.ibm.com',
+    'version': '1.0',
+    'execution_time_ms': 21
+  },
+  'success': True,
+  'content': {
+    'args': (2225,
+    None,
+    None,
+    u'2225',
+    u'Demo Scheduler',
+    39,
+    0,
+    {
+      u'scheduler_demo': u'yes'
+    },
+    None),
+    'type': 'interval',
+    'id': u'2225',
+    'value': '2m'
+  },
+  'raw': '{"args": [2225, null, null, "2225", "Demo Scheduler", 39, 0, {"scheduler_demo": "yes"}, null], "type": "interval", "id": "2225", "value": "2m"}',
+  'reason': None,
+  'version': '1.0'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.scheduler_label = row.schedule_label
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  row['status'] = 'Active'
+else:
+  row['status'] = row['status'] + " (Error)"
+```
+
+</p>
+</details>
+
+---
 ## Function - Remove a Scheduled Rule
 Stop a schedule
 
@@ -289,6 +451,7 @@ else:
 ### Rules
 * Rules must be enabled to be scheduled and are again checked when the scheduled rule is triggered.
 * Rules scheduled must match the invoking Rule. For instance, to create a scheduled artifact rule, use the rule `Create a Schedule - Artifact`. 
+* All schedules must be in the future
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.
 * Incident notes are created each time a scheduled rule is excuted documenting the rule invocation.
