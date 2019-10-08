@@ -45,13 +45,11 @@ class FunctionComponent(ResilientComponent):
     def _fn_pp_forensics_function(self, event, *args, **kwargs):
         """Function: Function to retrieve Forensics data from the ProofPoint API by Campaign or Threat ID"""
         # Get the function parameters:
-        incident_id = kwargs.get('incident_id')
         campaign_id = kwargs.get('proofpoint_campaign_id')
         threat_id = kwargs.get('proofpoint_threat_id')
         aggregate_flag = kwargs.get('proofpoint_aggregate_flag')
         malicious_flag = kwargs.get('proofpoint_malicious_flag')
 
-        log.info('incident_id: {}'.format(incident_id))
         log.info('proofpoint_campaign_id: {}'.format(campaign_id))
         log.info('proofpoint_threat_id: {}'.format(threat_id))
         log.info('proofpoint_aggregate_flag: {}'.format(aggregate_flag))
@@ -60,7 +58,6 @@ class FunctionComponent(ResilientComponent):
         yield StatusMessage("starting...")
 
         inputs = {
-            'incident_id': incident_id,
             'campaign_id': campaign_id,
             'threat_id': threat_id,
             'aggregate_flag': aggregate_flag,
@@ -151,8 +148,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionError(err)
 
     def _parse_opts(self):
         """
