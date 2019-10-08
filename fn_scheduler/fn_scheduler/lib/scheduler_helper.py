@@ -111,6 +111,9 @@ class ResilientScheduler:
         except:
             raise ValueError("Invalid interval format: time value should be integer. For example: 5s, 10m, 1d, 2w, 1M")
 
+        if time_value <= 0:
+            raise ValueError("time value needs to be > 0: {}".format(time_value))
+
         # Get the time units from input string.
         time_unit = time_string.rstrip()[-1]
 
