@@ -90,6 +90,8 @@ class DLPListener(ResilientComponent):
                 self.submit_summary_note(payload, incident, new_incident['id'])
 
                 self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+            else: 
+                LOG.info("Incident was found in Resilient with sdlp_incident_id field.")
         LOG.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
@@ -369,12 +371,12 @@ class DLPListener(ResilientComponent):
         """Gather the artifacts that were parsed and sent to resilient and display their Type and Value as list items
         Done with a list comprehension to iterate over the list of artifacts found in the payload input.
         """
-        artifact_list = ["<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
+        artifact_list = [u"<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
         
         # Make a call to the resilient API to find File Artifacts, they are not a part of the jinja payload
         artifacts = self.res_rest_client.get('/incidents/{}/artifacts'.format(new_incident_id))
         # Extend the list of artifacts we already have with any File Artifacts we can get from the API. 16, 15, 12, 4, 36 are all type ids for File Artifacts such as Log File
-        artifact_list.extend(["<li>File Artifact : <b>{}</b></li>".format(artifact["value"]) for artifact in artifacts if artifact["type"] in [16, 15, 12, 4, 36]])
+        artifact_list.extend([u"<li>File Artifact : <b>{}</b></li>".format(artifact["value"]) for artifact in artifacts if artifact["type"] in [16, 15, 12, 4, 36]])
         return u"""<b> A Symantec DLP Incident has been imported into Resilient</b>
         <p>Incident Notes, Artifacts and Attachments found (if any) have been imported into this Incident.</p>
         <p>Status Type for this Incident: <b>{status}</b></p>
