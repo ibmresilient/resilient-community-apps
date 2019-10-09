@@ -241,7 +241,7 @@ class MitreAttackTactic(MitreAttackBase):
         type_filter = Filter("type", "=", cls.MITRE_TYPE)
         name_filter = Filter("x_mitre_shortname", "=", name)
         items = conn.get_items([type_filter, name_filter])
-        if items:
+        if not items:
             return None
 
         return [cls(x) for x in items]  # create a list of class instances from query data
