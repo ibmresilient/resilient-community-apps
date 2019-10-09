@@ -180,8 +180,8 @@ class MitreAttackBase(object):
         Since multiple types of objects can have the same name across collections, returns a list of objects.
         :param conn: Connection object
         :type conn: MitreAttackConnection
-        :param type_id: name of the type to query
-        :type type_id: str
+        :param name: name of the type to query
+        :type name: str
         :return: list of objects of the class with given name
         :rtype: list(self.__class__)
         """
@@ -244,12 +244,72 @@ class MitreAttackTactic(MitreAttackBase):
             "collection": self.collection
         }
 
+    @classmethod
+    def get_by_shortname(cls, conn, shortname):
+        """
+        Queries the connection to get instances of this class with given name.
+        Since multiple types of objects can have the same name across collections, returns a list of objects.
+        :param conn: Connection object
+        :type conn: MitreAttackConnection
+        :param shortname: shortname of the type to query
+        :type shortname: str
+        :return: list of objects of the class with given name
+        :rtype: list(self.__class__)
+        """
+        name = shortname.strip()
+
+        type_filter = Filter("type", "=", cls.MITRE_TYPE)
+        name_filter = Filter("x_mitre_shortname", "=", name)
+        items = conn.get_items([type_filter, name_filter])
+        if not items:
+            return None
+
+        return [cls(x) for x in items]  # create a list of class instances from query data
+
+    @classmethod
+    def get_by_technique(cls, conn, technique):
+        """
+        Get the tactic that the given technique is a part of.
+        Get it using the shortname and filter by collection.
+        :param conn: Connection object
+        :param technique: MitreAttackTechnique instance
+        :return:
+        """
+        name = technique.tactic_shortname
+        items = cls.get_by_shortname(conn, name)
+        if not items:
+            return None
+        # filter by correct collection otherwise
+        return list(filter(lambda x: x.collection == technique.collection, items))
+
 
 class MitreAttackTechnique(MitreAttackBase):
     MITRE_TYPE = "attack-pattern"
 
+    def __init__(self, doc):
+        super(MitreAttackTechnique, self).__init__(doc)
+        self.tactic_shortname = self.get_tactic_shortname(doc)
+
+    @staticmethod
+    def get_tactic_shortname(doc):
+        """
+        Extracts the shortname of the Tactic that the technique is a part of.
+
+        :param doc: stix formatted dictionary describing the technique
+        :return: Name of the technique that the technique is a part of
+        """
+        # get the shortname recorded in stix document
+        kill_chain_phases = doc.get("kill_chain_phases", {})
+        for kill_phase in kill_chain_phases:
+            if kill_phase.get("kill_chain_name", "") == "mitre-attack":
+                return kill_phase.get("phase_name")
+        return None
+
     def get_mitigations(self, conn):
         return MitreAttackMitigation.get_by_technique(conn, self)
+
+    def get_tactic(self, conn):
+        return MitreAttackTactic.get_by_technique(conn, self)
 
     @classmethod
     def get_by_tactic(cls, conn, tactic):

@@ -80,7 +80,11 @@ class TestMitreTactic(object):
         """
         tactics = MitreAttackTactic.get_by_name(self.mitre_attack, "Impact")
         assert any(x.description.startswith("Deprecated") for x in tactics)
-        
+
+    def test_get_by_shortname_works(self):
+        tactics = MitreAttackTactic.get_by_shortname(self.mitre_attack, "collection")
+        assert tactics
+
 
 class TestMitreTechnique(object):
     mitre_attack = MitreAttackConnection()
@@ -90,6 +94,10 @@ class TestMitreTechnique(object):
         data_mocker = MitreQueryMocker()
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             yield
+
+    def test_getting_tactic_from_technique_works(self):
+        tech = MitreAttackTechnique.get_by_id(self.mitre_attack, "T1213")[0]
+        assert tech.get_tactic(self.mitre_attack) is not None
 
     def test_tech_of_tactic(self):
         collection_tech = MitreAttackTechnique.get_by_tactic(self.mitre_attack,
@@ -198,7 +206,7 @@ class TestMitreMitigation(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
             assert any(x.description.startswith("Deprecated") for x in mitigations)
-            
+
 class TestMitreSoftware(object):
     mitre_attack = MitreAttackConnection()
 
@@ -218,7 +226,7 @@ class TestMitreSoftware(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             assert len(MitreAttackSoftware.get_all(self.mitre_attack)) == len(MitreQueryMocker.SOFTWARE[0]) + len(
                 MitreQueryMocker.SOFTWARE[1]) + len(MitreQueryMocker.SOFTWARE[2])
-            
+
 
 class TestMitre(object):
     mitre_conn = MitreAttackConnection()
