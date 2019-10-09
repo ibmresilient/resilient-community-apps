@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
 
             result_payload = ResultPayload("fn_mitre_integration", mitre_technique_name=mitre_technique_name,
                                            mitre_technique_id=mitre_technique_id,
-                                           mitre_technique_mitigation_only= mitre_technique_mitigation_only)
+                                           mitre_technique_mitigation_only=mitre_technique_mitigation_only)
             yield StatusMessage("starting...")
             yield StatusMessage("querying MITRE STIX TAXII server. It might take several minutes...")
 
@@ -61,9 +61,11 @@ class FunctionComponent(ResilientComponent):
 
             techs = []
             for technique in techniques:
+                tactics = technique.get_tactic(mitre_conn)
                 tech_dict = technique.dict_form()
                 tech_dict.update(
                     {
+                        "tactic": tactics[0].name if tactics else None,  # there should be 1 tactic per technique
                         "mitre_mitigations": [x.dict_form() for x in technique.get_mitigations(mitre_conn)]
                     }
                 )
