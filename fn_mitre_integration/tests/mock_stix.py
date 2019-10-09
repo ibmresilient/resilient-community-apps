@@ -90,6 +90,8 @@ class MitreQueryMocker(object):
             elif filt.property == "name":
                 result.extend(filter(lambda x: x["name"] == filt.value, data))
                 filtered = True
+            elif filt.property == "x_mitre_shortname":
+                result.extend(filter(lambda x: x.get("x_mitre_shortname", "") == filt.value, data))
         if not filtered:
             result = data
 
