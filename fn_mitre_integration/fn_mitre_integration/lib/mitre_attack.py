@@ -99,7 +99,7 @@ class MitreAttackBase(object):
     @staticmethod
     def get_id(doc):
         """
-        Get id fro  m STIX document for this particular class.
+        Get id from STIX document for this particular class.
         Override for classes with other structure.
         :param doc: stix structured dictionary
         :type doc: dict
