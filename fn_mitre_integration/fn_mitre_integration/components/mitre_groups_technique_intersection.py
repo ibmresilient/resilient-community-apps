@@ -78,7 +78,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting group intersection information...")
             groups = mitre_attack.MitreAttackGroup.get_by_technique_intersection(mitre_conn, techniques)
 
-            yield StatusMessage("Done. Returning results")
+            if len(groups) == 0:
+                yield StatusMessage("No groups were found using all of the given techniques. Done")
+            else:
+                yield StatusMessage("Done. Returning results.")
+
             # Storing the techniques specified to query this group
             for group in groups:
                 group.technique_id = intersection_query
