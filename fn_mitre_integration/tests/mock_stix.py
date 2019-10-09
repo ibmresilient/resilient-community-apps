@@ -5,7 +5,8 @@
 class MitreQueryMocker(object):
     """
     Whole class exists to patch MitreAttackConnection's query to return data from saved data.
-    query is called 3 times each `get_items` call, for each collection, so we return 3 times.
+    query is called 3 times during each of `get_items` calls; 1 time per collection, so we have 3 arrays of data
+    per category, and return one at a time, counting the number of calls made.
     We mod the index we return, just in case more collections get added down the road.
     """
     TACTICS =   [
@@ -23,11 +24,22 @@ class MitreQueryMocker(object):
                 [{"type": "course-of-action",    "id": "course-of-action--20f6a9df-37c4-4e20-9e47-025983b1b39d",    "created_by_ref": "identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5",    "created": "2019-06-11T16:33:55.337Z",    "modified": "2019-06-11T16:33:55.337Z",    "name": "Filter Network Traffic",    "description": "Use network appliances to filter ingress or egress traffic and perform protocol-based filtering.",    "external_references": [        {            "source_name": "mitre-attack",            "url": "https://attack.mitre.org/mitigations/M1037",            "external_id": "M1037"        }    ],    "object_marking_refs": [        "marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168"    ],    "x_mitre_version": "1.0"}],
                 []
                 ]
+    SOFTWARE =  [
+                [{'created_by_ref': 'identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5', 'description': '[Pegasus for iOS](https://attack.mitre.org/software/S0289) is the iOS version of malware that has reportedly been linked to the NSO Group. It has been advertised and sold to target high-value victims. (Citation: Lookout-Pegasus) (Citation: PegasusCitizenLab) The Android version is tracked separately under [Pegasus for Android](https://attack.mitre.org/software/S0316).', 'id': 'malware--33d9d91d-aad9-49d5-a516-220ce101ac8a', 'external_references': [{'external_id': 'S0289', 'source_name': 'mitre-mobile-attack', 'url': 'https://attack.mitre.org/software/S0289'}, {'source_name': 'Pegasus for iOS', 'description': '(Citation: Lookout-Pegasus) (Citation: PegasusCitizenLab)'}, {'source_name': 'Lookout-Pegasus', 'description': 'Lookout. (2016). Technical Analysis of Pegasus Spyware. Retrieved December 12, 2016.', 'url': 'https://info.lookout.com/rs/051-ESQ-475/images/lookout-pegasus-technical-analysis.pdf'}, {'source_name': 'PegasusCitizenLab', 'description': 'Bill Marczak and John Scott-Railton. (2016, August 24). The Million Dollar Dissident: NSO Group’s iPhone Zero-Days used against a UAE Human Rights Defender. Retrieved December 12, 2016.', 'url': 'https://citizenlab.org/2016/08/million-dollar-dissident-iphone-zero-day-nso-group-uae/'}], 'object_marking_refs': ['marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168'], 'modified': '2018-12-11 20:40:31.461000+00:00', 'type': 'malware', 'created': '2017-10-25 14:48:44.238000+00:00', 'name': 'Pegasus for iOS', 'labels': ['malware'], 'x_mitre_old_attack_id': 'MOB-S0005', 'x_mitre_version': '1.1', 'x_mitre_platforms': ['iOS'], 'x_mitre_aliases': ['Pegasus for iOS'], 'revoked': 'False'}],
+                [{'created_by_ref': 'identity--c78cb6e5-0c4b-4611-8297-d1b8b55e40b5', 'description': '[Adups](https://attack.mitre.org/software/S0309) is software that was pre-installed onto Android devices, including those made by BLU Products. The software was reportedly designed to help a Chinese phone manufacturer monitor user behavior, transferring sensitive data to a Chinese server. (Citation: NYTimes-BackDoor) (Citation: BankInfoSecurity-BackDoor)', 'id': 'malware--f6ac21b6-2592-400c-8472-10d0e2f1bfaf', 'external_references': [{'external_id': 'S0309', 'source_name': 'mitre-mobile-attack', 'url': 'https://attack.mitre.org/software/S0309'}, {'source_name': 'Adups', 'description': '(Citation: NYTimes-BackDoor) (Citation: BankInfoSecurity-BackDoor)'}, {'source_name': 'NYTimes-BackDoor', 'description': 'Matt Apuzzo and Michael S. Schmidt. (2016, November 15). Secret Back Door in Some U.S. Phones Sent Data to China, Analysts Say. Retrieved February 6, 2017.', 'url': 'https://www.nytimes.com/2016/11/16/us/politics/china-phones-software-security.html'}, {'source_name': 'BankInfoSecurity-BackDoor', 'description': 'Jeremy Kirk. (2016, November 16). Why Did Chinese Spyware Linger in U.S. Phones?. Retrieved February 6, 2017.', 'url': 'http://www.bankinfosecurity.com/did-chinese-spyware-linger-in-us-phones-a-9534'}], 'object_marking_refs': ['marking-definition--fa42a846-8d90-4e51-bc29-71d5b4802168'], 'modified': '2018-12-11 20:40:31.461000+00:00', 'type': 'malware', 'created': '2017-10-25 14:48:47.038000+00:00', 'name': 'Adups', 'labels': ['malware'], 'x_mitre_old_attack_id': 'MOB-S0025', 'x_mitre_version': '1.1', 'x_mitre_platforms': ['Android'], 'x_mitre_aliases': ['Adups'], 'revoked': 'False'}],
+                []
+    ]
 
     def __init__(self):
-        self.call = 0
+        self.call = 0  # call keeps track of the array position to return. We expect to always have 3 calls in a row
 
     def query(self, filters):
+        """
+        Look through the filters to see what type of data is requested.
+        For supported types return one collection of data.
+        We expect to get 3 calls,  for each of the collections, so we track the number of function calls to
+        make sure we return all of the data.
+        """
         res = None
 
         if not isinstance(filters, list):
@@ -44,11 +56,20 @@ class MitreQueryMocker(object):
                 elif filt.value == "course-of-action":
                     res = self.mitigations(filters)
                     break
-        self.call += 1
-        self.call %= 3
+                # software supports 2 types, so we handle the situation when each or a combination is queried
+                elif (isinstance(filt.value, (list, tuple)) and filt.value[0] in ["tool", "malware"] and filt.value[1] in ["tool", "malware"]) or \
+                    filt.value in ["tool", "malware"]:
+                    res = self.software(filters)
+                    break
+        self.call += 1  # next collection
+        self.call %= 3  # loop through the data we have.
         return res
 
     def apply_fiters(self, data, filters):
+        """
+        Simulate some of the basic filters for the purpose of testing.
+        Supports selecting items by their id and name.
+        """
         result = []
         filtered = False
 
@@ -75,7 +96,19 @@ class MitreQueryMocker(object):
         return self.apply_fiters(self.TACTICS[self.call], filters)
 
     def techniques(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
         return self.apply_fiters(self.TECHNIQUES[self.call], filters)
 
     def mitigations(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
         return self.apply_fiters(self.MITIGATIONS[self.call], filters)
+
+    def software(self, filters):
+        """
+        :return: list - one of 3, for each datastore queried
+        """
+        return self.apply_fiters(self.SOFTWARE[self.call], filters)

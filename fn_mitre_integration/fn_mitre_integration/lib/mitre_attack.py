@@ -6,12 +6,32 @@
 from stix2 import TAXIICollectionSource, Filter, CompositeDataSource
 from stix2.datastore.taxii import DataSourceError
 from taxii2client import Server
-import time
 import re
 
 MITRE_TAXII_URL = "https://cti-taxii.mitre.org/taxii/"
 MITRE_BASE_URL = "https://attack.mitre.org"
 CODE_TAG = "tt"  # Some descriptions contain <code> html tag, which we update for platform's rich text
+
+
+def sanitize_stix(text):
+    """
+    Applies all the sanitizations that so far came up:
+    - Replaces <code> tags with <tt>
+    - Creates HTML links from Markdown
+    :param text:
+    :return:
+    """
+    return replace_code_tags(replace_markdown_links(text))
+
+
+def replace_markdown_links(text):
+    """
+    STIX descriptions/mitigations contain links in a Markdown format, which isn't supported on Resilient Side.
+    We will take those, and convert them to HTML links
+    :param text: text from stix
+    :return: text with Markdown links converted to HTML links
+    """
+    return re.sub("\[(.*?)\]\((.*?)\)", r'<a href="\g<2>">\g<1></a>', text)
 
 
 def replace_code_tags(text):
@@ -316,9 +336,9 @@ class MitreAttackTechnique(MitreAttackBase):
         refs = [{"url": r.get("url", "")} for r in self._stix["external_references"]]
         return {
             "name": self.name,
-            "description": replace_code_tags(self.description),
+            "description": sanitize_stix(self.description),
             "external_references": refs,
-            "x_mitre_detection": replace_code_tags(self._stix.get("x_mitre_detection", "")),
+            "x_mitre_detection": sanitize_stix(self._stix.get("x_mitre_detection", "")),
             "id": self.id,
             "collection": self.collection
         }
@@ -347,10 +367,80 @@ class MitreAttackMitigation(MitreAttackBase):
 
     def dict_form(self):
         return {
-            "description": replace_code_tags(self.description),
+            "description": sanitize_stix(self.description),
             "name": self.name,
             "id": self.id,
             "collection": self.collection
+        }
+
+
+class MitreAttackSoftware(MitreAttackBase):
+    MITRE_TYPE = ["tool", "malware"]
+    MITRE_URL_TYPE = "software"
+
+    def __init__(self, doc):
+        super(MitreAttackSoftware, self).__init__(doc)
+        self.type = self.get_type(doc)
+        self.platforms = self.get_platforms(doc)
+        self.technique_id = None
+
+    def get_url(self):
+        """
+        Get the url link for the current class.
+        :return: url string
+        :rtype: str
+        """
+        item_id = self.id
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
+        return url
+
+    def get_platforms(selfs, doc):
+        """
+        Gets the software platforms from STIX document
+        :param doc: Stix document
+        :return: List of platforms that the software functions on
+        :rtype: list
+        """
+        return doc.get("x_mitre_platforms", [])
+
+    def get_type(self, doc):
+        """
+        Gets the type of the software.
+        :param doc: Stix document
+        :return: "malware" or "tool"
+        """
+        return doc.get("type", "")
+
+    @classmethod
+    def get_by_technique(cls, conn, technique):
+        """
+        Get all the software related to the given technique.
+        :param conn: Mitre Connection
+        :param technique: Technique which we need the software for
+        :return: list of Software instances
+        :rtype: list(MitreAtackSoftware)
+        """
+        if technique is None:
+            return None
+
+        soft = conn.get_related_to(technique._stix, "uses", target_only=True)  # get stix objects
+        soft = filter(lambda x: x["type"] in cls.MITRE_TYPE, soft)  # filter to keep only software types
+        soft = [cls(x) for x in soft]  # initialize class instances
+
+        for s in soft:
+            s.technique_id = technique.id
+
+        return soft
+
+    def dict_form(self):
+        return {
+            "technique": self.technique_id,
+            "name": self.name,
+            "id": self.id,
+            "ref": self.get_url(),
+            "description": sanitize_stix(self.description),
+            "platforms": self.platforms,
+            "type": self.type
         }
 
 

@@ -27,12 +27,16 @@
 ## Release Notes
 
 ### v2.0
+- Added Workflow/Rule/Data table to get software used by a technique/techniques
 - Added support for all of the MITRE's collections
-- New column `Collection` was added to the data tables to specify what collection
-the technique/task comes from.
+- New column `Collection` was added to technique and tactic data tables 
+to specify what collection the technique/task comes from.
 - Data returned by the functions has a different format - `pre-processing` and `post-processing` scripts
 have examples of what the data looks like.
 - Added Activity Fields to the Rules
+
+### v1.0
+- Initial release
 
 ---
 
