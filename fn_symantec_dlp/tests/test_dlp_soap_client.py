@@ -163,7 +163,7 @@ class TestDLPSOAPClient():
         """
         batch = "_{}".format(uuid.uuid4())
         incident_id = 999
-        default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "fn_symantec_dlp/data/templates")
+        default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, os.path.join("fn_symantec_dlp", "data", "templates"))
         resp = DLPSoapClient.map_values(template_file=os.path.abspath(default_dir + "/_dlp_update_incident_xml_template.jinja2"),
                                         message_dict={
                                             "batchId":batch,

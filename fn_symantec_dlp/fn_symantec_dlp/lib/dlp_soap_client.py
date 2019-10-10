@@ -10,11 +10,12 @@ import os
 
 
 import zeep
-from zeep.helpers import serialize_object
+from jinja2 import Environment, PackageLoader
+
 from requests import Session
 from requests.auth import HTTPBasicAuth, AuthBase
+from requests.exceptions import HTTPError, Timeout
 from resilient_lib import validate_fields
-from resilient_circuits import template_functions
 
 LOG = logging.getLogger(__name__)
 
@@ -208,7 +209,7 @@ class DLPSoapClient():
             # Now we prepare a dict with our custom values and then update that dict with the kwargs
             update_payload.update(kwargs)
 
-            default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
+            default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data", "templates")
             rendered_xml = cls.map_values(
                 template_file=os.path.abspath(default_dir + "/_dlp_update_incident_xml_template.jinja2"),
                 message_dict=update_payload)
@@ -224,7 +225,7 @@ class DLPSoapClient():
             LOG.info("Sent new update to DLP Incident %s", incident_id)
 
             return response
-        except Exception as upload_ex:
+        except (HTTPError, Timeout) as upload_ex: # Catch any Fault or ValidationError, other Exceptions should be caught
             LOG.debug(traceback.format_exc())
             # Log the Connection error to the user
             LOG.error(u"Problem: %s", repr(upload_ex))
@@ -238,9 +239,17 @@ class DLPSoapClient():
         Import a Jinja template
         Map Event data to a new Incidents data including artifact data"""
         LOG.debug("Attempting to map message to an IncidentDTO. Message provided : %d", message_dict)
-        with open(template_file, 'r') as template:
 
-            incident_template = template.read()
-            incident_data = template_functions.render(incident_template, message_dict)
-            LOG.debug(incident_data)
-            return incident_data
+
+        # Setup the Jinja2 Environment with path to Jinja2 templates
+        # Uses PackageLoader to load all the templates in the templates dir
+        jinja_env = Environment(
+            loader=PackageLoader("fn_symantec_dlp", os.path.join("data", "templates")),
+            trim_blocks=True # Used to get rid of line endings that we may put in the template for readability
+        )
+        # Get the template use for the update. 
+        jinja_template = jinja_env.get_template("/_dlp_update_incident_xml_template.jinja2")
+        # Now render the template with our message
+        jinja_rendered_text = jinja_template.render(message_dict)
+        LOG.debug(jinja_rendered_text)
+        return jinja_rendered_text
