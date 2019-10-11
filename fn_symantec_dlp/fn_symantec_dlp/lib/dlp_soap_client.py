@@ -19,6 +19,9 @@ from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
 
+DEFAULT_TEMPLATES_PATH = os.path.join("data", "templates")
+DEFAULT_JINJA_UPDATE_TEMPLATE = "_dlp_update_incident_xml_template.jinja2"
+
 
 class SymantecAuth(AuthBase):
     """SymantecAuth a class which inherits from requests.AuthBase,
@@ -244,12 +247,12 @@ class DLPSoapClient():
         # Setup the Jinja2 Environment with path to Jinja2 templates
         # Uses PackageLoader to load all the templates in the templates dir
         jinja_env = Environment(
-            loader=PackageLoader("fn_symantec_dlp", os.path.join("data", "templates")),
+            loader=PackageLoader("fn_symantec_dlp", DEFAULT_TEMPLATES_PATH),
             trim_blocks=True # Used to get rid of line endings that we may put in the template for readability
         )
         # Get the template use for the update. 
-        jinja_template = jinja_env.get_template("/_dlp_update_incident_xml_template.jinja2")
+        jinja_template = jinja_env.get_template(DEFAULT_JINJA_UPDATE_TEMPLATE)
         # Now render the template with our message
         jinja_rendered_text = jinja_template.render(message_dict)
-        LOG.debug(jinja_rendered_text)
+        LOG.debug("-----Template Rendered-----\n%s\n-------End-------",  jinja_rendered_text)
         return jinja_rendered_text
