@@ -39,12 +39,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient integration for Proofpoint TRAP**
 
 Proofpoint Threat Response Auto-Pull (TRAP) enables messaging and security administrators to analyze emails and move malicious or unwanted emails to quarantine, after delivery. It follows forwarded mail and distribution lists, and creates an auditable activity trail.
 
 The ProofPoint Trap function package provides the following features:
-* Poll a Proofpoint TRAP server for incidents and create corresponding incidents in Resilient.
+* Poll a Proofpoint TRAP server for incidents and create corresponding incidents in the Resilient platform.
 * Get Proofpoint TRAP incident details.
 * Get a Proofpoint Trap list member or members.
 * Add a member to a Proofpoint Trap list for artifacts of type host, IP address, or URL to a list.
@@ -90,10 +89,10 @@ The ProofPoint Trap function package provides the following features:
   | ------ | :------: | ------- | ----------- |
   | **base_url** | Yes | https://192.168.1.1/api | *Base URL of Proofpoint TRAP API* |
   | **api_key** | Yes | abcd1234-a123-123a-123a-123456abcdef | *API Key for Proofpoint TRAP* |
-  | **polling_interval** | Yes | `2` | *Interval to poll TRAP in Minutes* |
-  | **startup_interval** | Yes | `60` | *Initial Import Look-back Interval in minutes (default: 1 hour)* |
-  | **state** | Yes | `open` | *State of Incidents to Query* |
-  | **host_categories** | Yes | `attacker,cnc,forensics,url` | *Comma separated list of 'host' categories to check for artifacts. The default is forensics.* |
+  | **polling_interval** | Yes | 2 | *Interval to poll TRAP in Minutes* |
+  | **startup_interval** | Yes | 60 | *Initial Import Look-back Interval in minutes (default: 1 hour)* |
+  | **state** | Yes | open | *State of Incidents to Query* |
+  | **host_categories** | Yes | attacker,cnc,forensics,url | *Comma separated list of 'host' categories to check for artifacts. The default is forensics.* |
   | **cafile** | No | cafile=~/.resilient/trap/cert.cer | *Optional setting to use a ca certificate to access Proofpoint TRAP* |                            |                                    |
   | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Proofpoint TRAP via a proxy* |                                   |
 
@@ -102,7 +101,7 @@ The ProofPoint Trap function package provides the following features:
   ```
   $ resilient-circuits selftest -l fn-proofpoint-trap
   ```
-* **Run** resilient-circuits or restart the Service on Windows/Linux:
+* **Run** resilient-circuits as follows, or restart the resilient-circuits service:
   ```
   $ resilient-circuits run
   ```
@@ -117,14 +116,13 @@ The ProofPoint Trap function package provides the following features:
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* The package customizations includes the following Data Table and Custom Field:
-
+* The package customizations includes the following custom field and data tables:
   ![screenshot: custom_layouts](./screenshots/custom_layouts.png)
  
- 
-* Add the data table to the Incident->Artifacts tab and save:
+* In the Layouts tab, add the data table to the Artifacts tab and save:
    ![screenshot: custom_layouts](./screenshots/custom_layout_datatable.png)  
-* Add the custom field to the Incident->Details tab and save:
+   
+* In the Layouts tab, add the custom field to the Details tab and save: 
    ![screenshot: custom_layouts](./screenshots/custom_layout_field.png)
 ---
 
@@ -143,23 +141,18 @@ The ProofPoint Trap function package provides the following features:
 There are several ways to verify the successful operation of a function.
 
 ### Resilient Action Status
-* When viewing an incident, use the Actions menu to view **Action Status**.
-* By default, pending and errors are displayed.
-* Modify the filter for actions to also show Completed actions.
-* Clicking on an action displays additional information on the progress made or what error occurred.
+* When viewing an incident, use the Actions menu to view Action Status. By default, pending and errors are displayed.
+* Modify the filter for actions to a®lso show Completed actions. Clicking on an action displays additional information on the progress made or what error occurred.
 
 ### Resilient Scripting Log
-* A separate log file is available to review scripting errors.
-* This is useful when issues occur in the pre-processing or post-processing scripts.
-* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
+* A separate log file is available to review scripting errors. This is useful when issues occur in the pre-processing or post-processing scripts.
+* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`. 
 
 ### Resilient Logs
 * By default, Resilient logs are retained at `/usr/share/co3/logs`.
 * The `client.log` may contain additional information regarding the execution of functions.
 
 ### Resilient-Circuits
-* The log is controlled in the `.resilient/app.config` file under the section [resilient] and the property `logdir`.
-* The default file name is `app.log`.
 * Each function will create progress information.
 * Failures will show up as errors and may contain python trace statements.
 
