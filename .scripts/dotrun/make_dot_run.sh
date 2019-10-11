@@ -110,7 +110,7 @@ TMP_DIR=/tmp
 MANYLINUX1="cryptography cffi lxml MarkupSafe"
 ENV_LIBS="pip SecretStorage setuptools setuptools_scm watchdog wheel keyring==7.3 virtualenv"
 # needed for VERSION_LIBS
-EARLY_LIBS="pycparser future configobj"
+EARLY_LIBS="pycparser future configobj simplejson"
 VERSION_LIBS="enum34 circuits investigate pymisp beautifulsoup4 pyodbc"
 # on pypi
 RESILIENT_LIBS="rc-webserver rc-cts resilient-circuits"

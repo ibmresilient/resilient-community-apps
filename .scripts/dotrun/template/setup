@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # This script is used with the self-extracting .run created by makeself. The following actions are performed:
 # 1) Install virtualenv so that python libraries are installed and referenced locally
 # 2) Enhance the python libraries used to install additional packages and those used by resilient-circuits
@@ -8,8 +9,17 @@
 # 5) Print the README document on how to use resilient-circuits and packages installed. Also, how to
 #    install the additional packages extracted at a later time.
 #
+
+# pip command to run. Can be overwritten with --pip_cmd
+pip_cmd='pip'
+if [ $# -ne 1 ] && [ "$1" == "--pip_cmd" ]; then
+   pip_cmd=$2
+   shift 2
+fi
+echo "Using pip cmd: '${pip_cmd}'"
+
 # 1. Install virtualenv so that python libraries are installed and referenced locally
-pip install --no-index --find-links=./lib/ --upgrade --user virtualenv
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade --user virtualenv
 if [ $? -eq 0 ]; then
    mkdir ~/venv
    ~/.local/bin/virtualenv ~/venv/resilient-circuits
@@ -17,21 +27,21 @@ if [ $? -eq 0 ]; then
 fi
 #
 # 2. Enhance the python libraries used to install additional packages and those used by resilient-circuits
-pip install --no-index --find-links=./lib/ --upgrade pip
-pip install --no-index --find-links=./lib/ --upgrade setuptools
-pip install --no-index --find-links=./lib/ --upgrade setuptools_scm
-pip install --no-index --find-links=./lib/ --upgrade watchdog
-pip install --no-index --find-links=./lib/ --upgrade wheel
-pip install --no-index --find-links=./lib/ --upgrade keyring==7.3
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade ${pip_cmd}
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade setuptools
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade setuptools_scm
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade watchdog
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade wheel
+${pip_cmd} install --no-index --find-links=./lib/ --upgrade keyring==7.3
 #
 # 3. Install resilient-circuits
-pip install --no-index --find-links=. --find-links=./lib ./lib/resilient_circuits*.tar.gz
+${pip_cmd} install --no-index --find-links=. --find-links=./lib ./lib/resilient_circuits*.tar.gz
 #
 # 4. Install any additional packages to the environment representing additional functions or threat services for
 #    use with resilient-circuits
 # loop over any arguments for additional packages to install
 #   a) find specific package files from package names: fn-utilities -> fn-utilities-1.0.0.tar.gz
-if [ $# -ne 1 ] && [ '$1' == '*' ]; then
+if [ $# -ne 1 ] && [ "$1" == "*" ]; then
    pkgs=`ls *.tar.gz`
 else
    pkgs=$@
@@ -39,7 +49,7 @@ fi
 #   b) perform the install using with found package names
 for pkg in ${pkgs}
 do
-    pip install --no-index --find-links=. --find-links=./lib ${pkg}*.tar.gz
+    ${pip_cmd} install --no-index --find-links=. --find-links=./lib ${pkg}*.tar.gz
 done
 #
 # 5. Print README
