@@ -91,7 +91,7 @@ class DLPListener(ResilientComponent):
 
                 self.send_res_id_to_dlp(new_incident, incident['incidentId'])
             else: 
-                LOG.info(u"Incident was found in Resilient with sdlp_incident_id %s field.", incident['incidentId'])
+                LOG.info(u"Incident was found in Resilient with sdlp_incident_id %s field. SDLP Incident will not be imported into Resilient", incident['incidentId'])
         LOG.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
