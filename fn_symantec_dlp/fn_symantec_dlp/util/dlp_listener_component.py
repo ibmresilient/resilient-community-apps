@@ -69,10 +69,12 @@ class DLPListener(ResilientComponent):
             # The rest_client function returns a 'connected' instance of SimpleClient, so if the session is still valid, reuse that.
             self.res_rest_client = ResilientComponent.rest_client(self)
         
-        LOG.info("Number of Incidents after filtering: %d", len(incidents))
+        LOG.info("Number of Incidents after filtering out any Incident which has a value for the `resilient_incident_id` custom attribute: %d", len(incidents))
         # Get the sdlp_incident_id field
         sdlp_id_type = self.res_rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
-
+        # Log a info message if sdlp_should_search_res is not set 
+        if not self.should_search_res:
+            LOG.info("sdlp_should_search_res app.config value is False or not set. Duplicate Resilient Incidents may be created if the poller cannot update the DLP Incident with its new corresponding Resilient ID.")
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
             if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
