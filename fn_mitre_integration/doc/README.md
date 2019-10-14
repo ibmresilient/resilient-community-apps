@@ -34,8 +34,10 @@
 <!--
   List the Key Features of the Integration
 -->
-* Query tactics/techniques by name or id
-* Queries all of MITRE ATT&CK collections
+The Mitre integration package provides the following features:
+
+* Query tactics/techniques by name or ID
+* Query all of MITRE ATT&CK collections
 * Create a task from a queried technique that would include mitigation information
 * Query groups/software by technique
 * Query groups that use a set of techniques
@@ -43,9 +45,9 @@
 ---
 
 ## Function - MITRE Get Groups Using All Given Techniques
-For given Techniques return the Groups that are known to use all of them.
+For given Techniques, return the Groups that are known to use all of them.
 Techniques can be specified with a comma separated strings of IDs or Names.
-In case both are provided, the ID values will take precedence as names aren't guaranteed to be unique.
+In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
  ![screenshot: fn-mitre-get-groups-using-all-given-techniques ](./screenshots/fn-mitre-get-groups-using-all-given-techniques.png)
 
@@ -143,9 +145,9 @@ for group in groups_mitre:
 
 ---
 ## Function - MITRE Groups Using Given Techniques
-For each of the given Techniques finds all of the Groups using it.
+For each given Technique, find all of the Groups using it.
 Techniques can be specified with a comma separated strings of IDs or Names.
-In case both are provided, the ID values will take precedence as names aren't guaranteed to be unique.
+In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
  ![screenshot: fn-mitre-groups-using-given-techniques ](./screenshots/fn-mitre-groups-using-given-techniques.png)
 
@@ -240,8 +242,8 @@ for group in groups_mitre:
 ---
 ## Function - MITRE Tactic Information
 Get information about MITRE tactic.
-Tactics can be specified with a comma separated strings of IDs or Names.
-In case both are provided, the ID values will take precedence as names aren't guaranteed to be unique.
+Tactics can be specified with a comma separated string of IDs or Names.
+In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
  ![screenshot: fn-mitre-tactic-information ](./screenshots/fn-mitre-tactic-information.png)
 
@@ -404,7 +406,7 @@ for tactic in tactics:
 ---
 ## Function - MITRE Technique Information
 Get ATT&CK information about MITRE ATT&CK technique.
-In case both ID and name are provided, the ID value will take precedence as names aren't guaranteed to be unique.
+In case both ID and name are provided, the ID value takes precedence as names are not guaranteed to be unique.
 
  ![screenshot: fn-mitre-technique-information ](./screenshots/fn-mitre-technique-information.png)
 
@@ -516,8 +518,8 @@ for att_tech in att_techs:
 ---
 ## Function - MITRE Technique's Software
 Gets a list of Software used by each of the Techniques queried.
-Techniques can be specified with a comma separated strings of IDs or Names.
-In case both are provided, the ID values will take precedence as names aren't guaranteed to be unique.
+Techniques can be specified with comma separated strings of IDs or Names.
+In case both are provided, the ID values take precedence as names are not guaranteed to be unique.
 
  ![screenshot: fn-mitre-techniques-software ](./screenshots/fn-mitre-techniques-software.png)
 
@@ -619,6 +621,15 @@ for soft in software:
 ---
 
 ## Data Table - MITRE ATT&CK Groups
+This data table stores information about MITRE Groups.
+
+Each row has information about one Group. 
+
+Name and ID in each row are also hyper links to MITRE page for the presented group. 
+
+"Technique" column reflects the technique that was used to query Group's information.
+Multiple IDs in the column it mean that the Group was found by
+querying Groups that are known to use all of the given Techniques.
 
  ![screenshot: dt-mitre-attck-groups](./screenshots/dt-mitre-attck-groups.png)
 
@@ -636,6 +647,11 @@ mitre_attack_groups
 
 ---
 ## Data Table - MITRE ATT&CK Tactics
+This data table stores information about MITRE Tactics.
+
+Each row has information about one Tactic.
+
+Column "confidence" is used by QRAW.
 
  ![screenshot: dt-mitre-attck-tactics](./screenshots/dt-mitre-attck-tactics.png)
 
@@ -653,6 +669,12 @@ mitre_attack_of_incident
 
 ---
 ## Data Table - MITRE ATT&CK Software
+This data table stores information about MITRE Software.
+
+Each row has information about one tool. Name and ID in each row are also hyper links
+to MITRE page for the presented software.  
+
+"Technique" column reflects the Technique used to query the Software in the row.
 
  ![screenshot: dt-mitre-attck-software](./screenshots/dt-mitre-attck-software.png)
 
@@ -671,6 +693,10 @@ mitre_attack_software
 
 ---
 ## Data Table - MITRE ATT&CK Techniques
+This data table stores information about MITRE Techniques.
+
+Not all information provided by the function querying Techniques is used for the sake of clarity.
+Mitigations can be found by creating a task from the row.
 
  ![screenshot: dt-mitre-attck-techniques](./screenshots/dt-mitre-attck-techniques.png)
 

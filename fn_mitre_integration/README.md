@@ -30,15 +30,14 @@
   notes of a previous release
 -->
 ### v2.0
-- Added customizations allowing to find groups that use all of the techniques given
-- Added customizations allowing to find groups for each of the techniques given
-- Added Workflow/Rule/Data table to get software used by a technique/techniques
-- Added support for all of the MITRE's collections
-- New column `Collection` was added to technique and tactic data tables 
-to specify what collection the technique/task comes from.
-- Data returned by the functions has a different format - `pre-processing` and `post-processing` scripts
+- Added customizations that find groups using all of the given techniques.
+- Added customizations that find groups for each of the given techniques.
+- Added a workflow, rule and data table to get software used by one or more techniques.
+- Added support for all of the MITRE's collections.
+- Added a Collection column to the technique and tactic data tables that specify the technique or task’s collection.
+- Data returned by the functions has a different format; the `pre-process` and `post-process` scripts
 have examples of what the data looks like.
-- Added Activity Fields to the Rules
+- Added Activity Fields to the rules.
 
 ### v1.0
 - Initial release
@@ -55,9 +54,9 @@ have examples of what the data looks like.
 MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. 
 This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
 MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a 
-tactic or technique has been identified. This information can help security analyst response quickly to a (potential) breach. 
+tactic or technique has been identified. This information can help security analysts respond quickly to a (potential) breach. 
 
-It comes with a set of customizations allowing to query MITRE ATT&CK for
+It comes with a set of customizations that query MITRE ATT&CK for the following:
 - Techniques
 - Tactics
 - Software used in techniques
@@ -110,7 +109,7 @@ It comes with a set of customizations allowing to query MITRE ATT&CK for
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+* Import the Data Tables and Custom Fields as shown in the following screenshot:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -129,15 +128,14 @@ It comes with a set of customizations allowing to query MITRE ATT&CK for
 There are several ways to verify the successful operation of a function.
 
 ### Resilient Action Status
-* When viewing an incident, use the Actions menu to view **Action Status**.
-* By default, pending and errors are displayed.
-* Modify the filter for actions to also show Completed actions.
-* Clicking on an action displays additional information on the progress made or what error occurred.
+* When viewing an incident, use the Actions menu to view Action Status. 
+By default, pending and errors are displayed.
+* Modify the filter for actions to also show Completed actions. 
+Clicking on an action displays additional information on the progress made or what error occurred. 
 
 ### Resilient Scripting Log
-* A separate log file is available to review scripting errors.
-* This is useful when issues occur in the pre-processing or post-processing scripts.
-* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
+* A separate log file is available to review scripting errors. This is useful when issues occur in the pre-processing or post-processing scripts.
+* The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`. 
 
 ### Resilient Logs
 * By default, Resilient logs are retained at `/usr/share/co3/logs`.
@@ -146,8 +144,8 @@ There are several ways to verify the successful operation of a function.
 ### Resilient-Circuits
 * The log is controlled in the `.resilient/app.config` file under the section [resilient] and the property `logdir`.
 * The default file name is `app.log`.
-* Each function will create progress information.
-* Failures will show up as errors and may contain python trace statements.
+* Each function creates progress information. 
+* Failures show up as errors and may contain python trace statements. 
 
 ---
 
