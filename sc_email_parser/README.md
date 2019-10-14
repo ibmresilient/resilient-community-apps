@@ -19,7 +19,7 @@ Before installing, verify that your environment meets the following prerequisite
 8. Select **Proceed**.
 
 ### Result
-After installing from **RuleAndScript.res**, the Resilient platform will have a new Python script called "Generic email script v2.0" and a new rule called "Process email message v2.0". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
+After installing from **RuleAndScript.res**, the Resilient platform will have a new Python script called "Generic email script v2.0.1" and a new rule called "Process email message v2.0.1". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
 
 The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
 * Checks if an existing incident exists whose title reflects the email message received.
