@@ -32,49 +32,49 @@
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
 
-The ProofPoint Trap function package provides the following features:
+The ProofPoint TRAP function package provides the following features:
 * Poll a Proofpoint TRAP server for incidents and create corresponding incidents in the Resilient platform.
 * Get Proofpoint TRAP incident details.
-* Get a Proofpoint Trap list member or members.
-* Add a member to a Proofpoint Trap list for artifacts of type host, IP address, or URL to a list.
-* Update a member of a Proofpoint Trap list. 
-* Delete a member from of a Proofpoint Trap list.  
+* Get a Proofpoint TRAP list member or members.
+* Add a member to a Proofpoint TRAP list for artifacts of type host, IP address, or URL.
+* Update a member of a Proofpoint TRAP list. 
+* Delete a member from a Proofpoint TRAP list.  
 
 ---
 
 # Poller:
 
 Threaded Poller which runs continuously while the integration is running.
-* Polls a Proofpoint TRAP server for incidents and create corresponding incidents in the Resilient platform.
-* Adds Proofpoint Trap events to incident data table `Proofpoint TRAP Events` in the Resilient platform.
+* Polls a Proofpoint TRAP server for incidents and creates corresponding incidents in the Resilient platform.
+* Adds Proofpoint TRAP events to incident data table `Proofpoint TRAP Events` in the Resilient platform.
 * Adds artifacts to incidents in the Resilient platform corresponding to hosts artifacts in Proofpoint TRAP incident events. The actual artifacts added are determined by the `host_categories` configuration option. 
 * Adds a note with Proofpoint TRAP events details to an incident in the Resilient platform.
 
 #### Example incident created by the poller:
 
- ![screenshot: fn-proofpoint-trap-get-incident-details ](./screenshots/fn-proofpoint-trap-incident-details.png)
+   ![screenshot: fn-proofpoint-trap-get-incident-details ](./screenshots/fn-proofpoint-trap-incident-details.png)
 
 #### Examples of incident artifacts created by the poller:
 
- ![screenshot: fn-proofpoint-trap-get-incident-artifacts ](./screenshots/fn-proofpoint-trap-incident-artifacts.png)
+   ![screenshot: fn-proofpoint-trap-get-incident-artifacts ](./screenshots/fn-proofpoint-trap-incident-artifacts.png)
 
 ---
 
 # Functions:
 ## Function - Proofpoint TRAP: Get Incident Details
-Fetch Incident Details from Proofpoint Trap.
-* Adds a note to the Resilient incident with ProofPoint Trap incident details.
-* Provides an example workflow which uses this Resilient Function, `Example: Proofpoint Trap: Get Incident Details`. 
+Fetch Incident Details from Proofpoint TRAP.
+* Adds a note to the Resilient incident with ProofPoint TRAP incident details.
+* Provides an example workflow which uses this Resilient Function, `Example: Proofpoint TRAP: Get Incident Details`. 
 
-The workflow is initiated by the incident rule, `Example: Proofpoint Trap: Get Incident Details`.
+The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Get Incident Details`.
 
-1. Open an incident and select `Example: Proofpoint Trap: Get Incident Details` from Actions.
+1. Open an incident and select `Example: Proofpoint TRAP: Get Incident Details` from Actions.
 
-    ![screenshot: fn-proofpoint-trap-incident-details-action ](./screenshots/fn-proofpoint-trap-incident-details-action.png)
+   ![screenshot: fn-proofpoint-trap-incident-details-action ](./screenshots/fn-proofpoint-trap-incident-details-action.png)
 
-2. Click Action-> Example: Proofpoint Trap: Get Incident Details. A note is added to the incident with the incident details in JSON format.  
+2. Click Action-> Example: Proofpoint TRAP: Get Incident Details. A note is added to the incident with the incident details in JSON format.  
 
-This invokes the `Example: Proofpoint Trap: Get Incident Details` workflow, which calls the `Proofpoint TRAP: Get Incident Details` function.
+This invokes the `Example: Proofpoint TRAP: Get Incident Details` workflow, which calls the `Proofpoint TRAP: Get Incident Details` function.
 
 
 <details><summary>Inputs:</summary>
@@ -127,8 +127,9 @@ incident.addNote(helper.createRichText(note))
 ---
 
 ## Function - Proofpoint TRAP: Get List Members
-Get member or members of a Proofpoint Trap list.
-* Adds Proofpoint Trap list members to incident data table `Proofpoint TRAP List Members` in the Resilient platform.
+Get member or members of a Proofpoint TRAP list.
+* Retrives all the members of a Proofpoint TRAP list. Lists can be host list, url list, user list, or file list.
+* Adds Proofpoint TRAP list members to incident data table `Proofpoint TRAP List Members` in the Resilient platform.
 * Example workflows which use this Resilient Function include `Example: Proofpoint TRAP: Get List Members`.
 
 The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Get List Members`.
@@ -136,15 +137,16 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Get L
 
 1. Open an incident and select `Example: Proofpoint TRAP: Get List Members` from Actions.
 
-    ![screenshot: dt-proofpoint-trap-list-members-action ](./screenshots/dt-proofpoint-trap-list-members-action.png)
+   ![screenshot: dt-proofpoint-trap-list-members-action ](./screenshots/dt-proofpoint-trap-list-members-action.png)
 
 2.  Select a list ID from the displayed drop-down list and  click Execute.  
 
-    ![screenshot: dt-proofpoint-trap-list-members_2-action ](./screenshots/dt-proofpoint-trap-list-members_2-action.png)
+   ![screenshot: dt-proofpoint-trap-list-members_2-action ](./screenshots/dt-proofpoint-trap-list-members_2-action.png)
 
 This invokes the `Example: Proofpoint TRAP: Get List Members` workflow, which calls the `Proofpoint TRAP: Get List Members` function.
 The data table `Proofpoint TRAP List Members` will be updated in the Resilient platform with the member details for the selected list.  
-    ![screenshot: dt-proofpoint-trap-list-members-datatable](./screenshots/dt-proofpoint-trap-list-members-datatable.png)
+
+   ![screenshot: dt-proofpoint-trap-list-members-datatable](./screenshots/dt-proofpoint-trap-list-members-datatable.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -263,8 +265,8 @@ if __name__ == "__main__":
 ---
 
 ## Function - Proofpoint TRAP: Add Members to List
-Add host, IP address, or URL to a Proofpoint TRAP list. List can be host list, URL list, user list, or file list.
-* Adds a new member to a Proofpoint TRAP list.
+Add a member or members to a Proofpoint TRAP list.
+* Adds a new host, IP address, URL, user account or hash member to a Proofpoint TRAP list. List can be host list, URL list, user list, or file list.
 * Adds the new Proofpoint TRAP list member details to the incident data table `Proofpoint TRAP List Members` in the Resilient platform.
 * An example workflow that uses this Resilient Function includes `Example: Proofpoint TRAP: Add Member to List`. The workflow is applicable for Resilient artifact types: 'URL', 'User Account', 'DNS Name', 'IP Address', System Name', 'Malware SHA-256 Hash', 'Malware SHA-1 Hash' and 'Malware MD5 Hash'. 
 
@@ -273,16 +275,16 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Add M
 1. Open an incident and select the 'Artifacts' tab.
 2. For a Resilient artifact of an applicable type, such as 'IP Address,’ click Action-> `Example: Proofpoint TRAP: Add Member to List`.
 
-    ![screenshot: dt-proofpoint-trap-add-member-action ](./screenshots/dt-proofpoint-trap-add-member-action.png)
+   ![screenshot: dt-proofpoint-trap-add-member-action ](./screenshots/dt-proofpoint-trap-add-member-action.png)
 
 3. Select an input from a list of user defined inputs. For example, select Proofpoint TRAP list id 1 from the drop-down. 
 
-    ![screenshot: dt-proofpoint-trap-add-member_2-action ](./screenshots/dt-proofpoint-trap-add-member_2-action.png)
+   ![screenshot: dt-proofpoint-trap-add-member_2-action ](./screenshots/dt-proofpoint-trap-add-member_2-action.png)
 
-4.  Input values for the remainder of the fields and click Execute.  This invokes the Example: Proofpoint TRAP: Add Member to List workflow, which calls the `Proofpoint  TRAP: Add Members to List` function.  
+4.  Input values for the remainder of the fields and click Execute.  This invokes the `Example: Proofpoint TRAP: Add Member to List` workflow, which calls the `Proofpoint  TRAP: Add Members to List` function.  
 
 The data table `Proofpoint TRAP List Members`, is updated in the Resilient platform with the member details for the selected list. 
-    ![screenshot: dt-proofpoint-trap-add-member-datatable](./screenshots/dt-proofpoint-trap-add-member-datatable.png)
+   ![screenshot: dt-proofpoint-trap-add-member-datatable](./screenshots/dt-proofpoint-trap-add-member-datatable.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -405,8 +407,8 @@ if __name__ == "__main__":
 
 ---
 ## Function - Proofpoint TRAP: Update List Member
-Update the member of a list by specifying the list and the member to update.
-* Updates an existing member of a Proofpoint TRAP list.
+Update a member of a Proofpoint TRAP list.
+* Updates an existing member of a Proofpoint TRAP list by specifying the list and the member to update.
 * Refreshes Proofpoint TRAP list member details for the incident data table `Proofpoint TRAP List Members` in the Resilient platform.
 * An example workflow that uses this Resilient Function includes `Example: Proofpoint TRAP: Update List Member`.
 * The workflow is applicable for populated rows of incident data table `Proofpoint TRAP List Members` in the Resilient platform.
@@ -416,16 +418,16 @@ The workflow is initiated by the data table rule, `Example: Proofpoint TRAP: Upd
 1. Open an incident and select the row of data table `Proofpoint TRAP List Members`corresponding to the list member to update.
 2. From the selected row’s actions menu, select `Example: Proofpoint TRAP: Update List Member`.
 
-    ![screenshot: dt-proofpoint-trap-update-member-action ](./screenshots/dt-proofpoint-trap-update-member-action.png)
+   ![screenshot: dt-proofpoint-trap-update-member-action ](./screenshots/dt-proofpoint-trap-update-member-action.png)
 
 3. In the list of user defined inputs, enter values for the displayed fields and click Execute.
 
-    ![screenshot: dt-proofpoint-trap-update-member_2-action ](./screenshots/dt-proofpoint-trap-update-member_2-action.png)
+   ![screenshot: dt-proofpoint-trap-update-member_2-action ](./screenshots/dt-proofpoint-trap-update-member_2-action.png)
 
 This invokes the `Example: Proofpoint TRAP: Update List Member` workflow, which calls the `Proofpoint TRAP: Update List Member` function.
 The data table `Proofpoint TRAP List Members` is refreshed in the Resilient platform with the updated member details for the selected list.
 
-    ![screenshot: dt-proofpoint-trap-update-member-datatable](./screenshots/dt-proofpoint-trap-update-member-datatable.png)
+   ![screenshot: dt-proofpoint-trap-update-member-datatable](./screenshots/dt-proofpoint-trap-update-member-datatable.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -547,8 +549,8 @@ if __name__ == "__main__":
 
 ---
 ## Function - Proofpoint TRAP: Delete List Member
-Delete the member of a list.
-* Deletes a member of a Proofpoint TRAP list.
+Delete the member of a Proofpoint TRAP list.
+* Deletes a member of a Proofpoint TRAP list by specifying the list and the member to update.
 * Updates the deleted Proofpoint TRAP list member details for the selected incident data table `Proofpoint TRAP List Members` row in the Resilient platform.
 * An example workflow that uses this Resilient Function includes `Example: Proofpoint TRAP: Delete List Member`.
 * The workflow is applicable for incident data table `Proofpoint TRAP List Members` populated rows in the Resilient platform.
@@ -558,13 +560,13 @@ The workflow is initiated by the data table rule, `Example: Proofpoint TRAP: Del
 1. Open an incident and select the row of data table `Proofpoint TRAP List Members`corresponding to the list member to delete.
 2. From the selected row’s actions menu, select `Example: Proofpoint TRAP: Delete List Member`.
 
-    ![screenshot: dt-proofpoint-trap-delete-member-action ](./screenshots/dt-proofpoint-trap-delete-member-action.png)
+   ![screenshot: dt-proofpoint-trap-delete-member-action ](./screenshots/dt-proofpoint-trap-delete-member-action.png)
 
 3. Click on the action to execute. This invokes the `Example: Proofpoint TRAP: Delete List Member` workflow, which calls the `Proofpoint TRAP: Delete List Member` function.
 
 The data table `Proofpoint TRAP List Members` will be refreshed in the Resilient platform for the deleted member with `Status` set to `Deleted`.
-
-    ![screenshot: dt-proofpoint-trap-delete-member-datatable](./screenshots/dt-proofpoint-trap-delete-member-datatable.png)
+   
+   ![screenshot: dt-proofpoint-trap-delete-member-datatable](./screenshots/dt-proofpoint-trap-delete-member-datatable.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -661,7 +663,7 @@ if __name__ == "__main__":
 ## Data Table - Proofpoint TRAP Events
 This data table is populated by the `poller` for each Resilient incident and has an entry for each event detected in the corresponding Proofpoint incident.
  
- ![screenshot: dt-proofpoint-trap-events](./screenshots/dt-proofpoint-trap-events.png)
+   ![screenshot: dt-proofpoint-trap-events](./screenshots/dt-proofpoint-trap-events.png)
 
 #### API Name:
 proofpoint_trap_events
@@ -685,7 +687,7 @@ This data table is typically initiallly populated by a workflow using the Functi
 
 The data table is also updated by functions `Proofpoint TRAP: Add Members to List`, `Proofpoint TRAP: Update List Member` and `Proofpoint TRAP: Delete List Member`.
 
- ![screenshot: dt-proofpoint-trap-list-members-datatable](./screenshots/dt-proofpoint-trap-list-members-datatable.png)
+   ![screenshot: dt-proofpoint-trap-list-members-datatable](./screenshots/dt-proofpoint-trap-list-members-datatable.png)
 
 #### API Name:
 trap_list_members
@@ -717,7 +719,7 @@ trap_list_members
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: Proofpoint Trap: Get Incident Details | incident | `wf_proofpoint_trap_get_incident_details` |
+| Example: Proofpoint TRAP: Get Incident Details | incident | `wf_proofpoint_trap_get_incident_details` |
 | Example: Proofpoint TRAP: Get List Members | incident | `wf_proofpoint_trap_get_list_members` |
 | Example: Proofpoint TRAP: Add Member to List | artifact | `wf_proofpoint_trap_add_member_to_list` |
 | Example: Proofpoint TRAP: Update List Member | trap_list_members | `wf_proofpoint_trap_update_list_member` |
