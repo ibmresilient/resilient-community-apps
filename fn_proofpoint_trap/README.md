@@ -42,13 +42,13 @@
 
 Proofpoint Threat Response Auto-Pull (TRAP) enables messaging and security administrators to analyze emails and move malicious or unwanted emails to quarantine, after delivery. It follows forwarded mail and distribution lists, and creates an auditable activity trail.
 
-The ProofPoint Trap function package provides the following features:
+The ProofPoint TRAP function package provides the following features:
 * Poll a Proofpoint TRAP server for incidents and create corresponding incidents in the Resilient platform.
 * Get Proofpoint TRAP incident details.
-* Get a Proofpoint Trap list member or members.
-* Add a member to a Proofpoint Trap list for artifacts of type host, IP address, or URL to a list.
-* Update a member of a Proofpoint Trap list. 
-* Delete a member from of a Proofpoint Trap list.  
+* Get a Proofpoint TRAP list member or members.
+* Add a member to a Proofpoint TRAP list for artifacts of type host, IP address, or URL.
+* Update a member of a Proofpoint TRAP list. 
+* Delete a member from a Proofpoint TRAP list.  
 
 ---
 
