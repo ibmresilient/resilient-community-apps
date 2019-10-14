@@ -74,7 +74,11 @@ For each, it will create a row in the corresponding data table for MITRE softwar
             for technique in techniques:
                 software.extend(mitre_attack.MitreAttackSoftware.get_by_technique(mitre_conn, technique))
 
-            yield StatusMessage("Done. Returning results")
+            if len(software) == 0:
+                yield StatusMessage("No software was found for the given techniques. Done.")
+            else:
+                yield StatusMessage("Done. Returning results.")
+
             software = [x.dict_form() for x in software]  # prepare the data for viewing
             results = {
                 "mitre_software": software

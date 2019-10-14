@@ -69,7 +69,11 @@ class FunctionComponent(ResilientComponent):
             for technique in techniques:
                 groups.extend(mitre_attack.MitreAttackGroup.get_by_technique(mitre_conn, technique))
 
-            yield StatusMessage("Done. Returning results")
+            if len(groups) == 0:
+                yield StatusMessage("No groups were found using any of the given techniques. Done.")
+            else:
+                yield StatusMessage("Done. Returning results.")
+
             groups = [x.dict_form() for x in groups]  # prepare the data for viewing
 
             results = {
