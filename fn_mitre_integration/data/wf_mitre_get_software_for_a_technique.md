@@ -19,6 +19,11 @@
 
 ### Pre-Processing Script
 ```python
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
 incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
 

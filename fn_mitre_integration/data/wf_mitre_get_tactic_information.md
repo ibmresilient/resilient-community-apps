@@ -19,8 +19,11 @@
 
 ### Pre-Processing Script
 ```python
-# if at least one activity field is given discard the inputs
-# this is to avoid situation where rule has name and activity has id for different tactics, which can lead to unexpected output
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_tactic_name or rule.properties.mitre_tactic_id
 incident_propery_given = incident.properties.mitre_tactic_id or incident.properties.mitre_tactic_name
 
@@ -30,7 +33,6 @@ if activity_field_given:
 elif incident_propery_given:
   inputs.mitre_tactic_name = incident.properties.mitre_tactic_name
   inputs.mitre_tactic_id = incident.properties.mitre_tactic_id
-# else, just keep the function input
 ```
 
 ### Post-Processing Script

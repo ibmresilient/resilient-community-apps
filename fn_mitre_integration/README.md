@@ -52,8 +52,6 @@ have examples of what the data looks like.
 -->
 **Resilient Circuits Components for 'fn_mitre_integration**
 
- ![screenshot: main](./doc/screenshots/main.png)
-
 MITRE’s TAXII<sup>TM</sup> 2.0 Server provides Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK or ATTACK) content. 
 This content is critical for cyber security industry in order to make a holistic approach to detection and mitigation of Advanced Persistent Threats (APTs). 
 MITRE Integration Function enables Resilient users to gather ATT&CK information on cyber intrusion once a 
@@ -66,7 +64,6 @@ It comes with a set of customizations allowing to query MITRE ATT&CK for
 - Groups using techniques
 - Groups that use a specific set of techniques
 - Mitigations
-
 ---
 
 ## Requirements

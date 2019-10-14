@@ -86,6 +86,11 @@ Content part of ResultPayload:
 <p>
 
 ```python
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
 incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
 
@@ -181,6 +186,11 @@ Content of ResultPayload:
 <p>
 
 ```python
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
 incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
 
@@ -280,8 +290,11 @@ results = {
 <p>
 
 ```python
-# if at least one activity field is given discard the inputs
-# this is to avoid situation where rule has name and activity has id for different tactics, which can lead to unexpected output
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_tactic_name or rule.properties.mitre_tactic_id
 incident_propery_given = incident.properties.mitre_tactic_id or incident.properties.mitre_tactic_name
 
@@ -291,7 +304,6 @@ if activity_field_given:
 elif incident_propery_given:
   inputs.mitre_tactic_name = incident.properties.mitre_tactic_name
   inputs.mitre_tactic_id = incident.properties.mitre_tactic_id
-# else, just keep the function input
 ```
 
 </p>
@@ -415,14 +427,16 @@ In case both ID and name are provided, the ID value will take precedence as name
 Content in ResultPayload
 {
   "mitre_techniques": [
-    {
-      "name": "String", 
-      "description": "String",
-      "external_references": [{"url": "String"}],
-      "x_mitre_detection": "String",
-      "id": "String",
-      "collection": "String"
-    }
+        {
+            "name": "Name of the technique",
+            "description": "Description of the technique",
+            "external_references": ["url1", "url2"],
+            "x_mitre_detection": "Detection procedure",
+            "id": :"Technique's ID",
+            "collection": "Collection that the technique belongs to",
+            "mitre_mitigations": [] or ["mitigations"],
+            "tactic": "Tactic Name" or None
+        }
   ]
 }
 ```
@@ -435,8 +449,24 @@ Content in ResultPayload
 <p>
 
 ```python
-inputs.mitre_technique_id = row.technique_id
-inputs.mitre_technique_name = row.technique_name
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
+# Except mitre_technique_mitigation_only which checks Activity Field and then Function input
+
+activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
+incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
+
+if activity_field_given:
+  inputs.mitre_technique_name = rule.properties.mitre_technique_name
+  inputs.mitre_technique_id = rule.properties.mitre_technique_id
+elif incident_properties_given:
+  inputs.mitre_technique_id = incident.properties.mitre_technique_id
+  inputs.mitre_technique_name = incident.properties.mitre_technique_name
+
+inputs.mitre_technique_mitigation_only = rule.properties.mitre_technique_mitigation_only if rule.properties.mitre_technique_mitigation_only is not None else inputs.mitre_technique_mitigation_only
 ```
 
 </p>
@@ -446,37 +476,38 @@ inputs.mitre_technique_name = row.technique_name
 <p>
 
 ```python
-""" An example of returned data in ResultPayload. Whether it's queried by id or name a list will be returned.
-{
-  "mitre_techniques": [
-    {
-      "name": "String", 
-      "description": "String",
-      "external_references": [{"url": "String"}],
-      "x_mitre_detection": "String",
-      "id": "String",
-      "collection": "String"
-    }
-  ]
-}
+"""
+Content in the ResultPayload:
+        {
+            "name": "Name of the technique",
+            "description": "Description of the technique",
+            "external_references": ["url1", "url2"],
+            "x_mitre_detection": "Detection procedure",
+            "id": :"Technique's ID",
+            "collection": "Collection that the technique belongs to",
+            "mitre_mitigations": [] or ["mitigations"],
+            "tactic": "Tactic Name" or None
+        }
 """
 
-techniques = results.content["mitre_techniques"]
+att_techs = results.content["mitre_techniques"]
 
-if not isinstance(techniques, list):
-  techniques = [techniques]
+if not isinstance(att_techs, list):
+  att_techs = [att_techs]
 
-for technique in techniques:
-  task_title = "MITRE ATT&CK Technique: " + technique["name"]
-  task_summary=u"""
-  <h1> Description </h1>
-  {des}
-  <h1> Detection </h1>
-  {det}
-  <h1> Mitigation </h1>
-  {miti}
-  """.format(des=technique.get("description", ""), det=technique.get("x_mitre_detection", ""), miti=technique.get("mitre_mitigation",""))
-  incident.addTask(task_title, "Detect/Analyze", helper.createRichText(task_summary))
+for att_tech in att_techs:
+  tech_row = incident.addRow("mitre_attack_techniques")
+  tech_row["collection"] = att_tech.get("collection", "")
+  tech_row["tactic"] = att_tech.get("tactic", "")
+  tech_row["technique_name"] = att_tech["name"]
+  tech_row["technique_description"] = helper.createRichText(att_tech["description"])
+  refs = att_tech["external_references"]
+  ref_html = ""
+  for ref in refs:
+    ref_html = ref_html + '<a href="' + ref["url"] + '">' + ref["url"] + '</a><br>'
+  tech_row["references"] = helper.createRichText(ref_html)
+  tech_row["detection"] = helper.createRichText(att_tech["x_mitre_detection"])
+  tech_row["technique_id"] = att_tech["id"]
 ```
 
 </p>
@@ -527,6 +558,11 @@ In case both are provided, the ID values will take precedence as names aren't gu
 <p>
 
 ```python
+# The priority order of inputs is:
+# 1. Values entered in the Activity Field pop-up
+# 2. Values in the Input Fields added to the layout
+# 3. Inputs in the function's workflow
+
 activity_field_given = rule.properties.mitre_technique_id or rule.properties.mitre_technique_name
 incident_properties_given = incident.properties.mitre_technique_name or incident.properties.mitre_technique_id
 
@@ -592,11 +628,11 @@ mitre_attack_groups
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Aliases | `groups_aliases` | `text` | Known aliases for the Group |
-| Description | `groups_description` | `textarea` | - |
-| ID | `groups_id` | `textarea` | MITRE ID for the Group |
-| Name | `groups_name` | `textarea` | Name of the Group |
-| Technique | `groups_technique` | `text` | Technique(s) that the group was queried by. |
+| Group Aliases | `groups_aliases` | `text` | Known aliases for the Group |
+| Group Description | `groups_description` | `textarea` | - |
+| Group ID | `groups_id` | `textarea` | MITRE ID for the Group |
+| Group Name | `groups_name` | `textarea` | Name of the Group |
+| Technique ID | `groups_technique` | `text` | Technique(s) that the group was queried by. |
 
 ---
 ## Data Table - MITRE ATT&CK Tactics
@@ -609,11 +645,11 @@ mitre_attack_of_incident
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| ATT&CK Tactic | `attack_tactic` | `text` | Tactic's name in MITRE |
-| Collection | `collection` | `text` | Collection/Domain in MITRE that the Tactic comes from |
+| Tactic Name | `attack_tactic` | `text` | Tactic's name in MITRE |
+| MITRE Collection | `collection` | `text` | Collection/Domain in MITRE that the Tactic comes from |
 | Confidence | `confidence` | `text` | Confidence of the mapping |
-| Reference | `reference` | `textarea` | url links for MITRE ATT&CK Tactic |
-| Tactic Code | `tactic_code` | `text` | Tactic's ID in MITRE |
+| Tactic Reference | `reference` | `textarea` | url links for MITRE ATT&CK Tactic |
+| Tactic ID | `tactic_code` | `text` | Tactic's ID in MITRE |
 
 ---
 ## Data Table - MITRE ATT&CK Software
@@ -626,12 +662,12 @@ mitre_attack_software
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Description | `software_description` | `textarea` | - |
-| ID | `software_id` | `textarea` | Software's ID in MITRE ATT&CK |
-| Name | `software_name` | `textarea` | Name of the software |
-| Platform | `software_platform` | `text` | Platform where the software can be used |
-| Technique | `software_technique` | `text` | MITRE ID of the technique queried for the list of software |
-| Type | `software_type` | `text` | Category for this software in ATT&CK |
+| Software Description | `software_description` | `textarea` | - |
+| Software ID | `software_id` | `textarea` | Software's ID in MITRE ATT&CK |
+| Software Name | `software_name` | `textarea` | Name of the software |
+| Software Platform | `software_platform` | `text` | Platform where the software can be used |
+| Technique ID | `software_technique` | `text` | MITRE ID of the technique queried for the list of software |
+| Software Type | `software_type` | `text` | Category for this software in ATT&CK |
 
 ---
 ## Data Table - MITRE ATT&CK Techniques
@@ -644,21 +680,21 @@ mitre_attack_techniques
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Collection | `collection` | `text` | Domain/Collection in MITRE that the Technique comes from |
-| Detection | `detection` | `text` | Detection of MITRE ATT&CK Technique  |
-| References | `references` | `textarea` | url references for MITRE ATT&CK Technique |
-| Tactic | `tactic` | `text` | MITRE ATT&CK Tactic name |
-| Description | `technique_description` | `text` | Description of MITRE ATT&CK Technique |
-| Technique id | `technique_id` | `text` | MITRE ATT&CK Technique ID |
-| Technique name | `technique_name` | `text` | MITRE ATT&CK Technique name |
+| MITRE Collection | `collection` | `text` | Domain/Collection in MITRE that the Technique comes from |
+| Technique Detection | `detection` | `text` | Detection of MITRE ATT&CK Technique  |
+| Technique References | `references` | `textarea` | url references for MITRE ATT&CK Technique |
+| Tactic Name | `tactic` | `text` | MITRE ATT&CK Tactic name |
+| Technique Description | `technique_description` | `text` | Description of MITRE ATT&CK Technique |
+| Technique ID | `technique_id` | `text` | MITRE ATT&CK Technique ID |
+| Technique Name | `technique_name` | `text` | MITRE ATT&CK Technique name |
 
 ---
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| MITRE ATT&CK Technique ID | `mitre_technique_id` | `text` | `properties` | - | MITRE ID for technique |
 | MITRE ATT&CK Tactic ID | `mitre_tactic_id` | `text` | `properties` | - | MITRE ID for Tactic |
+| MITRE ATT&CK Technique ID | `mitre_technique_id` | `text` | `properties` | - | MITRE ID for technique |
 | MITRE ATT&CK Tactic name | `mitre_tactic_name` | `text` | `properties` | MITRE tactic name | MITRE ATT&CK Tactic name |
 | MITRE ATT&CK Technique name | `mitre_technique_name` | `text` | `properties` | MITRE technique name | MITRE ATT&CK Technique name |
 
@@ -668,12 +704,12 @@ mitre_attack_techniques
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Create Task for MITRE ATT&CK technique | mitre_attack_techniques | `mitre_technique_task` |
-| Get MITRE Groups per Technique | incident | `mitre_get_groups_using_techniques` |
-| Get MITRE Groups using all Techniques | incident | `mitre_get_groups_using_all_techniques` |
-| Get MITRE tactic information | incident | `mitre_get_tactic_information` |
-| Get MITRE technique information | incident | `mitre_get_technique_information` |
-| Get MITRE technique's software | incident | `mitre_get_software_for_a_technique` |
+| MITRE: Create Task for ATT&CK Technique | mitre_attack_techniques | `mitre_technique_task` |
+| MITRE: Get Groups per Technique | incident | `mitre_get_groups_using_techniques` |
+| MITRE: Get Groups using all Techniques | incident | `mitre_get_groups_using_all_techniques` |
+| MITRE: Get Tactic information | incident | `mitre_get_tactic_information` |
+| MITRE: Get Technique information | incident | `mitre_get_technique_information` |
+| MITRE: Get Technique's Software | incident | `mitre_get_software_for_a_technique` |
 
 ---
 
