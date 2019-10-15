@@ -34,7 +34,16 @@ inputs.mitre_technique_name = row.technique_name
       "external_references": [{"url": "String"}],
       "x_mitre_detection": "String",
       "id": "String",
-      "collection": "String"
+      "collection": "String",
+      "tactic": "String",
+      "mitre_mitigations": [
+        {
+          "name": "String",
+          "description": "String",
+          "id": "String",
+          "collection": "String"
+        }
+      ]
     }
   ]
 }
@@ -47,6 +56,19 @@ if not isinstance(techniques, list):
 
 for technique in techniques:
   task_title = "MITRE ATT&CK Technique: " + technique["name"]
+  
+  mitigations = technique.get("mitre_mitigations", None)
+  if not mitigations:
+    mitigation_text = "No mitigations found"
+  else:
+    mitigation_text = []
+    for mitigation in mitigations:
+      mitigation_text.append(u"""
+      <h3>{0}</h3>
+      <p>{1}</p>
+      """.format(mitigation["name"], mitigation["description"]))
+    mitigation_text = "".join(mitigation_text)
+  
   task_summary=u"""
   <h1> Description </h1>
   {des}
@@ -54,7 +76,7 @@ for technique in techniques:
   {det}
   <h1> Mitigation </h1>
   {miti}
-  """.format(des=technique.get("description", ""), det=technique.get("x_mitre_detection", ""), miti=technique.get("mitre_mitigation",""))
+  """.format(des=technique.get("description", ""), det=technique.get("x_mitre_detection", ""), miti=mitigation_text)
   incident.addTask(task_title, "Detect/Analyze", helper.createRichText(task_summary))
 ```
 

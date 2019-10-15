@@ -50,7 +50,14 @@ Content in the ResultPayload:
             "x_mitre_detection": "Detection procedure",
             "id": :"Technique's ID",
             "collection": "Collection that the technique belongs to",
-            "mitre_mitigations": [] or ["mitigations"],
+            "mitre_mitigations": [
+              {
+                "name": "String",
+                "description": "String",
+                "id": "String",
+                "collection": "String"
+              }
+            ],
             "tactic": "Tactic Name" or None
         }
 """
