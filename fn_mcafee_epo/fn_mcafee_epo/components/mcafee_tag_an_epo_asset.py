@@ -5,7 +5,10 @@
 
 import logging
 import requests
-from urlparse import urljoin
+try:
+    from urlparse import urljoin
+except:
+    from urllib.parse import urljoin
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 LOG = logging.getLogger(__name__)
