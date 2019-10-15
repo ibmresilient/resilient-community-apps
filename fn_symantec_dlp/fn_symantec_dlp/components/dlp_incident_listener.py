@@ -16,6 +16,8 @@ from resilient_circuits import ResilientComponent
 from resilient_lib import str_to_bool
 
 from fn_symantec_dlp.util.dlp_listener_component import DLPListener
+from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
+
 
 
 LOG = logging.getLogger(__name__)
@@ -57,9 +59,9 @@ class FunctionComponent(ResilientComponent):
             self.options = opts.get("fn_symantec_dlp", {})
             # Toggle the shared class_vars_loaded so the init of DLPSoapClient isin't skipped
             self.dlp_listener.soap_client.class_vars_loaded = False 
-            # Reinit the Listener class which will reinit the SoapClient
-            self.dlp_listener = DLPListener(opts)
-            # Once here, the Listener should be reloaded and the Timer component should not need re-registration
+            # Reinit the DLPSoapClient class
+            DLPSoapClient.__init__(self.dlp_listener.soap_client, app_configs=self.options)
+            # Once here, the SoapClient should be reloaded and the Timer component on the next iteration will make calls with the new details
 
 
     def setup_listener(self):

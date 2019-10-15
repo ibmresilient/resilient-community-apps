@@ -74,7 +74,7 @@ class DLPListener(ResilientComponent):
         sdlp_id_type = self.res_rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
         # Log a info message if sdlp_should_search_res is not set 
         if not self.should_search_res:
-            LOG.info("sdlp_should_search_res app.config value is False or not set. Duplicate Resilient Incidents may be created if the poller cannot update the DLP Incident with its new corresponding Resilient ID.")
+            LOG.info("sdlp_should_search_res app.config value is False or not set. Duplicate Resilient Incidents may be created if the poller cannot update the DLP Incident with its new corresponding Resilient ID or the Resilient ID in the SDLP incident has been removed")
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
             if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
