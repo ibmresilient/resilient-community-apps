@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
-from fn_mitre_integration.lib import mitre_attack
+from fn_mitre_integration.lib import mitre_attack, mitre_attack_utils
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mitre_groups_technique_intersection"""
@@ -47,33 +47,11 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Getting technique information...")
 
             mitre_conn = mitre_attack.MitreAttackConnection()
-            intersection_query = None  # ids of techniques that the groups intersect
 
-            if mitre_technique_id is not None:
-                # Try id first, because it's less ambiguous
-                intersection_query = mitre_technique_id
-                technique_ids = mitre_technique_id.split(',')
-                techniques = []
-                for t_id in technique_ids:
-                    technique = mitre_attack.MitreAttackTechnique.get_by_id(mitre_conn, t_id)
-                    if not technique:
-                        raise ValueError("Technique with id {} doesn't exist".format(t_id))
-                    techniques.extend(technique)  # create a list of lists to find the intersection
-            else:
-                intersection_query = []
-                # It's possible for multiple tactics to have the same name
-                # And we want to make sure that all of them are processed in that case
-                technique_names = mitre_technique_name.split(',')
-                techniques = []
-                for name in technique_names:
-                    technique = mitre_attack.MitreAttackTechnique.get_by_name(mitre_conn, name)
-                    if not technique:
-                        raise ValueError("Techniques with name {} don't exist".format(name))
-                    techniques.extend(technique)  # create a list of lists to find the intersection
+            techniques = mitre_attack_utils.get_multiple_techniques(mitre_conn, mitre_technique_ids=mitre_technique_id,
+                                                                    mitre_technique_names=mitre_technique_name)
 
-                    intersection_query.extend([t.id for t in technique])
-
-                intersection_query = ",".join(intersection_query)
+            intersection_query = ",".join([t.id for t in techniques])
 
             yield StatusMessage("Getting group intersection information...")
             groups = mitre_attack.MitreAttackGroup.get_by_technique_intersection(mitre_conn, techniques)

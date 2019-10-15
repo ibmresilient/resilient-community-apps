@@ -10,7 +10,7 @@ available to public, this file is a system level test
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, \
     MitreAttackMitigation, MitreAttackSoftware, MitreAttackGroup
-from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques
+from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques, get_multiple_techniques
 import requests
 import pytest
 import mock
@@ -155,6 +155,7 @@ class TestMitreTechnique(object):
         """
         techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Domain Generation Algorithms")
         assert any(x.description.startswith("Deprecated") for x in techniques)
+
 
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
@@ -363,3 +364,44 @@ class TestMitre(object):
 
             tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
             assert(tech[0].id == "T1205")
+
+
+class TestMitreUtilMultipleTechniques(object):
+    mitre_attack = MitreAttackConnection()
+
+    @pytest.fixture(autouse=True)
+    def set_up_mock_for_query(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            yield
+
+    def test_multiple_techniques_works_by_id(self):
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1213, T1483",
+                                             mitre_technique_names=None)
+        assert len(techniques) == 2
+
+    def test_multiple_techniques_works_by_name(self):
+        """
+        In mocked data, for these names there's more than one technique.
+        """
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids=None,
+                                             mitre_technique_names="Port Knocking, Domain Generation Algorithms")
+        assert len(techniques) > 2
+
+    def test_ids_precede_names(self):
+        """
+        Since 2 techniques are returned and not 3, we know that it used ids.
+        """
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1213, T1483",
+                                             mitre_technique_names="Port Knocking, Domain Generation Algorithms")
+        assert len(techniques) == 2
+
+    def test_unknown_ids_fail(self):
+        with pytest.raises(ValueError):
+            techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1205, T1213, T007",
+                                                mitre_technique_names=None)
+
+    def test_unknown_names_fail(self):
+        with pytest.raises(ValueError):
+            techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids=None,
+                                                mitre_technique_names="Made up technique")
