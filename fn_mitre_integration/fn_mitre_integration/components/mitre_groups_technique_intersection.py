@@ -43,7 +43,6 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("At least one of the inputs(mitre_technique_name or mitre_technique_id) "
                                  "should be provided.")
 
-            yield StatusMessage("starting...")
             yield StatusMessage("Getting technique information...")
 
             mitre_conn = mitre_attack.MitreAttackConnection()
