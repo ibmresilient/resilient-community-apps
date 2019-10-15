@@ -28,6 +28,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_scheduler'",
     install_requires=[
         'resilient_circuits>=30.0.0',
+        'resilient_lib>=33.0.189',
         'pytz',
         'APScheduler>=3.6.1',
         'SQLAlchemy>=1.3.8',
