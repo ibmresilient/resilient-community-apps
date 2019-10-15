@@ -9,8 +9,8 @@ available to public, this file is a system level test
 """
 
 from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection, MitreAttackTactic, MitreAttackTechnique, \
-    MitreAttackMitigation, MitreAttackSoftware
-from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques
+    MitreAttackMitigation, MitreAttackSoftware, MitreAttackGroup
+from fn_mitre_integration.lib.mitre_attack_utils import get_tactics_and_techniques, get_multiple_techniques
 import requests
 import pytest
 import mock
@@ -156,6 +156,7 @@ class TestMitreTechnique(object):
         techniques = MitreAttackTechnique.get_by_name(self.mitre_attack, "Domain Generation Algorithms")
         assert any(x.description.startswith("Deprecated") for x in techniques)
 
+
 class TestMitreMitigation(object):
     mitre_attack = MitreAttackConnection()
 
@@ -207,6 +208,7 @@ class TestMitreMitigation(object):
             mitigations = MitreAttackMitigation.get_all(self.mitre_attack)
             assert any(x.description.startswith("Deprecated") for x in mitigations)
 
+
 class TestMitreSoftware(object):
     mitre_attack = MitreAttackConnection()
 
@@ -226,6 +228,81 @@ class TestMitreSoftware(object):
         with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
             assert len(MitreAttackSoftware.get_all(self.mitre_attack)) == len(MitreQueryMocker.SOFTWARE[0]) + len(
                 MitreQueryMocker.SOFTWARE[1]) + len(MitreQueryMocker.SOFTWARE[2])
+
+
+class TestMitreGroup(object):
+    class MockGroupID(object):
+        def __init__(self, group_id):
+            self.id = group_id
+
+    mitre_attack = MitreAttackConnection()
+
+    def test_groups_done_have_mardown_links(self):
+        """
+        Test that links are sanitized.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            groups = MitreAttackGroup.get_all(self.mitre_attack)
+            dict_reps = [g.dict_form() for g in groups]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", group["description"]) is None) for group in dict_reps])
+
+    def test_groups_dont_have_mardown_links(self):
+        """
+        Mocked Domain Generation Algorithms on purpose has added code tags to where they could appear.
+        """
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            software = MitreAttackSoftware.get_all(self.mitre_attack)
+            dict_reps = [s.dict_form() for s in software]
+            # check for every technique's representation that all the field don't have the tag
+            assert all([(re.search("\[(.*?)\]\((.*?)\)", s_repr["description"]) is None) for s_repr in dict_reps])
+
+    def test_group_single_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        Group with id 42 is in every sublist.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3)],
+                     [GROUP(10), GROUP(11), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42)],
+                     [GROUP(30), GROUP(31), GROUP(32), GROUP(42)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 1
+        assert 42 in intersection
+
+    def test_group_multiple_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        Groupswith id 42 and 123 are in every sublist.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],
+                     [GROUP(10), GROUP(11), GROUP(123), GROUP(122), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42), GROUP(123), GROUP(122)],
+                     [GROUP(123), GROUP(30), GROUP(31), GROUP(32), GROUP(42)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 2
+        assert 42 in intersection
+        assert 123 in intersection
+
+    def test_group_no_intersection_exists(self):
+        """
+        test_list is a list of lists.
+        Each sublist is the groups that use a technique.
+        There aren't any groups in each of the subsets.
+        """
+        GROUP = self.MockGroupID
+        test_list = [[GROUP(42), GROUP(1), GROUP(2), GROUP(3), GROUP(123), GROUP(122)],
+                     [GROUP(10), GROUP(11), GROUP(123), GROUP(122), GROUP(12), GROUP(42)],
+                     [GROUP(20), GROUP(21), GROUP(22), GROUP(23), GROUP(42), GROUP(122)],
+                     [GROUP(123), GROUP(30), GROUP(31), GROUP(32)]]
+        intersection = MitreAttackGroup.get_intersection_of_groups(test_list)
+        assert len(intersection) == 0
 
 
 class TestMitre(object):
@@ -287,3 +364,44 @@ class TestMitre(object):
 
             tech = MitreAttackTechnique.get_by_id(self.mitre_conn, "T1205")
             assert(tech[0].id == "T1205")
+
+
+class TestMitreUtilMultipleTechniques(object):
+    mitre_attack = MitreAttackConnection()
+
+    @pytest.fixture(autouse=True)
+    def set_up_mock_for_query(self):
+        data_mocker = MitreQueryMocker()
+        with patch("fn_mitre_integration.lib.mitre_attack.TAXIICollectionSource.query", data_mocker.query):
+            yield
+
+    def test_multiple_techniques_works_by_id(self):
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1213, T1483",
+                                             mitre_technique_names=None)
+        assert len(techniques) == 2
+
+    def test_multiple_techniques_works_by_name(self):
+        """
+        In mocked data, for these names there's more than one technique.
+        """
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids=None,
+                                             mitre_technique_names="Port Knocking, Domain Generation Algorithms")
+        assert len(techniques) > 2
+
+    def test_ids_precede_names(self):
+        """
+        Since 2 techniques are returned and not 3, we know that it used ids.
+        """
+        techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1213, T1483",
+                                             mitre_technique_names="Port Knocking, Domain Generation Algorithms")
+        assert len(techniques) == 2
+
+    def test_unknown_ids_fail(self):
+        with pytest.raises(ValueError):
+            techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids="T1205, T1213, T007",
+                                                mitre_technique_names=None)
+
+    def test_unknown_names_fail(self):
+        with pytest.raises(ValueError):
+            techniques = get_multiple_techniques(self.mitre_attack, mitre_technique_ids=None,
+                                                mitre_technique_names="Made up technique")

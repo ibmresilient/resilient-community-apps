@@ -374,6 +374,98 @@ class MitreAttackMitigation(MitreAttackBase):
         }
 
 
+class MitreAttackGroup(MitreAttackBase):
+    MITRE_TYPE = "intrusion-set"
+    MITRE_URL_TYPE = "groups"
+
+    def __init__(self, doc):
+        super(MitreAttackGroup, self).__init__(doc)
+        self.aliases = self.get_aliases(doc)
+        self.technique_id = None
+
+    def get_url(self):
+        """
+        Get the url link for the current class.
+        :return: url string
+        :rtype: str
+        """
+        item_id = self.id
+        url = "{}/{}/{}".format(MITRE_BASE_URL, self.MITRE_URL_TYPE, item_id)
+        return url
+
+    @staticmethod
+    def get_aliases(doc):
+        return doc.get("aliases", [])
+
+    @classmethod
+    def get_by_technique(cls, conn, technique):
+        """
+        Get all the groups related to the given technique.
+        :param conn: Mitre Connection
+        :param technique: Technique which we need the software for
+        :return: list of Group instances
+        :rtype: list(MitreAttackGroup)
+        """
+        if technique is None:
+            return None
+
+        groups = conn.get_related_to(technique._stix, "uses", target_only=True)
+        groups = filter(lambda x: x["type"] == cls.MITRE_TYPE, groups)
+        groups = [cls(x) for x in groups]
+
+        for group in groups:
+            group.technique_id = technique.id
+
+        return groups
+
+    @classmethod
+    def get_by_technique_intersection(cls, conn, techniques):
+        """
+        Given a list of techniques, find which groups use all of them.
+        :param conn: :param conn: connection object for making requests
+        :type conn: MitreAttackConnection
+        :param techniques: techniques to intersect
+        :type techniques: list(MitreAttackTechnique)
+        :return:
+        """
+        if not techniques:
+            return None
+        # get groups that each techniques is associated with
+        groups_per_technique = [cls.get_by_technique(conn, technique) for technique in techniques]
+
+        # get a list of ids of groups using all the techniques
+        intersection = cls.get_intersection_of_groups(groups_per_technique)
+        groups = [x for x in groups_per_technique[0] if x.id in intersection]
+
+        return groups
+
+    @staticmethod
+    def get_intersection_of_groups(groups_per_technique):
+        """
+        Given a list of groups using a technique per each technique, find which groups are in all of those lists,
+        i.e. which groups use all of the given techniques.
+        :param groups_per_technique: list of (list of groups) per technique
+        :type groups_per_technique: list(list(MitreAttackGroup))
+        :return: list of IDs of groups using all of the techniques
+        :rtype: list(str)
+        """
+        # if there are groups using all the techniques, they all will also use the first technique
+        intersection = set([x.id for x in groups_per_technique[0]])
+        for group in groups_per_technique:
+            intersection = intersection & set([x.id for x in group])  # intersection is an associative operation
+        return intersection
+
+    def dict_form(self):
+        return {
+            "technique": self.technique_id,
+            "name": self.name,
+            "id": self.id,
+            "ref": self.get_url(),
+            "description": sanitize_stix(self.description),
+            "aliases": self.aliases
+        }
+
+
 class MitreAttackSoftware(MitreAttackBase):
     MITRE_TYPE = ["tool", "malware"]
     MITRE_URL_TYPE = "software"
@@ -418,7 +510,7 @@ class MitreAttackSoftware(MitreAttackBase):
         :param conn: Mitre Connection
         :param technique: Technique which we need the software for
         :return: list of Software instances
-        :rtype: list(MitreAtackSoftware)
+        :rtype: list(MitreAttackSoftware)
         """
         if technique is None:
             return None

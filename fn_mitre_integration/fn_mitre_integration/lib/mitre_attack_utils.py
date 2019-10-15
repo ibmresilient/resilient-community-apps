@@ -13,6 +13,39 @@ from fn_mitre_integration.lib.mitre_attack import MitreAttackConnection
 from fn_mitre_integration.lib.mitre_attack import MitreAttackTactic, MitreAttackTechnique
 
 
+def get_multiple_techniques(mitre_conn, mitre_technique_ids=None, mitre_technique_names=None):
+    """
+    Gets multiple techniques from a comma separated input of IDs or names.
+    If both are given, the IDs are used.
+    :param mitre_conn: MitreAttackConnection instance
+    :param mitre_technique_ids: Comma separated string with MITRE IDs
+    :param mitre_technique_names: Comma separated string with MITRE names
+    :return: List of techniques
+    :rtype: list(MitreAttackTechnique)
+    """
+    if mitre_technique_ids is not None:
+        # Try id first, because it's less ambiguous
+        technique_ids = mitre_technique_ids.split(',')
+        techniques = []
+        for t_id in technique_ids:
+            technique = MitreAttackTechnique.get_by_id(mitre_conn, t_id)
+            if not technique:
+                raise ValueError("Technique with id {} doesn't exist".format(t_id))
+            techniques.extend(technique)
+    else:
+        # It's possible for multiple tactics to have the same name
+        # And we want to make sure that all of them are processed in that case
+        technique_names = mitre_technique_names.split(',')
+        techniques = []
+        for name in technique_names:
+            technique = MitreAttackTechnique.get_by_name(mitre_conn, name)
+            if not technique:
+                raise ValueError("Techniques with name {} don't exist".format(name))
+            techniques.extend(technique)
+
+    return techniques
+
+
 def get_tactics_and_techniques(tactic_names=None, tactic_ids=None):
     """
     Get techniques for all input tactics
