@@ -10,7 +10,7 @@ from fn_scheduler.components import SECTION_SCHEDULER
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 
 """
-Summary: 
+Summary:
 
     Start the scheduler
 
