@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_elasticsearch',
-    version='1.0.3',
+    version='1.0.4',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',

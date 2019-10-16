@@ -13,7 +13,7 @@ FunctionResult, FunctionError
 
 from fn_elasticsearch.util.helper import ElasticSearchHelper
 
-
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_elasticsearch_query"""
@@ -26,6 +26,8 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
+        LOG.debug("Reloading event triggered, comparing app.config values")
+
         self.options = opts.get("fn_elasticsearch", {})
 
     @function("fn_elasticsearch_query")
@@ -85,9 +87,19 @@ class FunctionComponent(ResilientComponent):
             # Start query results as None
             query_results = None
             matched_records = 0
-
+            
+            es_instance_info = es.info()
+            
+                
             try:
-                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
+
+                if int(es_instance_info["version"]["number"][0]) > 6:
+                    log.debug("Connected ElasticSearch instance is higher than version 6, doc_type won't be sent with the request")
+                    es_results = es.search(index=es_index, body=es_query, ignore=[400, 404, 500])
+
+                else:
+                    log.debug("Connected ElasticSearch instance is 6 or lower, doc_type will be added to the search request")
+                    es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
             except Exception as e:
                 raise FunctionError("Encountered error while submitting query to ElasticSearch {0}".format(e))
             # If our results has a 'hits' attribute; inform the user
