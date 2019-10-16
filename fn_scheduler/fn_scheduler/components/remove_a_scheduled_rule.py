@@ -21,6 +21,8 @@ class FunctionComponent(ResilientComponent):
 
         options = opts.get(SECTION_SCHEDULER, {})
 
+        validate_fields(["datastore_dir", "thread_max", "timezone"], options)
+
         self.res_scheduler = ResilientScheduler(options.get("datastore_dir"),
                                                 options.get("thread_max"),
                                                 options.get("timezone"))

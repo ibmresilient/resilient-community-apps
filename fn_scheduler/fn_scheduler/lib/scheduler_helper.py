@@ -23,7 +23,7 @@ _scheduler_ = None
 
 class ResilientScheduler:
     """
-    This class builds a singleton instance of the schuduler.
+    This class builds a singleton instance of the scheduler.
     It also contains helper functions for building and managing scheduler jobs
     """
 
@@ -226,9 +226,20 @@ class ResilientScheduler:
         :return: json formatted job
         """
         job_json = ResilientScheduler.job_to_json(job)
+
+        return ResilientScheduler.clean_password(job_json)
+
+    @staticmethod
+    def clean_password(job_json):
+        """
+        remove arguments which contain passwords
+        :param job_json:
+        :return: cleaned up job_json
+        """
+
         params = list(job_json['args'])
 
-        # hide settings with contain passwords
+        # hide settings which contain passwords
         params[8] = None
         job_json['args'] = tuple(params)
 

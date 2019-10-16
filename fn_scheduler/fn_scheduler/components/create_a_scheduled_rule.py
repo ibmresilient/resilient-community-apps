@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
 from resilient_circuits.rest_helper import get_resilient_client
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 from fn_scheduler.lib.resilient_helper import get_incident, get_rule_by_id, get_rule_by_name, add_comment, lookup_object_type
@@ -22,6 +22,8 @@ class FunctionComponent(ResilientComponent):
 
         options = opts.get(SECTION_SCHEDULER, {})
 
+        validate_fields(["datastore_dir", "thread_max", "timezone"], options)
+
         self.res_scheduler = ResilientScheduler(options.get("datastore_dir"),
                                                 options.get("thread_max"),
                                                 options.get("timezone"))
@@ -31,9 +33,6 @@ class FunctionComponent(ResilientComponent):
     def _create_a_schedule_function(self, event, *args, **kwargs):
         """Function: Schedule a rule to run on a schedule. This rule will be executed for a given incident, artifact, task, etc."""
         try:
-            # TODO
-            # https://localhost:1443/rest/orgs/201/incidents/2219/table_data/1001/row_data/
-
             # Get the function parameters:
             scheduler_type = self.get_select_param(kwargs.get("scheduler_type"))  # select, values: "cron", "interval", "date"
             scheduler_type_value = kwargs.get("scheduler_type_value")  # text
@@ -43,8 +42,9 @@ class FunctionComponent(ResilientComponent):
 
             incident_id = kwargs.get("incident_id")  # number
             object_id = kwargs.get("object_id")  # number
+            # row_id is presently unavailable from a pre-proessing script.
+            # A future change to resilient is needed to allow this natively. Presently, supplying this information manually is needed
             row_id = kwargs.get("row_id") # number
-            # TODO row_id is not possible
 
             if row_id:
                 object_id = event.message["workflow"]["object_type"]['id']
@@ -109,9 +109,7 @@ class FunctionComponent(ResilientComponent):
             job['next_run_time'] = self.res_scheduler.get_str_date(job['next_run_time'])
             job['trigger'] = None
             # clear args which contain passwords ([resilient])
-            params = list(job['args'])
-            params[8] = None
-            job['args'] = tuple(params)
+            job = ResilientScheduler.clean_password(job)
 
             results = rc.done(True, job)
 
@@ -137,16 +135,27 @@ def triggered_job(incident_id, object_id, row_id,
                   scheduler_label,
                   rule_name, rule_id, rule_object_type_id, rule_params,
                   opts, **kwargs):
+    """
+    This function is called when a scheduled rule is triggered. It is run asynchronous of the create_scheduled_rule process.
+    It's role is to build the api call-back to Resilient to run the rule.
+    In addition to invoking a rule, a note is added to the incideent to indicate that a scheduled rule was run.
+    :param incident_id:
+    :param object_id: task_id, note_id, artifact_id, etc.
+    :param row_id: used when object_id is a datatable_id
+    :param scheduler_label:
+    :param rule_name:
+    :param rule_id:
+    :param rule_object_type_id: internal id referring to incident, task, artifact, etc.
+    :param rule_params:
+    :param opts: contains [resilient] parameters needed to connect back to Resilient for API calls
+    :param kwargs: catch all for additional arguments as necessary
+    :return: None
+    """
     log.debug(incident_id)
     log.debug(rule_id)
     log.debug(rule_object_type_id)
     log.debug(rule_params)
     log.debug(kwargs)
-    """
-    https://localhost:1443/rest/orgs/201/incidents/2219/artifacts/87/action_invocations
-{"action_id":29,"properties":{"trap_list_id":100,"trap_description":"abc","trap_expiration":1568174400000,"trap_duration":100}}
-    https://localhost:1443/rest/orgs/201/incidents/2219/table_data/1001/row_data/1/action_invocations
-    """
 
     # get the rest client
     rest_client = get_resilient_client(opts)

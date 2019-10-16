@@ -5,7 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
-from resilient_lib import ResultPayload
+from resilient_lib import ResultPayload, validate_fields
 from fn_scheduler.components import SECTION_SCHEDULER
 from fn_scheduler.lib.scheduler_helper import ResilientScheduler
 
@@ -18,6 +18,8 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         options = opts.get(SECTION_SCHEDULER, {})
+
+        validate_fields(["datastore_dir", "thread_max", "timezone"], options)
 
         self.res_scheduler = ResilientScheduler(options.get("datastore_dir"),
                                                 options.get("thread_max"),

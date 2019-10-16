@@ -14,12 +14,12 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_scheduler", {})
+        self.options = opts.get(SECTION_SCHEDULER, {})
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_scheduler", {})
+        self.options = opts.get(SECTION_SCHEDULER, {})
 
     @function("scheduled_rule_pause")
     def _scheduled_rule_pause_function(self, event, *args, **kwargs):

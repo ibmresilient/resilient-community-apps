@@ -44,5 +44,10 @@ class FunctionComponent(ResilientComponent):
         # TODO restart the scheduler
 
     def validate_app_config(self, options):
+        """
+        ensure app.config settings are in place
+        :param options:
+        :return: True if success, otherwise ValueError
+        """
         validate_fields(('datastore_dir', 'thread_max', 'timezone'), options)
         return True
