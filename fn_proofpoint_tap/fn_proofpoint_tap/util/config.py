@@ -40,5 +40,9 @@ forensics_template=
 
 # optional - If required by Proofpoint
 cafile=
+
+# optional - for access via a proxy
+#http_proxy=http://proxyhost:8080
+#https_proxy=https://proxyhost:8080
 """
     return config_data
