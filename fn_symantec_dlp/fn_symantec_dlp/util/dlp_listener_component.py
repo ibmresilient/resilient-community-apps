@@ -48,7 +48,7 @@ class DLPListener(ResilientComponent):
         # Gather the sdlp_incident_creation_date_later_than if its set or use the default value 
         incident_creation_date_later_than = datetime.datetime.now() - datetime.timedelta(
             days=int(self.dlp_opts.get("sdlp_incident_creation_date_later_than", DEFAULT_NUM_OF_DAYS)))
-        LOG.debug("Searching for Incidents which were created after %s", incident_creation_date_later_than)
+        LOG.info("Searching for Incidents which were created after %s", incident_creation_date_later_than)
         # gather the list of incidents from a saved report
         res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
                                           incident_creation_date_later_than=incident_creation_date_later_than)
@@ -58,18 +58,23 @@ class DLPListener(ResilientComponent):
         LOG.info("Now filtering out Incidents which already have a Resilient Incident ID")
         LOG.info("Number of Incidents before filtering: %d", len(incidents))
 
-        # Drop all incidents which have a res_id custom attribute
-        incidents = list(self.filter_existing_incidents(incidents))
+        if 'resilient_incident_id' not in self.soap_client.list_custom_attributes():
+            LOG.warning("The Custom Attribute 'resilient_incident_id' was not found on your DLP Instance, this may result in duplicate Incidents being found in Resilient as no filtering will be done on the DLP Side")
+        else:
+            # Drop all incidents which have a res_id custom attribute
+            incidents = list(filter(self.filter_existing_incidents, incidents))
 
         if incidents: # If theres more than one incident after first filter 
             # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
             # The rest_client function returns a 'connected' instance of SimpleClient, so if the session is still valid, reuse that.
             self.res_rest_client = ResilientComponent.rest_client(self)
         
-        LOG.info("Number of Incidents after filtering: %d", len(incidents))
+        LOG.info("Number of Incidents after filtering out any Incident which has a value for the `resilient_incident_id` custom attribute: %d", len(incidents))
         # Get the sdlp_incident_id field
         sdlp_id_type = self.res_rest_client.get('/types/{}/fields/{}'.format("incident", "sdlp_incident_id"))
-
+        # Log a info message if sdlp_should_search_res is not set 
+        if not self.should_search_res:
+            LOG.info("sdlp_should_search_res app.config value is False or not set. Duplicate Resilient Incidents may be created if the poller cannot update the DLP Incident with its new corresponding Resilient ID or the Resilient ID in the SDLP incident has been removed")
         for incident in incidents:
             # For each incident; Take in Incident ID's and check if theres an existing resilient incident
             if not self.does_incident_exist_in_res(sdlp_id_type, incident['incidentId']):
@@ -87,6 +92,8 @@ class DLPListener(ResilientComponent):
                 self.submit_summary_note(payload, incident, new_incident['id'])
 
                 self.send_res_id_to_dlp(new_incident, incident['incidentId'])
+            else: 
+                LOG.info(u"Incident was found in Resilient with sdlp_incident_id %s field. SDLP Incident will not be imported into Resilient", incident['incidentId'])
         LOG.info("Finished processing all Incidents in Saved Report %s", self.soap_client.dlp_saved_report_id)
 
     def send_res_id_to_dlp(self, new_incident, dlp_incident_id):
@@ -236,7 +243,7 @@ class DLPListener(ResilientComponent):
                         <b>Event Time: </b><p>{time}</p>
                         <br><br>
                         <b>Event Detail</b>: <p>{detail}</p>
-                        <p> performed by user <b>{user}</b></p""".format(
+                        <p> performed by user <b>{user}</b></p>""".format(
                             time=history_item['date'],
                             detail=history_item['detail'],
                             user=history_item['user']
@@ -260,25 +267,24 @@ class DLPListener(ResilientComponent):
         return "Low"
 
     @staticmethod
-    def filter_existing_incidents(incidents):
+    def filter_existing_incidents(incident):
         """filter_existing_incidents function used to filter out any DLP Incidents which already have an associated Resilient Incident ID. 
-        Done to avoid duplication, the function iterates over a list of incidents, searching the customAttributes for a resilient_incidentid attribute.
-        If this value is empty, we yield that incident back to the caller, if a value is set, do nothing.
+        Done to avoid duplication, the function iterates over a list of incidents, searching the customAttributes for a resilient_incident_id attribute.
+        If this value is empty, we return True so it can be collected, if a value is set, do nothing.
         
         
         :param incidents: A number of incidents which did not have a resilient_incidentid customAttribute set
         :type incidents: dict or Zeep Object
-        :return: returns a generator of all the matching incidents which can then be cast to an iterable 
-        :rtype: generator
+        :return: returns a boolean which can be used with filter() as the predicate
+        :rtype: boolean
         """
-        for incident in incidents:
-            if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
-                for groupset in incident['incident'].customAttributeGroup:  # for each group
-                    if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
-                        for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
-                            # If the attribute is the resilient one and has no value
-                            if attribute.name == "resilient_incident_id" and attribute.value is None:
-                                yield incident
+        if hasattr(incident['incident'], 'customAttributeGroup'):  # if there are customAttributeGroups
+            for groupset in incident['incident'].customAttributeGroup:  # for each group
+                if hasattr(groupset, 'customAttribute'):  # if the group has a customAttribute object
+                    for attribute in groupset['customAttribute']:  # Loop the customAttribute object to get an attribute
+                        # If the attribute is the resilient one and has no value
+                        if attribute.name == "resilient_incident_id" and attribute.value is None:
+                            return True
 
     def does_incident_exist_in_res(self, sdlp_id_type, sdlp_incident_id):
         """does_incident_exist_in_res function used to check if a given DLP incident has already been imported into Resilient. 
@@ -359,11 +365,20 @@ class DLPListener(ResilientComponent):
             LOG.debug("Encountered exception when converting datetime to an epoch; Error %s", e)
             return 0
 
-    def prepare_incident_summary_note(self, incident, payload):
+    def prepare_incident_summary_note(self, incident, payload, new_incident_id):
         """prepare_incident_summary_note is used to prepare a final summary note for the incident
         This is a good place to place artifacts which may not suit the artifact tab such as the User Justification
         """
 
+        """Gather the artifacts that were parsed and sent to resilient and display their Type and Value as list items
+        Done with a list comprehension to iterate over the list of artifacts found in the payload input.
+        """
+        artifact_list = [u"<li>{} : <b>{}</b></li>".format(artifact["type"]["name"], artifact["value"]) for artifact in json.loads(payload, strict=False)["artifacts"]]
+        
+        # Make a call to the resilient API to find File Artifacts, they are not a part of the jinja payload
+        artifacts = self.res_rest_client.get('/incidents/{}/artifacts'.format(new_incident_id))
+        # Extend the list of artifacts we already have with any File Artifacts we can get from the API. 16, 15, 12, 4, 36 are all type ids for File Artifacts such as Log File
+        artifact_list.extend([u"<li>File Artifact : <b>{}</b></li>".format(artifact["value"]) for artifact in artifacts if artifact["type"] in [16, 15, 12, 4, 36]])
         return u"""<b> A Symantec DLP Incident has been imported into Resilient</b>
         <p>Incident Notes, Artifacts and Attachments found (if any) have been imported into this Incident.</p>
         <p>Status Type for this Incident: <b>{status}</b></p>
@@ -371,16 +386,16 @@ class DLPListener(ResilientComponent):
         <p>The User provided this as a User Justification: <b>{user_justification}</b> </p>
         <p>The Incident was detected with the detection server: <b>{detection_server}</b></p>
         <br><br>
-        <p>After parsing the Incident; <b>{num_of_artifacts}</b> artifacts were found. </p>
-        <p>Notes Imported: <b>{num_of_notes}</b></p>""".format(
+        <p>The following Artifacts Types were added to the Resilient Incident:</p>
+        <ul>{artifacts}</ul>""".format(
             status=incident['incident']['status'],
             blocked_status=incident['incident']['blockedStatus'],
             user_justification=incident['incident']['userJustification'],
             detection_server=incident['incident']['detectionServer'],
-            num_of_artifacts=len(json.loads(payload, strict=False)["artifacts"]),
-            num_of_notes=len(self.gather_incident_notes(incident))
+            artifacts=u"".join(artifact_list)
         )
     
     def submit_summary_note(self, payload, incident, new_incident_id):
+        summary_note_text = self.prepare_incident_summary_note(incident, payload, new_incident_id)
         self.res_rest_client.post('/incidents/{}/comments'.format(new_incident_id), 
-            {"text":{"format":"html", "content": self.prepare_incident_summary_note(incident, payload)}})
+            {"text":{"format":"html", "content": summary_note_text}})

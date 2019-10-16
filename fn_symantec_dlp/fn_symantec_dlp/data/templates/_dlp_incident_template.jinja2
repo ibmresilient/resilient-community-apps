@@ -1,6 +1,6 @@
 {
     {%- set comma = joiner(",") -%}
-    "name": "[Symantec DLP] Incident {{incident.incidentId}} escalated from DLP",
+    "name": "Symantec DLP Incident Id {{incident.incidentId}} escalated from DLP",
     "description": "An incident imported using the Symantec DLP Integration",
     "discovered_date": {%- if incident.incident.get('detectionDate', False) -%}{{dt_to_milli_epoch(incident.incident.detectionDate)}}{% else %} 0 {%- endif -%},
     "incident_type_ids": [16],
@@ -71,15 +71,5 @@
             }        
         }
         {%- endfor -%}
-        {# If there is one or more note in the incident, add a comma here to avoid JSON issues #}
-        {%- if incident.notes|length > 0 -%}
-        {{- comma() }}
-        {%- endif -%}
-        {    
-            "text": {
-                "format": "html",
-                "content": "<p>The marked detection date of this Incident is <b>{{incident.detection_date}}</b> and the event time is <b>{{incident.event_date}}</b>"
-            }        
-        }
     ]
 }
