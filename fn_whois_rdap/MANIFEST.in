@@ -1,4 +1,5 @@
 include fn_whois_rdap/README.md
+include fn_whois_rdap/doc/README.md
 include fn_whois_rdap/util/*
 include fn_whois_rdap/LICENSE
-include doc/*
+include fn_whois_rdap/doc/*
