@@ -29,20 +29,22 @@ class FunctionComponent(ResilientComponent):
             validate_fields(["rdap_depth", "rdap_query"], kwargs)
             payload_object = ResultPayload("fn_whois_rdap", **kwargs)
 
+            rdap_query = u"{}".format(rdap_query)
+
             input_is_ip, registered_domain = helper.check_input_ip(rdap_query)
 
             real_domain = helper.check_registered_domain(registered_domain)
 
-            if real_domain:
-                if not input_is_ip:
-                    ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
-                    rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
-                    results = helper.check_response(rdap_response, payload_object)
-                else:
+            if not input_is_ip and real_domain:
+                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
+                rdap_response = helper.get_rdap_registry_info(u"{}".format(ip_from_domain), rdap_depth)
+                results = helper.check_response(rdap_response, payload_object)
+            else:
+                try:
                     rdap_response = helper.get_rdap_registry_info(rdap_query, rdap_depth)
                     results = helper.check_response(rdap_response, payload_object)
-            else:
-                yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
+                except:
+                    yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
             
             timenow = helper.time_str()
 

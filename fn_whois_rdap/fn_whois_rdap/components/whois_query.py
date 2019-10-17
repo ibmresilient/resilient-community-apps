@@ -26,20 +26,22 @@ class FunctionComponent(ResilientComponent):
             validate_fields("whois_query", kwargs)
             payload_object = ResultPayload("fn_whois_rdap", **kwargs)
 
+            whois_query = u"{}".format(whois_query)
+
             input_is_ip, registered_domain = helper.check_input_ip(whois_query)
 
             real_domain = helper.check_registered_domain(registered_domain)
-
-            if real_domain:
-                if not input_is_ip:
-                    ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
-                    whois_response = helper.get_whois_registry_info(ip_from_domain)
-                    results = helper.check_response(whois_response, payload_object)
-                else:
+            
+            if not input_is_ip and real_domain:
+                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
+                whois_response = helper.get_whois_registry_info(u"{}".format(ip_from_domain))
+                results = helper.check_response(whois_response, payload_object)
+            else:
+                try:
                     whois_response = helper.get_whois_registry_info(whois_query)
                     results = helper.check_response(whois_response, payload_object)
-            else:
-                yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
+                except:
+                    yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
             
             timenow = helper.time_str()
 

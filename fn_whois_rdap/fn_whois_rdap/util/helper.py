@@ -57,14 +57,16 @@ def get_whois_registry_info(ip_input):
     Returns:
         {object} -- Contains all registry information
     """
-
-    internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
     try:
-        whois_response = internet_protocol_address_object.lookup_whois()
-        if internet_protocol_address_object.dns_zone:
-            whois_response["dns_zone"] = internet_protocol_address_object.dns_zone
-        return whois_response
-    except exceptions.ASNRegistryError as e:
+        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        try:
+            whois_response = internet_protocol_address_object.lookup_whois()
+            if internet_protocol_address_object.dns_zone:
+                whois_response["dns_zone"] = internet_protocol_address_object.dns_zone
+            return whois_response
+        except exceptions.ASNRegistryError as e:
+            logging.error(traceback.format_exc())
+    except:
         logging.error(traceback.format_exc())
 
 def get_rdap_registry_info(ip_input, rdap_depth):
@@ -77,14 +79,16 @@ def get_rdap_registry_info(ip_input, rdap_depth):
     Returns:
         {object} -- Registry info, RDAP Protocol
     """
-
-    internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
     try:
-        rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
-        if internet_protocol_address_object.dns_zone:
-            rdap_response["dns_zone"] = internet_protocol_address_object.dns_zone
-        return rdap_response
-    except exceptions.ASNRegistryError as e:
+        internet_protocol_address_object = IPWhois(ip_input,allow_permutations=True)
+        try:
+            rdap_response = internet_protocol_address_object.lookup_rdap(rdap_depth)
+            if internet_protocol_address_object.dns_zone:
+                rdap_response["dns_zone"] = internet_protocol_address_object.dns_zone
+            return rdap_response
+        except exceptions.ASNRegistryError as e:
+            logging.error(traceback.format_exc())
+    except:
         logging.error(traceback.format_exc())
 
 def check_response(response,payload_object):
