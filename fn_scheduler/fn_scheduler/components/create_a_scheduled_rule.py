@@ -67,6 +67,9 @@ class FunctionComponent(ResilientComponent):
 
             # make sure incident isn't closed
             resp = get_incident(rest_client, incident_id)
+            if not resp.get("success", True):
+                raise FunctionError("Incident {} not found".format(incident_id))
+
             if not resp or resp['end_date'] is not None:
                 raise FunctionError("Incident is closed")
 
@@ -125,9 +128,11 @@ class FunctionComponent(ResilientComponent):
         :return: json data
         """
         params = {}
-        for items in rule_params.split(';'):
-            k, v = items.split('=')
-            params[k.strip(' ').lower()] = v.strip(' ')
+        if rule_params:
+            for items in rule_params.split(';'):
+                # improperly formatted parameters will fail with KeyError
+                k, v = items.split('=')
+                params[k.strip(' ').lower()] = v.strip(' ')
 
         return params
 
@@ -164,7 +169,7 @@ def triggered_job(incident_id, object_id, row_id,
     # make sure the incident is still open
     resp = get_incident(rest_client, incident_id)
     if not resp or resp['end_date'] is not None:
-        log.warning(u"Incident %s is not found or closed. Removing scheduled job: %s", incident_id, rule_name)
+        log.warning(u"Incident %s is not found or closed. Removing scheduled rule: %s", incident_id, rule_name)
         scheduler.remove_job(scheduler_label)
         return
 
@@ -173,6 +178,7 @@ def triggered_job(incident_id, object_id, row_id,
         get_rule_by_id(rest_client, rule_id)
     except KeyError as err:
         # remove rules which no longer exist
+        log.error(u"Rule '%s' not found and schedule will be removed.", rule_name)
         add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
         scheduler.remove_job(scheduler_label)
         return

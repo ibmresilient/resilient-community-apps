@@ -4,7 +4,7 @@
 
 import re
 import threading
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import *
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -98,15 +98,15 @@ class ResilientScheduler:
 
         elif type == "delta":
             dt = self.get_interval(value, date=True)
-
             trigger = DateTrigger(run_date=dt, timezone=self.timezone)
 
         else:
-            ValueError("Unrecognized type %s", type)
+            raise ValueError("Unrecognized type %s", type)
 
         return trigger
 
-    def get_interval(self, time_string, date=False):
+    @staticmethod
+    def get_interval(time_string, date=False):
         """
         Parse the input time string into "time value" and "time unit" and compute the time in seconds.
         The input string will be in format time_value with the time unit character concatenated on the end.
@@ -157,7 +157,8 @@ class ResilientScheduler:
         """
         result = {
             "id": job.id,
-            "args": job.args
+            "args": job.args,
+            "next_run_time": ResilientScheduler.get_str_date(job.next_run_time)
         }
 
         if isinstance(job.trigger, IntervalTrigger):

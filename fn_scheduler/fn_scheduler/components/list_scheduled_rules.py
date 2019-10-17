@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
                     list_jobs.append(job_json)
 
             log.debug(list_jobs)
-            if list_jobs:
+            if not list_jobs:
                 yield StatusMessage("No scheduled jobs")
 
             result = rc.done(True, list_jobs)
