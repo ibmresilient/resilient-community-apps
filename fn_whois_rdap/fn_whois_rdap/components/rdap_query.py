@@ -31,17 +31,22 @@ class FunctionComponent(ResilientComponent):
 
             input_is_ip, registered_domain = helper.check_input_ip(rdap_query)
 
-            if not input_is_ip:
-                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
-                rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
-                results = helper.check_response(rdap_response, payload_object)
+            real_domain = helper.check_registered_domain(registered_domain)
+
+            if real_domain:
+                if not input_is_ip:
+                    ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
+                    rdap_response = helper.get_rdap_registry_info(ip_from_domain, rdap_depth)
+                    results = helper.check_response(rdap_response, payload_object)
+                else:
+                    rdap_response = helper.get_rdap_registry_info(rdap_query, rdap_depth)
+                    results = helper.check_response(rdap_response, payload_object)
             else:
-                rdap_response = helper.get_rdap_registry_info(rdap_query, rdap_depth)
-                results = helper.check_response(rdap_response, payload_object)
+                yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
             
             timenow = helper.time_str()
 
-            yield StatusMessage("RDAP Query complete, Threat Intelligence added to Artifact '{}' at {}".format(rdap_query, timenow))
+            yield StatusMessage(u"RDAP Query complete, Threat Intelligence added to Artifact '{}' at {}".format(rdap_query, timenow))
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

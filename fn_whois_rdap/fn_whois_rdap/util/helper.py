@@ -6,6 +6,7 @@ import future        # pip install future
 import builtins      # pip install future
 import past          # pip install future
 import six           # pip install six
+import socket
 from past.builtins import basestring, unicode
 import tldextract
 import logging
@@ -37,6 +38,16 @@ def check_input_ip(query):
     if ext.registered_domain:
         input_is_ip = False
     return input_is_ip, ext.registered_domain
+
+def check_registered_domain(registered_domain):
+    real_domain = False
+    try:
+        socket.getaddrinfo(registered_domain, None)[-1][4][0]
+        real_domain = True
+        return real_domain
+    except socket.gaierror as socket_error:
+        logging.error(traceback.format_exc())
+        return real_domain
 
 # Gather registry information
 def get_whois_registry_info(ip_input):

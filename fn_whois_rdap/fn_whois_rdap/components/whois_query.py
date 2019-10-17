@@ -28,17 +28,22 @@ class FunctionComponent(ResilientComponent):
 
             input_is_ip, registered_domain = helper.check_input_ip(whois_query)
 
-            if not input_is_ip:
-                ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
-                whois_response = helper.get_whois_registry_info(ip_from_domain)
-                results = helper.check_response(whois_response, payload_object)
+            real_domain = helper.check_registered_domain(registered_domain)
+
+            if real_domain:
+                if not input_is_ip:
+                    ip_from_domain = socket.getaddrinfo(registered_domain, None)[-1][4][0]
+                    whois_response = helper.get_whois_registry_info(ip_from_domain)
+                    results = helper.check_response(whois_response, payload_object)
+                else:
+                    whois_response = helper.get_whois_registry_info(whois_query)
+                    results = helper.check_response(whois_response, payload_object)
             else:
-                whois_response = helper.get_whois_registry_info(whois_query)
-                results = helper.check_response(whois_response, payload_object)
+                yield FunctionError("This may not a be valid IP, URL or domain, no registry information is currently accessible")
             
             timenow = helper.time_str()
 
-            yield StatusMessage("WHOIS Query complete, Threat Intelligence added to Artifact '{}' at {}".format(whois_query, timenow))
+            yield StatusMessage(u"WHOIS Query complete, Threat Intelligence added to Artifact '{}' at {}".format(whois_query, timenow))
             yield FunctionResult(results)
         except Exception as error:
             yield FunctionError(error)

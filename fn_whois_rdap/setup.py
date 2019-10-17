@@ -34,8 +34,8 @@ setup(
         'resilient_lib>=33.0.189',
         'ipwhois>=1.1.0',
         'tldextract>=2.2.1',
-        'futures',
-        'six'
+        'future>=0.18.0',
+        'six==1.12.0'
     ],
     packages=find_packages(),
     include_package_data=True,
