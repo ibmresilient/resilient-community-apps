@@ -86,6 +86,15 @@ class FunctionComponent(ResilientComponent):
 
     def build_conversation(self, card,
                            incident_id, task_id, teams_payload, teams_mrkdow):
+        """
+        build the message card format used to post to teams webhooks
+        :param card:
+        :param incident_id:
+        :param task_id:
+        :param teams_payload: json formatted data
+        :param teams_mrkdow: true/false to support markdown format
+        :return: formatted card for transmission
+        """
 
         incident_url = build_incident_url(build_resilient_url(self.opts['host'], self.opts['port']), incident_id)
         type = 'Incident'
@@ -95,6 +104,7 @@ class FunctionComponent(ResilientComponent):
             incident_url = "{}{}{}".format(incident_url, TASK_FRAGMENT, task_id)
             type = 'Task'
 
+        # url back to resilient
         card.addLinkButton("Resilient {}".format(type), incident_url)
 
         if teams_payload.get("title"):
@@ -102,7 +112,7 @@ class FunctionComponent(ResilientComponent):
 
         mrkdown = MarkdownParser()
 
-        card.text(mrkdown.convert(teams_payload.get("summary")))
+        card.text(mrkdown.convert(teams_payload.get("summary", "-None-")))
 
         for section in teams_payload.get("sections", []):
 

@@ -13,5 +13,7 @@ def config_section_data():
 # add multiple parameters for the channels to access and their webhook. 
 # The channel name is used in the function input: teams_channel
 #<channel_name>=<teams channel webhook>
+# If supporting a self test capability, add a webhook to a test channel
+#selftest=<teams channel webhook>
 """
     return config_data
