@@ -8,7 +8,7 @@ Queries provided to the function must be properly formed to work.
 Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query.
 A number of example queries are available when setting up the function in a workflow.
 
-** Important caveat: Your ElasticSearch library version must match the major ElasticSearch version as breaking changes may be introduced as new releases are announced. This integration handles for recent version changes.
+** Important caveat: Your ElasticSearch library version must match the major ElasticSearch version as breaking changes may be introduced as new releases are announced. This integration handles for recent version changes.**
 
 Two options are available for connection:
 HTTP connection to localhost or remote 
