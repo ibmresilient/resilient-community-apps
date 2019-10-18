@@ -67,20 +67,8 @@ class ResilientScheduler:
         :return: appropriate trigger
         """
 
-        validate_crontab_time_format_regex = re.compile( \
-            "{0}\s+{1}\s+{2}\s+{3}\s+{4}".format( \
-                "(?P<minute>\*|[0-5]?\d)", \
-                "(?P<hour>\*|[01]?\d|2[0-3])", \
-                "(?P<day>\*|0?[1-9]|[12]\d|3[01])", \
-                "(?P<month>\*|0?[1-9]|1[012])", \
-                "(?P<day_of_week>\*|[0-6](\-[0-6])?)" \
-                ) # end of str.format()
-        )
-
         trigger = None
         if type == "cron":
-            if not validate_crontab_time_format_regex.match(value):
-                raise ValueError("Invalid cron entry: %s", value)
 
             split_cron = value.split(" ")
             trigger = CronTrigger(minute=split_cron[0],
