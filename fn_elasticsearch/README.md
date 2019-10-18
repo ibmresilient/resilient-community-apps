@@ -2,12 +2,13 @@
 
 **The ElasticSearch integration allows users of the Resilient Platform to connect to and query an ElasticSearch Database.**
 
-Users can specify the location of a remote Elasticsearch instance and query this instance for data which is then returned to Resilient for display or use by other functions.
-
+Users can specify the location of a remote Elasticsearch instance and query this instance for data which is then returned to Resilient for display or use by other functions. 
 
 Queries provided to the function must be properly formed to work.
 Please review the [ElasticSearch documentation](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/search-request-body.html) for examples on how to form your query.
 A number of example queries are available when setting up the function in a workflow.
+
+** Important caveat: Your ElasticSearch library version must match the major ElasticSearch version as breaking changes may be introduced as new releases are announced. This integration handles for recent version changes.
 
 Two options are available for connection:
 HTTP connection to localhost or remote 
@@ -20,7 +21,9 @@ If you wish to connect to a resource with a self signed cert can provide a cafil
   - [Pre-Processing Scripts](#pre-processing-scripts)
   - [Post-Processing Script](#post-processing-script)
   - [ElasticSearch Query Function Output:](#elasticsearch-query-function-output)
-  - [Rules](#rules)# Resilient Integration with Elasticsearch
+  - [Rules](#rules)
+
+# Resilient Integration with Elasticsearch
 
 ## app.config settings
 
