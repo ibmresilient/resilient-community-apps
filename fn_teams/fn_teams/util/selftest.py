@@ -13,7 +13,7 @@ log.setLevel(logging.INFO)
 log.addHandler(logging.StreamHandler())
 
 # channel reference for testing
-SELF_TEST="selftest"
+SELF_TEST = "selftest"
 
 def selftest_function(opts):
     """
