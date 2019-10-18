@@ -98,14 +98,16 @@ class TestListScheduledRules:
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_success(self, mock_get_incident, mock_get_rules,
                      circuits_app, scheduler_type, scheduler_type_value,
-                     scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results):
+                     scheduler_rule_name, scheduler_rule_parameters,
+                     scheduler_label, incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_get_incident)
         setup_mock_actions(mock_get_rules)
 
         now = datetime.datetime.now()
+        yyyymmdd = now.strftime('%s')
 
-        rule_label = "{}_{}".format(scheduler_label, now)
+        rule_label = "{}_{}".format(scheduler_label, yyyymmdd)
 
         function_params = {
             "scheduler_type": scheduler_type,
@@ -118,7 +120,7 @@ class TestListScheduledRules:
             "row_id": row_id
         }
         results = call_create_a_scheduled_rule_function(circuits_app, function_params)
-        assert(results['success'])
+        assert results['success']
 
         # list
         job = self.check_job(circuits_app, incident_id, rule_label)
@@ -176,5 +178,3 @@ class TestListScheduledRules:
                 return job
 
         return None
-
-

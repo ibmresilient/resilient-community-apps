@@ -5,6 +5,7 @@ use the environment variable TEST_RESILIENT_APP_CONFIG to refer to the app.confi
 """
 
 from __future__ import print_function
+import datetime
 import logging
 import pytest
 import sys
@@ -28,6 +29,9 @@ config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+now = datetime.datetime.now()
+yyyymmdd = now.strftime('%s')
 
 
 def call_create_a_scheduled_rule_function(circuits, function_params, timeout=10):
@@ -208,16 +212,20 @@ class TestCreateAScheduledRule:
                                  ('cron', "* 2 * * *", "Test Rule", None, "cron", 123, None, None, {"value": "xyz"}),
                                  ('interval', "2h", "Test Rule", None, "interval", 123, None, None, {"value": "xyz"}),
                                  ('date', "", "Test Rule", None, "date", 123, None, None, {"value": "xyz"}),
-                                 ('delta', "2h", "Test Rule", None, "delta", 123, None, None, {"value": "xyz"})
+                                 ('delta', "2h", "Test Rule", None, "delta", 123, None, None, {"value": "xyz"}),
+                                 ('delta', "2h", "unicode ΞΟΠΡ", None, "unicode ΞΟΠΡ", 123, None, None, {"value": "xyz"})
                              ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_success(self, mock_get_incident, mock_get_rules,
                      circuits_app, scheduler_type, scheduler_type_value,
-                     scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results):
+                     scheduler_rule_name, scheduler_rule_parameters,
+                     scheduler_label, incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_get_incident)
         setup_mock_actions(mock_get_rules)
+
+        rule_label = "{}_{}".format(scheduler_label, yyyymmdd)
 
         if scheduler_type == "date":
             dt = ResilientScheduler.get_interval("2h", date=True)
@@ -228,10 +236,10 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label": rule_label,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
         }
         results = call_create_a_scheduled_rule_function(circuits_app, function_params)
-        assert(results['success'])
+        assert results['success']

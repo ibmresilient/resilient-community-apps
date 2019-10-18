@@ -200,7 +200,27 @@ def setup_mock_actions(mock_rules, enabled=True, object_type=0):
                 "export_key": "Automatic Campaign Close",
                 "logic_type": "all",
                 "tags": []
-            }
+            },
+             {
+                 "id": 25,
+                 "name": "unicode ΞΟΠΡ",
+                 "type": 0,
+                 "enabled": enabled,
+                 "object_type": object_type,
+                 "conditions": [
+                 ],
+                 "automations": [],
+                 "message_destinations": [],
+                 "workflows": [
+                     6
+                 ],
+                 "view_items": [],
+                 "timeout_seconds": 86400,
+                 "uuid": "cd0f3596-1082-44f7-ba8d-0c214bb68a66",
+                 "export_key": "Automatic Campaign Close",
+                 "logic_type": "all",
+                 "tags": []
+             }
         ]
     }
 
