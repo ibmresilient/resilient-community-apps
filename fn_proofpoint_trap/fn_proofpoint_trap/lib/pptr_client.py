@@ -194,7 +194,8 @@ class PPTRClient(object):
         """
         url = urljoin(self.base_url, self._endpoints["add_members"]).format(list_id)
         # Convert expiration timestamp to UTC format.
-        expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
+        if expiration is not None:
+            expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
 
         if duration is not None:
             # Convert parameter (in hours) to milliseconds for api.
