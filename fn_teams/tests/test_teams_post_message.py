@@ -36,8 +36,8 @@ class TestTeamsPostMessage:
         assert func is not None
 
     @pytest.mark.parametrize("incident_id, task_id, teams_webhook, teams_text, teams_mrkdown, expected_results", [
-        (123, 123, "text", "text", True, {"value": "xyz"}),
-        (123, 123, "text", "text", True, {"value": "xyz"})
+        (123, None, None, "text", True, {"value": "xyz"}),
+        (123, 1234, None, "text", True, {"value": "xyz"})
     ])
     def test_success(self, circuits_app, incident_id, task_id, teams_webhook, teams_text, teams_mrkdown, expected_results):
         """ Test calling with sample values for the parameters """
