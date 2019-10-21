@@ -196,6 +196,10 @@ class PPTRClient(object):
         # Convert expiration timestamp to UTC format.
         expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
 
+        if duration is not None:
+            # Convert parameter (in hours) to milliseconds for api.
+            duration = int(duration) * 60 * 60 * 1000
+
         payload = json.dumps({
                 "member": member, "description": description, "expiration": expiration, "duration": duration
             }
@@ -222,6 +226,10 @@ class PPTRClient(object):
         # Convert expiration timestamp to UTC format.
         if expiration is not None:
             expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
+
+        if duration is not None:
+            # Convert parameter (in hours) to milliseconds for api.
+            duration = int(duration) * 60 * 60 * 1000
 
         payload = json.dumps({
                 "description": description, "expiration": expiration, "duration": duration
