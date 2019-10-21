@@ -48,8 +48,7 @@ class FunctionComponent(ResilientComponent):
             log.info("trap_expiration: %s", trap_expiration)
             log.info("trap_duration: %s", trap_duration)
 
-            validate_fields(["trap_list_id", "trap_member", "trap_description", "trap_expiration",
-                             "trap_duration"], kwargs)
+            validate_fields(["trap_list_id", "trap_member"], kwargs)
 
             pptr = PPTRClient(self.opts, self.options)
             rtn = pptr.add_list_member(**params)
