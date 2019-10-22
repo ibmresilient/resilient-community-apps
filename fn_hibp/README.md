@@ -136,6 +136,11 @@ if results.Breaches:
     artifact.description = des + "\nBreaches: " + str(len(results.Breaches))
 ```
 
+## Rules
+| Rule Name | Object Type | Workflow Triggered | Conditions |
+| --------- | :---------: | ------------------ | ---------- |
+| Have I Been Pwned Search | `Artifact` | `Have I Been Pwned Search` | `Type` has one of `["Email Recipient", "Email Sender"]`
+
 To package for distribution,
 
     python ./fn_hibp/setup.py sdist
