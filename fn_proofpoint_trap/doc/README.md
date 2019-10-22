@@ -139,9 +139,11 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Get L
 
    ![screenshot: dt-proofpoint-trap-list-members-action ](./screenshots/dt-proofpoint-trap-list-members-action.png)
 
-2.  Select a list ID from the displayed drop-down list and  click Execute.  
+2. Select a list ID from the displayed drop-down list and click Execute.  
 
-   ![screenshot: dt-proofpoint-trap-list-members_2-action ](./screenshots/dt-proofpoint-trap-list-members_2-action.png)
+   ![screenshot: dt-proofpoint-trap-list-members_2-action ](./screenshots/dt-proofpoint-trap-list-members_2-action.png) 
+    
+    Note: The drop-down for list ID selection, uses the format '&lt;list description&gt;:&lt;list id&gt;'.
 
 This invokes the `Example: Proofpoint TRAP: Get List Members` workflow, which calls the `Proofpoint TRAP: Get List Members` function.
 The data table `Proofpoint TRAP List Members` will be updated in the Resilient platform with the member details for the selected list.  
@@ -203,8 +205,13 @@ results = { 'inputs': {u'trap_list_id': 1, u'trap_members_type': u'members.json'
 <p>
 
 ```python
-inputs.trap_list_id = rule.properties.trap_list_id
-inputs.trap_member_id = rule.properties.trap_member_id
+import re
+if re.match("^.*:\d+$", rule.properties.trap_list_id):
+    inputs.trap_list_id = rule.properties.trap_list_id.split(":")[1]
+else:
+    raise ValueError("Required field: '{0}' with value: '{1}' is in an incorrect format.".format("rule.properties.trap_list_id", rule.properties.trap_list_id))
+inputs.trap_list_id = rule.properties.trap_list_id.split(":")[1]
+inputs.trap_members_type = "members.json"
 ```
 
 </p>
@@ -214,14 +221,48 @@ inputs.trap_member_id = rule.properties.trap_member_id
 <p>
 
 ```python
-##  ProofPoint Trap - fn_proofpoint_trap_get_list_member ##
+##  ProofPoint Trap - fn_proofpoint_trap_get_list_members ##
+# Example result:
+"""
+Result: { 'inputs': {u'trap_list_id': 1, u'trap_members_type': u'members.json'},
+          'metrics': {'package': 'fn-proofpoint-trap', 'timestamp': '2019-08-29 14:02:01', 'package_version': '1.0.0',
+                      'host': 'myhost.com', 'version': '1.0', 'execution_time_ms': 27}, 'success': True,
+          'content': [{u'user_id': None, u'description': u'IP to block', u'deleted': False, u'created_at': u'2017-01-11T03:47:15Z',
+                       u'enabled': True, u'updated_at': u'2017-01-11T03:47:15Z',
+                       u'host': {u'created_at': u'2017-01-11T03:47:15Z', u'updated_at': u'2017-01-11T03:47:15Z',
+                                 u'host': u'75.76.13.144', u'ttl': 0, u'resolution_state': 4, u'id': 20
+                                 },
+                       u'response_id': None, u'expiration': u'2018-12-18T19:08:56Z', u'list_id': 2, u'host_id': 20,
+                       u'hash_reputation_id': None, u'id': 8, u'reverse_user_id': None
+                      },
+                      {u'user_id': None, u'description': u'test', u'deleted': False, u'created_at': u'2017-01-11T03:43:54Z',
+                       u'enabled': True, u'updated_at': u'2017-01-11T03:43:54Z',
+                       u'host': {u'created_at': u'2016-12-29T04:56:13Z', u'updated_at': u'2017-01-13T00:45:16Z',
+                                 u'host': u'string', u'ttl': 0, u'resolution_state': 4, u'id': 6
+                                },
+                       u'response_id': None, u'expiration': None, u'list_id': 2, u'host_id': 6, u'hash_reputation_id': None,
+                       u'id': 6, u'reverse_user_id': None
+                       }],
+          'raw': '[{"user_id": null, "description": "IP to block", "deleted": false, "created_at": "2017-01-11T03:47:15Z", '
+                 '"enabled": true, "updated_at": "2017-01-11T03:47:15Z", "host": {"created_at": "2017-01-11T03:47:15Z", '
+                 '"updated_at": "2017-01-11T03:47:15Z", "host": "75.76.13.144", "ttl": 0, "resolution_state": 4, "id": 20}, '
+                 '"response_id": null, "expiration": "2018-12-18T19:08:56Z", "list_id": 2, "host_id": 20, '
+                 '"hash_reputation_id": null, "id": 8, "reverse_user_id": null}, {"user_id": null, "description": "test", '
+                 '"deleted": false, "created_at": "2017-01-11T03:43:54Z", "enabled": true, "updated_at": "2017-01-11T03:43:54Z", '
+                 '"host": {"created_at": "2016-12-29T04:56:13Z", "updated_at": "2017-01-13T00:45:16Z", "host": "string", '
+                 '"ttl": 0, "resolution_state": 4, "id": 6}, "response_id": null, "expiration": null, "list_id": 2, '
+                 '"host_id": 6, "hash_reputation_id": null, "id": 6, "reverse_user_id": null}]', 
+          'reason': None,
+          'version': '1.0'
+}
+"""
 #  Globals
 # List of fields in datatable fn_proofpoint_trap_get_list_members script
-DATA_TBL_FIELDS = ["member_list_id", "member_id", "member_description", "expiration", "created_at", "updated_at"]
-DATA_TBL_FIELDS_HOST = ["created_at", "host", "resolution_state", "ttl"]
-FN_NAME = "fn_proofpoint_trap_get_list_member"
-WF_NAME = "Example: Proofpoint TRAP: Get List Member"
-MEMBER = results.content
+DATA_TBL_FIELDS = ["query_execution_time", "member_id", "list_id", "member_description", "expiration", "created_at", "status"]
+DATA_TBL_FIELDS_HOST = ["created_at", "updated_at", "host", "resolution_state", "ttl"]
+FN_NAME = "fn_proofpoint_trap_get_list_members"
+WF_NAME = "Example: Proofpoint TRAP: Get List Members"
+MEMBERS = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
@@ -230,26 +271,25 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def main():
     note_text = ''
-    if MEMBER is not None:
-        note_text = "ProofPoint Trap Integration Integration: Workflow <b>{0}</b>: There was a result returned for Resilient function " \
-                   "<b>{1}</b>".format(WF_NAME, FN_NAME)
-        newrow = incident.addRow("trap_list_members")
-        newrow.query_execution_date = QUERY_EXECUTION_DATE
-        for f in DATA_TBL_FIELDS:
-            f_base = '_'.join(f.split('_')[1:])
-            if not f_base:
-                f_base = f
-            if f == "query_execution_time":
-                continue
-            if MEMBER[f_base] is not None:
-                  newrow[f] = MEMBER[f_base]
-
-        host = MEMBER["host"]
-        if host is not None:
-            for d in DATA_TBL_FIELDS_HOST:
-                newrow[d] = host[d]
-
-            
+    if MEMBERS is not None:
+        note_text = "ProofPoint Trap Integration Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
+                   "<b>{2}</b>".format(WF_NAME, len(MEMBERS), FN_NAME)
+        for i in range(len(MEMBERS)):
+            newrow = incident.addRow("trap_list_members")
+            newrow.query_execution_date = QUERY_EXECUTION_DATE
+            newrow.member_id = MEMBERS[i]["id"]
+            newrow.member_description = MEMBERS[i]["description"]
+            for f in DATA_TBL_FIELDS:
+                if f in ["query_execution_time", "member_id", "member_description", "status"]:
+                    continue
+                if MEMBERS[i][f] is not None:
+                    newrow[f] = MEMBERS[i][f]
+                if MEMBERS[i]["enabled"]:
+                    newrow.status = "Enabled"
+                host = MEMBERS[i]["host"]
+                if host is not None:
+                    for d in DATA_TBL_FIELDS_HOST:
+                        newrow[d] = host[d]
     else:
         noteText += "ProofPoint Trap Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned  for " \
                     "list id <b>{1}</b> for Resilient function <b>{3}</b>".format(WF_NAME, INPUTS["trap_list_id"], FN_NAME)
@@ -277,10 +317,12 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Add M
 
    ![screenshot: dt-proofpoint-trap-add-member-action ](./screenshots/dt-proofpoint-trap-add-member-action.png)
 
-3. Select an input from a list of user defined inputs. For example, select Proofpoint TRAP list id 1 from the drop-down. 
+3. Select an input from a list of user defined inputs.  For example, select Proofpoint TRAP list ID 1 from the drop-down. 
 
    ![screenshot: dt-proofpoint-trap-add-member_2-action ](./screenshots/dt-proofpoint-trap-add-member_2-action.png)
-
+   
+   Note: The drop-down for list ID selection, uses the format '&lt;list description&gt;:&lt;list id&gt;'.
+ 
 4.  Input values for the remainder of the fields and click Execute.  This invokes the `Example: Proofpoint TRAP: Add Member to List` workflow, which calls the `Proofpoint  TRAP: Add Members to List` function.  
 
 The data table `Proofpoint TRAP List Members`, is updated in the Resilient platform with the member details for the selected list. 
@@ -292,7 +334,7 @@ The data table `Proofpoint TRAP List Members`, is updated in the Resilient platf
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `trap_description` | `text` | No | `-` | Short description of Proofpoint TRAP list member. |
-| `trap_duration` | `number` | No | `-` | Number of milliseconds to wait before expiring the Proofpoint TRAP list membership.  |
+| `trap_duration` | `number` | No | `-` | Number of hours after which to expire Proofpoint TRAP list membership.  |
 | `trap_expiration` | `datetimepicker` | No | `-` | Timestamp to expire Proofpoint TRAP list member. |
 | `trap_list_id` | `number` | No | `-` | Proofpoint TRAP List ID. |
 | `trap_member` | `text` | No | `-` | Proofpoint TRAP List member to add. Can be of type host, IP address, or URL. |
@@ -318,9 +360,13 @@ results = {
 <p>
 
 ```python
+import re
 inputs.trap_member = artifact.value
 inputs.trap_description = rule.properties.trap_description
-inputs.trap_list_id = rule.properties.trap_list_id
+if re.match("^.*:\d+$", rule.properties.trap_list_id):
+    inputs.trap_list_id = rule.properties.trap_list_id.split(":")[1]
+else:
+    raise ValueError("Required field: '{0}' with value: '{1}' is in an incorrect format.".format("rule.properties.trap_list_id", rule.properties.trap_list_id))
 inputs.trap_expiration =  rule.properties.trap_expiration
 inputs.trap_duration =  rule.properties.trap_duration
 ```
@@ -435,7 +481,7 @@ The data table `Proofpoint TRAP List Members` is refreshed in the Resilient plat
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `trap_description` | `text` | No | `-` | Short description of Proofpoint TRAP list member. |
-| `trap_duration` | `number` | No | `-` | Number of milliseconds to wait before expiring the Proofpoint TRAP list membership. |
+| `trap_duration` | `number` | No | `-` | Number of hours after which to expire Proofpoint TRAP list membership. |
 | `trap_expiration` | `datetimepicker` | No | `-` | Timestamp to expire Proofpoint TRAP list member. |
 | `trap_list_id` | `number` | No | `-` | Proofpoint TRAP List ID. |
 | `trap_member_id` | `number` | No | `-` | Proofpoint TRAP List member ID. |
