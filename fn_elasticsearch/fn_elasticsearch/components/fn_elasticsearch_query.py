@@ -13,6 +13,11 @@ FunctionResult, FunctionError
 
 from fn_elasticsearch.util.helper import ElasticSearchHelper
 
+BADLY_FORMED_QUERY = 400
+NOT_FOUND = 404
+ES_ERROR = 500
+ERROR_TUPLE = (BADLY_FORMED_QUERY, NOT_FOUND, ES_ERROR)
+
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
@@ -87,10 +92,7 @@ class FunctionComponent(ResilientComponent):
             # Start query results as None
             query_results = None
             matched_records = 0
-            
             es_instance_info = es.info()
-            
-                
             try:
 
                 if int(es_instance_info["version"]["number"][0]) > 6:
@@ -113,19 +115,19 @@ class FunctionComponent(ResilientComponent):
             elif 'status' in es_results:
                 # If we encounter either a 404 (Not found) or 400 error return the reason
 
-                if es_results['status'] in (400, 404, 500):
+                if es_results['status'] in ERROR_TUPLE:
                     # Can raise the root_cause of the failure
                     log.error(es_results["error"]["root_cause"])
                     log.error(es_results)
                     log.error(es_results['status'])
-                    if es_results['status'] == 400:
+                    if es_results['status'] == BADLY_FORMED_QUERY:
                         # es_results["error"]["root_cause"][1]["reason"] is only available on exceptions of type 400
                         yield StatusMessage("Exception with code 400 encountered. Error: "+str(es_results["error"]["root_cause"]))
 
-                    elif es_results['status'] == 404:
+                    elif es_results['status'] == NOT_FOUND:
                         # Give reason that 404 happened; index not found?
                         yield StatusMessage("Exception encounted during query : "+str(es_results["error"]["reason"]))
-                    elif es_results['status'] == 500:
+                    elif es_results['status'] == ES_ERROR:
                         yield StatusMessage("Unexpected 500 error encountered. Error: "+str(es_results["error"]["reason"]))
 
             # Prepare the results object
@@ -141,7 +143,6 @@ class FunctionComponent(ResilientComponent):
                 "returned_records": len(query_results)
             }
             yield StatusMessage("Successful: "+str(results["success"]))
-            # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
