@@ -10,7 +10,7 @@ In addition, this package contains a command line tool used to build a Natural L
 Please refer to the User Guide for instructions on building the model and running predictions.
 
 ## System Requirements
-- Resilient Server version 33 or later
+- Resilient Server version 32 or later
 - Ability to connect to Resilient server with HTTPS on port 443 and 65001
 
 ## Package Dependences
@@ -18,7 +18,7 @@ Please refer to the User Guide for instructions on building the model and runnin
 - pandas 0.23.3
 - numpy 1.12.1
 - scipy 1.1.0
-- resilient_circuits version 33 or later
+- resilient_circuits version 32 or later
 
 ## Installation
 Install this package with 'pip', or run `python setup.py install`

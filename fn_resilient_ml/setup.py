@@ -20,12 +20,12 @@ def snake_to_camel(word):
 setup(
     name='fn_resilient_ml',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT License',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
+    url='https://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_resilient_ml'",
-    long_description="Resilient Circuits Components for 'fn_resilient_ml'",
+    long_description="fn_resilient_ml supports NLP search for finding most similar incidents",
     install_requires=[
         'resilient_circuits>=30.0.0'
     ],

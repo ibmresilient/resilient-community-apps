@@ -23,9 +23,6 @@ class FunctionComponent(ResilientComponent):
     def _resilient_nlp_search_function(self, event, *args, **kwargs):
         """Function: None"""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
-
             # Get the function parameters:
             search_incident_id = kwargs.get("search_incident_id")  # number
             number_incidents = kwargs.get("number_incidents")  # number
