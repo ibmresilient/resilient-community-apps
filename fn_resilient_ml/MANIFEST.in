@@ -1,0 +1,4 @@
+include README.md
+include fn_resilient_ml/util/*
+include fn_resilient_ml/LICENSE
+include doc/*
