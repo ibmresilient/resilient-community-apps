@@ -9,7 +9,10 @@ and [SIF](https://openreview.net/pdf?id=SyK00v5xx) to find similar incidents.
 
 ### Do a search
 NLP can rank incidents by computing similarity. Specify how many top
-incidents to return by the search, or use default if leave it empty.
+incidents to return by the search, or leave it empty to use default
+value.
+
+![menu](./images/Menu.png)
 
 To change the default number of incidents to return value, go to
 Customization Settings->Workflows->"Example of NLP search". Click
