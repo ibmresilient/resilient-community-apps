@@ -20,7 +20,7 @@ from resilient_lib import RequestsCommon
 
 log = logging.getLogger(__name__)
 
-idfields = [
+PROOFPOINT_ID_FIELDS = [
     'campaignId',   # in main body
     'campaignID',   # in threat map
     'messageID',
@@ -37,11 +37,12 @@ timefields = [
     'clickTime',
 ]
 
-type2typeid = {
-    'MALWARE': 'Malware',
+TYPE_2_TYPE_ID_MAP = {
+    'impostor': 'Other',
+    'malware': 'Malware',
     'phish': 'Phishing',
-    'Spam': 'Other',
-    'Unknown': 'TBD / Unknown',
+    'spam': 'Other',
+    'unknown': 'TBD / Unknown',
 }
 
 threats_info_map = {
@@ -81,11 +82,12 @@ class PP_ThreatPolling(ResilientComponent):
         self.opts = opts
         self.options = opts.get("fn_proofpoint_tap", {})
 
-        # Proofpoint score
+        # Proofpoint score threshold
         self.score_threshold = float(self.options.get("score_threshold")) \
             if self.options.get("score_threshold") else None
-        # Types of incidents to import to Resilient
-        self.type_filter = self.gettypefilter()
+
+        # Filter - Set types of incidents to import to Resilient
+        self.id_type_filter = self._get_type_filter()
 
         # Create a new Resilient incident from this event
         # using an optional JSON (JINJA2) template file
@@ -110,18 +112,22 @@ class PP_ThreatPolling(ResilientComponent):
         else:
             self.lastupdate = 60 * int(interval)
 
-    def gettypefilter(self):
-        """get lowercase set of type filter options if set, otherwise None"""
+    def _get_type_filter(self):
+        """
+        Get set of type ids for the type_filter options if set, otherwise None.
+        :return: set of threat ids
+        """
         if 'type_filter' in self.options:
             type_filter = self.options.get('type_filter').lower()
-            if not type_filter or type_filter == 'all':
+            if not type_filter or 'all' in type_filter:
                 # none or "all" specified, no filtering
                 return None
+
             filters = set()
             for typestring in type_filter.split(','):
-                for threat_type, threat_id in self.class2typeids.items():
-                    if threat_type.lower() == typestring:
-                        filters.add(threat_id)
+                incident_type_id = self._get_incident_type_id(typestring)
+                if incident_type_id:
+                    filters.add(incident_type_id)
 
             return filters
 
@@ -183,19 +189,22 @@ class PP_ThreatPolling(ResilientComponent):
         """build Incident data structure in Resilient DTO format"""
         properties = {}
 
-        for field in idfields:
+        for field in PROOFPOINT_ID_FIELDS:
             value = data.get(field)
             if value is not None:
                 properties[field] = value
 
-        threat_types = self.getincidenttypes(data)
+        # pull the threat types from the data
+        threat_types = self._get_threat_types(data)
 
-        if threat_types is None:
+        # map threat types to incident type ids and check to see if filtering is requested
+        threat_type_ids = self._filtered_threat_types(threat_types)
+
+        if threat_type_ids is None:
             log.debug("no threat_types, discarding")
             return None
 
-        # look for threat type and classification in main body, else in threatsInfoMap
-
+        # look for threat name and classification in main body, else in threatsInfoMap
         threatsinfo = data.get('threatsInfoMap')
         threatinfo = threatsinfo[0] if threatsinfo else {}
         threatname = data.get('threat', threatinfo.get('threat'))
@@ -204,7 +213,7 @@ class PP_ThreatPolling(ResilientComponent):
         return {
             'description': self.mkdescription(data, kind, threat_id),
             'discovered_date': self.getdiscovereddate(data),
-            'incident_type_ids': threat_types,
+            'incident_type_ids': threat_type_ids,
             'name': '{0} {1}'.format(threatname, classification),
             'properties': properties,
         }
@@ -241,64 +250,111 @@ class PP_ThreatPolling(ResilientComponent):
                 except ValueError:
                     log.exception("{} Not in expected timestamp format {}".format(val, ts_format))
 
-    def getincidenttypes(self, data):
-        """Figure out what Incident types this threat is"""
+    def _get_threat_types(self, data):
+        """
+        Pull the the threat types from the data.
+        :param data:
+        :return: set with threat_types
+        """
         # Use set() to automatically avoid duplication and support disjoint filtering
-        incident_types = set()
-        # Try classification field
-        incident_type = self.class2typeids.get(data.get('classification'))
-        if incident_type:
-            incident_types.add(incident_type)
+        threat_types = set()
+
+        # pull the threat type data from classification field
+        data_class_threat_type = data.get('classification')
+        if data_class_threat_type:
+            threat_types.add(data_class_threat_type.lower())
 
         # examine Threat Info Map for possible Incident types
-
         threatinfos = data.get('threatsInfoMap')
-
         if threatinfos:
             for threatinfo in threatinfos:
                 # check info map classification field
-                incident_type = self.class2typeids.get(threatinfo.get('classification'))
-                if incident_type:
-                    incident_types.add(incident_type)
+                threatinfo_class_threat_type = threatinfo.get('classification')
+                if threatinfo_class_threat_type:
+                    threat_types.add(threatinfo_class_threat_type.lower())
 
-        # extract spam, phishing, and malware scores
-        spamscore = float(data.get('spamScore', '0'))
-        phishscore = float(data.get('phishScore', '0'))
-        malwarescore = float(data.get('malwareScore', '0'))
+        # score_threshold is an optional param
+        # if score_threshold was defined in the config file
+        # filter the score values and pull appropriate threat types
+        if self.score_threshold is not None:
+            # extract spam, phishing, malware and imposter scores, if no value default is -1
+            spamscore = float(data.get('spamScore', '-1'))
+            phishscore = float(data.get('phishScore', '-1'))
+            malwarescore = float(data.get('malwareScore', '-1'))
+            imposterscore = float(data.get('impostorScore', '-1'))
 
-        # if scores found and nonzero, see which are higher
-        if spamscore and phishscore and malwarescore:
-            if spamscore > phishscore and spamscore > malwarescore:
-                # spam
-                if self.score_threshold is not None and spamscore < self.score_threshold:
-                    log.info('spam score {} < {}, filtering'.format(spamscore, self.score_threshold))
-                    return
-                incident_types.add(self.class2typeids.get('Spam'))
+            # if scores found and are higher then the score_threshold add the threat type to the set
+            # if the scores found are lower then the score_threshold remove the threat type from the set
+            # set.remove will thrown a KeyError if element doesn't exist, use discard instead
+            if spamscore >= self.score_threshold:
+                threat_types.add('spam')
+            else:
+                threat_types.discard('spam')
 
-            if phishscore >= spamscore and phishscore > malwarescore:
-                # phishing
-                if self.score_threshold is not None and phishscore < self.score_threshold:
-                    log.info('phishing score {} < {}, filtering'.format(phishscore, self.score_threshold))
-                    return
-                incident_types.add(self.class2typeids.get('Phishing'))
+            if phishscore >= self.score_threshold:
+                threat_types.add('phishing')
+            else:
+                threat_types.discard('phishing')
 
-            if malwarescore > spamscore and malwarescore > phishscore:
-                # malware
-                if self.score_threshold is not None and malwarescore < self.score_threshold:
-                    log.info('malware score {} < {}, filtering'.format(malwarescore, self.score_threshold))
-                    return
-                incident_types.add(self.class2typeids.get('Malware'))
+            if malwarescore >= self.score_threshold:
+                threat_types.add('malware')
+            else:
+                threat_types.discard('malware')
 
-        if not incident_types:
+            if imposterscore >= self.score_threshold:
+                threat_types.add('imposter')
+            else:
+                threat_types.discard('imposter')
+
+        if not threat_types:
             # didn't match any known incident types
-            incident_types.add(self.class2typeids.get('Unknown'))
+            threat_types.add('unknown')
+
+        return threat_types
+
+    def map_to_incident_type_ids(self, threat_types):
+        """
+        Map the threat types to incident type ids based on the class2typeids map.
+        :param threat_types:
+        :return: set of incident_type_ids
+        """
+        incident_type_ids = set()
+        for threat_type in threat_types:
+            inc_type_id = self._get_incident_type_id(threat_type)
+            if inc_type_id:
+                incident_type_ids.add(inc_type_id)
+
+        return incident_type_ids
+
+    def _filtered_threat_types(self, threat_types):
+        """
+        Map the threat types to incident type ids and check to see if filtering is requested.
+        :param threat_types:
+        :return: list of incident_type_ids or None
+        """
+        # Map the threat types to incident type ids
+        incident_type_ids = self.map_to_incident_type_ids(threat_types)
 
         # check to see if filtering is requested
-        if self.type_filter is None or not self.type_filter.isdisjoint(incident_types):
+        if self.id_type_filter is None or self.id_type_filter.intersection(incident_type_ids):
             # no filter or incident type in filter, return list
-            return list(incident_types)
+            return list(incident_type_ids)
 
-        log.info('incident types {} filtered due to {}'.format(incident_types, self.type_filter))
+        log.info('incident types {} filtered due to {}'.format(incident_type_ids, self.id_type_filter))
+        return None
+
+    def _get_incident_type_id(self, threat_type):
+        """
+        Find the Resilient incident type id from class2typeids map for given threat type name.
+        :param threat_type:
+        :return: value
+        """
+        if not threat_type:
+            return None
+
+        for key, value in self.class2typeids.items():
+            if key.lower() == threat_type.lower():
+                return value
 
     @staticmethod
     def build_artifacts(data):
@@ -371,7 +427,7 @@ class PP_ThreatPolling(ResilientComponent):
             # install canonical name
             class2typeids[incident_type['label']] = incident_type['value']
             # install alternate names
-            for alternate, typeid in type2typeid.items():
+            for alternate, typeid in TYPE_2_TYPE_ID_MAP.items():
                 if incident_type['label'] == typeid:
                     class2typeids[alternate] = incident_type['value']
 
@@ -379,8 +435,12 @@ class PP_ThreatPolling(ResilientComponent):
 
     @staticmethod
     def find_id(threat):
-        """Find ID key and ID for threat"""
-        for idfield in idfields:
+        """
+        Find ID key and ID for threat
+        :param threat:
+        :return: value for the chosen proofpoint field, idfield
+        """
+        for idfield in PROOFPOINT_ID_FIELDS:
             if idfield in threat:
                 return threat[idfield], idfield
 
