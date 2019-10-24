@@ -91,7 +91,7 @@ class TestListScheduledRules:
 
     #@pytest.mark.skip
     @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, "
-                             "scheduler_label, incident_id, object_id, row_id, expected_results", [
+                             "scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
                                  ('cron', "* 2 * * *", "Test Rule", None, "CRUD", 123, None, None, {"value": "xyz"})
                              ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
@@ -99,7 +99,7 @@ class TestListScheduledRules:
     def test_success(self, mock_get_incident, mock_get_rules,
                      circuits_app, scheduler_type, scheduler_type_value,
                      scheduler_rule_name, scheduler_rule_parameters,
-                     scheduler_label, incident_id, object_id, row_id, expected_results):
+                     scheduler_label_prefix, incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_get_incident)
         setup_mock_actions(mock_get_rules)
@@ -107,34 +107,35 @@ class TestListScheduledRules:
         now = datetime.datetime.now()
         yyyymmdd = now.strftime('%s')
 
-        rule_label = "{}_{}".format(scheduler_label, yyyymmdd)
+        rule_label = "{}_{}".format(scheduler_label_prefix, yyyymmdd)
 
         function_params = {
             "scheduler_type": scheduler_type,
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": rule_label,
+            "scheduler_label_prefix": rule_label,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
         }
         results = call_create_a_scheduled_rule_function(circuits_app, function_params)
         assert results['success']
+        job_id = results['content']['id']
 
         # list
-        job = self.check_job(circuits_app, incident_id, rule_label)
+        job = self.check_job(circuits_app, incident_id, job_id)
         if not job:
             raise LookupError("missing scheduled rule")
 
         # pause
         function_params = {
-            "scheduler_label": rule_label
+            "scheduler_label_prefix": job_id
         }
         results = call_scheduled_rule_pause_function(circuits_app, function_params)
         assert results['success']
 
-        job = self.check_job(circuits_app, incident_id, rule_label, is_enabled=False)
+        job = self.check_job(circuits_app, incident_id, job_id, is_enabled=False)
         if not job:
             raise LookupError("missing scheduled rule")
 
@@ -142,7 +143,7 @@ class TestListScheduledRules:
         results = call_scheduled_rule_resume_function(circuits_app, function_params)
         assert results['success']
 
-        job = self.check_job(circuits_app, incident_id, rule_label)
+        job = self.check_job(circuits_app, incident_id, job_id)
         if not job:
             raise LookupError("missing scheduled rule")
 
@@ -150,7 +151,7 @@ class TestListScheduledRules:
         results = call_remove_a_scheduled_rule_function(circuits_app, function_params)
         assert results['success']
 
-        job = self.check_job(circuits_app, incident_id, rule_label)
+        job = self.check_job(circuits_app, incident_id, job_id)
         if job:
             raise LookupError("scheduled rule not removed")
 
@@ -169,7 +170,7 @@ class TestListScheduledRules:
 
         results = call_list_scheduled_rules_function(circuits_app, function_params)
         for job in results['content']:
-            if job['id'] == job_label:
+            if job['id'].startswith(job_label):
                 if is_enabled:
                     assert job['next_run_time']
                 else:

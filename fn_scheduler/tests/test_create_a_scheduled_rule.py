@@ -57,7 +57,7 @@ class TestCreateAScheduledRule:
 
 
     #@pytest.mark.skip
-    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results", [
+    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
         ('cron',     "* 2 * *", "Test Rule", "text=text", "bad cron", 123, 0, None, {"value": "xyz"}),
         ('interval', "2",       "Test Rule", "text=text", "bad interval", 123, 0, None, {"value": "xyz"}),
         ('date',     "10/31/2019", "Test Rule", "text=text", "bad date", 123, 0, None, {"value": "xyz"}),
@@ -68,7 +68,7 @@ class TestCreateAScheduledRule:
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_failure_scheduler_type(self, mock_incident, mock_rules,
                                     circuits_app, scheduler_type, scheduler_type_value,
-                                    scheduler_rule_name, scheduler_rule_parameters, scheduler_label,
+                                    scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix,
                                     incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_incident)
@@ -79,7 +79,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label_prefix": scheduler_label_prefix,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
@@ -90,7 +90,7 @@ class TestCreateAScheduledRule:
 
 
     #@pytest.mark.skip
-    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results", [
+    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
         ('cron',     "* 2 * * *", "Rule not found", "text=text", "Rule not found", 123, 0, None, {"value": "xyz"}),
         ('interval', "2m",       "Test Rule", "text=text", "Rule disabled", 123, 0, None, {"value": "xyz"})
     ])
@@ -98,7 +98,7 @@ class TestCreateAScheduledRule:
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_failure_scheduler_rule(self, mock_incident, mock_rules,
                                     circuits_app, scheduler_type, scheduler_type_value,
-                                    scheduler_rule_name, scheduler_rule_parameters, scheduler_label,
+                                    scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix,
                                     incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_incident)
@@ -109,7 +109,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label_prefix": scheduler_label_prefix,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
@@ -120,14 +120,14 @@ class TestCreateAScheduledRule:
 
 
     #@pytest.mark.skip
-    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results", [
+    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
         ('cron',     "* 2 * * *", "Test Rule", "text=text", "incident closed", 123, 0, None, {"value": "xyz"})
     ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_failure_incident_closed(self, mock_incident, mock_rules,
                                      circuits_app, scheduler_type, scheduler_type_value,
-                                     scheduler_rule_name, scheduler_rule_parameters, scheduler_label,
+                                     scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix,
                                      incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_incident, end_date=1546719640000)
@@ -138,7 +138,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label_prefix": scheduler_label_prefix,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
@@ -149,14 +149,14 @@ class TestCreateAScheduledRule:
 
 
     #@pytest.mark.skip
-    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results", [
+    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
         ('cron',     "* 2 * * *", "Test Rule", "text=text", "incident not found", 1234, 0, None, {"value": "xyz"})
     ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_failure_incident_not_found(self, mock_incident, mock_rules,
                                         circuits_app, scheduler_type, scheduler_type_value,
-                                        scheduler_rule_name, scheduler_rule_parameters, scheduler_label,
+                                        scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix,
                                         incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_incident, success=False)
@@ -167,7 +167,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label_prefix": scheduler_label_prefix,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
@@ -178,14 +178,14 @@ class TestCreateAScheduledRule:
 
 
     #@pytest.mark.skip
-    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label, incident_id, object_id, row_id, expected_results", [
+    @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
         ('cron',     "* 2 * * *", "Test Rule", "text=text", "object id mismatch", 123, 4, None, {"value": "xyz"})
     ])
     @patch('fn_scheduler.lib.resilient_helper.get_rules')
     @patch('fn_scheduler.components.create_a_scheduled_rule.get_incident')
     def test_failure_object_id_mismatch(self, mock_incident, mock_rules,
                                         circuits_app, scheduler_type, scheduler_type_value,
-                                        scheduler_rule_name, scheduler_rule_parameters, scheduler_label,
+                                        scheduler_rule_name, scheduler_rule_parameters, scheduler_label_prefix,
                                         incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_incident)
@@ -196,7 +196,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": scheduler_label,
+            "scheduler_label_prefix": scheduler_label_prefix,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id
@@ -208,7 +208,7 @@ class TestCreateAScheduledRule:
 
     #@pytest.mark.skip
     @pytest.mark.parametrize("scheduler_type, scheduler_type_value, scheduler_rule_name, scheduler_rule_parameters, "
-                             "scheduler_label, incident_id, object_id, row_id, expected_results", [
+                             "scheduler_label_prefix, incident_id, object_id, row_id, expected_results", [
                                  ('cron', "* 2 * * *", "Test Rule", None, "cron", 123, None, None, {"value": "xyz"}),
                                  ('interval', "2h", "Test Rule", None, "interval", 123, None, None, {"value": "xyz"}),
                                  ('date', "", "Test Rule", None, "date", 123, None, None, {"value": "xyz"}),
@@ -220,12 +220,12 @@ class TestCreateAScheduledRule:
     def test_success(self, mock_get_incident, mock_get_rules,
                      circuits_app, scheduler_type, scheduler_type_value,
                      scheduler_rule_name, scheduler_rule_parameters,
-                     scheduler_label, incident_id, object_id, row_id, expected_results):
+                     scheduler_label_prefix, incident_id, object_id, row_id, expected_results):
         """ Test calling with sample values for the parameters """
         setup_mock_incident(mock_get_incident)
         setup_mock_actions(mock_get_rules)
 
-        rule_label = "{}_{}".format(scheduler_label, yyyymmdd)
+        rule_label = "{}_{}".format(scheduler_label_prefix, yyyymmdd)
 
         if scheduler_type == "date":
             dt = ResilientScheduler.get_interval("2h", date=True)
@@ -236,7 +236,7 @@ class TestCreateAScheduledRule:
             "scheduler_type_value": scheduler_type_value,
             "scheduler_rule_name": scheduler_rule_name,
             "scheduler_rule_parameters": scheduler_rule_parameters,
-            "scheduler_label": rule_label,
+            "scheduler_label_prefix": rule_label,
             "incident_id": incident_id,
             "object_id": object_id,
             "row_id": row_id

@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
             scheduler_type_value = kwargs.get("scheduler_type_value")  # text
             scheduler_rule_name = kwargs.get("scheduler_rule_name")  # text
             scheduler_rule_parameters = kwargs.get("scheduler_rule_parameters")  # text
-            scheduler_label = kwargs.get("scheduler_label")  # text
+            scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
 
             incident_id = kwargs.get("incident_id")  # number
             object_id = kwargs.get("object_id")  # number
@@ -52,11 +52,13 @@ class FunctionComponent(ResilientComponent):
             object_type_id = event.message["workflow"]["object_type"]['id']
             object_type_name = event.message["workflow"]["object_type"]['name']
 
+            scheduler_label_prefix = "{}-{}".format(scheduler_label_prefix, incident_id)
+
             log.info("scheduler_type: %s", scheduler_type)
             log.info("scheduler_type_value: %s", scheduler_type_value)
             log.info("scheduler_rule_name: %s", scheduler_rule_name)
             log.info("scheduler_rule_parameters: %s", scheduler_rule_parameters)
-            log.info("scheduler_label: %s", scheduler_label)
+            log.info("scheduler_label_prefix: %s", scheduler_label_prefix)
 
             log.info("incident_id: %s", incident_id)
             log.info("object_id: %s", object_id)
@@ -88,7 +90,7 @@ class FunctionComponent(ResilientComponent):
                 rule_params = self.validate_rule_parameters(scheduler_rule_parameters)
 
             incident_data = [incident_id, object_id, row_id,
-                             scheduler_label,
+                             scheduler_label_prefix,
                              scheduler_rule_name, rule_id, rule_object_type_id, rule_params,
                              self.opts[SECTION_RESILIENT]]
 
@@ -99,7 +101,7 @@ class FunctionComponent(ResilientComponent):
             scheduler = ResilientScheduler.get_scheduler()
             scheduled_job = scheduler.add_job(triggered_job,
                                               trigger,
-                                              id=scheduler_label,
+                                              id=scheduler_label_prefix,
                                               args=incident_data,
                                               kwargs=rule_params)
 
