@@ -65,7 +65,7 @@ Schedule a rule to run on a schedule. This rule will be executed for a given inc
 | `incident_id` | `number` | Yes | `-` | Incident Id where the rule will be executed |
 | `object_id` | `number` | No | `-` | Id for task, artifact, attachment, datatable, etc. |
 | `row_id` | `number` | No | `-` | row information for datatable rules |
-| `scheduler_label` | `text` | Yes | `-` | Label to recall the created schedule |
+| `scheduler_label_prefix` | `text` | Yes | `-` | Label to recall the created schedule. The incident id is appended to the name for uniqueness|
 | `scheduler_rule_name` | `text` | Yes | `-` | Name of rule to schedule |
 | `scheduler_rule_parameters` | `text` | No | `-` | Optional parameters for the rule in field=value format separated by semicolons. These fields should match the api name for the rule's activity fields |
 | `scheduler_type` | `select` | No | `-` | type of schedule to create. cron, interval, date or delta |
@@ -121,7 +121,7 @@ else:
   inputs.scheduler_type_value = rule.properties.schedule_type_value
 inputs.scheduler_rule_name = rule.properties.schedule_rule_name
 inputs.scheduler_rule_parameters = rule.properties.schedule_rule_parameters
-inputs.scheduler_label = rule.properties.schedule_label
+inputs.scheduler_label_prefix = rule.properties.scheduler_label_prefix
 inputs.incident_id = incident.id
 ```
 

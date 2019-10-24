@@ -26,19 +26,19 @@ class FunctionComponent(ResilientComponent):
         """Function: Pause a scheduled rule"""
         try:
             # Get the function parameters:
-            scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
+            scheduler_label = kwargs.get("scheduler_label")  # text
 
             log = logging.getLogger(__name__)
-            log.info("scheduler_label_prefix: %s", scheduler_label_prefix)
+            log.info("scheduler_label: %s", scheduler_label)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
-            job = self.find_job_by_label(scheduler_label_prefix)
+            job = self.find_job_by_label(scheduler_label)
             if job is None:
-                raise KeyError("Job not found: {}".format(scheduler_label_prefix))
+                raise KeyError("Job not found: {}".format(scheduler_label))
 
             job.pause()
-            yield StatusMessage("Job paused: {}".format(scheduler_label_prefix))
+            yield StatusMessage("Job paused: {}".format(scheduler_label))
 
             results = rc.done(True, ResilientScheduler.sanitize_job(job))
 
@@ -52,19 +52,19 @@ class FunctionComponent(ResilientComponent):
         """Function: Resume a scheduled job"""
         try:
             # Get the function parameters:
-            scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
+            scheduler_label = kwargs.get("scheduler_label")  # text
 
             log = logging.getLogger(__name__)
-            log.info("scheduler_label_prefix: %s", scheduler_label_prefix)
+            log.info("scheduler_label: %s", scheduler_label)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
-            job = self.find_job_by_label(scheduler_label_prefix)
+            job = self.find_job_by_label(scheduler_label)
             if job is None:
-                raise KeyError("Job not found: {}".format(scheduler_label_prefix))
+                raise KeyError("Job not found: {}".format(scheduler_label))
 
             job.resume()
-            yield StatusMessage("Job resumed: {}".format(scheduler_label_prefix))
+            yield StatusMessage("Job resumed: {}".format(scheduler_label))
 
             results = rc.done(True, ResilientScheduler.sanitize_job(job))
 
@@ -74,17 +74,17 @@ class FunctionComponent(ResilientComponent):
             yield FunctionError()
 
 
-    def find_job_by_label(self, scheduler_label_prefix):
+    def find_job_by_label(self, scheduler_label):
         """
         find the job by it's label
-        :param scheduler_label_prefix:
+        :param scheduler_label:
         :return: job found or None
         """
         scheduler = ResilientScheduler.get_scheduler()
         jobs = scheduler.get_jobs()
 
         for job in jobs:
-            if job.id.lower() == scheduler_label_prefix.lower():
+            if job.id.lower() == scheduler_label.lower():
                 return job
 
         return None

@@ -30,17 +30,17 @@ class FunctionComponent(ResilientComponent):
     @function("remove_a_scheduled_rule")
     def _remove_a_scheduled_job(self, event, *args, **kwargs):
         try:
-            scheduler_label_prefix = kwargs.get("scheduler_label_prefix")  # text
-            log.info(u"scheduler_label_prefix: %s", scheduler_label_prefix)
-            validate_fields(["scheduler_label_prefix"], kwargs)
+            scheduler_label = kwargs.get("scheduler_label")  # text
+            log.info(u"scheduler_label: %s", scheduler_label)
+            validate_fields(["scheduler_label"], kwargs)
 
             rc = ResultPayload(SECTION_SCHEDULER, **kwargs)
 
             scheduler = ResilientScheduler.get_scheduler()
 
             try:
-                scheduler.remove_job(scheduler_label_prefix)
-                log.info(u"Rule '{}' deleted".format(scheduler_label_prefix))
+                scheduler.remove_job(scheduler_label)
+                log.info(u"Rule '{}' deleted".format(scheduler_label))
 
                 yield StatusMessage("Scheduled rule removed")
                 result = rc.done(True, None)

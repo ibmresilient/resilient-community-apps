@@ -130,7 +130,7 @@ class TestListScheduledRules:
 
         # pause
         function_params = {
-            "scheduler_label_prefix": job_id
+            "scheduler_label": job_id
         }
         results = call_scheduled_rule_pause_function(circuits_app, function_params)
         assert results['success']
