@@ -218,7 +218,7 @@ class DLPSoapClient():
                 message_dict=update_payload)
 
             response = cls.session.post(cls.sdlp_incident_endpoint,
-                                        data=rendered_xml, headers=headers)
+                                        data=rendered_xml.encode('utf-8'), headers=headers)
 
             # Catch any request issues and raise them
             response.raise_for_status() 
