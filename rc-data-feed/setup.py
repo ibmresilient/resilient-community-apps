@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed',
-    version='1.2.0',
+    version='1.2.1',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',

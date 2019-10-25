@@ -501,6 +501,8 @@ class FullTypeInfo(TypeInfo):
 
         value_dtos = self.fields_map[field_name]['values']
 
-        value_dto = next(value for value in value_dtos if value['value'] == raw_value)
-
-        return value_dto['label']
+        try:
+            value_dto = next(value for value in value_dtos if value['value'] == raw_value)
+            return value_dto['label']
+        except StopIteration:
+            return None
