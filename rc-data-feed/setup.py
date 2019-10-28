@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed',
-    version='1.2.0',
+    version='2.0.0',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -14,8 +14,7 @@ setup(
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
         'resilient_circuits>=30.0.84',
-        'resilient>=30.0.84',
-        'elasticsearch',
+        'resilient>=30.0.84'
         'resilient_lib',
         'pyodbc',
         'six',
