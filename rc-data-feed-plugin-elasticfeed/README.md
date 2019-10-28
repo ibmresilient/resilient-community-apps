@@ -65,7 +65,7 @@ Unless otherwise specified, contents of this repository are published under the 
   cafile=false
 ```
 
-# ElasticFeed
+# ElasticFeed Class
 This class allows you to write all incoming data to ElasticSearch. The data representation within Elastic is referenced by index, document type (incident, note, task, artifact, etc.) and document_id (incident_id, note_id, task_id, etc.).
 The following configuration items are supported:
 

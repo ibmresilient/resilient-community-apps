@@ -58,7 +58,7 @@ Unless otherwise specified, contents of this repository are published under the 
   directory=/path/to/feed_directory
 ```
 
-# FileFeed
+# FileFeed Class
 The FileFeed class allows you to write all the incoming data to a directory on your file system (one file per object).  
 The structure of the file names is either:
 
