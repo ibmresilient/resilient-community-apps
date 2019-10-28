@@ -5,6 +5,7 @@
 import datetime
 import logging
 import os
+import platform
 import re
 import time
 import sys
@@ -18,6 +19,7 @@ from resilient_lib.components.resilient_common import write_file_attachment, val
 PACKAGE_NAME = "fn_log_capture"
 LOG_FILE = "app.log"
 DATE_PATTERN = r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}"
+DEFAULT_ATTACHMENT_NAME = "{}_resilient-circuits_{}.log"
 
 LOG_LEVELS = {
     "debug": ['debug', 'info', 'warning', 'error'],
@@ -70,7 +72,9 @@ class FunctionComponent(ResilientComponent):
 
             if not log_attachment_name:
                 dt = datetime.datetime.now()
-                log_attachment_name = "resilient-circuits_{}.log".format(dt.strftime("%Y%m%d_%H%M%S"))
+                fqdn = platform.node().split('.')
+
+                log_attachment_name = DEFAULT_ATTACHMENT_NAME.format(fqdn[0], dt.strftime("%Y%m%d_%H%M%S"))
 
             log = logging.getLogger(__name__)
             log.info("log_capture_maxlen: %s", log_capture_maxlen)

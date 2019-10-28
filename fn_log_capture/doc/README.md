@@ -44,7 +44,7 @@ Use the input fields in any combination. The only requirements is that 'Date com
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
-| `log_attachment_name` | `text` | No | `-` | if empty the file will be resilient-circuits_yyymmdd_hhmms.log |
+| `log_attachment_name` | `text` | No | `-` | if empty the file will be `hostname`\_resilient-circuits\_`yyymmdd_hhmms`.log |
 | `log_capture_date` | `datetimepicker` | No | `-` | Date to start log capture |
 | `log_capture_date_option` | `select` | No | before/after | Specify if the date match will be before or after the log timestamp |
 | `log_capture_maxlen` | `number` | No | `-` | # of log lines to return from the end or all lines when empty |
@@ -134,6 +134,7 @@ inputs.log_min_level = rule.properties.log_min_level
 ## Notes
 * The fn_log_capture function can be used with to capture log attachments for a Task. An additional Task level rule and workflow level is required, along with the pre-processing script set to capture the task_id.
 * This integration currenly only supports one integration server. Future product changes are needed to support targeting a specific integration server's log file.
+* Attachment names must use ASCII characters (not unicode).
 
 <!--
 ## Inform Resilient Users
