@@ -14,7 +14,7 @@ else:
     from mock import Mock, patch
 
 """
-pytest --resilient_app_config=/<user>/<path>/resilient-community-apps/fn_netdevice/tests/data/app.config tests/test_mock.py
+pytest --resilient_app_config=/<path>/<to>/app.config tests/test_fn_log_capture.py
 """
 
 PACKAGE_NAME = "fn_log_capture"

@@ -5,6 +5,10 @@ import os
 import sys
 from fn_log_capture.components.funct_fn_log_capture import filter_log_level, get_log_by_filter
 
+"""
+pytest --resilient_app_config=/<path>/<to>/app.config tests/test_filter_by_log_level.py
+"""
+
 LOG_TEMPLATE = u"2019-10-21 15:08:42,990 {} Sample Message  Ā ā Ă ă Ą ą Ć ć Ĉ ĉ"
 
 class TestFnLogCaptureFilter:

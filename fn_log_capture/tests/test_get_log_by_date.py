@@ -6,6 +6,10 @@ import pytest
 import sys
 from fn_log_capture.components.funct_fn_log_capture import get_log_by_date
 
+"""
+pytest --resilient_app_config=/<path>/<to>/app.config tests/test_get_log_by_date.py
+"""
+
 BEFORE_RESULTS = u"""2019-10-21 14:08:42,990 DEBUG Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:09:42,990 INFO Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:10:42,990 WARNING Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
