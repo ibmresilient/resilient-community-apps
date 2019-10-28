@@ -22,7 +22,8 @@ polling_interval=
 # no entry will use time span equivalent to polling interval
 startup_interval=
 
-# optional filtering - comma separated list of types of events to import into Resilient
+# optional filtering - contain at least one of 
+# comma separated list of types of events to import into Resilient
 # choices:  malware, phish, spam, imposter, all
 # if this configuration value is missing or blank, no filtering
 type_filter=

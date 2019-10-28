@@ -208,7 +208,7 @@ class PP_ThreatPolling(ResilientComponent):
         threatsinfo = data.get('threatsInfoMap')
         threatinfo = threatsinfo[0] if threatsinfo else {}
         threatname = data.get('threat', threatinfo.get('threat'))
-        classification = data.get('classification', threatinfo.get('classification'))
+        classification = self._print_content(self._get_event_classification(data))
 
         return {
             'description': self.mkdescription(data, kind, threat_id),
@@ -250,28 +250,54 @@ class PP_ThreatPolling(ResilientComponent):
                 except ValueError:
                     log.exception("{} Not in expected timestamp format {}".format(val, ts_format))
 
+    @staticmethod
+    def _get_event_classification(data):
+        """
+        Get the "original" TAP classification for this event
+        :param data:
+        :return:
+        """
+        # Use set() to automatically avoid duplication and support disjoint filtering
+        original_threat_types = set()
+
+        # pull the threat type data from classification field
+        event_classification = data.get('classification')
+        if event_classification:
+            original_threat_types.add(event_classification.lower())
+
+        # examine Threat Info Map for possible threat types
+        threatinfos = data.get('threatsInfoMap')
+        if threatinfos:
+            for threatinfo in threatinfos:  # There may be more than one threat per message.
+                # check info map classification field
+                event_classification = threatinfo.get('classification')
+                if event_classification:
+                    original_threat_types.add(event_classification.lower())
+
+        return original_threat_types
+
+    @staticmethod
+    def _print_content(set_to_print):
+        """
+        Print content of set.
+        :param set_to_print:
+        :return:
+        """
+        if not set_to_print or not isinstance(set_to_print, set):
+            return "N/A"
+
+        print_list = list(set_to_print)
+        return ', '.join(print_list)
+
     def _get_threat_types(self, data):
         """
         Pull the the threat types from the data.
         :param data:
         :return: set with threat_types
         """
-        # Use set() to automatically avoid duplication and support disjoint filtering
-        threat_types = set()
-
-        # pull the threat type data from classification field
-        data_class_threat_type = data.get('classification')
-        if data_class_threat_type:
-            threat_types.add(data_class_threat_type.lower())
-
-        # examine Threat Info Map for possible Incident types
-        threatinfos = data.get('threatsInfoMap')
-        if threatinfos:
-            for threatinfo in threatinfos:
-                # check info map classification field
-                threatinfo_class_threat_type = threatinfo.get('classification')
-                if threatinfo_class_threat_type:
-                    threat_types.add(threatinfo_class_threat_type.lower())
+        # Get the TAP classification for this event
+        original_threat_types = self._get_event_classification(data)
+        log.debug("TAP event threat type classification is '{}'".format(self._print_content(original_threat_types)))
 
         # score_threshold is an optional param
         # if score_threshold was defined in the config file
@@ -283,33 +309,60 @@ class PP_ThreatPolling(ResilientComponent):
             malwarescore = float(data.get('malwareScore', '-1'))
             imposterscore = float(data.get('impostorScore', '-1'))
 
-            # if scores found and are higher then the score_threshold add the threat type to the set
-            # if the scores found are lower then the score_threshold remove the threat type from the set
-            # set.remove will thrown a KeyError if element doesn't exist, use discard instead
-            if spamscore >= self.score_threshold:
-                threat_types.add('spam')
-            else:
-                threat_types.discard('spam')
+            log.debug("spamScore {}".format(spamscore))
+            log.debug("phishScore {}".format(phishscore))
+            log.debug("malwareScore {}".format(malwarescore))
+            log.debug("impostorScore {}".format(imposterscore))
 
-            if phishscore >= self.score_threshold:
-                threat_types.add('phishing')
-            else:
-                threat_types.discard('phishing')
+            # create a copy of original_threat_types, keep the original values separate
+            score_threat_types = original_threat_types.copy()
 
-            if malwarescore >= self.score_threshold:
-                threat_types.add('malware')
-            else:
-                threat_types.discard('malware')
+            self._check_if_score_above_threshold(spamscore, 'spam', score_threat_types)
+            self._check_if_score_above_threshold(phishscore, 'phishing', score_threat_types)
+            self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
+            self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
 
-            if imposterscore >= self.score_threshold:
-                threat_types.add('imposter')
-            else:
-                threat_types.discard('imposter')
+            log.debug("Updated threat type classification based on score values is '{}'".format(self._print_content(score_threat_types)))
 
-        if not threat_types:
-            # didn't match any known incident types
-            threat_types.add('unknown')
+            # validation for irregular results
+            # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
+            # and the incoming spamscore is 50 and phishscore is 70 the code will remove "spam" from the threat_types
+            # set (because it's lower than score_threshold) but will add "phishing" to the threat_types set making
+            # the result inconsistent with the TAP classification of this event. In this case we log the error.
 
+            # verify the size of the threat_types set, if it includes at least one element but it doesn't include
+            # elements from original_threat_types then we have found an irregularity
+            if len(score_threat_types) > 0:
+                for orig_threat in original_threat_types:
+                    if orig_threat not in score_threat_types:
+                        log.info("Irregular result. The original TAP threat type classification '{}' was discarded "
+                                 "because its score value is lower than the app.config score_threshold value. "
+                                 "'{}' - updated threat type classification based on score values is inconsistent with "
+                                 "'{}' - the original TAP event threat type classification.".format(
+                        orig_threat, self._print_content(score_threat_types), self._print_content(original_threat_types)))
+
+            return score_threat_types
+
+        return original_threat_types
+
+    def _check_if_score_above_threshold(self, score_value, score_type, threat_types):
+        """
+        If scores found and are higher then the score_threshold add the threat type to the set.
+        Otherwise remove the threat type from the set if the set already contains it.
+        :param score_value:
+        :param score_type:
+        :param threat_types:
+        :return: threat_types
+        """
+        if score_value >= self.score_threshold:
+            threat_types.add(score_type)
+            log.debug("'{}' classification was added because its score value '{}' is higher "
+                      "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
+        else:
+            if score_type in threat_types:
+                threat_types.remove(score_type)
+                log.debug("'{}' classification was removed because its score value '{}' is lower "
+                          "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
         return threat_types
 
     def map_to_incident_type_ids(self, threat_types):
@@ -319,6 +372,7 @@ class PP_ThreatPolling(ResilientComponent):
         :return: set of incident_type_ids
         """
         incident_type_ids = set()
+
         for threat_type in threat_types:
             inc_type_id = self._get_incident_type_id(threat_type)
             if inc_type_id:
