@@ -38,11 +38,11 @@ timefields = [
 ]
 
 TYPE_2_TYPE_ID_MAP = {
-    'impostor': 'Other',
-    'malware': 'Malware',
-    'phish': 'Phishing',
-    'spam': 'Other',
-    'unknown': 'TBD / Unknown',
+    u'impostor': u'Other',
+    u'malware': u'Malware',
+    u'phish': u'Phishing',
+    u'spam': u'Other',
+    u'unknown': u'TBD / Unknown',
 }
 
 threats_info_map = {
@@ -211,17 +211,18 @@ class PP_ThreatPolling(ResilientComponent):
         classification = self._print_content(self._get_event_classification(data))
 
         return {
-            'description': self.mkdescription(data, kind, threat_id),
+            'description': self.mkdescription(data, kind, threat_id, classification),
             'discovered_date': self.getdiscovereddate(data),
             'incident_type_ids': threat_type_ids,
             'name': '{0} {1}'.format(threatname, classification),
             'properties': properties,
         }
 
-    def mkdescription(self, data, kind, threat_id):
+    def mkdescription(self, data, kind, threat_id, classification):
         """Make Incident description text"""
-        data['kind'] = kind
-        data['id'] = threat_id
+        data[u'kind'] = kind
+        data[u'id'] = threat_id
+        data[u'classification'] = classification
 
         try:
             return {'format': 'text', 'content': template_functions.render(self.threat_template, data)}
