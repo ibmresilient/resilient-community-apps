@@ -22,30 +22,30 @@ Unless otherwise specified, contents of this repository are published under the 
   sudo pip install --upgrade setuptools
   sudo pip install --upgrade resilient-circuits
 ```  
-*	Run the following commands to install the package:
+* Run the following commands to install the package:
 ```
   unzip rc_data_feed-plugin-kafkafeed-<version>.zip
   [sudo] pip install --upgrade rc_data_feed-plugin-kafkafeed-<version>.tar.gz
 ```  
-*	Configure Resilient-circuits
+* Configure Resilient-circuits
 
   The Resilient Circuits process runs as an unprivileged user, typically named integration. If you do not already have an integration user configured on your appliance, create it now. 
   Complete the following steps to configure and run the integration:
-*	Using sudo, switch to the integration user, as follows:
+* Using sudo, switch to the integration user, as follows:
 ```
   sudo su - integration
 ```
-*	Use one of the following commands to create or update the resilient-circuits configuration file. Use –c for new environments or –u for existing environments.
+* Use one of the following commands to create or update the resilient-circuits configuration file. Use –c for new environments or –u for existing environments.
 ```
   resilient-circuits config -c
   or
   resilient-circuits config –u [-l rc-data-feed-plugin-kafkafeed]
 ```
-*	Edit the resilient-circuits configuration file, as follows:
+* Edit the resilient-circuits configuration file, as follows:
     
-     - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
-     - In the [kafka_feed] section, configure the settings for your file storage environment.
-     - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
+  - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
+  - In the [kafka_feed] section, configure the settings for your file storage environment.
+  - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
 ```
   [feeds]
   feed_names=kafka_feed
