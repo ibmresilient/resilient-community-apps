@@ -126,7 +126,7 @@ class FeedComponent(ResilientComponent):
 
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
 
-            # determine the reload options to follow
+                # determine the reload options to follow
                 if self.options.get('reload', 'false').lower() == 'true':
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 

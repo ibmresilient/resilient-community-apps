@@ -6,8 +6,7 @@
 import logging
 import pyodbc
 
-from rc_data_feed.lib.sql_feed_base import SqlFeedDestinationBase
-
+from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
 
 LOG = logging.getLogger(__name__)
 
