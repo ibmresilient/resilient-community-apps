@@ -44,7 +44,7 @@ Unless otherwise specified, contents of this repository are published under the 
 *	Edit the resilient-circuits configuration file, as follows:
     
      - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
-     - In the [elastic_feed] section, configure the settins for your elasticsearch environment.
+     - In the [elastic_feed] section, configure the settings for your elasticsearch environment.
      - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
 ```
   [feeds]
