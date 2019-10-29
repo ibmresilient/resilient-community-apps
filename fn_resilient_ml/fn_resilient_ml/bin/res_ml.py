@@ -23,7 +23,8 @@ import sys
 
 from fn_resilient_ml.lib import file_manage
 from fn_resilient_ml.lib.res_utils import ResUtils
-from fn_resilient_ml.lib.nlp_settings import NLPSettings
+from fn_resilient_ml.lib.nlp.nlp_settings import NLPSettings
+from fn_resilient_ml.lib.nlp.res_nlp import ResNLP
 
 import configparser
 
@@ -154,16 +155,25 @@ def build_nlp(args, opt_parser):
     opt = opt_parser.opts.get(MACHINE_LEARNING_SECTION)
     nlp_settings.update_settings(opt)
 
-    csv_file = args.input if args.input else file_manage.FileManage.DEFAULT_INCIDENT_FILE
-
+    inc_file = args.input if args.input else file_manage.FileManage.DEFAULT_INCIDENT_FILE
+    art_file = file_manage.FileManage.DEFAULT_ARTIFACT_FILE
     #
     #   1. Download incidents and artifacts. To be used as training data
     #
     res_utils = ResUtils()
     res_utils.connect(opt_parser)
-    res_utils.download_incidents(csv_file)
-    res_utils.download_artifacts()
+    res_utils.download_incidents(inc_file)
+    res_utils.download_artifacts(art_file)
+    #
+    #   2. Build NLP model
+    #
+    res_nlp = ResNLP(inc_file=inc_file,
+                     art_file=art_file)
 
-
+    res_nlp.build_model()
+    #
+    #   3. Save the model
+    #
+    res_nlp.save_model()
 
     return

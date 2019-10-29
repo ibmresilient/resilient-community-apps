@@ -15,8 +15,9 @@ import pandas as pds
 from fn_resilient_ml.lib.nlp.nlp_word2vec import NLPWord2Vec
 
 class ResNLP(NLPWord2Vec):
-    def __init__(self, data_file):
-        self.data_file = data_file
+    def __init__(self, inc_file, art_file=None):
+        self.inc_file = inc_file
+        self.art_file = art_file
         self.dataframe = None
 
     def load_data(self):
