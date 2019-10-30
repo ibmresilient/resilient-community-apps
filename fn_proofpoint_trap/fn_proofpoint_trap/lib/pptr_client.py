@@ -187,9 +187,9 @@ class PPTRClient(object):
 
         :param list_id: The id value of a list (integer).
         :param member: Member to add (string). Can host, IP address, or URL to a list.
-        :param description: The information format to get in return. (path).
-        :param expiration: The information format to get in return. (path).
-        :param duration The information format to get in return. (path).
+        :param description: Description of Proofpoint TRAP list member (string)
+        :param expiration: Timestamp to expire Proofpoint TRAP list member (Unix type timestamp).
+        :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["add_members"]).format(list_id)
@@ -218,9 +218,9 @@ class PPTRClient(object):
 
         :param list_id: The id value of a list (integer).
         :param member: The id of a member of a list (integer).
-        :param description: The information format to get in return. (path).
-        :param expiration: The information format to get in return. (path).
-        :param duration The information format to get in return. (path).
+        :param description: Description of Proofpoint TRAP list member (string).
+        :param expiration: Timestamp to expire Proofpoint TRAP list member (Unix type timestamp).
+        :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
         url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
