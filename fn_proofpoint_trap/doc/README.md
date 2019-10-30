@@ -143,7 +143,7 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Get L
 
    ![screenshot: dt-proofpoint-trap-list-members_2-action ](./screenshots/dt-proofpoint-trap-list-members_2-action.png) 
     
-    Note: The drop-down for list ID selection, uses the format '&lt;list description&gt;:&lt;list id&gt;'.
+    Note: The drop-down for list ID selection uses the format '&lt;list description&gt;:&lt;list id&gt;'.
 
 This invokes the `Example: Proofpoint TRAP: Get List Members` workflow, which calls the `Proofpoint TRAP: Get List Members` function.
 The data table `Proofpoint TRAP List Members` will be updated in the Resilient platform with the member details for the selected list.  
@@ -157,9 +157,9 @@ The data table `Proofpoint TRAP List Members` will be updated in the Resilient p
 
 | Config | Type | Required |Example | Description |
 | ------ | :---: | :------: |------- | ----------- |
-| `trap_list_id` | `number` | `number` | `1` | Proofpoint TRAP List ID. |
-| `trap_member_id` | `number` | `text` | `1` | Proofpoint TRAP List member ID. |
-| `trap_members_type` | `number` | `text` | `members.json` | The Proofpoint TRAP information format to get in result for list membership. Default is members.json. |
+| `trap_list_id` | `number` | Yes | `1` | Proofpoint TRAP List ID. |
+| `trap_member_id` | `number` | No | `1` | Proofpoint TRAP List member ID. |
+| `trap_members_type` | `number` | Yes | `members.json` | The Proofpoint TRAP information format to get in result for list membership. Default is members.json. |
 
 <details><summary>Outputs:</summary>
 <p>
@@ -321,7 +321,7 @@ The workflow is initiated by the incident rule, `Example: Proofpoint TRAP: Add M
 
    ![screenshot: dt-proofpoint-trap-add-member_2-action ](./screenshots/dt-proofpoint-trap-add-member_2-action.png)
    
-   Note: The drop-down for list ID selection, uses the format '&lt;list description&gt;:&lt;list id&gt;'.
+   Note: The drop-down for list ID selection uses the format '&lt;list description&gt;:&lt;list id&gt;'.
  
 4.  Input values for the remainder of the fields and click Execute.  This invokes the `Example: Proofpoint TRAP: Add Member to List` workflow, which calls the `Proofpoint  TRAP: Add Members to List` function.  
 
@@ -334,10 +334,10 @@ The data table `Proofpoint TRAP List Members`, is updated in the Resilient platf
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `trap_description` | `text` | No | `-` | Short description of Proofpoint TRAP list member. |
-| `trap_duration` | `number` | No | `-` | Number of hours after which to expire Proofpoint TRAP list membership.  |
+| `trap_duration` | `number` | No | `-` | Number of minutes after which to expire Proofpoint TRAP list membership.  |
 | `trap_expiration` | `datetimepicker` | No | `-` | Timestamp to expire Proofpoint TRAP list member. |
-| `trap_list_id` | `number` | No | `-` | Proofpoint TRAP List ID. |
-| `trap_member` | `text` | No | `-` | Proofpoint TRAP List member to add. Can be of type host, IP address, or URL. |
+| `trap_list_id` | `number` | Yes | `-` | Proofpoint TRAP List ID. |
+| `trap_member` | `text` | Yes | `-` | Proofpoint TRAP List member to add. Can be of type host, IP address, or URL. |
 
 </p>
 </details>
@@ -481,10 +481,10 @@ The data table `Proofpoint TRAP List Members` is refreshed in the Resilient plat
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `trap_description` | `text` | No | `-` | Short description of Proofpoint TRAP list member. |
-| `trap_duration` | `number` | No | `-` | Number of hours after which to expire Proofpoint TRAP list membership. |
+| `trap_duration` | `number` | No | `-` | Number of minutes after which to expire Proofpoint TRAP list membership. |
 | `trap_expiration` | `datetimepicker` | No | `-` | Timestamp to expire Proofpoint TRAP list member. |
-| `trap_list_id` | `number` | No | `-` | Proofpoint TRAP List ID. |
-| `trap_member_id` | `number` | No | `-` | Proofpoint TRAP List member ID. |
+| `trap_list_id` | `number` | Yes | `-` | Proofpoint TRAP List ID. |
+| `trap_member_id` | `number` | Yes | `-` | Proofpoint TRAP List member ID. |
 
 </p>
 </details>
@@ -619,8 +619,8 @@ The data table `Proofpoint TRAP List Members` will be refreshed in the Resilient
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `trap_list_id` | `number` | No | `-` | Proofpoint TRAP List ID. |
-| `trap_member_id` | `number` | No | `-` | Proofpoint TRAP List member ID. |
+| `trap_list_id` | `number` | Yes | `-` | Proofpoint TRAP List ID. |
+| `trap_member_id` | `number` | Yes | `-` | Proofpoint TRAP List member ID. |
 
 </p>
 </details>
