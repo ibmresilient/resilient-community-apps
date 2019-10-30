@@ -215,7 +215,7 @@ class PP_ThreatPolling(ResilientComponent):
             'description': self.mkdescription(data, kind, threat_id, classification),
             'discovered_date': self.getdiscovereddate(data),
             'incident_type_ids': threat_type_ids,
-            'name': '{0} {1}'.format(threatname, classification),
+            'name': 'Proofpoint TAP Event: {0} {1}'.format(threatname, classification),
             'properties': properties,
         }
 
