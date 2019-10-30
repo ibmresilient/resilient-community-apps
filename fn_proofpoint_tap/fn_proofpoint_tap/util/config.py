@@ -32,7 +32,7 @@ type_filter=
 # scores are floating point values from 0 to 100 and represent minimum malware, spam, phish or imposter scores 
 # to classify the type of event
 # no entry will ignore the event score values and classify threat based on default TAP event classification
-score_threshold=
+score_threshold=50
 
 # optional - Jinja template to override default threat description format
 threat_template=
