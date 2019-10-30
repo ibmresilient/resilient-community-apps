@@ -28,8 +28,8 @@ setup(
     description="Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient",
     long_description="Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient.",
     install_requires=[
-        'resilient_circuits>=33.0.189',
-        'resilient-lib>=33.0.189',
+        'resilient_circuits>=34.0.195',
+        'resilient-lib>=34.0.195',
         'zeep>=3.4.0',
         'requests>=2.7.0'
     ],
