@@ -5,6 +5,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError, StatusMessage
+from resilient import SimpleHTTPException
 from resilient_circuits.rest_helper import get_resilient_client
 from resilient_lib import ResultPayload, validate_fields
 from fn_scheduler.components import SECTION_SCHEDULER, SECTION_RESILIENT
@@ -168,8 +169,12 @@ def triggered_job(incident_id, object_id, row_id,
     rest_client = get_resilient_client(opts)
     scheduler = ResilientScheduler.get_scheduler()
 
-    # make sure the incident is still open
-    resp = get_incident(rest_client, incident_id)
+    # make sure the incident is still open and not deleted
+    try:
+        resp = get_incident(rest_client, incident_id)
+    except SimpleHTTPException:
+        resp = None
+
     if not resp or resp['end_date'] is not None:
         log.warning(u"Incident %s is not found or closed. Removing scheduled rule: %s", incident_id, rule_name)
         scheduler.remove_job(scheduler_label)

@@ -463,6 +463,14 @@ else:
 * Incident notes are created each time a scheduled rule is excuted documenting the rule invocation.
 * Scheduled rules will not show up under Action Status and Workflow Status. Refer instead to the incident notes.
 
+### Artifacts
+* Rules executed against artifacts should include at least two Activity Fields:
+  * artifact_type
+  * artifact_value
+* Your artifact level workflow and function would then capture this information using rule properties such as:
+  * inputs.artifact_type = rule.properties.artifact_type
+  * inputs.artifact_value = rule.properties.artifact_value
+
 ### Datatables
 * Datatable scheduled rules are not part of this package, but can be easily created for a specific Datatable.
 * Datatable scheduled rules cannot currently reference the invoking datatable row in the pre-processing script. However, a rule's activity field can be defined to prompt for it.
