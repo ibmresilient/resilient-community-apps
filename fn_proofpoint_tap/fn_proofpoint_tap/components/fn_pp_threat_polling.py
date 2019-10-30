@@ -37,6 +37,7 @@ timefields = [
     'clickTime',
 ]
 
+# Map for Proofpoint threat type to Resilient incident type
 TYPE_2_TYPE_ID_MAP = {
     u'impostor': u'Other',
     u'malware': u'Malware',
@@ -118,7 +119,7 @@ class PP_ThreatPolling(ResilientComponent):
         :return: set of threat ids
         """
         if 'type_filter' in self.options:
-            type_filter = self.options.get('type_filter').lower()
+            type_filter = self.options.get('type_filter').strip().lower()
             if not type_filter or 'all' in type_filter:
                 # none or "all" specified, no filtering
                 return None
@@ -208,7 +209,7 @@ class PP_ThreatPolling(ResilientComponent):
         threatsinfo = data.get('threatsInfoMap')
         threatinfo = threatsinfo[0] if threatsinfo else {}
         threatname = data.get('threat', threatinfo.get('threat'))
-        classification = self._print_content(self._get_event_classification(data))
+        classification = self._format_content(self._get_event_classification(data))
 
         return {
             'description': self.mkdescription(data, kind, threat_id, classification),
@@ -278,17 +279,17 @@ class PP_ThreatPolling(ResilientComponent):
         return original_threat_types
 
     @staticmethod
-    def _print_content(set_to_print):
+    def _format_content(set_to_format):
         """
-        Print content of set.
-        :param set_to_print:
+        Format content of set and return str.
+        :param set_to_format:
         :return:
         """
-        if not set_to_print or not isinstance(set_to_print, set):
+        if not set_to_format or not isinstance(set_to_format, set):
             return "N/A"
 
-        print_list = list(set_to_print)
-        return ', '.join(print_list)
+        formatted_list = list(set_to_format)
+        return ', '.join(formatted_list)
 
     def _get_threat_types(self, data):
         """
@@ -298,7 +299,7 @@ class PP_ThreatPolling(ResilientComponent):
         """
         # Get the TAP classification for this event
         original_threat_types = self._get_event_classification(data)
-        log.debug("TAP event threat type classification is '{}'".format(self._print_content(original_threat_types)))
+        log.debug("TAP event threat type classification is '{}'".format(self._format_content(original_threat_types)))
 
         # score_threshold is an optional param
         # if score_threshold was defined in the config file
@@ -323,7 +324,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
 
-            log.debug("Updated threat type classification based on score values is '{}'".format(self._print_content(score_threat_types)))
+            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_content(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -340,7 +341,7 @@ class PP_ThreatPolling(ResilientComponent):
                                  "because its score value is lower than the app.config score_threshold value. "
                                  "'{}' - updated threat type classification based on score values is inconsistent with "
                                  "'{}' - the original TAP event threat type classification.".format(
-                        orig_threat, self._print_content(score_threat_types), self._print_content(original_threat_types)))
+                        orig_threat, self._format_content(score_threat_types), self._format_content(original_threat_types)))
 
             return score_threat_types
 
