@@ -126,7 +126,7 @@ class PP_ThreatPolling(ResilientComponent):
 
             filters = set()
             for typestring in type_filter.split(','):
-                incident_type_id = self._get_incident_type_id(typestring)
+                incident_type_id = self._get_incident_type_id(typestring.strip())
                 if incident_type_id:
                     filters.add(incident_type_id)
 
@@ -209,7 +209,7 @@ class PP_ThreatPolling(ResilientComponent):
         threatsinfo = data.get('threatsInfoMap')
         threatinfo = threatsinfo[0] if threatsinfo else {}
         threatname = data.get('threat', threatinfo.get('threat'))
-        classification = self._format_content(self._get_event_classification(data))
+        classification = self._format_set(self._get_event_classification(data))
 
         return {
             'description': self.mkdescription(data, kind, threat_id, classification),
@@ -279,7 +279,7 @@ class PP_ThreatPolling(ResilientComponent):
         return original_threat_types
 
     @staticmethod
-    def _format_content(set_to_format):
+    def _format_set(set_to_format):
         """
         Format content of set and return str.
         :param set_to_format:
@@ -299,7 +299,7 @@ class PP_ThreatPolling(ResilientComponent):
         """
         # Get the TAP classification for this event
         original_threat_types = self._get_event_classification(data)
-        log.debug("TAP event threat type classification is '{}'".format(self._format_content(original_threat_types)))
+        log.debug("TAP event threat type classification is '{}'".format(self._format_set(original_threat_types)))
 
         # score_threshold is an optional param
         # if score_threshold was defined in the config file
@@ -324,7 +324,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
 
-            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_content(score_threat_types)))
+            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -341,7 +341,7 @@ class PP_ThreatPolling(ResilientComponent):
                                  "because its score value is lower than the app.config score_threshold value. "
                                  "'{}' - updated threat type classification based on score values is inconsistent with "
                                  "'{}' - the original TAP event threat type classification.".format(
-                        orig_threat, self._format_content(score_threat_types), self._format_content(original_threat_types)))
+                        orig_threat, self._format_set(score_threat_types), self._format_set(original_threat_types)))
 
             return score_threat_types
 
