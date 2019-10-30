@@ -214,7 +214,8 @@ class TestDLPSOAPClient():
             mock_url = "{host_url}ProtectManager/services/v2011/incidents".format(
                 host_url=setup_mocked_dlp_connection.host)
             m.post(mock_url, text=mock_response)
-            setup_mocked_dlp_connection.update_incident(incident_id=1, status="Closed")
+            with pytest.raises(ValueError) as e:
+                setup_mocked_dlp_connection.update_incident(incident_id=1, status="Closed")
             
     
             
