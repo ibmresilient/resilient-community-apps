@@ -16,6 +16,7 @@ from rc_data_feed.lib.file_feed import FileFeedDestination
 from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
 from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
 from rc_data_feed.lib.elastic_feed import ElasticFeedDestination
+from rc_data_feed.lib.kafka_feed import KafkaFeedDestination
 from rc_data_feed.lib.splunk_hec_feed import SplunkHECFeedDestination
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.feed import FeedContext
@@ -94,6 +95,10 @@ def send_data(type_info, inc_id, rest_client_helper, payload, feed_outputs, is_d
     """
     context = FeedContext(type_info, inc_id, rest_client_helper.inst_rest_client, is_deleted)
 
+    # make sure the incident has a org_name
+    if type_info.get_pretty_type_name() == 'incident':
+        payload['org_name'] = type_info.get_org_name(payload['org_id'])
+
     for feed_output in feed_outputs:
         # don't let a failure in one feed break all the rest
         try:
@@ -116,6 +121,7 @@ class FeedComponent(ResilientComponent):
         "ODBCFeed": ODBCFeedDestination,
         "FileFeed": FileFeedDestination,
         "ElasticFeed": ElasticFeedDestination,
+        "KafkaFeed": KafkaFeedDestination,
         "SQLiteFeed": SqliteFeedDestination,
         "SplunkHECFeed": SplunkHECFeedDestination
     }

@@ -6,12 +6,17 @@
 #
 import requests
 import json
-import qradar_constants
+import fn_qradar_integration.util.qradar_constants as qradar_constants
 import base64
-import urllib
 import logging
-from SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
-import function_utils
+from fn_qradar_integration.util.SearchWaitCommand import SearchWaitCommand, SearchFailure, SearchJobFailure
+import fn_qradar_integration.util.function_utils as function_utils
+
+# handle python2 and 3
+try:
+    from urllib import quote  # Python 2.X
+except ImportError:
+    from urllib.parse import quote  # Python 3+
 
 LOG = logging.getLogger(__name__)
 
@@ -343,7 +348,7 @@ class QRadarClient(object):
             #
             #   urllib.quote has trouble to handle unicode
             #
-            ref_set_link = urllib.quote(ref_set, '')
+            ref_set_link = quote(ref_set, '')
         except:
             ref_set_link = ref_set
 
@@ -352,7 +357,7 @@ class QRadarClient(object):
         ret = None
         try:
             if filter:
-                parameter = urllib.quote('?filter=value="{}"'.format(filter))
+                parameter = quote('?filter=value="{}"'.format(filter))
                 url = url + parameter
 
             response = requests.Session().get(url=url,
@@ -387,12 +392,12 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = urllib.quote(ref_set, '')
+        ref_set_link = quote(ref_set, '')
         url = "{}{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL, ref_set_link)
 
         ret = None
         try:
-            data = {"value": urllib.quote(value)}
+            data = {"value": quote(value)}
 
             response = requests.Session().post(url=url,
                                                headers=auth_info.headers,
@@ -417,8 +422,8 @@ class QRadarClient(object):
         :return:
         """
         auth_info = AuthInfo.get_authInfo()
-        ref_set_link = urllib.quote(ref_set, '')
-        value = urllib.quote(value, '')
+        ref_set_link = quote(ref_set, '')
+        value = quote(value, '')
         url = "{}{}/{}/{}".format(auth_info.api_url, qradar_constants.REFERENCE_SET_URL,
                                   ref_set_link, value)
 

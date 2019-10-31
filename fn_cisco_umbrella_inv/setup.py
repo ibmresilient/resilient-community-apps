@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_cisco_umbrella_inv',
-    version='1.0.0',
+    version='1.0.1',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
     description="Resilient Circuits Components for 'fn_cisco_umbrella_inv'",

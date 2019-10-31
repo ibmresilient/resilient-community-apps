@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 
-# (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 
 """ Resilient functions component to run a Bigfix Query against a Bigfix server for an endpoint and return
 BigFix properties for the endpoint"""
@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_params(params, "fn_bigfix_assets")
 
-            yield StatusMessage("Running BigFix Query for Endpoint id {0}, with name {1} ..."
+            yield StatusMessage(u"Running BigFix Query for Endpoint id {0}, with name {1} ..."
                                 .format(params["asset_id"], params["asset_name"]))
             bigfix_client = BigFixClient(self.options)
 

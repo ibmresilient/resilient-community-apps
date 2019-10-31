@@ -5,15 +5,17 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_jira',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
+    url='https://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_jira'",
     long_description="Resilient Circuits Components for 'fn_jira'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'beautifulsoup4'
+        'resilient-lib>=32.0.186',
+        'beautifulsoup4>=4.8.0'
     ],
     packages=find_packages(),
     include_package_data=True,

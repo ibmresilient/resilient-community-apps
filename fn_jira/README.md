@@ -8,6 +8,7 @@ This Resilient Functions package provides integration with JIRA for:
 Prerequisites
 ```
 resilient-circuits >=v30.0.0
+resilient-lib >= 32.0.186
 ```
 
 ## Environment
