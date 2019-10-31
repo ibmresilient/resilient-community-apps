@@ -39,11 +39,9 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_proofpoint_tap**
+Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This includes ransomware and other advanced email threats delivered through malicious attachments and URLs.
 
- ![screenshot: main](./doc/screenshots/main.png)
-
-Resilient Circuits Components for 'fn_proofpoint_tap
+The Proofpoint TAP function package provides the 
 
 ---
 
