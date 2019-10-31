@@ -24,8 +24,11 @@ inputs.proofpoint_campaign_id = artifact.value
 
 ### Post-Processing Script
 ```python
-incident.addNote(results.data)
-
+# results and results.data are both a Dictionary
+if results and results.get("data"):
+  incident.addNote(str(results.get("data")))
+else:
+  incident.addNote("No Campaign information found for artifact {}.".format(artifact.value))
 ```
 
 ---

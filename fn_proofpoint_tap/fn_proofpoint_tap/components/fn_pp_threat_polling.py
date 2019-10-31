@@ -361,7 +361,7 @@ class PP_ThreatPolling(ResilientComponent):
         :return: threat_types
         """
         # if the endpoint didn't provide the score value then don't do any filtering based on the score
-        if score_value == -1:
+        if score_value < 0:
             return threat_types
 
         if score_value >= self.score_threshold:

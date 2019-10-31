@@ -39,9 +39,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for fn_proofpoint_tap**
+**Resilient Circuits Components for 'fn_proofpoint_tap**
 
  ![screenshot: main](./doc/screenshots/main.png)
+
+Resilient Circuits Components for 'fn_proofpoint_tap
 
 ---
 
@@ -49,7 +51,7 @@
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v31.0.4254`
+* Resilient platform >= `v32`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
@@ -84,17 +86,18 @@
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *Enter a description of the config here* |
-  | **username** | Yes | `` | *Enter a description of the config here* |
-  | **password** | Yes | `` | *Enter a description of the config here* |
-  | **polling_interval** | Yes | `` | *Enter a description of the config here* |
-  | **startup_interval** | Yes | `` | *Enter a description of the config here* |
-  | **type_filter** | Yes | `` | *Enter a description of the config here* |
-  | **score_threshold** | Yes | `` | *Enter a description of the config here* |
-  | **threat_template** | Yes | `` | *Enter a description of the config here* |
-  | **cafile** | Yes | `` | *Enter a description of the config here* |
-
-Optionally, proxy support can be added by adding **http_proxy** and **https_proxy** to the fn_proofpoint_trap section
+  | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *URL and credentials to authenticate to Proofpoint TAP* |
+  | **username** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP* |
+  | **password** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP* |
+  | **polling_interval** | Yes | `5` | *how often, in minutes, to check for new events, 0 to turn off* |
+  | **startup_interval** | No | `30` | *how long, in minutes (max 60) to check for previous events at startup* |
+  | **type_filter** | No | `malware, phish, spam, imposter, all` | *filtering - comma separated list of types of events to import into Resilient* |
+  | **score_threshold** | No | `50` | *classification for the type of event to import based on the respective threat score* |
+  | **threat_template** | No | `50` | *Jinja template to override default threat description format* |
+  | **forensics_template** | No | `` | *Jinja template to override default forensic format* |
+  | **cafile** | No | `` | *if required by Proofpoint* |
+  | **http_proxy** | No | `http://proxyhost:8080` | *for access via a proxy* |
+  | **https_proxy** | No | `https://proxyhost:8080` | *for access via a proxy* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -105,6 +108,18 @@ Optionally, proxy support can be added by adding **http_proxy** and **https_prox
   ```
   $ resilient-circuits run
   ```
+
+### Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+
+---
 
 ## Uninstall
 * SSH into your Integration Server.

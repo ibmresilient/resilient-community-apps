@@ -27,14 +27,14 @@
 <!--
   List the Key Features of the Integration
 -->
-* Escalate threats to Resilient as new Incidents
-* Enrich Incident data with TAP campaign information
-* Collect detailed forensic data on individual threats or campaigns
+* Key Feature 1
+* Key Feature 2
+* Key Feature 3
 
 ---
 
 ## Function - Proofpoint TAP Get Campaign
-
+Function pulls specific details about campaigns including description, the actor, malware family, techniques and the threat variants associated with the campaign.
 
  ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/fn-proofpoint-tap-get-campaign.png)
 
@@ -76,8 +76,11 @@ inputs.proofpoint_campaign_id = artifact.value
 <p>
 
 ```python
-incident.addNote(results.data)
-
+# results and results.data are both a Dictionary
+if results and results.get("data"):
+  incident.addNote(str(results.get("data")))
+else:
+  incident.addNote("No Campaign information found for artifact {}.".format(artifact.value))
 ```
 
 </p>
@@ -85,7 +88,7 @@ incident.addNote(results.data)
 
 ---
 ## Function - Proofpoint TAP Get Forensics
-
+Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.
 
  ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/fn-proofpoint-tap-get-forensics.png)
 
@@ -94,7 +97,6 @@ incident.addNote(results.data)
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | No | `-` | - |
 | `proofpoint_aggregate_flag` | `boolean` | No | `-` | - |
 | `proofpoint_campaign_id` | `text` | No | `-` | - |
 | `proofpoint_malicious_flag` | `boolean` | No | `-` | - |
@@ -122,7 +124,7 @@ results = {
 
 ```python
 inputs.proofpoint_threat_id = artifact.value
-inputs.proofpoint_aggregate_flag = True
+inputs.proofpoint_malicious_flag = True
 ```
 
 </p>
@@ -132,7 +134,11 @@ inputs.proofpoint_aggregate_flag = True
 <p>
 
 ```python
-incident.addNote(results.data)
+# results is a Dictionary and data is a List
+if results and results.get("data"):
+  incident.addNote("\n\n".join(results.get("data")))
+else:
+  incident.addNote("No malicious Forensics information found for artifact {}.".format(artifact.value))
 ```
 
 </p>
@@ -144,6 +150,7 @@ incident.addNote(results.data)
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
+| Proofpoint Campaign ID | `campaignId` | `text` | `properties` | - | - |
 | Proofpoint Message ID | `messageID` | `text` | `properties` | - | - |
 
 ---
@@ -152,10 +159,10 @@ incident.addNote(results.data)
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: Proofpoint TAP - Get Aggregate Forensics by Threat ID | artifact | `get_aggregate_forensics_by_threat_id` |
-| Example: Proofpoint TAP - Get Campaign | artifact | `get_campaign_flow` |
+| Example: Proofpoint TAP - Aggregate Forensics by Threat ID and Show Malicious Results Only | artifact | `get_forensics_by_threat_id` |
+| Example: Proofpoint TAP - Get Campaign Information by Campaign ID | artifact | `get_campaign_flow` |
 | Example: Proofpoint TAP - Get Forensics by Campaign ID | artifact | `get_forensics_by_campaign_id` |
-| Example: Proofpoint TAP - Get Forensics by Threat ID | artifact | `get_forensics_by_threat_id` |
+| Exemple: Proofpoint TAP - Aggregate Forensics for Entire Campaign Associated with Threat ID | artifact | `get_aggregate_forensics_by_threat_id` |
 
 ---
 
