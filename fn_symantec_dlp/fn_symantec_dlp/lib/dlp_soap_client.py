@@ -224,7 +224,7 @@ class DLPSoapClient():
             response.raise_for_status() 
             # If the request returns with a success code but does not have a SUCCESS status, return an error
             if b"<statusCode>SUCCESS</statusCode>" not in response.content:
-                raise ValueError("API Call did not Return a Success code")
+                raise ValueError("API Call did not Return a Success code. Check that the SDLP incident has not been removed.")
             LOG.info("Sent new update to DLP Incident %s", incident_id)
 
             return response
