@@ -286,8 +286,11 @@ class PP_ThreatPolling(ResilientComponent):
         :param set_to_format:
         :return:
         """
-        if not set_to_format or not isinstance(set_to_format, set):
+        if set_to_format is None or not isinstance(set_to_format, set):
             return "N/A"
+
+        if len(set_to_format) == 0:
+            return "None"
 
         formatted_list = list(set_to_format)
         return ', '.join(formatted_list)
@@ -325,8 +328,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
 
-            if len(original_threat_types) != len(score_threat_types):
-                log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
+            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -402,7 +404,7 @@ class PP_ThreatPolling(ResilientComponent):
             # no filter or incident type in filter, return list
             return list(incident_type_ids)
 
-        log.info('incident types {} filtered due to {}'.format(incident_type_ids, self.id_type_filter))
+        log.info("Events with threat type '{}' have been filtered due to type_filter set in app.config".format(self._format_set(threat_types)))
         return None
 
     def _get_incident_type_id(self, threat_type):

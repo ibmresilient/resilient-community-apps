@@ -54,7 +54,7 @@ def custom_response_err_msg(response):
         msg = str(err)
 
         if isinstance(err, HTTPError) and response.status_code == 404:
-            msg = response.content + " please make sure you are invoking the appropriate Rule for chosen Artifact"
+            msg = "{} please make sure you are invoking the appropriate Rule for chosen Artifact".format(response.content)
 
         log and log.error(msg)
         raise IntegrationError(msg)
