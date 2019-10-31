@@ -8,5 +8,6 @@ Header Reply To:{%- if headerReplyTo is defined %} {{ headerReplyTo }}{%- else %
 Header To:{%- if headerTo is defined %} {{ headerTo }}{%- else %} N/A{% endif %}
 Recipient:{%- if recipient is defined %} {{ recipient }}{%- else %} N/A{% endif %}
 Sender IP:{%- if senderIP is defined %} {{ senderIP }}{%- else %} N/A{% endif %}
+Click IP:{%- if clickIP is defined %} {{ clickIP }}{%- else %} N/A{% endif %}
+Threat URL:{%- if threatURL is defined %} {{ threatURL }}{%- else %} N/A{% endif %}
 Message ID:{%- if messageID is defined %} {{ messageID }}{%- else %} N/A{% endif %}
-Campaign ID:{%- if campaignId is defined %} {{ campaignId }}{%- else %} N/A{% endif %}

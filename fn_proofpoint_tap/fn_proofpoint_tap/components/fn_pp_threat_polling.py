@@ -26,8 +26,9 @@ PROOFPOINT_ID_FIELDS = [
     'messageID',
 ]
 
+# do not rename the values in this dict - they match Proofpoint TAP values
 artifact_types = {
-    'Proofpoint Campaign ID': 'campaignID',
+    'Proofpoint Campaign ID': 'campaignId',
     'Proofpoint Threat ID': 'threatID',
 }
 
@@ -215,7 +216,7 @@ class PP_ThreatPolling(ResilientComponent):
             'description': self.mkdescription(data, kind, threat_id, classification),
             'discovered_date': self.getdiscovereddate(data),
             'incident_type_ids': threat_type_ids,
-            'name': 'Proofpoint TAP Event: {0} {1}'.format(threatname, classification),
+            'name': 'Proofpoint TAP Event: {0} {1}'.format(threatname if threatname else "", classification),
             'properties': properties,
         }
 
@@ -324,7 +325,8 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
 
-            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
+            if len(original_threat_types) != len(score_threat_types):
+                log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -356,6 +358,10 @@ class PP_ThreatPolling(ResilientComponent):
         :param threat_types:
         :return: threat_types
         """
+        # if the endpoint didn't provide the score value then don't do any filtering based on the score
+        if score_value == -1:
+            return threat_types
+
         if score_value >= self.score_threshold:
             threat_types.add(score_type)
             log.debug("'{}' classification was added because its score value '{}' is higher "
@@ -412,22 +418,33 @@ class PP_ThreatPolling(ResilientComponent):
             if key.lower() == threat_type.lower():
                 return value
 
-    @staticmethod
-    def build_artifacts(data):
+    def build_artifacts(self, data):
         """Build Artifacts containing Threat and Campaign IDs in Incident for further analysis"""
         artifact_payloads = {}
 
         maps = data.get('threatsInfoMap')
+        if maps:
+            for threat_map in maps:
+                self._build_artifact_for_data(threat_map, artifact_payloads)
 
-        if not maps:
-            return artifact_payloads
+        else:
+            self._build_artifact_for_data(data, artifact_payloads)
 
-        for threat_map in maps:
-            for key, value in artifact_types.items():
-                artifact_id = threat_map.get(value)
-                if artifact_id is not None:
-                    log.debug('artifact type {} ({}) ID {}'.format(key, value, artifact_id))
-                    artifact_payloads[artifact_id] = key
+        return artifact_payloads
+
+    @staticmethod
+    def _build_artifact_for_data(data, artifact_payloads):
+        """
+        Add artifact type and value to the artifact_payload
+        :param data:
+        :param artifact_payloads:
+        :return:
+        """
+        for key, value in artifact_types.items():
+            artifact_id = data.get(value)
+            if artifact_id is not None:
+                log.debug('artifact type {} ({}) ID {}'.format(key, value, artifact_id))
+                artifact_payloads[artifact_id] = key
 
         return artifact_payloads
 
