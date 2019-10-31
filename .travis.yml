@@ -62,7 +62,7 @@ install:
 - pip install --upgrade setuptools
 - pip install tox
 - pip install pylint
-- pip install pytest==4.0.1
+- pip install pytest
 - pip install resilient
 - pip install resilient-circuits
 - pip install pytest-resilient-circuits
