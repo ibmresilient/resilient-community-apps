@@ -41,7 +41,10 @@
 -->
 Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This includes ransomware and other advanced email threats delivered through malicious attachments and URLs.
 
-The Proofpoint TAP function package provides the 
+The Proofpoint TAP function package provides the following features:
+*  Poll detailed information about several types of TAP events in a SIEM-compatible, vendor-neutral format. Currently, Blocked or permitted clicks to threats recognized by URL Defense and Blocked or delivered messages that contain threats recognized by URL Defense or Attachment Defense are exposed.
+* Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
+* Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
 
 ---
 
@@ -93,7 +96,7 @@ The Proofpoint TAP function package provides the
   | **score_threshold** | No | `50` | *classification for the type of event to import based on the respective threat score* |
   | **threat_template** | No | `50` | *Jinja template to override default threat description format* |
   | **forensics_template** | No | `` | *Jinja template to override default forensic format* |
-  | **cafile** | No | `` | *if required by Proofpoint* |
+  | **cafile** | No | `cafile=~/.resilient/tap/cert.cer` | *if required by Proofpoint* |
   | **http_proxy** | No | `http://proxyhost:8080` | *for access via a proxy* |
   | **https_proxy** | No | `https://proxyhost:8080` | *for access via a proxy* |
 
