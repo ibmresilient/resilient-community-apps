@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-proofpoint-tap Functions for IBM Resilient
+# Proofpoint TAP Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -29,8 +29,13 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### v1.0.0
-* Initial Release
+### What's new in this Beta
+* Fixed a bug for Get Forensics function when adding a Note the Workflow needed a long time to complete.
+* Improved the poller logic and filtering based on score threshold.
+* Improved the documentation.
+* Renamed the names of Rules and Workflows in Resilient UI for better clarity.
+* Updated both jinja2 templates to extract more information from the endpoint.
+* Important note if you are using both Proofpoint TAP and TRAP integrations. TAP polls events and TRAP polls incidents, one could be more granular thant the other and you might not need to use both pollers at the same time.
 
 ---
 
@@ -42,7 +47,7 @@
 Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers with an innovative approach that detects, analyzes and blocks advanced threats before they reach your inbox. This includes ransomware and other advanced email threats delivered through malicious attachments and URLs.
 
 The Proofpoint TAP function package provides the following features:
-*  Poll detailed information about several types of TAP events in a SIEM-compatible, vendor-neutral format. Currently, Blocked or permitted clicks to threats recognized by URL Defense and Blocked or delivered messages that contain threats recognized by URL Defense or Attachment Defense are exposed.
+* Poll detailed information about several types of TAP events in a SIEM-compatible, vendor-neutral format. This includes Blocked or permitted clicks to threats recognized by URL Defense and Blocked or delivered messages that contain threats recognized by URL Defense or Attachment Defense are exposed.
 * Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
 * Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
 
@@ -88,17 +93,17 @@ The Proofpoint TAP function package provides the following features:
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
   | **base_url** | Yes | `https://tap-api-v2.proofpoint.com/v2` | *URL and credentials to authenticate to Proofpoint TAP* |
-  | **username** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP* |
-  | **password** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP* |
-  | **polling_interval** | Yes | `5` | *how often, in minutes, to check for new events, 0 to turn off* |
-  | **startup_interval** | No | `30` | *how long, in minutes (max 60) to check for previous events at startup* |
-  | **type_filter** | No | `malware, phish, spam, imposter, all` | *filtering - comma separated list of types of events to import into Resilient* |
-  | **score_threshold** | No | `50` | *classification for the type of event to import based on the respective threat score* |
-  | **threat_template** | No | `50` | *Jinja template to override default threat description format* |
-  | **forensics_template** | No | `` | *Jinja template to override default forensic format* |
-  | **cafile** | No | `cafile=~/.resilient/tap/cert.cer` | *if required by Proofpoint* |
-  | **http_proxy** | No | `http://proxyhost:8080` | *for access via a proxy* |
-  | **https_proxy** | No | `https://proxyhost:8080` | *for access via a proxy* |
+  | **username** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP.* |
+  | **password** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP.* |
+  | **polling_interval** | Yes | `5` | *How often, in minutes, to check for new events, 0 to turn off.* |
+  | **startup_interval** | No | `30` | *How long, in minutes (max 60) to check for previous events at startup.* |
+  | **type_filter** | No | `malware, phish, spam, imposter, all` | *Filtering a comma-separated list of types of events to import into the Resilient platform* |
+  | **score_threshold** | No | `50` | *Classification for the type of event to import based on the respective threat score.* |
+  | **threat_template** | No | `50` | *Jinja template to override default threat description format.* |
+  | **forensics_template** | No | `` | *Jinja template to override default forensic format.* |
+  | **cafile** | No | `cafile=~/.resilient/tap/cert.cer` | *If required by Proofpoint.* |
+  | **http_proxy** | No | `http://proxyhost:8080` | *For access via a proxy.* |
+  | **https_proxy** | No | `https://proxyhost:8080` | *For access via a proxy.* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -116,9 +121,7 @@ The Proofpoint TAP function package provides the following features:
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+* There are two custom incident fields Proofpoint Campaign ID and Proofpoint Threat ID that you may show on a desired layout. These two fields get automatically populated by the Proofpoint TAP poller.
 
 ---
 
