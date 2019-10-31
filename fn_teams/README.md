@@ -128,7 +128,6 @@ There are several ways to verify the successful operation of a function.
 
 ---
 
-
 ## Configure fn_teams
 After running `resilient-circuits config -l fn-teams`, your app.config file will contain the following section
 
@@ -137,13 +136,14 @@ After running `resilient-circuits config -l fn-teams`, your app.config file will
 # add multiple parameters for the channels to access and their webhook. 
 #  The channel name is used in the function input: teams_channel
 #<channel_name>=<teams channel webhook>
+# use this channel reference to use the self-test capability of resilient-circuits
+#selftest=<teams channel webhook>
 ```
 
 Any number of channels can be configured, each with it's own inbound webhook. If you're unfamiliar with Teams' inbound webhooks, refer to the setup 
 documentation such as this [medium article](https://medium.com/@ankush.kumar133/get-started-with-microsoft-team-connectors-incoming-webhook-a330657993e7)
 
 Copy the webhook URL and add it to your `[fn_teams]` section using a label which refers to the channel. This label is then used in your Resilient workflow, configuring the `Teams Post Message` function's `teams_channel` input parameter.
-
 
 
 ## Support

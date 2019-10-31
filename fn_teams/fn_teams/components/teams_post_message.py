@@ -34,9 +34,6 @@ class FunctionComponent(ResilientComponent):
     def _teams_post_message_function(self, event, *args, **kwargs):
         """Function: Post a message to a Microsoft Teams channel"""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
-
             validate_fields(['incident_id', 'teams_channel', 'teams_payload'], kwargs)
 
             # Get the function parameters:
@@ -121,7 +118,7 @@ class FunctionComponent(ResilientComponent):
                 cardsection.enableMarkdown()
 
             if section.get("title"):
-                cardsection.title(teams_payload.get("title"))
+                cardsection.title(section.get("title"))
 
             if section.get("text"):
                 cardsection.text(section.get("text"))

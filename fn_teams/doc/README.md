@@ -59,7 +59,7 @@ format of a payload. * = optional
 | `task_id` | `number` | No | `-` | - |
 | `teams_channel` | `text` | Yes | `-` | Lookup label to channel to post a message |
 | `teams_mrkdown` | `boolean` | Yes | `-` | Yes / No |
-| `teams_payload` | `text` | Yes | `-` | json of teams conversation message: title, text, sections, facts |
+| `teams_payload` | `text` | Yes | `-` | json formmatted data of teams conversation message: title, text, sections, facts |
 
 </p>
 </details>
@@ -130,9 +130,6 @@ None
 </details>
 
 ---
-
-
-
 
 ## Rules
 | Rule Name | Object | Workflow Triggered |
