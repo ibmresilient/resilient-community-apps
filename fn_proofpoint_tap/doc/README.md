@@ -27,83 +27,62 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+* Poller
+* Get Forensics
+* Get Campaign
 
 ---
 
-## Function - Proofpoint TAP Get Campaign
-Function pulls specific details about campaigns including description, the actor, malware family, techniques and the threat variants associated with the campaign.
+## Poller
 
- ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/fn-proofpoint-tap-get-campaign.png)
+Threaded Poller which runs continuously while the integration is running.
 
-<details><summary>Inputs:</summary>
-<p>
+* Polls Proofpoint TAP events for all clicks and messages relating to known threats within the specified time period.
+* Filter the events based on their classification type/threat type - malware, phish, spam, imposter, all that is set in app.config.
+* Filter type of events to import based on the respective threat score that is set in app.config.
+* Creates Incidents in the Resilient platform based on the events.
+* Adds artifacts to incidents in the Resilient platform corresponding to Proofpoint TRAP campaign ID and threat ID.
 
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `proofpoint_campaign_id` | `text` | No | `-` | - |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.proofpoint_campaign_id = artifact.value
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-# results and results.data are both a Dictionary
-if results and results.get("data"):
-  incident.addNote(str(results.get("data")))
-else:
-  incident.addNote("No Campaign information found for artifact {}.".format(artifact.value))
-```
-
-</p>
-</details>
-
+ ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/poller.png) 
 ---
+
 ## Function - Proofpoint TAP Get Forensics
-Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.
+Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment. The results are saved in a Note.
 
- ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/fn-proofpoint-tap-get-forensics.png)
+ ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/get_forensics.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `proofpoint_aggregate_flag` | `boolean` | No | `-` | - |
-| `proofpoint_campaign_id` | `text` | No | `-` | - |
-| `proofpoint_malicious_flag` | `boolean` | No | `-` | - |
-| `proofpoint_threat_id` | `text` | No | `-` | - |
+| `proofpoint_aggregate_flag` | `boolean` | No | `-` | `A boolean value, defaulting to false. May optionally be used with the threatId parameter. It cannot be used with the campaignId parameter. If false, aggregate forensics for that specific threat identifier will be returned. If true AND if the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise, aggregate forensics for the individual threat are returned.` |
+| `proofpoint_campaign_id` | `text` | No | `-` | `An string containing a campaign identifier.` |
+| `proofpoint_malicious_flag` | `boolean` | No | `-` | `Show malicious results only` |
+| `proofpoint_threat_id` | `text` | No | `-` | `An string containing a threat identifier.` |
 
 </p>
 </details>
+
+There are three Workflows build on top of this function:
+
+* Example: Proofpoint TAP - Aggregate Forensics for Threat 
+
+Workflow imports additional forensic information based on the given threat identifier. Aggregate forensics for the given threat identifier will be returned and additionally filtered to include malicious results only.
+
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Threat.png)
+
+* Example: Proofpoint TAP - Get Forensics by Campaign ID 
+
+Workflow imports additional forensics information based on the given campaign identifier.
+
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Forensics_CampaignID.png)
+
+* Exemple: Proofpoint TAP - Aggregate Forensics for Campaign 
+
+Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned.
+
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Campaign.png)
 
 <details><summary>Outputs:</summary>
 <p>
@@ -146,12 +125,58 @@ else:
 
 ---
 
+## Function - Proofpoint TAP Get Campaign
+Function pulls specific details about campaigns including description, the actor, malware family, techniques and the threat variants associated with the campaign. The results are saved in a Note.
+
+ ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/get_campaign.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `proofpoint_campaign_id` | `text` | No | `-` | `An string containing a campaign identifier.` |
+
+There is one Workflow build on top of this function:
+
+* Example: Proofpoint TAP - Get Campaign  
+
+Workflow imports detailed information for given campaign identifier, including description, the actor, malware family, techniques and the threat variants associated with the campaign.
+
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Campaign_wk.png)
+
+<p>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.proofpoint_campaign_id = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+# results and results.data are both a Dictionary
+if results and results.get("data"):
+  incident.addNote(str(results.get("data")))
+else:
+  incident.addNote("No Campaign information found for artifact {}.".format(artifact.value))
+```
+
+</p>
+</details>
+
+---
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| Proofpoint Campaign ID | `campaignId` | `text` | `properties` | - | - |
-| Proofpoint Message ID | `messageID` | `text` | `properties` | - | - |
+| Proofpoint Campaign ID | `campaignId` | `text` | `properties` | - | `An string containing a campaign identifier.` |
+| Proofpoint Message ID | `messageID` | `text` | `properties` | - | `An string containing a threat identifier.` |
 
 ---
 
