@@ -27,8 +27,8 @@ setup(
     description="Resilient integration for Proofpoint TRAP",
     long_description="Resilient integration for Proofpoint TRAP. Pulls information data from Proofpoint TRAP",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient>=30.0.0',
+        'resilient_circuits>=33.0.0',
+        'resilient>=32.0.0',
         'resilient_lib>=32.0.0'
     ],
     packages=find_packages(),
