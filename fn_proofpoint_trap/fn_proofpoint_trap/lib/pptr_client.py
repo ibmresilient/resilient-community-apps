@@ -9,10 +9,11 @@ from datetime import datetime
 from sys import version_info
 import os
 import requests
-try:
-    from urllib.parse import urljoin
-except:
+if version_info.major < 3:
     from urlparse import urljoin
+else:
+    from urllib.parse import urljoin
+
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
