@@ -82,8 +82,8 @@ class FunctionComponent(ResilientComponent):
             elif breaches_response.status_code == 429:
                 time.sleep(2)
             else:
-                log.warn("Have I Been Pwned returned unexpected status code")
-                yield FunctionError("Have I Been Pwned returned unexpected status code")
+                log.warn("Have I Been Pwned returned " + breaches_response.status_code + "unexpected status code")
+                yield FunctionError("Have I Been Pwned returned " + breaches_response.status_code + " status code")
 
             results = {
                 "Breaches": breaches
