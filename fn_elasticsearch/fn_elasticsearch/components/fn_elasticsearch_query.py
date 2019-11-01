@@ -16,6 +16,7 @@ from fn_elasticsearch.util.helper import ElasticSearchHelper
 BADLY_FORMED_QUERY = 400
 NOT_FOUND = 404
 ES_ERROR = 500
+ELASTIC_VERSION = 6
 ERROR_TUPLE = (BADLY_FORMED_QUERY, NOT_FOUND, ES_ERROR)
 
 LOG = logging.getLogger(__name__)
@@ -93,17 +94,9 @@ class FunctionComponent(ResilientComponent):
             query_results = None
             matched_records = 0
             es_instance_info = es.info()
-            try:
+            
+            es_results = self.perform_search(es_instance_info, es, es_query, es_index, es_doc_type)
 
-                if int(es_instance_info["version"]["number"][0]) > 6:
-                    log.debug("Connected ElasticSearch instance is higher than version 6, doc_type won't be sent with the request")
-                    es_results = es.search(index=es_index, body=es_query, ignore=[400, 404, 500])
-
-                else:
-                    log.debug("Connected ElasticSearch instance is 6 or lower, doc_type will be added to the search request")
-                    es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
-            except Exception as e:
-                raise FunctionError("Encountered error while submitting query to ElasticSearch {0}".format(e))
             # If our results has a 'hits' attribute; inform the user
             if 'hits' in es_results:
                 yield StatusMessage("Call to elasticsearch was successful. Returning results")
@@ -146,3 +139,16 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    @staticmethod
+    def perform_search(es_instance_info, es, es_query, es_index, es_doc_type):
+        try:
+            if int(es_instance_info["version"]["number"][0]) > ELASTIC_VERSION:
+                LOG.debug("Connected ElasticSearch instance is higher than version 6, doc_type won't be sent with the request")
+                es_results = es.search(index=es_index, body=es_query, ignore=[400, 404, 500])
+            else:
+                LOG.debug("Connected ElasticSearch instance is 6 or lower, doc_type will be added to the search request")
+                es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
+        except Exception as e:
+            raise ValueError("Encountered error while submitting query to ElasticSearch {0}".format(e))
+        return es_results
