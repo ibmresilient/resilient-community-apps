@@ -4,7 +4,6 @@
 
 """ Helper functions for Resilient circuits Functions supporting ProofPoint TRAP """
 
-import datetime
 import logging
 
 from resilient_circuits.actions_component import ResilientComponent
