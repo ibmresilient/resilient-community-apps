@@ -58,7 +58,7 @@ The Proofpoint TAP function package provides the following features:
   List any Requirements 
 -->
 * Resilient platform >= `v32`
-* An Integration Server running `resilient_circuits>=33.0.192`
+* An Integration Server running `resilient_circuits>=32.0.186`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---

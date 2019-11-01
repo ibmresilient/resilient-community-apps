@@ -13,7 +13,7 @@ setup(
     description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     long_description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=32.0.186',
         'resilient-lib'
     ],
     packages=find_packages(),
