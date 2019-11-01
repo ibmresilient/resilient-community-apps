@@ -104,7 +104,8 @@ class FunctionComponent(ResilientComponent):
             else:
                 datastream = BytesIO(captured_lines.encode("utf-8"))
 
-            attachment_result = write_file_attachment(rest_client, log_attachment_name, datastream,
+            # failures will raise an exception
+            write_file_attachment(rest_client, log_attachment_name, datastream,
                                                       incident_id, task_id)
 
             # Produce a FunctionResult with the results
@@ -112,7 +113,6 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("done...")
 
             result_data = { "attachment_name": log_attachment_name, "num_of_lines": num_of_lines }
-
             results = result_payload.done(True, result_data)
 
             yield FunctionResult(results)
