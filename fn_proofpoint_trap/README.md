@@ -56,8 +56,8 @@ The ProofPoint TRAP function package provides the following features:
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v30.0.3476`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* Resilient platform >= `v32`
+* An Integration Server running `resilient_circuits>=33.0.192`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
@@ -87,14 +87,14 @@ The ProofPoint TRAP function package provides the following features:
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **base_url** | Yes | https://192.168.1.1/api | *Base URL of Proofpoint TRAP API* |
-  | **api_key** | Yes | abcd1234-a123-123a-123a-123456abcdef | *API Key for Proofpoint TRAP* |
-  | **polling_interval** | Yes | 2 | *Interval to poll TRAP in Minutes* |
-  | **startup_interval** | Yes | 60 | *Initial Import Look-back Interval in minutes (default: 1 hour)* |
+  | **base_url** | Yes | https://192.168.1.1/api | *Base URL of Proofpoint TRAP API.* |
+  | **api_key** | Yes | abcd1234-a123-123a-123a-123456abcdef | *API Key for Proofpoint TRAP.* |
+  | **polling_interval** | Yes | 2 | *Interval to poll Proofpoint TRAP in Minutes, 0 to turn off.* |
+  | **startup_interval** | Yes | 60 | *Initial Import Look-back Interval in minutes (default: 1 hour).* |
   | **state** | Yes | open | *State of Incidents to Query* |
   | **host_categories** | Yes | attacker,cnc,forensics,url | *Comma separated list of 'host' categories to check for artifacts. The default is forensics.* |
-  | **cafile** | No | cafile=~/.resilient/trap/cert.cer | *Optional setting to use a ca certificate to access Proofpoint TRAP* |                            |                                    |
-  | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Proofpoint TRAP via a proxy* |                                   |
+  | **cafile** | No | cafile=~/.resilient/trap/cert.cer | *Optional setting to use a ca certificate to access Proofpoint TRAP.* |                            |                                    |
+  | **http_proxy** or **https_proxy** | No | https://proxyhost:8080 | *Optional settings for access to Proofpoint TRAP via a proxy.* |                                   |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
