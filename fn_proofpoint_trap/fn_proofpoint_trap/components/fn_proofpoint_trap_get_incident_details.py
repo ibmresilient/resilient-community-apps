@@ -8,9 +8,7 @@
 # Manual Action: Execute a REST query against a ProofPoint TRAP server.
 
 import logging
-import requests
-import json
-import os
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient

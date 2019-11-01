@@ -4,7 +4,6 @@
 """ Incident poller for a ProofPoint TRAP server """
 
 import logging
-import os
 import time
 import pprint
 import re
