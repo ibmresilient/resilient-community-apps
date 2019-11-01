@@ -9,6 +9,7 @@
     -----------
     This file contains the configuration settings for NLP. This can allow the
     user to change these in the future, by reading from app.config for example
+    Singleton design pattern
 """
 
 
@@ -46,10 +47,10 @@ class NLPSettings:
         :param opt:
         :return:
         """
-        self.w2v_feature_size = opt.get("word2vec_feature_size", NLPSettings.WORD2VEC_FEATURE_SIZE)
+        self._w2v_feature_size = opt.get("word2vec_feature_size", NLPSettings.WORD2VEC_FEATURE_SIZE)
 
     def __init__(self):
-        self.w2v_feature_size = NLPSettings.WORD2VEC_FEATURE_SIZE
+        self._w2v_feature_size = NLPSettings.WORD2VEC_FEATURE_SIZE
 
     def bigram_min_count(self):
         return self.BIGRAM_MIN_COUNT
@@ -85,4 +86,4 @@ class NLPSettings:
         return NLPSettings.WORD2VEC_REPORT_DELAY
 
     def w2v_feature_size(self):
-        return self.w2v_feature_size
+        return self._w2v_feature_size

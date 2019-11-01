@@ -12,6 +12,8 @@ NLP can rank incidents by computing similarity. Specify how many top
 incidents to return by the search, or leave it empty to use default
 value.
 
+Note: for 0 or negative input, default number of incidents will be returned
+
 ![menu](./images/Menu.png)
 
 To change the default number of incidents to return value, go to

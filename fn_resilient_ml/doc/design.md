@@ -22,3 +22,10 @@ Compute a vector an input sentence, using word2vec and SIF
 
 ### ResNLP
 Subclass of NlpWord2Vec. Implements logic to preprocess incident data
+
+## Sequences
+Two major processes, namely building a NLP model and searching using a
+NLP model
+### Build NLP model
+
+### Search

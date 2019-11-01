@@ -14,7 +14,7 @@
 import logging
 import numpy as np
 from fn_resilient_ml.lib.nlp.word_sentence_utils import WordSentenceUtils
-
+import json
 
 class ResSen2Vec:
     # parameter used in compute frequency
@@ -28,6 +28,36 @@ class ResSen2Vec:
         # util to preprocess data
         self.utils = WordSentenceUtils()
         self.log = log if log else logging.getLogger(__name__)
+        self.sentence_vectors = []
+        self.feature_size = 0
+
+    def get_vec_for_words(self, words):
+        """
+
+        :param words:
+        :return:
+        """
+        self.feature_size = self.word2vec.vector_size
+        v = np.zeros(self.feature_size, dtype="float64")
+
+        count = 0
+        for word in words:
+            word_count = self.sif.get_word_count(word)
+            if word_count > 0:
+                try:
+                    a_value = self.SIF_A / (self.SIF_A + word_count)
+                    vec = np.multiply(a_value, self.word2vec[word])
+                    v = np.add(v, vec)
+                    count += 1
+                except Exception as e:
+                    # Not an error if word is not in the vocab
+                    self.log.debug("{} is not in the vocab of the word2vec model".format(word))
+
+        # normalize it
+        if count != 0:
+            v = np.divide(v, count)
+
+        return v
 
     def get_vec_for_sentence(self, sentence):
         """
@@ -36,23 +66,7 @@ class ResSen2Vec:
         :return:
         """
         words = self.utils.get_words(sentence)
-        feature_size = self.word2vec.vector_size
-        v = np.zeros(feature_size, dtype="float64")
-
-        count = 0
-        for word in words:
-            word_count = self.sif.get_word_count(word)
-            if word_count > 0:
-                a_value = self.SIF_A/(self.SIF_A + word_count)
-                vec = np.multiply(a_value, self.word2vec.get_vec(word))
-                v = np.add(v, vec)
-                count += 1
-
-        # normalize it
-        if count != 0:
-            v = np.divide(v, count)
-
-        return v
+        return self.get_vec_for_words(words)
 
     def get_similarity(self, sentence1, sentence2):
         """
@@ -68,3 +82,53 @@ class ResSen2Vec:
 
         return sim
 
+    def cache_sentence_vectors(self, dataset, inc_ids, s2v_file):
+        """
+        Compute vectors for all sentences in the dataset and cache it to a file.
+        They will be used later to compute similarity
+        :param dataset: sentences for incident. A sentence includes the name, description,
+                        resolution_summary, artifact values, and artifact descriptions
+        :param inc_ids: list of incident ids corresponding to the sentences above
+        :param s2v_file: file to store cached vectors
+        :return:
+        """
+        ret = False
+        if len(inc_ids) != len(dataset):
+            self.log.error("Data mismatched! {} sentences and {} incident ids".format(len(dataset), len(inc_ids)))
+            return ret
+
+        sen_vecs = {}
+        for i in range(len(inc_ids)):
+            sen_vecs[inc_ids[i]] = list(self.get_vec_for_words(dataset[i]))
+
+        with open(s2v_file, "w") as outfile:
+            json.dump(sen_vecs, outfile)
+            ret = True
+
+        return ret
+
+    def load_s2v(self, s2v_file):
+        """
+        Load cached vectors
+
+        :param s2v_file:
+        :return:
+        """
+        ret = False
+        with open(s2v_file, "r") as infile:
+            self.sentence_vectors = json.load(infile)
+            ret = True
+
+        if len(self.sentence_vectors.keys()) > 0:
+            key = self.sentence_vectors.keys()[0]
+            self.feature_size = len(self.sentence_vectors[key])
+        return ret
+
+    def get_incident_vec(self, inc_id):
+        """
+        Get the vector for the given incident
+        :param inc_id: Incident ID
+        :return:
+        """
+        v = np.zeros(self.feature_size, dtype="float64")
+        return self.sentence_vectors.get(inc_id, v)

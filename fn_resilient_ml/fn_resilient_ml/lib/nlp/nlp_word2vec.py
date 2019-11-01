@@ -57,12 +57,12 @@ class NLPWord2Vec:
         """
         return
 
-    def save_model(self):
+    def save_model(self, w2v_file):
         """
         Save the NLP model into a txt file.
         :return:
         """
-        model_file = FileManage.DEFAULT_NLP_FILE
+        model_file = w2v_file
         if self.model_name is not None:
             model_file = self.model_name + "-w2v.txt"
 
@@ -120,7 +120,7 @@ class NLPWord2Vec:
 
         self.word2vec = word2vec
 
-    def get_vec(self, word):
+    def get_word_vec(self, word):
         """
         Get the vector (word embedding) for a word
         :param word:

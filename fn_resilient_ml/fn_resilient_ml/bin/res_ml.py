@@ -71,7 +71,8 @@ def main():
     """
     Main function. We hanlde building NLP now.
         1. build_nlp:   Build a NLP model
-            -i:         [Optional] CSV file for sample data. Download directly if not specified
+            -i:         [Optional] CSV file for incident data. Download directly if not specified
+            -a:         [Optional] CSV file for artifact data. Download directly if not specified
             -o:         [Optional] Name used for output files. Use default if not specified
         2. view:        Show summary of a saved model/SIF file
             -i:         Required flag, input file to view
@@ -93,13 +94,17 @@ def main():
                                         help="View summary of a saved model")
 
     # 1. build_nlp
-    #   -i (Optional) Specify a CSV file with data samples
-    nlp_parser.add_argument("-i", "--input",
-                            help="CSV file with data samples",
+    #   -i (Optional) Specify a CSV file with incident data
+    nlp_parser.add_argument("-i", "--incident",
+                            help="CSV file with incident data",
                             default=None)
-    #   -o (Optional) Name used for output files
+    #   -a (Optional) Specify a CSV file with artifact data
+    nlp_parser.add_argument("-a", "--artifact",
+                            help="CSV file with artifact data",
+                            default=None)
+    #   -o (Optional) Model name used for output files
     nlp_parser.add_argument("-o", "--output",
-                            help="Name used for output files. Don't include extension.",
+                            help="Model name used for output files. Don't include extension.",
                             default=None)
 
     # 2. view
@@ -155,25 +160,43 @@ def build_nlp(args, opt_parser):
     opt = opt_parser.opts.get(MACHINE_LEARNING_SECTION)
     nlp_settings.update_settings(opt)
 
-    inc_file = args.input if args.input else file_manage.FileManage.DEFAULT_INCIDENT_FILE
-    art_file = file_manage.FileManage.DEFAULT_ARTIFACT_FILE
+    inc_file = args.incident
+    art_file = args.artifact
     #
     #   1. Download incidents and artifacts. To be used as training data
     #
-    res_utils = ResUtils()
-    res_utils.connect(opt_parser)
-    res_utils.download_incidents(inc_file)
-    res_utils.download_artifacts(art_file)
+    if inc_file is None or art_file is None:
+        res_utils = ResUtils()
+        res_utils.connect(opt_parser)
+
+    if inc_file is None:
+        res_utils.download_incidents(inc_file)
+    else:
+        inc_file = file_manage.FileManage.DEFAULT_INCIDENT_FILE
+
+    if art_file is None:
+        res_utils.download_artifacts(art_file)
+    else:
+        art_file = file_manage.FileManage.DEFAULT_ARTIFACT_FILE
     #
     #   2. Build NLP model
     #
     res_nlp = ResNLP(inc_file=inc_file,
                      art_file=art_file)
 
-    res_nlp.build_model()
+    res_nlp.build()
     #
     #   3. Save the model
     #
-    res_nlp.save_model()
+    model_name = args.output
+    if model_name is not None:
+        sif_file = model_name + "-sif.json"
+        vec_file = model_name + "-vec.pkl"
+        w2v_file = model_name + "-w2v.txt"
+        res_nlp.save(w2v_file=w2v_file,
+                     sif_file=sif_file,
+                     s2v_file=vec_file)
+    else:
+        res_nlp.save()
 
     return
