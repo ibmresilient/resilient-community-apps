@@ -214,8 +214,17 @@ def triggered_job(incident_id, object_id, row_id,
     log.info("Executing Rule '{}:{}' for Incident {}".format(scheduler_label, rule_name, incident_id))
 
     # run the rule
-    resp = rest_client.post(url, payload)
-    log.debug(resp)
+    try:
+        resp = rest_client.post(url, payload)
+        log.debug(resp)
+    except SimpleHTTPException as err:
+        # is the object removed?
+        if "Not Found" in str(err):
+            log.error("Object not found and schedule will be removed for rule '%s'", rule_id)
+            add_comment(rest_client, incident_id, u"Error running rule '{}': {}".format(scheduler_label, str(err)))
+            scheduler.remove_job(scheduler_label)
+            return
+
     if rule_type:
         add_comment(rest_client, incident_id, u"Scheduled job '{}' run on {}: {}".format(rule_name, rule_type, object_id))
     else:
