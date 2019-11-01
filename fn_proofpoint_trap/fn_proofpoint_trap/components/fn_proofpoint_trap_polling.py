@@ -415,11 +415,8 @@ class PPTRIncidentPolling(ResilientComponent):
         super(PPTRIncidentPolling, self).__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
         validate_opts(self)
-        # initialize last update to startup interval if present, otherwise update interval
-        startup_interval = self.options.get('startup_interval', None)
-        if startup_interval is not None:
-            startup_interval = int(startup_interval)
-        self.lastupdate = startup_interval
+        self.stop_thread = False
+        self.threads = []
         self.main()
 
     @handler("reload")
@@ -427,15 +424,32 @@ class PPTRIncidentPolling(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_proofpoint_trap", {})
         validate_opts(self)
+        self.stop_thread = True
+        self.main()
 
     def main(self):
         """main entry point, instiantiate polling thread"""
+
+        # Wait for all existing threads to complete.
+        for thread in self.threads:
+            thread.join()
+
+        # Get rid of stopped threads from list.
+        self.threads = [t for t in self.threads if t.is_alive()]
+
         options = self.options
+        # initialize last update to startup interval if present, otherwise update interval
+        startup_interval = options.get('startup_interval', None)
+        if startup_interval is not None:
+            startup_interval = int(startup_interval)
+        self.lastupdate = startup_interval
+
         polling_interval = int(options.get("polling_interval", 0))
 
         if polling_interval  > 0:
             # Create and start polling thread
             thread = Thread(target=self.polling_thread)
+            self.threads.append(thread)
             thread.daemon = True
             thread.start()
             log.info("Polling for incidents in Proofpoint TRAP every {0} minutes".format(polling_interval))
@@ -487,6 +501,9 @@ class PPTRIncidentPolling(ResilientComponent):
             # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
             time.sleep(int(self.options.get("polling_interval", 10)) * 60)
 
+            if self.stop_thread:
+                self.stop_thread = False
+                break
 
     def make_data_table(self, events):
         """
