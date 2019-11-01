@@ -30,12 +30,12 @@
   notes of a previous release
 -->
 ### What's new in this Beta
-* Fixed a bug for Get Forensics function when adding a Note the Workflow needed a long time to complete.
+* Fixed a bug for Get Forensics function where adding a Note caused the Workflow a long time to complete.
 * Improved the poller logic and filtering based on score threshold.
 * Improved the documentation.
-* Renamed the names of Rules and Workflows in Resilient UI for better clarity.
+* Renamed the Rules and Workflows for clarity.
 * Updated both jinja2 templates to extract more information from the endpoint.
-* Important note if you are using both Proofpoint TAP and TRAP integrations. TAP polls events and TRAP polls incidents, one could be more granular thant the other and you might not need to use both pollers at the same time.
+* NOTE: If using both Proofpoint TAP and TRAP integrations, TAP polls events and TRAP polls incidents. One could be more granular than the other; therefore, you might not need to use both pollers at the same time.
 
 ---
 
@@ -58,7 +58,7 @@ The Proofpoint TAP function package provides the following features:
   List any Requirements 
 -->
 * Resilient platform >= `v32`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* An Integration Server running `resilient_circuits>=33.0.192`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---
@@ -97,7 +97,7 @@ The Proofpoint TAP function package provides the following features:
   | **password** | Yes | `` | *URL and credentials to authenticate to Proofpoint TAP.* |
   | **polling_interval** | Yes | `5` | *How often, in minutes, to check for new events, 0 to turn off.* |
   | **startup_interval** | No | `30` | *How long, in minutes (max 60) to check for previous events at startup.* |
-  | **type_filter** | No | `malware, phish, spam, imposter, all` | *Filtering a comma-separated list of types of events to import into the Resilient platform* |
+  | **type_filter** | No | `malware, phish, spam, impostor, all` | *Filtering a comma-separated list of types of events to import into the Resilient platform* |
   | **score_threshold** | No | `50` | *Classification for the type of event to import based on the respective threat score.* |
   | **threat_template** | No | `50` | *Jinja template to override default threat description format.* |
   | **forensics_template** | No | `` | *Jinja template to override default forensic format.* |

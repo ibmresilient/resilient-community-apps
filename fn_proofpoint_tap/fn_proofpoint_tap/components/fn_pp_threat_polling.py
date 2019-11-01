@@ -309,16 +309,16 @@ class PP_ThreatPolling(ResilientComponent):
         # if score_threshold was defined in the config file
         # filter the score values and pull appropriate threat types
         if self.score_threshold is not None:
-            # extract spam, phishing, malware and imposter scores, if no value default is -1
+            # extract spam, phishing, malware and impostor scores, if no value default is -1
             spamscore = float(data.get('spamScore', '-1'))
             phishscore = float(data.get('phishScore', '-1'))
             malwarescore = float(data.get('malwareScore', '-1'))
-            imposterscore = float(data.get('impostorScore', '-1'))
+            impostorscore = float(data.get('impostorScore', '-1'))
 
             log.debug("spamScore {}".format(spamscore))
             log.debug("phishScore {}".format(phishscore))
             log.debug("malwareScore {}".format(malwarescore))
-            log.debug("impostorScore {}".format(imposterscore))
+            log.debug("impostorScore {}".format(impostorscore))
 
             # create a copy of original_threat_types, keep the original values separate
             score_threat_types = original_threat_types.copy()
@@ -326,7 +326,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(spamscore, 'spam', score_threat_types)
             self._check_if_score_above_threshold(phishscore, 'phishing', score_threat_types)
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
-            self._check_if_score_above_threshold(imposterscore, 'imposter', score_threat_types)
+            self._check_if_score_above_threshold(impostorscore, 'impostor', score_threat_types)
 
             log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
