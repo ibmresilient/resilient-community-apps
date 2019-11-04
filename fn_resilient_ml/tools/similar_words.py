@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#   Given a input word, found n top similar words using a given model
+#   Given an input word, find n top similar words using a given model
 #   Usage:
 #       similar_words _input_word -n 5 -m model_file
 #
