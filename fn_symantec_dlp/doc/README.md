@@ -42,13 +42,122 @@ For an example of how to setup a Saved Report, see the README at the root of thi
 
 
 ## Function - Symantec DLP: Update Incident
+A function which is used to update the details of a Symantec DLP Incident. Takes 1 input which is a dictionary of things to be changed. To enable to updating of multiple custom attributes, provide a list or dictionary of all the attributes to be changed in the format: <attribute_name>: <new_value>
 
-**Function is unimplementated**
+ ![screenshot: fn-symantec-dlp-update-incident ](./screenshots/fn-symantec-dlp-update-incident.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `sdlp_update_payload` | `textarea` | Yes | `-` | A JSON-like object which contains values to be updated on a given Symantec DLP Incident |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+#######################################
+### Define pre-processing functions ###
+#######################################
+def dict_to_json_str(d):
+  """Function that converts a dictionary into a JSON stringself.
+     Supports basestring, bool and int.
+     If the value is None, it sets it to False"""
+
+  json_str = '"{ {0} }"'
+  json_entry = '"{0}":{1}'
+  json_entry_str = '"{0}":"{1}"'
+  json_entry_unicode = u'"{0}":"{1}"'
+  entries = [] 
+  
+  for entry in d:
+    key = entry
+    value = d[entry]
+    
+      
+    if value is None:
+      value = False
+      
+    if isinstance(value, unicode):
+      entries.append(json_entry_unicode.format(key, value))
+      
+    elif isinstance(value, basestring):
+      entries.append(json_entry_str.format(key, value))
+    
+    elif isinstance(value, bool):
+      value = 'true' if value == True else 'false'
+      entries.append(json_entry.format(key, value))
+    
+    else:
+      entries.append(json_entry.format(key, value))
+  
+  return '{' + ','.join(entries) + '}'
+
+from java.util import Date
+
+# Prepare the payload which will be sent to DLP as an update request
+payload = {
+"note": u"Note Sent via Resilient Integration with DLP. [{}]{}".format(Date(), rule.properties.sdlp_note_to_be_sent or "Default Note from Resilient"),
+"incident_id": incident.properties.sdlp_incident_id
+}
+
+
+inputs.sdlp_update_payload = dict_to_json_str(payload)
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+---
+
 
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
-| Symantec DLP Incident URL  | `sdlp_incident_url` | `textarea` | `properties` | - | - |
 | Symantec DLP Incident ID | `sdlp_incident_id` | `number` | `properties` | - | The ID of a Symantec DLP Incident |
+| Symantec DLP Incident URL  | `sdlp_incident_url` | `textarea` | `properties` | - | - |
 
 ---
+
+
+## Rules
+| Rule Name | Object | Workflow Triggered |
+| --------- | ------ | ------------------ |
+| Example: Symantec DLP - Send a note to a DLP Incident | incident | `sdlp_send_note_to_incident` |
+| Example: Symantec DLP - Update DLP when this Incident is closed  | incident | `sdlp_set_incident_status` |
+
+---
+
+<!--
+## Inform Resilient Users
+  Use this section to optionally provide additional information so that Resilient playbook 
+  designer can get the maximum benefit of your integration.
+-->
