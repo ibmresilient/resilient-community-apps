@@ -10,10 +10,12 @@
 #    install the additional packages extracted at a later time.
 #
 
-# pip command to run. Can be overwritten with --pip_cmd
+# python version to run. Can be overwritten with --python_version
 pip_cmd='pip'
-if [ $# -ne 1 ] && [ "$1" == "--pip_cmd" ]; then
-   pip_cmd=$2
+python_cmd='python'
+if [ $# -ne 1 ] && [ "$1" == "--python_version" ]; then
+   pip_cmd="$pip_cmd$2"
+   python_cmd="$python_cmd$2"
    shift 2
 fi
 echo "Using pip cmd: '${pip_cmd}'"
@@ -22,7 +24,7 @@ echo "Using pip cmd: '${pip_cmd}'"
 ${pip_cmd} install --no-index --find-links=./lib/ --upgrade --user virtualenv
 if [ $? -eq 0 ]; then
    mkdir ~/venv
-   ~/.local/bin/virtualenv ~/venv/resilient-circuits
+   ~/.local/bin/virtualenv -p $python_cmd ~/venv/resilient-circuits
    source ~/venv/resilient-circuits/bin/activate
 fi
 #
