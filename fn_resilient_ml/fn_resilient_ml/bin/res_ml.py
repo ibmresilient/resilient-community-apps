@@ -170,14 +170,16 @@ def build_nlp(args, opt_parser):
         res_utils.connect(opt_parser)
 
     if inc_file is None:
-        res_utils.download_incidents(inc_file)
-    else:
         inc_file = file_manage.FileManage.DEFAULT_INCIDENT_FILE
 
+    if not os.path.exists(inc_file):
+        res_utils.download_incidents(inc_file)
+
     if art_file is None:
-        res_utils.download_artifacts(art_file)
-    else:
         art_file = file_manage.FileManage.DEFAULT_ARTIFACT_FILE
+
+    if not os.path.exists(art_file):
+        res_utils.download_artifacts(art_file)
     #
     #   2. Build NLP model
     #

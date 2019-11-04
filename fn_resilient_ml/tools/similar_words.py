@@ -25,7 +25,7 @@ parser.add_argument("-m", "--model",
 args, unknown_args = parser.parse_known_args()
 
 model_file = args.model
-num_return = args.number
+num_return = int(args.number)
 word = args.word
 
 print("similar-words:")
