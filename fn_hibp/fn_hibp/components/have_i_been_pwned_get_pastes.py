@@ -5,7 +5,6 @@
 import logging
 import requests
 import time
-import re
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 
@@ -50,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             result_payload = ResultPayload("fn_hibp", **kwargs)
 
             # Get the function parameters:
-            email_address = kwargs.get("hibp_email_address")  # text
+            email_address = kwargs.get("email_address")  # text
 
             log = logging.getLogger(__name__)
             if email_address is not None:
@@ -80,8 +79,8 @@ class FunctionComponent(ResilientComponent):
             elif pastes_response.status_code == 429:
                 time.sleep(2)
             else:
-                log.warn("Have I Been Pwned returned unexpected status code")
-                yield FunctionError("Have I Been Pwned returned unexpected status code")
+                log.warn("Have I Been Pwned returned " + str(pastes_response.status_code) + " unexpected status code")
+                yield FunctionError("Have I Been Pwned returned " + str(pastes_response.status_code) + " status code")
 
             results = {
                 "Pastes": pastes

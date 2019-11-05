@@ -5,7 +5,6 @@
 import logging
 import requests
 import time
-import re
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 
@@ -50,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             result_payload = ResultPayload("fn_hibp", **kwargs)
 
             # Get the function parameters:
-            email_address = kwargs.get("hibp_email_address")  # text
+            email_address = kwargs.get("email_address")  # text
 
             log = logging.getLogger(__name__)
             if email_address is not None:
@@ -59,8 +58,6 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError("email_address is required to run this function")
 
             hibp_api_key = self.get_config_option("hibp_api_key")
-            if re.match('<.*>', hibp_api_key) is not None:
-                raise ValueError("API Key is required to use HIBP API")
 
             headers={
                         'User-Agent': 'Resilient HIBP/2.0',
@@ -82,8 +79,8 @@ class FunctionComponent(ResilientComponent):
             elif breaches_response.status_code == 429:
                 time.sleep(2)
             else:
-                log.warn("Have I Been Pwned returned " + breaches_response.status_code + "unexpected status code")
-                yield FunctionError("Have I Been Pwned returned " + breaches_response.status_code + " status code")
+                log.warn("Have I Been Pwned returned " + str(breaches_response.status_code) + " unexpected status code")
+                yield FunctionError("Have I Been Pwned returned " + str(breaches_response.status_code) + " status code")
 
             results = {
                 "Breaches": breaches
