@@ -69,4 +69,4 @@ for w in all_words:
             closest.sort(key=lambda u:u["sim"])
 
 for c in closest:
-    print("{}: {}".format(c["word"], c["sim"]))
+    print("\t%-30s %s"%(c["word"] + ":", c["sim"]))
