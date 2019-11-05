@@ -34,14 +34,15 @@ This package of functions allows an enterprise to schedule a rule to run in the 
 3) date (ex. 2019/10/23 12:00:00 or 2019-10-23 12:00:00)
 4) delta (ex. 1h for one hour in the future, the same values as interval are supported)
 
-Scheduled rules using `cron` and `interval` are reocurring whereas `date` and `delta` are single event schedules. Scheduled rules are persisted so that restarts of resilient-circuits will resume already scheduled rules.
+Scheduled rules using `cron` and `interval` are reoccurring whereas `date` and `delta` are single event schedules. Scheduled rules are persisted so that restarts of resilient-circuits will resume already scheduled rules.
 
 Functions available include:
 <!--
   List the Key Features of the Integration
 -->
 * Create a scheduled rule
-* List scheduled rule
+* List scheduled rules
+* Pause and resume scheduled rules
 * Remove a scheduled rule
 
 ---
@@ -434,9 +435,6 @@ else:
 
 ---
 
-
-
-
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
@@ -460,7 +458,7 @@ else:
 * All schedules must be in the future.
 * Disabled rules will not execute but the scheduled rule will continue to trigger.
 * Rules triggered on closed incidents will not run and the scheduled rule will be removed.
-* Incident notes are created each time a scheduled rule is excuted documenting the rule invocation.
+* Incident notes are created each time a scheduled rule is executed documenting the rule invocation.
 * Scheduled rules will not show up under Action Status and Workflow Status. Refer instead to the incident notes.
 
 ### Artifacts
