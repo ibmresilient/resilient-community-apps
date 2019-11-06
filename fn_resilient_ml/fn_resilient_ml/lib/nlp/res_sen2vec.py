@@ -120,7 +120,7 @@ class ResSen2Vec:
             ret = True
 
         if len(self.sentence_vectors.keys()) > 0:
-            key = self.sentence_vectors.keys()[0]
+            key = next(iter(self.sentence_vectors))
             self.feature_size = len(self.sentence_vectors[key])
         return ret
 
@@ -132,3 +132,39 @@ class ResSen2Vec:
         """
         v = np.zeros(self.feature_size, dtype="float64")
         return self.sentence_vectors.get(inc_id, v)
+
+    def get_closest(self, sentence, num):
+        v1 = self.get_vec_for_sentence(sentence)
+        v1_norm = np.linalg.norm(v1)
+        closest = []
+        incident_ids = list(self.sentence_vectors.keys())
+        for i in range(num):
+            v2 = np.array(self.sentence_vectors[incident_ids[i]])
+
+            v2_norm = np.linalg.norm(v2)
+            if v1_norm == 0 or v2_norm == 0:
+                sim = 0
+            else:
+                sim = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+            closest.append({
+                "ref": incident_ids[i],
+                "sim": sim
+            })
+
+        closest.sort(key=lambda u:u["sim"])
+
+        for i in range(num, len(self.sentence_vectors)):
+            v2 = np.array(self.sentence_vectors[incident_ids[i]])
+            v2_norm = np.linalg.norm(v2)
+            if v1_norm == 0 or v2_norm == 0:
+                sim = 0
+            else:
+                sim = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+            if sim > closest[0]["sim"]:
+                closest[0] = {
+                    "ref": incident_ids[i],
+                    "sim": sim
+                }
+                closest.sort(key=lambda u: u["sim"])
+
+        return closest

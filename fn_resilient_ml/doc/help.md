@@ -6,6 +6,13 @@ and [SIF](https://openreview.net/pdf?id=SyK00v5xx) to find similar incidents.
 ## Usage
 
 ### Build a NLP model
+From a terminal of the integration server, make sure app.config has been
+created properly. Then
+```
+res-ml build_nlp
+```
+This will download the incidents and artifacts, and train a NLP
+model.
 
 ### Do a search
 NLP can rank incidents by computing similarity. Specify how many top
@@ -25,9 +32,12 @@ Save & Close.
 ![wf_default](./images/WF_default_value.png)
 ### Rebuild a NLP model
 NLP model needs to be rebuilt periodically when more incidents are available.
+Refer to the section about for building a NLP model.
 
 ## Background information
+Resilient NLP model uses gensim word2vec and SIF to compute similarity.
 ### word2vec
+
 ### SIF
 
 ## FAQ

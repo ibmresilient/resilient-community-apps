@@ -22,7 +22,7 @@ from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
 from fn_resilient_ml.lib.file_manage import FileManage
 
 class ResNLP(NLPWord2Vec):
-    def __init__(self, inc_file, art_file=None, in_log=None):
+    def __init__(self, inc_file=None, art_file=None, in_log=None):
         self.inc_file = inc_file
         self.art_file = art_file
         self.dataframe = None
