@@ -16,7 +16,9 @@ The data can be written to any or all of the following destinations:
 - Splunk
 - Kafka
 
-The extension was written to allow other destinations to be created with relative ease. The following diagram shows the overall data flow from Resilient to the existing feeds.
+Each of these destinations are available as separately installable packages to minimize the python libraries required for your Integrations Server. 
+
+This extension was written to allow other destinations to be created with relative ease. The following diagram shows the overall data flow from Resilient to the existing feeds.
 
 See the complete documentation in the doc/ folder for installation, configuration and operation information.
 

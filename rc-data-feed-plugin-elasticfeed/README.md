@@ -5,7 +5,6 @@ This plugin allows this replica data to be maintained in Elasticsearch.
 
 Refer to the documentation on the Data Feed extension for uses cases support and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
-  
 # License
 
 Unless otherwise specified, contents of this repository are published under the MIT open-source
@@ -44,8 +43,9 @@ Unless otherwise specified, contents of this repository are published under the 
 *	Edit the resilient-circuits configuration file, as follows:
     
      - In the [resilient] section, ensure that you provide all the information required to connect to the Resilient platform.
-     - In the [elastic_feed] section, configure the settings for your elasticsearch environment.
      - In the [feeds] section, define the feed(s) you intend to use and create separate sections for each feed. For example:
+     `feed_names=elastic_feed`
+     - In the [elastic_feed] section, configure the settings for your elasticsearch environment.
 ```
   [feeds]
   feed_names=elastic_feed
@@ -82,4 +82,3 @@ The following configuration items are supported:
 ## Considerations
 •	ElasticSearch allows for the updating to and deleting of individual documents. No data duplication occurs. A recently deleted custom datatable column may also not update until circuits is re-run or until the datatable is edited in the UI. 
 Consult section 7.2 of the rc-data-feed documentation for datatable limitations in general.
-

@@ -44,7 +44,7 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
     def init_elastic(self):
         http_auth = None
         if self.user:
-            http_auth=(self.user, self.password)
+            http_auth= (self.user, self.password)
 
         if self.url.lower().startswith('https'):
             # Attempt to create an SSL context, should work fine if no CERT is provided
@@ -54,16 +54,16 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
                 context = create_default_context(cafile=self.cafile)
                 # Connect to the ElasticSearch instance
             self.es = Elasticsearch(self.url,
-                               port=self.port,
-                               ssl_context=context,
-                               http_auth=http_auth)
+                                    port=self.port,
+                                    ssl_context=context,
+                                    http_auth=http_auth)
         else:
             # Connect without to Elastic without HTTPS
             self.es = Elasticsearch(self.url,
-                               port=self.port,
-                               verify_certs=False,
-                               cafile=self.cafile,
-                               http_auth=http_auth)
+                                    port=self.port,
+                                    verify_certs=False,
+                                    cafile=self.cafile,
+                                    http_auth=http_auth)
 
 
     def _create_index(self, index):
@@ -98,17 +98,17 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             self._fn_elasticsearch_index(index, name, payload['id'], elastic_payload)
 
 
-    def _fn_elasticsearch_index(self, index, type, type_id, payload):
+    def _fn_elasticsearch_index(self, index, object_type, type_id, payload):
         """Function: Allows a user to index a specified payload"""
 
-        result = self.es.index(index=index, doc_type=type, id=type_id, body=payload)
+        result = self.es.index(index=index, doc_type=object_type, id=type_id, body=payload)
 
         if result.get("result") not in ("created", "updated"):
-            msg_error = u"Unable to index {}, {}, {} ({})".format(index, type, type_id, payload)
+            msg_error = u"Unable to index {}, {}, {} ({})".format(index, object_type, type_id, payload)
             raise RuntimeError(msg_error)
 
 
-    def _perform_alter(self, index, type, type_id, alter_fields):
+    def _perform_alter(self, index, object_type, type_id, alter_fields):
         fields = ("ctx._source.{0} = params.{0}".format(key for key in alter_fields.keys()))
 
         update_payload = {
@@ -119,16 +119,16 @@ class ElasticFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-pu
             }
         }
 
-        result = self.es.update(index=index, doc_type=type, id=type_id, body=update_payload)
+        result = self.es.update(index=index, doc_type=object_type, id=type_id, body=update_payload)
 
 
-    def _fn_elasticsearch_delete(self, index, type, type_id):
+    def _fn_elasticsearch_delete(self, index, object_type, type_id):
         """Function: Allows a user to delete a specified payload"""
 
-        result = self.es.delete(index=index, doc_type=type, id=type_id)
+        result = self.es.delete(index=index, doc_type=object_type, id=type_id)
 
         if result.get("result") not in ("deleted"):
-            msg_error = u"Unable to delete {}, {}, {}".format(index, type, type_id)
+            msg_error = u"Unable to delete {}, {}, {}".format(index, object_type, type_id)
             raise RuntimeError(msg_error)
 
 

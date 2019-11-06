@@ -5,6 +5,7 @@ import sys
 import time
 from collections import OrderedDict
 from data_feeder_plugins.elasticfeed.elasticfeed import ElasticFeedDestination
+from elasticsearch import Elasticsearch
 from rc_data_feed.lib.type_info import ActionMessageTypeInfo
 
 TYPE_NAME = "all_types"
@@ -17,9 +18,17 @@ APP_CONFIG = {
     "cafile": "false"
 }
 
-ts = int(time.time())
+TS = int(time.time())
 
-MSG_PAYLOAD = OrderedDict({"id":  ts,
+INDEX = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
+
+ES = Elasticsearch(APP_CONFIG['url'],
+                   port=APP_CONFIG['port'],
+                   verify_certs=False,
+                   cafile=APP_CONFIG['cafile'],
+                   http_auth=None)
+
+MSG_PAYLOAD = OrderedDict({"id":  TS,
                            "inc_id": 2301,
                            "test_text": u"ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ",
                            "test_int": 1000,
@@ -28,7 +37,7 @@ MSG_PAYLOAD = OrderedDict({"id":  ts,
                            "test_bool": True
                            })
 
-RESULT_PAYLOAD = {  "id":  ts,
+RESULT_PAYLOAD = {  "id":  TS,
                     "inc_id": 2301,
                     "test_text": u"ƀ Ɓ Ƃ ƃ Ƅ ƅ Ɔ Ƈ ƈ",
                     "test_int": 1000,
@@ -45,7 +54,7 @@ else:
 
 def test_index():
     """
-    test that all fields sent for a file_feed are present
+    test that all fields sent for a elastic_feed are present
     :return:
     """
     es_feed = ElasticFeedDestination(None, APP_CONFIG)
@@ -54,15 +63,16 @@ def test_index():
     es_feed.send_data(context, MSG_PAYLOAD)
 
     # test the results
-    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
-    result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+    result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
 
     for key, value in RESULT_PAYLOAD.items():
         assert result["_source"][key] == value
 
+    assert result["_version"] == 1
+
 def test_update():
     """
-    test that all fields sent for a file_feed are present
+    test that all fields sent for a elastic_feed are present
     :return:
     """
     es_feed = ElasticFeedDestination(None, APP_CONFIG)
@@ -70,22 +80,26 @@ def test_update():
     context = Context()
 
     update_payload = MSG_PAYLOAD.copy()
-    update_payload['test_text'] = "a" * 4000
+    update_payload['test_text'] = "a" * 100
     update_result = RESULT_PAYLOAD.copy()
     update_result['test_text'] = update_payload['test_text']
 
     es_feed.send_data(context, update_payload)
 
     # test the results
-    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
-    result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=update_payload['id'])
+    ES.indices.refresh(index=INDEX)
+
+    result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert result["_source"][key] == value
 
+    # depends on previous tests
+    assert result["_version"] == 2
+
 def test_alter():
     """
-    test that all fields sent for a file_feed are present
+    test that all fields sent for a elastic_feed are present
     :return:
     """
     es_feed = ElasticFeedDestination(None, APP_CONFIG)
@@ -93,18 +107,22 @@ def test_alter():
     context = Context()
 
     update_payload = MSG_PAYLOAD.copy()
-    update_payload['alter_text'] = "this is a new column"
+    update_payload['alter_text'] = "this is a new column " + str(TS)
     update_result = RESULT_PAYLOAD.copy()
     update_result['alter_text'] = update_payload['alter_text']
-    print(update_payload)
+
     result = es_feed.send_data(context, update_payload)
 
     # test the results
-    index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
-    test_result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=update_payload['id'])
+    ES.indices.refresh(index=INDEX)
+
+    test_result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=update_payload['id'])
 
     for key, value in update_result.items():
         assert test_result["_source"][key] == value
+
+    # depends on previous tests
+    assert test_result["_version"] == 3
 
 def test_delete():
     es_feed = ElasticFeedDestination(None, APP_CONFIG)
@@ -115,8 +133,7 @@ def test_delete():
 
     # test the results
     with pytest.raises(Exception) as err:
-        index = u"{}{}".format(APP_CONFIG['index_prefix'], TYPE_NAME)
-        test_result = es_feed.es.get(index=index, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
+        test_result = ES.get(index=INDEX, doc_type=TYPE_NAME, id=MSG_PAYLOAD['id'])
         assert err['found'] == False
 
 

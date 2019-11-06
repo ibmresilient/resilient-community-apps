@@ -8,6 +8,10 @@ from data_feeder_plugins.kafkafeed.kafkafeed import KafkaFeedDestination
 from rc_data_feed.lib.type_info import ActionMessageTypeInfo
 from confluent_kafka import Consumer, KafkaError
 
+'''
+tested with pytest --resilient_app_config=/path/to/.resilient/app.config
+'''
+
 TYPE_NAME = "all_types"
 TOPIC = "resilient_test"
 
@@ -102,8 +106,6 @@ def _kafka_consumer(app_settings):
         c.close()
 
     assert found
-
-
 
 class Context():
     """
