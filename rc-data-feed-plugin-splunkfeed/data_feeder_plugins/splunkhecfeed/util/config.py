@@ -19,6 +19,9 @@ index=data_feeder
 event_host=<resilient host>
 event_source=resilient
 use_ssl=true
+# these settings are only needed for the unit tests
+#user=
+#password=
 """
 
     return config_data

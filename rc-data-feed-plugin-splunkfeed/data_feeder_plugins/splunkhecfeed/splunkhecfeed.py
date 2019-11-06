@@ -12,7 +12,7 @@ import logging
 
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
-from splunk_http_event_collector import http_event_collector
+from .splunk_http_event_collector import http_event_collector
 
 LOG = logging.getLogger(__name__)
 

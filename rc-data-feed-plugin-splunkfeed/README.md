@@ -64,6 +64,9 @@ Unless otherwise specified, contents of this repository are published under the 
   event_host=localhost
   event_source=resilient
   use_ssl=true
+  # these settings are only needed for the unit tests
+  #user=
+  #password=
 ```
 
 # SplunkHECFeed Class
