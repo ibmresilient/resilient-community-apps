@@ -13,6 +13,7 @@ setup(
     long_description="Resilient Circuits functions to search for breaches and pastes on email accounts.",
     install_requires=[
         'resilient_circuits>=30.0.0'
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
