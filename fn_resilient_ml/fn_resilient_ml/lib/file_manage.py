@@ -19,11 +19,11 @@ import pickle
 
 
 class FileManage():
-    DEFAULT_SIF_FILE = "resilient-sif.json"
-    DEFAULT_VEC_FILE = "resilient-vec.pkl"
+    DEFAULT_SIF_FILE = "resilient-sif.pkl"
+    DEFAULT_VEC_FILE = "resilient-vec.json"
     DEFAULT_NLP_FILE = "resilient-w2v.txt"
     DEFAULT_INCIDENT_FILE = "resilient-incidents.csv"
-    DEFAULT_ARTIFACT_FILE = "resilient-artifacts.csv"
+    DEFAULT_ARTIFACT_FILE = "resilient-artifacts.json"
 
     FILE_NAME_OUTPUT        = "File:                        {}"
     LAST_MODIFICATION_TIME  = "Last modification time:      {}"

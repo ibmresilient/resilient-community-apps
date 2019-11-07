@@ -148,7 +148,6 @@ def view_summary(args):
     for s in summary:
         print(s)
 
-
 def build_nlp(args, opt_parser):
     """
 
@@ -165,20 +164,26 @@ def build_nlp(args, opt_parser):
     #
     #   1. Download incidents and artifacts. To be used as training data
     #
-    if inc_file is None or art_file is None:
-        res_utils = ResUtils()
-        res_utils.connect(opt_parser)
+    res_utils = None
 
     if inc_file is None:
         inc_file = file_manage.FileManage.DEFAULT_INCIDENT_FILE
 
     if not os.path.exists(inc_file):
+        LOG.info("Download incidents")
+        if res_utils is None:
+            res_utils = ResUtils()
+            res_utils.connect(opt_parser)
         res_utils.download_incidents(inc_file)
 
     if art_file is None:
         art_file = file_manage.FileManage.DEFAULT_ARTIFACT_FILE
 
     if not os.path.exists(art_file):
+        LOG.info("Download artifacts")
+        if res_utils is None:
+            res_utils = ResUtils()
+            res_utils.connect(opt_parser)
         res_utils.download_artifacts(art_file)
     #
     #   2. Build NLP model
@@ -186,14 +191,16 @@ def build_nlp(args, opt_parser):
     res_nlp = ResNLP(inc_file=inc_file,
                      art_file=art_file)
 
+    LOG.info("Build NLP")
     res_nlp.build()
     #
     #   3. Save the model
     #
     model_name = args.output
+    LOG.info("Saving model")
     if model_name is not None:
-        sif_file = model_name + "-sif.json"
-        vec_file = model_name + "-vec.pkl"
+        sif_file = model_name + "-sif.pkl"
+        vec_file = model_name + "-vec.json"
         w2v_file = model_name + "-w2v.txt"
         res_nlp.save(w2v_file=w2v_file,
                      sif_file=sif_file,

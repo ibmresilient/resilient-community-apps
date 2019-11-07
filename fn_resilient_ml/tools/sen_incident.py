@@ -93,6 +93,7 @@ if debug:
 
         words_1 = s_util.get_words(sentence)
         words_2 = sentences[inc_id_index]
+
         for w1 in words_1:
             for w2 in words_2:
                 try:
@@ -121,3 +122,30 @@ if debug:
         s_count.sort(key=lambda u: u[1])
         for i in range(min(5, len(s_count))):
             print("\t\t%-30s %s" % (s_count[i][0] + ':', s_count[i][1]))
+
+        count_threshold = 10
+        v2_high = np.zeros(w2v.word2vec.vector_size)
+        v2_low = np.zeros(w2v.word2vec.vector_size)
+        high_count = 0
+        low_count = 0
+
+        for w2 in words_2:
+            wc = sif.get_word_count(w2)
+            a_value = ResSen2Vec.SIF_A/(ResSen2Vec.SIF_A + wc)
+            try:
+                w_v = w2v.get_word_vec(w2)
+                if wc > count_threshold:
+                    v2_high += np.multiply(a_value, w2v.get_word_vec(w2))
+                    high_count += 1
+                else:
+                    v2_low += np.multiply(a_value, w2v.get_word_vec(w2))
+                    low_count += 1
+            except:
+                pass
+
+        if high_count > 0:
+            v2_high /= high_count
+        if low_count > 0:
+            v2_low /= low_count
+        sim_high = np.dot(v2_high, sen_vec)/(np.linalg.norm(v2_high) * np.linalg.norm(sen_vec))
+        print("\tLow sim: {}".format(sim_high))

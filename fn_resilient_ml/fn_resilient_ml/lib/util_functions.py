@@ -68,6 +68,7 @@ def get_artifact_des(inc_id, artifact_json):
         result = art.get("result", None)
         if result:
             ret_str += result.get("value", "") + " "
-            ret_str += result.get("description", "").get("content", "") + " "
+            if result.get("description", None) is not None:
+                ret_str += result.get("description", {}).get("content", "") + " "
 
     return ret_str

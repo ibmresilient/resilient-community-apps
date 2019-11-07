@@ -104,7 +104,12 @@ class ResSen2Vec:
         with open(s2v_file, "w") as outfile:
             json.dump(sen_vecs, outfile)
             ret = True
-
+        ## @TODO remove debug code
+        with open("inc_ids.json", "w") as outfile:
+            json.dump(inc_ids, outfile)
+        with open("inc_sen.json", "w") as outfile:
+            json.dump(dataset, outfile)
+        ##
         return ret
 
     def load_s2v(self, s2v_file):
