@@ -89,7 +89,7 @@ class PP_ThreatPolling(ResilientComponent):
             if self.options.get("score_threshold") else None
 
         # Filter - Set types of incidents to import to Resilient
-        self.id_type_filter = self._get_type_filter()
+        self.id_type_filter = self._get_type_filter(self.options.get("type_filter", None))
 
         # Create a new Resilient incident from this event
         # using an optional JSON (JINJA2) template file
@@ -114,24 +114,27 @@ class PP_ThreatPolling(ResilientComponent):
         else:
             self.lastupdate = 60 * int(interval)
 
-    def _get_type_filter(self):
+    def _get_type_filter(self, tp_filter):
         """
-        Get set of type ids for the type_filter options if set, otherwise None.
+        Get set of type ids for the type_filter options.
         :return: set of threat ids
         """
-        if 'type_filter' in self.options:
-            type_filter = self.options.get('type_filter').strip().lower()
-            if not type_filter or 'all' in type_filter:
-                # none or "all" specified, no filtering
-                return None
 
-            filters = set()
-            for typestring in type_filter.split(','):
-                incident_type_id = self._get_incident_type_id(typestring.strip())
-                if incident_type_id:
-                    filters.add(incident_type_id)
+        if not tp_filter:
+            return None
 
-            return filters
+        type_filter = tp_filter.strip().lower()
+        if not type_filter or 'all' in type_filter:
+            # none or "all" specified, no filtering
+            return None
+
+        filters = set()
+        for typestring in type_filter.split(','):
+            incident_type_id = self._get_incident_type_id(typestring.strip())
+            if incident_type_id:
+                filters.add(incident_type_id)
+
+        return filters
 
     def main(self):
         """main entry point, instantiate polling thread"""
@@ -382,6 +385,9 @@ class PP_ThreatPolling(ResilientComponent):
         :return: set of incident_type_ids
         """
         incident_type_ids = set()
+
+        if not threat_types:
+            return incident_type_ids
 
         for threat_type in threat_types:
             inc_type_id = self._get_incident_type_id(threat_type)
