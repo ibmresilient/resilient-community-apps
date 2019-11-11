@@ -14,6 +14,8 @@ Set if using a proxy
 
 As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key)
 
+Version 2.0.0 of Have I Been Pwned includes a modification to the message destination. The message destination name has changed from fn_hibp to hibp_fn. The payload return has also been modified to improve the overall logic of both Have I Been Pwned functions. These changes include the incorporation of resilient-lib and the return of the post-processing script modified from results.Breaches to results.content["Breaches"].
+
 ## Function Inputs:
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
