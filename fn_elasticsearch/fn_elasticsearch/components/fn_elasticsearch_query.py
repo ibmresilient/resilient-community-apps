@@ -16,7 +16,7 @@ from fn_elasticsearch.util.helper import ElasticSearchHelper
 BADLY_FORMED_QUERY = 400
 NOT_FOUND = 404
 ES_ERROR = 500
-ELASTIC_TAG_VERSION = 5.9
+ELASTIC_TAG_VERSION = 6
 ERROR_TUPLE = (BADLY_FORMED_QUERY, NOT_FOUND, ES_ERROR)
 
 LOG = logging.getLogger(__name__)
@@ -145,11 +145,11 @@ class FunctionComponent(ResilientComponent):
         try:
             if not es_doc_type:
                 es_doc_type = None 
-            if int(es_instance_info["version"]["number"][0]) >= ELASTIC_TAG_VERSION:
-                LOG.debug("Connected ElasticSearch instance is higher than version 6, doc_type won't be sent with the request")
+            if int(es_instance_info["version"]["number"][0]) > ELASTIC_TAG_VERSION:
+                LOG.debug("Connected ElasticSearch instance is higher than version 5.9, doc_type won't be sent with the request")
                 es_results = es.search(index=es_index, body=es_query, ignore=[400, 404, 500])
             else:
-                LOG.debug("Connected ElasticSearch instance is 6 or lower, doc_type will be added to the search request")
+                LOG.debug("Connected ElasticSearch instance is 5.9 or lower, doc_type will be added to the search request")
                 es_results = es.search(index=es_index, doc_type=es_doc_type, body=es_query, ignore=[400, 404, 500])
         except Exception as e:
             raise ValueError("Encountered error while submitting query to ElasticSearch {0}".format(e))
