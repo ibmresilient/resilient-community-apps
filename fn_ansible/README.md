@@ -11,6 +11,10 @@
 ## About This Package:
 This package contains functions that integrate with Ansible to run playbooks and modules for remote host execution.
 
+## History
+1.1 - change result payload format to JSON returned to Resilient 
+ * For customers upgrading from 1.0, the example workflows will use different post-processing script logic, based on the json results returned.
+
 ## Features:
 * Run pre-written Ansible Playbooks from the Resilient platform, using parameter substitution.
 * Run Ansible Modules for ad-hoc command execution.
@@ -136,18 +140,11 @@ Results returned to the Resilient platform from an Ansible function are in the f
 The following Post-Processing Script cleans up the payload and adds it as an incident note:
 
 ```
-import re
-
-pp = '(\\x1b\[\d*(;\d*)*m)'
-note = u''
-
 if len(results['content'].keys()) == 0:
   note = u"No results returned on parameters: {}".format(results['inputs'])
 else:
-
   for item in results['content']:
-    note = note + u"{} - {}\n".format(item, results['inputs'])
-    note = note + re.sub(pp, '', results['content'][item]['detail']).replace('\\r\\n', '\\n') + '\n'
+    note = u"{} - {}\n{}".format(item, results['inputs'], str(results['content'][item]['detail']))
 
 incident.addNote(helper.createPlainText(note))
 ```
