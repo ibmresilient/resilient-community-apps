@@ -30,7 +30,7 @@ class BlankClass(object):
         pass
 
 
-class TestPPThreatPolling:
+class TestPPThreatPolling(object):
     """ Tests for the Proofpoint TAP Poller"""
 
     @staticmethod
@@ -43,7 +43,10 @@ class TestPPThreatPolling:
                                                  'Phishing': 22, 'phish': 22, 'TBD / Unknown': 16, 'unknown': 16}
         mocked_parseops.return_value = None
         mocked_main.return_value = None
-        monkeypatch.setattr(ResilientComponent, "__init__", BlankClass.__init__)
+        if sys.version_info.major == 2:
+            monkeypatch.setattr(ResilientComponent, "__init__", BlankClass)
+        else:
+            monkeypatch.setattr(ResilientComponent, "__init__", BlankClass.__init__)
         poller = PP_ThreatPolling(MOCKED_OPS)
         return poller
 
