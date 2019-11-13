@@ -10,6 +10,11 @@ Set if using a proxy
     ## Proxy settings if needed
     #hibp_proxy_http=
     #hibp_proxy_https=
+    hibp_api_key=< Have I Been Pwned API Key>
+
+As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key). This API key will need to **manually** be added to the app.config file.
+
+Version 2.0.0 of Have I Been Pwned includes a modification to the returned payload. These changes include the incorporation of resilient-lib and results from the post processing script modified from *results.Breaches* to *results.content["Breaches"]*.
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |
