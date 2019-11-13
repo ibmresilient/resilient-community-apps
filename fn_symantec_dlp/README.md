@@ -7,6 +7,7 @@
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
+- [Configure Symantec DLP](#configure-symantec-dlp)
 
 ---
 
@@ -135,6 +136,19 @@ There are several ways to verify the successful operation of a function.
 
 
 ## Configure Symantec DLP 
+
+### Configure Symantec DLP custom attribute
+2 Custom attributes are used by the DLP integration to hold relevant information from the Resilient platform. `resilient_incident_id` is used as a predicate for filtering out already imported incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident dupliciation. In Symantec DLP navagate to `System > Incident Attributes > Custom Attributes`
+
+ ![screenshot: finding-attribute-page ](./doc/screenshots/finding-attributes-page.png)
+
+ You will be given the option to set things such as Status values for incidents and custom attributes. Select the option to add a new custom attribute and create a `resilient_incident_id` custom  attribute.
+ ![screenshot: adding new attribute](./doc/screenshots/adding-an-attribute.png)
+ ![screenshot: adding new attribute form](./doc/screenshots/new-attribute-form.png)
+
+
+### Configure Symantec DLP saved report
+
 This integration with Symantec DLP works by querying a DLP Saved Report for incidents. When the saved report results are retrieved, any incident which does not have a value for the `resilient_incident_id` custom attribute is imported into Resilient. Afterward, the `resilient_incident_id` custom DLP attribute will be filled in with the new Resilient incident ID. This Saved Report can be customized to specify which incidents should be imported to the Resilient platform.
 
 To setup a basic Saved Report for the integration follow these high level steps: 
@@ -144,6 +158,8 @@ To setup a basic Saved Report for the integration follow these high level steps:
 * Include an additional filter to be done on the `resilient_incident_id` where the value `Is Unassigned`
 * Click `Save As` and name your new report 
 * With the saved report active, note the `reportID` value in the URL. This will be the saved Report ID needed. 
+
+![saved report](./doc/screenshots/saved-report.png)
 
 ---
 
