@@ -15,7 +15,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("fn_hibp", {})
+        self.options = opts.get("hibp", {})
 
         self.PROXIES = {}
         # Get proxies
@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v3/pasteaccount/"
-            result_payload = ResultPayload("fn_hibp", **kwargs)
+            result_payload = ResultPayload("hibp", **kwargs)
 
             # Get the function parameters:
             email_address = kwargs.get("email_address")  # text
