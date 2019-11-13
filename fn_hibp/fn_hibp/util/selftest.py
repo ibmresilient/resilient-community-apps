@@ -20,7 +20,7 @@ def selftest_function(opts):
     Suggested return values are be unimplemented, success, or failure.
     """
     try:
-        options = opts.get("fn_hibp", {})
+        options = opts.get("hibp", {})
         hibp_api_key = options.get("hibp_api_key")
         validate_fields(["[hibp_api_key]"], options)
         HAVE_I_BEEN_PWNED_API_KEY_URL: "https://haveibeenpwned.com/api/v3/"
