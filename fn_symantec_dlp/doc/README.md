@@ -32,7 +32,7 @@ In order to configure the Poller to run, an app.config value named `sdlp_should_
 
 See the README located at the root of the project for information on the app.config values. 
 
->Note: When the `sdlp_should_search_res` is set to True, the important incidents from DLP are filtered twice. Once on the resultant list of incidents filtering out those with a non-null `resilient_incident_id` custom attribute. The second filtering occurs if `sdlp_should_search_res` is set to True and for each incident. A Resilient search_ex call is performed to ensure no Resilient platform incident exists with the given DLP incident ID set. The search is performed on the `sdlp_incident_id` Resilient Custom Field. This extra filter comes with a performance cost and should be disabled unless needed.
+>Note: When the `sdlp_should_search_res` parameter is set to True, the imported incidents from DLP are filtered twice. Once on the resultant list of incidents filtering out those with a non-null `resilient_incident_id` custom attribute. The second filtering occurs if `sdlp_should_search_res` is set to True. In this case, for each incident, a Resilient search API call is performed to ensure no Resilient platform incident exists with the given DLP incident ID set. The search is performed on the `sdlp_incident_id` Resilient Custom Field. This extra filter comes with a performance cost and should be disabled unless needed.
 
 #### Symantec DLP Report Configuration
 The Symantec DLP incident and Reporting SOAP API requires that the polled incidents be a part of a DLP Saved Report and this Saved Report ID is specified in the app.config. 
@@ -42,7 +42,7 @@ For an example of how to setup a Saved Report, see the README at the root of thi
 
 
 ## Function - Symantec DLP: Update Incident
-A function which is used to update the details of a Symantec DLP incident. Takes one input which is a dictionary of things to be changed. To enable to updating of multiple custom attributes, provide a list or dictionary of all the attributes to be changed in the format: <attribute_name>: <new_value>
+A function which is used to update the details of a Symantec DLP incident. It takes one input which is a dictionary of DLP incident attributes to be changed. To enable updates for multiple custom attributes, provide a list or dictionary of all the attributes to be changed in the format: <attribute_name>: <new_value>
 
  ![screenshot: fn-symantec-dlp-update-incident ](./screenshots/fn-symantec-dlp-update-incident.png)
 

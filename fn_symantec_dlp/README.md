@@ -89,9 +89,9 @@ Included in this package are two main components; a incident Poller used to gath
   ```
 
 ### Custom Layouts
-Their are two custom fields which are used by the integration; `sdlp_incident_id` and `sdlp_incident_url`. `sdlp_incident_id` is used by the integration to perform an optional secondary filter when importing incidents into the Resilient platform. `sdlp_incident_url` provides a clickable URL when a DLP incident is imported giving quick access to the DLP console.
+There are two custom fields which are used by the integration; `sdlp_incident_id` and `sdlp_incident_url`. `sdlp_incident_id` is used by the integration to perform an optional secondary filter when importing incidents into the Resilient platform. `sdlp_incident_url` provides a clickable URL when a DLP incident is imported giving quick access to the DLP console.
 
-* Import the and custom fields like the screenshot below:
+* Import the custom fields such as the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -138,11 +138,11 @@ There are several ways to verify the successful operation of a function.
 ## Configure Symantec DLP 
 
 ### Configure Symantec DLP custom attribute
-2 Custom attributes are used by the DLP integration to hold relevant information from the Resilient platform. `resilient_incident_id` is used as a predicate for filtering out already imported incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident dupliciation. In Symantec DLP navagate to `System > Incident Attributes > Custom Attributes`
+2 Custom attributes are used by the DLP integration to hold relevant information from the Resilient platform. `resilient_incident_id` is used as a predicate for filtering out already imported incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident duplication. In Symantec DLP navigate to `System > Incident Attributes > Custom Attributes`
 
  ![screenshot: finding-attribute-page ](./doc/screenshots/finding-attributes-page.png)
 
- You will be given the option to set things such as Status values for incidents and custom attributes. Select the option to add a new custom attribute and create a `resilient_incident_id` custom  attribute.
+ You will be given the option to configure settings such as status values for incidents and custom attributes. Select the option to add a new custom attribute and create a `resilient_incident_id` custom  attribute.
  ![screenshot: adding new attribute](./doc/screenshots/adding-an-attribute.png)
  ![screenshot: adding new attribute form](./doc/screenshots/new-attribute-form.png)
 
@@ -152,7 +152,7 @@ There are several ways to verify the successful operation of a function.
 This integration with Symantec DLP works by querying a DLP Saved Report for incidents. When the saved report results are retrieved, any incident which does not have a value for the `resilient_incident_id` custom attribute is imported into Resilient. Afterward, the `resilient_incident_id` custom DLP attribute will be filled in with the new Resilient incident ID. This Saved Report can be customized to specify which incidents should be imported to the Resilient platform.
 
 To setup a basic Saved Report for the integration follow these high level steps: 
-* Login to Symantec DLP and navagate to the incidents View 
+* Login to Symantec DLP and navigate to the incidents View 
 * View any existing report such as `Endpoint incidents - All`
 * Apply filtering rules as needed by your Org
 * Include an additional filter to be done on the `resilient_incident_id` where the value `Is Unassigned`
