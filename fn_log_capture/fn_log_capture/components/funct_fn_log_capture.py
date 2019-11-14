@@ -2,24 +2,25 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import datetime
 import logging
 import os
 import platform
-import re
 import time
 import sys
 from collections import deque
+from datetime import datetime
 from io import BytesIO
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from resilient_lib.components.integration_errors import IntegrationError
-from resilient_lib.components.resilient_common import write_file_attachment, validate_fields
+from resilient_lib import write_file_attachment, validate_fields
 
 PACKAGE_NAME = "fn_log_capture"
 LOG_FILE = "app.log"
-DATE_PATTERN = r"^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}"
 DEFAULT_ATTACHMENT_NAME = "{}_resilient-circuits_{}.log"
+
+DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+DATE_FORMAT_MS = ','.join((DATE_FORMAT, '%f'))
 
 LOG_LEVELS = {
     "debug": ['debug', 'info', 'warning', 'error'],
@@ -47,11 +48,13 @@ class FunctionComponent(ResilientComponent):
         :param opts:
         :return:
         """
-        log_dir = opts.get("resilient", {}).get("logdir")
+        res_opts = opts.get("resilient", {})
+        log_dir = res_opts.get("logdir")
+        log_file = res_opts.get("logfile", LOG_FILE)
         if not log_dir:
             raise IntegrationError("Log directory not found")
 
-        self.log_file = os.path.join(log_dir, LOG_FILE)
+        self.log_file = os.path.join(log_dir, log_file)
         if not os.path.isfile(self.log_file):
             raise IntegrationError("Log file incorrect: {}".format(self.log_file))
 
@@ -71,7 +74,7 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['incident_id'], kwargs)
 
             if not log_attachment_name:
-                dt = datetime.datetime.now()
+                dt = datetime.now()
                 fqdn = platform.node().split('.')
 
                 log_attachment_name = DEFAULT_ATTACHMENT_NAME.format(fqdn[0], dt.strftime("%Y%m%d_%H%M%S"))
@@ -106,13 +109,13 @@ class FunctionComponent(ResilientComponent):
 
             # failures will raise an exception
             write_file_attachment(rest_client, log_attachment_name, datastream,
-                                                      incident_id, task_id)
+                                  incident_id, task_id)
 
             # Produce a FunctionResult with the results
             yield StatusMessage(u"attachment created '{}' with {} lines".format(log_attachment_name, num_of_lines))
             yield StatusMessage("done...")
 
-            result_data = { "attachment_name": log_attachment_name, "num_of_lines": num_of_lines }
+            result_data = {"attachment_name": log_attachment_name, "num_of_lines": num_of_lines}
             results = result_payload.done(True, result_data)
 
             yield FunctionResult(results)
@@ -163,7 +166,7 @@ def get_log_by_filter(log_file, log_min_level, log_capture_maxlen):
         if result_line:
             captured_list.append(result_line)
 
-    d = deque(captured_list, maxlen=log_capture_maxlen)
+    d = captured_list[-log_capture_maxlen:]
     d_list = list(d)
 
     return len(d_list), "".join(d_list)
@@ -182,27 +185,32 @@ def get_log_by_date(log_file, log_capture_date, log_capture_date_option, log_cap
     log = logging.getLogger(__name__)
 
     # read from the beginning looking for lines to capture based on timestamp
-    compare_date = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(log_capture_date/1000))
-    log.debug("Looking for date: {}".format(compare_date))
+    time_struct = time.localtime(log_capture_date/1000)
+    compare_date = datetime.fromtimestamp(time.mktime(time_struct))
+    log.debug("Looking for date: {}".format(time.strftime(DATE_FORMAT, time_struct)))
 
     captured_list = []
     result_line = None
     triggered = False
 
     for line in get_log_file_data(log_file):
-        startswith = line[0: len(compare_date)]
-        if not triggered:
+        # attempt to get the date string from the log entry.
+        # Some entries are multi-line, so not all lines will have a date string
+        try:
+            startswith = datetime.strptime(' '.join(line.split(' ', 2)[:2]), DATE_FORMAT_MS)
+        except (ValueError, TypeError):
+            startswith = None
 
-            if re.match(DATE_PATTERN, line):
-                if log_capture_date_option == 'before' and \
-                        startswith <= compare_date:
+        if not triggered:
+            if startswith:
+                if log_capture_date_option == 'before' and startswith <= compare_date:
                     triggered = True
                 elif startswith >= compare_date:
                     triggered = True
 
         if triggered:
             # don't capture after the compare_date
-            if log_capture_date_option == 'before' and re.match(DATE_PATTERN, line):
+            if log_capture_date_option == 'before' and startswith:
                 if startswith <= compare_date:
                     result_line = filter_log_level(log_min_level, line, multi_line=result_line)
                     if result_line:
