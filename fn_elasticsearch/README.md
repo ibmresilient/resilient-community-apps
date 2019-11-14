@@ -7,12 +7,12 @@
 -->
 ### v1.0.5
 
-* Added logic to conditionally use doc_type depending on the major version of Elastic
+* Added logic to conditionally use doc_type depending on the major version of ElasticSearch
 * Updated documentation
 
 ### v1.0.4
 
-* Customer hotfix
+* Customer hotfix related to breaking version changes to ElasticSearch library
 
 ### v1.0.3
 
