@@ -32,6 +32,11 @@ artifact_types = {
     'Proofpoint Threat ID': 'threatID',
 }
 
+ARTIFACT_TYPE_API_NAME = {
+    'Proofpoint Campaign ID': 'proofpoint_campaign_id',
+    'Proofpoint Threat ID': 'proofpoint_threat_id'
+}
+
 timefields = [
     'threatTime',
     'messageTime',
@@ -232,8 +237,9 @@ class PP_ThreatPolling(ResilientComponent):
         try:
             return {'format': 'text', 'content': template_functions.render(self.threat_template, data)}
 
-        except jinja2.exceptions.TemplateSyntaxError:
-            log.info('threat template is not set correctly in config file')
+        except jinja2.exceptions.TemplateSyntaxError as err:
+            log.info('threat template is not set correctly in config file {}'.format(err))
+            raise err
 
     @staticmethod
     def getdiscovereddate(data):
@@ -253,8 +259,9 @@ class PP_ThreatPolling(ResilientComponent):
                     combined = seconds * 1000 + millis
                     log.debug('seconds {} millis {} combined {}'.format(seconds, millis, combined))
                     return combined
-                except ValueError:
-                    log.exception("{} Not in expected timestamp format {}".format(val, ts_format))
+                except ValueError as err:
+                    log.exception("{} Not in expected timestamp format {} - {}".format(val, ts_format, err))
+                    raise err
 
     @staticmethod
     def _get_event_classification(data):
@@ -468,6 +475,7 @@ class PP_ThreatPolling(ResilientComponent):
 
         except SimpleHTTPException as ex:
             log.info('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            raise ex
 
     def update_incident(self, incident_id, artifacts):
         """Update Resilient Incident"""
@@ -494,12 +502,14 @@ class PP_ThreatPolling(ResilientComponent):
                 if artifact_id not in existing_artifacts or existing_artifacts[artifact_id] != artifact_type:
                     # populate payload with ID and type
                     artifact_payload['value'] = artifact_id
+                    artifact_payload['type']['name'] = ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
                     artifact_payload['description']['content'] = artifact_type
                     # attach new Artifact to Incident
                     resilient_client.post(uri=artifact_uri, payload=artifact_payload)
 
         except SimpleHTTPException as ex:
             log.info('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            raise ex
 
     def getclass2typeids(self):
         """Extract incident types from Resilient, build mapping from names to IDs"""
