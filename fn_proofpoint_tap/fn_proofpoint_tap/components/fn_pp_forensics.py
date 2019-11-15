@@ -11,7 +11,6 @@ import json
 import os
 from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
-from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg
 from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
 from pkg_resources import Requirement, resource_filename
 try:
@@ -103,8 +102,7 @@ class FunctionComponent(ResilientComponent):
 
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
-            forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
-                                                    callback=custom_response_err_msg)
+            forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
             forensics = forensics_response.json()
 

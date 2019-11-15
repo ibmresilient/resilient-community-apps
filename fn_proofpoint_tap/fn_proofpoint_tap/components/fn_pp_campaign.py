@@ -7,7 +7,6 @@
 
 import logging
 import os
-from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg
 from resilient_lib import RequestsCommon, validate_fields
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -79,8 +78,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
-            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
-                                     callback=custom_response_err_msg)
+            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
             # Debug logging
             log.debug("Response content: {}".format(res.content))

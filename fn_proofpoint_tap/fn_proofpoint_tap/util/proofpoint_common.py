@@ -35,27 +35,3 @@ def get_threat_list(rc, options, lastupdate, bundle):
     # Debug logging
     log.debug("Response content: {}".format(res.content))
     return res.json()
-
-
-def custom_response_err_msg(response):
-    """
-    Custom handler for response handling.
-    :param response:
-    :return: response
-    """
-    try:
-        # Raise error is bad status code is returned
-        response.raise_for_status()
-
-        # Return requests.Response object
-        return response
-
-    except Exception as err:
-        msg = str(err)
-
-        if isinstance(err, HTTPError) and response.status_code == 404:
-            msg = "{} please make sure you are invoking the appropriate Rule for chosen Artifact".format(response.content)
-
-        log and log.error(msg)
-        raise IntegrationError(msg)
-
