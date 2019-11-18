@@ -17,7 +17,7 @@ from resilient_circuits import ResilientComponent, template_functions
 from resilient_lib import build_incident_url, build_resilient_url, str_to_bool, write_to_tmp_file
 
 from zeep.helpers import serialize_object
-
+from zeep.exceptions import Fault
 from fn_symantec_dlp.lib.dlp_soap_client import DLPSoapClient
 
 LOG = logging.getLogger(__name__)
@@ -49,10 +49,19 @@ class DLPListener(ResilientComponent):
         incident_creation_date_later_than = datetime.datetime.now() - datetime.timedelta(
             days=int(self.dlp_opts.get("sdlp_incident_creation_date_later_than", DEFAULT_NUM_OF_DAYS)))
         LOG.info("Searching for Incidents which were created after %s", incident_creation_date_later_than)
-        # gather the list of incidents from a saved report
-        res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
-                                          incident_creation_date_later_than=incident_creation_date_later_than)
-
+        
+        try:
+            # gather the list of incidents from a saved report
+            res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
+                                            incident_creation_date_later_than=incident_creation_date_later_than)
+        except Fault as caught_exc:
+            # Put the traceback into DEBUG
+            LOG.debug(traceback.format_exc())
+            # Log the Connection error to the user
+            LOG.error(u"Problem: %s", repr(caught_exc))
+            errMsg = u"[Symantec DLP] Encountered an exception when querying the Incident List with Report ID {}".format(DLPSoapClient.dlp_saved_report_id)
+            LOG.error(errMsg)
+            raise ValueError(errMsg)
         # gather the incident_details for incidents returned
         incidents = DLPSoapClient.incident_detail(incident_id=res['incidentLongId'])
         LOG.info("Now filtering out Incidents which already have a Resilient Incident ID")
@@ -64,7 +73,7 @@ class DLPListener(ResilientComponent):
             # Drop all incidents which have a res_id custom attribute
             incidents = list(filter(self.filter_existing_incidents, incidents))
 
-        if incidents: # If theres more than one incident after first filter 
+        if incidents:  # If theres more than one incident after first filter 
             # Due to the possibility of a timeout, on each polling event, grab a rest_client for dlp_listener.
             # The rest_client function returns a 'connected' instance of SimpleClient, so if the session is still valid, reuse that.
             self.res_rest_client = ResilientComponent.rest_client(self)
