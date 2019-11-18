@@ -10,6 +10,7 @@ import os
 
 
 import zeep
+from zeep.cache import InMemoryCache
 from jinja2 import Environment, PackageLoader
 
 from requests import Session
@@ -108,8 +109,22 @@ class DLPSoapClient():
         cls.session.verify = cls.dlp_cert
         cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
-        # Setup Transport with our credentials
-        cls.transport = zeep.Transport(session=cls.session)
+        mimefile = "../data/xmlmime.xml"
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        mimefile_abs_path = os.path.join(dir_path, mimefile)
+        # If the Xmlmime file was provided
+        if os.path.isfile(mimefile_abs_path):
+            # Open it and add it to a Cache
+            with open(mimefile_abs_path, mode="rb") as f:
+                filecontent = f.read()
+                dlp_cache = InMemoryCache()
+                dlp_cache.add("http://www.w3.org/2005/05/xmlmime", filecontent)
+                dlp_cache.add("https://www.w3.org/2005/05/xmlmime", filecontent)
+            # Setup Transport with credentials and the cached mimefile
+            cls.transport = zeep.Transport(session=cls.session, cache=dlp_cache)
+        else:
+            # Setup Transport with our credentials
+            cls.transport = zeep.Transport(session=cls.session)
 
         try: # Try to create a soap_client from the wsdl and transport
             cls.soap_client = zeep.Client(wsdl=cls.wsdl, transport=cls.transport)
