@@ -22,7 +22,7 @@ setup(
         'Programming Language :: Python',
     ],
     entry_points={
-        "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.kafkafeed.util.config:config_section_data"]
+        "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.filefeed.util.config:config_section_data"]
     },
     tests_require=["pytest < 4.0.0",
                    "pytest_resilient_circuits"]
