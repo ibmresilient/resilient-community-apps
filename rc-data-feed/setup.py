@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
         'resilient_circuits>=30.0.84',
-        'resilient>=30.0.84'
+        'resilient>=30.0.84',
         'resilient_lib'
     ],
     packages=find_packages(),
