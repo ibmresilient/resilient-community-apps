@@ -55,8 +55,6 @@ class DLPListener(ResilientComponent):
             res = DLPSoapClient.incident_list(saved_report_id=DLPSoapClient.dlp_saved_report_id,
                                             incident_creation_date_later_than=incident_creation_date_later_than)
         except Fault as caught_exc:
-            # Put the traceback into DEBUG
-            LOG.debug(traceback.format_exc())
             # Log the Connection error to the user
             LOG.error(u"Problem: %s", repr(caught_exc))
             errMsg = u"[Symantec DLP] Encountered an exception when querying the Incident List with Report ID {}".format(DLPSoapClient.dlp_saved_report_id)
