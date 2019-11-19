@@ -34,6 +34,9 @@ See the README located at the root of the project for information on the app.con
 
 >Note: When the `sdlp_should_search_res` parameter is set to True, the imported incidents from DLP are filtered twice. Once on the resultant list of incidents filtering out those with a non-null `resilient_incident_id` custom attribute. The second filtering occurs if `sdlp_should_search_res` is set to True. In this case, for each incident, a Resilient search API call is performed to ensure no Resilient platform incident exists with the given DLP incident ID set. The search is performed on the `sdlp_incident_id` Resilient Custom Field. This extra filter comes with a performance cost and should be disabled unless needed.
 
+#### A note on the SOAP client and airgapped envionments. 
+When setting up the client which will make the SOAP requests to DLP, requests are made to gather the defined namespaces in the WSDL file provided. One of the needed namespaces is [www.xmlmime.com/2005/](www.xmlmime.com/2005) which requires a outside network request. In scenarios where you have Resilient Circuits in an airgapped environment, this can be avoided by downloading the xml file located at [xmlmime](www.xmlmime.com/2005) and then saving it in the data directory of the integration. If this is done, the local xml file will be cached to avoid a network request.
+
 #### Symantec DLP Report Configuration
 The Symantec DLP incident and Reporting SOAP API requires that the polled incidents be a part of a DLP Saved Report and this Saved Report ID is specified in the app.config. 
 
