@@ -109,11 +109,13 @@ class DLPSoapClient():
         cls.session.verify = cls.dlp_cert
         cls.session.auth = SymantecAuth(cls.dlp_username, cls.dlp_password, cls.host)
 
-        mimefile = "../data/xmlmime.xml"
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        mimefile_abs_path = os.path.join(dir_path, mimefile)
+
+        mimefile_abs_path = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)),
+            os.path.pardir, "data", "xmlmime.xml")
         # If the Xmlmime file was provided
         if os.path.isfile(mimefile_abs_path):
+            LOG.info("A Local XML file was found in the data directory, %s \n Loading this into the cache", mimefile_abs_path)
             # Open it and add it to a Cache
             with open(mimefile_abs_path, mode="rb") as f:
                 filecontent = f.read()
