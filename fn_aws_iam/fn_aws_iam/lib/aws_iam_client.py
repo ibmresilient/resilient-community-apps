@@ -34,8 +34,8 @@ class AwsIamClient():
         """ Create an AWS IAM client.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Converted  string.
-
+        :param service_name: AWS service for which to create client.
+        :return: AWS client.
         """
         # Create IAM client for iam or sts.
         try:
@@ -54,6 +54,12 @@ class AwsIamClient():
         return client
 
     def _get_type_from_response(self, response):
+        """ The get type of data returned in an AWS IAM query.
+
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :param response: The response from AWS API query.
+        result_type: The type of result e.g. 'Users'.
+        """
         for key in response:
             if key in SUPPORTED_PAGINATE_TYPES:
                 result_type = key
@@ -108,8 +114,7 @@ class AwsIamClient():
         """ Get the identity of the current AWS IAM user.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Converted  string.
-
+        :return default_identity: Called identity dict.
         """
         try:
             # Create IAM client for sts
@@ -127,8 +132,7 @@ class AwsIamClient():
         """ Convert datetime objects returned in result e.g. 'CreateDate' to a string.
 
         :param result_entry: Result entry dict from AWS IAM response.
-        :return: Converted result.
-
+        :return result_entry: Converted result entry.
         """
         for key in result_entry:
             if isinstance(result_entry[key], datetime):
@@ -158,13 +162,13 @@ class AwsIamClient():
             LOG.info(e)
             raise e
 
-        return  self._update_result(result, result_type)
+        return self._update_result(result, result_type)
 
     def get_user(self, **kwargs):
         """ Get AWS IAM user properties.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Boolean.
+        :return: Result in a list.
         """
         result = []
         try:
@@ -180,9 +184,11 @@ class AwsIamClient():
         return  self._update_result(result, "User")
 
     def list_user_tags(self, **kwargs):
-        # Get user tags:
-        tags = []
-        # Get user tags:
+        """ Get AWS IAM user tags.
+
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return: Result in a list of dicts.
+        """
         try:
             tags = self.iam.list_user_tags(**kwargs)["Tags"]
         except Exception as e:
@@ -194,12 +200,11 @@ class AwsIamClient():
         return tags
 
     def get_login_profile(self, **kwargs):
-        """ Get AWS IAM user Profile.
+        """ Get AWS IAM user login profile.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Boolean.
+        :return: User login profile dict.
         """
-        # Set default good status:
         profile = {}
 
         try:
@@ -220,11 +225,10 @@ class AwsIamClient():
         return profile
 
     def delete_login_profile(self, **kwargs):
-        """ Delete AWS IAM user Profile.
+        """ Delete AWS IAM user login profile.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Converted  string.
-
+        :return status: Return status string.
         """
         # Set default good status:
         status = "OK"
@@ -246,7 +250,11 @@ class AwsIamClient():
         return status
 
     def update_login_profile(self, **kwargs):
+        """ Update AWS IAM user login profile.
 
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return status: Return status string.
+        """
         # Get user tags:
         status = "OK"
 
