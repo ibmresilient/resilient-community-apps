@@ -8,6 +8,8 @@
 import logging
 import os
 from resilient_lib import RequestsCommon, validate_fields
+from resilient_lib.components.integration_errors import IntegrationError
+from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg, PROOFPOINT_TAP_404_ERROR
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 try:
@@ -78,18 +80,29 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage('Sending GET request to {0}'.format(url))
 
-            res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
+            try:
+                res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
+                                         callback=custom_response_err_msg)
 
-            # Debug logging
-            log.debug("Response content: {}".format(res.content))
+                # Debug logging
+                log.debug("Response content: {}".format(res.content))
 
-            results['success'] = True
-            results['data'] = res.json()
-            results['href'] = url
+                results['data'] = res.json()
+                results['success'] = True
 
-            yield StatusMessage("done...")
+                yield StatusMessage("done...")
+
+            except IntegrationError as err:
+                msg = str(err)
+                # If endpoint returns 404 workflow is not terminated - a Note with error msg is created instead
+                if PROOFPOINT_TAP_404_ERROR in msg:
+                    results["note_text"] = PROOFPOINT_TAP_404_ERROR
+                    results['success'] = False
+                else:
+                    raise FunctionError(err)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+
         except Exception as err:
             yield FunctionError(err)
