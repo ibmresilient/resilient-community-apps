@@ -7,21 +7,24 @@
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
+- [Configure Symantec DLP](#configure-symantec-dlp)
 
 ---
 
 ## Release Notes
 ### v0.0.1
-* Pre-Release -- DLP Polling Component to import Incidents into Resilient.
+* Pre-Release -- DLP Polling Component to import incidents into the Resilient platform.
+### v1.0.0
+* Initial Release -- Includes a DLP Polling Component to import incidents into the Resilient platform and also a function to update DLP incidents as a part of the incident response process.
 
 ---
 
 ## Overview
-**Resilient Circuits Components used to establish DLP as a source of Incidents for Resilient**
+**Resilient Circuits Components used to establish DLP as a source of incidents for the Resilient platform**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Included in this package are two main components; a Incident Poller used to gather Incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP Incident from Resilient
+Included in this package are two main components; a incident Poller used to gather incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP incident from the Resilient platform.
 
 ---
 
@@ -66,16 +69,14 @@ Included in this package are two main components; a Incident Poller used to gath
   | ------ | :------: | ------- | ----------- |
   | **sdlp_should_poller_run** | Yes | `True` | *Whether or not to start the listener* |
   | **sdlp_host** | Yes | `https://<serverip>:<port>` | *The URL of the DLP Installation* |
-  | **sdlp_wsdl** | Yes | `https://<serverip>:<port>/ProtectManager/services/v2011/incidents?wsdl` | *The location of your WSDL file used to construct requests when dealing with the Incident and Reporting API* |
-  | **sdlp_incident_endpoint** | Yes | `https://<serverip>:<port>/ProtectManager/services/v2011/incidents` | *The URL of the Incident and Reporting API for your DLP Installation* |
+  | **sdlp_wsdl** | Yes | `https://<serverip>:<port>/ProtectManager/services/v2011/incidents?wsdl` | *The location of your WSDL file used to construct requests when dealing with the incident and Reporting API* |
+  | **sdlp_incident_endpoint** | Yes | `https://<serverip>:<port>/ProtectManager/services/v2011/incidents` | *The URL of the incident and Reporting API for your DLP Installation* |
   | **sdlp_username** | Yes | `<SDLP Username>` | *Username for DLP* |
   | **sdlp_password** | Yes | `<SDLP Password>` | *Password for DLP* |
   | **sdlp_cafile** | No | `<SDLP Password>` | *Location of the CA file for DLP, leave Blank or ‘comment out’ for unverified requests* |
   | **sdlp_listener_timer** | Yes | `600` | *Used to set how often the Listener should poll, default is 10 mins (600)sdlp_listener_timer=600* |
-  | **sdlp_savedreportid** | Yes | `0` | *The Saved Report ID used to query for Incidents, must be set otherwise the integration will fail* |
-  | **sdlp_should_search_res** | Yes | `False` | *An optional app.config that, if set to True will perform an additional filter on DLP Incident results 
-  to ensure no Resilient incident exists with the same DLP Incident ID. 
-  Uses search_ex to query for incidents with an sdlp_incident_id custom field* |
+  | **sdlp_savedreportid** | Yes | `0` | *Saved Report ID used to query for incidents, must be set otherwise the integration will fail* |
+  | **sdlp_should_search_res** | Yes | `False` | *Optional. If set to True, it performs an additional filter on DLP incident results to ensure that no Resilient incident exists with the same DLP incident ID. Uses search_ex to query for incidents with an sdlp_incident_id custom field* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -88,8 +89,9 @@ Included in this package are two main components; a Incident Poller used to gath
   ```
 
 ### Custom Layouts
-# TODO: Finish this section when all custom fields defined.
-* Import the Data Tables and Custom Fields like the screenshot below:
+There are two custom fields which are used by the integration; `sdlp_incident_id` and `sdlp_incident_url`. `sdlp_incident_id` is used by the integration to perform an optional secondary filter when importing incidents into the Resilient platform. `sdlp_incident_url` provides a clickable URL when a DLP incident is imported giving quick access to the DLP console.
+
+* Import the custom fields such as the screenshot below:
 
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
@@ -109,19 +111,19 @@ Included in this package are two main components; a Incident Poller used to gath
 ## Troubleshooting
 There are several ways to verify the successful operation of a function.
 
-### Resilient Action Status
+### Resilient platform Action Status
 * When viewing an incident, use the Actions menu to view **Action Status**.
 * By default, pending and errors are displayed.
 * Modify the filter for actions to also show Completed actions.
 * Clicking on an action displays additional information on the progress made or what error occurred.
 
-### Resilient Scripting Log
+### Resilient platform Scripting Log
 * A separate log file is available to review scripting errors.
 * This is useful when issues occur in the pre-processing or post-processing scripts.
 * The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
-### Resilient Logs
-* By default, Resilient logs are retained at `/usr/share/co3/logs`.
+### Resilient platform Logs
+* By default, Resilient platform logs are retained at `/usr/share/co3/logs`.
 * The `client.log` may contain additional information regarding the execution of functions.
 
 ### Resilient-Circuits
@@ -134,15 +136,30 @@ There are several ways to verify the successful operation of a function.
 
 
 ## Configure Symantec DLP 
-This integration with Symantec DLP works by querying a DLP Saved Report for Incidents. When the saved report results are retrieved, any Incident which does not have a value for the `resilient_incident_id` custom attribute is imported into Resilient. Afterward, the `resilient_incident_id` custom DLP attribute will be filled in with the new Resilient Incident ID. This Saved Report can be customized to specify which Incidents should be imported to Resilient.
+
+### Configure Symantec DLP custom attribute
+2 Custom attributes are used by the DLP integration to hold relevant information from the Resilient platform. `resilient_incident_id` is used as a predicate for filtering out already imported incidents and avoiding duplication. Without this custom attribute in place, there is a potential for incident duplication. In Symantec DLP navigate to `System > Incident Attributes > Custom Attributes`
+
+ ![screenshot: finding-attribute-page ](./doc/screenshots/finding-attributes-page.png)
+
+ You will be given the option to configure settings such as status values for incidents and custom attributes. Select the option to add a new custom attribute and create a `resilient_incident_id` custom  attribute.
+ ![screenshot: adding new attribute](./doc/screenshots/adding-an-attribute.png)
+ ![screenshot: adding new attribute form](./doc/screenshots/new-attribute-form.png)
+
+
+### Configure Symantec DLP saved report
+
+This integration with Symantec DLP works by querying a DLP Saved Report for incidents. When the saved report results are retrieved, any incident which does not have a value for the `resilient_incident_id` custom attribute is imported into Resilient. Afterward, the `resilient_incident_id` custom DLP attribute will be filled in with the new Resilient incident ID. This Saved Report can be customized to specify which incidents should be imported to the Resilient platform.
 
 To setup a basic Saved Report for the integration follow these high level steps: 
-* Login to Symantec DLP and navagate to the Incidents View 
-* View any existing report such as `Endpoint Incidents - All`
+* Login to Symantec DLP and navigate to the incidents View 
+* View any existing report such as `Endpoint incidents - All`
 * Apply filtering rules as needed by your Org
 * Include an additional filter to be done on the `resilient_incident_id` where the value `Is Unassigned`
 * Click `Save As` and name your new report 
 * With the saved report active, note the `reportID` value in the URL. This will be the saved Report ID needed. 
+
+![saved report](./doc/screenshots/saved-report.png)
 
 ---
 
