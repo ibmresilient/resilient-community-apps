@@ -26,13 +26,14 @@ class PyTest(TestCommand):
 
 setup(
     name='rc-cts-abuseipdb',
-    version='1.0.0',
+    version='2.0.0',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
     install_requires=[
-        'rc-cts'
+        'rc-cts',
+        'resilient_lib'
     ],
     description="Resilient Circuits Custom Threat Service for AbuseIPDB",
     long_description="Resilient Circuits Custom Threat Service Component for AbuseIPDB",
@@ -47,7 +48,6 @@ setup(
         "resilient.circuits.components":
             ["AbuseIPDBThreatFeedSearcher = "
              "rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher:AbuseIPDBThreatFeedSearcher"],
-        "resilient.circuits.configsection":
-            ["gen_config = rc_cts_abuseipdb.components.abuseipdb_threat_feed_searcher:config_section_data"]
+        "resilient.circuits.configsection": ["gen_config = rc_cts_abuseipdb.util.config:config_section_data"],
     }
 )
