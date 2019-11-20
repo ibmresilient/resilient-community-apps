@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
-from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
 LOG = logging.getLogger(__name__)
 
@@ -18,11 +18,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_aws_iam", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_aws_iam", {})
+        validate_opts(self)
 
     @function("fn_aws_iam_list_user_groups")
     def _fn_aws_iam_list_user_groups_function(self, event, *args, **kwargs):

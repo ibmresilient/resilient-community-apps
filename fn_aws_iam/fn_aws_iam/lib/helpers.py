@@ -5,14 +5,12 @@
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function
 import logging
-import sys
-import datetime
-import tempfile
 from resilient_circuits.actions_component import ResilientComponent
 
 LOG = logging.getLogger(__name__)
 CONFIG_DATA_SECTION = "fn_aws_iam"
 PARAM_PREFIX = CONFIG_DATA_SECTION.split('_', 1)[1]+'_'
+MANDATORY_CONFIG_PARAMS = ["aws_iam_access_key_id", "aws_iam_secret_access_key"]
 
 def transform_kwargs(kwargs):
     """"Update kwargs dictionary.
@@ -26,13 +24,8 @@ def transform_kwargs(kwargs):
 
     :param kwargs: Dictionary of Resilient Function parameters.
     :param patt: Pattern to remove from beginning of parameters in 'params'.
-
-     """
+    """
     params = {}
-    # Pattern to strip from beginning of parameter e.g. 'aws_iam_'.
-    pattern = PARAM_PREFIX+'_'
-
-    # Remove  "aws_iam_" from the kwargs key names.
     for (k, v) in kwargs.copy().items():
         v = kwargs.pop(k)
 
@@ -52,11 +45,23 @@ def transform_kwargs(kwargs):
     return params
 
 def snake_to_pascal(param):
-    """
-    Convert a paramater name from snake_case to PascalCase as used for AWS IAM api parameters.
+    """ Convert a parameter name from snake_case to PascalCase as used for AWS IAM api parameters.
 
     :param word: Dictionary of Resilient Function parameters.
     :return: Converted  string.
-
     """
     return ''.join(x.capitalize() or '_' for x in param.split('_'))
+
+def validate_opts(func):
+    """"Check options set correctly.
+    Checks that the parameters are set and that they aren't set to an empty value.
+
+    :param func: Resilient Function instance reference
+    """
+    for param in MANDATORY_CONFIG_PARAMS:
+        param_value = func.options.get(param, None)
+        LOG.info(param_value)
+        if param_value is None:
+            raise Exception("Mandatory config setting '{}' not set.".format(param))
+        if param_value == '' or param_value == "\'\'":
+            raise ValueError("Invalid value for config setting '{}'.".format(param))
