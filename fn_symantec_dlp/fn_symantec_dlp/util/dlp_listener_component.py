@@ -205,10 +205,10 @@ class DLPListener(ResilientComponent):
         # To avoid a START_DATE cannot be after DISCOVERED_DATE. issue
         # If no dates are present, time will be set to now.
         incident_dates = []
-        if incident['incident'].get('eventDate'):
-            incident_dates.append(incident['incident'].get('eventDate'))
-        if incident['incident'].get('detectionDate'):
-            incident_dates.append(incident['incident'].get('detectionDate'))
+        if hasattr(incident['incident'], 'eventDate'):
+            incident_dates.append(incident['incident']['eventDate'])
+        if hasattr(incident['incident'], 'detectionDate'):
+            incident_dates.append(incident['incident']['detectionDate'])
         payload = self.map_values(
             template_file=os.path.abspath(default_dir + "/_dlp_incident_template.jinja2"),
             message_dict={"incident":
