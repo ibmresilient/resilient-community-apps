@@ -192,14 +192,24 @@ class DLPListener(ResilientComponent):
         """
 
         default_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), os.path.pardir, "data/templates")
+        
+        # Get the detection date and the event_date. event_date should be the start date
+        # Considering the possibility of a timesync issue, take the earlier of either eventDate or detectionDate
+        # To avoid a START_DATE cannot be after DISCOVERED_DATE. issue
+        # If no dates are present, time will be set to now.
+        incident_dates = []
+        if incident['incident'].get('eventDate'):
+            incident_dates.append(incident['incident'].get('eventDate'))
+        if incident['incident'].get('detectionDate'):
+            incident_dates.append(incident['incident'].get('detectionDate'))
         payload = self.map_values(
             template_file=os.path.abspath(default_dir + "/_dlp_incident_template.jinja2"),
             message_dict={"incident":
                               {"incident": serialize_object(incident['incident']),
                                "incidentId": incident['incidentId'],
-                               "event_date": incident['incident']['eventDate'],
+                               "event_date": min(incident_dates or [0]),
                                "notes": notes_to_be_added,
-                               "detection_date": incident['incident']['detectionDate'],
+                               "detection_date": max(incident_dates or [0]),
                                "severity": self.return_res_severity(incident['incident']['severity']),
                                "dlp_incident_url": self.build_dlp_url(incidentid=incident['incidentId'], host=self.soap_client.host)}})
         return payload
