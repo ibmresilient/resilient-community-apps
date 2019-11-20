@@ -6,6 +6,7 @@
 """
 
 import logging
+from fn_aws_iam.lib.aws_iam_client import AwsIamClient
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -14,8 +15,17 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Simple test to verify ProofPoint Trap connectivity.
     """
     options = opts.get("fn_aws_iam", {})
-    return {"state": "unimplemented"}
+    try:
+        iam = AwsIamClient(opts, options, sts_client=True)
+        default_identity = iam.sts.get_caller_identity()
+
+        if isinstance(default_identity , dict):
+            return {"state": "success"}
+        else:
+            return {"state": "failure"}
+
+    except Exception as e:
+        return {"state": "failure", "status_code": e}
