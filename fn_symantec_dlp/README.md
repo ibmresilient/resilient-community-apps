@@ -22,8 +22,6 @@
 ## Overview
 **Resilient Circuits Components used to establish DLP as a source of incidents for the Resilient platform**
 
- ![screenshot: main](./doc/screenshots/main.png)
-
 Included in this package are two main components; a incident Poller used to gather incidents from DLP and a Resilient Circuits Function for updating a Symantec DLP incident from the Resilient platform.
 
 ---
