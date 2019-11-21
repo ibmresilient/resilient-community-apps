@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sch="http://www.vontu.com/v2011/enforce/webservice/incident/schema" xmlns:sch1="http://www.vontu.com/v2011/enforce/webservice/incident/common/schema">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <sch:incidentUpdateRequest>
+            <!--1 or more repetitions:-->
+            <updateBatch>
+                <batchId>{{batchId}}</batchId>
+                <!--Zero or more repetitions:-->
+                <incidentId>{{dlp_id}}</incidentId>
+                <incidentAttributes>
+                        {%- if severity -%}<severity>{{severity}}</severity>{%- endif -%}
+                        {%- if status -%}<status>{{status}}</status>{%- endif -%}
+                        {%- if remediationStatus -%}<remediationStatus>{{remediationStatus}}</remediationStatus>{%- endif -%}
+                        {%- if remediationLocation -%}<remediationLocation>{{remediationLocation}}</remediationLocation>{%- endif -%}
+
+                        {%- if note -%}
+                        <note>
+                            <!--Optional:-->
+                            {# Date and Time can be provided but is optional so our sent note is the most recent one #}
+                            <dateAndTime>?</dateAndTime>
+                            <note>{{note}}</note>
+                        </note>
+                        {%- endif -%}
+
+                        {# Custom Attributes #}
+                        {%- if custom_attributes -%}
+                            {%- for attribute in custom_attributes -%}
+                                <customAttribute>
+                                    <sch1:name>{{attribute.name}}</sch1:name>
+                                    <sch1:value>{{attribute.value}}</sch1:value>
+                                </customAttribute>
+                            {%-endfor-%}
+                        {%- endif -%}
+                </incidentAttributes>
+            </updateBatch>
+        </sch:incidentUpdateRequest>
+    </soapenv:Body>
+    </soapenv:Envelope>
