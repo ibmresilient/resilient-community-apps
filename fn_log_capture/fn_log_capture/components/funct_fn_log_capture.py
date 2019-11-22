@@ -63,7 +63,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Get the resilient-circuits log, optionally specifying the last n lines"""
         try:
             # Get the function parameters:
-            log_capture_maxlen = kwargs.get("log_capture_maxlen")  # number
+            log_capture_maxlen = kwargs.get("log_capture_maxlen", 0)  # number
             log_capture_date = kwargs.get("log_capture_date")  # datetimepicker (epoch)
             log_capture_date_option = self.get_select_param(kwargs.get("log_capture_date_option"))  # select
             log_min_level = self.get_select_param(kwargs.get("log_min_level")) # select
@@ -87,6 +87,8 @@ class FunctionComponent(ResilientComponent):
             log.info("task_id: %s", task_id)
             log.info(u"log_attachment_name: %s", log_attachment_name)
             log.info("log_min_level: %s", log_min_level)
+
+            log_capture_maxlen = log_capture_maxlen if log_capture_maxlen else 0
 
             result_payload = ResultPayload(PACKAGE_NAME, **kwargs)
             yield StatusMessage("starting...")
