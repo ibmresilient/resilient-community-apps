@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function
 import logging
@@ -26,21 +25,21 @@ def transform_kwargs(kwargs):
     :param patt: Pattern to remove from beginning of parameters in 'params'.
     """
     params = {}
-    for (k, v) in kwargs.copy().items():
-        v = kwargs.pop(k)
+    for (key, val) in kwargs.copy().items():
+        val = kwargs.pop(key)
 
-        if isinstance(k, list):
-            k = [ResilientComponent.get_select_param(val) for val in v]
-        elif isinstance(v, dict):
-            v = v.get("name")
-        kwargs[k] = v.rstrip().lstrip() if isinstance(v, str) else v
-        params[snake_to_pascal(k.rsplit(PARAM_PREFIX,1)[1])] = v.rstrip().lstrip() if isinstance(v, str) \
-                                                                and k.lower().startswith(PARAM_PREFIX) else v
+        if isinstance(key, list):
+            key = [ResilientComponent.get_select_param(val) for val in val]
+        elif isinstance(val, dict):
+            val = val.get("name")
+        kwargs[key] = val.rstrip().lstrip() if isinstance(val, str) else val
+        params[snake_to_pascal(key.rsplit(PARAM_PREFIX, 1)[1])] = val.rstrip().lstrip() \
+            if isinstance(val, str) and key.lower().startswith(PARAM_PREFIX) else val
 
     # If any entry has "None" string change to None value for params.
-    for k, v in params.items():
-        if isinstance(v, str) and v.lower() == 'none':
-            params[k] = None
+    for key, val in params.items():
+        if isinstance(val, str) and val.lower() == 'none':
+            params[key] = None
 
     return params
 
@@ -63,5 +62,5 @@ def validate_opts(func):
         LOG.info(param_value)
         if param_value is None:
             raise Exception("Mandatory config setting '{}' not set.".format(param))
-        if param_value == '' or param_value == "\'\'":
+        if param_value in ('', "\'\'"):
             raise ValueError("Invalid value for config setting '{}'.".format(param))
