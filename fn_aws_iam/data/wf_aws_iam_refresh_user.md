@@ -65,6 +65,13 @@ def check_add_quotes(tag_name):
     else:
         return tag_name
 
+def process_tags(tag_list, row):
+    tags = []
+    for i in range(len(tag_list)):
+        if tag_list[i]["Key"] is not None:
+            tags.append(tag_list[i]["Key"])
+    row.Tags = ','.join(check_add_quotes(t) for t in tags)
+
 def main():
     note_text = ''
     if CONTENT is not None and len(CONTENT) > 0:
@@ -83,15 +90,8 @@ def main():
                         else:
                             row[f] = u[f]
                     else:
-                        if f == "Tags":
-                            tags = []
-                            tag_list = u[f]
-                            nt = "{}".format(tag_list)
-                            incident.addNote(helper.createRichText(nt))
-                            for i in range(len(tag_list)):
-                                if tag_list[i]["Key"] is not None:
-                                    tags.append(tag_list[i]["Key"])
-                            row.Tags = ','.join(check_add_quotes(t) for t in tags)
+                        if f == "Tags" and len(u[f]) > 0:
+                            process_tags(u[f], row)
                         else:
                             row[f] = ','.join(u[f])
         else:
@@ -149,7 +149,7 @@ Result: {
 # List of fields in datatable fn_aws_iam_list_user_groups script
 DATA_TBL_FIELDS = ["Groups"]
 FN_NAME = "fn_aws_iam_list_user_groups"
-WF_NAME = "Example: AWS IAM: Refresh User"
+WF_NAME = "Refresh User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -169,6 +169,144 @@ def main():
         row.Groups = ",".join(groups)
     else:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>"\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+
+## Function - AWS IAM: List User Policies
+
+### API Name
+`fn_aws_iam_list_user_policies`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_user_groups script ##
+# Example result:
+"""
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyName': 'test_pol'},
+                      {'PolicyName': 'test_pol_2',
+                       'PolicyArn': 'arn:aws:iam::834299573936:policy/test_pol_2'},
+                      {'PolicyName': 'AmazonRoute53ReadOnlyAccess',
+                       'PolicyArn': 'arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess'}],
+          'raw': '[{"PolicyName": "test_pol"}, {"PolicyName": "test_pol_2",
+                    "PolicyArn": "arn:aws:iam::834299573936:policy/test_pol_2"},
+                    {"PolicyName": "AmazonRoute53ReadOnlyAccess",
+                    "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"}]',
+          'inputs': {'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                      'host': 'myhost.ibm.com', 'execution_time_ms': 87423, 'timestamp': '2019-11-21 11:55:29'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_user_groups script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_list_user_policies"
+WF_NAME = "Refresh User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+note_text = ''
+
+def main():
+    note_text = ''
+    if CONTENT is not None:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Policy name' result(s) returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>"\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        policy_names = []
+        for pn in range(len(CONTENT)):
+            if CONTENT[pn]["PolicyName"] is not None:
+                policy_names.append(CONTENT[pn]["PolicyName"])
+        row.Policies = ",".join(policy_names)
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>"\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+
+## Function - AWS IAM: List User Access Key Ids
+
+### API Name
+`fn_aws_iam_list_user_access_key_ids`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_user_groups script ##
+# Example result:
+"""
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'UserName': 'iam_test_User', 'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L',
+                       'Status': 'Active', 'CreateDate': '2019-11-12 11:09:38'
+                       }],
+          'raw': '[{"UserName": "iam_test_User", "AccessKeyId": "AKIA4EQBBG2YKXYJB55L",
+                  "Status": "Active", "CreateDate": "2019-11-12 11:09:38"}]',
+          'inputs': {'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                      'host': 'myhost.ibm.com', 'execution_time_ms': 5365, 'timestamp': '2019-11-21 10:41:22'}}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_user_groups script
+DATA_TBL_FIELDS = ["AccessKeyIds"]
+FN_NAME = "fn_aws_iam_list_user_access_keys"
+WF_NAME = "Refresh User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+note_text = ''
+
+def main():
+    note_text = ''
+    if CONTENT is not None:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Access key' result(s) returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>"\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        access_key_ids = []
+        for ak in range(len(CONTENT)):
+            if CONTENT[ak]["AccessKeyId"] is not None:
+                access_key_ids.append(CONTENT[ak]["AccessKeyId"])
+        row.AccessKeyIds = ",".join(access_key_ids)
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>"\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 

@@ -49,7 +49,7 @@ Result: {
 import re
 # List of fields in datatable fn_aws_iam_list_users script
 DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags", "Groups"]
+                   "PasswordLastUsed", "AccessKeyIds", "Policies", "Tags", "Groups"]
 FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "List Users"
 # Processing
@@ -64,6 +64,20 @@ def check_add_quotes(tag_name):
         return "'"+tag_name+"'"
     else:
         return tag_name
+
+def process_access_key_ids(access_key_id_list, row):
+    access_key_ids = []
+    for i in range(len(access_key_id_list)):
+        if access_key_id_list[i]["AccessKeyId"] is not None:
+            access_key_ids.append(access_key_id_list[i]["AccessKeyId"])
+    row.AccessKeyIds = ','.join(access_key_ids)
+
+def process_policies(policy_list, row):
+    policies = []
+    for i in range(len(policy_list)):
+        if policy_list[i]["PolicyName"] is not None:
+            policies.append(policy_list[i]["PolicyName"])
+    row.Policies = ','.join(policies)
 
 def process_groups(group_list, row):
     groups = []
@@ -96,7 +110,11 @@ def main():
                         else:
                           newrow[f] = CONTENT[u][f]
                     else:
-                        if f == "Groups" and len(CONTENT[u][f]) > 0:
+                        if f == "AccessKeyIds" and len(CONTENT[u][f]) > 0:
+                            process_access_key_ids(CONTENT[u][f], newrow)
+                        elif f == "Policies" and len(CONTENT[u][f]) > 0:
+                            process_policies(CONTENT[u][f], newrow)
+                        elif f == "Groups" and len(CONTENT[u][f]) > 0:
                             process_groups(CONTENT[u][f], newrow)
                         elif f == "Tags" and len(CONTENT[u][f]) > 0:
                             process_tags(CONTENT[u][f], newrow)

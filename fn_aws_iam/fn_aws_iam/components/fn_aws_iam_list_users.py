@@ -4,8 +4,8 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
 from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
@@ -47,13 +47,19 @@ class FunctionComponent(ResilientComponent):
                 # All users
                 rtn = iam.result_paginator("list_users")
                 for i in range(len(rtn)):
-                    # Add tags and groups for each user.
-                    user_tags = iam.list_user_tags(UserName=rtn[i]["UserName"])
+                    # Add extra data for each user.
+                    user_access_key_ids = iam.result_paginator("list_access_keys", UserName=rtn[i]["UserName"])
+                    user_policies = iam.result_paginator("list_attached_user_policies", UserName=rtn[i]["UserName"])
                     user_groups = iam.result_paginator("list_groups_for_user", UserName=rtn[i]["UserName"])
-                    if len(user_tags) > 0:
-                        rtn[i]["Tags"] = user_tags
-                    if len(user_groups) > 0:
+                    user_tags = iam.list_user_tags(UserName=rtn[i]["UserName"])
+                    if user_access_key_ids:
+                        rtn[i]["AccessKeyIds"] = user_access_key_ids
+                    if user_policies:
+                        rtn[i]["Policies"] = user_policies
+                    if user_groups:
                         rtn[i]["Groups"] = user_groups
+                    if user_tags:
+                        rtn[i]["Tags"] = user_tags
 
             results = rp.done(True, rtn)
 

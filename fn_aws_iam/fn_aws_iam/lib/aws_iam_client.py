@@ -1,14 +1,21 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-from boto3 import Session
-from botocore.exceptions import ClientError
+""" AWS IAM client support classes. """
 from  datetime import datetime
 import logging
+from botocore.exceptions import ClientError
+from boto3 import Session
 
 LOG = logging.getLogger(__name__)
 # List of paginated types supported for the integration.
-SUPPORTED_PAGINATE_TYPES = ["Users", "Groups"]
+SUPPORTED_PAGINATE_TYPES = [
+    "Users",
+    "Groups",
+    "AccessKeyMetadata",
+    "PolicyNames",
+    "AttachedPolicies"
+]
 
 class AwsIamClient():
     """
@@ -46,10 +53,10 @@ class AwsIamClient():
                 aws_secret_access_key=self.aws_iam_secret_access_key
             ).client(service_name=service_name)
 
-        except ClientError as e:
-            LOG.error("ERROR instantiating AWS IAM client for service: {0}, Got exception type: {1}, msg: {2}"
-                      .format(service_name, e.__repr__(), e.message))
-            raise e
+        except ClientError as cli_ex:
+            LOG.error("ERROR instantiating AWS IAM client for service: %s, Got exception : %s",
+                      service_name, cli_ex.__repr__())
+            raise cli_ex
 
         return client
 
@@ -101,9 +108,10 @@ class AwsIamClient():
         """
         if isinstance(result, list):
             for entry in result:
-                entry = self._datetime_to_str(entry)
+                if isinstance(entry, dict):
+                    entry = self._datetime_to_str(entry)
         else:
-            LOG.error("ERROR with unexpected result type {0} for AWS IAM query".format(type(result)))
+            LOG.error("ERROR with unexpected result type %s for AWS IAM query", type(result))
 
         if any(n in result_type for n in ["User", "Users"]):
             result = self._add_user_properties(result)
@@ -113,17 +121,15 @@ class AwsIamClient():
     def _get_default_identity(self):
         """ Get the identity of the current AWS IAM user.
 
-        :param kwargs: Dictionary of AWS API parameters for function call .
         :return default_identity: Called identity dict.
         """
         try:
-            # Create IAM client for sts
-
             default_identity = self.sts.get_caller_identity()
-        except Exception as e:
-            LOG.error("ERROR with 'get_caller_identity' Got exception type: {0}, msg: {1}"
-                      .format(e.__repr__(), e.message))
-            raise e
+
+        except Exception as int_ex:
+            LOG.error("ERROR with 'get_caller_identity' Got exception: %s",
+                      int_ex.__repr__())
+            raise int_ex
 
         return default_identity
 
@@ -140,7 +146,7 @@ class AwsIamClient():
         return result_entry
 
     def result_paginator(self, method, **kwargs):
-        """ Get the result in using get_paginator format for certain AWS IAM queries.
+        """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
         :param method: The method to pass to get_paginator e.g. 'list_users'.
@@ -156,11 +162,11 @@ class AwsIamClient():
                     result_type = self._get_type_from_response(response)
                 result.extend(response[result_type])
 
-        except Exception as e:
-            LOG.error("ERROR with method: '{0}' and args: '{1}, Got exception type: {2}, msg: {3}"
-                      .format(method, kwargs, e.__repr__(), e.message))
-            LOG.info(e)
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR in paginator with method: '%s' and args: '%s', Got exception: %s",
+                      method, kwargs, int_ex.__repr__())
+            LOG.info(int_ex)
+            raise int_ex
 
         return self._update_result(result, result_type)
 
@@ -173,10 +179,10 @@ class AwsIamClient():
         result = []
         try:
             user = self.iam.get_user(**kwargs)["User"]
-        except Exception as e:
-            LOG.error("ERROR with 'get_user' and args: '{0}, Got exception type: {1}, msg: {2}"
-                      .format(kwargs, e.__repr__(), e.message))
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR with 'get_user' and args: '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
 
         # Normalize result to be same as that of list all users.
         result.append(user)
@@ -191,11 +197,11 @@ class AwsIamClient():
         """
         try:
             tags = self.iam.list_user_tags(**kwargs)["Tags"]
-        except Exception as e:
-            LOG.error("ERROR with 'list_user_tags' and args: '{0}, Got exception type: {1}, msg: {2}"
-                      .format(kwargs, e.__repr__(), e.message))
-            LOG.info(e)
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR with 'list_user_tags' and args: '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            LOG.info(int_ex)
+            raise int_ex
 
         return tags
 
@@ -213,14 +219,15 @@ class AwsIamClient():
             profile = response["LoginProfile"]
 
         except self.iam.exceptions.NoSuchEntityException:
-            LOG.info('ERROR get_login_profile {0} :{1} exception'.format(kwargs, "NoSuchEntity"))
+            LOG.info("ERROR with 'get_login_profile' and args: '%s', Got exception: %s",
+                     kwargs, "NoSuchEntityException")
 
             profile = {}
 
-        except Exception as e:
-            LOG.error("ERROR with 'get_login_profile' and args {0}, Got exception type: {1}, msg: {2}"
-                      .format(kwargs, e.__repr__(), e.message))
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR with 'get_login_profile' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
 
         return profile
 
@@ -235,17 +242,17 @@ class AwsIamClient():
 
         try:
 
-            response = self.iam.delete_login_profile(**kwargs)
+            self.iam.delete_login_profile(**kwargs)
 
         except self.iam.exceptions.NoSuchEntityException:
-            LOG.info('ERROR delete_login_profile {0} :{1} exception'.format(kwargs, "NoSuchEntity"))
+            LOG.info("ERROR with 'delete_login_profile' and args: '%s', Got exception: %s",
+                     kwargs, "NoSuchEntityException")
             status = "NoSuchEntity"
 
-        except Exception as e:
-            LOG.error("ERROR with 'delete_login_profile' and args {0}, Got exception type: {1}, msg: {2}"
-                      .format(kwargs, e.__repr__(), e.message))
-            LOG.info(e)
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR with 'delete_login_profile' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
 
         return status
 
@@ -259,15 +266,40 @@ class AwsIamClient():
         status = "OK"
 
         try:
-            response = self.iam.update_login_profile(**kwargs)
+            self.iam.update_login_profile(**kwargs)
 
         except self.iam.exceptions.PasswordPolicyViolation:
-            LOG.info('ERROR update_login_profile {0} :{1} exception'.format(kwargs, "PasswordPolicyViolation"))
+            LOG.info("ERROR with 'update_login_profile' and args: '%s', Got exception %s",
+                     kwargs, "PasswordPolicyViolation")
             status = "PasswordPolicyViolation"
 
-        except Exception as e:
-            LOG.error("ERROR with 'update_login_profile' and args {0}, Got exception type: {1}, msg: {2}"
-                      .format(kwargs, e.__repr__(), e.message))
-            raise e
+        except Exception as int_ex:
+            LOG.error("ERROR with 'update_login_profile' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
+
+        return status
+
+    def delete_access_key(self, **kwargs):
+        """ Delete AWS IAM user access key.
+
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return status: Return status string.
+        """
+        # Set default good status:
+        status = "OK"
+        try:
+
+            self.iam.delete_access_key(**kwargs)
+
+        except self.iam.exceptions.NoSuchEntityException:
+            LOG.info("ERROR with 'delete_access_key' and args: '%s', Got exception: %s",
+                     kwargs, "NoSuchEntityException")
+            status = "NoSuchEntity"
+
+        except Exception as int_ex:
+            LOG.error("ERROR with 'delete_access_key' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
 
         return status
