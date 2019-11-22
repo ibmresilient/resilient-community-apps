@@ -97,6 +97,16 @@ Sample Message
         else:
             assert MAXLEN_RESULTS == results
 
+    def test_maxlen_none(self):
+        log_file = get_sample_logfile_path()
+        num, results = get_log_by_filter(log_file, "Debug", 0)
+
+        NONE_RESULTS = get_log_file()
+        if sys.version_info.major < 3:
+            assert unicode(''.join(NONE_RESULTS), encoding='utf-8') == unicode(results, encoding='utf-8')
+        else:
+            assert ''.join(NONE_RESULTS) == results
+
 def get_log_file():
     log_file = get_sample_logfile_path()
 
