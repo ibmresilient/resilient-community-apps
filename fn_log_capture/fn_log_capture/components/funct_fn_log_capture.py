@@ -19,8 +19,9 @@ PACKAGE_NAME = "fn_log_capture"
 LOG_FILE = "app.log"
 DEFAULT_ATTACHMENT_NAME = "{}_resilient-circuits_{}.log"
 
-DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
-DATE_FORMAT_MS = ','.join((DATE_FORMAT, '%f'))
+DATE_FORMAT = '%Y-%m-%d'
+DATE_TIME_FORMAT = ' '.join((DATE_FORMAT, '%H:%M:%S'))
+DATE_TIME_MS_FORMAT = ','.join((DATE_TIME_FORMAT, '%f'))
 
 LOG_LEVELS = {
     "debug": ['debug', 'info', 'warning', 'error'],
@@ -178,7 +179,7 @@ def get_log_by_date(log_file, log_capture_date, log_capture_date_option, log_cap
     capture log files based on capture_date before or after fields
     :param log_file:
     :param log_capture_date epoch formatted field in milliseconds
-    :param log_capture_date_option: 'before' or 'after'
+    :param log_capture_date_option: 'before', 'on', or 'after'
     :param log_capture_maxlen: # of lines to capture at end of list
     :param log_min_level: DEBUG, INFO, WARNING, ERROR levels to filter DEBUG is all, INFO imcludes
        WARNING and ERROR, etc.
@@ -189,40 +190,58 @@ def get_log_by_date(log_file, log_capture_date, log_capture_date_option, log_cap
     # read from the beginning looking for lines to capture based on timestamp
     time_struct = time.localtime(log_capture_date/1000)
     compare_date = datetime.fromtimestamp(time.mktime(time_struct))
-    log.debug("Looking for date: {}".format(time.strftime(DATE_FORMAT, time_struct)))
+    if log_capture_date_option == 'on':
+        compare_date = compare_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    log.debug("Looking for date: {}".format(time.strftime(DATE_TIME_FORMAT, time_struct)))
 
     captured_list = []
     result_line = None
     triggered = False
 
     for line in get_log_file_data(log_file):
+        capture = False
         # attempt to get the date string from the log entry.
         # Some entries are multi-line, so not all lines will have a date string
         try:
-            startswith = datetime.strptime(' '.join(line.split(' ', 2)[:2]), DATE_FORMAT_MS)
+            if log_capture_date_option == 'on':
+                log_file_date = datetime.strptime(line.split(' ', 1)[0], DATE_FORMAT)
+            else:
+                log_file_date = datetime.strptime(' '.join(line.split(' ', 2)[:2]), DATE_TIME_MS_FORMAT)
+
         except (ValueError, TypeError):
-            startswith = None
+            log_file_date = None
 
         if not triggered:
-            if startswith:
-                if log_capture_date_option == 'before' and startswith <= compare_date:
+            if log_file_date:
+                if log_capture_date_option == 'before' and log_file_date <= compare_date:
                     triggered = True
-                elif startswith >= compare_date:
+                    capture = True
+                elif log_capture_date_option == 'on' and log_file_date == compare_date:
                     triggered = True
-
-        if triggered:
+                    capture = True
+                elif log_capture_date_option == 'after' and log_file_date >= compare_date:
+                    triggered = True
+                    capture = True
+        else:
             # don't capture after the compare_date
-            if log_capture_date_option == 'before' and startswith:
-                if startswith <= compare_date:
-                    result_line = filter_log_level(log_min_level, line, multi_line=result_line)
-                    if result_line:
-                        captured_list.append(line)
+            if log_capture_date_option == 'before' and log_file_date:
+                if log_file_date <= compare_date:
+                    capture = True
+                else:
+                    break
+            # only capture for the given date
+            elif log_capture_date_option == 'on' and log_file_date:
+                if log_file_date == compare_date:
+                    capture = True
                 else:
                     break
             else:
-                result_line = filter_log_level(log_min_level, line, multi_line=result_line)
-                if result_line:
-                    captured_list.append(line)
+                capture = True
+
+        if capture:
+            result_line = filter_log_level(log_min_level, line, multi_line=result_line)
+            if result_line:
+                captured_list.append(line)
 
     # add maxlen
     if log_capture_maxlen:

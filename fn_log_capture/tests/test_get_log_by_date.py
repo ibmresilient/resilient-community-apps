@@ -39,13 +39,23 @@ Sample Message
 2019-10-21 16:09:42,990 INFO Sample Message
 2019-10-21 16:10:42,990 WARNING Sample Message
 2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:08:42,990 DEBUG Sample Message
+2019-10-22 16:09:42,990 INFO Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
 """
 
-AFTER_MAXLEN_RESULTS = """3
-2019-10-21 16:08:42,990 DEBUG Sample Message
-2019-10-21 16:09:42,990 INFO Sample Message
-2019-10-21 16:10:42,990 WARNING Sample Message
-2019-10-21 16:11:42,990 ERROR Sample Message
+AFTER_MAXLEN_RESULTS = """2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:08:42,990 DEBUG Sample Message
+2019-10-22 16:09:42,990 INFO Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
+"""
+
+ON_RESULTS = """2019-10-22 16:08:42,990 DEBUG Sample Message
+2019-10-22 16:09:42,990 INFO Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
 """
 
 class TestFnLogByDate:
@@ -56,6 +66,7 @@ class TestFnLogByDate:
                                 (5, 1571684880000, "before", "Debug", BEFORE_MAXLEN_RESULTS),
                                 (None, 1571684880000, "after", "Debug", AFTER_RESULTS),
                                 (5, 1571684880000, "after", "Debug", AFTER_MAXLEN_RESULTS),
+                                (None, 1571716800000, "on", "Debug", ON_RESULTS)
                              ])
     def test_success(self,
                      log_capture_maxlen, log_capture_date, log_capture_date_option,
@@ -71,4 +82,4 @@ class TestFnLogByDate:
 
 def get_sample_logfile_path():
     log_dir = os.path.dirname(os.path.realpath(__file__))
-    return os.path.join(log_dir, "data", "sample.log")
+    return os.path.join(log_dir, "data", "sample.file")

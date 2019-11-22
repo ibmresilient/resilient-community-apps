@@ -75,7 +75,7 @@ class TestFnLogCapture:
 
 def setup_get_log_file(mock_function):
     log_dir = os.path.dirname(os.path.realpath(__file__))
-    log_file = os.path.join(log_dir, "data", "sample.log")
+    log_file = os.path.join(log_dir, "data", "sample.file")
 
     with open(log_file, "rb") as f:
         mock_function.return_value = f.readlines()

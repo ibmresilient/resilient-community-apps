@@ -53,6 +53,7 @@ Sample Message
 2
 3
 2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
 """
         results = get_filtered_results('Error')
         if sys.version_info.major < 3:
@@ -75,6 +76,8 @@ Sample Message
 3
 2019-10-21 16:10:42,990 WARNING Sample Message
 2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
 """
         results = get_filtered_results('Warning')
         if sys.version_info.major < 3:
@@ -83,11 +86,11 @@ Sample Message
             assert WARNING_RESULTS == results
 
     def test_maxlen(self):
-        MAXLEN_RESULTS = """3
-2019-10-21 16:08:42,990 DEBUG Sample Message
-2019-10-21 16:09:42,990 INFO Sample Message
-2019-10-21 16:10:42,990 WARNING Sample Message
-2019-10-21 16:11:42,990 ERROR Sample Message
+        MAXLEN_RESULTS = """2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:08:42,990 DEBUG Sample Message
+2019-10-22 16:09:42,990 INFO Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message
 """
         log_file = get_sample_logfile_path()
         num, results = get_log_by_filter(log_file, "Debug", 5)
@@ -115,7 +118,7 @@ def get_log_file():
 
 def get_sample_logfile_path():
     log_dir = os.path.dirname(os.path.realpath(__file__))
-    return os.path.join(log_dir, "data", "sample.log")
+    return os.path.join(log_dir, "data", "sample.file")
 
 def get_filtered_results(log_level):
     sample_lines = get_log_file()
