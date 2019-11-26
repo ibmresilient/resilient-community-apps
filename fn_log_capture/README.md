@@ -15,9 +15,10 @@ This integration allows one to capture log entries from an integrations server f
 
 Key Features
 
-* filter logs by date (before or after a specified date and time)
+* filter logs by date (before, on or after a specified date and time)
 * filter logs entries by number of log entries to return (ex. last 1000 lines)
 * filter by minimum log level: DEBUG, INFO, WARNING and ERROR
+* Retain log files as an attachment
 
 # fn-log-capture Functions for IBM Resilient
 
@@ -50,7 +51,7 @@ Key Features
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_log_capture
+Resilient Circuits Components for fn_log_capture
 
 ---
 
@@ -92,7 +93,6 @@ Resilient Circuits Components for 'fn_log_capture
   $ resilient-circuits run
   ```
 
-
 ---
 
 ## Uninstall
@@ -102,6 +102,13 @@ Resilient Circuits Components for 'fn_log_capture
   $ pip uninstall fn-log-capture
   ```
 
+---
+## Usage
+
+* The Log Level represents the minimum value matched. For instance, DEBUG will also report INFO, WARNING and ERROR.
+* All filter fields are additive. For instance, using an _after_ compare date with maxlines will return the number of lines specified at the end of the log file (trimming the first set of lines).
+* If the log file name is left blank, a system generated name is created in the format: \<hostname\>\_resilient-circuits\_<date_time>.log
+* If you have more than one active Integration Server, this function cannot be installed on all. Presently there is no easy solution to allow mulitple installations of a function to target a specific integration server. 
 ---
 
 ## Troubleshooting
