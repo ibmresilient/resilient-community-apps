@@ -29,7 +29,12 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
-### What's new in this Beta
+### What's new in this Beta 
+* Created two new custom Artifact Types for Threat ID and Campaign ID and filtered Rules based on the Artifact type.
+* If Threat ID or Campaign ID don't exist in Proofpoint Tap instead of ending the Workflow a Note is created with a message telling the user Threat ID/Campaign ID cannot be found.
+* After Workflow is completed a clear Note is created with the name of the executed Workflow, results are saved into a Resilient Datatable. Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+
+### What's new in this Beta 11/1/2019
 * Fixed a bug for Get Forensics function where adding a Note caused the Workflow a long time to complete.
 * Improved the poller logic and filtering based on score threshold.
 * Improved the documentation.
@@ -121,7 +126,9 @@ The Proofpoint TAP function package provides the following features:
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* There are two custom incident fields Proofpoint Campaign ID and Proofpoint Threat ID that you may show on a desired layout. These two fields get automatically populated by the Proofpoint TAP poller.
+* To use the functions, the Resilient playbook designer needs to create a new Incident tab containing the Proofpoint TAP Campaign Object Details Data Table. The examples in this guide assume that the incident tab is named Proofpoint TAP. 
+
+* Additionally there are two custom incident fields Proofpoint Campaign ID and Proofpoint Threat ID that you may show on a desired layout. These two fields get automatically populated by the Proofpoint TAP poller.
 
 ---
 
