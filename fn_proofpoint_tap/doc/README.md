@@ -264,11 +264,11 @@ if results:
 ## Rules
 | Rule Name | Object | Workflow/Script Triggered |
 | --------- | ------ | ------------------ |
-| Example: Proofpoint TAP - Aggregate Malicious Forensics by Threat ID | artifact | `get_forensics_by_threat_idworkflow` |
-| Example: Proofpoint TAP - Get Campaign Information by Campaign ID | artifact | `get_campaign_flow workflow` |
-| Example: Proofpoint TAP - Aggregate Forensics by Campaign ID | artifact | `get_forensics_by_campaign_id workflow` |
-| Example: Proofpoint TAP - Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID | artifact | `get_aggregate_forensics_by_threat_id workflow` |
-| Example: Create Artifact for Campaign Object Name or Threat | data table | `Example: Create Artifact for Campaign Object Name or Threat Script` |
+| Example: Proofpoint TAP - Aggregate Malicious Forensics by Threat ID | Artifact | `get_forensics_by_threat_id Workflow` |
+| Example: Proofpoint TAP - Get Campaign Information by Campaign ID | Artifact | `get_campaign_flow Workflow` |
+| Example: Proofpoint TAP - Aggregate Forensics by Campaign ID | Artifact | `get_forensics_by_campaign_id Workflow` |
+| Example: Proofpoint TAP - Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID | Artifact | `get_aggregate_forensics_by_threat_id Workflow` |
+| Example: Create Artifact for Campaign Object Name or Threat | Data Table | `Example: Create Artifact for Campaign Object Name or Threat Script` |
 
 ---
 
@@ -303,7 +303,6 @@ if artifact_value:
 
 </p>
 </details>
----
 
 <!--
 ## Inform Resilient Users

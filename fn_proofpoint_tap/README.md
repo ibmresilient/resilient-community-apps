@@ -34,7 +34,7 @@
 * If Threat ID or Campaign ID don't exist in Proofpoint Tap instead of ending the Workflow a Note is created with a message telling the user Threat ID/Campaign ID cannot be found.
 * After Workflow is completed a clear Note is created with the name of the executed Workflow, results are saved into a Resilient Datatable. Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
 
-### What's new in this Beta 11/1/2019
+### What's new in the Beta 11/1/2019
 * Fixed a bug for Get Forensics function where adding a Note caused the Workflow a long time to complete.
 * Improved the poller logic and filtering based on score threshold.
 * Improved the documentation.
