@@ -4,6 +4,7 @@
 """ AWS IAM client support classes. """
 from  datetime import datetime
 import logging
+import re
 from botocore.exceptions import ClientError
 from boto3 import Session
 
@@ -15,6 +16,11 @@ SUPPORTED_PAGINATE_TYPES = [
     "AccessKeyMetadata",
     "PolicyNames",
     "AttachedPolicies"
+]
+FILTER_NAMES = [
+    "UserName",
+    "GroupName",
+    "PolicyName"
 ]
 
 class AwsIamClient():
@@ -93,7 +99,7 @@ class AwsIamClient():
                 result[i].update({"DefaultUser": "Yes"})
 
         # Insert the default user at the top of the result.
-        if len(result) > 1:
+        if default_index and len(result) > 1:
             result.insert(0, result.pop(default_index))
 
         return result
@@ -145,16 +151,19 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def result_paginator(self, method, **kwargs):
+    def result_paginator(self, method, filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
         :param method: The method to pass to get_paginator e.g. 'list_users'.
+        :param filter: Dict of filters by filter type.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Query result in a list.
         """
         result_type = None
+        filtered_count = 0
         result = []
+
         try:
             paginator = self.iam.get_paginator(method)
             for response in paginator.paginate(**kwargs):
@@ -168,7 +177,11 @@ class AwsIamClient():
             LOG.info(int_ex)
             raise int_ex
 
-        return self._update_result(result, result_type)
+        # Apply filter to results.
+        if result:
+            (filtered_count, result) = self._filter(result, filter)
+
+        return  (filtered_count, self._update_result(result, result_type))
 
     def get_user(self, **kwargs):
         """ Get AWS IAM user properties.
@@ -303,3 +316,26 @@ class AwsIamClient():
             raise int_ex
 
         return status
+
+    def _filter(self, result, filter=None):
+        """ Filter results returned from AWS IAM.
+
+        :param result: Dict or list of dicts from AWS IAM response.
+        :param filter: Dict of filters by filter type.
+        :return: Result or Tuple of filtered result count and either full or filtered result depending on filter type.
+        """
+        # Set default good status:
+
+        rtn = (len(result), result)
+
+        for filter_name in FILTER_NAMES:
+            if filter and filter_name in filter and filter_name in result[0]:
+                regex = r'{}'.format(filter[filter_name])
+                filtered_result = [r for r in result if re.search(regex, r[filter_name])]
+                if filter_name in FILTER_NAMES[0]:
+                    # If file is 'UserName' return filtered count and filtered result.
+                    rtn = (len(filtered_result), filtered_result)
+                else:
+                    # For other filter types return filtered count and full result.
+                    rtn = (len(filtered_result), result)
+        return rtn
