@@ -58,8 +58,8 @@ class FunctionComponent(ResilientComponent):
                 for policy_name in re.split('\s+,\s+', aws_iam_policy_names):
                     policy = [policy for policy in user_policies if policy["PolicyName"] == policy_name][0]
                     if not policy:
-                        raise ValueError("Policy with  name '{0}' not attached for user '{1}'."
-                                         .format(aws_iam_policy_names, aws_iam_user_name))
+                        raise ValueError("Policy with name '{0}' not attached for user '{1}'."
+                                         .format(policy_name, aws_iam_user_name))
                     else:
                         params.update({"PolicyArn": policy["PolicyArn"]})
                         rtn.append({"PolicyArn": policy["PolicyArn"], "Status": iam.detach_user_policy(**params)})
