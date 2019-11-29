@@ -370,6 +370,30 @@ class AwsIamClient():
 
         return status
 
+    def add_user_to_group(self, **kwargs):
+        """ Add user to AWS IAM group.
+
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return status: Return status string.
+        """
+        # Set default good status:
+        status = "OK"
+        try:
+
+            self.iam.add_user_to_group(**kwargs)
+
+        except self.iam.exceptions.NoSuchEntityException:
+            LOG.info("ERROR with 'detach_user_policy' and args: '%s', Got exception: %s",
+                     kwargs, "NoSuchEntityException")
+            status = "NoSuchEntity"
+
+        except Exception as int_ex:
+            LOG.error("ERROR with 'detach_user_policy' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
+
+        return status
+
     def _filter(self, result, filter=None):
         """ Filter results returned from AWS IAM.
 
