@@ -336,7 +336,7 @@ class AwsIamClient():
         for filter_name in FILTER_NAMES:
             if filter and filter_name in filter and filter_name in result[0]:
                 regex = r'{}'.format(filter[filter_name])
-                filtered_result = [r for r in result if re.search(regex, r[filter_name])]
+                filtered_result = [r for r in result if re.search(regex, r[filter_name], re.IGNORECASE)]
                 if filter_name in FILTER_NAMES[0]:
                     # If file is 'UserName' return filtered count and filtered result.
                     rtn = (len(filtered_result), filtered_result)
