@@ -322,6 +322,30 @@ class AwsIamClient():
 
         return status
 
+    def attach_user_policy(self, **kwargs):
+        """ Delete AWS IAM user access key.
+
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return status: Return status string.
+        """
+        # Set default good status:
+        status = "OK"
+        try:
+
+            self.iam.attach_user_policy(**kwargs)
+
+        except self.iam.exceptions.NoSuchEntityException:
+            LOG.info("ERROR with 'delete_access_key' and args: '%s', Got exception: %s",
+                     kwargs, "NoSuchEntityException")
+            status = "NoSuchEntity"
+
+        except Exception as int_ex:
+            LOG.error("ERROR with 'delete_access_key' and args '%s', Got exception: %s",
+                      kwargs, int_ex.__repr__())
+            raise int_ex
+
+        return status
+
     def _filter(self, result, filter=None):
         """ Filter results returned from AWS IAM.
 
