@@ -161,7 +161,6 @@ class AwsIamClient():
         :return: Query result in a list.
         """
         result_type = None
-        filtered_count = 0
         result = []
 
         try:
@@ -177,11 +176,17 @@ class AwsIamClient():
             LOG.info(int_ex)
             raise int_ex
 
-        # Apply filter to results.
+        # Make updates to the raw result.
         if result:
-            (filtered_count, result) = self._filter(result, filter)
+            result = self._update_result(result, result_type)
 
-        return  (filtered_count, self._update_result(result, result_type))
+        # Apply filter to results.
+        if result and filter:
+            return self._filter(result, filter)
+        else:
+            # Unfiltered result
+            return result
+
 
     def get_user(self, **kwargs):
         """ Get AWS IAM user properties.
