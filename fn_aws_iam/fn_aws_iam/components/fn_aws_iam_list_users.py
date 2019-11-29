@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
                     user = rtn_users[i]
                     group_count = 0
                     policy_count = 0
-                    user_access_key_ids = user_policies = user_groups = user_tags = ([] for _ in range(4))
+                    user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
                     # Add extra data for each user. Filtered count is also returned in certain instances.
                     user_groups = iam.result_paginator("list_groups_for_user", UserName=user["UserName"],
                                                        filter=group_filter)
