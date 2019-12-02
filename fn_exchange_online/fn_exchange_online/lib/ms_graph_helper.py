@@ -7,18 +7,16 @@ from resilient_lib import OAuth2ClientCredentialsSession
 
 log = logging.getLogger(__name__)
 
-MS_GRAPH_TOKEN_URL = u'https://login.microsoftonline.com/{0}/oauth2/v2.0/token'
-
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
+        self.__ms_graph_token_url = ms_graph_token_url.format(tenant_id)
         self.__ms_graph_url = ms_graph_url
         self.__tenant_id = tenant_id
         self.__client_id = client_id,
         self.__client_secret = client_secret
-
         self.__proxies = proxies
         self.__ms_graph_session = self.authenticate()
 
@@ -26,8 +24,7 @@ class MSGraphHelper(object):
         """
         Authenticate and get oauth2 token for the session.
         """
-        token_url = MS_GRAPH_TOKEN_URL.format(self.__tenant_id)
-        return OAuth2ClientCredentialsSession(token_url,
+        return OAuth2ClientCredentialsSession(url=self.__ms_graph_token_url,
                                               client_id=self.__client_id,
                                               client_secret=self.__client_secret,
                                               scope=['.default'],
