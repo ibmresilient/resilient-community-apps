@@ -72,9 +72,6 @@ class FunctionComponent(ResilientComponent):
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.get_user_profile(email_address)
 
-            if not response:
-                raise FunctionError("Request for Exchange Online user profile failed, please check the log.")
-
             response_json = response.json()
             results = rp.done(True, response_json)
 

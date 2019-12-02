@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 
 MS_GRAPH_TOKEN_URL = u'https://login.microsoftonline.com/{0}/oauth2/v2.0/token'
 
-class MSGraphHelper:
+class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
@@ -40,7 +40,8 @@ class MSGraphHelper:
         ms_graph_user_profile_url = u'{0}/users/{1}'.format(self.__ms_graph_url, email_address)
         response = self.__ms_graph_session.get(ms_graph_user_profile_url)
 
+        # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise FunctionError("Invalid response from Microsoft Graph")
+            raise FunctionError("Invalid response from Microsoft Graph when trying to get user profile.")
 
         return response
