@@ -14,10 +14,7 @@ CONFIG_DATA_SECTION = 'fn_exchange_online'
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_get_email_user_profile"""
 
-    def __init__(self, opts):
-        """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
-
+    def load_options(self, opts):
         # Get app.config parameters.
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
@@ -26,32 +23,24 @@ class FunctionComponent(ResilientComponent):
         required_fields = ["microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
         validate_fields(required_fields, self.options)
 
-        # Get proxies if defined
-        rc = RequestsCommon(self.opts, self.options)
-        proxies = rc.get_proxies()
-
         # Get the MS Graph helper class
         self.MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_url"),
                                              self.options.get("tenant_id"),
                                              self.options.get("client_id"),
                                              self.options.get("client_secret",
-                                             proxies))
+                                             RequestsCommon(self.opts, self.options).get_proxies()))
+
+    def __init__(self, opts):
+        """constructor provides access to the configuration options"""
+        super(FunctionComponent, self).__init__(opts)
+
+        self.load_options(opts)
+
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.opts = opts
-        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Get proxies if defined
-        rc = RequestsCommon(self.opts, self.options)
-        proxies = rc.get_proxies()
-
-        # Get the MS Graph helper class
-        self.MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_url"),
-                                             self.options.get("tenant_id"),
-                                             self.options.get("client_id"),
-                                             self.options.get("client_secret",
-                                             proxies))
+        self.load_options(opts)
 
     @function("exchange_online_get_email_user_profile")
     def _exchange_online_get_email_user_profile_function(self, event, *args, **kwargs):
@@ -61,13 +50,15 @@ class FunctionComponent(ResilientComponent):
 
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
-            # Get the function parameters
-            email_address = kwargs.get("exo_email_address")  # text
+            # Validate fields
+            validate_fields(['exo_email_address'], kwargs)
 
-            if not email_address:
-                raise ValueError("Exchange Online Get User Profile: email address must be specified.")
-            else:
-                log.info("Exchange Online get user profile exo_email_address: %s", email_address)
+            # Get the function parameters
+            email_address = kwargs.get('exo_email_address')  # text
+
+            log.info(u"exo_email_address: %s", email_address)
+
+            yield StatusMessage(u"Start user profile query for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.get_user_profile(email_address)
@@ -79,7 +70,7 @@ class FunctionComponent(ResilientComponent):
             pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
             results['pretty_string'] = pretty_string
 
-            yield StatusMessage("Returning Exchange Online user profile results")
+            yield StatusMessage(u"Returning user profile results for email address: {}".format(email_address))
 
             log.debug(json.dumps(results['content']))
 

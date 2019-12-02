@@ -1,3 +1,5 @@
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# -*- coding: utf-8 -*-
 
 import logging
 from resilient_circuits import FunctionError
