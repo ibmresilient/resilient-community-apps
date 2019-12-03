@@ -2,8 +2,8 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-from visitors import Visitor
-import resources
+from .visitors import Visitor
+from . import resources
 
 
 class HtmlGenVisitor(Visitor):

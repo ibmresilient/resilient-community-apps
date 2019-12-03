@@ -25,7 +25,7 @@ class TestQRadarHttpInfo(object):
                              cafile=cafile,
                              log=None)
 
-        api_base_url = host + "/console/plugins/" + str(app_id) + "/app_proxy/api"
+        api_base_url = "https://" + host + "/console/plugins/" + str(app_id) + "/app_proxy/api"
 
         # about url
         about_url = http_info.get_about_url()

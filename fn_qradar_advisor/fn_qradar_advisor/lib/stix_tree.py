@@ -2,11 +2,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-from visitors import GetNodeVisitor
-from html_gen_visitor import HtmlGenVisitor
-from tree_node import TreeNode
-from relation_visitor import RelationVisitor
-import stix_utils
+from .visitors import GetNodeVisitor
+from .html_gen_visitor import HtmlGenVisitor
+from .tree_node import TreeNode
+from .relation_visitor import RelationVisitor
+from . import stix_utils
 
 
 class MultiRootTree(object):
@@ -230,7 +230,7 @@ def get_html(stix, log):
     objects = stix["objects"]
     stix_tree = build_tree(objects, log)
     html = ""
-    trees = stix_tree.roots
+    trees = roots
     num_objects = 0
     num_links = 0
     for subtree in trees:

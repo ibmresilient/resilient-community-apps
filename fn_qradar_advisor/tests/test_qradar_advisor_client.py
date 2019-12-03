@@ -29,7 +29,7 @@ QRADAR_HOST = "the.qradar.host.com"
 QRADAR_TOKEN = "bogus qradar token"
 CSRF_TOKEN = "bogus csfr token"
 QRADAR_APP_ID = 1234
-QRADAR_API_BASE_URL=QRADAR_HOST+"/console/plugins/" + str(QRADAR_APP_ID) + "/app_proxy/api"
+QRADAR_API_BASE_URL="https://" + QRADAR_HOST+"/console/plugins/" + str(QRADAR_APP_ID) + "/app_proxy/api"
 QRADAR_VERIFY = False
 
 # Util function to generate simulated requests response

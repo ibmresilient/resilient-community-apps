@@ -2,9 +2,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-from visitors import Visitor
-from visitors import GetNodeVisitor
-import stix_tree
+from .visitors import Visitor
+from .visitors import GetNodeVisitor
+from . import stix_tree
 
 
 class RelationVisitor(Visitor):
@@ -44,9 +44,9 @@ class RelationVisitor(Visitor):
             # add target_id here as child
             #
             existing, target_node = stix_tree.extract_object(stix_objects=self.objects,
-                                                              multi_root_tree=self.multi_root_tree,
-                                                              object_id=self.target_id,
-                                                              log=self.log)
+                                                   multi_root_tree=self.multi_root_tree,
+                                                   object_id=self.target_id,
+                                                   log=self.log)
             if existing:
                 should_merge = False
                 if target_node.is_root:
@@ -74,9 +74,9 @@ class RelationVisitor(Visitor):
             # target_id node become a new root
             #
             existing, source_node = stix_tree.extract_object(stix_objects=self.objects,
-                                                              multi_root_tree=self.multi_root_tree,
-                                                              object_id=self.source_id,
-                                                              log=self.log)
+                                                   multi_root_tree=self.multi_root_tree,
+                                                   object_id=self.source_id,
+                                                   log=self.log)
             #
             # if node is a root node and if node is in different tree of source_node,
             # we can merge two branches

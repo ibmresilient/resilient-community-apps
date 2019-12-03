@@ -60,5 +60,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as e:
-            log.error(e.message)
-            yield FunctionError(e.message)
+            log.error(str(e))
+            yield FunctionError(str(e))
