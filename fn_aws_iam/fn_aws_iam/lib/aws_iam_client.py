@@ -14,6 +14,7 @@ SUPPORTED_PAGINATE_TYPES = [
     "Users",
     "Groups",
     "AccessKeyMetadata",
+    "Policies",
     "PolicyNames",
     "AttachedPolicies"
 ]
@@ -335,12 +336,12 @@ class AwsIamClient():
             self.iam.attach_user_policy(**kwargs)
 
         except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'delete_access_key' and args: '%s', Got exception: %s",
+            LOG.info("ERROR with 'attach_user_policy' and args: '%s', Got exception: %s",
                      kwargs, "NoSuchEntityException")
             status = "NoSuchEntity"
 
         except Exception as int_ex:
-            LOG.error("ERROR with 'delete_access_key' and args '%s', Got exception: %s",
+            LOG.error("ERROR with 'attach_user_policy' and args '%s', Got exception: %s",
                       kwargs, int_ex.__repr__())
             raise int_ex
 

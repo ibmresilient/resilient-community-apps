@@ -33,23 +33,43 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
             # Get the function parameters:
             aws_iam_user_name = kwargs.get("aws_iam_user_name")  # text
+            aws_iam_policy_names = kwargs.get("aws_iam_policy_names")  # text
             aws_iam_arns = kwargs.get("aws_iam_arns")  # text
 
             log = logging.getLogger(__name__)
             log.info("aws_iam_user_name: %s", aws_iam_user_name)
+            log.info("aws_iam_policy_names: %s", aws_iam_policy_names)
             log.info("aws_iam_arns: %s", aws_iam_arns)
 
-            validate_fields(["aws_iam_user_name", "aws_iam_arns"], kwargs)
-
+            if not aws_iam_policy_names and not aws_iam_arns:
+                raise ValueError("Expected either parameter '{0}' or '{1}' to be set."
+                                 .format("aws_iam_policy_names", "aws_iam_arns"))
+            if all([aws_iam_policy_names, aws_iam_arns]):
+                raise ValueError("Expected only one of parameters '{0}' or '{1}' to be set."
+                                 .format("aws_iam_policy_names", "aws_iam_arns"))
             iam = AwsIamClient(self.opts, self.options)
-            # Pop 'AccessKeys' parameter from params.
-            if "Arns" in params:
-                del params["Arns"]
-
             rtn = []
-            for arn in re.split('\s+,\s+', aws_iam_arns):
-                params.update({"PolicyArn": arn})
-                rtn.append({"PolicyArn": arn, "Status": iam.attach_user_policy(**params)})
+            if aws_iam_policy_names:
+                # Delete 'PolicyNames' from params
+                del params["PolicyNames"]
+                # Test if policy_names are attached for user name and get arn.
+                for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
+                    policies = iam.result_paginator("list_policies")
+                    if policies:
+                        policy = [policy for policy in policies if policy["PolicyName"] == policy_name][0]
+
+                    if not policies or not policy:
+                        raise ValueError("Policy with name '{0}' does not exist.".format(policy_name))
+                    else:
+                        params.update({"PolicyArn": policy["Arn"]})
+                        rtn.append({"PolicyArn": policy["Arn"], "Status": iam.attach_user_policy(**params)})
+            else:
+                if "Arns" in params:
+                    # Delete 'Arns' from params
+                    del params["Arns"]
+                for arn in re.split('\s*,\s*', aws_iam_arns):
+                    params.update({"PolicyArn": arn})
+                    rtn.append({"PolicyArn": arn, "Status": iam.attach_user_policy(**params)})
 
             results = rp.done(True, rtn)
 
