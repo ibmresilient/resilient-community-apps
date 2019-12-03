@@ -28,8 +28,8 @@ class FunctionComponent(ResilientComponent):
                                              self.options.get("microsoft_graph_url"),
                                              self.options.get("tenant_id"),
                                              self.options.get("client_id"),
-                                             self.options.get("client_secret",
-                                             RequestsCommon(self.opts, self.options).get_proxies()))
+                                             self.options.get("client_secret"),
+                                             RequestsCommon(self.opts, self.options).get_proxies())
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
