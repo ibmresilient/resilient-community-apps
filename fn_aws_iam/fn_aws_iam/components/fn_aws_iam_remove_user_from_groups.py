@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
             if "GroupNames" in params:
                 del params["GroupNames"]
             # Get user groups
-            user_groups = iam_cli.result_paginator("list_groups_for_user", UserName=aws_iam_user_name)
+            user_groups = iam_cli.result_paginate("list_groups_for_user", UserName=aws_iam_user_name)
             rtn = []
             # Test if user is a member of groups in aws_iam_group_names.
             for group_name in re.split('\s+,\s+', aws_iam_group_names):

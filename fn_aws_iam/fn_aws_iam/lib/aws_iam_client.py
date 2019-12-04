@@ -158,7 +158,7 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def result_paginator(self, method=None, filter=None, **kwargs):
+    def result_paginate(self, method=None, filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 

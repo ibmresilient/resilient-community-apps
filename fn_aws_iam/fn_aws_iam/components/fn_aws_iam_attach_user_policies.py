@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
                 del params["PolicyNames"]
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
-                    policies = iam_cli .result_paginator("list_policies")
+                    policies = iam_cli .result_paginate("list_policies")
                     if policies:
                         policy = [policy for policy in policies if policy["PolicyName"] == policy_name][0]
 
