@@ -1,0 +1,4 @@
+include README.md
+include fn_exchange_online/util/*
+include fn_exchange_online/LICENSE
+include doc/*
