@@ -1,11 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-import logging
-from resilient_circuits import FunctionError
 from resilient_lib import OAuth2ClientCredentialsSession
-
-log = logging.getLogger(__name__)
+from resilient_lib.components.integration_errors import IntegrationError
 
 class MSGraphHelper(object):
     """
@@ -36,11 +33,11 @@ class MSGraphHelper(object):
         :param email_address: email address of the user profile requested
         :return: requests response from the users/profile endpoint
         """
-        ms_graph_user_profile_url = u'{0}/users/{1}'.format(self.__ms_graph_url, email_address)
+        ms_graph_user_profile_url = u'{0}users/{1}'.format(self.__ms_graph_url, email_address)
         response = self.__ms_graph_session.get(ms_graph_user_profile_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise FunctionError("Invalid response from Microsoft Graph when trying to get user profile.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get user profile.")
 
         return response

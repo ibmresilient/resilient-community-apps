@@ -10,6 +10,7 @@ from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_get_email_user_profile"""
@@ -47,8 +48,7 @@ class FunctionComponent(ResilientComponent):
     def _exchange_online_get_email_user_profile_function(self, event, *args, **kwargs):
         """Function: This function will get Exchange Online user profile for a given email address."""
         try:
-            log = logging.getLogger(__name__)
-
+            # Initialize the results payload
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
@@ -57,7 +57,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
 
-            log.info(u"exo_email_address: %s", email_address)
+            LOG.info(u"exo_email_address: %s", email_address)
 
             yield StatusMessage(u"Start user profile query for email address: {}".format(email_address))
 
@@ -73,10 +73,10 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Returning user profile results for email address: {}".format(email_address))
 
-            log.debug(json.dumps(results['content']))
+            LOG.debug(json.dumps(results['content']))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
-            log.error(err)
-            yield FunctionError()
+            LOG.error(err)
+            yield FunctionError(err)
