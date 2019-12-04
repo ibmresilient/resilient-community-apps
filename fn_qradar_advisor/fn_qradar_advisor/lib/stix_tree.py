@@ -230,7 +230,7 @@ def get_html(stix, log):
     objects = stix["objects"]
     stix_tree = build_tree(objects, log)
     html = ""
-    trees = roots
+    trees = stix_tree.roots
     num_objects = 0
     num_links = 0
     for subtree in trees:
