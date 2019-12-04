@@ -73,16 +73,19 @@ class AwsIamClient():
         return client
 
     def _get_type_from_response(self, response, type_list):
-        """ The get type of data returned in an AWS IAM query.
+        """ The get type of data returned in an AWS IAM response.
 
-        :param kwargs: Dictionary of AWS API parameters for function call .
         :param response: The response from AWS API query.
         :param type_list: List of valid types  in AWS IAM responses.
         result_type: The type of result e.g. 'Users'.
         """
+        result_type = None
         for key in response:
             if key in type_list:
                 result_type = key
+
+        if not result_type:
+            raise ValueError("No supported type for integration found in AWS IAM response")
 
         return result_type
 
