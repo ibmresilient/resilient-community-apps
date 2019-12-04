@@ -38,9 +38,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam.result_paginator("list_access_keys", **params)
+            rtn = iam_cli.result_paginator("list_access_keys", **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

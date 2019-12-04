@@ -40,9 +40,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam.result_paginator("list_groups_for_user", **params)
+            rtn = iam_cli.result_paginator("list_groups_for_user", **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results
