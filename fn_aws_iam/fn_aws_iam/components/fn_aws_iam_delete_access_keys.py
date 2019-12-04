@@ -40,7 +40,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name", "aws_iam_access_keys"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
             # Pop 'AccessKeys' parameter from params.
             if "AccessKeys" in params:
                 del params["AccessKeys"]
@@ -48,7 +48,10 @@ class FunctionComponent(ResilientComponent):
             rtn = []
             for ak_id in re.split('\s+,\s+', aws_iam_access_keys):
                 params.update({"AccessKeyId": ak_id})
-                rtn.append({"AccessKeyId": ak_id, "Status": iam.delete_access_key(**params)})
+                rtn.append({
+                    "AccessKeyId": ak_id,
+                    "Status": iam_cli.result_post(iam_cli.iam.delete_access_key, **params)}
+                )
 
             results = rp.done(True, rtn)
 

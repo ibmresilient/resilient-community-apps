@@ -40,9 +40,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam.list_user_tags(**params)
+            rtn = iam_cli.result_get(iam_cli.iam.list_user_tags, **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

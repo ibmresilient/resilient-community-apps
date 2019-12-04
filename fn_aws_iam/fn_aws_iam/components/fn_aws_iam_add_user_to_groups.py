@@ -41,15 +41,18 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name", "aws_iam_group_names"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
             # Pop 'AccessKeys' parameter from params.
             if "GroupNames" in params:
                 del params["GroupNames"]
 
             rtn = []
-            for group_name in re.split('\s+,\s+', aws_iam_group_names):
+            for group_name in re.split('\s*,\s*', aws_iam_group_names):
                 params.update({"GroupName": group_name})
-                rtn.append({"GroupName": group_name, "Status": iam.add_user_to_group(**params)})
+                rtn.append({
+                    "GroupName": group_name,
+                    "Status": iam_cli.result_post(iam_cli.iam.add_user_to_group, **params)}
+                )
 
             results = rp.done(True, rtn)
 

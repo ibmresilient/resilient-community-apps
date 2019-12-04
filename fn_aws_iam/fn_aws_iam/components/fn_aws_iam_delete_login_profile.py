@@ -40,9 +40,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam.delete_login_profile(**params)
+            rtn = iam_cli.iam.result_post(iam_cli.iam.iam.delete_login_profile, **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

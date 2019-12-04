@@ -44,9 +44,9 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name", "aws_iam_password", "aws_iam_password_reset_required"], kwargs)
 
-            iam = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam.update_login_profile(**params)
+            rtn = iam_cli.result_post(iam_cli.iam.update_login_profile, **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

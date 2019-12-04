@@ -18,6 +18,11 @@ SUPPORTED_PAGINATE_TYPES = [
     "PolicyNames",
     "AttachedPolicies"
 ]
+SUPPORTED_GET_TYPES = [
+    "User",
+    "Tags",
+    "LoginProfile"
+]
 FILTER_NAMES = [
     "UserName",
     "GroupName",
@@ -67,15 +72,16 @@ class AwsIamClient():
 
         return client
 
-    def _get_type_from_response(self, response):
+    def _get_type_from_response(self, response, type_list):
         """ The get type of data returned in an AWS IAM query.
 
         :param kwargs: Dictionary of AWS API parameters for function call .
         :param response: The response from AWS API query.
+        :param type_list: List of valid types  in AWS IAM responses.
         result_type: The type of result e.g. 'Users'.
         """
         for key in response:
-            if key in SUPPORTED_PAGINATE_TYPES:
+            if key in type_list:
                 result_type = key
 
         return result_type
@@ -91,7 +97,7 @@ class AwsIamClient():
         default_index = None
         default_identity = self._get_default_identity()
         for i in range(len(result)):
-            if self.get_login_profile(UserName=result[i]["UserName"]):
+            if self.result_get(self.iam.get_login_profile, UserName=result[i]["UserName"]):
                 result[i].update({"LoginProfileExists": "Yes"})
             else:
                 result[i].update({"LoginProfileExists": "No"})
@@ -152,7 +158,7 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def result_paginator(self, method, filter=None, **kwargs):
+    def result_paginator(self, method=None, filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
@@ -168,7 +174,7 @@ class AwsIamClient():
             paginator = self.iam.get_paginator(method)
             for response in paginator.paginate(**kwargs):
                 if not result_type:
-                    result_type = self._get_type_from_response(response)
+                    result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
                 result.extend(response[result_type])
 
         except Exception as int_ex:
@@ -188,71 +194,52 @@ class AwsIamClient():
             # Unfiltered result
             return result
 
+    def result_get(self, aws_iam_op, **kwargs):
+        """ Execute a 'query' type AWS IAM  operation.
+        Example calls include 'get_user' and 'get_user_tags'.
+        Note: That some the calls will translate to actual 'post' operations.
 
-    def get_user(self, **kwargs):
-        """ Get AWS IAM user properties.
-
+        :param aws_iam_op: The AWS IAM operation to execute e.g. 'get_user'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
         result = []
+        result_type = None
+        op_name = aws_iam_op.__name__
         try:
-            user = self.iam.get_user(**kwargs)["User"]
-        except Exception as int_ex:
-            LOG.error("ERROR with 'get_user' and args: '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
+            response = aws_iam_op(**kwargs)
 
-        # Normalize result to be same as that of list all users.
-        result.append(user)
+            if not result_type:
+                result_type = self._get_type_from_response(response, SUPPORTED_GET_TYPES)
 
-        return  self._update_result(result, "User")
-
-    def list_user_tags(self, **kwargs):
-        """ Get AWS IAM user tags.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: Result in a list of dicts.
-        """
-        try:
-            tags = self.iam.list_user_tags(**kwargs)["Tags"]
-        except Exception as int_ex:
-            LOG.error("ERROR with 'list_user_tags' and args: '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            LOG.info(int_ex)
-            raise int_ex
-
-        return tags
-
-    def get_login_profile(self, **kwargs):
-        """ Get AWS IAM user login profile.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return: User login profile dict.
-        """
-        profile = {}
-
-        try:
-
-            response = self.iam.get_login_profile(**kwargs)
-            profile = response["LoginProfile"]
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'get_login_profile' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-
-            profile = {}
+        except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_iam_op.__name__, kwargs, "NoSuchEntityException")
+            # If Return empty dict if the object doesn't exist.
+            if aws_iam_op.__name__ == "get_login_profile":
+                # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
+                return {}
+            else:
+                raise no_such_entity_ex
 
         except Exception as int_ex:
-            LOG.error("ERROR with 'get_login_profile' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
+            LOG.error("ERROR with %s and args: '%s', Got exception: %s",
+                      aws_iam_op.__name__, kwargs, int_ex.__repr__())
             raise int_ex
 
-        return profile
+        if result_type == "User":
+            # Normalize and update result for 'User' to be same as that of list all users.
+            result.append(response[result_type])
+            return self._update_result(result, result_type)
+        else:
+            return response[result_type]
 
-    def delete_login_profile(self, **kwargs):
-        """ Delete AWS IAM user login profile.
 
+    def result_post(self, aws_iam_op, **kwargs):
+        """ Execute a 'post' type AWS IAM  operation whihc results in an update or change to the AWS IAM environment.
+        Example calls include 'delete_access_key' and 'attach_user_policy'.
+
+        :param aws_iam_op: The AWS IAM operation to execute e.g. 'delete_access_key'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return status: Return status string.
         """
@@ -260,161 +247,18 @@ class AwsIamClient():
         status = "OK"
 
         try:
-
-            self.iam.delete_login_profile(**kwargs)
+            aws_iam_op(**kwargs)
 
         except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'delete_login_profile' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s", aws_iam_op.__name__, kwargs, "NoSuchEntityException")
             status = "NoSuchEntity"
 
-        except Exception as int_ex:
-            LOG.error("ERROR with 'delete_login_profile' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def update_login_profile(self, **kwargs):
-        """ Update AWS IAM user login profile.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Get user tags:
-        status = "OK"
-
-        try:
-            self.iam.update_login_profile(**kwargs)
-
         except self.iam.exceptions.PasswordPolicyViolation:
-            LOG.info("ERROR with 'update_login_profile' and args: '%s', Got exception %s",
-                     kwargs, "PasswordPolicyViolation")
+            LOG.info("ERROR with $s and args: '%s', Got exception %s", aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
             status = "PasswordPolicyViolation"
 
         except Exception as int_ex:
-            LOG.error("ERROR with 'update_login_profile' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def delete_access_key(self, **kwargs):
-        """ Delete AWS IAM user access key.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Set default good status:
-        status = "OK"
-        try:
-
-            self.iam.delete_access_key(**kwargs)
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'delete_access_key' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-            status = "NoSuchEntity"
-
-        except Exception as int_ex:
-            LOG.error("ERROR with 'delete_access_key' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def attach_user_policy(self, **kwargs):
-        """ Delete AWS IAM user access key.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Set default good status:
-        status = "OK"
-        try:
-
-            self.iam.attach_user_policy(**kwargs)
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'attach_user_policy' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-            status = "NoSuchEntity"
-
-        except Exception as int_ex:
-            LOG.error("ERROR with 'attach_user_policy' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def detach_user_policy(self, **kwargs):
-        """ Detach AWS IAM user policy.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Set default good status:
-        status = "OK"
-        try:
-
-            self.iam.detach_user_policy(**kwargs)
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'detach_user_policy' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-            status = "NoSuchEntity"
-
-        except Exception as int_ex:
-            LOG.error("ERROR with 'detach_user_policy' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def add_user_to_group(self, **kwargs):
-        """ Add user to AWS IAM group.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Set default good status:
-        status = "OK"
-        try:
-
-            self.iam.add_user_to_group(**kwargs)
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'detach_user_policy' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-            status = "NoSuchEntity"
-
-        except Exception as int_ex:
-            LOG.error("ERROR with 'detach_user_policy' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
-            raise int_ex
-
-        return status
-
-    def remove_user_from_group(self, **kwargs):
-        """ Remove user from AWS IAM group.
-
-        :param kwargs: Dictionary of AWS API parameters for function call .
-        :return status: Return status string.
-        """
-        # Set default good status:
-        status = "OK"
-        try:
-
-            self.iam.remove_user_from_group(**kwargs)
-
-        except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with 'detach_user_policy' and args: '%s', Got exception: %s",
-                     kwargs, "NoSuchEntityException")
-            status = "NoSuchEntity"
-
-        except Exception as int_ex:
-            LOG.error("ERROR with 'detach_user_policy' and args '%s', Got exception: %s",
-                      kwargs, int_ex.__repr__())
+            LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_iam_op.__name__, kwargs, int_ex.__repr__())
             raise int_ex
 
         return status
