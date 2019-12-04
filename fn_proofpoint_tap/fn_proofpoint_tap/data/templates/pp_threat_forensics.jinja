@@ -1,6 +1,12 @@
-{{ display }}
-Type: {{ type }}
-Malicious: {{ malicious }}
-Note: {{ note }}
-OS: {{ platforms[0].name }}
-URL: {{ what.url }}
+<br>Friendly Display: {{ display }}
+<br>Malicious: {{ malicious }}
+<br>Relative time at which the evidence was observed during sandboxing: {{ time }}
+<br>Platforms in which Evidence was seen:
+{% for platform in platforms %}
+    name: {{ platform.name }}, OS: {{ platform.os }}, version: {{ platform.version }}
+{% endfor %}
+<br>Evidence Type: {{ type }}
+<br>Facets associated with Evidence Type:
+{% for key, value in what.items() %}
+    <br>{{key}}: {{value}}
+{% endfor %}

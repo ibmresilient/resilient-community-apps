@@ -23,18 +23,16 @@ def selftest_function(opts):
     """
     options = opts.get('fn_proofpoint_tap', {})
 
-    validate_fields(['base_url', 'username', 'password', 'polling_interval'], options)
+    validate_fields(['base_url', 'username', 'password'], options)
 
     base_url = options.get('base_url')
     username = options.get('username')
     password = options.get('password')
-    polling_interval = options.get('polling_interval')
     cafile = options.get('cafile')
     bundle = os.path.expanduser(cafile) if cafile else False
 
     basic_auth = HTTPBasicAuth(username, password)
-    lastupdate = int(polling_interval) * 60
-    url = '{}/siem/all?format=JSON&sinceSeconds={}'.format(base_url, lastupdate)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
+    url = '{}/siem/all?format=JSON&sinceSeconds={}'.format(base_url, 300)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
 
     rc = RequestsCommon(opts=opts, function_opts=options)
     try:
