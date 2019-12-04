@@ -56,8 +56,10 @@ class FunctionComponent(ResilientComponent):
                 user_policies = iam_cli.result_paginate("list_attached_user_policies", UserName=aws_iam_user_name)
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
-                    policy = [policy for policy in user_policies if policy["PolicyName"] == policy_name][0]
-                    if not policy:
+                    if user_policies:
+                        policy = [policy for policy in user_policies if policy["PolicyName"] == policy_name][0]
+
+                    if not user_policies or not policy:
                         raise ValueError("Policy with name '{0}' not attached for user '{1}'."
                                          .format(policy_name, aws_iam_user_name))
                     else:
