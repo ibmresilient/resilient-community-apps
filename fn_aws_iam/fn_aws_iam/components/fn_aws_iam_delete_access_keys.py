@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
                 del params["AccessKeys"]
 
             rtn = []
-            for ak_id in re.split('\s+,\s+', aws_iam_access_keys):
+            for ak_id in re.split('\s*,\s*', aws_iam_access_keys):
                 params.update({"AccessKeyId": ak_id})
                 rtn.append({
                     "AccessKeyId": ak_id,
