@@ -5,7 +5,7 @@
 import logging
 import re
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_lib import ResultPayload
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
 from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
@@ -54,18 +54,18 @@ class FunctionComponent(ResilientComponent):
                 del params["PolicyNames"]
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
-                    policies = iam_cli .result_paginate("list_policies")
+                    policies = iam_cli.result_paginate("list_policies")
                     if policies:
                         policy = [policy for policy in policies if policy["PolicyName"] == policy_name][0]
 
                     if not policies or not policy:
                         raise ValueError("Policy with name '{0}' does not exist.".format(policy_name))
-                    else:
-                        params.update({"PolicyArn": policy["Arn"]})
-                        rtn.append({
-                            "PolicyArn": policy["Arn"],
-                            "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)}
-                        )
+
+                    params.update({"PolicyArn": policy["Arn"]})
+                    rtn.append({
+                        "PolicyArn": policy["Arn"],
+                        "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)}
+                    )
             else:
                 if "Arns" in params:
                     # Delete 'Arns' from params
@@ -74,8 +74,8 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": arn})
                     rtn.append({
                         "PolicyArn": arn,
-                        "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)}
-                    )
+                        "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)
+                    })
 
             results = rp.done(True, rtn)
 
