@@ -11,7 +11,8 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_exchange_online]
-microsoft_graph_token_url=https://login.microsoftonline.com/{0}/oauth2/v2.0/token
+# Note that the token url below contains a placeholder {tenant} for the tenant ID.
+microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
 microsoft_graph_url=https://graph.microsoft.com/v1.0/
 tenant_id=xxx
 client_id=xxx

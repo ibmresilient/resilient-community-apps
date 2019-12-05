@@ -9,7 +9,7 @@ class MSGraphHelper(object):
     Helper object MSGraphHelper.
     """
     def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
-        self.__ms_graph_token_url = ms_graph_token_url.format(tenant_id)
+        self.__ms_graph_token_url = self.format_ms_graph_token_url(ms_graph_token_url, tenant_id)
         self.__ms_graph_url = ms_graph_url
         self.__tenant_id = tenant_id
         self.__client_id = client_id,
@@ -26,6 +26,13 @@ class MSGraphHelper(object):
                                               client_secret=self.__client_secret,
                                               scope=['.default'],
                                               proxies=self.__proxies)
+
+    def format_ms_graph_token_url(self, ms_graph_token_url, tenant_id):
+        """
+        :param ms_graph_url: ms_graph_token_url from the app.config contains {tenant} substring
+        :return: ms_graph_token_url string with "{tenant}" substring removed
+        """
+        return ms_graph_token_url.replace("{tenant}", tenant_id)
 
     def get_user_profile(self, email_address):
         """
