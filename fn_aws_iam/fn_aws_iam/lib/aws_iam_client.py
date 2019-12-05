@@ -6,6 +6,7 @@ from  datetime import datetime
 import logging
 import re
 from botocore.exceptions import ClientError
+from botocore.config import Config
 from boto3 import Session
 
 LOG = logging.getLogger(__name__)
@@ -43,6 +44,12 @@ class AwsIamClient():
             self.aws_iam_region = options.get("aws_iam_region")
         else:
             self.aws_iam_region = None
+        self.proxies = {}
+        self.proxies = {}
+        if "https_proxy" in function_options and function_options["https_proxy"] is not None:
+            self.proxies.update({"https": function_options.get("https_proxy")})
+        if "http_proxy" in function_options and function_options["http_proxy"] is not None:
+            self.proxies.update({"http": function_options.get("http_proxy")})
 
         self.iam = self._get_client("iam")
 
@@ -62,8 +69,8 @@ class AwsIamClient():
             client = Session(
                 region_name=self.aws_iam_region,
                 aws_access_key_id=self.aws_iam_access_key_id,
-                aws_secret_access_key=self.aws_iam_secret_access_key
-            ).client(service_name=service_name)
+                aws_secret_access_key=self.aws_iam_secret_access_key,
+            ).client(service_name=service_name, config=Config(proxies=self.proxies))
 
         except ClientError as cli_ex:
             LOG.error("ERROR instantiating AWS IAM client for service: %s, Got exception : %s",

@@ -15,5 +15,8 @@ aws_iam_access_key_id=<AWS_IAM_ACCESS_KEY_ID>
 aws_iam_secret_access_key=<AWS_IAM_SECRET_ACCESS_KEY>
 # Optional configuration setting to set an AWS IAM region.
 #aws_iam_region=None
+# Optional settings for access to AWS IAM via a proxy.
+#http_proxy=http://proxy:80
+#https_proxy=http://proxy:80
 """
     return config_data
