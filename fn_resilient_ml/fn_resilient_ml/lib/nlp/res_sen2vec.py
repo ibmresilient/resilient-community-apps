@@ -14,44 +14,60 @@
 import logging
 import numpy as np
 from fn_resilient_ml.lib.nlp.word_sentence_utils import WordSentenceUtils
+from fn_resilient_ml.lib.file_manage import FileManage
 import json
+from sklearn.decomposition import PCA
+from nltk.corpus import words as nltk_words
+import nltk
 
 class ResSen2Vec:
     # parameter used in compute frequency
     SIF_A = 1e-3
+    COUNT_THRESHOLD = 200
 
     def __init__(self, w2v, sif, log=None):
         # A NLPWord2Vec to get the vec for a word
         self.word2vec = w2v
         # A ResSIF used to get word count
         self.sif = sif
-        # util to preprocess data
+        # util to pre-process data
         self.utils = WordSentenceUtils()
         self.log = log if log else logging.getLogger(__name__)
         self.sentence_vectors = []
         self.feature_size = 0
+        # download nltk resource if necessary
+        nltk.download('words', quiet=True)
+        self.setofwords = set(nltk_words.words())
 
     def get_vec_for_words(self, words):
         """
-
+        Here is the implementation of SIF (Smooth Inverse Frequency)
         :param words:
         :return:
         """
         self.feature_size = self.word2vec.vector_size
+        # This is the accumulator. Initialize to zero vector first
         v = np.zeros(self.feature_size, dtype="float64")
 
         count = 0
         for word in words:
-            word_count = self.sif.get_word_count(word)
-            if word_count > 0:
-                try:
-                    a_value = self.SIF_A / (self.SIF_A + word_count)
-                    vec = np.multiply(a_value, self.word2vec[word])
-                    v = np.add(v, vec)
-                    count += 1
-                except Exception as e:
-                    # Not an error if word is not in the vocab
-                    self.log.debug("{} is not in the vocab of the word2vec model".format(word))
+            if word in self.setofwords:
+                # We only care about words in nltk words set
+                word_count = self.sif.get_word_count(word)
+                if word_count > 0:
+                    # some words have unreasonably low count and adjust it a little bit
+                    if word_count < self.COUNT_THRESHOLD:
+                        word_count = self.COUNT_THRESHOLD - (self.COUNT_THRESHOLD - word_count)/2
+
+                    try:
+                        a_value = self.SIF_A / (self.SIF_A + word_count)
+                        vec = np.multiply(a_value, self.word2vec[word])
+                        # accumulate it
+                        v = np.add(v, vec)
+                        count += 1
+                    except Exception as e:
+                        # Not an error if word is not in the vocab
+                        self.log.debug("{} is not in the vocab of the word2vec model".format(word))
 
         # normalize it
         if count != 0:
@@ -82,6 +98,38 @@ class ResSen2Vec:
 
         return sim
 
+    def remove_pca(self, vecs):
+        """
+        Remove the principle component from the vectors. This follows the recommendation of
+        "A SIMPLE BUT TOUGH-TO-BEAT BASELINE FOR SENTENCE EMBEDDINGS",
+        The reason according to them is that all vectors contain a common principle component
+        that comes from common words. Here we use sk-learn PCA to do so
+        :param vecs: input vectors
+        :return: vectors with principle component removed
+        """
+        pca = PCA()
+        pca.fit(np.array(vecs))
+        u = pca.components_[0]
+
+        # Need to store this PCA for later use when we compare incidents
+        with open(FileManage.DEFAULT_PCA_FILE, 'w') as outfile:
+            ul = list(u)
+            json.dump(ul, outfile)
+
+        u = np.multiply((u, np.transpose(u)))
+
+        # Corner case for small number of dataset. Pad with 0
+        if len(u) < self.word2vec.vector_size:
+            for i in range(self.word2vec.vector_size - len(u)):
+                u = np.append(u, 0)
+
+        ret = []
+        for v in vecs:
+            sub = np.multiply(u, v)
+            ret.append(np.subtract(v, sub))
+
+        return ret
+
     def cache_sentence_vectors(self, dataset, inc_ids, s2v_file):
         """
         Compute vectors for all sentences in the dataset and cache it to a file.
@@ -97,10 +145,17 @@ class ResSen2Vec:
             self.log.error("Data mismatched! {} sentences and {} incident ids".format(len(dataset), len(inc_ids)))
             return ret
 
+        all_vecs = []
+        for i in range(len(inc_ids)):
+            all_vecs.append(self.get_vec_for_words(dataset[i]))
+
+        vecs = self.remove_pca(all_vecs)
+
         sen_vecs = {}
         for i in range(len(inc_ids)):
-            sen_vecs[inc_ids[i]] = list(self.get_vec_for_words(dataset[i]))
+            sen_vecs[inc_ids[i]] = list(vecs[i])
 
+        # Cache the vector representation for incidents
         with open(s2v_file, "w") as outfile:
             json.dump(sen_vecs, outfile)
             ret = True

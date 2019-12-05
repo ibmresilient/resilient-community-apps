@@ -22,6 +22,7 @@ class FileManage():
     DEFAULT_SIF_FILE = "resilient-sif.pkl"
     DEFAULT_VEC_FILE = "resilient-vec.json"
     DEFAULT_NLP_FILE = "resilient-w2v.txt"
+    DEFAULT_PCA_FILE = "resilient-pca.json"
     DEFAULT_INCIDENT_FILE = "resilient-incidents.csv"
     DEFAULT_ARTIFACT_FILE = "resilient-artifacts.json"
 
