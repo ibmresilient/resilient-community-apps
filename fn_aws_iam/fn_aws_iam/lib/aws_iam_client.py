@@ -100,7 +100,7 @@ class AwsIamClient():
         default_index = None
         default_identity = self._get_default_identity()
         for i in range(len(result)):
-            if self.result_get(self.iam.get_login_profile, UserName=result[i]["UserName"]):
+            if self.get(self.iam.get_login_profile, UserName=result[i]["UserName"]):
                 result[i].update({"LoginProfileExists": "Yes"})
             else:
                 result[i].update({"LoginProfileExists": "No"})
@@ -161,18 +161,17 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def result_paginate(self, method=None, filter=None, **kwargs):
+    def paginate(self, method, filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
-        :param method: The method to pass to get_paginator e.g. 'list_users'.
+        :param method: The AWS IAM operation to execute e.g. 'list_users'.
         :param filter: Dict of filters by filter type.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Query result in a list.
         """
         result_type = None
         result = []
-
         try:
             paginator = self.iam.get_paginator(method)
             for response in paginator.paginate(**kwargs):
@@ -197,18 +196,22 @@ class AwsIamClient():
             # Unfiltered result
             return result
 
-    def result_get(self, aws_iam_op, **kwargs):
+    def get(self, aws_iam_op, paginate=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
-        Example calls include 'get_user' and 'get_user_tags'.
-        Note: That some the calls will translate to actual 'post' operations.
+        Example calls include 'get_user' and 'get_user_tags', 'list_users'.
+        The calls will translate to actual 'get' or query operations and a number will return
+        paginated results.
 
-        :param aws_iam_op: The AWS IAM operation to execute e.g. 'get_user'.
+        :param aws_iam_op: The AWS IAM operation or method to execute e.g. 'get_user'.
+        :param paginate: Boolean to indicate operation will return paginated result e.g. 'list_users'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
+        if paginate:
+            return self.paginate(aws_iam_op, **kwargs)
+
         result = []
         result_type = None
-        op_name = aws_iam_op.__name__
         try:
             response = aws_iam_op(**kwargs)
 
@@ -238,7 +241,7 @@ class AwsIamClient():
             return response[result_type]
 
 
-    def result_post(self, aws_iam_op, **kwargs):
+    def post(self, aws_iam_op, **kwargs):
         """ Execute a 'post' type AWS IAM  operation whihc results in an update or change to the AWS IAM environment.
         Example calls include 'delete_access_key' and 'attach_user_policy'.
 

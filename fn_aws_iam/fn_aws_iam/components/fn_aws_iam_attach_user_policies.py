@@ -54,7 +54,7 @@ class FunctionComponent(ResilientComponent):
                 del params["PolicyNames"]
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
-                    policies = iam_cli.result_paginate("list_policies")
+                    policies = iam_cli.paginate("list_policies")
                     if policies:
                         policy = [policy for policy in policies if policy["PolicyName"] == policy_name][0]
 
@@ -64,7 +64,7 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": policy["Arn"]})
                     rtn.append({
                         "PolicyArn": policy["Arn"],
-                        "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)}
+                        "Status": iam_cli.post(iam_cli.iam.attach_user_policy, **params)}
                     )
             else:
                 if "Arns" in params:
@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": arn})
                     rtn.append({
                         "PolicyArn": arn,
-                        "Status": iam_cli.result_post(iam_cli.iam.attach_user_policy, **params)
+                        "Status": iam_cli.post(iam_cli.iam.attach_user_policy, **params)
                     })
 
             results = rp.done(True, rtn)

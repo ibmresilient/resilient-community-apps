@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             iam_cli = AwsIamClient(self.opts, self.options, sts_client=True)
             if aws_iam_user_name:
                 # User specified.
-                rtn = iam_cli.result_get(iam_cli.iam.get_user, **params)
+                rtn = iam_cli.get(iam_cli.iam.get_user, **params)
                 # If a single user add to a list to normalize result.
             else:
                 # Initialize the filters
@@ -62,7 +62,7 @@ class FunctionComponent(ResilientComponent):
                     policy_filter["PolicyName"] = aws_iam_policy_filter
                 rtn_users = []
                 # All users
-                rtn_users = iam_cli.result_paginate("list_users", filter=user_filter)
+                rtn_users = iam_cli.get("list_users", paginate=True, filter=user_filter)
                 # The user result will be returned as a tuple of filtered count and filtered user list if a filter
                 # is specified . The count is not used.
                 if isinstance(rtn_users, tuple):
@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                     policy_count = 0
                     user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
                     # Add extra data for each user. Filtered count is also returned in certain instances.
-                    user_groups = iam_cli.result_paginate("list_groups_for_user", UserName=user["UserName"],
+                    user_groups = iam_cli.get("list_groups_for_user", paginate=True, UserName=user["UserName"],
                                                        filter=group_filter)
                     # The group result will be returned as a tuple of filtered count and group list if a filter is
                     # specified, otherwise it will be a list of groups.
@@ -87,7 +87,7 @@ class FunctionComponent(ResilientComponent):
                             user["Groups"] = user_groups
                     elif aws_iam_group_filter:
                         continue
-                    user_policies = iam_cli.result_paginate("list_attached_user_policies", UserName=user["UserName"],
+                    user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=user["UserName"],
                                                          filter=policy_filter)
                     # The policy result will be returned as a tuple of filtered count and policy list if a filter is
                     # specified, otherwise it will be a list of policies.
@@ -101,10 +101,10 @@ class FunctionComponent(ResilientComponent):
                     elif aws_iam_policy_filter:
                         continue
 
-                    user_access_key_ids = iam_cli.result_paginate("list_access_keys", UserName=user["UserName"])
+                    user_access_key_ids = iam_cli.get("list_access_keys", paginate=True, UserName=user["UserName"])
                     if user_access_key_ids:
                         user["AccessKeyIds"] = user_access_key_ids
-                    user_tags = iam_cli.result_get(iam_cli.iam.list_user_tags, UserName=user["UserName"])
+                    user_tags = iam_cli.get(iam_cli.iam.list_user_tags, UserName=user["UserName"])
                     if user_tags:
                         user["Tags"] = user_tags
                     rtn.append(user)

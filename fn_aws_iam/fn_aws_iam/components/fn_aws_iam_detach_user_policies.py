@@ -53,7 +53,7 @@ class FunctionComponent(ResilientComponent):
                 # Delete 'PolicyNames' from params
                 del params["PolicyNames"]
                 # Get user policies
-                user_policies = iam_cli.result_paginate("list_attached_user_policies", UserName=aws_iam_user_name)
+                user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=aws_iam_user_name)
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
                     if user_policies:
@@ -64,8 +64,8 @@ class FunctionComponent(ResilientComponent):
                                          .format(policy_name, aws_iam_user_name))
                     else:
                         params.update({"PolicyArn": policy["PolicyArn"]})
-                        rtn.append({"PolicyArn": policy["PolicyArn"],
-                                    "Status": iam_cli.result_post(iam_cli.iam.detach_user_policy, **params)})
+                        rtn.append({"PolicyName": policy_name,
+                                    "Status": iam_cli.post(iam_cli.iam.detach_user_policy, **params)})
             else:
                 # Delete 'Arn' from params
                 del params["Arns"]
@@ -73,7 +73,7 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": arn})
                     rtn.append({
                         "PolicyArn": arn,
-                        "Status": iam_cli.result_post(iam_cli.iam.detach_user_policy, **params)}
+                        "Status": iam_cli.post(iam_cli.iam.detach_user_policy, **params)}
                     )
 
             results = rp.done(True, rtn)

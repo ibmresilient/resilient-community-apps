@@ -39,9 +39,9 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.opts, self.options)
             # Get user managed policies.
-            rtn = iam_cli.result_paginate("list_attached_user_policies", **params)
+            rtn = iam_cli.get("list_attached_user_policies", paginate=True, **params)
             # Add user in-line policies at beginning of result.
-            for up in iam_cli.result_paginate("list_user_policies", **params):
+            for up in iam_cli.get("list_user_policies", paginate=True, **params):
                 rtn[:0] = [{"PolicyName": up}]
 
             results = rp.done(True, rtn)
