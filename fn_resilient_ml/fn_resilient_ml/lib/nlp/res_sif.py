@@ -61,6 +61,7 @@ class ResSIF:
                 loaded = True
         if not loaded:
             self.log.error("Failed to load sif from file {}.".format(filename))
+        return loaded
 
     def get_word_count(self, word):
         """

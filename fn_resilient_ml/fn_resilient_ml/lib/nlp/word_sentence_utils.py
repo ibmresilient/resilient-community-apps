@@ -20,9 +20,9 @@ from bs4 import BeautifulSoup
 
 class WordSentenceUtils:
     def __init__(self):
-        nltk.download("wordnet")
-        nltk.download("stopwords")
-        nltk.download('averaged_perceptron_tagger')
+        nltk.download("wordnet", quiet=True)
+        nltk.download("stopwords", quiet=True)
+        nltk.download('averaged_perceptron_tagger', quiet=True)
         self.remove_list = ", . ; ? ~ ! * ) ( { } $ # @ < > ] [".split()
         self.lem = WordNetLemmatizer()
 
@@ -58,7 +58,7 @@ class WordSentenceUtils:
         :param sentence:
         :return:
         """
-        soup = BeautifulSoup(sentence)
+        soup = BeautifulSoup(sentence, features="html.parser")
         sentence = soup.get_text()
         sentence = self.clean_str(sentence)
         words = sentence.lower().split()
