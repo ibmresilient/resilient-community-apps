@@ -18,11 +18,13 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get("fn_aws_iam", {})
+        validate_opts(self)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
         self.options = opts.get("fn_aws_iam", {})
+        validate_opts(self)
 
     @function("fn_aws_iam_add_user_to_groups")
     def _fn_aws_iam_add_user_to_groups_function(self, event, *args, **kwargs):
