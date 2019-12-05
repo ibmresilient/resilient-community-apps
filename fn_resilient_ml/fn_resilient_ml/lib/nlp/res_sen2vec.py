@@ -116,7 +116,7 @@ class ResSen2Vec:
             ul = list(u)
             json.dump(ul, outfile)
 
-        u = np.multiply((u, np.transpose(u)))
+        u = np.multiply(u, np.transpose(u))
 
         # Corner case for small number of dataset. Pad with 0
         if len(u) < self.word2vec.vector_size:
