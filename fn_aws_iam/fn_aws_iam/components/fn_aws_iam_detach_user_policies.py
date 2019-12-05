@@ -55,21 +55,21 @@ class FunctionComponent(ResilientComponent):
                 # Get user policies
                 user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=aws_iam_user_name)
                 # Test if policy_names are attached for user name and get arn.
-                for policy_name in re.split('\s*,\s*', aws_iam_policy_names):
+                for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
                     if user_policies:
                         policy = [policy for policy in user_policies if policy["PolicyName"] == policy_name][0]
 
                     if not user_policies or not policy:
                         raise ValueError("Policy with name '{0}' not attached for user '{1}'."
                                          .format(policy_name, aws_iam_user_name))
-                    else:
-                        params.update({"PolicyArn": policy["PolicyArn"]})
-                        rtn.append({"PolicyName": policy_name,
-                                    "Status": iam_cli.post(iam_cli.iam.detach_user_policy, **params)})
+
+                    params.update({"PolicyArn": policy["PolicyArn"]})
+                    rtn.append({"PolicyName": policy_name,
+                                "Status": iam_cli.post(iam_cli.iam.detach_user_policy, **params)})
             else:
                 # Delete 'Arn' from params
                 del params["Arns"]
-                for arn in re.split('\s*,\s*', aws_iam_arns):
+                for arn in re.split(r"\s*,\s*", aws_iam_arns):
                     params.update({"PolicyArn": arn})
                     rtn.append({
                         "PolicyArn": arn,

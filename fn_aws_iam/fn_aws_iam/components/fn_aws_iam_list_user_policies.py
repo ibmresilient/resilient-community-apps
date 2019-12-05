@@ -3,7 +3,7 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
 from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
@@ -41,8 +41,8 @@ class FunctionComponent(ResilientComponent):
             # Get user managed policies.
             rtn = iam_cli.get("list_attached_user_policies", paginate=True, **params)
             # Add user in-line policies at beginning of result.
-            for up in iam_cli.get("list_user_policies", paginate=True, **params):
-                rtn[:0] = [{"PolicyName": up}]
+            for user_policy in iam_cli.get("list_user_policies", paginate=True, **params):
+                rtn[:0] = [{"PolicyName": user_policy}]
 
             results = rp.done(True, rtn)
 

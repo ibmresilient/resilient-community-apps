@@ -3,7 +3,7 @@
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
 from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
@@ -33,7 +33,6 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             aws_iam_user_name = kwargs.get("aws_iam_user_name")  # text
 
-            LOG = logging.getLogger(__name__)
             LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
 
             validate_fields(["aws_iam_user_name"], kwargs)

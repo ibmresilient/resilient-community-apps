@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             user_groups = iam_cli.get("list_groups_for_user", paginate=True, UserName=aws_iam_user_name)
             rtn = []
             # Test if user is a member of groups in aws_iam_group_names.
-            for group_name in re.split('\s*,\s*', aws_iam_group_names):
+            for group_name in re.split(r"\s*,\s*", aws_iam_group_names):
                 if user_groups:
                     group = [group for group in user_groups if group["GroupName"] == group_name][0]
 

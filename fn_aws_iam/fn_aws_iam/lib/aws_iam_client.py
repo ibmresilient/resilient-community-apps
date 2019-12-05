@@ -168,12 +168,12 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def paginate(self, method, filter=None, **kwargs):
+    def paginate(self, method, results_filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
         :param method: The AWS IAM operation to execute e.g. 'list_users'.
-        :param filter: Dict of filters by filter type.
+        :param results_filter: Dict of filters by filter type.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Query result in a list.
         """
@@ -197,11 +197,11 @@ class AwsIamClient():
             result = self._update_result(result, result_type)
 
         # Apply filter to results.
-        if result and filter:
-            return self._filter(result, filter)
-        else:
-            # Unfiltered result
-            return result
+        if result and results_filter:
+            return self._filter(result, results_filter)
+
+        # Return unfiltered result
+        return result
 
     def get(self, aws_iam_op, paginate=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
@@ -232,8 +232,8 @@ class AwsIamClient():
             if aws_iam_op.__name__ == "get_login_profile":
                 # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
                 return {}
-            else:
-                raise no_such_entity_ex
+
+            raise no_such_entity_ex
 
         except Exception as int_ex:
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
@@ -244,8 +244,8 @@ class AwsIamClient():
             # Normalize and update result for 'User' to be same as that of list all users.
             result.append(response[result_type])
             return self._update_result(result, result_type)
-        else:
-            return response[result_type]
+
+        return response[result_type]
 
 
     def post(self, aws_iam_op, **kwargs):
@@ -267,7 +267,7 @@ class AwsIamClient():
             status = "NoSuchEntity"
 
         except self.iam.exceptions.PasswordPolicyViolation:
-            LOG.info("ERROR with $s and args: '%s', Got exception %s", aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
+            LOG.info("ERROR with %s and args: '%s', Got exception %s", aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
             status = "PasswordPolicyViolation"
 
         except Exception as int_ex:
@@ -277,11 +277,11 @@ class AwsIamClient():
         return status
 
 
-    def _filter(self, result, filter=None):
+    def _filter(self, result, results_filter=None):
         """ Filter results returned from AWS IAM.
 
         :param result: Dict or list of dicts from AWS IAM response.
-        :param filter: Dict of filters by filter type.
+        :param results_filter: Dict of filters by filter type.
         :return: Result or Tuple of filtered result count and either full or filtered result depending on filter type.
         """
         # Set default good status:
@@ -289,8 +289,8 @@ class AwsIamClient():
         rtn = (len(result), result)
 
         for filter_name in FILTER_NAMES:
-            if filter and filter_name in filter and filter_name in result[0]:
-                regex = r'{}'.format(filter[filter_name])
+            if results_filter and filter_name in results_filter and filter_name in result[0]:
+                regex = r'{}'.format(results_filter[filter_name])
                 filtered_result = [r for r in result if re.search(regex, r[filter_name], re.IGNORECASE)]
                 if filter_name in FILTER_NAMES[0]:
                     # If file is 'UserName' return filtered count and filtered result.

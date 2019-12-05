@@ -7,7 +7,7 @@ import re
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
-from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs
+from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
 LOG = logging.getLogger(__name__)
 
@@ -46,7 +46,7 @@ class FunctionComponent(ResilientComponent):
                 del params["AccessKeys"]
 
             rtn = []
-            for ak_id in re.split('\s*,\s*', aws_iam_access_keys):
+            for ak_id in re.split(r"\s*,\s*", aws_iam_access_keys):
                 params.update({"AccessKeyId": ak_id})
                 rtn.append({
                     "AccessKeyId": ak_id,

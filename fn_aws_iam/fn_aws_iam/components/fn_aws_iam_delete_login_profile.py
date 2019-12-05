@@ -50,3 +50,4 @@ class FunctionComponent(ResilientComponent):
         except Exception:
             LOG.exception("Exception in Resilient Function for AWS IAM.")
             yield FunctionError()
+

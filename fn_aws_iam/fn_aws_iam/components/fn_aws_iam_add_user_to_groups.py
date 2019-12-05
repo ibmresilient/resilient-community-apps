@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
                 del params["GroupNames"]
 
             rtn = []
-            for group_name in re.split('\s*,\s*', aws_iam_group_names):
+            for group_name in re.split(r"\s*,\s*", aws_iam_group_names):
                 params.update({"GroupName": group_name})
                 rtn.append({
                     "GroupName": group_name,

@@ -4,8 +4,6 @@
 """Function implementation"""
 
 import logging
-import copy
-
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
@@ -62,7 +60,7 @@ class FunctionComponent(ResilientComponent):
                     policy_filter["PolicyName"] = aws_iam_policy_filter
                 rtn_users = []
                 # All users
-                rtn_users = iam_cli.get("list_users", paginate=True, filter=user_filter)
+                rtn_users = iam_cli.get("list_users", paginate=True, results_filter=user_filter)
                 # The user result will be returned as a tuple of filtered count and filtered user list if a filter
                 # is specified . The count is not used.
                 if isinstance(rtn_users, tuple):
@@ -75,7 +73,7 @@ class FunctionComponent(ResilientComponent):
                     user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
                     # Add extra data for each user. Filtered count is also returned in certain instances.
                     user_groups = iam_cli.get("list_groups_for_user", paginate=True, UserName=user["UserName"],
-                                                       filter=group_filter)
+                                              results_filter=group_filter)
                     # The group result will be returned as a tuple of filtered count and group list if a filter is
                     # specified, otherwise it will be a list of groups.
                     if isinstance(user_groups, tuple):
@@ -83,12 +81,11 @@ class FunctionComponent(ResilientComponent):
                     if user_groups:
                         if aws_iam_group_filter and not group_count:
                             continue
-                        else:
-                            user["Groups"] = user_groups
+                        user["Groups"] = user_groups
                     elif aws_iam_group_filter:
                         continue
-                    user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=user["UserName"],
-                                                         filter=policy_filter)
+                    user_policies = iam_cli.get("list_attached_user_policies", paginate=True,
+                                                UserName=user["UserName"], results_filter=policy_filter)
                     # The policy result will be returned as a tuple of filtered count and policy list if a filter is
                     # specified, otherwise it will be a list of policies.
                     if isinstance(user_policies, tuple):
@@ -96,8 +93,7 @@ class FunctionComponent(ResilientComponent):
                     if user_policies:
                         if aws_iam_policy_filter and not policy_count:
                             continue
-                        else:
-                            user["Policies"] = user_policies
+                        user["Policies"] = user_policies
                     elif aws_iam_policy_filter:
                         continue
 
