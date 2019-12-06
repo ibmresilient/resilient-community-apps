@@ -15,7 +15,7 @@ log.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
-    Simple test to verify ProofPoint Trap connectivity.
+    Simple test to verify AWS IAM connectivity.
     """
     options = opts.get("fn_aws_iam", {})
     try:
