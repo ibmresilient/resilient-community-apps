@@ -9,7 +9,7 @@ class MSGraphHelper(object):
     Helper object MSGraphHelper.
     """
     def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, proxies=None):
-        self.__ms_graph_token_url = ms_graph_token_url.format(tenant_id)
+        self.__ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.__ms_graph_url = ms_graph_url
         self.__tenant_id = tenant_id
         self.__client_id = client_id,

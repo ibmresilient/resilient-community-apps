@@ -11,7 +11,12 @@ def config_section_data():
        when called by `resilient-circuits config [-c|-u]`
     """
     config_data = u"""[fn_exchange_online]
-microsoft_graph_token_url=https://login.microsoftonline.com/{0}/oauth2/v2.0/token
+#
+# Note that the microsoft_graph_token_url below contains a placeholder {tenant} for the tenant ID.
+# Do not place the tenant id in the place holder as the integration will do this at run time.
+# In most cases the only required edits are replacing "xxx" with the Microsoft App credentials. 
+# 
+microsoft_graph_token_url=https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token
 microsoft_graph_url=https://graph.microsoft.com/v1.0/
 tenant_id=xxx
 client_id=xxx
