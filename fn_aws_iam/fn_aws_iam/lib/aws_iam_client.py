@@ -255,17 +255,23 @@ class AwsIamClient():
         return response[result_type]
 
 
-    def post(self, aws_iam_op, **kwargs):
+    def post(self, op, **kwargs):
         """ Execute a 'post' type AWS IAM  operation whihc results in an update or change to the AWS IAM environment.
         Example calls include 'delete_access_key' and 'attach_user_policy'.
 
-        :param aws_iam_op: The AWS IAM operation to execute e.g. 'delete_access_key'.
+        :param op: The AWS IAM operation to execute e.g. 'delete_access_key'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return status: Return status string.
         """
         # Set default good status:
         status = "OK"
-
+        try:
+            # Get the AWS IAM object corresponding to the operation 'op'.
+            aws_iam_op = getattr(self.iam, op)
+        except AttributeError as attr_ex:
+            LOG.error("Unknown AWS IAM operation %s, Got exception: %s",
+                      op, attr_ex.__repr__())
+            raise attr_ex
         try:
             aws_iam_op(**kwargs)
 
