@@ -167,11 +167,11 @@ class AwsIamClient():
                 result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
         return result_entry
 
-    def paginate(self, method, results_filter=None, **kwargs):
+    def paginate(self, op=None, results_filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
-        :param method: The AWS IAM operation to execute e.g. 'list_users'.
+        :param op: The AWS IAM operation to execute e.g. 'list_users'.
         :param results_filter: Dict of filters by filter type.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Query result in a list.
@@ -179,15 +179,15 @@ class AwsIamClient():
         result_type = None
         result = []
         try:
-            paginator = self.iam.get_paginator(method)
+            paginator = self.iam.get_paginator(op)
             for response in paginator.paginate(**kwargs):
                 if not result_type:
                     result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
                 result.extend(response[result_type])
 
         except Exception as int_ex:
-            LOG.error("ERROR in paginator with method: '%s' and args: '%s', Got exception: %s",
-                      method, kwargs, int_ex.__repr__())
+            LOG.error("ERROR in paginator with operation: '%s' and args: '%s', Got exception: %s",
+                      op, kwargs, int_ex.__repr__())
             LOG.info(int_ex)
             raise int_ex
 
@@ -202,24 +202,29 @@ class AwsIamClient():
         # Return unfiltered result
         return result
 
-    def get(self, method, paginate=False, **kwargs):
+    def get(self, op=None, paginate=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
         Example calls include 'get_user' and 'get_user_tags', 'list_users'.
-        The calls will translate to actual 'get' or query operations. The method will return
+        The calls will translate to actual 'get' or query operations. The operation will return
         standard or paginated result since not all query operations support pagination.
 
-        :param method: The AWS IAM method to execute e.g. 'get_user' or 'list_users'.
+        :param op: The AWS IAM operation to execute e.g. 'get_user' or 'list_users'.
         :param paginate: Boolean to indicate operation will return paginated result e.g. 'list_users'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
         if paginate:
-            return self.paginate(method, **kwargs)
+            return self.paginate(op, **kwargs)
 
         result = []
         result_type = None
-        # Get the AWS IAM object corresponding to the method.
-        aws_iam_op = getattr(self.iam, method)
+        try:
+            # Get the AWS IAM object corresponding to the operation 'op'.
+            aws_iam_op = getattr(self.iam, op)
+        except AttributeError as attr_ex:
+            LOG.error("Unknown AWS IAM operation %s, Got exception: %s",
+                      op, attr_ex.__repr__())
+            raise attr_ex
 
         try:
             response = aws_iam_op(**kwargs)
