@@ -79,3 +79,107 @@ if __name__ == "__main__":
 
 ---
 
+
+## Function - AWS IAM: List Users
+
+### API Name
+`fn_aws_iam_list_users`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_users script ##
+# Example result:
+"""
+Result: {
+            'version': '1.0', 'success': True, 'reason': None,
+            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'AIDA4EQBBG2YDOLTU6QSM',
+                         'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-05 15:54:43'},
+                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                         'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
+                         'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
+                       ],
+            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "AIDA4EQBBG2YDOLTU6QSM", "Arn": "arn:aws:iam::834299573936:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "AIDA4EQBBG2YGZOQXT2JB", "Arn": "arn:aws:iam::834299573936:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
+            'inputs': {},
+            'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                        'host': 'myhost.ibm.com', 'execution_time_ms': 7951,
+                        'timestamp': '2019-11-14 13:48:30'
+                       }
+}
+
+"""
+import re
+#  Globals
+# List of fields in datatable fn_aws_iam_list_users script
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                   "PasswordLastUsed", "Tags"]
+FN_NAME = "fn_aws_iam_list_users"
+WF_NAME = "Delete Login Profile"
+# Processing
+INPUTS = results.inputs
+CONTENT = results.content
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+note_text = ''
+
+def check_add_quotes(tag_name):
+    # Using regex
+    # If spaces in tag name add quotes
+    if re.search(r"\s", tag_name):
+        return "'"+tag_name+"'"
+    else:
+        return tag_name
+
+def process_tags(tag_list, row):
+    tags = []
+    for i in range(len(tag_list)):
+        if tag_list[i]["Key"] is not None:
+            tags.append(tag_list[i]["Key"])
+    row.Tags = ','.join(check_add_quotes(t) for t in tags)
+
+def main():
+    note_text = ''
+    if CONTENT is not None and len(CONTENT) > 0:
+        if len(CONTENT) == 1:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
+                        "<b>{2}</b>  for Resilient function <b>{3}</b>"\
+                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            u = CONTENT.pop()
+            row.query_execution_date = QUERY_EXECUTION_DATE
+            for f in DATA_TBL_FIELDS:
+                if u[f] is not None:
+                    if isinstance(u[f], unicode) or isinstance(u[f], int) \
+                            or isinstance(u[f], long) or len(u[f]) == 0:
+                        if f == "DefaultUser" and not u[f]:
+                            pass
+                        else:
+                            row[f] = u[f]
+                    else:
+                        if f == "Tags" and len(u[f]) > 0:
+                            process_tags(u[f], row)
+                        else:
+                            row[f] = ','.join(u[f])
+        else:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
+                        "Resilient function <b>{3}</b>".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            row.LoginProfileExists = "NO"
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+```
+
+---
+

@@ -19,8 +19,9 @@
 
 ### Pre-Processing Script
 ```python
-note_text = "AWS IAM Integration: There were <b>{0}</b> results returned for Resilient function "
-incident.addNote(helper.createRichText(note_text))
+inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
+inputs.aws_iam_group_filter = rule.properties.aws_iam_group_filter
+inputs.aws_iam_policy_filter = rule.properties.aws_iam_policy_filter
 ```
 
 ### Post-Processing Script
