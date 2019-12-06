@@ -32,7 +32,7 @@ class MSGraphHelper(object):
         :param ms_graph_url: ms_graph_token_url from the app.config contains {tenant} substring
         :return: ms_graph_token_url string with "{tenant}" substring removed
         """
-        return ms_graph_token_url.replace("{tenant}", tenant_id)
+        return ms_graph_token_url.format(tenant=tenant_id)
 
     def get_user_profile(self, email_address):
         """
