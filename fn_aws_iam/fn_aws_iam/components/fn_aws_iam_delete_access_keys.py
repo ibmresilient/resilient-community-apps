@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
                 params.update({"AccessKeyId": ak_id})
                 rtn.append({
                     "AccessKeyId": ak_id,
-                    "Status": iam_cli.post(iam_cli.iam.delete_access_key, **params)}
+                    "Status": iam_cli.post("iam.delete_access_key", **params)}
                 )
 
             results = rp.done(True, rtn)

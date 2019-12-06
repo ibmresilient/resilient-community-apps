@@ -41,10 +41,9 @@ class AwsIamClient():
         self.aws_iam_access_key_id = function_options.get("aws_iam_access_key_id")
         self.aws_iam_secret_access_key = function_options.get("aws_iam_secret_access_key")
         if function_options.get("aws_iam_region") is not None:
-            self.aws_iam_region = options.get("aws_iam_region")
+            self.aws_iam_region = function_options.get("aws_iam_region")
         else:
             self.aws_iam_region = None
-        self.proxies = {}
         self.proxies = {}
         if "https_proxy" in function_options and function_options["https_proxy"] is not None:
             self.proxies.update({"https": function_options.get("https_proxy")})
@@ -107,7 +106,7 @@ class AwsIamClient():
         default_index = None
         default_identity = self._get_default_identity()
         for i in range(len(result)):
-            if self.get(self.iam.get_login_profile, UserName=result[i]["UserName"]):
+            if self.get("get_login_profile", UserName=result[i]["UserName"]):
                 result[i].update({"LoginProfileExists": "Yes"})
             else:
                 result[i].update({"LoginProfileExists": "No"})
@@ -203,22 +202,25 @@ class AwsIamClient():
         # Return unfiltered result
         return result
 
-    def get(self, aws_iam_op, paginate=False, **kwargs):
+    def get(self, method, paginate=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
         Example calls include 'get_user' and 'get_user_tags', 'list_users'.
-        The calls will translate to actual 'get' or query operations and a number will return
-        paginated results.
+        The calls will translate to actual 'get' or query operations. The method will return
+        standard or paginated result since not all query operations support pagination.
 
-        :param aws_iam_op: The AWS IAM operation or method to execute e.g. 'get_user'.
+        :param method: The AWS IAM method to execute e.g. 'get_user' or 'list_users'.
         :param paginate: Boolean to indicate operation will return paginated result e.g. 'list_users'.
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
         if paginate:
-            return self.paginate(aws_iam_op, **kwargs)
+            return self.paginate(method, **kwargs)
 
         result = []
         result_type = None
+        # Get the AWS IAM object corresponding to the method.
+        aws_iam_op = getattr(self.iam, method)
+
         try:
             response = aws_iam_op(**kwargs)
 

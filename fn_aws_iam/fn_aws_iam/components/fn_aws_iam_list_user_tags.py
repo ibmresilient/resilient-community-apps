@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam_cli.get(iam_cli.iam.list_user_tags, **params)
+            rtn = iam_cli.get("list_user_tags", **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

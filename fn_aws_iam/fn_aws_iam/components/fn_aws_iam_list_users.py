@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
             iam_cli = AwsIamClient(self.opts, self.options, sts_client=True)
             if aws_iam_user_name:
                 # User specified.
-                rtn = iam_cli.get(iam_cli.iam.get_user, **params)
+                rtn = iam_cli.get("get_user", **params)
                 # If a single user add to a list to normalize result.
             else:
                 # All users
@@ -123,7 +123,7 @@ class FunctionComponent(ResilientComponent):
             user_access_key_ids = iam_cli.get("list_access_keys", paginate=True, UserName=user["UserName"])
             if user_access_key_ids:
                 user["AccessKeyIds"] = user_access_key_ids
-            user_tags = iam_cli.get(iam_cli.iam.list_user_tags, UserName=user["UserName"])
+            user_tags = iam_cli.get("list_user_tags", UserName=user["UserName"])
             if user_tags:
                 user["Tags"] = user_tags
 

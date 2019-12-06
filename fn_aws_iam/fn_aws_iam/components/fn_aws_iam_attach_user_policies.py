@@ -66,7 +66,7 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": policy["Arn"]})
                     rtn.append({
                         "PolicyArn": policy["Arn"],
-                        "Status": iam_cli.post(iam_cli.iam.attach_user_policy, **params)}
+                        "Status": iam_cli.post("iam.attach_user_policy", **params)}
                     )
             else:
                 if "Arns" in params:
@@ -76,7 +76,7 @@ class FunctionComponent(ResilientComponent):
                     params.update({"PolicyArn": arn})
                     rtn.append({
                         "PolicyArn": arn,
-                        "Status": iam_cli.post(iam_cli.iam.attach_user_policy, **params)
+                        "Status": iam_cli.post("iam.attach_user_policy", **params)
                     })
 
             results = rp.done(True, rtn)

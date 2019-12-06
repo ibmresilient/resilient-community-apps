@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
                 params.update({"GroupName": group_name})
                 rtn.append({
                     "GroupName": group_name,
-                    "Status": iam_cli.post(iam_cli.iam.remove_user_from_group, **params)
+                    "Status": iam_cli.post("iam.remove_user_from_group", **params)
                 })
 
             results = rp.done(True, rtn)
