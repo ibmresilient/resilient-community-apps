@@ -42,7 +42,7 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam_cli.iam.post("delete_login_profile", **params)
+            rtn = iam_cli.post("delete_login_profile", **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results

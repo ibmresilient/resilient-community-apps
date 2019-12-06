@@ -47,7 +47,7 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.opts, self.options)
 
-            rtn = iam_cli.post("iam.update_login_profile", **params)
+            rtn = iam_cli.post("update_login_profile", **params)
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results
