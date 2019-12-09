@@ -41,3 +41,30 @@ class MSGraphHelper(object):
             raise IntegrationError("Invalid response from Microsoft Graph when trying to get user profile.")
 
         return response
+
+    def query_emails(self, email_address, sender, has_attachments):
+        """
+        Query MS Graph user profile endpoint using the MS graph session.
+        :param email_address: email address of the user whose mailboz is being searched.
+        :return: requests response from the email query
+        """
+        filter = None
+        if sender:
+            filter = u"messages?$filter=from/emailAddress/address%20eq%20'{}'".format(sender)
+
+        if has_attachments is not None:
+            filter = u"messages?$filter=hasAttachments%20eq%20{}%20and%20isRead%20eq%false".format(str(has_attachments).lower())
+
+        if filter:
+            # Assemble the MS Graph API query string.
+            ms_graph_query_messages_url = u'{0}users/{1}/{2}'.format(self.__ms_graph_url, email_address, filter)
+        else:
+            raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
+
+        response = self.__ms_graph_session.get(ms_graph_query_messages_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
+
+        return response
