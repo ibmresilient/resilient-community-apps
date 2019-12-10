@@ -44,7 +44,8 @@
 
  ![screenshot: main](./doc/screenshots/teams_incident.png)
 
-This python package contains the integration code necessary to connect to Microsoft Soft teams to esclate incident data to an existing Teams channel.  Included are example workflows and rules for pushing incident and task information to a Teams channel. See the README documentation in the doc/ folder for further information on how to use this integration.
+This python package contains the integration code necessary to connect to Microsoft Soft teams to esclate incident data to an existing Teams channel.  
+Included are example workflows and rules for pushing incident and task information to a Teams channel. See the README documentation in the doc/ folder for further information on how to use this integration.
 
 ---
 
@@ -54,7 +55,7 @@ This python package contains the integration code necessary to connect to Micros
 -->
 * Resilient platform >= `v31.0.4254`
 * An Integration Server running `resilient_circuits>=30.0.0' 'resilient_lib`
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide).
 
 ---
 
@@ -89,7 +90,6 @@ This python package contains the integration code necessary to connect to Micros
   ```
   $ resilient-circuits run
   ```
-
 
 ---
 

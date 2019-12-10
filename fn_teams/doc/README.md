@@ -15,11 +15,15 @@
 # **User Guide:** fn_teams_v1.0.0
 
 ## Table of Contents
+- [Install](#install)
 - [Key Features](#key-features)
 - [Function - Teams Post Message](#function---teams-post-message)
 - [Rules](#rules)
 
 ---
+
+## Install
+Refer to the README.pdf included in this package for installation and configuration information.
 
 ## Key Features
 <!--
