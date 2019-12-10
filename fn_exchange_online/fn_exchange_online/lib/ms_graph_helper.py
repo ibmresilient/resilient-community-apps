@@ -1,9 +1,10 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
-
+import logging
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
+LOG = logging.getLogger(__name__)
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
@@ -42,25 +43,61 @@ class MSGraphHelper(object):
 
         return response
 
-    def query_emails(self, email_address, sender, has_attachments):
+    def append_query_to_query_url(self, filter_query, new_query):
+        """
+        :param filter_query: query filter string
+        :param new_query: new query to add to the filter query string
+        :return: the new query filter string
+        # If there is already a query appended on the query filter string it will end with a close parentheses ')'
+        # otherwise it will end "=".  When adding a new query, url-encoded ' and ' string should be be placed between
+        # between the two queries.
+        """
+        if filter_query.endswith(')'):
+            join_string = u"%20and%20"
+        else:
+            join_string = ""
+        return u"{0}{1}{2}".format(filter_query, join_string, new_query)
+
+    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         Query MS Graph user profile endpoint using the MS graph session.
         :param email_address: email address of the user whose mailboz is being searched.
         :return: requests response from the email query
         """
-        filter = None
+        filter_query= u"messages?$filter="
+        filter_start_length = len(filter_query)
         if sender:
-            filter = u"messages?$filter=from/emailAddress/address%20eq%20'{}'".format(sender)
+            sender_query = u"(from/emailAddress/address%20eq%20'{0}')".format(sender)
+            filter_query = self.append_query_to_query_url(filter_query, sender_query)
+
+        if start_date is not None:
+            start_date_query = u"(receivedDateTime%20ge%20{0})".format(start_date)
+            filter_query = self.append_query_to_query_url(filter_query, start_date_query)
+
+        if end_date is not None:
+            end_date_query = u"(receivedDateTime%20le%20{0})".format(end_date)
+            filter_query = self.append_query_to_query_url(filter_query, end_date_query)
 
         if has_attachments is not None:
-            filter = u"messages?$filter=hasAttachments%20eq%20{}%20and%20isRead%20eq%false".format(str(has_attachments).lower())
+            has_attachments_query = u"(hasAttachments%20eq%20{0})".format(str(has_attachments).lower())
+            filter_query = self.append_query_to_query_url(filter_query, has_attachments_query)
 
-        if filter:
+        if message_subject:
+            subject_query = u"(contains(subject,'{0}'))".format(message_subject)
+            filter_query = self.append_query_to_query_url(filter_query, subject_query)
+
+        # body does not work yet.
+        if message_body:
+            body_query = u"(contains(subject,'{0}')".format(message_subject)
+            filter_query = self.append_query_to_query_url(filter_query, body_query)
+
+        if len(filter_query) > filter_start_length:
             # Assemble the MS Graph API query string.
-            ms_graph_query_messages_url = u'{0}users/{1}/{2}'.format(self.__ms_graph_url, email_address, filter)
+            ms_graph_query_messages_url = u'{0}users/{1}/{2}'.format(self.__ms_graph_url, email_address, filter_query)
         else:
             raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
 
+        LOG.info(u"Exchange Online query string {0}", ms_graph_query_messages_url)
         response = self.__ms_graph_session.get(ms_graph_query_messages_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
@@ -68,3 +105,4 @@ class MSGraphHelper(object):
             raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
 
         return response
+
