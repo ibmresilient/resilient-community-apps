@@ -59,29 +59,43 @@ class MSGraphHelper(object):
             join_string = ""
         return u"{0}{1}{2}".format(filter_query, join_string, new_query)
 
-    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body, order_by_recency):
         """
         Query MS Graph user profile endpoint using the MS graph session.
         :param email_address: email address of the user whose mailboz is being searched.
         :return: requests response from the email query
         """
-        filter_query= u"messages?$filter="
+        filter_query = u"?$filter="
         filter_start_length = len(filter_query)
-        if sender:
-            sender_query = u"(from/emailAddress/address%20eq%20'{0}')".format(sender)
-            filter_query = self.append_query_to_query_url(filter_query, sender_query)
 
-        if start_date is not None:
+        order_query = u"?$orderby="
+        order_start_length = len(order_query)
+        if order_by_recency is not None:
+            if order_by_recency:
+                order_query = u"{0}(receivedDateTime%20desc)".format(order_query)
+            else:
+                order_query = u"{0}(receivedDateTime%20asc)".format(order_query)
+            # When using $orderby in query you must also use the same parameter in $filter clause
+            # So, if a start date is note specified set one.
+            if start_date is None:
+                start_date_query = u"(receivedDateTime%20ge%20{0})".format('1900-01-01T00:00:00Z')
+                filter_query = self.append_query_to_query_url(filter_query, start_date_query)
+
+        if start_date:
             # convert from epoch to utc time.
-            utc_time = datetime.datetime.utcfromtimestamp(start_date/1000)
+            utc_time = datetime.datetime.fromtimestamp(start_date/1000).strftime('%Y-%m-%dT%H:%M:%SZ')
             start_date_query = u"(receivedDateTime%20ge%20{0})".format(utc_time)
             filter_query = self.append_query_to_query_url(filter_query, start_date_query)
 
-        if end_date is not None:
+        if end_date:
             # convert from epoch to utc time.
-            utc_time = datetime.datetime.utcfromtimestamp(end_date/1000)
+            utc_time = datetime.datetime.fromtimestamp(end_date/1000).strftime('%Y-%m-%dT%H:%M:%SZ')
             end_date_query = u"(receivedDateTime%20le%20{0})".format(utc_time)
             filter_query = self.append_query_to_query_url(filter_query, end_date_query)
+
+        if sender:
+            sender_query = u"(from/emailAddress/address%20eq%20'{0}')".format(sender)
+            filter_query = self.append_query_to_query_url(filter_query, sender_query)
 
         if has_attachments is not None:
             has_attachments_query = u"(hasAttachments%20eq%20{0})".format(str(has_attachments).lower())
@@ -93,12 +107,17 @@ class MSGraphHelper(object):
 
         # body does not work yet.
         if message_body:
-            body_query = u"(contains(subject,'{0}')".format(message_subject)
+            body_query = u"(contains(body,'{0}')".format(message_body)
             filter_query = self.append_query_to_query_url(filter_query, body_query)
 
         if len(filter_query) > filter_start_length:
             # Assemble the MS Graph API query string.
-            ms_graph_query_messages_url = u'{0}users/{1}/{2}'.format(self.__ms_graph_url, email_address, filter_query)
+            if len(order_query) > order_start_length:
+                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}&{3}'.format(self.__ms_graph_url, email_address,
+                                                                                     order_query, filter_query)
+            else:
+                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
+                                                                                 filter_query)
         else:
             raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
 

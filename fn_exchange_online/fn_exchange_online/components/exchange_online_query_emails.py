@@ -56,15 +56,17 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_has_attachments'], kwargs)
             validate_fields(['exo_message_subject'], kwargs)
             validate_fields(['exo_message_body'], kwargs)
+            validate_fields(['exo_order_by_recency'], kwargs)
 
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
             email_address_sender = kwargs.get('exo_email_address_sender')  # text
-            start_date = kwargs.get('exo_start_date')  # datetime
-            end_date = kwargs.get('exo_end_date')  # datetime
-            has_attachments = kwargs.get('exo_has_attachments')  # bool
-            message_subject = kwargs.get('exo_message_subject')  # text
-            message_body = kwargs.get('exo_message_body')  # text
+            start_date       = kwargs.get('exo_start_date')  # datetime
+            end_date         = kwargs.get('exo_end_date')  # datetime
+            has_attachments  = kwargs.get('exo_has_attachments')  # bool
+            message_subject  = kwargs.get('exo_message_subject')  # text
+            message_body     = kwargs.get('exo_message_body')  # text
+            order_by_recency = kwargs.get('exo_order_by_recency')  # bool
 
             LOG.info(u"exo_email_address: %s", email_address)
             LOG.info(u"exo_email_address_sender: %s", email_address_sender)
@@ -73,11 +75,11 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_email_has_attachments: %s", has_attachments)
             LOG.info(u"exo_message_subject: %s", message_subject)
             LOG.info(u"exo_message_body: %s", message_body)
-
-            #yield StatusMessage(u"Start Exchange Online query user email address: {} for email from {}".format(email_address, email_address_sender)
+            LOG.info(u"exo_order_by_recency: %s", message_body)
 
             # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date, has_attachments, message_subject, message_body)
+            response = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
+                                                         has_attachments, message_subject, message_body, order_by_recency)
 
             response_json = response.json()
             results = rp.done(True, response_json)
