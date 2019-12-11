@@ -1,5 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+import datetime
 import logging
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
@@ -71,11 +72,15 @@ class MSGraphHelper(object):
             filter_query = self.append_query_to_query_url(filter_query, sender_query)
 
         if start_date is not None:
-            start_date_query = u"(receivedDateTime%20ge%20{0})".format(start_date)
+            # convert from epoch to utc time.
+            utc_time = datetime.datetime.utcfromtimestamp(start_date/1000)
+            start_date_query = u"(receivedDateTime%20ge%20{0})".format(utc_time)
             filter_query = self.append_query_to_query_url(filter_query, start_date_query)
 
         if end_date is not None:
-            end_date_query = u"(receivedDateTime%20le%20{0})".format(end_date)
+            # convert from epoch to utc time.
+            utc_time = datetime.datetime.utcfromtimestamp(end_date/1000)
+            end_date_query = u"(receivedDateTime%20le%20{0})".format(utc_time)
             filter_query = self.append_query_to_query_url(filter_query, end_date_query)
 
         if has_attachments is not None:
