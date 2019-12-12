@@ -31,8 +31,11 @@
 -->
 ### What's new in this Beta 
 * Created two new custom Artifact Types for Threat ID and Campaign ID and filtered Rules based on the Artifact type.
-* If Threat ID or Campaign ID don't exist in Proofpoint Tap instead of ending the Workflow a Note is created with a message telling the user Threat ID/Campaign ID cannot be found.
-* After Workflow is completed a clear Note is created with the name of the executed Workflow, results are saved into a Resilient Datatable. Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+* If Threat ID or Campaign ID don't exist in Proofpoint Tap system, instead of ending the Workflow with an Error, a Note is created with a message explaining the user Threat ID or Campaign ID cannot be found.
+* When Get Campaign Workflow is completed a Note is created with the name of the Workflow and some basic information about the Campaign. Detailed Campaign information is saved in Proofpoint TAP Campaign Object Details Data Table. Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+* Get Forensics function has an additional input paramater incident_field which is used for creating an Attachments of Forensics Report.
+* Results of all three Workflows for Get Forensics function are saved in a Note and an Attachment.
+* Aggregate Forensics for entire campaign now returns malicious results only.
 
 ### What's new in the Beta 11/1/2019
 * Fixed a bug for Get Forensics function where adding a Note caused the Workflow a long time to complete.
@@ -54,7 +57,8 @@ Proofpoint Targeted Attack Protection (TAP) helps you stay ahead of attackers wi
 The Proofpoint TAP function package provides the following features:
 * Poll detailed information about several types of TAP events in a SIEM-compatible, vendor-neutral format. This includes Blocked or permitted clicks to threats recognized by URL Defense and Blocked or delivered messages that contain threats recognized by URL Defense or Attachment Defense are exposed.
 * Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
-* Get detailed forensic evidences about individual threats or campaigns observed in their environment. These evidences could be used as indicators of compromise to confirm infection on a host, as supplementary data to enrich and correlate against other security intelligence sources, or to orchestrate updates to security endpoints to prevent exposure and infection.
+* Pull specific details about campaigns, including their description, the actor, malware family, and techniques associated with the campaign and the threat variants which have been associated with the campaign.
+
 
 ---
 
@@ -104,8 +108,8 @@ The Proofpoint TAP function package provides the following features:
   | **startup_interval** | No | `30` | *How long, in minutes (max 60) to check for previous events at startup.* |
   | **type_filter** | No | `malware, phish, spam, impostor, all` | *Filtering a comma-separated list of types of events to import into the Resilient platform* |
   | **score_threshold** | No | `50` | *Classification for the type of event to import based on the respective threat score.* |
-  | **threat_template** | No | `50` | *Jinja template to override default threat description format.* |
-  | **forensics_template** | No | `` | *Jinja template to override default forensic format.* |
+  | **threat_template** | No |  | *Jinja template to override default threat description format.* |
+  | **forensics_template** | No |  | *Jinja template to override default forensic format.* |
   | **cafile** | No | `cafile=~/.resilient/tap/cert.cer` | *If required by Proofpoint.* |
   | **http_proxy** | No | `http://proxyhost:8080` | *For access via a proxy.* |
   | **https_proxy** | No | `https://proxyhost:8080` | *For access via a proxy.* |

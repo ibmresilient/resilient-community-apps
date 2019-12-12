@@ -57,9 +57,10 @@ Function pulls detailed forensic evidence about individual threats or campaigns 
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | Incident ID |
 | `proofpoint_aggregate_flag` | `boolean` | No | `-` | A boolean value, defaulting to false. May optionally be used with the threatId parameter. It cannot be used with the campaignId parameter. If false, aggregate forensics for that specific threat identifier will be returned. If true AND if the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise, aggregate forensics for the individual threat are returned. |
 | `proofpoint_campaign_id` | `text` | No | `-` | A string containing a campaign identifier. |
-| `proofpoint_malicious_flag` | `boolean` | No | `-` | Show malicious results only |
+| `proofpoint_malicious_flag` | `boolean` | No | `-` | Show malicious results only. |
 | `proofpoint_threat_id` | `text` | No | `-` | A string containing a threat identifier. |
 
 </p>
@@ -76,15 +77,15 @@ Workflow imports additional forensic information based on the given threat ident
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Threat.png)
 
-* Example: Proofpoint TAP - Get Forensics by Campaign ID 
+*  Example: Proofpoint TAP - Aggregate Forensics by Campaign ID 
 
-Workflow imports additional forensics information based on the given campaign identifier.
+Workflow returns aggregate forensics for an entire campaign based on the given campaign identifier.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Forensics_CampaignID.png)
 
 * Example: Proofpoint TAP - Aggregate Forensics for Campaign 
 
-Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned.
+Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned. Forensics returned is additionally filtered to include malicious results only.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Campaign.png)
 
@@ -96,21 +97,16 @@ Workflow imports additional forensic information based on the given threat ident
 
 ```python
 results {
-  "inputs": {
-    "campaign_id": None,
-    "threat_id": "355e7ff321fc141e057c2ad6a593a9a264ed910065fe6c099f5cd0e097824474",
-    "aggregate_flag": None,
-    "malicious_flag": True
-  },
-  "success": True,
-  "data": [
-    "Malicious content dropped during execution\nType: behavior\nMalicious: True\nNote: Malicious content dropped during execution\nOS: Win7\nURL: ",
-    "Malicious content dropped during execution\nType: behavior\nMalicious: True\nNote: Malicious content dropped during execution\nOS: Win7\nURL: ",
-    "Malicious attachment with url: http://skilleducators.com\nType: url\nMalicious: True\nNote: \nOS: Win7\nURL: http://skilleducators.com",
-    "Malicious attachment with url: http://skilleducators.com\nType: url\nMalicious: True\nNote: \nOS: Win7\nURL: http://skilleducators.com"
-  ]
-}
-
+    "inputs": {
+        "incident_id": 2106,
+        "campaign_id": None,
+        "threat_id": "355e7ff321fc141e057c2ad6a593a9a264ed910065fe6c099f5cd0e097824474",
+        "aggregate_flag": None,
+        "malicious_flag": True
+      },
+      "success": True,
+      "num_reports": 1
+    }
 ```
 
 </p>
@@ -120,6 +116,7 @@ results {
 <p>
 
 ```python
+inputs.incident_id = incident.id
 inputs.proofpoint_threat_id = artifact.value
 inputs.proofpoint_malicious_flag = True
 ```
@@ -131,11 +128,32 @@ inputs.proofpoint_malicious_flag = True
 <p>
 
 ```python
-# results is a Dictionary and data is a List
-if results and results.get("data"):
-  incident.addNote("\n\n".join(results.get("data")))
-else:
-  incident.addNote("No malicious Forensics information found for artifact {}.".format(artifact.value))
+from java.util import Date
+
+# results is a Dictionary and reports is a List
+if results is not None:
+  noteText = "<b>Proofpoint TAP - Aggregate Malicious Forensics by Threat ID Results:</b>"
+  
+  if results.get("success") is True:
+    num_reports = results.get("num_reports", 0)
+    
+    noteText = u"""{}
+    <br>Found {} {} with malicious forensics for artifact {}. {}""".format(
+      noteText,
+      num_reports,
+      "report" if num_reports == 1 else "reports",
+      artifact.value,
+      "Results are saved in an Attachment." if num_reports > 0 else "")
+  
+  elif results.get("success") is False and results.get("note_err_text", None) is not None:
+    noteText = u"""{} 
+    <br>No Forensics found for Threat ID '{}'. 
+    <br>Error: {}.""".format(noteText, artifact.value, results.get("note_err_text"))
+  
+  else:
+    noteText = u"""{} <br>No Forensics found for Threat ID '{}'.""".format(noteText, artifact.value)
+  
+  incident.addNote(helper.createRichText(noteText))
 ```
 
 </p>

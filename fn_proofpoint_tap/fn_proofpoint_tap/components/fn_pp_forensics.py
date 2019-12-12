@@ -129,6 +129,8 @@ class FunctionComponent(ResilientComponent):
                         # Create an Attachment only if Reports were found
                         if filtered_reports:
                             num_reports = len(filtered_reports)
+                            results['num_reports'] = num_reports
+
                             yield StatusMessage('Found {} {} with forensics evidence'.format(num_reports, "report" if
                                                 num_reports == 1 else "reports"))
 
@@ -148,7 +150,6 @@ class FunctionComponent(ResilientComponent):
                             yield StatusMessage('No report with forensics evidence found')
 
                         results['success'] = True
-                        results['reports'] = filtered_reports
 
                     except ValueError as err:
                         raise err
