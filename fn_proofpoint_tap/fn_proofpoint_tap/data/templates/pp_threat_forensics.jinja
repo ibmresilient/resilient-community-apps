@@ -1,12 +1,6 @@
-<br>Friendly Display: {{ display }}
-<br>Malicious: {{ malicious }}
-<br>Relative time at which the evidence was observed during sandboxing: {{ time }}
-<br>Platforms in which Evidence was seen:
-{% for platform in platforms %}
-    name: {{ platform.name }}, OS: {{ platform.os }}, version: {{ platform.version }}
-{% endfor %}
-<br>Evidence Type: {{ type }}
-<br>Facets associated with Evidence Type:
-{% for key, value in what.items() %}
-    <br>{{key}}: {{value}}
-{% endfor %}
+Friendly Display: {{ display }}
+Malicious: {{ malicious }}
+Relative time at which the evidence was observed during sandboxing: {{ time }}
+Platforms in which Evidence was seen: {% for platform in platforms -%} Name - {{ platform.name }}, OS - {{ platform.os }}, Version - {{ platform.version }}{% endfor %}
+Evidence Type: {{ type }}
+Facets associated with Evidence Type: {% for key, value in what.items() %}{{key}} - {{value}}{% endfor %}

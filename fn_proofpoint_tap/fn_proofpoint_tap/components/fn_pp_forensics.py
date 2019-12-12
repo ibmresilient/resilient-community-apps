@@ -6,15 +6,14 @@
 """Function implementation"""
 
 import logging
-import json
 import os
-import jinja2
+import tempfile
+import datetime
 from resilient_lib import RequestsCommon, validate_fields
 from resilient_lib.components.integration_errors import IntegrationError
 from requests.auth import HTTPBasicAuth
-from pkg_resources import Requirement, resource_filename
-from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg, PROOFPOINT_TAP_404_ERROR
-from resilient_circuits import ResilientComponent, function, handler, template_functions, StatusMessage, FunctionResult, FunctionError
+from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg, PROOFPOINT_TAP_404_ERROR, filter_reports, create_attachment
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -47,11 +46,13 @@ class FunctionComponent(ResilientComponent):
 
         try:
             # Get the function parameters:
+            incident_id = kwargs.get('incident_id')  # number
             campaign_id = kwargs.get('proofpoint_campaign_id')
             threat_id = kwargs.get('proofpoint_threat_id')
             aggregate_flag = kwargs.get('proofpoint_aggregate_flag')
             malicious_flag = kwargs.get('proofpoint_malicious_flag')
 
+            log.info('incident_id: {}'.format(incident_id))
             log.info('proofpoint_campaign_id: {}'.format(campaign_id))
             log.info('proofpoint_threat_id: {}'.format(threat_id))
             log.info('proofpoint_aggregate_flag: {}'.format(aggregate_flag))
@@ -60,6 +61,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting...")
 
             inputs = {
+                'incident_id': incident_id,
                 'campaign_id': campaign_id,
                 'threat_id': threat_id,
                 'aggregate_flag': aggregate_flag,
@@ -109,46 +111,49 @@ class FunctionComponent(ResilientComponent):
                 aggregate_forensics = forensics_response.json()
                 log.debug('Get Forensics Response content: {}'.format(aggregate_forensics))
 
-                malicious_reports = []
-                reports = aggregate_forensics.get('reports', [])
-                for report in reports:
+                with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_file:
+                    # "w+b" Binary mode is used so that it behaves consistently on all platforms without
+                    # regard for the data that is stored.
+                    try:
+                        # Write title in a temp file
+                        report_title = "Proofpoint TAP - Aggregate Forensics Report"
+                        temp_file.write(report_title.encode('utf-8'))
 
-                    malicious_evidence = []  # array of malicious Evidence rendered with jinja template
-                    for forensic in report.get('forensics', []):
+                        # Filter results
+                        filtered_reports = filter_reports(aggregate_forensics, malicious_flag, temp_file, self.options,
+                                                          self.default_path)
 
-                        if not forensic:
-                            # no object
-                            continue
-                        if malicious_flag is True and forensic.get('malicious') is False:
-                            # we're only interested in malicious ones
-                            continue
+                        # Close temp_file before creating an Attachment
+                        temp_file.close()
 
-                        log.debug('Malicious forensic evidence found {}'.format(json.dumps(forensic, indent=2)))
-                        try:
-                            # load the forensics jinja template
-                            self._open_template()
-                            # render it and add malicious forensics to malicious_evidence list
-                            malicious_evidence.append(template_functions.render(self.forensics_template, forensic))
-                        except jinja2.exceptions.TemplateSyntaxError:
-                            log.info('forensics template is not set correctly in config file')
+                        # Create an Attachment only if Reports were found
+                        if filtered_reports:
+                            num_reports = len(filtered_reports)
+                            yield StatusMessage('Found {} {} with forensics evidence'.format(num_reports, "report" if
+                                                num_reports == 1 else "reports"))
 
-                    if malicious_evidence:
-                        # add report_generated date to report Dict
-                        report['report_generated'] = aggregate_forensics.get('generated')
-                        # add malicious forensics
-                        report['malicious_forensic_report'] = malicious_evidence
+                            # Initialize Resilient API object
+                            res_client = self.rest_client()
 
-                        malicious_reports.append(report)
+                            # Create an Attachment
+                            file_name = "Aggregate Forensics Report - {}.txt".format(str(datetime.datetime.now()))
 
-                if malicious_reports:
-                    num_reports = len(malicious_reports)
-                    yield StatusMessage('Found {} {} with malicious forensics'.format(num_reports, "report" if
-                                        num_reports == 1 else "reports"))
-                else:
-                    yield StatusMessage('No report with malicious forensics found')
+                            new_attachment = create_attachment(res_client, file_name, temp_file, incident_id, 'text/plain')
+                            if new_attachment is not None:
+                                yield StatusMessage("Report with forensic evidence uploaded as an Attachment")
+                            else:
+                                raise FunctionError(
+                                    "Failed creating an Attachment with forensic evidence report")
+                        else:
+                            yield StatusMessage('No report with forensics evidence found')
 
-                results['success'] = True
-                results['reports'] = malicious_reports
+                        results['success'] = True
+                        results['reports'] = filtered_reports
+
+                    except ValueError as err:
+                        raise err
+                    finally:
+                        os.unlink(temp_file.name)
 
                 yield StatusMessage("Done...")
                 # Produce a FunctionResult with the results
@@ -171,23 +176,3 @@ class FunctionComponent(ResilientComponent):
 
         except Exception as err:
             yield FunctionError(err)
-
-    def _open_template(self):
-        """
-        Open jinja template file.
-        :return:
-        """
-        forensics_path = self.options.get("forensics_template", self.default_path)
-        if forensics_path and not os.path.exists(forensics_path):
-            log.warn(u"Template file '%s' not found.", forensics_path)
-            forensics_path = None
-        if not forensics_path:
-            # Use the template file installed by this package
-            forensics_path = resource_filename(Requirement("fn-proofpoint_tap"),
-                                               "fn_proofpoint_tap/data/templates/pp_threat_forensics.jinja")
-        if not os.path.exists(forensics_path):
-            raise Exception(u"Template file '{}' not found".format(forensics_path))
-
-        log.info(u"Template file: %s", forensics_path)
-        with open(forensics_path, "r") as forensics_file:
-            self.forensics_template = forensics_file.read()
