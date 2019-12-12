@@ -5,14 +5,20 @@
 
 from __future__ import print_function
 import pytest
-from resilient_circuits.util import get_config_data, get_function_definition
+from mock import patch
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+from .mock_artifacts import mocked_aws_iam_client, get_mock_config, get_func_responses
 
 PACKAGE_NAME = "fn_aws_iam"
 FUNCTION_NAME = "fn_aws_iam_list_user_tags"
 
-# Read the default configuration-data section from the package
-config_data = get_config_data(PACKAGE_NAME)
+# Read the mock configuration-data section from the package
+config_data = get_mock_config()
+
+def assert_keys_in(json_obj, *keys):
+    for key in keys:
+        assert key in json_obj
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
@@ -37,14 +43,20 @@ class TestFnAwsIamListUserTags:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @patch('fn_aws_iam.components.fn_aws_iam_list_user_tags.AwsIamClient', side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
-        ("text", {"value": "xyz"}),
-        ("text", {"value": "xyz"})
+        ("iam_test_User", get_func_responses("list_user_tags")),
+        ("iam_test_User_empty", get_func_responses("list_user_tags_empty"))
     ])
-    def test_success(self, circuits_app, aws_iam_user_name, expected_results):
+    def test_success(self, mock_post, circuits_app, aws_iam_user_name, expected_results):
         """ Test calling with sample values for the parameters """
-        function_params = { 
+
+        keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
+
+        function_params = {
             "aws_iam_user_name": aws_iam_user_name
         }
         results = call_fn_aws_iam_list_user_tags_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert_keys_in(results, *keys)
+        content = results["content"]
+        assert expected_results == content
