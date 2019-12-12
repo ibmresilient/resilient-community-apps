@@ -21,7 +21,7 @@
  ![screenshot: main](./doc/screenshots/greynoise_main.png)
 
 <!-- This description is taken from the in the "long_description" attribute setup.py file -->
-Perform IP Analysis using Greynoise to catagorize IP addresses and it's threat on you organization.
+Perform IP analysis using GreyNoise to categorize IP addresses and it's threat on your organization.
 
 ![screenshot: main](./doc/screenshots/greynoise_result.png)
 
