@@ -77,6 +77,8 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_message_body: %s", message_body)
             LOG.info(u"exo_order_by_recency: %s", message_body)
 
+            response = self.MS_graph_helper.get_users()
+
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
                                                          has_attachments, message_subject, message_body, order_by_recency)

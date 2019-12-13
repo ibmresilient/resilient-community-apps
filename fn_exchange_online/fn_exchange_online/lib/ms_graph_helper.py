@@ -44,6 +44,20 @@ class MSGraphHelper(object):
 
         return response
 
+    def get_users(self):
+        """
+        Query MS Graph for all users endpoint using .
+        :return: requests response from the /users/ endpoint
+        """
+        ms_graph_users_url = u'{0}users?$count=true'.format(self.__ms_graph_url)
+        response = self.__ms_graph_session.get(ms_graph_users_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+
+        return response
+
     def append_query_to_query_url(self, filter_query, new_query):
         """
         :param filter_query: query filter string
@@ -67,7 +81,8 @@ class MSGraphHelper(object):
         """
         filter_query = u"?$filter="
         filter_start_length = len(filter_query)
-
+        search_query = u"?$search="
+        search_start_length = len(search_query)
         order_query = u"?$orderby="
         order_start_length = len(order_query)
         if order_by_recency is not None:
@@ -107,14 +122,14 @@ class MSGraphHelper(object):
 
         # body does not work yet.
         if message_body:
-            body_query = u"(contains(body,'{0}')".format(message_body)
-            filter_query = self.append_query_to_query_url(filter_query, body_query)
+            body_query = u"{0}".format(message_body)
+            search_query = self.append_query_to_query_url(search_query, message_body)
 
-        if len(filter_query) > filter_start_length:
+        if len(filter_query) > filter_start_length or len(search_query) > search_start_length:
             # Assemble the MS Graph API query string.
-            if len(order_query) > order_start_length:
+            if len(search_query) > search_start_length:
                 ms_graph_query_messages_url = u'{0}users/{1}/messages{2}&{3}'.format(self.__ms_graph_url, email_address,
-                                                                                     order_query, filter_query)
+                                                                                     search_query, filter_query)
             else:
                 ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
                                                                                  filter_query)
