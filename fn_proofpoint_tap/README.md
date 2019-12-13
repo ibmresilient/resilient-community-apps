@@ -33,7 +33,7 @@
 * Created two new custom Artifact Types for Threat ID and Campaign ID and filtered Rules based on the Artifact type.
 * If Threat ID or Campaign ID don't exist in Proofpoint Tap system, instead of ending the Workflow with an Error, a Note is created with a message explaining the user Threat ID or Campaign ID cannot be found.
 * When Get Campaign Workflow is completed a Note is created with the name of the Workflow and some basic information about the Campaign. Detailed Campaign information is saved in Proofpoint TAP Campaign Object Details Data Table. Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
-* Get Forensics function has an additional input paramater incident_field which is used for creating an Attachments of Forensics Report.
+* Get Forensics function has an additional input parameter incident_id which is used for creating Forensics Report Attachment.
 * Results of all three Workflows for Get Forensics function are saved in a Note and an Attachment.
 * Aggregate Forensics for entire campaign now returns malicious results only.
 
@@ -171,6 +171,12 @@ There are several ways to verify the successful operation of a function.
 * Each function will create progress information.
 * Failures will show up as errors and may contain python trace statements.
 
+### Timeout error
+* If you receive a timeout error from the Proofpoint TAP endpoint while making a request, you can increase the default timeout value in the app.config file by adding this section:
+```
+[integrations]
+timeout=60
+```
 ---
 
 <!--

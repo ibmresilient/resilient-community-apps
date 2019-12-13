@@ -48,7 +48,7 @@ Threaded Poller which runs continuously while the integration is running.
 ---
 
 ## Function - Proofpoint TAP Get Forensics
-Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment. The results are saved in a Note.
+Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.
 
  ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/get_forensics.png)
 
@@ -73,21 +73,30 @@ There are three Workflows for this function:
 
 * Example: Proofpoint TAP - Aggregate Forensics for Threat 
 
-Workflow imports additional forensic information based on the given threat identifier. Aggregate forensics for the given threat identifier are returned and additionally filtered to include malicious results only.
+Workflow imports additional forensic information based on the given threat identifier. Aggregate forensics for the given threat identifier are returned and additionally filtered to include malicious results only. Results are saved in a Note and an Attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Threat.png)
 
 *  Example: Proofpoint TAP - Aggregate Forensics by Campaign ID 
 
-Workflow returns aggregate forensics for an entire campaign based on the given campaign identifier.
+Workflow returns aggregate forensics for an entire campaign based on the given campaign identifier. Results are saved in a Note and an Attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Forensics_CampaignID.png)
 
 * Example: Proofpoint TAP - Aggregate Forensics for Campaign 
 
-Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned. Forensics returned is additionally filtered to include malicious results only.
+Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned. Forensics returned is additionally filtered to include malicious results only. Results are saved in a Note and an Attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Campaign.png)
+
+The results of all three Workflows are saved in a Note and an Attachment.
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/forensics_note.png)
+
+Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/forensics_attachment.png)
+
+![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/sample_attachment.png)
+
 
 </p>
 </details>
@@ -229,7 +238,7 @@ def add_row_to_campaign_object_dt(object_type, object_id, object_name=None, thre
 ########################
 
 # results and results.data are both a Dictionary
-if results:
+if results is not None:
   noteText = "<b>Proofpoint TAP - Get Campaign Information by Campaign ID:</b>"
   
   if results.get("success") is True and results.get("data", None) is not None:
@@ -238,8 +247,12 @@ if results:
     campaign_description = data.get("description", None)
     campaign_start_date = data.get("startDate", None)
     
-    noteText = u"""{}<br>A Campaign with Campaign ID '{}', Name '{}' and Description '{}' was found. Campaign's first threat variants were first observed on '{}'.
-    <br>Campaign objects were saved in the Proofpoint TAP Campaign Object Details Data Table.""".format(noteText, artifact.value, campaign_name, campaign_description, campaign_start_date)
+    noteText = u"""{}<br>Campaign was found:
+    <br>- Campaign ID '{}'
+    <br>- Name '{}'
+    <br>- Description '{}'
+    <br>- Campaign's first threat variants were first observed on '{}'
+    <br>Campaign objects are saved in the Proofpoint TAP Campaign Object Details Data Table.""".format(noteText, artifact.value, campaign_name, campaign_description, campaign_start_date)
     
     campaign_members_list = data.get("campaignMembers", None)
     map(lambda member: add_row_to_campaign_object_dt("CampaignMembers", member.get("id"), threat=member.get("threat"), \
@@ -257,10 +270,12 @@ if results:
     techniques_list = data.get("techniques", [])
     map(lambda technique: add_row_to_campaign_object_dt("Technique", technique.get("id"), object_name=technique.get("name")), techniques_list)
 
-  elif results.get("success") is False and results.get("note_text", None) is not None:
-    noteText = "{} <br>{} - No Campaign information found for campaign ID {}".format(noteText, str(results.get("note_text")), artifact.value)
+  elif results.get("success") is False and results.get("note_err_text", None) is not None:
+    noteText = u"""{} 
+    <br>No Campaign information found for campaign ID '{}'. 
+    <br>Error: {}.""".format(noteText, artifact.value, results.get("note_err_text"))
   else:
-    noteText = "{} <br>No Campaign information found for campaign ID.".format(noteText, artifact.value)
+    noteText = u"""{} <br>No Campaign information found for campaign ID '{}'.""".format(noteText, artifact.value)
   
   incident.addNote(helper.createRichText(noteText))
 ```
@@ -286,13 +301,13 @@ if results:
 | Example: Proofpoint TAP - Get Campaign Information by Campaign ID | Artifact | `get_campaign_flow Workflow` |
 | Example: Proofpoint TAP - Aggregate Forensics by Campaign ID | Artifact | `get_forensics_by_campaign_id Workflow` |
 | Example: Proofpoint TAP - Aggregate Malicious Forensics for Entire Campaign Associated with Threat ID | Artifact | `get_aggregate_forensics_by_threat_id Workflow` |
-| Example: Create Artifact for Campaign Object Name or Threat | Data Table | `Example: Create Artifact for Campaign Object Name or Threat Script` |
+| Example: Proofpoint TAP - Create Artifact for Campaign Object Name or Threat | Data Table | `Example: Proofpoint TAP - Create Artifact for Campaign Object Name or Threat` |
 
 ---
 
 ## Scripts
 
-<details><summary>Example: Create Artifact for Campaign Object Name or Threat</summary>
+<details><summary>Example: Proofpoint TAP - Create Artifact for Campaign Object Name or Threat</summary>
 <p>
 
 ```python
