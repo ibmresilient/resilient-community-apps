@@ -110,6 +110,7 @@ class AbuseIPDBThreatFeedSearcher(ResilientComponent):
             number_of_reports = resp_data['totalReports']
             country = resp_data['countryName']
             most_recent_report = resp_data['lastReportedAt']
+            confidence_score = resp_data.get("abuseConfidenceScore", 0)
 
             # get clean list of de-duped categories
             categories_names = ""
@@ -120,16 +121,18 @@ class AbuseIPDBThreatFeedSearcher(ResilientComponent):
                 categories_set = set(categories_list)  # dedup list
                 categories_names = u', '.join((self.abuseipdb_categories.get(item, 'unknown') for item in categories_set))
 
-            # Return zero or more hits.  Here's one example.
-            hits.append(
-                Hit(
-                    NumberProp(name="Confidence Score", value=resp_data.get("abuseConfidenceScore", 0)),
-                    NumberProp(name="Number of Reports", value=number_of_reports),
-                    StringProp(name="Country", value=country),
-                    StringProp(name="Most Recent Report", value=most_recent_report),
-                    StringProp(name="Categories", value=categories_names)
-                    )
-            )
+            # only return data if there's anything useful
+            if number_of_reports or confidence_score:
+                # Return zero or more hits.  Here's one example.
+                hits.append(
+                    Hit(
+                        NumberProp(name="Confidence Score", value=confidence_score),
+                        NumberProp(name="Number of Reports", value=number_of_reports),
+                        StringProp(name="Country", value=country),
+                        StringProp(name="Most Recent Report", value=most_recent_report),
+                        StringProp(name="Categories", value=categories_names)
+                        )
+                )
 
         except Exception as err:
             LOG.exception(str(err))
