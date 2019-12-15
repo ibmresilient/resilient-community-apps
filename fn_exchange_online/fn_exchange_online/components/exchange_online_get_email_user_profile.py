@@ -21,7 +21,8 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id", "client_secret"]
+        required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id",
+                           "client_secret", "max_emails_retrieved_in_query"]
         validate_fields(required_fields, self.options)
 
         # Get the MS Graph helper class
