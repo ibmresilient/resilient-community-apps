@@ -30,6 +30,7 @@ class FunctionComponent(ResilientComponent):
                                              self.options.get("tenant_id"),
                                              self.options.get("client_id"),
                                              self.options.get("client_secret"),
+                                             self.options.get("max_emails_retrieved_in_query"),
                                              RequestsCommon(self.opts, self.options).get_proxies())
 
     def __init__(self, opts):
