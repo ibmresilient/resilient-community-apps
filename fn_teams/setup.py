@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_teams',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT License',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -27,7 +27,7 @@ setup(
     description="Resilient Circuits Components for 'fn_teams'",
     long_description="Resilient Circuits Components for 'fn_teams'. Included are example workflows and rules for pushing incident and task information to a Teams channel",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
         'resilient_lib',
         'pymsteams'
     ],
