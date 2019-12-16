@@ -66,6 +66,7 @@ fn_isitPhishing
 fn_jira
 fn_joe_sandbox_analysis
 fn_ldap_utilities
+fn_log_capture
 fn_machine_learning
 fn_mcafee_atd
 fn_mcafee_epo
@@ -90,6 +91,7 @@ fn_query_tor_network
 fn_res_to_icd
 fn_risk_fabric
 fn_rsa_netwitness
+fn_scheduler
 fn_sep
 fn_service_now
 fn_slack
@@ -107,6 +109,7 @@ fn_virustotal
 fn_vmray_analyzer
 fn_watson_translate
 fn_whois
+fn_whois_rdap
 fn_xforce
 older
 rc-cts-abuseipdb
