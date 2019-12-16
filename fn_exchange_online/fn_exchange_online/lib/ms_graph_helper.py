@@ -59,6 +59,19 @@ class MSGraphHelper(object):
 
         return response
 
+    def query_emails_all_users(self, sender, start_date, end_date, has_attachments, message_subject, message_body):
+
+        response = self.get_users()
+        response_user_json = response.json()
+        user_list = response_user_json['value']
+        results = []
+        for user in user_list:
+            email_address = user['userPrincipalName']
+            user_query = self.query_emails(email_address, sender, start_date, end_date, has_attachments,
+                                           message_subject, message_body)
+            results.append(user_query)
+        return results
+
     def append_query_to_query_url(self, filter_query, new_query):
         """
         :param filter_query: query filter string
@@ -121,7 +134,7 @@ class MSGraphHelper(object):
             filter_query = self.append_query_to_query_url(filter_query, has_attachments_query)
 
         if message_subject:
-            subject_query = u'(contains(subject,"{0}"))'.format(message_subject)
+            subject_query = u"(contains(subject,'{0}'))".format(message_subject)
             filter_query = self.append_query_to_query_url(filter_query, subject_query)
 
         # If nothing was added, then return the empty string.
@@ -130,7 +143,7 @@ class MSGraphHelper(object):
 
         return filter_query
 
-    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body, order_by_recency):
+    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         Query MS Graph user profile endpoint using the MS graph session.
         :param email_address: email address of the user whose mailbox is being searched.
@@ -163,6 +176,9 @@ class MSGraphHelper(object):
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
             raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
-
-        return response
+        response_json = response.json()
+        results = {'email_address': email_address,
+                   'email_list': response_json['value']
+                   }
+        return results
 

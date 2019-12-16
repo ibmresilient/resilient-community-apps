@@ -58,7 +58,6 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_has_attachments'], kwargs)
             validate_fields(['exo_message_subject'], kwargs)
             validate_fields(['exo_message_body'], kwargs)
-            validate_fields(['exo_order_by_recency'], kwargs)
 
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
@@ -68,7 +67,6 @@ class FunctionComponent(ResilientComponent):
             has_attachments  = kwargs.get('exo_has_attachments')  # bool
             message_subject  = kwargs.get('exo_message_subject')  # text
             message_body     = kwargs.get('exo_message_body')  # text
-            order_by_recency = kwargs.get('exo_order_by_recency')  # bool
 
             LOG.info(u"exo_email_address: %s", email_address)
             LOG.info(u"exo_email_address_sender: %s", email_address_sender)
@@ -77,22 +75,19 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_email_has_attachments: %s", has_attachments)
             LOG.info(u"exo_message_subject: %s", message_subject)
             LOG.info(u"exo_message_body: %s", message_body)
-            LOG.info(u"exo_order_by_recency: %s", message_body)
 
-            response = self.MS_graph_helper.get_users()
+            if (email_address == "ALL USERS"):
+                email_results = self.MS_graph_helper.query_emails_all_users(email_address_sender, start_date, end_date,
+                                                                       has_attachments, message_subject, message_body)
+            else:
+                # Call MS Graph API to get the user profile
+                email_results = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
+                                                         has_attachments, message_subject, message_body)
 
-            # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
-                                                         has_attachments, message_subject, message_body, order_by_recency)
+            #response_json = response.json()
+            results = rp.done(True, email_results)
 
-            response_json = response.json()
-            results = rp.done(True, response_json)
-
-            # Add pretty printed string for easier to read output text in note.
-            pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
-            results['pretty_string'] = pretty_string
-
-            yield StatusMessage(u"Returning results for email address: {}".format(email_address, email_address_sender))
+            yield StatusMessage(u"Returning results for email address: {}".format(email_address))
 
             LOG.debug(json.dumps(results['content']))
 
