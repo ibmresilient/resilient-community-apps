@@ -88,6 +88,12 @@ class FileManage():
         return ret
 
     def get_summary_saved_vec(self):
+        """
+        Return a brief summary of a vec file. A vec file is the cache of
+        all vectors of incidents. So here we output the dimension of each
+        vector, and the number of vectors (incidents).
+        :return:
+        """
         ret = []
         try:
             mtime = self._get_mtime()
@@ -111,6 +117,11 @@ class FileManage():
         return ret
 
     def get_summary_sif(self):
+        """
+        A SIF (Smooth Inverse Frequency) file contains the word counts. As a brief
+        summary, return the total count of words
+        :return:
+        """
         ret = []
         try:
             mtime = self._get_mtime()

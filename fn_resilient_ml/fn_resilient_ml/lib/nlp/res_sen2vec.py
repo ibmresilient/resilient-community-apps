@@ -49,7 +49,9 @@ class ResSen2Vec:
         # This is the accumulator. Initialize to zero vector first
         v = np.zeros(self.feature_size, dtype="float64")
 
-        count = 0
+        # given words of a sentence, now we are ready to compute the
+        # vector for this sentence.
+        count = 0               # count of how many words contributing to this sentence
         for word in words:
             if word in self.setofwords:
                 # We only care about words in nltk words set
@@ -58,8 +60,8 @@ class ResSen2Vec:
                     # some words have unreasonably low count and adjust it a little bit
                     if word_count < self.COUNT_THRESHOLD:
                         word_count = self.COUNT_THRESHOLD - (self.COUNT_THRESHOLD - word_count)/2
-
                     try:
+                        # This is the SIF method
                         a_value = self.SIF_A / (self.SIF_A + word_count)
                         vec = np.multiply(a_value, self.word2vec[word])
                         # accumulate it
@@ -194,6 +196,12 @@ class ResSen2Vec:
         return self.sentence_vectors.get(inc_id, v)
 
     def get_closest(self, sentence, num):
+        """
+        Given a sentence (such as the description of a new incident), find _num_ of closest (old) incidents
+        :param sentence:
+        :param num:
+        :return:
+        """
         v1 = self.get_vec_for_sentence(sentence)
         v1_norm = np.linalg.norm(v1)
         closest = []

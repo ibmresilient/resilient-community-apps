@@ -56,10 +56,3 @@ print("\n")
 
 for inc in closest:
     print("\t{}\t\t{}".format(inc["ref"], inc["sim"]))
-
-
-
-
-
-
-
