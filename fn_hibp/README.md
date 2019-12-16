@@ -1,7 +1,6 @@
 # Resilient Integration with Have I Been Pwned
 **This package contains two functions that allows you to search for breaches and pastes given an email address as an input.**
 
- ![screenshot](./screenshots/HIBP_workflow_1.png)
 
 ## app.config settings:
 Set if using a proxy
@@ -10,8 +9,15 @@ Set if using a proxy
     ## Proxy settings if needed
     #hibp_proxy_http=
     #hibp_proxy_https=
+    hibp_api_key=< Have I Been Pwned API Key>
+
+As of recent July 2019 changes, HIBP released v3 of the API (deprecating v2) and now requires a for-fee API Key (see https://haveibeenpwned.com/API/Key). 
+If upgrading from version 1.0.0,  **manually** add the **hibp_api_key** setting to your app.config file.
+
+Version 2.0.0 of Have I Been Pwned includes a modification to the returned payload. These changes include the incorporation of resilient-lib and results from the post processing script modified from *results.Breaches* to *results.content["Breaches"]*.
 
 ## Function Inputs:
+
 | Function Name | Type | Required | Example |
 | ------------- | :--: | :-------:| ------- |
 | `email_address` | `String` | Yes | `"test@resilientsystems.com"` |

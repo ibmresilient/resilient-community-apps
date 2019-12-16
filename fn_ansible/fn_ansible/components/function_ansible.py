@@ -58,12 +58,7 @@ class FunctionComponent(ResilientComponent):
             result = ResultPayload(SECTION_HDR, **kwargs)
 
             # Prepare playbook vars
-            extra_vars = {}
-            if ansible_parameters:
-                for item in ansible_parameters.split(u";"):
-                    if len(item.strip(u' ')) > 0:
-                        k, v = item.split(u"=")
-                        extra_vars[k.strip(u' ')] = v.strip(u' ')
+            extra_vars = convert_parameters(ansible_parameters)
 
             # prepare playbook arg
             playbook_extension = ansible_playbook.split(u".")[-1]
@@ -103,6 +98,9 @@ class FunctionComponent(ResilientComponent):
             log.info(u"playbook_name: %s", ansible_module.strip(u' '))
             log.info(u"ansible_parameters: %s", ansible_parameters)
 
+            # module args use the format name=value name=value
+            module_args = ansible_parameters.replace(u';', u' ')
+
             workflow_id = event.message['workflow_instance']['workflow_instance_id']
 
             result = ResultPayload(SECTION_HDR, **kwargs)
@@ -112,7 +110,7 @@ class FunctionComponent(ResilientComponent):
                 private_data_dir=self.runner_dir,
                 artifact_dir=self.artifact_dir,
                 module_name=ansible_module.strip(u' '),
-                module_args=ansible_parameters,
+                module_args=module_args,
                 module_hosts=ansible_hosts
             )
 
@@ -126,3 +124,19 @@ class FunctionComponent(ResilientComponent):
             log.info("Running cleanup_artifact_dir for {} previous runs".format(self.artifact_rentention_num))
             cleanup_artifact_dir(self.artifact_dir if self.artifact_dir else self.runner_dir,
                                  self.artifact_rentention_num)
+
+def convert_parameters(ansible_parameters):
+    """
+    convert name=value;name=value syntax to a dictionary
+    :param ansible_parameters:
+    :return: dictionary
+    """
+    params_dict = {}
+
+    if ansible_parameters:
+        for item in ansible_parameters.split(u";"):
+            if len(item.strip(u' ')) > 0:
+                k, v = item.split(u"=")
+                params_dict[k.strip(u' ')] = v.strip(u' ')
+
+    return params_dict

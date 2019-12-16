@@ -1,5 +1,5 @@
 # Resilient example email message parsing script
-This package consists of the `RuleAndScript.res` and `ScriptAlone.res` Resilient configuration files which respectively contain an example email parsing script and a rule to run it automatically, and the script without the rule.
+This package consists of the **RuleAndScript.res** and **ScriptAlone.res** Resilient configuration files. The first file contains an example email parsing script and a rule to run it automatically. The **ScriptAlone.res** file contains the script without the rule. 
 
 ## Installation instructions
 
@@ -9,17 +9,19 @@ Before installing, verify that your environment meets the following prerequisite
 
 ### Procedure
 
+**Important:** Repeatedly importing the **.res** files will overwrite any changes you have made to the script and rule.
+
 1. Log on to the Resilient platform using a suitable account.
-2. Navigate to **Administrator Settings**.
-3. Select the **Organization** tab.
-4. Select the **Import** link.
-5. Select the **+ Import settings** button.
-6. If you are upgrading from a previous version of this package select the **ScriptAlone.res** file from the installation bundle. Otherwise, choose the **RuleAndScript.res** file.
-7. Select **Open**.
-8. Select **Proceed**.
+1. Navigate to **Administrator Settings**.
+1. Select the **Organization** tab.
+1. Select the **Import** link.
+1. Select the **+ Import settings** button.
+1. If you are upgrading from a previous version of this package, select the **ScriptAlone.res** file from the installation bundle. Otherwise, choose the **RuleAndScript.res** file.
+1. Select **Open**.
+1. Select **Proceed**.
 
 ### Result
-After installing from **RuleAndScript.res**, the Resilient platform will have a new Python script called "Generic email script v2.0" and a new rule called "Process email message v2.0". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
+After installing from **RuleAndScript.res**, the Resilient platform will have a new Python script called "Generic email script v2.0.1" and a new rule called "Process email message v2.0.1". The rule runs the script when it is triggered by a new email message being received by the Resilient platform. If instead you imported **ScriptAlone.res** then you will only have the new script and not the rule.
 
 The script is intended to perform generic email parsing on newly created email message objects. It performs the following:
 * Checks if an existing incident exists whose title reflects the email message received.

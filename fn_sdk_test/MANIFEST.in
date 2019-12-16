@@ -1,0 +1,4 @@
+include README.md
+include fn_sdk_test/util/*
+include fn_sdk_test/LICENSE
+include doc/*

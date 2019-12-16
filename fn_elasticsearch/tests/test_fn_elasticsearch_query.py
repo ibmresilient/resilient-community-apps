@@ -2,7 +2,6 @@
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Tests using pytest_resilient_circuits"""
-
 from __future__ import print_function
 import pytest
 from resilient_circuits.util import get_config_data, get_function_definition

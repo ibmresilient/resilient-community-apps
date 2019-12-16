@@ -6,6 +6,7 @@ import logging
 import requests
 import time
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload
 
 
 class FunctionComponent(ResilientComponent):
@@ -41,54 +42,52 @@ class FunctionComponent(ResilientComponent):
     @function("have_i_been_pwned_get_pastes")
     def _have_i_been_pwned_get_pastes_function(self, event, *args, **kwargs):
         """Function: Get all pastes of an email account from Have I Been Pwned."""
-        retry = True
-        while retry:
-            try:
-                yield StatusMessage("starting...")
-                start = time.time()
+        try:
+            yield StatusMessage("starting...")
 
-                HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v2/pasteaccount/"
+            HAVE_I_BEEN_PWNED_PASTES_URL = "https://haveibeenpwned.com/api/v3/pasteaccount/"
+            result_payload = ResultPayload("hibp", **kwargs)
 
-                # Get the function parameters:
-                email_address = kwargs.get("email_address")  # text
+            # Get the function parameters:
+            email_address = kwargs.get("email_address")  # text
 
-                log = logging.getLogger(__name__)
-                if email_address is not None:
-                    log.info("email_address: %s", email_address)
-                else:
-                    raise ValueError("email_address is required to run this function")
+            log = logging.getLogger(__name__)
+            if email_address is not None:
+                log.info("email_address: %s", email_address)
+            else:
+                raise ValueError("email_address is required to run this function")
 
-                breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
-                pastes_response = requests.get(breach_url, headers={'User-Agent': 'Resilient HIBP'},
-                                               proxies=self.PROXIES)
+            hibp_api_key = self.get_config_option("hibp_api_key")
 
+            headers={
+                        'User-Agent': 'Resilient HIBP/2.0',
+                        'hibp-api-key': hibp_api_key
+                    }
+
+            breach_url = "{0}{1}".format(HAVE_I_BEEN_PWNED_PASTES_URL, email_address)
+            pastes_response = requests.get(breach_url, headers=headers,proxies=self.PROXIES)
+
+            pastes = None
+            # Good response
+            if pastes_response.status_code == 200:
+                pastes = pastes_response.json()
+            # 404 is returned when an email was not found
+            elif pastes_response.status_code == 404:
+                yield StatusMessage("No pastes found on email address: {}".format(email_address))
                 pastes = None
-                # Good response
-                if pastes_response.status_code == 200:
-                    pastes = pastes_response.json()
-                    retry = False
-                # 404 is returned when an email was not found
-                elif pastes_response.status_code == 404:
-                    yield StatusMessage("No pastes found on email address: {}".format(email_address))
-                    pastes = None
-                    retry = False
-                # Rate limit was hit, wait 2 seconds and try again
-                elif pastes_response.status_code == 429:
-                    time.sleep(2)
-                else:
-                    log.warn("Have I Been Pwned returned unexpected status code")
-                    retry = False
-                    yield FunctionError("Have I Been Pwned returned unexpected status code")
+            # Rate limit was hit, wait 2 seconds and try again
+            elif pastes_response.status_code == 429:
+                time.sleep(2)
+            else:
+                log.warn("Have I Been Pwned returned " + str(pastes_response.status_code) + " unexpected status code")
+                yield FunctionError("Have I Been Pwned returned " + str(pastes_response.status_code) + " status code")
 
-                end = time.time()
-                results = {
-                    "Run Time": str(end - start),
-                    "Inputs": kwargs,
-                    "Pastes": pastes
-                }
+            results = {
+                "Pastes": pastes
+            }
 
-                yield StatusMessage("done...")
-                # Produce a FunctionResult with the results
-                yield FunctionResult(results)
-            except Exception as e:
-                yield FunctionError(e)
+            yield StatusMessage("Lookup complete")
+            # Produce a FunctionResult with the results
+            yield FunctionResult(result_payload.done(True, results))
+        except Exception as e:
+            yield FunctionError(e)

@@ -5,7 +5,11 @@
 
 import logging
 import requests
-from urlparse import urljoin
+import sys
+if sys.version_info.major < 3:
+    from urlparse import urljoin
+else:
+    from urllib.parse import urljoin
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
 LOG = logging.getLogger(__name__)

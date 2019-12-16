@@ -513,7 +513,7 @@ class EmailProcessor(object):
     newReporterInfo = emailmessage.from.address
     if emailmessage.from.name is not None:
       newReporterInfo = u"{0} <{1}>".format(emailmessage.from.name, emailmessage.from.address)
-      log.info("Adding reporter field \"{0}\"".format(newReporterInfo))
+      log.info(u"Adding reporter field \"{0}\"".format(newReporterInfo))
       incident.reporter = newReporterInfo
 
       if emailmessage.subject is not None:
@@ -549,7 +549,7 @@ if len(incidents) == 0:
 
 else:
   # A similar incident already exists. Associate the email with this preexisting incident.
-  log.info("Associating with existing incident {0}".format(incidents[0].id))
+  log.info(u"Associating with existing incident {0}".format(incidents[0].id))
   emailmessage.associateWithIncident(incidents[0])
 
 # Capture any URLs present in the email body text and add them as artifacts

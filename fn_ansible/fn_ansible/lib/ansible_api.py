@@ -58,12 +58,17 @@ def run_playbook(
                                    )
 
         for host in r.events:
+            log.debug(host)
             if sys.version_info[0] >= 3:
                 detail = bytes(host.get('stdout', ''), 'utf-8').decode('unicode_escape')
             else:
                 detail = host.get('stdout', '').decode('string_escape')
 
             if host.get('event', '').startswith('runner_on'):
+                # look for json results
+                if host['event_data'].get("res"):
+                    detail = host['event_data'].get("res")
+
                 result[host['event_data']['host']] = \
                     { 'summary': r.status,
                        'detail': detail
