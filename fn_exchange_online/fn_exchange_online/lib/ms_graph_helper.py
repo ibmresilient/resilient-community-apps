@@ -34,7 +34,7 @@ class MSGraphHelper(object):
         """
         Query MS Graph user profile endpoint using the MS graph session.
         :param email_address: email address of the user profile requested
-        :return: requests response from the users/profile endpoint
+        :return: requests response from the /users/profile endpoint
         """
         ms_graph_user_profile_url = u'{0}users/{1}'.format(self.__ms_graph_url, email_address)
         response = self.__ms_graph_session.get(ms_graph_user_profile_url)
@@ -47,8 +47,8 @@ class MSGraphHelper(object):
 
     def get_users(self):
         """
-        Query MS Graph for all users endpoint using .
-        :return: requests response from the /users/ endpoint
+        Query MS Graph for all users endpoint.
+        :return: requests response from the /users/ endpoint which is the list of all users.
         """
         ms_graph_users_url = u'{0}users?$count=true'.format(self.__ms_graph_url)
         response = self.__ms_graph_session.get(ms_graph_users_url)
@@ -60,17 +60,127 @@ class MSGraphHelper(object):
         return response
 
     def query_emails_all_users(self, sender, start_date, end_date, has_attachments, message_subject, message_body):
-
+        """
+        This function iterates over all users and returns a list of emails that match the search criteria.
+        :param sender: email address of sender to search for
+        :param start_date: date/time string of email received dated to start search
+        :param end_date: date/time string of email received dated to end search
+        :param has_attachments: boolean flag indicating to search for emails with or without attachments
+        :param message_subject: search for emails containing this string in the "subject" of email
+        :param message_body: search for emails containing this string in the "body" of email
+        :return: list of emails in all user email account that match the search criteria.
+        """
+        # Get the users
         response = self.get_users()
-        response_user_json = response.json()
-        user_list = response_user_json['value']
+        user_list = response.json()['value']
         results = []
+
+        # Iterate through all users
         for user in user_list:
             email_address = user['userPrincipalName']
-            user_query = self.query_emails(email_address, sender, start_date, end_date, has_attachments,
+            email_query = self.query_emails(email_address, sender, start_date, end_date, has_attachments,
+                                           message_subject, message_body)
+            results.append(email_query)
+        return results
+
+    def query_emails_by_list(self, email_address_string, sender, start_date, end_date, has_attachments, message_subject, message_body):
+        """
+        query_emails_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
+        :param email_address_string: a comma separated string that that is converted to a list of email addresses to query.
+        :param sender: email address of sender to search for
+        :param start_date: date/time string of email received dated to start search
+        :param end_date: date/time string of email received dated to end search
+        :param has_attachments: boolean flag indicating to search for emails with or without attachments
+        :param message_subject: search for emails containing this string in the "subject" of email
+        :param message_body: search for emails containing this string in the "body" of email
+        :return: list of emails in all user email account that match the search criteria.
+        """
+        results = []
+        for email_address in email_address_string.split(','):
+            user_query = self.query_emails_by_address(email_address.strip(), sender, start_date, end_date, has_attachments,
                                            message_subject, message_body)
             results.append(user_query)
         return results
+
+    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body):
+        """
+        query_emails is the top level routine for querying emails.
+        :param email_address: A string indicating which emails to query.  email_address will be either:
+                a single email address
+                a comma separated string of email addresses
+                a string "ALL USERS" indicating that all user emails should be queried.
+        :param sender: email address of sender to search for
+        :param start_date: date/time string of email received dated to start search
+        :param end_date: date/time string of email received dated to end search
+        :param has_attachments: boolean flag indicating to search for emails with or without attachments
+        :param message_subject: search for emails containing this string in the "subject" of email
+        :param message_body: search for emails containing this string in the "body" of email
+        :return: list of emails in all user email account that match the search criteria.
+        """
+
+        if (',' in email_address):
+            query_results = self.query_emails_by_list(email_address, sender, start_date, end_date, has_attachments,
+                                                      message_subject, message_body)
+        elif (email_address == "ALL USERS"):
+            query_results = self.query_emails_all_users(sender, start_date, end_date, has_attachments, message_subject,
+                                                        message_body)
+        else:
+            query_results = self.query_emails_by_address(email_address, sender, start_date, end_date, has_attachments,
+                                                         message_subject, message_body)
+        return query_results
+
+    def query_emails_by_address(self, email_address, sender, start_date, end_date, has_attachments, message_subject,
+                                message_body):
+        """
+         query_emails_by_address returns the
+         :param email_address: a single email address to be queried.
+         :param sender: email address of sender to search for
+         :param start_date: date/time string of email received dated to start search
+         :param end_date: date/time string of email received dated to end search
+         :param has_attachments: boolean flag indicating to search for emails with or without attachments
+         :param message_subject: search for emails containing this string in the "subject" of email
+         :param message_body: search for emails containing this string in the "body" of email
+         :return: list of emails in all user email account that match the search criteria.
+         """
+        # Create $search string query for search on message body string.
+        search_query = self.build_search_query(message_body)
+
+        # Create $filter query string for query on messages.
+        filter_query = self.build_filter_query(start_date, end_date, sender, message_subject, has_attachments)
+
+        # Assemble the MS Graph API query string.
+        if len(search_query) > 0:
+            if len(filter_query) > 0:
+                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}&{3}'.format(self.__ms_graph_url, email_address,
+                                                                                     search_query, filter_query)
+            else:
+                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
+                                                                                 search_query)
+        elif len(filter_query) > 0:
+                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
+                                                                                     filter_query)
+        else:
+            raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
+
+        LOG.info(u'Exchange Online query string {0}', ms_graph_query_messages_url)
+        response = self.__ms_graph_session.get(ms_graph_query_messages_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
+
+        # Return empty list if the email is not found.
+        if response.status_code == 404:
+            email_list = []
+        else:
+            email_list = response.json()['value']
+
+        results = {'email_address': email_address,
+                   'status_code': response.status_code,
+                   'email_list': email_list
+                   }
+        return results
+
 
     def append_query_to_query_url(self, filter_query, new_query):
         """
@@ -143,42 +253,5 @@ class MSGraphHelper(object):
 
         return filter_query
 
-    def query_emails(self, email_address, sender, start_date, end_date, has_attachments, message_subject, message_body):
-        """
-        Query MS Graph user profile endpoint using the MS graph session.
-        :param email_address: email address of the user whose mailbox is being searched.
-        :return: requests response from the email query
-        """
 
-        # Create $search string query for search on message body string.
-        search_query = self.build_search_query(message_body)
-
-        # Create $filter query string for query on messages.
-        filter_query = self.build_filter_query(start_date, end_date, sender, message_subject, has_attachments)
-
-        # Assemble the MS Graph API query string.
-        if len(search_query) > 0:
-            if len(filter_query) > 0:
-                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}&{3}'.format(self.__ms_graph_url, email_address,
-                                                                                     search_query, filter_query)
-            else:
-                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
-                                                                                 search_query)
-        elif len(filter_query) > 0:
-                ms_graph_query_messages_url = u'{0}users/{1}/messages{2}'.format(self.__ms_graph_url, email_address,
-                                                                                     filter_query)
-        else:
-            raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
-
-        LOG.info(u'Exchange Online query string {0}', ms_graph_query_messages_url)
-        response = self.__ms_graph_session.get(ms_graph_query_messages_url)
-
-        # User not found (404) is a valid "error" so don't return error for that.
-        if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
-        response_json = response.json()
-        results = {'email_address': email_address,
-                   'email_list': response_json['value']
-                   }
-        return results
 

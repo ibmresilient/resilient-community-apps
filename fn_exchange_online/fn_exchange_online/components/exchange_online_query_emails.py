@@ -76,23 +76,21 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_message_subject: %s", message_subject)
             LOG.info(u"exo_message_body: %s", message_body)
 
-            if (email_address == "ALL USERS"):
-                email_results = self.MS_graph_helper.query_emails_all_users(email_address_sender, start_date, end_date,
-                                                                       has_attachments, message_subject, message_body)
-            else:
-                # Call MS Graph API to get the user profile
-                email_results = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
+            yield StatusMessage(u"Start message query.")
+
+            email_results = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
                                                          has_attachments, message_subject, message_body)
 
-            #response_json = response.json()
+            # Put query results in the results payload.
             results = rp.done(True, email_results)
 
-            yield StatusMessage(u"Returning results for email address: {}".format(email_address))
+            yield StatusMessage(u"Returning results from query.")
 
             LOG.debug(json.dumps(results['content']))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
+
         except Exception as err:
             LOG.error(err)
             yield FunctionError(err)
