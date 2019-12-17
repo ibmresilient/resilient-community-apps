@@ -52,6 +52,7 @@ class FunctionComponent(ResilientComponent):
 
             # Validate fields
             validate_fields(['exo_email_address'], kwargs)
+            validate_fields(['exo_mail_folders'], kwargs)
             validate_fields(['exo_email_address_sender'], kwargs)
             validate_fields(['exo_start_date'], kwargs)
             validate_fields(['exo_end_date'], kwargs)
@@ -61,7 +62,8 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
-            email_address_sender = kwargs.get('exo_email_address_sender')  # text
+            mail_folders   = kwargs.get('exo_mail_folders')  # text
+            sender         = kwargs.get('exo_email_address_sender')  # text
             start_date       = kwargs.get('exo_start_date')  # datetime
             end_date         = kwargs.get('exo_end_date')  # datetime
             has_attachments  = kwargs.get('exo_has_attachments')  # bool
@@ -69,7 +71,8 @@ class FunctionComponent(ResilientComponent):
             message_body     = kwargs.get('exo_message_body')  # text
 
             LOG.info(u"exo_email_address: %s", email_address)
-            LOG.info(u"exo_email_address_sender: %s", email_address_sender)
+            LOG.info(u"exo_mailfolders: %s", mail_folders)
+            LOG.info(u"exo_email_address_sender: %s", sender)
             LOG.info(u"exo_start_date: %s", start_date)
             LOG.info(u"exo_end_date: %s", end_date)
             LOG.info(u"exo_email_has_attachments: %s", has_attachments)
@@ -78,8 +81,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Start message query.")
 
-            email_results = self.MS_graph_helper.query_emails(email_address, email_address_sender, start_date, end_date,
-                                                         has_attachments, message_subject, message_body)
+            email_results = self.MS_graph_helper.query_emails(email_address, mail_folders, sender, start_date, end_date,
+                                                              has_attachments, message_subject, message_body)
 
             # Put query results in the results payload.
             results = rp.done(True, email_results)
