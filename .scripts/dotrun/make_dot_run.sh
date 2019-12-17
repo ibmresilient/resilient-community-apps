@@ -11,7 +11,7 @@ function usage {
   if [ "$1" != "" ]; then
     echo $1
   fi
-  echo "usage: $0 <directory to build> <template directory> <result directory>"
+  echo "usage: $0 <directory to build integrations and library files> <template directory> <result directory for makeself.run file>"
   exit 1
 }
 
@@ -105,13 +105,14 @@ if [ ! -d "$2" ]; then
   usage "template directory is missing"
 fi
 
+TODAY=`date +"%m-%d-%y"`
 TEMPLATE_DIR=$2
 TMP_DIR=/tmp
 MANYLINUX1="cryptography cffi lxml MarkupSafe"
 ENV_LIBS="pip SecretStorage setuptools setuptools_scm watchdog wheel keyring==7.3 virtualenv"
 # needed for VERSION_LIBS
-EARLY_LIBS="pycparser future configobj"
-VERSION_LIBS="enum34 circuits investigate pymisp beautifulsoup4 pyodbc"
+EARLY_LIBS="pycparser future configobj simplejson"
+VERSION_LIBS="enum34 circuits investigate pymisp beautifulsoup4 pyodbc PySocks filelock configparser docutils backports.functools-lru-cache"
 # on pypi
 RESILIENT_LIBS="rc-webserver rc-cts resilient-circuits"
 GIT_LIBS="williballenthin/vivisect fireeye/flare-floss yeti-platform/pyeti"
@@ -130,6 +131,7 @@ fi
 # complete path into with ${BUILD_DIR}
 LINKS_INFO="--find-links ${BUILD_DIR} --find-links ${BUILD_DIR}/lib -d ${BUILD_DIR}/lib/"
 
+RESULT_FILE=${RESULT_DIR}/resilient-circuits_${TODAY}.run
 # S T A R T I N G
 # start with a fresh directory
 if [ -d ${BUILD_DIR} ]; then
@@ -138,11 +140,11 @@ fi
 
 cp -r ${TEMPLATE_DIR} ${BUILD_DIR}
 
-# start with fresh result directory
-if [ -d ${RESULT_DIR} ]; then
-  rm -Rf ${RESULT_DIR}
-fi
+# make result directory
 mkdir ${RESULT_DIR}
+if [ -f "${RESULT_FILE}" ]; then
+  rm ${RESULT_FILE}
+fi
 
 cd ${BUILD_DIR}
 
@@ -167,5 +169,4 @@ ls -1 ${BUILD_DIR} >>${BUILD_DIR}/README
 #
 # end with makeself
 
-TODAY=`date +"%m-%d-%y"`
-/bin/bash makeself --target resilient-circuits ${BUILD_DIR} ${RESULT_DIR}/resilient-circuits_${TODAY}.run "Resilient-Circuits" ./setup
+/bin/bash makeself --target resilient-circuits ${BUILD_DIR} ${RESULT_FILE} "Resilient-Circuits" ./setup

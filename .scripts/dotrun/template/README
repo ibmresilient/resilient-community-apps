@@ -9,9 +9,13 @@ When executed, this self-extracting file will automatically install resilient-ci
 
 Usage:
 
-/bin/bash resilient-circuits.run [--confirm] [--target dir]
+/bin/bash resilient-circuits.run [--confirm] [--target <dir>] -- [--python_version [2|3|3.6|3.7]] [package1 package2 ...]
+
 --confirm will prompt the user to extract the files and also prompt before installing resilient-circuits. If omitted, all files are extracted and resilient-circuits will be installed into the environment using ‘pip’.
 --target will retain the unpacked files in a directory of your choice. The default is to retain the files in the current working directory.
+-- separator for script arguments on the target environment
+--python_verson [2|3|3.6|3.7]] version of python and pip to use for python installs. 'pip' for python 2.7 is the default
+[package1 package2 ...] names of packages to install along with resilient-circuits
 
 By default, all functions and custom threat services are retained for future use in the current working directory under resilient-circuits/.
 

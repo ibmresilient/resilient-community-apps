@@ -3,7 +3,7 @@
 
 from setuptools import setup, find_packages
 
-PUBLISH_VERSION = "1.0.0"
+PUBLISH_VERSION = "1.0.1"
 
 
 setup(
