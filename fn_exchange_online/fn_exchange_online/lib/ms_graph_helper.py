@@ -59,6 +59,20 @@ class MSGraphHelper(object):
 
         return response
 
+    def delete_message(self, email_address, mailfolder_id, message_id):
+        """
+        Call MS Graph to delete  endpoint.
+        :return: requests response from the /users/ endpoint which is the list of all users.
+        """
+        ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
+        response = self.__ms_graph_session.delete(ms_graph_users_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+
+        return response
+
     def query_emails_all_users(self, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
