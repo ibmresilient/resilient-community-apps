@@ -15,7 +15,7 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-        self.options = opts.get("hibp", {})
+        self.options = opts.get("fn_hibp", {})
 
         self.PROXIES = {}
         # Get proxies
