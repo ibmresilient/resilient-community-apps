@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields, str_to_bool
 from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment
 
 JOBS_URL = "jobs/{id}"
@@ -50,14 +51,14 @@ class FunctionComponent(ResilientComponent):
 
             # get summary information
             summary_url = "/".join((self.options['url'], TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
-            summary_result = rc.execute_call_v2("get", summary_url, proxies=rc.get_proxies(), auth=basic_auth,
+            summary_result = rc.execute_call_v2("get", summary_url, auth=basic_auth,
                                                 verify=cafile)
             json_summary = summary_result.json()
 
+            # get the events which are managed separately. These event include the detail for each hosts accessed
             event_url = "/".join((self.options['url'], TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))
 
-
-            events_result = rc.execute_call_v2("get", event_url, proxies=rc.get_proxies(), auth=basic_auth,
+            events_result = rc.execute_call_v2("get", event_url, auth=basic_auth,
                                                verify=cafile)
 
             json_events = events_result.json()
@@ -68,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # save results as attachment will return no results.content
-            if tower_save_as_attachment:
+            if str_to_bool(tower_save_as_attachment):
                 res_client = self.rest_client()
                 save_as_attachment(res_client, incident_id, payload)
 

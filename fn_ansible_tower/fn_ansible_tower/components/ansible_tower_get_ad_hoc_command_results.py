@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -68,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # save results as attachment will return no results.content
-            if tower_save_as_attachment:
+            if str_to_bool(tower_save_as_attachment):
                 res_client = self.rest_client()
                 save_as_attachment(res_client, incident_id, payload)
 

@@ -28,7 +28,8 @@ setup(
     long_description="Resilient Circuits Components for 'fn_ansible_tower'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib'
+        'resilient_lib',
+        'six'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -26,7 +27,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("ansible_tower_run_an_ad_hoc_command")
     def _ansible_tower_list_job_templates_function(self, event, *args, **kwargs):
-        """Function: List available job templates"""
+        """Function: Run an ansible module outside of the job template"""
         try:
             validate_fields(("url"), self.options) # validate key app.config settings
 
@@ -63,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             rc = RequestsCommon(self.opts, self.options)
-            results = rc.execute_call_v2("post", url, proxies=rc.get_proxies(), auth=basic_auth,
+            results = rc.execute_call_v2("post", url, auth=basic_auth,
                                          json=arguments, headers=JSON_HEADERS,
                                          verify=cafile)
 

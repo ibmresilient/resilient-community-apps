@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import io
@@ -29,9 +30,10 @@ def get_job_template_by_name(opts, options, filter_by_name):
     rc = RequestsCommon(opts, options)
 
     next_url = "/".join((TOWER_API_BASE, LIST_URL))
+    # continue as long as paged results exist
     while next_url:
         url = "/".join((options.get('url'), next_url)).replace("//api", "/api")
-        results = rc.execute_call_v2("get", url, proxies=rc.get_proxies(), auth=basic_auth,
+        results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
 
@@ -62,7 +64,7 @@ def get_job_template_by_project(opts, options, filter_by_project):
     result_templates = []
     while next_url:
         url = "/".join((options.get('url'), next_url)).replace("//api", "/api")
-        results = rc.execute_call_v2("get", url, proxies=rc.get_proxies(), auth=basic_auth,
+        results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
 
@@ -115,7 +117,7 @@ def save_as_attachment(res_client, incident_id, results):
     note = u"Job Id: {}\nStatus: {}\nTemplate Name: {}\nFinished: {}".format(results['summary']['id'], results['summary']['status'],
                                                                              results['summary']['name'], finished)
     note = note + u"\n".join(event.get("stdout") for event in results['events']['results'])
-    note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color hilighting
+    note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color highlighting
 
     if six.PY2:
         file_handle = io.BytesIO(note.encode('utf-8'))
@@ -124,3 +126,5 @@ def save_as_attachment(res_client, incident_id, results):
 
     file_name = u"{}_{}.txt".format(results['summary']['name'].replace(" ", "_"), results['summary']['id'])
     write_file_attachment(res_client, file_name, file_handle, incident_id)
+
+    return True

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import calendar
@@ -7,7 +8,7 @@ import logging
 import time
 from datetime import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, ResultPayload, str_to_bool, validate_fields
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items
 
 JOBS_URL = "jobs/"
@@ -30,7 +31,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("ansible_tower_list_jobs")
     def _ansible_tower_list_jobs_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: get all jobs, using criteria to filter if present"""
         try:
             validate_fields(("url"), self.options) # validate key app.config settings
 
@@ -57,6 +58,7 @@ class FunctionComponent(ResilientComponent):
             # common
             basic_auth, cafile = get_common_request_items(self.options)
 
+            # loop if results are paged
             while url:
                 paged_results, next_url = get_paged_jobs(rc, url, basic_auth, cafile, tower_job_status_list,
                                                          last_update_epoch)
@@ -78,7 +80,7 @@ class FunctionComponent(ResilientComponent):
 
 def get_paged_jobs(rc, url, basic_auth, cafile, tower_job_status_list, last_update_epoch):
     """
-    get jobs results, returning paged results as
+    get jobs results, returning paged results
     :param rc: RequestsCommon
     :param url:
     :param basic_auth:
@@ -87,7 +89,7 @@ def get_paged_jobs(rc, url, basic_auth, cafile, tower_job_status_list, last_upda
     :param last_update_epoch: optional date for review jobs to return
     :return: results, next url
     """
-    tower_result = rc.execute_call_v2("get", url, proxies=rc.get_proxies(), auth=basic_auth,
+    tower_result = rc.execute_call_v2("get", url, auth=basic_auth,
                                       verify=cafile)
 
     json_results = tower_result.json()
@@ -139,15 +141,16 @@ def convert_job_search_time(search_time):
 
     else:
         delta = int(search_time_split[0])
-        if search_time_split[1].strip().lower() in ("minute", "minutes"):
+        units = search_time_split[1].strip().lower()
+        if units in ("minute", "minutes"):
             delta = delta*60 # convert minutes to seconds
-        elif search_time_split[1].strip().lower() in ("hour", "hours"):
+        elif units in ("hour", "hours"):
             delta = delta*60*60 # convert hours to seconds
-        elif search_time_split[1].strip().lower() in ("day", "days"):
+        elif units in ("day", "days"):
             delta = delta*60*60*24 # convert days to seconds
-        elif search_time_split[1].strip().lower() in ("week", "weeks"):
+        elif units in ("week", "weeks"):
             delta = delta*60*60*24*7 # convert weeks to seconds
         else:
-            raise ValueError("Unrecognized time frame: %s", search_time_split[1])
+            raise ValueError("Unrecognized time frame: %s", units)
 
     return now - delta

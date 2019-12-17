@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Function implementation"""
 
 import logging
@@ -107,7 +108,7 @@ def run_job_template(opts, options, tower_template_id,
 
     # common
     basic_auth, cafile = get_common_request_items(options)
-    tower_result = rc.execute_call_v2("post", url, proxies=rc.get_proxies(), auth=basic_auth,
+    tower_result = rc.execute_call_v2("post", url, auth=basic_auth,
                                       json=arguments, headers=JSON_HEADERS,
                                       verify=cafile)
     return tower_result.json()
