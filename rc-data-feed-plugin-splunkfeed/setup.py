@@ -4,8 +4,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='rc_data_feed',
-    version='2.0.0',
+    name='rc_data_feed_plugin_splunkfeed',
+    version='1.0.0',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -13,9 +13,7 @@ setup(
     description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     long_description="Resilient Circuits Components for sending data feeds to other (BI) systems",
     install_requires=[
-        'resilient_circuits>=30.0.84',
-        'resilient>=30.0.84',
-        'resilient_lib'
+        'rc_data_feed'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,12 +22,7 @@ setup(
         'Programming Language :: Python',
     ],
     entry_points={
-        "resilient.circuits.components": [
-            "FeedComponent = rc_data_feed.components.feed_ingest:FeedComponent",
-            "SyncIncidentsFunctionComponent = rc_data_feed.components.data_feeder_sync_incidents:FunctionComponent"
-        ],
-        "resilient.circuits.configsection": ["gen_config = rc_data_feed.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = rc_data_feed.util.customize:customization_data"],
+        "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.splunkhecfeed.util.config:config_section_data"]
     },
     tests_require=["pytest < 4.0.0",
                    "pytest_resilient_circuits"]

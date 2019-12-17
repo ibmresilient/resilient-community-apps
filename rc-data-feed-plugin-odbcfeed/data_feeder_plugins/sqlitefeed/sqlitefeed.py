@@ -8,17 +8,15 @@ Resilient data to SQLite."""
 import sqlite3
 import logging
 
-from rc_data_feed.lib.sql_feed_base import SqlFeedDestinationBase
-from rc_data_feed.lib.sql_dialect import SqliteDialect
-
+from data_feeder_plugins.sqllib.sql_feed_base import SqlFeedDestinationBase
+from data_feeder_plugins.sqllib.sql_dialect import SqliteDialect
 
 LOG = logging.getLogger(__name__)
 
-
-class SqliteFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-public-methods
+class SQLiteFeedDestination(SqlFeedDestinationBase):  # pylint: disable=too-few-public-methods
     """SQLite feed destination that writes Resilient data to a SQLite DB."""
     def __init__(self, rest_client_helper, options):
-        super(SqliteFeedDestination, self).__init__(rest_client_helper, options, dialect=SqliteDialect())
+        super(SQLiteFeedDestination, self).__init__(rest_client_helper, options, dialect=SqliteDialect())
 
         file_name = options.get('file_name', 'objects.sqlite3')
 

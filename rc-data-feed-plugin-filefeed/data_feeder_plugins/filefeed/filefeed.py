@@ -16,9 +16,7 @@ from io import open
 from rc_data_feed.lib.feed import FeedDestinationBase
 from rc_data_feed.lib.type_info import TypeInfo
 
-
 LOG = logging.getLogger(__name__)
-
 
 class FileFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-public-methods
     """Feed destination for writing Resilient data to a local directory."""
