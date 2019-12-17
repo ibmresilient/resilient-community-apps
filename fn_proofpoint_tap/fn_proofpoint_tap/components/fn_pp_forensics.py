@@ -98,7 +98,7 @@ class FunctionComponent(ResilientComponent):
             bundle = os.path.expanduser(cafile) if cafile else False
 
             yield StatusMessage("Configuration values OK")
-            yield StatusMessage("Certificate verify {0}".format(bundle))
+            yield StatusMessage(u"Certificate verify {0}".format(bundle))
 
             basic_auth = HTTPBasicAuth(username, password)
             url = '{0}/forensics?{1}'.format(base_url, params)  # /v2/forensics Fetch forensic information for a given threat or campaign.
@@ -109,7 +109,7 @@ class FunctionComponent(ResilientComponent):
                 forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
                                                         callback=custom_response_err_msg)
                 aggregate_forensics = forensics_response.json()
-                log.debug('Get Forensics Response content: {}'.format(aggregate_forensics))
+                log.debug(u'Get Forensics Response content: {}'.format(aggregate_forensics))
 
                 with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_file:
                     # "w+b" Binary mode is used so that it behaves consistently on all platforms without

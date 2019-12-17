@@ -182,7 +182,7 @@ class PP_ThreatPolling(ResilientComponent):
                                     log.debug('Incident filtered')
                             else:
                                 # incident already exists, extract its ID
-                                log.debug('incident {} {} already exists'.format(idtype, threat_id))
+                                log.debug(u'incident {} {} already exists'.format(idtype, threat_id))
                                 incident_id = existing_incidents[0]['id']
 
                             if incident_id is not None:
@@ -224,7 +224,7 @@ class PP_ThreatPolling(ResilientComponent):
             'description': self.mkdescription(data, kind, threat_id, classification),
             'discovered_date': self.getdiscovereddate(data),
             'incident_type_ids': threat_type_ids,
-            'name': 'Proofpoint TAP Event: {0} {1}'.format(threatname if threatname else "", classification),
+            'name': u'Proofpoint TAP Event: {0} {1}'.format(threatname if threatname else "", classification),
             'properties': properties,
         }
 
@@ -238,7 +238,7 @@ class PP_ThreatPolling(ResilientComponent):
             return {'format': 'text', 'content': template_functions.render(self.threat_template, data)}
 
         except jinja2.exceptions.TemplateSyntaxError as err:
-            log.info('threat template is not set correctly in config file {}'.format(err))
+            log.info(u'threat template is not set correctly in config file {}'.format(err))
             raise err
 
     @staticmethod
@@ -260,7 +260,7 @@ class PP_ThreatPolling(ResilientComponent):
                     log.debug('seconds {} millis {} combined {}'.format(seconds, millis, combined))
                     return combined
                 except ValueError as err:
-                    log.exception("{} Not in expected timestamp format {} - {}".format(val, ts_format, err))
+                    log.exception(u"{} Not in expected timestamp format {} - {}".format(val, ts_format, err))
                     raise err
 
     @staticmethod
@@ -313,7 +313,7 @@ class PP_ThreatPolling(ResilientComponent):
         """
         # Get the TAP classification for this event
         original_threat_types = self._get_event_classification(data)
-        log.debug("TAP event threat type classification is '{}'".format(self._format_set(original_threat_types)))
+        log.debug(u"TAP event threat type classification is '{}'".format(self._format_set(original_threat_types)))
 
         # score_threshold is an optional param
         # if score_threshold was defined in the config file
@@ -338,7 +338,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(impostorscore, 'impostor', score_threat_types)
 
-            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
+            log.debug(u"Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -351,7 +351,7 @@ class PP_ThreatPolling(ResilientComponent):
             if len(score_threat_types) > 0:
                 for orig_threat in original_threat_types:
                     if orig_threat not in score_threat_types:
-                        log.info("Irregular result. The original TAP threat type classification '{}' was discarded "
+                        log.info(u"Irregular result. The original TAP threat type classification '{}' was discarded "
                                  "because its score value is lower than the app.config score_threshold value. "
                                  "'{}' - updated threat type classification based on score values is inconsistent with "
                                  "'{}' - the original TAP event threat type classification.".format(
@@ -376,12 +376,12 @@ class PP_ThreatPolling(ResilientComponent):
 
         if score_value >= self.score_threshold:
             threat_types.add(score_type)
-            log.debug("'{}' classification was added because its score value '{}' is higher "
+            log.debug(u"'{}' classification was added because its score value '{}' is higher "
                       "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
         else:
             if score_type in threat_types:
                 threat_types.remove(score_type)
-                log.debug("'{}' classification was removed because its score value '{}' is lower "
+                log.debug(u"'{}' classification was removed because its score value '{}' is lower "
                           "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
         return threat_types
 
@@ -417,7 +417,7 @@ class PP_ThreatPolling(ResilientComponent):
             # no filter or incident type in filter, return list
             return list(incident_type_ids)
 
-        log.info("Events with threat type '{}' have been filtered due to type_filter set in app.config".format(self._format_set(threat_types)))
+        log.info(u"Events with threat type '{}' have been filtered due to type_filter set in app.config".format(self._format_set(threat_types)))
         return None
 
     def _get_incident_type_id(self, threat_type):
@@ -458,7 +458,7 @@ class PP_ThreatPolling(ResilientComponent):
         for key, value in artifact_types.items():
             artifact_id = data.get(value)
             if artifact_id is not None:
-                log.debug('artifact type {} ({}) ID {}'.format(key, value, artifact_id))
+                log.debug(u'artifact type {} ({}) ID {}'.format(key, value, artifact_id))
                 artifact_payloads[artifact_id] = key
 
         return artifact_payloads
@@ -474,7 +474,7 @@ class PP_ThreatPolling(ResilientComponent):
             return incident_response['id']
 
         except SimpleHTTPException as ex:
-            log.info('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
             raise ex
 
     def update_incident(self, incident_id, artifacts):
@@ -508,7 +508,7 @@ class PP_ThreatPolling(ResilientComponent):
                     resilient_client.post(uri=artifact_uri, payload=artifact_payload)
 
         except SimpleHTTPException as ex:
-            log.info('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
             raise ex
 
     def getclass2typeids(self):
