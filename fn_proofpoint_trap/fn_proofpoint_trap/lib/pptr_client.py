@@ -9,6 +9,8 @@ from datetime import datetime
 from sys import version_info
 import os
 import requests
+from resilient_lib import RequestsCommon
+from resilient_lib.components.integration_errors import IntegrationError
 if version_info.major < 3:
     from urlparse import urljoin
 else:
@@ -18,9 +20,6 @@ try:
     from json.decoder import JSONDecodeError
 except ImportError:
     JSONDecodeError = ValueError
-
-from resilient_lib import RequestsCommon
-from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
 
@@ -77,7 +76,7 @@ def incidents_exception_handler(response):
             return custom_error_content
         return {'error': 'HTTP error {}'.format(err)}
 
-class PPTRClient(object):
+class PPTRClient():
     """
     Client class used to expose Proof Point TRAP api.
     """
@@ -109,30 +108,29 @@ class PPTRClient(object):
         """
         url = urljoin(self.base_url, self._endpoints["incidents"])
         params = {}
-        if type(lastupdate) is int:
+        if isinstance(lastupdate, int):
             params['created_after'] = timestamp_minutes_ago(lastupdate)
         else:
             if lastupdate is None:
                 # first run, fetch all
                 LOG.info("First Run in progress - this may take a while.")
         try:
-            r = self._req.execute_call_v2('get', url, callback=incidents_exception_handler, headers=self._headers,
-                                          params=params, verify=self.bundle, proxies=self._req.get_proxies())
+            res = self._req.execute_call_v2('get', url, callback=incidents_exception_handler, headers=self._headers,
+                                            params=params, verify=self.bundle, proxies=self._req.get_proxies())
 
         except IntegrationError as ierr:
             msg = str(ierr)
             return {'error': 'Request to {0} failed with error {1}.'.format(url, msg)}
 
         # If an error caught in the error handler return the error dict.
-        if "error" in r:
-            return r
+        if "error" in res:
+            return res
 
         try:
-            return r.json()
+            return res.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
-            return r.content
-        return r
+            return res.content
 
     def get_incident_details(self, incident_id=None):
         """Get incident details for an  incident id.
@@ -144,23 +142,23 @@ class PPTRClient(object):
         url = urljoin(self.base_url, self._endpoints["incident"]).format(incident_id)
 
         try:
-            r = self._req.execute_call_v2('get', url, callback=incident_details_exception_handler,
-                                          headers=self._headers, verify=self.bundle, proxies=self._req.get_proxies())
+            res = self._req.execute_call_v2('get', url, callback=incident_details_exception_handler,
+                                            headers=self._headers, verify=self.bundle, proxies=self._req.get_proxies())
 
         except IntegrationError as ierr:
             msg = str(ierr)
             raise Exception('Request to {0} failed with error {1}.'.format(url, msg))
 
-        if isinstance(r, dict) and "error" in r:
-            return r
-        else:
-            rtn['href'] = url
-            try:
-                rtn['data'] = r.json()
-            except ValueError:
-                # Default response likely not in json format just return content as is.
-                rtn['data'] = r.content
-            return rtn
+        if isinstance(res, dict) and "error" in res:
+            return res
+
+        rtn['href'] = url
+        try:
+            rtn['data'] = res.json()
+        except ValueError:
+            # Default response likely not in json format just return content as is.
+            rtn['data'] = res.content
+        return rtn
 
     def get_list_members(self, list_id=None, member_id=None, members_type=None):
         """Gets member(s) from a list.
@@ -178,13 +176,13 @@ class PPTRClient(object):
         else:
             url = urljoin(self.base_url, self._endpoints["list_members"]).format(list_id, members_type)
 
-        r = self._req.execute_call_v2('get', url, verify=self.bundle, headers=self._headers, proxies=self._req.get_proxies())
+        res = self._req.execute_call_v2('get', url, verify=self.bundle, headers=self._headers,
+                                        proxies=self._req.get_proxies())
         try:
-            return r.json()
+            return res.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
-            return r.content
-        return r
+            return res.content
 
 
     def add_list_member(self, list_id=None, member=None, description=None, expiration=None, duration=None):
@@ -207,16 +205,15 @@ class PPTRClient(object):
             duration = int(duration) * 60 * 1000
 
         payload = json.dumps({
-                "member": member, "description": description, "expiration": expiration, "duration": duration
-            }
-        )
-        r = self._req.execute_call_v2('post', url, verify=self.bundle, headers=self._headers, json=payload, proxies=self._req.get_proxies())
+            "member": member, "description": description, "expiration": expiration, "duration": duration
+        })
+        res = self._req.execute_call_v2('post', url, verify=self.bundle, headers=self._headers, json=payload,
+                                        proxies=self._req.get_proxies())
         try:
-            return r.json()
+            return res.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
-            return r.content
-        return r
+            return res.content
 
     def update_list_member(self, list_id=None, member_id=None, description=None, expiration=None, duration=None):
         """Update member of a list.
@@ -238,16 +235,15 @@ class PPTRClient(object):
             duration = int(duration) * 60 * 1000
 
         payload = json.dumps({
-                "description": description, "expiration": expiration, "duration": duration
-            }
-        )
-        r = self._req.execute_call_v2('put', url, verify=self.bundle, headers=self._headers, json=payload, proxies=self._req.get_proxies())
+            "description": description, "expiration": expiration, "duration": duration
+        })
+        res = self._req.execute_call_v2('put', url, verify=self.bundle, headers=self._headers, json=payload,
+                                        proxies=self._req.get_proxies())
         try:
-            return r.json()
+            return res.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
-            return r.content
-        return r
+            return res.content
 
     def delete_list_member(self, list_id=None, member_id=None):
         """Delete member from a list.
@@ -258,15 +254,14 @@ class PPTRClient(object):
         """
         url = urljoin(self.base_url, self._endpoints["list_member"]).format(list_id, member_id)
 
-        r = self._req.execute_call_v2('delete', url, verify=self.bundle, headers=self._headers, proxies=self._req.get_proxies())
+        res = self._req.execute_call_v2('delete', url, verify=self.bundle, headers=self._headers,
+                                        proxies=self._req.get_proxies())
         try:
-            return r.json()
+            return res.json()
         except ValueError:
             # Default response likely not in json format just return content as is.
             # Covert bypes to string fro python 3.
             if version_info.major < 3:
-                return r.content
-            else:
-                return r.content.decode('utf-8')
+                return res.content
 
-        return r
+            return res.content.decode('utf-8')

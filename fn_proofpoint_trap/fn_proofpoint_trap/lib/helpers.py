@@ -4,13 +4,18 @@
 
 """ Helper functions for Resilient circuits Functions supporting ProofPoint TRAP """
 
-import logging
-
 from resilient_circuits.actions_component import ResilientComponent
 
 CONFIG_DATA_SECTION = "fn_proofpoint_trap"
-log = logging.getLogger(__name__)
-mandatory_config_params = ["base_url", "api_key", "polling_interval", "startup_interval", "state", "host_categories"]
+
+MANDATORY_CONFIG_PARAMS = [
+    "base_url",
+    "api_key",
+    "polling_interval",
+    "startup_interval",
+    "state",
+    "host_categories"
+]
 
 def transform_kwargs(kwargs):
     """"Update kwargs dictionary.
@@ -26,21 +31,21 @@ def transform_kwargs(kwargs):
     params = {}
 
     # Remove  "sep_" from the kwargs key names.
-    for (k, v) in kwargs.copy().items():
-        v = kwargs.pop(k)
+    for (key, value) in kwargs.copy().items():
+        value = kwargs.pop(key)
 
-        if isinstance(k, list):
-            k = [ResilientComponent.get_select_param(val) for val in v]
-        elif isinstance(v, dict):
-            v = v.get("name")
-        kwargs[k] = v.rstrip().lstrip() if isinstance(v, str)  else v
-        params[k.split('_', 1)[1]] = v.rstrip().lstrip() if isinstance(v, str) \
-                                                                and v.lower().startswith("trap_") else v
+        if isinstance(key, list):
+            key = [ResilientComponent.get_select_param(val) for val in value]
+        elif isinstance(value, dict):
+            value = value.get("name")
+        kwargs[key] = value.rstrip().lstrip() if isinstance(value, str)  else value
+        params[key.split('_', 1)[1]] = value.rstrip().lstrip() if isinstance(value, str) \
+                                                                and value.lower().startswith("trap_") else value
 
     # If any entry has "None" string change to None value for params.
-    for k, v in params.items():
-        if isinstance(v, str) and v.lower() == 'none':
-            params[k] = None
+    for key, value in params.items():
+        if isinstance(value, str) and value.lower() == 'none':
+            params[key] = None
 
     return params
 
@@ -50,7 +55,7 @@ def validate_opts(func):
     :param func: Resilient Function instance reference
 
      """
-    for param in mandatory_config_params:
+    for param in MANDATORY_CONFIG_PARAMS:
         param_value = func.options.get(param, None)
 
         if param_value is None:
