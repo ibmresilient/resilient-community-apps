@@ -65,7 +65,7 @@ class MSGraphHelper(object):
         Query MS Graph for all users endpoint.
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
-        ms_graph_users_url = u'{0}users?$count=true'.format(self.__ms_graph_url)
+        ms_graph_users_url = u'{0}users'.format(self.__ms_graph_url)
         response = self.__ms_graph_session.get(ms_graph_users_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
@@ -98,7 +98,7 @@ class MSGraphHelper(object):
 
         return response
 
-    def query_emails_all_users(self, sender, mail_folder, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_emails_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
         :param sender: email address of sender to search for
@@ -161,7 +161,7 @@ class MSGraphHelper(object):
             query_results = self.query_emails_by_list(email_address, mail_folder, sender, start_date, end_date,
                                                       has_attachments, message_subject, message_body)
         elif (email_address == "ALL USERS"):
-            query_results = self.query_emails_all_users(mail_folder, mail_folder, sender, start_date, end_date,
+            query_results = self.query_emails_all_users(mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         else:
             query_results = self.query_emails_by_address(email_address, mail_folder, sender, start_date, end_date,
