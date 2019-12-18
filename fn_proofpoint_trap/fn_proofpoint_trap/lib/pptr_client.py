@@ -123,7 +123,7 @@ class PPTRClient():
             return {'error': 'Request to {0} failed with error {1}.'.format(url, msg)}
 
         # If an error caught in the error handler return the error dict.
-        if "error" in res:
+        if isinstance(res, dict) and "error" in res:
             return res
 
         try:
