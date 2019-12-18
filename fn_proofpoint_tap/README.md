@@ -14,37 +14,12 @@
 
 # Proofpoint TAP Functions for IBM Resilient
 
-- [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Uninstall](#uninstall)
 - [Troubleshooting](#troubleshooting)
 - [Support](#support)
-
----
-
-## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
-### What's new in this Beta 
-* Created two custom Artifact Types for Threat ID and Campaign ID, and filtered rules based on the artifact type. 
-* Instead of ending the workflow with an error when a Threat ID or Campaign ID does not exist in the Proofpoint Tap system, a note is created with a message explaining that the user Threat ID or Campaign ID cannot be found. 
-* When the Get Campaign Workflow completes. it creates a note with the name of the workflow and includes basic information about the Campaign. Detailed Campaign information is saved in the Proofpoint TAP Campaign Object Details Data Table. Additionally, a script is available for the data table to create an artifact based on chosen row. 
-* Get Forensics function has an additional input parameter, incident_id, which is used for creating a Forensics Report Attachment. 
-* Results of all three workflows for the Get Forensics function are saved in a note and an attachment.
-* Aggregate Forensics for the entire campaign now returns malicious results only. 
-
-### What's new in the Beta 11/1/2019
-* Fixed a bug for the Get Forensics function where adding a note caused the workflow a long time to complete. 
-* Improved the poller logic and filtering based on the score threshold.
-* Improved the documentation.
-* Renamed the rules and workflows for clarity. 
-* Updated both jinja2 templates to extract more information from the endpoint. 
-
-NOTE: If using both Proofpoint TAP and TRAP integrations, TAP polls events and TRAP polls incidents. One could be more granular than the other; therefore, you might not need to use both pollers at the same time.
 
 ---
 
