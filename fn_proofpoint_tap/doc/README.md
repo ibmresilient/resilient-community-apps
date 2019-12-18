@@ -41,14 +41,15 @@ Threaded Poller which runs continuously while the integration is running.
 * Polls Proofpoint TAP events for all clicks and messages relating to known threats within the specified time period.
 * Filters the events based on their classification threat type such as malware, phish, spam, and impostor. The chosen type_filter is defined in the app.config file. 
 * Filters the type of events to import based on the respective threat score that is configured in the app.config file.
-* Creates Incidents in the Resilient platform based on the events.
+* Creates incidents in the Resilient platform based on the events.
 * Adds artifacts to incidents in the Resilient platform corresponding to Proofpoint TRAP Campaign ID and Threat ID.
 
+The following is an example of an incident created by the Poller.
  ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/poller.png) 
 ---
 
 ## Function - Proofpoint TAP Get Forensics
-Function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.
+This function pulls detailed forensic evidence about individual threats or campaigns observed in their environment.
 
  ![screenshot: fn-proofpoint-tap-get-forensics ](./screenshots/get_forensics.png)
 
@@ -58,7 +59,7 @@ Function pulls detailed forensic evidence about individual threats or campaigns 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | Incident ID |
-| `proofpoint_aggregate_flag` | `boolean` | No | `-` | A boolean value, defaulting to false. May optionally be used with the threatId parameter. It cannot be used with the campaignId parameter. If false, aggregate forensics for that specific threat identifier will be returned. If true AND if the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise, aggregate forensics for the individual threat are returned. |
+| `proofpoint_aggregate_flag` | `boolean` | No | `-` | A boolean value, which is false by default. Can optionally be used with the threatId parameter. It cannot be used with the campaignId parameter. If false, returns the aggregate forensics for that specific threat identifier. If true AND the threat has been associated with a campaign, returns the aggregate forensics for the entire campaign. Otherwise, returns the aggregate forensics for the individual threat. |
 | `proofpoint_campaign_id` | `text` | No | `-` | A string containing a campaign identifier. |
 | `proofpoint_malicious_flag` | `boolean` | No | `-` | Show malicious results only. |
 | `proofpoint_threat_id` | `text` | No | `-` | A string containing a threat identifier. |
@@ -69,30 +70,30 @@ Function pulls detailed forensic evidence about individual threats or campaigns 
 <details><summary>Workflows:</summary>
 <p>
 
-There are three Workflows for this function:
+There are three workflows for this function:
 
 * Example: Proofpoint TAP - Aggregate Forensics for Threat 
 
-Workflow imports additional forensic information based on the given threat identifier. Aggregate forensics for the given threat identifier are returned and additionally filtered to include malicious results only. Results are saved in a Note and an Attachment.
+Imports additional forensic information based on the given threat identifier. It returns aggregate forensics for the given threat identifier, which is filtered to include malicious results only. Results are saved in a note and attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Threat.png)
 
 *  Example: Proofpoint TAP - Aggregate Forensics by Campaign ID 
 
-Workflow returns aggregate forensics for an entire campaign based on the given campaign identifier. Results are saved in a Note and an Attachment.
+Returns aggregate forensics for an entire campaign based on the given campaign identifier. Results are saved in a note and attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Forensics_CampaignID.png)
 
 * Example: Proofpoint TAP - Aggregate Forensics for Campaign 
 
-Workflow imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, aggregate forensics for the entire campaign are returned. Otherwise aggregate forensics for the individual threat are returned. Forensics returned is additionally filtered to include malicious results only. Results are saved in a Note and an Attachment.
+Imports additional forensic information based on the given threat identifier. If the threat has been associated with a campaign, it returns aggregate forensics for the entire campaign. Otherwise, it returns aggregate forensics for the individual threat. The returned forensics are filtered to include malicious results only. Results are saved in a note and attachment.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Aggregate_Forensics_Campaign.png)
 
-The results of all three Workflows are saved in a Note and an Attachment.
+The results of all three workflows are saved in a note and an attachment.
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/forensics_note.png)
 
-Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+Additionally a script is available for the data table to create an artifact based on chosen row.
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/forensics_attachment.png)
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/sample_attachment.png)
@@ -152,7 +153,7 @@ if results is not None:
       num_reports,
       "report" if num_reports == 1 else "reports",
       artifact.value,
-      "Results are saved in an Attachment." if num_reports > 0 else "")
+      "Results are saved in an attachment." if num_reports > 0 else "")
   
   elif results.get("success") is False and results.get("note_err_text", None) is not None:
     noteText = u"""{} 
@@ -188,18 +189,18 @@ Function pulls specific details about campaigns including description, the actor
 <details><summary>Workflows:</summary>
 <p>
 
-There is one Workflow for this function:
+There is one workflow for this function:
 
 * Example: Proofpoint TAP - Get Campaign
 
-Workflow imports detailed information for given campaign identifier, including description, the actor, malware family, techniques and the threat variants associated with the campaign.
+Imports detailed information for given campaign identifier, including description, the actor, malware family, techniques and the threat variants associated with the campaign.
 
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/Get_Campaign_wk.png)
 
-The results are saved in a Note and Proofpoint TAP Campaign Object Details Data Table.
+The results are saved in a note and Proofpoint TAP Campaign Object Details Data Table.
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/campaign_note.png)
 
-Additionally a Script is available for the Data Table to create an Artifact based on chosen row.
+Additionally a script is available for the data table to create an artifact based on chosen row.
 ![screenshot: fn-proofpoint-tap-get-campaign ](./screenshots/campaign_datatable.png)
 
 </p>
@@ -311,7 +312,7 @@ if results is not None:
 <p>
 
 ```python
-# Script creates an Artifact for Proofpoint TAP Campaign Object Name or Threat based on the selected datatable row.
+# Script creates an artifact for Proofpoint TAP Campaign Object Name or Threat based on the selected datatable row.
 # Artifact description
 artifact_description = u"""Created by Proofpoint TAP Get Campaign results for Campaign ID '{}', Type of Campaign Object '{}', Object ID '{}'""".format(
   row.proofpoint_tap_campaign_id,

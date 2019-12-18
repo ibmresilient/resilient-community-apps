@@ -43,6 +43,7 @@
 * Improved the documentation.
 * Renamed the rules and workflows for clarity. 
 * Updated both jinja2 templates to extract more information from the endpoint. 
+
 NOTE: If using both Proofpoint TAP and TRAP integrations, TAP polls events and TRAP polls incidents. One could be more granular than the other; therefore, you might not need to use both pollers at the same time.
 
 ---
