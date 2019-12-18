@@ -5,12 +5,12 @@
 
 import logging
 
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 from fn_proofpoint_trap.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_proofpoint_trap_get_list_members"""
@@ -38,9 +38,9 @@ class FunctionComponent(ResilientComponent):
             trap_member_id = kwargs.get("trap_member_id ")  # number
             trap_members_type = self.get_select_param(kwargs.get("trap_members_type"))  # select, values: "members.json"
 
-            log.info("trap_list_id: %s", trap_list_id)
-            log.info("trap_member_id: %s", trap_member_id)
-            log.info("trap_members_type: %s", trap_members_type)
+            LOG.info("trap_list_id: %s", trap_list_id)
+            LOG.info("trap_member_id: %s", trap_member_id)
+            LOG.info("trap_members_type: %s", trap_members_type)
 
             validate_fields(["trap_list_id", "trap_members_type"], kwargs)
 
@@ -52,5 +52,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Proofpoint TRAP.")
+            LOG.exception("Exception in Resilient Function for Proofpoint TRAP.")
             yield FunctionError()

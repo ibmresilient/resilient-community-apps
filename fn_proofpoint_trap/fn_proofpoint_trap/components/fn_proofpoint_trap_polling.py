@@ -10,8 +10,8 @@ import re
 from threading import Thread
 from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
-from fn_proofpoint_trap.lib.helpers import validate_opts
 from resilient_lib.components.integration_errors import IntegrationError
+from fn_proofpoint_trap.lib.helpers import validate_opts
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 
 """
@@ -63,7 +63,8 @@ Summary:
                     
         Initial Codegen Performed:
             
-             codegen -m fn_proofpoint_trap -f fn_proofpoint_trap_get_incident_details  --datatable proofpoint_trap_events -p fn_proofpoint_trap
+             codegen -m fn_proofpoint_trap -f fn_proofpoint_trap_get_incident_details  
+             --datatable proofpoint_trap_events -p fn_proofpoint_trap
                 
                             
         Full Example Payload:
@@ -222,11 +223,10 @@ Summary:
   'team': 'Unassigned',
   'updated_at': '2019-03-26T18:56:50Z',
   'users': []}
-
 """
 
 # Map of Proofpoint TRAP event field to data table column
-proofpoint_trap_events_map = {
+PROOFPOINT_TRAP_EVENTS_MAP = {
     'id': 'event_id',
     'description': 'event_description',
     'category': 'event_category',
@@ -239,7 +239,7 @@ proofpoint_trap_events_map = {
 }
 
 # API Name(s) of Data Table(s)
-data_table_ids = [
+DATA_TABLE_IDS = [
     'proofpoint_trap_events',
 ]
 
@@ -248,15 +248,15 @@ data_table_ids = [
 #   List of Dictionaries
 #   Format Example for list items:
 #   {'name': 'Classification', 'value': 'Phishing' }
-incident_field_names = [
+INCIDENT_FIELD_NAMES = [
     'Severity',
     'Classification',
     'Attack Vector',
     'Abuse Disposition',
 ]
 
-# Relevant Timestamps from TRAP
-timestamps = [
+# Relevant TIMESTAMPS from TRAP
+TIMESTAMPS = [
     'created_at',
     'updated_at',
 ]
@@ -264,7 +264,7 @@ timestamps = [
 # Incident Types
 # API Field is incident_type_ids @ Resilient (int)
 # API Field is incident_field_values where name: Classification (dict)
-class2typeid = {
+CLASS2TYPEID = {
     'MALWARE' : 19,
     'Malware': 19,
     'Phishing': 22,
@@ -324,7 +324,7 @@ class2typeid = {
 # Nist Attack Vectors
 # API Field is nist_attack_vectors @ Resilient
 # API Field is incident_field_values where name: Attack Vectors @ TRAP
-nist_vectors = {
+NIST_VECTORS = {
     'Email': 4,
     'Impersonation': 5,
     'Attrition': 2,
@@ -375,7 +375,7 @@ nist_vectors = {
 # Abuse Disposition Fields
 # API Field is confirmed @ Resilient
 # API Field is incident_field_values where name: Abuse Disposition @ TRAP
-abuse_disposition = {
+ABUSE_DISPOSITION = {
     None: False,
     'None': False,
     'Confirmed': True
@@ -383,7 +383,7 @@ abuse_disposition = {
 
 # API Field is severity_code @ Resilient
 # API Field is  incident_field_values where name: Severity @ TRAP
-incident_severity = {
+INCIDENT_SEVERITY = {
     # Resilient has no informational so temporarily filter down to Low
     'Informational': 100,
     'Low': 100,
@@ -393,19 +393,19 @@ incident_severity = {
 }
 
 # Custom Incident Fields
-custom_fields = [
+CUSTOM_FIELDS = [
     # TRAP Incidents id field to be posted to Resilient Incidents
     'proofpoint_trap_incident_id',
 ]
 
 ## Regular Expression Definitions for Artifact Extraction
-regex_defs = {
-    'URL': '^((?:http(?:s)?\://)[a-zA-Z0-9\.\?\#\&\=\/_-]{1,})$',
-    'IP Address':  '^((?:[0-9]{1,3}\.){3}(?:[0-9]{1,3}))$',
-    'DNS Name': '^((?!(?:http(s)?:\/\/?))(?:(?:[\w-]{1,}[\.])){1,}([a-zA-Z]{2,}))$',
+REGEX_DEFS = {
+    'URL': r'^((?:http(?:s)?\://)[a-zA-Z0-9\.\?\#\&\=\/_-]{1,})$',
+    'IP Address':  r'^((?:[0-9]{1,3}\.){3}(?:[0-9]{1,3}))$',
+    'DNS Name': r'^((?!(?:http(s)?:\/\/?))(?:(?:[\w-]{1,}[\.])){1,}([a-zA-Z]{2,}))$',
 }
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 class PPTRIncidentPolling(ResilientComponent):
     """Component that polls for new data arriving from Proofpoint TRAP"""
@@ -449,23 +449,23 @@ class PPTRIncidentPolling(ResilientComponent):
 
         if self.threads:
             # Polling threads still running raise runtime error.
-            log.error("There were {} polling threads which did not stop within timeout period on restart"
-                      .format(len(self.threads)))
+            LOG.error("There were %d polling threads which did not stop within timeout period on restart",
+                      len(self.threads))
             raise RuntimeError("There were {} polling threads which did not stop within timeout period on restart."
                                .format(len(self.threads)))
 
         # Turn off 'stop_thread' flag.
         self.stop_thread = False
 
-        if polling_interval  > 0:
+        if polling_interval > 0:
             # Create and start polling thread
             thread = Thread(target=self.polling_thread)
             self.threads.append(thread)
             thread.daemon = True
             thread.start()
-            log.info("Polling for incidents in Proofpoint TRAP every {0} minutes".format(polling_interval))
+            LOG.info("Polling for incidents in Proofpoint TRAP every %d minutes", polling_interval)
         else:
-            log.info("Polling for incidents in Proofpoint TRAP not enabled")
+            LOG.info("Polling for incidents in Proofpoint TRAP not enabled")
 
     def polling_thread(self):
         """contents of polling thread, alternately check for new data and wait"""
@@ -474,41 +474,41 @@ class PPTRIncidentPolling(ResilientComponent):
         while not self.stop_thread:
 
             incident_list = pptr.get_incidents(self.lastupdate)
-            self.lastupdate = int(self.options.get("polling_interval", 2))
+
             if 'error' in incident_list:
-                log.warning(incident_list.get('error'))
+                LOG.warning(incident_list.get('error'))
                 raise IntegrationError(incident_list.get('error'))
-            else:
-                try:
-                    ### BEGIN Processing incidents
-                    for incident in incident_list:
-                        log.info("Proofpoint TRAP Incident ID {} discovered: {}".format(incident['id'],incident['summary']))
-                        if len(self._find_resilient_incident_for_req(incident['id'],custom_fields[0])) == 0:
-                            # Assemble Data table for incident
-                            i_table = self.make_data_table(incident['events'])
 
-                            # Get Extra Incident Fields
-                            i_fields = self.make_incident_fields(incident)
+            try:
+                ### BEGIN Processing incidents
+                for incident in incident_list:
+                    LOG.info("Proofpoint TRAP Incident ID %d discovered: %s", incident['id'], incident['summary'])
+                    if len(self._find_resilient_incident_for_req(incident['id'], CUSTOM_FIELDS[0])) == 0:
+                        # Assemble Data table for incident
+                        i_table = self.make_data_table(incident['events'])
 
-                            # Build out artifacts for incident
-                            i_artifacts = self.make_incident_artifacts(incident)
+                        # Get Extra Incident Fields
+                        i_fields = self.make_incident_fields(incident)
 
-                            # Create incident and return response
-                            i_response = self.create_incident(i_fields, i_table)
+                        # Build out artifacts for incident
+                        i_artifacts = self.make_incident_artifacts(incident)
 
-                            # Add Artifacts
-                            self.create_incident_artifact(i_response['id'], i_artifacts)
+                        # Create incident and return response
+                        i_response = self.create_incident(i_fields, i_table)
 
-                            # Add raw event payload as note
-                            i_comment = self.create_incident_comment(i_response['id'], incident)
-                        else:
-                            log.info("Incident already exists for TRAP Incident {}".format(incident['id']))
-                            # TODO: Add checks for Artifacts and Data Table rows
-                        # TODO: Check update_at against datetime.now and if the delta is greater than polling interval,
-                        #       ensure that table data is up to date
+                        # Add Artifacts
+                        self.create_incident_artifact(i_response['id'], i_artifacts)
 
-                except TypeError as ex:
-                    log.error(ex)
+                        # Add raw event payload as note
+                        i_comment = self.create_incident_comment(i_response['id'], incident)
+                    else:
+                        LOG.info("Incident already exists for TRAP Incident %d", incident['id'])
+                        # TODO: Add checks for Artifacts and Data Table rows
+                    # TODO: Check update_at against datetime.now and if the delta is greater than polling interval,
+                    #       ensure that table data is up to date
+
+            except TypeError as ex:
+                LOG.error(ex)
 
             # Break out of loop before sleep if restart initiated.
             if self.stop_thread:
@@ -542,16 +542,16 @@ class PPTRIncidentPolling(ResilientComponent):
         data_table = []
         for event in events:
             table_row = {}
-            for k,v in proofpoint_trap_events_map.items():
-                if k in event.keys():
-                    table_row[v] = { "value" : event[k] }
-            data_table.append({ "cells" : table_row })
-            log.debug("Table Row created with values: {}".format(table_row))
-        log.info("Data Table Assembled with {} rows".format(len(data_table)))
+            for key, val in PROOFPOINT_TRAP_EVENTS_MAP.items():
+                if key in event.keys():
+                    table_row[val] = {"value" : event[key]}
+            data_table.append({"cells" : table_row})
+            LOG.debug("Table Row created with values: %s", table_row)
+        LOG.info("Data Table Assembled with %d rows", len(data_table))
 
         # TODO: POST Data Table to Resilient Incident
-        log.debug(pprint.pformat(data_table,indent=4))
-        return {'proofpoint_trap_events' : data_table }
+        LOG.debug(pprint.pformat(data_table, indent=4))
+        return {'proofpoint_trap_events' : data_table}
 
     def make_incident_name(self, incident):
         """
@@ -567,7 +567,7 @@ class PPTRIncidentPolling(ResilientComponent):
             i_summary = 'No Summary Provided'
 
         iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
-        log.debug("Incident Label Assembled: {}".format(iname))
+        LOG.debug("Incident Label Assembled: %s", iname)
 
         return iname
 
@@ -596,7 +596,7 @@ class PPTRIncidentPolling(ResilientComponent):
         try:
             r_incidents = self.rest_client().post(query_uri, query)
         except SimpleHTTPException as ex:
-            log.error("Failed to pull incidents:{}".format(ex))
+            LOG.error("Failed to pull incidents:%s", ex)
             r_incidents = 'Failed'
         return r_incidents
 
@@ -623,35 +623,35 @@ class PPTRIncidentPolling(ResilientComponent):
 
             for table_id, contents in tables.items():
                 if contents:
-                    if table_id in data_table_ids:
+                    if table_id in DATA_TABLE_IDS:
                         # table data, add row to specified data table
                         uri = '/incidents/{0}/table_data/{1}/row_data'.format(incident_id, table_id)
-                        log.info("Attempting to create table with the following: {}".format(uri))
+                        LOG.info("Attempting to create table with the following: %s", uri)
 
                         for content in contents:
                             resilient_client.post(uri=uri, payload=content)
                     else:
                         # other data, create Note with details
                         uri = '/incidents/{0}/comments'.format(incident_id)
-                        log.info("Attempting to add note with the following: {}".format(uri))
+                        LOG.info("Attempting to add note with the following: %s", uri)
                         for content in contents:
                             resilient_client.post(uri=uri, payload=content)
             return incident_response
 
         except SimpleHTTPException as ex:
-            log.error('Something went wrong when attempting to create the Incident: {}'.format(ex))
+            LOG.error('Something went wrong when attempting to create the Incident: %s', ex)
 
 
-    def create_incident_comment(self, id, data):
+    def create_incident_comment(self, incident_id, data):
         """
         Add a comment to the specified Resilient Incident by ID
 
-        :param id:  Resilient Incident ID
+        :param incident_id:  Resilient Incident ID
         :param data: Content to be added as note
         :return: Response from Resilient for debug
         """
         try:
-            uri = '/incidents/{}/comments'.format(id)
+            uri = '/incidents/{}/comments'.format(incident_id)
             resilient_client = self.rest_client()
             heading = "Raw Proofpoint TRAP Event Payload:\n"
             note = {
@@ -663,38 +663,38 @@ class PPTRIncidentPolling(ResilientComponent):
             return comment_response
 
         except SimpleHTTPException as ex:
-            log.error("Failed to add note for incident {}: {}".format(id,ex))
+            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)
 
 
-    def create_incident_artifact(self, id, data):
+    def create_incident_artifact(self, incident_id, data):
         """
 
-        :param id: Incident ID
+        :param incident_id: Incident ID
         :param data: Dictionary returned from extraction
         :return:
         """
         try:
-            uri = '/incidents/{}/artifacts'.format(id)
+            uri = '/incidents/{}/artifacts'.format(incident_id)
             resilient_client = self.rest_client()
 
-            for k,v in data.items():
-                log.debug("Processing list of {}: {}".format(k,v))
-                for _v in v:
-                    _desc = "{} extracted from Proofpoint TRAP Incident".format(k)
+            for key, val in data.items():
+                LOG.debug("Processing list of %s: %s", key, val)
+                for _v in val:
+                    _desc = "{} extracted from Proofpoint TRAP Incident".format(key)
                     payload = {
-                        "type": k,
+                        "type": key,
                         "value": _v,
                         "description": {
                             "format": "text",
                             "content": _desc
                         }
                     }
-                    log.info("Attempting to create artifact {} for incident {}".format(payload,id))
+                    LOG.info("Attempting to create artifact %s for incident %d", payload, incident_id)
                     resilient_client.post(uri=uri, payload=payload)
 
 
         except SimpleHTTPException as ex:
-            log.error("Failed to add artifact for incident {}: {}".format(id, ex))
+            LOG.error("Failed to add artifact for incident %d: %s", incident_id, ex)
 
 
     def make_incident_fields(self, incident):
@@ -720,16 +720,16 @@ class PPTRIncidentPolling(ResilientComponent):
         for field in i_fields:
             # Map NIST Attack Vector. Default to Email
             if field['name'] == 'Attack Vector':
-                r_fields['nist_attack_vectors'].append(nist_vectors.get(field['value'],4))
+                r_fields['nist_attack_vectors'].append(NIST_VECTORS.get(field['value'], 4))
             # Map Classification to Incident Type, Default to Phishing
             elif field['name'] == 'Classification':
-                r_fields['incident_type_ids'].append(class2typeid.get(field['value'],22))
+                r_fields['incident_type_ids'].append(CLASS2TYPEID.get(field['value'], 22))
             elif field['name'] == 'Severity':
                 # Get Incident Severity. Default to Low
-                r_fields['severity_code'] = incident_severity.get(field['value'],100)
+                r_fields['severity_code'] = INCIDENT_SEVERITY.get(field['value'], 100)
             elif field['name'] == 'Abuse Disposition':
                 # Get Disposition, Default to None (unconfirmed)
-                r_fields['confirmed'] = abuse_disposition.get(field['value'],None)
+                r_fields['confirmed'] = ABUSE_DISPOSITION.get(field['value'], None)
         r_fields['properties']['proofpoint_trap_incident_id'] = incident.get('id')
 
         return r_fields
@@ -765,16 +765,17 @@ class PPTRIncidentPolling(ResilientComponent):
 
         if 'hosts' in incident:
             # Process the selected categories under hosts.
-            for c in host_categories:
-                if c in incident['hosts']:
-                    for k,v in regex_defs.items():
-                        if k not in artifacts:
-                            artifacts[k] = []
-                        artifacts[k].extend([x for x in incident['hosts'][c] if re.match(v, x) and x not in artifacts[k]])
+            for hcat in host_categories:
+                if hcat in incident['hosts']:
+                    for key, val in REGEX_DEFS.items():
+                        if key not in artifacts:
+                            artifacts[key] = []
+                        artifacts[key].extend([x for x in incident['hosts'][hcat] if re.match(val, x)
+                                               and x not in artifacts[key]])
         return artifacts
 
 
-    def _find_resilient_incident_for_req(self, id, idtype):
+    def _find_resilient_incident_for_req(self, incident_id, idtype):
         """Return list of incidents if there are any with the same case ID, else returns empty list"""
         r_incidents = []
         query_uri = '/incidents/query?return_level=partial'
@@ -784,7 +785,7 @@ class PPTRIncidentPolling(ResilientComponent):
                     {
                         'field_name': 'properties.{}'.format(idtype),
                         'method': 'equals',
-                        'value': id
+                        'value': incident_id
                     },
                     {
                         'field_name': 'plan_status',
@@ -803,7 +804,7 @@ class PPTRIncidentPolling(ResilientComponent):
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = '/incidents/query?return_level=normal&field_handle={}'.format(id)
+            query_uri = '/incidents/query?return_level=normal&field_handle={}'.format(incident_id)
             query = {
                 'filters': [{
                     'conditions': [
@@ -827,7 +828,7 @@ class PPTRIncidentPolling(ResilientComponent):
                 raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
-                           if r_inc['properties'].get(idtype) == id]
+                           if r_inc['properties'].get(idtype) == incident_id]
 
         return r_incidents
 

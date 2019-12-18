@@ -5,12 +5,12 @@
 
 import logging
 
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 from fn_proofpoint_trap.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'fn_proofpoint_trap_add_members_to_list"""
@@ -42,11 +42,11 @@ class FunctionComponent(ResilientComponent):
             trap_expiration = kwargs.get("trap_expiration")  # datetimepicker
             trap_duration = kwargs.get("trap_duration")  # number
 
-            log.info("trap_list_id: %s", trap_list_id)
-            log.info("trap_member: %s", trap_member)
-            log.info("trap_description: %s", trap_description)
-            log.info("trap_expiration: %s", trap_expiration)
-            log.info("trap_duration: %s", trap_duration)
+            LOG.info("trap_list_id: %s", trap_list_id)
+            LOG.info("trap_member: %s", trap_member)
+            LOG.info("trap_description: %s", trap_description)
+            LOG.info("trap_expiration: %s", trap_expiration)
+            LOG.info("trap_duration: %s", trap_duration)
 
             validate_fields(["trap_list_id", "trap_member"], kwargs)
 
@@ -58,5 +58,5 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception:
-            log.exception("Exception in Resilient Function for Proofpoint TRAP.")
+            LOG.exception("Exception in Resilient Function for Proofpoint TRAP.")
             yield FunctionError()

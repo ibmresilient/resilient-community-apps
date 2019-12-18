@@ -5,13 +5,12 @@
    test with: resilient-circuits selftest -l fn_sep
 """
 import logging
-import datetime
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 
-lastupdate = 60
-log = logging.getLogger(__name__)
-log.setLevel(logging.INFO)
-log.addHandler(logging.StreamHandler())
+LASTUPDATE = 60
+LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
+LOG.addHandler(logging.StreamHandler())
 
 def selftest_function(opts):
     """
@@ -20,12 +19,11 @@ def selftest_function(opts):
     options = opts.get("fn_proofpoint_trap", {})
     try:
         pptr = PPTRClient(opts, options)
-        r = pptr.get_incidents(lastupdate)
+        res = pptr.get_incidents(LASTUPDATE)
 
-        if isinstance(r, list):
+        if isinstance(res, list):
             return {"state": "success"}
-        else:
-            return {"state": "failure"}
+        return {"state": "failure"}
 
-    except Exception as e:
-        return {"state": "failure", "status_code": e}
+    except Exception as excp:
+        return {"state": "failure", "status_code": excp}
