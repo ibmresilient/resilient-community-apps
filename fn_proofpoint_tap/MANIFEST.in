@@ -1,0 +1,8 @@
+include README.md
+include fn_proofpoint_tap/util/*
+include fn_proofpoint_tap/data/templates/*.jinja*
+include fn_proofpoint_tap/LICENSE
+include doc/*.md
+include doc/*.docx
+include doc/*.pdf
+include doc/screenshots/*
