@@ -429,22 +429,33 @@ class PPTRIncidentPolling(ResilientComponent):
 
     def main(self):
         """main entry point, instiantiate polling thread"""
-
-        # Wait for all existing threads to complete.
-        for thread in self.threads:
-            thread.join()
-
-        # Get rid of stopped threads from list.
-        self.threads = [t for t in self.threads if t.is_alive()]
-
-        options = self.options
         # initialize last update to startup interval if present, otherwise update interval
+        options = self.options
         startup_interval = options.get('startup_interval', None)
         if startup_interval is not None:
             startup_interval = int(startup_interval)
         self.lastupdate = startup_interval
-
         polling_interval = int(options.get("polling_interval", 0))
+        # Use a timeout value of polling_interval (in secs) + 10 secs to wait for all threads to end.
+        thread_timeout = (polling_interval * 60) + 10
+
+        # Wait for threads to stop within thread timeout interval.
+        stop_time = time.time() + thread_timeout
+        while any(t.isAlive for t in self.threads) and (time.time() < stop_time):
+            time.sleep(0.1)
+
+        # Get rid of stopped threads from list.
+        self.threads = [t for t in self.threads if t.is_alive()]
+
+        if self.threads:
+            # Polling threads still running raise runtime error.
+            log.error("There were {} polling threads which did not stop within timeout period on restart"
+                      .format(len(self.threads)))
+            raise RuntimeError("There were {} polling threads which did not stop within timeout period on restart."
+                               .format(len(self.threads)))
+
+        # Turn off 'stop_thread' flag.
+        self.stop_thread = False
 
         if polling_interval  > 0:
             # Create and start polling thread
@@ -460,7 +471,7 @@ class PPTRIncidentPolling(ResilientComponent):
         """contents of polling thread, alternately check for new data and wait"""
         pptr = PPTRClient(self.opts, self.options)
 
-        while True:
+        while not self.stop_thread:
 
             incident_list = pptr.get_incidents(self.lastupdate)
             self.lastupdate = int(self.options.get("polling_interval", 2))
@@ -498,12 +509,13 @@ class PPTRIncidentPolling(ResilientComponent):
 
                 except TypeError as ex:
                     log.error(ex)
+
+            # Break out of loop before sleep if restart initiated.
+            if self.stop_thread:
+                break
+
             # Amount of time (seconds) to wait to check cases again, defaults to 10 mins if not set
             time.sleep(int(self.options.get("polling_interval", 10)) * 60)
-
-            if self.stop_thread:
-                self.stop_thread = False
-                break
 
     def make_data_table(self, events):
         """
