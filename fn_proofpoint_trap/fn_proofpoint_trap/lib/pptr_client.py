@@ -123,6 +123,10 @@ class PPTRClient(object):
             msg = str(ierr)
             return {'error': 'Request to {0} failed with error {1}.'.format(url, msg)}
 
+        # If an error caught in the error handler return the error dict.
+        if "error" in r:
+            return r
+
         try:
             return r.json()
         except ValueError:
