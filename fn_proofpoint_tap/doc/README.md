@@ -31,6 +31,7 @@
 * Poller
 * Get Forensics
 * Get Campaign
+
 NOTE: If using both Proofpoint TAP and TRAP integrations, TAP polls events and TRAP polls incidents. One could be more granular than the other; therefore, you might not need to use both pollers at the same time.
 
 ---

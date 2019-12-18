@@ -132,6 +132,7 @@ There are several ways to verify the successful operation of a function.
 
 ### Resilient Scripting Log
 A separate log file is available to review scripting errors. This is useful when issues occur in the pre-processing or post-processing scripts.
+
 The default location for this log file is: `/var/log/resilient-scripting/resilient-scripting.log`.
 
 ### Resilient Logs
