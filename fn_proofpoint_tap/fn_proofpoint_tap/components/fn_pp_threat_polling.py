@@ -2,20 +2,21 @@
 # pragma pylint: disable=unused-argument, no-self-use
 
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+
 """Polling implementation"""
 
 import calendar
-import jinja2
 import logging
 import os
 import time
 from datetime import datetime
 from threading import Thread
+import jinja2
 from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
 from pkg_resources import Requirement, resource_filename
-from fn_proofpoint_tap.util.proofpoint_common import get_threat_list
 from resilient_lib import RequestsCommon
+from fn_proofpoint_tap.util.proofpoint_common import get_threat_list
 
 
 log = logging.getLogger(__name__)
@@ -100,7 +101,7 @@ class PP_ThreatPolling(ResilientComponent):
         # using an optional JSON (JINJA2) template file
         threat_path = self.options.get("threat_template", self.default_path)
         if threat_path and not os.path.exists(threat_path):
-            log.warn(u"Template file '%s' not found.", threat_path)
+            log.warning(u"Template file '%s' not found.", threat_path)
             threat_path = None
         if not threat_path:
             # Use the template file installed by this package
@@ -355,7 +356,7 @@ class PP_ThreatPolling(ResilientComponent):
                                  "because its score value is lower than the app.config score_threshold value. "
                                  "'{}' - updated threat type classification based on score values is inconsistent with "
                                  "'{}' - the original TAP event threat type classification.".format(
-                        orig_threat, self._format_set(score_threat_types), self._format_set(original_threat_types)))
+                            orig_threat, self._format_set(score_threat_types), self._format_set(original_threat_types)))
 
             return score_threat_types
 

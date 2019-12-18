@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
+
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 
+""" Common code for Proofpoint TAP"""
+
 import logging
-import json
 import os
 import jinja2
 from requests.auth import HTTPBasicAuth
-from six import string_types
 from requests.exceptions import HTTPError
+from six import string_types
 from resilient_lib.components.integration_errors import IntegrationError
 from pkg_resources import Requirement, resource_filename
 from resilient_circuits import template_functions
+import json
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
@@ -22,6 +25,14 @@ PROOFPOINT_TAP_404_ERROR = "404 Client Error"
 
 
 def get_threat_list(rc, options, lastupdate, bundle):
+    """
+    Get threat list.
+    :param rc:
+    :param options:
+    :param lastupdate:
+    :param bundle:
+    :return:
+    """
     base_url = options['base_url']
     username = options['username']
     password = options['password']

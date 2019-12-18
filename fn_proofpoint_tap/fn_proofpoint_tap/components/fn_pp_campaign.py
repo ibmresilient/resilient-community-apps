@@ -9,9 +9,9 @@ import logging
 import os
 from resilient_lib import RequestsCommon, validate_fields
 from resilient_lib.components.integration_errors import IntegrationError
-from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg, PROOFPOINT_TAP_404_ERROR
 from requests.auth import HTTPBasicAuth
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from fn_proofpoint_tap.util.proofpoint_common import custom_response_err_msg, PROOFPOINT_TAP_404_ERROR
 try:
     from json.decoder import JSONDecodeError
 except ImportError:
