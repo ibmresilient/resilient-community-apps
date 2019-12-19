@@ -7,9 +7,9 @@ setup(
     name='fn_proofpoint_tap',
     version='1.0.0',
     license='MIT',
-    author='Resilient Labs',
-    author_email='resil.labs@gmail.com',
-    url='https://ibm.biz/resilientcommunity',
+    author='IBM Resilient',
+    author_email='support@resilientsystems.com',
+    url='https://success.resilientsystems.com/',
     description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     long_description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     install_requires=[

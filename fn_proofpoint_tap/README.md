@@ -169,4 +169,4 @@ timeout=60
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_proofpoint_tap | 1.0.0 | Resilient Labs | https://ibm.biz/resilientcommunity |
+| fn_proofpoint_tap | 1.0.0 | IBM Resilient | https://success.resilientsystems.com/ |
