@@ -9,7 +9,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='https://ibm.biz/resilientcommunity',
+    url='https://success.resilientsystems.com/',
     description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     long_description="Resilient Circuits Components for 'fn_proofpoint_tap'",
     install_requires=[
