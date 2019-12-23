@@ -14,6 +14,11 @@ from fn_resilient_ml.lib.nlp.res_sif import ResSIF
 from fn_resilient_ml.lib.nlp.res_nlp import ResNLP
 from fn_resilient_ml.lib.nlp.word_sentence_utils import WordSentenceUtils
 import json
+from nltk.corpus import words
+setofwords = set(words.words())
+
+SIF_A = 10e-3
+
 
 parser = argparse.ArgumentParser(description="Find similarity between given sentence and incident")
 
@@ -64,7 +69,17 @@ vec.load_s2v(vec_file)
 
 inc_vec = vec.get_incident_vec(str(inc_id))
 sen_vec = vec.get_vec_for_sentence(sentence)
+u = []
+with open("vec_en_new_pcs.json", "r") as infile:
+    u = json.load(infile)
+
+u = np.multiply(u, np.transpose(u))
+sub = np.multiply(u, sen_vec)
+sen_vec = np.subtract(sen_vec, sub)
+inc_vec_norm = np.linalg.norm(inc_vec)
+sen_vec_norm = np.linalg.norm(sen_vec)
 sim = np.dot(inc_vec, sen_vec)/(np.linalg.norm(inc_vec) * np.linalg.norm(sen_vec))
+sim1 = np.dot(inc_vec, sen_vec)/(inc_vec_norm * sen_vec_norm)
 
 print("Similarity between input incident and sentence:")
 print("\t\t%-30s %s"%("similarity:", sim))
@@ -82,7 +97,28 @@ if debug:
             inc_id_index = i
             break
     if inc_id_index is not None:
-        inc_v = vec.get_vec_for_words(sentences[inc_id_index])
+
+        words = sentences[inc_id_index]
+        inc_v = np.zeros(w2v.word2vec.vector_size)
+        inv_v_count = 0
+        for w in words:
+            if w in setofwords:
+                wc = sif.get_word_count(w)
+                if wc < 300:
+                    wc = 300 - (300 - wc) / 3
+                a_value = SIF_A / (SIF_A + wc)
+                try:
+                    w_v = w2v.get_word_vec(w)
+                    inc_v += np.multiply(a_value, w_v)
+                    inv_v_count += 1
+                except:
+                    pass
+        if inv_v_count > 0:
+            inc_v /= inv_v_count
+
+        #inc_v = vec.get_vec_for_words(sentences[inc_id_index])
+        sub = np.multiply(u, inc_v)
+        inc_v = np.subtract(inc_v, sub)
         sim1 = np.dot(inc_vec, inc_v)/(np.linalg.norm(inc_vec) * np.linalg.norm(inc_v))
         print("\trecompute incident vec, and check with cached one. Sim shall be close to 1:")
         print("\t\t%-30s %s" % ("recom sim:", sim1))
@@ -99,11 +135,14 @@ if debug:
                 try:
                     v1 = w2v.get_word_vec(w1)
                     v2 = w2v.get_word_vec(w2)
-                    sim1 = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
-                    if abs(sim1) > sim_max:
-                        sim_max = abs(sim1)
-                        wrd1 = w1
-                        wrd2 = w2
+                    v1_norm = np.linalg.norm(v1)
+                    v2_norm = np.linalg.norm(v2)
+                    if v1_norm > 0 and v2_norm > 0:
+                        sim1 = np.dot(v1, v2) / (v1_norm * v2_norm)
+                        if abs(sim1) > sim_max:
+                            sim_max = abs(sim1)
+                            wrd1 = w1
+                            wrd2 = w2
                 except:
                     pass
         if sim_max != 0:
@@ -120,26 +159,41 @@ if debug:
         print("\tincident top 5 word count:")
         s_count = [(w, sif.get_word_count(w)) for w in words_2]
         s_count.sort(key=lambda u: u[1])
-        for i in range(min(5, len(s_count))):
-            print("\t\t%-30s %s" % (s_count[i][0] + ':', s_count[i][1]))
+        s_tmp = [s for s in s_count if s[1] > 0]
+        for i in range(min(5, len(s_tmp))):
+            print("\t\t%-30s %s" % (s_tmp[i][0] + ':', s_tmp[i][1]))
 
         count_threshold = 10
         v2_high = np.zeros(w2v.word2vec.vector_size)
         v2_low = np.zeros(w2v.word2vec.vector_size)
         high_count = 0
         low_count = 0
+        v2_all = np.zeros(w2v.word2vec.vector_size)
+        v2_all_count = 0
+        sen_vec_norm = np.linalg.norm(sen_vec)
+        total_wc = 0
+        for w2 in words_2:
+            total_wc += sif.get_word_count(w2)
 
+        res = []
         for w2 in words_2:
             wc = sif.get_word_count(w2)
-            a_value = ResSen2Vec.SIF_A/(ResSen2Vec.SIF_A + wc)
+            a_value = SIF_A/(SIF_A + wc)
             try:
                 w_v = w2v.get_word_vec(w2)
-                if wc > count_threshold:
+                w_sim = np.dot(w_v, sen_vec)/(np.linalg.norm(w_v) * sen_vec_norm)
+                res.append((w2, wc, w_sim))
+                #if wc/total_wc < 0.005:
+                #if wc < 500 and w_sim < 0.50:
+                if wc > 10:
                     v2_high += np.multiply(a_value, w2v.get_word_vec(w2))
                     high_count += 1
-                else:
+                if wc > 100:
                     v2_low += np.multiply(a_value, w2v.get_word_vec(w2))
                     low_count += 1
+                v2_all += np.multiply(a_value, w2v.get_word_vec(w2))
+                v2_all_count += 1
+
             except:
                 pass
 
@@ -147,5 +201,17 @@ if debug:
             v2_high /= high_count
         if low_count > 0:
             v2_low /= low_count
-        sim_high = np.dot(v2_high, sen_vec)/(np.linalg.norm(v2_high) * np.linalg.norm(sen_vec))
-        print("\tLow sim: {}".format(sim_high))
+        if v2_all_count > 0:
+            v2_all /= v2_all_count
+
+        sim_high = np.dot(v2_high, sen_vec)/(np.linalg.norm(v2_high) * sen_vec_norm)
+        sim_low = np.dot(v2_low, sen_vec)/(np.linalg.norm(v2_low) * sen_vec_norm)
+        sim_all = np.dot(v2_all, sen_vec) / (np.linalg.norm(v2_all) * sen_vec_norm)
+
+        print("\tLow sim: {}".format(sim_low))
+        print("\tHigh sim: {}".format(sim_high))
+        print("\tAll sim: {}".format(sim_all))
+
+        res.sort(key=lambda u:u[2])
+        for w in res:
+            print("%-20s, %-8s, %s"%(w[0], str(w[1]), str(w[2])))
