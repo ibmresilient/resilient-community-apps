@@ -145,7 +145,7 @@ class ArielSearch(SearchWaitCommand):
         auth_info = AuthInfo.get_authInfo()
         url = auth_info.api_url + qradar_constants.ARIEL_SEARCHES_RESULT.format(search_id)
 
-        headers = auth_info.headers
+        headers = auth_info.headers.copy()
         # if the # of returned items is big, this call will take a long time!
         # Need to use Range to limit the #.
         headers[b"Range"] = "items={}-{}".format(str(self.range_start), str(self.range_end))
