@@ -14,7 +14,7 @@ import pytest
 from fn_utilities.components.utilities_excel_query import WorksheetData
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult, FunctionError
-from .mock_attachment import AttachmentMock
+from mock_attachment import AttachmentMock
 import json
 import os
 
