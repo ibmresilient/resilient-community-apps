@@ -66,6 +66,7 @@ class FunctionComponent(ResilientComponent):
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)
 
+            # If message was deleted a 204 code is returned.
             if response.status_code == 204:
                 success = True
                 response_json = {'value': success}

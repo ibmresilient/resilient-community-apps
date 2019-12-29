@@ -76,19 +76,22 @@ class MSGraphHelper(object):
 
     def delete_message(self, email_address, mail_folder, message_id):
         """
-        Call MS Graph to delete  endpoint.
+        Call MS Graph to delete message.
+        :param email_address: email address of the user's mailbox from which to delete the message
+        :param mail_folder: mailFolder id of the folder containing the message to be deleted
+        :param message_id: message id of the message to be deleted
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
-        if mail_folder:
-            ms_graph_users_url = u'{0}users/{1}/mailFolders/{2}/messages/{3}'.format(self.__ms_graph_url, email_address,
-                                                                                     mail_folder, message_id)
-        else:
-            ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
+        mail_folder_string = self.build_folder_string(mail_folder)
+
+        ms_graph_users_url = u'{0}users/{1}{2}/messages/{3}'.format(self.__ms_graph_url, email_address,
+                                                                    mail_folder_string, message_id)
+
         response = self.__ms_graph_session.delete(ms_graph_users_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to delete message.")
 
         return response
 
@@ -105,6 +108,7 @@ class MSGraphHelper(object):
     def query_emails_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
+        :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
         :param end_date: date/time string of email received dated to end search
@@ -116,6 +120,8 @@ class MSGraphHelper(object):
         # Get the users
         response = self.get_users()
         user_list = response.json()['value']
+
+        # Start with an empty list of results.
         results = []
 
         # Iterate through all users
@@ -130,6 +136,7 @@ class MSGraphHelper(object):
         """
         query_emails_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
         :param email_address_string: a comma separated string that that is converted to a list of email addresses to query.
+        :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
         :param end_date: date/time string of email received dated to end search
@@ -139,6 +146,8 @@ class MSGraphHelper(object):
         :return: list of emails in all user email account that match the search criteria.
         """
         results = []
+
+        # Iterator through list of email addresses
         for email_address in email_address_string.split(','):
             user_query = self.query_emails_by_address(email_address.strip(), mail_folder, sender, start_date, end_date,
                                                       has_attachments, message_subject, message_body)
@@ -147,7 +156,8 @@ class MSGraphHelper(object):
 
     def query_emails(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
-        query_emails is the top level routine for querying emails.
+        query_emails is the top level routine for querying emails.  If the email_address to search contains the
+        string "ALL USERS", then all of the users of the tenant are searched.
         :param email_address: A string indicating which emails to query.  email_address will be either:
                 a single email address
                 a comma separated string of email addresses
@@ -170,7 +180,7 @@ class MSGraphHelper(object):
         return query_results
 
     def build_folder_string(self, mail_folder):
-        if mail_folder is None:
+        if mail_folder is None or mail_folder == "":
             return ""
 
         folder_string = u"/mailFolders/{}".format(mail_folder)
