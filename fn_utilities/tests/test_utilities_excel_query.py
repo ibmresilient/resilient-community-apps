@@ -27,6 +27,12 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
 
+def sort_json_arrays(obj):
+    for elem in obj:
+        if isinstance(obj[elem], list):
+            obj[elem].sort()
+        if isinstance(obj[elem], dict):
+            sort_json_arrays(obj[elem])
 
 def call_utilities_excel_query_function(circuits, function_params, timeout=10):
     # Fire a message to the function
@@ -133,7 +139,9 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        expected = sort_json_arrays(json.loads(expected.strip()))
+        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
+        assert  expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", {}, "test2", "data/excel_query/test_named_ranges.dat"),
@@ -169,7 +177,9 @@ class TestWorksheetData:
             expected = file.read()
         # comparing objects is a work around for the difference in iteration through dictionaries in Python 2 and 3
         # which creates different json dumps
-        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        expected = sort_json_arrays(json.loads(expected.strip()))
+        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
+        assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -190,7 +200,9 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        expected = sort_json_arrays(json.loads(expected.strip()))
+        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
+        assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
@@ -208,7 +220,9 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        expected = sort_json_arrays(json.loads(expected.strip()))
+        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
+        assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JAN 2015'!A3, 'Sheet1'!A1:A1",
@@ -230,6 +244,9 @@ class TestWorksheetData:
         # are the same, but in different order
         expected["sheets"]["_keys"].sort()
         actual["sheets"]["_keys"].sort()
+
+        expected = sort_json_arrays(expected)
+        actual = sort_json_arrays(actual)
         assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
@@ -248,7 +265,9 @@ class TestWorksheetData:
         with open(res_path, 'r') as file:
             expected = file.read()
 
-        assert json.loads(expected.strip()) == json.loads(json.dumps(wb.result, default=WorksheetData.serializer))
+        expected = sort_json_arrays(json.loads(expected.strip()))
+        actual = sort_json_arrays(json.loads(json.dumps(wb.result, default=WorksheetData.serializer)))
+        assert expected == actual
 
     @pytest.mark.parametrize("path, ranges, defined_names, expected_result_path", [
         ("data/excel_query/budget.xlsx", "'JANUA 2015'!A3:A3,", "", "data/excel_query/test_cell_empty.dat"),
