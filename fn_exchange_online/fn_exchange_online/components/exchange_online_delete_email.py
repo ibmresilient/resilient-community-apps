@@ -65,21 +65,21 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(u"Start delete message for  email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)
+            response = self.MS_graph_helper.delete_message(email_address, messages_id)
 
             if response.status_code == 204:
                 success = True
+                response_json = {'value': success}
             else:
                 success = False
+                response_json = response.json()
 
-            response_json = response.json()
             results = rp.done(success, response_json)
 
             yield StatusMessage(u"Returning delete results for email address: {}".format(email_address))
 
-            LOG.debug(json.dumps(results['content']))
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            LOG.error(err)
+            yield FunctionError(err)

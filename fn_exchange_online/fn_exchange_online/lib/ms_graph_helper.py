@@ -157,15 +157,12 @@ class MSGraphHelper(object):
         :return: list of emails in all user email account that match the search criteria.
         """
 
-        if (',' in email_address):
-            query_results = self.query_emails_by_list(email_address, mail_folder, sender, start_date, end_date,
-                                                      has_attachments, message_subject, message_body)
-        elif (email_address == "ALL USERS"):
+        if (email_address == "ALL USERS"):
             query_results = self.query_emails_all_users(mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         else:
-            query_results = self.query_emails_by_address(email_address, mail_folder, sender, start_date, end_date,
-                                                         has_attachments, message_subject, message_body)
+            query_results = self.query_emails_by_list(email_address, mail_folder, sender, start_date, end_date,
+                                                        has_attachments, message_subject, message_body)
         return query_results
 
     def build_folder_string(self, mail_folder):
