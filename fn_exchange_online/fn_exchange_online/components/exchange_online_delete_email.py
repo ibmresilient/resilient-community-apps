@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_email_address: %s", mailfolders_id)
             LOG.info(u"exo_email_address: %s", messages_id)
 
-            yield StatusMessage(u"Start delete message for  email address: {}".format(email_address))
+            yield StatusMessage(u"Start delete message for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)
