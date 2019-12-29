@@ -50,7 +50,6 @@ class FunctionComponent(ResilientComponent):
 
             # Validate fields
             validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_mailfolders_id'], kwargs)
             validate_fields(['exo_messages_id'], kwargs)
 
             # Get the function parameters
@@ -65,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(u"Start delete message for  email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.delete_message(email_address, messages_id)
+            response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)
 
             if response.status_code == 204:
                 success = True

@@ -74,12 +74,16 @@ class MSGraphHelper(object):
 
         return response
 
-    def delete_message(self, email_address, message_id):
+    def delete_message(self, email_address, mail_folder, message_id):
         """
         Call MS Graph to delete  endpoint.
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
-        ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
+        if mail_folder:
+            ms_graph_users_url = u'{0}users/{1}/mailFolders/{2}/messages/{3}'.format(self.__ms_graph_url, email_address,
+                                                                                     mail_folder, message_id)
+        else:
+            ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
         response = self.__ms_graph_session.delete(ms_graph_users_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
