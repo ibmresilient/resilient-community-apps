@@ -23,8 +23,12 @@
 from __future__ import unicode_literals
 import logging
 import json
+import sys
 from pkg_resources import Requirement, resource_filename
-from pymisp import PyMISP
+if sys.version_info < (3, 6):
+    from pymisp import PyMISP
+else:
+    from pymisp import ExpandedPyMISP
 from circuits import BaseComponent, handler
 from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, IpProp, LatLngProp, ThreatServiceLookupEvent
 
@@ -163,7 +167,10 @@ class MISPThreatSearcher(BaseComponent):
 
         LOG.info("MISP Lookup: " + str(artifact_value))
 
-        misp_api = PyMISP(self.misp_url, self.misp_key, self.misp_verifycert, 'json')
+        if sys.version_info < (3, 6):
+            misp_api = PyMISP(self.misp_url, self.misp_key, self.misp_verifycert, 'json')
+        else:
+            misp_api = ExpandedPyMISP(self.misp_url, self.misp_key, ssl=self.misp_verifycert)
 
         # MISP search_index: produces a list of events, and their key attributes, based on search criteria.
         # But does not filter by attribute type (only by the value that matched),
@@ -241,13 +248,20 @@ class MISPThreatSearcher(BaseComponent):
                     UriProp(name="MISP Link", value=link),
                 )
                 # Add all the tags as separate properties
-                if event.get("Tag"):
-                    for tag in event.get("Tag"):
-                        if ":" in tag["name"]:
-                            tag_name, tag_value = tag["name"].split(":", 1)
-                        else:
-                            tag_name = tag_value = tag["name"]
-                        hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
+                tag_counter = {}
+                for tag in event.get("Tag", []):
+                    if ":" in tag["name"]:
+                        tag_name, tag_value = tag["name"].split(":", 1)
+                    else:
+                        tag_name = tag_value = tag["name"]
+
+                    # start counter at 0 if it doesn't exist
+                    tag_count = tag_counter.get(tag_name, -1) + 1
+                    tag_counter[tag_name] = tag_count
+                    # only add count to name if > 0
+                    if tag_count:
+                        tag_name = "{}_{}".format(tag_name, tag_count)
+                    hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
 
                 hits.append(hit)
 
