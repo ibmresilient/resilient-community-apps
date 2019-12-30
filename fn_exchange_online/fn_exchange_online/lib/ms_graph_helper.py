@@ -18,7 +18,8 @@ class MSGraphHelper(object):
         self.__client_secret = client_secret
         self.__proxies = proxies
         self.__ms_graph_session = self.authenticate()
-        self.__max_emails = max_emails
+        self.__max_emails = int(max_emails)
+        self.__current_email_count = 0
 
     def authenticate(self):
         """
@@ -71,6 +72,23 @@ class MSGraphHelper(object):
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
             raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+
+        return response
+
+    def get_message(self, email_address, message_id):
+        """
+        Call MS Graph to delete message.
+        :param email_address: email address of the user's mailbox from which to delete the message
+        :param message_id: message id of the message to be deleted
+        :return: requests response from the /users/ endpoint which is the list of all users.
+        """
+        ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
+
+        response = self.__ms_graph_session.get(ms_graph_users_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to delete message.")
 
         return response
 
@@ -162,6 +180,7 @@ class MSGraphHelper(object):
                 a single email address
                 a comma separated string of email addresses
                 a string "ALL USERS" indicating that all user emails should be queried.
+        :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
         :param end_date: date/time string of email received dated to end search
@@ -170,6 +189,8 @@ class MSGraphHelper(object):
         :param message_body: search for emails containing this string in the "body" of email
         :return: list of emails in all user email account that match the search criteria.
         """
+
+        self.__current_email_count = 0
 
         if (email_address == "ALL USERS"):
             query_results = self.query_emails_all_users(mail_folder, sender, start_date, end_date,
@@ -180,6 +201,12 @@ class MSGraphHelper(object):
         return query_results
 
     def build_folder_string(self, mail_folder):
+        """
+        build_folder_string function creates the string used on MS Graph API calls to specify the mail folder
+        location of the
+        :param mail_folder: mailFolder id
+        :return: the mailFolder string to be used in MS Graph API calls where a mail folder is used.
+        """
         if mail_folder is None or mail_folder == "":
             return ""
 
@@ -189,8 +216,9 @@ class MSGraphHelper(object):
     def query_emails_by_address(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
                                 message_body):
         """
-         query_emails_by_address returns the results of a query on a single email mailbox.
+         query_emails_by_address returns the results of a query on a single email address (mailbox).
          :param email_address: a single email address to be queried.
+         :param mail_folder: mailFolder id of the folder to search
          :param sender: email address of sender to search for
          :param start_date: date/time string of email received dated to start search
          :param end_date: date/time string of email received dated to end search
@@ -223,7 +251,24 @@ class MSGraphHelper(object):
             raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
 
         LOG.info(u'Exchange Online query string {0}', ms_graph_query_messages_url)
-        response = self.__ms_graph_session.get(ms_graph_query_messages_url)
+
+        email_list = []
+        # MS Graph will return message results back a certain number at a time, so we need to
+        # append all of the results to a single list.  Because there can be a huge number of emails
+        # returned, keep a count and limit the number returned to a variable set in the app.config.
+        # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
+        while ms_graph_query_messages_url and self.__current_email_count <= self.__max_emails:
+            response = self.__ms_graph_session.get(ms_graph_query_messages_url)
+            json_response = response.json()
+            for email in json_response['value']:
+                # Add these emails to the list
+                email_list.append(email)
+
+            # Keep track of the total emails retrieved so far.
+            self.__current_email_count = self.__current_email_count + len(json_response['value'])
+
+            # Get URL for the next batch of results.
+            ms_graph_query_messages_url = json_response.get('@odata.nextLink')
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
@@ -232,8 +277,6 @@ class MSGraphHelper(object):
         # Return empty list if the email is not found.
         if response.status_code == 404:
             email_list = []
-        else:
-            email_list = response.json()['value']
 
         results = {'email_address': email_address,
                    'status_code': response.status_code,

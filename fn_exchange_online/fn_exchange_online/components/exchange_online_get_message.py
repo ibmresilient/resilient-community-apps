@@ -12,7 +12,7 @@ CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_online_delete_email"""
+    """Component that implements Resilient function 'exchange_online_get_message"""
     def load_options(self, opts):
         # Get app.config parameters.
         self.opts = opts
@@ -41,9 +41,9 @@ class FunctionComponent(ResilientComponent):
         """Configuration options have changed, save new values"""
         self.load_options(opts)
 
-    @function("exchange_online_delete_email")
-    def _exchange_online_delete_email_function(self, event, *args, **kwargs):
-        """Function: Delete a message in the specified user's mailbox."""
+    @function("exchange_online_get_message")
+    def _exchange_online_get_message_function(self, event, *args, **kwargs):
+        """Function: This function returns the contents of an Exchange Online message."""
         try:
             # Initialize the results payload
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
@@ -52,31 +52,28 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_email_address'], kwargs)
             validate_fields(['exo_messages_id'], kwargs)
 
-            # Get the function parameters
-            email_address = kwargs.get('exo_email_address')  # text
-            mailfolders_id = kwargs.get('exo_mailfolders_id')  # text
-            messages_id = kwargs.get('exo_messages_id')  # text
+            # Get the function parameters:
+            email_address = kwargs.get("exo_email_address")  # text
+            messages_id = kwargs.get("exo_messages_id")  # text
 
             LOG.info(u"exo_email_address: %s", email_address)
-            LOG.info(u"exo_mailfolders_id: %s", mailfolders_id)
             LOG.info(u"exo_messages_id: %s", messages_id)
 
-            yield StatusMessage(u"Start delete message for email address: {}".format(email_address))
+            yield StatusMessage(u"Start get message for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)
+            response = self.MS_graph_helper.get_message(email_address, messages_id)
 
-            # If message was deleted a 204 code is returned.
-            if response.status_code == 204:
-                success = True
-                response_json = {'value': success}
-            else:
-                success = False
-                response_json = response.json()
+            response_json = response.json()
+            results = rp.done(True, response_json)
 
-            results = rp.done(success, response_json)
+            # Add pretty printed string for easier to read output text in note.
+            pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
+            results['pretty_string'] = pretty_string
 
-            yield StatusMessage(u"Returning delete results for email address: {}".format(email_address))
+            yield StatusMessage(u"Returning results for get message for email address: {}".format(email_address))
+
+            LOG.debug(json.dumps(results['content']))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

@@ -75,8 +75,6 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Returning user profile results for email address: {}".format(email_address))
 
-            LOG.debug(json.dumps(results['content']))
-
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
         except Exception as err:
