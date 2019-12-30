@@ -10,7 +10,7 @@ class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_emails, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, proxies=None):
         self.__ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.__ms_graph_url = ms_graph_url
         self.__tenant_id = tenant_id
@@ -18,7 +18,7 @@ class MSGraphHelper(object):
         self.__client_secret = client_secret
         self.__proxies = proxies
         self.__ms_graph_session = self.authenticate()
-        self.__max_emails = int(max_emails)
+        self.__max_messages = int(max_messages)
         self.__current_email_count = 0
 
     def authenticate(self):
@@ -257,7 +257,7 @@ class MSGraphHelper(object):
         # append all of the results to a single list.  Because there can be a huge number of emails
         # returned, keep a count and limit the number returned to a variable set in the app.config.
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
-        while ms_graph_query_messages_url and self.__current_email_count <= self.__max_emails:
+        while ms_graph_query_messages_url and self.__current_email_count <= self.__max_messages:
             response = self.__ms_graph_session.get(ms_graph_query_messages_url)
             json_response = response.json()
             for email in json_response['value']:
