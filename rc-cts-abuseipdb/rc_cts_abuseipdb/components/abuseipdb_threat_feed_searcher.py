@@ -5,41 +5,34 @@
 """
     Test using 'curl':
 
-        curl -v -X OPTIONS 'http://127.0.0.1:9000/cts/abuseipdb_threat_feed'
-        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.name","value":"localhost"}' 'http://127.0.0.1:9000/cts/abuseipdb_threat_feed'
-        curl -v 'http://127.0.0.1:9000/cts/abuseipdb_threat_feed/9dd7b18b-48a1-5108-9d79-1a67641d0df5'
-        curl -v -X GET 'http://127.0.0.1:9000/cts/abuseipdb_threat_feed/7c796ece-e3b7-5dd1-a14c-a9c3179087e4'
+        curl -v -k --header "Content-Type: application/json" --data-binary '{"type":"net.ip","value":"8.8.8.8"}' 'http://127.0.0.1:9000/cts/abuseipdb_threat_feed'
 """
 
 import logging
-from rc_cts import searcher_channel, Hit, NumberProp, StringProp, UriProp, ThreatServiceLookupEvent
-from circuits import Event, Timer, handler
+from rc_cts import searcher_channel, Hit, NumberProp, StringProp, ThreatServiceLookupEvent
+from circuits import handler
 from resilient_circuits.actions_component import ResilientComponent
-import requests, requests_toolbelt
-import json
-
+from resilient_lib import RequestsCommon, validate_fields
 
 LOG = logging.getLogger(__name__)
 
-
-def config_section_data():
-    return """[abuseipdb_cts]
-abuseipdb_url=https://www.abuseipdb.com/check
-abuseipdb_key=
-ignore_white_listed=True
-"""
+HEADER_TEMPLATE = {
+    "Key": None,
+    "Accept": "application/json"
+}
 
 
 class AbuseIPDBThreatFeedSearcher(ResilientComponent):
     """
-    Example of a custom threat searcher component
+    custom threat searcher component for abuseipdb
     """
     def __init__(self, opts):
         super(AbuseIPDBThreatFeedSearcher, self).__init__(opts)
 
+        self.opts = opts
         self.options = opts.get("abuseipdb_cts", {})
         LOG.debug(opts)
-        """check https://www.abuseipdb.com/categories for more information"""
+        # check https://www.abuseipdb.com/categories for more information
         self.abuseipdb_categories = {
             3: "Fraud Orders",
             4: "DDoS Attack",
@@ -79,69 +72,68 @@ class AbuseIPDBThreatFeedSearcher(ResilientComponent):
         artifact_type = event.artifact['type']
         artifact_value = event.artifact['value']
 
-        if not self.options.get("abuseipdb_key"):
-            LOG.error("AbuseIPDB api key not set. You must set an api key to run this CTS.")
-            return
+        validate_fields(("abuseipdb_key", "abuseipdb_url"), self.options)
 
         LOG.info("AbuseIPDB lookup started for Artifact Type {0} - Artifact Value {1}"
                  .format(artifact_type, artifact_value))
-        hits = self._query_abuseipdb(artifact_value)
+
+        rc = RequestsCommon(self.opts, self.options)
+        hits = self._query_abuseipdb(rc, artifact_value)
 
         yield hits
 
-    def _query_abuseipdb(self, artifact_value):
+    def _query_abuseipdb(self, rc, artifact_value):
+        """
+        perform the query to abuseipdb
+        :param rc: resilient-lib object
+        :param artifact_value:
+        :return: hits object
+        """
+
         hits = []
-        ignore_white_listed = True
-        if self.options.get("ignore_white_listed", "True").lower() != "true":
-            ignore_white_listed = False
+
         try:
-            url = "{0}/{1}/json?key={2}".format(self.options.get("abuseipdb_url", "https://www.abuseipdb.com/check"),
-                                                artifact_value,
-                                                self.options.get("abuseipdb_key"))
+            headers = HEADER_TEMPLATE.copy()
+            headers['Key'] = self.options.get("abuseipdb_key")
 
-            adapter = requests_toolbelt.SSLAdapter("SSLv23")
-            session = requests.Session()
-            session.mount('https://', adapter)
-            LOG.debug("Getting info from {0}".format(url))
-            response = session.get(url)
-            if response.status_code == 200:
-                resp_json = json.loads(response.text)
-                category_list = set([])
-                number_of_reports = len(resp_json)
-                country = resp_json[0]["country"]
-                most_recent_report = resp_json[0]["created"]
+            url = self.options.get("abuseipdb_url")
+            params = {
+                'ipAddress': artifact_value,
+                'isWhitelisted': self.options.get("ignore_white_listed", "True"),
+                'verbose': True
+            }
 
-                """First we clean list of duplicated categories
-                We also check for whitelisted reports. 
-                If the option to ignore is set to true, we ignore ALL reports if we found at least one white listed """
-                for report in resp_json:
-                    if report["isWhitelisted"] and ignore_white_listed:
-                        LOG.info("Ignoring white listed reports for {0}".format(artifact_value))
-                        return hits
+            response = rc.execute_call_v2("get", url, params=params, headers=headers)
+            LOG.debug(response.json())
 
-                    for category in report["category"]:
-                        if category != 0:
-                            category_list.add(category)
+            resp_data = response.json()['data']
+            number_of_reports = resp_data['totalReports']
+            country = resp_data['countryName']
+            most_recent_report = resp_data['lastReportedAt']
+            confidence_score = resp_data.get("abuseConfidenceScore", 0)
 
-                """Then we build the string with the values"""
-                categories_string = ""
-                for cat in category_list:
-                    if categories_string != "":
-                        categories_string += ", "
-                    categories_string += self.abuseipdb_categories[cat]
+            # get clean list of de-duped categories
+            categories_names = ""
+            if resp_data.get('reports'):
+                categories_list = []
+                for report in resp_data['reports']:
+                    categories_list.extend(report["categories"])
+                categories_set = set(categories_list)  # dedup list
+                categories_names = u', '.join((self.abuseipdb_categories.get(item, 'unknown') for item in categories_set))
 
+            # only return data if there's anything useful
+            if number_of_reports or confidence_score:
                 # Return zero or more hits.  Here's one example.
                 hits.append(
                     Hit(
-                        NumberProp(name="Number of reports", value=number_of_reports),
+                        NumberProp(name="Confidence Score", value=confidence_score),
+                        NumberProp(name="Number of Reports", value=number_of_reports),
                         StringProp(name="Country", value=country),
                         StringProp(name="Most Recent Report", value=most_recent_report),
-                        StringProp(name="Categories", value=categories_string)
+                        StringProp(name="Categories", value=categories_names)
                         )
                 )
-            else:
-                LOG.warn("Got response status {0} from AbuseIPDB".format(response.status_code))
 
-        except BaseException as e:
-            LOG.exception(e.message)
+        except Exception as err:
+            LOG.exception(str(err))
         return hits
