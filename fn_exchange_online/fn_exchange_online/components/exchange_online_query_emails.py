@@ -82,7 +82,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Start message query.")
 
-            email_results = self.MS_graph_helper.query_emails(email_address, mail_folders, sender, start_date, end_date,
+            email_results = self.MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
                                                               has_attachments, message_subject, message_body)
 
             # Put query results in the results payload.

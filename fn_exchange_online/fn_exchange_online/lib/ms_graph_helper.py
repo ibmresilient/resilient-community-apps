@@ -124,7 +124,7 @@ class MSGraphHelper(object):
 
         return response
 
-    def get_email_attachments(self, email_address, message_id):
+    def get_message_attachments(self, email_address, message_id):
         ms_graph_users_url = u'{0}users/{1}/messages/{2}/attachments'.format(self.__ms_graph_url, email_address, message_id)
         response = self.__ms_graph_session.get(ms_graph_users_url)
 
@@ -134,7 +134,7 @@ class MSGraphHelper(object):
 
         return response
 
-    def query_emails_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
         :param mail_folder: mailFolder id of the folder to search
@@ -156,16 +156,16 @@ class MSGraphHelper(object):
         # Iterate through all users
         for user in user_list:
             email_address = user['userPrincipalName']
-            user_query = self.query_emails_by_address(email_address, mail_folder, sender, start_date, end_date,
+            user_query = self.query_messages_by_address(email_address, mail_folder, sender, start_date, end_date,
                                                        has_attachments, message_subject, message_body)
             # Append results for this user
             results.append(user_query)
 
         return results
 
-    def query_emails_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
-        query_emails_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
+        query_messages_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
         :param email_address_string: a comma separated string that that is converted to a list of email addresses to query.
         :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
@@ -180,14 +180,14 @@ class MSGraphHelper(object):
 
         # Iterator through list of email addresses
         for email_address in email_address_string.split(','):
-            user_query = self.query_emails_by_address(email_address.strip(), mail_folder, sender, start_date, end_date,
+            user_query = self.query_messages_by_address(email_address.strip(), mail_folder, sender, start_date, end_date,
                                                       has_attachments, message_subject, message_body)
             results.append(user_query)
         return results
 
-    def query_emails(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
-        query_emails is the top level routine for querying emails.  If the email_address to search contains the
+        query_messages is the top level routine for querying message.  If the email_address to search contains the
         string "ALL" or "all", then all of the users of the tenant are searched.
         :param email_address: A string indicating which emails to query.  email_address will be either:
                 a single email address
@@ -206,10 +206,10 @@ class MSGraphHelper(object):
         self.__current_message_count = 0
 
         if (email_address.lower() == "all"):
-            query_results = self.query_emails_all_users(mail_folder, sender, start_date, end_date,
+            query_results = self.query_messages_all_users(mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         else:
-            query_results = self.query_emails_by_list(email_address, mail_folder, sender, start_date, end_date,
+            query_results = self.query_messages_by_list(email_address, mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         return query_results
 
@@ -226,10 +226,10 @@ class MSGraphHelper(object):
         folder_string = u"/mailFolders/{}".format(mail_folder)
         return folder_string
 
-    def query_emails_by_address(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
-                                message_body):
+    def query_messages_by_address(self, email_address, mail_folder, sender, start_date, end_date, has_attachments,
+                                  message_subject, message_body):
         """
-         query_emails_by_address returns the results of a query on a single email address (mailbox).
+         query_messages_by_address returns the results of a query on a single email address (mailbox).
          :param email_address: a single email address to be queried.
          :param mail_folder: mailFolder id of the folder to search
          :param sender: email address of sender to search for
