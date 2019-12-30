@@ -1,11 +1,9 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
 import datetime
-import logging
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
-LOG = logging.getLogger(__name__)
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
@@ -125,7 +123,8 @@ class MSGraphHelper(object):
         return response
 
     def get_message_attachments(self, email_address, message_id):
-        ms_graph_users_url = u'{0}users/{1}/messages/{2}/attachments'.format(self.__ms_graph_url, email_address, message_id)
+        ms_graph_users_url = u'{0}users/{1}/messages/{2}/attachments'.format(self.__ms_graph_url, email_address,
+                                                                             message_id)
         response = self.__ms_graph_session.get(ms_graph_users_url)
 
         # User not found (404) is a valid "error" so don't return error for that.
@@ -163,7 +162,8 @@ class MSGraphHelper(object):
 
         return results
 
-    def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments,
+                               message_subject, message_body):
         """
         query_messages_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
         :param email_address_string: a comma separated string that that is converted to a list of email addresses to query.
@@ -262,8 +262,6 @@ class MSGraphHelper(object):
                                                                                      folder_string, filter_query)
         else:
             raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
-
-        LOG.info(u'Exchange Online query string {0}', ms_graph_query_messages_url)
 
         email_list = []
         # MS Graph will return message results back a certain number at a time, so we need to
