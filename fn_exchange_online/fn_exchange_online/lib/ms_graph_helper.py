@@ -20,6 +20,7 @@ class MSGraphHelper(object):
         self.__ms_graph_session = self.authenticate()
         self.__max_messages = int(max_messages)
         self.__current_email_count = 0
+        self.__max_users = 100
 
     def authenticate(self):
         """
@@ -66,14 +67,24 @@ class MSGraphHelper(object):
         Query MS Graph for all users endpoint.
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
+        user_list = []
+        user_count = 0
         ms_graph_users_url = u'{0}users'.format(self.__ms_graph_url)
-        response = self.__ms_graph_session.get(ms_graph_users_url)
 
-        # User not found (404) is a valid "error" so don't return error for that.
-        if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+        while ms_graph_users_url and user_count <= self.__max_users:
+            response = self.__ms_graph_session.get(ms_graph_users_url)
+            json_response = response.json()
+            for user in json_response['value']:
+                # Add these users to the list
+                user_list.append(user)
 
-        return response
+            # Keep track of the total emails retrieved so far.
+            user_count = user_count + len(json_response['value'])
+
+            # Get URL for the next batch of results.
+            ms_graph_users_url = json_response.get('@odata.nextLink')
+
+        return user_list
 
     def get_message(self, email_address, message_id):
         """
@@ -135,19 +146,21 @@ class MSGraphHelper(object):
         :param message_body: search for emails containing this string in the "body" of email
         :return: list of emails in all user email account that match the search criteria.
         """
-        # Get the users
-        response = self.get_users()
-        user_list = response.json()['value']
 
         # Start with an empty list of results.
         results = []
 
+        # Get the users
+        user_list = self.get_users()
+
         # Iterate through all users
         for user in user_list:
             email_address = user['userPrincipalName']
-            email_query = self.query_emails(email_address, mail_folder, sender, start_date, end_date, has_attachments,
-                                           message_subject, message_body)
-            results.append(email_query)
+            user_query = self.query_emails_by_address(email_address, mail_folder, sender, start_date, end_date,
+                                                       has_attachments, message_subject, message_body)
+            # Append results for this user
+            results.append(user_query)
+
         return results
 
     def query_emails_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
