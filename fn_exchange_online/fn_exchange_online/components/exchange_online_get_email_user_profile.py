@@ -20,9 +20,8 @@ class FunctionComponent(ResilientComponent):
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
-        # Validate required fields in app.config are set
         required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id",
-                           "client_secret", "max_messages_retrieved_in_query"]
+                           "client_secret", "max_messages", "max_users"]
         validate_fields(required_fields, self.options)
 
         # Get the MS Graph helper class
@@ -31,7 +30,8 @@ class FunctionComponent(ResilientComponent):
                                              self.options.get("tenant_id"),
                                              self.options.get("client_id"),
                                              self.options.get("client_secret"),
-                                             self.options.get("max_messages_retrieved_in_query"),
+                                             self.options.get("max_messages"),
+                                             self.options.get("max_users"),
                                              RequestsCommon(self.opts, self.options).get_proxies())
 
     def __init__(self, opts):

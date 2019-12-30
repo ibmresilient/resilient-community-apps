@@ -25,7 +25,7 @@ def selftest_function(opts):
     options = opts.get(CONFIG_DATA_SECTION, {})
 
     validate_fields(['microsoft_graph_token_url', 'microsoft_graph_url', 'tenant_id',
-                     'client_id', 'client_secret'], options)
+                     'client_id', 'client_secret', 'max_messages', 'max_users'], options)
 
     # Read configuration settings:
     token_url = options['microsoft_graph_token_url']
@@ -33,11 +33,14 @@ def selftest_function(opts):
     tenant_id = options['tenant_id']
     client_id = options['client_id']
     client_secret = options['client_secret']
+    max_messages  = options['max_messages']
+    max_users     = options['max_users']
 
     try:
         log.info(
             u'Calling MS Graph API with: \n token_url: ' + token_url + u'\n MS Graph API url: ' + graph_url +
-            u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id)
+            u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + max_messages +
+            + u'\n max_users: ' + max_users)
 
         state, reason = "", ""
 
@@ -47,6 +50,8 @@ def selftest_function(opts):
                                         tenant_id,
                                         client_id,
                                         client_secret,
+                                        max_messages,
+                                        max_users
                                         RequestsCommon(opts, options).get_proxies())
 
         # Get a MS Graph session token

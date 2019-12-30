@@ -21,6 +21,7 @@ microsoft_graph_url=https://graph.microsoft.com/v1.0/
 tenant_id=xxx
 client_id=xxx
 client_secret=xxx
-max_messages_retrieved_in_query=20
+max_messages=100
+max_users=2000
 """
     return config_data

@@ -10,7 +10,7 @@ class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users, proxies=None):
         self.__ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.__ms_graph_url = ms_graph_url
         self.__tenant_id = tenant_id
@@ -19,8 +19,8 @@ class MSGraphHelper(object):
         self.__proxies = proxies
         self.__ms_graph_session = self.authenticate()
         self.__max_messages = int(max_messages)
-        self.__current_email_count = 0
-        self.__max_users = 100
+        self.__current_message_count = 0
+        self.__max_users = int(max_users)
 
     def authenticate(self):
         """
@@ -188,11 +188,11 @@ class MSGraphHelper(object):
     def query_emails(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
         """
         query_emails is the top level routine for querying emails.  If the email_address to search contains the
-        string "ALL USERS", then all of the users of the tenant are searched.
+        string "ALL" or "all", then all of the users of the tenant are searched.
         :param email_address: A string indicating which emails to query.  email_address will be either:
                 a single email address
                 a comma separated string of email addresses
-                a string "ALL USERS" indicating that all user emails should be queried.
+                a string "ALL" indicating that all user emails should be queried.
         :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
@@ -202,10 +202,10 @@ class MSGraphHelper(object):
         :param message_body: search for emails containing this string in the "body" of email
         :return: list of emails in all user email account that match the search criteria.
         """
+        # Initialize message count at the top-level query function.
+        self.__current_message_count = 0
 
-        self.__current_email_count = 0
-
-        if (email_address == "ALL USERS"):
+        if (email_address.lower() == "all"):
             query_results = self.query_emails_all_users(mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         else:
@@ -270,7 +270,7 @@ class MSGraphHelper(object):
         # append all of the results to a single list.  Because there can be a huge number of emails
         # returned, keep a count and limit the number returned to a variable set in the app.config.
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
-        while ms_graph_query_messages_url and self.__current_email_count <= self.__max_messages:
+        while ms_graph_query_messages_url and self.__current_message_count <= self.__max_messages:
             response = self.__ms_graph_session.get(ms_graph_query_messages_url)
             json_response = response.json()
             for email in json_response['value']:
@@ -278,7 +278,7 @@ class MSGraphHelper(object):
                 email_list.append(email)
 
             # Keep track of the total emails retrieved so far.
-            self.__current_email_count = self.__current_email_count + len(json_response['value'])
+            self.__current_message_count = self.__current_message_count + len(json_response['value'])
 
             # Get URL for the next batch of results.
             ms_graph_query_messages_url = json_response.get('@odata.nextLink')
