@@ -130,9 +130,11 @@ def convert_job_search_time(search_time):
     # read from the beginning looking for lines to capture based on timestamp
     delta = 0
 
-    search_time_split = search_time.split(" ")
+    # remove all extraneous spaces
+    search_time_split = ' '.join(search_time.split()).split()
+
     if len(search_time_split) == 1:
-        if search_time_split[0].strip().lower() == "today":
+        if search_time_split[0].lower() == "today":
             # get midnight of this day
             dt = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
             now = calendar.timegm(dt.timetuple())
@@ -141,7 +143,10 @@ def convert_job_search_time(search_time):
 
     else:
         delta = int(search_time_split[0])
-        units = search_time_split[1].strip().lower()
+        units = search_time_split[1].lower()
+        if delta <= 0:
+            raise ValueError("Positive value required: %s", delta)
+
         if units in ("minute", "minutes"):
             delta = delta*60 # convert minutes to seconds
         elif units in ("hour", "hours"):
