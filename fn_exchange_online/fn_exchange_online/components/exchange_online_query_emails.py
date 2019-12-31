@@ -53,13 +53,6 @@ class FunctionComponent(ResilientComponent):
 
             # Validate fields
             validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_mail_folders'], kwargs)
-            validate_fields(['exo_email_address_sender'], kwargs)
-            validate_fields(['exo_start_date'], kwargs)
-            validate_fields(['exo_end_date'], kwargs)
-            validate_fields(['exo_has_attachments'], kwargs)
-            validate_fields(['exo_message_subject'], kwargs)
-            validate_fields(['exo_message_body'], kwargs)
 
             # Get the function parameters
             email_address  = kwargs.get('exo_email_address')  # text
