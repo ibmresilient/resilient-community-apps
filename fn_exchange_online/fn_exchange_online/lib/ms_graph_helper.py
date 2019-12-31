@@ -49,14 +49,14 @@ class MSGraphHelper(object):
         """
         Query MS Graph user mailFolders endpoint using the MS graph session.
         :param email_address: email address of the user profile requested
-        :return: requests response from the /users/profile endpoint
+        :return: requests response from the /users/mailFolders endpoint
         """
         ms_graph_user_mail_folders = u'{0}users/{1}/mailFolders'.format(self.__ms_graph_url, email_address)
         response = self.__ms_graph_session.get(ms_graph_user_mail_folders)
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to get user profile.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get user mail folders.")
 
         return response
 
@@ -86,10 +86,10 @@ class MSGraphHelper(object):
 
     def get_message(self, email_address, message_id):
         """
-        Call MS Graph to delete message.
-        :param email_address: email address of the user's mailbox from which to delete the message
-        :param message_id: message id of the message to be deleted
-        :return: requests response from the /users/ endpoint which is the list of all users.
+        Call MS Graph to get message json.
+        :param email_address: email address of the user's mailbox from which to get the message
+        :param message_id: message id of the message to get
+        :return: requests get response for the message to retrieve
         """
         ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
 
@@ -97,7 +97,24 @@ class MSGraphHelper(object):
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to delete message.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get message.")
+
+        return response
+
+    def get_message_mime(self, email_address, message_id):
+        """
+        Call MS Graph to get message mime content.
+        :param email_address: email address of the user's mailbox from which to get the message
+        :param message_id: message id of the message to get
+        :return: requests get response for the message to retrieve
+        """
+        ms_graph_users_url = u'{0}users/{1}/messages/{2}/$value'.format(self.__ms_graph_url, email_address, message_id)
+
+        response = self.__ms_graph_session.get(ms_graph_users_url)
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get message mime.")
 
         return response
 
@@ -129,7 +146,7 @@ class MSGraphHelper(object):
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to get list of users.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to get attachments.")
 
         return response
 
@@ -261,7 +278,7 @@ class MSGraphHelper(object):
                 ms_graph_query_messages_url = u'{0}users/{1}{2}/messages{3}'.format(self.__ms_graph_url, email_address,
                                                                                      folder_string, filter_query)
         else:
-            raise IntegrationError("Exchange Online: Query Emails: no query parameters specified.")
+            raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
 
         email_list = []
         # MS Graph will return message results back a certain number at a time, so we need to
@@ -283,7 +300,7 @@ class MSGraphHelper(object):
 
         # User not found (404) is a valid "error" so don't return error for that.
         if response.status_code >= 300 and response.status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph when trying to query emails.")
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to query messages.")
 
         # Return empty list if the email is not found.
         if response.status_code == 404:

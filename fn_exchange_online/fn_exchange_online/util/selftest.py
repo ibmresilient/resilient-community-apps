@@ -40,7 +40,7 @@ def selftest_function(opts):
         log.info(
             u'Calling MS Graph API with: \n token_url: ' + token_url + u'\n MS Graph API url: ' + graph_url +
             u'\n tenant_id: ' + tenant_id + u'\n client_id: ' + client_id + u'\n max_messages: ' + max_messages +
-            + u'\n max_users: ' + max_users)
+            u'\n max_users: ' + max_users)
 
         state, reason = "", ""
 
@@ -51,7 +51,7 @@ def selftest_function(opts):
                                         client_id,
                                         client_secret,
                                         max_messages,
-                                        max_users
+                                        max_users,
                                         RequestsCommon(opts, options).get_proxies())
 
         # Get a MS Graph session token
