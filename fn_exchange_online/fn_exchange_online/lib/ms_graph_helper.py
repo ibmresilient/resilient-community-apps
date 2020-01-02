@@ -139,6 +139,29 @@ class MSGraphHelper(object):
 
         return response
 
+    def move_message(self, email_address, mail_folder, message_id, dest_folder):
+        """
+        Call MS Graph to move message.
+        :param email_address: email address of the user's mailbox from which to delete the message
+        :param message_id: message id of the message to be deleted
+        :param mail_folder: mailFolder id of the folder containing the message to be deleted
+        :return: requests response from the /users/ endpoint which is the list of all users.
+        """
+        mail_folder_string = self.build_folder_string(mail_folder)
+
+        ms_graph_users_url = u'{0}users/{1}{2}/messages/{3}/move'.format(self.__ms_graph_url, email_address,
+                                                                    mail_folder_string, message_id)
+
+        response = self.__ms_graph_session.post(ms_graph_users_url,
+                                                headers={'Content-Type': 'application/json'},
+                                                json={'destinationId': dest_folder['name']})
+
+        # User not found (404) is a valid "error" so don't return error for that.
+        if response.status_code >= 300 and response.status_code != 404:
+            raise IntegrationError("Invalid response from Microsoft Graph when trying to delete message.")
+
+        return response
+
     def get_message_attachments(self, email_address, message_id):
         ms_graph_users_url = u'{0}users/{1}/messages/{2}/attachments'.format(self.__ms_graph_url, email_address,
                                                                              message_id)
@@ -257,7 +280,7 @@ class MSGraphHelper(object):
          :param message_body: search for emails containing this string in the "body" of email
          :return: list of emails in all user email account that match the search criteria.
          """
-
+        # Compute the mail folder if it is specified.
         folder_string = self.build_folder_string(mail_folder)
 
         # Create $search string query for search on message body string.
