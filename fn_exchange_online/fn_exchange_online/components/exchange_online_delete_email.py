@@ -2,7 +2,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
@@ -50,8 +49,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_messages_id'], kwargs)
+            validate_fields(['exo_email_address', 'exo_messages_id'], kwargs)
 
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
@@ -62,7 +60,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_mailfolders_id: %s", mailfolders_id)
             LOG.info(u"exo_messages_id: %s", messages_id)
 
-            yield StatusMessage(u"Start delete message for email address: {}".format(email_address))
+            yield StatusMessage(u"Starting delete message for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.delete_message(email_address, mailfolders_id, messages_id)

@@ -2,8 +2,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import sys
-import json
 import logging
 from io import BytesIO
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -51,9 +49,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['incident_id'], kwargs)
-            validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_messages_id'], kwargs)
+            validate_fields(['incident_id', 'exo_email_address', 'exo_messages_id'], kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
@@ -68,7 +64,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_messages_id: %s", message_id)
             LOG.info(u"exo_attachment_name: %s", attachment_name)
 
-            yield StatusMessage(u"Start get message mime for email address: {}".format(email_address))
+            yield StatusMessage(u"Starting to get message mime for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.get_message_mime(email_address, message_id)

@@ -61,7 +61,7 @@ class FunctionComponent(ResilientComponent):
 
             LOG.info(u"exo_email_address: %s", email_address)
 
-            yield StatusMessage(u"Start user profile query for email address: {}".format(email_address))
+            yield StatusMessage(u"Starting user profile query for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.get_user_profile(email_address)

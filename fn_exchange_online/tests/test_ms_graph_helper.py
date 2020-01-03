@@ -72,3 +72,39 @@ class TestMSGraphHelper(object):
 
         except IntegrationError as err:
             assert True
+
+    @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.get')
+    @patch('fn_exchange_online.lib.ms_graph_helper.OAuth2ClientCredentialsSession.authenticate')
+    def test_get_user_profile(self, authenticate_mock, get_mock):
+        """ Test Query Messages"""
+        print("Test Query Messages\n")
+        content = {"displayName": "Tester"}
+
+        try:
+            authenticate_mock.return_value = True
+            MS_graph_helper = MSGraphHelper(MOCKED_OPTS.get("microsoft_graph_token_url"),
+                                                    MOCKED_OPTS.get("microsoft_graph_url"),
+                                                    MOCKED_OPTS.get("tenant_id"),
+                                                    MOCKED_OPTS.get("client_id"),
+                                                    MOCKED_OPTS.get("client_secret"),
+                                                    MOCKED_OPTS.get("max_messages"),
+                                                    MOCKED_OPTS.get("max_users"),
+                                                    None)
+
+            get_mock.return_value = generate_response(content, 200)
+
+            response = MS_graph_helper.query_messages(self, email_address, mail_folder, sender, start_date, end_date,
+                                                      has_attachments, message_subject, message_body)
+            assert response.status_code == 200
+            assert response.content["displayName"] == "Tester"
+
+                    get_mock.return_value = generate_response(content, 404)
+                    response = MS_graph_helper.get_user_profile("tester@example.com")
+                    assert response.status_code == 404
+                    assert response.content["displayName"] == "Tester"
+
+                    get_mock.return_value = generate_response(content, 300)
+                    response = MS_graph_helper.get_user_profile("tester@example.com")
+
+        except IntegrationError as err:
+            assert True

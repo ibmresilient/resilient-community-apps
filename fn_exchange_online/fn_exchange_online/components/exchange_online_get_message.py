@@ -49,8 +49,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_messages_id'], kwargs)
+            validate_fields(['exo_email_address', 'exo_messages_id'], kwargs)
 
             # Get the function parameters:
             email_address = kwargs.get("exo_email_address")  # text
@@ -59,7 +58,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_email_address: %s", email_address)
             LOG.info(u"exo_messages_id: %s", message_id)
 
-            yield StatusMessage(u"Start get message for email address: {}".format(email_address))
+            yield StatusMessage(u"Starting get message for email address: {}".format(email_address))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.get_message(email_address, message_id)

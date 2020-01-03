@@ -33,8 +33,8 @@ def selftest_function(opts):
     tenant_id = options['tenant_id']
     client_id = options['client_id']
     client_secret = options['client_secret']
-    max_messages  = options['max_messages']
-    max_users     = options['max_users']
+    max_messages = options['max_messages']
+    max_users = options['max_users']
 
     try:
         log.info(

@@ -49,9 +49,7 @@ class FunctionComponent(ResilientComponent):
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['exo_email_address'], kwargs)
-            validate_fields(['exo_messages_id'], kwargs)
-            validate_fields(['exo_destination_mailfolder_id'], kwargs)
+            validate_fields(['exo_email_address', 'exo_messages_id', 'exo_destination_mailfolder_id'], kwargs)
 
             # Get the function parameters:
             email_address = kwargs.get("exo_email_address")  # text
@@ -64,7 +62,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_mailfolders_id: %s", mailfolders_id)
             LOG.info(u"exo_destination_id: %s", destination_id)
 
-            yield StatusMessage(u"Start move message for email address: {} to mail folder {}".format(email_address, destination_id))
+            yield StatusMessage(u"Starting move message for email address: {} to mail folder {}".format(email_address, destination_id))
 
             # Call MS Graph API to get the user profile
             response = self.MS_graph_helper.move_message(email_address, mailfolders_id, message_id, destination_id)

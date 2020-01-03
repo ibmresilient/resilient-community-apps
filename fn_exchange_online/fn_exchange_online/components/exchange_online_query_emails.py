@@ -11,6 +11,7 @@ from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
 CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
 
+
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_query_emails"""
 
@@ -55,14 +56,14 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_email_address'], kwargs)
 
             # Get the function parameters
-            email_address  = kwargs.get('exo_email_address')  # text
-            mail_folders   = kwargs.get('exo_mail_folders')  # text
-            sender         = kwargs.get('exo_email_address_sender')  # text
-            start_date       = kwargs.get('exo_start_date')  # datetime
-            end_date         = kwargs.get('exo_end_date')  # datetime
-            has_attachments  = kwargs.get('exo_has_attachments')  # bool
-            message_subject  = kwargs.get('exo_message_subject')  # text
-            message_body     = kwargs.get('exo_message_body')  # text
+            email_address = kwargs.get('exo_email_address')  # text
+            mail_folders = kwargs.get('exo_mail_folders')  # text
+            sender = kwargs.get('exo_email_address_sender')  # text
+            start_date = kwargs.get('exo_start_date')  # datetime
+            end_date = kwargs.get('exo_end_date')  # datetime
+            has_attachments = kwargs.get('exo_has_attachments')  # bool
+            message_subject = kwargs.get('exo_message_subject')  # text
+            message_body = kwargs.get('exo_message_body')  # text
 
             LOG.info(u"exo_email_address: %s", email_address)
             LOG.info(u"exo_mailfolders: %s", mail_folders)
@@ -73,10 +74,10 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_message_subject: %s", message_subject)
             LOG.info(u"exo_message_body: %s", message_body)
 
-            yield StatusMessage(u"Start message query.")
+            yield StatusMessage(u"Starting message query.")
 
             email_results = self.MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
-                                                              has_attachments, message_subject, message_body)
+                                                                has_attachments, message_subject, message_body)
 
             # Put query results in the results payload.
             results = rp.done(True, email_results)
