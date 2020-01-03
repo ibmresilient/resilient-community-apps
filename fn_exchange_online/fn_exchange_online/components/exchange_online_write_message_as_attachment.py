@@ -85,7 +85,7 @@ class FunctionComponent(ResilientComponent):
             results_data = {"attachment_name": attachment_name}
             results = rp.done(True, results_data)
 
-            yield StatusMessage(u"Returning results for get message mime for email address: {}".format(email_address))
+            yield StatusMessage(u"Returning results for get message mime for email address: {0}\n attachment name: {1}".format(email_address, attachment_name))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
