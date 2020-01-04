@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -72,7 +73,7 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Returning results for get message for email address: {}".format(email_address))
 
-            LOG.debug(json.dumps(results['content']))
+            LOG.debug(json.dumps(pretty_string))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

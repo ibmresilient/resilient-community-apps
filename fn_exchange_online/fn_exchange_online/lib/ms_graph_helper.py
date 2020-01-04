@@ -9,16 +9,16 @@ class MSGraphHelper(object):
     Helper object MSGraphHelper.
     """
     def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users, proxies=None):
-        self.__ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
-        self.__ms_graph_url = ms_graph_url
-        self.__tenant_id = tenant_id
-        self.__client_id = client_id,
-        self.__client_secret = client_secret
-        self.__proxies = proxies
-        self.__ms_graph_session = self.authenticate()
-        self.__max_messages = int(max_messages)
-        self.__current_message_count = 0
-        self.__max_users = int(max_users)
+        self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
+        self.ms_graph_url = ms_graph_url
+        self.tenant_id = tenant_id
+        self.client_id = client_id,
+        self.client_secret = client_secret
+        self.proxies = proxies
+        self.ms_graph_session = self.authenticate()
+        self.max_messages = int(max_messages)
+        self.current_message_count = 0
+        self.max_users = int(max_users)
 
     @staticmethod
     def check_ms_graph_response_code(status_code):
@@ -29,11 +29,11 @@ class MSGraphHelper(object):
         """
         Authenticate and get oauth2 token for the session.
         """
-        return OAuth2ClientCredentialsSession(url=self.__ms_graph_token_url,
-                                              client_id=self.__client_id,
-                                              client_secret=self.__client_secret,
+        return OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
+                                              client_id=self.client_id,
+                                              client_secret=self.client_secret,
                                               scope=['.default'],
-                                              proxies=self.__proxies)
+                                              proxies=self.proxies)
 
     def get_user_profile(self, email_address):
         """
@@ -41,8 +41,8 @@ class MSGraphHelper(object):
         :param email_address: email address of the user profile requested
         :return: requests response from the /users/profile endpoint
         """
-        ms_graph_user_profile_url = u'{0}users/{1}'.format(self.__ms_graph_url, email_address)
-        response = self.__ms_graph_session.get(ms_graph_user_profile_url)
+        ms_graph_user_profile_url = u'{0}/users/{1}'.format(self.ms_graph_url, email_address)
+        response = self.ms_graph_session.get(ms_graph_user_profile_url)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -54,8 +54,8 @@ class MSGraphHelper(object):
         :param email_address: email address of the user profile requested
         :return: requests response from the /users/mailFolders endpoint
         """
-        ms_graph_user_mail_folders = u'{0}users/{1}/mailFolders'.format(self.__ms_graph_url, email_address)
-        response = self.__ms_graph_session.get(ms_graph_user_mail_folders)
+        ms_graph_user_mail_folders = u'{0}/users/{1}/mailFolders'.format(self.ms_graph_url, email_address)
+        response = self.ms_graph_session.get(ms_graph_user_mail_folders)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -68,16 +68,16 @@ class MSGraphHelper(object):
         """
         user_list = []
         user_count = 0
-        ms_graph_users_url = u'{0}users'.format(self.__ms_graph_url)
+        ms_graph_users_url = u'{0}/users'.format(self.ms_graph_url)
 
-        while ms_graph_users_url and user_count <= self.__max_users:
-            response = self.__ms_graph_session.get(ms_graph_users_url)
+        while ms_graph_users_url and user_count <= self.max_users:
+            response = self.ms_graph_session.get(ms_graph_users_url)
             json_response = response.json()
             for user in json_response['value']:
                 # Add these users to the list
                 user_list.append(user)
 
-            # Keep track of the total emails retrieved so far.
+            # Keep track of the total users retrieved so far.
             user_count = user_count + len(json_response['value'])
 
             # Get URL for the next batch of results.
@@ -92,9 +92,9 @@ class MSGraphHelper(object):
         :param message_id: message id of the message to get
         :return: requests get response for the message to retrieve
         """
-        ms_graph_users_url = u'{0}users/{1}/messages/{2}'.format(self.__ms_graph_url, email_address, message_id)
+        ms_graph_users_url = u'{0}/users/{1}/messages/{2}'.format(self.ms_graph_url, email_address, message_id)
 
-        response = self.__ms_graph_session.get(ms_graph_users_url)
+        response = self.ms_graph_session.get(ms_graph_users_url)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -107,9 +107,9 @@ class MSGraphHelper(object):
         :param message_id: message id of the message to get
         :return: requests get response for the message to retrieve
         """
-        ms_graph_users_url = u'{0}users/{1}/messages/{2}/$value'.format(self.__ms_graph_url, email_address, message_id)
+        ms_graph_users_url = u'{0}/users/{1}/messages/{2}/$value'.format(self.ms_graph_url, email_address, message_id)
 
-        response = self.__ms_graph_session.get(ms_graph_users_url)
+        response = self.ms_graph_session.get(ms_graph_users_url)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -125,10 +125,10 @@ class MSGraphHelper(object):
         """
         mail_folder_string = self.build_folder_string(mail_folder)
 
-        ms_graph_users_url = u'{0}users/{1}{2}/messages/{3}'.format(self.__ms_graph_url, email_address,
+        ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}'.format(self.ms_graph_url, email_address,
                                                                     mail_folder_string, message_id)
 
-        response = self.__ms_graph_session.delete(ms_graph_users_url)
+        response = self.ms_graph_session.delete(ms_graph_users_url)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -144,21 +144,21 @@ class MSGraphHelper(object):
         """
         mail_folder_string = self.build_folder_string(mail_folder)
 
-        ms_graph_users_url = u'{0}users/{1}{2}/messages/{3}/move'.format(self.__ms_graph_url, email_address,
+        ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}/move'.format(self.ms_graph_url, email_address,
                                                                     mail_folder_string, message_id)
 
-        response = self.__ms_graph_session.post(ms_graph_users_url,
-                                                headers={'Content-Type': 'application/json'},
-                                                json={'destinationId': dest_folder['name']})
+        response = self.ms_graph_session.post(ms_graph_users_url,
+                                              headers={'Content-Type': 'application/json'},
+                                              json={'destinationId': dest_folder['name']})
 
         self.check_ms_graph_response_code(response.status_code)
 
         return response
 
     def get_message_attachments(self, email_address, message_id):
-        ms_graph_users_url = u'{0}users/{1}/messages/{2}/attachments'.format(self.__ms_graph_url, email_address,
-                                                                             message_id)
-        response = self.__ms_graph_session.get(ms_graph_users_url)
+        ms_graph_users_url = u'{0}/users/{1}/messages/{2}/attachments'.format(self.ms_graph_url, email_address,
+                                                                              message_id)
+        response = self.ms_graph_session.get(ms_graph_users_url)
 
         self.check_ms_graph_response_code(response.status_code)
 
@@ -211,12 +211,13 @@ class MSGraphHelper(object):
 
         # Iterator through list of email addresses
         for email_address in email_address_string.split(','):
-            user_query = self.query_messages_by_address(email_address.strip(), mail_folder, sender, start_date, end_date,
-                                                      has_attachments, message_subject, message_body)
+            user_query = self.query_messages_by_address(email_address.strip(), mail_folder, sender, start_date,
+                                                        end_date, has_attachments, message_subject, message_body)
             results.append(user_query)
         return results
 
-    def query_messages(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages(self, email_address, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
+                       message_body):
         """
         query_messages is the top level routine for querying message.  If the email_address to search contains the
         string "ALL" or "all", then all of the users of the tenant are searched.
@@ -234,7 +235,7 @@ class MSGraphHelper(object):
         :return: list of emails in all user email account that match the search criteria.
         """
         # Initialize message count at the top-level query function.
-        self.__current_message_count = 0
+        self.current_message_count = 0
 
         if (email_address.lower() == "all"):
             query_results = self.query_messages_all_users(mail_folder, sender, start_date, end_date,
@@ -283,13 +284,13 @@ class MSGraphHelper(object):
         # Assemble the MS Graph API query string.
         if len(search_query) > 0:
             if len(filter_query) > 0:
-                ms_graph_query_messages_url = u'{0}users/{1}{2}/messages{3}&{4}'.format(self.__ms_graph_url, email_address,
+                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url, email_address,
                                                                                      folder_string, search_query, filter_query)
             else:
-                ms_graph_query_messages_url = u'{0}users/{1}{2}/messages{3}'.format(self.__ms_graph_url, email_address,
+                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
                                                                                  folder_string, search_query)
         elif len(filter_query) > 0:
-                ms_graph_query_messages_url = u'{0}users/{1}{2}/messages{3}'.format(self.__ms_graph_url, email_address,
+                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
                                                                                      folder_string, filter_query)
         else:
             raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
@@ -299,8 +300,8 @@ class MSGraphHelper(object):
         # append all of the results to a single list.  Because there can be a huge number of emails
         # returned, keep a count and limit the number returned to a variable set in the app.config.
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
-        while ms_graph_query_messages_url and self.__current_message_count <= self.__max_messages:
-            response = self.__ms_graph_session.get(ms_graph_query_messages_url)
+        while ms_graph_query_messages_url and self.current_message_count <= self.max_messages:
+            response = self.ms_graph_session.get(ms_graph_query_messages_url)
 
             self.check_ms_graph_response_code(response.status_code)
 
@@ -315,7 +316,7 @@ class MSGraphHelper(object):
                 email_list.append(email)
 
             # Keep track of the total emails retrieved so far.
-            self.__current_message_count = self.__current_message_count + len(json_response['value'])
+            self.current_message_count = self.current_message_count + len(json_response['value'])
 
             # Get URL for the next batch of results.
             ms_graph_query_messages_url = json_response.get('@odata.nextLink')
