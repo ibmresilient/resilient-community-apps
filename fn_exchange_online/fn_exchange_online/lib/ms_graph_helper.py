@@ -4,6 +4,8 @@ import datetime
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
+DEFAULT_SCOPE='https://graph.microsoft.com/.default'
+
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
@@ -32,7 +34,7 @@ class MSGraphHelper(object):
         return OAuth2ClientCredentialsSession(url=self.ms_graph_token_url,
                                               client_id=self.client_id,
                                               client_secret=self.client_secret,
-                                              scope=['.default'],
+                                              scope=DEFAULT_SCOPE,
                                               proxies=self.proxies)
 
     def get_user_profile(self, email_address):
