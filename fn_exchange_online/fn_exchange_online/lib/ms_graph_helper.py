@@ -4,17 +4,18 @@ import datetime
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
-DEFAULT_SCOPE='https://graph.microsoft.com/.default'
+DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 
 class MSGraphHelper(object):
     """
     Helper object MSGraphHelper.
     """
-    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users, proxies=None):
+    def __init__(self, ms_graph_token_url, ms_graph_url, tenant_id, client_id, client_secret, max_messages, max_users,
+                 proxies=None):
         self.ms_graph_token_url = ms_graph_token_url.format(tenant=tenant_id)
         self.ms_graph_url = ms_graph_url
         self.tenant_id = tenant_id
-        self.client_id = client_id,
+        self.client_id = client_id
         self.client_secret = client_secret
         self.proxies = proxies
         self.ms_graph_session = self.authenticate()
@@ -24,6 +25,11 @@ class MSGraphHelper(object):
 
     @staticmethod
     def check_ms_graph_response_code(status_code):
+        """
+        Check that the request status code: raise an integration error if great than 300 and code is "not found"
+        :param status_code: request statues code
+        :return:
+        """
         if status_code >= 300 and status_code != 404:
             raise IntegrationError("Invalid response from Microsoft Graph API call.")
 
@@ -128,7 +134,7 @@ class MSGraphHelper(object):
         mail_folder_string = self.build_folder_string(mail_folder)
 
         ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}'.format(self.ms_graph_url, email_address,
-                                                                    mail_folder_string, message_id)
+                                                                     mail_folder_string, message_id)
 
         response = self.ms_graph_session.delete(ms_graph_users_url)
 
@@ -147,7 +153,7 @@ class MSGraphHelper(object):
         mail_folder_string = self.build_folder_string(mail_folder)
 
         ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}/move'.format(self.ms_graph_url, email_address,
-                                                                    mail_folder_string, message_id)
+                                                                          mail_folder_string, message_id)
 
         response = self.ms_graph_session.post(ms_graph_users_url,
                                               headers={'Content-Type': 'application/json'},
@@ -158,6 +164,12 @@ class MSGraphHelper(object):
         return response
 
     def get_message_attachments(self, email_address, message_id):
+        """
+        Get the attachments of a messages
+        :param email_address: Email address of mailbox containing the message
+        :param message_id: Message to get the attachments from.
+        :return:
+        """
         ms_graph_users_url = u'{0}/users/{1}/messages/{2}/attachments'.format(self.ms_graph_url, email_address,
                                                                               message_id)
         response = self.ms_graph_session.get(ms_graph_users_url)
@@ -166,7 +178,8 @@ class MSGraphHelper(object):
 
         return response
 
-    def query_messages_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject, message_body):
+    def query_messages_all_users(self, mail_folder, sender, start_date, end_date, has_attachments, message_subject,
+                                 message_body):
         """
         This function iterates over all users and returns a list of emails that match the search criteria.
         :param mail_folder: mailFolder id of the folder to search
@@ -189,7 +202,7 @@ class MSGraphHelper(object):
         for user in user_list:
             email_address = user['userPrincipalName']
             user_query = self.query_messages_by_address(email_address, mail_folder, sender, start_date, end_date,
-                                                       has_attachments, message_subject, message_body)
+                                                        has_attachments, message_subject, message_body)
             # Append results for this user
             results.append(user_query)
 
@@ -198,8 +211,10 @@ class MSGraphHelper(object):
     def query_messages_by_list(self, email_address_string, mail_folder, sender, start_date, end_date, has_attachments,
                                message_subject, message_body):
         """
-        query_messages_by_list iterates over a list of email addresses and returns a list of emails that match the search criteria.
-        :param email_address_string: a comma separated string that that is converted to a list of email addresses to query.
+        query_messages_by_list iterates over a list of email addresses and returns a list of emails that match the
+        search criteria.
+        :param email_address_string: a comma separated string that that is converted to a list of email addresses to
+        query.
         :param mail_folder: mailFolder id of the folder to search
         :param sender: email address of sender to search for
         :param start_date: date/time string of email received dated to start search
@@ -239,15 +254,17 @@ class MSGraphHelper(object):
         # Initialize message count at the top-level query function.
         self.current_message_count = 0
 
-        if (email_address.lower() == "all"):
+        if email_address.lower() == "all":
             query_results = self.query_messages_all_users(mail_folder, sender, start_date, end_date,
-                                                        has_attachments, message_subject, message_body)
+                                                          has_attachments, message_subject, message_body)
         else:
             query_results = self.query_messages_by_list(email_address, mail_folder, sender, start_date, end_date,
                                                         has_attachments, message_subject, message_body)
         return query_results
 
-    def build_folder_string(self, mail_folder):
+
+    @staticmethod
+    def build_folder_string(mail_folder):
         """
         build_folder_string function creates the string used on MS Graph API calls to specify the mail folder
         location of the
@@ -286,14 +303,19 @@ class MSGraphHelper(object):
         # Assemble the MS Graph API query string.
         if search_query:
             if filter_query:
-                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url, email_address,
-                                                                                     folder_string, search_query, filter_query)
+                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url,
+                                                                                         email_address,
+                                                                                         folder_string,
+                                                                                         search_query,
+                                                                                         filter_query)
             else:
-                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
-                                                                                 folder_string, search_query)
+                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
+                                                                                     email_address,
+                                                                                     folder_string,
+                                                                                     search_query)
         elif filter_query:
-                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
-                                                                                     folder_string, filter_query)
+            ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
+                                                                                 folder_string, filter_query)
         else:
             raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
 
@@ -329,8 +351,8 @@ class MSGraphHelper(object):
                    }
         return results
 
-
-    def append_query_to_query_url(self, filter_query, new_query):
+    @staticmethod
+    def append_query_to_query_url(filter_query, new_query):
         """
         :param filter_query: query filter string
         :param new_query: new query to add to the filter query string
@@ -346,7 +368,8 @@ class MSGraphHelper(object):
             join_string = ""
         return u'{0}{1}{2}'.format(filter_query, join_string, new_query)
 
-    def build_search_query(self, message_body):
+    @staticmethod
+    def build_search_query(message_body):
         """
          Build the "$search" query portion of the string to search the body of the message.
          :param message_body: string to find in the message body.
@@ -354,8 +377,8 @@ class MSGraphHelper(object):
          """
         if message_body:
             return u'?$search="{0}"'.format(message_body)
-        else:
-            return ""
+
+        return ""
 
     def build_filter_query(self, start_date, end_date, sender, message_subject, has_attachments):
         """
@@ -400,7 +423,3 @@ class MSGraphHelper(object):
             return ""
 
         return filter_query
-
-
-
-
