@@ -284,14 +284,14 @@ class MSGraphHelper(object):
         filter_query = self.build_filter_query(start_date, end_date, sender, message_subject, has_attachments)
 
         # Assemble the MS Graph API query string.
-        if len(search_query) > 0:
-            if len(filter_query) > 0:
+        if search_query:
+            if filter_query:
                 ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url, email_address,
                                                                                      folder_string, search_query, filter_query)
             else:
                 ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
                                                                                  folder_string, search_query)
-        elif len(filter_query) > 0:
+        elif filter_query:
                 ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
                                                                                      folder_string, filter_query)
         else:
