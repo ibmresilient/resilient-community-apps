@@ -16,23 +16,13 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_get_email_user_profile"""
 
     def load_options(self, opts):
-        # Get app.config parameters.
+        """ Get app.config parameters and validate them. """
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id",
                            "client_secret", "max_messages", "max_users"]
         validate_fields(required_fields, self.options)
-
-        # Get the MS Graph helper class
-        self.MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
-                                             self.options.get("microsoft_graph_url"),
-                                             self.options.get("tenant_id"),
-                                             self.options.get("client_id"),
-                                             self.options.get("client_secret"),
-                                             self.options.get("max_messages"),
-                                             self.options.get("max_users"),
-                                             RequestsCommon(self.opts, self.options).get_proxies())
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -63,8 +53,18 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Starting user profile query for email address: {}".format(email_address))
 
+            # Get the MS Graph helper class
+            # Get the MS Graph helper class
+            MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
+                                            self.options.get("microsoft_graph_url"),
+                                            self.options.get("tenant_id"),
+                                            self.options.get("client_id"),
+                                            self.options.get("client_secret"),
+                                            self.options.get("max_messages"),
+                                            self.options.get("max_users"),
+                                            RequestsCommon(self.opts, self.options).get_proxies())
             # Call MS Graph API to get the user profile
-            response = self.MS_graph_helper.get_user_profile(email_address)
+            response = MS_graph_helper.get_user_profile(email_address)
 
             response_json = response.json()
             results = rp.done(True, response_json)

@@ -17,7 +17,7 @@ class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'exchange_online_query_emails"""
 
     def load_options(self, opts):
-        # Get app.config parameters.
+        """ Get app.config parameters and validate them. """
         self.opts = opts
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
@@ -25,16 +25,6 @@ class FunctionComponent(ResilientComponent):
         required_fields = ["microsoft_graph_token_url", "microsoft_graph_url", "tenant_id", "client_id",
                            "client_secret", "max_messages", "max_users"]
         validate_fields(required_fields, self.options)
-
-        # Get the MS Graph helper class
-        self.MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
-                                             self.options.get("microsoft_graph_url"),
-                                             self.options.get("tenant_id"),
-                                             self.options.get("client_id"),
-                                             self.options.get("client_secret"),
-                                             self.options.get("max_messages"),
-                                             self.options.get("max_users"),
-                                             RequestsCommon(self.opts, self.options).get_proxies())
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -77,8 +67,18 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage(u"Starting message query.")
 
-            email_results = self.MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
-                                                                has_attachments, message_subject, message_body)
+            # Get the MS Graph helper class
+            MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
+                                            self.options.get("microsoft_graph_url"),
+                                            self.options.get("tenant_id"),
+                                            self.options.get("client_id"),
+                                            self.options.get("client_secret"),
+                                            self.options.get("max_messages"),
+                                            self.options.get("max_users"),
+                                            RequestsCommon(self.opts, self.options).get_proxies())
+
+            email_results = MS_graph_helper.query_messages(email_address, mail_folders, sender, start_date, end_date,
+                                                           has_attachments, message_subject, message_body)
 
             # Put query results in the results payload.
             results = rp.done(True, email_results)

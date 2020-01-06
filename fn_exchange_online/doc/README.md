@@ -464,13 +464,13 @@ exo_message_query_results_dt
 ## Rules
 | Rule Name | Object | Workflow Triggered |
 | --------- | ------ | ------------------ |
-| Example: Exchange Online Get Message | exo_message_query_results_dt | `example_exchange_online_get_message` |
 | Example: Exchange Online Get User Profile | artifact | `example_exchange_online_get_user_profile` |
 | Example: Exchange Online Create Artifacts | exo_message_query_results_dt | `-` |
 | Example: Exchange Online Move Message to Folder | exo_message_query_results_dt | `example_exchange_online_move_message_to_folder` |
 | Example: Exchange Online Query Messages Multiple Users | incident | `example_exchange_online_query_messages_of_a_group` |
 | Example: Exchange Online Delete Message | exo_message_query_results_dt | `example_exchange_online_delete_email` |
-| Example: Exchange Online Write Message as Attachment | exo_message_query_results_dt | `example_exchange_online_write_message_as_attachment` |
+| Example: Exchange Online Write Message EML as Attachment | exo_message_query_results_dt | `example_exchange_online_write_message_as_attachment` |
+| Example: Exchange Online Write Message JSON as Note | exo_message_query_results_dt | `example_exchange_online_get_message` |
 | Example: Exchange Online Query Messages | artifact | `example_exchange_online_query_emails` |
 
 ---
