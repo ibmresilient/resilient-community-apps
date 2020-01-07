@@ -8,20 +8,14 @@ import logging
 import sys
 import traceback
 
+from pydoc import locate
 from resilient_circuits import ResilientComponent, handler, ActionMessage
 from resilient_lib import str_to_bool
 from resilient import SimpleHTTPException
 
-from rc_data_feed.lib.file_feed import FileFeedDestination
-from rc_data_feed.lib.sqlite_feed import SqliteFeedDestination
-from rc_data_feed.lib.odbc_feed import ODBCFeedDestination
-from rc_data_feed.lib.elastic_feed import ElasticFeedDestination
-from rc_data_feed.lib.kafka_feed import KafkaFeedDestination
-from rc_data_feed.lib.splunk_hec_feed import SplunkHECFeedDestination
 from rc_data_feed.lib.type_info import FullTypeInfo, ActionMessageTypeInfo
 from rc_data_feed.lib.feed import FeedContext
 from rc_data_feed.lib.rest_client_helper import RestClientHelper
-
 
 LOG = logging.getLogger(__name__)
 
@@ -52,14 +46,11 @@ def build_feed_outputs(rest_client_helper, opts, feed_names):
 
         class_name = feed_options.get("class")
 
-        if FeedComponent.AVAILABLE_CLASSES.get(class_name) is None:
-            LOG.error("Incorrect feed class %s, skipping", class_name)
+        namespace = 'data_feeder_plugins.{ns}.{ns}.{claz}Destination'.format(ns=class_name.lower(), claz=class_name)
+        LOG.debug(namespace)
+        obj = locate(namespace)(rest_client_helper, feed_options)
 
-        else:
-            LOG.debug("Initializing feed %s", feed_config_name)
-            obj = FeedComponent.AVAILABLE_CLASSES[class_name](rest_client_helper, feed_options)
-
-            feed_outputs.append(obj)
+        feed_outputs.append(obj)
 
     return feed_outputs
 
@@ -117,14 +108,6 @@ class FeedComponent(ResilientComponent):
     INCIDENT_TYPE_ID = 0
     INC_PAGE_SIZE = 500
     SEARCH_PAGE_SIZE = 50
-    AVAILABLE_CLASSES = {
-        "ODBCFeed": ODBCFeedDestination,
-        "FileFeed": FileFeedDestination,
-        "ElasticFeed": ElasticFeedDestination,
-        "KafkaFeed": KafkaFeedDestination,
-        "SQLiteFeed": SqliteFeedDestination,
-        "SplunkHECFeed": SplunkHECFeedDestination
-    }
 
     """Component that ingests data"""
     def __init__(self, opts):
@@ -143,7 +126,7 @@ class FeedComponent(ResilientComponent):
 
                 self.feed_outputs = build_feed_outputs(rest_client_helper, opts, self.options.get("feed_names", None))
 
-            # determine the reload options to follow
+                # determine the reload options to follow
                 if self.options.get('reload', 'false').lower() == 'true':
                     query_api_method = str_to_bool(self.options.get("reload_query_api_method", 'false'))
 

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='rc_data_feed',
-    version='1.2.1',
+    version='2.0.0',
     license='MIT',
     author='IBM Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -15,11 +15,7 @@ setup(
     install_requires=[
         'resilient_circuits>=30.0.84',
         'resilient>=30.0.84',
-        'elasticsearch',
-        'resilient_lib',
-        'pyodbc',
-        'six',
-        'confluent-kafka'
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
