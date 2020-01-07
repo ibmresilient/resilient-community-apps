@@ -1,7 +1,7 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 
-# (c) Copyright IBM Corp. 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2020. All Rights Reserved.
 
 import sys
 import json
@@ -18,7 +18,9 @@ MOCKED_OPTS = {
     "microsoft_graph_url": "microsoft_graph_url",
     "tenant_id": "tenant_id",
     "client_id": "client_id",
-    "client_secret": "client_secret"
+    "client_secret": "client_secret",
+    "max_messages": "100",
+    "max_users": "2000"
 }
 
 def generate_response(content, status):
@@ -50,6 +52,8 @@ class TestMSGraphHelper(object):
                                             MOCKED_OPTS.get("tenant_id"),
                                             MOCKED_OPTS.get("client_id"),
                                             MOCKED_OPTS.get("client_secret"),
+                                            MOCKED_OPTS.get("max_messages"),
+                                            MOCKED_OPTS.get("max_users"),
                                             None)
 
             get_mock.return_value = generate_response(content, 200)

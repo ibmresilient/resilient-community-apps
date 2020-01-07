@@ -23,7 +23,7 @@ setup(
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    url='https://success.resilientsystems.com/',
     description="Resilient Circuits Components for 'fn_exchange_online'",
     long_description="Resilient Circuits Components for 'fn_exchange_online'",
     install_requires=[

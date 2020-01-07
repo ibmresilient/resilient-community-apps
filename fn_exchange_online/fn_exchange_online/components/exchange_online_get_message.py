@@ -13,8 +13,7 @@ CONFIG_DATA_SECTION = 'fn_exchange_online'
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'exchange_online_get_email_user_profile"""
-
+    """Component that implements Resilient function 'exchange_online_get_message"""
     def load_options(self, opts):
         """ Get app.config parameters and validate them. """
         self.opts = opts
@@ -27,33 +26,32 @@ class FunctionComponent(ResilientComponent):
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
-
         self.load_options(opts)
 
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-
         self.load_options(opts)
 
-    @function("exchange_online_get_email_user_profile")
-    def _exchange_online_get_email_user_profile_function(self, event, *args, **kwargs):
-        """Function: This function will get Exchange Online user profile for a given email address."""
+    @function("exchange_online_get_message")
+    def _exchange_online_get_message_function(self, event, *args, **kwargs):
+        """Function: This function returns the contents of an Exchange Online message."""
         try:
             # Initialize the results payload
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Validate fields
-            validate_fields(['exo_email_address'], kwargs)
+            validate_fields(['exo_email_address', 'exo_messages_id'], kwargs)
 
-            # Get the function parameters
-            email_address = kwargs.get('exo_email_address')  # text
+            # Get the function parameters:
+            email_address = kwargs.get("exo_email_address")  # text
+            message_id = kwargs.get("exo_messages_id")  # text
 
             LOG.info(u"exo_email_address: %s", email_address)
+            LOG.info(u"exo_messages_id: %s", message_id)
 
-            yield StatusMessage(u"Starting user profile query for email address: {}".format(email_address))
+            yield StatusMessage(u"Starting get message for email address: {}".format(email_address))
 
-            # Get the MS Graph helper class
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
                                             self.options.get("microsoft_graph_url"),
@@ -63,8 +61,9 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_messages"),
                                             self.options.get("max_users"),
                                             RequestsCommon(self.opts, self.options).get_proxies())
+
             # Call MS Graph API to get the user profile
-            response = MS_graph_helper.get_user_profile(email_address)
+            response = MS_graph_helper.get_message(email_address, message_id)
 
             response_json = response.json()
             results = rp.done(True, response_json)
@@ -73,7 +72,9 @@ class FunctionComponent(ResilientComponent):
             pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
             results['pretty_string'] = pretty_string
 
-            yield StatusMessage(u"Returning user profile results for email address: {}".format(email_address))
+            yield StatusMessage(u"Returning results for get message for email address: {}".format(email_address))
+
+            LOG.debug(json.dumps(pretty_string))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
