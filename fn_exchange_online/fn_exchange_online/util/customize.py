@@ -8,7 +8,7 @@ from resilient_circuits.util import *
 def codegen_reload_data():
     """Parameters to codegen used to generate the fn_exchange_online package"""
     reload_params = {"package": u"fn_exchange_online",
-                    "incident_fields": [], 
+                    "incident_fields": [],
                     "action_fields": [u"exo_attachment_name", u"exo_destination_mailfolder_id", u"exo_email_address_list", u"exo_email_address_sender", u"exo_end_date", u"exo_has_attachments", u"exo_mail_folders", u"exo_message_body", u"exo_message_subject", u"exo_start_date"], 
                     "function_params": [u"exo_attachment_name", u"exo_destination_mailfolder_id", u"exo_email_address", u"exo_email_address_sender", u"exo_end_date", u"exo_has_attachments", u"exo_mail_folders", u"exo_mailfolders_id", u"exo_message_body", u"exo_message_subject", u"exo_messages_id", u"exo_start_date", u"incident_id", u"task_id"], 
                     "datatables": [u"exo_message_query_results_dt"], 
