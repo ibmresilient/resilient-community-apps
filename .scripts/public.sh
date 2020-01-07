@@ -54,6 +54,7 @@ fn_geocoding
 fn_google_cloud_dlp
 fn_google_cloud_functions
 fn_google_maps_directions
+fn_greynoise
 fn_grpc_interface
 fn_grr_search
 fn_hibp
@@ -85,6 +86,8 @@ fn_pastebin
 fn_phish_ai
 fn_phish_tank
 fn_pipl
+fn_proofpoint_tap
+fn_proofpoint_trap
 fn_qradar_advisor
 fn_qradar_integration
 fn_query_tor_network
@@ -98,6 +101,7 @@ fn_slack
 fn_spamhaus_query
 fn_splunk_integration
 fn_task_utils
+fn_teams
 fn_thug
 fn_twilio
 fn_twitter_most_popular
