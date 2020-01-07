@@ -152,6 +152,7 @@ if results.content["error"] is not None:
   row.exo_dt_status = "Not Found"
 else:
   noteText = u"Exchange Online email address: {0}\nmessage ID:\n{1} moved to folder {2}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"], results.inputs["exo_destination_mailfolder_id"]["name"] )
+  row['exo_dt_status'] = helper.createRichText("Moved")
 
 incident.addNote(noteText)
 ```
