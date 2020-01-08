@@ -27,7 +27,13 @@ setup(
     description="Resilient Circuits Components for 'fn_resilient_ml'",
     long_description="fn_resilient_ml supports NLP search for finding most similar incidents",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'gensim>=3.8.0',
+        'numpy>=1.17.2',
+        'pandas>=0.25.1',
+        'nltk>=3.4.5',
+        'beautifulsoup4>=4.8.0',
+        'scipy>=1.3.1'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -42,6 +48,7 @@ setup(
         ],
         "resilient.circuits.configsection": ["gen_config = fn_resilient_ml.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_resilient_ml.util.customize:customization_data"],
-        "resilient.circuits.selftest": ["selftest = fn_resilient_ml.util.selftest:selftest_function"]
+        "resilient.circuits.selftest": ["selftest = fn_resilient_ml.util.selftest:selftest_function"],
+        "console_scripts": ["res-ml = fn_resilient_ml.bin.res_ml:main"]
     }
 )
