@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_phish_tank_v1.0.0
+# **User Guide:** fn_phish_tank_v1.0.1
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -40,7 +40,7 @@ Searches the PhishTank database (https://www.phishtank.com/) to determine if a U
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `phish_tank_check_url` | `text` | Yes | `http://www.example.com` | URL to lookup in PhishTank's Database |
+| `phish_tank_check_url` | `text` | Yes | `https://checkurl.phishtank.com/checkurl/` | URL to lookup in PhishTank's Database |
 
 </p>
 </details>
