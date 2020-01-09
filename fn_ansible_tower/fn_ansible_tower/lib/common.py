@@ -39,7 +39,8 @@ def get_job_template_by_name(opts, options, filter_by_name):
 
         if filter_by_name:
             for template in json_results['results']:
-                if template['name'].lower() == filter_by_name.strip().lower():
+                # template names are case sensitive
+                if template['name'] == filter_by_name.strip():
                     return template
 
         # get next paged set of results
