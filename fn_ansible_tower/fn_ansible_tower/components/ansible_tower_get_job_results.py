@@ -32,12 +32,12 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             tower_job_id = kwargs.get("tower_job_id")  # text
-            tower_save_as_attachment = kwargs.get("tower_save_as_attachment") # boolean
+            tower_save_as = self.get_select_param(kwargs.get("tower_save_as")) # select
             incident_id = kwargs.get("incident_id") # number
 
             log = logging.getLogger(__name__)
             log.info("tower_job_id: %s", tower_job_id)
-            log.info("tower_save_as_attachment: %s", tower_save_as_attachment)
+            log.info("tower_save_as: %s", tower_save_as)
             log.info("incident_id: %s", incident_id)
 
             result = ResultPayload(SECTION_HDR, **kwargs)
@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # save results as attachment will return no results.content
-            if str_to_bool(tower_save_as_attachment):
+            if tower_save_as == 'attachment':
                 res_client = self.rest_client()
                 save_as_attachment(res_client, incident_id, payload)
 

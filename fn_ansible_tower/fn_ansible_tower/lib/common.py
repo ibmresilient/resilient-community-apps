@@ -121,9 +121,9 @@ def save_as_attachment(res_client, incident_id, results):
     note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color highlighting
 
     if six.PY2:
-        file_handle = io.BytesIO(note.encode('utf-8'))
-    else:
         file_handle = io.StringIO(note)
+    else:
+        file_handle = io.BytesIO(note.encode('utf-8'))
 
     file_name = u"{}_{}.txt".format(results['summary']['name'].replace(" ", "_"), results['summary']['id'])
     write_file_attachment(res_client, file_name, file_handle, incident_id)
