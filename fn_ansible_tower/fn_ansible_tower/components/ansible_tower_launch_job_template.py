@@ -50,7 +50,7 @@ class FunctionComponent(ResilientComponent):
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-            if tower_template_id is None:
+            if not tower_template_id:
                 if not tower_template_name:
                     raise ValueError("Specify either tower_template_id or tower_template_name")
 
