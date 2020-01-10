@@ -38,9 +38,8 @@ class FunctionComponent(ResilientComponent):
             aws_iam_user_name = kwargs.get("aws_iam_user_name")  # text
             aws_iam_group_names = kwargs.get("aws_iam_group_names")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("aws_iam_user_name: %s", aws_iam_user_name)
-            log.info("aws_iam_group_names: %s", aws_iam_group_names)
+            LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
+            LOG.info("aws_iam_group_names: %s", aws_iam_group_names)
 
             validate_fields(["aws_iam_user_name", "aws_iam_group_names"], kwargs)
 

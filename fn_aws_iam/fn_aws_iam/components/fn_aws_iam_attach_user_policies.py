@@ -39,10 +39,9 @@ class FunctionComponent(ResilientComponent):
             aws_iam_policy_names = kwargs.get("aws_iam_policy_names")  # text
             aws_iam_arns = kwargs.get("aws_iam_arns")  # text
 
-            log = logging.getLogger(__name__)
-            log.info("aws_iam_user_name: %s", aws_iam_user_name)
-            log.info("aws_iam_policy_names: %s", aws_iam_policy_names)
-            log.info("aws_iam_arns: %s", aws_iam_arns)
+            LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
+            LOG.info("aws_iam_policy_names: %s", aws_iam_policy_names)
+            LOG.info("aws_iam_arns: %s", aws_iam_arns)
 
             if not aws_iam_policy_names and not aws_iam_arns:
                 raise ValueError("Expected either parameter '{0}' or '{1}' to be set."
