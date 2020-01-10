@@ -43,7 +43,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Integration with Amazon AWS IAM to facilitate manual enrichment and targeted remediation actions. " "Teams can investigate an attack by searching for AWS user accounts across an AWS environment, and " "quickly respond to attacks by executing remediation actions, such as removing permissions or " "login profiles for suspicious accounts from within the Resilient platform
+Integration with Amazon AWS IAM to facilitate manual enrichment and targeted remediation actions. Teams can investigate an attack by searching for AWS user accounts across an AWS environment, and quickly respond to attacks by executing remediation actions, such as removing accounts or removing permissions or login profiles for suspicious accounts from within the Resilient platform
 
 ---
 
@@ -86,9 +86,12 @@ Integration with Amazon AWS IAM to facilitate manual enrichment and targeted rem
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **aws_iam_access_key_id** | Yes | `<AWS_IAM_ACCESS_KEY_ID>` | *Enter a description of the config here* |
-  | **aws_iam_secret_access_key** | Yes | `<AWS_IAM_SECRET_ACCESS_KEY>` | *Enter a description of the config here* |
-
+  | **aws_iam_access_key_id** | Yes | `ABCD1EFGHI2JK3L4MNOP` | *AWS access key id of user with programmatic (API) access to AWS IAM services for an AWS account. Note: User must have sufficent permissions to be able to manage IAM resources for the AWS account.* |
+  | **aws_iam_secret_access_key** | Yes | `aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def` | *AWS secret access key used for programmatic (API) access to AWS services.* |
+  | **aws_iam_region** | No | `us-west-1` | *Optional setting for an IAM AWS region if required.* |
+  | **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
+  | **https_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
+  
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
   ```
@@ -148,20 +151,7 @@ There are several ways to verify the successful operation of a function.
 
 ---
 
-<!--
-  If necessary, use this section to describe how to configure your security application to work with the integration.
-  Delete this section if the user does not need to perform any configuration procedures on your product.
-
-## Configure <Product_Name>
-
-* Step One
-* Step Two
-* Step Three
-
----
--->
-
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_aws_iam | 1.0.0 | IBM Resilient Support | https://github.com/ibmresilient/resilient-community-apps |
+| fn_aws_iam | 1.0.0 | IBM Resilient Support | https://ibm.com/mysupport |

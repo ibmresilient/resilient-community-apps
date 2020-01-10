@@ -74,8 +74,8 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
 
-        except Exception:
-            LOG.exception("Exception in Resilient Function for AWS IAM.")
+        except Exception as aws_err:
+            LOG.exception("ERROR with Exception '%s' in Resilient Function for AWS IAM.", aws_err.__repr__())
             yield FunctionError()
 
     @staticmethod
@@ -91,13 +91,16 @@ class FunctionComponent(ResilientComponent):
         rtn = []
         for i in range(len(rtn_users)):
             user = rtn_users[i]
+            # When a filter is defined for groups or polices the 'group_count' or 'policy_count' will be returned in the
+            # result as a tuple value. In either case if the count is 'True' i.e. > 0 the user and filtered properties
+            # (group or policy) are included in the result, otherwise the user is dropped from the result.
             group_count = 0
             policy_count = 0
             user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
-            # Add extra data for each user. Filtered count is also returned in certain instances.
+            # Add extra data for each user. Filtered count is also returned when a filter is defined for groups.
             user_groups = iam_cli.get("list_groups_for_user", paginate=True, UserName=user["UserName"],
                                       results_filter=group_filter)
-            # The group result will be returned as a tuple of filtered count and group list if a filter is
+            # The group result will be returned as a tuple of filtered count and filtered group list if a filter is
             # specified, otherwise it will be a list of groups.
             if isinstance(user_groups, tuple):
                 (group_count, user_groups) = user_groups
@@ -107,9 +110,10 @@ class FunctionComponent(ResilientComponent):
                 user["Groups"] = user_groups
             elif group_filter:
                 continue
+            # Add extra data for each user. Filtered count is also returned when a filter is defined for polices.
             user_policies = iam_cli.get("list_attached_user_policies", paginate=True,
                                         UserName=user["UserName"], results_filter=policy_filter)
-            # The policy result will be returned as a tuple of filtered count and policy list if a filter is
+            # The policy result will be returned as a tuple of filtered count and filtered policy list if a filter is
             # specified, otherwise it will be a list of policies.
             if isinstance(user_policies, tuple):
                 (policy_count, user_policies) = user_policies

@@ -84,6 +84,7 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            LOG.exception("Exception in Resilient Function for AWS IAM.")
+
+        except Exception as aws_err:
+            LOG.exception("ERROR with Exception '%s' in Resilient Function for AWS IAM.", aws_err.__repr__())
             yield FunctionError()

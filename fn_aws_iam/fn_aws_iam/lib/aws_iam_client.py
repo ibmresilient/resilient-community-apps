@@ -34,16 +34,22 @@ class AwsIamClient():
     """
     Client class for AWS IAM.
     """
-    def __init__(self, options, function_options=None, sts_client=False):
+    def __init__(self, options, function_options={}, sts_client=False):
         """
         Class constructor.
         """
-        self.aws_iam_access_key_id = function_options.get("aws_iam_access_key_id")
-        self.aws_iam_secret_access_key = function_options.get("aws_iam_secret_access_key")
-        if function_options.get("aws_iam_region") is not None:
-            self.aws_iam_region = function_options.get("aws_iam_region")
-        else:
-            self.aws_iam_region = None
+        if not isinstance(function_options, dict) and not function_options:
+            raise ValueError("The 'function_options' parameter is not set correctly.")
+        self.aws_iam_access_key_id = function_options.get("aws_iam_access_key_id", None)
+        if not self.aws_iam_access_key_id:
+            raise ValueError("The '{}' config setting is not set for the '{}' parameter."
+                             .format("aws_iam_access_key_id", "function_options"))
+        self.aws_iam_secret_access_key = function_options.get("aws_iam_secret_access_key", None)
+        if not self.aws_iam_secret_access_key:
+            raise ValueError("The '{}' config setting is not set for the '{}' parameter."
+                             .format("aws_iam_secret_access_key", "function_options"))
+        self.aws_iam_region = function_options.get("aws_iam_region", None)
+
         self.proxies = {}
         if "https_proxy" in function_options and function_options["https_proxy"] is not None:
             self.proxies.update({"https": function_options.get("https_proxy")})
@@ -58,13 +64,12 @@ class AwsIamClient():
     def _get_client(self, service_name):
         """ Create an AWS IAM client.
 
-        :param kwargs: Dictionary of AWS API parameters for function call .
         :param service_name: AWS service for which to create client.
         :return: AWS client.
         """
-        # Create IAM client for iam or sts.
+        # Create an AWS boto3 client instance for the specified AWS service name. Supported AWS service names
+        # for the integration are 'aws' and 'sts'.
         try:
-
             client = Session(
                 region_name=self.aws_iam_region,
                 aws_access_key_id=self.aws_iam_access_key_id,
@@ -77,23 +82,6 @@ class AwsIamClient():
             raise cli_ex
 
         return client
-
-    def _get_type_from_response(self, response, type_list):
-        """ The get type of data returned in an AWS IAM response.
-
-        :param response: The response from AWS API query.
-        :param type_list: List of valid types  in AWS IAM responses.
-        result_type: The type of result e.g. 'Users'.
-        """
-        result_type = None
-        for key in response:
-            if key in type_list:
-                result_type = key
-
-        if not result_type:
-            raise ValueError("No supported type for integration found in AWS IAM response")
-
-        return result_type
 
     def _add_user_properties(self, result):
         """ Add metadata entries for login profile, default user.
@@ -134,7 +122,7 @@ class AwsIamClient():
                     entry = self._datetime_to_str(entry)
         else:
             LOG.error("ERROR with unexpected result type %s for AWS IAM query", type(result))
-
+        # If the result is for a user or list of users add some additional user properties.
         if any(n in result_type for n in ["User", "Users"]):
             result = self._add_user_properties(result)
 
@@ -154,18 +142,6 @@ class AwsIamClient():
             raise int_ex
 
         return default_identity
-
-    @staticmethod
-    def _datetime_to_str(result_entry):
-        """ Convert datetime objects returned in result e.g. 'CreateDate' to a string.
-
-        :param result_entry: Result entry dict from AWS IAM response.
-        :return result_entry: Converted result entry.
-        """
-        for key in result_entry:
-            if isinstance(result_entry[key], datetime):
-                result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
-        return result_entry
 
     def paginate(self, op=None, results_filter=None, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
@@ -256,7 +232,7 @@ class AwsIamClient():
 
 
     def post(self, op, **kwargs):
-        """ Execute a 'post' type AWS IAM  operation whihc results in an update or change to the AWS IAM environment.
+        """ Execute a 'post' type AWS IAM  operation which results in an update or change to the AWS IAM environment.
         Example calls include 'delete_access_key' and 'attach_user_policy'.
 
         :param op: The AWS IAM operation to execute e.g. 'delete_access_key'.
@@ -312,3 +288,33 @@ class AwsIamClient():
                     # For other filter types return filtered count and full result.
                     rtn = (len(filtered_result), result)
         return rtn
+
+    @staticmethod
+    def _get_type_from_response(response, type_list):
+        """ The get type of data returned in an AWS IAM response.
+
+        :param response: The response from AWS API query.
+        :param type_list: List of valid types  in AWS IAM responses.
+        result_type: The type of result e.g. 'Users'.
+        """
+        result_type = None
+        for key in response:
+            if key in type_list:
+                result_type = key
+
+        if not result_type:
+            raise ValueError("No supported type for integration found in AWS IAM response")
+
+        return result_type
+
+    @staticmethod
+    def _datetime_to_str(result_entry):
+        """ Convert datetime objects returned in result e.g. 'CreateDate' to a string.
+
+        :param result_entry: Result entry dict from AWS IAM response.
+        :return result_entry: Converted result entry.
+        """
+        for key in result_entry:
+            if isinstance(result_entry[key], datetime):
+                result_entry[key] = result_entry[key].strftime("%Y-%m-%d %H:%M:%S")
+        return result_entry

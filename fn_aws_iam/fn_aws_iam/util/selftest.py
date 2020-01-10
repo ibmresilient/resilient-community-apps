@@ -22,8 +22,13 @@ def selftest_function(opts):
         iam = AwsIamClient(opts, options, sts_client=True)
         default_identity = iam.sts.get_caller_identity()
 
-        if isinstance(default_identity , dict):
-            return {"state": "success"}
+        if isinstance(default_identity , dict) and "Arn" in default_identity:
+            user_name = default_identity["Arn"].split('/')[1]
+            user_properties = iam.iam.get_user(UserName=user_name)
+            if isinstance(user_properties, dict) and "User" in user_properties:
+                return {"state": "success"}
+            else:
+                return {"state": "failure"}
         else:
             return {"state": "failure"}
 

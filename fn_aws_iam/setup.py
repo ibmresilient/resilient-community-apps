@@ -22,8 +22,8 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient Support',
-    author_email='support@resilientsystems.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    author_email='',
+    url='https://ibm.com/mysupport',
     description="Amazon AWS IAM Integration for Resilient",
     long_description="Integration with Amazon AWS IAM to facilitate manual enrichment and targeted remediation actions. "
                      "Teams can investigate an attack by searching for AWS user accounts across an AWS environment, and "
