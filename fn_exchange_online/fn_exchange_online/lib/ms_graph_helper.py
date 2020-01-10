@@ -262,21 +262,6 @@ class MSGraphHelper(object):
                                                         has_attachments, message_subject, message_body)
         return query_results
 
-
-    @staticmethod
-    def build_folder_string(mail_folder):
-        """
-        build_folder_string function creates the string used on MS Graph API calls to specify the mail folder
-        location of the
-        :param mail_folder: mailFolder id
-        :return: the mailFolder string to be used in MS Graph API calls where a mail folder is used.
-        """
-        if not mail_folder:
-            return ""
-
-        folder_string = u"/mailFolders/{}".format(mail_folder)
-        return folder_string
-
     def query_messages_by_address(self, email_address, mail_folder, sender, start_date, end_date, has_attachments,
                                   message_subject, message_body):
         """
@@ -291,41 +276,16 @@ class MSGraphHelper(object):
          :param message_body: search for emails containing this string in the "body" of email
          :return: list of emails in all user email account that match the search criteria.
          """
-        # Compute the mail folder if it is specified.
-        folder_string = self.build_folder_string(mail_folder)
-
-        # Create $search string query for search on message body string.
-        search_query = self.build_search_query(message_body)
-
-        # Create $filter query string for query on messages.
-        filter_query = self.build_filter_query(start_date, end_date, sender, message_subject, has_attachments)
-
-        # Assemble the MS Graph API query string.
-        if search_query:
-            if filter_query:
-                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url,
-                                                                                         email_address,
-                                                                                         folder_string,
-                                                                                         search_query,
-                                                                                         filter_query)
-            else:
-                ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
-                                                                                     email_address,
-                                                                                     folder_string,
-                                                                                     search_query)
-        elif filter_query:
-            ms_graph_query_messages_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url, email_address,
-                                                                                 folder_string, filter_query)
-        else:
-            raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
+        ms_graph_query_url = self.build_MS_graph_query_url(email_address, mail_folder, sender, start_date, end_date,
+                                                           has_attachments, message_subject, message_body)
 
         email_list = []
         # MS Graph will return message results back a certain number at a time, so we need to
         # append all of the results to a single list.  Because there can be a huge number of emails
         # returned, keep a count and limit the number returned to a variable set in the app.config.
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
-        while ms_graph_query_messages_url and self.current_message_count <= self.max_messages:
-            response = self.ms_graph_session.get(ms_graph_query_messages_url)
+        while ms_graph_query_url and self.current_message_count <= self.max_messages:
+            response = self.ms_graph_session.get(ms_graph_query_url)
 
             self.check_ms_graph_response_code(response.status_code)
 
@@ -343,13 +303,73 @@ class MSGraphHelper(object):
             self.current_message_count = self.current_message_count + len(json_response['value'])
 
             # Get URL for the next batch of results.
-            ms_graph_query_messages_url = json_response.get('@odata.nextLink')
+            ms_graph_query_url = json_response.get('@odata.nextLink')
 
         results = {'email_address': email_address,
                    'status_code': response.status_code,
                    'email_list': email_list
                    }
         return results
+
+    def build_MS_graph_query_url(self, email_address, mail_folder, sender, start_date, end_date, has_attachments,
+                                 message_subject, message_body):
+        """
+          build_MS_graph_query_url returns the MS Graph URL to query messages with this specified parameters.
+          :param email_address: a single email address to be queried.
+          :param mail_folder: mailFolder id of the folder to search
+          :param sender: email address of sender to search for
+          :param start_date: date/time string of email received dated to start search
+          :param end_date: date/time string of email received dated to end search
+          :param has_attachments: boolean flag indicating to search for emails with or without attachments
+          :param message_subject: search for emails containing this string in the "subject" of email
+          :param message_body: search for emails containing this string in the "body" of email
+          :return: list of emails in all user email account that match the search criteria.
+          """
+        # Compute the mail folder if it is specified.
+        folder_string = self.build_folder_string(mail_folder)
+
+        # Create $search string query for search on message body string.
+        search_query = self.build_search_query(message_body)
+
+        # Create $filter query string for query on messages.
+        filter_query = self.build_filter_query(start_date, end_date, sender, message_subject, has_attachments)
+
+        # Assemble the MS Graph API query string.
+        if search_query:
+            if filter_query:
+                ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url,
+                                                                                email_address,
+                                                                                folder_string,
+                                                                                search_query,
+                                                                                filter_query)
+            else:
+                ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
+                                                                            email_address,
+                                                                            folder_string,
+                                                                            search_query)
+        elif filter_query:
+            ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
+                                                                        email_address,
+                                                                        folder_string,
+                                                                        filter_query)
+        else:
+            raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
+
+        return ms_graph_query_url
+
+    @staticmethod
+    def build_folder_string(mail_folder):
+        """
+        build_folder_string function creates the string used on MS Graph API calls to specify the mail folder
+        location of the message.  (Mail Folder is not always used or needed if you have the actual message ID.)
+        :param mail_folder: mailFolder id
+        :return: the mailFolder string to be used in MS Graph API calls where a mail folder is used.
+        """
+        if not mail_folder:
+            return ""
+
+        folder_string = u"/mailFolders/{}".format(mail_folder)
+        return folder_string
 
     @staticmethod
     def append_query_to_query_url(filter_query, new_query):
