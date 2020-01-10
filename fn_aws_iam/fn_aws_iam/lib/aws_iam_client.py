@@ -34,7 +34,7 @@ class AwsIamClient():
     """
     Client class for AWS IAM.
     """
-    def __init__(self, options, function_options={}, sts_client=False):
+    def __init__(self, function_options={}, sts_client=False):
         """
         Class constructor.
         """

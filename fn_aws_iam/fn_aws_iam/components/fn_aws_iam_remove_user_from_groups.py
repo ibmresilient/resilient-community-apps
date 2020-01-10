@@ -43,7 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name", "aws_iam_group_names"], kwargs)
 
-            iam_cli = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.options)
             # Pop 'GroupNames' parameter from params.
             if "GroupNames" in params:
                 del params["GroupNames"]

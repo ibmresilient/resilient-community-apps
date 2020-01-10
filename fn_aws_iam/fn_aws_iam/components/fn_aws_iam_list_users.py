@@ -44,7 +44,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info("aws_iam_group_filter: %s", aws_iam_group_filter)
             LOG.info("aws_iam_policy_filter: %s", aws_iam_policy_filter)
 
-            iam_cli = AwsIamClient(self.opts, self.options, sts_client=True)
+            iam_cli = AwsIamClient(self.options, sts_client=True)
             if aws_iam_user_name:
                 # User specified.
                 rtn = iam_cli.get("get_user", **params)

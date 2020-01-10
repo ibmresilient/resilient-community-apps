@@ -49,7 +49,7 @@ class FunctionComponent(ResilientComponent):
             if all([aws_iam_policy_names, aws_iam_arns]):
                 raise ValueError("Expected only one of parameters '{0}' or '{1}' to be set."
                                  .format("aws_iam_policy_names", "aws_iam_arns"))
-            iam_cli = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.options)
             rtn = []
             if aws_iam_policy_names:
                 # Delete 'PolicyNames' from params

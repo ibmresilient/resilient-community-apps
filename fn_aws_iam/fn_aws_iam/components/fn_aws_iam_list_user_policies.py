@@ -40,7 +40,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name"], kwargs)
 
-            iam_cli = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.options)
             # Get user managed policies.
             rtn = iam_cli.get("list_attached_user_policies", paginate=True, **params)
             # Add user in-line policies at beginning of result.

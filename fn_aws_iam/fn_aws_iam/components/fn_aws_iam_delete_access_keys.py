@@ -43,7 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(["aws_iam_user_name", "aws_iam_access_keys"], kwargs)
 
-            iam_cli = AwsIamClient(self.opts, self.options)
+            iam_cli = AwsIamClient(self.options)
             # Pop 'AccessKeys' parameter from params.
             if "AccessKeys" in params:
                 del params["AccessKeys"]
