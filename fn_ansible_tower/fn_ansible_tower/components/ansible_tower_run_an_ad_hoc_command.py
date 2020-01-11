@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
 
             json_results = results.json()
 
-            result_payload = result.done(True, json_results)
+            result_payload = result.done(True, results.json())
             yield StatusMessage("done...")
 
             # Produce a FunctionResult with the results

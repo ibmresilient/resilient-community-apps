@@ -150,10 +150,10 @@ def save_as_attachment(res_client, incident_id, results):
     finished = results['summary']['finished'].replace('T', ' ') if results['summary']['finished'] else None
     note = u"Job Id: {}\nStatus: {}\nTemplate Name: {}\nFinished: {}".format(results['summary']['id'], results['summary']['status'],
                                                                              results['summary']['name'], finished)
-    note = note + u"\n".join(event.get("stdout") for event in results['events']['results'])
+    note = u"{0}{1}.format(note, u"\n".join(event.get("stdout") for event in results['events']['results']))
     note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color highlighting
 
-    if six.PY2:
+    if sys.version_info.major < 3:
         file_handle = io.StringIO(note)
     else:
         file_handle = io.BytesIO(note.encode('utf-8'))
