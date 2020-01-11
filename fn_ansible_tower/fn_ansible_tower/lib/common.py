@@ -48,12 +48,13 @@ def get_job_template_by_name(opts, options, filter_by_name):
 
     return None
 
-def get_job_template_by_project(opts, options, filter_by_project):
+def get_job_template_by_project(opts, options, filter_by_project, template_pattern):
     """
     get job templates, optionally based on project name
     :param opts: app.config file
     :param options: app.config section just for this integration
-    :param filter_by_project: name of project to search for
+    :param filter_by_project: name of project to search for, may contain wildcards
+    :param template_pattern: filter list of templates by wildcards
     :return: list of templates by project
     """
     url = "/".join((options.get('url'), TOWER_API_BASE, LIST_URL))
@@ -70,15 +71,47 @@ def get_job_template_by_project(opts, options, filter_by_project):
         json_results = results.json()
 
         if filter_by_project:
-            result_templates.extend([template for template in json_results['results']
-                                     if template['summary_fields']['project']['name'].lower() == filter_by_project.lower()])
+            project_templates = project_pattern_match(json_results['results'], filter_by_project)
+            result_templates.extend(template_pattern_match(project_templates, template_pattern))
         else:
-            result_templates.extend(json_results['results'])
+            result_templates.extend(template_pattern_match(json_results['results'], template_pattern))
 
         # get next paged set of results
         next_url = json_results['next']
 
     return result_templates
+
+def project_pattern_match(results, project_pattern):
+    """
+    Return projects which match the project pattern. No pattern specified returns all projects
+    :param results - list of all projects
+    :param project_pattern - optional wildcard (*) name of project to match
+    :return: list of projects
+    """
+
+    if project_pattern:
+        # convert wildcard "*" to regex format ".*"
+        pattern = project_pattern.replace("*", ".*")
+        compiled = re.compile(pattern)
+        return [project for project in results if compiled.match(project['summary_fields']['project']['name'])]
+
+    return results
+
+def template_pattern_match(results, template_pattern):
+    """
+    Return templates which match the template pattern. No pattern specified returns all template
+    :param results - list of all template
+    :param template_pattern - optional wildcard (*) name of template to match
+    :return: list of template
+    """
+
+    if template_pattern:
+        # convert wildcard "*" to regex format ".*"
+        pattern = template_pattern.replace("*", ".*")
+        compiled = re.compile(pattern)
+        return [template for template in results if compiled.match(template['name'])]
+
+    return results
 
 def make_extra_vars(arguments):
     """
@@ -125,7 +158,8 @@ def save_as_attachment(res_client, incident_id, results):
     else:
         file_handle = io.BytesIO(note.encode('utf-8'))
 
+    # file names are best without embedded spaces
     file_name = u"{}_{}.txt".format(results['summary']['name'].replace(" ", "_"), results['summary']['id'])
-    write_file_attachment(res_client, file_name, file_handle, incident_id)
+    attachment_json = write_file_attachment(res_client, file_name, file_handle, incident_id)
 
-    return True
+    return file_name, attachment_json

@@ -43,18 +43,25 @@ class TestAnsibleTowerListJobTemplates:
 
 
     @patch('fn_ansible_tower.lib.common.RequestsCommon.execute_call_v2')
-    @pytest.mark.parametrize("tower_project, expected_results", [
-        (None, 2),
-        ("Demo Project", 1),
-        ("2nd Project", 1),
-        ("not found", 0)
+    @pytest.mark.parametrize("tower_project, tower_template_pattern, expected_results", [
+        (None, None, 2),
+        ("Demo Project", None, 1),
+        ("2nd Project", None, 1),
+        ("2nd*", None, 1),
+        ("not found", None, 0),
+        ("Demo Project", "Demo Job Template", 1),
+        ("Demo Project", "Demo Job *", 1),
+        ("Demo Project", "*Job*", 1),
+        ("Demo*", "*Job*", 1),
+        (None, "Demo Job Template", 1),
     ])
-    def test_filter(self, mock_get, circuits_app, tower_project, expected_results):
+    def test_filter(self, mock_get, circuits_app, tower_project, tower_template_pattern, expected_results):
         """ Test calling with sample values for the parameters """
         mock_get.return_value = helper.MockedResponse(helper.mocked_get_job_template_by_project())
 
         function_params = {
-            "tower_project": tower_project
+            "tower_project": tower_project,
+            "tower_template_pattern": tower_template_pattern
         }
         results = call_ansible_tower_list_job_templates_function(circuits_app, function_params)
         assert(len(results['content']) == expected_results)

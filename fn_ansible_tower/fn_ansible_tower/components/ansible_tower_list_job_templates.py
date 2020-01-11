@@ -35,15 +35,17 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             tower_project = kwargs.get("tower_project")  # text
+            template_pattern = kwargs.get("tower_template_pattern")  # text
 
             log = logging.getLogger(__name__)
             log.info("tower_project: %s", tower_project)
+            log.info("tower_template_pattern: %s", template_pattern)
 
             result = ResultPayload(SECTION_HDR, **kwargs)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-            json_templates = get_job_template_by_project(self.opts, self.options, tower_project)
+            json_templates = get_job_template_by_project(self.opts, self.options, tower_project, template_pattern)
 
             result_payload = result.done(True, json_templates)
             yield StatusMessage("done...")

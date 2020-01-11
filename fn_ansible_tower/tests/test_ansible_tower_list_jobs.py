@@ -83,5 +83,5 @@ class TestAnsibleTowerListJobs:
         ('x weeks')
     ])
     def test_convert_job_search_time_failure(self, tower_last_updated):
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             result = convert_job_search_time(tower_last_updated)

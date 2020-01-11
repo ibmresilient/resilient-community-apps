@@ -71,7 +71,9 @@ class FunctionComponent(ResilientComponent):
             # save results as attachment will return no results.content
             if tower_save_as == 'attachment':
                 res_client = self.rest_client()
-                save_as_attachment(res_client, incident_id, payload)
+                file_name, attachment_json = save_as_attachment(res_client, incident_id, payload)
+                log.debug(attachment_json)
+                yield StatusMessage(u"Attachment {} Id: {} created".format(file_name, attachment_json.get("id")))
 
             result_payload = result.done(True, payload)
 
