@@ -68,8 +68,6 @@ class FunctionComponent(ResilientComponent):
                                          json=arguments, headers=JSON_HEADERS,
                                          verify=cafile)
 
-            json_results = results.json()
-
             result_payload = result.done(True, results.json())
             yield StatusMessage("done...")
 

@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
             # get summary information
             summary_url = "/".join((self.options['url'], TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
             summary_result = rc.execute_call_v2("get", summary_url, proxies=rc.get_proxies(), auth=basic_auth,
-                                               verify=cafile)
+                                                verify=cafile)
             json_summary = summary_result.json()
 
             event_url = "/".join((self.options['url'], TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))

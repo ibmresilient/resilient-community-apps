@@ -5,7 +5,7 @@
 
 import io
 import re
-import six
+import sys
 from resilient_lib import RequestsCommon, validate_fields, str_to_bool, write_file_attachment
 
 TOWER_API_BASE = "api/v2"
@@ -150,7 +150,7 @@ def save_as_attachment(res_client, incident_id, results):
     finished = results['summary']['finished'].replace('T', ' ') if results['summary']['finished'] else None
     note = u"Job Id: {}\nStatus: {}\nTemplate Name: {}\nFinished: {}".format(results['summary']['id'], results['summary']['status'],
                                                                              results['summary']['name'], finished)
-    note = u"{0}{1}.format(note, u"\n".join(event.get("stdout") for event in results['events']['results']))
+    note = u"{0}{1}".format(note, u"\n".join(event.get("stdout") for event in results['events']['results']))
     note = re.sub(r'[\x00-\x7f]\[[0-9;]*m', r'', note) # remove color highlighting
 
     if sys.version_info.major < 3:
