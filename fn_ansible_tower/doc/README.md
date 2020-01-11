@@ -356,7 +356,8 @@ List available job templates
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `tower_project` | `text` | No | `-` | optionally filter by project |
+| `tower_project` | `text` | No | `-` | Optionally filter by project. Use * for wildcard matching. |
+| `tower_template_pattern` | `text` | No | `-` | Optionally filter by project. se * for wildcard matching. |
 
 </p>
 </details>
@@ -380,6 +381,7 @@ results = {
 
 ```python
 inputs.tower_project = rule.properties.tower_project
+inputs.tower_template_pattern = rule.properties.tower_template_pattern
 ```
 
 </p>
