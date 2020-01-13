@@ -1,4 +1,4 @@
-##Resilient Circuits Components for function: fn_virustotal
+## Resilient Circuits Components for function: fn_virustotal
 
 VirusTotal is an artifact enrichment solution. 
 Queries are possible for:
@@ -11,18 +11,18 @@ Queries are possible for:
 
 Files and URLs may require additional time to complete their scans, so a link is returned to review the results at a later time.
 
-###Contents:
-####Message Destinations: 
+### Contents:
+#### Message Destinations: 
   * fn_virustotal 
 
-###Functions: 
+### Functions: 
   * VirusTotal 
 
-###Workflows: 
+### Workflows: 
   * Example: VirusTotal Scan 
   * Example: VirusTotal Scan (Attachment) 
 
-###Rules: 
+### Rules: 
 Example: Virus Total 
 Example: Virus Total for Attachments
 
@@ -43,10 +43,10 @@ To package for distribution,
 
     python ./fn_virustotal/setup.py sdist
 
-###Requirements:
+### Requirements:
 * resilient-circuits 
 
-###Installation:
+### Installation:
 Run the following command to import this function into IBM resilient
 
     resilient-circuits customize
