@@ -5,13 +5,12 @@
 """Function implementation"""
 
 import logging
-import re
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-import fn_twilio.util.selftest as selftest
+from fn_twilio.lib.common import clean_phone_number
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 
-CONFIG_DATA_SECTION = 'fn_twilio_send_sms' 
+CONFIG_DATA_SECTION = 'fn_twilio_send_sms'
 
 class FunctionPayload(object):
     """Class that contains the payload sent back to UI and
@@ -86,7 +85,7 @@ class FunctionComponent(ResilientComponent):
                                             payload.inputs["twilio_sms_destination"].split(',')]  # Split commas ignoring any whitespace
                 phone_numbers = []
                 for phone_number_unstripped in phone_numbers_unstripped:
-                    phone_numbers.append('+' + re.sub("[^0-9]", "", phone_number_unstripped))  # Strip all non-numeric chars and prefix with +
+                    phone_numbers.append(clean_phone_number(phone_number_unstripped))  # Strip all non-numeric chars and prefix with +
 
             except Exception:
                 raise FunctionError("Invalid phone numbers {0} provided, failed to decode.".format(payload.inputs["twilio_sms_destination"]))
@@ -107,21 +106,25 @@ class FunctionComponent(ResilientComponent):
                         to=phone_number
                     )
 
+                    entry = {
+                        "phone_number": phone_number,
+                        "messaging_service_sid": message.messaging_service_sid,
+                        "date_created": str(message.date_created),
+                        "direction": message.direction,
+                        "message_body": message.body,
+                        "status": message.status,
+                        "error_message": None
+                    }
+
                     if message.error_code is None:
-                        entry = { 
-                            "phone_number": phone_number,
-                            "success": True
-                        }
-                        payload.twilio_status.append(entry)
+                        entry['success'] = True
                         log.info('Sent to {0}'.format(phone_number))
                     else:
-                        entry = { 
-                            "phone_number": phone_number,
-                            "error_message": message.error_message,
-                            "success": False
-                        }
-                        payload.twilio_status.append(entry)
+                        entry['success'] = False
+                        entry["error_message"]: message.error_message
                         log.error('Failed to send to {0} [{1}]'.format(phone_number, message.error_message))
+
+                    payload.twilio_status.append(entry)
                 except TwilioRestException as e:
                         entry = { 
                             "phone_number": phone_number,
