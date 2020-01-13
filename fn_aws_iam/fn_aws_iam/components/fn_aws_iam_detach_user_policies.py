@@ -29,7 +29,15 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_detach_user_policies")
     def _fn_aws_iam_detach_user_policies_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Remove the specified managed policy from the specified IAM user.
+
+        Note: A user can also have inline policies embedded with it, this function will delete inline
+        policies associated with the the user. Parameter aws_iam_user_name is an IAM user name.
+        Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+
+        param aws_iam_policy_names: (optional) A comma separated  list of IAM policy names.
+        param aws_iam_arns: (optional) A comma separated list of IAM policy arns.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

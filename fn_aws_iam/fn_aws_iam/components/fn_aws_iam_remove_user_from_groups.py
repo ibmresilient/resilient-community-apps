@@ -29,7 +29,12 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_remove_user_from_groups")
     def _fn_aws_iam_remove_user_from_groups_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Removes the specified IAM user from the specified groups.
+        Group names is be a comma separated string of group names.
+
+        param aws_iam_user_name: An IAM user name.
+        param aws_iam_group_names: A comma separated list of IAM group names.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

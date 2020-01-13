@@ -29,7 +29,14 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_attach_user_policies")
     def _fn_aws_iam_attach_user_policies_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Attach the specified managed policies to the specified IAM user.
+
+        Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+
+        :param aws_iam_user_name: An IAM user name.
+        :param aws_iam_policy_names: (optional) A comma separated list of IAM policy names.
+        :param  aws_iam_arns: (optional) A comma separated list of IAM policy arns.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

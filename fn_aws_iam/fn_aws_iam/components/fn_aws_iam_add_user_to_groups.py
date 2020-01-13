@@ -29,7 +29,11 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_add_user_to_groups")
     def _fn_aws_iam_add_user_to_groups_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Add the specified IAM user to the specified groups.
+
+        :param aws_iam_user_name: An IAM user name.
+        :param aws_iam_group_names: A comma separated list of IAM group names.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

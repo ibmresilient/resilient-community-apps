@@ -28,7 +28,10 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_list_user_groups")
     def _fn_aws_iam_list_user_groups_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get the IAM groups that the specified IAM user belongs to.
+
+        param aws_iam_user_name: An IAM user name.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

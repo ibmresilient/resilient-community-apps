@@ -28,7 +28,11 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_delete_login_profile")
     def _fn_aws_iam_delete_login_profile_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Delete the password for the specified IAM user, which terminates the user's ability
+        to access AWS services through the AWS Management Console.
+
+        param aws_iam_user_name: An IAM user name.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

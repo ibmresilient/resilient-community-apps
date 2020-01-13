@@ -28,7 +28,10 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_list_user_tags")
     def _fn_aws_iam_list_user_tags_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get the tags that are attached to the specified IAM user.
+
+        param aws_iam_user_name: An IAM user name.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

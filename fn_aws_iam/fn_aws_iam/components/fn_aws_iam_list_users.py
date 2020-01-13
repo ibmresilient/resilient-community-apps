@@ -28,7 +28,14 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_list_users")
     def _fn_aws_iam_list_users_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get IAM user or users in the AWS account.  Users can be filtered by user name ,
+        group and policy. If the user name is specified get only information for this user.
+
+        param aws_iam_user_name: (optional) An IAM user name.
+        param aws_iam_user_filter: (optional) User filter used to refined user data returned.
+        param aws_aim_group_filter: (optional)Group filter used to refined user data returned.
+        param aws_aim_policy_filter: (optional) Policy filter used to refined user data returned.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

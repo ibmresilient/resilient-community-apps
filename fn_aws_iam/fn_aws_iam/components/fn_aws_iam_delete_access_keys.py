@@ -29,7 +29,11 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_delete_access_keys")
     def _fn_aws_iam_delete_access_keys_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Delete the access key pairs associated with the specified IAM user.
+
+        :param aws_iam_user_name: An IAM user name.
+        :param aws_iam_access_keys: A comma separated list of IAM access key ids.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

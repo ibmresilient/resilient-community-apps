@@ -28,7 +28,10 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_list_user_policies")
     def _fn_aws_iam_list_user_policies_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get all managed policies and in-line policies that are attached to the specified IAM user.
+
+        param aws_iam_user_name: An IAM user name.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

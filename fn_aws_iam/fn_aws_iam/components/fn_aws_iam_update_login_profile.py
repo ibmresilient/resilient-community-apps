@@ -28,7 +28,13 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_update_login_profile")
     def _fn_aws_iam_update_login_profile_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Change the password for the specified IAM user.
+
+        param aws_iam_user_name: An IAM user name.
+        param aws_iam_password: A new password for an IAM user.
+        param aws_iam_password_reset_required: A boolean value to determine whether a password reset should
+        be required on change.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object

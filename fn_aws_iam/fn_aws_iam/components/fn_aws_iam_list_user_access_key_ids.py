@@ -28,7 +28,10 @@ class FunctionComponent(ResilientComponent):
 
     @function("fn_aws_iam_list_user_access_key_ids")
     def _fn_aws_iam_list_user_access_key_ids_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get information about the access key IDs associated with the specified IAM user.
+
+        param aws_iam_user_name: An IAM user name.
+        """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object
