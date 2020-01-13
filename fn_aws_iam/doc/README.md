@@ -44,7 +44,7 @@
 ---
 
 ## Function - AWS IAM: Add User To Groups
-None
+Add the specified IAM user to the specified groups. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is a comma separated list of IAM group names.
 
  ![screenshot: fn-aws-iam-add-user-to-groups ](./screenshots/fn-aws-iam-add-user-to-groups.png)
 
@@ -53,8 +53,8 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_names` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_group_names` | `text` | Yes | `-` | Comma separated list of AWS IAM group names. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -142,7 +142,9 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Attach User policies
-None
+Attach the specified managed policies to the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+
+Note: One of parameters aws_iam_policy_names or aws_iam_arns required to be set.
 
  ![screenshot: fn-aws-iam-attach-user-policies ](./screenshots/fn-aws-iam-attach-user-policies.png)
 
@@ -151,9 +153,9 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_arns` | `text` | No | `-` | - |
-| `aws_iam_policy_names` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
+| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -251,7 +253,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Delete Access Keys
-None
+Delete the access key pairs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_access_keys is a comma separated list of IAM access key ids.
 
  ![screenshot: fn-aws-iam-delete-access-keys ](./screenshots/fn-aws-iam-delete-access-keys.png)
 
@@ -260,8 +262,8 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_access_keys` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_access_keys` | `text` | Yes | `-` | Comma seperated list of AWS IAM access key names. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -360,7 +362,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Delete Login Profile
-None
+Delete the password for the specified IAM user, which terminates the user's ability to access AWS services through the AWS Management Console. Parameter aws_iam_user_name is an IAM user name.
 
  ![screenshot: fn-aws-iam-delete-login-profile ](./screenshots/fn-aws-iam-delete-login-profile.png)
 
@@ -369,7 +371,7 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -441,11 +443,11 @@ def main():
         if CONTENT == "OK":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile deleted for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
         elif CONTENT == "NoSuchEntity":
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile does not exist for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)
@@ -460,7 +462,10 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Detach User policies
-None
+Remove the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+
+Note: A user can also have inline policies embedded with it, this function will delete inline policies associated with the the user. 
+Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
 
  ![screenshot: fn-aws-iam-detach-user-policies ](./screenshots/fn-aws-iam-detach-user-policies.png)
 
@@ -469,9 +474,9 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_arns` | `text` | No | `-` | - |
-| `aws_iam_policy_names` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
+| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -569,7 +574,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Access Key Ids
-None
+Get information about the access key IDs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
  ![screenshot: fn-aws-iam-list-user-access-key-ids ](./screenshots/fn-aws-iam-list-user-access-key-ids.png)
 
@@ -578,7 +583,7 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -661,7 +666,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Groups
-None
+Get the IAM groups that the specified IAM user belongs to. Parameter aws_iam_user_name is an IAM user name.
 
  ![screenshot: fn-aws-iam-list-user-groups ](./screenshots/fn-aws-iam-list-user-groups.png)
 
@@ -670,7 +675,7 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -757,7 +762,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Policies
-None
+Get all managed policies and in-line policies that are attached to the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
  ![screenshot: fn-aws-iam-list-user-policies ](./screenshots/fn-aws-iam-list-user-policies.png)
 
@@ -766,7 +771,7 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -855,7 +860,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Tags
-None
+Get the tags that are attached to the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
  ![screenshot: fn-aws-iam-list-user-tags ](./screenshots/fn-aws-iam-list-user-tags.png)
 
@@ -864,8 +869,7 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_filter` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -906,7 +910,7 @@ None
 
 ---
 ## Function - AWS IAM: List Users
-None
+Get IAM user or users in the AWS account.  Users can be filtered by user name , group and policy. If the user name is specified get information only for this user. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine user data returned.
 
  ![screenshot: fn-aws-iam-list-users ](./screenshots/fn-aws-iam-list-users.png)
 
@@ -915,10 +919,10 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_filter` | `text` | No | `-` | - |
-| `aws_iam_policy_filter` | `text` | No | `-` | - |
-| `aws_iam_user_filter` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group name. Filter can be a string or regular expression. |
+| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policy name. Filter can be a string or regular expression. |
+| `aws_iam_user_filter` | `text` | No | `-` | Filter users based on user name. Filter can be a string or regular expression. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1039,7 +1043,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Remove User From Groups
-None
+Removes the specified IAM user from the specified groups. Group names is be a comma separated string of group names. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is  a comma separated list of IAM group names.
 
  ![screenshot: fn-aws-iam-remove-user-from-groups ](./screenshots/fn-aws-iam-remove-user-from-groups.png)
 
@@ -1048,8 +1052,8 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_names` | `text` | No | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_group_names` | `text` | No | `-` | Comma separated list of AWS IAM group names. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1147,7 +1151,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Update Login Profile
-None
+Change the password for the specified IAM user.Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_password is a new password value fro an IAM user. Parameter aws_iam_password_reset_required is a boolean value to determine whether a password reset should be required on change.
 
  ![screenshot: fn-aws-iam-update-login-profile ](./screenshots/fn-aws-iam-update-login-profile.png)
 
@@ -1156,9 +1160,9 @@ None
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_password` | `text` | Yes | `-` | - |
-| `aws_iam_password_reset_required` | `boolean` | Yes | `-` | - |
-| `aws_iam_user_name` | `text` | No | `-` | - |
+| `aws_iam_password` | `text` | Yes | `-` | AWS IAM password for user login profile. |
+| `aws_iam_password_reset_required` | `boolean` | Yes | `-` | A password reset required on password change. |
+| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1267,6 +1271,7 @@ aws_iam_users
 | Login Profile exists | `LoginProfileExists` | `text` | - |
 | Password last used | `PasswordLastUsed` | `text` | - |
 | Policies | `Policies` | `text` | - |
+| Status | `Status` | `text` | - |
 | Tags | `Tags` | `text` | - |
 | User id | `UserId` | `text` | - |
 | User name | `UserName` | `text` | - |
