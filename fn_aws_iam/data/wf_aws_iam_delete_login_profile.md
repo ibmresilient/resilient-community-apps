@@ -63,11 +63,11 @@ def main():
         if CONTENT == "OK":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile deleted for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
         elif CONTENT == "NoSuchEntity":
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile does not exist for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)

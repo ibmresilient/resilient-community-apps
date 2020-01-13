@@ -12,7 +12,7 @@
 `fn_aws_iam_list_users`
 
 ### Output Name
-`None`
+``
 
 ### Message Destination
 `fn_aws_iam`
@@ -103,6 +103,7 @@ def main():
             newrow = incident.addRow("aws_iam_users")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             for f in DATA_TBL_FIELDS:
+                newrow.Status = "Active"
                 if CONTENT[u][f] is not None:
                     if isinstance(CONTENT[u][f], unicode) or isinstance(CONTENT[u][f], int) \
                             or isinstance(CONTENT[u][f], long) or len(CONTENT[u][f]) == 0:

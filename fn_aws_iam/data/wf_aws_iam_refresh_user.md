@@ -270,7 +270,7 @@ inputs.aws_iam_user_name = row.UserName
 
 ### Post-Processing Script
 ```python
-##  AWS IAM - fn_aws_iam_list_user_groups script ##
+##  AWS IAM - fn_aws_iam_list_user_access_keys script ##
 # Example result:
 """
 Result: {
@@ -285,7 +285,7 @@ Result: {
                       'host': 'myhost.ibm.com', 'execution_time_ms': 5365, 'timestamp': '2019-11-21 10:41:22'}}
 """
 #  Globals
-# List of fields in datatable fn_aws_iam_list_user_groups script
+# List of fields in datatable fn_aws_iam_list_user_access_keys script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
 FN_NAME = "fn_aws_iam_list_user_access_keys"
 WF_NAME = "Refresh User"
