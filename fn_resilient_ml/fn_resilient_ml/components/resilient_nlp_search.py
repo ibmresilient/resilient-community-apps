@@ -35,7 +35,7 @@ class FunctionComponent(ResilientComponent):
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
-            inc_hrefs = util_functions.get_indent_href(inc_id=search_incident_id,
+            inc_hrefs = util_functions.get_incident_href(inc_id=search_incident_id,
                                                        org_id=res_client.org_id,
                                                        base_url=res_client.base_url,
                                                        num_return=number_incidents)
