@@ -1,0 +1,4 @@
+include README.md
+include fn_aws_iam/util/*
+include fn_aws_iam/LICENSE
+include doc/*
