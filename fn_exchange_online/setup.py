@@ -22,10 +22,10 @@ setup(
     version='1.0.0',
     license='MIT',
     author='IBM Resilient',
-    author_email='support@resilientsystems.com',
-    url='https://success.resilientsystems.com/',
+    author_email='',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_exchange_online'",
-    long_description="Resilient Circuits Components for 'fn_exchange_online'",
+    long_description="Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.",
     install_requires=[
         'resilient_circuits>=31.0.0',
         'resilient_lib'
