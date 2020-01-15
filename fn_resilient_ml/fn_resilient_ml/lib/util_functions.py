@@ -55,23 +55,3 @@ def get_incident_href(inc_id, org_id, base_url, num_return):
               "keywords": inc["keywords"]} for inc in incident_ids]
     return hrefs
 
-def get_artifact_des(inc_id, artifact_json):
-    """
-    Extract description of artifacts of a given incident
-    :param inc_id:
-    :param artifact_json:
-    :return: String as "{artifact_value} {artifact description} {artifact_value} {artifact description}"
-    """
-    ret_str = ""
-
-    artifacts = artifact_json.get("results")
-    artifacts_for_inc = [artifact for artifact in artifacts if artifact["inc_id"] == inc_id]
-
-    for art in artifacts_for_inc:
-        result = art.get("result", None)
-        if result:
-            ret_str += result.get("value", "") + " "
-            if result.get("description", None) is not None:
-                ret_str += result.get("description", {}).get("content", "") + " "
-
-    return ret_str
