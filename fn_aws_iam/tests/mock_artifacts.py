@@ -105,7 +105,16 @@ def get_cli_raw_responses(op):
                                                      }
                                 }
 
-        )
+        ),
+        "delete_user": ( {'ResponseMetadata': {'RequestId': 'fa4255b2-67eb-4308-937c-bd7c70a2d0cf',
+                                               'HTTPStatusCode': 200,
+                                               'HTTPHeaders': {
+                                                   'x-amzn-requestid': 'fa4255b2-67eb-4308-937c-bd7c70a2d0cf',
+                                                   'content-type': 'text/xml', 'content-length': '200',
+                                                   'date': 'Thu, 09 Jan 2020 10:49:57 GMT'},
+                                               'RetryAttempts': 0}
+                          }
+        ),
     }
     return response[op]
 
@@ -301,6 +310,8 @@ def get_func_responses(op):
         "update_login_profile_good": ('OK'),
         "update_login_profile_nosuch": ('NoSuchEntity'),
         "update_login_profile_badpw": ('PasswordPolicyViolation'),
+        "delete_user_good": ('OK'),
+        "delete_user_nosuch": ('NoSuchEntity'),
     }
     return response[op]
 
@@ -352,6 +363,9 @@ def mocked_iam(*args, **kwargs):
 
         def get_user(self):
             return get_cli_raw_responses("get_user")
+
+        def delete_user(self):
+            return get_cli_raw_responses("delete_user")
 
         def get_login_profile(self, **kwargs):
             return get_cli_raw_responses("get_login_profile")
@@ -451,6 +465,11 @@ def mocked_aws_iam_client(*args, **kwargs):
                     return get_func_responses("delete_login_profile_nosuch")
                 else:
                     return get_func_responses("delete_login_profile_good")
+            elif op == "delete_user":
+                if kwargs["UserName"] == "iam_test_User_no_such":
+                    return get_func_responses("delete_user_nosuch")
+                else:
+                    return get_func_responses("delete_user_good")
             if op == "remove_user_from_group":
                 return get_func_responses("remove_user_from_group")
             elif op == "update_login_profile":

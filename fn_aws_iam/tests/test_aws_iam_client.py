@@ -37,7 +37,7 @@ class TestAWSIAMClient:
     def test_get_client(self, service, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._get_client(service)
         assert(expected_result in repr(response))
 
@@ -50,7 +50,7 @@ class TestAWSIAMClient:
     def test_get_type_from_response(self, op, type_list, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._get_type_from_response(get_cli_raw_responses(op), type_list)
         assert(expected_result in repr(response))
 
@@ -61,7 +61,7 @@ class TestAWSIAMClient:
     def test_get_type_from_response_err(self, op, type_list, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         with pytest.raises(ValueError) as e:
             response = iam_cli._get_type_from_response(get_cli_raw_responses(op), type_list)
         assert str(e.value) == expected_result
@@ -78,7 +78,7 @@ class TestAWSIAMClient:
     def test_add_user_properties(self, mock_profile, mock_id, result, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._add_user_properties(result)
         assert(expected_result == response)
 
@@ -94,7 +94,7 @@ class TestAWSIAMClient:
     def test_update_result(self, mock_profile, mock_id, result, result_type, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._update_result(result, result_type)
         assert(expected_result == response)
 
@@ -105,7 +105,7 @@ class TestAWSIAMClient:
     def test_datetime_to_str(self, result_entry, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._datetime_to_str(result_entry)
         assert(expected_result[0] == response["CreateDate"])
         assert (expected_result[1] == response["PasswordLastUsed"])
@@ -122,7 +122,7 @@ class TestAWSIAMClient:
     def test_paginate(self, mock_orofile, mock_id, mock_filter, mock_paginator, op, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli.paginate(op)
         assert (expected_result == response)
 
@@ -135,7 +135,7 @@ class TestAWSIAMClient:
     def test_get(self, mock_id, mock_iam, op, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli.get(op)
         assert (expected_result == response)
 
@@ -143,12 +143,13 @@ class TestAWSIAMClient:
     @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
     @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_client', side_effect=mocked_iam)
     @pytest.mark.parametrize("op, expected_result", [
-       ( "get_user", "OK")
+       ( "get_user", "OK"),
+       ( "delete_user", "OK")
     ])
     def test_post(self, mock_id, mock_iam, op, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli.post(op)
         assert (expected_result == response)
 
@@ -165,7 +166,7 @@ class TestAWSIAMClient:
     def test__filter(self, result, results_filter, expected_result):
         options = {}
 
-        iam_cli = AwsIamClient(options, get_config())
+        iam_cli = AwsIamClient(get_config())
         response = iam_cli._filter(result, results_filter)
         if isinstance(expected_result, list):
             assert (expected_result[0] == response[0])
