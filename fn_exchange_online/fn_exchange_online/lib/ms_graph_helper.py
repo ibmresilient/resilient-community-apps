@@ -182,6 +182,7 @@ class MSGraphHelper(object):
         recipient_list = [{'emailAddress': {'address': address.strip()}}
                           for address in recipients.split(',')]
 
+        # Create the message in the required json format
         message_json = {"message": {"subject": subject,
                                     "body": {"contentType": "HTML", "content": html_body},
                                     "toRecipients": recipient_list},
