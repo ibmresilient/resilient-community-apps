@@ -24,21 +24,25 @@ def make_incident_href(inc_id, org_id, base_url):
                                 org_id=org_id)
 
 
-def get_incident_href(inc_id, org_id, base_url, num_return):
+def get_incident_href(nlp_str, org_id, base_url, num_return, model_path):
     """
+    For the given nlp_str, find the top num_return (old) incidents that
+    are similar to it (from NLP point of view).
 
-    :param inc_id:
-    :param org_id:
-    :param base_url:
-    :param num_return:
+    Generate the href links for each of those returned incident as well.
+
+    :param nlp_str:     input sentence to do nlp search
+    :param org_id:      org id (used to generate href links)
+    :param base_url:    base url of resilient server (used to generate href links)
+    :param num_return:  number of closest incidents to return
     :return:
     """
     # SIF (Smooth Inverse Frequency) file
-    sif = ResSIF
+    sif = ResSIF()
     sif.load_sif(FileManage.DEFAULT_SIF_FILE)
 
     # Word2Vec NLP model
-    nlp = ResNLP
+    nlp = ResNLP()
     nlp.load_model(FileManage.DEFAULT_NLP_FILE)
 
     # sentence to vector
@@ -49,9 +53,9 @@ def get_incident_href(inc_id, org_id, base_url, num_return):
     # load pca
     vec.load_pca(FileManage.DEFAULT_PCA_FILE)
 
-    incident_ids = vec.get_closest(inc_id, num_return)
-    hrefs = [{"inc_link": make_incident_href(inc["inc_id"], org_id, base_url),
-              "similarity": inc["similarity"],
+    incident_ids = vec.get_closest(nlp_str, num_return)
+    hrefs = [{"inc_link": make_incident_href(inc["ref"], org_id, base_url),
+              "similarity": inc["sim"],
               "keywords": inc["keywords"]} for inc in incident_ids]
     return hrefs
 

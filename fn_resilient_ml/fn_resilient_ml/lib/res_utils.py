@@ -20,9 +20,9 @@ import json
 RESILIENT_SECTION = "resilient"
 
 class ResUtils:
-    def __init__(self, in_log=None):
+    def __init__(self, resclient=None, in_log=None):
         self.log = in_log if in_log else logging.getLogger(__name__)
-        self.res_client = None
+        self.res_client = resclient
 
     def connect(self, opt_parser):
         res_opt = opt_parser.opts.get(RESILIENT_SECTION)
@@ -297,3 +297,19 @@ class ResUtils:
                     ret_str += result.get("description", {}).get("content", "") + " "
 
         return ret_str
+
+    def get_inc_art_des(self, inc_id):
+        """
+        Given an incident ID, find the description of it and the
+        descriptions of its artifacts.
+
+        :param inc_id:  input incident id
+        :return:        description and artifact descriptions
+        """
+        url = "/incidents/{}".format(inc_id)
+        resp = self.res_client.get(url)
+        des = resp.get("description")
+
+        return des
+
+
