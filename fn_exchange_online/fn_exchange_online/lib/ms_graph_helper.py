@@ -164,7 +164,7 @@ class MSGraphHelper(object):
         return response
 
 
-    def send_message(self, sender_address, recipient_addresses, subject, body):
+    def send_message(self, sender_address, recipients, subject, body):
         """
         Call MS Graph to send message.
         :param email_address: email address of the sender
@@ -175,23 +175,18 @@ class MSGraphHelper(object):
         """
 
         ms_graph_create_message_url = u'{0}/users/{1}/sendMail'.format(self.ms_graph_url, sender_address)
-        #for email_address in recipient_addresses.split(','):
-        message_json = {"message":{
-                            "subject": subject,
-                            "body": {
-                                "contentType": "Text",
-                                "content": body
-                            },
-                            "toRecipients": [
-                                {
-                                    "emailAddress": {
-                                        "address": recipient_addresses
-                                    }
-                                }
-                            ],
-                            },
-                        "saveToSentItems": "false"
-                        }
+
+        html_body = u'<html><body>{0}</body></html>'.format(body)
+
+        # Create recipient list in required format.
+        recipient_list = [{'emailAddress': {'address': address.strip()}}
+                          for address in recipients.split(',')]
+
+        message_json = {"message": {"subject": subject,
+                                    "body": {"contentType": "HTML", "content": html_body},
+                                    "toRecipients": recipient_list},
+                        "saveToSentItems": "true"}
+
         response = self.ms_graph_session.post(ms_graph_create_message_url,
                                               headers={'Content-Type': 'application/json'},
                                               json=message_json)
