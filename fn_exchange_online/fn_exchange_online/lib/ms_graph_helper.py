@@ -168,7 +168,7 @@ class MSGraphHelper(object):
         """
         Call MS Graph to send message.
         :param sender_address: email address of the sender
-        :param recipient_addresses: comma separated list of users to send message to
+        :param recipients: comma separated list of users to send message to
         :param subject: message subject text
         :param body: message body text
         :return: requests response from post.
