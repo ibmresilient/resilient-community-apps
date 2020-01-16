@@ -254,7 +254,8 @@ class MSGraphHelper(object):
         # Initialize message count at the top-level query function.
         self.current_message_count = 0
 
-        if email_address.lower() == "all":
+        input_choices = set(['all', 'all user', 'all users'])
+        if email_address.lower() in input_choices:
             query_results = self.query_messages_all_users(mail_folder, sender, start_date, end_date,
                                                           has_attachments, message_subject, message_body)
         else:
