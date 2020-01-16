@@ -65,7 +65,7 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_users"),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
-            # Call MS Graph API to get the user profile
+            # Call MS Graph API to send the message
             response = MS_graph_helper.send_message(email_address, recipients, message_subject, message_body)
 
             # If message was sent a 202 code is returned...nothing is returned in the response.
