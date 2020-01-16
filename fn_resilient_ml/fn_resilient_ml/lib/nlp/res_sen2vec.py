@@ -277,16 +277,18 @@ class ResSen2Vec:
             for w in words:
                 try:
                     wc = self.sif.get_word_count(w)
+                    if wc < self.COUNT_THRESHOLD:
+                        wc = self.COUNT_THRESHOLD - (self.COUNT_THRESHOLD - wc)/2
+
                     a_value = ResSen2Vec.SIF_A / (ResSen2Vec.SIF_A + wc)
                     w_v = self.word2vec[w]
                     sub = np.multiply(self.pca_u, w_v)
                     w_v = np.subtract(w_v, sub)
 
                     sim = a_value * np.dot(w_v, v2_1) / (np.linalg.norm(w_v) * v2_norm_1)
-                    word_sim.append((math.trunc(sim * 1000) / 1000, w))
+                    word_sim.append((sim, w))
                 except:
                     pass
             word_sim.sort(key=lambda u: u[0])
             top_5 = word_sim[:5]
-            top_5 = [ws[1] + "(" + str(ws[0]) + ")" for ws in top_5]
-            cl["keywords"] = ' '.join(top_5)
+            cl["keywords"] = ', '.join([ws[1] for ws in top_5])
