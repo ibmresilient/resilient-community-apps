@@ -167,7 +167,7 @@ class MSGraphHelper(object):
     def send_message(self, sender_address, recipients, subject, body):
         """
         Call MS Graph to send message.
-        :param email_address: email address of the sender
+        :param sender_address: email address of the sender
         :param recipient_addresses: comma separated list of users to send message to
         :param subject: message subject text
         :param body: message body text
