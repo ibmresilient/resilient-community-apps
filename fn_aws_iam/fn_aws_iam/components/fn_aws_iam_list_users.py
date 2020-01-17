@@ -108,13 +108,13 @@ class FunctionComponent(ResilientComponent):
         :return: Enhanced user results.
         """
         # Boolean to ask the request query to return the filtered result in a result tuple.
-        return_filtered = True if query_type == "access_keys" else False
+        return_filtered = bool(query_type == "access_keys")
         rtn = []
         for i in range(len(rtn_users)):
             user = rtn_users[i]
-            # When a filter is defined for groups or polices the 'group_count' or 'policy_count' will be returned in the
-            # result as a tuple value. In either case if the count is 'True' i.e. > 0 the user and filtered properties
-            # (group or policy) are included in the result, otherwise the user is dropped from the result.
+            # When a filter is defined for groups or polices the 'group_count' or 'policy_count' will be returned in
+            # the result as a tuple value. In either case if the count is 'True' i.e. > 0 the user and filtered
+            # properties (group or policy) are included in the result, otherwise the user is dropped from the result.
             group_count = 0
             policy_count = 0
             access_key_count = 0
@@ -130,24 +130,27 @@ class FunctionComponent(ResilientComponent):
                     (group_count, user_groups) = user_groups
                 if user_groups:
                     if group_filter and not group_count:
+                        # If filter was specified and no filtered count returned drop user entry.
                         continue
                     user["Groups"] = user_groups
                 elif group_filter:
+                    # If we get no user access groups returned and filter was specified drop user entry.
                     continue
                 # Add extra data for each user. Filtered count is also returned when a filter is defined for polices.
                 user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=user["UserName"],
                                             results_filter=policy_filter, return_filtered=return_filtered)
-                # The policy result will be returned as a tuple of filtered count and filtered policy list if a filter is
-                # specified, otherwise it will be a list of policies.
+                # The policy result will be returned as a tuple of filtered count and filtered policy list if
+                # a filter is specified, otherwise it will be a list of policies.
                 if isinstance(user_policies, tuple):
                     (policy_count, user_policies) = user_policies
                 if user_policies:
                     if policy_filter and not policy_count:
+                        # If filter was specified and no filtered count returned drop user entry.
                         continue
                     user["Policies"] = user_policies
                 elif policy_filter:
+                    # If we get no user policies returned and the filter was specified drop user entry.
                     continue
-
             # Add extra data for each user. Filtered count is also returned when a filter is defined for polices.
             user_access_key_ids = iam_cli.get("list_access_keys", paginate=True, UserName=user["UserName"],
                                               results_filter=access_key_filter, return_filtered=return_filtered)
@@ -157,14 +160,16 @@ class FunctionComponent(ResilientComponent):
                 (access_key_count, user_access_key_ids) = user_access_key_ids
             if user_access_key_ids:
                 if access_key_filter and not access_key_count:
+                    # If filter was specified and no filtered count returned drop user entry.
                     continue
-                for i in range(len(user_access_key_ids)):
+                for j in range(len(user_access_key_ids)):
                     # Only perform following queries if the list query type is for 'access_keys'.
                     if not query_type or query_type.lower() == "access_keys":
-                        user_access_key_ids[i]["key_last_used"] = \
-                            iam_cli.get("get_access_key_last_used", AccessKeyId=user_access_key_ids[i]['AccessKeyId'])
+                        user_access_key_ids[j]["key_last_used"] = \
+                            iam_cli.get("get_access_key_last_used", AccessKeyId=user_access_key_ids[j]['AccessKeyId'])
                 user["AccessKeyIds"] = user_access_key_ids
             elif access_key_filter:
+                # If we get no user access keys returned and filter was specified drop user entry.
                 continue
 
             # Only perform following queries if the list query type is for 'users;'.
