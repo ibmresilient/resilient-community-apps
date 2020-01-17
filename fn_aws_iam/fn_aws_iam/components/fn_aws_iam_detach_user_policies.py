@@ -64,18 +64,29 @@ class FunctionComponent(ResilientComponent):
                 del params["PolicyNames"]
                 # Get user policies
                 user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=aws_iam_user_name)
+                inline_policies = iam_cli.get("list_user_policies", paginate=True, UserName=aws_iam_user_name)
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
-                    if user_policies:
-                        policy = [policy for policy in user_policies if policy["PolicyName"] == policy_name][0]
+                    if inline_policies and policy_name in inline_policies:
+                        if "PolicyArn" in params:
+                            # Delete 'PolicyArn' from 'params' if in-line policy.
+                            del params["PolicyArn"]
+                        # Policy is an in-line policy delete instead.
+                        params.update({"PolicyName": policy_name})
+                        rtn.append({"PolicyName": policy_name, "Status": iam_cli.post("delete_user_policy", **params)})
+                    elif user_policies:
+                        if "PolicyName" in params:
+                            # Delete 'PolicyName' from 'params' if managed policy.
+                            del params["PolicyName"]
+                        # Detach managed policies instead of deleting.
+                        policy_list = [policy for policy in user_policies if policy["PolicyName"] == policy_name]
 
-                    if not user_policies or not policy:
-                        raise ValueError("Policy with name '{0}' not attached for user '{1}'."
-                                         .format(policy_name, aws_iam_user_name))
-
-                    params.update({"PolicyArn": policy["PolicyArn"]})
-                    rtn.append({"PolicyName": policy_name,
-                                "Status": iam_cli.post("detach_user_policy", **params)})
+                        if not user_policies or not policy_list:
+                            raise ValueError("Policy with name '{0}' not attached for user '{1}'."
+                                             .format(policy_name, aws_iam_user_name))
+                        policy = policy_list[0]
+                        params.update({"PolicyArn": policy["PolicyArn"]})
+                        rtn.append({"PolicyName": policy_name, "Status": iam_cli.post("detach_user_policy", **params)})
             else:
                 # Delete 'Arn' from params
                 del params["Arns"]

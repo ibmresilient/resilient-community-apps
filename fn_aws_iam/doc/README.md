@@ -20,6 +20,7 @@
 - [Function - AWS IAM: Attach User policies](#function---aws-iam-attach-user-policies)
 - [Function - AWS IAM: Delete Access Keys](#function---aws-iam-delete-access-keys)
 - [Function - AWS IAM: Delete Login Profile](#function---aws-iam-delete-login-profile)
+- [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 - [Function - AWS IAM: Detach User policies](#function---aws-iam-detach-user-policies)
 - [Function - AWS IAM: List User Access Key Ids](#function---aws-iam-list-user-access-key-ids)
 - [Function - AWS IAM: List User Groups](#function---aws-iam-list-user-groups)
@@ -53,8 +54,8 @@ Add the specified IAM user to the specified groups. Parameter aws_iam_user_name 
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_names` | `text` | Yes | `-` | Comma separated list of AWS IAM group names. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_group_names` | `text` | No | `-` | Comma separated list of AWS IAM group names. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -155,7 +156,7 @@ Note: One of parameters aws_iam_policy_names or aws_iam_arns required to be set.
 | ---- | :--: | :------: | ------- | ------- |
 | `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
 | `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -262,8 +263,8 @@ Delete the access key pairs associated with the specified IAM user. Parameter aw
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_access_keys` | `text` | Yes | `-` | Comma seperated list of AWS IAM access key names. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_access_keys` | `text` | No | `-` | Comma seperated list of AWS IAM access key names. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -371,7 +372,7 @@ Delete the password for the specified IAM user, which terminates the user's abil
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -461,22 +462,29 @@ if __name__ == "__main__":
 </details>
 
 ---
-## Function - AWS IAM: Detach User policies
-Remove the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+## Function - AWS IAM: Delete User
+Delete the specified IAM user. Parameter aws_iam_user_name is an IAM user name. 
 
-Note: A user can also have inline policies embedded with it, this function will delete inline policies associated with the the user. 
-Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+Note: When deleting an IAM user programmatically, you must delete the following items attached to the user or the deletion fails:
 
- ![screenshot: fn-aws-iam-detach-user-policies ](./screenshots/fn-aws-iam-detach-user-policies.png)
+    Password ( DeleteLoginProfile )
+    Access keys ( DeleteAccessKey )
+    Inline policies ( DeleteUserPolicy )
+    Attached managed policies ( DetachUserPolicy ) 
+    Group memberships ( RemoveUserFromGroup )
+    Signing certificate ( DeleteSigningCertificate )
+    SSH public key ( DeleteSSHPublicKey )
+    Git credentials ( DeleteServiceSpecificCredential )
+    Multi-factor authentication (MFA) device ( DeactivateMFADevice , DeleteVirtualMFADevice )
+
+ ![screenshot: fn-aws-iam-delete-user ](./screenshots/fn-aws-iam-delete-user.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
-| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -500,7 +508,108 @@ results = {
 
 ```python
 inputs.aws_iam_user_name = row.UserName
-inputs.aws_iam_policy_names = row.Policies
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+##  AWS IAM - fn_aws_iam_delete_access_keys script ##
+# Example result:
+"""
+OK
+Result: { 'version': '1.0', 'success': True, 'reason': None, 
+          'content': 'OK', 
+          'raw': '"OK"', 
+          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                      'execution_time_ms': 689, 'timestamp': '2020-01-15 10:27:48'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_delete_user  script
+DATA_TBL_FIELDS = ["Status"]
+FN_NAME = "fn_aws_iam_delete_user"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+
+def main():
+    note_text = ''
+    if CONTENT is not None:
+        if CONTENT == "OK":
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: User <b>{1}</b> was successfully deleted for " \
+                        "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+            row.Status = "Deleted"
+            row.Tags = ''
+        else:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Unexpected delete status <b>{1}</b> for delete" \
+                        " user operation <b>{2}</b> for Resilient function <b>{3}</b>"\
+                .format(WF_NAME, CONTENT, INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
+            .format(WF_NAME, FN_NAME)
+
+    incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+```
+
+</p>
+</details>
+
+---
+## Function - AWS IAM: Detach User policies
+Remove the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+
+Note: A user can also have inline policies embedded with it, this function will delete inline policies associated with the the user. 
+Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+
+ ![screenshot: fn-aws-iam-detach-user-policies ](./screenshots/fn-aws-iam-detach-user-policies.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
+| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.aws_iam_user_name = row.UserName
+content = workflow.properties.list_user_policies_results.content
+policy_names = []
+for pn in range(len(content)):
+    if content[pn]["PolicyName"] is not None:
+        policy_names.append(content[pn]["PolicyName"])
+inputs.aws_iam_policy_names = ",".join(policy_names)
+
 ```
 
 </p>
@@ -530,7 +639,7 @@ Result: {
 # List of fields in datatable for fn_aws_iam_detach_user_policies  script
 DATA_TBL_FIELDS = ["Policies"]
 FN_NAME = "fn_aws_iam_detach_user_policies"
-WF_NAME = "Detach All User Policies"
+WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -559,6 +668,7 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>"\
                 .format(WF_NAME, len(no_such_entity_policies), ", ".join(str(i) for i in no_such_entity_policies), INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Policies = ''
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)
@@ -583,7 +693,7 @@ Get information about the access key IDs associated with the specified IAM user.
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -675,7 +785,7 @@ Get the IAM groups that the specified IAM user belongs to. Parameter aws_iam_use
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -771,7 +881,7 @@ Get all managed policies and in-line policies that are attached to the specified
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -869,7 +979,7 @@ Get the tags that are attached to the specified IAM user. Parameter aws_iam_user
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -910,7 +1020,7 @@ None
 
 ---
 ## Function - AWS IAM: List Users
-Get IAM user or users in the AWS account.  Users can be filtered by user name , group and policy. If the user name is specified get information only for this user. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine user data returned.
+Get IAM user or users in the AWS account.  Users can be filtered by user name , group and policy. If the user name is specified get information only for this user. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine user data returned. Parameter aws_iam_query_type (optional) is used to determine type of query to perform users.
 
  ![screenshot: fn-aws-iam-list-users ](./screenshots/fn-aws-iam-list-users.png)
 
@@ -919,10 +1029,12 @@ Get IAM user or users in the AWS account.  Users can be filtered by user name , 
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group name. Filter can be a string or regular expression. |
-| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policy name. Filter can be a string or regular expression. |
-| `aws_iam_user_filter` | `text` | No | `-` | Filter users based on user name. Filter can be a string or regular expression. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users based on access keys applied to user. Filter by access key id, can be a string or regular expression. |
+| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name, can be a string or regular expression. |
+| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name, can be a string or regular expression. |
+| `aws_iam_query_type` | `text` | No | `-` | Type of query to perform for list_users, can be one of 'users' or 'access_keys'. Optional parameter. |
+| `aws_iam_user_filter` | `text` | No | `-` | Filter users based on user name. Can be a string or regular expression. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1053,7 +1165,7 @@ Removes the specified IAM user from the specified groups. Group names is be a co
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `aws_iam_group_names` | `text` | No | `-` | Comma separated list of AWS IAM group names. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1077,7 +1189,12 @@ results = {
 
 ```python
 inputs.aws_iam_user_name = row.UserName
-inputs.aws_iam_group_names = row.Groups
+content = workflow.properties.list_user_groups_results.content
+groups = []
+for g in range(len(content)):
+    if content[g]["GroupName"] is not None:
+        groups.append(content[g]["GroupName"])
+inputs.aws_iam_group_names = ",".join(groups)
 ```
 
 </p>
@@ -1107,7 +1224,7 @@ Result: {
 # List of fields in datatable for fn_aws_iam_detach_user_policies  script
 DATA_TBL_FIELDS = ["Policies"]
 FN_NAME = "fn_aws_iam_remove_user_from_groups"
-WF_NAME = "Remove User From All Groups"
+WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -1136,6 +1253,7 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Groups <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>"\
                 .format(WF_NAME, len(no_such_entity_groups), ", ".join(str(i) for i in no_such_entity_groups), INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Groups = ''
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)
@@ -1162,7 +1280,7 @@ Change the password for the specified IAM user.Parameter aws_iam_user_name is an
 | ---- | :--: | :------: | ------- | ------- |
 | `aws_iam_password` | `text` | Yes | `-` | AWS IAM password for user login profile. |
 | `aws_iam_password_reset_required` | `boolean` | Yes | `-` | A password reset required on password change. |
-| `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
 </details>
@@ -1288,6 +1406,7 @@ aws_iam_users
 | Example: AWS IAM: Attach User Policy | aws_iam_users | `wf_aws_iam_attach_user_policy` |
 | Example: AWS IAM: Delete Access Keys | aws_iam_users | `wf_aws_iam_delete_access_keys` |
 | Example: AWS IAM: Delete Login Profile | aws_iam_users | `wf_aws_iam_delete_login_profile` |
+| Example: AWS IAM: Delete User | aws_iam_users | `wf_aws_iam_delete_user` |
 | Example: AWS IAM: Detach All User Policies | aws_iam_users | `wf_aws_iam_detach_all_user_policies` |
 | Example: AWS IAM: List Users | incident | `wf_aws_iam_list_users` |
 | Example: AWS IAM: Refresh User | aws_iam_users | `wf_aws_iam_refresh_user` |
