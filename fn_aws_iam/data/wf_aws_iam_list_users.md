@@ -22,6 +22,8 @@
 inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
 inputs.aws_iam_group_filter = rule.properties.aws_iam_group_filter
 inputs.aws_iam_policy_filter = rule.properties.aws_iam_policy_filter
+inputs.aws_iam_access_key_filter = rule.properties.aws_iam_access_key_filter
+inputs.aws_iam_query_type = "users"
 ```
 
 ### Post-Processing Script
