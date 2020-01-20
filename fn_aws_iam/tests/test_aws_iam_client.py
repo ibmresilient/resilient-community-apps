@@ -168,10 +168,13 @@ class TestAWSIAMClient:
         (get_func_responses("list_users"), None, True, 4),
         (get_func_responses("list_users"), {'UserName': u'test_user'}, True, 0),
         (get_func_responses("list_users"), {'UserName': 'iam_list_User_1'}, True, 1),
+        (get_func_responses("list_access_keys"), {'AccessKeyId': 'ABC123CDE456FGH789IJ'}, True, 1),
+        (get_func_responses("list_access_keys"), {'AccessKeyId': '123'}, True, 2),
         (get_func_responses("list_groups_for_user"), {'GroupName': u'test_group'}, False, [0, 2]),
         (get_func_responses("list_groups_for_user"), {'GroupName': 'null_group'}, False, [1, 2]),
         (get_func_responses("list_policies"), {'PolicyName': u'test_policy'}, False, [0, 3]),
         (get_func_responses("list_policies"), {'PolicyName': 'deny_all'}, False, [1, 3]),
+
     ])
     def test__filter(self, mock_id, result, results_filter, return_filtered, expected_result):
         options = {}

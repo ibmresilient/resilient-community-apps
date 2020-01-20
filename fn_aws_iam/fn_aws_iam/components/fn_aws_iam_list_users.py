@@ -46,7 +46,6 @@ class FunctionComponent(ResilientComponent):
             aws_iam_group_filter = kwargs.get("aws_iam_group_filter")  # text
             aws_iam_policy_filter = kwargs.get("aws_iam_policy_filter")  # text
             aws_iam_access_key_filter = kwargs.get("aws_iam_access_key_filter")  # text
-            aws_iam_query_type = kwargs.get("aws_iam_query_type")  # text
             aws_iam_query_type = \
                 self.get_select_param(kwargs.get("aws_iam_query_type"))  # select, values: "users", "access_keys"
 

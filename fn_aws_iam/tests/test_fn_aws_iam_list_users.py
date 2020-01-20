@@ -43,11 +43,17 @@ class TestFnAwsIamListUsers:
         assert func is not None
 
     @patch('fn_aws_iam.components.fn_aws_iam_list_users.AwsIamClient', side_effect=mocked_aws_iam_client)
-    @pytest.mark.parametrize("aws_iam_user_name, aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter, expected_results", [
-        (None, None, None, None, get_func_responses("list_users")),
-        ("iam_test_User_1", None, None, None, get_func_responses("get_user"))
+    @pytest.mark.parametrize("aws_iam_user_name, aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter, "
+                             "aws_iam_access_key_filter, aws_iam_query_type, expected_results", [
+        (None, None, None, None, None, None, get_func_responses("list_users")),
+        ("iam_test_User_1", None, None, None, None, None, get_func_responses("get_user")),
+        (None, "iam_test_User_1", None, None, None, "users", get_func_responses("list_users_filtered_by_name_all_types")),
+        (None, "not_exists", None, None, None, "users", []),
+        (None, None, None, None, "123", "access_keys", get_func_responses("list_users_filtered_by_keys_wtih_dates")),
+
     ])
-    def test_success(self, mock_get, circuits_app, aws_iam_user_name, aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter, expected_results):
+    def test_success(self, mock_get, circuits_app, aws_iam_user_name, aws_iam_user_filter, aws_iam_group_filter,
+                     aws_iam_policy_filter, aws_iam_access_key_filter, aws_iam_query_type, expected_results):
         """ Test calling with sample values for the parameters """
 
         keys = ["content", "inputs", "metrics", "raw", "reason", "success", "version"]
@@ -56,7 +62,9 @@ class TestFnAwsIamListUsers:
             "aws_iam_user_name": aws_iam_user_name,
             "aws_iam_user_filter": aws_iam_user_filter,
             "aws_iam_group_filter": aws_iam_group_filter,
-            "aws_iam_policy_filter": aws_iam_policy_filter
+            "aws_iam_policy_filter": aws_iam_policy_filter,
+            "aws_iam_access_key_filter": aws_iam_access_key_filter,
+            "aws_iam_query_type": aws_iam_query_type
         }
         results = call_fn_aws_iam_list_users_function(circuits_app, function_params)
         assert_keys_in(results, *keys)

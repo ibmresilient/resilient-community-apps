@@ -224,6 +224,7 @@ def mock_client_results(type):
                                  'LoginProfileExists': 'Yes',
                                  u'Path': '/', u'Arn': 'arn:aws:iam::123456789012:user/iam_test_User_1'}]
                                )
+
     }
     return response[type]
 
@@ -247,6 +248,87 @@ def get_func_responses(op):
                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_3', 'CreateDate': '2017-05-29 20:38:09',
                          'LoginProfileExists': 'Yes'}]
                       ),
+        "list_users_filtered_by_name_all_types": ([{'AccessKeyIds': [{'AccessKeyId': 'ABC123CDE456FGH789IJ',
+                                                            'CreateDate': '2019-10-31 16:23:08',
+                                                            'Status': 'Active',
+                                                            'UserName': 'iam_test_User_1'},
+                                                           {'AccessKeyId': 'BC123CDE456FGH789IJK',
+                                                            'CreateDate': '2019-11-04 11:33:33',
+                                                            'Status': 'Active',
+                                                            'UserName': 'iam_test_User_1'}],
+                                          'Arn': 'arn:aws:iam::012345678901:user/iam_test_User_1',
+                                          'CreateDate': '2019-10-31 16:23:07',
+                                          'DefaultUser': 'Yes',
+                                          'Groups': [{'Arn': 'arn:aws:iam::123456789012:group/null_group',
+                                                      'CreateDate': '2019-12-04 12:31:47',
+                                                      'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
+                                                      'GroupName': 'null_group',
+                                                      'Path': '/'},
+                                                     {'Arn': 'arn:aws:iam::123456789012:group/denyall_group',
+                                                      'CreateDate': '2019-11-29 15:49:34',
+                                                      'GroupId': 'AGPA4EQBBG2YPUAIHTA3E',
+                                                      'GroupName': 'denyall_group',
+                                                      'Path': '/'}],
+                                          'LoginProfileExists': 'Yes',
+                                          'PasswordLastUsed': '2019-12-10 17:10:40',
+                                          'Path': '/',
+                                          'Policies': [{'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all',
+                                                        'PolicyName': 'deny_all'},
+                                                       {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll',
+                                                        'PolicyName': 'AWSDenyAll'}],
+                                          'Tags': [{'Key': 'Test_tag1', 'Value': 'A test TAG'},
+                                                   {'Key': 'Tes Tag2', 'Value': 'Another test tag'}],
+                                          'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                          'UserName': 'iam_test_User_1'}]
+        ),
+        "list_users_filtered_by_group":([{'Arn': 'arn:aws:iam::012345678901:user/iam_test_User',
+                                          'CreateDate': '2019-10-31 16:23:07',
+                                          'DefaultUser': 'Yes',
+                                          'Groups': {'Arn': 'arn:aws:iam::123456789012:group/null_group',
+                                                     'CreateDate': '2019-12-04 12:31:47',
+                                                     'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
+                                                     'GroupName': 'null_group',
+                                                     'Path': '/'},
+                                          'LoginProfileExists': 'Yes',
+                                          'PasswordLastUsed': '2019-12-10 17:10:40',
+                                          'Path': '/',
+                                          'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                          'UserName': 'iam_list_User'}]
+                                        ),
+        "list_users_filtered_by_policy": (  [{'Arn': 'arn:aws:iam::012345678901:user/iam_test_User',
+                                              'CreateDate': '2019-10-31 16:23:07',
+                                              'DefaultUser': 'Yes',
+                                              'LoginProfileExists': 'Yes',
+                                              'PasswordLastUsed': '2019-12-10 17:10:40',
+                                              'Path': '/',
+                                              'Policies': {'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all',
+                                                           'PolicyName': 'deny_all'},
+                                              'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                              'UserName': 'iam_list_User'}]
+        ),
+        "list_users_filtered_by_keys_with_dates": ([{'AccessKeyIds': [{'AccessKeyId': 'ABC123CDE456FGH789IJ',
+                                                                    'CreateDate': '2019-10-31 16:23:08',
+                                                                    'Status': 'Active',
+                                                                    'UserName': 'iam_test_User_1',
+                                                                    'key_last_used': {'LastUsedDate': '2020-01-20 12:17:00',
+                                                                                      'Region': 'us-east-1',
+                                                                                      'ServiceName': 'sts'}},
+                                                                   {'AccessKeyId': 'BC123CDE456FGH789IJK',
+                                                                    'CreateDate': '2019-11-04 11:33:33',
+                                                                    'Status': 'Active',
+                                                                    'UserName': 'iam_test_User_1',
+                                                                    'key_last_used': {'LastUsedDate': '2020-01-20 12:17:00',
+                                                                                      'Region': 'us-east-1',
+                                                                                      'ServiceName': 'sts'}}],
+                                                  'Arn': 'arn:aws:iam::012345678901:user/iam_test_User',
+                                                  'CreateDate': '2019-10-31 16:23:07',
+                                                  'DefaultUser': 'Yes',
+                                                  'LoginProfileExists': 'Yes',
+                                                  'PasswordLastUsed': '2019-12-10 17:10:40',
+                                                  'Path': '/',
+                                                  'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                                                  'UserName': 'iam_list_User'}]
+        ),
         "list_policies": ([{'PolicyName': 'deny_all', 'PolicyId': 'ANPA4EQBBG2YGU5WU75FL',
                             'Arn': 'arn:aws:iam::123456789012:policy/deny_all', 'Path': '/', 'DefaultVersionId': 'v1',
                             'AttachmentCount': 0, 'PermissionsBoundaryUsageCount': 0, 'IsAttachable': True,
@@ -295,6 +377,8 @@ def get_func_responses(op):
         "get_login_profile": (
             {'UserName': 'iam_test_User', 'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 8, tzinfo=tzutc()),
              'PasswordResetRequired': False}
+        ),
+        "get_access_key_last_used": ({'LastUsedDate': '2020-01-20 12:17:00', 'ServiceName': 'sts', 'Region': 'us-east-1'}
         ),
         "add_user_to_group_good": ('OK'),
         "add_user_to_group_nosuch":('NoSuchEntity'),
@@ -398,26 +482,48 @@ def mocked_aws_iam_client(*args, **kwargs):
             if op == "get_user":
                 return get_func_responses("get_user")
             if op == "list_users":
-                return get_func_responses("list_users")
+                if "UserName" in kwargs and "iam_test_User_1" == kwargs["UserName"]:
+                    return get_func_responses("get_user")
+                if "results_filter" in kwargs and "UserName" in kwargs["results_filter"]:
+                    if kwargs["results_filter"]["UserName"] == "not_exists":
+                        return (0, [])
+                    else:
+                        return get_func_responses("get_user")
+                else:
+                    return get_func_responses("list_users")
             if op == "list_policies":
                 return get_func_responses("list_policies")
             if op == "list_access_keys":
                 if "iam_list_User" in kwargs["UserName"]:
-                    return []
+                    if "iam_list_User" == kwargs["UserName"] and "results_filter" in kwargs and "AccessKeyId" \
+                            in kwargs["results_filter"] and kwargs["results_filter"]["AccessKeyId"] == "123":
+                        return (2, get_func_responses("list_access_keys"))
+                    else:
+                        return []
                 elif "_empty" in kwargs["UserName"]:
                     return get_func_responses("list_access_keys_empty")
                 else:
                     return get_func_responses("list_access_keys")
+            if op == "get_access_key_last_used":
+                return get_func_responses("get_access_key_last_used")
             if op == "list_groups_for_user":
                 if "iam_list_User" in kwargs["UserName"]:
-                    return []
+                    if "iam_list_User" == kwargs["UserName"] and "results_filter" in kwargs and "GroupName" \
+                                in kwargs["results_filter"] and kwargs["results_filter"]["GroupName"] == "null_group":
+                        return (1, get_func_responses("list_groups_for_user")[0])
+                    else:
+                        return []
                 elif "_empty" in kwargs["UserName"]:
                     return get_func_responses("list_groups_for_user_empty")
                 else:
                     return get_func_responses("list_groups_for_user")
             if op == "list_attached_user_policies":
                 if "iam_list_User"  in kwargs["UserName"]:
-                    return []
+                    if "iam_list_User" == kwargs["UserName"] and "results_filter" in kwargs and "PolicyName" \
+                            in kwargs["results_filter"] and kwargs["results_filter"]["PolicyName"] == "deny_all":
+                        return (1, get_func_responses("list_attached_user_policies")[0])
+                    else:
+                        return []
                 elif "_empty" in kwargs["UserName"]:
                     return get_func_responses("list_attached_user_policies_empty")
                 else:
