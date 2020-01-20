@@ -6,7 +6,7 @@
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
-from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, get_common_request_items
+from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, get_common_request_items, clean_url
 
 AD_HOC_URL = 'ad_hoc_commands/'
 
@@ -51,7 +51,7 @@ class FunctionComponent(ResilientComponent):
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
 
-            url = "/".join((self.options.get('url'), TOWER_API_BASE, AD_HOC_URL))
+            url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, AD_HOC_URL))
             # common
             basic_auth, cafile = get_common_request_items(self.options)
 

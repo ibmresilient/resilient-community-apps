@@ -5,8 +5,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, ResultPayload, str_to_bool, validate_fields
-from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment, clean_url
 
 JOBS_URL = "ad_hoc_commands/{id}/"
 EVENTS_URL = "ad_hoc_commands/{id}/events/"
@@ -32,12 +32,12 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             tower_job_id = kwargs.get("tower_job_id")  # text
-            tower_save_as_attachment = kwargs.get("tower_save_as_attachment")
+            tower_save_as = self.get_select_param(kwargs.get("tower_save_as")) # select
             incident_id = kwargs.get("incident_id") # number
 
             log = logging.getLogger(__name__)
             log.info("tower_job_id: %s", tower_job_id)
-            log.info("tower_save_as_attachment: %s", tower_save_as_attachment)
+            log.info("tower_save_as: %s", tower_save_as)
             log.info("incident_id: %s", incident_id)
 
             result = ResultPayload(SECTION_HDR, **kwargs)
@@ -50,12 +50,12 @@ class FunctionComponent(ResilientComponent):
             basic_auth, cafile = get_common_request_items(self.options)
 
             # get summary information
-            summary_url = "/".join((self.options['url'], TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
+            summary_url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
             summary_result = rc.execute_call_v2("get", summary_url, proxies=rc.get_proxies(), auth=basic_auth,
                                                 verify=cafile)
             json_summary = summary_result.json()
 
-            event_url = "/".join((self.options['url'], TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))
+            event_url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))
 
 
             events_result = rc.execute_call_v2("get", event_url, proxies=rc.get_proxies(), auth=basic_auth,
@@ -69,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             # save results as attachment will return no results.content
-            if str_to_bool(tower_save_as_attachment):
+            if tower_save_as == "attachment":
                 res_client = self.rest_client()
                 save_as_attachment(res_client, incident_id, payload)
 

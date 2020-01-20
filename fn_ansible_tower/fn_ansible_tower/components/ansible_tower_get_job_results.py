@@ -5,8 +5,8 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import RequestsCommon, ResultPayload, validate_fields, str_to_bool
-from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment
+from resilient_lib import RequestsCommon, ResultPayload, validate_fields
+from fn_ansible_tower.lib.common import SECTION_HDR, TOWER_API_BASE, get_common_request_items, save_as_attachment, clean_url
 
 JOBS_URL = "jobs/{id}"
 EVENTS_URL = "jobs/{id}/job_events/"
@@ -50,13 +50,13 @@ class FunctionComponent(ResilientComponent):
             basic_auth, cafile = get_common_request_items(self.options)
 
             # get summary information
-            summary_url = "/".join((self.options['url'], TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
+            summary_url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, JOBS_URL.format(id=tower_job_id)))
             summary_result = rc.execute_call_v2("get", summary_url, auth=basic_auth,
                                                 verify=cafile)
             json_summary = summary_result.json()
 
             # get the events which are managed separately. These event include the detail for each hosts accessed
-            event_url = "/".join((self.options['url'], TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))
+            event_url = "/".join((clean_url(self.options['url']), TOWER_API_BASE, EVENTS_URL.format(id=tower_job_id)))
 
             events_result = rc.execute_call_v2("get", event_url, auth=basic_auth,
                                                verify=cafile)

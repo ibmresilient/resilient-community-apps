@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import RequestsCommon, ResultPayload, validate_fields
 from fn_ansible_tower.lib.common import get_job_template_by_name, SECTION_HDR, TOWER_API_BASE, JSON_HEADERS, make_extra_vars, \
-    get_common_request_items
+                                        get_common_request_items, clean_url
 
 LAUNCH_URL = "job_templates/{id}/launch/"
 
@@ -89,7 +89,7 @@ def run_job_template(opts, options, tower_template_id,
     log = logging.getLogger(__name__)
     rc = RequestsCommon(opts, options)
 
-    url = "/".join((options.get('url'), TOWER_API_BASE, LAUNCH_URL.format(id=tower_template_id)))
+    url = "/".join((clean_url(options['url']), TOWER_API_BASE, LAUNCH_URL.format(id=tower_template_id)))
 
     arguments = {}
     if tower_template_arguments:

@@ -32,7 +32,7 @@ def get_job_template_by_name(opts, options, filter_by_name):
     next_url = "/".join((TOWER_API_BASE, LIST_URL))
     # continue as long as paged results exist
     while next_url:
-        url = "/".join((options.get('url'), next_url)).replace("//api", "/api")
+        url = "/".join((clean_url(options.get('url')), next_url))
         results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
@@ -57,7 +57,7 @@ def get_job_template_by_project(opts, options, filter_by_project, template_patte
     :param template_pattern: filter list of templates by wildcards
     :return: list of templates by project
     """
-    url = "/".join((options.get('url'), TOWER_API_BASE, LIST_URL))
+    url = "/".join((clean_url(options.get('url')), TOWER_API_BASE, LIST_URL))
     basic_auth, cafile = get_common_request_items(options)
 
     rc = RequestsCommon(opts, options)
@@ -65,7 +65,7 @@ def get_job_template_by_project(opts, options, filter_by_project, template_patte
     next_url = "/".join((TOWER_API_BASE, LIST_URL))
     result_templates = []
     while next_url:
-        url = "/".join((options.get('url'), next_url)).replace("//api", "/api")
+        url = "/".join((clean_url(clean_url(options.get('url'))), next_url))
         results = rc.execute_call_v2("get", url, auth=basic_auth,
                                      verify=cafile)
         json_results = results.json()
@@ -163,3 +163,11 @@ def save_as_attachment(res_client, incident_id, results):
     attachment_json = write_file_attachment(res_client, file_name, file_handle, incident_id)
 
     return file_name, attachment_json
+
+def clean_url(url):
+    """
+    remove trailing slash if it exists
+    :param url:
+    :return: url without training slash
+    """
+    return url[:-1] if url.endswith("/") else url

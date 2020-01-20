@@ -9,8 +9,6 @@ from resilient_circuits import ResilientComponent, function, handler, \
 from resilient_lib import ResultPayload, validate_fields
 from fn_ansible_tower.lib.common import get_job_template_by_project, SECTION_HDR
 
-LIST_URL = 'job_templates/'
-
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'ansible_tower_list_job_templates"""
 
