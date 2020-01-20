@@ -28,7 +28,7 @@ setup(
     long_description="Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient.",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'resilient_lib'
+        'resilient_lib>=35.0.dev'
     ],
     packages=find_packages(),
     include_package_data=True,
