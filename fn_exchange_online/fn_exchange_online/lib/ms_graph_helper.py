@@ -194,6 +194,64 @@ class MSGraphHelper(object):
 
         return response
 
+
+    def create_meeting(self, email_address, start_time, end_time, subject, body, required_attendees, optional_attendees,
+                       location):
+        """
+         create_meeting will create an event in the specified email_address user's calandar and send email to the
+         required and optional attendee email addresses.
+        :param email_address: meeting organizer
+        :param start_time: start time of the meeting
+        :param end_time: end time of the meeting
+        :param subject: subject of the meeting/email
+        :param body: body email meeting invitation
+        :param required_attendees: list of required attendee email addresses
+        :param location: list of optional attendee email addresses
+        :return: response from MS Graph API post to calendar/events endpoint
+        """
+        ms_graph_calender_event_url = u'{0}/users/{1}/calendar/events'.format(self.ms_graph_url, email_address)
+
+        # Get the time zone of the organizer.
+        ms_graph_timezone_url = u'{0}/users/{1}/mailboxSettings/timeZone'.format(self.ms_graph_url, email_address)
+        response = self.ms_graph_session.get(ms_graph_timezone_url)
+        response_json = response.json()
+        time_zone = response_json["value"]
+
+        # Calculate meeting start and end date/time.
+        utc_start_time = datetime.datetime.fromtimestamp(start_time / 1000).strftime('%Y-%m-%dT%H:%M:%S')
+        utc_end_time = datetime.datetime.fromtimestamp(end_time / 1000).strftime('%Y-%m-%dT%H:%M:%S')
+
+        # Create attendee list in required format.  If no required/optional attendees are specified set to empty string.
+        if not required_attendees:
+            required_attendees = ""
+        if not optional_attendees:
+            optional_attendees = ""
+
+        required_list = [{'emailAddress': {'address': address.strip()}, 'type': "required"}
+                         for address in required_attendees.split(',')]
+        optional_list = [{'emailAddress': {'address': address.strip()}, 'type': "optional"}
+                         for address in optional_attendees.split(',')]
+        attendees = required_list + optional_list
+
+        # Format the calendar event json.
+        event_json = {"subject": subject,
+                      "body": {"contentType": "HTML",
+                                "content": body},
+                      "start": {"dateTime": utc_start_time,
+                                "timeZone": time_zone},
+                      "end": {"dateTime": utc_end_time,
+                              "timeZone": time_zone},
+                      "location": {"displayName": location},
+                      "attendees": attendees}
+
+        response = self.ms_graph_session.post(ms_graph_calender_event_url,
+                                              headers={'Content-Type': 'application/json'},
+                                              json=event_json)
+
+        self.check_ms_graph_response_code(response.status_code)
+
+        return response
+
     def get_message_attachments(self, email_address, message_id):
         """
         Get the attachments of a messages
