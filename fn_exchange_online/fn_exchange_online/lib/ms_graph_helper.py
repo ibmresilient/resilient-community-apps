@@ -163,6 +163,37 @@ class MSGraphHelper(object):
 
         return response
 
+
+    def send_message(self, sender_address, recipients, subject, body):
+        """
+        Call MS Graph to send message.
+        :param sender_address: email address of the message sender
+        :param recipients: comma separated list of users to send message to
+        :param subject: message subject text
+        :param body: message body text
+        :return: requests response from post.
+        """
+
+        ms_graph_create_message_url = u'{0}/users/{1}/sendMail'.format(self.ms_graph_url, sender_address)
+
+        # Create recipient list in required format.
+        recipient_list = [{'emailAddress': {'address': address.strip()}}
+                          for address in recipients.split(',')]
+
+        # Create the message in the required json format
+        message_json = {"message": {"subject": subject,
+                                    "body": {"contentType": "HTML", "content": body},
+                                    "toRecipients": recipient_list},
+                        "saveToSentItems": "true"}
+
+        response = self.ms_graph_session.post(ms_graph_create_message_url,
+                                              headers={'Content-Type': 'application/json'},
+                                              json=message_json)
+
+        self.check_ms_graph_response_code(response.status_code)
+
+        return response
+
     def get_message_attachments(self, email_address, message_id):
         """
         Get the attachments of a messages
