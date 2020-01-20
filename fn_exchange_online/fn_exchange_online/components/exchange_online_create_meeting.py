@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
+import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
@@ -42,7 +43,7 @@ class FunctionComponent(ResilientComponent):
 
             # Validate fields
             validate_fields(['exo_meeting_email_address', 'exo_meeting_start_time', 'exo_meeting_end_time',
-                             'exo_meeting_subject', 'exo_meeting_body', 'exo_meeting_required_attendees'], kwargs)
+                             'exo_meeting_subject', 'exo_meeting_body'], kwargs)
 
             # Get the function parameters:
             email_address = kwargs.get("exo_meeting_email_address")  # text
@@ -52,6 +53,7 @@ class FunctionComponent(ResilientComponent):
             body = kwargs.get("exo_meeting_body")  # text
             required_attendees = kwargs.get("exo_meeting_required_attendees")  # text
             optional_attendees = kwargs.get("exo_meeting_optional_attendees")  # text
+            location = kwargs.get("exo_meeting_location")  # text
 
             LOG.info(u"exo_meeting_email_address: %s", email_address)
             LOG.info(u"exo_meeting_start_time: %s", start_time)
@@ -60,6 +62,7 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_meeting_body: %s", body)
             LOG.info(u"exo_meeting_required_attendees: %s", required_attendees)
             LOG.info(u"exo_meeting_optional_attendees: %s", optional_attendees)
+            LOG.info(u"exo_meeting_location: %s", location)
 
             yield StatusMessage(u"Starting create meeting for email address: {}".format(email_address))
 
@@ -75,16 +78,20 @@ class FunctionComponent(ResilientComponent):
 
             # Call MS Graph API to get the user profile
             response = MS_graph_helper.create_meeting(email_address, start_time, end_time, subject, body,
-                                                      required_attendees, optional_attendees)
+                                                      required_attendees, optional_attendees, location)
 
-            if response.status_code == 204:
+            if response.status_code == 201:
                 success = True
-                response_json = {'value': success}
             else:
                 success = False
-                response_json = response.json()
+
+            response_json = response.json()
 
             results = rp.done(success, response_json)
+
+            # Add pretty printed string for easier to read output text in note.
+            pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
+            results['pretty_string'] = pretty_string
 
             yield StatusMessage(u"Returning create meeting results for email address: {}".format(email_address))
 
