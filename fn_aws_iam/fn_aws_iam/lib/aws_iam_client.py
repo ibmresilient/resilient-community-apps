@@ -62,8 +62,7 @@ class AwsIamClient():
 
         if sts_client:
             self.sts = self._get_client("sts")
-
-        self.default_identity = self._get_default_identity()
+            self.default_identity = self._get_default_identity()
 
     def _get_client(self, service_name):
         """ Create an AWS IAM client.
