@@ -8,6 +8,7 @@ from fn_resilient_ml.lib.file_manage import FileManage
 from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
 from fn_resilient_ml.lib.nlp.res_sif import ResSIF
 from fn_resilient_ml.lib.nlp.res_nlp import ResNLP
+from fn_resilient_ml.lib.res_utils import ResUtils
 
 def make_incident_href(inc_id, org_id, base_url):
     """
@@ -24,7 +25,7 @@ def make_incident_href(inc_id, org_id, base_url):
                                 org_id=org_id)
 
 
-def get_incident_href(nlp_str, org_id, base_url, num_return, model_path):
+def get_incident_href(nlp_str, res_client, num_return, model_path, inc_id):
     """
     For the given nlp_str, find the top num_return (old) incidents that
     are similar to it (from NLP point of view).
@@ -32,9 +33,10 @@ def get_incident_href(nlp_str, org_id, base_url, num_return, model_path):
     Generate the href links for each of those returned incident as well.
 
     :param nlp_str:     input sentence to do nlp search
-    :param org_id:      org id (used to generate href links)
-    :param base_url:    base url of resilient server (used to generate href links)
+    :param res_client:  resilient client
     :param num_return:  number of closest incidents to return
+    :param model_path:  (optional) Specify a model to use
+    :param inc_d:       (new) incident id. Make sure we don't return this.
     :return:
     """
     # SIF (Smooth Inverse Frequency) file
@@ -53,8 +55,15 @@ def get_incident_href(nlp_str, org_id, base_url, num_return, model_path):
     # load pca
     vec.load_pca(FileManage.DEFAULT_PCA_FILE)
 
-    incident_ids = vec.get_closest(nlp_str, num_return)
-    hrefs = [{"inc_link": make_incident_href(inc["ref"], org_id, base_url),
+    # find the highest inc id in the vec file. Note that the vec file contains
+    # all the incidents at the point the model is built. We want to find incidents
+    # created after that.
+    highest_id = vec.get_highest_inc_id()
+    res_utils = ResUtils(resclient=res_client)
+    other_incidents = res_utils.get_incidents_after(highest_id)
+
+    incident_ids = vec.get_closest(nlp_str, other_incidents, num_return, inc_id)
+    hrefs = [{"inc_link": make_incident_href(inc["ref"], res_client.org_id, res_client.base_url),
               "similarity": inc["sim"],
               "keywords": inc["keywords"]} for inc in incident_ids]
     return hrefs

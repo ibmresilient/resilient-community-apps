@@ -3,8 +3,45 @@
 
 import json
 from fn_resilient_ml.lib.res_utils import ResUtils
+import resilient
+import sys
 
-def test_get_artifact_des(json_artifacts=None):
+class OptParser(resilient.ArgumentParser):
+    """
+    This is a subclass of resilient.ArgumentParser. resilient.ArgumentParser takes care of both
+        1. Reading app.config
+        2. Validating required command line arguments.
+    Here we just want app.config, we are parsing/validating commandline arguments in our main function.
+    """
+    def __init__(self, config_file=None):
+        self.config_file = config_file or resilient.get_config_file()
+        super(OptParser, self).__init__(config_file=self.config_file)
+        #
+        #   Note this is a trick used by resilient-circuits. resilient.ArgumentParser will
+        #   validate the arguments of the command line. Since we use command line
+        #   argument of input/output files, we don't want that validation, so we
+        #   erase them before we call parse_args(). Then parse_args() only
+        #   reads from app.config
+        #
+        sys.argv = sys.argv[0:1]
+        self.opts = self.parse_args()
+
+        if self.config:
+            for section in self.config.sections():
+                #
+                # Handle sections other than [resilient] in app.config
+                #
+                items = dict((item.lower(), self.config.get(section, item)) for item in self.config.options(section))
+                self.opts.update({section: items})
+
+            resilient.parse_parameters(self.opts)
+
+
+def test_get_artifact_des():
+    json_artifacts = None
+    with open("resilient_artifacts.json", "r") as infile:
+        json_artifacts = json.load(infile)
+
     artifact_json = json_artifacts if json_artifacts else {
         "results":
     [{'inc_id': 2138,
@@ -104,8 +141,23 @@ def test_get_artifact_des(json_artifacts=None):
     assert "QRadar Offense Source: Source IP" in des
     print("Done")
 
+def test_get_incident_after(res_utils):
+    ret = res_utils.get_incidents_after(4600)
+
+    return ret
+
 if __name__ == "__main__":
-    j_dict = None
-    with open("resilient_artifacts.json", "r") as infile:
-        j_dict = json.load(infile)
-    test_get_artifact_des(j_dict)
+    #
+    #   Test 1: Extract des from artifacts
+    #
+    test_get_artifact_des()
+
+    #
+    #   Test 2: get incident after id
+    #
+    opt_parser = OptParser(config_file=None)
+    res_util = ResUtils()
+    res_util.connect(opt_parser)
+
+    test_get_incident_after(res_util)
+

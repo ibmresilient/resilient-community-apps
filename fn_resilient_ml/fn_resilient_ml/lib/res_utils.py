@@ -312,4 +312,38 @@ class ResUtils:
 
         return des
 
+    def get_incidents_after(self, inc_id, max_num=100):
+        """
+        Given an incident ID, fetch all the incidents after that.
+        :param inc_id:  input incident id
+        :return:        list of incidents (in json)
+        """
+        ret = []
+        filter_dict = {
+            "filters": [
+                {
+                    "conditions": [
+                        {
+                            "field_name": "id",
+                            "method": "gt",
+                            "value": inc_id
+                        }
+                    ]
+                }
+            ]
+        }
+        url = "/incidents/query?field_handle=-1"
+        try:
+            resp = self.res_client.post(url,
+                                        payload=filter_dict)
+            ret = [(res["id"], res.get("name", "")
+                    + " " + res.get("description", "")
+                    + " " + res.get("resolution_summary", ""))
+                   for res in resp]
+        except Exception as e:
+            self.log.exception(str(e))
+            ret = []
+
+        return ret
+
 

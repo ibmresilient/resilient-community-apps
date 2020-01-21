@@ -209,11 +209,22 @@ class ResSen2Vec:
         v = np.zeros(self.feature_size, dtype="float64")
         return self.sentence_vectors.get(inc_id, v)
 
-    def get_closest(self, sentence, num):
+    def get_highest_inc_id(self):
+        """
+        Get the highest incident id in the vec file. This is the last incident in the
+        vector cache file
+        :return:
+        """
+        incident_ids = list(self.sentence_vectors.keys())
+        return max(incident_ids)
+
+    def get_closest(self, sentence, other_incidents, num, search_inc_id):
         """
         Given a sentence (such as the description of a new incident), find _num_ of closest (old) incidents
-        :param sentence:
-        :param num:
+        :param sentence:            Description of the new incident
+        :param other_incidents:     incidents created after the model is built
+        :param num:                 number of incidents to return
+        :param search_inc_id:       incident id of the (new) incident
         :return:
         """
         v1 = self.get_vec_for_sentence(sentence)
@@ -254,6 +265,32 @@ class ResSen2Vec:
                     "vec": v2
                 }
                 closest.sort(key=lambda u: u["sim"])
+
+        for i in range(len(other_incidents)):
+            inc_id, inc_sentence = other_incidents[i]
+            if search_inc_id is not None and search_inc_id != inc_id:
+                #
+                #   The (new) incident is also created after the
+                #   nlp model was built. So it is most likely included
+                #   in other_incidents. We don't need to include that
+                #   in the return.
+                #
+                v2 = self.get_vec_for_sentence(inc_sentence)
+                # subtract pca
+                sub = np.multiply(self.pca_u, v2)
+                v2 = np.subtract(v2, sub)
+                v2_norm = np.linalg.norm(v2)
+                if v1_norm == 0 or v2_norm == 0:
+                    sim = 0
+                else:
+                    sim = np.dot(v1, v2) / (v1_norm * v2_norm)
+                if sim > closest[0]["sim"]:
+                    closest[0] = {
+                        "ref": inc_id,
+                        "sim": sim,
+                        "vec": v2
+                    }
+                    closest.sort(key=lambda u: u["sim"])
 
         # Find the keywords that contribute the most to the similarity
         self.find_keywords(sentence, closest)

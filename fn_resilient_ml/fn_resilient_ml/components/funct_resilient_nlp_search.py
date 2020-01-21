@@ -52,10 +52,10 @@ class FunctionComponent(ResilientComponent):
                 nlp_str = res_utils.get_inc_art_des(search_incident_id)
 
             inc_hrefs = util_functions.get_incident_href(nlp_str=nlp_str,
-                                                         org_id=res_client.org_id,
-                                                         base_url=res_client.base_url,
+                                                         res_client=res_client,
                                                          num_return=number_incidents,
-                                                         model_path=model_path)
+                                                         model_path=model_path,
+                                                         inc_id=search_incident_id)
 
             yield StatusMessage("done...")
 
