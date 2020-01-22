@@ -5,6 +5,7 @@ import json
 from fn_resilient_ml.lib.res_utils import ResUtils
 import resilient
 import sys
+import pandas as pds
 
 class OptParser(resilient.ArgumentParser):
     """
@@ -39,7 +40,7 @@ class OptParser(resilient.ArgumentParser):
 
 def test_get_artifact_des():
     json_artifacts = None
-    with open("resilient_artifacts.json", "r") as infile:
+    with open("resilient-artifacts.json", "r") as infile:
         json_artifacts = json.load(infile)
 
     artifact_json = json_artifacts if json_artifacts else {
@@ -141,23 +142,57 @@ def test_get_artifact_des():
     assert "QRadar Offense Source: Source IP" in des
     print("Done")
 
-def test_get_incident_after(res_utils):
-    ret = res_utils.get_incidents_after(4600)
+def test_get_incident_after(res_utils, min_id):
+    ret = res_utils.get_incidents_after(min_id)
 
     return ret
 
 if __name__ == "__main__":
     #
     #   Test 1: Extract des from artifacts
-    #
+    #   Static function. Test data hard coded
     test_get_artifact_des()
 
     #
-    #   Test 2: get incident after id
+    #   Make connection to do other tests
     #
     opt_parser = OptParser(config_file=None)
     res_util = ResUtils()
+    #
+    #   Test 2: Connect
+    #
     res_util.connect(opt_parser)
+    assert(res_util.res_client is not None)
 
-    test_get_incident_after(res_util)
+    #
+    #   Test 3: Get all incidents. Make sure
+    #   your server (app.config) has some incidents
+    #
+    res_util.download_incidents()
+    #   check file
+    dataframe = pds.read_csv("resilient-incidents.csv",
+                             sep=',',
+                             usecols=["id", "name", "description", "resolution_summary"],
+                             skipinitialspace=True,
+                             quotechar='"')
+    #   size
+    row_count = dataframe.shape[0]
+    assert(row_count > 0)
 
+    all_ids = []
+    for index in range(row_count):
+        row = dataframe.iloc[index]
+        all_ids.append(int(row["id"]))
+    print("Lowest id {}".format(min(all_ids)))
+    print("Highest id {}".format(max(all_ids)))
+    #
+    #   Test 4: Download all artifacts
+    #
+    res_util.download_artifacts()
+
+    #
+    #   Test 5: get incidents after a given id
+    #
+    ret = test_get_incident_after(res_util, min(all_ids))
+    assert(len(ret) == len(all_ids) - 1)
+    print("Done")

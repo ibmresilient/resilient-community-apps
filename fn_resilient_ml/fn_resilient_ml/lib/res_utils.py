@@ -336,14 +336,18 @@ class ResUtils:
         try:
             resp = self.res_client.post(url,
                                         payload=filter_dict)
-            ret = [(res["id"], res.get("name", "")
-                    + " " + res.get("description", "")
-                    + " " + res.get("resolution_summary", ""))
-                   for res in resp]
+
+            for res in resp:
+                sentence = ""
+                name_str = res.get("name", "")
+                description_str = res.get("description", "")
+                reso_str = res.get("resolution_summary", "")
+                sentence += name_str if name_str is not None else ""
+                sentence += description_str if description_str is not None else ""
+                sentence += reso_str if reso_str is not None else ""
+                ret.append((res["id"], sentence))
         except Exception as e:
             self.log.exception(str(e))
             ret = []
 
         return ret
-
-
