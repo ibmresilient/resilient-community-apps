@@ -517,7 +517,7 @@ class MSGraphHelper(object):
             filter_query = self.append_query_to_query_url(filter_query, end_date_query)
 
         if sender:
-            sender_query = u'(from/emailAddress/address%20eq%20"{0}")'.format(sender)
+            sender_query = u"(from/emailAddress/address%20eq%20'{0}')".format(sender)
             filter_query = self.append_query_to_query_url(filter_query, sender_query)
 
         if has_attachments is not None:
