@@ -173,6 +173,7 @@ class AwsIamClient():
         """
         result_type = None
         result = []
+        count = 0
         try:
             paginator = self.iam.get_paginator(op)
             for response in paginator.paginate(**kwargs):
@@ -186,16 +187,20 @@ class AwsIamClient():
             LOG.info(int_ex)
             raise int_ex
 
+        # Apply filter to results.
+        if result and results_filter:
+            (count, result) = self._filter(result, results_filter, return_filtered)
+
         # Make updates to the raw result.
         if result:
             result = self._update_result(result, result_type)
 
-        # Apply filter to results.
-        if result and results_filter:
-            return self._filter(result, results_filter, return_filtered)
-
-        # Return unfiltered result
-        return result
+        # Return result
+        if results_filter:
+            # If filter set return tuple including count.
+            return (count, result)
+        else:
+            return result
 
     def get(self, op=None, paginate=False, return_filtered=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
