@@ -7,7 +7,7 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from fn_aws_iam.lib.aws_iam_client import AwsIamClient
-from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts
+from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, validate_opts, is_regex
 
 LOG = logging.getLogger(__name__)
 
@@ -55,6 +55,14 @@ class FunctionComponent(ResilientComponent):
             LOG.info("aws_iam_policy_filter: %s", aws_iam_policy_filter)
             LOG.info("aws_iam_access_key_filter: %s", aws_iam_access_key_filter)
             LOG.info("aws_iam_query_type: %s", aws_iam_query_type)
+
+            # Get a list of all enabled filters.
+            enabled_filters = [f for f in [aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter,
+                                               aws_iam_access_key_filter] if f is not None]
+            # Test any enabled filters to ensure they are valid regular expressions.
+            for sf in (enabled_filters):
+                if not is_regex(sf):
+                    raise ValueError("The query filter '{}' is not a valid regular expression.".format(repr(sf)))
 
             iam_cli = AwsIamClient(self.options, sts_client=True)
             if aws_iam_user_name:
