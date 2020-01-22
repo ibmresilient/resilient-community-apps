@@ -30,7 +30,7 @@ class FileManage():
     LAST_MODIFICATION_TIME  = "Last modification time:      {}"
     NUM_SENTENCES           = "Number of sentences:         {}"
     NUM_WORDS_OUTPUT        = "Number of words:             {}"
-    FEATURE_DIMENSION       = "Feature dimension:           {}"
+    FEATURE_DIMENSION       = "Feature dimensions:          {}"
     NUM_VECTORS_OUTPUT      = "Number of vectors:           {}"
 
     def __init__(self, filename):
@@ -106,8 +106,8 @@ class FileManage():
 
             ret.append(self.FILE_NAME_OUTPUT.format(self.filename))
             ret.append(self.LAST_MODIFICATION_TIME.format(mtime))
-
-            ret.append(self.FEATURE_DIMENSION.format(len(data[0]["vec"])))
+            key = list(data.keys())[0]
+            ret.append(self.FEATURE_DIMENSION.format(len(data[key])))
             ret.append(self.NUM_VECTORS_OUTPUT.format(len(data)))
             ret.append("\n")
         except Exception as e:
