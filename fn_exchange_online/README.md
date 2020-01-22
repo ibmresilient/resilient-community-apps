@@ -43,7 +43,7 @@
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-Resilient Circuits Components for 'fn_exchange_online
+Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient
 
 ---
 
@@ -169,4 +169,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_exchange_online | 1.0.0 | IBM Resilient | https://success.resilientsystems.com/ |
+| fn_exchange_online | 1.0.0 | IBM Resilient | https://ibm.com/mysupport |
