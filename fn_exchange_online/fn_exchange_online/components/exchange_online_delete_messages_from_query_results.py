@@ -3,7 +3,6 @@
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
-import json
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
@@ -47,12 +46,9 @@ class FunctionComponent(ResilientComponent):
             validate_fields(['exo_query_messages_results'], kwargs)
 
             # Get the function parameters
-            query_messages_results = kwargs.get('exo_query_messages_results')  # text
+            query_results = kwargs.get('exo_query_messages_results')  # text
 
-            # Convert string to JSON.
-            query_messages_results_json = json.loads(query_messages_results)
-
-            LOG.info(u"exo_query_messages_results: %s", query_messages_results)
+            LOG.info(u"exo_query_messages_results: %s", query_results)
 
             yield StatusMessage(u"Starting delete messages for query results")
 
@@ -66,31 +62,14 @@ class FunctionComponent(ResilientComponent):
                                             self.options.get("max_users"),
                                             RequestsCommon(self.opts, self.options).get_proxies())
 
-            delete_results = []
+            # Delete messages found in the query.
+            delete_results = MS_graph_helper.delete_messages_from_query_results(query_results)
 
-            for user in query_messages_results_json:
-                email_address = user["email_address"]
-                deleted_list = []
-                not_deleted_list = []
-                for message in user["email_list"]:
 
-                    # Call MS Graph API to get the user profile
-                    response = MS_graph_helper.delete_message(email_address, None, message["id"])
-
-                    # If message was deleted a 204 code is returned.
-                    if response.status_code == 204:
-                        deleted_list.append(message)
-                    else:
-                        not_deleted_list.append(message)
-
-                user_delete_results = {'email_address': email_address,
-                                       'deleted_list': deleted_list,
-                                       'not_deleted_list': not_deleted_list}
-                delete_results.append(user_delete_results)
 
             results = rp.done(True, delete_results)
 
-            yield StatusMessage(u"Returning delete message from query results")
+            yield StatusMessage(u"Returning Delete Messages From Query Results results.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
