@@ -65,8 +65,6 @@ class FunctionComponent(ResilientComponent):
             # Delete messages found in the query.
             delete_results = MS_graph_helper.delete_messages_from_query_results(query_results)
 
-
-
             results = rp.done(True, delete_results)
 
             yield StatusMessage(u"Returning Delete Messages From Query Results results.")
