@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
 -->
 
-# fn-exchange-online Functions for IBM Resilient
+# Microsoft Exchange Online Functions for IBM Resilient
 
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -86,13 +86,13 @@ Resilient Integration with Exchange Online provides the capability to access and
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Enter a description of the config here* |
-  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Enter a description of the config here* |
-  | **tenant_id** | Yes | `xxx` | *Enter a description of the config here* |
-  | **client_id** | Yes | `xxx` | *Enter a description of the config here* |
-  | **client_secret** | Yes | `xxx` | *Enter a description of the config here* |
-  | **max_messages** | Yes | `100` | *Enter a description of the config here* |
-  | **max_users** | Yes | `2000` | *Enter a description of the config here* |
+  | **microsoft_graph_token_url** | Yes | `https://login.microsoftonline.com/{tenant}/oauth2/v2.0/token` | *Microsoft Graph URL endpoint for acquring access token* |
+  | **microsoft_graph_url** | Yes | `https://graph.microsoft.com/v1.0` | *Microsoft Graph base URL * |
+  | **tenant_id** | Yes | `xxx` | *Microsoft Azure Tenant ID* |
+  | **client_id** | Yes | `xxx` | *Microsoft Azure Client ID (Application ID)* |
+  | **client_secret** | Yes | `xxx` | *Microsoft Azure Client Secret* |
+  | **max_messages** | Yes | `100` | *Maximum number of messages that a query will return* |
+  | **max_users** | Yes | `2000` | *Maximum number of users searched in a query* |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:
@@ -110,9 +110,11 @@ Resilient Integration with Exchange Online provides the capability to access and
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
+Create an Exchange Online custom incident tab and drag the Exchange Online Message Query Results data table on to it as pictured in the screenshot below:
 
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+   ![screenshot: custom_layouts](./doc/screenshots/EXO-layout-tab.png)
+Results of any Exchange Online message query will be displayed in this data table.
+   ![screenshot: custom_layouts](./doc/screenshots/EXO-data-table.png)
 
 ---
 
@@ -165,7 +167,49 @@ There are several ways to verify the successful operation of a function.
 
 ---
 -->
+## Azure Active Directory Configuration
 
+To run the Resilient Exchange Online integration you must register the application on Microsoft Azure portal.  The tenant ID, client ID and the client secret that are defined in the fn_exchange_online section of the app.config are assigned by Azure when the application is registered.  
+
+### App Registration
+To register the Resilient integration application click "App registrations" in Manage section of your Azure Active Directory domain account.  Then click the "New Registration" button as depicted in the image below.
+
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-New-App.png)
+
+Enter a name for the integration.  In this example we name the application "resilient-integration".  Then press "Register" button.
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-an-application.png)
+Click on the newly created application and the page will appear similar to the screenshot below.  
+You can get the tenant and client IDs that should be placed in the app.config.
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-registrations.png)
+Next click on the left menu item "Certificates & secrets" and create a secret which will also be placed in the app.config.
+
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-secrets.png)
+
+### API Permissions
+For the Resilient integration app to access data in Microsoft Graph, an administrator 
+must grant it the correct permissions via a consent process. Click on "API permissions" on the left menu and then "+ Add a Permission" 
+
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions.png)
+
+Click on Microsoft Graph 
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-MS-Graph.png)
+
+Select Application permissions (not Delegated permissions):
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-Application-permissions.png)
+
+Add each of the following Microsoft Graph "Application permissions":
+* Calendar.ReadWrite
+* Mail.ReadWrite
+* Mail.Send
+* MailboxSetting.Read
+* User.Read.All
+
+Once the API Application permissions are added click the "Grant admin consent" button
+for your domain 
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-consent.png)
+
+Log into an admin account to accept these permissions requested on behalf of your organization:
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Accept-permissions.png)
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
