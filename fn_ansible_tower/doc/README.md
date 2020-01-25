@@ -32,7 +32,7 @@
 <!--
   List the Key Features of the Integration
 -->
-* List Job Templates filtering by Project
+* List Job Templates filtering by Project and Template name
 * Execute Job Templates, specifying name/value pairs for job template substitution
 * Execute ad-hoc Jobs, specifying name/value pairs for module parameters
 * List Jobs run filtered by status or date
@@ -40,12 +40,18 @@
 
 ---
 
+See the Installation guide in this package for instructions on how to install, import into Resilient and customize your layouts.
+
+---
+
 ## Function - Ansible Tower Run an Ad Hoc Command
 This function allows one to run an ad hoc command. An ad hoc command is an Ansible module.
 
- ![screenshot: fn-ansible-tower-run-an-ad-hoc-command ](./screenshots/fn-ansible-tower-run-an-ad-hoc-command.png)
+ ![screenshot: run_an_ad_hoc_command ](./screenshots/run_an_ad_hoc_command.png)
 
 <details><summary>Inputs:</summary>
+<p>Edit the Rule's activity field for tower_modules to tailor to your organization's list of modules exposed.
+</p>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
@@ -61,15 +67,7 @@ This function allows one to run an ad hoc command. An ad hoc command is an Ansib
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results are displayed in the Ansible Tower Launched Jobs datatable.
 </p>
 </details>
 
@@ -127,9 +125,9 @@ if not results.content['failed']:
 
 ---
 ## Function - Ansible Tower List Jobs
-List jobs based on job status and last modified conditions
+List jobs based on job status and last modified conditions.
 
- ![screenshot: fn-ansible-tower-list-jobs ](./screenshots/fn-ansible-tower-list-jobs.png)
+ ![screenshot: fn-ansible-tower-list-jobs ](./screenshots/list_jobs.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -144,15 +142,7 @@ List jobs based on job status and last modified conditions
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results are displayed in the Ansible Tower List Templates datatable.
 </p>
 </details>
 
@@ -194,9 +184,9 @@ for job in results.content:
 
 ---
 ## Function - Ansible Tower Run Job
-Execute a job for a given job template
+Execute a job for a given job template.
 
- ![screenshot: fn-ansible-tower-run-job ](./screenshots/fn-ansible-tower-run-job.png)
+ ![screenshot: fn-ansible-tower-run-job ](./screenshots/run_a_job_template.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -211,19 +201,20 @@ Execute a job for a given job template
 | `tower_template_name` | `text` | No | `-` | Name of Job Template, optional to tower_template_id |
 
 </p>
+<p>
+<ul>
+<li>
+When executing a job template from an artifact, two additional arguments are added to the tower_arguments: artifact_type and artifact_value. Use these arguments in your playbooks as needed.
+</li>
+<li>Specify either template name or template id.</li>
+<li>Template names are case sensitive</li>
+<ul>
+</p>
 </details>
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results are displayed in the Ansible Tower Launched Jobs datatable.
 </p>
 </details>
 
@@ -276,9 +267,9 @@ if not results.content['failed']:
 
 ---
 ## Function - Ansible Tower Get Job Results
-Get the results of a complete job
+Get the results of a running or completed job.
 
- ![screenshot: fn-ansible-tower-get-job-results ](./screenshots/fn-ansible-tower-get-job-results.png)
+ ![screenshot: fn-ansible-tower-get-job-results ](./screenshots/job_results.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -287,22 +278,16 @@ Get the results of a complete job
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
 | `tower_job_id` | `number` | Yes | `-` | Launched job Id for a job template |
-| `tower_save_as_attachment` | `boolean` | Yes | `-` | either save as a note or an attachment |
+| `tower_save_as` | `text` | Yes | 'attachment' | either save as a note or an attachment |
 
+</p>
+<p>Use tower_save_as `attachment` when the results are expected to be large, such as when many hosts are returning results.
 </p>
 </details>
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results returned as either a note or an attachment.
 </p>
 </details>
 
@@ -347,9 +332,9 @@ if results.content:
 
 ---
 ## Function - Ansible Tower List Job Templates
-List available job templates
+List available job templates by project or template name search.
 
- ![screenshot: fn-ansible-tower-list-job-templates ](./screenshots/fn-ansible-tower-list-job-templates.png)
+ ![screenshot: fn-ansible-tower-list-job-templates ](./screenshots/list_job_templates.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -360,19 +345,17 @@ List available job templates
 | `tower_template_pattern` | `text` | No | `-` | Optionally filter by project. se * for wildcard matching. |
 
 </p>
+<ul>
+<li>
+Use * to indicate wildcard searches
+</li>
+<li>Template names are case sensitive</li>
+<ul>
 </details>
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results are displayed in the Ansible Tower Job Templates datatable.
 </p>
 </details>
 
@@ -413,9 +396,8 @@ else:
 
 ---
 ## Function - Ansible Tower Get Ad Hoc Command Results
-Return the results of an ad hoc command job
+Return the results of an ad hoc command job.
 
- ![screenshot: fn-ansible-tower-get-ad-hoc-command-results ](./screenshots/fn-ansible-tower-get-ad-hoc-command-results.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -424,22 +406,16 @@ Return the results of an ad hoc command job
 | ---- | :--: | :------: | ------- | ------- |
 | `incident_id` | `number` | Yes | `-` | - |
 | `tower_job_id` | `number` | Yes | `-` | Launched job Id for a job template |
-| `tower_save_as_attachment` | `boolean` | Yes | `-` | either save as a note or an attachment |
+| `tower_save_as` | `text` | Yes | `note` | either save as a note or an attachment |
 
+</p>
+<p>Use tower_save_as `attachment` when the results are expected to be large, such as when many hosts are returning results.
 </p>
 </details>
 
 <details><summary>Outputs:</summary>
 <p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
+Results returned as either a note or an attachment.
 </p>
 </details>
 
@@ -486,7 +462,7 @@ if results.content:
 
 ## Data Table - Ansible Tower Launched Jobs
 
- ![screenshot: dt-ansible-tower-launched-jobs](./screenshots/dt-ansible-tower-launched-jobs.png)
+ ![screenshot: dt-ansible-tower-launched-jobs](./screenshots/run_a_job_template.png)
 
 #### API Name:
 ansible_tower_launched_jobs
@@ -494,24 +470,24 @@ ansible_tower_launched_jobs
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
-| Arguments | `arguments` | `text` | Arguments for job template substitution |
-| Completion Date | `completion_date` | `text` | - |
-| Ignored Fields | `ignored_fields` | `text` | Returned from Ansible Tower if no match in Job Template |
-| Hosts | `inventory` | `text` | - |
-| Job Id | `job_id` | `number` | - |
-| Launch Date | `launch_date` | `text` | Date job was created |
-| Project | `project` | `text` | Project of Job Template |
 | Reported On | `reported_on` | `text` | Date row was added |
-| Run Tags | `run_tags` | `text` | - |
-| Skip Tags | `skip_tags` | `text` | - |
-| Status | `status` | `text` | Status of Job |
-| Name | `template_name` | `text` | Job Template Name |
 | Type | `type` | `text` | 'ad hoc', 'template' |
+| Launch Date | `launch_date` | `text` | Date job was created |
+| Completion Date | `completion_date` | `text` | Date job completed |
+| Status | `status` | `text` | Status of Job |
+| Job Id | `job_id` | `number` | job id returned |
+| Name | `template_name` | `text` | Job Template Name |
+| Project | `project` | `text` | Project of Job Template |
+| Run Tags | `run_tags` | `text` | tags used when job launched |
+| Skip Tags | `skip_tags` | `text` | tags used when job launched |
+| Hosts | `inventory` | `text` | hosts specified when job launched |
+| Ignored Fields | `ignored_fields` | `text` | Returned from Ansible Tower if no match in Job Template |
+| Arguments | `arguments` | `text` | Arguments for job template substitution |
 
 ---
 ## Data Table - Ansible Tower Job Templates
 
- ![screenshot: dt-ansible-tower-job-templates](./screenshots/dt-ansible-tower-job-templates.png)
+ ![screenshot: dt-ansible-tower-job-templates](./screenshots/list_job_templates.png)
 
 #### API Name:
 ansible_tower_job_templates
@@ -520,13 +496,12 @@ ansible_tower_job_templates
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
 | Reported On | `reported_on` | `text` | - |
-| Description | `template_description` | `text` | - |
 | Job Id | `template_id` | `number` | - |
-| Last Run | `template_last_run` | `text` | - |
-| Name | `template_name` | `text` | - |
-| Playbook | `template_playbook` | `text` | - |
 | Project | `template_project` | `text` | - |
-
+| Name | `template_name` | `text` | - |
+| Description | `template_description` | `text` | - |
+| Playbook | `template_playbook` | `text` | - |
+| Last Run | `template_last_run` | `text` | - |
 ---
 
 
