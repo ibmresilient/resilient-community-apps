@@ -196,10 +196,14 @@ To register the Resilient integration application click "App registrations" in M
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-New-App.png)
 
 Enter a name for the integration.  In this example we name the application "resilient-integration".  Then press "Register" button.
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-an-application.png)
+
 Click on the newly created application and anpage will appear similar to the screenshot below.  
 Get the tenant and client IDs for the application that are parameters in the app.config file:
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-registrations.png)
+
 Next click on the left menu item "Certificates & secrets" and create a secret which which is another application credential in the app.config.
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-secrets.png)
@@ -210,7 +214,8 @@ must grant it the correct permissions via a consent process. Click on "API permi
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions.png)
 
-Click on Microsoft Graph 
+Click on Microsoft Graph:
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-MS-Graph.png)
 
 Select Application permissions (not Delegated permissions):
@@ -222,12 +227,16 @@ Check each of each of the following Microsoft Graph API "Application permissions
 * Mail.Send
 * MailboxSetting.Read
 * User.Read.All
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-checkboxes.png)
+
 Once the API Application permissions are added click the "Grant admin consent" button
-for your domain 
+for your domain:
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-consent.png)
 
 Log into an admin account to accept these permissions requested on behalf of your organization:
+
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Accept-permissions.png)
 
 ## Support
