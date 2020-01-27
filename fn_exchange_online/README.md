@@ -39,11 +39,30 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_exchange_online**
+Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
 
- ![screenshot: main](./doc/screenshots/main.png)
+* Get the user profile of the specified email address in JSON format.
 
-Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online messages from Resilient
+* Get a specified message and and return the results in JSON format.
+
+* Get a specified message .eml format write as an incident attachment.
+
+* Move a message to a specified "Well-known" Outlook folder.
+
+* Send an message: from the specified email address to the specified recipients with specified message subject and body text.
+
+* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: message sender, messages from a specific Well-known folder, a time frame for when the message was received, text contained in the message subject or the message body, whether the message has attachments. Results are returned in the Exchange Online Query Message Results data table.
+
+* Delete a single specified message from a specified email address.
+
+* Delete a list of messages that are the results of a message query.  The messages deleted are written to the Exchange Online Query Messages data table.
+
+* Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
+
+
+ ![screenshot: main](./doc/screenshots/EXO-functions.png)
+
+
 
 ---
 
@@ -110,10 +129,10 @@ Resilient Integration with Exchange Online provides the capability to access and
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-Create an Exchange Online custom incident tab and drag the Exchange Online Message Query Results data table on to it as pictured in the screenshot below:
+Create an Exchange Online custom incident tab and drag the Exchange Online Message Query Results data table on to the layout and hit Save as shown in the screenshot below:  
 
    ![screenshot: custom_layouts](./doc/screenshots/EXO-layout-tab.png)
-Results of any Exchange Online message query will be displayed in this data table.
+Results of any Exchange Online message query will be displayed in this data table on the Exchange Online custom incident tab.
    ![screenshot: custom_layouts](./doc/screenshots/EXO-data-table.png)
 
 ---
@@ -167,9 +186,9 @@ There are several ways to verify the successful operation of a function.
 
 ---
 -->
-## Azure Active Directory Configuration
+## Microsoft Azure App Configuration
 
-To run the Resilient Exchange Online integration you must register the application on Microsoft Azure portal.  The tenant ID, client ID and the client secret that are defined in the fn_exchange_online section of the app.config are assigned by Azure when the application is registered.  
+To run the Resilient Exchange Online integration you must first register the application on Microsoft Azure portal.  The tenant ID, client ID and the client secret that are defined in the fn_exchange_online section of the app.config are assigned by Azure when the application is registered.  
 
 ### App Registration
 To register the Resilient integration application click "App registrations" in Manage section of your Azure Active Directory domain account.  Then click the "New Registration" button as depicted in the image below.
@@ -178,10 +197,10 @@ To register the Resilient integration application click "App registrations" in M
 
 Enter a name for the integration.  In this example we name the application "resilient-integration".  Then press "Register" button.
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Register-an-application.png)
-Click on the newly created application and the page will appear similar to the screenshot below.  
-You can get the tenant and client IDs that should be placed in the app.config.
+Click on the newly created application and anpage will appear similar to the screenshot below.  
+Get the tenant and client IDs for the application that are parameters in the app.config file:
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-registrations.png)
-Next click on the left menu item "Certificates & secrets" and create a secret which will also be placed in the app.config.
+Next click on the left menu item "Certificates & secrets" and create a secret which which is another application credential in the app.config.
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-App-secrets.png)
 
@@ -197,19 +216,20 @@ Click on Microsoft Graph
 Select Application permissions (not Delegated permissions):
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-Application-permissions.png)
 
-Add each of the following Microsoft Graph "Application permissions":
+Check each of each of the following Microsoft Graph API "Application permissions":
 * Calendar.ReadWrite
 * Mail.ReadWrite
 * Mail.Send
 * MailboxSetting.Read
 * User.Read.All
-
+![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-checkboxes.png)
 Once the API Application permissions are added click the "Grant admin consent" button
 for your domain 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-consent.png)
 
 Log into an admin account to accept these permissions requested on behalf of your organization:
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Accept-permissions.png)
+
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
