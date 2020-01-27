@@ -11,6 +11,9 @@ def config_section_data():
     """
     config_data = u"""
 [fn_resilient_ml]
+#
+# Required. The (absolute) path to the folder of the saved NLP model
+#
 model_path=path_of_the_saved_models
 num_top_similar_incidents=5
 

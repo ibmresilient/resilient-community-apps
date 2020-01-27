@@ -4,6 +4,7 @@
 #
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 #
+import os
 from fn_resilient_ml.lib.file_manage import FileManage
 from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
 from fn_resilient_ml.lib.nlp.res_sif import ResSIF
@@ -35,25 +36,29 @@ def get_incident_href(nlp_str, res_client, num_return, model_path, inc_id):
     :param nlp_str:     input sentence to do nlp search
     :param res_client:  resilient client
     :param num_return:  number of closest incidents to return
-    :param model_path:  (optional) Specify a model to use
-    :param inc_d:       (new) incident id. Make sure we don't return this.
+    :param model_path:  (required) Specify the path to find the saved model
+    :param inc_id:      (new) incident id. Don't include this in return.
     :return:
     """
+    file_path = model_path
+    if not file_path.endswith('/'):
+        file_path += '/'
+
     # SIF (Smooth Inverse Frequency) file
     sif = ResSIF()
-    sif.load_sif(FileManage.DEFAULT_SIF_FILE)
+    sif.load_sif(os.path.join(file_path, FileManage.DEFAULT_SIF_FILE))
 
     # Word2Vec NLP model
     nlp = ResNLP()
-    nlp.load_model(FileManage.DEFAULT_NLP_FILE)
+    nlp.load_model(os.path.join(file_path, FileManage.DEFAULT_NLP_FILE))
 
     # sentence to vector
     vec = ResSen2Vec(nlp.word2vec, sif)
     # load cached vectors for old incidents
-    vec.load_s2v(FileManage.DEFAULT_VEC_FILE)
+    vec.load_s2v(os.path.join(file_path, FileManage.DEFAULT_VEC_FILE))
 
     # load pca
-    vec.load_pca(FileManage.DEFAULT_PCA_FILE)
+    vec.load_pca(os.path.join(file_path, FileManage.DEFAULT_PCA_FILE))
 
     # find the highest inc id in the vec file. Note that the vec file contains
     # all the incidents at the point the model is built. We want to find incidents
