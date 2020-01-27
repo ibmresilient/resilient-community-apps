@@ -16,7 +16,7 @@
 ## Prerequisites:
 ```
 resilient version 30 or later
-resilient_circuits version 30 or later
+resilient_circuits version 33 or later
 twilio version 6.21.0 or later
 ```
 
