@@ -30,7 +30,8 @@ setup(
                      "quickly respond to attacks by executing remediation actions, such as removing permissions or "
                      "login profiles for suspicious accounts from within the Resilient platform.",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=33.0.0',
+        'resilient_lib>=33.0.0',
         'boto3>=1.10.6'
     ],
     packages=find_packages(),
