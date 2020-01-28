@@ -150,7 +150,11 @@ class MSGraphHelper(object):
         ;        and list of messages not deleted from query result
         """
         # Convert string to JSON.
-        query_results_json = json.loads(query_results)
+        try:
+            query_results_json = json.loads(query_results)
+        except ValueError as err:
+            raise IntegrationError("Invalid JSON string in Delete Message from Query Results.")
+
         delete_results = []
 
         for user in query_results_json:
@@ -247,8 +251,15 @@ class MSGraphHelper(object):
         # Get the time zone of the organizer.
         ms_graph_timezone_url = u'{0}/users/{1}/mailboxSettings/timeZone'.format(self.ms_graph_url, email_address)
         response = self.ms_graph_session.get(ms_graph_timezone_url)
-        response_json = response.json()
-        time_zone = response_json["value"]
+
+        self.check_ms_graph_response_code(response.status_code)
+
+        if response.status_code == 200:
+            response_json = response.json()
+            time_zone = response_json["value"]
+        else:
+            # If the timezone is not found (not set) then default to UTC time
+            time_zone = "UTC"
 
         # Calculate meeting start and end date/time.
         utc_start_time = datetime.datetime.fromtimestamp(start_time / 1000).strftime('%Y-%m-%dT%H:%M:%S')
