@@ -1,5 +1,6 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+import json
 import datetime
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
@@ -141,6 +142,38 @@ class MSGraphHelper(object):
         self.check_ms_graph_response_code(response.status_code)
 
         return response
+
+    def delete_messages_from_query_results(self, query_results):
+        """
+        :param query_results: query result list returned from Query Message function JSON object as a string.
+        :return: list of messages for each email address search: list of deleted messages from the query results
+        ;        and list of messages not deleted from query result
+        """
+        # Convert string to JSON.
+        query_results_json = json.loads(query_results)
+        delete_results = []
+
+        for user in query_results_json:
+            email_address = user["email_address"]
+            deleted_list = []
+            not_deleted_list = []
+            for message in user["email_list"]:
+
+                # Call MS Graph API to delete the message
+                response = self.delete_message(email_address, None, message["id"])
+
+                # If message was deleted a 204 code is returned.
+                if response.status_code == 204:
+                    deleted_list.append(message)
+                else:
+                    not_deleted_list.append(message)
+
+            user_delete_results = {'email_address': email_address,
+                                   'deleted_list': deleted_list,
+                                   'not_deleted_list': not_deleted_list}
+            delete_results.append(user_delete_results)
+
+        return delete_results
 
     def move_message(self, email_address, mail_folder, message_id, dest_folder):
         """

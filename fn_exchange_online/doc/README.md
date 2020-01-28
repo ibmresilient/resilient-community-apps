@@ -33,9 +33,26 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
+
+* Get the user profile of the specified email address in JSON format.
+
+* Get a specified message and and return the results in JSON format.
+
+* Get a specified message .eml format write as an incident attachment.
+
+* Move a message to a specified "Well-known" Outlook folder.
+
+* Send an message: from the specified email address to the specified recipients with specified message subject and body text.
+
+* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: message sender, messages from a specific Well-known folder, a time frame for when the message was received, text contained in the message subject or the message body, whether the message has attachments. Results are returned in the Exchange Online Query Message Results data table.
+
+* Delete a single specified message from a specified email address.
+
+* Delete a list of messages that are the results of a message query.  The messages deleted are written to the Exchange Online Query Messages data table.
+
+* Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
+
 
 ---
 
