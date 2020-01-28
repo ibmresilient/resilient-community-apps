@@ -5,8 +5,10 @@
 
 import json
 import logging
+import datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
+from resilient_lib.components.integration_errors import IntegrationError
 from fn_exchange_online.lib.ms_graph_helper import MSGraphHelper
 
 CONFIG_DATA_SECTION = 'fn_exchange_online'
@@ -63,6 +65,16 @@ class FunctionComponent(ResilientComponent):
             LOG.info(u"exo_meeting_required_attendees: %s", required_attendees)
             LOG.info(u"exo_meeting_optional_attendees: %s", optional_attendees)
             LOG.info(u"exo_meeting_location: %s", location)
+
+            # Validate the meeting start/end time
+            if start_time >= end_time:
+                raise IntegrationError("Exchange Online meeting start time is behind end time.")
+
+            # Check meeting time is not in the past.
+            now_utc = datetime.datetime.utcnow()
+            meeting_time_utc = datetime.datetime.utcfromtimestamp(start_time/1000)
+            if now_utc > meeting_time_utc:
+                raise IntegrationError("Exchange Online meeting start date/time is in the past.")
 
             yield StatusMessage(u"Starting create meeting for email address: {}".format(email_address))
 
