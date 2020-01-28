@@ -240,7 +240,7 @@ class AwsIamClient():
                 # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
                 return {}
 
-            raise no_such_entity_ex
+            return {"Status": "NoSuchEntity"}
 
         except Exception as int_ex:
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",

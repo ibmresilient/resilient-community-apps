@@ -60,15 +60,18 @@ class FunctionComponent(ResilientComponent):
             enabled_filters = [f for f in [aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter,
                                                aws_iam_access_key_filter] if f is not None]
             # Test any enabled filters to ensure they are valid regular expressions.
-            for sf in (enabled_filters):
-                if not is_regex(sf):
-                    raise ValueError("The query filter '{}' is not a valid regular expression.".format(repr(sf)))
+            for ef in (enabled_filters):
+                if not is_regex(ef):
+                    raise ValueError("The query filter '{}' is not a valid regular expression.".format(repr(ef)))
 
             iam_cli = AwsIamClient(self.options, sts_client=True)
             if aws_iam_user_name:
                 # User specified.
+                if aws_iam_query_type:
+                    # If 'aws_iam_query_type' parameter is in function args remove "QueryType" from 'params'.
+                    del params["QueryType"]
+                # If a single user result will be add to a list to normalize result.
                 rtn = iam_cli.get("get_user", **params)
-                # If a single user add to a list to normalize result.
             else:
                 # All users
                 # Initialize the filters.

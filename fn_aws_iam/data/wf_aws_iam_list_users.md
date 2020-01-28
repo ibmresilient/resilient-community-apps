@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: List Users
 
-
 ## Function - AWS IAM: List Users
 
 ### API Name
@@ -19,11 +18,42 @@
 
 ### Pre-Processing Script
 ```python
-inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
-inputs.aws_iam_group_filter = rule.properties.aws_iam_group_filter
-inputs.aws_iam_policy_filter = rule.properties.aws_iam_policy_filter
-inputs.aws_iam_access_key_filter = rule.properties.aws_iam_access_key_filter
-inputs.aws_iam_query_type = "users"
+import re
+
+# Get a list of all enabled filters.
+ENABLED_FILTERS = [f for f in [rule.properties.aws_iam_user_filter, rule.properties.aws_iam_group_filter, 
+                               rule.properties.aws_iam_policy_filter, rule.properties.aws_iam_access_key_filter] 
+                   if f is not None]
+
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except re.error:
+        return False
+
+
+def main():
+    # Test any enabled filters to ensure they are valid regular expressions.
+    for ef in (ENABLED_FILTERS):
+        if not is_regex(ef):
+            raise ValueError("The query filter '{}' is not a valid regular expression.".format(unicode(ef)))
+
+    inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
+    inputs.aws_iam_group_filter = rule.properties.aws_iam_group_filter
+    inputs.aws_iam_policy_filter = rule.properties.aws_iam_policy_filter
+    inputs.aws_iam_access_key_filter = rule.properties.aws_iam_access_key_filter
+    inputs.aws_iam_query_type = "users"
+
+
+if __name__ == "__main__":
+    main()
 ```
 
 ### Post-Processing Script
@@ -57,6 +87,7 @@ FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "List Users"
 # Processing
 CONTENT = results.content
+INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
 
@@ -98,9 +129,12 @@ def process_tags(tag_list, row):
 
 def main():
     note_text = ''
+    filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
+                           INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
+               if f is not None]
     if CONTENT is not None:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
-                   "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
+                   "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
         for u in range(len(CONTENT)):
             newrow = incident.addRow("aws_iam_users")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -127,7 +161,16 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
             .format(WF_NAME, FN_NAME)
-
+    if filters:
+        note_text += "<br>Query Filters:</br>"
+        if "aws_iam_user_filter" in INPUTS and INPUTS["aws_iam_user_filter"] is not None:
+            note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
+        if "aws_iam_group_filter" in INPUTS and INPUTS["aws_iam_group_filter"] is not None:
+            note_text += "<br>aws_iam_group_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_group_filter"])
+        if "aws_iam_policy_filter" in INPUTS and INPUTS["aws_iam_policy_filter"] is not None:
+            note_text += "<br>aws_iam_policy_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_policy_filter"])
+        if "aws_iam_access_key_filter" in INPUTS and INPUTS["aws_iam_access_key_filter"] is not None:
+            note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()

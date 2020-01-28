@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: List Access Keys
 
-
 ## Function - AWS IAM: List Users
 
 ### API Name
@@ -56,6 +55,7 @@ FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "List Access Keys"
 # Processing
 CONTENT = results.content
+INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def process_access_keys(access_key_id_list, user_name):
@@ -75,6 +75,9 @@ def process_access_keys(access_key_id_list, user_name):
                     newrow[l] = luak[l]
 def main():
     note_text = ''
+    filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
+                           INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
+               if f is not None]
     if CONTENT is not None:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
                    "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
@@ -87,6 +90,12 @@ def main():
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
             .format(WF_NAME, FN_NAME)
 
+    if filters:
+        note_text += "<br>Query Filters:</br>"
+        if "aws_iam_user_filter" in INPUTS and INPUTS["aws_iam_user_filter"] is not None:
+            note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
+        if "aws_iam_access_key_filter" in INPUTS and INPUTS["aws_iam_access_key_filter"] is not None:
+            note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
