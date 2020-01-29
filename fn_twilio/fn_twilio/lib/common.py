@@ -3,6 +3,7 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 
 import re
+import calendar
 from dateutil.relativedelta import *
 
 SECONDS_IN_MINUTE = 60
@@ -49,3 +50,11 @@ def get_interval(time_string):
 
 def clean_phone_number(phone_number):
     return '+' + re.sub("[^0-9]", "", phone_number)
+
+def get_ts_from_datetime(dt):
+    """
+    return an epoch value of a datefield, in milliseconds
+    :param dt:
+    :return: epoch in milliseconds
+    """
+    return calendar.timegm(dt.timetuple())*1000

@@ -7,7 +7,7 @@
 import logging
 from dateutil.parser import parse
 import time
-from fn_twilio.lib.common import get_interval, clean_phone_number
+from fn_twilio.lib.common import get_interval, clean_phone_number, get_ts_from_datetime
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, get_workflow_status, readable_datetime
 from twilio.rest import Client
@@ -33,7 +33,7 @@ class FunctionComponent(ResilientComponent):
 
     @function("twilio_get_responses")
     def _twilio_receive_messages_function(self, event, *args, **kwargs):
-        """Function: Receive messages based on a message Id (SID)"""
+        """Function: Receive messages based on a destination number and a timeframe"""
         try:
             # Get the workflow_instance_id so we can raise an error if the workflow was terminated by the user
             workflow_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
@@ -42,16 +42,16 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             twilio_phone_number = kwargs.get("twilio_phone_number")  # text
-            twilio_after_date = kwargs.get("twilio_after_date")  # text
-            twilio_after_date_ts = kwargs.get("twilio_after_date_ts")  # number
+            twilio_date_sent = kwargs.get("twilio_date_sent")  # text
+            twilio_date_sent_ts = kwargs.get("twilio_date_sent_ts")  # number
             twilio_wait_timeout = kwargs.get("twilio_wait_timeout")  # text
             if not twilio_wait_timeout:
                 twilio_wait_timeout = DEFAULT_WAIT_TIMEOUT
 
             log = logging.getLogger(__name__)
             log.info("twilio_phone_number: %s", twilio_phone_number)
-            log.info("twilio_after_date: %s", twilio_after_date)
-            log.info("twilio_after_date_ts: %s", twilio_after_date_ts)
+            log.info("twilio_date_sent: %s", twilio_date_sent)
+            log.info("twilio_date_sent_ts: %s", twilio_date_sent_ts)
             log.info("twilio_wait_timeout: %s", twilio_wait_timeout)
 
             # Get configs
@@ -64,8 +64,8 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             phone_number = clean_phone_number(twilio_phone_number)
 
-            if twilio_after_date_ts and not twilio_after_date:
-                twilio_after_date = readable_datetime(twilio_after_date_ts)
+            if twilio_date_sent_ts and not twilio_date_sent:
+                twilio_date_sent = readable_datetime(twilio_date_sent_ts)
 
             client = Client(account_sid, auth_token)
 
@@ -80,10 +80,12 @@ class FunctionComponent(ResilientComponent):
             wf_status = None
             rest_client = self.rest_client()
 
+            converted_date = parse(twilio_date_sent) if twilio_date_sent else None
+
             while continue_flg and time.time() <= wait_timeout:
                 # get the messages
                 messages = client.messages.list(
-                    date_sent=parse(twilio_after_date) if twilio_after_date else None,
+                    date_sent=converted_date,
                     to=src_address,
                     from_=phone_number
                 )
@@ -98,6 +100,7 @@ class FunctionComponent(ResilientComponent):
                             "phone_number": message.from_,
                             "messaging_service_sid": message.sid,
                             "date_created": str(message.date_created),
+                            "date_created_ts": get_ts_from_datetime(message.date_created),
                             "direction": message.direction,
                             "message_body": message.body,
                             "status": message.status,
@@ -109,15 +112,17 @@ class FunctionComponent(ResilientComponent):
                     rc = False
                     time.sleep(SLEEP_TIME)
 
+                    # check to see if the workflow is still active
                     wf_status = get_workflow_status(rest_client, workflow_instance_id)
                     continue_flg = not wf_status.is_terminated
 
             if wf_status and wf_status.is_terminated:
                 err_msg = u"Workflow was terminated: {}".format(wf_status.reason)
-                rc = False
+                yield StatusMessage(err_msg)
                 log.warning(err_msg)
+                rc = False
             elif not payload:
-                err_msg = "Timeout waiting for responses for phone number: {} since {}".format(twilio_phone_number, twilio_after_date)
+                err_msg = u"Timeout waiting for responses for phone number: {} since {}".format(twilio_phone_number, twilio_date_sent)
                 log.warning(err_msg)
 
             yield StatusMessage("done...")

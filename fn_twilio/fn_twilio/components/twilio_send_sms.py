@@ -6,7 +6,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from fn_twilio.lib.common import clean_phone_number
+from fn_twilio.lib.common import clean_phone_number, get_ts_from_datetime
 from twilio.rest import Client
 from twilio.base.exceptions import TwilioRestException
 
@@ -110,6 +110,7 @@ class FunctionComponent(ResilientComponent):
                         "phone_number": phone_number,
                         "messaging_service_sid": message.messaging_service_sid,
                         "date_created": str(message.date_created),
+                        "date_created_ts": get_ts_from_datetime(message.date_created),
                         "direction": message.direction,
                         "message_body": message.body,
                         "status": message.status,
