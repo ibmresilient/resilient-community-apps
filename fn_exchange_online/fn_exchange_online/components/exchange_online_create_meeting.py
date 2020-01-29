@@ -102,7 +102,7 @@ class FunctionComponent(ResilientComponent):
             results = rp.done(success, response_json)
 
             # Add pretty printed string for easier to read output text in note.
-            pretty_string = json.dumps(response_json, sort_keys=True, indent=4, separators=(',', ': '))
+            pretty_string = json.dumps(response_json, ensure_ascii=False, indent=4, separators=(',', ': '))
             results['pretty_string'] = pretty_string
 
             yield StatusMessage(u"Returning create meeting results for email address: {}".format(email_address))
