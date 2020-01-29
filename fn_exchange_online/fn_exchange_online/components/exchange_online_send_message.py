@@ -45,7 +45,7 @@ class FunctionComponent(ResilientComponent):
             email_address = kwargs.get("exo_email_address")  # text
             recipients = kwargs.get("exo_recipients")  # text
             message_subject = kwargs.get("exo_message_subject")  # text
-            message_body = kwargs.get("exo_message_body")  # text
+            message_body = self.get_textarea_param(kwargs.get("exo_message_send_body"))  # textarea
 
             log = logging.getLogger(__name__)
             log.info(u"exo_email_address: %s", email_address)
