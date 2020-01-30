@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_greynoise',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
