@@ -71,12 +71,35 @@ Resilient Integration with Exchange Online provides the capability to access and
   List any Requirements 
 -->
 * Resilient platform >= `v34.2.47`
-* An Integration Server running `resilient_circuits>=31.0.0`
-  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+* An Integration Server running:
+  *  `resilient_circuits>=31.0.0`
+  *  `resilient_lib>=35.0.0`
+
+  * The minimum set of Resilient API permissions for this integration:
+    * Edit Org Data
+    * Functions.Read
+    * Functions.Edit
+    * Other.ReadIncidentsActionInvocations
+    * Scripts.Create
+    * Scripts.Edit
+    * Workflows.Create
+    * Workflow.Edit
+   Microsoft Graph API "Application permissions":
+* To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+
+* The following Microsoft Graph API "Application permissions" (See Microsoft Azure App Configuration section below to configure):
+  * Calendar.ReadWrite
+  * Mail.ReadWrite
+  * Mail.Send
+  * MailboxSetting.Read
+  * User.Read.All
 
 ---
 
 ## Installation
+
+
+
 * Download the `fn_exchange_online.zip`.
 * Copy the `.zip` to your Integration Server and SSH into it.
 * **Unzip** the package:
@@ -235,7 +258,7 @@ for your domain:
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-API-permissions-consent.png)
 
-Log into an admin account to accept these permissions requested on behalf of your organization:
+You may need to log into an admin account to accept these permissions requested on behalf of your organization:
 
 ![screenshot: custom_layouts](./doc/screenshots/MS-Azure-Accept-permissions.png)
 
