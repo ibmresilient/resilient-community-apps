@@ -5,6 +5,7 @@
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 #
 import os
+from datetime import datetime
 from fn_resilient_ml.lib.file_manage import FileManage
 from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
 from fn_resilient_ml.lib.nlp.res_sif import ResSIF
@@ -73,3 +74,6 @@ def get_incident_href(nlp_str, res_client, num_return, model_path, inc_id):
               "keywords": inc["keywords"]} for inc in incident_ids]
     return hrefs
 
+def get_cur_time():
+    cur_time = datetime.now()
+    return cur_time.strftime("%Y-%m-%d, %H:%M:%S")

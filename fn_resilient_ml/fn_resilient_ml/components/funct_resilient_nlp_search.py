@@ -57,10 +57,13 @@ class FunctionComponent(ResilientComponent):
                                                          model_path=model_path,
                                                          inc_id=search_incident_id)
 
+            cur_time = util_functions.get_cur_time()
+
             yield StatusMessage("done...")
 
             results = {
-                "incidents": inc_hrefs
+                "incidents": inc_hrefs,
+                "time": cur_time
             }
 
             # Produce a FunctionResult with the results
