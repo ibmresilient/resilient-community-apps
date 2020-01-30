@@ -52,7 +52,7 @@ class FunctionComponent(ResilientComponent):
             start_time = kwargs.get("exo_meeting_start_time")  # datetimepicker
             end_time = kwargs.get("exo_meeting_end_time")  # datetimepicker
             subject = kwargs.get("exo_meeting_subject")  # text
-            body = kwargs.get("exo_meeting_body")  # text
+            body = self.get_textarea_param(kwargs.get("exo_meeting_send_body"))  # textarea
             required_attendees = kwargs.get("exo_meeting_required_attendees")  # text
             optional_attendees = kwargs.get("exo_meeting_optional_attendees")  # text
             location = kwargs.get("exo_meeting_location")  # text
