@@ -12,7 +12,7 @@
   ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
-# **User Guide:** fn_exchange_online_v1.0.0
+# **User Guide:** Microsoft Exchange Online Functions for IBM Resilient v1.0.0
 
 ## Table of Contents
 - [Key Features](#key-features)
@@ -34,27 +34,42 @@
 <!--
   List the Key Features of the Integration
 -->
-* Key Feature 1
-* Key Feature 2
-* Key Feature 3
+Resilient Integration with Exchange Online provides the capability to access and manipulate Microsoft Exchange Online (Office 365 in the cloud) messages from the IBM Resilient Soar Platform.  The integration uses Microsoft Graph API to access the data in Office 365.  Included in the integrations are the following capabilities:
+
+* Get the user profile of the specified email address in JSON format.
+
+* Get a specified message and and return the results in JSON format.
+
+* Get a specified message .eml format write as an incident attachment.
+
+* Move a message to a specified "Well-known" Outlook folder.
+
+* Send an message: from the specified email address to the specified recipients with specified message subject and body text.
+
+* Query messages of a single user, a list of users, or the whole tenant and return a list of messages matching the criteria: message sender, messages from a specific Well-known folder, a time frame for when the message was received, text contained in the message subject or the message body, whether the message has attachments. Results are returned in the Exchange Online Query Message Results data table.
+
+* Delete a single specified message from a specified email address.
+
+* Delete a list of messages that are the results of a message query.  The messages deleted are written to the Exchange Online Query Messages data table.
+
+* Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
 
 ## Function - Exchange Online: Move Message to Folder
 This function will move an Exchange Online message to the specified folder in the users mailbox.
 
- ![screenshot: fn-exchange-online-move-message-to-folder ](./screenshots/fn-exchange-online-move-message-to-folder.png)
+ ![screenshot: fn-exchange-online-move-message-to-folder ](./screenshots/EXO-move-message-to-folder-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `exo_destination_mailfolder_id` | `select` | Yes | `-` | Destination folder to which message is moved. |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
 | `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
 | `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-
+| `exo_destination_mailfolder_id` | `select` | Yes | `-` | Destination folder to which message is moved. |
 </p>
 </details>
 
@@ -62,15 +77,44 @@ This function will move an Exchange Online message to the specified folder in th
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+Result: {
+  'inputs': {u'exo_destination_mailfolder_id': {u'id': 126, 
+                                               u'name': u'recoverableitemsdeletions'}, 
+             u'exo_mailfolders_id': None, 
+             u'exo_messages_id':u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAAAAEMAABJf-ANAwqcRJF4hFv_x44UAAAXaS2qAAA=', u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+  'metrics': {'package': 'fn-exchange-online', 
+              'timestamp': '2020-01-31 13:23:41', 
+              'package_version': '1.0.0', 
+              'host': 'MacBook-Pro.local', 
+              'version': '1.0', 
+              'execution_time_ms': 1706}, 
+  'success': True, 
+  'content': {'value': True}, 
+  'raw': '{"value": true}', 
+  'reason': None, 
+  'version': '1.0'}
 ```
-
 </p>
 </details>
+
+<details><summary>Workflows:</summary>
+<p>
+The example Move Message to Folder workflow works off the Exchange Online Message Query Results data table.
+
+
+![screenshot: fn-exchange-online-move-message-to-folder](./screenshots/EXO-move-message-to-folder-workflow.png)
+
+<details><summary>Example Workflow Output:</summary>
+<p>
+The Get User Profile workflow writes the user profile in JSON format to an incident note.  Sample output of the note is pictured below:
+
+![screenshot: fn-exchange-online-move-message-to-folder-workflow-output](./screenshots/EXO-move-message-to-folder-workflow-output.png)
+
+</p>
+
+</details>
+
+
 
 <details><summary>Example Pre-Process Script:</summary>
 <p>
@@ -100,6 +144,16 @@ else:
   row['exo_dt_status'] = helper.createRichText(status_text)
 incident.addNote(noteText)
 ```
+
+</p>
+</details>
+<details><summary>Example Rule:</summary>
+<p>
+
+![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+</p>
+</details>
 
 </p>
 </details>
@@ -236,9 +290,9 @@ incident.addNote(noteText)
 
 ---
 ## Function - Exchange Online: Get User Profile
-This function will get Exchange Online user profile for a given email address.
+The Get User Profile function will return Exchange Online user profile for a given email address.
 
- ![screenshot: fn-exchange-online-get-user-profile ](./screenshots/fn-exchange-online-get-user-profile.png)
+ ![screenshot: fn-exchange-online-get-user-profile ](./screenshots/EXO-get-user-profile-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -255,14 +309,41 @@ This function will get Exchange Online user profile for a given email address.
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'inputs': {u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-01-31 11:14:42', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 599}, 
+    'success': True, 
+    'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",\n    "businessPhones": [],\n    "displayName": "Resilient User 2",\n    "givenName": "Resilient User 2",\n    "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f",\n    "jobTitle": null,\n    "mail": "resilient2@securitypocdemos.onmicrosoft.com",\n    "mobilePhone": null,\n    "officeLocation": null,\n    "preferredLanguage": "en-US",\n    "surname": "Resilient User 2",\n    "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com"\n}', 
+    'content': {
+        u'displayName': u'Resilient User 2', 
+        u'mobilePhone': None, 
+        u'preferredLanguage': u'en-US', 
+        u'jobTitle': None, 
+        u'userPrincipalName': u'resilient2@securitypocdemos.onmicrosoft.com', 
+        u'@odata.context': u'https://graph.microsoft.com/v1.0/$metadata#users/$entity', 
+        u'officeLocation': None, 
+        u'businessPhones': [], 
+        u'mail': u'resilient2@securitypocdemos.onmicrosoft.com', 
+        u'surname': u'Resilient User 2', 
+        u'givenName': u'Resilient User 2', 
+        u'id': u'393c1ebb-8222-4ba1-8665-f54eaf7f024f'},
+    'raw': '{"displayName": "Resilient User 2", "mobilePhone": null, "preferredLanguage": "en-US", "jobTitle": null, "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com", "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity", "officeLocation": null, "businessPhones": [], "mail": "resilient2@securitypocdemos.onmicrosoft.com", "surname": "Resilient User 2", "givenName": "Resilient User 2", "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f"}', 
+    'reason': None, 
+    'version': '1.0'
 }
 ```
 
 </p>
 </details>
+<details><summary>Workflows:</summary>
+<p>
+The example Get User Profile workflow works off an artifact whose value contains the email address of the user whose profile is to be queried.  The user profile is returned in JSON format as an incident note.
+
+![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-get-user-profile-workflow.png)
 
 <details><summary>Example Pre-Process Script:</summary>
 <p>
@@ -288,6 +369,37 @@ incident.addNote(noteText)
 
 </p>
 </details>
+
+<details><summary>Example Workflow Output:</summary>
+<p>
+The Get User Profile workflow writes the user profile in JSON format to an incident note.  Sample output of the note is pictured below:
+
+![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-get-user-profile-workflow-output.png)
+
+</p>
+
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The example Get User Profile rule will invoke the Get User Profile workflow if the artifact type is one of the following:
+
+* Email Recipient
+* Email Sender
+* Email Sender Name
+* User Account
+
+![screenshot: fn-exchange-online-get-user-profile-rule](./screenshots/EXO-get-user-profile-rule.png)
+
+</p>
+</details>
+
+
+</p>
+</details>
+
+
+
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
@@ -653,6 +765,117 @@ inputs.exo_messages_id = row.exo_dt_message_id
 ```python
 None
 ```
+
+</p>
+</details>
+
+---
+---
+## Function - Exchange Online: Get User Profile
+The Get User Profile function will return Exchange Online user profile for a given email address.
+
+ ![screenshot: fn-exchange-online-get-user-profile ](./screenshots/EXO-get-user-profile-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    'inputs': {u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-01-31 11:14:42', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 599}, 
+    'success': True, 
+    'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",\n    "businessPhones": [],\n    "displayName": "Resilient User 2",\n    "givenName": "Resilient User 2",\n    "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f",\n    "jobTitle": null,\n    "mail": "resilient2@securitypocdemos.onmicrosoft.com",\n    "mobilePhone": null,\n    "officeLocation": null,\n    "preferredLanguage": "en-US",\n    "surname": "Resilient User 2",\n    "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com"\n}', 
+    'content': {
+        u'displayName': u'Resilient User 2', 
+        u'mobilePhone': None, 
+        u'preferredLanguage': u'en-US', 
+        u'jobTitle': None, 
+        u'userPrincipalName': u'resilient2@securitypocdemos.onmicrosoft.com', 
+        u'@odata.context': u'https://graph.microsoft.com/v1.0/$metadata#users/$entity', 
+        u'officeLocation': None, 
+        u'businessPhones': [], 
+        u'mail': u'resilient2@securitypocdemos.onmicrosoft.com', 
+        u'surname': u'Resilient User 2', 
+        u'givenName': u'Resilient User 2', 
+        u'id': u'393c1ebb-8222-4ba1-8665-f54eaf7f024f'},
+    'raw': '{"displayName": "Resilient User 2", "mobilePhone": null, "preferredLanguage": "en-US", "jobTitle": null, "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com", "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity", "officeLocation": null, "businessPhones": [], "mail": "resilient2@securitypocdemos.onmicrosoft.com", "surname": "Resilient User 2", "givenName": "Resilient User 2", "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f"}', 
+    'reason': None, 
+    'version': '1.0'
+}
+```
+
+</p>
+</details>
+<details><summary>Workflows:</summary>
+<p>
+The example Get User Profile workflow works off an artifact whose value contains the email address of the user whose profile is to be queried.  The user profile is returned in JSON format as an incident note.
+
+![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-get-user-profile-workflow.png)
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.exo_email_address = artifact.value
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.content["error"] is not None:
+  noteText = u"Exchange Online user profile NOT FOUND: {0}\n{1}".format(results.inputs["exo_email_address"], results.pretty_string)
+else:
+  noteText = u"Exchange Online user profile: {0}\n{1}".format(results.inputs["exo_email_address"], results.pretty_string)
+
+incident.addNote(noteText)
+```
+
+</p>
+</details>
+
+<details><summary>Example Workflow Output:</summary>
+<p>
+The Get User Profile workflow writes the user profile in JSON format to an incident note.  Sample output of the note is pictured below:
+
+![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-get-user-profile-workflow-output.png)
+
+</p>
+
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The example Get User Profile rule will invoke the Get User Profile workflow if the artifact type is one of the following:
+
+* Email Recipient
+* Email Sender
+* Email Sender Name
+* User Account
+
+![screenshot: fn-exchange-online-get-user-profile-rule](./screenshots/EXO-get-user-profile-rule.png)
+
+</p>
+</details>
+
 
 </p>
 </details>
