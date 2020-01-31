@@ -77,6 +77,7 @@ Resilient Integration with Exchange Online provides the capability to access and
 
   * The minimum set of Resilient API permissions for this integration:
     * Edit Org Data
+    * Incidents.Edit.Fields
     * Functions.Read
     * Functions.Edit
     * Layouts.Read
