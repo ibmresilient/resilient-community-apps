@@ -79,6 +79,7 @@ Resilient Integration with Exchange Online provides the capability to access and
     * Edit Org Data
     * Functions.Read
     * Functions.Edit
+    * Layouts.Read
     * Other.ReadIncidentsActionInvocations
     * Scripts.Create
     * Scripts.Edit
