@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             # artifact_file_type:
             # "Email Attachment", "Malware Sample", "Log File", "X509 Certificate File", "Other File", etc.
-            base64content = kwargs.get("base64content")  # text
+            base64content = str.encode(str(kwargs.get("base64content")))  # text
             incident_id = kwargs.get("incident_id")  # number
             artifact_file_type = self.get_select_param(kwargs.get("artifact_file_type")) or "Malware Sample"
             file_name = kwargs.get("file_name")  # text
