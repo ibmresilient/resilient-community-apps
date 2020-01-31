@@ -5,6 +5,7 @@
 
 import logging
 import json
+import pprint
 import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
@@ -34,7 +35,7 @@ class FunctionComponent(ResilientComponent):
         inputs:
             pulsedive_id: an integer
             pulsedive_id_type: specify "indicator", "threat", or feed
-            pulsedive_id_report: specify data requested
+            pulsedive_id_report: specify data requested based on id and type
         return: json data
         """
         try:
@@ -43,30 +44,29 @@ class FunctionComponent(ResilientComponent):
 
             # Get the function parameters:
             pd_id = kwargs.get("pulsedive_id")  # number
-            pulsedive_id_type = self.get_select_param(kwargs.get("pulsedive_id_type"))  # select, values: "Indicator", "Threat", "Feed"
-            pulsedive_id_report_type = self.get_select_param(kwargs.get("pulsedive_id_report_type"))  # select, values: "General", "Linked Indicators", "Properties (using Indicator ID only)", "Indicator Summary (using Threat ID only)"
+            pulsedive_id_type = self.get_select_param(
+                kwargs.get("pulsedive_id_type"))  # "Indicator", "Threat", "Feed"
+            pulsedive_id_report_type = self.get_select_param(kwargs.get(
+                "pulsedive_id_report_type"))  # "General", "Linked Indicators", "Properties", "Indicator Summary"
 
             log = logging.getLogger(__name__)
-            log.info("pulsedive_id: {}".format(pd_id))
-            log.info("pulsedive_id_type: {} ".format(pulsedive_id_type))
-            log.info("pulsedive_id_report_type: {}".format(pulsedive_id_report_type))
+            log.info("function params: pulsedive id = %s, type = %s, report = %s" %
+                     (pd_id, pulsedive_id_type, pulsedive_id_report_type))
+            log.info("config params: %s" % self.options)
 
-            # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             yield StatusMessage("starting...")
-            log.info("api.config options: {}".format(self.options))
 
-            # form the url request:
-            if pulsedive_id_type == "Indicator":
-                id_key = "iid"
+            # form the url request for id:
+            if pulsedive_id_type == "Feed":
+                id_key = "fid"
             elif pulsedive_id_type == "Threat":
                 id_key = "tid"
-            else:   # Feed
-                id_key = "fid"
+            else:  # Indicator ID (default)
+                id_key = "iid"
 
-            pulsedive_data = {
-                id_key: pd_id
-            }
+            pulsedive_data = {id_key: pd_id}
 
+            # form the url request for report type:
             if "Linked" in pulsedive_id_report_type:
                 # for all id types: indicator, threat, feed
                 pulsedive_data["get"] = "links"
@@ -79,8 +79,6 @@ class FunctionComponent(ResilientComponent):
                 pulsedive_data["summary"] = "1"
                 pulsedive_data["splitrisk"] = "1"
 
-            log.info("pulsedive_data: {}".format(pulsedive_data))
-
             # convert dict to list
             dict_list = []
             for k, v in pulsedive_data.items():
@@ -89,13 +87,14 @@ class FunctionComponent(ResilientComponent):
             url_form = "&".join(i for i in dict_list)
 
             # assemble the url
-            request_url = "{}/info.php?{}&pretty=1&key={}".format(
+            request_url = "{}/info.php?{}&key={}".format(
                 self.options["pulsedive_api_url"],
                 url_form,
                 self.options["pulsedive_api_key"]
             )
 
-            log.info("request_url: {}".format(request_url))
+            # log.info("request_url: {}".format(request_url))
+            # make the api call
             resp = requests.get(request_url)
 
             # headers = {
@@ -108,13 +107,17 @@ class FunctionComponent(ResilientComponent):
 
             log.info("response: %s", resp.json())
 
-            # Send back the results
+            # provide pretty-print format for readability in output
+            pp = pprint.PrettyPrinter(indent=4)
+
+            # prepare results to send for output
             results = {
-                "content": resp.json(),
                 "url": request_url,
                 "inputs": {"report_type": pulsedive_id_report_type,
-                           "query type": pulsedive_id_type,
-                           "query id": pd_id}
+                           "query_type": pulsedive_id_type,
+                           "query_id": pd_id},
+                "content": resp.json(),
+                "pretty": pp.pformat(resp.json())
             }
 
             # Produce a FunctionResult with the results
