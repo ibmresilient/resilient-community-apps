@@ -69,7 +69,7 @@ This function will move an Exchange Online message to the specified folder in th
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
 | `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
 | `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-| `exo_destination_mailfolder_id` | `select` | Yes | `-` | Destination folder to which message is moved. |
+| `exo_destination_mailfolder_id` | `select` | Yes | `recoverableitemsdeletions` | Destination folder to which message is moved. |
 </p>
 </details>
 
@@ -99,14 +99,33 @@ Result: {
 
 <details><summary>Workflows:</summary>
 <p>
-The example Move Message to Folder workflow works off the Exchange Online Message Query Results data table.
+The example Move Message to Folder workflow works off the Exchange Online Message Query Results data table. Messages can be moved to a "Well known Outlook folder:
+
+* archive
+* clutter
+* conflicts
+* conversationhistory
+* deleteditems
+* drafts
+* inbox
+* junkemail
+* localfailures
+* msgfolderroot
+* outbox
+* recoverableitemsdeletions
+* scheduled
+* searchfolders
+* sentitems
 
 
 ![screenshot: fn-exchange-online-move-message-to-folder](./screenshots/EXO-move-message-to-folder-workflow.png)
 
 <details><summary>Example Workflow Output:</summary>
 <p>
-The Get User Profile workflow writes the user profile in JSON format to an incident note.  Sample output of the note is pictured below:
+The Move Message to Folder workflow will call MS Graph API to move message in the data table row to the specified Well-known Outlook folder specified in the exo_destination_mailfolder_id input parameter.
+When a message is moved it's message ID is changed and as a result the status field column of the Exchange Online Message Query Results data table row entry will be updated to "Moved" in Red.   As the row status will no longer be "Active", the possible rules to be run on the data table row will be change because the message ID in the table is no longer valid.
+
+Below is a screen shot of an example Note after a message is moved to a folder:
 
 ![screenshot: fn-exchange-online-move-message-to-folder-workflow-output](./screenshots/EXO-move-message-to-folder-workflow-output.png)
 
@@ -149,6 +168,7 @@ incident.addNote(noteText)
 </details>
 <details><summary>Example Rule:</summary>
 <p>
+The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
 
 ![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
 
@@ -289,117 +309,6 @@ incident.addNote(noteText)
 </details>
 
 ---
-## Function - Exchange Online: Get User Profile
-The Get User Profile function will return Exchange Online user profile for a given email address.
-
- ![screenshot: fn-exchange-online-get-user-profile ](./screenshots/EXO-get-user-profile-function.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    'inputs': {u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
-    'metrics': {'package': 'fn-exchange-online', 
-                'timestamp': '2020-01-31 11:14:42', 
-                'package_version': '1.0.0', 
-                'host': 'MacBook-Pro.local', 
-                'version': '1.0', 
-                'execution_time_ms': 599}, 
-    'success': True, 
-    'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",\n    "businessPhones": [],\n    "displayName": "Resilient User 2",\n    "givenName": "Resilient User 2",\n    "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f",\n    "jobTitle": null,\n    "mail": "resilient2@securitypocdemos.onmicrosoft.com",\n    "mobilePhone": null,\n    "officeLocation": null,\n    "preferredLanguage": "en-US",\n    "surname": "Resilient User 2",\n    "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com"\n}', 
-    'content': {
-        u'displayName': u'Resilient User 2', 
-        u'mobilePhone': None, 
-        u'preferredLanguage': u'en-US', 
-        u'jobTitle': None, 
-        u'userPrincipalName': u'resilient2@securitypocdemos.onmicrosoft.com', 
-        u'@odata.context': u'https://graph.microsoft.com/v1.0/$metadata#users/$entity', 
-        u'officeLocation': None, 
-        u'businessPhones': [], 
-        u'mail': u'resilient2@securitypocdemos.onmicrosoft.com', 
-        u'surname': u'Resilient User 2', 
-        u'givenName': u'Resilient User 2', 
-        u'id': u'393c1ebb-8222-4ba1-8665-f54eaf7f024f'},
-    'raw': '{"displayName": "Resilient User 2", "mobilePhone": null, "preferredLanguage": "en-US", "jobTitle": null, "userPrincipalName": "resilient2@securitypocdemos.onmicrosoft.com", "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity", "officeLocation": null, "businessPhones": [], "mail": "resilient2@securitypocdemos.onmicrosoft.com", "surname": "Resilient User 2", "givenName": "Resilient User 2", "id": "393c1ebb-8222-4ba1-8665-f54eaf7f024f"}', 
-    'reason': None, 
-    'version': '1.0'
-}
-```
-
-</p>
-</details>
-<details><summary>Workflows:</summary>
-<p>
-The example Get User Profile workflow works off an artifact whose value contains the email address of the user whose profile is to be queried.  The user profile is returned in JSON format as an incident note.
-
-![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-get-user-profile-workflow.png)
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_email_address = artifact.value
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.content["error"] is not None:
-  noteText = u"Exchange Online user profile NOT FOUND: {0}\n{1}".format(results.inputs["exo_email_address"], results.pretty_string)
-else:
-  noteText = u"Exchange Online user profile: {0}\n{1}".format(results.inputs["exo_email_address"], results.pretty_string)
-
-incident.addNote(noteText)
-```
-
-</p>
-</details>
-
-<details><summary>Example Workflow Output:</summary>
-<p>
-The Get User Profile workflow writes the user profile in JSON format to an incident note.  Sample output of the note is pictured below:
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-get-user-profile-workflow-output.png)
-
-</p>
-
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-The example Get User Profile rule will invoke the Get User Profile workflow if the artifact type is one of the following:
-
-* Email Recipient
-* Email Sender
-* Email Sender Name
-* User Account
-
-![screenshot: fn-exchange-online-get-user-profile-rule](./screenshots/EXO-get-user-profile-rule.png)
-
-</p>
-</details>
-
-
-</p>
-</details>
-
-
-
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
