@@ -16,14 +16,15 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
-- [Function - Exchange Online: Move Message to Folder](#function---exchange-online-move-message-to-folder)
+
 - [Function - Exchange Online: Create Meeting](#function---exchange-online-create-meeting)
 - [Function - Exchange Online: Send Message](#function---exchange-online-send-message)
-- [Function - Exchange Online: Get User Profile](#function---exchange-online-get-user-profile)
 - [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
 - [Function - Exchange Online: Query Messages](#function---exchange-online-query-messages)
 - [Function - Exchange Online: Delete Message](#function---exchange-online-delete-message)
 - [Function - Exchange Online: Get Message](#function---exchange-online-get-message)
+- [Function - Exchange Online: Get User Profile](#function---exchange-online-get-user-profile)
+- [Function - Exchange Online: Move Message to Folder](#function---exchange-online-move-message-to-folder)
 - [Function - Exchange Online: Write Message as Attachment](#function---exchange-online-write-message-as-attachment)
 - [Data Table - Exchange Online Message Query Results](#data-table---exchange-online-message-query-results)
 - [Rules](#rules)
@@ -55,21 +56,21 @@ Resilient Integration with Exchange Online provides the capability to access and
 * Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
-## Function - Exchange Online: Write Message as Attachment
-This function will get the mime content of an Exchange Online message and write it as an incident attachment.  The attachment file name is an optional parameter and the functional will use a default message-{email-address}-{message-ID}.eml filename if none is specified.
+---
+## Function - Exchange Online: Delete Message
+Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
 
-![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
+ ![screenshot: fn-exchange-online-delete-message ](./screenshots/EXO-delete-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | Yes | `-` | - |
-| `task_id` | `number` | No | `-` | - |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
 | `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-| `exo_attachment_name` | `text` | No | `my-message.eml` | The name of the attachment file to which message is written. |
+
 </p>
 </details>
 
@@ -77,19 +78,10 @@ This function will get the mime content of an Exchange Online message and write 
 <p>
 
 ```python
-results = {'inputs': {u'incident_id': 2099, 
-                      u'exo_attachment_name': None, 
-                      u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
-                       u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},
-           'metrics': {'package': 'fn-exchange-online', 
-                       'timestamp': '2020-02-03 14:54:13', 
-                       'package_version': '1.0.0', 
-                       'host': 'annmarie-mbp.cambridge.ibm.com', 
-                       'version': '1.0', 'execution_time_ms': 5929}, 
-            'success': True, 'content': {'attachment_name': u'my-message.eml'}, 
-            'raw': '{"attachment_name": "my-message.eml"}', 
-            'reason': None, 
-            'version': '1.0'}
+results = {
+    # TODO: Copy and paste an example of the Function Output within this code block.
+    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
+    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
 }
 ```
 
@@ -98,17 +90,19 @@ results = {'inputs': {u'incident_id': 2099,
 
 <details><summary>Workflows:</summary>
 <p>
+The example Delete Message workflow works off 
+
+![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-delete-message-workflow.png)
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
 ```python
-inputs.incident_id = incident.id
-#inputs.task_id = task.id
-inputs.exo_attachment_name = rule.properties.exo_attachment_name
 inputs.exo_email_address = row.exo_dt_email_address
 inputs.exo_messages_id = row.exo_dt_message_id
-
+inputs.exo_mailfolders_id = None
 ```
+
 </p>
 </details>
 
@@ -116,37 +110,37 @@ inputs.exo_messages_id = row.exo_dt_message_id
 <p>
 
 ```python
-None
+if results.success:
+  # The message was deleted, so update "status" column in data table.
+  text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
+  row['exo_dt_status'] = helper.createRichText(text)
+elif results.content["error"] is not None: 
+  # There is an "item not found" error mostly likely here
+  row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
 ```
 
 </p>
 </details>
-
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-
-Below is a screen shot of an example Note after a message is moved to a folder:
-
-![screenshot: fn-exchange-online-move-message-to-folder-workflow-output](./screenshots/EXO-move-message-to-folder-workflow-output.png)
+![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-workflow-output.png)
 
 </p>
-
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-The example Write Message EML as Attachment rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Write Message as Attachment  rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message content can not be retrieed and written anymore.
 
-![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
+![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
 
 </p>
 </details>
+
 </p>
 </details>
 
 ---
-
 ## Function - Exchange Online: Create Meeting
 This function will create a meeting event in the organizer's Outlook calendar and send a calendar event mail message to the meeting participants inviting them to the meeting.
 
@@ -542,90 +536,12 @@ if len(note) > note_len:
 </p>
 </details>
 
----
-## Function - Exchange Online: Delete Message
-Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
-
- ![screenshot: fn-exchange-online-delete-message ](./screenshots/fn-exchange-online-delete-message.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_email_address = row.exo_dt_email_address
-inputs.exo_messages_id = row.exo_dt_message_id
-inputs.exo_mailfolders_id = None
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  # The message was deleted, so update "status" column in data table.
-  text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
-  row['exo_dt_status'] = helper.createRichText(text)
-elif results.content["error"] is not None: 
-  # There is an "item not found" error mostly likely here
-  row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
-```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
-</p>
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
-
-</p>
-</details>
-
-</p>
-</details>
 
 ---
 ## Function - Exchange Online: Get Message
 This function returns the contents of an Exchange Online message in json format.
 
- ![screenshot: fn-exchange-online-get-message ](./screenshots/fn-exchange-online-get-message.png)
+ ![screenshot: fn-exchange-online-get-message ](./screenshots/EXO-get-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -633,7 +549,7 @@ This function returns the contents of an Exchange Online message in json format.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to get|
 
 </p>
 </details>
@@ -642,11 +558,35 @@ This function returns the contents of an Exchange Online message in json format.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=',
+                      u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+          'metrics': {'package': 'fn-exchange-online', 
+                      'timestamp': '2020-02-03 15:39:31', 
+                      'package_version': '1.0.0', 
+                      'host': 'cambridge.ibm.com', 
+                      'version': '1.0', '
+                      'execution_time_ms': 654},
+          'success': True, 
+          'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity",\n    "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\"",\n    "bccRecipients": [],\n    "body": {\n        "content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n",\n        "contentType": "html"\n    },\n    "bodyPreview": "test text area body",\n    "categories": [],\n    "ccRecipients": [],\n    "changeKey": "CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/",\n    "conversationId": "AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=",\n    "conversationIndex": "AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==",\n    "createdDateTime": "2020-01-29T16:17:26Z",\n    "flag": {\n        "flagStatus": "notFlagged"\n    },\n    "from": {\n        "emailAddress": {\n            "address": "resilient2@securitypocdemos.onmicrosoft.com",\n            "name": "Jack Up"\n        }\n    },\n    "hasAttachments": false,\n    "id": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=",\n    "importance": "normal",\n    "inferenceClassification": "focused",\n    "internetMessageId": "<MWHPR2201MB1135CC1DDFCD65AD5BF1DD8AB1050@MWHPR2201MB1135.namprd22.prod.outlook.com>",\n    "isDeliveryReceiptRequested": false,\n    "isDraft": false,\n    "isRead": true,\n    "isReadReceiptRequested": false,\n    "lastModifiedDateTime": "2020-02-03T16:46:41Z",\n    "parentFolderId": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=",\n    "receivedDateTime": "2020-01-29T16:17:27Z",\n    "replyTo": [],\n    "sender": {\n        "emailAddress": {\n            "address": "resilient2@securitypocdemos.onmicrosoft.com",\n            "name": "Resilient User 2"\n        }\n    },\n    "sentDateTime": "2020-01-29T16:17:23Z",\n    "subject": "test text area body",\n    "toRecipients": [\n        {\n            "emailAddress": {\n                "address": "resilient2@securitypocdemos.onmicrosoft.com",\n                "name": "Resilient USer 2"\n            }\n        },\n        {\n            "emailAddress": {\n                "address": "resilient3@securitypocdemos.onmicrosoft.com",\n                "name": "Resilient User 3"\n            }\n        }\n    ],\n    "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem"\n}', 
+          'content': {u'sentDateTime': u'2020-01-29T16:17:23Z', 
+                      u'conversationId':u'AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=', 
+                      u'isDraft': False, 
+                      u'internetMessageId': u'<MMMMprod.outlook.com>', 
+                      u'id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
+                      u'isReadReceiptRequested': False, 
+                      u'subject': u'test text area body', 
+                      u'lastModifiedDateTime': u'2020-02-03T16:46:41Z', 
+                      u'bodyPreview': u'test text area body', 
+                      u'from': {u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                      u'flag': {u'flagStatus': u'notFlagged'}, 
+                      u'@odata.context': u"https://graph.microsoft.com/v1.0/$metadata#users('resilient2%40securitypocdemos.onmicrosoft.com')/messages/$entity", u'replyTo': [], u'changeKey': u'CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/', u'receivedDateTime': u'2020-01-29T16:17:27Z', u'parentFolderId': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=', u'body': {u'content': u'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n<meta content="text/html; charset=us-ascii">\r\n</head>\r\n<body>\r\n<div class="rte">\r\n<div>test text area body</div>\r\n</div>\r\n</body>\r\n</html>\r\n', u'contentType': u'html'}, u'isDeliveryReceiptRequested': False, u'importance': u'normal', u'toRecipients': [{u'emailAddress': {u'name': u'Jack Up', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, {u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient3@securitypocdemos.onmicrosoft.com'}}], u'ccRecipients': [], u'isRead': True, u'categories': [],
+                      u'sender': {u'emailAddress': {u'name': u'Resilient User 2', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                      u'createdDateTime': u'2020-01-29T16:17:26Z', u'webLink': u'https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem', u'conversationIndex': u'AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==', u'hasAttachments': False, u'bccRecipients': [], u'inferenceClassification': u'focused', 
+                      u'@odata.etag': u'W/"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/"'}, 'raw': '{"sentDateTime": "2020-01-29T16:17:23Z", "conversationId": "AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=", "isDraft": false, "internetMessageId": "<MWHPR2201MB1135CC1DDFCD65AD5BF1DD8AB1050@MWHPR2201MB1135.namprd22.prod.outlook.com>", "id": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=", "isReadReceiptRequested": false, "subject": "test text area body", "lastModifiedDateTime": "2020-02-03T16:46:41Z", "bodyPreview": "test text area body", "from": {"emailAddress": {"name": "Jack Up", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, 
+                      "flag": {"flagStatus": "notFlagged"}, 
+                      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity", "replyTo": [], "changeKey": "CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/", "receivedDateTime": "2020-01-29T16:17:27Z", "parentFolderId": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=", "body": {"content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n", "contentType": "html"}, "isDeliveryReceiptRequested": false, "importance": "normal", "toRecipients": [{"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, {"emailAddress": {"name": "Resilient User 2", "address": "resilient3@securitypocdemos.onmicrosoft.com"}}], "ccRecipients": [], "isRead": true, "categories": [], "sender": {"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "createdDateTime": "2020-01-29T16:17:26Z", "webLink": "https://outlook.office365.com/owa/?ItemID=Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem", "conversationIndex": "AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==", "hasAttachments": false, "bccRecipients": [], "inferenceClassification": "focused", "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\""}',
+              'reason': None, 
+              'version': '1.0'}
 ```
 
 </p>
@@ -654,6 +594,11 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+The workflow Write Message JSON as Note calls the Get Message function and write the JSON contents returned from MS Graph API to an incident note.  
+
+![screenshot: fn-exchange-online-get-message](./screenshots/EXO-get-message-workflow.png)
+
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -682,17 +627,10 @@ incident.addNote(noteText)
 </p>
 </details>
 
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
-</p>
-</details>
-
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+  ![screenshot: fn-exchange-online-get-message-rule](./screenshots/EXO-get-message-rule.png)
 
 </p>
 </details>
@@ -941,7 +879,85 @@ The example Move Message to Folder rule works off the Exchange Online Message Qu
 </details>
 
 ---
+## Function - Exchange Online: Write Message as Attachment
+This function will get the mime content of an Exchange Online message and write it as an incident attachment.  The attachment file name is an optional parameter and the functional will use a default message-{email-address}-{message-ID}.eml filename if none is specified.
 
+![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
+| `task_id` | `number` | No | `-` | - |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_attachment_name` | `text` | No | `my-message.eml` | The name of the attachment file to which message is written. |
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {'inputs': {u'incident_id': 2099, 
+                      u'exo_attachment_name': None, 
+                      u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
+                       u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},
+           'metrics': {'package': 'fn-exchange-online', 
+                       'timestamp': '2020-02-03 14:54:13', 
+                       'package_version': '1.0.0', 
+                       'host': 'annmarie-mbp.cambridge.ibm.com', 
+                       'version': '1.0', 'execution_time_ms': 5929}, 
+            'success': True, 'content': {'attachment_name': u'my-message.eml'}, 
+            'raw': '{"attachment_name": "my-message.eml"}', 
+            'reason': None, 
+            'version': '1.0'}
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+#inputs.task_id = task.id
+inputs.exo_attachment_name = rule.properties.exo_attachment_name
+inputs.exo_email_address = row.exo_dt_email_address
+inputs.exo_messages_id = row.exo_dt_message_id
+
+```
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The example Write Message EML as Attachment rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Write Message as Attachment  rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message content can not be retrieed and written anymore.
+
+![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
+
+</p>
+</details>
+</p>
+</details>
+
+---
 
 ## Data Table - Exchange Online Message Query Results
 
