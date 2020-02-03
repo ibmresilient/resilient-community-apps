@@ -56,7 +56,7 @@ Resilient Integration with Exchange Online provides the capability to access and
 
 ---
 ## Function - Exchange Online: Write Message as Attachment
-This function will get the mime content of an Exchange Online message and write it as an incident attachment.
+This function will get the mime content of an Exchange Online message and write it as an incident attachment.  The attachment file name is an optional parameter and the functional will use a default message-{email-address}-{message-ID}.eml filename if none is specified.
 
 ![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
 
@@ -77,10 +77,19 @@ This function will get the mime content of an Exchange Online message and write 
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'inputs': {u'incident_id': 2099, 
+                      u'exo_attachment_name': None, 
+                      u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
+                       u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},
+           'metrics': {'package': 'fn-exchange-online', 
+                       'timestamp': '2020-02-03 14:54:13', 
+                       'package_version': '1.0.0', 
+                       'host': 'annmarie-mbp.cambridge.ibm.com', 
+                       'version': '1.0', 'execution_time_ms': 5929}, 
+            'success': True, 'content': {'attachment_name': u'my-message.eml'}, 
+            'raw': '{"attachment_name": "my-message.eml"}', 
+            'reason': None, 
+            'version': '1.0'}
 }
 ```
 
@@ -127,7 +136,7 @@ Below is a screen shot of an example Note after a message is moved to a folder:
 
 <details><summary>Example Rule:</summary>
 <p>
-The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
+The example Write Message EML as Attachment rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Write Message as Attachment  rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message content can not be retrieed and written anymore.
 
 ![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
 
