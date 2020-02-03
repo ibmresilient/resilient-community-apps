@@ -19,6 +19,14 @@
 ### Pre-Processing Script
 ```python
 inputs.aws_iam_user_name = row.UserName
+# Test password to see it complies with basic password policy.
+err_msg = "The new password needs be minimum 8 characters in length and have at least 1 uppercase and 1 lowercase character."
+if len(rule.properties.aws_iam_password) < 8:
+    raise ValueError(err_msg)
+if not any(c.isupper() for c in rule.properties.aws_iam_password):
+    raise ValueError(err_msg)
+if not any(c.islower() for c in rule.properties.aws_iam_password):
+    raise ValueError(err_msg)
 inputs.aws_iam_password = rule.properties.aws_iam_password
 inputs.aws_iam_password_reset_required = rule.properties.aws_iam_password_reset_required
 ```

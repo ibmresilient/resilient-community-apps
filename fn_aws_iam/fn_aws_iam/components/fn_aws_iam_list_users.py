@@ -35,6 +35,8 @@ class FunctionComponent(ResilientComponent):
         param aws_iam_user_filter: (optional) User filter used to refined user data returned.
         param aws_aim_group_filter: (optional)Group filter used to refined user data returned.
         param aws_aim_policy_filter: (optional) Policy filter used to refined user data returned.
+        param aws_iam_access_key_filter: (optional) Policy filter used to refined user data returned.
+        param aws_iam_query_type: (optional) Policy filter used to determin type of query.
         """
         try:
             params = transform_kwargs(kwargs) if kwargs else {}
@@ -58,9 +60,9 @@ class FunctionComponent(ResilientComponent):
 
             # Get a list of all enabled filters.
             enabled_filters = [f for f in [aws_iam_user_filter, aws_iam_group_filter, aws_iam_policy_filter,
-                                               aws_iam_access_key_filter] if f is not None]
+                                           aws_iam_access_key_filter] if f is not None]
             # Test any enabled filters to ensure they are valid regular expressions.
-            for ef in (enabled_filters):
+            for ef in enabled_filters:
                 if not is_regex(ef):
                     raise ValueError("The query filter '{}' is not a valid regular expression.".format(repr(ef)))
 
@@ -78,6 +80,7 @@ class FunctionComponent(ResilientComponent):
                 user_filter, group_filter, policy_filter, access_key_filter = ({} for _ in range(4))
                 if aws_iam_user_filter:
                     user_filter["UserName"] = aws_iam_user_filter
+
                 if aws_iam_group_filter:
                     group_filter["GroupName"] = aws_iam_group_filter
                 if aws_iam_policy_filter:
@@ -88,7 +91,7 @@ class FunctionComponent(ResilientComponent):
                 rtn_users = []
                 rtn_users = iam_cli.get("list_users", paginate=True, results_filter=user_filter, return_filtered=True)
                 # The user result will be returned as a tuple of filtered count and filtered user list if a filter
-                # is specified . The count is not used.
+                # is specified. The count is not used.
                 # The parameter return_filtered (Boolean) asks the request query to return the filtered result in the
                 # result tuple.
                 if isinstance(rtn_users, tuple):
@@ -113,81 +116,94 @@ class FunctionComponent(ResilientComponent):
 
         :param rtn_users: Basic user results list returned from AWS IAM lookup.
         :param iam_cli: The AWS IAM client instance.
+        :param query_type: The query type to be executed can be either "users" or "access_keys".
         :param group_filter: The group filter applied by the integration.
         :param policy_filter: The group filter applied by the integration.
+        :param access_key_filter: The group filter applied by the integration.
         :return: Enhanced user results.
         """
-        # Boolean to ask the request query to return the filtered result in a result tuple.
+        # Boolean to ask the request query to return the filtered result instead of full result in a result tuple.
         return_filtered = bool(query_type == "access_keys")
         rtn = []
+        # Get a shortcut to this class.
+        cls = FunctionComponent
+        user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
+        # Property query lookup table.
+        prop_params = [
+            ["Groups", "list_groups_for_user", group_filter, user_groups],
+            ["Policies", "list_attached_user_policies", policy_filter, user_policies],
+            ["AccessKeyIds", "list_access_keys", access_key_filter, user_access_key_ids],
+            ["Tags", "list_user_tags", None, user_tags]
+        ]
         for i in range(len(rtn_users)):
+            skip_prop = False
             user = rtn_users[i]
-            # When a filter is defined for groups or polices the 'group_count' or 'policy_count' will be returned in
-            # the result as a tuple value. In either case if the count is 'True' i.e. > 0 the user and filtered
-            # properties (group or policy) are included in the result, otherwise the user is dropped from the result.
-            group_count = 0
-            policy_count = 0
-            access_key_count = 0
-            # Only perform following queries if the list query type is for 'users'
-            if query_type and query_type.lower() == "users":
-                user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
-                # Add extra data for each user. Filtered count is also returned when a filter is defined for groups.
-                user_groups = iam_cli.get("list_groups_for_user", paginate=True, UserName=user["UserName"],
-                                          results_filter=group_filter)
-                # The group result will be returned as a tuple of filtered count and filtered group list if a filter is
-                # specified, otherwise it will be a list of groups.
-                if isinstance(user_groups, tuple):
-                    (group_count, user_groups) = user_groups
-                if user_groups:
-                    if group_filter and not group_count:
-                        # If filter was specified and no filtered count returned drop user entry.
-                        continue
-                    user["Groups"] = user_groups
-                elif group_filter:
-                    # If we get no user access groups returned and filter was specified drop user entry.
-                    continue
-                # Add extra data for each user. Filtered count is also returned when a filter is defined for polices.
-                user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=user["UserName"],
-                                            results_filter=policy_filter, return_filtered=return_filtered)
-                # The policy result will be returned as a tuple of filtered count and filtered policy list if
-                # a filter is specified, otherwise it will be a list of policies.
-                if isinstance(user_policies, tuple):
-                    (policy_count, user_policies) = user_policies
-                if user_policies:
-                    if policy_filter and not policy_count:
-                        # If filter was specified and no filtered count returned drop user entry.
-                        continue
-                    user["Policies"] = user_policies
-                elif policy_filter:
-                    # If we get no user policies returned and the filter was specified drop user entry.
-                    continue
-            # Add extra data for each user. Filtered count is also returned when a filter is defined for polices.
-            user_access_key_ids = iam_cli.get("list_access_keys", paginate=True, UserName=user["UserName"],
-                                              results_filter=access_key_filter, return_filtered=return_filtered)
-            # The access key result will be returned as a tuple of filtered count and filtered access list if a filter
-            # is specified, otherwise it will be a list of access keys.
-            if isinstance(user_access_key_ids, tuple):
-                (access_key_count, user_access_key_ids) = user_access_key_ids
-            if user_access_key_ids:
-                if access_key_filter and not access_key_count:
-                    # If filter was specified and no filtered count returned drop user entry.
-                    continue
-                for j in range(len(user_access_key_ids)):
-                    # Only perform following queries if the list query type is for 'access_keys'.
-                    if not query_type or query_type.lower() == "access_keys":
-                        user_access_key_ids[j]["key_last_used"] = \
-                            iam_cli.get("get_access_key_last_used", AccessKeyId=user_access_key_ids[j]['AccessKeyId'])
-                user["AccessKeyIds"] = user_access_key_ids
-            elif access_key_filter:
-                # If we get no user access keys returned and filter was specified drop user entry.
+            user_name = user["UserName"]
+            # When a filter is defined for groups, polices or access key ids the 'group_count', 'policy_count' or
+            # 'access_key_filter' will be returned in the result as a tuple value. In all casees if the count is
+            # 'True' i.e. > 0 the user and non-filtered properties (groups, policies, access key ids) are included in
+            # the result, otherwise the user is dropped from the result.
+            for prop_param in prop_params:
+                # Don't perform property lookup if query_type = "access_keys" and the query is for groups, policies
+                # or tags.
+                if query_type and query_type.lower() == "access_keys" and prop_param[0] in ["Groups", "Policies",
+                                                                                            "Tags"]:
+                    pass
+                else:
+                    user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
+                    (skip_prop, prop_param[3]) = cls.process_user_property(iam_cli, prop_param[1], user_name,
+                                                                            prop_param[2], return_filtered)
+                    if skip_prop:
+                        break
+                    if prop_param[3]:
+                        if prop_param[0] == "AccessKeyIds":
+                            for j in range(len(prop_param[3])):
+                                # Only perform following queries if the list query type is for 'access_keys'.
+                                if not query_type or query_type.lower() == "access_keys":
+                                    prop_param[3][j]["key_last_used"] = \
+                                        iam_cli.get("get_access_key_last_used",
+                                                    AccessKeyId=prop_param[3][j]['AccessKeyId'])
+                        user[prop_param[0]] = prop_param[3]
+            # Skip user if boolean is set to 'True' in inner loop.
+            if skip_prop:
                 continue
-
-            # Only perform following queries if the list query type is for 'users;'.
-            if query_type and query_type.lower() == "users":
-                user_tags = iam_cli.get("list_user_tags", UserName=user["UserName"])
-                if user_tags:
-                    user["Tags"] = user_tags
 
             rtn.append(user)
 
         return rtn
+
+
+    @staticmethod
+    def process_user_property(iam_cli, op, user_name, results_filter, return_filtered):
+        """ Get properties data for AWS IAM users.
+        Properties can be any of groups, policies, access key ids or tags.
+
+        :param iam_cli: The AWS IAM client instance.
+        :param op: The AWS IAM op to execute.
+        :param user_name: The AWS IAM user name.
+        :param results_filter: The user property filter for groups, policies or access key ids.
+        :param return_filtered: Boolean to indicate where full or filtered result should be returned.
+        :return: User properties for groups, policies or access key ids.
+        """
+        skip_prop = False
+        prop_count = 0
+        user_prop = iam_cli.get(op, paginate=True, UserName=user_name, results_filter=results_filter,
+                                return_filtered=return_filtered)
+        # Filtered count can also be returned when a filter is defined for the property query.
+        # The result will be returned as a tuple of filtered count and filtered property list if a filter is
+        # specified, otherwise it will be a list of properties of type specified by AWS IAM query op.
+        if isinstance(user_prop, tuple):
+            (prop_count, user_prop) = user_prop
+
+        if user_prop:
+            # A property list is returned for the query.
+            if results_filter and not prop_count:
+                # If we get here we get a property list and have no property count.
+                # However a filter was specified so return 'True' to skip entry.
+                skip_prop = True
+        elif results_filter:
+            # An empty list can be a legitimate result, however if we get here and we specified a filter but no property
+            # list was returned return 'True' to skip entry.
+            skip_prop = True
+
+        return (skip_prop, user_prop)

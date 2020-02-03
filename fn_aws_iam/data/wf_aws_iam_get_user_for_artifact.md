@@ -58,7 +58,11 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 def main():
     note_text = ''
     if CONTENT is not None and len(CONTENT) > 0:
-        if len(CONTENT) == 1:
+        if "Status" in CONTENT and CONTENT["Status"] == "NoSuchEntity":
+            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist " \
+                         "for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        elif len(CONTENT) == 1:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
                         "<b>{2}</b>  for Resilient function <b>{3}</b>"\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)

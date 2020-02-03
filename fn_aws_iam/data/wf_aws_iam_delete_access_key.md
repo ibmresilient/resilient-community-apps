@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: Delete Access Key
 
-
 ## Function - AWS IAM: Delete Access Keys
 
 ### API Name
@@ -62,17 +61,17 @@ def main():
                 no_such_entity += 1
                 no_such_entity_keys.append(CONTENT[i]["AccessKeyId"])
         if deleted_keys:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> deleted " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(deleted_keys), deleted_keys, INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Ids <b>{1}</b> deleted " \
+                        "for Resilient function <b>{2}</b>".format(WF_NAME, ''.join(deleted_keys),  FN_NAME)
         if no_such_entity:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(no_such_entity_keys), no_such_entity_keys, INPUTS["aws_iam_user_name"], FN_NAME)
-        row.AccessKeyIds = ""
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
+                        "for Resilient function <b>{2}</b>"\
+                .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
+        row.Status = ""
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
-            .format(WF_NAME, FN_NAME)
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
+        "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>"\
+            .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":

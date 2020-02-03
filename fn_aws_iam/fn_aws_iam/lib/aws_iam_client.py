@@ -181,6 +181,12 @@ class AwsIamClient():
                     result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
                 result.extend(response[result_type])
 
+        except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     op, kwargs, "NoSuchEntityException")
+
+            return {"Status": "NoSuchEntity"}
+
         except Exception as int_ex:
             LOG.error("ERROR in paginator with operation: '%s' and args: '%s', Got exception: %s",
                       op, kwargs, int_ex.__repr__())
@@ -202,7 +208,7 @@ class AwsIamClient():
         else:
             return result
 
-    def get(self, op=None, paginate=False, return_filtered=False, **kwargs):
+    def get(self, op=None, paginate=False, results_filter=None, return_filtered=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
         Example calls include 'get_user' and 'get_user_tags', 'list_users'.
         The calls will translate to actual 'get' or query operations. The operation will return
@@ -213,8 +219,8 @@ class AwsIamClient():
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
-        if paginate:
-            return self.paginate(op, return_filtered=return_filtered, **kwargs)
+        if paginate and self.iam.can_paginate(op):
+            return self.paginate(op, results_filter=results_filter, return_filtered=return_filtered, **kwargs)
 
         result = []
         result_type = None

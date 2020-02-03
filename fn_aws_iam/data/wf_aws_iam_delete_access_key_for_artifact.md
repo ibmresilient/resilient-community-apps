@@ -93,8 +93,8 @@ def main():
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
 
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned access key " \
-                     "<b>{1}</b> for Resilient function <b>{2}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The access key <b>{1}</b> not found " \
+                     "for Resilient function <b>{2}</b>"\
           .format(WF_NAME, INPUTS["aws_iam_access_key_filter"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

@@ -75,7 +75,7 @@ def main():
     note_text = ''
     if CONTENT is not None and len(CONTENT) > 0:
         if "Status" in CONTENT and CONTENT["Status"] == "NoSuchEntity":
-            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exists <b>{1}</b> " \
+            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist " \
                          "for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.Status = "Deleted"
@@ -100,12 +100,13 @@ def main():
                         else:
                             row[f] = ','.join(u[f])
         else:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
-                        "Resilient function <b>{3}</b>".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
+                        "<b>{2}</b> for Resilient function <b>{3}</b>"\
+                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
             row.LoginProfileExists = "NO"
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
-            .format(WF_NAME, FN_NAME)
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for user " \
+                     "<b>{1}</b> for Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
