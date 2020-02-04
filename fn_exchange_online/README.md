@@ -86,7 +86,7 @@ Resilient Integration with Exchange Online provides the capability to access and
     * Scripts.Edit
     * Workflows.Create
     * Workflow.Edit
-   Microsoft Graph API "Application permissions":
+
 * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 * The following Microsoft Graph API "Application permissions" (See Microsoft Azure App Configuration section below to configure):

@@ -18,13 +18,13 @@
 - [Key Features](#key-features)
 
 - [Function - Exchange Online: Create Meeting](#function---exchange-online-create-meeting)
-- [Function - Exchange Online: Send Message](#function---exchange-online-send-message)
-- [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
-- [Function - Exchange Online: Query Messages](#function---exchange-online-query-messages)
 - [Function - Exchange Online: Delete Message](#function---exchange-online-delete-message)
+- [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
 - [Function - Exchange Online: Get Message](#function---exchange-online-get-message)
 - [Function - Exchange Online: Get User Profile](#function---exchange-online-get-user-profile)
 - [Function - Exchange Online: Move Message to Folder](#function---exchange-online-move-message-to-folder)
+- [Function - Exchange Online: Query Messages](#function---exchange-online-query-messages)
+- [Function - Exchange Online: Send Message](#function---exchange-online-send-message)
 - [Function - Exchange Online: Write Message as Attachment](#function---exchange-online-write-message-as-attachment)
 - [Data Table - Exchange Online Message Query Results](#data-table---exchange-online-message-query-results)
 - [Rules](#rules)
@@ -56,11 +56,10 @@ Resilient Integration with Exchange Online provides the capability to access and
 * Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
----
-## Function - Exchange Online: Delete Message
-Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
+## Function - Exchange Online: Send Message
+This function will create a message and send to the specified recipients.
 
- ![screenshot: fn-exchange-online-delete-message ](./screenshots/EXO-delete-message-function.png)
+ ![screenshot: fn-exchange-online-send-message ](./screenshots/EXO-send-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -68,8 +67,9 @@ Delete a message in the specified user's email address mailbox.  The email addre
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders id  |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_message_body` | `text` | No | `message body text` | message body |
+| `exo_message_subject` | `text` | No | `message subject` | message subject |
+| `exo_recipients` | `text` | Yes | `-` | comma separated list of message recipients |
 
 </p>
 </details>
@@ -79,20 +79,22 @@ Delete a message in the specified user's email address mailbox.  The email addre
 
 ```python
 results = {
-   'inputs': {u'exo_mailfolders_id': None, 
-              u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},           
+    'inputs': {u'exo_recipients': u'resilient2@securitypocdemos.onmicrosoft.com,        resilient3@securitypocdemos.onmicrosoft.com', 
+              u'exo_message_subject': u'Please investigate', 
+              u'exo_message_body': u'<div class="rte"><div>Can you look into this?</div><div><br /></div><div>Thanks!</div></div>', 
+              u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+              
     'metrics': {'package': 'fn-exchange-online', 
-                'timestamp': '2020-02-04 09:08:13', 
+                'timestamp': '2020-02-04 11:18:16', 
                 'package_version': '1.0.0', 
                 'host': 'MacBook-Pro.local', 
                 'version': '1.0', 
-                'execution_time_ms': 1300},
-    'success': True,
+                'execution_time_ms': 796}, 
+    'success': True, 
     'content': {'value': True}, 
     'raw': '{"value": true}', 
     'reason': None, 
-    'version': '1.0'
-}
+    'version': '1.0'}
 ```
 
 </p>
@@ -100,18 +102,18 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
-The example Delete Message workflow works off the Query Results data table.
-After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table will be updated from Active to Deleted in red text.  At this point other data table rules that work on a message will not be active because the message is deleted.
+The Example: Exchange Online Send Message workflow will call the Exchange Online Send Message function and write an incident note containing the results of the function.
 
-![screenshot: fn-exchange-online-delete-message-workflow](./screenshots/EXO-delete-message-workflow.png)
+![screenshot: fn-exchange-online-send-message-workflow](./screenshots/EXO-send-message-workflow.png)
 
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
 ```python
-inputs.exo_email_address = row.exo_dt_email_address
-inputs.exo_messages_id = row.exo_dt_message_id
-inputs.exo_mailfolders_id = None
+inputs.exo_email_address   = inputs.exo_email_address   if rule.properties.exo_message_sender_address is None else rule.properties.exo_message_sender_address
+inputs.exo_recipients      = inputs.exo_recipients      if rule.properties.exo_message_recipients     is None else rule.properties.exo_message_recipients
+inputs.exo_message_subject = inputs.exo_message_subject if rule.properties.exo_message_subject is None else rule.properties.exo_message_subject
+inputs.exo_message_body    = inputs.exo_message_send_body.content if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
 ```
 
 </p>
@@ -122,30 +124,35 @@ inputs.exo_mailfolders_id = None
 
 ```python
 if results.success:
-  # The message was deleted, so update "status" column in data table.
-  text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
-  row['exo_dt_status'] = helper.createRichText(text)
-elif results.content["error"] is not None: 
-  # There is an "item not found" error mostly likely here
-  row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
+  noteText = u"Exchange Online message sent\n   From: {0}\n   To: {1}\n   Subject: {2}\n   Body: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"], results.inputs["exo_message_subject"], results.inputs["exo_message_body"])
+else:
+  noteText = u"Exchange Online message NOT sent\n   From: {0}\n  To: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"])
+
+incident.addNote(noteText)
 ```
 
 </p>
 </details>
 <details><summary>Example Workflow Output:</summary>
 <p>
+The following is a sample incident note that is created from Example: Exchange Online Send Message workflow:
 
-![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-message-workflow-output.png)
+![screenshot: fn-exchange-online-send-message-workflow-output](./screenshots/EXO-send-message-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-The Example: Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
+The following Example: Exchange Online Send Message incident menu item rule is included to send a message via Exchange Online:
 
-![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule.png)
 
+<p>
+
+When the Example Send Message rule is initiated the following rule activity popup dialog will appear prompting for input on the message to send:
+
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule-activity.png)
 </p>
 </details>
 
@@ -234,92 +241,6 @@ incident.addNote(noteText)
 <p>
 ![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
 
-</p>
-</details>
-
-</p>
-</details>
-
----
-## Function - Exchange Online: Send Message
-This function will create a message and send to the specified recipients.
-
- ![screenshot: fn-exchange-online-send-message ](./screenshots/EXO-send-message-function.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_recipients` | `text` | Yes | `-` | comma separated list of message recipients |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_email_address   = inputs.exo_email_address   if rule.properties.exo_message_sender_address is None else rule.properties.exo_message_sender_address
-inputs.exo_recipients      = inputs.exo_recipients      if rule.properties.exo_message_recipients     is None else rule.properties.exo_message_recipients
-inputs.exo_message_subject = inputs.exo_message_subject if rule.properties.exo_message_subject is None else rule.properties.exo_message_subject
-inputs.exo_message_body    = inputs.exo_message_send_body.content if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  noteText = u"Exchange Online message sent\n   From: {0}\n   To: {1}\n   Subject: {2}\n   Body: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"], results.inputs["exo_message_subject"], results.inputs["exo_message_body"])
-else:
-  noteText = u"Exchange Online message NOT sent\n   From: {0}\n  To: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"])
-
-incident.addNote(noteText)
-```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-send-message-workflow-output](./screenshots/EXO-send-message-workflow-output.png)
-
-</p>
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-
-![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule.png)
-
-<p>
-
-When the Example Send Message rule is initiated the following rule activity popup dialog will appear prompting for input for the the message to send:
- 
-![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule-activity.png)
 </p>
 </details>
 
@@ -554,6 +475,101 @@ if len(note) > note_len:
 </p>
 </details>
 
+---
+## Function - Exchange Online: Delete Message
+Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
+
+ ![screenshot: fn-exchange-online-delete-message ](./screenshots/EXO-delete-message-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders id  |
+| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+   'inputs': {u'exo_mailfolders_id': None, 
+              u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},           
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-02-04 09:08:13', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 1300},
+    'success': True,
+    'content': {'value': True}, 
+    'raw': '{"value": true}', 
+    'reason': None, 
+    'version': '1.0'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+The example Delete Message workflow works off the Query Results data table.
+After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table will be updated from Active to Deleted in red text.  At this point other data table rules that work on a message will not be active because the message is deleted.
+
+![screenshot: fn-exchange-online-delete-message-workflow](./screenshots/EXO-delete-message-workflow.png)
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.exo_email_address = row.exo_dt_email_address
+inputs.exo_messages_id = row.exo_dt_message_id
+inputs.exo_mailfolders_id = None
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  # The message was deleted, so update "status" column in data table.
+  text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
+  row['exo_dt_status'] = helper.createRichText(text)
+elif results.content["error"] is not None: 
+  # There is an "item not found" error mostly likely here
+  row['exo_dt_status'] = helper.createRichText(results.content["error"]["code"])
+```
+
+</p>
+</details>
+<details><summary>Example Workflow Output:</summary>
+<p>
+
+![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-message-workflow-output.png)
+
+</p>
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The Example: Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
+
+![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
+
+</p>
+</details>
+
+</p>
+</details>
 
 ---
 ## Function - Exchange Online: Get Message
@@ -862,15 +878,15 @@ inputs.exo_destination_mailfolder_id = rule.properties.exo_destination_mailfolde
 <p>
 
 ```python
-# Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
 if results.content["error"] is not None:
+  # Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
   noteText = u"Exchange Online message NOT FOUND: \n email address: {0}\n message ID: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"])
   status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Not Found")
   row['exo_dt_status'] = helper.createRichText(status_text)
 else:
-  noteText = u"Exchange Online email address: {0}\nmessage ID:\n{1} moved to folder {2}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"], results.inputs["exo_destination_mailfolder_id"]["name"] )
-  status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Moved")
-  row['exo_dt_status'] = helper.createRichText(status_text)
+  # When a message is moved it's ID changes, so update the new message ID into the data table
+  noteText = u"Exchange Online email address: {0}\n\n  Message has been moved to folder: {1}\n\n  Old message ID: {2} \n\n  New message ID: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_destination_mailfolder_id"]["name"], results.inputs["exo_messages_id"], results.content["new_message_id"])
+  row['exo_dt_message_id'] = results.content["new_message_id"] 
 incident.addNote(noteText)
 ```
 
