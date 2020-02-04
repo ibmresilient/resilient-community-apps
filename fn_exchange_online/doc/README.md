@@ -16,7 +16,6 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
-
 - [Function - Exchange Online: Create Meeting](#function---exchange-online-create-meeting)
 - [Function - Exchange Online: Delete Message](#function---exchange-online-delete-message)
 - [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
