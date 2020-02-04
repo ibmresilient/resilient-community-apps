@@ -716,6 +716,7 @@ The example Move Message to Folder rule works off the Exchange Online Message Qu
 
 </p>
 </details>
+
 ---
 
 ## Function - Exchange Online: Query Messages
