@@ -1113,7 +1113,8 @@ The example Write Message EML as Attachment rule works off the Exchange Online M
 
 ## Data Table - Exchange Online Message Query Results
 
- ![screenshot: dt-exchange-online-message-query-results](./screenshots/dt-exchange-online-message-query-results.png)
+ ![screenshot: dt-exchange-online-message-query-results](./screenshots/EXO-dt-message-query-results-datatable.png)
+
 
 #### API Name:
 exo_message_query_results_dt
