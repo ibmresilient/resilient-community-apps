@@ -56,25 +56,33 @@ Resilient Integration with Exchange Online provides the capability to access and
 * Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
----
-## Function - Exchange Online: Create Meeting
-This function will create a meeting event in the organizer's Outlook calendar and send a calendar event mail message to the meeting participants inviting them to the meeting.
+## Exchange Online Integration Use Case for Phishing Investigation
 
- ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
+<p>
+
+
+
+---
+
+## Function - Exchange Online: Query Messages
+The Exchange Online: Query Message function will query Exchange Online to find messages matching the specified input parameters.  A list of messages matching the search criteria is returned from the function.  The function will search for messages matching the following criteria:
+*  
+
+ ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `exo_meeting_body` | `text` | Yes | `-` | Meeting message body |
-| `exo_meeting_email_address` | `text` | Yes | `user@example.com` | Email address of meeting coordinator |
-| `exo_meeting_end_time` | `datetimepicker` | Yes | `-` | End date and time for meeting |
-| `exo_meeting_location` | `text` | No | `-` | - |
-| `exo_meeting_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendee email addresses |
-| `exo_meeting_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendee email addresses |
-| `exo_meeting_start_time` | `datetimepicker` | Yes | `-` | Meeting start date and time |
-| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subect |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
+| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
+| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
+| `exo_message_body` | `text` | No | `message body text` | message body |
+| `exo_message_subject` | `text` | No | `message subject` | message subject |
+| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
 
 </p>
 </details>
@@ -95,18 +103,24 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+
+![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-workflow.png)
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
 ```python
-inputs.exo_meeting_email_address = inputs.exo_meeting_email_address  if rule.properties.exo_meeting_email_address is None else rule.properties.exo_meeting_email_address
-inputs.exo_meeting_start_time = inputs.exo_meeting_start_time if rule.properties.exo_meeting_start_time is None else rule.properties.exo_meeting_start_time
-inputs.exo_meeting_end_time = inputs.exo_meeting_end_time if rule.properties.exo_meeting_end_time is None else rule.properties.exo_meeting_end_time
-inputs.exo_meeting_subject = inputs.exo_meeting_subject if rule.properties.exo_meeting_subject is None else rule.properties.exo_meeting_subject
-inputs.exo_meeting_body = inputs.exo_meeting_body if rule.properties.exo_meeting_body.content is None else rule.properties.exo_meeting_body.content
-inputs.exo_meeting_required_attendees = inputs.exo_meeting_required_attendees if rule.properties.exo_meeting_required_attendees is None else rule.properties.exo_meeting_required_attendees
-inputs.exo_meeting_optional_attendees = inputs.exo_meeting_optional_attendees if rule.properties.exo_meeting_optional_attendees is None else rule.properties.exo_meeting_optional_attendees
-inputs.exo_meeting_location = inputs.exo_meeting_location if rule.properties.exo_meeting_location is None else rule.properties.exo_meeting_location
+# Get the email address of the user whose mailbox will be queried.
+inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
+
+# Get the search criteria from the activity rules if available. 
+inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
+inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
+inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
+inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
+inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
+inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
+inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
 ```
 
 </p>
@@ -116,27 +130,55 @@ inputs.exo_meeting_location = inputs.exo_meeting_location if rule.properties.exo
 <p>
 
 ```python
-if results.success:
-  noteText = u"Exchange Online created meeting\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"],results.pretty_string)
-else:
-  noteText = u"Exchange Online meeting was NOT created\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"], results.pretty_string)
+from java.util import Date
 
-incident.addNote(noteText)
+note = u"Exchange Online Query Multiple users:\n"
+note_len = len(note)
+
+# Add each email as a row in the query results data table
+for user in results["content"]:
+  # If an email address is not found post to a note.
+  if user["status_code"] == 404:
+    line = u"email address not found: {}\n".format(user["email_address"])
+    note = note + line
+    
+  for email in user["email_list"]:
+    message_row = incident.addRow("exo_message_query_results_dt")
+    message_row.exo_dt_query_date = Date()
+    message_row.exo_dt_message_id = email.id
+    message_row.exo_dt_received_date   = email.receivedDateTime
+    message_row.exo_dt_email_address = user["email_address"]
+    if email.sender:
+      message_row.exo_dt_sender_email = email.sender.emailAddress.address
+    else:
+      message_row.exo_dt_sender_email = ""
+    message_row.exo_dt_message_subject = email.subject
+    message_row.exo_dt_has_attachments = email.hasAttachments
+    if email.webLink:
+      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+      message_row.exo_dt_web_link = helper.createRichText(ref_html)
+    else:
+      message_row.exo_dt_web_link = ""
+ 
+    message_row.exo_dt_status = helper.createRichText("Active")
+
+# If any email addresses where not found post a note
+if len(note) > note_len:
+  incident.addNote(note)
 ```
 
 </p>
 </details>
 
+
 <details><summary>Example Rule:</summary>
 <p>
-The following Example: Exchange Online Create Meeting incident menu item rule is included to create a meeting via Exchange Online:
 
-![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
+![screenshot: fn-exchange-online-query-messages-rule](./screenshots/EXO-query-messages-rule.png)
 
+When the Example: Exchange Online Delete Messages from Query Results rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
 
-When the Example: Exchange Online Create Meeting rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message:
-
-![screenshot: fn-exchange-online-create-meeting-rule-activity](./screenshots/EXO-create-meeting-rule-activity.png)
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-query-messages-rule-activity.png)
 
 </p>
 </details>
@@ -237,14 +279,15 @@ incident.addNote(note)
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-delete-from-query-workflow-output](./screenshots/EXO-delete-from-query-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+![screenshot: fn-exchange-online-delete-from-query-rule](./screenshots/EXO-delete-from-query-rule.png)
 
 </p>
 </details>
@@ -253,24 +296,24 @@ incident.addNote(note)
 </details>
 
 ---
-## Function - Exchange Online: Query Messages
-This function will query Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.
+## Function - Exchange Online: Create Meeting
+The Exchange Online: Create Meeting function will create a meeting event in the organizer's Outlook calendar and send a calendar event invitation message to the meeting participants.
 
- ![screenshot: fn-exchange-online-query-messages ](./screenshots/fn-exchange-online-query-messages.png)
+ ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
-| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
-| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
-| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
+| `exo_meeting_body` | `text` | Yes | `meeting message body` | Meeting message body |
+| `exo_meeting_email_address` | `text` | Yes | `user@example.com` | Email address of meeting coordinator |
+| `exo_meeting_end_time` | `datetimepicker` | Yes | `-` | End date and time for meeting |
+| `exo_meeting_location` | `text` | No | `-` | - |
+| `exo_meeting_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendee email addresses |
+| `exo_meeting_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendee email addresses |
+| `exo_meeting_start_time` | `datetimepicker` | Yes | `-` | Meeting start date and time |
+| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subect |
 
 </p>
 </details>
@@ -280,9 +323,25 @@ This function will query Exchange Online to find messages matching the specified
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'inputs': {
+          u'exo_meeting_end_time': 1581022800000, 
+          u'exo_meeting_optional_attendees': None, 
+          u'exo_meeting_subject': u'phishing meeting', 
+          u'exo_meeting_body': u'<div class="rte"><div>We need to talk about this!</div></div>', u'exo_meeting_required_attendees': u'resilient3@securitypocdemos.onmicrosoft.com, resilient2@securitypocdemos.onmicrosoft.com', 
+          u'exo_meeting_start_time': 1581004800000, 
+          u'exo_meeting_email_address': u'resilient2@securitypocdemos.onmicrosoft.com', u'exo_meeting_location': None}, 
+    'metrics': {'package': 'fn-exchange-online', 
+          'timestamp': '2020-02-04 13:30:45', 
+          'package_version': '1.0.0', 
+          'host': 'MacBook-Pro.local', 
+          'version': '1.0', 
+          'execution_time_ms': 1728}, 
+    'success': True, 
+      'content': {u'body': {u'content': u'', u'contentType': u'html'}, u'sensitivity': u'normal', u'locations': [], .....}', 
+    'reason': None, 
+    'version': '1.0',
+    'pretty_string': u'{\n    "body": {\n        "content": "",\n        "contentType": "html"\n    },\n    "sensitivity": "normal",\n    "locations": []"040000008200E00074C5B7101A82E0080000000096E4493689DBD501000000000000000010000000ADDA5C7497FB60469CE3850456D898C5",\n    "seriesMasterId": null,\n    "responseStatus": {\n        "response": "organizer",\n        "time": "0001-01-01T00:00:00Z"\n    },\n    "@odata.etag": "W/\\"SX/wDQMKnESReIRb/seOFAAAJWnN6Q==\\""\n}', 
+    'content': {u'body': {u'content': u'', u'contentType': u'html'}, u'sensitivity': u'normal', u'locations': [],..... "}'
 }
 ```
 
@@ -295,17 +354,14 @@ results = {
 <p>
 
 ```python
-# Get the email address of the user whose mailbox will be queried.
-inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
-
-# Get the search criteria from the activity rules if available. 
-inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
-inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
-inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
-inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
-inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
-inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
-inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
+inputs.exo_meeting_email_address = inputs.exo_meeting_email_address  if rule.properties.exo_meeting_email_address is None else rule.properties.exo_meeting_email_address
+inputs.exo_meeting_start_time = inputs.exo_meeting_start_time if rule.properties.exo_meeting_start_time is None else rule.properties.exo_meeting_start_time
+inputs.exo_meeting_end_time = inputs.exo_meeting_end_time if rule.properties.exo_meeting_end_time is None else rule.properties.exo_meeting_end_time
+inputs.exo_meeting_subject = inputs.exo_meeting_subject if rule.properties.exo_meeting_subject is None else rule.properties.exo_meeting_subject
+inputs.exo_meeting_body = inputs.exo_meeting_body if rule.properties.exo_meeting_body.content is None else rule.properties.exo_meeting_body.content
+inputs.exo_meeting_required_attendees = inputs.exo_meeting_required_attendees if rule.properties.exo_meeting_required_attendees is None else rule.properties.exo_meeting_required_attendees
+inputs.exo_meeting_optional_attendees = inputs.exo_meeting_optional_attendees if rule.properties.exo_meeting_optional_attendees is None else rule.properties.exo_meeting_optional_attendees
+inputs.exo_meeting_location = inputs.exo_meeting_location if rule.properties.exo_meeting_location is None else rule.properties.exo_meeting_location
 ```
 
 </p>
@@ -315,56 +371,27 @@ inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.proper
 <p>
 
 ```python
-from java.util import Date
+if results.success:
+  noteText = u"Exchange Online created meeting\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"],results.pretty_string)
+else:
+  noteText = u"Exchange Online meeting was NOT created\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"], results.pretty_string)
 
-note = u"Exchange Online Query Multiple users:\n"
-note_len = len(note)
-
-# Add each email as a row in the query results data table
-for user in results["content"]:
-  # If an email address is not found post to a note.
-  if user["status_code"] == 404:
-    line = u"email address not found: {}\n".format(user["email_address"])
-    note = note + line
-    
-  for email in user["email_list"]:
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
- 
-    message_row.exo_dt_status = helper.createRichText("Active")
-
-# If any email addresses where not found post a note
-if len(note) > note_len:
-  incident.addNote(note)
+incident.addNote(noteText)
 ```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+The following Example: Exchange Online Create Meeting incident menu item rule is included to create a meeting via Exchange Online:
+
+![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
+
+
+When the Example: Exchange Online Create Meeting rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+
+![screenshot: fn-exchange-online-create-meeting-rule-activity](./screenshots/EXO-create-meeting-rule-activity.png)
 
 </p>
 </details>
@@ -458,7 +485,7 @@ elif results.content["error"] is not None:
 
 <details><summary>Example Rule:</summary>
 <p>
-The Example: Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
+The Example: Exchange Online Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
 
 ![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
 
@@ -498,7 +525,7 @@ results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2Iw
                       'version': '1.0', '
                       'execution_time_ms': 654},
           'success': True, 
-          'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity",\n    "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\"",\n    "bccRecipients": [],\n    "body": {\n        "content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n",\n        "contentType": "html"\n    },\n    "bodyPreview": "test text area body",\n    "categories": [],\n    "ccRecipients": [],\n    "changeKey": "CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/",\n    "conversationId": "AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=",\n    "conversationIndex": "AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==",\n    "createdDateTime": "2020-01-29T16:17:26Z",\n    "flag": {\n        "flagStatus": "notFlagged"\n    },\n    "from": {\n        "emailAddress": {\n            "address": "resilient2@securitypocdemos.onmicrosoft.com",\n            "name": "Jack Up"\n        }\n    },\n    "hasAttachments": false,\n    "id": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=",\n    "importance": "normal",\n    "inferenceClassification": "focused",\n    "internetMessageId": "<MWHPR2201MB1135CC1DDFCD65AD5BF1DD8AB1050@MWHPR2201MB1135.namprd22.prod.outlook.com>",\n    "isDeliveryReceiptRequested": false,\n    "isDraft": false,\n    "isRead": true,\n    "isReadReceiptRequested": false,\n    "lastModifiedDateTime": "2020-02-03T16:46:41Z",\n    "parentFolderId": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=",\n    "receivedDateTime": "2020-01-29T16:17:27Z",\n    "replyTo": [],\n    "sender": {\n        "emailAddress": {\n            "address": "resilient2@securitypocdemos.onmicrosoft.com",\n            "name": "Resilient User 2"\n        }\n    },\n    "sentDateTime": "2020-01-29T16:17:23Z",\n    "subject": "test text area body",\n    "toRecipients": [\n        {\n            "emailAddress": {\n                "address": "resilient2@securitypocdemos.onmicrosoft.com",\n                "name": "Resilient USer 2"\n            }\n        },\n        {\n            "emailAddress": {\n                "address": "resilient3@securitypocdemos.onmicrosoft.com",\n                "name": "Resilient User 3"\n            }\n        }\n    ],\n    "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem"\n}', 
+          'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity",\n    "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\"",\n    "bccRecipients": [],\n    "body": {\n        "content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n",\n        "contentType": "html"\n    },\n    "bodyPreview": "test text area body",\n    "categories": [],\n    "ccRecipients": [],}......', 
           'content': {u'sentDateTime': u'2020-01-29T16:17:23Z', 
                       u'conversationId':u'AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=', 
                       u'isDraft': False, 
@@ -510,12 +537,10 @@ results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2Iw
                       u'bodyPreview': u'test text area body', 
                       u'from': {u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
                       u'flag': {u'flagStatus': u'notFlagged'}, 
-                      u'@odata.context': u"https://graph.microsoft.com/v1.0/$metadata#users('resilient2%40securitypocdemos.onmicrosoft.com')/messages/$entity", u'replyTo': [], u'changeKey': u'CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/', u'receivedDateTime': u'2020-01-29T16:17:27Z', u'parentFolderId': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=', u'body': {u'content': u'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n<meta content="text/html; charset=us-ascii">\r\n</head>\r\n<body>\r\n<div class="rte">\r\n<div>test text area body</div>\r\n</div>\r\n</body>\r\n</html>\r\n', u'contentType': u'html'}, u'isDeliveryReceiptRequested': False, u'importance': u'normal', u'toRecipients': [{u'emailAddress': {u'name': u'Jack Up', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, {u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient3@securitypocdemos.onmicrosoft.com'}}], u'ccRecipients': [], u'isRead': True, u'categories': [],
-                      u'sender': {u'emailAddress': {u'name': u'Resilient User 2', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
-                      u'createdDateTime': u'2020-01-29T16:17:26Z', u'webLink': u'https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem', u'conversationIndex': u'AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==', u'hasAttachments': False, u'bccRecipients': [], u'inferenceClassification': u'focused', 
-                      u'@odata.etag': u'W/"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/"'}, 'raw': '{"sentDateTime": "2020-01-29T16:17:23Z", "conversationId": "AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=", "isDraft": false, "internetMessageId": "<MWHPR2201MB1135CC1DDFCD65AD5BF1DD8AB1050@MWHPR2201MB1135.namprd22.prod.outlook.com>", "id": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=", "isReadReceiptRequested": false, "subject": "test text area body", "lastModifiedDateTime": "2020-02-03T16:46:41Z", "bodyPreview": "test text area body", "from": {"emailAddress": {"name": "Jack Up", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, 
-                      "flag": {"flagStatus": "notFlagged"}, 
-                      "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity", "replyTo": [], "changeKey": "CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/", "receivedDateTime": "2020-01-29T16:17:27Z", "parentFolderId": "AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAAAAD45IEka4IVS4DBeEtMPuSEAQBJf-ANAwqcRJF4hFv_x44UAAAinByvAAA=", "body": {"content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n", "contentType": "html"}, "isDeliveryReceiptRequested": false, "importance": "normal", "toRecipients": [{"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, {"emailAddress": {"name": "Resilient User 2", "address": "resilient3@securitypocdemos.onmicrosoft.com"}}], "ccRecipients": [], "isRead": true, "categories": [], "sender": {"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "createdDateTime": "2020-01-29T16:17:26Z", "webLink": "https://outlook.office365.com/owa/?ItemID=Bx44UAAAinByvAABJf%2FANAwqcRJF4hFv%2Bx44UAAAinIROAAA%3D&exvsurl=1&viewmodel=ReadMessageItem", "conversationIndex": "AQHV1r+WaPN8L7yd1E6zs7TSj+rzKw==", "hasAttachments": false, "bccRecipients": [], "inferenceClassification": "focused", "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\""}',
+                      .
+                      .
+                      .
+                      },
               'reason': None, 
               'version': '1.0'}
 ```
