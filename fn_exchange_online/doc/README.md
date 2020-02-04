@@ -61,136 +61,12 @@ Resilient Integration with Exchange Online provides the capability to access and
 <p>
 
 
-
----
-
-## Function - Exchange Online: Query Messages
-The Exchange Online: Query Message function will query Exchange Online to find messages matching the specified input parameters.  A list of messages matching the search criteria is returned from the function.  The function will search for messages matching the following criteria:
-*  
-
- ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-function.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
-| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
-| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
-| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-
-![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-workflow.png)
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-# Get the email address of the user whose mailbox will be queried.
-inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
-
-# Get the search criteria from the activity rules if available. 
-inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
-inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
-inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
-inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
-inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
-inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
-inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-from java.util import Date
-
-note = u"Exchange Online Query Multiple users:\n"
-note_len = len(note)
-
-# Add each email as a row in the query results data table
-for user in results["content"]:
-  # If an email address is not found post to a note.
-  if user["status_code"] == 404:
-    line = u"email address not found: {}\n".format(user["email_address"])
-    note = note + line
-    
-  for email in user["email_list"]:
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
- 
-    message_row.exo_dt_status = helper.createRichText("Active")
-
-# If any email addresses where not found post a note
-if len(note) > note_len:
-  incident.addNote(note)
-```
-
-</p>
-</details>
-
-
-<details><summary>Example Rule:</summary>
-<p>
-
-![screenshot: fn-exchange-online-query-messages-rule](./screenshots/EXO-query-messages-rule.png)
-
-When the Example: Exchange Online Delete Messages from Query Results rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
-
-![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-query-messages-rule-activity.png)
-
-</p>
-</details>
-
-</p>
-</details>
-
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
 This Exchange Online function will delete a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
 
- ![screenshot: fn-exchange-online-delete-messages-from-query-results ](./screenshots/fn-exchange-online-delete-messages-from-query-results.png)
+ ![screenshot: fn-exchange-online-delete-messages-from-query-results](./screenshots/EXO-delete-from_query-function.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -207,9 +83,7 @@ This Exchange Online function will delete a list of messages returned from the Q
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    
 }
 ```
 
@@ -218,6 +92,10 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+
+![screenshot: fn-exchange-delete-from-query-workflow](./screenshots/EXO-delete-from-query-workflow.png)
+
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -288,6 +166,12 @@ incident.addNote(note)
 <p>
 
 ![screenshot: fn-exchange-online-delete-from-query-rule](./screenshots/EXO-delete-from-query-rule.png)
+
+The Example: Exchange Online Delete Message From Query Results incident menu item rule will 
+bring up the rule activity popup dialog pictured below to prompt for input querying message to be deleted.
+See the Query function section for a description of querying.  
+
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-delete-from-query-rule-activity.png)
 
 </p>
 </details>
@@ -827,6 +711,214 @@ incident.addNote(noteText)
 The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
 
 ![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+</p>
+</details>
+
+</p>
+</details>
+---
+
+## Function - Exchange Online: Query Messages
+The Exchange Online: Query Message function will query Exchange Online to find messages matching the specified input parameters.  A list of messages matching the search criteria is returned from the function.  
+<p>
+The function will search over the following email accounts:
+
+* all mailboxes of a tenant (specify "all", "ALL", "all users")
+* a single email address
+* a comma separated list of email addressed
+<p>
+If no mail folder if specified, all folders and subdirectories are queried.
+The mail folder to be searched can be one of the list of Outlook "Well-known" folders:
+
+* archive
+* clutter
+* conflicts
+* conversationhistory
+* deleteditems
+* drafts
+* inbox
+* junkemail
+* localfailures
+* msgfolderroot
+* outbox
+* recoverableitemsdeletions
+* scheduled
+* searchfolders
+* sentitems
+<p>
+At least one of search criteria must be passed to the query messages function.
+The function will search for messages matching the following criteria:
+
+* Sender email address
+* Message received date/time start/end 
+* Message subject "contains" text
+* Message body "contains" text
+* Boolean flag indicating whether the message has an attachment
+
+<p>
+NOTE: the results of the Query Message function can be large.  Use the max_user and max_messages parameters in the app.config file to limit the number of users searched and the number of messages returned from a query.
+
+ ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
+| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
+| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
+| `exo_message_body` | `text` | No | `message body text` | message body |
+| `exo_message_subject` | `text` | No | `message subject` | message subject |
+| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+   'inputs': {u'exo_start_date': None,
+              u'exo_email_address_sender': None, 
+              u'exo_end_date': None, 
+              u'exo_message_subject': u'lunch', 
+              u'exo_has_attachments': None, 
+              u'exo_email_address': u'all', 
+              u'exo_mail_folders': None, 
+              u'exo_message_body': None},
+    'metrics': {'package': 'fn-exchange-online', 
+              'timestamp': '2020-02-04 15:36:12', 
+              'package_version': '1.0.0', 
+              'host': 'MacBook-Pro.local', 
+              'version': '1.0', 
+              'execution_time_ms': 9492}, 
+    'success': True, 
+    'content': [{'status_code': 200, 
+                'email_address': u'resilient2@securitypocdemos.onmicrosoft.com', 
+                'email_list': [{u'sentDateTime': u'2020-02-04T20:44:02Z', 
+                u'conversationId': u'AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQANIxI-VmHPNIslAVFC4yWrI=', 
+                u'internetMessageId': u'<MWHPR2201MB11359DA0C07AF09AB319DD9FB1030@MWHPR2201MB1135.namprd22.prod.outlook.com>', 
+                u'id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAAAAEJAABJf-ANAwqcRJF4hFv_x44UAAAlbtF2AAA=', u'isReadReceiptRequested': False, 
+                u'subject': u'lunch', 
+                u'lastModifiedDateTime': u'2020-02-04T20:44:04Z', 
+                u'bodyPreview': u"Let's have lunch at 12!", 
+                u'from': {u'emailAddress': {u'name': u'Resilient User 2', 
+                          u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                u'flag': {u'flagStatus': u'notFlagged'}, 
+                u'isDraft': False, 
+                u'replyTo': [], 
+                u'changeKey': u'CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAlac/G', u'receivedDateTime': u'2020-02-04T20:44:03Z', 
+                u'parentFolderId': u'AQMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAD_OSBJGuCFUuAwXhLTD7khAEASX-wDQMKnESReIRb-seOFAAAAgEJAAAA', 
+                u'body': {u'content': u'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n<meta content="text/html; charset=iso-8859-1">\r\n<style type="text/css" style="display:none">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir="ltr">\r\n<div style="font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)">\r\nLet\'s have lunch at 12!<br>\r\n</div>\r\n</body>\r\n</html>\r\n', u'contentType': u'html'}, 
+                u'isDeliveryReceiptRequested': False, 
+                u'importance': u'normal', 
+                u'toRecipients': [{u'emailAddress': {u'name': u'Resilient User 3', 
+                                  u'address': u'resilient3@securitypocdemos.onmicrosoft.com'}}], 
+                u'ccRecipients': [], 
+                u'isRead': True, 
+                u'categories': [], 
+                u'sender': {u'emailAddress': {u'name': u'Resilient User 2', 
+                            u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                u'createdDateTime': u'2020-02-04T20:44:02Z', 
+                u'webLink': u'https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAAAAEJAABJf%2FANAwqcRJF4hFv%2Bx44UAAAlbtF2AAA%3D&exvsurl=1&viewmodel=ReadMessageItem', 
+                u'conversationIndex': u'AQHV25vV0jEj9WYc80iyUBUULjJasg==', 
+                u'hasAttachments': False, 
+                u'bccRecipients': [], 
+                u'inferenceClassification': u'focused', 
+                u'@odata.etag': u'W/"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAlac/G"'}]}], 
+      'reason': None, 
+      'version': '1.0'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+The Example: Exchange Online Query Messages workflow will place results into the Exchange Online Query Results data table which appears on the Exchange Online custom incident tab. 
+(See the Install Guide to setup the custom tab.)
+
+![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-workflow.png)
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+# Get the email address of the user whose mailbox will be queried.
+inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
+
+# Get the search criteria from the activity rules if available. 
+inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
+inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
+inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
+inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
+inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
+inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
+inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+note = u"Exchange Online Query Multiple users:\n"
+note_len = len(note)
+
+# Add each email as a row in the query results data table
+for user in results["content"]:
+  # If an email address is not found post to a note.
+  if user["status_code"] == 404:
+    line = u"email address not found: {}\n".format(user["email_address"])
+    note = note + line
+    
+  for email in user["email_list"]:
+    message_row = incident.addRow("exo_message_query_results_dt")
+    message_row.exo_dt_query_date = Date()
+    message_row.exo_dt_message_id = email.id
+    message_row.exo_dt_received_date   = email.receivedDateTime
+    message_row.exo_dt_email_address = user["email_address"]
+    if email.sender:
+      message_row.exo_dt_sender_email = email.sender.emailAddress.address
+    else:
+      message_row.exo_dt_sender_email = ""
+    message_row.exo_dt_message_subject = email.subject
+    message_row.exo_dt_has_attachments = email.hasAttachments
+    if email.webLink:
+      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+      message_row.exo_dt_web_link = helper.createRichText(ref_html)
+    else:
+      message_row.exo_dt_web_link = ""
+ 
+    message_row.exo_dt_status = helper.createRichText("Active")
+
+# If any email addresses where not found post a note
+if len(note) > note_len:
+  incident.addNote(note)
+```
+
+</p>
+</details>
+
+
+<details><summary>Example Rule:</summary>
+<p>
+
+![screenshot: fn-exchange-online-query-messages-rule](./screenshots/EXO-query-messages-rule.png)
+
+When the Example: Exchange Online Delete Messages from Query Results rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-query-messages-rule-activity.png)
 
 </p>
 </details>
