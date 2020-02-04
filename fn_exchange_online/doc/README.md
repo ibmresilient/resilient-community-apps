@@ -68,7 +68,7 @@ Delete a message in the specified user's email address mailbox.  The email addre
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
+| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders id  |
 | `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
 
 </p>
@@ -79,9 +79,19 @@ Delete a message in the specified user's email address mailbox.  The email addre
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   'inputs': {u'exo_mailfolders_id': None, 
+              u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},           
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-02-04 09:08:13', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 1300},
+    'success': True,
+    'content': {'value': True}, 
+    'raw': '{"value": true}', 
+    'reason': None, 
+    'version': '1.0'
 }
 ```
 
@@ -90,9 +100,10 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
-The example Delete Message workflow works off 
+The example Delete Message workflow works off the Query Results data table.
+After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table will be updated from Active to Deleted in red text.  At this point other data table rules that work on a message will not be active because the message is deleted.
 
-![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-delete-message-workflow.png)
+![screenshot: fn-exchange-online-delete-message-workflow](./screenshots/EXO-delete-message-workflow.png)
 
 <details><summary>Example Pre-Process Script:</summary>
 <p>
@@ -124,13 +135,14 @@ elif results.content["error"] is not None:
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-message-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
+The Example: Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
 
 ![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
 
@@ -213,14 +225,14 @@ incident.addNote(noteText)
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-online-create-meeting--workflow-output](./screenshots/EXO-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
 
 </p>
 </details>
@@ -232,7 +244,7 @@ incident.addNote(noteText)
 ## Function - Exchange Online: Send Message
 This function will create a message and send to the specified recipients.
 
- ![screenshot: fn-exchange-online-send-message ](./screenshots/fn-exchange-online-send-message.png)
+ ![screenshot: fn-exchange-online-send-message ](./screenshots/EXO-send-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -293,15 +305,21 @@ incident.addNote(noteText)
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-online-send-message-workflow-output](./screenshots/EXO-send-message-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
 
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule.png)
+
+<p>
+
+When the Example Send Message rule is initiated the following rule activity popup dialog will appear prompting for input for the the message to send:
+ 
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule-activity.png)
 </p>
 </details>
 
@@ -594,7 +612,7 @@ results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2Iw
 
 <details><summary>Workflows:</summary>
 <p>
-The workflow Write Message JSON as Note calls the Get Message function and write the JSON contents returned from MS Graph API to an incident note.  
+The workflow Write Message JSON as Note calls the Get Message function and writes the JSON contents returned from MS Graph API to an incident note.  The JSON returned from MS Graph API contains information that is different from the .eml file, so both formats are provided in this package (see Write Message EML as Attachment).
 
 ![screenshot: fn-exchange-online-get-message](./screenshots/EXO-get-message-workflow.png)
 
