@@ -1,5 +1,5 @@
-# Design for Resilient NLP integration 
-Resilient NLP integration uses Nature Language Processing (NLP) to digest incident textual data, and
+# Design for Resilient Machine Learning Integration 
+Resilient machine learning integration supports using Nature Language Processing (NLP) to digest incident textual data, and
 provides advanced predictions of incident relationships.
 
 ## NLP
