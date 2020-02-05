@@ -55,10 +55,29 @@ Resilient Integration with Exchange Online provides the capability to access and
 * Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
-## Exchange Online Integration Use Case for Phishing Investigation
+## Integration Flow for Phishing Investigation Use Case
 
 <p>
+The Exchange Online integration primary use case is monitoring and control email activities in Exchange Online (Office 365 Outlook in the cloud) and to protect against inbound malicious emails.
+<p>
+To use the integration, you can run the Query Messages rule from the Action menu of an Incident.  From this rule you can search a single email address, a list of email addresses or the entire tenant.  Results of the query will be returned in the Exchange Online Message Query Results data table on the Exchange Online incident tab. Each row in the data table contains information from one message and the following actions can be performed on each message when it's state is Active in the Status column :  
 
+* Create artifacts: Email Recipient, Email Sender, Email Subject
+* Delete the message
+* Move the message to a Well-known folder
+* Write the message .eml as an incident
+* Write the message JSON returned from MS Graph to an incident note 
+
+<p>
+More investigation, including other integrations can be done on the file after writing the message to a note or attachment.  
+<p>
+The data table Status column is set to Active when the message is entered in the table.  Any time after that, the message may be deleted by a user, so in some cases the Status field may be updated to Not Found, or Deleted if it is deleted when running one of the above data table rules/workflows.
+
+<p>The time the query takes places is the first column of the data table and you can use this value to sort through data if multiple queries are run and entered into the data table.  You may want to empty the data table after each query.
+
+<p>Quer
+
+<p>Once investigation on the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions men
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
