@@ -169,7 +169,6 @@ def main():
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> deleted " \
                         "for user <b>{3}</b> for Resilient function <b>{4}</b>." \
                 .format(WF_NAME, len(deleted_keys), ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
-
             artifact_desc_content = artifact.description["content"]
             artifact_desc_sep = "==============="
             artifact_desc_upd = "{0}: Access key '{1}' deleted for AWS IAM user '{2}' by Workflow '{3}' and Function '{4}'."\
