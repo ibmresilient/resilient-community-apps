@@ -88,125 +88,8 @@ More investigation, including using other email analysis scripts and integration
 <p>
 
 ---
-## Function - Exchange Online: Delete Messages From Query Results
-This Exchange Online function will delete a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
-
- ![screenshot: fn-exchange-online-delete-messages-from-query-results](./screenshots/EXO-delete-from_query-function.png)
-
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_query_messages_results` | `text` | Yes | `-` | String containing JSON data results from Query Messages function |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-
-![screenshot: fn-exchange-delete-from-query-workflow](./screenshots/EXO-delete-from-query-workflow.png)
-
-
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_query_messages_results = workflow.properties.exo_query_results['raw']
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-from java.util import Date
-
-deleted_count = 0
-not_deleted_count = 0
-
-# Add each email as a row in the query results data table
-for user in results["content"]:
-    
-  not_deleted_count = not_deleted_count + len(user["not_deleted_list"])
-  for email in user["deleted_list"]:
-    deleted_count = deleted_count + 1
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
- 
-    text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
-    message_row.exo_dt_status = helper.createRichText(text)
-
-
-# Post a note containing the number of emails deleted
-note = u"Exchange Online Delete Messages From Query Results:\n  {0} messages deleted".format(deleted_count)
-
-# Add to the note if any messages from the query were not deleted.
-if not_deleted_count > 0:
-  note2 = u"  {0} messages NOT deleted".format(not_deleted_count)
-  note = u"{0}\n{1}".format(note, note2)
-incident.addNote(note)
-```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-delete-from-query-workflow-output](./screenshots/EXO-delete-from-query-workflow-output.png)
-
-</p>
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-
-![screenshot: fn-exchange-online-delete-from-query-rule](./screenshots/EXO-delete-from-query-rule.png)
-
-The Example: Exchange Online Delete Message From Query Results incident menu item rule will 
-bring up the rule activity popup dialog pictured below to prompt for input querying message to be deleted.
-See the Query function section for a description of querying.  
-
-![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-delete-from-query-rule-activity.png)
-
-</p>
-</details>
-
-</p>
-</details>
-
----
 ## Function - Exchange Online: Create Meeting
+
 The Exchange Online: Create Meeting function will create a meeting event in the organizer's Outlook calendar and send a calendar event invitation message to the meeting participants.
 
  ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
@@ -260,6 +143,11 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+
+The Example: Exchange Online Create Meeting workflow calls the create meeting function and then write the results to an incident note.
+
+![screenshot: fn-exchange-online-create-meeting-workflow](./screenshots/EXO-create-meeting-workflow.png)
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -398,6 +286,125 @@ elif results.content["error"] is not None:
 The Example: Exchange Online Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
 
 ![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
+
+</p>
+</details>
+
+</p>
+</details>
+
+---
+## Function - Exchange Online: Delete Messages From Query Results
+This Exchange Online function will delete a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
+
+ ![screenshot: fn-exchange-online-delete-messages-from-query-results](./screenshots/EXO-delete-from_query-function.png)
+
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_query_messages_results` | `text` | Yes | `-` | String containing JSON data results from Query Messages function |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+
+![screenshot: fn-exchange-delete-from-query-workflow](./screenshots/EXO-delete-from-query-workflow.png)
+
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.exo_query_messages_results = workflow.properties.exo_query_results['raw']
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+deleted_count = 0
+not_deleted_count = 0
+
+# Add each email as a row in the query results data table
+for user in results["content"]:
+    
+  not_deleted_count = not_deleted_count + len(user["not_deleted_list"])
+  for email in user["deleted_list"]:
+    deleted_count = deleted_count + 1
+    message_row = incident.addRow("exo_message_query_results_dt")
+    message_row.exo_dt_query_date = Date()
+    message_row.exo_dt_message_id = email.id
+    message_row.exo_dt_received_date   = email.receivedDateTime
+    message_row.exo_dt_email_address = user["email_address"]
+    if email.sender:
+      message_row.exo_dt_sender_email = email.sender.emailAddress.address
+    else:
+      message_row.exo_dt_sender_email = ""
+    message_row.exo_dt_message_subject = email.subject
+    message_row.exo_dt_has_attachments = email.hasAttachments
+    if email.webLink:
+      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+      message_row.exo_dt_web_link = helper.createRichText(ref_html)
+    else:
+      message_row.exo_dt_web_link = ""
+ 
+    text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Deleted")
+    message_row.exo_dt_status = helper.createRichText(text)
+
+
+# Post a note containing the number of emails deleted
+note = u"Exchange Online Delete Messages From Query Results:\n  {0} messages deleted".format(deleted_count)
+
+# Add to the note if any messages from the query were not deleted.
+if not_deleted_count > 0:
+  note2 = u"  {0} messages NOT deleted".format(not_deleted_count)
+  note = u"{0}\n{1}".format(note, note2)
+incident.addNote(note)
+```
+
+</p>
+</details>
+<details><summary>Example Workflow Output:</summary>
+<p>
+The messages deleted will appear in the data table with red "Deleted" text in the Status column:
+
+![screenshot: fn-exchange-delete-from-query-workflow-output](./screenshots/EXO-delete-from-query-workflow-output.png)
+
+</p>
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+
+![screenshot: fn-exchange-online-delete-from-query-rule](./screenshots/EXO-delete-from-query-rule.png)
+
+The Example: Exchange Online Delete Message From Query Results incident menu item rule will 
+bring up the rule activity popup dialog pictured below to prompt for input querying message to be deleted.
+See the Query function section for a description of querying.  
+
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-delete-from-query-rule-activity.png)
 
 </p>
 </details>
