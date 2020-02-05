@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: Delete Login Profile
 
-
 ## Function - AWS IAM: Delete Login Profile
 
 ### API Name
@@ -59,17 +58,17 @@ note_text = ''
 
 def main():
     note_text = ''
-    if CONTENT is not None:
+    if CONTENT:
         if CONTENT == "OK":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile deleted for user <b>{1}</b> for " \
-                        "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.LoginProfileExists = "No"
         elif CONTENT == "NoSuchEntity":
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile does not exist for user <b>{1}</b> for " \
-                        "Resilient function <b>{2}</b>".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.LoginProfileExists = "No"
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -78,7 +77,6 @@ if __name__ == "__main__":
 ```
 
 ---
-
 
 ## Function - AWS IAM: List Users
 
@@ -148,10 +146,10 @@ def process_tags(tag_list, row):
 
 def main():
     note_text = ''
-    if CONTENT is not None and len(CONTENT) > 0:
+    if CONTENT:
         if len(CONTENT) == 1:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>"\
+                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
             u = CONTENT.pop()
             row.query_execution_date = QUERY_EXECUTION_DATE
@@ -170,10 +168,10 @@ def main():
                             row[f] = ','.join(u[f])
         else:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
-                        "Resilient function <b>{3}</b>".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+                        "Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
             row.LoginProfileExists = "NO"
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

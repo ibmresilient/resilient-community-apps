@@ -80,7 +80,6 @@ class FunctionComponent(ResilientComponent):
                 user_filter, group_filter, policy_filter, access_key_filter = ({} for _ in range(4))
                 if aws_iam_user_filter:
                     user_filter["UserName"] = aws_iam_user_filter
-
                 if aws_iam_group_filter:
                     group_filter["GroupName"] = aws_iam_group_filter
                 if aws_iam_policy_filter:
@@ -135,9 +134,8 @@ class FunctionComponent(ResilientComponent):
             ["AccessKeyIds", "list_access_keys", access_key_filter, user_access_key_ids],
             ["Tags", "list_user_tags", None, user_tags]
         ]
-        for i in range(len(rtn_users)):
+        for user in rtn_users:
             skip_prop = False
-            user = rtn_users[i]
             user_name = user["UserName"]
             # When a filter is defined for groups, polices or access key ids the 'group_count', 'policy_count' or
             # 'access_key_filter' will be returned in the result as a tuple value. In all casees if the count is
@@ -150,7 +148,6 @@ class FunctionComponent(ResilientComponent):
                                                                                             "Tags"]:
                     pass
                 else:
-                    user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
                     (skip_prop, prop_param[3]) = cls.process_user_property(iam_cli, prop_param[1], user_name,
                                                                             prop_param[2], return_filtered)
                     if skip_prop:

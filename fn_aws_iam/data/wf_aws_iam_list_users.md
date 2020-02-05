@@ -101,30 +101,30 @@ def check_add_quotes(tag_name):
 
 def process_access_key_ids(access_key_id_list, row):
     access_key_ids = []
-    for i in range(len(access_key_id_list)):
-        if access_key_id_list[i]["AccessKeyId"] is not None:
-            access_key_ids.append(access_key_id_list[i]["AccessKeyId"])
+    for ak_id in access_key_id_list:
+        if ak_id["AccessKeyId"] is not None:
+            access_key_ids.append(ak_id["AccessKeyId"])
     row.AccessKeyIds = ','.join(access_key_ids)
 
 def process_policies(policy_list, row):
     policies = []
-    for i in range(len(policy_list)):
-        if policy_list[i]["PolicyName"] is not None:
-            policies.append(policy_list[i]["PolicyName"])
+    for pol in policy_list:
+        if pol["PolicyName"] is not None:
+            policies.append(pol["PolicyName"])
     row.Policies = ','.join(policies)
 
 def process_groups(group_list, row):
     groups = []
-    for g in range(len(group_list)):
-        if group_list[g]["GroupName"] is not None:
-            groups.append(group_list[g]["GroupName"])
+    for grp in group_list:
+        if grp["GroupName"] is not None:
+            groups.append(grp["GroupName"])
     row.Groups = ",".join(groups)
 
 def process_tags(tag_list, row):
     tags = []
-    for i in range(len(tag_list)):
-        if tag_list[i]["Key"] is not None:
-            tags.append(tag_list[i]["Key"])
+    for tag in tag_list:
+        if tag["Key"] is not None:
+            tags.append(tag["Key"])
     row.Tags = ','.join(check_add_quotes(t) for t in tags)
 
 def main():
@@ -132,44 +132,44 @@ def main():
     filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
                            INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
                if f is not None]
-    if CONTENT is not None:
+    if CONTENT:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
                    "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
-        for u in range(len(CONTENT)):
+        for u in CONTENT:
             newrow = incident.addRow("aws_iam_users")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
             for f in DATA_TBL_FIELDS:
                 newrow.Status = "Active"
-                if CONTENT[u][f] is not None:
-                    if isinstance(CONTENT[u][f], unicode) or isinstance(CONTENT[u][f], int) \
-                            or isinstance(CONTENT[u][f], long) or len(CONTENT[u][f]) == 0:
-                        if f == "DefaultUser" and not CONTENT[u][f]:
+                if u[f] is not None:
+                    if isinstance(u[f], unicode) or isinstance(u[f], int) \
+                            or isinstance(u[f], long) or len(u[f]) == 0:
+                        if f == "DefaultUser" and not u[f]:
                             pass
                         else:
-                          newrow[f] = CONTENT[u][f]
+                          newrow[f] = u[f]
                     else:
-                        if f == "AccessKeyIds" and len(CONTENT[u][f]) > 0:
-                            process_access_key_ids(CONTENT[u][f], newrow)
-                        elif f == "Policies" and len(CONTENT[u][f]) > 0:
-                            process_policies(CONTENT[u][f], newrow)
-                        elif f == "Groups" and len(CONTENT[u][f]) > 0:
-                            process_groups(CONTENT[u][f], newrow)
-                        elif f == "Tags" and len(CONTENT[u][f]) > 0:
-                            process_tags(CONTENT[u][f], newrow)
+                        if f == "AccessKeyIds" and len(u[f]) > 0:
+                            process_access_key_ids(u[f], newrow)
+                        elif f == "Policies" and len(u[f]) > 0:
+                            process_policies(u[f], newrow)
+                        elif f == "Groups" and len(u[f]) > 0:
+                            process_groups(u[f], newrow)
+                        elif f == "Tags" and len(u[f]) > 0:
+                            process_tags(u[f], newrow)
                         else:
-                            newrow[f] = ','.join(CONTENT[u][f])
+                            newrow[f] = ','.join(u[f])
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
     if filters:
         note_text += "<br>Query Filters:</br>"
-        if "aws_iam_user_filter" in INPUTS and INPUTS["aws_iam_user_filter"] is not None:
+        if INPUTS.get("aws_iam_user_filter"): 
             note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
-        if "aws_iam_group_filter" in INPUTS and INPUTS["aws_iam_group_filter"] is not None:
+        if INPUTS.get("aws_iam_group_filter"): 
             note_text += "<br>aws_iam_group_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_group_filter"])
-        if "aws_iam_policy_filter" in INPUTS and INPUTS["aws_iam_policy_filter"] is not None:
+        if INPUTS.get("aws_iam_policy_filter"): 
             note_text += "<br>aws_iam_policy_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_policy_filter"])
-        if "aws_iam_access_key_filter" in INPUTS and INPUTS["aws_iam_access_key_filter"] is not None:
+        if INPUTS.get("aws_iam_access_key_filter"):   
             note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
