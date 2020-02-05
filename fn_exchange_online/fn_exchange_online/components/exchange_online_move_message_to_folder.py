@@ -72,7 +72,8 @@ class FunctionComponent(ResilientComponent):
             # If message was deleted a 201 code is returned.
             if response.status_code == 201:
                 success = True
-                response_json = {'value': success}
+                new_message_id = response.json().get('id')
+                response_json = {'new_message_id': new_message_id}
             else:
                 success = False
                 response_json = response.json()

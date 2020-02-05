@@ -16,14 +16,14 @@
 
 ## Table of Contents
 - [Key Features](#key-features)
-- [Function - Exchange Online: Move Message to Folder](#function---exchange-online-move-message-to-folder)
 - [Function - Exchange Online: Create Meeting](#function---exchange-online-create-meeting)
-- [Function - Exchange Online: Send Message](#function---exchange-online-send-message)
-- [Function - Exchange Online: Get User Profile](#function---exchange-online-get-user-profile)
-- [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
-- [Function - Exchange Online: Query Messages](#function---exchange-online-query-messages)
 - [Function - Exchange Online: Delete Message](#function---exchange-online-delete-message)
+- [Function - Exchange Online: Delete Messages From Query Results](#function---exchange-online-delete-messages-from-query-results)
 - [Function - Exchange Online: Get Message](#function---exchange-online-get-message)
+- [Function - Exchange Online: Get User Profile](#function---exchange-online-get-user-profile)
+- [Function - Exchange Online: Move Message to Folder](#function---exchange-online-move-message-to-folder)
+- [Function - Exchange Online: Query Messages](#function---exchange-online-query-messages)
+- [Function - Exchange Online: Send Message](#function---exchange-online-send-message)
 - [Function - Exchange Online: Write Message as Attachment](#function---exchange-online-write-message-as-attachment)
 - [Data Table - Exchange Online Message Query Results](#data-table---exchange-online-message-query-results)
 - [Rules](#rules)
@@ -55,261 +55,36 @@ Resilient Integration with Exchange Online provides the capability to access and
 * Create a meeting event in the organizer's Outlook calendar and send a calendar event message to meeting participants inviting them to the meeting.
 
 ---
-## Function - Exchange Online: Write Message as Attachment
-This function will get the mime content of an Exchange Online message and write it as an incident attachment.
+## Integration Flow for Phishing Investigation Use Case
 
-![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
-
-<details><summary>Inputs:</summary>
 <p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `incident_id` | `number` | Yes | `-` | - |
-| `task_id` | `number` | No | `-` | - |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-| `exo_attachment_name` | `text` | No | `my-message.eml` | The name of the attachment file to which message is written. |
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
+The Exchange Online integration primary use case is monitoring and control email activities in Exchange Online (Office 365 Outlook in the cloud) and to protect against inbound malicious emails.
 <p>
+To use the integration, you can run the Query Messages rule from the Action menu of an Incident.  From this rule you can search a single email address, a list of email addresses or the entire tenant.  Results of the query will be returned in the Exchange Online Message Query Results data table on the Exchange Online incident tab. Each row in the data table contains information from one message and the following actions can be performed on each message when it's state is Active in the Status column :  
 
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
+* Create artifacts: Email Recipient, Email Sender, Email Subject
+* Delete the message
+* Move the message to a Well-known folder
+* Write the message .eml as an incident
+* Write the message JSON returned from MS Graph to an incident note 
 
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
 <p>
-<details><summary>Example Pre-Process Script:</summary>
+More investigation, including other integrations can be done on the file after writing the message to a note or attachment.  
 <p>
+The data table Status column is set to Active when the message is entered in the table.  Any time after that, the message may be deleted by a user, so in some cases the Status field may be updated to Not Found, or Deleted if it is deleted when running one of the above data table rules/workflows.
 
-```python
-inputs.incident_id = incident.id
-#inputs.task_id = task.id
-inputs.exo_attachment_name = rule.properties.exo_attachment_name
-inputs.exo_email_address = row.exo_dt_email_address
-inputs.exo_messages_id = row.exo_dt_message_id
+<p>The time the query takes places is the first column of the data table and you can use this value to sort through data if multiple queries are run and entered into the data table.  You may want to empty the data table after each query.
 
-```
-</p>
-</details>
+<p>Quer
 
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-
-Below is a screen shot of an example Note after a message is moved to a folder:
-
-![screenshot: fn-exchange-online-move-message-to-folder-workflow-output](./screenshots/EXO-move-message-to-folder-workflow-output.png)
-
-</p>
-
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
-
-![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
-
-</p>
-</details>
-</p>
-</details>
-
----
-
-## Function - Exchange Online: Create Meeting
-This function will create a meeting event in the organizer's Outlook calendar and send a calendar event mail message to the meeting participants inviting them to the meeting.
-
- ![screenshot: fn-exchange-online-create-meeting ](./screenshots/fn-exchange-online-create-meeting.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_meeting_body` | `text` | Yes | `-` | Meeting message body |
-| `exo_meeting_email_address` | `text` | Yes | `user@example.com` | Email address of meeting coordinator |
-| `exo_meeting_end_time` | `datetimepicker` | Yes | `-` | End date and time for meeting |
-| `exo_meeting_location` | `text` | No | `-` | - |
-| `exo_meeting_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendee email addresses |
-| `exo_meeting_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendee email addresses |
-| `exo_meeting_start_time` | `datetimepicker` | Yes | `-` | Meeting start date and time |
-| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subect |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_meeting_email_address = inputs.exo_meeting_email_address  if rule.properties.exo_meeting_email_address is None else rule.properties.exo_meeting_email_address
-inputs.exo_meeting_start_time = inputs.exo_meeting_start_time if rule.properties.exo_meeting_start_time is None else rule.properties.exo_meeting_start_time
-inputs.exo_meeting_end_time = inputs.exo_meeting_end_time if rule.properties.exo_meeting_end_time is None else rule.properties.exo_meeting_end_time
-inputs.exo_meeting_subject = inputs.exo_meeting_subject if rule.properties.exo_meeting_subject is None else rule.properties.exo_meeting_subject
-inputs.exo_meeting_body = inputs.exo_meeting_body if rule.properties.exo_meeting_body.content is None else rule.properties.exo_meeting_body.content
-inputs.exo_meeting_required_attendees = inputs.exo_meeting_required_attendees if rule.properties.exo_meeting_required_attendees is None else rule.properties.exo_meeting_required_attendees
-inputs.exo_meeting_optional_attendees = inputs.exo_meeting_optional_attendees if rule.properties.exo_meeting_optional_attendees is None else rule.properties.exo_meeting_optional_attendees
-inputs.exo_meeting_location = inputs.exo_meeting_location if rule.properties.exo_meeting_location is None else rule.properties.exo_meeting_location
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  noteText = u"Exchange Online created meeting\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"],results.pretty_string)
-else:
-  noteText = u"Exchange Online meeting was NOT created\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"], results.pretty_string)
-
-incident.addNote(noteText)
-```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
-</p>
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
-
-</p>
-</details>
-
-</p>
-</details>
-
----
-## Function - Exchange Online: Send Message
-This function will create a message and send to the specified recipients.
-
- ![screenshot: fn-exchange-online-send-message ](./screenshots/fn-exchange-online-send-message.png)
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_recipients` | `text` | Yes | `-` | comma separated list of message recipients |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows:</summary>
-<p>
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.exo_email_address   = inputs.exo_email_address   if rule.properties.exo_message_sender_address is None else rule.properties.exo_message_sender_address
-inputs.exo_recipients      = inputs.exo_recipients      if rule.properties.exo_message_recipients     is None else rule.properties.exo_message_recipients
-inputs.exo_message_subject = inputs.exo_message_subject if rule.properties.exo_message_subject is None else rule.properties.exo_message_subject
-inputs.exo_message_body    = inputs.exo_message_send_body.content if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-if results.success:
-  noteText = u"Exchange Online message sent\n   From: {0}\n   To: {1}\n   Subject: {2}\n   Body: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"], results.inputs["exo_message_subject"], results.inputs["exo_message_body"])
-else:
-  noteText = u"Exchange Online message NOT sent\n   From: {0}\n  To: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"])
-
-incident.addNote(noteText)
-```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
-</p>
-</details>
-
-<details><summary>Example Rule:</summary>
-<p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
-
-</p>
-</details>
-
-</p>
-</details>
+<p>Once investigation on the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions men
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
 This Exchange Online function will delete a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
 
- ![screenshot: fn-exchange-online-delete-messages-from-query-results ](./screenshots/fn-exchange-online-delete-messages-from-query-results.png)
+ ![screenshot: fn-exchange-online-delete-messages-from-query-results](./screenshots/EXO-delete-from_query-function.png)
+
 
 <details><summary>Inputs:</summary>
 <p>
@@ -326,9 +101,7 @@ This Exchange Online function will delete a list of messages returned from the Q
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    
 }
 ```
 
@@ -337,6 +110,10 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+
+![screenshot: fn-exchange-delete-from-query-workflow](./screenshots/EXO-delete-from-query-workflow.png)
+
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -398,14 +175,21 @@ incident.addNote(note)
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-delete-from-query-workflow-output](./screenshots/EXO-delete-from-query-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+![screenshot: fn-exchange-online-delete-from-query-rule](./screenshots/EXO-delete-from-query-rule.png)
+
+The Example: Exchange Online Delete Message From Query Results incident menu item rule will 
+bring up the rule activity popup dialog pictured below to prompt for input querying message to be deleted.
+See the Query function section for a description of querying.  
+
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-delete-from-query-rule-activity.png)
 
 </p>
 </details>
@@ -414,24 +198,24 @@ incident.addNote(note)
 </details>
 
 ---
-## Function - Exchange Online: Query Messages
-This function will query Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.
+## Function - Exchange Online: Create Meeting
+The Exchange Online: Create Meeting function will create a meeting event in the organizer's Outlook calendar and send a calendar event invitation message to the meeting participants.
 
- ![screenshot: fn-exchange-online-query-messages ](./screenshots/fn-exchange-online-query-messages.png)
+ ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
-| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
-| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
-| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
+| `exo_meeting_body` | `text` | Yes | `meeting message body` | Meeting message body |
+| `exo_meeting_email_address` | `text` | Yes | `user@example.com` | Email address of meeting coordinator |
+| `exo_meeting_end_time` | `datetimepicker` | Yes | `-` | End date and time for meeting |
+| `exo_meeting_location` | `text` | No | `-` | - |
+| `exo_meeting_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendee email addresses |
+| `exo_meeting_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendee email addresses |
+| `exo_meeting_start_time` | `datetimepicker` | Yes | `-` | Meeting start date and time |
+| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subect |
 
 </p>
 </details>
@@ -441,9 +225,25 @@ This function will query Exchange Online to find messages matching the specified
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    'inputs': {
+          u'exo_meeting_end_time': 1581022800000, 
+          u'exo_meeting_optional_attendees': None, 
+          u'exo_meeting_subject': u'phishing meeting', 
+          u'exo_meeting_body': u'<div class="rte"><div>We need to talk about this!</div></div>', u'exo_meeting_required_attendees': u'resilient3@securitypocdemos.onmicrosoft.com, resilient2@securitypocdemos.onmicrosoft.com', 
+          u'exo_meeting_start_time': 1581004800000, 
+          u'exo_meeting_email_address': u'resilient2@securitypocdemos.onmicrosoft.com', u'exo_meeting_location': None}, 
+    'metrics': {'package': 'fn-exchange-online', 
+          'timestamp': '2020-02-04 13:30:45', 
+          'package_version': '1.0.0', 
+          'host': 'MacBook-Pro.local', 
+          'version': '1.0', 
+          'execution_time_ms': 1728}, 
+    'success': True, 
+      'content': {u'body': {u'content': u'', u'contentType': u'html'}, u'sensitivity': u'normal', u'locations': [], .....}', 
+    'reason': None, 
+    'version': '1.0',
+    'pretty_string': u'{\n    "body": {\n        "content": "",\n        "contentType": "html"\n    },\n    "sensitivity": "normal",\n    "locations": []"040000008200E00074C5B7101A82E0080000000096E4493689DBD501000000000000000010000000ADDA5C7497FB60469CE3850456D898C5",\n    "seriesMasterId": null,\n    "responseStatus": {\n        "response": "organizer",\n        "time": "0001-01-01T00:00:00Z"\n    },\n    "@odata.etag": "W/\\"SX/wDQMKnESReIRb/seOFAAAJWnN6Q==\\""\n}', 
+    'content': {u'body': {u'content': u'', u'contentType': u'html'}, u'sensitivity': u'normal', u'locations': [],..... "}'
 }
 ```
 
@@ -456,17 +256,14 @@ results = {
 <p>
 
 ```python
-# Get the email address of the user whose mailbox will be queried.
-inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
-
-# Get the search criteria from the activity rules if available. 
-inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
-inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
-inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
-inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
-inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
-inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
-inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
+inputs.exo_meeting_email_address = inputs.exo_meeting_email_address  if rule.properties.exo_meeting_email_address is None else rule.properties.exo_meeting_email_address
+inputs.exo_meeting_start_time = inputs.exo_meeting_start_time if rule.properties.exo_meeting_start_time is None else rule.properties.exo_meeting_start_time
+inputs.exo_meeting_end_time = inputs.exo_meeting_end_time if rule.properties.exo_meeting_end_time is None else rule.properties.exo_meeting_end_time
+inputs.exo_meeting_subject = inputs.exo_meeting_subject if rule.properties.exo_meeting_subject is None else rule.properties.exo_meeting_subject
+inputs.exo_meeting_body = inputs.exo_meeting_body if rule.properties.exo_meeting_body.content is None else rule.properties.exo_meeting_body.content
+inputs.exo_meeting_required_attendees = inputs.exo_meeting_required_attendees if rule.properties.exo_meeting_required_attendees is None else rule.properties.exo_meeting_required_attendees
+inputs.exo_meeting_optional_attendees = inputs.exo_meeting_optional_attendees if rule.properties.exo_meeting_optional_attendees is None else rule.properties.exo_meeting_optional_attendees
+inputs.exo_meeting_location = inputs.exo_meeting_location if rule.properties.exo_meeting_location is None else rule.properties.exo_meeting_location
 ```
 
 </p>
@@ -476,56 +273,27 @@ inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.proper
 <p>
 
 ```python
-from java.util import Date
+if results.success:
+  noteText = u"Exchange Online created meeting\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"],results.pretty_string)
+else:
+  noteText = u"Exchange Online meeting was NOT created\n   From: {0}\n{1}".format(results.inputs["exo_meeting_email_address"], results.pretty_string)
 
-note = u"Exchange Online Query Multiple users:\n"
-note_len = len(note)
-
-# Add each email as a row in the query results data table
-for user in results["content"]:
-  # If an email address is not found post to a note.
-  if user["status_code"] == 404:
-    line = u"email address not found: {}\n".format(user["email_address"])
-    note = note + line
-    
-  for email in user["email_list"]:
-    message_row = incident.addRow("exo_message_query_results_dt")
-    message_row.exo_dt_query_date = Date()
-    message_row.exo_dt_message_id = email.id
-    message_row.exo_dt_received_date   = email.receivedDateTime
-    message_row.exo_dt_email_address = user["email_address"]
-    if email.sender:
-      message_row.exo_dt_sender_email = email.sender.emailAddress.address
-    else:
-      message_row.exo_dt_sender_email = ""
-    message_row.exo_dt_message_subject = email.subject
-    message_row.exo_dt_has_attachments = email.hasAttachments
-    if email.webLink:
-      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
-      message_row.exo_dt_web_link = helper.createRichText(ref_html)
-    else:
-      message_row.exo_dt_web_link = ""
- 
-    message_row.exo_dt_status = helper.createRichText("Active")
-
-# If any email addresses where not found post a note
-if len(note) > note_len:
-  incident.addNote(note)
+incident.addNote(noteText)
 ```
-
-</p>
-</details>
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+The following Example: Exchange Online Create Meeting incident menu item rule is included to create a meeting via Exchange Online:
+
+![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
+
+
+When the Example: Exchange Online Create Meeting rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+
+![screenshot: fn-exchange-online-create-meeting-rule-activity](./screenshots/EXO-create-meeting-rule-activity.png)
 
 </p>
 </details>
@@ -537,7 +305,7 @@ if len(note) > note_len:
 ## Function - Exchange Online: Delete Message
 Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
 
- ![screenshot: fn-exchange-online-delete-message ](./screenshots/fn-exchange-online-delete-message.png)
+ ![screenshot: fn-exchange-online-delete-message ](./screenshots/EXO-delete-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -545,7 +313,7 @@ Delete a message in the specified user's email address mailbox.  The email addre
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
+| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders id  |
 | `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
 
 </p>
@@ -556,9 +324,19 @@ Delete a message in the specified user's email address mailbox.  The email addre
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+   'inputs': {u'exo_mailfolders_id': None, 
+              u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},           
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-02-04 09:08:13', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 1300},
+    'success': True,
+    'content': {'value': True}, 
+    'raw': '{"value": true}', 
+    'reason': None, 
+    'version': '1.0'
 }
 ```
 
@@ -567,6 +345,11 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+The example Delete Message workflow works off the Query Results data table.
+After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table will be updated from Active to Deleted in red text.  At this point other data table rules that work on a message will not be active because the message is deleted.
+
+![screenshot: fn-exchange-online-delete-message-workflow](./screenshots/EXO-delete-message-workflow.png)
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -597,14 +380,16 @@ elif results.content["error"] is not None:
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
+![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-message-workflow-output.png)
 
 </p>
 </details>
 
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+The Example: Exchange Online Delete Message rule works off the Query Results data table.  The Delete Message rule is available when the "Status" column of the message row-entry is set to Active.
+
+![screenshot: fn-exchange-online-delete-message-rule](./screenshots/EXO-delete-message-rule.png)
 
 </p>
 </details>
@@ -616,7 +401,7 @@ elif results.content["error"] is not None:
 ## Function - Exchange Online: Get Message
 This function returns the contents of an Exchange Online message in json format.
 
- ![screenshot: fn-exchange-online-get-message ](./screenshots/fn-exchange-online-get-message.png)
+ ![screenshot: fn-exchange-online-get-message ](./screenshots/EXO-get-message-function.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -624,7 +409,7 @@ This function returns the contents of an Exchange Online message in json format.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to get|
 
 </p>
 </details>
@@ -633,11 +418,33 @@ This function returns the contents of an Exchange Online message in json format.
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
+results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=',
+                      u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+          'metrics': {'package': 'fn-exchange-online', 
+                      'timestamp': '2020-02-03 15:39:31', 
+                      'package_version': '1.0.0', 
+                      'host': 'cambridge.ibm.com', 
+                      'version': '1.0', '
+                      'execution_time_ms': 654},
+          'success': True, 
+          'pretty_string': u'{\n    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users(\'resilient2%40securitypocdemos.onmicrosoft.com\')/messages/$entity",\n    "@odata.etag": "W/\\"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAil53/\\"",\n    "bccRecipients": [],\n    "body": {\n        "content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=us-ascii\\">\\r\\n</head>\\r\\n<body>\\r\\n<div class=\\"rte\\">\\r\\n<div>test text area body</div>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n",\n        "contentType": "html"\n    },\n    "bodyPreview": "test text area body",\n    "categories": [],\n    "ccRecipients": [],}......', 
+          'content': {u'sentDateTime': u'2020-01-29T16:17:23Z', 
+                      u'conversationId':u'AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQAGjzfC_8ndROs7O00o-q8ys=', 
+                      u'isDraft': False, 
+                      u'internetMessageId': u'<MMMMprod.outlook.com>', 
+                      u'id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
+                      u'isReadReceiptRequested': False, 
+                      u'subject': u'test text area body', 
+                      u'lastModifiedDateTime': u'2020-02-03T16:46:41Z', 
+                      u'bodyPreview': u'test text area body', 
+                      u'from': {u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                      u'flag': {u'flagStatus': u'notFlagged'}, 
+                      .
+                      .
+                      .
+                      },
+              'reason': None, 
+              'version': '1.0'}
 ```
 
 </p>
@@ -645,6 +452,11 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
+The workflow Write Message JSON as Note calls the Get Message function and writes the JSON contents returned from MS Graph API to an incident note.  The JSON returned from MS Graph API contains information that is different from the .eml file, so both formats are provided in this package (see Write Message EML as Attachment).
+
+![screenshot: fn-exchange-online-get-message](./screenshots/EXO-get-message-workflow.png)
+
+
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 
@@ -673,17 +485,10 @@ incident.addNote(noteText)
 </p>
 </details>
 
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
-</p>
-</details>
-
 <details><summary>Example Rule:</summary>
 <p>
-![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
+
+  ![screenshot: fn-exchange-online-get-message-rule](./screenshots/EXO-get-message-rule.png)
 
 </p>
 </details>
@@ -897,15 +702,15 @@ inputs.exo_destination_mailfolder_id = rule.properties.exo_destination_mailfolde
 <p>
 
 ```python
-# Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
 if results.content["error"] is not None:
+  # Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.
   noteText = u"Exchange Online message NOT FOUND: \n email address: {0}\n message ID: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"])
   status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Not Found")
   row['exo_dt_status'] = helper.createRichText(status_text)
 else:
-  noteText = u"Exchange Online email address: {0}\nmessage ID:\n{1} moved to folder {2}".format(results.inputs["exo_email_address"], results.inputs["exo_messages_id"], results.inputs["exo_destination_mailfolder_id"]["name"] )
-  status_text = u"""<p style= "color:{color}">{status} </p>""".format(color="red", status="Moved")
-  row['exo_dt_status'] = helper.createRichText(status_text)
+  # When a message is moved it's ID changes, so update the new message ID into the data table
+  noteText = u"Exchange Online email address: {0}\n\n  Message has been moved to folder: {1}\n\n  Old message ID: {2} \n\n  New message ID: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_destination_mailfolder_id"]["name"], results.inputs["exo_messages_id"], results.content["new_message_id"])
+  row['exo_dt_message_id'] = results.content["new_message_id"] 
 incident.addNote(noteText)
 ```
 
@@ -933,10 +738,402 @@ The example Move Message to Folder rule works off the Exchange Online Message Qu
 
 ---
 
+## Function - Exchange Online: Query Messages
+The Exchange Online: Query Message function will query Exchange Online to find messages matching the specified input parameters.  A list of messages matching the search criteria is returned from the function.  
+<p>
+The function will search over the following email accounts:
+
+* all mailboxes of a tenant (specify "all", "ALL", "all users")
+* a single email address
+* a comma separated list of email addressed
+<p>
+If no mail folder if specified, all folders and subdirectories are queried.
+The mail folder to be searched can be one of the list of Outlook "Well-known" folders:
+
+* archive
+* clutter
+* conflicts
+* conversationhistory
+* deleteditems
+* drafts
+* inbox
+* junkemail
+* localfailures
+* msgfolderroot
+* outbox
+* recoverableitemsdeletions
+* scheduled
+* searchfolders
+* sentitems
+<p>
+At least one of search criteria must be passed to the query messages function.
+The function will search for messages matching the following criteria:
+
+* Sender email address
+* Message received date/time start/end 
+* Message subject "contains" text
+* Message body "contains" text
+* Boolean flag indicating whether the message has an attachment
+
+<p>
+NOTE: the results of the Query Message function can be large.  Use the max_user and max_messages parameters in the app.config file to limit the number of users searched and the number of messages returned from a query.
+
+ ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
+| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
+| `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
+| `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
+| `exo_message_body` | `text` | No | `message body text` | message body |
+| `exo_message_subject` | `text` | No | `message subject` | message subject |
+| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+   'inputs': {u'exo_start_date': None,
+              u'exo_email_address_sender': None, 
+              u'exo_end_date': None, 
+              u'exo_message_subject': u'lunch', 
+              u'exo_has_attachments': None, 
+              u'exo_email_address': u'all', 
+              u'exo_mail_folders': None, 
+              u'exo_message_body': None},
+    'metrics': {'package': 'fn-exchange-online', 
+              'timestamp': '2020-02-04 15:36:12', 
+              'package_version': '1.0.0', 
+              'host': 'MacBook-Pro.local', 
+              'version': '1.0', 
+              'execution_time_ms': 9492}, 
+    'success': True, 
+    'content': [{'status_code': 200, 
+                'email_address': u'resilient2@securitypocdemos.onmicrosoft.com', 
+                'email_list': [{u'sentDateTime': u'2020-02-04T20:44:02Z', 
+                u'conversationId': u'AAQkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAQANIxI-VmHPNIslAVFC4yWrI=', 
+                u'internetMessageId': u'<MWHPR2201MB11359DA0C07AF09AB319DD9FB1030@MWHPR2201MB1135.namprd22.prod.outlook.com>', 
+                u'id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAAAAEJAABJf-ANAwqcRJF4hFv_x44UAAAlbtF2AAA=', u'isReadReceiptRequested': False, 
+                u'subject': u'lunch', 
+                u'lastModifiedDateTime': u'2020-02-04T20:44:04Z', 
+                u'bodyPreview': u"Let's have lunch at 12!", 
+                u'from': {u'emailAddress': {u'name': u'Resilient User 2', 
+                          u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                u'flag': {u'flagStatus': u'notFlagged'}, 
+                u'isDraft': False, 
+                u'replyTo': [], 
+                u'changeKey': u'CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAlac/G', u'receivedDateTime': u'2020-02-04T20:44:03Z', 
+                u'parentFolderId': u'AQMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMAAuAAAD_OSBJGuCFUuAwXhLTD7khAEASX-wDQMKnESReIRb-seOFAAAAgEJAAAA', 
+                u'body': {u'content': u'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n<meta content="text/html; charset=iso-8859-1">\r\n<style type="text/css" style="display:none">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir="ltr">\r\n<div style="font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)">\r\nLet\'s have lunch at 12!<br>\r\n</div>\r\n</body>\r\n</html>\r\n', u'contentType': u'html'}, 
+                u'isDeliveryReceiptRequested': False, 
+                u'importance': u'normal', 
+                u'toRecipients': [{u'emailAddress': {u'name': u'Resilient User 3', 
+                                  u'address': u'resilient3@securitypocdemos.onmicrosoft.com'}}], 
+                u'ccRecipients': [], 
+                u'isRead': True, 
+                u'categories': [], 
+                u'sender': {u'emailAddress': {u'name': u'Resilient User 2', 
+                            u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, 
+                u'createdDateTime': u'2020-02-04T20:44:02Z', 
+                u'webLink': u'https://outlook.office365.com/owa/?ItemID=AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf%2FANAwqcRJF4hFv%2Bx44UAAAAAAEJAABJf%2FANAwqcRJF4hFv%2Bx44UAAAlbtF2AAA%3D&exvsurl=1&viewmodel=ReadMessageItem', 
+                u'conversationIndex': u'AQHV25vV0jEj9WYc80iyUBUULjJasg==', 
+                u'hasAttachments': False, 
+                u'bccRecipients': [], 
+                u'inferenceClassification': u'focused', 
+                u'@odata.etag': u'W/"CQAAABYAAABJf/ANAwqcRJF4hFv+x44UAAAlac/G"'}]}], 
+      'reason': None, 
+      'version': '1.0'
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+The Example: Exchange Online Query Messages workflow will place results into the Exchange Online Query Results data table which appears on the Exchange Online custom incident tab. 
+(See the Install Guide to setup the custom tab.)
+
+![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-workflow.png)
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+# Get the email address of the user whose mailbox will be queried.
+inputs.exo_email_address = inputs.exo_email_address if rule.properties.exo_email_address_list is None else rule.properties.exo_email_address_list
+
+# Get the search criteria from the activity rules if available. 
+inputs.exo_mail_folders         = inputs.exo_mail_folders         if rule.properties.exo_mailfolder_id        is None else rule.properties.exo_mailfolder_id
+inputs.exo_email_address_sender = inputs.exo_email_address_sender if rule.properties.exo_email_address_sender is None else rule.properties.exo_email_address_sender
+inputs.exo_message_subject      = inputs.exo_message_subject      if rule.properties.exo_message_subject      is None else rule.properties.exo_message_subject
+inputs.exo_message_body         = inputs.exo_message_body         if rule.properties.exo_message_body         is None else rule.properties.exo_message_body
+inputs.exo_start_date           = inputs.exo_start_date           if rule.properties.exo_start_date           is None else rule.properties.exo_start_date
+inputs.exo_end_date             = inputs.exo_end_date             if rule.properties.exo_end_date             is None else rule.properties.exo_end_date
+inputs.exo_has_attachments      = inputs.exo_has_attachments      if rule.properties.exo_has_attachments      is None else rule.properties.exo_has_attachments
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+from java.util import Date
+
+note = u"Exchange Online Query Multiple users:\n"
+note_len = len(note)
+
+# Add each email as a row in the query results data table
+for user in results["content"]:
+  # If an email address is not found post to a note.
+  if user["status_code"] == 404:
+    line = u"email address not found: {}\n".format(user["email_address"])
+    note = note + line
+    
+  for email in user["email_list"]:
+    message_row = incident.addRow("exo_message_query_results_dt")
+    message_row.exo_dt_query_date = Date()
+    message_row.exo_dt_message_id = email.id
+    message_row.exo_dt_received_date   = email.receivedDateTime
+    message_row.exo_dt_email_address = user["email_address"]
+    if email.sender:
+      message_row.exo_dt_sender_email = email.sender.emailAddress.address
+    else:
+      message_row.exo_dt_sender_email = ""
+    message_row.exo_dt_message_subject = email.subject
+    message_row.exo_dt_has_attachments = email.hasAttachments
+    if email.webLink:
+      ref_html = u"""<a href='{0}'>Link</a>""".format(email.webLink)
+      message_row.exo_dt_web_link = helper.createRichText(ref_html)
+    else:
+      message_row.exo_dt_web_link = ""
+ 
+    message_row.exo_dt_status = helper.createRichText("Active")
+
+# If any email addresses where not found post a note
+if len(note) > note_len:
+  incident.addNote(note)
+```
+
+</p>
+</details>
+
+
+<details><summary>Example Rule:</summary>
+<p>
+
+![screenshot: fn-exchange-online-query-messages-rule](./screenshots/EXO-query-messages-rule.png)
+
+When the Example: Exchange Online Delete Messages from Query Results rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+
+![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-query-messages-rule-activity.png)
+
+</p>
+</details>
+
+</p>
+</details>
+
+---
+## Function - Exchange Online: Send Message
+This function will create a message and send to the specified recipients.
+
+ ![screenshot: fn-exchange-online-send-message ](./screenshots/EXO-send-message-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_message_body` | `text` | No | `message body text` | message body |
+| `exo_message_subject` | `text` | No | `message subject` | message subject |
+| `exo_recipients` | `text` | Yes | `-` | comma separated list of message recipients |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {
+    'inputs': {u'exo_recipients': u'resilient2@securitypocdemos.onmicrosoft.com,        resilient3@securitypocdemos.onmicrosoft.com', 
+              u'exo_message_subject': u'Please investigate', 
+              u'exo_message_body': u'<div class="rte"><div>Can you look into this?</div><div><br /></div><div>Thanks!</div></div>', 
+              u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'}, 
+              
+    'metrics': {'package': 'fn-exchange-online', 
+                'timestamp': '2020-02-04 11:18:16', 
+                'package_version': '1.0.0', 
+                'host': 'MacBook-Pro.local', 
+                'version': '1.0', 
+                'execution_time_ms': 796}, 
+    'success': True, 
+    'content': {'value': True}, 
+    'raw': '{"value": true}', 
+    'reason': None, 
+    'version': '1.0'}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+The Example: Exchange Online Send Message workflow will call the Exchange Online Send Message function and write an incident note containing the results of the function.
+
+![screenshot: fn-exchange-online-send-message-workflow](./screenshots/EXO-send-message-workflow.png)
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.exo_email_address   = inputs.exo_email_address   if rule.properties.exo_message_sender_address is None else rule.properties.exo_message_sender_address
+inputs.exo_recipients      = inputs.exo_recipients      if rule.properties.exo_message_recipients     is None else rule.properties.exo_message_recipients
+inputs.exo_message_subject = inputs.exo_message_subject if rule.properties.exo_message_subject is None else rule.properties.exo_message_subject
+inputs.exo_message_body    = inputs.exo_message_send_body.content if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+if results.success:
+  noteText = u"Exchange Online message sent\n   From: {0}\n   To: {1}\n   Subject: {2}\n   Body: {3}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"], results.inputs["exo_message_subject"], results.inputs["exo_message_body"])
+else:
+  noteText = u"Exchange Online message NOT sent\n   From: {0}\n  To: {1}".format(results.inputs["exo_email_address"], results.inputs["exo_recipients"])
+
+incident.addNote(noteText)
+```
+
+</p>
+</details>
+<details><summary>Example Workflow Output:</summary>
+<p>
+The following is a sample incident note that is created from Example: Exchange Online Send Message workflow:
+
+![screenshot: fn-exchange-online-send-message-workflow-output](./screenshots/EXO-send-message-workflow-output.png)
+
+</p>
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The following Example: Exchange Online Send Message incident menu item rule is included to send a message via Exchange Online:
+
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule.png)
+
+<p>
+
+When the Example Send Message rule is initiated the following rule activity popup dialog will appear prompting for input on the message to send:
+
+![screenshot: fn-exchange-online-send-message-rule](./screenshots/EXO-send-message-rule-activity.png)
+</p>
+</details>
+
+</p>
+</details>
+
+---
+## Function - Exchange Online: Write Message as Attachment
+This function will get the mime content of an Exchange Online message and write it as an incident attachment.  The attachment file name is an optional parameter and the functional will use a default message-{email-address}-{message-ID}.eml filename if none is specified.
+
+![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | Yes | `-` | - |
+| `task_id` | `number` | No | `-` | - |
+| `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
+| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_attachment_name` | `text` | No | `my-message.eml` | The name of the attachment file to which message is written. |
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results = {'inputs': {u'incident_id': 2099, 
+                      u'exo_attachment_name': None, 
+                      u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
+                       u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},
+           'metrics': {'package': 'fn-exchange-online', 
+                       'timestamp': '2020-02-03 14:54:13', 
+                       'package_version': '1.0.0', 
+                       'host': 'annmarie-mbp.cambridge.ibm.com', 
+                       'version': '1.0', 'execution_time_ms': 5929}, 
+            'success': True, 'content': {'attachment_name': u'my-message.eml'}, 
+            'raw': '{"attachment_name": "my-message.eml"}', 
+            'reason': None, 
+            'version': '1.0'}
+}
+```
+
+</p>
+</details>
+
+<details><summary>Workflows:</summary>
+<p>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.incident_id = incident.id
+#inputs.task_id = task.id
+inputs.exo_attachment_name = rule.properties.exo_attachment_name
+inputs.exo_email_address = row.exo_dt_email_address
+inputs.exo_messages_id = row.exo_dt_message_id
+
+```
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+None
+```
+
+</p>
+</details>
+
+<details><summary>Example Rule:</summary>
+<p>
+The example Write Message EML as Attachment rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Write Message as Attachment  rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message content can not be retrieed and written anymore.
+
+![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
+
+</p>
+</details>
+</p>
+</details>
+
+---
 
 ## Data Table - Exchange Online Message Query Results
 
- ![screenshot: dt-exchange-online-message-query-results](./screenshots/dt-exchange-online-message-query-results.png)
+ ![screenshot: dt-exchange-online-message-query-results](./screenshots/EXO-dt-message-query-results-datatable.png)
+
 
 #### API Name:
 exo_message_query_results_dt
