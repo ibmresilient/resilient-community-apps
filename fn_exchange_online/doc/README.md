@@ -741,16 +741,9 @@ else:
 incident.addNote(noteText)
 ```
 
-<details><summary>Example Workflow Output:</summary>
-<p>
-
-![screenshot: fn-exchange-online-get-user-profile-workflow-output](./screenshots/EXO-workflow-output.png)
-
 </p>
 </details>
 
-</p>
-</details>
 <details><summary>Example Rule:</summary>
 <p>
 The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
@@ -793,7 +786,7 @@ The mail folder to be searched can be one of the list of Outlook "Well-known" fo
 * searchfolders
 * sentitems
 <p>
-At least one of the following search criteria must be passed to the query messages function
+At least one of the following search criteria must be passed to the query messages function:
 
 * Sender email address
 * Message received date/time start/end 
