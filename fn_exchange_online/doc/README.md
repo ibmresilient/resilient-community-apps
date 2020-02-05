@@ -58,7 +58,7 @@ Resilient Integration with Exchange Online provides the capability to access and
 ## Integration Flow for Phishing Investigation Use Case
 
 <p>
-The Exchange Online integration primary use case is monitoring and control email activities in Exchange Online (Office 365 Outlook in the cloud) and to protect against inbound malicious emails.
+The Exchange Online integration primary use case is monitoring and controling email activities in Exchange Online (Office 365 Outlook in the cloud) and to protect against inbound malicious emails.
 <p>
 To use the integration, you can run the Query Messages rule from the Action menu of an Incident.  From this rule you can search a single email address, a list of email addresses or the entire tenant.  Results of the query will be returned in the Exchange Online Message Query Results data table on the Exchange Online incident tab. Each row in the data table contains information from one message and the following actions can be performed on each message when it's state is Active in the Status column :  
 
@@ -86,7 +86,7 @@ More investigation, including using other email analysis scripts and integration
 <p>Once the investigation of the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions menu.  This rule is very powerful and should be used with caution as you can delete many user messages.  The rule starts a workflow that performs a query of messages and sends the matching results to a function that will delete a list of messages.  The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red.  An incident note is also written that indicates the number of messages deleted.
 
 <p>
-
+At anytime the user can send a message or schedule a meeting using the Exchange OPnline: Send MEssage and 
 ---
 ## Function - Exchange Online: Create Meeting
 
@@ -276,7 +276,7 @@ elif results.content["error"] is not None:
 <details><summary>Example Workflow Output:</summary>
 <p>
 
-![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-message-workflow-output.png)
+![screenshot: fn-exchange-online-delete-message-output](./screenshots/EXO-delete-from-query-workflow-output.png)
 
 </p>
 </details>
@@ -314,8 +314,20 @@ This Exchange Online function will delete a list of messages returned from the Q
 <p>
 
 ```python
-results = {
-    
+results = {'inputs': {u'exo_query_messages_results': u'[{"status_code": 200, "email_address": "resilient3@securitypocdemos.onmicrosoft.com", "email_list": [{"sentDateTime": "2020-02-05T20:03:21Z", "conversationId": "AAQkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAQAExiSXKQgttDm_-WozAl5As=", "internetMessageId": "<MWHPR2201MB11357FA62DE5F7C1B1EBCF53B1020@MWHPR2201MB1135.namprd22.prod.outlook.com>", "id": "AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ-6AAALRtgSAAA=", "isReadReceiptRequested": false, "subject": "lunch", "lastModifiedDateTime": "2020-02-05T20:05:13Z", "bodyPreview": "Do you want to meet for lunch?", "from": {"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "flag": {"flagStatus": "notFlagged"}, "isDraft": false, "replyTo": [], "changeKey": "CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT", "receivedDateTime": "2020-02-05T20:03:24Z", "parentFolderId": "AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAuAAAAAACPU6DCGuV7Sa2kl4jNbcmuAQCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAAA=", "body": {"content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=iso-8859-1\\">\\r\\n<style type=\\"text/css\\" style=\\"display:none\\">\\r\\n<!--\\r\\np\\r\\n\\t{margin-top:0;\\r\\n\\tmargin-bottom:0}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body dir=\\"ltr\\">\\r\\n<div style=\\"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\\">\\r\\nDo you want to meet for lunch?<br>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n", "contentType": "html"}, "isDeliveryReceiptRequested": false, "importance": "normal", "toRecipients": [{"emailAddress": {"name": "Resilient User 3", "address": "resilient3@securitypocdemos.onmicrosoft.com"}}], "ccRecipients": [], "isRead": false, "categories": [], "sender": {"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "createdDateTime": "2020-02-05T20:03:23Z", "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ%2F6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ%2F6AAALRtgSAAA%3D&exvsurl=1&viewmodel=ReadMessageItem", "conversationIndex": "AQHV3F9QTGJJcpCC20Ob79ajMCXkCw==", "hasAttachments": false, "bccRecipients": [], "inferenceClassification": "focused", "@odata.etag": "W/\\"CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT\\""}]}]'}, 
+
+'metrics': {'package': 'fn-exchange-online', 
+            'timestamp': '2020-02-05 15:06:25', 
+            'package_version': '1.0.0', 
+            'host': 'MacBook-Pro.local', 
+            'version': '1.0', 
+            'execution_time_ms': 4869}, 
+            
+'success': True, 
+'content': [{'not_deleted_list': [], 'deleted_list': [{u'sentDateTime': u'2020-02-05T20:03:21Z', u'webLink': u'https://outlook.office365.com/owa/?ItemID=AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ%2F6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ%2F6AAALRtgSAAA%3D&exvsurl=1&viewmodel=ReadMessageItem', u'conversationId': u'AAQkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAQAExiSXKQgttDm_-WozAl5As=', u'internetMessageId': u'<MWHPR2201MB11357FA62DE5F7C1B1EBCF53B1020@MWHPR2201MB1135.namprd22.prod.outlook.com>', u'id': u'AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ-6AAALRtgSAAA=', u'isReadReceiptRequested': False, u'subject': u'lunch', u'lastModifiedDateTime': u'2020-02-05T20:05:13Z', u'bodyPreview': u'Do you want to meet for lunch?', u'from': {u'emailAddress': {u'name': u'Resilient User 2', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, u'isDraft': False, u'importance': u'normal', u'changeKey': u'CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT', u'receivedDateTime': u'2020-02-05T20:03:24Z', u'parentFolderId': u'AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAuAAAAAACPU6DCGuV7Sa2kl4jNbcmuAQCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAAA=', u'body': {u'content': u'<html>\r\n<head>\r\n<meta http-equiv="Content-Type" content="text/html; charset=utf-8">\r\n<meta content="text/html; charset=iso-8859-1">\r\n<style type="text/css" style="display:none">\r\n<!--\r\np\r\n\t{margin-top:0;\r\n\tmargin-bottom:0}\r\n-->\r\n</style>\r\n</head>\r\n<body dir="ltr">\r\n<div style="font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)">\r\nDo you want to meet for lunch?<br>\r\n</div>\r\n</body>\r\n</html>\r\n', u'contentType': u'html'}, u'isDeliveryReceiptRequested': False, u'replyTo': [], u'toRecipients': [{u'emailAddress': {u'name': u'Resilient User 3', u'address': u'resilient3@securitypocdemos.onmicrosoft.com'}}], u'ccRecipients': [], u'flag': {u'flagStatus': u'notFlagged'}, u'categories': [], u'sender': {u'emailAddress': {u'name': u'Resilient User 2', u'address': u'resilient2@securitypocdemos.onmicrosoft.com'}}, u'createdDateTime': u'2020-02-05T20:03:23Z', u'isRead': False, u'conversationIndex': u'AQHV3F9QTGJJcpCC20Ob79ajMCXkCw==', u'hasAttachments': False, u'bccRecipients': [], u'inferenceClassification': u'focused', u'@odata.etag': u'W/"CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT"'}], 'email_address': u'resilient3@securitypocdemos.onmicrosoft.com'}], 'raw': '[{"not_deleted_list": [], "deleted_list": [{"sentDateTime": "2020-02-05T20:03:21Z", "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ%2F6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ%2F6AAALRtgSAAA%3D&exvsurl=1&viewmodel=ReadMessageItem", "conversationId": "AAQkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAQAExiSXKQgttDm_-WozAl5As=", "internetMessageId": "<MWHPR2201MB11357FA62DE5F7C1B1EBCF53B1020@MWHPR2201MB1135.namprd22.prod.outlook.com>", "id": "AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQBGAAAAAACPU6DCGuV7Sa2kl4jNbcmuBwCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAACU6ehSHWGRTqkx2knKEQ-6AAALRtgSAAA=", "isReadReceiptRequested": false, "subject": "lunch", "lastModifiedDateTime": "2020-02-05T20:05:13Z", "bodyPreview": "Do you want to meet for lunch?", "from": {"emailAddress": {"name": "Resilient User 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "isDraft": false, "importance": "normal", "changeKey": "CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT", "receivedDateTime": "2020-02-05T20:03:24Z", "parentFolderId": "AAMkADZkZDY2NTRlLWQwNjgtNDMxZi1iYTA2LTQ0ZmYxN2UwMjhmZQAuAAAAAACPU6DCGuV7Sa2kl4jNbcmuAQCU6ehSHWGRTqkx2knKEQ-6AAAAAAEMAAA=", "body": {"content": "<html>\\r\\n<head>\\r\\n<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=utf-8\\">\\r\\n<meta content=\\"text/html; charset=iso-8859-1\\">\\r\\n<style type=\\"text/css\\" style=\\"display:none\\">\\r\\n<!--\\r\\np\\r\\n\\t{margin-top:0;\\r\\n\\tmargin-bottom:0}\\r\\n-->\\r\\n</style>\\r\\n</head>\\r\\n<body dir=\\"ltr\\">\\r\\n<div style=\\"font-family:Calibri,Arial,Helvetica,sans-serif; font-size:12pt; color:rgb(0,0,0)\\">\\r\\nDo you want to meet for lunch?<br>\\r\\n</div>\\r\\n</body>\\r\\n</html>\\r\\n", "contentType": "html"}, "isDeliveryReceiptRequested": false, "replyTo": [], "toRecipients": [{"emailAddress": {"name": "Resilient User 3", "address": "resilient3@securitypocdemos.onmicrosoft.com"}}], "ccRecipients": [], "flag": {"flagStatus": "notFlagged"}, "categories": [], "sender": {"emailAddress": {"name": "Resilient USer 2", "address": "resilient2@securitypocdemos.onmicrosoft.com"}}, "createdDateTime": "2020-02-05T20:03:23Z", "isRead": false, "conversationIndex": "AQHV3F9QTGJJcpCC20Ob79ajMCXkCw==", "hasAttachments": false, "bccRecipients": [], "inferenceClassification": "focused", "@odata.etag": "W/\\"CQAAABYAAACU6ehSHWGRTqkx2knKEQ/6AAALRVqT\\""}], "email_address": "resilient3@securitypocdemos.onmicrosoft.com"}]', 
+
+'reason': None, 
+'version': '1.0'
 }
 ```
 
@@ -781,8 +793,7 @@ The mail folder to be searched can be one of the list of Outlook "Well-known" fo
 * searchfolders
 * sentitems
 <p>
-At least one of search criteria must be passed to the query messages function.
-The function will search for messages matching the following criteria:
+At least one of the following search criteria must be passed to the query messages function
 
 * Sender email address
 * Message received date/time start/end 
