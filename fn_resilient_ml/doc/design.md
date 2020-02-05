@@ -15,7 +15,7 @@ In order to find relationship between textual information, one approach is to fi
 between individual words first. This NLP integration uses a python package called 
 gensim word2vec to do so. 
 
-### Word Embedding
+### Word Embeddings
 [Gensim word2vec](https://radimrehurek.com/gensim/models/word2vec.html) represents each word used 
 in the dataset as a multi-dimensional vector. This is also
 called word embeddings. Here the dataset is the textual information of all the incidents. This is the
@@ -34,7 +34,7 @@ Each word is then a combination (vector sum) of those meaningful features. Simil
 similar combination, and thus stay close to each other.
    
 In reality, users specify how many features to use, and the model figures out what features to use.
-A dimension used by a word2vec is in general a combination of several meaningful features 
+A dimension used by a word2vec model is in general a combination of several meaningful features 
 human being can understand. 
 
 For resilient NLP, the default number of features is set to be 50. Advanced users can change this value in 
@@ -77,8 +77,8 @@ this model can give more accurate result.
 
 With these two enhancement, word2vec can be used to obtain similarity between sentences.
 
-### NLP summary
-In summary, the steps to build this NLP model can be summarized in the following data flow
+### Resilient NLP summary
+In summary, the steps to build a Resilient NLP model can be summarized in the following data flow
 diagram:
 ![data flow](images/NLP_dataflow.png)
 
@@ -89,7 +89,9 @@ a .txt file. By default, this file is named resilient-w2v.txt.
 * PCA is then computed using the sentence vectors. PCA data is saved into resilient-pca.json.
 * PCA is removed from each sentence vector, and all sentence vectors are saved into resilient-vec.json.
 
-Later on, to find similar incidents given a new one, we need to use all those four files saved above.
+Later on, to find similar incidents given a new one, we need to use all those four files saved above,
+as show in the following data flow diagram.
+![dat flow](images/NLP_search_dataflow.png)
 * Use the resilient-w2v.txt file to find the vector for each word of the new incident
 * Use the resilient-sif.pkl file to find the weight factor for each word
 * Sum up the word vector to get the sentence vector
