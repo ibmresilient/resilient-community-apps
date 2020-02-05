@@ -22,12 +22,14 @@ SUPPORTED_PAGINATE_TYPES = [
 SUPPORTED_GET_TYPES = [
     "User",
     "Tags",
-    "LoginProfile"
+    "LoginProfile",
+    "AccessKeyLastUsed"
 ]
 FILTER_NAMES = [
     "UserName",
     "GroupName",
-    "PolicyName"
+    "PolicyName",
+    "AccessKeyId"
 ]
 
 class AwsIamClient():
@@ -60,6 +62,7 @@ class AwsIamClient():
 
         if sts_client:
             self.sts = self._get_client("sts")
+            self.default_identity = self._get_default_identity()
 
     def _get_client(self, service_name):
         """ Create an AWS IAM client.
@@ -108,6 +111,19 @@ class AwsIamClient():
 
         return result
 
+    def _add_access_key_properties(self, result):
+        """ Add metadata entries for access keys.
+
+        :param result: List of dicts from AWS IAM response.
+        :return: Updated result.
+
+        """
+        # Add a flag for the default access key in result.
+        for i in range(len(result)):
+            if result[i]["AccessKeyId"] == self.aws_iam_access_key_id:
+                result[i].update({"DefaultKey": "Yes"})
+        return result
+
     def _update_result(self, result, result_type):
         """ Make any necessary conversions and additions to AWS IAM result.
 
@@ -120,12 +136,15 @@ class AwsIamClient():
             for entry in result:
                 if isinstance(entry, dict):
                     entry = self._datetime_to_str(entry)
+        elif isinstance(result, dict):
+            result = self._datetime_to_str(result)
         else:
             LOG.error("ERROR with unexpected result type %s for AWS IAM query", type(result))
         # If the result is for a user or list of users add some additional user properties.
         if any(n in result_type for n in ["User", "Users"]):
             result = self._add_user_properties(result)
-
+        elif "AccessKeyMetadata" in result_type:
+            result = self._add_access_key_properties(result)
         return result
 
     def _get_default_identity(self):
@@ -143,7 +162,7 @@ class AwsIamClient():
 
         return default_identity
 
-    def paginate(self, op=None, results_filter=None, **kwargs):
+    def paginate(self, op=None, results_filter=None, return_filtered=False, **kwargs):
         """ Get the result using get_paginator format for certain AWS IAM queries.
         Example calls include 'list_users' adn 'list_groups_for_user'.
 
@@ -154,6 +173,7 @@ class AwsIamClient():
         """
         result_type = None
         result = []
+        count = 0
         try:
             paginator = self.iam.get_paginator(op)
             for response in paginator.paginate(**kwargs):
@@ -161,24 +181,34 @@ class AwsIamClient():
                     result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
                 result.extend(response[result_type])
 
+        except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     op, kwargs, "NoSuchEntityException")
+
+            return {"Status": "NoSuchEntity"}
+
         except Exception as int_ex:
             LOG.error("ERROR in paginator with operation: '%s' and args: '%s', Got exception: %s",
                       op, kwargs, int_ex.__repr__())
             LOG.info(int_ex)
             raise int_ex
 
+        # Apply filter to results.
+        if result and results_filter:
+            (count, result) = self._filter(result, results_filter, return_filtered)
+
         # Make updates to the raw result.
         if result:
             result = self._update_result(result, result_type)
 
-        # Apply filter to results.
-        if result and results_filter:
-            return self._filter(result, results_filter)
+        # Return result
+        if results_filter:
+            # If filter set return tuple including count.
+            return (count, result)
+        else:
+            return result
 
-        # Return unfiltered result
-        return result
-
-    def get(self, op=None, paginate=False, **kwargs):
+    def get(self, op=None, paginate=False, results_filter=None, return_filtered=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
         Example calls include 'get_user' and 'get_user_tags', 'list_users'.
         The calls will translate to actual 'get' or query operations. The operation will return
@@ -189,8 +219,8 @@ class AwsIamClient():
         :param kwargs: Dictionary of AWS API parameters for function call .
         :return: Result in a list.
         """
-        if paginate:
-            return self.paginate(op, **kwargs)
+        if paginate and self.iam.can_paginate(op):
+            return self.paginate(op, results_filter=results_filter, return_filtered=return_filtered, **kwargs)
 
         result = []
         result_type = None
@@ -216,7 +246,7 @@ class AwsIamClient():
                 # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
                 return {}
 
-            raise no_such_entity_ex
+            return {"Status": "NoSuchEntity"}
 
         except Exception as int_ex:
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
@@ -226,9 +256,10 @@ class AwsIamClient():
         if result_type == "User":
             # Normalize and update result for 'User' to be same as that of list all users.
             result.append(response[result_type])
-            return self._update_result(result, result_type)
+        else:
+            result = response[result_type]
 
-        return response[result_type]
+        return self._update_result(result, result_type)
 
 
     def post(self, op, **kwargs):
@@ -266,26 +297,26 @@ class AwsIamClient():
         return status
 
 
-    def _filter(self, result, results_filter=None):
+    def _filter(self, result, results_filter=None, return_filtered=False):
         """ Filter results returned from AWS IAM.
 
         :param result: Dict or list of dicts from AWS IAM response.
         :param results_filter: Dict of filters by filter type.
+        :param return_filtered: Boolean to determine whether the filtered result is returned in result tuple.
         :return: Result or Tuple of filtered result count and either full or filtered result depending on filter type.
         """
-        # Set default good status:
-
+        # Set default good result:
         rtn = (len(result), result)
 
         for filter_name in FILTER_NAMES:
             if results_filter and filter_name in results_filter and filter_name in result[0]:
                 regex = r'{}'.format(results_filter[filter_name])
                 filtered_result = [r for r in result if re.search(regex, r[filter_name], re.IGNORECASE)]
-                if filter_name in FILTER_NAMES[0]:
-                    # If file is 'UserName' return filtered count and filtered result.
+                if return_filtered:
+                    # Return filtered count and filtered result.
                     rtn = (len(filtered_result), filtered_result)
                 else:
-                    # For other filter types return filtered count and full result.
+                    # If Boolean not set return filtered count and full result.
                     rtn = (len(filtered_result), result)
         return rtn
 

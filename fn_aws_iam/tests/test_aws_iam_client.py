@@ -30,11 +30,13 @@ class TestAWSIAMClient:
     """ Test aws_iam_client using mocked data.  """
 
     """ Test sep_client._get_client"""
+
+    @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
     @pytest.mark.parametrize("service, expected_result", [
         ("iam", "botocore.client.IAM object at "),
         ("sts", "botocore.client.STS object at "),
     ])
-    def test_get_client(self, service, expected_result):
+    def test_get_client(self, mock_id, service, expected_result):
         options = {}
 
         iam_cli = AwsIamClient(get_config())
@@ -42,12 +44,14 @@ class TestAWSIAMClient:
         assert(expected_result in repr(response))
 
     """ Test sep_client.__get_type_from_response"""
+
+    @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
     @pytest.mark.parametrize("op, type_list, expected_result", [
         ("get_user", SUPPORTED_GET_TYPES, "User"),
         ("list_user_tags", SUPPORTED_GET_TYPES, "Tags"),
         ("get_login_profile", SUPPORTED_GET_TYPES, "LoginProfile"),
     ])
-    def test_get_type_from_response(self, op, type_list, expected_result):
+    def test_get_type_from_response(self, mock_id, op, type_list, expected_result):
         options = {}
 
         iam_cli = AwsIamClient(get_config())
@@ -55,10 +59,12 @@ class TestAWSIAMClient:
         assert(expected_result in repr(response))
 
     """ Test sep_client.__get_type_from_response negative case"""
+
+    @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
     @pytest.mark.parametrize("op, type_list, expected_result", [
         ("get_user", SUPPORTED_PAGINATE_TYPES, "No supported type for integration found in AWS IAM response")
     ])
-    def test_get_type_from_response_err(self, op, type_list, expected_result):
+    def test_get_type_from_response_err(self, mock_id, op, type_list, expected_result):
         options = {}
 
         iam_cli = AwsIamClient(get_config())
@@ -99,10 +105,12 @@ class TestAWSIAMClient:
         assert(expected_result == response)
 
     """ Test sep_client._datetime_to_str"""
+
+    @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
     @pytest.mark.parametrize("result_entry, expected_result", [
         (mocked_iam_pre_results("get_user")[0], ["2019-10-31 16:23:07", "2019-11-15 17:11:28"])
     ])
-    def test_datetime_to_str(self, result_entry, expected_result):
+    def test_datetime_to_str(self, mock_id, result_entry, expected_result):
         options = {}
 
         iam_cli = AwsIamClient(get_config())
@@ -154,20 +162,25 @@ class TestAWSIAMClient:
         assert (expected_result == response)
 
     """ Test sep_client._filter"""
-    @pytest.mark.parametrize("result, results_filter, expected_result", [
-        (get_func_responses("list_users"), None, 4),
-        (get_func_responses("list_users"), {'UserName': u'test_user'}, 0),
-        (get_func_responses("list_users"), {'UserName': 'iam_list_User_1'}, 1),
-        (get_func_responses("list_groups_for_user"), {'GroupName': u'test_group'}, [0, 2]),
-        (get_func_responses("list_groups_for_user"), {'GroupName': 'null_group'}, [1, 2]),
-        (get_func_responses("list_policies"), {'PolicyName': u'test_policy'}, [0, 3]),
-        (get_func_responses("list_policies"), {'PolicyName': 'deny_all'}, [1, 3]),
+
+    @patch('fn_aws_iam.lib.aws_iam_client.AwsIamClient._get_default_identity', side_effect=get_default_identity)
+    @pytest.mark.parametrize("result, results_filter, return_filtered, expected_result", [
+        (get_func_responses("list_users"), None, True, 4),
+        (get_func_responses("list_users"), {'UserName': u'test_user'}, True, 0),
+        (get_func_responses("list_users"), {'UserName': 'iam_list_User_1'}, True, 1),
+        (get_func_responses("list_access_keys"), {'AccessKeyId': 'ABC123CDE456FGH789IJ'}, True, 1),
+        (get_func_responses("list_access_keys"), {'AccessKeyId': '123'}, True, 2),
+        (get_func_responses("list_groups_for_user"), {'GroupName': u'test_group'}, False, [0, 2]),
+        (get_func_responses("list_groups_for_user"), {'GroupName': 'null_group'}, False, [1, 2]),
+        (get_func_responses("list_policies"), {'PolicyName': u'test_policy'}, False, [0, 3]),
+        (get_func_responses("list_policies"), {'PolicyName': 'deny_all'}, False, [1, 3]),
+
     ])
-    def test__filter(self, result, results_filter, expected_result):
+    def test__filter(self, mock_id, result, results_filter, return_filtered, expected_result):
         options = {}
 
         iam_cli = AwsIamClient(get_config())
-        response = iam_cli._filter(result, results_filter)
+        response = iam_cli._filter(result, results_filter, return_filtered=return_filtered)
         if isinstance(expected_result, list):
             assert (expected_result[0] == response[0])
             assert (expected_result[1] == len(response[1]))

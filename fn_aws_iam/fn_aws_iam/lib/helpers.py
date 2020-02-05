@@ -4,6 +4,7 @@
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function
 import logging
+import re
 from resilient_circuits.actions_component import ResilientComponent
 
 LOG = logging.getLogger(__name__)
@@ -64,3 +65,16 @@ def validate_opts(func):
             raise Exception("Mandatory config setting '{}' not set.".format(param))
         if param_value in ('', "\'\'"):
             raise ValueError("Invalid value for config setting '{}'.".format(param))
+
+
+def is_regex(regex_str):
+    """"Test if sting is a correctly formed regular expression.
+
+    :param regex_str: Regular expression string.
+    :return: Boolean.
+    """
+    try:
+        re.compile(regex_str)
+        return True
+    except re.error:
+        return False

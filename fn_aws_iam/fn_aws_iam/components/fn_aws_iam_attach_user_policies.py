@@ -64,12 +64,11 @@ class FunctionComponent(ResilientComponent):
                 # Test if policy_names are attached for user name and get arn.
                 for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
                     policies = iam_cli.get("list_policies", paginate=True)
-                    if policies:
-                        policy = [policy for policy in policies if policy["PolicyName"] == policy_name][0]
+                    policy_list = [policy for policy in policies if policy["PolicyName"] == policy_name]
 
-                    if not policies or not policy:
+                    if not policies or not policy_list:
                         raise ValueError("Policy with name '{0}' does not exist.".format(policy_name))
-
+                    policy = policy_list[0]
                     params.update({"PolicyArn": policy["Arn"]})
                     rtn.append({
                         "PolicyName": policy_name,
