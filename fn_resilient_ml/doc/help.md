@@ -19,6 +19,14 @@ NLP can rank incidents by similarity. Specify how many top
 incidents to return by the search, or leave it empty to use default
 value.
 
+Select an incident, then click Actions
+![action](images/NlpSearch.png)
+
+There are two NLP searches available.
+
+#### NLP Search
+This one uses the description of the selected incident to do NLP search. 
+
 Note: for 0 or negative values, default number of incidents will be returned
 
 ![menu](./images/Menu.png)
@@ -30,6 +38,17 @@ Input tab, change number_incidents to new default value. Then click
 Save & Close.
 
 ![wf_default](./images/WF_default_value.png)
+
+#### NLP String Search
+This one allows users to fine-tune the string they want to use for th search. 
+A use case is the following. Sometimes the description of an incident might contain
+some irrelevant data. If users know which portion of the whole description is more
+important/relevant, they can input this portion to do the NLP string search.
+
+![string search](images/NlpStringsearch.png)
+
+Users can specify how many similar incident to return here as well.
+
 ### Rebuild a NLP model
 NLP model needs to be rebuilt periodically when more incidents are available.
 Refer to the section about for building a NLP model.

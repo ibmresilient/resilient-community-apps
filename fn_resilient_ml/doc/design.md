@@ -100,7 +100,7 @@ above data flow diagram:
 * resilient-w2v.txt: word2vec model in text format. It is basically a word-vec dictionary.
 * resilient-sif.pkl: word count in python pickle format. It is a word-count dictinary.
 * resilient-vec.json: vectors for all (old) incidents. 
-* resilient-pca.json: PCA vector.
+* resilient-pca.json: a vector for the principle component, in json format.
  
 At the end, it removes the saved incident and artifact files.
 

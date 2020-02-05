@@ -57,6 +57,8 @@ class FileManage():
         elif file_ext == ".pkl" and file_name.endswith("-sif"):
             # This is a file with word counts used for SIF
             ret = self.get_summary_sif()
+        elif file_ext == ".json" and file_name.endswith("-pca"):
+            ret  = self.get_summary_pca()
         else:
             ret = ["Unable to detect the file type."]
         return ret
@@ -134,6 +136,30 @@ class FileManage():
             ret.append(self.FILE_NAME_OUTPUT.format(self.filename))
             ret.append(self.LAST_MODIFICATION_TIME.format(mtime))
             ret.append(self.NUM_WORDS_OUTPUT.format(len(sif)))
+            ret.append("\n")
+        except Exception as e:
+            ret.append("Failed to read SIF file {}.".format(self.filename))
+            ret.append("Error: {}".format(e))
+        return ret
+
+    def get_summary_pca(self):
+        """
+        A PCA (Principle Component Analysis) file contains the principle
+        vector component to be removed.
+        :return:
+        """
+        ret = []
+        try:
+            mtime = self._get_mtime()
+            ret.append("---------------------")
+            ret.append("Summary for PCA file:")
+            ret.append("---------------------")
+
+            data = json.load(open(self.filename, 'r'))
+
+            ret.append(self.FILE_NAME_OUTPUT.format(self.filename))
+            ret.append(self.LAST_MODIFICATION_TIME.format(mtime))
+            ret.append(self.FEATURE_DIMENSION.format(len(data)))
             ret.append("\n")
         except Exception as e:
             ret.append("Failed to read SIF file {}.".format(self.filename))
