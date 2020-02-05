@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: Add User To Group
 
-
 ## Function - AWS IAM: Add User To Groups
 
 ### API Name
@@ -48,24 +47,24 @@ def main():
     no_such_entity = 0
     added_groups = []
     no_such_entity_groups = []
-    if CONTENT is not None:
-        for i in range(len(CONTENT)):
-            if CONTENT[i]["Status"] == "OK":
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
                 added += 1
-                added_groups.append(CONTENT[i]["GroupName"])
+                added_groups.append(grp_stat["GroupName"])
             else:
                 no_such_entity += 1
-                no_such_entity_groups.append(CONTENT[i]["GroupName"])
+                no_such_entity_groups.append(grp_stat["GroupName"])
         if added_groups:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> Groups <b>{2}</b> added " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(added_groups), added_groups, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(added_groups), ", ".join(str(i) for i in added_groups), INPUTS["aws_iam_user_name"], FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There was <b>{1}</b> Groups <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(no_such_entity_groups), no_such_entity_groups, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_groups), ", ".join(str(i) for i in no_such_entity_groups), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -75,7 +74,6 @@ if __name__ == "__main__":
 ```
 
 ---
-
 
 ## Function - AWS IAM: List User Groups
 
@@ -125,18 +123,18 @@ note_text = ''
 
 def main():
     note_text = ''
-    if CONTENT is not None:
+    if CONTENT:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Group' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>"\
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
             .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         groups = []
-        for g in range(len(CONTENT)):
-            if CONTENT[g]["GroupName"] is not None:
-                groups.append(CONTENT[g]["GroupName"])
+        for grp in CONTENT:
+            if grp["GroupName"] is not None:
+                groups.append(grp["GroupName"])
         row.Groups = ",".join(groups)
     else:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>"\
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

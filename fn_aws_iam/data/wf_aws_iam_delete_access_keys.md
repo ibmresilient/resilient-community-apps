@@ -5,7 +5,6 @@
 
 # Example: AWS IAM: Delete Access Keys
 
-
 ## Function - AWS IAM: Delete Access Keys
 
 ### API Name
@@ -58,25 +57,25 @@ def main():
     no_such_entity = 0
     deleted_keys = []
     no_such_entity_keys = []
-    if CONTENT is not None:
-        for i in range(len(CONTENT)):
-            if CONTENT[i]["Status"] == "OK":
+    if CONTENT:
+        for ak_stat in CONTENT:
+            if ak_stat["Status"] == "OK":
                 deleted += 1
-                deleted_keys.append(CONTENT[i]["AccessKeyId"])
+                deleted_keys.append(ak_stat["AccessKeyId"])
             else:
                 no_such_entity += 1
-                no_such_entity_keys.append(CONTENT[i]["AccessKeyId"])
+                no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> deleted " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(deleted_keys), deleted_keys, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deleted_keys), ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>"\
-                .format(WF_NAME, len(no_such_entity_keys), no_such_entity_keys, INPUTS["aws_iam_user_name"], FN_NAME)
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_keys), ", ".join(str(i) for i in no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
         row.AccessKeyIds = ""
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -86,7 +85,6 @@ if __name__ == "__main__":
 ```
 
 ---
-
 
 ## Function - AWS IAM: List User Access Key Ids
 
@@ -132,18 +130,18 @@ note_text = ''
 
 def main():
     note_text = ''
-    if CONTENT is not None:
+    if CONTENT:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Access key' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>"\
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
             .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         access_key_ids = []
-        for ak in range(len(CONTENT)):
-            if CONTENT[ak]["AccessKeyId"] is not None:
-                access_key_ids.append(CONTENT[ak]["AccessKeyId"])
+        for ak in CONTENT:
+            if ak["AccessKeyId"] is not None:
+                access_key_ids.append(ak["AccessKeyId"])
         row.AccessKeyIds = ",".join(access_key_ids)
     else:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>"\
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

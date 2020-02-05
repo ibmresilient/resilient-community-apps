@@ -52,25 +52,25 @@ def main():
     no_such_entity = 0
     deleted_keys = []
     no_such_entity_keys = []
-    if CONTENT is not None:
-        for i in range(len(CONTENT)):
-            if CONTENT[i]["Status"] == "OK":
+    if CONTENT:
+        for ak_stat in CONTENT:
+            if ak_stat["Status"] == "OK":
                 deleted += 1
-                deleted_keys.append(CONTENT[i]["AccessKeyId"])
+                deleted_keys.append(ak_stat["AccessKeyId"])
             else:
                 no_such_entity += 1
-                no_such_entity_keys.append(CONTENT[i]["AccessKeyId"])
+                no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Ids <b>{1}</b> deleted " \
-                        "for Resilient function <b>{2}</b>".format(WF_NAME, ''.join(deleted_keys),  FN_NAME)
+                        "for Resilient function <b>{2}</b>.".format(WF_NAME, ''.join(deleted_keys),  FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
-                        "for Resilient function <b>{2}</b>"\
+                        "for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
         row.Status = ""
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
-        "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>"\
+        "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))

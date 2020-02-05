@@ -60,16 +60,16 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def process_access_keys(access_key_id_list, user_name):
     access_key_ids = []
-    for i in range(len(access_key_id_list)):
+    for ak_id in access_key_id_list:
         newrow = incident.addRow("aws_iam_access_keys")
         newrow.query_execution_date = QUERY_EXECUTION_DATE
         newrow.UserName = user_name
         for f in DATA_TBL_FIELDS[2:]:
-            if access_key_id_list[i][f] is not None:
-                newrow[f] = access_key_id_list[i][f]
+            if ak_id[f] is not None:
+                newrow[f] = ak_id[f]
         # Add key last used data if it exists.
-        if access_key_id_list[i]["key_last_used"] is not None:
-            luak = access_key_id_list[i]["key_last_used"]
+        if ak_id["key_last_used"] is not None:
+            luak = ak_id["key_last_used"]
             for l in DATA_TBL_FIELDS_LUAK:
                 if luak[l] is not None:
                     newrow[l] = luak[l]
@@ -78,23 +78,23 @@ def main():
     filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
                            INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
                if f is not None]
-    if CONTENT is not None:
+    if CONTENT:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
-                   "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
-        for u in range(len(CONTENT)):
-           if CONTENT[u]["AccessKeyIds"] is not None:
-                user_name = CONTENT[u]["UserName"]
-                process_access_keys(CONTENT[u]["AccessKeyIds"], user_name)
+                   "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
+        for u in CONTENT:
+           if u["AccessKeyIds"]:
+                user_name = u["UserName"]
+                process_access_keys(u["AccessKeyIds"], user_name)
 
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
 
     if filters:
         note_text += "<br>Query Filters:</br>"
-        if "aws_iam_user_filter" in INPUTS and INPUTS["aws_iam_user_filter"] is not None:
+        if INPUTS.get("aws_iam_user_filter"): 
             note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
-        if "aws_iam_access_key_filter" in INPUTS and INPUTS["aws_iam_access_key_filter"] is not None:
+        if INPUTS.get("aws_iam_access_key_filter"): 
             note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":

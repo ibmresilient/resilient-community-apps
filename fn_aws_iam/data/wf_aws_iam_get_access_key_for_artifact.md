@@ -66,16 +66,16 @@ note_text = ''
 
 def process_access_keys(access_key_id_list, user_name):
     access_key_ids = []
-    for i in range(len(access_key_id_list)):
+    for ak_id in access_key_id_list:
         newrow = incident.addRow("aws_iam_access_keys")
         newrow.query_execution_date = QUERY_EXECUTION_DATE
         newrow.UserName = user_name
         for f in DATA_TBL_FIELDS[2:]:
-            if access_key_id_list[i][f] is not None:
-                newrow[f] = access_key_id_list[i][f]
+            if ak_id[f] is not None:
+                newrow[f] = ak_id[f]
         # Add key last used data if it exists.
-        if access_key_id_list[i]["key_last_used"] is not None:
-            luak = access_key_id_list[i]["key_last_used"]
+        if ak_id["key_last_used"] is not None:
+            luak = ak_id["key_last_used"]
             for l in DATA_TBL_FIELDS_LUAK:
                 if luak[l] is not None:
                     newrow[l] = luak[l]
@@ -83,10 +83,10 @@ def process_access_keys(access_key_id_list, user_name):
 
 def main():
     note_text = ''
-    if CONTENT is not None and len(CONTENT) > 0:
+    if CONTENT:
         if len(CONTENT) == 1:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for access " \
-                        "key(s) matching <b>{2}</b>  for Resilient function <b>{3}</b>"\
+                        "key(s) matching <b>{2}</b>  for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_access_key_filter"], FN_NAME)
             u = CONTENT.pop()
             if u["AccessKeyIds"] is not None:
@@ -94,9 +94,9 @@ def main():
                 process_access_keys(u["AccessKeyIds"], user_name)
         else:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
-                        "Resilient function <b>{3}</b>".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+                        "Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
