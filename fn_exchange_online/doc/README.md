@@ -69,15 +69,23 @@ To use the integration, you can run the Query Messages rule from the Action menu
 * Write the message JSON returned from MS Graph to an incident note 
 
 <p>
-More investigation, including other integrations can be done on the file after writing the message to a note or attachment.  
-<p>
 The data table Status column is set to Active when the message is entered in the table.  Any time after that, the message may be deleted by a user, so in some cases the Status field may be updated to Not Found, or Deleted if it is deleted when running one of the above data table rules/workflows.
 
 <p>The time the query takes places is the first column of the data table and you can use this value to sort through data if multiple queries are run and entered into the data table.  You may want to empty the data table after each query.
 
-<p>Quer
+<p>Because the number of messages returned from a query can be very big, the integration has two parameters in the app.config to limit the number of messages returned:
 
-<p>Once investigation on the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions men
+* max_messages
+* max_users
+
+max_messages will limit the number of messages returned from a query.  max_users will limit the number of user mailboxes searched in a query.  Take these parameters in to consideration when performing queries and performance.
+
+<p>
+More investigation, including using other email analysis scripts and integrations, can be done on messages after writing the message to a note or attachment.  
+
+<p>Once the investigation of the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions menu.  This rule is very powerful and should be used with caution as you can delete many user messages.  The rule starts a workflow that performs a query of messages and sends the matching results to a function that will delete a list of messages.  The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red.  An incident note is also written that indicates the number of messages deleted.
+
+<p>
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
@@ -1131,6 +1139,10 @@ The example Write Message EML as Attachment rule works off the Exchange Online M
 ---
 
 ## Data Table - Exchange Online Message Query Results
+
+Below is an example of results of a message query that are populated in the Exchange Online Message Query Results data table:
+
+NOTE: The Web Link column contains a link to the message, but you have to be logged in as the message owner user to view the message in the link.  SOC operator will probably not be able to view by default.
 
  ![screenshot: dt-exchange-online-message-query-results](./screenshots/EXO-dt-message-query-results-datatable.png)
 
