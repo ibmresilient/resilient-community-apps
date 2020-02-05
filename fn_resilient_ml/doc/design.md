@@ -1,9 +1,9 @@
-# Resilient NLP integration Design
-NLP integration uses Nature Language Processing (NLP) to digest incident data, and
-provide advanced predictions of incident relationships.
+# Design for Resilient NLP integration 
+Resilient NLP integration uses Nature Language Processing (NLP) to digest incident textual data, and
+provides advanced predictions of incident relationships.
 
 ## NLP
-To obtained the relationship among incident, NLP model is used to process textual information
+To obtained the relationship among incidents, a NLP model is used to process textual information
 of incidents, including the followings:
 * name
 * description 
@@ -16,28 +16,40 @@ between individual words first. This NLP integration uses a python package calle
 gensim word2vec to do so. 
 
 ### Word Embedding
-Gensim word2vec represents each word used in the dataset as a multi-dimensional vector. This is also
-called word embedding. Here the dataset is the textual information of all the incidents. This is the
-dataset being used to train the word2vec model.
+[Gensim word2vec](https://radimrehurek.com/gensim/models/word2vec.html) represents each word used 
+in the dataset as a multi-dimensional vector. This is also
+called word embeddings. Here the dataset is the textual information of all the incidents. This is the
+dataset being used to train the word2vec model. Note that this is an unsupervised learning model, so
+we don't need to split the dataset into training and testing. The whole set is used for training.
 
-From the dataset, the word2vec model looks for the likelihood that words co-occur. Using this information,
+From the dataset, the word2vec model looks for the likelihood that words co-occur in proximity. 
+Using this information,
 the model can convert each word in to a vector such that similar words would stay close to 
-each other. It is a two-layer neural network model, which is not so computationally expensive. 
+each other. This is a two-layer neural network model, which is not so computationally expensive. 
 
 To understand how a word can be represented by a vector, it might be helpful to imagine that each dimension of the 
 vector space represents something meaningful and understandable. 
 ![nlp_meaning](images/nlp_meaning.png)
+Each word is then a combination (vector sum) of those meaningful features. Similar words should then have 
+similar combination, and thus stay close to each other.
    
-In reality, a dimension used by a word2vec is in general a combination of several meaningful features 
+In reality, users specify how many features to use, and the model figures out what features to use.
+A dimension used by a word2vec is in general a combination of several meaningful features 
 human being can understand. 
 
-In summary, word2vec can convert words into a multidimensional vector. Similar words stay close to each
-other. 
+For resilient NLP, the default number of features is set to be 50. Advanced users can change this value in 
+app.config.
+
+There are other (advanced) settings for word2vec stored in nlp_settings.py. They are for advanced users
+to fine-tune the word2vec model, if they are familiar with it.
+
+In summary, word2vec can convert words into multidimensional vectors. Similar words stay close to each
+other. Similarity between words can then be defined as dot product of the corresponding vectors.
 
 ### Sentence similarity
 Word2vec can find out the similarity between words. But how about sentences?
 
-First of all, the similarity between two words is computed by the dot product of those two
+Remember that the similarity between two words is computed by the dot product of those two
 corresponding vectors. 
 
 A simple approach is to represent a sentence using the sum of the vectors of all the words. It turns 
@@ -53,15 +65,17 @@ When word vectors are summed up, a weight factor is assigned to each word.
 ```
 a/(a+wc)
 ```
-Here a is a small number (10^(-4)), wc is the word count. The bigger the word count, the smaller
+Here ```a``` is a small number (10^(-4)), wc is the word count. As show above, the bigger the word count, the smaller
 the weight factor. To understand this, imagine a word appears in all samples (incidents), then this
-word is not useful at all in distinguishing different incidents. Thus higher word count means lower
-contribution.
+word is not useful at all in distinguishing different incidents. 
+Thus higher word count shall go with lower contribution.
 
 #### Remove PCA
 According to the research of the above paper, the vectors for sentences obtained by summing word vectors
 all share a common principle component (vector), due to shared common words. By removing this common component,
 this model can give more accurate result.
+
+With these two enhancement, word2vec can be used to obtain similarity between sentences.
 
 ### NLP summary
 In summary, the steps to build this NLP model can be summarized in the following data flow
