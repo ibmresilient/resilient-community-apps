@@ -102,7 +102,7 @@ class PPTRClient():
         :param lastupdate: - Minutes since last update
         :return Result in json format.
         """
-        url = self.base_url + self._endpoints["incidents"]
+        url = "{}{}".format(self.base_url, self._endpoints["incidents"])
         params = {}
         if isinstance(lastupdate, int):
             params['created_after'] = timestamp_minutes_ago(lastupdate)
@@ -136,7 +136,7 @@ class PPTRClient():
         """
         rtn = {}
 
-        url = self.base_url + self._endpoints["incident"].format(incident_id)
+        url = "{}{}".format(self.base_url, self._endpoints["incident"].format(incident_id))
 
         try:
             res = self._req.execute_call_v2('get', url, callback=incident_details_exception_handler,
@@ -170,9 +170,9 @@ class PPTRClient():
         """
         if member_id is not None:
 
-            url = self.base_url + self._endpoints["list_member"].format(list_id, member_id)
+            url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
         else:
-            url = self.base_url + self._endpoints["list_members"].format(list_id, members_type)
+            url = "{}{}".format(self.base_url, self._endpoints["list_members"].format(list_id, members_type))
 
         res = self._req.execute_call_v2('get', url, verify=self.bundle, headers=self._headers,
                                         proxies=self._req.get_proxies())
@@ -193,7 +193,7 @@ class PPTRClient():
         :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
-        url = self.base_url + self._endpoints["add_members"].format(list_id)
+        url = "{}{}".format(self.base_url, self._endpoints["add_members"].format(list_id))
         # Convert expiration timestamp to UTC format.
         if expiration is not None:
             expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -223,7 +223,7 @@ class PPTRClient():
         :param duration: Number of minutes after which to expire Proofpoint TRAP list membership (integer).
         :return Result in json format.
         """
-        url = self.base_url + self._endpoints["list_member"].format(list_id, member_id)
+        url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
         # Convert expiration timestamp to UTC format.
         if expiration is not None:
             expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
@@ -250,7 +250,7 @@ class PPTRClient():
         :param member_id: The id of a member of a list (integer).
         :return Result in json format.
         """
-        url = self.base_url + self._endpoints["list_member"].format(list_id, member_id)
+        url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
 
         res = self._req.execute_call_v2('delete', url, verify=self.bundle, headers=self._headers,
                                         proxies=self._req.get_proxies())
