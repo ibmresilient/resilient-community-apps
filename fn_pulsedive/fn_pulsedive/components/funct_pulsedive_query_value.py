@@ -56,9 +56,10 @@ class FunctionComponent(ResilientComponent):
             pulsedive_feed_org = kwargs.get("pulsedive_feed_org")  # string
             incident_id = kwargs.get("incident_id")     # integer
             if kwargs.get("attachment_name") is None:
-                attachment_name = u"pulsedive_{}_{}.txt".format(pulsedive_query_type, pulsedive_value)
+                attachment_name = u"pulsedive_{}_{}.txt".format(
+                    pulsedive_query_type, pulsedive_value)
             else:
-                attachment_name = kwargs.get("attachment_name")
+                attachment_name = kwargs.get("attachment_name").replace(" ", "_")
 
             log.info("function params: pulsedive value = '%s', type = %s, feed org = '%s', \
                      incident = '%s', attachment = '%s'",
@@ -77,19 +78,10 @@ class FunctionComponent(ResilientComponent):
             if pulsedive_query_type == "Feed":
                 pulsedive_data["feed"] = pulsedive_value
                 pulsedive_data["organization"] = pulsedive_feed_org
-                # value_key = "feed"
             elif pulsedive_query_type == "Threat":
                 pulsedive_data["threat"] = pulsedive_value
-                # value_key = "threat"
             else:  # Indicator ID (default)
                 pulsedive_data["indicator"] = pulsedive_value
-                # value_key = "indicator"
-
-            # pulsedive_data = {value_key: pulsedive_value}
-
-            # if pulsedive_query_type == "Feed":
-            #     # for all id types: indicator, threat, feed
-            #     pulsedive_data["organization"] = pulsedive_feed_org
 
             # make the api call
             rc = RequestsCommon(self.opts, self.options)    # initialize
@@ -105,12 +97,12 @@ class FunctionComponent(ResilientComponent):
             # prepare results to send for output
             results = {
                 "url": api_url,
-                "inputs": {"value": pulsedive_value,
-                           "query_type": pulsedive_query_type,
-                           "feed_org": pulsedive_feed_org},
+                "fn_inputs": {"value": pulsedive_value,
+                              "query_type": pulsedive_query_type,
+                              "feed_org": pulsedive_feed_org,
+                              "attachment_name": attachment_name},
                 "request_parameters": pulsedive_data,
                 "content": resp.json(),
-                "attachment_name": attachment_name,
                 "pretty": pp.pformat(resp.json())
             }
 
