@@ -40,7 +40,7 @@ Resilient Integration with Exchange Online provides the capability to access and
 
 * Get a specified message and and return the results in JSON format.
 
-* Get a specified message .eml format write as an incident attachment.
+* Get a specified message in .eml format and write as an incident attachment.
 
 * Move a message to a specified "Well-known" Outlook folder.
 
@@ -58,39 +58,42 @@ Resilient Integration with Exchange Online provides the capability to access and
 ## Integration Flow for Phishing Investigation Use Case
 
 <p>
-The Exchange Online integration primary use case is monitoring and controling email activities in Exchange Online (Office 365 Outlook in the cloud) and to protect against inbound malicious emails.
+The Exchange Online integration primary use case is to monitor and control email activities in Exchange Online (Office 365 Outlook in the cloud) and protect against inbound malicious emails. 
 <p>
-To use the integration, you can run the Query Messages rule from the Action menu of an Incident.  From this rule you can search a single email address, a list of email addresses or the entire tenant.  Results of the query will be returned in the Exchange Online Message Query Results data table on the Exchange Online incident tab. Each row in the data table contains information from one message and the following actions can be performed on each message when it's state is Active in the Status column :  
+To use the integration, run the Query Messages rule from the Action menu of an incident. From the rule, you can search a single email address, a list of email addresses or the entire tenant. Results of the query are returned in the Exchange Online Message Query Results data table on the Exchange Online incident tab. Each row in the data table contains information from one message and the following actions can be performed on each message when it's state is Active in the Status column: 
 
-* Create artifacts: Email Recipient, Email Sender, Email Subject
-* Delete the message
-* Move the message to a Well-known folder
-* Write the message .eml as an incident
-* Write the message JSON returned from MS Graph to an incident note 
+* Create artifacts: Email Recipient, Email Sender, Email Subject.
+* Delete the message.
+* Move the message to a Well-known folder.
+* Write the message .eml as an incident.
+* Write the message JSON returned from MS Graph to an incident note.
 
 <p>
-The data table Status column is set to Active when the message is entered in the table.  Any time after that, the message may be deleted by a user, so in some cases the Status field may be updated to Not Found, or Deleted if it is deleted when running one of the above data table rules/workflows.
+The data table Status column is set to Active when the message is entered in the table. Any time after that, a user can delete the message; however, this could update the Status field to Not Found or Deleted if the message is deleted when running one of the above data table rules or workflows. 
 
-<p>The time the query takes places is the first column of the data table and you can use this value to sort through data if multiple queries are run and entered into the data table.  You may want to empty the data table after each query.
+<p>The first column of the data table displays the time the query occurred. You can use this value to sort through data if multiple queries are run and entered into the data table. You may want to empty the data table after each query. 
 
-<p>Because the number of messages returned from a query can be very big, the integration has two parameters in the app.config to limit the number of messages returned:
+<p>Because a large number of messages can be returned from a query, the integration has following parameters in the app.config to limit the number of messages returned:
 
 * max_messages
 * max_users
 
-max_messages will limit the number of messages returned from a query.  max_users will limit the number of user mailboxes searched in a query.  Take these parameters in to consideration when performing queries and performance.
+Considering using these parameters to improve performance when running queries.
 
 <p>
-More investigation, including using other email analysis scripts and integrations, can be done on messages after writing the message to a note or attachment.  
+You can perform additional investigation, including using other email analysis scripts and integrations, on messages after writing the message to a note or attachment. 
 
-<p>Once the investigation of the messages is complete and you know for sure there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident Actions menu.  This rule is very powerful and should be used with caution as you can delete many user messages.  The rule starts a workflow that performs a query of messages and sends the matching results to a function that will delete a list of messages.  The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red.  An incident note is also written that indicates the number of messages deleted.
+<p>Once you complete the investigation of the messages and there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident’s Actions menu. The rule starts a workflow that performs a query of messages and sends the matching results to a function that deletes a list of messages. The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red. An incident note is also written that indicates the number of messages deleted. 
 
 <p>
-At anytime the user can send a message or schedule a meeting using the Exchange OPnline: Send MEssage and 
+Use this rule with caution as you can delete many user messages. 
+<p>
+At anytime the user can send a message or schedule a meeting using the Exchange Online: Send Message and Exchange Online: Create meeting rules and workflows.
+
 ---
 ## Function - Exchange Online: Create Meeting
 
-The Exchange Online: Create Meeting function will create a meeting event in the organizer's Outlook calendar and send a calendar event invitation message to the meeting participants.
+The Exchange Online: Create Meeting function creates a meeting event in the organizer's Outlook calendar and sends a calendar event invitation message to the meeting participants.
 
  ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
 
@@ -106,7 +109,7 @@ The Exchange Online: Create Meeting function will create a meeting event in the 
 | `exo_meeting_optional_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of optional attendee email addresses |
 | `exo_meeting_required_attendees` | `text` | No | `user1@example.com, user2@example.com` | Comma separated list of required attendee email addresses |
 | `exo_meeting_start_time` | `datetimepicker` | Yes | `-` | Meeting start date and time |
-| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subect |
+| `exo_meeting_subject` | `text` | Yes | `-` | Meeting Subject |
 
 </p>
 </details>
@@ -187,7 +190,7 @@ The following Example: Exchange Online Create Meeting incident menu item rule is
 ![screenshot: fn-exchange-online-create-meeting-rule](./screenshots/EXO-create-meeting-rule.png)
 
 
-When the Example: Exchange Online Create Meeting rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+When the Example: Exchange Online Create Meeting rule is activated the following rule activity popup dialog appears prompting for input for creating the meeting and sending a message to the invitees:
 
 ![screenshot: fn-exchange-online-create-meeting-rule-activity](./screenshots/EXO-create-meeting-rule-activity.png)
 
@@ -199,7 +202,7 @@ When the Example: Exchange Online Create Meeting rule is activated the following
 
 ---
 ## Function - Exchange Online: Delete Message
-Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.
+Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message ID are required input parameters.  The mail folder is an optional parameter.
 
  ![screenshot: fn-exchange-online-delete-message ](./screenshots/EXO-delete-message-function.png)
 
@@ -209,8 +212,8 @@ Delete a message in the specified user's email address mailbox.  The email addre
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders id  |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
+| `exo_mailfolders_id` | `text` | No | `inbox` | MailFolders ID  |
+| `exo_messages_id` | `text` | Yes | `-` | The message ID of the message to be deleted |
 
 </p>
 </details>
@@ -241,8 +244,7 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
-The example Delete Message workflow works off the Query Results data table.
-After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table will be updated from Active to Deleted in red text.  At this point other data table rules that work on a message will not be active because the message is deleted.
+The example Delete Message workflow uses the information in the Query Results data table. After the message is deleted using the Example: Exchange Online Delete Message workflow, the "Status" column in the data table is updated from Active to Deleted in red text. Any data table rules accessing the deleted message become inactive.
 
 ![screenshot: fn-exchange-online-delete-message-workflow](./screenshots/EXO-delete-message-workflow.png)
 
@@ -295,7 +297,7 @@ The Example: Exchange Online Delete Message rule works off the Query Results dat
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
-This Exchange Online function will delete a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
+This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
 
  ![screenshot: fn-exchange-online-delete-messages-from-query-results](./screenshots/EXO-delete-from_query-function.png)
 
@@ -426,7 +428,7 @@ See the Query function section for a description of querying.
 
 ---
 ## Function - Exchange Online: Get Message
-This function returns the contents of an Exchange Online message in json format.
+This function returns the contents of an Exchange Online message in JSON format.
 
  ![screenshot: fn-exchange-online-get-message ](./screenshots/EXO-get-message-function.png)
 
@@ -436,7 +438,7 @@ This function returns the contents of an Exchange Online message in json format.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to get|
+| `exo_messages_id` | `text` | Yes | `-` | The message ID of the message to get|
 
 </p>
 </details>
@@ -479,7 +481,10 @@ results = {'inputs': {u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2Iw
 
 <details><summary>Workflows:</summary>
 <p>
-The workflow Write Message JSON as Note calls the Get Message function and writes the JSON contents returned from MS Graph API to an incident note.  The JSON returned from MS Graph API contains information that is different from the .eml file, so both formats are provided in this package (see Write Message EML as Attachment).
+The workflow Write Message JSON as Note calls the Get Message function and writes the JSON contents returned from MS Graph API to an incident note.  The JSON returned from MS Graph API contains information that is different from the .eml file, so both formats are provided in this package 
+For information on writing EML to attachment see:
+
+[Write Message as Attachment](#function---exchange-online-write-message-as-attachment).
 
 ![screenshot: fn-exchange-online-get-message](./screenshots/EXO-get-message-workflow.png)
 
@@ -525,7 +530,7 @@ incident.addNote(noteText)
 
 ---
 ## Function - Exchange Online: Get User Profile
-The Get User Profile function will return Exchange Online user profile for a given email address.
+The Get User Profile function returns Exchange Online user profile for a given email address.
 
  ![screenshot: fn-exchange-online-get-user-profile ](./screenshots/EXO-get-user-profile-function.png)
 
@@ -576,7 +581,7 @@ results = {
 </details>
 <details><summary>Workflows:</summary>
 <p>
-The example Get User Profile workflow works off an artifact whose value contains the email address of the user whose profile is to be queried.  The user profile is returned in JSON format as an incident note.
+The example Get User Profile workflow accesses the artifact whose value contains the email address of the user whose profile is to be queried.  The user profile is returned in JSON format as an incident note.
 
 ![screenshot: fn-exchange-online-get-user-profile-workflow](./screenshots/EXO-get-user-profile-workflow.png)
 
@@ -617,7 +622,7 @@ The Get User Profile workflow writes the user profile in JSON format to an incid
 
 <details><summary>Example Rule:</summary>
 <p>
-The example Get User Profile rule will invoke the Get User Profile workflow if the artifact type is one of the following:
+The example Get User Profile rule invokes the Get User Profile workflow if the artifact type is one of the following:
 
 * Email Recipient
 * Email Sender
@@ -636,7 +641,7 @@ The example Get User Profile rule will invoke the Get User Profile workflow if t
 ---
 
 ## Function - Exchange Online: Move Message to Folder
-This function will move an Exchange Online message to the specified folder in the users mailbox.
+This function moves an Exchange Online message to the specified folder in the users mailbox.
 
  ![screenshot: fn-exchange-online-move-message-to-folder ](./screenshots/EXO-move-message-to-folder-function.png)
 
@@ -646,9 +651,9 @@ This function will move an Exchange Online message to the specified folder in th
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_mailfolders_id` | `text` | No | `-` | MailFolders id  |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-| `exo_destination_mailfolder_id` | `select` | Yes | `recoverableitemsdeletions` | Destination folder to which message is moved. |
+| `exo_mailfolders_id` | `text` | No | `-` | MailFolders ID  |
+| `exo_messages_id` | `text` | Yes | `-` | The message ID of the message to be deleted |
+| `exo_destination_mailfolder_id` | `select` | Yes | `recoverableitemsdeletions` | Destination folder to which message is moved |
 </p>
 </details>
 
@@ -678,7 +683,7 @@ Result: {
 
 <details><summary>Workflows:</summary>
 <p>
-The example Move Message to Folder workflow works off the Exchange Online Message Query Results data table. Messages can be moved to a "Well known Outlook folder:
+The example Move Message to Folder workflow accesses the Exchange Online Message Query Results data table. Messages can be moved to a "Well known” Outlook folder, such as: 
 
 * archive
 * clutter
@@ -701,8 +706,7 @@ The example Move Message to Folder workflow works off the Exchange Online Messag
 
 <details><summary>Example Workflow Output:</summary>
 <p>
-The Move Message to Folder workflow will call MS Graph API to move message in the data table row to the specified Well-known Outlook folder specified in the exo_destination_mailfolder_id input parameter.
-When a message is moved it's message ID is changed and as a result the status field column of the Exchange Online Message Query Results data table row entry will be updated to "Moved" in Red.   As the row status will no longer be "Active", the possible rules to be run on the data table row will be change because the message ID in the table is no longer valid.
+The Move Message to Folder workflow calls the MS Graph API to move a message in the data table row to the Well-known Outlook folder specified in the exo_destination_mailfolder_id input parameter. When a message is moved, its message ID is changed, the status field column of the Exchange Online Message Query Results data table is updated to "Moved" in Red, and any rules to be run on the data table row are changed. 
 
 Below is a screen shot of an example Note after a message is moved to a folder:
 
@@ -746,7 +750,7 @@ incident.addNote(noteText)
 
 <details><summary>Example Rule:</summary>
 <p>
-The example Move Message to Folder rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Moved, Deleted or Not Found, in which case the message cannot be moved.
+The example Move Message to Folder rule accesses the Exchange Online Message Query Results data table.  When the status column of the row is Active the Move Message To Folder rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message cannot be moved.
 
 ![screenshot: fn-exchange-online-movemessage-to-folder-rule](./screenshots/EXO-move-message-to-folder-rule.png)
 
@@ -759,16 +763,15 @@ The example Move Message to Folder rule works off the Exchange Online Message Qu
 ---
 
 ## Function - Exchange Online: Query Messages
-The Exchange Online: Query Message function will query Exchange Online to find messages matching the specified input parameters.  A list of messages matching the search criteria is returned from the function.  
+The Exchange Online: Query Message function queries the Exchange Online to find messages matching the specified input parameters. The function returns a list of messages matching the search criteria.
 <p>
 The function will search over the following email accounts:
 
 * all mailboxes of a tenant (specify "all", "ALL", "all users")
-* a single email address
-* a comma separated list of email addressed
+* single email address
+* comma separated list of email addressed
 <p>
-If no mail folder if specified, all folders and subdirectories are queried.
-The mail folder to be searched can be one of the list of Outlook "Well-known" folders:
+If no mail folder if specified, all folders and subdirectories are queried. The mail folder to be searched can be one of the list of Outlook "Well-known" folders: 
 
 * archive
 * clutter
@@ -786,7 +789,7 @@ The mail folder to be searched can be one of the list of Outlook "Well-known" fo
 * searchfolders
 * sentitems
 <p>
-At least one of the following search criteria must be passed to the query messages function:
+At least one of the following search criteria must be passed to the query messages function: 
 
 * Sender email address
 * Message received date/time start/end 
@@ -795,7 +798,7 @@ At least one of the following search criteria must be passed to the query messag
 * Boolean flag indicating whether the message has an attachment
 
 <p>
-NOTE: the results of the Query Message function can be large.  Use the max_user and max_messages parameters in the app.config file to limit the number of users searched and the number of messages returned from a query.
+NOTE: There can be a large number of results of the Query Message function. If needed, use the max_user and max_messages parameters in the app.config file to limit the number of users searched and the number of messages returned from a query. 
 
  ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-function.png)
 
@@ -805,13 +808,13 @@ NOTE: the results of the Query Message function can be large.  Use the max_user 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_email_address_sender` | `text` | No | `user@example.com` | Only get emails sent from this email address; leave blank to ignore sender attribute |
-| `exo_end_date` | `datetimepicker` | No | `-` | Query message received ending at this date/time. |
+| `exo_email_address_sender` | `text` | No | `user@example.com` | Search messages sent from this email address; leave blank to ignore sender attribute |
+| `exo_end_date` | `datetimepicker` | No | `-` | Query messages received ending at this date/time |
 | `exo_has_attachments` | `boolean` | No | `-` | True to include attachments, False to exclude attachments, Unknown to get all |
 | `exo_mail_folders` | `text` | No | `Inbox` | The folder to search in the users mailbox |
 | `exo_message_body` | `text` | No | `message body text` | message body |
 | `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_start_date` | `datetimepicker` | No | `-` | Query emails received starting at this date/time. |
+| `exo_start_date` | `datetimepicker` | No | `-` | Query messages received starting at this date/time |
 
 </p>
 </details>
@@ -879,8 +882,7 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
-The Example: Exchange Online Query Messages workflow will place results into the Exchange Online Query Results data table which appears on the Exchange Online custom incident tab. 
-(See the Install Guide to setup the custom tab.)
+The Example: Exchange Online Query Messages workflow places results into the Exchange Online Query Results data table, which appears on the Exchange Online custom incident tab. (See the Installation Guide to configure the custom tab.) 
 
 ![screenshot: fn-exchange-online-query-messages](./screenshots/EXO-query-messages-workflow.png)
 
@@ -954,7 +956,7 @@ if len(note) > note_len:
 
 ![screenshot: fn-exchange-online-query-messages-rule](./screenshots/EXO-query-messages-rule.png)
 
-When the Example: Exchange Online Delete Messages from Query Results rule is activated the following rule activity popup dialog will appear prompting for input for creating the meeting and sending a message to the invitees:
+When the Example: Exchange Online Delete Messages from Query Results rule is activated, the following rule activity popup dialog prompts for input to create the meeting and send a message to the invitees:
 
 ![screenshot: fn-exchange-online-query-messages-rule-activity](./screenshots/EXO-query-messages-rule-activity.png)
 
@@ -966,7 +968,7 @@ When the Example: Exchange Online Delete Messages from Query Results rule is act
 
 ---
 ## Function - Exchange Online: Send Message
-This function will create a message and send to the specified recipients.
+This function creates a message and sends it to the specified recipients.
 
  ![screenshot: fn-exchange-online-send-message ](./screenshots/EXO-send-message-function.png)
 
@@ -976,9 +978,9 @@ This function will create a message and send to the specified recipients.
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_message_body` | `text` | No | `message body text` | message body |
-| `exo_message_subject` | `text` | No | `message subject` | message subject |
-| `exo_recipients` | `text` | Yes | `-` | comma separated list of message recipients |
+| `exo_message_body` | `text` | No | `message body text` | Message body |
+| `exo_message_subject` | `text` | No | `message subject` | Message subject |
+| `exo_recipients` | `text` | Yes | `-` | Comma separated list of message recipients |
 
 </p>
 </details>
@@ -1011,7 +1013,7 @@ results = {
 
 <details><summary>Workflows:</summary>
 <p>
-The Example: Exchange Online Send Message workflow will call the Exchange Online Send Message function and write an incident note containing the results of the function.
+The Example: Exchange Online Send Message workflow calls the Exchange Online Send Message function and writes an incident note containing the results of the function.
 
 ![screenshot: fn-exchange-online-send-message-workflow](./screenshots/EXO-send-message-workflow.png)
 
@@ -1070,7 +1072,7 @@ When the Example Send Message rule is initiated the following rule activity popu
 
 ---
 ## Function - Exchange Online: Write Message as Attachment
-This function will get the mime content of an Exchange Online message and write it as an incident attachment.  The attachment file name is an optional parameter and the functional will use a default message-{email-address}-{message-ID}.eml filename if none is specified.
+This function gets the mime content of an Exchange Online message and writes it as an incident attachment. The attachment file name is an optional parameter. The function uses a default message-{email-address}-{message-ID}.eml filename if none is specified.
 
 ![screenshot: fn-exchange-online-write-message-as-attachment ](./screenshots/EXO-write-message-attachment-function.png)
 
@@ -1082,8 +1084,8 @@ This function will get the mime content of an Exchange Online message and write 
 | `incident_id` | `number` | Yes | `-` | - |
 | `task_id` | `number` | No | `-` | - |
 | `exo_email_address` | `text` | Yes | `user@example.com` | Get information on this user email account |
-| `exo_messages_id` | `text` | Yes | `-` | The message id of the message to be deleted |
-| `exo_attachment_name` | `text` | No | `my-message.eml` | The name of the attachment file to which message is written. |
+| `exo_messages_id` | `text` | Yes | `-` | The message ID of the message to be deleted |
+| `exo_attachment_name` | `text` | No | `my-message.eml` | The attachment file to which message is written |
 </p>
 </details>
 
@@ -1092,7 +1094,7 @@ This function will get the mime content of an Exchange Online message and write 
 
 ```python
 results = {'inputs': {u'incident_id': 2099, 
-                      u'exo_attachment_name': None, 
+                      u'exo_attachment_name': u'my-message.eml', 
                       u'exo_messages_id': u'AAMkAGFmNDE0ZDA1LTFmOGMtNGU2MS04Y2IwLTJhMmViNWU3Y2VhMABGAAAAAAD45IEka4IVS4DBeEtMPuSEBwBJf-ANAwqcRJF4hFv_x44UAAAinByvAABJf-ANAwqcRJF4hFv_x44UAAAinIROAAA=', 
                        u'exo_email_address': u'resilient2@securitypocdemos.onmicrosoft.com'},
            'metrics': {'package': 'fn-exchange-online', 
@@ -1138,7 +1140,7 @@ None
 
 <details><summary>Example Rule:</summary>
 <p>
-The example Write Message EML as Attachment rule works off the Exchange Online Message Query Results data table.  When the status column of the row is Active the Write Message as Attachment  rule is available to initiate the corresponding workflow. The status column may be non-Active if the message is Deleted or Not Found, in which case the message content can not be retrieed and written anymore.
+The example Write Message EML as Attachment rule accesses the Exchange Online Message Query Results data table. When the status column of the row is Active, the Write Message as Attachment rule is available to initiate the corresponding workflow. If the status is non-Active, which includes Deleted or Not Found, the message content cannot be retrieved or written.
 
 ![screenshot: fn-exchange-online-write-message-attachment-rule](./screenshots/EXO-write-message-attachment-rule.png)
 
@@ -1151,9 +1153,9 @@ The example Write Message EML as Attachment rule works off the Exchange Online M
 
 ## Data Table - Exchange Online Message Query Results
 
-Below is an example of results of a message query that are populated in the Exchange Online Message Query Results data table:
+The following is an example of message query results that are populated in the Exchange Online Message Query Results data table:
 
-NOTE: The Web Link column contains a link to the message, but you have to be logged in as the message owner user to view the message in the link.  SOC operator will probably not be able to view by default.
+NOTE: The Web Link column contains a link to the message, but you must be logged in as the message owner user to view the message in the link. 
 
  ![screenshot: dt-exchange-online-message-query-results](./screenshots/EXO-dt-message-query-results-datatable.png)
 
