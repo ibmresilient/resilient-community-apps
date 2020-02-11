@@ -1024,7 +1024,7 @@ The Example: Exchange Online Send Message workflow calls the Exchange Online Sen
 inputs.exo_email_address   = inputs.exo_email_address   if rule.properties.exo_message_sender_address is None else rule.properties.exo_message_sender_address
 inputs.exo_recipients      = inputs.exo_recipients      if rule.properties.exo_message_recipients     is None else rule.properties.exo_message_recipients
 inputs.exo_message_subject = inputs.exo_message_subject if rule.properties.exo_message_subject is None else rule.properties.exo_message_subject
-inputs.exo_message_body    = inputs.exo_message_send_body.content if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
+inputs.exo_message_body    = inputs.exo_message_body    if rule.properties.exo_message_send_body.content is None else rule.properties.exo_message_send_body.content
 ```
 
 </p>
