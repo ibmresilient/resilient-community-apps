@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, no-self-u
+#
+# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+#
 """Function implementation"""
 
 import logging
@@ -70,4 +73,5 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception as e:
             log.exception(e)
+            log.error("Failed to find similar incidents, function exception.")
             yield FunctionError()
