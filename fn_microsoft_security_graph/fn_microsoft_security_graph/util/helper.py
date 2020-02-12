@@ -19,7 +19,7 @@ class MicrosoftGraphHelper:
 
     def __set_cache(self, d):
         try:
-            for k, v in d.iteritems():
+            for k, v in d.items():
                 self.__cache.update([(k, v)])
         except AttributeError:
             for k, v in d.items():
