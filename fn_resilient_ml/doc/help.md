@@ -39,7 +39,7 @@ Save & Close.
 ![wf_default](./images/WF_default_value.png)
 
 #### NLP String Search
-This one allows users to fine-tune the string they want to use for th search. 
+This one allows users to fine-tune the string they want to use for the search. 
 A use case is the following. Sometimes the description of an incident might contain
 some irrelevant data. If users know which portion of the whole description is more
 important/relevant, they can input this portion to do the NLP string search.

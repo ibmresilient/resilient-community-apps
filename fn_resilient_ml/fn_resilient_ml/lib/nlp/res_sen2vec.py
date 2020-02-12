@@ -19,7 +19,7 @@ import json
 from sklearn.decomposition import PCA
 from nltk.corpus import words as nltk_words
 import nltk
-import math
+
 
 class ResSen2Vec:
     # parameter used in compute frequency

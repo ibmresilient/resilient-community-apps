@@ -3,7 +3,7 @@ Resilient machine learning integration supports using Nature Language Processing
 provides advanced predictions of incident relationships.
 
 ## NLP
-To obtained the relationship among incidents, a NLP model is used to process textual information
+To obtain the relationship among incidents, a NLP model is used to process textual information
 of incidents, including the followings:
 * name
 * description 
@@ -186,7 +186,7 @@ the ResSIF to figure out the contribution weight factor. Then
 it sums up the vectors. 
 
 #### get_vec_for_sentence
-For a given sentence, it calls WordSsentenceUtils to extract a list 
+For a given sentence, it calls WordSentenceUtils to extract a list 
 of words from it. Then it calls its get_vec_for_words to get the
 corresponding vector.  
 
@@ -206,7 +206,7 @@ vectors.
 #### get_closeset
 This the the main methods to get the similar incidents. 
 
-Inupts:
+Inputs:
 * sentence: Description of the newly created incident.
 * num: How many similar incidents to return
 * other incidents: Important here. When a NLP model is built, vectors are computed/saved for each incident
