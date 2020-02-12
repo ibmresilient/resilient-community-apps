@@ -64,6 +64,7 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
             phone_number = clean_phone_number(twilio_phone_number)
 
+            # timestamp date has precedence over string version
             if twilio_date_sent_ts and not twilio_date_sent:
                 twilio_date_sent = readable_datetime(twilio_date_sent_ts)
 
@@ -74,27 +75,28 @@ class FunctionComponent(ResilientComponent):
 
             continue_flg = True
 
-            err_msg = None
-            payload = []
-            rc = True
+            result_err_msg = None
+            result_payload = []
+            result_rc = True
             wf_status = None
             rest_client = self.rest_client()
 
             converted_date = parse(twilio_date_sent) if twilio_date_sent else None
 
+            # continue while the workflow is still active, no messages have been received and timeout period active
             while continue_flg and time.time() <= wait_timeout:
-                # get the messages
+                # get the messages based on phone number and date sent
                 messages = client.messages.list(
                     date_sent=converted_date,
                     to=src_address,
                     from_=phone_number
                 )
 
-                # if no messages, delay and try again
                 if messages:
                     continue_flg = False
                     log.debug(str(messages))
 
+                    # format messages for payload return
                     for message in messages:
                         entry = {
                             "phone_number": message.from_,
@@ -106,10 +108,11 @@ class FunctionComponent(ResilientComponent):
                             "status": message.status,
                             "error_message": message.error_message
                         }
-                        payload.append(entry)
+                        result_payload.append(entry)
 
-                if not payload:
-                    rc = False
+                # if no messages, delay and try again
+                if not result_payload:
+                    result_rc = False
                     time.sleep(SLEEP_TIME)
 
                     # check to see if the workflow is still active
@@ -117,17 +120,18 @@ class FunctionComponent(ResilientComponent):
                     continue_flg = not wf_status.is_terminated
 
             if wf_status and wf_status.is_terminated:
-                err_msg = u"Workflow was terminated: {}".format(wf_status.reason)
-                yield StatusMessage(err_msg)
-                log.warning(err_msg)
-                rc = False
-            elif not payload:
-                err_msg = u"Timeout waiting for responses for phone number: {} since {}".format(twilio_phone_number, twilio_date_sent)
-                log.warning(err_msg)
+                result_err_msg = u"Workflow was terminated: {}".format(wf_status.reason)
+                yield StatusMessage(result_err_msg)
+                log.warning(result_err_msg)
+                result_rc = False
+            elif not result_payload:
+                result_err_msg = u"Timeout waiting for responses for phone number: {} since {}".format(twilio_phone_number, twilio_date_sent)
+                yield StatusMessage(result_err_msg)
+                log.warning(result_err_msg)
 
             yield StatusMessage("done...")
 
-            results = res_payload.done(rc, payload, reason=err_msg)
+            results = res_payload.done(result_rc, result_payload, reason=result_err_msg)
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

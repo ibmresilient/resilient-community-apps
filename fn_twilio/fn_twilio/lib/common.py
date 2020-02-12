@@ -4,7 +4,6 @@
 
 import re
 import calendar
-from dateutil.relativedelta import *
 
 SECONDS_IN_MINUTE = 60
 SECONDS_IN_HOUR = SECONDS_IN_MINUTE*60
@@ -29,7 +28,6 @@ def get_interval(time_string):
 
     # Get the time units from input string.
     time_unit = time_string.rstrip()[-1]
-
     in_seconds = 0
 
     # Compute the total time to sleep in seconds
@@ -49,6 +47,11 @@ def get_interval(time_string):
     return in_seconds
 
 def clean_phone_number(phone_number):
+    """
+    remove all characters other can numbers and dashes
+    :param phone_number:
+    :return: cleaned number
+    """
     return '+' + re.sub("[^0-9]", "", phone_number)
 
 def get_ts_from_datetime(dt):
