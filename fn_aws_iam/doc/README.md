@@ -61,7 +61,7 @@ The integration can also be used to make the following changes to a SEP environm
 ## Function - AWS IAM: List Users
 Get IAM user or users in the AWS account.  Users can be filtered by user name , group and policy. If the user name is specified get information only for this user. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine user data returned. Parameter aws_iam_query_type (optional) is used to determine type of query to perform users.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: List Users`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User`, `Example: AWS IAM: Delete User For Artifact`, `Example: AWS IAM: Get Access Key For Artifact`, `Example: AWS IAM: Get User For Artifact` and `Example: AWS IAM: List Access Keys`.
+* Example workflows that use this Resilient Function include `Example: AWS IAM: List Users`, `Example: AWS IAM: List Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User`, `Example: AWS IAM: Delete User For Artifact`, `Example: AWS IAM: Get Access Key For Artifact` and `Example: AWS IAM: Get User For Artifact`.
 
 The workflow, `Example: AWS IAM: List Users`, sets the following input fields for the Function:
 
@@ -280,6 +280,146 @@ if __name__ == "__main__":
 </p>
 </details>
 
+The workflow, `Example: AWS IAM: List Access keys`, sets the following input fields for the Function:
+
+*	aws_iam_user_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
+*	aws_iam_access_key_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
+*	aws_iam_query_type is set to value `access_keys`.
+
+The workflow is initiated by the incident rule, `Example: AWS IAM: List Access keys`.
+
+1. Open an incident and select `Example: AWS IAM: List Access keys` from Actions.
+
+   ![screenshot: fn-aws-iam-list-keys-action ](./screenshots/fn-aws-iam-list-keys-action.png)
+   
+2. The user is presented with a list of input fields which can be used to filter users using regular expressions. Set any desired filters and click Execute..
+
+   ![screenshot: fn-aws-iam-list-keys-action_2 ](./screenshots/fn-aws-iam-list-keys-action_2.png)
+
+
+This invokes the `Example: AWS IAM: List Access keys` workflow, which calls the `AWS IAM: List Users` function.
+The data table `AWS IAM Access Keys` will be updated in the Resilient platform with the users properties for the selected AWS account.  
+
+   ![screenshot: fn-aws-iam-list-keys-datatable](./screenshots/fn-aws-iam-list-keys-datatable.png)
+
+Note: If all unfiltered access keys are listed the key for the default user for the integration will be indicated by "Yes" in the "Default key" field.
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users or access keys based on access keys applied to user. Filter by access key id, can be a string or regular expression. |
+| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name, can be a string or regular expression. |
+| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name, can be a string or regular expression. |
+| `aws_iam_query_type` | `select` | No | `-` | Type of query to perform for list_users, can be one of 'users' or 'access_keys'. Optional parameter. |
+| `aws_iam_user_filter` | `text` | No | `-` | Filter users or access keys based on user name. Can be a string or regular expression. |
+| `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+```python
+results =  {
+            'version': '1.0', 'success': True, 'reason': None,
+            'content': [{'Path': '/', 'UserName': 'iam_test_User', 'UserId': 'AIDA4EQBBG2YDOLTU6QSM',
+                         'Arn': 'arn:aws:iam::123456789123:user/iam_test_User', 'CreateDate': '2019-11-05 15:54:43'},
+                        {'Path': '/', 'UserName': 'iam_test_User_2', 'UserId': 'AIDA4EQBBG2YGZOQXT2JB',
+                         'Arn': 'arn:aws:iam::123456789123:user/iam_test_User_2',
+                         'CreateDate': '2019-10-31 16:23:07', 'PasswordLastUsed': '2019-11-12 10:55:42'}
+                       ],
+            'raw': '[{"Path": "/", "UserName": "iam_test_User", "UserId": "AIDA4EQBBG2YDOLTU6QSM", "Arn": "arn:aws:iam::834299573936:user/iam_test_User", "CreateDate": "2019-11-05 15:54:43"}, {"Path": "/", "UserName": "iam_test_User_2", "UserId": "AIDA4EQBBG2YGZOQXT2JB", "Arn": "arn:aws:iam::834299573936:user/iam_test_User_2", "CreateDate": "2019-10-31 16:23:07"}]',
+            'inputs': {},
+            'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                        'host': 'myhost.ibm.com', 'execution_time_ms': 7951,
+                        'timestamp': '2019-11-14 13:48:30'
+                       }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.aws_iam_access_key_filter = rule.properties.aws_iam_access_key_filter
+inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
+inputs.aws_iam_query_type = "access_keys"
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+```python
+##  AWS IAM - fn_aws_iam_list_users script ##
+#  Globals
+import re
+# List of fields in datatable fn_aws_iam_list_users script main
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "AccessKeyId", "CreateDate", "Status", "DefaultKey"]
+# List of fields in datatable fn_aws_iam_list_users script last used access keys.
+DATA_TBL_FIELDS_LUAK = ["LastUsedDate", "ServiceName", "Region"]
+FN_NAME = "fn_aws_iam_list_users"
+WF_NAME = "List Access Keys"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+
+def process_access_keys(access_key_id_list, user_name):
+    access_key_ids = []
+    for ak_id in access_key_id_list:
+        newrow = incident.addRow("aws_iam_access_keys")
+        newrow.query_execution_date = QUERY_EXECUTION_DATE
+        newrow.UserName = user_name
+        for f in DATA_TBL_FIELDS[2:]:
+            if ak_id[f] is not None:
+                newrow[f] = ak_id[f]
+        # Add key last used data if it exists.
+        if ak_id["key_last_used"] is not None:
+            luak = ak_id["key_last_used"]
+            for l in DATA_TBL_FIELDS_LUAK:
+                if luak[l] is not None:
+                    newrow[l] = luak[l]
+def main():
+    note_text = ''
+    filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
+                           INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
+               if f is not None]
+    if CONTENT:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
+                   "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
+        for u in CONTENT:
+           if u["AccessKeyIds"]:
+                user_name = u["UserName"]
+                process_access_keys(u["AccessKeyIds"], user_name)
+
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
+            .format(WF_NAME, FN_NAME)
+
+    if filters:
+        note_text += "<br>Query Filters:</br>"
+        if INPUTS.get("aws_iam_user_filter"): 
+            note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
+        if INPUTS.get("aws_iam_access_key_filter"): 
+            note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
+    incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+```
+
+</p>
+</details>
+
 ---
 ## Function - AWS IAM: Delete User
 Delete the specified IAM user. Parameter aws_iam_user_name is an IAM user name. 
@@ -477,7 +617,7 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Delete Acce
 
 3. User is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-accesskeys-action_2 ](./screenshots/fn-aws-iam-delete-accesskeys-action_2.png)     
+    ![screenshot: fn-aws-iam-delete-accesskey-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-action_2.png)     
 
 Pressing Execute invokes the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
@@ -499,7 +639,7 @@ The workflow is initiated by the artifact rule, `Example: AWS IAM: Delete Access
 
 3. User is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-accesskeys-action_2 ](./screenshots/fn-aws-iam-delete-accesskeys-action_2.png)     
+    ![screenshot: fn-aws-iam-delete-accesskey-artifact-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-artifact-action_2.png)     
 
 Pressing Execute invokes the `Example: AWS IAM: Delete Access Key For Artifact` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
@@ -880,7 +1020,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Update Login Profile
-Change the password for the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_password is a new password value fro an IAM user. Parameter aws_iam_password_reset_required is a boolean value to determine whether a password reset should be required on change.
+Change the password for the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_password is a new password value for an IAM user. Parameter aws_iam_password_reset_required is a boolean value to determine whether a password reset should be required on change.
 
 * Example workflows that use this Resilient Function include `Example: AWS IAM: Change Profile Password`
 
@@ -897,8 +1037,8 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Change Prof
 
    ![screenshot: fn-aws-iam-update-login-profile-action ](./screenshots/fn-aws-iam-update-login-profile-action.png)
 
-3. The user is presented with a number of activity fields for a new password a password confirmation and a boolean to indicate if password reset is needed.
-    From the drop-down list of user defined polciy name , select a policy and click Execute.
+3. The user is presented with 2 activity fields for a new password a password confirmation and a boolean to indicate if password reset is needed.
+    Set the appropriate values for the fields and click Execute.
 
    ![screenshot: fn-aws-iam-update-login-profile_2-action ](./screenshots/fn-aws-iam-update-login-profile_2-action.png)
 
@@ -1020,9 +1160,8 @@ Add the specified IAM user to the specified groups. Parameter aws_iam_user_name 
 
 The workflow, `Example: AWS IAM: Add User To Group`, sets the following input fields for the Function:
 
-inputs.aws_iam_group_names = rule.properties.aws_iam_group
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_group_names is mapped to activity field `aws_iam_group` which is a drop-down list of group names.
+*	aws_iam_group_names is mapped to activity field which is a drop-down list of group names.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Add User To Group`.
 
@@ -1035,7 +1174,7 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Add User To
 
    ![screenshot: fn-aws-iam-add-user-to-groups_2-action ](./screenshots/fn-aws-iam-add-user-to-groups_2-action.png)
 
-This invokes the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Add User To Groups` function.
+This invokes the `Example: AWS IAM: Add User To Group` workflow, which calls the `AWS IAM: Add User To Groups` function.
 On successful completion, for the data table `AWS IAM Users` the `Groups` field will get updated for the selected user.
 
    ![screenshot: fn-aws-iam-add-user-to-groups-datatable](./screenshots/fn-aws-iam-add-user-to-groups-datatable.png)
@@ -1508,7 +1647,7 @@ The workflow, `Example: AWS IAM: Detach All User Policies`, sets the following i
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Detach All User Policies`.
 
-1. Open an incident and select the row of data table `AWS IAM Users` corresponding to user who needs to have all polices removed or deleted.
+1. Open an incident and select the row of data table `AWS IAM Users` corresponding to the user who needs to have all polices removed or deleted.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Detach All User Policies`.
 
    ![screenshot: fn-aws-iam-detach-user-policies-action ](./screenshots/fn-aws-iam-detach-user-policies-action.png)
@@ -1518,7 +1657,8 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Detach All 
    ![screenshot: fn-aws-iam-detach-user-policies-action_2 ](./screenshots/fn-aws-iam-detach-user-policies-action_2.png)  
 
 This invokes the `Example: AWS IAM: Detach All User Policies` workflow, which calls the `AWS IAM: Detach User policies` function.
-On successful completion, for the data table `AWS IAM Users` the `Policies` field will get updated for the selected user.
+
+On successful completion, for the data table `AWS IAM Users` the `Policies` field will get updated to an empty value for the selected user.
 
    ![screenshot: fn-aws-iam-detach-user-policies-datatable](./screenshots/fn-aws-iam-detach-user-policies-datatable.png)
 
