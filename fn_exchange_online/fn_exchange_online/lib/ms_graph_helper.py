@@ -1,10 +1,15 @@
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 # -*- coding: utf-8 -*-
+import logging
 import json
 import datetime
+from pytz import timezone
+import pytz
+from tzlocal.windows_tz import win_tz
 from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 
+LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
 
 class MSGraphHelper(object):
@@ -256,14 +261,29 @@ class MSGraphHelper(object):
 
         if response.status_code == 200:
             response_json = response.json()
-            time_zone = response_json["value"]
+            windows_time_zone = response_json["value"]
         else:
             # If the timezone is not found (not set) then default to UTC time
-            time_zone = "UTC"
+            windows_time_zone = "UTC"
 
-        # Calculate meeting start and end date/time.
-        utc_start_time = datetime.datetime.fromtimestamp(start_time / 1000).strftime('%Y-%m-%dT%H:%M:%S')
-        utc_end_time = datetime.datetime.fromtimestamp(end_time / 1000).strftime('%Y-%m-%dT%H:%M:%S')
+        # Convert the Windows time zone to IANA format.
+        iana_time_zone = win_tz.get(windows_time_zone)
+
+        # Use pytz with IANA time zone.
+        to_zone = timezone(iana_time_zone)
+
+        # Convert the start time to the time zone of the user mailbox
+        start = datetime.datetime.utcfromtimestamp(start_time / 1000)
+        start_tz = start.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime('%Y-%m-%dT%H:%M:%S')
+
+        # Convert the end time to the time zone of the user mailbox
+        end = datetime.datetime.utcfromtimestamp(end_time / 1000)
+        end_tz = end.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime('%Y-%m-%dT%H:%M:%S')
+
+        LOG.debug("Windows time zone = %s", windows_time_zone)
+        LOG.debug("IANA time zone = %s", iana_time_zone)
+        LOG.debug("meeting start = %s", start_tz)
+        LOG.debug("meeting end = %s", end_tz)
 
         # Create attendee list in required format.  If no required/optional attendees are specified set to empty string.
         if not required_attendees:
@@ -281,10 +301,10 @@ class MSGraphHelper(object):
         event_json = {"subject": subject,
                       "body": {"contentType": "HTML",
                                 "content": body},
-                      "start": {"dateTime": utc_start_time,
-                                "timeZone": time_zone},
-                      "end": {"dateTime": utc_end_time,
-                              "timeZone": time_zone},
+                      "start": {"dateTime": start_tz,
+                                "timeZone": windows_time_zone},
+                      "end": {"dateTime": end_tz,
+                              "timeZone": windows_time_zone},
                       "location": {"displayName": location},
                       "attendees": attendees}
 
