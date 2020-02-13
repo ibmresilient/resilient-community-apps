@@ -56,7 +56,12 @@ class FunctionComponent(ResilientComponent):
 
             misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
 
-            event = misp_client.new_event(misp_distribution, misp_threat_level, misp_analysis_level, misp_event_name)
+            eventJson = {"Event": {"info": misp_event_name,
+                    "analysis": misp_analysis_level,
+                    "distribution": misp_distribution,
+                    "threat_level_id": misp_threat_level}}
+
+            event = misp_client.add_event(eventJson)
 
             log.info(event)
 
