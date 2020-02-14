@@ -8,7 +8,7 @@ from io import BytesIO
 from resilient_circuits import \
     (ResilientComponent, function, handler,
      StatusMessage, FunctionResult, FunctionError)
-from resilient_lib import validate_fields, RequestsCommon, write_file_attachment
+from resilient_lib import validate_fields, RequestsCommon, ResultPayload, write_file_attachment
 
 CONFIG_SECTION = "fn_pulsedive"
 
@@ -160,7 +160,7 @@ class FunctionComponent(ResilientComponent):
         """
         Function: Search Pulsedive for Indicators, Threats, or Feeds, using type-related filters.
         This function gets input values from the action rule activity fields and
-        sends them to Pulsedive's Search endpoint https://pulsedive.com/api/?q=search.
+        sends them to Pulsedive's Search endpoint https://pulsedive.com/api/search.php
         Results: a summary will be written to an incident note and
                  full details will be written to an incident attachment.
                  An option to export Indicator (only) search to CSV is provided in a link in Note.
@@ -209,26 +209,27 @@ class FunctionComponent(ResilientComponent):
             api_url = "{}/search.php?".format(self.options["pulsedive_api_url"])
 
             # make the api call
+            rp = ResultPayload(CONFIG_SECTION, **kwargs)
             rc = RequestsCommon(self.opts, self.options)    # initialize
             resp = rc.execute_call_v2("get",
                                       url=api_url,
                                       params=pulsedive_data
                                       )
 
-            # prepare results to send for output
-            results = {
-                "search_type": pulsedive_search_type,
-                "request_parameters": pulsedive_data,
-                "request_url": resp.request.url,
-                "attachment_name": attachment_name,
-                "json": resp.json()
-            }
+            # # prepare results to send for output
+            # results = {
+            #     "search_type": pulsedive_search_type,
+            #     "request_parameters": pulsedive_data,
+            #     "request_url": resp.request.url,
+            #     "attachment_name": attachment_name,
+            #     "json": resp.json()
+            # }
 
             # Get the rest client so we can add the attachment to the incident
             client = self.rest_client()
 
             # prepare datastream to output to attachment
-            if pulsedive_data["pretty"] == "Yes":
+            if pulsedive_data["pretty"] == "Yes":fo
                 # Pulsedive returns pp format if requested. Convert to bytestream for file handling.
                 datastream = BytesIO(resp.content)
             else:
@@ -239,6 +240,13 @@ class FunctionComponent(ResilientComponent):
             # Write the file as attachment: failures will raise an exception
             write_file_attachment(client, attachment_name, datastream=datastream,
                                   incident_id=incident_id, task_id=None)
+
+            # === prepare the results
+            resp_json = rp.done(True, resp.json())
+            results = {
+                "resp_json": resp_json,
+                "att_name": attachment_name
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

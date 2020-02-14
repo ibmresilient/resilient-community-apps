@@ -1,0 +1,59 @@
+# -*- coding: utf-8 -*-
+"""Tests using pytest_resilient_circuits"""
+
+from __future__ import print_function
+import pytest
+from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits import SubmitTestFunction, FunctionResult
+
+PACKAGE_NAME = "fn_pulsedive"
+FUNCTION_NAME = "pulsedive_search"
+
+# Read the default configuration-data section from the package
+config_data = get_config_data(PACKAGE_NAME)
+
+# Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
+resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+
+
+def call_pulsedive_search_function(circuits, function_params, timeout=10):
+    # Fire a message to the function
+    evt = SubmitTestFunction("pulsedive_search", function_params)
+    circuits.manager.fire(evt)
+    event = circuits.watcher.wait("pulsedive_search_result", parent=evt, timeout=timeout)
+    assert event
+    assert isinstance(event.kwargs["result"], FunctionResult)
+    pytest.wait_for(event, "complete", True)
+    return event.kwargs["result"].value
+
+
+class TestPulsediveSearch:
+    """ Tests for the pulsedive_search function"""
+
+    def test_function_definition(self):
+        """ Test that the package provides customization_data that defines the function """
+        func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
+        assert func is not None
+
+    @pytest.mark.parametrize("incident_id, pulsedive_search_type, pulsedive_indicator_type, pulsedive_risk, pulsedive_attribute, pulsedive_lastseen, pulsedive_latest, pulsedive_threat, pulsedive_feed, pulsedive_limit, pulsedive_value, pulsedive_category, expected_results", [
+        (123, 'Threat', ['IPv6', 'URL'], ['Critical', 'Low'], "text", 'day', 'latest', "text", "text", '100 results', "text", ['Crime', 'PUP'], {"value": "xyz"}),
+        (123, 'Threat', ['URL', 'Artifact'], ['Medium', 'Unknown'], "text", 'day', 'historical', "text", "text", '1000 results', "text", ['APT', 'Terrorism'], {"value": "xyz"})
+    ])
+    def test_success(self, circuits_app, incident_id, pulsedive_search_type, pulsedive_indicator_type, pulsedive_risk, pulsedive_attribute, pulsedive_lastseen, pulsedive_latest, pulsedive_threat, pulsedive_feed, pulsedive_limit, pulsedive_value, pulsedive_category, expected_results):
+        """ Test calling with sample values for the parameters """
+        function_params = { 
+            "incident_id": incident_id,
+            "pulsedive_search_type": pulsedive_search_type,
+            "pulsedive_indicator_type": pulsedive_indicator_type,
+            "pulsedive_risk": pulsedive_risk,
+            "pulsedive_attribute": pulsedive_attribute,
+            "pulsedive_lastseen": pulsedive_lastseen,
+            "pulsedive_latest": pulsedive_latest,
+            "pulsedive_threat": pulsedive_threat,
+            "pulsedive_feed": pulsedive_feed,
+            "pulsedive_limit": pulsedive_limit,
+            "pulsedive_value": pulsedive_value,
+            "pulsedive_category": pulsedive_category
+        }
+        results = call_pulsedive_search_function(circuits_app, function_params)
+        assert(expected_results == results)

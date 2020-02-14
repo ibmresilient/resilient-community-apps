@@ -20,10 +20,10 @@ def snake_to_camel(word):
 setup(
     name='fn_pulsedive',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author='Carol Namkoong',
+    author_email='namkoong@us.ibm.com',
+    url='resilientsystems.com',
     description="Resilient Circuits Components for 'fn_pulsedive'",
     long_description="Resilient Circuits Components for 'fn_pulsedive'",
     install_requires=[
