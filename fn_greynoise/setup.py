@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_greynoise',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -27,7 +27,8 @@ setup(
     description="Resilient Circuits Components for 'fn_greynoise'",
     long_description="Collect analysis on IP Addresses using Greynoise",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
