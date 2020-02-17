@@ -95,6 +95,8 @@ At anytime the user can send a message or schedule a meeting using the Exchange 
 
 The Exchange Online: Create Meeting function creates a meeting event in the organizer's Outlook calendar and sends a calendar event invitation message to the meeting participants.
 
+<p> The meeting start and end times are set in the time zone of the meeting organizer's Outlook mailbox preferred time zone setting.  If no mailbox time zone setting is set, the meeting time is calculated using UTC time zone. 
+
  ![screenshot: fn-exchange-online-create-meeting ](./screenshots/EXO-create-meeting-function.png)
 
 <details><summary>Inputs:</summary>

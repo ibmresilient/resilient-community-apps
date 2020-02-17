@@ -89,12 +89,15 @@ The integration contains the following functions:
 
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
-* The following Microsoft Graph API "Application permissions" (See Microsoft Azure App Configuration section below to configure):
+* The following Microsoft Graph API "Application permissions" for this integration:
   * Calendar.ReadWrite
   * Mail.ReadWrite
   * Mail.Send
   * MailboxSetting.Read
   * User.Read.All
+
+
+  To set up Microsoft Azure permissions see section: [Microsoft Azure App Configuration](#microsoft-azure-app-configuration)
 
 ---
 
