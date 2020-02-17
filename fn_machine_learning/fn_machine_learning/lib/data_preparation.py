@@ -20,6 +20,7 @@
 """
 import pandas as pds
 from sklearn.preprocessing import MinMaxScaler
+import sys
 
 
 class DataPreparation(object):
@@ -84,13 +85,20 @@ class DataPreparation(object):
             counts = df_training.iloc[:, -1].value_counts()
             # first we need to figure out the count for the majority class
             maj_count = 0
-            for itr in counts.iteritems():
+
+            # check Python version and use appropriate method to return iterable list
+            if sys.version_info[0] < 3:
+                items = counts.iteritems()
+            else:
+                items = counts.items()
+
+            for itr in items:
                 if itr[1] > maj_count:
                     maj_count = itr[1]
 
             # go through all the classes again and upsample if necessary
             dataf = pds.DataFrame()
-            for itr in counts.iteritems():
+            for itr in items:
                 #
                 # itr is a tuple (class_value, count)
                 # Here we want to extract all the samples with the same
