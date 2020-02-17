@@ -39,7 +39,8 @@ setup(
         'pywinrm>=0.3.0',
         'json2html',
         'lxml',
-        'mail-parser>=3.9.3'
+        'mail-parser>=3.9.3',
+        'six>=1.14.0'
     ],
     packages=find_packages(),
     include_package_data=True,
