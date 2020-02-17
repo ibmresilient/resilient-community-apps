@@ -11,6 +11,7 @@ from resilient_lib.components.integration_errors import IntegrationError
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
+TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
 
 class MSGraphHelper(object):
     """
@@ -274,11 +275,11 @@ class MSGraphHelper(object):
 
         # Convert the start time to the time zone of the user mailbox
         start = datetime.datetime.utcfromtimestamp(start_time / 1000)
-        start_tz = start.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime('%Y-%m-%dT%H:%M:%S')
+        start_tz = start.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime(TIME_FORMAT)
 
         # Convert the end time to the time zone of the user mailbox
         end = datetime.datetime.utcfromtimestamp(end_time / 1000)
-        end_tz = end.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime('%Y-%m-%dT%H:%M:%S')
+        end_tz = end.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime(TIME_FORMAT)
 
         LOG.debug("Windows time zone = %s", windows_time_zone)
         LOG.debug("IANA time zone = %s", iana_time_zone)
