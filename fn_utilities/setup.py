@@ -40,7 +40,7 @@ setup(
         'json2html',
         'lxml',
         'mail-parser>=3.9.3',
-        'six>=13.0.0'
+        'six>=14.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
