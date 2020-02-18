@@ -93,9 +93,10 @@ The integration contains the following functions:
   * Calendar.ReadWrite
   * Mail.ReadWrite
   * Mail.Send
-  * MailboxSetting.Read
+  * MailboxSettings.Read
   * User.Read.All
 
+  NOTE: Not all permissions are needed for each function, as explained in the Exchange Online Integration User Guide.
 
   To set up Microsoft Azure permissions see section: [Microsoft Azure App Configuration](#microsoft-azure-app-configuration)
 
