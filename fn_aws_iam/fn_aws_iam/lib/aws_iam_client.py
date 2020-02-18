@@ -5,6 +5,7 @@
 from  datetime import datetime
 import logging
 import re
+from sys import version_info
 from botocore.exceptions import ClientError
 from botocore.config import Config
 from boto3 import Session
@@ -248,6 +249,14 @@ class AwsIamClient():
 
             return {"Status": "NoSuchEntity"}
 
+        except self.iam.exceptions.ClientError as invalid_ex:
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_iam_op.__name__, kwargs, "ValidationErrorException")
+            if "ValidationError" in invalid_ex.__repr__():
+                return {"Status": "ValidationError"}
+            else:
+                raise invalid_ex
+
         except Exception as int_ex:
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
                       aws_iam_op.__name__, kwargs, int_ex.__repr__())
@@ -310,7 +319,10 @@ class AwsIamClient():
 
         for filter_name in FILTER_NAMES:
             if results_filter and filter_name in results_filter and filter_name in result[0]:
-                regex = r'{}'.format(results_filter[filter_name])
+                if version_info.major < 3:
+                    regex = r'{}'.format(results_filter[filter_name].encode('utf-8'))
+                else:
+                    regex = r'{}'.format(results_filter[filter_name])
                 filtered_result = [r for r in result if re.search(regex, r[filter_name], re.IGNORECASE)]
                 if return_filtered:
                     # Return filtered count and filtered result.
