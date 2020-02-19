@@ -27,10 +27,26 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
 
+def sort_helper(x):
+    # Handle NoneTypes and empty lists
+    if (x is None) or (isinstance(x, list) and (len(x) == 0 or x[0] is None)):
+        return ""
+    # Handle nested lists
+    elif isinstance(x, list):
+        if isinstance(x[0], float) or isinstance(x[0], int):
+            return str(x[0])
+        else:
+            return x[0] # should only get here if x[0] is string or ascii
+    # All other possible data types (int, float, str, ascii chars)
+    elif isinstance(x, float) or isinstance(x, int):
+        return str(x)
+    return x            # should only get here if x is string or ascii
+
+
 def sort_json_arrays(obj):
     for elem in obj:
         if isinstance(obj[elem], list):
-            obj[elem].sort()
+            obj[elem].sort(key=sort_helper)
         if isinstance(obj[elem], dict):
             sort_json_arrays(obj[elem])
 
