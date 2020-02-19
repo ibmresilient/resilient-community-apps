@@ -83,7 +83,7 @@ Considering using these parameters to improve performance when running queries.
 <p>
 You can perform additional investigation, including using other email analysis scripts and integrations, on messages after writing the message to a note or attachment. 
 
-<p>Once you complete the investigation of the messages and there are problematic messages that you want to delete, use the Example: Exchange Online Delete Message rule from the incident’s Actions menu. The rule starts a workflow that performs a query of messages and sends the matching results to a function that deletes a list of messages. The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red. An incident note is also written that indicates the number of messages deleted. 
+<p>Once you complete the investigation of the messages and there are problematic messages that you want to delete, use the Example: Exchange Online Delete Messages for Query Results rule from the incident’s Actions menu. The rule starts a workflow that performs a query of messages and sends the matching results to a function that deletes a list of messages. The results are written to the Exchange Online Message Query Results data table with a Status column of "Deleted" in red. An incident note is also written that indicates the number of messages deleted. 
 
 <p>
 Use this rule with caution as you can delete many user messages. 
@@ -552,7 +552,7 @@ incident.addNote(noteText)
 ---
 ## Function - Exchange Online: Get User Profile
 <p>
-Exchange Online: Delete Message function requires the following Microsoft Graph API Application permission:
+Exchange Online: Get User Profile function requires the following Microsoft Graph API Application permission:
 
 * <b>User.Read.All</b>
 
