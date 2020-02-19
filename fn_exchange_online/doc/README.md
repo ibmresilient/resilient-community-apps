@@ -93,7 +93,7 @@ At anytime the user can send a message or schedule a meeting using the Exchange 
 ---
 ## Function - Exchange Online: Create Meeting
 <p>
-Exchange Online: Create Meeting function requires the following Microsoft Graph API Applications permissions:
+Exchange Online: Create Meeting function requires the following Microsoft Graph API Application permissions:
 
 * <b>Calendars.ReadWrite
 * MailboxSettings.Read</b>
@@ -211,7 +211,7 @@ When the Example: Exchange Online Create Meeting rule is activated the following
 ## Function - Exchange Online: Delete Message
 Exchange Online: Delete Message function requires the following Microsoft Graph API Application permission:
 
-<b>Mail.ReadWrite</b>
+* <b>Mail.ReadWrite</b>
 
 Delete a message in the specified user's email address mailbox.  The email address of the mailbox and the message ID are required input parameters.  The mail folder is an optional parameter.
 
@@ -308,10 +308,10 @@ The Example: Exchange Online Delete Message rule works off the Query Results dat
 
 ---
 ## Function - Exchange Online: Delete Messages From Query Results
-Exchange Online: Delete Messages From Query Results function requires the following Microsoft Graph API Application permission:
+Exchange Online: Delete Messages From Query Results function requires the following Microsoft Graph API Application permissions:
 
-<b>Mail.ReadWrite</b>
-<b>User.Read.All</b> (if querying the whole tenant)
+* <b>Mail.ReadWrite</b>
+* <b>User.Read.All</b> (if querying the whole tenant)
 
 This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.
 
@@ -447,7 +447,7 @@ See the Query function section for a description of querying.
 
 Exchange Online: Get Message function requires the following Microsoft Graph API Application permission:
 
-<b>Mail.Read</b>
+* <b>Mail.Read</b>
 
 This function returns the contents of an Exchange Online message in JSON format.
 
@@ -554,7 +554,7 @@ incident.addNote(noteText)
 <p>
 Exchange Online: Delete Message function requires the following Microsoft Graph API Application permission:
 
-<b>User.Read.All</b>
+* <b>User.Read.All</b>
 
 <p>
 The Get User Profile function returns Exchange Online user profile for a given email address.
@@ -670,7 +670,7 @@ The example Get User Profile rule invokes the Get User Profile workflow if the a
 ## Function - Exchange Online: Move Message to Folder
 Exchange Online: Move Message to Folder function requires the following Microsoft Graph API Application permission:
 
-<b>Mail.ReadWrite</b>
+* <b>Mail.ReadWrite</b>
 
 This function moves an Exchange Online message to the specified folder in the users mailbox.
 
@@ -794,11 +794,10 @@ The example Move Message to Folder rule accesses the Exchange Online Message Que
 ---
 
 ## Function - Exchange Online: Query Messages
-Exchange Online: Query Messages to Folder function requires the following Microsoft Graph API Application permission:
+Exchange Online: Query Messages function requires the following Microsoft Graph API Application permissions:
 
-<b>Mail.Read</b>
-<b>User.Read.All</b> (if querying the whole tenant)
-
+* <b>Mail.Read</b>
+* <b>User.Read.All</b> (if querying the whole tenant)
 
 The Exchange Online: Query Message function queries the Exchange Online to find messages matching the specified input parameters. The function returns a list of messages matching the search criteria.
 <p>
@@ -1008,7 +1007,7 @@ When the Example: Exchange Online Delete Messages from Query Results rule is act
 <p>
 Exchange Online: Send Message function requires the following Microsoft Graph API Application permission:
 
-<b>Mail.Send</b>
+* <b>Mail.Send</b>
 
 <p>
 This function creates a message and sends it to the specified recipients.
@@ -1118,7 +1117,7 @@ When the Example Send Message rule is initiated the following rule activity popu
 <p>
 Exchange Online: Write Message as Attachment function requires the following Microsoft Graph API Application permission:
 
-<b>Mail.Read</b>
+* <b>Mail.Read</b>
 
 <p>
 This function gets the mime content of an Exchange Online message and writes it as an incident attachment. The attachment file name is an optional parameter. The function uses a default message-{email-address}-{message-ID}.eml filename if none is specified.
