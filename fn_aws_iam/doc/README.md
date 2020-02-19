@@ -42,7 +42,7 @@
 Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. Using IAM, AWS users and groups can be created and managed, permissions can used to allow and deny access to AWS resources.
 The AWS IAM integration with the Resilient platform allows for querying and updating of users or access keys for an AWS account. 
 
-The following type of queries can be executed:
+The following types of queries can be executed:
 * Get a list of users and associated items (login profile, access keys, groups, policies).
 * Get a list of access keys.
 
@@ -50,7 +50,7 @@ The integration can also be used to make the following changes to a SEP environm
 * Delete a user and delete or remove items associated with the user.
 * Attach a user policy.
 * Detach all policies for a user.
-* Add user to a group.
+* Add a user to a group.
 * Remove a user from all groups.
 * Change a user profile password.
 * Delete an access key.
@@ -59,11 +59,11 @@ The integration can also be used to make the following changes to a SEP environm
 
 ---
 ## Function - AWS IAM: List Users
-Get IAM user or users in the AWS account.  Users can be filtered by user name , group and policy. If the user name is specified get information only for this user. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine user data returned. Parameter aws_iam_query_type (optional) is used to determine type of query to perform users.
+The function can perform a get of IAM user or users in the AWS account.  Users can be filtered by user name , group, policy or access key. If the user name is specified, the function can perform a get of information for this user only. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine the user data returned. Parameter aws_iam_query_type (optional) is used to determine the type of query to perform on users.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: List Users`, `Example: AWS IAM: List Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User`, `Example: AWS IAM: Delete User For Artifact`, `Example: AWS IAM: Get Access Key For Artifact` and `Example: AWS IAM: Get User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: List Users`, `Example: AWS IAM: List Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User`, `Example: AWS IAM: Delete User For Artifact`, `Example: AWS IAM: Get Access Key For Artifact` and `Example: AWS IAM: Get User For Artifact`.
 
-The workflow, `Example: AWS IAM: List Users`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: List Users`, sets the following input fields for the function:
 
 *	aws_iam_user_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
 *	aws_iam_group_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
@@ -77,27 +77,27 @@ The workflow is initiated by the incident rule, `Example: AWS IAM: List Users`.
 
    ![screenshot: fn-aws-iam-list-users-action ](./screenshots/fn-aws-iam-list-users-action.png)
    
-2. The user is presented with a list of input fields which can be used to filter users using regular expressions. Set any desired filters and click Execute..
+2. The user is presented with a list of input fields which can be used to filter users using regular expressions. Set any desired filters.
 
    ![screenshot: fn-aws-iam-list-users-action_2 ](./screenshots/fn-aws-iam-list-users-action_2.png)
 
 
-This invokes the `Example: AWS IAM: List Users` workflow, which calls the `AWS IAM: List Users` function.
-The data table `AWS IAM Users` will be updated in the Resilient platform with the users properties for the selected AWS account.  
+Press Execute to invoke the `Example: AWS IAM: List Users` workflow, which calls the `AWS IAM: List Users` function.
+The data table `AWS IAM Users` is updated in the Resilient platform with the users' properties for the selected AWS account.  
 
    ![screenshot: fn-aws-iam-list-users-datatable](./screenshots/fn-aws-iam-list-users-datatable.png)
    ![screenshot: fn-aws-iam-list-users-datatable_2](./screenshots/fn-aws-iam-list-users-datatable_2.png)   
 
-Note: If all unfiltered users are listed the default user for the integration will be indicated by "Yes" in the "Default user" field.
+Note: If all unfiltered users are listed, the default user for the integration is indicated by "Yes" in the "Default user" field.
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users or access keys based on access keys applied to user. Filter by access key id, can be a string or regular expression. |
-| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name, can be a string or regular expression. |
-| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name, can be a string or regular expression. |
+| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users or access keys based on access keys applied to user. Filter by access key ID. Can be a string or regular expression. |
+| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name. Can be a string or regular expression. |
+| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name. Can be a string or regular expression. |
 | `aws_iam_query_type` | `select` | No | `-` | Type of query to perform for list_users, can be one of 'users' or 'access_keys'. Optional parameter. |
 | `aws_iam_user_filter` | `text` | No | `-` | Filter users or access keys based on user name. Can be a string or regular expression. |
 | `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
@@ -280,7 +280,7 @@ if __name__ == "__main__":
 </p>
 </details>
 
-The workflow, `Example: AWS IAM: List Access keys`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: List Access keys`, sets the following input fields for the function:
 
 *	aws_iam_user_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
 *	aws_iam_access_key_filter (optional) is mapped to an activity field input. Note: Input should be a valid regular expression.
@@ -292,26 +292,26 @@ The workflow is initiated by the incident rule, `Example: AWS IAM: List Access k
 
    ![screenshot: fn-aws-iam-list-keys-action ](./screenshots/fn-aws-iam-list-keys-action.png)
    
-2. The user is presented with a list of input fields which can be used to filter users using regular expressions. Set any desired filters and click Execute..
+2. The user is presented with a list of input fields which can be used to filter users using regular expressions. Set any desired filters.
 
    ![screenshot: fn-aws-iam-list-keys-action_2 ](./screenshots/fn-aws-iam-list-keys-action_2.png)
 
 
-This invokes the `Example: AWS IAM: List Access keys` workflow, which calls the `AWS IAM: List Users` function.
-The data table `AWS IAM Access Keys` will be updated in the Resilient platform with the users properties for the selected AWS account.  
+Press Execute to invoke the `Example: AWS IAM: List Access keys` workflow, which calls the `AWS IAM: List Users` function.
+The data table `AWS IAM Access Keys` is updated in the Resilient platform with the users' properties for the selected AWS account.  
 
    ![screenshot: fn-aws-iam-list-keys-datatable](./screenshots/fn-aws-iam-list-keys-datatable.png)
 
-Note: If all unfiltered access keys are listed the key for the default user for the integration will be indicated by "Yes" in the "Default key" field.
+Note: If all unfiltered access keys are listed, the key for the default user for the integration is indicated by "Yes" in the "Default key" field.
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users or access keys based on access keys applied to user. Filter by access key id, can be a string or regular expression. |
-| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name, can be a string or regular expression. |
-| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name, can be a string or regular expression. |
+| `aws_iam_access_key_filter` | `text` | No | `-` | Filter users or access keys based on access keys applied to user. Filter by access key ID. Can be a string or regular expression. |
+| `aws_iam_group_filter` | `text` | No | `-` | Filter users based on group membership. Filter by group name. Can be a string or regular expression. |
+| `aws_iam_policy_filter` | `text` | No | `-` | Filter users based on policies applied to user. Filter by policy name. Can be a string or regular expression. |
 | `aws_iam_query_type` | `select` | No | `-` | Type of query to perform for list_users, can be one of 'users' or 'access_keys'. Optional parameter. |
 | `aws_iam_user_filter` | `text` | No | `-` | Filter users or access keys based on user name. Can be a string or regular expression. |
 | `aws_iam_user_name` | `text` | No | `AWS IAM user name` | AWS IAM user name. |
@@ -424,7 +424,7 @@ if __name__ == "__main__":
 ## Function - AWS IAM: Delete User
 Delete the specified IAM user. Parameter aws_iam_user_name is an IAM user name. 
 
-When deleting an IAM user programmatically, the workflow will  delete or remove the following items attached to the user:
+When deleting an IAM user programmatically, the workflow deletes or removes the following items attached to the user:
     
     Password ( DeleteLoginProfile )
     Access keys ( DeleteAccessKey )
@@ -432,23 +432,23 @@ When deleting an IAM user programmatically, the workflow will  delete or remove 
     Attached managed policies ( DetachUserPolicy ) 
     Group memberships ( RemoveUserFromGroup )
 
-Note: If any of other the following items is associated with the target user the integration will fail.
+Note: If any of the following items is associated with the target user, the integration fails.
 
     0Signing certificate ( DeleteSigningCertificate )
     SSH public key ( DeleteSSHPublicKey )
     Git credentials ( DeleteServiceSpecificCredential )
     Multi-factor authentication (MFA) device ( DeactivateMFADevice , DeleteVirtualMFADevice )
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
 Both of the example workflows are multi-step functions and will attempt to remove or delete the items referenced above if associated with the user,
-and will then attempt to delete the user.
+and then attempt to delete the user.
     
-If any of the items mentioned above exist for the user the workflow will fail.
+If any of the items mentioned above exist for the user, the workflow will fail.
 
-The workflow, `Example: AWS IAM: Delete User`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
-*	aws_iam_user_name is mapped to a user name from the selected data table row `Example: AWS IAM: Delete User` or artifact .
+*	aws_iam_user_name is mapped to a user name from the selected data table row `Example: AWS IAM: Delete User` or artifact.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
 
@@ -457,35 +457,35 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User
 
    ![screenshot: fn-aws-iam-delete-user-action ](./screenshots/fn-aws-iam-delete-user-action.png)
 
-3. User is presented with a warning and an option to Execute or Cancel.
+The user is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-user-action_2 ](./screenshots/fn-aws-iam-delete-user-action_2.png)     
+   ![screenshot: fn-aws-iam-delete-user-action_2 ](./screenshots/fn-aws-iam-delete-user-action_2.png)  
+       
+Press Execute to invoke the `Example: AWS IAM: Delete User` workflow, which calls the `AWS IAM: Delete User` function. 
 
-Pressing Execute invokes the `Example: AWS IAM: Delete User` workflow, which calls the `AWS IAM: Delete User` function.
-
-On successful completion, the data table `AWS IAM Users` will be refreshed in the Resilient platform with the updated access key details for the selected user. The data table `Status` field will transition to `Deleted`.
+On successful completion of the workflow, the data table `AWS IAM Users` is refreshed in the Resilient platform with the updated access key details for the selected user. The `Status` field of the data table transitions to `Deleted`.
 
    ![screenshot: fn-aws-iam-delete-user-datatable](./screenshots/fn-aws-iam-delete-user-datatable.png)
    ![screenshot: fn-aws-iam-delete-user-datatable_2](./screenshots/fn-aws-iam-delete-user-datatable_2.png)
 
-The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
 
 The workflow is initiated by the artifact rule, `Example: AWS IAM: Delete User For Artifact`.
 
 1. Open an incident and select the 'Artifacts' tab.
-2. For a Resilient artifact of type, 'AWS IAM User Name’ click Action-> `Example: AWS IAM: Delete User For Artifact`.
+2. For a Resilient artifact of type, 'AWS IAM User Name’, click Action-> `Example: AWS IAM: Delete User For Artifact`.
 
    ![screenshot: fn-aws-iam-delete-user-artifact-action ](./screenshots/fn-aws-iam-delete-user-artifact-action.png)
 
-3. User is presented with a warning and an option to Execute or Cancel.
+User is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-user-action_2 ](./screenshots/fn-aws-iam-delete-user-action_2.png)     
+   ![screenshot: fn-aws-iam-delete-user-action_2 ](./screenshots/fn-aws-iam-delete-user-action_2.png)     
 
-Pressing Execute invokes the `Example: AWS IAM: Delete User For Artifact` workflow, which calls the `AWS IAM: Delete User` function.
+Press Execute to invoke the `Example: AWS IAM: Delete User For Artifact` workflow, which calls the `AWS IAM: Delete User` function.
 
-On successful completion, the artifact description will be updated with details of user deletion.
+On successful completion of the workflow, the artifact description is updated with details of the user deletion.
 
    ![screenshot: fn-aws-iam-delete-user-artifact](./screenshots/fn-aws-iam-delete-user-artifact.png)
 
@@ -577,11 +577,11 @@ if __name__ == "__main__":
 ---
 
 ## Function - AWS IAM: Delete Access Keys
-Delete the access key pairs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_access_keys is a comma separated list of IAM access key ids.
+Delete the access key pairs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_access_keys is a comma separated list of IAM access key IDs.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Delete Access Key`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Delete Access Key`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Delete Access Keys`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete Access Keys`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 *	aws_iam_access_keys is mapped to all access keys for the user from the selected row of data table `AWS IAM Users`.
@@ -593,20 +593,20 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Delete Acce
 
    ![screenshot: fn-aws-iam-delete-accesskeys-action ](./screenshots/fn-aws-iam-delete-accesskeys-action.png)
 
-3. The user is presented with a warning and an option to Execute or Cancel.
+The user is presented with a warning and an option to Execute or Cancel.
+    
+   ![screenshot: fn-aws-iam-delete-accesskeys-action_2 ](./screenshots/fn-aws-iam-delete-accesskeys-action_2.png)     
 
-    ![screenshot: fn-aws-iam-delete-accesskeys-action_2 ](./screenshots/fn-aws-iam-delete-accesskeys-action_2.png)     
+Press Execute to invoke the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
-Pressing Execute invokes the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
-
-On successful completion, for the data table `AWS IAM Users` the `Access key ids` field will get updated for the selected user.
+On successful completion of the workflow, the `Access key ids` field of the `AWS IAM Users` data table is updated for the selected user.
 
    ![screenshot: fn-aws-iam-delete-accesskeys-datatable](./screenshots/fn-aws-iam-delete-accesskeys-datatable.png)
    
-The workflow, `Example: AWS IAM: Delete Access Key`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete Access Key`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Access Keys`.
-*	aws_iam_access_keys is mapped to the access key id from the selected row of data table `AWS IAM Access Keys`.
+*	aws_iam_access_keys is mapped to the access key ID from the selected row of data table `AWS IAM Access Keys`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete Access Key`.
 
@@ -615,17 +615,17 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Delete Acce
 
    ![screenshot: fn-aws-iam-delete-accesskey-action ](./screenshots/fn-aws-iam-delete-accesskey-action.png)
 
-3. User is presented with a warning and an option to Execute or Cancel.
+User is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-accesskey-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-action_2.png)     
+   ![screenshot: fn-aws-iam-delete-accesskey-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-action_2.png)     
 
-Pressing Execute invokes the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
+Press Execute to invoke the `Example: AWS IAM: Delete Access Key` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
-On successful completion, the data table `AWS IAM Access Keys` `Status` field will transition to `Deleted`.
+On successful completion of the workflow, the `Status` field of the `AWS IAM Access Keys` data table is transitioned to `Deleted`.
    
    ![screenshot: fn-aws-iam-delete-accesskey-datatable](./screenshots/fn-aws-iam-delete-accesskey-datatable.png)
 
-The workflow, `Example: AWS IAM: Delete Access Key For Artifact`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete Access Key For Artifact`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name computed from a previous step in the workflow.
 *	aws_iam_access_keys is mapped to an artifact value for artifact of type `AWS IAM Access Key ID`.
@@ -633,17 +633,17 @@ The workflow, `Example: AWS IAM: Delete Access Key For Artifact`, sets the follo
 The workflow is initiated by the artifact rule, `Example: AWS IAM: Delete Access Key For Artifact`.
 
 1. Open an incident and select the 'Artifacts' tab.
-2. For a Resilient artifact of type, `AWS IAM Access Key ID` click Action-> `Example: AWS IAM: Delete Access Key For Artifact`.
+2. For a Resilient artifact of type `AWS IAM Access Key ID`, click Action-> `Example: AWS IAM: Delete Access Key For Artifact`.
 
    ![screenshot: fn-aws-iam-delete-accesskey-artifact-action ](./screenshots/fn-aws-iam-delete-accesskey-artifact-action.png)
 
-3. User is presented with a warning and an option to Execute or Cancel.
+User is presented with a warning and an option to Execute or Cancel.
 
-    ![screenshot: fn-aws-iam-delete-accesskey-artifact-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-artifact-action_2.png)     
+   ![screenshot: fn-aws-iam-delete-accesskey-artifact-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-artifact-action_2.png)     
 
-Pressing Execute invokes the `Example: AWS IAM: Delete Access Key For Artifact` workflow, which calls the `AWS IAM: Delete Access Keys` function.
+Press Execute to invoke the `Example: AWS IAM: Delete Access Key For Artifact` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
-On successful completion, the artifact description will be updated with details of access key deletion.
+On successful completion of the workflow, the artifact description is updated with details of access key deletion.
 
    ![screenshot: fn-aws-iam-delete-accesskey-artifact](./screenshots/fn-aws-iam-delete-accesskey-artifact.png)
 
@@ -753,29 +753,29 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Remove User From Groups
-Removes the specified IAM user from the specified groups. Group names is be a comma separated string of group names. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is  a comma separated list of IAM group names.
+Removes the specified IAM user from the specified groups. Group names is a comma separated string of group names. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is  a comma separated list of IAM group names.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Remove User From All Groups`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Remove User From All Groups`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Remove User From All Groups`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Remove User From All Groups`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 *	aws_iam_group_names is mapped to all group names from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Remove User From All Groups`.
 
-1. Open an incident and select the row of data table `AWS IAM Users`corresponding to user who needs to be removed from all groups.
+1. Open an incident and select the row of data table `AWS IAM Users`corresponding to the user who needs to be removed from all groups.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Remove User From All Groups`.
 
    ![screenshot: fn-aws-iam-remove-user-from-groups-action ](./screenshots/fn-aws-iam-remove-user-from-groups-action.png)
    
-3. User is presented with a warning and an option to Execute or Cancel.
-
+User is presented with a warning and an option to Execute or Cancel.
+    
    ![screenshot: fn-aws-iam-remove-user-from-groups-action_2 ](./screenshots/fn-aws-iam-remove-user-from-groups-action_2.png)   
                                     
-Pressing Execute invokes the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Remove User From Groups` function.
+Press Execute to invoke the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Remove User From Groups` function.
 
-On successful completion, for the data table `AWS IAM Users` the `Groups` field will get updated to an empty value for the selected user.
+On successful completion of the workflow, the `Groups` field of the `AWS IAM Users` data table is updated to an empty value for the selected user.
 
    ![screenshot: fn-aws-iam-remove-user-from-groups-datatable](./screenshots/fn-aws-iam-remove-user-from-groups-datatable.png)
 
@@ -884,31 +884,31 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Attach User policies
-Attach the specified managed policies to the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+Attaches the specified managed policies to the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
 
-Note: One of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+Note: One of parameters, aws_iam_policy_names or aws_iam_arns, is required to be set.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Attach User Policy`
+Example workflows that use this Resilient function include `Example: AWS IAM: Attach User Policy`
 
-The workflow, `Example: AWS IAM: Attach User Policy`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Attach User Policy`, sets the following input fields for the function:
  
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 *	aws_iam_policy_names is mapped to activity field `aws_iam_policy_name` which should be a drop-down list of policy names.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Attach User Policy`.
 
-1. Open an incident and select the row of data table `AWS IAM Users` corresponding to user who needs to have a policy attached.
+1. Open an incident and select the row of data table `AWS IAM Users` corresponding to the user who needs to have a policy attached.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Attach User Policy`.
 
    ![screenshot: fn-aws-iam-attach-user-policies-action ](./screenshots/fn-aws-iam-attach-user-policies-action.png)
 
-3. From the drop-down list of user defined polciy name , select a policy and click Execute.
+3. From the drop-down list of user defined policy names, select a policy and click Execute.
 
    ![screenshot: fn-aws-iam-attach-user-policies_2-action ](./screenshots/fn-aws-iam-attach-user-policies_2-action.png)
 
 This invokes the `Example: AWS IAM: Attach User Policy` workflow, which calls the `AWS IAM: Attach User policies` function.
 
-On successful completion, for the data table `AWS IAM Users` the `Policies` field will get updated for the selected user.
+On successful completion of the workflow, the `Policies` field of the `AWS IAM Users` data table is updated for the selected user.
 
    ![screenshot: fn-aws-iam-attach-user-policies-datatable](./screenshots/fn-aws-iam-attach-user-policies-datatable.png)
 
@@ -1020,11 +1020,11 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Update Login Profile
-Change the password for the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_password is a new password value for an IAM user. Parameter aws_iam_password_reset_required is a boolean value to determine whether a password reset should be required on change.
+Changes the password for the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_password is a new password value for an IAM user. Parameter aws_iam_password_reset_required is a boolean value to determine whether a password reset should be required on change.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Change Profile Password`
+Example workflows that use this Resilient function include `Example: AWS IAM: Change Profile Password`
 
-The workflow, `Example: AWS IAM: Change Profile Password`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Change Profile Password`, sets the following input fields for the function:
 
 * aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 * aws_iam_password is mapped to an activity field input.
@@ -1046,7 +1046,7 @@ Note: The minimum reqirements for a new password is at > 8 characters, at least 
 
 This invokes the `Example: AWS IAM: Change Profile Password` workflow, which calls the `AWS IAM: Update Login Profile` function.
 
-On successful completion a note will be created indicting status of action.
+On successful completion of the workflow, a note is created indicting the status of the action.
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1154,28 +1154,29 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Add User To Groups
-Add the specified IAM user to the specified groups. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is a comma separated list of IAM group names.
+Adds the specified IAM user to the specified groups. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is a comma separated list of IAM group names.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Add User To Group`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Add User To Group`.
 
-The workflow, `Example: AWS IAM: Add User To Group`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Add User To Group`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_group_names is mapped to activity field which is a drop-down list of group names.
+*	aws_iam_group_names is mapped to an activity field, which is a drop-down list of group names.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Add User To Group`.
 
-1. Open an incident and select the row of data table `AWS IAM Users`corresponding to user who needs to be added to a group.
+1. Open an incident and select the row of data table `AWS IAM Users`corresponding to the user who needs to be added to a group.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Add User To Group`.
 
    ![screenshot: fn-aws-iam-add-user-to-groups-action ](./screenshots/fn-aws-iam-add-user-to-groups-action.png)
 
-3. From the drop-down list of user defined groups names , select a group and click Execute.
+3. From the drop-down list of user defined groups names, select a group and click Execute.
 
    ![screenshot: fn-aws-iam-add-user-to-groups_2-action ](./screenshots/fn-aws-iam-add-user-to-groups_2-action.png)
 
 This invokes the `Example: AWS IAM: Add User To Group` workflow, which calls the `AWS IAM: Add User To Groups` function.
-On successful completion, for the data table `AWS IAM Users` the `Groups` field will get updated for the selected user.
+
+, the data table `AWS IAM Users` field `Groups` is updated for the selected user.
 
    ![screenshot: fn-aws-iam-add-user-to-groups-datatable](./screenshots/fn-aws-iam-add-user-to-groups-datatable.png)
 
@@ -1273,27 +1274,28 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Groups
-Get the IAM groups that the specified IAM user belongs to. Parameter aws_iam_user_name is an IAM user name.
+Gets the IAM groups that include the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Add User To Group`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Remove User From All Groups`, `Example: AWS IAM: Delete User` or , `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Add User To Group`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Remove User From All Groups`, `Example: AWS IAM: Delete User` or , `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Add User To Group`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Add User To Group`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Add User To Group`.
 
-1. Open an incident and select the row of data table `AWS IAM Users`corresponding to user who needs to be added to a group.
+1. Open an incident and select the row of data table `AWS IAM Users`corresponding to the user who needs to be added to a group.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Add User To Group`.
 
    ![screenshot: fn-aws-iam-add-user-to-groups-action ](./screenshots/fn-aws-iam-add-user-to-groups-action.png)
 
-3. From the drop-down list of user defined groups names , select a group and click Execute.
+3. From the drop-down list of user defined groups names, select a group and click Execute.
 
    ![screenshot: fn-aws-iam-add-user-to-groups_2-action ](./screenshots/fn-aws-iam-add-user-to-groups_2-action.png)
 
 This invokes the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Add User To Groups` function.
-On successful completion, for the data table `AWS IAM Users` the `Groups` field will get updated for the selected user.
+
+On successful completion of the workflow, the `Groups` field of the `AWS IAM Users` data table is updated for the selected user.
 
    ![screenshot: fn-aws-iam-add-user-to-groups-datatable](./screenshots/fn-aws-iam-add-user-to-groups-datatable.png)
 
@@ -1390,11 +1392,11 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Delete Login Profile
-Delete the password for the specified IAM user, which terminates the user's ability to access AWS services through the AWS Management Console. Parameter aws_iam_user_name is an IAM user name.
+Deletes the password for the specified IAM user, which terminates the user's ability to access AWS services through the AWS Management Console. Parameter aws_iam_user_name is an IAM user name.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User` and `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User` and `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Delete Login Profile`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Delete Login Profile`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
@@ -1409,8 +1411,9 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Delete Logi
 
    ![screenshot: fn-aws-iam-delete-login-profile-action_2 ](./screenshots/fn-aws-iam-delete-login-profile-action_2.png)  
 
-This invokes the `Example: AWS IAM: Delete Login Profile` workflow, which calls the `AWS IAM: Delete Login Profile` function.
-On successful completion, for the data table `AWS IAM Users` the `Login Profile exists` field will get updated to "No" for the selected user.
+Press Execute to invoke the `Example: AWS IAM: Delete Login Profile` workflow, which calls the `AWS IAM: Delete Login Profile` function.
+
+On successful completion of the workflow, the `Login Profile exists` field of the `AWS IAM Users` data table is updated to "No" for the selected user.
 
    ![screenshot: fn-aws-iam-delete-login-profile-datatable](./screenshots/fn-aws-iam-delete-login-profile-datatable.png)
 
@@ -1510,32 +1513,28 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Policies
-Get all managed policies and in-line policies that are attached to the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
+Gets all managed policies and in-line policies that are attached to the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Attach User Policy`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Get User For Artifact`, `Example: AWS IAM: Detach All User Policies`, `Example: AWS IAM: Delete User` and `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Attach User Policy`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Get User For Artifact`, `Example: AWS IAM: Detach All User Policies`, `Example: AWS IAM: Delete User` and `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Attach User Policy`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Attach User Policy`, sets the following input fields for the function:
 
-*	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-
-The workflow, `Example: AWS IAM: Attach User Policy`, sets the following input fields for the Function:
- 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Attach User Policy`.
 
-1. Open an incident and select the row of data table `AWS IAM Users` corresponding to user who needs to have a policy attached.
+1. Open an incident and select the row of data table `AWS IAM Users` corresponding to the user who needs to have a policy attached.
 2. From the selected rows action menu, select `Example: AWS IAM: Attach User Policy`.
 
    ![screenshot: fn-aws-iam-attach-user-policies-action ](./screenshots/fn-aws-iam-attach-user-policies-action.png)
 
-3. From the drop-down list of user defined policty name , select a policy and click Execute.
+3. From the drop-down list of user defined policty name, select a policy and click Execute.
 
    ![screenshot: fn-aws-iam-attach-user-policies_2-action ](./screenshots/fn-aws-iam-attach-user-policies_2-action.png)
 
 This invokes the `Example: AWS IAM: Attach User Policy` workflow, which calls the `AWS IAM: List User Policies` function.
 
-On successful completion, for the data table `AWS IAM Users` the `Policies` field will get updated for the selected user.
+On successful completion of the workflow, the `Policies` field of the `AWS IAM Users` data table is updated for the selected user.
 
    ![screenshot: fn-aws-iam-attach-user-policies-datatable](./screenshots/fn-aws-iam-attach-user-policies-datatable.png)
 
@@ -1633,14 +1632,14 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Detach User policies
-Remove the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+Removes the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
 
-Note: A user can also have inline policies embedded with it, this function will delete inline policies associated with the the user. 
-Note: one of parameters aws_iam_policy_names or aws_iam_arns required to be set.
+Note: A user can have embedded inline policies, which the function also deletes. One of the parameters, aws_iam_policy_names or aws_iam_arns, is 
+required to be set.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Detach All User Policies`, `Example: AWS IAM: Delete User For Artifact` or `Example: AWS IAM: Delete User`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Detach All User Policies`, `Example: AWS IAM: Delete User For Artifact` or `Example: AWS IAM: Delete User`.
 
-The workflow, `Example: AWS IAM: Detach All User Policies`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Detach All User Policies`, sets the following input fields for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 *	aws_iam_policy_names is mapped to all policy names for the user from the selected row of data table `AWS IAM Users`.
@@ -1656,9 +1655,9 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Detach All 
 
    ![screenshot: fn-aws-iam-detach-user-policies-action_2 ](./screenshots/fn-aws-iam-detach-user-policies-action_2.png)  
 
-This invokes the `Example: AWS IAM: Detach All User Policies` workflow, which calls the `AWS IAM: Detach User policies` function.
+Press Execute to invoke the `Example: AWS IAM: Detach All User Policies` workflow, which calls the `AWS IAM: Detach User policies` function.
 
-On successful completion, for the data table `AWS IAM Users` the `Policies` field will get updated to an empty value for the selected user.
+On successful completion of the workflow, the `Policies` field of the `AWS IAM Users` data table is updated to an empty value for the selected user.
 
    ![screenshot: fn-aws-iam-detach-user-policies-datatable](./screenshots/fn-aws-iam-detach-user-policies-datatable.png)
 
@@ -1772,24 +1771,24 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: List User Access Key Ids
-Get information about the access key IDs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
+Gets information about the access key IDs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
-* Example workflows that use this Resilient Function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Get User For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
+Example workflows that use this Resilient function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Get User For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
-The workflow, `Example: AWS IAM: Refresh User`, sets the following input fields for the Function:
+The workflow, `Example: AWS IAM: Refresh User`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected data table row.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Refresh User`.
 
-1. Open an incident and select the row of data table `AWS IAM Users` corresponding to the user which is to have its properties refreshed for th dat table.
+1. Open an incident and select the row of data table `AWS IAM Users` corresponding to the user which is to have its properties refreshed for the data table.
 2. From the selected row’s actions menu, select `Example: AWS IAM: Refresh User`.
- fn-aws-iam-list-user-access-key-ids 
+
    ![screenshot: fn-aws-iam-list-user-access-key-ids-action ](./screenshots/fn-aws-iam-list-user-access-key-ids-action.png)
    
-Pressing Execute invokes the `Example: AWS IAM: Refresh User` workflow, which calls the `AWS IAM: List User Access Key Ids` function.
+Press Execute to invoke the `Example: AWS IAM: Refresh User` workflow, which calls the `AWS IAM: List User Access Key Ids` function.
 
-On successful completion, for the data table `AWS IAM Users` the `Access key ids` field will get updated for the selected user.
+On successful completion of the workflow, the `Access key ids` field of the `AWS IAM Users` data table is updated for the selected user.
 
    ![screenshot: fn-aws-iam-list-user-access-key-ids-datatable](./screenshots/fn-aws-iam-list-user-access-key-ids-datatable.png)
 
