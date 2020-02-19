@@ -153,6 +153,7 @@ class TestAWSIAMClient:
     @pytest.mark.parametrize("op, expected_result", [
        ( "get_user", "OK"),
        ( "delete_user", "OK")
+
     ])
     def test_post(self, mock_id, mock_iam, op, expected_result):
         options = {}
