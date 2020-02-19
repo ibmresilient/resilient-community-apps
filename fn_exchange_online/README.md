@@ -90,7 +90,7 @@ The integration contains the following functions:
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 * The following Microsoft Graph API "Application permissions" for this integration:
-  * Calendar.ReadWrite
+  * Calendars.ReadWrite
   * Mail.ReadWrite
   * Mail.Send
   * MailboxSettings.Read
@@ -122,7 +122,7 @@ The integration contains the following functions:
   ```
 * Import the **configurations** into your app.config file:
   ```
-  $ resilient-circuits config -u
+  $ resilient-circuits config -u -l fn-exchange-online 
   ```
 * Import the fn_exchange_online **customizations** into the Resilient platform:
   ```
