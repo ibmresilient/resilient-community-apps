@@ -8,6 +8,7 @@ from .tree_node import TreeNode
 from . import stix_utils
 
 
+
 class MultiRootTree(object):
     """
     A stix2 bundle can be represented by a multi-root tree.
