@@ -27,20 +27,31 @@ config_data = get_config_data(PACKAGE_NAME)
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
 resilient_mock = AttachmentMock
 
+'''
+sort_helper(): Defines how .sort() will compare different data types in obj[elem]
+    - NoneTypes and empty lists will be sorted as ""
+    - Lists contained within obj[elem] will be sorted in obj[elem] based on the first element in the list
+        (if first value is None, "" gets returned)
+    - Floats and ints will be sorted based on value from being converted to strings
+        (Python3 does not accept comparison between float/int and string)
+'''
 def sort_helper(x):
-    # Handle NoneTypes and empty lists
-    if (x is None) or (isinstance(x, list) and (not x or x[0] is None)):
+    # Handle NoneTypes and empty lists and lists with None at index 0
+    if x is None or (isinstance(x, list) and x[0] is None):
         return ""
-    # Handle nested lists
+    # Handle nested lists that are not empty and do not have None at index 0
     elif isinstance(x, list):
+        # floats and ints are returned as strings
         if isinstance(x[0], float) or isinstance(x[0], int):
             return str(x[0])
+        # other types are returned as is
         else:
-            return x[0] # should only get here if x[0] is string or ascii
-    # All other possible data types (int, float, str, ascii chars)
+            return x[0]
+    # floats and ints returned as strings
     elif isinstance(x, float) or isinstance(x, int):
         return str(x)
-    return x            # should only get here if x is string or ascii
+    # other types are returned as is
+    return x
 
 
 def sort_json_arrays(obj):
