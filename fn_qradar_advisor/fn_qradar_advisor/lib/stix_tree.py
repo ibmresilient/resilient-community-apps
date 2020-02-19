@@ -2,11 +2,11 @@
 # pragma pylint: disable=unused-argument, no-self-use
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
-from visitors import GetNodeVisitor
-from html_gen_visitor import HtmlGenVisitor
-from tree_node import TreeNode
-from relation_visitor import RelationVisitor
-import stix_utils
+from .visitors import GetNodeVisitor
+from .html_gen_visitor import HtmlGenVisitor
+from .tree_node import TreeNode
+from . import stix_utils
+
 
 
 class MultiRootTree(object):
@@ -226,6 +226,7 @@ def get_html(stix, log):
     :param log:
     :return:
     """
+    from .relation_visitor import RelationVisitor
     # Use the json dict directly
     objects = stix["objects"]
     stix_tree = build_tree(objects, log)
