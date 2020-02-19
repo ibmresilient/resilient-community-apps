@@ -29,7 +29,7 @@ resilient_mock = AttachmentMock
 
 def sort_helper(x):
     # Handle NoneTypes and empty lists
-    if (x is None) or (isinstance(x, list) and (len(x) == 0 or x[0] is None)):
+    if (x is None) or (isinstance(x, list) and (not x or x[0] is None)):
         return ""
     # Handle nested lists
     elif isinstance(x, list):
