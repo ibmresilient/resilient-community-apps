@@ -183,9 +183,6 @@ class AwsIamClient():
                 result.extend(response[result_type])
 
         except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     op, kwargs, "NoSuchEntityException")
-
             return {"Status": "NoSuchEntity"}
 
         except Exception as int_ex:
@@ -240,9 +237,7 @@ class AwsIamClient():
                 result_type = self._get_type_from_response(response, SUPPORTED_GET_TYPES)
 
         except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     aws_iam_op.__name__, kwargs, "NoSuchEntityException")
-            # If Return empty dict if the object doesn't exist.
+            # If Return empty dict if the login profile doesn't exist for the user.
             if aws_iam_op.__name__ == "get_login_profile":
                 # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
                 return {}
@@ -250,11 +245,11 @@ class AwsIamClient():
             return {"Status": "NoSuchEntity"}
 
         except self.iam.exceptions.ClientError as invalid_ex:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     aws_iam_op.__name__, kwargs, "ValidationErrorException")
             if "ValidationError" in invalid_ex.__repr__():
                 return {"Status": "ValidationError"}
             else:
+                LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                         aws_iam_op.__name__, kwargs, "ValidationErrorException")
                 raise invalid_ex
 
         except Exception as int_ex:

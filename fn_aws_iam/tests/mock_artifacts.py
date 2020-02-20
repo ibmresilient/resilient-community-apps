@@ -388,6 +388,8 @@ def get_func_responses(op):
         "detach_user_policy_nosuch": ('NoSuchEntity'),
         "delete_access_key_good": ('OK'),
         "delete_access_key_nosuch": ('NoSuchEntity'),
+        "update_access_key_good": ('OK'),
+        "update_access_key_nosuch": ('NoSuchEntity'),
         "delete_login_profile_good": ('OK'),
         "delete_login_profile_nosuch": ('NoSuchEntity'),
         "remove_user_from_group": ('OK'),
@@ -566,6 +568,11 @@ def mocked_aws_iam_client(*args, **kwargs):
                     return get_func_responses("delete_access_key_nosuch")
                 else:
                     return get_func_responses("delete_access_key_good")
+            elif op == "update_access_key":
+                if "NOSUCH" in kwargs["AccessKeyId"]:
+                    return get_func_responses("update_access_key_nosuch")
+                else:
+                    return get_func_responses("update_access_key_good")
             elif op == "delete_login_profile":
                 if kwargs["UserName"] == "iam_test_User_no_profile":
                     return get_func_responses("delete_login_profile_nosuch")
