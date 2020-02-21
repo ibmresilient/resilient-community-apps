@@ -66,9 +66,11 @@ def main():
                 no_such_entity += 1
                 no_such_entity_policies.append(pol_stat["PolicyName"])
         if added_policies:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> added " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(added_policies), ", ".join(str(i) for i in added_policies), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Policy <b>{1}</b> was attached to user " \
+                        "<b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, ", ".join(str(i) for i in added_policies), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text += "<br>Refreshing data table <b>{0}</b> row for user <b>{1}</b> with updated policy data."\
+                .format("AWS IAM Users", INPUTS["aws_iam_user_name"])
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
@@ -127,7 +129,7 @@ Result: {
 # List of fields in datatable for fn_aws_iam_list_user_policies script
 DATA_TBL_FIELDS = ["Policies"]
 FN_NAME = "fn_aws_iam_list_user_policies"
-WF_NAME = "Attach DenyAll policy"
+WF_NAME = "Example: AWS IAM: Attach User Policy"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -136,20 +138,18 @@ note_text = ''
 def main():
     note_text = ''
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Policy name' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         policy_names = []
         for pol in CONTENT:
             if pol["PolicyName"] is not None:
                 policy_names.append(pol["PolicyName"])
         row.Policies = ",".join(policy_names)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> attached Policy names found for user " \
+                    "<b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+        row.Policies = ""
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```

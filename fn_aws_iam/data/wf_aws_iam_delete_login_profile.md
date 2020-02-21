@@ -148,9 +148,6 @@ def main():
     note_text = ''
     if CONTENT:
         if len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
             u = CONTENT.pop()
             row.query_execution_date = QUERY_EXECUTION_DATE
             for f in DATA_TBL_FIELDS:
@@ -169,12 +166,12 @@ def main():
         else:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
                         "Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
             .format(WF_NAME, FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```

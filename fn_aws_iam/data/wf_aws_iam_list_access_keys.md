@@ -74,13 +74,19 @@ def process_access_keys(access_key_id_list, user_name):
                 if luak[l] is not None:
                     newrow[l] = luak[l]
 def main():
-    note_text = ''
-    filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
-                           INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
+    note_text = u''
+    filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],
+                           INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]]
                if f is not None]
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
-                   "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
+        key_count = 0
+        for u in CONTENT:
+           if u["AccessKeyIds"]:
+                for k in  u["AccessKeyIds"]:
+                    key_count += 1
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> access keys(s) returned for Resilient function " \
+                   "<b>{2}</b>.".format(WF_NAME, key_count, FN_NAME)
+        note_text += "<br>Adding new rows to data table <b>{0}</b> for <b>{1}</b> access keys(s).</br>".format("AWS IAM Access Keys", key_count)
         for u in CONTENT:
            if u["AccessKeyIds"]:
                 user_name = u["UserName"]
@@ -92,10 +98,10 @@ def main():
 
     if filters:
         note_text += "<br>Query Filters:</br>"
-        if INPUTS.get("aws_iam_user_filter"): 
-            note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
-        if INPUTS.get("aws_iam_access_key_filter"): 
-            note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
+        if INPUTS.get("aws_iam_user_filter"):
+            note_text += u"<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
+        if INPUTS.get("aws_iam_access_key_filter"):
+            note_text += u"<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()

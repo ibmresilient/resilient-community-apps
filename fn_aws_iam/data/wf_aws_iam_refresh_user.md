@@ -80,9 +80,11 @@ def main():
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.Status = "Deleted"
         elif len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was found " \
+                         "for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text += "<br>Refreshing data table <b>{0}</b> for user <b>{1}</b>.</br>"\
+                .format("AWS IAM Users", INPUTS["aws_iam_user_name"])
             workflow.addProperty("user_exists", {})
             u = CONTENT.pop()
             row.query_execution_date = QUERY_EXECUTION_DATE
@@ -107,8 +109,8 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for user " \
                      "<b>{1}</b> for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if note_text:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -162,22 +164,16 @@ QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 note_text = ''
 
 def main():
-    note_text = ''
+
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Group' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         groups = []
         for grp in CONTENT:
             if grp["GroupName"] is not None:
                 groups.append(grp["GroupName"])
         row.Groups = ",".join(groups)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
-            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Groups = ""
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -235,20 +231,14 @@ note_text = ''
 def main():
     note_text = ''
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Policy name' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         policy_names = []
         for pol in CONTENT:
             if  pol["PolicyName"] is not None:
                 policy_names.append( pol["PolicyName"])
         row.Policies = ",".join(policy_names)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
-            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Policies = ""
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -298,22 +288,16 @@ INPUTS = results.inputs
 note_text = ''
 
 def main():
-    note_text = ''
+
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Access key' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         access_key_ids = []
         for ak_id in CONTENT:
             if ak_id["AccessKeyId"] is not None:
                 access_key_ids.append(ak_id["AccessKeyId"])
         row.AccessKeyIds = ",".join(access_key_ids)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
-            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        row.AccessKeyIds = ""
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
