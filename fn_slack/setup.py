@@ -15,7 +15,7 @@ setup(
                      "text file as an Attachment and archives the Slack channel.",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'slackclient',
+        'slackclient<2.0.0',
         'bs4'
     ],
     packages=find_packages(),
