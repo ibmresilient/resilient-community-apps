@@ -66,9 +66,9 @@ def main():
                 no_such_entity += 1
                 no_such_entity_groups.append(pol_stat["GroupName"])
         if added_groups:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Groups <b>{2}</b> removed " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(added_groups), ", ".join(str(i) for i in added_groups), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was removed from the " \
+                        "following groups <b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], ", ".join(str(i) for i in added_groups), FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Groups <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
@@ -142,20 +142,14 @@ def check_add_quotes(tag_name):
 def main():
     note_text = ''
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Group' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         groups = []
         for grp in CONTENT:
             if grp["GroupName"] is not None:
                 groups.append(grp["GroupName"])
         row.Groups = ",".join(groups)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
-            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Groups = ""
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```

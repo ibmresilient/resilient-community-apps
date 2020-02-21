@@ -54,32 +54,36 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 INPUTS = results.inputs
 CONTENT = results.content
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+note_text = u''
 
 def main():
-    note_text = ''
+    note_text = u''
     if CONTENT:
         if isinstance(CONTENT, dict) and CONTENT.get("Status") == "NoSuchEntity":
-            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist " \
-                         "for Resilient function <b>{2}</b>."\
+            note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was not found " \
+                         u"for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        elif isinstance(CONTENT, dict) and CONTENT.get("Status") == "ValidationError":
+            note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: The username <b>{1}</b> is invalid " \
+                         u"for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
         elif len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was found " \
+                        "for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             workflow.addProperty("user_exists", {})
             u = CONTENT.pop()
             if u["LoginProfileExists"] is not None and u["LoginProfileExists"].lower() == "yes":
                 workflow.addProperty("has_login_profile", {})
             if u["DefaultUser"] is not None and u["DefaultUser"].lower() == "yes":
                 workflow.addProperty("is_default_user", {})
-                note_text += "<br>This is the default user and therefore will not be deleted.</br>"
+                note_text += u"<br>This is the default user and therefore will not be deleted.</br>"
         else:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
-                        "Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = u"AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
+                        u"Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned  user <b>{1}</b> " \
-                     "for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned  user <b>{1}</b> " \
+                     u"for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
 
     incident.addNote(helper.createRichText(note_text))
@@ -139,7 +143,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -153,8 +157,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -201,7 +206,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -218,8 +223,9 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -275,7 +281,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -302,8 +308,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -357,7 +364,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -374,8 +381,9 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -431,7 +439,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -458,8 +466,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -511,7 +520,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -528,8 +537,9 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -585,7 +595,7 @@ WF_NAME = "Example: AWS IAM: Delete User For Artifact"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
@@ -612,8 +622,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -668,11 +679,14 @@ def main():
         if CONTENT == "OK":
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: User <b>{1}</b> was successfully deleted for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-            artifact_desc_content = artifact.description["content"]
+            if artifact.description:
+                artifact_desc_content = artifact.description["content"] + "\n"
+            else:
+              artifact_desc_content = ''
             artifact_desc_sep = "==============="
             artifact_desc_upd = "{0}: AWS IAM User '{1}' deleted by Workflow '{2}' and Function '{3}'."\
               .format(EXECUTION_DATE, INPUTS["aws_iam_user_name"], WF_NAME, FN_NAME)
-            artifact_desc_upd = artifact_desc_content + "\n" + artifact_desc_sep + "\n" + artifact_desc_upd + "\n" \
+            artifact_desc_upd = artifact_desc_content + artifact_desc_sep + "\n" + artifact_desc_upd + "\n" \
                                 + artifact_desc_sep
             artifact.description = "{}".format(artifact_desc_upd)
         else:

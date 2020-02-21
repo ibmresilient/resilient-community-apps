@@ -20,13 +20,14 @@
 ```python
 inputs.aws_iam_user_name = row.UserName
 # Test password to see it complies with basic password policy.
-err_msg = "The new password needs be minimum 8 characters in length and have at least 1 uppercase and 1 lowercase character."
+err_msg_validation = "The new password needs be minimum 8 characters in length and have at least 1 uppercase and 1 lowercase character."
+err_msg_confirm_match = "The password and confirmation password do not match."
 if len(rule.properties.aws_iam_password) < 8:
-    raise ValueError(err_msg)
+    raise ValueError(err_msg_validation)
 if not any(c.isupper() for c in rule.properties.aws_iam_password):
-    raise ValueError(err_msg)
+    raise ValueError(err_msg_validation)
 if not any(c.islower() for c in rule.properties.aws_iam_password):
-    raise ValueError(err_msg)
+    raise ValueError(err_msg_validation)
 inputs.aws_iam_password = rule.properties.aws_iam_password
 inputs.aws_iam_password_reset_required = rule.properties.aws_iam_password_reset_required
 ```
@@ -59,7 +60,7 @@ Result: {
 # List of fields in datatable fn_aws_iam_delete_login_profile  script
 DATA_TBL_FIELDS = ["Groups"]
 FN_NAME = "fn_aws_iam_update_login_profile"
-WF_NAME = "Update Login Profile"
+WF_NAME = "Change Profile Password"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -70,10 +71,10 @@ def main():
     note_text = ''
     if CONTENT:
         if CONTENT == "OK":
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile updated for user <b>{1}</b> for " \
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile password updated for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
         elif CONTENT == "PasswordPolicyViolation":
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Password policy violation updating user <b>{1}</b> for " \
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile password policy violation updating user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\

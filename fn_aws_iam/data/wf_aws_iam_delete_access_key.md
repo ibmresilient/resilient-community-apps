@@ -28,11 +28,11 @@ inputs.aws_iam_access_keys = row.AccessKeyId
 # Example result:
 """
 OK
-Result: {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'AccessKeyId': 'AKIA4EQBBG2YFAXXIG6M', 'Status': 'OK'}], 
-         'raw': '[{"AccessKeyId": "AKIA4EQBBG2YFAXXIG6M", "Status": "OK"}]', 
-         'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'AKIA4EQBBG2YFAXXIG6M'}, 
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
+Result: {'version': '1.0', 'success': True, 'reason': None,
+         'content': [{'AccessKeyId': 'AKIA4EQBBG2YFAXXIG6M', 'Status': 'OK'}],
+         'raw': '[{"AccessKeyId": "AKIA4EQBBG2YFAXXIG6M", "Status": "OK"}]',
+         'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'AKIA4EQBBG2YFAXXIG6M'},
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
                      'host': 'myhost.ibm.com', 'execution_time_ms': 752, 'timestamp': '2020-01-16 13:47:07'
                     }
 }
@@ -45,6 +45,7 @@ WF_NAME = "Delete Access Key"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
+EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def main():
     note_text = ''
@@ -61,13 +62,15 @@ def main():
                 no_such_entity += 1
                 no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Ids <b>{1}</b> deleted " \
-                        "for Resilient function <b>{2}</b>.".format(WF_NAME, ''.join(deleted_keys),  FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deleted " \
+                        "for user <b>{0}</b> for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, ''.join(deleted_keys), INPUTS["aws_iam_user_name"],  FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
-                        "for Resilient function <b>{2}</b>."\
-                .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
+                        "for user <b>{2}</b> for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, ''.join(no_such_entity), INPUTS["aws_iam_user_name"], FN_NAME)
         row.Status = ""
+        row.query_execution_date = EXECUTION_DATE
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
         "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>."\

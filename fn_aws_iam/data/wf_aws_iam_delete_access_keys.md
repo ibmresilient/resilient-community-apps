@@ -28,28 +28,23 @@ inputs.aws_iam_access_keys = row.AccessKeyIds
 # Example result:
 """
 OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L', 'Status': 'OK'},
-                      {'AccessKeyId': 'AKIA4EQBBG2YKXYJB55M', 'Status': 'NoSuchEntity'}],
-          'raw': '[{"AccessKeyId": "AKIA4EQBBG2YKXYJB55L", "Status": "OK"},
-                  {"AccessKeyId": "AKIA4EQBBG2YKXYJB55M", "Status": "NoSuchEntity"}]',
-          'inputs': {'aws_iam_user_name': 'iam_johnpren_test_User', 'aws_iam_access_keys': 'AKIA4EQBBG2YKXYJB55L,AKIA4EQBBG2YKXYJB55M'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                      'host': 'myhost.ibm.com', 'execution_time_ms': 37199, 'timestamp': '2019-11-21 14:31:13'
-                     }
+Result: {'version': '1.0', 'success': True, 'reason': None,
+         'content': [{'AccessKeyId': 'AKIA4EQBBG2YFAXXIG6M', 'Status': 'OK'}],
+         'raw': '[{"AccessKeyId": "AKIA4EQBBG2YFAXXIG6M", "Status": "OK"}]',
+         'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'AKIA4EQBBG2YFAXXIG6M'},
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                     'host': 'myhost.ibm.com', 'execution_time_ms': 752, 'timestamp': '2020-01-16 13:47:07'
+                    }
 }
 """
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_access_keys  script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
 FN_NAME = "fn_aws_iam_delete_access_keys"
-WF_NAME = "Delete Access Keys"
+WF_NAME = "Delete Access Key"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
 
 def main():
     note_text = ''
@@ -66,17 +61,17 @@ def main():
                 no_such_entity += 1
                 no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> deleted " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(deleted_keys), ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Ids <b>{1}</b> were deleted " \
+                        "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, ''.join(deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
         if no_such_entity:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(no_such_entity_keys), ", ".join(str(i) for i in no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
-        row.AccessKeyIds = ""
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId ids <b>{1}</b> does not exist " \
+                        "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, ''.join(no_such_entity), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
-            .format(WF_NAME, FN_NAME)
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
+        "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
@@ -129,22 +124,15 @@ INPUTS = results.inputs
 note_text = ''
 
 def main():
-    note_text = ''
+
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Access key' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
-            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
         access_key_ids = []
         for ak in CONTENT:
             if ak["AccessKeyId"] is not None:
                 access_key_ids.append(ak["AccessKeyId"])
         row.AccessKeyIds = ",".join(access_key_ids)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
-            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+        row.AccessKeyIds = ""
 if __name__ == "__main__":
     main()
 ```

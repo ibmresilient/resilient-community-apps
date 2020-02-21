@@ -82,10 +82,10 @@ def process_access_keys(access_key_id_list, user_name):
 
 
 def main():
-    note_text = ''
+    note_text = u''
     if CONTENT:
         if len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for access " \
+            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for access " \
                         "key(s) matching <b>{2}</b>  for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_access_key_filter"], FN_NAME)
             u = CONTENT.pop()
@@ -93,11 +93,12 @@ def main():
                 user_name = u["UserName"]
                 process_access_keys(u["AccessKeyIds"], user_name)
         else:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
-                        "Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = u"AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user <b>{2}</b> for " \
+                        u"Resilient function <b>{3}</b>.".format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient function <b>{1}</b>."\
-            .format(WF_NAME, FN_NAME)
+        note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned returned for access key <b>{1}</b> " \
+                     u"for Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_access_key_filter"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
