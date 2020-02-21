@@ -46,6 +46,10 @@ class FunctionComponent(ResilientComponent):
             iam_cli = AwsIamClient(self.options)
 
             rtn = iam_cli.get("list_access_keys", paginate=True, **params)
+            for j in range(len(rtn)):
+                rtn[j]["key_last_used"] = \
+                    iam_cli.get("get_access_key_last_used",
+                                AccessKeyId=rtn[j]['AccessKeyId'])
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results
