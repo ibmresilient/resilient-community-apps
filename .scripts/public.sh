@@ -100,6 +100,7 @@ fn_service_now
 fn_slack
 fn_spamhaus_query
 fn_splunk_integration
+fn_symantec_dlp
 fn_task_utils
 fn_teams
 fn_thug
