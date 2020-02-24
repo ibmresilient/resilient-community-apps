@@ -65,7 +65,7 @@ class TestNetwitnessQuery:
 
     def test_convert_to_nw_time(self):
         expected_nw_time = "2018-Dec-18 13:28:45"
-        nw_time = convert_to_nw_time("1545157725000")
+        nw_time = convert_to_nw_time(int("1545157725000"))
 
         assert nw_time == expected_nw_time
 
