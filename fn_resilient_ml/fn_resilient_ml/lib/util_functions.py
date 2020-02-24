@@ -4,6 +4,13 @@
 #
 # (c) Copyright IBM Corp. 2019. All Rights Reserved.
 #
+import os
+from datetime import datetime
+from fn_resilient_ml.lib.file_manage import FileManage
+from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
+from fn_resilient_ml.lib.nlp.res_sif import ResSIF
+from fn_resilient_ml.lib.nlp.res_nlp import ResNLP
+from fn_resilient_ml.lib.res_utils import ResUtils
 
 def make_incident_href(inc_id, org_id, base_url):
     """
@@ -20,37 +27,53 @@ def make_incident_href(inc_id, org_id, base_url):
                                 org_id=org_id)
 
 
-def get_indent_href(inc_id, org_id, base_url, num_return):
+def get_incident_href(nlp_str, res_client, num_return, model_path, inc_id):
     """
+    For the given nlp_str, find the top num_return (old) incidents that
+    are similar to it (from NLP point of view).
 
-    :param inc_id:
-    :param org_id:
-    :param base_url:
-    :param num_return:
+    Generate the href links for each of those returned incident as well.
+
+    :param nlp_str:     input sentence to do nlp search
+    :param res_client:  resilient client
+    :param num_return:  number of closest incidents to return
+    :param model_path:  (required) Specify the path to find the saved model
+    :param inc_id:      (new) incident id. Don't include this in return.
     :return:
     """
-    incident_ids = get_similar_incidents(inc_id, num_return)
-    hrefs = [{"inc_link": make_incident_href(inc["inc_id"], org_id, base_url),
-              "similarity": inc["similarity"]} for inc in incident_ids]
+    file_path = model_path
+    if not file_path.endswith('/'):
+        file_path += '/'
+
+    # SIF (Smooth Inverse Frequency) file
+    sif = ResSIF()
+    sif.load_sif(os.path.join(file_path, FileManage.DEFAULT_SIF_FILE))
+
+    # Word2Vec NLP model
+    nlp = ResNLP()
+    nlp.load_model(os.path.join(file_path, FileManage.DEFAULT_NLP_FILE))
+
+    # sentence to vector
+    vec = ResSen2Vec(nlp.word2vec, sif)
+    # load cached vectors for old incidents
+    vec.load_s2v(os.path.join(file_path, FileManage.DEFAULT_VEC_FILE))
+
+    # load pca
+    vec.load_pca(os.path.join(file_path, FileManage.DEFAULT_PCA_FILE))
+
+    # find the highest inc id in the vec file. Note that the vec file contains
+    # all the incidents at the point the model is built. We want to find incidents
+    # created after that.
+    highest_id = vec.get_highest_inc_id()
+    res_utils = ResUtils(resclient=res_client)
+    other_incidents = res_utils.get_incidents_after(highest_id)
+
+    incident_ids = vec.get_closest(nlp_str, other_incidents, num_return, inc_id)
+    hrefs = [{"inc_link": make_incident_href(inc["ref"], res_client.org_id, res_client.base_url),
+              "similarity": inc["sim"],
+              "keywords": inc["keywords"]} for inc in incident_ids]
     return hrefs
 
-def get_artifact_des(inc_id, artifact_json):
-    """
-    Extract description of artifacts of a given incident
-    :param inc_id:
-    :param artifact_json:
-    :return: String as "{artifact_value} {artifact description} {artifact_value} {artifact description}"
-    """
-    ret_str = ""
-
-    artifacts = artifact_json.get("results")
-    artifacts_for_inc = [artifact for artifact in artifacts if artifact["inc_id"] == inc_id]
-
-    for art in artifacts_for_inc:
-        result = art.get("result", None)
-        if result:
-            ret_str += result.get("value", "") + " "
-            if result.get("description", None) is not None:
-                ret_str += result.get("description", {}).get("content", "") + " "
-
-    return ret_str
+def get_cur_time():
+    cur_time = datetime.now()
+    return cur_time.strftime("%Y-%m-%d, %H:%M:%S")

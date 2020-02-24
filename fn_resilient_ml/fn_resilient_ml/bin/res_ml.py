@@ -208,4 +208,10 @@ def build_nlp(args, opt_parser):
     else:
         res_nlp.save()
 
+    #
+    #   4. Remove the saved incidents and artifacts
+    #
+    os.remove(inc_file)
+    os.remove(art_file)
+
     return

@@ -33,6 +33,7 @@ setup(
         'pandas>=0.25.1',
         'nltk>=3.4.5',
         'beautifulsoup4>=4.8.0',
+        'scikit-learn>=0.21.3',
         'scipy>=1.3.1'
     ],
     packages=find_packages(),

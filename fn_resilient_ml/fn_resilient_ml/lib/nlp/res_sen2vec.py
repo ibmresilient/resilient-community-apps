@@ -20,6 +20,7 @@ from sklearn.decomposition import PCA
 from nltk.corpus import words as nltk_words
 import nltk
 
+
 class ResSen2Vec:
     # parameter used in compute frequency
     SIF_A = 1e-3
@@ -38,6 +39,9 @@ class ResSen2Vec:
         # download nltk resource if necessary
         nltk.download('words', quiet=True)
         self.setofwords = set(nltk_words.words())
+
+        # pca vector
+        self.pca_u = []
 
     def get_vec_for_words(self, words):
         """
@@ -161,12 +165,7 @@ class ResSen2Vec:
         with open(s2v_file, "w") as outfile:
             json.dump(sen_vecs, outfile)
             ret = True
-        ## @TODO remove debug code
-        with open("inc_ids.json", "w") as outfile:
-            json.dump(inc_ids, outfile)
-        with open("inc_sen.json", "w") as outfile:
-            json.dump(dataset, outfile)
-        ##
+
         return ret
 
     def load_s2v(self, s2v_file):
@@ -186,6 +185,16 @@ class ResSen2Vec:
             self.feature_size = len(self.sentence_vectors[key])
         return ret
 
+    def load_pca(self, pca_file):
+        """
+        Load pca vector from file
+        :param pca_file:
+        :return:
+        """
+        with open(pca_file, "r") as infile:
+            u = json.load(infile)
+            self.pca_u = np.multiply(u, np.transpose(u))
+
     def get_incident_vec(self, inc_id):
         """
         Get the vector for the given incident
@@ -195,15 +204,30 @@ class ResSen2Vec:
         v = np.zeros(self.feature_size, dtype="float64")
         return self.sentence_vectors.get(inc_id, v)
 
-    def get_closest(self, sentence, num):
+    def get_highest_inc_id(self):
+        """
+        Get the highest incident id in the vec file. This is the last incident in the
+        vector cache file
+        :return:
+        """
+        incident_ids = list(self.sentence_vectors.keys())
+        return max(incident_ids)
+
+    def get_closest(self, sentence, other_incidents, num, search_inc_id):
         """
         Given a sentence (such as the description of a new incident), find _num_ of closest (old) incidents
-        :param sentence:
-        :param num:
+        :param sentence:            Description of the new incident
+        :param other_incidents:     incidents created after the model is built
+        :param num:                 number of incidents to return
+        :param search_inc_id:       incident id of the (new) incident
         :return:
         """
         v1 = self.get_vec_for_sentence(sentence)
+        # subtract pca
+        sub = np.multiply(self.pca_u, v1)
+        v1 = np.subtract(v1, sub)
         v1_norm = np.linalg.norm(v1)
+
         closest = []
         incident_ids = list(self.sentence_vectors.keys())
         for i in range(num):
@@ -213,10 +237,11 @@ class ResSen2Vec:
             if v1_norm == 0 or v2_norm == 0:
                 sim = 0
             else:
-                sim = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+                sim = np.dot(v1, v2) / (v1_norm * v2_norm)
             closest.append({
                 "ref": incident_ids[i],
-                "sim": sim
+                "sim": sim,
+                "vec": v2
             })
 
         closest.sort(key=lambda u:u["sim"])
@@ -227,12 +252,75 @@ class ResSen2Vec:
             if v1_norm == 0 or v2_norm == 0:
                 sim = 0
             else:
-                sim = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2))
+                sim = np.dot(v1, v2) / (v1_norm * v2_norm)
             if sim > closest[0]["sim"]:
                 closest[0] = {
                     "ref": incident_ids[i],
-                    "sim": sim
+                    "sim": sim,
+                    "vec": v2
                 }
                 closest.sort(key=lambda u: u["sim"])
 
+        for i in range(len(other_incidents)):
+            inc_id, inc_sentence = other_incidents[i]
+            if search_inc_id is not None and search_inc_id != inc_id:
+                #
+                #   The (new) incident is also created after the
+                #   nlp model was built. So it is most likely included
+                #   in other_incidents. We don't need to include that
+                #   in the return.
+                #
+                v2 = self.get_vec_for_sentence(inc_sentence)
+                # subtract pca
+                sub = np.multiply(self.pca_u, v2)
+                v2 = np.subtract(v2, sub)
+                v2_norm = np.linalg.norm(v2)
+                if v1_norm == 0 or v2_norm == 0:
+                    sim = 0
+                else:
+                    sim = np.dot(v1, v2) / (v1_norm * v2_norm)
+                if sim > closest[0]["sim"]:
+                    closest[0] = {
+                        "ref": inc_id,
+                        "sim": sim,
+                        "vec": v2
+                    }
+                    closest.sort(key=lambda u: u["sim"])
+
+        # Find the keywords that contribute the most to the similarity
+        self.find_keywords(sentence, closest)
+
         return closest
+
+    def find_keywords(self, sentence, closest):
+        """
+        For each incident in closest,  find words in sentence with highest contribution.
+
+        :param sentence: description of the input (new) incident
+        :param closest: the top closest incidents found
+        :return: add "keywords" to each closest incident
+        """
+        w_util = WordSentenceUtils()
+        words = w_util.get_words(sentence)
+        for cl in closest:
+            v2_1 = cl["vec"]
+            v2_norm_1 = np.linalg.norm(v2_1)
+            word_sim = []
+            for w in words:
+                try:
+                    wc = self.sif.get_word_count(w)
+                    if wc < self.COUNT_THRESHOLD:
+                        wc = self.COUNT_THRESHOLD - (self.COUNT_THRESHOLD - wc)/2
+
+                    a_value = ResSen2Vec.SIF_A / (ResSen2Vec.SIF_A + wc)
+                    w_v = self.word2vec[w]
+                    sub = np.multiply(self.pca_u, w_v)
+                    w_v = np.subtract(w_v, sub)
+
+                    sim = a_value * np.dot(w_v, v2_1) / (np.linalg.norm(w_v) * v2_norm_1)
+                    word_sim.append((sim, w))
+                except:
+                    pass
+            word_sim.sort(key=lambda u: u[0])
+            top_5 = word_sim[:5]
+            cl["keywords"] = ', '.join([ws[1] for ws in top_5])

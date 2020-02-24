@@ -48,7 +48,6 @@ Use the command line tool
 res-ml build_nlp
 ```
 to build a machine learning model
-```
 
 ### Rebuild the NLP model
 Same as building a new model.
@@ -58,4 +57,4 @@ As a rule, it is recommended that customers rebuild their model once a week.
 There are more advanced options. Please refer to the User Guide.
 ## Uninstall,
 
-    pip uninstall fn_resilient_nlp
+    pip uninstall fn_resilient_ml

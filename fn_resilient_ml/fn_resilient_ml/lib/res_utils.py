@@ -20,9 +20,9 @@ import json
 RESILIENT_SECTION = "resilient"
 
 class ResUtils:
-    def __init__(self, in_log=None):
+    def __init__(self, resclient=None, in_log=None):
         self.log = in_log if in_log else logging.getLogger(__name__)
-        self.res_client = None
+        self.res_client = resclient
 
     def connect(self, opt_parser):
         res_opt = opt_parser.opts.get(RESILIENT_SECTION)
@@ -275,3 +275,79 @@ class ResUtils:
                     break
 
         return inc_count
+
+    @staticmethod
+    def get_artifact_des(inc_id, artifact_json):
+        """
+        Extract description of artifacts of a given incident
+        :param inc_id:
+        :param artifact_json:
+        :return: String as "{artifact_value} {artifact description} {artifact_value} {artifact description}"
+        """
+        ret_str = ""
+
+        artifacts = artifact_json.get("results")
+        artifacts_for_inc = [artifact for artifact in artifacts if artifact["inc_id"] == inc_id]
+
+        for art in artifacts_for_inc:
+            result = art.get("result", None)
+            if result:
+                ret_str += result.get("value", "") + " "
+                if result.get("description", None) is not None:
+                    ret_str += result.get("description", {}).get("content", "") + " "
+
+        return ret_str
+
+    def get_inc_art_des(self, inc_id):
+        """
+        Given an incident ID, find the description of it and the
+        descriptions of its artifacts.
+
+        :param inc_id:  input incident id
+        :return:        description and artifact descriptions
+        """
+        url = "/incidents/{}".format(inc_id)
+        resp = self.res_client.get(url)
+        des = resp.get("description")
+
+        return des
+
+    def get_incidents_after(self, inc_id, max_num=100):
+        """
+        Given an incident ID, fetch all the incidents after that.
+        :param inc_id:  input incident id
+        :return:        list of incidents (in json)
+        """
+        ret = []
+        filter_dict = {
+            "filters": [
+                {
+                    "conditions": [
+                        {
+                            "field_name": "id",
+                            "method": "gt",
+                            "value": inc_id
+                        }
+                    ]
+                }
+            ]
+        }
+        url = "/incidents/query?field_handle=-1"
+        try:
+            resp = self.res_client.post(url,
+                                        payload=filter_dict)
+
+            for res in resp:
+                sentence = ""
+                name_str = res.get("name", "")
+                description_str = res.get("description", "")
+                reso_str = res.get("resolution_summary", "")
+                sentence += name_str if name_str is not None else ""
+                sentence += description_str if description_str is not None else ""
+                sentence += reso_str if reso_str is not None else ""
+                ret.append((res["id"], sentence))
+        except Exception as e:
+            self.log.exception(str(e))
+            ret = []
+
+        return ret

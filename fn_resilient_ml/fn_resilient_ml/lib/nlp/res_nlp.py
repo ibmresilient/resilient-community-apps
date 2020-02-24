@@ -16,7 +16,7 @@ import json
 import logging
 from fn_resilient_ml.lib.nlp.nlp_word2vec import NLPWord2Vec
 from fn_resilient_ml.lib.nlp.word_sentence_utils import WordSentenceUtils
-from fn_resilient_ml.lib import util_functions
+from fn_resilient_ml.lib.res_utils import ResUtils
 from fn_resilient_ml.lib.nlp.res_sif import ResSIF
 from fn_resilient_ml.lib.nlp.res_sen2vec import ResSen2Vec
 from fn_resilient_ml.lib.file_manage import FileManage
@@ -72,7 +72,7 @@ class ResNLP(NLPWord2Vec):
             #
             inc_id = int(row["id"])
             if self.artifacts is not None:
-                artifact_des = util_functions.get_artifact_des(inc_id, self.artifacts)
+                artifact_des = ResUtils.get_artifact_des(inc_id, self.artifacts)
                 sentence += artifact_des
             ws = word_utils.get_words(sentence)
 
