@@ -1,0 +1,4 @@
+include README.md
+include fn_secureworks_ctp/util/*
+include fn_secureworks_ctp/LICENSE
+include doc/*
