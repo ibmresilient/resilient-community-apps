@@ -117,5 +117,6 @@ class FunctionComponent(ResilientComponent):
             write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
 
             yield FunctionResult(results)
-        except:
-            yield FunctionError()
+        except Exception as err:
+            log.error(err)
+            yield FunctionError(err)
