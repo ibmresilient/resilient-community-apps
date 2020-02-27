@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
@@ -20,14 +21,14 @@ def snake_to_camel(word):
 setup(
     name='fn_secureworks_ctp',
     version='1.0.0',
-    license='<<insert here>>',
-    author='<<your name here>>',
-    author_email='you@example.com',
-    url='<<your company url>>',
+    license='MIT',
+    author_email='',
+    url='https://ibm.com/mysupport',
     description="Resilient Circuits Components for 'fn_secureworks_ctp'",
     long_description="Resilient Circuits Components for 'fn_secureworks_ctp'",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient-lib>=35.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
