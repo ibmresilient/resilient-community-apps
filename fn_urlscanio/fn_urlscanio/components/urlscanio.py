@@ -9,6 +9,8 @@ import json
 import requests
 import time
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import write_file_attachment
+from io import BytesIO
 
 CONFIG_DATA_SECTION = 'urlscanio'
 
@@ -35,6 +37,7 @@ class FunctionComponent(ResilientComponent):
             urlscanio_public = kwargs.get("urlscanio_public")        # boolean, optional
             urlscanio_useragent = kwargs.get("urlscanio_useragent")  # text, optional
             urlscanio_referer = kwargs.get("urlscanio_referer")      # text, optional
+            incident_id = kwargs.get("incident_id")                  # number, optional
 
             log.info("urlscanio_url: %s", urlscanio_url)
 
@@ -104,6 +107,14 @@ class FunctionComponent(ResilientComponent):
                 "report_url": urlscanio_report_url,
                 "report": urlscanio_report_json
             }
+
+            # Get rest client, attachment name, and png content so we can write as an attachment
+            rest_client = self.rest_client()
+            attachment_name = u"urlscanio-screenshot-{}.png".format(urlscanio_url)
+            datastream = BytesIO(urlscanio_png_get.content)
+
+            # Write the file as an attachment
+            write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
 
             yield FunctionResult(results)
         except:
