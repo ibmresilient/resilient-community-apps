@@ -102,7 +102,7 @@ class FunctionComponent(ResilientComponent):
 
             # returns the png file base64 and also the report url
             results = {
-                "png_base64content": urlscanio_png_b64,
+                "png_base64content": str(urlscanio_png_b64),
                 "png_url": urlscanio_png_url,
                 "report_url": urlscanio_report_url,
                 "report": urlscanio_report_json
