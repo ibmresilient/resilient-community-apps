@@ -2,6 +2,20 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+import glob
+import ntpath
+
+def get_module_name(module_path):
+    """
+    Return the module name of the module path
+    """
+    return ntpath.split(module_path)[1].split(".")[0]
+
+def snake_to_camel(word):
+    """
+    Convert a word from snake_case to CamelCase
+    """
+    return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
     name='fn_urlscanio',
@@ -23,9 +37,11 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "UrlscanioFunctionComponent = fn_urlscanio.components.urlscanio:FunctionComponent",
+            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
+            "{}FunctionComponent = fn_urlscanio.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_urlscanio/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_urlscanio.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_urlscanio.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_urlscanio.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_urlscanio.util.selftest:selftest_function"]
     }
 )
