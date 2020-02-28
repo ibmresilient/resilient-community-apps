@@ -118,5 +118,4 @@ class FunctionComponent(ResilientComponent):
 
             yield FunctionResult(results)
         except Exception as err:
-            log.error(err)
             yield FunctionError(err)
