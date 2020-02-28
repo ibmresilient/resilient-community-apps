@@ -22,12 +22,12 @@ setup(
     version='1.0.1',
     license='MIT',
     author='IBM Resilient',
-    author_email='info@resilientsystems.com',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_urlscanio'",
     long_description="Resilient Circuits Components for 'fn_urlscanio'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'resilient_lib'
+        'resilient_lib>32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
