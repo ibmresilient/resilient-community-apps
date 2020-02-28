@@ -229,7 +229,7 @@ class FunctionComponent(ResilientComponent):
             client = self.rest_client()
 
             # prepare datastream to output to attachment
-            if pulsedive_data["pretty"] == "Yes":fo
+            if pulsedive_data["pretty"] == "Yes":
                 # Pulsedive returns pp format if requested. Convert to bytestream for file handling.
                 datastream = BytesIO(resp.content)
             else:
