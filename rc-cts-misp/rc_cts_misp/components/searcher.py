@@ -219,7 +219,11 @@ class MISPThreatSearcher(BaseComponent):
             LOG.debug("Search for %s", misp_type)
             LOG.debug(json.dumps(result))
             if result:
-                response = result.get("response", {})
+                if misp_api.__class__.__name__ == "PyMISP":
+                    response = result.get("response", {})
+                else:
+                    response = result
+
                 if isinstance(response, dict):
                     attributes = response.get("Attribute", [])
                     for attribute in attributes:
@@ -260,8 +264,8 @@ class MISPThreatSearcher(BaseComponent):
                     tag_counter[tag_name] = tag_count
                     # only add count to name if > 0
                     if tag_count:
-                        tag_name = "{}_{}".format(tag_name, tag_count)
-                    hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
+                        tag_name = u"{}_{}".format(tag_name, tag_count)
+                    hit.append(StringProp(name=u"{}:".format(tag_name), value=tag_value))
 
                 hits.append(hit)
 
