@@ -264,8 +264,8 @@ class MISPThreatSearcher(BaseComponent):
                     tag_counter[tag_name] = tag_count
                     # only add count to name if > 0
                     if tag_count:
-                        tag_name = "{}_{}".format(tag_name, tag_count)
-                    hit.append(StringProp(name="{}:".format(tag_name), value=tag_value))
+                        tag_name = u"{}_{}".format(tag_name, tag_count)
+                    hit.append(StringProp(name=u"{}:".format(tag_name), value=tag_value))
 
                 hits.append(hit)
 
