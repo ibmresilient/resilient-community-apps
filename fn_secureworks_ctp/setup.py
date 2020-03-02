@@ -38,8 +38,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "{}FunctionComponent = fn_secureworks_ctp.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_secureworks_ctp/components/[a-zA-Z]*.py")
+            "fn_secureworks_ctpFunctionComponent = fn_secureworks_ctp.components.secureworks_ctp_poll:SecureworksCTPPollComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_secureworks_ctp.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_secureworks_ctp.util.customize:customization_data"],
