@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_urlhaus',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -14,7 +14,8 @@ setup(
     long_description="""Resilient Circuits Components for 'fn_urlhaus'. Supported is inqueries on ip addresses, hashes and domains
               and submissions on malware distributing urls""",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=30.0.0',
+        'resilient_lib'
     ],
     packages=find_packages(),
     include_package_data=True,
