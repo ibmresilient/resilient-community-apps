@@ -7,7 +7,8 @@ import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
 from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
-from io import BytesIO
+from io import BytesIO, StringIO
+import sys
 
 log = logging.getLogger(__name__)
 
@@ -101,8 +102,20 @@ class FunctionComponent(ResilientComponent):
                 yield StatusMessage("Logs found, creating attachment...")
                 # Get client, attachment name, and content of log files from netwitness
                 rest_client = self.rest_client()
-                attachment_name = u"Log file for {} - {}.{}".format(nw_start_time, nw_end_time, nw_data_format[5:])
-                datastream = BytesIO(results["content"].encode("utf-8"))
+
+                # Determine the proper extension for the attachment name
+                if nw_data_format == "logs_text":
+                    ext = "txt"
+                else:
+                    ext = nw_data_format[5:]    # for csv, xml, json
+
+                attachment_name = u"Log file for {} - {}.{}".format(nw_start_time, nw_end_time, ext)
+
+                if sys.version_info.major < 3:
+                    datastream = StringIO(results["content"])
+                else:
+                    datastream = BytesIO(results["content"].encode("utf-8"))
+
                 write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
 
             yield StatusMessage("Done...")
