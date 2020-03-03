@@ -46,8 +46,8 @@ Result: {
 import re
 #  Globals
 # List of fields in datatable fn_aws_iam_list_users script
-DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags"]
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                   "Tags"]
 FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "Get User For Artifact"
 # Processing
@@ -252,8 +252,8 @@ Use this step to get user groups and also to process previous steps in workflow 
 #  Globals
 import re
 # List of fields in datatable fn_aws_iam_list_user_groups script
-DATA_TBL_FIELDS_USER = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags"]
+DATA_TBL_FIELDS_USER = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                        "Tags"]
 DATA_TBL_FIELDS_GROUPS = ["Groups"]
 DATA_TBL_FIELDS_POLICIES = ["Policies"]
 
