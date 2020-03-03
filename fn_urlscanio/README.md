@@ -86,3 +86,14 @@ No action is performed after the workflow is complete, so we simply outline the 
 
 To regenerate the customization blob,
 `resilient-circuits codegen -p fn_urlscanio -m urlscanio --workflow example_urlscanio --rule "Example: urlscan.io"`
+
+## Changelog
+
+### 1.0.0
+
+- Initial Release
+
+### 1.1.0
+
+- Removed worklfow dependency on fn_utilities
+- Added incident_id parameter to workflow inputs
