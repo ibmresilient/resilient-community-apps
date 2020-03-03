@@ -7,14 +7,10 @@ domains, as well as additional information about the page itself. urlscan.io wil
 record the DOM content, JavaScript global variables, cookies created by the page, and a myriad of other observations.
 
 This integration is a Resilient function that can be called from workflows, to submit a URL for analysis by urlscan.io.
-It returns the report metadata, report URL, and base64-encoded screenshot that you can attach to the incident.
+It returns the report metadata, report URL, and base64-encoded screenshot that is attached to the incident.
 
 
 ## Installation
-
-The example workflow in this package requires the "Base64 to Attachment" function from the `fn_utilities` package.
-You must install that package before installing this.
-
 
 To install in "development mode"
 
