@@ -374,6 +374,45 @@ def get_func_responses(op):
                             {'Key': 'Tes Tag2', 'Value': 'Another test tag'}]
                           ),
         "list_user_tags_empty": ([]),
+        "list_mfa_devices": ([{"UserName": "iam_test_user",
+                                 "SerialNumber": "arn:aws:iam::123456789012:mfa/iam_test_user",
+                                 "EnableDate": "2015-06-16T22:36:37Z"
+                               }]
+        ),
+        "list_mfa_devices_has_virt": ([{"UserName": "iam_test_user_has_virt",
+                                          "SerialNumber": "arn:aws:iam::123456789012:mfa/iam_test_user_has_virt",
+                                          "EnableDate": "2015-06-16T22:36:37Z"
+                                        }]
+        ),
+        "list_mfa_devices_nodevs": ([]
+        ),
+        "list_mfa_devices_nosuch": ({"Status": "NoSuchEntity"}
+        ),
+        "list_virtual_mfa_devices": ([{"SerialNumber": "arn:aws:iam::123456789012:mfa/iam_test_user_has_virt"}
+                                      ]
+        ),
+        "list_signing_certificates": (
+            [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD',
+              'CertificateBody': '-----BEGIN CERTIFICATE-----MIID...Apg=-----END CERTIFICATE-----',
+              'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}]
+        ),
+        "list_signing_certificates_nosuch": ({"Status": "NoSuchEntity"}
+        ),
+        "list_service_specific_credentials": ([{'UserName': 'iam_test_user', 'Status': 'Active',
+                                                'ServiceUserName': 'iam_test_user-at-834299573936',
+                                                'CreateDate': '2020-02-25 10:43:24',
+                                                'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ',
+                                                'ServiceName': 'codecommit.amazonaws.com'
+                                                }]
+        ),
+        "list_service_specific_credentials_nosuch": ({"Status": "NoSuchEntity"}
+        ),
+        "list_ssh_public_keys": ([{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G',
+                                   'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
+                                   }]
+        ),
+        "list_ssh_public_keys_nosuch": ({"Status": "NoSuchEntity"}
+        ),
         "get_login_profile": (
             {'UserName': 'iam_test_User', 'CreateDate': datetime.datetime(2019, 10, 31, 16, 23, 8, tzinfo=tzutc()),
              'PasswordResetRequired': False}
@@ -398,6 +437,17 @@ def get_func_responses(op):
         "update_login_profile_badpw": ('PasswordPolicyViolation'),
         "delete_user_good": ('OK'),
         "delete_user_nosuch": ('NoSuchEntity'),
+        "deactivate_mfa_device_good": ('OK'),
+        "deactivate_mfa_device_nosuch": ('NoSuchEntity'),
+        "delete_virtual_mfa_device_good": ('OK'),
+        "delete_virtual_mfa_device_nosuch": ('NoSuchEntity'),
+        "delete_signing_certificate_good": ('OK'),
+        "delete_signing_certificate_nosuch": ('NoSuchEntity'),
+        "delete_service_specific_credential_good": ('OK'),
+        "delete_service_specific_credential_nosuch": ('NoSuchEntity'),
+        "delete_ssh_public_key_good": ('OK'),
+        "delete_ssh_public_key_nosuch": ('NoSuchEntity')
+
     }
     return response[op]
 
@@ -547,6 +597,33 @@ def mocked_aws_iam_client(*args, **kwargs):
 
             if op == "get_login_profile":
                 return get_func_responses("get_login_profile")
+            if op == "list_mfa_devices":
+                if  "not_exists" in kwargs["UserName"]:
+                    return get_func_responses("list_mfa_devices_nosuch")
+                elif "no_devs" in kwargs["UserName"]:
+                    return get_func_responses("list_mfa_devices_nodevs")
+                elif "has_virt" in kwargs["UserName"]:
+                    return get_func_responses("list_mfa_devices_has_virt")
+                else:
+                    return get_func_responses("list_mfa_devices")
+            if op == "list_virtual_mfa_devices":
+                return get_func_responses("list_virtual_mfa_devices")
+            if op == "list_signing_certificates":
+                if "not_exists" in kwargs["UserName"]:
+                    return get_func_responses("list_signing_certificates_nosuch")
+                else:
+                    return get_func_responses("list_signing_certificates")
+            if op == "list_service_specific_credentials":
+                if "not_exists" in kwargs["UserName"]:
+                    return get_func_responses("list_service_specific_credentials_nosuch")
+                else:
+                    return get_func_responses("list_service_specific_credentials")
+            if op == "list_ssh_public_keys":
+                if "not_exists" in kwargs["UserName"]:
+                    return get_func_responses("list_ssh_public_keys_nosuch")
+                else:
+                    return get_func_responses("list_ssh_public_keys")
+
         def post(self, op, **kwargs):
             if op == "add_user_to_group":
                 if kwargs["GroupName"] == "denyall_group":
@@ -592,7 +669,31 @@ def mocked_aws_iam_client(*args, **kwargs):
                     return get_func_responses("update_login_profile_nosuch")
                 elif "_badpw" in kwargs["UserName"]:
                     return get_func_responses("update_login_profile_badpw")
-
+            elif op == "deactivate_mfa_device":
+                if "not_exists" in kwargs["SerialNumber"]:
+                    return get_func_responses("deactivate_mfa_device_nosuch")
+                else:
+                    return get_func_responses("deactivate_mfa_device_good")
+            elif op == "delete_virtual_mfa_device":
+                if "not_exists" in kwargs["SerialNumber"]:
+                    return get_func_responses("delete_virtual_mfa_device_nosuch")
+                else:
+                    return get_func_responses("delete_virtual_mfa_device_good")
+            elif op == "delete_signing_certificate":
+                if "not_exists" in kwargs["CertificateId"]:
+                    return get_func_responses("delete_signing_certificate_nosuch")
+                else:
+                    return get_func_responses("delete_signing_certificate_good")
+            elif op == "delete_service_specific_credential":
+                if "not_exists" in kwargs["ServiceSpecificCredentialId"]:
+                    return get_func_responses("delete_service_specific_credential_nosuch")
+                else:
+                    return get_func_responses("delete_service_specific_credential_good")
+            elif op == "delete_ssh_public_key":
+                if "not_exists" in kwargs["SSHPublicKeyId"]:
+                    return get_func_responses("delete_ssh_public_key_nosuch")
+                else:
+                    return get_func_responses("delete_ssh_public_key_good")
     return MockResponse(*args, **kwargs)
 
 def get_mock_config():
