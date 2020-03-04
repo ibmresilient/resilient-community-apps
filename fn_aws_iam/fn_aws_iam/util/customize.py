@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """Generate the Resilient customizations required for fn_aws_iam"""
 
 from __future__ import print_function
