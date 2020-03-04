@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -6,7 +8,7 @@ import pytest
 from mock import patch
 from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
-from .mock_artifacts import mocked_aws_iam_client, get_mock_config, get_func_responses
+from .mock_artifacts import mocked_aws_iam_client, get_mock_config, get_func_responsess
 
 PACKAGE_NAME = "fn_aws_iam"
 FUNCTION_NAME = "fn_aws_iam_update_access_key"
