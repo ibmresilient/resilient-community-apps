@@ -61,8 +61,12 @@ class FunctionComponent(ResilientComponent):
             if aws_iam_policy_names:
                 # Delete 'PolicyNames' from params
                 del params["PolicyNames"]
-                # Test if policy_names are attached for user name and get arn.
+                # Iterate over policy names in the comma separated list from parameter
+                # 'aws_iam_policy_names'. Add each in turn to the 'params' dict then attempt to attach each
+                # policy to the user in parameter 'aws_iam_user_name'. Include the status of each attempt in the returned
+                # result.
                 for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
+                    # Test if policy name is attached for user name and get arn.
                     policies = iam_cli.get("list_policies", paginate=True)
                     policy_list = [policy for policy in policies if policy["PolicyName"] == policy_name]
 
@@ -78,6 +82,9 @@ class FunctionComponent(ResilientComponent):
                 if "Arns" in params:
                     # Delete 'Arns' from params
                     del params["Arns"]
+                # Iterate over policy arns in the comma separated list in parameter 'aws_iam_arns'. Add each in turn
+                # to the 'params' dict then attempt to attach  each policy to the user in parameter 'aws_iam_user_name'.
+                # Include the status of each attempt in the returned result.
                 for arn in re.split(r"\s*,\s*", aws_iam_arns):
                     params.update({"PolicyArn": arn})
                     rtn.append({

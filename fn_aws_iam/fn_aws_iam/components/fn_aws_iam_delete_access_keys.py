@@ -53,6 +53,9 @@ class FunctionComponent(ResilientComponent):
                 del params["AccessKeys"]
 
             rtn = []
+            # Iterate over access key ids in the comma separated list in parameter 'aws_iam_access_keys'. Add each in
+            # turn to the 'params' dict then attempt to delete each access key for the user in parameter
+            # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
             for ak_id in re.split(r"\s*,\s*", aws_iam_access_keys):
                 params.update({"AccessKeyId": ak_id})
                 rtn.append({

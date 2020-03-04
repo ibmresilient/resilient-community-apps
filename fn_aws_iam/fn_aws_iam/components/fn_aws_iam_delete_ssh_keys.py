@@ -54,6 +54,9 @@ class FunctionComponent(ResilientComponent):
                 del params["SshKeyIds"]
 
             rtn = []
+            # Iterate over SSH public key ids in the comma separated list in parameter 'aws_iam_ssh_key_ids'.
+            # Add each in turn to the 'params' dict then attempt to delete each key for the user in parameter
+            # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
             for ssh_key_id in re.split(r"\s*,\s*", aws_iam_ssh_key_ids):
                 params.update({"SSHPublicKeyId": ssh_key_id})
                 rtn.append({

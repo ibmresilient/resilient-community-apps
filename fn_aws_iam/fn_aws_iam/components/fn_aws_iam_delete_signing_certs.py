@@ -54,6 +54,10 @@ class FunctionComponent(ResilientComponent):
                 del params["SignCertIds"]
 
             rtn = []
+            # Iterate over signing certificate ids in the comma separated list in parameter
+            # 'param aws_iam_sign_cert_ids'. Add each in turn to the 'params' dict then attempt to delete each
+            # certificate for the user in parameter 'aws_iam_user_name'. Include the status of each attempt in the
+            # returned result.
             for scert_id in re.split(r"\s*,\s*", aws_iam_sign_cert_ids):
                 params.update({"CertificateId": scert_id})
                 rtn.append({

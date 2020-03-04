@@ -54,6 +54,9 @@ class FunctionComponent(ResilientComponent):
                 del params["SscIds"]
 
             rtn = []
+            # Iterate over service-specific credential ids in the comma separated list in parameter 'aws_iam_ssc_ids'.
+            # Add each in turn to the 'params' dict then attempt to delete each credential for the user in parameter
+            # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
             for ssc_id in re.split(r"\s*,\s*", aws_iam_ssc_ids):
                 params.update({"ServiceSpecificCredentialId": ssc_id})
                 rtn.append({

@@ -52,6 +52,9 @@ class FunctionComponent(ResilientComponent):
                 del params["MfaSerialNums"]
 
             rtn = []
+            # Iterate over mfa serial numbers in the comma separated list in parameter
+            # 'param aws_iam_mfa_serial_numbers'. Add each in turn to the 'params' dict then attempt to delete each
+            # virtual mfa. Include the status of each attempt in the returned result.
             for mfa_ser_num in re.split(r"\s*,\s*", aws_iam_mfa_serial_nums):
                 params.update({"SerialNumber": mfa_ser_num})
                 rtn.append({
