@@ -37,6 +37,7 @@ After installation, before running, you must import the customizations into your
 
     resilient-circuits customize
 
+<br/>
 
 ## app.config settings
 
@@ -86,6 +87,8 @@ No action is performed after the workflow is complete, so we simply outline the 
 
 To regenerate the customization blob,
 `resilient-circuits codegen -p fn_urlscanio -m urlscanio --workflow example_urlscanio --rule "Example: urlscan.io"`
+
+<br/>
 
 ## Changelog
 
