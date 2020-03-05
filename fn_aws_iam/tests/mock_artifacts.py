@@ -346,6 +346,20 @@ def get_func_responses(op):
                               {'UserName': 'iam_test_User_1', 'AccessKeyId': 'BC123CDE456FGH789IJK', 'Status': 'Active',
                                'CreateDate': '2019-11-04 11:33:33'}]
                             ),
+        "list_access_keys_with_klu": ([{'AccessKeyId': 'ABC123CDE456FGH789IJ', 'CreateDate': '2019-10-31 16:23:08',
+                                        'Status': 'Active', 'UserName': 'iam_test_User_1',
+                                        'key_last_used': {'LastUsedDate': '2020-01-20 12:17:00', 'Region': 'us-east-1',
+                                                          'ServiceName': 'sts'
+                                                         }
+                                       },
+                                       {'AccessKeyId': 'BC123CDE456FGH789IJK', 'CreateDate': '2019-11-04 11:33:33',
+                                        'Status': 'Active', 'UserName': 'iam_test_User_1',
+                                        'key_last_used': {'LastUsedDate': '2020-01-20 12:17:00', 'Region': 'us-east-1',
+                                                          'ServiceName': 'sts'
+                                                         }
+                                       }
+                                      ]
+        ),
         "list_access_keys_empty": ([]),
         "list_groups_for_user": ([{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'AGPA4EQBBG2YAVPJATCNZ',
                                    'Arn': 'arn:aws:iam::123456789012:group/null_group',

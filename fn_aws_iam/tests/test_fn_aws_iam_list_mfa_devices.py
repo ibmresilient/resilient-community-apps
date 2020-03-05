@@ -58,7 +58,7 @@ class TestFnAwsIamListMfaDevices:
     @patch("fn_aws_iam.components.fn_aws_iam_list_mfa_devices.AwsIamClient", side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
         ("iam_test_user", [{'EnableDate': '2015-06-16T22:36:37Z',
-                              'SerialNumber': 'arn:aws:iam::123456789012:mfa/iam_test_user_1',
+                              'SerialNumber': 'arn:aws:iam::123456789012:mfa/iam_test_user',
                               'UserName': 'iam_test_user'}]),
         ("iam_test_user_has_virt", [{'EnableDate': '2015-06-16T22:36:37Z',
                                      'SerialNumber': 'arn:aws:iam::123456789012:mfa/iam_test_user_has_virt',
