@@ -63,11 +63,11 @@ def main():
                 no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deleted " \
-                        "for user <b>{0}</b> for Resilient function <b>{2}</b>."\
+                        "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, ''.join(deleted_keys), INPUTS["aws_iam_user_name"],  FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
-                        "for user <b>{2}</b> for Resilient function <b>{2}</b>."\
+                        "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, ''.join(no_such_entity), INPUTS["aws_iam_user_name"], FN_NAME)
         row.Status = ""
         row.query_execution_date = EXECUTION_DATE

@@ -163,9 +163,9 @@ def main():
                 no_such_entity += 1
                 no_such_entity_keys.append(ak_stat["AccessKeyId"])
         if deleted_keys:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> deleted " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>." \
-                .format(WF_NAME, len(deleted_keys), ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> deleted " \
+                        "for user <b>{2}</b> for Resilient function <b>{3}</b>." \
+                .format(WF_NAME, ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
 
             artifact_desc_content = artifact.description["content"]
             artifact_desc_sep = "==============="
@@ -175,9 +175,9 @@ def main():
                                 + artifact_desc_sep
             artifact.description = "{}".format(artifact_desc_upd)
         if no_such_entity:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Access Key Ids <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>." \
-                .format(WF_NAME, len(no_such_entity_keys), ", ".join(str(i) for i in no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> " \
+                        "did not exist for user <b>{2}</b> for Resilient function <b>{3}</b>." \
+                .format(WF_NAME, ", ".join(str(i) for i in no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>." \
             .format(WF_NAME, FN_NAME)

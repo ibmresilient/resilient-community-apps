@@ -69,7 +69,7 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
                         "<b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.Status = "Deleted"
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for user " \
                      "<b>{1}</b> for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
@@ -154,10 +154,12 @@ def main():
                 note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Access key <b>{1}</b> not found for user " \
                             "<b>{2}</b> for Resilient function <b>{3}</b>." \
                     .format(WF_NAME, row.AccessKeyId, INPUTS["aws_iam_user_name"], FN_NAME)
+                row.Status = "Deleted"
     else:
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> Access key <b>{1}</b> not found " \
                     "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
             .format(WF_NAME, row.AccessKeyId, INPUTS["aws_iam_user_name"], FN_NAME)
+        row.Status = "Deleted"
         
     if note_text:
         incident.addNote(helper.createRichText(note_text))

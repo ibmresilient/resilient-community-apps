@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -65,8 +65,11 @@ class FunctionComponent(ResilientComponent):
                 # Get user policies
                 user_policies = iam_cli.get("list_attached_user_policies", paginate=True, UserName=aws_iam_user_name)
                 inline_policies = iam_cli.get("list_user_policies", paginate=True, UserName=aws_iam_user_name)
-                # Test if policy_names are attached for user name and get arn.
+                # Iterate over policy names in the comma separated list in parameter 'aws_iam_policy_names'. Add each
+                # in turn to the 'params' dict then attempt to detach each policy from the user in parameter
+                # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
                 for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
+                    # Test if policy_name is attached for user name and get arn.
                     if inline_policies and policy_name in inline_policies:
                         if "PolicyArn" in params:
                             # Delete 'PolicyArn' from 'params' if in-line policy.
@@ -90,6 +93,9 @@ class FunctionComponent(ResilientComponent):
             else:
                 # Delete 'Arn' from params
                 del params["Arns"]
+                # Iterate over policy arns in the comma separated list in parameter 'aws_iam_arns'. Add each in turn
+                # to the 'params' dict then attempt to detach each policy to the user in parameter
+                # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
                 for arn in re.split(r"\s*,\s*", aws_iam_arns):
                     params.update({"PolicyArn": arn})
                     rtn.append({
