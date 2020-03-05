@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
@@ -43,7 +45,7 @@ class TestFnAwsIamListUserAccessKeyIds:
 
     @patch('fn_aws_iam.components.fn_aws_iam_list_user_access_key_ids.AwsIamClient', side_effect=mocked_aws_iam_client)
     @pytest.mark.parametrize("aws_iam_user_name, expected_results", [
-        ("iam_test_User", get_func_responses("list_access_keys")),
+        ("iam_test_User_1", get_func_responses("list_access_keys_with_klu")),
         ("iam_test_User_empty", get_func_responses("list_access_keys_empty"))
     ])
     def test_success(self, mock_post, circuits_app, aws_iam_user_name, expected_results):

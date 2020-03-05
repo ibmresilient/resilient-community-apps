@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
 """Test helper functions"""
 import pytest
 from fn_aws_iam.lib.helpers import *

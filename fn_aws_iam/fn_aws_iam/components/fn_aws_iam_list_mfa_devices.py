@@ -12,7 +12,7 @@ from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, valida
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_aws_iam_delete_login_profile"""
+    """Component that implements Resilient function 'fn_aws_iam_list_mfa_devices'"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -26,10 +26,10 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_aws_iam", {})
         validate_opts(self)
 
-    @function("fn_aws_iam_delete_login_profile")
-    def _fn_aws_iam_delete_login_profile_function(self, event, *args, **kwargs):
-        """Function: Delete the password for the specified IAM user, which terminates the user's ability
-        to access AWS services through the AWS Management Console.
+    @function("fn_aws_iam_list_mfa_devices")
+    def _fn_aws_iam_list_mfa_devices_function(self, event, *args, **kwargs):
+        """Function: List the MFA devices associated with an IAM user also determine which of the associated MFA
+        devices is a virtual device.
 
         param aws_iam_user_name: An IAM user name.
         """
@@ -37,7 +37,7 @@ class FunctionComponent(ResilientComponent):
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
-            # Get the function parameters:
+
             aws_iam_user_name = kwargs.get("aws_iam_user_name")  # text
 
             LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
@@ -46,7 +46,17 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.options)
 
-            rtn = iam_cli.post("delete_login_profile", **params)
+            # Get active mfa devices for user.
+            rtn = iam_cli.get("list_mfa_devices", paginate=True, **params)
+            if isinstance(rtn, list):
+                # Get virtual mfa devices for the account.
+                virt_mfas = iam_cli.get("list_virtual_mfa_devices", paginate=True)
+                # Determine if active mfa is also a virtual MFA.
+                for i in range(len(rtn)):
+                    for virt_mfa in virt_mfas:
+                        if rtn[i]["SerialNumber"] == virt_mfa["SerialNumber"]:
+                            rtn[i]["is_virtual"] = True
+
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results
@@ -55,4 +65,3 @@ class FunctionComponent(ResilientComponent):
         except Exception as aws_err:
             LOG.exception("ERROR with Exception '%s' in Resilient Function for AWS IAM.", aws_err.__repr__())
             yield FunctionError()
-

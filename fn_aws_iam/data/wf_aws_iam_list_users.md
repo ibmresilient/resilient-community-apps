@@ -81,8 +81,8 @@ Result: {
 #  Globals
 import re
 # List of fields in datatable fn_aws_iam_list_users script
-DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "AccessKeyIds", "Policies", "Tags", "Groups"]
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists", 
+                   "AccessKeyIds", "Policies", "Tags", "Groups"]
 FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "List Users"
 # Processing

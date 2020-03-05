@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Helper functions for Resilient circuits Functions supporting Symantec SEP """
 from __future__ import print_function

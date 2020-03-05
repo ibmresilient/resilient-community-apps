@@ -12,7 +12,7 @@ from fn_aws_iam.lib.helpers import CONFIG_DATA_SECTION, transform_kwargs, valida
 LOG = logging.getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
-    """Component that implements Resilient function 'fn_aws_iam_delete_login_profile"""
+    """Component that implements Resilient function 'fn_aws_iam_list_ss_creds'"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
@@ -26,10 +26,9 @@ class FunctionComponent(ResilientComponent):
         self.options = opts.get("fn_aws_iam", {})
         validate_opts(self)
 
-    @function("fn_aws_iam_delete_login_profile")
-    def _fn_aws_iam_delete_login_profile_function(self, event, *args, **kwargs):
-        """Function: Delete the password for the specified IAM user, which terminates the user's ability
-        to access AWS services through the AWS Management Console.
+    @function("fn_aws_iam_list_ss_creds")
+    def _fn_aws_iam_list_ss_creds_function(self, event, *args, **kwargs):
+        """Function: List the service-specific credentials associated with an IAM user.
 
         param aws_iam_user_name: An IAM user name.
         """
@@ -37,7 +36,7 @@ class FunctionComponent(ResilientComponent):
             params = transform_kwargs(kwargs) if kwargs else {}
             # Instantiate result payload object
             rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
-            # Get the function parameters:
+
             aws_iam_user_name = kwargs.get("aws_iam_user_name")  # text
 
             LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
@@ -46,7 +45,8 @@ class FunctionComponent(ResilientComponent):
 
             iam_cli = AwsIamClient(self.options)
 
-            rtn = iam_cli.post("delete_login_profile", **params)
+            rtn = iam_cli.get("list_service_specific_credentials", **params)
+
             results = rp.done(True, rtn)
 
             # Produce a FunctionResult with the results
@@ -55,4 +55,3 @@ class FunctionComponent(ResilientComponent):
         except Exception as aws_err:
             LOG.exception("ERROR with Exception '%s' in Resilient Function for AWS IAM.", aws_err.__repr__())
             yield FunctionError()
-

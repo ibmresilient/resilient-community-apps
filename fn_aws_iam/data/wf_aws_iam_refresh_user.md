@@ -46,8 +46,8 @@ Result: {
 import re
 #  Globals
 # List of fields in datatable fn_aws_iam_list_users script
-DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags"]
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                   "Tags"]
 FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "Refresh User"
 # Processing
@@ -105,7 +105,7 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
                         "<b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
-            row.LoginProfileExists = "NO"
+            row.LoginProfileExists = "No"
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for user " \
                      "<b>{1}</b> for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
