@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ AWS IAM client support classes. """
 from  datetime import datetime
 import logging
 import re
+from sys import version_info
 from botocore.exceptions import ClientError
 from botocore.config import Config
 from boto3 import Session
@@ -17,13 +18,18 @@ SUPPORTED_PAGINATE_TYPES = [
     "AccessKeyMetadata",
     "Policies",
     "PolicyNames",
-    "AttachedPolicies"
+    "AttachedPolicies",
+    "SSHPublicKeys",
+    "Certificates",
+    "MFADevices",
+    "VirtualMFADevices"
 ]
 SUPPORTED_GET_TYPES = [
     "User",
     "Tags",
     "LoginProfile",
-    "AccessKeyLastUsed"
+    "AccessKeyLastUsed",
+    "ServiceSpecificCredentials"
 ]
 FILTER_NAMES = [
     "UserName",
@@ -36,7 +42,7 @@ class AwsIamClient():
     """
     Client class for AWS IAM.
     """
-    def __init__(self, function_options={}, sts_client=False):
+    def __init__(self, function_options=None, sts_client=False):
         """
         Class constructor.
         """
@@ -181,10 +187,7 @@ class AwsIamClient():
                     result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
                 result.extend(response[result_type])
 
-        except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     op, kwargs, "NoSuchEntityException")
-
+        except self.iam.exceptions.NoSuchEntityException:
             return {"Status": "NoSuchEntity"}
 
         except Exception as int_ex:
@@ -205,8 +208,8 @@ class AwsIamClient():
         if results_filter:
             # If filter set return tuple including count.
             return (count, result)
-        else:
-            return result
+
+        return result
 
     def get(self, op=None, paginate=False, results_filter=None, return_filtered=False, **kwargs):
         """ Execute a 'query' type AWS IAM  operation.
@@ -238,15 +241,22 @@ class AwsIamClient():
             if not result_type:
                 result_type = self._get_type_from_response(response, SUPPORTED_GET_TYPES)
 
-        except self.iam.exceptions.NoSuchEntityException as no_such_entity_ex:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
-                     aws_iam_op.__name__, kwargs, "NoSuchEntityException")
-            # If Return empty dict if the object doesn't exist.
+        except self.iam.exceptions.NoSuchEntityException:
+            # If Return empty dict if the login profile doesn't exist for the user.
             if aws_iam_op.__name__ == "get_login_profile":
                 # If result is of type 'get_login_profile' return empty dict if the object doesn't exist.
                 return {}
 
             return {"Status": "NoSuchEntity"}
+
+        except self.iam.exceptions.ClientError as invalid_ex:
+
+            if "ValidationError" in invalid_ex.__repr__():
+                return {"Status": "ValidationError"}
+
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_iam_op.__name__, kwargs, "ValidationErrorException")
+            raise invalid_ex
 
         except Exception as int_ex:
             LOG.error("ERROR with %s and args: '%s', Got exception: %s",
@@ -283,11 +293,13 @@ class AwsIamClient():
             aws_iam_op(**kwargs)
 
         except self.iam.exceptions.NoSuchEntityException:
-            LOG.info("ERROR with %s and args: '%s', Got exception: %s", aws_iam_op.__name__, kwargs, "NoSuchEntityException")
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_iam_op.__name__, kwargs, "NoSuchEntityException")
             status = "NoSuchEntity"
 
         except self.iam.exceptions.PasswordPolicyViolation:
-            LOG.info("ERROR with %s and args: '%s', Got exception %s", aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
+            LOG.info("ERROR with %s and args: '%s', Got exception %s",
+                     aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
             status = "PasswordPolicyViolation"
 
         except Exception as int_ex:
@@ -310,7 +322,10 @@ class AwsIamClient():
 
         for filter_name in FILTER_NAMES:
             if results_filter and filter_name in results_filter and filter_name in result[0]:
-                regex = r'{}'.format(results_filter[filter_name])
+                if version_info.major < 3:
+                    regex = r'{}'.format(results_filter[filter_name].encode('utf-8'))
+                else:
+                    regex = r'{}'.format(results_filter[filter_name])
                 filtered_result = [r for r in result if re.search(regex, r[filter_name], re.IGNORECASE)]
                 if return_filtered:
                     # Return filtered count and filtered result.

@@ -46,33 +46,36 @@ Result: {
 import re
 #  Globals
 # List of fields in datatable fn_aws_iam_list_users script
-DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags"]
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                   "Tags"]
 FN_NAME = "fn_aws_iam_list_users"
-WF_NAME = "Example: AWS IAM: Get User For Artifact"
+WF_NAME = "Get User For Artifact"
 # Processing
 INPUTS = results.inputs
 CONTENT = results.content
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def main():
-    note_text = ''
+    note_text = u''
     if CONTENT:
         if isinstance(CONTENT, dict) and CONTENT.get("Status") == "NoSuchEntity":
-            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist " \
+            note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist " \
+                         "for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        elif isinstance(CONTENT, dict) and CONTENT.get("Status") == "ValidationError":
+            note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: The username <b>{1}</b> is invalid " \
                          "for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
         elif len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was found for Resilient " \
+                        u"function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             workflow.addProperty("user_exists", {})
         else:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
+            note_text = u"AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
                         "<b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient " \
+        note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for Resilient " \
                      "function <b>{1}</b>.".format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -100,7 +103,7 @@ inputs.aws_iam_user_name = artifact.value
 
 ### Post-Processing Script
 ```python
-##  AWS IAM - fn_aws_iam_list_user_groups script ##
+##  AWS IAM - fn_aws_iam_list_user_policies script ##
 # Example result:
 """
 Result: {
@@ -121,24 +124,24 @@ Result: {
 }
 """
 #  Globals
-# List of fields in datatable fn_aws_iam_list_user_groups script
+# List of fields in datatable fn_aws_iam_list_user_policies script
 DATA_TBL_FIELDS = ["Policies"]
 FN_NAME = "fn_aws_iam_list_user_policies"
-WF_NAME = "Example: AWS IAM: Get User For Artifact"
+WF_NAME = "Get User For Artifact"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
 note_text = ''
 
 def main():
-    note_text = ''
+    note_text = u''
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Policy name' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+        note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> policies found for user " \
+                    u"<b>{2}</b> for Resilient function <b>{3}</b>."\
             .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+        note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> policies found for " \
+                    u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -184,22 +187,22 @@ Result: {
 # List of fields in datatable fn_aws_iam_list_user_access_keys script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
 FN_NAME = "fn_aws_iam_list_user_access_keys"
-WF_NAME = "Example: AWS IAM: Get User For Artifact"
+WF_NAME = "Get User For Artifact"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
 note_text = ''
 
 def main():
-    note_text = ''
+    note_text = u''
     newrow = workflow.properties.newrow
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Access key' result(s) returned for user " \
-                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+        note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> access key ids found for user " \
+                    u"<b>{2}</b> for Resilient function <b>{3}</b>."\
             .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
     else:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
-                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+        note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> access key id found for " \
+                    u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -249,13 +252,13 @@ Use this step to get user groups and also to process previous steps in workflow 
 #  Globals
 import re
 # List of fields in datatable fn_aws_iam_list_user_groups script
-DATA_TBL_FIELDS_USER = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "Tags"]
+DATA_TBL_FIELDS_USER = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
+                        "Tags"]
 DATA_TBL_FIELDS_GROUPS = ["Groups"]
 DATA_TBL_FIELDS_POLICIES = ["Policies"]
 
 FN_NAME = "fn_aws_iam_list_user_groups"
-WF_NAME = "Example: AWS IAM: Get User For Artifact"
+WF_NAME = "Get User For Artifact"
 # Processing
 USER_CONTENT = workflow.properties.list_users_results.content
 POLICY_CONTENT = workflow.properties.list_user_policies_results.content
@@ -303,7 +306,7 @@ def process_tags(tag_list, row):
     row.Tags = ','.join(check_add_quotes(t) for t in tags)
 
 def main():
-    note_text = ''
+    note_text = u''
     if USER_CONTENT:
         u = USER_CONTENT.pop()
         newrow = incident.addRow("aws_iam_users")
@@ -326,13 +329,13 @@ def main():
         if ACCESS_KEY_ID_CONTENT:
             process_access_key_ids(ACCESS_KEY_ID_CONTENT, newrow)
         if GROUP_CONTENT:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>{1}</b> 'Group' result(s) returned for user " \
-                        "<b>{2}</b> for Resilient function <b>{3}</b>."\
+            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> groups found for user " \
+                        u"<b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, len(GROUP_CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
             process_groups(GROUP_CONTENT, newrow)
         else:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
-                        "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> group found for " \
+                        u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":

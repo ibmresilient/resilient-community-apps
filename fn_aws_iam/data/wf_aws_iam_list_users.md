@@ -81,8 +81,8 @@ Result: {
 #  Globals
 import re
 # List of fields in datatable fn_aws_iam_list_users script
-DATA_TBL_FIELDS = ["query_execution_time", "UserName", "UserId", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists",
-                   "PasswordLastUsed", "AccessKeyIds", "Policies", "Tags", "Groups"]
+DATA_TBL_FIELDS = ["query_execution_time", "UserName", "Arn", "DefaultUser", "CreateDate", "LoginProfileExists", 
+                   "AccessKeyIds", "Policies", "Tags", "Groups"]
 FN_NAME = "fn_aws_iam_list_users"
 WF_NAME = "List Users"
 # Processing
@@ -128,13 +128,14 @@ def process_tags(tag_list, row):
     row.Tags = ','.join(check_add_quotes(t) for t in tags)
 
 def main():
-    note_text = ''
+    note_text = u''
     filters = [f for f in [INPUTS["aws_iam_user_filter"], INPUTS["aws_iam_group_filter"],  
                            INPUTS["aws_iam_policy_filter"], INPUTS["aws_iam_access_key_filter"]] 
                if f is not None]
     if CONTENT:
-        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for Resilient function " \
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> user(s) returned for Resilient function " \
                    "<b>{2}</b>.".format(WF_NAME, len(CONTENT), FN_NAME)
+        note_text += "<br>Adding new row(s) to data table <b>{0}</b> for <b>{1}</b> user(s).</br>".format("AWS IAM Users", len(CONTENT))
         for u in CONTENT:
             newrow = incident.addRow("aws_iam_users")
             newrow.query_execution_date = QUERY_EXECUTION_DATE
@@ -164,13 +165,13 @@ def main():
     if filters:
         note_text += "<br>Query Filters:</br>"
         if INPUTS.get("aws_iam_user_filter"): 
-            note_text += "<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
+            note_text += u"<br>aws_iam_user_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_user_filter"])
         if INPUTS.get("aws_iam_group_filter"): 
-            note_text += "<br>aws_iam_group_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_group_filter"])
+            note_text += u"<br>aws_iam_group_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_group_filter"])
         if INPUTS.get("aws_iam_policy_filter"): 
-            note_text += "<br>aws_iam_policy_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_policy_filter"])
+            note_text += u"<br>aws_iam_policy_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_policy_filter"])
         if INPUTS.get("aws_iam_access_key_filter"):   
-            note_text += "<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
+            note_text += u"<br>aws_iam_access_key_filter: <b>{0}</b></br>".format(INPUTS["aws_iam_access_key_filter"])
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()

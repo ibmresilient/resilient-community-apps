@@ -60,14 +60,14 @@ def main():
     note_text = ''
     if CONTENT:
         if isinstance(CONTENT, dict) and CONTENT.get("Status") == "NoSuchEntity":
-            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> does not exist for Resilient " \
+            note_text += "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was not found for Resilient " \
                          "function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.Status = "Deleted"
         elif len(CONTENT) == 1:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> results returned for user " \
-                        "<b>{2}</b>  for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was found " \
+                        "for Resilient function <b>{2}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             workflow.addProperty("user_exists", {})
             u = CONTENT.pop()
             if u["LoginProfileExists"] is not None and u["LoginProfileExists"].lower() == "yes":
@@ -82,7 +82,7 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>no</b> results returned for user <b>{1}</b> " \
                      "for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
+    
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
@@ -132,14 +132,14 @@ Result: {
 """
 #  Globals
 # List of fields in datatable fn_aws_iam_delete_login_profile  script
-DATA_TBL_FIELDS = ["Groups"]
+DATA_TBL_FIELDS = ["LoginProfileExists"]
 FN_NAME = "fn_aws_iam_delete_login_profile"
 WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
@@ -152,12 +152,13 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile does not exist for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.LoginProfileExists = "No"
-            row.PasswordLastUsed = ''
+
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -204,7 +205,7 @@ WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
@@ -221,8 +222,9 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Access key' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -278,7 +280,7 @@ WF_NAME = "Delete User"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
@@ -306,8 +308,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -361,7 +364,7 @@ WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
@@ -378,8 +381,9 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Policy name' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+    
 if __name__ == "__main__":
     main()
 ```
@@ -436,11 +440,68 @@ WF_NAME = "Delete User"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
-    added = 0
+    ##  AWS IAM - fn_aws_iam_detach_user_policies script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyName': 'AWSDenyAll', 'Status': 'OK'}
+                      {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'PolicyName': "AWSDenyAll", 'Status": 'OK'},
+                  {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_detach_user_policies  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_detach_user_policies"
+WF_NAME = "Example: AWS IAM: Delete User For Artifact"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    detached = 0
+    no_such_entity = 0
+    detached_policies = []
+    no_such_entity_policies = []
+    if CONTENT:
+        for pol_stat in CONTENT:
+            if pol_stat["Status"] == "OK":
+                detached += 1
+                detached_policies.append(pol_stat["PolicyName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_policies.append(pol_stat["PolicyName"])
+        if detached_policies:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> detached " \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(detached_policies), ", ".join(str(i) for i in detached_policies), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_policies), ", ".join(str(i) for i in no_such_entity_policies), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+
+if __name__ == "__main__":
+    main()
+ = 0
     no_such_entity = 0
     added_policies = []
     no_such_entity_policies = []
@@ -464,8 +525,9 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 
-    incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -517,7 +579,7 @@ WF_NAME = "Delete User"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT=False
 
 def main():
     note_text = ''
@@ -534,8 +596,8 @@ def main():
         note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Group' result(s) returned for " \
                     "user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -591,26 +653,26 @@ WF_NAME = "Delete User"
 CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = ''
-    added = 0
+    deleted = 0
     no_such_entity = 0
-    added_groups = []
+    deleted_groups = []
     no_such_entity_groups = []
     if CONTENT:
         for grp_stat in CONTENT:
             if grp_stat["Status"] == "OK":
-                added += 1
-                added_groups.append(grp_stat["GroupName"])
+                deleted += 1
+                deleted_groups.append(grp_stat["GroupName"])
             else:
                 no_such_entity += 1
                 no_such_entity_groups.append(grp_stat["GroupName"])
-        if added_groups:
+        if deleted_groups:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Groups <b>{2}</b> removed " \
                         "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(added_groups), ", ".join(str(i) for i in added_groups), INPUTS["aws_iam_user_name"], FN_NAME)
+                .format(WF_NAME, len(deleted_groups), ", ".join(str(i) for i in deleted_groups), INPUTS["aws_iam_user_name"], FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Groups <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
@@ -619,8 +681,707 @@ def main():
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
 
-    incident.addNote(helper.createRichText(note_text))
+```
+
+---
+
+## Function - AWS IAM: List SSH Public Keys
+
+### API Name
+`fn_aws_iam_list_ssh_keys`
+
+### Output Name
+`list_ssh_keys_results`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_ssh_public_keys script ##
+# Example result:
+"""
+Result: {
+          'version': '1.0', 'success': True, 'reason': None, 
+          'content': [{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 
+                       'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
+                      }
+                     ], 
+          'raw': '[{"UserName": "iam_test_user_10", "SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", 
+                  "Status": "Active", "UploadDate": "2020-02-25 11:05:17"}]', 
+          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                      'execution_time_ms': 657, 'timestamp': '2020-02-25 16:11:28'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_ssh_public_keys script
+DATA_TBL_FIELDS = ["SSHPublicKeyIds"]
+FN_NAME = "fn_aws_iam_list_ssh_public_keys"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+DEBUG_SCRIPT=False
+
+def main():
+    note_text = ''
+    if CONTENT:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'SSH Public keys' returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        access_key_ids = []
+        for sshk_id in CONTENT:
+            if sshk_id["SSHPublicKeyId"] is not None:
+                workflow.addProperty("has_ssh_public_keys", {})
+                break
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'SSH Public keys' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Function - AWS IAM: Delete SSH Public Keys
+
+### API Name
+`fn_aws_iam_delete_ssh_keys`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+content = workflow.properties.list_ssh_keys_results.content
+ssh_key_ids = []
+for ssh_key_id in content:
+    if ssh_key_id["SSHPublicKeyId"] is not None:
+        ssh_key_ids.append(ssh_key_id["SSHPublicKeyId"])
+inputs.aws_iam_ssh_key_ids = ",".join(ssh_key_ids)
+
+
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_delete_ssh_keys script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'OK'}
+                      {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'SSHPublicKeyId': "APKA4EQBBG2YCGOGDY5G", 'Status": 'OK'},
+                  {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_ssh_keys_ids': 'APKA4EQBBG2YCGOGDY5G', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_delete_ssh_keys  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_delete_ssh_keys"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    deleted = 0
+    no_such_entity = 0
+    deleted_keys = []
+    no_such_entity_keys = []
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
+                deleted += 1
+                deleted_keys.append(grp_stat["GroupName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_keys.append(grp_stat["GroupName"])
+        if deleted_keys:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'SSH Public keys' <b>{2}</b> removed " \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deleted_keys), ", ".join(str(i) for i in deleted_keys), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> 'SSH Public keys' <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_keys), ", ".join(str(i) for i in no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
+## Function - AWS IAM: List Service Specific Credentials
+
+### API Name
+`fn_aws_iam_list_ss_creds`
+
+### Output Name
+`list_srv_specific_creds_results`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_service_specific_credentials script ##
+# Example result:
+"""
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user-at-834299573936', 
+                      'CreateDate': '2020-02-25 10:43:24', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 
+                      'ServiceName': 'codecommit.amazonaws.com'
+                     },
+                     {'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user_10-at-834299573936',
+                      'CreateDate': '2020-02-26 11:50:52', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YGOLHZWY7L', 
+                      'ServiceName': 'cassandra.amazonaws.com'}], 
+         'raw': '[{"UserName": "iam_test_user", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936", 
+                   "CreateDate": "2020-02-25 10:43:24", "ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", "ServiceName": "codecommit.amazonaws.com"}, 
+                   {"UserName": "iam_test_user_10", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936", 
+                   "CreateDate": "2020-02-26 11:50:52", "ServiceSpecificCredentialId": "ACCA4EQBBG2YGOLHZWY7L", "ServiceName": "cassandra.amazonaws.com"}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                     'execution_time_ms': 982, 'timestamp': '2020-02-26 11:56:51'
+                    }
+}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_service_specific_credentials script
+DATA_TBL_FIELDS = ["ServiceSpecificCredentialIds"]
+FN_NAME = "fn_aws_iam_list_service_specific_credentials"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    if CONTENT:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Service specific credentials' returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        for ssc_id in CONTENT:
+            if ssc_id["ServiceSpecificCredentialId"] is not None:
+                workflow.addProperty("has_srv_creds", {})
+                break
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Service specific credentials' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Function - AWS IAM: Delete Service Specific Credentials
+
+### API Name
+`fn_aws_iam_delete_ss_creds`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+content = workflow.properties.list_srv_specific_creds_results.content
+srv_specific_cred_ids = []
+for ssc_id in content:
+    if ssc_id["ServiceSpecificCredentialId"] is not None:
+        srv_specific_cred_ids.append(ssc_id["ServiceSpecificCredentialId"])
+inputs.aws_iam_ssc_ids = ",".join(srv_specific_cred_ids)
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_delete_ss_creds script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'OK'}
+                      {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'ServiceSpecificCredentialId: "ACCA4EQBBG2YH6NR76SCQ", 'Status": 'OK'},
+                  {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_ssc_ids': 'ACCA4EQBBG2YH6NR76SCQ', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_delete_ss_creds  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_delete_ss_creds"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    deleted = 0
+    no_such_entity = 0
+    deleted_creds = []
+    no_such_entity_creds = []
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
+                deleted += 1
+                deleted_creds.append(grp_stat["GroupName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_creds.append(grp_stat["GroupName"])
+        if deleted_creds:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Service specific credentials' <b>{2}</b> removed " \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deleted_creds), ", ".join(str(i) for i in deleted_creds), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> 'Service specific credentials' <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_creds), ", ".join(str(i) for i in no_such_entity_creds), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
+## Function - AWS IAM: List Signing Certificates
+
+### API Name
+`fn_aws_iam_list_signing_certs`
+
+### Output Name
+`list_signing_certs_results`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_signing_certificates script ##
+# Example result:
+"""
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 
+                      'CertificateBody': '-----BEGIN CERTIFICATE-----\nMIID...Apg=\n-----END CERTIFICATE-----', 
+                      'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}], 
+         'raw': '[{"UserName": "iam_test_user", "CertificateId": "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "CertificateBody": 
+                 "-----BEGIN CERTIFICATE-----\\nMIID...Apg=\\n-----END CERTIFICATE-----", "Status": "Active", "UploadDate": "2020-02-26 12:25:27"}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 'execution_time_ms': 729, 'timestamp': '2020-02-26 12:33:57'
+        }
+}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_signing_certificates script
+DATA_TBL_FIELDS = ["CertificateIds"]
+FN_NAME = "fn_aws_iam_list_signing_certificates"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+DEBUG_SCRIPT=False
+
+def main():
+    note_text = ''
+    if CONTENT:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Signing Certificates' returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        for scert_id in CONTENT:
+            if scert_id["CertificateId"] is not None:
+                workflow.addProperty("has_sign_certs", {})
+                break
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Signing Certificates' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Function - AWS IAM: Delete Signing Certificates
+
+### API Name
+`fn_aws_iam_delete_signing_certs`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+content = workflow.properties.list_signing_certs_results.content
+sign_cert_ids = []
+for scert_id in content:
+    if scert_id["CertificateId"] is not None:
+        sign_cert_ids.append(scert_id["CertificateId"])
+inputs.aws_iam_sign_cert_ids = ",".join(sign_cert_ids)
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_signing_certs script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'}
+                      {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'CertificateId: "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", 'Status": 'OK'},
+                  {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_sign_cert_ids': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_list_signing_certs  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_list_signing_certs"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    deleted = 0
+    no_such_entity = 0
+    deleted_certs = []
+    no_such_entity_certs = []
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
+                deleted += 1
+                deleted_certs.append(grp_stat["GroupName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_certs.append(grp_stat["GroupName"])
+        if deleted_certs:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Signing Certificates' <b>{2}</b> removed " \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deleted_certs), ", ".join(str(i) for i in deleted_certs), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Signing Certificates' <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_certs), ", ".join(str(i) for i in no_such_entity_certs), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
+## Function - AWS IAM: List MFA Devices
+
+### API Name
+`fn_aws_iam_list_mfa_devices`
+
+### Output Name
+`list_mfa_devices_results`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_list_mfa_devices script ##
+# Example result:
+"""
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'UserName'a: 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+                      'EnableDate': '2020-02-26 16:55:05'}, 'is_virtual': True], 
+         'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user_10", 
+                 "EnableDate": "2020-02-26 16:55:05"}, 'is_virtual': True]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_10'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
+                     'execution_time_ms': 5644, 'timestamp': '2020-02-26 17:37:48'
+                    }
+}
+"""
+#  Globals
+# List of fields in datatable fn_aws_iam_list_mfa_devices script
+DATA_TBL_FIELDS = ["SerialNumbers"]
+FN_NAME = "fn_aws_iam_list_mfa_devices"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+DEBUG_SCRIPT=False
+
+def main():
+    note_text = ''
+    if CONTENT:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'Active NFA devices' returned for user " \
+                    "<b>{2}</b> for Resilient function <b>{3}</b>."\
+            .format(WF_NAME, len(CONTENT), INPUTS["aws_iam_user_name"], FN_NAME)
+        for mfa_ser_num in CONTENT:
+            if mfa_ser_num["SerialNumber"] is not None:
+                workflow.addProperty("has_active_mfa", {})
+            if mfa_ser_num.get("is_virtual", None):
+                workflow.addProperty("is_virtual_mfa", {})
+    else:
+        note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> 'Active NFA devices' result(s) returned for " \
+                    "user <b>{1}</b> for Resilient function <b>{2}</b>."\
+            .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Function - AWS IAM: Deactivate MFA Devices
+
+### API Name
+`fn_aws_iam_deactivate_mfa_devices`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+inputs.aws_iam_user_name = row.UserName
+content = workflow.properties.list_mfa_devices_results.content
+mfa_serial_nums = []
+for mfa_ser_num in content:
+    if mfa_ser_num["SerialNumber"] is not None:
+        mfa_serial_nums.append(mfa_ser_num["SerialNumber"])
+inputs.aws_iam_mfa_serial_nums = ",".join(mfa_serial_nums)
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_deactivate_mfa_devices script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}
+                      {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'SerialNumber: "arn:aws:iam::834299573936:mfa/iam_test_user", 'Status": 'OK'},
+                  {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_deactivate_mfa_devices  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_deactivate_mfa_devices"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    deactivated = 0
+    no_such_entity = 0
+    deactivated_mfas = []
+    no_such_entity_mfas = []
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
+                deactivated += 1
+                deactivated_mfas.append(grp_stat["GroupName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_mfas.append(grp_stat["GroupName"])
+        if deactivated_mfas:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'MFA devices' <b>{2}</b> de-activated " \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deactivated_mfas), ", ".join(str(i) for i in deactivated_mfas), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> 'MFA devices' <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_mfas), ", ".join(str(i) for i in no_such_entity_mfas), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+if __name__ == "__main__":
+    main()
+
+```
+
+---
+
+## Function - AWS IAM: Delete Virtual MFA Devices
+
+### API Name
+`fn_aws_iam_delete_mfa_devices`
+
+### Output Name
+`None`
+
+### Message Destination
+`fn_aws_iam`
+
+### Pre-Processing Script
+```python
+content = workflow.properties.list_mfa_devices_results.content
+mfa_serial_nums = []
+for mfa_ser_num in content:
+    if mfa_ser_num["SerialNumber"] is not None and mfa_ser_num.get("is_virtual", None):
+        mfa_serial_nums.append(mfa_ser_num["SerialNumber"])
+inputs.aws_iam_mfa_serial_nums = ",".join(mfa_serial_nums)
+
+```
+
+### Post-Processing Script
+```python
+##  AWS IAM - fn_aws_iam_delete_mfa_devices script ##
+# Example result:
+"""
+OK
+Result: {
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}
+                      {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'SerialNumber: "arn:aws:iam::834299573936:mfa/iam_test_user", 'Status": 'OK'},
+                  {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
+}
+"""
+#  Globals
+# List of fields in datatable for fn_aws_iam_delete_mfa_devices  script
+DATA_TBL_FIELDS = ["Policies"]
+FN_NAME = "fn_aws_iam_delete_mfa_devices"
+WF_NAME = "Delete User"
+# Processing
+CONTENT = results.content
+INPUTS = results.inputs
+QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
+DEBUG_SCRIPT = False
+
+def main():
+    note_text = ''
+    deleted = 0
+    no_such_entity = 0
+    deleted_mfas = []
+    no_such_entity_mfas = []
+    if CONTENT:
+        for grp_stat in CONTENT:
+            if grp_stat["Status"] == "OK":
+                deleted += 1
+                deleted_mfas.append(grp_stat["GroupName"])
+            else:
+                no_such_entity += 1
+                no_such_entity_mfas.append(grp_stat["GroupName"])
+        if deleted_mfas:
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> 'MFA devices' <b>{2}</b> deleted" \
+                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(deleted_mfas), ", ".join(str(i) for i in deleted_mfas), INPUTS["aws_iam_user_name"], FN_NAME)
+        if no_such_entity:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> 'MFA devices' <b>{2}</b> " \
+                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, len(no_such_entity_mfas), ", ".join(str(i) for i in no_such_entity_mfas), INPUTS["aws_iam_user_name"], FN_NAME)
+    else:
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
+            .format(WF_NAME, FN_NAME)
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 
@@ -667,6 +1428,7 @@ WF_NAME = "Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
+EXECUTION_DATE = results["metrics"]["timestamp"]
 
 def main():
     note_text = ''
@@ -675,7 +1437,8 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: User <b>{1}</b> was successfully deleted for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
             row.Status = "Deleted"
-            row.Tags = ''
+            row.Tags = ""
+            row.query_execution_date = EXECUTION_DATE
         else:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Unexpected delete status <b>{1}</b> for delete" \
                         " user operation <b>{2}</b> for Resilient function <b>{3}</b>."\

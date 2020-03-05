@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Tests using pytest_resilient_circuits"""
 
@@ -52,7 +52,6 @@ class TestFnAwsIamListUsers:
         (None, None, None, "deny_all", None, "users", get_func_responses("list_users_filtered_by_policy")),
         (None, "not_exists", None, None, None, "users", []),
         (None, None, None, None, "123", "access_keys", get_func_responses("list_users_filtered_by_keys_with_dates")),
-
     ])
     def test_success(self, mock_get, circuits_app, aws_iam_user_name, aws_iam_user_filter, aws_iam_group_filter,
                      aws_iam_policy_filter, aws_iam_access_key_filter, aws_iam_query_type, expected_results):

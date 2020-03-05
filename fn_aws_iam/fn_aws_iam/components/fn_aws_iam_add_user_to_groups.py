@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
@@ -53,8 +53,9 @@ class FunctionComponent(ResilientComponent):
                 del params["GroupNames"]
 
             rtn = []
-            # Iterate over group names in comma separated list 'aws_iam_group_names' and try and add the
-            # user to each group Include the status of each attempt in result.
+            # Iterate over group names in the comma separated list in parameter 'aws_iam_group_names'. Add each in
+            # turn to the 'params' dict then attempt to add the user in parameter 'aws_iam_user_name' to the group.
+            # Include the status of each attempt in the returned result.
             for group_name in re.split(r"\s*,\s*", aws_iam_group_names):
                 params.update({"GroupName": group_name})
                 rtn.append({
