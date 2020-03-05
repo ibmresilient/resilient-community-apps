@@ -90,7 +90,7 @@ def write_to_csv(incidents, fields_dict, filename, max_count=None, filter=None, 
     #   Keep a count for samples
     #
     inc_count = 0
-    with open(filename, "wb") as outfile:
+    with open(filename, "w") as outfile:
         #
         #   Write everything into a CSV file, since scikit-learn uses CSV format for samples
         #
