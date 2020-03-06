@@ -69,6 +69,8 @@ def main():
         elif len(CONTENT) == 1:
             note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The user <b>{1}</b> was found for Resilient " \
                         u"function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+            note_text += "<br>Adding new row to data table <b>{0}</b> for user <b>{1}</b>.</br>"\
+                .format("AWS IAM Users", INPUTS["aws_iam_user_name"])
             workflow.addProperty("user_exists", {})
         else:
             note_text = u"AWS IAM Integration: : Workflow <b>{0}</b>: Too many results <b>{1}</b> returned for user " \
@@ -131,7 +133,7 @@ WF_NAME = "Get User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = u''
@@ -143,8 +145,8 @@ def main():
         note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> policies found for " \
                     u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -191,7 +193,7 @@ WF_NAME = "Get User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
-note_text = ''
+DEBUG_SCRIPT = False
 
 def main():
     note_text = u''
@@ -204,8 +206,8 @@ def main():
         note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> access key id found for " \
                     u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-
-    incident.addNote(helper.createRichText(note_text))
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
 ```
@@ -266,7 +268,7 @@ ACCESS_KEY_ID_CONTENT = workflow.properties.list_user_access_key_ids_result.cont
 GROUP_CONTENT = results.content
 INPUTS = results.inputs
 QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-note_text = ''
+DEBUG_SCRIPT = False
 
 def check_add_quotes(tag_name):
     # Using regex
@@ -337,7 +339,9 @@ def main():
             note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There was <b>no</b> group found for " \
                         u"user <b>{1}</b> for Resilient function <b>{2}</b>."\
                 .format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
-    incident.addNote(helper.createRichText(note_text))
+    if DEBUG_SCRIPT:
+        incident.addNote(helper.createRichText(note_text))
+    
 if __name__ == "__main__":
     main()
 ```

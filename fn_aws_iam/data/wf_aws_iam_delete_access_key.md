@@ -69,7 +69,7 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
                         "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
                 .format(WF_NAME, ''.join(no_such_entity), INPUTS["aws_iam_user_name"], FN_NAME)
-        row.Status = ""
+        row.Status = "Deleted"
         row.query_execution_date = EXECUTION_DATE
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
