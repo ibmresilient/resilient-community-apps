@@ -14,6 +14,7 @@ import pandas as pds
 import logging
 from fn_machine_learning.lib.multi_id_binarizer import MultiIdBinarizer
 from sklearn.metrics import precision_score, recall_score, f1_score
+import sys
 
 #
 #   All the algorithms supported by this integration package
@@ -136,7 +137,14 @@ def get_default_encoder(features, csv_file, separator=',', in_log=None):
                           quotechar='"')
 
         X = df[features]
-        for col_name, col in X.iteritems():
+
+        # check Python version and use appropriate method to return iterable list
+        if sys.version_info[0] < 3:
+            items = X.iteritems()
+        else:
+            items = X.items()
+
+        for col_name, col in items:
             if col.dtype.name == "object":
                 is_list = MultiIdBinarizer.is_multi_selection(col)
                 if is_list:
@@ -183,7 +191,13 @@ def analyze(y_true, y_pred):
             else:
                 correct[t] = 1
 
-    for key, value in count.iteritems():
+    # check Python version and use appropriate method to return iterable list
+    if sys.version_info[0] < 3:
+        items = count.iteritems()
+    else:
+        items = count.items()
+
+    for key, value in items:
         cor = correct.get(key, 0)
         re[key] = float(cor)/count[key]
 

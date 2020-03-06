@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_elasticsearch',
-    version='1.0.5',
+    version='1.0.6',
     url='https://github.com/ibmresilient/resilient-community-apps',
     license='MIT',
     author='IBM Resilient Labs',
@@ -14,7 +14,8 @@ setup(
     long_description="Allows users of the Resilient Platform to connect to and query an ElasticSearch Database. Users can specify the location of a remote ElasticSearch instance and query this instance for data through the Resilient Platform ",
     install_requires=[
         'resilient_circuits>=31.0.0',
-        'elasticsearch>=6.3.0'
+        'elasticsearch>=6.3.0',
+        'resilient_lib>=32.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

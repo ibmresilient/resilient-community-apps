@@ -89,12 +89,7 @@ class ShadowServerThreatFeedSearcher(ResilientComponent):
                     resp_json = json.loads(response.text.replace(artifact_value, "", 1))
                     hit = Hit()
 
-                    if sys.version_info[0] < 3:
-                        items = resp_json.iteritems()
-                    else:
-                        items = resp_json.items()
-
-                    for attribute, value in items:
+                    for attribute, value in resp_json.items():
                         if attribute not in self.data_to_ignore:
                             hit.append(StringProp(name=attribute, value=value))
 

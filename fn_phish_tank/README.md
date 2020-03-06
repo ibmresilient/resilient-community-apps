@@ -66,7 +66,7 @@ Partial URLs are not supported with this integration since the PhishTank API sup
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **phish_tank_api_url** | Yes | `http://checkurl.phishtank.com/checkurl/` | PhishTank API Access URL |
+  | **phish_tank_api_url** | Yes | `https://checkurl.phishtank.com/checkurl/` | PhishTank API Access URL |
   | **phish_tank_api_key** | Yes | - | PhishTank API Key |
   | **proxy** | No | `127.0.0.1` | Proxy Server Address. Default is `None` |
 
@@ -124,6 +124,9 @@ There are several ways to verify the successful operation of a function.
 -->
 ### v1.0.0
 * Initial Release
+
+### v1.0.1
+* Default URL fixes
 
 ---
 ## Support

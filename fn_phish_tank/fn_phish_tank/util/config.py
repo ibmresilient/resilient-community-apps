@@ -12,7 +12,7 @@ def config_section_data():
     """
     config_data = u"""[fn_phish_tank]
 # PhishTank API Access URL
-phish_tank_api_url=http://checkurl.phishtank.com/checkurl/
+phish_tank_api_url=https://checkurl.phishtank.com/checkurl/
 # PhishTank API Key.
 phish_tank_api_key=
 # Proxy Server by Default it will be None.

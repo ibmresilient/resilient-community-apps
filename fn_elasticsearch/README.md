@@ -5,6 +5,10 @@
   Specify all changes in this release. Do not remove the release 
   notes of a previous release
 -->
+### v1.0.6
+
+* Add resilient-lib dependency to setup.py
+
 ### v1.0.5
 
 * Added logic to conditionally use doc_type depending on the major version of ElasticSearch

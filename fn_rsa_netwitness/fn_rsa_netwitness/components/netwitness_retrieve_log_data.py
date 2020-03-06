@@ -5,8 +5,10 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool
+from resilient_lib import validate_fields, ResultPayload, RequestsCommon, str_to_bool, write_file_attachment
 from fn_rsa_netwitness.util.helper import get_headers, convert_to_nw_time
+from io import BytesIO, StringIO
+import sys
 
 log = logging.getLogger(__name__)
 
@@ -46,6 +48,8 @@ class FunctionComponent(ResilientComponent):
             nw_end_time = kwargs.get("nw_end_time")  # int
             if nw_end_time is None:
                 raise FunctionError("nw_end_time must be set in order to run this function.")
+
+            incident_id = kwargs.get("incident_id")     # number
 
             # Initialize resilient_lib objects (handles the select input)
             rp = ResultPayload("fn_rsa_netwitness", **kwargs)
@@ -91,6 +95,29 @@ class FunctionComponent(ResilientComponent):
             log.debug("data_file: {}".format(data_file))
             results = rp.done(True, data_file)
             log.debug("RESULTS: %s", results)
+
+            # Check for empty log files
+            # (if empty, no log file will be attached and a note will be added in the workflow post-process)
+            if results["content"]:
+                yield StatusMessage("Logs found, creating attachment...")
+                # Get client, attachment name, and content of log files from netwitness
+                rest_client = self.rest_client()
+
+                # Determine the proper extension for the attachment name
+                if nw_data_format == "logs_text":
+                    ext = "txt"
+                else:
+                    ext = nw_data_format[5:]    # for csv, xml, json
+
+                attachment_name = u"Log file for {} - {}.{}".format(nw_start_time, nw_end_time, ext)
+
+                if sys.version_info.major < 3:
+                    datastream = StringIO(results["content"])
+                else:
+                    datastream = BytesIO(results["content"].encode("utf-8"))
+
+                write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
+
             yield StatusMessage("Done...")
 
             # Produce a FunctionResult with the results
