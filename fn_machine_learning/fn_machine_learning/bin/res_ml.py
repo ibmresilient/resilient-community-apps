@@ -506,7 +506,14 @@ def show_model_summary(model, model_file):
 
     if model.config.analysis:
         LOG.info("  Accuracy for {} value:".format(model.config.predict_field))
-        for key, value in model.config.analysis.iteritems():
+
+        # check Python version and use appropriate method to return iterable list
+        if sys.version_info[0] < 3:
+            items = model.config.analysis.iteritems()
+        else:
+            items = model.config.analysis.items()
+        
+        for key, value in items:
             LOG.info("    %-*s %s" % (12, key + ":", value))
 
 
