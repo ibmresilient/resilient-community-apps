@@ -12,6 +12,10 @@ def config_section_data():
     config_data = u"""[urlscanio]
 # API key for urlscan.io
 urlscanio_api_key=xxx
+# Base URL for the urlscanio API
+urlscanio_report_url=https://urlscan.io/api/v1
+# Base URL to access screenshots in urlscanio
+urlscanio_screenshot_url=https://urlscan.io/screenshots
 
 # Optional timeout (seconds)
 # timeout=300
