@@ -7,13 +7,14 @@
 
 import logging
 import threading
-from circuits import Event, Timer
+from circuits import Event, Timer, task
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
 from fn_secureworks_ctp.lib.secureworks_ctp_helper import SecureworksCTPProcess
+from fn_secureworks_ctp.lib.scwx_client import SCWXClient
 
-CONFIG_DATA_SECTION = 'fn_secureworks_ctp'
-SCWX_CTP_POLL_CHANNEL = "scwx_ctp_escalation"
+CONFIG_DATA_SECTION = "fn_secureworks_ctp"
+SCWX_CTP_POLL_CHANNEL = "scwx_ctp_poll"
 TICKET_ID_FIELDNAME = "scwx_ctp_ticket_id"
 LOG = logging.getLogger(__name__)
 
@@ -60,18 +61,19 @@ class SecureworksCTPPollComponent(ResilientComponent):
     @handler("Poll")
     def _poll(self, event):
         """Handle the timer"""
-        LOG.debug("Secureworks CTP poll timer initiated")
-        scwx_poll = SecureworksCTPProcess(self.options)
+        LOG.info("Secureworks CTP poll start")
+        scwx_poll = SecureworksCTPProcess(opts=self.opts)
         try:
             if self.scwx_thread.is_alive() == True:
-                LOG.info("Secureworks CTP Thread already running.")
+                LOG.info("Secureworks CTP thread already running")
             else:
-                LOG.info("Secureworks CTP Thread is not running.")
+                LOG.info("Secureworks CTP thread is not running")
                 self.scwx_thread = threading.Thread(target=scwx_poll.run)
                 self.scwx_thread.daemon = True
                 self.scwx_thread.start()
         except Exception as err:
-            LOG.error("Error starting the Secureworks CTP thread: {}".format(str(err)))
+            LOG.error("Error starting Secureworks poller thread: {}".format(str(err)))
+
 
     def _load_options(self, opts):
         """Read options from config"""
@@ -86,7 +88,3 @@ class SecureworksCTPPollComponent(ResilientComponent):
         # Timer interval (seconds).  Default 10 minutes.
         self.polling_interval = int(self.options.get("polling_interval", 600))
 
-
-    def _escalate(self):
-        """Query the Secureworks CTP endpoint for new tickets, and raise them to Resilient"""
-        LOG.info(u"Getting list of open tickets")
