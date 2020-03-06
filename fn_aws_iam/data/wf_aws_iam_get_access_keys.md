@@ -86,15 +86,17 @@ def main():
     if CONTENT:
         if len(CONTENT) == 1:
             u = CONTENT.pop()
+            access_key_ids = []
             if u["AccessKeyIds"]:
                 for k in u["AccessKeyIds"]:
+                    access_key_ids.append(k["AccessKeyId"])
                     key_count += 1
-            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> access keys(s) returned for " \
-                        u"user for <b>{2}</b> Resilient function <b>{3}</b>."\
-                .format(WF_NAME, key_count, INPUTS["aws_iam_user_filter"], FN_NAME)
+            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> access keys(s) <b>{2}</b> returned for " \
+                        u"user <b>{3}</b> for Resilient function <b>{4}</b>."\
+                .format(WF_NAME, key_count, ','.join(access_key_ids), INPUTS["aws_iam_user_filter"], FN_NAME)
             if key_count:
-                note_text += u"<br>Adding new rows to data table <b>{0}</b> for <b>{1}</b> access keys(s).</br>"\
-                    .format("AWS IAM Access Keys", key_count)
+                note_text += u"<br>Adding new row(s) to data table <b>{0}</b> for access keys(s) <b>{1}</b>.</br>"\
+                    .format("AWS IAM Access Keys", ','.join(access_key_ids), key_count)
                 user_name = u["UserName"]
                 process_access_keys(u["AccessKeyIds"], user_name)
         else:

@@ -21,7 +21,6 @@
 inputs.aws_iam_user_name = row.UserName
 # Test password to see it complies with basic password policy.
 err_msg_validation = "The new password needs be minimum 8 characters in length and have at least 1 uppercase and 1 lowercase character."
-err_msg_confirm_match = "The password and confirmation password do not match."
 if len(rule.properties.aws_iam_password) < 8:
     raise ValueError(err_msg_validation)
 if not any(c.isupper() for c in rule.properties.aws_iam_password):
@@ -29,7 +28,11 @@ if not any(c.isupper() for c in rule.properties.aws_iam_password):
 if not any(c.islower() for c in rule.properties.aws_iam_password):
     raise ValueError(err_msg_validation)
 inputs.aws_iam_password = rule.properties.aws_iam_password
-inputs.aws_iam_password_reset_required = rule.properties.aws_iam_password_reset_required
+inputs.aws_iam_password_reset_required = False
+if rule.properties.aws_iam_password_reset_required.lower() == "yes":
+    inputs.aws_iam_password_reset_required = True
+
+    
 ```
 
 ### Post-Processing Script
