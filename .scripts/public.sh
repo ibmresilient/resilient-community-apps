@@ -28,6 +28,7 @@ README.md
 base_input_types
 fn_alienvault_otx
 fn_ansible
+fn_ansible_tower
 fn_apility
 fn_aws_utilities
 fn_bigfix
@@ -49,6 +50,7 @@ fn_docker
 fn_elasticsearch
 fn_email_header_validation
 fn_exchange
+fn_exchange_online
 fn_floss
 fn_geocoding
 fn_google_cloud_dlp
