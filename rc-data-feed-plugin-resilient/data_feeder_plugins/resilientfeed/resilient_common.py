@@ -1,7 +1,6 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Copyright: (c) 2019, Mark Scherfling <mark.scherfling@ibm.com>
-# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 import calendar
 import io
@@ -12,8 +11,9 @@ import resilient
 import sys
 import tempfile
 import time
+from .db_sync import DBSyncFactory
+from .constants import DF_INC_ID, DF_ORG_ID
 from resilient_lib import IntegrationError, get_file_attachment, write_file_attachment
-from rc_data_feed.lib.type_info import TypeInfo
 from cachetools import TTLCache
 
 CACHE_TTL = 30*60   # 30 minutes
@@ -48,11 +48,7 @@ class Resilient(object):
     TASK_UPDATE = "/tasks"
     GET_INCIDENT_TASKS = "/incidents/{}/tasks"
 
-    # sync properties for incident
-    DF_INC_ID = "df_inc_id"
-    DF_ORG_ID = "df_org_id"
-
-    def __init__(self, opts, rest_client_helper=None):
+    def __init__(self, opts, rest_client_helper):
         self.opts = opts
         self.types = None
 
@@ -67,22 +63,11 @@ class Resilient(object):
         self.cache = TTLCache(maxsize=1, ttl=CACHE_TTL)
         self.log = logging.getLogger(__name__)
 
-    def _init_types(self):
-        """
-        Update an incident and datatables to include the custom definitions.
-        Incident types and Artifact types and playbook Tasks are also synchronized
-        :return: true/false for success
-        """
-        if self.rest_client:
-            types_map = self.rest_client.get('/types')
+        # get the class to maintain the reference map: either datatable or sqlite
+        self.dbsync = DBSyncFactory.get_dbsync(self.rest_client, self.opts.get("db_sync_file", None))
+        if not self.dbsync:
+            raise IntegrationError("Unable to create DBSync object")
 
-            for (type_name, type_dto) in list(types_map.items()):
-                pretty_type_name = TypeInfo.pretify_type_name(type_name)
-
-                parent_types = type_dto['parent_types']
-
-                if not pretty_type_name in self.cache:
-                    self.cache[pretty_type_name] = type_dto
 
     def create_update_type(self, src_inc_id, src_org_id, type_name, payload, orig_id):
         """
@@ -100,23 +85,21 @@ class Resilient(object):
         # determine if we have seen this object before
         #
         sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version = \
-            self.find_sync_row(src_inc_id, src_org_id, mapped_type_name, orig_id)
+            self.dbsync.find_sync_row(src_org_id, src_inc_id, mapped_type_name, orig_id)
 
         # update operation?
-        if sync_row:
+        if sync_type_id:
             self.log.info('updating %s(%s->%s): %s', mapped_type_name, orig_id, sync_type_id, payload)
             self.update_type(mapped_type_name, sync_inc_id, sync_type_id, sync_task_id, payload)
             # update sync row
-            self.update_existing_sync_row(sync_inc_id, row_id, sync_row, sync_row_version)
+            self.dbsync.update_existing_sync_row(sync_inc_id, row_id, sync_row, sync_row_version)
 
         else:
             # make sure the incident already exists for child objects
-            if not mapped_type_name == 'incident':
-                #sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version = \
-                #    self.find_sync_row(src_inc_id, src_org_id, "incident", src_inc_id)
-                sync_inc_id = self._find_incident(src_org_id, src_inc_id)
+            if mapped_type_name != 'incident':
+                sync_inc_id = self.dbsync.find_incident(src_org_id, src_inc_id)
                 if not sync_inc_id:
-                    raise IntegrationError("Incident for Id {} does not exist".format(src_inc_id))
+                    raise IntegrationError("Incident for source Id {} does not exist".format(src_inc_id))
 
             # creating a task? may already have one created when the incident was created
             if mapped_type_name == "task":
@@ -130,17 +113,17 @@ class Resilient(object):
                     self.log.info('duplicate %s(%s->%s): %s', type_name, orig_id, new_type_id, payload)
 
                 # create sync row
-                self.create_sync_row(sync_inc_id, src_inc_id, src_org_id, mapped_type_name, orig_id, new_type_id)
+                self.dbsync.create_sync_row(sync_inc_id, src_org_id, src_inc_id, mapped_type_name, orig_id, new_type_id)
             else:
                 if mapped_type_name == "incident":
-                    self.set_sync_fields(payload, src_org_id, src_inc_id)
+                    set_sync_fields(payload, src_org_id, src_inc_id)
 
                 # create object
                 self.log.info('adding %s(%s): %s', type_name, orig_id, payload)
                 sync_inc_id, new_type_id = self.create_type(mapped_type_name, sync_inc_id, sync_task_id, payload)
 
                 # create sync row
-                self.create_sync_row(sync_inc_id, src_inc_id, src_org_id, mapped_type_name, orig_id, new_type_id)
+                self.dbsync.create_sync_row(sync_inc_id, src_org_id, src_inc_id, mapped_type_name, orig_id, new_type_id)
 
 
     def _find_task(self, sync_inc_id, payload):
@@ -164,7 +147,16 @@ class Resilient(object):
 
 
     def update_type(self, mapped_type_name, sync_inc_id, sync_type_id, sync_task_id, payload):
-        uri = self._get_url(sync_task_id or sync_inc_id, mapped_type_name, update_flag=True)
+        """
+        update the object. This will require reading the current record to collect the existing version number
+        :param mapped_type_name:
+        :param sync_inc_id:
+        :param sync_type_id:
+        :param sync_task_id:
+        :param payload:
+        :return:
+        """
+        uri = get_url(sync_task_id or sync_inc_id, mapped_type_name, update_flag=True)
         # get uri to our record
         update_uri = "{}/{}".format(uri, sync_type_id)
 
@@ -186,13 +178,21 @@ class Resilient(object):
             self.log.exception(e)
 
     def create_type(self, mapped_type_name, sync_inc_id, sync_task_id, payload):
-        uri = self._get_url(sync_task_id or sync_inc_id, mapped_type_name)
+        """
+        create the new object
+        :param mapped_type_name:
+        :param sync_inc_id:
+        :param sync_task_id:
+        :param payload:
+        :return:
+        """
+        uri = get_url(sync_task_id or sync_inc_id, mapped_type_name)
 
         response = self.rest_client.post(uri, payload)
         self.log.debug(response)
 
         # created an incident?
-        if sync_inc_id == None:
+        if sync_inc_id is None:
             sync_inc_id = response['id']
 
         # response a list?
@@ -213,13 +213,24 @@ class Resilient(object):
         if type_name == "note" and payload.get("type", "") == "task":
             # get the sync_task_id for this task comment
             sync_inc_id, sync_task_id, row_id, sync_row, sync_row_version = \
-                self.find_sync_row(src_inc_id, src_org_id, "task", payload.get("task_id"))
+                self.dbsync.find_sync_row(src_org_id, src_inc_id, "task", payload.get("task_id"))
 
             return sync_task_id, "tasknote"
-        else:
-            return None, type_name
+
+        return None, type_name
 
     def upload_attachment(self, src_rest_client, src_inc_id, src_org_id, type_name, payload, orig_id):
+        """
+        attachments may be incident level, associated with tasks, or part of an artifact
+        see write_artifact_attachment for artifact file uploads
+        :param src_rest_client:
+        :param src_inc_id:
+        :param src_org_id:
+        :param type_name:
+        :param payload:
+        :param orig_id:
+        :return:
+        """
         src_artifact_id = src_attachment_id = None
         if payload.get('attachment', {}).get('content_type', None):
             src_artifact_id = orig_id
@@ -230,41 +241,40 @@ class Resilient(object):
         if payload.get("task_id", None):
             src_task_id = payload.get("task_id")
             sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version = \
-                self.find_sync_row(src_inc_id, src_org_id, "task", src_task_id)
+                self.dbsync.find_sync_row(src_org_id, src_inc_id, "task", src_task_id)
             dst_task_id = sync_type_id
         else:
             src_task_id = None
             dst_task_id = None
             # get the target incident
             sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version = \
-                self.find_sync_row(src_inc_id, src_org_id, "incident", src_inc_id)
+                self.dbsync.find_sync_row(src_org_id, src_inc_id, "incident", src_inc_id)
 
-        if not sync_row:
+        if not sync_type_id:
             raise IntegrationError("{} for Id {} does not exist".format(type_name, src_task_id if src_task_id else src_inc_id))
+
+        # read the attachment from the source Resilient
+        attachment_contents = get_file_attachment(src_rest_client, src_inc_id, attachment_id=src_attachment_id,
+                                                  task_id=src_task_id, artifact_id=src_artifact_id)
+
+        if sys.version_info.major < 3:
+            file_handle = io.StringIO(attachment_contents)
         else:
-            attachment_contents = get_file_attachment(src_rest_client, src_inc_id, attachment_id=src_attachment_id,
-                                                      task_id=src_task_id, artifact_id=src_artifact_id)
+            file_handle = io.BytesIO(attachment_contents)
 
-            if sys.version_info.major < 3:
-                file_handle = io.StringIO(attachment_contents)
-            else:
-                file_handle = io.BytesIO(attachment_contents)
+        if src_artifact_id:
+            response = self.write_artifact_file(payload['attachment']['name'], file_handle,
+                                                sync_inc_id, payload)
+        else:
+            response = write_file_attachment(self.rest_client, payload['name'], file_handle, sync_inc_id,
+                                             task_id=dst_task_id, content_type=payload['content_type'])
 
-            if src_artifact_id:
-                response = self.write_artifact_attachment(self.rest_client, payload['attachment']['name'], file_handle,
-                                                          sync_inc_id, payload)
-            else:
-                response = write_file_attachment(self.rest_client, payload['name'], file_handle, sync_inc_id,
-                                                 task_id=dst_task_id, content_type=payload['content_type'])
+        # create sync row
+        self.dbsync.create_sync_row(sync_inc_id, src_org_id, src_inc_id, type_name, orig_id, response.get('id', None))
 
-            # create sync row
-            self.create_sync_row(sync_inc_id, src_inc_id, src_org_id, type_name, orig_id, response.get('id', None))
-
-    def write_artifact_attachment(self, res_client, file_name, datastream, incident_id, payload):
+    def write_artifact_file(self, file_name, datastream, incident_id, payload):
         """
         call the Resilient REST API to create the attachment on incident or task
-
-        :param res_client: required for communication back to resilient
         :param file_name: required, name of the attachment
         :param datastream: required, stream of bytes
         :param incident_id: required
@@ -289,9 +299,9 @@ class Resilient(object):
                 temp_file.close()
 
                 # Create a new artifact attachment by calling resilient REST API
-                artifact_uri = "{}/files".format(self._get_url(incident_id, "artifact"))
+                artifact_uri = "{}/files".format(get_url(incident_id, "artifact"))
 
-                new_attachment = res_client.post_artifact_file(artifact_uri,
+                new_attachment = self.rest_client.post_artifact_file(artifact_uri,
                                                                payload.get("type", None),
                                                                temp_file.name,
                                                                description=payload.get("description", None),
@@ -305,162 +315,14 @@ class Resilient(object):
 
         return new_attachment
 
-    def _get_url(self, inc_id, type_name, update_flag=False):
-        if type_name == "task" and update_flag:
-            return Resilient.TASK_UPDATE
 
-        if URI_LOOKUP_BY_TYPE.get(type_name, None):
-            return URI_LOOKUP_BY_TYPE[type_name].format(inc_id)
-        else:
-            return Resilient.DATATABLE.format(inc_id, type_name) # if type not found, it's a datatable
-
-    def format_datatable_cells(self, payload):
-        """
-        {'id': 456, 'reported_on': 'Thu Feb 13 16:44:53 UTC 2020', 'template_id': 12, 'template_project': '2nd Project', 'template_name': 'panorama_add_malicious_ip', 'template_description': '', 'template_playbook': 'panorama_add_malicious_ip.yml', 'template_last_run': '2019-12-10 04:32:52.861234Z'}
-        :param payload:
-        :return:
-        """
-        cells = {}
-        for k, v in payload.items():
-            if not k == "id":
-                cells[k] = { "value": v }
-
-        return payload['id'], cells
-
-
-    def create_incident(self, payload):
-        """
-        call the resilient api to create an incident
-        :param payload:
-        :return:
-        """
-        uri = Resilient.INCIDENT_URI
-        return self._post(uri, payload)
-
-    def update_incident(self, inc_id, incident_data):
-        """
-        call the Resilient API to update an incident
-        This function uses the resilient library Patch object to compose the json needed for
-        the update operation
-        :param inc_id:
-        :param upgrade_record:
-        :return: result payload of the patch operation
-        """
-        try:
-            incident_uri = "/".join((Resilient.INCIDENT_URI, str(inc_id)))
-
-            # get the existing record with current values
-            current_inc = self.rest_client.get(incident_uri)
-
-            patch = resilient.Patch(current_inc)
-
-            result = None
-            changes = False
-            if incident_data.get_param_attributes() and incident_data.get_param_attributes():
-                for name, value in incident_data.get_param_attributes().items():
-                    if name not in ('notes', 'artifacts', 'customfields'):
-                        patch.add_value(name, incident_data.get_param_value(name, value))
-                        changes = True
-
-                if incident_data.get_customfields():
-                    for name, value in incident_data.get_customfields().items():
-                        patch.add_value(name, value)
-                        changes = True
-
-                if changes:
-                    patch_result = self.rest_client.patch(incident_uri, patch)
-                    result = self._chk_status(patch_result)
-
-            # adding notes and artifacts?
-            if incident_data.get_notes():
-                comments_uri = "/".join((incident_uri, "comments"))
-                for note_payload in incident_data.get_notes():
-                    note_result = self.rest_client.post(comments_uri, note_payload)
-                    self._chk_status(note_result)
-
-            if incident_data.get_artifacts():
-                artifacts_uri = "/".join((incident_uri, "artifacts"))
-                for artifact_payload in incident_data.get_artifacts():
-                    artifact_result = self.rest_client.post(artifacts_uri, artifact_payload)
-                    self._chk_status(artifact_result)
-
-            return result if result else {}
-
-        except Exception as err:
-            # incident not found
-            raise IntegrationError(err)
-
-    def delete_incident(self, inc_id):
-        """
-        call the Resilient API to delete an incident
-        :param inc_id:
-        :return:
-        """
-        uri = "/".join((Resilient.INCIDENT_URI, str(inc_id)))
-
-        try:
-            result = self.rest_client.delete(uri)
-        except Exception as err:
-            raise IntegrationError(err)
-
-        return result
-
-    def add_artifact(self, inc_id, payload):
-        """
-        call the Resilient API to add an artifact to an existing incident
-        :param inc_id:
-        :param payload:
-        :return:
-        """
-        uri = "/".join((Resilient.INCIDENT_URI, str(inc_id), Resilient.ARTIFACT_URI))
-
-        return self._post(uri, payload)
-
-    def add_note(self, inc_id, payload):
-        """
-        call the Resilient API to add a note to an existing incident
-        :param inc_id:
-        :param payload:
-        :return:
-        """
-        uri = "/".join((Resilient.INCIDENT_URI, str(inc_id), Resilient.COMMENT_URI))
-
-        return self._post(uri, payload)
-
-    def _post(self, uri, payload):
-        """
-        internal function to call the Resilient POST operation
-        :param uri:
-        :param payload:
-        :return:
-        """
-        try:
-            result = self.rest_client.post(uri, payload)
-        except Exception as err:
-            raise IntegrationError(err)
-
-        return result
-
-    def _chk_status(self, resp, rc=200):
-        """
-        check the return status. If return code is not met, raise IntegrationError,
-        if success, return the json payload
-        :param resp:
-        :param rc:
-        :return:
-        """
-        if hasattr(resp, "status_code"):
-            if isinstance(rc, list):
-                if resp.status_code < rc[0] or resp.status_code > rc[1]:
-                    raise IntegrationError("status code failure: {}".format(resp.status_code))
-            elif resp.status_code != rc:
-                raise IntegrationError("status code failure: {}".format(resp.status_code))
-
-            return resp.json()
-
-        return {}
-
+    '''
     def get_object_schema(self, object_type):
+        """
+        
+        :param object_type: 
+        :return: 
+        """
         if not self.cache.get(object_type, None):
             self.cache[object_type] = self.rest_client.get(Resilient.TYPES_URI.format(object_type))
 
@@ -487,7 +349,7 @@ class Resilient(object):
             except Exception:
                 # check that we got a 400
                 pass
-
+    
     def get_field_value(self, object_type, field_name, field_value):
         """
         convert a field value used for select values to a value
@@ -531,154 +393,33 @@ class Resilient(object):
         :return: json schema for field
         """
         return self.get_object_schema(object_type)['fields'].get(field_name, None)
+    '''
 
-    def find_sync_row(self, orig_incident_id, orig_org_id, type_name, type_id):
-        key = self.make_sync_key(orig_org_id, orig_incident_id, type_name, type_id)
-        query = {
-            "org_id": self.rest_client.org_id,
-            "query": str(type_id),
-            "types": [
-                "datatable"
-            ],
-            "filters": {
-                "data_feeder_sync": [
-                    {
-                        "conditions": [
-                            {
-                                "field_name": "key",
-                                "method": "equals",
-                                "value": [
-                                    key
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "min_required_results": 0
-        }
+# S T A T I C
+def get_url(inc_id, type_name, update_flag=False):
+    """
+    get the uri based on the type of field to create/update
+    :param inc_id: most uri's include incident_id
+    :param type_name:
+    :param update_flag: task updates use a different uri
+    :return: uri
+    """
+    if type_name == "task" and update_flag:
+        return Resilient.TASK_UPDATE
 
-        response = self.rest_client.search(query)
-        if len(response['results']) > 1:
-            raise IntegrationError("Too many results indicates a consistency error")
+    if URI_LOOKUP_BY_TYPE.get(type_name, None):
+        return URI_LOOKUP_BY_TYPE[type_name].format(inc_id)
 
-        if not response['results']:
-            return None, None, None, None, None
+    return Resilient.DATATABLE.format(inc_id, type_name) # if type not found, it's a datatable
 
-        result = response['results'][0]
+def set_sync_fields(payload, orig_org_id, orig_inc_id):
+    """
+    keep a record of which incident created the copy
+    :param payload:
+    :param orig_org_id:
+    :param orig_inc_id:
+    :return:
+    """
+    payload['properties'][DF_ORG_ID] = orig_org_id
+    payload['properties'][DF_INC_ID] = orig_inc_id
 
-        # get the type_id
-        for _, item in result['result']['cells'].items():
-            if item['id']['name'] == 'new_id':
-                type_id = item['value']
-                break
-
-        return result['inc_id'], type_id, result['obj_id'], result['result']['cells'], result['result']['version']
-
-    def make_sync_key(self, orig_org_id, orig_incident_id, type_name, type_id):
-        """
-        build the key to the data_feeder_sync datatable
-        :param orig_org_id:
-        :param orig_incident_id:
-        :param type_name:
-        :param type_id:
-        :return: <org_id>:<inc_id>:<type_name>:<type_id>
-        """
-        return ":".join((str(orig_org_id), str(orig_incident_id), type_name, str(type_id)))
-
-    def update_existing_sync_row(self, inc_id, row_id, cells, version):
-        """
-        update last_sync time for datarow
-        :param inc_id:
-        :param row_id:
-        :param cells:
-        :param version:
-        :return:
-        """
-
-        new_cells = cells.copy()
-        # update the last sync field
-        for cell, body in new_cells.items():
-            if body['id']['name'] == 'last_sync':
-                body['value'] = self._get_current_timestamp()
-
-        payload = {
-            "cells": new_cells,
-            "version": version
-        }
-
-        uri = "{}/{}".format(Resilient.SYNC_DATATABLE_URI.format(inc_id), row_id)
-        return self.rest_client.put(uri, payload)
-
-    def create_sync_row(self, inc_id, orig_inc_id, orig_org_id, type_name, orig_id, new_id):
-        """
-        create a new row in our sync datatable to track this information
-        :param inc_id:
-        :param orig_inc_id:
-        :param orig_org_id:
-        :param type_name:
-        :param orig_id:
-        :param new_id:
-        :return:
-        """
-        key = self.make_sync_key(orig_org_id, orig_inc_id, type_name, orig_id)
-        payload = {
-            "cells": {
-                "key": {
-                    "value": key
-                },
-                "new_id": {
-                    "value": new_id
-                },
-                "last_sync": {
-                    "value": self._get_current_timestamp()
-                }
-            }
-        }
-
-        self.log.debug(payload)
-        uri = Resilient.SYNC_DATATABLE_URI.format(inc_id)
-        return self.rest_client.post(uri, payload)
-
-    def _find_incident(self, src_org_id, src_inc_id):
-        """
-        Find the incident synchronized from a given inc_id and org_id
-        :param src_org_id:
-        :param src_inc_id:
-        :return: found inc_id or None
-        """
-        uri = "/incidents/query"
-
-        query = {
-            "filters": [
-                {
-                    "conditions": [
-                        {
-                            "field_name": "properties.{}".format(Resilient.DF_ORG_ID),
-                            "method": "equals",
-                            "value": src_org_id
-                        },
-                        {
-                            "field_name": "properties.{}".format(Resilient.DF_INC_ID),
-                            "method": "equals",
-                            "value": src_inc_id
-                        }
-                    ]
-                }
-            ]
-        }
-
-        self.log.debug(query)
-
-        response = self.rest_client.post(uri, query)
-        if response:
-            return response[0]['id']
-
-        return None
-
-    def set_sync_fields(self, payload, orig_org_id, orig_inc_id):
-        payload['properties'][Resilient.DF_ORG_ID] = orig_org_id
-        payload['properties'][Resilient.DF_INC_ID] = orig_inc_id
-
-    def _get_current_timestamp(self):
-        return calendar.timegm(time.gmtime())*1000

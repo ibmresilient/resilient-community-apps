@@ -19,5 +19,8 @@ api_key_secret=
 port=1443
 org=resilient
 cafile=false
+# optionally use sqlite db to retain mapping between resilient instances
+# if not used, a datatable in the resulting incident is maintained
+#db_sync_file=/path/to/file
 """
     return config_data
