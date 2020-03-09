@@ -126,16 +126,18 @@ class FunctionComponent(ResilientComponent):
         rtn = []
         # Get a shortcut to this class.
         cls = FunctionComponent
-        user_access_key_ids, user_policies, user_groups, user_tags = ([] for _ in range(4))
+        user_access_key_ids, user_policies, user_inline_policies, user_groups, user_tags = ([] for _ in range(5))
         # Property query lookup table.
         prop_params = [
             ["Groups", "list_groups_for_user", group_filter, user_groups],
             ["Policies", "list_attached_user_policies", policy_filter, user_policies],
+            ["InlinePolicies", "list_user_policies", policy_filter, user_inline_policies],
             ["AccessKeyIds", "list_access_keys", access_key_filter, user_access_key_ids],
             ["Tags", "list_user_tags", None, user_tags]
         ]
         for user in rtn_users:
             skip_prop = False
+            has_managed_policies = True
             user_name = user["UserName"]
             # When a filter is defined for groups, polices or access key ids the 'group_count', 'policy_count' or
             # 'access_key_filter' will be returned in the result as a tuple value. In all casees if the count is
@@ -145,14 +147,29 @@ class FunctionComponent(ResilientComponent):
                 # Don't perform property lookup if query_type = "access_keys" and the query is for groups, policies
                 # or tags.
                 if query_type and query_type.lower() == "access_keys" and prop_param[0] in ["Groups", "Policies",
-                                                                                            "Tags"]:
+                                                                                            "PoliciesInline", "Tags"]:
                     pass
                 else:
                     (skip_prop, prop_param[3]) = cls.process_user_property(iam_cli, prop_param[1], user_name,
                                                                             prop_param[2], return_filtered)
                     if skip_prop:
-                        break
+                        if prop_param[0] == "InlinePolicies"  and not has_managed_policies:
+                            break
+                        if prop_param[0] == "Policies":
+                            has_managed_policies = False
+                        else:
+                            break
+
                     if prop_param[3]:
+                        if prop_param[0] == "InlinePolicies":
+                            # Add any user in-line policies at beginning of user 'policies' result.
+                            for user_policy in prop_param[3]:
+                                if user.get("Policies", None):
+                                    # Add user in-line policies at beginning of result.
+                                    user["Policies"][:0] = [user_policy]
+                                else:
+                                    user["Policies"] = [user_policy]
+
                         if prop_param[0] == "AccessKeyIds":
                             for j in range(len(prop_param[3])):
                                 # Only perform following queries if the list query type is for 'access_keys'.
@@ -160,7 +177,9 @@ class FunctionComponent(ResilientComponent):
                                     prop_param[3][j]["key_last_used"] = \
                                         iam_cli.get("get_access_key_last_used",
                                                     AccessKeyId=prop_param[3][j]['AccessKeyId'])
+
                         user[prop_param[0]] = prop_param[3]
+
             # Skip user if boolean is set to 'True' in inner loop.
             if skip_prop:
                 continue
