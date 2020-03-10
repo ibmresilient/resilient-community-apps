@@ -181,4 +181,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_utilities | 1.0.10 | IBM Resilient | http://ibm.biz/resilientcommunity |
+| fn_utilities | 1.0.12 | IBM Resilient | http://ibm.biz/resilientcommunity |
