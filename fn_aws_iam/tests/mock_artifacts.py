@@ -271,7 +271,8 @@ def get_func_responses(op):
                                           'LoginProfileExists': 'Yes',
                                           'PasswordLastUsed': '2019-12-10 17:10:40',
                                           'Path': '/',
-                                          'Policies': [{'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all',
+                                          'Policies': [ {'PolicyName': 'inline_deny_all'},
+                                                        {'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all',
                                                         'PolicyName': 'deny_all'},
                                                        {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll',
                                                         'PolicyName': 'AWSDenyAll'}],
@@ -370,19 +371,12 @@ def get_func_responses(op):
         ),
         "list_groups_for_user_empty": ([]),
         "list_attached_user_policies": ([{'PolicyName': 'deny_all',
-                                            'PolicyArn': 'arn:aws:iam::012345678901:policy/deny_all'},
+                                            'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all'},
                                            {'PolicyName': 'AWSDenyAll', 'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll'}]
                                        ),
         "list_attached_user_policies_empty": ([]),
-        "list_user_policies": (['inline_deny_all']),
+        "list_user_policies": ([{'PolicyName': 'inline_deny_all'}]),
         "list_user_policies_empty": (''),
-
-        "list_attached_user_policies": ([{'PolicyName': 'deny_all',
-                                          'PolicyArn': 'arn:aws:iam::123456789012:policy/deny_all'},
-                                         {'PolicyName': 'AWSDenyAll',
-                                          'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll'}]
-                                        ),
-
         "list_user_tags": ([{'Key': 'Test_tag1', 'Value': 'A test TAG'},
                             {'Key': 'Tes Tag2', 'Value': 'Another test tag'}]
                           ),
@@ -594,7 +588,9 @@ def mocked_aws_iam_client(*args, **kwargs):
                 else:
                     return get_func_responses("list_attached_user_policies")
             if op == "list_user_policies":
-                if "iam_list_User" in kwargs["UserName"]:
+                if "with_inline" in kwargs["UserName"]:
+                    return get_func_responses("list_user_policies")
+                elif "iam_list_User" in kwargs["UserName"]:
                     return []
                 elif "_empty" in kwargs["UserName"]:
                     return get_func_responses("list_user_policies_empty")
