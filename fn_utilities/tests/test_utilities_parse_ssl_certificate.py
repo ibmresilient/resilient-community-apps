@@ -16,7 +16,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
 
 
-def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=10):
+def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=30):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_parse_ssl_certificate", function_params)
     circuits.manager.fire(evt)
