@@ -70,7 +70,7 @@ class FunctionComponent(ResilientComponent):
                 # 'aws_iam_user_name'. Include the status of each attempt in the returned result.
                 for policy_name in re.split(r"\s*,\s*", aws_iam_policy_names):
                     # Test if policy_name is attached for user name and get arn.
-                    if inline_policies and policy_name in inline_policies:
+                    if inline_policies and policy_name in [ip["PolicyName"] for ip in inline_policies]:
                         if "PolicyArn" in params:
                             # Delete 'PolicyArn' from 'params' if in-line policy.
                             del params["PolicyArn"]
