@@ -153,15 +153,23 @@ class FunctionComponent(ResilientComponent):
                     (skip_prop, prop_param[3]) = cls.process_user_property(iam_cli, prop_param[1], user_name,
                                                                             prop_param[2], return_filtered)
                     if skip_prop:
-                        if prop_param[0] == "InlinePolicies"  and not has_managed_policies:
+                        if prop_param[0] == "InlinePolicies" and has_managed_policies:
+                            # If managed policies already found for a filter reset skip user flag.
+                            skip_prop =  False
+                        elif prop_param[0] == "InlinePolicies" and not has_managed_policies:
+                            # Neither managed not in-line policies found for a filter, skip user.
                             break
-                        if prop_param[0] == "Policies":
+                        elif prop_param[0] == "Policies":
                             has_managed_policies = False
                         else:
+                            # Skip user.
                             break
 
                     if prop_param[3]:
                         if prop_param[0] == "InlinePolicies":
+                            if has_managed_policies:
+                                # If managed properties were already found don't skip user.
+                                skip_prop = False
                             # Add any user in-line policies at beginning of user 'policies' result.
                             for user_policy in prop_param[3]:
                                 if user.get("Policies", None):
@@ -169,7 +177,6 @@ class FunctionComponent(ResilientComponent):
                                     user["Policies"][:0] = [user_policy]
                                 else:
                                     user["Policies"] = [user_policy]
-
                         if prop_param[0] == "AccessKeyIds":
                             for j in range(len(prop_param[3])):
                                 # Only perform following queries if the list query type is for 'access_keys'.
@@ -177,8 +184,8 @@ class FunctionComponent(ResilientComponent):
                                     prop_param[3][j]["key_last_used"] = \
                                         iam_cli.get("get_access_key_last_used",
                                                     AccessKeyId=prop_param[3][j]['AccessKeyId'])
-
-                        user[prop_param[0]] = prop_param[3]
+                        if prop_param[0] != "InlinePolicies":
+                            user[prop_param[0]] = prop_param[3]
 
             # Skip user if boolean is set to 'True' in inner loop.
             if skip_prop:
