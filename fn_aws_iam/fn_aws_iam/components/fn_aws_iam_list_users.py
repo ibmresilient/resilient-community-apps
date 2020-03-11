@@ -147,7 +147,7 @@ class FunctionComponent(ResilientComponent):
                 # Don't perform property lookup if query_type = "access_keys" and the query is for groups, policies
                 # or tags.
                 if query_type and query_type.lower() == "access_keys" and prop_param[0] in ["Groups", "Policies",
-                                                                                            "PoliciesInline", "Tags"]:
+                                                                                            "InlinePolicies", "Tags"]:
                     pass
                 else:
                     (skip_prop, prop_param[3]) = cls.process_user_property(iam_cli, prop_param[1], user_name,
