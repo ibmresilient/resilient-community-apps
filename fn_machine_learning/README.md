@@ -7,17 +7,17 @@ This function package provides the following feature to be used in a workflow:
 Make a prediction of a selected field of a given incident, using a pre-built machine learning model.
 
 In addition, this package contains a command line tool used to build a machine learning model.
-Please refer to the User Guide for instructions on building the model and running predictions.
+Please refer to the User Guide for explanation on building the model and running predictions.
 
 ## System Requirements
 - Resilient Server version 30 or later
 - Ability to connect to Resilient server with HTTPS on port 443 and 65001
 
-## Package Dependences
-- sklearn 0.19.2
-- pandas 0.23.3
-- numpy 1.12.1
-- scipy 1.1.0
+## Package Dependencies
+- sklearn 0.20.4
+- pandas 0.24.2
+- numpy 1.16.6
+- scipy 1.2.3
 - resilient_circuits version 30 or later
 
 ## Installation
@@ -45,7 +45,7 @@ Run with: `resilient-circuits customize` to install function definitions and sam
 ## Start
 Start this function app with: `resilient-circuits run`
 
-## Build a mechine learning model
+## Build a machine learning model
 Use the command line tool
 ```
 res-ml
@@ -61,7 +61,9 @@ run:
 res-ml config
 ```
 
-The resulting file, ml.config, will contain the following:
+to create ml.config as well as res-ml.log.
+
+ml.config, will contain the following:
 
 ```
 [resilient]
@@ -156,6 +158,6 @@ res-ml rebuild -i incident_prediction.ml
 As a rule, it is recommended that customers rebuild their model once a week.
 
 There are more advanced options. Please refer to the User Guide.
-## Uninstall,
+## Uninstall
 
     pip uninstall fn-machine-learning
