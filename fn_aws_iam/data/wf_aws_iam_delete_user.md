@@ -435,36 +435,7 @@ Result: {
 # List of fields in datatable for fn_aws_iam_detach_user_policies  script
 DATA_TBL_FIELDS = ["Policies"]
 FN_NAME = "fn_aws_iam_detach_user_policies"
-WF_NAME = "Delete User"
-# Processing
-CONTENT = results.content
-INPUTS = results.inputs
-QUERY_EXECUTION_DATE = results["metrics"]["timestamp"]
-DEBUG_SCRIPT=False
-
-def main():
-    note_text = ''
-    ##  AWS IAM - fn_aws_iam_detach_user_policies script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'PolicyName': 'AWSDenyAll', 'Status': 'OK'}
-                      {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'PolicyName': "AWSDenyAll", 'Status": 'OK'},
-                  {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
-#  Globals
-# List of fields in datatable for fn_aws_iam_detach_user_policies  script
-DATA_TBL_FIELDS = ["Policies"]
-FN_NAME = "fn_aws_iam_detach_user_policies"
-WF_NAME = "Example: AWS IAM: Delete User For Artifact"
+WF_NAME = "Example: AWS IAM: Delete User"
 # Processing
 CONTENT = results.content
 INPUTS = results.inputs
@@ -493,35 +464,6 @@ def main():
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> " \
                         "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
                 .format(WF_NAME, len(no_such_entity_policies), ", ".join(str(i) for i in no_such_entity_policies), INPUTS["aws_iam_user_name"], FN_NAME)
-    else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
-            .format(WF_NAME, FN_NAME)
-    if DEBUG_SCRIPT:
-        incident.addNote(helper.createRichText(note_text))
-
-if __name__ == "__main__":
-    main()
- = 0
-    no_such_entity = 0
-    added_policies = []
-    no_such_entity_policies = []
-    if CONTENT:
-        for pol_stat in CONTENT:
-            if pol_stat["Status"] == "OK":
-                added += 1
-                added_policies.append(pol_stat["PolicyName"])
-            else:
-                no_such_entity += 1
-                no_such_entity_policies.append(pol_stat["PolicyName"])
-        if added_policies:
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> detached " \
-                        "for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(added_policies), ", ".join(str(i) for i in added_policies), INPUTS["aws_iam_user_name"], FN_NAME)
-        if no_such_entity:
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: There were <b>{1}</b> Policies <b>{2}</b> " \
-                        "which did not exist for user <b>{3}</b> for Resilient function <b>{4}</b>."\
-                .format(WF_NAME, len(no_such_entity_policies), ", ".join(str(i) for i in no_such_entity_policies), INPUTS["aws_iam_user_name"], FN_NAME)
-        row.Policies = ''
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\
             .format(WF_NAME, FN_NAME)

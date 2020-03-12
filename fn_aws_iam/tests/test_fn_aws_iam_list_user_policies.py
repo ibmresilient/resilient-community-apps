@@ -59,8 +59,7 @@ class TestFnAwsIamListUserPolicies:
         }
         expected_result = []
         if expected_results:
-            for user_policy in expected_results[0]:
-                expected_result[:0] = [{"PolicyName": user_policy}]
+            expected_result.extend(expected_results[0])
             expected_result.extend(expected_results[1])
         results = call_fn_aws_iam_list_user_policies_function(circuits_app, function_params)
         assert_keys_in(results, *keys)

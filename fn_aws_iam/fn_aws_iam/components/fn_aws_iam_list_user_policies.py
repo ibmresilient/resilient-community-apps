@@ -48,7 +48,7 @@ class FunctionComponent(ResilientComponent):
             rtn = iam_cli.get("list_attached_user_policies", paginate=True, **params)
             # Add user in-line policies at beginning of result.
             for user_policy in iam_cli.get("list_user_policies", paginate=True, **params):
-                rtn[:0] = [{"PolicyName": user_policy}]
+                rtn[:0] = [user_policy]
 
             results = rp.done(True, rtn)
 

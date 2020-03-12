@@ -185,7 +185,12 @@ class AwsIamClient():
             for response in paginator.paginate(**kwargs):
                 if not result_type:
                     result_type = self._get_type_from_response(response, SUPPORTED_PAGINATE_TYPES)
-                result.extend(response[result_type])
+                if op == "list_user_policies":
+                    # Add extra key to result for in-line policies to facilitate filtering.
+                    for pol in response[result_type]:
+                        result.extend([{"PolicyName": pol}])
+                else:
+                    result.extend(response[result_type])
 
         except self.iam.exceptions.NoSuchEntityException:
             return {"Status": "NoSuchEntity"}
