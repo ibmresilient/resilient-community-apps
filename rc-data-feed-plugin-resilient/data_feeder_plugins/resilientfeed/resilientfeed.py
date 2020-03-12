@@ -10,7 +10,7 @@ from .resilient_common import Resilient
 
 LOG = logging.getLogger(__name__)
 
-# use for parsing owner or member values: First Last (a@example.com)
+# use for parsing owner or member values to return email addr: First Last (a@example.com)
 USER_REGEX = re.compile(r".*\((.*)\)")
 
 """
@@ -36,8 +36,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             # remove org reference
             orig_id, cleaned_payload = clean_payload(payload)
 
-            LOG.info('adding %s(%s): %s', type_name, orig_id, cleaned_payload)
-
             self.resilient_target.upload_attachment(self.resilient_source.rest_client, context.inc_id,
                                                     self.resilient_source.rest_client.org_id, type_name,
                                                     cleaned_payload, orig_id)
@@ -55,9 +53,10 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             # convert selection lists and multi-selection lists to values, not id's
             new_payload = self.convert_values(context, all_field_names, None, payload, self._is_datatable(payload))
 
-            # remove org reference
+            # remove fields unrelated to creating a new type
             orig_id, cleaned_payload = clean_payload(new_payload)
 
+            # perform the creation in the new resilient org
             self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
                                                      type_name, cleaned_payload, orig_id)
 
@@ -89,7 +88,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             if datatable_flag and all_field_names.get(field, {}).get('name', None):
                 field_key = all_field_names[field]['name']
                 if all_field_names[field]['input_type'] in ('select', 'multiselect'):
-                    new_value = {"value": self.convert_selects(field_key, payload[field]['value'], all_field_names[field])}
+                    new_value = {"value": self.convert_selects(field_key, payload[field].get('value', None),
+                                                               all_field_names[field])}
                 else:
                     new_value = {"value": payload[field].get('value', None)}
 
@@ -180,32 +180,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         new_payload = dict((key, value) for key, value in payload.items() if value)
         return new_payload
 
-    """
-    def get_custom_fields(self, type_name):
-        custom_fields = [
-            {
-                "name": "data_feeder_original_incident_id",
-                "text": "original incident_id",
-                "prefix": "properties",
-                "type_id": 0,
-                "tooltip": "data feeder reference",
-                "placeholder": "",
-                "input_type": "number"
-            },
-            {
-                "name": "data_feeder_original_org_id",
-                "text": "original org_id",
-                "prefix": "properties",
-                "type_id": 0,
-                "tooltip": "data feeder reference",
-                "placeholder": "",
-                "input_type": "number"
-            }
-        ]
-
-        return custom_fields + self.resilient_source.get_custom_fields(type_name)
-    """
-
 # S T A T I C
 def clean_payload(payload):
     """
@@ -224,5 +198,9 @@ def clean_payload(payload):
     payload.pop('reng_version', None)
     payload.pop('instr_text', None) # legacy field
     payload.pop('at_id', None)
+    if isinstance(payload.get('phase_id', None), dict):
+        payload['phase_id'].pop('id', None)
+    if isinstance(payload.get('category_id', None), dict):
+        payload['category_id'].pop('id', None)
 
     return orig_id, payload

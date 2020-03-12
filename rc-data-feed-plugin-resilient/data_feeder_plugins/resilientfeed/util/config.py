@@ -10,6 +10,7 @@ def config_section_data():
     """
     config_data = u"""[resilient_feed]
 class=ResilientFeed
+# provide configuration information to the target Resilient and Organization
 host=localhost
 #proxy_host=
 api_key_id=
@@ -19,8 +20,7 @@ api_key_secret=
 port=1443
 org=resilient
 cafile=false
-# optionally use sqlite db to retain mapping between resilient instances
-# if not used, a datatable in the resulting incident is maintained
-#db_sync_file=/path/to/file
+# identify a sqlite db file to retain mapping between resilient instances.
+db_sync_file=/path/to/file
 """
     return config_data

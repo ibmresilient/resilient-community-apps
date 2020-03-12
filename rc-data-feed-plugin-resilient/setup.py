@@ -15,7 +15,8 @@ setup(
     install_requires=[
         'cachetools',
         'rc_data_feed',
-        'resilient'
+        'resilient',
+        'resilient-lib'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -24,7 +25,8 @@ setup(
         'Programming Language :: Python',
     ],
     entry_points={
-        "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.elasticfeed.util.config:config_section_data"],
+        "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.resilient.util.config:config_section_data"],
+        "resilient.circuits.customize": ["customize = data_feeder_plugins.resilient.util:customization_data"],
     },
     tests_require=["pytest < 4.0.0",
                    "pytest_resilient_circuits"]

@@ -6,30 +6,31 @@ import calendar
 import logging
 import sqlite3
 import time
-from .constants import DF_ORG_ID, DF_INC_ID
+#from .constants import DF_ORG_ID, DF_INC_ID
 from sqlite3 import Error
-from resilient_lib import IntegrationError
+#from resilient_lib import IntegrationError
 
 class DBSyncFactory:
     @staticmethod
     def get_dbsync(rest_client, sqllite_file):
         if sqllite_file:
-            return SQLiteDBSync(sqllite_file)
+            return SQLiteDBSync(rest_client.org_id, sqllite_file)
 
-        return ResDBSync(rest_client)
+        return None
 
 class DBSyncInterface:
     """
     Interface class for methods associated with maintaining mappings between the source and destination
     Resilient objects
     """
-    def find_sync_row(self, orig_org_id, orig_inc_id, type_name, type_id):
+    def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
         pass
 
-    def update_existing_sync_row(self, inc_id, row_id, cells, version):
+    def update_existing_sync_row(self, target_inc_id, type_name, target_type_id):
         pass
 
-    def create_sync_row(self, inc_id, orig_org_id, orig_inc_id, type_name, orig_id, new_id):
+    def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
+                        new_inc_id, new_type_id):
         pass
 
     def find_incident(self, orig_org_id, orig_inc_id):
@@ -39,7 +40,7 @@ class DBSyncInterface:
         """
         build the key to the data_feeder_sync datatable
         :param orig_org_id:
-        :param orig_incident_id:
+        :param orig_inc_id:
         :param type_name:
         :param type_id:
         :return: <org_id>:<inc_id>:<type_name>:<type_id>
@@ -58,85 +59,117 @@ class SQLiteDBSync(DBSyncInterface):
     """
     DBTABLE = "data_feeder_sync"
 
-    SYNC_TABLE_DEF = """-- projects table
-CREATE TABLE IF NOT EXISTS {} (
-    key string PRIMARY KEY,
-    new_id int NOT NULL,
+    SYNC_TABLE_DEF = """-- mapping table
+CREATE TABLE IF NOT EXISTS {table_name} (
+    type_name text,
+    org1 int,
+    org1_inc_id int,
+    org1_type_id int,
+    org2 int,
+    org2_inc_id int,
+    org2_type_id int,
     last_sync timestamp,
-    inc_id int NOT NULL
-);""".format(DBTABLE)
+    PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id)
+);""".format(table_name=DBTABLE)
 
-    SYNC_INSERT = """INSERT INTO {} (key, new_id, last_sync, inc_id) VALUES(?, ?, ?, ?);""".format(DBTABLE)
-    SYNC_UPDATE = """UPDATE {} set last_sync=? where key=?""".format(DBTABLE)
-    SYNC_SELECT = """SELECT * FROM {} WHERE key=?""".format(DBTABLE)
+    SYNC_TABLE_INDEX = """CREATE [UNIQUE] INDEX IF NOT EXISTS ix_{table_name} 
+ON table_name(org2, org2_inc_id, type_name, org2_type_id);""".format(table_name=DBTABLE)
 
-    def __init__(self, sqlite_file):
+    SYNC_INSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync) VALUES(?, ?, ?, ?, ?, ?, ?, ?);""".format(table_name=DBTABLE)
+    SYNC_UPDATE = """UPDATE {table_name} set last_sync=? where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
+    SYNC_SELECT = """SELECT * FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=?""".format(table_name=DBTABLE)
+    SYNC_SELECT_REVERSE = """SELECT * FROM {table_name} WHERE org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
+
+    def __init__(self, org_id, sqlite_file):
+        self.org_id = org_id
         self.log = logging.getLogger(__name__)
 
         try:
             self.sqlite_db = sqlite3.connect(sqlite_file)
 
-            self.create_table(SQLiteDBSync.SYNC_TABLE_DEF)
+            self.create_table(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.SYNC_TABLE_INDEX)
         except Error as e:
             self.log.error("Unable to use file for data feeder sync")
 
-    def create_table(self, create_table_sql):
+    def create_table(self, *args):
         """ create a table from the create_table_sql statement
         :param create_table_sql: a CREATE TABLE statement
         :return:
         """
         try:
             c = self.sqlite_db.cursor()
-            c.execute(create_table_sql)
+            for arg in args:
+                c.execute(arg)
         except Error as e:
-            self.log.error("Unable to create table for data feeder sync")
+            self.log.error("Unable to create table for data feeder sync", e)
 
 
-    def find_sync_row(self, orig_org_id, orig_inc_id, type_name, type_id):
-        key = self.make_sync_key(orig_org_id, orig_inc_id, type_name, type_id)
-        self.log.debug(key)
+    def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
+        """
+
+        :param orig_org_id:
+        :param orig_inc_id:
+        :param type_name:
+        :param orig_type_id:
+        :return: target_inc_id, target_type_id
+        """
 
         try:
             cur = self.sqlite_db.cursor()
-            cur.execute(SQLiteDBSync.SYNC_SELECT, (key,))
+            cur.execute(SQLiteDBSync.SYNC_SELECT, (orig_org_id, orig_inc_id, type_name, orig_type_id))
 
             data = cur.fetchone()
-            # row: key, object_id, last_sync, inc_id
+            # row: type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync
             if data is None:
-                return None, None, None, None, None
+                return None, None
 
-            # return: sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version
-            return data[3], data[1], key, None, None
+            # return: sync_inc_id, sync_type_id
+            return data[5], data[6]
         except Exception as err:
-            self.log.debug("find_sync_row err %s", err)
-            return None, None, None, None, None
+            self.log.error("find_sync_row err %s", err)
+            return None, None
 
-    def create_sync_row(self, inc_id, orig_org_id, orig_inc_id, type_name, orig_id, new_id):
-        key = self.make_sync_key(orig_org_id, orig_inc_id, type_name, orig_id)
+    def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
+                        new_inc_id, new_type_id):
+        """
+        add a row to the mapping table to map the source object with the destination object
+        :param orig_org_id:
+        :param orig_inc_id:
+        :param type_name:
+        :param orig_type_id:
+        :param new_inc_id:
+        :param new_type_id:
+        :return:
+        """
+        # (src_org_id, src_inc_id, type_name, orig_id,
+        # sync_inc_id, new_type_id)
 
         try:
             cur = self.sqlite_db.cursor()
-            cur.execute(SQLiteDBSync.SYNC_INSERT, (key, new_id, self._get_current_timestamp(), inc_id) )
+            cur.execute(SQLiteDBSync.SYNC_INSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
+                                                   self.org_id, new_inc_id, new_type_id,
+                                                   self._get_current_timestamp()))
 
             self.sqlite_db.commit()
         except Exception as err:
-            pass
+            self.log.error("create_sync_row err %s", err)
 
-    def update_existing_sync_row(self, inc_id, row_id, cells, version):
+    def update_existing_sync_row(self, target_inc_id, type_name, target_type_id):
         try:
             cur = self.sqlite_db.cursor()
-            cur.execute(SQLiteDBSync.SYNC_UPDATE, (row_id, self._get_current_timestamp()) )
+            cur.execute(SQLiteDBSync.SYNC_UPDATE, (self.org_id, target_inc_id, type_name, target_type_id,
+                                                   self._get_current_timestamp()))
 
             self.sqlite_db.commit()
         except Exception as err:
-            pass
+            self.log.error("update_existing_sync_row err %s", err)
 
     def find_incident(self, orig_org_id, orig_inc_id):
-        sync_inc_id, sync_type_id, row_id, sync_row, sync_row_version = \
-            self.find_sync_row(orig_org_id, orig_inc_id, "incident", orig_inc_id)
+        sync_inc_id, _ = self.find_sync_row(orig_org_id, orig_inc_id, "incident", orig_inc_id)
 
         return sync_inc_id
 
+'''
 class ResDBSync(DBSyncInterface):
     """
     Class for maintaining mapping as a Resilient datatable
@@ -214,25 +247,26 @@ class ResDBSync(DBSyncInterface):
         uri = "{}/{}".format(ResDBSync.SYNC_DATATABLE_URI.format(inc_id), row_id)
         return self.rest_client.put(uri, payload)
 
-    def create_sync_row(self, inc_id, orig_org_id, orig_inc_id, type_name, orig_id, new_id):
+    def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
+                        new_inc_id, new_type_id):
         """
         create a new row in our sync datatable to track this information
-        :param inc_id:
         :param orig_inc_id:
         :param orig_org_id:
         :param type_name:
-        :param orig_id:
-        :param new_id:
+        :param orig_type_id:
+        :param new_inc_id:
+        :param new_type_id:
         :return:
         """
-        key = self.make_sync_key(orig_org_id, orig_inc_id, type_name, orig_id)
+        key = self.make_sync_key(orig_org_id, orig_inc_id, type_name, orig_type_id)
         payload = {
             "cells": {
                 "key": {
                     "value": key
                 },
                 "new_id": {
-                    "value": new_id
+                    "value": new_type_id
                 },
                 "last_sync": {
                     "value": self._get_current_timestamp()
@@ -241,7 +275,7 @@ class ResDBSync(DBSyncInterface):
         }
 
         self.log.debug(payload)
-        uri = ResDBSync.SYNC_DATATABLE_URI.format(inc_id)
+        uri = ResDBSync.SYNC_DATATABLE_URI.format(new_inc_id)
         return self.rest_client.post(uri, payload)
 
     def find_incident(self, orig_org_id, orig_inc_id):
@@ -279,3 +313,4 @@ class ResDBSync(DBSyncInterface):
             return response[0]['id']
 
         return None
+'''
