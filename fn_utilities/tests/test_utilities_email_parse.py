@@ -40,6 +40,7 @@ class TestArtifactEmailParse:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest
     @pytest.mark.parametrize("base64content, expected_result", [
         (ArtifactMock.test_data_b64("email_sample_1.eml"), {
             "from": [["", "foo@example.com"]],

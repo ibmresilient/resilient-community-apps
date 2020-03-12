@@ -46,9 +46,6 @@ class TestUtilitiesParseSslCertificate:
         curr_dir = os.path.dirname(os.path.realpath(__file__))
 
         certificate = open(os.path.join(curr_dir, TestUtilitiesParseSslCertificate.DATA_DIR, utilities_certificate), mode="r").read()
-        
-        import pprint
-        pprint.pprint((certificate))
 
         function_params = { 
             "artifact_id": artifact_id,
