@@ -3164,11 +3164,9 @@ aws_iam_users
 | Default user | `DefaultUser` | `text` | - |
 | Groups | `Groups` | `text` | - |
 | Login Profile exists | `LoginProfileExists` | `text` | - |
-| Password last used | `PasswordLastUsed` | `text` | - |
 | Policies | `Policies` | `text` | - |
 | Status | `Status` | `text` | - |
 | Tags | `Tags` | `text` | - |
-| User id | `UserId` | `text` | - |
 | User name | `UserName` | `text` | - |
 | Query execution date | `query_execution_date` | `text` | - |
 
