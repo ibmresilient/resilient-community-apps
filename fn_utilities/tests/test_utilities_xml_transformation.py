@@ -39,11 +39,17 @@ class TestUtilitiesXmlTransformation:
     def test_success(self, circuits_app, xml_source, xml_stylesheet, expected_results):
         curr_dir = os.path.dirname(os.path.realpath(__file__))
 
-        xml_data = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, xml_source), mode="r").read()
+
         if sys.version_info.major < 3:
-            expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read().decode('utf8')
+            xml_data = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, xml_source),
+                            mode="r").read().decode('utf8')
+            expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results),
+                                    mode="r").read().decode('utf8')
         else:
-            expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results), mode="r").read()
+            xml_data = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, xml_source),
+                            mode="r").read()
+            expected_results = open(os.path.join(curr_dir, TestUtilitiesXmlTransformation.DATA_DIR, expected_results),
+                                    mode="r").read()
 
         """ Test calling with sample values for the parameters """
         function_params = {
