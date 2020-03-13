@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import logging
 from resilient_circuits import ResilientComponent
-from resilient_lib import IntegrationError, RequestsCommon, ResultPayload
 from fn_secureworks_ctp.lib.scwx_client import SCWXClient
 
 LOG = logging.getLogger(__name__)
@@ -17,9 +16,9 @@ class SecureworksCTPProcess(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
         self.polling_interval = int(self.options.get("polling_interval", 600))
         if self.polling_interval == 0:
-            log.warn("Secureworks CTP escalation interval is not configured.  Automated escalation is disabled.")
+            LOG.error("Secureworks CTP escalation interval is not configured.  Automated escalation is disabled.")
             return
-        self.scwx_client = SCWXClient(self.options)
+        self.scwx_client = SCWXClient(opts)
         self.rest_client = self.rest_client()
 
     def poll_start(self):
@@ -40,8 +39,10 @@ class SecureworksCTPProcess(ResilientComponent):
         """
         LOG.info("Secureworks CTP escalate.")
         try:
-            rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             tickets_list = self.scwx_client.post_tickets_updates()
+            for ticket in tickets_list:
+                tickets_list2 = self.scwx_client.post_tickets_acknowledge()
+            x = 1
         except Exception as err:
             raise err

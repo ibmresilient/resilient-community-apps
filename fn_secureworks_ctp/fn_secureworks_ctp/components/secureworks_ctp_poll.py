@@ -10,8 +10,8 @@ import threading
 from circuits import Event, Timer, task
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
-from fn_secureworks_ctp.lib.secureworks_ctp_helper import SecureworksCTPProcess
 from fn_secureworks_ctp.lib.scwx_client import SCWXClient
+
 
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"
 SCWX_CTP_POLL_CHANNEL = "scwx_ctp_poll"
@@ -47,11 +47,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
             LOG.info(u"Secureworks CTP escalation interval is not configured.  Automated escalation is disabled.")
             return
 
-        scwx_poll = SecureworksCTPProcess(opts)
-        self.scwx_thread = threading.Thread(target=scwx_poll.run)
-        self.scwx_thread.daemon = True
-
-        Timer(self.polling_interval, Poll(), persist=True).register(self)
+        LOG.info(u"Secureworks CTP escalation initiated, polling interval %s", self.polling_interval)
+        Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -62,18 +59,13 @@ class SecureworksCTPPollComponent(ResilientComponent):
     def _poll(self, event):
         """Handle the timer"""
         LOG.info("Secureworks CTP poll start")
-        scwx_poll = SecureworksCTPProcess(opts=self.opts)
-        try:
-            if self.scwx_thread.is_alive() == True:
-                LOG.info("Secureworks CTP thread already running")
-            else:
-                LOG.info("Secureworks CTP thread is not running")
-                self.scwx_thread = threading.Thread(target=scwx_poll.run)
-                self.scwx_thread.daemon = True
-                self.scwx_thread.start()
-        except Exception as err:
-            LOG.error("Error starting Secureworks poller thread: {}".format(str(err)))
+        self._escalate()
 
+    @handler("PollCompleted")
+    def _poll_completed(self, event):
+        """Set up the next timer"""
+        LOG.info("Secureworks CTP poll completed")
+        Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     def _load_options(self, opts):
         """Read options from config"""
@@ -81,10 +73,29 @@ class SecureworksCTPPollComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["base_url", "username", "password", "query_ticket_type",
-                           "query_ticket_group", "polling_interval"]
+        required_fields = ["base_url", "username", "password", "query_ticket_types",
+                           "query_grouping_types", "polling_interval"]
         validate_fields(required_fields, self.options)
-
+        self.scwx_client = SCWXClient(self.opts, self.options)
         # Timer interval (seconds).  Default 10 minutes.
         self.polling_interval = int(self.options.get("polling_interval", 600))
 
+    def _escalate(self):
+        """ Search for Sercureworks CTP tickets and create incidents in Resilient for them
+        :return:
+        """
+        LOG.info("Secureworks CTP escalate.")
+        try:
+
+
+            response = self.scwx_client.post_tickets_updates()
+            tickets = response.get('tickets')
+            for ticket in tickets:
+                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                if response_ack.get("code") == "SUCCESS":
+
+        except Exception as err:
+            raise err
+        finally:
+            # We always want to reset the timer to wake up, no matter failure or success
+            self.fire(PollCompleted())
