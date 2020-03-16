@@ -35,6 +35,7 @@ class TestSendEmail:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.livetest #can be removed in future when attachment mock endpoint is updated
     @pytest.mark.parametrize("mail_from, mail_incident_id, mail_to, mail_cc, mail_bcc, mail_subject, mail_body_text, expected_results", [
         ("text", 123, "text", "text", "text", "text", "text", {"value": "xyz"}),
         ("text", 123, "text", "text", "text", "text", "text", {"value": "xyz"})

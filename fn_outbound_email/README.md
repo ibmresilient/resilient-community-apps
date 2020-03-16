@@ -12,6 +12,9 @@ To install in "development mode"
 
 After installation, the package will be loaded by `resilient-circuits run`.
 
+To test if login capability is possible for your smtp relay, please run `resilient-circuits selftest`. The integrations can send email without this being functional, if you are using an unauthenticated port (generally 25) behind a firewall. Please be aware that many servers will not afford this capability, as unautheticated senders are considered as highly likely to be spam emailers. They are some limitations to the `smtplib` library which can be explored in your local configuration. 
+
+If you wish to change the mail sender email, please edit the `mail_from` parameter in the code.
 
 To uninstall,
 
