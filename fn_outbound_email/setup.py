@@ -12,7 +12,8 @@ setup(
     description="Resilient Circuits Components for 'fn_outbound_email'",
     long_description="Resilient Circuits Components for 'fn_outbound_email'",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=35.0.203',
+        'resilient_lib>=35.0.203',
         'Jinja2>=2.9.6',
         'six'
     ],
