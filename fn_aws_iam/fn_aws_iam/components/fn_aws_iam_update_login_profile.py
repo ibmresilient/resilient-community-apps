@@ -45,7 +45,8 @@ class FunctionComponent(ResilientComponent):
             aws_iam_password_reset_required = kwargs.get("aws_iam_password_reset_required")  # boolean
 
             LOG.info("aws_iam_user_name: %s", aws_iam_user_name)
-            LOG.info("aws_iam_password: %s", aws_iam_password)
+            # Hide password fro logger.
+            LOG.info("aws_iam_password: %s", "***")
             LOG.info("aws_iam_password_reset_required: %s", aws_iam_password_reset_required)
 
             validate_fields(["aws_iam_user_name", "aws_iam_password", "aws_iam_password_reset_required"], kwargs)
@@ -54,8 +55,10 @@ class FunctionComponent(ResilientComponent):
             iam_cli = AwsIamClient(self.options)
 
             rtn = iam_cli.post("update_login_profile", **params)
-            results = rp.done(True, rtn)
 
+            results = rp.done(True, rtn)
+            # Hide password in result.
+            results["inputs"]["aws_iam_password"] = "***"
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
 

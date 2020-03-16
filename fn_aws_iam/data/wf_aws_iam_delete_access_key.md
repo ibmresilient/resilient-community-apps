@@ -64,11 +64,11 @@ def main():
         if deleted_keys:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deleted " \
                         "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, ''.join(deleted_keys), INPUTS["aws_iam_user_name"],  FN_NAME)
+                .format(WF_NAME, ','.join(deleted_keys), INPUTS["aws_iam_user_name"],  FN_NAME)
         if no_such_entity:
             note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Access keyId id <b>{1}</b> does not exist " \
                         "for user <b>{2}</b> for Resilient function <b>{3}</b>."\
-                .format(WF_NAME, ''.join(no_such_entity), INPUTS["aws_iam_user_name"], FN_NAME)
+                .format(WF_NAME, ','.join(no_such_entity_keys), INPUTS["aws_iam_user_name"], FN_NAME)
         row.Status = "Deleted"
         row.query_execution_date = EXECUTION_DATE
     else:

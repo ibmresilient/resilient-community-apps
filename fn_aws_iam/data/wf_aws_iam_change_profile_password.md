@@ -37,30 +37,21 @@ if rule.properties.aws_iam_password_reset_required.lower() == "yes":
 
 ### Post-Processing Script
 ```python
-##  AWS IAM - fn_aws_iam_delete_login_profile script ##
+##  AWS IAM - fn_aws_iam_update_login_profile script ##
 # Example result:
 """
-OK
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'NoSuchEntity', 'raw': '"NoSuchEntity"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': 'OK', 'raw': '"OK"', 
+                     'inputs': {'aws_iam_user_name': 'iam_test_user_1', 
+                                'aws_iam_password': '***', 'aws_iam_password_reset_required': False}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                     'execution_time_ms': 4300, 'timestamp': '2020-03-13 17:35:48'
+                    }
 }
-NosuchEntity
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'OK', 'raw': '"OK"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
-}
+
 """
 #  Globals
-# List of fields in datatable fn_aws_iam_delete_login_profile  script
+# List of fields in datatable fn_aws_iam_update_login_profile  script
 DATA_TBL_FIELDS = ["Groups"]
 FN_NAME = "fn_aws_iam_update_login_profile"
 WF_NAME = "Change Profile Password"
