@@ -201,7 +201,12 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         # Task
         payload.pop('reng_version', None)
-        payload.pop('instr_text', None) # legacy field
+        if payload.get('instructions') and not isinstance(payload.get('instructions'), dict):
+            payload['instructions'] = {
+                "format": "html",
+                "content": payload.get('instructions')
+            }
+
         payload.pop('at_id', None)
         if isinstance(payload.get('phase_id', None), dict):
             payload['phase_id'].pop('id', None)

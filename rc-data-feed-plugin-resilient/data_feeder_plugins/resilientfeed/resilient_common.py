@@ -3,6 +3,7 @@
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 import io
+import json
 import logging
 import mimetypes
 import os
@@ -35,7 +36,7 @@ class Resilient(object):
     COMMENT_URI = "comments"
     ARTIFACT_URI = "artifacts"
     DATATABLE_URI = "/incidents/{}/table_data/{}"
-    DATATABLE_ROWDATA_URI = "/".join((DATATABLE_URI, "rowdata"))
+    DATATABLE_ROWDATA_URI = "/".join((DATATABLE_URI, "row_data"))
     TASK_UPDATE = "/tasks"
     GET_INCIDENT_TASKS = "/incidents/{}/tasks"
 
@@ -64,8 +65,34 @@ class Resilient(object):
             if not self.dbsync:
                 raise IntegrationError("Unable to create DBSync object")
 
-
     def create_update_type(self, src_inc_id, src_org_id, type_name, payload, orig_id):
+        """
+        wrapper to _create_update_type to include logic to retry failures based on parent objects created in
+        reverse order
+        :param src_inc_id:
+        :param src_org_id:
+        :param type_name:
+        :param payload:
+        :param orig_id:
+        :return: None
+        """
+        new_id = self._create_update_type(src_inc_id, src_org_id, type_name, payload, orig_id)
+
+        if new_id:
+            # determine if there are any retries needed
+            retry_list = self.dbsync.find_retry_rows(src_org_id, src_inc_id, type_name)
+
+            for retry_item in retry_list:
+                retry_type_name = retry_item[2]
+                retry_payload = json.loads(retry_item[4])
+                retry_orig_id = retry_item[3]
+
+                self.log.info('retrying %s:%s->%s to %s:%s)', src_inc_id, retry_type_name, retry_orig_id,
+                              self.rest_client.org_id, new_id)
+                # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
+                new_type_id = self._create_update_type(src_inc_id, src_org_id, retry_type_name, retry_payload, retry_orig_id)
+
+    def _create_update_type(self, src_inc_id, src_org_id, type_name, payload, orig_id):
         """
         create a new object if it doesn't already have a mapping in the target org
         :param src_inc_id:
@@ -97,7 +124,12 @@ class Resilient(object):
             if mapped_type_name != 'incident':
                 sync_inc_id = self.dbsync.find_incident(src_org_id, src_inc_id)
                 if sync_inc_id is None:
-                    raise IntegrationError("Incident from {} does not exist".format(src_inc_id))
+                    self.dbsync.create_retry_row(src_org_id, src_inc_id, 'incident', src_inc_id,
+                                                 mapped_type_name, orig_id,
+                                                 None, payload)
+                    self.log.warning('queued to retry %s:%s->%s to %s', type_name, src_inc_id, orig_id,
+                                     self.rest_client.org_id)
+                    return None
                 elif sync_inc_id == 0:
                     # this is a child object to an incident which was filtered
                     self.log.info("Filtering %s:%s->%s", type_name, src_inc_id, orig_id)
@@ -109,7 +141,7 @@ class Resilient(object):
                 new_type_id = self._find_task(sync_inc_id, payload)
                 if not new_type_id:
                     # create object
-                    self.log.info('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
+                    self.log.debug('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                   self.rest_client.org_id, sync_inc_id)
                     self.log.debug(payload)
 
@@ -123,6 +155,7 @@ class Resilient(object):
                         self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
                                                     sync_inc_id, new_type_id)
                     except Exception:
+                        new_type_id = None
                         self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                       self.rest_client.org_id, sync_inc_id)
                         self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
@@ -141,7 +174,7 @@ class Resilient(object):
             else:
                 if payload or sync_inc_id:
                     # create object
-                    self.log.info('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
+                    self.log.debug('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                   self.rest_client.org_id, sync_inc_id)
                     self.log.debug(payload)
 
@@ -155,6 +188,7 @@ class Resilient(object):
                         self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
                                                     sync_inc_id, new_type_id)
                     except Exception as err:
+                        new_type_id = None
                         self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                          self.rest_client.org_id, sync_inc_id)
                         self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
@@ -168,6 +202,8 @@ class Resilient(object):
                     # create sync row - even if filtered
                     self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
                                                 sync_inc_id, new_type_id)
+
+        return new_type_id
 
 
     def _find_task(self, sync_inc_id, payload):
@@ -276,7 +312,6 @@ class Resilient(object):
         try:
             uri = Resilient.DATATABLE_URI.format(inc_id, table_name)
             datatable_list = self.rest_client.get(uri)
-            self.log.debug(datatable_list)
             return datatable_list
 
         except Exception as err:

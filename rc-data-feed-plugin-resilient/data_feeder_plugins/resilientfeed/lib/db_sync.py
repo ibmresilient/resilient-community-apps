@@ -87,17 +87,18 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_inc_id int,
     payload text,
     last_sync timestamp,
-    PRIMARY KEY (org1, org1_inc_id, org2, org1_dep_type_name, org1_dep_type_id)
+    PRIMARY KEY (org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
     );""".format(table_name=RETRY_DBTABLE)
 
     RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name} 
-    WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?;""".format(table_name=RETRY_DBTABLE)
-    RETRY_INSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, 
-    org1_dep_type_name, org1_dep_type_id,
-    org2, org2_inc_id, payload, last_sync)
-    VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'));""".format(table_name=RETRY_DBTABLE)
+    WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
+    RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, 
+        org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_sync)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        ON CONFLICT(org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id) 
+        DO UPDATE SET last_sync = datetime('now');""".format(table_name=RETRY_DBTABLE)
     RETRY_DELETE = """DELETE from {table_name}  
-    WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?;""".format(table_name=RETRY_DBTABLE)
+        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
 
 
     def __init__(self, org_id, sqlite_file):
@@ -237,7 +238,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             else:
                 new_payload = payload
 
-            cur.execute(SQLiteDBSync.RETRY_INSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
+            cur.execute(SQLiteDBSync.RETRY_UPSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
                                                     org1_dep_type_name, org1_dep_type_id,
                                                     self.org_id, new_inc_id, new_payload))
 
@@ -245,7 +246,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         except Exception as err:
             self.log.error("create_retry_row err %s", err)
 
-    def find_retry_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
+    def find_retry_rows(self, orig_org_id, orig_inc_id, type_name):
         """
         determine if we have already syncrhonized this object in the destination organization
         :param orig_org_id:
@@ -257,11 +258,17 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
         try:
             cur = self.sqlite_db.cursor()
-            cur.execute(SQLiteDBSync.RETRY_SELECT, (orig_org_id, orig_inc_id, type_name, orig_type_id, self.org_id))
+            cur.execute(SQLiteDBSync.RETRY_SELECT, (orig_org_id, orig_inc_id, type_name, self.org_id))
 
-            return cur.fetchall()
+            result_list = cur.fetchall()
 
+            # remove the items as they maybe readded
+            cur.execute(SQLiteDBSync.RETRY_DELETE, (orig_org_id, orig_inc_id, type_name, self.org_id))
+
+            self.log.info(result_list)
+            return result_list
         except Exception as err:
+            self.log.error("find_retry_rows failure to get retries. err %s", err)
             return []
 
     def delete_retry_rows(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
