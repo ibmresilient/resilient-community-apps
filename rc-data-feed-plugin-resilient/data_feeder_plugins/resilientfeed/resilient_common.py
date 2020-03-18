@@ -7,13 +7,12 @@ import logging
 import mimetypes
 import os
 import resilient
-import sys
 import tempfile
-from .db_sync import DBSyncFactory
-from .constants import DF_INC_ID, DF_ORG_ID
+from data_feeder_plugins.resilientfeed.lib.db_sync import DBSyncFactory
 from cachetools import cached, TTLCache
 from resilient_lib import IntegrationError, get_file_attachment, write_file_attachment
 
+# URIs for resilient API calls
 URI_LOOKUP_BY_TYPE = {
     "incident": "/incidents",
     "artifact": "/incidents/{}/artifacts",
@@ -35,19 +34,21 @@ class Resilient(object):
     INCIDENT_URI = "/incidents/{}"
     COMMENT_URI = "comments"
     ARTIFACT_URI = "artifacts"
-    SYNC_DATATABLE_URI = "/incidents/{}/table_data/data_feeder_sync/row_data"
-    DATATABLE = "/incidents/{}/table_data/{}/row_data"
+    DATATABLE_URI = "/incidents/{}/table_data/{}"
+    DATATABLE_ROWDATA_URI = "/".join((DATATABLE_URI, "rowdata"))
     TASK_UPDATE = "/tasks"
     GET_INCIDENT_TASKS = "/incidents/{}/tasks"
 
     def __init__(self, opts, rest_client_helper):
         """
+        configure the rest_client for the destination resilient
         :param opts: used for Resilient target
         :param rest_client_helper: used for Resilient source
         """
         self.opts = opts
         self.log = logging.getLogger(__name__)
 
+        # rest_client_helper is None for destination Resilient org
         try:
             if rest_client_helper:
                 self.rest_client = rest_client_helper.rest_client()
@@ -59,7 +60,7 @@ class Resilient(object):
         # get the class to maintain the reference map: either datatable or sqlite
         # only needed for target Resilient
         if not rest_client_helper:
-            self.dbsync = DBSyncFactory.get_dbsync(self.rest_client, self.opts.get("db_sync_file", None))
+            self.dbsync = DBSyncFactory.get_dbsync(self.rest_client.org_id, self.opts.get("db_sync_file", None))
             if not self.dbsync:
                 raise IntegrationError("Unable to create DBSync object")
 
@@ -69,9 +70,9 @@ class Resilient(object):
         create a new object if it doesn't already have a mapping in the target org
         :param src_inc_id:
         :param src_org_id:
-        :param type_name:
+        :param type_name: 'incident', 'task', 'artifact', etc.
         :param payload:
-        :param orig_id:
+        :param orig_id: such as task_id, artifact_id, etc.
         :return:
         """
 
@@ -83,7 +84,7 @@ class Resilient(object):
             self.dbsync.find_sync_row(src_org_id, src_inc_id, mapped_type_name, orig_id)
 
         # update operation?
-        if sync_type_id:
+        if sync_type_id and sync_inc_id != 0:
             self.log.info('updating %s:%s->%s to %s:%s->%s)', src_inc_id, mapped_type_name, orig_id,
                           self.rest_client.org_id, sync_inc_id, sync_type_id)
             self.log.debug(payload)
@@ -91,13 +92,16 @@ class Resilient(object):
             self.update_type(mapped_type_name, sync_inc_id, sync_type_id, sync_task_id, payload)
             # update sync row
             self.dbsync.update_existing_sync_row(sync_inc_id, mapped_type_name, sync_type_id)
-
         else:
             # make sure the incident already exists for child objects
             if mapped_type_name != 'incident':
                 sync_inc_id = self.dbsync.find_incident(src_org_id, src_inc_id)
-                if not sync_inc_id:
+                if sync_inc_id is None:
                     raise IntegrationError("Incident from {} does not exist".format(src_inc_id))
+                elif sync_inc_id == 0:
+                    # this is a child object to an incident which was filtered
+                    self.log.info("Filtering %s:%s->%s", type_name, src_inc_id, orig_id)
+                    return None
 
             # creating a task? may already have one created when the incident was created
             if mapped_type_name == "task":
@@ -105,40 +109,65 @@ class Resilient(object):
                 new_type_id = self._find_task(sync_inc_id, payload)
                 if not new_type_id:
                     # create object
-
                     self.log.info('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                   self.rest_client.org_id, sync_inc_id)
                     self.log.debug(payload)
 
-                    sync_inc_id, new_type_id = self.create_type(mapped_type_name, sync_inc_id, sync_task_id, payload)
+                    try:
+                        sync_inc_id, new_type_id = self.create_type(mapped_type_name, sync_inc_id, sync_task_id, payload)
 
-                    self.log.info('added %s:%s->%s to %s:%s->%s', type_name, src_inc_id, orig_id,
-                                  self.rest_client.org_id, sync_inc_id, new_type_id)
+                        self.log.info('added %s:%s->%s to %s:%s->%s', type_name, src_inc_id, orig_id,
+                                      self.rest_client.org_id, sync_inc_id, new_type_id)
+
+                        # create sync row, duplicates are now mapped too
+                        self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                    sync_inc_id, new_type_id)
+                    except Exception:
+                        self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
+                                      self.rest_client.org_id, sync_inc_id)
+                        self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                     type_name, new_type_id,
+                                                     sync_inc_id, payload)
                 else:
                     self.log.info('duplicate %s:%s->%s of %s:%s->%s', type_name, src_inc_id, orig_id,
                                   self.rest_client.org_id, sync_inc_id, new_type_id)
                     self.log.debug(payload)
 
-                # create sync row, duplicates are now mapped too
-                self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
-                                            sync_inc_id, new_type_id)
+                    # create sync row, duplicates are now mapped too
+                    self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                sync_inc_id, new_type_id)
+
+
             else:
-                if mapped_type_name == "incident":
-                    set_sync_fields(payload, src_org_id, src_inc_id)
+                if payload or sync_inc_id:
+                    # create object
+                    self.log.info('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
+                                  self.rest_client.org_id, sync_inc_id)
+                    self.log.debug(payload)
 
-                # create object
-                self.log.info('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
-                              self.rest_client.org_id, sync_inc_id)
-                self.log.debug(payload)
+                    try:
+                        sync_inc_id, new_type_id = self.create_type(mapped_type_name, sync_inc_id, sync_task_id, payload)
 
-                sync_inc_id, new_type_id = self.create_type(mapped_type_name, sync_inc_id, sync_task_id, payload)
+                        self.log.info('added %s:%s->%s to %s:%s->%s', type_name, src_inc_id, orig_id,
+                                      self.rest_client.org_id, sync_inc_id, new_type_id)
 
-                # create sync row
-                self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
-                                            sync_inc_id, new_type_id)
+                        # create sync row
+                        self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                    sync_inc_id, new_type_id)
+                    except Exception as err:
+                        self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
+                                         self.rest_client.org_id, sync_inc_id)
+                        self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                     type_name, new_type_id,
+                                                     sync_inc_id, payload)
 
-                self.log.info('added %s:%s->%s to %s:%s->%s', type_name, src_inc_id, orig_id,
-                              self.rest_client.org_id, sync_inc_id, new_type_id)
+                else:
+                    self.log.info("Filtering %s:%s->%s", type_name, src_inc_id, orig_id)
+                    sync_inc_id = new_type_id = 0
+
+                    # create sync row - even if filtered
+                    self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
+                                                sync_inc_id, new_type_id)
 
 
     def _find_task(self, sync_inc_id, payload):
@@ -211,10 +240,10 @@ class Resilient(object):
             self.log.debug(response)
 
         except Exception as err:
-            self.log.error("Unable to update %s %s, Incident %s", mapped_type_name, sync_type_id, sync_inc_id)
-            self.log.error(update_uri)
-            self.log.error(payload)
-            self.log.exception(err)
+            self.log.warn("Unable to update %s %s, Incident %s", mapped_type_name, sync_type_id, sync_inc_id)
+            self.log.warn(update_uri)
+            self.log.warn(payload)
+            raise IntegrationError(err)
 
     def get_existing_datatable_row(self, inc_id, table_name, row_id):
         """
@@ -245,7 +274,7 @@ class Resilient(object):
         :return: None or row found
         """
         try:
-            uri = "/incidents/{}/table_data/{}".format(inc_id, table_name)
+            uri = Resilient.DATATABLE_URI.format(inc_id, table_name)
             datatable_list = self.rest_client.get(uri)
             self.log.debug(datatable_list)
             return datatable_list
@@ -258,12 +287,12 @@ class Resilient(object):
 
     def create_type(self, mapped_type_name, sync_inc_id, sync_task_id, payload):
         """
-        create the new object
+        create the new object: incident, artifact, milestone, task
         :param mapped_type_name:
         :param sync_inc_id:
         :param sync_task_id:
         :param payload:
-        :return:
+        :return: id of new object and it's type (task comments-> tasknote)
         """
         uri, _ = get_url(sync_task_id or sync_inc_id, mapped_type_name)
 
@@ -272,7 +301,7 @@ class Resilient(object):
             self.log.debug(response)
 
             # created an incident?
-            if sync_inc_id is None:
+            if not sync_inc_id:
                 sync_inc_id = response['id']
 
             # response a list?
@@ -281,11 +310,10 @@ class Resilient(object):
             else:
                 new_type_id = response['id']
         except Exception as err:
-            self.log.error("Unable to create %s, Incident %s", mapped_type_name, sync_inc_id)
-            self.log.error(uri)
-            self.log.error(payload)
-            self.log.exception(err)
-            new_type_id = None
+            self.log.warn("Unable to create %s, Incident %s", mapped_type_name, sync_inc_id)
+            self.log.warn(uri)
+            self.log.warn(payload)
+            raise IntegrationError(err)
 
         return sync_inc_id, new_type_id
 
@@ -315,7 +343,7 @@ class Resilient(object):
         :param type_name:
         :param payload:
         :param orig_id:
-        :return:
+        :return: None
         """
         src_artifact_id = src_attachment_id = None
         if payload.get('attachment', {}).get('content_type', None):
@@ -340,16 +368,14 @@ class Resilient(object):
         # read the attachment from the source Resilient
         attachment_contents = get_file_attachment(src_rest_client, src_inc_id, attachment_id=src_attachment_id,
                                                   task_id=src_task_id, artifact_id=src_artifact_id)
-        # python 2/3 differences
-        #if sys.version_info.major < 3:
-        #    file_handle = io.StringIO(attachment_contents)
-        #else:
+
         file_handle = io.BytesIO(attachment_contents)
 
         self.log.info('adding %s:%s to %s:%s', type_name, orig_id,
                       self.rest_client.org_id, sync_inc_id)
         self.log.debug(payload)
 
+        # artifact as file attachment?
         if src_artifact_id:
             response = self.write_artifact_file(payload['attachment']['name'], file_handle,
                                                 sync_inc_id, payload)
@@ -380,7 +406,7 @@ class Resilient(object):
         :param payload: required,
         :return: new attachment -dictionary of attachment metadata
         """
-
+        # determine the content_type
         content_type = payload['attachment'].get('content_type', None) \
                        or mimetypes.guess_type(file_name or "")[0] \
                        or "application/octet-stream"
@@ -432,15 +458,4 @@ def get_url(inc_id, type_name, update_flag=False):
     if URI_LOOKUP_BY_TYPE.get(type_name, None):
         return URI_LOOKUP_BY_TYPE[type_name].format(inc_id), False
 
-    return Resilient.DATATABLE.format(inc_id, type_name), True # if type not found, it's a datatable
-
-def set_sync_fields(payload, orig_org_id, orig_inc_id):
-    """
-    keep a record of which incident created the copy in the newly created incident
-    :param payload:
-    :param orig_org_id:
-    :param orig_inc_id:
-    :return:
-    """
-    payload['properties'][DF_ORG_ID] = orig_org_id
-    payload['properties'][DF_INC_ID] = orig_inc_id
+    return Resilient.DATATABLE_ROWDATA_URI.format(inc_id, type_name), True # if type not found, it's a datatable
