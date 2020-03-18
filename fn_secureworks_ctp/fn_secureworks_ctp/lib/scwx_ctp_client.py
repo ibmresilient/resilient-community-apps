@@ -30,19 +30,13 @@ class SCWXClient(object):
 
         self.rc = RequestsCommon(opts, options)
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
-        self.headers = self.get_headers()
+        self.headers = self.get_headers(self.APIKEY)
 
-    def get_headers(self):
+    def get_headers(self, apikey):
         return {
-            'Authorization': self.APIKEY,
+            'Authorization': apikey,
             'content-type': "application/json"
         }
-
-    def mock_post_tickets_updates(self):
-        ticket_string = open('/Users/annmarie.meier.norcross@ibm.com/Secureworks.txt', mode="r").read()
-        tickets = json.loads(ticket_string)
-        response = {'tickets': tickets}
-        return response
 
     def post_tickets_updates(self):
         """POST get a list of updated tickets not yet acknowledged """
@@ -50,7 +44,7 @@ class SCWXClient(object):
         payload = {'ticketType': self.ticket_types,
                    'limit': self.limit,
                    'groupingType': self.grouping_types,
-                   'worklogs': "UPDATES"}
+                   'worklogs': "UPDATED"}
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, params=payload, verify=self.bundle,
                                            proxies=self.rc.get_proxies())

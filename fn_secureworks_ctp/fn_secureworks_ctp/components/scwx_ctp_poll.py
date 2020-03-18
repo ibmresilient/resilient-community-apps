@@ -6,9 +6,7 @@
 """Function implementation"""
 
 import os
-from datetime import datetime
 import logging
-import threading
 from circuits import Event, Timer, task
 from pkg_resources import Requirement, resource_filename
 from resilient import SimpleHTTPException
@@ -92,19 +90,20 @@ class SecureworksCTPPollComponent(ResilientComponent):
         """
         LOG.info(u"Secureworks CTP escalate.")
         try:
-            #response = self.scwx_client.post_tickets_updates()
-            response = self.scwx_client.mock_post_tickets_updates()
+            # Get list of tickets needing updating
+            response = self.scwx_client.post_tickets_updates()
             tickets = response.get('tickets')
 
             for ticket in tickets:
-                # Tell Secureworks to that we have received the ticket (acknowledge).
-                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                response_ack = {'code': "SUCCESS", 'ticketId': ticket.get('ticketId')}
+                # Acknowledge Secureworks that we have received the tickets.
+                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+
                 if response_ack.get('code') is not "SUCCESS":
                     LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
                     continue
+
                 ticket_id = response_ack.get('ticketId')
-                LOG.info(u"Secureworks CTP update ticket acknowledged: %s.", ticket_id)
+                LOG.info(u"Secureworks CTP ticket acknowledged: %s.", ticket_id)
 
                 # Check if there is already a Resilient incident for this Secureworks ticket.
                 resilient_incident = self._find_resilient_incident_for_req(ticket_id)
@@ -114,7 +113,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     continue
 
                 # Create a new incident for this Secureworks CTP ticket.
-                self._create_incident(ticket)
+                incident = self._create_incident(ticket)
 
         except Exception as err:
             raise err
@@ -180,7 +179,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
     def _create_incident(self, ticket):
         """
-
         :param ticket: Secureworks CTP ticket (json object)
         :return:
         """
@@ -213,7 +211,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
             incident_id = incident.get('id')
             message = u"Created incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
             LOG.info(message)
+            return incident
 
         except Exception as exc:
             LOG.exception(exc)
             raise
+
