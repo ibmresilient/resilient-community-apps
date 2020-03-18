@@ -19,7 +19,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = AttachmentMock
 
 
-def call_utilities_string_to_attachment_function(circuits, function_params, timeout=120):
+def call_utilities_string_to_attachment_function(circuits, function_params, timeout=10):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_string_to_attachment", function_params)
     circuits.manager.fire(evt)
