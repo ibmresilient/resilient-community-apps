@@ -15,7 +15,7 @@ from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import validate_fields
-from fn_secureworks_ctp.lib.scwx_client import SCWXClient
+from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"

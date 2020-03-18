@@ -38,7 +38,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.components": [
-            "fn_secureworks_ctpFunctionComponent = fn_secureworks_ctp.components.secureworks_ctp_poll:SecureworksCTPPollComponent"
+            "fn_secureworks_ctpFunctionComponent = fn_secureworks_ctp.components.scwx_ctp_poll:SecureworksCTPPollComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_secureworks_ctp.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_secureworks_ctp.util.customize:customization_data"],

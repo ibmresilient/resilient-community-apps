@@ -5,7 +5,6 @@
 
 import os
 import json
-import requests
 import logging
 from resilient_lib import validate_fields, RequestsCommon
 
@@ -40,7 +39,6 @@ class SCWXClient(object):
         }
 
     def mock_post_tickets_updates(self):
-        tickets = []
         ticket_string = open('/Users/annmarie.meier.norcross@ibm.com/Secureworks.txt', mode="r").read()
         tickets = json.loads(ticket_string)
         response = {'tickets': tickets}
