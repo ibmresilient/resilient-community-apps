@@ -5,10 +5,15 @@
 
 """Function implementation"""
 
+import os
+from datetime import datetime
 import logging
 import threading
 from circuits import Event, Timer, task
+from pkg_resources import Requirement, resource_filename
+from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
+from resilient_circuits.template_functions import render_json, environment
 from resilient_lib import validate_fields
 from fn_secureworks_ctp.lib.scwx_client import SCWXClient
 
@@ -21,12 +26,10 @@ LOG = logging.getLogger(__name__)
 class Poll(Event):
     """A Circuits event to trigger polling"""
     channels = (SCWX_CTP_POLL_CHANNEL,)
-    LOG.info("class Poll")
 
 class PollCompleted(Event):
     """A Circuits event to notify that this poll event is completed"""
     channels = (SCWX_CTP_POLL_CHANNEL,)
-    LOG.info("class Poll complete")
 
 class SecureworksCTPPollComponent(ResilientComponent):
     """
@@ -58,13 +61,13 @@ class SecureworksCTPPollComponent(ResilientComponent):
     @handler("Poll")
     def _poll(self, event):
         """Handle the timer"""
-        LOG.info("Secureworks CTP poll start")
+        LOG.info(u"Secureworks CTP start polling.")
         self._escalate()
 
     @handler("PollCompleted")
     def _poll_completed(self, event):
         """Set up the next timer"""
-        LOG.info("Secureworks CTP poll completed")
+        LOG.info(u"Secureworks CTP poll complete.")
         Timer(self.polling_interval, Poll(), persist=False).register(self)
 
     def _load_options(self, opts):
@@ -73,29 +76,144 @@ class SecureworksCTPPollComponent(ResilientComponent):
         self.options = opts.get(CONFIG_DATA_SECTION, {})
 
         # Validate required fields in app.config are set
-        required_fields = ["base_url", "username", "password", "query_ticket_types",
+        required_fields = ["base_url", "username", "password", "query_limit", "query_ticket_types",
                            "query_grouping_types", "polling_interval"]
         validate_fields(required_fields, self.options)
+
+        # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
+
         # Timer interval (seconds).  Default 10 minutes.
         self.polling_interval = int(self.options.get("polling_interval", 600))
 
     def _escalate(self):
-        """ Search for Sercureworks CTP tickets and create incidents in Resilient for them
+        """ Search for Secureworks CTP tickets and create incidents in Resilient for them
         :return:
         """
-        LOG.info("Secureworks CTP escalate.")
+        LOG.info(u"Secureworks CTP escalate.")
         try:
-
-
-            response = self.scwx_client.post_tickets_updates()
+            #response = self.scwx_client.post_tickets_updates()
+            response = self.scwx_client.mock_post_tickets_updates()
             tickets = response.get('tickets')
+
             for ticket in tickets:
-                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                if response_ack.get("code") == "SUCCESS":
+                # Tell Secureworks to that we have received the ticket (acknowledge).
+                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                response_ack = {'code': "SUCCESS", 'ticketId': ticket.get('ticketId')}
+                if response_ack.get('code') is not "SUCCESS":
+                    LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
+                    continue
+                ticket_id = response_ack.get('ticketId')
+                LOG.info(u"Secureworks CTP update ticket acknowledged: %s.", ticket_id)
+
+                # Check if there is already a Resilient incident for this Secureworks ticket.
+                resilient_incident = self._find_resilient_incident_for_req(ticket_id)
+                if resilient_incident:
+                    # Update worklogs here when we pull those in future sprint.
+                    LOG.info(u"Skipping ticket %s, already escalated", ticket_id)
+                    continue
+
+                # Create a new incident for this Secureworks CTP ticket.
+                self._create_incident(ticket)
 
         except Exception as err:
             raise err
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
+
+
+    def _find_resilient_incident_for_req(self, ticket_id):
+        """
+         Query resilient for to see if an incident has already been created for the Secureworks ticket.
+         """
+        r_incidents = []
+        query_uri = "/incidents/query?return_level=partial"
+        query = {
+            'filters': [{
+                'conditions': [
+                    {
+                        'field_name': 'properties.{}'.format(TICKET_ID_FIELDNAME),
+                        'method': 'equals',
+                        'value': ticket_id
+                    },
+                    {
+                        'field_name': 'plan_status',
+                        'method': 'equals',
+                        'value': 'A'
+                    }
+                ]
+            }],
+            "sorts": [{
+                "field_name": "create_date",
+                "type": "desc"
+            }]
+        }
+        try:
+            r_incidents = self.rest_client().post(query_uri, query)
+        except SimpleHTTPException:
+            # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
+            # To work around this issue, let's try a different query, and filter the results. (Expensive!)
+            query_uri = u"/incidents/query?return_level=normal&field_handle={}".format(TICKET_ID_FIELDNAME)
+            query = {
+                'filters': [{
+                    'conditions': [
+                        {
+                            'field_name': 'properties.{}'.format(TICKET_ID_FIELDNAME),
+                            'method': 'has_a_value'
+                        },
+                        {
+                            'field_name': 'plan_status',
+                            'method': 'equals',
+                            'value': 'A'
+                        }
+                    ]
+                }]
+            }
+            LOG.debug(query)
+            r_incidents_tmp = self.rest_client().post(query_uri, query)
+            r_incidents = [r_inc for r_inc in r_incidents_tmp
+                           if r_inc["properties"].get(TICKET_ID_FIELDNAME) == ticket_id]
+        if len(r_incidents) > 0:
+            return r_incidents[0]
+        return None
+
+    def _create_incident(self, ticket):
+        """
+
+        :param ticket: Secureworks CTP ticket (json object)
+        :return:
+        """
+        ticket_id = ticket.get('ticketId')
+        LOG.info(u"Processing Secureworks CTP ticket %s", ticket_id)
+        try:
+            # Create a new Resilient incident from this ticket
+            # using a JSON (JINJA2) template file
+            template_file_path = self.options.get('template_file')
+            if template_file_path and not os.path.exists(template_file_path):
+                LOG.warn(u"Template file '%s' not found.", template_file_path)
+                template_file_path = None
+            if not template_file_path:
+                # Use the template file installed by this package
+                template_file_path = resource_filename(Requirement("fn-secureworks-ctp"),
+                                                       "fn_secureworks_ctp/data/scwx_ctp_template.jinja")
+                if not os.path.exists(template_file_path):
+                    raise Exception(u"Template file '{}' not found".format(template_file_path))
+
+            LOG.info(u"Secureworks CTP Template file: %s", template_file_path)
+            with open(template_file_path, "r") as definition:
+                escalate_template = definition.read()
+
+            # Render the template.
+            new_incident_payload = render_json(escalate_template, ticket)
+            LOG.debug(new_incident_payload)
+
+            # Post incident to Resilient
+            incident = self.rest_client().post("/incidents", new_incident_payload)
+            incident_id = incident.get('id')
+            message = u"Created incident {} for Secureworks CTP ticket {}".format(incident_id, ticket_id)
+            LOG.info(message)
+
+        except Exception as exc:
+            LOG.exception(exc)
+            raise

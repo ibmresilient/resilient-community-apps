@@ -14,16 +14,21 @@ def config_section_data():
 base_url=https://api.secureworks.com/api/ticket/v3
 username=
 password=
-verify=
 
-# Query Secureworks CTP tickets of type: SERVICE_REQUEST, INCIDENT, CHANGE
+# Required - Query Secureworks CTP tickets of type: SERVICE_REQUEST, INCIDENT, CHANGE
 query_ticket_types=INCIDENT
 
-# Query Secureworks CTP tickets of group: REQUEST, CHANGE, HEALTH, SECURITY
+# Required - Query Secureworks CTP tickets of group: REQUEST, CHANGE, HEALTH, SECURITY
 query_grouping_types=SECURITY
+
+# Required - Maximum number of tickets to be returned from the /tickets/updates endpoint
+query_limit=10
 
 # Required - How often, in minutes, to check for new events
 # To turn the poller off use value 0
 polling_interval=600
+
+# Optional - If required by Secureworks CTP
+cafile=
 """
     return config_data
