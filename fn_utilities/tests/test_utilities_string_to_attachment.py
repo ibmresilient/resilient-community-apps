@@ -19,7 +19,7 @@ config_data = get_config_data(PACKAGE_NAME)
 resilient_mock = AttachmentMock
 
 
-def call_utilities_string_to_attachment_function(circuits, function_params, timeout=10):
+def call_utilities_string_to_attachment_function(circuits, function_params, timeout=120):
     # Fire a message to the function
     evt = SubmitTestFunction("utilities_string_to_attachment", function_params)
     circuits.manager.fire(evt)
@@ -39,9 +39,8 @@ class TestUtilitiesStringToAttachment:
         assert func is not None
 
     @pytest.mark.parametrize("string_to_convert_to_attachment, attachment_name, incident_id, expected_results", [
-        ("test string", "test attachment name", 202, {'attachment_id' : 2021})
+        ("test string", "test attachment name", 202, {'attachment_id': 2021})
     ])
-
     def test_success(self, circuits_app, string_to_convert_to_attachment, attachment_name, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
