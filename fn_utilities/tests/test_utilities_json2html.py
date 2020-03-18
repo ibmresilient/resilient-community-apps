@@ -3,6 +3,7 @@
 
 from __future__ import print_function
 import pytest
+import sys
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from resilient_circuits.action_message import FunctionException_, FunctionError_
@@ -36,6 +37,10 @@ class TestUtilitiesJson2Html:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.skipif(sys.version_info < (3, 0), reason="""Python2 does not gaurantee the order of iteration over elements 
+                                                          thus it is difficult to compare expected and actual results. 
+                                                          If the test passes in Python3 it is reasonable to assume
+                                                          that the results of the function are accurate in Python2.""")
     @pytest.mark.parametrize("json2html_data, json2html_keys, expected_results", [
         ('{ "key10": { "key20": { "a": "a1", "b": "b1", "key30": [1, 2, 3, 4] } } }',
          None, {"content": "<table border=\"1\"><tr><th>key10</th><td><table border=\"1\"><tr><th>key20</th><td><table border=\"1\"><tr><th>a</th><td>a1</td></tr><tr><th>b</th><td>b1</td></tr><tr><th>key30</th><td><ul><li>1</li><li>2</li><li>3</li><li>4</li></ul></td></tr></table></td></tr></table></td></tr></table>"}),
@@ -49,7 +54,7 @@ class TestUtilitiesJson2Html:
             "json2html_keys": json2html_keys
         }
         results = call_utilities_json2html_function(circuits_app, function_params)
-        assert(expected_results == results)
+        assert expected_results == results
 
 
     @pytest.mark.parametrize("json2html_data, json2html_keys, expected_results", [
