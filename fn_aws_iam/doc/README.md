@@ -50,10 +50,9 @@
 <!--
   List the Key Features of the Integration
 -->
-Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. Using IAM, AWS users and groups can be created and managed, permissions can used to allow and deny access to AWS resources.
-The AWS IAM integration with the Resilient platform allows for querying and updating of users or access keys for an AWS account. 
-
-The following types of queries can be executed:
+Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. You can use IAM to create and manage AWS users and groups, and use permissions to allow or deny access to AWS resources. 
+The AWS IAM integration with the Resilient platform allows you to query and update users or access keys for an AWS account.
+You can execute the following types of queries:
 * Get a list of users and associated items (login profile, access keys, groups, policies).
 * Get a list of access keys.
 * List objects associated with a user:
@@ -61,11 +60,11 @@ The following types of queries can be executed:
    * Groups.
    * Policies.
    * SSH public keys.
-   * Services specific credentials.
+   * Service-specific credentials.
    * Signing certificates.
    * Active mfa devices (Virtual devices flagged).
    
-The integration can also be used to make the following changes to an AWS IAM environment:
+You can also use the integration to make the following changes to an AWS IAM environment:
 * Delete a user and delete or remove items associated with the user.
 * Attach a user policy.
 * Detach all policies for a user.
@@ -76,14 +75,14 @@ The integration can also be used to make the following changes to an AWS IAM env
 * Delete all access keys for a user.
 * Delete the login profile for a user.
 * Delete all ssh Public Keys for a user.
-* Delete all service Specific credentials for a user.
+* Delete all service-specific credentials for a user.
 * Delete all signing certificates for a user.
 * De-activate all active mfa devices for a user.
 * Delete all active mfa virtual devices for a user.
 
 ---
 ## Function - AWS IAM: List Users
-The function can perform a get of IAM user or users in the AWS account.  Users can be filtered by user name , group, policy or access key. If the user name is specified, the function can perform a get of information for this user only. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine the user data returned. Parameter aws_iam_query_type (optional) is used to determine the type of query to perform on users.
+The function can perform a get of IAM user or users in the AWS account. Users can be filtered by user name, group, policy or access key. If the user name is specified, the function can perform a get of information for this user only. Parameter aws_iam_user_name is an IAM user name. Parameters aws_iam_user_filter, aws_aim_group_filter and aws_aim_policy_filter param (all optional) are filters used to refine the user data returned. Parameter aws_iam_query_type (optional) is used to determine the type of query to perform on users.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: List Users`, `Example: AWS IAM: List Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete Login Profile`, `Example: AWS IAM: Delete User`, `Example: AWS IAM: Delete User For Artifact`, `Example: AWS IAM: Get Access Key For Artifact` and `Example: AWS IAM: Get User For Artifact`.
 
@@ -105,9 +104,9 @@ The workflow is initiated by the incident rule, `Example: AWS IAM: List Users`.
 
    ![screenshot: fn-aws-iam-list-users-action_2 ](./screenshots/fn-aws-iam-list-users-action_2.png)
 
+3. Press Execute to invoke the `Example: AWS IAM: List Users` workflow, which calls the `AWS IAM: List Users` function.
 
-Press Execute to invoke the `Example: AWS IAM: List Users` workflow, which calls the `AWS IAM: List Users` function.
-The data table `AWS IAM Users` is updated in the Resilient platform with the users' properties for the selected AWS account.  
+On successful completion of the workflow, the data table `AWS IAM Users` is updated in the Resilient platform with the users' properties for the selected AWS account.  
 
    ![screenshot: fn-aws-iam-list-users-datatable](./screenshots/fn-aws-iam-list-users-datatable.png)
  
@@ -320,8 +319,9 @@ The workflow is initiated by the incident rule, `Example: AWS IAM: List Access k
    ![screenshot: fn-aws-iam-list-keys-action_2 ](./screenshots/fn-aws-iam-list-keys-action_2.png)
 
 
-Press Execute to invoke the `Example: AWS IAM: List Access keys` workflow, which calls the `AWS IAM: List Users` function.
-The data table `AWS IAM Access Keys` is updated in the Resilient platform with the users' properties for the selected AWS account.  
+3. Press Execute to invoke the `Example: AWS IAM: List Access keys` workflow, which calls the `AWS IAM: List Users` function.
+
+On successful completion of the workflow, the data table `AWS IAM Access Keys` is updated in the Resilient platform with the users' properties for the selected AWS account.  
 
    ![screenshot: fn-aws-iam-list-keys-datatable](./screenshots/fn-aws-iam-list-keys-datatable.png)
 
@@ -373,7 +373,6 @@ results =  {
 inputs.aws_iam_access_key_filter = rule.properties.aws_iam_access_key_filter
 inputs.aws_iam_user_filter = rule.properties.aws_iam_user_filter
 inputs.aws_iam_query_type = "access_keys"
-
 ```
 
 </p>
@@ -482,7 +481,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-delete-user-action_2 ](./screenshots/fn-aws-iam-delete-user-action_2.png)  
        
-Press Execute to invoke the `Example: AWS IAM: Delete User` workflow, which calls the `AWS IAM: Delete User` function. 
+3. Press Execute to invoke the `Example: AWS IAM: Delete User` workflow, which calls the `AWS IAM: Delete User` function. 
 
 On successful completion of the workflow, the data table `AWS IAM Users` is refreshed in the Resilient platform with the updated access key details for the selected user. The `Status` field of the data table transitions to `Deleted`.
 
@@ -503,7 +502,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-delete-user-artifact-action_2 ](./screenshots/fn-aws-iam-delete-user-artifact-action_2.png)     
 
-Press Execute to invoke the `Example: AWS IAM: Delete User For Artifact` workflow, which calls the `AWS IAM: Delete User` function.
+3. Press Execute to invoke the `Example: AWS IAM: Delete User For Artifact` workflow, which calls the `AWS IAM: Delete User` function.
 
 On successful completion of the workflow, the artifact description is updated with details of the user deletion.
 
@@ -524,10 +523,13 @@ On successful completion of the workflow, the artifact description is updated wi
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = { 'version': '1.0', 'success': True, 'reason': None,
+            'content': 'OK', 
+            'raw': '"OK"', 
+            'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+            'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                        'execution_time_ms': 689, 'timestamp': '2020-01-15 10:27:48'
+                       }
 }
 ```
 
@@ -549,18 +551,6 @@ inputs.aws_iam_user_name = row.UserName
 
 ```python
 ##  AWS IAM - fn_aws_iam_delete_access_keys script ##
-# Example result:
-"""
-OK
-Result: { 'version': '1.0', 'success': True, 'reason': None, 
-          'content': 'OK', 
-          'raw': '"OK"', 
-          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
-                      'execution_time_ms': 689, 'timestamp': '2020-01-15 10:27:48'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_user  script
 DATA_TBL_FIELDS = ["Status"]
@@ -595,7 +585,7 @@ if __name__ == "__main__":
 </details>
 
 ---
-## Function - AWS IAM: List User Access Key Ids
+## Function - AWS IAM: List User Access Key IDs
 Gets information about the access key IDs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Refresh User`, `Example: AWS IAM: Get User For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
@@ -611,7 +601,7 @@ The workflow is initiated by the data table rule, `Example: AWS IAM: Refresh Use
 
    ![screenshot: fn-aws-iam-list-user-access-key-ids-action ](./screenshots/fn-aws-iam-list-user-access-key-ids-action.png)
    
-Press Execute to invoke the `Example: AWS IAM: Refresh User` workflow, which calls the `AWS IAM: List User Access Key Ids` function.
+3. Press Execute to invoke the `Example: AWS IAM: Refresh User` workflow, which calls the `AWS IAM: List User Access Key IDs` function.
 
 On successful completion of the workflow, the `Access key ids` field of the `AWS IAM Users` data table is updated for the selected user.
 
@@ -632,9 +622,15 @@ On successful completion of the workflow, the `Access key ids` field of the `AWS
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'UserName': 'iam_test_User', 'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L',
+                       'Status': 'Active', 'CreateDate': '2019-11-12 11:09:38'
+                      }
+                     ],
+          'raw': '[{"UserName": "iam_test_User", "AccessKeyId": "AKIA4EQBBG2YKXYJB55L", "Status": "Active", "CreateDate": "2019-11-12 11:09:38"}]',
+          'inputs': {'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                      'host': 'myhost.ibm.com', 'execution_time_ms': 5365, 'timestamp': '2019-11-21 10:41:22'}
 }
 ```
 
@@ -656,19 +652,6 @@ inputs.aws_iam_user_name = row.UserName
 
 ```python
 ##  AWS IAM - fn_aws_iam_list_user_access_keys script ##
-# Example result:
-"""
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'UserName': 'iam_test_User', 'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L',
-                       'Status': 'Active', 'CreateDate': '2019-11-12 11:09:38'
-                       }],
-          'raw': '[{"UserName": "iam_test_User", "AccessKeyId": "AKIA4EQBBG2YKXYJB55L",
-                  "Status": "Active", "CreateDate": "2019-11-12 11:09:38"}]',
-          'inputs': {'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                      'host': 'myhost.ibm.com', 'execution_time_ms': 5365, 'timestamp': '2019-11-21 10:41:22'}}
-"""
 #  Globals
 # List of fields in datatable fn_aws_iam_list_user_access_keys script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
@@ -713,8 +696,8 @@ Example workflows that use this Resilient function include `Example: AWS IAM: De
 The workflow, `Example: AWS IAM: Deactivate Access Key`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected data table row.
-*   aws_iam_access_key_id = is mapped to an access key id from the selected data table row.
-*   aws_iam_status = Is set to the value "Inactive".
+*   aws_iam_access_key_id = is mapped to an access key ID from the selected data table row.
+*   aws_iam_status = is set to the value "Inactive".
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Deactivate Access Key`.
 
@@ -727,7 +710,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-update-access-key-action_2 ](./screenshots/fn-aws-iam-update-access-key-action_2.png)  
 
-Press Execute to invoke the `Example: AWS IAM: Deactivate Access Key` workflow, which calls the `AWS IAM: Update Access Key` function.
+3. Press Execute to invoke the `Example: AWS IAM: Deactivate Access Key` workflow, which calls the `AWS IAM: Update Access Key` function.
 
 On successful completion of the workflow, the `Status` field of the `AWS IAM Access Keys` data table is transitioned to `Inactive`
 
@@ -749,20 +732,23 @@ On successful completion of the workflow, the `Status` field of the `AWS IAM Acc
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'inputs': {'aws_iam_user_name': 'iam_test_user', 'aws_iam_access_key_id': 'AKIA4EQBBG2YGLNUPO64', 
+                      'aws_iam_status': 'Inactive'},
+           'metrics': {'package': 'fn-aws-iam', 'timestamp': '2020-02-19 12:53:48', 'package_version': '1.0.0',
+                     'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 3023},
+           'success': True,
+           'content': 'OK',
+           'raw': '"OK"',
+           'reason': None,
+           'version': '1.0'
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
-
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
   ```python
 inputs.aws_iam_access_key_id = row.AccessKeyId
@@ -770,27 +756,14 @@ inputs.aws_iam_user_name = row.UserName
 inputs.aws_iam_status = "Inactive"
   ```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
   ```python
-  ##  AWS IAM - fn_aws_iam_update_access_key script ##
-# Example result:
-"""
-OK
-Result: {'inputs': {u'aws_iam_user_name': u'iam_test_user', u'aws_iam_access_key_id': u'AKIA4EQBBG2YGLNUPO64', u'aws_iam_status': u'Inactive'},
-         'metrics': {'package': 'fn-aws-iam', 'timestamp': '2020-02-19 12:53:48', 'package_version': '1.0.0',
-                     'host': 'myhost.ibm.com', 'version': '1.0', 'execution_time_ms': 3023},
-         'success': True,
-         'content': 'OK',
-         'raw': '"OK"',
-         'reason': None,
-         'version': '1.0'
-}
-"""
+##  AWS IAM - fn_aws_iam_update_access_key script ##
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_access_keys  script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
@@ -801,19 +774,19 @@ CONTENT = results.content
 INPUTS = results.inputs
 
 def main():
-    note_text = u''
+    note_text = ''
     if CONTENT:
         if CONTENT == "OK":
-            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deactivated " \
-                        u"for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deactivated " \
+                        "for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
             row.Status = "Inactive"
-        elif CONTENT == u"NoSuchEntity":
-            note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> Not found " \
-                        u"for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
+        elif CONTENT == "NoSuchEntity":
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> Not found " \
+                        "for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
             row.Status = "NoSuchEntity"
     else:
-        note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
-                     u"access key id <b>{1}</b> access key  Resilient function <b>{2}</b>."\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \
+                     "access key id <b>{1}</b> access key  Resilient function <b>{2}</b>."\
             .format(WF_NAME, INPUTS["aws_iam_access_keys"], FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -822,14 +795,12 @@ if __name__ == "__main__":
 
   ```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: Delete Access Keys
-Delete the access key pairs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_access_keys is a comma separated list of IAM access key IDs.
+Delete the access key pairs associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_access_keys is a comma-separated list of IAM access key IDs.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete Access Keys`, `Example: AWS IAM: Delete Access Key`, `Example: AWS IAM: Delete Access Key For Artifact`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
@@ -849,7 +820,7 @@ The user is presented with a warning and an option to Execute or Cancel.
     
    ![screenshot: fn-aws-iam-delete-accesskeys-action_2 ](./screenshots/fn-aws-iam-delete-accesskeys-action_2.png)     
 
-Press Execute to invoke the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
+3. Press Execute to invoke the `Example: AWS IAM: Delete Access Keys` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
 On successful completion of the workflow, the `Access key ids` field of the `AWS IAM Users` data table is updated for the selected user.
 
@@ -871,7 +842,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-delete-accesskey-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-action_2.png)     
 
-Press Execute to invoke the `Example: AWS IAM: Delete Access Key` workflow, which calls the `AWS IAM: Delete Access Keys` function.
+3. Press Execute to invoke the `Example: AWS IAM: Delete Access Key` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
 On successful completion of the workflow, the `Status` field of the `AWS IAM Access Keys` data table is transitioned to `Deleted`.
    
@@ -893,7 +864,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-delete-accesskey-artifact-action_2 ](./screenshots/fn-aws-iam-delete-accesskey-artifact-action_2.png)     
 
-Press Execute to invoke the `Example: AWS IAM: Delete Access Key For Artifact` workflow, which calls the `AWS IAM: Delete Access Keys` function.
+3. Press Execute to invoke the `Example: AWS IAM: Delete Access Key For Artifact` workflow, which calls the `AWS IAM: Delete Access Keys` function.
 
 On successful completion of the workflow, the artifact description is updated with details of access key deletion.
 
@@ -904,7 +875,7 @@ On successful completion of the workflow, the artifact description is updated wi
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_access_keys` | `text` | Yes | `-` | Comma seperated list of AWS IAM access key names. |
+| `aws_iam_access_keys` | `text` | Yes | `-` | Comma-seperated list of AWS IAM access key names. |
 | `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
@@ -914,10 +885,13 @@ On successful completion of the workflow, the artifact description is updated wi
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'version': '1.0', 'success': True, 'reason': None,
+           'content': [{'AccessKeyId': 'AKIA4EQBBG2YFAXXIG6M', 'Status': 'OK'}],
+           'raw': '[{"AccessKeyId": "AKIA4EQBBG2YFAXXIG6M", "Status": "OK"}]',
+           'inputs': {'aws_iam_user_name': 'iam_test_User_1', 'aws_iam_access_keys': 'AKIA4EQBBG2YFAXXIG6M'},
+           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
+                       'host': 'myhost.ibm.com', 'execution_time_ms': 752, 'timestamp': '2020-01-16 13:47:07'
+                      }
 }
 ```
 
@@ -941,20 +915,7 @@ inputs.aws_iam_access_keys = row.AccessKeyIds
 ```python
 ##  AWS IAM - fn_aws_iam_delete_access_keys script ##
 # Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'AccessKeyId': 'AKIA4EQBBG2YKXYJB55L', 'Status': 'OK'},
-                      {'AccessKeyId': 'AKIA4EQBBG2YKXYJB55M', 'Status': 'NoSuchEntity'}],
-          'raw': '[{"AccessKeyId": "AKIA4EQBBG2YKXYJB55L", "Status": "OK"},
-                  {"AccessKeyId": "AKIA4EQBBG2YKXYJB55M", "Status": "NoSuchEntity"}]',
-          'inputs': {'aws_iam_user_name': 'iam_johnpren_test_User', 'aws_iam_access_keys': 'AKIA4EQBBG2YKXYJB55L,AKIA4EQBBG2YKXYJB55M'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                      'host': 'myhost.ibm.com', 'execution_time_ms': 37199, 'timestamp': '2019-11-21 14:31:13'
-                     }
-}
-"""
+
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_access_keys  script
 DATA_TBL_FIELDS = ["AccessKeyIds"]
@@ -996,8 +957,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
-
-
 ```
 
 </p>
@@ -1041,10 +1000,23 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'AGPA4EQBBG2YAVPJATCNZ', 
+                      'Arn': 'arn:aws:iam::834299573936:group/null_group', 'CreateDate': '2019-12-04 12:31:47'}, 
+                      {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'AGPA4EQBBG2YPUAIHTA3E', 
+                       'Arn': 'arn:aws:iam::834299573936:group/denyall_group', 'CreateDate': '2019-11-29 15:49:34'}, 
+                      {'Path': '/', 'GroupName': 'myS3group', 'GroupId': 'AGPAIH4V2XCXOME6HWCPQ', 
+                      'Arn': 'arn:aws:iam::834299573936:group/myS3group', 'CreateDate': '2017-05-29 20:41:50'}], 
+          'raw': '[{"Path": "/", "GroupName": "null_group", "GroupId": "AGPA4EQBBG2YAVPJATCNZ",' \
+                 '"Arn": "arn:aws:iam::834299573936:group/null_group", "CreateDate": "2019-12-04 12:31:47"},' \ 
+                 '"Path": "/", "GroupName": "denyall_group", "GroupId": "AGPA4EQBBG2YPUAIHTA3E",' \
+                 '"Arn": "arn:aws:iam::834299573936:group/denyall_group", "CreateDate": "2019-11-29 15:49:34"},' \
+                 '{"Path": "/", "GroupName": "myS3group", "GroupId": "AGPAIH4V2XCXOME6HWCPQ",' \
+                 '"Arn": "arn:aws:iam::834299573936:group/myS3group", "CreateDate": "2017-05-29 20:41:50"}]' , 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_1'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
+                     'execution_time_ms': 944, 'timestamp': '2020-03-16 15:43:21'
+                    }
 }
 ```
 
@@ -1066,22 +1038,6 @@ inputs.aws_iam_user_name = row.UserName
 
 ```python
 ##  AWS IAM - fn_aws_iam_list_user_groups script ##
-# Example result:
-"""
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': [{'Path': '/', 'GroupName': 'system-admins', 'GroupId': 'AGPAJUCG3BHM64OGVGCBG',
-                      'Arn': 'arn:aws:iam::834299573936:group/system-admins', 'CreateDate': '2017-05-29 20:37:53'}],
-                      'raw': '[{"Path": "/", "GroupName": "system-admins", "GroupId": "AGPAJUCG3BHM64OGVGCBG",
-                      "Arn": "arn:aws:iam::834299573936:group/system-admins", "CreateDate": "2017-05-29 20:37:53"
-                      }
-                    ]',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                     'execution_time_ms': 1070, 'timestamp': '2019-11-18 10:19:19'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable fn_aws_iam_list_user_groups script
 DATA_TBL_FIELDS = ["Groups"]
@@ -1113,7 +1069,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Add User To Groups
-Adds the specified IAM user to the specified groups. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is a comma separated list of IAM group names.
+Adds the specified IAM user to the specified groups. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is a comma-separated list of IAM group names.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Add User To Group`.
 
@@ -1144,7 +1100,7 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_names` | `text` | Yes | `-` | Comma separated list of AWS IAM group names. |
+| `aws_iam_group_names` | `text` | Yes | `-` | Comma-separated list of AWS IAM group names. |
 | `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
@@ -1154,10 +1110,14 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+{'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'GroupName': 'denyall_group', 'Status': 'OK'}], 
+         'raw': '[{"GroupName": "denyall_group", "Status": "OK"}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_1', 'aws_iam_group_names': 'denyall_group'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
+                     'host': 'myhost.ibm.com', 'execution_time_ms': 4303, 'timestamp': '2020-03-16 15:43:17'
+           
+                    }
 }
 ```
 
@@ -1233,7 +1193,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Remove User From Groups
-Removes the specified IAM user from the specified groups. Group names is a comma separated string of group names. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is  a comma separated list of IAM group names.
+Removes the specified IAM user from the specified groups. Group names is a comma-separated string of group names. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_group_names is  a comma-separated list of IAM group names.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Remove User From All Groups`, `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
@@ -1253,7 +1213,7 @@ The user is presented with a warning and an option to Execute or Cancel.
     
    ![screenshot: fn-aws-iam-remove-user-from-groups-action_2 ](./screenshots/fn-aws-iam-remove-user-from-groups-action_2.png)   
                                     
-Press Execute to invoke the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Remove User From Groups` function.
+3. Press Execute to invoke the `Example: AWS IAM: Remove User From All Groups` workflow, which calls the `AWS IAM: Remove User From Groups` function.
 
 On successful completion of the workflow, the `Groups` field of the `AWS IAM Users` data table is updated to an empty value for the selected user.
 
@@ -1265,7 +1225,7 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_group_names` | `text` | Yes | `-` | Comma separated list of AWS IAM group names. |
+| `aws_iam_group_names` | `text` | Yes | `-` | Comma-separated list of AWS IAM group names. |
 | `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 </p>
@@ -1276,9 +1236,15 @@ On successful completion of the workflow, the `Groups` field of the `AWS IAM Use
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Status': 'OK'},
+                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'OK'}],
+          'raw': '[{"PolicyArn": "arn:aws:iam::aws:policy/AWSDenyAll", "Status": "OK"},' \
+                  '{"PolicyArn": "arn:aws:iam::aws:policy/AWSDenyAll_2", "Status": "OK"}]',
+          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
@@ -1301,21 +1267,6 @@ inputs.aws_iam_group_names = row.Groups
 
 ```python
 ##  AWS IAM - fn_aws_iam_detach_user_policies script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Status': 'OK'}
-                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'PolicyArn': "arn:aws:iam::aws:policy/AWSDenyAll", 'Status": 'OK'},
-                  {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable for fn_aws_iam_detach_user_policies  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -1400,9 +1351,19 @@ On successful completion of the workflow, the `Policies` field of the `AWS IAM U
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyName': 'test_pol'},
+                      {'PolicyName': 'test_pol_2',
+                       'PolicyArn': 'arn:aws:iam::834299573936:policy/test_pol_2'},
+                      {'PolicyName': 'AmazonRoute53ReadOnlyAccess',
+                       'PolicyArn': 'arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess'}],
+          'raw': '[{"PolicyName": "test_pol"}, {"PolicyName": "test_pol_2", "PolicyArn":'\
+                 '"arn:aws:iam::834299573936:policy/test_pol_2"}, {"PolicyName": '\
+                 '"AmazonRoute53ReadOnlyAccess", "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"}]',
+          'inputs': {'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                      'host': 'myhost.ibm.com', 'execution_time_ms': 87423, 'timestamp': '2019-11-21 11:55:29'
+                     }
 }
 ```
 
@@ -1424,25 +1385,6 @@ inputs.aws_iam_user_name = row.UserName
 
 ```python
 ##  AWS IAM - fn_aws_iam_list_user_policies script ##
-# Example result:
-"""
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'PolicyName': 'test_pol'},
-                      {'PolicyName': 'test_pol_2',
-                       'PolicyArn': 'arn:aws:iam::834299573936:policy/test_pol_2'},
-                      {'PolicyName': 'AmazonRoute53ReadOnlyAccess',
-                       'PolicyArn': 'arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess'}],
-          'raw': '[{"PolicyName": "test_pol"}, {"PolicyName": "test_pol_2",
-                    "PolicyArn": "arn:aws:iam::834299573936:policy/test_pol_2"},
-                    {"PolicyName": "AmazonRoute53ReadOnlyAccess",
-                    "PolicyArn": "arn:aws:iam::aws:policy/AmazonRoute53ReadOnlyAccess"}]',
-          'inputs': {'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                      'host': 'myhost.ibm.com', 'execution_time_ms': 87423, 'timestamp': '2019-11-21 11:55:29'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable for fn_aws_iam_list_user_policies script
 DATA_TBL_FIELDS = ["Policies"]
@@ -1479,7 +1421,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Attach User policies
-Attaches the specified managed policies to the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+Attaches the specified managed policies to the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is a comma-separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma-separated list of IAM policy arns.
 
 Note: One of parameters, aws_iam_policy_names or aws_iam_arns, is required to be set.
 
@@ -1513,8 +1455,8 @@ On successful completion of the workflow, the `Policies` field of the `AWS IAM U
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
-| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
+| `aws_iam_arns` | `text` | No | `-` | Comma-separated list of AWS IAM Amazon Resource Names (ARNs). |
+| `aws_iam_policy_names` | `text` | No | `-` | Comma-separated list of AWS IAM policy names. |
 | `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 Note: At least One of the parameters `aws_iam_arns` or `aws_iam_user_name` must be set.
@@ -1527,9 +1469,15 @@ Note: At least One of the parameters `aws_iam_arns` or `aws_iam_user_name` must 
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Status': 'OK'},
+                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"PolicyArn": "arn:aws:iam::aws:policy/AWSDenyAll", "Status": "OK"}, '\
+                 '{"PolicyArn": "arn:aws:iam::aws:policy/AWSDenyAll_2", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
@@ -1552,21 +1500,6 @@ inputs.aws_iam_policy_names = rule.properties.aws_iam_policy_name
 
 ```python
 ##  AWS IAM - fn_aws_iam_attach_user_policies script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Status': 'OK'},
-                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'PolicyArn': "arn:aws:iam::aws:policy/AWSDenyAll", 'Status": 'OK'},
-                  {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable for fn_aws_iam_attach_user_policies  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -1615,7 +1548,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Detach User policies
-Removes the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma separated list of IAM policy arns.
+Removes the specified managed policy from the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_policy_names (optional) is  a comma-separated  list of IAM policy names. Parameter (optional) aws_iam_arns is a comma-separated list of IAM policy arns.
 
 Note: A user can have embedded inline policies, which the function also deletes. One of the parameters, aws_iam_policy_names or aws_iam_arns, is 
 required to be set.
@@ -1638,7 +1571,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-detach-user-policies-action_2 ](./screenshots/fn-aws-iam-detach-user-policies-action_2.png)  
 
-Press Execute to invoke the `Example: AWS IAM: Detach All User Policies` workflow, which calls the `AWS IAM: Detach User policies` function.
+3. Press Execute to invoke the `Example: AWS IAM: Detach All User Policies` workflow, which calls the `AWS IAM: Detach User policies` function.
 
 On successful completion of the workflow, the `Policies` field of the `AWS IAM Users` data table is updated to an empty value for the selected user.
 
@@ -1651,8 +1584,8 @@ On successful completion of the workflow, the `Policies` field of the `AWS IAM U
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
-| `aws_iam_arns` | `text` | No | `-` | Comma separated list of AWS IAM Amazon Resource Names (ARNs). |
-| `aws_iam_policy_names` | `text` | No | `-` | Comma separated list of AWS IAM policy names. |
+| `aws_iam_arns` | `text` | No | `-` | Comma-separated list of AWS IAM Amazon Resource Names (ARNs). |
+| `aws_iam_policy_names` | `text` | No | `-` | Comma-separated list of AWS IAM policy names. |
 | `aws_iam_user_name` | `text` | Yes | `AWS IAM user name` | AWS IAM user name. |
 
 Note: At least One of the parameters `aws_iam_arns` or `aws_iam_user_name` must be set.
@@ -1665,9 +1598,14 @@ Note: At least One of the parameters `aws_iam_arns` or `aws_iam_user_name` must 
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'PolicyName': 'AWSDenyAll', 'Status': 'OK'},
+                      {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"PolicyName": "AWSDenyAll", "Status": "OK"},{"PolicyName": "AWSDenyAll_2", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
@@ -1691,20 +1629,6 @@ inputs.aws_iam_policy_names = row.Policies
 
 ```python
 ##  AWS IAM - fn_aws_iam_detach_user_policies script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'PolicyName': 'AWSDenyAll', 'Status': 'OK'}
-                      {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'PolicyName': "AWSDenyAll", 'Status": 'OK'},
-                  {'PolicyName': 'AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
 """
 #  Globals
 # List of fields in datatable for fn_aws_iam_detach_user_policies  script
@@ -1746,7 +1670,6 @@ def main():
     incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
-
 ```
 
 </p>
@@ -1763,14 +1686,14 @@ The workflow, `Example: AWS IAM: Delete User`, sets the following input field fo
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1787,48 +1710,38 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None, 
+          'content': [{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 
+                       'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
+                      }
+                     ], 
+          'raw': '[{"UserName": "iam_test_user_10", "SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", '\
+                 '"Status": "Active", "UploadDate": "2020-02-25 11:05:17"}]', 
+          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                      'execution_time_ms': 657, 'timestamp': '2020-02-25 16:11:28'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+```python
+inputs.aws_iam_user_name = row.UserName
+```
 
-  ```python
-  inputs.aws_iam_user_name = row.UserName
-  ```
+</p>
+</details>
 
-  </p>
-  </details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  ##  AWS IAM - fn_aws_iam_list_ssh_public_keys script ##
-# Example result:
-"""
-Result: {
-          'version': '1.0', 'success': True, 'reason': None, 
-          'content': [{'UserName': 'iam_test_user', 'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 
-                       'Status': 'Active', 'UploadDate': '2020-02-25 11:05:17'
-                      }
-                     ], 
-          'raw': '[{"UserName": "iam_test_user_10", "SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", 
-                  "Status": "Active", "UploadDate": "2020-02-25 11:05:17"}]', 
-          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
-                      'execution_time_ms': 657, 'timestamp': '2020-02-25 16:11:28'
-                     }
-}
-"""
+```python
+##  AWS IAM - fn_aws_iam_list_ssh_public_keys script ##
 #  Globals
 # List of fields in datatable fn_aws_iam_list_ssh_public_keys script
 DATA_TBL_FIELDS = ["SSHPublicKeyIds"]
@@ -1868,25 +1781,25 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS IAM: Delete SSH Public Keys
-Delete Secure Shell (SSH) public keys associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_ssh_key_ids is a comma separated list of SSH public key ids.
+Delete Secure Shell (SSH) public keys associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_ssh_key_ids is a comma-separated list of SSH public key IDs.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
 The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_ssh_key_ids is mapped to ssh key ids retrieved from the previous step (c.f. `AWS IAM: List SSH Public Keys`) in the workflow.
+*	aws_iam_ssh_key_ids is mapped to SSH key IDs retrieved from the previous step (c.f. `AWS IAM: List SSH Public Keys`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
-*	aws_iam_ssh_key_ids is mapped to ssh key ids retrieved from the previous step (c.f. `AWS IAM: List SSH Public Keys`) in the workflow.
+*	aws_iam_ssh_key_ids is mapped to SSH key IDs retrieved from the previous step (c.f. `AWS IAM: List SSH Public Keys`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1904,21 +1817,25 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'OK'}
+                      {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", "Status": "OK"},'\
+                  '{"SSHPublicKeyId": "APKA4EQBBG2YCGOGDY5G", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_ssh_keys_ids': 'APKA4EQBBG2YCGOGDY5G', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
+```python
 inputs.aws_iam_user_name = row.UserName
 content = workflow.properties.list_ssh_keys_results.content
 ssh_key_ids = []
@@ -1928,31 +1845,16 @@ for ssh_key_id in content:
 inputs.aws_iam_ssh_key_ids = ",".join(ssh_key_ids)
 
 
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
   ```python
-  ##  AWS IAM - fn_aws_iam_delete_ssh_keys script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'OK'}
-                      {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'SSHPublicKeyId': "APKA4EQBBG2YCGOGDY5G", 'Status": 'OK'},
-                  {'SSHPublicKeyId': 'APKA4EQBBG2YCGOGDY5G', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_ssh_keys_ids': 'APKA4EQBBG2YCGOGDY5G', 'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
+##  AWS IAM - fn_aws_iam_delete_ssh_keys script ##
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_ssh_keys  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -2012,14 +1914,14 @@ The workflow, `Example: AWS IAM: Delete User`, sets the following input field fo
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2035,36 +1937,7 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Workflows</summary>
-
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  inputs.aws_iam_user_name = row.UserName
-  ```
-
-  </p>
-  </details>
-
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  ##  AWS IAM - fn_aws_iam_list_service_specific_credentials script ##
-# Example result:
-"""
-Result: {'version': '1.0', 'success': True, 'reason': None, 
+results = {'version': '1.0', 'success': True, 'reason': None, 
          'content': [{'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user-at-834299573936', 
                       'CreateDate': '2020-02-25 10:43:24', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 
                       'ServiceName': 'codecommit.amazonaws.com'
@@ -2072,16 +1945,36 @@ Result: {'version': '1.0', 'success': True, 'reason': None,
                      {'UserName': 'iam_test_user', 'Status': 'Active', 'ServiceUserName': 'iam_test_user_10-at-834299573936',
                       'CreateDate': '2020-02-26 11:50:52', 'ServiceSpecificCredentialId': 'ACCA4EQBBG2YGOLHZWY7L', 
                       'ServiceName': 'cassandra.amazonaws.com'}], 
-         'raw': '[{"UserName": "iam_test_user", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936", 
-                   "CreateDate": "2020-02-25 10:43:24", "ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", "ServiceName": "codecommit.amazonaws.com"}, 
-                   {"UserName": "iam_test_user_10", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936", 
-                   "CreateDate": "2020-02-26 11:50:52", "ServiceSpecificCredentialId": "ACCA4EQBBG2YGOLHZWY7L", "ServiceName": "cassandra.amazonaws.com"}]', 
+         'raw': '[{"UserName": "iam_test_user", "Status": "Active", "ServiceUserName": "iam_test_user_10-at-834299573936",'\ 
+                   '"CreateDate": "2020-02-25 10:43:24", "ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", '\
+                   '"ServiceName": "codecommit.amazonaws.com"},{"UserName": "iam_test_user_10", "Status": "Active", '\
+                   '"ServiceUserName": "iam_test_user_10-at-834299573936", "CreateDate": "2020-02-26 11:50:52", '\
+                   '"ServiceSpecificCredentialId": "ACCA4EQBBG2YGOLHZWY7L", "ServiceName": "cassandra.amazonaws.com"}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
                      'execution_time_ms': 982, 'timestamp': '2020-02-26 11:56:51'
                     }
 }
-"""
+```
+
+</p>
+</details>
+
+<details><summary>Example Pre-Process Script:</summary>
+<p>
+
+```python
+inputs.aws_iam_user_name = row.UserName
+```
+
+</p>
+</details>
+
+<details><summary>Example Post-Process Script:</summary>
+<p>
+
+  ```python
+  ##  AWS IAM - fn_aws_iam_list_service_specific_credentials script ##
 #  Globals
 # List of fields in datatable fn_aws_iam_list_service_specific_credentials script
 DATA_TBL_FIELDS = ["ServiceSpecificCredentialIds"]
@@ -2111,23 +2004,21 @@ def main():
 
 if __name__ == "__main__":
     main()
-  ```
+```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: Delete Service Specific Credentials
-Delete service-specific credentials associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_ssc_ids is a comma separated list of service-specific credential ids.
+Delete service-specific credentials associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_ssc_ids is a comma-separated list of service-specific credential ids.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
 The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_ssc_ids is mapped to service specific credential ids retrieved from the previous step (c.f. `AWS IAM: List Service Specific Credentials`) in the workflow.
+*	aws_iam_ssc_ids is mapped to service specific credential IDs retrieved from the previous step (c.f. `AWS IAM: List Service Specific Credentials`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
 For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
@@ -2135,7 +2026,7 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
-*	aws_iam_ssc_ids is mapped to service specific credential ids retrieved from the previous step (c.f. `AWS IAM: List Service Specific Credentials`) in the workflow.
+*	aws_iam_ssc_ids is mapped to service specific credential IDs retrieved from the previous step (c.f. `AWS IAM: List Service Specific Credentials`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
 For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
@@ -2156,21 +2047,25 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'OK'}
+                      {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}],
+          'raw': '[{"ServiceSpecificCredentialId: "ACCA4EQBBG2YH6NR76SCQ", "Status": "OK"},'\
+                 '{"ServiceSpecificCredentialId": "ACCA4EQBBG2YH6NR76SCQ", "Status": "NoSuchEntity"}]',
+          'inputs': {'aws_iam_ssc_ids': 'ACCA4EQBBG2YH6NR76SCQ', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
+```python
   inputs.aws_iam_user_name = row.UserName
 content = workflow.properties.list_srv_specific_creds_results.content
 srv_specific_cred_ids = []
@@ -2178,31 +2073,16 @@ for ssc_id in content:
     if ssc_id["ServiceSpecificCredentialId"] is not None:
         srv_specific_cred_ids.append(ssc_id["ServiceSpecificCredentialId"])
 inputs.aws_iam_ssc_ids = ",".join(srv_specific_cred_ids)
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
-  ##  AWS IAM - fn_aws_iam_delete_ss_creds script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'OK'}
-                      {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'ServiceSpecificCredentialId: "ACCA4EQBBG2YH6NR76SCQ", 'Status": 'OK'},
-                  {'ServiceSpecificCredentialId': 'ACCA4EQBBG2YH6NR76SCQ', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_ssc_ids': 'ACCA4EQBBG2YH6NR76SCQ', 'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
+```python
+##  AWS IAM - fn_aws_iam_delete_ss_creds script ##
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_ss_creds  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -2244,16 +2124,14 @@ def main():
 if __name__ == "__main__":
     main()
 
-  ```
+```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: List Signing Certificates
-List the signing certificates  associated with an IAM user. Parameter aws_iam_user_name is an IAM user name.
+List the signing certificates associated with an IAM user. Parameter aws_iam_user_name is an IAM user name.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
@@ -2285,32 +2163,38 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'UserName': 'iam_test_user', 'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 
+                      'CertificateBody': '-----BEGIN CERTIFICATE-----\nMIID...Apg=\n-----END CERTIFICATE-----', 
+                      'Status': 'Active', 'UploadDate': '2020-02-26 12:25:27'}], 
+         'raw': '[{"UserName": "iam_test_user", "CertificateId": "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "CertificateBody":'\ 
+                 ''"-----BEGIN CERTIFICATE-----\\nMIID...Apg=\\n-----END CERTIFICATE-----", "Status": "Active",'\
+                 '"UploadDate": "2020-02-26 12:25:27"}]',
+         'inputs': {'aws_iam_user_name': 'iam_test_user'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com', 
+                     'execution_time_ms': 729, 'timestamp': '2020-02-26 12:33:57'
+                    }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+<p>
 
-  ```python
-  inputs.aws_iam_user_name = row.UserName
-  ```
+```python
+inputs.aws_iam_user_name = row.UserName
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
+```python
   ##  AWS IAM - fn_aws_iam_list_signing_certificates script ##
 # Example result:
 """
@@ -2354,34 +2238,32 @@ def main():
 
 if __name__ == "__main__":
     main()
-  ```
+```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: Delete Signing Certificates
-Delete signing certificates associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_sign_cert_ids is a comma separated list of signing certificate ids.
+Delete signing certificates associated with the specified IAM user. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_sign_cert_ids is a comma-separated list of signing certificate ids.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
 The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_sign_cert_ids is mapped to signing certificate ids retrieved from the previous step (c.f. `AWS IAM: List Signing Certificates`) in the workflow.
+*	aws_iam_sign_cert_ids is mapped to signing certificate IDs retrieved from the previous step (c.f. `AWS IAM: List Signing Certificates`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
-*	aws_iam_sign_cert_ids is mapped to signing certificate ids retrieved from the previous step (c.f. `AWS IAM: List Signing Certificates`) in the workflow.
+*	aws_iam_sign_cert_ids is mapped to signing certificate IDs retrieved from the previous step (c.f. `AWS IAM: List Signing Certificates`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2399,53 +2281,43 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'},
+                      {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}],
+          'raw': '[{'CertificateId': "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", "Status": "OK"},'
+                  '{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}]',
+          'inputs': {'aws_iam_sign_cert_ids': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  inputs.aws_iam_user_name = row.UserName
+```python
+inputs.aws_iam_user_name = row.UserName
 content = workflow.properties.list_signing_certs_results.content
 sign_cert_ids = []
 for scert_id in content:
     if scert_id["CertificateId"] is not None:
         sign_cert_ids.append(scert_id["CertificateId"])
 inputs.aws_iam_sign_cert_ids = ",".join(sign_cert_ids)
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
-  ##  AWS IAM - fn_aws_iam_list_signing_certs script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'}
-                      {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'CertificateId: "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", 'Status": 'OK'},
-                  {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_sign_cert_ids': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
+```python
+##  AWS IAM - fn_aws_iam_list_signing_certs script ##
+
 #  Globals
 # List of fields in datatable for fn_aws_iam_list_signing_certs  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -2489,14 +2361,12 @@ if __name__ == "__main__":
 
   ```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: List MFA Devices
-List the MFA devices associated with an IAM user also determine which of the associated MFA devices is a virtual device. Parameter aws_iam_user_name is an IAM user name.
+List the MFA devices associated with an IAM user. Also determine which of the associated MFA devices is a virtual device. Parameter aws_iam_user_name is an IAM user name.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
@@ -2505,14 +2375,14 @@ The workflow, `Example: AWS IAM: Delete User`, sets the following input field fo
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2528,46 +2398,36 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'UserName': 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+                      'EnableDate': '2020-02-26 16:55:05', 'is_virtual': True}],
+         'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user_10",' 
+                 '"EnableDate": "2020-02-26 16:55:05", 'is_virtual': True}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_10'},
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
+                     'execution_time_ms': 5644, 'timestamp': '2020-02-26 17:37:48'
+                    }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
+```python
+inputs.aws_iam_user_name = row.UserName
+```
 
-  ```python
-  inputs.aws_iam_user_name = row.UserName
-  ```
+</p>
+</details>
 
-  </p>
-  </details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  ##  AWS IAM - fn_aws_iam_list_mfa_devices script ##
-# Example result:
-"""
-Result: {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName'a: 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
-                      'EnableDate': '2020-02-26 16:55:05'}, 'is_virtual': True], 
-         'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user_10", 
-                 "EnableDate": "2020-02-26 16:55:05"}, 'is_virtual': True]', 
-         'inputs': {'aws_iam_user_name': 'iam_test_user_10'}, 
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
-                     'execution_time_ms': 5644, 'timestamp': '2020-02-26 17:37:48'
-                    }
-}
-"""
+```python
+##  AWS IAM - fn_aws_iam_list_mfa_devices script ##
 #  Globals
 # List of fields in datatable fn_aws_iam_list_mfa_devices script
 DATA_TBL_FIELDS = ["SerialNumbers"]
@@ -2599,33 +2459,30 @@ def main():
 if __name__ == "__main__":
     main()
   ```
-
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: Deactivate MFA Devices
-Deactivate MFA devices and remove it from association with the user name for which it was originally enabled. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_mfa_serial_numbers is a comma separated list of IAM MFA serial numbers or arns.
+Deactivate MFA devices and remove it from association with the user name for which it was originally enabled. Parameter aws_iam_user_name is an IAM user name. Parameter aws_iam_mfa_serial_numbers is a comma-separated list of IAM MFA serial numbers or arns.
 
 Example workflows that use this Resilient function include `Example: AWS IAM: Delete User` or `Example: AWS IAM: Delete User For Artifact`.
 
 The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to a user name from the selected row of data table `AWS IAM Users`.
-*	aws_iam_mfa_serial_numbers is mapped to mfa serial numbers retrieved from the previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
+*	aws_iam_mfa_serial_numbers is mapped to MFA serial numbers retrieved from the previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
 *	aws_iam_user_name is mapped to an artifact value for artifact of type `AWS IAM User Name`.
-*	aws_iam_mfa_serial_numbers is mapped to mfa serial numbers retrieved from the previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
+*	aws_iam_mfa_serial_numbers is mapped to MFA serial numbers retrieved from the previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 
 <details><summary>Inputs:</summary>
@@ -2644,53 +2501,41 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}],
+          'raw': '[{"SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user", "Status": "OK"}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+                     'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  inputs.aws_iam_user_name = row.UserName
+```python
+inputs.aws_iam_user_name = row.UserName
 content = workflow.properties.list_mfa_devices_results.content
 mfa_serial_nums = []
 for mfa_ser_num in content:
     if mfa_ser_num["SerialNumber"] is not None:
         mfa_serial_nums.append(mfa_ser_num["SerialNumber"])
 inputs.aws_iam_mfa_serial_nums = ",".join(mfa_serial_nums)
-  ```
+```
 
-  </p>
-  </details>
+</p>
+</details>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  ```python
+```python
   ##  AWS IAM - fn_aws_iam_deactivate_mfa_devices script ##
-# Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}
-                      {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'SerialNumber: "arn:aws:iam::834299573936:mfa/iam_test_user", 'Status": 'OK'},
-                  {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable for fn_aws_iam_deactivate_mfa_devices  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -2732,16 +2577,14 @@ def main():
 if __name__ == "__main__":
     main()
 
-  ```
+```
 
-  </p>
-  </details>
-
+</p>
 </details>
 
 ---
 ## Function - AWS IAM: Delete Virtual MFA Devices
-Delete a virtual MFA device. Parameter aws_iam_mfa_serial_numbers is a comma separated list of IAM MFA serial numbers or arns.
+Delete a virtual MFA device. Parameter aws_iam_mfa_serial_numbers is a comma-separated list of IAM MFA serial numbers or arns.
 
 Note: You must deactivate a user's virtual MFA device before you can delete it.
 
@@ -2749,17 +2592,17 @@ Example workflows that use this Resilient function include `Example: AWS IAM: De
 
 The workflow, `Example: AWS IAM: Delete User`, sets the following input field for the function:
 
-*	aws_iam_mfa_serial_numbers is mapped to mfa serial numbers retrieved a previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
+*	aws_iam_mfa_serial_numbers is mapped to MFA serial numbers retrieved a previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 The workflow, `Example: AWS IAM: Delete User For Artifact`, sets the following input field for the function:
 
-*	aws_iam_mfa_serial_numbers is mapped to mfa serial numbers retrieved a previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
+*	aws_iam_mfa_serial_numbers is mapped to MFA serial numbers retrieved a previous step (c.f. `AWS IAM: List MFA Devices`) in the workflow.
 
 The workflow is initiated by the data table rule, `Example: AWS IAM: Delete User For Artifact`.
-For more information on this workflow reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
+For more information on this workflow, reference section [Function - AWS IAM: Delete User](#function---aws-iam-delete-user)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -2776,53 +2619,42 @@ For more information on this workflow reference section [Function - AWS IAM: Del
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+          'version': '1.0', 'success': True, 'reason': None,
+          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}],
+          'raw': '[{'SerialNumber': "arn:aws:iam::834299573936:mfa/iam_test_user", "Status": "OK"}]',
+          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+                     'aws_iam_user_name': 'iam_test_User'},
+          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
+                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
+                     }
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Workflows</summary>
+<details><summary>Example Pre-Process Script:</summary>
+<p>
 
-  <details><summary>Example Pre-Process Script:</summary>
-  <p>
-
-  ```python
-  content = workflow.properties.list_mfa_devices_results.content
+```python
+content = workflow.properties.list_mfa_devices_results.content
 mfa_serial_nums = []
 for mfa_ser_num in content:
     if mfa_ser_num["SerialNumber"] is not None and mfa_ser_num.get("is_virtual", None):
         mfa_serial_nums.append(mfa_ser_num["SerialNumber"])
 inputs.aws_iam_mfa_serial_nums = ",".join(mfa_serial_nums)
+```
 
-  ```
+</p>
+</details>
 
-  </p>
-  </details>
+<details><summary>Example Post-Process Script:</summary>
+<p>
 
-  <details><summary>Example Post-Process Script:</summary>
-  <p>
-
-  ```python
-  ##  AWS IAM - fn_aws_iam_delete_mfa_devices script ##
+```python
+##  AWS IAM - fn_aws_iam_delete_mfa_devices script ##
 # Example result:
-"""
-OK
-Result: {
-          'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'OK'}
-                      {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}],
-          'raw': '[{'SerialNumber: "arn:aws:iam::834299573936:mfa/iam_test_user", 'Status": 'OK'},
-                  {'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'Status': 'NoSuchEntity'}]',
-          'inputs': {'aws_iam_mfa_serial_nums': 'arn:aws:iam::834299573936:mfa/iam_test_user', 'aws_iam_user_name': 'iam_test_User'},
-          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                      'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'
-                     }
-}
-"""
+
 #  Globals
 # List of fields in datatable for fn_aws_iam_delete_mfa_devices  script
 DATA_TBL_FIELDS = ["Policies"]
@@ -2863,13 +2695,10 @@ def main():
         incident.addNote(helper.createRichText(note_text))
 if __name__ == "__main__":
     main()
+```
 
-  ```
-
-  </p>
-  </details>
-
-</details>
+ </p>
+ </details>
 
 ---
 ## Function - AWS IAM: Update Login Profile
@@ -2917,10 +2746,15 @@ On successful completion of the workflow, a note is created indicting the status
 <p>
 
 ```python
-results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+results = {'version': '1.0', 'success': True, 'reason': None, 
+         'content': 'OK', 
+         'raw': '"OK"', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_1', 'aws_iam_password': '***', 
+                    'aws_iam_password_reset_required': False}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
+                     'host': 'myhost.ibm.com', 
+                     'execution_time_ms': 4300, 'timestamp': '2020-03-13 17:35:48'
+                    }
 }
 ```
 
@@ -2952,27 +2786,7 @@ inputs.aws_iam_password_reset_required = rule.properties.aws_iam_password_reset_
 
 ```python
 ##  AWS IAM - fn_aws_iam_delete_login_profile script ##
-# Example result:
-"""
-OK
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'NoSuchEntity', 'raw': '"NoSuchEntity"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
-}
-NosuchEntity
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'OK', 'raw': '"OK"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
-}
-"""
+
 #  Globals
 # List of fields in datatable fn_aws_iam_delete_login_profile  script
 DATA_TBL_FIELDS = ["Groups"]
@@ -3026,7 +2840,7 @@ The user is presented with a warning and an option to Execute or Cancel.
 
    ![screenshot: fn-aws-iam-delete-login-profile-action_2 ](./screenshots/fn-aws-iam-delete-login-profile-action_2.png)  
 
-Press Execute to invoke the `Example: AWS IAM: Delete Login Profile` workflow, which calls the `AWS IAM: Delete Login Profile` function.
+3. Press Execute to invoke the `Example: AWS IAM: Delete Login Profile` workflow, which calls the `AWS IAM: Delete Login Profile` function.
 
 On successful completion of the workflow, the `Login Profile exists` field of the `AWS IAM Users` data table is updated to "No" for the selected user.
 
@@ -3047,9 +2861,12 @@ On successful completion of the workflow, the `Login Profile exists` field of th
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To see view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+         'version': '1.0', 'success': True, 'reason': None,
+         'content': 'OK', 'raw': '"OK"',
+         'inputs': {'aws_iam_user_name': 'iam_test_User'},
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
+                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
+                     }
 }
 ```
 
@@ -3071,27 +2888,6 @@ inputs.aws_iam_user_name = row.UserName
 
 ```python
 ##  AWS IAM - fn_aws_iam_delete_login_profile script ##
-# Example result:
-"""
-OK
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'NoSuchEntity', 'raw': '"NoSuchEntity"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
-}
-NosuchEntity
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': 'OK', 'raw': '"OK"',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0',
-                     'host': 'myhost.ie.ibm.com', 'execution_time_ms': 9170, 'timestamp': '2019-11-18 16:24:17'
-                     }
-}
-"""
 #  Globals
 # List of fields in datatable fn_aws_iam_delete_login_profile  script
 DATA_TBL_FIELDS = ["Groups"]
@@ -3177,7 +2973,7 @@ aws_iam_users
 | Display Name | API Access Name | Description |
 | ------------ | --------------- | ----------- |
 | AWS IAM User Name | `aws_iam_user_name` | Amazon Web Services (AWS) IAM user name. |
-| AWS IAM Access Key ID | `aws_iam_access_key_id` | Amazon Web Services (AWS) IAM access key id. |
+| AWS IAM Access Key ID | `aws_iam_access_key_id` | Amazon Web Services (AWS) IAM access key ID. |
 
 ---
 
