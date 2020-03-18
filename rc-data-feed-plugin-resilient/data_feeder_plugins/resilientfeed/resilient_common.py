@@ -126,7 +126,7 @@ class Resilient(object):
                         self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                       self.rest_client.org_id, sync_inc_id)
                         self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
-                                                     type_name, new_type_id,
+                                                     type_name, None,
                                                      sync_inc_id, payload)
                 else:
                     self.log.info('duplicate %s:%s->%s of %s:%s->%s', type_name, src_inc_id, orig_id,
@@ -158,7 +158,7 @@ class Resilient(object):
                         self.log.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                                          self.rest_client.org_id, sync_inc_id)
                         self.dbsync.create_retry_row(src_org_id, src_inc_id, type_name, orig_id,
-                                                     type_name, new_type_id,
+                                                     type_name, None,
                                                      sync_inc_id, payload)
 
                 else:
