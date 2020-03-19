@@ -9,7 +9,7 @@
   If you make manual edits and run docgen again, a .bak file will be created
 
   Store any screenshots in the "doc/screenshots" directory and reference them like:
-  ![screenshot: screenshot_1](./doc/screenshots/screenshot_1.png)
+  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
 # fn-pulsedive Functions for IBM Resilient
@@ -39,11 +39,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for 'fn_pulsedive**
+**Resilient Circuits Components for 'fn_pulsedive'**
 
- ![screenshot: main](./doc/screenshots/main.png)
+ ![screenshot: fn-pulsedive-wf](./doc/screenshots/fn_pulsedive_wf.png)
 
-Resilient Circuits Components for 'fn_pulsedive
+Resilient Circuits Components for 'fn_pulsedive'
 
 ---
 
@@ -51,12 +51,9 @@ Resilient Circuits Components for 'fn_pulsedive
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.1.70`
+* Resilient platform >= `v35.2.32`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
-  * If using API Keys, minimum required are:
-    * API Key 1
-    * API Key 2
 ---
 
 ## Installation
