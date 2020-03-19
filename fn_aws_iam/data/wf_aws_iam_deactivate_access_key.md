@@ -53,11 +53,13 @@ def main():
     if CONTENT:
         if CONTENT == "OK":
             note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> was deactivated " \
-                        u"for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
+                        u"for user <b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_access_key_id"], INPUTS["aws_iam_user_name"],  FN_NAME)
             row.Status = "Inactive"
         elif CONTENT == u"NoSuchEntity":
             note_text = u"AWS IAM Integration: Workflow <b>{0}</b>: The Access Key Id <b>{1}</b> Not found " \
-                        u"for Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_access_key_id"],  FN_NAME)
+                        u"for user <b>{2}</b> for Resilient function <b>{3}</b>."\
+                .format(WF_NAME, INPUTS["aws_iam_access_key_id"], INPUTS["aws_iam_user_name"],  FN_NAME)
             row.Status = "NoSuchEntity"
     else:
         note_text += u"AWS IAM Integration: Workflow <b>{0}</b>: There were no results returned for " \

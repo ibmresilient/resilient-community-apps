@@ -151,7 +151,7 @@ if __name__ == "__main__":
 
 ---
 
-## Function - AWS IAM: List User Access Key Ids
+## Function - AWS IAM: List User Access Key IDs
 
 ### API Name
 `fn_aws_iam_list_user_access_key_ids`

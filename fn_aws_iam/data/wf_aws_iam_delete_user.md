@@ -165,7 +165,7 @@ if __name__ == "__main__":
 
 ---
 
-## Function - AWS IAM: List User Access Key Ids
+## Function - AWS IAM: List User Access Key IDs
 
 ### API Name
 `fn_aws_iam_list_user_access_key_ids`
@@ -1040,7 +1040,7 @@ inputs.aws_iam_sign_cert_ids = ",".join(sign_cert_ids)
 OK
 Result: {
           'version': '1.0', 'success': True, 'reason': None,
-          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'}
+          'content': [{'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'OK'},
                       {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}],
           'raw': '[{'CertificateId: "WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD", 'Status": 'OK'},
                   {'CertificateId': 'WM6U3NNR5JH3AOTNJY44CUI6I6EYXTLD', 'Status': 'NoSuchEntity'}]',
@@ -1117,10 +1117,10 @@ inputs.aws_iam_user_name = row.UserName
 # Example result:
 """
 Result: {'version': '1.0', 'success': True, 'reason': None, 
-         'content': [{'UserName'a: 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
-                      'EnableDate': '2020-02-26 16:55:05'}, 'is_virtual': True], 
+         'content': [{'UserName': 'iam_test_user', 'SerialNumber': 'arn:aws:iam::834299573936:mfa/iam_test_user', 
+                      'EnableDate': '2020-02-26 16:55:05', 'is_virtual': True}], 
          'raw': '[{"UserName": "iam_test_user_10", "SerialNumber": "arn:aws:iam::834299573936:mfa/iam_test_user_10", 
-                 "EnableDate": "2020-02-26 16:55:05"}, 'is_virtual': True]', 
+                 "EnableDate": "2020-02-26 16:55:05", 'is_virtual': True}]', 
          'inputs': {'aws_iam_user_name': 'iam_test_user_10'}, 
          'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
                      'execution_time_ms': 5644, 'timestamp': '2020-02-26 17:37:48'
