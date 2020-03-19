@@ -302,10 +302,18 @@ class AwsIamClient():
                      aws_iam_op.__name__, kwargs, "NoSuchEntityException")
             status = "NoSuchEntity"
 
-        except self.iam.exceptions.PasswordPolicyViolation:
+        except self.iam.exceptions.PasswordPolicyViolationException:
             LOG.info("ERROR with %s and args: '%s', Got exception %s",
                      aws_iam_op.__name__, kwargs, "PasswordPolicyViolation")
             status = "PasswordPolicyViolation"
+
+        except self.iam.exceptions.ClientError as invalid_ex:
+            if "ValidationError" in invalid_ex.__repr__():
+                return "ValidationError"
+
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_iam_op.__name__, kwargs, "ValidationErrorException")
+            raise invalid_ex
 
         except Exception as int_ex:
             LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_iam_op.__name__, kwargs, int_ex.__repr__())

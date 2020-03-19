@@ -31,9 +31,9 @@ OK
 Result: {
           'version': '1.0', 'success': True, 'reason': None,
           'content': [{'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll', 'Status': 'OK'}
-                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}],
+                      {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'OK'}],
           'raw': '[{'PolicyArn': "arn:aws:iam::aws:policy/AWSDenyAll", 'Status": 'OK'},
-                  {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'NoSuchEntity'}]',
+                  {'PolicyArn': 'arn:aws:iam::aws:policy/AWSDenyAll_2', 'Status': 'OK'}]',
           'inputs': {'aws_iam_arns': 'arn:aws:iam::aws:policy/AWSDenyAll', 'aws_iam_user_name': 'iam_test_User_1'},
           'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
                       'execution_time_ms': 790, 'timestamp': '2019-11-29 12:18:30'

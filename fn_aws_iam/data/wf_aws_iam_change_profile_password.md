@@ -21,18 +21,22 @@
 inputs.aws_iam_user_name = row.UserName
 # Test password to see it complies with basic password policy.
 err_msg_validation = "The new password needs be minimum 8 characters in length and have at least 1 uppercase and 1 lowercase character."
+err_msg_ascii = "The new password must contain only printable ASCII characters."
 if len(rule.properties.aws_iam_password) < 8:
     raise ValueError(err_msg_validation)
 if not any(c.isupper() for c in rule.properties.aws_iam_password):
     raise ValueError(err_msg_validation)
 if not any(c.islower() for c in rule.properties.aws_iam_password):
     raise ValueError(err_msg_validation)
+try:
+    rule.properties.aws_iam_password.decode('ascii')
+except:
+    raise ValueError(err_msg_ascii)
 inputs.aws_iam_password = rule.properties.aws_iam_password
 inputs.aws_iam_password_reset_required = False
 if rule.properties.aws_iam_password_reset_required.lower() == "yes":
     inputs.aws_iam_password_reset_required = True
 
-    
 ```
 
 ### Post-Processing Script
@@ -65,10 +69,16 @@ def main():
     note_text = ''
     if CONTENT:
         if CONTENT == "OK":
-            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile password updated for user <b>{1}</b> for " \
+            note_text = "AWS IAM Integration: Workflow <b>{0}</b>: Login profile password was updated for user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
         elif CONTENT == "PasswordPolicyViolation":
-            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile password policy violation updating user <b>{1}</b> for " \
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile password got policy violation ERROR updating user <b>{1}</b> for " \
+                        "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        elif CONTENT == "ValidationError":
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile password got validation ERROR updating user <b>{1}</b> for " \
+                        "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
+        else:
+            note_text = "AWS IAM Integration: : Workflow <b>{0}</b>: Login profile password got unexpected ERROR updating user <b>{1}</b> for " \
                         "Resilient function <b>{2}</b>.".format(WF_NAME, INPUTS["aws_iam_user_name"], FN_NAME)
     else:
         note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>."\

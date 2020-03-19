@@ -27,7 +27,14 @@ inputs.aws_iam_group_names = rule.properties.aws_iam_group
 ##  AWS IAM - fn_aws_iam_add_user_to_groups script ##
 # Example result:
 """
-Result: {
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'GroupName': 'denyall_group', 'Status': 'OK'}], 
+         'raw': '[{"GroupName": "denyall_group", "Status": "OK"}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_1', 'aws_iam_group_names': 'denyall_group'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 
+                     'host': 'myhost.ibm.com', 'execution_time_ms': 4303, 'timestamp': '2020-03-16 15:43:17'
+           
+        }
 }
 """
 #  Globals
@@ -98,18 +105,23 @@ inputs.aws_iam_user_name = row.UserName
 ##  AWS IAM - fn_aws_iam_list_user_groups script ##
 # Example result:
 """
-Result: {
-         'version': '1.0', 'success': True, 'reason': None,
-         'content': [{'Path': '/', 'GroupName': 'system-admins', 'GroupId': 'AGPAJUCG3BHM64OGVGCBG',
-                      'Arn': 'arn:aws:iam::834299573936:group/system-admins', 'CreateDate': '2017-05-29 20:37:53'}],
-                      'raw': '[{"Path": "/", "GroupName": "system-admins", "GroupId": "AGPAJUCG3BHM64OGVGCBG",
-                      "Arn": "arn:aws:iam::834299573936:group/system-admins", "CreateDate": "2017-05-29 20:37:53"
-                      }
-                    ]',
-         'inputs': {'aws_iam_user_name': 'iam_test_User'},
-         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ibm.com',
-                     'execution_time_ms': 1070, 'timestamp': '2019-11-18 10:19:19'
-                     }
+Result: {'version': '1.0', 'success': True, 'reason': None, 
+         'content': [{'Path': '/', 'GroupName': 'null_group', 'GroupId': 'AGPA4EQBBG2YAVPJATCNZ', 
+                      'Arn': 'arn:aws:iam::834299573936:group/null_group', 'CreateDate': '2019-12-04 12:31:47'}, 
+                      {'Path': '/', 'GroupName': 'denyall_group', 'GroupId': 'AGPA4EQBBG2YPUAIHTA3E', 
+                       'Arn': 'arn:aws:iam::834299573936:group/denyall_group', 'CreateDate': '2019-11-29 15:49:34'}, 
+                      {'Path': '/', 'GroupName': 'myS3group', 'GroupId': 'AGPAIH4V2XCXOME6HWCPQ', 
+                      'Arn': 'arn:aws:iam::834299573936:group/myS3group', 'CreateDate': '2017-05-29 20:41:50'}], 
+          'raw': '[{"Path": "/", "GroupName": "null_group", "GroupId": "AGPA4EQBBG2YAVPJATCNZ", 
+                 "Arn": "arn:aws:iam::834299573936:group/null_group", "CreateDate": "2019-12-04 12:31:47"}, 
+                 "Path": "/", "GroupName": "denyall_group", "GroupId": "AGPA4EQBBG2YPUAIHTA3E", 
+                 "Arn": "arn:aws:iam::834299573936:group/denyall_group", "CreateDate": "2019-11-29 15:49:34"}, 
+                 {"Path": "/", "GroupName": "myS3group", "GroupId": "AGPAIH4V2XCXOME6HWCPQ", 
+                 "Arn": "arn:aws:iam::834299573936:group/myS3group", "CreateDate": "2017-05-29 20:41:50"}]', 
+         'inputs': {'aws_iam_user_name': 'iam_test_user_1'}, 
+         'metrics': {'version': '1.0', 'package': 'fn-aws-iam', 'package_version': '1.0.0', 'host': 'myhost.ie.ibm.com', 
+                     'execution_time_ms': 944, 'timestamp': '2020-03-16 15:43:21'
+                    }
 }
 """
 #  Globals
