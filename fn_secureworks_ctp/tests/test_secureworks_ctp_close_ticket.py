@@ -29,7 +29,7 @@ def call_secureworks_ctp_close_ticket_function(circuits, function_params, timeou
 
 class TestSecureworksCtpCloseTicket:
     """ Tests for the secureworks_ctp_close_ticket function"""
-
+    @pytest.mark.livetest
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
