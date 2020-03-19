@@ -88,8 +88,8 @@ Resilient Circuits Components for 'fn_pulsedive
   ```
   | Config | Required | Example | Description |
   | ------ | :------: | ------- | ----------- |
-  | **pulsedive_api_key** | Yes | `<my api key>` | *Enter a description of the config here* |
-  | **pulsedive_api_url** | Yes | `https://pulsedive.com/api/` | *Enter a description of the config here* |
+  | **pulsedive_api_key** | Yes | `<my api key>` | User API key that can be found under Pulsedive --> API |
+  | **pulsedive_api_url** | Yes | `https://pulsedive.com/api/` | Pulsedive base URL |
 
 * **Save** and **Close** the app.config file.
 * [Optional]: Run selftest to test the Integration you configured:

@@ -32,7 +32,7 @@ properties, summary
 * Query Pulsedive by an IP address, a DNS, a threat name or alias, or a feed name and organization
 * Search Pulsedive for all indicators, threats, or feeds, using a variety of search filters
 
-Result summaries will be written to an Incident Note, and details will be written to an Incident attachment.
+Result summaries will be written to an Incident Note and details will be written to an Incident Attachment.
 
 ---
 
@@ -60,9 +60,28 @@ Query Pulsedive for information on an indicator ID, threat ID, or feed ID. Speci
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    "iid": 2,
+    "type": "domain",
+    "indicator": "alvoportas.com.br",
+    "risk": "low",
+    "risk_recommended": "low",
+    "manualrisk": 0,
+    "retired": "No recent activity",
+    "stamp_added": "2017-09-27 18:11:38",
+    "stamp_updated": "2019-11-11 20:47:04",
+    "stamp_seen": "2019-06-30 17:29:31",
+    "stamp_probed": "2019-06-30 17:29:33",
+    "stamp_retired": "2019-10-03 01:39:22",
+    "recent": 0,
+    "riskfactors": [
+        {
+            "rfid": 2,
+            "description": "found in third-party feeds",
+            "risk": "medium"
+        },
+        ...
+    ]
+    ...    
 }
 ```
 
@@ -131,7 +150,7 @@ incident.addNote(note)
 ## Function - Pulsedive: Search
 Search Pulsedive for Indicators, Threats, or Feeds, using various type-related filters.
 
- ![screenshot: fn-pulsedive-search ](./screenshots/fn-pulsedive-search.png)
+ ![screenshot: fn-search ](./screenshots/fn_search.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -163,9 +182,27 @@ Search Pulsedive for Indicators, Threats, or Feeds, using various type-related f
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    ...
+    {
+        "iid": 1446,
+        "indicator": "156.67.106.30",
+        "type": "ip",
+        "risk": "low",
+        "stamp_updated": "2020-03-19 14:23:00",
+        "stamp_seen": "2020-03-19 14:22:59",
+        "summary": {
+            "properties": {
+                "geo": {
+                    "country": "Poland",
+                    "city": "Krapkowice",
+                    "org": "Krapkowickie Sieci Internetowe sc",
+                    "region": "Opole Voivodeship",
+                    "countrycode": "PL"
+                }
+            }
+        }
+    },
+    ...
 }
 ```
 
@@ -204,28 +241,35 @@ inputs.pulsedive_threat = rule.properties.pulsedive_threat
   <p>
 
   ```python
-  # get results and post summary to incident note
+# get results and post summary to incident note
+search_type = results.get("resp_json")["inputs"]["pulsedive_search_type"]["name"] if not None else "n/a"
+return_limit = results.get("resp_json")["inputs"]["pulsedive_limit"]["name"] if not None else "n/a"
+time_frame = results.get("resp_json")["inputs"]["pulsedive_lastseen"]["name"] if not None else "n/a"
+risk_filter = [str(x["name"]) for x in results.get("resp_json")["inputs"]["pulsedive_risk"]]
+categories = [str(x["name"]) for x in results.get("resp_json")["inputs"]["pulsedive_category"]]
+
+count = len(results.get("resp_json")["content"]["results"])
 
 # create text for summary results
 note_text = u"<p>Pulsedive <b>{}</b> search results:</p> \
-<p><b>GET url:</b> {}</p> \
-<p><b>Filters:</b> {}</p> \
+<p><b>time frame:</b> {}</p> \
+<p><b>risk filter</b> {}</p> \
+<p><b>categories</b> {}</p> \
+<p><b>max # of returned data</b> {}</p> \
 <p><b>Results count:</b> {}</p> \n \
 <p>See attachment <b>'{}'</b> for full dataset</p> \n \
-".format(results["search_type"], results["request_url"], results["request_parameters"], len(results["json"]["results"]),results["attachment_name"])
+".format(str(search_type), str(time_frame), risk_filter, categories, str(return_limit), count, 
+results.get("att_name"))
 
 # append link for exporting results to CSV (for Indicator search only)
 if results["search_type"] == "Indicator":
   export_url = u"""<a href='{}{}' target='blank'>here</a>""".format(results["request_url"], "&export=1")
   note_text += "Click {} to export results to CSV".format(export_url)
 
-# ".format(results["fn_inputs"]["search_type"], 
-# results["url"], results["request_parameters"], results["counts"], results["fn_inputs"]["attachment_name"])
-
 # Create note text
-# note = helper.createPlainText(note_text)
 note = helper.createRichText(note_text)
-# Create incident note_text
+
+# Create incident note
 incident.addNote(note)
   ```
 
@@ -238,7 +282,7 @@ incident.addNote(note)
 ## Function - Pulsedive: Query by Value
 Query Pulsedive for information on an indicator value, threat value, or feed value.
 
- ![screenshot: fn-pulsedive-query-by-value ](./screenshots/fn-pulsedive-query-by-value.png)
+ ![screenshot: fn-pulsedive-query-by-value ](./screenshots/fn_query_val.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -259,9 +303,31 @@ Query Pulsedive for information on an indicator value, threat value, or feed val
 
 ```python
 results = {
-    # TODO: Copy and paste an example of the Function Output within this code block.
-    # To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function. 
-    # The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"
+    {
+        "iid": 2,
+        "type": "domain",
+        "indicator": "alvoportas.com.br",
+        "risk": "low",
+        "risk_recommended": "low",
+        "manualrisk": 0,
+        "retired": "No recent activity",
+        "stamp_added": "2017-09-27 18:11:38",
+        "stamp_updated": "2019-11-11 20:47:04",
+        "stamp_seen": "2019-06-30 17:29:31",
+        "stamp_probed": "2019-06-30 17:29:33",
+        "stamp_retired": "2019-10-03 01:39:22",
+        "recent": 0,
+        "riskfactors": [
+            {
+                "rfid": 2,
+                "description": "found in third-party feeds",
+                "risk": "medium"
+            },
+            ...
+        ],
+        ...
+    },   
+    ...
 }
 ```
 
