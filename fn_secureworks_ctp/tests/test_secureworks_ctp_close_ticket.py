@@ -39,6 +39,7 @@ class TestSecureworksCtpCloseTicket:
         ({"value": "xyz"}),
         ({"value": "xyz"})
     ])
+    @pytest.mark.livetest
     def test_success(self, circuits_app, expected_results):
         """ Test calling with sample values for the parameters """
         function_params = { 
