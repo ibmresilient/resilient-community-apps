@@ -6,6 +6,7 @@
 """Function implementation"""
 
 import os
+from cachetools import cached, LFUCache
 import logging
 from circuits import Event, Timer, task
 from pkg_resources import Requirement, resource_filename
@@ -19,6 +20,7 @@ from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"
 SCWX_CTP_POLL_CHANNEL = "scwx_ctp_poll"
 TICKET_ID_FIELDNAME = "scwx_ctp_ticket_id"
+DEFAULT_POLL_SECONDS=600
 LOG = logging.getLogger(__name__)
 
 class Poll(Event):
@@ -44,7 +46,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
         self._load_options(opts)
 
-        if self.polling_interval == 0:
+        if not self.polling_interval:
             LOG.info(u"Secureworks CTP escalation interval is not configured.  Automated escalation is disabled.")
             return
 
@@ -78,11 +80,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
                            "query_grouping_types", "polling_interval"]
         validate_fields(required_fields, self.options)
 
+        self.polling_interval = int(self.options.get("polling_interval", DEFAULT_POLL_SECONDS))
+
         # Create Secureworks client
         self.scwx_client = SCWXClient(self.opts, self.options)
-
-        # Timer interval (seconds).  Default 10 minutes.
-        self.polling_interval = int(self.options.get("polling_interval", 600))
 
     def _escalate(self):
         """ Search for Secureworks CTP tickets and create incidents in Resilient for them
@@ -92,6 +93,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
         try:
             # Get list of tickets needing updating
             response = self.scwx_client.post_tickets_updates()
+
             tickets = response.get('tickets')
 
             for ticket in tickets:
@@ -107,20 +109,17 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 # Check if there is already a Resilient incident for this Secureworks ticket.
                 resilient_incident = self._find_resilient_incident_for_req(ticket_id)
-                if resilient_incident:
-                    # Update worklogs here when we pull those in future sprint.
-                    LOG.info(u"Skipping ticket %s, already escalated", ticket_id)
-                    continue
+                if not resilient_incident:
+                    # Create a new incident for this Secureworks CTP ticket.
+                    resilient_incident = self._create_incident(ticket)
 
-                # Create a new incident for this Secureworks CTP ticket.
-                incident = self._create_incident(ticket)
+                # Add worklogs here
 
         except Exception as err:
             raise err
         finally:
             # We always want to reset the timer to wake up, no matter failure or success
             self.fire(PollCompleted())
-
 
     def _find_resilient_incident_for_req(self, ticket_id):
         """
@@ -213,7 +212,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
             LOG.info(message)
             return incident
 
-        except Exception as exc:
-            LOG.exception(exc)
-            raise
+        except Exception as err:
+            raise err
 

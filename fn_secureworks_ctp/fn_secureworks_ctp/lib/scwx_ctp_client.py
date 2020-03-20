@@ -23,10 +23,10 @@ class SCWXClient(object):
         self.username = options.get('username')
         self.password = options.get('password')
         self.limit = options.get('query_limit')
-        self.ticket_types = options.get('query_ticket_types').split(",")
-        self.grouping_types = options.get('query_grouping_types').split(",")
+        self.ticket_types = options.get('query_ticket_types','').split(",")
+        self.grouping_types = options.get('query_grouping_types','').split(",")
         self.cafile = options.get('cafile')
-        self.bundle = os.path.expanduser(cafile) if self.cafile else False
+        self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
 
         self.rc = RequestsCommon(opts, options)
         self.APIKEY = u"APIKEY {0}:{1}".format(self.username, self.password)
