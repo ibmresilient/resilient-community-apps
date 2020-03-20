@@ -19,7 +19,7 @@ def selftest_function(opts):
     """
     options = opts.get("fn_aws_iam", {})
     try:
-        iam = AwsIamClient(opts, options, sts_client=True)
+        iam = AwsIamClient(options, sts_client=True)
         default_identity = iam.sts.get_caller_identity()
 
         if isinstance(default_identity , dict) and "Arn" in default_identity:
