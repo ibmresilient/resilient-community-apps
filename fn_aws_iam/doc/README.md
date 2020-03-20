@@ -62,7 +62,7 @@ You can execute the following types of queries:
    * SSH public keys.
    * Service-specific credentials.
    * Signing certificates.
-   * Active mfa devices (Virtual devices flagged).
+   * Active MFA devices (Virtual devices flagged).
    
 You can also use the integration to make the following changes to an AWS IAM environment:
 * Delete a user and delete or remove items associated with the user.
@@ -74,11 +74,11 @@ You can also use the integration to make the following changes to an AWS IAM env
 * Delete an access key.
 * Delete all access keys for a user.
 * Delete the login profile for a user.
-* Delete all ssh Public Keys for a user.
+* Delete all SSH Public Keys for a user.
 * Delete all service-specific credentials for a user.
 * Delete all signing certificates for a user.
-* De-activate all active mfa devices for a user.
-* Delete all active mfa virtual devices for a user.
+* De-activate all active MFA devices for a user.
+* Delete all active MFA virtual devices for a user.
 
 ---
 ## Function - AWS IAM: List Users
