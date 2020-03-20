@@ -1,0 +1,20 @@
+{
+  {# JINJA template for creating a new Resilient incident from a Secureworks ticket. #}
+  "name": "Secureworks CTP Incident - for Ticket ID {{ticketId}}",
+  "start_date": {{dateCreated}},
+  "discovered_date": {{dateCreated}},
+  "description": {
+    "format": "html",
+    "content": "<div><p>{{detailedDescription}}</p></div>"
+  },
+  "incident_type_ids": [
+  ],
+  "properties": {
+    "scwx_ctp_ticket_id": "{{ticketId}}",
+    "scwx_ctp_date_created": {{dateCreated}},
+    "scwx_ctp_ticket_type": "{{ticketType}}",
+    "scwx_ctp_grouping_type": "{{groupingType}}",
+    "scwx_ctp_priority": "{{priority}}",
+    "scwx_ctp_request_type": "{{requestType}}"
+  }
+}
