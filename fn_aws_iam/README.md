@@ -41,19 +41,69 @@
 -->
 **Amazon AWS IAM Integration for Resilient**
 
- ![screenshot: main](./doc/screenshots/main.png)
+Amazon Web Services Identity and Access Management (AWS IAM) allows management of access to AWS services and resources securely. You can use IAM to create and manage AWS users and groups, and use permissions to allow or deny access to AWS resources. 
+The AWS IAM integration with the Resilient platform allows you to query and update users or access keys for an AWS account.
 
-Integration with Amazon AWS IAM to facilitate manual enrichment and targeted remediation actions. Teams can investigate an attack by searching for AWS user accounts across an AWS environment, and quickly respond to attacks by executing remediation actions, such as removing accounts or removing permissions or login profiles for suspicious accounts from within the Resilient platform
+You can execute the following types of queries:
+* Get a list of users and associated items (login profile, access keys, groups, policies).
+* Get a list of access keys.
+* List objects associated with a user:
+   * Access keys.
+   * Groups.
+   * Policies.
+   * SSH public keys.
+   * Service-specific credentials.
+   * Signing certificates.
+   * Active MFA devices (Virtual devices flagged).
+   
+You can also use the integration to make the following changes to an AWS IAM environment:
+* Delete a user and delete or remove items associated with the user.
+* Attach a user policy.
+* Detach all policies for a user.
+* Add a user to a group.
+* Remove a user from all groups.
+* Change a user profile password.
+* Delete an access key.
+* Delete all access keys for a user.
+* Delete the login profile for a user.
+* Delete all SSH Public Keys for a user.
+* Delete all service-specific credentials for a user.
+* Delete all signing certificates for a user.
+* De-activate all active MFA devices for a user.
+* Delete all active MFA virtual devices for a user.
 
+The integration contains the following functions:
+ ![screenshot: functions](./doc/screenshots/functions.png)
+ ![screenshot: functions_2](./doc/screenshots/functions_2.png)
 ---
 
 ## Requirements
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v33.0.5112`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* Resilient platform >= `v35.0.5468`
+* An Integration Server running:
+  *  `resilient_circuits>=35.0.0`
+  *  `resilient_lib>=35.0.0`
+ 
+  * The minimum set of Resilient API permissions for this integration if using an API key account:
+    * Edit Org Data
+    * Incidents.Edit.Fields
+    * Functions.Read
+    * Functions.Edit
+    * Layouts.Read
+    * Other.ReadIncidentsActionInvocations
+    * Scripts.Create
+    * Scripts.Edit
+    * Workflows.Create
+    * Workflow.Edit
+    
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+
+* An AWS IAM user dedicated for this integration with the following configuration: 
+  * User account is not the AWS IAM root account user.
+  * User is added to an "Administrators" group to which is attached the `AdministratorAccess` policy.
+  * An access key created for the user. The user access key ID and secret access key are used by the integration.
 
 ---
 
@@ -88,7 +138,6 @@ Integration with Amazon AWS IAM to facilitate manual enrichment and targeted rem
   | ------ | :------: | ------- | ----------- |
   | **aws_iam_access_key_id** | Yes | `ABCD1EFGHI2JK3L4MNOP` | *AWS access key id of user with programmatic (API) access to AWS IAM services for an AWS account. Note: User must have sufficent permissions to be able to manage IAM resources for the AWS account.* |
   | **aws_iam_secret_access_key** | Yes | `aBcdeFGH/iJkl1MNo2P3Q4rs5tuV6wXYZAbc+Def` | *AWS secret access key used for programmatic (API) access to AWS services.* |
-  | **aws_iam_region** | No | `us-west-1` | *Optional setting for an IAM AWS region if required.* |
   | **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
   | **https_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.* |
   
@@ -108,8 +157,7 @@ Integration with Amazon AWS IAM to facilitate manual enrichment and targeted rem
   You may wish to recommend a new incident tab.
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
+* To use the functions, the Resilient playbook designer should create a new Incident tab containing the data tables. Drag the AWS IAM data tables on to the layout and click Save as shown in the screenshot below:
   ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
 
 ---
