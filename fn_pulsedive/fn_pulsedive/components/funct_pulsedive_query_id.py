@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
     def _pulsedive_query_id_function(self, event, *args, **kwargs):
         """Function: Query Pulsedive for information on an indicator ID, threat ID, or feed ID.
         This function gets input values from the action rule activity fields and
-        sends them to Pulsedive's Query endpoint https://pulsedive.com/api/info.php
+        sends them to Pulsedive's Query endpoint
         Results: a summary will be written to an incident note and
                  full details will be written to an incident attachment.
         """

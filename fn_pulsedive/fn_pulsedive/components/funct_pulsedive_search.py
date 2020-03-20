@@ -160,7 +160,7 @@ class FunctionComponent(ResilientComponent):
         """
         Function: Search Pulsedive for Indicators, Threats, or Feeds, using type-related filters.
         This function gets input values from the action rule activity fields and
-        sends them to Pulsedive's Search endpoint https://pulsedive.com/api/search.php
+        sends them to Pulsedive's Search endpoint
         Results: a summary will be written to an incident note and
                  full details will be written to an incident attachment.
                  An option to export Indicator (only) search to CSV is provided in a link in Note.

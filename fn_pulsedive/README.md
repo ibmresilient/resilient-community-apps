@@ -51,7 +51,7 @@ Resilient Circuits Components for 'fn_pulsedive'
 <!--
   List any Requirements 
 -->
-* Resilient platform >= `v35.2.32`
+* Resilient platform >= `v35.0.5343`
 * An Integration Server running `resilient_circuits>=30.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 ---
