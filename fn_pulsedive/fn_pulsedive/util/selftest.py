@@ -15,8 +15,8 @@ CONFIG_SECTION = "fn_pulsedive"
 
 def selftest_function(opts):
     """
-    Placeholder for selftest function. An example use would be to test package api connectivity.
-    Suggested return values are be unimplemented, success, or failure.
+    Test package api connectivity.
+    Return success or failure based in status code
     """
     options = opts.get("fn_pulsedive", {})
     log.info("key: %s, url: %s", options["pulsedive_api_key"], options["pulsedive_api_url"])

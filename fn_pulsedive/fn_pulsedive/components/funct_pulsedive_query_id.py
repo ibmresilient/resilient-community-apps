@@ -52,24 +52,20 @@ class FunctionComponent(ResilientComponent):
         :return: dict of parameters
         """
         # add id to url request:
-        if query_type == "Feed":
-            query_key = "fid"
-        elif query_type == "Threat":
-            query_key = "tid"
-        else:  # Indicator ID (default)
-            query_key = "iid"
+        id_mapping = {"Feed": "fid", "Threat": "tid"}
+        query_key = id_mapping[query_type] if query_type in id_mapping else 'iid'     # iid is for Indicator ID (default)
 
         # add report type and params to url request:
         rpt_type = self.get_select_param(kwargs.get("pulsedive_id_report_type"))
+
+        rpt_mapping = {"Linked": ("links", "", ""), "Properties": ("properties", "", ""), "Summary": ("links", "1", "1")}
         summary = report_type = split = ""
-        if "Linked" in rpt_type:
-            report_type = "links"
-        if "Properties" in rpt_type:
-            report_type = "properties"
-        if "Summary" in rpt_type:
-            report_type = "links"
-            summary = "1"
-            split = "1"
+
+        for k in rpt_mapping.keys():
+            if k in rpt_type:
+                report_type = rpt_mapping[k][0]
+                summary = rpt_mapping[k][1]
+                split = rpt_mapping[k][2]
 
         params_map = {
             query_key: kwargs.get("pulsedive_id"),
@@ -118,7 +114,7 @@ class FunctionComponent(ResilientComponent):
                 attachment_name = u"pulsedive_{}_id{}_{}.txt".format(
                     pulsedive_query_type, pulsedive_id, pulsedive_id_report_type)
             else:
-                attachment_name = kwargs.get("attachment_name").replace(" ", "_")
+                attachment_name = kwargs.get("attachment_name").replace(u" ", u"_")
 
             log.info("function params: pulsedive id = %s, type = %s, report = %s,\
                      incident='%s', attachment='%s'",
@@ -147,7 +143,7 @@ class FunctionComponent(ResilientComponent):
                 datastream = BytesIO(resp.content)
             else:
                 # Convert dict to string first, then convert to bytestream for file handling.
-                ds = "{}".format(resp.json())
+                ds = "{}".format(resp.text)
                 datastream = BytesIO(ds.encode("utf-8"))
 
             # Write the file as attachment: failures will raise an exception

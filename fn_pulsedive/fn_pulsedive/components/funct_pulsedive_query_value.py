@@ -59,7 +59,7 @@ class FunctionComponent(ResilientComponent):
                 attachment_name = u"pulsedive_{}_{}.txt".format(
                     pulsedive_query_type, pulsedive_value)
             else:
-                attachment_name = kwargs.get("attachment_name").replace(" ", "_")
+                attachment_name = kwargs.get("attachment_name").replace(u" ", u"_")
 
             log.info("function params: pulsedive value = '%s', type = %s, feed org = '%s', \
                      incident = '%s', attachment = '%s'",
@@ -101,7 +101,7 @@ class FunctionComponent(ResilientComponent):
                 datastream = BytesIO(resp.content)
             else:
                 # Convert dict to string first, then convert to bytestream for file handling.
-                ds = "{}".format(resp.json())
+                ds = "{}".format(resp.text)
                 datastream = BytesIO(ds.encode("utf-8"))
 
             # Write the file as attachment: failures will raise an exception

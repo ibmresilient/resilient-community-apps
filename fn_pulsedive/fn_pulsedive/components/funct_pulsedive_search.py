@@ -199,7 +199,7 @@ class FunctionComponent(ResilientComponent):
             if kwargs.get("attachment_name") is None:
                 attachment_name = u"pulsedive_search_{}.txt".format(pulsedive_search_type)
             else:
-                attachment_name = kwargs.get("attachment_name").replace(" ", "_")
+                attachment_name = kwargs.get("attachment_name").replace(u" ", u"_")
             log.info("%s attachment name: %s", attachment_name)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
@@ -234,7 +234,7 @@ class FunctionComponent(ResilientComponent):
                 datastream = BytesIO(resp.content)
             else:
                 # Convert dict to string first, then convert to bytestream for file handling.
-                ds = "{}".format(resp.json())
+                ds = "{}".format(resp.text)
                 datastream = BytesIO(ds.encode("utf-8"))
 
             # Write the file as attachment: failures will raise an exception

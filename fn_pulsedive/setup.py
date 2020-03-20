@@ -21,9 +21,9 @@ setup(
     name='fn_pulsedive',
     version='1.0.0',
     license='MIT',
-    author='Carol Namkoong',
-    author_email='namkoong@us.ibm.com',
-    url='resilientsystems.com',
+    author='Priya Sapra',
+    author_email='resil.labs@gmail.com',
+    url='https://github.com/ibmresilient/resilient-community-apps',
     description="Resilient Circuits Components for 'fn_pulsedive'",
     long_description="Resilient Circuits Components for 'fn_pulsedive'",
     install_requires=[
