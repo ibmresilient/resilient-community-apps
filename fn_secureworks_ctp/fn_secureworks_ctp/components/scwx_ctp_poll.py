@@ -6,7 +6,8 @@
 """Function implementation"""
 
 import os
-from cachetools import cached, LFUCache
+import json
+import datetime
 import logging
 from circuits import Event, Timer, task
 from pkg_resources import Requirement, resource_filename
@@ -31,6 +32,11 @@ class PollCompleted(Event):
     """A Circuits event to notify that this poll event is completed"""
     channels = (SCWX_CTP_POLL_CHANNEL,)
 
+def datetime_filter(val):
+    """ JINJA filter to convert ms to mm/dd/YYYY:H:M:S """
+    dt = datetime.datetime.fromtimestamp(val / 1000.0)
+    return dt.strftime("%m/%d/%Y %H:%M:%S")
+
 class SecureworksCTPPollComponent(ResilientComponent):
     """
     Event-driven polling for Secureworks CTP tickets
@@ -49,6 +55,11 @@ class SecureworksCTPPollComponent(ResilientComponent):
         if not self.polling_interval:
             LOG.info(u"Secureworks CTP escalation interval is not configured.  Automated escalation is disabled.")
             return
+
+        # Add the timestamp-parse function to the global JINJA environment
+        env = environment()
+        env.globals.update({"datetime_filter": datetime_filter})
+        env.filters.update({"datetime_filter": datetime_filter})
 
         LOG.info(u"Secureworks CTP escalation initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
@@ -92,13 +103,14 @@ class SecureworksCTPPollComponent(ResilientComponent):
         LOG.info(u"Secureworks CTP escalate.")
         try:
             # Get list of tickets needing updating
-            response = self.scwx_client.post_tickets_updates()
-
+            #response = self.scwx_client.post_tickets_updates()
+            response = self.scwx_client.mock_post_tickets_updates()
             tickets = response.get('tickets')
 
             for ticket in tickets:
                 # Acknowledge Secureworks that we have received the tickets.
-                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                response_ack = {'code': "SUCCESS", 'ticketId': ticket.get('ticketId')}
 
                 if response_ack.get('code') is not "SUCCESS":
                     LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
@@ -114,6 +126,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     resilient_incident = self._create_incident(ticket)
 
                 # Add worklogs here
+                worklogs = ticket.get('worklogs')
+                resilient_incident = resilient_incident.get('id')
+                for worklog in worklogs:
+                    self.create_incident_comment(resilient_incident, worklog)
 
         except Exception as err:
             raise err
@@ -215,3 +231,41 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise err
 
+    def create_incident_comment(self, incident_id, data):
+        """
+        Add a comment to the specified Resilient Incident by ID
+
+        :param incident_id:  Resilient Incident ID
+        :param data: Content to be added as note
+        :return: Response from Resilient for debug
+        """
+        try:
+            uri = '/incidents/{}/comments'.format(incident_id)
+            resilient_client = self.rest_client()
+            note = u"<b>Secureworks CTP Worklog:</b><br>"
+            date = data.get('dateCreated')
+            description = data.get('description')
+            type = data.get('type')
+            createdBy = data.get('createdBy')
+            if createdBy:
+                note = u"{}    <b>Created by:</b> {}<br>".format(note, createdBy)
+            if date:
+                created = datetime_filter(date)
+                note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
+            if type:
+                note = u"{}    <b>Type:</b> {}<br>".format(note, type)
+            if description:
+                description = description.replace("\n", "<br>")
+                note = u"{}    <b>Description:</b><br> {}".format(note, description)
+            body = json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4,
+                              separators=(',', ': '))
+            note_json = {
+                'format': 'html',
+                'content': note
+            }
+            payload = {'text': note_json}
+            comment_response = resilient_client.post(uri=uri, payload=payload)
+            return comment_response
+
+        except SimpleHTTPException as ex:
+            LOG.error("Failed to add note for incident %d: %s", incident_id, ex)
