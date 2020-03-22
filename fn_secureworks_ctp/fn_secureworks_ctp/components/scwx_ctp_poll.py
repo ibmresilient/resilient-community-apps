@@ -6,6 +6,7 @@
 """Function implementation"""
 
 import os
+from io import BytesIO
 import json
 import datetime
 import logging
@@ -14,7 +15,7 @@ from pkg_resources import Requirement, resource_filename
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, write_file_attachment
 from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 
@@ -125,11 +126,11 @@ class SecureworksCTPPollComponent(ResilientComponent):
                     # Create a new incident for this Secureworks CTP ticket.
                     resilient_incident = self._create_incident(ticket)
 
-                # Add worklogs here
-                worklogs = ticket.get('worklogs')
-                resilient_incident = resilient_incident.get('id')
-                for worklog in worklogs:
-                    self.create_incident_comment(resilient_incident, worklog)
+                # Add worklogs as notes to the incident
+                self.add_worklog_notes(resilient_incident, ticket)
+
+                # Add ticket attachments
+                self.add_ticket_attachments(resilient_incident, ticket)
 
         except Exception as err:
             raise err
@@ -231,34 +232,17 @@ class SecureworksCTPPollComponent(ResilientComponent):
         except Exception as err:
             raise err
 
-    def create_incident_comment(self, incident_id, data):
+    def create_incident_comment(self, incident_id, note):
         """
         Add a comment to the specified Resilient Incident by ID
 
         :param incident_id:  Resilient Incident ID
-        :param data: Content to be added as note
+        :param note: Content to be added as note
         :return: Response from Resilient for debug
         """
         try:
             uri = '/incidents/{}/comments'.format(incident_id)
             resilient_client = self.rest_client()
-            note = u"<b>Secureworks CTP Worklog:</b><br>"
-            date = data.get('dateCreated')
-            description = data.get('description')
-            type = data.get('type')
-            createdBy = data.get('createdBy')
-            if createdBy:
-                note = u"{}    <b>Created by:</b> {}<br>".format(note, createdBy)
-            if date:
-                created = datetime_filter(date)
-                note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
-            if type:
-                note = u"{}    <b>Type:</b> {}<br>".format(note, type)
-            if description:
-                description = description.replace("\n", "<br>")
-                note = u"{}    <b>Description:</b><br> {}".format(note, description)
-            body = json.dumps(data, ensure_ascii=False, sort_keys=True, indent=4,
-                              separators=(',', ': '))
             note_json = {
                 'format': 'html',
                 'content': note
@@ -269,3 +253,42 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
         except SimpleHTTPException as ex:
             LOG.error("Failed to add note for incident %d: %s", incident_id, ex)
+
+
+    def add_worklog_notes(self, incident, ticket):
+        worklogs = ticket.get('worklogs')
+        incident_id = incident.get('id')
+        for worklog in worklogs:
+            note = u"<b>Secureworks CTP Worklog:</b><br>"
+            date = worklog.get('dateCreated')
+            description = worklog.get('description')
+            type = worklog.get('type')
+            createdBy = worklog.get('createdBy')
+            if createdBy:
+                note = u"{}    <b>Created by:</b> {}<br>".format(note, createdBy)
+            if date:
+                created = datetime_filter(date)
+                note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
+            if type:
+                note = u"{}    <b>Type:</b> {}<br>".format(note, type)
+            if description:
+                description = description.replace("\n", "<br>")
+                note = u"{}    <b>Description:</b><br> {}".format(note, description)
+
+            self.create_incident_comment(incident_id, note)
+
+    def add_ticket_attachments(self, incident, ticket):
+        attachment_info_list = ticket.get('attachmentInfo')
+        incident_id = incident.get('id')
+        ticket_id = ticket.get('ticketId')
+        for attachment in attachment_info_list:
+            attachment_id = attachment.get('id')
+            response = self.scwx_client.get_ticket_attachment(ticket_id, attachment_id)
+            datastream = BytesIO(response.content)
+            attachment_name = attachment.get('name')
+            if not attachment_name:
+                attachment_name = u"TicketId-{0}-AttachmentID-{1}".format(ticket_id, attachment_id)
+
+            # Write the file as attachement: failures will raise an exception
+            write_file_attachment(self.rest_client, attachment_name, datastream,
+                                  incident_id, None)
