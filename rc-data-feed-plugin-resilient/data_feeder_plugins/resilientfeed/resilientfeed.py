@@ -8,12 +8,12 @@ import re
 from data_feeder_plugins.resilientfeed.lib.filters import Filters
 from resilient_lib import str_to_bool
 from rc_data_feed.lib.feed import FeedDestinationBase
-from .resilient_common import Resilient
+from .resilient_common import Resilient, get_users_and_groups
 
 LOG = logging.getLogger(__name__)
 
 # use for parsing owner or member values to return email addr: First Last (a@example.com)
-USER_REGEX = re.compile(r".*\((.*)\)")
+USER_REGEX = re.compile(r".*\((.*\@.*)\)")
 
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
@@ -54,13 +54,13 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         # check for attachments and artifacts with attachments
         if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
             # remove org reference
-            orig_id, cleaned_payload = self.clean_payload(type_name, payload)
+            orig_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
 
             self.resilient_target.upload_attachment(self.resilient_source.rest_client, context.inc_id,
                                                     self.resilient_source.rest_client.org_id, type_name,
                                                     cleaned_payload, orig_id)
         else:
-            # get all the field definitions
+            # get all the field definitions from the source environment
             all_fields = context.type_info.get_all_fields(refresh=False)
 
             # invert the list into a dictionary for faster review
@@ -72,11 +72,20 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
             # convert selection lists and multi-selection lists to values, not id's
             try:
-                new_payload = self.convert_values(context, type_name, all_field_names, None, payload,
+                # get the fields of the target resilient
+                #target_all_fields_by_name, target_prefix_list = \
+                #    get_fields(self.resilient_target.rest_client, type_name, self._is_datatable(payload))
+                #if not target_all_fields_by_name:
+                #    LOG.warn("'{}' does not exist on target organization. Bypassing".format(type_name))
+                #else:
+                new_payload = self.convert_values(context, type_name,
+                                                  all_field_names, None, payload,
                                                   self._is_datatable(payload))
 
                 # remove fields unrelated to creating a new type
-                orig_id, cleaned_payload = self.clean_payload(type_name, new_payload)
+                orig_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
+
+                LOG.debug(cleaned_payload)
 
                 # perform the creation in the new resilient org
                 self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
@@ -98,11 +107,14 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return bool(payload.get("table_name", None))
 
 
-    def convert_values(self, context, type_name, all_field_names, prefix, payload, datatable_flag):
+    def convert_values(self, context, type_name,
+                       all_field_names, prefix, payload, datatable_flag):
         """
         recursive function to convert Ids to values for a given object
         :param context:
         :param type_name: type of object converting
+        :param target_all_fields_by_name: type definition for the target org
+        :param target_prefix_list - list on target system of acceptable field prefixes
         :param all_field_names: type definition for this object
         :param prefix: hierarchical fields have prefixes (incident)
         :param payload:
@@ -124,10 +136,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 else:
                     new_value = {"value": payload[field].get('value', None)}
 
-            elif isinstance(payload[field], dict):
-                # recurse over this dictionary
-                new_value = self.convert_values(context, type_name, all_field_names, field, payload[field], datatable_flag)
-
             else:
                 new_value = payload[field]
                 if field in all_field_names:
@@ -135,7 +143,13 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                         and all_field_names[field].get('prefix', prefix) == prefix:
                         new_value = self.convert_selects(field_key, payload[field], all_field_names[field])
 
-            if is_incident(type_name) and not self.filters.filter_payload_value(field_key, new_value):
+                elif isinstance(payload[field], dict):
+                    # recurse over this dictionary
+                    new_value = self.convert_values(context, type_name,
+                                                    all_field_names, field, payload[field], datatable_flag)
+
+            # don't include filtered fields
+            if type_name == "incident" and not self.filters.filter_payload_value(field_key, new_value):
                 msg = "Filter fail on {}:{}".format(field_key, new_value)
                 raise FilterError(msg)
 
@@ -161,20 +175,24 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 found = False
                 for value in type_info['values']:
                     if value['value'] == item:
-                        replacement_value = self._clean_assignee_value(type_info['input_type'], value['label'])
+                        replacement_value = self._clean_assignee_value(type_info['input_type'], self.capture_email(value['label']))
                         new_value.append(replacement_value)
                         found = True
                         break
 
                 if not found and item:
                     LOG.warning(u"Substitute value: {} not found for field: {}, omitting".format(item, field_key))
+
+        elif isinstance(orig_values, dict):
+            if orig_values.get('name', None):
+                new_value = {"name": self._clean_assignee_value(type_info['input_type'], orig_values.get('name'))}
+
         else:
             found = False
             new_value = orig_values
             for value in type_info['values']:
-                #LOG.debug("{}:{}".format(value['value'], new_value))
                 if value['value'] == orig_values:
-                    new_value = self._clean_assignee_value(type_info['input_type'], value['label'])
+                    new_value = self._clean_assignee_value(type_info['input_type'], self.capture_email(value['label']))
                     found = True
                     break
 
@@ -184,12 +202,13 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
         return new_value
 
-    def clean_payload(self, type_name, payload):
+    def clean_payload(self, orig_inc_id, type_name, payload):
         """
         remove fields which will be problematic if passed on
+        :param orig_inc_id: original incident id
         :param type_name: type of object
-        :param payload:
-        :return: cleaned payload
+        :param payload: dictionary
+        :return: dictionary of cleaned payload
         """
         orig_org_id = payload.get('org_id', None)
         orig_id = payload.pop('id', None)
@@ -199,47 +218,73 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         payload.pop('org_name', None)
         payload.pop('workspace', None)
 
-        # Task
-        payload.pop('reng_version', None)
-        if payload.get('instructions') and not isinstance(payload.get('instructions'), dict):
-            payload['instructions'] = {
-                "format": "html",
-                "content": payload.get('instructions')
-            }
+        if payload.get("assessment"):
+            payload['assessment'] = payload['assessment'].replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '')
 
+        # Task
+        payload.pop('inc_owner_id', None)
+        payload.pop('reng_version', None)
         payload.pop('at_id', None)
+        payload.pop('creator_principal', None)
         if isinstance(payload.get('phase_id', None), dict):
             payload['phase_id'].pop('id', None)
         if isinstance(payload.get('category_id', None), dict):
             payload['category_id'].pop('id', None)
 
-        if is_incident(type_name):
+        # fields which are rich text requiring new formats
+        for field_name in ['instructions', 'description']:
+            if payload.get(field_name) and not isinstance(payload.get(field_name), dict):
+                payload[field_name] = {
+                    "format": "html",
+                    "content": payload.get(field_name)
+                }
+
+        if type_name == "incident":
             payload = clean_incident_fields(self.filter_fields, payload)
 
             if self.sync_references:
                 payload['properties'][DF_ORG_ID] = orig_org_id
                 payload['properties'][DF_INC_ID] = orig_id
 
+        elif type_name == "artifact" and payload.get("parent_id", None):
+            # find the parent Id as it's been moved
+            # failures to find parent_id will requeue for retry later
+            target_inc_id, target_type_id = \
+                self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
+                                                           "artifact", payload.get("parent_id"))
+            if target_type_id:
+                payload["parent_id"] = target_type_id
+
         return orig_id, payload
 
 
-    def _clean_assignee_value(self, input_type, value):
+    def _clean_assignee_value(self, input_type, email):
         """
         parse out the string "First Last (a@example.com)" to return only email portion.
         This applies only to select_owner and multiselect_members
         :param input_type:
-        :param value:
+        :param email:
         :return: value if not input type match or email address
         """
-        if input_type not in ('select_owner', 'multiselect_members'):
-            return value
+        if input_type not in ('select_owner', 'multiselect_members', 'user'):
+            return email
 
+        # confirm that this user is in the target organization, if not return none
+        target_users = get_users_and_groups(self.resilient_target.rest_client) # TODO - member list of incident?
+        if email not in target_users:
+            LOG.warn("User/Group '%s' does not exist in target organization", email)
+            return None
+        else:
+            return email
+
+
+    def capture_email(self, value):
         # select_owner or multiselect_members
         match = USER_REGEX.match(value)
         if match:
             return match.group(1)       # just email address
-
-        return value
+        else:
+            return value
 
     def filter_nulls(self, payload):
         """
@@ -252,9 +297,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return new_payload
 
 # S T A T I C
-def is_incident(type_name):
-    return type_name == "incident"
-
 def clean_incident_fields(filter_fields, payload):
     """
     exclude incident fields from an incident
@@ -275,6 +317,17 @@ def clean_incident_fields(filter_fields, payload):
 
 
 class FilterError(Exception):
+    """
+    Class used to signal Filter Error. It doesn't add any specific information other than
+    identifying the type of error
+    """
+    def __init__(self, value):
+        self.value = value
+
+    def __str__(self):
+        return repr(self.value)
+
+class FieldNotFoundError(Exception):
     """
     Class used to signal Filter Error. It doesn't add any specific information other than
     identifying the type of error

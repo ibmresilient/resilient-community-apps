@@ -50,13 +50,13 @@ class SQLiteDBSync(DBSyncInterface):
 
     SYNC_TABLE_DEF = """-- mapping table
 CREATE TABLE IF NOT EXISTS {table_name} (
-    type_name text,
-    org1 int,
-    org1_inc_id int,
-    org1_type_id int,
-    org2 int,
-    org2_inc_id int,
-    org2_type_id int,
+    type_name text not null,
+    org1 int not null,
+    org1_inc_id int not null,
+    org1_type_id int not null,
+    org2 int not null,
+    org2_inc_id int not null,
+    org2_type_id int not null,
     last_sync timestamp,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id)
 );""".format(table_name=DBTABLE)
@@ -72,16 +72,16 @@ ON {table_name}(org2, org2_inc_id, type_name, org2_type_id);""".format(table_nam
         last_sync = datetime('now');""".format(table_name=DBTABLE)
     SYNC_INSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync) VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'));""".format(table_name=DBTABLE)
     SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
-    SYNC_SELECT = """SELECT * FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
+    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
 
     # R E T R Y  D B
     RETRY_TABLE_DEF = """-- retry table
 CREATE TABLE IF NOT EXISTS {table_name} (
-    type_name text,
-    org1 int,
-    org1_inc_id int,
-    org1_type_id int,
-    org1_dep_type_name text,
+    type_name text not null,
+    org1 int not null,
+    org1_inc_id int not null,
+    org1_type_id int not null,
+    org1_dep_type_name text not null,
     org1_dep_type_id int,
     org2 int,
     org2_inc_id int,
@@ -262,10 +262,10 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
             result_list = cur.fetchall()
 
-            # remove the items as they maybe readded
-            cur.execute(SQLiteDBSync.RETRY_DELETE, (orig_org_id, orig_inc_id, type_name, self.org_id))
+            # remove the items as they may be readded
+            if result_list:
+                cur.execute(SQLiteDBSync.RETRY_DELETE, (orig_org_id, orig_inc_id, type_name, self.org_id))
 
-            self.log.info(result_list)
             return result_list
         except Exception as err:
             self.log.error("find_retry_rows failure to get retries. err %s", err)
