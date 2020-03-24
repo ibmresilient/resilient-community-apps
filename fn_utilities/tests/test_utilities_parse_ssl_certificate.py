@@ -3,6 +3,7 @@
 
 from __future__ import print_function
 import pytest, os, sys
+from mock_attachment import AttachmentMock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -13,7 +14,7 @@ FUNCTION_NAME = "utilities_parse_ssl_certificate"
 config_data = get_config_data(PACKAGE_NAME)
 
 # Provide a simulation of the Resilient REST API (uncomment to connect to a real appliance)
-resilient_mock = "pytest_resilient_circuits.BasicResilientMock"
+resilient_mock = AttachmentMock
 
 
 def call_utilities_parse_ssl_certificate_function(circuits, function_params, timeout=30):
@@ -33,7 +34,7 @@ class TestUtilitiesParseSslCertificate:
     DATA_DIR = "data/ssl_certs"
 
     @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
-    
+
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
