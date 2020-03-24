@@ -4,6 +4,7 @@
 
 from __future__ import print_function
 import pytest
+import sys
 from mock_attachment import AttachmentMock
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -38,6 +39,10 @@ class TestUtilitiesStringToAttachment:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    @pytest.mark.skipif(sys.version_info < (3, 0), reason="""Python2 does not gaurantee the order registering mock calls
+                                                            in BasicResilientMock and AttachmentMock - there are two 
+                                                            similar regex urls that we need to fix first INT-2423
+                                                            """)
     @pytest.mark.parametrize("string_to_convert_to_attachment, attachment_name, incident_id, expected_results", [
         ("test string", "test attachment name", 202, {'attachment_id': 2021})
     ])
