@@ -1,4 +1,4 @@
-from data_feeder_plugins.resilientfeed.resilientfeed import clean_incident_fields
+from data_feeder_plugins.resilientfeed.resilientfeed import exclude_incident_fields
 
 TEST_PAYLOAD = {
                 'dtm': {},
@@ -32,14 +32,14 @@ TEST_PAYLOAD = {
 def test_field():
     filters = ['confirmed', 'zip']
 
-    payload = clean_incident_fields(filters, TEST_PAYLOAD)
+    payload = exclude_incident_fields(filters, TEST_PAYLOAD)
     for filter in filters:
         assert not payload.get(filter, None)
 
 def test_section():
     filters = ['pii', 'gdpr']
 
-    payload = clean_incident_fields(filters, TEST_PAYLOAD)
+    payload = exclude_incident_fields(filters, TEST_PAYLOAD)
     for filter in filters:
         assert not payload.get(filter, None)
 
@@ -47,8 +47,6 @@ def test_section_field():
     # part of pii section
     filters = ['determined_date']
 
-    payload = clean_incident_fields(filters, TEST_PAYLOAD)
+    payload = exclude_incident_fields(filters, TEST_PAYLOAD)
     assert payload.get("pii", None)
     assert not payload["pii"].get('determined_date', None)
-
-

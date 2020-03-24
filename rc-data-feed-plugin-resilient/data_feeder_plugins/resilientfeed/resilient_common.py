@@ -231,8 +231,7 @@ class Resilient(object):
 
         for task in response:
             # pick a number of comparison fields to ensure duplicate
-            if task['name'] == payload['name'] and task['cat_name'] == payload['cat_name'] \
-                    and task['instructions'] == payload['instructions']:
+            if task['name'] == payload['name'] and task['cat_name'] == payload['cat_name']:
                 return task['id']
 
         return None

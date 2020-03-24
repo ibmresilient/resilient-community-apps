@@ -31,10 +31,9 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         self.options = options
         self.resilient_source = Resilient(options, rest_client_helper)
         self.resilient_target = Resilient(options, None)
-        # set up the criteria to accept incident synchronizing, if any
-        self.filters = Filters(options.get("matching_fields", None), options.get("matching_operator", None))
+
         # incident fields to filter out
-        self.filter_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(",")
+        self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(",")
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
 
 
@@ -49,6 +48,10 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         :param payload:
         :return:
         """
+        # set up the criteria to accept incident synchronizing, if any
+        matching_criteria = Filters(self.options.get("matching_incident_fields", None),
+                                    self.options.get("matching_operator", None))
+
         type_name = context.type_info.get_pretty_type_name()
 
         # check for attachments and artifacts with attachments
@@ -73,12 +76,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             # convert selection lists and multi-selection lists to values, not id's
             try:
                 # get the fields of the target resilient
-                #target_all_fields_by_name, target_prefix_list = \
-                #    get_fields(self.resilient_target.rest_client, type_name, self._is_datatable(payload))
-                #if not target_all_fields_by_name:
-                #    LOG.warn("'{}' does not exist on target organization. Bypassing".format(type_name))
-                #else:
-                new_payload = self.convert_values(context, type_name,
+                new_payload = self.convert_values(context, matching_criteria, type_name,
                                                   all_field_names, None, payload,
                                                   self._is_datatable(payload))
 
@@ -90,7 +88,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 # perform the creation in the new resilient org
                 self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
                                                          type_name, cleaned_payload, orig_id)
-            except FilterError as err:
+            except MatchError as err:
                 LOG.info("{} on Incident {}".format(str(err), context.inc_id))
 
                 # create a sync entry so we know we skipped this incident
@@ -107,11 +105,12 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return bool(payload.get("table_name", None))
 
 
-    def convert_values(self, context, type_name,
+    def convert_values(self, context, matching_criteria, type_name,
                        all_field_names, prefix, payload, datatable_flag):
         """
         recursive function to convert Ids to values for a given object
         :param context:
+        :param matching_criteria: criteria to determine if this incident is allowed
         :param type_name: type of object converting
         :param target_all_fields_by_name: type definition for the target org
         :param target_prefix_list - list on target system of acceptable field prefixes
@@ -145,13 +144,13 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
                 elif isinstance(payload[field], dict):
                     # recurse over this dictionary
-                    new_value = self.convert_values(context, type_name,
+                    new_value = self.convert_values(context, matching_criteria, type_name,
                                                     all_field_names, field, payload[field], datatable_flag)
 
-            # don't include filtered fields
-            if type_name == "incident" and not self.filters.filter_payload_value(field_key, new_value):
-                msg = "Filter fail on {}:{}".format(field_key, new_value)
-                raise FilterError(msg)
+            # apply logic to determine if the incident should be created
+            if type_name == "incident" and not matching_criteria.match_payload_value(field_key, new_value):
+                msg = "Match failed on {}:{}".format(field_key, new_value)
+                raise MatchError(msg)
 
             new_payload[field_key] = new_value
 
@@ -175,7 +174,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 found = False
                 for value in type_info['values']:
                     if value['value'] == item:
-                        replacement_value = self._clean_assignee_value(type_info['input_type'], self.capture_email(value['label']))
+                        replacement_value = self._clean_assignee_value(type_info['input_type'], capture_email(value['label']))
                         new_value.append(replacement_value)
                         found = True
                         break
@@ -192,7 +191,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             new_value = orig_values
             for value in type_info['values']:
                 if value['value'] == orig_values:
-                    new_value = self._clean_assignee_value(type_info['input_type'], self.capture_email(value['label']))
+                    new_value = self._clean_assignee_value(type_info['input_type'], capture_email(value['label']))
                     found = True
                     break
 
@@ -240,7 +239,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 }
 
         if type_name == "incident":
-            payload = clean_incident_fields(self.filter_fields, payload)
+            payload = exclude_incident_fields(self.exclude_fields, payload)
 
             if self.sync_references:
                 payload['properties'][DF_ORG_ID] = orig_org_id
@@ -277,15 +276,6 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         else:
             return email
 
-
-    def capture_email(self, value):
-        # select_owner or multiselect_members
-        match = USER_REGEX.match(value)
-        if match:
-            return match.group(1)       # just email address
-        else:
-            return value
-
     def filter_nulls(self, payload):
         """
         instance method
@@ -297,26 +287,35 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         return new_payload
 
 # S T A T I C
-def clean_incident_fields(filter_fields, payload):
+def capture_email(value):
+    # select_owner or multiselect_members
+    match = USER_REGEX.match(value)
+    if match:
+        return match.group(1)       # just email address
+    else:
+        return value
+
+
+def exclude_incident_fields(filter_fields, payload):
     """
     exclude incident fields from an incident
     :param filter_fields - list of fields to exclude
     :param payload:
-    :return: updated payload
+    :return: payload with excluded fields removed
     """
     new_payload = {}
 
     for field in payload.keys():
         if field not in filter_fields:
             if isinstance(payload[field], dict):
-                new_payload[field] = clean_incident_fields(filter_fields, payload[field])
+                new_payload[field] = exclude_incident_fields(filter_fields, payload[field])
             else:
                 new_payload[field] = payload[field]
 
     return new_payload
 
 
-class FilterError(Exception):
+class MatchError(Exception):
     """
     Class used to signal Filter Error. It doesn't add any specific information other than
     identifying the type of error
