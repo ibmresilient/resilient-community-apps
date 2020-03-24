@@ -104,8 +104,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
         LOG.info(u"Secureworks CTP escalate.")
         try:
             # Get list of tickets needing updating
-            #response = self.scwx_client.post_tickets_updates()
-            response = self.scwx_client.mock_post_tickets_updates()
+            response = self.scwx_client.post_tickets_updates()
+
             tickets = response.get('tickets')
             ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
             LOG.info(u"Secureworks tickets to be processed this poll: %s", ticket_id_list)
@@ -128,8 +128,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 self.add_ticket_attachments(resilient_incident, ticket)
 
                 # Acknowledge Secureworks that we have received the tickets.
-                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
-                response_ack = [{'code': "SUCCESS", 'ticketId': ticket_id}]
+                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+
                 code = response_ack[0].get('code')
                 if code is not "SUCCESS":
                     LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
@@ -308,9 +308,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
             ticket_id = ticket.get('ticketId')
             for attachment in attachment_info_list:
                 attachment_id = attachment.get('id')
-                #response = self.scwx_client.get_ticket_attachment(ticket_id, attachment_id)
-                response = {'name': 'Securework-attachment.txt',
-                            'content': 'here is the content '.encode('utf-8')}
+
+                # Get ticket attachment
+                response = self.scwx_client.get_ticket_attachment(ticket_id, attachment_id)
+
                 content = response.get('content')
                 datastream = BytesIO(content)
                 attachment_name = attachment.get('name')
