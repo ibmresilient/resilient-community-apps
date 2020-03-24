@@ -25,6 +25,7 @@ class SCWXClient(object):
         self.limit = options.get('query_limit')
         self.ticket_types = options.get('query_ticket_types','').split(",")
         self.grouping_types = options.get('query_grouping_types','').split(",")
+        self.assignedToCustomer = options.get('assignedToCustomer')
         self.cafile = options.get('cafile')
         self.bundle = os.path.expanduser(self.cafile) if self.cafile else False
 
@@ -50,6 +51,7 @@ class SCWXClient(object):
         payload = {'ticketType': self.ticket_types,
                    'limit': self.limit,
                    'groupingType': self.grouping_types,
+                   'assignedToCustomer': self.assignedToCustomer,
                    'worklogs': "UPDATED"}
 
         response = self.rc.execute_call_v2("post", url, headers=self.headers, params=payload, verify=self.bundle,
