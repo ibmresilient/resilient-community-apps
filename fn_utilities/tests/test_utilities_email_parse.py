@@ -34,12 +34,13 @@ def call_email_parse_function(circuits, function_params, timeout=10):
 
 class TestArtifactEmailParse:
     """ Tests for the artifact_email_parse function"""
-
+    @pytest.mark.livetest
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
+    
     @pytest.mark.parametrize("base64content, expected_result", [
         (ArtifactMock.test_data_b64("email_sample_1.eml"), {
             "from": [["", "foo@example.com"]],
@@ -66,6 +67,7 @@ class TestArtifactEmailParse:
             ]
         }),
     ])
+    @pytest.mark.livetest
     def test_success(self, circuits_app, base64content, expected_result):
         """ Test calling with sample values for the parameters """
         function_params = { 

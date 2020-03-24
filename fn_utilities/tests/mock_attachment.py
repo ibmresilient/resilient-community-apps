@@ -69,17 +69,23 @@ class AttachmentMock(BasicResilientMock):
     }
 
     @resilient_endpoint("GET", "/tasks/[0-9]+/attachments$")
-    @resilient_endpoint("GET", "/incidents/[0-9]+/attachments$")
-    def attachments_get(self, request):
+    def task_attachments_get(self, request):
         """ GET the list of attachments """
         data = [value for id, value in self.attachments.items()]
         return requests_mock.create_response(request,
                                              status_code=200,
                                              json=data)
 
-    @resilient_endpoint("POST", "/tasks/[0-9]+/attachments$")
+    @resilient_endpoint("GET", "/incidents/[0-9]+/attachments$")
+    def incident_attachments_get(self, request):
+        """ GET the list of attachments """
+        data = [value for id, value in self.attachments.items()]
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json=data)
+
     @resilient_endpoint("POST", "/incidents/[0-9]+/attachments$")
-    def attachments_post(self, request):
+    def incident_attachments_post(self, request):
         """ POST an attachment """
 
         data = {}
@@ -87,6 +93,20 @@ class AttachmentMock(BasicResilientMock):
 
         if incident_id == "202":
           data = self.attachments["2021"]
+
+        return requests_mock.create_response(request,
+                                             status_code=200,
+                                             json=data)
+
+    @resilient_endpoint("POST", "/tasks/[0-9]+/attachments$")
+    def task_attachments_post(self, request):
+        """ POST an attachment """
+
+        data = {}
+        incident_id = request.url.split("/")[-2]
+
+        if incident_id == "202":
+            data = self.attachments["2021"]
 
         return requests_mock.create_response(request,
                                              status_code=200,
