@@ -7,22 +7,21 @@
 
 import os
 from io import BytesIO
-import json
 import datetime
 import logging
-from circuits import Event, Timer, task
+from circuits import Event, Timer
 from pkg_resources import Requirement, resource_filename
 from resilient import SimpleHTTPException
 from resilient_circuits import ResilientComponent, handler
 from resilient_circuits.template_functions import render_json, environment
-from resilient_lib import validate_fields, write_file_attachment, IntegrationError
+from resilient_lib import validate_fields, write_file_attachment
 from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"
 SCWX_CTP_POLL_CHANNEL = "scwx_ctp_poll"
 TICKET_ID_FIELDNAME = "scwx_ctp_ticket_id"
-DEFAULT_POLL_SECONDS=600
+DEFAULT_POLL_SECONDS = 600
 LOG = logging.getLogger(__name__)
 
 class Poll(Event):
@@ -108,7 +107,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
             tickets = response.get('tickets')
             ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
-            LOG.info(u"Secureworks tickets to be processed this poll: %s", ticket_id_list)
+            LOG.info(u"Secureworks CTP tickets to be processed this poll: %s", ticket_id_list)
 
             for ticket in tickets:
 
@@ -209,7 +208,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             # using a JSON (JINJA2) template file
             template_file_path = self.options.get('template_file')
             if template_file_path and not os.path.exists(template_file_path):
-                LOG.warn(u"Template file '%s' not found.", template_file_path)
+                LOG.info(u"Template file '%s' not found.", template_file_path)
                 template_file_path = None
             if not template_file_path:
                 # Use the template file installed by this package
@@ -275,15 +274,15 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 note = u"<b>Secureworks CTP Worklog:</b><br>"
                 date = worklog.get('dateCreated')
                 description = worklog.get('description')
-                type = worklog.get('type')
-                createdBy = worklog.get('createdBy')
-                if createdBy:
-                    note = u"{}    <b>Created by:</b> {}<br>".format(note, createdBy)
+                worklog_type = worklog.get('type')
+                created_by = worklog.get('createdBy')
+                if created_by:
+                    note = u"{}    <b>Created by:</b> {}<br>".format(note, created_by)
                 if date:
                     created = datetime_filter(date)
                     note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
-                if type:
-                    note = u"{}    <b>Type:</b> {}<br>".format(note, type)
+                if worklog_type:
+                    note = u"{}    <b>Type:</b> {}<br>".format(note, worklog_type)
                 if description:
                     description = description.replace("\n", "<br>")
                     note = u"{}    <b>Description:</b><br> {}".format(note, description)
