@@ -34,7 +34,7 @@ class TestUtilitiesParseSslCertificate:
     DATA_DIR = "data/ssl_certs"
 
     @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
-
+    @pytest.mark.livetest
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
@@ -44,6 +44,7 @@ class TestUtilitiesParseSslCertificate:
         (1, "ssl_example.cert", 2095,  "Valid"),
         #(6, "text", 2095, {"expiration_status": "Expired"})
     ])
+    @pytest.mark.livetest
     @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
     def test_success(self, circuits_app, artifact_id, utilities_certificate, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
@@ -58,4 +59,4 @@ class TestUtilitiesParseSslCertificate:
         }
 
         results = call_utilities_parse_ssl_certificate_function(circuits_app, function_params)
-        assert(expected_results == results["expiration_status"])
+        assert expected_results == results.get("expiration_status")
