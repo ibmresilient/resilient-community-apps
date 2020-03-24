@@ -2,7 +2,7 @@
 """Tests using pytest_resilient_circuits"""
 
 from __future__ import print_function
-import pytest, os
+import pytest, os, sys
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
@@ -32,15 +32,18 @@ class TestUtilitiesParseSslCertificate:
 
     DATA_DIR = "data/ssl_certs"
 
+    @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
+    
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
-    #@pytest.mark.livetest
+
     @pytest.mark.parametrize("artifact_id, utilities_certificate, incident_id, expected_results", [
         (1, "ssl_example.cert", 2095,  "Valid"),
         #(6, "text", 2095, {"expiration_status": "Expired"})
     ])
+    @pytest.mark.skipif(sys.version_info < (3, 6), reason="requires python3.6 or higher")
     def test_success(self, circuits_app, artifact_id, utilities_certificate, incident_id, expected_results):
         """ Test calling with sample values for the parameters """
         curr_dir = os.path.dirname(os.path.realpath(__file__))
