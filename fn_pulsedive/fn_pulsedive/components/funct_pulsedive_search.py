@@ -234,7 +234,7 @@ class FunctionComponent(ResilientComponent):
                 datastream = BytesIO(resp.content)
             else:
                 # Convert dict to string first, then convert to bytestream for file handling.
-                ds = "{}".format(resp.text)
+                ds = resp.text
                 datastream = BytesIO(ds.encode("utf-8"))
 
             # Write the file as attachment: failures will raise an exception
