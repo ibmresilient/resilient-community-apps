@@ -32,7 +32,7 @@ class PollCompleted(Event):
     """A Circuits event to notify that this poll event is completed"""
     channels = (SCWX_CTP_POLL_CHANNEL,)
 
-def datetime_filter(val):
+def readable_datetime(val):
     """ JINJA filter to convert ms to mm/dd/YYYY:H:M:S """
     dt = datetime.datetime.fromtimestamp(val / 1000.0)
     return dt.strftime("%m/%d/%Y %H:%M:%S")
@@ -58,8 +58,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
         # Add the timestamp-parse function to the global JINJA environment
         env = environment()
-        env.globals.update({"datetime_filter": datetime_filter})
-        env.filters.update({"datetime_filter": datetime_filter})
+        env.globals.update({"readable_datetime": readable_datetime})
+        env.filters.update({"readable_datetime": readable_datetime})
 
         LOG.info(u"Secureworks CTP escalation initiated, polling interval %s", self.polling_interval)
         Timer(self.polling_interval, Poll(), persist=False).register(self)
@@ -130,7 +130,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
 
                 code = response_ack[0].get('code')
-                if code is not "SUCCESS":
+                if code != "SUCCESS":
                     LOG.info(u"Secureworks CTP could not acknowledge ticket: %s code: %s", ticket_id, code)
                 else:
                     LOG.info(u"Secureworks CTP acknowledged ticket: %s code: %s", ticket_id, code)
@@ -192,7 +192,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             r_incidents_tmp = self.rest_client().post(query_uri, query)
             r_incidents = [r_inc for r_inc in r_incidents_tmp
                            if r_inc["properties"].get(TICKET_ID_FIELDNAME) == ticket_id]
-        if len(r_incidents) > 0:
+        if r_incidents:
             return r_incidents[0]
         return None
 
@@ -208,7 +208,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
             # using a JSON (JINJA2) template file
             template_file_path = self.options.get('template_file')
             if template_file_path and not os.path.exists(template_file_path):
-                LOG.info(u"Template file '%s' not found.", template_file_path)
+                LOG.warning(u"Template file '%s' not found.", template_file_path)
                 template_file_path = None
             if not template_file_path:
                 # Use the template file installed by this package
@@ -279,7 +279,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 if created_by:
                     note = u"{}    <b>Created by:</b> {}<br>".format(note, created_by)
                 if date:
-                    created = datetime_filter(date)
+                    created = readable_datetime(date)
                     note = u"{}    <b>Date Created:</b> {}<br>".format(note, created)
                 if worklog_type:
                     note = u"{}    <b>Type:</b> {}<br>".format(note, worklog_type)
