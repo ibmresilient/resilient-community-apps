@@ -58,21 +58,25 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_inc_id int not null,
     org2_type_id int not null,
     last_sync timestamp,
+    state text,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id)
 );""".format(table_name=DBTABLE)
 
-    SYNC_TABLE_INDEX = """CREATE UNIQUE INDEX IF NOT EXISTS ix_{table_name} 
-ON {table_name}(org2, org2_inc_id, type_name, org2_type_id);""".format(table_name=DBTABLE)
+    SYNC_TABLE_INDEX = """CREATE UNIQUE INDEX IF NOT EXISTS ix_{table_name}
+        ON {table_name}(org2, org2_inc_id, type_name, org2_type_id);""".format(table_name=DBTABLE)
 
-    SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync) 
-        VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'))
+    SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state)
+        VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)
         ON CONFLICT(org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id) DO UPDATE SET
         org2_inc_id = ?,
         org2_type_id = ?,
-        last_sync = datetime('now');""".format(table_name=DBTABLE)
-    SYNC_INSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync) VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'));""".format(table_name=DBTABLE)
+        last_sync = datetime('now'),
+        state=?;""".format(table_name=DBTABLE)
     SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
-    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
+    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
+
+    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), state='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBTABLE)
+    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), state='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBTABLE)
 
     # R E T R Y  D B
     RETRY_TABLE_DEF = """-- retry table
@@ -90,14 +94,14 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     PRIMARY KEY (org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
     );""".format(table_name=RETRY_DBTABLE)
 
-    RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name} 
-    WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
-    RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, 
+    RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name}
+        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
+    RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id,
         org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_sync)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-        ON CONFLICT(org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id) 
+        ON CONFLICT(org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
         DO UPDATE SET last_sync = datetime('now');""".format(table_name=RETRY_DBTABLE)
-    RETRY_DELETE = """DELETE from {table_name}  
+    RETRY_DELETE = """DELETE from {table_name}
         WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
 
 
@@ -115,7 +119,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
             self.create_table(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.RETRY_TABLE_DEF, SQLiteDBSync.SYNC_TABLE_INDEX)
         except Error as e:
-            self.log.error("Unable to use file for data feeder sync")
+            self.log.error("Unable to use file for data feeder sync: %s", e)
 
     def create_table(self, *args):
         """ create a table from the create_table_sql statement
@@ -127,7 +131,9 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             for arg in args:
                 cur.execute(arg)
         except Error as e:
-            self.log.error("Unable to create table for data feeder sync", e)
+            self.log.error("Unable to create table for data feeder sync: %s", e)
+        finally:
+            cur and cur.close()
 
 
     def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
@@ -145,18 +151,20 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             cur.execute(SQLiteDBSync.SYNC_SELECT, (orig_org_id, orig_inc_id, type_name, orig_type_id, self.org_id))
 
             data = cur.fetchone()
-            # row: type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync
+            # row: type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state
             if data is None:
-                return None, None
+                return None, None, None
 
             # return: sync_inc_id, sync_type_id
-            return data[5], data[6]
-        except Exception as err:
+            return data[5], data[6], data[8]
+        except Error as err:
             self.log.error("find_sync_row err %s", err)
-            return None, None
+            return None, None, None
+        finally:
+            cur and cur.close()
 
     def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
-                        new_inc_id, new_type_id):
+                        new_inc_id, new_type_id, state):
         """
         add a row to the mapping db to map the source object with the destination object
         :param orig_org_id:
@@ -165,19 +173,21 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         :param orig_type_id:
         :param new_inc_id:
         :param new_type_id:
+        :param state: active, filtered, deleted
         :return: None
         """
 
         try:
-            now = self._get_current_timestamp()
             cur = self.sqlite_db.cursor()
             cur.execute(SQLiteDBSync.SYNC_UPSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                                   self.org_id, new_inc_id, new_type_id,
-                                                   new_inc_id, new_type_id))
+                                                   self.org_id, new_inc_id, new_type_id, state,
+                                                   new_inc_id, new_type_id, state))
 
             self.sqlite_db.commit()
-        except Exception as err:
+        except Error as err:
             self.log.error("create_sync_row err %s", err)
+        finally:
+            cur and cur.close()
 
     def update_existing_sync_row(self, target_inc_id, type_name, target_type_id):
         """
@@ -193,8 +203,10 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             cur.execute(SQLiteDBSync.SYNC_UPDATE, (self.org_id, target_inc_id, type_name, target_type_id))
 
             self.sqlite_db.commit()
-        except Exception as err:
+        except Error as err:
             self.log.error("update_existing_sync_row err %s", err)
+        finally:
+            cur and cur.close()
 
     def find_incident(self, orig_org_id, orig_inc_id):
         """
@@ -203,9 +215,47 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         :param orig_inc_id:
         :return: found inc_id or None
         """
-        sync_inc_id, _ = self.find_sync_row(orig_org_id, orig_inc_id, "incident", orig_inc_id)
+        sync_inc_id, _, sync_state = self.find_sync_row(orig_org_id, orig_inc_id, "incident", orig_inc_id)
 
-        return sync_inc_id
+        return sync_inc_id, sync_state
+
+    def delete_type(self, org2_id, org2_inc_id, type_name, org2_type_id):
+        """
+        delete an entry in the sync table
+        :param org2_id:
+        :param org2_inc_id:
+        :param type_name:
+        :param org2_type_id:
+        :return:
+        """
+        try:
+            cur = self.sqlite_db.cursor()
+
+            cur.execute(SQLiteDBSync.SYNC_DELETE_TYPE, (org2_id, org2_inc_id, type_name, org2_type_id))
+
+            self.sqlite_db.commit()
+        except Error as err:
+            self.log.error("delete_type err %s", err)
+        finally:
+            cur and cur.close()
+
+    def delete_incident_types(self, org2_id, org2_inc_id):
+        """
+        delete all records associated with an incident
+        :param org2_id:
+        :param org2_inc_id:
+        :return:
+        """
+        try:
+            cur = self.sqlite_db.cursor()
+
+            cur.execute(SQLiteDBSync.SYNC_DELETE_INCIDENT, (org2_id, org2_inc_id))
+
+            self.sqlite_db.commit()
+        except Error as err:
+            self.log.error("delete_type err %s", err)
+        finally:
+            cur and cur.close()
 
 
     # R E T R Y  F U N C T I O N S
@@ -226,7 +276,6 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         """
 
         try:
-            now = self._get_current_timestamp()
             cur = self.sqlite_db.cursor()
             # (org1, org1_inc_id, type_name, org1_type_id,
             #     org1_dep_type_name, org1_dep_type_id,
@@ -243,8 +292,10 @@ CREATE TABLE IF NOT EXISTS {table_name} (
                                                     self.org_id, new_inc_id, new_payload))
 
             self.sqlite_db.commit()
-        except Exception as err:
+        except Error as err:
             self.log.error("create_retry_row err %s", err)
+        finally:
+            cur and cur.close()
 
     def find_retry_rows(self, orig_org_id, orig_inc_id, type_name):
         """
@@ -267,9 +318,11 @@ CREATE TABLE IF NOT EXISTS {table_name} (
                 cur.execute(SQLiteDBSync.RETRY_DELETE, (orig_org_id, orig_inc_id, type_name, self.org_id))
 
             return result_list
-        except Exception as err:
+        except Error as err:
             self.log.error("find_retry_rows failure to get retries. err %s", err)
             return []
+        finally:
+            cur and cur.close()
 
     def delete_retry_rows(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
         """
@@ -285,5 +338,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             cur.execute(SQLiteDBSync.RETRY_DELETE, (orig_org_id, orig_inc_id, type_name, orig_type_id, self.org_id))
 
             self.sqlite_db.commit()
-        except Exception as err:
+        except Error as err:
             self.log.error("delete_retry_rows err %s", err)
+        finally:
+            cur and cur.close()

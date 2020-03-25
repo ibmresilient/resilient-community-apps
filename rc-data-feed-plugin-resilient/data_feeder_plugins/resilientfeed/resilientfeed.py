@@ -43,16 +43,22 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         1) Convert id references to values
         2) Match incident filter criteria
         3) cleanup loads, removing fields identified
-        4) Perform syncrhonization, create or update
+        4) Perform synchronization, create or update
         :param context:
         :param payload:
-        :return:
+        :return: None
         """
+        type_name = context.type_info.get_pretty_type_name()
+
+        if context.is_deleted:
+            orig_id = payload.get('id', None)
+            self.resilient_target.delete_type(context.inc_id, self.resilient_source.rest_client.org_id,
+                                              type_name, payload, orig_id)
+            return
+
         # set up the criteria to accept incident synchronizing, if any
         matching_criteria = Filters(self.options.get("matching_incident_fields", None),
                                     self.options.get("matching_operator", None))
-
-        type_name = context.type_info.get_pretty_type_name()
 
         # check for attachments and artifacts with attachments
         if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
@@ -86,10 +92,12 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 LOG.debug(cleaned_payload)
 
                 # perform the creation in the new resilient org
-                self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
-                                                         type_name, cleaned_payload, orig_id)
+                create_list = self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
+                                                                       type_name, cleaned_payload, orig_id)
+
+                LOG.debug("Objects created: %s", create_list)
             except MatchError as err:
-                LOG.info("{} on Incident {}".format(str(err), context.inc_id))
+                LOG.info("%s on Incident %s", err, context.inc_id)
 
                 # create a sync entry so we know we skipped this incident
                 self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
@@ -180,7 +188,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                         break
 
                 if not found and item:
-                    LOG.warning(u"Substitute value: {} not found for field: {}, omitting".format(item, field_key))
+                    LOG.warning(u"Substitute value: %s not found for field: %s, omitting", item, field_key)
 
         elif isinstance(orig_values, dict):
             if orig_values.get('name', None):
@@ -196,14 +204,14 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                     break
 
             if not found and new_value:
-                LOG.warning(u"Substitute value: {} not found for field: {}, omitting".format(new_value, field_key))
+                LOG.warning(u"Substitute value: %s not found for field: %s, omitting", new_value, field_key)
                 new_value = None
 
         return new_value
 
     def clean_payload(self, orig_inc_id, type_name, payload):
         """
-        remove fields which will be problematic if passed on
+        remove fields which will be problematic if passed on and perform clean up for API submission
         :param orig_inc_id: original incident id
         :param type_name: type of object
         :param payload: dictionary
@@ -245,14 +253,19 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 payload['properties'][DF_ORG_ID] = orig_org_id
                 payload['properties'][DF_INC_ID] = orig_id
 
-        elif type_name == "artifact" and payload.get("parent_id", None):
-            # find the parent Id as it's been moved
-            # failures to find parent_id will requeue for retry later
-            target_inc_id, target_type_id = \
-                self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
-                                                           "artifact", payload.get("parent_id"))
-            if target_type_id:
-                payload["parent_id"] = target_type_id
+        elif type_name == "artifact":
+            # make the artifact type an api style name as custom artifact types are only supported this way
+            #todo payload['type'] = payload.get('type', '').lower().replace(' ', '_')
+
+            if payload.get("parent_id", None):
+                # find the parent Id as it's been moved
+                # failures to find parent_id will requeue for retry later
+                _, target_type_id, sync_state = \
+                    self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
+                                                               "artifact", payload.get("parent_id"))
+
+                if target_type_id and sync_state == "active":
+                    payload["parent_id"] = target_type_id
 
         return orig_id, payload
 
@@ -271,10 +284,10 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         # confirm that this user is in the target organization, if not return none
         target_users = get_users_and_groups(self.resilient_target.rest_client) # TODO - member list of incident?
         if email not in target_users:
-            LOG.warn("User/Group '%s' does not exist in target organization", email)
+            LOG.warning("User/Group '%s' does not exist in target organization", email)
             return None
-        else:
-            return email
+
+        return email
 
     def filter_nulls(self, payload):
         """
@@ -292,8 +305,8 @@ def capture_email(value):
     match = USER_REGEX.match(value)
     if match:
         return match.group(1)       # just email address
-    else:
-        return value
+
+    return value
 
 
 def exclude_incident_fields(filter_fields, payload):
@@ -311,6 +324,8 @@ def exclude_incident_fields(filter_fields, payload):
                 new_payload[field] = exclude_incident_fields(filter_fields, payload[field])
             else:
                 new_payload[field] = payload[field]
+        else:
+            LOG.info("Filtering field: %s", field)
 
     return new_payload
 
