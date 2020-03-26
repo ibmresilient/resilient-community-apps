@@ -14,6 +14,7 @@ LOG = logging.getLogger(__name__)
 
 # use for parsing owner or member values to return email addr: First Last (a@example.com)
 USER_REGEX = re.compile(r".*\((.*\@.*)\)")
+XML_REGEX = re.compile(r"^<\?xml.*\?>(.*)")
 
 # sync properties for an incident
 DF_INC_ID = "df_inc_id"
@@ -225,14 +226,18 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         payload.pop('org_name', None)
         payload.pop('workspace', None)
 
-        if payload.get("assessment"):
-            payload['assessment'] = payload['assessment'].replace('<?xml version="1.0" encoding="UTF-8" standalone="yes"?>', '')
+        if payload.get('assessment'):
+            payload['assessment'] = clean_xml(payload['assessment'])
+
+        if payload.get('pii', {}).get('assessment'):
+            payload['pii']['assessment'] = clean_xml(payload['pii']['assessment'])
 
         # Task
         payload.pop('inc_owner_id', None)
         payload.pop('reng_version', None)
         payload.pop('at_id', None)
         payload.pop('creator_principal', None)
+        payload.pop('creator', None)  # older versions of resilient uses this
         if isinstance(payload.get('phase_id', None), dict):
             payload['phase_id'].pop('id', None)
         if isinstance(payload.get('category_id', None), dict):
@@ -305,6 +310,14 @@ def capture_email(value):
     match = USER_REGEX.match(value)
     if match:
         return match.group(1)       # just email address
+
+    return value
+
+def clean_xml(value):
+    # remove xml header for data that follows
+    match = XML_REGEX.match(value)
+    if match:
+        return match.group(1)
 
     return value
 

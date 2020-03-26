@@ -61,7 +61,7 @@ class Resilient(object):
             else:
                 self.rest_client = resilient.get_client(self.opts)
         except Exception as err:
-            raise IntegrationError(err)
+            raise IntegrationError(str(err))
 
         # get the class to maintain the reference map: either datatable or sqlite
         # only needed for target Resilient
@@ -177,7 +177,7 @@ class Resilient(object):
 
                 new_type_id = sync_type_id
             except IntegrationError as err:
-                LOG.warning(err)
+                LOG.warning(str(err))
                 new_type_id = None
                 LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                             self.rest_client.org_id, sync_inc_id)
@@ -335,9 +335,10 @@ class Resilient(object):
 
         except Exception as err:
             LOG.warning("Unable to update %s %s, Incident %s", mapped_type_name, sync_type_id, sync_inc_id)
+            LOG.warning(err)
             LOG.debug(update_uri)
             LOG.debug(payload)
-            raise IntegrationError(err)
+            raise IntegrationError(str(err))
 
     def get_existing_datatable_row(self, inc_id, table_name, row_id):
         """
@@ -403,9 +404,10 @@ class Resilient(object):
                 new_type_id = response['id']
         except Exception as err:
             LOG.warning("Unable to create %s, Incident %s", mapped_type_name, sync_inc_id)
+            LOG.warning(err)
             LOG.debug(uri)
             LOG.debug(payload)
-            raise IntegrationError(err)
+            raise IntegrationError(str(err))
 
         return sync_inc_id, new_type_id
 
