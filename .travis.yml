@@ -55,6 +55,18 @@ matrix:
     - TOXENV=py36 TEST_RESILIENT_ORG="Resilient Integrations - Test"
     script:
     - echo "3.6 Master Build" && .scripts/run_tests.sh
+  - if: tag IS present AND tag =~ /^docker\/.+/
+    stage: Build Docker
+    name: Building Docker containers
+    services:
+      - docker
+    script:
+      - source .scripts/set_up_container_build_data.sh
+      - docker build --cache-from resilient/ubi8 -t resilient/$INTEGRATION_NAME:latest 
+        -t resilient/$INTEGRATION_NAME:INTEGRATION_VERSION ./$INTEGRATION_NAME
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin https://sec-resilient-docker-local.artifactory.swg-devops.com/
+      - docker push sec-resilient-docker-local.artifactory.swg-devops.com/resilient/$INTEGRATION_NAME:latest
+      - docker push sec-resilient-docker-local.artifactory.swg-devops.com/resilient/$INTEGRATION_NAME:INTEGRATION_VERSION
 before_install:
 - echo "About to install"
 install:
