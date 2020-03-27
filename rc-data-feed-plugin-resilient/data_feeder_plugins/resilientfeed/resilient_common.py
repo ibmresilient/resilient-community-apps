@@ -80,7 +80,7 @@ class Resilient(object):
             self.dbsync.find_sync_row(src_org_id, src_inc_id, type_name, orig_id)
 
         # do nothing if already deleted
-        if sync_state and sync_state != "active":
+        if sync_state and sync_state == "deleted":
             LOG.debug("%s %s:%s->%s", sync_state, src_inc_id, mapped_type_name, orig_id)
             return
 
@@ -161,7 +161,7 @@ class Resilient(object):
             self.dbsync.find_sync_row(src_org_id, src_inc_id, mapped_type_name, orig_id)
 
         # do nothing if already deleted
-        if sync_state and sync_state != "active":
+        if sync_state and sync_state == "deleted":
             LOG.debug("%s %s:%s->%s", sync_state, src_inc_id, mapped_type_name, orig_id)
             return None
 
@@ -191,7 +191,7 @@ class Resilient(object):
                 sync_inc_id, sync_state = self.dbsync.find_incident(src_org_id, src_inc_id)
 
                 # do nothing if already deleted
-                if sync_state and sync_state != "active":
+                if sync_state and sync_state == "deleted":
                     LOG.debug("%s %s:%s->%s", sync_state, src_inc_id, mapped_type_name, orig_id)
                     return None
 
@@ -226,7 +226,7 @@ class Resilient(object):
                         # create sync row, duplicates are now mapped too
                         self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
                                                     sync_inc_id, new_type_id, 'active')
-                    except Exception as err:
+                    except (IntegrationError, Exception) as err:
                         LOG.warning(err)
                         new_type_id = None
                         LOG.warning('queued to retry %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
@@ -424,7 +424,7 @@ class Resilient(object):
                 self.dbsync.find_sync_row(src_org_id, src_inc_id, "task", payload.get("task_id"))
 
             # do nothing if already deleted
-            if sync_state and sync_state != "active":
+            if sync_state and sync_state == "deleted":
                 LOG.debug("%s %s:%s->%s", sync_state, src_inc_id, type_name, payload.get("task_id"))
                 return None, None
 
@@ -462,7 +462,7 @@ class Resilient(object):
             sync_inc_id, sync_type_id, sync_state = self.dbsync.find_sync_row(src_org_id, src_inc_id, "incident", src_inc_id)
 
         # do nothing if already deleted
-        if sync_state and sync_state != "active":
+        if sync_state and sync_state == "deleted":
             LOG.debug("%s %s:%s->%s", sync_state, src_inc_id, type_name, src_task_id or src_inc_id)
             return
 
@@ -475,7 +475,7 @@ class Resilient(object):
 
         file_handle = io.BytesIO(attachment_contents)
 
-        LOG.debug('adding %s:%s to %s:%s', type_name, orig_id,
+        LOG.debug('adding %s:%s->%s to %s:%s', type_name, src_inc_id, orig_id,
                   self.rest_client.org_id, sync_inc_id)
 
         # artifact as file attachment?
@@ -497,7 +497,7 @@ class Resilient(object):
         self.dbsync.create_sync_row(src_org_id, src_inc_id, type_name, orig_id,
                                     sync_inc_id, new_type_id, 'active')
 
-        LOG.info('added %s:%s to %s:%s->%s', type_name, orig_id,
+        LOG.info('added %s:%s->%s to %s:%s->%s', type_name, src_inc_id, orig_id,
                  self.rest_client.org_id, sync_inc_id, new_type_id)
 
     def write_artifact_file(self, file_name, datastream, incident_id, payload):
@@ -535,6 +535,7 @@ class Resilient(object):
                                                                      mimetype=content_type)
             except Exception as err:
                 LOG.error("Unable to create attachment for file: %s", file_name)
+                LOG.error(artifact_uri)
                 LOG.error(payload)
                 LOG.exception(err)
             finally:

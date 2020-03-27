@@ -33,7 +33,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         self.resilient_source = Resilient(options, rest_client_helper)
         self.resilient_target = Resilient(options, None)
 
-        # incident fields to filter out
+        # incident fields to exclude
         self.exclude_fields = options.get("exclude_incident_fields", "").replace(" ", "").split(",")
         self.sync_references = str_to_bool(options.get("sync_reference_fields", "false"))
 
@@ -87,16 +87,15 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                                                   all_field_names, None, payload,
                                                   self._is_datatable(payload))
 
-                # remove fields unrelated to creating a new type
+                # remove fields unrelated to creating/upgrading an object
                 orig_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
-
                 LOG.debug(cleaned_payload)
 
                 # perform the creation in the new resilient org
                 create_list = self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
                                                                        type_name, cleaned_payload, orig_id)
 
-                LOG.debug("Objects created: %s", create_list)
+                LOG.debug("Objects created/updated: %s", create_list)
             except MatchError as err:
                 LOG.info("%s on Incident %s", err, context.inc_id)
 
@@ -322,23 +321,23 @@ def clean_xml(value):
     return value
 
 
-def exclude_incident_fields(filter_fields, payload):
+def exclude_incident_fields(exclude_fields, payload):
     """
     exclude incident fields from an incident
-    :param filter_fields - list of fields to exclude
+    :param exclude_fields - list of fields to exclude
     :param payload:
     :return: payload with excluded fields removed
     """
     new_payload = {}
 
     for field in payload.keys():
-        if field not in filter_fields:
+        if field not in exclude_fields:
             if isinstance(payload[field], dict):
-                new_payload[field] = exclude_incident_fields(filter_fields, payload[field])
+                new_payload[field] = exclude_incident_fields(exclude_fields, payload[field])
             else:
                 new_payload[field] = payload[field]
         else:
-            LOG.info("Filtering field: %s", field)
+            LOG.info("Excluding field: %s", field)
 
     return new_payload
 

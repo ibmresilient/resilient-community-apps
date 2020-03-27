@@ -59,15 +59,12 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_type_id int not null,
     last_sync timestamp,
     state text,
-    PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id)
+    PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
 );""".format(table_name=DBTABLE)
-
-    SYNC_TABLE_INDEX = """CREATE UNIQUE INDEX IF NOT EXISTS ix_{table_name}
-        ON {table_name}(org2, org2_inc_id, type_name, org2_type_id);""".format(table_name=DBTABLE)
 
     SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state)
         VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)
-        ON CONFLICT(org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id) DO UPDATE SET
+        ON CONFLICT(org1, org1_inc_id, type_name, org1_type_id, org2) DO UPDATE SET
         org2_inc_id = ?,
         org2_type_id = ?,
         last_sync = datetime('now'),
@@ -117,7 +114,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         try:
             self.sqlite_db = sqlite3.connect(sqlite_file)
 
-            self.create_table(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.RETRY_TABLE_DEF, SQLiteDBSync.SYNC_TABLE_INDEX)
+            self.create_table(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.RETRY_TABLE_DEF)
         except Error as e:
             self.log.error("Unable to use file for data feeder sync: %s", e)
 
