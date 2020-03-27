@@ -389,7 +389,7 @@ def ds_to_millis(val):
     if not val:
         return val
     try:
-        ts = val[:23]
+        ts = val[:-1]
         ts_format = "%Y-%m-%dT%H:%M:%S.%f"
         dt = datetime.strptime(ts, ts_format)
         return calendar.timegm(dt.utctimetuple()) * 1000

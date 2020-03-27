@@ -231,6 +231,9 @@ class TestMicrosoftSecurityGraphfunctions:
     def test_ds_to_millis(self):
         epoch = ds_to_millis("2017-05-17T17:07:59.114Z")
         assert epoch == 1495040879000
+        
+        epoch = ds_to_millis("2020-03-27T11:57:22.29Z")
+        assert epoch == 1585310242000
 
     def test_build_incident_dto(self):
         ds_filter = {"ds_to_millis": ds_to_millis}
