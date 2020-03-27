@@ -52,9 +52,9 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         type_name = context.type_info.get_pretty_type_name()
 
         if context.is_deleted:
-            orig_id = payload.get('id', None)
-            self.resilient_target.delete_type(context.inc_id, self.resilient_source.rest_client.org_id,
-                                              type_name, payload, orig_id)
+            orig_type_id = payload.get('id', None)
+            self.resilient_target.delete_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                              type_name, payload, orig_type_id)
             return
 
         # set up the criteria to accept incident synchronizing, if any
@@ -64,11 +64,11 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         # check for attachments and artifacts with attachments
         if type_name == "attachment" or (type_name == "artifact" and payload.get("attachment", None)):
             # remove org reference
-            orig_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
+            orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, payload)
 
-            self.resilient_target.upload_attachment(self.resilient_source.rest_client, context.inc_id,
-                                                    self.resilient_source.rest_client.org_id, type_name,
-                                                    cleaned_payload, orig_id)
+            self.resilient_target.upload_attachment(self.resilient_source.rest_client,
+                                                    self.resilient_source.rest_client.org_id, context.inc_id,
+                                                    type_name, cleaned_payload, orig_type_id)
         else:
             # get all the field definitions from the source environment
             all_fields = context.type_info.get_all_fields(refresh=False)
@@ -88,19 +88,19 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                                                   self._is_datatable(payload))
 
                 # remove fields unrelated to creating/upgrading an object
-                orig_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
+                orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
                 LOG.debug(cleaned_payload)
 
                 # perform the creation in the new resilient org
-                create_list = self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
-                                                                       type_name, cleaned_payload, orig_id)
+                create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
+                                                                       type_name, cleaned_payload, orig_type_id)
 
                 LOG.debug("Objects created/updated: %s", create_list)
             except MatchError as err:
                 LOG.info("%s on Incident %s", err, context.inc_id)
 
                 # create a sync entry so we know we skipped this incident
-                self.resilient_target.create_update_type(context.inc_id, self.resilient_source.rest_client.org_id,
+                self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
                                                          type_name, None, context.inc_id)
 
 
@@ -218,7 +218,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         :return: dictionary of cleaned payload
         """
         orig_org_id = payload.get('org_id', None)
-        orig_id = payload.pop('id', None)
+        orig_type_id = payload.pop('id', None)
 
         # incident
         payload.pop('org', None)
@@ -255,11 +255,11 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
 
             if self.sync_references:
                 payload['properties'][DF_ORG_ID] = orig_org_id
-                payload['properties'][DF_INC_ID] = orig_id
+                payload['properties'][DF_INC_ID] = orig_type_id
 
         elif type_name == "artifact":
             # make the artifact type an api style name as custom artifact types are only supported this way
-            #todo payload['type'] = payload.get('type', '').lower().replace(' ', '_')
+            #todo custom artifact types do not sync as the api name of the artifact is not visible in /types
 
             if payload.get("parent_id", None):
                 # find the parent Id as it's been moved
@@ -271,7 +271,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 if target_type_id and sync_state == "active":
                     payload["parent_id"] = target_type_id
 
-        return orig_id, payload
+        return orig_type_id, payload
 
 
     def _clean_assignee_value(self, input_type, email):
@@ -347,19 +347,21 @@ class MatchError(Exception):
     Class used to signal Filter Error. It doesn't add any specific information other than
     identifying the type of error
     """
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, message):
+        super(MatchError, self).__init__(message)
+        self.message = message
 
     def __str__(self):
-        return repr(self.value)
+        return repr(self.message)
 
 class FieldNotFoundError(Exception):
     """
     Class used to signal Filter Error. It doesn't add any specific information other than
     identifying the type of error
     """
-    def __init__(self, value):
-        self.value = value
+    def __init__(self, message):
+        super(FieldNotFoundError, self).__init__(message)
+        self.msg = message
 
     def __str__(self):
-        return repr(self.value)
+        return repr(self.msg)

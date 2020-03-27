@@ -12,6 +12,12 @@ from sqlite3 import Error
 class DBSyncFactory:
     @staticmethod
     def get_dbsync(org_id, sqllite_file):
+        """
+        build the object associated the type of sync data source
+        :param org_id:
+        :param sqllite_file:
+        :return: object for sync datasource
+        """
         if sqllite_file:
             return SQLiteDBSync(org_id, sqllite_file)
 
@@ -23,16 +29,29 @@ class DBSyncInterface:
     Resilient objects
     """
     def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
+        """
+        find a sync record for a given object
+        """
         pass
 
     def update_existing_sync_row(self, target_inc_id, type_name, target_type_id):
+        """
+        update a sync record for a given object
+        """
         pass
 
-    def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
-                        new_inc_id, new_type_id):
+    def create_sync_row(self, orig_org_id, orig_inc_id,
+                        type_name, orig_type_id,
+                        new_inc_id, new_type_id, state):
+        """
+        create a sync record for a given object
+        """
         pass
 
     def find_incident(self, orig_org_id, orig_inc_id):
+        """
+        find an incident sync record for a given object
+        """
         pass
 
     def _get_current_timestamp(self):
@@ -58,7 +77,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_inc_id int not null,
     org2_type_id int not null,
     last_sync timestamp,
-    state text,
+    state text not null,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
 );""".format(table_name=DBTABLE)
 
@@ -152,15 +171,23 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             if data is None:
                 return None, None, None
 
-            # return: sync_inc_id, sync_type_id
-            return data[5], data[6], data[8]
+            sync_inc_id = data[5]
+            sync_type_id = data[6]
+            sync_state = data[8]
+
+            # do nothing if already deleted
+            if sync_state == "deleted":
+                self.log.debug("%s %s:%s->%s", sync_state, orig_inc_id, type_name, orig_type_id or orig_inc_id)
+
+            return sync_inc_id, sync_type_id, sync_state
         except Error as err:
             self.log.error("find_sync_row err %s", err)
             return None, None, None
         finally:
             cur and cur.close()
 
-    def create_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id,
+    def create_sync_row(self, orig_org_id, orig_inc_id,
+                        type_name, orig_type_id,
                         new_inc_id, new_type_id, state):
         """
         add a row to the mapping db to map the source object with the destination object
