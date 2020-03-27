@@ -1,4 +1,3 @@
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -22,14 +21,16 @@ class FunctionComponent(ResilientComponent):
 
     @function("secureworks_ctp_close_ticket")
     def _secureworks_ctp_close_ticket_function(self, event, *args, **kwargs):
-        """Function: Close a Secureworks CTP Ticket when the associated Resilient Incident is closed."""
+        """Function: Close a Secureworks CTP in an incident that has a Secureworks CTP ticket associated with it."""
         try:
             # Get the wf_instance_id of the workflow this Function was called in
             wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
 
             # Get the function parameters:
+            incident_id = kwargs.get("incident_id")  # number
 
             log = logging.getLogger(__name__)
+            log.info("incident_id: %s", incident_id)
 
             # PUT YOUR FUNCTION IMPLEMENTATION CODE HERE
             #  yield StatusMessage("starting...")
