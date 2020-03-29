@@ -42,7 +42,7 @@ class DBSyncInterface:
 
     def create_sync_row(self, orig_org_id, orig_inc_id,
                         type_name, orig_type_id,
-                        new_inc_id, new_type_id, state):
+                        new_inc_id, new_type_id, status):
         """
         create a sync record for a given object
         """
@@ -77,22 +77,22 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2_inc_id int not null,
     org2_type_id int not null,
     last_sync timestamp,
-    state text not null,
+    status text not null,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
 );""".format(table_name=DBTABLE)
 
-    SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state)
+    SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status)
         VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)
         ON CONFLICT(org1, org1_inc_id, type_name, org1_type_id, org2) DO UPDATE SET
         org2_inc_id = ?,
         org2_type_id = ?,
         last_sync = datetime('now'),
-        state=?;""".format(table_name=DBTABLE)
+        status=?;""".format(table_name=DBTABLE)
     SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
-    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
+    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
 
-    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), state='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBTABLE)
-    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), state='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBTABLE)
+    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBTABLE)
+    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBTABLE)
 
     # R E T R Y  D B
     RETRY_TABLE_DEF = """-- retry table
@@ -106,17 +106,17 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     org2 int,
     org2_inc_id int,
     payload text,
-    last_sync timestamp,
+    last_attempt timestamp,
     PRIMARY KEY (org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
     );""".format(table_name=RETRY_DBTABLE)
 
     RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name}
         WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
     RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id,
-        org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_sync)
+        org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_attempt)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         ON CONFLICT(org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
-        DO UPDATE SET last_sync = datetime('now');""".format(table_name=RETRY_DBTABLE)
+        DO UPDATE SET last_attempt = datetime('now');""".format(table_name=RETRY_DBTABLE)
     RETRY_DELETE = """DELETE from {table_name}
         WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
 
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             cur.execute(SQLiteDBSync.SYNC_SELECT, (orig_org_id, orig_inc_id, type_name, orig_type_id, self.org_id))
 
             data = cur.fetchone()
-            # row: type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, state
+            # row: type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status
             if data is None:
                 return None, None, None
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
     def create_sync_row(self, orig_org_id, orig_inc_id,
                         type_name, orig_type_id,
-                        new_inc_id, new_type_id, state):
+                        new_inc_id, new_type_id, status):
         """
         add a row to the mapping db to map the source object with the destination object
         :param orig_org_id:
@@ -197,15 +197,15 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         :param orig_type_id:
         :param new_inc_id:
         :param new_type_id:
-        :param state: active, filtered, deleted
+        :param status: active, filtered, deleted
         :return: None
         """
 
         try:
             cur = self.sqlite_db.cursor()
             cur.execute(SQLiteDBSync.SYNC_UPSERT, (orig_org_id, orig_inc_id, type_name, orig_type_id,
-                                                   self.org_id, new_inc_id, new_type_id, state,
-                                                   new_inc_id, new_type_id, state))
+                                                   self.org_id, new_inc_id, new_type_id, status,
+                                                   new_inc_id, new_type_id, status))
 
             self.sqlite_db.commit()
         except Error as err:
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             cur = self.sqlite_db.cursor()
             # (org1, org1_inc_id, type_name, org1_type_id,
             #     org1_dep_type_name, org1_dep_type_id,
-            #     org2, org2_inc_id, payload, last_sync)
+            #     org2, org2_inc_id, payload, last_attempt)
 
             if isinstance(payload, dict):
                 new_payload = payload.copy()
