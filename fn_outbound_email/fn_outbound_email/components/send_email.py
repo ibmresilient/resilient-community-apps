@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+#(c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+#pragma pylint: disable=unused-argument, no-self-use, line-too-long
 """Function implementation"""
 
 from __future__ import print_function
@@ -12,6 +13,8 @@ from resilient_circuits import ResilientComponent, function, handler, StatusMess
 
 log = logging.getLogger(__name__)
 
+CONFIG_DATA_SECTION = 'fn_outbound_email'
+SMTP_DEFAULT_CONN_TIMEOUT = 15
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'send_email"""
@@ -21,6 +24,10 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.incident_data = {}
         self.mail_data = {}
+        self.opts = opts
+        self.smtp_config_section = self.opts.get(CONFIG_DATA_SECTION, {})
+        self.smtp_port_choice = self.smtp_config_section.get("smtp_port")
+        self.smtp_user = self.smtp_config_section.get("smtp_user")
 
         self.mail_context = {
             "mail_from": "",
@@ -41,7 +48,12 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
         try:
             # Get the function parameters:
-            mail_from = kwargs.get("mail_from")  # text
+            if self.smtp_port_choice == '589':
+                mail_from = self.smtp_user
+            else:
+                mail_from = kwargs.get("mail_from")  # text
+            import pprint
+            pprint.pprint(mail_from)
             mail_to = kwargs.get("mail_to")  # text
             mail_cc = kwargs.get("mail_cc")  # text
             mail_bcc = kwargs.get("mail_bcc")  # text

@@ -1,3 +1,4 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation
@@ -13,7 +14,7 @@ LOG = logging.getLogger(__name__)
 LOG.addHandler(logging.StreamHandler())
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 10
+SMTP_DEFAULT_CONN_TIMEOUT = 20
 SMTP_DEFAULT_PORT = 25
 
 def selftest_function(opts):
@@ -28,7 +29,7 @@ def selftest_function(opts):
 
         smtp_conn_timeout = int(smtp_config_section.get("smtp_conn_timeout", SMTP_DEFAULT_CONN_TIMEOUT))
 
-        validate_fields(["smtp_server", "smtp_port", "smtp_user", "smtp_password"], smtp_config_section)
+        validate_fields(["smtp_server", "smtp_port"], smtp_config_section)
         LOG.info("Validating connection to mail server")
 
         if smtp_config_section.get("smtp_ssl_mode") == "ssl":
@@ -46,7 +47,9 @@ def selftest_function(opts):
 
             if smtp_config_section.get("smtp_ssl_mode") == "starttls":
                 LOG.info("Starting TLS...")
-                smtp_connection.starttls(context=SendSMTPEmail.get_smtp_ssl_context)
+                smtp_connection.ehlo()
+                smtp_connection.starttls()
+                smtp_connection.ehlo()
 
         if smtp_user:
             LOG.info("Logging in to SMTP...")
@@ -54,6 +57,7 @@ def selftest_function(opts):
                 raise Exception('An SMTP user has been set; the SMTP password from app.config cannot be null')
             else:
                 smtp_connection.login(user=smtp_user, password=smtp_password)
+                smtp_connection.sendmail(smtp_user, smtp_user,'test')
         return {"state": "success"}
     except Exception as err:
         LOG.error(err)

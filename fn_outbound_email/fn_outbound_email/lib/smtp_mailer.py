@@ -1,3 +1,8 @@
+# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, no-self-use
+
+
 import errno
 import os
 import smtplib
@@ -14,7 +19,7 @@ from fn_outbound_email.lib.template_helper import TemplateHelper
 log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
-SMTP_DEFAULT_CONN_TIMEOUT = 10
+SMTP_DEFAULT_CONN_TIMEOUT = 15
 SMTP_DEFAULT_PORT = '25'
 
 
@@ -117,7 +122,10 @@ class SendSMTPEmail(ResilientComponent):
 
                 if self.smtp_config_section.get("smtp_ssl_mode") == "starttls":
                     log.info("Starting TLS...")
-                    smtp_connection.starttls(context=self.get_smtp_ssl_context())
+                    smtp_connection.ehlo()
+                    smtp_connection.starttls()
+                    smtp_connection.ehlo()
+
 
             if self.smtp_user:
                 log.info("Logging in to SMTP...")
