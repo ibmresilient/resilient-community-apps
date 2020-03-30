@@ -149,7 +149,7 @@ class FunctionComponent(ResilientComponent):
             "value[]": kwargs.get("pulsedive_search_value"),
             "category[]": self.get_select_param(kwargs.get("pulsedive_category")),
             "splitrisk": self.get_select_param(kwargs.get("pulsedive_splitrisk")),
-            "pretty": self.get_select_param(kwargs.get("pulsedive_pretty"))
+            "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty"))
         }
         return params_map
 
