@@ -103,7 +103,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
         LOG.info(u"Secureworks CTP escalate.")
         try:
             # Get list of tickets needing updating
-            response = self.scwx_client.post_tickets_updates()
+            #response = self.scwx_client.post_tickets_updates()
+            response = self.scwx_client.mock_post_tickets_updates()
+
+            codes = self.scwx_client.get_tickets_close_codes("IN35579566")
 
             tickets = response.get('tickets')
             ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
@@ -116,6 +119,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
 
                 # Check if there is already a Resilient incident for this Secureworks ticket.
                 resilient_incident = self._find_resilient_incident_for_req(ticket_id)
+
                 if not resilient_incident:
                     # Create a new incident for this Secureworks CTP ticket.
                     resilient_incident = self._create_incident(ticket)
@@ -127,7 +131,8 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 self.add_ticket_attachments(resilient_incident, ticket)
 
                 # Acknowledge Secureworks that we have received the tickets.
-                response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                #response_ack = self.scwx_client.post_tickets_acknowledge(ticket)
+                response_ack = [{'code': "SUCCESS", 'ticketId': ticket_id}]
 
                 code = response_ack[0].get('code')
                 if code != "SUCCESS":
@@ -309,7 +314,9 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 attachment_id = attachment.get('id')
 
                 # Get ticket attachment
-                response = self.scwx_client.get_ticket_attachment(ticket_id, attachment_id)
+                #response = self.scwx_client.get_tickets_attachment(ticket_id, attachment_id)
+                response = {'name': 'Securework-attachment.txt',
+                            'content': 'here is the content '.encode('utf-8')}
 
                 content = response.get('content')
                 datastream = BytesIO(content)
