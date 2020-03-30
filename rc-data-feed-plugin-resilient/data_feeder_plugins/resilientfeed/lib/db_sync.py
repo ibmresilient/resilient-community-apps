@@ -2,11 +2,9 @@
 # (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
-import calendar
 import logging
 import json
 import sqlite3
-import time
 from sqlite3 import Error
 
 class DBSyncFactory:
@@ -14,6 +12,7 @@ class DBSyncFactory:
     def get_dbsync(org_id, sqllite_file):
         """
         build the object associated the type of sync data source
+        If in the future another type of dbis supported, this factory can be modified
         :param org_id:
         :param sqllite_file:
         :return: object for sync datasource
@@ -27,7 +26,12 @@ class DBSyncInterface:
     """
     Interface class for methods associated with maintaining mappings between the source and destination
     Resilient objects
+    This interface is in place to support additional databases
     """
+
+    DBTABLE = "data_feeder_sync"
+    RETRY_DBTABLE = "data_feeder_retry"
+
     def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
         """
         find a sync record for a given object
@@ -54,18 +58,10 @@ class DBSyncInterface:
         """
         pass
 
-    def _get_current_timestamp(self):
-        """
-        get current epoch value
-        """
-        return calendar.timegm(time.gmtime())*1000
-
 class SQLiteDBSync(DBSyncInterface):
     """
     Class for maintaining mapping table in sqlite
     """
-    DBTABLE = "data_feeder_sync"
-    RETRY_DBTABLE = "data_feeder_retry"
 
     SYNC_TABLE_DEF = """-- mapping table
 CREATE TABLE IF NOT EXISTS {table_name} (
@@ -79,7 +75,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     last_sync timestamp,
     status text not null,
     PRIMARY KEY (org1, org1_inc_id, type_name, org1_type_id, org2)
-);""".format(table_name=DBTABLE)
+);""".format(table_name=DBSyncInterface.DBTABLE)
 
     SYNC_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status)
         VALUES(?, ?, ?, ?, ?, ?, ?, datetime('now'), ?)
@@ -87,12 +83,12 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         org2_inc_id = ?,
         org2_type_id = ?,
         last_sync = datetime('now'),
-        status=?;""".format(table_name=DBTABLE)
-    SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBTABLE)
-    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBTABLE)
+        status=?;""".format(table_name=DBSyncInterface.DBTABLE)
+    SYNC_UPDATE = """UPDATE {table_name} set last_sync=datetime('now') where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?""".format(table_name=DBSyncInterface.DBTABLE)
+    SYNC_SELECT = """SELECT type_name, org1, org1_inc_id, org1_type_id, org2, org2_inc_id, org2_type_id, last_sync, status FROM {table_name} WHERE org1=? and org1_inc_id=? and type_name=? and org1_type_id=? and org2=?""".format(table_name=DBSyncInterface.DBTABLE)
 
-    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBTABLE)
-    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBTABLE)
+    SYNC_DELETE_TYPE = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=? and type_name=? and org2_type_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
+    SYNC_DELETE_INCIDENT = """UPDATE {table_name} set last_sync=datetime('now'), status='deleted' where org2=? and org2_inc_id=?;""".format(table_name=DBSyncInterface.DBTABLE)
 
     # R E T R Y  D B
     RETRY_TABLE_DEF = """-- retry table
@@ -108,17 +104,17 @@ CREATE TABLE IF NOT EXISTS {table_name} (
     payload text,
     last_attempt timestamp,
     PRIMARY KEY (org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
-    );""".format(table_name=RETRY_DBTABLE)
+    );""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
 
     RETRY_SELECT = """SELECT org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload FROM {table_name}
-        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
+        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
     RETRY_UPSERT = """INSERT INTO {table_name} (org1, org1_inc_id, type_name, org1_type_id,
         org1_dep_type_name, org1_dep_type_id, org2, org2_inc_id, payload, last_attempt)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         ON CONFLICT(org1, org1_inc_id, org2, type_name, org1_dep_type_name, org1_dep_type_id)
-        DO UPDATE SET last_attempt = datetime('now');""".format(table_name=RETRY_DBTABLE)
+        DO UPDATE SET last_attempt = datetime('now');""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
     RETRY_DELETE = """DELETE from {table_name}
-        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=RETRY_DBTABLE)
+        WHERE org1=? and org1_inc_id=? and type_name=? and org2=?;""".format(table_name=DBSyncInterface.RETRY_DBTABLE)
 
 
     def __init__(self, org_id, sqlite_file):
@@ -133,13 +129,13 @@ CREATE TABLE IF NOT EXISTS {table_name} (
         try:
             self.sqlite_db = sqlite3.connect(sqlite_file)
 
-            self.create_table(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.RETRY_TABLE_DEF)
+            self.create_tables(SQLiteDBSync.SYNC_TABLE_DEF, SQLiteDBSync.RETRY_TABLE_DEF)
         except Error as e:
             self.log.error("Unable to use file for data feeder sync: %s", e)
 
-    def create_table(self, *args):
-        """ create a table from the create_table_sql statement
-        :param create_table_sql: a CREATE TABLE statement
+    def create_tables(self, *args):
+        """ create db tables
+        :param args: CREATE TABLE statement(s)
         :return:
         """
         try:
@@ -154,7 +150,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
 
     def find_sync_row(self, orig_org_id, orig_inc_id, type_name, orig_type_id):
         """
-        determine if we have already syncrhonized this object in the destination organization
+        determine if we have already synchronized this object in the destination organization
         :param orig_org_id:
         :param orig_inc_id:
         :param type_name:
@@ -175,7 +171,6 @@ CREATE TABLE IF NOT EXISTS {table_name} (
             sync_type_id = data[6]
             sync_state = data[8]
 
-            # do nothing if already deleted
             if sync_state == "deleted":
                 self.log.debug("%s %s:%s->%s", sync_state, orig_inc_id, type_name, orig_type_id or orig_inc_id)
 
@@ -190,7 +185,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
                         type_name, orig_type_id,
                         new_inc_id, new_type_id, status):
         """
-        add a row to the mapping db to map the source object with the destination object
+        add a row or update an existing row to the mapping db to map the source object with the destination object
         :param orig_org_id:
         :param orig_inc_id:
         :param type_name:
@@ -287,7 +282,7 @@ CREATE TABLE IF NOT EXISTS {table_name} (
                          org1_dep_type_name, org1_dep_type_id,
                          new_inc_id, payload):
         """
-        add a row to the retry db to map the source object with the dependent object
+        add a row and update an existing row to the retry db to map the source object with the dependent object
         :param orig_org_id:
         :param orig_inc_id:
         :param type_name:

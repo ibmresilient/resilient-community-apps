@@ -6,14 +6,15 @@
 import logging
 import re
 from data_feeder_plugins.resilientfeed.lib.filters import Filters
-from resilient_lib import str_to_bool
+from resilient_lib import str_to_bool, validate_fields
 from rc_data_feed.lib.feed import FeedDestinationBase
 from .resilient_common import Resilient, get_users_and_groups
 
 LOG = logging.getLogger(__name__)
 
-# use for parsing owner or member values to return email addr: First Last (a@example.com)
+# used for parsing owner or member values to return email addr: First Last (a@example.com)
 USER_REGEX = re.compile(r".*\((.*\@.*)\)")
+# remove xml identifier
 XML_REGEX = re.compile(r"^<\?xml.*\?>(.*)")
 
 # sync properties for an incident
@@ -30,6 +31,8 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
     def __init__(self, rest_client_helper, options):   # pylint: disable=unused-argument
         super(ResilientFeedDestination, self).__init__()
         self.options = options
+
+        validate_fields(['db_sync_file'], options)
         self.resilient_source = Resilient(options, rest_client_helper)
         self.resilient_target = Resilient(options, None)
 
@@ -91,7 +94,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 orig_type_id, cleaned_payload = self.clean_payload(context.inc_id, type_name, new_payload)
                 LOG.debug(cleaned_payload)
 
-                # perform the creation in the new resilient org
+                # perform the creation or update in the new resilient org
                 create_list = self.resilient_target.create_update_type(self.resilient_source.rest_client.org_id, context.inc_id,
                                                                        type_name, cleaned_payload, orig_type_id)
 
@@ -117,6 +120,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                        all_field_names, prefix, payload, datatable_flag):
         """
         recursive function to convert Ids to values for a given object
+        raise MatchError if the matching criteria for an incident fails
         :param context:
         :param matching_criteria: criteria to determine if this incident is allowed
         :param type_name: type of object converting
@@ -176,6 +180,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
         if field_key == "plan_status":
             return orig_values
 
+        # recreate the list of values, dropping any not found
         if isinstance(orig_values, list):
             new_value = []
             for item in orig_values:
@@ -190,6 +195,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 if not found and item:
                     LOG.warning(u"Substitute value: %s not found for field: %s, omitting", item, field_key)
 
+        # recurse over dictionaries
         elif isinstance(orig_values, dict):
             if orig_values.get('name', None):
                 new_value = {"name": self._clean_assignee_value(type_info['input_type'], orig_values.get('name'))}
@@ -286,7 +292,7 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
             return email
 
         # confirm that this user is in the target organization, if not return none
-        target_users = get_users_and_groups(self.resilient_target.rest_client) # TODO - member list of incident?
+        target_users = get_users_and_groups(self.resilient_target.rest_client)
         if email not in target_users:
             LOG.warning("User/Group '%s' does not exist in target organization", email)
             return None
@@ -337,7 +343,7 @@ def exclude_incident_fields(exclude_fields, payload):
             else:
                 new_payload[field] = payload[field]
         else:
-            LOG.info("Excluding field: %s", field)
+            LOG.debug("Excluding field: %s", field)
 
     return new_payload
 

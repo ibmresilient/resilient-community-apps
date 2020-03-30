@@ -38,6 +38,12 @@ class Filters:
                 if not m:
                     raise IntegrationError("Unable to parse filter '{}'".format(filter_str))
 
+                match_field = m.group(1)
+                match_opr = m.group(2)
+                # correct mistyped comparison
+                if match_opr.strip() == '=':
+                    match_opr = '=='
+
                 match_value = m.group(3)
 
                 # determine if working with a string, boolean, or int
@@ -51,9 +57,9 @@ class Filters:
                     except:
                         pass
 
-                compare_tuple = (m.group(1), m.group(2), match_value)
+                compare_tuple = (match_field, match_opr, match_value)
                 self.log.debug(compare_tuple)
-                self.match_list[m.group(1)] = compare_tuple
+                self.match_list[match_field] = compare_tuple
 
     def match_payload_value(self, field, value):
         """
@@ -106,10 +112,6 @@ class Filters:
         :param match_value:
         :return: true/false
         """
-        # correct mistyped comparison
-        if match_opr.strip() == '=':
-            match_opr = '=='
-
         # test each value in the list. Only one needs to match
         if isinstance(payload_value, list):
             result_list = []
@@ -123,6 +125,7 @@ class Filters:
     def do_eval(self, payload_value, match_opr, match_value):
         """
         perform the comparison using eval, such as 'plan_status == "C"'
+        this function uses eval
         :param payload_value:
         :param match_opr:
         :param match_value:

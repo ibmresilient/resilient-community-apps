@@ -144,7 +144,7 @@ Three methods exist for synchronizing incident data:
 ## Behavior
 Unexpected behaviors can occur and are detailed here.
 * If an incident is originally filtered via the `matching_incident_fields` setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incicident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the `Data Feeder: Sync Incidents` function. 
-
+* Attachments cannot be updated
 
 ## SQLite Database
 A sqlite database is used to maintain a mapping of incident data between the source and target Resilient instances. Two tables are maintained for this purpose:
