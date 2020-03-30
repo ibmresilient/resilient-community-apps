@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             api_url = "{}/info.php?".format(self.options["pulsedive_api_url"])
             pulsedive_data = {
                 "key": self.options["pulsedive_api_key"],
-                "pretty": self.get_select_param(kwargs.get("pulsedive_pretty"))
+                "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty"))
             }
 
             # add type to url request:
@@ -81,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                 pulsedive_data["organization"] = pulsedive_feed_org
             elif pulsedive_query_type == "Threat":
                 pulsedive_data["threat"] = pulsedive_value
-            else:  # Indicator ID (default)å
+            else:  # Indicator ID (default)
                 pulsedive_data["indicator"] = pulsedive_value
 
             # make the api call

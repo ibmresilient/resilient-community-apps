@@ -72,7 +72,7 @@ class FunctionComponent(ResilientComponent):
             "get": report_type,
             "summary": summary,
             "splitrisk": split,
-            "pretty": self.get_select_param(kwargs.get("pulsedive_pretty"))
+            "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty"))
         }
         return params_map
 

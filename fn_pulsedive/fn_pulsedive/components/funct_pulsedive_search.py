@@ -83,9 +83,8 @@ class FunctionComponent(ResilientComponent):
             "threat[]": kwargs.get("pulsedive_threat"),
             "feed[]": kwargs.get("pulsedive_feed"),
             "limit": limit_options.get(temp_limit, "hundred"),
-            "pretty": self.get_select_param(kwargs.get("pulsedive_pretty")),
-            "lastseen": time_options.get(temp_time, ""),
-            # "export": self.get_select_param(kwargs.get("pulsedive_export"))
+            "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty")),
+            "lastseen": time_options.get(temp_time, "")
         }
         return params_map
 
@@ -215,15 +214,6 @@ class FunctionComponent(ResilientComponent):
                                       url=api_url,
                                       params=pulsedive_data
                                       )
-
-            # # prepare results to send for output
-            # results = {
-            #     "search_type": pulsedive_search_type,
-            #     "request_parameters": pulsedive_data,
-            #     "request_url": resp.request.url,
-            #     "attachment_name": attachment_name,
-            #     "json": resp.json()
-            # }
 
             # Get the rest client so we can add the attachment to the incident
             client = self.rest_client()
