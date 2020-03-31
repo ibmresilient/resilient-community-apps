@@ -75,13 +75,13 @@ class FunctionComponent(ResilientComponent):
 
         # map action input fields to Pulsedive Indicator filters
         params_map = {
-            "value[]": kwargs.get("pulsedive_search_value"),
+            "value[]": kwargs.get("pulsedive_search_value") if kwargs.get("pulsedive_search_value") is None else [val.strip() for val in kwargs.get("pulsedive_search_value").split(",")],
             "type[]": self.get_select_param(kwargs.get("pulsedive_indicator_type")),
             "risk[]": self.get_select_param(kwargs.get("pulsedive_risk")),
-            "attribute[]": kwargs.get("pulsedive_attribute"),
-            "property[]": kwargs.get("pulsedive_property"),
-            "threat[]": kwargs.get("pulsedive_threat"),
-            "feed[]": kwargs.get("pulsedive_feed"),
+            "attribute[]": kwargs.get("pulsedive_attribute") if kwargs.get("pulsedive_attribute") is None else [att.strip() for att in kwargs.get("pulsedive_attribute").split(",")],
+            "property[]": kwargs.get("pulsedive_property") if kwargs.get("pulsedive_property") is None else [prop.strip() for prop in kwargs.get("pulsedive_property").split(",")],
+            "threat[]": kwargs.get("pulsedive_threat") if kwargs.get("pulsedive_threat") is None else [threat.strip() for threat in kwargs.get("pulsedive_threat").split(",")],
+            "feed[]": kwargs.get("pulsedive_feed") if kwargs.get("pulsedive_feed") is None else [feed.strip() for feed in kwargs.get("pulsedive_feed").split(",")],
             "limit": limit_options.get(temp_limit, "hundred"),
             "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty")),
             "lastseen": time_options.get(temp_time, "")
@@ -116,10 +116,10 @@ class FunctionComponent(ResilientComponent):
         # map action input fields to Pulsedive Indicator filters
         params_map = {
             "search": "threat",
-            "value[]": kwargs.get("pulsedive_search_value"),
+            "value[]": kwargs.get("pulsedive_search_value") if kwargs.get("pulsedive_search_value") is None else [val.strip() for val in kwargs.get("pulsedive_search_value").split(",")],
             "category[]": self.get_select_param(kwargs.get("pulsedive_category")),
-            "attribute[]": kwargs.get("pulsedive_attribute"),
-            "property[]": kwargs.get("pulsedive_property"),
+            "attribute[]": kwargs.get("pulsedive_attribute") if kwargs.get("pulsedive_attribute") is None else [att.strip() for att in kwargs.get("pulsedive_attribute").split(",")],
+            "property[]": kwargs.get("pulsedive_property") if kwargs.get("pulsedive_property") is None else [prop.strip() for prop in kwargs.get("pulsedive_property").split(",")],
             "risk[]": self.get_select_param(kwargs.get("pulsedive_risk")),
             "splitrisk": self.get_select_param(kwargs.get("pulsedive_splitrisk")),
             "pretty": self.get_select_param(kwargs.get("pulsedive_pretty"))
@@ -146,7 +146,7 @@ class FunctionComponent(ResilientComponent):
         # map action input fields to Pulsedive Indicator filters
         params_map = {
             "search": "feed",
-            "value[]": kwargs.get("pulsedive_search_value"),
+            "value[]": kwargs.get("pulsedive_search_value") if kwargs.get("pulsedive_search_value") is None else [val.strip() for val in kwargs.get("pulsedive_search_value").split(",")],
             "category[]": self.get_select_param(kwargs.get("pulsedive_category")),
             "splitrisk": self.get_select_param(kwargs.get("pulsedive_splitrisk")),
             "pretty": "Yes" if "pulsedive_pretty" not in kwargs else self.get_select_param(kwargs.get("pulsedive_pretty"))
