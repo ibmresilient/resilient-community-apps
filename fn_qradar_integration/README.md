@@ -32,6 +32,7 @@ host = qradar-server-hostname-or-ip-address
 username = qradar-login-user-name 
 splunkpassword = qradar-password-keyring-recommended
 verify_cert = False-to-skip-qradar-cert-validation
+qradartoken= xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 ```
 ## Customize
 Run with: `resilient-circuits customize` to install function definitions, message destinations, sample workflows, datatable, and rules to the Resilient server. 
