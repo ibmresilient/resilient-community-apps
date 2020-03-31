@@ -36,7 +36,7 @@ def test_retry_task_insert_select_delete(db_conn):
                               "task", 2001,
                               None, payload_str)
 
-    row_list = db_conn.find_retry_row(201, 1000, "incident", 1000)
+    row_list = db_conn.find_retry_rows(201, 1000, "incident")
 
     # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
     assert row_list
@@ -52,7 +52,7 @@ def test_retry_task_insert_select_delete(db_conn):
 
     db_conn.delete_retry_rows(201, 1000, "incident", 1000)
 
-    row_list = db_conn.find_retry_row(201, 1000, "incident", 1000)
+    row_list = db_conn.find_retry_rows(201, 1000, "incident")
 
     assert not row_list
 
@@ -83,7 +83,7 @@ def test_retry_attachment_insert_select_delete(db_conn):
                               "attachment", 337,
                              2874, payload_str)
 
-    row_list = db_conn.find_retry_row(201, 1000, "task", 2267891)
+    row_list = db_conn.find_retry_rows(201, 1000, "task")
 
     # org1_type_id, org2_inc_id, org1_dep_type_name, org1_dep_type_id, payload
     assert row_list
@@ -95,6 +95,6 @@ def test_retry_attachment_insert_select_delete(db_conn):
 
     db_conn.delete_retry_rows(201, 1000, "task", 2267891)
 
-    row_list = db_conn.find_retry_row(201, 1000, "task", 2267891)
+    row_list = db_conn.find_retry_rows(201, 1000, "task")
 
     assert not row_list
