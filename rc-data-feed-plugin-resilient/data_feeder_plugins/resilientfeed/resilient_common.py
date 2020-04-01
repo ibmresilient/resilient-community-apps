@@ -227,6 +227,9 @@ class Resilient(object):
                 # Is this an unmapped task created with the incident?
                 new_type_id = self._find_task(sync_inc_id, payload)
                 if not new_type_id:
+                    # creating a task doesn't use instr_text field
+                    payload.pop('instr_text', None)
+
                     sync_inc_id, new_type_id = self.create_type(orig_org_id, orig_inc_id, orig_type_id,
                                                                 mapped_type_name, type_name,
                                                                 sync_inc_id, sync_task_id, payload)
