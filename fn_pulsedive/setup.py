@@ -23,7 +23,7 @@ setup(
     license='MIT',
     author='Priya Sapra',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
+    url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_pulsedive'",
     long_description="Resilient Circuits Components for 'fn_pulsedive'",
     install_requires=[

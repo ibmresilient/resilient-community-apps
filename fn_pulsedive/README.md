@@ -53,6 +53,17 @@ Resilient Circuits Components for 'fn_pulsedive'
 -->
 * Resilient platform >= `v35.0.5343`
 * An Integration Server running `resilient_circuits>=30.0.0`
+    * The minimum set of Resilient API permissions if using an API key account:
+        * Incidents.Edit.Fields
+        * Workflows.Create
+        * Workflows.Edit
+        * Functions.Read
+        * Functions.Create
+        * Functions.Edit
+        * Other.ReadIncidentsActionInvocations
+        * Edit Org Data
+        * Scripts.Create
+        * Scripts.Edit
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 ---
 
@@ -136,6 +147,15 @@ There are several ways to verify the successful operation of a function.
 * Each function will create progress information.
 * Failures will show up as errors and may contain python trace statements.
 
+### Timeouts
+Pulesdive Search often takes a longer time to execute. In the case that the function times out, you can edit the
+timeout setting in `app.config`. If the timeout setting is not there already, go to `app.config` and add the following
+to increase the timeout setting to 60 seconds:
+```
+[integrations]
+timeout=60
+```  
+
 ---
 
 <!--
@@ -154,4 +174,4 @@ There are several ways to verify the successful operation of a function.
 ## Support
 | Name | Version | Author | Support URL |
 | ---- | ------- | ------ | ----------- |
-| fn_pulsedive | 1.0.0 | Carol Namkoong | resilientsystems.com |
+| fn_pulsedive | 1.0.0 | Priya Sapra | http://ibm.biz/resilientcommunity |
