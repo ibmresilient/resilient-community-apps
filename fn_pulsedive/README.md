@@ -148,9 +148,9 @@ There are several ways to verify the successful operation of a function.
 * Failures will show up as errors and may contain python trace statements.
 
 ### Timeouts
-Pulesdive Search often takes a longer time to execute. In the case that the function times out, you can edit the
-timeout setting in `app.config`. If the timeout setting is not there already, go to `app.config` and add the following
-to increase the timeout setting to 60 seconds:
+Pulsedive Search may take a long time to execute. In the case that the function times out, you can edit the
+timeout setting in `app.config`. If the timeout setting is not there, go to `app.config` and add the following
+to increase the timeout setting to 60 seconds. For example:
 ```
 [integrations]
 timeout=60
