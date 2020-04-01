@@ -188,7 +188,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         # this may be set to None (e.g. for email message objects that are not
         # associated with any specific incident ID.
         #
-        if not self.dialect == "MariaDBDialect": 
+        if 'inc_id' not in all_field_names:
             all_field_names.append('inc_id')
 
         flat_payload['inc_id'] = context.inc_id
