@@ -154,7 +154,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             if not self.dialect.is_column_exists_exception(db_exception):
                 raise db_exception
 
-    def send_data(self, context, payload):
+    def send_data(self, context, payload, dia):
         # Create a flattened map where each key of the map is the field name.
         #
         flat_payload = context.type_info.flatten(payload, translate_func=TypeInfo.translate_value)
@@ -188,7 +188,8 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
         # this may be set to None (e.g. for email message objects that are not
         # associated with any specific incident ID.
         #
-        all_field_names.append('inc_id')
+        if not self.dialect == "MariaDBDialect": 
+            all_field_names.append('inc_id')
 
         flat_payload['inc_id'] = context.inc_id
 
