@@ -32,7 +32,19 @@
 -->
 * IBM Resilient >= `v35.0.5445`
 * An Integration Server running `resilient_circuits`
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+
+  * The minimum set of Resilient API permissions for this integration if using an API key account:
+    * Edit Org Data
+    * Incidents.Edit.Fields
+    * Functions.Read
+    * Functions.Edit
+    * Layouts.Read
+    * Other.ReadIncidentsActionInvocations
+    * Workflows.Create
+    * Workflow.Edit
+
+  * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+
 
 ---
 
