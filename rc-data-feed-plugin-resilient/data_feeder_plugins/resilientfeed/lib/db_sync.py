@@ -36,13 +36,13 @@ class DBSyncInterface:
         """
         find a sync record for a given object
         """
-        pass
+        raise NotImplementedError("required")
 
     def update_existing_sync_row(self, target_inc_id, type_name, target_type_id):
         """
         update a sync record for a given object
         """
-        pass
+        raise NotImplementedError("required")
 
     def create_sync_row(self, orig_org_id, orig_inc_id,
                         type_name, orig_type_id,
@@ -50,13 +50,13 @@ class DBSyncInterface:
         """
         create a sync record for a given object
         """
-        pass
+        raise NotImplementedError("required")
 
     def find_incident(self, orig_org_id, orig_inc_id):
         """
         find an incident sync record for a given object
         """
-        pass
+        raise NotImplementedError("required")
 
 class SQLiteDBSync(DBSyncInterface):
     """

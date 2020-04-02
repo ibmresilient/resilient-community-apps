@@ -59,7 +59,7 @@ Note: Perform an export and reimport of these customizatons into the target Resi
      - In the [resilient_feed] section, configure the settings for your Resilient environment.
 ```
   [feeds]
-  feed_names=elastic_feed
+  feed_names=resilient_feed
   reload=True
   # feed_data is the default queue that will be listened to
   queue=feed_data
@@ -133,7 +133,8 @@ The following configuration items are supported:
 * Presently, artifacts with custom artifact types cannot synchronize.
 * Deleting a source incident task attachment presently doesn't synchronize.
 * Incident email messages (via the built-in Inbound Email Connectors) do not synchronize.
-
+* It's presently not possible to restrict synchronization of incident elements such as tasks, artifacts, notes, etc.
+when using `reload=all` and the action `Data Feeder: Sync Incidents`.
 
 ## Syncrhonization Methods
 Three methods exist for synchronizing incident data:
@@ -177,6 +178,10 @@ Synchronization could fail for the following reasons:
 * Older incident fields missing required fields defined at a later point in time. The only remedy is to modify the definition of the fields from `required` to `optional` and then resync the field using the rule `Data Feed: Sync Incidents`.
 * Matching criteria filtered the incident. Review the values specified in `matching_incident_fields` and the value specified in `matching_operator`
 * Change the log level to debug to receive additional troubleshooting information on synchronization issues
+* Changes to tasks, artifacts, notes, etc. before the incident is synchronized.
+  - If the log displays a message such as:
+  `Incident not found. Queued to retry task:xxx->xxx to xxx`
+  Run the incident action: `Data Feeder: Sync Incidents` to synchronize the incident and all it's related tasks, artifacts, notes, etc.
 ```
 [resilient]
 loglevel = DEBUG

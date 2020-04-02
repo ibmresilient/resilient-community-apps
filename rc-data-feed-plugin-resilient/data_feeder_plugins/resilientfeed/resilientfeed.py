@@ -263,19 +263,18 @@ class ResilientFeedDestination(FeedDestinationBase):  # pylint: disable=too-few-
                 payload['properties'][DF_ORG_ID] = orig_org_id
                 payload['properties'][DF_INC_ID] = orig_type_id
 
-        elif type_name == "artifact":
+        elif type_name in ("artifact", "note") and payload.get("parent_id", None):
             # make the artifact type an api style name as custom artifact types are only supported this way
             #todo custom artifact types do not sync as the api name of the artifact is not visible in /types
 
-            if payload.get("parent_id", None):
-                # find the parent Id as it's been moved
-                # failures to find parent_id will requeue for retry later
-                _, target_type_id, sync_state = \
-                    self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
-                                                               "artifact", payload.get("parent_id"))
+            # find the parent Id as it's been moved
+            # failures to find parent_id will requeue for retry later
+            _, target_parent_id, sync_state = \
+                self.resilient_target.dbsync.find_sync_row(self.resilient_source.rest_client.org_id, orig_inc_id,
+                                                           type_name, payload.get("parent_id"))
 
-                if target_type_id and sync_state == "active":
-                    payload["parent_id"] = target_type_id
+            if target_parent_id and sync_state == "active":
+                payload["parent_id"] = target_parent_id
 
         return orig_type_id, payload
 
