@@ -72,11 +72,11 @@ matrix:
     install: skip
     script:
       - source .scripts/set_up_container_build_data.sh
-      - docker build --cache-from resilient/ubi8 -t resilient/$INTEGRATION_NAME:latest 
-        -t resilient/$INTEGRATION_NAME:$INTEGRATION_VERSION ./$INTEGRATION_NAME
+      - docker build --cache-from resilient/ubi8 -t ${DOCKER_URL}/resilient/${INTEGRATION_NAME}:latest 
+        -t ${DOCKER_URL}/resilient/${INTEGRATION_NAME}:${INTEGRATION_VERSION} ./${INTEGRATION_NAME}
       - echo "$DOCKER_PASSWORD" | docker login --password-stdin --username "$DOCKER_USERNAME" https://${DOCKER_URL}/
-      - docker push ${DOCKER_URL}/resilient/$INTEGRATION_NAME:latest
-      - docker push ${DOCKER_URL}/resilient/$INTEGRATION_NAME:$INTEGRATION_VERSION
+      - docker push ${DOCKER_URL}/resilient/${INTEGRATION_NAME}:latest
+      - docker push ${DOCKER_URL}/resilient/${INTEGRATION_NAME}:${INTEGRATION_VERSION}
 
 install:
 - pip install --upgrade pip
