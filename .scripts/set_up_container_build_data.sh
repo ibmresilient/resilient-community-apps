@@ -12,6 +12,8 @@ then
     exit 1
 fi
 
+# To get version of the integration we first extract line verion=<version> from setup.py, from where we extract
+# the actual version substring. Doing it in 2 steps to avoid using Perl style regex with lookahead capabilities
 export INTEGRATION_VERSION=$(cat "$setup_file" | grep -o "version=['\"][0-9.]*['\"]" | grep -oE "[0-9.]+")
 
 echo "Integration's version is: $INTEGRATION_VERSION"
