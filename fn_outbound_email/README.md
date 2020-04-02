@@ -38,8 +38,9 @@
     * Incidents.Edit.Fields
     * Functions.Read
     * Functions.Edit
-    * Layouts.Read
     * Other.ReadIncidentsActionInvocations
+    * Scripts.Create
+    * Scripts.Edit
     * Workflows.Create
     * Workflow.Edit
 
