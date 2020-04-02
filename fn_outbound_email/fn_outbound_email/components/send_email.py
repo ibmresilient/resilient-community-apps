@@ -15,6 +15,7 @@ log = logging.getLogger(__name__)
 
 CONFIG_DATA_SECTION = 'fn_outbound_email'
 SMTP_DEFAULT_CONN_TIMEOUT = 15
+DEFAULT_TLS_SMTP_PORT = '587'
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'send_email"""
@@ -48,7 +49,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Send Email"""
         try:
             # Get the function parameters:
-            if self.smtp_port_choice == '589':
+            if self.smtp_port_choice == DEFAULT_TLS_SMTP_PORT:
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
