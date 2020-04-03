@@ -14,7 +14,7 @@ setup(
     long_description="Resilient Circuits Components for 'fn_misp'",
     install_requires=[
         'resilient_circuits>=30.0.0',
-        'pymisp>=2.4'
+        'pymisp>= 2.4.111'
     ],
     packages=find_packages(),
     include_package_data=True,
