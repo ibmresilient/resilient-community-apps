@@ -3,7 +3,12 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
+import sys
+if sys.version_info < (3, 6):
+    from pymisp import PyMISP
+else:
+    from pymisp import ExpandedPyMISP
+
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -27,12 +32,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-                else:
-                    return option
+
+                return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
 
             # Get the function parameters:
             misp_event_id = kwargs.get("misp_event_id")  # number
@@ -46,10 +51,8 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
-
             """
-            default_map = { 
+            default_map = {
                 "DNS Name": "domain",
                 "Email Attachment": "email-attachment",
                 "Email Body": "email-body",
@@ -72,13 +75,23 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Creating new misp attribute {} {}".format(misp_attribute_type, misp_attribute_value))
 
-            attribute = misp_client.add_named_attribute(misp_event_id, misp_attribute_type, misp_attribute_value)
+            if sys.version_info < (3, 6):
+                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+                attribute = misp_client.add_named_attribute(misp_event_id, misp_attribute_type, misp_attribute_value)
+            else:
+                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+                attribute = {
+                    "type": misp_attribute_type,
+                    "value": misp_attribute_value
+                }
+                attribute = misp_client.add_attribute(event=misp_event_id, attribute=attribute)
 
             log.info(event)
 
-            results = { "success": True,
-                        "content": attribute
-                      }
+            results = {
+                "success": True,
+                "content": attribute
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

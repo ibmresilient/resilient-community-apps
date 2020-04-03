@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='fn_misp',
-    version='1.0.0',
+    version='1.1.0',
     license='MIT',
     author='Craig',
     author_email='craig@resilientlab.co.uk',

@@ -3,10 +3,15 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
+import sys
+if sys.version_info < (3, 6):
+    from pymisp import PyMISP
+else:
+    from pymisp import ExpandedPyMISP
+
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-PACKAGE= "fn_misp"
+PACKAGE = "fn_misp"
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function(s)"""
@@ -33,12 +38,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-                else:
-                    return option
+
+                return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
 
             # Get the function parameters:
             misp_event_name = kwargs.get("misp_event_name")  # text
@@ -54,12 +59,19 @@ class FunctionComponent(ResilientComponent):
 
             yield StatusMessage("Setting up connection to MISP")
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            if sys.version_info < (3, 6):
+                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            else:
+                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
 
-            eventJson = {"Event": {"info": misp_event_name,
+            eventJson = {
+                "Event": {
+                    "info": misp_event_name,
                     "analysis": misp_analysis_level,
                     "distribution": misp_distribution,
-                    "threat_level_id": misp_threat_level}}
+                    "threat_level_id": misp_threat_level
+                }
+            }
 
             event = misp_client.add_event(eventJson)
 

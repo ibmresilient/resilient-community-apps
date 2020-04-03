@@ -3,8 +3,12 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
+import sys
 import time
+if sys.version_info < (3, 6):
+    from pymisp import PyMISP
+else:
+    from pymisp import ExpandedPyMISP
 from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
 
 
@@ -28,12 +32,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-                else:
-                    return option
+
+                return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
 
             # Get the function parameters:
             misp_sighting = kwargs.get("misp_sighting")  # text
@@ -41,17 +45,25 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("misp_sighting: %s", misp_sighting)
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            if sys.version_info < (3, 6):
+                sighting_json = {
+                    "values":["{}".format(misp_sighting)],
+                    "timestamp": int(time.time())
+                }
+                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+                result = misp_client.set_sightings(sighting_json)
+            else:
+                sighting_json = {
+                    "value":misp_sighting,
+                    "timestamp": int(time.time())
+                }
+                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+                result = misp_client.add_sighting(sighting_json)
 
-            sighting_json = {
-                            "values":["{}".format(misp_sighting)], 
-                            "timestamp": int(time.time())
-                            }
-
-            result = misp_client.set_sightings(sighting_json)
-
-            results = { "success": True,
-                        "content": result }
+            results = {
+                "success": True,
+                "content": result
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

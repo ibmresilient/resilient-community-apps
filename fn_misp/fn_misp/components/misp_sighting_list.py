@@ -3,8 +3,12 @@
 """Function implementation"""
 
 import logging
-from pymisp import PyMISP
-from resilient_circuits import ResilientComponent, function, StatusMessage, FunctionResult, FunctionError
+import sys
+if sys.version_info < (3, 6):
+    from pymisp import PyMISP
+else:
+    from pymisp import ExpandedPyMISP
+from resilient_circuits import ResilientComponent, function, FunctionResult, FunctionError
 
 
 class FunctionComponent(ResilientComponent):
@@ -27,12 +31,12 @@ class FunctionComponent(ResilientComponent):
                 if option is None and optional is False:
                     err = "'{0}' is mandatory and is not set in ~/.resilient/app.config file. You must set this value to run this function".format(option_name)
                     raise ValueError(err)
-                else:
-                    return option
+
+                return option
 
             API_KEY = get_config_option("misp_key")
             URL = get_config_option("misp_url")
-            VERIFY_CERT = True if get_config_option("verify_cert").lower() == "true" else False
+            VERIFY_CERT = (get_config_option("verify_cert").lower() == "true")
 
             # Get the function parameters:
             event_id = int(kwargs.get("misp_event_id"))  # text
@@ -40,12 +44,17 @@ class FunctionComponent(ResilientComponent):
             log = logging.getLogger(__name__)
             log.info("event_id: %s", event_id)
 
-            misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+            if sys.version_info < (3, 6):
+                misp_client = PyMISP(URL, API_KEY, VERIFY_CERT, 'json')
+                result = misp_client.sighting_list(event_id, 'event')
+            else:
+                misp_client = ExpandedPyMISP(URL, API_KEY, ssl=VERIFY_CERT)
+                result = misp_client.search_sightings(context='event', context_id=event_id)
 
-            result = misp_client.sighting_list(event_id, 'event')
-
-            results = { "success": True,
-                        "content": result }
+            results = {
+                "success": True,
+                "content": result
+            }
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
