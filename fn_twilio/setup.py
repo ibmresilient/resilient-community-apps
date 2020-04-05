@@ -29,6 +29,7 @@ setup(
     long_description="The function uses the Twilio REST API to send an SMS message to a destination number(s)",
     install_requires=[
         'resilient_circuits>=32.0.186',
+        'resilient-lib',
         'python-dateutil',
         'twilio>=6.21.0'
     ],
