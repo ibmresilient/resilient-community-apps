@@ -86,11 +86,7 @@ class FunctionComponent(ResilientComponent):
             # continue while the workflow is still active, no messages have been received and timeout period active
             while continue_flg and time.time() <= wait_timeout:
                 # get the messages based on phone number and date sent
-                messages = client.messages.list(
-                    date_sent=converted_date,
-                    to=src_address,
-                    from_=phone_number
-                )
+                messages = self.get_responses(client, converted_date, src_address, phone_number)
 
                 if messages:
                     continue_flg = False
@@ -137,3 +133,9 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    def get_responses(self, client, converted_date, src_address, phone_number):
+        # get the messages based on phone number and date sent
+        return client.messages.list(date_sent=converted_date,
+                                    to=src_address,
+                                    from_=phone_number)

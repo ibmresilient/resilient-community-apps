@@ -32,6 +32,7 @@ class FunctionComponent(ResilientComponent):
         """constructor provides access to the configuration options"""
         super(FunctionComponent, self).__init__(opts)
         self.options = opts.get(CONFIG_DATA_SECTION, {})
+        self.log = logging.getLogger(__name__)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -41,7 +42,6 @@ class FunctionComponent(ResilientComponent):
     @function("twilio_send_sms")
     def _twilio_send_sms_function(self, event, *args, **kwargs):
         """Function: Send an SMS message via a Twilio account"""
-        log = logging.getLogger(__name__)
             
         def get_config_option(option_name, optional=False):
             """Given option_name, checks if it is in appconfig. Raises ValueError if a mandatory option is missing"""
@@ -64,7 +64,6 @@ class FunctionComponent(ResilientComponent):
                 return this_input
 
         try:
-
             inputs = {
                 "twilio_sms_destination": get_function_input(kwargs, "twilio_sms_destination"),
                 "twilio_sms_message": get_function_input(kwargs, "twilio_sms_message")
@@ -98,43 +97,11 @@ class FunctionComponent(ResilientComponent):
 
             # Send SMS to each number
             for phone_number in phone_numbers:
-                try:
-                    message = client.messages \
-                    .create(
-                        body=payload.inputs["twilio_sms_message"],
-                        from_= src_address,
-                        to=phone_number
-                    )
-
-                    entry = {
-                        "phone_number": phone_number,
-                        "messaging_service_sid": message.messaging_service_sid,
-                        "date_created": str(message.date_created),
-                        "date_created_ts": get_ts_from_datetime(message.date_created),
-                        "direction": message.direction,
-                        "message_body": message.body,
-                        "status": message.status,
-                        "error_message": None
-                    }
-
-                    if message.error_code is None:
-                        entry['success'] = True
-                        log.info('Sent to {0}'.format(phone_number))
-                    else:
-                        entry['success'] = False
-                        entry["error_message"]: message.error_message
-                        log.error('Failed to send to {0} [{1}]'.format(phone_number, message.error_message))
-
-                    payload.twilio_status.append(entry)
-                except TwilioRestException as e:
-                        entry = { 
-                            "phone_number": phone_number,
-                            "error_message": e.msg,
-                            "success": False
-                        }
-                        payload.twilio_status.append(entry)
-                        log.error('Failed to send to {0} [{1}]'.format(phone_number, e.msg))
-
+                entry = self.send_message(client, payload.inputs["twilio_sms_message"],
+                                          src_address, phone_number)
+                payload.twilio_status.append(entry)
+                # set the success of the entire transaction correctly
+                payload.success = payload.success and entry['success']
 
             # Produce a FunctionResult with the results
             results = payload.as_dict()
@@ -142,3 +109,55 @@ class FunctionComponent(ResilientComponent):
             yield FunctionResult(results)
         except Exception:
             yield FunctionError()
+
+    def send_message(self, client, message, src_address, phone_number):
+        """[summary]
+        
+        Arguments:
+            client {[type]} -- [description]
+            src_address {[type]} -- [description]
+            phone_number {[type]} -- [description]
+            message {[type]} -- [description]
+        
+        Returns:
+            [type] -- [description]
+        """
+        try:
+            message = self.create_message(client, message, src_address, phone_number)
+
+            entry = {
+                "phone_number": phone_number,
+                "messaging_service_sid": message.messaging_service_sid,
+                "date_created": str(message.date_created),
+                "date_created_ts": get_ts_from_datetime(message.date_created),
+                "direction": message.direction,
+                "message_body": message.body,
+                "status": message.status,
+                "error_message": message.error_message
+            }
+
+            if message.error_code is None:
+                entry['success'] = True
+                self.log.info('Sent to {0}'.format(phone_number))
+            else:
+                entry['success'] = False
+                entry["error_message"]: message.error_message
+                self.log.error('Failed to send to {0} [{1}]'.format(phone_number, message.error_message))
+
+        except TwilioRestException as e:
+            entry = { 
+                "phone_number": phone_number,
+                "error_message": e.msg,
+                "success": False
+            }
+            self.log.error('Failed to send to {0} [{1}]'.format(phone_number, e.msg))
+
+        return entry
+            
+    def create_message(self, client, message, src_address, phone_number):
+        return client.messages.create(
+                body=message,
+                from_= src_address,
+                to=phone_number
+            )
+            
