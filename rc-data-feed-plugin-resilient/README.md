@@ -1,13 +1,13 @@
 # Introduction
-This package contains the Resilient Plugin to the Data Feed extension.  This Data Feed extension allows one to maintain "replica" data for Resilient incidents, artifacts, tasks, notes, etc. in another instance of Resilient or another Organization in the same instance of Resilient.  The updates are performed in near real-time.
+This package contains the Resilient plugin to the Data Feed extension. The Data Feed Extension allows you to maintain "replica" data for Resilient incidents artifacts, tasks, notes, and so on, in another Resilient organization in the same or different Resilient platform. The updates are performed in near real-time.
 
 Refer to the documentation on the Data Feed extension for use cases supported and configuration options. Also refer to the other Data Feed plugins which can be used in combination.
 
 ## Features
-* Transfer incident data between two instances of Resilient
-* Transfer incident data between two Organizations within the same Resilient instance
+* Transfer incident data between two instances of Resilient.
+* Transfer incident data between two Organizations within the same Resilient instance.
 * Transfer incident data to more than one Resilient instance at the same time.
-* Synchronized incident data objects include: Artifacts, Attachments, Notes, Milestones, Tasks and Datatables.
+* Synchronized incident data objects include: artifacts, attachments, notes, milestones, tasks and datatables.
 
 # License
 
@@ -19,13 +19,7 @@ Unless otherwise specified, contents of this repository are published under the 
   You perform these installation procedures at the Resilient integration server.
   
 ## Install the Python Components
-  Complete the following steps to install the Python components:
-* Ensure that the environment is up-to-date, as follows:
-```
-  sudo pip install --upgrade pip
-  sudo pip install --upgrade setuptools
-  sudo pip install --upgrade resilient-circuits
-```  
+* Complete the setup and configuration of your Integration server as detailed in our [Integration Server Guide](https://developer.ibm.com/security/resilient/start/).
 *	Run the following commands to install the package:
 ```
   unzip rc_data_feed_plugin_resilient-<version>.zip
@@ -49,7 +43,7 @@ Unless otherwise specified, contents of this repository are published under the 
 ```
 resilient-circuits customize -l rc-data-feed-plugin-resilient
 ```
-Note: Perform an export and reimport of these customizatons into the target Resilient instance in order to use them. See app.config parameter: `sync_reference_fields`.
+Note: Perform an export and reimport of these customizatons into the target Resilient organization in order to use them. See app.config parameter: `sync_reference_fields`.
 
 *	Edit the resilient-circuits configuration file, as follows:
     
@@ -103,22 +97,22 @@ The following configuration items are supported:
 | sync_reference_fields | True\|False | Specify  `True` to add information to the target incident to maintain the orginal org id and incident id. Fields are `df_org_id` and `df_inc_id`, respectively |
 
 ## Requirements
-* This functionality has been tested with Resilient instances >= v30
-* The target Resilient instance must be at the same version or greater than the source Resilient instance
-* The target Resilient instance must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Adminstrator Settings`.
-* The target Resilient instance should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
+* This functionality has been tested with Resilient instances >= v30.
+* The target Resilient platform must be at the same version or greater than the source Resilient platform.
+* The target Resilient organization must have the same set of custom fields, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Adminstrator Settings`.
+* The target Resilient organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
 * To synchronize datatables in real time, create rules specifying the `feed_data` message destination in order to changes.
 
 ## Setup Steps
-1. Ensure Resilient version requirements are met for both the source and destination instances
-2. Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the Resilient source instance and importing them to the target Resilient instance.
-3. Manually recreate the users and groups needed in the target Resilient instance.
-4. Configure the app.config settings with the settings for the target Resilent instance and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.
+1. Ensure Resilient version requirements are met for both the source and destination instances.
+2. Perform the manual duplication of custom fields, incident types, phases and tasks, etc. by exporting these configurations from the Resilient source organization and importing them to the target Resilient organization.
+3. Manually recreate the users and groups needed in the target Resilient organization.
+4. Configure the app.config settings with the settings for the target Resilent organization and, optionally, the criteria for the types of incidents to synchronize and fields to exclude.
 5. Run `resilient-circuits run` to confirm connectivity to both instances of Resilient (with `reload=False`).
-6. The best way to test is to set `reload=False` under `[feeds]` in your app.config file, and in the source Resilient instance, run the `Data Feeder: Sync Incidents` rule to synchronize a small number of incidents.
+6. The best way to test is to set `reload=False` under `[feeds]` in your app.config file, and in the source Resilient organization, run the `Data Feeder: Sync Incidents` rule to synchronize a small number of incidents.
 
 ## Considerations
-* If real-time synchronization remains in place, changes in the source Resilient data will overwrite any changes made in the target Resilient instance data. 
+* If real-time synchronization remains in place, changes in the source Resilient data will overwrite any changes made in the target Resilient organization data. 
 * Deleting a source incident, task, artifact, etc. will also delete the matching target information.
 * Synchronization of incidents may fail if newer required fields were created that were not present on these older incidents. Same is true for newer 'on close' created fields. This can be overcome by changing the fields from `required` to `optional`.
 * Unoffical timing tests shows creating incident data can take .3-.5 seconds each data type. Consider the time it will take for all your incident data to synchronize when using `reload=True`.
@@ -129,7 +123,7 @@ The following configuration items are supported:
 ## Limitations
 * This solution is not intended for bidirectional synchronization.
 * Unfortunately, the create date of the original incident is lost when the target incident is synchronized. 
-* Timer data cannot be synchronized
+* Timer data cannot be synchronized.
 * Presently, artifacts with custom artifact types cannot synchronize.
 * Deleting a source incident task attachment presently doesn't synchronize.
 * Incident email messages (via the built-in Inbound Email Connectors) do not synchronize.
@@ -145,7 +139,7 @@ Three methods exist for synchronizing incident data:
 ## Behavior
 Unexpected behaviors can occur and are detailed here.
 * If an incident is originally filtered via the `matching_incident_fields` setting, all incident data are filtered. If in the future that incident changes so that the matching criteria passes, at the time the incicident is changed, only the incident is synchronized. To include all the other data elements such as tasks, artifact, attachments, etc., use the `Data Feeder: Sync Incidents` function. 
-* Attachments cannot be updated
+* Attachments cannot be updated.
 
 ## SQLite Database
 A sqlite database is used to maintain a mapping of incident data between the source and target Resilient instances. Two tables are maintained for this purpose:
@@ -173,11 +167,11 @@ Use the following SQL statements for problem diagnostics:
 
 ## Troubleshooting Tips
 Synchronization could fail for the following reasons: 
-* Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target Resilient instance. Also check the permissions set on your target Resilient user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.
+* Missing custom fields, custom incident_types, phases, etc. Ensure you have exported and re-imported these customizations into the target Resilient organization. Also check the permissions set on your target Resilient user account or api token associated with incident, artifact, task, etc. creation, including creating wiki pages.
 * Artifacts with custom artifact types cannot be synchronized at this time.
 * Older incident fields missing required fields defined at a later point in time. The only remedy is to modify the definition of the fields from `required` to `optional` and then resync the field using the rule `Data Feed: Sync Incidents`.
-* Matching criteria filtered the incident. Review the values specified in `matching_incident_fields` and the value specified in `matching_operator`
-* Change the log level to debug to receive additional troubleshooting information on synchronization issues
+* Matching criteria filtered the incident. Review the values specified in `matching_incident_fields` and the value specified in `matching_operator`.
+* Change the log level to debug to receive additional troubleshooting information on synchronization issues.
 * Changes to tasks, artifacts, notes, etc. before the incident is synchronized.
   - If the log displays a message such as:
   `Incident not found. Queued to retry task:xxx->xxx to xxx`
