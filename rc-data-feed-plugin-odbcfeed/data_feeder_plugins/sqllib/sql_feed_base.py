@@ -154,7 +154,7 @@ class SqlFeedDestinationBase(FeedDestinationBase):  # pylint: disable=too-few-pu
             if not self.dialect.is_column_exists_exception(db_exception):
                 raise db_exception
 
-    def send_data(self, context, payload, dia):
+    def send_data(self, context, payload):
         # Create a flattened map where each key of the map is the field name.
         #
         flat_payload = context.type_info.flatten(payload, translate_func=TypeInfo.translate_value)
