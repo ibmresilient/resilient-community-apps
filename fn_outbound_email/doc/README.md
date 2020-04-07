@@ -1,7 +1,7 @@
-# **User Guide:** fn_outbound_email_v1.0.7
+# **User Guide:** fn_outbound_email_1.0.7
 
 ## Table of Contents
-- [**User Guide:** fn_outbound_email_v1.0.7](#user-guide-fnoutboundemailv107)
+- [**User Guide:** fn_outbound_email_1.0.7](#user-guide-fnoutboundemail107)
   - [Table of Contents](#table-of-contents)
   - [Key Features](#key-features)
   - [Function - Send Email HTML](#function---send-email-html)
@@ -94,7 +94,12 @@ inputs.mail_body_html = """
 <p>
 
 ```python
-None
+if results.success:
+  dummy = "N/A"
+  noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4}\n Body: {5}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text )   
+else:
+  noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
+incident.addNote(noteText)
 ```
 
 ```python
@@ -168,7 +173,12 @@ Incident Summary:
 <p>
 
 ```python
-None
+if results.success:
+  dummy = "N/A"
+  noteText = u"Email Sent if mail server is valid/authenticated\n From: {0}\n To: {1}\n CC: {2}\n BCC: {3}\n Subject: {4}\n Body: {5}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"), results.content.inputs[2].strip("u\"[]"), results.content.inputs[3].strip("u\"[]"), results.content.inputs[4].strip("u\""), results.content.text )   
+else:
+  noteText = u"Email NOT Sent\n From: {0}\n To: {1}".format(results.content.inputs[0].strip("u\"[]"), results.content.inputs[1].strip("u\"[]"))
+incident.addNote(noteText)
 ```
 
 </p>

@@ -90,12 +90,19 @@
   ```
   $ resilient-circuits selftest -l fn-outbound-email
   ```
+  
 * **Run** resilient-circuits or restart the Service on Windows/Linux:
   ```
   $ resilient-circuits run
   ```
 
 ## Common connection issues with TLS
+
+```
+fn-outbound-email: 
+    SMTP AUTH extension not supported by server.
+    selftest: failure, Elapsed time: 0.416000 seconds
+```
 
 Email servers are often restrictive on which applications/users that are authorized to send emails, for instance if you have 2FA authentication enabled on a gmail account, you must add a specific application password or allow less secure apps (Not recommended)
 
