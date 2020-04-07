@@ -12,6 +12,17 @@ Please refer to the User Guide for instructions on building the model and runnin
 ## System Requirements
 - Resilient Server version 32 or later
 - Ability to connect to Resilient server with HTTPS on port 443 and 65001
+- The minimum set of Resilient API permissions if using an API key account:
+    - Incidents.Read
+    - Edit Org Data
+    - Scripts.Edit
+    - Scripts.Create
+    - Workflows.Edit
+    - Workflows.Create
+    - Functions.Read
+    - Functions.Edit
+    - Functions.Create
+    - Other.ReadIncidentActionInvocations
 
 ## Package Dependences
 - sklearn 0.19.2
@@ -55,6 +66,21 @@ Same as building a new model.
 As a rule, it is recommended that customers rebuild their model once a week.
 
 There are more advanced options. Please refer to the User Guide.
-## Uninstall,
+## Uninstall
 
     pip uninstall fn_resilient_ml
+
+## Troubleshooting
+If `build_nlp` fails due to SSL certifications errors caused by NLTK, you can run the following in a separate file and
+download everything for NLTK:
+```buildoutcfg
+import nltk
+import ssl
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+nltk.download()
+```
