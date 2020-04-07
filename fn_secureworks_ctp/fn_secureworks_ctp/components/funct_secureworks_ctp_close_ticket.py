@@ -4,7 +4,7 @@
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, ResultPayload, IntegrationError
 from fn_secureworks_ctp.lib.scwx_ctp_client import SCWXClient
 
 CONFIG_DATA_SECTION = "fn_secureworks_ctp"
@@ -34,29 +34,43 @@ class FunctionComponent(ResilientComponent):
     @handler("reload")
     def _reload(self, event, opts):
         """Configuration options have changed, save new values"""
-        self.options = opts.get("fn_secureworks_ctp", {})
+        self.options = opts.get(CONFIG_DATA_SECTION, {})
 
     @function("secureworks_ctp_close_ticket")
     def _secureworks_ctp_close_ticket_function(self, event, *args, **kwargs):
         """Function: Close a Secureworks CTP in an incident that has a Secureworks CTP ticket associated with it."""
         try:
-            # Get the wf_instance_id of the workflow this Function was called in
-            wf_instance_id = event.message["workflow_instance"]["workflow_instance_id"]
+            # Initialize the results payload
+            rp = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
 
             # Get the function parameters:
             incident_id = kwargs.get("incident_id")  # number
 
             log = logging.getLogger(__name__)
             log.info("incident_id: %s", incident_id)
-            uri = u"/incidents/{}".format(incident_id)
+
+            yield StatusMessage(u"Starting Close Secureworks CTP ticket.")
+
+            # Get the incident
+            uri = u"/incidents/{}?handle_format=names".format(incident_id)
             incident = self.rest_client().get(uri)
             resolution_summary = incident.get('resolution_summary')
-            close_code = incident['properties']['scwx_ctp_close_code']
-            self.scwx_client.post_tickets_close(incident_id, resolution_summary, close_code)
+            ticket_id = incident['properties']['scwx_ctp_ticket_id']
+            if not ticket_id:
+                raise IntegrationError("Secureworks CTP close ticket: Incident {0} does not contain a ticketId", incident_id)
 
-            results = {
-                "value": ""
-            }
+            close_code = incident['properties']['scwx_ctp_close_code']
+
+            response = self.scwx_client.post_tickets_close(ticket_id, resolution_summary, close_code)
+
+            if response.get('status_code') == 200:
+                success = True
+            else:
+                success = False
+
+            results = rp.done(success, response)
+
+            yield StatusMessage(u"Returning results for Close Secureworks CTP ticketId: {0} incident ID: {1}".format(ticket_id, incident_id))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

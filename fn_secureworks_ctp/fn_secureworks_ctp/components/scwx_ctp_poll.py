@@ -106,8 +106,6 @@ class SecureworksCTPPollComponent(ResilientComponent):
             #response = self.scwx_client.post_tickets_updates()
             response = self.scwx_client.mock_post_tickets_updates()
 
-            codes = self.scwx_client.get_tickets_close_codes("IN35579566")
-
             tickets = response.get('tickets')
             ticket_id_list = [ticket.get('ticketId') for ticket in tickets]
             LOG.info(u"Secureworks CTP tickets to be processed this poll: %s", ticket_id_list)
@@ -123,6 +121,7 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 if not resilient_incident:
                     # Create a new incident for this Secureworks CTP ticket.
                     resilient_incident = self._create_incident(ticket)
+                    self.add_closing_codes(resilient_incident, ticket)
 
                 # Add ticket worklogs to the incident as notes
                 self.add_worklog_notes(resilient_incident, ticket)
@@ -334,3 +333,10 @@ class SecureworksCTPPollComponent(ResilientComponent):
                 LOG.debug(new_attachment)
         except Exception as err:
             raise err
+
+    def add_closing_codes(self, incident, ticket):
+        ticket_id = ticket.get('ticketId')
+        incident_id = incident.get('id')
+
+        #codes = self.scwx_client.get_tickets_close_codes(ticket_id)
+        codes = self.scwx_client.get_tickets_close_codes("IN35579566")
