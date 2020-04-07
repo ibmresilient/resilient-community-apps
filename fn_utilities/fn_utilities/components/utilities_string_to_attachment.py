@@ -36,7 +36,7 @@ class FunctionComponent(ResilientComponent):
                 raise ValueError('attachment_name is required')
             # Check if the desired attachment_name has a file extension provided, assign .txt if not
             if "." not in attachment_name:
-                attachment_name = '{0}.txt'.format(attachment_name)  # text (required)
+                attachment_name = u'{0}.txt'.format(attachment_name)  # text (required)
 
             incident_id = kwargs.get('incident_id')  # number (required)
             if not incident_id:
