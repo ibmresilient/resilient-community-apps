@@ -26,7 +26,7 @@ setup(
     ],
     entry_points={
         "resilient.circuits.configsection": ["gen_config = data_feeder_plugins.resilientfeed.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = data_feeder_plugins.resilientfeed.util:customization_data"],
+        "resilient.circuits.customize": ["customize = data_feeder_plugins.resilientfeed.util.customize:customization_data"],
     },
     tests_require=["pytest < 4.0.0",
                    "pytest_resilient_circuits"]
