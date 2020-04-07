@@ -10,6 +10,7 @@ import os
 import tempfile
 from fn_outbound_email.lib.smtp_mailer import SendSMTPEmail
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_lib import ResultPayload, validate_fields
 
 log = logging.getLogger(__name__)
 
@@ -53,8 +54,6 @@ class FunctionComponent(ResilientComponent):
                 mail_from = self.smtp_user
             else:
                 mail_from = kwargs.get("mail_from")  # text
-            import pprint
-            pprint.pprint(mail_from)
             mail_to = kwargs.get("mail_to")  # text
             mail_cc = kwargs.get("mail_cc")  # text
             mail_bcc = kwargs.get("mail_bcc")  # text
@@ -78,6 +77,9 @@ class FunctionComponent(ResilientComponent):
             self.mail_data['mail_subject'] = mail_subject
             self.mail_data['mail_attachments'] = self.process_attachments(inc_id=mail_incident_id)
 
+            payload = ResultPayload(CONFIG_DATA_SECTION, **kwargs)
+            validate_fields(["mail_to", "mail_subject", "mail_incident_id"], kwargs)
+
             yield StatusMessage("Starting to send email...")
 
             send_smtp_email = SendSMTPEmail(self.opts, self.mail_data)
@@ -91,21 +93,24 @@ class FunctionComponent(ResilientComponent):
             if mail_body_html:
                 log.info("Rendering template")
                 mail_body_html = send_smtp_email.render_template(mail_body_html, self.incident_data, self.mail_data)
+                dummy_text = mail_body_html
                 email_message = send_smtp_email.send(body_html=mail_body_html)
             elif mail_body_text:
                 log.info("Rendering template")
                 mail_body_text = send_smtp_email.render_template(mail_body_text, self.incident_data, self.mail_data)
+                dummy_text = mail_body_text
                 email_message = send_smtp_email.send(body_text=mail_body_text)
 
             if not email_message:
                 success = False
 
             yield StatusMessage("Done with sending email...")
-
-            results = {
-                "success": success,
-                "message": email_message
-            }
+            
+            results = payload.done(success=True, content={
+                "inputs" : [mail_from if mail_from else "N/A", mail_to if mail_to else "N/A", mail_cc if mail_cc else "N/A", mail_bcc if mail_bcc else "N/A", mail_subject if mail_subject else "N/A"],
+                "message": email_message,
+                "text" : dummy_text
+            })
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
