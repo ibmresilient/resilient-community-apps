@@ -32,7 +32,7 @@ class FunctionComponent(ResilientComponent):
             if not string_to_convert_to_attachment:
                 raise ValueError('string_to_convert_to_attachment is required')
 
-            attachment_name = u'{0}'.format(kwargs.get('attachment_name'))  # text (required)
+            attachment_name = kwargs.get('attachment_name')  # text (required)
             if not attachment_name:
                 raise ValueError('attachment_name is required')
             # Check if the desired attachment_name has a file extension provided, assign .txt if not
